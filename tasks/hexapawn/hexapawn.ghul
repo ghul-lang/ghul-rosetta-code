@@ -40,7 +40,7 @@ has_won(board: string, side: char) -> bool =>
 
 square(index: int) -> string => "{"abc"[index % 3]}{3 - index / 3}"
 
-let symbols = "WB." |> zip("♙♟.") |> collect_map()
+let symbols = "WB." |> zip("♙♟．") |> collect_map()
 
 show(board: string) is
     for row in 0..3 do
@@ -50,7 +50,7 @@ show(board: string) is
         write_line("{3 - row} {pieces}")
     od
 
-    write_line("  abc")
+    write_line("  ａｂｃ")
 si
 
 parse(text: string) -> Move? is

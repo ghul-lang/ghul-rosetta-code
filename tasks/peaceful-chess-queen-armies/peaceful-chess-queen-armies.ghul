@@ -86,8 +86,8 @@ show(armies: Armies, n: int) is
             let bit = 1ul << row * n + column in
             if armies.black & bit != 0ul then "♛"
             elif armies.white & bit != 0ul then "♕"
-            elif (row + column) % 2 == 0 then "."
-            else ":"
+            elif (row + column) % 2 == 0 then "．"
+            else "："
             fi)
 
         write_line("    {squares |> join(" ")}")
