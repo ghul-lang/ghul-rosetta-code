@@ -3,5 +3,5 @@
   "slug": "https-client-authenticated",
   "state": "published",
   "note": "reopened, was rejected/needs-network: a local stand-in server makes it testable; an endpoint argument uses the real one",
-  "published_hash": "0ea79850c273a1bea45e44dc8a70ee2419dc77fe0d72764cd59646306d6ab015"
+  "published_hash": "7ec5bc0e3830fab6a4fc40c1f76e65b0edf06a40097bb1740a569c6df745153c"
 }

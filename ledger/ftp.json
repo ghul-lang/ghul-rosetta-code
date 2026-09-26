@@ -3,5 +3,5 @@
   "slug": "ftp",
   "state": "published",
   "note": "reopened, was rejected/needs-network: a local stand-in server makes it testable; an endpoint argument uses the real one",
-  "published_hash": "670f4507ad3da1ac23b54a3045bbc03455abfaa993be9dc981b49f83b2bfeb9b"
+  "published_hash": "45776ca63a436ae1899df51be0be6ca54c14e0035139be39b1ae3ce6f51f72f8"
 }
