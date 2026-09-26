@@ -347,7 +347,7 @@ notation(move: Move) -> string =>
         fi in
     "{name(move.from)}{name(move.to)}{promotion}"
 
-let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟.") |> collect_map()
+let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> collect_map()
 
 show(position: POSITION) is
     for row in 0..8 do
@@ -359,7 +359,7 @@ show(position: POSITION) is
         write_line("{8 - row} {pieces}")
     od
 
-    write_line("  a b c d e f g h")
+    write_line("  ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ")
 si
 
 over(position: POSITION) -> bool is

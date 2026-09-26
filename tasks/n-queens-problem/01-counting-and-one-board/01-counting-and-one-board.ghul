@@ -32,6 +32,6 @@ if let first_solution = placements(8, LIST()) |> first() then
     |> each((row, column) =>
         write_line(
             (0..8)
-                |> map(c => if c == column then "♕" else "." fi)
+                |> map(c => if c == column then "♕" else "．" fi)
                 |> join(" ")))
 fi

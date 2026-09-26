@@ -1,22 +1,22 @@
 placing armies on boards of increasing size
 
 4 black and 4 white queens on a 5 by 5 board:
-    ♛ : . : ♛
-    : . ♕ . :
-    . ♕ . ♕ .
-    : . ♕ . :
-    ♛ : . : ♛
+    ♛ ： ． ： ♛
+    ： ． ♕ ． ：
+    ． ♕ ． ♕ ．
+    ： ． ♕ ． ：
+    ♛ ： ． ： ♛
 <<image queens-4-5.png>>
 
 9 black and 9 white queens on a 8 by 8 board:
-    ♛ ♛ ♛ : . : . :
-    : . : . : . ♕ ♕
-    . : . : . ♕ ♕ ♕
-    ♛ . : ♛ : . : .
-    ♛ ♛ . : . : . :
-    ♛ ♛ : . : . : .
-    . : . : ♕ ♕ . :
-    : . : . : ♕ ♕ .
+    ♛ ♛ ♛ ： ． ： ． ：
+    ： ． ： ． ： ． ♕ ♕
+    ． ： ． ： ． ♕ ♕ ♕
+    ♛ ． ： ♛ ： ． ： ．
+    ♛ ♛ ． ： ． ： ． ：
+    ♛ ♛ ： ． ： ． ： ．
+    ． ： ． ： ♕ ♕ ． ：
+    ： ． ： ． ： ♕ ♕ ．
 <<image queens-9-8.png>>
 
 10 of each colour cannot share a 8 by 8 board
