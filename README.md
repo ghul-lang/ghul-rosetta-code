@@ -3,8 +3,7 @@
 Working repository for [ghūl](https://ghul.dev) solutions to [Rosetta Code](https://rosettacode.org)
 tasks. Every solution is written, built and run here, and its output captured as a test, before it
 is posted to the wiki. Nothing goes up untested, and a compiler or runtime change that breaks a
-posted solution shows up as a failing test rather than as a wrong answer sitting on a wiki page
-nobody re-reads.
+posted solution shows up as a failing test here rather than as a wrong answer on the wiki.
 
 ## layout
 
