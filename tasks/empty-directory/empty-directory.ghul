@@ -6,7 +6,8 @@ let scratch =
 IO.Directory.create_directory(scratch)
 
 is_empty(path: string) -> bool is
-    let use entries = IO.Directory.enumerate_file_system_entries(path).iterator
+    let use entries =
+        IO.Directory.enumerate_file_system_entries(path).iterator
 
     return !entries.move_next()
 si
