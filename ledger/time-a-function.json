@@ -3,5 +3,5 @@
   "slug": "time-a-function",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: run.check can judge that the slower function measures slower",
-  "published_hash": "006c5b66ca3439b6f32a50e040f4a8894c4344e0a339784712213ab2cf7c8f83"
+  "published_hash": "99c034b19bc26f557ba2d9858f5081fd3a89c84fd60498e070438db3f3ec5126"
 }

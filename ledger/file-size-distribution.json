@@ -3,5 +3,5 @@
   "slug": "file-size-distribution",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: the directory is taken from the command line, so the test walks a sample tree shipped with the task and the output is fixed",
-  "published_hash": "4e48c9b111733c748464151a5c0f3d87da2bdda70f85d632b822fcc8f3dd7932"
+  "published_hash": "18dad78a383851c8b9de31d9b09fc091695d32debc0357e9035d3ae6be1199d3"
 }

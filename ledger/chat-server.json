@@ -3,5 +3,5 @@
   "slug": "chat-server",
   "state": "published",
   "note": "reopened, was rejected/needs-network: loopback sockets and threads let one program host the server and its own clients",
-  "published_hash": "b5514cc6a8e372f88fd0939b5c6efe061fd69b09eb8415eb05c95a7fc1a4571a"
+  "published_hash": "1d77be3bae4bacc41b1f598ac198bd12b8ca16a3f9ca4d40716cabd53c4964f5"
 }
