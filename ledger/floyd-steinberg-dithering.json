@@ -2,7 +2,7 @@
   "title": "Floyd-Steinberg dithering",
   "slug": "floyd-steinberg-dithering",
   "state": "published",
-  "published_hash": "38ee31f465fd3e360f5a582b2e5055854df11989c3e5466e0cb7f7aed7a7be0d",
+  "published_hash": "49cab57a418ef3a5dd5600054346cfa8b1faa623c2120d2a2821a9b4276950f9",
   "image_hashes": {
     "Ghul-floyd-steinberg-dithering-source.png": "a3eccdd5dfb067539e08fd01d7d8e89df9aa4809",
     "Ghul-floyd-steinberg-dithering-dithered.png": "9224d07ce54a9cd791a319d8f960866ad54d224c"

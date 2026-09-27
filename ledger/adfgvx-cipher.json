@@ -3,5 +3,5 @@
   "slug": "adfgvx-cipher",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: encrypt then decrypt and assert the round trip, with a seeded key",
-  "published_hash": "36d665b0c8d67c80ddd1758b7153668e67abd50fa73b9993b79f70f5fbd3bd8b"
+  "published_hash": "216ae3fafc607b1b3a11c17882a071f2a61c69c14ad09699b1ab9c7574ffc0c8"
 }
