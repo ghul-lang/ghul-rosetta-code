@@ -18,7 +18,7 @@ for a in 0..n do
     write_line(row |> join(" "))
 od
 
-quads() -> Pipe[(int, int, int, int)] is
+quads() -> (int, int, int, int){} is
     for a in 0..n do
         for b in a + 1..n do
             for c in b + 1..n do

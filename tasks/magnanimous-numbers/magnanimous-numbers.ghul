@@ -33,7 +33,7 @@ is_magnanimous(value: int) -> bool is
     true
 si
 
-magnanimous() -> Pipe[int] is
+magnanimous() -> int{} is
     let candidate mut = 0
 
     do

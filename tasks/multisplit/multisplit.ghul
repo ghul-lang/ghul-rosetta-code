@@ -6,7 +6,7 @@ starts_with(text: string, position: int, separator: string) -> bool =>
     position + separator.length <= text.length /\
         text[position..position + separator.length] =~ separator
 
-multisplit(text: string, separators: string[]) -> Pipe[PIECE] is
+multisplit(text: string, separators: string[]) -> PIECE{} is
     let start mut = 0
     let position mut = 0
 

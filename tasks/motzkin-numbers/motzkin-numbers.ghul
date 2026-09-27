@@ -3,7 +3,7 @@ use default
 let one = 1n
 let two = 2n
 
-motzkin(count: int) -> Pipe[bigint] is
+motzkin(count: int) -> bigint{} is
     let previous mut = 0n
     let current mut = one
 

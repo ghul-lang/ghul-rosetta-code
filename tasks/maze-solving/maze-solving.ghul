@@ -106,7 +106,7 @@ open(from: int, to: int) -> bool =>
     else down_open[to]
     fi
 
-neighbours(i: int) -> Pipe[int] =>
+neighbours(i: int) -> int{} =>
     directions
         |> map(d =>
             (column = i % columns + d.across, row = i / columns + d.down))

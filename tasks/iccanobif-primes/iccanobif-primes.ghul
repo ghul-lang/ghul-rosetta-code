@@ -35,7 +35,7 @@ is_prime(value: bigint) -> bool =>
     value > 1n /\
     bases |> all(base => passes_miller_rabin(value, cast(base)))
 
-fibonacci() -> Pipe[bigint] is
+fibonacci() -> bigint{} is
     let previous mut = 0n
     let current mut = 1n
 

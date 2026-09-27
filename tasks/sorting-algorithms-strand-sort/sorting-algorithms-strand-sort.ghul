@@ -1,6 +1,6 @@
 use default
 
-merge(left: List[int], right: List[int]) -> Pipe[int] is
+merge(left: List[int], right: List[int]) -> int{} is
     let at_left mut = 0
     let at_right mut = 0
 

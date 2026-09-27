@@ -62,7 +62,7 @@ parse_xor(text: string, at: int) -> PARSE =>
 parse_or(text: string, at: int) -> PARSE =>
     parse_binary(text, at, '|', parse_xor)
 
-names(expression: Expression) -> Pipe[string] is
+names(expression: Expression) -> string{} is
     case expression
     when leaf: Expression.VARIABLE then
         yield leaf.name

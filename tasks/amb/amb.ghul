@@ -3,7 +3,7 @@ use default
 amb[T](
     sets: List[Iterable[T]],
     accepts: (T, T) -> bool
-) -> Pipe[LIST[T]] is
+) -> LIST[T]{} is
     if sets.count == 0 then
         yield LIST()
     else

@@ -36,7 +36,7 @@ inside(square: Square) -> bool =>
     square.row >= 0 /\ square.row < size /\
     square.column >= 0 /\ square.column < size
 
-steps_from(square: Square) -> Pipe[Square] is
+steps_from(square: Square) -> Square{} is
     for down in -1::1 do
         for across in -1::1 do
             let next =

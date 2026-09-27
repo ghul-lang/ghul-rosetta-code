@@ -1,6 +1,6 @@
 use default
 
-squares(count: int) -> Pipe[int] is
+squares(count: int) -> int{} is
     for value in 1::count do
         yield value * value
     od

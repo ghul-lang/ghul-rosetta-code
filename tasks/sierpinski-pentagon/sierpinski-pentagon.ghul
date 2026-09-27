@@ -28,7 +28,7 @@ inner(shape: Pentagon, index: int) -> Pentagon =>
       y = shape.y + reach * sin(angle),
       radius = smaller))
 
-flake(shape: Pentagon, order: int) -> Pipe[Pentagon] is
+flake(shape: Pentagon, order: int) -> Pentagon{} is
     if order == 0 then
         yield shape
     else

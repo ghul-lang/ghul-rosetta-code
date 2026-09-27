@@ -1,6 +1,6 @@
 use default
 
-primes() -> Pipe[int] is
+primes() -> int{} is
     let found = LIST()
     let candidate mut = 2
 
@@ -18,7 +18,7 @@ primes() -> Pipe[int] is
     od
 si
 
-between(low: int, high: int) -> Pipe[int] =>
+between(low: int, high: int) -> int{} =>
     primes()
         |> skip_while(prime => prime < low)
         |> take_while(prime => prime <= high)

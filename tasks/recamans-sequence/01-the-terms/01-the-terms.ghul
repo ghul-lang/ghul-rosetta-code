@@ -1,6 +1,6 @@
 use default
 
-recaman() -> Pipe[int] is
+recaman() -> int{} is
     let seen = SET()
     let term mut = 0
     let index mut = 0

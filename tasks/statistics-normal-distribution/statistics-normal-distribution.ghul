@@ -4,7 +4,7 @@ use System.Math.*
 
 let random = System.Random(1809)
 
-normal() -> Pipe[double] is
+normal() -> double{} is
     while true do
         let r = sqrt(-2.0D * log(1.0D - random.next_double()))
         let angle = 2.0D * pi * random.next_double()

@@ -1,6 +1,6 @@
 use default
 
-n_step(initial: int[]) -> Pipe[int] is
+n_step(initial: int[]) -> int{} is
     let window = LIST(initial)
 
     for value in initial do

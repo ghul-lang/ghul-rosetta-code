@@ -1,6 +1,6 @@
 use default
 
-bell_triangle() -> Pipe[List[bigint]] is
+bell_triangle() -> List[bigint]{} is
     let row mut = LIST()
 
     row.add(1n)

@@ -27,7 +27,7 @@ class FACE(a: Point, b: Point, c: Point) is
 
     outside(p: Point) -> bool => normal ⋅ (p - a) > 0.000000001D
 
-    edges: Pipe[(from: Point, to: Point)] =>
+    edges: (from: Point, to: Point){} =>
         [(from = a, to = b), (from = b, to = c), (from = c, to = a)]
             |> pipe()
 si

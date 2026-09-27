@@ -13,7 +13,7 @@ class NODE[T](value: T) is
     si
 si
 
-values[T](first: NODE[T]) -> Pipe[T] is
+values[T](first: NODE[T]) -> T{} is
     let cursor mut = first
 
     while let node = cursor do

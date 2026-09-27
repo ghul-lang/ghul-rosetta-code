@@ -1,6 +1,6 @@
 use default
 
-factors(n: int) -> Ghul.Pipes.Pipe[int] is
+factors(n: int) -> int{} is
     let remaining mut = n
     let divisor mut = 2
 

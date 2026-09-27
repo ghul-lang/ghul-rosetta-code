@@ -1,6 +1,6 @@
 use default
 
-collapsed(text: string) -> Ghul.Pipes.Pipe[char] is
+collapsed(text: string) -> char{} is
     let previous mut = null
 
     for ch in text do

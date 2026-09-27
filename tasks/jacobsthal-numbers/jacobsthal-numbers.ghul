@@ -2,7 +2,7 @@ use default
 
 let two = 2n
 
-jacobsthal_from(first: bigint, second: bigint) -> Pipe[bigint] is
+jacobsthal_from(first: bigint, second: bigint) -> bigint{} is
     let previous mut = first
     let current mut = second
 
@@ -14,11 +14,11 @@ jacobsthal_from(first: bigint, second: bigint) -> Pipe[bigint] is
     od
 si
 
-jacobsthal() -> Pipe[bigint] => jacobsthal_from(0n, 1n)
+jacobsthal() -> bigint{} => jacobsthal_from(0n, 1n)
 
-jacobsthal_lucas() -> Pipe[bigint] => jacobsthal_from(two, 1n)
+jacobsthal_lucas() -> bigint{} => jacobsthal_from(two, 1n)
 
-jacobsthal_oblongs() -> Pipe[bigint] is
+jacobsthal_oblongs() -> bigint{} is
     let previous mut = 0n
     let current mut = 1n
 
@@ -36,7 +36,7 @@ is_prime(n: bigint) -> bool =>
             |> take_while(d => d * d <= n)
             |> all(d => n % d !~ 0n)
 
-show(label: string, values: Pipe[bigint], count: int) is
+show(label: string, values: bigint{}, count: int) is
     write_line("{label}:")
     let rows = values |> take(count) |> chunk(10)
 

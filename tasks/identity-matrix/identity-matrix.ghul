@@ -1,6 +1,6 @@
 use default
 
-identity(size: int) -> Ghul.Pipes.Pipe[string] =>
+identity(size: int) -> string{} =>
     (0..size)
         |> map(row =>
             (0..size)

@@ -1,6 +1,6 @@
 use default
 
-bernoulli(rows: int) -> Pipe[LIST[int]] is
+bernoulli(rows: int) -> LIST[int]{} is
     let row mut = LIST()
     row.add(1)
 

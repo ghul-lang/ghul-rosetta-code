@@ -6,7 +6,7 @@ is_prime(value: int) -> bool =>
         |> all(divisor => value % divisor != 0))
 
 running_sums(values: Iterable[int])
-    -> Pipe[(length: int, last: int, sum: int)]
+    -> (length: int, last: int, sum: int){}
 is
     let length mut = 0
     let total mut = 0

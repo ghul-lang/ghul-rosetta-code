@@ -1,7 +1,7 @@
 use default
 
 pairs(left: List[int], right: List[int])
-    -> Pipe[(first: int, second: int)]
+    -> (first: int, second: int){}
 is
     for first in left do
         for second in right do
@@ -10,7 +10,7 @@ is
     od
 si
 
-tuples(lists: List[List[int]], at: int) -> Pipe[List[int]] is
+tuples(lists: List[List[int]], at: int) -> List[int]{} is
     if at == lists.count then
         yield LIST()
     else

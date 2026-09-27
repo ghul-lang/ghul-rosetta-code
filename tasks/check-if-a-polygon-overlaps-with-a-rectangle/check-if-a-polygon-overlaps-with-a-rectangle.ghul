@@ -15,7 +15,7 @@ rectangle(x: double, y: double, width: double, height: double) -> Polygon =>
         P(x, y), P(x, y + height),
         P(x + width, y + height), P(x + width, y)]
 
-edges(shape: Polygon) -> Pipe[P] =>
+edges(shape: Polygon) -> P{} =>
     0..shape.count |> map(i => shape[(i + 1) % shape.count] - shape[i])
 
 shadow(shape: Polygon, axis: P) -> (low: double, high: double) =>

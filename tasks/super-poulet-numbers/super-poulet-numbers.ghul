@@ -25,7 +25,7 @@ is_prime(value: int) -> bool =>
         |> take_while(divisor => divisor * divisor <= value)
         |> all(divisor => value % divisor != 0))
 
-divisors(value: int) -> Pipe[int] is
+divisors(value: int) -> int{} is
     for candidate in 1::value do
         if candidate * candidate > value then break fi
 

@@ -8,7 +8,7 @@ sorted_string(s: string) -> string is
     chars |> map(c => "{c}") |> join("")
 si
 
-fangs(n: long) -> Pipe[(long, long)] is
+fangs(n: long) -> (long, long){} is
     let half = "{n}".length / 2
     let low mut = 1L
     let digits mut = 1

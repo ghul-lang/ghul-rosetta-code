@@ -1,6 +1,6 @@
 use default
 
-erdos_nicolas(limit: int) -> Pipe[(value: int, k: int)] is
+erdos_nicolas(limit: int) -> (value: int, k: int){} is
     let running_sum = LIST(limit + 1)
     let divisors_used = LIST(limit + 1)
     let divisors_at_hit = LIST(limit + 1)

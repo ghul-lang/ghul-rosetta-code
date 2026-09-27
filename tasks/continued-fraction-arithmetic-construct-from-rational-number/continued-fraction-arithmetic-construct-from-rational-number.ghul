@@ -1,6 +1,6 @@
 use default
 
-r2cf(numerator: long, denominator: long) -> Pipe[long] is
+r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator
     let n2 mut = denominator
 

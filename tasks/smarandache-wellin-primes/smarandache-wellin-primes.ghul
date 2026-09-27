@@ -32,12 +32,12 @@ is_probable_prime(n: bigint) -> bool =>
     |> all(a =>
         n =~ a \/ (!(n % a).is_zero /\ is_strong_probable_prime(n, a)))
 
-primes() -> Pipe[int] =>
+primes() -> int{} =>
     from(2)
     |> filter(p =>
         (2..p) |> take_while(d => d * d <= p) |> all(d => p % d != 0))
 
-wellin_numbers() -> Pipe[(index: int, last: int, digits: string)] is
+wellin_numbers() -> (index: int, last: int, digits: string){} is
     let digits mut = ""
     let index mut = 0
 

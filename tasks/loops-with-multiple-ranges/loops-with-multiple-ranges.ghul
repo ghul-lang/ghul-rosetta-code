@@ -1,6 +1,6 @@
 use default
 
-stepped(start: int, stop: int, step: int) -> Pipe[int] is
+stepped(start: int, stop: int, step: int) -> int{} is
     let value mut = start
 
     while (step > 0 /\ value <= stop) \/ (step < 0 /\ value >= stop) do

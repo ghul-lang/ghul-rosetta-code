@@ -38,7 +38,7 @@ for sum in 1::top do
     descendants[sum].sort()
 od
 
-ancestors(n: int) -> Pipe[int] is
+ancestors(n: int) -> int{} is
     let current mut = n
 
     while current > 1 /\ !is_prime(current) do

@@ -117,7 +117,7 @@ cyclic(n: int) -> Square =>
         |> collect()
 
 tally(n: int, squares: int, random: System.Random)
-    -> Pipe[(square: string, times: int)] is
+    -> (square: string, times: int){} is
     let cube = INCIDENCE_CUBE(cyclic(n), random)
     let counts = MAP[string, int]()
 

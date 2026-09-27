@@ -2,7 +2,7 @@ use default
 
 let factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi
 
-digits(n: int, base_value: int) -> Pipe[int] is
+digits(n: int, base_value: int) -> int{} is
     let remaining mut = n
 
     while remaining > 0 do

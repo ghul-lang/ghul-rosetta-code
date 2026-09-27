@@ -30,7 +30,7 @@ is_colorful(value: int) -> bool is
     true
 si
 
-arrangements(prefix: int, available: LIST[int]) -> Pipe[int] is
+arrangements(prefix: int, available: LIST[int]) -> int{} is
     for chosen in available do
         let value = prefix * 10 + chosen
         let rest = LIST(available)

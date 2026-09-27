@@ -12,7 +12,7 @@ atom(value: int) -> Nested => ATOM(value)
 
 list(items: Nested[]) -> Nested => LIST(items)
 
-flatten(node: Nested) -> Pipe[int] is
+flatten(node: Nested) -> int{} is
     case node
     when (value): ATOM then
         yield value

@@ -19,7 +19,7 @@ let mines =
 let cleared = SET[int]()
 let marked = SET()
 
-neighbours(cell: int) -> Pipe[int] is
+neighbours(cell: int) -> int{} is
     let (x, y) = (cell % width, cell / width)
 
     for dy in -1::1 do

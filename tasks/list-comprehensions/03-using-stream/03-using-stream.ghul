@@ -1,6 +1,6 @@
 use default
 
-triples(n: int) -> Pipe[(int, int, int)] =>
+triples(n: int) -> (int, int, int){} =>
     stream((1, 1, 1), (a, b, c) =>
         if a > n then STREAM.DONE
         elif c < n then (a, b, c) || (a, b, c + 1)

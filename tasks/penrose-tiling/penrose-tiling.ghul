@@ -17,7 +17,7 @@ towards(from: Point, to: Point) -> Point =>
     (x = from.x + (to.x - from.x) / phi,
      y = from.y + (to.y - from.y) / phi)
 
-split(tile: Half) -> Pipe[Half] is
+split(tile: Half) -> Half{} is
     if isa Half.THIN(tile) then
         let cut = towards(tile.a, tile.b)
 

@@ -1,6 +1,6 @@
 use default
 
-squeezed(text: string, target: char) -> Ghul.Pipes.Pipe[char] is
+squeezed(text: string, target: char) -> char{} is
     let previous mut = null
 
     for ch in text do

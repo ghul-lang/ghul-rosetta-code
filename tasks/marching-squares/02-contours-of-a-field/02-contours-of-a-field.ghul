@@ -40,7 +40,7 @@ crossing(from: Point, from_height: double,
      (x = from.x + (to.x - from.x) * part,
       y = from.y + (to.y - from.y) * part))
 
-contour(level: double) -> Pipe[(from: Point, to: Point)] is
+contour(level: double) -> (from: Point, to: Point){} is
     for row in 0..steps do
         for column in 0..steps do
             let south_west = sample(column, row)

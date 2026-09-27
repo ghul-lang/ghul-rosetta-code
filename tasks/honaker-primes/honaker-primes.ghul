@@ -1,6 +1,6 @@
 use default
 
-primes() -> Pipe[int] is
+primes() -> int{} is
     let found = LIST()
     let candidate mut = 1
 
@@ -28,7 +28,7 @@ si
 digit_sum(value: int) -> int =>
     if value < 10 then value else value % 10 + digit_sum(value / 10) fi
 
-honakers() -> Pipe[(position: int, prime: int)] is
+honakers() -> (position: int, prime: int){} is
     let position mut = 0
 
     for prime in primes() do

@@ -47,7 +47,7 @@ is
     out |> join(" ")
 si
 
-wrap(text: string, width: int) -> Pipe[string] is
+wrap(text: string, width: int) -> string{} is
     let line = System.Text.StringBuilder()
 
     for word in text.split([' ']) do

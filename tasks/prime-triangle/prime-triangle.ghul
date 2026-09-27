@@ -11,7 +11,7 @@ is_prime(value: int) -> bool =>
 let prime_sum = 0::41 |> map(is_prime) |> collect()
 
 extend(chosen: LIST[int], taken: LIST[bool],
-       size: int) -> Pipe[List[int]]
+       size: int) -> List[int]{}
 is
     if chosen.count == size then
         yield chosen
@@ -35,7 +35,7 @@ is
     fi
 si
 
-arrangements(size: int) -> Pipe[List[int]] =>
+arrangements(size: int) -> List[int]{} =>
     extend([1] |> collect_mutable(),
            repeat(false, size + 1) |> collect_mutable(),
            size)

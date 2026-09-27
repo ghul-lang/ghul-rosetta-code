@@ -6,7 +6,7 @@ proper_divisor_sum(n: long) -> long =>
         |> filter(d => n % d == 0L)
         |> sum_by(d => if d * d == n then d else d + n / d fi) + 1L
 
-abundant_odd(start: long) -> Pipe[long] =>
+abundant_odd(start: long) -> long{} =>
     from(start, 2L) |> filter(n => proper_divisor_sum(n) > n)
 
 show(n: long) =>

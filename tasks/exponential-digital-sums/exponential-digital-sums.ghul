@@ -6,7 +6,7 @@ write_line("")
 digit_sum(digits: string) -> int =>
     digits |> reduce(0, (sum, c) => sum + int(c) - int('0'))
 
-exponents(n: int, highest: int) -> Pipe[int] is
+exponents(n: int, highest: int) -> int{} is
     let value = bigint(n)
     let power mut = value
 

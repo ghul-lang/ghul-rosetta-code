@@ -8,7 +8,7 @@ let units = [
     (suffix = "sec", size = 1)
 ]
 
-parts(total: int) -> Ghul.Pipes.Pipe[string] is
+parts(total: int) -> string{} is
     let remaining mut = total
 
     for unit in units do

@@ -99,7 +99,7 @@ od
 
 let described mut = 0
 
-sentence_words() -> Pipe[string] is
+sentence_words() -> string{} is
     let cursor mut = 0
 
     while true do

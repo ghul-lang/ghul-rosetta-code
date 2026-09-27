@@ -12,7 +12,7 @@ let competitors =
      (score = 41, name = "Barry"),
      (score = 39, name = "Stephen")]
 
-ties(entries: List[ENTRY]) -> Pipe[List[ENTRY]] is
+ties(entries: List[ENTRY]) -> List[ENTRY]{} is
     let tied = LIST()
 
     for entry in entries do
@@ -30,7 +30,7 @@ ties(entries: List[ENTRY]) -> Pipe[List[ENTRY]] is
     fi
 si
 
-ranked(rank: RANKER) -> Pipe[string] is
+ranked(rank: RANKER) -> string{} is
     let ahead mut = 0
     let place mut = 0
 

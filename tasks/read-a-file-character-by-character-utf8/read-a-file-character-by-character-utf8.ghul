@@ -2,7 +2,7 @@ use default
 use Ghul.Pipes.Pipe
 use IO.File
 
-characters(path: string) -> Pipe[string] is
+characters(path: string) -> string{} is
     let use reader = File.open_text(path)
 
     while reader.peek() >= 0 do

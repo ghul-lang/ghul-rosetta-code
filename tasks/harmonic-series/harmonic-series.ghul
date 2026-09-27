@@ -1,6 +1,6 @@
 use default
 
-harmonic_numbers() -> Ghul.Pipes.Pipe[(n: int, value: double)] is
+harmonic_numbers() -> (n: int, value: double){} is
     let sum mut = 0.0
     let n mut = 1
 

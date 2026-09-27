@@ -1,6 +1,6 @@
 use default
 
-van_eck() -> Pipe[int] is
+van_eck() -> int{} is
     let last_seen = MAP()
 
     let term mut = 0

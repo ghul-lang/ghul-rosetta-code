@@ -4,7 +4,7 @@ use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
 
-hailstone(n: int) -> Pipe[int] is
+hailstone(n: int) -> int{} is
     let current mut = n
 
     while true do

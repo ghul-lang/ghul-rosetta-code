@@ -20,7 +20,7 @@ let smallest_factor = (
 
 let category = repeat(0, limit + 1) |> collect_mutable()
 
-prime_factors(n: int) -> Pipe[int] is
+prime_factors(n: int) -> int{} is
     let rest mut = n
 
     while rest > 1 do

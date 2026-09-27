@@ -7,7 +7,7 @@ union Token(text: string) is
     CLOSE(..)
 si
 
-scan(line: string) -> Pipe[Token] is
+scan(line: string) -> Token{} is
     for word in line.split([' ']) do
         case word
         when "(" then yield Token.OPEN(word)

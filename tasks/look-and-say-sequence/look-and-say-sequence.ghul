@@ -1,6 +1,6 @@
 use default
 
-look_and_say(seed: string) -> Pipe[string] is
+look_and_say(seed: string) -> string{} is
     let current mut = seed
 
     do

@@ -34,7 +34,7 @@ render(filled: Filled) -> string =>
         "[{nested.items |> map(render) |> join(", ")}]"
     esac
 
-positions(template: Template) -> Pipe[int] is
+positions(template: Template) -> int{} is
     case template
     when leaf: Template.INDEX then
         yield leaf.position

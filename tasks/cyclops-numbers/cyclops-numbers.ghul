@@ -31,7 +31,7 @@ is_prime(value: long) -> bool is
     return true
 si
 
-zero_free(digits: int) -> Pipe[long] is
+zero_free(digits: int) -> long{} is
     if digits == 0 then
         yield 0L
         return
@@ -44,7 +44,7 @@ zero_free(digits: int) -> Pipe[long] is
     od
 si
 
-cyclops() -> Pipe[long] is
+cyclops() -> long{} is
     let half mut = 0
 
     while true do
@@ -74,7 +74,7 @@ is_palindrome(value: long) -> bool is
         |> all(i => text[i] == text[text.length - 1 - i])
 si
 
-report(name: string, numbers: () -> Pipe[long]) is
+report(name: string, numbers: () -> long{}) is
     write_line("first 50 {name}:")
 
     let first_50 = numbers() |> take(50) |> collect()

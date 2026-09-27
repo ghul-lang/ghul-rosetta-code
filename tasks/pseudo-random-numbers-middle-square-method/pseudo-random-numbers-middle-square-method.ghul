@@ -1,6 +1,6 @@
 use default
 
-middle_square(seed: int) -> Pipe[int] is
+middle_square(seed: int) -> int{} is
     let current mut = seed
 
     while true do

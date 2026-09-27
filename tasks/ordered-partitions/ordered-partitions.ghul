@@ -1,6 +1,6 @@
 use default
 
-combinations(items: List[int], k: int) -> Pipe[List[int]] is
+combinations(items: List[int], k: int) -> List[int]{} is
     if k == 0 then
         yield LIST()
     elif items.count >= k then
@@ -22,7 +22,7 @@ combinations(items: List[int], k: int) -> Pipe[List[int]] is
     fi
 si
 
-partitions(items: List[int], sizes: List[int]) -> Pipe[List[List[int]]] is
+partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
     if sizes.count == 0 then
         yield LIST()
     else

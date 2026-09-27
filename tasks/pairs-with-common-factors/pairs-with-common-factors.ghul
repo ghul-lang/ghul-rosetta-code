@@ -16,7 +16,7 @@ for prime in 2::limit do
     fi
 od
 
-sharing_a_factor() -> Pipe[long] is
+sharing_a_factor() -> long{} is
     let coprime_total mut = 0L
 
     for count in 1::limit do

@@ -1,6 +1,6 @@
 use default
 
-bsd_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
+bsd_rand(seed: int) -> int{} is
     let state mut = long(seed)
 
     do
@@ -9,7 +9,7 @@ bsd_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
     od
 si
 
-ms_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
+ms_rand(seed: int) -> int{} is
     let state mut = long(seed)
 
     do

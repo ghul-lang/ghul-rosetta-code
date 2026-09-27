@@ -1,6 +1,6 @@
 use default
 
-sundaram(limit: int) -> Pipe[int] is
+sundaram(limit: int) -> int{} is
     let marked = LIST(limit + 1)
 
     (0::limit)

@@ -71,7 +71,7 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
     si
 si
 
-drain[T: Ghul.Comparable[T]](queue: PRIORITY_QUEUE[T]) -> Pipe[T] is
+drain[T: Ghul.Comparable[T]](queue: PRIORITY_QUEUE[T]) -> T{} is
     while queue.count > 0 do
         yield queue.pop()
     od

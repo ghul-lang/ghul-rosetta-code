@@ -24,7 +24,7 @@ shared(left: RealSet, right: RealSet) -> RealSet =>
 without(left: RealSet, right: RealSet) -> RealSet =>
     value => left(value) /\ !right(value)
 
-samples(low: double, high: double, steps: int) -> Pipe[double] =>
+samples(low: double, high: double, steps: int) -> double{} =>
     (0::steps)
         |> map(step =>
             low + (high - low) * double(step) / double(steps))

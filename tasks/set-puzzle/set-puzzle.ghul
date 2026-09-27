@@ -22,7 +22,7 @@ is_set(t: Triple) -> bool =>
     (a.symbol + b.symbol + c.symbol) % 3 == 0 /\
     (a.shading + b.shading + c.shading) % 3 == 0
 
-triples(cards: List[CARD]) -> Pipe[Triple] is
+triples(cards: List[CARD]) -> Triple{} is
     for i in 0..cards.count do
         for j in i + 1..cards.count do
             for k in j + 1..cards.count do

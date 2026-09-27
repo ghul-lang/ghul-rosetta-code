@@ -7,7 +7,7 @@ bits_set(value: int) -> int =>
         value % 2 + bits_set(value / 2)
     fi
 
-walsh(order: int) -> Pipe[string] =>
+walsh(order: int) -> string{} =>
     (0..order)
         |> map(row => (0..order)
             |> map(column =>

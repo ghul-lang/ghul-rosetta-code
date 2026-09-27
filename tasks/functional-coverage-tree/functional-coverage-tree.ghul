@@ -21,7 +21,7 @@ class NODE(name: string, weight: double, own_coverage: double?) is
             weighted / total
         fi
 
-    rows(depth: int) -> Pipe[string] is
+    rows(depth: int) -> string{} is
         let label = "{string(' ', depth * 4)}{name}"
         let shown_weight = if weight =~ 1.0D then "" else "{weight}" fi
         let shown_coverage =

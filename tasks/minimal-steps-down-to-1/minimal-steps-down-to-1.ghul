@@ -4,7 +4,7 @@ use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
 moves(value: int, divisors: List[int],
-      subtractors: List[int]) -> Pipe[MOVE]
+      subtractors: List[int]) -> MOVE{}
 is
     for divisor in divisors do
         if value % divisor == 0 then

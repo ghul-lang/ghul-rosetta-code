@@ -4,7 +4,7 @@ use System.Math
 
 let random = System.Random(314)
 
-darts() -> Pipe[(x: double, y: double)] is
+darts() -> (x: double, y: double){} is
     while true do
         yield (x = random.next_double(), y = random.next_double())
     od

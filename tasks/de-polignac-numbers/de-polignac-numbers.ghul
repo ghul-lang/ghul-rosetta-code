@@ -21,7 +21,7 @@ is_de_polignac(n: int) -> bool =>
         |> take_while(power => power < n)
         |> all(power => !is_prime(n - power))
 
-de_polignac_numbers() -> Pipe[int] => from(1, 2) |> filter(is_de_polignac)
+de_polignac_numbers() -> int{} => from(1, 2) |> filter(is_de_polignac)
 
 write_line("First 50 de Polignac numbers:")
 

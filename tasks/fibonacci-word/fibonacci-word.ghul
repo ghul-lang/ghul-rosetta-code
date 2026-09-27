@@ -1,7 +1,7 @@
 use default
 use System.Math
 
-words() -> Pipe[string] is
+words() -> string{} is
     let earlier mut = "1"
     let later mut = "0"
 

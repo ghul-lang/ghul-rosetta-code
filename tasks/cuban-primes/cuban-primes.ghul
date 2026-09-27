@@ -56,7 +56,7 @@ probably_prime(value: long) -> bool is
     true
 si
 
-cubans() -> Pipe[long] is
+cubans() -> long{} is
     let n mut = 0L
 
     do

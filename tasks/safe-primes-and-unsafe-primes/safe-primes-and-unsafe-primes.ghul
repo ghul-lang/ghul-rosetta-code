@@ -20,7 +20,7 @@ is_prime(value: int) -> bool => value >= 2 /\ !composite[value]
 
 is_safe(prime: int) -> bool => is_prime((prime - 1) / 2)
 
-selected(wanted: (int) -> bool) -> Pipe[int] =>
+selected(wanted: (int) -> bool) -> int{} =>
     2..sieve_limit |> filter(is_prime) |> filter(wanted)
 
 report(name: string, wanted: (int) -> bool, first: int) is

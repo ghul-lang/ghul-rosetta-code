@@ -9,7 +9,7 @@ eban_group(group: int) -> bool =>
     group == 0 \/
         group < 100 /\ eban_units /\ eban_tens)
 
-groups(n: int) -> Pipe[int] is
+groups(n: int) -> int{} is
     let remaining mut = n
 
     while remaining > 0 do
@@ -20,7 +20,7 @@ si
 
 is_eban(n: int) -> bool => groups(n) |> all(eban_group)
 
-eban_up_to(limit: int) -> Pipe[int] =>
+eban_up_to(limit: int) -> int{} =>
     1::limit |> filter(is_eban)
 
 let up_to_1000 = eban_up_to(1000) |> collect()

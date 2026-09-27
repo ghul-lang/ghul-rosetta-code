@@ -1,6 +1,6 @@
 use default
 
-fairshare(base: int) -> Pipe[int] =>
+fairshare(base: int) -> int{} =>
     from(0) |> map(count => digit_sum(count, base) % base)
 
 digit_sum(value: int, base: int) -> int =>

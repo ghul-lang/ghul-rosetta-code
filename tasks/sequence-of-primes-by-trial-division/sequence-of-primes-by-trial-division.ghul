@@ -1,6 +1,6 @@
 use default
 
-primes() -> Pipe[int] is
+primes() -> int{} is
     let found = LIST[int]()
     let candidate mut = 2
 

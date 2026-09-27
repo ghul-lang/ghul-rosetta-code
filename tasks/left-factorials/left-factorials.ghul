@@ -1,6 +1,6 @@
 use default
 
-left_factorials() -> Ghul.Pipes.Pipe[bigint] =>
+left_factorials() -> bigint{} =>
     stream(
         (n = 0, factorial = 1n, total = 0n),
         (n, factorial, total) =>

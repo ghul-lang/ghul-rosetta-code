@@ -6,7 +6,7 @@ class NODE(name: string, children: List[NODE])
 
 leaf(name: string) -> NODE => NODE(name, LIST())
 
-render_nest(node: NODE, depth: int) -> Pipe[string] is
+render_nest(node: NODE, depth: int) -> string{} is
     yield "{repeat("    ", depth) |> join("")}{node.name}"
 
     for child in node.children do
@@ -14,10 +14,10 @@ render_nest(node: NODE, depth: int) -> Pipe[string] is
     od
 si
 
-render_indent(lines: List[LINE]) -> Pipe[string] =>
+render_indent(lines: List[LINE]) -> string{} =>
     lines |> map(line => "{line.depth} {line.name}")
 
-to_indent(node: NODE, depth: int) -> Pipe[LINE] is
+to_indent(node: NODE, depth: int) -> LINE{} is
     yield (depth = depth, name = node.name)
 
     for child in node.children do

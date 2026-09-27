@@ -38,7 +38,7 @@ is_unprimeable(value: int) -> bool is
     true
 si
 
-unprimeables() -> Pipe[int] is
+unprimeables() -> int{} is
     let candidate mut = 99
 
     do

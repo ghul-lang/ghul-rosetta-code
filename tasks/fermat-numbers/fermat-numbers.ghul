@@ -54,7 +54,7 @@ pollard_rho(value: bigint, budget: int) -> bigint? is
     return null
 si
 
-factors(value: bigint) -> Pipe[bigint] is
+factors(value: bigint) -> bigint{} is
     if is_prime(value) then
         yield value
     elif let divisor = pollard_rho(value, 1_000_000) then

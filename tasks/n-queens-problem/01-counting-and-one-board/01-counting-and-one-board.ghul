@@ -7,7 +7,7 @@ safe(queens: List[int], row: int, column: int) -> bool =>
                 placed_row - placed_column != row - column /\
                 placed_row + placed_column != row + column)
 
-placements(n: int, queens: List[int]) -> Pipe[List[int]] is
+placements(n: int, queens: List[int]) -> List[int]{} is
     if queens.count == n then
         yield queens
     else

@@ -1,6 +1,6 @@
 use default
 
-extend(prefix: LIST[int], size: int) -> Pipe[List[int]] is
+extend(prefix: LIST[int], size: int) -> List[int]{} is
     if prefix.count == size then
         yield prefix
     else
@@ -17,9 +17,9 @@ extend(prefix: LIST[int], size: int) -> Pipe[List[int]] is
     fi
 si
 
-derangements(size: int) -> Pipe[List[int]] => extend(LIST(), size)
+derangements(size: int) -> List[int]{} => extend(LIST(), size)
 
-subfactorials() -> Pipe[bigint] is
+subfactorials() -> bigint{} is
     let previous mut = 1n
     let current mut = 0n
     let index mut = 0

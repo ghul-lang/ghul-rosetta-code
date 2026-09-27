@@ -37,7 +37,7 @@ si
 is_duffinian(value: int) -> bool =>
     is_composite(value) /\ gcd(value, sigma(value)) == 1
 
-duffinians() -> Pipe[int] is
+duffinians() -> int{} is
     let candidate mut = 1
 
     do
@@ -49,7 +49,7 @@ duffinians() -> Pipe[int] is
     od
 si
 
-triplets() -> Pipe[int] is
+triplets() -> int{} is
     let candidate mut = 1
 
     do

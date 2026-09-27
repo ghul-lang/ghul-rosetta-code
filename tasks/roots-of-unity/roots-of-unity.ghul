@@ -2,7 +2,7 @@ use default
 
 use System.Numerics.Complex
 
-roots_of_unity(n: int) -> Pipe[Complex] =>
+roots_of_unity(n: int) -> Complex{} =>
     (0..n)
     |> map(k => Complex.from_polar_coordinates(
         1.0, 2.0 * System.Math.pi * double(k) / double(n)))

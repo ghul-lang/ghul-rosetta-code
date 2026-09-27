@@ -2,7 +2,7 @@ use default
 use Ghul.Comparable
 
 merge_two[T: Comparable[T]](left: Iterable[T],
-                            right: Iterable[T]) -> Pipe[T]
+                            right: Iterable[T]) -> T{}
 is
     let ahead = left.iterator
     let behind = right.iterator
@@ -34,17 +34,17 @@ is
     od
 si
 
-merge_all[T: Comparable[T]](streams: List[Iterable[T]]) -> Pipe[T] =>
+merge_all[T: Comparable[T]](streams: List[Iterable[T]]) -> T{} =>
     case streams.count
-    when 0 then pipe(LIST())
-    when 1 then pipe(streams[0])
+    when 0 then LIST[T]()
+    when 1 then streams[0]
     else
         let middle = streams.count / 2 in
         merge_two(merge_all(streams[0..middle]),
                   merge_all(streams[middle..<0]))
     esac
 
-counting(start: int, step: int, count: int) -> Pipe[int] is
+counting(start: int, step: int, count: int) -> int{} is
     for term in 0..count do
         yield start + term * step
     od

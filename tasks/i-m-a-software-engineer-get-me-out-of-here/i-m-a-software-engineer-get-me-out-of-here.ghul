@@ -37,7 +37,7 @@ let cells =
 let number =
     cells |> index() |> map((i, cell) => (cell, i)) |> collect_map()
 
-moves(cell: Cell) -> Pipe[Cell] =>
+moves(cell: Cell) -> Cell{} =>
     let (row, column) = cell in
     let step = int(country[row][column] - '0') in
     [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]

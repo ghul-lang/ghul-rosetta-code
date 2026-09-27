@@ -46,7 +46,7 @@ totient(n: int) -> int =>
         power(factor.prime, factor.exponent - 1) *
         (factor.prime - 1))
 
-achilles_numbers() -> Pipe[int] is
+achilles_numbers() -> int{} is
     let n mut = 1
 
     do

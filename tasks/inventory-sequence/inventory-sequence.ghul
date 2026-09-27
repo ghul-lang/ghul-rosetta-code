@@ -1,6 +1,6 @@
 use default
 
-inventory() -> Pipe[int] is
+inventory() -> int{} is
     let counts = MAP()
 
     while true do

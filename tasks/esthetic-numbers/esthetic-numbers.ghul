@@ -16,7 +16,7 @@ render(value: long, base: int) -> string is
     return string(digits.to_array())
 si
 
-esthetic(base: int) -> Pipe[long] is
+esthetic(base: int) -> long{} is
     let pending = Queue()
 
     for digit in 1..base do

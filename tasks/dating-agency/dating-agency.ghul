@@ -12,7 +12,7 @@ struct SAILOR(name: string) is
 si
 
 struct AGENCY(ladies: List[LADY]) is
-    suggestions: Pipe[LADY] => ladies |> filter(lady => lady.is_nice)
+    suggestions: LADY{} => ladies |> filter(lady => lady.is_nice)
 si
 
 let agency = AGENCY(

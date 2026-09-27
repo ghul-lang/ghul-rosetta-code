@@ -8,7 +8,7 @@ si
 
 let games = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
 
-outcomes(count: int) -> Pipe[Collections.List[Result]] is
+outcomes(count: int) -> Collections.List[Result]{} is
     if count == 0 then
         yield LIST[Result]()
         return

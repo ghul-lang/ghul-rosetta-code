@@ -25,7 +25,7 @@ inside(square: Square) -> bool =>
 
 let visit_order = repeat(0, size * size) |> collect_mutable()
 
-onward(square: Square) -> Pipe[Square] =>
+onward(square: Square) -> Square{} =>
     leaps
         |> map(leap =>
             (file = square.file + leap.file,

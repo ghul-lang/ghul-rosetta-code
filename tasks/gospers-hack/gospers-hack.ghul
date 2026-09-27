@@ -1,7 +1,7 @@
 use default
 use System.Convert.to_string
 
-successors(from: int) -> Pipe[int] is
+successors(from: int) -> int{} is
     let n mut = from
 
     do

@@ -8,7 +8,7 @@ si
 use Tree.EMPTY
 use Tree.NODE
 
-preorder[T](tree: Tree[T]) -> Pipe[T] is
+preorder[T](tree: Tree[T]) -> T{} is
     if let (value, left, right): NODE = tree then
         yield value
 
@@ -17,7 +17,7 @@ preorder[T](tree: Tree[T]) -> Pipe[T] is
     fi
 si
 
-inorder[T](tree: Tree[T]) -> Pipe[T] is
+inorder[T](tree: Tree[T]) -> T{} is
     if let (value, left, right): NODE = tree then
         yield in inorder(left)
 
@@ -27,7 +27,7 @@ inorder[T](tree: Tree[T]) -> Pipe[T] is
     fi
 si
 
-postorder[T](tree: Tree[T]) -> Pipe[T] is
+postorder[T](tree: Tree[T]) -> T{} is
     if let (value, left, right): NODE = tree then
         yield in postorder(left)
         yield in postorder(right)
@@ -36,7 +36,7 @@ postorder[T](tree: Tree[T]) -> Pipe[T] is
     fi
 si
 
-levelorder[T](tree: Tree[T]) -> Pipe[T] is
+levelorder[T](tree: Tree[T]) -> T{} is
     let pending = Queue[Tree[T]]()
 
     pending.enqueue(tree)
@@ -55,7 +55,7 @@ si
 
 leaf[T](value: T) -> Tree[T] => NODE(value, EMPTY, EMPTY)
 
-show[T](label: string, values: Pipe[T]) =>
+show[T](label: string, values: T{}) =>
     write_line("{label,-12} {values |> join(" ")}")
 
 let tree =

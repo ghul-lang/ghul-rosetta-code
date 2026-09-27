@@ -5,7 +5,7 @@ let names = [
     "Nickel", "Aluminium", "Iron", "Tin", "Lead"
 ]
 
-lucas(b: bigint) -> Pipe[bigint] is
+lucas(b: bigint) -> bigint{} is
     let (x, y) mut = (1n, 1n)
 
     yield x

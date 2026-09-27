@@ -5,7 +5,7 @@ let biggest_factorial = 18
 factorial(n: int) -> long =>
     2::n |> reduce(1L, (product, i) => product * long(i))
 
-multiples(value: long, largest: int, limit: long) -> Pipe[long] is
+multiples(value: long, largest: int, limit: long) -> long{} is
     yield value
 
     for i in 2::largest do

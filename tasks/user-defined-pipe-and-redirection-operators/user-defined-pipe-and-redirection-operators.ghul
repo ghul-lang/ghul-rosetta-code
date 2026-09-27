@@ -1,6 +1,6 @@
 use default
-use Stream = Ghul.Pipes.Pipe[string]
-use Filter = (Ghul.Pipes.Pipe[string]) -> Ghul.Pipes.Pipe[string]
+use Stream = string{}
+use Filter = (string{}) -> string{}
 
 |(source: Stream, next: Filter) -> Stream => next(source)
 

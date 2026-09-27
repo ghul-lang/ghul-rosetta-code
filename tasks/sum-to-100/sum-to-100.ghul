@@ -4,7 +4,7 @@ use System.Text.StringBuilder
 let joined = 2
 let minus = 1
 
-expressions() -> Pipe[(value: int, text: string)] is
+expressions() -> (value: int, text: string){} is
     for code in 0..19683 do
         let operators = LIST(9)
         let rest mut = code

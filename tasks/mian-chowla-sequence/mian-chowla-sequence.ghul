@@ -1,6 +1,6 @@
 use default
 
-mian_chowla() -> Pipe[int] is
+mian_chowla() -> int{} is
     let terms = LIST()
     let sums = SET()
     let candidate mut = 1

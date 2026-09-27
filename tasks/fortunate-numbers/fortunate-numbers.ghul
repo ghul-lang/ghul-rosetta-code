@@ -47,7 +47,7 @@ is_prime(value: int) -> bool is
     return divisor * divisor > value
 si
 
-fortunate(count: int) -> Pipe[int] is
+fortunate(count: int) -> int{} is
     let primorial mut = 1n
     let candidate mut = 1
     let found mut = 0

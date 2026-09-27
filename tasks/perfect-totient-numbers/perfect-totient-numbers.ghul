@@ -36,7 +36,7 @@ totient_sum(value: int) -> int is
     total
 si
 
-perfect_totients(count: int) -> Pipe[int] is
+perfect_totients(count: int) -> int{} is
     let candidate mut = 1
     let found mut = 0
 

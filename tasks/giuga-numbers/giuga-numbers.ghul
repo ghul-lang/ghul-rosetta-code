@@ -34,7 +34,7 @@ is_giuga(value: int) -> bool is
     factors |> all(factor => (total / factor - 1L) % factor == 0L)
 si
 
-giugas() -> Pipe[int] is
+giugas() -> int{} is
     let candidate mut = 1
 
     do

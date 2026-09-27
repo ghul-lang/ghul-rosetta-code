@@ -21,7 +21,7 @@ let everything =
     BindingFlags.INSTANCE | BindingFlags.STATIC |
     BindingFlags.DECLARED_ONLY
 
-callees(method: MethodBase) -> Pipe[MethodBase] is
+callees(method: MethodBase) -> MethodBase{} is
     let il = method.get_method_body()?.get_i_l_as_byte_array()
 
     if !il? then

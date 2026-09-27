@@ -1,7 +1,7 @@
 use default
 
 schwartzian[T, K: Ghul.Comparable[K]]
-    (items: Iterable[T], key: (T) -> K) -> Pipe[T]
+    (items: Iterable[T], key: (T) -> K) -> T{}
 =>
     items
         |> map(item => (item, key = key(item)))

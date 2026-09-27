@@ -28,7 +28,7 @@ base_primes(bound: int) -> LIST[int] is
     2::bound |> filter(value => !composite[value]) |> collect_mutable()
 si
 
-primes_below(bound: int) -> Pipe[int] is
+primes_below(bound: int) -> int{} is
     let root_bound = int(sqrt(double(bound))) + 1
     let roots = base_primes(root_bound)
     let block = repeat(false, segment_size) |> collect_mutable()

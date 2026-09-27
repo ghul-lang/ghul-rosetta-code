@@ -1,6 +1,6 @@
 use default
 
-killings(n: int, k: int) -> Pipe[int] is
+killings(n: int, k: int) -> int{} is
     let standing = 0..n |> collect_mutable()
     let at mut = 0
 

@@ -17,7 +17,7 @@ reciprocal_period(prime: int) -> int? =>
 is_long(prime: int) -> bool =>
     reciprocal_period(prime) =~ prime - 1
 
-long_primes(bound: int) -> Pipe[int] =>
+long_primes(bound: int) -> int{} =>
     2::bound |> filter(is_prime) |> filter(is_long)
 
 write_line("long primes up to 500:")

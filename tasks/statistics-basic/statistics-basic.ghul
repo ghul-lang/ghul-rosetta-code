@@ -32,7 +32,7 @@ si
 
 let random = System.Random(100)
 
-samples() -> Pipe[double] is
+samples() -> double{} is
     while true do
         yield random.next_double()
     od

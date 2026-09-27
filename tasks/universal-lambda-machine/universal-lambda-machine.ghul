@@ -176,7 +176,7 @@ let top = constant(Term.PAIR)
 let zero = constant(Term.ATOM(0))
 let one = constant(Term.ATOM(1))
 
-items(thunk: THUNK, limit: int) -> Pipe[THUNK] is
+items(thunk: THUNK, limit: int) -> THUNK{} is
     let rest mut = thunk
     let count mut = 0
 

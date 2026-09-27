@@ -24,7 +24,7 @@ si
 
 roots(
     f: double -> double, start: double, stop: double, step: double
-) -> Pipe[Root] is
+) -> Root{} is
     let steps = int(System.Math.round((stop - start) / step))
     let x = (i: int) => start + double(i) * step
 

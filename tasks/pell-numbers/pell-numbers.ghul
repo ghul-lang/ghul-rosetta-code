@@ -36,7 +36,7 @@ is_prime(value: bigint) -> bool is
     witnesses |> all(witness => passes(witness, odd_part, power, value))
 si
 
-pell_recurrence(first: bigint, second: bigint) -> Pipe[bigint] is
+pell_recurrence(first: bigint, second: bigint) -> bigint{} is
     let previous mut = first
     let current mut = second
 
@@ -50,28 +50,28 @@ pell_recurrence(first: bigint, second: bigint) -> Pipe[bigint] is
     od
 si
 
-pells() -> Pipe[bigint] => pell_recurrence(0n, 1n)
+pells() -> bigint{} => pell_recurrence(0n, 1n)
 
-pell_lucas() -> Pipe[bigint] => pell_recurrence(2n, 2n)
+pell_lucas() -> bigint{} => pell_recurrence(2n, 2n)
 
-approximations() -> Pipe[(numerator: bigint, denominator: bigint)] =>
+approximations() -> (numerator: bigint, denominator: bigint){} =>
     pells()
         |> windows(2)
         |> map(pair =>
             (numerator = pair[0] + pair[1], denominator = pair[1]))
 
-pell_primes() -> Pipe[(index: int, value: bigint)] =>
+pell_primes() -> (index: int, value: bigint){} =>
     pells()
         |> index()
         |> filter(entry => is_prime(entry.value))
         |> map(entry => (index = entry.index, value = entry.value))
 
-newman_shanks_williams() -> Pipe[bigint] =>
+newman_shanks_williams() -> bigint{} =>
     pells() |> chunk(2) |> map(pair => pair[0] + pair[1])
 
 use TRIANGLE = (short: bigint, long: bigint, hypotenuse: bigint)
 
-near_isosceles_triples() -> Pipe[TRIANGLE] is
+near_isosceles_triples() -> TRIANGLE{} is
     let running mut = 0n
     let position mut = 0
 

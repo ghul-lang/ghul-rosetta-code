@@ -42,7 +42,7 @@ for value in 1::limit do
     digit_sum = digit_sum + change
 od
 
-self_numbers() -> Pipe[int] =>
+self_numbers() -> int{} =>
     1::limit |> filter(value => !is_generated(value))
 
 write_line("the first 50 self numbers:")

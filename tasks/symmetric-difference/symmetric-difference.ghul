@@ -1,9 +1,9 @@
 use default
 
-only_in(left: SET[string], right: SET[string]) -> Pipe[string] =>
+only_in(left: SET[string], right: SET[string]) -> string{} =>
     left |> filter(name => !right.contains(name))
 
-show(label: string, names: Pipe[string]) is
+show(label: string, names: string{}) is
     let listed = names |> join()
 
     write_line("{label}: {listed}")

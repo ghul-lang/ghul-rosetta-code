@@ -23,7 +23,7 @@ for candidate in 2::limit do
     fi
 od
 
-spiral() -> Pipe[POSITION] is
+spiral() -> POSITION{} is
     let x mut = 0
     let y mut = 0
     let run mut = 1

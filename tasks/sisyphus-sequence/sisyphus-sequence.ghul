@@ -29,7 +29,7 @@ next_prime() -> int is
     prime
 si
 
-sisyphus() -> Pipe[(term: int, prime: int)] is
+sisyphus() -> (term: int, prime: int){} is
     let term mut = 1
     let highest mut = 0
 

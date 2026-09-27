@@ -14,7 +14,7 @@ class LEXER is
         _column = 1
     si
 
-    tokens() -> Pipe[Token] is
+    tokens() -> Token{} is
         while true do
             _skip()
 

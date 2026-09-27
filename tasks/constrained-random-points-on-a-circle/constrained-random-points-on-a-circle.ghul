@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 let random = System.Random(10)
 
-candidates() -> Pipe[(x: int, y: int)] is
+candidates() -> (x: int, y: int){} is
     while true do
         yield (x = random.next(-15, 16), y = random.next(-15, 16))
     od

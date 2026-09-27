@@ -19,7 +19,7 @@ let prime = (
     sieve
 )
 
-rotations(n: int) -> Pipe[int] =>
+rotations(n: int) -> int{} =>
     let digits = "{n}" in
     0..digits.length
         |> map(i =>

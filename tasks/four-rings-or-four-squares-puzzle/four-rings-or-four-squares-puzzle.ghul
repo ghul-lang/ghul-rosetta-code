@@ -5,7 +5,7 @@ use Raster.SHAPES
 
 use Solution = (a: int, b: int, c: int, d: int, e: int, f: int, g: int)
 
-solutions(low: int, high: int, unique: bool) -> Pipe[Solution] is
+solutions(low: int, high: int, unique: bool) -> Solution{} is
     for a in low::high do
         for b in low::high do
             let total = a + b

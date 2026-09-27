@@ -20,7 +20,7 @@ class NODE[T](value: T) is
     si
 si
 
-forward[T](first: NODE[T]) -> Pipe[T] is
+forward[T](first: NODE[T]) -> T{} is
     let cursor mut = first
 
     while let node = cursor do
@@ -29,7 +29,7 @@ forward[T](first: NODE[T]) -> Pipe[T] is
     od
 si
 
-backward[T](last: NODE[T]) -> Pipe[T] is
+backward[T](last: NODE[T]) -> T{} is
     let cursor mut = last
 
     while let node = cursor do

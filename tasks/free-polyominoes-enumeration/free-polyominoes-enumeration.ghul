@@ -73,7 +73,7 @@ row_of(shape: Shape, row: int) -> string =>
         |> map(filled => if filled then "#" else " " fi)
         |> join("")
 
-art(shapes: List[Shape]) -> Pipe[string] =>
+art(shapes: List[Shape]) -> string{} =>
     let tallest = shapes |> map(height) |> reduce(0, int.max) in
     (0..tallest)
         |> map(row => shapes |> map(s => row_of(s, row)) |> join("  "))

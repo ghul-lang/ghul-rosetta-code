@@ -1,6 +1,6 @@
 use default
 
-factorize(text: string) -> Pipe[string] is
+factorize(text: string) -> string{} is
     let start mut = 0
 
     while start < text.length do

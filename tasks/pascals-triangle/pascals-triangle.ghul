@@ -1,6 +1,6 @@
 use default
 
-rows(count: int) -> Ghul.Pipes.Pipe[List[int]] is
+rows(count: int) -> List[int]{} is
     let row mut = LIST([1])
 
     for _ in 1::count do

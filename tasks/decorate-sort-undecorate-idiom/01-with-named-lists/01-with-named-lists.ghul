@@ -1,7 +1,7 @@
 use default
 
 decorate_sort_undecorate[T, K: Ghul.Comparable[K]]
-    (items: Iterable[T], key: (T) -> K) -> Pipe[T]
+    (items: Iterable[T], key: (T) -> K) -> T{}
 is
     let decorated =
         items |> map(item => (item, key = key(item)))

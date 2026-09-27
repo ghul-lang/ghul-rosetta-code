@@ -3,7 +3,7 @@ use default
 divisor_count(n: int) -> int =>
     1::n |> filter(divisor => n % divisor == 0) |> count()
 
-anti_primes() -> Pipe[int] is
+anti_primes() -> int{} is
     let most mut = 0
     let n mut = 1
 

@@ -19,7 +19,7 @@ let dice =
 // chains of distinct dice, each beaten by the one after it, whose first die
 // beats the last
 
-extend(chain: List[Die], length: int) -> Pipe[List[Die]] is
+extend(chain: List[Die], length: int) -> List[Die]{} is
     if chain.count == length then
         if beats(chain[0], chain[length - 1]) > 0 then
             yield chain
@@ -39,7 +39,7 @@ extend(chain: List[Die], length: int) -> Pipe[List[Die]] is
     fi
 si
 
-chains(length: int) -> Pipe[List[Die]] is
+chains(length: int) -> List[Die]{} is
     for die in dice do
         yield in extend([die], length)
     od

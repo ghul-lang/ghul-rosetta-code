@@ -7,7 +7,7 @@ exact_root(square: long) -> long? =>
     let root = long(System.Math.round(estimate)) in
     if root * root == square then root else null fi
 
-triples(k: long, limit: long) -> Pipe[Triple] =>
+triples(k: long, limit: long) -> Triple{} =>
     1L::limit
         |> flat_map(a => a::limit |> map(b => (a, b)))
         |> map((a, b) =>

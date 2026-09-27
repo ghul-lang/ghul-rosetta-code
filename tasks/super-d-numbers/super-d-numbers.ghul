@@ -1,6 +1,6 @@
 use default
 
-super_d(d: int) -> Pipe[long] =>
+super_d(d: int) -> long{} =>
     let run = "".pad_left(d, char(int('0') + d)) in
     from(1)
         |> map(n => long(n))

@@ -33,7 +33,7 @@ is_rhonda(value: int, base: int) -> bool =>
     digits(value, base) |> product() ==
     base * prime_factor_sum(value)
 
-rhondas(base: int) -> Pipe[int] is
+rhondas(base: int) -> int{} is
     let candidate mut = 1
 
     do

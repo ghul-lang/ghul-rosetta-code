@@ -1,6 +1,6 @@
 use default
 
-rounds(players: int) -> Pipe[Collections.List[(int, int)]] is
+rounds(players: int) -> Collections.List[(int, int)]{} is
     let n = if players % 2 == 0 then players else players + 1 fi
     let seats = (1::n) |> collect_mutable()
 

@@ -8,7 +8,7 @@ is_curzon(base: int, n: int) -> bool is
     return (power + 1n) % divisor =~ 0n
 si
 
-curzon_numbers(base: int) -> Pipe[int] is
+curzon_numbers(base: int) -> int{} is
     let n mut = 1
 
     while true do

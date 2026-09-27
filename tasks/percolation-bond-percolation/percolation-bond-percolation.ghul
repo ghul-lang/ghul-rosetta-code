@@ -72,7 +72,7 @@ class GRID is
         return drips() |> any(_ => true)
     si
 
-    drips() -> Pipe[int] =>
+    drips() -> int{} =>
         0..width |> filter(column =>
             is_wet(column, height - 1) /\ !floor(column, height))
 si

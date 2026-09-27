@@ -30,7 +30,7 @@ line(cells: Collections.List[Cell]) -> Line is
     return (penalty, prices[0], cells)
 si
 
-active_lines() -> Pipe[Line] is
+active_lines() -> Line{} is
     let rows = (0..contractors.count) |> filter(r => supply[r] > 0)
     let columns = (0..tasks.count) |> filter(c => demand[c] > 0)
 

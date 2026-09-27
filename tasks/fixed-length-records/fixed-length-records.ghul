@@ -10,7 +10,7 @@ let record_length = 80
 let block_length = 1024
 let block_line_length = 64
 
-records(path: string, length: int) -> Pipe[string] is
+records(path: string, length: int) -> string{} is
     let bytes = File.read_all_bytes(path)
     let whole = bytes.count / length
 

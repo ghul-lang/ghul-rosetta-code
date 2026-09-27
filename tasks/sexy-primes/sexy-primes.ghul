@@ -18,12 +18,12 @@ od
 
 is_prime(value: int) -> bool => value >= 2 /\ !composite[value]
 
-primes() -> Pipe[int] => 2..limit |> filter(is_prime)
+primes() -> int{} => 2..limit |> filter(is_prime)
 
 group_from(first: int, size: int) -> List[int] =>
     0..size |> map(step => first + step * 6) |> collect()
 
-sexy_groups(size: int) -> Pipe[List[int]] =>
+sexy_groups(size: int) -> List[int]{} =>
     primes()
         |> map(first => group_from(first, size))
         |> filter(members =>
@@ -32,7 +32,7 @@ sexy_groups(size: int) -> Pipe[List[int]] =>
 show(values: Iterable[List[int]]) -> string =>
     values |> map(members => "({members |> join(" ")})") |> join(" ")
 
-last[T](values: List[T], wanted: int) -> Pipe[T] =>
+last[T](values: List[T], wanted: int) -> T{} =>
     let extra = values.count - wanted in
     values |> skip(if extra > 0 then extra else 0 fi)
 

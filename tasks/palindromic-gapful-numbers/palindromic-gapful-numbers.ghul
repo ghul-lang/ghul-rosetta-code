@@ -4,7 +4,7 @@ use default
 // length's first half runs upward from the digit, and the second half
 // mirrors it
 
-palindromes(digit: int) -> Pipe[long] is
+palindromes(digit: int) -> long{} is
     for length in from(3) do
         let half = (length + 1) / 2
         let scale = repeat(10L, half - 1) |> product()
@@ -20,7 +20,7 @@ palindromes(digit: int) -> Pipe[long] is
     od
 si
 
-gapful(digit: int) -> Pipe[long] =>
+gapful(digit: int) -> long{} =>
     palindromes(digit) |> filter(n => n % long(11 * digit) == 0L)
 
 show(title: string, skip_count: int, take_count: int) is
