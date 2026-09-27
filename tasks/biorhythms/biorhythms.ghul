@@ -20,10 +20,10 @@ date(text: string) -> DateTime =>
 show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
 
 level(position: int, length: int) -> double =>
-    sin(2.0D * pi * cast double(position) / cast double(length))
+    sin(2.0D * pi * double(position) / double(length))
 
 report(birth: DateTime, target: DateTime) is
-    let days = cast int((target - birth).total_days)
+    let days = int((target - birth).total_days)
 
     write_line("{show(birth)} to {show(target)}, day {days}:")
 
@@ -43,7 +43,7 @@ report(birth: DateTime, target: DateTime) is
             else
                 let (trend, next) = quadrants[quadrant] in
                 let ahead = (quadrant + 1) * length / 4 - position in
-                let due = show(target.add_days(cast double(ahead))) in
+                let due = show(target.add_days(double(ahead))) in
                 "{percentage}% ({trend}, next {next} {due})"
             fi
 
@@ -58,9 +58,9 @@ report(date("1809-01-12"), date("1863-11-19"))
 
 let birth = date("1943-03-09")
 let target = date("1972-07-11")
-let centre = cast int((target - birth).total_days)
+let centre = int((target - birth).total_days)
 let span = 16
-let wide = cast double(span)
+let wide = double(span)
 
 let image = IMAGE(480, 240)
 
@@ -84,12 +84,12 @@ for (i, (label, length)) in cycles |> index() do
     image.line(
         (-span * 4::span * 4)
             |> map(q =>
-                let day = cast double(q) / 4.0D in
+                let day = double(q) / 4.0D in
                 let turn =
-                    (cast double(centre) + day) / cast double(length) in
+                    (double(centre) + day) / double(length) in
                 (x = day, y = sin(2.0D * pi * turn)))
             |> collect())
-    image.text(-wide + 10.0D * cast double(i), 1.45D, 13.0D, label)
+    image.text(-wide + 10.0D * double(i), 1.45D, 13.0D, label)
 od
 
 image.colour(60ub, 60ub, 60ub)

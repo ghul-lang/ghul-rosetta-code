@@ -4,7 +4,7 @@ middle_square(seed: int) -> Pipe[int] is
     let current mut = seed
 
     while true do
-        let squared = "{cast long(current) * cast long(current),012}"
+        let squared = "{long(current) * long(current),012}"
 
         current = int.parse(squared.substring(3, 6))
 

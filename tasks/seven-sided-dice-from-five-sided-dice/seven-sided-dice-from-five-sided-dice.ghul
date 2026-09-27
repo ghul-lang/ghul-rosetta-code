@@ -24,11 +24,11 @@ check_distribution(
         |> map(entry => (entry.key, entry.value.count))
         |> collect_map()
 
-    let expected = cast double(calls) / cast double(counts.count)
+    let expected = double(calls) / double(counts.count)
     let uniform mut = true
 
     for value in counts.keys |> sort() do
-        let difference = cast double(counts[value]) - expected
+        let difference = double(counts[value]) - expected
         let deviation = System.Math.abs(difference) / expected
 
         let flag = if deviation > tolerance then "  NOT UNIFORM" else "" fi

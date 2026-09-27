@@ -7,7 +7,7 @@ last_sunday(month: int) -> System.DateTime is
         System.DateTime(
             year, month, System.DateTime.days_in_month(year, month))
 
-    return last.add_days(cast double(-cast int(last.day_of_week)))
+    return last.add_days(double(-cast int(last.day_of_week)))
 si
 
 for month in 1::12 do

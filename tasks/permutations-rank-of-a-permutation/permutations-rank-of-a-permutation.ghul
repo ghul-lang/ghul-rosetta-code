@@ -11,7 +11,7 @@ unrank(rank: bigint, n: int) -> List[int] is
 
     for i in 0..n do
         let place = factorial(n - 1 - i)
-        let index = cast int(rest / place)
+        let index = int(rest / place)
 
         rest = rest % place
         result.add(left[index])

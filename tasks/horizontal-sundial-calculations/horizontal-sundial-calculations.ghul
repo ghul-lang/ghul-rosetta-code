@@ -33,7 +33,7 @@ while let latitude = ask("latitude in degrees, negative for south:"),
     write_line("hour    sun hour angle    dial hour line angle")
 
     for hour in -6::6 do
-        let sun = 15.0D * cast double(hour) - (longitude - meridian)
+        let sun = 15.0D * double(hour) - (longitude - meridian)
         let line = degrees(atan(sine * tan(radians(sun))))
         let clock = if hour == 0 then 12 else (hour + 12) % 12 fi
         let half = if hour < 0 then "am" else "pm" fi

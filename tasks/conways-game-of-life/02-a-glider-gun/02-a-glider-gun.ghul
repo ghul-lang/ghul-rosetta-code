@@ -75,10 +75,10 @@ draw(image: IMAGE, grid: Grid) is
         for column in 0..columns do
             if grid[row][column] then
                 image.fill_rectangle(
-                    cast double(column * cell),
-                    cast double(row * cell),
-                    cast double(column * cell + cell),
-                    cast double(row * cell + cell))
+                    double(column * cell),
+                    double(row * cell),
+                    double(column * cell + cell),
+                    double(row * cell + cell))
             fi
         od
     od

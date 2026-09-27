@@ -25,8 +25,8 @@ si
 roots(
     f: double -> double, start: double, stop: double, step: double
 ) -> Pipe[Root] is
-    let steps = cast int(System.Math.round((stop - start) / step))
-    let x = (i: int) => start + cast double(i) * step
+    let steps = int(System.Math.round((stop - start) / step))
+    let x = (i: int) => start + double(i) * step
 
     for i in 0::steps do
         if f(x(i)) == 0.0 then

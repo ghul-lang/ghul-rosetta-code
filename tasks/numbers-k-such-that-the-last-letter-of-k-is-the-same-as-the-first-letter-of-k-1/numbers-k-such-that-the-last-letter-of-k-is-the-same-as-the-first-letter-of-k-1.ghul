@@ -19,15 +19,15 @@ let scales = [
 
 english(n: long) -> string =>
     if n < 20L then
-        small[cast int(n)]
+        small[int(n)]
     elif n < 100L then
         let rest = n % 10L in
-        if rest == 0L then tens[cast int(n / 10L)]
-        else "{tens[cast int(n / 10L)]}-{small[cast int(rest)]}"
+        if rest == 0L then tens[int(n / 10L)]
+        else "{tens[int(n / 10L)]}-{small[int(rest)]}"
         fi
     elif n < 1000L then
         let rest = n % 100L in
-        let hundreds = "{small[cast int(n / 100L)]} hundred" in
+        let hundreds = "{small[int(n / 100L)]} hundred" in
         if rest == 0L then hundreds else "{hundreds} and {english(rest)}" fi
     else
         let (size, name) = scales |> find((size, _) => n >= size)! in
@@ -61,7 +61,7 @@ for size in [1_000, 10_000, 100_000, 1_000_000] do
     let breakdown =
         0..10
             |> map(digit =>
-                first |> count(k => k % 10L == cast long(digit)))
+                first |> count(k => k % 10L == long(digit)))
             |> join(" ")
 
     write_line("\nThe {size:N0}th is {first[size - 1]:N0}")

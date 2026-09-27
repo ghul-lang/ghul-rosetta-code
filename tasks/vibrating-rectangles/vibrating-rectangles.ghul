@@ -11,15 +11,15 @@ let frames = 42
 
 channel(hue: double, offset: double) -> ubyte =>
     let wave = 0.5D + 0.5D * cos(2.0D * pi * (hue - offset)) in
-    cast ubyte(round(40.0D + 215.0D * wave))
+    ubyte(round(40.0D + 215.0D * wave))
 
 draw(image: IMAGE, frame: int) is
     image.clear(10ub, 10ub, 15ub)
     image.stroke(2.0D)
 
     for ring in 0..rectangles do
-        let inset = spacing * cast double(ring) + 2.0D
-        let hue = cast double(frame - 2 * ring) / cast double(frames)
+        let inset = spacing * double(ring) + 2.0D
+        let hue = double(frame - 2 * ring) / double(frames)
 
         image.colour(
             channel(hue, 0.0D),
@@ -28,8 +28,8 @@ draw(image: IMAGE, frame: int) is
 
         let left = inset
         let top = inset
-        let right = cast double(width) - inset
-        let bottom = cast double(height) - inset
+        let right = double(width) - inset
+        let bottom = double(height) - inset
 
         image.line([
             (x = left, y = top), (x = right, y = top),

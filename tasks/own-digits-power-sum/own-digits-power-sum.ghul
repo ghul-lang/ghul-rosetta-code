@@ -16,7 +16,7 @@ digit_counts(value: long) -> LIST[int] is
     let remaining mut = value
 
     while remaining > 0L do
-        let digit = cast int(remaining % 10L)
+        let digit = int(remaining % 10L)
 
         counts[digit] = counts[digit] + 1
         remaining = remaining / 10L

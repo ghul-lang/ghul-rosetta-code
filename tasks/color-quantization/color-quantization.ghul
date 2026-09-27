@@ -10,14 +10,14 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = cast double(y) / 80.0D
+        let t = double(y) / 80.0D
 
         image.colour(
-            cast ubyte(40.0D + 200.0D * t),
-            cast ubyte(70.0D + 100.0D * t),
-            cast ubyte(160.0D - 60.0D * t))
+            ubyte(40.0D + 200.0D * t),
+            ubyte(70.0D + 100.0D * t),
+            ubyte(160.0D - 60.0D * t))
         image.fill_rectangle(
-            0.0D, cast double(y), 160.0D, cast double(y + 1))
+            0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -46,9 +46,9 @@ si
 
 hue(h: double) -> Colour =>
     let part = (h * 6.0D) - Math.floor(h * 6.0D) in
-    let sector = cast int(h * 6.0D) % 6 in
-    let up = cast int(255.0D * part) in
-    let down = cast int(255.0D * (1.0D - part)) in
+    let sector = int(h * 6.0D) % 6 in
+    let up = int(255.0D * part) in
+    let down = int(255.0D * (1.0D - part)) in
     case sector
     when 0 then (255, up, 0)
     when 1 then (down, 255, 0)
@@ -60,20 +60,20 @@ hue(h: double) -> Colour =>
 
 put(image: IMAGE, x: int, y: int, c: Colour) is
     image.set_pixel(
-        x, y, cast ubyte(c.red), cast ubyte(c.green), cast ubyte(c.blue))
+        x, y, ubyte(c.red), ubyte(c.green), ubyte(c.blue))
 si
 
 of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Colour =>
     (
-        red = cast int(p.red),
-        green = cast int(p.green),
-        blue = cast int(p.blue))
+        red = int(p.red),
+        green = int(p.green),
+        blue = int(p.blue))
 
 picture() -> IMAGE is
     let image = scene()
 
     for x in 0..image.width do
-        let c = hue(cast double(x) / cast double(image.width))
+        let c = hue(double(x) / double(image.width))
 
         for y in 0..8 do
             put(image, x, y, c)

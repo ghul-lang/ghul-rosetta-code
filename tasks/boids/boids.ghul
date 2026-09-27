@@ -26,17 +26,17 @@ let cave = IO.File.read_all_lines("cave.txt")
 
 let columns = cave[0].length
 let rows = cave.count
-let width = cast double(columns)
-let height = 2.0D * cast double(rows)
+let width = double(columns)
+let height = 2.0D * double(rows)
 
 let frames = 240
 let sight = 6.0D
 let personal_space = 1.5D
 
-row_of(y: double) -> int => rows - 1 - cast int(floor(y / 2.0D))
+row_of(y: double) -> int => rows - 1 - int(floor(y / 2.0D))
 
 column_of(x: double) -> int =>
-    (cast int(floor(x)) % columns + columns) % columns
+    (int(floor(x)) % columns + columns) % columns
 
 is_wall(point: VEC) -> bool =>
     point.y < 0.0D \/ point.y >= height \/
@@ -47,7 +47,7 @@ wall_push(point: VEC) -> VEC is
 
     for dx in -3::3 do
         for dy in -6::6 do
-            let probe = point + VEC(cast double(dx), cast double(dy))
+            let probe = point + VEC(double(dx), double(dy))
 
             if is_wall(probe) then
                 let away = point - probe
@@ -72,7 +72,7 @@ steer(boid: BOID, flock: List[BOID]) -> VEC is
     let force mut = VEC(0.04D, 0.0D) + wall_push(boid.position) * 1.5D
 
     if near.count > 0 then
-        let n = cast double(near.count)
+        let n = double(near.count)
 
         let centre =
             near |> map(o => o.position)
@@ -123,8 +123,8 @@ draw(image: IMAGE, flock: List[BOID]) is
     for (row, line) in cave |> index() do
         for (column, c) in line |> index() do
             if c == '#' then
-                let x = cast double(column)
-                let y = height - 2.0D * cast double(row + 1)
+                let x = double(column)
+                let y = height - 2.0D * double(row + 1)
 
                 image.fill_rectangle(
                     x - 0.05D, y - 0.05D, x + 1.05D, y + 2.05D)
@@ -146,8 +146,8 @@ let random = System.Random(1)
 
 let flock =
     [BOID(
-        VEC(cast double(c.index) + 0.5D,
-            height - 2.0D * cast double(r.index) - 1.0D),
+        VEC(double(c.index) + 0.5D,
+            height - 2.0D * double(r.index) - 1.0D),
         VEC(0.3D, random.next_double() * 0.4D - 0.2D))
         for r in cave |> index()
         for c in r.value |> index()

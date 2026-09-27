@@ -28,10 +28,10 @@ let top = 2.4D
 let steps = 120
 
 sample(column: int, row: int) -> Point =>
-    (x = left + (right - left) * cast double(column) /
-                cast double(steps),
-     y = bottom + (top - bottom) * cast double(row) /
-                  cast double(steps))
+    (x = left + (right - left) * double(column) /
+                double(steps),
+     y = bottom + (top - bottom) * double(row) /
+                  double(steps))
 
 crossing(from: Point, from_height: double,
          to: Point, to_height: double, level: double) -> Point =>
@@ -96,7 +96,7 @@ contour(level: double) -> Pipe[(from: Point, to: Point)] is
 si
 
 let levels =
-    0::12 |> map(step => -0.75D + 0.15D * cast double(step))
+    0::12 |> map(step => -0.75D + 0.15D * double(step))
 
 let image = IMAGE(600, 480)
 
@@ -108,7 +108,7 @@ let highest = 1.5D
 for pixel_y in 0..image.height do
     for pixel_x in 0..image.width do
         let spot =
-            image.to_user(cast double(pixel_x), cast double(pixel_y))
+            image.to_user(double(pixel_x), double(pixel_y))
 
         let part =
             (height_at(spot.x, spot.y) - lowest) / (highest - lowest)

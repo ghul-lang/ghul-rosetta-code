@@ -8,7 +8,7 @@ let current mut = 1n
 
 for _ in 1::1000 do
     let first = current.to_string()[0]
-    let digit = cast int(first) - cast int('0')
+    let digit = int(first) - int('0')
     leading_counts[digit] = leading_counts[digit] + 1
 
     let next = previous + current
@@ -19,7 +19,7 @@ od
 write_line("digit  actual   expected")
 
 for digit in 1::9 do
-    let actual = 100.0D * cast double(leading_counts[digit]) / 1000.0D
-    let expected = 100.0D * log10(1.0D + 1.0D / cast double(digit))
+    let actual = 100.0D * double(leading_counts[digit]) / 1000.0D
+    let expected = 100.0D * log10(1.0D + 1.0D / double(digit))
     write_line("{digit}    {actual,6:F2}%  {expected,6:F2}%")
 od

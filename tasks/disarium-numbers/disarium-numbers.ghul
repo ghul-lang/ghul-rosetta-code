@@ -4,6 +4,6 @@ is_disarium(n: int) -> bool =>
     "{n}"
         |> index()
         |> sum_by((position, digit) =>
-            repeat(cast int(digit - '0'), position + 1) |> product()) == n
+            repeat(int(digit - '0'), position + 1) |> product()) == n
 
 write_line(from(0) |> filter(is_disarium) |> take(18) |> join(" "))

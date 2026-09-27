@@ -8,7 +8,7 @@ let steps = 200
 cubic(a: POINT, b: POINT, c: POINT, d: POINT) -> List[POINT] =>
     (0..steps + 1)
         |> map(step =>
-            (let t = cast double(step) / cast double(steps)
+            (let t = double(step) / double(steps)
              let u = 1.0D - t
 
              (x = u * u * u * a.x + 3.0D * u * u * t * b.x +

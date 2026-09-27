@@ -5,7 +5,7 @@ use System.Numerics.Complex
 roots_of_unity(n: int) -> Pipe[Complex] =>
     (0..n)
     |> map(k => Complex.from_polar_coordinates(
-        1.0, 2.0 * System.Math.pi * cast double(k) / cast double(n)))
+        1.0, 2.0 * System.Math.pi * double(k) / double(n)))
 
 tidy(x: double) -> double =>
     if System.Math.abs(x) < 0.00005 then 0.0 else x fi

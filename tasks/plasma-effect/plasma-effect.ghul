@@ -12,13 +12,13 @@ plasma(x: double, y: double) -> double =>
      4.0) / 8.0
 
 channel(value: double, phase: double) -> ubyte =>
-    cast ubyte(127.5 + 127.4 * sin(pi * (value * 5.0 + phase)))
+    ubyte(127.5 + 127.4 * sin(pi * (value * 5.0 + phase)))
 
 let image = IMAGE(width, height)
 
 for y in 0..height do
     for x in 0..width do
-        let value = plasma(cast double(x), cast double(y))
+        let value = plasma(double(x), double(y))
 
         image.set_pixel(
             x, y,

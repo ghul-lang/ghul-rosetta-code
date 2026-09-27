@@ -43,34 +43,34 @@ running(
     adjusted
 si
 
-let harmonic = 1::n |> sum_by(i => 1.0 / cast double(i))
+let harmonic = 1::n |> sum_by(i => 1.0 / double(i))
 
 benjamini_hochberg() -> List[double] =>
     running(
-        descending, rank => cast double(n) / cast double(n - rank), true)
+        descending, rank => double(n) / double(n - rank), true)
 
 benjamini_yekutieli() -> List[double] =>
     running(
         descending,
-        rank => harmonic * cast double(n) / cast double(n - rank),
+        rank => harmonic * double(n) / double(n - rank),
         true)
 
 bonferroni() -> List[double] =>
     p_values
-        |> map(p => System.Math.min(1.0, cast double(n) * p))
+        |> map(p => System.Math.min(1.0, double(n) * p))
         |> collect()
 
 hochberg() -> List[double] =>
-    running(descending, rank => cast double(rank + 1), true)
+    running(descending, rank => double(rank + 1), true)
 
 holm() -> List[double] =>
-    running(ascending, rank => cast double(n - rank), false)
+    running(ascending, rank => double(n - rank), false)
 
 hommel() -> List[double] is
     let sorted = ascending |> map(i => p_values[i]) |> collect()
     let smallest =
         0..n
-            |> map(i => cast double(n) * sorted[i] / cast double(i + 1))
+            |> map(i => double(n) * sorted[i] / double(i + 1))
             |> min() ?? 1.0
     let q = repeat(smallest, n) |> collect_mutable()
     let floor = repeat(smallest, n) |> collect_mutable()
@@ -80,11 +80,11 @@ hommel() -> List[double] is
         let q1 =
             tail..n
                 |> map(i =>
-                    cast double(m) * sorted[i] / cast double(i - tail + 2))
+                    double(m) * sorted[i] / double(i - tail + 2))
                 |> min() ?? 1.0
 
         for i in 0..tail do
-            q[i] = System.Math.min(cast double(m) * sorted[i], q1)
+            q[i] = System.Math.min(double(m) * sorted[i], q1)
         od
 
         for i in tail..n do

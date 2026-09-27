@@ -13,13 +13,13 @@ let degree = 3
 let spans = control.count - degree
 
 knot(i: int) -> double =>
-    cast double(System.Math.clamp(i - degree, 0, spans))
+    double(System.Math.clamp(i - degree, 0, spans))
 
 lerp(a: Point, b: Point, t: double) -> Point =>
     (x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t)
 
 de_boor(t: double) -> Point is
-    let span = System.Math.min(cast int(t), spans - 1) + degree
+    let span = System.Math.min(int(t), spans - 1) + degree
     let d = LIST(0::degree |> map(j => control[j + span - degree]))
 
     for r in 1::degree do
@@ -41,7 +41,7 @@ let samples = 400
 
 let curve =
     (0::samples)
-        |> map(s => de_boor(cast double(spans * s) / cast double(samples)))
+        |> map(s => de_boor(double(spans * s) / double(samples)))
         |> collect()
 
 let image = IMAGE(400, 400)

@@ -56,7 +56,7 @@ read_ppm(path: string) -> BITMAP is
 
         return string(
             (from..at)
-                |> map(index => cast char(raw[index]))
+                |> map(index => char(raw[index]))
                 |> collect()
         )
     si
@@ -101,10 +101,10 @@ to_grey(image: BITMAP) -> BITMAP is
 
     for at in 0..image.width * image.height do
         let level =
-            cast ubyte(
-                0.2126D * cast double(image.bytes[at * 3]) +
-                0.7152D * cast double(image.bytes[at * 3 + 1]) +
-                0.0722D * cast double(image.bytes[at * 3 + 2]) + 0.5D
+            ubyte(
+                0.2126D * double(image.bytes[at * 3]) +
+                0.7152D * double(image.bytes[at * 3 + 1]) +
+                0.0722D * double(image.bytes[at * 3 + 2]) + 0.5D
             )
 
         grey.bytes[at * 3] = level
@@ -121,8 +121,8 @@ for y in 0..source.height do
     for x in 0..source.width do
         source.set_pixel(
             x, y,
-            (red = cast ubyte(255 * x / source.width),
-             green = cast ubyte(255 * y / source.height),
+            (red = ubyte(255 * x / source.width),
+             green = ubyte(255 * y / source.height),
              blue = 200ub)
         )
     od

@@ -14,10 +14,10 @@ inside(p: (x: double, y: double)) -> bool => p.x * p.x + p.y * p.y <= 1.0D
 
 estimate(throws: int) -> double =>
     let hits = darts() |> take(throws) |> filter(inside) |> count() in
-    4.0D * cast double(hits) / cast double(throws)
+    4.0D * double(hits) / double(throws)
 
 for power in 2::7 do
-    let throws = cast int(Math.pow(10.0D, cast double(power)))
+    let throws = int(Math.pow(10.0D, double(power)))
     let pi = estimate(throws)
 
     let error = Math.abs(pi - Math.pi)

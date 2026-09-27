@@ -27,7 +27,7 @@ mean_zero_proportion(limit: int) -> double is
         let carry mut = 0L
 
         for i in 0..limbs.count do
-            let product = limbs[i] * cast long(n) + carry
+            let product = limbs[i] * long(n) + carry
 
             limbs[i] = product % base
             carry = product / base
@@ -50,10 +50,10 @@ mean_zero_proportion(limit: int) -> double is
 
         let digits = top_digits + 9 * (limbs.count - 1)
 
-        total = total + cast double(zeros) / cast double(digits)
+        total = total + double(zeros) / double(digits)
     od
 
-    total / cast double(limit)
+    total / double(limit)
 si
 
 for limit in [100, 1000, 10000] do

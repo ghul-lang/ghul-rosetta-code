@@ -99,7 +99,7 @@ approximations()
     |> take(10)
     |> each(ratio => (
         let value =
-            cast double(ratio.numerator) / cast double(ratio.denominator)
+            double(ratio.numerator) / double(ratio.denominator)
 
         write_line("  {ratio.numerator}/{ratio.denominator} = {value:F15}")
     ))

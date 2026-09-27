@@ -31,7 +31,7 @@ for _ in 0..200000 do
 
     let at = image.to_pixel(point.x, point.y)
 
-    image.blend(cast int(at.x), cast int(at.y), 0.5D)
+    image.blend(int(at.x), int(at.y), 0.5D)
 od
 
 image.write("fern.png")

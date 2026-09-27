@@ -63,7 +63,7 @@ si
 let random = System.Random(1363)
 
 random_below(limit: bigint) -> bigint =>
-    bigint(random.next_int64(1L, cast long(limit)))
+    bigint(random.next_int64(1L, long(limit)))
 
 sign(hash: bigint, secret: bigint) -> (c: bigint, d: bigint) is
     do

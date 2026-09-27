@@ -24,7 +24,7 @@ escape(start_x: double, start_y: double) -> int =>
      steps)
 
 band(level: double, phase: double) -> ubyte =>
-    cast ubyte(
+    ubyte(
         127.5D * (1.0D - cos(6.0D * pi * level + phase))
     )
 
@@ -33,16 +33,16 @@ let image = IMAGE(width, height)
 for row in 0..height do
     for column in 0..width do
         let x =
-            -1.8D + 3.6D * cast double(column) / cast double(width)
+            -1.8D + 3.6D * double(column) / double(width)
         let y =
-            -1.35D + 2.7D * cast double(row) / cast double(height)
+            -1.35D + 2.7D * double(row) / double(height)
 
         let steps = escape(x, y)
 
         if steps < limit then
             let level =
-                log(cast double(steps) + 1.0D) /
-                log(cast double(limit) + 1.0D)
+                log(double(steps) + 1.0D) /
+                log(double(limit) + 1.0D)
 
             image.set_pixel(
                 column, row,

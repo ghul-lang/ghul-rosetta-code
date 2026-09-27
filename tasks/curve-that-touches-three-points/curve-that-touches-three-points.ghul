@@ -39,7 +39,7 @@ curve(start: P, middle: P, finish: P, steps: int) -> List[P] is
 
     (0::steps)
         |> map(i =>
-            let a = from + turn * cast double(i) / cast double(steps) in
+            let a = from + turn * double(i) / double(steps) in
             let x = centre.x + radius * cos(a) in
             P(x, centre.y + radius * sin(a)))
         |> collect()

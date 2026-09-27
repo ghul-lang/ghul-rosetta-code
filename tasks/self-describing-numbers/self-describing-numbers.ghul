@@ -1,6 +1,6 @@
 use default
 
-digit_of(letter: char) -> int => cast int(letter) - cast int('0')
+digit_of(letter: char) -> int => int(letter) - int('0')
 
 self_describing(value: int) -> bool is
     let digits = "{value}"

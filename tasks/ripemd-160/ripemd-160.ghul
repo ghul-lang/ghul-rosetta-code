@@ -41,7 +41,7 @@ mixed(round: int, x: uint, y: uint, z: uint) -> uint =>
     esac
 
 padded(message: ubyte[]) -> LIST[ubyte] is
-    let bits = cast ulong(message.count) * 8ul
+    let bits = ulong(message.count) * 8ul
 
     let block = LIST[ubyte](message)
 
@@ -52,7 +52,7 @@ padded(message: ubyte[]) -> LIST[ubyte] is
     od
 
     for index in 0..8 do
-        block.add(cast ubyte((bits >>> (8 * index)) & 0xFFul))
+        block.add(ubyte((bits >>> (8 * index)) & 0xFFul))
     od
 
     return block
@@ -60,7 +60,7 @@ si
 
 word(block: LIST[ubyte], at: int) -> uint =>
     0..4
-        |> map(index => cast uint(block[at + index]) << (8 * index))
+        |> map(index => uint(block[at + index]) << (8 * index))
         |> reduce(0u, (packed, part) => packed | part)
 
 ripemd160(message: ubyte[]) -> string is

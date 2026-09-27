@@ -59,7 +59,7 @@ ordinal(ahead: int, size: int, member: int, place: int) -> string =>
     "{ahead + member + 1}"
 
 fractional(ahead: int, size: int, member: int, place: int) -> string =>
-    "{cast double(ahead + ahead + size + 1) / 2.0D:F1}"
+    "{double(ahead + ahead + size + 1) / 2.0D:F1}"
 
 let methods =
     [(name = "standard", rank = standard),

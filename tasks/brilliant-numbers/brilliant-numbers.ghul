@@ -32,7 +32,7 @@ brilliant_numbers(max_digits: int) -> LIST[long] is
 
         for (i, p) in group |> index() do
             for q in group |> skip(i) do
-                found.add(cast long(p) * cast long(q))
+                found.add(long(p) * long(q))
             od
         od
 

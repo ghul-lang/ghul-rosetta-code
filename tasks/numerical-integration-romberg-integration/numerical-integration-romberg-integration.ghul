@@ -16,9 +16,9 @@ romberg(
     for i in 1::steps do
         intervals = intervals * 2
 
-        let h = width / cast double(intervals)
+        let h = width / double(intervals)
         let inner = 1..intervals
-            |> sum_by(j => f(lower + cast double(j) * h))
+            |> sum_by(j => f(lower + double(j) * h))
 
         let row = LIST[double]([(ends / 2.0 + inner) * h])
         let factor mut = 1.0

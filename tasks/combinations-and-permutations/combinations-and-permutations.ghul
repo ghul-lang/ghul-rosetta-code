@@ -19,7 +19,7 @@ let coefficients = [
 log_gamma(x: double) -> double is
     let xm = x - 1.0
     let t = xm + g + 0.5
-    let term = (sum, i) => sum + coefficients[i] / (xm + cast double(i))
+    let term = (sum, i) => sum + coefficients[i] / (xm + double(i))
     let a = 1::8 |> reduce(coefficients[0], term)
 
     let half_log_2pi = 0.5 * System.Math.log(2.0 * System.Math.pi)
@@ -35,20 +35,20 @@ scientific(ln_value: double) -> string is
     let exponent = System.Math.floor(log10)
     let mantissa = System.Math.pow(10.0, log10 - exponent)
 
-    "{mantissa,0:F6}e+{cast int(exponent)}"
+    "{mantissa,0:F6}e+{int(exponent)}"
 si
 
 approx_npk(n: int, k: int) -> string =>
     scientific(
-        log_gamma(cast double(n + 1)) -
-        log_gamma(cast double(n - k + 1))
+        log_gamma(double(n + 1)) -
+        log_gamma(double(n - k + 1))
     )
 
 approx_nck(n: int, k: int) -> string =>
     scientific(
-        log_gamma(cast double(n + 1)) -
-        log_gamma(cast double(k + 1)) -
-        log_gamma(cast double(n - k + 1))
+        log_gamma(double(n + 1)) -
+        log_gamma(double(k + 1)) -
+        log_gamma(double(n - k + 1))
     )
 
 truncated(v: bigint) -> string is

@@ -104,8 +104,8 @@ od
 for step_x in 0..49 do
     for step_y in 0..49 do
         let probe =
-            (x = -0.5D + cast double(step_x) * 0.22D,
-             y = -0.5D + cast double(step_y) * 0.22D)
+            (x = -0.5D + double(step_x) * 0.22D,
+             y = -0.5D + double(step_y) * 0.22D)
 
         if inside(probe, square_hole) then
             image.colour(40ub, 140ub, 60ub)

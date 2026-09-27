@@ -37,10 +37,10 @@ let widest =
     |> map(hop => abs(hop.to - hop.from))
     |> reduce(0, (best, span) => max(best, span))
 
-let deepest = cast double(widest) / 2.0
+let deepest = double(widest) / 2.0
 
 let left = -3.0
-let right = cast double(highest) + 3.0
+let right = double(highest) + 3.0
 let top = deepest + 3.0
 let bottom = -(deepest + 10.0)
 
@@ -48,17 +48,17 @@ let scale = 4.0
 let margin = 12.0
 
 let image = IMAGE(
-    cast int((right - left) * scale + 2.0 * margin),
-    cast int((top - bottom) * scale + 2.0 * margin))
+    int((right - left) * scale + 2.0 * margin),
+    int((top - bottom) * scale + 2.0 * margin))
 
 image.view(left, bottom, right, top, margin)
 
 image.colour(170ub, 170ub, 170ub)
 image.stroke(1.0)
-image.line(0.0, 0.0, cast double(highest), 0.0)
+image.line(0.0, 0.0, double(highest), 0.0)
 
 for tick in 0::highest / 25 do
-    let at = cast double(tick * 25)
+    let at = double(tick * 25)
     let label = "{tick * 25}"
 
     image.line(at, -1.5, at, 1.5)
@@ -71,8 +71,8 @@ image.stroke(1.4)
 for hop in hops |> index() do
     let (from, to) = hop.value
 
-    let middle = cast double(from + to) / 2.0
-    let radius = cast double(abs(to - from)) / 2.0
+    let middle = double(from + to) / 2.0
+    let radius = double(abs(to - from)) / 2.0
 
     if hop.index % 2 == 0 then
         image.arc(middle, 0.0, radius, 0.0, 180.0)

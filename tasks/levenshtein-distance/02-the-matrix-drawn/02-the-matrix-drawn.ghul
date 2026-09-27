@@ -65,14 +65,14 @@ alignment() -> LIST[(row: int, column: int)] is
 si
 
 corner(row: int, column: int) -> (x: double, y: double) =>
-    (x = cast double(left + column * cell),
-     y = cast double(top + row * cell))
+    (x = double(left + column * cell),
+     y = double(top + row * cell))
 
 centre(row: int, column: int) -> (x: double, y: double) =>
-    (x = cast double(left + column * cell) + 0.5 * cast double(cell),
-     y = cast double(top + row * cell) + 0.5 * cast double(cell))
+    (x = double(left + column * cell) + 0.5 * double(cell),
+     y = double(top + row * cell) + 0.5 * double(cell))
 
-let highest = cast double(source.length + target.length) / 2.0
+let highest = double(source.length + target.length) / 2.0
 
 let image = IMAGE(
     left + (target.length + 1) * cell + 14,
@@ -90,7 +90,7 @@ for row in 0::source.length do
              (x = to.x, y = at.y),
              (x = to.x, y = to.y),
              (x = at.x, y = to.y)],
-            COLOUR_MAP.viridis(cast double(table[row][column]) / highest))
+            COLOUR_MAP.viridis(double(table[row][column]) / highest))
     od
 od
 
@@ -105,7 +105,7 @@ image.line(
 
 for row in 0::source.length do
     for column in 0::target.length do
-        let shade = cast double(table[row][column]) / highest
+        let shade = double(table[row][column]) / highest
 
         if shade < 0.55 then
             image.colour(250ub, 250ub, 250ub)
@@ -127,7 +127,7 @@ for column in 1::target.length do
     let middle = centre(0, column)
 
     image.text(
-        middle.x, cast double(top) - 9.0, 17.0,
+        middle.x, double(top) - 9.0, 17.0,
         "{target[column - 1]}", Anchor.CENTRE)
 od
 
@@ -135,12 +135,12 @@ for row in 1::source.length do
     let middle = centre(row, 0)
 
     image.text(
-        cast double(left) - 9.0, middle.y + 5.0, 17.0,
+        double(left) - 9.0, middle.y + 5.0, 17.0,
         "{source[row - 1]}", Anchor.RIGHT)
 od
 
 image.text(
-    cast double(left), 26.0, 14.0,
+    double(left), 26.0, 14.0,
     "{source} to {target} in {table[source.length][target.length]} edits")
 
 image.write("levenshtein.png")

@@ -5,7 +5,7 @@ to_digits(value: long, base: long) -> LIST[int] is
     let remaining mut = value
 
     while remaining > 0L do
-        digits.insert(0, cast int(remaining % base))
+        digits.insert(0, int(remaining % base))
 
         remaining = remaining / base
     od
@@ -18,7 +18,7 @@ to_digits(value: long, base: long) -> LIST[int] is
 si
 
 from_digits(digits: List[int], base: long) -> long =>
-    digits |> reduce(0L, (value, digit) => value * base + cast long(digit))
+    digits |> reduce(0L, (value, digit) => value * base + long(digit))
 
 is_palindrome(digits: List[int]) -> bool =>
     0..digits.count / 2

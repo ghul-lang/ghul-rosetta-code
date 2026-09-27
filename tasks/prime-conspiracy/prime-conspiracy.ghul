@@ -35,7 +35,7 @@ write_line("{count:N0} first primes. "
 
 for key in (0..100) |> filter(key => transitions[key] > 0) do
     let frequency =
-        100.0 * cast double(transitions[key]) / cast double(count)
+        100.0 * double(transitions[key]) / double(count)
 
     write_line(
         "{key / 10} -> {key % 10} count: {transitions[key],6} "

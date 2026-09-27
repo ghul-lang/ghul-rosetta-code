@@ -50,7 +50,7 @@ patients |> each(patient => (
     let seen = scores |> count()
 
     let sum_cell = if seen > 0 then "{total:F1}" else "" fi
-    let average = total / cast double(seen)
+    let average = total / double(seen)
     let average_cell = if seen > 0 then "{average:F1}" else "" fi
 
     write_line(row(

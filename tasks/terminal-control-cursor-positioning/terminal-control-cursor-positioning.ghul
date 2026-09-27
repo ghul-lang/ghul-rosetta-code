@@ -1,6 +1,6 @@
 use default
 
-let escape = cast char(27)
+let escape = char(27)
 
 at(row: int, column: int) -> string => "{escape}[{row};{column}H"
 

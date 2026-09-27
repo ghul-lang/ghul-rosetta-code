@@ -19,4 +19,4 @@ od
 write_line("{runs} runs of the experiment")
 write_line("{wakings} wakings")
 write_line("{heads} of them after heads")
-write_line("credence: {cast double(heads) / cast double(wakings):F4}")
+write_line("credence: {double(heads) / double(wakings):F4}")

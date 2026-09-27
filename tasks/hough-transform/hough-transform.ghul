@@ -14,7 +14,7 @@ pentagon() -> IMAGE is
     image.line(
         (0::5)
             |> map(i =>
-                let a = pi * (0.5D + 0.4D * cast double(i)) in
+                let a = pi * (0.5D + 0.4D * double(i)) in
                 let x = 100.0D + 70.0D * cos(a) in
                 (x = x, y = 105.0D - 70.0D * sin(a)))
             |> collect())
@@ -25,21 +25,21 @@ si
 pentagon().write("pentagon.png")
 
 let source = IMAGE.read("pentagon.png")
-let diagonal = sqrt(2.0D) * cast double(size) / 2.0D
-let distances = cast int(2.0D * diagonal) + 1
+let diagonal = sqrt(2.0D) * double(size) / 2.0D
+let distances = int(2.0D * diagonal) + 1
 
 let votes = repeat(0, angles * distances) |> collect_mutable()
 
 for y in 0..size do
     for x in 0..size do
         if source.pixel(x, y).red < 128ub then
-            let dx = cast double(x - size / 2)
-            let dy = cast double(size / 2 - y)
+            let dx = double(x - size / 2)
+            let dy = double(size / 2 - y)
 
             for t in 0..angles do
-                let theta = pi * cast double(t) / cast double(angles)
+                let theta = pi * double(t) / double(angles)
                 let rho = dx * cos(theta) + dy * sin(theta)
-                let r = cast int(round(rho + diagonal))
+                let r = int(round(rho + diagonal))
 
                 votes[r * angles + t] = votes[r * angles + t] + 1
             od
@@ -59,7 +59,7 @@ for _ in 0..5 do
 
     let r = best / angles, t = best % angles
 
-    peaks.add((t / 2, r - cast int(round(diagonal)), remaining[best]))
+    peaks.add((t / 2, r - int(round(diagonal)), remaining[best]))
 
     for dr in -12::12 do
         for dt in -12::12 do
@@ -83,8 +83,8 @@ let space = IMAGE(angles, distances)
 
 for r in 0..distances do
     for t in 0..angles do
-        let level = cast double(votes[r * angles + t]) / cast double(most)
-        let shade = cast ubyte(255.0D * sqrt(level))
+        let level = double(votes[r * angles + t]) / double(most)
+        let shade = ubyte(255.0D * sqrt(level))
 
         space.set_pixel(t, distances - 1 - r, shade, shade, shade)
     od

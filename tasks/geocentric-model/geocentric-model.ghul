@@ -15,7 +15,7 @@ let shown = 2.2D
 let frames = 88
 
 rgb(r: int, g: int, b: int) -> Colour =>
-    (red = cast ubyte(r), green = cast ubyte(g), blue = cast ubyte(b))
+    (red = ubyte(r), green = ubyte(g), blue = ubyte(b))
 
 let earth: Body = ("Earth", 1.0D, 1.0D, 100.46D, rgb(60, 110, 220))
 
@@ -40,13 +40,13 @@ turning(body: Body, from: double, to: double) -> double =>
     atan2(a.x * b.y - a.y * b.x, a.x * b.x + a.y * b.y)
 
 retrograde_loops(body: Body) -> int is
-    let steps = cast int(years * 2000.0D)
+    let steps = int(years * 2000.0D)
     let loops mut = 0
     let backwards mut = false
 
     for step in 1..steps do
-        let year = years * cast double(step) / cast double(steps)
-        let previous = years * cast double(step - 1) / cast double(steps)
+        let year = years * double(step) / double(steps)
+        let previous = years * double(step - 1) / double(steps)
         let change = turning(body, previous, year)
 
         if change < 0.0D /\ !backwards then
@@ -60,7 +60,7 @@ retrograde_loops(body: Body) -> int is
 si
 
 year_of(frame: int) -> double =>
-    shown * cast double(frame) / cast double(frames)
+    shown * double(frame) / double(frames)
 
 draw(image: IMAGE, frame: int) is
     image.clear(8ub, 8ub, 20ub)

@@ -32,8 +32,8 @@ single_cell() -> List[bool] =>
 draw(image: IMAGE, rule: int, left: int) is
     image.colour(234ub, 237ub, 244ub)
     image.fill_rectangle(
-        cast double(left), cast double(top),
-        cast double(left + width), cast double(top + generations))
+        double(left), double(top),
+        double(left + width), double(top + generations))
 
     image.colour(30ub, 40ub, 70ub)
 
@@ -50,7 +50,7 @@ draw(image: IMAGE, rule: int, left: int) is
 
     image.colour(60ub, 65ub, 80ub)
     image.text(
-        cast double(left + width / 2), cast double(top) - 14.0,
+        double(left + width / 2), double(top) - 14.0,
         18.0, "rule {rule}", Anchor.CENTRE)
 si
 
@@ -61,7 +61,7 @@ draw(image, 110, gap * 2 + width)
 
 image.colour(90ub, 95ub, 110ub)
 image.text(
-    cast double(gap), cast double(top + generations + gap + 12), 13.0,
+    double(gap), double(top + generations + gap + 12), 13.0,
     "{generations} generations from a single live cell "
     "on a ring of {width}")
 

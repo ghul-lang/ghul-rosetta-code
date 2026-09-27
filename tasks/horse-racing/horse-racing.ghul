@@ -23,7 +23,7 @@ times(winner: double, runners: List[Runner]) -> Pipe[(string, double)] is
 
         let extra = pounds(race_4_weight(horse)) - pounds(weight)
 
-        yield (horse, winner + lengths / 5.0 + cast double(extra) / 10.0)
+        yield (horse, winner + lengths / 5.0 + double(extra) / 10.0)
     od
 si
 

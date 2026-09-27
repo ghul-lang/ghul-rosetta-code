@@ -1,6 +1,6 @@
 use default
 
-digit_sum(n: int) -> int => "{n}" |> sum_by(c => cast int(c - '0'))
+digit_sum(n: int) -> int => "{n}" |> sum_by(c => int(c - '0'))
 
 // Every n below 10^7 has a digit sum of at most 63, so any consummate
 // number below 100,000 is n / digit_sum(n) for some n below 6.3 million.

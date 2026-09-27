@@ -17,17 +17,17 @@ let targets = hashes
 let found = ConcurrentDictionary[int, string]()
 
 search(first: int) is
-    let word = LIST[ubyte](repeat(cast ubyte(97), 5))
-    word[0] = cast ubyte(97 + first)
+    let word = LIST[ubyte](repeat(ubyte(97), 5))
+    word[0] = ubyte(97 + first)
 
     for b in 0..26 do
         for c in 0..26 do
             for d in 0..26 do
                 for e in 0..26 do
-                    word[1] = cast ubyte(97 + b)
-                    word[2] = cast ubyte(97 + c)
-                    word[3] = cast ubyte(97 + d)
-                    word[4] = cast ubyte(97 + e)
+                    word[1] = ubyte(97 + b)
+                    word[2] = ubyte(97 + c)
+                    word[3] = ubyte(97 + d)
+                    word[4] = ubyte(97 + e)
 
                     let hash = SHA256.hash_data(word.to_array())
 

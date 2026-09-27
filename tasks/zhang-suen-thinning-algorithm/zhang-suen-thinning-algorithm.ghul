@@ -114,8 +114,8 @@ image.clear(255ub, 255ub, 255ub)
 
 for row in 0..rows do
     for column in 0..columns do
-        let x = cast double(column * cell)
-        let y = cast double(row * cell)
+        let x = double(column * cell)
+        let y = double(row * cell)
 
         if black[row][column] then
             image.colour(20ub, 20ub, 20ub)
@@ -126,7 +126,7 @@ for row in 0..rows do
         fi
 
         image.fill_rectangle(
-            x, y, x + cast double(cell), y + cast double(cell))
+            x, y, x + double(cell), y + double(cell))
     od
 od
 

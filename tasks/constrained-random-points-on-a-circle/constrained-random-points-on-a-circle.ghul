@@ -42,7 +42,7 @@ image.circle(0.0D, 0.0D, 15.0D)
 image.colour(40ub, 80ub, 170ub)
 
 for p in distinct do
-    image.dot(cast double(p.x), cast double(p.y), 3.0D)
+    image.dot(double(p.x), double(p.y), 3.0D)
 od
 
 image.write("ring.png")

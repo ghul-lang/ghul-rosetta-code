@@ -3,7 +3,7 @@ use default
 multifactorial(n: int, degree: int) -> long =>
     from(n, -degree)
         |> take_while(term => term > 0)
-        |> reduce(1L, (total, term) => total * cast long(term))
+        |> reduce(1L, (total, term) => total * long(term))
 
 write_line("degree  n = 1 .. 10")
 

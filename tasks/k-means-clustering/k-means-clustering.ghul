@@ -93,8 +93,8 @@ recentred() -> Collections.List[Point] is
             if sizes[which] == 0 then
                 centres[which]
             else
-                (x = totals[which].x / cast double(sizes[which]),
-                 y = totals[which].y / cast double(sizes[which]))
+                (x = totals[which].x / double(sizes[which]),
+                 y = totals[which].y / double(sizes[which]))
             fi)
         |> collect()
 si
@@ -142,7 +142,7 @@ let image = IMAGE(600, 600)
 image.view(-1.06D, -1.06D, 1.06D, 1.06D)
 
 for index in 0..points.count do
-    let shade = cast double(membership[index]) / cast double(clusters)
+    let shade = double(membership[index]) / double(clusters)
 
     image.colour(COLOUR_MAP.hue(shade))
     image.dot(points[index].x, points[index].y, 1.4D)

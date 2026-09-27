@@ -27,10 +27,10 @@ let bins = repeat(0, rows + 1) |> collect_mutable()
 let falling = LIST()
 
 x_of(row: int, slot: int) -> double =>
-    let offset = cast double(slot) - cast double(row) / 2.0D in
-    cast double(width) / 2.0D + offset * pin_spacing
+    let offset = double(slot) - double(row) / 2.0D in
+    double(width) / 2.0D + offset * pin_spacing
 
-y_of(row: int) -> double => top + cast double(row) * 11.0D
+y_of(row: int) -> double => top + double(row) * 11.0D
 
 draw(image: IMAGE) is
     image.clear(245ub, 242ub, 232ub)
@@ -43,7 +43,7 @@ draw(image: IMAGE) is
         od
     od
 
-    let floor = cast double(height - 4)
+    let floor = double(height - 4)
 
     image.colour(40ub, 90ub, 160ub)
 
@@ -51,7 +51,7 @@ draw(image: IMAGE) is
         let x = x_of(rows, slot)
 
         for i in 0..count do
-            let y = floor - ball_size * (cast double(i) + 0.5D)
+            let y = floor - ball_size * (double(i) + 0.5D)
 
             image.dot(x, y, ball_size / 2.0D)
         od

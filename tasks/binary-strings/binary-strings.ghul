@@ -1,7 +1,7 @@
 use default
 
 to_text(bytes: List[ubyte]) -> string =>
-    string(bytes |> map(b => cast char(b)) |> collect())
+    string(bytes |> map(b => char(b)) |> collect())
 
 replace_byte(
     bytes: List[ubyte], old: ubyte, replacement: ubyte

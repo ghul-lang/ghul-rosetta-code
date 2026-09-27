@@ -2,7 +2,7 @@ use default
 
 let fifth =
     0..250
-        |> map(n => repeat(cast long(n), 5) |> product())
+        |> map(n => repeat(long(n), 5) |> product())
         |> collect()
 let root = 1..250 |> map(n => (fifth[n], n)) |> collect_map()
 

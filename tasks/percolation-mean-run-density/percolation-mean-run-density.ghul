@@ -28,7 +28,7 @@ for p in [0.1, 0.3, 0.5, 0.7, 0.9] do
 
     for n in [100, 1_000, 10_000, 100_000] do
         let total = 0..trials |> sum_by(_ => runs(n, p))
-        let simulated = cast double(total) / cast double(trials * n)
+        let simulated = double(total) / double(trials * n)
 
         write_line("{n,8}  {simulated,9:F4}  {simulated - theory,10:F6}")
     od

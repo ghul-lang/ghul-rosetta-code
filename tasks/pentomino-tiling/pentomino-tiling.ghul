@@ -153,11 +153,11 @@ od
 let hues = "FILNPTUVWXYZ"
 
 colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
-    let h = cast double(hues.index_of(name)) / 12.0D * 6.0D in
+    let h = double(hues.index_of(name)) / 12.0D * 6.0D in
     let f = h - System.Math.floor(h) in
-    let i = cast int(h) in
-    let up = cast ubyte(90.0D + 150.0D * f) in
-    let down = cast ubyte(240.0D - 150.0D * f) in
+    let i = int(h) in
+    let up = ubyte(90.0D + 150.0D * f) in
+    let down = ubyte(240.0D - 150.0D * f) in
     case i
     when 0 then (red = 240ub, green = up, blue = 90ub)
     when 1 then (red = down, green = 240ub, blue = 90ub)
@@ -177,8 +177,8 @@ for i in 0..size * size do
     let name = board[i]
 
     if name != '-' then
-        let x = cell * cast double(i % size)
-        let y = cell * cast double(i / size)
+        let x = cell * double(i % size)
+        let y = cell * double(i / size)
 
         tiles.add(
             [
@@ -195,7 +195,7 @@ image.stroke(2.5D)
 
 for i in 0..size * size do
     let r = i / size, c = i % size
-    let x = cell * cast double(c), y = cell * cast double(r)
+    let x = cell * double(c), y = cell * double(r)
 
     if c + 1 < size /\ board[i] != board[i + 1] then
         image.line(x + cell, y, x + cell, y + cell)

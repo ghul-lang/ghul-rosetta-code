@@ -16,7 +16,7 @@ random_bytes() -> Pipe[int] is
         let byte mut = 0
 
         for _ in 0..8 do
-            byte = (byte << 1) | cast int(cells & 1UL)
+            byte = (byte << 1) | int(cells & 1UL)
             cells = rule_30(cells)
         od
 

@@ -39,7 +39,7 @@ let number =
 
 moves(cell: Cell) -> Pipe[Cell] =>
     let (row, column) = cell in
-    let step = cast int(country[row][column] - '0') in
+    let step = int(country[row][column] - '0') in
     [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
         |> map((dr, dc) => (row + dr * step, column + dc * step))
         |> filter(target => step > 0 /\ number.contains_key(target))

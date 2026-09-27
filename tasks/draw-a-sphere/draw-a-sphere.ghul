@@ -5,7 +5,7 @@ use System.Math.*
 use Math = System.Math
 
 let size = 480
-let centre = cast double(size) / 2.0D
+let centre = double(size) / 2.0D
 let radius = 208.0D
 
 let ambient = 0.14D
@@ -23,14 +23,14 @@ let towards_light =
 channel(base: double, level: double, gloss: double) -> ubyte =>
     (let value = base * level + 255.0D * gloss
 
-     cast ubyte(min(255.0D, max(0.0D, value))))
+     ubyte(min(255.0D, max(0.0D, value))))
 
 let image = IMAGE(size, size)
 
 for down in 0..size do
     for across in 0..size do
-        let x = (cast double(across) + 0.5D - centre) / radius
-        let y = (centre - cast double(down) - 0.5D) / radius
+        let x = (double(across) + 0.5D - centre) / radius
+        let y = (centre - double(down) - 0.5D) / radius
         let square = x * x + y * y
 
         if square <= 1.0D then

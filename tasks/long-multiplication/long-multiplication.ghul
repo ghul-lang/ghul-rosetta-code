@@ -1,7 +1,7 @@
 use default
 
 digits_of(s: string) -> LIST[int] is
-    let value = c => cast int(c) - cast int('0')
+    let value = c => int(c) - int('0')
 
     s |> reverse() |> map(value) |> collect_mutable()
 si

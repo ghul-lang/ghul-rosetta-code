@@ -63,8 +63,8 @@ cuts(h: int, w: int) -> long is
     fi
 
     if wide == 1 then return 1L fi
-    if wide == 2 then return cast long(tall) fi
-    if tall == 2 then return cast long(wide) fi
+    if wide == 2 then return long(tall) fi
+    if tall == 2 then return long(wide) fi
 
     let ways = CUTTER(tall, wide).from_centre()
 

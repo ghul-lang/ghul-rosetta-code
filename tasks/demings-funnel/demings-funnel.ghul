@@ -48,14 +48,14 @@ drops(ds: List[double], rule: (double, double) -> double) -> List[double] is
     landed
 si
 
-mean(xs: List[double]) -> double => (xs |> sum()) / cast double(xs.count)
+mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
 
 deviation(xs: List[double]) -> double is
     let m = mean(xs)
 
     sqrt(
         (xs |> sum_by(x => (x - m) * (x - m))) /
-        cast double(xs.count))
+        double(xs.count))
 si
 
 let rules = [
@@ -72,10 +72,10 @@ plot(
     ys: List[double],
     reach: double
 ) is
-    let width = cast double(image.width) / 2.0D
-    let height = cast double(image.height) / 2.0D
-    let left = cast double(at % 2) * width
-    let top = cast double(at / 2) * height
+    let width = double(image.width) / 2.0D
+    let height = double(image.height) / 2.0D
+    let left = double(at % 2) * width
+    let top = double(at / 2) * height
     let middle = (x = left + width / 2.0D, y = top + height / 2.0D)
     let scale = (min(width, height) / 2.0D - 14.0D) / reach
 

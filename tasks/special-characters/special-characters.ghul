@@ -1,7 +1,7 @@
 use default
 
 escape(written: string, produced: char) =>
-    write_line("{written,-10} U+{cast int(produced):X4}")
+    write_line("{written,-10} U+{int(produced):X4}")
 
 write_line("escape     character")
 

@@ -40,10 +40,10 @@ turned(p: VEC) -> VEC is
 si
 
 angle(i: int) -> double =>
-    2.0D * pi * cast double(i) / cast double(around)
+    2.0D * pi * double(i) / double(around)
 
 corner(i: int, j: int) -> VEC =>
-    let v = 2.0D * cast double(j) / cast double(across) - 1.0D in
+    let v = 2.0D * double(j) / double(across) - 1.0D in
     turned(surface(angle(i), v))
 
 depth(quad: Quad) -> double =>
@@ -88,9 +88,9 @@ for q in quads do
         q.corners |> map(p => (x = p.x, y = p.y)) |> collect()
 
     image.colour(
-        cast ubyte(light * (230.0D - 170.0D * tone)),
-        cast ubyte(light * (120.0D + 30.0D * tone)),
-        cast ubyte(light * (60.0D + 150.0D * tone)))
+        ubyte(light * (230.0D - 170.0D * tone)),
+        ubyte(light * (120.0D + 30.0D * tone)),
+        ubyte(light * (60.0D + 150.0D * tone)))
     image.fill(outline)
 
     image.colour(30ub, 30ub, 40ub)

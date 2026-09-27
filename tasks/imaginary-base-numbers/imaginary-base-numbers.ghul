@@ -36,7 +36,7 @@ from_quater_imaginary(text: string) -> (real: int, imaginary: int) is
     let index mut = text.length - 1
 
     while index >= 0 do
-        let digit = cast int(text[index]) - cast int('0')
+        let digit = int(text[index]) - int('0')
 
         real = real + digit * power_real
         imaginary = imaginary + digit * power_imaginary

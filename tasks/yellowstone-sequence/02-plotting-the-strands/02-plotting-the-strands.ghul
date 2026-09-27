@@ -35,7 +35,7 @@ let highest = terms
 let points = terms
     |> index()
     |> map(term =>
-        (x = cast double(term.index + 1), y = cast double(term.value)))
+        (x = double(term.index + 1), y = double(term.value)))
     |> collect()
 
 let image = IMAGE(760, 470)
@@ -48,7 +48,7 @@ let axes = AXES(image)
 axes.x_title = "n"
 axes.y_title = "a(n)"
 
-axes.fit(0.0, 0.0, cast double(terms.count), cast double(highest) + 20.0)
+axes.fit(0.0, 0.0, double(terms.count), double(highest) + 20.0)
 axes.draw()
 
 image.colour(170ub, 180ub, 205ub)

@@ -10,14 +10,14 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = cast double(y) / 80.0D
+        let t = double(y) / 80.0D
 
         image.colour(
-            cast ubyte(40.0D + 200.0D * t),
-            cast ubyte(70.0D + 100.0D * t),
-            cast ubyte(160.0D - 60.0D * t))
+            ubyte(40.0D + 200.0D * t),
+            ubyte(70.0D + 100.0D * t),
+            ubyte(160.0D - 60.0D * t))
         image.fill_rectangle(
-            0.0D, cast double(y), 160.0D, cast double(y + 1))
+            0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -47,42 +47,42 @@ si
 lerp(a: double, b: double, t: double) -> double => a + (b - a) * t
 
 bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
-    let x0 = min(cast int(floor(x)), source.width - 1)
-    let y0 = min(cast int(floor(y)), source.height - 1)
+    let x0 = min(int(floor(x)), source.width - 1)
+    let y0 = min(int(floor(y)), source.height - 1)
     let x1 = min(x0 + 1, source.width - 1)
     let y1 = min(y0 + 1, source.height - 1)
-    let tx = x - cast double(x0), ty = y - cast double(y0)
+    let tx = x - double(x0), ty = y - double(y0)
 
     let a = source.pixel(x0, y0), b = source.pixel(x1, y0)
     let c = source.pixel(x0, y1), d = source.pixel(x1, y1)
 
     mix(pick: RGB -> ubyte) =>
         lerp(
-            lerp(cast double(pick(a)), cast double(pick(b)), tx),
-            lerp(cast double(pick(c)), cast double(pick(d)), tx),
+            lerp(double(pick(a)), double(pick(b)), tx),
+            lerp(double(pick(c)), double(pick(d)), tx),
             ty)
 
     (mix(p => p.red), mix(p => p.green), mix(p => p.blue))
 si
 
 enlarge(source: IMAGE, factor: double) -> IMAGE is
-    let width = cast int(round(cast double(source.width) * factor))
-    let height = cast int(round(cast double(source.height) * factor))
+    let width = int(round(double(source.width) * factor))
+    let height = int(round(double(source.height) * factor))
     let result = IMAGE(width, height)
-    let across = cast double(source.width - 1) / cast double(width - 1)
-    let down = cast double(source.height - 1) / cast double(height - 1)
+    let across = double(source.width - 1) / double(width - 1)
+    let down = double(source.height - 1) / double(height - 1)
 
     for y in 0..height do
         for x in 0..width do
-            let sx = cast double(x) * across
-            let sy = cast double(y) * down
+            let sx = double(x) * across
+            let sy = double(y) * down
             let (r, g, b) = bilinear(source, sx, sy)
 
             result.set_pixel(
                 x, y,
-                cast ubyte(round(r)),
-                cast ubyte(round(g)),
-                cast ubyte(round(b)))
+                ubyte(round(r)),
+                ubyte(round(g)),
+                ubyte(round(b)))
         od
     od
 

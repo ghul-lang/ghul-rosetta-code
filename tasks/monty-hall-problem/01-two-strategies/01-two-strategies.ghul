@@ -46,7 +46,7 @@ for _ in 1::rounds do
 od
 
 percentage(wins: int) -> string =>
-    "{cast double(wins) * 100.0 / cast double(rounds),5:F2}%"
+    "{double(wins) * 100.0 / double(rounds),5:F2}%"
 
 write_line("over {rounds} games")
 write_line("  staying  wins {percentage(stay_wins)}")

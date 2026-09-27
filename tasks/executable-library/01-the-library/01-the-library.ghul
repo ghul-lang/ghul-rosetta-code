@@ -27,7 +27,7 @@ namespace Hailstone is
 
         let (start, length) =
             1..100_000
-                |> map(n => (n, length = hailstone(cast long(n)).count))
+                |> map(n => (n, length = hailstone(long(n)).count))
                 |> max_by((_, length) => length)!
 
         write_line(

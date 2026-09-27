@@ -82,11 +82,11 @@ write_line("p      fraction of {trials} {width} by {height} grids dripping")
 let shown mut = null
 
 for step in 0::10 do
-    let p = cast double(step) / 10.0D
+    let p = double(step) / 10.0D
     let grids = 0..trials |> map(_ => GRID(p)) |> collect()
     let dripped = grids |> filter(g => g.pour()) |> count()
 
-    write_line("{p:F1}    {cast double(dripped) / cast double(trials):F2}")
+    write_line("{p:F1}    {double(dripped) / double(trials):F2}")
 
     if step == 5 then
         shown = grids |> find(g => g.drips() |> any(_ => true))
@@ -101,8 +101,8 @@ if let grid = shown then
     let image = IMAGE(width * cell + 20, height * cell + 40)
 
     image.view(
-        -0.33D, cast double(height) + 0.33D,
-        cast double(width) + 0.33D, -1.0D)
+        -0.33D, double(height) + 0.33D,
+        double(width) + 0.33D, -1.0D)
 
     image.clear(255ub, 255ub, 255ub)
 
@@ -111,8 +111,8 @@ if let grid = shown then
             if grid.is_wet(column, row) then
                 image.colour(120ub, 170ub, 235ub)
 
-                let x = cast double(column)
-                let y = cast double(row)
+                let x = double(column)
+                let y = double(row)
 
                 image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
             fi
@@ -125,8 +125,8 @@ if let grid = shown then
     for row in 0::height do
         for column in 0..width do
             if grid.floor(column, row) then
-                let x = cast double(column)
-                let y = cast double(row)
+                let x = double(column)
+                let y = double(row)
 
                 image.line(x, y, x + 1.0D, y)
             fi
@@ -136,8 +136,8 @@ if let grid = shown then
     for row in 0..height do
         for column in 0::width do
             if grid.side(column, row) then
-                let x = cast double(column)
-                let y = cast double(row)
+                let x = double(column)
+                let y = double(row)
 
                 image.line(x, y, x, y + 1.0D)
             fi
@@ -148,7 +148,7 @@ if let grid = shown then
 
     for column in grid.drips() do
         image.dot(
-            cast double(column) + 0.5D, cast double(height) + 0.2D, 5.0D)
+            double(column) + 0.5D, double(height) + 0.2D, 5.0D)
     od
 
     image.write("bonds.png")

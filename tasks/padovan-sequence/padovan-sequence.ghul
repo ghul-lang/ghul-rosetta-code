@@ -19,7 +19,7 @@ let plastic =
 let scaling = 1.0453567932525329623D
 
 floor_padovan(n: int) -> int =>
-    cast int(floor(
+    int(floor(
         pow(plastic, cast(n - 1)) / scaling + 0.5D))
 
 l_system() -> Pipe[string] is

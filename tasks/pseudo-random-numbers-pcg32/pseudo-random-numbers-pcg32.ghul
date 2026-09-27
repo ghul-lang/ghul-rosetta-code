@@ -11,8 +11,8 @@ class PCG32 is
 
     next_int() -> uint is
         let old = _state
-        let shifted = cast uint(((old >> 18) ^ old) >> 27)
-        let rotation = cast int(old >> 59)
+        let shifted = uint(((old >> 18) ^ old) >> 27)
+        let rotation = int(old >> 59)
 
         _state = old * 6364136223846793005ul + _increment
 
@@ -20,7 +20,7 @@ class PCG32 is
     si
 
     next_float() -> double =>
-        cast double(next_int()) / 4_294_967_296.0
+        double(next_int()) / 4_294_967_296.0
 si
 
 let first = PCG32(42ul, 54ul)
@@ -33,7 +33,7 @@ let generator = PCG32(987654321ul, 1ul)
 let counts = repeat(0, 5) |> collect_mutable()
 
 for _ in 1::100_000 do
-    let bucket = cast int(generator.next_float() * 5.0)
+    let bucket = int(generator.next_float() * 5.0)
 
     counts[bucket] = counts[bucket] + 1
 od

@@ -48,11 +48,11 @@ shade(normal: VECTOR) -> ubyte is
         return 20ub
     fi
 
-    return cast ubyte(20.0 + 235.0 * pow(lit, 1.6))
+    return ubyte(20.0 + 235.0 * pow(lit, 1.6))
 si
 
 axis(index: int) -> double =>
-    extent * (2.0 * cast double(index) / cast double(size) - 1.0)
+    extent * (2.0 * double(index) / double(size) - 1.0)
 
 let image = IMAGE(size, size)
 

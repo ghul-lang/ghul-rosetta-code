@@ -31,10 +31,10 @@ with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
         |> collect()
 
 solve(m: Matrix, constants: List[int]) -> List[double] =>
-    let denominator = cast double(determinant(m)) in
+    let denominator = double(determinant(m)) in
     0..m.count
         |> map(column =>
-            cast double(determinant(with_column(m, column, constants))) /
+            double(determinant(with_column(m, column, constants))) /
             denominator)
         |> collect()
 

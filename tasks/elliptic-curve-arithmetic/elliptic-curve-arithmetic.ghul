@@ -90,7 +90,7 @@ draw(p: Point, q: Point, r: Point, s: Point) is
         let curve = 0..401
             |> map(
                 step =>
-                    least + (most - least) * cast double(step) / 400.0D)
+                    least + (most - least) * double(step) / 400.0D)
             |> map(x => (x = x, y = sqrt(x * x * x + b)))
             |> collect()
 

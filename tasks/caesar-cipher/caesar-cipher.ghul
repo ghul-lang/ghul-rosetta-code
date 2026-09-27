@@ -5,17 +5,17 @@ rotate(text: string, key: int) -> string is
 
     for letter in text do
         let first =
-            if letter >= 'a' /\ letter <= 'z' then cast int('a')
-            elif letter >= 'A' /\ letter <= 'Z' then cast int('A')
+            if letter >= 'a' /\ letter <= 'z' then int('a')
+            elif letter >= 'A' /\ letter <= 'Z' then int('A')
             else -1
             fi
 
         if first < 0 then
             shifted.append(letter)
         else
-            let rotated = (cast int(letter) - first + key) % 26
+            let rotated = (int(letter) - first + key) % 26
 
-            shifted.append(cast char(first + rotated))
+            shifted.append(char(first + rotated))
         fi
     od
 

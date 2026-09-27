@@ -7,7 +7,7 @@ distinct_prime_factors(value: int) -> LIST[long] is
 
     while factor * factor <= remaining do
         if remaining % factor == 0 then
-            factors.add(cast long(factor))
+            factors.add(long(factor))
 
             while remaining % factor == 0 do
                 remaining = remaining / factor
@@ -18,7 +18,7 @@ distinct_prime_factors(value: int) -> LIST[long] is
     od
 
     if remaining > 1 then
-        factors.add(cast long(remaining))
+        factors.add(long(remaining))
     fi
 
     factors
@@ -29,7 +29,7 @@ is_giuga(value: int) -> bool is
 
     if factors.count < 2 then return false fi
 
-    let total = cast long(value)
+    let total = long(value)
 
     factors |> all(factor => (total / factor - 1L) % factor == 0L)
 si

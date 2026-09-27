@@ -79,7 +79,7 @@ class INTEGRATOR is
 si
 
 run_for(integrator: INTEGRATOR, seconds: double) is
-    for _ in 0..cast int(seconds / step) do
+    for _ in 0..int(seconds / step) do
         integrator.advance(step)
     od
 si

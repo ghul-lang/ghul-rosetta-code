@@ -63,7 +63,7 @@ let primes = (2..(limit + 1))
 let powers mut = 0
 
 for base in primes do
-    let power mut = cast long(base) * cast(base)
+    let power mut = long(base) * cast(base)
 
     while power <= cast(limit) do
         powers = powers + 1

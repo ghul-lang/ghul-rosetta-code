@@ -11,7 +11,7 @@ every_other(x: List[Complex], start: int) -> List[Complex] =>
 
 twiddle(k: int, n: int) -> Complex =>
     Complex.from_polar_coordinates(
-        1.0D, -2.0D * Math.pi * cast double(k) / cast double(n))
+        1.0D, -2.0D * Math.pi * double(k) / double(n))
 
 fft(x: List[Complex]) -> List[Complex] is
     let n = x.count

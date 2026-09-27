@@ -55,11 +55,11 @@ write_line("p      fraction of {trials} {size} by {size} grids percolating")
 let shown mut = null
 
 for step in 0::10 do
-    let p = cast double(step) / 10.0D
+    let p = double(step) / 10.0D
     let grids = 0..trials |> map(_ => GRID(p)) |> collect()
     let through = grids |> filter(g => g.percolates()) |> count()
 
-    write_line("{p:F1}    {cast double(through) / cast double(trials):F3}")
+    write_line("{p:F1}    {double(through) / double(trials):F3}")
 
     if step == 6 then
         shown = grids |> find(g =>
@@ -74,13 +74,13 @@ if let grid = shown then
     let cell = 24
     let image = IMAGE(size * cell, size * cell)
 
-    image.view(0.0D, cast double(size), cast double(size), 0.0D)
+    image.view(0.0D, double(size), double(size), 0.0D)
     image.clear(250ub, 250ub, 250ub)
 
     for row in 0..size do
         for column in 0..size do
-            let x = cast double(column)
-            let y = cast double(row)
+            let x = double(column)
+            let y = double(row)
 
             if grid.is_reached(column, row) then
                 image.colour(40ub, 110ub, 220ub)

@@ -3,14 +3,14 @@ use default
 let digit_glyphs = "0123456789ABCDEF"
 
 is_pandigital(square: long, base: int) -> bool is
-    let radix = cast long(base)
+    let radix = long(base)
     let wanted = (1 << base) - 1
 
     let seen mut = 0
     let remaining mut = square
 
     while remaining > 0L do
-        seen = seen | (1 << cast int(remaining % radix))
+        seen = seen | (1 << int(remaining % radix))
         remaining = remaining / radix
     od
 
@@ -18,13 +18,13 @@ is_pandigital(square: long, base: int) -> bool is
 si
 
 in_base(value: long, base: int) -> string is
-    let radix = cast long(base)
+    let radix = long(base)
     let digits = LIST[char]()
 
     let remaining mut = value
 
     while remaining > 0L do
-        digits.insert(0, digit_glyphs[cast int(remaining % radix)])
+        digits.insert(0, digit_glyphs[int(remaining % radix)])
 
         remaining = remaining / radix
     od
@@ -36,25 +36,25 @@ smallest_root(base: int) -> int is
     let lowest mut = 1L
 
     for _ in 1..base do
-        lowest = lowest * cast long(base)
+        lowest = lowest * long(base)
     od
 
-    return cast int(
-        System.Math.ceiling(System.Math.sqrt(cast double(lowest))))
+    return int(
+        System.Math.ceiling(System.Math.sqrt(double(lowest))))
 si
 
 for base in 2::13 do
     let found =
         for root in from(smallest_root(base)) do
-            if is_pandigital(cast long(root) * cast long(root), base) then
+            if is_pandigital(long(root) * long(root), base) then
                 break root
             fi
         od
 
     let root = found!
-    let square = cast long(root) * cast long(root)
+    let square = long(root) * long(root)
 
     write_line(
-        "base {base,2}: {in_base(cast long(root), base),9} squared is "
+        "base {base,2}: {in_base(long(root), base),9} squared is "
         "{in_base(square, base)}")
 od

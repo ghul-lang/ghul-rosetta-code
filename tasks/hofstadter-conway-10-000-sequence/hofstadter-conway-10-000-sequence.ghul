@@ -15,7 +15,7 @@ let a = (
     terms
 )
 
-ratio(n: int) -> double => cast double(a[n]) / cast double(n)
+ratio(n: int) -> double => double(a[n]) / double(n)
 
 for power in 1..20 do
     let low = 1 << power

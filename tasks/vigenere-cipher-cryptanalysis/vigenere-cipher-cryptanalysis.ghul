@@ -7,9 +7,9 @@ let english = [
     0.00978, 0.02360, 0.00150, 0.01974, 0.00074
 ]
 
-ord(c: char) -> int => cast int(c) - cast int('A')
+ord(c: char) -> int => int(c) - int('A')
 
-chr(n: int) -> char => cast char(cast int('A') + (n % 26 + 26) % 26)
+chr(n: int) -> char => char(int('A') + (n % 26 + 26) % 26)
 
 counts(text: string) -> int[] =>
     (0..26)
@@ -24,8 +24,8 @@ column(text: string, length: int, start: int) -> string =>
         |> join("")
 
 coincidence(text: string) -> double =>
-    (counts(text) |> sum_by(n => cast double(n * (n - 1)))) /
-    cast double(text.length * (text.length - 1))
+    (counts(text) |> sum_by(n => double(n * (n - 1)))) /
+    double(text.length * (text.length - 1))
 
 shift(text: string, by: int) -> string =>
     text |> map(c => chr(ord(c) - by)) |> join("")
@@ -34,8 +34,8 @@ chi_squared(text: string) -> double =>
     counts(text)
         |> index()
         |> sum_by(n => (
-            let expected = english[n.index] * cast double(text.length)
-            let difference = cast double(n.value) - expected
+            let expected = english[n.index] * double(text.length)
+            let difference = double(n.value) - expected
             difference * difference / expected))
 
 best_shift(text: string) -> int =>
@@ -73,7 +73,7 @@ let letters = cipher |> filter(c => char.is_letter(c)) |> join("")
 let average_coincidence = length =>
     ((0..length)
         |> sum_by(i => coincidence(column(letters, length, i)))) /
-    cast double(length)
+    double(length)
 
 let length =
     1::20 |> find(length => average_coincidence(length) > 0.06) ?? 1

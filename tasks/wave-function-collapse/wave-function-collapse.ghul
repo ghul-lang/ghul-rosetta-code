@@ -99,8 +99,8 @@ for y in 0..tile do
     for x in 0..tile do
         if pixel(y, x) == '#' then
             image.fill_rectangle(
-                cast double(x * scale), cast double(y * scale),
-                cast double((x + 1) * scale), cast double((y + 1) * scale))
+                double(x * scale), double(y * scale),
+                double((x + 1) * scale), double((y + 1) * scale))
         fi
     od
 od

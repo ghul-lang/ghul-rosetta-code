@@ -63,7 +63,7 @@ image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0D)
 
 for (i, rect) in [first, second] |> index() do
-    let dx = 11.0D * cast double(i)
+    let dx = 11.0D * double(i)
 
     image.colour(60ub, 110ub, 200ub)
     outline(image, polygon, dx)

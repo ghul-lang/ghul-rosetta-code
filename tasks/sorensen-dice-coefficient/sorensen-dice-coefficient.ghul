@@ -38,7 +38,7 @@ coefficient(
      if total == 0 then
          0.0D
      else
-         cast double(2 * shared(left, right)) / cast(total)
+         double(2 * shared(left, right)) / cast(total)
      fi)
 
 let tasks =

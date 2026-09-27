@@ -10,7 +10,7 @@ let state mut = 1234567L
 next(limit: int) -> int is
     state = (state * 1103515245L + 12345L) % 2147483648L
 
-    return cast int(state % cast long(limit))
+    return int(state % long(limit))
 si
 
 let places =
@@ -18,9 +18,9 @@ let places =
         |> map(_ =>
             (x = next(width),
              y = next(height),
-             red = cast ubyte(80 + next(160)),
-             green = cast ubyte(80 + next(160)),
-             blue = cast ubyte(80 + next(160))))
+             red = ubyte(80 + next(160)),
+             green = ubyte(80 + next(160)),
+             blue = ubyte(80 + next(160))))
         |> collect()
 
 nearest(x: int, y: int) -> int =>
@@ -54,10 +54,10 @@ image.colour(0ub, 0ub, 0ub)
 
 for site in places do
     image.fill([
-        (x = cast double(site.x) - 3.0D, y = cast double(site.y) - 3.0D),
-        (x = cast double(site.x) + 3.0D, y = cast double(site.y) - 3.0D),
-        (x = cast double(site.x) + 3.0D, y = cast double(site.y) + 3.0D),
-        (x = cast double(site.x) - 3.0D, y = cast double(site.y) + 3.0D)
+        (x = double(site.x) - 3.0D, y = double(site.y) - 3.0D),
+        (x = double(site.x) + 3.0D, y = double(site.y) - 3.0D),
+        (x = double(site.x) + 3.0D, y = double(site.y) + 3.0D),
+        (x = double(site.x) - 3.0D, y = double(site.y) + 3.0D)
     ])
 od
 

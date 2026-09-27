@@ -30,7 +30,7 @@ guess(p: V3) -> int => if weights ⋅ p >= 0.0D then 1 else -1 fi
 train(p: V3) is
     let error = above(p.x, p.y) - guess(p)
 
-    weights = weights + p * (rate * cast double(error))
+    weights = weights + p * (rate * double(error))
 si
 
 correct() -> int =>

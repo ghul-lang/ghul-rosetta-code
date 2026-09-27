@@ -19,7 +19,7 @@ class SPLITMIX64 is
     si
 
     next_float() -> double =>
-        cast double(next_int()) / 18_446_744_073_709_551_616.0
+        double(next_int()) / 18_446_744_073_709_551_616.0
 si
 
 let first = SPLITMIX64(1234567ul)
@@ -32,7 +32,7 @@ let generator = SPLITMIX64(987654321ul)
 let counts = repeat(0, 5) |> collect_mutable()
 
 for _ in 1::100_000 do
-    let bucket = cast int(generator.next_float() * 5.0)
+    let bucket = int(generator.next_float() * 5.0)
 
     counts[bucket] = counts[bucket] + 1
 od

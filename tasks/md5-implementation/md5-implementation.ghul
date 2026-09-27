@@ -10,10 +10,10 @@ let shifts =
 let sines =
     0..64
         |> map(step =>
-            cast uint(
+            uint(
                 floor(
                     abs(
-                        sin(cast double(step + 1))) *
+                        sin(double(step + 1))) *
                     4294967296.0D)))
         |> collect()
 
@@ -21,7 +21,7 @@ rotate_left(value: uint, count: int) -> uint =>
     (value << count) | (value >>> (32 - count))
 
 padded(message: ubyte[]) -> LIST[ubyte] is
-    let bits = cast ulong(message.count) * 8ul
+    let bits = ulong(message.count) * 8ul
 
     let block = LIST[ubyte](message)
 
@@ -32,7 +32,7 @@ padded(message: ubyte[]) -> LIST[ubyte] is
     od
 
     for byte_index in 0..8 do
-        block.add(cast ubyte((bits >>> (8 * byte_index)) & 0xFFul))
+        block.add(ubyte((bits >>> (8 * byte_index)) & 0xFFul))
     od
 
     return block
@@ -41,7 +41,7 @@ si
 word(block: LIST[ubyte], at: int) -> uint =>
     0..4
         |> map(byte_index =>
-            cast uint(block[at + byte_index]) << (8 * byte_index))
+            uint(block[at + byte_index]) << (8 * byte_index))
         |> reduce(0u, (packed, part) => packed | part)
 
 md5(message: ubyte[]) -> string is
