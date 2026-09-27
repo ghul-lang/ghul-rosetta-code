@@ -40,7 +40,7 @@ is_emirp(n: int) -> bool is
     r != n /\ is_prime(n) /\ is_prime(r)
 si
 
-emirps() -> Ghul.Pipes.Pipe[int] is
+emirps() -> int{} is
     let n mut = 2
 
     do

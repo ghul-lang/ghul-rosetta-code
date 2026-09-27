@@ -5,7 +5,7 @@ use IO.Path
 // directive: #include "path", relative to the including file
 // includes nest to any depth; an include cycle is an error
 
-expand(path: string, active: List[string]) -> Pipe[string] is
+expand(path: string, active: List[string]) -> string{} is
     let full = Path.get_full_path(path)
 
     assert !(active |> any(open => open =~ full))

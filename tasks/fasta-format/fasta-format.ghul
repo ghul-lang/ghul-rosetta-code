@@ -2,7 +2,7 @@ use default
 
 use Record = (name: string, sequence: string)
 
-records(lines: List[string]) -> Ghul.Pipes.Pipe[Record] is
+records(lines: List[string]) -> Record{} is
     let name mut = null
     let sequence = System.Text.StringBuilder()
 

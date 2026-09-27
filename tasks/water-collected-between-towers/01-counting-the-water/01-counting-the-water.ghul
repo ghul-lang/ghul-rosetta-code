@@ -1,7 +1,7 @@
 use default
 use System.Math
 
-running_maxima(heights: Iterable[int]) -> Pipe[int] is
+running_maxima(heights: Iterable[int]) -> int{} is
     let highest mut = 0
 
     for height in heights do

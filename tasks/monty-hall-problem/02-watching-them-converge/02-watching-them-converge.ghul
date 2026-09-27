@@ -34,15 +34,15 @@ for trial in 1::rounds do
         switch_wins = switch_wins + 1
     fi
 
-    staying.add(cast double(stay_wins) / cast double(trial))
-    switching.add(cast double(switch_wins) / cast double(trial))
+    staying.add(double(stay_wins) / double(trial))
+    switching.add(double(switch_wins) / double(trial))
 od
 
 curve(rates: List[double]) -> List[(x: double, y: double)] =>
     rates
         |> index()
         |> map(rate =>
-            (x = log10(cast double(rate.index + 1)), y = rate.value))
+            (x = log10(double(rate.index + 1)), y = rate.value))
         |> collect()
 
 let stay_colour = (red = 210ub, green = 130ub, blue = 40ub)
@@ -61,8 +61,8 @@ axes.y_title = "win rate"
 axes.x_ticks(
     (0::4)
         |> map(decade =>
-            (value = cast double(decade),
-             label = "{System.Math.pow(10.0, cast double(decade))}"))
+            (value = double(decade),
+             label = "{System.Math.pow(10.0, double(decade))}"))
         |> collect())
 
 axes.y_ticks([

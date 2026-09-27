@@ -2,7 +2,7 @@ use default
 
 let words = IO.File.read_lines("unixdict.txt") |> collect_set()
 
-neighbours(word: string) -> Pipe[string] =>
+neighbours(word: string) -> string{} =>
     (0..word.length)
     |> flat_map(i =>
         ('a'::'z')

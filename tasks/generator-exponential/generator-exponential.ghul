@@ -10,7 +10,7 @@ power(base: long, exponent: int) -> long is
     return value
 si
 
-powers(exponent: int) -> Pipe[long] is
+powers(exponent: int) -> long{} is
     let base mut = 0L
 
     do
@@ -20,18 +20,19 @@ powers(exponent: int) -> Pipe[long] is
     od
 si
 
-next_power(powers: Pipe[long]) -> long is
+next_power(powers: Iterator[long]) -> long is
     assert powers.move_next() else "the powers never run out"
 
     return powers.current
 si
 
-without(values: Pipe[long], excluded: Pipe[long]) -> Pipe[long] is
-    let skipped mut = next_power(excluded)
+without(values: long{}, excluded: long{}) -> long{} is
+    let cursor = excluded.iterator
+    let skipped mut = next_power(cursor)
 
     for value in values do
         while skipped < value do
-            skipped = next_power(excluded)
+            skipped = next_power(cursor)
         od
 
         if skipped != value then

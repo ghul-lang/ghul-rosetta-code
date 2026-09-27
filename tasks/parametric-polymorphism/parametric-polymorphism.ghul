@@ -12,7 +12,7 @@ map[T, U](tree: Tree[T], f: T -> U) -> Tree[U] =>
         Tree.LEAF
     fi
 
-in_order[T](tree: Tree[T]) -> Pipe[T] is
+in_order[T](tree: Tree[T]) -> T{} is
     if let node: Tree.NODE = tree then
         yield in in_order(node.left)
         yield node.value

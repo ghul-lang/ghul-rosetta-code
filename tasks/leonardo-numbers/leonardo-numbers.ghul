@@ -1,6 +1,6 @@
 use default
 
-leonardo(first: int, second: int, add: int) -> Pipe[int] is
+leonardo(first: int, second: int, add: int) -> int{} is
     let previous mut = first
     let current mut = second
 

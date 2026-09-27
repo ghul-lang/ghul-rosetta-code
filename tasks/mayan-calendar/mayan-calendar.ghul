@@ -21,7 +21,7 @@ let correlation = 584_283
 let julian_day_of_0001_01_01 = 1_721_426
 
 days_since_creation(date: DateTime) -> int =>
-    let day = cast int(date.ticks / System.TimeSpan.ticks_per_day) in
+    let day = int(date.ticks / System.TimeSpan.ticks_per_day) in
     day + julian_day_of_0001_01_01 - correlation
 
 tzolkin(days: int) -> string =>

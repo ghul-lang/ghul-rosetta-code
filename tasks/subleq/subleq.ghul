@@ -19,7 +19,7 @@ while ip >= 0 do
     if a == -1 then
         memory[b] = Std.read()
     elif b == -1 then
-        Std.write(cast char(memory[a]))
+        Std.write(char(memory[a]))
     else
         memory[b] = memory[b] - memory[a]
 

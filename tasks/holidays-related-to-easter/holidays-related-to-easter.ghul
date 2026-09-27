@@ -41,7 +41,7 @@ feasts(
 ) -> string =>
     days
         |> map((name, offset) =>
-            "{name} {shown(easter.add_days(cast double(offset)))}")
+            "{name} {shown(easter.add_days(double(offset)))}")
         |> join()
 
 let western = [

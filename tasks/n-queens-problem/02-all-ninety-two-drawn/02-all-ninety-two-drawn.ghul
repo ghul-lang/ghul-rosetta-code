@@ -15,7 +15,7 @@ safe(queens: List[int], row: int, column: int) -> bool =>
                 placed_row - placed_column != row - column /\
                 placed_row + placed_column != row + column)
 
-placements(n: int, queens: List[int]) -> Pipe[List[int]] is
+placements(n: int, queens: List[int]) -> List[int]{} is
     if queens.count == n then
         yield queens
     else
@@ -39,22 +39,22 @@ board(image: IMAGE, solution: List[int], left: int, top: int) is
             fi
 
             image.fill_rectangle(
-                cast double(left + column * cell),
-                cast double(top + row * cell),
-                cast double(left + column * cell + cell),
-                cast double(top + row * cell + cell))
+                double(left + column * cell),
+                double(top + row * cell),
+                double(left + column * cell + cell),
+                double(top + row * cell + cell))
         od
     od
 
     image.colour(25ub, 50ub, 105ub)
 
-    let half = 0.5 * cast double(cell)
+    let half = 0.5 * double(cell)
 
     for placed in solution |> index() do
         image.dot(
-            cast double(left + placed.value * cell) + half,
-            cast double(top + placed.index * cell) + half,
-            0.32 * cast double(cell))
+            double(left + placed.value * cell) + half,
+            double(top + placed.index * cell) + half,
+            0.32 * double(cell))
     od
 si
 
@@ -68,7 +68,7 @@ let image = IMAGE(
 
 image.colour(70ub, 75ub, 90ub)
 image.text(
-    cast double(margin), 26.0, 16.0,
+    double(margin), 26.0, 16.0,
     "all {solutions.count} solutions to the eight queens problem")
 
 for solution in solutions |> index() do

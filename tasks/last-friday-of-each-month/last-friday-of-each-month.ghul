@@ -12,7 +12,7 @@ last_friday(year: int, month: int) -> DateTime is
     candidate
 si
 
-last_fridays(year: int) -> Pipe[DateTime] is
+last_fridays(year: int) -> DateTime{} is
     for month in 1::12 do
         yield last_friday(year, month)
     od

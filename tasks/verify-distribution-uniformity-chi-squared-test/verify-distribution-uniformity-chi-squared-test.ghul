@@ -44,7 +44,7 @@ upper_gamma(a: double, x: double) -> double is
     let h mut = dd
 
     for i in 1::200 do
-        let an = -cast double(i) * (cast double(i) - a)
+        let an = -double(i) * (double(i) - a)
 
         b = b + 2.0
         dd = an * dd + b
@@ -59,16 +59,16 @@ upper_gamma(a: double, x: double) -> double is
 si
 
 chi_squared(counts: List[int]) -> double is
-    let total = cast double(counts |> sum())
-    let expected = total / cast double(counts.count)
+    let total = double(counts |> sum())
+    let expected = total / double(counts.count)
 
     counts
         |> sum_by(k =>
-            let e = cast double(k) - expected in e * e / expected)
+            let e = double(k) - expected in e * e / expected)
 si
 
 is_uniform(counts: List[int], significance: double) -> bool =>
-    let freedom = cast double(counts.count - 1) in
+    let freedom = double(counts.count - 1) in
     upper_gamma(freedom / 2.0, chi_squared(counts) / 2.0) > significance
 
 for counts in [
@@ -77,7 +77,7 @@ for counts in [
 ] do
     let data = LIST(counts)
     let distance = chi_squared(data)
-    let freedom = cast double(data.count - 1)
+    let freedom = double(data.count - 1)
     let p_value = upper_gamma(freedom / 2.0, distance / 2.0)
 
     write_line("counts:      {data |> join(" ")}")

@@ -6,7 +6,7 @@ swap(values: LIST[int], left: int, right: int) is
     (values[left], values[right]) = (values[right], values[left])
 si
 
-permutations(size: int) -> Pipe[STEP] is
+permutations(size: int) -> STEP{} is
     let values = 1::size |> collect_mutable()
     let facing = repeat(-1, size) |> collect_mutable()
     let sign mut = 1

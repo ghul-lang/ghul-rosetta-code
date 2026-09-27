@@ -1,6 +1,6 @@
 use default
 
-walk(dir: string) -> Ghul.Pipes.Pipe[string] is
+walk(dir: string) -> string{} is
     for path in IO.Directory.get_files(dir) do
         yield path
     od

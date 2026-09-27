@@ -52,7 +52,7 @@ sort_tree(node: NODE, descending: bool) is
     od
 si
 
-flatten(node: NODE, level: int, pad: string) -> Pipe[string] is
+flatten(node: NODE, level: int, pad: string) -> string{} is
     if level >= 0 then
         yield "{repeat(pad, level) |> join("")}{node.text}"
     fi

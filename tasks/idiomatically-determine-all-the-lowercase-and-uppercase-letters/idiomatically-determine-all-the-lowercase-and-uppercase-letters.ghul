@@ -3,7 +3,7 @@ use default
 letters(matches: (char) -> bool) -> string =>
     string(
         (0..65536)
-        |> map(code => cast char(code))
+        |> map(code => char(code))
         |> filter(matches)
         |> collect()
     )

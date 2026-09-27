@@ -3,7 +3,7 @@ use System.Security.Cryptography.SHA256
 
 let block_size = 1024
 
-paired(hashes: List[ubyte[]]) -> Pipe[ubyte[]] =>
+paired(hashes: List[ubyte[]]) -> ubyte[]{} =>
     0..(hashes.count + 1) / 2
         |> map(index =>
             if 2 * index + 1 < hashes.count then

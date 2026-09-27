@@ -35,7 +35,7 @@ is_prime(value: bigint) -> bool =>
     value > 1n /\
     bases |> all(base => passes_miller_rabin(value, cast(base)))
 
-chernick_factors(n: int, m: long) -> Pipe[bigint] is
+chernick_factors(n: int, m: long) -> bigint{} is
     yield cast(6L * m + 1L)
     yield cast(12L * m + 1L)
 

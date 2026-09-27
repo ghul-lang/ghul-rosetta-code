@@ -16,7 +16,7 @@ digit_counts(value: long) -> LIST[int] is
     let remaining mut = value
 
     while remaining > 0L do
-        let digit = cast int(remaining % 10L)
+        let digit = int(remaining % 10L)
 
         counts[digit] = counts[digit] + 1
         remaining = remaining / 10L
@@ -25,7 +25,7 @@ digit_counts(value: long) -> LIST[int] is
     counts
 si
 
-multisets(width: int, lowest: int, chosen: LIST[int]) -> Pipe[LIST[int]] is
+multisets(width: int, lowest: int, chosen: LIST[int]) -> LIST[int]{} is
     if chosen.count == width then
         yield chosen
     else
@@ -39,7 +39,7 @@ multisets(width: int, lowest: int, chosen: LIST[int]) -> Pipe[LIST[int]] is
     fi
 si
 
-own_sums(width: int) -> Pipe[long] is
+own_sums(width: int) -> long{} is
     for combination in multisets(width, 0, LIST()) do
         let total mut = 0L
 

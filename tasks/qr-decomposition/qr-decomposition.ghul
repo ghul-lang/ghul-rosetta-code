@@ -108,7 +108,7 @@ show("Q", q)
 show("R", r)
 show("Q R", multiply(q, r))
 
-let xs = 0::10 |> map(x => cast double(x))
+let xs = 0::10 |> map(x => double(x))
 let ys = [
     1.0, 6.0, 17.0, 34.0, 57.0, 86.0, 121.0, 162.0, 209.0, 262.0, 321.0
 ]

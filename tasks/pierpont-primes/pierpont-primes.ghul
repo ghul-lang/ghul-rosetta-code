@@ -36,7 +36,7 @@ is_prime(value: bigint) -> bool is
     witnesses |> all(witness => passes(witness, odd_part, power, value))
 si
 
-three_smooth() -> Pipe[bigint] is
+three_smooth() -> bigint{} is
     let found = LIST()
     let next_double mut = 0
     let next_triple mut = 0
@@ -57,7 +57,7 @@ three_smooth() -> Pipe[bigint] is
     od
 si
 
-pierpont(offset: bigint) -> Pipe[bigint] =>
+pierpont(offset: bigint) -> bigint{} =>
     three_smooth() |> map(smooth => smooth + offset) |> filter(is_prime)
 
 report(kind: string, offset: bigint) is

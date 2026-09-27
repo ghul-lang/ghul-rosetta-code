@@ -12,7 +12,7 @@ let opcodes =
     (typeof OpCodes)
         .get_fields(BindingFlags.PUBLIC | BindingFlags.STATIC)
         |> map(f => cast OpCode(f.get_value(null)))
-        |> collect_map(op => cast int(op.value) & 0xFFFF, op => op)
+        |> collect_map(op => int(op.value) & 0xFFFF, op => op)
 
 let calls = [OpCodes.call, OpCodes.callvirt, OpCodes.newobj]
 
@@ -21,7 +21,7 @@ let everything =
     BindingFlags.INSTANCE | BindingFlags.STATIC |
     BindingFlags.DECLARED_ONLY
 
-callees(method: MethodBase) -> Pipe[MethodBase] is
+callees(method: MethodBase) -> MethodBase{} is
     let il = method.get_method_body()?.get_i_l_as_byte_array()
 
     if !il? then
@@ -38,12 +38,12 @@ callees(method: MethodBase) -> Pipe[MethodBase] is
     let at mut = 0
 
     while at < il.count do
-        let first = cast int(il[at])
+        let first = int(il[at])
 
         // Two-byte opcodes all start with 0xFE.
         let code =
             if first == 0xFE then
-                0xFE00 | cast int(il[at + 1])
+                0xFE00 | int(il[at + 1])
             else
                 first
             fi

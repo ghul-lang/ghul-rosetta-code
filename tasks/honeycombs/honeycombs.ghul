@@ -14,7 +14,7 @@ let seed mut = 20260920u
 next_letter() -> char is
     seed = seed * 1103515245u + 12345u
 
-    let drawn = cast int(seed >>> 16) % pool.count
+    let drawn = int(seed >>> 16) % pool.count
 
     let letter = pool[drawn]
 
@@ -31,8 +31,8 @@ let cells =
             let column = index / 4 in
             let row = index % 4 in
             (letter = letters[index],
-             x = cast double(column) * 1.5D * radius,
-             y = cast double(row) * rise * radius -
+             x = double(column) * 1.5D * radius,
+             y = double(row) * rise * radius -
                  (if column % 2 == 1 then rise * radius / 2.0D
                   else 0.0D fi)))
         |> collect()
@@ -42,7 +42,7 @@ let chosen = LIST[char]()
 corners(x: double, y: double) -> LIST[(double, double)] =>
     0..6
         |> map(corner =>
-            let angle = cast double(corner) * pi / 3.0D in
+            let angle = double(corner) * pi / 3.0D in
             (x + radius * 0.92D * cos(angle),
              y + radius * 0.92D * sin(angle)))
         |> collect_mutable()

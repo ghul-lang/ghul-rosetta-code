@@ -21,7 +21,7 @@ exhaust_second(r: Row) -> Row => (r.p12, r.p12, r.p2, r.p2)
 is_zero(r: Row) -> bool =>
     r.p12 =~ 0n /\ r.p1 =~ 0n /\ r.p2 =~ 0n /\ r.p =~ 0n
 
-r2cf(numerator: bigint, denominator: bigint) -> Pipe[bigint] is
+r2cf(numerator: bigint, denominator: bigint) -> bigint{} is
     let n1 mut = numerator
     let n2 mut = denominator
 
@@ -34,13 +34,13 @@ r2cf(numerator: bigint, denominator: bigint) -> Pipe[bigint] is
     od
 si
 
-square_root_of_two() -> Pipe[bigint] => [1n] |> cat(repeat(2n))
+square_root_of_two() -> bigint{} => [1n] |> cat(repeat(2n))
 
 let patience = 40
 
 combine(
     top_row: Row, bottom_row: Row, x: Iterable[bigint], y: Iterable[bigint]
-) -> Pipe[bigint] is
+) -> bigint{} is
     let top mut = top_row
     let bottom mut = bottom_row
     let xs = x.iterator
@@ -49,7 +49,7 @@ combine(
     let y_left mut = true
     let waited mut = 0
 
-    ratio(n: bigint, d: bigint) -> double => cast double(n) / cast double(d)
+    ratio(n: bigint, d: bigint) -> double => double(n) / double(d)
 
     settled() -> bool =>
         let (a12, a1, a2, a) = top, (b12, b1, b2, b) = bottom in
@@ -117,7 +117,7 @@ let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
 let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
 run(
-    label: string, operation: (Row, Row), x: Pipe[bigint], y: Pipe[bigint]
+    label: string, operation: (Row, Row), x: bigint{}, y: bigint{}
 ) =>
     let (top, bottom) = operation in
     write_line("{label,-15} = {show(combine(top, bottom, x, y))}")

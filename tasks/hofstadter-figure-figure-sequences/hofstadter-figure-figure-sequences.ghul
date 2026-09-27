@@ -1,6 +1,6 @@
 use default
 
-r_sequence() -> Pipe[int] is
+r_sequence() -> int{} is
     let skipped = LIST()
     let value mut = 1
     let n mut = 1
@@ -22,8 +22,8 @@ r_sequence() -> Pipe[int] is
     od
 si
 
-s_sequence() -> Pipe[int] is
-    let in_r = r_sequence()
+s_sequence() -> int{} is
+    let in_r = r_sequence().iterator
 
     assert in_r.move_next() else "the R sequence never runs out"
 

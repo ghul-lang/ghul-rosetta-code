@@ -59,7 +59,7 @@ let transforms =
 key(text: string) -> string =>
     transforms |> reduce(text, (running, step) => step(running))
 
-runs(text: string) -> Pipe[string] is
+runs(text: string) -> string{} is
     let held = LIST()
 
     for letter in text do

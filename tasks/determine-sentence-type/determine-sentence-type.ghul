@@ -16,7 +16,7 @@ kind(ending: char) -> string =>
     else "N"
     esac
 
-sentences(source: string) -> Pipe[string] is
+sentences(source: string) -> string{} is
     let start mut = 0
 
     for at in 0..source.length do

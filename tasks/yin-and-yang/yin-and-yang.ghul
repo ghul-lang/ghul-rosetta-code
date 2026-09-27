@@ -20,7 +20,7 @@ symbol(x: double, y: double, radius: double) -> string =>
         "#"
     fi
 
-taijitu(radius: int) -> Pipe[string] is
+taijitu(radius: int) -> string{} is
     for row in -radius::radius do
         yield ((-2 * radius)::(2 * radius))
             |> map(column =>

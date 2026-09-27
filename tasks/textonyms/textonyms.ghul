@@ -10,7 +10,7 @@ digits(word: string) -> string? is
             return null
         fi
 
-        result.append(keys[cast int(c) - cast int('a')])
+        result.append(keys[int(c) - int('a')])
     od
 
     result.to_string()

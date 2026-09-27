@@ -28,10 +28,10 @@ si
 simulated(people: int, at_least: int, trials: int) -> double =>
     let hits =
         0..trials |> filter(_ => shared(people, at_least)) |> count() in
-    cast double(hits) / cast double(trials)
+    double(hits) / double(trials)
 
 log_factorial(n: int) -> double =>
-    1::n |> reduce(0.0D, (s, i) => s + log(cast double(i)))
+    1::n |> reduce(0.0D, (s, i) => s + log(double(i)))
 
 exact(most: int, at_least: int) -> List[double] is
     let ways mut = repeat(0.0D, most + 1) |> collect_mutable()
@@ -59,7 +59,7 @@ exact(most: int, at_least: int) -> List[double] is
         |> map(n =>
             let log_scale =
                 log_factorial(n) -
-                cast double(n) * log(cast double(days)) in
+                double(n) * log(double(days)) in
             1.0D - ways[n] * exp(log_scale))
         |> collect()
 si
@@ -99,13 +99,13 @@ od
 let image = IMAGE(480, 300)
 let most = 400
 
-image.view(-40.0D, -0.15D, cast double(most) + 10.0D, 1.08D)
+image.view(-40.0D, -0.15D, double(most) + 10.0D, 1.08D)
 image.clear(252ub, 250ub, 245ub)
 
 image.colour(200ub, 200ub, 205ub)
 image.stroke(1.0D)
-image.line(0.0D, 0.5D, cast double(most), 0.5D)
-image.line(0.0D, 0.0D, cast double(most), 0.0D)
+image.line(0.0D, 0.5D, double(most), 0.5D)
+image.line(0.0D, 0.0D, double(most), 0.0D)
 image.line(0.0D, 0.0D, 0.0D, 1.0D)
 
 let colours = [
@@ -118,14 +118,14 @@ for (i, at_least) in 2::5 |> index() do
     let curve =
         (1::most / 4)
             |> map(step => step * 4)
-            |> map(n => (x = cast double(n), y = curves[i][n]))
+            |> map(n => (x = double(n), y = curves[i][n]))
             |> collect()
 
     image.colour(r, g, b)
     image.stroke(2.0D)
     image.line(curve)
 
-    let crossing = cast double(crossings[i])
+    let crossing = double(crossings[i])
 
     image.ring(crossing, 0.5D, 4.0D)
     let label = "{crossings[i]}"
@@ -136,7 +136,7 @@ od
 image.colour(60ub, 60ub, 60ub)
 image.text(-8.0D, 0.47D, 11.0D, "50%", Anchor.RIGHT)
 image.text(
-    cast double(most) / 2.0D, -0.12D, 12.0D,
+    double(most) / 2.0D, -0.12D, 12.0D,
     "people in the group", Anchor.CENTRE)
 
 image.write("birthdays.png")

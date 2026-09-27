@@ -25,7 +25,7 @@ is_prime(value: int) -> bool =>
         |> take_while(divisor => divisor * divisor <= value)
         |> all(divisor => value % divisor != 0))
 
-divisors(value: int) -> Pipe[int] is
+divisors(value: int) -> int{} is
     for candidate in 1::value do
         if candidate * candidate > value then break fi
 
@@ -40,7 +40,7 @@ divisors(value: int) -> Pipe[int] is
 si
 
 splits_repeated_doubling(value: int) -> bool =>
-    let wide = cast long(value) in
+    let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide
 
 is_super_poulet(value: int) -> bool =>

@@ -9,7 +9,7 @@ bar(value: double, lowest: double, span: double) -> char =>
     if span == 0.0 then
         bars[0]
     else
-        bars[cast int((value - lowest) * 7.999 / span)]
+        bars[int((value - lowest) * 7.999 / span)]
     fi
 
 sparkline(series: string) -> string is

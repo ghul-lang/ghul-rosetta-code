@@ -61,7 +61,7 @@ pollard_rho(value: bigint) -> bigint is
     return divisor
 si
 
-prime_factors(value: bigint) -> Pipe[bigint] is
+prime_factors(value: bigint) -> bigint{} is
     let remaining mut = value
 
     for small in small_primes do
@@ -89,7 +89,7 @@ prime_factors(value: bigint) -> Pipe[bigint] is
     fi
 si
 
-home_prime_chain(start: bigint) -> Pipe[bigint] is
+home_prime_chain(start: bigint) -> bigint{} is
     let current mut = start
 
     while !is_prime(current) do

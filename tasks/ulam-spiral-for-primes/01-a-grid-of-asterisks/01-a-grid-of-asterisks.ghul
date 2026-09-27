@@ -7,7 +7,7 @@ is_prime(number: int) -> bool =>
         |> take_while(divisor => divisor * divisor <= number)
         |> all(divisor => number % divisor != 0))
 
-spiral() -> Pipe[POSITION] is
+spiral() -> POSITION{} is
     let x mut = 0
     let y mut = 0
     let run mut = 1

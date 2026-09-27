@@ -5,7 +5,7 @@ name(code: int) -> string =>
     case code
     when 32 then "Spc"
     when 127 then "Del"
-    else "{cast char(code)}"
+    else "{char(code)}"
     esac
 
 let columns = 6

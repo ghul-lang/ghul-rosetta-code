@@ -5,7 +5,7 @@ use Point = (x: double, y: double)
 
 let rise = System.Math.sqrt(3.0D) / 2.0D
 
-koch(depth: int, from: Point, to: Point) -> Pipe[Point] is
+koch(depth: int, from: Point, to: Point) -> Point{} is
     if depth == 0 then
         yield from
         return

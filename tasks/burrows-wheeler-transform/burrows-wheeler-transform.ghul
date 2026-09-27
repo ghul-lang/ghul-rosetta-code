@@ -6,7 +6,7 @@ let end_of_text = 3c
 ordinal_order(left: string, right: string) -> int =>
     string.compare_ordinal(left, right)
 
-rotations(text: string) -> Pipe[string] =>
+rotations(text: string) -> string{} =>
     (0..text.length)
         |> map(i => "{text[i..<0]}{text[0..i]}")
 

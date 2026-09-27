@@ -1,8 +1,8 @@
 use default
 
 euler_maclaurin(n: int) -> double =>
-    let size = cast double(n) in
-    let harmonic = 1::n |> sum_by(k => 1.0 / cast double(k)) in
+    let size = double(n) in
+    let harmonic = 1::n |> sum_by(k => 1.0 / double(k)) in
     let bernoulli = [
         1.0 / 6.0, -1.0 / 30.0, 1.0 / 42.0, -1.0 / 30.0, 5.0 / 66.0,
         -691.0 / 2730.0, 7.0 / 6.0
@@ -12,7 +12,7 @@ euler_maclaurin(n: int) -> double =>
             |> index()
             |> sum_by((i, b) =>
                 let power = 2 * (i + 1) in
-                let exponent = cast double(power) in
+                let exponent = double(power) in
                 b / (exponent * double.pow(size, exponent)))
     in
     harmonic - double.log(size) - 1.0 / (2.0 * size) + correction
@@ -30,7 +30,7 @@ brent_mcmillan(digits: int) -> string is
     let u mut = a
     let v mut = b
 
-    for k in 1::(4 * cast int(n)) do
+    for k in 1::(4 * int(n)) do
         let kk = bigint(k)
 
         b = b * n * n / (kk * kk)

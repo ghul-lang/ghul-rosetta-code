@@ -6,7 +6,7 @@ smallest_factor(n: int) -> int =>
 prime_factor_count(n: int) -> int =>
     if n == 1 then 0 else 1 + prime_factor_count(n / smallest_factor(n)) fi
 
-almost_primes(k: int) -> Pipe[int] is
+almost_primes(k: int) -> int{} is
     let n mut = 2
 
     do

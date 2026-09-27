@@ -5,5 +5,5 @@ use System.Convert
 // is 255 - octal 377.
 
 for value in ubyte.min_value::ubyte.max_value do
-    write_line(Convert.to_string(cast int(value), 8))
+    write_line(Convert.to_string(int(value), 8))
 od

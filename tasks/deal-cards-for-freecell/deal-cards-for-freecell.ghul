@@ -1,11 +1,11 @@
 use default
 
-microsoft_rand(seed: int) -> Pipe[int] is
-    let state mut = cast long(seed)
+microsoft_rand(seed: int) -> int{} is
+    let state mut = long(seed)
 
     while true do
         state = (214013L * state + 2531011L) % 2147483648L
-        yield cast int(state / 65536L)
+        yield int(state / 65536L)
     od
 si
 
@@ -17,10 +17,12 @@ name(card: int) -> string => "{ranks[card / 4]}{suits[card % 4]}"
 deal(game: int) -> List[string] is
     let deck = LIST(0..52)
     let dealt = LIST()
-    let random = microsoft_rand(game)
+    let random = microsoft_rand(game).iterator
 
     while deck.count > 0 do
-        let index = (random |> first()) ?? 0
+        random.move_next()
+
+        let index = random.current
         let chosen = index % deck.count
         let last = deck.count - 1
 

@@ -1,6 +1,6 @@
 use default
 
-sylvester(count: int) -> Pipe[bigint] is
+sylvester(count: int) -> bigint{} is
     let term mut = 2n
 
     for _ in 1::count do

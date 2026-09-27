@@ -12,7 +12,7 @@ search(base: string, today: DateTime, wanted: string) is
     for back in (0..10) |> reverse() do
         let url =
             "{base}"
-            "{today.add_days(cast double(-back)):yyyy-MM-dd}.tcl"
+            "{today.add_days(double(-back)):yyyy-MM-dd}.tcl"
         let log = client.get_string_async(url).result
 
         write_line(url)

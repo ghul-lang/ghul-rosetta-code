@@ -70,9 +70,9 @@ let top = 34.0
 let split = 16.0
 
 row_y(row: int) -> double =>
-    top + cast double(row - 1) * cell + if row >= 8 then split else 0.0 fi
+    top + double(row - 1) * cell + if row >= 8 then split else 0.0 fi
 
-column_x(column: int) -> double => left + cast double(column - 1) * cell
+column_x(column: int) -> double => left + double(column - 1) * cell
 
 box(x: double, y: double, width: double, height: double)
     -> List[(x: double, y: double)]
@@ -95,8 +95,8 @@ si
 let table = symbols()
 
 let image = IMAGE(
-    cast int(column_x(18) + cell + 12.0),
-    cast int(row_y(9) + cell + 12.0))
+    int(column_x(18) + cell + 12.0),
+    int(row_y(9) + cell + 12.0))
 
 let cells = SHAPES()
 
@@ -186,7 +186,7 @@ let key = ["s", "p", "d", "f"]
 let key_y = row_y(1) + cell * 0.5
 
 for entry in key |> index() do
-    let x = column_x(4) + cast double(entry.index) * 104.0
+    let x = column_x(4) + double(entry.index) * 104.0
 
     image.colour(tint(entry.value))
     image.fill_rectangle(x, key_y - 8.0, x + 18.0, key_y + 8.0)

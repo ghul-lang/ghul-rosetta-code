@@ -9,14 +9,14 @@ let d = bigint.parse("5617843187844953170308463622230283376298685")
 let block_size = 17
 
 encode(block: Collections.List[ubyte]) -> bigint =>
-    block |> reduce(0n, (total, b) => total * 256n + bigint(cast int(b)))
+    block |> reduce(0n, (total, b) => total * 256n + bigint(int(b)))
 
 decode(number: bigint) -> ubyte[] is
     let bytes = LIST[ubyte]()
     let remaining mut = number
 
     while remaining > 0n do
-        bytes.insert(0, cast ubyte(cast int(remaining % 256n)))
+        bytes.insert(0, ubyte(int(remaining % 256n)))
         remaining = remaining / 256n
     od
 

@@ -3,7 +3,7 @@ use default
 let alphabet =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
-decode(text: string) -> Pipe[ubyte] is
+decode(text: string) -> ubyte{} is
     let buffer mut = 0
     let bits mut = 0
 
@@ -17,7 +17,7 @@ decode(text: string) -> Pipe[ubyte] is
             if bits >= 8 then
                 bits = bits - 8
 
-                yield cast ubyte((buffer >> bits) & 0xFF)
+                yield ubyte((buffer >> bits) & 0xFF)
             fi
         fi
     od

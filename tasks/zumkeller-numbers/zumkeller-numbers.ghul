@@ -52,7 +52,7 @@ si
 
 column(n: int, width: int) -> string => "{n}".pad_left(width)
 
-show(heading: string, numbers: Pipe[int], per_line: int, width: int) is
+show(heading: string, numbers: int{}, per_line: int, width: int) is
     write_line(heading)
 
     for row in numbers |> chunk(per_line) do

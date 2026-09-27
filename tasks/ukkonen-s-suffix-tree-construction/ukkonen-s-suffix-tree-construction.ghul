@@ -2,10 +2,10 @@ use default
 use System.Diagnostics.Stopwatch
 
 square_root(n: bigint) -> bigint is
-    let bits = cast int(n.get_bit_length())
+    let bits = int(n.get_bit_length())
 
     if bits <= 50 then
-        return bigint(System.Math.sqrt(cast double(n)))
+        return bigint(System.Math.sqrt(double(n)))
     fi
 
     let shift = bits / 4

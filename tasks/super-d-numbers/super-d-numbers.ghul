@@ -1,9 +1,9 @@
 use default
 
-super_d(d: int) -> Pipe[long] =>
-    let run = "".pad_left(d, cast char(cast int('0') + d)) in
+super_d(d: int) -> long{} =>
+    let run = "".pad_left(d, char(int('0') + d)) in
     from(1)
-        |> map(n => cast long(n))
+        |> map(n => long(n))
         |> filter(n =>
             let value = bigint(d) * bigint.pow(bigint(n), d) in
             value.to_string().contains(run))

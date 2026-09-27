@@ -4,9 +4,9 @@ use Raster.IMAGE
 let size = 256
 
 shade(value: int, phase: double) -> ubyte =>
-    cast ubyte(
+    ubyte(
         127.5D * (1.0D - Math.cos(
-            2.0D * Math.pi * cast double(value) / 256.0D + phase
+            2.0D * Math.pi * double(value) / 256.0D + phase
         ))
     )
 

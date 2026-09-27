@@ -1,13 +1,13 @@
 use default
 
 kaprekar(n: int) -> bool => (
-    let square = cast long(n) * cast long(n)
+    let square = long(n) * long(n)
     let power mut = 10L
 
     let matched = while power <= square do
         let right = square % power
 
-        if right > 0L /\ square / power + right == cast long(n) then
+        if right > 0L /\ square / power + right == long(n) then
             break true
         fi
 

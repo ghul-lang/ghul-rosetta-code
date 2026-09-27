@@ -85,7 +85,7 @@ class DOUBLY_LINKED_LIST[T] is
         added
     si
 
-    values() -> Pipe[T] is
+    values() -> T{} is
         let cursor mut = head
 
         while let node = cursor do

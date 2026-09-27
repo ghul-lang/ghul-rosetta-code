@@ -67,9 +67,9 @@ draw(image: IMAGE, angle: double) is
 
             shapes.add(
                 outline,
-                cast ubyte(70.0D * bright),
-                cast ubyte(130.0D * bright),
-                cast ubyte(210.0D * bright))
+                ubyte(70.0D * bright),
+                ubyte(130.0D * bright),
+                ubyte(210.0D * bright))
 
             outlines.add(outline)
         fi
@@ -92,7 +92,7 @@ image.view(-2.0D, -2.0D, 2.0D, 2.0D)
 let animation = ANIMATION(size, size)
 
 for frame in 0..frames do
-    let turn = cast double(frame) / cast double(frames)
+    let turn = double(frame) / double(frames)
     let angle = 2.0D * pi / 3.0D * turn
 
     draw(image, angle)

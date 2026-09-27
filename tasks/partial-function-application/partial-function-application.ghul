@@ -1,6 +1,6 @@
 use default
 
-fs(f: (int) -> int, s: Iterable[int]) -> Pipe[int] =>
+fs(f: (int) -> int, s: Iterable[int]) -> int{} =>
     s |> map(f)
 
 f1(n: int) -> int => n * 2

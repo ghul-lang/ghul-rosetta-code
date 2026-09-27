@@ -3,7 +3,7 @@ use default
 // every way to place the blocks, leftmost first, each separated by at
 // least one empty cell; yields the start position of each block
 
-placements(cells: int, blocks: List[int]) -> Pipe[List[int]] is
+placements(cells: int, blocks: List[int]) -> List[int]{} is
     if blocks.count == 0 then
         yield []
     else

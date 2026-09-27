@@ -7,9 +7,9 @@ value_of(c: char) -> int =>
     when '#' then 38
     else
         if char.is_digit(c) then
-            cast int(c) - cast int('0')
+            int(c) - int('0')
         else
-            cast int(char.to_upper(c)) - cast int('A') + 10
+            int(char.to_upper(c)) - int('A') + 10
         fi
     esac
 

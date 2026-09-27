@@ -7,7 +7,7 @@ render(value: long, base: int) -> string is
     let remaining mut = value
 
     while remaining > 0L do
-        let digit = cast int(remaining % cast(base))
+        let digit = int(remaining % cast(base))
 
         digits.insert(0, digit_symbols[digit])
         remaining = remaining / cast(base)
@@ -16,11 +16,11 @@ render(value: long, base: int) -> string is
     return string(digits.to_array())
 si
 
-esthetic(base: int) -> Pipe[long] is
+esthetic(base: int) -> long{} is
     let pending = Queue()
 
     for digit in 1..base do
-        pending.enqueue((cast long(digit), digit))
+        pending.enqueue((long(digit), digit))
     od
 
     while true do

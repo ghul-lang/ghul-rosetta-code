@@ -1,6 +1,6 @@
 use default
 
-triples(n: int) -> Pipe[(int, int, int)] is
+triples(n: int) -> (int, int, int){} is
     for a in 1::n do
         for b in a::n do
             for c in b::n do

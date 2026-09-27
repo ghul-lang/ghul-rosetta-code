@@ -4,14 +4,14 @@ use System.Math.*
 fivenum(xs_raw: double[]) -> double[] is
     let xs = xs_raw |> sort() |> collect()
     let n = xs.count
-    let n4 = floor((cast double(n) + 3.0) / 2.0) / 2.0
+    let n4 = floor((double(n) + 3.0) / 2.0) / 2.0
     let d = [
-        1.0, n4, (cast double(n) + 1.0) / 2.0,
-        cast double(n) + 1.0 - n4, cast double(n)
+        1.0, n4, (double(n) + 1.0) / 2.0,
+        double(n) + 1.0 - n4, double(n)
     ]
     midpoint(di: double) -> double is
-        let lo = xs[cast int(floor(di)) - 1]
-        let hi = xs[cast int(ceiling(di)) - 1]
+        let lo = xs[int(floor(di)) - 1]
+        let hi = xs[int(ceiling(di)) - 1]
 
         0.5 * (lo + hi)
     si

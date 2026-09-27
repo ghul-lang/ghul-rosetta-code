@@ -16,7 +16,7 @@ for text in strings do
         let c = text[first]
 
         write_line(
-            "    not unique: '{c}' (0x{cast int(c):X2}) "
+            "    not unique: '{c}' (0x{int(c):X2}) "
             "is at positions {first + 1} and {second + 1}")
     else
         write_line("    all unique")

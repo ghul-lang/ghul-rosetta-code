@@ -40,7 +40,7 @@ jaro(left: string, right: string) -> double is
         |> filter(i => matched_left[i] != matched_right[i])
         |> count()
 
-    let matches = cast double(match_count)
+    let matches = double(match_count)
     let half_transpositions = cast(transposed) / 2.0D
 
     return (matches / cast(left.length) +

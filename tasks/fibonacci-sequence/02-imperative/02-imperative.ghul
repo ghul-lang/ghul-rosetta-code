@@ -1,6 +1,6 @@
 use default
 
-fibonacci() -> Pipe[int] is
+fibonacci() -> int{} is
     let previous mut = 0
     let current mut = 1
     do

@@ -71,10 +71,10 @@ let image =
 
 wall(from_x: int, from_y: int, to_x: int, to_y: int) is
     image.line(
-        cast double(margin + from_x * cell),
-        cast double(margin + from_y * cell),
-        cast double(margin + to_x * cell),
-        cast double(margin + to_y * cell)
+        double(margin + from_x * cell),
+        double(margin + from_y * cell),
+        double(margin + to_x * cell),
+        double(margin + to_y * cell)
     )
 si
 

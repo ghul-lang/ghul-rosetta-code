@@ -15,7 +15,7 @@ from_hsv(hue: double, saturation: double, value: double) -> Colour =>
          (1.0D - saturation * (1.0D - sextant + floor(sextant)))
 
      let channels =
-         case cast int(floor(sextant)) % 6
+         case int(floor(sextant)) % 6
          when 0 then (red = value, green = climbing, blue = rising)
          when 1 then (red = falling, green = value, blue = rising)
          when 2 then (red = rising, green = value, blue = climbing)
@@ -24,9 +24,9 @@ from_hsv(hue: double, saturation: double, value: double) -> Colour =>
          else (red = value, green = rising, blue = falling)
          esac
 
-     (red = cast ubyte(round(255.0D * channels.red)),
-      green = cast ubyte(round(255.0D * channels.green)),
-      blue = cast ubyte(round(255.0D * channels.blue))))
+     (red = ubyte(round(255.0D * channels.red)),
+      green = ubyte(round(255.0D * channels.green)),
+      blue = ubyte(round(255.0D * channels.blue))))
 
 let size = 480
 let radius = 224.0D
@@ -35,12 +35,12 @@ let image = IMAGE(size, size)
 
 image.clear(24ub, 24ub, 28ub)
 
-let centre = 0.5D * cast double(size)
+let centre = 0.5D * double(size)
 
 for pixel_y in 0..size do
     for pixel_x in 0..size do
-        let across = cast double(pixel_x) + 0.5D - centre
-        let down = cast double(pixel_y) + 0.5D - centre
+        let across = double(pixel_x) + 0.5D - centre
+        let down = double(pixel_y) + 0.5D - centre
         let away = sqrt(across * across + down * down)
         let covered =
             min(1.0D, max(0.0D, radius + 0.5D - away))
@@ -63,7 +63,7 @@ image.write("wheel.png")
 write_line("hue   saturation 1, value 1")
 
 for hue in 0::5 do
-    let degrees = cast double(hue) * 60.0D
+    let degrees = double(hue) * 60.0D
     let shade = from_hsv(degrees, 1.0D, 1.0D)
 
     write_line(

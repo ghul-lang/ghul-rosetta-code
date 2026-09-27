@@ -1,6 +1,6 @@
 use default
 
-combos[T](items: List[T], k: int) -> Ghul.Pipes.Pipe[LIST[T]] is
+combos[T](items: List[T], k: int) -> LIST[T]{} is
     if k == 0 then
         yield LIST()
     else

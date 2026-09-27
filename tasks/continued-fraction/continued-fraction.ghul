@@ -24,14 +24,14 @@ si
 let sqrt2 = evaluate(n => if n == 0 then 1.0 else 2.0 fi, n => 1.0, 10000)
 
 let e = evaluate(
-    n => if n == 0 then 2.0 else cast double(n) fi,
-    n => if n == 1 then 1.0 else cast double(n - 1) fi,
+    n => if n == 0 then 2.0 else double(n) fi,
+    n => if n == 1 then 1.0 else double(n - 1) fi,
     10000
 )
 
 let pi = evaluate(
     n => if n == 0 then 3.0 else 6.0 fi,
-    n => cast double((2 * n - 1) * (2 * n - 1)),
+    n => double((2 * n - 1) * (2 * n - 1)),
     10000
 )
 

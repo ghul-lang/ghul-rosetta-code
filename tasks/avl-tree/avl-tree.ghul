@@ -70,7 +70,7 @@ insert(tree: Tree, key: int) -> Tree =>
     else node(Tree.EMPTY, key, Tree.EMPTY)
     esac
 
-in_order(tree: Tree) -> Pipe[int] is
+in_order(tree: Tree) -> int{} is
     if let n: Tree.NODE = tree then
         yield in in_order(n.left)
         yield n.key

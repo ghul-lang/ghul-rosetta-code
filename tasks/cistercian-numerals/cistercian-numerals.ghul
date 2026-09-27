@@ -53,15 +53,15 @@ draw(image: IMAGE, number: int, left: double) is
     image.text(centre, 12.0D, 12.0D, "{number}", Anchor.CENTRE)
 si
 
-let width = cast int(cell) * numbers.count
+let width = int(cell) * numbers.count
 let image = IMAGE(width, 130)
 
-image.view(0.0D, 0.0D, cast double(width), 130.0D)
+image.view(0.0D, 0.0D, double(width), 130.0D)
 image.clear(250ub, 247ub, 238ub)
 image.colour(60ub, 40ub, 30ub)
 
 for (i, number) in numbers |> index() do
-    draw(image, number, cell * cast double(i))
+    draw(image, number, cell * double(i))
 od
 
 write_line("the numerals for {numbers |> join(", ")}")

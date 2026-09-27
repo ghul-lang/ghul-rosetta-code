@@ -39,7 +39,7 @@ groups(value: long) -> LIST[int] is
     let rest mut = value
 
     while rest > 0L do
-        parts.add(cast int(rest % 1000L))
+        parts.add(int(rest % 1000L))
 
         rest = rest / 1000L
     od

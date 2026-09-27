@@ -17,14 +17,14 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
             |> join("")
     si
 
-    clean(text: string) -> Pipe[char] =>
+    clean(text: string) -> char{} =>
         text.to_upper_invariant()
         |> filter(c => c >= 'A' /\ c <= 'Z')
         |> filter(c => alphabet != Alphabet.NO_Q \/ c != 'Q')
         |> map(c =>
             if alphabet == Alphabet.J_IS_I /\ c == 'J' then 'I' else c fi)
 
-    digraphs(text: string) -> Pipe[(char, char)] is
+    digraphs(text: string) -> (char, char){} is
         let letters = clean(text) |> collect()
         let i mut = 0
 

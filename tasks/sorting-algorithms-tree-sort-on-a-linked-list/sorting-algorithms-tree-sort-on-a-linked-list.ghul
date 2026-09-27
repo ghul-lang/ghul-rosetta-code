@@ -37,7 +37,7 @@ build_tree(list: LinkedList) -> Tree is
     tree
 si
 
-in_order(tree: Tree) -> Ghul.Pipes.Pipe[int] is
+in_order(tree: Tree) -> int{} is
     if let (value, left, right): Tree.BRANCH = tree then
         yield in in_order(left)
         yield value

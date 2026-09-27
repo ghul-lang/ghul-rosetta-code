@@ -18,7 +18,7 @@ for a in 0..n do
     write_line(row |> join(" "))
 od
 
-quads() -> Pipe[(int, int, int, int)] is
+quads() -> (int, int, int, int){} is
     for a in 0..n do
         for b in a + 1..n do
             for c in b + 1..n do
@@ -49,7 +49,7 @@ image.view(-1.15D, -1.15D, 1.15D, 1.15D)
 image.clear(252ub, 252ub, 250ub)
 
 at(i: int) -> (x: double, y: double) =>
-    let turn = cast double(i) / cast double(n) in
+    let turn = double(i) / double(n) in
     let angle = pi / 2.0D - 2.0D * pi * turn in
     (x = cos(angle), y = sin(angle))
 

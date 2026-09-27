@@ -64,7 +64,7 @@ free(r: int, k: int) -> bool =>
 fits(piece: Piece, row: int, column: int) -> bool =>
     piece.cells |> all(c => free(row + c.row, column + c.column))
 
-squares(piece: Piece, row: int, column: int) -> Pipe[int] =>
+squares(piece: Piece, row: int, column: int) -> int{} =>
     piece.cells |> map(c => (row + c.row) * width + column + c.column)
 
 let current mut = draw()

@@ -1,6 +1,6 @@
 use default
 
-coefficients(p: int) -> Pipe[long] is
+coefficients(p: int) -> long{} is
     let binomial mut = 1L
 
     for k in 0::p do

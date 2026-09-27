@@ -1,7 +1,7 @@
 use default
 
 pell(n: int) -> (x: bigint, y: bigint) is
-    let root = cast int(System.Math.sqrt(cast double(n)))
+    let root = int(System.Math.sqrt(double(n)))
     let (y, z, r) mut = (root, 1, root * 2)
     let (e1, e2) mut = (1n, 0n)
     let (f1, f2) mut = (0n, 1n)

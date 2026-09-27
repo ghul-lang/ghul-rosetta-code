@@ -32,7 +32,7 @@ let clock = Stopwatch.start_new()
 for second in 1::seconds do
     let frames mut = 0
 
-    while clock.elapsed.total_seconds < cast double(second) do
+    while clock.elapsed.total_seconds < double(second) do
         draw_noise()
         frames = frames + 1
 

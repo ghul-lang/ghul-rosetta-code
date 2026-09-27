@@ -10,7 +10,7 @@ let current mut = 1n
 
 for _ in 1::1000 do
     let first = current.to_string()[0]
-    let digit = cast int(first) - cast int('0')
+    let digit = int(first) - int('0')
     leading_counts[digit] = leading_counts[digit] + 1
 
     let next = previous + current
@@ -19,10 +19,10 @@ for _ in 1::1000 do
 od
 
 let actual = (1::9)
-    |> map(digit => cast double(leading_counts[digit]) / 10.0)
+    |> map(digit => double(leading_counts[digit]) / 10.0)
 
 let expected = (1::9)
-    |> map(digit => 100.0 * log10(1.0 + 1.0 / cast double(digit)))
+    |> map(digit => 100.0 * log10(1.0 + 1.0 / double(digit)))
     |> collect()
 
 let observed_colour = (red = 40ub, green = 90ub, blue = 180ub)
@@ -44,7 +44,7 @@ image.colour(215ub, 215ub, 215ub)
 image.stroke(1.0)
 
 for step in 0::6 do
-    let y = cast double(step * 5)
+    let y = double(step * 5)
 
     image.line(0.3, y, 9.7, y)
     image.text(0.15, y - 0.4, 12.0, "{step * 5}%", Anchor.RIGHT)
@@ -55,7 +55,7 @@ image.line(0.3, 0.0, 9.7, 0.0)
 
 for entry in actual |> index() do
     let digit = entry.index + 1
-    let middle = cast double(digit)
+    let middle = double(digit)
 
     image.colour(observed_colour)
     box(middle - 0.36, 0.0, middle - 0.03, entry.value)
@@ -76,7 +76,7 @@ let keys = [
 ]
 
 for key in keys |> index() do
-    let y = 31.0 - 2.6 * cast double(key.index)
+    let y = 31.0 - 2.6 * double(key.index)
 
     image.colour(key.value.shade)
     box(3.8, y - 0.55, 4.15, y + 0.55)

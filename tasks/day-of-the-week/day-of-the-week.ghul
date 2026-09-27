@@ -1,7 +1,7 @@
 use default
 use System
 
-christmas_days() -> Pipe[DateTime] is
+christmas_days() -> DateTime{} is
     for year in 2008::2121 do
         yield DateTime(year, 12, 25)
     od

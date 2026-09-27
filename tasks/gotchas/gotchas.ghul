@@ -17,15 +17,15 @@ let colours = [
 write_line("{colours.count} colours: {colours}")
 
 // byte is signed, ubyte unsigned
-write_line("byte {cast byte(200)}, ubyte {cast ubyte(200)}")
+write_line("byte {byte(200)}, ubyte {ubyte(200)}")
 
-// a pipe resumes where the last read stopped, and restarts once exhausted
+// every read of a pipe starts from the beginning and runs its stages again
 let evens = [1, 2, 3, 4, 5, 6] |> filter(x => x % 2 == 0)
 
 write_line("first even: {evens |> first()}")
 
 for e in evens do
-    write_line("next even: {e}")
+    write_line("even again: {e}")
 od
 
 write_line("all evens: {evens}")

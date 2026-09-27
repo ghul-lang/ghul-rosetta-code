@@ -8,7 +8,7 @@ si
 use Tree.LEAF
 use Tree.NODE
 
-fringe(tree: Tree) -> Pipe[int] is
+fringe(tree: Tree) -> int{} is
     if isa LEAF(tree) then
         yield tree.value
     elif isa NODE(tree) then

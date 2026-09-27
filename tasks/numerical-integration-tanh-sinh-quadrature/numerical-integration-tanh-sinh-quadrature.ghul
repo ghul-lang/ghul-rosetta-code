@@ -12,7 +12,7 @@ tanh_sinh(
     let quarter_turn = pi / 2.0
 
     weighted(i: int) -> double =>
-        let t = cast double(i) * h in
+        let t = double(i) * h in
         let s = sinh(t) * quarter_turn in
         let cosh_s = cosh(s) in
         let slope = cosh(t) * quarter_turn / (cosh_s * cosh_s) in

@@ -1,7 +1,7 @@
 use default
 use System.Text.StringBuilder
 
-wrapped(text: string, width: int) -> Pipe[string] is
+wrapped(text: string, width: int) -> string{} is
     let line = StringBuilder()
 
     for word in text.split([' ']) |> filter(word => word.length > 0) do

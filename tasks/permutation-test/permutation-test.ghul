@@ -31,10 +31,10 @@ si
 
 choose(0, n, 0)
 
-let groupings = cast double(at_most + above)
+let groupings = double(at_most + above)
 
 write_line("{at_most + above} alternative groupings")
-percent(count: int) -> double => 100.0 * cast double(count) / groupings
+percent(count: int) -> double => 100.0 * double(count) / groupings
 
 write_line("difference <= observed: {percent(at_most):F4}%")
 write_line("difference  > observed: {percent(above):F4}%")

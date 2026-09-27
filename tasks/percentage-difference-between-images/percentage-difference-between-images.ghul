@@ -8,14 +8,14 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = cast double(y) / 80.0D
+        let t = double(y) / 80.0D
 
         image.colour(
-            cast ubyte(40.0D + 200.0D * t),
-            cast ubyte(70.0D + 100.0D * t),
-            cast ubyte(160.0D - 60.0D * t))
+            ubyte(40.0D + 200.0D * t),
+            ubyte(70.0D + 100.0D * t),
+            ubyte(160.0D - 60.0D * t))
         image.fill_rectangle(
-            0.0D, cast double(y), 160.0D, cast double(y + 1))
+            0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -42,7 +42,7 @@ scene() -> IMAGE is
     image
 si
 
-coarse(value: ubyte) -> ubyte => cast ubyte(cast int(value) / 16 * 16 + 8)
+coarse(value: ubyte) -> ubyte => ubyte(int(value) / 16 * 16 + 8)
 
 reduced(image: IMAGE) -> IMAGE is
     let copy = IMAGE(image.width, image.height)
@@ -60,7 +60,7 @@ reduced(image: IMAGE) -> IMAGE is
 si
 
 gap(a: ubyte, b: ubyte) -> long =>
-    cast long(Math.abs(cast int(a) - cast int(b)))
+    long(Math.abs(int(a) - int(b)))
 
 difference(a: IMAGE, b: IMAGE) -> double is
     assert a.width == b.width /\ a.height == b.height
@@ -78,9 +78,9 @@ difference(a: IMAGE, b: IMAGE) -> double is
         od
     od
 
-    let most = 255.0D * 3.0D * cast double(a.width * a.height)
+    let most = 255.0D * 3.0D * double(a.width * a.height)
 
-    100.0D * cast double(total) / most
+    100.0D * double(total) / most
 si
 
 let original = scene()

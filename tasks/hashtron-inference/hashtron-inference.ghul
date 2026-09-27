@@ -16,11 +16,11 @@ hash(n: uint, salt: uint, max: uint) -> uint is
 
     m = m + salt
 
-    cast uint((cast ulong(m) * cast ulong(max)) >> 32)
+    uint((ulong(m) * ulong(max)) >> 32)
 si
 
 infer_bit(command: uint, bit: int, program: List[Stage]) -> bool =>
-    let input = command | (cast uint(bit) << 16) in
+    let input = command | (uint(bit) << 16) in
     let first_stage = program[0] in
     let start = (
         input = hash(input, first_stage.salt, first_stage.max),
@@ -51,7 +51,7 @@ let square_root_program = System.Text.RegularExpressions.Regex
     |> collect()
 
 let roots = 0..256
-    |> map(n => inference(cast uint(n), 4, square_root_program))
+    |> map(n => inference(uint(n), 4, square_root_program))
     |> collect()
 
 for row in roots |> chunk(16) do
@@ -59,6 +59,6 @@ for row in roots |> chunk(16) do
 od
 
 let correct = 0..256
-    |> all(n => roots[n] == cast ulong(System.Math.sqrt(cast double(n))))
+    |> all(n => roots[n] == ulong(System.Math.sqrt(double(n))))
 
 write_line("every square root correct: {correct}")

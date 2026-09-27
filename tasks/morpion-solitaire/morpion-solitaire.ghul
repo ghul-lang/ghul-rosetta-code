@@ -142,8 +142,8 @@ let image = IMAGE(
     (high_x - low_x + 2) * cell, (high_y - low_y + 2) * cell)
 
 image.view(
-    cast double(low_x) - 1.0D, cast double(low_y) - 1.0D,
-    cast double(high_x) + 1.0D, cast double(high_y) + 1.0D)
+    double(low_x) - 1.0D, double(low_y) - 1.0D,
+    double(high_x) + 1.0D, double(high_y) + 1.0D)
 
 image.clear(255ub, 255ub, 255ub)
 
@@ -152,14 +152,14 @@ image.stroke(1.0D)
 
 for x in low_x - 1::high_x + 1 do
     image.line(
-        cast double(x), cast double(low_y - 1),
-        cast double(x), cast double(high_y + 1))
+        double(x), double(low_y - 1),
+        double(x), double(high_y + 1))
 od
 
 for y in low_y - 1::high_y + 1 do
     image.line(
-        cast double(low_x - 1), cast double(y),
-        cast double(high_x + 1), cast double(y))
+        double(low_x - 1), double(y),
+        double(high_x + 1), double(y))
 od
 
 image.colour(40ub, 90ub, 170ub)
@@ -171,24 +171,24 @@ for m in played do
     let from_y = m.y - m.k * step.dy
 
     image.line(
-        cast double(from_x), cast double(from_y),
-        cast double(from_x + 4 * step.dx),
-        cast double(from_y + 4 * step.dy))
+        double(from_x), double(from_y),
+        double(from_x + 4 * step.dx),
+        double(from_y + 4 * step.dy))
 od
 
 image.colour(20ub, 20ub, 20ub)
 
 for (x, y) in start do
-    image.dot(cast double(x), cast double(y), 7.0D)
+    image.dot(double(x), double(y), 7.0D)
 od
 
 for (m, n) in played |> index() |> map(im => (im.value, im.index + 1)) do
     image.colour(255ub, 255ub, 255ub)
-    image.dot(cast double(m.x), cast double(m.y), 12.0D)
+    image.dot(double(m.x), double(m.y), 12.0D)
     image.colour(200ub, 40ub, 40ub)
-    image.circle(cast double(m.x), cast double(m.y), 0.36D)
+    image.circle(double(m.x), double(m.y), 0.36D)
     image.text(
-        cast double(m.x), cast double(m.y) - 0.16D, 12.0D, "{n}",
+        double(m.x), double(m.y) - 0.16D, 12.0D, "{n}",
         Raster.Anchor.CENTRE)
 od
 

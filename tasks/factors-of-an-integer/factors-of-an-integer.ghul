@@ -1,6 +1,6 @@
 use default
 
-factors(n: int) -> Ghul.Pipes.Pipe[int] =>
+factors(n: int) -> int{} =>
     1::n |> filter(d => n % d == 0)
 
 for n in [1, 45, 53, 64, 1024] do

@@ -25,7 +25,7 @@ let prime = (
 )
 
 term(p: int) -> double =>
-    let reciprocal = 1.0 / cast double(p) in
+    let reciprocal = 1.0 / double(p) in
     double.log(1.0 - reciprocal) + reciprocal
 
 let total mut = gamma

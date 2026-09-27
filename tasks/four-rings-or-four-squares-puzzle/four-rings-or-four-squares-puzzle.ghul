@@ -5,7 +5,7 @@ use Raster.SHAPES
 
 use Solution = (a: int, b: int, c: int, d: int, e: int, f: int, g: int)
 
-solutions(low: int, high: int, unique: bool) -> Pipe[Solution] is
+solutions(low: int, high: int, unique: bool) -> Solution{} is
     for a in low::high do
         for b in low::high do
             let total = a + b
@@ -54,7 +54,7 @@ let step = 100.0
 let margin = 40.0
 let drop = 60.0
 
-left_of(at: int) -> double => margin + cast double(at) * step
+left_of(at: int) -> double => margin + double(at) * step
 
 top_of(at: int) -> double => margin + if at % 2 == 0 then 0.0 else drop fi
 
@@ -76,8 +76,8 @@ si
 
 draw(s: Solution) is
     let image = IMAGE(
-        cast int(left_of(3) + side + margin),
-        cast int(margin + drop + side + margin + 10.0))
+        int(left_of(3) + side + margin),
+        int(margin + drop + side + margin + 10.0))
 
     let overlaps = SHAPES()
 

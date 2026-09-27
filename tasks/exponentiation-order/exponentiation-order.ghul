@@ -6,7 +6,7 @@ use default
 // (5 ** 3) ** 2.
 
 **(base: bigint, exponent: bigint) -> bigint =>
-    bigint.pow(base, cast int(exponent))
+    bigint.pow(base, int(exponent))
 
 write_line("5 ** 3 ** 2   = {5n ** 3n ** 2n}")
 write_line("(5 ** 3) ** 2 = {(5n ** 3n) ** 2n}")

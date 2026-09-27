@@ -2,7 +2,7 @@ use default
 
 use Matrix = (a1: long, a: long, b1: long, b: long)
 
-r2cf(numerator: long, denominator: long) -> Pipe[long] is
+r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator
     let n2 mut = denominator
 
@@ -15,9 +15,9 @@ r2cf(numerator: long, denominator: long) -> Pipe[long] is
     od
 si
 
-square_root_of_two() -> Pipe[long] => [1L] |> cat(repeat(2L))
+square_root_of_two() -> long{} => [1L] |> cat(repeat(2L))
 
-transform(matrix: Matrix, source: Iterable[long]) -> Pipe[long] is
+transform(matrix: Matrix, source: Iterable[long]) -> long{} is
     let (a1, a, b1, b) mut = matrix
     let terms = source.iterator
 

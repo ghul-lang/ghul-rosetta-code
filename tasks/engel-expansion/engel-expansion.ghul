@@ -13,7 +13,7 @@ power[T: INumber[T]](base: T, exponent: int) -> T =>
         base * power(base, exponent - 1)
     fi
 
-engel(numerator: bigint, denominator: bigint) -> Pipe[bigint] is
+engel(numerator: bigint, denominator: bigint) -> bigint{} is
     let current mut = numerator
 
     while current > 0n do

@@ -17,7 +17,7 @@ digest(path: string) -> string =>
     System.Convert.to_hex_string(SHA256.hash_data(bytes))
 
 same_contents(root: string, size: long, paths: Iterable[string])
-    -> Pipe[Group] =>
+    -> Group{} =>
     paths
         |> group_by(digest)
         |> map((_, same) =>

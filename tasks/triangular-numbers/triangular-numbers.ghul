@@ -6,7 +6,7 @@ binomial(upper: int, lower: int) -> bigint =>
         |> reduce(1n, (running, step) =>
             running * bigint(upper - lower + step) / bigint(step))
 
-simplex(dimension: int) -> Pipe[bigint] =>
+simplex(dimension: int) -> bigint{} =>
     from(1) |> map(index => binomial(index + dimension - 1, dimension))
 
 triangular_root(value: double) -> double =>
@@ -46,7 +46,7 @@ let roots = [(name = "triangular", of = triangular_root),
     |> each(value => (
         write_line("roots of {value}:")
 
-        let as_real = cast double(value)
+        let as_real = double(value)
 
         roots
             |> each(root =>

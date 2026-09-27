@@ -7,7 +7,7 @@ is_prime(value: int) -> bool =>
         |> take_while(divisor => divisor * divisor <= value)
         |> all(divisor => value % divisor != 0))
 
-prime_digit_numbers() -> Pipe[int] is
+prime_digit_numbers() -> int{} is
     let level mut = prime_digits |> collect()
 
     do
@@ -19,7 +19,7 @@ prime_digit_numbers() -> Pipe[int] is
     od
 si
 
-smarandache() -> Pipe[int] => prime_digit_numbers() |> filter(is_prime)
+smarandache() -> int{} => prime_digit_numbers() |> filter(is_prime)
 
 write_line("the first 25 Smarandache prime-digital primes:")
 

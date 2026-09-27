@@ -19,7 +19,7 @@ is_square(n: long) -> bool is
         return false
     fi
 
-    let root mut = cast long(System.Math.sqrt(cast double(n)))
+    let root mut = long(System.Math.sqrt(double(n)))
 
     while root * root > n do
         root = root - 1L
@@ -56,10 +56,10 @@ let block mut = 10L
 
 while block < limit do
     for pair in starts_and_ends do
-        let start = block * cast long(pair.first)
+        let start = block * long(pair.first)
         let stop = System.Math.min(start + block, limit)
 
-        let first_candidate = start + cast long(pair.last)
+        let first_candidate = start + long(pair.last)
 
         let n mut =
             if first_candidate < start then start else first_candidate fi

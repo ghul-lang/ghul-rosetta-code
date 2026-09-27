@@ -71,10 +71,10 @@ let image =
 
 wall(from_x: int, from_y: int, to_x: int, to_y: int) is
     image.line(
-        cast double(margin + from_x * cell),
-        cast double(margin + from_y * cell),
-        cast double(margin + to_x * cell),
-        cast double(margin + to_y * cell)
+        double(margin + from_x * cell),
+        double(margin + from_y * cell),
+        double(margin + to_x * cell),
+        double(margin + to_y * cell)
     )
 si
 
@@ -106,7 +106,7 @@ open(from: int, to: int) -> bool =>
     else down_open[to]
     fi
 
-neighbours(i: int) -> Pipe[int] =>
+neighbours(i: int) -> int{} =>
     directions
         |> map(d =>
             (column = i % columns + d.across, row = i / columns + d.down))
@@ -147,8 +147,8 @@ write_line("{path.count} cells from the top left to the bottom right")
 
 centre(i: int) -> (x: double, y: double) =>
     (
-        x = cast double(margin + (i % columns) * cell + cell / 2),
-        y = cast double(margin + (i / columns) * cell + cell / 2))
+        x = double(margin + (i % columns) * cell + cell / 2),
+        y = double(margin + (i / columns) * cell + cell / 2))
 
 image.colour(210ub, 50ub, 40ub)
 image.stroke(4.0D)

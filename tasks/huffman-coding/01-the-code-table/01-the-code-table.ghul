@@ -38,7 +38,7 @@ build_tree(leaves: List[Huffman]) -> Huffman is
 si
 
 codes(node: Huffman, prefix: string)
-    -> Pipe[(symbol: char, weight: int, code: string)]
+    -> (symbol: char, weight: int, code: string){}
 is
     if let leaf: LEAF = node then
         let code = if prefix.length == 0 then "0" else prefix fi
@@ -73,7 +73,7 @@ let table =
         if left.weight != right.weight then
             right.weight - left.weight
         else
-            cast int(left.symbol) - cast int(right.symbol)
+            int(left.symbol) - int(right.symbol)
         fi)
 
 write_line("symbol  weight  code")

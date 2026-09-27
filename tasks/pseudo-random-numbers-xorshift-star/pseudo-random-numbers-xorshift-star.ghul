@@ -15,11 +15,11 @@ class XORSHIFT_STAR is
         x = x ^ (x >> 27)
         _state = x
 
-        cast uint((x * 0x2545F4914F6CDD1Dul) >> 32)
+        uint((x * 0x2545F4914F6CDD1Dul) >> 32)
     si
 
     next_float() -> double =>
-        cast double(next_int()) / 4_294_967_296.0
+        double(next_int()) / 4_294_967_296.0
 si
 
 let first = XORSHIFT_STAR(1234567ul)
@@ -32,7 +32,7 @@ let generator = XORSHIFT_STAR(987654321ul)
 let counts = repeat(0, 5) |> collect_mutable()
 
 for _ in 1::100_000 do
-    let bucket = cast int(generator.next_float() * 5.0)
+    let bucket = int(generator.next_float() * 5.0)
 
     counts[bucket] = counts[bucket] + 1
 od

@@ -11,7 +11,7 @@ balanced(brackets: string) -> bool => (
     level == 0
 )
 
-arrangements(opens: int, closes: int) -> Pipe[string] is
+arrangements(opens: int, closes: int) -> string{} is
     if opens == 0 /\ closes == 0 then
         yield ""
     else

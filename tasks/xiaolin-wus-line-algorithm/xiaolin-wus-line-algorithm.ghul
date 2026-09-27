@@ -25,8 +25,8 @@ endpoint(
     let ends_at = round(x)
     let height = y + gradient * (ends_at - x)
 
-    let column = cast int(ends_at)
-    let base = cast int(floor(height))
+    let column = int(ends_at)
+    let base = int(floor(height))
 
     mark(column, base, steep, rest(height) * gap)
     mark(column, base + 1, steep, fraction(height) * gap)
@@ -64,7 +64,7 @@ line(from_x: double, from_y: double, to_x: double, to_y: double) is
     let height mut = first.height + gradient
 
     for column in first.column + 1..last.column do
-        let base = cast int(floor(height))
+        let base = int(floor(height))
 
         mark(column, base, steep, rest(height))
         mark(column, base + 1, steep, fraction(height))
@@ -75,7 +75,7 @@ si
 
 for spoke in 0..13 do
     let angle =
-        pi * (cast double(spoke) / 12.0D - 0.5D)
+        pi * (double(spoke) / 12.0D - 0.5D)
 
     line(
         10.0D, 150.0D,

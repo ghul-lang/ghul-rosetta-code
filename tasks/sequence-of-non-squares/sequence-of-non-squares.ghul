@@ -2,10 +2,10 @@ use default
 use System.Math.*
 
 non_square(n: int) -> int =>
-    n + cast int(floor(0.5 + sqrt(cast double(n))))
+    n + int(floor(0.5 + sqrt(double(n))))
 
 is_square(n: int) -> bool =>
-    let root = cast int(sqrt(cast double(n))) in
+    let root = int(sqrt(double(n))) in
     root * root == n \/ (root + 1) * (root + 1) == n
 
 write_line(1::22 |> map(non_square) |> join(" "))

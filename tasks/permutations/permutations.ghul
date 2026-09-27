@@ -1,6 +1,6 @@
 use default
 
-permutations(items: LIST[int]) -> Pipe[LIST[int]] is
+permutations(items: LIST[int]) -> LIST[int]{} is
     if items.count == 0 then
         yield LIST()
     else

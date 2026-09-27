@@ -45,7 +45,7 @@ si
 next_prime(n: bigint) -> bigint =>
     from(0) |> map(k => n + bigint(k)) |> find(is_probable_prime)!
 
-reciprocal_primes() -> Pipe[bigint] is
+reciprocal_primes() -> bigint{} is
     let numerator mut = 1n
     let denominator mut = 1n
 

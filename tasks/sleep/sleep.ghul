@@ -15,7 +15,7 @@ elapsed.stop()
 
 write_line("Awake!")
 
-assert elapsed.elapsed_milliseconds >= cast long(requested)
+assert elapsed.elapsed_milliseconds >= long(requested)
     else "the thread woke early"
 
 write_line("slept for at least {requested} milliseconds")

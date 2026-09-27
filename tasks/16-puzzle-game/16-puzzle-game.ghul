@@ -30,7 +30,7 @@ apply(command: string) -> bool is
         return false
     fi
 
-    let n = cast int(command[1]) - cast int('1')
+    let n = int(command[1]) - int('1')
 
     if n < 0 \/ n >= size then
         return false

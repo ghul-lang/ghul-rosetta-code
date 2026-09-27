@@ -46,7 +46,7 @@ si
 digit_at(bits: long, position: int) -> char =>
     if (bits >> position) & 1L == 1L then '2' else '1' fi
 
-one_two_numbers(digits: int) -> Pipe[string] =>
+one_two_numbers(digits: int) -> string{} =>
     0L..(1L << digits)
         |> map(bits =>
             string(0..digits

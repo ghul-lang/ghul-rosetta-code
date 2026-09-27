@@ -17,7 +17,7 @@ let leaps =
 at(square: Square) -> int => square.rank * size + square.file
 
 named(square: Square) -> string =>
-    "{cast char(cast int('a') + square.file)}{square.rank + 1}"
+    "{char(int('a') + square.file)}{square.rank + 1}"
 
 inside(square: Square) -> bool =>
     square.file >= 0 /\ square.file < size /\
@@ -25,7 +25,7 @@ inside(square: Square) -> bool =>
 
 let visit_order = repeat(0, size * size) |> collect_mutable()
 
-onward(square: Square) -> Pipe[Square] =>
+onward(square: Square) -> Square{} =>
     leaps
         |> map(leap =>
             (file = square.file + leap.file,
@@ -85,14 +85,14 @@ let image = IMAGE(520, 520)
 image.view(-0.1D, -0.1D, 8.1D, 8.1D)
 
 middle(square: Square) -> (x: double, y: double) =>
-    (x = cast double(square.file) + 0.5D,
-     y = cast double(square.rank) + 0.5D)
+    (x = double(square.file) + 0.5D,
+     y = double(square.rank) + 0.5D)
 
 let board = SHAPES()
 
 for rank in 0..size do
     for file in 0..size do
-        let corner = (x = cast double(file), y = cast double(rank))
+        let corner = (x = double(file), y = double(rank))
 
         let cell =
             [corner,
@@ -117,7 +117,7 @@ for step in 0..tour.count - 1 do
     let to = middle(tour[step + 1])
 
     image.colour(
-        COLOUR_MAP.viridis(cast double(step) / cast double(tour.count)))
+        COLOUR_MAP.viridis(double(step) / double(tour.count)))
 
     image.line(from.x, from.y, to.x, to.y)
 od

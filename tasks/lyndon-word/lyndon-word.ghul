@@ -1,6 +1,6 @@
 use default
 
-lyndon_words(alphabet: string, n: int) -> Pipe[string] is
+lyndon_words(alphabet: string, n: int) -> string{} is
     let last = alphabet.length - 1
     let word = LIST([-1])
 

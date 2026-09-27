@@ -1,6 +1,6 @@
 use default
 
-expand(part: string) -> Pipe[int] is
+expand(part: string) -> int{} is
     let split_at = (1..part.length)
         |> find(i => part[i] == '-' /\ char.is_digit(part[i - 1]))
 

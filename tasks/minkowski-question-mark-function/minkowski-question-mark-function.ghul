@@ -30,7 +30,7 @@ question(x: double) -> double is
         let m = p + r
         let n = q + s
 
-        if x < cast double(m) / cast double(n) then
+        if x < double(m) / double(n) then
             r = m
             s = n
         else
@@ -94,7 +94,7 @@ inverse(y: double) -> double is
     for at in 0..run.count do
         let term = run[run.count - 1 - at]
 
-        x = 1.0D / (cast double(term) + x)
+        x = 1.0D / (double(term) + x)
     od
 
     x
@@ -143,7 +143,7 @@ image.colour(30ub, 70ub, 160ub)
 image.stroke(1.6D)
 image.line(
     0..1201
-        |> map(step => cast double(step) / 1200.0D)
+        |> map(step => double(step) / 1200.0D)
         |> map(x => (x = x, y = question(x)))
         |> collect())
 

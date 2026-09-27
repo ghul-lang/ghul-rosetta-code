@@ -8,7 +8,7 @@ fits(square: Square, row: int, column: int, value: int) -> bool =>
 
 completions(
     square: Square, cells: List[(int, int)], index: int
-) -> Pipe[List[List[int]]] is
+) -> List[List[int]]{} is
     if index == cells.count then
         yield square |> collect()
         return
@@ -25,7 +25,7 @@ completions(
     od
 si
 
-reduced_latin_squares(n: int) -> Pipe[List[List[int]]] =>
+reduced_latin_squares(n: int) -> List[List[int]]{} =>
     let square = 0..n
         |> map(row => 0..n
             |> map(column =>
@@ -39,7 +39,7 @@ reduced_latin_squares(n: int) -> Pipe[List[List[int]]] =>
         |> collect() in
     completions(square, cells, 0)
 
-factorial(n: int) -> long => 1::n |> reduce(1L, (f, k) => f * cast long(k))
+factorial(n: int) -> long => 1::n |> reduce(1L, (f, k) => f * long(k))
 
 let oeis = [1L, 2L, 12L, 576L, 161_280L, 812_851_200L]
 
@@ -58,7 +58,7 @@ write_line(
     "{"n",2}{"reduced",9}{"times n!(n-1)!",17}{"OEIS A002860",16}")
 
 for n in 1::6 do
-    let reduced = cast long(reduced_latin_squares(n) |> count())
+    let reduced = long(reduced_latin_squares(n) |> count())
     let total = reduced * factorial(n) * factorial(n - 1)
 
     write_line("{n,2}{reduced,9}{total,17}{oeis[n - 1],16}")

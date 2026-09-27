@@ -1,6 +1,6 @@
 use default
 
-repeat(form: string, times: int) -> Pipe[string] is
+repeat(form: string, times: int) -> string{} is
     for _ in 1::times do
         yield form
     od

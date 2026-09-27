@@ -12,15 +12,15 @@ bucket(size: long) -> int =>
     if size == 0L then
         0
     else
-        cast int(log10(cast double(size))) + 1
+        int(log10(double(size))) + 1
     fi
 
 label(bucket: int) -> string =>
     if bucket == 0 then
         "empty"
     else
-        "{pow(10.0, cast double(bucket - 1))} to "
-        "{pow(10.0, cast double(bucket)) - 1.0} bytes"
+        "{pow(10.0, double(bucket - 1))} to "
+        "{pow(10.0, double(bucket)) - 1.0} bytes"
     fi
 
 let counts =
@@ -38,7 +38,7 @@ od
 
 let total = sizes |> sum()
 let small = sizes |> filter(size => size < 1000L) |> collect()
-let share = 100.0 * cast double(small |> sum()) / cast double(total)
+let share = 100.0 * double(small |> sum()) / double(total)
 
 write_line("")
 write_line(

@@ -11,13 +11,13 @@ exact(t: double) -> double => room + (initial - room) * double.exp(-k * t)
 
 euler(
     f: (double, double) -> double, y0: double, step: int, end: int
-) -> Pipe[(time: int, value: double)] is
+) -> (time: int, value: double){} is
     let y mut = y0
 
     for t in from(0, step) |> take_while(t => t <= end) do
         yield (t, y)
 
-        y = y + cast double(step) * f(cast double(t), y)
+        y = y + double(step) * f(double(t), y)
     od
 si
 
@@ -27,7 +27,7 @@ for step in [2, 5, 10] do
 
     for (time, value) in euler(cooling, initial, step, 100) do
         if time % 10 == 0 then
-            let expected = exact(cast double(time))
+            let expected = exact(double(time))
 
             write_line("{time,6} {value,8:F3} {expected,8:F3}")
         fi

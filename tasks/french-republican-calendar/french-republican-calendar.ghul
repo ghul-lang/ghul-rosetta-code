@@ -29,7 +29,7 @@ days_in(republican_year: int) -> int =>
     if is_leap(republican_year) then 366 else 365 fi
 
 to_republican(date: DateTime) -> string is
-    let day_count mut = cast int(date.subtract(epoch).total_days)
+    let day_count mut = int(date.subtract(epoch).total_days)
     let year mut = 1
 
     while day_count >= days_in(year) do

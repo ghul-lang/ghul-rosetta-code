@@ -20,7 +20,7 @@ step(cells: string, rule: int) -> string is
     return string(next.to_array())
 si
 
-generations(start: string, rule: int) -> Pipe[string] is
+generations(start: string, rule: int) -> string{} is
     let cells mut = start
 
     while true do

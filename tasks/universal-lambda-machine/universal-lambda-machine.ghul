@@ -176,7 +176,7 @@ let top = constant(Term.PAIR)
 let zero = constant(Term.ATOM(0))
 let one = constant(Term.ATOM(1))
 
-items(thunk: THUNK, limit: int) -> Pipe[THUNK] is
+items(thunk: THUNK, limit: int) -> THUNK{} is
     let rest mut = thunk
     let count mut = 0
 
@@ -221,7 +221,7 @@ run_bytes(bytes: List[int], limit: int) -> string is
         |> map(b =>
             let value =
                 items(b, 8) |> reduce(0, (a, t) => a * 2 + bit_of(t)) in
-            "{cast char(value)}")
+            "{char(value)}")
         |> join("")
 si
 
@@ -266,13 +266,13 @@ let query = "010000011100111001110100000011100111010"
 
 let symbolic =
     IO.File.read_all_bytes("symbolic.Blc")
-        |> map(b => cast int(b))
-        |> cat(query |> map(c => cast int(c)))
+        |> map(b => int(b))
+        |> cat(query |> map(c => int(c)))
         |> collect()
 
 let hilbert =
     IO.File.read_all_bytes("hilbert.Blc")
-        |> map(b => cast int(b))
+        |> map(b => int(b))
         |> collect()
 
 write_line()

@@ -1,6 +1,6 @@
 use default
 
-humble() -> Pipe[long] is
+humble() -> long{} is
     let found = LIST()
     found.add(1L)
 

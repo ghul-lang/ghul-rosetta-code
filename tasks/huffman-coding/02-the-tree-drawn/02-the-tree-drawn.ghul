@@ -67,7 +67,7 @@ let next_leaf mut = 0.0
 
 place(node: Huffman, depth: int) -> SPOT =>
     if let leaf: LEAF = node then
-        (let at = (x = next_leaf, y = -cast double(depth))
+        (let at = (x = next_leaf, y = -double(depth))
 
          next_leaf = next_leaf + 1.0
          marks.add((at = at, symbol = leaf.symbol, weight = leaf.weight))
@@ -77,7 +77,7 @@ place(node: Huffman, depth: int) -> SPOT =>
         (let left = place(node.left, depth + 1)
          let right = place(node.right, depth + 1)
 
-         let at = (x = (left.x + right.x) / 2.0, y = -cast double(depth))
+         let at = (x = (left.x + right.x) / 2.0, y = -double(depth))
 
          edges.add((from = at, to = left, bit = "0"))
          edges.add((from = at, to = right, bit = "1"))

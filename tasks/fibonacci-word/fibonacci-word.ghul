@@ -1,7 +1,7 @@
 use default
 use System.Math
 
-words() -> Pipe[string] is
+words() -> string{} is
     let earlier mut = "1"
     let later mut = "0"
 
@@ -28,7 +28,7 @@ entropy(word: string) -> double is
         counts[character] = seen + 1
     od
 
-    let total = cast double(word.length)
+    let total = double(word.length)
 
     counts.values
         |> map(count => cast(count) / total)

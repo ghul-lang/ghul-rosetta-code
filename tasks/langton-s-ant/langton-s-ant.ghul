@@ -17,8 +17,8 @@ draw(image: IMAGE, row: int, column: int) is
 
     for i in 0..size * size do
         if black[i] then
-            let x = cast double(i % size)
-            let y = cast double(i / size)
+            let x = double(i % size)
+            let y = double(i / size)
 
             image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
         fi
@@ -26,13 +26,13 @@ draw(image: IMAGE, row: int, column: int) is
 
     image.colour(220ub, 50ub, 40ub)
     image.fill_rectangle(
-        cast double(column) - 0.5D, cast double(row) - 0.5D,
-        cast double(column) + 1.5D, cast double(row) + 1.5D)
+        double(column) - 0.5D, double(row) - 0.5D,
+        double(column) + 1.5D, double(row) + 1.5D)
 si
 
 let image = IMAGE(pixels, pixels)
 
-image.view(0.0D, 0.0D, cast double(size), cast double(size))
+image.view(0.0D, 0.0D, double(size), double(size))
 
 let animation = ANIMATION(pixels, pixels)
 

@@ -1,6 +1,6 @@
 use default
 
-farey(order: int) -> Pipe[(numerator: int, denominator: int)] is
+farey(order: int) -> (numerator: int, denominator: int){} is
     let low mut = (numerator = 0, denominator = 1)
     let high mut = (numerator = 1, denominator = order)
 

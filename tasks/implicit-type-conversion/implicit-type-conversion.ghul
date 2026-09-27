@@ -19,6 +19,6 @@ let maybe_count: int? = count
 write_line("count widened to int?: {maybe_count}")
 
 let smallest: byte = 5b
-let widened: double = cast double(cast int(smallest))
+let widened: double = double(int(smallest))
 
 write_line("byte {smallest} widened by explicit cast to {widened}")

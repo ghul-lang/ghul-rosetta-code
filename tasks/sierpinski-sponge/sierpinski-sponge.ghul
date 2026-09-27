@@ -61,7 +61,7 @@ let cells =
         |> collect()
 
 let image = IMAGE(420, 450)
-let reach = cast double(size) * 1.05D
+let reach = double(size) * 1.05D
 
 image.view(-reach, -1.07D * reach, reach, 1.07D * reach)
 image.clear(250ub, 248ub, 240ub)
@@ -76,15 +76,15 @@ for c in cells do
             let outline =
                 face.corners
                     |> map((dx, dy, dz) => project(
-                        cast double(c.x + dx),
-                        cast double(c.y + dy),
-                        cast double(c.z + dz)))
+                        double(c.x + dx),
+                        double(c.y + dy),
+                        double(c.z + dz)))
                     |> collect()
 
             image.colour(
-                cast ubyte(200.0D * face.light),
-                cast ubyte(90.0D * face.light),
-                cast ubyte(40.0D * face.light))
+                ubyte(200.0D * face.light),
+                ubyte(90.0D * face.light),
+                ubyte(40.0D * face.light))
             image.fill(outline)
 
             image.colour(30ub, 20ub, 20ub)

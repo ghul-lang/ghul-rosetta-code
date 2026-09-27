@@ -1,7 +1,7 @@
 use default
 
 egyptian(numerator: bigint, denominator: bigint)
-        -> Pipe[bigint] is
+        -> bigint{} is
     let top mut = numerator
     let bottom mut = denominator
 

@@ -11,9 +11,9 @@ for y in 0..height do
     for x in 0..width do
         let radius =
             Math.sqrt(
-                cast double((x - 160) * (x - 160) + (y - 120) * (y - 120)))
+                double((x - 160) * (x - 160) + (y - 120) * (y - 120)))
 
-        let shade = cast ubyte(120.0 + 110.0 * Math.sin(radius / 12.0))
+        let shade = ubyte(120.0 + 110.0 * Math.sin(radius / 12.0))
 
         source.set_pixel(x, y, shade, 255ub - shade, 90ub)
     od
@@ -25,10 +25,10 @@ luminance(x: int, y: int) -> int is
     let pixel = source.pixel(x, y)
 
     return
-        cast int(
-            0.2126 * cast double(pixel.red) +
-            0.7152 * cast double(pixel.green) +
-            0.0722 * cast double(pixel.blue))
+        int(
+            0.2126 * double(pixel.red) +
+            0.7152 * double(pixel.green) +
+            0.0722 * double(pixel.blue))
 si
 
 let histogram = repeat(0, 256) |> collect_mutable()

@@ -1,6 +1,6 @@
 use default
 
-triples(n: int) -> Pipe[(int, int, int)] =>
+triples(n: int) -> (int, int, int){} =>
     1::n |> flat_map(a =>
         a::n |> flat_map(b =>
             (b::n)

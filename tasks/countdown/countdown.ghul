@@ -9,7 +9,7 @@ use Move = (value: int, step: string)
 move(a: int, operator: string, b: int, value: int) -> Move =>
     (value = value, step = "{a} {operator} {b} = {value}")
 
-combinations(a: int, b: int) -> Pipe[Move] is
+combinations(a: int, b: int) -> Move{} is
     let (large, small) = if a >= b then (a, b) else (b, a) fi
 
     yield move(large, "+", small, large + small)

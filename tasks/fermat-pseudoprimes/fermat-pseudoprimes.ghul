@@ -40,7 +40,7 @@ mod_pow(base: long, exponent: long, modulus: long) -> long is
 si
 
 is_pseudoprime(a: int, x: int) -> bool is
-    let power = mod_pow(cast long(a), cast long(x - 1), cast long(x))
+    let power = mod_pow(long(a), long(x - 1), long(x))
 
     x > 1 /\ !is_prime(x) /\ power == 1L
 si

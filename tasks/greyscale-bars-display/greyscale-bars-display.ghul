@@ -10,17 +10,17 @@ let image = IMAGE(width, height)
 for quarter in 0..4 do
     let bars = 8 << quarter
     let bar_width = width / bars
-    let top = cast double(quarter * band)
+    let top = double(quarter * band)
 
     for bar in 0..bars do
         let step = if quarter % 2 == 0 then bar else bars - 1 - bar fi
-        let grey = cast ubyte(255 * step / (bars - 1))
-        let left = cast double(bar * bar_width)
-        let right = left + cast double(bar_width)
+        let grey = ubyte(255 * step / (bars - 1))
+        let left = double(bar * bar_width)
+        let right = left + double(bar_width)
 
         image.colour(grey, grey, grey)
         image.fill_rectangle(
-            left, top, right, top + cast double(band))
+            left, top, right, top + double(band))
     od
 
     write_line("row {quarter + 1}: {bars} bars of {bar_width} pixels")

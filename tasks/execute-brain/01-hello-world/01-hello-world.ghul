@@ -39,10 +39,10 @@ run(program: string, input: string) is
         when '<' then cell = cell - 1
         when '+' then cells[cell] = (cells[cell] + 1) % 256
         when '-' then cells[cell] = (cells[cell] + 255) % 256
-        when '.' then write(cast char(cells[cell]))
+        when '.' then write(char(cells[cell]))
         when ',' then
             let next =
-                if read < input.length then cast int(input[read]) else 0 fi
+                if read < input.length then int(input[read]) else 0 fi
 
             cells[cell] = next
             read = read + 1

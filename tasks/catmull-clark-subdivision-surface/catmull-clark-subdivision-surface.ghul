@@ -13,7 +13,7 @@ centre(points: List[Point]) -> Point =>
     (points
         |> reduce((x = 0.0D, y = 0.0D, z = 0.0D),
                   (a: Point, b: Point) => a + b)) *
-    (1.0D / cast double(points.count))
+    (1.0D / double(points.count))
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
     if a < b then (low = a, high = b) else (low = b, high = a) fi
@@ -101,7 +101,7 @@ subdivided(mesh: Mesh) -> Mesh is
                         |> cat([points[vertex]])
                         |> collect())
         else
-            let n = cast double(touching_faces.count)
+            let n = double(touching_faces.count)
 
             let face_average =
                 centre(touching_faces |> map(index => face_points[index])
@@ -146,9 +146,9 @@ let cube =
     (points =
          0..8
              |> map(corner =>
-                 (x = cast double(corner % 2) * 2.0D - 1.0D,
-                  y = cast double(corner / 2 % 2) * 2.0D - 1.0D,
-                  z = cast double(corner / 4) * 2.0D - 1.0D))
+                 (x = double(corner % 2) * 2.0D - 1.0D,
+                  y = double(corner / 2 % 2) * 2.0D - 1.0D,
+                  z = double(corner / 4) * 2.0D - 1.0D))
              |> collect(),
      faces =
          [[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1],

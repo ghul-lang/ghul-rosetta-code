@@ -92,7 +92,7 @@ is
     return (tree = SEQUENCE(unpaired), next = position)
 si
 
-expand_from(items: List[Alternation], at: int) -> Pipe[string] is
+expand_from(items: List[Alternation], at: int) -> string{} is
     if at == items.count then
         yield ""
     else
@@ -104,7 +104,7 @@ expand_from(items: List[Alternation], at: int) -> Pipe[string] is
     fi
 si
 
-expand(tree: Alternation) -> Pipe[string] is
+expand(tree: Alternation) -> string{} is
     if let leaf: LITERAL = tree then
         yield leaf.text
     elif let sequence: SEQUENCE = tree then
@@ -116,7 +116,7 @@ expand(tree: Alternation) -> Pipe[string] is
     fi
 si
 
-expansions(text: string) -> Pipe[string] =>
+expansions(text: string) -> string{} =>
     expand(parse(text, 0, false).tree)
 
 let inputs = [

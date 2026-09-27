@@ -12,7 +12,7 @@ let competitors =
      (score = 41, name = "Barry"),
      (score = 39, name = "Stephen")]
 
-ties(entries: List[ENTRY]) -> Pipe[List[ENTRY]] is
+ties(entries: List[ENTRY]) -> List[ENTRY]{} is
     let tied = LIST()
 
     for entry in entries do
@@ -30,7 +30,7 @@ ties(entries: List[ENTRY]) -> Pipe[List[ENTRY]] is
     fi
 si
 
-ranked(rank: RANKER) -> Pipe[string] is
+ranked(rank: RANKER) -> string{} is
     let ahead mut = 0
     let place mut = 0
 
@@ -59,7 +59,7 @@ ordinal(ahead: int, size: int, member: int, place: int) -> string =>
     "{ahead + member + 1}"
 
 fractional(ahead: int, size: int, member: int, place: int) -> string =>
-    "{cast double(ahead + ahead + size + 1) / 2.0D:F1}"
+    "{double(ahead + ahead + size + 1) / 2.0D:F1}"
 
 let methods =
     [(name = "standard", rank = standard),

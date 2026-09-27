@@ -48,7 +48,7 @@ least_m(n: int, factorial: bigint) -> int =>
 
 factorial(n: int) -> bigint => 1::n |> reduce(1n, (f, k) => f * bigint(k))
 
-terms() -> Pipe[(n: int, m: int)] =>
+terms() -> (n: int, m: int){} =>
     from(0) |> map(n => (n = n, m = least_m(n, factorial(n))))
 
 write_line("The first 50 terms:")

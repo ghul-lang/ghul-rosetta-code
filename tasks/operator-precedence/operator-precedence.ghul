@@ -3,7 +3,7 @@ use default
 row(level: string, ops: string, assoc: string) -> string =>
     "  {level,-16}{ops,-30}{assoc}"
 
-levels() -> Pipe[string] is
+levels() -> string{} is
     yield row("primary", "f(x)  a[i]  (e)  T(x)", "left")
     yield row("postfix", ".  ?.  ?  !  |>", "left")
     yield row("prefix", "!  -  any spelling", "right")
@@ -53,7 +53,7 @@ joined(op: string, a: E, b: E) -> E => E("({a} {op} {b})")
 
 <*>(a: E, b: E) -> E => joined("<*>", a, b)
 
-grouping(a: E, b: E, c: E) -> Pipe[string] is
+grouping(a: E, b: E, c: E) -> string{} is
     yield "  a +++ b *** c   {a +++ b *** c}"
     yield "  a <+> b +++ c   {a <+> b +++ c}"
     yield "  a +++ b +++ c   {a +++ b +++ c}"

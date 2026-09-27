@@ -34,7 +34,7 @@ run(lines: List[string]) is
         when '<' then cell = cell - 1
         when '+' then memory[cell] = get() + 1
         when '-' then memory[cell] = get() - 1
-        when '.' then write(cast char(get()))
+        when '.' then write(char(get()))
         when ',' then memory[cell] = IO.Std.in.read()
         when '/' then heading = (x = -heading.y, y = -heading.x)
         when '\\' then heading = (x = heading.y, y = heading.x)

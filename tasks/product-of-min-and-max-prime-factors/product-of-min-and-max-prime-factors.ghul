@@ -1,6 +1,6 @@
 use default
 
-prime_factors(n: int) -> Pipe[int] is
+prime_factors(n: int) -> int{} is
     let remaining mut = n
     let divisor mut = 2
 

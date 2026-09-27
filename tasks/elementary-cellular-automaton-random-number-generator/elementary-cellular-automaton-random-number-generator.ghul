@@ -9,14 +9,14 @@ rule_30(cells: ulong) -> ulong =>
     BitOperations.rotate_right(cells, 1) ^
         (cells | BitOperations.rotate_left(cells, 1))
 
-random_bytes() -> Pipe[int] is
+random_bytes() -> int{} is
     let cells mut = 1UL
 
     for _ in from(0) do
         let byte mut = 0
 
         for _ in 0..8 do
-            byte = (byte << 1) | cast int(cells & 1UL)
+            byte = (byte << 1) | int(cells & 1UL)
             cells = rule_30(cells)
         od
 

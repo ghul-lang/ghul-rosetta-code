@@ -1,6 +1,6 @@
 use default
 
-choose(m: int, n: int, from: int, chosen: LIST[int]) -> Pipe[LIST[int]] is
+choose(m: int, n: int, from: int, chosen: LIST[int]) -> LIST[int]{} is
     if chosen.count == m then
         yield chosen
 
@@ -16,7 +16,7 @@ choose(m: int, n: int, from: int, chosen: LIST[int]) -> Pipe[LIST[int]] is
     od
 si
 
-combinations(m: int, n: int) -> Pipe[LIST[int]] =>
+combinations(m: int, n: int) -> LIST[int]{} =>
     choose(m, n, 0, LIST())
 
 for combination in combinations(3, 5) do

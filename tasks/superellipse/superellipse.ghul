@@ -14,11 +14,11 @@ shaped(turn: double, half_axis: double) -> double =>
 
      if turn < 0.0D then -value else value fi)
 
-outline(steps: int) -> Pipe[(x: double, y: double)] =>
+outline(steps: int) -> (x: double, y: double){} =>
     (0::steps)
         |> map(step =>
-            (let angle = 2.0D * pi * cast double(step) /
-                    cast double(steps)
+            (let angle = 2.0D * pi * double(step) /
+                    double(steps)
 
              (x = shaped(cos(angle), a),
               y = shaped(sin(angle), b))))

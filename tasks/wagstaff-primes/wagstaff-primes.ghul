@@ -53,7 +53,7 @@ probably_prime(value: bigint) -> bool is
     true
 si
 
-wagstaff(top: int) -> Pipe[(exponent: int, value: bigint)] is
+wagstaff(top: int) -> (exponent: int, value: bigint){} is
     let reported mut = 0
 
     for exponent in 3::top do

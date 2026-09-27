@@ -19,20 +19,20 @@ class TALLY is
         total = total + x
         squares = squares + x * x
 
-        let bin = min(cast int(x * cast double(bins)), bins - 1)
+        let bin = min(int(x * double(bins)), bins - 1)
 
         histogram[bin] = histogram[bin] + 1
     si
 
-    mean: double => total / cast double(count)
+    mean: double => total / double(count)
 
     deviation: double =>
-        sqrt(squares / cast double(count) - mean * mean)
+        sqrt(squares / double(count) - mean * mean)
 si
 
 let random = System.Random(100)
 
-samples() -> Pipe[double] is
+samples() -> double{} is
     while true do
         yield random.next_double()
     od
@@ -63,7 +63,7 @@ let tallest = small.histogram |> reduce(0, (a, b) => max(a, b))
 
 for bin in 0..bins do
     let n = small.histogram[bin]
-    let low = cast double(bin) / cast double(bins)
+    let low = double(bin) / double(bins)
 
     write_line(
         "  {low:F1} - {low + 0.1D:F1} {n,4} "
@@ -73,21 +73,21 @@ od
 let shown = [0, 2, 4]
 let panel = 220.0D
 
-let image = IMAGE(cast int(panel) * shown.count, 200)
+let image = IMAGE(int(panel) * shown.count, 200)
 
-image.view(0.0D, 0.0D, panel * cast double(shown.count), 200.0D)
+image.view(0.0D, 0.0D, panel * double(shown.count), 200.0D)
 image.clear(252ub, 252ub, 250ub)
 
 for (which, place) in
         shown |> index() |> map(iv => (iv.value, iv.index)) do
     let tally = tallies[which]
-    let left = panel * cast double(place) + 15.0D
-    let width = (panel - 30.0D) / cast double(bins)
+    let left = panel * double(place) + 15.0D
+    let width = (panel - 30.0D) / double(bins)
 
     for bin in 0..bins do
         let share =
-            cast double(tally.histogram[bin]) / cast double(tally.count)
-        let x = left + width * cast double(bin)
+            double(tally.histogram[bin]) / double(tally.count)
+        let x = left + width * double(bin)
 
         image.colour(60ub, 110ub, 190ub)
         image.fill_rectangle(

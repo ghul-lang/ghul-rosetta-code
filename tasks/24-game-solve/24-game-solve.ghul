@@ -73,7 +73,7 @@ while let line = read_line() do
     let terms =
         (0..digits.length)
             |> map(i =>
-                let d = cast long(digits[i]) - 48L in
+                let d = long(digits[i]) - 48L in
                 (value = Q(d, 1L), text = "{d}"))
             |> collect()
 

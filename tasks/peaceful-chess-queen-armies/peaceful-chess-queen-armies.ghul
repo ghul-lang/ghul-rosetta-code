@@ -98,12 +98,12 @@ draw(armies: Armies, n: int, file: string) is
     let square = 44
     let image = IMAGE(n * square, n * square)
 
-    image.view(0.0D, cast double(n), cast double(n), 0.0D)
+    image.view(0.0D, double(n), double(n), 0.0D)
 
     for row in 0..n do
         for column in 0..n do
-            let x = cast double(column)
-            let y = cast double(row)
+            let x = double(column)
+            let y = double(row)
             let bit = 1ul << row * n + column
 
             if (row + column) % 2 == 0 then

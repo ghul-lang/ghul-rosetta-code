@@ -1,6 +1,6 @@
 use default
 
-fibonacci_up_to(limit: int) -> Pipe[int] is
+fibonacci_up_to(limit: int) -> int{} is
     let smaller mut = 1
     let larger mut = 2
 

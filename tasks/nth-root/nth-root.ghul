@@ -1,7 +1,7 @@
 use default
 
 nth_root(a: double, n: int) -> double is
-    let order = cast double(n)
+    let order = double(n)
 
     let estimate mut = a / order
 

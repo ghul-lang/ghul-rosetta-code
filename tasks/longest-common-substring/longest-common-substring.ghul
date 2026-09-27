@@ -1,6 +1,6 @@
 use default
 
-substrings(text: string) -> Pipe[string] is
+substrings(text: string) -> string{} is
     for start in 0..text.length do
         for finish in (start + 1)::text.length do
             yield text[start..finish]

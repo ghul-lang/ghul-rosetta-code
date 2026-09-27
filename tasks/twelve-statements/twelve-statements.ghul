@@ -49,7 +49,7 @@ let statements =
 consistent(values: List[bool]) -> bool =>
     0..12 |> all(index => statements[index](values) == values[index])
 
-assignments() -> Pipe[bool[]] =>
+assignments() -> bool[]{} =>
     (0..1 << 12)
         |> map(mask =>
             0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect())

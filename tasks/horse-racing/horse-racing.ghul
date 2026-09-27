@@ -15,7 +15,7 @@ pounds(weight: string) -> int =>
 race_4_weight(horse: string) -> string =>
     if fillies.contains(horse) then "8.11" else "9.00" fi
 
-times(winner: double, runners: List[Runner]) -> Pipe[(string, double)] is
+times(winner: double, runners: List[Runner]) -> (string, double){} is
     let lengths mut = 0.0
 
     for (horse, weight, behind) in runners do
@@ -23,7 +23,7 @@ times(winner: double, runners: List[Runner]) -> Pipe[(string, double)] is
 
         let extra = pounds(race_4_weight(horse)) - pounds(weight)
 
-        yield (horse, winner + lengths / 5.0 + cast double(extra) / 10.0)
+        yield (horse, winner + lengths / 5.0 + double(extra) / 10.0)
     od
 si
 

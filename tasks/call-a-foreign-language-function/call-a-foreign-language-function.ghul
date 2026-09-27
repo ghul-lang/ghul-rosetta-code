@@ -14,7 +14,7 @@ bind(
 
     let il = stub.get_i_l_generator()
     il.emit(OpCodes.ldarg_0)
-    il.emit(OpCodes.ldc_i8, cast long(address))
+    il.emit(OpCodes.ldc_i8, long(address))
     il.emit(OpCodes.conv_i)
     il.emit_calli(
         OpCodes.calli, CallingConvention.CDECL, result, [pointer])

@@ -77,7 +77,7 @@ least_prime_factor(value: bigint) -> bigint is
     return if smaller < larger then smaller else larger fi
 si
 
-euclid_mullin(count: int) -> Pipe[bigint] is
+euclid_mullin(count: int) -> bigint{} is
     let product mut = 2n
 
     yield product

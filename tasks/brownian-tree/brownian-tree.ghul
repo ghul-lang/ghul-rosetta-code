@@ -37,7 +37,7 @@ for particle in 0..particles do
 
     tree.add((x = x, y = y))
 
-    let age = cast ubyte(255 * particle / particles)
+    let age = ubyte(255 * particle / particles)
 
     image.set_pixel(x, y, age, 40ub, 255ub - age)
 od

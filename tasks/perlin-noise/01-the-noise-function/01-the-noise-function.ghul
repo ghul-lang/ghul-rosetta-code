@@ -51,9 +51,9 @@ grad(hash: int, x: double, y: double, z: double) -> double is
 si
 
 noise(at_x: double, at_y: double, at_z: double) -> double is
-    let unit_x = cast int(floor(at_x)) & 255
-    let unit_y = cast int(floor(at_y)) & 255
-    let unit_z = cast int(floor(at_z)) & 255
+    let unit_x = int(floor(at_x)) & 255
+    let unit_y = int(floor(at_y)) & 255
+    let unit_z = int(floor(at_z)) & 255
 
     let x = at_x - floor(at_x)
     let y = at_y - floor(at_y)

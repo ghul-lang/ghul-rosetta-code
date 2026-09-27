@@ -47,7 +47,7 @@ class THIELE is
         fi
 si
 
-let xs = 0..32 |> map(i => cast double(i) * 0.05) |> collect()
+let xs = 0..32 |> map(i => double(i) * 0.05) |> collect()
 let sines = xs |> map(sin) |> collect()
 let cosines = xs |> map(cos) |> collect()
 let tangents = xs |> map(tan) |> collect()

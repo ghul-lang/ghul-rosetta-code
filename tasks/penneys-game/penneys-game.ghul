@@ -6,7 +6,7 @@ let random = Random(11)
 
 toss() -> char => if random.next(2) == 0 then 'H' else 'T' fi
 
-tosses() -> Pipe[char] is
+tosses() -> char{} is
     while true do
         yield toss()
     od

@@ -4,7 +4,7 @@ use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
 
-hailstone(n: int) -> Pipe[int] is
+hailstone(n: int) -> int{} is
     let current mut = n
 
     while true do
@@ -40,7 +40,7 @@ let image = IMAGE(860, 520)
 
 image.view(
     0.0, 0.0,
-    cast double(limit), cast double(tallest) + 18.0,
+    double(limit), double(tallest) + 18.0,
     62.0)
 
 image.colour(80ub, 80ub, 80ub)
@@ -56,14 +56,14 @@ image.colour(40ub, 70ub, 150ub)
 image.stroke(1.1)
 
 for entry in lengths |> index() do
-    let x = cast double(entry.index + 1)
-    let y = cast double(entry.value)
+    let x = double(entry.index + 1)
+    let y = double(entry.value)
 
     image.line(x, y, x, y)
 od
 
-let marked_x = cast double(longest)
-let marked_y = cast double(tallest)
+let marked_x = double(longest)
+let marked_y = double(tallest)
 
 image.colour(200ub, 40ub, 40ub)
 image.stroke(6.0)

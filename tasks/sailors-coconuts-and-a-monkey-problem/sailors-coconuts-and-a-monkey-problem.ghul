@@ -11,7 +11,7 @@ satisfies_tale(total: int, sailors: int) -> bool is
     pile % sailors == 0
 si
 
-hidden_piles(total: int, sailors: int) -> Pipe[int] is
+hidden_piles(total: int, sailors: int) -> int{} is
     let pile mut = total
 
     for _ in 1::sailors do

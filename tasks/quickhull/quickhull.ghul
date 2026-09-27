@@ -27,7 +27,7 @@ class FACE(a: Point, b: Point, c: Point) is
 
     outside(p: Point) -> bool => normal ⋅ (p - a) > 0.000000001D
 
-    edges: Pipe[(from: Point, to: Point)] =>
+    edges: (from: Point, to: Point){} =>
         [(from = a, to = b), (from = b, to = c), (from = c, to = a)]
             |> pipe()
 si
@@ -116,9 +116,9 @@ let cloud =
             let next = () -> double is
                 seed = seed * 1103515245u + 12345u
 
-                let drawn = cast int(seed >>> 16) % 1000
+                let drawn = int(seed >>> 16) % 1000
 
-                return cast double(drawn) / 500.0D - 1.0D
+                return double(drawn) / 500.0D - 1.0D
             si
             in
             (x = next(), y = next(), z = next()))
@@ -134,9 +134,9 @@ let shapes =
       points =
           0..8
               |> map(corner =>
-                  (x = cast double(corner % 2) * 2.0D - 1.0D,
-                   y = cast double(corner / 2 % 2) * 2.0D - 1.0D,
-                   z = cast double(corner / 4) * 2.0D - 1.0D))
+                  (x = double(corner % 2) * 2.0D - 1.0D,
+                   y = double(corner / 2 % 2) * 2.0D - 1.0D,
+                   z = double(corner / 4) * 2.0D - 1.0D))
               |> cat([(x = 0.0D, y = 0.0D, z = 0.0D),
                       (x = 0.5D, y = -0.25D, z = 0.125D)])
               |> collect()),

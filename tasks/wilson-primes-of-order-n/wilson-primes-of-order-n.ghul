@@ -10,7 +10,7 @@ factorials_mod(count: int, modulus: long) -> LIST[long] is
     let result = LIST[long]([1L])
 
     for k in 1..count do
-        result.add(result[k - 1] * cast long(k) % modulus)
+        result.add(result[k - 1] * long(k) % modulus)
     od
 
     return result
@@ -26,7 +26,7 @@ si
 let wilson = (1::orders) |> map(_ => LIST[int]()) |> collect()
 
 for p in (2..limit) |> filter(is_prime) do
-    let modulus = cast long(p) * cast long(p)
+    let modulus = long(p) * long(p)
     let factorials = factorials_mod(p, modulus)
 
     for n in 1::orders do

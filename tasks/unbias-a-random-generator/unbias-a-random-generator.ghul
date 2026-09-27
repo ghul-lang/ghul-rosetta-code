@@ -26,7 +26,7 @@ write_line("N   ones from randN   ones from unbiased")
 for n in 3::6 do
     let biased = 1::samples |> count(_ => rand_n(n) == 1)
     let fair = 1::samples |> count(_ => unbiased(n) == 1)
-    let percent = (k: int) => 100.0 * cast double(k) / cast double(samples)
+    let percent = (k: int) => 100.0 * double(k) / double(samples)
 
     write_line("{n}   {percent(biased),14:F2}%   {percent(fair),17:F2}%")
 od

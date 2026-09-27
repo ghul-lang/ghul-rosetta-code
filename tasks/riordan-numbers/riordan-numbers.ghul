@@ -1,6 +1,6 @@
 use default
 
-riordan(count: int) -> Pipe[bigint] is
+riordan(count: int) -> bigint{} is
     let previous mut = 1n
     let current mut = 0n
 

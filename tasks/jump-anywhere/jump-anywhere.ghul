@@ -53,7 +53,7 @@ descend(level: int) is
     descend(level - 1)
 si
 
-steps() -> Pipe[string] is
+steps() -> string{} is
     write_line("  generator: started")
     yield "one"
     write_line("  generator: resumed")

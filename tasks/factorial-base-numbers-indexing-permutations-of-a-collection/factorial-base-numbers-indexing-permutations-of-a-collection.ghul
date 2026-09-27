@@ -16,7 +16,7 @@ permute[T](digits: Collections.List[int], items: Collections.List[T])
     return result
 si
 
-factorial_base_numbers(places: int) -> Pipe[LIST[int]] is
+factorial_base_numbers(places: int) -> LIST[int]{} is
     let digits = repeat(0, places) |> collect_mutable()
 
     while true do

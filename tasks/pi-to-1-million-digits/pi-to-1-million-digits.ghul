@@ -31,10 +31,10 @@ si
 // Each level takes the square root of the top half of the bits, which is
 // right to half the precision, and one Newton step doubles that.
 square_root(n: bigint) -> bigint is
-    let bits = cast int(n.get_bit_length())
+    let bits = int(n.get_bit_length())
 
     if bits <= 50 then
-        return bigint(System.Math.sqrt(cast double(n)))
+        return bigint(System.Math.sqrt(double(n)))
     fi
 
     let shift = bits / 4
@@ -87,7 +87,7 @@ si
 
 pi_digits(digits: int) -> string is
     let guard = 10
-    let terms = cast long(digits / 14 + 2)
+    let terms = long(digits / 14 + 2)
     let (_, q, t) = split(0L, terms)
     let scale = bigint.pow(10n, digits + guard)
     let root = square_root(10_005n * scale * scale)

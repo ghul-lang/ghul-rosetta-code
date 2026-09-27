@@ -23,7 +23,7 @@ twin_pairs(bound: int) -> int =>
         |> filter(pair => pair[1] - pair[0] == 2)
         |> count()
 
-powers_of_ten() -> Pipe[int] is
+powers_of_ten() -> int{} is
     let value mut = 10
 
     do

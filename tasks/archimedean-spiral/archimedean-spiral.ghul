@@ -19,7 +19,7 @@ image.stroke(1.5D)
 
 image.line(
     (0..steps + 1)
-        |> map(step => at(last * cast double(step) / cast double(steps)))
+        |> map(step => at(last * double(step) / double(steps)))
         |> collect()
 )
 

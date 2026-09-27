@@ -3,6 +3,7 @@
 2 colours: [redgreen, blue]
 byte -56, ubyte 200
 first even: 2
-next even: 4
-next even: 6
+even again: 2
+even again: 4
+even again: 6
 all evens: [2, 4, 6]

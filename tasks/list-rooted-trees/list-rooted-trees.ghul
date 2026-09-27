@@ -1,6 +1,6 @@
 use default
 
-trees(bags: int) -> Pipe[string] is
+trees(bags: int) -> string{} is
     if bags == 1 then
         yield "()"
         return
@@ -11,7 +11,7 @@ trees(bags: int) -> Pipe[string] is
     od
 si
 
-forests(bags: int, largest: string?) -> Pipe[string] is
+forests(bags: int, largest: string?) -> string{} is
     if bags == 0 then
         yield ""
         return

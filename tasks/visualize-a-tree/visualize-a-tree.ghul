@@ -4,7 +4,7 @@ class NODE(name: string, children: List[NODE])
 
 leaf(name: string) -> NODE => NODE(name, LIST())
 
-indented(node: NODE, depth: int) -> Pipe[string] is
+indented(node: NODE, depth: int) -> string{} is
     yield "{repeat(" ", depth * 4) |> join("")}{node.name}"
 
     for child in node.children do
@@ -19,7 +19,7 @@ nested(node: NODE) -> string =>
         "{node.name}({node.children |> map(nested) |> join(" ")})"
     fi
 
-branches(node: NODE, prefix: string) -> Pipe[string] is
+branches(node: NODE, prefix: string) -> string{} is
     for entry in node.children |> index() do
         let last = entry.index == node.children.count - 1
         let joint = if last then "\\- " else "+- " fi

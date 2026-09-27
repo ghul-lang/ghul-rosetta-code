@@ -10,19 +10,19 @@ let offset = radius / 2.5D
 let step = 2.0D * pi / 15.0D
 
 let image = IMAGE(
-    cast int(spacing) * (columns + 1), cast int(spacing) * (rows + 1))
+    int(spacing) * (columns + 1), int(spacing) * (rows + 1))
 
 image.view(
-    0.0D, spacing * cast double(rows + 1),
-    spacing * cast double(columns + 1), 0.0D)
+    0.0D, spacing * double(rows + 1),
+    spacing * double(columns + 1), 0.0D)
 
 image.clear(0ub, 125ub, 0ub)
 
 for row in 0..rows do
     for column in 0..columns do
-        let x = spacing * cast double(column + 1)
-        let y = spacing * cast double(row + 1)
-        let angle = -step * cast double(row + column)
+        let x = spacing * double(column + 1)
+        let y = spacing * double(row + 1)
+        let angle = -step * double(row + column)
         let dx = offset * sin(angle)
         let dy = -offset * cos(angle)
 

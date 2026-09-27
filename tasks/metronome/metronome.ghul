@@ -13,8 +13,8 @@ metronome(beats_per_minute: int, beats_per_bar: int, bars: int) is
         "{beats_per_minute} beats a minute, {beats_per_bar} to the bar")
 
     for beat in 0..beats_per_bar * bars do
-        let due = cast long(beat * interval)
-        let wait = cast int(due - clock.elapsed_milliseconds)
+        let due = long(beat * interval)
+        let wait = int(due - clock.elapsed_milliseconds)
 
         if wait > 0 then
             Thread.sleep(wait)

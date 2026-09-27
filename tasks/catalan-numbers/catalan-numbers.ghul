@@ -15,7 +15,7 @@ by_recurrence(n: int) -> long is
     let c mut = 1L
 
     for k in 1::n do
-        c = 2L * (2L * cast long(k) - 1L) * c / (cast long(k) + 1L)
+        c = 2L * (2L * long(k) - 1L) * c / (long(k) + 1L)
     od
 
     c

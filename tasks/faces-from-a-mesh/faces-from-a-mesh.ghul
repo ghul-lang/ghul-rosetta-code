@@ -1,7 +1,7 @@
 use default
 use Edge = (from: int, to: int)
 
-rotations(face: List[int]) -> Pipe[LIST[int]] =>
+rotations(face: List[int]) -> LIST[int]{} =>
     0..face.count
         |> map(offset =>
             0..face.count

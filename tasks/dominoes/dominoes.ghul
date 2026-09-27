@@ -8,7 +8,7 @@ use Grid = List[List[int]]
 parse(lines: List[string]) -> Grid =>
     lines
         |> map(line =>
-            line |> map(c => cast int(c - '0')) |> collect())
+            line |> map(c => int(c - '0')) |> collect())
         |> collect()
 
 solve(grid: Grid) -> List[int]? is

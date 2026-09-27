@@ -11,14 +11,14 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = cast double(y) / 80.0D
+        let t = double(y) / 80.0D
 
         image.colour(
-            cast ubyte(40.0D + 200.0D * t),
-            cast ubyte(70.0D + 100.0D * t),
-            cast ubyte(160.0D - 60.0D * t))
+            ubyte(40.0D + 200.0D * t),
+            ubyte(70.0D + 100.0D * t),
+            ubyte(160.0D - 60.0D * t))
         image.fill_rectangle(
-            0.0D, cast double(y), 160.0D, cast double(y + 1))
+            0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -48,9 +48,9 @@ si
 use Layer = (name: string, row: int, column: int, show: RGB -> RGB)
 
 byte(v: double) -> ubyte =>
-    cast ubyte(round(255.0D * clamp(v, 0.0D, 1.0D)))
+    ubyte(round(255.0D * clamp(v, 0.0D, 1.0D)))
 
-fraction(b: ubyte) -> double => cast double(b) / 255.0D
+fraction(b: ubyte) -> double => double(b) / 255.0D
 
 ink(amount: double, r: double, g: double, b: double) -> RGB =>
     (
@@ -109,15 +109,15 @@ for layer in layers do
 
     sheet.colour(40ub, 40ub, 40ub)
     sheet.text(
-        cast double(left + source.width / 2),
-        cast double(top + source.height + 15),
+        double(left + source.width / 2),
+        double(top + source.height + 15),
         10.0D, layer.name, Anchor.CENTRE)
 od
 
-let key_top = cast double(10 + cell_height + 40)
+let key_top = double(10 + cell_height + 40)
 
 for (i, line) in ["top: RGB", "middle: CMY", "bottom: CMYK"] |> index() do
-    let y = key_top + 18.0D * cast double(i)
+    let y = key_top + 18.0D * double(i)
 
     sheet.text(90.0D, y, 11.0D, line, Anchor.CENTRE)
 od

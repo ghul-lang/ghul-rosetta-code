@@ -3,8 +3,8 @@
    5  value
    3  map
    3  name
+   2  $StateMachine_callees_0
    2  append_formatted
    2  count
    2  current
-   2  declaring_type
-   2  flat_map
+   2  current_managed_thread_id

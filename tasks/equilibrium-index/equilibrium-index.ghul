@@ -1,6 +1,6 @@
 use default
 
-equilibrium_indices(values: int[]) -> Pipe[int] is
+equilibrium_indices(values: int[]) -> int{} is
     let total = values |> sum()
     let below mut = 0
 

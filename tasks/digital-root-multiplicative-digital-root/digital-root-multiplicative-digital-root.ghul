@@ -1,7 +1,7 @@
 use default
 
 product_of_digits(n: long) -> long =>
-    "{n}" |> map(c => cast long(c - '0')) |> product()
+    "{n}" |> map(c => long(c - '0')) |> product()
 
 root(n: long) -> (persistence: int, root: long) is
     let m mut = n
@@ -28,7 +28,7 @@ write_line("\nMDR: first five numbers")
 for target in 0::9 do
     let numbers =
         from(0L)
-            |> filter(n => root(n).root == cast long(target))
+            |> filter(n => root(n).root == long(target))
             |> take(5)
 
     write_line("{target,3}: {numbers}")

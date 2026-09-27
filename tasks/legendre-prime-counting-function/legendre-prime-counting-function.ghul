@@ -11,7 +11,7 @@ for p in 2..200 do
     fi
 od
 
-let primes = [cast long(n) for n in 2..limit if !composite[n]]
+let primes = [long(n) for n in 2..limit if !composite[n]]
 
 phi(x: long, a: int) -> long =>
     if a == 0 then
@@ -26,11 +26,11 @@ prime_count(n: long) -> long =>
     if n < 2L then
         0L
     else
-        let a = prime_count(cast long(System.Math.sqrt(cast double(n)))) in
-        phi(n, cast int(a)) + a - 1L
+        let a = prime_count(long(System.Math.sqrt(double(n)))) in
+        phi(n, int(a)) + a - 1L
     fi
 
 for exponent in 0::9 do
-    let n = cast long(System.Math.pow(10.0, cast double(exponent)))
+    let n = long(System.Math.pow(10.0, double(exponent)))
     write_line("10^{exponent} {prime_count(n),12:N0}")
 od

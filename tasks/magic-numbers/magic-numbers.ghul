@@ -1,6 +1,6 @@
 use default
 
-magic_numbers() -> Pipe[bigint] is
+magic_numbers() -> bigint{} is
     let current = 1::9 |> map(d => bigint(d)) |> collect_mutable()
     let length mut = 1
 

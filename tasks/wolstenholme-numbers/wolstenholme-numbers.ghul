@@ -6,7 +6,7 @@ write_line("")
 let one = 1n
 let two = 2n
 
-wolstenholme(count: int) -> Pipe[bigint] is
+wolstenholme(count: int) -> bigint{} is
     let numerator mut = 0n
     let denominator mut = one
 

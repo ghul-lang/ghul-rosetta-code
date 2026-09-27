@@ -14,7 +14,7 @@ parse(text: string) -> List[Fraction] =>
             denominator = bigint.parse(parts[1])))
         |> collect()
 
-run(program: List[Fraction], start: bigint) -> Pipe[bigint] is
+run(program: List[Fraction], start: bigint) -> bigint{} is
     let n mut = start
 
     while true do

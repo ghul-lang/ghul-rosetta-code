@@ -39,7 +39,7 @@ bar_chart(values: List[double], size: double) is
         values |> reduce(0.0, (most, value) =>
             if value > most then value else most fi)
 
-    let width = size / cast double(values.count)
+    let width = size / double(values.count)
 
     for value in values do
         let height = size * value / tallest

@@ -3,7 +3,7 @@ use Math = System.Math
 use Raster.Anchor
 use Raster.IMAGE
 
-running_maxima(heights: Iterable[int]) -> Pipe[int] is
+running_maxima(heights: Iterable[int]) -> int{} is
     let highest mut = 0
 
     for height in heights do
@@ -36,7 +36,7 @@ let series =
 let gap = 2.5
 
 let span =
-    (series |> sum_by(towers => cast double(towers.count) + gap)) - gap
+    (series |> sum_by(towers => double(towers.count) + gap)) - gap
 
 let tallest =
     series
@@ -47,7 +47,7 @@ let image = IMAGE(1000, 300)
 
 image.view(
     -0.5, -4.0,
-    span + 0.5, cast double(tallest) + 4.0,
+    span + 0.5, double(tallest) + 4.0,
     16.0)
 
 box(left: double, bottom: double, right: double, top: double) is
@@ -61,7 +61,7 @@ si
 let stone = (red = 110ub, green = 105ub, blue = 100ub)
 let water = (red = 90ub, green = 160ub, blue = 220ub)
 
-let ceiling = cast double(tallest)
+let ceiling = double(tallest)
 
 image.colour(water)
 box(0.0, ceiling + 1.8, 1.2, ceiling + 2.8)
@@ -76,25 +76,25 @@ for towers in series do
     let volume = depth |> sum()
 
     for column in 0..towers.count do
-        let left = at + cast double(column)
-        let height = cast double(towers[column])
+        let left = at + double(column)
+        let height = double(towers[column])
 
         image.colour(stone)
         box(left, 0.0, left + 1.0, height)
 
         image.colour(water)
         box(left, height, left + 1.0,
-            height + cast double(depth[column]))
+            height + double(depth[column]))
     od
 
     image.colour(70ub, 70ub, 70ub)
     image.stroke(1.2)
-    image.line(at, 0.0, at + cast double(towers.count), 0.0)
+    image.line(at, 0.0, at + double(towers.count), 0.0)
 
-    image.text(at + cast double(towers.count) / 2.0, -2.4, 15.0,
+    image.text(at + double(towers.count) / 2.0, -2.4, 15.0,
                "{volume}", Anchor.CENTRE)
 
-    at = at + cast double(towers.count) + gap
+    at = at + double(towers.count) + gap
 od
 
 image.write("towers.png")

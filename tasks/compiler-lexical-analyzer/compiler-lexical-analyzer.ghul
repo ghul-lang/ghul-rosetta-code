@@ -14,7 +14,7 @@ class LEXER is
         _column = 1
     si
 
-    tokens() -> Pipe[Token] is
+    tokens() -> Token{} is
         while true do
             _skip()
 
@@ -65,7 +65,7 @@ class LEXER is
         if _at + offset < _source.length then
             _source[_at + offset]
         else
-            cast char(0)
+            char(0)
         fi
 
     _advance() -> char is
@@ -135,7 +135,7 @@ class LEXER is
 
         _advance()
 
-        cast int(c)
+        int(c)
     si
 
     _string(line: int, column: int) is

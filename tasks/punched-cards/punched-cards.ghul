@@ -14,7 +14,7 @@ punch(c: char, holes: string) is
 si
 
 for d in 0..10 do
-    punch(cast char(48 + d), "{d}")
+    punch(char(48 + d), "{d}")
 od
 
 for (letters, zone, first) in [
@@ -70,22 +70,22 @@ od
 let columns = 80
 let pitch = 9.0D
 let spacing = 21.0D
-let card_width = 44.0D + pitch * cast double(columns)
+let card_width = 44.0D + pitch * double(columns)
 let card_height = 44.0D + spacing * 12.0D
 let gap = 20.0D
 
 let image = IMAGE(
-    cast int(card_width + 2.0D * gap),
-    cast int(gap + cast double(program.count) * (card_height + gap)))
+    int(card_width + 2.0D * gap),
+    int(gap + double(program.count) * (card_height + gap)))
 
 image.view(
-    0.0D, cast double(image.height), cast double(image.width), 0.0D)
+    0.0D, double(image.height), double(image.width), 0.0D)
 image.clear(60ub, 70ub, 80ub)
 
 for (line, number) in
         program |> index() |> map(iv => (iv.value, iv.index)) do
     let left = gap
-    let top = gap + cast double(number) * (card_height + gap)
+    let top = gap + double(number) * (card_height + gap)
 
     image.colour(242ub, 230ub, 196ub)
     image.fill([
@@ -97,7 +97,7 @@ for (line, number) in
     ])
 
     for column in 0..columns do
-        let x = left + 26.0D + pitch * cast double(column)
+        let x = left + 26.0D + pitch * double(column)
         let c = if column < line.length then line[column] else ' ' fi
         let punched = holes(c)
 
@@ -107,7 +107,7 @@ for (line, number) in
         fi
 
         for row in 0..12 do
-            let y = top + 30.0D + spacing * cast double(row)
+            let y = top + 30.0D + spacing * double(row)
 
             if punched |> any(r => r == row) then
                 image.colour(20ub, 20ub, 20ub)

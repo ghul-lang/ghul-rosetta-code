@@ -16,7 +16,7 @@ next_row(row: Polynomial) -> Polynomial =>
         |> map(i => row[0] * row[i] - row[n] * row[n - i])
         |> collect()
 
-rows(p: Polynomial) -> Pipe[Polynomial] is
+rows(p: Polynomial) -> Polynomial{} is
     let row mut = p
 
     while row.count > 1 do

@@ -53,7 +53,7 @@ class AUTOMATON(patterns: List[string] private) is
         else _next(_fail[state], c)
         fi
 
-    matches(text: string) -> Pipe[(pattern: string, position: int)] is
+    matches(text: string) -> (pattern: string, position: int){} is
         let state mut = 0
 
         for (at, c) in text |> index() do

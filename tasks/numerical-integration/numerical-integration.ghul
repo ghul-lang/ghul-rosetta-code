@@ -6,26 +6,26 @@ sum_over(n: int, term: int -> double) -> double =>
     0..n |> sum_by(term)
 
 left_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / cast double(n) in
-    h * sum_over(n, i => f(a + h * cast double(i)))
+    let h = (b - a) / double(n) in
+    h * sum_over(n, i => f(a + h * double(i)))
 
 right_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / cast double(n) in
-    h * sum_over(n, i => f(a + h * cast double(i + 1)))
+    let h = (b - a) / double(n) in
+    h * sum_over(n, i => f(a + h * double(i + 1)))
 
 midpoint_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / cast double(n) in
-    h * sum_over(n, i => f(a + h * (cast double(i) + 0.5)))
+    let h = (b - a) / double(n) in
+    h * sum_over(n, i => f(a + h * (double(i) + 0.5)))
 
 trapezium(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / cast double(n) in
-    let inner = sum_over(n - 1, i => f(a + h * cast double(i + 1))) in
+    let h = (b - a) / double(n) in
+    let inner = sum_over(n - 1, i => f(a + h * double(i + 1))) in
     h * ((f(a) + f(b)) / 2.0 + inner)
 
 simpson(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / cast double(n) in
-    let middles = sum_over(n, i => f(a + h * cast double(i) + h / 2.0)) in
-    let joins = sum_over(n - 1, i => f(a + h * cast double(i + 1))) in
+    let h = (b - a) / double(n) in
+    let middles = sum_over(n, i => f(a + h * double(i) + h / 2.0)) in
+    let joins = sum_over(n - 1, i => f(a + h * double(i + 1))) in
     h / 6.0 * (f(a) + f(b) + 4.0 * middles + 2.0 * joins)
 
 let methods = [

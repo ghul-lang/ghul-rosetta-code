@@ -4,7 +4,7 @@ use SOLUTION = (colour: LIST[string], nation: LIST[string],
                 drink: LIST[string], smoke: LIST[string],
                 pet: LIST[string])
 
-permutations(items: LIST[string]) -> Pipe[LIST[string]] is
+permutations(items: LIST[string]) -> LIST[string]{} is
     if items.count == 0 then
         yield LIST()
     else
@@ -25,7 +25,7 @@ permutations(items: LIST[string]) -> Pipe[LIST[string]] is
     fi
 si
 
-arrangements(items: string[]) -> Pipe[LIST[string]] is
+arrangements(items: string[]) -> LIST[string]{} is
     yield in permutations(LIST(items))
 si
 
@@ -41,12 +41,12 @@ next_to(left: LIST[string], left_value: string,
     (let gap = house_of(left, left_value) - house_of(right, right_value)
      gap == 1 \/ gap == -1)
 
-colour_rows() -> Pipe[LIST[string]] =>
+colour_rows() -> LIST[string]{} =>
     arrangements(["red", "green", "white", "yellow", "blue"])
         |> filter(row => house_of(row, "green") + 1 ==
             house_of(row, "white"))
 
-nation_rows(colour: LIST[string]) -> Pipe[LIST[string]] =>
+nation_rows(colour: LIST[string]) -> LIST[string]{} =>
     arrangements(["English", "Swede", "Dane", "Norwegian", "German"])
         |> filter(row =>
             house_of(row, "Norwegian") == 0 /\
@@ -54,7 +54,7 @@ nation_rows(colour: LIST[string]) -> Pipe[LIST[string]] =>
             next_to(row, "Norwegian", colour, "blue"))
 
 drink_rows(colour: LIST[string], nation: LIST[string])
-    -> Pipe[LIST[string]] =>
+    -> LIST[string]{} =>
     arrangements(["tea", "coffee", "milk", "beer", "water"])
         |> filter(row =>
             house_of(row, "milk") == 2 /\
@@ -62,7 +62,7 @@ drink_rows(colour: LIST[string], nation: LIST[string])
             together(row, "coffee", colour, "green"))
 
 smoke_rows(colour: LIST[string], nation: LIST[string],
-           drink: LIST[string]) -> Pipe[LIST[string]] =>
+           drink: LIST[string]) -> LIST[string]{} =>
     arrangements(["Pall Mall", "Dunhill", "Blend", "Blue Master",
                   "Prince"])
         |> filter(row =>
@@ -72,7 +72,7 @@ smoke_rows(colour: LIST[string], nation: LIST[string],
             next_to(row, "Blend", drink, "water"))
 
 pet_rows(nation: LIST[string], smoke: LIST[string])
-    -> Pipe[LIST[string]] =>
+    -> LIST[string]{} =>
     arrangements(["dog", "bird", "cat", "horse", "zebra"])
         |> filter(row =>
             together(row, "dog", nation, "Swede") /\
@@ -80,7 +80,7 @@ pet_rows(nation: LIST[string], smoke: LIST[string])
             next_to(row, "cat", smoke, "Blend") /\
             next_to(row, "horse", smoke, "Dunhill"))
 
-solutions() -> Pipe[SOLUTION] is
+solutions() -> SOLUTION{} is
     for colour in colour_rows() do
         for nation in nation_rows(colour) do
             for drink in drink_rows(colour, nation) do

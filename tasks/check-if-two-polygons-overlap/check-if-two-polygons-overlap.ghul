@@ -9,7 +9,7 @@ use Polygon = Collections.List[Point]
 normal(corner: Point, next: Point) -> Point =>
     (x = corner.y - next.y, y = next.x - corner.x)
 
-axes(shape: Polygon) -> Pipe[Point] =>
+axes(shape: Polygon) -> Point{} =>
     0..shape.count
         |> map(index =>
             normal(shape[index], shape[(index + 1) % shape.count]))

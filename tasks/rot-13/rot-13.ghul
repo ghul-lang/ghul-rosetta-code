@@ -2,9 +2,9 @@ use default
 
 rot13(c: char) -> char =>
     if c >= 'a' /\ c <= 'z' then
-        cast char((cast int(c) - cast int('a') + 13) % 26 + cast int('a'))
+        char((int(c) - int('a') + 13) % 26 + int('a'))
     elif c >= 'A' /\ c <= 'Z' then
-        cast char((cast int(c) - cast int('A') + 13) % 26 + cast int('A'))
+        char((int(c) - int('A') + 13) % 26 + int('A'))
     else
         c
     fi

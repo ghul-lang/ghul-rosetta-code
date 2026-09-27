@@ -28,17 +28,17 @@ descendants[0].add(1L)
 for p in (2::top) |> filter(is_prime) do
     for sum in p::top do
         for d in descendants[sum - p] do
-            descendants[sum].add(d * cast long(p))
+            descendants[sum].add(d * long(p))
         od
     od
 od
 
 for sum in 1::top do
-    descendants[sum].remove(cast long(sum))
+    descendants[sum].remove(long(sum))
     descendants[sum].sort()
 od
 
-ancestors(n: int) -> Pipe[int] is
+ancestors(n: int) -> int{} is
     let current mut = n
 
     while current > 1 /\ !is_prime(current) do

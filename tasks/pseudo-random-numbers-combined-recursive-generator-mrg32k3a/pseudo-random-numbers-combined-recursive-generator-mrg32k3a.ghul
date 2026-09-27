@@ -25,7 +25,7 @@ class MRG32K3A is
         modulo(x1 - x2, m1) + 1L
     si
 
-    next_float() -> double => cast double(next_int()) / 4_294_967_088.0
+    next_float() -> double => double(next_int()) / 4_294_967_088.0
 si
 
 let first = MRG32K3A(1234567L)
@@ -38,7 +38,7 @@ let generator = MRG32K3A(987654321L)
 let counts = repeat(0, 5) |> collect_mutable()
 
 for _ in 1::100_000 do
-    let bucket = cast int(generator.next_float() * 5.0)
+    let bucket = int(generator.next_float() * 5.0)
 
     counts[bucket] = counts[bucket] + 1
 od

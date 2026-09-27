@@ -58,7 +58,7 @@ interpret(node: Node) -> int =>
             od
             0
         when "Sequence" then interpret(left); interpret(right); 0
-        when "Prtc" then Std.write(cast char(interpret(left))); 0
+        when "Prtc" then Std.write(char(interpret(left))); 0
         when "Prti" then Std.write("{interpret(left)}"); 0
         when "Prts" then
             if let (_, text): Node.LEAF = left then

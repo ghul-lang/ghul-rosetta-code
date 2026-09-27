@@ -1,6 +1,6 @@
 use default
 
-primes_below(limit: int) -> Pipe[int] is
+primes_below(limit: int) -> int{} is
     let composite = repeat(false, limit) |> collect_mutable()
 
     for candidate in 2..limit do

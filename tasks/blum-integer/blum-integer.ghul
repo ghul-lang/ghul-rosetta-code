@@ -43,7 +43,7 @@ write_line("")
 write_line("distribution of the final digit over the first 400,000:")
 
 for digit in [1, 3, 7, 9] do
-    let share = cast double(blum |> filter(b => b % 10 == digit) |> count())
+    let share = double(blum |> filter(b => b % 10 == digit) |> count())
 
     write_line("  {digit}: {share / 4000.0D:F3}%")
 od

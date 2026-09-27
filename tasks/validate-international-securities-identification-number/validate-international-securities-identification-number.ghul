@@ -5,7 +5,7 @@ luhn(digits: string) -> bool is
     let total mut = 0
 
     for (i, c) in digits.to_char_array() |> reverse() |> index() do
-        let d = cast int(c) - cast int('0')
+        let d = int(c) - int('0')
         let doubled = if i % 2 == 1 then d * 2 else d fi
 
         total = total + doubled / 10 + doubled % 10
@@ -17,8 +17,8 @@ si
 let format = Regex("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
 
 base_36(c: char) -> int =>
-    if char.is_digit(c) then cast int(c) - cast int('0')
-    else cast int(c) - cast int('A') + 10
+    if char.is_digit(c) then int(c) - int('0')
+    else int(c) - int('A') + 10
     fi
 
 is_valid(isin: string) -> bool =>

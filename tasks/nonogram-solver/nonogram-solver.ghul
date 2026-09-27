@@ -7,7 +7,7 @@ let unknown = -1
 clues_of(text: string) -> List[List[int]] =>
     text.split([' '])
         |> map(word =>
-            word |> map(c => cast int(c) - 64) |> collect())
+            word |> map(c => int(c) - 64) |> collect())
         |> collect()
 
 arrangements(clues: List[int], length: int) -> List[long] is

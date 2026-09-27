@@ -1,6 +1,6 @@
 use default
 
-primes_below(limit: int) -> Pipe[int] is
+primes_below(limit: int) -> int{} is
     let composite = repeat(false, limit) |> collect_mutable()
 
     for candidate in 2..limit do
@@ -32,7 +32,7 @@ brilliant_numbers(max_digits: int) -> LIST[long] is
 
         for (i, p) in group |> index() do
             for q in group |> skip(i) do
-                found.add(cast long(p) * cast long(q))
+                found.add(long(p) * long(q))
             od
         od
 

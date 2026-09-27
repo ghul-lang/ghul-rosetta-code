@@ -47,8 +47,8 @@ for y in 0..image.height do
     for x in 0..image.width do
         image.set_pixel(
             x, y,
-            (red = cast ubyte(255 * x / image.width),
-             green = cast ubyte(255 * y / image.height),
+            (red = ubyte(255 * x / image.width),
+             green = ubyte(255 * y / image.height),
              blue = 128ub)
         )
     od

@@ -1,8 +1,8 @@
 use default
 
 is_cube(n: long) -> bool is
-    let estimate = System.Math.cbrt(cast double(n))
-    let root = cast long(System.Math.round(estimate))
+    let estimate = System.Math.cbrt(double(n))
+    let root = long(System.Math.round(estimate))
 
     root * root * root == n
 si

@@ -6,7 +6,7 @@ use System.Globalization.UnicodeCategory
 // identifier is read in UTF-16 code units, so only the basic plane counts.
 
 starts_identifier(c: char) -> bool =>
-    if cast int(c) <= 0x7E then
+    if int(c) <= 0x7E then
         char.is_ascii_letter(c) \/ c == '_'
     else
         char.is_letter(c) \/
@@ -15,7 +15,7 @@ starts_identifier(c: char) -> bool =>
 
 continues_identifier(c: char) -> bool =>
     starts_identifier(c) \/ char.is_ascii_digit(c) \/ (
-        cast int(c) > 0x7E /\ (
+        int(c) > 0x7E /\ (
             let category = char.get_unicode_category(c) in
             category == UnicodeCategory.DECIMAL_DIGIT_NUMBER \/
             category == UnicodeCategory.NON_SPACING_MARK \/
@@ -23,7 +23,7 @@ continues_identifier(c: char) -> bool =>
             category == UnicodeCategory.CONNECTOR_PUNCTUATION))
 
 let characters =
-    0..0x10000 |> map(code => cast char(code))
+    0..0x10000 |> map(code => char(code))
 
 let ascii = characters |> take(0x7F)
 

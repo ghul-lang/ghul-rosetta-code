@@ -1,6 +1,6 @@
 use default
 
-rows() -> Pipe[List[bigint]] is
+rows() -> List[bigint]{} is
     let row mut = [1n] |> collect()
 
     do

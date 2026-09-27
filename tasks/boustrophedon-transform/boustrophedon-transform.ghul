@@ -43,7 +43,7 @@ fibonacci(index: int) -> bigint is
     return current
 si
 
-boustrophedon(term: (int) -> bigint, count: int) -> Pipe[bigint] is
+boustrophedon(term: (int) -> bigint, count: int) -> bigint{} is
     let row mut = LIST()
     row.add(term(0))
 
