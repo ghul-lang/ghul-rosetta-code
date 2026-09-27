@@ -11,7 +11,7 @@ The comma is the fix, and reading the count is the cheap check.
 `byte` is the signed type and `ubyte` the unsigned one, the reverse of .NET's
 names for the same two types. Code that reads binary data wants `ubyte`.
 
-A pipe is lazy, and every read of it starts from the beginning and runs its
-stages again: reading part of it leaves nothing behind for the next read, and
-work a stage does is done again on each read. Collect a pipe into a list when
-it is going to be read more than once.
+A pipe is a cursor over its source. Reading part of it and then reading it
+again carries on from where the last read stopped; it starts over only once it
+has run out. Collect a pipe into a list when it is going to be read more than
+once.
