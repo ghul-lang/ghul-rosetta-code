@@ -5,8 +5,12 @@ let scratch =
 
 IO.Directory.create_directory(scratch)
 
-is_empty(path: string) -> bool =>
-    !(IO.Directory.enumerate_file_system_entries(path) |> first())?
+is_empty(path: string) -> bool is
+    let use entries =
+        IO.Directory.enumerate_file_system_entries(path).iterator
+
+    return !entries.move_next()
+si
 
 let empty = IO.Path.combine(scratch, "empty")
 let occupied = IO.Path.combine(scratch, "occupied")
