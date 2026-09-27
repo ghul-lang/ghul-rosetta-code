@@ -2,7 +2,7 @@ use default
 use System.Text.Encoding
 
 percent_encoded(octet: ubyte) -> string =>
-    (let character = cast char(octet)
+    (let character = char(octet)
 
      if char.is_ascii_letter_or_digit(character) then
          "{character}"

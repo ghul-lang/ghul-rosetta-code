@@ -54,8 +54,8 @@ si
 // scaled to a frame time that divides the period exactly.
 let period = 4.0D * quarter_period(0.0002D)
 
-let tick = period / cast double(frames * substeps)
-let delay = cast int(round(1000.0D * period / cast double(frames)))
+let tick = period / double(frames * substeps)
+let delay = int(round(1000.0D * period / double(frames)))
 
 let image = IMAGE(width, height)
 

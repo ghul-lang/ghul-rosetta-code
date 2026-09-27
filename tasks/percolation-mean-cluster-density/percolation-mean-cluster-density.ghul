@@ -60,8 +60,8 @@ si
 
 density(size: int) -> double =>
     let total = (0..runs)
-        |> sum_by(_ => cast double(CLUSTERS(size).count)) in
-    total / cast double(runs) / cast double(size * size)
+        |> sum_by(_ => double(CLUSTERS(size).count)) in
+    total / double(runs) / double(size * size)
 
 write_line("mean cluster density at p = {p}, averaged over {runs} runs")
 write_line()
@@ -95,8 +95,8 @@ for cell in 0..225 do
 
     if label > 0 then
         let (red, green, blue) = palette[(label - 1) % palette.count]
-        let x = cast double(cell % 15)
-        let y = cast double(cell / 15)
+        let x = double(cell % 15)
+        let y = double(cell / 15)
 
         image.colour(red, green, blue)
         image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)

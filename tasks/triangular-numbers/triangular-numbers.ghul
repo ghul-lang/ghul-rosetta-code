@@ -46,7 +46,7 @@ let roots = [(name = "triangular", of = triangular_root),
     |> each(value => (
         write_line("roots of {value}:")
 
-        let as_real = cast double(value)
+        let as_real = double(value)
 
         roots
             |> each(root =>

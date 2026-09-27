@@ -49,7 +49,7 @@ decimal(q: Q) -> string is
     "{sign}{integer}.{text.substring(0, start)}({text.substring(start)})"
 si
 
-let nothing = cast char(0)
+let nothing = char(0)
 
 class BAD_INPUT(text: string init): System.Exception is
     super(text)

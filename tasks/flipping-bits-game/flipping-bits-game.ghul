@@ -28,7 +28,7 @@ show(caption: string, board: LIST[int]) is
     write_line(caption)
 
     let letters =
-        0..size |> map(c => "{cast char(cast int('a') + c)}")
+        0..size |> map(c => "{char(int('a') + c)}")
 
     write_line("   {letters |> join(" ")}")
 
@@ -71,10 +71,10 @@ while !same(board, target) do
     let move = typed.trim()
 
     if move.length == 1 /\ char.is_digit(move[0]) then
-        flip_row(board, cast int(move[0]) - cast int('1'))
+        flip_row(board, int(move[0]) - int('1'))
         moves = moves + 1
     elif move.length == 1 /\ char.is_letter(move[0]) then
-        flip_column(board, cast int(move.to_lower()[0]) - cast int('a'))
+        flip_column(board, int(move.to_lower()[0]) - int('a'))
         moves = moves + 1
     else
         write_line("enter a row number or a column letter")

@@ -6,7 +6,7 @@ woodall(n: int) -> bigint => (bigint(n) << n) - 1n
 
 let small_primes = 3::20_000
     |> filter(p => 2..p |> all(d => d * d > p \/ p % d != 0))
-    |> map(p => cast long(p))
+    |> map(p => long(p))
     |> collect()
 
 power_of_two_mod(n: int, p: long) -> long is
@@ -28,7 +28,7 @@ si
 
 has_small_factor(n: int, offset: long) -> bool =>
     n > 10 /\ small_primes |> any(p =>
-        (cast long(n) % p * power_of_two_mod(n, p) + offset) % p == 0L)
+        (long(n) % p * power_of_two_mod(n, p) + offset) % p == 0L)
 
 passes_round(
     witness: bigint, candidate: bigint, odd_part: bigint, twos: int

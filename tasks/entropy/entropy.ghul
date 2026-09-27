@@ -12,7 +12,7 @@ entropy(text: string) -> double is
         counts[character] = seen + 1
     od
 
-    let total = cast double(text.length)
+    let total = double(text.length)
 
     return counts.values
         |> map(count => cast(count) / total)

@@ -49,7 +49,7 @@ combine(
     let y_left mut = true
     let waited mut = 0
 
-    ratio(n: bigint, d: bigint) -> double => cast double(n) / cast double(d)
+    ratio(n: bigint, d: bigint) -> double => double(n) / double(d)
 
     settled() -> bool =>
         let (a12, a1, a2, a) = top, (b12, b1, b2, b) = bottom in

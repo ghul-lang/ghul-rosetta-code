@@ -7,7 +7,7 @@ let entropy =
         |> group_by(c => c)
         |> sum_by((_, occurrences) =>
             let share =
-                cast double(occurrences.count) / cast double(source.length)
+                double(occurrences.count) / double(source.length)
             in
             -share * double.log2(share))
 

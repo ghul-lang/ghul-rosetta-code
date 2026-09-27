@@ -10,10 +10,10 @@ let height = 360
 let light = (x = -0.45D, y = 0.55D, z = 0.70D)
 
 brightness(pixel_x: int, pixel_y: int) -> double =>
-    (let x = (cast double(pixel_x) - 0.5D * cast double(width)) /
-             (0.42D * cast double(height))
-     let y = (0.5D * cast double(height) - cast double(pixel_y)) /
-             (0.42D * cast double(height))
+    (let x = (double(pixel_x) - 0.5D * double(width)) /
+             (0.42D * double(height))
+     let y = (0.5D * double(height) - double(pixel_y)) /
+             (0.42D * double(height))
 
      let sky = 0.86D - 0.42D * (y + 1.2D) / 2.4D
      let away = x * x + y * y
@@ -35,7 +35,7 @@ let grey = LIST()
 for pixel_y in 0..height do
     for pixel_x in 0..width do
         let value = brightness(pixel_x, pixel_y)
-        let shade = cast ubyte(round(255.0D * value))
+        let shade = ubyte(round(255.0D * value))
 
         grey.add(value)
         source.set_pixel(pixel_x, pixel_y, shade, shade, shade)
@@ -45,7 +45,7 @@ od
 let palette = 2
 
 nearest(value: double) -> double =>
-    (let steps = cast double(palette - 1)
+    (let steps = double(palette - 1)
 
      round(min(1.0D, max(0.0D, value)) * steps) / steps)
 
@@ -64,7 +64,7 @@ for pixel_y in 0..height do
         let chosen = nearest(wanted)
         let error = wanted - chosen
 
-        let shade = cast ubyte(round(255.0D * chosen))
+        let shade = ubyte(round(255.0D * chosen))
 
         dithered.set_pixel(pixel_x, pixel_y, shade, shade, shade)
 

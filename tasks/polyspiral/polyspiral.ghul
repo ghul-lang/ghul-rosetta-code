@@ -20,11 +20,11 @@ draw(image: IMAGE, increment: double) is
         let radians = angle * pi / 180.0D
         let next_x = x + length * cos(radians)
         let next_y = y + length * sin(radians)
-        let fade = cast double(segment) / cast double(segments)
+        let fade = double(segment) / double(segments)
 
         image.colour(
-            cast ubyte(255.0D * (1.0D - fade)),
-            cast ubyte(120.0D + 100.0D * fade),
+            ubyte(255.0D * (1.0D - fade)),
+            ubyte(120.0D + 100.0D * fade),
             255ub)
         image.line(x, y, next_x, next_y)
 
@@ -42,7 +42,7 @@ image.view(-250.0D, -250.0D, 250.0D, 250.0D)
 let animation = ANIMATION(size, size)
 
 for frame in 0..frames do
-    draw(image, 90.0D + 360.0D * cast double(frame) / cast double(frames))
+    draw(image, 90.0D + 360.0D * double(frame) / double(frames))
     animation.add(image, 100)
 od
 

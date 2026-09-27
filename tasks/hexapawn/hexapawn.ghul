@@ -61,8 +61,8 @@ parse(text: string) -> Move? is
     fi
 
     let index = at =>
-        (3 - (cast int(squares[at + 1]) - cast int('0'))) * 3 +
-        cast int(squares[at]) - cast int('a')
+        (3 - (int(squares[at + 1]) - int('0'))) * 3 +
+        int(squares[at]) - int('a')
 
     (from = index(0), to = index(2))
 si

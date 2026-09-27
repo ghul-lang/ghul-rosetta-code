@@ -5,10 +5,10 @@ let pair_bound = 1200
 let sums = LIST()
 
 for a in 1..pair_bound do
-    let a_cubed = cast long(a) * cast long(a) * cast long(a)
+    let a_cubed = long(a) * long(a) * long(a)
 
     for b in (a + 1)..pair_bound do
-        let b_cubed = cast long(b) * cast long(b) * cast long(b)
+        let b_cubed = long(b) * long(b) * long(b)
 
         sums.add(a_cubed + b_cubed)
     od
@@ -36,7 +36,7 @@ od
 
 cube_root(value: long) -> long => (
     let cube_root_of = System.Math.cbrt(cast(value))
-    let root = cast long(System.Math.floor(cube_root_of + 0.5D))
+    let root = long(System.Math.floor(cube_root_of + 0.5D))
 
     if root * root * root == value then root else 0L fi
 )

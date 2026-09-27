@@ -20,7 +20,7 @@ od
 
 probably_prime(value: long) -> bool is
     for small in small_primes do
-        let divisor = cast long(small)
+        let divisor = long(small)
 
         if value == divisor then return true fi
         if value % divisor == 0L then return false fi

@@ -28,7 +28,7 @@ beats(dice1: int, faces1: int, dice2: int, faces2: int) -> double =>
                 ways * (second |> take(a) |> sum()))
     in
     let games = (first |> sum()) * (second |> sum()) in
-    cast double(wins) / cast double(games)
+    double(wins) / double(games)
 
 let first = beats(9, 4, 6, 6)
 let second = beats(5, 10, 6, 7)

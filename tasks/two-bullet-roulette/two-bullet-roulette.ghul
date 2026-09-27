@@ -73,7 +73,7 @@ let trials = 100_000
 
 for (label, method) in zip(["A", "B", "C", "D"], methods) do
     let deaths = 1::trials |> count(_ => play(method))
-    let rate = 100.0 * cast double(deaths) / cast double(trials)
+    let rate = 100.0 * double(deaths) / double(trials)
 
     write_line("{label}. {method,-34} {rate,6:F2}% deaths")
 od

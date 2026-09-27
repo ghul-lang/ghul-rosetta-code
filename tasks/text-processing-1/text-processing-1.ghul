@@ -42,7 +42,7 @@ for line in lines do
 
     if date >= "2004-12-29" then
         let average =
-            if accepted > 0 then line_total / cast double(accepted)
+            if accepted > 0 then line_total / double(accepted)
             else 0.0
             fi
 
@@ -57,7 +57,7 @@ write_line("")
 write_line("File     = readings.txt")
 write_line("Total    = {total,10:F3}")
 write_line("Readings = {readings,6}")
-write_line("Average  = {total / cast double(readings),10:F3}")
+write_line("Average  = {total / double(readings),10:F3}")
 write_line("")
 write_line(
     "Maximum run of {longest} consecutive false readings ends at the "

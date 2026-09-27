@@ -7,7 +7,7 @@ shift(stamp: string, offset: TimeSpan) -> string =>
     (TimeSpan.parse_exact(stamp, format, null) + offset).to_string(format)
 
 synced(lines: string[], seconds: int) -> Pipe[string] =>
-    let offset = TimeSpan.from_seconds(cast double(seconds)) in
+    let offset = TimeSpan.from_seconds(double(seconds)) in
     lines |> map(line =>
         if line.contains(" --> ") then
             let parts = line.split([' ']) in

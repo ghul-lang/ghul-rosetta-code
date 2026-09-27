@@ -20,9 +20,9 @@ project(p: Point) -> Flat =>
 
 corner(i: int, j: int, k: int) -> Flat =>
     project((
-        x = width * cast double(i) - width / 2.0D,
-        y = height * cast double(j) - height / 2.0D,
-        z = depth * cast double(k) - depth / 2.0D))
+        x = width * double(i) - width / 2.0D,
+        y = height * double(j) - height / 2.0D,
+        z = depth * double(k) - depth / 2.0D))
 
 outline(corners: (int, int, int)[]) -> List[Flat] =>
     corners |> map((i, j, k) => corner(i, j, k)) |> collect()
@@ -43,9 +43,9 @@ let shapes = SHAPES()
 for (points, light) in faces do
     shapes.add(
         points,
-        cast ubyte(80.0D * light),
-        cast ubyte(120.0D * light),
-        cast ubyte(240.0D * light))
+        ubyte(80.0D * light),
+        ubyte(120.0D * light),
+        ubyte(240.0D * light))
 od
 
 image.fill(shapes)

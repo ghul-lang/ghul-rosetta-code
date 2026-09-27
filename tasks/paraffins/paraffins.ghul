@@ -30,7 +30,7 @@ tree(branches: int, n: int, largest: int, size: int, count: long) is
             if b == branches + 1 then
                 rooted[n] * count
             else
-                let extra = cast long(b - branches - 1) in
+                let extra = long(b - branches - 1) in
                 ways * (rooted[n] + extra) / (extra + 1L)
             fi
 

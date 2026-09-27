@@ -156,7 +156,7 @@ for (name, make) in inputs do
         image.stroke(2.0)
         image.line(
             zip(powers, t)
-            |> map((p, time) => (x = cast double(p), y = log2(time)))
+            |> map((p, time) => (x = double(p), y = log2(time)))
             |> collect())
     od
 

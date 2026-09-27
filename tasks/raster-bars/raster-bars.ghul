@@ -19,28 +19,28 @@ let bars = [
 ]
 
 channel(value: double) -> ubyte =>
-    cast ubyte(round(255.0D * clamp(value, 0.0D, 1.0D)))
+    ubyte(round(255.0D * clamp(value, 0.0D, 1.0D)))
 
 draw_bar(image: IMAGE, colour: Colour, top: double) is
     for row in 0..thickness do
-        let across = (cast double(row) + 0.5D) / cast double(thickness)
+        let across = (double(row) + 0.5D) / double(thickness)
         let shine = sin(across * pi)
         let glint = pow(shine, 12.0D) * 0.5D
-        let y = top + cast double(row)
+        let y = top + double(row)
 
         image.colour(
             channel(colour.red * shine + glint),
             channel(colour.green * shine + glint),
             channel(colour.blue * shine + glint))
 
-        image.fill_rectangle(0.0D, y, cast double(width), y + 1.0D)
+        image.fill_rectangle(0.0D, y, double(width), y + 1.0D)
     od
 si
 
 draw(image: IMAGE, time: double) is
     image.clear(0ub, 0ub, 10ub)
 
-    let travel = cast double(height - thickness) / 2.0D
+    let travel = double(height - thickness) / 2.0D
 
     for bar in bars do
         let top =
@@ -54,7 +54,7 @@ let image = IMAGE(width, height)
 let animation = ANIMATION(width, height)
 
 for frame in 0..frames do
-    let time = 2.0D * pi * cast double(frame) / cast double(frames)
+    let time = 2.0D * pi * double(frame) / double(frames)
 
     draw(image, time)
     animation.add(image, 40)

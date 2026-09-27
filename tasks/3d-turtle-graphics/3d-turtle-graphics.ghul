@@ -116,7 +116,7 @@ si
 
 bar_chart(t: TURTLE, values: double[], size: double) is
     let start = t.state
-    let width = size / cast double(values.count)
+    let width = size / double(values.count)
     let most = values |> reduce(0.0D, max)
 
     for value in values do

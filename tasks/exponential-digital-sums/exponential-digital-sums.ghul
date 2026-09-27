@@ -4,7 +4,7 @@ write_line("summing digit powers, which takes a moment")
 write_line("")
 
 digit_sum(digits: string) -> int =>
-    digits |> reduce(0, (sum, c) => sum + cast int(c) - cast int('0'))
+    digits |> reduce(0, (sum, c) => sum + int(c) - int('0'))
 
 exponents(n: int, highest: int) -> Pipe[int] is
     let value = bigint(n)

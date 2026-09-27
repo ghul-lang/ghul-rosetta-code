@@ -3,7 +3,7 @@ use default
 let limit = 300_000
 let composite = repeat(false, limit) |> collect_mutable()
 
-let root = cast int(System.Math.sqrt(cast double(limit)))
+let root = int(System.Math.sqrt(double(limit)))
 
 for p in 2::root do
     if !composite[p] then

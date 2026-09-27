@@ -1,6 +1,6 @@
 use default
 
-let escape = cast char(27)
+let escape = char(27)
 
 let hide = "{escape}[?25l"
 let show = "{escape}[?25h"

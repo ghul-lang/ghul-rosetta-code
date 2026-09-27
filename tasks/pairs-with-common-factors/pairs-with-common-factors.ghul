@@ -20,9 +20,9 @@ sharing_a_factor() -> Pipe[long] is
     let coprime_total mut = 0L
 
     for count in 1::limit do
-        coprime_total = coprime_total + cast long(totient[count])
+        coprime_total = coprime_total + long(totient[count])
 
-        yield cast long(count) * cast(count - 1) / 2L + 1L - coprime_total
+        yield long(count) * cast(count - 1) / 2L + 1L - coprime_total
     od
 si
 

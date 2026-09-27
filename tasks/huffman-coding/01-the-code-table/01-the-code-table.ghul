@@ -73,7 +73,7 @@ let table =
         if left.weight != right.weight then
             right.weight - left.weight
         else
-            cast int(left.symbol) - cast int(right.symbol)
+            int(left.symbol) - int(right.symbol)
         fi)
 
 write_line("symbol  weight  code")

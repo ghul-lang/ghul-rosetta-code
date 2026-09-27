@@ -27,7 +27,7 @@ class MACHINE is
 
     run() is
         do
-            let op = cast Op(cast int(_code[_pc]))
+            let op = cast Op(int(_code[_pc]))
 
             _pc = _pc + 1
 
@@ -42,7 +42,7 @@ class MACHINE is
                 _pc = _pc + if _pop() == 0 then offset else 4 fi
             when Op.NEG then _push(-_pop())
             when Op.NOT then _push(truth(_pop() == 0))
-            when Op.PRTC then IO.Std.write(cast char(_pop()))
+            when Op.PRTC then IO.Std.write(char(_pop()))
             when Op.PRTS then IO.Std.write(_strings[_pop()])
             when Op.PRTI then IO.Std.write("{_pop()}")
             when Op.HALT then break
@@ -122,7 +122,7 @@ for line in lines |> skip(1 + string_count) do
 
     let op = System.Enum.parse[Op](parts[1].to_upper_invariant())
 
-    code.add(cast ubyte(cast int(op)))
+    code.add(ubyte(cast int(op)))
 
     if parts.count > 2 then
         let operand = int.parse(parts[2].trim(['[', ']', '(', ')']))

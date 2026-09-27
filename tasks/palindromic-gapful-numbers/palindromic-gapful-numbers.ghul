@@ -8,8 +8,8 @@ palindromes(digit: int) -> Pipe[long] is
     for length in from(3) do
         let half = (length + 1) / 2
         let scale = repeat(10L, half - 1) |> product()
-        let low = cast long(digit) * scale
-        let high = cast long(digit + 1) * scale
+        let low = long(digit) * scale
+        let high = long(digit + 1) * scale
 
         for left in from(low) |> take_while(n => n < high) do
             let text = "{left}"
@@ -21,7 +21,7 @@ palindromes(digit: int) -> Pipe[long] is
 si
 
 gapful(digit: int) -> Pipe[long] =>
-    palindromes(digit) |> filter(n => n % cast long(11 * digit) == 0L)
+    palindromes(digit) |> filter(n => n % long(11 * digit) == 0L)
 
 show(title: string, skip_count: int, take_count: int) is
     write_line(title)

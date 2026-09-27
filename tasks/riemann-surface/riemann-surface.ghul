@@ -32,10 +32,10 @@ turned(p: VEC) -> VEC is
 si
 
 angle(i: int) -> double =>
-    2.0D * pi * cast double(turns) *
-    cast double(i) / cast double(around)
+    2.0D * pi * double(turns) *
+    double(i) / double(around)
 
-radius(j: int) -> double => reach * cast double(j) / cast double(along)
+radius(j: int) -> double => reach * double(j) / double(along)
 
 corner(i: int, j: int) -> VEC is
     let t = angle(i)
@@ -54,7 +54,7 @@ patch(i: int, j: int) -> Patch =>
             turned(corner(i + 1, j)),
             turned(corner(i + 1, j + 1)),
             turned(corner(i, j + 1))],
-        phase = angle(i) / (2.0D * pi * cast double(turns)))
+        phase = angle(i) / (2.0D * pi * double(turns)))
 
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
 
@@ -85,9 +85,9 @@ for p in patches do
         p.corners |> map(c => (x = c.x, y = c.y)) |> collect()
 
     image.colour(
-        cast ubyte(cast double(tint.red) * light),
-        cast ubyte(cast double(tint.green) * light),
-        cast ubyte(cast double(tint.blue) * light))
+        ubyte(double(tint.red) * light),
+        ubyte(double(tint.green) * light),
+        ubyte(double(tint.blue) * light))
 
     image.fill(outline)
     image.line(outline |> cat([outline[0]]) |> collect())

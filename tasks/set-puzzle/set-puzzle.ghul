@@ -91,7 +91,7 @@ outline(symbol: int, x: double, y: double)
     let steps = 32 in
     (0..steps)
         |> map(i =>
-            let turn = cast double(i) / cast double(steps) in
+            let turn = double(i) / double(steps) in
             let t = 2.0D * pi * turn in
             case symbol
             when 0 then
@@ -113,17 +113,17 @@ let card_height = 72.0D
 let gap = 12.0D
 
 let image = IMAGE(
-    cast int(4.0D * card_width + 5.0D * gap),
-    cast int(3.0D * card_height + 4.0D * gap))
+    int(4.0D * card_width + 5.0D * gap),
+    int(3.0D * card_height + 4.0D * gap))
 
 image.view(
-    0.0D, cast double(image.height), cast double(image.width), 0.0D)
+    0.0D, double(image.height), double(image.width), 0.0D)
 image.clear(40ub, 90ub, 60ub)
 
 for (card, place) in
         deals[1].cards |> index() |> map(iv => (iv.value, iv.index)) do
-    let left = gap + cast double(place % 4) * (card_width + gap)
-    let top = gap + cast double(place / 4) * (card_height + gap)
+    let left = gap + double(place % 4) * (card_width + gap)
+    let top = gap + double(place / 4) * (card_height + gap)
     let (red, green, blue) = inks[card.colour]
 
     image.colour(255ub, 255ub, 252ub)
@@ -131,7 +131,7 @@ for (card, place) in
         left, top, left + card_width, top + card_height)
 
     for i in 0..card.number + 1 do
-        let offset = cast double(i) - cast double(card.number) / 2.0D
+        let offset = double(i) - double(card.number) / 2.0D
         let x = left + card_width / 2.0D + 26.0D * offset
         let shape = outline(card.symbol, x, top + card_height / 2.0D)
 
@@ -140,9 +140,9 @@ for (card, place) in
             image.fill(shape)
         elif card.shading == 2 then
             image.colour(
-                cast ubyte(255 - (255 - cast int(red)) / 3),
-                cast ubyte(255 - (255 - cast int(green)) / 3),
-                cast ubyte(255 - (255 - cast int(blue)) / 3))
+                ubyte(255 - (255 - int(red)) / 3),
+                ubyte(255 - (255 - int(green)) / 3),
+                ubyte(255 - (255 - int(blue)) / 3))
             image.fill(shape)
         fi
 

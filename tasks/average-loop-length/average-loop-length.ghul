@@ -18,11 +18,11 @@ loop_length(n: int) -> int is
 si
 
 simulated(n: int) -> double =>
-    cast double(1::trials |> sum_by(_ => loop_length(n))) /
-        cast double(trials)
+    double(1::trials |> sum_by(_ => loop_length(n))) /
+        double(trials)
 
 analytical(n: int) -> double =>
-    let size = cast double(n) in
+    let size = double(n) in
     1::n
         |> sum_by(k =>
             0..k |> map(i => (size - cast(i)) / size) |> product())

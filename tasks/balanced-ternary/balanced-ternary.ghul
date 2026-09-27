@@ -21,7 +21,7 @@ balanced(n: bigint) -> BT is
     let more mut = true
 
     while more do
-        let r mut = cast int(remaining % three)
+        let r mut = int(remaining % three)
         if r < 0 then r = r + 3 fi
         if r == 2 then r = -1 fi
 

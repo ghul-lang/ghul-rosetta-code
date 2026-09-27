@@ -4,7 +4,7 @@ rotate_left(value: uint, count: int) -> uint =>
     (value << count) | (value >>> (32 - count))
 
 padded(message: ubyte[]) -> LIST[ubyte] is
-    let bits = cast ulong(message.count) * 8ul
+    let bits = ulong(message.count) * 8ul
 
     let block = LIST[ubyte](message)
 
@@ -15,7 +15,7 @@ padded(message: ubyte[]) -> LIST[ubyte] is
     od
 
     for index in 0..8 do
-        block.add(cast ubyte((bits >>> (56 - 8 * index)) & 0xFFul))
+        block.add(ubyte((bits >>> (56 - 8 * index)) & 0xFFul))
     od
 
     return block
@@ -24,7 +24,7 @@ si
 word(block: LIST[ubyte], at: int) -> uint =>
     0..4
         |> map(index =>
-            cast uint(block[at + index]) << (24 - 8 * index))
+            uint(block[at + index]) << (24 - 8 * index))
         |> reduce(0u, (packed, part) => packed | part)
 
 sha1(message: ubyte[]) -> string is

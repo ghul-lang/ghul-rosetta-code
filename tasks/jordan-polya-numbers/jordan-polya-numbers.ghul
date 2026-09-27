@@ -3,7 +3,7 @@ use default
 let biggest_factorial = 18
 
 factorial(n: int) -> long =>
-    2::n |> reduce(1L, (product, i) => product * cast long(i))
+    2::n |> reduce(1L, (product, i) => product * long(i))
 
 multiples(value: long, largest: int, limit: long) -> Pipe[long] is
     yield value

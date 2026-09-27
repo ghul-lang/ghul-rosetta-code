@@ -1,11 +1,11 @@
 use default
 
 microsoft_rand(seed: int) -> Pipe[int] is
-    let state mut = cast long(seed)
+    let state mut = long(seed)
 
     while true do
         state = (214013L * state + 2531011L) % 2147483648L
-        yield cast int(state / 65536L)
+        yield int(state / 65536L)
     od
 si
 

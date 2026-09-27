@@ -22,12 +22,12 @@ greatest_common_divisor(a: long, b: long) -> long =>
 bernoulli(n: int) -> FRACTION is
     let a =
         0::n
-            |> map(m => fraction(1L, cast long(m + 1)))
+            |> map(m => fraction(1L, long(m + 1)))
             |> collect_mutable()
 
     for m in 1::n do
         for j in 1::m |> reverse() do
-            a[j - 1] = fraction(cast long(j), 1L) * (a[j - 1] - a[j])
+            a[j - 1] = fraction(long(j), 1L) * (a[j - 1] - a[j])
         od
     od
 
@@ -37,7 +37,7 @@ si
 binomial(n: int, k: int) -> long =>
     1::k
         |> reduce(1L, (c: long, i: int) =>
-            c * cast long(n - k + i) / cast long(i))
+            c * long(n - k + i) / long(i))
 
 term(coefficient: FRACTION, power: int) -> string =>
     let top = long.abs(coefficient.numerator) in
@@ -51,7 +51,7 @@ faulhaber(p: int) -> string =>
         0::p
             |> map(j =>
                 (coefficient =
-                    fraction(binomial(p + 1, j), cast long(p + 1)) *
+                    fraction(binomial(p + 1, j), long(p + 1)) *
                         bernoulli(j),
                  power = p + 1 - j))
             |> filter(t => t.coefficient.numerator != 0L)

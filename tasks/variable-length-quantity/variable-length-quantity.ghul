@@ -1,7 +1,7 @@
 use default
 
 to_octets(value: long) -> LIST[ubyte] is
-    let octets = LIST([cast ubyte(value & 0x7FL)])
+    let octets = LIST([ubyte(value & 0x7FL)])
     let rest mut = value >> 7
 
     while rest > 0L do

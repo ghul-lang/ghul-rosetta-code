@@ -40,7 +40,7 @@ divisors(value: int) -> Pipe[int] is
 si
 
 splits_repeated_doubling(value: int) -> bool =>
-    let wide = cast long(value) in
+    let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide
 
 is_super_poulet(value: int) -> bool =>

@@ -20,18 +20,18 @@ class RATE_COUNTER is
 
     jobs: int => _jobs
     seconds: double => _clock.elapsed.total_seconds
-    rate: double => cast double(_jobs) / seconds
+    rate: double => double(_jobs) / seconds
 si
 
 job() is
     let total mut = 0L
 
     for i in 0..10_000 do
-        total = total + cast long(i) * cast long(i)
+        total = total + long(i) * long(i)
     od
 si
 
-let tick_ns = 1.0e9 / cast double(Stopwatch.frequency)
+let tick_ns = 1.0e9 / double(Stopwatch.frequency)
 write_line("timer resolution: {tick_ns:F0} ns")
 
 for count in [100, 1_000, 10_000] do

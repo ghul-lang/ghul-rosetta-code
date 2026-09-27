@@ -69,7 +69,7 @@ axes.draw()
 
 let corners =
     LIST(hull |> map(at =>
-        (x = cast double(at.x), y = cast double(at.y))))
+        (x = double(at.x), y = double(at.y))))
 
 image.colour(206ub, 224ub, 244ub)
 image.fill(corners)
@@ -82,12 +82,12 @@ image.line(corners)
 
 for at in points do
     image.colour(60ub, 60ub, 70ub)
-    image.dot(cast double(at.x), cast double(at.y), 3.5D)
+    image.dot(double(at.x), double(at.y), 3.5D)
 od
 
 for at in hull do
     image.colour(216ub, 64ub, 48ub)
-    image.dot(cast double(at.x), cast double(at.y), 5.0D)
+    image.dot(double(at.x), double(at.y), 5.0D)
 od
 
 image.write("hull.png")

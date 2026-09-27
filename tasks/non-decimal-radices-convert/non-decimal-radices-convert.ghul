@@ -3,14 +3,14 @@ use default
 let digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 to_base(n: long, base: int) -> string =>
-    let b = cast long(base) in
-    let last = digits[cast int(n % b)] in
+    let b = long(base) in
+    let last = digits[int(n % b)] in
     if n < b then "{last}" else "{to_base(n / b, base)}{last}" fi
 
 from_base(text: string, base: int) -> long =>
     text
         |> reduce(0L, (value: long, c: char) =>
-            value * cast long(base) + cast long(digits.index_of(c)))
+            value * long(base) + long(digits.index_of(c)))
 
 let cases = [
     (26L, 16), (0L, 2), (255L, 2), (1_000_000L, 36),

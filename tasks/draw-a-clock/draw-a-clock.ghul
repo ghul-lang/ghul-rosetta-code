@@ -27,16 +27,16 @@ draw(image: IMAGE, time: System.DateTime) is
     for tick in 0..60 do
         let long = tick % 5 == 0
         let inner = if long then 0.8D else 0.88D fi
-        let (x0, y0) = point(cast double(tick), inner)
-        let (x1, y1) = point(cast double(tick), 0.94D)
+        let (x0, y0) = point(double(tick), inner)
+        let (x1, y1) = point(double(tick), 0.94D)
 
         image.stroke(if long then 3.0D else 1.0D fi)
         image.line(x0, y0, x1, y1)
     od
 
-    let second = cast double(time.second)
-    let minute = cast double(time.minute) + second / 60.0D
-    let hour = cast double(time.hour % 12) + minute / 60.0D
+    let second = double(time.second)
+    let minute = double(time.minute) + second / 60.0D
+    let hour = double(time.hour % 12) + minute / 60.0D
 
     hand(image, 5.0D * hour, 0.5D, 5.0D)
     hand(image, minute, 0.75D, 3.0D)
@@ -56,10 +56,10 @@ image.view(-1.1D, -1.1D, 1.1D, 1.1D)
 let animation = ANIMATION(size, size)
 
 let now = System.DateTime.now
-let start = now.add_milliseconds(cast double(-now.millisecond))
+let start = now.add_milliseconds(double(-now.millisecond))
 
 for second in 0..60 do
-    let time = start.add_seconds(cast double(second))
+    let time = start.add_seconds(double(second))
 
     draw(image, time)
     animation.add(image, 1000)

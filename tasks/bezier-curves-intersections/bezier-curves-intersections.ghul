@@ -98,7 +98,7 @@ image.stroke(2.0D)
 
 trace(curve: Curve) -> List[Point] =>
     (0::100)
-        |> map(i => point_at(curve, cast double(i) / 100.0D))
+        |> map(i => point_at(curve, double(i) / 100.0D))
         |> collect()
 
 image.colour(40ub, 90ub, 170ub)

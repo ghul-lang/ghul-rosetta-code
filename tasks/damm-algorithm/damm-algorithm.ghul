@@ -13,7 +13,7 @@ let table = [
     "2581436790"
 ]
 
-digit_value(digit: char) -> int => cast int(digit) - cast('0')
+digit_value(digit: char) -> int => int(digit) - cast('0')
 
 valid(number: string) -> bool => (
     let interim mut = 0

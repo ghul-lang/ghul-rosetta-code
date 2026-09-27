@@ -9,7 +9,7 @@ letters(text: string) -> string =>
 
 random_group() -> string =>
     string(1::6
-        |> map(_ => cast char(65 + RandomNumberGenerator.get_int32(26)))
+        |> map(_ => char(65 + RandomNumberGenerator.get_int32(26)))
         |> collect())
 
 random_line() -> string => 1::6 |> map(_ => random_group()) |> join(" ")
@@ -40,13 +40,13 @@ take_key(path: string, length: int) -> string is
     key.to_string().substring(0, length)
 si
 
-position(c: char) -> int => cast int(c) - cast int('A')
+position(c: char) -> int => int(c) - int('A')
 
 shift(text: string, key: string, direction: int) -> string =>
     string(0..text.length
         |> map(i =>
             let moved = position(text[i]) + direction * position(key[i]) in
-            cast char(cast int('A') + (moved + 26) % 26))
+            char(int('A') + (moved + 26) % 26))
         |> collect())
 
 round_trip(

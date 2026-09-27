@@ -108,10 +108,10 @@ let image = IMAGE(64 * scale, 64 * scale)
 
 for (i, grains) in identity.cells |> index() do
     let (r, g, b) = shades[grains]
-    let x = cast double(i % 64 * scale), y = cast double(i / 64 * scale)
+    let x = double(i % 64 * scale), y = double(i / 64 * scale)
 
     image.colour(r, g, b)
-    let side = cast double(scale)
+    let side = double(scale)
 
     image.fill_rectangle(x, y, x + side, y + side)
 od

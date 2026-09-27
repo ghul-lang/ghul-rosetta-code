@@ -11,8 +11,8 @@ let volume_limit = 0.25
 
 most_of(item: Bounty) -> int =>
     System.Math.min(
-        cast int(weight_limit / item.weight),
-        cast int(volume_limit / item.volume))
+        int(weight_limit / item.weight),
+        int(volume_limit / item.volume))
 
 let best_value mut = 0
 let best mut = (panaceas = 0, ichors = 0, golds = 0)
@@ -20,12 +20,12 @@ let best mut = (panaceas = 0, ichors = 0, golds = 0)
 for panaceas in 0::most_of(panacea) do
     for ichors in 0::most_of(ichor) do
         let weight =
-            cast double(panaceas) * panacea.weight +
-            cast double(ichors) * ichor.weight
+            double(panaceas) * panacea.weight +
+            double(ichors) * ichor.weight
 
         let volume =
-            cast double(panaceas) * panacea.volume +
-            cast double(ichors) * ichor.volume
+            double(panaceas) * panacea.volume +
+            double(ichors) * ichor.volume
 
         if weight > weight_limit \/ volume > volume_limit then
             break
@@ -33,8 +33,8 @@ for panaceas in 0::most_of(panacea) do
 
         let golds =
             System.Math.min(
-                cast int((weight_limit - weight) / gold.weight),
-                cast int((volume_limit - volume) / gold.volume))
+                int((weight_limit - weight) / gold.weight),
+                int((volume_limit - volume) / gold.volume))
 
         let value =
             panaceas * panacea.value +
@@ -51,14 +51,14 @@ od
 let (panaceas, ichors, golds) = best
 
 let weight =
-    cast double(panaceas) * panacea.weight +
-    cast double(ichors) * ichor.weight +
-    cast double(golds) * gold.weight
+    double(panaceas) * panacea.weight +
+    double(ichors) * ichor.weight +
+    double(golds) * gold.weight
 
 let volume =
-    cast double(panaceas) * panacea.volume +
-    cast double(ichors) * ichor.volume +
-    cast double(golds) * gold.volume
+    double(panaceas) * panacea.volume +
+    double(ichors) * ichor.volume +
+    double(golds) * gold.volume
 
 write_line("Maximum value achievable is {best_value}")
 write_line(

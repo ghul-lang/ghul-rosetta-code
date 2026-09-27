@@ -9,6 +9,6 @@ root_mean_square(values: Collections.List[double]) -> double is
     return Math.sqrt(squares / cast(values.count))
 si
 
-let one_to_ten = 1::10 |> map(n => cast double(n)) |> collect()
+let one_to_ten = 1::10 |> map(n => double(n)) |> collect()
 
 write_line("{root_mean_square(one_to_ten)}")

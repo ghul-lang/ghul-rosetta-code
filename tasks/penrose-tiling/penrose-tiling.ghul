@@ -34,8 +34,8 @@ split(tile: Half) -> Pipe[Half] is
 si
 
 spoke(index: int) -> Half =>
-    (let low = cast double(2 * index - 1) * pi / 10.0D
-     let high = cast double(2 * index + 1) * pi / 10.0D
+    (let low = double(2 * index - 1) * pi / 10.0D
+     let high = double(2 * index + 1) * pi / 10.0D
 
      let first = (x = cos(low), y = sin(low))
      let second = (x = cos(high), y = sin(high))

@@ -5,7 +5,7 @@ harmonic_numbers() -> Ghul.Pipes.Pipe[(n: int, value: double)] is
     let n mut = 1
 
     do
-        sum = sum + 1.0 / cast double(n)
+        sum = sum + 1.0 / double(n)
         yield (n = n, value = sum)
         n = n + 1
     od
@@ -22,7 +22,7 @@ write_line("first position where H(n) exceeds a given integer:")
 
 for threshold in 1::10 do
     let past_threshold = harmonic_numbers()
-        |> filter(h => h.value > cast double(threshold))
+        |> filter(h => h.value > double(threshold))
         |> first()
 
     if let (n, _) = past_threshold then

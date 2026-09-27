@@ -27,8 +27,8 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] =>
 plot(at: Step) is
     let spot = image.to_pixel(at.x, at.y)
 
-    image.colour(COLOUR_MAP.hue(cast double(at.corner) / 3.0D))
-    image.blend(cast int(spot.x), cast int(spot.y), 0.6D)
+    image.colour(COLOUR_MAP.hue(double(at.corner) / 3.0D))
+    image.blend(int(spot.x), int(spot.y), 0.6D)
 si
 
 let start =

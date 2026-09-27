@@ -29,7 +29,7 @@ describe(seconds: double) -> string =>
     units
     |> filter((_, _, below) => seconds < below)
     |> map((name, size, _) =>
-        let count = cast int(seconds / size) in
+        let count = int(seconds / size) in
         "{count} {name}{if count == 1 then "" else "s" fi}")
     |> first() ?? ""
 

@@ -22,7 +22,7 @@ unrank(index: bigint) -> LIST[bigint] is
     let remaining mut = index
 
     while remaining > 1n do
-        let digit = cast int(remaining % eleven)
+        let digit = int(remaining % eleven)
 
         digits.add(if digit == 10 then " " else "{digit}" fi)
         remaining = remaining / eleven

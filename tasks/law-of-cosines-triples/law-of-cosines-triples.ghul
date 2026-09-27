@@ -3,8 +3,8 @@ use default
 use Triple = (a: long, b: long, c: long)
 
 exact_root(square: long) -> long? =>
-    let estimate = System.Math.sqrt(cast double(square)) in
-    let root = cast long(System.Math.round(estimate)) in
+    let estimate = System.Math.sqrt(double(square)) in
+    let root = long(System.Math.round(estimate)) in
     if root * root == square then root else null fi
 
 triples(k: long, limit: long) -> Pipe[Triple] =>

@@ -31,7 +31,7 @@ quarter_arc(image: IMAGE, from: Point, to: Point) is
     image.line(
         (0::24)
             |> map(i =>
-                let a = start + sweep * cast double(i) / 24.0D in
+                let a = start + sweep * double(i) / 24.0D in
                 (x = centre.x + radius * cos(a),
                  y = centre.y + radius * sin(a)))
             |> collect())
@@ -51,7 +51,7 @@ harriss(
             x = here.x + side * cos(radians),
             y = here.y + side * sin(radians))
 
-        let quadrant = cast int(round(angle / 90.0D))
+        let quadrant = int(round(angle / 90.0D))
         let colour = colours[(quadrant % 4 + 4) % 4]
 
         image.colour(colour.red, colour.green, colour.blue)
@@ -72,7 +72,7 @@ let x = 450.0D
 let y = 630.0D
 let base = 525.0D / plastic / plastic
 
-scaled(power: int) -> double => base / pow(plastic, cast double(power))
+scaled(power: int) -> double => base / pow(plastic, double(power))
 
 let left = x - (scaled(1) + scaled(3))
 let high = y - (base + scaled(2))

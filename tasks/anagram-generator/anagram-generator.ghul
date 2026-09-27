@@ -5,7 +5,7 @@ letter_counts(text: string) -> LIST[int] is
 
     for letter in text do
         if char.is_letter(letter) then
-            let index = cast int(char.to_lower(letter)) - cast int('a')
+            let index = int(char.to_lower(letter)) - int('a')
 
             counts[index] = counts[index] + 1
         fi

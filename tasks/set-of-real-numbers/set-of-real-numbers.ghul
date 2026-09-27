@@ -27,14 +27,14 @@ without(left: RealSet, right: RealSet) -> RealSet =>
 samples(low: double, high: double, steps: int) -> Pipe[double] =>
     (0::steps)
         |> map(step =>
-            low + (high - low) * cast double(step) / cast double(steps))
+            low + (high - low) * double(step) / double(steps))
 
 is_empty(set: RealSet, low: double, high: double, steps: int) -> bool =>
     samples(low, high, steps) |> all(value => !set(value))
 
 extent(set: RealSet, low: double, high: double, steps: int) -> double =>
     let inside = samples(low, high, steps) |> filter(set) |> count() in
-    (high - low) * cast double(inside) / cast double(steps)
+    (high - low) * double(inside) / double(steps)
 
 let examples =
     [(name = "(0,1] u [0,2)",

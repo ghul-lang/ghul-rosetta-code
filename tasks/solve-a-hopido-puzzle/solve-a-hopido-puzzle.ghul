@@ -76,13 +76,13 @@ for row in 0..rows do
 od
 
 let cell = 48.0D
-let image = IMAGE(cast int(cell) * columns, cast int(cell) * rows)
+let image = IMAGE(int(cell) * columns, int(cell) * rows)
 
 image.clear(245ub, 240ub, 225ub)
 
 for s in open do
-    let x = cell * cast double(s.column)
-    let y = cell * cast double(s.row)
+    let x = cell * double(s.column)
+    let y = cell * double(s.row)
 
     image.colour(200ub, 215ub, 235ub)
     image.fill_rectangle(
@@ -93,8 +93,8 @@ let path =
     open
         |> sort((a, b) => order[a] - order[b])
         |> map(s => (
-            x = cell * (cast double(s.column) + 0.5D),
-            y = cell * (cast double(s.row) + 0.5D)))
+            x = cell * (double(s.column) + 0.5D),
+            y = cell * (double(s.row) + 0.5D)))
         |> collect()
 
 image.colour(30ub, 60ub, 140ub)
@@ -109,8 +109,8 @@ image.colour(90ub, 90ub, 100ub)
 
 for s in open do
     image.text(
-        cell * cast double(s.column) + 5.0D,
-        cell * cast double(s.row) + 15.0D, 11.0D, "{order[s]}")
+        cell * double(s.column) + 5.0D,
+        cell * double(s.row) + 15.0D, 11.0D, "{order[s]}")
 od
 
 image.write("hopido.png")

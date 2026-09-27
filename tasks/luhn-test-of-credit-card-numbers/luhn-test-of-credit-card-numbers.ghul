@@ -7,7 +7,7 @@ luhn(number: string) -> bool is
             |> index()
             |> sum_by(entry =>
                 (
-                    let digit = cast int(entry.value) - cast int('0')
+                    let digit = int(entry.value) - int('0')
 
                     if entry.index % 2 == 0 then
                         digit

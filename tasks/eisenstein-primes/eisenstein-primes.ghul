@@ -17,10 +17,10 @@ is_eisenstein_prime(e: Eisenstein) -> bool =>
         is_prime(norm(e))
     fi
 
-real(e: Eisenstein) -> double => cast double(e.a) - cast double(e.b) / 2.0D
+real(e: Eisenstein) -> double => double(e.a) - double(e.b) / 2.0D
 
 imaginary(e: Eisenstein) -> double =>
-    cast double(e.b) * Math.sqrt(3.0D) / 2.0D
+    double(e.b) * Math.sqrt(3.0D) / 2.0D
 
 show(e: Eisenstein) -> string =>
     let im = imaginary(e) in
@@ -53,7 +53,7 @@ write_line("")
 write_line("plotted the first 2000, out to norm {norm(largest)}")
 
 let image = IMAGE(400, 400)
-let extent = Math.sqrt(cast double(norm(largest))) * 1.05D
+let extent = Math.sqrt(double(norm(largest))) * 1.05D
 
 image.view(-extent, -extent, extent, extent)
 image.clear(10ub, 12ub, 25ub)

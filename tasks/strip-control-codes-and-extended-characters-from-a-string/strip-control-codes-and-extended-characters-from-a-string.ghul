@@ -3,13 +3,13 @@ use default
 strip_control(text: string) -> string =>
     string(
         text
-            |> filter(c => cast int(c) >= 32 /\ cast int(c) != 127)
+            |> filter(c => int(c) >= 32 /\ int(c) != 127)
             |> collect())
 
 strip_control_and_extended(text: string) -> string =>
     string(
         text
-            |> filter(c => cast int(c) >= 32 /\ cast int(c) <= 126)
+            |> filter(c => int(c) >= 32 /\ int(c) <= 126)
             |> collect())
 
 let sample = "Hello\tWorldCafé"

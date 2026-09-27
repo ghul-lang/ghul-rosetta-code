@@ -6,10 +6,10 @@ show(name: string, value: int) =>
     write_line("{name,-22} {Convert.to_string(value, 2),32}")
 
 rotate_left(a: int, by: int) -> int =>
-    cast int(BitOperations.rotate_left(cast uint(a), by))
+    int(BitOperations.rotate_left(uint(a), by))
 
 rotate_right(a: int, by: int) -> int =>
-    cast int(BitOperations.rotate_right(cast uint(a), by))
+    int(BitOperations.rotate_right(uint(a), by))
 
 bitwise(a: int, b: int) is
     show("a", a)

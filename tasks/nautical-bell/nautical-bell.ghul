@@ -53,8 +53,8 @@ ring(bells: int) -> string =>
 
 keep_watch(clock: Clock, until: System.DateTime) is
     let now = clock.now
-    let half_hours = cast int(now.time_of_day.total_minutes) / 30 + 1
-    let next mut = now.date.add_minutes(30.0 * cast double(half_hours))
+    let half_hours = int(now.time_of_day.total_minutes) / 30 + 1
+    let next mut = now.date.add_minutes(30.0 * double(half_hours))
 
     while next <= until do
         clock.wait_until(next)

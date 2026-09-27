@@ -36,12 +36,12 @@ line(from_x: int, from_y: int, to_x: int, to_y: int) is
 si
 
 for spoke in 0..24 do
-    let angle = 2.0D * pi * cast double(spoke) / 24.0D
+    let angle = 2.0D * pi * double(spoke) / 24.0D
 
     line(
         200, 200,
-        200 + cast int(180.0D * cos(angle)),
-        200 + cast int(180.0D * sin(angle))
+        200 + int(180.0D * cos(angle)),
+        200 + int(180.0D * sin(angle))
     )
 od
 

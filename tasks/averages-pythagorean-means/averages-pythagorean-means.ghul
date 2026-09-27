@@ -17,7 +17,7 @@ harmonic(values: double[]) -> double is
     return cast(values.count) / reciprocals
 si
 
-let one_to_ten = 1::10 |> map(n => cast double(n)) |> collect()
+let one_to_ten = 1::10 |> map(n => double(n)) |> collect()
 
 let a = arithmetic(one_to_ten)
 let g = geometric(one_to_ten)

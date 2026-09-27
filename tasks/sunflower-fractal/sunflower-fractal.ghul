@@ -13,13 +13,13 @@ image.colour(0ub, 0ub, 255ub)
 image.stroke(1.0D)
 
 for i in 0::seeds do
-    let n = cast double(i)
-    let r = pow(n, phi) / cast double(seeds)
+    let n = double(i)
+    let r = pow(n, phi) / double(seeds)
     let angle = 2.0D * pi * phi * n
 
     image.circle(
         r * sin(angle), r * cos(angle),
-        5.0D * n / cast double(seeds))
+        5.0D * n / double(seeds))
 od
 
 write_line("{seeds} seeds, each turned the golden angle from the last")

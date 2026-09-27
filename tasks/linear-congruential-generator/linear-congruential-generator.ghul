@@ -1,7 +1,7 @@
 use default
 
 bsd_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
-    let state mut = cast long(seed)
+    let state mut = long(seed)
 
     do
         state = (1103515245L * state + 12345L) % 2147483648L
@@ -10,7 +10,7 @@ bsd_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
 si
 
 ms_rand(seed: int) -> Ghul.Pipes.Pipe[int] is
-    let state mut = cast long(seed)
+    let state mut = long(seed)
 
     do
         state = (214013L * state + 2531011L) % 2147483648L

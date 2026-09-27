@@ -11,7 +11,7 @@ let golden = (1.0D + sqrt(5.0D)) / 2.0D
 let shrink = 1.0D / (1.0D + golden)
 
 towards(index: int) -> double =>
-    pi / 2.0D + 0.4D * pi * cast double(index)
+    pi / 2.0D + 0.4D * pi * double(index)
 
 corner_of(shape: Pentagon, index: int) -> Point =>
     (let angle = towards(index)

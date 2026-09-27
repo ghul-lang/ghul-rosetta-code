@@ -30,7 +30,7 @@ class INCIDENCE_CUBE is
     si
 
     _add(r: int, c: int, s: int, delta: byte) is
-        _set(r, c, s, cast byte(_at(r, c, s) + delta))
+        _set(r, c, s, byte(_at(r, c, s) + delta))
     si
 
     _pick(choices: List[int]) -> int => choices[_random.next(choices.count)]

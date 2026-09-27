@@ -5,7 +5,7 @@ encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
     let block = LIST[ubyte]()
 
     flush() is
-        frame.add(cast ubyte(block.count + 1))
+        frame.add(ubyte(block.count + 1))
 
         block |> each(b => frame.add(b))
 
@@ -36,7 +36,7 @@ decode(frame: List[ubyte], marker: ubyte) -> List[ubyte] is
     let at mut = 0
 
     while at < frame.count do
-        let milestone = cast int(frame[at])
+        let milestone = int(frame[at])
 
         assert milestone > 0 else "a milestone of zero cannot advance"
         assert at + milestone <= frame.count
@@ -71,9 +71,9 @@ let examples: List[ubyte][] = [
     [0x11ub, 0x22ub, 0ub, 0x33ub],
     [0x11ub, 0x22ub, 0x33ub, 0x44ub],
     [0x11ub, 0ub, 0ub, 0ub],
-    1::254 |> map(n => cast ubyte(n)) |> collect(),
-    0::254 |> map(n => cast ubyte(n)) |> collect(),
-    1::255 |> map(n => cast ubyte(n)) |> collect()
+    1::254 |> map(n => ubyte(n)) |> collect(),
+    0::254 |> map(n => ubyte(n)) |> collect(),
+    1::255 |> map(n => ubyte(n)) |> collect()
 ]
 
 write_line("unencoded                              encoded")

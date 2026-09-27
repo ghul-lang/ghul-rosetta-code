@@ -6,10 +6,10 @@ characters(path: string) -> Pipe[string] is
     let use reader = File.open_text(path)
 
     while reader.peek() >= 0 do
-        let first = cast char(reader.read())
+        let first = char(reader.read())
 
         if char.is_high_surrogate(first) /\ reader.peek() >= 0 then
-            let second = cast char(reader.read())
+            let second = char(reader.read())
 
             yield "{first}{second}"
         else

@@ -14,7 +14,7 @@ next_row(above: LIST[double], row: LIST[double]) -> LIST[double] =>
 
 derivative(row: LIST[double], order: int) -> LIST[double] =>
     (0..row.count)
-    |> map(k => row[k] * cast double(order - 2 * k))
+    |> map(k => row[k] * double(order - 2 * k))
     |> collect_mutable()
 
 routh_array(

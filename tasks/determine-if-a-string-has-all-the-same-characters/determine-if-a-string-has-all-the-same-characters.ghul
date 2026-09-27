@@ -10,7 +10,7 @@ for text in ["", "   ", "2", "333", ".55", "tttTTT", "4444 444k"] do
         let c = text[at]
 
         write_line(
-            "    not all the same: '{c}' (0x{cast int(c):X2}) "
+            "    not all the same: '{c}' (0x{int(c):X2}) "
             "differs at position {at + 1}")
     else
         write_line("    all the same")

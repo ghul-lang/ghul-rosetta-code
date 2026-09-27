@@ -8,7 +8,7 @@ let steps = 200
 quadratic(a: POINT, b: POINT, c: POINT) -> List[POINT] =>
     (0..steps + 1)
         |> map(step =>
-            (let t = cast double(step) / cast double(steps)
+            (let t = double(step) / double(steps)
              let u = 1.0D - t
 
              (x = u * u * a.x + 2.0D * u * t * b.x + t * t * c.x,

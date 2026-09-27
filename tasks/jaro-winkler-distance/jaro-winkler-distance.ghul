@@ -56,7 +56,7 @@ jaro_similarity(left: string, right: string) -> double is
         return 0.0D
     fi
 
-    let m = cast double(matches)
+    let m = double(matches)
     let matched = (m - cast(mismatches) / 2.0D) / m
     let left_rate = m / cast(left.length)
     let right_rate = m / cast(right.length)

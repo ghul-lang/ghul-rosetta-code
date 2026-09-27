@@ -1,10 +1,10 @@
 use default
 
 struct LADY(name: string) is
-    is_nice: bool => name |> sum_by(c => cast int(c)) % 2 == 0
+    is_nice: bool => name |> sum_by(c => int(c)) % 2 == 0
 si
 
-last_letter(name: string) -> int => cast int(name[name.length - 1])
+last_letter(name: string) -> int => int(name[name.length - 1])
 
 struct SAILOR(name: string) is
     finds_lovable(lady: LADY) -> bool =>

@@ -2,8 +2,8 @@ use default
 use System.Text.StringBuilder
 
 symbol_table() -> LIST[char] is
-    let symbols = cast int('a')::cast int('z')
-        |> map(code => cast char(code))
+    let symbols = int('a')::int('z')
+        |> map(code => char(code))
         |> collect_mutable()
 
     return symbols

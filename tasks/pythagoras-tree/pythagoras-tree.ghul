@@ -22,7 +22,7 @@ square(
     let x5 = x4 + 0.5D * (across - up)
     let y5 = y4 - 0.5D * (across + up)
 
-    image.colour(0ub, cast ubyte(90 + 20 * depth), 0ub)
+    image.colour(0ub, ubyte(90 + 20 * depth), 0ub)
 
     image.fill([(x1, y1), (x2, y2), (x3, y3), (x4, y4)])
 

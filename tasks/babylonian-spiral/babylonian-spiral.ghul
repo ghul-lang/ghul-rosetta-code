@@ -9,8 +9,8 @@ steps_of_length(squared: int) -> List[Step] is
     let a mut = 0
 
     while 2 * a * a <= squared do
-        let rest = cast double(squared - a * a)
-        let b = cast int(round(sqrt(rest)))
+        let rest = double(squared - a * a)
+        let b = int(round(sqrt(rest)))
 
         if a * a + b * b == squared then
             for (x, y) in [(a, b), (b, a)] do
@@ -27,8 +27,8 @@ steps_of_length(squared: int) -> List[Step] is
 si
 
 bend(from: Step, to: Step) -> double =>
-    let turn = atan2(cast double(from.y), cast double(from.x)) -
-        atan2(cast double(to.y), cast double(to.x)) in
+    let turn = atan2(double(from.y), double(from.x)) -
+        atan2(double(to.y), double(to.x)) in
     turn - 2.0D * pi * floor(turn / (2.0D * pi))
 
 spiral(count: int) -> List[Step] is
@@ -74,8 +74,8 @@ od
 
 let many = spiral(10000)
 
-let xs = many |> map(p => cast double(p.x)) |> collect()
-let ys = many |> map(p => cast double(p.y)) |> collect()
+let xs = many |> map(p => double(p.x)) |> collect()
+let ys = many |> map(p => double(p.y)) |> collect()
 
 let low_x = xs |> reduce(0.0D, min)
 let high_x = xs |> reduce(0.0D, max)
@@ -94,7 +94,7 @@ image.clear(252ub, 250ub, 245ub)
 image.colour(30ub, 60ub, 140ub)
 image.stroke(1.0D)
 image.line(
-    many |> map(p => (x = cast double(p.x), y = cast double(p.y)))
+    many |> map(p => (x = double(p.x), y = double(p.y)))
         |> collect())
 
 image.write("spiral.png")

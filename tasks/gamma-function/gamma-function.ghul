@@ -16,7 +16,7 @@ gamma(x: double) -> double =>
     else
         let xm = x - 1.0
         let t = xm + g + 0.5
-        let term = (sum, i) => sum + coefficients[i] / (xm + cast double(i))
+        let term = (sum, i) => sum + coefficients[i] / (xm + double(i))
         let a = 1::8 |> reduce(coefficients[0], term)
         let scale = sqrt(2.0 * pi)
 

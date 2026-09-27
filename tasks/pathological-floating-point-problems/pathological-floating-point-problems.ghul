@@ -84,7 +84,7 @@ od
 let naive_balance mut = System.Math.e - 1.0
 
 for year in 1::25 do
-    naive_balance = naive_balance * cast double(year) - 1.0
+    naive_balance = naive_balance * double(year) - 1.0
 od
 
 write_line("  exact:  \${balance.decimal(16)}")

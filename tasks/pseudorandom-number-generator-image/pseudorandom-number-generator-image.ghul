@@ -12,7 +12,7 @@ for y in 0..size do
     for x in 0..size do
         state = next(state)
 
-        let bit = cast ubyte((state >> 16) & 1u) * 255ub
+        let bit = ubyte((state >> 16) & 1u) * 255ub
 
         image.set_pixel(x, y, bit, bit, bit)
     od

@@ -28,7 +28,7 @@ entropy(word: string) -> double is
         counts[character] = seen + 1
     od
 
-    let total = cast double(word.length)
+    let total = double(word.length)
 
     counts.values
         |> map(count => cast(count) / total)

@@ -40,7 +40,7 @@ implicit_equation(x: double, y: double) -> double => 5.0 * x * x + y - 5.0
 f(t: double) -> double => implicit_equation(x(t), y(t)) + t
 
 for i in 0::10 do
-    let t0 = cast double(i) / 10.0
+    let t0 = double(i) / 10.0
     let prefix = "t0 = {t0:F1} :"
 
     if let t = steffensen_aitken(f, t0, 0.00000001, 1000) then

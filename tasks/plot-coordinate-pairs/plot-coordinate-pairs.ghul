@@ -31,11 +31,11 @@ image.colour(160ub, 160ub, 160ub)
 image.stroke(1.0)
 
 for tick in 0..10 do
-    image.line(cast double(tick), -20.0, cast double(tick), 200.0)
+    image.line(double(tick), -20.0, double(tick), 200.0)
 od
 
 for tick in 0..5 do
-    let y = cast double(tick) * 40.0
+    let y = double(tick) * 40.0
     image.line(-1.0, y, 10.0, y)
 od
 

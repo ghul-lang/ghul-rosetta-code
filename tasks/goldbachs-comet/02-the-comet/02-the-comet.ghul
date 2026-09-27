@@ -46,7 +46,7 @@ let image = IMAGE(760, 480)
 
 image.view(
     0.0, 0.0,
-    cast double(limit), cast double(tallest) + 2.0,
+    double(limit), double(tallest) + 2.0,
     52.0)
 
 image.colour(80ub, 80ub, 80ub)
@@ -65,19 +65,19 @@ for point in points do
         if point.even % 6 == band.residue then
             image.colour(band.red, band.green, band.blue)
 
-            let x = cast double(point.even)
-            let y = cast double(point.count)
+            let x = double(point.even)
+            let y = double(point.count)
 
             image.line(x, y, x, y)
         fi
     od
 od
 
-let step = cast double(tallest) / 15.0
+let step = double(tallest) / 15.0
 
 for entry in bands |> index() do
     let band = entry.value
-    let y = cast double(tallest) - step * cast double(entry.index + 1)
+    let y = double(tallest) - step * double(entry.index + 1)
 
     image.colour(band.red, band.green, band.blue)
     image.stroke(2.4)

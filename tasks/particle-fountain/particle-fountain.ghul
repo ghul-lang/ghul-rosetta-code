@@ -24,8 +24,8 @@ spread(half: double) -> double =>
     (random.next_double() * 2.0D - 1.0D) * half
 
 launch(drop: DROP) is
-    drop.x = cast double(width / 2) + spread(1.5D)
-    drop.y = cast double(height - 10)
+    drop.x = double(width / 2) + spread(1.5D)
+    drop.y = double(height - 10)
     drop.dx = spread(0.9D)
     drop.dy = -3.8D + spread(0.3D)
 si
@@ -35,13 +35,13 @@ let drops =
         |> map(i => (
             let drop = DROP()
             launch(drop)
-            drop.y = cast double(height + i % 80)
+            drop.y = double(height + i % 80)
             drop))
         |> collect()
 
 step() is
     for drop in drops do
-        if drop.y > cast double(height) then
+        if drop.y > double(height) then
             if random.next_double() < 0.1D then
                 launch(drop)
             fi
@@ -56,15 +56,15 @@ step() is
 si
 
 airborne() -> int =>
-    drops |> filter(drop => drop.y <= cast double(height)) |> count()
+    drops |> filter(drop => drop.y <= double(height)) |> count()
 
 draw(image: IMAGE) is
     image.clear(10ub, 15ub, 35ub)
 
     for drop in drops do
-        if drop.y <= cast double(height) then
+        if drop.y <= double(height) then
             let fall = System.Math.clamp(drop.dy / 3.8D, -1.0D, 1.0D)
-            let shade = cast ubyte(170 + cast int(80.0D * fall * fall))
+            let shade = ubyte(170 + int(80.0D * fall * fall))
 
             image.colour(shade - 60ub, shade, 255ub)
             image.dot(drop.x, drop.y, 0.8D)

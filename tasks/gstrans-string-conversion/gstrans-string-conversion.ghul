@@ -9,13 +9,13 @@ encode_one(value: int) -> string =>
     if value >= 128 then
         "|!{encode_one(value - 128)}"
     elif value < 32 then
-        "|{cast char(value + 64)}"
+        "|{char(value + 64)}"
     else
         case value
         when 34 then "|\""
         when 124 then "||"
         when 127 then "|?"
-        else "{cast char(value)}"
+        else "{char(value)}"
         esac
     fi
 
@@ -44,7 +44,7 @@ decode(text: string) -> Decoded is
         fi
 
         if body[at] != '|' then
-            values.add(high + cast int(body[at]))
+            values.add(high + int(body[at]))
             at = at + 1
         elif at + 1 >= body.length then
             return Decoded.ERROR("'|' at the end")
@@ -59,7 +59,7 @@ decode(text: string) -> Decoded is
                 when '|' then 124
                 else
                     if code >= '@' /\ code <= 'z' then
-                        cast int(code) % 32
+                        int(code) % 32
                     else
                         return Decoded.ERROR("'|{code}' at {at - 2}")
                     fi
@@ -75,13 +75,13 @@ si
 show(values: Iterable[int]) -> string =>
     values
         |> map(v =>
-            if v >= 32 /\ v < 127 then "{cast char(v)}" else "[{v}]" fi)
+            if v >= 32 /\ v < 127 then "{char(v)}" else "[{v}]" fi)
         |> join("")
 
 let samples = [
     [12, 72, 101, 108, 108, 111, 7, 10, 13],
-    "ALERT|G" |> map(c => cast int(c)),
-    "\"quoted|text\"" |> map(c => cast int(c)),
+    "ALERT|G" |> map(c => int(c)),
+    "\"quoted|text\"" |> map(c => int(c)),
     [13, 10, 0, 5, 244, 13, 255]
 ]
 

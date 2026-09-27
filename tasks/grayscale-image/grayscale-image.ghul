@@ -2,10 +2,10 @@ use Ghul.Pipes
 use Raster.IMAGE
 
 luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
-    cast ubyte(
-        0.2126D * cast double(red) +
-        0.7152D * cast double(green) +
-        0.0722D * cast double(blue) + 0.5D
+    ubyte(
+        0.2126D * double(red) +
+        0.7152D * double(green) +
+        0.0722D * double(blue) + 0.5D
     )
 
 to_grey(colour: IMAGE) -> ubyte[] =>
@@ -38,9 +38,9 @@ for y in 0..height do
     for x in 0..width do
         colour.set_pixel(
             x, y,
-            cast ubyte(255 * x / width),
-            cast ubyte(255 * y / height),
-            cast ubyte(255 - 255 * x / width)
+            ubyte(255 * x / width),
+            ubyte(255 * y / height),
+            ubyte(255 - 255 * x / width)
         )
     od
 od

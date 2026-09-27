@@ -19,7 +19,7 @@ class BIT_WRITER(target: IO.Stream) is
 
     flush() is
         if _filled > 0 then
-            _target.write_byte(cast ubyte(_accumulator << (8 - _filled)))
+            _target.write_byte(ubyte(_accumulator << (8 - _filled)))
 
             _accumulator = 0
             _filled = 0
@@ -57,7 +57,7 @@ pack(text: string) -> ubyte[] is
     let writer = BIT_WRITER(packed)
 
     for c in text do
-        writer.write(cast int(c), 7)
+        writer.write(int(c), 7)
     od
 
     writer.flush()
@@ -70,7 +70,7 @@ unpack(packed: ubyte[], count: int) -> string is
     let text = System.Text.StringBuilder()
 
     for _ in 0..count do
-        text.append(cast char(reader.read(7)))
+        text.append(char(reader.read(7)))
     od
 
     text.to_string()

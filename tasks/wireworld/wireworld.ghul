@@ -52,12 +52,12 @@ draw(image: IMAGE, grid: Grid) is
             else continue
             esac
 
-            let x = cast double(margin + column * cell)
-            let y = cast double(margin + row * cell)
+            let x = double(margin + column * cell)
+            let y = double(margin + row * cell)
 
             image.fill_rectangle(
                 x + 1.0D, y + 1.0D,
-                x + cast double(cell) - 1.0D, y + cast double(cell) - 1.0D)
+                x + double(cell) - 1.0D, y + double(cell) - 1.0D)
         od
     od
 si

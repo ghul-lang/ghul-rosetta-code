@@ -84,13 +84,13 @@ for row in 0..rows do
 od
 
 let cell = 40.0D
-let image = IMAGE(cast int(cell) * columns, cast int(cell) * rows)
+let image = IMAGE(int(cell) * columns, int(cell) * rows)
 
 image.clear(245ub, 240ub, 225ub)
 
 for s in open do
-    let x = cell * cast double(s.column)
-    let y = cell * cast double(s.row)
+    let x = cell * double(s.column)
+    let y = cell * double(s.row)
     let light = (s.row + s.column) % 2 == 0
 
     if light then
@@ -106,8 +106,8 @@ let path =
     open
         |> sort((a, b) => order[a] - order[b])
         |> map(s => (
-            x = cell * (cast double(s.column) + 0.5D),
-            y = cell * (cast double(s.row) + 0.5D)))
+            x = cell * (double(s.column) + 0.5D),
+            y = cell * (double(s.row) + 0.5D)))
         |> collect()
 
 image.colour(30ub, 60ub, 140ub)

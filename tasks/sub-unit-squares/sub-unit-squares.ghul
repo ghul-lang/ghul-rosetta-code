@@ -1,7 +1,7 @@
 use default
 
 is_square(n: long) -> bool =>
-    let root = cast long(System.Math.sqrt(cast double(n))) in
+    let root = long(System.Math.sqrt(double(n))) in
     root * root == n \/ (root + 1L) * (root + 1L) == n
 
 let found = LIST[long]()

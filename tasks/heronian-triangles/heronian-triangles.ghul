@@ -16,9 +16,9 @@ gcd(a: int, b: int) -> int is
 si
 
 heron_area(a: int, b: int, c: int) -> long? is
-    let al = cast long(a)
-    let bl = cast long(b)
-    let cl = cast long(c)
+    let al = long(a)
+    let bl = long(b)
+    let cl = long(c)
     let cross_terms =
         2L * al * al * bl * bl +
         2L * bl * bl * cl * cl +
@@ -30,7 +30,7 @@ heron_area(a: int, b: int, c: int) -> long? is
         return null
     fi
 
-    let root = cast long(System.Math.sqrt(cast double(sixteen_area_sq)))
+    let root = long(System.Math.sqrt(double(sixteen_area_sq)))
 
     for r in [root - 1L, root, root + 1L] do
         if r >= 0L /\ r * r == sixteen_area_sq /\ r % 4L == 0L then

@@ -12,7 +12,7 @@ is_valid_iban(raw: string) -> bool is
 
     let rearranged = "{iban[4..<0]}{iban[0..4]}"
 
-    let letter_value = ch => "{cast int(ch) - cast int('A') + 10}"
+    let letter_value = ch => "{int(ch) - int('A') + 10}"
     let numeric = rearranged
         |> map(ch => if is_letter(ch) then letter_value(ch) else "{ch}" fi)
         |> join("")
@@ -20,7 +20,7 @@ is_valid_iban(raw: string) -> bool is
     let remainder mut = 0
 
     for ch in numeric do
-        remainder = (remainder * 10 + (cast int(ch) - cast int('0'))) % 97
+        remainder = (remainder * 10 + (int(ch) - int('0'))) % 97
     od
 
     remainder == 1

@@ -3,9 +3,9 @@ use System.Math.sqrt
 
 step(value: long) -> long =>
     if (value % 2L) == 0L then
-        cast long(sqrt(cast(value)))
+        long(sqrt(cast(value)))
     else
-        cast long(cast(value) * sqrt(cast(value)))
+        long(cast(value) * sqrt(cast(value)))
     fi
 
 stats(start: long) -> (int, long, int) => (

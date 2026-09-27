@@ -37,7 +37,7 @@ verhoeff(digits: string, show: bool) -> int is
     let c mut = 0
 
     for (i, ch) in digits.to_char_array() |> reverse() |> index() do
-        let n = cast int(ch) - cast int('0')
+        let n = int(ch) - int('0')
         let permuted = p[i % 8][n]
 
         c = d[c][permuted]

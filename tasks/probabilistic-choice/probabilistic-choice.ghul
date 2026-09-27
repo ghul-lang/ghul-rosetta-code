@@ -37,6 +37,6 @@ od
 write_line("item      target  generated")
 
 for (slot, (name, probability)) in items |> index() do
-    let generated = cast double(counts[slot]) / cast double(trials)
+    let generated = double(counts[slot]) / double(trials)
     write_line("{name,-8} {probability,8:F6} {generated,10:F6}")
 od

@@ -105,12 +105,12 @@ let tiles = SHAPES()
 image.clear(250ub, 250ub, 245ub)
 
 for (i, shape) in sixes |> index() do
-    let left = cast double(i % columns * panel + 12)
-    let top = cast double(i / columns * panel + 12)
+    let left = double(i % columns * panel + 12)
+    let top = double(i / columns * panel + 12)
 
     for c in shape do
-        let x = left + size * cast double(c.column)
-        let y = top + size * cast double(c.row)
+        let x = left + size * double(c.column)
+        let y = top + size * double(c.row)
         let far = size - 1.0D
 
         tiles.add(

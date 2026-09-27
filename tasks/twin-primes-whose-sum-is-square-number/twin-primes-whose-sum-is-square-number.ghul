@@ -21,7 +21,7 @@ od
 is_prime(value: int) -> bool => value > 1 /\ !composite[value]
 
 is_square(value: int) -> bool =>
-    (let root = cast int(System.Math.sqrt(cast(value))) in
+    (let root = int(System.Math.sqrt(cast(value))) in
      root - 1::root + 1 |> any(side => side * side == value))
 
 write_line("twin primes below ten million whose sum is a square:")
@@ -30,7 +30,7 @@ for lower in 2::limit - 2 do
     let sum = lower * 2 + 2
 
     if is_prime(lower) /\ is_prime(lower + 2) /\ is_square(sum) then
-        let root = cast int(System.Math.sqrt(cast(sum)))
+        let root = int(System.Math.sqrt(cast(sum)))
 
         write_line("  {lower} and {lower + 2} sum to {sum}, "
                    "which is {root} squared")

@@ -8,7 +8,7 @@ hickerson(n: int) -> decimal =>
     factorial / (2m * power)
 
 is_almost_integer(h: decimal) -> bool =>
-    let tenths = cast int((h - decimal.floor(h)) * 10m) in
+    let tenths = int((h - decimal.floor(h)) * 10m) in
     tenths == 0 \/ tenths == 9
 
 for n in 1::17 do

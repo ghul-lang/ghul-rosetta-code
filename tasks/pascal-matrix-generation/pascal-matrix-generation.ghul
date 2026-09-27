@@ -5,7 +5,7 @@ choose(n: int, k: int) -> long =>
         0L
     else
         1::k
-            |> reduce(1L, (c, i) => c * cast long(n - k + i) / cast long(i))
+            |> reduce(1L, (c, i) => c * long(n - k + i) / long(i))
     fi
 
 matrix(size: int, entry: (int, int) -> long) -> List[List[long]] =>

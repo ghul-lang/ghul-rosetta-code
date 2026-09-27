@@ -39,7 +39,7 @@ cardinal(value: long) -> string is
     let scale mut = 0
 
     while remaining > 0L do
-        let group = cast int(remaining % 1000L)
+        let group = int(remaining % 1000L)
 
         if group > 0 then
             let name = under_thousand(group)
@@ -90,7 +90,7 @@ si
 
 as_number(text: string) -> long =>
     if text.contains(".") \/ text.contains("e") \/ text.contains("E") then
-        cast long(double.parse(text))
+        long(double.parse(text))
     else
         long.parse(text)
     fi

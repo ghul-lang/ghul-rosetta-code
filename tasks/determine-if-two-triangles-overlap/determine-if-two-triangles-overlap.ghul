@@ -76,7 +76,7 @@ let image = IMAGE(panel * 4, panel * 2)
 image.clear(252ub, 250ub, 245ub)
 
 for (i, (a, b)) in pairs |> index() do
-    let left = cast double(i % 4 * panel), top = cast double(i / 4 * panel)
+    let left = double(i % 4 * panel), top = double(i / 4 * panel)
     let all = a |> cat(b) |> collect()
     let low_x = all |> map(p => p.x) |> reduce(all[0].x, min)
     let high_x = all |> map(p => p.x) |> reduce(all[0].x, max)

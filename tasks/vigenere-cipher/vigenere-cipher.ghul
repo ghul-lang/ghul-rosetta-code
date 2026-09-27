@@ -17,11 +17,11 @@ shifted(text: string, key: string, direction: int) -> string is
     let result = StringBuilder()
 
     for at in 0..letters.length do
-        let letter = cast int(letters[at]) - cast int('A')
-        let shift = cast int(word[at % word.length]) - cast int('A')
+        let letter = int(letters[at]) - int('A')
+        let shift = int(word[at % word.length]) - int('A')
         let moved = ((letter + direction * shift) % 26 + 26) % 26
 
-        result.append(cast char(moved + cast('A')))
+        result.append(char(moved + cast('A')))
     od
 
     return result.to_string()
