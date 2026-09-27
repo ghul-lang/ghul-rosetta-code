@@ -1,3 +1,4 @@
+@@suppress("deprecated")
 @@precedence("∘", "user-8")
 
 use default
