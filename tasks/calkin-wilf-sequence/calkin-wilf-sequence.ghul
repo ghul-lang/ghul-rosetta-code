@@ -4,18 +4,18 @@ next_term(numerator: int, denominator: int) -> (int, int) =>
     (denominator,
      denominator * (2 * (numerator / denominator) + 1) - numerator)
 
-let current mut = (1, 1)
-let terms = LIST()
+let terms = () is
+    let numerator mut = 1
+    let denominator mut = 1
 
-for _ in 1::20 do
-    let (numerator, denominator) = current
+    do
+        yield "{numerator}/{denominator}"
 
-    terms.add("{numerator}/{denominator}")
+        (numerator, denominator) = next_term(numerator, denominator)
+    od
+si
 
-    current = next_term(numerator, denominator)
-od
-
-write_line(terms |> join(" "))
+write_line(terms() |> take(20) |> join(" "))
 
 continued_fraction(numerator: int, denominator: int) -> LIST[int] is
     let left mut = numerator
@@ -39,16 +39,11 @@ si
 
 let fraction = continued_fraction(83116, 51639)
 
-let bits mut = ""
-let one mut = true
-
-for step in 0::(fraction.count - 1) do
-    let run = fraction[fraction.count - 1 - step]
-
-    for _ in 1::run do
-        bits = "{bits}{if one then "1" else "0" fi}"
-    od
-    one = !one
-od
+let bits = fraction
+    |> reverse()
+    |> index()
+    |> map((step, run) =>
+        string(if step % 2 == 0 then '1' else '0' fi, run))
+    |> string()
 
 write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}")
