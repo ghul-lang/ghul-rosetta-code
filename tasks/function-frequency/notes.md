@@ -1,3 +1,2 @@
-Every count is 1. The program is written as a chain of pipe combinators, so each
-function it defines is passed to one of them as a value at a single place rather
-than being called from several.
+Every count is 1. Each function the program defines is named at a single place,
+most of them passed to a pipe combinator as a value rather than called.
