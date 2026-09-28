@@ -9,6 +9,13 @@
 
     <GhulOptions Include="--warn-as-error null-deref" />
 
+    <!-- Two warnings that are always a mistake in a solution: statements the
+         entry point never runs, and a local hiding the function called beside
+         it. As errors they fail the build at the site, where as warnings a
+         captured warn.expected would record them as expected output. -->
+    <GhulOptions Include="--warn-as-error top-level-statements-not-run" />
+    <GhulOptions Include="--warn-as-error shadowed-non-callable" />
+
     <!-- The pipe combinators take pure functions, and a call to write_line or
          a string interpolation is not one. The warning is advice: the call it
          sits on is judged on its own callee either way. Marking a solution's
