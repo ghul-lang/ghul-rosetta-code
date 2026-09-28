@@ -18,7 +18,7 @@ substitute(x: uint) -> uint =>
         |> map(i =>
             let nibble = int((x >> (4 * i)) & 0xFui) in
             uint(s_boxes[i][nibble]) << (4 * i))
-        |> reduce(0ui, (a: uint, b: uint) => a | b)
+        |> reduce(0ui, (a, b) => a | b)
 
 // the left half is combined with the key element, substituted, rotated
 // left 11 bits and mixed into the right half
@@ -34,7 +34,7 @@ little_endian(bytes: List[int]) -> ulong =>
     bytes
         |> index()
         |> map((i, b) => ulong(b) << (8 * i))
-        |> reduce(0ul, (a: ulong, b: ulong) => a | b)
+        |> reduce(0ul, (a, b) => a | b)
 
 let input = little_endian([0x21, 0x04, 0x3B, 0x04, 0x30, 0x04, 0x32, 0x04])
 let key = uint(little_endian([0xF9, 0x04, 0xC1, 0xE2]))

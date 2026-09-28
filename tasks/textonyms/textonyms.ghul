@@ -16,7 +16,7 @@ digits(word: string) -> string? is
     result.to_string()
 si
 
-let groups = MAP[string, LIST[string]]()
+let groups = MAP()
 let representable mut = 0
 
 for word in IO.File.read_all_lines("unixdict.txt") do
@@ -24,7 +24,7 @@ for word in IO.File.read_all_lines("unixdict.txt") do
         representable = representable + 1
 
         if !groups.contains_key(key) then
-            groups[key] = LIST[string]()
+            groups[key] = LIST()
         fi
 
         groups[key].add(word)

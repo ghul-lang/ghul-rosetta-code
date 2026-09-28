@@ -83,7 +83,7 @@ for n in 1::30 do
     write_line("CP[{n}] = {show(cyclotomic(n))}")
 od
 
-let first_order = MAP[long, int]()
+let first_order = MAP()
 let n mut = 0
 
 while first_order.count < 10 do

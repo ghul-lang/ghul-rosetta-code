@@ -22,8 +22,8 @@ let rounds = 500
 
 let flags = 0..workers |> map(i => FLAG()) |> collect()
 
-let counter = LIST[int]([0])
-let occupancy = LIST[int]([0, 0])
+let counter = LIST([0])
+let occupancy = LIST([0, 0])
 
 all_within(from: int, to: int, allowed: int[]) -> bool =>
     from..to |> all(i => allowed |> any(value => value == flags[i].read()))

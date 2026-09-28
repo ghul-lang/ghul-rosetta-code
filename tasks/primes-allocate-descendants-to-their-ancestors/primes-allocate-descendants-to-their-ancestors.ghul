@@ -22,7 +22,7 @@ prime_factor_sum(n: int) -> int is
     return sum
 si
 
-let descendants = (0::top) |> map(_ => LIST[long]()) |> collect()
+let descendants = (0::top) |> map(_ => LIST()) |> collect()
 descendants[0].add(1L)
 
 for p in (2::top) |> filter(is_prime) do

@@ -31,7 +31,7 @@ let declared = robot.get_type().get_methods(flags)
         |> join(", ")}) -> {m.return_type.name}")
     |> collect_mutable()
 
-declared.sort((left: string, right: string) -> int =>
+declared.sort((left, right) =>
     string.compare(left, right))
 
 declared |> each(line => write_line(line))

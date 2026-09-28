@@ -44,7 +44,7 @@ on_curve(point: Point?) -> bool =>
     fi
 
 *(k: bigint, point: Point?) -> Point? is
-    let result: Point? mut = null
+    let result mut = null
     let addend mut = point
     let rest mut = k
 

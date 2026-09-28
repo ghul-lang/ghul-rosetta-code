@@ -7,7 +7,7 @@ is_prime(n: int) -> bool =>
     n > 1 /\ (2..n) |> take_while(d => d * d <= n) |> all(d => n % d != 0)
 
 factorials_mod(count: int, modulus: long) -> LIST[long] is
-    let result = LIST[long]([1L])
+    let result = LIST([1L])
 
     for k in 1..count do
         result.add(result[k - 1] * long(k) % modulus)
@@ -23,7 +23,7 @@ is_wilson(p: int, n: int, factorials: LIST[long], modulus: long) -> bool is
     return (product - sign + modulus) % modulus == 0L
 si
 
-let wilson = (1::orders) |> map(_ => LIST[int]()) |> collect()
+let wilson = (1::orders) |> map(_ => LIST()) |> collect()
 
 for p in (2..limit) |> filter(is_prime) do
     let modulus = long(p) * long(p)

@@ -13,15 +13,15 @@ parse(lines: List[string]) -> Grid =>
 
 solve(grid: Grid) -> List[int]? is
     let partner = repeat(-1, rows * columns) |> collect_mutable()
-    let used = SET[int]()
+    let used = SET()
 
-    value(cell: int) -> int => grid[cell / columns][cell % columns]
+    value(cell) => grid[cell / columns][cell % columns]
 
-    domino(a: int, b: int) -> int =>
+    domino(a, b) =>
         let x = value(a), y = value(b) in
         if x < y then x * 7 + y else y * 7 + x fi
 
-    place(from: int) -> bool is
+    place(from) is
         let cell mut = from
 
         while cell < rows * columns /\ partner[cell] >= 0 do

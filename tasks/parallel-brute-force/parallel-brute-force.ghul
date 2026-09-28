@@ -17,7 +17,7 @@ let targets = hashes
 let found = ConcurrentDictionary[int, string]()
 
 search(first: int) is
-    let word = LIST[ubyte](repeat(ubyte(97), 5))
+    let word = LIST(repeat(ubyte(97), 5))
     word[0] = ubyte(97 + first)
 
     for b in 0..26 do

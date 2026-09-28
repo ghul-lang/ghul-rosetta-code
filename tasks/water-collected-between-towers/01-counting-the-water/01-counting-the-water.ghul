@@ -30,5 +30,5 @@ let series =
      [8, 7, 7, 6],
      [6, 7, 10, 7, 6]]
 
-series |> each((towers: int[]) =>
+series |> each(towers =>
     write_line("{towers |> join(", ")} -> {water(towers)}"))

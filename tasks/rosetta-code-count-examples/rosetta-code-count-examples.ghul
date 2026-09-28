@@ -15,7 +15,7 @@ count_examples(api: string) is
     client.default_request_headers.user_agent
         .parse_add("ghul-rosetta-code/1.0")
 
-    let get = (query: string) =>
+    let get = query =>
         let text = client.get_string_async("{api}?{query}").result in
         JsonDocument.parse(text, _[JsonDocumentOptions]).root_element
 

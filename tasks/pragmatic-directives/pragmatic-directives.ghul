@@ -16,8 +16,8 @@ class POINT(x: int, y: int) is
     to_string() -> string => "({x}, {y})"
 si
 
-let double = (n: int) => n * 2
-let increment = (n: int) => n + 1
+let double = n => n * 2
+let increment = n => n + 1
 
 let composed = double ∘ increment
 

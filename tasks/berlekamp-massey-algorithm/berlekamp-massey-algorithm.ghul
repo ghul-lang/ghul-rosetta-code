@@ -15,7 +15,7 @@ shortest_register(sequence: List[int]) -> Register is
     let length mut = 0
     let shift mut = 1
 
-    subtract_shifted(target: LIST[int], shifted: List[int]) is
+    subtract_shifted(target, shifted) is
         for (i, coefficient) in shifted |> index() do
             while target.count <= i + shift do
                 target.add(0)

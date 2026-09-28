@@ -25,7 +25,7 @@ test_entry() is
     let made = request.create_self_signed(
         System.DateTimeOffset.now.add_days(-1.0),
         System.DateTimeOffset.now.add_days(1.0))
-    let pfx: ubyte[] = made.export(X509ContentType.PFX)
+    let pfx = made.export(X509ContentType.PFX)
     let certificate = X509CertificateLoader.load_pkcs12(
         pfx, cast string?(null), X509KeyStorageFlags.DEFAULT_KEY_SET, null)
 

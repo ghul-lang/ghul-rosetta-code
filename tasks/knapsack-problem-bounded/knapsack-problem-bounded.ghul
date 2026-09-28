@@ -59,7 +59,7 @@ for at in 0..copies.count do
     od
 od
 
-let counts = MAP[string, int]()
+let counts = MAP()
 let room mut = capacity
 
 for back in 0..copies.count do

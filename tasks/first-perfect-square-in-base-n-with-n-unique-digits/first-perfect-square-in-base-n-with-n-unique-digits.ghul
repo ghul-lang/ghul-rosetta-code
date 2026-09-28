@@ -19,7 +19,7 @@ si
 
 in_base(value: long, base: int) -> string is
     let radix = long(base)
-    let digits = LIST[char]()
+    let digits = LIST()
 
     let remaining mut = value
 

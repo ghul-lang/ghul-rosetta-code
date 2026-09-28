@@ -6,7 +6,7 @@ divisor_count(n: int) -> int =>
         |> filter(d => n % d == 0)
         |> sum_by(d => if d * d == n then 1 else 2 fi)
 
-let terms = LIST[int]()
+let terms = LIST()
 let candidate mut = 0
 
 for n in 1::15 do

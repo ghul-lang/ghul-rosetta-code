@@ -21,7 +21,7 @@ cells(row: string) -> List[string]? is
 si
 
 read(diagram: string) -> Diagram is
-    let fields = LIST[FIELD]()
+    let fields = LIST()
     let width mut = 0
     let at mut = 0
 

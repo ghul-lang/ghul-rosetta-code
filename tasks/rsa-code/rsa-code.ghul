@@ -12,7 +12,7 @@ encode(block: Collections.List[ubyte]) -> bigint =>
     block |> reduce(0n, (total, b) => total * 256n + bigint(int(b)))
 
 decode(number: bigint) -> ubyte[] is
-    let bytes = LIST[ubyte]()
+    let bytes = LIST()
     let remaining mut = number
 
     while remaining > 0n do

@@ -35,7 +35,7 @@ parses(sentence: string, start: string) -> bool is
         let row = LIST[SET[string]]()
 
         for _ in 0..length do
-            row.add(SET[string]())
+            row.add(SET())
         od
 
         table.add(row)

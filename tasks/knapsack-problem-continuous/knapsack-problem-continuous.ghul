@@ -17,7 +17,7 @@ let items =
 
 let capacity = 15.0
 
-let taken = LIST[(name: string, portion: double, value: double)]()
+let taken = LIST()
 
 let remaining mut = capacity
 

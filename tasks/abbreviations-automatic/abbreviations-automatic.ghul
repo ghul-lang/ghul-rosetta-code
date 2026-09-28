@@ -8,7 +8,7 @@ shortest_unique(line: string) -> int? is
         return null
     fi
 
-    distinct(length: int) -> int =>
+    distinct(length) =>
         words
             |> map(word => word.substring(0, int.min(length, word.length)))
             |> collect_set()

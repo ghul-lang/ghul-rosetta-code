@@ -6,10 +6,10 @@ class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
     _neighbours: MAP[int, SET[int]]
 
     init(..) is
-        _neighbours = MAP[int, SET[int]]()
+        _neighbours = MAP()
 
         for node in nodes do
-            _neighbours[node] = SET[int]()
+            _neighbours[node] = SET()
         od
 
         for (from, to) in edges do
@@ -24,8 +24,8 @@ class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
 si
 
 parse(description: string) -> GRAPH is
-    let nodes = SET[int]()
-    let edges = LIST[Edge]()
+    let nodes = SET()
+    let edges = LIST()
 
     for token in description.split([' ']) do
         let ends =
@@ -46,7 +46,7 @@ parse(description: string) -> GRAPH is
 si
 
 colour(graph: GRAPH) -> MAP[int, int] is
-    let colours = MAP[int, int]()
+    let colours = MAP()
 
     while colours.count < graph.nodes.count do
         let candidates =

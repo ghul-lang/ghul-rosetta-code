@@ -9,7 +9,7 @@ class NODE is
         self.length = length
         self.suffix = suffix
 
-        edges = MAP[char, int]()
+        edges = MAP()
     si
 si
 
@@ -17,7 +17,7 @@ class EERTREE(text: string) is
     _nodes: LIST[NODE]
 
     init(..) is
-        _nodes = LIST[NODE]([NODE(-1, 0), NODE(0, 0)])
+        _nodes = LIST([NODE(-1, 0), NODE(0, 0)])
 
         let longest mut = 1
 
@@ -58,9 +58,9 @@ class EERTREE(text: string) is
     si
 
     palindromes: Collections.List[string] is
-        let found = LIST[string]()
+        let found = LIST()
 
-        walk(node: int, palindrome: string) is
+        walk(node, palindrome) is
             for (letter, child) in _nodes[node].edges do
                 let grown =
                     if node == 0 then "{letter}"

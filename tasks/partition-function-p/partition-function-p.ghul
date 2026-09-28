@@ -1,7 +1,7 @@
 use default
 
 partitions(n: int) -> bigint is
-    let p = LIST[bigint]([1n])
+    let p = LIST([1n])
 
     for m in 1::n do
         let total mut = 0n

@@ -25,4 +25,4 @@ yellowstone(count: int) -> LIST[int] is
 si
 
 write_line("first 30 Yellowstone numbers:")
-write_line(yellowstone(30) |> map((t: int) => "{t}") |> join(" "))
+write_line(yellowstone(30) |> map(t => "{t}") |> join(" "))

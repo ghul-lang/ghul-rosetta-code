@@ -32,7 +32,7 @@ visit(vertex: int) is
     od
 
     if low[vertex] == index[vertex] then
-        let component = LIST[int]()
+        let component = LIST()
 
         while true do
             let member = stack.pop()

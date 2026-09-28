@@ -3,7 +3,7 @@ use default
 use Graph = List[SET[int]]
 
 graph(n: int, edges: Iterable[(int, int)]) -> Graph is
-    let adjacency = 0..n |> map(_ => SET[int]()) |> collect()
+    let adjacency = 0..n |> map(_ => SET()) |> collect()
 
     for (u, v) in edges do
         adjacency[u].add(v)
@@ -15,7 +15,7 @@ si
 
 closure(g: Graph) -> Graph is
     let n = g.count
-    let h = g |> map(neighbours => SET[int](neighbours)) |> collect()
+    let h = g |> map(neighbours => SET(neighbours)) |> collect()
     let changed mut = true
 
     while changed do
@@ -38,9 +38,9 @@ si
 is_complete(g: Graph) -> bool => g |> all(s => s.count == g.count - 1)
 
 hamiltonian_cycle(g: Graph) -> List[int]? is
-    let path = LIST[int]([0])
+    let path = LIST([0])
 
-    extend() -> bool is
+    extend() is
         let last = path[path.count - 1]
 
         if path.count == g.count then

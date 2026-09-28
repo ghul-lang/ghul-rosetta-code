@@ -75,7 +75,7 @@ multiply(a: Matrix, b: Matrix) -> Matrix is
         size = size * 2
     od
 
-    let pad = (m: Matrix) =>
+    let pad = m =>
         0..size
             |> map(i =>
                 0..size

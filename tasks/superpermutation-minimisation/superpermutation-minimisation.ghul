@@ -15,7 +15,7 @@ recursive(n: int) -> string is
     fi
 
     let previous = recursive(n - 1)
-    let seen = SET[string]()
+    let seen = SET()
     let letter = alphabet[n - 1]
     let result = System.Text.StringBuilder()
 
@@ -27,7 +27,7 @@ recursive(n: int) -> string is
             let built = result.to_string()
             let overlap mut = System.Math.min(built.length, piece.length)
 
-            let matches = (k: int) => built.ends_with(piece.substring(0, k))
+            let matches = k => built.ends_with(piece.substring(0, k))
 
             while overlap > 0 /\ !matches(overlap) do
                 overlap = overlap - 1

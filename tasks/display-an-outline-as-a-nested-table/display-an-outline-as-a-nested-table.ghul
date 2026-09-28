@@ -95,7 +95,7 @@ let bottom = deepest(tree)
 
 pad(tree, 0, bottom)
 
-let rows = 0::bottom |> map(_ => LIST[CELL]()) |> collect_mutable()
+let rows = 0::bottom |> map(_ => LIST()) |> collect_mutable()
 
 gather(tree, 0, root_colour, rows)
 

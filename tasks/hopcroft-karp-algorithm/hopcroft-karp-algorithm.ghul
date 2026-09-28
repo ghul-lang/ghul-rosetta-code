@@ -8,12 +8,12 @@ class BIPARTITE(left: int, right: int) is
 
     init(..) is
         _adjacent = LIST[LIST[int]]()
-        _partner_of_left = LIST[int?]()
-        _partner_of_right = LIST[int?]()
-        _distance = LIST[int?]()
+        _partner_of_left = LIST()
+        _partner_of_right = LIST()
+        _distance = LIST()
 
         for _ in 0..left do
-            _adjacent.add(LIST[int]())
+            _adjacent.add(LIST())
             _partner_of_left.add(null)
             _distance.add(null)
         od
@@ -42,7 +42,7 @@ class BIPARTITE(left: int, right: int) is
     si
 
     _layer() -> bool is
-        let waiting = Queue[int]()
+        let waiting = Queue()
 
         for u in 0..left do
             if _partner_of_left[u]? then

@@ -5,10 +5,10 @@ use Matrix = Collections.List[Collections.List[double?]]
 use Edge = (from: int, to: int, weight: double)
 
 weighted(size: int, edges: Collections.List[Edge]) -> Matrix is
-    let graph = LIST[LIST[double?]]()
+    let graph = LIST()
 
     for u in 0..size do
-        let weights = LIST[double?]()
+        let weights = LIST()
 
         for v in 0..size do
             weights.add(if u == v then 0.0 else null fi)
@@ -38,7 +38,7 @@ potentials(graph: Matrix) -> Collections.List[double]? is
     let size = graph.count
     let potential = repeat(0.0, size) |> collect_mutable()
 
-    relax() -> bool is
+    relax() is
         let changed mut = false
 
         for u in 0..size do
@@ -75,7 +75,7 @@ shortest_from(
     source: int
 ) -> Collections.List[double?] is
     let size = graph.count
-    let distance = LIST[double?]()
+    let distance = LIST()
 
     for _ in 0..size do
         distance.add(null)
@@ -112,7 +112,7 @@ shortest_from(
         fi
     od
 
-    let result = LIST[double?]()
+    let result = LIST()
 
     for v in 0..size do
         if let reweighted = distance[v] then

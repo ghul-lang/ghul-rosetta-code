@@ -36,10 +36,10 @@ anagrams_of(seed: string, wanted: int) -> List[string] is
             |> sort((a, b) => b.text.length <> a.text.length)
             |> collect()
 
-    let found = LIST[string]()
-    let chosen = LIST[string]()
+    let found = LIST()
+    let chosen = LIST()
 
-    search(start: int) is
+    search(start) is
         if found.count >= wanted then
             return
         elif remaining |> all(count => count == 0) then

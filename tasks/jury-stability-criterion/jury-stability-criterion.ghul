@@ -8,7 +8,7 @@ use default
 use Polynomial = List[double]
 
 evaluate(p: Polynomial, z: double) -> double =>
-    p |> reduce(0.0, (total: double, a: double) => total * z + a)
+    p |> reduce(0.0, (total, a) => total * z + a)
 
 next_row(row: Polynomial) -> Polynomial =>
     let n = row.count - 1 in

@@ -5,7 +5,7 @@ use REACHED = (cost: int, previous: string)
 
 shortest_paths(edges: EDGE[], nodes: string[], source: string)
     -> MAP[string, REACHED] is
-    let best = MAP[string, REACHED]()
+    let best = MAP()
     let unvisited = LIST(nodes)
 
     best[source] = (cost = 0, previous = "")

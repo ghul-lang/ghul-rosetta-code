@@ -4,7 +4,7 @@ use Candidate = (value: int, mask: int, reduced: List[int])
 
 describe(value: int) -> Candidate is
     let reduced = repeat(0, 10) |> collect_mutable()
-    let digits = LIST[int]()
+    let digits = LIST()
 
     let remaining mut = value
 
@@ -50,7 +50,7 @@ for size in 2::5 do
     IO.Std.out.flush()
 
     let entries = candidates(size)
-    let shown = LIST[string]()
+    let shown = LIST()
 
     let found mut = 0
 

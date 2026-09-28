@@ -1,8 +1,8 @@
 use default
 
 proper_divisors(n: int) -> List[int] is
-    let small = LIST[int]()
-    let large = LIST[int]()
+    let small = LIST()
+    let large = LIST()
 
     for d in 1::n do
         if d * d > n then

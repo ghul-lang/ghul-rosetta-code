@@ -6,7 +6,7 @@ class NODE is
 
     init(label: string) is
         _label = label
-        _edges = MAP[char, NODE]()
+        _edges = MAP()
     si
 
     label: string => _label
@@ -45,7 +45,7 @@ class NODE is
         tail._edges = _edges
 
         _label = _label[0..at]
-        _edges = MAP[char, NODE]()
+        _edges = MAP()
         _edges[tail.label[0]] = tail
     si
 

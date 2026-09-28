@@ -5,7 +5,7 @@ write_line("")
 
 let limit = 1_030_000_000
 let words = limit / 64 + 1
-let generated = LIST[ulong](words + 1)
+let generated = LIST(words + 1)
 
 0::words |> each(_ => generated.add(0ul))
 

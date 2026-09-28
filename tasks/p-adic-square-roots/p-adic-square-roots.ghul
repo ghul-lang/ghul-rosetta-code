@@ -47,7 +47,7 @@ to_digits(n: bigint, p: bigint, k: int) -> List[bigint] =>
 // the rational a/b nearest to n modulo p^k, by Gauss lattice reduction
 
 rational(n: bigint, p: bigint, k: int) -> (top: bigint, bottom: bigint) is
-    dot(u: (bigint, bigint), w: (bigint, bigint)) -> bigint =>
+    dot(u, w) =>
         u.`0 * w.`0 + u.`1 * w.`1
 
     let u mut = (bigint.pow(p, k), 0n)

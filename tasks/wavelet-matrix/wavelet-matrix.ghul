@@ -4,7 +4,7 @@ class BITS(flags: List[bool] init) is
     _ones_before: LIST[int]
 
     init(..) is
-        _ones_before = LIST[int]()
+        _ones_before = LIST()
 
         let running mut = 0
 
@@ -30,8 +30,8 @@ class WAVELET(values: List[int] init) is
     _width: int
 
     init(..) is
-        _levels = LIST[BITS]()
-        _below = LIST[int]()
+        _levels = LIST()
+        _below = LIST()
         _width = 1
 
         let largest =
@@ -45,7 +45,7 @@ class WAVELET(values: List[int] init) is
 
         for level in 0.._width do
             let bit = _width - 1 - level
-            let set = (v: int) => ((v >> bit) & 1) == 1
+            let set = v => ((v >> bit) & 1) == 1
 
             _levels.add(BITS(holding |> map(set) |> collect()))
 

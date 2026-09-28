@@ -7,7 +7,7 @@ use System.Threading.Thread
 let port = 12321
 
 let log = Collections.LIST[string]()
-let serving = Collections.LIST[Thread]()
+let serving = Collections.LIST()
 
 note(what: string) is
     System.Threading.Monitor.enter(log)

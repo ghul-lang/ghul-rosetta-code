@@ -4,14 +4,14 @@ use Collections
 suffixes(words: string[], size: int)
     -> (by_prefix: MAP[string, LIST[string]], prefixes: LIST[string])
 is
-    let by_prefix = MAP[string, LIST[string]]()
-    let prefixes = LIST[string]()
+    let by_prefix = MAP()
+    let prefixes = LIST()
 
     for at in size::words.count do
         let prefix = words[(at - size)..at] |> join(" ")
 
         if !by_prefix.contains_key(prefix) then
-            by_prefix[prefix] = LIST[string]()
+            by_prefix[prefix] = LIST()
             prefixes.add(prefix)
         fi
 
@@ -30,7 +30,7 @@ generate(
     random: System.Random
 ) -> string
 is
-    let out = LIST[string](start.split([' ']))
+    let out = LIST(start.split([' ']))
     let size = out.count
 
     while out.count < length do

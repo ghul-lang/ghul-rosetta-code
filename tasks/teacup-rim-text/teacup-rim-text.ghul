@@ -6,7 +6,7 @@ rotations(word: string) -> List[string] =>
         |> collect()
 
 let words = SET(IO.File.read_all_lines("unixdict.txt"))
-let shown = SET[string]()
+let shown = SET()
 
 for word in words |> filter(w => w.length > 2) |> sort() do
     let ring = rotations(word)

@@ -44,7 +44,7 @@ question(x: double) -> double is
 si
 
 terms(y: double) -> List[int] is
-    let runs = LIST[int]()
+    let runs = LIST()
 
     let rest mut = y
     let bit mut = 0

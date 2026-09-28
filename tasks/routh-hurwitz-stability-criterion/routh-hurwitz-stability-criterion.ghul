@@ -23,7 +23,7 @@ routh_array(
     let degree = coefficients.count - 1
     let width = degree / 2 + 1
 
-    let row_from = (start: int) =>
+    let row_from = start =>
         (0..width)
         |> map(k =>
             if start + 2 * k <= degree then

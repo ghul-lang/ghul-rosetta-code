@@ -50,7 +50,7 @@ let starts_and_ends =
 
 let limit = 2_100_000_000L
 
-let found = LIST[long]()
+let found = LIST()
 
 let block mut = 10L
 

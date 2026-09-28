@@ -27,12 +27,12 @@ root(vertex: int) -> int is
     return tree[vertex]
 si
 
-let chosen = LIST[Edge]()
+let chosen = LIST()
 
 let forests mut = vertices
 
 while forests > 1 do
-    let cheapest = MAP[int, Edge]()
+    let cheapest = MAP()
 
     for edge in edges do
         let left = root(edge.from)

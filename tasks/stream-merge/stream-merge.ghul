@@ -36,7 +36,7 @@ si
 
 merge_all[T: Comparable[T]](streams: List[Iterable[T]]) -> T{} =>
     case streams.count
-    when 0 then LIST[T]()
+    when 0 then LIST()
     when 1 then streams[0]
     else
         let middle = streams.count / 2 in

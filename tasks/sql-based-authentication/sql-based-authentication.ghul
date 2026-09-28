@@ -69,7 +69,7 @@ is
         return false
     fi
 
-    let salt = row.get_field_value[ubyte[]](0)
+    let salt = row.get_field_value(0)
     let stored = row.get_field_value[ubyte[]](1)
 
     return digest(salt, password) =~ stored

@@ -37,7 +37,7 @@ let cells =
                   else 0.0D fi)))
         |> collect()
 
-let chosen = LIST[char]()
+let chosen = LIST()
 
 corners(x: double, y: double) -> LIST[(double, double)] =>
     0..6

@@ -29,7 +29,7 @@ let days = [
     "Thursday", "Friday", "Saturday"
 ]
 
-let colours = LinkedList[string](
+let colours = LinkedList(
     ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"])
 
 show("days", days)

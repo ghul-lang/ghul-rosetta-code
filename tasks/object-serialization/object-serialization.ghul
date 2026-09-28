@@ -10,10 +10,10 @@ class ENTRY(
         "{name}, {legs} legs, tagged {tags |> join(" and ")}"
 si
 
-let zoo = LIST[ENTRY]()
+let zoo = LIST()
 
-zoo.add(ENTRY("spider", 8, LIST[string](["small", "hairy"])))
-zoo.add(ENTRY("ostrich", 2, LIST[string](["large", "fast"])))
+zoo.add(ENTRY("spider", 8, LIST(["small", "hairy"])))
+zoo.add(ENTRY("ostrich", 2, LIST(["large", "fast"])))
 
 let text = JsonSerializer.serialize[LIST[ENTRY]](zoo, null)
 

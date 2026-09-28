@@ -36,7 +36,7 @@ p(n: int) -> bigint is
     let partitions = LIST([1n])
 
     for m in 1::n do
-        term(offset: int) -> bigint =>
+        term(offset) =>
             if offset <= m then partitions[m - offset] else 0n fi
 
         let total = from(1)

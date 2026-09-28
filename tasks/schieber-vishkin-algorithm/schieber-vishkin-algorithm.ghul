@@ -74,7 +74,7 @@ class LCA is
 
         lambda[0] = lambda[count]
 
-        down(v: int) is
+        down(v) is
             alfa[v] = alfa[parents[v]] | (beta[v] & -beta[v])
 
             let c mut = child[v]
@@ -124,7 +124,7 @@ let parents = [0, 0, 1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 5, 6, 8, 8, 10]
 let lca = LCA(parents)
 
 naive(u: int, v: int) -> int is
-    let ancestors = SET[int]()
+    let ancestors = SET()
     let a mut = u
 
     while a != 0 do

@@ -47,7 +47,7 @@ od
 
 let countdown = (
     let n mut = 3
-    let said = LIST[string]()
+    let said = LIST()
 
     do
         said.add("{n}")

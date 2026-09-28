@@ -49,14 +49,14 @@ combine(
     let y_left mut = true
     let waited mut = 0
 
-    ratio(n: bigint, d: bigint) -> double => double(n) / double(d)
+    ratio(n, d) => double(n) / double(d)
 
-    settled() -> bool =>
+    settled() =>
         let (a12, a1, a2, a) = top, (b12, b1, b2, b) = bottom in
         b12 !~ 0n /\ b1 !~ 0n /\ b2 !~ 0n /\ b !~ 0n /\
         a12 / b12 =~ a / b /\ a1 / b1 =~ a / b /\ a2 / b2 =~ a / b
 
-    first_is_further() -> bool =>
+    first_is_further() =>
         let (_, a1, a2, a) = top, (_, b1, b2, b) = bottom in
         if b =~ 0n /\ b2 =~ 0n then true
         elif b =~ 0n \/ b2 =~ 0n then false
@@ -111,10 +111,10 @@ show(terms: Iterable[bigint]) -> string =>
     else "[{shown[0]}; {rest}{more}]"
     fi
 
-let add: (Row, Row) = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
-let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
-let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
-let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
+let add = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
+let subtract = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
+let multiply = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
+let divide = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
 run(
     label: string, operation: (Row, Row), x: bigint{}, y: bigint{}

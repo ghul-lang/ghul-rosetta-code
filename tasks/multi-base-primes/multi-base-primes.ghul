@@ -47,7 +47,7 @@ for length in 1::4 do
                 let text = in_base(n, base)
 
                 if !bases_of.contains_key(text) then
-                    bases_of[text] = LIST[int]()
+                    bases_of[text] = LIST()
                 fi
 
                 bases_of[text].add(base)

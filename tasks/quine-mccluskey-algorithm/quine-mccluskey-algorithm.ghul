@@ -18,7 +18,7 @@ covers(implicant: Implicant, minterm: int) -> bool =>
     (minterm & \implicant.dashes) == implicant.bits
 
 render(implicant: Implicant, variables: int) -> string is
-    let glyphs = LIST[char]()
+    let glyphs = LIST()
 
     for position in 0..variables do
         let bit = variables - 1 - position
@@ -37,7 +37,7 @@ render(implicant: Implicant, variables: int) -> string is
 si
 
 prime_implicants(minterms: List[int], variables: int) -> List[Implicant] is
-    let primes = LIST[Implicant]()
+    let primes = LIST()
 
     let current mut =
         minterms
@@ -46,7 +46,7 @@ prime_implicants(minterms: List[int], variables: int) -> List[Implicant] is
             |> collect()
 
     while current.count > 0 do
-        let combined = LIST[Implicant]()
+        let combined = LIST()
         let used = repeat(false, current.count) |> collect_mutable()
 
         for i in 0..current.count do
@@ -134,7 +134,7 @@ smallest_choice(
     uncovered: List[int],
     size: int
 ) -> List[Implicant]? is
-    let chosen = LIST[Implicant]()
+    let chosen = LIST()
 
     return search(spare, uncovered, size, 0, chosen)
 si

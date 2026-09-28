@@ -12,7 +12,7 @@ run(command: string, arguments: List[string]) -> LIST[string] is
     od
 
     let child = Process.start(how)!
-    let lines = LIST[string]()
+    let lines = LIST()
 
     while let line = child.standard_output.read_line() do
         lines.add(line)

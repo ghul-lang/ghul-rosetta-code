@@ -22,7 +22,7 @@ class NUMBRIX is
     _neighbours(cell: int) -> List[int] is
         let row = cell / _size
         let column = cell % _size
-        let result = LIST[int]()
+        let result = LIST()
 
         if row > 0 then result.add(cell - _size) fi
         if row < _size - 1 then result.add(cell + _size) fi

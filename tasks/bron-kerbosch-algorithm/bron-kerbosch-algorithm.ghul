@@ -10,7 +10,7 @@ let neighbours = MAP[string, SET[string]]()
 
 link(from: string, to: string) is
     if !neighbours.contains_key(from) then
-        neighbours[from] = SET[string]()
+        neighbours[from] = SET()
     fi
 
     neighbours[from].add(to)
@@ -75,9 +75,9 @@ search(
 si
 
 search(
-    SET[string](),
+    SET(),
     neighbours.keys |> collect_set(),
-    SET[string]())
+    SET())
 
 cliques.sort((a, b) => a[0] <> b[0])
 

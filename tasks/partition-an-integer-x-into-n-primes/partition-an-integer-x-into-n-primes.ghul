@@ -15,7 +15,7 @@ let primes = 2::limit |> filter(n => !composite[n]) |> collect()
 
 partition(x: int, n: int, from_index: int) -> List[int]? is
     if n == 0 then
-        return if x == 0 then LIST[int]() else null fi
+        return if x == 0 then LIST() else null fi
     fi
 
     for i in from_index..primes.count do

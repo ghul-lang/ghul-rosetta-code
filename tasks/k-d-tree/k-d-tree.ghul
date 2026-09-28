@@ -33,10 +33,10 @@ use Found = (point: Point, distance: double, visited: int)
 
 nearest(tree: Tree, target: Point) -> Found is
     let visited mut = 0
-    let best: Point? mut = null
+    let best mut = null
     let best_distance mut = double.positive_infinity
 
-    search(node: Tree) is
+    search(node) is
         if let n: Tree.NODE = node then
             visited = visited + 1
 

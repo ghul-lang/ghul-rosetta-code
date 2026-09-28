@@ -18,7 +18,7 @@ json(value: object) -> string =>
 call(client: HttpClient, url: string, method: string, arguments: object)
     -> string
 is
-    let request = MAP[string, object]()
+    let request = MAP()
 
     request["jsonrpc"] = "2.0"
     request["method"] = method
@@ -76,7 +76,7 @@ serve(listener: HttpListener) is
 
         let method = request.get_property("method").get_string() ?? ""
         let arguments = request.get_property("params")
-        let reply = MAP[string, object]()
+        let reply = MAP()
 
         reply["jsonrpc"] = "2.0"
         reply["id"] = request.get_property("id").get_int32()
@@ -84,7 +84,7 @@ serve(listener: HttpListener) is
         if offered.contains_key(method) then
             reply["result"] = offered[method](arguments)
         else
-            let error = MAP[string, object]()
+            let error = MAP()
 
             error["code"] = -32601
             error["message"] = "method not found"

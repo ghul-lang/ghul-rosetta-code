@@ -1,7 +1,7 @@
 use default
 
 digits(n: long, base: long) -> List[long] is
-    let result = LIST[long]()
+    let result = LIST()
     let rest mut = n
 
     while rest > 0L do

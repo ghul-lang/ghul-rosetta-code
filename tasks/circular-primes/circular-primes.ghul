@@ -37,7 +37,7 @@ probably_prime(n: bigint) -> bool is
         s = s + 1
     od
 
-    witness(base: bigint) -> bool is
+    witness(base) is
         let x mut = bigint.mod_pow(base, d, n)
 
         if x =~ 1n \/ x =~ n - 1n then

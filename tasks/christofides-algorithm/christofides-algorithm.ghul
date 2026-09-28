@@ -16,7 +16,7 @@ length(edges: Iterable[Edge]) -> double =>
 
 spanning_tree(n: int) -> List[Edge] is
     let in_tree = SET([0])
-    let edges = LIST[Edge]()
+    let edges = LIST()
 
     while in_tree.count < n do
         let next =
@@ -54,7 +54,7 @@ perfect_matching(vertices: List[int]) -> List[Edge] =>
 eulerian_circuit(n: int, edges: List[Edge]) -> List[int] is
     let unused =
         0..n
-            |> map(_ => LIST[(edge: int, other: int)]())
+            |> map(_ => LIST())
             |> collect()
     let used = repeat(false, edges.count) |> collect_mutable()
 
@@ -64,7 +64,7 @@ eulerian_circuit(n: int, edges: List[Edge]) -> List[int] is
     od
 
     let stack = STACK([edges[0].from])
-    let circuit = LIST[int]()
+    let circuit = LIST()
 
     while stack.count > 0 do
         let vertex = stack.peek()
@@ -93,7 +93,7 @@ let matching = perfect_matching(odd)
 let circuit =
     eulerian_circuit(n, tree |> cat(matching) |> collect())
 
-let visited = SET[int]()
+let visited = SET()
 let tour = circuit |> filter(v => visited.add(v)) |> collect_mutable()
 
 tour.add(tour[0])

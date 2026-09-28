@@ -31,7 +31,7 @@ duplicate[T: Copyable[T]](value: T) -> T => value.copy()
 let animals: LIST[Animal] = _()
 
 animals.add(CAT("Ada"))
-animals.add(DOG("Rex", LIST[string](["sit", "roll over"])))
+animals.add(DOG("Rex", LIST(["sit", "roll over"])))
 
 for original in animals do
     let copy = duplicate(original)

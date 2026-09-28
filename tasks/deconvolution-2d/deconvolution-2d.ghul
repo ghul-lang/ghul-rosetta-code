@@ -18,7 +18,7 @@ parse_all(text: string) -> List[Tensor] is
         skip_spaces()
 
         if text[at] == '[' then
-            let items = LIST[Tensor]()
+            let items = LIST()
             at = at + 1
 
             while text[at] != ']' do
@@ -43,7 +43,7 @@ parse_all(text: string) -> List[Tensor] is
         Tensor.SCALAR(int.parse(text[start..at]))
     si
 
-    let found = LIST[Tensor]()
+    let found = LIST()
 
     while at < text.length do
         if text[at] == '[' then
@@ -75,7 +75,7 @@ embed(tensor: Tensor, strides: List[int]) -> List[int] is
 
     let values = repeat(0, size + 1) |> collect_mutable()
 
-    place(t: Tensor, level: int, offset: int) is
+    place(t, level, offset) is
         case t
         when (value): Tensor.SCALAR then
             values[offset] = value
@@ -91,7 +91,7 @@ embed(tensor: Tensor, strides: List[int]) -> List[int] is
 si
 
 deconvolve_1d(g: List[int], f: List[int]) -> List[int] is
-    let h = LIST[int]()
+    let h = LIST()
 
     for n in 0..g.count - f.count + 1 do
         let lower = System.Math.max(0, n - f.count + 1)
@@ -106,7 +106,7 @@ si
 reshape(
     values: List[int], dimensions: List[int], strides: List[int]
 ) -> Tensor is
-    build(level: int, offset: int) -> Tensor =>
+    build(level, offset) =>
         if level == dimensions.count then
             Tensor.SCALAR(values[offset])
         else

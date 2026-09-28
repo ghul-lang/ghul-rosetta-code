@@ -26,7 +26,7 @@ roots(
     f: double -> double, start: double, stop: double, step: double
 ) -> Root{} is
     let steps = int(System.Math.round((stop - start) / step))
-    let x = (i: int) => start + double(i) * step
+    let x = i => start + double(i) * step
 
     for i in 0::steps do
         if f(x(i)) == 0.0 then
@@ -39,7 +39,7 @@ roots(
     od
 si
 
-let f = (x: double) => x * x * x - 3.0 * x * x + 2.0 * x
+let f = x => x * x * x - 3.0 * x * x + 2.0 * x
 
 for (start, stop, step) in [(-1.0, 3.0, 0.1), (-0.95, 3.05, 0.3)] do
     write_line("from {start} to {stop} in steps of {step}:")

@@ -21,7 +21,7 @@ book_text(path: string) -> string is
 si
 
 words_of(text: string) -> List[string] is
-    let words = LIST[string]()
+    let words = LIST()
     let current = System.Text.StringBuilder()
 
     let flush = () =>
@@ -54,8 +54,8 @@ let words = words_of(book_text("war-of-the-worlds.txt"))
 
 // Each following word is stored once per time it was seen, so drawing
 // one at random draws it with the weight the book gave it.
-let after_one = MAP[string, LIST[string]]()
-let after_two = MAP[(string, string), LIST[string]]()
+let after_one = MAP()
+let after_two = MAP()
 
 for i in 0..words.count - 2 do
     let one = words[i]
@@ -63,7 +63,7 @@ for i in 0..words.count - 2 do
     let next = words[i + 2]
 
     if !after_one.contains_key(one) then
-        after_one[one] = LIST[string]()
+        after_one[one] = LIST()
     fi
 
     after_one[one].add(two)
@@ -71,7 +71,7 @@ for i in 0..words.count - 2 do
     let pair = (one, two)
 
     if !after_two.contains_key(pair) then
-        after_two[pair] = LIST[string]()
+        after_two[pair] = LIST()
     fi
 
     after_two[pair].add(next)
@@ -81,7 +81,7 @@ pick(choices: List[string]) -> string =>
     choices[random.next(0, choices.count)]
 
 sentence() -> string is
-    let chosen = LIST[string]()
+    let chosen = LIST()
 
     let first = pick(after_one["."])
 

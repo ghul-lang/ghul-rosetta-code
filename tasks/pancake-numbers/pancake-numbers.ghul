@@ -14,7 +14,7 @@ furthest(n: int) -> (flips: int, example: string) is
     let depth mut = 0
 
     do
-        let next = LIST[string]()
+        let next = LIST()
 
         for stack in frontier do
             for count in 2::n do

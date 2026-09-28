@@ -3,7 +3,7 @@ use default
 merged(base: MAP[string, object], update: MAP[string, object])
     -> MAP[string, object]
 is
-    let result = MAP[string, object]()
+    let result = MAP()
 
     for (key, value) in base do
         result[key] = value
@@ -16,13 +16,13 @@ is
     result
 si
 
-let base = MAP[string, object]()
+let base = MAP()
 
 base["name"] = "Rocket Skates"
 base["price"] = 12.75
 base["color"] = "yellow"
 
-let update = MAP[string, object]()
+let update = MAP()
 
 update["price"] = 15.25
 update["color"] = "red"

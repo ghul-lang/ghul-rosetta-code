@@ -44,8 +44,8 @@ write_source(path: string) is
 si
 
 split(path: string) -> List[string] is
-    let parts = LIST[string]()
-    let held = LIST[int]()
+    let parts = LIST()
+    let held = LIST()
 
     spill() is
         if held.count > 0 then

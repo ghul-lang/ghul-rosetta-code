@@ -11,7 +11,7 @@ precedes(a: List[int], b: List[int]) -> bool =>
     elif a[0] != b[0] then
         a[0] < b[0]
     else
-        let rest = (list: List[int]) => list |> skip(1)
+        let rest = list => list |> skip(1)
             |> collect() in
         precedes(rest(a), rest(b))
     fi

@@ -2,7 +2,7 @@ use default
 
 let out mut = 0
 let most mut = 0
-let peaks = LIST[string]()
+let peaks = LIST()
 
 for line in IO.File.read_all_lines("mlijobs.txt") do
     let fields =

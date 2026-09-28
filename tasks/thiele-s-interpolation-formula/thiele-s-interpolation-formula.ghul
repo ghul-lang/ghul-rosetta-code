@@ -11,7 +11,7 @@ class THIELE is
     init(x: double[], y: double[]) is
         _x = x
         _y = y
-        _rho = MAP[(int, int), double]()
+        _rho = MAP()
     si
 
     _reciprocal(order: int, i: int) -> double is
