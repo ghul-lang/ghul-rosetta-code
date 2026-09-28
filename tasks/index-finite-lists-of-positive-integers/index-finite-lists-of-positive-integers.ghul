@@ -39,7 +39,7 @@ unrank(index: bigint) -> LIST[bigint] is
 si
 
 let sample = [1, 2, 3, 10, 100, 987654321, 1]
-    |> map(v => cast bigint(v))
+    |> map(v => bigint(v))
     |> collect()
 
 let index = rank(sample)
