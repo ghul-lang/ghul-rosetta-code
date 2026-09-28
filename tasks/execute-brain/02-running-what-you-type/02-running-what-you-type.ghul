@@ -30,7 +30,7 @@ run(program: string, input: string) -> string is
         fi
     od
 
-    let output = LIST[char]()
+    let output = LIST()
 
     let cell mut = 0
     let at mut = 0

@@ -77,7 +77,7 @@ library_sort(xs: LIST[int]) => xs.sort()
 let random = System.Random(1)
 
 let inputs = [
-    ("ones", (n: int) => repeat(1, n) |> collect()),
+    ("ones", n => repeat(1, n) |> collect()),
     ("range", (n: int) => (0..n) |> collect()),
     ("shuffled", (n: int) =>
         (0..n) |> sort_by(_ => random.next()) |> collect())
@@ -95,7 +95,7 @@ let powers = (6::14) |> collect()
 microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
     (0..3)
     |> map(_ =>
-        let copy = LIST[int](data) in
+        let copy = LIST(data) in
         let clock = Stopwatch.start_new() in
         (
             sort(copy)

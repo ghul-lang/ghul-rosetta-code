@@ -130,7 +130,7 @@ node(expression: Expression)
     -> (label: string, children: List[Expression]) =>
     case expression
     when (value): NUMBER then
-        (label = "{value}", children = LIST[Expression]())
+        (label = "{value}", children = LIST())
     when (left, right): ADD then
         (label = "+", children = [left, right])
     when (left, right): SUBTRACT then
