@@ -14,7 +14,9 @@ let opcodes =
         |> map(f => cast OpCode(f.get_value(null)))
         |> collect_map(op => int(op.value) & 0xFFFF, op => op)
 
-let calls = [OpCodes.call, OpCodes.callvirt, OpCodes.newobj]
+let calls =
+    [OpCodes.call, OpCodes.callvirt, OpCodes.newobj,
+     OpCodes.ldftn, OpCodes.ldvirtftn]
 
 let everything =
     BindingFlags.PUBLIC | BindingFlags.NON_PUBLIC |
@@ -106,30 +108,36 @@ ghul_name(method: MethodBase) -> string is
         .to_lower_invariant()
 si
 
-// The program declares these, so a call to one of them is a call the
-// program made to itself. Anything else the IL names - a runtime pipe
-// class, a BCL method, an interpolation handler - is counted by nobody,
-// which is what keeps the answer the same whatever the compiler emits
-// around the program.
+// The program's own functions, and the calls and references it makes to
+// them. Anything else the IL names - a runtime pipe class, a BCL method,
+// an interpolation handler - is counted by nobody, which is what keeps
+// the answer the same whatever the compiler emits around the program.
 let own_types =
     Assembly.get_executing_assembly().get_types() |> collect_set()
 
-// The compiler puts the program's global functions in $globals, so that
-// type is the program's own. Every other type it names for itself - a
-// state machine, a closure frame - is not, and neither is any member it
-// names for itself: a lambda body, a cached delegate, a backing field.
+// A function the program declares. Its own global functions and methods
+// are one, and so is every function literal it writes: the compiler puts
+// each of those in a frame of its own as $anon_N, and a literal is a
+// function the program wrote.
+//
+// What the compiler makes for itself is not: a generator's state machine
+// and its enumerator members, the frames' own constructors, and the
+// accessors of a cached delegate's field.
 declared_by_the_program(method: MethodBase) -> bool is
     let owner = method.declaring_type
 
-    if !owner? then
+    if !owner? \/ !own_types.contains(owner) then
         return false
     fi
 
-    let own_container =
-        !owner.name.starts_with("$") \/ owner.name =~ "$globals"
+    if method.name.starts_with("$anon_") then
+        return true
+    fi
 
-    return own_types.contains(owner) /\ own_container /\
-        !method.name.starts_with("$")
+    let compiler_owned =
+        owner.name.starts_with("$") /\ owner.name !~ "$globals"
+
+    return !compiler_owned /\ !method.name.starts_with("$")
 si
 
 // The counts are of the calls the program makes to its own functions.
@@ -144,8 +152,14 @@ let most_called =
         |> map(ghul_name)
         |> group_by(name => name)
         |> map(uses => (name = uses.key, uses = uses.value.count))
+        // Among functions used equally often a named one comes first, so
+        // the names a reader is looking for are not pushed off the end by
+        // literals, whose names the compiler chose.
         |> sort((a, b) =>
+            let a_literal = if a.name.starts_with("$") then 1 else 0 fi in
+            let b_literal = if b.name.starts_with("$") then 1 else 0 fi in
             if a.uses != b.uses then b.uses <> a.uses
+            elif a_literal != b_literal then a_literal <> b_literal
             else a.name <> b.name fi)
         |> take(10)
 
