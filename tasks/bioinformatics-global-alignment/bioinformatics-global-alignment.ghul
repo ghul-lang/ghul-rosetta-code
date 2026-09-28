@@ -53,10 +53,10 @@ report(sequences: string[]) is
     write_line("  {result.length} bases")
 
     for base in ['A', 'C', 'G', 'T', 'U'] do
-        let count = result |> filter(c => c == base) |> count()
+        let occurrences = result |> filter(c => c == base) |> count()
 
-        if count > 0 then
-            write_line("  {base}: {count}")
+        if occurrences > 0 then
+            write_line("  {base}: {occurrences}")
         fi
     od
 

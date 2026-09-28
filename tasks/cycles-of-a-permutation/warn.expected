@@ -1,2 +1,0 @@
-cycles-of-a-permutation.ghul(113,41,113,46): warning shadowed-non-callable: index is not callable here, calling the one from an enclosing scope instead [cycles-of-a-permutation.ghulproj]
-cycles-of-a-permutation.ghul(62,43,62,48): warning shadowed-non-callable: index is not callable here, calling the one from an enclosing scope instead [cycles-of-a-permutation.ghulproj]

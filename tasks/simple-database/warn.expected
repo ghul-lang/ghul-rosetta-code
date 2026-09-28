@@ -1,1 +1,0 @@
-simple-database.ghul(6,1,8,24): warning top-level-statements-not-run: top-level statements will not run: the entry point is entry [entry point declared here: simple-database.ghul(107,1)] [simple-database.ghulproj]
