@@ -21,7 +21,7 @@ class MONEY(cents: bigint) is
 si
 
 dollars(units: int, cents: int) -> MONEY =>
-    MONEY(cast bigint(units) * 100n + cast bigint(cents))
+    MONEY(bigint(units) * 100n + bigint(cents))
 
 let hamburger = dollars(5, 50)
 let milkshake = dollars(2, 86)
