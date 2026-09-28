@@ -17,8 +17,14 @@ namespace Rosetta is
     class SECTION is
         _root: string
 
+        // What rendering found that a person should fix: a program the
+        // playground cannot load, with no playground-unsupported file to
+        // tell a reader who opens the link anyway why it will not run.
+        warnings: LIST[string]
+
         init(root: string) is
             _root = root
+            warnings = LIST[string]()
         si
 
         // The digest of a published section, which is what lets a later run
@@ -133,10 +139,14 @@ namespace Rosetta is
                 return false
             fi
 
-            if !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")) /\ !needs_other_packages(directory, name) then
+            if !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")) then
                 let id = IO.Path.get_relative_path(IO.Path.combine(_root, "tasks"), directory).replace('\\', '/')
 
-                text.append("{{{{ghul playground|{id}}}}}\n\n")
+                if needs_other_packages(directory, name) then
+                    warnings.add("{id}: cannot run in the playground but has no playground-unsupported file - no link written")
+                else
+                    text.append("{{{{ghul playground|{id}}}}}\n\n")
+                fi
             fi
 
             let notes = IO.Path.combine(directory, "notes.md")

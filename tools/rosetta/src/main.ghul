@@ -823,6 +823,12 @@ write_wiki_out(root: string, slugs: Collections.List[string]) is
 
             System.Environment.exit_code = 1
         fi
+
+        for warning in section.warnings do
+            error.write_line(warning)
+        od
+
+        section.warnings.clear()
     od
 si
 
@@ -1322,12 +1328,20 @@ else
     when "section" then
         if arguments.count < 1 then
             error.write_line("usage: rosetta section <slug>")
-        elif let section = SECTION(root).render(arguments[0]) then
-            IO.Std.write(section)
         else
-            error.write_line("{arguments[0]}: no section - disabled, no source, or no captured output")
+            let renderer = SECTION(root)
 
-            System.Environment.exit_code = 1
+            if let section = renderer.render(arguments[0]) then
+                IO.Std.write(section)
+            else
+                error.write_line("{arguments[0]}: no section - disabled, no source, or no captured output")
+
+                System.Environment.exit_code = 1
+            fi
+
+            for warning in renderer.warnings do
+                error.write_line(warning)
+            od
         fi
     when "wiki-out" then
         write_wiki_out(root, arguments)
