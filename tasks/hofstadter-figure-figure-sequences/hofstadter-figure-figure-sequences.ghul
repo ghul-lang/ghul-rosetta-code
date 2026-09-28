@@ -23,7 +23,7 @@ r_sequence() -> int{} is
 si
 
 s_sequence() -> int{} is
-    let in_r = r_sequence().iterator
+    let in_r = use r_sequence().iterator
 
     assert in_r.move_next() else "the R sequence never runs out"
 
