@@ -1,7 +1,25 @@
 use default
+use IO.Std.write
 
+// Two for loops, the inner one bounded by the outer.
 for row in 1::5 do
-    let line = string('*', row)
+    for _ in 1::row do
+        write("*")
+    od
 
-    write_line(line)
+    write_line()
 od
+
+write_line()
+
+// The inner loop as a pipe, closed off into text by string().
+for row in 1::5 do
+    write_line(repeat('*', row) |> string())
+od
+
+write_line()
+
+// Both loops as comprehensions, one inside the other.
+let rows = [['*' for _ in 1::row] |> string() for row in 1::5]
+
+write_line(rows |> string("\n"))
