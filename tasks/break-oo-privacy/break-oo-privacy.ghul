@@ -11,7 +11,8 @@ let safe = SAFE("1234", "a bar of gold")
 write_line(safe.open("0000"))
 
 let hidden = BindingFlags.INSTANCE | BindingFlags.NON_PUBLIC
-let fields = safe.get_type().get_fields(hidden)
+let fields =
+    safe.get_type().get_fields(hidden) |> filter(f => !f.name.starts_with('$'))
 
 for member in fields do
     write_line("{member.name} = {member.get_value(safe)}")
