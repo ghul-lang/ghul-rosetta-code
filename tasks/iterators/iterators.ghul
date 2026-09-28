@@ -1,19 +1,36 @@
 use default
 
-squares(count: int) -> int{} is
-    for value in 1::count do
-        yield value * value
+picks(values: string{}, positions: int[]) -> string{} is
+    let items = use values.iterator
+    let at mut = 0
+
+    for position in positions do
+        while at < position do
+            assert items.move_next() else "too few elements"
+
+            at = at + 1
+        od
+
+        yield items.current
     od
 si
 
-show(caption: string, values: Iterable[int]) is
-    let shown = values |> map(value => "{value}") |> join(" ")
+show(name: string, values: string{}) is
+    let from_start = picks(values, [1, 4, 5]) |> join()
+    let from_end = picks(values |> reverse(), [1, 4, 5]) |> join()
 
-    write_line("{caption}: {shown}")
+    write_line("{name}: {values |> join()}")
+    write_line("  first, fourth, fifth: {from_start}")
+    write_line("  last, fourth to last, fifth to last: {from_end}")
 si
 
-show("array", [3, 1, 2])
-show("list", [3, 1, 2])
-show("set", SET([3, 1, 2]))
-show("range", 1::4)
-show("generator", squares(4))
+let days = [
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"
+]
+
+let colours = LinkedList[string](
+    ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"])
+
+show("days", days)
+show("colours", colours)

@@ -1,20 +1,10 @@
 use IO.Std.write
 use default
 
-grid(size: int, random: System.Random) -> LIST[LIST[int]] is
-    let rows = LIST()
+grid(size: int, random: System.Random) -> int[][] =>
+    [[random.next(1, 21) for _ in 1::size] for _ in 1::size]
 
-    for _ in 1::size do
-        let row = 1::size |> map(_ => random.next(1, 21))
-            |> collect_mutable()
-
-        rows.add(row)
-    od
-
-    rows
-si
-
-show_until_twenty(rows: LIST[LIST[int]]) is
+show_until_twenty(rows: int[][]) is
     search: for row in rows do
         for value in row do
             write("{value,3}")

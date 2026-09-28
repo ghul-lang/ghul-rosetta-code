@@ -1,14 +1,7 @@
 use default
 
-power(base: long, exponent: int) -> long is
-    let value mut = 1L
-
-    for _ in 0..exponent do
-        value = value * base
-    od
-
-    return value
-si
+power(base: long, exponent: int) -> long =>
+    repeat(base, exponent) |> product()
 
 powers(exponent: int) -> long{} is
     let base mut = 0L

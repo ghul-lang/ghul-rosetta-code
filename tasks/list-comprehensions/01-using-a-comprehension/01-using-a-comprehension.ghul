@@ -1,0 +1,12 @@
+use default
+
+triples(n: int) -> (int, int, int)[] =>
+    [
+        (a, b, c)
+        for a in 1::n
+        for b in a::n
+        for c in b::n
+        if a * a + b * b == c * c
+    ]
+
+write_line(triples(20) |> join())

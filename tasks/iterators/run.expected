@@ -1,5 +1,6 @@
-array: 3 1 2
-list: 3 1 2
-set: 3 1 2
-range: 1 2 3 4
-generator: 1 4 9 16
+days: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+  first, fourth, fifth: Sunday, Wednesday, Thursday
+  last, fourth to last, fifth to last: Saturday, Wednesday, Tuesday
+colours: Red, Orange, Yellow, Green, Blue, Purple
+  first, fourth, fifth: Red, Green, Blue
+  last, fourth to last, fifth to last: Purple, Yellow, Orange
