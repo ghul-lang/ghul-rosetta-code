@@ -14,7 +14,9 @@ let opcodes =
         |> map(f => cast OpCode(f.get_value(null)))
         |> collect_map(op => int(op.value) & 0xFFFF, op => op)
 
-let calls = [OpCodes.call, OpCodes.callvirt, OpCodes.newobj]
+let calls =
+    [OpCodes.call, OpCodes.callvirt, OpCodes.newobj,
+     OpCodes.ldftn, OpCodes.ldvirtftn]
 
 let everything =
     BindingFlags.PUBLIC | BindingFlags.NON_PUBLIC |
@@ -40,7 +42,6 @@ callees(method: MethodBase) -> MethodBase{} is
     while at < il.count do
         let first = int(il[at])
 
-        // Two-byte opcodes all start with 0xFE.
         let code =
             if first == 0xFE then
                 0xFE00 | int(il[at + 1])
@@ -76,14 +77,11 @@ operand_size(kind: OperandType, il: ubyte[], at: int) -> int =>
     then 1
     when OperandType.INLINE_VAR then 2
     when OperandType.INLINE_I8, OperandType.INLINE_R then 8
-    // A switch is a target count followed by that many targets.
     when OperandType.INLINE_SWITCH then
         4 + 4 * BitConverter.to_int32(il, at)
     else 4
     esac
 
-// A type keeps its own name; a member is spelled the way ghūl spells
-// an imported one, and a property accessor by its property.
 ghul_name(method: MethodBase) -> string is
     if method.is_constructor then
         return (method.declaring_type?.name ?? "").split(['`'])[0]
@@ -106,7 +104,26 @@ ghul_name(method: MethodBase) -> string is
         .to_lower_invariant()
 si
 
-// The counts are of the IL this compiler generated for the program.
+let own_types =
+    Assembly.get_executing_assembly().get_types() |> collect_set()
+
+declared_by_the_program(method: MethodBase) -> bool is
+    let owner = method.declaring_type
+
+    if !owner? \/ !own_types.contains(owner) then
+        return false
+    fi
+
+    if method.name.starts_with("$anon_") then
+        return true
+    fi
+
+    let compiler_owned =
+        owner.name.starts_with("$") /\ owner.name !~ "$globals"
+
+    return !compiler_owned /\ !method.name.starts_with("$")
+si
+
 let most_called =
     Assembly.get_executing_assembly().get_types()
         |> flat_map(type =>
@@ -114,11 +131,15 @@ let most_called =
                 type.get_methods(everything),
                 type.get_constructors(everything)))
         |> flat_map(callees)
+        |> filter(declared_by_the_program)
         |> map(ghul_name)
         |> group_by(name => name)
         |> map(uses => (name = uses.key, uses = uses.value.count))
         |> sort((a, b) =>
+            let a_literal = if a.name.starts_with("$") then 1 else 0 fi in
+            let b_literal = if b.name.starts_with("$") then 1 else 0 fi in
             if a.uses != b.uses then b.uses <> a.uses
+            elif a_literal != b_literal then a_literal <> b_literal
             else a.name <> b.name fi)
         |> take(10)
 
