@@ -57,7 +57,7 @@ si
 add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
     let exponent = int.min(x.exponent, y.exponent)
 
-    aligned(z) =>
+    aligned(z: PAdic) -> List[bigint] =>
         repeat(0n, z.exponent - exponent)
             |> cat(z.digits)
             |> take(k)
@@ -97,7 +97,7 @@ rational(x: PAdic, p: bigint, k: int) -> string is
             |> index()
             |> sum_by((i, d) => d * bigint.pow(p, i))
 
-    dot(u, w) =>
+    dot(u: (bigint, bigint), w: (bigint, bigint)) -> bigint =>
         u.`0 * w.`0 + u.`1 * w.`1
 
     let u mut = (modulus, 0n)

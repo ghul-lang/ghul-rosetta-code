@@ -111,10 +111,10 @@ show(terms: Iterable[bigint]) -> string =>
     else "[{shown[0]}; {rest}{more}]"
     fi
 
-let add = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
-let subtract = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
-let multiply = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
-let divide = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
+let add: (Row, Row) = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
+let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
+let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
+let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
 run(
     label: string, operation: (Row, Row), x: bigint{}, y: bigint{}

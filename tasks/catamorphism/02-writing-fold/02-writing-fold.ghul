@@ -22,8 +22,8 @@ si
 
 let numbers = [1, 2, 3, 4, 5]
 
-let bracket_left = (running, value) => "({running} {value})"
-let bracket_right = (value, running) => "({value} {running})"
+let bracket_left = (running: string, value: int) => "({running} {value})"
+let bracket_right = (value: int, running: string) => "({value} {running})"
 
 let left_sum = fold_left(numbers, 0, (total, value) => total + value)
 let right_sum = fold_right(numbers, 0, (value, total) => value + total)

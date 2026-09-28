@@ -55,7 +55,7 @@ let words = words_of(book_text("war-of-the-worlds.txt"))
 // Each following word is stored once per time it was seen, so drawing
 // one at random draws it with the weight the book gave it.
 let after_one = MAP()
-let after_two = MAP()
+let after_two = MAP[(string, string), LIST[string]]()
 
 for i in 0..words.count - 2 do
     let one = words[i]

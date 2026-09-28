@@ -56,7 +56,7 @@ smallest_start(n: int) -> bigint? is
         partitions =
             partitions
                 |> flat_map(
-                    ((a, b, unassigned)) =>
+                    ((a, b, unassigned): Partition) -> List[Partition] =>
                     if near & a != 0L \/ far & b != 0L then
                         [(a, b, unassigned)]
                     else

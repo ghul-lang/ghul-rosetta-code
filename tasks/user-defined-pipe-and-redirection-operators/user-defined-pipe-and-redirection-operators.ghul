@@ -47,7 +47,7 @@ head(count: int) -> Filter => source => source |> take(count)
 tail(count: int) -> Filter => source => last(source, count)
 
 last(source: Stream, count: int) -> Stream is
-    let held = LIST()
+    let held = LIST[string]()
 
     for line in source do
         held.add(line)
@@ -79,7 +79,7 @@ si
 uniq() -> Filter => source => dedupe(source)
 
 dedupe(source: Stream) -> Stream is
-    let seen = SET()
+    let seen = SET[string]()
 
     for line in source do
         if seen.add(line) then
@@ -93,7 +93,7 @@ sorted() -> Filter => source => in_order(source)
 in_order(source: Stream) -> Stream is
     let lines = source |> collect_mutable()
 
-    lines.sort((a, b) => string.compare(a, b))
+    lines.sort((a: string, b: string) -> int => string.compare(a, b))
 
     pipe(lines)
 si
