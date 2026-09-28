@@ -34,12 +34,9 @@ gcd(left: int, right: int) -> int => (
     a
 )
 
-let all_coprime = for index in 0..999 do
-    if gcd(sequence[index], sequence[index + 1]) != 1 then
-        break false
-    fi
-od
+let all_coprime = 0..999
+    |> all(index => gcd(sequence[index], sequence[index + 1]) == 1)
 
 write_line(
     "consecutive members up to the 1000th are all coprime: "
-    "{if all_coprime ?? true then "true" else "false" fi}")
+    "{all_coprime}")

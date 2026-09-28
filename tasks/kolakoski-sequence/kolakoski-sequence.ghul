@@ -1,23 +1,16 @@
 use default
 
-cycler(values: int[]) -> () -> int is
-    let at mut = 0
-
-    return () => (
-        let value = values[at]
-        at = (at + 1) % values.count
-        value
-    )
-si
-
 kolakoski(values: int[], length: int) -> List[int] is
-    let next = cycler(values)
+    let cycled = () is
+        do
+            yield in values
+        od
+    si
+
     let sequence = LIST()
     let at_run mut = 0
 
-    while sequence.count < length do
-        let value = next()
-
+    for value in cycled() do
         sequence.add(value)
 
         for _ in 1..sequence[at_run] do
@@ -25,6 +18,10 @@ kolakoski(values: int[], length: int) -> List[int] is
         od
 
         at_run = at_run + 1
+
+        if sequence.count >= length then
+            break
+        fi
     od
 
     return sequence[0..length]
