@@ -108,21 +108,9 @@ ghul_name(method: MethodBase) -> string is
         .to_lower_invariant()
 si
 
-// The program's own functions, and the calls and references it makes to
-// them. Anything else the IL names - a runtime pipe class, a BCL method,
-// an interpolation handler - is counted by nobody, which is what keeps
-// the answer the same whatever the compiler emits around the program.
 let own_types =
     Assembly.get_executing_assembly().get_types() |> collect_set()
 
-// A function the program declares. Its own global functions and methods
-// are one, and so is every function literal it writes: the compiler puts
-// each of those in a frame of its own as $anon_N, and a literal is a
-// function the program wrote.
-//
-// What the compiler makes for itself is not: a generator's state machine
-// and its enumerator members, the frames' own constructors, and the
-// accessors of a cached delegate's field.
 declared_by_the_program(method: MethodBase) -> bool is
     let owner = method.declaring_type
 
@@ -140,7 +128,6 @@ declared_by_the_program(method: MethodBase) -> bool is
     return !compiler_owned /\ !method.name.starts_with("$")
 si
 
-// The counts are of the calls the program makes to its own functions.
 let most_called =
     Assembly.get_executing_assembly().get_types()
         |> flat_map(type =>
@@ -152,9 +139,6 @@ let most_called =
         |> map(ghul_name)
         |> group_by(name => name)
         |> map(uses => (name = uses.key, uses = uses.value.count))
-        // Among functions used equally often a named one comes first, so
-        // the names a reader is looking for are not pushed off the end by
-        // literals, whose names the compiler chose.
         |> sort((a, b) =>
             let a_literal = if a.name.starts_with("$") then 1 else 0 fi in
             let b_literal = if b.name.starts_with("$") then 1 else 0 fi in
