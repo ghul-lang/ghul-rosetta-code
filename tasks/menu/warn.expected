@@ -1,1 +1,0 @@
-menu.ghul(11,39,11,44): warning shadowed-non-callable: index is not callable here, calling the one from an enclosing scope instead [menu.ghulproj]

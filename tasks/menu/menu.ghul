@@ -8,8 +8,8 @@ choose(items: List[string]) -> string is
     fi
 
     do
-        for (index, item) in items |> index() do
-            write_line("{index + 1}. {item}")
+        for (position, item) in items |> index() do
+            write_line("{position + 1}. {item}")
         od
 
         write("choose: ")
