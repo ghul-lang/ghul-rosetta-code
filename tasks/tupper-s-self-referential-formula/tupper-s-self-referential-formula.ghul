@@ -20,7 +20,7 @@ let k =
 let cell = 6
 
 lit(x: int, y: int) -> bool =>
-    ((k + cast bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n
+    ((k + bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n
 
 let image = IMAGE(106 * cell, 17 * cell)
 
