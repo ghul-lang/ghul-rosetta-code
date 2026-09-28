@@ -42,7 +42,6 @@ callees(method: MethodBase) -> MethodBase{} is
     while at < il.count do
         let first = int(il[at])
 
-        // Two-byte opcodes all start with 0xFE.
         let code =
             if first == 0xFE then
                 0xFE00 | int(il[at + 1])
@@ -78,14 +77,11 @@ operand_size(kind: OperandType, il: ubyte[], at: int) -> int =>
     then 1
     when OperandType.INLINE_VAR then 2
     when OperandType.INLINE_I8, OperandType.INLINE_R then 8
-    // A switch is a target count followed by that many targets.
     when OperandType.INLINE_SWITCH then
         4 + 4 * BitConverter.to_int32(il, at)
     else 4
     esac
 
-// A type keeps its own name; a member is spelled the way ghūl spells
-// an imported one, and a property accessor by its property.
 ghul_name(method: MethodBase) -> string is
     if method.is_constructor then
         return (method.declaring_type?.name ?? "").split(['`'])[0]
