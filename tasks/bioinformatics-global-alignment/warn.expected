@@ -1,1 +1,0 @@
-bioinformatics-global-alignment.ghul(56,57,56,62): warning shadowed-non-callable: count is not callable here, calling the one from an enclosing scope instead [bioinformatics-global-alignment.ghulproj]
