@@ -106,7 +106,31 @@ ghul_name(method: MethodBase) -> string is
         .to_lower_invariant()
 si
 
-// The counts are of the IL this compiler generated for the program.
+// The program declares these, so a call to one of them is a call the
+// program made to itself. Anything else the IL names - a runtime pipe
+// class, a BCL method, an interpolation handler - is counted by nobody,
+// which is what keeps the answer the same whatever the compiler emits
+// around the program.
+let own_types = Assembly.get_executing_assembly().get_types() |> collect_set()
+
+// The compiler puts the program's global functions in $globals, so that
+// type is the program's own. Every other type it names for itself - a
+// state machine, a closure frame - is not, and neither is any member it
+// names for itself: a lambda body, a cached delegate, a backing field.
+declared_by_the_program(method: MethodBase) -> bool is
+    let owner = method.declaring_type
+
+    if !owner? then
+        return false
+    fi
+
+    let own_container = !owner.name.starts_with("$") \/ owner.name =~ "$globals"
+
+    return own_types.contains(owner) /\ own_container /\
+        !method.name.starts_with("$")
+si
+
+// The counts are of the calls the program makes to its own functions.
 let most_called =
     Assembly.get_executing_assembly().get_types()
         |> flat_map(type =>
@@ -114,6 +138,7 @@ let most_called =
                 type.get_methods(everything),
                 type.get_constructors(everything)))
         |> flat_map(callees)
+        |> filter(declared_by_the_program)
         |> map(ghul_name)
         |> group_by(name => name)
         |> map(uses => (name = uses.key, uses = uses.value.count))
