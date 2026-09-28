@@ -1,0 +1,306 @@
+namespace Rosetta is
+    use System.Text.StringBuilder
+    use System.Text.RegularExpressions.Regex
+    use Collections
+    use Ghul.Pipes
+
+    // A task's ghul section as it goes on the wiki: a heading, then for the
+    // task or each of its parts the playground link, any notes, the source,
+    // and the output. The output is the test's captured run.expected, which
+    // the task's own test holds equal to what the program prints, so the
+    // section is a function of the files in the task directory alone and
+    // nothing has to be built or run to produce it.
+    //
+    // What `publish` records as published_hash is the digest of exactly this
+    // text, trimmed, so comparing the two says whether a solution has changed
+    // since it was posted.
+    class SECTION is
+        _root: string
+
+        // What rendering found that a person should fix: a program the
+        // playground cannot load, with no playground-unsupported file to
+        // tell a reader who opens the link anyway why it will not run.
+        warnings: LIST[string]
+
+        init(root: string) is
+            _root = root
+            warnings = LIST[string]()
+        si
+
+        // The digest of a published section, which is what lets a later run
+        // tell a wiki edit from one made here. Any stable hash would do;
+        // this one is short enough to sit in the ledger and read.
+        digest(section: string) -> string static =>
+            System.Convert.to_hex_string(
+                System.Security.Cryptography.SHA256.hash_data(
+                    System.Text.Encoding.utf8.get_bytes(section))).to_lower()
+
+        // Whether the section this repository would post now differs from the
+        // one it last posted, so the wiki shows an older solution.
+        is_ahead_of(slug: string, published_hash: string?) -> bool is
+            if let hash = published_hash, section = render(slug) then
+                return digest(section.trim()) !~ hash
+            fi
+
+            return false
+        si
+
+        // The markup for a task, or null where there is none to post: a task
+        // with a disabled test, one without a source, or one whose output
+        // has not been captured.
+        render(slug: string) -> string? is
+            let directory = IO.Path.combine(_root, "tasks", slug)
+
+            if !IO.Directory.exists(directory) then
+                return null
+            fi
+
+            let parts = parts_of(directory)
+
+            if parts.count == 0 then
+                if IO.File.exists(IO.Path.combine(directory, "disabled")) then
+                    return null
+                fi
+            elif parts |> any(part => IO.File.exists(IO.Path.combine(part, "disabled"))) then
+                return null
+            fi
+
+            let text = StringBuilder()
+
+            text.append("=={{{{header|ghul}}}}==\n")
+
+            if parts.count == 0 then
+                if !body(text, slug, directory, slug) then
+                    return null
+                fi
+            else
+                let first mut = true
+
+                for part in parts do
+                    let name = IO.Path.get_file_name(part) ?? ""
+
+                    if !first then
+                        text.append('\n')
+                    fi
+
+                    first = false
+
+                    text.append("==={heading(part, name)}===\n")
+
+                    if !body(text, slug, part, name) then
+                        return null
+                    fi
+                od
+            fi
+
+            return text.to_string()
+        si
+
+        parts_of(directory: string) -> LIST[string] is
+            let parts =
+                LIST[string](
+                    IO.Directory.get_directories(directory)
+                    |> filter(d => Regex.is_match(IO.Path.get_file_name(d) ?? "", "^[0-9][0-9]-"))
+                )
+
+            parts.sort((a: string, b: string) -> int => string.compare_ordinal(a, b))
+
+            return parts
+        si
+
+        // A part's `heading` file when it has one, otherwise its directory
+        // name: 01-using-map is headed "Using map".
+        heading(directory: string, name: string) -> string is
+            let written = IO.Path.combine(directory, "heading")
+
+            if IO.File.exists(written) then
+                return IO.File.read_all_lines(written)[0]
+            fi
+
+            let rest = name.substring(name.index_of('-') + 1).replace('-', ' ')
+
+            if rest.length == 0 then
+                return rest
+            fi
+
+            return "{char.to_upper_invariant(rest[0])}{rest.substring(1)}"
+        si
+
+        body(text: StringBuilder, slug: string, directory: string, name: string) -> bool is
+            let source = IO.Path.combine(directory, "{name}.ghul")
+
+            if !IO.File.exists(source) then
+                return false
+            fi
+
+            let output = output_of(directory)
+
+            if !output? then
+                return false
+            fi
+
+            if !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")) then
+                let id = IO.Path.get_relative_path(IO.Path.combine(_root, "tasks"), directory).replace('\\', '/')
+
+                if needs_other_packages(directory, name) then
+                    warnings.add("{id}: cannot run in the playground but has no playground-unsupported file - no link written")
+                else
+                    text.append("{{{{ghul playground|{id}}}}}\n\n")
+                fi
+            fi
+
+            let notes = IO.Path.combine(directory, "notes.md")
+
+            if IO.File.exists(notes) then
+                text.append(MARKDOWN_TO_WIKI().render(IO.File.read_all_text(notes)))
+                text.append("\n\n")
+            fi
+
+            text.append("<syntaxhighlight lang=\"ghul\">")
+            text.append(IO.File.read_all_text(source))
+            text.append("</syntaxhighlight>\n\n")
+
+            if output.length > 0 then
+                text.append("{{{{out}}}}\n")
+
+                output_block(text, slug, directory, output)
+            fi
+
+            return true
+        si
+
+        // What the program prints, with trailing newlines dropped: the text
+        // `wiki-output.txt` gives in place of a run, or else the captured
+        // run.expected, followed by run.err.expected where the test captures
+        // that too. Null when nothing has been captured.
+        output_of(directory: string) -> string? is
+            let substitute = IO.Path.combine(directory, "wiki-output.txt")
+
+            if IO.File.exists(substitute) then
+                return without_trailing_newlines(IO.File.read_all_text(substitute))
+            fi
+
+            let expected = IO.Path.combine(directory, "run.expected")
+
+            if !IO.File.exists(expected) then
+                return null
+            fi
+
+            let output = without_trailing_newlines(IO.File.read_all_text(expected))
+            let errors = IO.Path.combine(directory, "run.err.expected")
+
+            if IO.File.exists(errors) /\ reads_its_own_output(directory) then
+                let error_text = without_trailing_newlines(IO.File.read_all_text(errors))
+
+                return if output.length > 0 then "{output}\n{error_text}" else error_text fi
+            fi
+
+            return output
+        si
+
+        // A test that feeds the program input, varies from run to run, or
+        // checks more than standard output: its captured files are the
+        // output shown, standard error included.
+        reads_its_own_output(directory: string) -> bool =>
+            ["run.in", "run.session", "run.check", "run.args", "run.err.expected", "run.exit.expected"]
+                |> any(file => IO.File.exists(IO.Path.combine(directory, file)))
+
+        without_trailing_newlines(text: string) -> string => text.trim_end('\n')
+
+        // A package reference other than ghul.raster, which the playground
+        // cannot load, so no playground link goes up for the program.
+        needs_other_packages(directory: string, name: string) -> bool is
+            let project = IO.Path.combine(directory, "{name}.ghulproj")
+
+            if !IO.File.exists(project) then
+                return false
+            fi
+
+            return
+                Regex.matches(IO.File.read_all_text(project), "PackageReference Include=\"[^\"]*\"")
+                    |> any(m => m.value !~ "PackageReference Include=\"ghul.raster\"")
+        si
+
+        // The output in <pre> blocks, with an image reference in place of each
+        // line an image's `show` wrote, and a line saying what the pictures of
+        // any control characters stand for.
+        output_block(text: StringBuilder, slug: string, directory: string, raw: string) is
+            let has_controls = raw |> any(c => (c < '\t' \/ (c > '\n' /\ c < ' ') \/ c == '\u007F'))
+            let output = if has_controls then without_trailing_newlines(CONTROL_PICTURES.render(raw)) else raw fi
+            let legend = if has_controls then CONTROL_PICTURES.legend(raw) else null fi
+
+            let open mut = false
+
+            for line in output.split(['\n']) do
+                if line.starts_with("<<image ") /\ line.ends_with(">>") then
+                    if open then
+                        text.append("</pre>\n")
+                        open = false
+                    fi
+
+                    let image = line.substring(8, line.length - 10)
+
+                    text.append("[[File:Ghul-{slug}-{wiki_image(directory, image)}|thumb|none]]\n")
+                else
+                    if !open then
+                        text.append("<pre>\n")
+                        open = true
+                    fi
+
+                    text.append(echoed(line))
+                fi
+            od
+
+            if open then
+                text.append("</pre>\n")
+            fi
+
+            if let words = legend then
+                let trimmed = without_trailing_newlines(words)
+
+                if trimmed.length > 0 then
+                    text.append("\n{trimmed}\n")
+                fi
+            fi
+        si
+
+        // A line as the shell's echo writes it, which reads a line made only
+        // of its own option letters as options rather than text.
+        echoed(line: string) -> string is
+            if Regex.is_match(line, "^-[neE]+$") then
+                return if line.contains('n') then "" else "\n" fi
+            fi
+
+            return "{line}\n"
+        si
+
+        // What an image is called on the wiki: an animated PNG goes up as the
+        // GIF it is converted to, since MediaWiki's thumbnail of an animated
+        // PNG shows only its first frame.
+        wiki_image(directory: string, name: string) -> string is
+            let file = IO.Path.combine(directory, name)
+            let captured = "{file}.expected"
+            let path = if IO.File.exists(file) then file elif IO.File.exists(captured) then captured else null fi
+
+            if let found = path then
+                if animated_png(found) /\ name.ends_with(".png") then
+                    return "{name.substring(0, name.length - 4)}.gif"
+                fi
+            fi
+
+            return name
+        si
+
+        // An animated PNG carries an acTL chunk, which the format puts ahead
+        // of the first IDAT, so whichever of the two names comes first says
+        // which kind of file this is.
+        animated_png(path: string) -> bool is
+            let bytes = IO.File.read_all_bytes(path)
+            let text = System.Text.Encoding.latin1.get_string(bytes)
+            let animation = text.index_of("acTL", System.StringComparison.ORDINAL)
+            let data = text.index_of("IDAT", System.StringComparison.ORDINAL)
+
+            return animation >= 0 /\ (data < 0 \/ animation < data)
+        si
+    si
+si

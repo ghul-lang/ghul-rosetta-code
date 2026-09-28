@@ -19,6 +19,8 @@ use Rosetta
 //   rosetta publish --rehearse <page> [--api <url>] <slug>
 //   rosetta adopt <slug> ...          record the live section as ours, when it matches wiki-out/
 //   rosetta render-notes <path>      a task's notes.md as wiki markup, to stdout
+//   rosetta section <slug>           the task's ghul section as wiki markup, to stdout
+//   rosetta wiki-out <slug> ...       write each task's section to wiki-out/<slug>.wiki
 //   rosetta index [--check]          write index.json, or only validate the tags it would carry
 //   rosetta edit-page <title> <file> <summary> [--dry-run]
 //                                    replace a page that is not a task's, such as a template
@@ -788,12 +790,47 @@ check(api: string?) is
     fi
 si
 
-// The digest of a published section, which is what lets a later run tell a wiki edit from one
-// made here. Any stable hash would do; this one is short enough to sit in the ledger and read.
-digest(section: string) -> string =>
-    System.Convert.to_hex_string(
-        System.Security.Cryptography.SHA256.hash_data(
-            System.Text.Encoding.utf8.get_bytes(section))).to_lower()
+digest(section: string) -> string => SECTION.digest(section)
+
+// Writes each named task's section to wiki-out/<slug>.wiki, which is what `publish` reads, and
+// reports one line a task. A task with nothing to post - a disabled test, no source, or no
+// captured output - is reported and skipped, and makes the exit status non-zero.
+write_wiki_out(root: string, slugs: Collections.List[string]) is
+    let out = IO.Path.combine(root, "wiki-out")
+    let section = SECTION(root)
+
+    IO.Directory.create_directory(out)
+
+    for slug in slugs do
+        let path = IO.Path.combine(out, "{slug}.wiki")
+
+        if let markup = section.render(slug) then
+            IO.File.write_all_text(path, markup)
+
+            let task = IO.Path.combine(root, "tasks", slug)
+            let descriptor =
+                System.Text.Json.JsonDocument.parse(IO.File.read_all_text(IO.Path.combine(task, "task.json")), _).root_element
+
+            let status = descriptor.get_property("status").get_string()
+            let url = descriptor.get_property("url").get_string()
+            let notes = if IO.Directory.get_files(task, "notes.md", IO.SearchOption.ALL_DIRECTORIES).count > 0 then " (notes)" else "" fi
+
+            write_line("{slug,-28} {status,-9} {url}{notes}")
+        else
+            IO.File.delete(path)
+
+            write_line("{slug,-28} skipped (disabled, no source, or no captured output)")
+
+            System.Environment.exit_code = 1
+        fi
+
+        for warning in section.warnings do
+            error.write_line(warning)
+        od
+
+        section.warnings.clear()
+    od
+si
 
 // Records the section that is live on the wiki as the one this repository published, so a later
 // `publish` can replace it.
@@ -1288,6 +1325,26 @@ else
                 IO.Std.write(CONTROL_PICTURES.render(text))
             fi
         fi
+    when "section" then
+        if arguments.count < 1 then
+            error.write_line("usage: rosetta section <slug>")
+        else
+            let renderer = SECTION(root)
+
+            if let section = renderer.render(arguments[0]) then
+                IO.Std.write(section)
+            else
+                error.write_line("{arguments[0]}: no section - disabled, no source, or no captured output")
+
+                System.Environment.exit_code = 1
+            fi
+
+            for warning in renderer.warnings do
+                error.write_line(warning)
+            od
+        fi
+    when "wiki-out" then
+        write_wiki_out(root, arguments)
     when "render-notes" then
         if arguments.count < 1 then
             error.write_line("usage: rosetta render-notes <path-to-notes.md>")

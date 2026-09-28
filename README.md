@@ -91,16 +91,17 @@ scripts/generate-wiki.sh --out amb quine # the same, for the tasks named
 scripts/generate-wiki.sh y-combinator    # one task, to stdout
 ```
 
-Generating builds and runs each task, so `--all` costs a couple of minutes on a full repository.
+Generating reads each task's files and builds nothing: the output shown is what the task's test
+captured in `run.expected`, so run the test first when a solution's output has changed.
 A publish run posts either the slugs it is given or every solved task, so `--solved` and `--out`
 generate exactly what it will read and leave the rest of `wiki-out/` alone.
 
 Each file is the complete section: the `{{header|ghul}}` heading, the source in a
 `<syntaxhighlight>` block, and the program's output in a `{{out}}` block. The source is read from
-the task and the output comes from running it, so an edited solution can be generated straight
-away with nothing to update in between. Where that output differs from the test's `run.expected`,
-the entry is still emitted and the difference is reported on stderr - the test needs recapturing,
-which is worth knowing but is not a reason to withhold the markup.
+the task and the output is its test's `run.expected`, which the test holds equal to what the
+program prints, so a solution whose output changed needs its test recaptured before its markup is
+generated. The same rendering, by `rosetta section`, is what the index compares with the ledger to
+mark a task whose solution is newer than the section on the wiki.
 
 A control character in that output is shown as its Unicode picture - the escape character as
 ␛, the bell as ␇ - with a line under the block saying what they stand for. A wiki page cannot
@@ -324,6 +325,10 @@ Two fields in each `task.json` are written by hand:
 Everything else in an index entry comes from the task's files: its parts, source line counts, its
 `*.png.expected` images, whether it reads standard input (`run.in` or `run.session`), and whether
 the playground can run it (no `playground-unsupported` marker).
+
+One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
+`rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
+the solution it shows is newer than the one on the wiki.
 
 ## the rosetta tool
 

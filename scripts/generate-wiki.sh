@@ -1,447 +1,38 @@
 #!/bin/bash
 
-# Emit Rosetta Code wiki markup for a task: heading, syntax-highlighted source, and the output
-# the program produces. Reads the source from tasks/<slug>/<slug>.ghul and gets the output by
-# running the task, so editing a solution and generating its markup needs nothing in between.
+# Emit Rosetta Code wiki markup for a task: heading, playground link, any notes, the source, and
+# the output its test captured. The markup is rendered by `rosetta section`, which is also what
+# the index compares against the ledger's published_hash to tell a task changed since it was
+# posted, so there is one renderer and the two cannot disagree.
 #
 # A task worth showing more than one way holds parts instead: tasks/<slug>/NN-name/, each a whole
 # program with its own project and test. Each becomes a ===heading=== section with its own source
 # and output, in the order the numbers give.
 #
-# A task, or a part, may carry `notes.md` beside its source: Markdown prose placed ahead of the
-# code, converted to wiki markup by `rosetta render-notes`. Optional and rare by design - see
-# 'writing explanatory text' in the README. A run that touches a task carrying one prints
-# "(notes)" beside it, since a batch that adds prose is not one to wave through unread.
+# The output shown is the test's run.expected (with run.err.expected where the test captures it),
+# or wiki-output.txt where a task that talks to a service records a real run by hand. Nothing is
+# built or run here: the task's own test holds run.expected equal to what the program prints, so
+# run the test before generating markup for a task whose output has changed.
 #
 #   scripts/generate-wiki.sh <slug>          markup to stdout, ready to paste
 #   scripts/generate-wiki.sh --all           writes wiki-out/<slug>.wiki for every working task
 #   scripts/generate-wiki.sh --solved        the same, for the tasks not yet on the wiki
 #   scripts/generate-wiki.sh --out <slug>... the same, for the tasks named
 #
-# Generating builds and runs each task, so --all costs a couple of minutes on a full repository.
 # Publishing reads wiki-out/, and a publish run posts either named slugs or every solved task, so
 # --solved and --out generate exactly what such a run will read and nothing else.
 #
-# Where that output differs from the matching test's run.expected, the entry is emitted anyway
-# and the difference is reported on stderr: the test needs recapturing, which is worth knowing
-# but is not a reason to withhold the markup.
-#
-# Tasks whose test carries a `disabled` marker are skipped: they are not working, and an entry
-# that does not run should not be posted. So is a task that fails to build or run.
+# A task whose test carries a `disabled` marker is skipped, as is one with no source or no
+# captured output: an entry that does not run should not be posted. A run that touches a task
+# carrying notes.md prints "(notes)" beside it, since a batch that adds prose is not one to wave
+# through unread.
 
 set -e
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
-task_url() {
-    local TASK=$1
-
-    if [ -f "$TASK/task.json" ] ; then
-        sed -n 's/.*"url"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$TASK/task.json"
-    fi
-}
-
-task_status() {
-    local TASK=$1
-
-    if [ -f "$TASK/task.json" ] ; then
-        sed -n 's/.*"status"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$TASK/task.json"
-    fi
-}
-
-# Run the task and print what it writes to stdout. The program is built first, separately, and
-# everything the build prints is discarded: MSBuild writes compiler warnings to stdout whatever
-# the verbosity, and a warning captured here would go into the {{out}} block as though the
-# program had printed it - carrying the absolute path of this checkout onto a public page. Only
-# the built program's own output is captured. It is rebuilt when the source is newer, so an edit
-# is always picked up.
-run_task() {
-    local DIR=$1
-    local NAME=$2
-
-    # binary, not $NAME: every project builds to that assembly name, which is what
-    # the test runner looks for.
-    local BUILT="$DIR/bin/Debug/net10.0/binary"
-
-    if [ ! -x "$BUILT" ] || [ ! "$BUILT" -nt "$DIR/$NAME.ghul" ] ; then
-        dotnet build "$DIR" --nologo -v quiet >/dev/null 2>&1 || return 1
-    fi
-
-    # From the task's own directory, which is where it is run every other way:
-    # the test runner sets it as the working directory, and each project sets
-    # RunWorkingDirectory so `dotnet run` matches. A task that reads a data
-    # file beside it, or writes an image for the entry to refer to, names that
-    # file relative to the directory it lives in and finds it nowhere else.
-    ( cd "$DIR" && "./bin/Debug/net10.0/binary" )
-}
-
-# The parts of a task, in order, or nothing when it is an ordinary single-program task.
-task_parts() {
-    local TASK=$ROOT/tasks/$1
-    local PART
-
-    for PART in "$TASK"/[0-9][0-9]-*/ ; do
-        if [ -d "$PART" ] ; then
-            basename "$PART"
-        fi
-    done
-
-    # A task with no parts is the ordinary case, not a failure: saying so explicitly keeps the
-    # unmatched glob's false test from taking the whole script down under set -e.
-    return 0
-}
-
-# 01-using-map becomes "Using map": the number orders the parts and does not belong in the
-# heading, and the rest is the heading with its hyphens opened out. A part whose heading a
-# directory name cannot spell carries it in a `heading` file, used as it stands.
-part_heading() {
-    local DIR=$2
-
-    if [ -n "$DIR" ] && [ -f "$DIR/heading" ] ; then
-        head -1 "$DIR/heading"
-        return 0
-    fi
-
-    local NAME=${1#*-}
-
-    NAME=${NAME//-/ }
-
-    echo "${NAME^}"
-}
-
-# A link that opens the program in the ghūl playground, which fetches the source from this
-# repository by the path after /rosetta-code/. A program the playground cannot run carries a
-# playground-unsupported file giving the reason, and gets no link; the playground shows that
-# reason to anyone who reaches it anyway.
-#
-# The wiki's Template:Ghul playground carries the wording, so an entry says only which program to
-# open and the text can be changed for every entry at once by editing that template.
-#
-# Referencing a package the playground does not carry is the one case that can be told from the
-# files alone; deciding it without the marker would leave the playground unable to explain
-# itself, so one without it is reported rather than quietly left unlinked. ghul.raster is in the
-# playground's own reference set, so a task that references only that package is not this case.
-#
-# Reading standard input used to be the other such case, back when the playground could not
-# supply it at all. It can now, by blocking the same way a real read would until the page sends a
-# line, so whether a stdin-reading task is fit to link is a question about what it does with what
-# it reads - typically whether it also echoes it, doubling the playground's own echo - which
-# cannot be told from the files alone and is judged per task instead. The marker is the record of
-# that judgement.
-emit_playground_link() {
-    local DIR=$1
-    local NAME=$2
-    local ID=${DIR#"$ROOT/tasks/"}
-
-    if [ -f "$DIR/playground-unsupported" ] ; then
-        return 0
-    fi
-
-    local OTHER_PACKAGES
-    OTHER_PACKAGES=$( { grep -o 'PackageReference Include="[^"]*"' "$DIR/$NAME.ghulproj" 2>/dev/null \
-        | grep -v 'Include="ghul.raster"' || true ; } )
-
-    if [ -n "$OTHER_PACKAGES" ] ; then
-        echo "$ID: cannot run in the playground but has no playground-unsupported file - no link written" >&2
-        return 0
-    fi
-
-    echo "{{ghul playground|$ID}}"
-    echo
-}
-
-# One program's source and output: the body of an entry, or of one part of one.
-emit_body() {
-    local DIR=$1
-    local NAME=$2
-
-    local SOURCE="$DIR/$NAME.ghul"
-    local EXPECTED="$DIR/run.expected"
-
-    if [ ! -f "$SOURCE" ] ; then
-        echo "no source: $SOURCE" >&2
-        return 1
-    fi
-
-    local OUTPUT
-
-    # A task that reads standard input is driven by the test runner, which
-    # paces what it sends against what the program has printed. Running it
-    # here with nothing on standard input produces a transcript of prompts
-    # with no answers in it, so the captured expectation is the output: it is
-    # the transcript the runner produced, and nothing else can reproduce it.
-    #
-    # A task judged by run.check prints something different every time, so a
-    # fresh run would change the published entry on every generation. Its
-    # run.expected is the recorded sample, and that is what is shown.
-    #
-    # The same holds for a task the runner starts with a command line, or
-    # whose subject is what it writes to standard error or the status it ends
-    # with: run here with no arguments it prints its usage, or crashes, or
-    # says nothing at all. Its recorded expectation is the run worth showing.
-    # A task that talks to a service is tested against a stand-in, so what
-    # its test prints is the stand-in's answer. A reader wants the answer the
-    # published code gets from the real service, recorded by hand from a run
-    # against it in wiki-output.txt.
-    if [ -f "$DIR/wiki-output.txt" ] ; then
-        OUTPUT=$(cat "$DIR/wiki-output.txt")
-    elif [ -f "$DIR/run.in" ] || [ -f "$DIR/run.session" ] || [ -f "$DIR/run.check" ] \
-        || [ -f "$DIR/run.args" ] || [ -f "$DIR/run.err.expected" ] \
-        || [ -f "$DIR/run.exit.expected" ] ; then
-        if [ ! -f "$EXPECTED" ] ; then
-            echo "$DIR: reads standard input or varies from run to run, and has no run.expected - run the test first" >&2
-            return 1
-        fi
-
-        OUTPUT=$(cat "$EXPECTED")
-
-        # What a reader sees at a terminal is both streams, in that order.
-        if [ -f "$DIR/run.err.expected" ] ; then
-            if [ -n "$OUTPUT" ] ; then
-                OUTPUT="$OUTPUT
-$(cat "$DIR/run.err.expected")"
-            else
-                OUTPUT=$(cat "$DIR/run.err.expected")
-            fi
-        fi
-    else
-        if ! OUTPUT=$(run_task "$DIR" "$NAME") ; then
-            echo "$DIR: does not build or run" >&2
-            return 1
-        fi
-
-        if [ -f "$EXPECTED" ] && [ "$OUTPUT" != "$(cat "$EXPECTED")" ] ; then
-            echo "$DIR: output differs from run.expected - recapture the test" >&2
-        fi
-    fi
-
-    emit_playground_link "$DIR" "$NAME"
-
-    if [ -f "$DIR/notes.md" ] ; then
-        emit_notes "$DIR/notes.md" || return 1
-    fi
-
-    printf '%s' "<syntaxhighlight lang=\"ghul\">"
-    cat "$SOURCE"
-    echo "</syntaxhighlight>"
-    echo
-
-    if [ -n "$OUTPUT" ] ; then
-        echo "{{out}}"
-        emit_output "$SLUG" "$DIR" "$OUTPUT"
-    fi
-}
-
-# A task's own explanatory prose, written in Markdown at `notes.md` beside its source and
-# converted to wiki markup here, ahead of the code. Optional, and absent from most tasks: see
-# 'writing explanatory text' in the README before adding one.
-emit_notes() {
-    local NOTES=$1
-
-    if ! dotnet run --project "$ROOT/tools/rosetta" -- render-notes "$NOTES" ; then
-        echo "$NOTES: could not be rendered" >&2
-        return 1
-    fi
-
-    echo
-}
-
-# Whether a task, or any of its parts, carries notes.md - for the caller deciding whether a batch
-# needs a human to read prose before it goes anywhere, rather than for generating markup.
-task_has_notes() {
-    local SLUG=$1
-    local TASK=$ROOT/tasks/$SLUG
-    local PARTS
-
-    PARTS=$(task_parts "$SLUG")
-
-    if [ -z "$PARTS" ] ; then
-        [ -f "$TASK/notes.md" ]
-        return
-    fi
-
-    local PART
-
-    for PART in $PARTS ; do
-        [ -f "$TASK/$PART/notes.md" ] && return 0
-    done
-
-    return 1
-}
-
-# The output, with any image the program named turned into a reference the
-# wiki renders. A `<<image NAME>>` line is written by an image's `show` at
-# the point in the output where it belongs, and cannot stay inside a <pre>
-# block, which the wiki renders literally - so the block is closed before
-# each reference and opened again after it. A run with no images comes out
-# as one block, exactly as before.
-emit_output() {
-    local SLUG=$1
-    local DIR=$2
-    local OUTPUT=$3
-
-    local LEGEND=
-
-    # A control character has no glyph and cannot survive a wiki page - what
-    # comes back is a replacement character, so the published section stops
-    # matching what was sent and can never be recognised as ours again. The
-    # published block shows Unicode's picture of each one instead, with a line
-    # saying what they stand for. The test still asserts the real bytes.
-    if printf '%s' "$OUTPUT" | grep -qP '[\x00-\x08\x0b-\x1f\x7f]' ; then
-        local RAW
-        RAW=$(mktemp)
-        printf '%s' "$OUTPUT" > "$RAW"
-        OUTPUT=$(dotnet run --project "$ROOT/tools/rosetta" -- render-output "$RAW" 2>/dev/null)
-        LEGEND=$(dotnet run --project "$ROOT/tools/rosetta" -- render-output "$RAW" --legend 2>/dev/null)
-        rm -f "$RAW"
-    fi
-
-    local OPEN=no
-
-    while IFS= read -r LINE ; do
-        case "$LINE" in
-            "<<image "*">>")
-                local NAME=${LINE#<<image }
-                NAME=${NAME%>>}
-
-                if [ "$OPEN" = yes ] ; then
-                    echo "</pre>"
-                    OPEN=no
-                fi
-
-                echo "[[File:$(image_title "$SLUG" "$(wiki_image "$DIR/$NAME" "$NAME")")|thumb|none]]"
-                ;;
-            *)
-                if [ "$OPEN" = no ] ; then
-                    echo "<pre>"
-                    OPEN=yes
-                fi
-
-                echo "$LINE"
-                ;;
-        esac
-    done <<< "$OUTPUT"
-
-    if [ "$OPEN" = yes ] ; then
-        echo "</pre>"
-    fi
-
-    if [ -n "$LEGEND" ] ; then
-        echo
-        echo "$LEGEND"
-    fi
-}
-
-
-# What an image is called on the wiki. The File: namespace is shared with
-# every other language there, so a name like Spiral.png would collide; the
-# slug and the language make one that cannot.
-image_title() {
-    local SLUG=$1
-    local NAME=$2
-
-    echo "Ghul-$SLUG-$NAME"
-}
-
-# Whether a PNG holds more than one frame. An animated PNG carries an acTL
-# chunk, which the format requires ahead of the first IDAT, so the first of
-# the two chunk names to appear says which kind of file this is. Nothing is
-# decoded: the chunks between the header and the image data are a handful of
-# bytes of known shape, and a four-byte name that is not a chunk name cannot
-# turn up among them.
-animated_png() {
-    local FILE=$1
-
-    [ -f "$FILE" ] || return 1
-
-    [ "$(LC_ALL=C grep -ao -e acTL -e IDAT "$FILE" | head -1)" = acTL ]
-}
-
-# What an image is called on the wiki, which is what the solution called it
-# except when it is animated. MediaWiki keeps every frame of a GIF in the
-# scaled thumbnail an entry shows and shows only the first frame of an
-# animated PNG, so an animation goes up as the GIF `rosetta publish` converts
-# it to, under the name used here.
-wiki_image() {
-    local FILE=$1
-    local NAME=$2
-
-    if animated_png "$FILE" ; then
-        echo "${NAME%.png}.gif"
-    else
-        echo "$NAME"
-    fi
-}
-
-emit() {
-    local SLUG=$1
-    local PARTS
-
-    PARTS=$(task_parts "$SLUG")
-
-    echo "=={{header|ghul}}=="
-
-    if [ -z "$PARTS" ] ; then
-        emit_body "$ROOT/tasks/$SLUG" "$SLUG"
-        return
-    fi
-
-    local PART
-    local FIRST=yes
-
-    for PART in $PARTS ; do
-        [ "$FIRST" = yes ] || echo
-
-        FIRST=no
-
-        echo "===$(part_heading "$PART" "$ROOT/tasks/$SLUG/$PART")==="
-
-        emit_body "$ROOT/tasks/$SLUG/$PART" "$PART" || return 1
-    done
-}
-
-working() {
-    local SLUG=$1
-    local PARTS
-
-    PARTS=$(task_parts "$SLUG")
-
-    if [ -z "$PARTS" ] ; then
-        [ ! -f "$ROOT/tasks/$SLUG/disabled" ]
-        return
-    fi
-
-    local PART
-
-    for PART in $PARTS ; do
-        [ -f "$ROOT/tasks/$SLUG/$PART/disabled" ] && return 1
-    done
-
-    return 0
-}
-
-# Write one task's markup to wiki-out/, reporting what happened. Returns non-zero only for a
-# caller that needs to know a named task was not written; a bulk run carries on regardless.
-generate_to_out() {
-    local SLUG=$1
-    local OUT=$ROOT/wiki-out
-
-    if ! working "$SLUG" ; then
-        printf '%-28s skipped (disabled)\n' "$SLUG"
-        return 1
-    fi
-
-    if ! emit "$SLUG" > "$OUT/$SLUG.wiki" ; then
-        rm -f "$OUT/$SLUG.wiki"
-        printf '%-28s skipped (does not run)\n' "$SLUG"
-        return 1
-    fi
-
-    local NOTES=
-    task_has_notes "$SLUG" && NOTES=" (notes)"
-
-    printf '%-28s %-9s %s%s\n' \
-        "$SLUG" "$(task_status "$ROOT/tasks/$SLUG")" "$(task_url "$ROOT/tasks/$SLUG")" "$NOTES"
+rosetta() {
+    dotnet run --project "$ROOT/tools/rosetta" -- "$@"
 }
 
 # The slugs of every task the ledger holds in the given state. A rejected task carries no slug,
@@ -456,9 +47,6 @@ slugs_in_state() {
 if [ "$1" = "--all" ] || [ "$1" = "--solved" ] || [ "$1" = "--out" ] ; then
     MODE=$1
     shift
-
-    OUT=$ROOT/wiki-out
-    mkdir -p "$OUT"
 
     case $MODE in
         --all)
@@ -489,31 +77,24 @@ if [ "$1" = "--all" ] || [ "$1" = "--solved" ] || [ "$1" = "--out" ] ; then
             ;;
     esac
 
-    FAILED=0
-
-    for SLUG in $SLUGS ; do
-        generate_to_out "$SLUG" || FAILED=$((FAILED + 1))
-    done
+    # A named task that produced nothing is the caller's problem: they asked for it by name and a
+    # publish run would read a file that is missing or stale. A bulk run skipping a broken task is
+    # the documented behaviour and stays a success.
+    STATUS=0
+    # shellcheck disable=SC2086
+    rosetta wiki-out $SLUGS || STATUS=$?
 
     echo
     echo "written to wiki-out/ - paste each into the ghul section of the page above it"
 
-    # A named task that produced nothing is the caller's problem: they asked for it by name and a
-    # publish run would read a file that is missing or stale. A bulk run skipping a broken task is
-    # the documented behaviour and stays a success.
-    if [ "$MODE" = "--out" ] && [ "$FAILED" -gt 0 ] ; then
+    if [ "$MODE" = "--out" ] && [ "$STATUS" -ne 0 ] ; then
         exit 1
     fi
 elif [ -n "$1" ] ; then
-    if ! working "$1" ; then
-        echo "$1 is disabled - its test does not pass, so it should not be posted" >&2
-        exit 1
-    fi
-
     # to stderr, so stdout stays exactly what gets pasted
-    echo "paste into: $(task_url "$ROOT/tasks/$1")" >&2
+    echo "paste into: $(jq -r '.url' "$ROOT/tasks/$1/task.json" 2>/dev/null)" >&2
 
-    emit "$1"
+    rosetta section "$1"
 else
     echo "usage: scripts/generate-wiki.sh <slug>"
     echo "       scripts/generate-wiki.sh --all"
