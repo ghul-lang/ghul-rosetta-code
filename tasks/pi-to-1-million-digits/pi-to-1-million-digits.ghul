@@ -59,7 +59,7 @@ decimal(n: bigint) -> string is
 
     let text = System.Text.StringBuilder()
 
-    write(part: bigint, level: int, padded: bool) is
+    write(part, level, padded) is
         if level < 0 then
             let digits = part.to_string()
 

@@ -52,7 +52,7 @@ read(scan: string) -> List[int]? is
         return null
     fi
 
-    let found = LIST[int]()
+    let found = LIST()
 
     for place in 0..12 do
         let at = if place < 6 then 3 + place * 7 else 8 + place * 7 fi

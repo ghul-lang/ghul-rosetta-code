@@ -13,11 +13,11 @@ same_perimeter(one: List[int], other: List[int]) -> bool =>
     rotations(other) |> any(turned => turned =~ one)
 
 perimeter(edges: List[Edge]) -> List[int]? is
-    let neighbours = MAP[int, LIST[int]]()
+    let neighbours = MAP()
 
-    let join = (a: int, b: int) -> void is
+    let join = (a, b) is
         if !neighbours.contains_key(a) then
-            neighbours[a] = LIST[int]()
+            neighbours[a] = LIST()
         fi
 
         neighbours[a].add(b)

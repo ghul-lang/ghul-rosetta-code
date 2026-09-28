@@ -12,7 +12,7 @@ use Mesh = (points: List[Point], faces: List[Face])
 centre(points: List[Point]) -> Point =>
     (points
         |> reduce((x = 0.0D, y = 0.0D, z = 0.0D),
-                  (a: Point, b: Point) => a + b)) *
+                  (a, b) => a + b)) *
     (1.0D / double(points.count))
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
@@ -27,7 +27,7 @@ subdivided(mesh: Mesh) -> Mesh is
                                        |> collect()))
             |> collect()
 
-    let edge_faces = MAP[(low: int, high: int), LIST[int]]()
+    let edge_faces = MAP()
 
     for face_index in 0..faces.count do
         let face = faces[face_index]
@@ -38,7 +38,7 @@ subdivided(mesh: Mesh) -> Mesh is
             let key = edge_key(face[corner], next)
 
             if !edge_faces.contains_key(key) then
-                edge_faces[key] = LIST[int]()
+                edge_faces[key] = LIST()
             fi
 
             edge_faces[key].add(face_index)
@@ -47,7 +47,7 @@ subdivided(mesh: Mesh) -> Mesh is
 
     let new_points = LIST(points)
 
-    let edge_points = MAP[(low: int, high: int), int]()
+    let edge_points = MAP()
 
     for (key, touching) in edge_faces do
         let ends = [points[key.low], points[key.high]] |> collect()
@@ -67,7 +67,7 @@ subdivided(mesh: Mesh) -> Mesh is
         new_points.add(position)
     od
 
-    let face_indices = MAP[int, int]()
+    let face_indices = MAP()
 
     for face_index in 0..faces.count do
         face_indices[face_index] = new_points.count
@@ -121,7 +121,7 @@ subdivided(mesh: Mesh) -> Mesh is
         fi
     od
 
-    let new_faces = LIST[Face]()
+    let new_faces = LIST()
 
     for face_index in 0..faces.count do
         let face = faces[face_index]
@@ -154,7 +154,7 @@ let cube =
          [[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1],
           [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]])
 
-let rounds = LIST[Mesh]()
+let rounds = LIST()
 
 rounds.add(cube)
 
@@ -170,7 +170,7 @@ for round in 0..rounds.count do
             |> map(point =>
                 System.Math.sqrt(point.x * point.x + point.y * point.y +
                                  point.z * point.z))
-            |> reduce(0.0D, (a: double, b: double) => System.Math.max(a, b))
+            |> reduce(0.0D, (a, b) => System.Math.max(a, b))
 
     write_line(
         "round {round}: {points.count} points, {faces.count} faces, "
@@ -179,7 +179,7 @@ od
 
 let image = IMAGE(420, 420)
 
-let turned = (p: Point) -> (x: double, y: double) =>
+let turned = p =>
     (x = p.x * 0.85D + p.z * 0.5D, y = p.y * 0.9D + p.z * 0.3D)
 
 image.view(-2.0D, -2.0D, 2.0D, 2.0D)

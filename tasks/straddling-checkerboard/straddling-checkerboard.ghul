@@ -12,7 +12,7 @@ class CHECKERBOARD is
     init(header: string, rows: string[]) is
         _header = header
         _rows = rows
-        _encode = MAP[char, string]()
+        _encode = MAP()
 
         let blanks = System.Text.StringBuilder()
 

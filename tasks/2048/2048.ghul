@@ -17,7 +17,7 @@ lines_for(direction: char) -> LIST[LIST[int]] =>
     (let lines = LIST[LIST[int]]()
 
      for major in 0..side do
-         let line = LIST[int]()
+         let line = LIST()
 
          for minor in 0..side do
              line.add(
@@ -42,7 +42,7 @@ lines_for(direction: char) -> LIST[LIST[int]] =>
 // move, so the scan steps over both tiles it consumed.
 collapse(values: LIST[int]) -> LIST[int] =>
     (let packed = values |> filter(value => value != 0) |> collect()
-     let result = LIST[int]()
+     let result = LIST()
      let at mut = 0
 
      while at < packed.count do

@@ -25,8 +25,8 @@ let all_good =
                 |> all(reading => int.parse(fields[reading * 2]) >= 1))
         |> count()
 
-let times_seen = MAP[string, int]()
-let duplicates = LIST[string]()
+let times_seen = MAP()
+let duplicates = LIST()
 
 for fields in records do
     let date = fields[0]

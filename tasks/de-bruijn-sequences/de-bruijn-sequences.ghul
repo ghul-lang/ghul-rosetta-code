@@ -2,9 +2,9 @@ use default
 
 de_bruijn(k: int, n: int) -> string is
     let a = repeat(0, k * n) |> collect_mutable()
-    let digits = LIST[int]()
+    let digits = LIST()
 
-    extend(t: int, p: int) is
+    extend(t, p) is
         if t > n then
             if n % p == 0 then
                 for j in 1::p do

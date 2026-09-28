@@ -58,4 +58,4 @@ for placed in spiral() |> index() |> take(size * size) do
     fi
 od
 
-grid |> each((row: LIST[string]) => write_line(row |> join("")))
+grid |> each(row => write_line(row |> join("")))

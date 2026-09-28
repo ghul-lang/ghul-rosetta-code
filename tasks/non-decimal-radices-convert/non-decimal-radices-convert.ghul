@@ -9,7 +9,7 @@ to_base(n: long, base: int) -> string =>
 
 from_base(text: string, base: int) -> long =>
     text
-        |> reduce(0L, (value: long, c: char) =>
+        |> reduce(0L, (value, c) =>
             value * long(base) + long(digits.index_of(c)))
 
 let cases = [

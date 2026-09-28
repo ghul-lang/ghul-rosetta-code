@@ -20,7 +20,7 @@ month_block(month: int) -> List[string] is
         repeat("  ", offset)
             |> cat(1::days |> map(day => "{day,2}"))
 
-    let lines = LIST[string]()
+    let lines = LIST()
 
     lines.add(centre(month_names[month - 1], column))
     lines.add("Su Mo Tu We Th Fr Sa")

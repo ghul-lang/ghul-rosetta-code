@@ -25,7 +25,7 @@ optimal_order(dims: List[long]) -> (cost: long, order: string) is
         od
     od
 
-    order(i: int, j: int) -> string =>
+    order(i, j) =>
         if i == j then
             "A{i + 1}"
         else

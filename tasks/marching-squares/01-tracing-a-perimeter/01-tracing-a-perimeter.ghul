@@ -62,7 +62,7 @@ assert inked.count > 0 else "the grid has no filled cell"
 
 let start = inked[0]
 
-let path = LIST[Step]()
+let path = LIST()
 
 let column mut = start.column
 let row mut = start.row

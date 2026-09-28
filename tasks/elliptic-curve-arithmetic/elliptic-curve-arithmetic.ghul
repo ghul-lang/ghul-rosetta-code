@@ -101,7 +101,7 @@ draw(p: Point, q: Point, r: Point, s: Point) is
             curve |> map(at => (x = at.x, y = -at.y)) |> collect())
 
         let slope = (qy - py) / (qx - px)
-        let chord = (x: double) => (x = x, y = py + slope * (x - px))
+        let chord = x => (x = x, y = py + slope * (x - px))
 
         image.colour(200ub, 90ub, 40ub)
         image.stroke(1.2D)

@@ -1,7 +1,7 @@
 use default
 
 to_digits(value: long, base: long) -> LIST[int] is
-    let digits = LIST[int]()
+    let digits = LIST()
     let remaining mut = value
 
     while remaining > 0L do

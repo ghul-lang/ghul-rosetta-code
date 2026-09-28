@@ -28,7 +28,7 @@ live_neighbours(grid: Grid, row: int, column: int) -> int is
 si
 
 step(grid: Grid) -> Grid is
-    alive(row: int, column: int) -> bool is
+    alive(row, column) is
         let neighbours = live_neighbours(grid, row, column)
 
         if grid[row][column] then

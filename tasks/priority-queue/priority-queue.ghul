@@ -12,7 +12,7 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
     _heap: LIST[T]
 
     init() is
-        _heap = LIST[T]()
+        _heap = LIST()
     si
 
     count: int => _heap.count
@@ -77,7 +77,7 @@ drain[T: Ghul.Comparable[T]](queue: PRIORITY_QUEUE[T]) -> T{} is
     od
 si
 
-let queue = PRIORITY_QUEUE[JOB]()
+let queue = PRIORITY_QUEUE()
 
 [
     JOB(3, "Clear drains"),

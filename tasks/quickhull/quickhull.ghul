@@ -37,7 +37,7 @@ same_edge(one: (from: Point, to: Point),
     one.from =~ other.to /\ one.to =~ other.from
 
 hull(points: List[Point]) -> LIST[FACE] is
-    let furthest = (from: Point, along: Point) -> Point =>
+    let furthest = (from, along) =>
         points |> reduce(points[0], (best, candidate) =>
             if (candidate - from) ⋅ along > (best - from) ⋅ along then
                 candidate
@@ -113,7 +113,7 @@ let cloud =
     in
     0..60
         |> map(_ =>
-            let next = () -> double is
+            let next = () is
                 seed = seed * 1103515245u + 12345u
 
                 let drawn = int(seed >>> 16) % 1000
@@ -153,7 +153,7 @@ for (name, points) in shapes do
     let area =
         faces
             |> map(face => face.area)
-            |> reduce(0.0D, (running: double, part: double) =>
+            |> reduce(0.0D, (running, part) =>
                 running + part)
 
     write_line("{name}: {faces.count} faces, area {area:F6}")
@@ -161,7 +161,7 @@ od
 
 let image = IMAGE(420, 420)
 
-let turned = (p: Point) -> (x: double, y: double) =>
+let turned = p =>
     (x = p.x * 0.8D + p.z * 0.6D, y = p.y * 0.9D + p.z * 0.3D)
 
 image.view(-2.2D, -2.2D, 2.2D, 2.2D)

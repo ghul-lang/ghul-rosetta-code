@@ -3,7 +3,7 @@ use default
 let source = IO.Std.read_line() ?? ""
 
 tokenize(text: string) -> LIST[string] is
-    let result = LIST[string]()
+    let result = LIST()
     let i mut = 0
 
     while i < text.length do

@@ -3,7 +3,7 @@ use default
 make_list(separator: string) -> string is
     let counter mut = 0
 
-    let make_item = (item: string) => (
+    let make_item = item => (
         counter = counter + 1
         "{counter}{separator}{item}"
     )

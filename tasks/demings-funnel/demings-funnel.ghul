@@ -36,7 +36,7 @@ let dys = [
     -0.947D, -1.424D, -0.542D, -1.032D]
 
 drops(ds: List[double], rule: (double, double) -> double) -> List[double] is
-    let landed = LIST[double]()
+    let landed = LIST()
     let at mut = 0.0D
 
     for d in ds do

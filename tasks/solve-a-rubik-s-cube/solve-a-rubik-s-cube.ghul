@@ -191,7 +191,7 @@ notation(move: int) -> string =>
 
 solve(title: string, start: int[]) is
     let state mut = start
-    let moves = LIST[int]()
+    let moves = LIST()
 
     for phase in 1::4 do
         for move in solve_phase(phase, state) do

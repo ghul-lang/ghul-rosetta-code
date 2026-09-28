@@ -104,7 +104,7 @@ class VISITOR(nickname: string public) is
 
         _reader = StreamReader(stream)
         _writer = StreamWriter(stream)
-        heard = LIST[string]()
+        heard = LIST()
 
         _writer.auto_flush = true
 

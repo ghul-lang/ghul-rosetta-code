@@ -56,7 +56,7 @@ bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     let a = source.pixel(x0, y0), b = source.pixel(x1, y0)
     let c = source.pixel(x0, y1), d = source.pixel(x1, y1)
 
-    mix(pick: RGB -> ubyte) =>
+    mix(pick) =>
         lerp(
             lerp(double(pick(a)), double(pick(b)), tx),
             lerp(double(pick(c)), double(pick(d)), tx),

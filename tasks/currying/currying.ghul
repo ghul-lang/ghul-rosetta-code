@@ -1,6 +1,6 @@
 use default
 
-let add = (a: int) => (b: int) => a + b
+let add = a => b => a + b
 
 write_line("add(2)(3) = {add(2)(3)}")
 

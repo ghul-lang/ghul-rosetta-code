@@ -6,7 +6,7 @@ let edges =
     ]
 
 let reversed =
-    0..edges.count |> map(_ => LIST[int]()) |> collect()
+    0..edges.count |> map(_ => LIST()) |> collect()
 
 for vertex in 0..edges.count do
     for next in edges[vertex] do

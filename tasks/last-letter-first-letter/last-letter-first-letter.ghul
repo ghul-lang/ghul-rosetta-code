@@ -14,10 +14,10 @@ let names = (
 
 longest_chain(words: string[]) -> List[string] is
     let used = repeat(false, words.count) |> collect_mutable()
-    let path = LIST[string]()
-    let best = LIST[string]()
+    let path = LIST()
+    let best = LIST()
 
-    extend(last: char) is
+    extend(last) is
         if path.count > best.count then
             best.clear()
             best.add_range(path)

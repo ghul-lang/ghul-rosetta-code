@@ -18,7 +18,7 @@ class HOLDER is
 si
 
 outer() -> string is
-    inner() -> string => "a named function inside a body, local to it"
+    inner() => "a named function inside a body, local to it"
 
     inner()
 si

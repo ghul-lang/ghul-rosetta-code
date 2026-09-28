@@ -6,7 +6,7 @@ factorial(n: int) -> bigint =>
 // Lexicographic order, read as a number in the factorial base.
 unrank(rank: bigint, n: int) -> List[int] is
     let left = 0..n |> collect_mutable()
-    let result = LIST[int]()
+    let result = LIST()
     let rest mut = rank
 
     for i in 0..n do

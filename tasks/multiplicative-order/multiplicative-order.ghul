@@ -3,7 +3,7 @@ use default
 use Factor = (prime: bigint, power: int)
 
 factorise(n: bigint) -> List[Factor] is
-    let factors = LIST[Factor]()
+    let factors = LIST()
     let rest mut = n
     let p mut = 2n
 

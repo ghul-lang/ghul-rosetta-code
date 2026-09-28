@@ -12,9 +12,9 @@ stand_in() -> string is
 
     control.start()
 
-    let ascii = (text: string) => Encoding.ascii.get_bytes(text)
+    let ascii = text => Encoding.ascii.get_bytes(text)
 
-    let port_of = (listener: TcpListener) =>
+    let port_of = listener =>
         if let bound: IPEndPoint = listener.local_endpoint then bound.port
         else throw System.Exception("the listener has no address")
         fi
@@ -29,7 +29,7 @@ stand_in() -> string is
             writer.auto_flush = true
             writer.write("220 stand-in ready\r\n")
 
-            let send = (bytes: ubyte[]) is
+            let send = (bytes) is
                 let client = data.accept_tcp_client()
 
                 writer.write("150 sending\r\n")

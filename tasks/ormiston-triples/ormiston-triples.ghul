@@ -76,7 +76,7 @@ signature(value: int) -> long is
     counts
 si
 
-let smallest = LIST[int]()
+let smallest = LIST()
 let triples mut = 0
 
 let two_back mut = 0

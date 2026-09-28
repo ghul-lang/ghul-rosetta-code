@@ -11,8 +11,8 @@ neighbours(word: string) -> string{} =>
     |> filter(candidate => words.contains(candidate))
 
 ladder(start: string, goal: string) -> Collections.List[string]? is
-    let previous = MAP[string, string]()
-    let queue = Collections.Queue[string]()
+    let previous = MAP()
+    let queue = Collections.Queue()
 
     previous[start] = start
     queue.enqueue(start)
@@ -21,7 +21,7 @@ ladder(start: string, goal: string) -> Collections.List[string]? is
         let word = queue.dequeue()
 
         if word =~ goal then
-            let path = LIST[string]([goal])
+            let path = LIST([goal])
 
             while path[0] !~ start do
                 path.insert(0, previous[path[0]])

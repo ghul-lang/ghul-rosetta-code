@@ -79,9 +79,9 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
     let order = (0..n) |> sort_by_descending(j => norms[j]) |> collect()
     let last = u.count - 1
 
-    let sign = (j: int) => if u[last][j] < 0.0 then -1.0 else 1.0 fi
+    let sign = j => if u[last][j] < 0.0 then -1.0 else 1.0 fi
 
-    let scale = (j: int) =>
+    let scale = j =>
         if norms[j] > 0.0 then sign(j) / norms[j] else 0.0 fi
 
     let sorted_u =

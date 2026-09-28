@@ -7,17 +7,17 @@ let ranks =
 
 let random = System.Random(20260908)
 
-let deck = LIST[int]()
+let deck = LIST()
 
-let you = LIST[int]()
-let me = LIST[int]()
+let you = LIST()
+let me = LIST()
 
-let your_books = LIST[int]()
-let my_books = LIST[int]()
+let your_books = LIST()
+let my_books = LIST()
 
 // What your asks and my failed ones have told me about your hand.
-let you_hold = LIST[int]()
-let you_lack = LIST[int]()
+let you_hold = LIST()
+let you_lack = LIST()
 
 held(hand: LIST[int], rank: int) -> int =>
     hand |> filter(card => card == rank) |> count()
@@ -62,7 +62,7 @@ hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int =>
 lay_down_books(hand: LIST[int], books: LIST[int], owner: string) is
     for rank in 0..ranks.count do
         if held(hand, rank) == 4 then
-            hand_over(hand, LIST[int](), rank)
+            hand_over(hand, LIST(), rank)
 
             books.add(rank)
 

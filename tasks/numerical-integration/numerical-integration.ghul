@@ -37,13 +37,13 @@ let methods = [
 ]
 
 let cases = [
-    (name = "x cubed on [0, 1]", f = (x: double) => x * x * x,
+    (name = "x cubed on [0, 1]", f = x => x * x * x,
      a = 0.0, b = 1.0, n = 100),
-    (name = "1/x on [1, 100]", f = (x: double) => 1.0 / x,
+    (name = "1/x on [1, 100]", f = x => 1.0 / x,
      a = 1.0, b = 100.0, n = 1_000),
-    (name = "x on [0, 5000]", f = (x: double) => x,
+    (name = "x on [0, 5000]", f = x => x,
      a = 0.0, b = 5000.0, n = 5_000_000),
-    (name = "x on [0, 6000]", f = (x: double) => x,
+    (name = "x on [0, 6000]", f = x => x,
      a = 0.0, b = 6000.0, n = 6_000_000)
 ]
 

@@ -7,7 +7,7 @@ let numbers = [
 ]
 
 factors(number: long) -> Collections.LIST[long] is
-    let found = Collections.LIST[long]()
+    let found = Collections.LIST()
     let rest mut = number
     let divisor mut = 2L
 

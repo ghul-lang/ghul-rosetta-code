@@ -15,7 +15,7 @@ languages(api: string) -> List[(name: string, users: int)] is
     client.default_request_headers.user_agent
         .parse_add("ghul-rosetta-code/1.0")
 
-    let found = LIST[(name: string, users: int)]()
+    let found = LIST()
     let query =
         "{api}?action=query&generator=categorymembers"
         "&gcmtitle=Category:Language_users&gcmtype=subcat"

@@ -1,6 +1,6 @@
 use default
 
-let words = LIST[string]([
+let words = LIST([
     "Here", "are", "some", "sample", "strings", "to", "be", "sorted"
 ])
 

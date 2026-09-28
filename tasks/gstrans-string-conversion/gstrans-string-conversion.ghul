@@ -28,7 +28,7 @@ decode(text: string) -> Decoded is
 
     let body = if quoted then text[1..<1] else text fi
 
-    let values = LIST[int]()
+    let values = LIST()
     let at mut = 0
 
     while at < body.length do

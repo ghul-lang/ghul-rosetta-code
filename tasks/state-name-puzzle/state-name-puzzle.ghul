@@ -26,7 +26,7 @@ letters(s: string) -> string =>
 
 solve(names: Iterable[string]) is
     let states = names |> collect_set() |> sort() |> collect()
-    let groups = MAP[string, LIST[(int, int)]]()
+    let groups = MAP()
 
     for i in 0..states.count do
         for j in i + 1..states.count do

@@ -1,7 +1,7 @@
 use default
 
 filter(a: double[], b: double[], signal: double[]) -> List[double] is
-    let out = LIST[double]()
+    let out = LIST()
 
     for i in 0..signal.count do
         let total mut = b[0] * signal[i]

@@ -34,7 +34,7 @@ held_karp(cost: List[List[int]]) -> (total: int, tour: List[int]) is
     let final = 1..n
         |> min_by(c => best[everything][c] + cost[c][0])!
 
-    let tour = LIST[int]([0])
+    let tour = LIST([0])
     let visited mut = everything
     let at mut = final
 

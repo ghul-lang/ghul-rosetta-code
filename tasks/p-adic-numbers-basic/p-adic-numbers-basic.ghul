@@ -42,7 +42,7 @@ to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic is
     let (bottom, below) = without_p(b, p)
     let divisor = inverse(bottom, p)
     let remainder mut = top
-    let digits = LIST[bigint]()
+    let digits = LIST()
 
     for _ in 0..k do
         let digit = modulo(modulo(remainder, p) * divisor, p)
@@ -64,7 +64,7 @@ add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
             |> collect()
 
     let a = aligned(x), b = aligned(y)
-    let digits = LIST[bigint]()
+    let digits = LIST()
     let carry mut = 0n
 
     for i in 0..k do

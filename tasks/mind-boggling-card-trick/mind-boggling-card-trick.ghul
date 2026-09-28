@@ -7,8 +7,8 @@ shuffled[T](items: Iterable[T]) -> LIST[T] =>
 
 trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) |> cat(repeat('B', 26)))
-    let black = LIST[char]()
-    let red = LIST[char]()
+    let black = LIST()
+    let red = LIST()
 
     let pairs = deck |> chunk(2) |> map(pair => (pair[0], pair[1]))
 

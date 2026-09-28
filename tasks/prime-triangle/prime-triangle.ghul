@@ -40,7 +40,7 @@ arrangements(size: int) -> List[int]{} =>
            repeat(false, size + 1) |> collect_mutable(),
            size)
 
-let totals = LIST[int]()
+let totals = LIST()
 
 for size in 2::20 do
     let shown mut = false

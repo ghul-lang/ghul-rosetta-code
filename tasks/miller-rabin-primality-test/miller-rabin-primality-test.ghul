@@ -24,7 +24,7 @@ is_probably_prime(n: bigint, rounds: int) -> bool is
         s = s + 1
     od
 
-    witness(a: bigint) -> bool is
+    witness(a) is
         let x mut = bigint.mod_pow(a, d, n)
 
         if x =~ 1n \/ x =~ n - 1n then

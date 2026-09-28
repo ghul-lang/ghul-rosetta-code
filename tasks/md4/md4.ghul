@@ -12,7 +12,7 @@ rotate_left(value: uint, count: int) -> uint =>
 padded(message: ubyte[]) -> LIST[ubyte] is
     let bits = ulong(message.count) * 8ul
 
-    let block = LIST[ubyte](message)
+    let block = LIST(message)
 
     block.add(0x80ub)
 

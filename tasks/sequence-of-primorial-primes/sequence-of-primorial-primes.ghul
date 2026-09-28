@@ -50,7 +50,7 @@ si
 is_prime(n: int) -> bool =>
     n >= 2 /\ (2::n |> take_while(d => d * d <= n) |> all(d => n % d != 0))
 
-let found = LIST[int]()
+let found = LIST()
 let primorial mut = 1n
 let index mut = 0
 

@@ -7,8 +7,8 @@ let random = System.Random(2026)
 
 let rounds = 10000
 
-let staying = LIST[double]()
-let switching = LIST[double]()
+let staying = LIST()
+let switching = LIST()
 
 let stay_wins mut = 0
 let switch_wins mut = 0

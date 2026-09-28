@@ -16,7 +16,7 @@ let composite = (
     sieve
 )
 
-let first_start = MAP[int, int]()
+let first_start = MAP()
 
 (
     let previous mut = 3

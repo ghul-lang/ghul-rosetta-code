@@ -12,7 +12,7 @@ let board =
 blank() -> int => board.index_of(0)
 
 neighbours(square: int) -> LIST[int] =>
-    (let found = LIST[int]()
+    (let found = LIST()
      let row = square / side
      let column = square % side
 

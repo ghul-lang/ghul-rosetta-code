@@ -8,7 +8,7 @@ use System.Text.Json.JsonDocumentOptions
 // category. The API returns a category's members a batch at a time, and
 // says where to continue from until there are no more.
 members(client: HttpClient, api: string, category: string) -> SET[string] is
-    let titles = SET[string]()
+    let titles = SET()
     let query =
         "{api}?action=query&list=categorymembers"
         "&cmtitle=Category:{category}"

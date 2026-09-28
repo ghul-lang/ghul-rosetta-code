@@ -3,7 +3,7 @@ use default
 let numbers = [1, 2, 3, 4, 5]
 
 let largest =
-    (left: int, right: int) => if left > right then left else right fi
+    (left, right) => if left > right then left else right fi
 
 let sum = numbers |> reduce(0, (total, value) => total + value)
 let product = numbers |> reduce(1, (total, value) => total * value)

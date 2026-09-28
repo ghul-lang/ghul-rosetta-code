@@ -1,7 +1,7 @@
 use default
 
 apply[T, U](values: T[], callback: T -> U) -> List[U] is
-    let applied = LIST[U]()
+    let applied = LIST()
 
     for value in values do
         applied.add(callback(value))

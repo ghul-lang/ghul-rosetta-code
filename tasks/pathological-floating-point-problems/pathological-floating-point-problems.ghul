@@ -46,7 +46,7 @@ whole(n: bigint) -> RATIONAL => RATIONAL(n, 1n)
 
 write_line("Task 1: the sequence v")
 
-let v = LIST[RATIONAL]([whole(0n), whole(2n), whole(-4n)])
+let v = LIST([whole(0n), whole(2n), whole(-4n)])
 
 for n in 3::100 do
     let a = v[n - 1]
@@ -54,7 +54,7 @@ for n in 3::100 do
     v.add(whole(111n) - whole(1130n) / a + whole(3000n) / (a * b))
 od
 
-let naive = LIST[double]([0.0, 2.0, -4.0])
+let naive = LIST([0.0, 2.0, -4.0])
 
 for n in 3::100 do
     let a = naive[n - 1]

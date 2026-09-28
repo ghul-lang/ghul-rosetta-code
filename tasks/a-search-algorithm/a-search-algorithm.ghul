@@ -92,7 +92,7 @@ while open.count > 0 do
     od
 od
 
-let backwards = LIST[Square]()
+let backwards = LIST()
 let walk mut = at(goal)
 
 while walk >= 0 do

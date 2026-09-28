@@ -8,7 +8,7 @@ let total mut = 0.0
 let readings mut = 0
 let gap mut = 0
 let longest mut = 0
-let longest_ends = LIST[string]()
+let longest_ends = LIST()
 
 for line in lines do
     let fields = line.split(separators, skip_empty)

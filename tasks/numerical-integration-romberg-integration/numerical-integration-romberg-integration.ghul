@@ -20,7 +20,7 @@ romberg(
         let inner = 1..intervals
             |> sum_by(j => f(lower + double(j) * h))
 
-        let row = LIST[double]([(ends / 2.0 + inner) * h])
+        let row = LIST([(ends / 2.0 + inner) * h])
         let factor mut = 1.0
 
         for k in 1::i do

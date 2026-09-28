@@ -4,7 +4,7 @@ class NODE(label: string public) is
     links: LIST[NODE]
 
     init(..) is
-        links = LIST[NODE]()
+        links = LIST()
     si
 
     to_string() -> string =>
@@ -12,9 +12,9 @@ class NODE(label: string public) is
 si
 
 deep_copy(node: NODE) -> NODE is
-    let seen = MAP[NODE, NODE]()
+    let seen = MAP()
 
-    copy_into(source: NODE) -> NODE is
+    copy_into(source) is
         if seen.contains_key(source) then
             return seen[source]
         fi

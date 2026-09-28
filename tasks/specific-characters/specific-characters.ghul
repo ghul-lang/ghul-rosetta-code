@@ -1,7 +1,7 @@
 use default
 
 counts(s: string) -> Map[char, int] is
-    let tally = MAP[char, int]()
+    let tally = MAP()
 
     for c in s do
         tally[c] = (if tally.contains_key(c) then tally[c] else 0 fi) + 1
@@ -12,12 +12,12 @@ si
 
 show(strings: string[]) is
     let tallies = strings |> map(counts) |> collect()
-    let specific = LIST[int]()
-    let others = LIST[int]()
+    let specific = LIST()
+    let others = LIST()
 
     for i in 0..strings.count do
         let chars = tallies[i].keys |> collect()
-        let elsewhere = (c: char) =>
+        let elsewhere = c =>
             0..strings.count
                 |> any(j => j != i /\ tallies[j].contains_key(c))
         let passes =

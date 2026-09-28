@@ -14,7 +14,7 @@ let richer = account.with_deposit(50)
 write_line("{account}")
 write_line("{richer}")
 
-let names = LIST[string](["Ada", "Grace"])
+let names = LIST(["Ada", "Grace"])
 let readable: Collections.List[string] = names
 
 write_line("through the read-only view: {readable |> join(", ")}")

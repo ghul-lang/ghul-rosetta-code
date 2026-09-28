@@ -41,7 +41,7 @@ suffize(text: string, digits: int?, base: int) -> string is
     "{sign}{shown}{suffix}"
 si
 
-let tests: (string, int?, int)[] = [
+let tests = [
     ("87,654,321", null, 10),
     ("-998,877,665,544,332,211,000", 3, 10),
     ("+112,233", 0, 10),

@@ -6,7 +6,7 @@ let knight_pairs =
 position(number: int) -> string is
     let squares = repeat('.', 8) |> collect_mutable()
 
-    place(piece: char, among_empty: int) is
+    place(piece, among_empty) is
         let square = 0..8
             |> filter(s => squares[s] == '.')
             |> skip(among_empty)

@@ -13,8 +13,8 @@ fix_star(makers: Maker[]) -> Sequence[] =>
         SELF_APPLY(
             r =>
                 makers
-                    |> map((make: Maker) -> Sequence =>
-                            (n: int) => make(r.apply(r))(n))
+                    |> map(make =>
+                            n => make(r.apply(r))(n))
                     |> collect())
     in wrap.apply(wrap)
 

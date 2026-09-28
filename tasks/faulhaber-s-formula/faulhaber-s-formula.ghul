@@ -36,7 +36,7 @@ si
 
 binomial(n: int, k: int) -> long =>
     1::k
-        |> reduce(1L, (c: long, i: int) =>
+        |> reduce(1L, (c, i) =>
             c * long(n - k + i) / long(i))
 
 term(coefficient: FRACTION, power: int) -> string =>

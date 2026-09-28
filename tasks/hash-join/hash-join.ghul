@@ -18,11 +18,11 @@ let nemeses =
         (character = "Glory", nemesis = "Buffy")
     ]
 
-let by_character = MAP[string, LIST[string]]()
+let by_character = MAP()
 
 for (character, nemesis) in nemeses do
     if !by_character.contains_key(character) then
-        by_character[character] = LIST[string]()
+        by_character[character] = LIST()
     fi
 
     by_character[character].add(nemesis)

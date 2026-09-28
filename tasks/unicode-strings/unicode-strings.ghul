@@ -26,8 +26,8 @@ let ελληνικά = "κείμενο"
 write_line("a name is written in any script, and so is an operator")
 write_line("  héllo {héllo}, 日本語 {日本語}, ελληνικά {ελληνικά}")
 
-let evens = SET[int]([2, 4])
-let odds = SET[int]([1, 3])
+let evens = SET([2, 4])
+let odds = SET([1, 3])
 let joined = (evens ∪ odds) |> sort()
 
 write_line("  6 × 7 = {6 × 7}")

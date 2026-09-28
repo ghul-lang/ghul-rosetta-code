@@ -57,7 +57,7 @@ median_filter(source: IMAGE) -> IMAGE is
                             Math.clamp(x + dx, 0, source.width - 1),
                             Math.clamp(y + dy, 0, source.height - 1)))
 
-            let middle = (pick: RGB -> ubyte) =>
+            let middle = pick =>
                 let sorted =
                     window |> map(pick) |> sort() in
                 (sorted |> collect())[4]

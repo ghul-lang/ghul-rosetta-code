@@ -6,7 +6,7 @@ is_prime(n: long) -> bool =>
 
 value_in(digits: List[int], base: int) -> long =>
     digits
-        |> reduce(0L, (value: long, d: int) =>
+        |> reduce(0L, (value, d) =>
             value * long(base) + long(d))
 
 // A numeric string n is composite in every base once it is composite in

@@ -108,7 +108,7 @@ class HEAP is
     // The root list and each child list are circular and doubly linked, so
     // a node is spliced in or out without knowing which list it is in.
     _ring(from: NODE) -> List[NODE] is
-        let seen = LIST[NODE]()
+        let seen = LIST()
         let at mut = from
 
         seen.add(from)
@@ -176,7 +176,7 @@ class HEAP is
             return
         fi
 
-        let by_degree = LIST[NODE?]()
+        let by_degree = LIST()
 
         for _ in 0::64 do
             by_degree.add(null)
@@ -248,7 +248,7 @@ class HEAP is
 si
 
 drain(heap: HEAP) -> string is
-    let taken = LIST[string]()
+    let taken = LIST()
 
     while let least = heap.extract_minimum() do
         taken.add("{least.key}")

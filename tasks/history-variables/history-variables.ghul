@@ -4,7 +4,7 @@ class HISTORIC[T] is
     _past: LIST[T]
 
     init(initial: T) is
-        _past = LIST[T]([initial])
+        _past = LIST([initial])
     si
 
     value: T public => _past[_past.count - 1],
@@ -21,7 +21,7 @@ class HISTORIC[T] is
     si
 si
 
-let temperature = HISTORIC[int](20)
+let temperature = HISTORIC(20)
 
 temperature.value = 21
 temperature.value = 25
@@ -35,7 +35,7 @@ temperature.rollback()
 write_line("after a rollback: {temperature.value}")
 write_line("history: {temperature.history |> join(", ")}")
 
-let name = HISTORIC[string]("draft")
+let name = HISTORIC("draft")
 
 name.value = "final"
 

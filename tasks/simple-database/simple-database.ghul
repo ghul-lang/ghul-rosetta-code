@@ -28,7 +28,7 @@ read_all(file: string) -> LIST[ENTRY] =>
             |> map(entry => entry!)
             |> collect_mutable()
     else
-        LIST[ENTRY]()
+        LIST()
     fi
 
 add(file: string, category: string, description: string, date: DateTime) is
@@ -50,7 +50,7 @@ latest_by_category(file: string) -> LIST[ENTRY] is
         |> map(group => group.value |> max_by(entry => entry.date)!)
         |> collect_mutable()
 
-    newest.sort((left: ENTRY, right: ENTRY) -> int =>
+    newest.sort((left, right) =>
         string.compare(left.category, right.category))
 
     newest
@@ -59,7 +59,7 @@ si
 by_date(file: string) -> LIST[ENTRY] is
     let all = read_all(file)
 
-    all.sort((left: ENTRY, right: ENTRY) -> int => left.date <> right.date)
+    all.sort((left, right) => left.date <> right.date)
 
     all
 si

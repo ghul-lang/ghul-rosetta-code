@@ -54,10 +54,10 @@ class SUFFIX_TREE is
 
     init(text: string) is
         _text = text
-        _start = LIST[int]()
-        _end = LIST[int]()
-        _link = LIST[int]()
-        _children = LIST[MAP[char, int]]()
+        _start = LIST()
+        _end = LIST()
+        _link = LIST()
+        _children = LIST()
         _leaf_end = 0
 
         let root = _node(-1, -1)
@@ -137,7 +137,7 @@ class SUFFIX_TREE is
         _start.add(start)
         _end.add(end)
         _link.add(0)
-        _children.add(MAP[char, int]())
+        _children.add(MAP())
 
         _start.count - 1
     si

@@ -1,8 +1,8 @@
 use default
 
 encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
-    let frame = LIST[ubyte]()
-    let block = LIST[ubyte]()
+    let frame = LIST()
+    let block = LIST()
 
     flush() is
         frame.add(ubyte(block.count + 1))
@@ -32,7 +32,7 @@ encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
 si
 
 decode(frame: List[ubyte], marker: ubyte) -> List[ubyte] is
-    let data = LIST[ubyte]()
+    let data = LIST()
     let at mut = 0
 
     while at < frame.count do

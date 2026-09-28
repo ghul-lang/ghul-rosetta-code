@@ -3,7 +3,7 @@ use default
 let symbols = "0123456789ABCDEF"
 
 in_base(n: long, base: int) -> string is
-    let digits = LIST[char]()
+    let digits = LIST()
     let rest mut = n
 
     while rest > 0L do
@@ -43,7 +43,7 @@ roots(base: int) -> List[long] is
     let modulus = long(base - 1)
     let residue = long(base * (base - 1) / 2) % modulus
     let low mut = long(System.Math.sqrt(double(smallest)))
-    let found = LIST[long]()
+    let found = LIST()
 
     while low * low < smallest do
         low = low + 1L

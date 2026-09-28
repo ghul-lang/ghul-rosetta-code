@@ -10,7 +10,7 @@ radix_sort(values: List[int]) -> List[int] is
 
         while largest / place > 0 do
             let buckets =
-                0..10 |> map(_ => LIST[int]()) |> collect()
+                0..10 |> map(_ => LIST()) |> collect()
 
             for v in current do
                 buckets[v / place % 10].add(v)

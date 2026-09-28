@@ -18,9 +18,7 @@ let properties = book.get_type().get_properties(flags)
     |> filter(p => p.declaring_type == book.get_type())
     |> collect_mutable()
 
-properties.sort((left: System.Reflection.PropertyInfo,
-        right: System.Reflection.PropertyInfo) ->
-    int => string.compare(left.name, right.name))
+properties.sort((left, right) => string.compare(left.name, right.name))
 
 for property in properties do
     let access =

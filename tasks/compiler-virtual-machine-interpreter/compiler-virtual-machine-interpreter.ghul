@@ -22,7 +22,7 @@ class MACHINE is
         _code = code
         _strings = strings
         _data = repeat(0, data_size) |> collect_mutable()
-        _stack = LIST[int]()
+        _stack = LIST()
     si
 
     run() is
@@ -101,7 +101,7 @@ truth(value: bool) -> int => if value then 1 else 0 fi
 unquote(text: string) -> string =>
     text[1..<1].replace("\\n", "\n").replace("\\\\", "\\")
 
-let lines = LIST[string]()
+let lines = LIST()
 
 while let line = IO.Std.read_line() do
     lines.add(line)
@@ -112,7 +112,7 @@ let data_size = int.parse(header[1])
 let string_count = int.parse(header[3])
 
 let strings = lines |> skip(1) |> take(string_count) |> map(unquote)
-let code = LIST[ubyte]()
+let code = LIST()
 
 for line in lines |> skip(1 + string_count) do
     let parts = line.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)

@@ -67,7 +67,7 @@ class FOUR_BIT_ADDER is
         left = repeat(0, 4) |> map(_ => PIN(false)) |> collect_mutable()
         right = repeat(0, 4) |> map(_ => PIN(false)) |> collect_mutable()
 
-        let bits = LIST[Component]()
+        let bits = LIST()
         let carried: Component mut = PIN(false)
 
         for at in 0..4 do

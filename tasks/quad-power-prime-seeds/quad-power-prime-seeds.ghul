@@ -67,7 +67,7 @@ is_seed(n: long) -> bool is
     true
 si
 
-let seeds = LIST[long]()
+let seeds = LIST()
 let milestones = LIST[(limit: long, seed: long, index: int)]()
 let next_milestone mut = 1_000_000L
 let n mut = 1L
