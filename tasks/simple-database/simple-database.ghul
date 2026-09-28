@@ -3,10 +3,6 @@ use System.DateTime
 use System.Environment
 use System.Environment_SpecialFolder.USER_PROFILE
 
-let default_file = IO.Path.combine(
-    Environment.get_folder_path(USER_PROFILE),
-    ".simple-database")
-
 class ENTRY(date: DateTime, category: string, description: string) is
     line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"
 
@@ -106,7 +102,8 @@ si
 
 entry(args: string[]) -> int is
     let stored = Environment.get_environment_variable("SIMPLE_DATABASE")
-    let file = stored ?? default_file
+    let file = stored ?? IO.Path.combine(
+        Environment.get_folder_path(USER_PROFILE), ".simple-database")
 
     if args.count == 0 then
         usage()
