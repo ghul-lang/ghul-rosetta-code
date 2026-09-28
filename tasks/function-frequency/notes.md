@@ -1,2 +1,2 @@
-Every count is 1. Each function the program defines is named at a single place,
-most of them passed to a pipe combinator as a value rather than called.
+Every count is 1. The counter reads call instructions out of the compiled
+program, and each function this one defines is reached from exactly one of them.
