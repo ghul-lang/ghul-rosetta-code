@@ -55,7 +55,7 @@ procedures() -> MAP[string, (JsonElement) -> object] is
     let offered = MAP[string, (JsonElement) -> object]()
 
     offered["sum"] = p =>
-        cast object(p.enumerate_array() |> sum_by(e => e.get_int32()))
+        cast(p.enumerate_array() |> sum_by(e => e.get_int32()))
 
     offered["upper"] = p => (p[0].get_string() ?? "").to_upper_invariant()
 
