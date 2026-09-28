@@ -42,6 +42,8 @@ namespace Rosetta is
         _vocabulary: MAP[string, string]
         _tag_order: LIST[string]
         _problems: LIST[string]
+        _section: SECTION
+        _published: MAP[string, string]
 
         problems: LIST[string] => _problems
 
@@ -50,6 +52,16 @@ namespace Rosetta is
             _vocabulary = MAP[string, string]()
             _tag_order = LIST[string]()
             _problems = LIST[string]()
+            _section = SECTION(root)
+            _published = MAP[string, string]()
+
+            for entry in LEDGER(IO.Path.combine(root, "ledger")).entries() do
+                if let slug = entry.slug, hash = entry.published_hash then
+                    if entry.state =~ "published" then
+                        _published[slug] = hash
+                    fi
+                fi
+            od
 
             let document = JsonDocument.parse(IO.File.read_all_text(IO.Path.combine(root, "TAGS.json")), _)
 
@@ -173,6 +185,13 @@ namespace Rosetta is
             write_strings(writer, "images", images)
             writer.write_number("lines", parts |> reduce(0, (total, p) => total + p.lines))
 
+            // Whether the solution here has changed since the section on the
+            // wiki was posted, so a reader of the site sees a newer one.
+            let published: string mut
+            let ahead = _published.try_get_value(slug, published ref) /\ _section.is_ahead_of(slug, published)
+
+            writer.write_boolean("ahead_of_wiki", ahead)
+
             writer.write_start_array("parts")
 
             for part in parts do
@@ -239,7 +258,7 @@ namespace Rosetta is
                 for part_directory in numbered do
                     let name = IO.Path.get_file_name(part_directory) ?? ""
 
-                    let heading = heading_for(part_directory, name)
+                    let heading = _section.heading(part_directory, name)
 
                     if let part = part_of(part_directory, "{slug}/{name}", heading) then
                         parts.add(part)
@@ -280,29 +299,6 @@ namespace Rosetta is
                         IO.File.exists(IO.Path.combine(directory, "run.session")),
                     images
                 )
-        si
-
-        // A part whose heading a directory name cannot spell carries it in a
-        // `heading` file, as generate-wiki.sh reads it.
-        heading_for(directory: string, name: string) -> string is
-            let written = IO.Path.combine(directory, "heading")
-
-            if IO.File.exists(written) then
-                return IO.File.read_all_lines(written)[0]
-            fi
-
-            heading_of(name)
-        si
-
-        // 01-using-map is "Using map", as generate-wiki.sh heads the part.
-        heading_of(name: string) -> string is
-            let rest = name.substring(name.index_of('-') + 1).replace('-', ' ')
-
-            if rest.length == 0 then
-                return rest
-            fi
-
-            return "{char.to_upper_invariant(rest[0])}{rest.substring(1)}"
         si
 
         line_count(text: string) -> int is
