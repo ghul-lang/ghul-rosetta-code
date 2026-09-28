@@ -5,15 +5,8 @@ use System.Math.*
 let cube = x => x * x * x
 let cube_root = x => cbrt(x)
 
-let functions = LIST()
-functions.add(sin)
-functions.add(cos)
-functions.add(cube)
-
-let inverses = LIST()
-inverses.add(asin)
-inverses.add(acos)
-inverses.add(cube_root)
+let functions = [sin, cos, cube]
+let inverses = [asin, acos, cube_root]
 
 for (function, inverse) in functions |> zip(inverses) do
     let round_trip = function >> inverse
