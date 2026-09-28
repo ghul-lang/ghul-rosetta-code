@@ -71,7 +71,7 @@ factorial_primes() -> (n: int, sign: int, value: bigint){} is
     let n mut = 1
 
     do
-        fact = fact * cast bigint(n)
+        fact = fact * bigint(n)
 
         if is_probable_prime(fact - 1n) then
             yield (n = n, sign = -1, value = fact - 1n)

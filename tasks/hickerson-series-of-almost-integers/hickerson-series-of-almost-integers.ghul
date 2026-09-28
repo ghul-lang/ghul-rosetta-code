@@ -3,7 +3,7 @@ use default
 let ln2 = 0.6931471805599453094172321215m
 
 hickerson(n: int) -> decimal =>
-    let factorial = 1::n |> reduce(1m, (f, k) => f * cast decimal(k)) in
+    let factorial = 1::n |> reduce(1m, (f, k) => f * decimal(k)) in
     let power = 1::n + 1 |> reduce(1m, (p, _) => p * ln2) in
     factorial / (2m * power)
 

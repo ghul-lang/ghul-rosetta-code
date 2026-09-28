@@ -65,7 +65,7 @@ prime_factors(value: bigint) -> bigint{} is
     let remaining mut = value
 
     for small in small_primes do
-        let divisor = cast bigint(small)
+        let divisor = bigint(small)
 
         while remaining % divisor =~ 0n do
             yield divisor

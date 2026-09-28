@@ -62,7 +62,7 @@ class FORMULA(text: string) is
                     element()
                 fi
 
-            total = total + part * cast decimal(count())
+            total = total + part * decimal(count())
         od
 
         total

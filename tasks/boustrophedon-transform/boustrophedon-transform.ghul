@@ -81,6 +81,6 @@ report("ones", _ => 1n)
 report("alternating", index => (
     if index % 2 == 0 then 1n
     else 0n - 1n fi))
-report("primes", index => cast bigint(nth_prime(index)))
+report("primes", index => bigint(nth_prime(index)))
 report("fibonacci", index => fibonacci(index))
 report("factorials", index => factorial(index))
