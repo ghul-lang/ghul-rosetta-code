@@ -12,8 +12,32 @@ if [ ! -f $CASE/ghulflags ] ; then
     exit 1;
 fi
 
-if [ ! -f $CASE/failed ] ; then
-    echo "expected to find failed marker in $CASE - run the test first"
+# The runner compares text output ignoring whitespace, so a task whose output
+# changed only in spacing passes and leaves no failed marker. A produced file
+# that differs from its expectation byte for byte is still worth promoting.
+differs() {
+    local produced=$1 expectation=$2
+
+    if [ ! -f "$produced" ] ; then
+        return 1
+    fi
+
+    if [ ! -f "$expectation" ] ; then
+        [ -s "$produced" ]
+        return
+    fi
+
+    ! cmp -s "$produced" "$expectation"
+}
+
+if
+    [ ! -f $CASE/failed ] &&
+    ! differs $CASE/run.out $CASE/run.expected &&
+    ! differs $CASE/err.sort $CASE/err.expected &&
+    ! differs $CASE/warn.sort $CASE/warn.expected
+then
+    echo "nothing to capture in $CASE: no failed marker, and no produced output that differs from its expectations"
+    echo "a passing run deletes its output; run the test with GHUL_TEST_KEEP_ARTIFACTS=1 to keep it for capture"
     exit 1
 fi
 
