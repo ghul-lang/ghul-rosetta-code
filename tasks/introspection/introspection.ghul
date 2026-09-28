@@ -41,7 +41,7 @@ fi
 
 let values = integers |> map(f => cast int(f.get_value(null)!))
 
-let named = integers |> map(f => f.name.trim_start(['$']))
+let named = integers |> map(f => f.name.trim_start(['$'])) |> sort()
 
 write_line("integer globals: {named |> join(", ")}")
 write_line("their sum: {values |> sum()}")
