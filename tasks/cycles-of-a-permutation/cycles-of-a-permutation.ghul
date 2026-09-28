@@ -59,8 +59,8 @@ one_line(cycle_notation: Collections.List[LIST[int]], size: int)
     od
 
     for cycle in cycle_notation do
-        for (index, position) in cycle |> index() do
-            result[cycle[(index + 1) % cycle.count] - 1] = position
+        for (at, position) in cycle |> index() do
+            result[cycle[(at + 1) % cycle.count] - 1] = position
         od
     od
 
@@ -110,8 +110,8 @@ let days = [
 
 write_line("permutations from each day to the next:")
 
-for (index, (name, letters)) in days |> index() do
-    let (next_name, next_letters) = days[(index + 1) % days.count]
+for (day, (name, letters)) in days |> index() do
+    let (next_name, next_letters) = days[(day + 1) % days.count]
     let permutation = permutation_between(letters, next_letters)
 
     write_line("  {name}->{next_name}: {show_one_line(permutation)}")
