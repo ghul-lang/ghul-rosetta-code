@@ -111,7 +111,8 @@ si
 // class, a BCL method, an interpolation handler - is counted by nobody,
 // which is what keeps the answer the same whatever the compiler emits
 // around the program.
-let own_types = Assembly.get_executing_assembly().get_types() |> collect_set()
+let own_types =
+    Assembly.get_executing_assembly().get_types() |> collect_set()
 
 // The compiler puts the program's global functions in $globals, so that
 // type is the program's own. Every other type it names for itself - a
@@ -124,7 +125,8 @@ declared_by_the_program(method: MethodBase) -> bool is
         return false
     fi
 
-    let own_container = !owner.name.starts_with("$") \/ owner.name =~ "$globals"
+    let own_container =
+        !owner.name.starts_with("$") \/ owner.name =~ "$globals"
 
     return own_types.contains(owner) /\ own_container /\
         !method.name.starts_with("$")
