@@ -1,0 +1,1 @@
+ghūl's optional types already make a Maybe monad, so nothing needs defining. `~>` is bind: it threads a present value into the call and skips the call for an absent one. Unit is the implicit conversion from `T` to `T?`, and since binding a freshly wrapped value is just a call, the first step is an ordinary `|>`.
