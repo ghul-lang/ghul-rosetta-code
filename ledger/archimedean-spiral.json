@@ -3,7 +3,7 @@
   "slug": "archimedean-spiral",
   "state": "published",
   "note": "reopened, was rejected/needs-gui: renders to a PNG written by the repository's own encoder, so it needs no drawing library",
-  "published_hash": "2c5626981db69478f8cc4b137cfe0c460d7b4a90ae35b7d9ed2586c07777e594",
+  "published_hash": "08309fe98b9eb52b418e229fe8b441aea2eb55eab4a6adff52bdddf28fba31e7",
   "image_hashes": {
     "Ghul-archimedean-spiral-spiral.png": "e1dc2a0fcdb64bc747c9b8974c5ed33a9c8338d7"
   }
