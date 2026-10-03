@@ -5,8 +5,7 @@ union Number is
     FRACTIONAL(value: double)
 si
 
-use Number.WHOLE
-use Number.FRACTIONAL
+use Number.*
 
 widen(n: Number) -> double =>
     case n
@@ -21,31 +20,19 @@ add(left: Number, right: Number) -> Number =>
         FRACTIONAL(widen(left) + widen(right))
     fi
 
-show(n: Number) -> string =>
-    case n
-    when (value): WHOLE then "{value}"
-    when (value): FRACTIONAL then "{value}"
-    esac
+accumulator(initial: Number) -> Number -> Number =>
+    let sum mut = initial in
 
-accumulator(initial: Number) -> Number -> Number is
-    let sum mut = initial
-
-    return value => (
+    value => (
         sum = add(sum, value)
         sum
     )
-si
 
 let x = accumulator(WHOLE(1))
-
 x(WHOLE(5))
-
 accumulator(WHOLE(3))
-
-write_line(show(x(FRACTIONAL(2.3D))))
+write_line("{x(FRACTIONAL(2.3D))}")
 
 let y = accumulator(WHOLE(10))
-
 y(WHOLE(5))
-
-write_line(show(y(WHOLE(5))))
+write_line("{y(WHOLE(5))}")

@@ -1,2 +1,2 @@
-8.3
-20
+Number.FRACTIONAL(value = 8.3)
+Number.WHOLE(value = 20)
