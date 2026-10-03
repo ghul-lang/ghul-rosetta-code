@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Largest_number_divisible_by_its_digits",
     "status": "solved",
     "tags": ["number-theory", "puzzles"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 759,
+    "run_ms": 766
 }

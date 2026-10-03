@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Exponential_digital_sums",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 4629,
+    "run_ms": 8735
 }

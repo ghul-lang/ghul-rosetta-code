@@ -7,5 +7,6 @@
         "game",
         "interactive"
     ],
-    "interest": 5
+    "interest": 5,
+    "run_ms": 1001
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Word_search",
     "status": "published",
     "tags": ["puzzles", "strings"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 635,
+    "run_ms": 635
 }

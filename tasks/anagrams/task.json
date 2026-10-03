@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Anagrams",
     "status": "published",
     "tags": ["strings", "pipes", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 528
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Szymański's_algorithm",
     "status": "published",
     "tags": ["concurrency", "algorithms"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 5481,
+    "run_ms": 5537
 }

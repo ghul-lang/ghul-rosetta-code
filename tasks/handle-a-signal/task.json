@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Handle_a_signal",
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 1587
 }

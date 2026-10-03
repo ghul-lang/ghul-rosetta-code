@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Magnanimous_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 563,
+    "run_ms": 611
 }

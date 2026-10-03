@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ormiston_triples",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 16487
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Hamming_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 1026,
+    "run_ms": 1061
 }

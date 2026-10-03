@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Blum_integer",
     "status": "published",
     "tags": ["number-theory", "primes", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 825,
+    "run_ms": 946
 }

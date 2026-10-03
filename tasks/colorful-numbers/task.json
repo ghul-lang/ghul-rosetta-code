@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Colorful_numbers",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 701
 }

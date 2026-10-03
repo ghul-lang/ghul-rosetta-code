@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic/Rational",
     "status": "published",
     "tags": ["maths", "operators", "classes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 836
 }

@@ -6,5 +6,7 @@
     "basics",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "first_output_ms": 651,
+    "run_ms": 651
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Cuban_primes",
     "status": "published",
     "tags": ["primes", "pipes", "generators", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 2566,
+    "run_ms": 2566
 }

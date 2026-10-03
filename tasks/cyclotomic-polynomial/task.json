@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cyclotomic_polynomial",
     "status": "solved",
     "tags": ["maths", "number-theory", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 1960
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Summarize_and_say_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 4876,
+    "run_ms": 4898
 }

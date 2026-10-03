@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Greed",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 3256,
+    "run_ms": 3283
 }

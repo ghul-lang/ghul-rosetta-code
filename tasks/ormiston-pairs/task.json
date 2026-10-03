@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Ormiston_pairs",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 767,
+    "run_ms": 811
 }

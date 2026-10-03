@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Anaprimes",
     "status": "published",
     "tags": ["primes", "number-theory", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 1784
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Latin_Squares_in_reduced_form",
     "status": "solved",
     "tags": ["generators", "recursion", "maths"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 552,
+    "run_ms": 552
 }

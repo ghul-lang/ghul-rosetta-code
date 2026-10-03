@@ -6,5 +6,7 @@
     "dotnet-interop",
     "parsing"
   ],
-  "interest": 2
+  "interest": 2,
+    "first_output_ms": 680,
+    "run_ms": 710
 }

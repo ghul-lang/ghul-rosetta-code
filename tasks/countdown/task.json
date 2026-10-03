@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Countdown",
     "status": "published",
     "tags": ["puzzles", "recursion", "generators"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 566,
+    "run_ms": 566
 }

@@ -6,5 +6,7 @@
     "primes",
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "first_output_ms": 668,
+    "run_ms": 707
 }

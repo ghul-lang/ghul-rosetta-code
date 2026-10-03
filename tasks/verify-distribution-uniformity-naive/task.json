@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Verify_distribution_uniformity/Naive",
     "status": "solved",
     "tags": ["simulation", "closures"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 649
 }

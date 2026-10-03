@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Chess_player",
     "status": "published",
     "tags": ["game", "interactive", "algorithms"],
-    "interest": 5
+    "interest": 5,
+    "run_ms": 1521
 }

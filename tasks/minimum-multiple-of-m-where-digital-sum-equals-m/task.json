@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Minimum_multiple_of_m_where_digital_sum_equals_m",
     "status": "solved",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 790,
+    "run_ms": 829
 }

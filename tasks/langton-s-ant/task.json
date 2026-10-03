@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Langton's_ant",
     "status": "published",
     "tags": ["simulation", "graphics"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 763,
+    "run_ms": 802
 }

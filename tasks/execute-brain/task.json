@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Execute_Brain****",
     "status": "published",
     "tags": ["parsing", "interactive", "algorithms", "pattern-matching"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 588,
+    "run_ms": 638
 }

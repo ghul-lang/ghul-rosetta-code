@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Bulls_and_cows/Player",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 819,
+    "run_ms": 1851
 }

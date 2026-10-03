@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Last_letter-first_letter",
     "status": "solved",
     "tags": ["recursion", "puzzles"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 1916,
+    "run_ms": 1995
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Home_primes",
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "run_ms": 2669
 }

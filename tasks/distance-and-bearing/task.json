@@ -7,5 +7,7 @@
     "parsing",
     "text-processing"
   ],
-  "interest": 3
+  "interest": 3,
+    "first_output_ms": 513,
+    "run_ms": 529
 }

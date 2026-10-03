@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/De_Polignac_numbers",
     "status": "solved",
     "tags": ["primes", "number-theory", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 570
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Four_is_the_number_of_letters_in_the_...",
     "status": "published",
     "tags": ["strings", "generators", "text-processing"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 763,
+    "run_ms": 4635
 }

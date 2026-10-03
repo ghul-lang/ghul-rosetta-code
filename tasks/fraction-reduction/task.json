@@ -6,5 +6,7 @@
         "number-theory",
         "puzzles"
     ],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 1085,
+    "run_ms": 3625
 }

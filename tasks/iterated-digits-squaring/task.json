@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Iterated_digits_squaring",
     "status": "published",
     "tags": ["number-theory", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 2014,
+    "run_ms": 2024
 }

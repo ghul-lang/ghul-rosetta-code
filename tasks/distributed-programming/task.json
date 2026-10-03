@@ -7,5 +7,6 @@
     "concurrency",
     "closures"
   ],
-  "interest": 3
+  "interest": 3,
+    "run_ms": 642
 }

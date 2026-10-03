@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Execute_HQ9+",
     "status": "published",
     "tags": ["interactive", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 6504,
+    "run_ms": 6563
 }

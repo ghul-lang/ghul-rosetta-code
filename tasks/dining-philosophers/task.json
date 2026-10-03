@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dining_philosophers",
     "status": "published",
     "tags": ["concurrency", "async", "algorithms"],
-    "interest": 4
+    "interest": 4,
+    "run_ms": 3430
 }

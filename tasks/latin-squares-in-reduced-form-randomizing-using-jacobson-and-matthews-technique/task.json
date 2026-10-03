@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Latin_Squares_in_reduced_form/Randomizing_using_Jacobson_and_Matthews'_technique",
     "status": "solved",
     "tags": ["algorithms", "classes", "maths"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 2688,
+    "run_ms": 3212
 }

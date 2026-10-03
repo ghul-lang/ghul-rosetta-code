@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Greedy_algorithm_for_Egyptian_fractions",
     "status": "published",
     "tags": ["number-theory", "algorithms", "generators"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 519,
+    "run_ms": 518
 }

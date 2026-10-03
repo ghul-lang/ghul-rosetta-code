@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Recursive_descent_parser_generator",
     "status": "published",
     "tags": ["parsing", "text-processing", "unions"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 1483,
+    "run_ms": 1512
 }

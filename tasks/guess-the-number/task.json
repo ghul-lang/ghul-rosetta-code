@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Guess_the_number",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 937,
+    "run_ms": 954
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Boustrophedon_transform",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 990,
+    "run_ms": 1645
 }

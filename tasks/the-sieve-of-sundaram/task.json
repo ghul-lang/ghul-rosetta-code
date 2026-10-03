@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/The_sieve_of_Sundaram",
     "status": "published",
     "tags": ["primes", "generators", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 735
 }

@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/2048",
     "status": "published",
     "tags": ["game", "puzzles", "interactive", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 1173,
+    "run_ms": 1233
 }
