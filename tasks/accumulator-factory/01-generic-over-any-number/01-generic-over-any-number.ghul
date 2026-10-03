@@ -11,24 +11,19 @@ accumulator[T: INumber[T]](initial: T) -> T -> T is
     )
 si
 
+// int
 let x = accumulator(1)
-
 x(5)
-
 accumulator(3)
-
 write_line(x(2))
 
-let y = accumulator(1.0D)
+// double
+let y = accumulator(1.0)
+y(5.0)
+accumulator(3.0)
+write_line(y(2.3))
 
-y(5.0D)
-
-accumulator(3.0D)
-
-write_line(y(2.3D))
-
-let z = accumulator(System.Int128.one)
-
-z(System.Int128.parse("123456789012345678901234567890"))
-
-write_line(z(System.Int128.one))
+// bigint
+let z = accumulator(1n)
+z(123456789012345678901234567890n)
+write_line(z(1n))
