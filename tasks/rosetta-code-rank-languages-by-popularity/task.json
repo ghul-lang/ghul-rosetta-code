@@ -7,5 +7,7 @@
     "parsing",
     "sorting"
   ],
-  "interest": 2
+  "interest": 2,
+    "first_output_ms": 617,
+    "run_ms": 646
 }

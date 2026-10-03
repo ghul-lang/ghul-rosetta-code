@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Fortunate_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 2477,
+    "run_ms": 6244
 }

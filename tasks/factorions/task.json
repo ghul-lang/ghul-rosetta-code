@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Factorions",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 958,
+    "run_ms": 1456
 }

@@ -7,5 +7,6 @@
         "maths",
         "operators"
     ],
-    "interest": 5
+    "interest": 5,
+    "run_ms": 588
 }

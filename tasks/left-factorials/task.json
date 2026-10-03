@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Left_factorials",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 707,
+    "run_ms": 707
 }

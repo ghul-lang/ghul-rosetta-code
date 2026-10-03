@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Wolstenholme_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 789,
+    "run_ms": 6259
 }

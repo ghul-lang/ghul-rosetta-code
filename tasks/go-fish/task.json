@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Go_Fish",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 1256,
+    "run_ms": 1286
 }

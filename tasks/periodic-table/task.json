@@ -7,5 +7,7 @@
         "text-processing",
         "algorithms"
     ],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 516,
+    "run_ms": 556
 }

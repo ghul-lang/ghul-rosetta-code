@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Wasteful,_equidigital_and_frugal_numbers",
     "status": "published",
     "tags": ["number-theory", "unions", "pattern-matching", "classes"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 954,
+    "run_ms": 1287
 }

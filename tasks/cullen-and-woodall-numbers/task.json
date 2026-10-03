@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Cullen_and_Woodall_numbers",
     "status": "solved",
     "tags": ["primes", "number-theory"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 783,
+    "run_ms": 69144
 }

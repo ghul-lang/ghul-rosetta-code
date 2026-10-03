@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/RCRPG",
     "status": "published",
     "tags": ["game", "interactive", "classes"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 4225,
+    "run_ms": 4315
 }

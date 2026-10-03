@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Narcissistic_decimal_number",
     "status": "published",
     "tags": ["number-theory", "generators", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 1211,
+    "run_ms": 1229
 }

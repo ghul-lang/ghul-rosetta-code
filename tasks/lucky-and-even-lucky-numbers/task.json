@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Lucky_and_even_lucky_numbers",
     "status": "published",
     "tags": ["number-theory", "unions", "pattern-matching", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 668,
+    "run_ms": 706
 }

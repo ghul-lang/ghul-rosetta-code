@@ -6,5 +6,6 @@
     "number-theory",
     "algorithms"
   ],
-  "interest": 4
+  "interest": 4,
+    "run_ms": 1040
 }

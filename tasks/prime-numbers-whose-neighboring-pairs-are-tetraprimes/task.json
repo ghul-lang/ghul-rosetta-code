@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Prime_numbers_whose_neighboring_pairs_are_tetraprimes",
     "status": "solved",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 686,
+    "run_ms": 794
 }

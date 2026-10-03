@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Smarandache-Wellin_primes",
     "status": "solved",
     "tags": ["primes", "number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 61082
 }

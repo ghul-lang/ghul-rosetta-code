@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Word_frequency",
     "status": "solved",
     "tags": ["text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 1294,
+    "run_ms": 1376
 }

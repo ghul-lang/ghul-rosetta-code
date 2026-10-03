@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Prime_conspiracy",
     "status": "solved",
     "tags": ["primes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 1411,
+    "run_ms": 1435
 }

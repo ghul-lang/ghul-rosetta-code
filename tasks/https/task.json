@@ -6,5 +6,7 @@
     "dotnet-interop",
     "concurrency"
   ],
-  "interest": 2
+  "interest": 2,
+    "first_output_ms": 669,
+    "run_ms": 691
 }

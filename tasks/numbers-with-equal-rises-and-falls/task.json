@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numbers_with_equal_rises_and_falls",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 1921
 }

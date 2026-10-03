@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Percolation/Mean_cluster_density",
     "status": "published",
     "tags": ["simulation", "graphics", "classes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 1345
 }

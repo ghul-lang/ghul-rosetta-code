@@ -8,5 +8,7 @@
         "maths",
         "pipes"
     ],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 827,
+    "run_ms": 1212
 }

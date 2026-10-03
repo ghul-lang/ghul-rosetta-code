@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Hailstone_sequence",
     "status": "published",
     "tags": ["number-theory", "graphics", "generators"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 584,
+    "run_ms": 630
 }

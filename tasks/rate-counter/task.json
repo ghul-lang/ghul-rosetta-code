@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Rate_counter",
     "status": "solved",
     "tags": ["classes", "closures"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 700,
+    "run_ms": 700
 }

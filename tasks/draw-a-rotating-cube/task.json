@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Draw_a_rotating_cube",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 516,
+    "run_ms": 525
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Universal_Turing_machine",
     "status": "published",
     "tags": ["simulation", "classes", "parsing"],
-    "interest": 4
+    "interest": 4,
+    "run_ms": 3390
 }

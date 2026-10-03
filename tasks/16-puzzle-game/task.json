@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/16_puzzle_game",
     "status": "published",
     "tags": ["game", "puzzles", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 522,
+    "run_ms": 584
 }

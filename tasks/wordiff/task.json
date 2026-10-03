@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Wordiff",
     "status": "published",
     "tags": ["game", "strings", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 629
 }

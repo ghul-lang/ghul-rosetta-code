@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/24_game/Solve",
     "status": "published",
     "tags": ["puzzles", "recursion", "operators"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 734,
+    "run_ms": 796
 }

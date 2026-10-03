@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Rational_calculator",
     "status": "published",
     "tags": ["parsing", "operators", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 2763,
+    "run_ms": 2874
 }

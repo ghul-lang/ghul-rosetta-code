@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Least_m_such_that_n!_+_m_is_prime",
     "status": "solved",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "first_output_ms": 1934,
+    "run_ms": 4654
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Eban_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 1169
 }

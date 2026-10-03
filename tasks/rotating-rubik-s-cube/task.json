@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Rotating_Rubik's_cube",
     "status": "published",
     "tags": ["graphics", "puzzles"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 545,
+    "run_ms": 566
 }

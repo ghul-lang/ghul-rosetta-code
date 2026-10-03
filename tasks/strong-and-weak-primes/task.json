@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Strong_and_weak_primes",
     "status": "published",
     "tags": ["primes", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 916
 }

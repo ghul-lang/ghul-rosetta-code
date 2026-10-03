@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Hello_world/Web_server",
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 558,
+    "run_ms": 620
 }

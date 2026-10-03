@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Free_polyominoes_enumeration",
     "status": "published",
     "tags": ["puzzles", "algorithms", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 1864,
+    "run_ms": 1941
 }

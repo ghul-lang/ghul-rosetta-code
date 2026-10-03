@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Chernick's_Carmichael_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "run_ms": 1208
 }

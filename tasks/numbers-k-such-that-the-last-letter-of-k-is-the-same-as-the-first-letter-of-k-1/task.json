@@ -6,5 +6,6 @@
     "strings",
     "number-theory"
   ],
-  "interest": 3
+  "interest": 3,
+    "run_ms": 22869
 }

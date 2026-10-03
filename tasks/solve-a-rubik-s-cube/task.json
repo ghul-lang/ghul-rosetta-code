@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Solve_a_Rubik's_cube",
     "status": "published",
     "tags": ["puzzles", "algorithms", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 733,
+    "run_ms": 733
 }

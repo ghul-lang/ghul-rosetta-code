@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Factorial_base_numbers_indexing_permutations_of_a_collection",
     "status": "published",
     "tags": ["algorithms", "generics"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 1146,
+    "run_ms": 1789
 }

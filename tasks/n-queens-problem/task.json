@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/N-queens_problem",
     "status": "published",
     "tags": ["puzzles", "graphics", "generators", "pipes", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "first_output_ms": 711,
+    "run_ms": 769
 }

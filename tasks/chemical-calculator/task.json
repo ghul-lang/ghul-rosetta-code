@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Chemical_calculator",
     "status": "published",
     "tags": ["parsing", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "first_output_ms": 733,
+    "run_ms": 766
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Punched_cards",
     "status": "published",
     "tags": ["graphics", "strings"],
-    "interest": 4
+    "interest": 4,
+    "run_ms": 592
 }

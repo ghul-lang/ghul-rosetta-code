@@ -3,5 +3,7 @@
     "url": "https://rosettacode.org/wiki/Draw_a_clock",
     "status": "published",
     "tags": ["date-time", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "first_output_ms": 597,
+    "run_ms": 642
 }

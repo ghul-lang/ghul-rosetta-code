@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sisyphus_sequence",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "run_ms": 533
 }

@@ -6,5 +6,7 @@
     "primes",
     "number-theory"
   ],
-  "interest": 3
+  "interest": 3,
+    "first_output_ms": 1236,
+    "run_ms": 1252
 }
