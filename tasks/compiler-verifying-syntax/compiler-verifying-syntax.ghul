@@ -3,6 +3,7 @@ use IO.Std.read_line
 
 let keywords = ["and", "or", "not", "true", "false"]
 
+@suppress("non-pascal-case-name")
 class BAD_SYNTAX(text: string init): System.Exception is
     super(text)
 si
