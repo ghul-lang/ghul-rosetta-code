@@ -9,6 +9,7 @@ union Rule is
     OPTIONAL(body: Rule)
 si
 
+@suppress("non-pascal-case-name")
 class BAD_GRAMMAR(text: string init): System.Exception is
     super(text)
 si

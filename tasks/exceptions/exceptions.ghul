@@ -1,5 +1,6 @@
 use default
 
+@suppress("non-pascal-case-name")
 class NEGATIVE_VALUE_EXCEPTION(message: string): System.Exception is
     super(message)
 si

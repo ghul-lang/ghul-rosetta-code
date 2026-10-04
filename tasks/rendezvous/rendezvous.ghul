@@ -2,6 +2,7 @@ use default
 use IO.Std.write
 use Ghul.Coroutines
 
+@suppress("non-pascal-case-name")
 class OUT_OF_INK: System.Exception is
     init() is
         super.init("out of ink")

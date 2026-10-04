@@ -51,6 +51,7 @@ si
 
 let nothing = char(0)
 
+@suppress("non-pascal-case-name")
 class BAD_INPUT(text: string init): System.Exception is
     super(text)
 si
