@@ -44,6 +44,7 @@ namespace Rosetta is
         _problems: LIST[string]
         _section: SECTION
         _published: MAP[string, string]
+        _wasm: SET[string]
 
         problems: LIST[string] => _problems
 
@@ -54,6 +55,7 @@ namespace Rosetta is
             _problems = LIST[string]()
             _section = SECTION(root)
             _published = MAP[string, string]()
+            _wasm = wasm_passing(root)
 
             for entry in LEDGER(IO.Path.combine(root, "ledger")).entries() do
                 if let slug = entry.slug, hash = entry.published_hash then
@@ -210,11 +212,31 @@ namespace Rosetta is
                 writer.write_boolean("playground", part.playground)
                 writer.write_boolean("input", part.input)
                 write_strings(writer, "images", part.images)
+                writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground /\ part.images.count == 0)
                 writer.write_end_object()
             od
 
             writer.write_end_array()
             writer.write_end_object()
+        si
+
+        // The programs wasm-passing.txt lists as running correctly when compiled
+        // for WebAssembly, by part id. None when there is no such file.
+        wasm_passing(root: string) -> SET[string] is
+            let passing = SET[string]()
+            let file = IO.Path.combine(root, "wasm-passing.txt")
+
+            if IO.File.exists(file) then
+                for line in IO.File.read_all_lines(file) do
+                    let id = line.trim()
+
+                    if id.length > 0 /\ !id.starts_with("#") then
+                        passing.add(id)
+                    fi
+                od
+            fi
+
+            return passing
         si
 
         write_strings(writer: Utf8JsonWriter, name: string, values: LIST[string]) is
