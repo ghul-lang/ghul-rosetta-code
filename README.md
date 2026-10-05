@@ -326,6 +326,15 @@ Everything else in an index entry comes from the task's files: its parts, source
 `*.png.expected` images, whether it reads standard input (`run.in` or `run.session`), and whether
 the playground can run it (no `playground-unsupported` marker).
 
+`wasm` on each part is true when the playground can run that part compiled to WebAssembly: it is
+listed in `wasm-passing.txt`, it has no `playground-unsupported` marker, and it draws no images.
+`wasm-passing.txt` names one program a line, by the part's `id` in the index, under a `#` line
+giving the compiler, ghul-core and ghul-runtime versions it was checked with. Those are the
+versions the playground's compile service builds WebAssembly with, so the file is regenerated
+whenever those move: every program is compiled with `--target wasm` against those versions, run
+under Node, and listed when its output matches `run.expected`. Without the file every part's
+`wasm` is false.
+
 One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
 the solution it shows is newer than the one on the wiki.
