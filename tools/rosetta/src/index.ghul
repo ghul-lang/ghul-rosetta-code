@@ -212,7 +212,7 @@ namespace Rosetta is
                 writer.write_boolean("playground", part.playground)
                 writer.write_boolean("input", part.input)
                 write_strings(writer, "images", part.images)
-                writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground /\ part.images.count == 0)
+                writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground)
                 writer.write_end_object()
             od
 
