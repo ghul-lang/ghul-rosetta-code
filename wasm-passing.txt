@@ -1,13 +1,18 @@
-# ghul.compiler 65.3.2, ghul-core v0.37.0, ghul-runtime v25.4.0, ghul-raster v0.12.0
+# ghul.compiler 65.4.2, ghul-core v0.37.2, ghul-runtime v25.4.0, ghul-raster v0.12.0
 100-doors
 100-prisoners
+15-puzzle-game
 16-puzzle-game
+2048
+21-game
 24-game-solve
 3d-turtle-graphics
 99-bottles-of-beer
+a-b
 a-search-algorithm
 abc-correlation
 abc-problem
+abc-words
 abelian-sandpile-model
 abelian-sandpile-model-identity
 abstract-type
@@ -16,12 +21,16 @@ accumulator-factory/02-widening-from-integer-to-float
 achilles-numbers
 ackermann-function
 additive-primes
+adfgvx-cipher
 aks-test-for-primes
 algebraic-data-types
 align-columns
 almost-prime
 amb
 amicable-pairs
+anadromes
+anagrams
+anagrams-deranged-anagrams
 anaprimes
 angle-difference-between-two-bearings
 angles-geometric-normalization-and-conversion
@@ -91,6 +100,7 @@ bitwise-io
 black-box
 blossom-algorithm
 blum-integer
+boids
 boolean-values
 boustrophedon-transform
 box-the-compass
@@ -99,6 +109,7 @@ brace-expansion
 brazilian-numbers
 brilliant-numbers
 bron-kerbosch-algorithm
+bulls-and-cows
 bulls-and-cows-player
 burrows-wheeler-transform
 caesar-cipher
@@ -132,6 +143,7 @@ closures-value-capture
 code-golf/01-shortest
 code-golf/02-no-literals
 collections
+color-wheel
 colorful-numbers
 colour-bars-display
 colour-pinstripe-display
@@ -159,6 +171,7 @@ continued-fraction-arithmetic-construct-from-rational-number
 continued-fraction-arithmetic-g-matrix-ng-continued-fraction-n
 convert-seconds-to-compound-duration
 convex-hull
+conways-game-of-life/02-a-glider-gun
 copy-a-string
 copy-stdin-to-stdout
 count-in-factors
@@ -210,6 +223,7 @@ doubly-linked-list-element-insertion
 doubly-linked-list-traversal
 dragon-curve
 draw-a-cuboid
+draw-a-rotating-cube
 draw-a-sphere
 draw-the-empire-state-building
 duffinian-numbers
@@ -246,8 +260,10 @@ evolutionary-algorithm
 exceptions
 executable-library/01-the-library
 execute-brain/01-hello-world
+execute-brain/02-running-what-you-type
 execute-computer-zero
 execute-hq9
+execute-snusp
 exponential-digital-sums
 exponentiation-operator
 exponentiation-order
@@ -270,6 +286,7 @@ fibonacci-n-step-number-sequences
 fibonacci-word
 fibonacci-word-fractal
 file-extension-is-in-extensions-list
+file-input-output
 filter
 find-chess960-starting-position-identifier
 find-common-directory-path
@@ -287,11 +304,13 @@ fivenum/01-the-summary
 fivenum/02-a-box-plot
 fizzbuzz
 flatten-a-list
+flipping-bits-game
 flow-control-structures
 floyd-steinberg-dithering
 floyd-warshall-algorithm
 floyds-triangle
 forbidden-numbers
+forest-fire
 formal-power-series
 formatted-numeric-output
 fortunate-numbers
@@ -308,6 +327,7 @@ function-composition
 function-definition
 fusc-sequence
 gabows-algorithm
+galton-box-animation
 gamma-function
 gapful-numbers
 gauss-jordan-matrix-inversion
@@ -315,7 +335,9 @@ gaussian-primes
 general-fizzbuzz
 generate-random-chess-position
 generator-exponential
+geocentric-model
 giuga-numbers
+globally-replace-text-in-several-files
 goldbachs-comet/01-the-g-numbers
 goldbachs-comet/02-the-comet
 golden-ratio-convergence
@@ -330,6 +352,8 @@ greed
 greedy-algorithm-for-egyptian-fractions
 greyscale-bars-display
 gstrans-string-conversion
+guess-the-number
+guess-the-number-with-feedback
 guess-the-number-with-feedback-player
 hailstone-sequence/01-the-sequence
 hailstone-sequence/02-lengths-plotted
@@ -364,6 +388,7 @@ horse-racing
 hourglass-puzzle
 huffman-coding/01-the-code-table
 humble-numbers
+hunt-the-wumpus
 i-m-a-software-engineer-get-me-out-of-here
 identity-matrix
 idoneal-numbers
@@ -375,6 +400,7 @@ index-finite-lists-of-positive-integers
 inheritance-multiple
 inheritance-single
 input-loop
+integer-comparison
 intersecting-number-wheels
 inverted-index
 isbn13-check-digit
@@ -393,6 +419,7 @@ json-pointer
 juggler-sequence
 julia-set
 jury-stability-criterion
+k-means-clustering
 kaprekar-numbers
 kernighans-large-earthquake-problem
 klarner-rado-sequence
@@ -451,6 +478,7 @@ loops-nested
 loops-while
 loops-with-multiple-ranges
 loops-wrong-ranges
+lorenz-attractor
 lucas-lehmer-test
 lucky-and-even-lucky-numbers
 ludic-numbers
@@ -467,6 +495,7 @@ man-or-boy-test
 mandelbrot-set
 map-range
 marching-squares/01-tracing-a-perimeter
+markov-chain-text-generator
 matrix-multiplication
 matrix-transposition
 maximum-triangle-path-sum
@@ -478,6 +507,7 @@ maze-solving
 mcnaughton-yamada-thompson-algorithm
 mcnuggets-problem
 meissel-mertens-constant
+menu
 metallic-ratios
 mian-chowla-sequence
 middle-three-digits
@@ -551,6 +581,7 @@ optional-parameters
 order-by-pair-comparisons
 order-disjoint-list-items
 ordered-partitions
+ordered-words
 ormiston-pairs
 ormiston-triples
 overloaded-operators
@@ -571,11 +602,13 @@ parse-ebnf
 parsing-rpn-calculator-algorithm
 parsing-rpn-to-infix-conversion
 parsing-shunting-yard-algorithm
+particle-fountain
 partition-an-integer-x-into-n-primes
 partition-function-p
 pascal-matrix-generation
 pascal-s-triangle-puzzle
 pascals-triangle
+passphrase-generator
 pathological-floating-point-problems
 peano-curve
 pell-numbers
@@ -593,6 +626,7 @@ periodic-table/01-the-table
 periodic-table/02-the-picture
 peripheral-drift-illusion
 perlin-noise/01-the-noise-function
+perlin-noise/02-a-slice-of-the-field
 permutation-test
 permutations
 permutations-by-swapping
@@ -606,11 +640,13 @@ pig-the-dice-game-player
 pinstripe-display
 piprimes
 pisano-period
+plasma-effect
 playing-cards
 plot-coordinate-pairs
 poker-hand-analyser
 polymorphic-copy
 polymorphism
+polyspiral
 population-count
 power-set
 price-fraction
@@ -622,6 +658,7 @@ prime-reciprocal-sum
 prime-triangle
 primes-n-2-m-1
 primorial-numbers
+print-itself
 priority-queue
 probabilistic-choice
 problem-of-apollonius
@@ -649,6 +686,7 @@ ramanujans-constant
 ramer-douglas-peucker-line-simplification
 ramsey-s-theorem
 random-latin-squares
+random-sentence-from-book
 range-consolidation
 range-expansion
 range-extraction
@@ -658,6 +696,8 @@ raster-bars
 rational-calculator
 ray-casting-algorithm
 rcrpg
+read-a-configuration-file
+read-a-file-line-by-line
 read-entire-file
 real-constants-and-functions
 recamans-sequence/01-the-terms
@@ -681,6 +721,7 @@ rock-paper-scissors
 roman-numerals-encode
 roots-of-a-quadratic-function
 rot-13
+rotating-rubik-s-cube
 round-robin-tournament-schedule
 rubik-s-cube
 run-length-encoding
@@ -694,11 +735,13 @@ sattolo-cycle
 scope-function-names-and-labels
 scope-modifiers
 sealed-classes-and-methods
+search-in-paragraph-s-text
 sedols
 selectively-replace-multiple-instances-of-a-character-within-a-string
 self-describing-numbers
 self-numbers
 semiprime
+semordnilap
 sequence-nth-number-with-exactly-n-divisors
 sequence-of-non-squares
 sequence-of-primes-by-trial-division
@@ -711,6 +754,7 @@ set-right-adjacent-bits
 set-the-card-game
 seven-sided-dice-from-five-sided-dice
 sexy-primes
+shape-machine
 short-circuit-evaluation
 shortest-common-supersequence
 show-ascii-table
@@ -805,6 +849,7 @@ strip-whitespace-from-a-string-top-and-tail
 strong-and-weak-primes
 sub-unit-squares
 subleq
+substitution-cipher
 substring-top-and-tail
 subtractive-generator
 successive-prime-differences
@@ -831,6 +876,7 @@ tarjan
 tau-function
 tau-number
 taxicab-numbers
+teacup-rim-text
 temperature-conversion
 terminal-control-clear-the-screen
 terminal-control-coloured-text
@@ -840,6 +886,10 @@ terminal-control-display-an-extended-character
 terminal-control-inverse-video
 terminal-control-ringing-the-terminal-bell
 ternary-logic
+text-processing-1
+text-processing-2
+text-processing-max-licenses-in-use
+textonyms
 the-sieve-of-sundaram
 the-twelve-days-of-christmas
 thue-morse
@@ -873,7 +923,9 @@ unicode-variable-names
 universal-turing-machine
 unprimeable-numbers
 untouchable-numbers
+update-a-configuration-file
 upside-down-numbers
+user-input-text
 vampire-number
 van-der-corput-sequence
 variable-declaration-reset
@@ -900,7 +952,12 @@ wave-function-collapse
 weird-numbers
 wieferich-primes
 wilson-primes-of-order-n
+wireworld
+word-search
+word-wheel
 word-wrap
+wordiff
+words-containing-the-substring
 world-cup-group-stage
 write-entire-file
 write-float-arrays-to-a-text-file
