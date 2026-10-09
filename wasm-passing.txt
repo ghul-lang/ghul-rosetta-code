@@ -1,4 +1,4 @@
-# ghul.compiler 65.4.2, ghul-core v0.37.2, ghul-runtime v25.4.0, ghul-raster v0.12.0
+# ghul.compiler 65.4.4, ghul-core v0.39.0, ghul-runtime v25.5.0, ghul-raster v0.12.0
 100-doors
 100-prisoners
 15-puzzle-game
@@ -25,16 +25,19 @@ adfgvx-cipher
 aks-test-for-primes
 algebraic-data-types
 align-columns
+almkvist-giullera-formula-for-pi
 almost-prime
 amb
 amicable-pairs
 anadromes
+anagram-generator
 anagrams
 anagrams-deranged-anagrams
 anaprimes
 angle-difference-between-two-bearings
 angles-geometric-normalization-and-conversion
 animate-a-pendulum
+anonymous-recursion
 anti-primes
 aperys-constant
 append-a-record-to-the-end-of-a-text-file
@@ -47,6 +50,7 @@ argument-destructuring
 arithmetic-derivative
 arithmetic-geometric-mean
 arithmetic-geometric-mean-calculate-pi
+arithmetic-integer
 arithmetic-mean
 arithmetic-numbers
 arithmetic-rational
@@ -109,6 +113,7 @@ brace-expansion
 brazilian-numbers
 brilliant-numbers
 bron-kerbosch-algorithm
+brownian-tree
 bulls-and-cows
 bulls-and-cows-player
 burrows-wheeler-transform
@@ -125,6 +130,7 @@ catalan-numbers-pascals-triangle
 catamorphism/01-using-reduce
 catamorphism/02-writing-fold
 catch-an-exception-thrown-in-a-nested-call
+catmull-clark-subdivision-surface
 centre-and-radius-of-a-circle-passing-through-3-points-in-a-plane
 chaocipher
 chaos-game
@@ -132,13 +138,16 @@ character-codes
 check-if-a-polygon-overlaps-with-a-rectangle
 check-if-two-polygons-overlap
 check-machin-like-formulas
+chernicks-carmichael-numbers
 cheryls-birthday
 chinese-remainder-theorem
 chinese-zodiac
 chowla-numbers
 church-numerals
+circular-primes
 cistercian-numerals
 classes
+closest-pair-problem
 closures-value-capture
 code-golf/01-shortest
 code-golf/02-no-literals
@@ -158,6 +167,7 @@ compare-length-of-two-strings
 compiler-ast-interpreter
 compiler-code-generator
 compiler-syntax-analyzer
+compiler-verifying-syntax
 composite-numbers-k-with-no-single-digit-factors-whose-factors-are-all-substrings-of-k
 compound-data-type
 conditional-structures
@@ -169,8 +179,10 @@ constrained-random-points-on-a-circle
 continued-fraction
 continued-fraction-arithmetic-construct-from-rational-number
 continued-fraction-arithmetic-g-matrix-ng-continued-fraction-n
+continued-fraction-arithmetic-g-matrix-ng-continued-fraction-n1-continued-fraction-n2
 convert-seconds-to-compound-duration
 convex-hull
+conways-game-of-life/01-a-blinker
 conways-game-of-life/02-a-glider-gun
 copy-a-string
 copy-stdin-to-stdout
@@ -184,13 +196,17 @@ create-an-html-table
 csv-to-html-translation
 cuban-primes
 cullen-and-woodall-numbers
+cumulative-standard-deviation
 currency
+currying
+curve-that-touches-three-points
 curzon-numbers
 cut-a-rectangle
 cycles-of-a-permutation
 cyclops-numbers
 cyk-algorithm
 damm-algorithm
+de-bruijn-sequences
 de-polignac-numbers
 deal-cards-for-freecell
 death-star
@@ -198,6 +214,7 @@ deceptive-numbers
 deconvolution-1d
 decorate-sort-undecorate-idiom/01-with-named-lists
 decorate-sort-undecorate-idiom/02-schwartzian-transform
+deepcopy
 define-a-primitive-data-type
 delegates
 delete-a-file
@@ -216,6 +233,7 @@ dinesmans-multiple-dwelling-problem
 display-a-linear-combination
 diversity-prediction-theorem
 documentation
+dominoes
 doomsday-rule
 dot-product
 doubly-linked-list-element-definition
@@ -230,6 +248,7 @@ duffinian-numbers
 dynamic-variable-names
 earliest-difference-between-prime-gaps
 eban-numbers
+eertree
 egyptian-division
 eisenstein-primes
 ekg-sequence-convergence
@@ -239,6 +258,7 @@ elementary-cellular-automaton/01-three-rules
 elementary-cellular-automaton/02-a-space-time-diagram
 elliptic-curve-digital-signature-algorithm
 emirp-primes
+empty-directory
 empty-program
 empty-string
 endless-maze
@@ -270,8 +290,12 @@ exponentiation-order
 exponentiation-with-infix-operators-in-or-operating-on-the-base
 extend-your-language
 extensible-prime-generator
+external-sort
+faces-from-a-mesh
+factorial
 factorial-base-numbers-indexing-permutations-of-a-collection
 factorial-primes
+factorions
 factorize-string-into-lyndon-words
 factors-of-an-integer
 fairshare-between-two-and-more
@@ -282,7 +306,10 @@ faulhabers-triangle
 feigenbaum-constant-calculation
 fermat-numbers
 fermat-pseudoprimes
+fibonacci-heap
 fibonacci-n-step-number-sequences
+fibonacci-sequence/01-functional
+fibonacci-sequence/02-imperative
 fibonacci-word
 fibonacci-word-fractal
 file-extension-is-in-extensions-list
@@ -333,6 +360,7 @@ gapful-numbers
 gauss-jordan-matrix-inversion
 gaussian-primes
 general-fizzbuzz
+generate-chess960-starting-position
 generate-random-chess-position
 generator-exponential
 geocentric-model
@@ -366,6 +394,8 @@ harshad-or-niven-series
 hash-from-two-arrays
 hash-join
 haversine-formula
+held-karp-algorithm
+hello-world-line-printer
 hello-world-newbie/01-in-the-browser
 hello-world-newbie/02-in-a-codespace-or-from-the-template
 hello-world-newbie/03-on-your-own-machine
@@ -374,10 +404,12 @@ hello-world-standard-error
 hello-world-text
 here-document
 heronian-triangles
+hexapawn
 higher-order-functions
 hilbert-curve
 history-variables
 hofstadter-conway-10-000-sequence
+hofstadter-figure-figure-sequences
 hofstadter-q-sequence
 home-primes
 honaker-primes
@@ -390,11 +422,14 @@ huffman-coding/01-the-code-table
 humble-numbers
 hunt-the-wumpus
 i-m-a-software-engineer-get-me-out-of-here
+iban
 identity-matrix
+idiomatically-determine-all-the-lowercase-and-uppercase-letters
 idoneal-numbers
 imaginary-base-numbers
 implicit-type-conversion
 include-a-file
+increasing-gaps-between-consecutive-niven-numbers
 increment-a-numerical-string
 index-finite-lists-of-positive-integers
 inheritance-multiple
@@ -409,6 +444,7 @@ jacobi-symbol
 jacobsthal-numbers
 jaro-similarity
 jaro-winkler-distance
+jensens-device
 jewels-and-stones
 johnsons-algorithm
 jordan-polya-numbers
@@ -419,9 +455,11 @@ json-pointer
 juggler-sequence
 julia-set
 jury-stability-criterion
+k-d-tree
 k-means-clustering
 kaprekar-numbers
 kernighans-large-earthquake-problem
+kirkpatrick-seidel-algorithm
 klarner-rado-sequence
 knapsack-problem-bounded
 knapsack-problem-unbounded
@@ -438,6 +476,7 @@ langton-s-ant
 largest-int-from-concatenated-ints
 largest-number-divisible-by-its-digits
 largest-proper-divisor-of-n
+last-letter-first-letter
 latin-squares-in-reduced-form
 leap-year
 least-common-multiple
@@ -461,6 +500,7 @@ logistic-curve-fitting-in-epidemiology
 long-literals-with-continuations
 long-multiplication
 long-primes
+longest-common-subsequence
 longest-common-substring
 longest-increasing-subsequence
 look-and-say-sequence
@@ -496,6 +536,7 @@ mandelbrot-set
 map-range
 marching-squares/01-tracing-a-perimeter
 markov-chain-text-generator
+matrix-chain-multiplication
 matrix-multiplication
 matrix-transposition
 maximum-triangle-path-sum
@@ -512,6 +553,7 @@ metallic-ratios
 mian-chowla-sequence
 middle-three-digits
 mill-game
+miller-rabin-primality-test
 mind-boggling-card-trick
 minesweeper-game
 minimal-steps-down-to-1
@@ -576,10 +618,12 @@ old-lady-swallowed-a-fly
 old-russian-measure-of-length
 one-dimensional-cellular-automata
 one-of-n-lines-in-a-file
+openwebnet-password
 operator-precedence
 optional-parameters
 order-by-pair-comparisons
 order-disjoint-list-items
+order-two-numerical-lists
 ordered-partitions
 ordered-words
 ormiston-pairs
@@ -602,7 +646,9 @@ parse-ebnf
 parsing-rpn-calculator-algorithm
 parsing-rpn-to-infix-conversion
 parsing-shunting-yard-algorithm
+partial-function-application
 particle-fountain
+particle-swarm-optimization
 partition-an-integer-x-into-n-primes
 partition-function-p
 pascal-matrix-generation
@@ -677,7 +723,9 @@ quad-power-prime-seeds
 quaternion
 queue-definition
 queue-usage
+quickhull
 quickselect-algorithm
+quine
 quine-mccluskey-algorithm
 quoting-constructs
 radical-of-an-integer
@@ -697,7 +745,9 @@ rational-calculator
 ray-casting-algorithm
 rcrpg
 read-a-configuration-file
+read-a-file-character-by-character-utf8
 read-a-file-line-by-line
+read-a-specific-line-from-a-file
 read-entire-file
 real-constants-and-functions
 recamans-sequence/01-the-terms
@@ -719,10 +769,12 @@ riordan-numbers
 robots
 rock-paper-scissors
 roman-numerals-encode
+roots-of-a-function
 roots-of-a-quadratic-function
 rot-13
 rotating-rubik-s-cube
 round-robin-tournament-schedule
+routh-hurwitz-stability-criterion
 rubik-s-cube
 run-length-encoding
 runge-kutta-method
@@ -732,6 +784,7 @@ safe-primes-and-unsafe-primes
 sailors-coconuts-and-a-monkey-problem
 same-fringe/01-generators
 sattolo-cycle
+schieber-vishkin-algorithm
 scope-function-names-and-labels
 scope-modifiers
 sealed-classes-and-methods
@@ -820,8 +873,11 @@ sorting-algorithms-tree-sort-on-a-linked-list
 soundex
 sparkline-in-unicode
 special-characters
+special-variables
+specific-characters
 spelling-of-ordinal-numbers
 sphenic-numbers
+spiral-matrix
 split-a-character-string-based-on-change-of-character
 spoof-game
 square-but-not-cube
@@ -838,9 +894,11 @@ stern-brocot-sequence
 stirling-numbers-of-the-first-kind
 stirling-numbers-of-the-second-kind
 straddling-checkerboard
+string-append
 string-concatenation
 string-interpolation-included
 string-matching
+string-prepend
 strip-a-set-of-characters-from-a-string
 strip-block-comments
 strip-comments-from-a-string
@@ -868,9 +926,11 @@ sunflower-fractal
 super-d-numbers
 super-poulet-numbers
 superellipse
+superpermutation-minimisation
 sutherland-hodgman-polygon-clipping
 sylvesters-sequence
 symmetric-difference
+syntax-highlighting-using-mediawiki-formatting
 tamagotchi-emulator
 tarjan
 tau-function
@@ -886,10 +946,12 @@ terminal-control-display-an-extended-character
 terminal-control-inverse-video
 terminal-control-ringing-the-terminal-bell
 ternary-logic
+tetris
 text-processing-1
 text-processing-2
 text-processing-max-licenses-in-use
 textonyms
+the-name-game
 the-sieve-of-sundaram
 the-twelve-days-of-christmas
 thue-morse
@@ -898,6 +960,7 @@ tokenize-a-string-with-escaping
 tonelli-shanks-algorithm
 top-rank-per-group
 topological-sort
+topswops
 totient-function
 towers-of-hanoi
 trabb-pardo-knuth-algorithm
@@ -907,6 +970,7 @@ tree-from-nesting-levels
 tree-traversal
 triangular-numbers
 trigonometric-functions
+tropical-algebra-overloading
 truncatable-primes
 truth-table
 tupper-s-self-referential-formula
@@ -918,6 +982,7 @@ two-s-complement
 ulam-spiral-for-primes/01-a-grid-of-asterisks
 ulam-spiral-for-primes/02-drawing-the-spiral
 ultra-useful-primes
+unbias-a-random-generator
 undulating-numbers
 unicode-variable-names
 universal-turing-machine
@@ -926,6 +991,7 @@ untouchable-numbers
 update-a-configuration-file
 upside-down-numbers
 user-input-text
+utf-8-encode-and-decode
 vampire-number
 van-der-corput-sequence
 variable-declaration-reset
@@ -949,6 +1015,7 @@ walsh-matrix
 war-card-game
 wasteful-equidigital-and-frugal-numbers
 wave-function-collapse
+wavelet-matrix
 weird-numbers
 wieferich-primes
 wilson-primes-of-order-n
@@ -965,6 +1032,7 @@ write-language-name-in-3d-ascii
 writer-monad
 xiaolin-wus-line-algorithm
 y-combinator/01-the-y-combinator
+y-combinator/02-using-rec
 yellowstone-sequence/01-the-first-thirty
 yellowstone-sequence/02-plotting-the-strands
 yin-and-yang
