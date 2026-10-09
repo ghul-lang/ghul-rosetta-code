@@ -96,6 +96,15 @@ namespace Rosetta is
 
             writer.write_end_object()
 
+            // Where a solution can run, in the order a reader is offered them.
+            // Not tags: they are derived from the files rather than written in a
+            // task.json, and tags are what the playground and the site compare to
+            // find tasks that are alike, which every task would be on these.
+            writer.write_start_object("platforms")
+            writer.write_string("dotnet", "runs in the playground on .NET")
+            writer.write_string("wasm", "runs in the playground compiled to WebAssembly")
+            writer.write_end_object()
+
             writer.write_start_array("tasks")
 
             let directories = LIST[string](IO.Directory.get_directories(IO.Path.combine(_root, "tasks")))
@@ -178,6 +187,18 @@ namespace Rosetta is
             for tag in tags do
                 writer.write_string_value(tag)
             od
+
+            writer.write_end_array()
+
+            writer.write_start_array("runs_on")
+
+            if parts |> any(p => p.playground) then
+                writer.write_string_value("dotnet")
+            fi
+
+            if parts |> any(p => _wasm.contains(p.id) /\ p.playground) then
+                writer.write_string_value("wasm")
+            fi
 
             writer.write_end_array()
 
