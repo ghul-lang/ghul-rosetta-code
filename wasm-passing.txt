@@ -1,4 +1,4 @@
-# ghul.compiler 65.4.4, ghul-core v0.39.0, ghul-runtime v25.5.0, ghul-raster v0.12.0
+# ghul.compiler 65.4.5, ghul-core v0.40.0, ghul-runtime v25.6.0, ghul-raster v0.12.0
 100-doors
 100-prisoners
 15-puzzle-game
@@ -22,6 +22,7 @@ achilles-numbers
 ackermann-function
 additive-primes
 adfgvx-cipher
+aho-corasick-algorithm
 aks-test-for-primes
 algebraic-data-types
 align-columns
@@ -62,6 +63,7 @@ assertions
 associative-array-creation
 associative-array-iteration
 associative-array-merging
+atomic-updates
 attractive-numbers
 autogram-checker
 averages-median
@@ -138,6 +140,7 @@ character-codes
 check-if-a-polygon-overlaps-with-a-rectangle
 check-if-two-polygons-overlap
 check-machin-like-formulas
+checkpoint-synchronization
 chernicks-carmichael-numbers
 cheryls-birthday
 chinese-remainder-theorem
@@ -166,10 +169,13 @@ compare-a-list-of-strings
 compare-length-of-two-strings
 compiler-ast-interpreter
 compiler-code-generator
+compiler-lexical-analyzer
+compiler-simple-file-inclusion-pre-processor
 compiler-syntax-analyzer
 compiler-verifying-syntax
 composite-numbers-k-with-no-single-digit-factors-whose-factors-are-all-substrings-of-k
 compound-data-type
+concurrent-computing
 conditional-structures
 conjugate-a-latin-verb
 consecutive-primes-with-ascending-or-descending-differences
@@ -230,12 +236,14 @@ digital-root-multiplicative-digital-root
 dijkstras-algorithm/01-the-shortest-paths
 dijkstras-algorithm/02-the-graph-drawn
 dinesmans-multiple-dwelling-problem
+dining-philosophers
 display-a-linear-combination
 diversity-prediction-theorem
 documentation
 dominoes
 doomsday-rule
 dot-product
+doubly-linked-list-definition
 doubly-linked-list-element-definition
 doubly-linked-list-element-insertion
 doubly-linked-list-traversal
@@ -276,6 +284,7 @@ euler-method
 euler-s-sum-of-powers-conjecture
 evaluate-binomial-coefficients
 even-or-odd
+events
 evolutionary-algorithm
 exceptions
 executable-library/01-the-library
@@ -467,6 +476,7 @@ knight-s-tour
 knuth-s-algorithm-s
 knuth-shuffle
 koch-curve
+kolakoski-sequence
 kosaraju
 kronecker-product
 kronecker-product-based-fractals
@@ -550,6 +560,7 @@ mcnuggets-problem
 meissel-mertens-constant
 menu
 metallic-ratios
+metered-concurrency
 mian-chowla-sequence
 middle-three-digits
 mill-game
@@ -581,6 +592,7 @@ multiplicative-order
 multisplit
 munchausen-numbers
 munching-squares
+mutex
 mutual-recursion
 n-queens-problem/01-counting-and-one-board
 n-queens-problem/02-all-ninety-two-drawn
@@ -757,6 +769,7 @@ recursive-descent-parser-generator/02-the-generated-parser
 reduced-row-echelon-form
 remove-lines-from-a-file
 rename-a-file
+rendezvous
 rep-string
 repeat
 repeat-a-string
@@ -783,6 +796,7 @@ s-expressions
 safe-primes-and-unsafe-primes
 sailors-coconuts-and-a-monkey-problem
 same-fringe/01-generators
+same-fringe/02-coroutines
 sattolo-cycle
 schieber-vishkin-algorithm
 scope-function-names-and-labels
@@ -820,6 +834,7 @@ sierpinski-square-curve
 sierpinski-triangle
 sierpinski-triangle-graphical
 sieve-of-eratosthenes/01-marking-multiples
+sieve-of-eratosthenes/02-chained-filters
 sieve-of-pritchard
 sign-of-an-integer-signum
 simple-turtle-graphics
@@ -867,6 +882,7 @@ sorting-algorithms-permutation-sort
 sorting-algorithms-quicksort
 sorting-algorithms-selection-sort
 sorting-algorithms-shell-sort
+sorting-algorithms-sleep-sort
 sorting-algorithms-stooge-sort
 sorting-algorithms-strand-sort
 sorting-algorithms-tree-sort-on-a-linked-list
@@ -930,6 +946,7 @@ superpermutation-minimisation
 sutherland-hodgman-polygon-clipping
 sylvesters-sequence
 symmetric-difference
+synchronous-concurrency
 syntax-highlighting-using-mediawiki-formatting
 tamagotchi-emulator
 tarjan
