@@ -336,6 +336,12 @@ under Node, and listed when its output matches `run.expected` and every image it
 write matches its `.png.expected` pixel for pixel. Without the file every part's
 `wasm` is false.
 
+`runs_on` on each task lists where the playground can run it: `dotnet` where any part can run
+there, and `wasm` where any part runs compiled to WebAssembly. The index's `platforms` object names
+and describes them. They are not tags, because they are derived rather than written in a
+`task.json`, and the playground and the site compare tags to find tasks that are alike, which every
+task would be on these.
+
 One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
 the solution it shows is newer than the one on the wiki.
