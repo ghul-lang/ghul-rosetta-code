@@ -47,7 +47,7 @@ run_test() {
     local started ended
 
     started=$(date +%s)
-    timeout 600 nice -n 10 dotnet ghul-test --use-dotnet-build "$task" >/dev/null 2>&1
+    timeout 600 nice -n 10 dotnet ghul-test "$task" >/dev/null 2>&1
     local status=$?
     ended=$(date +%s)
 

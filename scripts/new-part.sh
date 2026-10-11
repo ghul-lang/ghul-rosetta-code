@@ -79,5 +79,5 @@ echo "created tasks/$SLUG/$PART"
 echo
 echo "write the part, then:"
 echo "    dotnet run --project tasks/$SLUG/$PART"
-echo "    dotnet ghul-test --use-dotnet-build tasks/$SLUG/$PART"
+echo "    dotnet ghul-test tasks/$SLUG/$PART"
 echo "    scripts/capture.sh tasks/$SLUG/$PART"

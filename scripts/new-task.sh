@@ -85,5 +85,5 @@ echo "created tasks/$SLUG"
 echo
 echo "write the solution, then:"
 echo "    dotnet run --project tasks/$SLUG"
-echo "    dotnet ghul-test --use-dotnet-build tasks/$SLUG"
+echo "    dotnet ghul-test tasks/$SLUG"
 echo "    scripts/capture.sh tasks/$SLUG"
