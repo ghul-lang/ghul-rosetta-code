@@ -4,17 +4,18 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [ main ]
-  merge_group:
+  push:
+    branches: [ main ]
 
-# There is no run on a push to main. The merge queue tests the pull request
-# merged with main and main is fast-forwarded to the commit it tested, so a
-# run afterwards tests that same tree a second time.
+# A pull request is tested merged with main as it stood when its run started,
+# and a push to main tests what actually landed, since main may have moved
+# under the pull request after its run; a red main is then visible.
 
 jobs:
   # What a pull request has to run. A change confined to task directories
   # needs only those tasks; anything else - a package version, the root
   # project, a script, the workflow - can reach every task, so it runs the
-  # lot. The queue runs the lot too, unless the group touches only the ledger.
+  # lot. A push to main runs the lot too, unless it touches only the ledger.
   #
   # The test is "outside tasks/" rather than a list of shared paths, so a
   # shared input added later is covered without this job being taught about
@@ -40,8 +41,8 @@ jobs:
     - id: pick
       env:
         EVENT: ${{ github.event_name }}
-        BASE: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-        HEAD: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
+        BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
       run: |
         set -euo pipefail
 
@@ -49,7 +50,7 @@ jobs:
         echo "changed:"; echo "$CHANGED" | sed 's/^/  /'
 
         # The decision is the base commit's copy of scripts/tasks-to-test.sh,
-        # for a pull request and a queue group alike: the one in the change
+        # for a pull request and a push alike: the one in the change
         # could be part of what it is judging. A base without it runs the
         # whole suite.
         DECIDE=$(mktemp -d)
