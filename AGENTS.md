@@ -532,7 +532,7 @@ Then write the solution, run it, and capture the output:
 
 ```sh
 dotnet run --project tasks/<slug>
-dotnet ghul-test --use-dotnet-build tasks/<slug>
+dotnet ghul-test tasks/<slug>
 scripts/capture.sh tasks/<slug>
 ```
 
@@ -734,8 +734,8 @@ build each task as they go.
 
 | Step | How to run | Typical duration |
 |------|-----------|------------------|
-| One task's test | `dotnet ghul-test --use-dotnet-build tasks/<slug>` | seconds |
-| Integration tests | `dotnet ghul-test --use-dotnet-build tasks` | minutes |
+| One task's test | `dotnet ghul-test tasks/<slug>` | seconds |
+| Integration tests | `dotnet ghul-test tasks` | minutes |
 
 Locally, run the tests for the tasks you created or edited, and no others: name them on one command
 line (`tasks/<slug-a> tasks/<slug-b>`). A new task has to be run anyway to capture its expectation,

@@ -1,0 +1,12 @@
+{
+    // How the tasks are run: each is a project, built with the compiler alone
+    // where the runner can read everything the project says, and with
+    // MSBuild otherwise, using the compiler the tool manifest pins.
+    "default": "tasks",
+    "configurations": {
+        "tasks": {
+            "build": "direct",
+            "compiler": "project"
+        }
+    }
+}
