@@ -349,8 +349,14 @@ under Node, and listed when its output matches `run.expected` and every image it
 write matches its `.png.expected` pixel for pixel. Without the file every part's
 `wasm` is false.
 
-`runs_on` on each task lists where the playground can run it: `dotnet` where any part can run
-there, and `wasm` where any part runs compiled to WebAssembly. The index's `platforms` object names
+`native` on each part is true when the part is listed in `llvm-tasks.txt`, the tests that build and
+pass as native executables through the `llvm` configuration. The file names each by its path,
+`tasks/<id>`. Nothing runs natively in the playground, so `native` says what a reader can build
+and run on their own machine, and the site points them at how.
+
+`runs_on` on each task lists where it runs: `dotnet` where the playground can run any part there,
+`wasm` where any part runs in the playground compiled to WebAssembly, and `native` where any part
+builds and runs as a native executable. The index's `platforms` object names
 and describes them. They are not tags, because they are derived rather than written in a
 `task.json`, and the playground and the site compare tags to find tasks that are alike, which every
 task would be on these.

@@ -45,6 +45,7 @@ namespace Rosetta is
         _section: SECTION
         _published: MAP[string, string]
         _wasm: SET[string]
+        _native: SET[string]
 
         problems: LIST[string] => _problems
 
@@ -56,6 +57,7 @@ namespace Rosetta is
             _section = SECTION(root)
             _published = MAP[string, string]()
             _wasm = wasm_passing(root)
+            _native = native_passing(root)
 
             for entry in LEDGER(IO.Path.combine(root, "ledger")).entries() do
                 if let slug = entry.slug, hash = entry.published_hash then
@@ -103,6 +105,7 @@ namespace Rosetta is
             writer.write_start_object("platforms")
             writer.write_string("dotnet", "runs in the playground on .NET")
             writer.write_string("wasm", "runs in the playground compiled to WebAssembly")
+            writer.write_string("native", "builds and runs as a native executable, on your own machine")
             writer.write_end_object()
 
             writer.write_start_array("tasks")
@@ -200,6 +203,10 @@ namespace Rosetta is
                 writer.write_string_value("wasm")
             fi
 
+            if parts |> any(p => _native.contains(p.id)) then
+                writer.write_string_value("native")
+            fi
+
             writer.write_end_array()
 
             writer.write_number("interest", interest)
@@ -234,6 +241,7 @@ namespace Rosetta is
                 writer.write_boolean("input", part.input)
                 write_strings(writer, "images", part.images)
                 writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground)
+                writer.write_boolean("native", _native.contains(part.id))
                 writer.write_end_object()
             od
 
@@ -253,6 +261,26 @@ namespace Rosetta is
 
                     if id.length > 0 /\ !id.starts_with("#") then
                         passing.add(id)
+                    fi
+                od
+            fi
+
+            return passing
+        si
+
+        // The programs llvm-tasks.txt lists as building and passing as native
+        // executables, by part id: the file names each by its path, which is
+        // the id under tasks/. None when there is no such file.
+        native_passing(root: string) -> SET[string] is
+            let passing = SET[string]()
+            let file = IO.Path.combine(root, "llvm-tasks.txt")
+
+            if IO.File.exists(file) then
+                for line in IO.File.read_all_lines(file) do
+                    let path = line.trim()
+
+                    if path.starts_with("tasks/") then
+                        passing.add(path.substring("tasks/".length))
                     fi
                 od
             fi
