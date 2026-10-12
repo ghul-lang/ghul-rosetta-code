@@ -361,6 +361,15 @@ and describes them. They are not tags, because they are derived rather than writ
 `task.json`, and the playground and the site compare tags to find tasks that are alike, which every
 task would be on these.
 
+Three fields on each part say what a reader needs to build and run it away from this repository:
+`files`, each file named in the part's `playground-files` as the `name` the program opens it under
+and the `path` of the file in the repository, with a symbolic link followed to the file it names;
+`args`, the lines of `run.args`, the command line the part is run with; and `raster`, whether its
+project references ghul.raster. The index's own `commit` is the commit it was generated from, which
+`index.yml` passes as `--commit`, so the paths can be fetched as they stood when the index was
+written. It is null in an index generated without one. `raster_version` is the ghul.raster release
+the tasks are built and tested with, read from `Directory.Packages.props`.
+
 One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
 the solution it shows is newer than the one on the wiki.

@@ -21,7 +21,20 @@ namespace Rosetta is
         input: bool
         images: LIST[string]
 
-        init(id: string, heading: string?, source: string, output: string, lines: int, playground: bool, input: bool, images: LIST[string]) is
+        // The files the program reads, each by the name it opens it under
+        // and the path of the file in the repository.
+        files: LIST[(name: string, path: string)]
+
+        // The command line the program is run with.
+        args: LIST[string]
+
+        // Whether the program draws with ghul.raster.
+        raster: bool
+
+        init(
+            id: string, heading: string?, source: string, output: string, lines: int, playground: bool, input: bool,
+            images: LIST[string], files: LIST[(name: string, path: string)], args: LIST[string], raster: bool
+        ) is
             self.id = id
             self.heading = heading
             self.source = source
@@ -30,6 +43,9 @@ namespace Rosetta is
             self.playground = playground
             self.input = input
             self.images = images
+            self.files = files
+            self.args = args
+            self.raster = raster
         si
     si
 
@@ -46,11 +62,16 @@ namespace Rosetta is
         _published: MAP[string, string]
         _wasm: SET[string]
         _native: SET[string]
+        _commit: string?
 
         problems: LIST[string] => _problems
 
-        init(root: string) is
+        // `commit` is the commit the task directories were read at, which a
+        // reader fetching a task's files fetches them at, or null where it
+        // is not known.
+        init(root: string, commit: string?) is
             _root = root
+            _commit = commit
             _vocabulary = MAP[string, string]()
             _tag_order = LIST[string]()
             _problems = LIST[string]()
@@ -89,6 +110,20 @@ namespace Rosetta is
 
             writer.write_start_object()
             writer.write_number("version", 1)
+
+            if let commit = _commit then
+                writer.write_string("commit", commit)
+            else
+                writer.write_null("commit")
+            fi
+
+            // The ghul.raster release the tasks are built and tested with, which
+            // a part whose raster is true needs.
+            if let raster = _raster_version() then
+                writer.write_string("raster_version", raster)
+            else
+                writer.write_null("raster_version")
+            fi
 
             writer.write_start_object("tags")
 
@@ -242,6 +277,20 @@ namespace Rosetta is
                 write_strings(writer, "images", part.images)
                 writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground)
                 writer.write_boolean("native", _native.contains(part.id))
+
+                writer.write_start_array("files")
+
+                for file in part.files do
+                    writer.write_start_object()
+                    writer.write_string("name", file.name)
+                    writer.write_string("path", file.path)
+                    writer.write_end_object()
+                od
+
+                writer.write_end_array()
+
+                write_strings(writer, "args", part.args)
+                writer.write_boolean("raster", part.raster)
                 writer.write_end_object()
             od
 
@@ -368,9 +417,67 @@ namespace Rosetta is
                     !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")),
                     IO.File.exists(IO.Path.combine(directory, "run.in")) \/
                         IO.File.exists(IO.Path.combine(directory, "run.session")),
-                    images
+                    images,
+                    files_of(directory, id),
+                    lines_of(IO.Path.combine(directory, "run.args")),
+                    _uses_raster(IO.Path.combine(directory, "{name}.ghulproj"))
                 )
         si
+
+        // The files playground-files names, one per line relative to the
+        // program's directory. A symbolic link is followed to the file it
+        // names, since what the repository serves for a link is its target's
+        // path rather than its contents.
+        files_of(directory: string, id: string) -> LIST[(name: string, path: string)] is
+            let files = LIST[(name: string, path: string)]()
+
+            for line in lines_of(IO.Path.combine(directory, "playground-files")) do
+                let full = IO.Path.get_full_path(IO.Path.combine(directory, line))
+
+                if !IO.File.exists(full) then
+                    _problems.add("{id}: playground-files names {line}, which does not exist")
+                    continue
+                fi
+
+                let target = IO.File.resolve_link_target(full, true)
+                let resolved = if let t = target then t.full_name else full fi
+
+                files.add((name = IO.Path.get_file_name(full) ?? line, path = relative(resolved)))
+            od
+
+            return files
+        si
+
+        // The file's lines with surrounding space taken off and blank ones
+        // left out, or none where there is no file.
+        lines_of(path: string) -> LIST[string] is
+            let lines = LIST[string]()
+
+            if IO.File.exists(path) then
+                for line in IO.File.read_all_lines(path) do
+                    if line.trim().length > 0 then
+                        lines.add(line.trim())
+                    fi
+                od
+            fi
+
+            return lines
+        si
+
+        _raster_version() -> string? is
+            let props = IO.Path.combine(_root, "Directory.Packages.props")
+
+            if !IO.File.exists(props) then
+                return null
+            fi
+
+            let found = Regex.match(IO.File.read_all_text(props), "Include=\"ghul\\.raster\"\\s+Version=\"([^\"]+)\"")
+
+            return if found.success then found.groups[1].value else null fi
+        si
+
+        _uses_raster(project: string) -> bool =>
+            IO.File.exists(project) /\ IO.File.read_all_text(project).contains("\"ghul.raster\"")
 
         line_count(text: string) -> int is
             let trimmed = text.trim_end(['\n', '\r'])

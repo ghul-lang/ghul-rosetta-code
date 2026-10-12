@@ -40,7 +40,7 @@ jobs:
     # Fails, rather than writing, when a task's tags or interest score do not
     # validate, so a bad task.json stops here instead of being served.
     - name: Generate index.json
-      run: dotnet run --project tools/rosetta -- index
+      run: dotnet run --project tools/rosetta -- index --commit "$GITHUB_SHA"
 
     - name: Publish on the index branch
       env:

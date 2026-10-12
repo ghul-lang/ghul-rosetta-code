@@ -21,7 +21,9 @@ use Rosetta
 //   rosetta render-notes <path>      a task's notes.md as wiki markup, to stdout
 //   rosetta section <slug>           the task's ghul section as wiki markup, to stdout
 //   rosetta wiki-out <slug> ...       write each task's section to wiki-out/<slug>.wiki
-//   rosetta index [--check]          write index.json, or only validate the tags it would carry
+//   rosetta index [--check] [--commit <sha>]
+//                                    write index.json, or only validate the tags it would carry;
+//                                    --commit names the commit the task files are fetched at
 //   rosetta edit-page <title> <file> <summary> [--dry-run]
 //                                    replace a page that is not a task's, such as a template
 //
@@ -147,12 +149,23 @@ sync(root: string) is
     fi
 si
 
+// the argument after `option`, or null where `option` is not given or is last
+option_value(arguments: Collections.List[string], option: string) -> string? is
+    for i in 0..arguments.count - 1 do
+        if arguments[i] =~ option then
+            return arguments[i + 1]
+        fi
+    od
+
+    return null
+si
+
 // index.json is generated from the task directories rather than committed: a workflow
 // on main writes it and publishes it on the index branch. --check validates the
 // tags and interest scores without writing, which is what a pull request runs,
 // and a failing validation writes nothing, so a bad task.json is never served.
-write_index(root: string, check: bool) is
-    let index = TASK_INDEX(root)
+write_index(root: string, check: bool, commit: string?) is
+    let index = TASK_INDEX(root, commit)
     let text = index.render()
 
     for problem in index.problems do
@@ -1304,7 +1317,7 @@ else
             reopen(root, arguments[0], arguments[1])
         fi
     when "index" then
-        write_index(root, arguments.contains("--check"))
+        write_index(root, arguments.contains("--check"), option_value(arguments, "--commit"))
     when "self-test" then
         self_test()
     when "adopt" then
