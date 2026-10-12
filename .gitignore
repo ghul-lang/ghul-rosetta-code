@@ -44,3 +44,4 @@ index.json
 
 # per-target builds of a task, beside it
 .targets-*/
+libraries/
