@@ -12,8 +12,12 @@ class FLAG is
 
     read() -> int => Volatile.read(state ref)
 
+    // The algorithm needs each flag a process sets to be visible before it
+    // reads the others. A volatile write may still be overtaken by a later
+    // read, which lets two processes each miss the other and both wait for
+    // ever; an interlocked exchange is a full fence.
     write(value: int) is
-        Volatile.write(state ref, value)
+        Interlocked.exchange(state ref, value)
     si
 si
 
