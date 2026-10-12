@@ -148,15 +148,17 @@ The tests assert the program's output only. There are deliberately no IL snapsho
 with no `il.expected` has its IL ignored.
 
 The tasks `llvm-tasks.txt` lists also build and pass as native executables, compiled for the llvm
-target against ghul-core and the ghul-runtime sources checked out beside this repository, and
-linked with the `ghul-llvm` on the `PATH` or named by `GHUL_LLVM`:
+target against ghul-core, the ghul-runtime sources and, for a task that draws, ghul-raster, each
+taken from `libraries/` or else checked out beside this repository, and linked with the
+`ghul-llvm` on the `PATH` or named by `GHUL_LLVM`:
 
 ```sh
 dotnet ghul-test --config llvm $(cat llvm-tasks.txt)
 ```
 
-The list holds the tasks that passed when it was last measured; what keeps the others off llvm is
-tracked on [ghul-lang/ghul#3454](https://github.com/ghul-lang/ghul/issues/3454).
+The list holds the tasks that passed when it was last measured, with the compiler the tool
+manifest pins and the library revisions the measurement names on the tracking issue. What keeps
+the others off llvm is tracked on [ghul-lang/ghul#3454](https://github.com/ghul-lang/ghul/issues/3454).
 
 ## pictures
 

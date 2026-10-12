@@ -10,9 +10,11 @@
         },
 
         // The same tasks built as native executables for the llvm target,
-        // against ghul-core and the ghul-runtime sources from the first
-        // checkout found beside this repository or its worktree's primary,
-        // and linked with the ghul-llvm on the PATH or named by GHUL_LLVM.
+        // against ghul-core, the ghul-runtime sources and, for a task that
+        // references ghul.raster, ghul-raster, each from the first checkout
+        // found under libraries/, beside this repository or beside its
+        // worktree's primary, and linked with the ghul-llvm on the PATH or
+        // named by GHUL_LLVM.
         // Opt-in, and run over the tasks llvm-tasks.txt lists:
         //   dotnet ghul-test --config llvm $(cat llvm-tasks.txt)
         "llvm": {
@@ -30,6 +32,12 @@
                             "name": "ghul-runtime",
                             "root": ["libraries/ghul-runtime", "../ghul-runtime", "../../../ghul-runtime"],
                             "sources": "@wasm-sources.rsp"
+                        },
+                        {
+                            "name": "ghul-raster",
+                            "package": "ghul.raster",
+                            "root": ["libraries/ghul-raster", "../ghul-raster", "../../../ghul-raster"],
+                            "sources": "src/**/*.ghul"
                         }
                     ]
                 }
