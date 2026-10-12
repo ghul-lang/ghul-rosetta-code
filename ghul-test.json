@@ -7,6 +7,33 @@
         "tasks": {
             "build": "direct",
             "compiler": "project"
+        },
+
+        // The same tasks built as native executables for the llvm target,
+        // against ghul-core and the ghul-runtime sources from the first
+        // checkout found beside this repository or its worktree's primary,
+        // and linked with the ghul-llvm on the PATH or named by GHUL_LLVM.
+        // Opt-in, and run over the tasks llvm-tasks.txt lists:
+        //   dotnet ghul-test --config llvm $(cat llvm-tasks.txt)
+        "llvm": {
+            "extends": "tasks",
+            "build_targets": ["llvm"],
+            "targets": {
+                "llvm": {
+                    "libraries": [
+                        {
+                            "name": "ghul-core",
+                            "root": ["libraries/ghul-core", "../ghul-core", "../../../ghul-core"],
+                            "sources": "src/**/*.ghul"
+                        },
+                        {
+                            "name": "ghul-runtime",
+                            "root": ["libraries/ghul-runtime", "../ghul-runtime", "../../../ghul-runtime"],
+                            "sources": "@wasm-sources.rsp"
+                        }
+                    ]
+                }
+            }
         }
     }
 }

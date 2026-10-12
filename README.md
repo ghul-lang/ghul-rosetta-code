@@ -147,6 +147,17 @@ dotnet ghul-test tasks
 The tests assert the program's output only. There are deliberately no IL snapshots: a test folder
 with no `il.expected` has its IL ignored.
 
+The tasks `llvm-tasks.txt` lists also build and pass as native executables, compiled for the llvm
+target against ghul-core and the ghul-runtime sources checked out beside this repository, and
+linked with the `ghul-llvm` on the `PATH` or named by `GHUL_LLVM`:
+
+```sh
+dotnet ghul-test --config llvm $(cat llvm-tasks.txt)
+```
+
+The list holds the tasks that passed when it was last measured; what keeps the others off llvm is
+tracked on [ghul-lang/ghul#3454](https://github.com/ghul-lang/ghul/issues/3454).
+
 ## pictures
 
 A solution that draws writes a PNG with `ghul.raster` and names it on standard output, which
