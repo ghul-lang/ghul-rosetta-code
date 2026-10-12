@@ -3,7 +3,7 @@ first =~ built                           true
 first !~ second                          true
 first < second                           true
 second > first                           true
-first <> second                          -1
+first <> second                          -15
 
 identity
 first == built                           false
