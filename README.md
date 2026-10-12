@@ -367,7 +367,8 @@ and the `path` of the file in the repository, with a symbolic link followed to t
 `args`, the lines of `run.args`, the command line the part is run with; and `raster`, whether its
 project references ghul.raster. The index's own `commit` is the commit it was generated from, which
 `index.yml` passes as `--commit`, so the paths can be fetched as they stood when the index was
-written. It is null in an index generated without one.
+written. It is null in an index generated without one. `raster_version` is the ghul.raster release
+the tasks are built and tested with, read from `Directory.Packages.props`.
 
 One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that

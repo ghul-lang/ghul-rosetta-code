@@ -117,6 +117,14 @@ namespace Rosetta is
                 writer.write_null("commit")
             fi
 
+            // The ghul.raster release the tasks are built and tested with, which
+            // a part whose raster is true needs.
+            if let raster = _raster_version() then
+                writer.write_string("raster_version", raster)
+            else
+                writer.write_null("raster_version")
+            fi
+
             writer.write_start_object("tags")
 
             for tag in _tag_order do
@@ -454,6 +462,18 @@ namespace Rosetta is
             fi
 
             return lines
+        si
+
+        _raster_version() -> string? is
+            let props = IO.Path.combine(_root, "Directory.Packages.props")
+
+            if !IO.File.exists(props) then
+                return null
+            fi
+
+            let found = Regex.match(IO.File.read_all_text(props), "Include=\"ghul\\.raster\"\\s+Version=\"([^\"]+)\"")
+
+            return if found.success then found.groups[1].value else null fi
         si
 
         _uses_raster(project: string) -> bool =>
