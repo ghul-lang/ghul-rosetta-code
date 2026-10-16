@@ -4,6 +4,6 @@
     "status": "published",
     "tags": ["graphics", "puzzles"],
     "interest": 5,
-    "first_output_ms": 545,
-    "run_ms": 566
+    "first_output_ms": 1255,
+    "run_ms": 1283
 }
