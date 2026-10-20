@@ -1,0 +1,15 @@
+use default
+
+let letters = ['a', 'b', 'c']
+let capitals = ['A', 'B', 'C']
+let digits = [1, 2, 3]
+
+rows() -> string{} is
+    for i in 0..letters.count do
+        yield "{letters[i]}{capitals[i]}{digits[i]}"
+    od
+si
+
+for row in rows() do
+    write_line(row)
+od
