@@ -1,0 +1,17 @@
+use default
+
+let letters = ['a', 'b', 'c']
+let capitals = ['A', 'B', 'C']
+let digits = [1, 2, 3]
+
+let i mut = 0
+
+do
+    if i == letters.count then
+        break
+    fi
+
+    write_line("{letters[i]}{capitals[i]}{digits[i]}")
+
+    i = i + 1
+od

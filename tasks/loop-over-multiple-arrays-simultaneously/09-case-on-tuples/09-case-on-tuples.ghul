@@ -1,0 +1,12 @@
+use default
+
+let letters = ['a', 'b', 'c']
+let capitals = ['A', 'B', 'C']
+let digits = [1, 2, 3]
+
+for i in 0..letters.count do
+    case (letters[i], capitals[i], digits[i])
+    when (letter, capital, digit) then
+        write_line("{letter}{capital}{digit}")
+    esac
+od
