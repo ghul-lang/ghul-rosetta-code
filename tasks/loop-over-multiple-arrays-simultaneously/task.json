@@ -1,7 +1,10 @@
 {
-    "task": "Loop over multiple arrays simultaneously",
-    "url": "https://rosettacode.org/wiki/Loop_over_multiple_arrays_simultaneously",
-    "status": "published",
-    "tags": ["basics", "pipes"],
-    "interest": 1
+  "task": "Loop over multiple arrays simultaneously",
+  "url": "https://rosettacode.org/wiki/Loop_over_multiple_arrays_simultaneously",
+  "status": "published",
+  "tags": [
+    "basics",
+    "pipes"
+  ],
+  "interest": 2
 }

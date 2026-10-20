@@ -1,0 +1,11 @@
+use default
+
+let letters = ['a', 'b', 'c']
+let capitals = ['A', 'B', 'C']
+let digits = [1, 2, 3]
+
+let rows = letters |> zip(capitals) |> zip(digits)
+
+for ((letter, capital), digit) in rows do
+    write_line("{letter}{capital}{digit}")
+od

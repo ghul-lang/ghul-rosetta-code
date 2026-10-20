@@ -1,0 +1,11 @@
+use default
+
+let letters = ['a', 'b', 'c'].iterator
+let capitals = ['A', 'B', 'C'].iterator
+let digits = [1, 2, 3].iterator
+
+while let letter = letters |> next(),
+          capital = capitals |> next(),
+          digit = digits |> next() do
+    write_line("{letter}{capital}{digit}")
+od

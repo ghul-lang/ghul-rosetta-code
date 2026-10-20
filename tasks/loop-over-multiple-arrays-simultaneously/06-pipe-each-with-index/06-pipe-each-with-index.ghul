@@ -1,0 +1,9 @@
+use default
+
+let capitals = ['A', 'B', 'C']
+let digits = [1, 2, 3]
+
+['a', 'b', 'c']
+    |> index()
+    |> each(x =>
+        write_line("{x.value}{capitals[x.index]}{digits[x.index]}"))
