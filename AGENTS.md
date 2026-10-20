@@ -792,9 +792,10 @@ are the reason a ghūl entry there needs no wrapper at all.
 ## Keeping GHUL.md in sync
 
 `GHUL.md` is not authored here. The master copy is `GHUL.md` in the
-[`ghul`](https://github.com/degory/ghul) compiler repo. Refresh the copy here when it has fallen
-behind and you are already touching this repository; never hand-edit it to correct a language
-reference error, fix it in the compiler repo instead.
+[`ghul`](https://github.com/ghul-lang/ghul) compiler repo, with its topic files in `ghul/docs/`;
+the copy here links to them on GitHub. Refresh it with `scripts/sync-ghul-md.sh`; a CI check runs
+`scripts/sync-ghul-md.sh --check` weekly and on any change to the file. Never hand-edit it to
+correct a language reference error, fix it in the compiler repo instead.
 
 ## See also
 
