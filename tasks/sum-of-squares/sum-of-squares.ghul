@@ -1,6 +1,6 @@
 use default
 
-sum_of_squares(values: Collections.Iterable[double]) -> double =>
+sum_of_squares(values: double{}) -> double =>
     values
         |> sum_by(v => v * v)
 

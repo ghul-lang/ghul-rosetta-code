@@ -64,7 +64,7 @@ by_date(file: string) -> LIST[ENTRY] is
     all
 si
 
-show(caption: string, entries: Iterable[ENTRY]) is
+show(caption: string, entries: ENTRY{}) is
     write_line(caption)
 
     entries |> each(entry => write_line("  {entry}"))

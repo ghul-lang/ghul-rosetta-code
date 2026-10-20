@@ -1,6 +1,6 @@
 use default
 
-greatest[T: Ghul.Comparable[T]](values: Iterable[T]) -> T? =>
+greatest[T: Ghul.Comparable[T]](values: T{}) -> T? =>
     values |> max_by(value => value)
 
 if let biggest = greatest([3, 9, 4, 1]) then

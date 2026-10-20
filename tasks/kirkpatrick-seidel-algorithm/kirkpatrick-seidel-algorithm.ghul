@@ -10,7 +10,7 @@ si
 
 slope(p: P, q: P) -> double => (q.y - p.y) / (q.x - p.x)
 
-median(values: Iterable[double]) -> double =>
+median(values: double{}) -> double =>
     let sorted = values |> sort() |> collect() in
     sorted[(sorted.count - 1) / 2]
 
@@ -110,7 +110,7 @@ upper_hull(points: List[P]) -> List[P] is
     upper(between |> cat([first, last]) |> collect(), first, last)
 si
 
-flipped(points: Iterable[P]) -> List[P] =>
+flipped(points: P{}) -> List[P] =>
     points |> map(p => P(p.x, -p.y)) |> collect()
 
 backwards(items: List[P]) -> List[P] =>

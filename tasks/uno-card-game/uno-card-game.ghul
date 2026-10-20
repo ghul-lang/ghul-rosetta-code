@@ -19,7 +19,7 @@ points(card: Card) -> int =>
     else 20
     fi
 
-shuffled(cards: Iterable[Card]) -> LIST[Card] =>
+shuffled(cards: Card{}) -> LIST[Card] =>
     LIST[Card](
         cards
             |> map(c => (card = c, key = random.next()))

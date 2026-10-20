@@ -29,7 +29,7 @@ sexy_groups(size: int) -> List[int]{} =>
         |> filter(members =>
             members[size - 1] < limit /\ (members |> all(is_prime)))
 
-show(values: Iterable[List[int]]) -> string =>
+show(values: List[int]{}) -> string =>
     values |> map(members => "({members |> join(" ")})") |> join(" ")
 
 last[T](values: List[T], wanted: int) -> T{} =>

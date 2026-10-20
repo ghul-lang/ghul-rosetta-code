@@ -6,7 +6,7 @@ use System.Text.RegularExpressions.Match
 let n = 10
 
 let text = IO.File.read_all_text("les-miserables.txt").to_lower_invariant()
-let words: Collections.Iterable[Match] = Regex("\\p{{L}}+").matches(text)
+let words: Match{} = Regex("\\p{{L}}+").matches(text)
 
 let counts =
     words

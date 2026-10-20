@@ -13,7 +13,7 @@ r2cf(numerator: long, denominator: long) -> long{} is
     od
 si
 
-show(terms: Iterable[long]) -> string =>
+show(terms: long{}) -> string =>
     let all = terms |> collect() in
     let rest = all |> skip(1) |> join() in
     if all.count == 1 then "[{all[0]}]" else "[{all[0]}; {rest}]" fi

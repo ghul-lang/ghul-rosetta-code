@@ -18,7 +18,7 @@ height(shape: Shape) -> int =>
 width(shape: Shape) -> int =>
     shape |> map(c => c.column) |> reduce(0, int.max) + 1
 
-normalised(cells: Iterable[Cell]) -> Shape is
+normalised(cells: Cell{}) -> Shape is
     let list = cells |> collect()
     let top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
     let left = list |> map(c => c.column) |> reduce(list[0].column, int.min)
