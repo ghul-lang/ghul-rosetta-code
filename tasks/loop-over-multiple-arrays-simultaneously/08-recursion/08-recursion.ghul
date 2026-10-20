@@ -1,11 +1,13 @@
 use default
 
-show(letters: char[], capitals: char[], digits: int[], from: int) is
-    if from < letters.count then
-        write_line("{letters[from]}{capitals[from]}{digits[from]}")
-
-        show(letters, capitals, digits, from + 1)
+show(
+    letters: List[char], capitals: List[char], digits: List[int]
+) -> string{} =>
+    if [letters.count, capitals.count, digits.count] |> min()! == 0 then
+        []
+    else
+        ["{letters[0]}{capitals[0]}{digits[0]}"] ++
+            show(letters[1..<0], capitals[1..<0], digits[1..<0])
     fi
-si
 
-show(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3], 0)
+write_line(show(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3]) |> join("\n"))

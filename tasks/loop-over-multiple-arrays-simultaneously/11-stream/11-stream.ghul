@@ -3,7 +3,9 @@ use default
 let letters = ['a', 'b', 'c']
 let capitals = ['A', 'B', 'C']
 let digits = [1, 2, 3]
+let count = [letters.count, capitals.count, digits.count] |> min()!
 
-stream(0, i => "{letters[i]}{capitals[i]}{digits[i]}" || i + 1)
-    |> take(letters.count)
+stream((letters, capitals, digits), (l, c, d) =>
+    "{l[0]}{c[0]}{d[0]}" || (l[1..<0], c[1..<0], d[1..<0]))
+    |> take(count)
     |> each(row => write_line(row))
