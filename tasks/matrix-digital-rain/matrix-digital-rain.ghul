@@ -3,7 +3,7 @@ use default
 let width = 32
 let height = 12
 let frames = 40
-let glyphs = "0123456789ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉ"
+let glyphs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+*=<>"
 
 class NOISE(seed: long) is
     next(limit: int) -> int is
