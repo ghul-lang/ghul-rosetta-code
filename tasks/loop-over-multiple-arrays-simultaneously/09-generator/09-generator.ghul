@@ -3,9 +3,10 @@ use default
 let letters = ['a', 'b', 'c']
 let capitals = ['A', 'B', 'C']
 let digits = [1, 2, 3]
+let count = [letters.count, capitals.count, digits.count] |> min()!
 
 rows() -> string{} is
-    for i in 0..letters.count do
+    for i in 0..count do
         yield "{letters[i]}{capitals[i]}{digits[i]}"
     od
 si
