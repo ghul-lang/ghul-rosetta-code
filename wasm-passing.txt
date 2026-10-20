@@ -653,6 +653,7 @@ md5
 md5-implementation
 meissel-mertens-constant
 menu
+merge-and-aggregate-datasets
 mertens-function
 metallic-ratios
 metered-concurrency
