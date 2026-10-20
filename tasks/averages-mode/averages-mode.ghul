@@ -1,6 +1,6 @@
 use default
 
-modes[T](values: Iterable[T]) -> List[T] =>
+modes[T](values: T{}) -> List[T] =>
     let groups = values |> group_by(value => value) in
     let most = groups.values |> map(group => group.count) |> max()! in
     groups

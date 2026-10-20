@@ -24,7 +24,7 @@ letters(s: string) -> string =>
             |> sort()
             |> collect())
 
-solve(names: Iterable[string]) is
+solve(names: string{}) is
     let states = names |> collect_set() |> sort() |> collect()
     let groups = MAP()
 

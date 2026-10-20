@@ -11,7 +11,7 @@ let months =
         for year in years for month in 1::12
         if has_five_weekends(year, month)]
 
-show(label: string, dates: Collections.Iterable[System.DateTime]) is
+show(label: string, dates: System.DateTime{}) is
     write_line(label)
 
     dates |> each(date => write_line("  {date.to_string("yyyy-MM")}"))

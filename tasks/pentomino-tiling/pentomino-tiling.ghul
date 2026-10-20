@@ -25,7 +25,7 @@ let pieces = [
 reading_order(a: Cell, b: Cell) -> int =>
     if a.row != b.row then a.row - b.row else a.column - b.column fi
 
-anchored(cells: Iterable[Cell]) -> Shape is
+anchored(cells: Cell{}) -> Shape is
     let sorted =
         cells
             |> sort(reading_order)

@@ -25,7 +25,7 @@ power_set[T](values: List[T]) -> LIST[LIST[T]] is
     return result
 si
 
-braced[T](values: Iterable[T]) -> string => "{{{values |> join(", ")}}}"
+braced[T](values: T{}) -> string => "{{{values |> join(", ")}}}"
 
 show[T](sets: LIST[LIST[T]]) -> string =>
     braced(sets |> map(subset => braced(subset)))

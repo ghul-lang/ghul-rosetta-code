@@ -16,7 +16,7 @@ digest(path: string) -> string =>
     let bytes = File.read_all_bytes(path) in
     System.Convert.to_hex_string(SHA256.hash_data(bytes))
 
-same_contents(root: string, size: long, paths: Iterable[string])
+same_contents(root: string, size: long, paths: string{})
     -> Group{} =>
     paths
         |> group_by(digest)

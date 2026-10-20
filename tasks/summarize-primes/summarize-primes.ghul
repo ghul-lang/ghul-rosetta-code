@@ -5,7 +5,7 @@ is_prime(value: int) -> bool =>
         |> take_while(divisor => divisor * divisor <= value)
         |> all(divisor => value % divisor != 0))
 
-running_sums(values: Iterable[int])
+running_sums(values: int{})
     -> (length: int, last: int, sum: int){}
 is
     let length mut = 0

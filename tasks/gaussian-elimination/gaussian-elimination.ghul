@@ -1,7 +1,7 @@
 use default
 use System.Math.*
 
-largest_magnitude(values: Iterable[double]) -> double =>
+largest_magnitude(values: double{}) -> double =>
     values |> reduce(0.0, (m, v) => max(m, abs(v)))
 
 solve(a: List[List[double]], b: List[double]) -> List[double] is

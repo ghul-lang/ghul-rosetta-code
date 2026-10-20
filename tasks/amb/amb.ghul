@@ -1,7 +1,7 @@
 use default
 
 amb[T](
-    sets: List[Iterable[T]],
+    sets: List[T{}],
     accepts: (T, T) -> bool
 ) -> LIST[T]{} is
     if sets.count == 0 then
@@ -22,7 +22,7 @@ amb[T](
     fi
 si
 
-let sets: List[Iterable[string]] = [
+let sets: List[string{}] = [
     ["the", "that", "a"],
     ["frog", "elephant", "thing"],
     ["walked", "treaded", "grows"],

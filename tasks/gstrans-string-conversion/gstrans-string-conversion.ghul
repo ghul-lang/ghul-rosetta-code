@@ -19,7 +19,7 @@ encode_one(value: int) -> string =>
         esac
     fi
 
-encode(values: Iterable[int]) -> string =>
+encode(values: int{}) -> string =>
     values |> map(encode_one) |> join("")
 
 decode(text: string) -> Decoded is
@@ -72,7 +72,7 @@ decode(text: string) -> Decoded is
     Decoded.VALUES(values)
 si
 
-show(values: Iterable[int]) -> string =>
+show(values: int{}) -> string =>
     values
         |> map(v =>
             if v >= 32 /\ v < 127 then "{char(v)}" else "[{v}]" fi)

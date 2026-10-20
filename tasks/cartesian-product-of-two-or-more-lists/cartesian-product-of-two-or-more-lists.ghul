@@ -30,7 +30,7 @@ tuples(lists: List[List[int]], at: int) -> List[int]{} is
     fi
 si
 
-show(values: Iterable[string]) -> string => "{{{values |> join(", ")}}}"
+show(values: string{}) -> string => "{{{values |> join(", ")}}}"
 
 show_numbers(values: List[int]) -> string =>
     show(values |> map(value => "{value}"))

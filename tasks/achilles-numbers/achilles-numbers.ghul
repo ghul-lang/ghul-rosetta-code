@@ -58,7 +58,7 @@ achilles_numbers() -> int{} is
     od
 si
 
-show(heading: string, numbers: Iterable[int]) is
+show(heading: string, numbers: int{}) is
     write_line(heading)
 
     for row in numbers |> chunk(10) do

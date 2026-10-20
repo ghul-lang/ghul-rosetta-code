@@ -11,7 +11,7 @@ distance(a: int, b: int) -> double =>
     let (ax, ay) = points[a], (bx, by) = points[b] in
     double.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by))
 
-length(edges: Iterable[Edge]) -> double =>
+length(edges: Edge{}) -> double =>
     edges |> sum_by((from, to) => distance(from, to))
 
 spanning_tree(n: int) -> List[Edge] is

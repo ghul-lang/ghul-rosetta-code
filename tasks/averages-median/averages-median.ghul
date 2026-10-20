@@ -1,6 +1,6 @@
 use default
 
-median(values: Collections.Iterable[double]) -> double is
+median(values: double{}) -> double is
     let ordered = values |> sort() |> collect()
 
     assert ordered.count > 0 else "the median of no values is not defined"

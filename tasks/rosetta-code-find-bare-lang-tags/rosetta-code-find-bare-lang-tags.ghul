@@ -9,7 +9,7 @@ bare_tags(page: string) -> (language: string, page: string){} is
     let text = IO.File.read_all_text("{page}.txt")
     let language mut = "no language"
 
-    let matches: Collections.Iterable[Match] = marker.matches(text)
+    let matches: Match{} = marker.matches(text)
 
     for found in matches do
         if found.groups[1].success then

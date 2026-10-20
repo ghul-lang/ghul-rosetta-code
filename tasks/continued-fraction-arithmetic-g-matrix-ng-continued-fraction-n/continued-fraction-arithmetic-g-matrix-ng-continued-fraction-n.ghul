@@ -17,7 +17,7 @@ si
 
 square_root_of_two() -> long{} => [1L] |> cat(repeat(2L))
 
-transform(matrix: Matrix, source: Iterable[long]) -> long{} is
+transform(matrix: Matrix, source: long{}) -> long{} is
     let (a1, a, b1, b) mut = matrix
     let terms = source.iterator
 
@@ -38,7 +38,7 @@ transform(matrix: Matrix, source: Iterable[long]) -> long{} is
     od
 si
 
-show(terms: Iterable[long]) -> string =>
+show(terms: long{}) -> string =>
     let shown = terms |> take(21) |> collect() in
     let rest = shown |> skip(1) |> take(19) |> join() in
     let more = if shown.count > 20 then ", ..." else "" fi in

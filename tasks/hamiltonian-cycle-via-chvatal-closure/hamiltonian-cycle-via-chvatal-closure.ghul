@@ -2,7 +2,7 @@ use default
 
 use Graph = List[SET[int]]
 
-graph(n: int, edges: Iterable[(int, int)]) -> Graph is
+graph(n: int, edges: (int, int){}) -> Graph is
     let adjacency = 0..n |> map(_ => SET()) |> collect()
 
     for (u, v) in edges do

@@ -1,6 +1,6 @@
 use default
 
-fold_left[T, A](values: Iterable[T], seed: A, combine: (A, T) -> A) -> A is
+fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A is
     let running mut = seed
 
     for value in values do

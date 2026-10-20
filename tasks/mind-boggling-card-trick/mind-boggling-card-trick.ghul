@@ -2,7 +2,7 @@ use default
 
 let random = System.Random(52)
 
-shuffled[T](items: Iterable[T]) -> LIST[T] =>
+shuffled[T](items: T{}) -> LIST[T] =>
     items |> sort_by(_ => random.next()) |> collect_mutable()
 
 trial() -> (black_in_black: int, red_in_red: int) is

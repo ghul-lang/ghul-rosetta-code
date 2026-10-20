@@ -1,8 +1,8 @@
 use default
 use Ghul.Comparable
 
-merge_two[T: Comparable[T]](left: Iterable[T],
-                            right: Iterable[T]) -> T{}
+merge_two[T: Comparable[T]](left: T{},
+                            right: T{}) -> T{}
 is
     let ahead = left.iterator
     let behind = right.iterator
@@ -34,7 +34,7 @@ is
     od
 si
 
-merge_all[T: Comparable[T]](streams: List[Iterable[T]]) -> T{} =>
+merge_all[T: Comparable[T]](streams: List[T{}]) -> T{} =>
     case streams.count
     when 0 then LIST()
     when 1 then streams[0]
@@ -62,7 +62,7 @@ write_line("three streams:")
 write_line("  {merge_all(streams) |> join(" ")}")
 
 write_line("nothing to merge:")
-write_line("  [{merge_all(LIST[Iterable[int]]()) |> join(" ")}]")
+write_line("  [{merge_all(LIST[int{}]()) |> join(" ")}]")
 
 let words =
     [pipe(["apple", "cherry", "grape"]), pipe(["banana", "date"])]

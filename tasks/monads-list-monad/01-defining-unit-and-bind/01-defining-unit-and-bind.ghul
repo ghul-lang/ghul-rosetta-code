@@ -1,17 +1,17 @@
 use default
 use System.Convert.to_string
 
-unit[T](value: T) -> Iterable[T] => [value]
+unit[T](value: T) -> T{} => [value]
 
->>=[T, U](values: Iterable[T], f: (T) -> Iterable[U])
-    -> Iterable[U]
+>>=[T, U](values: T{}, f: (T) -> U{})
+    -> U{}
 =>
     values |> flat_map(f)
 
-divisors(n: int) -> Iterable[int] =>
+divisors(n: int) -> int{} =>
     1::n |> filter(d => n % d == 0)
 
-spellings(n: int) -> Iterable[string] =>
+spellings(n: int) -> string{} =>
     ["{n}", "0b{to_string(n, 2)}"]
 
 write_line((unit(6) >>= divisors) |> join())
