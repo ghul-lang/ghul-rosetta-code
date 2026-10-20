@@ -601,7 +601,7 @@ loop-over-multiple-arrays-simultaneously/01-zip
 loop-over-multiple-arrays-simultaneously/02-index-range
 loop-over-multiple-arrays-simultaneously/03-while
 loop-over-multiple-arrays-simultaneously/04-do-and-break
-loop-over-multiple-arrays-simultaneously/05-comprehension
+loop-over-multiple-arrays-simultaneously/05-array-comprehension
 loop-over-multiple-arrays-simultaneously/06-pipe-each-with-index
 loop-over-multiple-arrays-simultaneously/07-iterators-and-next
 loop-over-multiple-arrays-simultaneously/08-recursion
