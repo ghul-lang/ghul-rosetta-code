@@ -14,8 +14,8 @@ class NOISE(seed: long) is
 si
 
 class DROP(noise: NOISE) is
-    head: int;
-    length: int;
+    head: int
+    length: int
 
     init(..) is restart(); si
 
