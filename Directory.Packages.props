@@ -5,7 +5,7 @@
 
   <ItemGroup>
     <PackageVersion Include="ghul.runtime" Version="29.2.0" />
-    <PackageVersion Include="ghul.raster" Version="0.13.1" />
+    <PackageVersion Include="ghul.raster" Version="0.14.0" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.12" />
     <PackageVersion Include="MSTest.TestFramework" Version="4.4.1" />
   </ItemGroup>
