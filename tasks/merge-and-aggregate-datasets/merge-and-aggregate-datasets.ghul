@@ -32,7 +32,7 @@ patients |> each(patient => (
         if by_patient.contains_key(patient.id) then
             by_patient[patient.id]
         else
-            LIST[VISIT]()
+            LIST()
         fi
 
     let latest =
