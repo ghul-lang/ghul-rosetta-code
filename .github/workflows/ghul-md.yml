@@ -1,0 +1,29 @@
+name: GHUL.md in step
+
+# GHUL.md here is a copy of ghul/GHUL.md. The check runs when a change touches
+# the copy or the script, and weekly, so drift in the master shows up as a
+# failing scheduled run rather than as a failure on an unrelated pull request.
+on:
+  pull_request:
+    paths:
+      - GHUL.md
+      - scripts/sync-ghul-md.sh
+      - .github/workflows/ghul-md.yml
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  in_step:
+    name: GHUL.md matches ghul/main
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Compare with ghul/main
+      run: ./scripts/sync-ghul-md.sh --check
