@@ -3,7 +3,9 @@ use default
 merge(
     letters: List[char], capitals: List[char], digits: List[int]
 ) -> string{} =>
-    if let [lh, ..lr] = letters, [ch, ..cr] = capitals, [dh, ..dr] = digits then
+    if let [lh, ..lr] = letters,
+           [ch, ..cr] = capitals,
+           [dh, ..dr] = digits then
         ["{lh}{ch}{dh}"] ++ merge(lr, cr, dr)
     else
         []
