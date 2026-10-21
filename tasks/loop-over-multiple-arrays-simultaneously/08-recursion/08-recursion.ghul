@@ -1,13 +1,12 @@
 use default
 
-show(
+merge(
     letters: List[char], capitals: List[char], digits: List[int]
 ) -> string{} =>
-    if [letters.count, capitals.count, digits.count] |> min()! > 0 then
-        ["{letters[0]}{capitals[0]}{digits[0]}"] ++
-            show(letters[1..<0], capitals[1..<0], digits[1..<0])
+    if let [lh, ..lr] = letters, [ch, ..cr] = capitals, [dh, ..dr] = digits then
+        ["{lh}{ch}{dh}"] ++ merge(lr, cr, dr)
     else
         []
     fi
 
-write_line(show(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3]) |> join("\n"))
+write_line(merge(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3]) |> join("\n"))
