@@ -109,6 +109,8 @@ show(m: Matrix) is
     write_line("")
 si
 
+write_line("Enter the number of rows and columns, then each row:")
+
 let size = IO.Std.read_line()!.split([' '])
 let rows = int.parse(size[0])
 

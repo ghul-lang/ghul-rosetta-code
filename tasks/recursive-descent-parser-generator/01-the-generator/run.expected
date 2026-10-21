@@ -1,5 +1,7 @@
 use default
 
+write_line("Enter an expression:")
+
 let source = IO.Std.read_line() ?? ""
 
 tokenize(text: string) -> LIST[string] is

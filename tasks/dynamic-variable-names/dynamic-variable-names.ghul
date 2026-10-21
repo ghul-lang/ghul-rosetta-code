@@ -3,7 +3,12 @@ use IO.Std.read_line
 
 let variables = MAP()
 
+write_line("Enter a variable name:")
+
 let name = read_line()!
+
+write_line("Enter its integer value:")
+
 let value = int.parse(read_line()!)
 
 variables[name] = value

@@ -36,6 +36,8 @@ run(program: string) -> int is
     accumulator
 si
 
+write_line("Enter HQ9+ programs, one per line:")
+
 while let program = read_line() do
     write_line("> {program}")
 

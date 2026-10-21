@@ -16,6 +16,8 @@ verse(name: string) -> string is
     "{name}!\n"
 si
 
+write_line("Enter names, one per line:")
+
 while let name = read_line() do
     write_line(verse(name.trim()))
 od

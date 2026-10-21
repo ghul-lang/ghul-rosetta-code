@@ -57,6 +57,8 @@ let choose_computer_move = () is
     fi
 si
 
+write_line("Enter rock, paper or scissors, one per line:")
+
 let line mut = read_line()
 
 while line? do

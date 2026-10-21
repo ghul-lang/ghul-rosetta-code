@@ -30,6 +30,8 @@ longest_lines(longest: string, ties: string) -> string =>
         ties
     fi
 
+write_line("Enter lines; the longest are printed at the end:")
+
 if let first = read_line() then
     write_line(longest_lines(first, first))
 fi

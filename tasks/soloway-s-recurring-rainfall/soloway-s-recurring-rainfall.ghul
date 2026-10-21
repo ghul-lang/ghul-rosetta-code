@@ -3,6 +3,8 @@ use default
 let total mut = 0L
 let count mut = 0
 
+write_line("Enter integers, one per line; 99999 ends the input:")
+
 while true do
     let line = IO.Std.read_line()
 

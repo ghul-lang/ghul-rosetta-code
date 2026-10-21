@@ -69,6 +69,8 @@ class FORMULA(text: string) is
     si
 si
 
+write_line("Enter chemical formulas, one per line:")
+
 while let formula = read_line() do
     let mass = FORMULA(formula).group()
 
