@@ -11,6 +11,6 @@
 
 '''ghūl''' is a general-purpose programming language, combining functional and object-oriented styles. It supports first-class functions and closures, classes, structs, traits, generics, async-await and generators, and has strong local type inference. The syntax is inspired by no-brace languages, including Algol 68 and Pascal.
 
-ghūl targets .NET, and inter-operates with other .NET languages. [https://github.com/ghul-lang/ghul The compiler itself] is written in ghūl.
+ghūl targets .NET, and inter-operates with other .NET languages. [https://github.com/degory/ghul The compiler itself] is written in ghūl.
 
 More information is available at [https://ghul.dev ghul.dev]. Try ghūl without installing anything in the [https://ghul.dev/playground/ online playground] or the [https://ghul.dev/repl/ online REPL]. To work locally, install the [https://www.nuget.org/packages/ghul.cli ghul.cli] .NET tool for a terminal REPL (<code>ghul repl</code>), or [https://www.nuget.org/packages/ghul.jupyter ghul.jupyter] for a Jupyter kernel.
