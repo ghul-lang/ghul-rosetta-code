@@ -37,8 +37,8 @@ it is run. So:
 
 ## The style guide applies here
 
-[`STYLE.md`](https://github.com/degory/ghul-style/blob/main/STYLE.md) in
-[degory/ghul-style](https://github.com/degory/ghul-style) holds the terminology, tone and
+[`STYLE.md`](https://github.com/ghul-lang/ghul-style/blob/main/STYLE.md) in
+[ghul-lang/ghul-style](https://github.com/ghul-lang/ghul-style) holds the terminology, tone and
 code-style rules for everything in the ghūl ecosystem that a person reads. It was written for
 `ghul-examples` and `ghul-dev`, and it governs the solutions here too: they are posted to a public
 wiki, and they are carried on ghul.dev as runnable examples, so a reader meets them in the same
@@ -326,7 +326,7 @@ surprise, a misread of the task text.
 
 When a minimal repro reproduces the problem outside the solution, it is a
 compiler bug, and a Rosetta Code entry is not the place to work around one.
-Raise it in degory/ghul, mark the task blocked against the issue, and move
+Raise it in ghul-lang/ghul, mark the task blocked against the issue, and move
 on to the next task. Rewriting the solution as an imperative loop instead
 ships the workaround to the wiki, where it outlives the bug and teaches
 readers an idiom that does not exist.
@@ -390,7 +390,7 @@ Both flags need `--format` alongside them; on its own, `--format-width` sets a w
 then does not format anything.
 
 **Its output carries statement terminators**, which this repository's sources do not
-(degory/ghul#2298), so it cannot be used unattended here: strip them from what it produces before
+(ghul-lang/ghul#2298), so it cannot be used unattended here: strip them from what it produces before
 keeping it. Read the result in any case - the formatter is faithful but it is not the author, and a
 solution's line breaks are often deliberate.
 

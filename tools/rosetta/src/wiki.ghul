@@ -26,7 +26,7 @@ namespace Rosetta is
 
             _client.default_request_headers.add(
                 "User-Agent",
-                "ghul-rosetta/1.0 (https://github.com/degory/ghul-rosetta-code)"
+                "ghul-rosetta/1.0 (https://github.com/ghul-lang/ghul-rosetta-code)"
             )
         si
 
