@@ -198,6 +198,8 @@ si
 
 let previous mut = null
 
+write_line("Enter expressions, one per line:")
+
 while let line = read_line() do
     write_line("> {line}")
 

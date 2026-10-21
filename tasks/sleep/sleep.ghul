@@ -3,6 +3,8 @@ use IO.Std.read_line
 use System.Diagnostics.Stopwatch
 use System.Threading.Thread
 
+write_line("Enter the milliseconds to sleep:")
+
 let requested = int.parse(read_line()!)
 
 write_line("Sleeping...")

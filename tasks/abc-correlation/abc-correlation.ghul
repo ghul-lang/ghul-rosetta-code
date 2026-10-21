@@ -8,6 +8,8 @@ balanced(text: string) -> bool =>
     in
     counts |> all(n => n == counts[0])
 
+write_line("Enter strings, one per line:")
+
 while let text = IO.Std.read_line() do
     let verdict = if balanced(text) then "is" else "is not" fi
 

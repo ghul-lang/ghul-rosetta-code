@@ -67,6 +67,8 @@ solve(terms: List[Term]) -> string? is
     return null
 si
 
+write_line("Enter four digits per line to solve:")
+
 while let line = read_line() do
     let digits = line.trim()
 

@@ -1,3 +1,4 @@
+Enter strings, one per line:
 'abc' is an ABC string
 'aabbcc' is an ABC string
 'abbc' is not an ABC string

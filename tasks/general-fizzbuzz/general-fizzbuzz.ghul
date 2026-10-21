@@ -1,8 +1,12 @@
 use default
 use IO.Std.read_line
 
+write_line("Enter the maximum:")
+
 let max_n = int.parse(read_line()!)
 let factors = LIST()
+
+write_line("Enter three factors, each a number and its word:")
 
 for _ in 0..3 do
     let parts = read_line()!.split([' '])
