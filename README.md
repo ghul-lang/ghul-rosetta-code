@@ -31,7 +31,7 @@ posted solution shows up as a failing test here rather than as a wrong answer on
   each removal before keeping it.
 - `tools/rosetta/` - the ledger and the wiki client.
 - `GHUL.md` - language reference, a copy of the master in the
-  [`ghul`](https://github.com/degory/ghul) repo. Refresh it when it falls behind; never edit it
+  [`ghul`](https://github.com/ghul-lang/ghul) repo. Refresh it when it falls behind; never edit it
   here.
 
 ## adding a task
@@ -474,4 +474,4 @@ license that way.
 
 ## issues
 
-[View open issues](https://github.com/degory/ghul/issues?q=is%3Aopen+is%3Aissue+label%3Aghul-rosetta-code) or [raise a new one](https://github.com/degory/ghul/issues/new?labels=ghul-rosetta-code).
+[View open issues](https://github.com/ghul-lang/ghul/issues?q=is%3Aopen+is%3Aissue+label%3Aghul-rosetta-code) or [raise a new one](https://github.com/ghul-lang/ghul/issues/new?labels=ghul-rosetta-code).

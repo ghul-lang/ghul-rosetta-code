@@ -2,7 +2,7 @@ Install the .NET 10 SDK from
 https://dotnet.microsoft.com/en-us/download/dotnet/10.0 - the compiler
 runs on it, and a ghūl project is an ordinary .NET SDK project.
 
-1. Clone https://github.com/degory/ghul-repository-template, or
+1. Clone https://github.com/ghul-lang/ghul-repository-template, or
    the scratchpad or examples repository, for a project to start
    from. The compiler is pinned in each as a local .NET tool, so
    `dotnet tool restore` fetches the right version with the code.

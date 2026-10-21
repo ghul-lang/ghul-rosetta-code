@@ -23,7 +23,7 @@ run. So the diff's audience is a stranger reading the page, not a maintainer
 reading the repository, and that is the standard to hold it to.
 
 `AGENTS.md` is the authority on how a solution is written, and `STYLE.md` from
-`degory/ghul-style` governs its identifiers and this repository's prose. Read both
+`ghul-lang/ghul-style` governs its identifiers and this repository's prose. Read both
 rather than restating them here.
 
 ## What to watch for here
@@ -52,7 +52,7 @@ rather than restating them here.
   comes first. See 'When a solution carries words, and when it does not'.
 - **A compiler bug worked around rather than reported.** A solution reshaped to
   avoid a bug ships the workaround to the wiki, where it outlives the bug. The
-  task is marked blocked against an issue in `degory/ghul` instead.
+  task is marked blocked against an issue in `ghul-lang/ghul` instead.
 - **Line width.** 64 columns is the aim and 76 the limit, because the page renders
   the code in a fixed-width block and ghul.dev in a narrower prose column.
 - **Statement terminators.** Sources here carry none: the line break is the
