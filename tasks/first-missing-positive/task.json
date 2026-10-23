@@ -1,0 +1,10 @@
+{
+    "task": "Find first missing positive",
+    "url": "https://rosettacode.org/wiki/Find_first_missing_positive",
+    "status": "solved",
+    "tags": [
+        "algorithms",
+        "data-structures"
+    ],
+    "interest": 2
+}
