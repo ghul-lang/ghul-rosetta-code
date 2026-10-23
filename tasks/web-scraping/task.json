@@ -1,7 +1,7 @@
 {
   "task": "Web scraping",
   "url": "https://rosettacode.org/wiki/Web_scraping",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "text-processing",
     "dotnet-interop"

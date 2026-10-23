@@ -1,7 +1,7 @@
 {
   "task": "Palindrome dates",
   "url": "https://rosettacode.org/wiki/Palindrome_dates",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "date-time",
     "strings"

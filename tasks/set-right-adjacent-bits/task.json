@@ -1,7 +1,7 @@
 {
     "task": "Set right-adjacent bits",
     "url": "https://rosettacode.org/wiki/Set_right-adjacent_bits",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "closures"],
     "interest": 2
 }

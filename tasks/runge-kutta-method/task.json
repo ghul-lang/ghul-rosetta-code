@@ -1,7 +1,7 @@
 {
     "task": "Runge-Kutta method",
     "url": "https://rosettacode.org/wiki/Runge-Kutta_method",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "closures"],
     "interest": 3
 }

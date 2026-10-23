@@ -1,7 +1,7 @@
 {
     "task": "Password generator",
     "url": "https://rosettacode.org/wiki/Password_generator",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "closures"],
     "interest": 2
 }

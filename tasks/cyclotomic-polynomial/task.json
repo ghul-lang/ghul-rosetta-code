@@ -1,7 +1,7 @@
 {
     "task": "Cyclotomic polynomial",
     "url": "https://rosettacode.org/wiki/Cyclotomic_polynomial",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "number-theory", "pattern-matching"],
     "interest": 3,
     "run_ms": 1960

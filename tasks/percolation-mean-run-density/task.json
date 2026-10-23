@@ -1,7 +1,7 @@
 {
   "task": "Percolation/Mean run density",
   "url": "https://rosettacode.org/wiki/Percolation/Mean_run_density",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "simulation",
     "maths"

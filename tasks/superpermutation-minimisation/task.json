@@ -1,7 +1,7 @@
 {
   "task": "Superpermutation minimisation",
   "url": "https://rosettacode.org/wiki/Superpermutation_minimisation",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "recursion",

@@ -1,7 +1,7 @@
 {
   "task": "I before E except after C",
   "url": "https://rosettacode.org/wiki/I_before_E_except_after_C",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "text-processing",
     "strings"

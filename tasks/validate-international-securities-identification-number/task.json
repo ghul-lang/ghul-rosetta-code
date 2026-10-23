@@ -1,7 +1,7 @@
 {
   "task": "Validate International Securities Identification Number",
   "url": "https://rosettacode.org/wiki/Validate_International_Securities_Identification_Number",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "dotnet-interop"

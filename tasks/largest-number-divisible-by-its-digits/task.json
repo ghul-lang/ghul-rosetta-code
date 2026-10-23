@@ -1,7 +1,7 @@
 {
     "task": "Largest number divisible by its digits",
     "url": "https://rosettacode.org/wiki/Largest_number_divisible_by_its_digits",
-    "status": "solved",
+    "status": "published",
     "tags": ["number-theory", "puzzles"],
     "interest": 2,
     "first_output_ms": 759,

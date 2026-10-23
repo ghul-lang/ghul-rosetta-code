@@ -1,7 +1,7 @@
 {
   "task": "MD5",
   "url": "https://rosettacode.org/wiki/MD5",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "strings"

@@ -1,7 +1,7 @@
 {
     "task": "Date manipulation",
     "url": "https://rosettacode.org/wiki/Date_manipulation",
-    "status": "solved",
+    "status": "published",
     "tags": ["date-time", "dotnet-interop"],
     "interest": 2
 }

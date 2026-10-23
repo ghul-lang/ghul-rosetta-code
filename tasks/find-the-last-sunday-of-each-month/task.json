@@ -1,7 +1,7 @@
 {
     "task": "Find the last Sunday of each month",
     "url": "https://rosettacode.org/wiki/Find_the_last_Sunday_of_each_month",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "date-time"
     ],

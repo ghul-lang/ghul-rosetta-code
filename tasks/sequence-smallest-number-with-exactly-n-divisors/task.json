@@ -1,7 +1,7 @@
 {
     "task": "Sequence: smallest number with exactly n divisors",
     "url": "https://rosettacode.org/wiki/Sequence:_smallest_number_with_exactly_n_divisors",
-    "status": "solved",
+    "status": "published",
     "tags": ["number-theory", "pipes"],
     "interest": 2
 }

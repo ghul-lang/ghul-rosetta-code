@@ -1,7 +1,7 @@
 {
   "task": "Non-decimal radices/Input",
   "url": "https://rosettacode.org/wiki/Non-decimal_radices/Input",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "parsing",
     "dotnet-interop"

@@ -1,7 +1,7 @@
 {
     "task": "Playfair cipher",
     "url": "https://rosettacode.org/wiki/Playfair_cipher",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "generators", "classes"],
     "interest": 3
 }

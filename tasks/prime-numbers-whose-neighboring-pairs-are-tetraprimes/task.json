@@ -1,7 +1,7 @@
 {
     "task": "Prime numbers whose neighboring pairs are tetraprimes",
     "url": "https://rosettacode.org/wiki/Prime_numbers_whose_neighboring_pairs_are_tetraprimes",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "first_output_ms": 686,

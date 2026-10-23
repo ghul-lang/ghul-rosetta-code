@@ -1,7 +1,7 @@
 {
     "task": "Partition an integer x into n primes",
     "url": "https://rosettacode.org/wiki/Partition_an_integer_x_into_n_primes",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "recursion"],
     "interest": 2
 }

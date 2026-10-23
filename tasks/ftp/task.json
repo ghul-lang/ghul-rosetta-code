@@ -1,7 +1,7 @@
 {
   "task": "FTP",
   "url": "https://rosettacode.org/wiki/FTP",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "concurrency"

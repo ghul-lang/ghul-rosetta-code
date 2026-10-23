@@ -1,7 +1,7 @@
 {
     "task": "Primality by Wilson's theorem",
     "url": "https://rosettacode.org/wiki/Primality_by_Wilson's_theorem",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2
 }

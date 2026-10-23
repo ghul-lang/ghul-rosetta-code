@@ -1,7 +1,7 @@
 {
     "task": "Round-robin tournament schedule",
     "url": "https://rosettacode.org/wiki/Round-robin_tournament_schedule",
-    "status": "solved",
+    "status": "published",
     "tags": ["algorithms", "generators"],
     "interest": 2
 }

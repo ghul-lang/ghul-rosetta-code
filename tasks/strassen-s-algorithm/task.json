@@ -1,7 +1,7 @@
 {
   "task": "Strassen's algorithm",
   "url": "https://rosettacode.org/wiki/Strassen's_algorithm",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "maths",
     "recursion",

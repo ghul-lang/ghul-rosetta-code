@@ -1,7 +1,7 @@
 {
   "task": "Bernstein basis polynomials",
   "url": "https://rosettacode.org/wiki/Bernstein_basis_polynomials",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "maths",
     "recursion"

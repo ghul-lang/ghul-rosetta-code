@@ -1,7 +1,7 @@
 {
     "task": "Numerical integration/Gauss-Legendre Quadrature",
     "url": "https://rosettacode.org/wiki/Numerical_integration/Gauss-Legendre_Quadrature",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "algorithms"],
     "interest": 2
 }

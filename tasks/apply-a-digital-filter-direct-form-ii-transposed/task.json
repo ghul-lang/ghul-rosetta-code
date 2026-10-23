@@ -1,7 +1,7 @@
 {
     "task": "Apply a digital filter (direct form II transposed)",
     "url": "https://rosettacode.org/wiki/Apply_a_digital_filter_(direct_form_II_transposed)",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "maths",
         "algorithms"

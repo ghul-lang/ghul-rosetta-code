@@ -1,7 +1,7 @@
 {
   "task": "Palindromic primes in base 16",
   "url": "https://rosettacode.org/wiki/Palindromic_primes_in_base_16",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "primes",
     "strings"

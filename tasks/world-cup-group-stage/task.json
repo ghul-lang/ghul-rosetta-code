@@ -1,7 +1,7 @@
 {
     "task": "World Cup group stage",
     "url": "https://rosettacode.org/wiki/World_Cup_group_stage",
-    "status": "solved",
+    "status": "published",
     "tags": ["generators", "pattern-matching"],
     "interest": 3
 }

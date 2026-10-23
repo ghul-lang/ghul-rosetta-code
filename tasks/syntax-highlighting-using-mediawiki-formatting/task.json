@@ -1,7 +1,7 @@
 {
   "task": "Syntax highlighting using Mediawiki formatting",
   "url": "https://rosettacode.org/wiki/Syntax_highlighting_using_Mediawiki_formatting",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "text-processing",
     "strings",

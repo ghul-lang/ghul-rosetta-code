@@ -1,7 +1,7 @@
 {
   "task": "SOAP",
   "url": "https://rosettacode.org/wiki/SOAP",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "parsing"

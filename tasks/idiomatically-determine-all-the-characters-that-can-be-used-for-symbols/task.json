@@ -1,7 +1,7 @@
 {
   "task": "Idiomatically determine all the characters that can be used for symbols",
   "url": "https://rosettacode.org/wiki/Idiomatically_determine_all_the_characters_that_can_be_used_for_symbols",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "dotnet-interop"

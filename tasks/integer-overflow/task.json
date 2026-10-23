@@ -1,7 +1,7 @@
 {
   "task": "Integer overflow",
   "url": "https://rosettacode.org/wiki/Integer_overflow",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "dotnet-interop"

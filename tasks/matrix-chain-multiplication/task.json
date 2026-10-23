@@ -1,7 +1,7 @@
 {
   "task": "Matrix chain multiplication",
   "url": "https://rosettacode.org/wiki/Matrix_chain_multiplication",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "algorithms",
     "recursion"

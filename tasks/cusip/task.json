@@ -1,7 +1,7 @@
 {
     "task": "CUSIP",
     "url": "https://rosettacode.org/wiki/CUSIP",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "pattern-matching"],
     "interest": 2
 }

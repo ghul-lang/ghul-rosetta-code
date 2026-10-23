@@ -1,7 +1,7 @@
 {
     "task": "GSTrans string conversion",
     "url": "https://rosettacode.org/wiki/GSTrans_string_conversion",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "unions", "parsing"],
     "interest": 2
 }

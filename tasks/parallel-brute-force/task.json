@@ -1,7 +1,7 @@
 {
     "task": "Parallel brute force",
     "url": "https://rosettacode.org/wiki/Parallel_brute_force",
-    "status": "solved",
+    "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
     "interest": 3,
     "run_ms": 4862

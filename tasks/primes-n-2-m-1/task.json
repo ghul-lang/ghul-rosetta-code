@@ -1,7 +1,7 @@
 {
     "task": "Primes: n*2^m+1",
     "url": "https://rosettacode.org/wiki/Primes:_n*2^m+1",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2
 }

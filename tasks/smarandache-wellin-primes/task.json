@@ -1,7 +1,7 @@
 {
     "task": "Smarandache-Wellin primes",
     "url": "https://rosettacode.org/wiki/Smarandache-Wellin_primes",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory", "generators"],
     "interest": 3,
     "run_ms": 61082

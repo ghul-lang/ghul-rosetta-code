@@ -1,7 +1,7 @@
 {
     "task": "Primes - allocate descendants to their ancestors",
     "url": "https://rosettacode.org/wiki/Primes_-_allocate_descendants_to_their_ancestors",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory", "generators"],
     "interest": 3
 }

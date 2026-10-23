@@ -1,7 +1,7 @@
 {
     "task": "Latin Squares in reduced form/Randomizing using Jacobson and Matthews' technique",
     "url": "https://rosettacode.org/wiki/Latin_Squares_in_reduced_form/Randomizing_using_Jacobson_and_Matthews'_technique",
-    "status": "solved",
+    "status": "published",
     "tags": ["algorithms", "classes", "maths"],
     "interest": 2,
     "first_output_ms": 2688,

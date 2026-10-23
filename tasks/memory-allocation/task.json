@@ -1,7 +1,7 @@
 {
   "task": "Memory allocation",
   "url": "https://rosettacode.org/wiki/Memory_allocation",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "basics"

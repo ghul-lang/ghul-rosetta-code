@@ -1,7 +1,7 @@
 {
   "task": "Soundex",
   "url": "https://rosettacode.org/wiki/Soundex",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "pattern-matching"

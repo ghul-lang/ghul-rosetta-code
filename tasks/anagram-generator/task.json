@@ -1,7 +1,7 @@
 {
     "task": "Anagram generator",
     "url": "https://rosettacode.org/wiki/Anagram_generator",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "strings",
         "recursion",
