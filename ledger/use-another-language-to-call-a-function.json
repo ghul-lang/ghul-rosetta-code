@@ -1,0 +1,6 @@
+{
+  "title": "Use another language to call a function",
+  "state": "rejected",
+  "reason": "no-equivalent",
+  "note": "the task is a C program calling a function the other language exports under a C name; ghul cannot export one"
+}
