@@ -49,4 +49,5 @@ si
 write_line("pair     dist    path")
 
 [(i, j) for i in 1::n for j in 1::n if i != j]
-    |> each((i, j) => write_line("{i} -> {j}    {dist[(i, j)],4}     {path(i, j)}"))
+    |> each((i, j) => write_line(
+        "{i} -> {j}    {dist[(i, j)],4}     {path(i, j)}"))
