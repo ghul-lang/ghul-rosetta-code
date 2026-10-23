@@ -2,5 +2,8 @@
   "title": "Gaussian primes",
   "slug": "gaussian-primes",
   "state": "published",
-  "published_hash": "2520eddb5d6972bf7dbb46acd9ad088ee7850d2b1b0558e1fa21dc1b666501ac"
+  "published_hash": "6718f3599a8e4a419ac41dd172002cc5ddd2e515b9b775de62f97c7fef71a71f",
+  "image_hashes": {
+    "Ghul-gaussian-primes-gaussian-primes.png": "eb03a3ed57af88ba0a14a55f15cf1bd821300a56"
+  }
 }
