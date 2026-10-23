@@ -1,5 +1,5 @@
 use default
 
-for value in from(0, 5) |> take_while(value => value <= 20) do
+for value in 0::20 |> step(5) do
     write_line("{value}")
 od
