@@ -1,20 +1,13 @@
 use default
 
-quicksort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] =>
-    if values.count <= 1 then
-        values
-    else
-        let pivot = values[0]
-        let rest = values[1..<0]
+quicksort[T: Ghul.Comparable[T]](values: List[T]) -> T{} =>
+    case values
+    when [] then values
+    when [pivot, ..rest] then
+        quicksort([v for v in rest if v < pivot]) ++
+            [pivot] ++
+            quicksort([v for v in rest if v >= pivot])
+    esac
 
-        let below = rest |> filter(value => value < pivot) |> collect()
-        let above = rest |> filter(value => value >= pivot) |> collect()
-
-        quicksort(below)
-            |> cat([pivot])
-            |> cat(quicksort(above))
-            |> collect()
-    fi
-
-write_line("{$quicksort([6, 2, 9, 2, 5, 1, 8, 3])}")
-write_line("{$quicksort(["pear", "apple", "fig", "date"])}")
+write_line("{quicksort([6, 2, 9, 2, 5, 1, 8, 3])}")
+write_line("{quicksort(["pear", "apple", "fig", "date"])}")
