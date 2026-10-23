@@ -1,5 +1,7 @@
 use default
 use System.Math.*
+use Raster.IMAGE
+use Raster.AXES
 
 is_prime(n: int) -> bool is
     if n < 2 then
@@ -46,15 +48,30 @@ let listing = primes_under_100
 
 write_line("gaussian primes with norm < 100 ({count} total):")
 write_line(listing)
-write_line("")
-write_line(
-    "plot, radius 50 (rows run from imaginary part +50 down to -50):"
-)
 
-for b in -50::50 |> reverse() do
-    let row = (-50::50)
-        |> map(a => if is_gaussian_prime(a, b) then "*" else " " fi)
-        |> join("")
+let image = IMAGE(620, 620)
 
-    write_line(row)
+let axes = AXES(image)
+
+axes.x_title = "real"
+axes.y_title = "imaginary"
+axes.fit(-54.0D, -54.0D, 54.0D, 54.0D)
+
+image.colour(90ub, 90ub, 100ub)
+image.stroke(1.0D)
+
+axes.draw()
+
+image.colour(40ub, 92ub, 168ub)
+
+for b in -50::50 do
+    for a in -50::50 do
+        if a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b) then
+            image.dot(double(a), double(b), 2.0D)
+        fi
+    od
 od
+
+image.write("gaussian-primes.png")
+
+image.show("gaussian-primes.png")

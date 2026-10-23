@@ -9,5 +9,6 @@
 
   <ItemGroup>
     <GhulSources Include="**/*.ghul" />
+    <PackageReference Include="ghul.raster" />
   </ItemGroup>
 </Project>
