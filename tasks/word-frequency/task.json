@@ -1,7 +1,7 @@
 {
     "task": "Word frequency",
     "url": "https://rosettacode.org/wiki/Word_frequency",
-    "status": "solved",
+    "status": "published",
     "tags": ["text-processing", "pipes"],
     "interest": 2,
     "first_output_ms": 1294,

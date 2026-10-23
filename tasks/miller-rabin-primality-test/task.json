@@ -1,7 +1,7 @@
 {
   "task": "Miller-Rabin primality test",
   "url": "https://rosettacode.org/wiki/Miller-Rabin_primality_test",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "primes",
     "maths"

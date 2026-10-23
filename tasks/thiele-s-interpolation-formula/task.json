@@ -1,7 +1,7 @@
 {
   "task": "Thiele's interpolation formula",
   "url": "https://rosettacode.org/wiki/Thiele's_interpolation_formula",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "maths",
     "recursion",

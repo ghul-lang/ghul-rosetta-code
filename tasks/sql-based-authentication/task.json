@@ -1,7 +1,7 @@
 {
     "task": "SQL-based authentication",
     "url": "https://rosettacode.org/wiki/SQL-based_authentication",
-    "status": "solved",
+    "status": "published",
     "tags": ["dotnet-interop", "strings"],
     "interest": 2
 }

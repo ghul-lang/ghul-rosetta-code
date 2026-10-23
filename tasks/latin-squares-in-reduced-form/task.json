@@ -1,7 +1,7 @@
 {
     "task": "Latin Squares in reduced form",
     "url": "https://rosettacode.org/wiki/Latin_Squares_in_reduced_form",
-    "status": "solved",
+    "status": "published",
     "tags": ["generators", "recursion", "maths"],
     "interest": 3,
     "first_output_ms": 552,

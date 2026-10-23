@@ -1,7 +1,7 @@
 {
   "task": "Retrieve and search chat history",
   "url": "https://rosettacode.org/wiki/Retrieve_and_search_chat_history",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "text-processing",

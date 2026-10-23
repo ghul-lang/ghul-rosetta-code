@@ -1,7 +1,7 @@
 {
   "task": "Sort three variables",
   "url": "https://rosettacode.org/wiki/Sort_three_variables",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "sorting",
     "generics",

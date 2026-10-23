@@ -1,7 +1,7 @@
 {
     "task": "Pascal matrix generation",
     "url": "https://rosettacode.org/wiki/Pascal_matrix_generation",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "closures"],
     "interest": 2
 }

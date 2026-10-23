@@ -1,7 +1,7 @@
 {
   "task": "Numbers divisible by their individual digits, but not by the product of their digits",
   "url": "https://rosettacode.org/wiki/Numbers_divisible_by_their_individual_digits,_but_not_by_the_product_of_their_digits",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "number-theory",
     "pipes"

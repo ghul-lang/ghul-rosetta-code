@@ -1,7 +1,7 @@
 {
     "task": "Smallest number k such that k+2^m is composite for all m less than k",
     "url": "https://rosettacode.org/wiki/Smallest_number_k_such_that_k+2^m_is_composite_for_all_m_less_than_k",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "run_ms": 35902

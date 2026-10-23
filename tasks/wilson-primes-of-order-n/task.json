@@ -1,7 +1,7 @@
 {
     "task": "Wilson primes of order n",
     "url": "https://rosettacode.org/wiki/Wilson_primes_of_order_n",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2
 }

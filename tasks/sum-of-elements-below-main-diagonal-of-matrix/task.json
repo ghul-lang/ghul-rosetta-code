@@ -1,7 +1,7 @@
 {
   "task": "Sum of elements below main diagonal of matrix",
   "url": "https://rosettacode.org/wiki/Sum_of_elements_below_main_diagonal_of_matrix",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "pipes"

@@ -1,7 +1,7 @@
 {
   "task": "Lucas-Lehmer test",
   "url": "https://rosettacode.org/wiki/Lucas-Lehmer_test",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "primes",
     "maths"

@@ -1,7 +1,7 @@
 {
     "task": "Numerical integration/Tanh-Sinh Quadrature",
     "url": "https://rosettacode.org/wiki/Numerical_integration/Tanh-Sinh_Quadrature",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "algorithms"],
     "interest": 2
 }

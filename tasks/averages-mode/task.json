@@ -1,7 +1,7 @@
 {
   "task": "Averages/Mode",
   "url": "https://rosettacode.org/wiki/Averages/Mode",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "generics",
     "pipes"

@@ -6,7 +6,7 @@ let digits = [1, 2, 3]
 let count = [letters.count, capitals.count, digits.count] |> min()!
 
 let rows = {
-    "{letters[i]}{capitals[i]}{digits[i]}" for i in 0..count
+    "{letters[i]}{capitals[i]}{digits[i]}" for i in from(0)
 }
 
-rows |> each(row => write_line(row))
+rows |> take(count) |> each(row => write_line(row))

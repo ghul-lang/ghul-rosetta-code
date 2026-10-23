@@ -1,7 +1,7 @@
 {
     "task": "Levenshtein distance/Alignment",
     "url": "https://rosettacode.org/wiki/Levenshtein_distance/Alignment",
-    "status": "solved",
+    "status": "published",
     "tags": ["strings", "algorithms"],
     "interest": 2
 }

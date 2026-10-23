@@ -1,7 +1,7 @@
 {
     "task": "Legendre prime counting function",
     "url": "https://rosettacode.org/wiki/Legendre_prime_counting_function",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "recursion"],
     "interest": 3,
     "first_output_ms": 592,

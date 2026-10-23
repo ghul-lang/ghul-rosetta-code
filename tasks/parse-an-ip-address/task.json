@@ -1,7 +1,7 @@
 {
     "task": "Parse an IP Address",
     "url": "https://rosettacode.org/wiki/Parse_an_IP_Address",
-    "status": "solved",
+    "status": "published",
     "tags": ["parsing", "dotnet-interop"],
     "interest": 2
 }

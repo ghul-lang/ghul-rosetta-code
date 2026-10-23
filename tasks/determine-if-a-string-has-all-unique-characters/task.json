@@ -1,7 +1,7 @@
 {
   "task": "Determine if a string has all unique characters",
   "url": "https://rosettacode.org/wiki/Determine_if_a_string_has_all_unique_characters",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "optionals"

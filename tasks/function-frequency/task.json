@@ -1,7 +1,7 @@
 {
   "task": "Function frequency",
   "url": "https://rosettacode.org/wiki/Function_frequency",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "generators",

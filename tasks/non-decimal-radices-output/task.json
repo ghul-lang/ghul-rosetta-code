@@ -1,7 +1,7 @@
 {
   "task": "Non-decimal radices/Output",
   "url": "https://rosettacode.org/wiki/Non-decimal_radices/Output",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "dotnet-interop"

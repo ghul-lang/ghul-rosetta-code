@@ -1,7 +1,7 @@
 {
   "task": "Sync subtitles",
   "url": "https://rosettacode.org/wiki/Sync_subtitles",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "text-processing",
     "dotnet-interop",

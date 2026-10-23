@@ -1,7 +1,7 @@
 {
     "task": "Modular arithmetic",
     "url": "https://rosettacode.org/wiki/Modular_arithmetic",
-    "status": "solved",
+    "status": "published",
     "tags": ["operators", "generics", "traits"],
     "interest": 3
 }

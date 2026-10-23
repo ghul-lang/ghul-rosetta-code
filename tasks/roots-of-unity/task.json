@@ -1,7 +1,7 @@
 {
     "task": "Roots of unity",
     "url": "https://rosettacode.org/wiki/Roots_of_unity",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "dotnet-interop"],
     "interest": 2
 }

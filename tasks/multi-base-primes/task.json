@@ -1,7 +1,7 @@
 {
     "task": "Multi-base primes",
     "url": "https://rosettacode.org/wiki/Multi-base_primes",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "run_ms": 2197

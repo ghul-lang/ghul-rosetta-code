@@ -1,7 +1,7 @@
 {
   "task": "Non-decimal radices/Convert",
   "url": "https://rosettacode.org/wiki/Non-decimal_radices/Convert",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "recursion"

@@ -1,7 +1,7 @@
 {
     "task": "De Polignac numbers",
     "url": "https://rosettacode.org/wiki/De_Polignac_numbers",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory", "pipes"],
     "interest": 3,
     "run_ms": 570

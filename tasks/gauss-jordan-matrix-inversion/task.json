@@ -1,7 +1,7 @@
 {
     "task": "Gauss-Jordan matrix inversion",
     "url": "https://rosettacode.org/wiki/Gauss-Jordan_matrix_inversion",
-    "status": "solved",
+    "status": "published",
     "tags": ["maths", "algorithms"],
     "interest": 2
 }

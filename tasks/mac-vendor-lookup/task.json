@@ -1,7 +1,7 @@
 {
   "task": "MAC vendor lookup",
   "url": "https://rosettacode.org/wiki/MAC_vendor_lookup",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "optionals"

@@ -1,7 +1,7 @@
 {
   "task": "Executable library",
   "url": "https://rosettacode.org/wiki/Executable_library",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "dotnet-interop"

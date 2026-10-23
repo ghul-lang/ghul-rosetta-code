@@ -1,7 +1,7 @@
 {
     "task": "Canonicalize CIDR",
     "url": "https://rosettacode.org/wiki/Canonicalize_CIDR",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "strings",
         "operators"

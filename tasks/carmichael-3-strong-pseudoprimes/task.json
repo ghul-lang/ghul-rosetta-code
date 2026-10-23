@@ -1,7 +1,7 @@
 {
     "task": "Carmichael 3 strong pseudoprimes",
     "url": "https://rosettacode.org/wiki/Carmichael_3_strong_pseudoprimes",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "primes",
         "number-theory"

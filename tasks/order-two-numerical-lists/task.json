@@ -1,7 +1,7 @@
 {
   "task": "Order two numerical lists",
   "url": "https://rosettacode.org/wiki/Order_two_numerical_lists",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "recursion"

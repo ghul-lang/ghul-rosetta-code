@@ -1,7 +1,7 @@
 {
   "task": "Find Chess960 starting position identifier",
   "url": "https://rosettacode.org/wiki/Find_Chess960_starting_position_identifier",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "puzzles",
     "strings"

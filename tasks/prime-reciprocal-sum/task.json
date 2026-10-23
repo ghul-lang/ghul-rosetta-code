@@ -1,7 +1,7 @@
 {
     "task": "Prime reciprocal sum",
     "url": "https://rosettacode.org/wiki/Prime_reciprocal_sum",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "generators"],
     "interest": 3,
     "run_ms": 560

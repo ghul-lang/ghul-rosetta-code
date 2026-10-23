@@ -1,7 +1,7 @@
 {
   "task": "Two identical strings",
   "url": "https://rosettacode.org/wiki/Two_identical_strings",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "basics",
     "dotnet-interop"

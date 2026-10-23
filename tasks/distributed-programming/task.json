@@ -1,7 +1,7 @@
 {
   "task": "Distributed programming",
   "url": "https://rosettacode.org/wiki/Distributed_programming",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "concurrency",

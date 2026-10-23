@@ -1,7 +1,7 @@
 {
     "task": "Calendar",
     "url": "https://rosettacode.org/wiki/Calendar",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "date-time",
         "text-processing"

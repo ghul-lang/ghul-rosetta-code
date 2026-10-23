@@ -1,7 +1,7 @@
 {
     "task": "Bioinformatics/Sequence mutation",
     "url": "https://rosettacode.org/wiki/Bioinformatics/Sequence_mutation",
-    "status": "solved",
+    "status": "published",
     "tags": [
         "strings",
         "simulation"

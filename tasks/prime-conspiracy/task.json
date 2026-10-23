@@ -1,7 +1,7 @@
 {
     "task": "Prime conspiracy",
     "url": "https://rosettacode.org/wiki/Prime_conspiracy",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "generators"],
     "interest": 3,
     "first_output_ms": 1411,

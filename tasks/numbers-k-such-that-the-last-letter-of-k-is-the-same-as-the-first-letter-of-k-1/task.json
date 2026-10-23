@@ -1,7 +1,7 @@
 {
   "task": "Numbers k such that the last letter of k is the same as the first letter of k+1",
   "url": "https://rosettacode.org/wiki/Numbers_k_such_that_the_last_letter_of_k_is_the_same_as_the_first_letter_of_k+1",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "strings",
     "number-theory"

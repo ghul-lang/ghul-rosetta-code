@@ -1,7 +1,7 @@
 {
   "task": "Maximum triangle path sum",
   "url": "https://rosettacode.org/wiki/Maximum_triangle_path_sum",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "algorithms",
     "pipes"

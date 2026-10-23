@@ -1,7 +1,7 @@
 {
     "task": "Hamiltonian Cycle via Chvátal Closure",
     "url": "https://rosettacode.org/wiki/Hamiltonian_Cycle_via_Chvátal_Closure",
-    "status": "solved",
+    "status": "published",
     "tags": ["algorithms", "recursion"],
     "interest": 3
 }

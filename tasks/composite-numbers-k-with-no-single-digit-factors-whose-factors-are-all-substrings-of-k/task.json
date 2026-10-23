@@ -1,7 +1,7 @@
 {
   "task": "Composite numbers k with no single digit factors whose factors are all substrings of k",
   "url": "https://rosettacode.org/wiki/Composite_numbers_k_with_no_single_digit_factors_whose_factors_are_all_substrings_of_k",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "number-theory",
     "primes"

@@ -1,7 +1,7 @@
 {
     "task": "Least m such that n! + m is prime",
     "url": "https://rosettacode.org/wiki/Least_m_such_that_n!_+_m_is_prime",
-    "status": "solved",
+    "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "first_output_ms": 1934,

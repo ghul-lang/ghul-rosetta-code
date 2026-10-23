@@ -1,7 +1,7 @@
 {
   "task": "Compiler/Simple file inclusion pre processor",
   "url": "https://rosettacode.org/wiki/Compiler/Simple_file_inclusion_pre_processor",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "text-processing",
     "generators",

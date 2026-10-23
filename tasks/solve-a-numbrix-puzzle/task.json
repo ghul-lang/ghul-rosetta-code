@@ -1,7 +1,7 @@
 {
   "task": "Solve a Numbrix puzzle",
   "url": "https://rosettacode.org/wiki/Solve_a_Numbrix_puzzle",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "puzzles",
     "recursion",

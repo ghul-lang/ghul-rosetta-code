@@ -1,7 +1,7 @@
 {
     "task": "OpenWebNet password",
     "url": "https://rosettacode.org/wiki/OpenWebNet_password",
-    "status": "solved",
+    "status": "published",
     "tags": ["algorithms", "pattern-matching"],
     "interest": 2
 }

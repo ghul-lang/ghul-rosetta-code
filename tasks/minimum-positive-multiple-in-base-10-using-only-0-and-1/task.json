@@ -1,7 +1,7 @@
 {
     "task": "Minimum positive multiple in base 10 using only 0 and 1",
     "url": "https://rosettacode.org/wiki/Minimum_positive_multiple_in_base_10_using_only_0_and_1",
-    "status": "solved",
+    "status": "published",
     "tags": ["algorithms", "number-theory"],
     "interest": 3
 }

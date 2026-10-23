@@ -1,7 +1,7 @@
 {
     "task": "Generate Chess960 starting position",
     "url": "https://rosettacode.org/wiki/Generate_Chess960_starting_position",
-    "status": "solved",
+    "status": "published",
     "tags": ["game", "algorithms"],
     "interest": 3
 }

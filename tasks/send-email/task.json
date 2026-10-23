@@ -1,7 +1,7 @@
 {
   "task": "Send email",
   "url": "https://rosettacode.org/wiki/Send_email",
-  "status": "solved",
+  "status": "published",
   "tags": [
     "dotnet-interop",
     "concurrency",

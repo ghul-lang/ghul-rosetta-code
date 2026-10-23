@@ -1,7 +1,7 @@
 {
     "task": "Last letter-first letter",
     "url": "https://rosettacode.org/wiki/Last_letter-first_letter",
-    "status": "solved",
+    "status": "published",
     "tags": ["recursion", "puzzles"],
     "interest": 3,
     "first_output_ms": 1916,
