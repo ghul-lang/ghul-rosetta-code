@@ -11,21 +11,20 @@ linear_combination(scalars: List[int]) -> string =>
             |> filter((_, c) => c != 0)
             |> collect()
     in
-    if terms.count == 0 then
+    case terms
+    when [] then
         "0"
-    else
-        let (first_index, first) = terms[0] in
+    when [(first_index, first), ..rest] then
         let lead = if first < 0 then "-" else "" fi in
-        let rest =
-            terms
-                |> skip(1)
+        let tail =
+            rest
                 |> map((i, c) =>
                     let sign = if c < 0 then " - " else " + " fi in
                     "{sign}{term(c, i + 1)}")
                 |> join("")
         in
-        "{lead}{term(first, first_index + 1)}{rest}"
-    fi
+        "{lead}{term(first, first_index + 1)}{tail}"
+    esac
 
 let lists = [
     [1, 2, 3], [0, 1, 2, 3], [1, 0, 3, 4], [1, 2, 0], [0, 0, 0], [0],

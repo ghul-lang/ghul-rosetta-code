@@ -37,7 +37,7 @@ si
 let text = "Rosetta Code is a programming chrestomathy site 😀."
 let bom = [0xFFub, 0xFEub]
 let body = System.Text.Encoding.unicode.get_bytes(text)
-let bytes = bom |> cat(body) |> collect()
+let bytes = bom ++ body |> collect()
 
 write_line("full dump:")
 hex_dump(bytes, 0, bytes.count)

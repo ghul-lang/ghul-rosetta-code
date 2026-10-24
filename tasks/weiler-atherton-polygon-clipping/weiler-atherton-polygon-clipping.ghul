@@ -165,7 +165,7 @@ image.view(0.0D, 540.0D, 600.0D, 60.0D)
 image.clear(252ub, 252ub, 250ub)
 
 outline(polygon: List[P]) -> List[(x: double, y: double)] =>
-    polygon |> cat([polygon[0]]) |> map(p => (x = p.x, y = p.y))
+    polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y))
         |> collect()
 
 image.colour(250ub, 200ub, 90ub)

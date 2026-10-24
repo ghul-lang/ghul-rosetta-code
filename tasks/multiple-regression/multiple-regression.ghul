@@ -18,7 +18,7 @@ solve(a: Matrix, b: List[double]) -> List[double] is
     let n = b.count
 
     let rows = 0..n
-        |> map(i => a[i] |> cat([b[i]]) |> collect_mutable())
+        |> map(i => a[i] ++ [b[i]] |> collect_mutable())
         |> collect_mutable()
 
     for k in 0..n do

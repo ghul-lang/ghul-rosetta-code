@@ -54,7 +54,7 @@ image.colour(20ub, 30ub, 60ub)
 image.stroke(2.0D)
 
 for (points, _) in faces do
-    image.line(points |> cat([points[0]]) |> collect())
+    image.line(points ++ [points[0]] |> collect())
 od
 
 write_line("a {width} x {height} x {depth} cuboid, three faces visible")

@@ -94,7 +94,7 @@ for q in quads do
     image.fill(outline)
 
     image.colour(30ub, 30ub, 40ub)
-    image.line(outline |> cat([outline[0]]) |> collect())
+    image.line(outline ++ [outline[0]] |> collect())
 od
 
 image.write("mobius.png")

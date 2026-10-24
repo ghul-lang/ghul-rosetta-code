@@ -16,7 +16,7 @@ outcomes(count: int) -> Collections.List[Result]{} is
 
     for rest in outcomes(count - 1) do
         for result in [Result.HOME_WIN, Result.DRAW, Result.AWAY_WIN] do
-            yield rest |> cat([result]) |> collect()
+            yield rest ++ [result] |> collect()
         od
     od
 si

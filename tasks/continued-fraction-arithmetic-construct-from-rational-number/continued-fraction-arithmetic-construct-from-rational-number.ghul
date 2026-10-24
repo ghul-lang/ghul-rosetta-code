@@ -15,8 +15,11 @@ si
 
 show(terms: long{}) -> string =>
     let all = terms |> collect() in
-    let rest = all |> skip(1) |> join() in
-    if all.count == 1 then "[{all[0]}]" else "[{all[0]}; {rest}]" fi
+    case all
+    when [] then "[]"
+    when [only] then "[{only}]"
+    when [first, ..rest] then "[{first}; {rest |> join()}]"
+    esac
 
 let examples = [
     [(1L, 2L), (3L, 1L), (23L, 8L), (13L, 11L), (22L, 7L), (-151L, 77L)],

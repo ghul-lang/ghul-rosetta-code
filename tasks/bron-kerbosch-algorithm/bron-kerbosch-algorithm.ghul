@@ -42,8 +42,7 @@ search(
     fi
 
     let pivot =
-        candidates
-            |> cat(excluded)
+        candidates ++ excluded
             |> reduce("", (best, vertex) =>
                 if best =~ "" \/
                    neighbours[vertex].count > neighbours[best].count
@@ -61,7 +60,7 @@ search(
         let adjacent = neighbours[vertex]
 
         search(
-            clique |> cat([vertex]) |> collect_set(),
+            clique ++ [vertex] |> collect_set(),
             candidates
                 |> filter(v => adjacent.contains(v))
                 |> collect_set(),

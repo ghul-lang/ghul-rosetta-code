@@ -30,8 +30,7 @@ separated(first: Polygon, second: Polygon, axis: Point) -> bool is
 si
 
 overlap(first: Polygon, second: Polygon) -> bool =>
-    !(axes(first)
-        |> cat(axes(second))
+    !(axes(first) ++ axes(second)
         |> any(axis => separated(first, second, axis)))
 
 polygon(corners: List[(double, double)]) -> Polygon =>

@@ -55,7 +55,7 @@ grow(shapes: List[Shape]) -> List[Shape] is
                 let next = at(cell.row + dr, cell.column + dc)
 
                 if !has(shape, next) then
-                    let cells = shape |> cat([next]) |> collect()
+                    let cells = shape ++ [next] |> collect()
                     let bigger = canonical(cells)
 
                     seen[key(bigger)] = bigger

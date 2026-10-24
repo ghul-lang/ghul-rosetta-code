@@ -4,11 +4,12 @@ amb[T](
     sets: List[T{}],
     accepts: (T, T) -> bool
 ) -> LIST[T]{} is
-    if sets.count == 0 then
+    case sets
+    when [] then
         yield LIST()
-    else
-        for choice in sets[0] do
-            for rest in amb(sets |> skip(1) |> collect(), accepts) do
+    when [set, ..others] then
+        for choice in set do
+            for rest in amb(others, accepts) do
                 if rest.count == 0 \/ accepts(choice, rest[0]) then
                     let sequence = LIST()
 
@@ -19,7 +20,7 @@ amb[T](
                 fi
             od
         od
-    fi
+    esac
 si
 
 let sets: List[string{}] = [

@@ -77,8 +77,7 @@ engage() -> MAP[string, string] is
         next_choice[man] = 0
     od
 
-    while free.count > 0 do
-        let man = free[0]
+    while let [man, ..] = free do
         let woman = men_preferences[man][next_choice[man]]
 
         next_choice[man] = next_choice[man] + 1

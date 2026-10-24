@@ -108,12 +108,13 @@ listen(prefix: string) -> HttpListener is
     listener
 si
 
-if args.count > 1 /\ args[0] =~ "serve" then
-    serve(listen(args[1]))
-elif args.count > 0 then
-    client(args[0])
+case args
+when ["serve", prefix, ..] then
+    serve(listen(prefix))
+when [url, ..] then
+    client(url)
 else
     write_line(
         "usage: distributed-programming serve <prefix> | "
         "distributed-programming <url>")
-fi
+esac

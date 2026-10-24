@@ -24,7 +24,7 @@ partition(x: int, n: int, from_index: int) -> List[int]? is
         fi
 
         if let rest = partition(x - primes[i], n - 1, i + 1) then
-            return [primes[i]] |> cat(rest) |> collect()
+            return [primes[i]] ++ rest |> collect()
         fi
     od
 

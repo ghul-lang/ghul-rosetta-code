@@ -61,7 +61,7 @@ plan(start: State) -> List[string]? is
         for (command, next) in moves(state) do
             if next.time <= target /\ !seen.contains(next) then
                 seen.add(next)
-                let longer = path |> cat([command]) |> collect_mutable()
+                let longer = path ++ [command] |> collect_mutable()
 
                 queue.enqueue((state = next, path = longer))
             fi

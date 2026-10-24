@@ -26,8 +26,8 @@ use Term = (value: Q, text: string)
 let target = Q(24L, 1L)
 
 solve(terms: List[Term]) -> string? is
-    if terms.count == 1 then
-        return if terms[0].value =~ target then terms[0].text else null fi
+    if let [only] = terms then
+        return if only.value =~ target then only.text else null fi
     fi
 
     for i in 0..terms.count do
@@ -54,7 +54,7 @@ solve(terms: List[Term]) -> string? is
                 fi
 
                 for term in joined do
-                    let next = rest |> cat([term]) |> collect()
+                    let next = rest ++ [term] |> collect()
 
                     if let found = solve(next) then
                         return found

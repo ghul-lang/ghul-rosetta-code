@@ -61,4 +61,4 @@ solve(real)
 
 write_line("")
 write_line("With the fictitious states:")
-solve(cat(real, fictitious))
+solve(real ++ fictitious)

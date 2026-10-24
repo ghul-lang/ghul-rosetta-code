@@ -48,13 +48,14 @@ report(differences: int[]) is
 
     write_line("differences of {shown}:")
 
-    if found.count == 0 then
+    case found
+    when [] then
         write_line("  none below {limit}")
-    else
+    when [first, ..] then
         write_line("  {found.count} groups, "
-                   "first {render(found[0])}, "
+                   "first {render(first)}, "
                    "last {render(found[found.count - 1])}")
-    fi
+    esac
 si
 
 report([2])

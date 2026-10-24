@@ -17,7 +17,7 @@ encrypt(text: string, square: SQUARE) -> string is
     let n = letters.length
     let rows = letters |> map(square.row)
     let cols = letters |> map(square.col)
-    let coords = rows |> cat(cols) |> collect()
+    let coords = rows ++ cols |> collect()
 
     0..n
         |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))

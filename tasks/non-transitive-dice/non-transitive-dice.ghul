@@ -31,7 +31,7 @@ extend(chain: List[Die], length: int) -> List[Die]{} is
             let fresh = !(chain |> any(used => used =~ die))
 
             if fresh /\ beats(last, die) < 0 then
-                let longer = chain |> cat([die]) |> collect()
+                let longer = chain ++ [die] |> collect()
 
                 yield in extend(longer, length)
             fi

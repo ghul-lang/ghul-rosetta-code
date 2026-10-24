@@ -14,4 +14,4 @@ let b = SET(["Jim", "Mary", "John", "Jim", "Bob"])
 
 show("only in A", only_in(a, b))
 show("only in B", only_in(b, a))
-show("symmetric difference", only_in(a, b) |> cat(only_in(b, a)))
+show("symmetric difference", only_in(a, b) ++ only_in(b, a))

@@ -207,12 +207,12 @@ human_move() -> Move? is
         let chosen =
             legal
                 |> filter(m =>
-                    if placing then
-                        squares.count == 1 /\ m.to =~ squares[0]
-                    else
-                        squares.count == 2 /\
-                        m.from =~ squares[0] /\ m.to =~ squares[1]
-                    fi)
+                    case (placing, squares)
+                    when (true, [to]) then m.to =~ to
+                    when (false, [from, to]) then
+                        m.from =~ from /\ m.to =~ to
+                    else false
+                    esac)
                 |> first()
 
         if let move = chosen then

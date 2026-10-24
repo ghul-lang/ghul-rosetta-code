@@ -5,7 +5,7 @@ use Collections.SET
 ×(a: int, b: int) -> int => a * b
 
 ∪(a: SET[int], b: SET[int]) -> SET[int] =>
-    a |> cat(b) |> collect_set()
+    a ++ b |> collect_set()
 
 bytes(encoding: System.Text.Encoding, text: string) -> string =>
     encoding.get_bytes(text) |> map(b => "{b:X2}") |> join(" ")
