@@ -31,7 +31,8 @@ draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
     image.colour(255ub, 220ub, 80ub)
     image.stroke(2.0D)
     let radians = angle * pi / 180.0D
-    image.line(cx, cy, cx + radius * cos(radians), cy + radius * sin(radians))
+    image.line(
+        cx, cy, cx + radius * cos(radians), cy + radius * sin(radians))
 si
 
 let image = IMAGE(size, size)
@@ -42,7 +43,8 @@ for frame in 0..frames do
 
     for ci in 0..centres.count - 1 do
         let c = centres[ci]
-        let angle = double(frame) * 360.0D / double(frames) + double(ci) * 30.0D
+        let angle = double(frame) * 360.0D / double(frames) +
+            double(ci) * 30.0D
         draw_spinner(image, c.x, c.y, angle)
     od
 
