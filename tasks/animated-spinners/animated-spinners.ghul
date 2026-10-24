@@ -1,0 +1,54 @@
+use default
+use System.Math.*
+use Raster.ANIMATION
+use Raster.IMAGE
+
+let size = 240
+let frames = 36
+let spokes = 12
+
+let centres = [
+    (x = 120.0D, y = 120.0D),
+    (x = 60.0D, y = 60.0D),
+    (x = 180.0D, y = 60.0D),
+    (x = 60.0D, y = 180.0D),
+    (x = 180.0D, y = 180.0D)
+]
+
+let radius = 22.0D
+
+draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
+    // faint spokes
+    image.colour(60ub, 60ub, 80ub)
+    image.stroke(1.0D)
+
+    for s in 0..spokes do
+        let a = double(s) * 360.0D / double(spokes) * pi / 180.0D
+        image.line(cx, cy, cx + radius * cos(a), cy + radius * sin(a))
+    od
+
+    // bright hand
+    image.colour(255ub, 220ub, 80ub)
+    image.stroke(2.0D)
+    let radians = angle * pi / 180.0D
+    image.line(cx, cy, cx + radius * cos(radians), cy + radius * sin(radians))
+si
+
+let image = IMAGE(size, size)
+let animation = ANIMATION(size, size)
+
+for frame in 0..frames do
+    image.clear(10ub, 10ub, 20ub)
+
+    for ci in 0..centres.count - 1 do
+        let c = centres[ci]
+        let angle = double(frame) * 360.0D / double(frames) + double(ci) * 30.0D
+        draw_spinner(image, c.x, c.y, angle)
+    od
+
+    animation.add(image, 40)
+od
+
+animation.write("animated-spinners.png")
+
+animation.show("animated-spinners.png")
