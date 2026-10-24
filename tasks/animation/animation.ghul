@@ -1,0 +1,26 @@
+use default
+use Raster.ANIMATION
+use Raster.IMAGE
+
+let width = 200
+let height = 60
+
+let base = "Hello World! "
+
+let animation = ANIMATION(width, height)
+
+let image = IMAGE(width, height)
+
+for frame in 0..base.length do
+    let rotated =
+        base.substring(frame) ++ base.substring(0, frame) |> string()
+
+    image.clear(0ub, 0ub, 0ub)
+    image.text(10.0D, 35.0D, 24.0D, rotated)
+
+    animation.add(image, 100)
+od
+
+animation.write("animation.png")
+
+animation.show("animation.png")

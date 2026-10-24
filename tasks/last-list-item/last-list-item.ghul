@@ -1,0 +1,16 @@
+use default
+
+let items = [6, 81, 243, 14, 25, 49, 123, 69, 11] |> collect_mutable()
+
+write_line("{items |> join()}")
+
+while items.count > 1 do
+    let smallest = items |> sort() |> take(2) |> collect()
+
+    smallest |> each(item => items.remove(item))
+    items.add(smallest |> sum())
+
+    write_line("{items |> join()}")
+od
+
+write_line("last item: {items[0]}")

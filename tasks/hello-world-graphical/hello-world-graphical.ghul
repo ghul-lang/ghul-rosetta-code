@@ -1,0 +1,12 @@
+use Raster.IMAGE
+
+let width = 320
+let height = 120
+
+let image = IMAGE(width, height)
+
+image.text(10.0D, 60.0D, 24.0D, "Goodbye, World!")
+
+image.write("hello-world-graphical.png")
+
+image.show("hello-world-graphical.png")
