@@ -1,0 +1,11 @@
+{
+  "task": "Geohash",
+  "url": "https://rosettacode.org/wiki/Geohash",
+  "status": "solved",
+  "tags": [
+    "algorithms",
+    "maths",
+    "strings"
+  ],
+  "interest": 2
+}
