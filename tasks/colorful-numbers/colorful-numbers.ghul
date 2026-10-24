@@ -47,7 +47,7 @@ si
 
 let digits = LIST(2::9)
 
-let candidates = 0::9 |> cat(arrangements(0, digits))
+let candidates = (0::9) ++ arrangements(0, digits)
 let colorful = candidates |> filter(is_colorful) |> collect_mutable()
 
 colorful.sort()

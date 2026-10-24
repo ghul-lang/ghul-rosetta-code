@@ -1,7 +1,7 @@
 use default
 use System.Math.*
 
-let root = if args.count > 0 then args[0] else "." fi
+let root = if let [root, ..] = args then root else "." fi
 
 let sizes =
     IO.Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)

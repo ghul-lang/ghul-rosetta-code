@@ -104,7 +104,7 @@ draw(s: Solution) is
     for at in 0..4 do
         let corners = outline(at)
 
-        image.line(corners |> cat([corners[0]]) |> collect())
+        image.line(corners ++ [corners[0]] |> collect())
     od
 
     let shared = margin + drop + side / 2.0 - drop / 2.0

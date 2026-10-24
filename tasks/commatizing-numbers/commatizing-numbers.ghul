@@ -12,9 +12,8 @@ from_left(digits: string, period: int, separator: string) -> string =>
 
 from_right(digits: string, period: int, separator: string) -> string =>
     let head = (digits.length - 1) % period + 1 in
-    [digits.substring(0, head)]
-        |> cat(groups(digits.substring(head), period))
-        |> join(separator)
+    [digits.substring(0, head)] ++
+        groups(digits.substring(head), period) |> join(separator)
 
 commatize(
     text: string, start: int, period: int, separator: string
@@ -33,8 +32,9 @@ commatize(
         fi
 
     let fraction =
-        if parts.count == 1 then ""
-        else ".{from_left(parts[1], period, separator)}"
+        if let [_, digits, ..] = parts then
+            ".{from_left(digits, period, separator)}"
+        else ""
         fi
 
     let before = text.substring(0, found.index)

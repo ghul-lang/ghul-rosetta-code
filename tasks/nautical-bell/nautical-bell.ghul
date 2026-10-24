@@ -71,7 +71,7 @@ keep_watch(clock: Clock, until: System.DateTime) is
     od
 si
 
-if args.count > 0 /\ args[0] =~ "--live" then
+if let ["--live", ..] = args then
     keep_watch(SYSTEM_CLOCK(), System.DateTime.max_value)
 else
     let midnight =

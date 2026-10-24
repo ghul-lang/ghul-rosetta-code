@@ -28,7 +28,7 @@ separated(a: Polygon, b: Polygon, axis: P) -> bool =>
     s.high < t.low \/ t.high < s.low
 
 overlap(a: Polygon, b: Polygon) -> bool =>
-    let axes = edges(a) |> cat(edges(b)) |> map(e => e.normal) in
+    let axes = edges(a) ++ edges(b) |> map(e => e.normal) in
     !(axes |> any(axis => separated(a, b, axis)))
 
 show(shape: Polygon) -> string =>
@@ -50,8 +50,7 @@ write_line("polygon and rect2 overlap? {overlap(polygon, second)}")
 
 outline(image: IMAGE, shape: Polygon, dx: double) is
     image.line(
-        shape
-            |> cat([shape[0]])
+        shape ++ [shape[0]]
             |> map(p => (x = p.x + dx, y = p.y))
             |> collect())
 si

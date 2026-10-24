@@ -20,15 +20,15 @@ raise_degree(q: List[double]) -> List[double] =>
     ]
 
 de_casteljau(b: List[double], t: double) -> double =>
-    if b.count == 1 then
-        b[0]
+    case b
+    when [p] then p
     else
         de_casteljau(
             1..b.count
                 |> map(i => (1.0 - t) * b[i - 1] + t * b[i])
                 |> collect(),
             t)
-    fi
+    esac
 
 horner(a: List[double], x: double) -> double =>
     a |> reverse() |> reduce(0.0, (total, c) => total * x + c)

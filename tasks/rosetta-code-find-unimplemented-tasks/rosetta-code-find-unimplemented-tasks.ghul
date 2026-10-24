@@ -59,7 +59,7 @@ unimplemented(api: string, language: string) -> List[string] is
         |> collect()
 si
 
-let language = if args.count > 0 then args[0] else "Ghul" fi
+let language = if let [language, ..] = args then language else "Ghul" fi
 let missing = unimplemented("https://rosettacode.org/w/api.php", language)
 
 write_line("{missing.count} tasks are not implemented in {language}:")

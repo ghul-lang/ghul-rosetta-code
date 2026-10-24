@@ -34,7 +34,7 @@ r2cf(numerator: bigint, denominator: bigint) -> bigint{} is
     od
 si
 
-square_root_of_two() -> bigint{} => [1n] |> cat(repeat(2n))
+square_root_of_two() -> bigint{} => [1n] ++ repeat(2n)
 
 let patience = 40
 
@@ -107,9 +107,11 @@ show(terms: bigint{}) -> string =>
     let shown = terms |> take(21) |> collect() in
     let rest = shown |> skip(1) |> take(19) |> join() in
     let more = if shown.count > 20 then ", ..." else "" fi in
-    if shown.count == 1 then "[{shown[0]}]"
-    else "[{shown[0]}; {rest}{more}]"
-    fi
+    case shown
+    when [] then "[]"
+    when [only] then "[{only}]"
+    when [first, ..] then "[{first}; {rest}{more}]"
+    esac
 
 let add: (Row, Row) = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
 let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))

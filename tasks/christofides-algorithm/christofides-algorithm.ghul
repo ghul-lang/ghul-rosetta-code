@@ -45,9 +45,8 @@ perfect_matching(vertices: List[int]) -> List[Edge] =>
                         |> map((_, vertex) => vertex)
                         |> collect()
                 in
-                [(from = vertices[0], to = vertices[partner])]
-                    |> cat(perfect_matching(rest))
-                    |> collect())
+                [(from = vertices[0], to = vertices[partner])] ++
+                    perfect_matching(rest) |> collect())
             |> min_by(matching => length(matching))!
     fi
 
@@ -91,7 +90,7 @@ let odd = 0..n
 
 let matching = perfect_matching(odd)
 let circuit =
-    eulerian_circuit(n, tree |> cat(matching) |> collect())
+    eulerian_circuit(n, tree ++ matching |> collect())
 
 let visited = SET()
 let tour = circuit |> filter(v => visited.add(v)) |> collect_mutable()

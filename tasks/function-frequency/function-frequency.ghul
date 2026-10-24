@@ -127,9 +127,8 @@ si
 let most_called =
     Assembly.get_executing_assembly().get_types()
         |> flat_map(type =>
-            cat(
-                type.get_methods(everything),
-                type.get_constructors(everything)))
+            type.get_methods(everything) ++
+                type.get_constructors(everything))
         |> flat_map(callees)
         |> filter(declared_by_the_program)
         |> map(ghul_name)

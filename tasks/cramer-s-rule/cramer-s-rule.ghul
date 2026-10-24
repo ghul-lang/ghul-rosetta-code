@@ -14,12 +14,12 @@ minor(m: Matrix, column: int) -> Matrix =>
         |> collect()
 
 determinant(m: Matrix) -> int =>
-    if m.count == 1 then
-        m[0][0]
+    case m
+    when [[entry]] then entry
     else
         0..m.count
             |> sum_by(c => sign(c) * m[0][c] * determinant(minor(m, c)))
-    fi
+    esac
 
 with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
     0..m.count

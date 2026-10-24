@@ -130,7 +130,7 @@ while let line = read_line() do
         fi
 
         show(false)
-    elif words.count == 1 /\ words[0] =~ "done" then
+    elif let ["done"] = words then
         let missed =
             atoms |> filter(a => !guesses.contains(a)) |> count()
 

@@ -8,9 +8,8 @@ paired(hashes: List[ubyte[]]) -> ubyte[]{} =>
         |> map(index =>
             if 2 * index + 1 < hashes.count then
                 SHA256.hash_data(
-                    hashes[2 * index]
-                        |> cat(hashes[2 * index + 1])
-                        |> collect())
+                    hashes[2 * index] ++
+                        hashes[2 * index + 1] |> collect())
             else
                 hashes[2 * index]
             fi)

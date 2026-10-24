@@ -88,7 +88,7 @@ for c in cells do
             image.fill(outline)
 
             image.colour(30ub, 20ub, 20ub)
-            image.line(outline |> cat([outline[0]]) |> collect())
+            image.line(outline ++ [outline[0]] |> collect())
         fi
     od
 od

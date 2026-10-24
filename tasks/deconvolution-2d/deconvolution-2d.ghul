@@ -58,7 +58,7 @@ si
 
 shape(tensor: Tensor) -> List[int] =>
     if let (items): Tensor.ARRAY = tensor then
-        [items.count] |> cat(shape(items[0])) |> collect()
+        [items.count] ++ shape(items[0]) |> collect()
     else
         []
     fi

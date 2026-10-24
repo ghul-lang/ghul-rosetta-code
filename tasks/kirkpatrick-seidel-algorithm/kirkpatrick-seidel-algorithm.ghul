@@ -100,14 +100,14 @@ upper(points: List[P], first: P, last: P) -> List[P] is
             upper(part |> collect(), right, last)
         fi
 
-    before |> cat(after) |> collect()
+    before ++ after |> collect()
 si
 
 upper_hull(points: List[P]) -> List[P] is
     let first = leftmost(points), last = rightmost(points)
     let between = points |> filter(p => p.x > first.x /\ p.x < last.x)
 
-    upper(between |> cat([first, last]) |> collect(), first, last)
+    upper(between ++ [first, last] |> collect(), first, last)
 si
 
 flipped(points: P{}) -> List[P] =>
@@ -122,7 +122,7 @@ hull(points: List[P]) -> List[P] =>
     let top = upper_hull(points) in
     let bottom = flipped(upper_hull(flipped(points))) in
     let inner = backwards(bottom) |> skip(1) |> take(bottom.count - 2) in
-    top |> cat(inner) |> collect()
+    top ++ inner |> collect()
 
 turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
 
@@ -180,8 +180,7 @@ od
 image.colour(200ub, 50ub, 40ub)
 image.stroke(2.0D)
 image.line(
-    result
-        |> cat([result[0]])
+    result ++ [result[0]]
         |> map(p => (x = p.x, y = p.y))
         |> collect())
 

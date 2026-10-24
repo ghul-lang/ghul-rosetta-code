@@ -6,7 +6,7 @@ shuffled[T](items: T{}) -> LIST[T] =>
     items |> sort_by(_ => random.next()) |> collect_mutable()
 
 trial() -> (black_in_black: int, red_in_red: int) is
-    let deck = shuffled(repeat('R', 26) |> cat(repeat('B', 26)))
+    let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
     let black = LIST()
     let red = LIST()
 

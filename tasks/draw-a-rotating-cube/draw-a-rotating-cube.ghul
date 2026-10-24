@@ -81,7 +81,7 @@ draw(image: IMAGE, angle: double) is
     image.stroke(1.5D)
 
     for outline in outlines do
-        image.line(outline |> cat([outline[0]]) |> collect())
+        image.line(outline ++ [outline[0]] |> collect())
     od
 si
 

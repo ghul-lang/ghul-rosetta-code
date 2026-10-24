@@ -68,7 +68,7 @@ key(phase: int, state: int[]) -> string is
                     |> map(e => (state[e] / 8) << e)
                     |> reduce(0, (a, b) => a | b)
 
-            [edges | state[31]] |> cat(state[32..40])
+            [edges | state[31]] ++ state[32..40]
         elif phase == 3 then
             let edges =
                 (0..12)

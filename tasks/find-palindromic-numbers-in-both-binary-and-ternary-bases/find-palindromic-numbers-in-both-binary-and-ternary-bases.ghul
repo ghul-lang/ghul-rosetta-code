@@ -46,7 +46,7 @@ ternary_palindromes() -> long{} is
             let front = to_digits(half, 3L)
             let mirrored = front |> take(length / 2) |> reverse()
 
-            yield from_digits(front |> cat(mirrored) |> collect(), 3L)
+            yield from_digits(front ++ mirrored |> collect(), 3L)
         od
     od
 si

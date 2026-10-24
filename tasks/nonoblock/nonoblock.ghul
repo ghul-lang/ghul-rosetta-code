@@ -4,11 +4,10 @@ use default
 // least one empty cell; yields the start position of each block
 
 placements(cells: int, blocks: List[int]) -> List[int]{} is
-    if blocks.count == 0 then
+    case blocks
+    when [] then
         yield []
-    else
-        let first = blocks[0]
-        let rest = blocks |> skip(1) |> collect()
+    when [first, ..rest] then
         let needed = (rest |> sum()) + rest.count
 
         for start in 0::cells - first - needed do
@@ -17,10 +16,10 @@ placements(cells: int, blocks: List[int]) -> List[int]{} is
             for tail in placements(int.max(cells - offset, 0), rest) do
                 let shifted = tail |> map(p => p + offset)
 
-                yield [start] |> cat(shifted) |> collect()
+                yield [start] ++ shifted |> collect()
             od
         od
-    fi
+    esac
 si
 
 draw(cells: int, blocks: List[int], starts: List[int]) -> string =>

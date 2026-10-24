@@ -148,7 +148,7 @@ for (card, place) in
 
         image.colour(red, green, blue)
         image.stroke(2.0D)
-        image.line(shape |> cat([shape[0]]) |> collect())
+        image.line(shape ++ [shape[0]] |> collect())
     od
 od
 

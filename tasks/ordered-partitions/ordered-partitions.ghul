@@ -23,25 +23,26 @@ combinations(items: List[int], k: int) -> List[int]{} is
 si
 
 partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
-    if sizes.count == 0 then
+    case sizes
+    when [] then
         yield LIST()
-    else
-        for block in combinations(items, sizes[0]) do
+    when [size, ..rest] then
+        for block in combinations(items, size) do
             let remaining = items |> except(block) |> collect()
 
-            for tail in partitions(remaining, sizes[1..<0]) do
+            for tail in partitions(remaining, rest) do
                 let whole = LIST()
 
                 whole.add(block)
 
-                for rest in tail do
-                    whole.add(rest)
+                for part in tail do
+                    whole.add(part)
                 od
 
                 yield whole
             od
         od
-    fi
+    esac
 si
 
 braces(block: List[int]) -> string =>

@@ -43,8 +43,8 @@ join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
 
 // Seven products of half-size matrices in place of the usual eight.
 strassen(a: Matrix, b: Matrix) -> Matrix is
-    if a.count == 1 then
-        return [[a[0][0] * b[0][0]]]
+    if let [[a00]] = a, [[b00]] = b then
+        return [[a00 * b00]]
     fi
 
     let (a11, a12) = (quarter(a, 0, 0), quarter(a, 0, 1))

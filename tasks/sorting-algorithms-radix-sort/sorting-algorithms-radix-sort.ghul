@@ -29,7 +29,7 @@ radix_sort(values: List[int]) -> List[int] is
     let negatives = sort_magnitudes(below)
     let others = sort_magnitudes(above)
 
-    cat(negatives |> reverse() |> map(v => -v), others) |> collect()
+    (negatives |> reverse() |> map(v => -v)) ++ others |> collect()
 si
 
 let values = [170, 45, 75, -90, -802, 24, 2, 66, 0, -1, 802]

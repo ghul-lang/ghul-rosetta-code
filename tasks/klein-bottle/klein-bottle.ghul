@@ -100,7 +100,7 @@ for q in quads do
     image.fill(outline)
 
     image.colour(20ub, 40ub, 60ub)
-    image.line(outline |> cat([outline[0]]) |> collect())
+    image.line(outline ++ [outline[0]] |> collect())
 od
 
 write_line("a Klein bottle, immersed in three dimensions")

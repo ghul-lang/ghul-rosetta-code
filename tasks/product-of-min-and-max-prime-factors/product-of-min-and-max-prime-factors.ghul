@@ -21,11 +21,10 @@ si
 min_max_product(n: int) -> int is
     let factors = prime_factors(n) |> collect()
 
-    if factors.count == 0 then
-        1
-    else
-        factors[0] * factors[factors.count - 1]
-    fi
+    case factors
+    when [] then 1
+    when [first, ..] then first * factors[factors.count - 1]
+    esac
 si
 
 for row in (1::100) |> map(min_max_product) |> chunk(10) do

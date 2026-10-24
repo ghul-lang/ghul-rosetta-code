@@ -6,7 +6,7 @@ cell(tag: string, text: string) -> string =>
     "      <{tag} align=\"right\">{text}</{tag}>"
 
 let heading =
-    ["" ] |> cat(columns) |> map(name => cell("th", name)) |> join("\n")
+    [""] ++ columns |> map(name => cell("th", name)) |> join("\n")
 
 let body =
     1::3

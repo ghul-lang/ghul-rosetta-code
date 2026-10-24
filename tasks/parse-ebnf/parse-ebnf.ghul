@@ -118,7 +118,10 @@ class READER(source: string) is
             parts.add(part)
         od
 
-        if parts.count == 1 then parts[0] else Rule.SEQUENCE(parts) fi
+        case parts
+        when [part] then part
+        else Rule.SEQUENCE(parts)
+        esac
     si
 
     expression() -> Rule is
@@ -128,7 +131,10 @@ class READER(source: string) is
             options.add(term())
         od
 
-        if options.count == 1 then options[0] else Rule.CHOICE(options) fi
+        case options
+        when [option] then option
+        else Rule.CHOICE(options)
+        esac
     si
 
     grammar() -> GRAMMAR is
