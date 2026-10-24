@@ -1,5 +1,6 @@
 {
-  "title": "Hello world/Graphical",
-  "state": "queued",
-  "note": "reopened, was rejected/needs-gui: ghul.raster can render text to a PNG, so the GUI requirement is met as an image written to the output directory"
+    "title": "Hello world/Graphical",
+    "state": "solved",
+    "note": "reopened, was rejected/needs-gui: ghul.raster can render text to a PNG, so the GUI requirement is met as an image written to the output directory",
+    "slug": "hello-world-graphical"
 }
