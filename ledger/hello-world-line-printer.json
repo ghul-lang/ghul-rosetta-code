@@ -1,6 +1,7 @@
 {
   "title": "Hello world/Line printer",
   "slug": "hello-world-line-printer",
-  "state": "solved",
-  "note": "the printer device is taken from the command line, so the test hands it a file and checks what arrived"
+  "state": "published",
+  "note": "the printer device is taken from the command line, so the test hands it a file and checks what arrived",
+  "published_hash": "48216fb7152e210110333841e9ed8c1cc6ed22484c3656aaedb1a050657c7c4b"
 }

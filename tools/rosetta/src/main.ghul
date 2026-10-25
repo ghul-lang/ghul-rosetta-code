@@ -411,7 +411,9 @@ image_file(root: string, slug: string, name: string) -> string is
     // a task the runner drives is not run when its markup is generated, so
     // fall back to the captured expectation, which the test asserts is the
     // same image
-    let captured = "{written}.expected"
+
+    // the captured expectation may live in a part directory, not the task root
+    let captured = task_file(root, slug, "{name}.expected")
 
     if !IO.File.exists(written) /\ IO.File.exists(captured) then
         return captured
