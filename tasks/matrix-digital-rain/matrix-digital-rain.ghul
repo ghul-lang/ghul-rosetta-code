@@ -1,0 +1,64 @@
+use default
+
+let width = 32
+let height = 12
+let frames = 40
+let glyphs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+*=<>"
+
+class NOISE(seed: long) is
+    next(limit: int) -> int is
+        seed = (seed * 1103515245L + 12345L) & 0x7FFFFFFFL
+
+        return int(seed >> 16) % limit
+    si
+si
+
+class DROP(noise: NOISE) is
+    head: int
+    length: int
+
+    init(..) is restart(); si
+
+    restart() is
+        length = 4 + noise.next(height)
+        head = -noise.next(height)
+    si
+
+    fall() is
+        head = head + 1
+
+        if head - length >= height then
+            restart()
+        fi
+    si
+
+    paints(row: int) -> bool => row <= head /\ row > head - length
+
+    is_head(row: int) -> bool => row == head
+si
+
+let noise = NOISE(2025L)
+let drops = 0..width |> map(_ => DROP(noise)) |> collect()
+let delay = if IO.Std.is_output_redirected then 0 else 70 fi
+let white = "\u001B[97m"
+let green = "\u001B[32m"
+
+glyph() -> char => glyphs[noise.next(glyphs.length)]
+
+for frame in 0..frames do
+    IO.Std.write("\u001B[H")
+
+    for row in 0..height do
+        let line = drops
+            |> map(drop =>
+                if !drop.paints(row) then " "
+                elif drop.is_head(row) then "{white}{glyph()}"
+                else "{green}{glyph()}" fi)
+            |> join("")
+
+        write_line("{line}\u001B[0m")
+    od
+
+    drops |> each(drop => drop.fall())
+    System.Threading.Thread.sleep(delay)
+od
