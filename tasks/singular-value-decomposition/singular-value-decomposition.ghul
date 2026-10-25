@@ -118,7 +118,7 @@ let a: Matrix =
     (0..rows)
     |> map(_ =>
         IO.Std.read_line()!.split([' '])
-        |> map(x => double.parse(x))
+        |> map(double.parse)
         |> collect_mutable())
     |> collect_mutable()
 

@@ -82,7 +82,7 @@ runs(text: string) -> string{} is
 si
 
 is_number(part: string) -> bool =>
-    part.length > 0 /\ (part |> all(letter => char.is_digit(letter)))
+    part.length > 0 /\ (part |> all(char.is_digit))
 
 without_leading_zeros(part: string) -> string =>
     let trimmed = part.trim_start('0') in

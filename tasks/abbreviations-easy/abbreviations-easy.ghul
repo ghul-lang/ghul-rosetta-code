@@ -13,7 +13,7 @@ let table =
     "TOP TRAnsfer Type Up"
 
 minimum_length(command: string) -> int =>
-    command |> filter(letter => char.is_upper(letter)) |> count()
+    command |> filter(char.is_upper) |> count()
 
 let commands =
     table.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)

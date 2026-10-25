@@ -7,7 +7,7 @@ encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
     flush() is
         frame.add(ubyte(block.count + 1))
 
-        block |> each(b => frame.add(b))
+        block |> each(frame.add)
 
         block.clear()
     si

@@ -22,7 +22,7 @@ let columns = cells(puzzle[0]).count
 
 let board =
     puzzle
-        |> flat_map(line => cells(line))
+        |> flat_map(cells)
         |> map(cell =>
             if cell =~ "." then hole
             elif cell =~ "__" then blank

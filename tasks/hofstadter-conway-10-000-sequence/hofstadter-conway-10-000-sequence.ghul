@@ -19,7 +19,7 @@ ratio(n: int) -> double => double(a[n]) / double(n)
 
 for power in 1..20 do
     let low = 1 << power
-    let n = low::(low * 2) |> max_by(n => ratio(n))!
+    let n = low::(low * 2) |> max_by(ratio)!
 
     let range = "between 2^{power,2} and 2^{power + 1,2}"
 

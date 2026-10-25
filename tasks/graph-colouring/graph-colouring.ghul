@@ -30,7 +30,7 @@ parse(description: string) -> GRAPH is
     for token in description.split([' ']) do
         let ends =
             token.split(['-'])
-            |> map(end => int.parse(end))
+            |> map(int.parse)
             |> collect()
 
         for end in ends do
@@ -56,7 +56,7 @@ colour(graph: GRAPH) -> MAP[int, int] is
                 (
                     saturation =
                         graph.neighbours(node)
-                        |> filter(other => colours.contains_key(other))
+                        |> filter(colours.contains_key)
                         |> map(other => colours[other])
                         |> collect_set()
                         .count,
@@ -78,7 +78,7 @@ colour(graph: GRAPH) -> MAP[int, int] is
 
         let taken =
             graph.neighbours(best.node)
-            |> filter(other => colours.contains_key(other))
+            |> filter(colours.contains_key)
             |> map(other => colours[other])
             |> collect_set()
 

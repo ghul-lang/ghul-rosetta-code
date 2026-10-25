@@ -9,8 +9,8 @@ to_angle(time: string) -> double =>
 
 mean_angle(angles: List[double]) -> double =>
     atan2(
-        angles |> sum_by(a => sin(a)),
-        angles |> sum_by(a => cos(a)))
+        angles |> sum_by(sin),
+        angles |> sum_by(cos))
 
 mean_time(times: List[string]) -> string =>
     let angle = mean_angle(times |> map(to_angle) |> collect()) in

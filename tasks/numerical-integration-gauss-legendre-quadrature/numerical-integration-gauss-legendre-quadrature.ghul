@@ -52,7 +52,7 @@ for (node, weight) in nodes_and_weights(5) do
 od
 
 write_line()
-let estimate = integrate(x => exp(x), -3.0, 3.0, 5)
+let estimate = integrate(exp, -3.0, 3.0, 5)
 
 write_line("exp(x) from -3 to 3: {estimate:F10}")
 write_line("exact:               {exp(3.0) - exp(-3.0):F10}")

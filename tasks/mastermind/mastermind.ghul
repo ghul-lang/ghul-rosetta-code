@@ -85,7 +85,7 @@ while !solved /\ history.count < guesses do
 
     let valid =
         guess.length == length /\
-        guess |> all(c => palette.contains(c))
+        guess |> all(palette.contains)
 
     if !valid then
         write_line("{length} letters from {palette}, please")

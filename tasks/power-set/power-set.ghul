@@ -28,7 +28,7 @@ si
 braced[T](values: T{}) -> string => "{{{values |> join(", ")}}}"
 
 show[T](sets: LIST[LIST[T]]) -> string =>
-    braced(sets |> map(subset => braced(subset)))
+    braced(sets |> map(braced))
 
 write_line(show(power_set(LIST[int]())))
 write_line(show(power_set([1, 2, 3])))

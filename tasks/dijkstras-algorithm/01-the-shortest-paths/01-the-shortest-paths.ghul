@@ -11,7 +11,7 @@ shortest_paths(edges: EDGE[], nodes: string[], source: string)
     best[source] = (cost = 0, previous = "")
 
     while let nearest = unvisited
-        |> filter(node => best.contains_key(node))
+        |> filter(best.contains_key)
         |> min_by(node => best[node].cost)
     do
         unvisited.remove(nearest)

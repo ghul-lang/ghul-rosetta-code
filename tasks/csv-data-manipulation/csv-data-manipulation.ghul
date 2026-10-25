@@ -6,7 +6,7 @@ with_sum_column(line: string, index: int) -> string =>
     else
         let total =
             line.split([','])
-                |> sum_by(number => int.parse(number))
+                |> sum_by(int.parse)
 
         "{line},{total}"
     fi

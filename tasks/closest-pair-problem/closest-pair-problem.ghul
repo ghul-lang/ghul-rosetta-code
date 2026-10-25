@@ -32,7 +32,7 @@ closest(by_x: List[P], by_y: List[P]) -> Pair is
     let right_x = by_x |> skip(half) |> collect()
     let left = SET(left_x)
 
-    let left_y = by_y |> filter(p => left.contains(p)) |> collect()
+    let left_y = by_y |> filter(left.contains) |> collect()
     let right_y = by_y |> filter(p => !left.contains(p)) |> collect()
 
     let best = closer(closest(left_x, left_y), closest(right_x, right_y))

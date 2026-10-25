@@ -62,10 +62,10 @@ search(
         search(
             clique ++ [vertex] |> collect_set(),
             candidates
-                |> filter(v => adjacent.contains(v))
+                |> filter(adjacent.contains)
                 |> collect_set(),
             excluded
-                |> filter(v => adjacent.contains(v))
+                |> filter(adjacent.contains)
                 |> collect_set())
 
         candidates.remove(vertex)

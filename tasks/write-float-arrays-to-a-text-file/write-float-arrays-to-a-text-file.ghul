@@ -24,7 +24,7 @@ write_columns(
 si
 
 let x = [1.0, 2.0, 3.0, 1.0e11]
-let y = x |> map(value => System.Math.sqrt(value)) |> collect()
+let y = x |> map(System.Math.sqrt) |> collect()
 
 let path = IO.Path.combine(scratch, "filename")
 

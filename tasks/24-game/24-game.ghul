@@ -97,7 +97,7 @@ parse_sum(text: string, at: int) -> Parsed =>
 sorted_digits(text: string) -> string =>
     (let held =
         text
-            |> filter(letter => char.is_digit(letter))
+            |> filter(char.is_digit)
             |> collect()
 
      System.Array.sort(held)

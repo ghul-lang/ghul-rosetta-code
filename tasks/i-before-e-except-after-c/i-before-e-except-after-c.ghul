@@ -4,7 +4,7 @@ let words = IO.File.read_all_lines("unixdict.txt")
 
 count(pattern: string) -> int =>
     let regex = System.Text.RegularExpressions.Regex(pattern) in
-    words |> count(word => regex.is_match(word))
+    words |> count(regex.is_match)
 
 plausible(feature: int, opposite: int) -> bool => feature > 2 * opposite
 

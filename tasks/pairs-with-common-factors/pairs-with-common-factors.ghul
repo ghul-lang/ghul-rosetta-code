@@ -3,7 +3,7 @@ use default
 let limit = 1_000_000
 let totient = LIST(limit + 1)
 
-0::limit |> each(value => totient.add(value))
+0::limit |> each(totient.add)
 
 for prime in 2::limit do
     if totient[prime] == prime then

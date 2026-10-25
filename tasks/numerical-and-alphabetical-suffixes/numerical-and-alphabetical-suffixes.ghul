@@ -161,7 +161,7 @@ lines |> each(line => (
     let expanded =
         line.split([' '])
             |> filter(item => item.length > 0)
-            |> map(item => expand(item))
+            |> map(expand)
             |> join("  ")
 
     write_line("in:  {line}")

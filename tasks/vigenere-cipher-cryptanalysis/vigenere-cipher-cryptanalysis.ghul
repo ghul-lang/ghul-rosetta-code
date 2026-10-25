@@ -68,7 +68,7 @@ let cipher =
     "BXVCB XBAWG LQKCM ICRRX MACUO IKHQU AJEGL OIJHH XPVZW JEWBA "
     "FWAML ZZRXJ EKAHV FASMU LVVUT TGK "
 
-let letters = cipher |> filter(c => char.is_letter(c)) |> join("")
+let letters = cipher |> filter(char.is_letter) |> join("")
 
 let average_coincidence = length =>
     ((0..length)

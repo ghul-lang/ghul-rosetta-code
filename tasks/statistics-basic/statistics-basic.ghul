@@ -46,7 +46,7 @@ write_line("      size       mean     stddev")
 for size in sizes do
     let tally = TALLY()
 
-    samples() |> take(size) |> each(x => tally.add(x))
+    samples() |> take(size) |> each(tally.add)
     tallies.add(tally)
 
     write_line(

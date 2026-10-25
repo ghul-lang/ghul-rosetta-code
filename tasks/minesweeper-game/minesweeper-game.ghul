@@ -36,7 +36,7 @@ neighbours(cell: int) -> int{} is
 si
 
 adjacent_mines(cell: int) -> int =>
-    neighbours(cell) |> filter(n => mines.contains(n)) |> count()
+    neighbours(cell) |> filter(mines.contains) |> count()
 
 clear(cell: int) is
     if cleared.contains(cell) \/ marked.contains(cell) then

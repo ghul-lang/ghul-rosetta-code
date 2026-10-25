@@ -98,7 +98,7 @@ merge(parts: List[string], into: string) is
     od
 
     runs |> each(run => run.dispose())
-    parts |> each(part => File.delete(part))
+    parts |> each(File.delete)
 si
 
 write_source("unsorted.txt")

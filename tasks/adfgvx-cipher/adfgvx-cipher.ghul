@@ -14,11 +14,11 @@ shuffled(items: string) -> string =>
      string(held |> collect()))
 
 all_letters(word: string) -> bool =>
-    word |> all(letter => char.is_letter(letter))
+    word |> all(char.is_letter)
 
 no_repeats(word: string) -> bool =>
     (let seen = SET()
-     word |> all(letter => seen.add(letter)))
+     word |> all(seen.add))
 
 read_order(key: string) -> LIST[int] =>
     (0..key.length)
@@ -76,8 +76,8 @@ let square = shuffled("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 let words =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(word => word.length == 9)
-        |> filter(word => all_letters(word))
-        |> filter(word => no_repeats(word))
+        |> filter(all_letters)
+        |> filter(no_repeats)
         |> collect()
 
 let key = words[random.next(words.count)].to_upper()
