@@ -3,13 +3,12 @@ use default
 use ROW = (power_of_2: int, doubling: int)
 use SUMS = (answer: int, accumulator: int)
 
-divide(dividend: int, divisor: int) -> (answer: int, remainder: int) is
+divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
     let table = stream((power_of_2 = 1, doubling = divisor),
             row => row ||
                 (power_of_2 = row.power_of_2 * 2,
                  doubling = row.doubling * 2))
-        |> take_while(row => row.doubling <= dividend)
-
+        |> take_while(row => row.doubling <= dividend) in
     let sums = table
         |> reverse()
         |> reduce((answer = 0, accumulator = 0), (sums, row) =>
@@ -18,10 +17,8 @@ divide(dividend: int, divisor: int) -> (answer: int, remainder: int) is
                  accumulator = sums.accumulator + row.doubling)
             else
                 sums
-            fi)
-
+            fi) in
     (answer = sums.answer, remainder = dividend - sums.accumulator)
-si
 
 let result = divide(580, 34)
 

@@ -23,8 +23,7 @@ imaginary(e: Eisenstein) -> double =>
     double(e.b) * Math.sqrt(3.0D) / 2.0D
 
 show(e: Eisenstein) -> string =>
-    let im = imaginary(e) in
-    let sign = if im < 0.0D then "-" else "+" fi in
+    let im = imaginary(e), sign = if im < 0.0D then "-" else "+" fi in
     "{real(e),8:F4} {sign} {Math.abs(im):F4}i"
 
 let reach = 60

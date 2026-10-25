@@ -21,15 +21,12 @@ od
 
 source.write("source.png")
 
-luminance(x: int, y: int) -> int is
-    let pixel = source.pixel(x, y)
-
-    return
+luminance(x: int, y: int) -> int =>
+    let pixel = source.pixel(x, y) in
         int(
             0.2126 * double(pixel.red) +
             0.7152 * double(pixel.green) +
             0.0722 * double(pixel.blue))
-si
 
 let histogram = repeat(0, 256) |> collect_mutable()
 

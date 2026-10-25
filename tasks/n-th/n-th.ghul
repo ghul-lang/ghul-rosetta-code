@@ -1,6 +1,6 @@
 use default
 
-ordinal(n: int) -> string is
+ordinal(n: int) -> string =>
     let suffix =
         if n % 100 >= 11 /\ n % 100 <= 13 then
             "th"
@@ -11,10 +11,9 @@ ordinal(n: int) -> string is
             when 3 then "rd"
             else "th"
             esac
-        fi
+        fi in
+    "{n}{suffix}"
 
-    return "{n}{suffix}"
-si
 
 for range in [0::25, 250::265, 1000::1025] do
     write_line(range |> map(ordinal) |> join(" "))

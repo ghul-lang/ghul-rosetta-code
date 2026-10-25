@@ -1,16 +1,14 @@
 use default
 
-from_array(values: int[]) -> Collections.List[int] is
-    let result = values |> collect()
+from_array(values: int[]) -> Collections.List[int] =>
+    let result = values |> collect() in
+    result
 
-    return result
-si
 
-text_of(values: Collections.List[int]) -> string is
-    let texts = values |> map(value => "{value}")
+text_of(values: Collections.List[int]) -> string =>
+    let texts = values |> map(value => "{value}") in
+    texts |> join(" ")
 
-    return texts |> join(" ")
-si
 
 binomial_transform(values: Collections.List[int], forward: bool)
         -> Collections.List[int] is

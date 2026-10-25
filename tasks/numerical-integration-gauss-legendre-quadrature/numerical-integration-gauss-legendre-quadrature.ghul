@@ -34,14 +34,12 @@ si
 nodes_and_weights(n: int) -> List[(node: double, weight: double)] =>
     1::n
         |> map(i =>
-            let x = root(n, i) in
-            let slope = legendre(n, x).slope in
+            let x = root(n, i), slope = legendre(n, x).slope in
             (node = x, weight = 2.0 / ((1.0 - x * x) * slope * slope)))
         |> collect()
 
 integrate(f: double -> double, a: double, b: double, n: int) -> double =>
-    let half = (b - a) / 2.0 in
-    let middle = (a + b) / 2.0 in
+    let half = (b - a) / 2.0, middle = (a + b) / 2.0 in
     half * (nodes_and_weights(n)
         |> sum_by(nw => nw.weight * f(half * nw.node + middle)))
 

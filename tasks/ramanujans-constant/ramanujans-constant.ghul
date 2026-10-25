@@ -81,13 +81,11 @@ si
 
 // The working scale carries more digits than are shown, because each
 // squaring in exp doubles the error in the last of them.
-show(heegner: int, value: bigint) is
-    let rounded = value / power_of_ten(guard + digits - shown)
-    let whole = rounded / power_of_ten(shown)
-    let fraction = (rounded % power_of_ten(shown)).to_string()
-
+show(heegner: int, value: bigint) =>
+    let rounded = value / power_of_ten(guard + digits - shown) in
+    let whole = rounded / power_of_ten(shown) in
+    let fraction = (rounded % power_of_ten(shown)).to_string() in
     write_line("{heegner,5}  {whole}.{fraction.pad_left(shown, '0')}")
-si
 
 let pi_value = pi()
 

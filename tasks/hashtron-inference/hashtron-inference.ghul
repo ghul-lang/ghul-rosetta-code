@@ -20,8 +20,7 @@ hash(n: uint, salt: uint, max: uint) -> uint is
 si
 
 infer_bit(command: uint, bit: int, program: List[Stage]) -> bool =>
-    let input = command | (uint(bit) << 16) in
-    let first_stage = program[0] in
+    let input = command | (uint(bit) << 16), first_stage = program[0] in
     let start = (
         input = hash(input, first_stage.salt, first_stage.max),
         room = first_stage.max) in

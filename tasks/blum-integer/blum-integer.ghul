@@ -16,12 +16,10 @@ for candidate in 2::limit do
     fi
 od
 
-is_blum(value: int) -> bool is
-    let p = smallest_factor[value]
-    let q = value / p
+is_blum(value: int) -> bool =>
+    let p = smallest_factor[value], q = value / p in
+    p != q /\ p % 4 == 3 /\ q % 4 == 3 /\ smallest_factor[q] == q
 
-    return p != q /\ p % 4 == 3 /\ q % 4 == 3 /\ smallest_factor[q] == q
-si
 
 let blum = 2::limit |> filter(is_blum) |> take(400_000) |> collect()
 

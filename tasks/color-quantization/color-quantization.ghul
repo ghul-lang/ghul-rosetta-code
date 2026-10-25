@@ -46,8 +46,7 @@ si
 
 hue(h: double) -> Colour =>
     let part = (h * 6.0D) - Math.floor(h * 6.0D) in
-    let sector = int(h * 6.0D) % 6 in
-    let up = int(255.0D * part) in
+    let sector = int(h * 6.0D) % 6, up = int(255.0D * part) in
     let down = int(255.0D * (1.0D - part)) in
     case sector
     when 0 then (255, up, 0)

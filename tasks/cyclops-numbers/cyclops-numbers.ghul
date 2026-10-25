@@ -60,19 +60,16 @@ cyclops() -> long{} is
     od
 si
 
-blinded(value: long) -> long is
-    let text = "{value}"
-    let middle = text.length / 2
+blinded(value: long) -> long =>
+    let text = "{value}", middle = text.length / 2 in
+    long.parse("{text[0..middle]}{text[middle + 1..<0]}")
 
-    return long.parse("{text[0..middle]}{text[middle + 1..<0]}")
-si
 
-is_palindrome(value: long) -> bool is
-    let text = "{value}"
+is_palindrome(value: long) -> bool =>
+    let text = "{value}" in
+    (0..text.length / 2)
 
-    return (0..text.length / 2)
         |> all(i => text[i] == text[text.length - 1 - i])
-si
 
 report(name: string, numbers: () -> long{}) is
     write_line("first 50 {name}:")

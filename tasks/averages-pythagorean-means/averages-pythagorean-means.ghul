@@ -1,21 +1,19 @@
 use default
 use System.Math
 
-arithmetic(values: double[]) -> double is
-    let total = values |> sum()
+arithmetic(values: double[]) -> double =>
+    let total = values |> sum() in
+    total / cast(values.count)
 
-    return total / cast(values.count)
-si
 
 geometric(values: double[]) -> double =>
     Math.pow(values |> product(), 1.0 / cast(values.count))
 
-harmonic(values: double[]) -> double is
+harmonic(values: double[]) -> double =>
     let reciprocals =
-        values |> reduce(0.0, (running, v) => running + 1.0 / v)
+        values |> reduce(0.0, (running, v) => running + 1.0 / v) in
+    cast(values.count) / reciprocals
 
-    return cast(values.count) / reciprocals
-si
 
 let one_to_ten = 1::10 |> map(n => double(n)) |> collect()
 

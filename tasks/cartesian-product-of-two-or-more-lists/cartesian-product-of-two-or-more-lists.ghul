@@ -38,20 +38,16 @@ show_numbers(values: List[int]) -> string =>
 show_tuple(values: List[int]) -> string =>
     "({values |> join(", ")})"
 
-show_binary(left: List[int], right: List[int]) is
+show_binary(left: List[int], right: List[int]) =>
     let product = pairs(left, right)
-        |> map(pair => "({pair.first}, {pair.second})")
-
+        |> map(pair => "({pair.first}, {pair.second})") in
     write_line(
         "{show_numbers(left)} × {show_numbers(right)} = {show(product)}")
-si
 
-show_nary(lists: List[List[int]]) is
-    let heading = lists |> map(show_numbers) |> join(" × ")
-    let product = tuples(lists, 0) |> map(show_tuple)
-
+show_nary(lists: List[List[int]]) =>
+    let heading = lists |> map(show_numbers) |> join(" × ") in
+    let product = tuples(lists, 0) |> map(show_tuple) in
     write_line("{heading} = {show(product)}")
-si
 
 show_binary([1, 2], [3, 4])
 show_binary([3, 4], [1, 2])

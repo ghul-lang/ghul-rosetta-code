@@ -32,16 +32,13 @@ all_different(ts: List[Triangle]) -> bool =>
 
 length(e: (P, P, P)) -> double => (e.`1 - e.`0).length
 
-split(t: Triangle, at: double) -> (Triangle, Triangle) is
-    let edges = [(t.a, t.b, t.c), (t.b, t.c, t.a), (t.c, t.a, t.b)]
+split(t: Triangle, at: double) -> (Triangle, Triangle) =>
+    let edges = [(t.a, t.b, t.c), (t.b, t.c, t.a), (t.c, t.a, t.b)] in
     let (p, q, opposite) =
         edges |> reduce(edges[0], (best, e) =>
-            if length(e) > length(best) then e else best fi)
-
-    let point = p + (q - p) * at
-
+            if length(e) > length(best) then e else best fi) in
+    let point = p + (q - p) * at in
     ((p, point, opposite), (point, q, opposite))
-si
 
 let random = System.Random(5)
 

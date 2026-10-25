@@ -2,11 +2,9 @@ use default
 
 let width = 48
 
-blank() -> LIST[int] is
-    let digits = repeat(0, width) |> collect_mutable()
-
+blank() -> LIST[int] =>
+    let digits = repeat(0, width) |> collect_mutable() in
     digits
-si
 
 copy(value: List[int]) -> LIST[int] is
     let digits = blank()

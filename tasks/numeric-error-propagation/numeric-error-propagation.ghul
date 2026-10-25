@@ -26,8 +26,7 @@ struct UNCERTAIN(value: double, error: double) is
         sqrt(error * error + other.error * other.error)
 
     relative_with(other: UNCERTAIN) -> double =>
-        let mine = error / value in
-        let theirs = other.error / other.value in
+        let mine = error / value, theirs = other.error / other.value in
         sqrt(mine * mine + theirs * theirs)
 
     to_string() -> string => "{value} ± {error}"

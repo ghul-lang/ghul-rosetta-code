@@ -2,11 +2,9 @@ use default
 
 let queue = Queue()
 
-report_empty(pending: Queue[string]) is
-    let state = if pending.count == 0 then "yes" else "no" fi
-
+report_empty(pending: Queue[string]) =>
+    let state = if pending.count == 0 then "yes" else "no" fi in
     write_line("empty: {state}")
-si
 
 ["first", "second", "third"] |> each(queue.enqueue)
 

@@ -18,36 +18,27 @@ let along = 40
 let yaw = 0.9D
 let pitch = 0.3D
 
-surface(u: double, v: double) -> VEC is
-    let c = cos(u)
-    let s = sin(u)
-    let cv = cos(v)
-
+surface(u: double, v: double) -> VEC =>
+    let c = cos(u), s = sin(u), cv = cos(v) in
     let x = -2.0D / 15.0D * c * (
         3.0D * cv - 30.0D * s + 90.0D * pow(c, 4.0D) * s -
-        60.0D * pow(c, 6.0D) * s + 5.0D * c * cv * s)
-
+        60.0D * pow(c, 6.0D) * s + 5.0D * c * cv * s) in
     let y = -1.0D / 15.0D * s * (
         3.0D * cv - 3.0D * c * c * cv - 48.0D * pow(c, 4.0D) * cv +
         48.0D * pow(c, 6.0D) * cv - 60.0D * s + 5.0D * c * cv * s -
         5.0D * pow(c, 3.0D) * cv * s -
         80.0D * pow(c, 5.0D) * cv * s +
-        80.0D * pow(c, 7.0D) * cv * s)
-
-    let z = 2.0D / 15.0D * (3.0D + 5.0D * c * s) * sin(v)
-
+        80.0D * pow(c, 7.0D) * cv * s) in
+    let z = 2.0D / 15.0D * (3.0D + 5.0D * c * s) * sin(v) in
     VEC(y, -z, -x)
-si
 
-turned(p: VEC) -> VEC is
-    let x = p.x * cos(yaw) - p.y * sin(yaw)
-    let y = p.x * sin(yaw) + p.y * cos(yaw)
-
+turned(p: VEC) -> VEC =>
+    let x = p.x * cos(yaw) - p.y * sin(yaw) in
+    let y = p.x * sin(yaw) + p.y * cos(yaw) in
     VEC(
         x,
         p.z * cos(pitch) - y * sin(pitch),
         p.z * sin(pitch) + y * cos(pitch))
-si
 
 corner(i: int, j: int) -> VEC =>
     let u = pi * double(i) / double(around) in

@@ -5,8 +5,7 @@ magic(n: int) -> List[List[int]] =>
         |> map(row =>
             (0..n)
                 |> map(column =>
-                    let i = row * n + column in
-                    let r = row % 4, c = column % 4 in
+                    let i = row * n + column, r = row % 4, c = column % 4 in
                     let keep = r == c \/ r + c == 3 in
                     if keep then n * n - i else i + 1 fi)
                 |> collect())
@@ -15,20 +14,16 @@ magic(n: int) -> List[List[int]] =>
 column(square: List[List[int]], c: int) -> List[int] =>
     square |> map(row => row[c]) |> collect()
 
-check(square: List[List[int]]) -> bool is
-    let n = square.count
-    let target = n * (n * n + 1) / 2
-
+check(square: List[List[int]]) -> bool =>
+    let n = square.count, target = n * (n * n + 1) / 2 in
     let lines =
         square
             |> cat(0..n |> map(c => column(square, c)))
             |> cat([
                 0..n |> map(i => square[i][i]),
                 0..n |> map(i => square[i][n - 1 - i])
-            ])
-
+            ]) in
     lines |> all(line => line |> sum() == target)
-si
 
 let square = magic(8)
 

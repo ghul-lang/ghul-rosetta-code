@@ -1,11 +1,9 @@
 use default
 
-report(path: string) is
-    let file = IO.File.exists(path)
-    let directory = IO.Directory.exists(path)
-
+report(path: string) =>
+    let file = IO.File.exists(path) in
+    let directory = IO.Directory.exists(path) in
     write_line("{path}: file {file}, directory {directory}")
-si
 
 for path in ["input.txt", "docs", "`Abdu'l-Bahá.txt"] do
     report(path)

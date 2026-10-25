@@ -84,11 +84,10 @@ is_prime(n: int) -> bool =>
 repunit(base: int, digits: int) -> bigint =>
     (bigint.pow(bigint(base), digits) - 1n) / bigint(base - 1)
 
-is_repunit_prime(base: int, digits: int) -> bool is
-    let value = repunit(base, digits)
+is_repunit_prime(base: int, digits: int) -> bool =>
+    let value = repunit(base, digits) in
+    !has_small_factor(value) /\ is_probable_prime(value)
 
-    return !has_small_factor(value) /\ is_probable_prime(value)
-si
 
 let limit = 1000
 

@@ -86,11 +86,9 @@ si
 
 -(a: BT, b: BT) -> BT => a + -b
 
-<<(a: BT, places: int) -> BT is
-    let zeroes = repeat('0', places) |> join("")
-
+<<(a: BT, places: int) -> BT =>
+    let zeroes = repeat('0', places) |> join("") in
     BT("{a.digits}{zeroes}")
-si
 
 *(a: BT, b: BT) -> BT is
     let product mut = BT("0")

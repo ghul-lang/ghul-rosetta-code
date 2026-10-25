@@ -1,11 +1,9 @@
 use default
 
-is_cube(n: long) -> bool is
-    let estimate = System.Math.cbrt(double(n))
-    let root = long(System.Math.round(estimate))
-
+is_cube(n: long) -> bool =>
+    let estimate = System.Math.cbrt(double(n)) in
+    let root = long(System.Math.round(estimate)) in
     root * root * root == n
-si
 
 let shown mut = 0
 let n mut = 1L

@@ -31,10 +31,8 @@ class SIMULATED_CLOCK(start: System.DateTime): Clock is
     si
 si
 
-watch(time: System.DateTime) -> string is
-    let hour = time.add_minutes(-1.0).hour
-
-    return
+watch(time: System.DateTime) -> string =>
+    let hour = time.add_minutes(-1.0).hour in
         if hour < 4 then "Middle watch"
         elif hour < 8 then "Morning watch"
         elif hour < 12 then "Forenoon watch"
@@ -43,7 +41,6 @@ watch(time: System.DateTime) -> string is
         elif hour < 20 then "Last dog watch"
         else "First watch"
         fi
-si
 
 ring(bells: int) -> string =>
     (0..bells / 2)

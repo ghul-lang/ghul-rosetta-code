@@ -25,18 +25,15 @@ let pieces = [
 reading_order(a: Cell, b: Cell) -> int =>
     if a.row != b.row then a.row - b.row else a.column - b.column fi
 
-anchored(cells: Cell{}) -> Shape is
+anchored(cells: Cell{}) -> Shape =>
     let sorted =
         cells
             |> sort(reading_order)
-            |> collect()
-
-    let first = sorted[0]
-
+            |> collect() in
+    let first = sorted[0] in
     sorted
         |> map(c => cell_at(c.row - first.row, c.column - first.column))
         |> collect()
-si
 
 cell_at(row: int, column: int) -> Cell => (row = row, column = column)
 
@@ -154,10 +151,8 @@ let hues = "FILNPTUVWXYZ"
 
 colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let h = double(hues.index_of(name)) / 12.0D * 6.0D in
-    let f = h - System.Math.floor(h) in
-    let i = int(h) in
-    let up = ubyte(90.0D + 150.0D * f) in
-    let down = ubyte(240.0D - 150.0D * f) in
+    let f = h - System.Math.floor(h), i = int(h) in
+    let up = ubyte(90.0D + 150.0D * f), down = ubyte(240.0D - 150.0D * f) in
     case i
     when 0 then (red = 240ub, green = up, blue = 90ub)
     when 1 then (red = down, green = 240ub, blue = 90ub)

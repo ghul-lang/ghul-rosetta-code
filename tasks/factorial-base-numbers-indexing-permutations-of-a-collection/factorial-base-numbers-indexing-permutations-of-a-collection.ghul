@@ -40,13 +40,11 @@ si
 parse_digits(text: string) -> LIST[int] =>
     text.split(['.']) |> map(int.parse) |> collect_mutable()
 
-show[T](digits: Collections.List[int], items: Collections.List[T]) is
-    let number = digits |> map(d => "{d}") |> join(".")
+show[T](digits: Collections.List[int], items: Collections.List[T]) =>
+    let number = digits |> map(d => "{d}") |> join(".") in
     let arrangement =
-        permute(digits, items) |> map(i => "{i}") |> join("")
-
+        permute(digits, items) |> map(i => "{i}") |> join("") in
     write_line("{number} -> {arrangement}")
-si
 
 for digits in factorial_base_numbers(3) do
     show(digits, [0, 1, 2, 3])

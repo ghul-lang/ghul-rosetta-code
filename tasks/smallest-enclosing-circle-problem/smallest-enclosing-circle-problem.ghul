@@ -23,9 +23,7 @@ across(a: P, b: P) -> CIRCLE =>
     CIRCLE((a + b) * 0.5D, (a - b).length / 2.0D)
 
 through(a: P, b: P, c: P) -> CIRCLE =>
-    let ab = b - a in
-    let ac = c - a in
-    let d = 2.0D * (ab × ac) in
+    let ab = b - a, ac = c - a, d = 2.0D * (ab × ac) in
     let offset = P(
         (ac.y * (ab ⋅ ab) - ab.y * (ac ⋅ ac)) / d,
         (ab.x * (ac ⋅ ac) - ac.x * (ab ⋅ ab)) / d) in

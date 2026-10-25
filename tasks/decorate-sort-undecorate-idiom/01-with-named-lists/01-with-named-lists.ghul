@@ -2,14 +2,11 @@ use default
 
 decorate_sort_undecorate[T, K: Ghul.Comparable[K]]
     (items: T{}, key: (T) -> K) -> T{}
-is
+=>
     let decorated =
-        items |> map(item => (item, key = key(item)))
-
-    let sorted = decorated |> sort_by(pair => pair.key)
-
+        items |> map(item => (item, key = key(item))) in
+    let sorted = decorated |> sort_by(pair => pair.key) in
     sorted |> map(pair => pair.item)
-si
 
 let words =
     ["Rosetta", "Code", "is", "a", "programming", "chrestomathy", "site"]

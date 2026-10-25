@@ -21,15 +21,13 @@ let reach = 2.2D
 let yaw = 0.62D
 let pitch = 0.5D
 
-turned(p: VEC) -> VEC is
-    let x = p.x * cos(yaw) - p.y * sin(yaw)
-    let y = p.x * sin(yaw) + p.y * cos(yaw)
-
+turned(p: VEC) -> VEC =>
+    let x = p.x * cos(yaw) - p.y * sin(yaw) in
+    let y = p.x * sin(yaw) + p.y * cos(yaw) in
     VEC(
         x,
         p.z * cos(pitch) - y * sin(pitch),
         p.z * sin(pitch) + y * cos(pitch))
-si
 
 angle(i: int) -> double =>
     2.0D * pi * double(turns) *
@@ -37,15 +35,12 @@ angle(i: int) -> double =>
 
 radius(j: int) -> double => reach * double(j) / double(along)
 
-corner(i: int, j: int) -> VEC is
-    let t = angle(i)
-    let r = radius(j)
-
+corner(i: int, j: int) -> VEC =>
+    let t = angle(i), r = radius(j) in
     VEC(
         r * cos(t),
         r * sin(t),
         sqrt(r) * cos(t / 2.0D))
-si
 
 patch(i: int, j: int) -> Patch =>
     (

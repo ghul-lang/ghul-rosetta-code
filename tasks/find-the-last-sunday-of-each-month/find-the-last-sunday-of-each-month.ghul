@@ -2,13 +2,12 @@ use default
 
 let year = 2013
 
-last_sunday(month: int) -> System.DateTime is
+last_sunday(month: int) -> System.DateTime =>
     let last =
         System.DateTime(
-            year, month, System.DateTime.days_in_month(year, month))
+            year, month, System.DateTime.days_in_month(year, month)) in
+    last.add_days(double(-cast int(last.day_of_week)))
 
-    return last.add_days(double(-cast int(last.day_of_week)))
-si
 
 for month in 1::12 do
     write_line(last_sunday(month).to_string("yyyy-MM-dd"))

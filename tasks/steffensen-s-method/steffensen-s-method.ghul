@@ -1,13 +1,9 @@
 use default
 use System.Math.*
 
-aitken(f: double -> double, p0: double) -> double is
-    let p1 = f(p0)
-    let p2 = f(p1)
-    let p1m0 = p1 - p0
-
+aitken(f: double -> double, p0: double) -> double =>
+    let p1 = f(p0), p2 = f(p1), p1m0 = p1 - p0 in
     p0 - (p1m0 * p1m0) / (p2 - 2.0 * p1 + p0)
-si
 
 steffensen_aitken(
     f: double -> double,

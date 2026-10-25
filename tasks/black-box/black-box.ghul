@@ -18,8 +18,7 @@ let guesses = SET()
 use Beam = (row: int, column: int, dr: int, dc: int)
 
 entrance(point: int) -> Beam =>
-    let side = (point - 1) / size in
-    let offset = (point - 1) % size in
+    let side = (point - 1) / size, offset = (point - 1) % size in
     let back = size - 1 - offset in
     case side
     when 0 then (row = -1, column = offset, dr = 1, dc = 0)

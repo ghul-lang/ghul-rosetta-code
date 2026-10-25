@@ -26,13 +26,11 @@ english(n: long) -> string =>
         else "{tens[int(n / 10L)]}-{small[int(rest)]}"
         fi
     elif n < 1000L then
-        let rest = n % 100L in
-        let hundreds = "{small[int(n / 100L)]} hundred" in
+        let rest = n % 100L, hundreds = "{small[int(n / 100L)]} hundred" in
         if rest == 0L then hundreds else "{hundreds} and {english(rest)}" fi
     else
         let (size, name) = scales |> find((size, _) => n >= size)! in
-        let rest = n % size in
-        let head = "{english(n / size)} {name}" in
+        let rest = n % size, head = "{english(n / size)} {name}" in
         if rest == 0L then head
         elif rest < 100L then "{head} and {english(rest)}"
         else "{head} {english(rest)}"

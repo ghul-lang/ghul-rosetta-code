@@ -10,13 +10,11 @@ roots_of_unity(n: int) -> Complex{} =>
 tidy(x: double) -> double =>
     if System.Math.abs(x) < 0.00005 then 0.0 else x fi
 
-show(z: Complex) -> string is
-    let re = tidy(z.real)
-    let im = tidy(z.imaginary)
-    let sign = if im < 0.0 then "-" else "+" fi
+show(z: Complex) -> string =>
+    let re = tidy(z.real), im = tidy(z.imaginary) in
+    let sign = if im < 0.0 then "-" else "+" fi in
+    "{re,7:F4} {sign} {System.Math.abs(im):F4}i"
 
-    return "{re,7:F4} {sign} {System.Math.abs(im):F4}i"
-si
 
 for n in 1::6 do
     write_line("n = {n}:")

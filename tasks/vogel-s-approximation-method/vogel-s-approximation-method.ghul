@@ -21,14 +21,13 @@ let allocation =
     |> map(_ => repeat(0, tasks.count) |> collect_mutable())
     |> collect()
 
-line(cells: Collections.List[Cell]) -> Line is
+line(cells: Collections.List[Cell]) -> Line =>
     let prices =
-        cells |> map((r, c) => costs[r][c]) |> sort() |> collect()
+        cells |> map((r, c) => costs[r][c]) |> sort() |> collect() in
     let penalty =
-        if prices.count > 1 then prices[1] - prices[0] else prices[0] fi
+        if prices.count > 1 then prices[1] - prices[0] else prices[0] fi in
+    (penalty, prices[0], cells)
 
-    return (penalty, prices[0], cells)
-si
 
 active_lines() -> Line{} is
     let rows = (0..contractors.count) |> filter(r => supply[r] > 0)

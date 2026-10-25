@@ -5,19 +5,14 @@ class MONEY(cents: bigint) is
 
     *(quantity: bigint) -> MONEY => MONEY(cents * quantity)
 
-    taxed(rate_per_10000: bigint) -> MONEY is
-        let raw = cents * rate_per_10000
-        let rounded = (raw + 5000n) / 10000n
-
+    taxed(rate_per_10000: bigint) -> MONEY =>
+        let raw = cents * rate_per_10000 in
+        let rounded = (raw + 5000n) / 10000n in
         MONEY(rounded)
-    si
 
-    to_string() -> string is
-        let whole = cents / 100n
-        let part = cents % 100n
-
+    to_string() -> string =>
+        let whole = cents / 100n, part = cents % 100n in
         "{whole}.{part,2:00}"
-    si
 si
 
 dollars(units: int, cents: int) -> MONEY =>

@@ -17,14 +17,12 @@ n_step(initial: int[]) -> int{} is
     od
 si
 
-show(name: string, initial: int[]) is
+show(name: string, initial: int[]) =>
     let series = n_step(initial)
         |> take(10)
         |> map(value => "{value}")
-        |> join(" ")
-
+        |> join(" ") in
     write_line("{name}: {series}")
-si
 
 show("fibonacci", [1, 1])
 show("tribonacci", [1, 1, 2])

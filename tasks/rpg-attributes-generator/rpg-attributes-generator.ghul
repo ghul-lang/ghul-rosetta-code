@@ -2,15 +2,11 @@ use default
 
 let dice = System.Random(20260909)
 
-attribute() -> int is
-    let rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect()
+attribute() -> int =>
+    let rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect() in
+    let lowest = rolls |> min_by(roll => roll), total = rolls |> sum() in
+    total - (lowest ?? 0)
 
-    let lowest = rolls |> min_by(roll => roll)
-
-    let total = rolls |> sum()
-
-    return total - (lowest ?? 0)
-si
 
 character() -> LIST[int] =>
     1::6 |> map(_ => attribute()) |> collect_mutable()
@@ -25,13 +21,11 @@ while !acceptable(rolled) do
     attempts = attempts + 1
 od
 
-acceptable(values: LIST[int]) -> bool is
-    let total = values |> sum()
+acceptable(values: LIST[int]) -> bool =>
+    let total = values |> sum() in
+    let strong = values |> filter(value => value >= 15) |> count() in
+    total >= 75 /\ strong >= 2
 
-    let strong = values |> filter(value => value >= 15) |> count()
-
-    return total >= 75 /\ strong >= 2
-si
 
 let total = rolled |> sum()
 

@@ -1,10 +1,8 @@
 use default
 
-digits_of(s: string) -> LIST[int] is
-    let value = c => int(c) - int('0')
-
+digits_of(s: string) -> LIST[int] =>
+    let value = c => int(c) - int('0') in
     s |> reverse() |> map(value) |> collect_mutable()
-si
 
 multiply(a: string, b: string) -> string is
     let da = digits_of(a)

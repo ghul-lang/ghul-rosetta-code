@@ -38,12 +38,9 @@ si
 describe[T](node: NODE[T]?) -> string =>
     if let present = node then "{present.value}" else "none" fi
 
-show[T](name: string, node: NODE[T]) is
-    let previous = describe(node.previous)
-    let next = describe(node.next)
-
+show[T](name: string, node: NODE[T]) =>
+    let previous = describe(node.previous), next = describe(node.next) in
     write_line("{name}: previous {previous}, next {next}")
-si
 
 let first = NODE(1)
 let last = first.insert_after(3)

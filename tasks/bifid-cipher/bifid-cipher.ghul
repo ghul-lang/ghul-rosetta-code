@@ -12,27 +12,21 @@ normalize(text: string) -> string =>
         |> map(ch => "{ch}")
         |> join("")
 
-encrypt(text: string, square: SQUARE) -> string is
-    let letters = normalize(text)
-    let n = letters.length
-    let rows = letters |> map(square.row)
-    let cols = letters |> map(square.col)
-    let coords = rows ++ cols |> collect()
-
+encrypt(text: string, square: SQUARE) -> string =>
+    let letters = normalize(text), n = letters.length in
+    let rows = letters |> map(square.row) in
+    let cols = letters |> map(square.col) in
+    let coords = rows ++ cols |> collect() in
     0..n
         |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
         |> join("")
-si
 
-decrypt(text: string, square: SQUARE) -> string is
-    let letters = normalize(text)
-    let n = letters.length
+decrypt(text: string, square: SQUARE) -> string =>
+    let letters = normalize(text), n = letters.length in
     let coords = letters
         |> flat_map(ch => [square.row(ch), square.col(ch)])
-        |> collect()
-
+        |> collect() in
     0..n |> map(i => square.at(coords[i], coords[n + i])) |> join("")
-si
 
 demo(label: string, message: string, square: SQUARE) is
     let encoded = encrypt(message, square)

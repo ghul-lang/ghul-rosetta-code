@@ -20,13 +20,12 @@ struct RATIONAL(numerator: bigint, denominator: bigint) is
         else "{numerator}/{denominator}" fi
 si
 
-reduced(numerator: bigint, denominator: bigint) -> RATIONAL is
-    let divisor = bigint.greatest_common_divisor(numerator, denominator)
-    let sign = if denominator < 0n then -1 else 1 fi
-    let scale = divisor * cast(sign)
+reduced(numerator: bigint, denominator: bigint) -> RATIONAL =>
+    let divisor = bigint.greatest_common_divisor(numerator, denominator) in
+    let sign = if denominator < 0n then -1 else 1 fi in
+    let scale = divisor * cast(sign) in
+    RATIONAL(numerator / scale, denominator / scale)
 
-    return RATIONAL(numerator / scale, denominator / scale)
-si
 
 whole(value: int) -> RATIONAL =>
     RATIONAL(cast(value), 1n)
@@ -73,11 +72,9 @@ class SERIES(term: (int) -> RATIONAL) is
     integrate() -> SERIES =>
         SERIES(n => if n == 0 then whole(0) else at(n - 1) / whole(n) fi)
 
-    show(name: string, count: int) is
-        let terms = 0..count |> map(n => at(n).to_string()) |> join()
-
+    show(name: string, count: int) =>
+        let terms = 0..count |> map(n => at(n).to_string()) |> join() in
         write_line("{name}: {terms}")
-    si
 si
 
 constant(value: int) -> SERIES =>

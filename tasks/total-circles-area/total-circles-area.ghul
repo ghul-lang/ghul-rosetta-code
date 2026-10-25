@@ -80,8 +80,7 @@ outer_arcs(c: Circle, others: List[Circle]) -> List[Arc] is
     (0..angles.count - 1)
         |> map(i => (circle = c, from = angles[i], to = angles[i + 1]))
         |> filter(arc =>
-            let middle = (arc.from + arc.to) / 2.0D in
-            let p = on(c, middle) in
+            let middle = (arc.from + arc.to) / 2.0D, p = on(c, middle) in
             !(others |> any(o => !(o =~ c) /\ covers(o, p.x, p.y))))
         |> collect()
 si

@@ -6,15 +6,13 @@ enum Mark is
     GREEN
 si
 
-marks(answer: string, guess: string) -> List[Mark] is
-    let positions = 0..guess.length
-
+marks(answer: string, guess: string) -> List[Mark] =>
+    let positions = 0..guess.length in
     let unmatched =
         positions
             |> filter(i => guess[i] != answer[i])
             |> map(i => answer[i])
-            |> collect_mutable()
-
+            |> collect_mutable() in
     positions
         |> map(i =>
             if guess[i] == answer[i] then Mark.GREEN
@@ -22,7 +20,6 @@ marks(answer: string, guess: string) -> List[Mark] is
             else Mark.GREY
             fi)
         |> collect()
-si
 
 let pairs = [
     ("ALLOW", "LOLLY"),

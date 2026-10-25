@@ -34,19 +34,16 @@ si
 tally(text: string, letter: char) -> int =>
     text |> filter(c => c == letter) |> count()
 
-score(code: string, guess: string, palette: string) -> string is
+score(code: string, guess: string, palette: string) -> string =>
     let exact =
-        0..code.length |> filter(i => code[i] == guess[i]) |> count()
-
+        0..code.length |> filter(i => code[i] == guess[i]) |> count() in
     let common =
         palette
-            |> sum_by(c => Math.min(tally(code, c), tally(guess, c)))
-
+            |> sum_by(c => Math.min(tally(code, c), tally(guess, c))) in
     ""
         .pad_right(exact, 'X')
         .pad_right(common, 'O')
         .pad_right(code.length, '-')
-si
 
 let colours = ask("how many colours", 2, 20)
 

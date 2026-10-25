@@ -82,20 +82,17 @@ let table = [
     "            cinema              |        |0.75      |"
 ]
 
-parse(line: string) -> (depth: int, node: NODE) is
-    let cells = line.split(['|'])
-    let name = cells[0].trim()
-    let depth = (cells[0].length - cells[0].trim_start().length) / 4
-    let weight_text = cells[1].trim()
-    let coverage_text = cells[2].trim()
+parse(line: string) -> (depth: int, node: NODE) =>
+    let cells = line.split(['|']), name = cells[0].trim() in
+    let depth = (cells[0].length - cells[0].trim_start().length) / 4 in
+    let weight_text = cells[1].trim(), coverage_text = cells[2].trim() in
     let weight = if weight_text.length > 0 then double.parse(weight_text)
-                 else 1.0D fi
+                 else 1.0D fi in
     let coverage =
         if coverage_text.length > 0 then double.parse(coverage_text)
-        else null fi
+        else null fi in
+    (depth, NODE(name, weight, coverage))
 
-    return (depth, NODE(name, weight, coverage))
-si
 
 let ancestors = LIST()
 let root mut = null

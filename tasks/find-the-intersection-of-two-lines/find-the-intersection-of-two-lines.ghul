@@ -33,14 +33,9 @@ image.view(-1.0D, -1.0D, 11.0D, 11.0D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0D)
 
-drawn(image: IMAGE, from: Point, to: Point) is
-    let along = to - from
-
-    let start = from - along
-    let end = to + along
-
+drawn(image: IMAGE, from: Point, to: Point) =>
+    let along = to - from, start = from - along, end = to + along in
     image.line(start.x, start.y, end.x, end.y)
-si
 
 image.colour(20ub, 60ub, 200ub)
 drawn(image, a, b)

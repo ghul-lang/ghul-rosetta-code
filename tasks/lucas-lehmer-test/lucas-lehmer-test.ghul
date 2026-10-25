@@ -8,8 +8,7 @@ is_prime(n: int) -> bool =>
 
 is_mersenne_prime(p: int) -> bool =>
     p == 2 \/ (
-        let mersenne = (1n << p) - 1n in
-        let s mut = 4n in
+        let mersenne = (1n << p) - 1n, s mut = 4n in
         (
             for _ in 0..p - 2 do
                 s = s * s - 2n

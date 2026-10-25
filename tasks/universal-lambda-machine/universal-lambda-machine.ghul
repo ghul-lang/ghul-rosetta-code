@@ -200,30 +200,24 @@ bit_of(thunk: THUNK) -> int =>
 bits_of(bytes: List[int]) -> List[bool] =>
     [(b >> (7 - i)) & 1 == 1 for b in bytes for i in 0..8]
 
-run_bits(program: string, limit: int) -> string is
-    let bits = program |> map(c => c == '1') |> collect()
-    let reader = READER(bits)
-    let term = reader.term()
-    let input = list(bits |> skip(reader.at) |> map(bit) |> collect())
-
+run_bits(program: string, limit: int) -> string =>
+    let bits = program |> map(c => c == '1') |> collect() in
+    let reader = READER(bits), term = reader.term() in
+    let input = list(bits |> skip(reader.at) |> map(bit) |> collect()) in
     items(THUNK(Term.APP(term, input), null), limit)
         |> map(t => "{bit_of(t)}")
         |> join("")
-si
 
-run_bytes(bytes: List[int], limit: int) -> string is
-    let reader = READER(bits_of(bytes))
-    let term = reader.term()
-    let used = (reader.at + 7) / 8
-    let rest = bytes |> skip(used) |> map(byte) |> collect()
-
+run_bytes(bytes: List[int], limit: int) -> string =>
+    let reader = READER(bits_of(bytes)), term = reader.term() in
+    let used = (reader.at + 7) / 8 in
+    let rest = bytes |> skip(used) |> map(byte) |> collect() in
     items(THUNK(Term.APP(term, list(rest)), null), limit)
         |> map(b =>
             let value =
                 items(b, 8) |> reduce(0, (a, t) => a * 2 + bit_of(t)) in
             "{char(value)}")
         |> join("")
-si
 
 let programs = [
     (name = "the 342 bit program", limit = 1000, program =

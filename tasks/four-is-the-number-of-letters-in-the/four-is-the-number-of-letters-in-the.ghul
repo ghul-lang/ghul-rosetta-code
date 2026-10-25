@@ -123,13 +123,12 @@ sentence_words() -> string{} is
     od
 si
 
-sentence_length(word_count: int) -> int is
+sentence_length(word_count: int) -> int =>
     let characters = words
         |> take(word_count)
-        |> sum_by(w => w.length)
+        |> sum_by(w => w.length) in
+    characters + word_count - 1
 
-    return characters + word_count - 1
-si
 
 write_line("the lengths of the first 201 words:")
 

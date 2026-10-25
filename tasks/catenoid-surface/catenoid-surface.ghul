@@ -21,15 +21,13 @@ let pitch = 0.45D
 surface(u: double, v: double) -> VEC =>
     VEC(cosh(v) * cos(u), cosh(v) * sin(u), v)
 
-turned(p: VEC) -> VEC is
-    let x = p.x * cos(yaw) - p.y * sin(yaw)
-    let y = p.x * sin(yaw) + p.y * cos(yaw)
-
+turned(p: VEC) -> VEC =>
+    let x = p.x * cos(yaw) - p.y * sin(yaw) in
+    let y = p.x * sin(yaw) + p.y * cos(yaw) in
     VEC(
         x,
         p.z * cos(pitch) - y * sin(pitch),
         p.z * sin(pitch) + y * cos(pitch))
-si
 
 corner(i: int, j: int) -> VEC =>
     let u = 2.0D * pi * double(i) / double(around) in

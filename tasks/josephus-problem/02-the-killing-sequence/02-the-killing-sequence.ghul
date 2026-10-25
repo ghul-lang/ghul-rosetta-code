@@ -13,11 +13,9 @@ killings(n: int, k: int) -> int{} is
     od
 si
 
-show(n: int, k: int) is
-    let killed = killings(n, k) |> collect()
-
+show(n: int, k: int) =>
+    let killed = killings(n, k) |> collect() in
     write_line("n = {n}, k = {k}: killed {killed |> join(", ")}")
-si
 
 show(5, 2)
 show(7, 3)

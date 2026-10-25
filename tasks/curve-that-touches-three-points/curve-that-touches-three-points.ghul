@@ -9,17 +9,15 @@ si
 
 let full = 2.0D * pi
 
-centre_of(a: P, b: P, c: P) -> P is
+centre_of(a: P, b: P, c: P) -> P =>
     let d =
         2.0D * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
-    let a2 = a.x * a.x + a.y * a.y
-    let b2 = b.x * b.x + b.y * b.y
-    let c2 = c.x * c.x + c.y * c.y
-
+        in
+    let a2 = a.x * a.x + a.y * a.y, b2 = b.x * b.x + b.y * b.y in
+    let c2 = c.x * c.x + c.y * c.y in
     P(
         (a2 * (b.y - c.y) + b2 * (c.y - a.y) + c2 * (a.y - b.y)) / d,
         (a2 * (c.x - b.x) + b2 * (a.x - c.x) + c2 * (b.x - a.x)) / d)
-si
 
 curve(start: P, middle: P, finish: P, steps: int) -> List[P] is
     let centre = centre_of(start, middle, finish)

@@ -8,12 +8,10 @@ let cell = 20
 let margin = 10
 let frames = 24
 
-read(path: string) -> Grid is
-    let lines = IO.File.read_all_lines(path)
-    let width = lines |> map(line => line.length) |> reduce(0, int.max)
-
+read(path: string) -> Grid =>
+    let lines = IO.File.read_all_lines(path) in
+    let width = lines |> map(line => line.length) |> reduce(0, int.max) in
     lines |> map(line => line.pad_right(width)) |> collect()
-si
 
 heads_around(grid: Grid, row: int, column: int) -> int =>
     [(r, c)

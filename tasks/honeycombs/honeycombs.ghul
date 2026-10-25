@@ -28,8 +28,7 @@ let letters = 0..20 |> map(_ => next_letter()) |> collect()
 let cells =
     0..20
         |> map(index =>
-            let column = index / 4 in
-            let row = index % 4 in
+            let column = index / 4, row = index % 4 in
             (letter = letters[index],
              x = double(column) * 1.5D * radius,
              y = double(row) * rise * radius -

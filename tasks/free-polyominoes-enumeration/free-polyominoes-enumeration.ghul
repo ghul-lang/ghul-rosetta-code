@@ -18,16 +18,15 @@ height(shape: Shape) -> int =>
 width(shape: Shape) -> int =>
     shape |> map(c => c.column) |> reduce(0, int.max) + 1
 
-normalised(cells: Cell{}) -> Shape is
-    let list = cells |> collect()
-    let top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
+normalised(cells: Cell{}) -> Shape =>
+    let list = cells |> collect() in
+    let top = list |> map(c => c.row) |> reduce(list[0].row, int.min) in
     let left = list |> map(c => c.column) |> reduce(list[0].column, int.min)
-
+    in
     list
         |> map(c => at(c.row - top, c.column - left))
         |> sort(reading_order)
         |> collect()
-si
 
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")

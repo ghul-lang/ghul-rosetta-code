@@ -18,12 +18,11 @@ let gregorian_months = [
 
 let epoch = DateTime(1792, 9, 22)
 
-is_leap(republican_year: int) -> bool is
-    let following = republican_year + 1
+is_leap(republican_year: int) -> bool =>
+    let following = republican_year + 1 in
+    following % 4 == 0 /\
 
-    return following % 4 == 0 /\
         (following % 100 != 0 \/ following % 400 == 0)
-si
 
 days_in(republican_year: int) -> int =>
     if is_leap(republican_year) then 366 else 365 fi

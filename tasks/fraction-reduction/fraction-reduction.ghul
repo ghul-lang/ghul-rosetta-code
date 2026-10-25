@@ -34,16 +34,13 @@ describe(value: int) -> Candidate is
     return (value = value, mask = mask, reduced = reduced)
 si
 
-candidates(size: int) -> List[Candidate] is
+candidates(size: int) -> List[Candidate] =>
     let lowest =
-        repeat(10, size - 1) |> reduce(1, (value, ten) => value * ten)
-
-    return
+        repeat(10, size - 1) |> reduce(1, (value, ten) => value * ten) in
         lowest..lowest * 10
             |> map(describe)
             |> filter(candidate => candidate.mask != 0)
             |> collect()
-si
 
 for size in 2::5 do
     IO.Std.write("{size}-digit fractions: ")

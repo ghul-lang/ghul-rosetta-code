@@ -31,8 +31,7 @@ join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
         |> map(i =>
             0..2 * half
                 |> map(j =>
-                    let top = i < half in
-                    let left = j < half in
+                    let top = i < half, left = j < half in
                     let part =
                         if top then (if left then c11 else c12 fi)
                         else (if left then c21 else c22 fi)
@@ -141,8 +140,7 @@ od
 let agrees =
     [(a, b), (c, d), (e, e)]
         |> all((x, y) =>
-            let s = multiply(x, y) in
-            let n = naive(x, y) in
+            let s = multiply(x, y), n = naive(x, y) in
             0..x.count |> all(i =>
                 0..x.count |> all(j =>
                     System.Math.abs(s[i][j] - n[i][j]) < 1.0e-9)))

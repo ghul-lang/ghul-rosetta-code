@@ -133,11 +133,10 @@ smallest_choice(
     spare: List[Implicant],
     uncovered: List[int],
     size: int
-) -> List[Implicant]? is
-    let chosen = LIST()
+) -> List[Implicant]? =>
+    let chosen = LIST() in
+    search(spare, uncovered, size, 0, chosen)
 
-    return search(spare, uncovered, size, 0, chosen)
-si
 
 search(
     spare: List[Implicant],

@@ -50,13 +50,11 @@ si
 
 mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
 
-deviation(xs: List[double]) -> double is
-    let m = mean(xs)
-
+deviation(xs: List[double]) -> double =>
+    let m = mean(xs) in
     sqrt(
         (xs |> sum_by(x => (x - m) * (x - m))) /
         double(xs.count))
-si
 
 let rules = [
     (name = "the funnel stays over the target", next = (at, d) => 0.0D),

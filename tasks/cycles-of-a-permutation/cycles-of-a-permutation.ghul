@@ -1,12 +1,11 @@
 use default
 
-permutation_between(before: string, after: string) -> LIST[int] is
+permutation_between(before: string, after: string) -> LIST[int] =>
     let one_line = after
         |> map(letter => before.index_of(letter) + 1)
-        |> collect_mutable()
+        |> collect_mutable() in
+    one_line
 
-    return one_line
-si
 
 apply(one_line: Collections.List[int], text: string) -> string =>
     string(one_line |> map(source => text[source - 1]) |> collect())
@@ -74,13 +73,12 @@ order(one_line: Collections.List[int]) -> int =>
         |> map(cycle => cycle.count)
         |> reduce(1, (acc, length) => acc * length / gcd(acc, length))
 
-signature(one_line: Collections.List[int]) -> int is
+signature(one_line: Collections.List[int]) -> int =>
     let even_cycles = cycles(one_line)
         |> filter(c => c.count % 2 == 0)
-        |> count()
+        |> count() in
+    if even_cycles % 2 == 0 then 1 else -1 fi
 
-    return if even_cycles % 2 == 0 then 1 else -1 fi
-si
 
 show_one_line(one_line: Collections.List[int]) -> string is
     let trimmed = LIST(one_line)
