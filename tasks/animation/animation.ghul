@@ -16,6 +16,7 @@ for frame in 0..base.length do
         base.substring(frame) ++ base.substring(0, frame) |> string()
 
     image.clear(0ub, 0ub, 0ub)
+    image.colour(255ub, 255ub, 255ub)
     image.text(10.0D, 35.0D, 24.0D, rotated)
 
     animation.add(image, 100)
