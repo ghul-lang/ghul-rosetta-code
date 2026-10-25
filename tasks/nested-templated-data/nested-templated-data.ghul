@@ -24,7 +24,7 @@ fill(template: Template, payloads: List[string]) -> Filled =>
         fi
     when nested: Template.GROUP then
         Filled.GROUP(
-            nested.items |> map(item => fill(item, payloads)) |> collect())
+            nested.items |> map(fill(*, payloads)) |> collect())
     esac
 
 render(filled: Filled) -> string =>

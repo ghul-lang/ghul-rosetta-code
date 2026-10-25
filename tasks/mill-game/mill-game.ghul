@@ -144,7 +144,7 @@ pick[T](items: List[T]) -> T => items[random.next(items.count)]
 computer_move(side: char) -> Move is
     let legal = moves(side)
     let winning =
-        legal |> filter(m => makes_mill(m, side)) |> collect()
+        legal |> filter(makes_mill(*, side)) |> collect()
 
     if winning.count > 0 then
         return pick(winning)

@@ -67,7 +67,7 @@ for index in 0..5 do
 
     for leaf in flake(inner(whole, index), order - 1) do
         shapes.add(
-            LIST(0..5 |> map(corner => corner_of(leaf, corner))),
+            LIST(0..5 |> map(corner_of(leaf, *))),
             tint)
     od
 od

@@ -29,7 +29,7 @@ separated(a: Polygon, b: Polygon, axis: P) -> bool =>
 
 overlap(a: Polygon, b: Polygon) -> bool =>
     let axes = edges(a) ++ edges(b) |> map(e => e.normal) in
-    !(axes |> any(axis => separated(a, b, axis)))
+    !(axes |> any(separated(a, b, *)))
 
 show(shape: Polygon) -> string =>
     "[{shape |> map(p => "[{p.x}, {p.y}]") |> join(", ")}]"

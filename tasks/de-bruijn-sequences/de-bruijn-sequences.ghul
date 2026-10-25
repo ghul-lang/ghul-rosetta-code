@@ -30,7 +30,7 @@ si
 missing_pins(sequence: string) -> List[string] =>
     let wrapped = "{sequence}{sequence[0..3]}" in
     let seen = 0..wrapped.length - 3
-        |> map(i => wrapped.substring(i, 4))
+        |> map(wrapped.substring(*, 4))
         |> collect_set() in
     0..10_000
         |> map(pin => pin.to_string("D4"))

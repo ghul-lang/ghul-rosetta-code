@@ -10,7 +10,7 @@ choose(n: int, k: int) -> long =>
 
 matrix(size: int, entry: (int, int) -> long) -> List[List[long]] =>
     0..size
-        |> map(i => 0..size |> map(j => entry(i, j)) |> collect())
+        |> map(i => 0..size |> map(entry(i, *)) |> collect())
         |> collect()
 
 upper(size: int) -> List[List[long]] => matrix(size, (i, j) => choose(j, i))

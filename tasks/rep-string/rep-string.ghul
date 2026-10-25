@@ -8,7 +8,7 @@ for text in ["1001110011", "1110111011", "0010010010", "1010101010",
              "00", "1"] do
     if let size = (1::text.length / 2)
         |> reverse()
-        |> find(candidate => repeats(text, candidate))
+        |> find(repeats(text, *))
     then
         write_line("{text} repeats {text[0..size]}")
     else

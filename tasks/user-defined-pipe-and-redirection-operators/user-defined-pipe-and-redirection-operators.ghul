@@ -44,7 +44,7 @@ grep(pattern: string) -> Filter =>
 
 head(count: int) -> Filter => source => source |> take(count)
 
-tail(count: int) -> Filter => source => last(source, count)
+tail(count: int) -> Filter => last(*, count)
 
 last(source: Stream, count: int) -> Stream is
     let held = LIST[string]()
@@ -60,7 +60,7 @@ last(source: Stream, count: int) -> Stream is
     pipe(held)
 si
 
-tee(path: string) -> Filter => source => copy_through(source, path)
+tee(path: string) -> Filter => copy_through(*, path)
 
 copy_through(source: Stream, path: string) -> Stream is
     let writer = IO.File.create_text(path)

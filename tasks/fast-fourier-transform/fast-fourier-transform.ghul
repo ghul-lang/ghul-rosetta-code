@@ -38,7 +38,7 @@ show(c: Complex) -> string =>
 
 let input =
     [1.0D, 1.0D, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D]
-        |> map(r => Complex(r, 0.0D))
+        |> map(Complex(*, 0.0D))
         |> collect()
 
 write_line("input:  {input |> map(c => c.real) |> join(", ")}")

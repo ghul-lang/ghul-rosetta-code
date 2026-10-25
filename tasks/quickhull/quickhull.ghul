@@ -94,7 +94,7 @@ hull(points: List[Point]) -> LIST[FACE] is
                 |> filter(edge =>
                     !(visible
                         |> flat_map(face => face.edges)
-                        |> any(other => same_edge(edge, other))))
+                        |> any(same_edge(edge, *))))
 
         for gone in visible do
             faces.remove(gone)

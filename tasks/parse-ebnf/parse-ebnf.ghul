@@ -183,9 +183,9 @@ class READER(source: string) is
                 throw BAD_GRAMMAR("undefined: {called}")
             fi
         when (parts): Rule.SEQUENCE then
-            parts |> each(p => check(grammar, p))
+            parts |> each(check(grammar, *))
         when (options): Rule.CHOICE then
-            options |> each(o => check(grammar, o))
+            options |> each(check(grammar, *))
         when (body): Rule.REPEAT then check(grammar, body)
         when (body): Rule.OPTIONAL then check(grammar, body)
         else

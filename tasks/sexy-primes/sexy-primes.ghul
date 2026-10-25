@@ -25,7 +25,7 @@ group_from(first: int, size: int) -> List[int] =>
 
 sexy_groups(size: int) -> List[int]{} =>
     primes()
-        |> map(first => group_from(first, size))
+        |> map(group_from(*, size))
         |> filter(members =>
             members[size - 1] < limit /\ (members |> all(is_prime)))
 

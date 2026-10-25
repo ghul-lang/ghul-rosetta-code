@@ -63,7 +63,7 @@ step(grid: Grid) -> Grid =>
     (0..rows)
         |> map(row =>
             (0..columns)
-                |> map(column => survives(grid, row, column))
+                |> map(survives(grid, row, *))
                 |> collect())
         |> collect()
 

@@ -57,9 +57,9 @@ class PUZZLE is
                 |> collect()
 
         choices =
-            row_clues |> map(clue => arrangements(clue, columns))
+            row_clues |> map(arrangements(*, columns))
                 |> cat(
-                    column_clues |> map(clue => arrangements(clue, rows)))
+                    column_clues |> map(arrangements(*, rows)))
                 |> collect()
     si
 

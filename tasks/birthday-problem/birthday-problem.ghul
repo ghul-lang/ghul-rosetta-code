@@ -82,7 +82,7 @@ let curves = LIST[List[double]]()
 let start mut = 2
 
 for at_least in 2::5 do
-    let estimate = first_even(n => simulated(n, at_least, 10000), start)
+    let estimate = first_even(simulated(*, at_least, 10000), start)
     let curve = exact(600, at_least)
     let answer = first_even(n => curve[n], start)
 

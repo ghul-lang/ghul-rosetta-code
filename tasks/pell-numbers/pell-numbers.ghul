@@ -33,7 +33,7 @@ is_prime(value: bigint) -> bool is
         power = power + 1
     od
 
-    witnesses |> all(witness => passes(witness, odd_part, power, value))
+    witnesses |> all(passes(*, odd_part, power, value))
 si
 
 pell_recurrence(first: bigint, second: bigint) -> bigint{} is

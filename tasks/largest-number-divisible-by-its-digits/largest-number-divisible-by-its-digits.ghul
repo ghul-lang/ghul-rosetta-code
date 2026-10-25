@@ -20,7 +20,7 @@ is_lynch_bell(n: long, base: long) -> bool =>
 largest(base: long, step: long, highest: long) -> long =>
     from(0L)
         |> map(k => highest / step * step - k * step)
-        |> find(n => is_lynch_bell(n, base))!
+        |> find(is_lynch_bell(*, base))!
 
 let decimal = largest(10L, 504L, 98764321L)
 let hexadecimal = largest(16L, 360360L, 0xFEDCBA987654321L)

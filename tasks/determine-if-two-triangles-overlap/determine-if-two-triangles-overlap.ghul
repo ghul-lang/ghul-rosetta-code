@@ -30,7 +30,7 @@ edge_normals(t: Triangle) -> P{} =>
 
 overlap(a: Triangle, b: Triangle, touching: bool) -> bool =>
     let axes = edge_normals(a) ++ edge_normals(b) in
-    !(axes |> any(axis => separated(a, b, axis, touching)))
+    !(axes |> any(separated(a, b, *, touching)))
 
 triangle(text: string) -> Triangle =>
     let numbers =

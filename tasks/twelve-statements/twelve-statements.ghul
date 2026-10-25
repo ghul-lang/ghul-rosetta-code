@@ -3,7 +3,7 @@ use default
 holds(values: List[bool], number: int) -> bool => values[number - 1]
 
 how_many(values: List[bool], numbers: List[int]) -> int =>
-    numbers |> filter(number => holds(values, number)) |> count()
+    numbers |> filter(holds(values, *)) |> count()
 
 statement_first(values: List[bool]) -> bool => true
 
@@ -60,7 +60,7 @@ assignments()
     |> filter(consistent)
     |> each(values => (
         let true_ones =
-            1::12 |> filter(number => holds(values, number))
+            1::12 |> filter(holds(values, *))
 
         write_line("  true: {true_ones |> join(" ")}")
     ))

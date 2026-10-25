@@ -56,7 +56,7 @@ show(heading: string, numbers: int{}, per_line: int, width: int) is
     write_line(heading)
 
     for row in numbers |> chunk(per_line) do
-        write_line("    {row |> map(n => column(n, width)) |> join("")}")
+        write_line("    {row |> map(column(*, width)) |> join("")}")
     od
 
     write_line("")

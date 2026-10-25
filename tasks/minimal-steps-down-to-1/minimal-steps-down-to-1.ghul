@@ -82,7 +82,7 @@ si
                    "{route(table, value)}".trim_end())
     od
 
-    [2_000, 20_000, 50_000] |> each(limit => deepest_in(table, limit))
+    [2_000, 20_000, 50_000] |> each(deepest_in(table, *))
 
     write_line()
 ))

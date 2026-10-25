@@ -112,7 +112,7 @@ neighbours(i: int) -> int{} =>
             (column = i % columns + d.across, row = i / columns + d.down))
         |> filter(c => inside(c.column, c.row))
         |> map(c => at(c.column, c.row))
-        |> filter(next => open(i, next))
+        |> filter(open(i, *))
 
 shortest_path(start: int, finish: int) -> List[int] is
     let previous = MAP()

@@ -43,7 +43,7 @@ matches(command: COMMAND, word: string) -> bool =>
 
 expand(word: string) -> string =>
     commands
-    |> filter(command => matches(command, word))
+    |> filter(matches(*, word))
     |> map(command => command.word.to_upper())
     |> first() ?? "*error*"
 

@@ -18,7 +18,7 @@ check(square: List[List[int]]) -> bool =>
     let n = square.count, target = n * (n * n + 1) / 2 in
     let lines =
         square
-            |> cat(0..n |> map(c => column(square, c)))
+            |> cat(0..n |> map(column(square, *)))
             |> cat([
                 0..n |> map(i => square[i][i]),
                 0..n |> map(i => square[i][n - 1 - i])

@@ -98,12 +98,12 @@ minimal_cover(minterms: List[int], variables: int) -> List[Implicant] is
                 minterms
                     |> any(m =>
                         covers(prime, m) /\
-                        primes |> count(other => covers(other, m)) == 1))
+                        primes |> count(covers(*, m)) == 1))
             |> collect()
 
     let uncovered =
         minterms
-            |> filter(m => !(essential |> any(p => covers(p, m))))
+            |> filter(m => !(essential |> any(covers(*, m))))
             |> collect()
 
     if uncovered.count == 0 then
@@ -146,7 +146,7 @@ search(
     chosen: LIST[Implicant]
 ) -> List[Implicant]? is
     if chosen.count == size then
-        if uncovered |> all(m => chosen |> any(p => covers(p, m))) then
+        if uncovered |> all(m => chosen |> any(covers(*, m))) then
             return chosen |> collect()
         fi
 
@@ -174,5 +174,5 @@ for (minterms, variables) in examples do
     let cover = minimal_cover(minterms, variables)
 
     write_line("minterms {minterms |> join(", ")}")
-    write_line("  {cover |> map(p => render(p, variables)) |> join(" ")}")
+    write_line("  {cover |> map(render(*, variables)) |> join(" ")}")
 od

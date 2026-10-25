@@ -37,7 +37,7 @@ pandigital(n: bigint, digits: string) -> bool =>
     text.length == digits.length /\ digits |> all(text.contains)
 
 for digits in ["123456789", "0123456789"] do
-    let found = magic |> filter(n => pandigital(n, digits)) |> join()
+    let found = magic |> filter(pandigital(*, digits)) |> join()
 
     write_line("\nMinimally pandigital in {digits}: {found}")
 od
