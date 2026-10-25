@@ -1,7 +1,7 @@
 use default
 
 struct LADY(name: string) is
-    is_nice: bool => name |> sum_by(c => int(c)) % 2 == 0
+    is_nice: bool => name |> sum_by(int) % 2 == 0
 si
 
 last_letter(name: string) -> int => int(name[name.length - 1])
@@ -19,7 +19,7 @@ let agency = AGENCY(
     [
         "Ada", "Beatrice", "Cora", "Delia", "Edith",
         "Flora", "Grace", "Hazel", "Iris", "Juno"
-    ] |> map(name => LADY(name)) |> collect()
+    ] |> map(LADY) |> collect()
 )
 
 let sailor = SAILOR("Popeye")

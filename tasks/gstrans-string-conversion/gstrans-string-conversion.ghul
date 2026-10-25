@@ -80,8 +80,8 @@ show(values: int{}) -> string =>
 
 let samples = [
     [12, 72, 101, 108, 108, 111, 7, 10, 13],
-    "ALERT|G" |> map(c => int(c)),
-    "\"quoted|text\"" |> map(c => int(c)),
+    "ALERT|G" |> map(int),
+    "\"quoted|text\"" |> map(int),
     [13, 10, 0, 5, 244, 13, 255]
 ]
 

@@ -77,7 +77,7 @@ square_roots(u: bigint, p: bigint, digits: int) -> List[bigint] is
 
     let roots mut =
         0..int(modulus)
-            |> map(r => bigint(r))
+            |> map(bigint)
             |> filter(r => modulo(r * r - u, modulus) =~ 0n)
             |> collect_mutable()
 

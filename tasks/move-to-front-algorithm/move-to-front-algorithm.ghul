@@ -3,7 +3,7 @@ use System.Text.StringBuilder
 
 symbol_table() -> LIST[char] =>
     let symbols = int('a')::int('z')
-        |> map(code => char(code))
+        |> map(char)
         |> collect_mutable() in
     symbols
 

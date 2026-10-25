@@ -15,7 +15,7 @@ si
 
 closure(g: Graph) -> Graph is
     let n = g.count
-    let h = g |> map(neighbours => SET(neighbours)) |> collect()
+    let h = g |> map(SET) |> collect()
     let changed mut = true
 
     while changed do

@@ -1,6 +1,6 @@
 use default
 
-factorial(n: int) -> bigint => 1::n |> map(k => bigint(k)) |> product()
+factorial(n: int) -> bigint => 1::n |> map(bigint) |> product()
 
 power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
 

@@ -22,7 +22,7 @@ od
 let primes =
     (2::sieve_limit)
         |> filter(candidate => !composite[candidate])
-        |> map(prime => bigint(prime))
+        |> map(bigint)
         |> collect()
 
 product(values: List[bigint]) -> bigint =>

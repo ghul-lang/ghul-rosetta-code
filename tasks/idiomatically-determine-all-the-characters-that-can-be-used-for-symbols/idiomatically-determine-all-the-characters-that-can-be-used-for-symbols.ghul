@@ -23,7 +23,7 @@ continues_identifier(c: char) -> bool =>
             category == UnicodeCategory.CONNECTOR_PUNCTUATION))
 
 let characters =
-    0..0x10000 |> map(code => char(code))
+    0..0x10000 |> map(char)
 
 let ascii = characters |> take(0x7F)
 
