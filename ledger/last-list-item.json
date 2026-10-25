@@ -1,5 +1,6 @@
 {
   "title": "Last list item",
   "slug": "last-list-item",
-  "state": "solved"
+  "state": "published",
+  "published_hash": "936815fc0f0ace81d5e50ea26fa1a96ccf8622b96d156e7c23e8476a6f1cd6de"
 }
