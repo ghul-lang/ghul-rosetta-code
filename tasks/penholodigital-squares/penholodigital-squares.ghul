@@ -85,7 +85,7 @@ for base in 9::15 do
     for row in 0..(shown.count + 2) / 3 do
         let cells = shown |> skip(row * 3) |> take(3)
 
-        write_line(cells |> map(n => show(n, base)) |> join("  "))
+        write_line(cells |> map(show(*, base)) |> join("  "))
     od
 
     write_line("")

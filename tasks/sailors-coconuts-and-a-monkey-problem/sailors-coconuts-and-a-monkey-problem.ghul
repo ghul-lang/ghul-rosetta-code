@@ -22,7 +22,7 @@ si
 
 for sailors in [5, 6] do
     if let total = stream(sailors, c => c || c + 1)
-        |> find(c => satisfies_tale(c, sailors)) then
+        |> find(satisfies_tale(*, sailors)) then
         write_line("{sailors} sailors: smallest pile is {total} coconuts")
         write_line(
             "  piles hidden at night: "

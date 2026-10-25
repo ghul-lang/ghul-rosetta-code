@@ -14,7 +14,7 @@ hailstone_step(env: ENVIRONMENT) is
 si
 
 let environments = (1..13)
-    |> map(value => ENVIRONMENT(value, 0))
+    |> map(ENVIRONMENT(*, 0))
     |> collect()
 
 while !(environments |> all(env => env.value == 1)) do

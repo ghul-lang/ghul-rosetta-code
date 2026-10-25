@@ -60,7 +60,7 @@ hop(s: Square, step: int) -> bool is
     false
 si
 
-let start = open |> find(s => hop(s, 1))
+let start = open |> find(hop(*, 1))
 
 assert start? else "no solution"
 

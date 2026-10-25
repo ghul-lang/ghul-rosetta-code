@@ -34,7 +34,7 @@ step(grid: Grid) -> Grid =>
     (0..grid.count)
         |> map(row =>
             (0..grid[row].length)
-                |> map(column => next(grid, row, column))
+                |> map(next(grid, row, *))
                 |> join(""))
         |> collect()
 

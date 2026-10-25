@@ -33,7 +33,7 @@ class MATRIX(cells: double[][]) is
     -(k: double) -> MATRIX => _each(a => a - k)
     *(k: double) -> MATRIX => _each(a => a * k)
     /(k: double) -> MATRIX => _each(a => a / k)
-    ^(k: double) -> MATRIX => _each(a => System.Math.pow(a, k))
+    ^(k: double) -> MATRIX => _each(System.Math.pow(*, k))
 
     to_string() -> string =>
         _cells

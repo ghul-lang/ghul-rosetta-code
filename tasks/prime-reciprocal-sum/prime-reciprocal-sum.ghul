@@ -21,7 +21,7 @@ is_probable_prime(n: bigint) -> bool is
         s = s + 1
     od
 
-    return small |> all(a => passes(n, a, d, s))
+    return small |> all(passes(n, *, d, s))
 si
 
 passes(n: bigint, a: bigint, d: bigint, s: int) -> bool is

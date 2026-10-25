@@ -52,12 +52,12 @@ order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
     let modulus = bigint.pow(factor.prime, factor.power) in
     let totient = modulus / factor.prime * (factor.prime - 1n) in
     factorise(totient)
-        |> map(q => order_part(a, q, totient, modulus))
+        |> map(order_part(a, *, totient, modulus))
         |> reduce(1n, (order, part) => order * part)
 
 multiplicative_order(a: bigint, m: bigint) -> bigint =>
     factorise(m)
-        |> map(factor => order_modulo_prime_power(a, factor))
+        |> map(order_modulo_prime_power(a, *))
         |> reduce(1n, lcm)
 
 let big = bigint.pow(10n, 100) + 1n

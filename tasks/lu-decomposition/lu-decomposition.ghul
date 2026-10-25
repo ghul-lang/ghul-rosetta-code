@@ -13,7 +13,7 @@ use Matrix = List[List[double]]
 
 square(n: int, cell: (int, int) -> double) -> LIST[LIST[double]] =>
     0..n
-        |> map(i => 0..n |> map(j => cell(i, j)) |> collect_mutable())
+        |> map(i => 0..n |> map(cell(i, *)) |> collect_mutable())
         |> collect_mutable()
 
 pivot(a: Matrix) -> Matrix is

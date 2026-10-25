@@ -36,7 +36,7 @@ inference(command: uint, bits: int, program: List[Stage]) -> ulong =>
         0ul
     else
         0..bits
-            |> filter(bit => infer_bit(command, bit, program))
+            |> filter(infer_bit(command, *, program))
             |> reduce(0ul, (out, bit) => out | (1ul << bit))
     fi
 

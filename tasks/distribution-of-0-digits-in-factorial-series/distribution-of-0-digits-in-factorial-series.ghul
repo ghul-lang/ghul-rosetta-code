@@ -44,7 +44,7 @@ mean_zero_proportion(limit: int) -> double is
         let lower_zeros =
             limbs
                 |> take(limbs.count - 1)
-                |> sum_by(limb => zeros_in(limb, 9))
+                |> sum_by(zeros_in(*, 9))
 
         let zeros = zeros_in(top, top_digits) + lower_zeros
 

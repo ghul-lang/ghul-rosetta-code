@@ -67,7 +67,7 @@ outer_arcs(c: Circle, others: List[Circle]) -> List[Arc] is
     let angles = LIST(
         others
             |> filter(o => !(o =~ c))
-            |> flat_map(o => crossings(c, o))
+            |> flat_map(crossings(c, *))
             |> map(wrap))
 
     if angles.count == 0 then
@@ -95,7 +95,7 @@ area_under(arc: Arc) -> double =>
 let all = LIST(circles)
 let kept = all |> filter(c => !inside(c, all)) |> collect()
 
-let arcs = kept |> flat_map(c => outer_arcs(c, kept)) |> collect()
+let arcs = kept |> flat_map(outer_arcs(*, kept)) |> collect()
 let area = arcs |> sum_by(area_under)
 
 let hidden = circles.count - kept.count

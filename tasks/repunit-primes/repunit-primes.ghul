@@ -101,7 +101,7 @@ for base in 2::16 do
     let found =
         2::limit
             |> filter(is_prime)
-            |> filter(digits => is_repunit_prime(base, digits))
+            |> filter(is_repunit_prime(base, *))
             |> collect()
 
     write_line(if found.count == 0 then "none" else found |> join(" ") fi)

@@ -42,7 +42,7 @@ for n in 1::12 do
 od
 
 let largest =
-    1::100 |> map(k => lah(100, k))
+    1::100 |> map(lah(100, *))
             |> reduce(0n,
                       (best, v) => if v > best then v else best fi)
 

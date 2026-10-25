@@ -5,7 +5,7 @@ alive(cells: string, index: int) -> bool =>
 
 live_neighbourhood(cells: string, index: int) -> int =>
     ((index - 1)::(index + 1))
-        |> filter(at => alive(cells, at))
+        |> filter(alive(cells, *))
         |> count()
 
 next_generation(cells: string) -> string =>

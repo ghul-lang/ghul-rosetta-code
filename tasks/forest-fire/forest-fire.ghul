@@ -49,7 +49,7 @@ step(forest: Forest) -> Forest =>
     (0..rows)
         |> map(row =>
             (0..columns)
-                |> map(column => next(forest, row, column))
+                |> map(next(forest, row, *))
                 |> collect())
         |> collect()
 

@@ -57,7 +57,7 @@ prime(n: int, factors: LIST[int], radicals: LIST[int]) -> bool =>
     n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
 
 let primes = (2..(limit + 1))
-    |> filter(n => prime(n, factor_counts, radical))
+    |> filter(prime(*, factor_counts, radical))
     |> collect()
 
 let powers mut = 0

@@ -12,7 +12,7 @@ multisplit(text: string, separators: string[]) -> PIECE{} is
 
     while position < text.length do
         if let separator = separators
-            |> find(candidate => starts_with(text, position, candidate))
+            |> find(starts_with(text, position, *))
         then
             yield (text = text[start..position],
                    separator = separator, at = position)

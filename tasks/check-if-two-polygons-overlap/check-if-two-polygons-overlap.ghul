@@ -27,7 +27,7 @@ separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
 
 overlap(first: Polygon, second: Polygon) -> bool =>
     !(axes(first) ++ axes(second)
-        |> any(axis => separated(first, second, axis)))
+        |> any(separated(first, second, *)))
 
 polygon(corners: List[(double, double)]) -> Polygon =>
     corners |> map((x, y) => (x = x, y = y)) |> collect()

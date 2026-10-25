@@ -110,7 +110,7 @@ for (name, make) in inputs do
     let times =
         sorts
         |> map(sorter =>
-            data |> map(d => microseconds(sorter.sort, d)) |> collect())
+            data |> map(microseconds(sorter.sort, *)) |> collect())
         |> collect()
 
     write_line("{name}: time in microseconds")

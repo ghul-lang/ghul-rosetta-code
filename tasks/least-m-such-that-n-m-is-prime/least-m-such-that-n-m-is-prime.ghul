@@ -36,7 +36,7 @@ is_probable_prime(n: bigint) -> bool is
 
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n]
         |> filter(witness => witness < n)
-        |> all(witness => passes_round(witness, n, odd_part, twos))
+        |> all(passes_round(*, n, odd_part, twos))
 si
 
 has_factor_up_to(m: int, n: int) -> bool => 2::n |> any(p => m % p == 0)

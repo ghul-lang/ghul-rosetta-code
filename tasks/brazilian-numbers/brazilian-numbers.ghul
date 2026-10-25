@@ -16,7 +16,7 @@ same_digits(number: int, base: int) -> bool is
 si
 
 is_brazilian(number: int) -> bool =>
-    2..number - 1 |> any(base => same_digits(number, base))
+    2..number - 1 |> any(same_digits(number, *))
 
 is_prime(number: int) -> bool =>
     number > 1 /\ ((2..number)
