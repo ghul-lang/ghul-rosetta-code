@@ -71,9 +71,9 @@ let examples: List[ubyte][] = [
     [0x11ub, 0x22ub, 0ub, 0x33ub],
     [0x11ub, 0x22ub, 0x33ub, 0x44ub],
     [0x11ub, 0ub, 0ub, 0ub],
-    1::254 |> map(n => ubyte(n)) |> collect(),
-    0::254 |> map(n => ubyte(n)) |> collect(),
-    1::255 |> map(n => ubyte(n)) |> collect()
+    1::254 |> map(ubyte) |> collect(),
+    0::254 |> map(ubyte) |> collect(),
+    1::255 |> map(ubyte) |> collect()
 ]
 
 write_line("unencoded                              encoded")

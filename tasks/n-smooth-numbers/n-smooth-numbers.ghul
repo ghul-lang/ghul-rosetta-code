@@ -15,7 +15,7 @@ si
 
 smooth(bound: int, count: int) -> LIST[bigint] is
     let factors = 2::bound |> filter(is_prime)
-                             |> map(p => bigint(p))
+                             |> map(bigint)
                              |> collect()
 
     let found = LIST()

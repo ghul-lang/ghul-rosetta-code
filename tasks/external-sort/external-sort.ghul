@@ -75,7 +75,7 @@ split(path: string) -> List[string] is
 si
 
 merge(parts: List[string], into: string) is
-    let runs = parts |> map(part => RUN(part)) |> collect()
+    let runs = parts |> map(RUN) |> collect()
     let use writer = File.create_text(into)
 
     do

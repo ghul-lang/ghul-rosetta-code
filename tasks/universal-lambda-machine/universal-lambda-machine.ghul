@@ -260,13 +260,13 @@ let query = "010000011100111001110100000011100111010"
 
 let symbolic =
     IO.File.read_all_bytes("symbolic.Blc")
-        |> map(b => int(b))
-        |> cat(query |> map(c => int(c)))
+        |> map(int)
+        |> cat(query |> map(int))
         |> collect()
 
 let hilbert =
     IO.File.read_all_bytes("hilbert.Blc")
-        |> map(b => int(b))
+        |> map(int)
         |> collect()
 
 write_line()

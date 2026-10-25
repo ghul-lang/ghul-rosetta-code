@@ -37,7 +37,7 @@ render(sets: LIST[SET[string]]) -> string is
 si
 
 show(groups: string[][]) is
-    let sets = groups |> map(group => SET(group)) |> collect_mutable()
+    let sets = groups |> map(SET) |> collect_mutable()
 
     write_line("{render(sets)}")
     write_line("  consolidates to {render(consolidate(sets))}")

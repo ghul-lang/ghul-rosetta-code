@@ -56,7 +56,7 @@ largest_truncatable(base: int) -> bigint is
 
     let level mut =
         1::base - 1
-            |> map(digit => bigint(digit))
+            |> map(bigint)
             |> filter(is_prime)
             |> collect()
 
