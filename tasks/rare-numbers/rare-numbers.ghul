@@ -32,11 +32,10 @@ is_square(n: long) -> bool is
     return root * root == n
 si
 
-is_rare(n: long) -> bool is
-    let r = reverse_of(n)
+is_rare(n: long) -> bool =>
+    let r = reverse_of(n) in
+    n > r /\ is_square(n + r) /\ is_square(n - r)
 
-    return n > r /\ is_square(n + r) /\ is_square(n - r)
-si
 
 // The sum ends in the last digit of n plus its first, and the difference in
 // their difference, so a pair of those digits that can end neither square

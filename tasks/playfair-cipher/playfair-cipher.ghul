@@ -41,12 +41,10 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         od
     si
 
-    shift(pair: (char, char), step: int) -> string is
-        let (a, b) = pair
-        let (row_a, col_a) = position(a)
-        let (row_b, col_b) = position(b)
-
-        return
+    shift(pair: (char, char), step: int) -> string =>
+        let (a, b) = pair in
+        let (row_a, col_a) = position(a) in
+        let (row_b, col_b) = position(b) in
             if row_a == row_b then
                 "{at(row_a, col_a + step)}{at(row_b, col_b + step)}"
             elif col_a == col_b then
@@ -54,12 +52,11 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
             else
                 "{at(row_a, col_b)}{at(row_b, col_a)}"
             fi
-    si
 
-    position(c: char) -> (int, int) is
-        let index = _grid.index_of(c)
-        return (index / 5, index % 5)
-    si
+    position(c: char) -> (int, int) =>
+        let index = _grid.index_of(c) in
+        (index / 5, index % 5)
+
 
     at(row: int, col: int) -> char =>
         _grid[(row + 5) % 5 * 5 + (col + 5) % 5]

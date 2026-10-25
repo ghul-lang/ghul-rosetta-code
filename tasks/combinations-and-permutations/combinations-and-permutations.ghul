@@ -16,27 +16,22 @@ let coefficients = [
     -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
 ]
 
-log_gamma(x: double) -> double is
-    let xm = x - 1.0
-    let t = xm + g + 0.5
-    let term = (sum, i) => sum + coefficients[i] / (xm + double(i))
-    let a = 1::8 |> reduce(coefficients[0], term)
-
-    let half_log_2pi = 0.5 * System.Math.log(2.0 * System.Math.pi)
-
+log_gamma(x: double) -> double =>
+    let xm = x - 1.0 in
+    let t = xm + g + 0.5 in
+    let term = (sum, i) => sum + coefficients[i] / (xm + double(i)) in
+    let a = 1::8 |> reduce(coefficients[0], term) in
+    let half_log_2pi = 0.5 * System.Math.log(2.0 * System.Math.pi) in
     half_log_2pi + (xm + 0.5) * System.Math.log(t) - t + System.Math.log(a)
-si
 
 // A value too large for a double is shown as a mantissa and a
 // decimal exponent, both taken from the natural log rather than
 // from the value itself.
-scientific(ln_value: double) -> string is
-    let log10 = ln_value / System.Math.log(10.0)
-    let exponent = System.Math.floor(log10)
-    let mantissa = System.Math.pow(10.0, log10 - exponent)
-
+scientific(ln_value: double) -> string =>
+    let log10 = ln_value / System.Math.log(10.0) in
+    let exponent = System.Math.floor(log10) in
+    let mantissa = System.Math.pow(10.0, log10 - exponent) in
     "{mantissa,0:F6}e+{int(exponent)}"
-si
 
 approx_npk(n: int, k: int) -> string =>
     scientific(

@@ -32,16 +32,14 @@ overlap(a: Triangle, b: Triangle, touching: bool) -> bool =>
     let axes = edge_normals(a) ++ edge_normals(b) in
     !(axes |> any(axis => separated(a, b, axis, touching)))
 
-triangle(text: string) -> Triangle is
+triangle(text: string) -> Triangle =>
     let numbers =
         text.split(['(', ')', ','], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
             |> map(double.parse)
-            |> collect()
-
+            |> collect() in
     (0..3)
         |> map(i => P(numbers[2 * i], numbers[2 * i + 1]))
         |> collect()
-si
 
 let pairs = [
     ("(0,0),(5,0),(0,5)", "(0,0),(5,0),(0,6)"),

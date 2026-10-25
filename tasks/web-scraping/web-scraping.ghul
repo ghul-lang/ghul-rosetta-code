@@ -3,12 +3,10 @@ use System.Net.Http.HttpClient
 use System.Text.RegularExpressions.Regex
 
 // The task: fetch a page and pull just the UTC time out of its HTML.
-utc_time(url: string) -> string? is
-    let page = HttpClient().get_string_async(url).result
-    let found = Regex.match(page, "(\\d\\d:\\d\\d:\\d\\d)</span> UTC")
-
+utc_time(url: string) -> string? =>
+    let page = HttpClient().get_string_async(url).result in
+    let found = Regex.match(page, "(\\d\\d:\\d\\d:\\d\\d)</span> UTC") in
     if found.success then "{found.groups[1].value} UTC" else null fi
-si
 
 let found = utc_time("https://www.utctime.net/")
 

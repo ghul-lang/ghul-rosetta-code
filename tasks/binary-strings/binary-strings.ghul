@@ -5,13 +5,11 @@ to_text(bytes: List[ubyte]) -> string =>
 
 replace_byte(
     bytes: List[ubyte], old: ubyte, replacement: ubyte
-) -> LIST[ubyte] is
+) -> LIST[ubyte] =>
     let result = bytes
         |> map(b => if b == old then replacement else b fi)
-        |> collect_mutable()
-
+        |> collect_mutable() in
     result
-si
 
 join_bytes(a: List[ubyte], b: List[ubyte]) -> LIST[ubyte] is
     let result = LIST(a)

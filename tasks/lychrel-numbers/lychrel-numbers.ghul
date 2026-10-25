@@ -7,11 +7,9 @@ write_line("")
 reverse_digits(n: bigint) -> bigint =>
     bigint.parse("{n}" |> reverse() |> join(""))
 
-is_palindrome(n: bigint) -> bool is
-    let s = "{n}"
-
+is_palindrome(n: bigint) -> bool =>
+    let s = "{n}" in
     s =~ (s |> reverse() |> join(""))
-si
 
 lychrel_sequence(n: int) -> RESULT is
     let current mut = bigint(n)

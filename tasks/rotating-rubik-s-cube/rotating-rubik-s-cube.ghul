@@ -34,21 +34,17 @@ let faces: (normal: Point, u: Point, v: Point, colour: Colour)[] = [
     (x_axis * -1.0, y_axis, z_axis, rgb(255, 88, 0))
 ]
 
-turned(p: Point, angle: double) -> Point is
-    let x = p.x * cos(angle) + p.z * sin(angle)
-    let z = p.z * cos(angle) - p.x * sin(angle)
-
+turned(p: Point, angle: double) -> Point =>
+    let x = p.x * cos(angle) + p.z * sin(angle) in
+    let z = p.z * cos(angle) - p.x * sin(angle) in
     (
         x = x,
         y = p.y * cos(tilt) - z * sin(tilt),
         z = p.y * sin(tilt) + z * cos(tilt))
-si
 
-project(p: Point) -> (x: double, y: double) is
-    let scale = camera_distance / (camera_distance - p.z)
-
+project(p: Point) -> (x: double, y: double) =>
+    let scale = camera_distance / (camera_distance - p.z) in
     (x = p.x * scale, y = p.y * scale)
-si
 
 facing(normal: Point, angle: double) -> bool =>
     turned(normal, angle).z * camera_distance > 1.5

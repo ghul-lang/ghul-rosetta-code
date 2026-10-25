@@ -98,18 +98,16 @@ class LCA is
         let l = _lambda[_alfa[v] & ((1 << h) - 1)] in
         _tau[((_beta[v] >> l) | 1) << l]
 
-    query(u: int, v: int) -> int is
-        let low = System.Math.min(_beta[u], _beta[v])
-        let high = System.Math.max(_beta[u], _beta[v])
-        let common = _lambda[high & -low]
-        let k = _alfa[u] & _alfa[v] & -(1 << common)
-        let h = _lambda[k & -k]
-        let j = ((_beta[u] >> h) | 1) << h
-        let x = if j == _beta[u] then u else _climb(u, h) fi
-        let y = if j == _beta[v] then v else _climb(v, h) fi
-
+    query(u: int, v: int) -> int =>
+        let low = System.Math.min(_beta[u], _beta[v]) in
+        let high = System.Math.max(_beta[u], _beta[v]) in
+        let common = _lambda[high & -low] in
+        let k = _alfa[u] & _alfa[v] & -(1 << common) in
+        let h = _lambda[k & -k] in
+        let j = ((_beta[u] >> h) | 1) << h in
+        let x = if j == _beta[u] then u else _climb(u, h) fi in
+        let y = if j == _beta[v] then v else _climb(v, h) fi in
         if _pi[x] <= _pi[y] then x else y fi
-    si
 si
 
 //               1

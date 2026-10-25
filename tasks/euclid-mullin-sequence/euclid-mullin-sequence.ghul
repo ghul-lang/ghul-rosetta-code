@@ -92,10 +92,9 @@ si
 
 let sequence = euclid_mullin(16) |> collect()
 
-render(terms: Collections.List[bigint]) -> string is
-    let texts = terms |> map(term => "{term}")
+render(terms: Collections.List[bigint]) -> string =>
+    let texts = terms |> map(term => "{term}") in
+    texts |> join(" ")
 
-    return texts |> join(" ")
-si
 
 write_line("first 16: {render(sequence)}")

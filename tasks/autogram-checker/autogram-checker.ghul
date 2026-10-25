@@ -88,14 +88,13 @@ claimed_counts(sentence: string) -> MAP[char, int] is
     return claims
 si
 
-is_autogram(sentence: string, with_punctuation: bool) -> bool is
-    let actual = actual_counts(sentence, with_punctuation)
-    let claimed = claimed_counts(sentence)
+is_autogram(sentence: string, with_punctuation: bool) -> bool =>
+    let actual = actual_counts(sentence, with_punctuation) in
+    let claimed = claimed_counts(sentence) in
+    actual.count == claimed.count /\
 
-    return actual.count == claimed.count /\
         actual |> all((character, count) =>
             count_of(claimed, character) == count)
-si
 
 let sentences = [
     "This sentence employs two a's, two c's, two d's, twenty-eight "

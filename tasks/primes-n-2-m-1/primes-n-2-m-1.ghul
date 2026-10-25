@@ -42,16 +42,13 @@ passes(n: bigint, a: bigint, d: bigint, s: int) -> bool is
     return false
 si
 
-abbreviated(p: bigint) -> string is
-    let digits = "{p}"
-
-    return
+abbreviated(p: bigint) -> string =>
+    let digits = "{p}" in
         if digits.length <= 40 then
             digits
         else
             "{digits[0..20]}...{digits[20..<<0]} ({digits.length} digits)"
         fi
-si
 
 for n in 1::50 do
     let (m, p) =

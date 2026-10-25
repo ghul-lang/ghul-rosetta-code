@@ -3,14 +3,12 @@ use System.Reflection.BindingFlags
 
 use Microsoft.VisualStudio.TestTools.UnitTesting
 
-is_palindrome(text: string) -> bool is
+is_palindrome(text: string) -> bool =>
     let letters =
         text.to_lower().to_char_array()
             |> filter(char.is_letter_or_digit)
-            |> collect()
-
+            |> collect() in
     letters =~ (letters |> reverse() |> collect())
-si
 
 // MSTest 4 records the text of the checked expression through trailing
 // optional parameters, which a call has to supply.

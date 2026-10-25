@@ -11,11 +11,10 @@ let small = (centre = (x = 10.0, y = 10.0, z = 18.0), radius = 14.0)
 
 let light = (x = -0.5, y = 0.6, z = 1.0)
 
-normalized(v: VECTOR) -> VECTOR is
-    let length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
+normalized(v: VECTOR) -> VECTOR =>
+    let length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z) in
+    (x = v.x / length, y = v.y / length, z = v.z / length)
 
-    return (x = v.x / length, y = v.y / length, z = v.z / length)
-si
 
 depths(
     centre: VECTOR,

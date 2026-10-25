@@ -18,11 +18,9 @@ co9(x: long) -> long is
     n
 si
 
-co9_fast(x: long, base: long) -> long is
-    let residue = x % (base - 1L)
-
+co9_fast(x: long, base: long) -> long =>
+    let residue = x % (base - 1L) in
     if residue == 0L /\ x > 0L then base - 1L else residue fi
-si
 
 write_line("part 1: digit-sum checksum")
 

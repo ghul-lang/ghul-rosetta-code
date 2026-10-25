@@ -16,12 +16,10 @@ let face_values = [
     ("a", 14)
 ] |> collect_map()
 
-parse(card: string) -> (face: int, suit: char) is
-    let suit = card[card.length - 1]
-    let face_text = card[0..(card.length - 1)]
-
+parse(card: string) -> (face: int, suit: char) =>
+    let suit = card[card.length - 1] in
+    let face_text = card[0..(card.length - 1)] in
     (face_values[face_text], suit)
-si
 
 classify(hand: string) -> string is
     let tokens = hand.split([' '])

@@ -25,18 +25,15 @@ let pieces = [
 reading_order(a: Cell, b: Cell) -> int =>
     if a.row != b.row then a.row - b.row else a.column - b.column fi
 
-anchored(cells: Cell{}) -> Shape is
+anchored(cells: Cell{}) -> Shape =>
     let sorted =
         cells
             |> sort(reading_order)
-            |> collect()
-
-    let first = sorted[0]
-
+            |> collect() in
+    let first = sorted[0] in
     sorted
         |> map(c => cell_at(c.row - first.row, c.column - first.column))
         |> collect()
-si
 
 cell_at(row: int, column: int) -> Cell => (row = row, column = column)
 

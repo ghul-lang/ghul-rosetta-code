@@ -10,11 +10,9 @@ sudan(order: int, left: bigint, right: bigint) -> bigint =>
     )
     fi
 
-show(order: int, left: int, right: int) is
-    let value = sudan(order, cast(left), cast(right))
-
+show(order: int, left: int, right: int) =>
+    let value = sudan(order, cast(left), cast(right)) in
     write_line("F({order}, {left}, {right}) = {value}")
-si
 
 for right in 0::3 do
     show(0, 3, right)

@@ -16,19 +16,16 @@ row(line: string, cell: string) -> string =>
         |> map(value => "      <{cell}>{escaped(value)}</{cell}>")
         |> join("\n")
 
-table(csv: string) -> string is
-    let lines = csv.split(['\n'])
-
+table(csv: string) -> string =>
+    let lines = csv.split(['\n']) in
     let head =
-        "  <thead>\n    <tr>\n{row(lines[0], "th")}\n    </tr>\n  </thead>"
-
+        "  <thead>\n    <tr>\n{row(lines[0], "th")}\n    </tr>\n  </thead>" in
     let body =
         lines[1..lines.count]
             |> map(line => "    <tr>\n{row(line, "td")}\n    </tr>")
-            |> join("\n")
+            |> join("\n") in
+    "<table>\n{head}\n  <tbody>\n{body}\n  </tbody>\n</table>"
 
-    return "<table>\n{head}\n  <tbody>\n{body}\n  </tbody>\n</table>"
-si
 
 let csv =
     "Character,Speech\n"

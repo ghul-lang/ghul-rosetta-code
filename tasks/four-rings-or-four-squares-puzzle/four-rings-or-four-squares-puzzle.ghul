@@ -58,16 +58,14 @@ left_of(at: int) -> double => margin + double(at) * step
 
 top_of(at: int) -> double => margin + if at % 2 == 0 then 0.0 else drop fi
 
-outline(at: int) -> (x: double, y: double)[] is
-    let x = left_of(at)
-    let y = top_of(at)
-
+outline(at: int) -> (x: double, y: double)[] =>
+    let x = left_of(at) in
+    let y = top_of(at) in
     [
         (x = x, y = y),
         (x = x + side, y = y),
         (x = x + side, y = y + side),
         (x = x, y = y + side)]
-si
 
 cell(x: double, y: double, letter: string, value: int, image: IMAGE) is
     image.text(x, y - 8.0, 15.0, letter, Anchor.CENTRE)

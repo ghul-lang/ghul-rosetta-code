@@ -16,17 +16,15 @@ pad(text: string, width: int) -> string =>
         pad(" {text}", width)
     fi
 
-show(matrix: int[][]) is
+show(matrix: int[][]) =>
     let width =
         ["{value}".length for row in matrix for value in row]
             |> reduce(1, (widest, length) =>
-                if length > widest then length else widest fi)
-
+                if length > widest then length else widest fi) in
     matrix
         |> each(row => write_line(row
             |> map(value => pad("{value}", width))
             |> join(" ")))
-si
 
 for pair in [(left = [[1, 2], [3, 4]], right = [[0, 5], [6, 7]]),
              (left = [[0, 1, 0], [1, 1, 1], [0, 1, 0]],

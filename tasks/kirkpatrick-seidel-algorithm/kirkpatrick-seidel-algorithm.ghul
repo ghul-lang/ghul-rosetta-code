@@ -103,12 +103,10 @@ upper(points: List[P], first: P, last: P) -> List[P] is
     before ++ after |> collect()
 si
 
-upper_hull(points: List[P]) -> List[P] is
-    let first = leftmost(points), last = rightmost(points)
-    let between = points |> filter(p => p.x > first.x /\ p.x < last.x)
-
+upper_hull(points: List[P]) -> List[P] =>
+    let first = leftmost(points), last = rightmost(points) in
+    let between = points |> filter(p => p.x > first.x /\ p.x < last.x) in
     upper(between ++ [first, last] |> collect(), first, last)
-si
 
 flipped(points: P{}) -> List[P] =>
     points |> map(p => P(p.x, -p.y)) |> collect()

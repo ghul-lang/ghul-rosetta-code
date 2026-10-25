@@ -14,20 +14,16 @@ axes(shape: Polygon) -> Point{} =>
         |> map(index =>
             normal(shape[index], shape[(index + 1) % shape.count]))
 
-spread(polygon: Polygon, axis: Point) -> (low: double, high: double) is
-    let alongs = polygon |> map(corner => corner ⋅ axis) |> collect()
-
-    return
+spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
+    let alongs = polygon |> map(corner => corner ⋅ axis) |> collect() in
         (low = alongs |> reduce(alongs[0], System.Math.min),
          high = alongs |> reduce(alongs[0], System.Math.max))
-si
 
-separated(first: Polygon, second: Polygon, axis: Point) -> bool is
-    let (low, high) = spread(first, axis)
-    let (other_low, other_high) = spread(second, axis)
+separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
+    let (low, high) = spread(first, axis) in
+    let (other_low, other_high) = spread(second, axis) in
+    high < other_low \/ other_high < low
 
-    return high < other_low \/ other_high < low
-si
 
 overlap(first: Polygon, second: Polygon) -> bool =>
     !(axes(first) ++ axes(second)

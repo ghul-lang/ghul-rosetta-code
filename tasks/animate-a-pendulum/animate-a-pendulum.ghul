@@ -14,11 +14,9 @@ let height = 180
 let frames = 40
 let substeps = 25
 
-advance(state: STATE, dt: double) -> STATE is
-    let rate = state.rate - dt * gravity / length * sin(state.angle)
-
+advance(state: STATE, dt: double) -> STATE =>
+    let rate = state.rate - dt * gravity / length * sin(state.angle) in
     (angle = state.angle + dt * rate, rate = rate)
-si
 
 quarter_period(dt: double) -> double is
     let state mut = (angle = swing, rate = 0.0D)

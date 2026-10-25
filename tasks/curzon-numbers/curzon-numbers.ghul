@@ -1,12 +1,11 @@
 use default
 
-is_curzon(base: int, n: int) -> bool is
-    let divisor = bigint(base * n + 1)
-    let big_base = bigint(base)
-    let power = bigint.mod_pow(big_base, bigint(n), divisor)
+is_curzon(base: int, n: int) -> bool =>
+    let divisor = bigint(base * n + 1) in
+    let big_base = bigint(base) in
+    let power = bigint.mod_pow(big_base, bigint(n), divisor) in
+    (power + 1n) % divisor =~ 0n
 
-    return (power + 1n) % divisor =~ 0n
-si
 
 curzon_numbers(base: int) -> int{} is
     let n mut = 1

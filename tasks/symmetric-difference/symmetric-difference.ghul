@@ -3,11 +3,9 @@ use default
 only_in(left: SET[string], right: SET[string]) -> string{} =>
     left |> filter(name => !right.contains(name))
 
-show(label: string, names: string{}) is
-    let listed = names |> join()
-
+show(label: string, names: string{}) =>
+    let listed = names |> join() in
     write_line("{label}: {listed}")
-si
 
 let a = SET(["John", "Serena", "Bob", "Mary", "Serena"])
 let b = SET(["Jim", "Mary", "John", "Jim", "Bob"])

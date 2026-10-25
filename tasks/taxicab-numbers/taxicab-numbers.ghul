@@ -58,11 +58,9 @@ expressions(taxi: long) -> string => (
     parts |> join(" = ")
 )
 
-show(rank: int, taxis: List[long]) is
-    let taxi = taxis[rank - 1]
-
+show(rank: int, taxis: List[long]) =>
+    let taxi = taxis[rank - 1] in
     write_line("{rank}: {taxi} = {expressions(taxi)}")
-si
 
 write_line("the lowest 25 taxicab numbers:")
 
