@@ -70,7 +70,7 @@ let triangles =
         |> flat_map(a => (a::200)
             |> flat_map(b => (b::200)
                 |> filter(c => a + b > c /\ gcd(gcd(a, b), c) == 1)
-                |> map(c => try_triangle(a, b, c))))
+                |> map(try_triangle(a, b, *))))
         |> filter(t => t?)
         |> map(t => t!)
         |> sort(compare_triangles)
