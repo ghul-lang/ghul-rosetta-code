@@ -18,7 +18,7 @@ let operation = add
 write_line("first class: {operation(4, 5)}")
 write_line("threaded first argument: {6 |> add(7)}")
 
-let add_ten = value => add(10, value)
+let add_ten = add(10, *)
 
 write_line("partial application: {add_ten(1)}")
 
