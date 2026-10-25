@@ -32,7 +32,7 @@ classify(hand: string) -> string is
         let cards = tokens |> map(parse) |> collect()
         let seen = SET[(int, char)]()
 
-        if !(cards |> all(c => seen.add(c))) then
+        if !(cards |> all(seen.add)) then
             "invalid"
         else
             let faces = cards
