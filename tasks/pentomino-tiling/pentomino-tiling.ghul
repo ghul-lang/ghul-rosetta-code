@@ -152,8 +152,7 @@ let hues = "FILNPTUVWXYZ"
 colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let h = double(hues.index_of(name)) / 12.0D * 6.0D in
     let f = h - System.Math.floor(h), i = int(h) in
-    let up = ubyte(90.0D + 150.0D * f) in
-    let down = ubyte(240.0D - 150.0D * f) in
+    let up = ubyte(90.0D + 150.0D * f), down = ubyte(240.0D - 150.0D * f) in
     case i
     when 0 then (red = 240ub, green = up, blue = 90ub)
     when 1 then (red = down, green = 240ub, blue = 90ub)

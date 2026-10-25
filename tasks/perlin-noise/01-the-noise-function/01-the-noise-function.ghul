@@ -46,8 +46,7 @@ grad(hash: int, x: double, y: double, z: double) -> double =>
 
 
 noise(at_x: double, at_y: double, at_z: double) -> double =>
-    let unit_x = int(floor(at_x)) & 255 in
-    let unit_y = int(floor(at_y)) & 255 in
+    let unit_x = int(floor(at_x)) & 255, unit_y = int(floor(at_y)) & 255 in
     let unit_z = int(floor(at_z)) & 255, x = at_x - floor(at_x) in
     let y = at_y - floor(at_y), z = at_z - floor(at_z), u = fade(x) in
     let v = fade(y), w = fade(z), a = p[unit_x] + unit_y in

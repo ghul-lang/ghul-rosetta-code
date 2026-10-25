@@ -14,8 +14,7 @@ half_adder(a: bool, b: bool) -> (sum: bool, carry: bool) =>
 full_adder(a: bool, b: bool, carry_in: bool)
     -> (sum: bool, carry: bool)
 =>
-    let lower = half_adder(a, b) in
-    let upper = half_adder(lower.sum, carry_in) in
+    let lower = half_adder(a, b), upper = half_adder(lower.sum, carry_in) in
     (sum = upper.sum, carry = or(lower.carry, upper.carry))
 
 four_bit_adder(a: bool[], b: bool[], carry_in: bool)

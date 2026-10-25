@@ -42,8 +42,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
     si
 
     shift(pair: (char, char), step: int) -> string =>
-        let (a, b) = pair in
-        let (row_a, col_a) = position(a) in
+        let (a, b) = pair, (row_a, col_a) = position(a) in
         let (row_b, col_b) = position(b) in
             if row_a == row_b then
                 "{at(row_a, col_a + step)}{at(row_b, col_b + step)}"

@@ -100,8 +100,7 @@ outline(symbol: int, x: double, y: double)
                 (x = x + 7.0D * cos(t) + 4.0D * sin(dy / 6.0D),
                  y = y + dy)
             else
-                let s = sin(t), c = cos(t) in
-                let k = 1.0D / (abs(s) + abs(c)) in
+                let s = sin(t), c = cos(t), k = 1.0D / (abs(s) + abs(c)) in
                 (x = x + 9.0D * c * k, y = y + 19.0D * s * k)
             esac)
         |> collect()

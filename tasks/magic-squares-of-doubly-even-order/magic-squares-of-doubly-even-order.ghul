@@ -5,8 +5,7 @@ magic(n: int) -> List[List[int]] =>
         |> map(row =>
             (0..n)
                 |> map(column =>
-                    let i = row * n + column in
-                    let r = row % 4, c = column % 4 in
+                    let i = row * n + column, r = row % 4, c = column % 4 in
                     let keep = r == c \/ r + c == 3 in
                     if keep then n * n - i else i + 1 fi)
                 |> collect())
