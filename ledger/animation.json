@@ -1,6 +1,7 @@
 {
   "title": "Animation",
-  "state": "solved",
+  "slug": "animation",
+  "state": "published",
   "note": "reopened, was rejected/needs-gui: ghul.raster supports animated PNGs via Raster.ANIMATION and add, so the rotating text can be pre-rendered as a cyclic animation",
-  "slug": "animation"
+  "published_hash": "50f3d9941d88b02b393f8ee0764da633641f2e95d900879661ece74cf3c142a4"
 }

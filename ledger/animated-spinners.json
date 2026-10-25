@@ -1,6 +1,6 @@
 {
   "title": "Animated Spinners",
+  "slug": "animated-spinners",
   "state": "solved",
-  "note": "reopened, was rejected/needs-gui: ghul.raster can draw the spinner frames and collect them into an animated PNG, so no native GUI window is needed",
-  "slug": "animated-spinners"
+  "note": "reopened, was rejected/needs-gui: ghul.raster can draw the spinner frames and collect them into an animated PNG, so no native GUI window is needed"
 }
