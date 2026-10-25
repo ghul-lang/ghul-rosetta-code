@@ -8,7 +8,7 @@ report_empty(pending: Queue[string]) is
     write_line("empty: {state}")
 si
 
-["first", "second", "third"] |> each(item => queue.enqueue(item))
+["first", "second", "third"] |> each(queue.enqueue)
 
 report_empty(queue)
 

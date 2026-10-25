@@ -9,7 +9,7 @@ make_list(separator: string) -> string is
     )
 
     let items = ["first", "second", "third"]
-        |> map(item => make_item(item))
+        |> map(make_item)
 
     return items |> join("\n")
 si

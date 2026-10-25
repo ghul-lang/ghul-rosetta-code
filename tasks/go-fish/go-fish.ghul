@@ -36,7 +36,7 @@ sorted_hand(hand: LIST[int]) -> string =>
 
      System.Array.sort(held)
 
-     held |> map(card => name_of(card)) |> join(" "))
+     held |> map(name_of) |> join(" "))
 
 draw() -> int? =>
     if deck.count == 0 then
@@ -88,7 +88,7 @@ my_choice() -> int =>
             |> filter(rank => held(me, rank) > 0)
 
      let known =
-         mine |> filter(rank => you_hold.contains(rank)) |> collect()
+         mine |> filter(you_hold.contains) |> collect()
 
      let untried =
          mine |> filter(rank => !you_lack.contains(rank)) |> collect()

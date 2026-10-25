@@ -11,7 +11,7 @@ let hashes = [
 ]
 
 let targets = hashes
-    |> map(hex => System.Convert.from_hex_string(hex))
+    |> map(System.Convert.from_hex_string)
     |> collect()
 
 let found = ConcurrentDictionary[int, string]()

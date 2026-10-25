@@ -4,7 +4,7 @@ sorted_letters(word: string) -> string =>
     string(word |> sort() |> collect())
 
 let sets = IO.File.read_all_lines("unixdict.txt")
-    |> group_by(word => sorted_letters(word))
+    |> group_by(sorted_letters)
 
 let largest =
     sets.values

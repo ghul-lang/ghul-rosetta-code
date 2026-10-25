@@ -93,7 +93,7 @@ let circuit =
     eulerian_circuit(n, tree ++ matching |> collect())
 
 let visited = SET()
-let tour = circuit |> filter(v => visited.add(v)) |> collect_mutable()
+let tour = circuit |> filter(visited.add) |> collect_mutable()
 
 tour.add(tour[0])
 

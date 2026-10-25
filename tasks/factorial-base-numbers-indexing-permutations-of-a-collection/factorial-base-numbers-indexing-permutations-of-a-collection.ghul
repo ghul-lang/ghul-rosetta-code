@@ -38,7 +38,7 @@ factorial_base_numbers(places: int) -> LIST[int]{} is
 si
 
 parse_digits(text: string) -> LIST[int] =>
-    text.split(['.']) |> map(part => int.parse(part)) |> collect_mutable()
+    text.split(['.']) |> map(int.parse) |> collect_mutable()
 
 show[T](digits: Collections.List[int], items: Collections.List[T]) is
     let number = digits |> map(d => "{d}") |> join(".")

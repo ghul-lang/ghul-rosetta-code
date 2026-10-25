@@ -16,7 +16,7 @@ shortest_superstring(sequences: string[]) -> string is
 
     for sequence in sequences do
         if !(pieces |> any(p => p.contains(sequence))) then
-            pieces.remove_all(p => sequence.contains(p))
+            pieces.remove_all(sequence.contains)
             pieces.add(sequence)
         fi
     od

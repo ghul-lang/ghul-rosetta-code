@@ -31,7 +31,7 @@ jaro(left: string, right: string) -> double is
 
     let matched_right =
         (0..right.length)
-        |> filter(j => taken.contains(j))
+        |> filter(taken.contains)
         |> map(j => right[j])
         |> collect()
 

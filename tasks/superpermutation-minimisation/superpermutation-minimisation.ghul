@@ -49,7 +49,7 @@ permutations(letters: string) -> List[string] =>
     fi
 
 contains_all(s: string, n: int) -> bool =>
-    permutations(alphabet.substring(0, n)) |> all(p => s.contains(p))
+    permutations(alphabet.substring(0, n)) |> all(s.contains)
 
 factorial(n: int) -> int => 1::n |> reduce(1, (a, b) => a * b)
 

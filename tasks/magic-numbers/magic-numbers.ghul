@@ -34,7 +34,7 @@ od
 
 pandigital(n: bigint, digits: string) -> bool =>
     let text = "{n}" in
-    text.length == digits.length /\ digits |> all(d => text.contains(d))
+    text.length == digits.length /\ digits |> all(text.contains)
 
 for digits in ["123456789", "0123456789"] do
     let found = magic |> filter(n => pandigital(n, digits)) |> join()

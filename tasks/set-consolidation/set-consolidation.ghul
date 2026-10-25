@@ -8,7 +8,7 @@ consolidate(input: LIST[SET[string]]) -> LIST[SET[string]] is
         let kept = LIST()
 
         for existing in result do
-            if existing |> any(item => merged.contains(item)) then
+            if existing |> any(merged.contains) then
                 merged.union_with(existing)
             else
                 kept.add(existing)

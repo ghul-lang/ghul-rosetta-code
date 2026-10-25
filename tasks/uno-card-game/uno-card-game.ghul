@@ -269,7 +269,7 @@ take_turn(seat: int) -> Played? is
             fi
 
             chosen_colour =
-                colours |> filter(c => reply.contains(c)) |> first() ??
+                colours |> filter(reply.contains) |> first() ??
                     chosen_colour
         fi
     fi
@@ -407,7 +407,7 @@ while scores |> all(s => s < 500) do
         (0..4)
             |> filter(s => s != winner)
             |> flat_map(s => hands[s])
-            |> sum_by(card => points(card))
+            |> sum_by(points)
 
     scores[winner] = scores[winner] + won
     verbose = false

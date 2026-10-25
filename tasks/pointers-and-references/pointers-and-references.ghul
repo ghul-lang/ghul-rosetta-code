@@ -35,7 +35,7 @@ write_line("through a reference: count is {count.value}")
 
 let boxes = [BOX(10), BOX(20)]
 
-boxes |> each(b => bump_box(b))
+boxes |> each(bump_box)
 
 let values = boxes |> map(b => b.value) |> join()
 

@@ -90,7 +90,7 @@ while first_order.count < 10 do
     n = n + 1
 
     let heights = cyclotomic(n)
-        |> map(c => System.Math.abs(c))
+        |> map(System.Math.abs)
         |> filter(h => h >= 1L /\ h <= 10L)
 
     for height in heights do

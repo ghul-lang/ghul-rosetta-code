@@ -8,7 +8,7 @@ is_alphabetic(character: char) -> bool =>
 prepared(text: string) -> string =>
     text
         |> filter(is_alphabetic)
-        |> map(character => char.to_upper_invariant(character))
+        |> map(char.to_upper_invariant)
         |> join("")
 
 shifted(text: string, key: string, direction: int) -> string is

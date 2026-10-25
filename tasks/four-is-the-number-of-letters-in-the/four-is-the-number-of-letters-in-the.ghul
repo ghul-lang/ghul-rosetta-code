@@ -86,7 +86,7 @@ ordinal(value: int) -> string is
 si
 
 letters(word: string) -> int =>
-    word |> filter(c => char.is_letter(c)) |> count()
+    word |> filter(char.is_letter) |> count()
 
 let words = LIST()
 

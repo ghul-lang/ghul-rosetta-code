@@ -118,7 +118,7 @@ class PREPROCESSOR(debug: bool) is
                 fi
             else
                 let replaced =
-                    usage.replace(line, m => call(m))
+                    usage.replace(line, call)
 
                 output.add(replaced)
             fi

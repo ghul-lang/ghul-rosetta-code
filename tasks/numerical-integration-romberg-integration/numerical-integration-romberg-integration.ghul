@@ -42,8 +42,8 @@ romberg(
     rows[rows.count - 1][rows.count - 1]
 si
 
-let sine = romberg(x => sin(x), 0.0, 1.0, 5, 1.0e-9)
-let exponential = romberg(x => exp(x), -3.0, 3.0, 5, 1.0e-9)
+let sine = romberg(sin, 0.0, 1.0, 5, 1.0e-9)
+let exponential = romberg(exp, -3.0, 3.0, 5, 1.0e-9)
 
 write_line("sin(x) from 0 to 1: {sine:F8}")
 write_line("exp(x) from -3 to 3: {exponential:F7}")

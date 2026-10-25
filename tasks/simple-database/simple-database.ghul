@@ -23,7 +23,7 @@ si
 read_all(file: string) -> LIST[ENTRY] =>
     if IO.File.exists(file) then
         IO.File.read_all_lines(file)
-            |> map(line => ENTRY.read(line))
+            |> map(ENTRY.read)
             |> filter(entry => entry?)
             |> map(entry => entry!)
             |> collect_mutable()

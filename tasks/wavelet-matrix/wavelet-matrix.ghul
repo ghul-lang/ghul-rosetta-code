@@ -54,7 +54,7 @@ class WAVELET(values: List[int] init) is
 
             _below.add(zeros.count)
 
-            ones |> each(v => zeros.add(v))
+            ones |> each(zeros.add)
 
             holding = zeros
         od

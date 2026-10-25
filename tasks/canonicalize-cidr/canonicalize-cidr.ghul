@@ -3,7 +3,7 @@ use default
 canonicalize(cidr: string) -> string is
     let parts = cidr.split(['/'])
     let bits = int.parse(parts[1])
-    let octets = parts[0].split(['.']) |> map(octet => long.parse(octet))
+    let octets = parts[0].split(['.']) |> map(long.parse)
 
     let address =
         octets |> reduce(0L, (packed, octet) => packed * 256L + octet)

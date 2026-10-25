@@ -5,8 +5,8 @@ let text =
 
 let counts =
     text
-        |> filter(c => char.is_letter(c))
-        |> group_by(c => char.to_lower_invariant(c))
+        |> filter(char.is_letter)
+        |> group_by(char.to_lower_invariant)
 
 for letter in counts.keys |> sort_by(k => k) do
     write_line("{letter}: {counts[letter].count}")

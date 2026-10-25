@@ -85,6 +85,6 @@ let queue = PRIORITY_QUEUE()
     JOB(5, "Make tea"),
     JOB(1, "Solve RC tasks"),
     JOB(2, "Tax return")
-] |> each(job => queue.push(job))
+] |> each(queue.push)
 
 drain(queue) |> each(job => write_line("{job}"))
