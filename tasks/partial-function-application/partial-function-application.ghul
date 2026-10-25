@@ -6,8 +6,8 @@ fs(f: (int) -> int, s: int{}) -> int{} =>
 f1(n: int) -> int => n * 2
 f2(n: int) -> int => n * n
 
-let fsf1 = s => fs(f1, s)
-let fsf2 = s => fs(f2, s)
+let fsf1 = fs(f1, *)
+let fsf2 = fs(f2, *)
 
 for s in [0::3, [2, 4, 6, 8]] do
     write_line("fsf1: {fsf1(s) |> join(", ")}")
