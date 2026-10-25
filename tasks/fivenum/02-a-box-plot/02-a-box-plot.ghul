@@ -13,8 +13,7 @@ fivenum(xs_raw: double[]) -> double[] is
         double(n) + 1.0 - n4, double(n)
     ]
     midpoint(di) =>
-        let lo = xs[int(floor(di)) - 1] in
-        let hi = xs[int(ceiling(di)) - 1] in
+        let lo = xs[int(floor(di)) - 1], hi = xs[int(ceiling(di)) - 1] in
         0.5 * (lo + hi)
 
     d |> map(midpoint) |> collect()

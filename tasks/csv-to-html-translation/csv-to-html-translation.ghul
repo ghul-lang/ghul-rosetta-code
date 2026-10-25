@@ -19,7 +19,8 @@ row(line: string, cell: string) -> string =>
 table(csv: string) -> string =>
     let lines = csv.split(['\n']) in
     let head =
-        "  <thead>\n    <tr>\n{row(lines[0], "th")}\n    </tr>\n  </thead>" in
+        "  <thead>\n    <tr>\n{row(lines[0], "th")}\n    </tr>\n  </thead>"
+        in
     let body =
         lines[1..lines.count]
             |> map(line => "    <tr>\n{row(line, "td")}\n    </tr>")

@@ -106,8 +106,7 @@ od
 write_line("")
 
 ends(p: Placed) -> string =>
-    let last = p.word.length - 1 in
-    let end_column = p.column + p.dc * last in
+    let last = p.word.length - 1, end_column = p.column + p.dc * last in
     let end_row = p.row + p.dr * last in
     "({p.column},{p.row})({end_column},{end_row})"
 

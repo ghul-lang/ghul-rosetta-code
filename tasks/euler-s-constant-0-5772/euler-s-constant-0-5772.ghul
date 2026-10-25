@@ -11,8 +11,7 @@ euler_maclaurin(n: int) -> double =>
         bernoulli
             |> index()
             |> sum_by((i, b) =>
-                let power = 2 * (i + 1) in
-                let exponent = double(power) in
+                let power = 2 * (i + 1), exponent = double(power) in
                 b / (exponent * double.pow(size, exponent)))
     in
     harmonic - double.log(size) - 1.0 / (2.0 * size) + correction

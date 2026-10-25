@@ -17,8 +17,7 @@ for candidate in 2::limit do
 od
 
 is_blum(value: int) -> bool =>
-    let p = smallest_factor[value] in
-    let q = value / p in
+    let p = smallest_factor[value], q = value / p in
     p != q /\ p % 4 == 3 /\ q % 4 == 3 /\ smallest_factor[q] == q
 
 

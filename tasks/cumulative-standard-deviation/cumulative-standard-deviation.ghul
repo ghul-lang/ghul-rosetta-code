@@ -2,9 +2,7 @@ use default
 use System.Math.sqrt
 
 let standard_deviation =
-    let count mut = 0 in
-    let total mut = 0.0D in
-    let squares mut = 0.0D in
+    let count mut = 0, total mut = 0.0D, squares mut = 0.0D in
 
     sample => (
         count = count + 1

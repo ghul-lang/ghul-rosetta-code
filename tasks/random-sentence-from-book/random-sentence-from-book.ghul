@@ -12,7 +12,8 @@ let apostrophes = ['\'', '\u2019']
 // part of what the task asks to read.
 book_text(path: string) -> string =>
     let whole = IO.File.read_all_text(path) in
-    let start = whole.index_of("*** START OF THE PROJECT GUTENBERG EBOOK") in
+    let start = whole.index_of("*** START OF THE PROJECT GUTENBERG EBOOK")
+    in
     let finish = whole.index_of("*** END OF THE PROJECT GUTENBERG EBOOK") in
     let from = whole.index_of('\n', start) + 1 in
     whole.substring(from, finish - from)

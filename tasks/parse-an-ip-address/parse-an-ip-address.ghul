@@ -7,8 +7,7 @@ use Parsed = (address: IPAddress, port: int?)
 after(text: string, index: int) -> string => text[index + 1..<0]
 
 bracketed(text: string) -> Parsed =>
-    let close = text.index_of(']') in
-    let has_port = close + 1 < text.length in
+    let close = text.index_of(']'), has_port = close + 1 < text.length in
     let port =
         if has_port then int.parse(after(text, close + 1)) else null fi in
     (address = IPAddress.parse(text[1..close]), port = port)

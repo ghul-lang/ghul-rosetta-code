@@ -19,9 +19,7 @@ let yaw = 0.9D
 let pitch = 0.3D
 
 surface(u: double, v: double) -> VEC =>
-    let c = cos(u) in
-    let s = sin(u) in
-    let cv = cos(v) in
+    let c = cos(u), s = sin(u), cv = cos(v) in
     let x = -2.0D / 15.0D * c * (
         3.0D * cv - 30.0D * s + 90.0D * pow(c, 4.0D) * s -
         60.0D * pow(c, 6.0D) * s + 5.0D * c * cv * s) in

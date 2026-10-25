@@ -13,8 +13,7 @@ normalize(text: string) -> string =>
         |> join("")
 
 encrypt(text: string, square: SQUARE) -> string =>
-    let letters = normalize(text) in
-    let n = letters.length in
+    let letters = normalize(text), n = letters.length in
     let rows = letters |> map(square.row) in
     let cols = letters |> map(square.col) in
     let coords = rows ++ cols |> collect() in
@@ -23,8 +22,7 @@ encrypt(text: string, square: SQUARE) -> string =>
         |> join("")
 
 decrypt(text: string, square: SQUARE) -> string =>
-    let letters = normalize(text) in
-    let n = letters.length in
+    let letters = normalize(text), n = letters.length in
     let coords = letters
         |> flat_map(ch => [square.row(ch), square.col(ch)])
         |> collect() in

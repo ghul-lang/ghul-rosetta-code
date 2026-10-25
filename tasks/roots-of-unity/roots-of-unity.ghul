@@ -11,8 +11,7 @@ tidy(x: double) -> double =>
     if System.Math.abs(x) < 0.00005 then 0.0 else x fi
 
 show(z: Complex) -> string =>
-    let re = tidy(z.real) in
-    let im = tidy(z.imaginary) in
+    let re = tidy(z.real), im = tidy(z.imaginary) in
     let sign = if im < 0.0 then "-" else "+" fi in
     "{re,7:F4} {sign} {System.Math.abs(im):F4}i"
 

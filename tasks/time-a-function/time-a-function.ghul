@@ -9,10 +9,8 @@ spent() -> double =>
         .total_milliseconds
 
 timed(name: string, work: () -> int) =>
-    let clock = Stopwatch.start_new() in
-    let before = spent() in
-    let answer = work() in
-    let elapsed = clock.elapsed.total_milliseconds in
+    let clock = Stopwatch.start_new(), before = spent() in
+    let answer = work(), elapsed = clock.elapsed.total_milliseconds in
     let processor = spent() - before in
     write_line(
         "{name,-22} {answer,12}  {elapsed,8:F2} ms elapsed  "

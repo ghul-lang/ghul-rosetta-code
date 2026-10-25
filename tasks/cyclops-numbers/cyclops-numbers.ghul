@@ -61,8 +61,7 @@ cyclops() -> long{} is
 si
 
 blinded(value: long) -> long =>
-    let text = "{value}" in
-    let middle = text.length / 2 in
+    let text = "{value}", middle = text.length / 2 in
     long.parse("{text[0..middle]}{text[middle + 1..<0]}")
 
 

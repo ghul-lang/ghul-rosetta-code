@@ -17,8 +17,7 @@ let format = "MMMM d yyyy h:mmtt"
 let culture = CultureInfo.invariant_culture
 
 parse(text: string) -> DateTimeOffset =>
-    let split = text.last_index_of(' ') in
-    let zone = text[split + 1..<0] in
+    let split = text.last_index_of(' '), zone = text[split + 1..<0] in
     let clock = DateTime.parse_exact(text[0..split], format, culture) in
     DateTimeOffset(clock, TimeSpan.from_hours(offsets[zone]))
 

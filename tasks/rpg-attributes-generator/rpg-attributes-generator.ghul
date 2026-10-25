@@ -4,8 +4,7 @@ let dice = System.Random(20260909)
 
 attribute() -> int =>
     let rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect() in
-    let lowest = rolls |> min_by(roll => roll) in
-    let total = rolls |> sum() in
+    let lowest = rolls |> min_by(roll => roll), total = rolls |> sum() in
     total - (lowest ?? 0)
 
 

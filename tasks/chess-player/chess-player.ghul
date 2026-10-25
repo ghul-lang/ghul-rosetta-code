@@ -281,8 +281,7 @@ value(piece: char) -> int =>
     esac
 
 centrality(square: int) -> int =>
-    let row = square / 8 in
-    let column = square % 8 in
+    let row = square / 8, column = square % 8 in
     6 - abs(2 * row - 7) / 2 - abs(2 * column - 7) / 2
 
 evaluate(position: POSITION) -> int =>

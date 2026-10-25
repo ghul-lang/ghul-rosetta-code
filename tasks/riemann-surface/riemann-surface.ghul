@@ -36,8 +36,7 @@ angle(i: int) -> double =>
 radius(j: int) -> double => reach * double(j) / double(along)
 
 corner(i: int, j: int) -> VEC =>
-    let t = angle(i) in
-    let r = radius(j) in
+    let t = angle(i), r = radius(j) in
     VEC(
         r * cos(t),
         r * sin(t),

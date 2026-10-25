@@ -202,16 +202,14 @@ bits_of(bytes: List[int]) -> List[bool] =>
 
 run_bits(program: string, limit: int) -> string =>
     let bits = program |> map(c => c == '1') |> collect() in
-    let reader = READER(bits) in
-    let term = reader.term() in
+    let reader = READER(bits), term = reader.term() in
     let input = list(bits |> skip(reader.at) |> map(bit) |> collect()) in
     items(THUNK(Term.APP(term, input), null), limit)
         |> map(t => "{bit_of(t)}")
         |> join("")
 
 run_bytes(bytes: List[int], limit: int) -> string =>
-    let reader = READER(bits_of(bytes)) in
-    let term = reader.term() in
+    let reader = READER(bits_of(bytes)), term = reader.term() in
     let used = (reader.at + 7) / 8 in
     let rest = bytes |> skip(used) |> map(byte) |> collect() in
     items(THUNK(Term.APP(term, list(rest)), null), limit)

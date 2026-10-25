@@ -11,9 +11,9 @@ let full = 2.0D * pi
 
 centre_of(a: P, b: P, c: P) -> P =>
     let d =
-        2.0D * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) in
-    let a2 = a.x * a.x + a.y * a.y in
-    let b2 = b.x * b.x + b.y * b.y in
+        2.0D * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+        in
+    let a2 = a.x * a.x + a.y * a.y, b2 = b.x * b.x + b.y * b.y in
     let c2 = c.x * c.x + c.y * c.y in
     P(
         (a2 * (b.y - c.y) + b2 * (c.y - a.y) + c2 * (a.y - b.y)) / d,

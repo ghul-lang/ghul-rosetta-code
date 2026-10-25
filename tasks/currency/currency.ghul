@@ -11,8 +11,7 @@ class MONEY(cents: bigint) is
         MONEY(rounded)
 
     to_string() -> string =>
-        let whole = cents / 100n in
-        let part = cents % 100n in
+        let whole = cents / 100n, part = cents % 100n in
         "{whole}.{part,2:00}"
 si
 

@@ -95,8 +95,7 @@ let powers = (6::14) |> collect()
 microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
     (0..3)
     |> map(_ =>
-        let copy = LIST(data) in
-        let clock = Stopwatch.start_new() in
+        let copy = LIST(data), clock = Stopwatch.start_new() in
         (
             sort(copy)
             clock.elapsed.total_milliseconds * 1000.0

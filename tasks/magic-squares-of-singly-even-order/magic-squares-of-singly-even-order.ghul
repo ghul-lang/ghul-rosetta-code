@@ -60,8 +60,7 @@ singly_even_magic_square(n: int) -> Square is
 si
 
 is_magic(square: Square) -> bool =>
-    let n = square.count in
-    let target = n * (n * n + 1) / 2 in
+    let n = square.count, target = n * (n * n + 1) / 2 in
     let lines =
         (0..n |> map(i => square[i] |> sum()))
             |> cat(

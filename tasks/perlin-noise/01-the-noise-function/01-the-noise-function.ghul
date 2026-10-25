@@ -31,8 +31,7 @@ fade(t: double) -> double => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 lerp(t: double, a: double, b: double) -> double => a + t * (b - a)
 
 grad(hash: int, x: double, y: double, z: double) -> double =>
-    let h = hash & 15 in
-    let u = if h < 8 then x else y fi in
+    let h = hash & 15, u = if h < 8 then x else y fi in
     let v =
         if h < 4 then
             y
@@ -49,18 +48,11 @@ grad(hash: int, x: double, y: double, z: double) -> double =>
 noise(at_x: double, at_y: double, at_z: double) -> double =>
     let unit_x = int(floor(at_x)) & 255 in
     let unit_y = int(floor(at_y)) & 255 in
-    let unit_z = int(floor(at_z)) & 255 in
-    let x = at_x - floor(at_x) in
-    let y = at_y - floor(at_y) in
-    let z = at_z - floor(at_z) in
-    let u = fade(x) in
-    let v = fade(y) in
-    let w = fade(z) in
-    let a = p[unit_x] + unit_y in
-    let aa = p[a] + unit_z in
-    let ab = p[a + 1] + unit_z in
-    let b = p[unit_x + 1] + unit_y in
-    let ba = p[b] + unit_z in
+    let unit_z = int(floor(at_z)) & 255, x = at_x - floor(at_x) in
+    let y = at_y - floor(at_y), z = at_z - floor(at_z), u = fade(x) in
+    let v = fade(y), w = fade(z), a = p[unit_x] + unit_y in
+    let aa = p[a] + unit_z, ab = p[a + 1] + unit_z in
+    let b = p[unit_x + 1] + unit_y, ba = p[b] + unit_z in
     let bb = p[b + 1] + unit_z in
     let near =
         lerp(v,

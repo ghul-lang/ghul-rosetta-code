@@ -17,8 +17,7 @@ gcd(a: long, b: long) -> long =>
     if b == 0L then Math.abs(a) else gcd(b, a % b) fi
 
 reduced(top: long, bottom: long) -> Q =>
-    let g = gcd(top, bottom) in
-    let sign = if bottom < 0L then -1L else 1L fi in
+    let g = gcd(top, bottom), sign = if bottom < 0L then -1L else 1L fi in
     Q(sign * top / g, sign * bottom / g)
 
 use Term = (value: Q, text: string)
