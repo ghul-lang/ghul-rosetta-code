@@ -4,29 +4,18 @@ use System.Math.log10
 
 let log_two = log10(2.0D)
 
-p(leading: int, nth: int) -> int is
-    let digits = floor(log10(double(leading)))
-    let lower = log10(double(leading)) - digits
-    let upper = log10(double(leading + 1)) - digits
-
-    let seen mut = 0
-
-    let found =
-        for power in from(1) do
-            let scaled = double(power) * log_two
-            let fraction = scaled - floor(scaled)
-
-            if fraction >= lower /\ fraction < upper then
-                seen = seen + 1
-
-                if seen == nth then
-                    break power
-                fi
-            fi
-        od
-
-    return found!
-si
+p(leading: int, nth: int) -> int =>
+    let digits = floor(log10(double(leading))) in
+    let lower = log10(double(leading)) - digits in
+    let upper = log10(double(leading + 1)) - digits in
+    from(1)
+        |> filter(power =>
+            let scaled = double(power) * log_two in
+            let fraction = scaled - floor(scaled) in
+            fraction >= lower /\ fraction < upper
+        )
+        |> skip(nth - 1)
+        |> first()!
 
 let wanted = [(12, 1), (12, 2), (123, 45), (123, 12345), (123, 678910)]
 
