@@ -4,17 +4,15 @@ combos[T](items: List[T], k: int) -> LIST[T]{} is
     if k == 0 then
         yield LIST()
     else
-        for i in 0..items.count do
-            for rest in combos(items[i..<0], k - 1) do
-                let combo = LIST([items[i]])
-
-                for item in rest do
-                    combo.add(item)
-                od
-
-                yield combo
+        case items
+        when [] then
+        when [first, ..rest] then
+            for combo in combos(LIST([first] ++ rest), k - 1) do
+                yield LIST([first] ++ combo)
             od
-        od
+
+            yield in combos(rest, k)
+        esac
     fi
 si
 
