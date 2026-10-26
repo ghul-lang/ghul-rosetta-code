@@ -62,25 +62,16 @@ assert inked.count > 0 else "the grid has no filled cell"
 
 let start = inked[0]
 
-let path = LIST()
-
-let column mut = start.column
-let row mut = start.row
-let previous: Step? mut = null
-
-do
-    let facing = heading(corner(column, row), previous)
-
-    path.add(facing)
-
-    column = column + facing.across
-    row = row + facing.down
-    previous = facing
-
-    if column == start.column /\ row == start.row then
-        break
+walk(column: int, row: int, previous: Step?) -> Step{} =>
+    let facing = heading(corner(column, row), previous) in
+    if column + facing.across == start.column /\
+        row + facing.down == start.row then
+        [facing]
+    else
+        [facing] ++ walk(column + facing.across, row + facing.down, facing)
     fi
-od
+
+let path = walk(start.column, start.row, null)
 
 for line in grid do
     write_line(line)
