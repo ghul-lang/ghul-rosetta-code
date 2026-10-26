@@ -3,21 +3,10 @@ use default
 let order = 3
 
 filled(x: int, y: int) -> bool =>
-    (let across mut = x
-     let down mut = y
-
-     let solid mut = true
-
-     while across > 0 \/ down > 0 do
-         if across % 3 == 1 /\ down % 3 == 1 then
-             solid = false
-         fi
-
-         across = across / 3
-         down = down / 3
-     od
-
-     solid)
+    if x == 0 /\ y == 0 then true
+    elif x % 3 == 1 /\ y % 3 == 1 then false
+    else filled(x / 3, y / 3)
+    fi
 
 let size = repeat(3, order) |> product()
 
