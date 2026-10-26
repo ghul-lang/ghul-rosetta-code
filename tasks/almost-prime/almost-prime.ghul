@@ -6,17 +6,8 @@ smallest_factor(n: int) -> int =>
 prime_factor_count(n: int) -> int =>
     if n == 1 then 0 else 1 + prime_factor_count(n / smallest_factor(n)) fi
 
-almost_primes(k: int) -> int{} is
-    let n mut = 2
-
-    do
-        if prime_factor_count(n) == k then
-            yield n
-        fi
-
-        n = n + 1
-    od
-si
+almost_primes(k: int) -> int{} =>
+    from(2) |> filter(n => prime_factor_count(n) == k)
 
 for k in 1::5 do
     let first_ten = almost_primes(k) |> take(10) |> map(n => "{n,5}")
