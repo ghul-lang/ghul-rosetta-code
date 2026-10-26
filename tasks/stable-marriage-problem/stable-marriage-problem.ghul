@@ -47,19 +47,8 @@ let women_preferences = [
 ] |> collect_map()
 
 
-rank(preferences: string[], name: string) -> int is
-    let position mut = 0
-
-    for candidate in preferences do
-        if candidate =~ name then
-            return position
-        fi
-
-        position = position + 1
-    od
-
-    -1
-si
+rank(preferences: string[], name: string) -> int =>
+    System.Array.index_of(preferences, name)
 
 prefers(
     preferences: Map[string, string[]],
@@ -95,32 +84,16 @@ engage() -> MAP[string, string] is
     engaged_to
 si
 
-is_stable(engaged_to: MAP[string, string]) -> bool is
-    for woman in engaged_to.keys do
-        for man in men_preferences.keys do
-            let partner = find_partner(engaged_to, man)
+is_stable(engaged_to: MAP[string, string]) -> bool =>
+    engaged_to.keys |> all(woman =>
+        men_preferences.keys |> all(man =>
+            man =~ engaged_to[woman] \/
+                !prefers(men_preferences, man, woman,
+                    find_partner(engaged_to, man)) \/
+                !prefers(women_preferences, woman, man, engaged_to[woman])))
 
-            if man != engaged_to[woman] /\
-                prefers(men_preferences, man, woman, partner) /\
-                prefers(women_preferences, woman, man, engaged_to[woman])
-            then
-                return false
-            fi
-        od
-    od
-
-    true
-si
-
-find_partner(engaged_to: MAP[string, string], man: string) -> string is
-    for woman in engaged_to.keys do
-        if engaged_to[woman] =~ man then
-            return woman
-        fi
-    od
-
-    ""
-si
+find_partner(engaged_to: MAP[string, string], man: string) -> string =>
+    engaged_to.keys |> find(woman => engaged_to[woman] =~ man) ?? ""
 
 let engaged_to = engage()
 
