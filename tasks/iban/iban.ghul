@@ -17,11 +17,8 @@ is_valid_iban(raw: string) -> bool is
         |> map(ch => if is_letter(ch) then letter_value(ch) else "{ch}" fi)
         |> join("")
 
-    let remainder mut = 0
-
-    for ch in numeric do
-        remainder = (remainder * 10 + (int(ch) - int('0'))) % 97
-    od
+    let remainder = numeric
+        |> reduce(0, (rem, ch) => (rem * 10 + (int(ch) - int('0'))) % 97)
 
     remainder == 1
 si
