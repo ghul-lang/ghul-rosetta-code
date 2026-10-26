@@ -28,15 +28,8 @@ combinations(a: int, b: int) -> Move{} is
 si
 
 solve(numbers: List[Found], target: int, best: Found) -> Found is
-    let closest mut = best
-
-    for found in numbers do
-        let distance = Math.abs(found.value - target)
-
-        if distance < Math.abs(closest.value - target) then
-            closest = found
-        fi
-    od
+    let closest mut =
+        numbers |> min_by(f => Math.abs(f.value - target)) ?? best
 
     if closest.value == target then
         return closest
