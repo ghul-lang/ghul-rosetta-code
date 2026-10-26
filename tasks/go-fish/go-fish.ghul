@@ -94,7 +94,7 @@ my_choice() -> int =>
          elif untried.count > 0 then untried
          else mine fi
 
-     pool |> max_by(rank => held(me, rank)) ?? -1)
+     pool |> max_by(held(me, *)) ?? -1)
 
 for rank in 0..ranks.count do
     for _ in 0..4 do

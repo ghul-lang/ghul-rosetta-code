@@ -93,7 +93,7 @@ spread(box: List[Weighted], axis: int) -> int =>
     (values |> max()!) - (values |> min()!)
 
 widest(box: List[Weighted]) -> int =>
-    0..3 |> max_by(axis => spread(box, axis))!
+    0..3 |> max_by(spread(box, *))!
 
 score(box: List[Weighted]) -> int => spread(box, widest(box))
 
@@ -149,7 +149,7 @@ distance(a: Colour, b: Colour) -> int =>
     dr * dr + dg * dg + db * db
 
 nearest(palette: List[Colour], c: Colour) -> Colour =>
-    palette |> min_by(p => distance(p, c))!
+    palette |> min_by(distance(*, c))!
 
 picture().write("picture.png")
 
