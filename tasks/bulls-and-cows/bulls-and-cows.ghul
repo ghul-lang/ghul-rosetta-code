@@ -22,20 +22,12 @@ is_well_formed(guess: string) -> bool =>
     guess |> all(c => c >= '1' /\ c <= '9') /\
     (guess |> distinct() |> count()) == 4
 
-score(guess: string) -> (bulls: int, cows: int) is
-    let bulls mut = 0
-    let cows mut = 0
-
-    for at in 0..4 do
-        if guess[at] == secret[at] then
-            bulls = bulls + 1
-        elif secret.index_of(guess[at]) >= 0 then
-            cows = cows + 1
-        fi
-    od
-
-    return (bulls = bulls, cows = cows)
-si
+score(guess: string) -> (bulls: int, cows: int) => (
+    let bulls = 0..4 |> count(i => guess[i] == secret[i])
+    let cows = 0..4 |> count(i => guess[i] != secret[i] /\
+        secret.index_of(guess[i]) >= 0)
+    (bulls = bulls, cows = cows)
+)
 
 write_line("I have four different digits from 1 to 9.")
 
