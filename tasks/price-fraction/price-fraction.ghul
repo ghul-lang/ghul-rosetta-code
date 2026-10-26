@@ -9,9 +9,7 @@ let bands =
 
 rescale(price: double) -> double =>
     assert price >= 0.0D /\ price < 1.01D else "price out of range" in
-    (for (upper_bound, fraction) in bands do
-         if price < upper_bound then break fraction fi
-     od)!
+    bands |> find(((upper_bound, _)) => price < upper_bound)?.`1!
 
 let shown =
     0::100 |> map(hundredths => (
