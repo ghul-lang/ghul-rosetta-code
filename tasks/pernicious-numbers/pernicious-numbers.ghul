@@ -1,18 +1,8 @@
 use default
 
-prime(value: int) -> bool => (
-    let divisor mut = 2
-
-    let factor_found = while divisor * divisor <= value do
-        if value % divisor == 0 then
-            break true
-        fi
-
-        divisor = divisor + 1
-    od
-
-    value >= 2 /\ !(factor_found ?? false)
-)
+prime(value: int) -> bool =>
+    value >= 2 /\
+        2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
 population_count(value: int) -> int =>
     System.Convert.to_string(value, 2)
