@@ -19,6 +19,7 @@ emirps() -> int{} => from(2) |> filter(is_emirp)
 
 write_line("first 20 emirps: {emirps() |> take(20) |> join()}")
 
-write_line("emirps between 7700 and 8000: {7700::8000 |> filter(is_emirp) |> join()}")
+let between = 7700::8000 |> filter(is_emirp)
+write_line("emirps between 7700 and 8000: {between |> join()}")
 
 write_line("10000th emirp: {emirps() |> skip(9999) |> first()!}")
