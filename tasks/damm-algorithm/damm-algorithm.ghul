@@ -15,16 +15,9 @@ let table = [
 
 digit_value(digit: char) -> int => int(digit) - cast('0')
 
-valid(number: string) -> bool => (
-    let interim mut = 0
-
-    for digit in number do
-        let row = table[interim]
-        interim = digit_value(row[digit_value(digit)])
-    od
-
-    interim == 0
-)
+valid(number: string) -> bool =>
+    number |> reduce(0, (interim, digit) =>
+        digit_value(table[interim][digit_value(digit)])) == 0
 
 for sample in ["5724", "5727", "5857"] do
     let verdict = if valid(sample) then "valid" else "invalid" fi
