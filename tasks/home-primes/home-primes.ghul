@@ -79,13 +79,8 @@ prime_factors(value: bigint) -> bigint{} is
         yield remaining
     else
         let divisor = pollard_rho(remaining)
-        let factors = LIST()
-
-        factors.add_range(prime_factors(divisor))
-        factors.add_range(prime_factors(remaining / divisor))
-        factors.sort()
-
-        yield in factors
+        yield in (prime_factors(divisor) ++
+            prime_factors(remaining / divisor)) |> sort()
     fi
 si
 
