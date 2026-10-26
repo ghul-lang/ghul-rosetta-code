@@ -18,17 +18,9 @@ let nemeses =
         (character = "Glory", nemesis = "Buffy")
     ]
 
-let by_character = MAP()
+let by_character = nemeses |> group_by(n => n.character)
 
-for (character, nemesis) in nemeses do
-    if !by_character.contains_key(character) then
-        by_character[character] = LIST()
-    fi
-
-    by_character[character].add(nemesis)
-od
-
-["{row.age}, {row.name}, {row.name}, {nemesis}"
+["{row.age}, {row.name}, {row.name}, {nemesis.nemesis}"
     for row in ages if by_character.contains_key(row.name)
     for nemesis in by_character[row.name]]
     |> each(row => write_line(row))
