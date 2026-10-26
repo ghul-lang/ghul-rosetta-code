@@ -21,18 +21,8 @@ od
 write_line(
     "100 appears at index {sequence.index_of(100) + 1}")
 
-gcd(left: int, right: int) -> int => (
-    let a mut = left
-    let b mut = right
-
-    while b > 0 do
-        let remainder = a % b
-        a = b
-        b = remainder
-    od
-
-    a
-)
+gcd(a: int, b: int) -> int =>
+    if b == 0 then a else gcd(b, a % b) fi
 
 let all_coprime = 0..999
     |> all(index => gcd(sequence[index], sequence[index + 1]) == 1)
