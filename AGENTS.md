@@ -282,6 +282,47 @@ Swapping two values is one assignment, `(a, b) = (b, a)`, rather than three thro
 Wrapping one that runs long goes after the `=`, because a continuation line opening with `(` reads
 as a new statement.
 
+## A loop that computes one value is a function
+
+The section above is about building a collection. This one is about the loop itself: a `while`
+over two or three `mut` locals that walks, searches, merges or converges. Each of those has a
+spelling in which the state is a parameter or a pattern rather than a variable, and that spelling
+is the one to write when it is no longer than the loop and reads at least as plainly. A loop that
+is the task's own shape stays a loop.
+
+- **A recursive function over `[]` and `[x, ..rest]`** where the algorithm is structural: a merge,
+  a split, a fold the pipe functions do not have. The rest element is a view of the source, so
+  peeling a list this way copies nothing.
+- **A `case` over a tuple of sequences**, `when ([], _)`, `when ([x, ..xr], [y, ..yr])`, where two
+  sequences are consumed together, in place of two indices and a `while`.
+- **A nested recursive function** whose parameters are the loop's state, in place of a `while` over
+  `mut` locals: a digit walk, a search, a convergence. `walk(remaining / base, total + digit)` says
+  what the loop's two assignments did.
+- **A `case` over a tuple as the whole body**, `case (n % 3, n % 5) when (0, 0) then ...`, where
+  the branches test the same few values, in place of a chain of `if` and `elif`.
+- **`from(start)` or a generator ended downstream** where the task asks for the first `n` results
+  or for results until a condition, in place of a sieve or a table filled to a guessed limit.
+- **`reduce`, `sum`, `count`, `find`, `any` and `all`** where the loop does one thing to each
+  element, in place of a `mut` accumulator the loop updates.
+
+```ghul
+merge(xs: List[int], ys: List[int]) -> int{} =>
+    case (xs, ys)
+    when ([], _) then ys
+    when (_, []) then xs
+    when ([x, ..xr], [y, ..yr]) then
+        if x <= y then [x] ++ merge(xr, ys) else [y] ++ merge(xs, yr) fi
+    esac
+
+digit_sum(value: int, base: int) -> int is
+    walk(remaining: int, total: int) -> int =>
+        if remaining == 0 then total
+        else walk(remaining / base, total + remaining % base) fi
+
+    walk(value, 0)
+si
+```
+
 ## Output that has to line up is ASCII
 
 The wiki's monospace font has no box-drawing, geometric or most mathematical characters, so a
