@@ -73,17 +73,13 @@ let e = 0::40
     |> map(k => RATIONAL(1n, 1::k |> reduce(1n, (f, i) => f * bigint(i))))
     |> reduce(whole(0n), * + *)
 
-let balance mut = e - whole(1n)
+let balance = 1::25
+    |> reduce(e - whole(1n), (bal, year) =>
+        bal * whole(bigint(year)) - whole(1n))
 
-for year in 1::25 do
-    balance = balance * whole(bigint(year)) - whole(1n)
-od
-
-let naive_balance mut = System.Math.e - 1.0
-
-for year in 1::25 do
-    naive_balance = naive_balance * double(year) - 1.0
-od
+let naive_balance = 1::25
+    |> reduce(System.Math.e - 1.0, (bal, year) =>
+        bal * double(year) - 1.0)
 
 write_line("  exact:  \${balance.decimal(16)}")
 write_line("  double: \${naive_balance:R}")
