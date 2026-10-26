@@ -1,28 +1,11 @@
 use default
 
 power(value: int, exponent: int) -> int =>
-    if exponent == 0 then
-        1
-    else
-        value * power(value, exponent - 1)
-    fi
-
-digit_powers(number: int, width: int) -> int =>
-    if number == 0 then
-        0
-    else
-        power(number % 10, width) + digit_powers(number / 10, width)
-    fi
-
-digit_count(number: int) -> int =>
-    if number < 10 then
-        1
-    else
-        1 + digit_count(number / 10)
-    fi
+    if exponent == 0 then 1 else value * power(value, exponent - 1) fi
 
 is_narcissistic(number: int) -> bool =>
-    digit_powers(number, digit_count(number)) == number
+    let width = digits(number) |> count() in
+    digits(number) |> map(d => power(d, width)) |> sum() == number
 
 let narcissistic = from(0)
     |> filter(is_narcissistic)
