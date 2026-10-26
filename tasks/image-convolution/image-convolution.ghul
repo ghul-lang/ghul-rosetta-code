@@ -90,12 +90,10 @@ let kernels: Kernel[] = [
 scene().write("scene.png")
 
 let source = IMAGE.read("scene.png")
-let results = LIST([("original", source)])
+kernels |> each(k => write_line("{k.name,-8} {k.weights |> join(" ")}"))
 
-for kernel in kernels do
-    results.add((kernel.name, convolve(source, kernel)))
-    write_line("{kernel.name,-8} {kernel.weights |> join(" ")}")
-od
+let results = [("original", source)] ++
+    (kernels |> map(k => (k.name, convolve(source, k))))
 
 let cell_width = source.width + 10, cell_height = source.height + 24
 let sheet = IMAGE(cell_width * 3 + 10, cell_height * 2 + 10)
