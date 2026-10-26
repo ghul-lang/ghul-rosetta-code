@@ -1,14 +1,7 @@
 use default
 
-counts(s: string) -> Map[char, int] is
-    let tally = MAP()
-
-    for c in s do
-        tally[c] = (if tally.contains_key(c) then tally[c] else 0 fi) + 1
-    od
-
-    tally
-si
+counts(s: string) -> Map[char, int] =>
+    s |> frequencies()
 
 show(strings: string[]) is
     let tallies = strings |> map(counts) |> collect()
