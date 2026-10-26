@@ -20,15 +20,9 @@ write_line("cells[0][0][0][0] = {cells[0][0][0][0]}")
 let size = extents |> product()
 let flat = repeat(0, size) |> collect_mutable()
 
-at(index: int[]) -> int is
-    let offset mut = 0
-
-    for dimension in 0..extents.count do
-        offset = offset * extents[dimension] + index[dimension]
-    od
-
-    offset
-si
+at(index: int[]) -> int =>
+    0..extents.count |> reduce(0, (offset, dimension) =>
+        offset * extents[dimension] + index[dimension])
 
 flat[at([1, 2, 3, 4])] = 42
 
