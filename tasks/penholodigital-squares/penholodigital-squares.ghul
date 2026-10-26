@@ -2,68 +2,31 @@ use default
 
 let symbols = "0123456789ABCDEF"
 
-in_base(n: long, base: int) -> string is
-    let digits = LIST()
-    let rest mut = n
-
-    while rest > 0L do
-        digits.add(symbols[int(rest % long(base))])
-        rest = rest / long(base)
-    od
-
-    string(digits |> reverse() |> collect())
-si
+in_base(n: long, base: int) -> string =>
+    digits(n, long(base)) |> map(d => symbols[int(d)]) |> string()
 
 value_of(digits: string, base: int) -> long =>
     digits |> reduce(0L, (total, c) =>
         total * long(base) + long(symbols.index_of(c)))
 
-is_penholodigital(square: long, base: int) -> bool is
-    let wanted = (1 << base) - 2
-    let seen mut = 0
-    let rest mut = square
-
-    while rest > 0L do
-        let digit = int(rest % long(base))
-
-        if digit == 0 \/ seen & (1 << digit) != 0 then
-            return false
-        fi
-
-        seen = seen | (1 << digit)
-        rest = rest / long(base)
-    od
-
-    seen == wanted
-si
+is_penholodigital(square: long, base: int) -> bool =>
+    let ds = digits(square, long(base)) |> collect() in
+    ds.count == base - 1 /\
+        ds |> collect_set() |> count() == ds.count /\
+        ds |> all(* > 0L)
 
 roots(base: int) -> List[long] is
     let smallest = value_of(symbols.substring(1, base - 1), base)
     let largest = value_of(reversed(symbols.substring(1, base - 1)), base)
     let modulus = long(base - 1)
     let residue = long(base * (base - 1) / 2) % modulus
-    let low mut = long(System.Math.sqrt(double(smallest)))
-    let found = LIST()
 
-    while low * low < smallest do
-        low = low + 1L
-    od
-
-    let n mut = low
-
-    while n * n <= largest do
-        let square = n * n
-
-        let possible = square % modulus == residue
-
-        if possible /\ is_penholodigital(square, base) then
-            found.add(n)
-        fi
-
-        n = n + 1L
-    od
-
-    found
+    from(long(System.Math.sqrt(double(smallest))))
+        |> filter(n => n * n >= smallest)
+        |> take_while(n => n * n <= largest)
+        |> filter(n => n * n % modulus == residue)
+        |> filter(n => is_penholodigital(n * n, base))
+        |> collect()
 si
 
 reversed(s: string) -> string =>
