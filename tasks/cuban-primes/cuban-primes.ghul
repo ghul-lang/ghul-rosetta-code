@@ -72,16 +72,13 @@ si
 
 write_line("the first 200 cuban primes:")
 
-let first = cubans() |> take(200) |> map(p => "{p,12:N0}") |> collect()
+let head = cubans() |> take(200) |> map(p => "{p,12:N0}") |> collect()
 
 for row in 0..25 do
-    write_line(first[row * 8..row * 8 + 8] |> join(""))
+    write_line(head[row * 8..row * 8 + 8] |> join(""))
 od
 
-let hundred_thousandth =
-    for entry in cubans() |> index() do
-        if entry.index == 99_999 then break entry.value fi
-    od
+let hundred_thousandth = cubans() |> skip(99_999) |> first()
 
 let largest = hundred_thousandth!
 
