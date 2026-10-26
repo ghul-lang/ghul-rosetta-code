@@ -20,30 +20,13 @@ od
 
 is_prime(value: int) -> bool => value > 1 /\ !composite[value]
 
-is_magnanimous(value: int) -> bool is
-    let digits = "{value}"
+is_magnanimous(value: int) -> bool =>
+    let digits = "{value}" in
+    1..digits.length |> all(split => is_prime(
+        System.Convert.to_int32(digits[0..split]) +
+        System.Convert.to_int32(digits[split..<0])))
 
-    for split in 1..digits.length do
-        let left = System.Convert.to_int32(digits[0..split])
-        let right = System.Convert.to_int32(digits[split..<0])
-
-        if !is_prime(left + right) then return false fi
-    od
-
-    true
-si
-
-magnanimous() -> int{} is
-    let candidate mut = 0
-
-    do
-        if is_magnanimous(candidate) then
-            yield candidate
-        fi
-
-        candidate = candidate + 1
-    od
-si
+magnanimous() -> int{} => from(0) |> filter(is_magnanimous)
 
 let terms = magnanimous() |> take(400) |> collect()
 
