@@ -7,7 +7,7 @@ is_happy(n: int) -> bool is
     let seen = LIST()
     let remaining mut = n
 
-    while remaining != 1 /\ !(seen |> any(x => x == remaining)) do
+    while remaining != 1 /\ !seen.contains(remaining) do
         seen.add(remaining)
         remaining = digit_square_sum(remaining)
     od
