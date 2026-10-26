@@ -1,66 +1,24 @@
 use default
 
-is_prime(n: int) -> bool is
-    if n < 2 then
-        return false
-    fi
-
-    if n % 2 == 0 then
-        return n == 2
-    fi
-
-    let i mut = 3
-
-    while i * i <= n do
-        if n % i == 0 then
-            return false
-        fi
-
-        i = i + 2
-    od
-
-    true
-si
+is_prime(n: int) -> bool =>
+    n > 1 /\ (n == 2 \/ n % 2 == 1 /\
+        from(3) |> take_while(d => d * d <= n) |> all(d => n % d != 0))
 
 reverse(n: int) -> int is
-    let r mut = 0
-    let m mut = n
+    walk(m: int, r: int) -> int =>
+        if m == 0 then r else walk(m / 10, r * 10 + m % 10) fi
 
-    while m > 0 do
-        r = r * 10 + m % 10
-        m = m / 10
-    od
-
-    r
+    walk(n, 0)
 si
 
 is_emirp(n: int) -> bool =>
     let r = reverse(n) in
     r != n /\ is_prime(n) /\ is_prime(r)
 
-emirps() -> int{} is
-    let n mut = 2
+emirps() -> int{} => from(2) |> filter(is_emirp)
 
-    do
-        if is_emirp(n) then
-            yield n
-        fi
+write_line("first 20 emirps: {emirps() |> take(20) |> join()}")
 
-        n = n + 1
-    od
-si
+write_line("emirps between 7700 and 8000: {7700::8000 |> filter(is_emirp) |> join()}")
 
-let first_twenty = emirps() |> take(20)
-let first_twenty_text = first_twenty |> map(n => "{n}") |> join()
-
-write_line("first 20 emirps: {first_twenty_text}")
-
-let in_range = 7700::8000 |> filter(is_emirp)
-let in_range_text = in_range |> map(n => "{n}") |> join()
-
-write_line("emirps between 7700 and 8000: {in_range_text}")
-
-let first_ten_thousand = emirps() |> take(10000) |> collect()
-let ten_thousandth = first_ten_thousand[first_ten_thousand.count - 1]
-
-write_line("10000th emirp: {ten_thousandth}")
+write_line("10000th emirp: {emirps() |> skip(9999) |> first()!}")
