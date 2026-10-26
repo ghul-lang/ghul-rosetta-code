@@ -4,19 +4,11 @@ use Candidate = (value: int, mask: int, reduced: List[int])
 
 describe(value: int) -> Candidate is
     let reduced = repeat(0, 10) |> collect_mutable()
-    let digits = LIST()
-
-    let remaining mut = value
-
-    while remaining > 0 do
-        digits.insert(0, remaining % 10)
-
-        remaining = remaining / 10
-    od
+    let places = value |> digits() |> collect()
 
     let mask mut = 0
 
-    for digit in digits do
+    for digit in places do
         if digit == 0 \/ (mask >> digit) & 1 == 1 then
             return (value = value, mask = 0, reduced = reduced)
         fi
@@ -24,11 +16,11 @@ describe(value: int) -> Candidate is
         mask = mask | (1 << digit)
     od
 
-    for i in 0..digits.count do
-        reduced[digits[i]] =
-            0..digits.count
+    for i in 0..places.count do
+        reduced[places[i]] =
+            0..places.count
                 |> filter(* != i)
-                |> reduce(0, (kept, j) => kept * 10 + digits[j])
+                |> reduce(0, (kept, j) => kept * 10 + places[j])
     od
 
     return (value = value, mask = mask, reduced = reduced)
