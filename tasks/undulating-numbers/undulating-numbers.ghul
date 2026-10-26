@@ -1,15 +1,9 @@
 use default
 
-undulating_value(first: int, second: int, length: int) -> long => (
-    let value mut = 0L
-
-    for position in 0..length do
-        let digit = if position % 2 == 0 then first else second fi
-        value = value * 10L + cast(digit)
-    od
-
-    value
-)
+undulating_value(first: int, second: int, length: int) -> long =>
+    0..length |> reduce(0L, (value, position) =>
+        value * 10L +
+            cast(if position % 2 == 0 then first else second fi))
 
 let limit = 9007199254740992L
 
@@ -55,19 +49,9 @@ for row in 0..9 do
             |> join(" "))
 od
 
-prime(value: long) -> bool => (
-    let divisor mut = 2L
-
-    let factor_found = while divisor * divisor <= value do
-        if value % divisor == 0L then
-            break true
-        fi
-
-        divisor = divisor + 1L
-    od
-
-    value >= 2L /\ !(factor_found ?? false)
-)
+prime(value: long) -> bool =>
+    value >= 2L /\ 2L::long(Ghul.Math.sqrt(double(value)))
+        |> all(d => value % d != 0L)
 
 write_line("three digit primes:")
 
