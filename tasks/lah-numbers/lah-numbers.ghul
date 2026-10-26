@@ -1,14 +1,7 @@
 use default
 
-factorial(value: int) -> bigint is
-    let product mut = 1n
-
-    for factor in 2::value do
-        product = product * bigint(factor)
-    od
-
-    product
-si
+factorial(value: int) -> bigint =>
+    2::value |> map(bigint) |> product()
 
 lah(n: int, k: int) -> bigint =>
     if k == 1 then factorial(n)
@@ -21,30 +14,19 @@ lah(n: int, k: int) -> bigint =>
 write_line("unsigned Lah numbers, L(n, k):")
 write_line("")
 
-let heading = LIST()
-heading.add("{"n/k",3}")
-
-for k in 1::12 do
-    heading.add("{k,12}")
-od
-
-write_line(heading |> join(""))
+write_line(["{"n/k",3}"] ++ (1::12 |> map(k => "{k,12}"))
+           |> join(""))
 
 for n in 1::12 do
-    let row = LIST()
-    row.add("{n,3}")
-
-    for k in 1::n do
-        row.add("{lah(n, k),12}")
-    od
-
-    write_line(row |> join(""))
+    write_line((["{n,3}"] ++
+                (1::n |> map(k => "{lah(n, k),12}")))
+               |> join(""))
 od
 
 let largest =
     1::100 |> map(lah(100, *))
-            |> reduce(0n,
-                      (best, v) => if v > best then v else best fi)
+           |> reduce(0n,
+                     (best, v) => if v > best then v else best fi)
 
 write_line("")
 write_line("the largest L(100, k):")
