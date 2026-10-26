@@ -12,12 +12,7 @@ padovan(step: int, count: int) -> LIST[int] is
     fi
 
     while terms.count < count do
-        let total mut = 0
-
-        for back in 2::step + 1 do
-            total = total + terms[terms.count - back]
-        od
-
+        let total = 2::step + 1 |> sum_by(back => terms[terms.count - back])
         terms.add(total)
     od
 
