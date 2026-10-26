@@ -117,21 +117,13 @@ cyclic(n: int) -> Square =>
         |> collect()
 
 tally(n: int, squares: int, random: System.Random)
-    -> (square: string, times: int){} is
-    let cube = INCIDENCE_CUBE(cyclic(n), random)
-    let counts = MAP()
-
-    for _ in 0..squares do
-        cube.next()
-        let key = text(reduced(cube.square))
-        let seen = if counts.contains_key(key) then counts[key] else 0 fi
-        counts[key] = seen + 1
-    od
-
-    counts
-        |> map(entry => (square = entry.key, times = entry.value))
+    -> (square: string, times: int){} =>
+    let cube = INCIDENCE_CUBE(cyclic(n), random) in
+    0..squares
+        |> map(_ => (cube.next(); text(reduced(cube.square))))
+        |> group_by(x => x)
+        |> map(entry => (square = entry.key, times = entry.value.count))
         |> sort_by(e => e.square)
-si
 
 let random = System.Random(42)
 
