@@ -76,17 +76,14 @@ colour(graph: GRAPH) -> MAP[int, int] is
             fi
         od
 
-        let taken =
+        let taken: SET[int] =
             graph.neighbours(best.node)
             |> filter(colours.contains_key)
             |> map(other => colours[other])
             |> collect_set()
 
-        let next mut = 0
-
-        while taken.contains(next) do
-            next = next + 1
-        od
+        let next =
+            from(0) |> find(c => !taken.contains(c))!
 
         colours[best.node] = next
     od
