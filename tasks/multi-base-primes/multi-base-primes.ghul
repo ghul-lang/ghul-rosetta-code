@@ -19,17 +19,8 @@ sieve(limit: int) -> List[bool] is
     composite |> map(! *) |> collect()
 si
 
-in_base(n: int, base: int) -> string is
-    let text = System.Text.StringBuilder()
-    let rest mut = n
-
-    while rest > 0 do
-        text.insert(0, digits[rest % base])
-        rest = rest / base
-    od
-
-    text.to_string()
-si
+in_base(n: int, base: int) -> string =>
+    if n == 0 then "" else "{in_base(n / base, base)}{digits[n % base]}" fi
 
 power(base: int, exponent: int) -> int =>
     1::exponent |> reduce(1, (p, _) => p * base)
