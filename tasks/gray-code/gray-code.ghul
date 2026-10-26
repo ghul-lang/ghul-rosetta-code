@@ -4,15 +4,8 @@ bits(n: int) -> string => System.Convert.to_string(n, 2).pad_left(5, '0')
 
 encode(n: int) -> int => n ^ (n >>> 1)
 
-decode(gray: int) -> int => (
-    let n mut = gray
-
-    for shift in 1..5 do
-        n = n ^ (gray >>> shift)
-    od
-
-    n
-)
+decode(gray: int) -> int =>
+    1..5 |> reduce(gray, (n, shift) => n ^ (gray >>> shift))
 
 write_line("binary  gray   decoded")
 
