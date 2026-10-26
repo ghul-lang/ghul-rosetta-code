@@ -88,16 +88,9 @@ inverse(y: double) -> double is
         return 0.0D
     fi
 
-    let run = terms(y)
-    let x mut = 0.0D
-
-    for at in 0..run.count do
-        let term = run[run.count - 1 - at]
-
-        x = 1.0D / (double(term) + x)
-    od
-
-    x
+    terms(y)
+        |> reverse()
+        |> reduce(0.0D, (x, term) => 1.0D / (double(term) + x))
 si
 
 let phi = (1.0D + sqrt(5.0D)) / 2.0D
