@@ -1,18 +1,12 @@
 use default
 
-strip_comment(line: string, markers: char[]) -> string is
-    let cut mut = line.length
-
-    for marker in markers do
-        let index = line.index_of(marker)
-
-        if index >= 0 /\ index < cut then
-            cut = index
-        fi
-    od
-
+strip_comment(line: string, markers: char[]) -> string =>
+    let cut = markers
+        |> map(line.index_of(*))
+        |> filter(i => i >= 0)
+        |> min() ?? line.length
+    in
     line[0..cut].trim()
-si
 
 let markers = ['#', ';']
 
