@@ -6,40 +6,22 @@ patience_sort(values: List[int]) -> int{} is
     let piles = LIST[LIST[int]]()
 
     for value in values do
-        let placed mut = false
-
-        for pile in piles do
-            if !placed /\ top(pile) >= value then
-                pile.add(value)
-                placed = true
-            fi
-        od
-
-        if !placed then
-            let fresh = LIST()
-
-            fresh.add(value)
-            piles.add(fresh)
+        if let pile = piles |> find(p => top(p) >= value) then
+            pile.add(value)
+        else
+            piles.add(LIST[int]([value]))
         fi
     od
 
     while piles.count > 0 do
-        let smallest mut = 0
-
-        for at in 1..piles.count do
-            if top(piles[at]) < top(piles[smallest]) then
-                smallest = at
-            fi
-        od
-
-        let pile = piles[smallest]
+        let pile = piles |> min_by(p => top(p))!
 
         yield top(pile)
 
         pile.remove_at(pile.count - 1)
 
         if pile.count == 0 then
-            piles.remove_at(smallest)
+            piles.remove_at(piles.index_of(pile))
         fi
     od
 si
