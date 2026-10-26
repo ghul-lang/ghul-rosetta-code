@@ -29,16 +29,14 @@ let rows = [
 ]
 
 bits(row: string) -> string =>
-    string(
-        row
-            |> map(c => if c == '#' then '1' else '0' fi)
-            |> collect())
+    row
+        |> map(c => if c == '#' then '1' else '0' fi)
+        |> string()
 
 flipped(seven: string) -> string =>
-    string(
-        seven
-            |> map(c => if c == '1' then '0' else '1' fi)
-            |> collect())
+    seven
+        |> map(c => if c == '1' then '0' else '1' fi)
+        |> string()
 
 digit(seven: string, right: bool) -> int? =>
     let wanted = if right then flipped(seven) else seven fi in
@@ -74,20 +72,17 @@ sound(found: List[int]) -> bool =>
             d.value * (if d.index % 2 == 0 then 3 else 1 fi))) % 10 == 0
 
 turned(scan: string) -> string =>
-    string(
-        0..scan.length
-            |> map(at => scan[scan.length - 1 - at])
-            |> collect())
+    0..scan.length
+        |> map(at => scan[scan.length - 1 - at])
+        |> string()
 
 for row in rows do
     let scan = bits(row)
 
     if let found = read(scan) /\ sound(found) then
-        write_line("{found |> map(d => "{d}") |> join("")}")
+        write_line("{found |> string()}")
     elif let turn = read(turned(scan)) /\ sound(turn) then
-        let shown = turn |> map(d => "{d}") |> join("")
-
-        write_line("{shown}  read upside down")
+        write_line("{turn |> string()}  read upside down")
     else
         write_line("rejected")
     fi
