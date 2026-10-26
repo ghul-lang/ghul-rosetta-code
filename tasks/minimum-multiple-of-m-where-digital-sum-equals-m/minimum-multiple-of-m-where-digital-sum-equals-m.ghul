@@ -1,19 +1,7 @@
 use default
 
-digit_sum(n: long) -> long is
-    let total mut = 0L
-    let rest mut = n
-
-    while rest > 0L do
-        total = total + rest % 10L
-        rest = rest / 10L
-    od
-
-    total
-si
-
 least_multiplier(n: long) -> long =>
-    from(1L) |> find(m => digit_sum(n * m) == n)!
+    from(1L) |> find(m => digits(n * m) |> sum() == n)!
 
 let terms = 1L::70L |> map(least_multiplier) |> collect()
 
