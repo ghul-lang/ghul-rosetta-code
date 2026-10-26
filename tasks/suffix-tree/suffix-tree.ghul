@@ -49,16 +49,9 @@ class NODE is
         _edges[tail.label[0]] = tail
     si
 
-    _shared_prefix(left: string, right: string) -> int is
-        let limit = System.Math.min(left.length, right.length)
-        let at mut = 0
-
-        while at < limit /\ left[at] == right[at] do
-            at = at + 1
-        od
-
-        at
-    si
+    _shared_prefix(left: string, right: string) -> int =>
+        let limit = System.Math.min(left.length, right.length) in
+        from(0) |> find(i => i == limit \/ left[i] != right[i]) ?? limit
 si
 
 show(node: NODE, depth: int) is
