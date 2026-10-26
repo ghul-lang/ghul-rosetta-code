@@ -46,17 +46,8 @@ totient(n: int) -> int =>
         power(factor.prime, factor.exponent - 1) *
         (factor.prime - 1))
 
-achilles_numbers() -> int{} is
-    let n mut = 1
-
-    do
-        if is_achilles(n) then
-            yield n
-        fi
-
-        n = n + 1
-    od
-si
+achilles_numbers() -> int{} =>
+    from(1) |> filter(is_achilles)
 
 show(heading: string, numbers: int{}) is
     write_line(heading)
