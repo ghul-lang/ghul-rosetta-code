@@ -3,19 +3,9 @@ use default
 power(base: int, exponent: int) -> long =>
     repeat(long(base), exponent) |> product()
 
-digit_counts(value: long) -> LIST[int] is
-    walk(remaining: long) -> LIST[int] =>
-        if remaining == 0L then
-            repeat(0, 10) |> collect_mutable()
-        else (
-            let counts = walk(remaining / 10L)
-            counts[int(remaining % 10L)] = counts[int(remaining % 10L)] + 1
-            counts
-        )
-        fi
-
-    walk(value)
-si
+digit_counts(value: long) -> List[int] =>
+    let found = digits(value) |> collect() in
+    0::9 |> map(d => found |> count(* == long(d))) |> collect()
 
 held(combination: LIST[int], digit: int) -> int =>
     combination |> count(* == digit)

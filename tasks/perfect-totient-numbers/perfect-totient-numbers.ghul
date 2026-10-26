@@ -24,17 +24,13 @@ totient(value: int) -> int is
     count
 si
 
-totient_sum(value: int) -> int is
-    walk(current: int) -> int =>
-        if current > 1 then
-            let next = totient(current) in
-            next + walk(next)
-        else
-            0
-        fi
-
-    walk(value)
-si
+totient_sum(value: int) -> int =>
+    if value > 1 then
+        let next = totient(value) in
+        next + totient_sum(next)
+    else
+        0
+    fi
 
 perfect_totients(count: int) -> int{} =>
     from(2) |> filter(c => totient_sum(c) == c) |> take(count)
