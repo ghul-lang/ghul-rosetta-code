@@ -23,30 +23,17 @@ si
 write_line("Stirling numbers of the second kind, S2(n, k):")
 write_line("")
 
-let heading = LIST()
-heading.add("{"n/k",3}")
-
-for k in 0::12 do
-    heading.add("{k,10}")
-od
-
-write_line(heading |> join(""))
+write_line(
+    ["{"n/k",3}"] ++ (0::12 |> map(k => "{k,10}"))
+    |> join(""))
 
 for n in 0::12 do
-    let row = row_of(n)
-    let cells = LIST()
-    cells.add("{n,3}")
-
-    for value in row do
-        cells.add("{value,10}")
-    od
-
-    write_line(cells |> join(""))
+    write_line(
+        ["{n,3}"] ++ (row_of(n) |> map(v => "{v,10}"))
+        |> join(""))
 od
 
-let largest =
-    row_of(100) |> reduce(0n,
-                          (best, v) => if v > best then v else best fi)
+let largest = (row_of(100) |> max())!
 
 write_line("")
 write_line("the largest S2(100, k):")
