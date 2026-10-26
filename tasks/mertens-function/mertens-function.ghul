@@ -40,16 +40,7 @@ let values = 1::1_000 |> map(mertens) |> collect()
 
 let zeroes = values |> filter(* == 0) |> count()
 
-let crossings mut = 0
-let previous mut = 0
-
-for value in values do
-    if value == 0 /\ previous != 0 then
-        crossings = crossings + 1
-    fi
-
-    previous = value
-od
+let crossings = values |> pairwise() |> count((a, b) => b == 0 /\ a != 0)
 
 write_line("")
 write_line("M(1) to M(1000) is zero {zeroes} times")
