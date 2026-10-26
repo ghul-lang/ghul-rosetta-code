@@ -1,19 +1,11 @@
 use default
 
-divisor_count(n: long) -> int is
-    let count mut = 0
-    let d mut = 1L
-
-    while d * d <= n do
-        if n % d == 0L then
-            count = count + (if d * d == n then 1 else 2 fi)
-        fi
-
-        d = d + 1L
-    od
-
-    count
-si
+divisor_count(n: long) -> int =>
+    from(1L)
+    |> take_while(d => d * d <= n)
+    |> filter(d => n % d == 0L)
+    |> map(d => if d * d == n then 1 else 2 fi)
+    |> sum()
 
 is_prime(n: int) -> bool =>
     n >= 2 /\ (2::n |> take_while(d => d * d <= n) |> all(d => n % d != 0))
@@ -22,24 +14,17 @@ let primes = from(2) |> filter(is_prime) |> take(50) |> collect()
 
 // A number with a prime number p of divisors is a prime to the power
 // p - 1, so the nth of them is the nth prime to that power.
-term(n: int) -> bigint is
+term(n: int) -> bigint =>
     if is_prime(n) then
-        return bigint.pow(bigint(primes[n - 1]), n - 1)
+        bigint.pow(bigint(primes[n - 1]), n - 1)
+    else
+        bigint(
+            from(1L)
+            |> filter(c => divisor_count(c) == n)
+            |> skip(n - 1)
+            |> first()!
+        )
     fi
-
-    let seen mut = 0
-    let candidate mut = 0L
-
-    while seen < n do
-        candidate = candidate + 1L
-
-        if divisor_count(candidate) == n then
-            seen = seen + 1
-        fi
-    od
-
-    bigint(candidate)
-si
 
 for n in 1::15 do
     write_line("{n,2}: {term(n)}")
