@@ -19,24 +19,18 @@ transform(text: string) -> string =>
         |> map(last_character)
         |> join("")
 
-invert(transformed: string) -> string is
-    let width = transformed.length
-    let table mut = 0..width |> map(i => "") |> collect()
-
-    for _ in 0..width do
-        table = table
-            |> index()
+invert(transformed: string) -> string =>
+    let width = transformed.length in
+    let empty = 0..width |> map(i => "") |> collect() in
+    let table = 0..width |> reduce(empty, (t, _) =>
+        t |> index()
             |> map(row => "{transformed[row.index]}{row.value}")
             |> sort(ordinal_order)
-            |> collect()
-    od
-
+            |> collect()) in
     let framed = table
         |> filter(row => row[row.length - 1] == end_of_text)
-        |> only()
-
+        |> only() in
     framed[1..width - 1]
-si
 
 visible(text: string) -> string =>
     text.replace(start_of_text, '^').replace(end_of_text, '|')
