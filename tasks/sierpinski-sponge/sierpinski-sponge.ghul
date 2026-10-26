@@ -9,28 +9,23 @@ let level = 2
 let size = 9
 
 solid(c: Cell) -> bool is
+    walk(x: int, y: int, z: int, depth: int) -> bool =>
+        if depth == level then
+            true
+        else
+            let middles =
+                [x % 3, y % 3, z % 3] |> filter(* == 1) |> count()
+
+            middles < 2 /\ walk(x / 3, y / 3, z / 3, depth + 1)
+        fi
+
     if c.x < 0 \/ c.y < 0 \/ c.z < 0 \/
         c.x >= size \/ c.y >= size \/ c.z >= size
     then
         return false
     fi
 
-    let x mut = c.x, y mut = c.y, z mut = c.z
-
-    for _ in 0..level do
-        let middles =
-            [x % 3, y % 3, z % 3] |> filter(* == 1) |> count()
-
-        if middles >= 2 then
-            return false
-        fi
-
-        x = x / 3
-        y = y / 3
-        z = z / 3
-    od
-
-    true
+    walk(c.x, c.y, c.z, 0)
 si
 
 project(x: double, y: double, z: double) -> Flat =>
