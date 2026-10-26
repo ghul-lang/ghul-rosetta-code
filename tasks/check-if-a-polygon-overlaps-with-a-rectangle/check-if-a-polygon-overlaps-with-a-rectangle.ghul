@@ -19,9 +19,8 @@ edges(shape: Polygon) -> P{} =>
     0..shape.count |> map(i => shape[(i + 1) % shape.count] - shape[i])
 
 shadow(shape: Polygon, axis: P) -> (low: double, high: double) =>
-    let lengths = shape |> map(p => p ⋅ axis) |> collect() in
-    (low = lengths |> reduce(lengths[0], System.Math.min),
-     high = lengths |> reduce(lengths[0], System.Math.max))
+    (low = shape |> map(p => p ⋅ axis) |> min()!,
+     high = shape |> map(p => p ⋅ axis) |> max()!)
 
 separated(a: Polygon, b: Polygon, axis: P) -> bool =>
     let s = shadow(a, axis), t = shadow(b, axis) in
