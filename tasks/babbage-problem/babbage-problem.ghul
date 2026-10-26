@@ -1,11 +1,7 @@
 use default
 
 let smallest =
-    for candidate in 1::100000 do
-        if candidate * candidate % 1000000 == 269696 then
-            break candidate
-        fi
-    od!
+    from(1) |> find(c => c * c % 1000000 == 269696) ?? 0
 
 let babbage = 99736L
 
