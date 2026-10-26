@@ -1,19 +1,8 @@
 use default
 use TRIANGLE = (a: int, b: int, c: int, area: long)
 
-gcd(a: int, b: int) -> int is
-    let x mut = a
-    let y mut = b
-
-    while y != 0 do
-        let t = y
-
-        y = x % y
-        x = t
-    od
-
-    x
-si
+gcd(a: int, b: int) -> int =>
+    if b == 0 then a else gcd(b, a % b) fi
 
 heron_area(a: int, b: int, c: int) -> long? is
     let al = long(a)
