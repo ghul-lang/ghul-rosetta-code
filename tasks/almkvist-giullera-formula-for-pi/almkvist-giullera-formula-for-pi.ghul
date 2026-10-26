@@ -8,17 +8,11 @@ integer_term(n: int) -> bigint =>
     32n * factorial(6 * n) * bigint(532 * n * n + 126 * n + 9) /
         (3n * bigint.pow(factorial(n), 6))
 
-square_root(n: bigint) -> bigint is
-    let x mut = n
-    let y mut = (x + 1n) / 2n
-
-    while y < x do
-        x = y
-        y = (x + n / x) / 2n
-    od
-
-    x
-si
+square_root(n: bigint) -> bigint =>
+    let walk = (x: bigint, y: bigint) -> bigint rec =>
+        if y < x then rec(y, (y + n / y) / 2n) else x fi
+    in
+    walk(n, (n + 1n) / 2n)
 
 for n in 0..10 do
     write_line("{n}: {integer_term(n)}")
