@@ -10,15 +10,9 @@ humble() -> long{} is
     do
         yield found[found.count - 1]
 
-        let smallest mut = found[next_index[0]] * factors[0]
-
-        for which in 1..factors.count do
-            let candidate = found[next_index[which]] * factors[which]
-
-            if candidate < smallest then
-                smallest = candidate
-            fi
-        od
+        let smallest = (0..factors.count
+            |> map(which => found[next_index[which]] * factors[which])
+            |> min())!
 
         for which in 0..factors.count do
             if found[next_index[which]] * factors[which] == smallest then
@@ -39,19 +33,14 @@ for row in 0..5 do
     write_line(first_fifty[row * 10..row * 10 + 10] |> join(""))
 od
 
-let widths = repeat(0, 20) |> collect_mutable()
-
-for value in humble() do
-    let width = "{value}".length
-
-    if width > 16 then break fi
-
-    widths[width - 1] = widths[width - 1] + 1
-od
+let widths = humble()
+    |> take_while(value => "{value}".length <= 16)
+    |> map(value => "{value}".length)
+    |> frequencies()
 
 write_line("")
 write_line("how many humble numbers have each number of digits:")
 
 for width in 1::16 do
-    write_line("  {width,2} digits: {widths[width - 1]}")
+    write_line("  {width,2} digits: {widths[width]}")
 od
