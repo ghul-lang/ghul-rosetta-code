@@ -4,20 +4,12 @@ permutations(items: LIST[int]) -> LIST[int]{} is
     if items.count == 0 then
         yield LIST()
     else
-        for index in 0..items.count do
+        yield in 0..items.count |> flat_map(index => (
             let rest = LIST(items)
-
             rest.remove_at(index)
-
-            for tail in permutations(rest) do
-                let whole = LIST()
-
-                whole.add(items[index])
-                whole.add_range(tail)
-
-                yield whole
-            od
-        od
+            permutations(rest)
+            |> map(tail => ([items[index]] ++ tail) |> collect_mutable())
+        ))
     fi
 si
 
