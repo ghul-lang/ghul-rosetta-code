@@ -14,31 +14,20 @@ let records =
         |> collect()
 
 let wrong_width =
-    records
-        |> filter(fields => fields.count != fields_per_record)
-        |> count()
+    records |> count(fields => fields.count != fields_per_record)
 
 let all_good =
     records
-        |> filter(fields =>
+        |> count(fields =>
             1::instruments
                 |> all(reading => int.parse(fields[reading * 2]) >= 1))
-        |> count()
 
-let times_seen = MAP()
-let duplicates = LIST()
-
-for fields in records do
-    let date = fields[0]
-    let before =
-        if times_seen.contains_key(date) then times_seen[date] else 0 fi
-
-    times_seen[date] = before + 1
-
-    if before == 1 then
-        duplicates.add(date)
-    fi
-od
+let duplicates =
+    records
+        |> group_by(fields => fields[0])
+        |> filter((_, seen) => seen.count > 1)
+        |> map((date, _) => date)
+        |> collect()
 
 write_line("{records.count} records read")
 
