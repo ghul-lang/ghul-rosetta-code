@@ -23,18 +23,8 @@ consolidate(input: LIST[SET[string]]) -> LIST[SET[string]] is
     result
 si
 
-render(sets: LIST[SET[string]]) -> string is
-    let parts = LIST()
-
-    for one in sets do
-        let items = one |> collect_mutable()
-        items.sort()
-
-        parts.add("\{{items |> join(", ")}\}")
-    od
-
-    parts |> join(" ")
-si
+render(sets: LIST[SET[string]]) -> string =>
+    sets |> map(one => "\{{one |> sort() |> join(", ")}\}") |> join(" ")
 
 show(groups: string[][]) is
     let sets = groups |> map(SET) |> collect_mutable()
