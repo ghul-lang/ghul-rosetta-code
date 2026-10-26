@@ -1,46 +1,20 @@
 use default
 
-factorial(value: int) -> bigint is
-    let product mut = 1n
+factorial(value: int) -> bigint =>
+    2::value |> reduce(1n, (product, factor) => product * cast(factor))
 
-    for factor in 2::value do
-        product = product * cast(factor)
-    od
+is_prime(n: int) -> bool =>
+    n > 1 /\ 2::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
 
-    return product
-si
-
-nth_prime(index: int) -> int is
-    let found mut = 0
-    let candidate mut = 1
-
-    while found <= index do
-        candidate = candidate + 1
-        let divisor mut = 2
-
-        while divisor * divisor <= candidate /\ candidate % divisor != 0 do
-            divisor = divisor + 1
-        od
-
-        if divisor * divisor > candidate then
-            found = found + 1
-        fi
-    od
-
-    return candidate
-si
+nth_prime(index: int) -> int =>
+    from(2) |> filter(is_prime) |> skip(index) |> first()!
 
 fibonacci(index: int) -> bigint is
-    let previous mut = 0n
-    let current mut = 1n
+    walk(previous: bigint, current: bigint, remaining: int) -> bigint =>
+        if remaining == 0 then current
+        else walk(current, previous + current, remaining - 1) fi
 
-    for _ in 0..index do
-        let following = previous + current
-        previous = current
-        current = following
-    od
-
-    return current
+    walk(0n, 1n, index)
 si
 
 boustrophedon(term: (int) -> bigint, count: int) -> bigint{} is
