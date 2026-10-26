@@ -201,7 +201,7 @@ bits_of(bytes: List[int]) -> List[bool] =>
     [(b >> (7 - i)) & 1 == 1 for b in bytes for i in 0..8]
 
 run_bits(program: string, limit: int) -> string =>
-    let bits = program |> map(c => c == '1') |> collect() in
+    let bits = program |> map(* == '1') |> collect() in
     let reader = READER(bits), term = reader.term() in
     let input = list(bits |> skip(reader.at) |> map(bit) |> collect()) in
     items(THUNK(Term.APP(term, input), null), limit)

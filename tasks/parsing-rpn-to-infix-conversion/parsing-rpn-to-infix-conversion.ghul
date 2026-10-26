@@ -53,7 +53,7 @@ convert(source: string) is
     write_line("  {"token",-6}stack")
 
     for token in source.split([' ']) do
-        if operators |> any(symbol => symbol =~ token) then
+        if operators |> any(* =~ token) then
             let right = stack[stack.count - 1]
             let left = stack[stack.count - 2]
 

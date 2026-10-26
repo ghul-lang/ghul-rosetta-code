@@ -117,7 +117,7 @@ cell(column: int, row: int) -> string =>
     else "  "
     fi
 
-for row in 0::high_y - low_y |> map(i => high_y - i) do
+for row in 0::high_y - low_y |> map(high_y - *) do
     let cells =
         (low_x::high_x)
             |> map(column =>

@@ -9,7 +9,7 @@ let residues =
 
 linked(a: int, b: int) -> bool =>
     let d = ((a - b) % n + n) % n in
-    residues |> any(r => r == d)
+    residues |> any(* == d)
 
 for a in 0..n do
     let row = 0..n |> map(b =>

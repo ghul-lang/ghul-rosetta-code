@@ -54,7 +54,7 @@ step(forest: Forest) -> Forest =>
         |> collect()
 
 census(forest: Forest, state: Cell) -> int =>
-    forest |> flat_map(row => row) |> filter(c => c == state) |> count()
+    forest |> flat_map(row => row) |> filter(* == state) |> count()
 
 draw(image: IMAGE, forest: Forest) is
     image.clear(60ub, 45ub, 30ub)

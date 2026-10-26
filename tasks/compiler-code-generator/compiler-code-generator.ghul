@@ -46,7 +46,7 @@ emit(name: string, operand: string) -> INSTRUCTION is
 si
 
 slot(names: LIST[string], name: string) -> int is
-    if !(names |> any(n => n =~ name)) then
+    if !(names |> any(* =~ name)) then
         names.add(name)
     fi
 

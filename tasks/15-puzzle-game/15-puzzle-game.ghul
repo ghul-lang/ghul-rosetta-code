@@ -7,7 +7,7 @@ let squares = side * side
 let random = System.Random(20260908)
 
 let board =
-    1::squares |> map(tile => tile % squares) |> collect_mutable()
+    1::squares |> map(* % squares) |> collect_mutable()
 
 blank() -> int => board.index_of(0)
 

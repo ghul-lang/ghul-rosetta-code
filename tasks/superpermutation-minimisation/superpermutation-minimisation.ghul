@@ -51,7 +51,7 @@ permutations(letters: string) -> List[string] =>
 contains_all(s: string, n: int) -> bool =>
     permutations(alphabet.substring(0, n)) |> all(s.contains)
 
-factorial(n: int) -> int => 1::n |> reduce(1, (a, b) => a * b)
+factorial(n: int) -> int => 1::n |> reduce(1, * * *)
 
 write_line(" n  joined  recursive  contains all")
 

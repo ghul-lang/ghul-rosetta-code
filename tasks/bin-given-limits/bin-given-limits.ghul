@@ -4,7 +4,7 @@ bin(limits: List[int], data: List[int]) -> List[int] is
     let counts = repeat(0, limits.count + 1) |> collect_mutable()
 
     for value in data do
-        let slot = limits |> count(limit => value >= limit)
+        let slot = limits |> count(value >= *)
 
         counts[slot] = counts[slot] + 1
     od

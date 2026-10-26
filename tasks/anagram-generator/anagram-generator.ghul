@@ -42,7 +42,7 @@ anagrams_of(seed: string, wanted: int) -> List[string] is
     search(start) is
         if found.count >= wanted then
             return
-        elif remaining |> all(count => count == 0) then
+        elif remaining |> all(* == 0) then
             found.add(chosen |> join(" "))
             return
         fi

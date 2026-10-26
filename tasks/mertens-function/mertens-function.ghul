@@ -38,7 +38,7 @@ od
 
 let values = 1::1_000 |> map(mertens) |> collect()
 
-let zeroes = values |> filter(m => m == 0) |> count()
+let zeroes = values |> filter(* == 0) |> count()
 
 let crossings mut = 0
 let previous mut = 0

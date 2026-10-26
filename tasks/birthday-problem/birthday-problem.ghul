@@ -117,7 +117,7 @@ for (i, at_least) in 2::5 |> index() do
     let (r, g, b) = colours[i]
     let curve =
         (1::most / 4)
-            |> map(step => step * 4)
+            |> map(* * 4)
             |> map(n => (x = double(n), y = curves[i][n]))
             |> collect()
 

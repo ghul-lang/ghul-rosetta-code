@@ -58,7 +58,7 @@ three_smooth() -> bigint{} is
 si
 
 pierpont(offset: bigint) -> bigint{} =>
-    three_smooth() |> map(smooth => smooth + offset) |> filter(is_prime)
+    three_smooth() |> map(* + offset) |> filter(is_prime)
 
 report(kind: string, offset: bigint) is
     let found = pierpont(offset) |> take(250) |> collect()

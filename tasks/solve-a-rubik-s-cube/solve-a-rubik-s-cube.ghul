@@ -66,19 +66,19 @@ key(phase: int, state: int[]) -> string is
             let edges =
                 (0..12)
                     |> map(e => (state[e] / 8) << e)
-                    |> reduce(0, (a, b) => a | b)
+                    |> reduce(0, * | *)
 
             [edges | state[31]] ++ state[32..40]
         elif phase == 3 then
             let edges =
                 (0..12)
                     |> map(e => slice(state[e]) << 2 * e)
-                    |> reduce(0, (a, b) => a | b)
+                    |> reduce(0, * | *)
 
             let corners =
                 (0..8)
                     |> map(c => ((state[c + 12] - 12) & 5) << 3 * c)
-                    |> reduce(0, (a, b) => a | b)
+                    |> reduce(0, * | *)
 
             let parity =
                 [true

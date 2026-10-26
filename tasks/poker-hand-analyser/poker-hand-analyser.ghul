@@ -49,7 +49,7 @@ classify(hand: string) -> string is
             od
 
             let groups = counts.values |> sort() |> collect()
-            let is_flush = suits |> all(s => s =~ suits[0])
+            let is_flush = suits |> all(* =~ suits[0])
 
             let is_straight =
                 (faces[4] - faces[0] == 4 /\ groups.count == 5) \/

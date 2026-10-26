@@ -59,7 +59,7 @@ class MACHINE(
             write_line("{state,-4} {picture(tape, head)}")
         fi
 
-        let marked = tape |> filter(c => c != blank) |> count()
+        let marked = tape |> filter(* != blank) |> count()
         write_line("{name}: halted after {steps} steps")
         write_line("{marked} cells marked")
         write_line()

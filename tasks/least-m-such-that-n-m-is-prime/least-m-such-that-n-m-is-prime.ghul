@@ -35,7 +35,7 @@ is_probable_prime(n: bigint) -> bool is
     od
 
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n]
-        |> filter(witness => witness < n)
+        |> filter(* < n)
         |> all(passes_round(*, n, odd_part, twos))
 si
 

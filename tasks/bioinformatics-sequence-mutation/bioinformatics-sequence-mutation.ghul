@@ -11,7 +11,7 @@ show(label: string, sequence: List[char]) is
     od
 
     let tally =
-        bases |> map(base => "{base} {sequence |> count(b => b == base)}")
+        bases |> map(base => "{base} {sequence |> count(* == base)}")
 
     write_line("  {sequence.count} bases: {tally |> join("  ")}")
     write_line("")

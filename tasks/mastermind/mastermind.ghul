@@ -32,7 +32,7 @@ ask(prompt: string, low: int, high: int) -> int is
 si
 
 tally(text: string, letter: char) -> int =>
-    text |> filter(c => c == letter) |> count()
+    text |> filter(* == letter) |> count()
 
 score(code: string, guess: string, palette: string) -> string =>
     let exact =

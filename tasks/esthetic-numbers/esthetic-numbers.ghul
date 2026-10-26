@@ -51,8 +51,8 @@ od
 
 show_range(low: long, high: long) is
     let matching = esthetic(10)
-        |> filter(value => value >= low)
-        |> take_while(value => value <= high)
+        |> filter(* >= low)
+        |> take_while(* <= high)
         |> map(value => "{value}")
         |> collect()
 

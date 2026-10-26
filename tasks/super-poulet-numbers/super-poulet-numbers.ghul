@@ -60,7 +60,7 @@ let found =
     from(3, 2)
         |> filter(report)
         |> filter(is_super_poulet)
-        |> take_while(value => value < 10_100_000)
+        |> take_while(* < 10_100_000)
         |> collect()
 
 write_line("the first 20 super-Poulet numbers:")
@@ -69,7 +69,7 @@ write_line()
 
 [1_000_000, 10_000_000]
     |> each(bound => (
-        let passed = found |> take_while(value => value <= bound) |> count()
+        let passed = found |> take_while(* <= bound) |> count()
 
         write_line("super-Poulet number {passed + 1} is the first over "
                    "{bound:N0}: {found[passed]:N0}")

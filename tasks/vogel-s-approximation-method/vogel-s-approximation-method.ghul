@@ -42,7 +42,7 @@ active_lines() -> Line{} is
     od
 si
 
-while demand |> any(d => d > 0) do
+while demand |> any(* > 0) do
     let chosen =
         active_lines()
         |> sort_by(l => l.cheapest)

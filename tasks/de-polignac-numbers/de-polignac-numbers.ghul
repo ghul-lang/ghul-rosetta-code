@@ -7,7 +7,7 @@ let root = int(System.Math.sqrt(double(limit)))
 
 for p in 2::root do
     if !composite[p] then
-        for multiple in from(p * p, p) |> take_while(m => m < limit) do
+        for multiple in from(p * p, p) |> take_while(* < limit) do
             composite[multiple] = true
         od
     fi
@@ -17,8 +17,8 @@ is_prime(n: int) -> bool => n >= 2 /\ !composite[n]
 
 is_de_polignac(n: int) -> bool =>
     from(0)
-        |> map(k => 1 << k)
-        |> take_while(power => power < n)
+        |> map(1 << *)
+        |> take_while(* < n)
         |> all(power => !is_prime(n - power))
 
 de_polignac_numbers() -> int{} => from(1, 2) |> filter(is_de_polignac)

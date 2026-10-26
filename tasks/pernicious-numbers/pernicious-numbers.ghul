@@ -16,7 +16,7 @@ prime(value: int) -> bool => (
 
 population_count(value: int) -> int =>
     System.Convert.to_string(value, 2)
-        |> filter(bit => bit == '1')
+        |> filter(* == '1')
         |> count()
 
 pernicious(value: int) -> bool => prime(population_count(value))

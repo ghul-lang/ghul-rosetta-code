@@ -40,7 +40,7 @@ word(block: LIST[ubyte], at: int) -> uint =>
     0..4
         |> map(index =>
             uint(block[at + index]) << (24 - 8 * index))
-        |> reduce(0u, (packed, part) => packed | part)
+        |> reduce(0u, * | *)
 
 sha256(message: ubyte[]) -> string is
     let block = padded(message)

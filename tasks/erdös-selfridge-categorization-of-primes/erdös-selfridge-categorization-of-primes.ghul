@@ -7,7 +7,7 @@ let smallest_factor = (
 
     for n in 2::limit do
         if factors[n] == 0 then
-            for multiple in from(n, n) |> take_while(m => m <= limit) do
+            for multiple in from(n, n) |> take_while(* <= limit) do
                 if factors[multiple] == 0 then
                     factors[multiple] = n
                 fi
@@ -37,7 +37,7 @@ si
 categorise(p: int) -> int =>
     1 + (
         prime_factors(p + 1)
-            |> filter(f => f > 3)
+            |> filter(* > 3)
             |> map(f => category[f])
             |> max() ?? 0)
 

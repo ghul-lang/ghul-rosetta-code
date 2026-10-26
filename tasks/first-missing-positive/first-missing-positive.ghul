@@ -1,7 +1,7 @@
 use default
 
 first_missing_positive(nums: List[int]) -> int =>
-    let present = SET(nums |> filter(n => n > 0)) in
+    let present = SET(nums |> filter(* > 0)) in
     from(1) |> find(n => !present.contains(n))!
 
 for nums in [[1, 2, 0], [3, 4, -1, 1], [7, 8, 9, 11, 12]] do

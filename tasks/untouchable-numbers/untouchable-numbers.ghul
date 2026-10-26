@@ -94,7 +94,7 @@ write_line("how many untouchable numbers there are up to:")
 
 for power in 1::5 do
     let bound = int(pow(10.0D, cast(power)))
-    let found = untouchable |> filter(value => value <= bound) |> count()
+    let found = untouchable |> filter(* <= bound) |> count()
 
     write_line("  {bound,7}: {found}")
 od

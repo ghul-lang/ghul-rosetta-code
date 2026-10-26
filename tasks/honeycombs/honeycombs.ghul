@@ -98,7 +98,7 @@ while chosen.count < cells.count do
 
     if !(cells |> any(cell => cell.letter == wanted)) then
         write_line("  {wanted} is not in the honeycomb")
-    elif chosen |> any(already => already == wanted) then
+    elif chosen |> any(* == wanted) then
         write_line("  {wanted} was already chosen")
     else
         chosen.add(wanted)

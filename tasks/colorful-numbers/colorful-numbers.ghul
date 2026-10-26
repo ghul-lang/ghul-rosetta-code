@@ -52,7 +52,7 @@ let colorful = candidates |> filter(is_colorful) |> collect_mutable()
 
 colorful.sort()
 
-let small = colorful |> filter(v => v < 100) |> map(v => "{v}")
+let small = colorful |> filter(* < 100) |> map(v => "{v}")
 
 write_line("the colorful numbers below 100:")
 write_line("  {small |> join(" ")}")

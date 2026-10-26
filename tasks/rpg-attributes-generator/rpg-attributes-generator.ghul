@@ -23,7 +23,7 @@ od
 
 acceptable(values: LIST[int]) -> bool =>
     let total = values |> sum() in
-    let strong = values |> filter(value => value >= 15) |> count() in
+    let strong = values |> filter(* >= 15) |> count() in
     total >= 75 /\ strong >= 2
 
 

@@ -20,8 +20,8 @@ si
 
 between(low: int, high: int) -> int{} =>
     primes()
-        |> skip_while(prime => prime < low)
-        |> take_while(prime => prime <= high)
+        |> skip_while(* < low)
+        |> take_while(* <= high)
 
 write_line("the first twenty primes:")
 write_line("  {primes() |> take(20) |> join(" ")}")

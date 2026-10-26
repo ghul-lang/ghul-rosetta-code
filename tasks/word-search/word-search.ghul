@@ -28,7 +28,7 @@ class GRID is
         placed = LIST()
     si
 
-    empty: int => cells |> filter(c => c == ' ') |> count()
+    empty: int => cells |> filter(* == ' ') |> count()
 
     fits(word: string, row: int, column: int, dr: int, dc: int) -> bool =>
         0..word.length |> all(i =>

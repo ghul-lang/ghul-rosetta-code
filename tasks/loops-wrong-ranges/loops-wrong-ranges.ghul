@@ -20,7 +20,7 @@ let cases = [
 for (start, stop, step, comment) in cases do
     let values =
         from(start, step)
-            |> take_while(v => v <= stop)
+            |> take_while(* <= stop)
             |> take(11)
             |> collect()
 

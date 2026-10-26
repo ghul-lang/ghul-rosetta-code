@@ -7,7 +7,7 @@ predict(
 ) -> int =>
     [connection[k] & sequence[n - k]
         for k in 1::length if k < connection.count]
-        |> reduce(0, (a, b) => a ^ b)
+        |> reduce(0, * ^ *)
 
 shortest_register(sequence: List[int]) -> Register is
     let connection = LIST([1])

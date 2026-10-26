@@ -50,7 +50,7 @@ let orthodox = [
     ("All Saints", 56)
 ]
 
-let years = 4::21 |> map(century => century * 100) |> cat(2010::2020)
+let years = 4::21 |> map(* * 100) |> cat(2010::2020)
 
 for year in years do
     if year < 1583 then

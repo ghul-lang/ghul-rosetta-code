@@ -10,7 +10,7 @@ let prime = (
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if sieve[p] then
-            for multiple in from(p * p, p) |> take_while(m => m < limit) do
+            for multiple in from(p * p, p) |> take_while(* < limit) do
                 sieve[multiple] = false
             od
         fi

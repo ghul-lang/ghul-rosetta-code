@@ -97,7 +97,7 @@ expand(source: string) -> string is
         let rest = text[cursor..<0]
 
         if rest[0] == '!' then
-            let marks = rest |> take_while(mark => mark == '!') |> count()
+            let marks = rest |> take_while(* == '!') |> count()
             let unit = bigint.pow(10n, point)
 
             value = multifactorial(value / unit, marks)

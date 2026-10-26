@@ -8,7 +8,7 @@ use IO.Path
 expand(path: string, active: List[string]) -> string{} is
     let full = Path.get_full_path(path)
 
-    assert !(active |> any(open => open =~ full))
+    assert !(active |> any(* =~ full))
     else "include cycle through {path}"
 
     let nested = active |> cat([full]) |> collect()

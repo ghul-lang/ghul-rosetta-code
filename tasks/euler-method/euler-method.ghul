@@ -14,7 +14,7 @@ euler(
 ) -> (time: int, value: double){} is
     let y mut = y0
 
-    for t in from(0, step) |> take_while(t => t <= end) do
+    for t in from(0, step) |> take_while(* <= end) do
         yield (t, y)
 
         y = y + double(step) * f(double(t), y)

@@ -9,7 +9,7 @@ bottles(n: int) -> string =>
     esac
 
 sing() is
-    for n in 1::99 |> map(i => 100 - i) do
+    for n in 1::99 |> map(100 - *) do
         let some = bottles(n)
 
         write_line("{some} of beer on the wall, {some} of beer.")

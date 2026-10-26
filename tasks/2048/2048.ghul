@@ -41,7 +41,7 @@ lines_for(direction: char) -> LIST[LIST[int]] =>
 // A tile made by a merge takes no further part in the same
 // move, so the scan steps over both tiles it consumed.
 collapse(values: LIST[int]) -> LIST[int] =>
-    (let packed = values |> filter(value => value != 0) |> collect()
+    (let packed = values |> filter(* != 0) |> collect()
      let result = LIST()
      let at mut = 0
 
@@ -115,7 +115,7 @@ Std.write_line()
 show()
 
 while true do
-    if board |> any(tile => tile >= win) then
+    if board |> any(* >= win) then
         Std.write_line("{win} reached, you win")
         break
     fi

@@ -19,7 +19,7 @@ solid(c: Cell) -> bool is
 
     for _ in 0..level do
         let middles =
-            [x % 3, y % 3, z % 3] |> filter(d => d == 1) |> count()
+            [x % 3, y % 3, z % 3] |> filter(* == 1) |> count()
 
         if middles >= 2 then
             return false

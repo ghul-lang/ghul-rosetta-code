@@ -19,7 +19,7 @@ let first_twenty = harshad()
 write_line("first 20 Harshad numbers: {first_twenty}")
 
 let beyond_thousand = harshad()
-    |> filter(number => number > 1000)
+    |> filter(* > 1000)
     |> first_or_throw()
 
 write_line("first Harshad number above 1000: {beyond_thousand}")

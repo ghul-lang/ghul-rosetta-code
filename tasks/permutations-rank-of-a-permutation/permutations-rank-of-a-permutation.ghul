@@ -1,7 +1,7 @@
 use default
 
 factorial(n: int) -> bigint =>
-    1::n |> map(bigint) |> reduce(1n, (a, b) => a * b)
+    1::n |> map(bigint) |> reduce(1n, * * *)
 
 // Lexicographic order, read as a number in the factorial base.
 unrank(rank: bigint, n: int) -> List[int] is

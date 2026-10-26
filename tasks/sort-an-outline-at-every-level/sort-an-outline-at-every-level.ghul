@@ -74,7 +74,7 @@ arrange(outline: List[string], descending: bool) -> Outcome is
     let marker = unit[0]
 
     for indent in indents do
-        if indent |> any(letter => letter != marker) then
+        if indent |> any(* != marker) then
             return Outcome.INCONSISTENT("indentation mixes tabs and spaces")
         fi
 

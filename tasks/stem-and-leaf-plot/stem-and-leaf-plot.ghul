@@ -11,7 +11,7 @@ let data = [
     34, 133, 45, 120, 30, 127, 31, 116, 146
 ]
 
-let values = data |> sort((a, b) => a - b) |> collect()
+let values = data |> sort(* - *) |> collect()
 let highest = values[values.count - 1] / 10
 
 for stem in 0::highest do

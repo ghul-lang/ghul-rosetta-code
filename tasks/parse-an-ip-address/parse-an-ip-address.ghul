@@ -22,7 +22,7 @@ with_port(text: string) -> Parsed =>
 split_port(text: string) -> Parsed =>
     if text.starts_with("[") then
         bracketed(text)
-    elif text |> count(c => c == ':') == 1 then
+    elif text |> count(* == ':') == 1 then
         with_port(text)
     else
         (address = IPAddress.parse(text), port = null)

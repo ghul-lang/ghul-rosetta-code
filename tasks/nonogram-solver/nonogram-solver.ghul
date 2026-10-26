@@ -22,7 +22,7 @@ arrangements(clues: List[int], length: int) -> List[long] is
         let rest =
             clues
                 |> skip(i + 1)
-                |> sum_by(n => n + 1)
+                |> sum_by(* + 1)
 
         for at in start::length - clues[i] - rest do
             let block = ((1L << clues[i]) - 1L) << at
@@ -88,8 +88,8 @@ class PUZZLE is
                     return false
                 fi
 
-                let always = fits |> reduce(-1L, (a, b) => a & b)
-                let ever = fits |> reduce(0L, (a, b) => a | b)
+                let always = fits |> reduce(-1L, * & *)
+                let ever = fits |> reduce(0L, * | *)
 
                 for (j, cell) in line |> index() do
                     if cells[cell] == unknown then

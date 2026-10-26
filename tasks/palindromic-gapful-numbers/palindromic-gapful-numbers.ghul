@@ -11,7 +11,7 @@ palindromes(digit: int) -> long{} is
         let low = long(digit) * scale
         let high = long(digit + 1) * scale
 
-        for left in from(low) |> take_while(n => n < high) do
+        for left in from(low) |> take_while(* < high) do
             let text = "{left}"
             let mirrored = text |> reverse() |> skip(length % 2) |> join("")
 

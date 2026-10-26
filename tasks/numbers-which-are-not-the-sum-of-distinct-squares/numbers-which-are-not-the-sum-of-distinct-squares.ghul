@@ -35,7 +35,7 @@ do
 
     if let last = gaps |> find(gap => run_after(gap) >= next) then
         write_line("Numbers that are not the sum of distinct squares:")
-        write_line(gaps |> take_while(gap => gap <= last) |> join(" "))
+        write_line(gaps |> take_while(* <= last) |> join(" "))
 
         break
     fi

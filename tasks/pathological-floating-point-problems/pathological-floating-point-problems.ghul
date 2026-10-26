@@ -71,7 +71,7 @@ write_line("Task 2: the Chaotic Bank Society")
 
 let e = 0::40
     |> map(k => RATIONAL(1n, 1::k |> reduce(1n, (f, i) => f * bigint(i))))
-    |> reduce(whole(0n), (total, term) => total + term)
+    |> reduce(whole(0n), * + *)
 
 let balance mut = e - whole(1n)
 
