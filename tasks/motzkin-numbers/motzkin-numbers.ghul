@@ -50,13 +50,11 @@ is_prime(value: bigint) -> bool is
 
     if value < two then return false fi
 
-    let odd_part mut = value - one
-    let power mut = 0
+    factor(n: bigint, exponent: int) -> (bigint, int) =>
+        if (n % two).is_zero then factor(n / two, exponent + 1)
+        else (n, exponent) fi
 
-    while (odd_part % two).is_zero do
-        odd_part = odd_part / two
-        power = power + 1
-    od
+    let (odd_part, power) = factor(value - one, 0)
 
     for small in witnesses do
         if !passes(bigint(small), odd_part, power, value) then
