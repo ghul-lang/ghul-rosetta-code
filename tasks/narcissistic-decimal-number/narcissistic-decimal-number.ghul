@@ -5,7 +5,7 @@ power(value: int, exponent: int) -> int =>
 
 is_narcissistic(number: int) -> bool =>
     let width = digits(number) |> count() in
-    digits(number) |> map(d => power(d, width)) |> sum() == number
+    digits(number) |> map(power(*, width)) |> sum() == number
 
 let narcissistic = from(0)
     |> filter(is_narcissistic)

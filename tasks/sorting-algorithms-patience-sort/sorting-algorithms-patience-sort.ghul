@@ -14,7 +14,7 @@ patience_sort(values: List[int]) -> int{} is
     od
 
     while piles.count > 0 do
-        let pile = piles |> min_by(p => top(p))!
+        let pile = piles |> min_by(top)!
 
         yield top(pile)
 

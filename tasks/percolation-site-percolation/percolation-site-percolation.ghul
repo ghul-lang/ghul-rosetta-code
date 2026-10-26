@@ -46,7 +46,7 @@ class GRID is
             fi
         od
 
-        return 0..size |> any(column => is_reached(column, size - 1))
+        return 0..size |> any(is_reached(*, size - 1))
     si
 si
 
@@ -63,7 +63,7 @@ for step in 0::10 do
 
     if step == 6 then
         shown = grids |> find(g =>
-            0..size |> any(column => g.is_reached(column, size - 1)))
+            0..size |> any(g.is_reached(*, size - 1)))
     fi
 od
 
