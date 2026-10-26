@@ -127,14 +127,10 @@ for group in 0..(played.count + 3) / 4 do
     write_line(listed |> skip(group * 4) |> take(4) |> join("  "))
 od
 
-let low_x =
-    points |> map(p => p.`0) |> reduce(0, (a, b) => min(a, b))
-let high_x =
-    points |> map(p => p.`0) |> reduce(0, (a, b) => max(a, b))
-let low_y =
-    points |> map(p => p.`1) |> reduce(0, (a, b) => min(a, b))
-let high_y =
-    points |> map(p => p.`1) |> reduce(0, (a, b) => max(a, b))
+let low_x = points |> map(p => p.`0) |> min()!
+let high_x = points |> map(p => p.`0) |> max()!
+let low_y = points |> map(p => p.`1) |> min()!
+let high_y = points |> map(p => p.`1) |> max()!
 
 let cell = 36
 
