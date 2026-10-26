@@ -8,15 +8,9 @@ let margin = 5
 
 let random = System.Random(20260918)
 
-let visited = LIST()
-let right_open = LIST()
-let down_open = LIST()
-
-for _ in 0..columns * rows do
-    visited.add(false)
-    right_open.add(false)
-    down_open.add(false)
-od
+let visited = repeat(false, columns * rows) |> collect_mutable()
+let right_open = repeat(false, columns * rows) |> collect_mutable()
+let down_open = repeat(false, columns * rows) |> collect_mutable()
 
 at(column: int, row: int) -> int => row * columns + column
 
@@ -49,15 +43,12 @@ carve(column: int, row: int) is
 
         if inside(next_column, next_row) /\
                 !visited[at(next_column, next_row)] then
-            if step.across == 1 then
-                right_open[at(column, row)] = true
-            elif step.across == -1 then
-                right_open[at(next_column, row)] = true
-            elif step.down == 1 then
-                down_open[at(column, row)] = true
-            else
-                down_open[at(column, next_row)] = true
-            fi
+            case (step.across, step.down)
+            when (1, 0) then right_open[at(column, row)] = true
+            when (-1, 0) then right_open[at(next_column, row)] = true
+            when (0, 1) then down_open[at(column, row)] = true
+            else down_open[at(column, next_row)] = true
+            esac
 
             carve(next_column, next_row)
         fi
