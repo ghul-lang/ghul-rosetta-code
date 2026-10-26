@@ -30,20 +30,10 @@ for _ in 1::3 do
         "host opens {game.opened}, switching gives {game.switched}")
 od
 
-let stay_wins mut = 0
-let switch_wins mut = 0
+let games = 1::rounds |> map(_ => play()) |> collect()
 
-for _ in 1::rounds do
-    let game = play()
-
-    if game.chosen == game.car then
-        stay_wins = stay_wins + 1
-    fi
-
-    if game.switched == game.car then
-        switch_wins = switch_wins + 1
-    fi
-od
+let stay_wins = games |> count(g => g.chosen == g.car)
+let switch_wins = games |> count(g => g.switched == g.car)
 
 percentage(wins: int) -> string =>
     "{double(wins) * 100.0 / double(rounds),5:F2}%"
