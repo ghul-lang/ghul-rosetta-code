@@ -1,21 +1,9 @@
 use default
 
-digits(n: long, base: long) -> List[long] is
-    let result = LIST()
-    let rest mut = n
-
-    while rest > 0L do
-        result.add(rest % base)
-        rest = rest / base
-    od
-
-    result
-si
-
 is_lynch_bell(n: long, base: long) -> bool =>
-    let digit_list = digits(n, base) in
-    digit_list |> all(d => d != 0L /\ n % d == 0L) /\
-    digit_list |> distinct() |> count() == digit_list.count
+    let ds = digits(n, base) in
+    ds |> all(d => d != 0L /\ n % d == 0L) /\
+    ds |> distinct() |> count() == ds |> count()
 
 largest(base: long, step: long, highest: long) -> long =>
     from(0L)
