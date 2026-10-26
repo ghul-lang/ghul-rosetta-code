@@ -1,23 +1,10 @@
 use default
 
-divisor_count(n: int) -> int is
-    let count mut = 0
-    let divisor mut = 1
-
-    while divisor * divisor <= n do
-        if n % divisor == 0 then
-            count = count + 2
-        fi
-
-        if divisor * divisor == n then
-            count = count - 1
-        fi
-
-        divisor = divisor + 1
-    od
-
-    count
-si
+divisor_count(n: int) -> int =>
+    from(1)
+    |> take_while(d => d * d <= n)
+    |> map(d => if n % d == 0 then if d * d == n then 1 else 2 fi else 0 fi)
+    |> sum()
 
 is_tau(n: int) -> bool => n % divisor_count(n) == 0
 
