@@ -21,10 +21,10 @@ flip_column(board: LIST[int], column: int) is
     od
 si
 
-same(left: LIST[int], right: LIST[int]) -> bool =>
+same(left: List[int], right: List[int]) -> bool =>
     0..size * size |> all(cell => left[cell] == right[cell])
 
-show(caption: string, board: LIST[int]) is
+show(caption: string, board: List[int]) is
     write_line(caption)
 
     let letters =

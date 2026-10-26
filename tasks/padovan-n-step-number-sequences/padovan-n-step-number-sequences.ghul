@@ -1,6 +1,6 @@
 use default
 
-padovan(step: int, count: int) -> LIST[int] is
+padovan(step: int, count: int) -> List[int] is
     let terms mut = LIST()
 
     if step == 2 then

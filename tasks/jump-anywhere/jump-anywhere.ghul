@@ -31,7 +31,7 @@ first_repeat(grid: int[][]) -> int? is
     od
 si
 
-complete_rows(grid: int[][]) -> LIST[string] is
+complete_rows(grid: int[][]) -> List[string] is
     let complete = LIST()
 
     scan: for row in grid do

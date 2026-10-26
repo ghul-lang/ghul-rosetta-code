@@ -16,7 +16,7 @@ promotion_square(piece: char, square: int) -> bool =>
     (piece == 'P' /\ rank_of(square) == 0) \/
     (piece == 'p' /\ rank_of(square) == 7)
 
-position() -> LIST[char] =>
+position() -> List[char] =>
     (let board = repeat('.', 64) |> collect_mutable()
 
      let white_king = random.next(64)
@@ -65,7 +65,7 @@ rank_to_fen(squares: List[char]) -> string =>
 
      text.to_string())
 
-to_fen(board: LIST[char]) -> string =>
+to_fen(board: List[char]) -> string =>
     (let ranks =
         (0..8)
             |> map(rank =>

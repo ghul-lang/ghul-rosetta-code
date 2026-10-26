@@ -20,7 +20,7 @@ od
 
 let primes = 2::limit |> filter(p => !composite[p]) |> collect()
 
-groups(differences: int[]) -> LIST[int]{} is
+groups(differences: int[]) -> List[int]{} is
     for start in 0..primes.count - differences.count do
         let matched mut = true
 
@@ -39,7 +39,7 @@ groups(differences: int[]) -> LIST[int]{} is
     od
 si
 
-render(group: LIST[int]) -> string =>
+render(group: List[int]) -> string =>
     "({group |> map(p => "{p}") |> join(", ")})"
 
 report(differences: int[]) is

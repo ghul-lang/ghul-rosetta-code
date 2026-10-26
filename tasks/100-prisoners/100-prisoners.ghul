@@ -11,7 +11,7 @@ let strategies = [
     (name = "following the cycle", finds = follows_the_cycle)
 ]
 
-shuffled_cards() -> LIST[int] =>
+shuffled_cards() -> List[int] =>
     (let cards = 1::prisoners |> collect_mutable()
      for i in 0..cards.count do
          let j = i + random.next(cards.count - i)
@@ -19,7 +19,7 @@ shuffled_cards() -> LIST[int] =>
      od
      cards)
 
-follows_the_cycle(cards: LIST[int], prisoner: int) -> bool =>
+follows_the_cycle(cards: List[int], prisoner: int) -> bool =>
     (let drawer mut = prisoner
      for _ in 0..attempts do
          if cards[drawer - 1] == prisoner then
@@ -29,7 +29,7 @@ follows_the_cycle(cards: LIST[int], prisoner: int) -> bool =>
      od
      false)
 
-opens_at_random(cards: LIST[int], prisoner: int) -> bool =>
+opens_at_random(cards: List[int], prisoner: int) -> bool =>
     (let unopened = 1::prisoners |> collect_mutable()
      for i in 0..attempts do
          let j = i + random.next(unopened.count - i)
@@ -41,11 +41,11 @@ opens_at_random(cards: LIST[int], prisoner: int) -> bool =>
      od
      false)
 
-all_pardoned(finds: (LIST[int], int) -> bool) -> bool =>
+all_pardoned(finds: (List[int], int) -> bool) -> bool =>
     let cards = shuffled_cards() in
     1::prisoners |> all(finds(cards, *))
 
-success_rate(finds: (LIST[int], int) -> bool) -> double =>
+success_rate(finds: (List[int], int) -> bool) -> double =>
     cast(0..trials |> filter(_ => all_pardoned(finds)) |> count()) *
         100.0D / cast(trials)
 

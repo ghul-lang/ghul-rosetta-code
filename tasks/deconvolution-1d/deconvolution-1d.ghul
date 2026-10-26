@@ -1,6 +1,6 @@
 use default
 
-deconvolve(g: int[], f: int[]) -> LIST[int] is
+deconvolve(g: int[], f: int[]) -> List[int] is
     let h = LIST()
 
     for n in 0..g.count - f.count + 1 do

@@ -7,7 +7,7 @@ summarize(term: string) -> string =>
     |> map(digit => "{counts[digit]}{digit}")
     |> join("")
 
-sequence(seed: int) -> LIST[string] is
+sequence(seed: int) -> List[string] is
     let terms = LIST()
     let seen = SET()
 

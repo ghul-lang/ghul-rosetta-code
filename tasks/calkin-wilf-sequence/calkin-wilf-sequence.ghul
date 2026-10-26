@@ -17,7 +17,7 @@ si
 
 write_line(terms() |> take(20) |> join(" "))
 
-continued_fraction(numerator: int, denominator: int) -> LIST[int] is
+continued_fraction(numerator: int, denominator: int) -> List[int] is
     let left mut = numerator
     let right mut = denominator
     let terms = LIST()

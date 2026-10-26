@@ -11,7 +11,7 @@ neighbours(node: Node) -> Node{} =>
 
 index_of(node: Node) -> int => node.row * size + node.col
 
-solve(matrix: LIST[LIST[double]], rhs: LIST[double]) -> LIST[double] is
+solve(matrix: LIST[LIST[double]], rhs: LIST[double]) -> List[double] is
     let n = rhs.count
 
     for column in 0..n do

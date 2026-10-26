@@ -1,6 +1,6 @@
 use default
 
-runs(values: List[int]) -> LIST[LIST[int]] is
+runs(values: List[int]) -> List[List[int]] is
     let groups = LIST()
     let current = LIST()
 

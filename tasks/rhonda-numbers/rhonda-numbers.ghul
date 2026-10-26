@@ -1,6 +1,6 @@
 use default
 
-digits(value: int, base: int) -> LIST[int] is
+digits(value: int, base: int) -> List[int] is
     let result = LIST()
     let remaining mut = value
 

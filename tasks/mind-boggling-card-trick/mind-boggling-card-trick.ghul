@@ -2,8 +2,8 @@ use default
 
 let random = System.Random(52)
 
-shuffled[T](items: T{}) -> LIST[T] =>
-    items |> sort_by(_ => random.next()) |> collect_mutable()
+shuffled[T](items: T{}) -> List[T] =>
+    items |> sort_by(_ => random.next()) |> collect()
 
 trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))

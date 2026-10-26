@@ -1,7 +1,7 @@
 use default
 
 permute[T](digits: Collections.List[int], items: Collections.List[T])
-        -> LIST[T] is
+        -> List[T] is
     let result = LIST(items)
 
     for (place, digit) in digits |> index() do
@@ -16,7 +16,7 @@ permute[T](digits: Collections.List[int], items: Collections.List[T])
     return result
 si
 
-factorial_base_numbers(places: int) -> LIST[int]{} is
+factorial_base_numbers(places: int) -> List[int]{} is
     let digits = repeat(0, places) |> collect_mutable()
 
     while true do
@@ -37,8 +37,8 @@ factorial_base_numbers(places: int) -> LIST[int]{} is
     od
 si
 
-parse_digits(text: string) -> LIST[int] =>
-    text.split(['.']) |> map(int.parse) |> collect_mutable()
+parse_digits(text: string) -> List[int] =>
+    text.split(['.']) |> map(int.parse) |> collect()
 
 show[T](digits: Collections.List[int], items: Collections.List[T]) =>
     let number = digits |> map(d => "{d}") |> join(".") in

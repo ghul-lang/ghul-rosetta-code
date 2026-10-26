@@ -1,16 +1,16 @@
 use default
 
-permutation_between(before: string, after: string) -> LIST[int] =>
+permutation_between(before: string, after: string) -> List[int] =>
     let one_line = after
         |> map(letter => before.index_of(letter) + 1)
-        |> collect_mutable() in
+        |> collect() in
     one_line
 
 
-apply(one_line: Collections.List[int], text: string) -> string =>
+apply(one_line: List[int], text: string) -> string =>
     string(one_line |> map(source => text[source - 1]) |> collect())
 
-inverse(one_line: Collections.List[int]) -> LIST[int] is
+inverse(one_line: List[int]) -> List[int] is
     let result = LIST(one_line)
 
     for (target, source) in one_line |> index() do
@@ -20,11 +20,11 @@ inverse(one_line: Collections.List[int]) -> LIST[int] is
     return result
 si
 
-compose(first: Collections.List[int], second: Collections.List[int])
-        -> LIST[int] =>
-    second |> map(source => first[source - 1]) |> collect_mutable()
+compose(first: List[int], second: List[int])
+        -> List[int] =>
+    second |> map(source => first[source - 1]) |> collect()
 
-cycles(one_line: Collections.List[int]) -> LIST[LIST[int]] is
+cycles(one_line: List[int]) -> List[List[int]] is
     let destination = inverse(one_line)
     let found = LIST()
     let seen = repeat(false, one_line.count) |> collect_mutable()
@@ -49,8 +49,8 @@ cycles(one_line: Collections.List[int]) -> LIST[LIST[int]] is
     return found
 si
 
-one_line(cycle_notation: Collections.List[LIST[int]], size: int)
-        -> LIST[int] is
+one_line(cycle_notation: List[List[int]], size: int)
+        -> List[int] is
     let result = LIST()
 
     for position in 1::size do
@@ -68,19 +68,19 @@ si
 
 gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
 
-order(one_line: Collections.List[int]) -> int =>
+order(one_line: List[int]) -> int =>
     cycles(one_line)
         |> map(cycle => cycle.count)
         |> reduce(1, (acc, length) => acc * length / gcd(acc, length))
 
-signature(one_line: Collections.List[int]) -> int =>
+signature(one_line: List[int]) -> int =>
     let even_cycles = cycles(one_line)
         |> filter(c => c.count % 2 == 0)
         |> count() in
     if even_cycles % 2 == 0 then 1 else -1 fi
 
 
-show_one_line(one_line: Collections.List[int]) -> string is
+show_one_line(one_line: List[int]) -> string is
     let trimmed = LIST(one_line)
 
     while trimmed.count > 0 /\
@@ -91,7 +91,7 @@ show_one_line(one_line: Collections.List[int]) -> string is
     return trimmed |> map(p => "{p}") |> join(" ")
 si
 
-show_cycles(one_line: Collections.List[int]) -> string =>
+show_cycles(one_line: List[int]) -> string =>
     cycles(one_line)
         |> map(cycle => "({cycle |> map(p => "{p}") |> join(" ")})")
         |> join(" ")

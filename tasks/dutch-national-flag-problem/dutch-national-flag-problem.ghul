@@ -6,7 +6,7 @@ enum COLOR is
     BLUE,
 si
 
-is_sorted(balls: LIST[COLOR]) -> bool =>
+is_sorted(balls: List[COLOR]) -> bool =>
     0..balls.count - 1 |> all(i => balls[i] <= balls[i + 1])
 
 shuffle(balls: LIST[COLOR], random: System.Random) is

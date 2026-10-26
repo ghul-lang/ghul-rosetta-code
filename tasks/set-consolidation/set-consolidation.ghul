@@ -1,6 +1,6 @@
 use default
 
-consolidate(input: LIST[SET[string]]) -> LIST[SET[string]] is
+consolidate(input: List[Set[string]]) -> List[Set[string]] is
     let result = LIST[SET[string]]()
 
     for candidate in input do
@@ -23,11 +23,11 @@ consolidate(input: LIST[SET[string]]) -> LIST[SET[string]] is
     result
 si
 
-render(sets: LIST[SET[string]]) -> string =>
+render(sets: List[Set[string]]) -> string =>
     sets |> map(one => "\{{one |> sort() |> join(", ")}\}") |> join(" ")
 
 show(groups: string[][]) is
-    let sets = groups |> map(SET) |> collect_mutable()
+    let sets = groups |> map(SET) |> collect()
 
     write_line("{render(sets)}")
     write_line("  consolidates to {render(consolidate(sets))}")

@@ -1,5 +1,5 @@
 use default
-use RESULT = (is_lychrel: bool, values: LIST[bigint])
+use RESULT = (is_lychrel: bool, values: List[bigint])
 
 write_line("reversing and adding, which takes a moment")
 write_line("")

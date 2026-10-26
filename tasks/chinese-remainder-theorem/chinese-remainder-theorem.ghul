@@ -10,7 +10,7 @@ extended_gcd(a: long, b: long) -> (g: long, x: long, y: long) is
     fi
 si
 
-crt(ns: LIST[long], as: LIST[long]) -> long? is
+crt(ns: List[long], as: List[long]) -> long? is
     let big_n mut = 1L
 
     for n in ns do
@@ -36,7 +36,7 @@ crt(ns: LIST[long], as: LIST[long]) -> long? is
     if result < 0L then result + big_n else result fi
 si
 
-demo(ns: LIST[long], as: LIST[long]) is
+demo(ns: List[long], as: List[long]) is
     let result = crt(ns, as)
     let n_text = ns |> map(n => "{n}") |> join()
     let a_text = as |> map(a => "{a}") |> join()

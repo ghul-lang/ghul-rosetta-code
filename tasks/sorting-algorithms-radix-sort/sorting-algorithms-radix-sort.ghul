@@ -4,7 +4,7 @@ use default
 // by their magnitude on their own and put first, reversed.
 radix_sort(values: List[int]) -> List[int] is
     sort_magnitudes(magnitudes: List[int]) -> List[int] is
-        let current mut = magnitudes |> collect_mutable()
+        let current mut = magnitudes |> collect()
         let largest = current |> max() ?? 0
         let place mut = 1
 
@@ -16,7 +16,7 @@ radix_sort(values: List[int]) -> List[int] is
                 buckets[v / place % 10].add(v)
             od
 
-            current = buckets |> flat_map(b => b) |> collect_mutable()
+            current = buckets |> flat_map(b => b) |> collect()
             place = place * 10
         od
 

@@ -9,10 +9,10 @@ highest(values: int[]) -> int =>
     values
     |> reduce(0, (best, value) => if value > best then value else best fi)
 
-matrix(first: string, second: string) -> LIST[LIST[int]] is
+matrix(first: string, second: string) -> List[List[int]] is
     let scores = 0::first.length
         |> map(_ => repeat(0, second.length + 1) |> collect_mutable())
-        |> collect_mutable()
+        |> collect()
 
     for i in 1::first.length do
         for j in 1::second.length do
@@ -30,7 +30,7 @@ matrix(first: string, second: string) -> LIST[LIST[int]] is
     return scores
 si
 
-best_cell(scores: LIST[LIST[int]]) -> (row: int, column: int) is
+best_cell(scores: List[List[int]]) -> (row: int, column: int) is
     let row mut = 0
     let column mut = 0
 
@@ -49,7 +49,7 @@ si
 trace(
     first: string,
     second: string,
-    scores: LIST[LIST[int]]
+    scores: List[List[int]]
 ) -> (a_aligned: string, b_aligned: string, path: string) is
     let (row, column) = best_cell(scores)
 

@@ -56,7 +56,7 @@ fits(m: Move) -> bool is
     return true
 si
 
-legal_moves() -> LIST[Move] is
+legal_moves() -> List[Move] is
     let empty = SET[(int, int)]()
 
     for (x, y) in points do

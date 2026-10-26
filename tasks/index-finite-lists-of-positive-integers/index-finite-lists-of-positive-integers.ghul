@@ -8,7 +8,7 @@ rank(values: Collections.List[bigint]) -> bigint =>
         value.to_string() |> reduce(acc * eleven + ten,
             (r, d) => r * eleven + cast(d - '0')))
 
-unrank(index: bigint) -> LIST[bigint] is
+unrank(index: bigint) -> List[bigint] is
     let digits = LIST()
     let remaining mut = index
 
@@ -24,7 +24,7 @@ unrank(index: bigint) -> LIST[bigint] is
     let values = (digits |> join("")).split([' '])
         |> filter(text => text.length > 0)
         |> map(bigint.parse)
-        |> collect_mutable()
+        |> collect()
 
     return values
 si

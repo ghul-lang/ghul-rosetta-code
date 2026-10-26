@@ -2,7 +2,7 @@ use default
 
 let random = System.Random(42)
 
-in_order(values: LIST[int]) -> bool =>
+in_order(values: List[int]) -> bool =>
     (0..values.count - 1)
         |> all(i => values[i] <= values[i + 1])
 

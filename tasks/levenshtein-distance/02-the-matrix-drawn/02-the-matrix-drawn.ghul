@@ -12,9 +12,9 @@ let cell = 38
 let left = 46
 let top = 58
 
-distances(source: string, target: string) -> LIST[LIST[int]] is
-    let rows = LIST[LIST[int]]()
-    let first = 0::target.length |> collect_mutable()
+distances(source: string, target: string) -> List[List[int]] is
+    let rows = LIST[List[int]]()
+    let first = 0::target.length |> collect()
 
     rows.add(first)
 
@@ -39,7 +39,7 @@ si
 
 let table = distances(source, target)
 
-alignment() -> LIST[(row: int, column: int)] is
+alignment() -> List[(row: int, column: int)] is
     let i mut = source.length
     let j mut = target.length
 

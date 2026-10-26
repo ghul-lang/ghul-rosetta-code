@@ -3,10 +3,10 @@ use default
 let headings = [(down = 0, across = 1), (down = 1, across = 0),
                 (down = 0, across = -1), (down = -1, across = 0)]
 
-spiral(size: int) -> LIST[LIST[int]] is
+spiral(size: int) -> List[LIST[int]] is
     let grid = 0..size
         |> map(_ => LIST(0..size |> map(column => -1)))
-        |> collect_mutable()
+        |> collect()
 
     let free = (row, column) =>
         row >= 0 /\ row < size /\ column >= 0 /\ column < size /\

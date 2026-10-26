@@ -19,7 +19,7 @@ let my_books = LIST()
 let you_hold = LIST()
 let you_lack = LIST()
 
-held(hand: LIST[int], rank: int) -> int =>
+held(hand: List[int], rank: int) -> int =>
     hand |> filter(* == rank) |> count()
 
 name_of(rank: int) -> string => ranks[rank]
@@ -31,7 +31,7 @@ cards(count: int, rank: int) -> string =>
         "{count} {name_of(rank)}s"
     fi
 
-sorted_hand(hand: LIST[int]) -> string =>
+sorted_hand(hand: List[int]) -> string =>
     hand |> sort() |> map(name_of) |> join(" ")
 
 draw() -> int? =>

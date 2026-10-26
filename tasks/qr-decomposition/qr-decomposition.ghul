@@ -31,10 +31,10 @@ multiply(a: Rows, b: Rows) -> Table is
     result
 si
 
-transpose(a: Rows) -> Table =>
+transpose(a: Rows) -> Rows =>
     0..a[0].count
-        |> map(j => 0..a.count |> map(i => a[i][j]) |> collect_mutable())
-        |> collect_mutable()
+        |> map(j => 0..a.count |> map(i => a[i][j]) |> collect())
+        |> collect()
 
 householder(a: Rows, k: int) -> Table is
     let m = a.count

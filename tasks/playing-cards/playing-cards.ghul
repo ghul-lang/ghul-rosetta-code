@@ -48,7 +48,7 @@ class DECK is
         od
     si
 
-    deal(n: int) -> LIST[CARD] is
+    deal(n: int) -> List[CARD] is
         let dealt = LIST(_cards[0..n])
 
         _cards.remove_range(0, n)

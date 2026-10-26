@@ -82,7 +82,7 @@ let image = IMAGE(520, 520)
 
 image.view(20.0D, 20.0D, 380.0D, 380.0D)
 
-closed(polygon: Collections.List[Point]) -> LIST[Point] is
+closed(polygon: Collections.List[Point]) -> List[Point] is
     let ring = LIST(polygon)
 
     ring.add(polygon[0])

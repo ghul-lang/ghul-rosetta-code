@@ -7,7 +7,7 @@ union Node is
     BRANCH(kind: string, left: Node, right: Node)
 si
 
-load(lines: LIST[string], cursor: LIST[int]) -> Node is
+load(lines: List[string], cursor: LIST[int]) -> Node is
     let line = lines[cursor[0]]
     cursor[0] = cursor[0] + 1
 

@@ -20,10 +20,10 @@ no_repeats(word: string) -> bool =>
     (let seen = SET()
      word |> all(seen.add))
 
-read_order(key: string) -> LIST[int] =>
+read_order(key: string) -> List[int] =>
     (0..key.length)
         |> sort_by(column => key[column])
-        |> collect_mutable()
+        |> collect()
 
 column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +
@@ -38,7 +38,7 @@ to_pairs(square: string, text: string) -> string =>
      od
      pairs.to_string())
 
-from_pairs(square: string, pairs: LIST[char]) -> string =>
+from_pairs(square: string, pairs: List[char]) -> string =>
     (let text = StringBuilder()
      for at in 0..pairs.count / 2 do
          let row = labels.index_of(pairs[at * 2])
