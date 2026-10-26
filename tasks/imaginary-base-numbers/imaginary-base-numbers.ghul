@@ -10,22 +10,11 @@ to_quater_imaginary(value: int) -> string is
         remaining = (digit - remaining) / 4
     od
 
-    let places = LIST()
-    let index mut = digits.count - 1
-
-    while index >= 0 do
-        places.add(digits[index])
-        if index > 0 then
-            places.add(0)
-        fi
-        index = index - 1
-    od
-
-    if places.count == 0 then
-        places.add(0)
+    if digits.count == 0 then
+        "0"
+    else
+        digits |> reverse() |> map(d => "{d}") |> join("0")
     fi
-
-    return places |> map(place => "{place}") |> join("")
 si
 
 from_quater_imaginary(text: string) -> (real: int, imaginary: int) is
