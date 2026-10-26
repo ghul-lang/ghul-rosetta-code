@@ -25,16 +25,7 @@ let primes =
         |> map(bigint)
         |> collect()
 
-product(values: List[bigint]) -> bigint =>
-    case values.count
-    when 0 then 1n
-    when 1 then values[0]
-    else
-        let middle = values.count / 2 in
-        product(values[0..middle]) * product(values[middle..<0])
-    esac
-
-primorial(index: int) -> bigint => product(primes[0..index])
+primorial(index: int) -> bigint => primes[0..index] |> product()
 
 write_line("the first ten primorial numbers:")
 
