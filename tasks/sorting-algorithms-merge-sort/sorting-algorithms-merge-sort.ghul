@@ -18,9 +18,9 @@ merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] =>
     when (_, []) then left
     when ([x, ..xr], [y, ..yr]) then
         if x <= y then
-            [x] ++ merge(xr, right) |> collect_mutable()
+            [x] ++ merge(xr, right) |> collect()
         else
-            [y] ++ merge(left, yr) |> collect_mutable()
+            [y] ++ merge(left, yr) |> collect()
         fi
     esac
 
