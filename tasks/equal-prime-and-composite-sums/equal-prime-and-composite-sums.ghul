@@ -1,17 +1,8 @@
 use default
 
-is_prime(value: long) -> bool is
-    if value < 2L then return false fi
-
-    let divisor mut = 2L
-
-    while divisor * divisor <= value do
-        if value % divisor == 0L then return false fi
-        divisor = divisor + 1L
-    od
-
-    true
-si
+is_prime(value: long) -> bool =>
+    value > 1L /\
+    2L::long(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0L)
 
 let prime_total mut = 0L
 let prime_index mut = 0
@@ -22,22 +13,14 @@ let composite_index mut = 0
 let last_composite mut = 3L
 
 take_prime() is
-    do
-        last_prime = last_prime + 1L
-
-        if is_prime(last_prime) then break fi
-    od
+    last_prime = from(last_prime + 1L) |> find(is_prime)!
 
     prime_index = prime_index + 1
     prime_total = prime_total + last_prime
 si
 
 take_composite() is
-    do
-        last_composite = last_composite + 1L
-
-        if !is_prime(last_composite) then break fi
-    od
+    last_composite = from(last_composite + 1L) |> find(v => !is_prime(v))!
 
     composite_index = composite_index + 1
     composite_total = composite_total + last_composite
