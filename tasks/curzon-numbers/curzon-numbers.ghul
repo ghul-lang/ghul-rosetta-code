@@ -6,16 +6,8 @@ is_curzon(base: int, n: int) -> bool =>
     (power + 1n) % divisor =~ 0n
 
 
-curzon_numbers(base: int) -> int{} is
-    let n mut = 1
-
-    while true do
-        if is_curzon(base, n) then
-            yield n
-        fi
-        n = n + 1
-    od
-si
+curzon_numbers(base: int) -> int{} =>
+    from(1) |> filter(is_curzon(base, *))
 
 for base in [2, 4, 6, 8, 10] do
     write_line("generalized Curzon numbers with base {base}:")
