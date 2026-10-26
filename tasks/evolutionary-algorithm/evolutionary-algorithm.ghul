@@ -13,17 +13,15 @@ fitness(candidate: string) -> int =>
     0..target.length |> filter(i => candidate[i] == target[i]) |> count()
 
 mutate(parent: string, rate: double) -> string =>
-    string(
-        parent
-            |> map(letter =>
-                if random.next_double() < rate then random_letter()
-                else letter
-                fi)
-            |> collect())
+    parent
+        |> map(letter =>
+            if random.next_double() < rate then random_letter()
+            else letter
+            fi)
+        |> string()
 
 let parent mut =
-    string(
-        0..target.length |> map(_ => random_letter()) |> collect())
+    0..target.length |> map(_ => random_letter()) |> string()
 
 let generation mut = 0
 
