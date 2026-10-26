@@ -41,15 +41,7 @@ while tour.count < size * size do
 
     let next =
         onward(square)
-            |> reduce(square,
-                (best, candidate) =>
-                    if at(best) == at(square) \/
-                            onward(candidate) |> count() <
-                            onward(best) |> count() then
-                        candidate
-                    else
-                        best
-                    fi)
+            |> min_by(candidate => onward(candidate) |> count()) ?? square
 
     assert at(next) != at(square) else "the tour reached a dead end"
 
