@@ -35,18 +35,14 @@ lcm(a: bigint, b: bigint) -> bigint => a / gcd(a, b) * b
 
 order_part(
     a: bigint, q: Factor, totient: bigint, modulus: bigint
-) -> bigint is
-    let cofactor = totient / bigint.pow(q.prime, q.power)
-    let y mut = bigint.mod_pow(a, cofactor, modulus)
-    let d mut = 0
-
-    while !y.is_one do
-        y = bigint.mod_pow(y, q.prime, modulus)
-        d = d + 1
-    od
-
-    bigint.pow(q.prime, d)
-si
+) -> bigint =>
+    let cofactor = totient / bigint.pow(q.prime, q.power) in
+    let walk = (y: bigint, d: int) rec =>
+        if y.is_one then bigint.pow(q.prime, d)
+        else rec(bigint.mod_pow(y, q.prime, modulus), d + 1)
+        fi
+    in
+    walk(bigint.mod_pow(a, cofactor, modulus), 0)
 
 order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
     let modulus = bigint.pow(factor.prime, factor.power) in
