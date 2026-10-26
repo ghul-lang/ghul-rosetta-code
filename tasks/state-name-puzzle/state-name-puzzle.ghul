@@ -18,11 +18,10 @@ let fictitious = [
 ]
 
 letters(s: string) -> string =>
-    string(
-        s.to_lower().to_char_array()
-            |> filter(char.is_letter)
-            |> sort()
-            |> collect())
+    s.to_lower().to_char_array()
+        |> filter(char.is_letter)
+        |> sort()
+        |> string()
 
 solve(names: string{}) is
     let states = names |> collect_set() |> sort() |> collect()

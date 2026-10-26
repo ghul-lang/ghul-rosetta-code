@@ -15,24 +15,12 @@ egyptian(numerator: bigint, denominator: bigint)
     od
 si
 
-describe(numerator: int, denominator: int) -> string is
-    let whole = numerator / denominator
-    let terms = LIST()
-
-    if whole > 0 then
-        terms.add("[{whole}]")
-    fi
-
-    let rest = egyptian(
-        cast(numerator % denominator),
-        cast(denominator))
-
-    for unit in rest do
-        terms.add("1/{unit}")
-    od
-
-    return "{numerator}/{denominator} = {terms |> join(" + ")}"
-si
+describe(numerator: int, denominator: int) -> string =>
+    let whole = numerator / denominator in
+    let terms = (if whole > 0 then ["[{whole}]"] else [] fi) ++
+        (egyptian(cast(numerator % denominator), cast(denominator))
+            |> map(unit => "1/{unit}")) in
+    "{numerator}/{denominator} = {terms |> join(" + ")}"
 
 for (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)] do
     write_line(describe(numerator, denominator))
@@ -45,19 +33,18 @@ report(limit: int) is
 
     for denominator in 2::limit do
         for numerator in 1..denominator do
-            let count mut = 0
-            let last mut = 0n
-
             let units = egyptian(
                 cast(numerator), cast(denominator))
 
+            let term_count = units |> count()
+            let last mut = 0n
+
             for unit in units do
-                count = count + 1
                 last = unit
             od
 
-            if count > most_terms.terms then
-                most_terms = (numerator, denominator, count)
+            if term_count > most_terms.terms then
+                most_terms = (numerator, denominator, term_count)
             fi
 
             if last > widest.unit then

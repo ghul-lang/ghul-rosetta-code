@@ -6,20 +6,15 @@ is_prime(n: int) -> bool =>
     n > 1 /\ (2..n) |> take_while(d => d * d <= n) |> all(d => n % d != 0)
 
 prime_factor_sum(n: int) -> int is
-    let remaining mut = n
-    let sum mut = 0
-    let divisor mut = 2
-
-    while remaining > 1 do
-        if remaining % divisor == 0 then
-            sum = sum + divisor
-            remaining = remaining / divisor
+    walk(remaining: int, sum: int, divisor: int) -> int =>
+        if remaining == 1 then sum
+        elif remaining % divisor == 0 then
+            walk(remaining / divisor, sum + divisor, divisor)
         else
-            divisor = divisor + 1
+            walk(remaining, sum, divisor + 1)
         fi
-    od
 
-    return sum
+    walk(n, 0, 2)
 si
 
 let descendants = (0::top) |> map(_ => LIST()) |> collect()

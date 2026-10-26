@@ -18,13 +18,10 @@ is_prime(n: bigint) -> bool is
         return false
     fi
 
-    let d mut = n - 1n
-    let shifts mut = 0
+    walk(d: bigint, shifts: int) -> (bigint, int) =>
+        if d.is_even then walk(d / 2n, shifts + 1) else (d, shifts) fi
 
-    while d.is_even do
-        d = d / 2n
-        shifts = shifts + 1
-    od
+    let (d, shifts) = walk(n - 1n, 0)
 
     for witness in small_primes do
         let x mut = bigint.mod_pow(bigint(witness), d, n)

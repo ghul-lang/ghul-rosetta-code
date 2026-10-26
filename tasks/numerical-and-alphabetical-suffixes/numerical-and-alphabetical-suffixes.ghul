@@ -10,17 +10,11 @@ let words =
      (spelling = "dozens", shortest = 3, factor = 12n),
      (spelling = "gross", shortest = 2, factor = 144n)]
 
-shared_prefix(left: string, right: string) -> int is
-    let limit = if left.length < right.length then left.length
-                else right.length fi
-    let length mut = 0
-
-    while length < limit /\ left[length] == right[length] do
-        length = length + 1
-    od
-
-    length
-si
+shared_prefix(left: string, right: string) -> int =>
+    left
+        |> zip(right)
+        |> take_while(((l, r)) => l == r)
+        |> count()
 
 multifactorial(value: bigint, step: int) -> bigint is
     let product mut = 1n

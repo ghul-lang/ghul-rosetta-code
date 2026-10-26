@@ -9,15 +9,12 @@ shuffle(deck: List[int]) -> List[int] =>
 
 shuffles_needed(size: int) -> int is
     let original = 0..size |> collect()
-    let deck mut = shuffle(original)
-    let count mut = 1
 
-    while deck !~ original do
-        deck = shuffle(deck)
-        count = count + 1
-    od
+    walk(deck: List[int], count: int) -> int =>
+        if deck =~ original then count
+        else walk(shuffle(deck), count + 1) fi
 
-    count
+    walk(shuffle(original), 1)
 si
 
 for size in [8, 24, 52, 100, 1020, 1024, 10000] do

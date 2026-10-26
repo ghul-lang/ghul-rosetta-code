@@ -25,17 +25,12 @@ insert(tree: Tree, value: int) -> Tree =>
         Tree.BRANCH(value, Tree.LEAF, Tree.LEAF)
     fi
 
-build_tree(list: LinkedList) -> Tree is
-    let tree mut = Tree.LEAF
-    let cursor mut = list
-
-    while let (value, next): LinkedList.NODE = cursor do
-        tree = insert(tree, value)
-        cursor = next
-    od
-
-    tree
-si
+build_tree(list: LinkedList) -> Tree =>
+    if let (value, next): LinkedList.NODE = list then
+        insert(build_tree(next), value)
+    else
+        Tree.LEAF
+    fi
 
 in_order(tree: Tree) -> int{} is
     if let (value, left, right): Tree.BRANCH = tree then

@@ -5,19 +5,18 @@ let plain_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
 substitute(text: string, from: string, to: string) -> string =>
-    string(
-        text
-            |> map(c =>
-                if char.is_upper(c) then
-                    let i = from.index_of(c)
-                    if i >= 0 then to[i] else c fi
-                elif char.is_lower(c) then
-                    let i = from.index_of(char.to_upper(c))
-                    if i >= 0 then char.to_lower(to[i]) else c fi
-                else
-                    c
-                fi)
-            |> collect())
+    text
+        |> map(c =>
+            if char.is_upper(c) then
+                let i = from.index_of(c)
+                if i >= 0 then to[i] else c fi
+            elif char.is_lower(c) then
+                let i = from.index_of(char.to_upper(c))
+                if i >= 0 then char.to_lower(to[i]) else c fi
+            else
+                c
+            fi)
+        |> string()
 
 encrypt(text: string) -> string =>
     substitute(text, plain_alphabet, cipher_alphabet)

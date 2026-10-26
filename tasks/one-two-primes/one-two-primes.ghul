@@ -30,13 +30,12 @@ is_prime(n: bigint) -> bool is
         return false
     fi
 
-    let odd_part mut = n - 1n
-    let twos mut = 0
+    split(odd_part: bigint, twos: int) -> (bigint, int) =>
+        if odd_part.is_even then
+            split(odd_part >> 1, twos + 1)
+        else (odd_part, twos) fi
 
-    while odd_part.is_even do
-        odd_part = odd_part >> 1
-        twos = twos + 1
-    od
+    let (odd_part, twos) = split(n - 1n, 0)
 
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
         |> filter(* < n)

@@ -8,20 +8,13 @@ let points =
 slice(from: int, length: int) -> string =>
     points[from..from + length] |> join("")
 
-starts_at(wanted: string) -> int is
+starts_at(wanted: string) -> int =>
     let target =
         wanted.enumerate_runes()
             |> map(point => "{point}")
-            |> collect()
-
-    for at in 0..points.count - target.count + 1 do
-        if slice(at, target.count) =~ wanted then
-            return at
-        fi
-    od
-
-    return -1
-si
+            |> collect() in
+    0..points.count - target.count + 1
+        |> find(at => slice(at, target.count) =~ wanted) ?? -1
 
 write_line(slice(4, 5))
 write_line(slice(4, points.count - 4))

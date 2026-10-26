@@ -2,27 +2,18 @@ use default
 
 let keys = "22233344455566677778889999"
 
-digits(word: string) -> string? is
-    let result = System.Text.StringBuilder()
-
-    for c in word.to_lower() do
-        if c < 'a' \/ c > 'z' then
-            return null
-        fi
-
-        result.append(keys[int(c) - int('a')])
-    od
-
-    result.to_string()
-si
+digits(word: string) -> string? =>
+    let lower = word.to_lower() in
+    if lower |> all(c => c >= 'a' /\ c <= 'z') then
+        lower |> map(c => keys[int(c) - int('a')]) |> string()
+    else
+        null
+    fi
 
 let groups = MAP()
-let representable mut = 0
 
 for word in IO.File.read_all_lines("unixdict.txt") do
     if let key = digits(word) then
-        representable = representable + 1
-
         if !groups.contains_key(key) then
             groups[key] = LIST()
         fi
@@ -31,6 +22,7 @@ for word in IO.File.read_all_lines("unixdict.txt") do
     fi
 od
 
+let representable = groups |> map(g => g.value.count) |> sum()
 let textonyms = groups |> filter(g => g.value.count > 1)
     |> collect()
 

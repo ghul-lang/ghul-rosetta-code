@@ -23,16 +23,9 @@ let last = sequence[4..<<0] |> join()
 write_line("first four: {first}")
 write_line("last four: {last}")
 
-let longest mut = 0
-let longest_length mut = 0
-
-for n in 1..100_000 do
-    let length = hailstone(n) |> count()
-
-    if length > longest_length then
-        longest = n
-        longest_length = length
-    fi
-od
+let (longest, longest_length) =
+    1..100_000
+    |> map(n => (n, hailstone(n) |> count()))
+    |> max_by((_, length) => length)!
 
 write_line("longest under 100,000: {longest} (length {longest_length})")

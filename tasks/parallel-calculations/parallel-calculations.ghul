@@ -34,18 +34,11 @@ let factorisations =
         |> map(running => running.result)
         |> collect()
 
-let best =
+let best = (
     factorisations
         |> index()
-        |> reduce(
-            0,
-            (best, entry) =>
-                if entry.value[0] > factorisations[best][0] then
-                    entry.index
-                else
-                    best
-                fi
-        )
+        |> max_by(entry => entry.value[0])
+)!.index
 
 for at in 0..numbers.count do
     write_line(

@@ -142,9 +142,7 @@ write_line("tiled on attempt {attempts}:")
 write_line("")
 
 for row in 0..size do
-    let cells = 0..size |> map(c => "{board[row * size + c]}")
-
-    write_line(cells |> join(" "))
+    write_line(0..size |> map(c => "{board[row * size + c]}") |> join(" "))
 od
 
 let hues = "FILNPTUVWXYZ"

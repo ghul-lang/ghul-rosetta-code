@@ -61,15 +61,10 @@ all
     |> sort((left, right) => left.text <> right.text)
     |> each(expression => write_line("    {expression.text}"))
 
-let counts = MAP()
-
-for expression in all do
-    let seen mut = 0
-
-    counts.try_get_value(expression.value, seen ref)
-
-    counts[expression.value] = seen + 1
-od
+let counts = all
+    |> group_by(expression => expression.value)
+    |> map(group => (group.key, group.value.count))
+    |> collect_map()
 
 let most = counts.keys |> max_by(value => counts[value])
 

@@ -41,8 +41,7 @@ canonical(shape: Shape) -> Shape is
         forms.add(normalised(current |> map(c => at(c.row, -c.column))))
     od
 
-    forms |> reduce(forms[0], (best, f) =>
-        if key(f) <> key(best) < 0 then f else best fi)
+    (forms |> min_by(key))!
 si
 
 grow(shapes: List[Shape]) -> List[Shape] is
@@ -63,7 +62,7 @@ grow(shapes: List[Shape]) -> List[Shape] is
         od
     od
 
-    seen.values |> sort((a, b) => key(a) <> key(b)) |> collect()
+    seen.values |> sort_by(key) |> collect()
 si
 
 row_of(shape: Shape, row: int) -> string =>

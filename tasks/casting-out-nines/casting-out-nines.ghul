@@ -4,15 +4,7 @@ co9(x: long) -> long is
     let n mut = x
 
     while n >= 10L do
-        let sum mut = 0L
-        let m mut = n
-
-        while m > 0L do
-            sum = sum + m % 10L
-            m = m / 10L
-        od
-
-        n = sum
+        n = digits(n) |> sum()
     od
 
     n

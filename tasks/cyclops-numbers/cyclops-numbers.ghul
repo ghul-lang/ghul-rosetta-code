@@ -14,22 +14,13 @@ for candidate in 2..sieve_limit do
     fi
 od
 
-is_prime(value: long) -> bool is
+is_prime(value: long) -> bool =>
     if value < cast(sieve_limit) then
-        return value >= 2L /\ !composite[cast(value)]
+        value >= 2L /\ !composite[cast(value)]
+    else
+        2L::long(Ghul.Math.sqrt(double(value)))
+            |> all(d => value % d != 0L)
     fi
-
-    let divisor mut = 2L
-
-    while divisor * divisor <= value do
-        if value % divisor == 0L then
-            return false
-        fi
-        divisor = divisor + 1L
-    od
-
-    return true
-si
 
 zero_free(digits: int) -> long{} is
     if digits == 0 then
@@ -77,10 +68,9 @@ report(name: string, numbers: () -> long{}) is
     let first_50 = numbers() |> take(50) |> collect()
 
     for row in 0..5 do
-        let cells = (0..10)
+        write_line((0..10)
             |> map(column => "{first_50[row * 10 + column],10}")
-
-        write_line(cells |> join(""))
+            |> join(""))
     od
 
     let beyond = numbers()

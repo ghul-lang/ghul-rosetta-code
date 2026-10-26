@@ -3,19 +3,10 @@ use default
 let ten = 10n
 let eleven = 11n
 
-rank(values: Collections.List[bigint]) -> bigint is
-    let result mut = 1n
-
-    for value in values do
-        result = result * eleven + ten
-
-        for digit in value.to_string() do
-            result = result * eleven + cast(digit - '0')
-        od
-    od
-
-    return result
-si
+rank(values: Collections.List[bigint]) -> bigint =>
+    values |> reduce(1n, (acc, value) =>
+        value.to_string() |> reduce(acc * eleven + ten,
+            (r, d) => r * eleven + cast(d - '0')))
 
 unrank(index: bigint) -> LIST[bigint] is
     let digits = LIST()

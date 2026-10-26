@@ -14,13 +14,7 @@ kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
         |> collect()
 
 power(seed: MATRIX, order: int) -> MATRIX =>
-    (let result mut = seed
-
-     for _ in 1..order do
-         result = kronecker(result, seed)
-     od
-
-     result)
+    1..order |> reduce(seed, (r, _) => kronecker(r, seed))
 
 plot(cells: MATRIX, path: string) is
     let scale = 4

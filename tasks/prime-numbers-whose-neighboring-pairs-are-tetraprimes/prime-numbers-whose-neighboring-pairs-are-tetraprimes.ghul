@@ -59,8 +59,8 @@ report(below: int, direction: string, offset: int, show: bool) is
         |> count(p => (p + offset) % 7 == 0 \/ (p + offset + 1) % 7 == 0)
 
     let gaps =
-        (1..found.count)
-        |> map(i => found[i] - found[i - 1])
+        found |> pairwise()
+        |> map(((a, b)) => b - a)
         |> sort()
         |> collect()
 

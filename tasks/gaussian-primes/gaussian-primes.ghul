@@ -3,38 +3,16 @@ use System.Math.*
 use Raster.IMAGE
 use Raster.AXES
 
-is_prime(n: int) -> bool is
-    if n < 2 then
-        return false
-    fi
-
-    if n % 2 == 0 then
-        return n == 2
-    fi
-
-    let i mut = 3
-
-    while i * i <= n do
-        if n % i == 0 then
-            return false
-        fi
-
-        i = i + 2
-    od
-
-    true
-si
+is_prime(n: int) -> bool =>
+    n > 1 /\ 2::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
 
 is_gaussian_prime(a: int, b: int) -> bool =>
-    if a != 0 /\ b != 0 then
-        is_prime(a * a + b * b)
-    elif a != 0 then
-        is_prime(abs(a)) /\ abs(a) % 4 == 3
-    elif b != 0 then
-        is_prime(abs(b)) /\ abs(b) % 4 == 3
-    else
-        false
-    fi
+    case (a, b)
+    when (0, 0) then false
+    when (0, b) then is_prime(abs(b)) /\ abs(b) % 4 == 3
+    when (a, 0) then is_prime(abs(a)) /\ abs(a) % 4 == 3
+    else is_prime(a * a + b * b)
+    esac
 
 let primes_under_100 =
     [(a = a, b = b)

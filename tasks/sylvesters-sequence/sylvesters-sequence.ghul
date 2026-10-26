@@ -20,13 +20,8 @@ for term in terms do
     write_line("  {term}")
 od
 
-let numerator mut = 0n
-let denominator mut = 1n
-
-for term in terms do
-    numerator = numerator * term + denominator
-    denominator = denominator * term
-od
+let (numerator, denominator) =
+    terms |> reduce((0n, 1n), ((n, d), term) => (n * term + d, d * term))
 
 let common = gcd(numerator, denominator)
 

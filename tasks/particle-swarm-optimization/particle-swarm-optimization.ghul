@@ -43,13 +43,7 @@ swarm(problem: PROBLEM) -> (best: V2, particles: LIST[PARTICLE]) is
                     at))
             |> collect_mutable()
 
-    let best mut = particles[0].best
-
-    for p in particles do
-        if f(p.best) < f(best) then
-            best = p.best
-        fi
-    od
+    let best mut = (particles |> min_by(p => f(p.best)))!.best
 
     for _ in 0..problem.iterations do
         for p in particles do

@@ -1,23 +1,7 @@
 use default
 
-tau(value: int) -> int is
-    let divisors mut = 0
-    let candidate mut = 1
-
-    while candidate * candidate <= value do
-        if value % candidate == 0 then
-            divisors = divisors + 2
-
-            if candidate * candidate == value then
-                divisors = divisors - 1
-            fi
-        fi
-
-        candidate = candidate + 1
-    od
-
-    divisors
-si
+tau(value: int) -> int =>
+    1::value |> count(n => value % n == 0)
 
 write_line("the number of divisors of 1 to 100:")
 

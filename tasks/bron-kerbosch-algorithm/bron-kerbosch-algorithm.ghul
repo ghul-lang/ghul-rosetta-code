@@ -41,16 +41,8 @@ search(
         return
     fi
 
-    let pivot =
-        candidates ++ excluded
-            |> reduce("", (best, vertex) =>
-                if best =~ "" \/
-                   neighbours[vertex].count > neighbours[best].count
-                then
-                    vertex
-                else
-                    best
-                fi)
+    let pivot = (candidates ++ excluded)
+        |> max_by(v => neighbours[v].count)!
 
     let branches =
         candidates

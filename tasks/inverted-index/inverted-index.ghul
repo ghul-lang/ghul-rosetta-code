@@ -10,7 +10,7 @@ let index = MAP()
 let number mut = 0
 
 for document in documents do
-    for word in document.split([' ']) do
+    for word in words(document) do
         if !index.contains_key(word) then
             index[word] = SET()
         fi

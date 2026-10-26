@@ -37,15 +37,9 @@ si
 is_probable_prime(value: bigint) -> bool =>
     bases |> all(base => passes_miller_rabin(value, cast(base)))
 
-is_prime(value: int) -> bool is
-    let divisor mut = 2
-
-    while divisor * divisor <= value /\ value % divisor != 0 do
-        divisor = divisor + 1
-    od
-
-    return divisor * divisor > value
-si
+is_prime(value: int) -> bool =>
+    value > 1 /\
+        2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
 fortunate(count: int) -> int{} is
     let primorial mut = 1n

@@ -1,3 +1,4 @@
+use default
 use Collections.SET
 use Raster.IMAGE
 
@@ -9,17 +10,8 @@ let random = System.Random(987654321)
 let tree = SET()
 
 touches(x: int, y: int) -> bool =>
-    (let found mut = false
-
-     for across in -1..2 do
-         for up in -1..2 do
-             if tree.contains((x = x + across, y = y + up)) then
-                 found = true
-             fi
-         od
-     od
-
-     found)
+    -1..2 |> any(across =>
+        -1..2 |> any(up => tree.contains((x = x + across, y = y + up))))
 
 let image = IMAGE(size, size)
 

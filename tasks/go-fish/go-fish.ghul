@@ -32,11 +32,7 @@ cards(count: int, rank: int) -> string =>
     fi
 
 sorted_hand(hand: LIST[int]) -> string =>
-    (let held = hand |> collect()
-
-     System.Array.sort(held)
-
-     held |> map(name_of) |> join(" "))
+    hand |> sort() |> map(name_of) |> join(" ")
 
 draw() -> int? =>
     if deck.count == 0 then
@@ -98,13 +94,7 @@ my_choice() -> int =>
          elif untried.count > 0 then untried
          else mine fi
 
-     pool
-         |> reduce(-1, (best, rank) =>
-             if best < 0 \/ held(me, rank) > held(me, best) then
-                 rank
-             else
-                 best
-             fi))
+     pool |> max_by(held(me, *)) ?? -1)
 
 for rank in 0..ranks.count do
     for _ in 0..4 do

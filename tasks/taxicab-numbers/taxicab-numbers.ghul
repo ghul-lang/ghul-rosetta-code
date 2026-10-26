@@ -2,37 +2,16 @@ use default
 
 let pair_bound = 1200
 
-let sums = LIST()
+cube(x: long) -> long => x * x * x
 
-for a in 1..pair_bound do
-    let a_cubed = long(a) * long(a) * long(a)
-
-    for b in (a + 1)..pair_bound do
-        let b_cubed = long(b) * long(b) * long(b)
-
-        sums.add(a_cubed + b_cubed)
-    od
-od
-
-sums.sort()
-
-let taxis = LIST()
-
-let i mut = 0
-
-while i < sums.count - 1 do
-    if sums[i] == sums[i + 1] then
-        let value = sums[i]
-
-        taxis.add(value)
-
-        while i < sums.count /\ sums[i] == value do
-            i = i + 1
-        od
-    else
-        i = i + 1
-    fi
-od
+let taxis =
+    [cube(long(a)) + cube(long(b))
+        for a in 1..pair_bound for b in (a + 1)..pair_bound]
+    |> sort()
+    |> group_by(value => value)
+    |> filter((_, group) => group.count > 1)
+    |> map((value, _) => value)
+    |> collect()
 
 cube_root(value: long) -> long => (
     let cube_root_of = System.Math.cbrt(cast(value))
@@ -41,22 +20,13 @@ cube_root(value: long) -> long => (
     if root * root * root == value then root else 0L fi
 )
 
-expressions(taxi: long) -> string => (
-    let parts = LIST()
-    let a mut = 1L
-
-    while a * a * a * 2L < taxi do
-        let b = cube_root(taxi - a * a * a)
-
-        if b > 0L then
-            parts.add("{a}^3 + {b}^3")
-        fi
-
-        a = a + 1L
-    od
-
-    parts |> join(" = ")
-)
+expressions(taxi: long) -> string =>
+    from(1L)
+    |> take_while(a => cube(a) * 2L < taxi)
+    |> map(a => (a, cube_root(taxi - cube(a))))
+    |> filter((_, b) => b > 0L)
+    |> map((a, b) => "{a}^3 + {b}^3")
+    |> join(" = ")
 
 show(rank: int, taxis: List[long]) =>
     let taxi = taxis[rank - 1] in

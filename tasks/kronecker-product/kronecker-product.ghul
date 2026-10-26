@@ -19,8 +19,7 @@ pad(text: string, width: int) -> string =>
 show(matrix: int[][]) =>
     let width =
         ["{value}".length for row in matrix for value in row]
-            |> reduce(1, (widest, length) =>
-                if length > widest then length else widest fi) in
+            |> max() ?? 1 in
     matrix
         |> each(row => write_line(row
             |> map(value => pad("{value}", width))

@@ -7,14 +7,10 @@ passes_miller_rabin(value: bigint, base: bigint) -> bool is
         return true
     fi
 
-    let odd mut = value - 1n
-    let rounds mut = 0
+    split(n: bigint, rounds: int) -> (bigint, int) =>
+        if n % 2n =~ 0n then split(n / 2n, rounds + 1) else (n, rounds) fi
 
-    while odd % 2n =~ 0n do
-        odd = odd / 2n
-        rounds = rounds + 1
-    od
-
+    let (odd, rounds) = split(value - 1n, 0)
     let residue mut = bigint.mod_pow(base, odd, value)
 
     if residue =~ 1n \/ residue =~ value - 1n then

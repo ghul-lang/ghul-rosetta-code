@@ -21,58 +21,24 @@ while root * root <= limit do
     root = root + 1
 od
 
-digit_signature(value: int) -> string => (
-    let counts = repeat(0, 10) |> collect_mutable()
+digit_signature(value: int) -> string =>
+    value |> digits() |> sort() |> string()
 
-    let rest mut = value
+let primes = 2..(limit + 1)
+    |> filter(candidate => !composite[candidate])
+    |> collect()
 
-    while rest > 0 do
-        let digit = rest % 10
-        counts[digit] = counts[digit] + 1
-        rest = rest / 10
-    od
-
-    let signature mut = ""
-
-    for count in counts do
-        signature = "{signature}{count}"
-    od
-
-    signature
-)
-
-let pairs = LIST()
-let up_to_million mut = 0
-let up_to_ten_million mut = 0
-let previous mut = 0
-let previous_signature mut = ""
-
-for candidate in 2..(limit + 1) do
-    if !composite[candidate] then
-        let signature = digit_signature(candidate)
-
-        if previous_signature =~ signature then
-            if pairs.count < 30 then
-                pairs.add("({previous}, {candidate})")
-            fi
-
-            if candidate <= 1000000 then
-                up_to_million = up_to_million + 1
-            fi
-
-            up_to_ten_million = up_to_ten_million + 1
-        fi
-
-        previous = candidate
-        previous_signature = signature
-    fi
-od
+let ormiston = primes
+    |> pairwise()
+    |> filter((a, b) => digit_signature(a) =~ digit_signature(b))
 
 write_line("first 30 Ormiston pairs:")
 
-for pair in pairs do
-    write_line(pair)
-od
+ormiston |> take(30) |> each((a, b) => write_line("({a}, {b})"))
+
+let up_to_million = ormiston
+    |> take_while((a, b) => b <= 1000000)
+    |> count()
 
 write_line("{up_to_million} pairs up to 1000000")
-write_line("{up_to_ten_million} pairs up to 10000000")
+write_line("{ormiston |> count()} pairs up to 10000000")

@@ -6,23 +6,19 @@ fits(square: Square, row: int, column: int, value: int) -> bool =>
     0..square.count
         |> all(k => square[row][k] != value /\ square[k][column] != value)
 
-completions(
-    square: Square, cells: List[(int, int)], index: int
-) -> List[List[int]]{} is
-    if index == cells.count then
+completions(square: Square, cells: List[(int, int)]) -> List[List[int]]{} is
+    case cells
+    when [] then
         yield square |> collect()
-        return
-    fi
-
-    let (row, column) = cells[index]
-
-    for value in 1::square.count do
-        if fits(square, row, column, value) then
-            square[row][column] = value
-            yield in completions(square, cells, index + 1)
-            square[row][column] = 0
-        fi
-    od
+    when [(row, column), ..rest] then
+        for value in 1::square.count do
+            if fits(square, row, column, value) then
+                square[row][column] = value
+                yield in completions(square, rest)
+                square[row][column] = 0
+            fi
+        od
+    esac
 si
 
 reduced_latin_squares(n: int) -> List[List[int]]{} =>
@@ -37,7 +33,7 @@ reduced_latin_squares(n: int) -> List[List[int]]{} =>
     let cells = 1..n
         |> flat_map(row => 1..n |> map(column => (row, column)))
         |> collect() in
-    completions(square, cells, 0)
+    completions(square, cells)
 
 factorial(n: int) -> long => 1::n |> reduce(1L, (f, k) => f * long(k))
 

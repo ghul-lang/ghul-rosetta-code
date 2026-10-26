@@ -1,24 +1,9 @@
 use default
 
-balanced(n: int) -> bool => (
-    let rest mut = n
-    let balance mut = 0
-
-    while rest >= 10 do
-        let lower = rest % 10
-        let upper = rest / 10 % 10
-
-        if upper < lower then
-            balance = balance + 1
-        elif upper > lower then
-            balance = balance - 1
-        fi
-
-        rest = rest / 10
-    od
-
-    balance == 0
-)
+balanced(n: int) -> bool =>
+    let pairs = digits(n) |> windows(2) |> collect() in
+    pairs |> count(pair => pair[0] < pair[1]) ==
+    pairs |> count(pair => pair[0] > pair[1])
 
 sequence() -> int{} => from(1) |> filter(balanced)
 

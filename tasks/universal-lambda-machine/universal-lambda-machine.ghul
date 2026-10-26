@@ -120,25 +120,15 @@ cons(head: Term, tail: Term) -> Term =>
 
 bit(b: bool) -> Term => if b then falsity else truth fi
 
-byte(b: int) -> Term is
-    let result mut = falsity
+byte(b: int) -> Term =>
+    from(0) |> take(8) |> reduce(falsity, (result, i) =>
+        cons(bit((b >> i) & 1 == 1), result))
 
-    for i in 0..8 do
-        result = cons(bit((b >> i) & 1 == 1), result)
-    od
-
-    result
-si
-
-list(items: List[Term]) -> Term is
-    let result mut = falsity
-
-    for i in 0..items.count do
-        result = cons(items[items.count - 1 - i], result)
-    od
-
-    result
-si
+list(items: List[Term]) -> Term =>
+    case items
+    when [] then falsity
+    when [x, ..rest] then cons(x, list(rest))
+    esac
 
 class READER(bits: List[bool]) is
     at: int public
@@ -177,19 +167,12 @@ let zero = constant(Term.ATOM(0))
 let one = constant(Term.ATOM(1))
 
 items(thunk: THUNK, limit: int) -> THUNK{} is
-    let rest mut = thunk
-    let count mut = 0
-
-    while count < limit do
-        if let (head, tail): Result.CONS = evaluate(rest, [top]) then
+    if limit > 0 then
+        if let (head, tail): Result.CONS = evaluate(thunk, [top]) then
             yield head
-            rest = tail
-        else
-            return
+            yield in items(tail, limit - 1)
         fi
-
-        count = count + 1
-    od
+    fi
 si
 
 bit_of(thunk: THUNK) -> int =>

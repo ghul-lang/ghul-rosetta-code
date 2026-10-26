@@ -1,13 +1,10 @@
 use default
 
 is_forbidden(n: int) -> bool is
-    let remaining mut = n
+    strip(remaining: int) -> int =>
+        if remaining % 4 == 0 then strip(remaining / 4) else remaining fi
 
-    while remaining % 4 == 0 do
-        remaining = remaining / 4
-    od
-
-    return remaining % 8 == 7
+    strip(n) % 8 == 7
 si
 
 write_line("the first fifty forbidden numbers:")

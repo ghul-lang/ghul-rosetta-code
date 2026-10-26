@@ -25,45 +25,22 @@ prime(text: string) -> bool => (
     value >= 2 /\ !composite[value]
 )
 
-left_truncatable(text: string) -> bool => (
-    let valid = for start in 0..text.length do
-        if !prime(text[start..<0]) then
-            break false
-        fi
-    od
+left_truncatable(text: string) -> bool =>
+    0..text.length |> all(start => prime(text[start..<0]))
 
-    valid ?? true
-)
+right_truncatable(text: string) -> bool =>
+    1::text.length |> all(end => prime(text[0..end]))
 
-right_truncatable(text: string) -> bool => (
-    let valid = for end in 1::text.length do
-        if !prime(text[0..end]) then
-            break false
-        fi
-    od
+let candidates = (2..(limit + 1))
+    |> filter(n => !composite[n] /\ !"{n}".contains('0'))
 
-    valid ?? true
-)
+let largest_left = candidates
+    |> filter(n => left_truncatable("{n}"))
+    |> max()!
 
-let primes = (2..(limit + 1))
-    |> filter(n => !composite[n])
-
-let largest_left mut = 0
-let largest_right mut = 0
-
-for candidate in primes do
-    let text = "{candidate}"
-
-    if !text.contains('0') then
-        if left_truncatable(text) then
-            largest_left = candidate
-        fi
-
-        if right_truncatable(text) then
-            largest_right = candidate
-        fi
-    fi
-od
+let largest_right = candidates
+    |> filter(n => right_truncatable("{n}"))
+    |> max()!
 
 write_line("largest left-truncatable prime below 1000000: {largest_left}")
 write_line(

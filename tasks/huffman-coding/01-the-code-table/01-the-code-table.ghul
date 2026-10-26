@@ -9,19 +9,11 @@ use Huffman.LEAF
 use Huffman.NODE
 
 take_lightest(pending: LIST[Huffman]) -> Huffman is
-    let at mut = 0
+    let lightest = pending |> min_by(node => node.weight)!
 
-    for i in 1..pending.count do
-        if pending[i].weight < pending[at].weight then
-            at = i
-        fi
-    od
+    pending.remove(lightest)
 
-    let lightest = pending[at]
-
-    pending.remove_at(at)
-
-    return lightest
+    lightest
 si
 
 build_tree(leaves: List[Huffman]) -> Huffman is
@@ -52,15 +44,7 @@ si
 
 let text = "this is an example for huffman encoding"
 
-let weights = MAP()
-
-for character in text do
-    let seen mut = 0
-
-    weights.try_get_value(character, seen ref)
-
-    weights[character] = seen + 1
-od
+let weights = text |> frequencies()
 
 let leaves = weights.keys
     |> sort()

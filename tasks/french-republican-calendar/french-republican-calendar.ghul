@@ -28,19 +28,18 @@ days_in(republican_year: int) -> int =>
     if is_leap(republican_year) then 366 else 365 fi
 
 to_republican(date: DateTime) -> string is
-    let day_count mut = int(date.subtract(epoch).total_days)
-    let year mut = 1
+    walk(remaining: int, year: int) -> string =>
+        let length = days_in(year) in
+        if remaining >= length then
+            walk(remaining - length, year + 1)
+        elif remaining < 360 then
+            let month = remaining / 30 in
+            "{remaining % 30 + 1} {republican_months[month]} {year}"
+        else
+            "{sansculottides[remaining - 360]} {year}"
+        fi
 
-    while day_count >= days_in(year) do
-        day_count = day_count - days_in(year)
-        year = year + 1
-    od
-
-    return if day_count < 360 then
-        "{day_count % 30 + 1} {republican_months[day_count / 30]} {year}"
-    else
-        "{sansculottides[day_count - 360]} {year}"
-    fi
+    walk(int(date.subtract(epoch).total_days), 1)
 si
 
 to_gregorian(republican: string) -> DateTime is

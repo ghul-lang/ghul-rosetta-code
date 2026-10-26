@@ -8,8 +8,7 @@ si
 
 // Tabs, control codes and anything outside ASCII are dropped.
 cleaned(line: string) -> string =>
-    string(line |> filter(c => c >= ' ' /\ c <= '~') |> collect())
-        .trim()
+    (line |> filter(c => c >= ' ' /\ c <= '~') |> string()).trim()
 
 parse(line: string) -> OPTION? is
     let enabled = !line.starts_with(";")

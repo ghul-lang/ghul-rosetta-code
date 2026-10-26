@@ -4,26 +4,19 @@ is_square(n: long) -> bool =>
     let root = long(System.Math.sqrt(double(n))) in
     root * root == n \/ (root + 1L) * (root + 1L) == n
 
-let found = LIST()
-let n mut = 1L
-
-while found.count < 7 do
-    let square = n * n
-    let digits = "{square}"
+qualifies(square: long) -> bool =>
+    let digits = "{square}" in
 
     // A leading 1 would become a leading zero, so the smaller number would
     // have fewer digits than the square it came from.
-    let leading = digits[0] != '1' \/ square == 1L
+    let leading = digits[0] != '1' \/ square == 1L in
+    let units = long.parse("".pad_left(digits.length, '1')) in
 
-    if leading /\ !digits.contains('0') then
-        let units = long.parse("".pad_left(digits.length, '1'))
+    leading /\ !digits.contains('0') /\ is_square(square - units)
 
-        if is_square(square - units) then
-            found.add(square)
-        fi
-    fi
-
-    n = n + 1L
-od
-
-write_line(found |> join(" "))
+write_line(
+    from(1L)
+    |> map(n => n * n)
+    |> filter(qualifies)
+    |> take(7)
+    |> join(" "))

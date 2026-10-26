@@ -12,29 +12,26 @@ floor_div(a: bigint, b: bigint) -> bigint =>
 modulo(a: bigint, m: bigint) -> bigint => ((a % m) + m) % m
 
 inverse(value: bigint, m: bigint) -> bigint is
-    let (r0, r1) mut = (modulo(value, m), m)
-    let (s0, s1) mut = (1n, 0n)
+    walk(r0: bigint, r1: bigint, s0: bigint, s1: bigint) -> bigint =>
+        if r1 =~ 0n then
+            modulo(s0, m)
+        else
+            let q = r0 / r1 in
+            walk(r1, r0 - q * r1, s1, s0 - q * s1)
+        fi
 
-    while r1 !~ 0n do
-        let q = r0 / r1
-
-        (r0, r1) = (r1, r0 - q * r1)
-        (s0, s1) = (s1, s0 - q * s1)
-    od
-
-    modulo(s0, m)
+    walk(modulo(value, m), m, 1n, 0n)
 si
 
 without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
-    let rest mut = n
-    let count mut = 0
+    walk(rest: bigint, count: int) -> (rest: bigint, count: int) =>
+        if rest !~ 0n /\ rest % p =~ 0n then
+            walk(rest / p, count + 1)
+        else
+            (rest, count)
+        fi
 
-    while rest !~ 0n /\ rest % p =~ 0n do
-        rest = rest / p
-        count = count + 1
-    od
-
-    (rest, count)
+    walk(n, 0)
 si
 
 to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic is
@@ -100,26 +97,23 @@ rational(x: PAdic, p: bigint, k: int) -> string is
     dot(u: (bigint, bigint), w: (bigint, bigint)) -> bigint =>
         u.`0 * w.`0 + u.`1 * w.`1
 
-    let u mut = (modulus, 0n)
-    let w mut = (n, 1n)
-
-    if dot(u, u) < dot(w, w) then
-        (u, w) = (w, u)
-    fi
-
-    do
-        let ww = dot(w, w)
-        let q = floor_div(2n * dot(u, w) + ww, 2n * ww)
-        let t = (u.`0 - q * w.`0, u.`1 - q * w.`1)
-
+    reduce(u: (bigint, bigint), w: (bigint, bigint)) -> (bigint, bigint) =>
+        let ww = dot(w, w) in
+        let q = floor_div(2n * dot(u, w) + ww, 2n * ww) in
+        let t = (u.`0 - q * w.`0, u.`1 - q * w.`1) in
         if dot(t, t) >= ww then
-            break
+            w
+        else
+            reduce(w, t)
         fi
 
-        (u, w) = (w, t)
-    od
-
-    let (a, b) = w
+    let (u, w) = ((modulus, 0n), (n, 1n))
+    let (a, b) =
+        if dot(u, u) < dot(w, w) then
+            reduce(w, u)
+        else
+            reduce(u, w)
+        fi
 
     if b =~ 0n \/ b % p =~ 0n then
         return "not recoverable at this precision"

@@ -75,27 +75,25 @@ ordinal(value: int) -> string is
     let head = words[0..cut + 1]
     let last = words[cut + 1..<0]
 
-    for (plain, special) in irregular_ordinals do
-        if last =~ plain then
-            return "{head}{special}"
-        fi
-    od
+    let special = irregular_ordinals
+        |> find_map(entry => if last =~ entry.`0 then entry.`1 else null fi)
 
-    return if last.ends_with("y") then "{head}{last[0..<1]}ieth"
-           else "{words}th" fi
+    return if let known = special then
+        "{head}{known}"
+    elif last.ends_with("y") then
+        "{head}{last[0..<1]}ieth"
+    else
+        "{words}th"
+    fi
 si
 
 letters(word: string) -> int =>
     word |> filter(char.is_letter) |> count()
 
-let words = LIST()
-
 let opening =
     "Four is the number of letters in the first word of this sentence,"
 
-for word in opening.split([' ']) do
-    words.add(word)
-od
+let words = opening.split([' ']) |> collect_mutable()
 
 let described mut = 0
 
