@@ -1,29 +1,24 @@
 use default
 
-power(base: int, exponent: int) -> long is
-    let result mut = 1L
-
-    for _ in 1::exponent do
-        result = result * cast(base)
-    od
-
-    result
-si
+power(base: int, exponent: int) -> long =>
+    repeat(long(base), exponent) |> product()
 
 digit_counts(value: long) -> LIST[int] is
-    let counts = repeat(0, 10) |> collect_mutable()
+    walk(remaining: long) -> LIST[int] =>
+        if remaining == 0L then
+            repeat(0, 10) |> collect_mutable()
+        else (
+            let counts = walk(remaining / 10L)
+            counts[int(remaining % 10L)] = counts[int(remaining % 10L)] + 1
+            counts
+        )
+        fi
 
-    let remaining mut = value
-
-    while remaining > 0L do
-        let digit = int(remaining % 10L)
-
-        counts[digit] = counts[digit] + 1
-        remaining = remaining / 10L
-    od
-
-    counts
+    walk(value)
 si
+
+held(combination: LIST[int], digit: int) -> int =>
+    combination |> count(* == digit)
 
 multisets(width: int, lowest: int, chosen: LIST[int]) -> LIST[int]{} is
     if chosen.count == width then
@@ -41,21 +36,12 @@ si
 
 own_sums(width: int) -> long{} is
     for combination in multisets(width, 0, LIST()) do
-        let total mut = 0L
-
-        for digit in combination do
-            total = total + power(digit, width)
-        od
+        let total = combination |> map(power(*, width)) |> sum()
 
         if "{total}".length == width then
-            let wanted = digit_counts(total)
-            let held = repeat(0, 10) |> collect_mutable()
+            let counts = digit_counts(total)
 
-            for digit in combination do
-                held[digit] = held[digit] + 1
-            od
-
-            if (0::9) |> all(digit => held[digit] == wanted[digit]) then
+            if (0::9) |> all(d => counts[d] == held(combination, d)) then
                 yield total
             fi
         fi
