@@ -1,6 +1,6 @@
 use default
 
-to_octets(value: long) -> LIST[ubyte] is
+to_octets(value: long) -> List[ubyte] is
     let octets = LIST([ubyte(value & 0x7FL)])
     let rest mut = value >> 7
 

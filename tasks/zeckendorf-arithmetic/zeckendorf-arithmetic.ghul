@@ -16,7 +16,7 @@ copy(value: List[int]) -> LIST[int] is
     digits
 si
 
-read(text: string) -> LIST[int] is
+read(text: string) -> List[int] is
     let digits = blank()
 
     for entry in text |> reverse() |> index() do
@@ -137,7 +137,7 @@ subtract(left: List[int], right: List[int]) -> LIST[int] is
     result
 si
 
-fibonacci_multiples(value: List[int], upto: List[int]) -> LIST[LIST[int]] is
+fibonacci_multiples(value: List[int], upto: List[int]) -> List[List[int]] is
     let table = LIST[LIST[int]]()
 
     table.add(copy(value))
@@ -150,7 +150,7 @@ fibonacci_multiples(value: List[int], upto: List[int]) -> LIST[LIST[int]] is
     table
 si
 
-multiply(left: List[int], right: List[int]) -> LIST[int] is
+multiply(left: List[int], right: List[int]) -> List[int] is
     let top = highest(right)
 
     if top < 0 then
@@ -177,7 +177,7 @@ multiply(left: List[int], right: List[int]) -> LIST[int] is
     total
 si
 
-use DIVISION = (quotient: LIST[int], remainder: LIST[int])
+use DIVISION = (quotient: List[int], remainder: List[int])
 
 divide(left: List[int], right: List[int]) -> DIVISION is
     let table = fibonacci_multiples(right, left)

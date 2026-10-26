@@ -7,10 +7,10 @@ digit_counts(value: long) -> List[int] =>
     let found = digits(value) |> collect() in
     0::9 |> map(d => found |> count(* == long(d))) |> collect()
 
-held(combination: LIST[int], digit: int) -> int =>
+held(combination: List[int], digit: int) -> int =>
     combination |> count(* == digit)
 
-multisets(width: int, lowest: int, chosen: LIST[int]) -> LIST[int]{} is
+multisets(width: int, lowest: int, chosen: List[int]) -> List[int]{} is
     if chosen.count == width then
         yield chosen
     else

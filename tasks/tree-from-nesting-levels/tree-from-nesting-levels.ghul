@@ -2,7 +2,7 @@ use default
 
 union Tree is
     LEAF(value: int)
-    NEST(children: LIST[Tree])
+    NEST(children: List[Tree])
 si
 
 nest(levels: int[]) -> Tree is

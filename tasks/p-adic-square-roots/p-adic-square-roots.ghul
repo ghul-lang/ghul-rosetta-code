@@ -79,7 +79,7 @@ square_roots(u: bigint, p: bigint, digits: int) -> List[bigint] is
         0..int(modulus)
             |> map(bigint)
             |> filter(r => modulo(r * r - u, modulus) =~ 0n)
-            |> collect_mutable()
+            |> collect()
 
     for _ in start..digits do
         let step = modulus
@@ -92,7 +92,7 @@ square_roots(u: bigint, p: bigint, digits: int) -> List[bigint] is
                 |> filter(r => modulo(r * r - u, modulus) =~ 0n)
                 |> collect_set()
                 |> sort()
-                |> collect_mutable()
+                |> collect()
     od
 
     roots

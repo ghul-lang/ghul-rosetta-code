@@ -1,6 +1,6 @@
 use default
 
-in_order[T: Ghul.Comparable[T]](values: LIST[T]) -> bool =>
+in_order[T: Ghul.Comparable[T]](values: List[T]) -> bool =>
     (0..values.count - 1)
         |> all(i => values[i] <= values[i + 1])
 

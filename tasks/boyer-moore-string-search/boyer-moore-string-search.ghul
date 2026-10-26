@@ -1,6 +1,6 @@
 use default
 
-search(text: string, pattern: string) -> LIST[int] is
+search(text: string, pattern: string) -> List[int] is
     let m = pattern.length
     let n = text.length
     let hits = LIST()

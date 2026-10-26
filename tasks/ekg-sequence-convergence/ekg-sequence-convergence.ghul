@@ -13,7 +13,7 @@ shares_factor(left_value: int, right_value: int) -> bool => (
     left > 1
 )
 
-ekg(start: int, count: int) -> LIST[int] is
+ekg(start: int, count: int) -> List[int] is
     let terms = LIST([1, start])
     let used = SET([1, start])
 

@@ -13,7 +13,7 @@ let board = repeat(0, squares) |> collect_mutable()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
-lines_for(direction: char) -> LIST[LIST[int]] =>
+lines_for(direction: char) -> List[List[int]] =>
     (let lines = LIST[LIST[int]]()
 
      for major in 0..side do
@@ -38,10 +38,10 @@ lines_for(direction: char) -> LIST[LIST[int]] =>
 
      lines)
 
-collapse(values: LIST[int]) -> LIST[int] =>
+collapse(values: List[int]) -> List[int] =>
     let merged = merge_packed(LIST[int](values |> filter(* != 0))) in
     let padded = merged ++ repeat(0, side - (merged |> count())) in
-    padded |> collect_mutable()
+    padded |> collect()
 
 merge_packed(packed: List[int]) -> int{} =>
     case packed
@@ -55,7 +55,7 @@ slide(target: LIST[int], direction: char) -> bool =>
 
      for line in lines_for(direction) do
          let moved =
-             collapse(line |> map(at => target[at]) |> collect_mutable())
+             collapse(line |> map(at => target[at]) |> collect())
 
          for at in 0..side do
              target[line[at]] = moved[at]

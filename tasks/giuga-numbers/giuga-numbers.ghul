@@ -1,6 +1,6 @@
 use default
 
-distinct_prime_factors(value: int) -> LIST[long] is
+distinct_prime_factors(value: int) -> List[long] is
     let factors = LIST()
     let remaining mut = value
     let factor mut = 2

@@ -2,7 +2,7 @@ use default
 use System.Diagnostics.Process
 use System.Diagnostics.ProcessStartInfo
 
-run(command: string, arguments: List[string]) -> LIST[string] is
+run(command: string, arguments: List[string]) -> List[string] is
     let how = ProcessStartInfo(command)
 
     how.redirect_standard_output = true

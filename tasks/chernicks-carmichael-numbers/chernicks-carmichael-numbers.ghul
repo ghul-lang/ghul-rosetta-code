@@ -40,12 +40,12 @@ chernick_factors(n: int, m: long) -> bigint{} is
     od
 si
 
-smallest_chernick(n: int) -> (m: long, factors: LIST[bigint]) is
+smallest_chernick(n: int) -> (m: long, factors: List[bigint]) is
     let step = if n > 4 then 1L << (n - 4) else 1L fi
     let m mut = step
 
     do
-        let factors = chernick_factors(n, m) |> collect_mutable()
+        let factors = chernick_factors(n, m) |> collect()
 
         if factors |> all(is_prime) then
             return (m, factors)

@@ -1,6 +1,6 @@
 use default
 
-magic_square(n: int) -> LIST[int] is
+magic_square(n: int) -> List[int] is
     let cells =
         repeat(0, n * n) |> collect_mutable()
 

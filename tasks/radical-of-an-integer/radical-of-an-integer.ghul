@@ -53,7 +53,7 @@ for count in 0..8 do
     fi
 od
 
-prime(n: int, factors: LIST[int], radicals: LIST[int]) -> bool =>
+prime(n: int, factors: List[int], radicals: List[int]) -> bool =>
     n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
 
 let primes = (2..(limit + 1))

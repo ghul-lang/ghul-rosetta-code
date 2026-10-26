@@ -3,7 +3,7 @@ use default
 amb[T](
     sets: List[T{}],
     accepts: (T, T) -> bool
-) -> LIST[T]{} is
+) -> List[T]{} is
     case sets
     when [] then
         yield LIST()

@@ -8,8 +8,8 @@ attribute() -> int =>
     total - (lowest ?? 0)
 
 
-character() -> LIST[int] =>
-    1::6 |> map(_ => attribute()) |> collect_mutable()
+character() -> List[int] =>
+    1::6 |> map(_ => attribute()) |> collect()
 
 let rolled mut = character()
 
@@ -21,7 +21,7 @@ while !acceptable(rolled) do
     attempts = attempts + 1
 od
 
-acceptable(values: LIST[int]) -> bool =>
+acceptable(values: List[int]) -> bool =>
     let total = values |> sum() in
     let strong = values |> filter(* >= 15) |> count() in
     total >= 75 /\ strong >= 2

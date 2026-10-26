@@ -1,11 +1,11 @@
 use default
 
-use Matrix = LIST[LIST[double]]
+use Matrix = List[LIST[double]]
 
 zeros(rows: int, columns: int) -> Matrix =>
     (0..rows)
     |> map(_ => repeat(0.0, columns) |> collect_mutable())
-    |> collect_mutable()
+    |> collect()
 
 identity(n: int) -> Matrix is
     let result = zeros(n, n)
@@ -20,7 +20,7 @@ si
 transpose(a: Matrix) -> Matrix =>
     (0..a[0].count)
     |> map(j => (0..a.count) |> map(i => a[i][j]) |> collect_mutable())
-    |> collect_mutable()
+    |> collect()
 
 column_dot(a: Matrix, p: int, q: int) -> double =>
     a |> sum_by(row => row[p] * row[q])
@@ -40,7 +40,7 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
     fi
 
     let n = a[0].count
-    let u = a |> map(row => row) |> collect_mutable()
+    let u = a |> map(row => row) |> collect()
     let v = identity(n)
     let converged mut = false
 
@@ -88,13 +88,13 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
         u
         |> map(row =>
             order |> map(j => row[j] * scale(j)) |> collect_mutable())
-        |> collect_mutable()
+        |> collect()
 
     let sorted_v =
         v
         |> map(row => order |> map(j => row[j] * sign(j))
             |> collect_mutable())
-        |> collect_mutable()
+        |> collect()
 
     let sigma = order |> map(j => norms[j]) |> collect()
 
@@ -120,7 +120,7 @@ let a: Matrix =
         IO.Std.read_line()!.split([' '])
         |> map(double.parse)
         |> collect_mutable())
-    |> collect_mutable()
+    |> collect()
 
 let (u, sigma, v) = svd(a)
 
@@ -145,4 +145,4 @@ show(
             |> sum_by(k => u[i][k] * sigma[k] * v[j][k])
             |> System.Math.round(12))
         |> collect_mutable())
-    |> collect_mutable())
+    |> collect())

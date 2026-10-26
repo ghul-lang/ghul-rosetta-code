@@ -2,7 +2,7 @@ use default
 use System.Math.min
 
 levenshtein(source: string, target: string) -> int is
-    let previous mut = 0::target.length |> collect_mutable()
+    let previous mut = 0::target.length |> collect()
 
     for i in 1::source.length do
         let current = LIST()

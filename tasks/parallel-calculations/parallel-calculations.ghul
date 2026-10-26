@@ -30,7 +30,7 @@ si
 let factorisations =
     numbers
         |> map(number => TASK.run(() => factors(number)))
-        |> collect_mutable()
+        |> collect()
         |> map(running => running.result)
         |> collect()
 

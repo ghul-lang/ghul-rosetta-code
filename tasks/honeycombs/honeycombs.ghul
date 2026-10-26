@@ -38,13 +38,13 @@ let cells =
 
 let chosen = LIST()
 
-corners(x: double, y: double) -> LIST[(double, double)] =>
+corners(x: double, y: double) -> List[(double, double)] =>
     0..6
         |> map(corner =>
             let angle = double(corner) * pi / 3.0D in
             (x + radius * 0.92D * cos(angle),
              y + radius * 0.92D * sin(angle)))
-        |> collect_mutable()
+        |> collect()
 
 draw() is
     let image = IMAGE(420, 300)

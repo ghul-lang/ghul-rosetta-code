@@ -40,7 +40,7 @@ mixed(round: int, x: uint, y: uint, z: uint) -> uint =>
     else x ^ (y | \z)
     esac
 
-padded(message: ubyte[]) -> LIST[ubyte] is
+padded(message: ubyte[]) -> List[ubyte] is
     let bits = ulong(message.count) * 8ul
 
     let block = LIST(message)
@@ -58,7 +58,7 @@ padded(message: ubyte[]) -> LIST[ubyte] is
     return block
 si
 
-word(block: LIST[ubyte], at: int) -> uint =>
+word(block: List[ubyte], at: int) -> uint =>
     0..4
         |> map(index => uint(block[at + index]) << (8 * index))
         |> reduce(0u, * | *)

@@ -69,7 +69,7 @@ si
 
 let memory = MAP[string, LIST[Move]]()
 
-options(board: string) -> LIST[Move] is
+options(board: string) -> List[Move] is
     if !memory.contains_key(board) then
         memory[board] = LIST(moves(board, 'B'))
     fi

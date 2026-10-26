@@ -4,13 +4,13 @@ use Raster.Anchor
 
 let labels = ["12", "11", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-let codes = MAP[char, LIST[int]]()
+let codes = MAP[char, List[int]]()
 
 row_of(label: string) -> int =>
     0..12 |> find(i => labels[i] =~ label) ?? -1
 
 punch(c: char, holes: string) is
-    codes[c] = holes.split([' ']) |> map(row_of) |> collect_mutable()
+    codes[c] = holes.split([' ']) |> map(row_of) |> collect()
 si
 
 for d in 0..10 do
@@ -37,7 +37,7 @@ for special in [
     punch(special[0], special.substring(2))
 od
 
-holes(c: char) -> LIST[int] =>
+holes(c: char) -> List[int] =>
     if c == ' ' then LIST()
     elif codes.contains_key(c) then codes[c]
     else throw System.ArgumentException("no card code for '{c}'")

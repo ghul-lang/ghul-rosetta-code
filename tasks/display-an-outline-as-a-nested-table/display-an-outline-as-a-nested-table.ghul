@@ -73,7 +73,7 @@ width(node: NODE) -> int =>
     fi
 
 gather(node: NODE, level: int, colour: string,
-       rows: LIST[LIST[CELL]])
+       rows: List[LIST[CELL]])
 is
     rows[level].add(
         (text = node.text, width = width(node), colour = colour))
@@ -95,7 +95,7 @@ let bottom = deepest(tree)
 
 pad(tree, 0, bottom)
 
-let rows = 0::bottom |> map(_ => LIST()) |> collect_mutable()
+let rows = 0::bottom |> map(_ => LIST()) |> collect()
 
 gather(tree, 0, root_colour, rows)
 

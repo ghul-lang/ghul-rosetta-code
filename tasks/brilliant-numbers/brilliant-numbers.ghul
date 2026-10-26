@@ -17,7 +17,7 @@ primes_below(limit: int) -> int{} is
     od
 si
 
-brilliant_numbers(max_digits: int) -> LIST[long] is
+brilliant_numbers(max_digits: int) -> List[long] is
     let found = LIST()
     let limit = repeat(10, max_digits) |> product()
     let primes = primes_below(limit)

@@ -1,12 +1,12 @@
 use default
 use Edge = (from: int, to: int)
 
-rotations(face: List[int]) -> LIST[int]{} =>
+rotations(face: List[int]) -> List[int]{} =>
     0..face.count
         |> map(offset =>
             0..face.count
                 |> map(index => face[(index + offset) % face.count])
-                |> collect_mutable())
+                |> collect())
 
 same_perimeter(one: List[int], other: List[int]) -> bool =>
     one.count == other.count /\

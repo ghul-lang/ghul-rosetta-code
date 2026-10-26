@@ -2,7 +2,7 @@ use default
 
 gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
 
-yellowstone(count: int) -> LIST[int] is
+yellowstone(count: int) -> List[int] is
     let terms = LIST([1, 2, 3])
     let used = SET([1, 2, 3])
 

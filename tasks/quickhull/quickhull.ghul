@@ -36,7 +36,7 @@ same_edge(one: (from: Point, to: Point),
           other: (from: Point, to: Point)) -> bool =>
     one.from =~ other.to /\ one.to =~ other.from
 
-hull(points: List[Point]) -> LIST[FACE] is
+hull(points: List[Point]) -> List[FACE] is
     let furthest = (from, along) =>
         points |> reduce(points[0], (best, candidate) =>
             if (candidate - from) ⋅ along > (best - from) ⋅ along then

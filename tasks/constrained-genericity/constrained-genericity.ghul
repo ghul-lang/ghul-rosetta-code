@@ -8,7 +8,7 @@ trait Fruit: Eatable is
     color() -> string
 si
 
-class FOOD_BOX[T: Eatable](items: LIST[T]) is
+class FOOD_BOX[T: Eatable](items: List[T]) is
     count() -> int => items.count
 si
 
@@ -24,7 +24,7 @@ class PEAR: Fruit is
     color() -> string => "green"
 si
 
-let fruits = [BANANA(), PEAR()] |> collect_mutable()
+let fruits = [BANANA(), PEAR()] |> collect()
 
 let box = FOOD_BOX(fruits)
 

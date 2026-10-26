@@ -20,8 +20,8 @@ is_pseudoprime(a: int, x: int) -> bool =>
     let power = mod_pow(long(a), long(x - 1), long(x)) in
     x > 1 /\ !is_prime(x) /\ power == 1L
 
-pseudoprimes_up_to(a: int, limit: int) -> LIST[int] =>
-    2::limit |> filter(is_pseudoprime(a, *)) |> collect_mutable()
+pseudoprimes_up_to(a: int, limit: int) -> List[int] =>
+    2::limit |> filter(is_pseudoprime(a, *)) |> collect()
 
 for a in 1::20 do
     let found = pseudoprimes_up_to(a, 12000)

@@ -1,7 +1,7 @@
 use default
 use System.Random
 
-riffle_shuffle(deck: LIST[int], random: Random) -> LIST[int] is
+riffle_shuffle(deck: List[int], random: Random) -> List[int] is
     let half = deck.count / 2
     let left = LIST(deck[0..half])
     let right = LIST(deck[half..<0])
@@ -23,7 +23,7 @@ riffle_shuffle(deck: LIST[int], random: Random) -> LIST[int] is
     merged
 si
 
-overhand_shuffle(deck: LIST[int], random: Random) -> LIST[int] is
+overhand_shuffle(deck: List[int], random: Random) -> List[int] is
     let remaining = LIST(deck)
     let stacked = LIST()
 

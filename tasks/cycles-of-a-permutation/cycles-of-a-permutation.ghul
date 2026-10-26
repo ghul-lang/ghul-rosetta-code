@@ -1,16 +1,16 @@
 use default
 
-permutation_between(before: string, after: string) -> LIST[int] =>
+permutation_between(before: string, after: string) -> List[int] =>
     let one_line = after
         |> map(letter => before.index_of(letter) + 1)
-        |> collect_mutable() in
+        |> collect() in
     one_line
 
 
 apply(one_line: Collections.List[int], text: string) -> string =>
     string(one_line |> map(source => text[source - 1]) |> collect())
 
-inverse(one_line: Collections.List[int]) -> LIST[int] is
+inverse(one_line: Collections.List[int]) -> List[int] is
     let result = LIST(one_line)
 
     for (target, source) in one_line |> index() do
@@ -21,10 +21,10 @@ inverse(one_line: Collections.List[int]) -> LIST[int] is
 si
 
 compose(first: Collections.List[int], second: Collections.List[int])
-        -> LIST[int] =>
-    second |> map(source => first[source - 1]) |> collect_mutable()
+        -> List[int] =>
+    second |> map(source => first[source - 1]) |> collect()
 
-cycles(one_line: Collections.List[int]) -> LIST[LIST[int]] is
+cycles(one_line: Collections.List[int]) -> List[List[int]] is
     let destination = inverse(one_line)
     let found = LIST()
     let seen = repeat(false, one_line.count) |> collect_mutable()
@@ -49,8 +49,8 @@ cycles(one_line: Collections.List[int]) -> LIST[LIST[int]] is
     return found
 si
 
-one_line(cycle_notation: Collections.List[LIST[int]], size: int)
-        -> LIST[int] is
+one_line(cycle_notation: Collections.List[List[int]], size: int)
+        -> List[int] is
     let result = LIST()
 
     for position in 1::size do

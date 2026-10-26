@@ -34,7 +34,7 @@ below_thousand(value: int) -> string =>
         "{small[value / 100]} hundred and {below_hundred(value % 100)}"
     fi
 
-groups(value: long) -> LIST[int] is
+groups(value: long) -> List[int] is
     let parts = LIST()
     let rest mut = value
 

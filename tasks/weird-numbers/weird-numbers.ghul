@@ -1,6 +1,6 @@
 use default
 
-proper_divisors(n: int) -> LIST[int] is
+proper_divisors(n: int) -> List[int] is
     let divisors = LIST([1])
     let candidate mut = 2
 
