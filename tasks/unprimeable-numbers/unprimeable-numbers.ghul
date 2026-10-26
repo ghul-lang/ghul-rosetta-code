@@ -28,9 +28,7 @@ is_unprimeable(value: int) -> bool is
     while place <= value do
         let kept = value - value / place % 10 * place
 
-        for digit in 0::9 do
-            if is_prime(kept + digit * place) then return false fi
-        od
+        if 0::9 |> any(d => is_prime(kept + d * place)) then return false fi
 
         place = place * 10
     od
@@ -62,12 +60,7 @@ write_line("")
 write_line("the lowest unprimeable number ending in each digit:")
 
 for last in 0::9 do
-    let found =
-        for candidate in unprimeables() do
-            if candidate % 10 == last then break candidate fi
-        od
-
-    let lowest = found!
+    let lowest = (unprimeables() |> find(c => c % 10 == last))!
 
     write_line("  {last}: {lowest:N0}")
 od
