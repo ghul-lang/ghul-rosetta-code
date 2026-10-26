@@ -1,19 +1,11 @@
 use default
 
-summarize(term: string) -> string is
-    let counts = MAP()
-
-    for digit in term do
-        counts[digit] =
-            (if counts.contains_key(digit) then counts[digit] else 0 fi) + 1
-    od
-
-    return
-        counts.keys
-        |> sort((left, right) => right <> left)
-        |> map(digit => "{counts[digit]}{digit}")
-        |> join("")
-si
+summarize(term: string) -> string =>
+    let counts = term |> frequencies() in
+    counts.keys
+    |> sort((left, right) => right <> left)
+    |> map(digit => "{counts[digit]}{digit}")
+    |> join("")
 
 sequence(seed: int) -> LIST[string] is
     let terms = LIST()
@@ -34,19 +26,15 @@ canonical(seed: int) -> string =>
 
 let lengths = MAP()
 
-let longest mut = 0
-
 for seed in 1..1000000 do
     let key = canonical(seed)
 
     if !lengths.contains_key(key) then
         lengths[key] = sequence(seed).count
     fi
-
-    if lengths[key] > longest then
-        longest = lengths[key]
-    fi
 od
+
+let longest = lengths.values |> max() ?? 0
 
 let winners =
     (1..1000000)
