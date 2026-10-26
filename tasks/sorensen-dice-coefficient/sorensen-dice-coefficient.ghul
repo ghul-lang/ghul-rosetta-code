@@ -1,38 +1,21 @@
 use default
 
-bigrams(phrase: string) -> MAP[string, int] =>
-    (let counted = MAP()
+bigrams(phrase: string) -> Map[string, int] =>
+    phrase.to_lower().split([' '])
+        |> flat_map(word =>
+            word |> windows(2) |> map(pair => pair |> string()))
+        |> frequencies()
 
-     for word in phrase.to_lower().split([' ']) do
-         for at in 0..word.length - 1 do
-             let pair = word[at .. at + 2]
-
-             counted[pair] = if counted.contains_key(pair) then
-                                 counted[pair] + 1
-                             else
-                                 1
-                             fi
-         od
-     od
-
-     counted)
-
-shared(
-    left: MAP[string, int],
-    right: MAP[string, int]
-) -> int =>
+shared(left: Map[string, int], right: Map[string, int]) -> int =>
     left
         |> filter(entry => right.contains_key(entry.key))
         |> sum_by(entry =>
             System.Math.min(entry.value, right[entry.key]))
 
-size(counted: MAP[string, int]) -> int =>
+size(counted: Map[string, int]) -> int =>
     counted.values |> sum()
 
-coefficient(
-    left: MAP[string, int],
-    right: MAP[string, int]
-) -> double =>
+coefficient(left: Map[string, int], right: Map[string, int]) -> double =>
     (let total = size(left) + size(right)
 
      if total == 0 then

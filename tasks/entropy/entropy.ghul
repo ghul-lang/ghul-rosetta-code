@@ -1,24 +1,13 @@
 use default
 use System.Math
 
-entropy(text: string) -> double is
-    let counts = MAP()
-
-    for character in text do
-        let seen mut = 0
-
-        counts.try_get_value(character, seen ref)
-
-        counts[character] = seen + 1
-    od
-
-    let total = double(text.length)
-
-    return counts.values
-        |> map(count => cast(count) / total)
+entropy(text: string) -> double =>
+    let groups = group_by(text, c => c).values in
+    let total = double(text.length) in
+    groups
+        |> map(group => double(group.count) / total)
         |> reduce(0.0D, (bits, probability) =>
             bits - probability * Math.log2(probability))
-si
 
 let text = "1223334444"
 

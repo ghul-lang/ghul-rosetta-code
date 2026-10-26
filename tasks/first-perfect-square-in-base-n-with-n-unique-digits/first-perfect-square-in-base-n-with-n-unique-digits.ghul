@@ -6,42 +6,33 @@ is_pandigital(square: long, base: int) -> bool is
     let radix = long(base)
     let wanted = (1 << base) - 1
 
-    let seen mut = 0
-    let remaining mut = square
+    walk(remaining: long, seen: int) -> bool =>
+        if remaining == 0L then seen == wanted
+        else
+            walk(remaining / radix,
+                seen | (1 << int(remaining % radix)))
+        fi
 
-    while remaining > 0L do
-        seen = seen | (1 << int(remaining % radix))
-        remaining = remaining / radix
-    od
-
-    return seen == wanted
+    walk(square, 0)
 si
 
 in_base(value: long, base: int) -> string is
     let radix = long(base)
-    let digits = LIST()
 
-    let remaining mut = value
+    walk(remaining: long) -> string =>
+        if remaining == 0L then
+            ""
+        else
+            let digit = digit_glyphs[int(remaining % radix)] in
+            "{walk(remaining / radix)}{digit}"
+        fi
 
-    while remaining > 0L do
-        digits.insert(0, digit_glyphs[int(remaining % radix)])
-
-        remaining = remaining / radix
-    od
-
-    return string(digits |> collect())
+    walk(value)
 si
 
-smallest_root(base: int) -> int is
-    let lowest mut = 1L
-
-    for _ in 1..base do
-        lowest = lowest * long(base)
-    od
-
-    return int(
-        System.Math.ceiling(System.Math.sqrt(double(lowest))))
-si
+smallest_root(base: int) -> int =>
+    let lowest = System.Math.pow(double(base), double(base - 1)) in
+    int(System.Math.ceiling(System.Math.sqrt(lowest)))
 
 for base in 2::13 do
     let found =

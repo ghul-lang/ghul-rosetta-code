@@ -4,18 +4,14 @@ filter(a: double[], b: double[], signal: double[]) -> List[double] is
     let out = LIST()
 
     for i in 0..signal.count do
-        let total mut = b[0] * signal[i]
-
-        for j in 1..b.count do
-            if i >= j then
-                total = total + b[j] * signal[i - j] - a[j] * out[i - j]
-            fi
-        od
+        let total = b[0] * signal[i] +
+            ([b[j] * signal[i - j] - a[j] * out[i - j]
+                for j in 1..b.count if i >= j] |> sum())
 
         out.add(total / a[0])
     od
 
-    return out
+    out
 si
 
 let a = [1.0, -2.77555756e-16, 3.33333333e-01, -1.85037171e-17]

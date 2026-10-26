@@ -1,34 +1,12 @@
 use default
 
-ascending_number(mask: int) -> int is
-    let value mut = 0
+ascending_number(mask: int) -> int =>
+    1::9
+        |> filter(d => (mask >> (d - 1)) & 1 == 1)
+        |> reduce(0, (value, d) => value * 10 + d)
 
-    for digit in 1::9 do
-        if (mask >> (digit - 1)) & 1 == 1 then
-            value = value * 10 + digit
-        fi
-    od
-
-    return value
-si
-
-is_prime(n: int) -> bool is
-    if n < 2 then
-        return false
-    fi
-
-    let factor mut = 2
-
-    while factor * factor <= n do
-        if n % factor == 0 then
-            return false
-        fi
-
-        factor = factor + 1
-    od
-
-    return true
-si
+is_prime(n: int) -> bool =>
+    n > 1 /\ 2::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
 
 1::511
     |> map(ascending_number)

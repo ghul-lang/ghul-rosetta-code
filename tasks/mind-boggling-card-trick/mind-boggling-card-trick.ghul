@@ -7,14 +7,11 @@ shuffled[T](items: T{}) -> LIST[T] =>
 
 trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
-    let black = LIST()
-    let red = LIST()
-
-    let pairs = deck |> chunk(2) |> map(pair => (pair[0], pair[1]))
-
-    for (top, next) in pairs do
-        if top == 'B' then black.add(next) else red.add(next) fi
-    od
+    let pairs = deck |> chunk(2)
+    let black = pairs |> filter(p => p[0] == 'B')
+        |> map(p => p[1]) |> collect_mutable()
+    let red = pairs |> filter(p => p[0] != 'B')
+        |> map(p => p[1]) |> collect_mutable()
 
     let swap = random.next(int.min(black.count, red.count) + 1)
     let black_bunch = shuffled(black) |> take(swap) |> collect()

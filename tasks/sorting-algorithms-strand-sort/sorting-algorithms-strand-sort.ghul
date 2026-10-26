@@ -1,22 +1,16 @@
 use default
 
-merge(left: List[int], right: List[int]) -> int{} is
-    let at_left mut = 0
-    let at_right mut = 0
-
-    while at_left < left.count /\ at_right < right.count do
-        if left[at_left] <= right[at_right] then
-            yield left[at_left]
-            at_left = at_left + 1
+merge(left: List[int], right: List[int]) -> int{} =>
+    case (left, right)
+    when ([], _) then right
+    when (_, []) then left
+    when ([x, ..xr], [y, ..yr]) then
+        if x <= y then
+            [x] ++ merge(xr, right)
         else
-            yield right[at_right]
-            at_right = at_right + 1
+            [y] ++ merge(left, yr)
         fi
-    od
-
-    yield in left |> skip(at_left)
-    yield in right |> skip(at_right)
-si
+    esac
 
 strand_sort(values: List[int]) -> List[int] is
     let remaining = LIST()

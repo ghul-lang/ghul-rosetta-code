@@ -26,15 +26,8 @@ struct MODULAR(value: int, modulus: int): Ring[MODULAR] is
     to_string() -> string => "{value} (mod {modulus})"
 si
 
-power[T: Ring[T]](x: T, exponent: int) -> T is
-    let result mut = x.one
-
-    for _ in 1::exponent do
-        result = result * x
-    od
-
-    result
-si
+power[T: Ring[T]](x: T, exponent: int) -> T =>
+    1::exponent |> reduce(x.one, (result, _) => result * x)
 
 f[T: Ring[T]](x: T) -> T => power(x, 100) + x + x.one
 

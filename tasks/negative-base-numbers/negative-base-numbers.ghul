@@ -2,25 +2,21 @@ use default
 
 let digit_set = "0123456789abcdefghijklmnopqrstuvwxyz"
 
-encode(n: int, base: int) -> string => (
-    let rest mut = n
-    let digits mut = ""
-
-    while rest != 0 do
-        let remainder mut = rest % base
-
-        rest = rest / base
-
-        if remainder < 0 then
-            remainder = remainder - base
-            rest = rest + 1
+encode(n: int, base: int) -> string =>
+    let walk = (rest: int, digits: string) rec =>
+        if rest == 0 then
+            if digits.length == 0 then "0" else digits fi
+        else
+            let (r, next) =
+                if rest % base < 0
+                then (rest % base - base, rest / base + 1)
+                else (rest % base, rest / base)
+                fi
+            in
+            rec(next, "{digit_set[r]}{digits}")
         fi
-
-        digits = "{digit_set[remainder]}{digits}"
-    od
-
-    if digits.length == 0 then "0" else digits fi
-)
+    in
+    walk(n, "")
 
 decode(encoded: string, base: int) -> int =>
     encoded

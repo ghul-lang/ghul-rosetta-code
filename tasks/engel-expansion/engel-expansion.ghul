@@ -25,17 +25,8 @@ engel(numerator: bigint, denominator: bigint) -> bigint{} is
 si
 
 from_engel(terms: Collections.List[bigint])
-        -> (numerator: bigint, denominator: bigint) is
-    let numerator mut = 0n
-    let denominator mut = 1n
-
-    for term in terms do
-        numerator = numerator * term + 1n
-        denominator = denominator * term
-    od
-
-    return (numerator, denominator)
-si
+        -> (numerator: bigint, denominator: bigint) =>
+    terms |> reduce((0n, 1n), ((n, d), term) => (n * term + 1n, d * term))
 
 show(name: string, fractional: string) is
     let numerator = bigint.parse(fractional)

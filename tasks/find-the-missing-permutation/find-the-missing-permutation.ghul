@@ -14,11 +14,6 @@ uses_at(position: int, letter: char) -> int =>
 
 under_represented(position: int) -> char =>
     "ABCD"
-        |> reduce(' ', (missing, letter) =>
-            if uses_at(position, letter) < complete / 4 then
-                letter
-            else
-                missing
-            fi)
+        |> find(letter => uses_at(position, letter) < complete / 4)!
 
-write_line(string(0..4 |> map(under_represented) |> collect()))
+write_line(0..4 |> map(under_represented) |> string())

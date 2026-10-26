@@ -8,47 +8,27 @@ is_prime(n: bigint) -> bool is
         return false
     fi
 
-    for small in witnesses do
-        if n =~ small then
-            return true
-        elif n % small =~ 0n then
-            return false
-        fi
-    od
+    if witnesses |> any(small => n % small =~ 0n) then
+        return witnesses |> any(small => n =~ small)
+    fi
 
-    let odd_part mut = n - 1n
-    let shifts mut = 0
-
-    while odd_part % 2n =~ 0n do
-        odd_part = odd_part / 2n
-        shifts = shifts + 1
-    od
-
-    for witness in witnesses do
-        let residue mut = mod_pow(witness, odd_part, n)
-
-        if residue =~ 1n \/ residue =~ n - 1n then
-            continue
+    split(m: bigint, shifts: int) -> (bigint, int) =>
+        if m % 2n =~ 0n then
+            split(m / 2n, shifts + 1)
+        else
+            (m, shifts)
         fi
 
-        let composite mut = true
+    let (odd_part, shifts) = split(n - 1n, 0)
 
-        for _ in 1..shifts do
-            residue = residue * residue % n
+    holds(w: bigint) -> bool =>
+        let first = mod_pow(w, odd_part, n) in
+        first =~ 1n \/ first =~ n - 1n \/
+            iterate(first, r => r * r % n)
+                |> take(shifts + 1)
+                |> any(r => r =~ n - 1n)
 
-            if residue =~ n - 1n then
-                composite = false
-
-                break
-            fi
-        od
-
-        if composite then
-            return false
-        fi
-    od
-
-    return true
+    witnesses |> all(holds)
 si
 
 largest_truncatable(base: int) -> bigint is
@@ -64,11 +44,7 @@ largest_truncatable(base: int) -> bigint is
     let largest mut = 0n
 
     while level.count > 0 do
-        largest =
-            level
-                |> reduce(0n, (best, candidate) =>
-                    if candidate > best then candidate else best fi)
-
+        largest = level |> max_by(c => c)!
         level =
             [bigint(digit) * place + candidate
                 for candidate in level for digit in 1::base - 1]
@@ -78,7 +54,7 @@ largest_truncatable(base: int) -> bigint is
         place = place * radix
     od
 
-    return largest
+    largest
 si
 
 for base in 3::12 do

@@ -2,19 +2,10 @@ use default
 
 let digit_symbols = "0123456789abcdef"
 
-render(value: long, base: int) -> string is
-    let digits = LIST()
-    let remaining mut = value
-
-    while remaining > 0L do
-        let digit = int(remaining % cast(base))
-
-        digits.insert(0, digit_symbols[digit])
-        remaining = remaining / cast(base)
-    od
-
-    return string(digits.to_array())
-si
+render(value: long, base: int) -> string =>
+    let digit = digit_symbols[int(value % cast(base))] in
+    let rest = value / cast(base) in
+    if rest > 0L then "{render(rest, base)}{digit}" else "{digit}" fi
 
 esthetic(base: int) -> long{} is
     let pending = Queue()

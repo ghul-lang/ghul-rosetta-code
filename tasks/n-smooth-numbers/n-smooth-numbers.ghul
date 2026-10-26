@@ -1,17 +1,8 @@
 use default
 
-is_prime(value: int) -> bool is
-    if value < 2 then return false fi
-
-    let divisor mut = 2
-
-    while divisor * divisor <= value do
-        if value % divisor == 0 then return false fi
-        divisor = divisor + 1
-    od
-
-    true
-si
+is_prime(value: int) -> bool =>
+    value >= 2 /\ 2::int(Ghul.Math.sqrt(double(value)))
+        |> all(d => value % d != 0)
 
 smooth(bound: int, count: int) -> LIST[bigint] is
     let factors = 2::bound |> filter(is_prime)

@@ -1,11 +1,5 @@
 use default
 
-repeat(form: string, times: int) -> string{} is
-    for _ in 1::times do
-        yield form
-    od
-si
-
 euclid(pulses: int, steps: int) -> string is
     let first mut = "1"
     let first_count mut = pulses

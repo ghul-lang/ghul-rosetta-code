@@ -1,42 +1,19 @@
 use default
 
-is_prime(n: int) -> bool is
-    if n < 2 then
-        return false
-    fi
-
-    if n % 2 == 0 then
-        return n == 2
-    fi
-
-    let i mut = 3
-
-    while i * i <= n do
-        if n % i == 0 then
-            return false
-        fi
-
-        i = i + 2
-    od
-
-    true
-si
+is_prime(n: int) -> bool =>
+    n == 2 \/ (n > 2 /\ n % 2 == 1 /\
+        3::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0))
 
 mod_pow(base: long, exponent: long, modulus: long) -> long is
-    let result mut = 1L
-    let b mut = base % modulus
-    let e mut = exponent
-
-    while e > 0L do
-        if e % 2L == 1L then
-            result = (result * b) % modulus
+    walk(b: long, e: long, r: long) -> long =>
+        if e == 0L then r
+        else
+            let square = (b * b) % modulus in
+            let bit = if e % 2L == 1L then (r * b) % modulus else r fi in
+            walk(square, e / 2L, bit)
         fi
 
-        e = e / 2L
-        b = (b * b) % modulus
-    od
-
-    result
+    walk(base % modulus, exponent, 1L)
 si
 
 is_pseudoprime(a: int, x: int) -> bool =>

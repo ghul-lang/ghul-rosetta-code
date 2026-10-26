@@ -2,14 +2,11 @@ use default
 
 for i in 1::100 do
     write_line(
-        if i % 15 == 0 then
-            "FizzBuzz"
-        elif i % 3 == 0 then
-            "Fizz"
-        elif i % 5 == 0 then
-            "Buzz"
-        else
-            "{i}"
-        fi
+        case (i % 3, i % 5)
+        when (0, 0) then "FizzBuzz"
+        when (0, _) then "Fizz"
+        when (_, 0) then "Buzz"
+        else "{i}"
+        esac
     )
 od

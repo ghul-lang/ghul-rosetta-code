@@ -17,24 +17,13 @@ words() -> string{} is
     od
 si
 
-entropy(word: string) -> double is
-    let counts = MAP()
-
-    for character in word do
-        let seen mut = 0
-
-        counts.try_get_value(character, seen ref)
-
-        counts[character] = seen + 1
-    od
-
-    let total = double(word.length)
-
-    counts.values
-        |> map(count => cast(count) / total)
+entropy(word: string) -> double =>
+    let total = double(word.length) in
+    word
+        |> group_by(c => c)
+        |> map(group => double(group.value.count) / total)
         |> reduce(0.0D, (bits, probability) =>
             bits - probability * Math.log2(probability))
-si
 
 write_line("   N      length            entropy")
 
