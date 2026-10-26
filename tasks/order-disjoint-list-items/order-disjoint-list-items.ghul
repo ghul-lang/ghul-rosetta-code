@@ -1,14 +1,7 @@
 use default
 
 reorder(items: string[], order: string[]) -> string[] is
-    let wanted = MAP()
-
-    for item in order do
-        let already mut = 0
-
-        wanted.try_get_value(item, already ref)
-        wanted[item] = already + 1
-    od
+    let wanted = MAP(order |> frequencies())
 
     let places = LIST()
 
