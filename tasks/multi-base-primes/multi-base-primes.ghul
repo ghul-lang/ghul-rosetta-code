@@ -10,13 +10,13 @@ sieve(limit: int) -> List[bool] is
 
     for p in 2..limit do
         if !composite[p] /\ p <= limit / p then
-            for multiple in from(p * p, p) |> take_while(m => m <= limit) do
+            for multiple in from(p * p, p) |> take_while(* <= limit) do
                 composite[multiple] = true
             od
         fi
     od
 
-    composite |> map(c => !c) |> collect()
+    composite |> map(! *) |> collect()
 si
 
 in_base(n: int, base: int) -> string is

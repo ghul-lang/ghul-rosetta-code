@@ -43,5 +43,5 @@ let primes = primes_below(1_000_000) |> collect()
 show(name: string, run: Collections.List[int]) =>
     write_line("{name}: {run |> map(p => "{p}") |> join(" ")}")
 
-show("ascending", longest_run(primes, (before, after) => before < after))
-show("descending", longest_run(primes, (before, after) => before > after))
+show("ascending", longest_run(primes, * < *))
+show("descending", longest_run(primes, * > *))

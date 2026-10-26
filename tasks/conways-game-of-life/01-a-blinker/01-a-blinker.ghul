@@ -62,7 +62,7 @@ parse(rows: string[]) -> Grid is
     let grid = LIST()
 
     for row in rows do
-        grid.add(row |> map(c => c == '#') |> collect_mutable())
+        grid.add(row |> map(* == '#') |> collect_mutable())
     od
 
     grid

@@ -30,7 +30,7 @@ report(name: string, wanted: (int) -> bool, first: int) is
     for bound in [1_000_000, 10_000_000] do
         let total =
             selected(wanted)
-                |> take_while(prime => prime < bound)
+                |> take_while(* < bound)
                 |> count()
 
         write_line("  {name} primes below {bound:N0}: {total:N0}")

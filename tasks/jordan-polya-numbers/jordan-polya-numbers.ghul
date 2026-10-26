@@ -38,7 +38,7 @@ as_factorials(value: long) -> string =>
         factors
             |> distinct()
             |> map(i =>
-                (let times = factors |> filter(f => f == i) |> count()
+                (let times = factors |> filter(* == i) |> count()
                  if times == 1 then "{i}!" else "{i}!^{times}" fi))
             |> join(" x ")
     else
@@ -61,7 +61,7 @@ numbers
         write_line(row |> map(n => "{n,7}") |> join("")))
 
 let below_a_hundred_million = numbers
-    |> take_while(n => n < 100000000L)
+    |> take_while(* < 100000000L)
     |> reduce(1L, (largest, n) => n)
 
 write_line("")

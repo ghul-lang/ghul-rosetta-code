@@ -53,7 +53,7 @@ order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
     let totient = modulus / factor.prime * (factor.prime - 1n) in
     factorise(totient)
         |> map(order_part(a, *, totient, modulus))
-        |> reduce(1n, (order, part) => order * part)
+        |> reduce(1n, * * *)
 
 multiplicative_order(a: bigint, m: bigint) -> bigint =>
     factorise(m)

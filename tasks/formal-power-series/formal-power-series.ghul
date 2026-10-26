@@ -52,7 +52,7 @@ class SERIES(term: (int) -> RATIONAL) is
     *(other: SERIES) -> SERIES => SERIES(n =>
         (0::n)
             |> map(k => at(k) * other.at(n - k))
-            |> reduce(whole(0), (sum, term) => sum + term))
+            |> reduce(whole(0), * + *))
 
     /(other: SERIES) -> SERIES is
         let quotient mut = SERIES(_ => whole(0))
@@ -60,7 +60,7 @@ class SERIES(term: (int) -> RATIONAL) is
         quotient = SERIES(n => (
             let carried = (1::n)
                 |> map(k => other.at(k) * quotient.at(n - k))
-                |> reduce(whole(0), (sum, term) => sum + term)
+                |> reduce(whole(0), * + *)
 
             (at(n) - carried) / other.at(0)))
 

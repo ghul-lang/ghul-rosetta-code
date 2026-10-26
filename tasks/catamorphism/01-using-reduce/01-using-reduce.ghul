@@ -5,8 +5,8 @@ let numbers = [1, 2, 3, 4, 5]
 let largest =
     (left, right) => if left > right then left else right fi
 
-let sum = numbers |> reduce(0, (total, value) => total + value)
-let product = numbers |> reduce(1, (total, value) => total * value)
+let sum = numbers |> reduce(0, * + *)
+let product = numbers |> reduce(1, * * *)
 
 write_line("sum:     {sum}")
 write_line("product: {product}")

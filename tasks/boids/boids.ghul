@@ -76,18 +76,18 @@ steer(boid: BOID, flock: List[BOID]) -> VEC is
 
         let centre =
             near |> map(o => o.position)
-                |> reduce(VEC(0.0D, 0.0D), (a, b) => a + b)
+                |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let heading =
             near |> map(o => o.velocity)
-                |> reduce(VEC(0.0D, 0.0D), (a, b) => a + b)
+                |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let crowding =
             near
                 |> filter(o =>
                     (o.position - boid.position).length < personal_space)
                 |> map(o => boid.position - o.position)
-                |> reduce(VEC(0.0D, 0.0D), (a, b) => a + b)
+                |> reduce(VEC(0.0D, 0.0D), * + *)
 
         force = force +
             (centre * (1.0D / n) - boid.position) * 0.01D +

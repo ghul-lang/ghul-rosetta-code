@@ -25,7 +25,7 @@ let tree =
         Tree.NODE(1, Tree.LEAF, Tree.LEAF),
         Tree.NODE(3, Tree.LEAF, Tree.LEAF))
 
-let doubled = map(tree, x => x * 2)
+let doubled = map(tree, * * 2)
 
 write_line(in_order(tree) |> join())
 write_line(in_order(doubled) |> join())

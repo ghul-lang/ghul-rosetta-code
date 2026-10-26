@@ -22,10 +22,10 @@ let root_colour = "#ffffe6"
 let palette = ["#ffebd2", "#f0fff0", "#e6ffff"]
 
 margin(line: string) -> int =>
-    line |> take_while(letter => letter == ' ') |> count()
+    line |> take_while(* == ' ') |> count()
 
 parse(lines: List[string]) -> NODE is
-    let unit = lines |> map(margin) |> filter(width => width > 0) |> min()
+    let unit = lines |> map(margin) |> filter(* > 0) |> min()
     let step = unit ?? 1
     let root = NODE(lines[0].trim(), LIST())
     let ancestors = LIST()

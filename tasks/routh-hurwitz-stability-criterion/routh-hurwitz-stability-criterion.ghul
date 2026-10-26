@@ -39,7 +39,7 @@ routh_array(
     for r in 2::degree do
         let above = rows[r - 2]
 
-        if rows[r - 1] |> all(x => x == 0.0) then
+        if rows[r - 1] |> all(* == 0.0) then
             write_line("  row s{degree - r + 1} is zero: "
                 "using the auxiliary polynomial's derivative")
             rows[r - 1] = derivative(above, degree - r + 2)

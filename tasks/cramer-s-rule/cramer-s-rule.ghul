@@ -8,7 +8,7 @@ minor(m: Matrix, column: int) -> Matrix =>
     1..m.count
         |> map(row =>
             0..m.count
-                |> filter(c => c != column)
+                |> filter(* != column)
                 |> map(c => m[row][c])
                 |> collect())
         |> collect()

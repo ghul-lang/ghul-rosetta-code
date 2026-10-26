@@ -8,7 +8,7 @@ is_prime(n: int) -> bool =>
     n >= 2 /\ 2..n |> all(d => d * d > n \/ n % d != 0)
 
 set_bits(mask: long) -> long{} =>
-    0..64 |> map(i => 1L << i) |> filter(bit => mask & bit != 0L)
+    0..64 |> map(1L << *) |> filter(bit => mask & bit != 0L)
 
 lowest_bit(mask: long) -> int =>
     if mask == 0L then -1 else BitOperations.trailing_zero_count(mask) fi
@@ -39,7 +39,7 @@ smallest_start(n: int) -> bigint? is
                     |> index()
                     |> filter((_, p) => v % p == 0)
                     |> map((i, _) => 1L << i)
-                    |> reduce(0L, (x, y) => x | y))
+                    |> reduce(0L, * | *))
             |> collect_mutable()
 
     let partitions: List[Partition] mut =

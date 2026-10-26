@@ -15,7 +15,7 @@ exponentiate[T](a: Church[T], b: Church[(T) -> T]) -> Church[T] => b(a)
 to_church[T](n: int) -> Church[T] =>
     if n == 0 then zero else successor(to_church(n - 1)) fi
 
-to_int(n: Church[int]) -> int => n(x => x + 1)(0)
+to_int(n: Church[int]) -> int => n(* + 1)(0)
 
 let three = successor(successor(successor(zero[int])))
 let four = successor(three)

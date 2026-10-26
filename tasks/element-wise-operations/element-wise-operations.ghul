@@ -22,17 +22,17 @@ class MATRIX(cells: double[][]) is
     constant(value: double) -> MATRIX =>
         _each(_ => value)
 
-    +(other: MATRIX) -> MATRIX => _both(other, (a, b) => a + b)
-    -(other: MATRIX) -> MATRIX => _both(other, (a, b) => a - b)
-    *(other: MATRIX) -> MATRIX => _both(other, (a, b) => a * b)
-    /(other: MATRIX) -> MATRIX => _both(other, (a, b) => a / b)
+    +(other: MATRIX) -> MATRIX => _both(other, * + *)
+    -(other: MATRIX) -> MATRIX => _both(other, * - *)
+    *(other: MATRIX) -> MATRIX => _both(other, * * *)
+    /(other: MATRIX) -> MATRIX => _both(other, * / *)
     ^(other: MATRIX) -> MATRIX =>
         _both(other, (a, b) => System.Math.pow(a, b))
 
-    +(k: double) -> MATRIX => _each(a => a + k)
-    -(k: double) -> MATRIX => _each(a => a - k)
-    *(k: double) -> MATRIX => _each(a => a * k)
-    /(k: double) -> MATRIX => _each(a => a / k)
+    +(k: double) -> MATRIX => _each(* + k)
+    -(k: double) -> MATRIX => _each(* - k)
+    *(k: double) -> MATRIX => _each(* * k)
+    /(k: double) -> MATRIX => _each(* / k)
     ^(k: double) -> MATRIX => _each(System.Math.pow(*, k))
 
     to_string() -> string =>

@@ -24,7 +24,7 @@ let sample_bins = 1::samples
     |> collect()
 
 let counts = 0..bins
-    |> map(bin => sample_bins |> count(b => b == bin))
+    |> map(bin => sample_bins |> count(* == bin))
     |> collect()
 
 let largest = counts |> max()!

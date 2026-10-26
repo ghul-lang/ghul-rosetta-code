@@ -23,7 +23,7 @@ invert(a: List[List[double]]) -> List[List[double]] is
             rows[k][j] = rows[k][j] / divisor
         od
 
-        for i in 0..n |> filter(i => i != k) do
+        for i in 0..n |> filter(* != k) do
             let factor = rows[i][k]
 
             for j in 0..2 * n do

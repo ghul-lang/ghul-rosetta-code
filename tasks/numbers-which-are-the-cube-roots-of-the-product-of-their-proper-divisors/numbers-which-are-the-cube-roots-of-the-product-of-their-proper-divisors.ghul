@@ -10,7 +10,7 @@ let divisor_count = (
     let counts = repeat(0, limit + 1) |> collect_mutable()
 
     for d in 1::limit do
-        for multiple in from(d, d) |> take_while(m => m <= limit) do
+        for multiple in from(d, d) |> take_while(* <= limit) do
             counts[multiple] = counts[multiple] + 1
         od
     od

@@ -39,7 +39,7 @@ is_prime(n: bigint) -> bool is
     od
 
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-        |> filter(witness => witness < n)
+        |> filter(* < n)
         |> all(passes_round(*, n, odd_part, twos))
 si
 

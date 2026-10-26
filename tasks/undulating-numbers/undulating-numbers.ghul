@@ -29,7 +29,7 @@ for length in 3..17 do
     od
 od
 
-let three_digit = values |> filter(v => v < 1000L) |> collect()
+let three_digit = values |> filter(* < 1000L) |> collect()
 let four_digit = values
     |> filter(v => v >= 1000L /\ v < 10000L)
 

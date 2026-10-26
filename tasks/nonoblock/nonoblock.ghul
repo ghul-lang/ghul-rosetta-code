@@ -14,7 +14,7 @@ placements(cells: int, blocks: List[int]) -> List[int]{} is
             let offset = start + first + 1
 
             for tail in placements(int.max(cells - offset, 0), rest) do
-                let shifted = tail |> map(p => p + offset)
+                let shifted = tail |> map(* + offset)
 
                 yield [start] ++ shifted |> collect()
             od

@@ -46,7 +46,7 @@ cyclotomic(n: int) -> List[long] is
         fi
     od
 
-    if n == 1 then series |> map(c => -c) |> collect() else series fi
+    if n == 1 then series |> map(- *) |> collect() else series fi
 si
 
 term(coefficient: long, power: int) -> string =>

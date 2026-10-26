@@ -141,7 +141,7 @@ class VERIFIER(tokens: List[string]) is
             advance()
         elif token =~ "true" \/ token =~ "false" then
             advance()
-        elif keywords |> any(k => k =~ token) \/
+        elif keywords |> any(* =~ token) \/
                 !(char.is_ascii_letter_or_digit(token[0])) then
             throw BAD_SYNTAX("expected operand, found {shown(token)}")
         else

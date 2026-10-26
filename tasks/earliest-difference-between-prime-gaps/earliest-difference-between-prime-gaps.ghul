@@ -7,7 +7,7 @@ let composite = (
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if !sieve[p] then
-            for multiple in from(p * p, p) |> take_while(m => m < limit) do
+            for multiple in from(p * p, p) |> take_while(* < limit) do
                 sieve[multiple] = true
             od
         fi
@@ -21,7 +21,7 @@ let first_start = MAP()
 (
     let previous mut = 3
 
-    for n in from(5, 2) |> take_while(n => n < limit) do
+    for n in from(5, 2) |> take_while(* < limit) do
         if !composite[n] then
             let gap = n - previous
 

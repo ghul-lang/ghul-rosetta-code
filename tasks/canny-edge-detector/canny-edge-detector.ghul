@@ -187,7 +187,7 @@ scene().write("scene.png")
 let input = IMAGE.read("scene.png")
 let edges = canny(blur(greyscale(input)), 20.0D, 50.0D)
 
-let found = edges.values |> filter(v => v > 0.0D) |> count()
+let found = edges.values |> filter(* > 0.0D) |> count()
 
 write_line("{found} of {edges.width * edges.height} pixels are on an edge")
 

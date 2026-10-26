@@ -59,7 +59,7 @@ od
 write_line("")
 write_line("the 3000th to 3002nd n-smooth numbers:")
 
-for bound in bounds |> filter(b => b >= 3) do
+for bound in bounds |> filter(* >= 3) do
     let found = smooth(bound, 3_002)
     let terms = found[2_999..3_002] |> map(value => "{value}") |> join(" ")
 

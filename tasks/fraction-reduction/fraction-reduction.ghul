@@ -27,7 +27,7 @@ describe(value: int) -> Candidate is
     for i in 0..digits.count do
         reduced[digits[i]] =
             0..digits.count
-                |> filter(j => j != i)
+                |> filter(* != i)
                 |> reduce(0, (kept, j) => kept * 10 + digits[j])
     od
 
@@ -36,7 +36,7 @@ si
 
 candidates(size: int) -> List[Candidate] =>
     let lowest =
-        repeat(10, size - 1) |> reduce(1, (value, ten) => value * ten) in
+        repeat(10, size - 1) |> reduce(1, * * *) in
         lowest..lowest * 10
             |> map(describe)
             |> filter(candidate => candidate.mask != 0)

@@ -3,10 +3,10 @@ use default
 balanced(text: string) -> bool =>
     let counts =
         "abc"
-            |> map(letter => text |> count(c => c == letter))
+            |> map(letter => text |> count(* == letter))
             |> collect()
     in
-    counts |> all(n => n == counts[0])
+    counts |> all(* == counts[0])
 
 write_line("Enter strings, one per line:")
 

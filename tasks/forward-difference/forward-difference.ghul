@@ -2,7 +2,7 @@ use default
 
 differences(xs: List[int]) -> List[int] =>
     zip(xs[1..<0], xs[0..<1])
-    |> map((next, current) => next - current)
+    |> map(* - *)
     |> collect()
 
 forward(order: int, xs: List[int]) -> List[int] =>

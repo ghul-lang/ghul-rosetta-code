@@ -19,7 +19,7 @@ conjugate_transpose(m: Matrix) -> Matrix =>
                 |> map(j =>
                     0..b.count
                         |> map(k => a[i][k] * b[k][j])
-                        |> reduce(Complex.zero, (x, y) => x + y))
+                        |> reduce(Complex.zero, * + *))
                 |> collect())
         |> collect()
 

@@ -20,7 +20,7 @@ let you_hold = LIST()
 let you_lack = LIST()
 
 held(hand: LIST[int], rank: int) -> int =>
-    hand |> filter(card => card == rank) |> count()
+    hand |> filter(* == rank) |> count()
 
 name_of(rank: int) -> string => ranks[rank]
 

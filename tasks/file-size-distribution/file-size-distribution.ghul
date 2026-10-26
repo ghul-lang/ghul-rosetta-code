@@ -37,7 +37,7 @@ for (b, count) in counts do
 od
 
 let total = sizes |> sum()
-let small = sizes |> filter(size => size < 1000L) |> collect()
+let small = sizes |> filter(* < 1000L) |> collect()
 let share = 100.0 * double(small |> sum()) / double(total)
 
 write_line("")

@@ -31,14 +31,14 @@ while next <= limit do
 od
 
 is_erdos(prime: int) -> bool =>
-    factorials |> filter(f => f < prime)
+    factorials |> filter(* < prime)
                |> all(f => !is_prime(prime - f))
 
 let erdos = 2::limit |> filter(is_prime)
                        |> filter(is_erdos)
                        |> collect()
 
-let below_2500 = erdos |> filter(p => p < 2_500) |> collect()
+let below_2500 = erdos |> filter(* < 2_500) |> collect()
 
 write_line("the Erdos primes below 2500:")
 

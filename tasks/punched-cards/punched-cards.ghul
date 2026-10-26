@@ -56,7 +56,7 @@ for line in program do
 
     for row in 0..12 do
         let marks = 0..line.length |> map(i =>
-            if punched[i] |> any(r => r == row) then "#"
+            if punched[i] |> any(* == row) then "#"
             elif row < 2 then "."
             else labels[row]
             fi)
@@ -109,7 +109,7 @@ for (line, number) in
         for row in 0..12 do
             let y = top + 30.0D + spacing * double(row)
 
-            if punched |> any(r => r == row) then
+            if punched |> any(* == row) then
                 image.colour(20ub, 20ub, 20ub)
                 image.fill_rectangle(
                     x - 2.5D, y - 6.0D, x + 2.5D, y + 6.0D)

@@ -17,7 +17,7 @@ flip(s: State, which: string) -> State =>
     esac
 
 running(s: State) -> List[int] =>
-    [s.small, s.large] |> filter(sand => sand > 0) |> collect()
+    [s.small, s.large] |> filter(* > 0) |> collect()
 
 wait(s: State) -> State? =>
     let sands = running(s) in

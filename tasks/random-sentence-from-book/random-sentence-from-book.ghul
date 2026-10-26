@@ -32,13 +32,13 @@ words_of(text: string) -> List[string] is
 
     for letter in text do
         if char.is_letter(letter) \/
-            apostrophes |> any(a => a == letter)
+            apostrophes |> any(* == letter)
         then
             current.append(letter)
         else
             flush()
 
-            if terminators |> any(t => t == letter) then
+            if terminators |> any(* == letter) then
                 words.add("{letter}")
             fi
         fi

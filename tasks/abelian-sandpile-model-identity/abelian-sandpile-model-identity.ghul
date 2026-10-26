@@ -94,7 +94,7 @@ side_by_side("s3_id + s3_id:", [s3_id, s3_id, s3_id + s3_id], ["+", "="])
 write_line("s3_id + s3_id =~ s3_id: {s3_id + s3_id =~ s3_id}")
 
 let six = SANDPILE.filled(64, 6)
-let identity = SANDPILE(64, six.cells |> map(grains => 6 - grains))
+let identity = SANDPILE(64, six.cells |> map(6 - *))
 
 write_line("")
 write_line("the identity of the 64 x 64 sandpile is drawn below")

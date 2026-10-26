@@ -79,7 +79,7 @@ subdivided(mesh: Mesh) -> Mesh is
         let touching_faces =
             0..faces.count
                 |> filter(face_index =>
-                    faces[face_index] |> any(corner => corner == vertex))
+                    faces[face_index] |> any(* == vertex))
                 |> collect()
 
         let touching_edges =

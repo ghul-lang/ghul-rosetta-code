@@ -80,7 +80,7 @@ let sphenics =
     |> filter(is_sphenic(*, factor))
     |> collect()
 
-let below_1000 = sphenics |> filter(n => n < 1000) |> join()
+let below_1000 = sphenics |> filter(* < 1000) |> join()
 
 write_line("sphenic numbers below 1000: {below_1000}")
 

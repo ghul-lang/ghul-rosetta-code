@@ -22,4 +22,4 @@ write_line(shuffled |> map(v => "{v}") |> join(" "))
 
 write_line("{original
     |> zip(shuffled)
-    |> all((before, after) => before != after)}")
+    |> all(* != *)}")

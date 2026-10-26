@@ -25,7 +25,7 @@ is_palindrome(digits: List[int]) -> bool =>
         |> all(i => digits[i] == digits[digits.count - 1 - i])
 
 raised(base: long, exponent: int) -> long =>
-    repeat(base, exponent) |> reduce(1L, (value, factor) => value * factor)
+    repeat(base, exponent) |> reduce(1L, * * *)
 
 in_base(value: long, base: long) -> string =>
     string(

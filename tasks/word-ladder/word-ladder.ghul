@@ -6,7 +6,7 @@ neighbours(word: string) -> string{} =>
     (0..word.length)
     |> flat_map(i =>
         ('a'::'z')
-        |> filter(c => c != word[i])
+        |> filter(* != word[i])
         |> map(c => "{word[0..i]}{c}{word[i + 1..<0]}"))
     |> filter(words.contains)
 

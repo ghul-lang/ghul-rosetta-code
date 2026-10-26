@@ -6,7 +6,7 @@ extend(prefix: LIST[int], size: int) -> List[int]{} is
     else
         for candidate in 0..size do
             if candidate != prefix.count /\
-                !(prefix |> any(taken => taken == candidate)) then
+                !(prefix |> any(* == candidate)) then
                 prefix.add(candidate)
 
                 yield in extend(prefix, size)

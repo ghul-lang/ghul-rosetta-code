@@ -30,7 +30,7 @@ let board =
             fi)
         |> collect_mutable()
 
-let given = SET(board |> filter(n => n > 0))
+let given = SET(board |> filter(* > 0))
 let last = given |> reduce(0, (a, b) => System.Math.max(a, b))
 
 at(row: int, column: int) -> int =>

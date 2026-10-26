@@ -15,7 +15,7 @@ let safe = repeat(0, 2) |> collect_mutable()
 let player mut = 0
 let turn mut = 0
 
-while safe |> all(total => total < 100) do
+while safe |> all(* < 100) do
     IO.Std.write(
         "player {player + 1} (safe {safe[player]}, turn {turn})"
         " roll? ")

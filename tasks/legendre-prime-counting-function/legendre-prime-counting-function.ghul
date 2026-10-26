@@ -5,7 +5,7 @@ let composite = repeat(false, limit) |> collect_mutable()
 
 for p in 2..200 do
     if !composite[p] then
-        for multiple in from(p * p, p) |> take_while(m => m < limit) do
+        for multiple in from(p * p, p) |> take_while(* < limit) do
             composite[multiple] = true
         od
     fi

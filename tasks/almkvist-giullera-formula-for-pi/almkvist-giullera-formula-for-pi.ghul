@@ -31,7 +31,7 @@ let reciprocal_pi_squared = from(0)
     |> map(n =>
         integer_term(n) * power_of_ten(precision) /
             power_of_ten(6 * n + 3))
-    |> take_while(term => term > 0n)
+    |> take_while(* > 0n)
     |> sum()
 
 let pi_squared =

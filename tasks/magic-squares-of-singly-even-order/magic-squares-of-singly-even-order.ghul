@@ -69,7 +69,7 @@ is_magic(square: Square) -> bool =>
                 0..n |> sum_by(i => square[i][i]),
                 0..n |> sum_by(i => square[i][n - 1 - i])])
     in
-    lines |> all(total => total == target)
+    lines |> all(* == target)
 
 let square = singly_even_magic_square(6)
 

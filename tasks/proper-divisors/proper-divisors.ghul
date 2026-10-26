@@ -18,7 +18,7 @@ proper_divisors(n: int) -> List[int] is
         fi
     od
 
-    small ++ (large |> reverse()) |> filter(d => d != n)
+    small ++ (large |> reverse()) |> filter(* != n)
         |> collect()
 si
 

@@ -65,7 +65,7 @@ while names.count == 2 do
 
     if !words.contains(entered) then
         write_line("{entered} is not in the dictionary")
-    elif used |> any(w => w =~ entered) then
+    elif used |> any(* =~ entered) then
         write_line("{entered} has been played already")
     elif !one_apart(last, entered) then
         write_line("{entered} is not one letter away from {last}")
