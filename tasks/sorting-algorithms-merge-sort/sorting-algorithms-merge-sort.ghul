@@ -12,33 +12,17 @@ merge_sort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] is
         merge_sort(values[middle..<0]))
 si
 
-merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] is
-    let merged = LIST()
-    let l mut = 0
-    let r mut = 0
-
-    while l < left.count /\ r < right.count do
-        if left[l] <= right[r] then
-            merged.add(left[l])
-            l = l + 1
+merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] =>
+    case (left, right)
+    when ([], _) then right
+    when (_, []) then left
+    when ([x, ..xr], [y, ..yr]) then
+        if x <= y then
+            [x] ++ merge(xr, right) |> collect_mutable()
         else
-            merged.add(right[r])
-            r = r + 1
+            [y] ++ merge(left, yr) |> collect_mutable()
         fi
-    od
-
-    while l < left.count do
-        merged.add(left[l])
-        l = l + 1
-    od
-
-    while r < right.count do
-        merged.add(right[r])
-        r = r + 1
-    od
-
-    return merged
-si
+    esac
 
 write_line(merge_sort([5, 3, 8, 1, 9, 2, 7]) |> join())
 write_line(merge_sort(["pear", "apple", "quince", "banana"]) |> join())
