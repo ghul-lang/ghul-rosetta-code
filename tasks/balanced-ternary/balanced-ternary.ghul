@@ -14,36 +14,20 @@ digit_value(c: char) -> int =>
 digit_char(v: int) -> char =>
     if v == 1 then '+' elif v == -1 then '-' else '0' fi
 
-balanced(n: bigint) -> BT is
-    let three = 3n
-    let chars = LIST()
-    let remaining mut = n
-    let more mut = true
+ternary(n: bigint) -> string =>
+    if n =~ 0n then
+        ""
+    else
+        let r = int((n % 3n + 3n) % 3n) in
+        let d = if r == 2 then -1 else r fi in
+        "{ternary((n - bigint(d)) / 3n)}{digit_char(d)}"
+    fi
 
-    while more do
-        let r mut = int(remaining % three)
-        if r < 0 then r = r + 3 fi
-        if r == 2 then r = -1 fi
+balanced(n: bigint) -> BT => BT(ternary(n))
 
-        chars.add(digit_char(r))
-        remaining = (remaining - bigint(r)) / three
-        more = remaining !~ 0n
-    od
-
-    chars.reverse()
-    BT(chars |> map(c => "{c}") |> join(""))
-si
-
-value(a: BT) -> bigint is
-    let three = 3n
-    let total mut = 0n
-
-    for c in a.digits do
-        total = total * three + bigint(digit_value(c))
-    od
-
-    total
-si
+value(a: BT) -> bigint =>
+    a.digits
+    |> reduce(0n, (total, c) => total * 3n + bigint(digit_value(c)))
 
 -(a: BT) -> BT is
     BT(a.digits |> map(c => digit_char(-digit_value(c))) |> join(""))
