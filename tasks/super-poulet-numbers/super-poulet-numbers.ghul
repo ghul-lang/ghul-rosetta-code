@@ -4,20 +4,17 @@ write_line("testing numbers for the super-Poulet property")
 write_line("")
 
 mod_pow(base: long, exponent: long, modulus: long) -> long is
-    let result mut = 1L
-    let factor mut = base % modulus
-    let remaining mut = exponent
-
-    while remaining > 0L do
-        if remaining % 2L == 1L then
-            result = result * factor % modulus
+    step(result: long, factor: long, remaining: long) -> long =>
+        if remaining == 0L then result
+        elif remaining % 2L == 1L then
+            step(result * factor % modulus,
+                factor * factor % modulus,
+                remaining / 2L)
+        else
+            step(result, factor * factor % modulus, remaining / 2L)
         fi
 
-        factor = factor * factor % modulus
-        remaining = remaining / 2L
-    od
-
-    result
+    step(1L, base % modulus, exponent)
 si
 
 is_prime(value: int) -> bool =>
