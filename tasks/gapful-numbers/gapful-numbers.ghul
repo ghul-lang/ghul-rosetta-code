@@ -1,23 +1,12 @@
 use default
 
-gapful_from(start: int, wanted: int) -> LIST[int] is
-    let found = LIST()
-    let candidate mut = start
+is_gapful(n: int) -> bool =>
+    let digits = n.to_string() in
+    let ends = "{digits[0]}{digits[digits.length - 1]}" in
+    n % int.parse(ends) == 0
 
-    while found.count < wanted do
-        let digits = candidate.to_string()
-        let first_last = int.parse(
-            "{digits[0]}{digits[digits.length - 1]}")
-
-        if candidate % first_last == 0 then
-            found.add(candidate)
-        fi
-
-        candidate = candidate + 1
-    od
-
-    found
-si
+gapful_from(start: int, wanted: int) -> int[] =>
+    from(start) |> filter(is_gapful) |> take(wanted) |> collect()
 
 write_line("first 30 gapful numbers:")
 write_line(gapful_from(100, 30) |> join())
