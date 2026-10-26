@@ -29,13 +29,10 @@ is_circular(n: int) -> bool =>
     rotations(n) |> all(rotation => rotation >= n /\ prime[rotation])
 
 probably_prime(n: bigint) -> bool is
-    let d mut = n - 1n
-    let s mut = 0
+    strip(d: bigint, s: int) -> (bigint, int) =>
+        if d.is_even then strip(d / 2n, s + 1) else (d, s) fi
 
-    while d.is_even do
-        d = d / 2n
-        s = s + 1
-    od
+    let (d, s) = strip(n - 1n, 0)
 
     witness(base) is
         let x mut = bigint.mod_pow(base, d, n)
