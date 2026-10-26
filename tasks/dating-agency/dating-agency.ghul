@@ -27,7 +27,7 @@ let sailor = SAILOR("Popeye")
 let suggested = agency.suggestions |> map(lady => lady.name)
 
 let dated = agency.suggestions
-    |> filter(lady => sailor.finds_lovable(lady))
+    |> filter(sailor.finds_lovable(*))
     |> map(lady => lady.name)
 
 write_line("The agency suggests: {suggested |> join(", ")}")

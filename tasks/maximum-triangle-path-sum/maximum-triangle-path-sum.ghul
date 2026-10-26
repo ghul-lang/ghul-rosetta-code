@@ -25,7 +25,7 @@ let triangle =
     ]
         |> map(line =>
             line.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
-                |> map(number => int.parse(number))
+                |> map(int.parse(*))
                 |> collect())
         |> collect()
 

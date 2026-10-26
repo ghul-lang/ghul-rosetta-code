@@ -4,7 +4,7 @@ let random = System.Random(2026)
 
 let words = IO.File.read_all_lines("unixdict.txt")
     |> filter(w => w.length >= 4 /\ w.length <= 8)
-    |> filter(w => w |> all(c => char.is_letter(c)))
+    |> filter(w => w |> all(char.is_letter(*)))
     |> collect()
 
 capitalised(word: string) -> string =>

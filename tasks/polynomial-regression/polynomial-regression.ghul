@@ -2,7 +2,7 @@ use default
 use System.Math.*
 
 power_sum(xs: double[], k: int) -> double =>
-    xs |> sum_by(x => pow(x, cast(k)))
+    xs |> sum_by(pow(*, cast(k)))
 
 moment(xs: double[], ys: double[], k: int) -> double =>
     zip(xs, ys) |> sum_by((x, y) => y * pow(x, cast(k)))

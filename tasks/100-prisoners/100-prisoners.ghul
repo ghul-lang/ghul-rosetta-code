@@ -43,7 +43,7 @@ opens_at_random(cards: LIST[int], prisoner: int) -> bool =>
 
 all_pardoned(finds: (LIST[int], int) -> bool) -> bool =>
     let cards = shuffled_cards() in
-    1::prisoners |> all(p => finds(cards, p))
+    1::prisoners |> all(finds(cards, *))
 
 success_rate(finds: (LIST[int], int) -> bool) -> double =>
     cast(0..trials |> filter(_ => all_pardoned(finds)) |> count()) *

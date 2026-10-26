@@ -6,7 +6,7 @@ let guard = 12
 power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
 
 factorial(n: int) -> bigint =>
-    2::n |> map(k => bigint(k)) |> product()
+    2::n |> map(bigint) |> product()
 
 let scale = power_of_ten(digits + guard)
 

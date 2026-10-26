@@ -41,7 +41,7 @@ step(grid: Grid) -> Grid is
     0..grid.count
         |> map(row =>
             0..grid[0].count
-                |> map(column => alive(row, column))
+                |> map(alive(row, *))
                 |> collect_mutable())
         |> collect_mutable()
 si

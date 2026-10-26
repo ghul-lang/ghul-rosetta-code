@@ -111,6 +111,13 @@ let total = (let acc mut = 0
   something the file already has; a name as common as `List`, `LIST`, `MAP` or `SET` is imported
   and written bare rather than reached through its namespace. Something uncommon that a solution
   names once, a static method in particular, is written with its namespace instead.
+- **A function literal that only forwards its parameter is not written.**
+  Where the body is one call or one operator and the parameter appears once,
+  as a whole argument or operand, write the call with `*` in its place:
+  `max_by(spread(box, *))`, `map(* + 1)`. Where the parameter is the only
+  argument of a named function, pass the function: `map(parse)`. The literal
+  stays where the parameter is a receiver (`p => p.name`), appears twice, or
+  sits inside a further expression.
 - **Reach for what has no equivalent in the language next door.** `let x = e in`
   and `assert c else "..." in` as expressions, `if let` and `while let` in place
   of a test followed by a cast, unions with `case` pattern matching in place of
