@@ -1,21 +1,12 @@
 use default
 
-kaprekar(n: int) -> bool => (
-    let square = long(n) * long(n)
-    let power mut = 10L
-
-    let matched = while power <= square do
-        let right = square % power
-
-        if right > 0L /\ square / power + right == long(n) then
-            break true
-        fi
-
-        power = power * 10L
-    od
-
-    matched ?? false
-)
+kaprekar(n: int) -> bool =>
+    let square = long(n) * long(n) in
+    iterate(10L, * * 10L)
+        |> take_while(* <= square)
+        |> any(p =>
+            let right = square % p in
+            right > 0L /\ square / p + right == long(n))
 
 let below_ten_thousand = (1::9999)
     |> filter(n => n == 1 \/ kaprekar(n))
