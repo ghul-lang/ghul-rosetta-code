@@ -7,16 +7,8 @@ primes() -> int{} is
     do
         candidate = candidate + 1
 
-        let divisible mut = false
-
-        for divisor in found do
-            if divisor * divisor > candidate then break fi
-
-            if candidate % divisor == 0 then
-                divisible = true
-                break
-            fi
-        od
+        let divisible =
+            found |> any(d => d * d <= candidate /\ candidate % d == 0)
 
         if !divisible then
             found.add(candidate)
@@ -52,10 +44,7 @@ for row in 0..10 do
     write_line(cells |> join(""))
 od
 
-let ten_thousandth =
-    for entry in honakers() |> index() do
-        if entry.index == 9_999 then break entry.value fi
-    od
+let ten_thousandth = honakers() |> skip(9999) |> first()
 
 write_line("")
 write_line("the ten thousandth is at position {ten_thousandth!.position}, "
