@@ -38,31 +38,17 @@ lines_for(direction: char) -> LIST[LIST[int]] =>
 
      lines)
 
-// A tile made by a merge takes no further part in the same
-// move, so the scan steps over both tiles it consumed.
 collapse(values: LIST[int]) -> LIST[int] =>
-    (let packed = values |> filter(* != 0) |> collect()
-     let result = LIST()
-     let at mut = 0
+    let merged = merge_packed(LIST[int](values |> filter(* != 0))) in
+    let padded = merged ++ repeat(0, side - (merged |> count())) in
+    padded |> collect_mutable()
 
-     while at < packed.count do
-         if
-             at + 1 < packed.count /\
-             packed[at] == packed[at + 1]
-         then
-             result.add(packed[at] * 2)
-             at = at + 2
-         else
-             result.add(packed[at])
-             at = at + 1
-         fi
-     od
-
-     while result.count < side do
-         result.add(0)
-     od
-
-     result)
+merge_packed(packed: List[int]) -> int{} =>
+    case packed
+    when [] then []
+    when [x, y, ..rest] /\ x == y then [x * 2] ++ merge_packed(rest)
+    when [x, ..rest] then [x] ++ merge_packed(rest)
+    esac
 
 slide(target: LIST[int], direction: char) -> bool =>
     (let before = target |> collect()
