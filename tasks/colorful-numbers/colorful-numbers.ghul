@@ -3,25 +3,17 @@ use default
 is_colorful(value: int) -> bool is
     if value < 10 then return true fi
 
-    let digits = LIST()
-    let remaining mut = value
+    let figures = Ghul.Pipes.digits(value) |> collect_mutable()
 
-    while remaining > 0 do
-        let digit = remaining % 10
-
-        if digit < 2 then return false fi
-
-        digits.add(digit)
-        remaining = remaining / 10
-    od
+    if figures |> any(d => d < 2) then return false fi
 
     let seen = SET()
 
-    for start in 0..digits.count do
+    for start in 0..figures.count do
         let product mut = 1
 
-        for step in start..digits.count do
-            product = product * digits[step]
+        for step in start..figures.count do
+            product = product * figures[step]
 
             if !seen.add(product) then return false fi
         od
