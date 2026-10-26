@@ -3,25 +3,19 @@ use default
 partitions(n: int) -> bigint is
     let p = LIST([1n])
 
+    walk(m: int, k: int, total: bigint) -> bigint =>
+        let first = m - k * (3 * k - 1) / 2 in
+        if first < 0 then total
+        else
+            let second = m - k * (3 * k + 1) / 2 in
+            let pair = p[first] +
+                (if second >= 0 then p[second] else 0n fi) in
+            walk(m, k + 1,
+                if k % 2 == 1 then total + pair else total - pair fi)
+        fi
+
     for m in 1::n do
-        let total mut = 0n
-        let k mut = 1
-
-        do
-            let first = m - k * (3 * k - 1) / 2
-
-            if first < 0 then
-                break
-            fi
-
-            let second = m - k * (3 * k + 1) / 2
-            let pair = p[first] + (if second >= 0 then p[second] else 0n fi)
-
-            total = if k % 2 == 1 then total + pair else total - pair fi
-            k = k + 1
-        od
-
-        p.add(total)
+        p.add(walk(m, 1, 0n))
     od
 
     p[n]
