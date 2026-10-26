@@ -1,15 +1,12 @@
 use default
 
 digit_sum(value: int, base: int) -> int is
-    let remaining mut = value
-    let total mut = 0
+    walk(remaining: int, total: int) -> int =>
+        if remaining == 0 then total
+        else walk(remaining / base, total + remaining % base)
+        fi
 
-    while remaining > 0 do
-        total = total + remaining % base
-        remaining = remaining / base
-    od
-
-    total
+    walk(value, 0)
 si
 
 for (value, base) in [(1, 10), (1234, 10), (0xFE, 16), (0xF0E, 16)] do
