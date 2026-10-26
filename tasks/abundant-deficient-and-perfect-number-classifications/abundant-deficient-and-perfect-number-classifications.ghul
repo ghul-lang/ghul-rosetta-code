@@ -15,21 +15,9 @@ for divisor in 1::limit / 2 do
     od
 od
 
-let deficient mut = 0
-let perfect mut = 0
-let abundant mut = 0
-
-for n in 1::limit do
-    let sum = proper_divisor_sums[n]
-
-    if sum < n then
-        deficient = deficient + 1
-    elif sum == n then
-        perfect = perfect + 1
-    else
-        abundant = abundant + 1
-    fi
-od
+let deficient = 1::limit |> count(n => proper_divisor_sums[n] < n)
+let perfect = 1::limit |> count(n => proper_divisor_sums[n] == n)
+let abundant = 1::limit |> count(n => proper_divisor_sums[n] > n)
 
 write_line("of 1 to {limit}:")
 write_line("  deficient {deficient}")
