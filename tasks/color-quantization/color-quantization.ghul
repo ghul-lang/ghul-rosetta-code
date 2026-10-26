@@ -90,11 +90,10 @@ channel(c: Colour, axis: int) -> int =>
 spread(box: List[Weighted], axis: int) -> int =>
     let values =
         box |> map(w => channel(w.colour, axis)) in
-    (values |> reduce(0, int.max)) - (values |> reduce(255, int.min))
+    (values |> max()!) - (values |> min()!)
 
 widest(box: List[Weighted]) -> int =>
-    0..3 |> reduce(0, (best, axis) =>
-        if spread(box, axis) > spread(box, best) then axis else best fi)
+    0..3 |> max_by(axis => spread(box, axis))!
 
 score(box: List[Weighted]) -> int => spread(box, widest(box))
 
@@ -107,13 +106,15 @@ split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
             |> collect()
 
     let total = sorted |> sum_by(w => w.count)
-    let cut mut = 1
-    let seen mut = sorted[0].count
 
-    while cut < sorted.count - 1 /\ seen < total / 2 do
-        seen = seen + sorted[cut].count
-        cut = cut + 1
-    od
+    walk(cut: int, seen: int) -> int =>
+        if cut < sorted.count - 1 /\ seen < total / 2 then
+            walk(cut + 1, seen + sorted[cut].count)
+        else
+            cut
+        fi
+
+    let cut = walk(1, sorted[0].count)
 
     (
         sorted |> take(cut) |> collect(),
@@ -133,13 +134,10 @@ median_cut(colours: List[Weighted], count: int) -> List[Colour] is
     let boxes = LIST[List[Weighted]]([colours])
 
     while boxes.count < count do
-        let largest =
-            0..boxes.count |> reduce(0, (best, i) =>
-                if score(boxes[i]) > score(boxes[best]) then i else best fi)
+        let worst = boxes |> max_by(score)!
+        let (low, high) = split(worst)
 
-        let (low, high) = split(boxes[largest])
-
-        boxes[largest] = low
+        boxes[boxes.index_of(worst)] = low
         boxes.add(high)
     od
 
@@ -151,8 +149,7 @@ distance(a: Colour, b: Colour) -> int =>
     dr * dr + dg * dg + db * db
 
 nearest(palette: List[Colour], c: Colour) -> Colour =>
-    palette |> reduce(palette[0], (best, p) =>
-        if distance(p, c) < distance(best, c) then p else best fi)
+    palette |> min_by(p => distance(p, c))!
 
 picture().write("picture.png")
 
@@ -162,11 +159,7 @@ let pixels =
     [of(input.pixel(x, y))
         for y in 0..input.height for x in 0..input.width]
 
-let counts = MAP()
-
-for c in pixels do
-    counts[c] = if counts.contains_key(c) then counts[c] + 1 else 1 fi
-od
+let counts = pixels |> frequencies()
 
 let colours =
     counts
