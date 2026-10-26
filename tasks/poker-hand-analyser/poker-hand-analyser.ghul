@@ -39,16 +39,11 @@ classify(hand: string) -> string is
                 |> collect()
             let suits = cards |> map(c => c.suit) |> collect()
 
-            let counts = MAP()
-
-            for face in faces do
-                counts[face] = if counts.contains_key(face)
-                    then counts[face] + 1
-                    else 1
-                    fi
-            od
-
-            let groups = counts.values |> sort() |> collect()
+            let groups = faces
+                |> frequencies()
+                |> map(kv => kv.value)
+                |> sort()
+                |> collect()
             let is_flush = suits |> all(* =~ suits[0])
 
             let is_straight =
