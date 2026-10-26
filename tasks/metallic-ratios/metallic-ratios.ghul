@@ -5,17 +5,8 @@ let names = [
     "Nickel", "Aluminium", "Iron", "Tin", "Lead"
 ]
 
-lucas(b: bigint) -> bigint{} is
-    let (x, y) mut = (1n, 1n)
-
-    yield x
-
-    for _ in from(0) do
-        yield y
-
-        (x, y) = (y, b * y + x)
-    od
-si
+lucas(b: bigint) -> bigint{} =>
+    stream((1n, 1n), ((x, y)) => x || (y, b * y + x))
 
 // successive ratios of the sequence, each truncated to the given number of
 // places, until one repeats the one before it
