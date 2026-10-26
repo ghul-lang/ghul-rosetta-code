@@ -11,15 +11,9 @@ by_convolution(n: int) -> long is
 si
 
 // C(n) = 2 * (2n - 1) * C(n - 1) / (n + 1)
-by_recurrence(n: int) -> long is
-    let c mut = 1L
-
-    for k in 1::n do
-        c = 2L * (2L * long(k) - 1L) * c / (long(k) + 1L)
-    od
-
-    c
-si
+by_recurrence(n: int) -> long =>
+    1::n |> reduce(1L, (c, k) =>
+        2L * (2L * long(k) - 1L) * c / (long(k) + 1L))
 
 for n in 0::14 do
     write_line("{n,2}: {by_convolution(n),8} {by_recurrence(n),8}")
