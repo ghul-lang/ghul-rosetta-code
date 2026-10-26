@@ -75,41 +75,28 @@ shortest_from(
     source: int
 ) -> Collections.List[double?] is
     let size = graph.count
-    let distance = LIST()
-
-    for _ in 0..size do
-        distance.add(null)
-    od
+    let distance = repeat(cast double?(null), size) |> collect_mutable()
 
     distance[source] = 0.0
 
     let settled = repeat(false, size) |> collect_mutable()
 
-    for _ in 0..size do
-        let next: int? mut = null
+    while let u = 0..size
+        |> filter(c => !settled[c] /\ distance[c]?)
+        |> min_by(c => distance[c]!)
+    do
+        settled[u] = true
 
-        for candidate in 0..size do
-            if !settled[candidate] /\ distance[candidate]? then
-                if !next? \/ distance[candidate]! < distance[next]! then
-                    next = candidate
+        for v in 0..size do
+            if let weight = graph[u][v] then
+                let through =
+                    distance[u]! + weight + potential[u] - potential[v]
+
+                if !distance[v]? \/ through < distance[v]! then
+                    distance[v] = through
                 fi
             fi
         od
-
-        if let u = next then
-            settled[u] = true
-
-            for v in 0..size do
-                if let weight = graph[u][v] then
-                    let through =
-                        distance[u]! + weight + potential[u] - potential[v]
-
-                    if !distance[v]? \/ through < distance[v]! then
-                        distance[v] = through
-                    fi
-                fi
-            od
-        fi
     od
 
     let result = LIST()
