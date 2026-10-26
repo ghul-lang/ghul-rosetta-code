@@ -1,9 +1,6 @@
 use default
 
-let found =
-    for n in 1::100000 do
-        if n * n - (n - 1) * (n - 1) > 1000 then break n fi
-    od
+let found = from(1) |> find(n => n * n - (n - 1) * (n - 1) > 1000)
 
 if let n = found then
     let square = n * n
