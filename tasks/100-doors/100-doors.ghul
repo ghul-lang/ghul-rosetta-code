@@ -1,10 +1,12 @@
 use default
 
-// pass p toggles every p-th door, so a door ends open when an odd number of
-// passes have touched it
-passes_touching(door: int) -> int =>
-    1::100 |> count(pass => door % pass == 0)
+// one pass toggles every door whose number is a multiple of the pass
+toggle(doors: bool[], pass: int) -> bool[] =>
+    [if (i + 1) % pass == 0 then !doors[i] else doors[i] fi for i in 0..100]
 
-let open_doors = 1::100 |> filter(door => passes_touching(door) % 2 == 1)
+let closed = repeat(false, 100) |> collect()
+let doors = 1::100 |> reduce(closed, toggle)
+
+let open_doors = 1::100 |> filter(door => doors[door - 1])
 
 write_line("open doors: {$open_doors}")
