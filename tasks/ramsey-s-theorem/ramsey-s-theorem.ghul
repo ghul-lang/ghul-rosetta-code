@@ -31,10 +31,12 @@ quads() -> (int, int, int, int){} is
 si
 
 uniform(q: (int, int, int, int)) -> bool =>
-    let (a, b, c, d) = q in
-    let pairs = [(a, b), (a, c), (a, d), (b, c), (b, d), (c, d)] in
-    let links = pairs |> filter((x, y) => linked(x, y)) |> count() in
-    links == 0 \/ links == 6
+    let
+        (a, b, c, d) = q,
+        pairs = [(a, b), (a, c), (a, d), (b, c), (b, d), (c, d)],
+        links = pairs |> filter((x, y) => linked(x, y)) |> count()
+    in
+        links == 0 \/ links == 6
 
 let bad = quads() |> filter(uniform) |> count()
 
