@@ -30,6 +30,6 @@ write_line("   N      length            entropy")
 words()
     |> take(37)
     |> index(1)
-    |> each(word =>
-        (let bits = entropy(word.value)
-         write_line("{word.index,4}{word.value.length,12}{bits,20:F15}")))
+    |> each(word => (
+        let bits = entropy(word.value)
+        write_line("{word.index,4}{word.value.length,12}{bits,20:F15}")))
