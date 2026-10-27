@@ -1,62 +1,46 @@
 use default
 use IO.Std.write
 
-let stream mut = ""
-let position mut = 0
-
-read() -> char is
-    let character = stream[position]
-
-    position = position + 1
-
-    character
-si
-
 is_letter(character: char) -> bool =>
     character >= 'a' /\ character <= 'z'
 
-forwards() -> char is
-    let character mut = read()
-
-    while is_letter(character) do
-        write("{character}")
-        character = read()
-    od
-
-    character
-si
-
-backwards() -> char => (
-    let character = read() in
+forwards(input: IO.TextReader) -> char =>
+    let character = char(input.read()) in
     if is_letter(character) then
-        let delimiter = backwards()
-
         write("{character}")
+        forwards(input)
+    else
+        character
+    fi
 
+// each letter waits on the call stack until the rest of the word is written
+backwards(input: IO.TextReader) -> char =>
+    let character = char(input.read()) in
+    if is_letter(character) then
+        let delimiter = backwards(input)
+        write("{character}")
         delimiter
     else
         character
     fi
-)
 
-solve(text: string) is
-    stream = text
-    position = 0
+words(input: IO.TextReader, reversing: bool) is
+    let delimiter =
+        if reversing then backwards(input) else forwards(input) fi
 
-    let reversing mut = false
-    let done mut = false
+    write("{delimiter}")
 
-    while !done do
-        let delimiter = if reversing then backwards() else forwards() fi
-
-        write("{delimiter}")
-
-        done = delimiter == '.'
-        reversing = !reversing
-    od
-
-    write_line("")
+    if delimiter != '.' then
+        words(input, !reversing)
+    fi
 si
 
-solve("what,is,the;meaning,of:life.")
-solve("we,are;not,in,kansas;any,more.")
+let texts = [
+    "what,is,the;meaning,of:life.",
+    "we,are;not,in,kansas;any,more."
+]
+
+for text in texts do
+    words(IO.StringReader(text), false)
+    write_line("")
+od

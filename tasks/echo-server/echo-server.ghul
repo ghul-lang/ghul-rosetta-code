@@ -4,90 +4,35 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Thread
 
-let port = 12321
-
-let log = Collections.LIST[string]()
-let serving = Collections.LIST()
-
-note(what: string) is
-    System.Threading.Monitor.enter(log)
-    log.add(what)
-    System.Threading.Monitor.exit(log)
-si
-
-serve(client: TcpClient, number: int) is
+echo(client: TcpClient, number: int, log: (string) -> void) is
     let stream = client.get_stream()
-    let reader = IO.StreamReader(stream)
-    let writer = IO.StreamWriter(stream)
+    let reader = IO.StreamReader(stream), writer = IO.StreamWriter(stream)
 
     writer.auto_flush = true
 
-    note("client {number} connected")
+    log("client {number} connected")
 
     while let line = reader.read_line() do
-        note("client {number} said {line}")
+        log("client {number} said {line}")
         writer.write("{line}\r\n")
     od
 
-    note("client {number} went away")
+    log("client {number} went away")
 
     client.dispose()
 si
 
-let listener = TcpListener(IPAddress.loopback, port)
+// each client gets its own thread, so one that stalls holds up no other
+serve(listener: TcpListener, log: (string) -> void) is
+    for number in from(1) do
+        let client = listener.accept_tcp_client()
+
+        Thread(() => echo(client, number, log)).start()
+    od
+si
+
+let listener = TcpListener(IPAddress.loopback, 12321)
 
 listener.start()
 
-let accepting =
-    Thread(
-        () is
-            let accepted mut = 0
-
-            while accepted < 2 do
-                let client = listener.accept_tcp_client()
-
-                accepted = accepted + 1
-
-                let number = accepted
-                let thread = Thread(() => serve(client, number))
-
-                System.Threading.Monitor.enter(log)
-                serving.add(thread)
-                System.Threading.Monitor.exit(log)
-
-                thread.start()
-            od
-        si
-    )
-
-accepting.start()
-
-talk(number: int, lines: string[]) is
-    let client = TcpClient("127.0.0.1", port)
-    let stream = client.get_stream()
-    let reader = IO.StreamReader(stream)
-    let writer = IO.StreamWriter(stream)
-
-    writer.auto_flush = true
-
-    for line in lines do
-        writer.write("{line}\r\n")
-        write_line("client {number} heard {reader.read_line()}")
-    od
-
-    client.dispose()
-si
-
-talk(1, ["hello", "again"])
-talk(2, ["and me"])
-
-accepting.join()
-listener.stop()
-
-for thread in serving do
-    thread.join()
-od
-
-for line in log |> sort() do
-    write_line(line)
-od
+serve(listener, line => write_line(line))

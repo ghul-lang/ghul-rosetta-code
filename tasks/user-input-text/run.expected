@@ -1,3 +1,7 @@
 string: hello
+integer: lots
+please enter 75000
+integer: 7500
+please enter 75000
 integer: 75000
 read the string hello and the integer 75000

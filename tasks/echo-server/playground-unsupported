@@ -1,1 +1,1 @@
-it listens on a TCP port and connects to itself, and the playground has no network
+it listens on a TCP port, and the playground has no network

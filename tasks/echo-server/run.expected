@@ -1,10 +1,10 @@
-client 1 heard hello
-client 1 heard again
-client 2 heard and me
+client 2 heard hello
+client 2 heard again
+client 1 heard half a line
 client 1 connected
-client 1 said again
-client 1 said hello
+client 1 said half a line
 client 1 went away
 client 2 connected
-client 2 said and me
+client 2 said again
+client 2 said hello
 client 2 went away
