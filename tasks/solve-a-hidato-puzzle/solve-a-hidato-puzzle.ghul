@@ -90,7 +90,7 @@ si
 show()
 write_line()
 
-let start = board.index_of(1)
+let start = board |> find_index(* == 1)!
 
 if place(start / columns, start % columns, 1) then
     show()

@@ -21,7 +21,7 @@ patience_sort(values: List[int]) -> int{} is
         pile.remove_at(pile.count - 1)
 
         if pile.count == 0 then
-            piles.remove_at(piles.index_of(pile))
+            piles.remove(pile)
         fi
     od
 si

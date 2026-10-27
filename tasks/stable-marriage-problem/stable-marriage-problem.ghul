@@ -48,7 +48,7 @@ let women_preferences = [
 
 
 rank(preferences: string[], name: string) -> int =>
-    System.Array.index_of(preferences, name)
+    preferences |> find_index(* =~ name)!
 
 prefers(
     preferences: Map[string, string[]],

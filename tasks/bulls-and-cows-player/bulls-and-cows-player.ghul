@@ -6,14 +6,14 @@ use Score = (bulls: int, cows: int)
 score(guess: string, secret: string) -> Score =>
     let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
     let shared =
-        0..4 |> filter(i => secret.index_of(guess[i]) >= 0) |> count() in
+        0..4 |> filter(i => secret.contains(guess[i])) |> count() in
     (bulls = bulls, cows = shared - bulls)
 
 let candidates mut =
     (1234::9876)
         |> map(n => "{n}")
         |> filter(s =>
-            s.index_of('0') < 0 /\
+            !s.contains('0') /\
             0..4 |> all(i => s.last_index_of(s[i]) == i))
         |> collect()
 

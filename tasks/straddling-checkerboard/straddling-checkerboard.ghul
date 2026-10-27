@@ -58,7 +58,7 @@ class CHECKERBOARD is
         while i < digits.length do
             let row mut = 0
 
-            if _blanks.index_of(digits[i]) >= 0 then
+            if _blanks.contains(digits[i]) then
                 row = _blanks.index_of(digits[i]) + 1
                 i = i + 1
             fi

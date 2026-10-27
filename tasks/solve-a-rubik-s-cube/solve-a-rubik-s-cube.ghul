@@ -175,12 +175,12 @@ parse(cubies: string) -> int[] is
     for (i, cubie) in cubies.split([' ']) |> index() do
         let twisted mut = cubie
 
-        while goal.index_of(twisted) < 0 do
+        while !(goal |> any(* =~ twisted)) do
             twisted = "{twisted[1..<0]}{twisted[0]}"
             state[i + 20] = state[i + 20] + 1
         od
 
-        state[i] = goal.index_of(twisted)
+        state[i] = goal |> find_index(* =~ twisted)!
     od
 
     state.to_array()

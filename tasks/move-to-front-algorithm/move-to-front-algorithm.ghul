@@ -20,7 +20,7 @@ encode(text: string) -> List[int] is
     let indices = LIST(text.length)
 
     for symbol in text do
-        let at = symbols.index_of(symbol)
+        let at = symbols |> find_index(* == symbol)!
 
         indices.add(at)
         move_to_front(symbols, at)

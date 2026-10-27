@@ -7,7 +7,7 @@ run(lines: List[string]) is
     let width = lines |> map(l => l.length) |> reduce(0, int.max)
     let at_start =
         (0..lines.count)
-            |> find(y => lines[y].index_of('$') >= 0)
+            |> find(y => lines[y].contains('$'))
 
     let ip mut =
         if let y = at_start then (x = lines[y].index_of('$'), y = y)

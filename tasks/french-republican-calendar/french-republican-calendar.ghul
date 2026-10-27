@@ -46,14 +46,14 @@ to_gregorian(republican: string) -> DateTime is
     let words = republican.split([' '])
     let year_text = words[words.count - 1]
     let year = int.parse(year_text)
-    let month = System.Array.index_of(republican_months, words[1])
+    let month = republican_months |> find_index(* =~ words[1])
     let day_of_year =
-        if month >= 0 then
+        if month? then
             month * 30 + int.parse(words[0]) - 1
         else
             let name = republican[0..<year_text.length + 1]
 
-            360 + System.Array.index_of(sansculottides, name)
+            360 + (sansculottides |> find_index(* =~ name))!
         fi
 
     let days = 1..year |> sum_by(days_in)

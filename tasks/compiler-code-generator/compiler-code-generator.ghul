@@ -50,7 +50,7 @@ slot(names: LIST[string], name: string) -> int is
         names.add(name)
     fi
 
-    names.index_of(name)
+    names |> find_index(* =~ name)!
 si
 
 let operators = MAP[string, string]()
