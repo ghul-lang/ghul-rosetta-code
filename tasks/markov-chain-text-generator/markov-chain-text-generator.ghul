@@ -36,7 +36,7 @@ generate(
             let word = choices[random.next(0, choices.count)]
 
             yield word
-            yield in chain((prefix |> skip(1) ++ [word]) |> collect())
+            yield in chain(((prefix |> skip(1)) ++ [word]) |> collect())
         fi
     si
 

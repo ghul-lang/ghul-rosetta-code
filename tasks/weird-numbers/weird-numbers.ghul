@@ -1,23 +1,11 @@
 use default
 
-proper_divisors(n: int) -> int{} is
-    let divisors = LIST([1])
-    let candidate mut = 2
-
-    while candidate * candidate <= n do
-        if n % candidate == 0 then
-            divisors.add(candidate)
-
-            if candidate != n / candidate then
-                divisors.add(n / candidate)
-            fi
-        fi
-
-        candidate = candidate + 1
-    od
-
-    divisors
-si
+proper_divisors(n: int) -> int{} =>
+    [1] ++ (
+        from(2)
+            |> take_while(d => d * d <= n)
+            |> filter(d => n % d == 0)
+            |> flat_map(d => if d == n / d then [d] else [d, n / d] fi))
 
 sums_to(divisors: List[int], target: int) -> bool =>
     case (divisors, target)

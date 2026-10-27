@@ -8,24 +8,20 @@ step(value: long) -> long =>
         long(cast(value) * sqrt(cast(value)))
     fi
 
-stats(start: long) -> (int, long, int) => (
-    let current mut = start
-    let terms mut = 0
-    let highest mut = start
-    let at mut = 0
+sequence(start: long) -> long{} is
+    yield start
 
-    while current != 1L do
-        current = step(current)
-        terms = terms + 1
+    if start != 1L then
+        yield in sequence(step(start))
+    fi
+si
 
-        if current > highest then
-            highest = current
-            at = terms
-        fi
-    od
-
-    (terms, highest, at)
-)
+stats(start: long) -> (int, long, int) =>
+    let
+        terms = sequence(start) |> collect(),
+        highest = terms |> max()!
+    in
+        (terms.count - 1, highest, terms |> find_index(* == highest)!)
 
 write_line("  n   l                h  i")
 
