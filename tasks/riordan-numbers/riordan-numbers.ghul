@@ -1,34 +1,24 @@
 use default
 
-riordan(count: int) -> bigint{} is
-    let previous mut = 1n
-    let current mut = 0n
+riordan() -> bigint{} =>
+    stream(
+        (0, 1n, 0n),
+        (index, previous, current) =>
+            let following =
+                cast(index + 1) * (2n * current + 3n * previous) /
+                    cast(index + 3) in
+            previous || (index + 1, current, following))
 
-    yield previous
-
-    for index in 1..count do
-        yield current
-
-        let following =
-            cast(index) *
-            (2n * current + 3n * previous) /
-            cast(index + 2)
-
-        previous = current
-        current = following
-    od
-si
-
-let first = riordan(32) |> collect()
+let grid = riordan() |> take(32) |> collect()
 
 for row in 0..8 do
-    let line = first[row * 4..row * 4 + 4] |> map(term => "{term,14}")
+    let line = grid[row * 4..row * 4 + 4] |> map(term => "{term,14}")
 
     write_line(line |> join(""))
 od
 
 digits(index: int) -> int =>
-    (riordan(index + 1) |> collect())[index].to_string().length
+    (riordan() |> skip(index) |> first())!.to_string().length
 
 write_line("")
 write_line("the 1,000th Riordan number has {digits(1_000)} digits")
