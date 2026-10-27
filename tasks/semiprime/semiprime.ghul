@@ -1,25 +1,20 @@
 use default
 
-is_semiprime(n: int) -> bool => (
-    let rest mut = n
-    let count mut = 0
-    let divisor mut = 2
-
-    while divisor * divisor <= rest /\ count < 3 do
-        while rest % divisor == 0 do
-            rest = rest / divisor
-            count = count + 1
-        od
-
-        divisor = divisor + 1
-    od
-
-    if rest > 1 then
-        count = count + 1
+prime_factors(n: int, divisor: int) -> int{} is
+    if n > 1 then
+        if divisor * divisor > n then
+            yield n
+        elif n % divisor == 0 then
+            yield divisor
+            yield in prime_factors(n / divisor, divisor)
+        else
+            yield in prime_factors(n, divisor + 1)
+        fi
     fi
+si
 
-    count == 2
-)
+is_semiprime(n: int) -> bool =>
+    prime_factors(n, 2) |> take(3) |> count() == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()
 

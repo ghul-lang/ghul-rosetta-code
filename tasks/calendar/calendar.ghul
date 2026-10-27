@@ -12,7 +12,6 @@ let gap = "  "
 centre(text: string, width: int) -> string =>
     "{string(' ', (width - text.length) / 2)}{text}".pad_right(width)
 
-// eight lines for every month: its name, the day names, and six weeks
 month_lines(year: int, month: int) -> string[] =>
     let
         offset = cast int(System.DateTime(year, month, 1).day_of_week),
@@ -50,7 +49,6 @@ calendar(year: int, page_width: int) -> string{} is
     od
 si
 
-// a line printer of the time: 132 columns
 for line in calendar(1969, 132) do
     write_line(line)
 od

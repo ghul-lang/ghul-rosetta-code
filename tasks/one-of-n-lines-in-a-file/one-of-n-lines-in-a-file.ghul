@@ -3,17 +3,9 @@ use System.Random
 
 let chance = Random(20260921)
 
-one_of_n(n: int) -> int => (
-    let chosen mut = 1
-
-    for line in 2::n do
-        if chance.next(line) == 0 then
-            chosen = line
-        fi
-    od
-
-    chosen
-)
+one_of_n(n: int) -> int =>
+    2::n |> reduce(1, (chosen, line) =>
+        if chance.next(line) == 0 then line else chosen fi)
 
 let lines = 10
 let trials = 1000000

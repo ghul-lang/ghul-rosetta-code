@@ -21,19 +21,20 @@ is_wilson(p: int, n: int, factorials: List[long], modulus: long) -> bool =>
     let product = factorials[n - 1] * factorials[p - n] % modulus in
     (product - sign + modulus) % modulus == 0L
 
+orders_of(p: int) -> List[int] =>
+    let
+        modulus = long(p) * long(p),
+        factorials = factorials_mod(p, modulus)
+    in
+        1::orders
+            |> filter(n => n <= p /\ is_wilson(p, n, factorials, modulus))
+            |> collect()
 
-let wilson = (1::orders) |> map(_ => LIST()) |> collect()
+let found = 2..limit |> filter(is_prime) |> map(p => (p, orders_of(p)))
+    |> collect()
 
-for p in (2..limit) |> filter(is_prime) do
-    let modulus = long(p) * long(p)
-    let factorials = factorials_mod(p, modulus)
-
-    for n in 1::orders do
-        if n <= p /\ is_wilson(p, n, factorials, modulus) then
-            wilson[n - 1].add(p)
-        fi
-    od
-od
+let wilson =
+    [[p for (p, ns) in found if ns |> contains(n)] for n in 1::orders]
 
 write_line("Wilson primes below {limit}:")
 write_line(" n  primes")

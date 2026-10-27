@@ -1,39 +1,17 @@
 use default
 
-zigzag(n: int) -> LIST[int]{} is
-    let cells = 0..n
-        |> map(_ => repeat(0, n) |> collect_mutable())
-        |> collect()
+zigzag_order(n: int) -> (int, int){} =>
+    [(row, column) for row in 0..n for column in 0..n]
+        |> sort_by(((row, column)) =>
+            let diagonal = row + column in
+            diagonal * n + if diagonal % 2 == 0 then column else row fi)
 
-    let row mut = 0
-    let column mut = 0
-
-    for value in 0..(n * n) do
-        cells[row][column] = value
-
-        if (row + column) % 2 == 0 then
-            if column == n - 1 then
-                row = row + 1
-            elif row == 0 then
-                column = column + 1
-            else
-                row = row - 1
-                column = column + 1
-            fi
-        else
-            if row == n - 1 then
-                column = column + 1
-            elif column == 0 then
-                row = row + 1
-            else
-                row = row + 1
-                column = column - 1
-            fi
-        fi
-    od
-
-    cells
-si
+zigzag(n: int) -> int[][] =>
+    let
+        order = zigzag_order(n) |> collect(),
+        position = MAP(0..order.count |> map(i => (order[i], i)))
+    in
+        [[position[(row, column)] for column in 0..n] for row in 0..n]
 
 let n = 5
 

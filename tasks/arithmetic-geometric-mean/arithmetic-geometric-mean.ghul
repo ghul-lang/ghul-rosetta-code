@@ -1,18 +1,9 @@
 use default
 use System.Math.*
 
-agm(a0: double, g0: double) -> double => (
-    let a mut = a0
-    let g mut = g0
-
-    while abs(a - g) > 1.0e-15 * abs(a) do
-        let next_a = (a + g) / 2.0
-
-        g = sqrt(a * g)
-        a = next_a
-    od
-
-    a
-)
+agm(a: double, g: double) -> double =>
+    if abs(a - g) <= 1.0e-15 * abs(a) then a
+    else agm((a + g) / 2.0, sqrt(a * g))
+    fi
 
 write_line("{agm(1.0, 1.0 / sqrt(2.0))}")

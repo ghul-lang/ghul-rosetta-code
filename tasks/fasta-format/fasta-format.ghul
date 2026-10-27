@@ -24,7 +24,6 @@ records(lines: string{}) -> Record{} is
     fi
 si
 
-// read_lines streams the file, so only one record is held at a time
 for record in records(IO.File.read_lines("example.fasta")) do
     write_line("{record.name}: {record.sequence}")
 od

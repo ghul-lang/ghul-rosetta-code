@@ -31,7 +31,6 @@ show(url: string, indent: string) is
         for (name, value) in parts do
             write_line("{indent}{name} = {value}")
 
-            // jdbc and the like carry a whole URL as their path
             if name =~ "path" /\ value.contains("://") then
                 show(value, "{indent}    ")
             fi

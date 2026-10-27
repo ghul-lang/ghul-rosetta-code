@@ -1,47 +1,19 @@
 use default
-use System.Reflection.Emit
-use System.Runtime.InteropServices
+use System.Runtime.InteropServices.DllImport
+use System.Runtime.InteropServices.Marshal
 
-bind(
-    library: word,
-    name: string,
-    result: System.Type?
-) -> System.Delegate is
-    let pointer = System.Type.get_type("System.IntPtr")!
-    let address = NativeLibrary.get_export(library, name)
+class LIBC is
+    @DllImport("libc")
+    strdup(text: string) -> word static
 
-    let stub = DynamicMethod(name, result, [pointer])
+    @DllImport("libc")
+    free(pointer: word) static
 
-    let il = stub.get_i_l_generator()
-    il.emit(OpCodes.ldarg_0)
-    il.emit(OpCodes.ldc_i8, long(address))
-    il.emit(OpCodes.conv_i)
-    il.emit_calli(
-        OpCodes.calli, CallingConvention.CDECL, result, [pointer])
-    il.emit(OpCodes.ret)
-
-    if result? then
-        let func = System.Type.get_type("System.Func`2")!
-
-        return stub.create_delegate(
-            func.make_generic_type([pointer, result]))
-    fi
-
-    let action = System.Type.get_type("System.Action`1")!
-
-    return stub.create_delegate(action.make_generic_type([pointer]))
+    init() is si
 si
 
-let libc = NativeLibrary.load("libc.so.6")
-
-let strdup = cast (word) -> word (
-    bind(libc, "strdup", System.Type.get_type("System.IntPtr")))
-let free = cast (word) -> void (bind(libc, "free", null))
-
-let source = Marshal.string_to_h_global_ansi("Hello World!")
-let copy = strdup(source)
+let copy = LIBC.strdup("Hello World!")
 
 write_line(Marshal.ptr_to_string_ansi(copy))
 
-free(copy)
-Marshal.free_h_global(source)
+LIBC.free(copy)

@@ -16,15 +16,10 @@ rk4(
 
 exact(t: double) -> double => Math.pow(t * t + 4.0, 2.0) / 16.0
 
-let step = rk4((t, y) => t * Math.sqrt(y), 0.1)
-let point mut = (0.0, 1.0)
+let advance = rk4((t, y) => t * Math.sqrt(y), 0.1)
 
-for n in 0::100 do
-    let (t, y) = point
+let points = stream((0.0, 1.0), point => point || advance(point))
 
-    if n % 10 == 0 then
-        write_line("y({t,4:F1}) = {y,12:F6}  error = {y - exact(t):E6}")
-    fi
-
-    point = step(point)
+for (t, y) in points |> take(101) |> step(10) do
+    write_line("y({t,4:F1}) = {y,12:F6}  error = {y - exact(t):E6}")
 od

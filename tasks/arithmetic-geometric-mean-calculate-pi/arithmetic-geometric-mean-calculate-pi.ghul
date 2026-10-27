@@ -1,55 +1,38 @@
 use default
 
+use State = (a: bigint, g: bigint, total: bigint, weight: bigint)
+
 let digits = 100
 let guard = 12
 
-power_of_ten(n: int) -> bigint => (
-    let value mut = 1n
+power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
 
-    for _ in 0..n do
-        value = value * 10n
-    od
+integer_sqrt(n: bigint) -> bigint =>
+    if n < 2n then n else newton(n, n) fi
 
-    value
-)
-
-integer_sqrt(n: bigint) -> bigint is
-    if n < 2n then
-        return n
-    fi
-
-    let root mut = n
-    let next mut = (root + 1n) / 2n
-
-    while next < root do
-        root = next
-        next = (root + n / root) / 2n
-    od
-
-    return root
-si
+newton(n: bigint, root: bigint) -> bigint =>
+    let next = (root + n / root) / 2n in
+    if next < root then newton(n, next) else root fi
 
 let scale = power_of_ten(digits + guard)
 
-pi(rounds: int) -> bigint is
-    let a mut = scale
-    let g mut = integer_sqrt(scale * scale / 2n)
-    let total mut = 0n
-    let weight mut = 4n
+step(state: State) -> State =>
+    let
+        (a, g, total, weight) = state,
+        next_a = (a + g) / 2n,
+        next_g = integer_sqrt(a * g)
+    in
+        (next_a, next_g,
+            total + weight * (next_a * next_a - next_g * next_g) / scale,
+            weight * 2n)
 
-    for _ in 1::rounds do
-        let next_a = (a + g) / 2n
-        let next_g = integer_sqrt(a * g)
-
-        a = next_a
-        g = next_g
-
-        total = total + weight * (a * a - g * g) / scale
-        weight = weight * 2n
-    od
-
-    return 4n * a * a / (scale - total)
-si
+pi(rounds: int) -> bigint =>
+    let
+        start = (scale, integer_sqrt(scale * scale / 2n), 0n, 4n),
+        (a, _, total, _) =
+            1::rounds |> reduce(start, (state, _) => step(state))
+    in
+        4n * a * a / (scale - total)
 
 let text = (pi(10) / power_of_ten(guard)).to_string()
 

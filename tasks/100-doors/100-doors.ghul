@@ -1,15 +1,10 @@
 use default
 
-let doors = repeat(false, 100) |> collect_mutable()
+toggle(doors: bool[], pass: int) -> bool[] =>
+    [if (i + 1) % pass == 0 then !doors[i] else doors[i] fi for i in 0..100]
 
-for pass in 1::100 do
-    let door mut = pass
-
-    while door <= 100 do
-        doors[door - 1] = !doors[door - 1]
-        door = door + pass
-    od
-od
+let closed = repeat(false, 100) |> collect()
+let doors = 1::100 |> reduce(closed, toggle)
 
 let open_doors = 1::100 |> filter(door => doors[door - 1])
 

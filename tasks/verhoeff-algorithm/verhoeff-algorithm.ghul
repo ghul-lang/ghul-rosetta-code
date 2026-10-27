@@ -26,14 +26,9 @@ let p = [
     [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
 ]
 
-// Runs the digits from the right through the permutation and the
-// dihedral group, showing each step when asked to.
-verhoeff(digits: string, show: bool) -> int is
-    if show then
-        write_line(" i  ni  p[i, ni]  c")
-        write_line("-------------------")
-    fi
+use Step = (i: int, n: int, permuted: int, c: int)
 
+steps(digits: string) -> Step{} is
     let c mut = 0
 
     for (i, ch) in digits.to_char_array() |> reverse() |> index() do
@@ -42,24 +37,31 @@ verhoeff(digits: string, show: bool) -> int is
 
         c = d[c][permuted]
 
-        if show then
-            write_line("{i,2}  {n}  {permuted,7}  {c,4}")
-        fi
+        yield (i = i, n = n, permuted = permuted, c = c)
     od
-
-    c
 si
 
-check_digit(number: string, show: bool) -> int is
-    if show then
-        write_line("Check digit calculations for {number}")
-        write_line("")
-    fi
+checksum(digits: string) -> int =>
+    steps(digits) |> reduce(0, (_, step) => step.c)
 
-    let c = verhoeff("{number}0", show)
+show_steps(digits: string) is
+    write_line(" i  ni  p[i, ni]  c")
+    write_line("-------------------")
+
+    for step in steps(digits) do
+        write_line("{step.i,2}  {step.n}  {step.permuted,7}  {step.c,4}")
+    od
+si
+
+for number in ["236", "12345", "123456789012"] do
+    let show = number.length < 6
+    let c = checksum("{number}0")
     let digit = inverse[c]
 
     if show then
+        write_line("Check digit calculations for {number}")
+        write_line("")
+        show_steps("{number}0")
         write_line("")
         write_line("inverse[{c}] = {digit}")
         write_line("")
@@ -68,31 +70,18 @@ check_digit(number: string, show: bool) -> int is
     write_line("The check digit for {number} is {digit}")
     write_line("")
 
-    digit
-si
+    for candidate in ["{number}{digit}", "{number}9"] do
+        if show then
+            write_line("Validation calculations for {candidate}")
+            write_line("")
+            show_steps(candidate)
+            write_line("")
+        fi
 
-validate(number: string, show: bool) is
-    if show then
-        write_line("Validation calculations for {number}")
+        let verdict =
+            if checksum(candidate) == 0 then "correct" else "incorrect" fi
+
+        write_line("The validation for {candidate} is {verdict}.")
         write_line("")
-    fi
-
-    let valid = verhoeff(number, show) == 0
-
-    if show then
-        write_line("")
-    fi
-
-    let verdict = if valid then "correct" else "incorrect" fi
-
-    write_line("The validation for {number} is {verdict}.")
-    write_line("")
-si
-
-for number in ["236", "12345", "123456789012"] do
-    let show = number.length < 6
-    let digit = check_digit(number, show)
-
-    validate("{number}{digit}", show)
-    validate("{number}9", show)
+    od
 od

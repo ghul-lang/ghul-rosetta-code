@@ -34,18 +34,12 @@ below_thousand(value: int) -> string =>
         "{small[value / 100]} hundred and {below_hundred(value % 100)}"
     fi
 
-groups(value: long) -> List[int] => (
-    let parts = LIST()
-    let rest mut = value
-
-    while rest > 0L do
-        parts.add(int(rest % 1000L))
-
-        rest = rest / 1000L
-    od
-
-    parts
-)
+groups(value: long) -> int{} is
+    if value > 0L then
+        yield int(value % 1000L)
+        yield in groups(value / 1000L)
+    fi
+si
 
 cardinal(value: long) -> string is
     if value < 0L then
@@ -54,21 +48,16 @@ cardinal(value: long) -> string is
         return small[0]
     fi
 
-    let parts = groups(value)
-    let named = LIST()
+    let parts = groups(value) |> collect()
 
-    let at mut = parts.count - 1
-
-    while at >= 0 do
-        if parts[at] != 0 then
-            let name = below_thousand(parts[at])
-
-            named.add(
-                if at == 0 then name else "{name} {scales[at - 1]}" fi)
-        fi
-
-        at = at - 1
-    od
+    let named = parts
+        |> index()
+        |> filter(((_, group)) => group != 0)
+        |> map(((at, group)) =>
+            let name = below_thousand(group) in
+            if at == 0 then name else "{name} {scales[at - 1]}" fi)
+        |> reverse()
+        |> collect()
 
     if named.count > 1 /\ parts[0] != 0 /\ parts[0] < 100 then
         let last = named[named.count - 1]

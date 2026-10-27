@@ -1,22 +1,8 @@
 use default
 
-let small_primes = LIST()
-let sieve_limit = 1_000
-
-let marked = repeat(false, sieve_limit + 1) |> collect_mutable()
-
-for candidate in 2::sieve_limit do
-    if !marked[candidate] then
-        small_primes.add(candidate)
-
-        let multiple mut = candidate * candidate
-
-        while multiple <= sieve_limit do
-            marked[multiple] = true
-            multiple = multiple + candidate
-        od
-    fi
-od
+let small_primes = 2::1_000
+    |> filter(n => 2::n - 1 |> all(d => d * d > n \/ n % d != 0))
+    |> collect()
 
 probably_prime(value: long) -> bool is
     for small in small_primes do
@@ -56,19 +42,10 @@ probably_prime(value: long) -> bool is
     true
 si
 
-cubans() -> long{} is
-    let n mut = 0L
-
-    do
-        n = n + 1L
-
-        let candidate = 3L * n * n + 3L * n + 1L
-
-        if probably_prime(candidate) then
-            yield candidate
-        fi
-    od
-si
+cubans() -> long{} =>
+    from(1L)
+        |> map(n => 3L * n * n + 3L * n + 1L)
+        |> filter(probably_prime)
 
 write_line("the first 200 cuban primes:")
 
