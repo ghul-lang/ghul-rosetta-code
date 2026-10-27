@@ -34,7 +34,7 @@ si
 [("1234", "1224533324"),
  ("thisisatest", "testing123testing"),
  ("XMJYAUZ", "MZJAWXU")]
-    |> each(pair =>
-        (let (left, right) = pair
-         write_line("{left} and {right}:"
-             " {longest_common_subsequence(left, right)}")))
+    |> each(pair => (
+        let (left, right) = pair
+        write_line("{left} and {right}:"
+            " {longest_common_subsequence(left, right)}")))
