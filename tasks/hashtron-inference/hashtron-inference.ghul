@@ -19,17 +19,22 @@ hash(n: uint, salt: uint, max: uint) -> uint => (
     uint((ulong(m) * ulong(max)) >> 32)
 )
 
-infer_bit(command: uint, bit: int, program: List[Stage]) -> bool =>
-    let input = command | (uint(bit) << 16), first_stage = program[0] in
+infer_bit(command: uint, bit: int, program: List[Stage]) -> bool => (
+    let
+        input = command | (uint(bit) << 16), first_stage = program[0]
+
     let start = (
         input = hash(input, first_stage.salt, first_stage.max),
-        room = first_stage.max) in
+        room = first_stage.max)
+
     let result = program
         |> skip(1)
         |> reduce(start, (state, stage) =>
             let room = state.room - stage.max in
-            (input = hash(state.input, stage.salt, room), room = room)) in
+            (input = hash(state.input, stage.salt, room), room = room))
+
     result.input & 1u != 0u
+)
 
 inference(command: uint, bits: int, program: List[Stage]) -> ulong =>
     if program.count == 0 then
