@@ -19,13 +19,14 @@ side(at: Point, from: Point, to: Point) -> double =>
     (to.y - from.y) * (at.x - from.x)
 
 crossing(first: Point, second: Point, from: Point, to: Point) ->
-        Point =>
-    (let near = side(first, from, to)
-     let far = side(second, from, to)
-     let part = near / (near - far)
+        Point => (
+    let near = side(first, from, to)
+    let far = side(second, from, to)
+    let part = near / (near - far)
 
-     (x = first.x + (second.x - first.x) * part,
-      y = first.y + (second.y - first.y) * part))
+    (x = first.x + (second.x - first.x) * part,
+     y = first.y + (second.y - first.y) * part)
+)
 
 same(a: Point, b: Point) -> bool => a.x == b.x /\ a.y == b.y
 
