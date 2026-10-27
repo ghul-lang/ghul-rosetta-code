@@ -30,15 +30,11 @@ si
 let seen = SET()
 let seeds = LIST()
 let related_count mut = 0
-let palindromic_starts = LIST()
+let palindromic_starts = [n for n in 1::10000 if is_palindrome(bigint(n))]
 
 for n in 1::10000 do
     if n % 1000 == 0 then
         write_line("  tested {n:N0} of 10,000")
-    fi
-
-    if is_palindrome(bigint(n)) then
-        palindromic_starts.add(n)
     fi
 
     if seen.contains(bigint(n)) then
