@@ -22,23 +22,16 @@ encode(code_point: int) -> List[int] is
     return octets
 si
 
-decode(octets: List[int]) -> int is
-    let leader = octets[0]
-
-    let code_point mut =
+decode(octets: List[int]) -> int =>
+    let leader = octets[0] in
+    octets |> skip(1) |> reduce(
         case octets.count
         when 1 then leader
         when 2 then leader & 0x1F
         when 3 then leader & 0x0F
         else leader & 0x07
-        esac
-
-    for continuation in octets |> skip(1) do
-        code_point = (code_point << 6) | (continuation & 0x3F)
-    od
-
-    return code_point
-si
+        esac,
+        (acc, continuation) => (acc << 6) | (continuation & 0x3F))
 
 hex(octet: int) -> string => "{octet:X2}"
 
