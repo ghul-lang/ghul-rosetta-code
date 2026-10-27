@@ -6,14 +6,15 @@ let step = 8.0D
 
 let diagonal = step * Math.sqrt(2.0D)
 
-expand(order: int) -> string =>
-    (let current mut = "F--XF--F--XF"
+expand(order: int) -> string => (
+    let current mut = "F--XF--F--XF"
 
-     for _ in 0..order do
-         current = current.replace("X", "XF+G+XF--F--XF+G+X")
-     od
+    for _ in 0..order do
+        current = current.replace("X", "XF+G+XF--F--XF+G+X")
+    od
 
-     current)
+    current
+)
 
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)

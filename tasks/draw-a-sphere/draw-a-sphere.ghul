@@ -11,19 +11,20 @@ let radius = 208.0D
 let ambient = 0.14D
 let shine = 28.0D
 
-let towards_light =
-    (let x = -0.45D
-     let y = 0.55D
-     let z = 0.70D
+let towards_light = (
+    let x = -0.45D
+    let y = 0.55D
+    let z = 0.70D
 
-     let length = sqrt(x * x + y * y + z * z)
+    let length = sqrt(x * x + y * y + z * z)
 
-     (x = x / length, y = y / length, z = z / length))
+    (x = x / length, y = y / length, z = z / length)
+)
 
-channel(base: double, level: double, gloss: double) -> ubyte =>
-    (let value = base * level + 255.0D * gloss
+channel(base: double, level: double, gloss: double) -> ubyte => (
+    let value = base * level + 255.0D * gloss
 
-     ubyte(min(255.0D, max(0.0D, value))))
+    ubyte(min(255.0D, max(0.0D, value))))
 
 let image = IMAGE(size, size)
 

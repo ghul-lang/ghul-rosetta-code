@@ -15,16 +15,17 @@ let random = System.Random(20260908)
 
 let taken = LIST[int]()
 
-fresh_room() -> int =>
-    (let chosen mut = random.next(caves.count) + 1
+fresh_room() -> int => (
+    let chosen mut = random.next(caves.count) + 1
 
-     while taken.contains(chosen) do
-         chosen = random.next(caves.count) + 1
-     od
+    while taken.contains(chosen) do
+        chosen = random.next(caves.count) + 1
+    od
 
-     taken.add(chosen)
+    taken.add(chosen)
 
-     chosen)
+    chosen
+)
 
 let wumpus mut = fresh_room()
 let bats = [fresh_room(), fresh_room()] |> collect_mutable()

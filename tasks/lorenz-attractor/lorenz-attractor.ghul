@@ -24,16 +24,17 @@ mean(a: Point, b: Point, c: Point, d: Point) -> Point =>
      y = (a.y + 2.0D * b.y + 2.0D * c.y + d.y) / 6.0D,
      z = (a.z + 2.0D * b.z + 2.0D * c.z + d.z) / 6.0D)
 
-step(at: Point) -> STREAM[Point, Point] =>
-    (let first = rate(at)
-     let second = rate(along(at, first, dt / 2.0D))
-     let third = rate(along(at, second, dt / 2.0D))
-     let fourth = rate(along(at, third, dt))
+step(at: Point) -> STREAM[Point, Point] => (
+    let first = rate(at)
+    let second = rate(along(at, first, dt / 2.0D))
+    let third = rate(along(at, second, dt / 2.0D))
+    let fourth = rate(along(at, third, dt))
 
-     let slope = mean(first, second, third, fourth)
-     let next = along(at, slope, dt)
+    let slope = mean(first, second, third, fourth)
+    let next = along(at, slope, dt)
 
-     next || next)
+    next || next
+)
 
 let path =
     stream((x = 1.0D, y = 1.0D, z = 1.0D), step)

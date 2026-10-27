@@ -107,21 +107,22 @@ class HEAP is
 
     // The root list and each child list are circular and doubly linked, so
     // a node is spliced in or out without knowing which list it is in.
-    _ring(from: NODE) -> NODE{} =>
-        (let seen = LIST()
-         let at mut = from
+    _ring(from: NODE) -> NODE{} => (
+        let seen = LIST()
+        let at mut = from
 
-         seen.add(from)
+        seen.add(from)
 
-         at = at.right
+        at = at.right
 
-         while at != from do
-             seen.add(at)
+        while at != from do
+            seen.add(at)
 
-             at = at.right
-         od
+            at = at.right
+        od
 
-         seen)
+        seen
+    )
 
     _take_in(node: NODE) is
         if let least = _min then
@@ -246,14 +247,15 @@ class HEAP is
     si
 si
 
-drain(heap: HEAP) -> string =>
-    (let taken = LIST()
+drain(heap: HEAP) -> string => (
+    let taken = LIST()
 
-     while let least = heap.extract_minimum() do
-         taken.add("{least.key}")
-     od
+    while let least = heap.extract_minimum() do
+        taken.add("{least.key}")
+    od
 
-     taken |> join(" "))
+    taken |> join(" ")
+)
 
 let first = HEAP()
 

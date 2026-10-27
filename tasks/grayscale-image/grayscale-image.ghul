@@ -17,16 +17,17 @@ to_grey(colour: IMAGE) -> ubyte[] =>
              luminance(seen.red, seen.green, seen.blue)))
         |> collect()
 
-to_colour(levels: ubyte[], width: int, height: int) -> IMAGE =>
-    (let image = IMAGE(width, height)
+to_colour(levels: ubyte[], width: int, height: int) -> IMAGE => (
+    let image = IMAGE(width, height)
 
-     for at in 0..levels.count do
-         image.set_pixel(
-             at % width, at / width, levels[at], levels[at], levels[at]
-         )
-     od
+    for at in 0..levels.count do
+        image.set_pixel(
+            at % width, at / width, levels[at], levels[at], levels[at]
+        )
+    od
 
-     image)
+    image
+)
 
 let width = 300
 let height = 200

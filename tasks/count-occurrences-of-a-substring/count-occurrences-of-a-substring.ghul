@@ -1,15 +1,16 @@
 use default
 
-occurrences(haystack: string, needle: string) -> int =>
-    (let found mut = 0
-     let at mut = haystack.index_of(needle)
+occurrences(haystack: string, needle: string) -> int => (
+    let found mut = 0
+    let at mut = haystack.index_of(needle)
 
-     while at >= 0 do
-         found = found + 1
-         at = haystack.index_of(needle, at + needle.length)
-     od
+    while at >= 0 do
+        found = found + 1
+        at = haystack.index_of(needle, at + needle.length)
+    od
 
-     found)
+    found
+)
 
 write_line("{occurrences("the three truths", "th")}")
 write_line("{occurrences("ababababab", "abab")}")

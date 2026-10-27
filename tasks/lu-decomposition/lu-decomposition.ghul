@@ -16,18 +16,19 @@ square(n: int, cell: (int, int) -> double) -> LIST[LIST[double]] =>
         |> map(i => 0..n |> map(cell(i, *)) |> collect_mutable())
         |> collect_mutable()
 
-pivot(a: Matrix) -> Matrix =>
-    (let n = a.count
-     let order = LIST(0..n)
+pivot(a: Matrix) -> Matrix => (
+    let n = a.count
+    let order = LIST(0..n)
 
-     for column in 0..n do
-         let best =
-             column..n |> max_by(row => double.abs(a[row][column]))!
+    for column in 0..n do
+        let best =
+            column..n |> max_by(row => double.abs(a[row][column]))!
 
-         (order[column], order[best]) = (order[best], order[column])
-     od
+        (order[column], order[best]) = (order[best], order[column])
+    od
 
-     square(n, (i, j) => if order[i] == j then 1.0 else 0.0 fi))
+    square(n, (i, j) => if order[i] == j then 1.0 else 0.0 fi)
+)
 
 decompose(a: Matrix)
     -> (lower: Matrix, upper: Matrix, permutation: Matrix) is

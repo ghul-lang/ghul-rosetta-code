@@ -3,21 +3,22 @@ use default
 let random = System.Random(7)
 let trials = 100
 
-runs(n: int, p: double) -> int =>
-    (let count mut = 0
-     let inside mut = false
+runs(n: int, p: double) -> int => (
+    let count mut = 0
+    let inside mut = false
 
-     for _ in 0..n do
-         let one = random.next_double() < p
+    for _ in 0..n do
+        let one = random.next_double() < p
 
-         if one /\ !inside then
-             count = count + 1
-         fi
+        if one /\ !inside then
+            count = count + 1
+        fi
 
-         inside = one
-     od
+        inside = one
+    od
 
-     count)
+    count
+)
 
 for p in [0.1, 0.3, 0.5, 0.7, 0.9] do
     let theory = p * (1.0 - p)

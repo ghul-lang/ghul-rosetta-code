@@ -8,20 +8,21 @@ let limit = 300
 let cx = -0.7D
 let cy = 0.27015D
 
-escape(start_x: double, start_y: double) -> int =>
-    (let x mut = start_x
-     let y mut = start_y
-     let steps mut = 0
+escape(start_x: double, start_y: double) -> int => (
+    let x mut = start_x
+    let y mut = start_y
+    let steps mut = 0
 
-     while steps < limit /\ x * x + y * y <= 4.0D do
-         let next = x * x - y * y + cx
+    while steps < limit /\ x * x + y * y <= 4.0D do
+        let next = x * x - y * y + cx
 
-         y = 2.0D * x * y + cy
-         x = next
-         steps = steps + 1
-     od
+        y = 2.0D * x * y + cy
+        x = next
+        steps = steps + 1
+    od
 
-     steps)
+    steps
+)
 
 band(level: double, phase: double) -> ubyte =>
     ubyte(

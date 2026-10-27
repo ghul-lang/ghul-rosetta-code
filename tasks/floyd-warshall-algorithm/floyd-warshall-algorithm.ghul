@@ -34,16 +34,17 @@ for k in 1::n do
     od
 od
 
-path(u: int, v: int) -> string =>
-    (let result = LIST([u])
-     let cur mut = u
+path(u: int, v: int) -> string => (
+    let result = LIST([u])
+    let cur mut = u
 
-     while cur != v do
-         cur = next_hop[(cur, v)]
-         result.add(cur)
-     od
+    while cur != v do
+        cur = next_hop[(cur, v)]
+        result.add(cur)
+    od
 
-     result |> map(x => "{x}") |> join(" -> "))
+    result |> map(x => "{x}") |> join(" -> ")
+)
 
 write_line("pair     dist    path")
 

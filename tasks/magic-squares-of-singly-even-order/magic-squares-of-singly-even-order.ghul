@@ -2,24 +2,25 @@ use default
 
 use Square = List[List[int]]
 
-odd_magic_square(n: int) -> Square =>
-    (let square =
-         0..n |> map(_ => repeat(0, n) |> collect_mutable())
-             |> collect()
-     let (row, column) mut = (0, n / 2)
+odd_magic_square(n: int) -> Square => (
+    let square =
+        0..n |> map(_ => repeat(0, n) |> collect_mutable())
+            |> collect()
+    let (row, column) mut = (0, n / 2)
 
-     for value in 1::n * n do
-         square[row][column] = value
+    for value in 1::n * n do
+        square[row][column] = value
 
-         let (up, right) = ((row + n - 1) % n, (column + 1) % n)
+        let (up, right) = ((row + n - 1) % n, (column + 1) % n)
 
-         let free = square[up][right] == 0
+        let free = square[up][right] == 0
 
-         (row, column) =
-             if free then (up, right) else ((row + 1) % n, column) fi
-     od
+        (row, column) =
+            if free then (up, right) else ((row + 1) % n, column) fi
+    od
 
-     square)
+    square
+)
 
 // four odd magic squares of half the size fill the quadrants, then some
 // columns swap between the top and bottom halves

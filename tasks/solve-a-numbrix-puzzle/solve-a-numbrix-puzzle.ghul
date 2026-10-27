@@ -19,17 +19,18 @@ class NUMBRIX is
         od
     si
 
-    _neighbours(cell: int) -> int{} =>
-        (let row = cell / _size
-         let column = cell % _size
-         let result = LIST()
+    _neighbours(cell: int) -> int{} => (
+        let row = cell / _size
+        let column = cell % _size
+        let result = LIST()
 
-         if row > 0 then result.add(cell - _size) fi
-         if row < _size - 1 then result.add(cell + _size) fi
-         if column > 0 then result.add(cell - 1) fi
-         if column < _size - 1 then result.add(cell + 1) fi
+        if row > 0 then result.add(cell - _size) fi
+        if row < _size - 1 then result.add(cell + _size) fi
+        if column > 0 then result.add(cell - 1) fi
+        if column < _size - 1 then result.add(cell + 1) fi
 
-         result)
+        result
+    )
 
     _distance(a: int, b: int) -> int =>
         System.Math.abs(a / _size - b / _size) +

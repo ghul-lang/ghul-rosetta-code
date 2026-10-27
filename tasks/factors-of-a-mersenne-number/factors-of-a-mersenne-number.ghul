@@ -1,20 +1,21 @@
 use default
 
-mod_pow(base: bigint, exponent: bigint, modulus: bigint) -> bigint =>
-    (let result mut = 1n
-     let b mut = base % modulus
-     let e mut = exponent
+mod_pow(base: bigint, exponent: bigint, modulus: bigint) -> bigint => (
+    let result mut = 1n
+    let b mut = base % modulus
+    let e mut = exponent
 
-     while e > 0n do
-         if e % 2n =~ 1n then
-             result = (result * b) % modulus
-         fi
+    while e > 0n do
+        if e % 2n =~ 1n then
+            result = (result * b) % modulus
+        fi
 
-         e = e / 2n
-         b = (b * b) % modulus
-     od
+        e = e / 2n
+        b = (b * b) % modulus
+    od
 
-     result)
+    result
+)
 
 find_mersenne_factor(p: int, limit: int) -> bigint? =>
     (1::limit)

@@ -26,17 +26,18 @@ forwards() -> char is
     character
 si
 
-backwards() -> char =>
-    (let character = read() in
-     if is_letter(character) then
-         let delimiter = backwards()
+backwards() -> char => (
+    let character = read() in
+    if is_letter(character) then
+        let delimiter = backwards()
 
-         write("{character}")
+        write("{character}")
 
-         delimiter
-     else
-         character
-     fi)
+        delimiter
+    else
+        character
+    fi
+)
 
 solve(text: string) is
     stream = text

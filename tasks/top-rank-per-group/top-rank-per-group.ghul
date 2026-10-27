@@ -24,14 +24,15 @@ let staff: List[Employee] =
         ("Timothy Grove", "E16398", 29900, "D190")
     ]
 
-top_earners(department: string, wanted: int) -> Employee{} =>
-    (let earners =
-         staff |> filter(e => e.department =~ department)
-             |> collect_mutable()
+top_earners(department: string, wanted: int) -> Employee{} => (
+    let earners =
+        staff |> filter(e => e.department =~ department)
+            |> collect_mutable()
 
-     earners.sort((a, b) => b.salary <> a.salary)
+    earners.sort((a, b) => b.salary <> a.salary)
 
-     earners |> take(wanted))
+    earners |> take(wanted)
+)
 
 let departments = staff |> map(e => e.department) |> collect_mutable()
 

@@ -11,17 +11,18 @@ let board =
 
 blank() -> int => board |> find_index(* == 0)!
 
-neighbours(square: int) -> List[int] =>
-    (let found = LIST()
-     let row = square / side
-     let column = square % side
+neighbours(square: int) -> List[int] => (
+    let found = LIST()
+    let row = square / side
+    let column = square % side
 
-     if row > 0 then found.add(square - side) fi
-     if row < side - 1 then found.add(square + side) fi
-     if column > 0 then found.add(square - 1) fi
-     if column < side - 1 then found.add(square + 1) fi
+    if row > 0 then found.add(square - side) fi
+    if row < side - 1 then found.add(square + side) fi
+    if column > 0 then found.add(square - 1) fi
+    if column < side - 1 then found.add(square + 1) fi
 
-     found)
+    found
+)
 
 slide(square: int) is
     let empty = blank()

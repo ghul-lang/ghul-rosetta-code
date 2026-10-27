@@ -10,20 +10,21 @@ plain_whitespace(text: string) -> string =>
             if char.is_white_space(letter) then ' ' else letter fi)
         |> join("")
 
-single_spaces(text: string) -> string =>
-    (let kept = LIST()
+single_spaces(text: string) -> string => (
+    let kept = LIST()
 
-     for letter in text do
-         let after_space = kept.count > 0 /\ kept[kept.count - 1] == ' '
+    for letter in text do
+        let after_space = kept.count > 0 /\ kept[kept.count - 1] == ' '
 
-         if letter != ' ' \/ !after_space then
-             kept.add(letter)
-         fi
-     od
+        if letter != ' ' \/ !after_space then
+            kept.add(letter)
+        fi
+    od
 
-     let joined = kept |> join("")
+    let joined = kept |> join("")
 
-     joined.trim())
+    joined.trim()
+)
 
 folded_case(text: string) -> string => text.to_lower()
 

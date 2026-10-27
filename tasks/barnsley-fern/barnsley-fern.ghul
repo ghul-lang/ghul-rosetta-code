@@ -2,22 +2,23 @@ use Raster.IMAGE
 
 let random = System.Random(20260918)
 
-next(x: double, y: double) -> (x: double, y: double) =>
-    (let choice = random.next_double()
+next(x: double, y: double) -> (x: double, y: double) => (
+    let choice = random.next_double()
 
-     if choice < 0.01D then
-         (x = 0.0D,
-          y = 0.16D * y)
-     elif choice < 0.86D then
-         (x = 0.85D * x + 0.04D * y,
-          y = -0.04D * x + 0.85D * y + 1.6D)
-     elif choice < 0.93D then
-         (x = 0.2D * x - 0.26D * y,
-          y = 0.23D * x + 0.22D * y + 1.6D)
-     else
-         (x = -0.15D * x + 0.28D * y,
-          y = 0.26D * x + 0.24D * y + 0.44D)
-     fi)
+    if choice < 0.01D then
+        (x = 0.0D,
+         y = 0.16D * y)
+    elif choice < 0.86D then
+        (x = 0.85D * x + 0.04D * y,
+         y = -0.04D * x + 0.85D * y + 1.6D)
+    elif choice < 0.93D then
+        (x = 0.2D * x - 0.26D * y,
+         y = 0.23D * x + 0.22D * y + 1.6D)
+    else
+        (x = -0.15D * x + 0.28D * y,
+         y = 0.26D * x + 0.24D * y + 0.44D)
+    fi
+)
 
 let image = IMAGE(320, 640)
 

@@ -13,30 +13,31 @@ let board = repeat(0, squares) |> collect_mutable()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
-lines_for(direction: char) -> List[int]{} =>
-    (let lines = LIST[LIST[int]]()
+lines_for(direction: char) -> List[int]{} => (
+    let lines = LIST[LIST[int]]()
 
-     for major in 0..side do
-         let line = LIST()
+    for major in 0..side do
+        let line = LIST()
 
-         for minor in 0..side do
-             line.add(
-                 if direction == 'a' \/ direction == 'd' then
-                     major * side + minor
-                 else
-                     minor * side + major
-                 fi
-             )
-         od
+        for minor in 0..side do
+            line.add(
+                if direction == 'a' \/ direction == 'd' then
+                    major * side + minor
+                else
+                    minor * side + major
+                fi
+            )
+        od
 
-         if direction == 'd' \/ direction == 's' then
-             line.reverse()
-         fi
+        if direction == 'd' \/ direction == 's' then
+            line.reverse()
+        fi
 
-         lines.add(line)
-     od
+        lines.add(line)
+    od
 
-     lines)
+    lines
+)
 
 collapse(values: List[int]) -> List[int] =>
     let merged = merge_packed(LIST[int](values |> filter(* != 0))) in
@@ -50,19 +51,20 @@ merge_packed(packed: List[int]) -> int{} =>
     when [x, ..rest] then [x] ++ merge_packed(rest)
     esac
 
-slide(target: LIST[int], direction: char) -> bool =>
-    (let before = target |> collect()
+slide(target: LIST[int], direction: char) -> bool => (
+    let before = target |> collect()
 
-     for line in lines_for(direction) do
-         let moved =
-             collapse(line |> map(at => target[at]) |> collect())
+    for line in lines_for(direction) do
+        let moved =
+            collapse(line |> map(at => target[at]) |> collect())
 
-         for at in 0..side do
-             target[line[at]] = moved[at]
-         od
-     od
+        for at in 0..side do
+            target[line[at]] = moved[at]
+        od
+    od
 
-     0..squares |> any(at => target[at] != before[at]))
+    0..squares |> any(at => target[at] != before[at])
+)
 
 spawn() is
     let empty =

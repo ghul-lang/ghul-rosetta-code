@@ -130,18 +130,19 @@ average(box: List[Weighted]) -> Colour is
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(colours: List[Weighted], count: int) -> List[Colour] =>
-    (let boxes = LIST[List[Weighted]]([colours])
+median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
+    let boxes = LIST[List[Weighted]]([colours])
 
-     while boxes.count < count do
-         let worst = boxes |> max_by(score)!
-         let (low, high) = split(worst)
+    while boxes.count < count do
+        let worst = boxes |> max_by(score)!
+        let (low, high) = split(worst)
 
-         boxes[boxes |> find_index(* == worst)!] = low
-         boxes.add(high)
-     od
+        boxes[boxes |> find_index(* == worst)!] = low
+        boxes.add(high)
+    od
 
-     boxes |> map(average) |> collect())
+    boxes |> map(average) |> collect()
+)
 
 distance(a: Colour, b: Colour) -> int =>
     let dr = a.red - b.red, dg = a.green - b.green, db = a.blue - b.blue in

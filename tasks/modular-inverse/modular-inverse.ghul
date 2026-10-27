@@ -1,18 +1,19 @@
 use default
 
-modular_inverse(a: int, m: int) -> int? =>
-    (let r mut = m
-     let next_r mut = a % m
-     let t mut = 0
-     let next_t mut = 1
+modular_inverse(a: int, m: int) -> int? => (
+    let r mut = m
+    let next_r mut = a % m
+    let t mut = 0
+    let next_t mut = 1
 
-     while next_r != 0 do
-         let q = r / next_r
-         (r, next_r) = (next_r, r - q * next_r)
-         (t, next_t) = (next_t, t - q * next_t)
-     od
+    while next_r != 0 do
+        let q = r / next_r
+        (r, next_r) = (next_r, r - q * next_r)
+        (t, next_t) = (next_t, t - q * next_t)
+    od
 
-     if r != 1 then null elif t < 0 then t + m else t fi)
+    if r != 1 then null elif t < 0 then t + m else t fi
+)
 
 let inverse = modular_inverse(42, 2017)!
 

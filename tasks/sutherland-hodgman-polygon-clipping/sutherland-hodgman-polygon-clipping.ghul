@@ -82,12 +82,13 @@ let image = IMAGE(520, 520)
 
 image.view(20.0D, 20.0D, 380.0D, 380.0D)
 
-closed(polygon: Collections.List[Point]) -> List[Point] =>
-    (let ring = LIST(polygon)
+closed(polygon: Collections.List[Point]) -> List[Point] => (
+    let ring = LIST(polygon)
 
-     ring.add(polygon[0])
+    ring.add(polygon[0])
 
-     ring)
+    ring
+)
 
 image.colour(210ub, 232ub, 214ub)
 image.fill(clipped)

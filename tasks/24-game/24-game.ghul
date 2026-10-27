@@ -15,30 +15,32 @@ skip_spaces(text: string, at: int) -> int =>
         at
     fi
 
-closed(text: string, value: double, at: int) -> Parsed =>
-    (let close = skip_spaces(text, at)
+closed(text: string, value: double, at: int) -> Parsed => (
+    let close = skip_spaces(text, at)
 
-     if close < text.length /\ text[close] == ')' then
-         Parsed.OK(value, close + 1)
-     else
-         Parsed.BAD("a bracket is not closed")
-     fi)
+    if close < text.length /\ text[close] == ')' then
+        Parsed.OK(value, close + 1)
+    else
+        Parsed.BAD("a bracket is not closed")
+    fi
+)
 
-parse_atom(text: string, at: int) -> Parsed =>
-    (let start = skip_spaces(text, at)
+parse_atom(text: string, at: int) -> Parsed => (
+    let start = skip_spaces(text, at)
 
-     if start >= text.length then
-         Parsed.BAD("the expression ends too soon")
-     elif char.is_digit(text[start]) then
-         Parsed.OK(char.get_numeric_value(text[start]), start + 1)
-     elif text[start] != '(' then
-         Parsed.BAD("{text[start]} does not belong here")
-     else
-         case parse_sum(text, start + 1)
-         when bad: Parsed.BAD then bad
-         when inner: Parsed.OK then closed(text, inner.value, inner.at)
-         esac
-     fi)
+    if start >= text.length then
+        Parsed.BAD("the expression ends too soon")
+    elif char.is_digit(text[start]) then
+        Parsed.OK(char.get_numeric_value(text[start]), start + 1)
+    elif text[start] != '(' then
+        Parsed.BAD("{text[start]} does not belong here")
+    else
+        case parse_sum(text, start + 1)
+        when bad: Parsed.BAD then bad
+        when inner: Parsed.OK then closed(text, inner.value, inner.at)
+        esac
+    fi
+)
 
 apply(left: double, operator: char, right: double) -> double =>
     case operator
@@ -54,27 +56,28 @@ carry_on(
     at: int,
     operators: string,
     next: (string, int) -> Parsed
-) -> Parsed =>
-    (let operator_at = skip_spaces(text, at)
+) -> Parsed => (
+    let operator_at = skip_spaces(text, at)
 
-     if
-         operator_at >= text.length \/
-         !operators.contains("{text[operator_at]}")
-     then
-         Parsed.OK(value, at)
-     else
-         case next(text, operator_at + 1)
-         when bad: Parsed.BAD then bad
-         when step: Parsed.OK then
-             carry_on(
-                 text,
-                 apply(value, text[operator_at], step.value),
-                 step.at,
-                 operators,
-                 next
-             )
-         esac
-     fi)
+    if
+        operator_at >= text.length \/
+        !operators.contains("{text[operator_at]}")
+    then
+        Parsed.OK(value, at)
+    else
+        case next(text, operator_at + 1)
+        when bad: Parsed.BAD then bad
+        when step: Parsed.OK then
+            carry_on(
+                text,
+                apply(value, text[operator_at], step.value),
+                step.at,
+                operators,
+                next
+            )
+        esac
+    fi
+)
 
 parse_run(
     text: string,
@@ -94,15 +97,16 @@ parse_product(text: string, at: int) -> Parsed =>
 parse_sum(text: string, at: int) -> Parsed =>
     parse_run(text, at, "+-", parse_product)
 
-sorted_digits(text: string) -> string =>
-    (let held =
-        text
-            |> filter(char.is_digit)
-            |> collect()
+sorted_digits(text: string) -> string => (
+    let held =
+       text
+           |> filter(char.is_digit)
+           |> collect()
 
-     System.Array.sort(held)
+    System.Array.sort(held)
 
-     string(held))
+    string(held)
+)
 
 runs_digits_together(text: string) -> bool =>
     (0..text.length - 1)

@@ -13,16 +13,17 @@ let corners =
 
 let image = IMAGE(640, 560)
 
-toward_a_corner(at: Step) -> STREAM[Step, Step] =>
-    (let chosen = random.next(corners.count)
-     let corner = corners[chosen]
+toward_a_corner(at: Step) -> STREAM[Step, Step] => (
+    let chosen = random.next(corners.count)
+    let corner = corners[chosen]
 
-     let next =
-         (x = (at.x + corner.x) / 2.0D,
-          y = (at.y + corner.y) / 2.0D,
-          corner = chosen)
+    let next =
+        (x = (at.x + corner.x) / 2.0D,
+         y = (at.y + corner.y) / 2.0D,
+         corner = chosen)
 
-     next || next)
+    next || next
+)
 
 plot(at: Step) is
     let spot = image.to_pixel(at.x, at.y)

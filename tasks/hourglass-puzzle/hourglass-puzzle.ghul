@@ -30,18 +30,19 @@ wait(s: State) -> State? =>
             time = s.time + step)
     fi
 
-moves(s: State) -> (command: string, next: State){} =>
-    (let result = LIST()
+moves(s: State) -> (command: string, next: State){} => (
+    let result = LIST()
 
-     if let after = wait(s) then
-         result.add((command = "wait", next = after))
-     fi
+    if let after = wait(s) then
+        result.add((command = "wait", next = after))
+    fi
 
-     for which in ["4", "7", "both"] do
-         result.add((command = "flip {which}", next = flip(s, which)))
-     od
+    for which in ["4", "7", "both"] do
+        result.add((command = "flip {which}", next = flip(s, which)))
+    od
 
-     result)
+    result
+)
 
 plan(start: State) -> List[string]? is
     let seen = SET()

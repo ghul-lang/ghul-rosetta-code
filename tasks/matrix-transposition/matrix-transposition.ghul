@@ -1,15 +1,16 @@
 use default
 
-transpose(matrix: List[List[int]]) -> List[List[int]] =>
-    (let columns = LIST()
+transpose(matrix: List[List[int]]) -> List[List[int]] => (
+    let columns = LIST()
 
-     for column in 0..matrix[0].count do
-         let row = matrix |> map(source => source[column]) |> collect()
+    for column in 0..matrix[0].count do
+        let row = matrix |> map(source => source[column]) |> collect()
 
-         columns.add(row)
-     od
+        columns.add(row)
+    od
 
-     columns)
+    columns
+)
 
 show(caption: string, matrix: List[List[int]]) is
     write_line(caption)

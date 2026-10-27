@@ -1,19 +1,20 @@
 namespace Hailstone is
     use default
 
-    hailstone(n: long) -> List[long] =>
-        (let terms = LIST([n])
+    hailstone(n: long) -> List[long] => (
+        let terms = LIST([n])
 
-         while terms[terms.count - 1] != 1L do
-             let term = terms[terms.count - 1]
+        while terms[terms.count - 1] != 1L do
+            let term = terms[terms.count - 1]
 
-             let next =
-                 if term % 2L == 0L then term / 2L else 3L * term + 1L fi
+            let next =
+                if term % 2L == 0L then term / 2L else 3L * term + 1L fi
 
-             terms.add(next)
-         od
+            terms.add(next)
+        od
 
-         terms)
+        terms
+    )
 
     entry() is
         let sequence = hailstone(27L)

@@ -54,16 +54,17 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
         top
     si
 
-    _smallest_of(parent: int) -> int =>
-        (let smallest mut = parent
+    _smallest_of(parent: int) -> int => (
+        let smallest mut = parent
 
-         for child in [parent * 2 + 1, parent * 2 + 2] do
-             if child < _heap.count /\ _heap[child] < _heap[smallest] then
-                 smallest = child
-             fi
-         od
+        for child in [parent * 2 + 1, parent * 2 + 2] do
+            if child < _heap.count /\ _heap[child] < _heap[smallest] then
+                smallest = child
+            fi
+        od
 
-         smallest)
+        smallest
+    )
 
     _swap(a: int, b: int) is
         (_heap[a], _heap[b]) = (_heap[b], _heap[a])

@@ -42,13 +42,14 @@ class SANDPILE is
     si
 si
 
-settled(size: int, grains: int) -> SANDPILE =>
-    (let pile = SANDPILE(size)
+settled(size: int, grains: int) -> SANDPILE => (
+    let pile = SANDPILE(size)
 
-     pile.add(size / 2, size / 2, grains)
-     pile.settle()
+    pile.add(size / 2, size / 2, grains)
+    pile.settle()
 
-     pile)
+    pile
+)
 
 show(grains: int) is
     let pile = settled(5, grains)

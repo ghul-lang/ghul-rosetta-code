@@ -5,21 +5,22 @@ use System.Math.*
 let size = 200
 let angles = 360
 
-pentagon() -> IMAGE =>
-    (let image = IMAGE(size, size)
+pentagon() -> IMAGE => (
+    let image = IMAGE(size, size)
 
-     image.clear(255ub, 255ub, 255ub)
-     image.colour(0ub, 0ub, 0ub)
-     image.stroke(2.0D)
-     image.line(
-         (0::5)
-             |> map(i =>
-                 let a = pi * (0.5D + 0.4D * double(i)) in
-                 let x = 100.0D + 70.0D * cos(a) in
-                 (x = x, y = 105.0D - 70.0D * sin(a)))
-             |> collect())
+    image.clear(255ub, 255ub, 255ub)
+    image.colour(0ub, 0ub, 0ub)
+    image.stroke(2.0D)
+    image.line(
+        (0::5)
+            |> map(i =>
+                let a = pi * (0.5D + 0.4D * double(i)) in
+                let x = 100.0D + 70.0D * cos(a) in
+                (x = x, y = 105.0D - 70.0D * sin(a)))
+            |> collect())
 
-     image)
+    image
+)
 
 pentagon().write("pentagon.png")
 

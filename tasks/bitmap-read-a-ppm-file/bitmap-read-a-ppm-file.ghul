@@ -23,10 +23,10 @@ class BITMAP is
         bytes[at + 2] = colour.blue
     si
 
-    pixel(x: int, y: int) -> COLOUR =>
-        (let at = (y * width + x) * 3
+    pixel(x: int, y: int) -> COLOUR => (
+        let at = (y * width + x) * 3
 
-         (red = bytes[at], green = bytes[at + 1], blue = bytes[at + 2]))
+        (red = bytes[at], green = bytes[at + 1], blue = bytes[at + 2]))
 si
 
 space(value: ubyte) -> bool =>

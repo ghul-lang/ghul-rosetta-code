@@ -7,9 +7,9 @@ use Writer[T] = (value: T, log: string)
 unit[T](value: T, note: string) -> Writer[T] =>
     (value = value, log = "  {note,-17}: {value}\n")
 
->>=[T, U](writer: Writer[T], f: (T) -> Writer[U]) -> Writer[U] =>
-    (let next = f(writer.value)
-     (value = next.value, log = "{writer.log}{next.log}"))
+>>=[T, U](writer: Writer[T], f: (T) -> Writer[U]) -> Writer[U] => (
+    let next = f(writer.value)
+    (value = next.value, log = "{writer.log}{next.log}"))
 
 root(value: int) -> Writer[double] =>
     unit(sqrt(cast(value)), "Took square root")

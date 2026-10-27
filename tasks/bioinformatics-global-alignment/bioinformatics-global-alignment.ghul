@@ -1,14 +1,15 @@
 use default
 
-overlap(left: string, right: string) -> int =>
-    (let longest = System.Math.min(left.length, right.length)
-     let size mut = longest
+overlap(left: string, right: string) -> int => (
+    let longest = System.Math.min(left.length, right.length)
+    let size mut = longest
 
-     while size > 0 /\ !left.ends_with(right[0..size]) do
-         size = size - 1
-     od
+    while size > 0 /\ !left.ends_with(right[0..size]) do
+        size = size - 1
+    od
 
-     size)
+    size
+)
 
 shortest_superstring(sequences: string[]) -> string is
     let pieces = LIST[string]()

@@ -1,14 +1,15 @@
 use default
 use System.Text.Encoding
 
-percent_encoded(octet: ubyte) -> string =>
-    (let character = char(octet)
+percent_encoded(octet: ubyte) -> string => (
+    let character = char(octet)
 
-     if char.is_ascii_letter_or_digit(character) then
-         "{character}"
-     else
-         "%{octet:X2}"
-     fi)
+    if char.is_ascii_letter_or_digit(character) then
+        "{character}"
+    else
+        "%{octet:X2}"
+    fi
+)
 
 url_encode(text: string) -> string =>
     Encoding.utf8.get_bytes(text)

@@ -13,20 +13,21 @@ let shrink = 1.0D / (1.0D + golden)
 towards(index: int) -> double =>
     pi / 2.0D + 0.4D * pi * double(index)
 
-corner_of(shape: Pentagon, index: int) -> Point =>
-    (let angle = towards(index)
+corner_of(shape: Pentagon, index: int) -> Point => (
+    let angle = towards(index)
 
-     (x = shape.x + shape.radius * cos(angle),
-      y = shape.y + shape.radius * sin(angle)))
+    (x = shape.x + shape.radius * cos(angle),
+     y = shape.y + shape.radius * sin(angle)))
 
-inner(shape: Pentagon, index: int) -> Pentagon =>
-    (let angle = towards(index)
-     let smaller = shape.radius * shrink
-     let reach = shape.radius - smaller
+inner(shape: Pentagon, index: int) -> Pentagon => (
+    let angle = towards(index)
+    let smaller = shape.radius * shrink
+    let reach = shape.radius - smaller
 
-     (x = shape.x + reach * cos(angle),
-      y = shape.y + reach * sin(angle),
-      radius = smaller))
+    (x = shape.x + reach * cos(angle),
+     y = shape.y + reach * sin(angle),
+     radius = smaller)
+)
 
 flake(shape: Pentagon, order: int) -> Pentagon{} is
     if order == 0 then

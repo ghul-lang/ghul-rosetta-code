@@ -18,16 +18,17 @@ advance(state: STATE, dt: double) -> STATE =>
     let rate = state.rate - dt * gravity / length * sin(state.angle) in
     (angle = state.angle + dt * rate, rate = rate)
 
-quarter_period(dt: double) -> double =>
-    (let state mut = (angle = swing, rate = 0.0D)
-     let elapsed mut = 0.0D
+quarter_period(dt: double) -> double => (
+    let state mut = (angle = swing, rate = 0.0D)
+    let elapsed mut = 0.0D
 
-     while state.angle > 0.0D do
-         state = advance(state, dt)
-         elapsed = elapsed + dt
-     od
+    while state.angle > 0.0D do
+        state = advance(state, dt)
+        elapsed = elapsed + dt
+    od
 
-     elapsed)
+    elapsed
+)
 
 draw(image: IMAGE, angle: double) is
     let x = length * sin(angle)

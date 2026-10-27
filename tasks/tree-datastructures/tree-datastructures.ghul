@@ -25,20 +25,21 @@ to_indent(node: NODE, depth: int) -> LINE{} is
     od
 si
 
-to_nest(lines: List[LINE], position: int) -> (node: NODE, next: int) =>
-    (let head = lines[position]
-     let children = LIST()
-     let cursor mut = position + 1
+to_nest(lines: List[LINE], position: int) -> (node: NODE, next: int) => (
+    let head = lines[position]
+    let children = LIST()
+    let cursor mut = position + 1
 
-     while cursor < lines.count /\ lines[cursor].depth > head.depth do
-         let (child, following) = to_nest(lines, cursor)
+    while cursor < lines.count /\ lines[cursor].depth > head.depth do
+        let (child, following) = to_nest(lines, cursor)
 
-         children.add(child)
+        children.add(child)
 
-         cursor = following
-     od
+        cursor = following
+    od
 
-     (node = NODE(head.name, children), next = cursor))
+    (node = NODE(head.name, children), next = cursor)
+)
 
 let start =
     NODE("RosettaCode",

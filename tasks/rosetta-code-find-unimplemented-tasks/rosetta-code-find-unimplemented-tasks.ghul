@@ -43,20 +43,21 @@ members(client: HttpClient, api: string, category: string) -> SET[string] is
     titles
 si
 
-unimplemented(api: string, language: string) -> List[string] =>
-    (let client = HttpClient()
+unimplemented(api: string, language: string) -> List[string] => (
+    let client = HttpClient()
 
-     // The wiki refuses a request that does not say what is making it.
-     client.default_request_headers.user_agent
-         .parse_add("ghul-rosetta-code/1.0")
+    // The wiki refuses a request that does not say what is making it.
+    client.default_request_headers.user_agent
+        .parse_add("ghul-rosetta-code/1.0")
 
-     let tasks = members(client, api, "Programming_Tasks")
-     let solved = members(client, api, language)
+    let tasks = members(client, api, "Programming_Tasks")
+    let solved = members(client, api, language)
 
-     tasks
-         |> filter(t => !solved.contains(t))
-         |> sort((a, b) => string.compare_ordinal(a, b))
-         |> collect())
+    tasks
+        |> filter(t => !solved.contains(t))
+        |> sort((a, b) => string.compare_ordinal(a, b))
+        |> collect()
+)
 
 let language = if let [language, ..] = args then language else "Ghul" fi
 let missing = unimplemented("https://rosettacode.org/w/api.php", language)

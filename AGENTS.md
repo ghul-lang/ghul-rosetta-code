@@ -95,14 +95,49 @@ So, in rough order of how often it comes up:
   Write a block expression parenthesised rather than with `val` ... `lav`: the
   two mean the same thing, and the parentheses are the spelling a reader from
   any language recognises as an expression. Where the block is the body of a
-  `=>` or the right-hand side of an `=`, keep the opening paren on the same line
-  as that token where practical:
+  `=>` or the right-hand side of an `=`, the opening paren ends the line with
+  that token, the statements inside are indented one level, and the closing
+  paren goes on a line of its own at the indent of the line that opened it:
 
 ```ghul
-let total = (let acc mut = 0
-             for x in xs do acc = acc + x od
-             acc)
+let stats = (
+    let total mut = 0, largest mut = 0
+
+    for x in xs do
+        total = total + x
+        largest = max(largest, x)
+    od
+
+    (total, largest)
+)
 ```
+
+  A block of four lines or fewer closes on its last line instead:
+
+```ghul
+let total = (
+    let acc mut = 0
+    for x in xs do acc = acc + x od
+    acc)
+```
+
+  Never put the opening paren on the line below, or line the statements up
+  under it.
+- **A chain of `let ... in` is one `let`.** Three or more `let ... in` in a
+  row stutter. Where the locals are short, declare them in one `let`,
+  separated by commas, with `in` on a line of its own before the expression:
+
+```ghul
+distance(a: POINT, b: POINT) -> double =>
+    let
+        dx = a.x - b.x, dy = a.y - b.y,
+        squared = dx * dx + dy * dy
+    in
+        Ghul.Math.sqrt(squared)
+```
+
+  Where an initializer spans several lines, or the locals run long, make the
+  body a parenthesised block of `let` statements instead.
 
   `is` ... `si` is for the rest: a body that is long or whose control flow is
   involved, one that returns from the middle (a `return` inside a block exits

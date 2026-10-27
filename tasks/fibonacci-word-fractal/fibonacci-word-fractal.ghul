@@ -3,18 +3,19 @@ use Raster
 let order = 23
 let step = 1.0D
 
-word(order: int) -> string =>
-    (let previous mut = "1"
-     let current mut = "0"
+word(order: int) -> string => (
+    let previous mut = "1"
+    let current mut = "0"
 
-     for _ in 2..order do
-         let next = "{current}{previous}"
+    for _ in 2..order do
+        let next = "{current}{previous}"
 
-         previous = current
-         current = next
-     od
+        previous = current
+        current = next
+    od
 
-     current)
+    current
+)
 
 let letters = word(order)
 

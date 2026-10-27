@@ -5,20 +5,21 @@ let width = 600
 let height = 450
 let limit = 300
 
-escape(cx: double, cy: double) -> int =>
-    (let x mut = 0.0D
-     let y mut = 0.0D
-     let steps mut = 0
+escape(cx: double, cy: double) -> int => (
+    let x mut = 0.0D
+    let y mut = 0.0D
+    let steps mut = 0
 
-     while steps < limit /\ x * x + y * y <= 4.0D do
-         let next = x * x - y * y + cx
+    while steps < limit /\ x * x + y * y <= 4.0D do
+        let next = x * x - y * y + cx
 
-         y = 2.0D * x * y + cy
-         x = next
-         steps = steps + 1
-     od
+        y = 2.0D * x * y + cy
+        x = next
+        steps = steps + 1
+    od
 
-     steps)
+    steps
+)
 
 band(level: double, phase: double) -> ubyte =>
     ubyte(

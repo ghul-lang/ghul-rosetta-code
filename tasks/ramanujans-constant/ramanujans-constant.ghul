@@ -4,14 +4,15 @@ let digits = 60
 let shown = 40
 let guard = 20
 
-power_of_ten(n: int) -> bigint =>
-    (let value mut = 1n
+power_of_ten(n: int) -> bigint => (
+    let value mut = 1n
 
-     for _ in 0..n do
-         value = value * 10n
-     od
+    for _ in 0..n do
+        value = value * 10n
+    od
 
-     value)
+    value
+)
 
 let scale = power_of_ten(digits + guard)
 

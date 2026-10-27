@@ -15,10 +15,10 @@ let expression = "3 4 2 * 1 5 - 2 3 ^ ^ / +"
 
 let stack = LIST()
 
-pop() -> double =>
-    (let top = stack[stack.count - 1]
-     stack.remove_at(stack.count - 1)
-     top)
+pop() -> double => (
+    let top = stack[stack.count - 1]
+    stack.remove_at(stack.count - 1)
+    top)
 
 show(token: string, action: string) is
     write_line("{token,5}  {action,-12}  {stack |> join(" ")}")

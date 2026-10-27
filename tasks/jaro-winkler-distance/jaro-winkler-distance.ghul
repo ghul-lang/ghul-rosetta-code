@@ -64,20 +64,21 @@ jaro_similarity(left: string, right: string) -> double is
     return (left_rate + right_rate + matched) / 3.0D
 si
 
-jaro_winkler_distance(left: string, right: string) -> double =>
-    (let similarity = jaro_similarity(left, right)
+jaro_winkler_distance(left: string, right: string) -> double => (
+    let similarity = jaro_similarity(left, right)
 
-     let prefix mut = 0
-     let shorter = min(left.length, right.length)
-     let limit = min(4, shorter)
+    let prefix mut = 0
+    let shorter = min(left.length, right.length)
+    let limit = min(4, shorter)
 
-     while prefix < limit /\ left[prefix] == right[prefix] do
-         prefix = prefix + 1
-     od
+    while prefix < limit /\ left[prefix] == right[prefix] do
+        prefix = prefix + 1
+    od
 
-     let boost = cast(prefix) * 0.1D * (1.0D - similarity)
+    let boost = cast(prefix) * 0.1D * (1.0D - similarity)
 
-     1.0D - (similarity + boost))
+    1.0D - (similarity + boost)
+)
 
 for word in misspelled do
     let candidates = dictionary

@@ -52,27 +52,29 @@ si
 hex(bytes: ubyte[]) -> string =>
     bytes |> map(b => "{b:X2}") |> join(" ")
 
-pack(text: string) -> ubyte[] =>
-    (let packed = IO.MemoryStream()
-     let writer = BIT_WRITER(packed)
+pack(text: string) -> ubyte[] => (
+    let packed = IO.MemoryStream()
+    let writer = BIT_WRITER(packed)
 
-     for c in text do
-         writer.write(int(c), 7)
-     od
+    for c in text do
+        writer.write(int(c), 7)
+    od
 
-     writer.flush()
+    writer.flush()
 
-     packed.to_array())
+    packed.to_array()
+)
 
-unpack(packed: ubyte[], count: int) -> string =>
-    (let reader = BIT_READER(IO.MemoryStream(packed))
-     let text = System.Text.StringBuilder()
+unpack(packed: ubyte[], count: int) -> string => (
+    let reader = BIT_READER(IO.MemoryStream(packed))
+    let text = System.Text.StringBuilder()
 
-     for _ in 0..count do
-         text.append(char(reader.read(7)))
-     od
+    for _ in 0..count do
+        text.append(char(reader.read(7)))
+    od
 
-     text.to_string())
+    text.to_string()
+)
 
 let bits = "0101011101010"
 let quantized = IO.MemoryStream()

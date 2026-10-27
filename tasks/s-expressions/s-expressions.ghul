@@ -18,14 +18,15 @@ delimits(character: char) -> bool =>
     character == '(' \/ character == ')' \/
     character == '"' \/ character <= ' '
 
-skip_space(text: string, at: int) -> int =>
-    (let i mut = at
+skip_space(text: string, at: int) -> int => (
+    let i mut = at
 
-     while i < text.length /\ text[i] <= ' ' do
-         i = i + 1
-     od
+    while i < text.length /\ text[i] <= ' ' do
+        i = i + 1
+    od
 
-     i)
+    i
+)
 
 atom(token: string) -> SExpr is
     let whole mut = 0

@@ -1,20 +1,21 @@
 use default
 
-to_quater_imaginary(value: int) -> string =>
-    (let digits = LIST()
-     let remaining mut = value
+to_quater_imaginary(value: int) -> string => (
+    let digits = LIST()
+    let remaining mut = value
 
-     while remaining != 0 do
-         let digit = ((remaining % 4) + 4) % 4
-         digits.add(digit)
-         remaining = (digit - remaining) / 4
-     od
+    while remaining != 0 do
+        let digit = ((remaining % 4) + 4) % 4
+        digits.add(digit)
+        remaining = (digit - remaining) / 4
+    od
 
-     if digits.count == 0 then
-         "0"
-     else
-         digits |> reverse() |> map(d => "{d}") |> join("0")
-     fi)
+    if digits.count == 0 then
+        "0"
+    else
+        digits |> reverse() |> map(d => "{d}") |> join("0")
+    fi
+)
 
 from_quater_imaginary(text: string) -> (real: int, imaginary: int) is
     let real mut = 0
