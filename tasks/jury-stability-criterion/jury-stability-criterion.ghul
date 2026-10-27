@@ -40,19 +40,23 @@ show(p: Polynomial) -> string =>
         p
             |> index()
             |> filter((_, a) => a != 0.0)
-            |> map((i, a) =>
-                let power = n - i in
-                let x = case power
+            |> map((i, a) => (
+                let
+                    power = n - i,
+                    size = double.abs(a),
+                    sign = if a < 0.0 then " - " else " + " fi,
+                    unit = size == 1.0 /\ power > 0,
+                    number = if unit then "" else "{size}" fi
+
+                let x =
+                    case power
                     when 0 then ""
                     when 1 then "z"
                     else "z^{power}"
                     esac
-                in
-                let size = double.abs(a) in
-                let sign = if a < 0.0 then " - " else " + " fi in
-                let unit = size == 1.0 /\ power > 0 in
-                let number = if unit then "" else "{size}" fi in
-                "{sign}{number}{x}")
+
+                "{sign}{number}{x}"
+            ))
             |> join("")
     in
     terms.substring(3)
