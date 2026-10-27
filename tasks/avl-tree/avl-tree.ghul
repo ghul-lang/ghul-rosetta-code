@@ -40,7 +40,7 @@ rotate_left(tree: Tree) -> Tree =>
 
 rebalance(tree: Tree) -> Tree =>
     case tree
-    when n: Tree.NODE then (
+    when n: Tree.NODE then
         let tilt = balance(n)
 
         if tilt > 1 /\ balance(n.left) < 0 then
@@ -54,7 +54,6 @@ rebalance(tree: Tree) -> Tree =>
         else
             tree
         fi
-    )
     else tree
     esac
 
