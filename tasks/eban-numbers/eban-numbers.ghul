@@ -10,12 +10,10 @@ eban_group(group: int) -> bool =>
         group < 100 /\ eban_units /\ eban_tens)
 
 groups(n: int) -> int{} is
-    let remaining mut = n
-
-    while remaining > 0 do
-        yield remaining % 1000
-        remaining = remaining / 1000
-    od
+    if n > 0 then
+        yield n % 1000
+        yield in groups(n / 1000)
+    fi
 si
 
 is_eban(n: int) -> bool => groups(n) |> all(eban_group)
