@@ -5,6 +5,10 @@
 
     <AssemblyName>binary</AssemblyName>
     <GhulCompiler>dotnet ghul-compiler --test-run</GhulCompiler>
+
+    <!-- stand-in.ghul carries the test: only echo-server.ghul is published -->
+    <GhulGlobalNamespace>true</GhulGlobalNamespace>
+    <GhulNoWarn>top-level-statements-not-run</GhulNoWarn>
   </PropertyGroup>
 
   <ItemGroup>

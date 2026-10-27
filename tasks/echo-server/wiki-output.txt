@@ -1,0 +1,7 @@
+client 1 connected
+client 2 connected
+client 2 said hello
+client 2 said again
+client 2 went away
+client 1 said half a line
+client 1 went away

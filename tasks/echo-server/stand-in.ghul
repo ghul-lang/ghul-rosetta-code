@@ -1,0 +1,72 @@
+use default
+use System.Net.IPAddress
+use System.Net.IPEndPoint
+use System.Net.Sockets.TcpClient
+use System.Net.Sockets.TcpListener
+use System.Threading.CountdownEvent
+use System.Threading.Monitor
+use System.Threading.Thread
+
+// The test's entry: the task's server on the loopback interface, on a port
+// the system picks, with one client stalled on half a line while another is
+// echoed in full. Not part of the published solution.
+@entry()
+test_entry() is
+    let listener = TcpListener(IPAddress.loopback, 0)
+
+    listener.start()
+
+    let port =
+        if let bound: IPEndPoint = listener.local_endpoint then bound.port
+        else throw System.Exception("the listener has no address")
+        fi
+
+    let log = LIST[string]()
+    let departures = CountdownEvent(2)
+
+    note(what: string) is
+        Monitor.enter(log)
+        log.add(what)
+
+        if what.ends_with("went away") then
+            departures.signal()
+        fi
+
+        Monitor.exit(log)
+    si
+
+    let server = Thread(() => serve(listener, note))
+
+    server.is_background = true
+    server.start()
+
+    let first = TcpClient("127.0.0.1", port)
+    let first_reader = IO.StreamReader(first.get_stream())
+    let first_writer = IO.StreamWriter(first.get_stream())
+
+    first_writer.auto_flush = true
+    first_writer.write("half a li")
+
+    let second = TcpClient("127.0.0.1", port)
+    let second_reader = IO.StreamReader(second.get_stream())
+    let second_writer = IO.StreamWriter(second.get_stream())
+
+    second_writer.auto_flush = true
+
+    for line in ["hello", "again"] do
+        second_writer.write("{line}\r\n")
+        write_line("client 2 heard {second_reader.read_line()}")
+    od
+
+    first_writer.write("ne\r\n")
+    write_line("client 1 heard {first_reader.read_line()}")
+
+    first.dispose()
+    second.dispose()
+
+    departures.wait()
+
+    for line in log |> sort() do
+        write_line(line)
+    od
+si
