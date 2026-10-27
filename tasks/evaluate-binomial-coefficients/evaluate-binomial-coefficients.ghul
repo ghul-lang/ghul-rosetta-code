@@ -4,13 +4,9 @@ binomial(n: int, k: int) -> long => (
     assert k >= 0 /\ k <= n else "k must lie between 0 and n"
 
     let smaller = if k > n - k then n - k else k fi
-    let result mut = 1L
 
-    for i in 0..smaller do
-        result = result * cast(n - i) / cast(i + 1)
-    od
-
-    result
+    0..smaller
+        |> reduce(1L, (product, i) => product * cast(n - i) / cast(i + 1))
 )
 
 for (n, k) in [(5, 3), (10, 5), (60, 30)] do
