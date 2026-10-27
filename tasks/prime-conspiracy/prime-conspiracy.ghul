@@ -20,20 +20,20 @@ primes(limit: int) -> int{} is
 si
 
 let count = 1_000_000
-let transitions = repeat(0, 100) |> collect_mutable()
-let previous mut = 2
+let last_digits =
+    primes(15_500_000) |> take(count) |> map(* % 10) |> collect()
 
-for p in primes(15_500_000) |> skip(1) |> take(count - 1) do
-    let digit = p % 10
-    let key = previous * 10 + digit
-    transitions[key] = transitions[key] + 1
-    previous = digit
-od
+let transitions =
+    1..count
+        |> map(i => last_digits[i - 1] * 10 + last_digits[i])
+        |> group_by(key => key)
+        |> map(group => (group.key, group.value.count))
+        |> collect_map()
 
 write_line("{count:N0} first primes. "
     "Transitions prime % 10 -> next-prime % 10.")
 
-for key in (0..100) |> filter(key => transitions[key] > 0) do
+for key in transitions.keys |> sort() do
     let frequency =
         100.0 * double(transitions[key]) / double(count)
 

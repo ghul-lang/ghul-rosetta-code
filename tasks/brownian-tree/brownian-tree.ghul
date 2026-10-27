@@ -13,22 +13,29 @@ touches(x: int, y: int) -> bool =>
     -1..2 |> any(across =>
         -1..2 |> any(up => tree.contains((x = x + across, y = y + up))))
 
+grow() -> (x: int, y: int){} is
+    for _ in 0..particles do
+        let x mut = random.next(size)
+        let y mut = random.next(size)
+
+        while !touches(x, y) do
+            x = (x + random.next(3) - 1 + size) % size
+            y = (y + random.next(3) - 1 + size) % size
+        od
+
+        tree.add((x = x, y = y))
+
+        yield (x = x, y = y)
+    od
+si
+
+tree.add((x = size / 2, y = size / 2))
+
 let image = IMAGE(size, size)
 
 image.set_pixel(size / 2, size / 2, 0ub, 0ub, 0ub)
-tree.add((x = size / 2, y = size / 2))
 
-for particle in 0..particles do
-    let x mut = random.next(size)
-    let y mut = random.next(size)
-
-    while !touches(x, y) do
-        x = (x + random.next(3) - 1 + size) % size
-        y = (y + random.next(3) - 1 + size) % size
-    od
-
-    tree.add((x = x, y = y))
-
+for (particle, (x, y)) in grow() |> index() do
     let age = ubyte(255 * particle / particles)
 
     image.set_pixel(x, y, age, 40ub, 255ub - age)

@@ -4,38 +4,25 @@ next_term(numerator: int, denominator: int) -> (int, int) =>
     (denominator,
      denominator * (2 * (numerator / denominator) + 1) - numerator)
 
-let terms = () is
-    let numerator mut = 1
-    let denominator mut = 1
+let terms = stream((1, 1), ((numerator, denominator)) =>
+    "{numerator}/{denominator}" || next_term(numerator, denominator))
 
-    do
-        yield "{numerator}/{denominator}"
+write_line(terms |> take(20) |> join(" "))
 
-        (numerator, denominator) = next_term(numerator, denominator)
-    od
-si
-
-write_line(terms() |> take(20) |> join(" "))
-
-continued_fraction(numerator: int, denominator: int) -> int{} is
-    let left mut = numerator
-    let right mut = denominator
-    let terms = LIST()
-
-    while right > 0 do
-        terms.add(left / right)
-        let remainder = left % right
-        left = right
-        right = remainder
-    od
-
-    if terms.count % 2 == 0 then
-        terms[terms.count - 1] = terms[terms.count - 1] - 1
-        terms.add(1)
+quotients(left: int, right: int) -> int{} is
+    if right > 0 then
+        yield left / right
+        yield in quotients(right, left % right)
     fi
-
-    terms
 si
+
+continued_fraction(numerator: int, denominator: int) -> int{} =>
+    let terms = quotients(numerator, denominator) |> collect() in
+    if terms.count % 2 == 0 then
+        (terms |> take(terms.count - 1)) ++ [terms[terms.count - 1] - 1, 1]
+    else
+        terms
+    fi
 
 let fraction = continued_fraction(83116, 51639)
 

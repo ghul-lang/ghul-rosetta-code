@@ -5,18 +5,14 @@ is_cube(n: long) -> bool =>
     let root = long(System.Math.round(estimate)) in
     root * root * root == n
 
-let shown mut = 0
-let n mut = 1L
+squares() -> long{} => from(1L) |> map(n => n * n)
 
-while shown < 30 do
-    let square = n * n
+let last = squares() |> filter(s => !is_cube(s)) |> skip(29) |> first()!
 
+for square in squares() |> take_while(* <= last) do
     if is_cube(square) then
         write_line("{square,5} is a square and a cube")
     else
         write_line("{square,5}")
-        shown = shown + 1
     fi
-
-    n = n + 1L
 od

@@ -1,22 +1,11 @@
 use default
 
-is_square_free(n: long) -> bool is
-    if n % 4L == 0L then
-        return false
-    fi
-
-    let d mut = 3L
-
-    while d * d <= n do
-        if n % (d * d) == 0L then
-            return false
-        fi
-
-        d = d + 2L
-    od
-
-    true
-si
+is_square_free(n: long) -> bool =>
+    n % 4L != 0L /\
+    from(1L)
+        |> map(k => 2L * k + 1L)
+        |> take_while(d => d * d <= n)
+        |> all(d => n % (d * d) != 0L)
 
 show(from: long, to: long) is
     let found = from::to |> filter(is_square_free) |> collect()
@@ -50,16 +39,8 @@ for d in 2::1000 do
     od
 od
 
-let count mut = 0
-let next mut = 100
+for bound in [100, 1_000, 10_000, 100_000, 1_000_000] do
+    let found = 1::bound |> count(n => square_free[n])
 
-for n in 1::limit do
-    if square_free[n] then
-        count = count + 1
-    fi
-
-    if n == next then
-        write_line("up to {n,9:N0}: {count,7:N0}")
-        next = next * 10
-    fi
+    write_line("up to {bound,9:N0}: {found,7:N0}")
 od

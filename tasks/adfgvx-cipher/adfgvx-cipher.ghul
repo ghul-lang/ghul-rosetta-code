@@ -1,5 +1,4 @@
 use default
-use System.Text.StringBuilder
 
 let labels = "ADFGVX"
 
@@ -29,38 +28,31 @@ column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +
     if column < length % key.length then 1 else 0 fi
 
-to_pairs(square: string, text: string) -> string => (
-    let pairs = StringBuilder()
-    for letter in text do
-        let at = square.index_of(letter)
-        pairs.append(labels[at / 6])
-        pairs.append(labels[at % 6])
-    od
-    pairs.to_string()
-)
+to_pairs(square: string, text: string) -> string =>
+    text
+        |> flat_map(letter =>
+            let at = square.index_of(letter) in
+            [labels[at / 6], labels[at % 6]])
+        |> join("")
 
-from_pairs(square: string, pairs: List[char]) -> string => (
-    let text = StringBuilder()
-    for at in 0..pairs.count / 2 do
-        let row = labels.index_of(pairs[at * 2])
-        let column = labels.index_of(pairs[at * 2 + 1])
-        text.append(square[row * 6 + column])
-    od
-    text.to_string()
-)
+from_pairs(square: string, pairs: List[char]) -> string =>
+    0..pairs.count / 2
+        |> map(at =>
+            let
+                row = labels.index_of(pairs[at * 2]),
+                column = labels.index_of(pairs[at * 2 + 1])
+            in
+                square[row * 6 + column])
+        |> join("")
 
-encrypt(square: string, key: string, text: string) -> string => (
-    let pairs = to_pairs(square, text)
-    let cipher = StringBuilder()
-    for column in read_order(key) do
-        let at mut = column
-        while at < pairs.length do
-            cipher.append(pairs[at])
-            at = at + key.length
-        od
-    od
-    cipher.to_string()
-)
+encrypt(square: string, key: string, text: string) -> string =>
+    let pairs = to_pairs(square, text) in
+    read_order(key)
+        |> flat_map(column =>
+            column..pairs.length
+                |> step(key.length)
+                |> map(at => pairs[at]))
+        |> join("")
 
 decrypt(square: string, key: string, cipher: string) -> string => (
     let pairs = cipher |> collect_mutable()

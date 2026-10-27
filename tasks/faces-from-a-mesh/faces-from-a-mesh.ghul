@@ -34,21 +34,18 @@ perimeter(edges: List[Edge]) -> List[int]? is
 
     let start = edges[0].from
 
-    let walk = LIST([start])
+    walk_from(previous: int, current: int) -> int{} is
+        if current != start then
+            let ends = neighbours[current]
 
-    let previous mut = start
-    let current mut = edges[0].to
+            yield current
+            let next = if ends[0] == previous then ends[1] else ends[0] fi
 
-    while current != start do
-        walk.add(current)
+            yield in walk_from(current, next)
+        fi
+    si
 
-        let ends = neighbours[current]
-
-        let next = if ends[0] == previous then ends[1] else ends[0] fi
-
-        previous = current
-        current = next
-    od
+    let walk = ([start] ++ walk_from(start, edges[0].to)) |> collect()
 
     return
         if walk.count == edges.count then walk else null fi

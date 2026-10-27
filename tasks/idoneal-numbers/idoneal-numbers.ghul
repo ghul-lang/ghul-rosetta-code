@@ -1,33 +1,17 @@
 use default
 
-is_idoneal(value: int) -> bool is
-    let a mut = 1
-
-    while 3 * a * a + 2 * a < value do
-        let b mut = a + 1
-
-        while a * b + b * (a + 1) < value do
-            if (value - a * b) % (a + b) == 0 then
-                let c = (value - a * b) / (a + b)
-
-                if c > b then return false fi
-            fi
-
-            b = b + 1
-        od
-
-        a = a + 1
-    od
-
-    true
-si
-
-let idoneals = 1::1_850 |> filter(is_idoneal) |> map(n => "{n,5}")
+is_idoneal(value: int) -> bool =>
+    !(from(1)
+        |> take_while(a => 3 * a * a + 2 * a < value)
+        |> any(a =>
+            from(a + 1)
+                |> take_while(b => a * b + b * (a + 1) < value)
+                |> any(b =>
+                    (value - a * b) % (a + b) == 0 /\
+                    (value - a * b) / (a + b) > b)))
 
 write_line("the 65 known idoneal numbers:")
 
-let rows = idoneals |> collect()
-
-for row in 0..13 do
-    write_line(rows[row * 5..row * 5 + 5] |> join(""))
+for row in 1::1_850 |> filter(is_idoneal) |> chunk(5) do
+    write_line(row |> map(n => "{n,5}") |> join(""))
 od

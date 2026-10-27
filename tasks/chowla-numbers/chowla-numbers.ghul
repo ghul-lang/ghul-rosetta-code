@@ -22,19 +22,10 @@ od
 
 write_line("")
 
-let counts mut = 0
-let bound mut = 100
+for bound in 2::7 |> map(k => repeat(10, k) |> product()) do
+    let primes = 2::bound |> count(n => chowla[n] == 0)
 
-for n in 2::10_000_000 do
-    if chowla[n] == 0 then
-        counts = counts + 1
-    fi
-
-    if n == bound then
-        write_line("{counts,10:N0} primes up to {bound,12:N0}")
-
-        bound = bound * 10
-    fi
+    write_line("{primes,10:N0} primes up to {bound,12:N0}")
 od
 
 write_line("")
