@@ -65,9 +65,7 @@ play(seed: int) -> (winner: int, rounds: int) is
             (pot[i], pot[other]) = (pot[other], pot[i])
         od
 
-        for card in pot do
-            hands[winner].enqueue(card)
-        od
+        pot |> each(card => hands[winner].enqueue(card))
 
         write_line(
             "{rounds,3}: {story |> join(", ")}: player {winner + 1} "
