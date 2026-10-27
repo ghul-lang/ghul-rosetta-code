@@ -13,20 +13,10 @@ IO.File.write_all_lines(
     path, 1..11 |> map(number => "line {number}") |> collect()
 )
 
-line(path: string, wanted: int) -> string? is
-    let use lines = IO.File.read_lines(path).iterator
-    let number mut = 0
-
-    for text in lines do
-        number = number + 1
-
-        if number == wanted then
-            return text
-        fi
-    od
-
-    return null
-si
+line(path: string, wanted: int) -> string? =>
+    cursor(use IO.File.read_lines(path).iterator)
+    |> skip(wanted - 1)
+    |> first()
 
 report(path: string, wanted: int) is
     if let text = line(path, wanted) then
