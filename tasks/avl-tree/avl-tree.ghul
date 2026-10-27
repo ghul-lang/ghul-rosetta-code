@@ -40,20 +40,21 @@ rotate_left(tree: Tree) -> Tree =>
 
 rebalance(tree: Tree) -> Tree =>
     case tree
-    when n: Tree.NODE then
-        (let tilt = balance(n)
+    when n: Tree.NODE then (
+        let tilt = balance(n)
 
-         if tilt > 1 /\ balance(n.left) < 0 then
-             rotate_right(node(rotate_left(n.left), n.key, n.right))
-         elif tilt > 1 then
-             rotate_right(tree)
-         elif tilt < -1 /\ balance(n.right) > 0 then
-             rotate_left(node(n.left, n.key, rotate_right(n.right)))
-         elif tilt < -1 then
-             rotate_left(tree)
-         else
-             tree
-         fi)
+        if tilt > 1 /\ balance(n.left) < 0 then
+            rotate_right(node(rotate_left(n.left), n.key, n.right))
+        elif tilt > 1 then
+            rotate_right(tree)
+        elif tilt < -1 /\ balance(n.right) > 0 then
+            rotate_left(node(n.left, n.key, rotate_right(n.right)))
+        elif tilt < -1 then
+            rotate_left(tree)
+        else
+            tree
+        fi
+    )
     else tree
     esac
 
