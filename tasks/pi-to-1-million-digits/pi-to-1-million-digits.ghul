@@ -86,12 +86,14 @@ si
 
 
 pi_digits(digits: int) -> string =>
-    let guard = 10, terms = long(digits / 14 + 2) in
-    let (_, q, t) = split(0L, terms) in
-    let scale = bigint.pow(10n, digits + guard) in
-    let root = square_root(10_005n * scale * scale) in
-    let pi = q * 426_880n * root / t, text = decimal(pi) in
-    "{text[0]}.{text.substring(1, digits - 1)}"
+    let
+        guard = 10, terms = long(digits / 14 + 2),
+        (_, q, t) = split(0L, terms),
+        scale = bigint.pow(10n, digits + guard),
+        root = square_root(10_005n * scale * scale),
+        pi = q * 426_880n * root / t, text = decimal(pi)
+    in
+        "{text[0]}.{text.substring(1, digits - 1)}"
 
 let clock = Stopwatch.start_new()
 write_line("computing a million digits, which takes a while")
