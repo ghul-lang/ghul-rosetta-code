@@ -2,16 +2,22 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
-write("string: ")
+ask(prompt: string) -> string? is
+    write(prompt)
+    read_line()
+si
 
-let text = read_line()
+read_75000() -> int? =>
+    while let line = ask("integer: ") do
+        let value mut = 0
 
-write("integer: ")
+        if int.try_parse(line, value ref) /\ value == 75000 then
+            break value
+        fi
 
-let number = read_line()
+        write_line("please enter 75000")
+    od
 
-if text? /\ number? then
-    write_line(
-        "read the string {text} and the integer {int.parse(number)}"
-    )
+if let text = ask("string: "), number = read_75000() then
+    write_line("read the string {text} and the integer {number}")
 fi
