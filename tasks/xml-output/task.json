@@ -7,5 +7,6 @@
         "dotnet-interop",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build an XML document of character elements with name attributes and escaped remarks, enclosed in an outer element."
 }

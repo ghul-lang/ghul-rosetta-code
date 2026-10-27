@@ -6,5 +6,6 @@
         "date-time",
         "text-processing"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a text calendar for 1969, formatted for either a 132-column line printer or an 80-column terminal."
 }

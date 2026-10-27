@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Wordle_comparison",
     "status": "published",
     "tags": ["game", "strings", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Score a Wordle guess against an answer, marking each letter green, yellow or grey with correct handling of repeated letters."
 }

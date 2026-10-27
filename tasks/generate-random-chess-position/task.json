@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Generate_random_chess_position",
     "status": "published",
     "tags": ["strings", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a random chess position in FEN notation that meets the rules for kings, pawns and piece counts, with white to move."
 }

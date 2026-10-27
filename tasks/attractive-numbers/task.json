@@ -7,5 +7,6 @@
         "number-theory",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the attractive numbers up to 120, numbers whose count of prime factors is itself prime."
 }

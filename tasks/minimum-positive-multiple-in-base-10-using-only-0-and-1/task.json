@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Minimum_positive_multiple_in_base_10_using_only_0_and_1",
     "status": "published",
     "tags": ["algorithms", "number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the smallest positive multiple of a given integer that uses only the digits 0 and 1, for a list of test values."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Catamorphism",
     "status": "published",
     "tags": ["pipes", "generics", "closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how reduce, also called fold, works by implementing it to collapse a list into a single value."
 }

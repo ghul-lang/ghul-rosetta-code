@@ -7,5 +7,6 @@
     "data-structures",
     "optionals"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find words in a word list that share a digit sequence on a phone keypad, and report the textonym counts and examples."
 }

@@ -6,5 +6,6 @@
     "basics",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Test how a range or sequence syntax behaves with edge cases such as zero increments, reversed bounds and equal start and stop values."
 }

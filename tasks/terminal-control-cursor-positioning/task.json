@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Cursor_positioning",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Move the cursor to column 3, row 6 and display the word Hello starting there."
 }

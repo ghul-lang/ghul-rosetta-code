@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Letter_frequency",
     "status": "published",
     "tags": ["strings", "text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Open a text file and count how many times each letter appears in it."
 }

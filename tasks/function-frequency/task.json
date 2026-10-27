@@ -7,5 +7,6 @@
     "generators",
     "pipes"
   ],
-  "interest": 4
+  "interest": 4,
+    "summary": "Show the ten most frequently used function names in a program, found by static self-inspection rather than runtime counts."
 }

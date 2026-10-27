@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Password_generator",
     "status": "published",
     "tags": ["strings", "closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate random passwords of a chosen length that each include lowercase, uppercase, digit and symbol characters, with an option to exclude look-alike characters."
 }

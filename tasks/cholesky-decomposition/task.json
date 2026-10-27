@@ -6,5 +6,6 @@
         "maths",
         "algorithms"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the lower Cholesky factor of a symmetric positive definite matrix, such that A equals L times its transpose, and test it on two examples."
 }

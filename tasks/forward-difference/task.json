@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Forward_difference",
     "status": "published",
     "tags": ["maths", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the nth-order forward difference of a list of numbers by repeating the first-order difference n times."
 }

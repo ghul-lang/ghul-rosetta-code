@@ -8,5 +8,6 @@
         "maths",
         "operators"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Measure the boundary area of the convex polyhedron enclosing a set of 3D points, using Quickhull."
 }

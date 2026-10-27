@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/The_Twelve_Days_of_Christmas",
     "status": "published",
     "tags": ["text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the lyrics of the Christmas carol about twelve gifts given over twelve days, in the correct order."
 }

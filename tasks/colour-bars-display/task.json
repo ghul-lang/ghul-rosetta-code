@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Colour_bars/Display",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Display vertical color bars across the full width of the screen, using the system palette or a fixed sequence of eight colors."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pisano_period",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write functions for the Pisano period of prime powers and of any integer, and print values for small primes and integers."
 }

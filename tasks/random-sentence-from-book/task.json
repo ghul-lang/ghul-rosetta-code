@@ -8,5 +8,6 @@
     ],
     "interest": 4,
     "first_output_ms": 579,
-    "run_ms": 600
+    "run_ms": 600,
+    "summary": "Build random sentences from H. G. Wells's novel, using weighted word choices from the previous one or two words."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Biorhythms",
     "status": "published",
     "tags": ["date-time", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the physical, emotional and mental biorhythm values for a target date given a birthdate, using sine cycles of 23, 28 and 33 days."
 }

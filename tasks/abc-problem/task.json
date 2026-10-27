@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/ABC_problem",
     "status": "published",
     "tags": ["puzzles", "recursion", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Decide whether a word can be spelled using a set of two-sided letter blocks, where each block can be used at most once."
 }

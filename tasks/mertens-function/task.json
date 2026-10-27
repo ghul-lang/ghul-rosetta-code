@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mertens_function",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the Mertens function, the running sum of Möbius values, then count its zeros and zero crossings from 1 to 1000."
 }

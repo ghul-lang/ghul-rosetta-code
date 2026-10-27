@@ -6,5 +6,6 @@
     "number-theory",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the largest number up to 100 that cannot be made by summing multiples of 6, 9 and 20."
 }

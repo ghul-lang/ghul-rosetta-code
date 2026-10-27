@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Simple_turtle_graphics",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a house of a given size and a bar chart scaled to a square using turtle graphics, returning the turtle to its starting position and heading."
 }

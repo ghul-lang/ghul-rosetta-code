@@ -7,5 +7,6 @@
     "pipes"
   ],
   "interest": 2,
-    "run_ms": 727
+    "run_ms": 727,
+    "summary": "Find the first ten super-d numbers for d from 2 to 6, where d times n to the power d has d matching digits in a row."
 }

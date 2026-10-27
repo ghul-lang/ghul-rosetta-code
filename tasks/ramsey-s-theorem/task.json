@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ramsey's_theorem",
     "status": "published",
     "tags": ["maths", "generators", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find a 17-node graph in which no four nodes form a complete or empty subgraph, illustrating Ramsey's theorem."
 }

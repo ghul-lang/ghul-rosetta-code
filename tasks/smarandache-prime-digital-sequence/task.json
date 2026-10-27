@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Smarandache_prime-digital_sequence",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first twenty-five primes made only of prime digits, and the hundredth such prime."
 }

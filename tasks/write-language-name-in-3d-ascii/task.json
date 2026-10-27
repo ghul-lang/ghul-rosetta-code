@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Write_language_name_in_3D_ASCII",
     "status": "published",
     "tags": ["strings", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Display a name in three-dimensional ASCII art, aiming for a result that is interesting or amusing."
 }

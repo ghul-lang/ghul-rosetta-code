@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Quicksort",
     "status": "published",
     "tags": ["sorting", "pipes", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort an array with quicksort, choosing a pivot and partitioning the remaining elements into smaller and larger groups."
 }

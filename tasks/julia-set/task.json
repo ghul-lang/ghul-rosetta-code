@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Julia_set",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Render a Julia set, a fractal produced by repeatedly applying a complex-valued function."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Exponentiation_operator",
     "status": "published",
     "tags": ["operators", "maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Re-implement integer and floating-point exponentiation as a function and an operator, with overloads where the language supports them."
 }

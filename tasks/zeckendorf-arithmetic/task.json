@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zeckendorf_arithmetic",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement addition, subtraction, multiplication and division on Zeckendorf number representations, avoiding decimal numbers."
 }

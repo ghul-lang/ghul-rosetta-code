@@ -6,5 +6,6 @@
         "graphics",
         "algorithms"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement Floyd-Steinberg dithering, which reduces an image to a restricted palette by spreading quantization error to neighbouring pixels."
 }

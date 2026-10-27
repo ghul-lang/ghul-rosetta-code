@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numerical_integration/Tanh-Sinh_Quadrature",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Approximate a definite integral with tanh-sinh quadrature, a double-exponential method that refines the estimate until the requested accuracy is reached."
 }

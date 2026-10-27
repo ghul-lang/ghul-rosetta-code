@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Generator/Exponential",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build generators for powers of integers, filter cubes from the squares, and show ten values after skipping the first twenty."
 }

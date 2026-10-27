@@ -7,5 +7,6 @@
     "number-theory"
   ],
   "interest": 2,
-    "run_ms": 718
+    "run_ms": 718,
+    "summary": "Find the first ten ultra-useful primes, where each is the smallest k making 2 to the power 2^n minus k prime."
 }

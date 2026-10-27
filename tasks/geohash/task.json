@@ -7,5 +7,6 @@
     "maths",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Encode a latitude and longitude as a geohash string of chosen precision, with an optional decoder that returns the coordinate ranges."
 }

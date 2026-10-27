@@ -6,5 +6,6 @@
         "simulation",
         "maths"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Simulate a four-bit adder built from logic gates, with NOT, AND and OR as the only primitives, and add two four-bit numbers."
 }

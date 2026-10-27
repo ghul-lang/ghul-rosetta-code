@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Atomic_updates",
     "status": "published",
     "tags": ["simulation", "async", "concurrency", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Keep a set of nonnegative buckets consistent while concurrent tasks equalize pairs, redistribute values and display totals, using atomic transfers."
 }

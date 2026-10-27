@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Remove_duplicate_elements",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Strip repeated values from an array, using a hash table, sorting, or pairwise comparison."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Probabilistic_choice",
     "status": "published",
     "tags": ["simulation", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate a million items at random weighted by given probabilities, and compare observed frequencies with the targets."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Image_convolution",
     "status": "published",
     "tags": ["graphics", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a generic 3x3 convolution filter for greyscale or colour images, then optionally use it to build a few end-user image filters."
 }

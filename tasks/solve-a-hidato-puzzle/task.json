@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Solve_a_Hidato_puzzle",
     "status": "published",
     "tags": ["puzzles", "recursion"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Solve a Hidato puzzle by filling blank grid squares with numbers so that consecutive numbers touch, including diagonally, in a unique path."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/N-smooth_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate n-smooth numbers, positive integers with no prime factor greater than n, for several prime values of n."
 }

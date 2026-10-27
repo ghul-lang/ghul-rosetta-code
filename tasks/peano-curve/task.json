@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Peano_curve",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a Peano curve, a space-filling fractal, at order three or higher as a graphic or ASCII art."
 }

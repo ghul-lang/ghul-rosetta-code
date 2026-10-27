@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Search_a_list",
     "status": "published",
     "tags": ["algorithms", "pattern-matching", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find the index of a string in a list of strings, returning the first match and raising an error if it is absent."
 }

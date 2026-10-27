@@ -8,5 +8,6 @@
     ],
     "interest": 4,
     "first_output_ms": 14748,
-    "run_ms": 14783
+    "run_ms": 14783,
+    "summary": "Find the first five rare numbers, and more if possible, where the sum and difference of a number and its reverse are perfect squares."
 }

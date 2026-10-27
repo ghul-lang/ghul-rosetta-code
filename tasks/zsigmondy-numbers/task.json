@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zsigmondy_numbers",
     "status": "published",
     "tags": ["number-theory", "maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute Zsigmondy number sequences for several pairs of radices, returning the largest divisor coprime to all earlier power differences."
 }

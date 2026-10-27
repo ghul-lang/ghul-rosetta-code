@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hex_dump",
     "status": "published",
     "tags": ["text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement a hexdump-like tool that prints canonical hex and ASCII lines, with optional start offset and length, and a binary mode."
 }

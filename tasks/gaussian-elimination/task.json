@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gaussian_elimination",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve a linear system Ax=b using Gaussian elimination with partial pivoting and scaling, followed by back substitution."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cramer's_rule",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Solve a four-by-four system of linear equations with Cramer's rule, using determinants of the coefficient matrix and its column-replaced variants."
 }

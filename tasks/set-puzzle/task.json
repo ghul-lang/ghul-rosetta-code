@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Set_puzzle",
     "status": "published",
     "tags": ["game", "puzzles", "generators", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Deal nine or twelve cards from a shuffled Set deck, with exactly four or six sets among them, and print the cards and sets."
 }

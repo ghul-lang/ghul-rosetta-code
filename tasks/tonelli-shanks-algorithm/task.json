@@ -6,5 +6,6 @@
     "number-theory",
     "optionals"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Solve the congruence x squared equal n modulo p with the Tonelli-Shanks algorithm for several n and p, including very large values."
 }

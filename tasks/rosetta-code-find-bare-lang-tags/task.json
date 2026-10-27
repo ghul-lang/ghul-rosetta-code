@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Rosetta_Code/Find_bare_lang_tags",
     "status": "published",
     "tags": ["text-processing", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find language tags with no language given in wiki page text, and count them per language section."
 }

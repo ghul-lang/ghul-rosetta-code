@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/99_bottles_of_beer",
     "status": "published",
     "tags": ["text-processing", "pattern-matching", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the full lyrics of the song 99 Bottles of Beer, counting down from 99 bottles to zero."
 }

@@ -6,5 +6,6 @@
     "strings",
     "generators"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Decode Base64 text back into the original file, the reverse of encoding, handling padding correctly."
 }

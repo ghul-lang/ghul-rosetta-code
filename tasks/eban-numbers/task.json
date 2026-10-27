@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators"],
     "interest": 2,
-    "run_ms": 1169
+    "run_ms": 1169,
+    "summary": "Find the eban numbers, whose English spellings contain no letter e, listing those up to 4,000 and counting them up to ten million."
 }

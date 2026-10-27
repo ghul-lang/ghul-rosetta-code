@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cistercian_numerals",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Write a routine that displays a Cistercian numeral for any number from 0 to 9999, drawn as a figure or as text."
 }

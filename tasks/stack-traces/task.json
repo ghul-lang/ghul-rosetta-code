@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stack_traces",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the current call stack, including at least each function's name, and continue running afterward."
 }

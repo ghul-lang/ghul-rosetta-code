@@ -7,5 +7,6 @@
         "strings",
         "text-processing"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a UTF-8 file one whole character at a time, returning each next character and an end-of-file marker at the end."
 }

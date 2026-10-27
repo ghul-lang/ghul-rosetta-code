@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fairshare_between_two_and_more",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first 25 terms of the Thue-Morse fairshare sequence for two, three, five and eleven people, from base-b digit sums modulo b."
 }

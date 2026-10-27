@@ -7,5 +7,6 @@
         "strings",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read 80-column fixed-length records from a file, reverse each record, and write them back out as fixed-length records."
 }

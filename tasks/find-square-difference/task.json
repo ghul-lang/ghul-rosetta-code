@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Find_square_difference",
     "status": "published",
     "tags": ["maths", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the least positive integer n for which the difference between n squared and (n-1) squared exceeds 1000."
 }

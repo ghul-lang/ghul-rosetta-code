@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Minesweeper_game",
     "status": "published",
     "tags": ["game", "interactive", "recursion", "generators"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Play a text-based game of Minesweeper on a six by four grid, where the player marks and clears squares to find hidden mines."
 }

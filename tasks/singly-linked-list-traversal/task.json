@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Singly-linked_list/Traversal",
     "status": "published",
     "tags": ["data-structures", "generators", "optionals", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Walk a singly-linked list from its first element to its last, visiting each one in turn."
 }

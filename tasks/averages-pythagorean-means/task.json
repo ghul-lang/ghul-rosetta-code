@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Averages/Pythagorean_means",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the arithmetic, geometric and harmonic means of the integers 1 to 10, and show that A is at least G is at least H."
 }

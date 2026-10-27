@@ -7,5 +7,6 @@
     "number-theory"
   ],
   "interest": 2,
-    "run_ms": 1512
+    "run_ms": 1512,
+    "summary": "Find square numbers that contain every nonzero digit of their base exactly once for bases 9 to 12, and count them."
 }

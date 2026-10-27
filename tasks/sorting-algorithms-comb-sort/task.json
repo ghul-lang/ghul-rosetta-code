@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Comb_sort",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort an array with comb sort, a bubble sort variant that compares elements at a shrinking gap."
 }

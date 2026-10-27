@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Set_right-adjacent_bits",
     "status": "published",
     "tags": ["strings", "closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Set the n bits to the right of every set bit in a bit string, keeping its width, and show the results for several examples."
 }

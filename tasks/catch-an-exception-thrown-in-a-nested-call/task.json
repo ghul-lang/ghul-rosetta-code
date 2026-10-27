@@ -5,5 +5,6 @@
     "tags": [
         "basics"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Define two exceptions and show an outer function catching only one of them after it is thrown from a nested call."
 }

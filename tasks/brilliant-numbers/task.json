@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Brilliant_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first 100 brilliant numbers, semiprimes built from two primes with the same digit count, and locate the first one at each order of magnitude."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Magic_squares_of_odd_order",
     "status": "published",
     "tags": ["algorithms", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a magic square for any odd N, filled with the numbers 1 up to N squared, and demonstrate with N equal to 5."
 }

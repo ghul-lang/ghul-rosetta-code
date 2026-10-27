@@ -6,5 +6,6 @@
     "maths",
     "classes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Implement interval addition on floating-point numbers, rounding the lower and upper bounds outward so the exact sum always lies inside."
 }

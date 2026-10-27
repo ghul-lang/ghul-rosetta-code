@@ -6,5 +6,6 @@
         "algorithms",
         "data-structures"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Encode and decode byte streams with Consistent Overhead Byte Stuffing, which removes zero bytes so that data can be framed."
 }

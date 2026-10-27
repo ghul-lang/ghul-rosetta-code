@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Babylonian_spiral",
     "status": "published",
     "tags": ["maths", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Generate the first 40 points of the Babylonian spiral, a path of integer coordinates that grows in length and bends as little as possible."
 }

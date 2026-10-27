@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Munchausen_numbers",
     "status": "published",
     "tags": ["number-theory", "recursion", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all Munchausen numbers between 1 and 5000, the numbers equal to the sum of their digits each raised to its own power."
 }

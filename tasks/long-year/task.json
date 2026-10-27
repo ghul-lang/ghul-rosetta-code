@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Long_year",
     "status": "published",
     "tags": ["date-time"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that decides whether a given year has 53 ISO weeks, and demonstrate it on several years."
 }

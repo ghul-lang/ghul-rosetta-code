@@ -6,5 +6,6 @@
         "date-time",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count the months from 1900 to 2100 that have five Fridays, Saturdays and Sundays, and show the first and last few."
 }

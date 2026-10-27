@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Flow-control_structures",
     "status": "published",
     "tags": ["basics", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Document common flow-control structures, including goto, and how each works."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_concatenation",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create a string variable, concatenate it with a string literal into a second variable, and show both values."
 }

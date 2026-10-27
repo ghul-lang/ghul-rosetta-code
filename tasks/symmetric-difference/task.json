@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Symmetric_difference",
     "status": "published",
     "tags": ["data-structures", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the symmetric difference of two sets, the items in exactly one of them, using the given test sets."
 }

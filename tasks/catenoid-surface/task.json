@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Catenoid_surface",
     "status": "published",
     "tags": ["graphics", "maths", "operators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a catenoid surface, the minimal surface formed by rotating a catenary curve around an axis."
 }

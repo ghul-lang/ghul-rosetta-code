@@ -5,5 +5,6 @@
     "tags": ["puzzles", "recursion", "generators"],
     "interest": 4,
     "first_output_ms": 566,
-    "run_ms": 566
+    "run_ms": 566,
+    "summary": "Use six numbers drawn from a list and four operations to reach a random target between 101 and 999."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/Preprocessor",
     "status": "published",
     "tags": ["parsing", "text-processing"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a preprocessor for a small language that handles include and define directives, with macros that take parameters."
 }

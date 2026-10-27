@@ -6,5 +6,6 @@
     "maths",
     "algorithms"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Test whether a set of frequency counts could plausibly come from a uniform distribution, using a chi-squared test at the 5 percent level."
 }

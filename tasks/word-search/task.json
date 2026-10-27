@@ -5,5 +5,6 @@
     "tags": ["puzzles", "strings"],
     "interest": 4,
     "first_output_ms": 635,
-    "run_ms": 635
+    "run_ms": 635,
+    "summary": "Build a 10 by 10 word search filled with at least 25 dictionary words, with leftover cells spelling a fixed message, and print it with its solutions."
 }

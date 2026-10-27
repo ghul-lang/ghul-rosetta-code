@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Humble_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the humble numbers, the 7-smooth integers, showing the first fifty and counting those with a given number of digits."
 }

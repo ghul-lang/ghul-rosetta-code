@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Constrained_genericity",
     "status": "published",
     "tags": ["generics", "traits", "classes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a generic FoodBox container that accepts only types providing an eat operation, without the container itself calling it."
 }

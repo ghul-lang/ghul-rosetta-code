@@ -5,5 +5,6 @@
     "tags": ["recursion", "puzzles"],
     "interest": 3,
     "first_output_ms": 1916,
-    "run_ms": 1995
+    "run_ms": 1995,
+    "summary": "Build the longest possible chain of Pokemon names from a list where each name starts with the last letter of the previous name."
 }

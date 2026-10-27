@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Conjugate_a_Latin_verb",
     "status": "published",
     "tags": ["text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Conjugate a Latin verb and display all its person and number forms, one per line, in a fixed order."
 }

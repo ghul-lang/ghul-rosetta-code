@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cut_a_rectangle",
     "status": "published",
     "tags": ["puzzles", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Count the ways to cut an m by n rectangle along square edges into two pieces of the same shape, optionally showing each cut."
 }

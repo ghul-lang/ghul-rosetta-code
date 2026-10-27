@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hamiltonian_Cycle_via_Chvátal_Closure",
     "status": "published",
     "tags": ["algorithms", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Test a graph with the Chvátal closure method for Hamiltonian cycles, concluding only when the closure is complete."
 }

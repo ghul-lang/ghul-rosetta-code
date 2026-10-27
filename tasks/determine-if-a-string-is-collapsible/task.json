@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Determine_if_a_string_is_collapsible",
     "status": "published",
     "tags": ["strings", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find repeated adjacent characters in a string, remove the repeats, and show the original and collapsed strings with their lengths."
 }

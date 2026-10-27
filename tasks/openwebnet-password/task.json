@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/OpenWebNet_password",
     "status": "published",
     "tags": ["algorithms", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate the password an OpenWebNet gateway asks for when a client is not on its whitelist, using the nonce it sends."
 }

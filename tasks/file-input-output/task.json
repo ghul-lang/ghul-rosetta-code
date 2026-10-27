@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/File_input/output",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Copy input.txt to output.txt, reading the contents into a variable first and writing that variable to the new file."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Department_numbers",
     "status": "published",
     "tags": ["puzzles"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all ways to assign unique numbers from one to seven to three departments so they sum to twelve, with an even number for police."
 }

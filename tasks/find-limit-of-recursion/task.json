@@ -8,5 +8,6 @@
     ],
     "interest": 3,
     "first_output_ms": 595,
-    "run_ms": 619
+    "run_ms": 619,
+    "summary": "Determine how deep recursive calls can go before the program hits its limit."
 }

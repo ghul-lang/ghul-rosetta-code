@@ -6,5 +6,6 @@
     "primes",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the palindromic primes below 500 when written in base 16."
 }

@@ -6,5 +6,6 @@
     "strings",
     "basics"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Check whether a string has equal counts of the letters a, b and c, ignoring every other character."
 }

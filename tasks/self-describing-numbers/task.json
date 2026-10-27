@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Self-describing_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check whether a positive integer is self-describing, meaning each digit equals how often its position index appears, and optionally list them."
 }

@@ -6,5 +6,6 @@
     "maths",
     "recursion"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Convert polynomials to Bernstein coefficients for degrees two and three, and evaluate them with de Casteljau's algorithm."
 }

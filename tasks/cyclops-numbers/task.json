@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "pipes", "generators"],
     "interest": 3,
-    "run_ms": 967
+    "run_ms": 967,
+    "summary": "Find the first 50 cyclops numbers in base 10 and their prime, blind prime and palindromic prime variants, plus the first of each beyond ten million."
 }

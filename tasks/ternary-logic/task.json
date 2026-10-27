@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ternary_logic",
     "status": "published",
     "tags": ["maths", "unions", "pattern-matching", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define a trit type for three-valued logic, reimplement the usual boolean operators on it, then generate sample results."
 }

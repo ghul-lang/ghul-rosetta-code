@@ -67,7 +67,8 @@ cat >"$TASK/task.json" <<EOJ
     "url": "https://rosettacode.org/wiki/$JSON_URL_TITLE",
     "status": "queued",
     "tags": [],
-    "interest": 0
+    "interest": 0,
+    "summary": ""
 }
 EOJ
 

@@ -6,5 +6,6 @@
     "dotnet-interop",
     "concurrency"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Connect to an FTP server, change directory, list files and download one in binary, preferring passive mode."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Polymorphic_copy",
     "status": "published",
     "tags": ["classes", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Copy an object whose concrete type is only known at run time, producing an independent duplicate that still behaves as its original subclass."
 }

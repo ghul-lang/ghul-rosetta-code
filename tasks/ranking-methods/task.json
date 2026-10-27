@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ranking_methods",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement five ranking methods, standard, modified, dense, ordinal and fractional, and apply each to a list of scores."
 }

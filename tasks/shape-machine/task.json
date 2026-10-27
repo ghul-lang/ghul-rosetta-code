@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Shape-Machine",
     "status": "published",
     "tags": ["interactive"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Repeat adding three and multiplying by 0.86 from a starting number, optionally stopping when the value stops changing."
 }

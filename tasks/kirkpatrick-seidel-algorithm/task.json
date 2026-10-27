@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kirkpatrick–Seidel_algorithm",
     "status": "published",
     "tags": ["algorithms", "recursion", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Find the convex hull of a 2-D point set using the divide-and-conquer Kirkpatrick-Seidel method."
 }

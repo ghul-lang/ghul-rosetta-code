@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/While",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print 1024 and keep halving it, printing each value, while it stays greater than zero."
 }

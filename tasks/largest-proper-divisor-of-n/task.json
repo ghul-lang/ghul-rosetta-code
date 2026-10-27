@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Largest_proper_divisor_of_n",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Compute the largest proper divisor of each n from 1 to 100, taking the largest divisor of 1 to be 1."
 }

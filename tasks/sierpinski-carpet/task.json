@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sierpinski_carpet",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw a Sierpinski carpet of a given order as graphics or ASCII art."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stable_marriage_problem",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve the stable marriage problem for ten men and ten women with the Gale-Shapley algorithm, then test a perturbed pairing for stability."
 }

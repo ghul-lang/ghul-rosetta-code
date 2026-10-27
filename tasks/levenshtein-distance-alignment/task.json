@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Levenshtein_distance/Alignment",
     "status": "published",
     "tags": ["strings", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show the alignment of two strings under their Levenshtein edit operations, marking gaps with dashes."
 }

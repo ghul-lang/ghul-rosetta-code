@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/ISBN13_check_digit",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Validate ISBN-13 codes by weighting alternate digits by three, summing, and checking the remainder after division by ten."
 }

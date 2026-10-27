@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Generic_swap",
     "status": "published",
     "tags": ["generics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a generic swap that exchanges the values of two storage places, whatever their types."
 }

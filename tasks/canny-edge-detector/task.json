@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Canny_edge_detector",
     "status": "published",
     "tags": ["graphics", "algorithms"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Detect edges in an image using the Canny method, covering smoothing, gradients, non-maximum suppression and hysteresis."
 }

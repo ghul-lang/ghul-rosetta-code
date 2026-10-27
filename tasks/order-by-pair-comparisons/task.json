@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Order_by_pair_comparisons",
     "status": "published",
     "tags": ["sorting", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort the colours of the rainbow by asking the user to compare pairs, minimising the number of questions."
 }

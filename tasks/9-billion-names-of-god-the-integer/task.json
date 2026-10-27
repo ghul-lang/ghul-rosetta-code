@@ -7,5 +7,6 @@
     "maths"
   ],
   "interest": 3,
-    "run_ms": 5709
+    "run_ms": 5709,
+    "summary": "Print the first rows of a triangle counting the ways each integer can be written as a sum, and check row sums against the partition function."
 }

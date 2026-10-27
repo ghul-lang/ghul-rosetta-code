@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Function_definition",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to define a multiplication function that accepts two values and returns the result."
 }

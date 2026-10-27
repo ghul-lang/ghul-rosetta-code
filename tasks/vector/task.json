@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vector",
     "status": "published",
     "tags": ["maths", "classes", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a physical vector type with addition, subtraction, scalar multiplication and division, plus a pretty-print function."
 }

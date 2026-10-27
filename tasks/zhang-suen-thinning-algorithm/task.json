@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zhang-Suen_thinning_algorithm",
     "status": "published",
     "tags": ["algorithms", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Thin the black pixels of a binary image toward single-pixel skeletons using Zhang-Suen's two-step method, repeating until nothing changes."
 }

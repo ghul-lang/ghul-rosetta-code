@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
     "interest": 2,
-    "run_ms": 941
+    "run_ms": 941,
+    "summary": "List each point where the gap between consecutive Niven numbers grows to a new record, up to the ten millionth Niven number."
 }

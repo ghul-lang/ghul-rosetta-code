@@ -7,5 +7,6 @@
     "generators",
     "operators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Apply the full matrix NG method to two continued fractions at once, deciding which input term to read next."
 }

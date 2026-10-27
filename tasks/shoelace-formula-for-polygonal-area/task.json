@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Shoelace_formula_for_polygonal_area",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the area of a polygon from its ordered vertices using the shoelace formula, applied to five given points."
 }

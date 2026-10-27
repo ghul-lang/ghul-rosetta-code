@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Variable-length_quantity",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert numbers to and from variable-length quantity octet sequences, and check that the round trip restores the originals."
 }

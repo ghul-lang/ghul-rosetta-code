@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Words_containing_\"the\"_substring",
     "status": "published",
     "tags": ["text-processing", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find words longer than eleven letters that contain the substring the in a dictionary file, and display them."
 }

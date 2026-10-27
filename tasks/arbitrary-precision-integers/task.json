@@ -5,5 +5,6 @@
     "tags": ["number-theory", "generics", "dotnet-interop"],
     "interest": 3,
     "first_output_ms": 1610,
-    "run_ms": 1658
+    "run_ms": 1658,
+    "summary": "Compute the huge integer 5^(4^(3^2)) with built-in arbitrary-precision arithmetic, and count its decimal digits."
 }

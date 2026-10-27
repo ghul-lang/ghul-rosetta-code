@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Create_a_file",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Create an empty file named output.txt and an empty directory named docs, both in the working directory and in the filesystem root."
 }

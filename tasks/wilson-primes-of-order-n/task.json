@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Wilson_primes_of_order_n",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find Wilson primes of each order from 1 to 11 among primes below 18, or below 11,000 if big integers are available."
 }

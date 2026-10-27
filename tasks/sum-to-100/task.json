@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sum_to_100",
     "status": "published",
     "tags": ["puzzles", "generators", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Find every way to place plus or minus signs between the digits 1 to 9 so the sum is 100, and report the solutions."
 }

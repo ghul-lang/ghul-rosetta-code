@@ -6,5 +6,6 @@
         "puzzles",
         "recursion"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a step_up function that climbs one stair using a robot step call that can fail, using as few variables as possible."
 }

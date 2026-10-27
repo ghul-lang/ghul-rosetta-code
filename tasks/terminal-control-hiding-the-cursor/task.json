@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Hiding_the_cursor",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Hide the terminal cursor and then show it again."
 }

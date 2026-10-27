@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/File_size_distribution",
     "status": "published",
     "tags": ["text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count files by size in logarithmic buckets across a directory tree, starting from the current or a given directory."
 }

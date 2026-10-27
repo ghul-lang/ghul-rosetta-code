@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ordered_partitions",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate all distributions of the numbers 1 to a total into blocks of given sizes."
 }

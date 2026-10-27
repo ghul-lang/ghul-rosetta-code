@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/File_extension_is_in_extensions_list",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Check whether a filename has one of a list of extensions, ignoring case, and test the result on sample names."
 }

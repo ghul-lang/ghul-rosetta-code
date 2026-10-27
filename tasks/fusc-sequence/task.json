@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fusc_sequence",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the fusc sequence, Stern's diatomic series from index zero, showing the first 61 terms and each new record length."
 }

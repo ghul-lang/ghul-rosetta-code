@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Convert an infix expression to reverse Polish notation with the shunting-yard algorithm, showing the operator stack and output at each step."
 }

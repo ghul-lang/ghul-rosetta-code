@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Singular_value_decomposition",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the singular value decomposition of an m by n matrix, reading its size and entries from input."
 }

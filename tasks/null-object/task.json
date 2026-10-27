@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Null_object",
     "status": "published",
     "tags": ["basics", "pattern-matching", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to test whether a value is the null object by checking an object against null."
 }

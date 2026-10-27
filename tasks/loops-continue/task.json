@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Continue",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print 1 to 10 in two rows of five using one loop that forces the next iteration on a condition."
 }

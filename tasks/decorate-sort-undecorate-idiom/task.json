@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Decorate-sort-undecorate_idiom",
     "status": "published",
     "tags": ["sorting", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort a list of words by length using the decorate-sort-undecorate idiom, pairing each word with its key before sorting."
 }

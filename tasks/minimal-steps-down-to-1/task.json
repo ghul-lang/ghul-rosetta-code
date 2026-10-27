@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Minimal_steps_down_to_1",
     "status": "published",
     "tags": ["algorithms", "number-theory", "pattern-matching", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the fewest division and subtraction steps needed to reduce a number to one under two different sets of rules, and show one path."
 }

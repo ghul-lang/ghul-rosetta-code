@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parse_EBNF",
     "status": "published",
     "tags": ["parsing", "recursion", "unions"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a grammar given in EBNF notation and decide whether an input string matches it."
 }

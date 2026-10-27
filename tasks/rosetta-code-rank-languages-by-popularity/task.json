@@ -9,5 +9,6 @@
   ],
   "interest": 2,
     "first_output_ms": 617,
-    "run_ms": 646
+    "run_ms": 646,
+    "summary": "Sort programming languages by how many category entries each has on a programming-task wiki, using scraping or its API."
 }

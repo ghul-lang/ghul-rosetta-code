@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Permutations",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate every permutation of n distinct objects, such as the first n numerals."
 }

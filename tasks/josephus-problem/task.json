@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Josephus_problem",
     "status": "published",
     "tags": ["puzzles", "algorithms", "recursion", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the survivor of the Josephus problem for any number of prisoners and step size, and identify the m-th prisoner to die."
 }

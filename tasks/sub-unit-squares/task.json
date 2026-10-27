@@ -6,5 +6,6 @@
     "number-theory",
     "basics"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the first few square numbers that remain square when one is subtracted from every digit."
 }

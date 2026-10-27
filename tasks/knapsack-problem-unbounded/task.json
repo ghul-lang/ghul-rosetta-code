@@ -5,5 +5,6 @@
     "tags": [
         "algorithms"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find how many of each item to take to maximize carried value within weight and volume limits when any item may be taken in unlimited quantity."
 }

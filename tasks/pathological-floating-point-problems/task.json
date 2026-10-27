@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pathological_floating_point_problems",
     "status": "published",
     "tags": ["maths", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how floating-point rounding derails a recurrence that should converge to 6, and a repeated bank-balance calculation."
 }

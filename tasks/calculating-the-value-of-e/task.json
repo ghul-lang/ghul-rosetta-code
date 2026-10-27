@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Calculating_the_value_of_e",
     "status": "published",
     "tags": ["maths", "generators", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate the value of Euler's number e, the base of natural logarithms."
 }

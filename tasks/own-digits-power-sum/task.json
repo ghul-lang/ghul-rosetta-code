@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Own_digits_power_sum",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find every N-digit number that equals the sum of its digits each raised to the power N, for each N from 3 to 8."
 }

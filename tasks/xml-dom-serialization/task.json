@@ -6,5 +6,6 @@
         "text-processing",
         "dotnet-interop"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a small XML document in memory and serialise it to text, with a root element, a child element and some text."
 }

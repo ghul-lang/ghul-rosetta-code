@@ -7,5 +7,6 @@
         "number-theory",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate all primes with strictly ascending decimal digits, by building candidates rather than filtering every prime."
 }

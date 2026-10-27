@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Total_circles_area",
     "status": "published",
     "tags": ["maths", "algorithms", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Compute the area covered by a set of partially overlapping circles, counting overlaps once, for a standard dataset of 24 disks."
 }

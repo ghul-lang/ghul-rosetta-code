@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parse_an_IP_Address",
     "status": "published",
     "tags": ["parsing", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Parse IPv4 and IPv6 text addresses, with and without ports, into hexadecimal address numbers and port details."
 }

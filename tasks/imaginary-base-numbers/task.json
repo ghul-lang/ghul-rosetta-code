@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Imaginary_base_numbers",
     "status": "published",
     "tags": ["maths", "number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert numbers to and from imaginary bases such as quater-imaginary, base 2i, and back."
 }

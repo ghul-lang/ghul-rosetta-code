@@ -5,5 +5,6 @@
     "tags": ["strings", "generators", "text-processing"],
     "interest": 3,
     "first_output_ms": 763,
-    "run_ms": 4635
+    "run_ms": 4635,
+    "summary": "Generate the word-length sequence of a self-describing never-ending sentence and report the length and word at large positions."
 }

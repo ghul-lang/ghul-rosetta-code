@@ -8,5 +8,6 @@
     ],
     "interest": 3,
     "first_output_ms": 1085,
-    "run_ms": 3625
+    "run_ms": 3625,
+    "summary": "Find proper fractions that reduce by crossing out a shared digit, grouped by digit count, with counts and examples."
 }

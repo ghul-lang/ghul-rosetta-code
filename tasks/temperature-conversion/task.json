@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Temperature_conversion",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert a kelvin temperature into celsius, fahrenheit and rankine scales, and print all four values."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["graphics", "strings"],
     "interest": 4,
-    "run_ms": 592
+    "run_ms": 592,
+    "summary": "Print punched cards in the Hollerith code, using the hello-world program as the test."
 }

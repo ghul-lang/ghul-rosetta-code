@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Number_names",
     "status": "published",
     "tags": ["strings", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Spell out integers in English words, supporting inputs up to one million, with optional support for zero, negatives and decimals."
 }

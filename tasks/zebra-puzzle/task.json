@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zebra_puzzle",
     "status": "published",
     "tags": ["puzzles", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Solve Einstein's zebra puzzle programmatically, finding who owns the zebra and listing each house's nationality, pet, drink and cigarette brand."
 }

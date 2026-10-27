@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Make_directory_path",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a function that creates a directory path including any missing parents, succeeding quietly if it already exists."
 }

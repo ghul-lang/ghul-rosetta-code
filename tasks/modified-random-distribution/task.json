@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Modified_random_distribution",
     "status": "published",
     "tags": ["simulation", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate random numbers with a V-shaped probability distribution using rejection sampling, then show a text histogram of at least 10,000 samples."
 }

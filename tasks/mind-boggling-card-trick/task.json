@@ -6,5 +6,6 @@
     "simulation",
     "puzzles"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Simulate a card trick that deals a shuffled deck into red and black piles, swaps random cards between them, and tests a counting claim."
 }

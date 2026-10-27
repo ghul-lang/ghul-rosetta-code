@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Wave_function_collapse",
     "status": "published",
     "tags": ["algorithms", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Generate a tiled image with the Wave Function Collapse heuristic, placing blocks under adjacency constraints on a wrapping grid."
 }

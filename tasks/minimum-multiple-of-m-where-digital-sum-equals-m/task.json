@@ -5,5 +5,6 @@
     "tags": ["number-theory", "pipes"],
     "interest": 2,
     "first_output_ms": 790,
-    "run_ms": 829
+    "run_ms": 829,
+    "summary": "Generate the sequence where each term is the smallest multiplier m for which the digit sum of n times m equals n."
 }

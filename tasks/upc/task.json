@@ -7,5 +7,6 @@
         "algorithms",
         "text-processing"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Decode UPC-A barcodes drawn as spaces and hashes into decimal digits, rejecting the bad row and checking each checksum."
 }

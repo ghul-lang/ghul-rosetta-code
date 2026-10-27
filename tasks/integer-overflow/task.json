@@ -6,5 +6,6 @@
     "basics",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Demonstrate integer overflow for each fixed-size signed and unsigned integer type in a language, showing wrapped or caught results."
 }

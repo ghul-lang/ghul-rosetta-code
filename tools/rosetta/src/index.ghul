@@ -49,8 +49,8 @@ namespace Rosetta is
         si
     si
 
-    // index.json: what ghul.dev's explorer reads about every task. Tags and
-    // interest are written by hand in each task.json, against the vocabulary
+    // index.json: what ghul.dev's explorer reads about every task. Tags,
+    // interest and the summary are written by hand in each task.json, against the vocabulary
     // in TAGS.json; everything else is derived from the task's files, so
     // nothing here can disagree with them.
     class TASK_INDEX is
@@ -203,6 +203,15 @@ namespace Rosetta is
                 _problems.add("{slug}: interest must be 1 to 5")
             fi
 
+            // One sentence saying what the task asks for, written for this repository rather than
+            // taken from the wiki, so a reader who has never met the task knows what they are
+            // looking at.
+            let summary = (string_property(descriptor, "summary") ?? "").trim()
+
+            if summary.length == 0 then
+                _problems.add("{slug}: no summary")
+            fi
+
             let parts = parts_of(directory, slug)
 
             if parts.count == 0 then
@@ -219,6 +228,7 @@ namespace Rosetta is
             writer.write_string("slug", slug)
             writer.write_string("title", title)
             writer.write_string("url", url)
+            writer.write_string("summary", summary)
 
             writer.write_start_array("tags")
 

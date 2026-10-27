@@ -9,5 +9,6 @@
     ],
     "interest": 4,
     "first_output_ms": 516,
-    "run_ms": 556
+    "run_ms": 556,
+    "summary": "Find the row and column of an element in a periodic table layout, given its atomic number."
 }

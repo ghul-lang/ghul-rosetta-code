@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort a list of numbers with gnome sort, a method that moves an element into place by a chain of adjacent swaps."
 }

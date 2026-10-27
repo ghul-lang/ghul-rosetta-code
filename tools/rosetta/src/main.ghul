@@ -173,7 +173,7 @@ write_index(root: string, check: bool, commit: string?) is
     od
 
     if index.problems.count > 0 then
-        error.write_line("{index.problems.count} problems in task.json tags or interest")
+        error.write_line("{index.problems.count} problems in task.json tags, interest or summary")
 
         System.Environment.exit_code = 1
 

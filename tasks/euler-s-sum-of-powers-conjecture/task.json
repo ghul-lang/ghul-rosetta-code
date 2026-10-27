@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 987,
-    "run_ms": 1006
+    "run_ms": 1006,
+    "summary": "Search for a counterexample to Euler's sum of powers conjecture, finding distinct integers between 0 and 250 with four fifth powers summing to a fifth power."
 }

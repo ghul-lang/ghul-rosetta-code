@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Averages/Arithmetic_mean",
     "status": "published",
     "tags": ["pipes", "maths", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the arithmetic mean of a numeric vector, deciding how to handle an empty input."
 }

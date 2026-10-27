@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Map_range",
     "status": "published",
     "tags": ["maths", "pattern-matching", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Linearly map a number from one range onto another, then use it to convert values from 0 to 10 into the range -1 to 0."
 }

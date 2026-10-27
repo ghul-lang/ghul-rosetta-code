@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Prime_decomposition",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that returns the prime factors of an integer greater than one, with repeats, for numbers of any size."
 }

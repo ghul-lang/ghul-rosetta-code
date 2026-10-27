@@ -6,5 +6,6 @@
     "basics",
     "dotnet-interop"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Find positive integers below 1000 whose binary form is one binary string repeated twice, showing each in decimal and binary."
 }

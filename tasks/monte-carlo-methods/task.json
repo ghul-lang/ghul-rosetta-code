@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "simulation", "generators"],
     "interest": 3,
-    "run_ms": 711
+    "run_ms": 711,
+    "summary": "Estimate pi by random sampling of points in a square containing a circle, for several sample sizes."
 }

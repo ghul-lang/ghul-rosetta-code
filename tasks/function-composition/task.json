@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Function_composition",
     "status": "published",
     "tags": ["closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a compose function that takes two one-argument functions and returns a new function applying one after the other."
 }

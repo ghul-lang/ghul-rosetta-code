@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Substitution_cipher",
     "status": "published",
     "tags": ["strings", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encrypt a file by replacing each letter with a predetermined substitute, save the output, then decrypt it back to the original."
 }

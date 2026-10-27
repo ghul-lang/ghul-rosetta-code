@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Roman_numerals/Encode",
     "status": "published",
     "tags": ["algorithms", "strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert a positive integer into its modern Roman numeral form, such as 1990 becoming MCMXC."
 }

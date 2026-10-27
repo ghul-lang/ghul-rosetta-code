@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Euclidean_rhythm",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a binary rhythm pattern with m ones and n minus m zeros, using a Euclidean-style algorithm."
 }

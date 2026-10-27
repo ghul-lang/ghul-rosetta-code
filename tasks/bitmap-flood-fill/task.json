@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Flood_fill",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement a flood fill that spreads from a point across a raster image, filling the area bounded by a target color."
 }

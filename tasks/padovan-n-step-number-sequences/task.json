@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Padovan_n-step_number_sequences",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first terms of the Padovan n-step sequences for n from 2 to 8, which generalise the Padovan sequence."
 }

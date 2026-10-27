@@ -7,5 +7,6 @@
         "operators",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement element-wise matrix and scalar-matrix operations: addition, subtraction, multiplication, division and exponentiation, so other tasks can reuse them."
 }

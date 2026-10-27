@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Strip_a_set_of_characters_from_a_string",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that removes every character in a given set from a string, returning the remaining text."
 }

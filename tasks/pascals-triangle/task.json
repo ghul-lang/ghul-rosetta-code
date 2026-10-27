@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pascal's_triangle",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print the first n rows of the triangle of binomial coefficients, starting from a single 1 at the top."
 }

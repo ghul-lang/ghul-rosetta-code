@@ -6,5 +6,6 @@
     "dotnet-interop",
     "strings"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Compute the MD5 hash of a string, optionally checking the result against the test vectors in RFC 1321."
 }

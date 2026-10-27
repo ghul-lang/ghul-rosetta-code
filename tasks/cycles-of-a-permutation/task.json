@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cycles_of_a_permutation",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert permutations between one-line and cycle notation, and find their inverses, products, orders, signatures and effect on strings."
 }

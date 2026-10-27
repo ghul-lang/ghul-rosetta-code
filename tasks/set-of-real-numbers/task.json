@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Set_of_real_numbers",
     "status": "published",
     "tags": ["maths", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Represent sets of real numbers built from open and closed intervals, supporting membership checks and union, intersection and difference."
 }

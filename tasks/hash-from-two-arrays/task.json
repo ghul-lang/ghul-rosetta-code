@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hash_from_two_arrays",
     "status": "published",
     "tags": ["data-structures", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a dictionary from two equal-length arrays, using the elements of the first as keys and those of the second as values."
 }

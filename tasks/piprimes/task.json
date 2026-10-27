@@ -6,5 +6,6 @@
     "primes",
     "basics"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Find the values of n for which the count of primes up to n is below 22."
 }

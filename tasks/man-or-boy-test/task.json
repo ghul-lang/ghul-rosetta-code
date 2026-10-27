@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Man_or_boy_test",
     "status": "published",
     "tags": ["recursion", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Run Knuth's man or boy test, an ALGOL 60 program that checks how a language handles recursion and non-local references, for a range of k values."
 }

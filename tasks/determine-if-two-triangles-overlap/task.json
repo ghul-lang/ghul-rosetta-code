@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Determine_if_two_triangles_overlap",
     "status": "published",
     "tags": ["maths", "algorithms", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Decide whether each given pair of 2D triangles in a plane overlaps, as in collision detection tests."
 }

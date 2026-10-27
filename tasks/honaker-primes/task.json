@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
     "interest": 3,
-    "run_ms": 559
+    "run_ms": 559,
+    "summary": "Identify Honaker primes, those whose digit sum matches the digit sum of their position, and list the first fifty."
 }

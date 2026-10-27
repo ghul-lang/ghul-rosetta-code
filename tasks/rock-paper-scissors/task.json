@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Rock-paper-scissors",
     "status": "published",
     "tags": ["game", "interactive", "unions", "pattern-matching"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Play rock-paper-scissors against a computer that weights its choices by how often the player has picked each option."
 }

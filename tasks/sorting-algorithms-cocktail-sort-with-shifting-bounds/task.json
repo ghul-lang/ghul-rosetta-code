@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Cocktail_sort_with_shifting_bounds",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement a cocktail sort, a bidirectional bubble sort that shrinks its scanned range on each pass, and show the sorted output."
 }

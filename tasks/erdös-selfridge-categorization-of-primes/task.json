@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 1935,
-    "run_ms": 2104
+    "run_ms": 2104,
+    "summary": "Assign primes to Erdős-Selfridge categories according to the prime factors of each prime plus one, for the first 200 and the first million."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/URL_parser",
     "status": "published",
     "tags": ["parsing", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Parse a well-formed URL into its scheme, credentials, domain, port, path, query and fragment parts."
 }

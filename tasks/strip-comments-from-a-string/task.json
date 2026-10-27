@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Strip_comments_from_a_string",
     "status": "published",
     "tags": ["strings", "text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Remove comments introduced by hash or semicolon markers from input lines and show the remaining text."
 }

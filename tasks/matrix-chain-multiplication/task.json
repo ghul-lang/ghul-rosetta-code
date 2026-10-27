@@ -6,5 +6,6 @@
     "algorithms",
     "recursion"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find the cheapest order in which to multiply a chain of matrices, given only their dimensions, and report the total number of operations."
 }

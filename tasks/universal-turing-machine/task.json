@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "classes", "parsing"],
     "interest": 4,
-    "run_ms": 3390
+    "run_ms": 3390,
+    "summary": "Simulate a universal Turing machine that reads any machine's rule table and runs it, then run an incrementer and a busy beaver machine."
 }

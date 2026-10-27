@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Undulating_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find undulating numbers, digit patterns like ABABAB, in bases 10 and 7, including the 600th and the count below 2^53."
 }

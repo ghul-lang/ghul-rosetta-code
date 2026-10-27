@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Introspection",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check the language version, whether a variable and an absolute-value function exist, and count the global integer variables and their sum."
 }

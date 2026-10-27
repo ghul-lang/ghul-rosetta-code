@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ramer-Douglas-Peucker_line_simplification",
     "status": "published",
     "tags": ["algorithms", "recursion", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Simplify a 2D polyline of ten points with the Ramer-Douglas-Peucker algorithm at an error threshold of one, and show what remains."
 }

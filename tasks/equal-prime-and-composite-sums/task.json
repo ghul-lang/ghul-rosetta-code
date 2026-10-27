@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Equal_prime_and_composite_sums",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find numbers that are both a sum of the first n primes and a sum of the first m composites, listing at least six."
 }

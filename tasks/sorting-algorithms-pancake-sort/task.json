@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Pancake_sort",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort integers into ascending order using only prefix reversals, flipping one fixed end of the list as the sole operation."
 }

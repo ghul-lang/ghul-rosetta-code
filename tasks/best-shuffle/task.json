@@ -6,5 +6,6 @@
     "strings",
     "algorithms"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Shuffle a string so that as many characters as possible move away from their original positions, and report the count of unchanged positions."
 }

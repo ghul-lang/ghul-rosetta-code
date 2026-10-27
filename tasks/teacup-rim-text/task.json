@@ -6,5 +6,6 @@
     "strings",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Search a word list for sets of same-length words that can be arranged around a circle, each word's first letter becoming the next word's last."
 }

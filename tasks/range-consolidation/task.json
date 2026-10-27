@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Range_consolidation",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Consolidate a list of numeric ranges by merging any that touch or overlap, then show the normalized outcome for five test sets."
 }

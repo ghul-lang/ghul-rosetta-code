@@ -7,5 +7,6 @@
     "generators"
   ],
   "interest": 3,
-    "run_ms": 1017
+    "run_ms": 1017,
+    "summary": "Find every ordered trio of four-faced dice, labelled one to four, in which each loses to the next yet the first beats the last."
 }

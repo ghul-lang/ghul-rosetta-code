@@ -6,5 +6,6 @@
         "concurrency",
         "basics"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read a sleep time, print Sleeping, pause the main thread, then print Awake."
 }

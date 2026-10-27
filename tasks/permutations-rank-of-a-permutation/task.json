@@ -7,5 +7,6 @@
     "maths"
   ],
   "interest": 3,
-    "run_ms": 1605
+    "run_ms": 1605,
+    "summary": "Convert permutations to their lexicographic ranks and back, and sample random permutations of twelve objects by rank."
 }

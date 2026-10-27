@@ -6,5 +6,6 @@
         "algorithms",
         "optionals"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute all-pairs shortest paths in a sparse weighted directed graph with negative edges by reweighting edges and then running Dijkstra's algorithm from each vertex."
 }

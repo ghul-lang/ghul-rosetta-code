@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fermat_pseudoprimes",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count Fermat pseudoprimes up to 12,000 for each base from one to twenty, and list the first twenty."
 }

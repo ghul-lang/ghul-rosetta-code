@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Magic_squares_of_doubly_even_order",
     "status": "published",
     "tags": ["maths", "puzzles"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Create an 8 by 8 magic square, a grid of consecutive integers whose rows, columns and diagonals share one sum."
 }

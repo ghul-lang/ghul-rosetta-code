@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hello_world/Newbie",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Explain how a newcomer installs a language and editor, then runs a Hello World example, with instructions for finding its output."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Yin_and_yang",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Create a function that draws a yin and yang taijitu symbol at a requested size, and show two small sizes."
 }

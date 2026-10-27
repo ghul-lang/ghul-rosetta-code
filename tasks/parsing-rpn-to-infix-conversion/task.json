@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parsing/RPN_to_infix_conversion",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert space-separated reverse Polish expressions into infix form, showing how the working structure changes with each token."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pell's_equation",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the smallest positive integer solution of x squared minus n times y squared equals one for four values of n."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hourglass_puzzle",
     "status": "published",
     "tags": ["puzzles", "game", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve the puzzle of measuring nine minutes with hourglasses timing four and seven minutes."
 }

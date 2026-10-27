@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sequence:_smallest_number_with_exactly_n_divisors",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the sequence whose nth term is the smallest natural number with exactly n divisors, showing at least fifteen terms."
 }

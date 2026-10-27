@@ -8,5 +8,6 @@
     ],
     "interest": 3,
     "first_output_ms": 512,
-    "run_ms": 524
+    "run_ms": 524,
+    "summary": "Choose a random line from a file in one pass without knowing its length, then tally a million simulated choices over ten lines."
 }

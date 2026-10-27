@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Flatten_a_list",
     "status": "published",
     "tags": ["data-structures", "unions", "pattern-matching", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Flatten arbitrarily nested lists of values into one flat list, using a sample nested list as the test."
 }

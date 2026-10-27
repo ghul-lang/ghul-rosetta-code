@@ -8,5 +8,6 @@
         "interactive"
     ],
     "interest": 5,
-    "run_ms": 1001
+    "run_ms": 1001,
+    "summary": "Build a graphical honeycomb of twenty hexagons, each labelled with a random letter, that the user picks by click or key press."
 }

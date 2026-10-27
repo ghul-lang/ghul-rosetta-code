@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/GSTrans_string_conversion",
     "status": "published",
     "tags": ["strings", "unions", "parsing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encode and decode strings in GSTrans, a printable-character scheme for all byte values, and say how errors are reported."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pell_numbers",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute Pell numbers, Pell-Lucas numbers, rational approximations to the square root of two, Pell primes and related Pythagorean triples."
 }

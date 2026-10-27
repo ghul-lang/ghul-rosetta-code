@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic-geometric_mean",
     "status": "published",
     "tags": ["maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a function computing the arithmetic-geometric mean of two numbers and use it to evaluate agm of 1 and 1 over root 2."
 }

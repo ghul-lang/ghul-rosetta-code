@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Farey_sequence",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the Farey sequences for orders 1 to 11, count the fractions for orders 100 to 1000 by hundreds, and show them as n/d fractions."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Range_expansion",
     "status": "published",
     "tags": ["parsing", "generators", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Expand a compact text description of integer ranges, such as 1-3,5, into the full list of numbers it describes."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Strand_sort",
     "status": "published",
     "tags": ["sorting", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort numbers with strand sort, which pulls sorted runs out of an unsorted list and merges them into the result."
 }

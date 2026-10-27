@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Scope/Function_names_and_labels",
     "status": "published",
     "tags": ["basics", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show which visibility levels apply to function names and labels in the language, demonstrating how each is scoped."
 }

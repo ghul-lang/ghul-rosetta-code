@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Isqrt_(integer_square_root)_of_X",
     "status": "published",
     "tags": ["maths", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute integer square roots with integer arithmetic only, using the quadratic residue method, and tabulate results for 0 to 65."
 }

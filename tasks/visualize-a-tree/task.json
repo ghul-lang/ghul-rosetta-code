@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Visualize_a_tree",
     "status": "published",
     "tags": ["graphics", "classes", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Write a program that produces a human-friendly visual representation of a tree structure, such as indented text."
 }

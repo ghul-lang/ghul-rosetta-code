@@ -8,5 +8,6 @@
   ],
   "interest": 2,
     "first_output_ms": 1680,
-    "run_ms": 6466
+    "run_ms": 6466,
+    "summary": "Find the first ten composite numbers with no single-digit prime factors whose prime factors all appear as substrings of the number."
 }

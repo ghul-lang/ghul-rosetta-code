@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stirling_numbers_of_the_second_kind",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute Stirling numbers of the second kind as a table up to 12 by 12, and find the largest value when n is 100."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Literals/Integer",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show integer literals written in every base supported, along with suffixes for different integer sizes."
 }

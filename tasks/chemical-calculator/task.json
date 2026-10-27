@@ -5,5 +5,6 @@
     "tags": ["parsing", "recursion"],
     "interest": 3,
     "first_output_ms": 733,
-    "run_ms": 766
+    "run_ms": 766,
+    "summary": "Compute the molar mass of a chemical formula, including parenthesised groups, using a table of atomic masses."
 }

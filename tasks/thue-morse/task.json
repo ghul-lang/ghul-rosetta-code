@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Thue-Morse",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the Thue-Morse sequence, a binary sequence built by repeatedly appending its complement to itself."
 }

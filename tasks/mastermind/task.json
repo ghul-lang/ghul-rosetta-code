@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mastermind",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement the board game Mastermind, with configurable color count, code length, guess limit and repetition, showing each guess and its feedback."
 }

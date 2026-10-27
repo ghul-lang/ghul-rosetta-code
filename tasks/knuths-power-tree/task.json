@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Knuth's_power_tree",
     "status": "published",
     "tags": ["number-theory", "maths", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the integers in Knuth's power tree for a given exponent, then use them to compute exact integer powers efficiently."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Engel_expansion",
     "status": "published",
     "tags": ["number-theory", "operators", "generators", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert rational numbers to Engel expansions and back, testing with approximations of pi, e and the square root of two."
 }

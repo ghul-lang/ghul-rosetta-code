@@ -6,5 +6,6 @@
     "strings",
     "classes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Encrypt and decrypt messages with the straddling checkerboard cipher, turning letters into a stream of decimal digits."
 }

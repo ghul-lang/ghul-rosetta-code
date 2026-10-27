@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/McNaughton-Yamada-Thompson_algorithm",
     "status": "published",
     "tags": ["algorithms", "parsing", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert regular expressions into nondeterministic finite automata with Thompson's construction, then use them to match strings."
 }

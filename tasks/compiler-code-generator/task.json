@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/code_generator",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Translate a flattened syntax tree for a small C-like language into text assembly code for a stack-based virtual machine."
 }

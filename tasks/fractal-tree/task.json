@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fractal_tree",
     "status": "published",
     "tags": ["graphics", "fractal", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a fractal tree, starting from a trunk and recursively splitting each branch end into two smaller branches."
 }

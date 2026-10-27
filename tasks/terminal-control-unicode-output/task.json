@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Unicode_output",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check whether the terminal supports Unicode, then print the delta character U+25B3 or raise an error if it does not."
 }

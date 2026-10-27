@@ -7,5 +7,6 @@
         "strings",
         "classes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a suffix tree for the string banana with a dollar sign appended, and display it using any convenient construction."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Elementary_cellular_automaton",
     "status": "published",
     "tags": ["simulation", "graphics", "generators", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Simulate an elementary cellular automaton for any of the 256 rules on a wrapping row of cells from a chosen initial state, and show its evolution."
 }

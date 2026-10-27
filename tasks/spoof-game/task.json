@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Spoof_game",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Play Spoof, a guessing game in which each player hides up to three coins and tries to name the total number of coins hidden by everyone."
 }

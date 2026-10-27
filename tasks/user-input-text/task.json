@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/User_input/Text",
     "status": "published",
     "tags": ["interactive", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Read a string and the integer 75000 from the console as typed input."
 }

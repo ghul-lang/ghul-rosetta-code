@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["graphics"],
     "interest": 4,
-    "run_ms": 503
+    "run_ms": 503,
+    "summary": "Generate and display an image that appears to move while staying perfectly still."
 }

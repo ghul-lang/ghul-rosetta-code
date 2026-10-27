@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/World_Cup_group_stage",
     "status": "published",
     "tags": ["generators", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Enumerate all 729 win, draw and loss outcomes of a World Cup group's six games, and histogram the standings points for each team."
 }

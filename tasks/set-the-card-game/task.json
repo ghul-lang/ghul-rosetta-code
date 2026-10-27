@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Set,_the_card_game",
     "status": "published",
     "tags": ["game", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Deal cards from a shuffled pack of Set cards and list every set of three cards among them, where each feature is all alike or all different."
 }

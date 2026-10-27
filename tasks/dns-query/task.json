@@ -6,5 +6,6 @@
     "algorithms",
     "dotnet-interop"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Resolve the domain name www.kame.net to its IPv4 and IPv6 addresses using DNS and print both."
 }

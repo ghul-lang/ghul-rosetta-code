@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Case-sensitivity_of_identifiers",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show whether identifiers differing only in letter case are treated as distinct, using names like dog, Dog and DOG."
 }

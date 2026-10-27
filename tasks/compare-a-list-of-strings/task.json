@@ -6,5 +6,6 @@
     "strings",
     "pipes"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Test whether a list of strings is all equal and whether each string is less than the next."
 }

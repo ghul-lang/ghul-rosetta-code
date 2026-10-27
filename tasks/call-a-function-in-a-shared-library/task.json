@@ -6,5 +6,6 @@
         "dotnet-interop",
         "closures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Call a function in a shared library at run time without linking it at compile time, falling back to an internal equivalent if the library is missing."
 }

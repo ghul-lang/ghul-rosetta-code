@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Casting_out_nines",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement the casting out nines checksum, use it to filter candidate numbers for Kaprekar properties, and extend the method to other bases."
 }

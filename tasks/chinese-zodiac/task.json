@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Chinese_zodiac",
     "status": "published",
     "tags": ["date-time"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Determine the Chinese zodiac animal, element and yin or yang for the lunisolar year beginning in a given CE year."
 }

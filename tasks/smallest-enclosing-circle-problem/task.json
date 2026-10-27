@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Smallest_enclosing_circle_problem",
     "status": "published",
     "tags": ["algorithms", "operators", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the smallest circle, defined by a centre and radius, enclosing a collection of points in n-dimensional space."
 }

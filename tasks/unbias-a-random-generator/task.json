@@ -6,5 +6,6 @@
     "simulation",
     "closures"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Turn a biased random bit generator into an unbiased one using von Neumann debiasing, and count outputs for N from 3 to 6."
 }

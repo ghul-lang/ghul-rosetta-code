@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Motzkin_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the first 42 Motzkin numbers, which count non-intersecting chord arrangements on a circle, and mark which are prime."
 }

@@ -6,5 +6,6 @@
     "maths",
     "algorithms"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Compute the QR decomposition of a sample matrix using Householder reflections, then use it for a least-squares fit."
 }

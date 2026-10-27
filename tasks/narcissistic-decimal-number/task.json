@@ -5,5 +5,6 @@
     "tags": ["number-theory", "generators", "recursion"],
     "interest": 2,
     "first_output_ms": 1211,
-    "run_ms": 1229
+    "run_ms": 1229,
+    "summary": "Generate the first 25 narcissistic decimal numbers, those equal to the sum of their digits raised to the power of the digit count."
 }

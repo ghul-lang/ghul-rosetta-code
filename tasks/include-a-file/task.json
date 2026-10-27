@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Include_a_file",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how a program can include source code from other files."
 }

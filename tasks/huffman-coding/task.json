@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Huffman_coding",
     "status": "published",
     "tags": ["graphics", "algorithms", "unions", "pattern-matching", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Build a Huffman code table for the characters of a given sample string, assigning shorter bit codes to more frequent characters."
 }

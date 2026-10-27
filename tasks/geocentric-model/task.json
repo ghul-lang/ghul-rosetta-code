@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "maths"],
     "interest": 4,
-    "run_ms": 512
+    "run_ms": 512,
+    "summary": "Show the planets rotating in a geocentric model of the solar system."
 }

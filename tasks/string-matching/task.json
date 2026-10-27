@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_matching",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Test whether one string starts with, contains, or ends with another, and report where matches occur."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/The_Name_Game",
     "status": "published",
     "tags": ["strings", "interactive", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print the lyrics of the Name Game song for a given name, applying its rules for vowels and for names starting with B, F or M."
 }

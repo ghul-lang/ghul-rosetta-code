@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bilinear_interpolation",
     "status": "published",
     "tags": ["graphics", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Enlarge an image by sixty percent using bilinear interpolation, then display the result or save it to a file."
 }

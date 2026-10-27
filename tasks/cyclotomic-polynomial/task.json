@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "number-theory", "pattern-matching"],
     "interest": 3,
-    "run_ms": 1960
+    "run_ms": 1960,
+    "summary": "Compute and print the first thirty cyclotomic polynomials and the order of the first ten whose coefficients include n or minus n."
 }

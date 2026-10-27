@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Topological_sort",
     "status": "published",
     "tags": ["sorting", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Order library names so each comes after the libraries it depends on, flagging any dependencies that cannot be ordered."
 }

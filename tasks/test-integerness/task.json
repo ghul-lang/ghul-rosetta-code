@@ -6,5 +6,6 @@
     "maths",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Test whether a rational, real or complex number, in several representations, is mathematically an integer, optionally within a tolerance."
 }

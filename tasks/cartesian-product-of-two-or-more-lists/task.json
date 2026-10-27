@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cartesian_product_of_two_or_more_lists",
     "status": "published",
     "tags": ["data-structures", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the Cartesian product of two lists and of an arbitrary number of lists, including cases where a list is empty."
 }

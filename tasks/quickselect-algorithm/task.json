@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Quickselect_algorithm",
     "status": "published",
     "tags": ["sorting", "algorithms", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Use quickselect to find the first to tenth largest members of a ten-element vector, in order."
 }

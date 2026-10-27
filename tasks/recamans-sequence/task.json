@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Recaman's_sequence",
     "status": "published",
     "tags": ["number-theory", "graphics", "generators"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Generate the first fifteen terms of Recamán's sequence, find the first duplicated value, and count terms needed to cover 0 to 1000."
 }

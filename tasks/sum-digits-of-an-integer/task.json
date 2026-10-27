@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sum_digits_of_an_integer",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sum the digits of a natural number written in a given base, showing examples in base ten and hexadecimal."
 }

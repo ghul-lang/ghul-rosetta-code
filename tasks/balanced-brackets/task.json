@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Balanced_brackets",
     "status": "published",
     "tags": ["algorithms", "generators", "pipes", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate strings with N opening and N closing brackets in arbitrary order, and decide whether each is balanced."
 }

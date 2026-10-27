@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pernicious_numbers",
     "status": "published",
     "tags": ["number-theory", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the first 25 pernicious numbers, whose binary one-bit count is prime, and those in a range near 888,888,888."
 }

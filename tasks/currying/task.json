@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Currying",
     "status": "published",
     "tags": ["closures", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Demonstrate currying with a simple example, a function that takes its arguments one at a time, and summarise its history."
 }

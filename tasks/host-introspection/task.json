@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Host_introspection",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the word size and endianness of the host machine."
 }

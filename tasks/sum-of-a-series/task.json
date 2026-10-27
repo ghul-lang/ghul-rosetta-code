@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sum_of_a_series",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the partial sum of the reciprocal squares up to 1000 terms, which approximates the Basel problem value."
 }

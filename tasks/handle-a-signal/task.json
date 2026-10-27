@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
     "interest": 3,
-    "run_ms": 1587
+    "run_ms": 1587,
+    "summary": "Print an integer every half second until an interrupt signal arrives, then report the elapsed seconds and exit."
 }

@@ -5,5 +5,6 @@
     "tags": ["graphics"],
     "interest": 4,
     "first_output_ms": 1073,
-    "run_ms": 3134
+    "run_ms": 3134,
+    "summary": "Generate a continuous stream of random black and white 320 by 240 images, showing the frames per second."
 }

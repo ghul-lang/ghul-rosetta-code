@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Check_Machin-like_formulas",
     "status": "published",
     "tags": ["maths", "classes", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Verify a list of Machin-like formulas for pi/4 by computing the tangent of each right-hand side with exact arithmetic, and confirm one is incorrect."
 }

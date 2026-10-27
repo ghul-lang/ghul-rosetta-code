@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators"],
     "interest": 2,
-    "run_ms": 9823
+    "run_ms": 9823,
+    "summary": "Find the first thirty Ruth-Aaron numbers under both prime-factor and prime-divisor definitions, plus the first triple of each."
 }

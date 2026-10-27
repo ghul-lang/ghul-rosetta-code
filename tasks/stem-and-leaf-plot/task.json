@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stem-and-leaf_plot",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Draw a text stem-and-leaf plot of a fixed data set, with each value's last digit as its leaf."
 }

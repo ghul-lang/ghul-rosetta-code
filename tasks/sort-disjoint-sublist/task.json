@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_disjoint_sublist",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort only the values at chosen indices in a list, leaving every other value where it stands."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Simple_database",
     "status": "published",
     "tags": ["data-structures", "date-time", "pipes", "text-processing"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a command-line tool that stores small records with a description, category, and date in a human-readable file, with commands to add entries and print them."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiton",
     "status": "published",
     "tags": ["algorithms", "generics", "classes", "concurrency", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a multiton class that manages a map of controlled instances, and test that each key returns the same instance."
 }

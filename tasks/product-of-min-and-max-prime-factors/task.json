@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Product_of_min_and_max_prime_factors",
     "status": "published",
     "tags": ["primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Multiply each integer's least and greatest prime factors, for the integers 1 to 100."
 }

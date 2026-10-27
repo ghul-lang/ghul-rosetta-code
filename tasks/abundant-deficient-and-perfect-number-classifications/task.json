@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Abundant,_deficient_and_perfect_number_classifications",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count how many integers from 1 to 20,000 are deficient, perfect or abundant, by comparing each one's proper divisor sum against the number."
 }

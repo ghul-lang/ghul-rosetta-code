@@ -7,5 +7,6 @@
     "operators",
     "optionals"
   ],
-  "interest": 4
+  "interest": 4,
+    "summary": "Implement a toy elliptic curve digital signature scheme, with key generation, signing and verification over a small prime field."
 }

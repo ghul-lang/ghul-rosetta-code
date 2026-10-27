@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Guess_the_number/With_feedback_(player)",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a computer player that finds a hidden target number, narrowing its guesses from the higher, lower or equal feedback it receives."
 }

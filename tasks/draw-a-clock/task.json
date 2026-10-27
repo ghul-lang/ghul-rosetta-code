@@ -5,5 +5,6 @@
     "tags": ["date-time", "graphics"],
     "interest": 4,
     "first_output_ms": 597,
-    "run_ms": 642
+    "run_ms": 642,
+    "summary": "Draw a clock that visibly changes every second, using a timer or system event rather than polling, and matches the system clock."
 }

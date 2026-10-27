@@ -7,5 +7,6 @@
         "dotnet-interop",
         "basics"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show the epoch used by popular date libraries, preferably by demonstrating it, and display the date in UTC where possible."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Least_common_multiple",
     "status": "published",
     "tags": ["maths", "recursion"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Work out the LCM of a pair of integers, which is the smallest positive integer that both divide."
 }

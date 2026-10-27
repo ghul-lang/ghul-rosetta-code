@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "operators", "classes", "graphics"],
     "interest": 4,
-    "run_ms": 509
+    "run_ms": 509,
+    "summary": "Add sandpiles on a 3 by 3 grid, letting avalanches settle, and confirm that addition is commutative and that one sandpile acts as the identity."
 }

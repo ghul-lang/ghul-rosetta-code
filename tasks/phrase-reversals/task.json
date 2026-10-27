@@ -7,5 +7,6 @@
     "pipes",
     "basics"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Reverse a phrase three ways: as a whole, within each word, and by word order."
 }

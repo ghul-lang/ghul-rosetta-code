@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/One-dimensional_cellular_automata",
     "status": "published",
     "tags": ["graphics", "simulation", "generators", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Evolve a one-dimensional cellular automaton over a row of cells, applying a three-cell neighbourhood rule to each generation."
 }

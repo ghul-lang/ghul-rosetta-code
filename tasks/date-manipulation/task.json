@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Date_manipulation",
     "status": "published",
     "tags": ["date-time", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Add twelve hours to a given date and time string, then display the result, optionally in a different time zone."
 }

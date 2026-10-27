@@ -6,5 +6,6 @@
     "strings",
     "pattern-matching"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Encode words with the Soundex phonetic index, giving homophones the same code and applying the rules for consonants that share a code."
 }

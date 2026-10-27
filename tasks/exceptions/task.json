@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Exceptions",
     "status": "published",
     "tags": ["classes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show an example of exception handling in the language, including catching an exception and throwing a new one."
 }

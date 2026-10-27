@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Smith–Waterman_algorithm",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Compute the optimal local alignment of two sequences with the Smith-Waterman dynamic programming method, giving its score and aligned substrings."
 }

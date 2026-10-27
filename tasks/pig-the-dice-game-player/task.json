@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["game", "simulation"],
     "interest": 4,
-    "run_ms": 676
+    "run_ms": 676,
+    "summary": "Extend a Pig dice simulator with computer players that follow one or more strategies, and show sample play."
 }

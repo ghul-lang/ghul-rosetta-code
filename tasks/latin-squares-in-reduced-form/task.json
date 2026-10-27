@@ -5,5 +5,6 @@
     "tags": ["generators", "recursion", "maths"],
     "interest": 3,
     "first_output_ms": 552,
-    "run_ms": 552
+    "run_ms": 552,
+    "summary": "Construct all reduced Latin squares of a given order, display those of order 4, and count them for orders 1 to 6."
 }

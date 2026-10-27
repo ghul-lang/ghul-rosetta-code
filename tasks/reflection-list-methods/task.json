@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Reflection/List_methods",
     "status": "published",
     "tags": ["dotnet-interop", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "List an object's methods by name, value, or both, using reflection where available."
 }

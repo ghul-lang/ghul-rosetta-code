@@ -7,5 +7,6 @@
     "number-theory"
   ],
   "interest": 3,
-    "run_ms": 22869
+    "run_ms": 22869,
+    "summary": "Find numbers whose English name ends with the same letter that the next number's name begins with, and tally them by final digit."
 }

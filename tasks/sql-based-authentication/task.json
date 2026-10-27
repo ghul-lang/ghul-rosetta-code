@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/SQL-based_authentication",
     "status": "published",
     "tags": ["dotnet-interop", "strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Connect to a MySQL database, create salted password records in a users table, and authenticate logins against them."
 }

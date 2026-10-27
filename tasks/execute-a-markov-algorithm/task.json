@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Execute_a_Markov_algorithm",
     "status": "published",
     "tags": ["text-processing", "strings"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Interpret Markov algorithm rulesets, applying the first matching rewrite rule on each pass until a terminating rule halts execution."
 }

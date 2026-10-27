@@ -4,5 +4,6 @@
     "status": "solved",
     "tags": ["sorting", "graphics", "algorithms"],
     "interest": 3,
-    "run_ms": 927
+    "run_ms": 927,
+    "summary": "Time several sorting algorithms on sequences of ones, sorted and shuffled values of growing length, then plot the results."
 }

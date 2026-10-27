@@ -6,5 +6,6 @@
     "text-processing",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Search a log for paragraphs starting with a Traceback line that mention SystemError, printing each match separated by dashed lines."
 }

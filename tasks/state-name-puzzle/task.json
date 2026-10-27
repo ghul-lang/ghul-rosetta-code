@@ -7,5 +7,6 @@
     "strings",
     "data-structures"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find pairs of state names whose combined letters rearrange into two other state names, using real and fictitious lists."
 }

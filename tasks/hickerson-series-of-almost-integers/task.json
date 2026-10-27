@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hickerson_series_of_almost_integers",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Evaluate Hickerson's almost-integer function for n from 1 to 17 and report which values are almost integers, using extra precision where needed."
 }

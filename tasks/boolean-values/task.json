@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Boolean_values",
     "status": "published",
     "tags": ["basics", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how boolean true and false are represented, and which other values count as true or false in conditions."
 }

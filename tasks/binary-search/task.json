@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Binary_search",
     "status": "published",
     "tags": ["algorithms", "pattern-matching", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement binary search over a sorted integer array, including recursive and iterative forms and the leftmost and rightmost insertion points."
 }

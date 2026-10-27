@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Queue/Usage",
     "status": "published",
     "tags": ["data-structures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create a queue and demonstrate its push, pop and empty operations."
 }

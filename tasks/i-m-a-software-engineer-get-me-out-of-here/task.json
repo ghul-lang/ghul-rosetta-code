@@ -9,5 +9,6 @@
   ],
   "interest": 4,
     "first_output_ms": 701,
-    "run_ms": 824
+    "run_ms": 824,
+    "summary": "Find shortest escape routes across a grid map where each cell's number gives how far the party travels per day, using Dijkstra and Floyd algorithms."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Permutations_by_swapping",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate permutations of n items where each successive permutation differs by one swap, and give the sign of each permutation."
 }

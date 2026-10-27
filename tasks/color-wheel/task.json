@@ -6,5 +6,6 @@
         "graphics",
         "maths"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw an HSV color wheel by computing each pixel's color from its position within a circle."
 }

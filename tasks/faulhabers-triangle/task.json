@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Faulhaber's_triangle",
     "status": "published",
     "tags": ["maths", "operators", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build the first ten rows of Faulhaber's triangle of power-sum coefficients, and use row 18 to compute a large sum."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "generators"],
     "interest": 3,
-    "run_ms": 560
+    "run_ms": 560,
+    "summary": "List primes in which every entry is the least prime whose reciprocal keeps a running reciprocal total under one."
 }

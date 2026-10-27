@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Nested_function",
     "status": "published",
     "tags": ["closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write two nested functions where the inner one reads the outer one's separator and updates its counter to print a numbered list."
 }

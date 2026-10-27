@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Transliterate_English_text_using_the_Greek_alphabet",
     "status": "published",
     "tags": ["text-processing", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Transliterate English text into Greek letters by substituting Greek equivalents for English letter groups, such as th for theta, keeping the original spacing."
 }

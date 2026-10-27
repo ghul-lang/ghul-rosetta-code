@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["puzzles", "game", "graphics"],
     "interest": 4,
-    "run_ms": 3696
+    "run_ms": 3696,
+    "summary": "Place m black and m white queens on an n-by-n board so that no queen attacks one of the other colour, and show solutions for two cases."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/A+B",
     "status": "published",
     "tags": ["basics", "interactive", "pattern-matching"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Add two integers, each between -1000 and 1000, read from input and print their sum."
 }

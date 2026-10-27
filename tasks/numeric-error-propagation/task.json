@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numeric_error_propagation",
     "status": "published",
     "tags": ["operators", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement an uncertain number type that propagates error through arithmetic, then use it to find the distance between two points with uncertain coordinates."
 }

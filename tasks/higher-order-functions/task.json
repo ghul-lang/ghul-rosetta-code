@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Higher-order_functions",
     "status": "published",
     "tags": ["basics", "generics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Demonstrate passing a function as a parameter to another function, a basic higher-order technique."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Check_that_file_exists",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Verify that a file named input.txt and a directory named docs exist, both in the working directory and in the filesystem root."
 }

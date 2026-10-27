@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Range_extraction",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Turn a sorted list of integers into a compact range string, such as 0-2,4,6-8, and show the output for a sample list."
 }

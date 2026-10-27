@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kaprekar_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all Kaprekar numbers below 10,000, those whose square can be split in two so the parts sum to the original."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Reverse_a_string",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Reverse a string, keeping combining marks attached to the characters they modify."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "pipes"],
     "interest": 2,
-    "run_ms": 2912
+    "run_ms": 2912,
+    "summary": "Find Zumkeller numbers, whose divisors split into two groups with equal sums, listing the first 220 and the first 40 odd ones."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Cumulative_standard_deviation",
     "status": "published",
     "tags": ["maths", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a stateful function that takes numbers one at a time and returns the running population standard deviation after each value."
 }

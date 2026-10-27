@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Break",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show a loop that draws random values between 0 and 19 and stops after it prints 10."
 }

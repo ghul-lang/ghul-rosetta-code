@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Price_fraction",
     "status": "published",
     "tags": ["algorithms", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Rescale a value between zero and one to a standard value using a fixed table of thresholds and replacement values."
 }

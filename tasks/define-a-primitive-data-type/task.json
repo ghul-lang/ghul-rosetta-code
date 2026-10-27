@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Define_a_primitive_data_type",
     "status": "published",
     "tags": ["classes", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define an integer-like type restricted to values from one to ten, and explain how its bounds are checked."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Empty_program",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write the simplest program the language still accepts as correct."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dynamic_variable_names",
     "status": "published",
     "tags": ["interactive"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create a variable whose name is read from user input at run time rather than written in the program text."
 }

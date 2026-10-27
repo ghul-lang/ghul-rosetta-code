@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sudoku",
     "status": "published",
     "tags": ["puzzles", "recursion"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Solve a partially filled 9x9 Sudoku grid and display the completed grid in a readable layout."
 }

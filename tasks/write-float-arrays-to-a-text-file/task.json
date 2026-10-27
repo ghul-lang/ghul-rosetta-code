@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Write_float_arrays_to_a_text_file",
     "status": "published",
     "tags": ["text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write two equal-length numeric arrays to a two-column text file, each column formatted to its own precision."
 }

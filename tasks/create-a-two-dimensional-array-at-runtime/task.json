@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Create_a_two-dimensional_array_at_runtime",
     "status": "published",
     "tags": ["data-structures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Read two sizes from the user, create a two-dimensional array of that shape, write and print one element, then free it if needed."
 }

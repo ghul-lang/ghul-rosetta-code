@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Calkin-Wilf_sequence",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the first twenty terms of the Calkin-Wilf sequence of rationals, then find the position of a given large fraction in it."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bulls_and_cows",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Play Bulls and Cows against a human, scoring each guess for bulls and cows against a random secret number with no repeated digits."
 }

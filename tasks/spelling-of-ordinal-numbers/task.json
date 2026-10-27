@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Spelling_of_ordinal_numbers",
     "status": "published",
     "tags": ["text-processing", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Spell positive integers as English ordinal names, such as first or one billionth, using the short scale for large values."
 }

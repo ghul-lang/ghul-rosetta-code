@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Day_of_the_week",
     "status": "published",
     "tags": ["date-time", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the years between 2008 and 2121 in which Christmas Day falls on a Sunday, using a standard date library."
 }

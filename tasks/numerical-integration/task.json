@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "closures"],
     "interest": 2,
-    "run_ms": 647
+    "run_ms": 647,
+    "summary": "Implement the rectangle, trapezium and Simpson's rules for numerical integration, then apply them to several test integrals."
 }

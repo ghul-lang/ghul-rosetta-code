@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Concurrent_computing",
     "status": "published",
     "tags": ["concurrency", "async"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print three given words in random order, one per line, using concurrent threads or tasks."
 }

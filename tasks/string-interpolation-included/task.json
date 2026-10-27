@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_interpolation_(included)",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Use built-in string interpolation to fill a placeholder in a sentence from a variable."
 }

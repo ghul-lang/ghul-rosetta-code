@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Determine_sentence_type",
     "status": "published",
     "tags": ["text-processing", "pattern-matching", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "For each sentence in a passage, find its last punctuation mark and output a letter for exclamation, question, serious or neutral."
 }

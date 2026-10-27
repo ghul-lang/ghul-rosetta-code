@@ -7,5 +7,6 @@
         "primes"
     ],
     "interest": 3,
-    "run_ms": 8006
+    "run_ms": 8006,
+    "summary": "Compute Chowla numbers, the sum of each number's divisors other than one and itself, and use them to count primes and find perfect numbers."
 }

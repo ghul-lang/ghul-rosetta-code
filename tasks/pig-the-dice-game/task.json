@@ -6,5 +6,6 @@
         "game",
         "interactive"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Simulate the dice game Pig for two players, scoring turns and rolling until a player holds or rolls a one."
 }

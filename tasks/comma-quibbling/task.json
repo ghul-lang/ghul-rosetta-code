@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Comma_quibbling",
     "status": "published",
     "tags": ["text-processing", "pattern-matching", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a function that joins a list of words with commas and a final conjunction, wrapped in braces, and test it on four inputs."
 }

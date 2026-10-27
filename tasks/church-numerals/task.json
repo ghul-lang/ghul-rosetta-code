@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Church_numerals",
     "status": "published",
     "tags": ["recursion", "generics", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define Church numerals with zero, successor, addition, multiplication and exponentiation, then convert results to integers."
 }

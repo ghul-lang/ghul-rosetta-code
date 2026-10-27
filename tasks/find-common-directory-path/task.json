@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Find_common_directory_path",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find the directory path common to several given paths, using a supplied separator, and test it on three Unix paths."
 }

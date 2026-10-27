@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pentomino_tiling",
     "status": "published",
     "tags": ["puzzles", "recursion", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Tile an 8 by 8 grid with the twelve pentomino shapes, leaving four random cells uncovered, and print the result."
 }

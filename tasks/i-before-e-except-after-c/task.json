@@ -6,5 +6,6 @@
     "text-processing",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Check a word list to see whether the spelling mnemonic about ie and ei holds up, with and without word frequencies."
 }

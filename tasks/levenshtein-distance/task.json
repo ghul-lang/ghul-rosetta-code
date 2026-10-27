@@ -5,5 +5,6 @@
     "tags": ["strings", "algorithms", "graphics"],
     "interest": 4,
     "first_output_ms": 556,
-    "run_ms": 556
+    "run_ms": 556,
+    "summary": "Measure how far apart kitten and sitting are, counting the fewest insertions, deletions and substitutions needed to convert one into the other."
 }

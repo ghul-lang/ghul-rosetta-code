@@ -10,5 +10,6 @@
     ],
     "interest": 5,
     "first_output_ms": 827,
-    "run_ms": 1212
+    "run_ms": 1212,
+    "summary": "Implement K-means++ clustering, which partitions points into K clusters using smarter initial centroid choices, and show the results."
 }

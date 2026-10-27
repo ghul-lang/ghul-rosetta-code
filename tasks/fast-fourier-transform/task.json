@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fast_Fourier_transform",
     "status": "published",
     "tags": ["maths", "algorithms", "recursion"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Compute the Fast Fourier Transform of a sequence of complex numbers, and take magnitudes when the input is real."
 }

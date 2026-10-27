@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stirling_numbers_of_the_first_kind",
     "status": "published",
     "tags": ["maths", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute Stirling numbers of the first kind as a table up to 12 by 12, and find the largest value when n is 100."
 }

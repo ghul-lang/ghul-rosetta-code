@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
     "interest": 3,
-    "run_ms": 701
+    "run_ms": 701,
+    "summary": "Identify colorful numbers, whose consecutive digit-group products are all distinct, and count them by order of magnitude."
 }

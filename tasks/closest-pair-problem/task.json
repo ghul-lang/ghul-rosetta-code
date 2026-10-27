@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["algorithms", "recursion", "graphics"],
     "interest": 3,
-    "run_ms": 512
+    "run_ms": 512,
+    "summary": "Find the two closest points in a set of two-dimensional points, using either a brute-force search or a divide-and-conquer method."
 }

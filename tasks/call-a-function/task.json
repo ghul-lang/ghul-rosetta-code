@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Call_a_function",
     "status": "published",
     "tags": ["basics", "closures", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Demonstrate the different ways a function can be called, including optional, variadic and named arguments, first-class use and partial application."
 }

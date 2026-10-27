@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Primes_-_allocate_descendants_to_their_ancestors",
     "status": "published",
     "tags": ["primes", "number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "List, for numbers up to 99, the ancestors and descendants of each, where a parent is the sum of a number's prime factors."
 }

@@ -6,5 +6,6 @@
     "maths",
     "operators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Derive the first ten polynomial formulas for sums of integer powers, starting from p equal to zero."
 }

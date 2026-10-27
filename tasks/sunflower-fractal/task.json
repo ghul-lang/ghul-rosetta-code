@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sunflower_fractal",
     "status": "published",
     "tags": ["fractal", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a sunflower pattern of seeds, each turned the golden angle from the last and placed further out along a spiral."
 }

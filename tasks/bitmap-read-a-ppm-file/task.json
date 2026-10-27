@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Read_a_PPM_file",
     "status": "published",
     "tags": ["graphics", "classes", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a PPM image file into a raster image type, then convert the color picture to grayscale and write the result out."
 }

@@ -7,5 +7,6 @@
         "basics",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print a numbered menu from a list of strings, prompt until the user enters a valid index, and return the chosen string."
 }

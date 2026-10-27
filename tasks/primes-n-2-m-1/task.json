@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Primes:_n*2^m+1",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first 45, 50 and 400 primes given by n times two to the power m, plus one, with m minimal."
 }

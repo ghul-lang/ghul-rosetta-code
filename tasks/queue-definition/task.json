@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Queue/Definition",
     "status": "published",
     "tags": ["data-structures", "generics", "classes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Build a first-in-first-out queue offering push, pop and empty, and handle popping an empty one."
 }

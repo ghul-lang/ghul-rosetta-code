@@ -6,5 +6,6 @@
     "basics",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the characters a program may use in names, using the language's own facilities rather than a fixed list."
 }

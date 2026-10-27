@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dragon_curve",
     "status": "published",
     "tags": ["graphics", "fractal", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a dragon curve fractal, either on screen or to an image file, using a recursive or iterative method."
 }

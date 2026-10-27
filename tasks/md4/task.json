@@ -6,5 +6,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the 128-bit MD4 message digest of a fixed ASCII text string, using a library or an implementation of the algorithm."
 }

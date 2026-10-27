@@ -7,5 +7,6 @@
         "pipes",
         "data-structures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a hash join that combines two tables on matching column values, building a multimap from the smaller table first."
 }

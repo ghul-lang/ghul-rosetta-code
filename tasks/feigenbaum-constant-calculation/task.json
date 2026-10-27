@@ -5,5 +5,6 @@
   "tags": [
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Calculate the Feigenbaum constant, a number from chaos theory describing period-doubling bifurcations."
 }

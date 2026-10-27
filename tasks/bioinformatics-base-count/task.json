@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bioinformatics/Base_count",
     "status": "published",
     "tags": ["strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Pretty print a long DNA sequence in blocks, then report the total count of each base: A, C, G and T."
 }

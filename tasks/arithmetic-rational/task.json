@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "operators", "classes"],
     "interest": 3,
-    "run_ms": 836
+    "run_ms": 836,
+    "summary": "Implement a rational number type with arithmetic, comparison and coercion operators, then use it to find perfect numbers below 2^19."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Median_filter",
     "status": "published",
     "tags": ["graphics", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Apply a median filter to an image, replacing each pixel color with the median color of its neighborhood."
 }

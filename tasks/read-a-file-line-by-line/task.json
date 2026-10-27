@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Read_a_file_line_by_line",
     "status": "published",
     "tags": ["basics", "pattern-matching"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Read a text file piece by piece, one line per step, rather than loading it all at once."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Largest_int_from_concatenated_ints",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Order a set of positive integers so that their concatenation forms the largest possible number, and show the result for two sample sets."
 }

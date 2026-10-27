@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Rubik's_cube",
     "status": "published",
     "tags": ["graphics", "puzzles"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw a Rubik's cube, though no further detail is given."
 }

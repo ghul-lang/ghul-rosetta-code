@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["algorithms", "strings", "optionals"],
     "interest": 3,
-    "run_ms": 627
+    "run_ms": 627,
+    "summary": "Transform one word into another one letter at a time through dictionary words, using the fewest intermediate words."
 }

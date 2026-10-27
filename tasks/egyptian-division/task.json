@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Egyptian_division",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Divide one integer by another using Egyptian division, building tables of powers of two and doublings and summing the matching rows."
 }

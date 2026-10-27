@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zeckendorf_number_representation",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Produce a table of the Zeckendorf representations of the integers zero to twenty, using non-consecutive Fibonacci numbers."
 }

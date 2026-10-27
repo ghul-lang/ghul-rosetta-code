@@ -7,5 +7,6 @@
         "graphics",
         "operators"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the point where two lines in 2D intersect, each defined by two given points."
 }

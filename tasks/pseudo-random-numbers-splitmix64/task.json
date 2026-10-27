@@ -7,5 +7,6 @@
     "classes",
     "operators"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Implement the splitmix64 random number generator and check its first outputs for a known seed."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Naming_conventions",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Document naming conventions for identifiers, types and libraries, noting which are enforced and which are commonly broken."
 }

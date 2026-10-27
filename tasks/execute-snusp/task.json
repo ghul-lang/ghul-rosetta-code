@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Execute_SNUSP",
     "status": "published",
     "tags": ["pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement an interpreter for SNUSP, an esoteric two-dimensional language whose instruction pointer travels across a grid of commands that work on a tape of cells."
 }

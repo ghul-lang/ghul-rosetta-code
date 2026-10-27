@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Append_a_record_to_the_end_of_a_text_file",
     "status": "published",
     "tags": ["text-processing", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write two passwd-style records to a text file, then append a third record in append mode and show that it landed at the end."
 }

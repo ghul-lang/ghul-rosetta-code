@@ -7,5 +7,6 @@
         "pipes",
         "recursion"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find all maximal cliques in an undirected graph given as a list of edges, using the Bron-Kerbosch algorithm with pivoting."
 }

@@ -6,5 +6,6 @@
     "dotnet-interop",
     "parsing"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Create a SOAP client that calls two functions exposed by a web service at a WSDL address."
 }

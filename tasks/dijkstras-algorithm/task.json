@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dijkstra's_algorithm",
     "status": "published",
     "tags": ["algorithms", "graphics", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Compute shortest paths from a source node in a directed weighted graph using Dijkstra's algorithm, then print the routes to two named nodes."
 }

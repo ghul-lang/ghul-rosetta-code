@@ -5,5 +5,6 @@
     "tags": ["number-theory", "pipes"],
     "interest": 3,
     "first_output_ms": 4876,
-    "run_ms": 4898
+    "run_ms": 4898,
+    "summary": "Find the seed under one million whose self-referential digit-summary sequence takes the most iterations to converge, and show that sequence."
 }

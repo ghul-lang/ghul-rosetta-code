@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Determine_if_a_string_is_squeezable",
     "status": "published",
     "tags": ["strings", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check whether a string contains a specified immediately repeated character, and remove the repeats of that character only."
 }

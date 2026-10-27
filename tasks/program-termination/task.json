@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Program_termination",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to stop a program completely from inside a conditional, including all threads and processes, and explain what cleanup happens."
 }

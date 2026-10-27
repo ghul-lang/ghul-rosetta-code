@@ -8,5 +8,6 @@
         "unions",
         "pattern-matching"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement the CYK algorithm to decide whether a string belongs to a context-free grammar in Chomsky normal form, using a noun phrase example."
 }

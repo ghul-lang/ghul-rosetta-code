@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Associative_array/Merging",
     "status": "published",
     "tags": ["data-structures", "basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Merge two associative arrays, letting update values override base values, without changing either original."
 }

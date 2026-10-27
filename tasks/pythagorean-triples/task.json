@@ -7,5 +7,6 @@
     "algorithms"
   ],
   "interest": 3,
-    "run_ms": 700
+    "run_ms": 700,
+    "summary": "Count the Pythagorean triples with perimeter up to 100, and how many of them are primitive."
 }

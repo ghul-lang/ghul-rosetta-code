@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Old_lady_swallowed_a_fly",
     "status": "published",
     "tags": ["strings", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the verses of the cumulative children's song about an old lady who swallows a fly, using its repetitive structure."
 }

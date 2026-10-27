@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Two's_complement",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to compute the two's complement of an integer by flipping its bits and adding one."
 }

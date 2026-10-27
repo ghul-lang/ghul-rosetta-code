@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Smith_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all Smith numbers below ten thousand, where the digits of the number sum to the same total as the digits of its prime factors."
 }

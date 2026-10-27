@@ -6,5 +6,6 @@
     "maths",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Compute the first ten metallic ratios by iterating Lucas-like sequences, reporting each ratio to 32 decimal places and its iteration count."
 }

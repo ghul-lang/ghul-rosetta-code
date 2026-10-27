@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators", "dotnet-interop"],
     "interest": 2,
-    "run_ms": 1610
+    "run_ms": 1610,
+    "summary": "Build the Fibonacci word for n equal to 37 and tabulate the length and entropy of each word from 1 to 37."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/War_card_game",
     "status": "published",
     "tags": ["game", "simulation"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Simulate a game of War with a deck of cards, following Bicycle's rules and showing one game as it is played."
 }

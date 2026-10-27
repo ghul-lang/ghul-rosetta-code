@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Semiprime",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Decide if a number is a semiprime, meaning it factors into two primes, which may be identical."
 }

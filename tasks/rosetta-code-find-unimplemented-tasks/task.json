@@ -8,5 +8,6 @@
   ],
   "interest": 2,
     "first_output_ms": 680,
-    "run_ms": 710
+    "run_ms": 710,
+    "summary": "Given a language name, list the wiki's programming tasks that have no implementation in that language, fetching data in batches."
 }

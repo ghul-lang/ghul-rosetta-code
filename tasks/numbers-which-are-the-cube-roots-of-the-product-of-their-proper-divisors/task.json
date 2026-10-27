@@ -7,5 +7,6 @@
   ],
   "interest": 2,
     "first_output_ms": 586,
-    "run_ms": 625
+    "run_ms": 625,
+    "summary": "Find positive integers equal to the cube root of the product of their proper divisors, listing the first 50 and the 500th and 5000th."
 }

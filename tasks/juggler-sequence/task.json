@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Juggler_sequence",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute step counts, peak values and peak positions for juggler sequences that begin at each integer from 20 to 39."
 }

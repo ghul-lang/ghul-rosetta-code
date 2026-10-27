@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sign_of_an_integer_(signum)",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Return the sign of an integer as minus one, zero or one, keeping the sign of a negative zero where one exists."
 }

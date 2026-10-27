@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Statistics/Basic",
     "status": "published",
     "tags": ["maths", "generators", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate uniform random numbers, then compute their mean and standard deviation for growing sample sizes and show a histogram."
 }

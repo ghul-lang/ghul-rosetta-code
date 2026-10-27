@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Leonardo_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first 25 Leonardo numbers with adjustable starting values and add term, and show that an add term of 0 gives Fibonacci numbers."
 }

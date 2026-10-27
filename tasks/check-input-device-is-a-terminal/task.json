@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Check_input_device_is_a_terminal",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to check whether standard input is a terminal."
 }

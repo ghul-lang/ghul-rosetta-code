@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Align_columns",
     "status": "published",
     "tags": ["text-processing", "unions", "pattern-matching", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Align the columns of dollar-delimited text left, right or center, with at least one space between words in each column."
 }

@@ -6,5 +6,6 @@
     "dotnet-interop",
     "classes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Write unit tests for a palindrome check using a well-known testing library."
 }

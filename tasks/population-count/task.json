@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Population_count",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count the one bits in non-negative integers, then list the first thirty powers of three and the first thirty evil and odious numbers."
 }

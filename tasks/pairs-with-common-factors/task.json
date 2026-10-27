@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pairs_with_common_factors",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the sequence counting, for each n, the pairs of integers from 2 to n that share a prime factor."
 }

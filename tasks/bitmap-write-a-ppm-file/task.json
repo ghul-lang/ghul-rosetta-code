@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Write_a_PPM_file",
     "status": "published",
     "tags": ["graphics", "classes", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Save a raster image as a binary PPM file in the Netpbm format."
 }

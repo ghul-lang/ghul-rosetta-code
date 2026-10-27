@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sexy_primes",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count sexy prime pairs through quintuplets below one million thirty-five, and list their last members along with unsexy primes."
 }

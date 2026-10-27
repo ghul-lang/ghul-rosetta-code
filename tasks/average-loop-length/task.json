@@ -7,5 +7,6 @@
     "maths"
   ],
   "interest": 3,
-    "run_ms": 712
+    "run_ms": 712,
+    "summary": "Estimate by simulation the average length before a repeat in a random mapping of 1..N, and compare it with the analytical formula."
 }

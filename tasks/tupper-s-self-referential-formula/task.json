@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tupper's_self-referential_formula",
     "status": "published",
     "tags": ["graphics", "maths", "number-theory"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw Tupper's self-referential inequality as a bitmap by evaluating it over a grid, using arbitrary-precision integers for the encoded constant."
 }

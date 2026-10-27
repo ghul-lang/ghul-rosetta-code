@@ -6,5 +6,6 @@
     "simulation",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Use rule 30 of the elementary cellular automaton as a random number source, showing the first ten bytes from one fixed cell."
 }

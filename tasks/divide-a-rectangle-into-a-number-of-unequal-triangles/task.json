@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Divide_a_rectangle_into_a_number_of_unequal_triangles",
     "status": "published",
     "tags": ["maths", "graphics", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Cut a rectangle into a chosen number of random, non-similar triangles that exactly cover it, and describe the algorithm used."
 }

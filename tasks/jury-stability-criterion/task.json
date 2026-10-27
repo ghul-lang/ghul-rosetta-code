@@ -6,5 +6,6 @@
     "maths",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Apply the Jury test to a polynomial to decide if every root sits within radius one, without computing the roots."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Walk_a_directory/Non-recursively",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the names of files matching a pattern in one directory, without descending into subdirectories."
 }

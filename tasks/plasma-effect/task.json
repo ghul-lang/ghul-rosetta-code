@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Plasma_effect",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Create a plasma effect, a colourful pattern made by applying sine and cosine functions to pixel colour values."
 }

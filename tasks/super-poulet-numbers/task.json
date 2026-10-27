@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
     "interest": 2,
-    "run_ms": 13880
+    "run_ms": 13880,
+    "summary": "Find the first 20 super-Poulet numbers, and the index and value of the first one above one million."
 }

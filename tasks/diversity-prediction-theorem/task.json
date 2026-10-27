@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Diversity_prediction_theorem",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show the crowd error, average individual error and prediction diversity for given true values and crowd estimates, to check the diversity prediction theorem."
 }

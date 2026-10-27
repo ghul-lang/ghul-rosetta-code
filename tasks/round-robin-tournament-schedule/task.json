@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Round-robin_tournament_schedule",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print a round-robin tournament schedule in which each of twelve participants plays every other participant once."
 }

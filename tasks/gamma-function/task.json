@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gamma_function",
     "status": "published",
     "tags": ["maths", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the real-valued Gamma function using an approximation such as Lanczos or Stirling, and compare it with a library."
 }

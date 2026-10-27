@@ -8,5 +8,6 @@
         "unions",
         "generators"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Generate contour lines for a two-dimensional scalar field using the marching squares algorithm."
 }

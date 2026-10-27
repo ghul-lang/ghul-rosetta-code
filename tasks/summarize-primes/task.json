@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Summarize_primes",
     "status": "published",
     "tags": ["primes", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "List the consecutive prime runs below 1000 whose sum is itself prime, giving each run's length, last prime and sum."
 }

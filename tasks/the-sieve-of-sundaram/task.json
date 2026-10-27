@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "generators", "pipes"],
     "interest": 2,
-    "run_ms": 735
+    "run_ms": 735,
+    "summary": "Generate odd primes with the sieve of Sundaram and find the first 100 and the millionth one."
 }

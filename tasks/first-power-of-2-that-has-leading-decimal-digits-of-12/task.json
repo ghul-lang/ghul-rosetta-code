@@ -7,5 +7,6 @@
         "maths"
     ],
     "interest": 3,
-    "run_ms": 1292
+    "run_ms": 1292,
+    "summary": "Find the nth exponent at which a power of two begins with given leading decimal digits, such as 12 or 123."
 }

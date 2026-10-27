@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sudan_function",
     "status": "published",
     "tags": ["algorithms", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function returning the value of the Sudan function F(x, y), a classic recursive function that is not primitive recursive."
 }

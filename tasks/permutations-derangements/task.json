@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Permutations/Derangements",
     "status": "published",
     "tags": ["algorithms", "number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the derangements of the integers 0 to n minus 1, count them as subfactorials, and tabulate the results for n up to 9."
 }

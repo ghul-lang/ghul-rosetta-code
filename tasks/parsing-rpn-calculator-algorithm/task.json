@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm",
     "status": "published",
     "tags": ["parsing", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Evaluate a space-separated reverse Polish expression with a stack, showing the stack contents after each token as a table."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "number-theory", "pipes"],
     "interest": 3,
-    "run_ms": 570
+    "run_ms": 570,
+    "summary": "Find the first fifty de Polignac numbers, the odd integers not expressible as a power of two plus a prime, and the 1,000th and 10,000th."
 }

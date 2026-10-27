@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Haversine_formula",
     "status": "published",
     "tags": ["maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the great-circle distance between two airports from their latitudes and longitudes using the haversine formula."
 }

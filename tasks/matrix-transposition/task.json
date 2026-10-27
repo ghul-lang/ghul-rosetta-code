@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Matrix_transposition",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Transpose a rectangular matrix of any size, swapping its rows and columns."
 }

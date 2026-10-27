@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Factors_of_an_integer",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the factors of a positive integer by listing the positive integers that divide it evenly."
 }

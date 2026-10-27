@@ -6,5 +6,6 @@
         "dotnet-interop",
         "text-processing"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Run a system command and store its output in a collection the program can read."
 }

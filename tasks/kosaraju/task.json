@@ -6,5 +6,6 @@
         "algorithms",
         "data-structures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Group the nodes of a directed graph into strongly connected components with Kosaraju's linear-time method, reporting each node's group."
 }

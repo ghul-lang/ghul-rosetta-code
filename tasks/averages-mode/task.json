@@ -6,5 +6,6 @@
     "generics",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the mode of a collection, handling the case where several values share the highest frequency."
 }

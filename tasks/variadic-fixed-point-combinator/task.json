@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Variadic_fixed-point_combinator",
     "status": "published",
     "tags": ["algorithms", "classes", "closures", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a variadic fixed-point combinator that returns the fixed points of several functions at once, preferably without explicit recursion."
 }

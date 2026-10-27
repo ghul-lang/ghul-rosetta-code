@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_length",
     "status": "published",
     "tags": ["strings", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the character length, counting code points rather than code units, and the byte length of a string in several encodings."
 }

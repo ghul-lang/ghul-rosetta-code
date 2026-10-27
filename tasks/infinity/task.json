@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Infinity",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Return positive infinity for floating-point numbers, testing whether the language supports it or otherwise returning the largest finite value."
 }

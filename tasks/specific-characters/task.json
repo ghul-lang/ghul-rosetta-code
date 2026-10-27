@@ -6,5 +6,6 @@
     "strings",
     "data-structures"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Count the distinct characters that appear exactly twice in one string and nowhere else in a list of strings."
 }

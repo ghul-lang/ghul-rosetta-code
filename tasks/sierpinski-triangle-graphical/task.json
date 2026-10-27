@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sierpinski_triangle/Graphical",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a Sierpinski triangle of order N as a graphical image, in any orientation."
 }

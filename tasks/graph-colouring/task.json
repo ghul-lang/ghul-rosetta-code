@@ -7,5 +7,6 @@
         "data-structures",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Colour graph vertices so that adjacent vertices differ while using few colours, reporting each vertex's colour and the number of colours used per graph."
 }

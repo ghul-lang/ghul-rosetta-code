@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
     "interest": 3,
-    "run_ms": 1208
+    "run_ms": 1208,
+    "summary": "Compute the smallest Chernick's Carmichael numbers with three to nine prime factors, using Chernick's universal form."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Break_OO_privacy",
     "status": "published",
     "tags": ["dotnet-interop", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how to read a private or protected member of a class from outside it, without going through a public accessor, as a debugger might."
 }

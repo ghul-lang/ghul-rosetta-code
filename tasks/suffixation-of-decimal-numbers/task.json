@@ -7,5 +7,6 @@
     "dotnet-interop",
     "optionals"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Add metric or binary magnitude suffixes like K or Ki to numbers, rounded to a chosen number of decimal places, and show each result."
 }

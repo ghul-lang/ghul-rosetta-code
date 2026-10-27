@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Iterators",
     "status": "published",
     "tags": ["basics", "pipes", "generators"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to iterate over an array-like collection of weekdays and a linked-list collection of colours, printing selected elements from each end."
 }

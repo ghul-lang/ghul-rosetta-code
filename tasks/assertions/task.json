@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Assertions",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show an assertion that an integer variable equals 42, halting when it does not."
 }

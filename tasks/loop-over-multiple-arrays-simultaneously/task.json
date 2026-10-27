@@ -6,5 +6,6 @@
     "basics",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Walk three parallel arrays together and print their matching entries on one line, noting how unequal lengths behave."
 }

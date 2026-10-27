@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/List_comprehensions",
     "status": "published",
     "tags": ["pipes", "generators", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build all Pythagorean triples with elements up to n using a list comprehension, and show each form available."
 }

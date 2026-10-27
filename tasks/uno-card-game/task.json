@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Uno_(card_game)",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Build a four-player Uno card game in ASCII art or a GUI, with three bot opponents, a draw pile, and the official rules and penalties."
 }

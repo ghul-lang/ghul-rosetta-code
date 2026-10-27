@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Idoneal_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first fifty idoneal numbers, positive integers with a special quadratic-form property, and, optionally, all 65 known ones."
 }

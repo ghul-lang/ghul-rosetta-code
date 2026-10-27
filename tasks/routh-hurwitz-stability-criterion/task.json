@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Routh–Hurwitz_stability_criterion",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Apply the Routh-Hurwitz test to a polynomial to check whether a linear system is stable, using only its coefficients."
 }

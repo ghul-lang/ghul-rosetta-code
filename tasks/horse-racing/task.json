@@ -6,5 +6,6 @@
     "puzzles",
     "simulation"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Predict the full result and winning time of a race involving ten horses, using past race weights, distances and time adjustments."
 }

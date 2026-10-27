@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Coloured_text",
     "status": "published",
     "tags": ["basics", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Display a word in several colours on the terminal, optionally detecting colour support, setting a background, or making it blink."
 }

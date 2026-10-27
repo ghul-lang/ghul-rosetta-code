@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 1236,
-    "run_ms": 1252
+    "run_ms": 1252,
+    "summary": "For each power of ten from 10 to one million, find the earliest adjacent prime gaps whose starting primes differ by more than it."
 }

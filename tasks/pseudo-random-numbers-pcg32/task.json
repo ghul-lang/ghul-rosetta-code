@@ -7,5 +7,6 @@
     "classes",
     "operators"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Implement the PCG32 random number generator and check its first outputs against known seed values."
 }

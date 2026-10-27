@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators", "pipes"],
     "interest": 4,
-    "run_ms": 2669
+    "run_ms": 2669,
+    "summary": "Find the home prime chains for the integers two to twenty by repeatedly factoring and concatenating prime factors until a prime results."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Van_der_Corput_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate terms of the van der Corput sequence, formed by reflecting binary digits about the point, and show the first ten."
 }

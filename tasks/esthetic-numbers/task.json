@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Esthetic_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find esthetic numbers, integers whose neighboring digits differ by exactly one, in bases 2 to 16, and base-10 values within given ranges."
 }

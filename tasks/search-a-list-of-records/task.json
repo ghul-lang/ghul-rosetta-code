@@ -7,5 +7,6 @@
         "generics",
         "optionals"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a generic function that finds the first element of a list of records matching a condition, and test it on city population data."
 }

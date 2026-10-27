@@ -6,5 +6,6 @@
     "text-processing",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Download the current UTC time from a US Naval Observatory web page and print it by extracting it from the HTML."
 }

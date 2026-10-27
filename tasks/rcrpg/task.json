@@ -5,5 +5,6 @@
     "tags": ["game", "interactive", "classes"],
     "interest": 4,
     "first_output_ms": 4225,
-    "run_ms": 4315
+    "run_ms": 4315,
+    "summary": "Build a small interactive game of rooms in three dimensions, with an inventory, a sledge that opens passages between rooms, ladders, gold and a goal."
 }

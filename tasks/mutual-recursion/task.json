@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mutual_recursion",
     "status": "published",
     "tags": ["recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write two mutually recursive functions that compute the two Hofstadter sequences, female F and male M."
 }

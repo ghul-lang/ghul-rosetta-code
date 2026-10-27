@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Functional_coverage_tree",
     "status": "published",
     "tags": ["data-structures", "classes", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute weighted coverage for every node of a house-cleaning task tree, and the extra overall coverage each subtask would add if completed."
 }

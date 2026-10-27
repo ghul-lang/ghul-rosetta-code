@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Copy_a_string",
     "status": "published",
     "tags": ["basics", "strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Copy a string and show how the copy differs from merely referring to the original."
 }

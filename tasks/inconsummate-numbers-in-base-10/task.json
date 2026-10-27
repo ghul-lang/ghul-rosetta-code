@@ -7,5 +7,6 @@
   ],
   "interest": 2,
     "first_output_ms": 841,
-    "run_ms": 869
+    "run_ms": 869,
+    "summary": "Find the inconsummate numbers in base ten, integers that no integer divided by its digit sum can produce, listing the first fifty."
 }

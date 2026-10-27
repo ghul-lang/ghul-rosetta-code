@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Operator_precedence",
     "status": "published",
     "tags": ["basics", "operators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the operators and constructs in order of precedence with their associativity, and state whether arguments pass by value or by reference."
 }

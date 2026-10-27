@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tetris",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Build a playable Tetris game with keyboard controls for moving, rotating, hard dropping and previewing the next piece."
 }

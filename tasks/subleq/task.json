@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Subleq",
     "status": "published",
     "tags": ["parsing", "basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write an interpreter for the SUBLEQ one-instruction machine and run a hello-world program on it."
 }

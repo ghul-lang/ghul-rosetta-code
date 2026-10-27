@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sattolo_cycle",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Shuffle an array so that every element moves to a new position, using the Sattolo cycle algorithm."
 }

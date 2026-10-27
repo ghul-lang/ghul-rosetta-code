@@ -5,5 +5,6 @@
     "tags": ["number-theory", "primes", "pipes", "generators"],
     "interest": 2,
     "first_output_ms": 563,
-    "run_ms": 611
+    "run_ms": 611,
+    "summary": "Find magnanimous numbers, those whose every split into two parts, added together, gives a prime, and list selected ranges."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tau_function",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count the positive divisors of each of the first 100 positive integers."
 }

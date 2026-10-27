@@ -5,5 +5,6 @@
     "tags": ["text-processing", "pipes"],
     "interest": 2,
     "first_output_ms": 1294,
-    "run_ms": 1376
+    "run_ms": 1376,
+    "summary": "Read a text file and list the n most common words with their counts, ignoring case, in decreasing order of frequency."
 }

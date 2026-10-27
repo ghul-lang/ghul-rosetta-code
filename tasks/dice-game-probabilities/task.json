@@ -6,5 +6,6 @@
     "maths",
     "puzzles"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Compute the probability that one player's dice total beats another's for two different sets of dice."
 }

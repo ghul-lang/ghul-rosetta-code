@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_an_array_of_composite_structures",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Sort an array of structures by a key field, such as the name in name-value pairs."
 }

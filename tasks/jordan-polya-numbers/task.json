@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jordan-Pólya_numbers",
     "status": "published",
     "tags": ["number-theory", "pattern-matching", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the first fifty Jordan-Pólya numbers, products of factorials, and the largest one below 100 million, with factorial decompositions for selected larger ones."
 }

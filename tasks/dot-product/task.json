@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dot_product",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Compute the dot product of two vectors of arbitrary length using a function or a built-in operation."
 }

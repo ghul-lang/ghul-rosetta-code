@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Additive_primes",
     "status": "published",
     "tags": ["primes", "number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all primes below 500 whose decimal digits also sum to a prime, and show them with a count."
 }

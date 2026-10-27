@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fibonacci_n-step_number_sequences",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate Fibonacci n-step sequences from given initial values, and print the first ten terms of the Fibonacci, tribonacci, tetranacci and Lucas series."
 }

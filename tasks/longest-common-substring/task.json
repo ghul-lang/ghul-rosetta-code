@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Longest_common_substring",
     "status": "published",
     "tags": ["strings", "pipes", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the longest run of consecutive characters shared by two strings, demonstrated with thisisatest and testing123testing."
 }

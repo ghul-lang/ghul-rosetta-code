@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mill_game",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement the two-player board game Nine Men's Morris, also called Mill, in which players form rows of three to remove opponents' pieces."
 }

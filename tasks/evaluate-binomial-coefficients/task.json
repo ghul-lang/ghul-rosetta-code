@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Evaluate_binomial_coefficients",
     "status": "published",
     "tags": ["maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a routine that computes any binomial coefficient, such as five choose three, which should give ten."
 }

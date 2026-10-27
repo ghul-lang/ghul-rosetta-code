@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Longest_common_subsequence",
     "status": "published",
     "tags": ["algorithms", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find a longest common subsequence of two strings, a sequence of characters kept in order but not necessarily adjacent."
 }

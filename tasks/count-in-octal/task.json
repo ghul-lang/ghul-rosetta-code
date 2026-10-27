@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Count_in_octal",
     "status": "published",
     "tags": ["basics", "number-theory"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print a sequential count in octal, starting at zero, one number per line, until stopped or the type's maximum is reached."
 }

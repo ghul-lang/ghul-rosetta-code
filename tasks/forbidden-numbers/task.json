@@ -6,5 +6,6 @@
         "number-theory",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "List the first fifty forbidden numbers, integers needing four nonzero squares to sum to them, and count them up to larger limits."
 }

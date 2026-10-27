@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Array_concatenation",
     "status": "published",
     "tags": ["data-structures", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to join two arrays into one, using the concatenation syntax if one exists."
 }

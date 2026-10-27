@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/First-class_functions",
     "status": "published",
     "tags": ["closures", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a list of real functions, including sine, cosine and cubing, and their inverses, then compose each with its inverse to recover the input."
 }

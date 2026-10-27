@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/RSA_code",
     "status": "published",
     "tags": ["number-theory", "strings"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement RSA encryption and decryption from scratch, without a library, and demonstrate it on a short message with a demonstration key."
 }

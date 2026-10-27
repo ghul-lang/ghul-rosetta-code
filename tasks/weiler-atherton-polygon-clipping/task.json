@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Weiler-Atherton_polygon_clipping",
     "status": "published",
     "tags": ["algorithms", "operators", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Clip one polygon against another with the Weiler-Atherton algorithm, which handles non-convex polygons."
 }

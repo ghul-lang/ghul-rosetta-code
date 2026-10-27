@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Remove_lines_from_a_file",
     "status": "published",
     "tags": ["text-processing", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a routine that deletes lines from a file, given a starting line and count, with an error past the end."
 }

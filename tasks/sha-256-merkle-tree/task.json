@@ -7,5 +7,6 @@
         "data-structures",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a SHA-256 Merkle tree over a file's 1024-byte blocks, pairing and hashing digests until one checksum remains."
 }

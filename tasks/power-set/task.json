@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Power_set",
     "status": "published",
     "tags": ["algorithms", "recursion", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a function that takes a set and returns its power set, the collection of all its subsets, including the empty set."
 }

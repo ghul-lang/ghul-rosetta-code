@@ -6,5 +6,6 @@
     "operators",
     "basics"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Evaluate exponentiation of negative and positive five to the second and third powers under the different placements of a minus sign."
 }

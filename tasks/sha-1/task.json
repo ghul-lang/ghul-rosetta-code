@@ -6,5 +6,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the SHA-1 message digest of a string of octets, either by calling a library or implementing the algorithm."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Plot_coordinate_pairs",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Plot two numerical arrays of x and y values as a graph and show the image for the given sample data."
 }

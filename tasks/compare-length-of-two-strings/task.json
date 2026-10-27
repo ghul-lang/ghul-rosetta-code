@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compare_length_of_two_strings",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print two strings with their lengths, longer first, then list several strings in descending length order."
 }

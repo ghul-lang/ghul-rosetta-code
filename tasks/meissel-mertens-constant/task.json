@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 668,
-    "run_ms": 707
+    "run_ms": 707,
+    "summary": "Calculate the Meissel-Mertens constant to the highest precision practical, a value tied to the sum of reciprocal primes."
 }

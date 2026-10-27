@@ -6,5 +6,6 @@
     "parsing",
     "dotnet-interop"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Parse integers written in decimal and other bases such as hexadecimal, octal and binary from strings, using built-in facilities where possible."
 }

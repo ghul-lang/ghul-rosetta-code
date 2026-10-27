@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Last_Friday_of_each_month",
     "status": "published",
     "tags": ["date-time", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the date of the last Friday in each month of a year read from input."
 }

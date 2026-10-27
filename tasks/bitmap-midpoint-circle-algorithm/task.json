@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Midpoint_circle_algorithm",
     "status": "published",
     "tags": ["graphics", "maths", "algorithms"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a circle on a raster image using the midpoint circle algorithm, also known as Bresenham's circle algorithm."
 }

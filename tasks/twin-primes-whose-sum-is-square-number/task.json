@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Twin_primes_whose_sum_is_square_number",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find twin prime pairs under ten million whose sum is a perfect square."
 }

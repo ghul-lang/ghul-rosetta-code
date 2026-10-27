@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "pipes"],
     "interest": 5,
-    "run_ms": 1596
+    "run_ms": 1596,
+    "summary": "Simulate the Drossel and Schwabl forest-fire model on a grid, where trees grow, ignite and burn out with set probabilities."
 }

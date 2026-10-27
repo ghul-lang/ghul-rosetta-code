@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators"],
     "interest": 2,
-    "run_ms": 14078
+    "run_ms": 14078,
+    "summary": "Display the first fifty self numbers, those no other number reaches by adding its own digits, and check a claimed large term."
 }

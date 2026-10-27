@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Möbius_function",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the Möbius function of positive integers from their prime factors, and display the first 99 values in a grid."
 }

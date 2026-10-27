@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Almost_prime",
     "status": "published",
     "tags": ["primes", "generators", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate k-almost primes, numbers that are products of k primes, and tabulate the first ten for k from 1 to 5."
 }

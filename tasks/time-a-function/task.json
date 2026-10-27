@@ -6,5 +6,6 @@
         "basics",
         "dotnet-interop"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Time how long a function takes to run, using the finest timer available and measuring process time where possible."
 }

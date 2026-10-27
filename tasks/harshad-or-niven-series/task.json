@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Harshad_or_Niven_series",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate successive Harshad numbers, those divisible by their digit sum, and list the first twenty and the first above 1000."
 }

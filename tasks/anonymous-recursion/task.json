@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Anonymous_recursion",
     "status": "published",
     "tags": ["basics", "closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a recursive Fibonacci function that checks for negative input, using recursion without a separately named helper function."
 }

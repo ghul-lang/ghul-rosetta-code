@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Knuth's_algorithm_S",
     "status": "published",
     "tags": ["algorithms", "closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement Knuth's Algorithm S for drawing a uniform random sample of n items from a stream of unknown length."
 }

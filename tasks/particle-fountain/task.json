@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "classes"],
     "interest": 5,
-    "run_ms": 682
+    "run_ms": 682,
+    "summary": "Animate a particle fountain of droplets that are sprayed upward and fall back under gravity, with slightly varied directions."
 }

@@ -6,5 +6,6 @@
     "date-time",
     "maths"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Compute the average of four nocturnal activity times by mapping times of day to angles, accurate to one second."
 }

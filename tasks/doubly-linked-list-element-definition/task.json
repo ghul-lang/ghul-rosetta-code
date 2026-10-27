@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Doubly-linked_list/Element_definition",
     "status": "published",
     "tags": ["data-structures", "classes", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Define the element type of a doubly linked list, holding a value and mutable pointers to the next and previous elements."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/First_class_environments",
     "status": "published",
     "tags": ["classes", "simulation"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a dozen environments, each holding a Hailstone value and a step count, and run one shared piece of code in all of them."
 }

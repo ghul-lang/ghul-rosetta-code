@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hough_transform",
     "status": "published",
     "tags": ["graphics", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the Hough transform on an image, mapping points to rho-theta space so that straight lines appear as bright peaks."
 }

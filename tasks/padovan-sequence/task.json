@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Padovan_sequence",
     "status": "published",
     "tags": ["number-theory", "pattern-matching", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the Padovan sequence by recurrence and by floor function, confirm they agree, and generate L-system strings whose lengths follow it."
 }

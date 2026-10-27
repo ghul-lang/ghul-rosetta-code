@@ -6,5 +6,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Maximize the value of goods a thief can carry in a 15 kg knapsack when each item can be cut into any fraction."
 }

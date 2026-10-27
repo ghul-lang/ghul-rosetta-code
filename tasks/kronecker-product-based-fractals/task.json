@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kronecker_product_based_fractals",
     "status": "published",
     "tags": ["graphics", "fractal", "maths"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Build fractals such as the Vicsek and Sierpinski carpet by repeatedly taking the Kronecker power of a small 0/1 matrix."
 }

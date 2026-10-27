@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Heronian_triangles",
     "status": "published",
     "tags": ["number-theory", "maths", "pipes", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the primitive Heronian triangles with sides up to 200 using Heron's formula, then list them ordered by area, perimeter and longest side."
 }

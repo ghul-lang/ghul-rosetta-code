@@ -8,5 +8,6 @@
         "generators",
         "recursion"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a Sierpinski pentagon, also called a pentaflake, at orders one to five, as graphics or ASCII art."
 }

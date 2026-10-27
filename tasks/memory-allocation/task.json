@@ -6,5 +6,6 @@
     "dotnet-interop",
     "basics"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Show how to allocate and free memory blocks explicitly, and how to reach heap, stack, shared and foreign memory where available."
 }

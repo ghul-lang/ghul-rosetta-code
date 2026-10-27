@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arrays",
     "status": "published",
     "tags": ["basics", "data-structures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show basic array syntax: creating an array, assigning and retrieving an element, and pushing a value onto a dynamic array."
 }

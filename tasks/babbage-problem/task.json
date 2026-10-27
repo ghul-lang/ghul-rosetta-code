@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Babbage_problem",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Check whether Babbage's guess is right: find the smallest positive integer whose square ends in 269,696, using an efficient method Babbage could have followed by hand."
 }

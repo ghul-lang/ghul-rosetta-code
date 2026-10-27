@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Polyspiral",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw an animation of polyspirals, one spiral per frame, with the turn angle increasing between frames."
 }

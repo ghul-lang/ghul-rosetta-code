@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Seven-sided_dice_from_five-sided_dice",
     "status": "published",
     "tags": ["simulation", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a uniform random generator for one to seven using only a one to five generator, then check the distribution over a million calls."
 }

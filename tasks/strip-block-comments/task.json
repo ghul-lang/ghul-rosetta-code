@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Strip_block_comments",
     "status": "published",
     "tags": ["text-processing", "strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Remove block comments delimited by slash-star and star-slash from source-like text, including multi-line comments."
 }

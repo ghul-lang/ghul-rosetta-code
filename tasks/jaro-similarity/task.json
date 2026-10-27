@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jaro_similarity",
     "status": "published",
     "tags": ["strings", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement the Jaro similarity of two strings and show its score for three example word pairs."
 }

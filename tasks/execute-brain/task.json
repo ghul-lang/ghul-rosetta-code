@@ -5,5 +5,6 @@
     "tags": ["parsing", "interactive", "algorithms", "pattern-matching"],
     "interest": 5,
     "first_output_ms": 588,
-    "run_ms": 638
+    "run_ms": 638,
+    "summary": "Implement an interpreter for Brain****, a minimal language whose eight commands move a pointer along a tape of cells, change them, loop, and do input and output."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "number-theory", "generators"],
     "interest": 3,
-    "run_ms": 61082
+    "run_ms": 61082,
+    "summary": "Find prime Smarandache-Wellin numbers, formed by concatenating consecutive primes, and their derived versions, including the larger cases needing big integers."
 }

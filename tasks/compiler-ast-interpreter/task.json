@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/AST_interpreter",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Interpret a flattened abstract syntax tree for a small C-like language, executing assignments, loops, conditionals and print statements."
 }

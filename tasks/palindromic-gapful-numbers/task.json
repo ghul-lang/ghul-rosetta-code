@@ -6,5 +6,6 @@
     "number-theory",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find the first 20 palindromic gapful numbers ending in each digit from 1 to 9."
 }

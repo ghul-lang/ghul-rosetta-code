@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Digital_root",
     "status": "published",
     "tags": ["number-theory", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate the additive persistence and digital root of a number, summing its digits repeatedly until one digit remains."
 }

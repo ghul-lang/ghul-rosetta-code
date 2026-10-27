@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Harmonic_series",
     "status": "published",
     "tags": ["maths", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the first twenty harmonic numbers, then find where the series first passes each integer from one to ten."
 }

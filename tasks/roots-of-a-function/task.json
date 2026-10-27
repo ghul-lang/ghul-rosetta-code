@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Roots_of_a_function",
     "status": "published",
     "tags": ["maths", "generators", "unions"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the roots of a cubic function over a given range, reporting whether each root is exact or approximate."
 }

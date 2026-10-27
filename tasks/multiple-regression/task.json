@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiple_regression",
     "status": "published",
     "tags": ["maths", "operators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the ordinary least squares coefficients that best fit a vector of observations as a linear combination of data vectors."
 }

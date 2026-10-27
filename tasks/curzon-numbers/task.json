@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Curzon_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first fifty generalized Curzon numbers for each even base from 2 to 10, plus the one thousandth."
 }

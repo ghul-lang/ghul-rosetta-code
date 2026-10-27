@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pinstripe/Display",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Draw vertical pinstripes across a display, with stripes one to four pixels wide changing in each quarter down the screen."
 }

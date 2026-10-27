@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sleeping_Beauty_problem",
     "status": "published",
     "tags": ["simulation", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Estimate by Monte Carlo simulation the proportion of heads among Sleeping Beauty's answers when she is woken and asked."
 }

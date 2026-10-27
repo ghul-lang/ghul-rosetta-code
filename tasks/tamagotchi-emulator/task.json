@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tamagotchi_emulator",
     "status": "published",
     "tags": ["game", "interactive", "simulation", "classes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Build a virtual pet that gets hungry and bored, ages, and needs feeding, play and cleaning to stay alive."
 }

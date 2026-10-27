@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
     "interest": 2,
-    "run_ms": 533
+    "run_ms": 533,
+    "summary": "Generate terms of the Sisyphus sequence, which halves even terms and adds the next unused prime to odd ones, and report the largest prime needed."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Extensible_prime_generator",
     "status": "published",
     "tags": ["primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a prime generator that extends its limit or counter automatically, then show the first twenty primes, those from 100 to 150, and the 10,000th prime."
 }

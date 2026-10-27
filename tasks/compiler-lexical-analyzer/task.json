@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/lexical_analyzer",
     "status": "published",
     "tags": ["parsing", "generators", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Split source text in a small C-like language into tokens, reporting each token's line, column, name and value and detecting lexical errors."
 }

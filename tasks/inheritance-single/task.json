@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Inheritance/Single",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Declare a tree of single-inheritance types, with Animal at the top, Dog and Cat below it, and Lab and Collie under Dog."
 }

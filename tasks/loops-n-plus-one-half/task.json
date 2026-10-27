@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/N_plus_one_half",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print 1 to 10 as a comma-separated list, using separate output calls for each number and the comma inside the loop."
 }

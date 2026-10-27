@@ -5,5 +5,6 @@
     "tags": ["number-theory", "pipes", "generators"],
     "interest": 2,
     "first_output_ms": 707,
-    "run_ms": 707
+    "run_ms": 707,
+    "summary": "Compute left factorials, the sums of factorials of all smaller numbers, for selected values and report digit lengths for large n."
 }

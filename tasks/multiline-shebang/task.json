@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiline_shebang",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a script with a multiline shebang, a polyglot header that a shell runs while the main code treats it as comments."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators"],
     "interest": 2,
-    "run_ms": 724
+    "run_ms": 724,
+    "summary": "Find the first ten Rhonda numbers in each non-prime base from two to sixteen, showing them in base ten."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Algebraic_data_types",
     "status": "published",
     "tags": ["data-structures", "unions", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement insertion into a red-black tree using pattern matching over algebraic data types."
 }

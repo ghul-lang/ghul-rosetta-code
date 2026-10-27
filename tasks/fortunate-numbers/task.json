@@ -5,5 +5,6 @@
     "tags": ["number-theory", "primes", "generators"],
     "interest": 2,
     "first_output_ms": 2477,
-    "run_ms": 6244
+    "run_ms": 6244,
+    "summary": "Compute the first Fortunate numbers, the smallest m that makes a primorial plus m prime."
 }

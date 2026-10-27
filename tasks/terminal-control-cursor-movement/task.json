@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Cursor_movement",
     "status": "published",
     "tags": ["basics", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Move the terminal cursor left, right, up, down, to the line start and end, and to the top-left and bottom-right corners."
 }

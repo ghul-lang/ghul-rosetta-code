@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tree_datastructures",
     "status": "published",
     "tags": ["data-structures", "classes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert a tree between a nested form and an indented form, and show that a round trip gives back the original nesting."
 }

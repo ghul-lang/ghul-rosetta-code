@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Lah_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute unsigned Lah numbers, the counts of ways to partition n elements into k ordered non-empty subsets, as a table up to 12."
 }

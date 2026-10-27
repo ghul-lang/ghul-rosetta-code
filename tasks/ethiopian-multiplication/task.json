@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ethiopian_multiplication",
     "status": "published",
     "tags": ["maths", "algorithms", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Multiply two integers with Ethiopian multiplication, built from separate functions for halving, doubling and testing evenness."
 }

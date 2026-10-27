@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/S-expressions",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a nested S-expression from a string into a native data structure, and write such a structure back out as an S-expression."
 }

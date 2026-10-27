@@ -7,5 +7,6 @@
     "recursion",
     "algorithms"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Multiply matrices with Strassen's algorithm, recursing down to blocks of size one or two rather than switching to standard multiplication sooner."
 }

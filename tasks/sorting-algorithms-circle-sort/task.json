@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Circle_sort",
     "status": "published",
     "tags": ["sorting", "generics", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort an array of integers with circle sort, comparing mirrored pairs and recursing on halves until no swaps remain."
 }

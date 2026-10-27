@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Knapsack_problem/0-1",
     "status": "published",
     "tags": ["algorithms", "puzzles"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Choose which items to pack, each at most once, to maximize total value within a 400 dag weight limit."
 }
