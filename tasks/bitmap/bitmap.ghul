@@ -26,12 +26,13 @@ class BITMAP is
         _write(y * width + x, colour)
     si
 
-    pixel(x: int, y: int) -> COLOUR =>
-        (let at = (y * width + x) * 3
+    pixel(x: int, y: int) -> COLOUR => (
+        let at = (y * width + x) * 3
 
-         (red = _pixels[at],
-          green = _pixels[at + 1],
-          blue = _pixels[at + 2]))
+        (red = _pixels[at],
+         green = _pixels[at + 1],
+         blue = _pixels[at + 2])
+    )
 
     _write(at: int, colour: COLOUR) is
         _pixels[at * 3] = colour.red

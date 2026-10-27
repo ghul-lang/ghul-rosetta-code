@@ -33,19 +33,20 @@ split(tile: Half) -> Half{} is
     fi
 si
 
-spoke(index: int) -> Half =>
-    (let low = double(2 * index - 1) * pi / 10.0D
-     let high = double(2 * index + 1) * pi / 10.0D
+spoke(index: int) -> Half => (
+    let low = double(2 * index - 1) * pi / 10.0D
+    let high = double(2 * index + 1) * pi / 10.0D
 
-     let first = (x = cos(low), y = sin(low))
-     let second = (x = cos(high), y = sin(high))
-     let middle = (x = 0.0D, y = 0.0D)
+    let first = (x = cos(low), y = sin(low))
+    let second = (x = cos(high), y = sin(high))
+    let middle = (x = 0.0D, y = 0.0D)
 
-     if index % 2 == 0 then
-         Half.THIN(middle, second, first)
-     else
-         Half.THIN(middle, first, second)
-     fi)
+    if index % 2 == 0 then
+        Half.THIN(middle, second, first)
+    else
+        Half.THIN(middle, first, second)
+    fi
+)
 
 let tiles mut = 0..10 |> map(spoke) |> collect()
 

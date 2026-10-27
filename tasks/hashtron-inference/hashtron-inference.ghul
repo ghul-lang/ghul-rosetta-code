@@ -2,21 +2,22 @@ use default
 
 use Stage = (salt: uint, max: uint)
 
-hash(n: uint, salt: uint, max: uint) -> uint =>
-    (let m mut = n - salt
+hash(n: uint, salt: uint, max: uint) -> uint => (
+    let m mut = n - salt
 
-     m = m ^ (m << 2)
-     m = m ^ (m << 3)
-     m = m ^ (m >> 5)
-     m = m ^ (m >> 7)
-     m = m ^ (m << 11)
-     m = m ^ (m << 13)
-     m = m ^ (m >> 17)
-     m = m ^ (m << 19)
+    m = m ^ (m << 2)
+    m = m ^ (m << 3)
+    m = m ^ (m >> 5)
+    m = m ^ (m >> 7)
+    m = m ^ (m << 11)
+    m = m ^ (m << 13)
+    m = m ^ (m >> 17)
+    m = m ^ (m << 19)
 
-     m = m + salt
+    m = m + salt
 
-     uint((ulong(m) * ulong(max)) >> 32))
+    uint((ulong(m) * ulong(max)) >> 32)
+)
 
 infer_bit(command: uint, bit: int, program: List[Stage]) -> bool =>
     let input = command | (uint(bit) << 16), first_stage = program[0] in

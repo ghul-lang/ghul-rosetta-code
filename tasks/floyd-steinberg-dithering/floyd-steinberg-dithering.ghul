@@ -9,23 +9,24 @@ let height = 360
 
 let light = (x = -0.45D, y = 0.55D, z = 0.70D)
 
-brightness(pixel_x: int, pixel_y: int) -> double =>
-    (let x = (double(pixel_x) - 0.5D * double(width)) /
-             (0.42D * double(height))
-     let y = (0.5D * double(height) - double(pixel_y)) /
-             (0.42D * double(height))
+brightness(pixel_x: int, pixel_y: int) -> double => (
+    let x = (double(pixel_x) - 0.5D * double(width)) /
+            (0.42D * double(height))
+    let y = (0.5D * double(height) - double(pixel_y)) /
+            (0.42D * double(height))
 
-     let sky = 0.86D - 0.42D * (y + 1.2D) / 2.4D
-     let away = x * x + y * y
+    let sky = 0.86D - 0.42D * (y + 1.2D) / 2.4D
+    let away = x * x + y * y
 
-     if away > 1.0D then
-         sky
-     else
-         (let z = sqrt(1.0D - away)
-          let facing = x * light.x + y * light.y + z * light.z
+    if away > 1.0D then
+        sky
+    else
+        (let z = sqrt(1.0D - away)
+         let facing = x * light.x + y * light.y + z * light.z
 
-          0.06D + 0.94D * max(0.0D, facing))
-     fi)
+         0.06D + 0.94D * max(0.0D, facing))
+    fi
+)
 
 let source = IMAGE(width, height)
 let dithered = IMAGE(width, height)
@@ -44,10 +45,10 @@ od
 
 let palette = 2
 
-nearest(value: double) -> double =>
-    (let steps = double(palette - 1)
+nearest(value: double) -> double => (
+    let steps = double(palette - 1)
 
-     round(min(1.0D, max(0.0D, value)) * steps) / steps)
+    round(min(1.0D, max(0.0D, value)) * steps) / steps)
 
 spread(pixel_x: int, pixel_y: int, error: double, part: double) is
     if pixel_x >= 0 /\ pixel_x < width /\ pixel_y < height then

@@ -20,16 +20,17 @@ class NODE[T](value: T) is
     si
 si
 
-render[T](first: NODE[T]) -> string =>
-    (let text mut = "{first.value}"
-     let cursor mut = first.next
+render[T](first: NODE[T]) -> string => (
+    let text mut = "{first.value}"
+    let cursor mut = first.next
 
-     while let node = cursor do
-         text = "{text} -> {node.value}"
-         cursor = node.next
-     od
+    while let node = cursor do
+        text = "{text} -> {node.value}"
+        cursor = node.next
+    od
 
-     text)
+    text
+)
 
 let a = NODE("A")
 let b = a.insert_after("B")

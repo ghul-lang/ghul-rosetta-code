@@ -14,22 +14,23 @@ distance(a: int, b: int) -> double =>
 length(edges: Edge{}) -> double =>
     edges |> sum_by((from, to) => distance(from, to))
 
-spanning_tree(n: int) -> Edge{} =>
-    (let in_tree = SET([0])
-     let edges = LIST()
+spanning_tree(n: int) -> Edge{} => (
+    let in_tree = SET([0])
+    let edges = LIST()
 
-     while in_tree.count < n do
-         let next =
-             [(from, to)
-                 for from in in_tree for to in 0..n
-                 if !in_tree.contains(to)]
-                 |> min_by((from, to) => distance(from, to))!
+    while in_tree.count < n do
+        let next =
+            [(from, to)
+                for from in in_tree for to in 0..n
+                if !in_tree.contains(to)]
+                |> min_by((from, to) => distance(from, to))!
 
-         edges.add(next)
-         in_tree.add(next.to)
-     od
+        edges.add(next)
+        in_tree.add(next.to)
+    od
 
-     edges)
+    edges
+)
 
 perfect_matching(vertices: List[int]) -> Edge{} =>
     if vertices.count == 0 then

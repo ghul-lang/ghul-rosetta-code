@@ -29,11 +29,11 @@ sums_to(divisors: List[int], target: int) -> bool =>
         fi
     esac
 
-weird(n: int) -> bool =>
-    (let divisors = proper_divisors(n) |> sort_descending() |> collect()
+weird(n: int) -> bool => (
+    let divisors = proper_divisors(n) |> sort_descending() |> collect()
 
-     divisors |> sum() > n /\
-         !sums_to(divisors, n))
+    divisors |> sum() > n /\
+        !sums_to(divisors, n))
 
 from(2)
     |> filter(weird)

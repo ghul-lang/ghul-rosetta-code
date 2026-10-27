@@ -41,19 +41,20 @@ is
     table
 si
 
-route(table: List[STEP], value: int) -> string =>
-    (let legs = LIST()
-     let current mut = value
+route(table: List[STEP], value: int) -> string => (
+    let legs = LIST()
+    let current mut = value
 
-     while current > 1 do
-         let leg = table[current]
+    while current > 1 do
+        let leg = table[current]
 
-         legs.add("{leg.label}=>{leg.next}")
+        legs.add("{leg.label}=>{leg.next}")
 
-         current = leg.next
-     od
+        current = leg.next
+    od
 
-     legs |> join(" "))
+    legs |> join(" ")
+)
 
 deepest_in(table: List[STEP], limit: int) is
     let deepest = 1::limit |> map(value => table[value].steps) |> max()

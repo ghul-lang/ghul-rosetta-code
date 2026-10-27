@@ -1,15 +1,16 @@
 use default
 use System
 
-last_friday(year: int, month: int) -> DateTime =>
-    (let candidate mut = DateTime(year, month,
-         DateTime.days_in_month(year, month))
+last_friday(year: int, month: int) -> DateTime => (
+    let candidate mut = DateTime(year, month,
+        DateTime.days_in_month(year, month))
 
-     while candidate.day_of_week !~ DayOfWeek.FRIDAY do
-         candidate = candidate.add_days(-1.0D)
-     od
+    while candidate.day_of_week !~ DayOfWeek.FRIDAY do
+        candidate = candidate.add_days(-1.0D)
+    od
 
-     candidate)
+    candidate
+)
 
 last_fridays(year: int) -> DateTime{} is
     for month in 1::12 do

@@ -9,19 +9,20 @@ let cursor mut = 0
 
 queue.add(1)
 
-path_to(target: int) -> Collections.List[int] =>
-    (let steps = LIST()
-     let current mut = target
+path_to(target: int) -> Collections.List[int] => (
+    let steps = LIST()
+    let current mut = target
 
-     while current != 1 do
-         steps.add(current)
-         current = parent[current]
-     od
+    while current != 1 do
+        steps.add(current)
+        current = parent[current]
+    od
 
-     steps.add(1)
-     steps.reverse()
+    steps.add(1)
+    steps.reverse()
 
-     steps)
+    steps
+)
 
 build_until(target: int) is
     while target != 1 /\ !parent.contains_key(target) do

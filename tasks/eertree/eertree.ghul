@@ -45,16 +45,17 @@ class EERTREE(text: string) is
         od
     si
 
-    _extend_from(node: int, at: int, letter: char) -> int =>
-        (let current mut = node
+    _extend_from(node: int, at: int, letter: char) -> int => (
+        let current mut = node
 
-         while at - _nodes[current].length - 1 < 0 \/
-             text[at - _nodes[current].length - 1] != letter
-         do
-             current = _nodes[current].suffix
-         od
+        while at - _nodes[current].length - 1 < 0 \/
+            text[at - _nodes[current].length - 1] != letter
+        do
+            current = _nodes[current].suffix
+        od
 
-         current)
+        current
+    )
 
     palindromes: Collections.List[string] is
         let found = LIST()

@@ -11,35 +11,38 @@ let strategies = [
     (name = "following the cycle", finds = follows_the_cycle)
 ]
 
-shuffled_cards() -> List[int] =>
-    (let cards = 1::prisoners |> collect_mutable()
-     for i in 0..cards.count do
-         let j = i + random.next(cards.count - i)
-         (cards[i], cards[j]) = (cards[j], cards[i])
-     od
-     cards)
+shuffled_cards() -> List[int] => (
+    let cards = 1::prisoners |> collect_mutable()
+    for i in 0..cards.count do
+        let j = i + random.next(cards.count - i)
+        (cards[i], cards[j]) = (cards[j], cards[i])
+    od
+    cards
+)
 
-follows_the_cycle(cards: List[int], prisoner: int) -> bool =>
-    (let drawer mut = prisoner
-     for _ in 0..attempts do
-         if cards[drawer - 1] == prisoner then
-             return true
-         fi
-         drawer = cards[drawer - 1]
-     od
-     false)
+follows_the_cycle(cards: List[int], prisoner: int) -> bool => (
+    let drawer mut = prisoner
+    for _ in 0..attempts do
+        if cards[drawer - 1] == prisoner then
+            return true
+        fi
+        drawer = cards[drawer - 1]
+    od
+    false
+)
 
-opens_at_random(cards: List[int], prisoner: int) -> bool =>
-    (let unopened = 1::prisoners |> collect_mutable()
-     for i in 0..attempts do
-         let j = i + random.next(unopened.count - i)
-         let drawer = unopened[j]
-         unopened[j] = unopened[i]
-         if cards[drawer - 1] == prisoner then
-             return true
-         fi
-     od
-     false)
+opens_at_random(cards: List[int], prisoner: int) -> bool => (
+    let unopened = 1::prisoners |> collect_mutable()
+    for i in 0..attempts do
+        let j = i + random.next(unopened.count - i)
+        let drawer = unopened[j]
+        unopened[j] = unopened[i]
+        if cards[drawer - 1] == prisoner then
+            return true
+        fi
+    od
+    false
+)
 
 all_pardoned(finds: (List[int], int) -> bool) -> bool =>
     let cards = shuffled_cards() in

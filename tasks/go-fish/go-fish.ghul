@@ -44,15 +44,16 @@ draw() -> int? =>
          card)
     fi
 
-hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int =>
-    (let moved = held(from_hand, rank)
+hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int => (
+    let moved = held(from_hand, rank)
 
-     for _ in 0..moved do
-         from_hand.remove(rank)
-         to_hand.add(rank)
-     od
+    for _ in 0..moved do
+        from_hand.remove(rank)
+        to_hand.add(rank)
+    od
 
-     moved)
+    moved
+)
 
 lay_down_books(hand: LIST[int], books: LIST[int], owner: string) is
     for rank in 0..ranks.count do
@@ -77,23 +78,24 @@ si
 // Ask for what you have shown me you hold, else for something I have
 // not already found you to be out of, and among those the rank I hold
 // most of.
-my_choice() -> int =>
-    (let mine =
-        (0..ranks.count)
-            |> filter(rank => held(me, rank) > 0)
+my_choice() -> int => (
+    let mine =
+       (0..ranks.count)
+           |> filter(rank => held(me, rank) > 0)
 
-     let known =
-         mine |> filter(you_hold.contains) |> collect()
+    let known =
+        mine |> filter(you_hold.contains) |> collect()
 
-     let untried =
-         mine |> filter(rank => !you_lack.contains(rank)) |> collect()
+    let untried =
+        mine |> filter(rank => !you_lack.contains(rank)) |> collect()
 
-     let pool =
-         if known.count > 0 then known
-         elif untried.count > 0 then untried
-         else mine fi
+    let pool =
+        if known.count > 0 then known
+        elif untried.count > 0 then untried
+        else mine fi
 
-     pool |> max_by(held(me, *)) ?? -1)
+    pool |> max_by(held(me, *)) ?? -1
+)
 
 for rank in 0..ranks.count do
     for _ in 0..4 do

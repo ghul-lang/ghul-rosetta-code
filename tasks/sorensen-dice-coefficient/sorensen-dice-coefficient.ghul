@@ -15,39 +15,41 @@ shared(left: Map[string, int], right: Map[string, int]) -> int =>
 size(counted: Map[string, int]) -> int =>
     counted.values |> sum()
 
-coefficient(left: Map[string, int], right: Map[string, int]) -> double =>
-    (let total = size(left) + size(right)
+coefficient(left: Map[string, int], right: Map[string, int]) -> double => (
+    let total = size(left) + size(right)
 
-     if total == 0 then
-         0.0D
-     else
-         double(2 * shared(left, right)) / cast(total)
-     fi)
+    if total == 0 then
+        0.0D
+    else
+        double(2 * shared(left, right)) / cast(total)
+    fi
+)
 
 let tasks =
     IO.File.read_all_lines("rosetta-tasks.txt")
         |> map(name => (name = name, grams = bigrams(name)))
 
-closest(term: string) -> (name: string, score: double){} =>
-    (let wanted = bigrams(term)
+closest(term: string) -> (name: string, score: double){} => (
+    let wanted = bigrams(term)
 
-     let scored =
-         tasks
-             |> map(task =>
-                 (name = task.name,
-                  score = coefficient(wanted, task.grams)))
-             |> collect_mutable()
+    let scored =
+        tasks
+            |> map(task =>
+                (name = task.name,
+                 score = coefficient(wanted, task.grams)))
+            |> collect_mutable()
 
-     scored.sort((left, right) =>
-         (let by_score = right.score <> left.score
+    scored.sort((left, right) =>
+        (let by_score = right.score <> left.score
 
-          if by_score != 0 then
-              by_score
-          else
-              left.name <> right.name
-          fi))
+         if by_score != 0 then
+             by_score
+         else
+             left.name <> right.name
+         fi))
 
-     scored[0..5])
+    scored[0..5]
+)
 
 for term in ["Primordial primes",
              "Sunkist-Giuliani formula",

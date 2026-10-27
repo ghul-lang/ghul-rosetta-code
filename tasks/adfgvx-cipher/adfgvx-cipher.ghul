@@ -5,20 +5,21 @@ let labels = "ADFGVX"
 
 let random = System.Random(20260908)
 
-shuffled(items: string) -> string =>
-    (let held = items |> collect_mutable()
-     for i in 0..held.count do
-         let j = i + random.next(held.count - i)
-         (held[i], held[j]) = (held[j], held[i])
-     od
-     string(held))
+shuffled(items: string) -> string => (
+    let held = items |> collect_mutable()
+    for i in 0..held.count do
+        let j = i + random.next(held.count - i)
+        (held[i], held[j]) = (held[j], held[i])
+    od
+    string(held)
+)
 
 all_letters(word: string) -> bool =>
     word |> all(char.is_letter)
 
-no_repeats(word: string) -> bool =>
-    (let seen = SET()
-     word |> all(seen.add))
+no_repeats(word: string) -> bool => (
+    let seen = SET()
+    word |> all(seen.add))
 
 read_order(key: string) -> int{} =>
     (0..key.length)
@@ -28,47 +29,51 @@ column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +
     (if column < length % key.length then 1 else 0 fi)
 
-to_pairs(square: string, text: string) -> string =>
-    (let pairs = StringBuilder()
-     for letter in text do
-         let at = square.index_of(letter)
-         pairs.append(labels[at / 6])
-         pairs.append(labels[at % 6])
-     od
-     pairs.to_string())
+to_pairs(square: string, text: string) -> string => (
+    let pairs = StringBuilder()
+    for letter in text do
+        let at = square.index_of(letter)
+        pairs.append(labels[at / 6])
+        pairs.append(labels[at % 6])
+    od
+    pairs.to_string()
+)
 
-from_pairs(square: string, pairs: List[char]) -> string =>
-    (let text = StringBuilder()
-     for at in 0..pairs.count / 2 do
-         let row = labels.index_of(pairs[at * 2])
-         let column = labels.index_of(pairs[at * 2 + 1])
-         text.append(square[row * 6 + column])
-     od
-     text.to_string())
+from_pairs(square: string, pairs: List[char]) -> string => (
+    let text = StringBuilder()
+    for at in 0..pairs.count / 2 do
+        let row = labels.index_of(pairs[at * 2])
+        let column = labels.index_of(pairs[at * 2 + 1])
+        text.append(square[row * 6 + column])
+    od
+    text.to_string()
+)
 
-encrypt(square: string, key: string, text: string) -> string =>
-    (let pairs = to_pairs(square, text)
-     let cipher = StringBuilder()
-     for column in read_order(key) do
-         let at mut = column
-         while at < pairs.length do
-             cipher.append(pairs[at])
-             at = at + key.length
-         od
-     od
-     cipher.to_string())
+encrypt(square: string, key: string, text: string) -> string => (
+    let pairs = to_pairs(square, text)
+    let cipher = StringBuilder()
+    for column in read_order(key) do
+        let at mut = column
+        while at < pairs.length do
+            cipher.append(pairs[at])
+            at = at + key.length
+        od
+    od
+    cipher.to_string()
+)
 
-decrypt(square: string, key: string, cipher: string) -> string =>
-    (let pairs = cipher |> collect_mutable()
-     let taken mut = 0
-     for column in read_order(key) do
-         let height = column_height(key, cipher.length, column)
-         for row in 0..height do
-             pairs[row * key.length + column] = cipher[taken]
-             taken = taken + 1
-         od
-     od
-     from_pairs(square, pairs))
+decrypt(square: string, key: string, cipher: string) -> string => (
+    let pairs = cipher |> collect_mutable()
+    let taken mut = 0
+    for column in read_order(key) do
+        let height = column_height(key, cipher.length, column)
+        for row in 0..height do
+            pairs[row * key.length + column] = cipher[taken]
+            taken = taken + 1
+        od
+    od
+    from_pairs(square, pairs)
+)
 
 let square = shuffled("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 

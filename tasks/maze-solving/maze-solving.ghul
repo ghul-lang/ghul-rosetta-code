@@ -21,17 +21,18 @@ let directions =
     [(across = 1, down = 0), (across = -1, down = 0),
      (across = 0, down = 1), (across = 0, down = -1)]
 
-shuffled() -> (across: int, down: int){} =>
-    (let order = LIST(directions)
-     let index mut = order.count - 1
+shuffled() -> (across: int, down: int){} => (
+    let order = LIST(directions)
+    let index mut = order.count - 1
 
-     while index > 0 do
-         let other = random.next(index + 1)
-         (order[index], order[other]) = (order[other], order[index])
-         index = index - 1
-     od
+    while index > 0 do
+        let other = random.next(index + 1)
+        (order[index], order[other]) = (order[other], order[index])
+        index = index - 1
+    od
 
-     order)
+    order
+)
 
 carve(column: int, row: int) is
     visited[at(column, row)] = true

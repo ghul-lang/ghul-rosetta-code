@@ -1,22 +1,24 @@
 use default
 
-fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A =>
-    (let running mut = seed
+fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
+    let running mut = seed
 
-     for value in values do
-         running = combine(running, value)
-     od
+    for value in values do
+        running = combine(running, value)
+    od
 
-     running)
+    running
+)
 
-fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A =>
-    (let running mut = seed
+fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A => (
+    let running mut = seed
 
-     for i in 0..values.count do
-         running = combine(values[values.count - 1 - i], running)
-     od
+    for i in 0..values.count do
+        running = combine(values[values.count - 1 - i], running)
+    od
 
-     running)
+    running
+)
 
 let numbers = [1, 2, 3, 4, 5]
 

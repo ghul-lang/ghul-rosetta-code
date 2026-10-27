@@ -1,13 +1,14 @@
 use default
 
-count_of_length(length: int) -> int =>
-    (let total mut = 1
+count_of_length(length: int) -> int => (
+    let total mut = 1
 
-     for _ in 1::length / 2 do
-         total = total * 9
-     od
+    for _ in 1::length / 2 do
+        total = total * 9
+    od
 
-     total)
+    total
+)
 
 upside_down(index: int) -> string is
     let length mut = 1

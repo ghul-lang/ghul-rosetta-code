@@ -16,16 +16,17 @@ shared_prefix(left: string, right: string) -> int =>
         |> take_while(((l, r)) => l == r)
         |> count()
 
-multifactorial(value: bigint, step: int) -> bigint =>
-    (let product mut = 1n
-     let term mut = value
+multifactorial(value: bigint, step: int) -> bigint => (
+    let product mut = 1n
+    let term mut = value
 
-     while term > 0n do
-         product = product * term
-         term = term - bigint(step)
-     od
+    while term > 0n do
+        product = product * term
+        term = term - bigint(step)
+    od
 
-     product)
+    product
+)
 
 expand(source: string) -> string is
     let text = source

@@ -58,14 +58,15 @@ show(generation: int, grid: Grid) is
     write_line()
 si
 
-parse(rows: string[]) -> Grid =>
-    (let grid = LIST()
+parse(rows: string[]) -> Grid => (
+    let grid = LIST()
 
-     for row in rows do
-         grid.add(row |> map(* == '#') |> collect())
-     od
+    for row in rows do
+        grid.add(row |> map(* == '#') |> collect())
+    od
 
-     grid)
+    grid
+)
 
 // A blinker, which oscillates with period two.
 let blinker mut = parse([".....", ".....", ".###.", ".....", "....."])

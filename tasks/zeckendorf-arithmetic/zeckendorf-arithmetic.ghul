@@ -6,23 +6,25 @@ blank() -> LIST[int] =>
     let digits = repeat(0, width) |> collect_mutable() in
     digits
 
-copy(value: List[int]) -> LIST[int] =>
-    (let digits = blank()
+copy(value: List[int]) -> LIST[int] => (
+    let digits = blank()
 
-     for index in 0..width do
-         digits[index] = value[index]
-     od
+    for index in 0..width do
+        digits[index] = value[index]
+    od
 
-     digits)
+    digits
+)
 
-read(text: string) -> List[int] =>
-    (let digits = blank()
+read(text: string) -> List[int] => (
+    let digits = blank()
 
-     for entry in text |> reverse() |> index() do
-         digits[entry.index] = if entry.value == '1' then 1 else 0 fi
-     od
+    for entry in text |> reverse() |> index() do
+        digits[entry.index] = if entry.value == '1' then 1 else 0 fi
+    od
 
-     digits)
+    digits
+)
 
 highest(value: List[int]) -> int =>
     let found =
@@ -103,22 +105,23 @@ add(left: List[int], right: List[int]) -> LIST[int] is
     total
 si
 
-decrement(value: List[int]) -> LIST[int] =>
-    (let result = copy(value)
-     let lowest = 0..width |> find(index => result[index] == 1)
+decrement(value: List[int]) -> LIST[int] => (
+    let result = copy(value)
+    let lowest = 0..width |> find(index => result[index] == 1)
 
-     if let at = lowest then
-         result[at] = 0
+    if let at = lowest then
+        result[at] = 0
 
-         let index mut = at - 1
+        let index mut = at - 1
 
-         while index >= 0 do
-             result[index] = 1
-             index = index - 2
-         od
-     fi
+        while index >= 0 do
+            result[index] = 1
+            index = index - 2
+        od
+    fi
 
-     result)
+    result
+)
 
 subtract(left: List[int], right: List[int]) -> LIST[int] =>
     let result = copy(left) in

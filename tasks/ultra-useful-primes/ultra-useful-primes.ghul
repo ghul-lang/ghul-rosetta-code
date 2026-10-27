@@ -41,15 +41,16 @@ is_probable_prime(n: bigint) -> bool is
     true
 si
 
-ultra_useful(n: int) -> int =>
-    (let power = bigint.pow(2n, 1 << n)
-     let k mut = 1
+ultra_useful(n: int) -> int => (
+    let power = bigint.pow(2n, 1 << n)
+    let k mut = 1
 
-     while !is_probable_prime(power - bigint(k)) do
-         k = k + 2
-     od
+    while !is_probable_prime(power - bigint(k)) do
+        k = k + 2
+    od
 
-     k)
+    k
+)
 
 write_line(" n     k")
 

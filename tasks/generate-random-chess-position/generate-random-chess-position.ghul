@@ -16,63 +16,66 @@ promotion_square(piece: char, square: int) -> bool =>
     (piece == 'P' /\ rank_of(square) == 0) \/
     (piece == 'p' /\ rank_of(square) == 7)
 
-position() -> List[char] =>
-    (let board = repeat('.', 64) |> collect_mutable()
+position() -> List[char] => (
+    let board = repeat('.', 64) |> collect_mutable()
 
-     let white_king = random.next(64)
-     let black_king mut = random.next(64)
+    let white_king = random.next(64)
+    let black_king mut = random.next(64)
 
-     while adjacent(white_king, black_king) do
-         black_king = random.next(64)
-     od
+    while adjacent(white_king, black_king) do
+        black_king = random.next(64)
+    od
 
-     board[white_king] = 'K'
-     board[black_king] = 'k'
+    board[white_king] = 'K'
+    board[black_king] = 'k'
 
-     for _ in 0..random.next(31) do
-         let square = random.next(64)
-         let piece = pieces[random.next(pieces.length)]
+    for _ in 0..random.next(31) do
+        let square = random.next(64)
+        let piece = pieces[random.next(pieces.length)]
 
-         if board[square] == '.' /\
-            !promotion_square(piece, square)
-         then
-             board[square] = piece
-         fi
-     od
+        if board[square] == '.' /\
+           !promotion_square(piece, square)
+        then
+            board[square] = piece
+        fi
+    od
 
-     board)
+    board
+)
 
-rank_to_fen(squares: List[char]) -> string =>
-    (let text = StringBuilder()
-     let empty mut = 0
+rank_to_fen(squares: List[char]) -> string => (
+    let text = StringBuilder()
+    let empty mut = 0
 
-     for square in squares do
-         if square == '.' then
-             empty = empty + 1
-         else
-             if empty > 0 then
-                 text.append(empty)
-                 empty = 0
-             fi
+    for square in squares do
+        if square == '.' then
+            empty = empty + 1
+        else
+            if empty > 0 then
+                text.append(empty)
+                empty = 0
+            fi
 
-             text.append(square)
-         fi
-     od
+            text.append(square)
+        fi
+    od
 
-     if empty > 0 then
-         text.append(empty)
-     fi
+    if empty > 0 then
+        text.append(empty)
+    fi
 
-     text.to_string())
+    text.to_string()
+)
 
-to_fen(board: List[char]) -> string =>
-    (let ranks =
-        (0..8)
-            |> map(rank =>
-                rank_to_fen(board[rank * 8 .. rank * 8 + 8]))
-            |> join("/")
+to_fen(board: List[char]) -> string => (
+    let ranks =
+       (0..8)
+           |> map(rank =>
+               rank_to_fen(board[rank * 8 .. rank * 8 + 8]))
+           |> join("/")
 
-     "{ranks} w - - 0 1")
+    "{ranks} w - - 0 1"
+)
 
 for _ in 0..3 do
     write_line(to_fen(position()))

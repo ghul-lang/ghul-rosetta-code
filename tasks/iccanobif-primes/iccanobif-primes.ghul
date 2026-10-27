@@ -47,12 +47,13 @@ fibonacci() -> bigint{} is
     od
 si
 
-reversed(value: bigint) -> bigint =>
-    (let digits = value.to_string().to_char_array()
+reversed(value: bigint) -> bigint => (
+    let digits = value.to_string().to_char_array()
 
-     System.Array.reverse(digits)
+    System.Array.reverse(digits)
 
-     bigint.parse(string(digits)))
+    bigint.parse(string(digits))
+)
 
 let iccanobif = fibonacci()
     |> map(reversed)

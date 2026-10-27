@@ -3,15 +3,16 @@ use IO.Std.read_line
 
 let random = System.Random(9)
 
-shuffled() -> List[int] =>
-    (let digits = 1::9 |> collect_mutable()
+shuffled() -> List[int] => (
+    let digits = 1::9 |> collect_mutable()
 
-     for i in 0..8 do
-         let other = i + random.next(9 - i)
-         (digits[i], digits[other]) = (digits[other], digits[i])
-     od
+    for i in 0..8 do
+        let other = i + random.next(9 - i)
+        (digits[i], digits[other]) = (digits[other], digits[i])
+    od
 
-     digits)
+    digits
+)
 
 sorted(digits: List[int]) -> bool =>
     0..8 |> all(i => digits[i] < digits[i + 1])

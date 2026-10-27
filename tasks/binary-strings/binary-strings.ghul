@@ -11,14 +11,15 @@ replace_byte(
         |> collect() in
     result
 
-join_bytes(a: List[ubyte], b: List[ubyte]) -> List[ubyte] =>
-    (let result = LIST(a)
+join_bytes(a: List[ubyte], b: List[ubyte]) -> List[ubyte] => (
+    let result = LIST(a)
 
-     for b2 in b do
-         result.add(b2)
-     od
+    for b2 in b do
+        result.add(b2)
+    od
 
-     result)
+    result
+)
 
 let hello = LIST([104ub, 101ub, 108ub, 108ub, 111ub])
 write_line("created: {to_text(hello)}")

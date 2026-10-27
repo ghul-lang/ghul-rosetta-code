@@ -19,12 +19,13 @@ records(path: string, length: int) -> string{} is
     od
 si
 
-reverse(record: string) -> string =>
-    (let characters = record |> collect()
+reverse(record: string) -> string => (
+    let characters = record |> collect()
 
-     System.Array.reverse(characters)
+    System.Array.reverse(characters)
 
-     string(characters))
+    string(characters)
+)
 
 let scratch =
     Path.combine(Path.get_temp_path(), "records-{Guid.new_guid()}")

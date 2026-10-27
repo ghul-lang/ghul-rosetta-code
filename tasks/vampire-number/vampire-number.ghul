@@ -1,11 +1,12 @@
 use default
 
-sorted_string(s: string) -> string =>
-    (let chars = s |> collect_mutable()
+sorted_string(s: string) -> string => (
+    let chars = s |> collect_mutable()
 
-     chars.sort((x, y) =>
-         if x < y then -1 elif x == y then 0 else 1 fi)
-     chars |> map(c => "{c}") |> join(""))
+    chars.sort((x, y) =>
+        if x < y then -1 elif x == y then 0 else 1 fi)
+    chars |> map(c => "{c}") |> join("")
+)
 
 fangs(n: long) -> (long, long){} is
     let half = "{n}".length / 2

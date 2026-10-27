@@ -20,17 +20,18 @@ take_lightest(pending: LIST[Huffman]) -> Huffman is
     lightest
 si
 
-build_tree(leaves: List[Huffman]) -> Huffman =>
-    (let pending = LIST(leaves)
+build_tree(leaves: List[Huffman]) -> Huffman => (
+    let pending = LIST(leaves)
 
-     while pending.count > 1 do
-         let first = take_lightest(pending)
-         let second = take_lightest(pending)
+    while pending.count > 1 do
+        let first = take_lightest(pending)
+        let second = take_lightest(pending)
 
-         pending.add(NODE(first, second, first.weight + second.weight))
-     od
+        pending.add(NODE(first, second, first.weight + second.weight))
+    od
 
-     pending[0])
+    pending[0]
+)
 
 let text = "this is an example for huffman encoding"
 

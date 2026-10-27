@@ -4,34 +4,36 @@ factorial(n: int) -> bigint =>
     1::n |> map(bigint) |> reduce(1n, * * *)
 
 // Lexicographic order, read as a number in the factorial base.
-unrank(rank: bigint, n: int) -> List[int] =>
-    (let left = 0..n |> collect_mutable()
-     let result = LIST()
-     let rest mut = rank
+unrank(rank: bigint, n: int) -> List[int] => (
+    let left = 0..n |> collect_mutable()
+    let result = LIST()
+    let rest mut = rank
 
-     for i in 0..n do
-         let place = factorial(n - 1 - i)
-         let index = int(rest / place)
+    for i in 0..n do
+        let place = factorial(n - 1 - i)
+        let index = int(rest / place)
 
-         rest = rest % place
-         result.add(left[index])
-         left.remove_at(index)
-     od
+        rest = rest % place
+        result.add(left[index])
+        left.remove_at(index)
+    od
 
-     result)
+    result
+)
 
-rank(permutation: List[int]) -> bigint =>
-    (let n = permutation.count
-     let total mut = 0n
+rank(permutation: List[int]) -> bigint => (
+    let n = permutation.count
+    let total mut = 0n
 
-     for i in 0..n do
-         let smaller_later =
-             i + 1..n |> count(j => permutation[j] < permutation[i])
+    for i in 0..n do
+        let smaller_later =
+            i + 1..n |> count(j => permutation[j] < permutation[i])
 
-         total = total + bigint(smaller_later) * factorial(n - 1 - i)
-     od
+        total = total + bigint(smaller_later) * factorial(n - 1 - i)
+    od
 
-     total)
+    total
+)
 
 let random = System.Random(12)
 
