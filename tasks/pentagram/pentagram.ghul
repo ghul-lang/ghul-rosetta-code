@@ -29,7 +29,9 @@ image.colour(148ub, 32ub, 48ub)
 image.stroke(3.0D)
 image.line(
     (0::5)
-        |> map(point => corner(point * 4 % 10))
+        |> map(* * 4)
+        |> map(* % 10)
+        |> map(corner)
         |> collect()
 )
 
