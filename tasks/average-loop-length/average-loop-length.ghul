@@ -3,19 +3,18 @@ use default
 let random = System.Random(2011)
 let trials = 100_000
 
-loop_length(n: int) -> int is
-    let seen = repeat(false, n + 1) |> collect_mutable()
-    let x mut = 1
-    let length mut = 0
+loop_length(n: int) -> int =>
+    (let seen = repeat(false, n + 1) |> collect_mutable()
+     let x mut = 1
+     let length mut = 0
 
-    while !seen[x] do
-        seen[x] = true
-        length = length + 1
-        x = random.next(1, n + 1)
-    od
+     while !seen[x] do
+         seen[x] = true
+         length = length + 1
+         x = random.next(1, n + 1)
+     od
 
-    length
-si
+     length)
 
 simulated(n: int) -> double =>
     double(1::trials |> sum_by(_ => loop_length(n))) /

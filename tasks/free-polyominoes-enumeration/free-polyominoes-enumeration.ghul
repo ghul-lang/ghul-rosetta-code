@@ -31,18 +31,17 @@ normalised(cells: Cell{}) -> Shape =>
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
-canonical(shape: Shape) -> Shape is
-    let forms = LIST()
-    let current mut = shape
+canonical(shape: Shape) -> Shape =>
+    (let forms = LIST()
+     let current mut = shape
 
-    for _ in 0..4 do
-        current = normalised(current |> map(c => at(c.column, -c.row)))
-        forms.add(current)
-        forms.add(normalised(current |> map(c => at(c.row, -c.column))))
-    od
+     for _ in 0..4 do
+         current = normalised(current |> map(c => at(c.column, -c.row)))
+         forms.add(current)
+         forms.add(normalised(current |> map(c => at(c.row, -c.column))))
+     od
 
-    (forms |> min_by(key))!
-si
+     (forms |> min_by(key))!)
 
 grow(shapes: List[Shape]) -> List[Shape] is
     let seen = MAP()

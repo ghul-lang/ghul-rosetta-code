@@ -2,20 +2,19 @@ use default
 
 let base = 1_000_000_000L
 
-zeros_in(limb: long, width: int) -> int is
-    let rest mut = limb
-    let zeros mut = 0
+zeros_in(limb: long, width: int) -> int =>
+    (let rest mut = limb
+     let zeros mut = 0
 
-    for _ in 0..width do
-        if rest % 10L == 0L then
-            zeros = zeros + 1
-        fi
+     for _ in 0..width do
+         if rest % 10L == 0L then
+             zeros = zeros + 1
+         fi
 
-        rest = rest / 10L
-    od
+         rest = rest / 10L
+     od
 
-    zeros
-si
+     zeros)
 
 digit_count(n: long) -> int => "{n}".length
 

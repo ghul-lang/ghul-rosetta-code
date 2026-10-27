@@ -4,21 +4,20 @@ let random = System.Random(2026)
 
 let rounds = 100000
 
-play() -> (car: int, chosen: int, opened: int, switched: int) is
-    let car = random.next(3)
-    let chosen = random.next(3)
+play() -> (car: int, chosen: int, opened: int, switched: int) =>
+    (let car = random.next(3)
+     let chosen = random.next(3)
 
-    let opened mut = random.next(3)
+     let opened mut = random.next(3)
 
-    while opened == chosen \/ opened == car do
-        opened = random.next(3)
-    od
+     while opened == chosen \/ opened == car do
+         opened = random.next(3)
+     od
 
-    let switched =
-        (0::2 |> find(door => door != chosen /\ door != opened))!
+     let switched =
+         (0::2 |> find(door => door != chosen /\ door != opened))!
 
-    (car = car, chosen = chosen, opened = opened, switched = switched)
-si
+     (car = car, chosen = chosen, opened = opened, switched = switched))
 
 write_line("the first three games")
 

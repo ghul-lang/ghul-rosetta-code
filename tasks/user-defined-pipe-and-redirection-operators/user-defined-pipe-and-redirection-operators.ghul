@@ -46,19 +46,18 @@ head(count: int) -> Filter => source => source |> take(count)
 
 tail(count: int) -> Filter => last(*, count)
 
-last(source: Stream, count: int) -> Stream is
-    let held = LIST[string]()
+last(source: Stream, count: int) -> Stream =>
+    (let held = LIST[string]()
 
-    for line in source do
-        held.add(line)
+     for line in source do
+         held.add(line)
 
-        if held.count > count then
-            held.remove_at(0)
-        fi
-    od
+         if held.count > count then
+             held.remove_at(0)
+         fi
+     od
 
-    pipe(held)
-si
+     pipe(held))
 
 tee(path: string) -> Filter => copy_through(*, path)
 
@@ -90,13 +89,12 @@ si
 
 sorted() -> Filter => source => in_order(source)
 
-in_order(source: Stream) -> Stream is
-    let lines = source |> collect_mutable()
+in_order(source: Stream) -> Stream =>
+    (let lines = source |> collect_mutable()
 
-    lines.sort((a: string, b: string) -> int => string.compare(a, b))
+     lines.sort((a: string, b: string) -> int => string.compare(a, b))
 
-    pipe(lines)
-si
+     pipe(lines))
 
 let work = IO.Path.combine(
     IO.Path.get_temp_path(),

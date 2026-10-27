@@ -1,21 +1,20 @@
 use default
 
-power_mod(base: bigint, exponent: bigint, modulus: bigint) -> bigint is
-    let result mut = 1n % modulus
-    let square mut = base % modulus
-    let remaining mut = exponent
+power_mod(base: bigint, exponent: bigint, modulus: bigint) -> bigint =>
+    (let result mut = 1n % modulus
+     let square mut = base % modulus
+     let remaining mut = exponent
 
-    while remaining > 0n do
-        if !remaining.is_even then
-            result = result * square % modulus
-        fi
+     while remaining > 0n do
+         if !remaining.is_even then
+             result = result * square % modulus
+         fi
 
-        square = square * square % modulus
-        remaining = remaining >> 1
-    od
+         square = square * square % modulus
+         remaining = remaining >> 1
+     od
 
-    result
-si
+     result)
 
 let a =
     2988348162058574136915891421498819466320163312926952423791023078876139n

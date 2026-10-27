@@ -21,23 +21,22 @@ outcomes(count: int) -> Collections.List[Result]{} is
     od
 si
 
-standings(results: Collections.List[Result]) -> int{} is
-    let points = repeat(0, 4) |> collect_mutable()
+standings(results: Collections.List[Result]) -> int{} =>
+    (let points = repeat(0, 4) |> collect_mutable()
 
-    for ((home, away), result) in zip(games, results) do
-        let (home_points, away_points) =
-            case result
-            when Result.HOME_WIN then (3, 0)
-            when Result.DRAW then (1, 1)
-            when Result.AWAY_WIN then (0, 3)
-            esac
+     for ((home, away), result) in zip(games, results) do
+         let (home_points, away_points) =
+             case result
+             when Result.HOME_WIN then (3, 0)
+             when Result.DRAW then (1, 1)
+             when Result.AWAY_WIN then (0, 3)
+             esac
 
-        points[home] = points[home] + home_points
-        points[away] = points[away] + away_points
-    od
+         points[home] = points[home] + home_points
+         points[away] = points[away] + away_points
+     od
 
-    return points |> sort_descending()
-si
+     points |> sort_descending())
 
 let histogram =
     (0..4) |> map(_ => repeat(0, 10) |> collect_mutable()) |> collect()

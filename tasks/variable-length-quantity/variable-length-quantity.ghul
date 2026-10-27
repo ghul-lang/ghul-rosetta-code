@@ -1,16 +1,15 @@
 use default
 
-to_octets(value: long) -> List[ubyte] is
-    let octets = LIST([ubyte(value & 0x7FL)])
-    let rest mut = value >> 7
+to_octets(value: long) -> List[ubyte] =>
+    (let octets = LIST([ubyte(value & 0x7FL)])
+     let rest mut = value >> 7
 
-    while rest > 0L do
-        octets.insert(0, cast((rest & 0x7FL) | 0x80L))
-        rest = rest >> 7
-    od
+     while rest > 0L do
+         octets.insert(0, cast((rest & 0x7FL) | 0x80L))
+         rest = rest >> 7
+     od
 
-    octets
-si
+     octets)
 
 from_octets(octets: List[ubyte]) -> long =>
     octets

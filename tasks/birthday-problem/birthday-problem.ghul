@@ -64,18 +64,18 @@ exact(most: int, at_least: int) -> List[double] is
         |> collect()
 si
 
-first_even(chance: (int) -> double, from: int) -> int is
-    let low mut = from
-    let high mut = 600
+first_even(chance: (int) -> double, from: int) -> int =>
+    (let low mut = from
+     let high mut = 600
 
-    while low < high do
-        let middle = (low + high) / 2
+     while low < high do
+         let middle = (low + high) / 2
 
-        if chance(middle) > 0.5D then high = middle else low = middle + 1 fi
-    od
+         if chance(middle) > 0.5D then high = middle
+         else low = middle + 1 fi
+     od
 
-    low
-si
+     low)
 
 let crossings = LIST()
 let curves = LIST[List[double]]()

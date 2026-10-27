@@ -3,15 +3,14 @@ use default
 let digits = 100
 let guard = 12
 
-power_of_ten(n: int) -> bigint is
-    let value mut = 1n
+power_of_ten(n: int) -> bigint =>
+    (let value mut = 1n
 
-    for _ in 0..n do
-        value = value * 10n
-    od
+     for _ in 0..n do
+         value = value * 10n
+     od
 
-    return value
-si
+     value)
 
 integer_sqrt(n: bigint) -> bigint is
     if n < 2n then

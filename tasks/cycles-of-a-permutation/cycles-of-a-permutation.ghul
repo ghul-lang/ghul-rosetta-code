@@ -10,15 +10,14 @@ permutation_between(before: string, after: string) -> List[int] =>
 apply(one_line: List[int], text: string) -> string =>
     string(one_line |> map(source => text[source - 1]))
 
-inverse(one_line: List[int]) -> List[int] is
-    let result = LIST(one_line)
+inverse(one_line: List[int]) -> List[int] =>
+    (let result = LIST(one_line)
 
-    for (target, source) in one_line |> index() do
-        result[source - 1] = target + 1
-    od
+     for (target, source) in one_line |> index() do
+         result[source - 1] = target + 1
+     od
 
-    return result
-si
+     result)
 
 compose(first: List[int], second: List[int])
         -> List[int] =>
@@ -80,16 +79,15 @@ signature(one_line: List[int]) -> int =>
     if even_cycles % 2 == 0 then 1 else -1 fi
 
 
-show_one_line(one_line: List[int]) -> string is
-    let trimmed = LIST(one_line)
+show_one_line(one_line: List[int]) -> string =>
+    (let trimmed = LIST(one_line)
 
-    while trimmed.count > 0 /\
-          trimmed[trimmed.count - 1] == trimmed.count do
-        trimmed.remove_at(trimmed.count - 1)
-    od
+     while trimmed.count > 0 /\
+           trimmed[trimmed.count - 1] == trimmed.count do
+         trimmed.remove_at(trimmed.count - 1)
+     od
 
-    return trimmed |> map(p => "{p}") |> join(" ")
-si
+     trimmed |> map(p => "{p}") |> join(" "))
 
 show_cycles(one_line: List[int]) -> string =>
     cycles(one_line)

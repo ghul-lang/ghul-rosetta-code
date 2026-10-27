@@ -23,21 +23,20 @@ area(polygon: List[P]) -> double =>
     (0..polygon.count)
         |> sum_by(i => polygon[i] × polygon[(i + 1) % polygon.count])
 
-contains(polygon: List[P], p: P) -> bool is
-    let inside mut = false
+contains(polygon: List[P], p: P) -> bool =>
+    (let inside mut = false
 
-    for i in 0..polygon.count do
-        let a = polygon[i]
-        let b = polygon[(i + 1) % polygon.count]
+     for i in 0..polygon.count do
+         let a = polygon[i]
+         let b = polygon[(i + 1) % polygon.count]
 
-        if (a.y > p.y) != (b.y > p.y) /\
-                p.x < a.x + (p.y - a.y) * (b.x - a.x) / (b.y - a.y) then
-            inside = !inside
-        fi
-    od
+         if (a.y > p.y) != (b.y > p.y) /\
+                 p.x < a.x + (p.y - a.y) * (b.x - a.x) / (b.y - a.y) then
+             inside = !inside
+         fi
+     od
 
-    inside
-si
+     inside)
 
 ring(polygon: List[P], crossings: List[Crossing]) -> NODE{} is
     let nodes = LIST()

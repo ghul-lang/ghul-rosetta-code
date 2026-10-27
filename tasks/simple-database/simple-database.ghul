@@ -56,13 +56,12 @@ latest_by_category(file: string) -> ENTRY{} is
     newest
 si
 
-by_date(file: string) -> ENTRY{} is
-    let all = read_all(file)
+by_date(file: string) -> ENTRY{} =>
+    (let all = read_all(file)
 
-    all.sort((left, right) => left.date <> right.date)
+     all.sort((left, right) => left.date <> right.date)
 
-    all
-si
+     all)
 
 show(caption: string, entries: ENTRY{}) is
     write_line(caption)

@@ -3,17 +3,16 @@ use System.Random
 
 let chance = Random(20260921)
 
-one_of_n(n: int) -> int is
-    let chosen mut = 1
+one_of_n(n: int) -> int =>
+    (let chosen mut = 1
 
-    for line in 2::n do
-        if chance.next(line) == 0 then
-            chosen = line
-        fi
-    od
+     for line in 2::n do
+         if chance.next(line) == 0 then
+             chosen = line
+         fi
+     od
 
-    return chosen
-si
+     chosen)
 
 let lines = 10
 let trials = 1000000

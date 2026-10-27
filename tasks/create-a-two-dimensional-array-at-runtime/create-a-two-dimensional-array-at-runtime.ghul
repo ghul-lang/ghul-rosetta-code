@@ -1,10 +1,9 @@
 use default
 
-grid(rows: int, columns: int) -> List[LIST[int]] is
+grid(rows: int, columns: int) -> List[LIST[int]] =>
     1::rows
         |> map(_ => repeat(0, columns) |> collect_mutable())
         |> collect()
-si
 
 let dimensions = [3, 4]
 

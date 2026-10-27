@@ -1,15 +1,14 @@
 use default
 
-encode(text: string) -> string is
-    let runs = System.Text.StringBuilder()
+encode(text: string) -> string =>
+    (let runs = System.Text.StringBuilder()
 
-    for run in text |> group() do
-        runs.append(run.count)
-        runs.append(run[0])
-    od
+     for run in text |> group() do
+         runs.append(run.count)
+         runs.append(run[0])
+     od
 
-    return runs.to_string()
-si
+     runs.to_string())
 
 decode(encoded: string) -> string is
     let text = System.Text.StringBuilder()

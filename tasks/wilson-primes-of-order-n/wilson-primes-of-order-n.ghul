@@ -6,15 +6,14 @@ let orders = 11
 is_prime(n: int) -> bool =>
     n > 1 /\ (2..n) |> take_while(d => d * d <= n) |> all(d => n % d != 0)
 
-factorials_mod(count: int, modulus: long) -> List[long] is
-    let result = LIST([1L])
+factorials_mod(count: int, modulus: long) -> List[long] =>
+    (let result = LIST([1L])
 
-    for k in 1..count do
-        result.add(result[k - 1] * long(k) % modulus)
-    od
+     for k in 1..count do
+         result.add(result[k - 1] * long(k) % modulus)
+     od
 
-    return result
-si
+     result)
 
 is_wilson(p: int, n: int, factorials: List[long], modulus: long) -> bool =>
     let sign = if n % 2 == 0 then 1L else -1L fi in
