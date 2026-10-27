@@ -31,7 +31,6 @@ under_thousand(value: int) -> string =>
         "{small[value / 100]} hundred {under_hundred(value % 100)}"
     fi
 
-// The groups of three digits in value, starting with the lowest.
 groups(value: long) -> int{} is
     if value > 0L then
         yield int(value % 1000L)

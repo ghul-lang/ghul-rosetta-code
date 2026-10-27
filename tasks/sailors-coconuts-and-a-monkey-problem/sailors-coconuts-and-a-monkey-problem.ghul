@@ -1,7 +1,5 @@
 use default
 
-// What is left after one sailor gives the monkey a coconut and hides a
-// share.
 after_night(pile: int, sailors: int) -> int =>
     pile - 1 - (pile - 1) / sailors
 

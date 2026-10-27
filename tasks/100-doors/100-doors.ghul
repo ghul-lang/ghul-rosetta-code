@@ -1,7 +1,5 @@
 use default
 
-// Each pass toggles every door whose number is a multiple of the pass
-// number.
 toggle(doors: bool[], pass: int) -> bool[] =>
     [if (i + 1) % pass == 0 then !doors[i] else doors[i] fi for i in 0..100]
 

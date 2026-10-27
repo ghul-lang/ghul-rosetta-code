@@ -4,8 +4,6 @@ let coin = System.Random(20260909)
 
 let runs = 1000000
 
-// Heads means one waking, on Monday. Tails means two, on Monday and
-// Tuesday.
 let heads = 0..runs |> count(_ => coin.next(2) == 0)
 let wakings = heads + 2 * (runs - heads)
 

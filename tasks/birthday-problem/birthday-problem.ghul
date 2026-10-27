@@ -33,10 +33,6 @@ simulated(people: int, at_least: int, trials: int) -> double =>
 log_factorial(n: int) -> double =>
     1::n |> reduce(0.0D, (s, i) => s + log(double(i)))
 
-// After each day, ways[m] measures how many ways m people can have
-// birthdays on the days so far with fewer than at_least of them on any
-// one day. Each new day takes j of the m people, for every j that keeps
-// it under the limit.
 exact(most: int, at_least: int) -> List[double] is
     let inverse_factorial =
         (0..at_least)
@@ -61,8 +57,6 @@ exact(most: int, at_least: int) -> List[double] is
         |> collect()
 si
 
-// A binary search for the smallest group size between low and high
-// whose chance is more than a half.
 first_even(chance: (int) -> double, low: int, high: int) -> int =>
     if low >= high then
         low

@@ -51,8 +51,6 @@ primorials() -> bigint{} is
     od
 si
 
-// The smallest m greater than 1 for which primorial + m is prime. Only
-// odd values of m need trying, because the primorial is even.
 fortunate(primorial: bigint) -> int =>
     from(1)
         |> map(k => 2 * k + 1)

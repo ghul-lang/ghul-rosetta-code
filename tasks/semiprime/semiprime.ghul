@@ -1,8 +1,5 @@
 use default
 
-// The prime factors of n, smallest first, trying divisors from divisor
-// upwards. A factor that divides n more than once appears more than
-// once.
 prime_factors(n: int, divisor: int) -> int{} is
     if n > 1 then
         if divisor * divisor > n then

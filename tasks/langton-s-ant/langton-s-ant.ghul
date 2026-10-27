@@ -13,11 +13,6 @@ let column_steps = [0, 1, 0, -1]
 
 use Ant = (row: int, column: int, steps: int, left: bool)
 
-// The ant's walk. On a white square it turns right and on a black square
-// it turns left; either way it flips the square's colour and steps
-// forward. The walk yields the ant every so many steps, and once more
-// when it leaves the field. The grid is shared, so whoever reads a yielded
-// ant sees the grid as it stands at that moment.
 walk(every: int) -> Ant{} is
     let row mut = size / 2, column mut = size / 2
     let facing mut = 0, steps mut = 0

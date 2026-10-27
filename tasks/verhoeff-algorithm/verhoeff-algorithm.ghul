@@ -28,9 +28,6 @@ let p = [
 
 use Step = (i: int, n: int, permuted: int, c: int)
 
-// Each step of the checksum, taking the digits from the right through the
-// permutation table and then the dihedral group table. The last step's c
-// is the checksum.
 steps(digits: string) -> Step{} is
     let c mut = 0
 

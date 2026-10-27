@@ -7,8 +7,6 @@ let guard = 12
 
 power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
 
-// Newton's method. Start from n and keep improving the estimate until it
-// stops getting smaller.
 integer_sqrt(n: bigint) -> bigint =>
     if n < 2n then n else newton(n, n) fi
 
@@ -18,8 +16,6 @@ newton(n: bigint, root: bigint) -> bigint =>
 
 let scale = power_of_ten(digits + guard)
 
-// One step of the arithmetic-geometric mean. It also adds this step's
-// term to the running total that the formula for pi needs.
 step(state: State) -> State =>
     let
         (a, g, total, weight) = state,

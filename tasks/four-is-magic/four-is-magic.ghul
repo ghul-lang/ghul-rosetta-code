@@ -54,8 +54,6 @@ cardinal(value: long) -> string is
         fi
 si
 
-// Each number's name is followed by the name of its length, until the
-// chain reaches four.
 phrases(name: string) -> string{} is
     if name =~ "four" then
         yield "four is magic"

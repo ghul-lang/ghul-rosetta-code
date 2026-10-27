@@ -13,8 +13,6 @@ forwards(input: IO.TextReader) -> char =>
         character
     fi
 
-// Each letter is held on the call stack, and written only after the rest
-// of the word has been, so the word comes out reversed.
 backwards(input: IO.TextReader) -> char =>
     let character = char(input.read()) in
     if is_letter(character) then

@@ -2,13 +2,8 @@ use default
 
 power_of_nine(exponent: int) -> int => repeat(9, exponent) |> product()
 
-// How many upside-down numbers have this many digits. The first half can
-// use any of the digits 1 to 9. The second half, and the 5 in the middle
-// of an odd length, are then fixed.
 count_of_length(length: int) -> int => power_of_nine(length / 2)
 
-// The length of the number at a given zero-based rank, and its rank
-// among the numbers of that length.
 locate(rank: int, length: int) -> (int, int) =>
     if rank < count_of_length(length) then (length, rank)
     else locate(rank - count_of_length(length), length + 1)

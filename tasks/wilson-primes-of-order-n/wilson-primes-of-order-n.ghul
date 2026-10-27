@@ -21,9 +21,6 @@ is_wilson(p: int, n: int, factorials: List[long], modulus: long) -> bool =>
     let product = factorials[n - 1] * factorials[p - n] % modulus in
     (product - sign + modulus) % modulus == 0L
 
-
-// The orders n for which p is a Wilson prime. The table of factorials is
-// built once for each prime and shared by all the orders.
 orders_of(p: int) -> List[int] =>
     let
         modulus = long(p) * long(p),
