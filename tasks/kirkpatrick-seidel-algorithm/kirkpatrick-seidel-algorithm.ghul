@@ -116,10 +116,12 @@ backwards(items: List[P]) -> P{} =>
         |> map(i => items[items.count - 1 - i])
 
 hull(points: List[P]) -> List[P] =>
-    let top = upper_hull(points) in
-    let bottom = flipped(upper_hull(flipped(points))) in
-    let inner = backwards(bottom) |> skip(1) |> take(bottom.count - 2) in
-    top ++ inner |> collect()
+    let
+        top = upper_hull(points),
+        bottom = flipped(upper_hull(flipped(points))),
+        inner = backwards(bottom) |> skip(1) |> take(bottom.count - 2)
+    in
+        top ++ inner |> collect()
 
 turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
 
