@@ -25,14 +25,10 @@ count(limit: long) -> (total: long, primitive: long) is
     (total, primitive)
 si
 
-let limit mut = 100L
-
-while limit <= 100_000_000L do
+for limit in 2::8 |> map(k => repeat(10L, k) |> product()) do
     let (total, primitive) = count(limit)
 
     write_line(
         "Perimeter up to {limit,11:N0}: {total,11:N0} triples, "
         "{primitive,10:N0} primitive")
-
-    limit = limit * 10L
 od
