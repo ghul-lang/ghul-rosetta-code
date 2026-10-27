@@ -14,34 +14,25 @@ let suits = "CDHS"
 
 name(card: int) -> string => "{ranks[card / 4]}{suits[card % 4]}"
 
-deal(game: int) -> List[string] is
+deal(game: int) -> string{} is
     let deck = LIST(0..52)
-    let dealt = LIST()
-    let random = microsoft_rand(game).iterator
 
-    while deck.count > 0 do
-        random.move_next()
-
-        let index = random.current
+    for index in microsoft_rand(game) |> take(52) do
         let chosen = index % deck.count
         let last = deck.count - 1
 
-        dealt.add(name(deck[chosen]))
+        yield name(deck[chosen])
 
         deck[chosen] = deck[last]
         deck.remove_at(last)
     od
-
-    dealt
 si
 
 for game in [1, 617] do
     write_line("Game #{game}")
 
-    let cards = deal(game)
-
-    for row in 0..(cards.count + 7) / 8 do
-        write_line(cards |> skip(row * 8) |> take(8) |> join(" "))
+    for row in deal(game) |> chunk(8) do
+        write_line(row |> join(" "))
     od
 
     write_line("")

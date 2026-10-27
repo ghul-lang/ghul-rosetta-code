@@ -1,25 +1,19 @@
 use Raster.IMAGE
 
-let image = IMAGE(400, 400)
-
-plot(x: int, y: int) is
-    image.set_pixel(x, y, 0ub, 0ub, 160ub)
-si
-
-circle(centre_x: int, centre_y: int, radius: int) is
+circle(centre_x: int, centre_y: int, radius: int) -> (int, int){} is
     let x mut = radius
     let y mut = 0
     let error mut = 1 - radius
 
     while x >= y do
-        plot(centre_x + x, centre_y + y)
-        plot(centre_x + y, centre_y + x)
-        plot(centre_x - y, centre_y + x)
-        plot(centre_x - x, centre_y + y)
-        plot(centre_x - x, centre_y - y)
-        plot(centre_x - y, centre_y - x)
-        plot(centre_x + y, centre_y - x)
-        plot(centre_x + x, centre_y - y)
+        yield (centre_x + x, centre_y + y)
+        yield (centre_x + y, centre_y + x)
+        yield (centre_x - y, centre_y + x)
+        yield (centre_x - x, centre_y + y)
+        yield (centre_x - x, centre_y - y)
+        yield (centre_x - y, centre_y - x)
+        yield (centre_x + y, centre_y - x)
+        yield (centre_x + x, centre_y - y)
 
         y = y + 1
 
@@ -32,8 +26,12 @@ circle(centre_x: int, centre_y: int, radius: int) is
     od
 si
 
+let image = IMAGE(400, 400)
+
 for radius in 1..10 do
-    circle(200, 200, radius * 18)
+    for (x, y) in circle(200, 200, radius * 18) do
+        image.set_pixel(x, y, 0ub, 0ub, 160ub)
+    od
 od
 
 image.write("circles.png")
