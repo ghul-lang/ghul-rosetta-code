@@ -4,27 +4,22 @@ use System.Math.*
 
 use Step = (x: int, y: int)
 
-steps_of_length(squared: int) -> List[Step] is
-    let found = LIST()
-    let a mut = 0
+let signs = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 
-    while 2 * a * a <= squared do
-        let rest = double(squared - a * a)
-        let b = int(round(sqrt(rest)))
+reflections(a: int, b: int) -> Step{} =>
+    [
+        (x = sx * x, y = sy * y)
+        for (x, y) in [(a, b), (b, a)]
+        for (sx, sy) in signs
+    ]
 
-        if a * a + b * b == squared then
-            for (x, y) in [(a, b), (b, a)] do
-                for (sx, sy) in [(1, 1), (-1, 1), (1, -1), (-1, -1)] do
-                    found.add((x = sx * x, y = sy * y))
-                od
-            od
-        fi
-
-        a = a + 1
-    od
-
-    found
-si
+steps_of_length(squared: int) -> List[Step] =>
+    from(0)
+        |> take_while(a => 2 * a * a <= squared)
+        |> map(a => (a, int(round(sqrt(double(squared - a * a))))))
+        |> filter(((a, b)) => a * a + b * b == squared)
+        |> flat_map(((a, b)) => reflections(a, b))
+        |> collect()
 
 bend(from: Step, to: Step) -> double =>
     let turn = atan2(double(from.y), double(from.x)) -

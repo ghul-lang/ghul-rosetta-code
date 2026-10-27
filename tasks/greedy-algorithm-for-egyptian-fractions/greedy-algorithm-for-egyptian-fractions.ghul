@@ -1,18 +1,13 @@
 use default
 
-egyptian(numerator: bigint, denominator: bigint)
-        -> bigint{} is
-    let top mut = numerator
-    let bottom mut = denominator
-
-    while top > 0n do
-        let unit = (bottom + top - 1n) / top
+egyptian(numerator: bigint, denominator: bigint) -> bigint{} is
+    if numerator > 0n then
+        let unit = (denominator + numerator - 1n) / numerator
 
         yield unit
-
-        top = top * unit - bottom
-        bottom = bottom * unit
-    od
+        yield in
+            egyptian(numerator * unit - denominator, denominator * unit)
+    fi
 si
 
 describe(numerator: int, denominator: int) -> string =>
@@ -26,40 +21,30 @@ for (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)] do
     write_line(describe(numerator, denominator))
 od
 
+units(numerator: int, denominator: int) -> bigint{} =>
+    egyptian(cast(numerator), cast(denominator))
+
+last_unit(numerator: int, denominator: int) -> bigint =>
+    units(numerator, denominator) |> reduce(0n, (_, unit) => unit)
+
 report(limit: int) is
-    let most_terms mut = (numerator = 0, denominator = 1, terms = 0)
-    let widest mut =
-        (numerator = 0, denominator = 1, unit = 0n)
+    let fractions = {
+        (numerator, denominator)
+        for denominator in 2::limit
+        for numerator in 1..denominator
+    }
 
-    for denominator in 2::limit do
-        for numerator in 1..denominator do
-            let units = egyptian(
-                cast(numerator), cast(denominator))
+    let (numerator, denominator) =
+        fractions |> max_by(((n, d)) => units(n, d) |> count())!
+    let (top, bottom) =
+        fractions |> max_by(((n, d)) => last_unit(n, d))!
 
-            let term_count = units |> count()
-            let last mut = 0n
-
-            for unit in units do
-                last = unit
-            od
-
-            if term_count > most_terms.terms then
-                most_terms = (numerator, denominator, term_count)
-            fi
-
-            if last > widest.unit then
-                widest = (numerator, denominator, last)
-            fi
-        od
-    od
+    let terms = units(numerator, denominator) |> count()
+    let unit = last_unit(top, bottom)
 
     write_line("")
-    let (numerator, denominator, terms) = most_terms
-
     write_line("for proper fractions with terms up to {limit}:")
     write_line("  most terms: {numerator}/{denominator} with {terms} terms")
-    let (top, bottom, unit) = widest
-
     write_line("  largest denominator: {top}/{bottom}")
     write_line("    with {unit.to_string().length} digits: {unit}")
 si
