@@ -37,9 +37,9 @@ together(left: List[string], left_value: string,
     house_of(left, left_value) == house_of(right, right_value)
 
 next_to(left: List[string], left_value: string,
-        right: List[string], right_value: string) -> bool =>
-    (let gap = house_of(left, left_value) - house_of(right, right_value)
-     gap == 1 \/ gap == -1)
+        right: List[string], right_value: string) -> bool => (
+    let gap = house_of(left, left_value) - house_of(right, right_value)
+    gap == 1 \/ gap == -1)
 
 colour_rows() -> List[string]{} =>
     arrangements(["red", "green", "white", "yellow", "blue"])
