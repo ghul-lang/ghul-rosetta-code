@@ -23,10 +23,12 @@ trapezium(f: Integrand, a: double, b: double, n: int) -> double =>
     h * ((f(a) + f(b)) / 2.0 + inner)
 
 simpson(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / double(n) in
-    let middles = sum_over(n, i => f(a + h * double(i) + h / 2.0)) in
-    let joins = sum_over(n - 1, i => f(a + h * double(i + 1))) in
-    h / 6.0 * (f(a) + f(b) + 4.0 * middles + 2.0 * joins)
+    let
+        h = (b - a) / double(n),
+        middles = sum_over(n, i => f(a + h * double(i) + h / 2.0)),
+        joins = sum_over(n - 1, i => f(a + h * double(i + 1)))
+    in
+        h / 6.0 * (f(a) + f(b) + 4.0 * middles + 2.0 * joins)
 
 let methods = [
     (name = "left rectangle", rule = left_rectangle),
