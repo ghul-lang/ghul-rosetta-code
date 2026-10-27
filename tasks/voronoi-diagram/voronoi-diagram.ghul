@@ -25,8 +25,8 @@ let places =
 
 nearest(x: int, y: int) -> int =>
     0..places.count |> min_by(at =>
-        (x - places[at].x) * (x - places[at].x) +
-        (y - places[at].y) * (y - places[at].y))!
+        let across = x - places[at].x, up = y - places[at].y in
+        across * across + up * up)!
 
 let image = IMAGE(width, height)
 

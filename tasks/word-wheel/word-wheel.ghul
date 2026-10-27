@@ -4,7 +4,7 @@ let wheel = "ndeokgelw"
 let centre = 'k'
 
 available(letters: string) -> MAP[char, int] =>
-    MAP(letters |> group_by(c => c) |> map(p => (p.key, p.value.count)))
+    MAP(letters |> frequencies())
 
 spellable(word: string) -> bool is
     let left = available(wheel)

@@ -15,8 +15,8 @@ IO.File.write_all_lines(
 
 line(path: string, wanted: int) -> string? =>
     cursor(use IO.File.read_lines(path).iterator)
-    |> skip(wanted - 1)
-    |> first()
+        |> skip(wanted - 1)
+        |> first()
 
 report(path: string, wanted: int) is
     if let text = line(path, wanted) then

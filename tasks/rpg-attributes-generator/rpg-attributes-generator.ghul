@@ -16,11 +16,10 @@ acceptable(values: List[int]) -> bool =>
     let strong = values |> filter(* >= 15) |> count() in
     total >= 75 /\ strong >= 2
 
-
-let found = from(1) |> map(i => (attempt = i, values = character()))
-    |> find(p => acceptable(p.values))
-
-let (attempts, rolled) = found!
+let (attempts, rolled) =
+    from(1)
+        |> map(attempt => (attempt, character()))
+        |> find(((_, values)) => acceptable(values))!
 
 let total = rolled |> sum()
 

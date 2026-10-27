@@ -13,8 +13,7 @@ ekg(start: int, count: int) -> List[int] is
 
     while terms.count < count do
         let candidate = from(2) |> find(c =>
-            !used.contains(c) /\
-                shares_factor(c, terms[terms.count - 1]))!
+            !used.contains(c) /\ shares_factor(c, terms[terms.count - 1]))!
 
         terms.add(candidate)
         used.add(candidate)

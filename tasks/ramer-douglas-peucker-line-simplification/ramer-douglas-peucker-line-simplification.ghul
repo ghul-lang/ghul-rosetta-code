@@ -17,22 +17,27 @@ distance(p: P, from: P, to: P) -> double =>
     fi
 
 simplify(points: List[P], epsilon: double) -> List[P] is
-    let first = points[0]
     let last = points.count - 1
+    let far mut = 0
+    let farthest mut = 0.0D
 
-    if let far = 1::last
-        |> max_by(i => distance(points[i], first, points[last])) then
-        let farthest = distance(points[far], first, points[last])
+    for i in 1..last do
+        let d = distance(points[i], points[0], points[last])
 
-        if farthest > epsilon then
-            let left = simplify(points[0::far], epsilon)
-            let right = simplify(points[far::last], epsilon)
-
-            return left |> take(left.count - 1) |> cat(right) |> collect()
+        if d > farthest then
+            far = i
+            farthest = d
         fi
+    od
+
+    if farthest <= epsilon then
+        return [points[0], points[last]]
     fi
 
-    return [first, points[last]]
+    let left = simplify(points[0::far], epsilon)
+    let right = simplify(points[far::last], epsilon)
+
+    return left |> take(left.count - 1) |> cat(right) |> collect()
 si
 
 let line = [
@@ -54,7 +59,9 @@ draw(points: List[P], width: double, size: double) is
     image.stroke(width)
     image.line(points |> map(p => (x = p.x, y = p.y)) |> collect())
 
-    points |> each(p => image.dot(p.x, p.y, size))
+    for p in points do
+        image.dot(p.x, p.y, size)
+    od
 si
 
 image.colour(170ub, 170ub, 180ub)
