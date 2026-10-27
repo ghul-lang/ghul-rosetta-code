@@ -29,11 +29,13 @@ tangent_is_one(terms: TERM[]) -> bool is
 si
 
 describe(term: TERM) -> string =>
-    let sign = if term.multiplier < 0 then "-" else "+" fi in
-    let scale = System.Math.abs(term.multiplier) in
-    let angle = "arctan({term.numerator}/{term.denominator})" in
-    let scaled = if scale == 1 then angle else "{scale}*{angle}" fi in
-    "{sign} {scaled}"
+    let
+        sign = if term.multiplier < 0 then "-" else "+" fi,
+        scale = System.Math.abs(term.multiplier),
+        angle = "arctan({term.numerator}/{term.denominator})",
+        scaled = if scale == 1 then angle else "{scale}*{angle}" fi
+    in
+        "{sign} {scaled}"
 
 
 let formulas = [

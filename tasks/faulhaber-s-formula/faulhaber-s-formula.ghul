@@ -3,10 +3,12 @@ use default
 struct FRACTION(numerator: long, denominator: long)
 
 fraction(numerator: long, denominator: long) -> FRACTION =>
-    let common = greatest_common_divisor(numerator, denominator) in
-    let divisor = long.abs(common) in
-    let sign = if denominator < 0L then -1L else 1L fi in
-    FRACTION(sign * numerator / divisor, sign * denominator / divisor)
+    let
+        common = greatest_common_divisor(numerator, denominator),
+        divisor = long.abs(common),
+        sign = if denominator < 0L then -1L else 1L fi
+    in
+        FRACTION(sign * numerator / divisor, sign * denominator / divisor)
 
 greatest_common_divisor(a: long, b: long) -> long =>
     if b == 0L then a else greatest_common_divisor(b, a % b) fi
@@ -40,11 +42,17 @@ binomial(n: int, k: int) -> long =>
             c * long(n - k + i) / long(i))
 
 term(coefficient: FRACTION, power: int) -> string =>
-    let top = long.abs(coefficient.numerator) in
-    let bottom = coefficient.denominator in
-    let number = if bottom == 1L then "{top}" else "{top}/{bottom}" fi in
-    let variable = if power == 1 then "n" else "n^{power}" fi in
-    if top == 1L /\ bottom == 1L then variable else "{number}{variable}" fi
+    let
+        top = long.abs(coefficient.numerator),
+        bottom = coefficient.denominator,
+        number = if bottom == 1L then "{top}" else "{top}/{bottom}" fi,
+        variable = if power == 1 then "n" else "n^{power}" fi
+    in
+        if top == 1L /\ bottom == 1L then
+            variable
+        else
+            "{number}{variable}"
+        fi
 
 faulhaber(p: int) -> string =>
     let terms =

@@ -24,10 +24,12 @@ substitute(x: uint) -> uint =>
 // left 11 bits and mixed into the right half
 
 main_step(block: ulong, key: uint) -> ulong =>
-    let low = uint(block & 0xFFFF_FFFFul), high = uint(block >> 32) in
-    let rotated = BitOperations.rotate_left(substitute(low + key), 11) in
-    let mixed = rotated ^ high in
-    (ulong(low) << 32) | ulong(mixed)
+    let
+        low = uint(block & 0xFFFF_FFFFul), high = uint(block >> 32),
+        rotated = BitOperations.rotate_left(substitute(low + key), 11),
+        mixed = rotated ^ high
+    in
+        (ulong(low) << 32) | ulong(mixed)
 
 little_endian(bytes: List[int]) -> ulong =>
     bytes

@@ -79,10 +79,12 @@ sign(hash: bigint, secret: bigint) -> (c: bigint, d: bigint) is
 si
 
 verify(hash: bigint, public_key: Point?, c: bigint, d: bigint) -> bool =>
-    let h = inverse(d, order) in
-    let h1 = modulo(hash * h, order), h2 = modulo(c * h, order) in
-    let sum = h1 * base + h2 * public_key in
-    if let (x, _) = sum then modulo(x, order) =~ c else false fi
+    let
+        h = inverse(d, order),
+        h1 = modulo(hash * h, order), h2 = modulo(c * h, order),
+        sum = h1 * base + h2 * public_key
+    in
+        if let (x, _) = sum then modulo(x, order) =~ c else false fi
 
 assert on_curve(base) else "base point is not on the curve"
 assert (order * base) == null else "base point does not have order r"

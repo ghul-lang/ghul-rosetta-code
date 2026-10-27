@@ -14,13 +14,15 @@ let knight_pairs =
     [(first, second) for first in 0::4 for second in first + 1::4]
 
 sp_id(pieces: string) -> int =>
-    let knights = positions(without(pieces, "QB"), 'N') in
-    let n = knight_pairs |> find_index(* =~ (knights[0], knights[1]))! in
-    let q = without(pieces, "B").index_of('Q') in
-    let bishops = positions(pieces, 'B') in
-    let dark = bishops |> find(b => b % 2 == 0)! / 2 in
-    let light = bishops |> find(b => b % 2 == 1)! / 2 in
-    96 * n + 16 * q + 4 * dark + light
+    let
+        knights = positions(without(pieces, "QB"), 'N'),
+        n = knight_pairs |> find_index(* =~ (knights[0], knights[1]))!,
+        q = without(pieces, "B").index_of('Q'),
+        bishops = positions(pieces, 'B'),
+        dark = bishops |> find(b => b % 2 == 0)! / 2,
+        light = bishops |> find(b => b % 2 == 1)! / 2
+    in
+        96 * n + 16 * q + 4 * dark + light
 
 let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
 

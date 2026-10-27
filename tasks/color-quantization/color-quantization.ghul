@@ -45,17 +45,19 @@ scene() -> IMAGE is
 si
 
 hue(h: double) -> Colour =>
-    let part = (h * 6.0D) - Math.floor(h * 6.0D) in
-    let sector = int(h * 6.0D) % 6, up = int(255.0D * part) in
-    let down = int(255.0D * (1.0D - part)) in
-    case sector
-    when 0 then (255, up, 0)
-    when 1 then (down, 255, 0)
-    when 2 then (0, 255, up)
-    when 3 then (0, down, 255)
-    when 4 then (up, 0, 255)
-    else (255, 0, down)
-    esac
+    let
+        part = (h * 6.0D) - Math.floor(h * 6.0D),
+        sector = int(h * 6.0D) % 6, up = int(255.0D * part),
+        down = int(255.0D * (1.0D - part))
+    in
+        case sector
+        when 0 then (255, up, 0)
+        when 1 then (down, 255, 0)
+        when 2 then (0, 255, up)
+        when 3 then (0, down, 255)
+        when 4 then (up, 0, 255)
+        else (255, 0, down)
+        esac
 
 put(image: IMAGE, x: int, y: int, c: Colour) is
     image.set_pixel(

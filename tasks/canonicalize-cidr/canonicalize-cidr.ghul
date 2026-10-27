@@ -1,18 +1,22 @@
 use default
 
-canonicalize(cidr: string) -> string =>
-    let parts = cidr.split(['/']), bits = int.parse(parts[1]) in
-    let octets = parts[0].split(['.']) |> map(long.parse) in
+canonicalize(cidr: string) -> string => (
+    let
+        parts = cidr.split(['/']), bits = int.parse(parts[1]),
+        octets = parts[0].split(['.']) |> map(long.parse)
+
     let address =
-        octets |> reduce(0L, (packed, octet) => packed * 256L + octet) in
+        octets |> reduce(0L, (packed, octet) => packed * 256L + octet)
     let mask =
-        if bits == 0 then 0L else (-1L << (32 - bits)) & 0xFFFFFFFFL fi in
-    let network = address & mask in
+        if bits == 0 then 0L else (-1L << (32 - bits)) & 0xFFFFFFFFL fi
+    let network = address & mask
     let dotted =
         0..4
             |> map(shift => "{(network >> (24 - 8 * shift)) & 0xFFL}")
-            |> join(".") in
+            |> join(".")
+
     "{dotted}/{bits}"
+)
 
 
 let blocks =

@@ -17,20 +17,23 @@ discordian(date: DateTime) -> string =>
     let year = date.year + 1166 in
     if date.month == 2 /\ date.day == 29 then
         "St. Tib's Day, YOLD {year}"
-    else
-        let leap = DateTime.is_leap_year(date.year) in
-        let leap_shift = if leap /\ date.month > 2 then 1 else 0 fi in
-        let day = date.day_of_year - 1 - leap_shift in
-        let season = day / 73, day_of_season = day % 73 + 1 in
+    else (
+        let
+            leap = DateTime.is_leap_year(date.year),
+            leap_shift = if leap /\ date.month > 2 then 1 else 0 fi,
+            day = date.day_of_year - 1 - leap_shift,
+            season = day / 73, day_of_season = day % 73 + 1
+
         let holyday =
             case day_of_season
             when 5 then ", celebrate {apostle_days[season]}"
             when 50 then ", celebrate {flux_days[season]}"
             else ""
             esac
-        in
+
         "{weekdays[day % 5]}, {seasons[season]} {day_of_season}, "
         "YOLD {year}{holyday}"
+    )
     fi
 
 let dates = [

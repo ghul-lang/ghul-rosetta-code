@@ -9,12 +9,14 @@ spent() -> double =>
         .total_milliseconds
 
 timed(name: string, work: () -> int) =>
-    let clock = Stopwatch.start_new(), before = spent(), answer = work() in
-    let elapsed = clock.elapsed.total_milliseconds in
-    let processor = spent() - before in
-    write_line(
-        "{name,-22} {answer,12}  {elapsed,8:F2} ms elapsed  "
-        "{processor,8:F2} ms processor")
+    let
+        clock = Stopwatch.start_new(), before = spent(), answer = work(),
+        elapsed = clock.elapsed.total_milliseconds,
+        processor = spent() - before
+    in
+        write_line(
+            "{name,-22} {answer,12}  {elapsed,8:F2} ms elapsed  "
+            "{processor,8:F2} ms processor")
 
 count_primes(limit: int) -> int is
     let sieve = repeat(true, limit) |> collect_mutable()

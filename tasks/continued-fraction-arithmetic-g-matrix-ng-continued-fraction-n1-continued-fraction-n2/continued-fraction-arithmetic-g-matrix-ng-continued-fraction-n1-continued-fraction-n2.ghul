@@ -104,14 +104,16 @@ combine(
 si
 
 show(terms: bigint{}) -> string =>
-    let shown = terms |> take(21) |> collect() in
-    let rest = shown |> skip(1) |> take(19) |> join() in
-    let more = if shown.count > 20 then ", ..." else "" fi in
-    case shown
-    when [] then "[]"
-    when [only] then "[{only}]"
-    when [first, ..] then "[{first}; {rest}{more}]"
-    esac
+    let
+        shown = terms |> take(21) |> collect(),
+        rest = shown |> skip(1) |> take(19) |> join(),
+        more = if shown.count > 20 then ", ..." else "" fi
+    in
+        case shown
+        when [] then "[]"
+        when [only] then "[{only}]"
+        when [first, ..] then "[{first}; {rest}{more}]"
+        esac
 
 let add: (Row, Row) = ((0n, 1n, 1n, 0n), (0n, 0n, 0n, 1n))
 let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))

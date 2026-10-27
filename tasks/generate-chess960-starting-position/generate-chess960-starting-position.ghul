@@ -35,10 +35,13 @@ position(number: int) -> string is
 si
 
 is_legal(rank: string) -> bool =>
-    let bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect() in
-    let rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect() in
-    let king = rank.index_of('K') in
-    (bishops[0] + bishops[1]) % 2 == 1 /\ rooks[0] < king /\ king < rooks[1]
+    let
+        bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect(),
+        rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect(),
+        king = rank.index_of('K')
+    in
+        (bishops[0] + bishops[1]) % 2 == 1 /\
+        rooks[0] < king /\ king < rooks[1]
 
 let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
 

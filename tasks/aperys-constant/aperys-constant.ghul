@@ -33,27 +33,32 @@ markov(terms: int) -> bigint =>
 
 wedeniwski(terms: int) -> bigint =>
     (0::terms
-    |> map(k =>
-        let n = bigint(k) in
-        let sign = if k % 2 == 0 then 1n else -1n fi in
+    |> map(k => (
+        let
+            n = bigint(k),
+            sign = if k % 2 == 0 then 1n else -1n fi
+
         let polynomial =
             126392n * n * n * n * n * n +
             412708n * n * n * n * n +
             531578n * n * n * n +
             336367n * n * n +
             104000n * n +
-            12463n in
+            12463n
+
         let numerator =
             factorial(2 * k + 1) * factorial(2 * k + 1) *
             factorial(2 * k + 1) * factorial(2 * k) *
             factorial(2 * k) * factorial(2 * k) *
             factorial(k) * factorial(k) * factorial(k) *
-            polynomial in
+            polynomial
+
         let denominator =
             factorial(3 * k + 2) * factorial(4 * k + 3) *
-            factorial(4 * k + 3) * factorial(4 * k + 3) in
+            factorial(4 * k + 3) * factorial(4 * k + 3)
+
         sign * (numerator * scale / denominator)
-    ) |> sum()) / 24n
+    )) |> sum()) / 24n
 
 show("1000 terms of the sum of reciprocal cubes:", reciprocal_cubes(1000))
 show("158 terms of the Markov representation:", markov(158))

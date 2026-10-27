@@ -21,10 +21,12 @@ struct RATIONAL(numerator: bigint, denominator: bigint) is
 si
 
 reduced(numerator: bigint, denominator: bigint) -> RATIONAL =>
-    let divisor = bigint.greatest_common_divisor(numerator, denominator) in
-    let sign = if denominator < 0n then -1 else 1 fi in
-    let scale = divisor * cast(sign) in
-    RATIONAL(numerator / scale, denominator / scale)
+    let
+        divisor = bigint.greatest_common_divisor(numerator, denominator),
+        sign = if denominator < 0n then -1 else 1 fi,
+        scale = divisor * cast(sign)
+    in
+        RATIONAL(numerator / scale, denominator / scale)
 
 
 whole(value: int) -> RATIONAL =>

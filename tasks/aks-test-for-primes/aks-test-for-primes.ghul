@@ -10,17 +10,21 @@ coefficients(p: int) -> long{} is
     od
 si
 
-term(coefficient: long, power: int) -> string =>
-    let size = long.abs(coefficient) in
-    let sign = if coefficient < 0L then " - " else " + " fi in
-    let number = if size == 1L /\ power > 0 then "" else "{size}" fi in
-    let x = case power
+term(coefficient: long, power: int) -> string => (
+    let
+        size = long.abs(coefficient),
+        sign = if coefficient < 0L then " - " else " + " fi,
+        number = if size == 1L /\ power > 0 then "" else "{size}" fi
+
+    let x =
+        case power
         when 0 then ""
         when 1 then "x"
         else "x^{power}"
         esac
-    in
+
     "{sign}{number}{x}"
+)
 
 expansion(p: int) -> string =>
     (coefficients(p)
