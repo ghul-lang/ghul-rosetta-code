@@ -39,14 +39,15 @@ closest(term: string) -> (name: string, score: double){} => (
                  score = coefficient(wanted, task.grams)))
             |> collect_mutable()
 
-    scored.sort((left, right) =>
-        (let by_score = right.score <> left.score
+    scored.sort((left, right) => (
+        let by_score = right.score <> left.score
 
-         if by_score != 0 then
-             by_score
-         else
-             left.name <> right.name
-         fi))
+        if by_score != 0 then
+            by_score
+        else
+            left.name <> right.name
+        fi
+    ))
 
     scored[0..5]
 )
