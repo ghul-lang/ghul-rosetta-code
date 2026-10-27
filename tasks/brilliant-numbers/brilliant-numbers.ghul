@@ -17,32 +17,26 @@ primes_below(limit: int) -> int{} is
     od
 si
 
-brilliant_numbers(max_digits: int) -> List[long] is
-    let found = LIST()
-    let limit = repeat(10, max_digits) |> product()
-    let primes = primes_below(limit)
-    let start mut = 0
+power_of_ten(n: int) -> int => repeat(10, n) |> product()
 
-    for digits in 1::max_digits do
-        let low = repeat(10, digits - 1) |> product()
-        let group = primes
-            |> skip(start)
-            |> take_while(p => p < low * 10)
-            |> collect()
+products(group: List[int]) -> long{} =>
+    [
+        long(p) * long(q)
+        for (i, p) in group |> index()
+        for q in group |> skip(i)
+    ]
 
-        for (i, p) in group |> index() do
-            for q in group |> skip(i) do
-                found.add(long(p) * long(q))
-            od
-        od
-
-        start = start + group.count
-    od
-
-    found.sort()
-
-    return found
-si
+brilliant_numbers(max_digits: int) -> List[long] =>
+    let primes = primes_below(power_of_ten(max_digits)) |> collect() in
+    1::max_digits
+        |> flat_map(digits =>
+            let
+                low = power_of_ten(digits - 1),
+                group = primes |> filter(p => p >= low /\ p < low * 10)
+            in
+                products(group |> collect()))
+        |> sort()
+        |> collect()
 
 let brilliant = brilliant_numbers(4)
 
@@ -56,13 +50,10 @@ od
 
 write_line("")
 
-let magnitude mut = 10L
-
-for _ in 1::7 do
+for magnitude in 1::7 |> map(k => repeat(10L, k) |> product()) do
     let position = brilliant |> take_while(b => b < magnitude) |> count()
 
     let first = brilliant[position]
 
     write_line("first >= {magnitude,10}: {first,10} at {position + 1}")
-    magnitude = magnitude * 10L
 od
