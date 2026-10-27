@@ -30,8 +30,8 @@ fade(t: double) -> double => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 
 lerp(t: double, a: double, b: double) -> double => a + t * (b - a)
 
-grad(hash: int, x: double, y: double, z: double) -> double =>
-    let h = hash & 15, u = if h < 8 then x else y fi in
+grad(hash: int, x: double, y: double, z: double) -> double => (
+    let h = hash & 15, u = if h < 8 then x else y fi
     let v =
         if h < 4 then
             y
@@ -39,26 +39,28 @@ grad(hash: int, x: double, y: double, z: double) -> double =>
             x
         else
             z
-        fi in
-    let first = if h & 1 == 0 then u else -u fi in
-    let second = if h & 2 == 0 then v else -v fi in
+        fi
+    let first = if h & 1 == 0 then u else -u fi,
+        second = if h & 2 == 0 then v else -v fi
     first + second
+)
 
 
-noise(at_x: double, at_y: double, at_z: double) -> double =>
-    let unit_x = int(floor(at_x)) & 255, unit_y = int(floor(at_y)) & 255 in
-    let unit_z = int(floor(at_z)) & 255, x = at_x - floor(at_x) in
-    let y = at_y - floor(at_y), z = at_z - floor(at_z), u = fade(x) in
-    let v = fade(y), w = fade(z), a = p[unit_x] + unit_y in
-    let aa = p[a] + unit_z, ab = p[a + 1] + unit_z in
-    let b = p[unit_x + 1] + unit_y, ba = p[b] + unit_z in
-    let bb = p[b + 1] + unit_z in
+noise(at_x: double, at_y: double, at_z: double) -> double => (
+    let
+        unit_x = int(floor(at_x)) & 255, unit_y = int(floor(at_y)) & 255,
+        unit_z = int(floor(at_z)) & 255, x = at_x - floor(at_x),
+        y = at_y - floor(at_y), z = at_z - floor(at_z), u = fade(x),
+        v = fade(y), w = fade(z), a = p[unit_x] + unit_y,
+        aa = p[a] + unit_z, ab = p[a + 1] + unit_z,
+        b = p[unit_x + 1] + unit_y, ba = p[b] + unit_z,
+        bb = p[b + 1] + unit_z
     let near =
         lerp(v,
              lerp(u, grad(p[aa], x, y, z), grad(p[ba], x - 1.0, y, z)),
              lerp(u,
                   grad(p[ab], x, y - 1.0, z),
-                  grad(p[bb], x - 1.0, y - 1.0, z))) in
+                  grad(p[bb], x - 1.0, y - 1.0, z)))
     let far =
         lerp(v,
              lerp(u,
@@ -66,8 +68,10 @@ noise(at_x: double, at_y: double, at_z: double) -> double =>
                   grad(p[ba + 1], x - 1.0, y, z - 1.0)),
              lerp(u,
                   grad(p[ab + 1], x, y - 1.0, z - 1.0),
-                  grad(p[bb + 1], x - 1.0, y - 1.0, z - 1.0))) in
+                  grad(p[bb + 1], x - 1.0, y - 1.0, z - 1.0)))
+
     lerp(w, near, far)
+)
 
 
 write_line("{noise(3.14, 42.0, 7.0):R}")
