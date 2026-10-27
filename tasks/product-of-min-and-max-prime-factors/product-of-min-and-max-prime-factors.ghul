@@ -19,12 +19,11 @@ prime_factors(n: int) -> int{} is
 si
 
 min_max_product(n: int) -> int =>
-    (let factors = prime_factors(n) |> collect()
-
-     case factors
-     when [] then 1
-     when [first, ..] then first * factors[factors.count - 1]
-     esac)
+    let factors = prime_factors(n) |> collect() in
+    case factors
+    when [] then 1
+    when [first, ..] then first * factors[factors.count - 1]
+    esac
 
 for row in (1::100) |> map(min_max_product) |> chunk(10) do
     write_line(row |> map(p => "{p,5}") |> join(""))
