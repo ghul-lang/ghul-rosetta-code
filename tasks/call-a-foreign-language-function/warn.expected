@@ -1,2 +1,0 @@
-call-a-foreign-language-function.ghul(37,14,38,65): warning cast-may-throw: cast to non-optional word -> word may throw [help: use cast word -> word? for null on failure] [call-a-foreign-language-function.ghulproj]
-call-a-foreign-language-function.ghul(39,12,39,58): warning cast-may-throw: cast to non-optional word -> void may throw [help: use cast word -> void? for null on failure] [call-a-foreign-language-function.ghulproj]
