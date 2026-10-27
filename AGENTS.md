@@ -126,6 +126,23 @@ let total = (
 - **An `if`, a `case` or a loop is never parenthesised.** Each is an
   expression closed by its own keyword, so `level + if c then 1 else -1 fi`
   and `if a then 4 else 0 fi + if b then 2 else 0 fi` read as they are.
+  Nor is anything inside one: each arm of an `if` or `case`, and each loop
+  body, is already a list of statements whose last is its value, so an arm
+  that needs a local declares it straight after `then`:
+
+```ghul
+rebalance(tree: Tree) -> Tree =>
+    case tree
+    when n: Tree.NODE then
+        let tilt = balance(n)
+
+        if tilt > 1 then rotate_right(tree)
+        elif tilt < -1 then rotate_left(tree)
+        else tree
+        fi
+    else tree
+    esac
+```
 - **A chain of `let ... in` is one `let`.** Three or more `let ... in` in a
   row stutter. Where the locals are short, declare them in one `let`,
   separated by commas, with `in` on a line of its own before the expression:

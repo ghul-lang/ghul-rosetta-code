@@ -62,7 +62,7 @@ si
 
 classify(value: int, base: int) -> Kind =>
     if value == 1 then EQUIDIGITAL
-    else (
+    else
         let own = length_in(value, base)
         let factors = factor_length(value, base)
 
@@ -70,7 +70,6 @@ classify(value: int, base: int) -> Kind =>
         elif own == factors then EQUIDIGITAL
         else FRUGAL
         fi
-    )
     fi
 
 class TALLY is

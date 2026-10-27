@@ -36,13 +36,12 @@ sorted_hand(hand: List[int]) -> string =>
 draw() -> int? =>
     if deck.count == 0 then
         null
-    else (
+    else
         let card = deck[deck.count - 1]
 
         deck.remove_at(deck.count - 1)
 
         card
-    )
     fi
 
 hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int => (

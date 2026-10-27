@@ -20,11 +20,11 @@ brightness(pixel_x: int, pixel_y: int) -> double => (
 
     if away > 1.0D then
         sky
-    else (
+    else
         let z = sqrt(1.0D - away)
         let facing = x * light.x + y * light.y + z * light.z
 
-        0.06D + 0.94D * max(0.0D, facing))
+        0.06D + 0.94D * max(0.0D, facing)
     fi
 )
 

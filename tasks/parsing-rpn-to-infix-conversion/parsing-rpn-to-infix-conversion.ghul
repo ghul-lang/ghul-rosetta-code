@@ -21,13 +21,12 @@ needs_parentheses(child: Expression, parent: string,
 =>
     case child
     when value: Expression.NUMBER then false
-    when inner: Expression.OPERATION then (
+    when inner: Expression.OPERATION then
         let mine = precedence(inner.symbol)
         let theirs = precedence(parent)
 
         mine < theirs \/
             (mine == theirs /\ on_right != right_associative(parent))
-    )
     esac
 
 render(node: Expression) -> string =>
