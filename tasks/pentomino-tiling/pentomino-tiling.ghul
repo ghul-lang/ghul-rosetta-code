@@ -154,13 +154,13 @@ colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
         up = ubyte(90.0D + 150.0D * f), down = ubyte(240.0D - 150.0D * f)
     in
         case i
-    when 0 then (red = 240ub, green = up, blue = 90ub)
-    when 1 then (red = down, green = 240ub, blue = 90ub)
-    when 2 then (red = 90ub, green = 240ub, blue = up)
-    when 3 then (red = 90ub, green = down, blue = 240ub)
-    when 4 then (red = up, green = 90ub, blue = 240ub)
-    else (red = 240ub, green = 90ub, blue = down)
-    esac
+        when 0 then (red = 240ub, green = up, blue = 90ub)
+        when 1 then (red = down, green = 240ub, blue = 90ub)
+        when 2 then (red = 90ub, green = 240ub, blue = up)
+        when 3 then (red = 90ub, green = down, blue = 240ub)
+        when 4 then (red = up, green = 90ub, blue = 240ub)
+        else (red = 240ub, green = 90ub, blue = down)
+        esac
 
 let cell = 40.0D
 let image = IMAGE(320, 320)
