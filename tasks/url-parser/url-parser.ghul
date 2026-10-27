@@ -3,37 +3,37 @@ use System.Text.RegularExpressions.Regex
 
 let pattern = Regex(
     "^(?<scheme>[^:/?#]+):"
-    "(?://(?:(?<user>[^@/]*)@)?"
-    "(?<host>\\[[^\\]]*\\]|[^:/?#]*)"
+    "(?://(?:(?<username>[^:@/]*)(?::(?<password>[^@/]*))?@)?"
+    "(?<domain>\\[[^\\]]*\\]|[^:/?#]*)"
     "(?::(?<port>[0-9]+))?)?"
     "(?<path>[^?#]*)"
     "(?:\\?(?<query>[^#]*))?"
     "(?:#(?<fragment>.*))?$")
 
-show(name: string, group: string) is
-    if group.length > 0 then
-        write_line("  {name} = {group}")
+let part_names = ["scheme", "username", "password", "domain", "port", "path", "query", "fragment"]
+
+parse_url(url: string) -> (string, string)[]? =>
+    let m = pattern.match(url) in
+    if m.success then
+        part_names
+            |> map(name => (name, m.groups[name].value))
+            |> filter(((_, value)) => value.length > 0)
+            |> map(((name, value)) => (name, if name =~ "port" then ":{value}" else value fi))
+            |> collect()
     fi
-si
 
-parse_url(url: string) is
-    let m = pattern.match(url)
+show(url: string, indent: string) is
+    if let parts = parse_url(url) then
+        for (name, value) in parts do
+            write_line("{indent}{name} = {value}")
 
-    write_line("{url}")
-
-    if !m.success then
-        write_line("  could not be parsed")
+            // jdbc and the like carry a whole URL as their path
+            if name =~ "path" /\ value.contains("://") then
+                show(value, "{indent}    ")
+            fi
+        od
     else
-        show("scheme", m.groups["scheme"].value)
-        show("domain", m.groups["host"].value)
-
-        if m.groups["port"].success then
-            show("port", ":{m.groups["port"].value}")
-        fi
-
-        show("path", m.groups["path"].value)
-        show("query", m.groups["query"].value)
-        show("fragment", m.groups["fragment"].value)
+        write_line("{indent}could not be parsed")
     fi
 si
 
@@ -53,5 +53,6 @@ let urls = [
 ]
 
 for url in urls do
-    parse_url(url)
+    write_line(url)
+    show(url, "  ")
 od

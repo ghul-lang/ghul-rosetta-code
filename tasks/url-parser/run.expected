@@ -11,6 +11,12 @@ urn:example:animal:ferret:nose
 jdbc:mysql://test_user:ouupppssss@localhost:3306/sakila?profileSQL=true
   scheme = jdbc
   path = mysql://test_user:ouupppssss@localhost:3306/sakila
+      scheme = mysql
+      username = test_user
+      password = ouupppssss
+      domain = localhost
+      port = :3306
+      path = /sakila
   query = profileSQL=true
 ftp://ftp.is.co.za/rfc/rfc1808.txt
   scheme = ftp
