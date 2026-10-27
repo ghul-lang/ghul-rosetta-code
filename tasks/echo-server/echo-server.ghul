@@ -22,7 +22,7 @@ echo(client: TcpClient, number: int, log: (string) -> void) is
     client.dispose()
 si
 
-// every client gets a thread of its own, so one that stalls holds up no other
+// each client gets its own thread, so one that stalls holds up no other
 serve(listener: TcpListener, log: (string) -> void) is
     for number in from(1) do
         let client = listener.accept_tcp_client()

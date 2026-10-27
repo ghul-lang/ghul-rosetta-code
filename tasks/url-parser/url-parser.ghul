@@ -10,7 +10,10 @@ let pattern = Regex(
     "(?:\\?(?<query>[^#]*))?"
     "(?:#(?<fragment>.*))?$")
 
-let part_names = ["scheme", "username", "password", "domain", "port", "path", "query", "fragment"]
+let part_names = [
+    "scheme", "username", "password", "domain",
+    "port", "path", "query", "fragment"
+]
 
 parse_url(url: string) -> (string, string)[]? =>
     let m = pattern.match(url) in
@@ -18,7 +21,8 @@ parse_url(url: string) -> (string, string)[]? =>
         part_names
             |> map(name => (name, m.groups[name].value))
             |> filter(((_, value)) => value.length > 0)
-            |> map(((name, value)) => (name, if name =~ "port" then ":{value}" else value fi))
+            |> map(((name, value)) =>
+                (name, if name =~ "port" then ":{value}" else value fi))
             |> collect()
     fi
 

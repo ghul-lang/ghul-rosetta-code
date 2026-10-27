@@ -25,7 +25,8 @@ backwards(input: IO.TextReader) -> char =>
     fi
 
 words(input: IO.TextReader, reversing: bool) is
-    let delimiter = if reversing then backwards(input) else forwards(input) fi
+    let delimiter =
+        if reversing then backwards(input) else forwards(input) fi
 
     write("{delimiter}")
 
@@ -34,7 +35,12 @@ words(input: IO.TextReader, reversing: bool) is
     fi
 si
 
-for text in ["what,is,the;meaning,of:life.", "we,are;not,in,kansas;any,more."] do
+let texts = [
+    "what,is,the;meaning,of:life.",
+    "we,are;not,in,kansas;any,more."
+]
+
+for text in texts do
     words(IO.StringReader(text), false)
     write_line("")
 od
