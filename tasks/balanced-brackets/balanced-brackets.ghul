@@ -5,7 +5,7 @@ balanced(brackets: string) -> bool => (
 
     for bracket in brackets do
         if bracket == ']' /\ level == 0 then return false fi
-        level = level + (if bracket == '[' then 1 else -1 fi)
+        level = level + if bracket == '[' then 1 else -1 fi
     od
 
     level == 0

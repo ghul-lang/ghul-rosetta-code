@@ -24,7 +24,7 @@ string_end(line: string, start: int) -> int is
     let i mut = start + 1
 
     while i < line.length /\ line[i] != quote do
-        i = i + (if line[i] == '\\' then 2 else 1 fi)
+        i = i + if line[i] == '\\' then 2 else 1 fi
     od
 
     System.Math.min(i + 1, line.length)

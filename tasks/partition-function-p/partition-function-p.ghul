@@ -9,7 +9,7 @@ partitions(n: int) -> bigint is
         else
             let second = m - k * (3 * k + 1) / 2 in
             let pair = p[first] +
-                (if second >= 0 then p[second] else 0n fi) in
+                if second >= 0 then p[second] else 0n fi in
             walk(m, k + 1,
                 if k % 2 == 1 then total + pair else total - pair fi)
         fi

@@ -32,8 +32,8 @@ let cells =
             (letter = letters[index],
              x = double(column) * 1.5D * radius,
              y = double(row) * rise * radius -
-                 (if column % 2 == 1 then rise * radius / 2.0D
-                  else 0.0D fi)))
+                 if column % 2 == 1 then rise * radius / 2.0D
+                 else 0.0D fi))
         |> collect()
 
 let chosen = LIST()

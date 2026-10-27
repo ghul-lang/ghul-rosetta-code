@@ -3,9 +3,9 @@ use default
 neighbourhood(cells: List[bool], at: int) -> int =>
     let left = cells[(at + cells.count - 1) % cells.count] in
     let right = cells[(at + 1) % cells.count] in
-        (if left then 4 else 0 fi) +
-        (if cells[at] then 2 else 0 fi) +
-        (if right then 1 else 0 fi)
+        if left then 4 else 0 fi +
+        if cells[at] then 2 else 0 fi +
+        if right then 1 else 0 fi
 
 step(rule: int, cells: List[bool]) -> List[bool] =>
     let next = 0..cells.count

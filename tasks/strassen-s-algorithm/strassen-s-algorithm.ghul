@@ -33,8 +33,8 @@ join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
                 |> map(j =>
                     let top = i < half, left = j < half in
                     let part =
-                        if top then (if left then c11 else c12 fi)
-                        else (if left then c21 else c22 fi)
+                        if top then if left then c11 else c12 fi
+                        else if left then c21 else c22 fi
                         fi in
                     part[i % half][j % half])
                 |> collect())

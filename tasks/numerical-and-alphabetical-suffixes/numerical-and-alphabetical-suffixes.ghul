@@ -71,8 +71,8 @@ expand(source: string) -> string is
         if stop > start then
             let power = int.parse(text[start..stop])
 
-            scale = scale - (if signed /\ text[marked] == '-' then -power
-                             else power fi)
+            scale = scale - if signed /\ text[marked] == '-' then -power
+                            else power fi
 
             cursor = stop
         fi

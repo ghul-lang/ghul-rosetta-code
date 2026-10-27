@@ -24,7 +24,7 @@
      '''let''' i '''mut''' = start + 1
  
      '''while''' i &lt; line.length /\ line[i] != quote '''do'''
-         i = i + ('''if''' line[i] == &apos;\\&apos; '''then''' 2 '''else''' 1 '''fi''')
+         i = i + '''if''' line[i] == &apos;\\&apos; '''then''' 2 '''else''' 1 '''fi'''
      '''od'''
  
      System.Math.min(i + 1, line.length)

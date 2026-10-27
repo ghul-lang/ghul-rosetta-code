@@ -54,10 +54,10 @@ contour(level: double) -> (from: Point, to: Point){} is
             let d = height_at(north_west.x, north_west.y)
 
             let corners =
-                (if a > level then 1 else 0 fi) +
-                (if b > level then 2 else 0 fi) +
-                (if c > level then 4 else 0 fi) +
-                (if d > level then 8 else 0 fi)
+                if a > level then 1 else 0 fi +
+                if b > level then 2 else 0 fi +
+                if c > level then 4 else 0 fi +
+                if d > level then 8 else 0 fi
 
             let south = crossing(south_west, a, south_east, b, level)
             let east = crossing(south_east, b, north_east, c, level)

@@ -46,7 +46,7 @@ apply(move: int, state: int[]) -> int[] is
 
             if turn == move % 3 then
                 turned[target + 20] =
-                    turned[target + 20] % (if corner > 0 then 3 else 2 fi)
+                    turned[target + 20] % if corner > 0 then 3 else 2 fi
             fi
         od
     od
