@@ -1,61 +1,19 @@
 use default
+use IO.Std.write
 
-class ROBOT(seed: int init, chance: double) is
-    _random: System.Random
-    position: int
-    attempts: int
+step_up() => while !step() do step_up() od
 
-    init(..) is
-        _random = System.Random(seed)
-    si
+let random mut = Ghul.RANDOM(0)
 
-    step() -> bool is
-        attempts = attempts + 1
-
-        if _random.next_double() < chance then
-            position = position + 1
-
-            return true
-        fi
-
-        position = position - 1
-
-        false
-    si
+step() -> bool is
+    let up = random.next_double() < 0.5
+    write(if up then " up" else " down" fi)
+    up
 si
 
-step_up_recursive(robot: ROBOT) is
-    if !robot.step() then
-        step_up_recursive(robot)
-        step_up_recursive(robot)
-    fi
-si
-
-step_up_iterative(robot: ROBOT) is
-    while !robot.step() do
-        step_up_iterative(robot)
-    od
-si
-
-plural(count: int, noun: string) -> string =>
-    "{count} {noun}{if count == 1 then "" else "s" fi}"
-
-report(name: string, climb: (ROBOT) -> void, chance: double) is
-    write_line("{name}, stepping up with chance {chance:F2}")
-
-    for seed in 1::4 do
-        let robot = ROBOT(seed, chance)
-
-        climb(robot)
-
-        let tries = plural(robot.attempts, "attempt")
-
-        write_line("  seed {seed}: at step {robot.position} after {tries}")
-    od
-
+for seed in 1::5 do
+    random = Ghul.RANDOM(seed)
+    write("seed {seed}:")
+    step_up()
     write_line("")
-si
-
-report("recursive", step_up_recursive, 0.75)
-report("iterative", step_up_iterative, 0.75)
-report("recursive", step_up_recursive, 0.55)
+od
