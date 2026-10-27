@@ -87,6 +87,7 @@ parse(line: string) -> (depth: int, node: NODE) => (
         cells = line.split(['|']), name = cells[0].trim(),
         depth = (cells[0].length - cells[0].trim_start().length) / 4,
         weight_text = cells[1].trim(), coverage_text = cells[2].trim()
+
     let weight =
         if weight_text.length > 0 then double.parse(weight_text)
         else 1.0D fi
