@@ -49,20 +49,9 @@ is_prime(n: bigint) -> bool is
     true
 si
 
-is_seed(n: long) -> bool is
-    let big = bigint(n)
-    let power mut = 1n
-
-    for _ in 0::4 do
-        if !is_prime(power + big + 1n) then
-            return false
-        fi
-
-        power = power * big
-    od
-
-    true
-si
+is_seed(n: long) -> bool =>
+    let big = bigint(n) in
+    0::4 |> all(k => is_prime(bigint.pow(big, k) + big + 1n))
 
 let seeds = LIST()
 let milestones = LIST[(limit: long, seed: long, index: int)]()
