@@ -12,13 +12,14 @@ let peaks =
 
 height_at(x: double, y: double) -> double =>
     peaks
-        |> sum_by(peak =>
-            (let across = x - peak.x
-             let up = y - peak.y
-             let away = across * across + up * up
+        |> sum_by(peak => (
+            let across = x - peak.x
+            let up = y - peak.y
+            let away = across * across + up * up
 
-             peak.height *
-             Math.exp(-away / (2.0D * peak.spread * peak.spread))))
+            peak.height *
+            Math.exp(-away / (2.0D * peak.spread * peak.spread))
+        ))
 
 let left = -3.0D
 let bottom = -2.4D
@@ -34,11 +35,11 @@ sample(column: int, row: int) -> Point =>
                   double(steps))
 
 crossing(from: Point, from_height: double,
-         to: Point, to_height: double, level: double) -> Point =>
-    (let part = (level - from_height) / (to_height - from_height)
+         to: Point, to_height: double, level: double) -> Point => (
+    let part = (level - from_height) / (to_height - from_height)
 
-     (x = from.x + (to.x - from.x) * part,
-      y = from.y + (to.y - from.y) * part))
+    (x = from.x + (to.x - from.x) * part,
+     y = from.y + (to.y - from.y) * part))
 
 contour(level: double) -> (from: Point, to: Point){} is
     for row in 0..steps do
