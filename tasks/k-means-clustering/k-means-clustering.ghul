@@ -33,12 +33,13 @@ si
 
 let points =
     (1::sample_size)
-        |> map(_ =>
-            (let angle = random.next_double() * 2.0D * pi
-             let radius = sqrt(random.next_double())
+        |> map(_ => (
+            let angle = random.next_double() * 2.0D * pi
+            let radius = sqrt(random.next_double())
 
-             (x = radius * cos(angle),
-              y = radius * sin(angle))))
+            (x = radius * cos(angle),
+             y = radius * sin(angle))
+        ))
         |> collect()
 
 seeded_centres() -> Collections.List[Point] is
