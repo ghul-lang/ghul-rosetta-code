@@ -41,46 +41,34 @@ is_prime(value: int) -> bool =>
     value > 1 /\
         2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
-fortunate(count: int) -> int{} is
-    let primorial mut = 1n
-    let candidate mut = 1
-    let found mut = 0
+primorials() -> bigint{} is
+    let product mut = 1n
 
-    while found < count do
-        candidate = candidate + 1
+    for prime in from(2) |> filter(is_prime) do
+        product = product * cast(prime)
 
-        if is_prime(candidate) then
-            primorial = primorial * cast(candidate)
-
-            let m mut = 3
-
-            while !is_probable_prime(primorial + cast(m)) do
-                m = m + 2
-            od
-
-            yield m
-            found = found + 1
-
-            if found % 10 == 0 then
-                write_line("  found {found} of {count}")
-            fi
-        fi
+        yield product
     od
 si
 
-let seen = fortunate(75) |> collect_mutable()
+// the smallest m > 1 for which primorial + m is prime; m is always odd
+fortunate(primorial: bigint) -> int =>
+    from(1)
+        |> map(k => 2 * k + 1)
+        |> find(m => is_probable_prime(primorial + cast(m)))!
 
-seen.sort()
+let count = 75
+let seen = LIST[int]()
 
-let unique = LIST()
-let previous mut = 0
+for (i, primorial) in primorials() |> take(count) |> index() do
+    seen.add(fortunate(primorial))
 
-for value in seen do
-    if value != previous then
-        unique.add(value)
+    if (i + 1) % 10 == 0 then
+        write_line("  found {i + 1} of {count}")
     fi
-    previous = value
 od
+
+let unique = seen |> collect_set() |> sort() |> collect()
 
 write_line("first 50 fortunate numbers:")
 
