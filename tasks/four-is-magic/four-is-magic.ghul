@@ -41,13 +41,8 @@ cardinal(value: long) -> string is
             fi
     fi
 
-    let unit mut = 1000L
-    let scale mut = 0
-
-    while value / unit >= 1000L do
-        unit = unit * 1000L
-        scale = scale + 1
-    od
+    let scale = ("{value}".length - 1) / 3 - 1
+    let unit = repeat(1000L, scale + 1) |> product()
 
     let name = "{cardinal(value / unit)} {scales[scale]}"
 
@@ -59,24 +54,21 @@ cardinal(value: long) -> string is
         fi
 si
 
-magic(value: long) -> string => (
-    let phrases = LIST()
-    let name mut = cardinal(value)
-
-    while name !~ "four" do
+// each name is followed by the name of its length, until four is reached
+phrases(name: string) -> string{} is
+    if name =~ "four" then
+        yield "four is magic"
+    else
         let counted = cardinal(cast(name.length))
 
-        phrases.add("{name} is {counted}")
+        yield "{name} is {counted}"
+        yield in phrases(counted)
+    fi
+si
 
-        name = counted
-    od
-
-    phrases.add("four is magic")
-
-    let sentence = phrases |> join()
-
+magic(value: long) -> string =>
+    let sentence = phrases(cardinal(value)) |> join() in
     "{sentence[0..1].to_upper_invariant()}{sentence[1..<0]}."
-)
 
 let samples = [
     0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L,
