@@ -100,14 +100,27 @@ So, in rough order of how often it comes up:
   paren goes on a line of its own at the indent of the line that opened it:
 
 ```ghul
-let total = (
-    let acc mut = 0
-    for x in xs do acc = acc + x od
-    acc
+let stats = (
+    let total mut = 0, largest mut = 0
+
+    for x in xs do
+        total = total + x
+        largest = max(largest, x)
+    od
+
+    (total, largest)
 )
 ```
 
-  A block of four lines or fewer closes on its last line instead, `acc)`.
+  A block of four lines or fewer closes on its last line instead:
+
+```ghul
+let total = (
+    let acc mut = 0
+    for x in xs do acc = acc + x od
+    acc)
+```
+
   Never put the opening paren on the line below, or line the statements up
   under it.
 - **A chain of `let ... in` is one `let`.** Three or more `let ... in` in a
