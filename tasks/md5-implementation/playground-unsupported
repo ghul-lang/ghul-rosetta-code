@@ -1,1 +1,0 @@
-it checks its digests against the .NET implementation of MD5, which the browser runtime does not provide
