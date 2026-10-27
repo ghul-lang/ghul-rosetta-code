@@ -121,8 +121,7 @@ reshape(
 si
 
 deconvolve(g: Tensor, f: Tensor) -> Tensor => (
-    let
-        g_shape = shape(g), strides = strides_of(g_shape)
+    let g_shape = shape(g), strides = strides_of(g_shape)
 
     let h_shape =
         g_shape
