@@ -13,7 +13,7 @@ squeezed(text: string, target: char) -> char{} is
 si
 
 squeeze(text: string, target: char) -> string =>
-    squeezed(text, target) |> map(c => "{c}") |> join("")
+    squeezed(text, target) |> string()
 
 show(text: string, target: char) is
     let result = squeeze(text, target)
