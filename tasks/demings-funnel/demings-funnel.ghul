@@ -35,17 +35,19 @@ let dys = [
     1.537D, -0.901D, 0.939D, -0.411D, 0.341D, -0.411D, 0.106D, 0.224D,
     -0.947D, -1.424D, -0.542D, -1.032D]
 
-drops(ds: List[double], rule: (double, double) -> double) -> List[double] =>
-    (let landed = LIST()
-     let at mut = 0.0D
+drops(ds: List[double],
+        rule: (double, double) -> double) -> List[double] => (
+    let landed = LIST()
+    let at mut = 0.0D
 
-     for d in ds do
-         landed.add(at + d)
+    for d in ds do
+        landed.add(at + d)
 
-         at = rule(at, d)
-     od
+        at = rule(at, d)
+    od
 
-     landed)
+    landed
+)
 
 mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
 

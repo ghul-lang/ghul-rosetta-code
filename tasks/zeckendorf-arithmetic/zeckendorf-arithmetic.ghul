@@ -131,17 +131,19 @@ subtract(left: List[int], right: List[int]) -> LIST[int] =>
         subtract(decrement(result), decrement(right))
     fi
 
-fibonacci_multiples(value: List[int], upto: List[int]) -> List[List[int]] =>
-    (let table = LIST[LIST[int]]()
+fibonacci_multiples(value: List[int],
+        upto: List[int]) -> List[List[int]] => (
+    let table = LIST[LIST[int]]()
 
-     table.add(copy(value))
-     table.add(add(value, value))
+    table.add(copy(value))
+    table.add(add(value, value))
 
-     while compare(table[table.count - 1], upto) <= 0 do
-         table.add(add(table[table.count - 1], table[table.count - 2]))
-     od
+    while compare(table[table.count - 1], upto) <= 0 do
+        table.add(add(table[table.count - 1], table[table.count - 2]))
+    od
 
-     table)
+    table
+)
 
 multiply(left: List[int], right: List[int]) -> List[int] is
     let top = highest(right)
