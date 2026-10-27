@@ -1,31 +1,31 @@
 use default
 
-satisfies_tale(total: int, sailors: int) -> bool is
-    let pile mut = total
+// what one sailor leaves: the pile less the monkey's coconut and his share
+after_night(pile: int, sailors: int) -> int =>
+    pile - 1 - (pile - 1) / sailors
 
-    for _ in 1::sailors do
-        if pile % sailors != 1 then return false fi
-        pile = pile - 1 - (pile - 1) / sailors
-    od
+satisfies_tale(pile: int, sailors: int, nights: int) -> bool =>
+    if nights == 0 then
+        pile % sailors == 0
+    else
+        pile % sailors == 1 /\
+        satisfies_tale(after_night(pile, sailors), sailors, nights - 1)
+    fi
 
-    pile % sailors == 0
-si
-
-hidden_piles(total: int, sailors: int) -> int{} is
-    let pile mut = total
-
-    for _ in 1::sailors do
+hidden_piles(pile: int, sailors: int, nights: int) -> int{} is
+    if nights > 0 then
         yield (pile - 1) / sailors
-        pile = pile - 1 - (pile - 1) / sailors
-    od
+        yield in
+            hidden_piles(after_night(pile, sailors), sailors, nights - 1)
+    fi
 si
 
 for sailors in [5, 6] do
-    if let total = stream(sailors, c => c || c + 1)
-        |> find(satisfies_tale(*, sailors)) then
+    if let total = from(sailors)
+        |> find(satisfies_tale(*, sailors, sailors)) then
         write_line("{sailors} sailors: smallest pile is {total} coconuts")
         write_line(
             "  piles hidden at night: "
-            "{hidden_piles(total, sailors) |> join(", ")}")
+            "{hidden_piles(total, sailors, sailors) |> join(", ")}")
     fi
 od
