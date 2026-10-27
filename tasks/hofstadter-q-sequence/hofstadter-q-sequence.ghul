@@ -1,14 +1,13 @@
 use default
 
-q_sequence(count: int) -> List[int] is
-    let terms = LIST([0, 1, 1])
+q_sequence(count: int) -> List[int] =>
+    (let terms = LIST([0, 1, 1])
 
-    for n in 3::count do
-        terms.add(terms[n - terms[n - 1]] + terms[n - terms[n - 2]])
-    od
+     for n in 3::count do
+         terms.add(terms[n - terms[n - 1]] + terms[n - terms[n - 2]])
+     od
 
-    return terms
-si
+     terms)
 
 let terms = q_sequence(100000)
 

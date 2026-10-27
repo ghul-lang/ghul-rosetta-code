@@ -31,15 +31,14 @@ union Result is
     CONS(head: THUNK, tail: THUNK)
 si
 
-lookup(env: ENV?, index: int) -> THUNK is
-    let e mut = env!
+lookup(env: ENV?, index: int) -> THUNK =>
+    (let e mut = env!
 
-    for _ in 1..index do
-        e = e.rest!
-    od
+     for _ in 1..index do
+         e = e.rest!
+     od
 
-    e.first
-si
+     e.first)
 
 evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
     let stack = STACK()
@@ -155,12 +154,11 @@ class READER(bits: List[bool]) is
     si
 si
 
-constant(term: Term) -> THUNK is
-    let thunk = THUNK(term, null)
+constant(term: Term) -> THUNK =>
+    (let thunk = THUNK(term, null)
 
-    thunk.value = Value.CLOSURE(term, null)
-    thunk
-si
+     thunk.value = Value.CLOSURE(term, null)
+     thunk)
 
 let top = constant(Term.PAIR)
 let zero = constant(Term.ATOM(0))

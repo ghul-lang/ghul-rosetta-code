@@ -1,19 +1,18 @@
 use default
 
-split(text: string) -> string{} is
-    let runs = LIST()
+split(text: string) -> string{} =>
+    (let runs = LIST()
 
-    let start mut = 0
+     let start mut = 0
 
-    for at in 1::text.length do
-        if at == text.length \/ text[at] != text[start] then
-            runs.add(text[start..at])
+     for at in 1::text.length do
+         if at == text.length \/ text[at] != text[start] then
+             runs.add(text[start..at])
 
-            start = at
-        fi
-    od
+             start = at
+         fi
+     od
 
-    runs
-si
+     runs)
 
 write_line(split("gHHH5YY++///\\") |> Ghul.Pipes.join())

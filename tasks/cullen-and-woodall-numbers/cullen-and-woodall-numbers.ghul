@@ -9,22 +9,21 @@ let small_primes = 3::20_000
     |> map(long)
     |> memo()
 
-power_of_two_mod(n: int, p: long) -> long is
-    let result mut = 1L
-    let base mut = 2L
-    let exponent mut = n
+power_of_two_mod(n: int, p: long) -> long =>
+    (let result mut = 1L
+     let base mut = 2L
+     let exponent mut = n
 
-    while exponent > 0 do
-        if exponent % 2 == 1 then
-            result = result * base % p
-        fi
+     while exponent > 0 do
+         if exponent % 2 == 1 then
+             result = result * base % p
+         fi
 
-        base = base * base % p
-        exponent = exponent / 2
-    od
+         base = base * base % p
+         exponent = exponent / 2
+     od
 
-    result
-si
+     result)
 
 has_small_factor(n: int, offset: long) -> bool =>
     n > 10 /\ small_primes |> any(p =>

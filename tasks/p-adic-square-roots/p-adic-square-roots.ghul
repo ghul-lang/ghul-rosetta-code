@@ -6,31 +6,29 @@ floor_div(a: bigint, b: bigint) -> bigint =>
 
 modulo(a: bigint, m: bigint) -> bigint => ((a % m) + m) % m
 
-inverse(value: bigint, m: bigint) -> bigint is
-    let (r0, r1) mut = (modulo(value, m), m)
-    let (s0, s1) mut = (1n, 0n)
+inverse(value: bigint, m: bigint) -> bigint =>
+    (let (r0, r1) mut = (modulo(value, m), m)
+     let (s0, s1) mut = (1n, 0n)
 
-    while r1 !~ 0n do
-        let q = r0 / r1
+     while r1 !~ 0n do
+         let q = r0 / r1
 
-        (r0, r1) = (r1, r0 - q * r1)
-        (s0, s1) = (s1, s0 - q * s1)
-    od
+         (r0, r1) = (r1, r0 - q * r1)
+         (s0, s1) = (s1, s0 - q * s1)
+     od
 
-    modulo(s0, m)
-si
+     modulo(s0, m))
 
-without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
-    let rest mut = n
-    let count mut = 0
+without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) =>
+    (let rest mut = n
+     let count mut = 0
 
-    while rest !~ 0n /\ rest % p =~ 0n do
-        rest = rest / p
-        count = count + 1
-    od
+     while rest !~ 0n /\ rest % p =~ 0n do
+         rest = rest / p
+         count = count + 1
+     od
 
-    (rest, count)
-si
+     (rest, count))
 
 show(digits: List[bigint], exponent: int) -> string =>
     let text = digits |> reverse() |> map(d => "{d}") |> join("") in

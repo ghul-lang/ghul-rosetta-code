@@ -34,18 +34,17 @@ below_thousand(value: int) -> string =>
         "{small[value / 100]} hundred and {below_hundred(value % 100)}"
     fi
 
-groups(value: long) -> List[int] is
-    let parts = LIST()
-    let rest mut = value
+groups(value: long) -> List[int] =>
+    (let parts = LIST()
+     let rest mut = value
 
-    while rest > 0L do
-        parts.add(int(rest % 1000L))
+     while rest > 0L do
+         parts.add(int(rest % 1000L))
 
-        rest = rest / 1000L
-    od
+         rest = rest / 1000L
+     od
 
-    return parts
-si
+     parts)
 
 cardinal(value: long) -> string is
     if value < 0L then

@@ -29,19 +29,18 @@ error(r: double) -> double =>
         |> map(c => model(r, double(c.index)) - double(c.value))
         |> sum_by(d => d * d)
 
-golden_section(low: double, high: double) -> double is
-    let ratio = (sqrt(5.0D) - 1.0D) / 2.0D
-    let a mut = low, b mut = high
+golden_section(low: double, high: double) -> double =>
+    (let ratio = (sqrt(5.0D) - 1.0D) / 2.0D
+     let a mut = low, b mut = high
 
-    while b - a > 1.0e-12 do
-        let c = b - ratio * (b - a)
-        let d = a + ratio * (b - a)
+     while b - a > 1.0e-12 do
+         let c = b - ratio * (b - a)
+         let d = a + ratio * (b - a)
 
-        if error(c) < error(d) then b = d else a = c fi
-    od
+         if error(c) < error(d) then b = d else a = c fi
+     od
 
-    (a + b) / 2.0D
-si
+     (a + b) / 2.0D)
 
 let r = golden_section(0.0D, 0.5D)
 

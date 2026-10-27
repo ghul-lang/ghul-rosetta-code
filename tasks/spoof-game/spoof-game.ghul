@@ -24,15 +24,14 @@ read_numbers(prompt: string) -> int[]? is
         |> collect()
 si
 
-computer_guess(coins: int, other: int?) -> int is
-    let guess mut = coins + random.next(4)
+computer_guess(coins: int, other: int?) -> int =>
+    (let guess mut = coins + random.next(4)
 
-    while other? /\ guess == other do
-        guess = coins + random.next(4)
-    od
+     while other? /\ guess == other do
+         guess = coins + random.next(4)
+     od
 
-    guess
-si
+     guess)
 
 let mine mut = 0
 let yours mut = 0

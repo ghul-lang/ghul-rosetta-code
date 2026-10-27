@@ -1,21 +1,20 @@
 use default
 
-to_digits(value: long, base: long) -> List[int] is
-    let digits = LIST()
-    let remaining mut = value
+to_digits(value: long, base: long) -> List[int] =>
+    (let digits = LIST()
+     let remaining mut = value
 
-    while remaining > 0L do
-        digits.insert(0, int(remaining % base))
+     while remaining > 0L do
+         digits.insert(0, int(remaining % base))
 
-        remaining = remaining / base
-    od
+         remaining = remaining / base
+     od
 
-    if digits.count == 0 then
-        digits.add(0)
-    fi
+     if digits.count == 0 then
+         digits.add(0)
+     fi
 
-    return digits
-si
+     digits)
 
 from_digits(digits: List[int], base: long) -> long =>
     digits |> reduce(0L, (value, digit) => value * base + long(digit))

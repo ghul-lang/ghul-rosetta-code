@@ -8,15 +8,14 @@ zeros(rows: int, columns: int) -> Table =>
         |> map(_ => repeat(0.0, columns) |> collect_mutable())
         |> collect_mutable()
 
-identity(size: int) -> Table is
-    let result = zeros(size, size)
+identity(size: int) -> Table =>
+    (let result = zeros(size, size)
 
-    for i in 0..size do
-        result[i][i] = 1.0
-    od
+     for i in 0..size do
+         result[i][i] = 1.0
+     od
 
-    result
-si
+     result)
 
 multiply(a: Rows, b: Rows) -> Table is
     let result = zeros(a.count, b[0].count)
@@ -57,37 +56,35 @@ householder(a: Rows, k: int) -> Table is
     h
 si
 
-decompose(a: Rows) -> (q: Table, r: Table) is
-    let m = a.count
-    let n = a[0].count
-    let q mut = identity(m)
-    let r mut = multiply(a, identity(n))
+decompose(a: Rows) -> (q: Table, r: Table) =>
+    (let m = a.count
+     let n = a[0].count
+     let q mut = identity(m)
+     let r mut = multiply(a, identity(n))
 
-    for k in 0..(if m - 1 < n then m - 1 else n fi) do
-        let h = householder(r, k)
+     for k in 0..(if m - 1 < n then m - 1 else n fi) do
+         let h = householder(r, k)
 
-        q = multiply(q, h)
-        r = multiply(h, r)
-    od
+         q = multiply(q, h)
+         r = multiply(h, r)
+     od
 
-    (q, r)
-si
+     (q, r))
 
-least_squares(a: Rows, b: List[double]) -> double{} is
-    let (q, r) = decompose(a)
-    let n = a[0].count
-    let column = b |> map(y => LIST([y])) |> collect()
-    let qtb = multiply(transpose(q), column)
-    let x = repeat(0.0, n) |> collect_mutable()
+least_squares(a: Rows, b: List[double]) -> double{} =>
+    (let (q, r) = decompose(a)
+     let n = a[0].count
+     let column = b |> map(y => LIST([y])) |> collect()
+     let qtb = multiply(transpose(q), column)
+     let x = repeat(0.0, n) |> collect_mutable()
 
-    for i in (0..n) |> reverse() do
-        let known = i + 1..n |> sum_by(j => r[i][j] * x[j])
+     for i in (0..n) |> reverse() do
+         let known = i + 1..n |> sum_by(j => r[i][j] * x[j])
 
-        x[i] = (qtb[i][0] - known) / r[i][i]
-    od
+         x[i] = (qtb[i][0] - known) / r[i][i]
+     od
 
-    x
-si
+     x)
 
 show(name: string, matrix: Rows) is
     write_line("{name}:")

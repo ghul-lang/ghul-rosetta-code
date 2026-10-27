@@ -1,8 +1,7 @@
 use default
 
-factorial(n: int) -> bigint is
+factorial(n: int) -> bigint =>
     1::n |> reduce(1n, (acc, i) => acc * bigint(i))
-si
 
 npk(n: int, k: int) -> bigint => factorial(n) / factorial(n - k)
 
@@ -45,15 +44,14 @@ approx_nck(n: int, k: int) -> string =>
         log_gamma(double(n - k + 1))
     )
 
-truncated(v: bigint) -> string is
-    let text = "{v}"
+truncated(v: bigint) -> string =>
+    (let text = "{v}"
 
-    if text.length <= 32 then
-        text
-    else
-        "{text[0..32]}... ({text.length - 32} more digits)"
-    fi
-si
+     if text.length <= 32 then
+         text
+     else
+         "{text[0..32]}... ({text.length - 32} more digits)"
+     fi)
 
 write_line("permutations from 1 to 12, exact integer arithmetic:")
 

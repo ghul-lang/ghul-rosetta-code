@@ -3,17 +3,16 @@ use default
 digit_square_sum(n: int) -> int =>
     n |> digits() |> map(d => d * d) |> sum()
 
-is_happy(n: int) -> bool is
-    let seen = LIST()
-    let remaining mut = n
+is_happy(n: int) -> bool =>
+    (let seen = LIST()
+     let remaining mut = n
 
-    while remaining != 1 /\ !seen.contains(remaining) do
-        seen.add(remaining)
-        remaining = digit_square_sum(remaining)
-    od
+     while remaining != 1 /\ !seen.contains(remaining) do
+         seen.add(remaining)
+         remaining = digit_square_sum(remaining)
+     od
 
-    remaining == 1
-si
+     remaining == 1)
 
 let first_eight = from(1)
     |> filter(is_happy)

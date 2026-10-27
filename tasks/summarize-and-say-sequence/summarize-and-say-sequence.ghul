@@ -7,19 +7,18 @@ summarize(term: string) -> string =>
     |> map(digit => "{counts[digit]}{digit}")
     |> join("")
 
-sequence(seed: int) -> List[string] is
-    let terms = LIST()
-    let seen = SET()
+sequence(seed: int) -> List[string] =>
+    (let terms = LIST()
+     let seen = SET()
 
-    let term mut = "{seed}"
+     let term mut = "{seed}"
 
-    while seen.add(term) do
-        terms.add(term)
-        term = summarize(term)
-    od
+     while seen.add(term) do
+         terms.add(term)
+         term = summarize(term)
+     od
 
-    return terms
-si
+     terms)
 
 canonical(seed: int) -> string =>
     string("{seed}" |> sort())

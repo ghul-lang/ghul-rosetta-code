@@ -34,22 +34,21 @@ without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
     walk(n, 0)
 si
 
-to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic is
-    let (top, above) = without_p(a, p)
-    let (bottom, below) = without_p(b, p)
-    let divisor = inverse(bottom, p)
-    let remainder mut = top
-    let digits = LIST()
+to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic =>
+    (let (top, above) = without_p(a, p)
+     let (bottom, below) = without_p(b, p)
+     let divisor = inverse(bottom, p)
+     let remainder mut = top
+     let digits = LIST()
 
-    for _ in 0..k do
-        let digit = modulo(modulo(remainder, p) * divisor, p)
+     for _ in 0..k do
+         let digit = modulo(modulo(remainder, p) * divisor, p)
 
-        digits.add(digit)
-        remainder = floor_div(remainder - digit * bottom, p)
-    od
+         digits.add(digit)
+         remainder = floor_div(remainder - digit * bottom, p)
+     od
 
-    (digits, above - below)
-si
+     (digits, above - below))
 
 add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
     let exponent = int.min(x.exponent, y.exponent)

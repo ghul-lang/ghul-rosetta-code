@@ -1,17 +1,16 @@
 use default
 
-binomial(n: int, k: int) -> long is
-    assert k >= 0 /\ k <= n else "k must lie between 0 and n"
+binomial(n: int, k: int) -> long =>
+    (assert k >= 0 /\ k <= n else "k must lie between 0 and n"
 
-    let smaller = if k > n - k then n - k else k fi
-    let result mut = 1L
+     let smaller = if k > n - k then n - k else k fi
+     let result mut = 1L
 
-    for i in 0..smaller do
-        result = result * cast(n - i) / cast(i + 1)
-    od
+     for i in 0..smaller do
+         result = result * cast(n - i) / cast(i + 1)
+     od
 
-    result
-si
+     result)
 
 for (n, k) in [(5, 3), (10, 5), (60, 30)] do
     write_line("C({n}, {k}) = {binomial(n, k)}")

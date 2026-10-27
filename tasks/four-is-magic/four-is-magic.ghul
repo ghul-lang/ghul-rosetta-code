@@ -59,24 +59,23 @@ cardinal(value: long) -> string is
         fi
 si
 
-magic(value: long) -> string is
-    let phrases = LIST()
-    let name mut = cardinal(value)
+magic(value: long) -> string =>
+    (let phrases = LIST()
+     let name mut = cardinal(value)
 
-    while name !~ "four" do
-        let counted = cardinal(cast(name.length))
+     while name !~ "four" do
+         let counted = cardinal(cast(name.length))
 
-        phrases.add("{name} is {counted}")
+         phrases.add("{name} is {counted}")
 
-        name = counted
-    od
+         name = counted
+     od
 
-    phrases.add("four is magic")
+     phrases.add("four is magic")
 
-    let sentence = phrases |> join()
+     let sentence = phrases |> join()
 
-    return "{sentence[0..1].to_upper_invariant()}{sentence[1..<0]}."
-si
+     "{sentence[0..1].to_upper_invariant()}{sentence[1..<0]}.")
 
 let samples = [
     0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L,

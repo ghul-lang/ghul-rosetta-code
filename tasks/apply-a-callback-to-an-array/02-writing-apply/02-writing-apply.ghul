@@ -1,14 +1,13 @@
 use default
 
-apply[T, U](values: T[], callback: T -> U) -> U{} is
-    let applied = LIST()
+apply[T, U](values: T[], callback: T -> U) -> U{} =>
+    (let applied = LIST()
 
-    for value in values do
-        applied.add(callback(value))
-    od
+     for value in values do
+         applied.add(callback(value))
+     od
 
-    return applied
-si
+     applied)
 
 shout(word: string) -> string => "{word.to_upper()}!"
 

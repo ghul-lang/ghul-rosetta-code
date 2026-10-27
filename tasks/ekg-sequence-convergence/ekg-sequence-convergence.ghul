@@ -7,20 +7,19 @@ shares_factor(left_value: int, right_value: int) -> bool =>
         left_value > 1
     fi
 
-ekg(start: int, count: int) -> List[int] is
-    let terms = LIST([1, start])
-    let used = SET([1, start])
+ekg(start: int, count: int) -> List[int] =>
+    (let terms = LIST([1, start])
+     let used = SET([1, start])
 
-    while terms.count < count do
-        let candidate = from(2) |> find(c =>
-            !used.contains(c) /\ shares_factor(c, terms[terms.count - 1]))!
+     while terms.count < count do
+         let candidate = from(2) |> find(c =>
+             !used.contains(c) /\ shares_factor(c, terms[terms.count - 1]))!
 
-        terms.add(candidate)
-        used.add(candidate)
-    od
+         terms.add(candidate)
+         used.add(candidate)
+     od
 
-    terms
-si
+     terms)
 
 let two = ekg(2, 80)
 let five = ekg(5, 80)

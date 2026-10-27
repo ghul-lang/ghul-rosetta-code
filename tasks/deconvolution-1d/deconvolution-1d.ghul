@@ -1,17 +1,16 @@
 use default
 
-deconvolve(g: int[], f: int[]) -> List[int] is
-    let h = LIST()
+deconvolve(g: int[], f: int[]) -> List[int] =>
+    (let h = LIST()
 
-    for n in 0..g.count - f.count + 1 do
-        let lower = System.Math.max(0, n - f.count + 1)
-        let overlap = (lower..n) |> map(i => f[n - i] * h[i]) |> sum()
+     for n in 0..g.count - f.count + 1 do
+         let lower = System.Math.max(0, n - f.count + 1)
+         let overlap = (lower..n) |> map(i => f[n - i] * h[i]) |> sum()
 
-        h.add((g[n] - overlap) / f[0])
-    od
+         h.add((g[n] - overlap) / f[0])
+     od
 
-    return h
-si
+     h)
 
 let h = [-8, -9, -3, -1, -6, 7]
 let f = [-3, -6, -1, 8, -6, 3, -1, -9, -9, 3, -2, 5, 2, -2, -7, -1]

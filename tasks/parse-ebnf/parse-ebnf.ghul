@@ -205,15 +205,14 @@ show(rule: Rule) -> string =>
     esac
 
 class MATCHER(grammar: GRAMMAR, text: string) is
-    blank(at: int) -> int is
-        let i mut = at
+    blank(at: int) -> int =>
+        (let i mut = at
 
-        while i < text.length /\ char.is_white_space(text[i]) do
-            i = i + 1
-        od
+         while i < text.length /\ char.is_white_space(text[i]) do
+             i = i + 1
+         od
 
-        i
-    si
+         i)
 
     ends(rule: Rule, at: int) -> int{} is
         let result = LIST()

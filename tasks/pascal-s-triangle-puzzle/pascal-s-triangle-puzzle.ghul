@@ -1,19 +1,18 @@
 use default
 
-pyramid(base: List[int]) -> List[List[int]] is
-    let rows = LIST[List[int]]([base])
+pyramid(base: List[int]) -> List[List[int]] =>
+    (let rows = LIST[List[int]]([base])
 
-    while rows[0].count > 1 do
-        let below = rows[0]
-        let above = 0..below.count - 1
-            |> map(i => below[i] + below[i + 1])
-            |> collect()
+     while rows[0].count > 1 do
+         let below = rows[0]
+         let above = 0..below.count - 1
+             |> map(i => below[i] + below[i + 1])
+             |> collect()
 
-        rows.insert(0, above)
-    od
+         rows.insert(0, above)
+     od
 
-    rows
-si
+     rows)
 
 let solutions =
     [(x, z) for x in 0::151 for z in 0::151]

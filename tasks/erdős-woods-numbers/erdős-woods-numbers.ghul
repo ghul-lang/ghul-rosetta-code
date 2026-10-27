@@ -13,19 +13,18 @@ set_bits(mask: long) -> long{} =>
 lowest_bit(mask: long) -> int =>
     if mask == 0L then -1 else BitOperations.trailing_zero_count(mask) fi
 
-inverse(value: bigint, modulus: bigint) -> bigint is
-    let (r0, r1) mut = (modulo(value, modulus), modulus)
-    let (s0, s1) mut = (1n, 0n)
+inverse(value: bigint, modulus: bigint) -> bigint =>
+    (let (r0, r1) mut = (modulo(value, modulus), modulus)
+     let (s0, s1) mut = (1n, 0n)
 
-    while r1 !~ 0n do
-        let q = r0 / r1
+     while r1 !~ 0n do
+         let q = r0 / r1
 
-        (r0, r1) = (r1, r0 - q * r1)
-        (s0, s1) = (s1, s0 - q * s1)
-    od
+         (r0, r1) = (r1, r0 - q * r1)
+         (s0, s1) = (s1, s0 - q * s1)
+     od
 
-    modulo(s0, modulus)
-si
+     modulo(s0, modulus))
 
 modulo(value: bigint, m: bigint) -> bigint => ((value % m) + m) % m
 

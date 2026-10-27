@@ -1,18 +1,17 @@
 use default
 
-letter_counts(text: string) -> LIST[int] is
-    let counts = repeat(0, 26) |> collect_mutable()
+letter_counts(text: string) -> LIST[int] =>
+    (let counts = repeat(0, 26) |> collect_mutable()
 
-    for letter in text do
-        if char.is_letter(letter) then
-            let index = int(char.to_lower(letter)) - int('a')
+     for letter in text do
+         if char.is_letter(letter) then
+             let index = int(char.to_lower(letter)) - int('a')
 
-            counts[index] = counts[index] + 1
-        fi
-    od
+             counts[index] = counts[index] + 1
+         fi
+     od
 
-    return counts
-si
+     counts)
 
 fits(word: List[int], available: List[int]) -> bool =>
     0..26 |> all(i => word[i] <= available[i])

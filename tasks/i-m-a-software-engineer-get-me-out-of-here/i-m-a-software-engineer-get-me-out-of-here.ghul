@@ -81,18 +81,17 @@ for k in 0..size do
     od
 od
 
-route(from: Cell, to: Cell) -> string is
-    let target = number[to]
-    let at mut = number[from]
-    let steps = LIST([cells[at]])
+route(from: Cell, to: Cell) -> string =>
+    (let target = number[to]
+     let at mut = number[from]
+     let steps = LIST([cells[at]])
 
-    while at != target do
-        at = next[at][target]
-        steps.add(cells[at])
-    od
+     while at != target do
+         at = next[at][target]
+         steps.add(cells[at])
+     od
 
-    steps |> map((row, column) => "({row}, {column})") |> join(" -> ")
-si
+     steps |> map((row, column) => "({row}, {column})") |> join(" -> "))
 
 let hq: Cell = (11, 11)
 let start = number[hq]

@@ -2,16 +2,15 @@ use default
 
 use Graph = List[SET[int]]
 
-graph(n: int, edges: (int, int){}) -> Graph is
-    let adjacency = 0..n |> map(_ => SET()) |> collect()
+graph(n: int, edges: (int, int){}) -> Graph =>
+    (let adjacency = 0..n |> map(_ => SET()) |> collect()
 
-    for (u, v) in edges do
-        adjacency[u].add(v)
-        adjacency[v].add(u)
-    od
+     for (u, v) in edges do
+         adjacency[u].add(v)
+         adjacency[v].add(u)
+     od
 
-    adjacency
-si
+     adjacency)
 
 closure(g: Graph) -> Graph is
     let n = g.count

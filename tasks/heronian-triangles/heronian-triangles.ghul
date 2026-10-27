@@ -30,13 +30,12 @@ heron_area(a: int, b: int, c: int) -> long? is
     null
 si
 
-try_triangle(a: int, b: int, c: int) -> TRIANGLE? is
-    if let area = heron_area(a, b, c) then
-        (a = a, b = b, c = c, area = area)
-    else
-        null
-    fi
-si
+try_triangle(a: int, b: int, c: int) -> TRIANGLE? =>
+    (if let area = heron_area(a, b, c) then
+         (a = a, b = b, c = c, area = area)
+     else
+         null
+     fi)
 
 compare_triangles(x: TRIANGLE, y: TRIANGLE) -> int is
     let by_area = x.area <> y.area

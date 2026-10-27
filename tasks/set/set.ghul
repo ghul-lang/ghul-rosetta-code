@@ -1,11 +1,10 @@
 use default
 
-render(s: SET[int]) -> string is
-    let items = s |> collect_mutable()
-    items.sort()
+render(s: SET[int]) -> string =>
+    (let items = s |> collect_mutable()
+     items.sort()
 
-    "{{{items |> join(", ")}}}"
-si
+     "{{{items |> join(", ")}}}")
 
 let a = SET([1, 2, 3, 4])
 let b = SET([3, 4, 5, 6])

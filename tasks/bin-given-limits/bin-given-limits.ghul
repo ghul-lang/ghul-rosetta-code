@@ -1,16 +1,15 @@
 use default
 
-bin(limits: List[int], data: List[int]) -> List[int] is
-    let counts = repeat(0, limits.count + 1) |> collect_mutable()
+bin(limits: List[int], data: List[int]) -> List[int] =>
+    (let counts = repeat(0, limits.count + 1) |> collect_mutable()
 
-    for value in data do
-        let slot = limits |> count(value >= *)
+     for value in data do
+         let slot = limits |> count(value >= *)
 
-        counts[slot] = counts[slot] + 1
-    od
+         counts[slot] = counts[slot] + 1
+     od
 
-    return counts
-si
+     counts)
 
 show(limits: List[int], counts: List[int]) is
     write_line("{"<",13}{limits[0],6}{counts[0],8}")
