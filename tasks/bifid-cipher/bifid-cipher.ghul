@@ -13,13 +13,15 @@ normalize(text: string) -> string =>
         |> join("")
 
 encrypt(text: string, square: SQUARE) -> string =>
-    let letters = normalize(text), n = letters.length in
-    let rows = letters |> map(square.row) in
-    let cols = letters |> map(square.col) in
-    let coords = rows ++ cols |> collect() in
-    0..n
-        |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
-        |> join("")
+    let
+        letters = normalize(text), n = letters.length,
+        rows = letters |> map(square.row),
+        cols = letters |> map(square.col),
+        coords = rows ++ cols |> collect()
+    in
+        0..n
+            |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
+            |> join("")
 
 decrypt(text: string, square: SQUARE) -> string =>
     let letters = normalize(text), n = letters.length in
