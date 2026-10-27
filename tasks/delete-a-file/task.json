@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Delete_a_file",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Delete a file named input.txt and a directory named docs, both in the working directory and in the filesystem root."
 }

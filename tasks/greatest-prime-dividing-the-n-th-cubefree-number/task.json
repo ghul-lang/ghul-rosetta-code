@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Greatest_prime_dividing_the_n-th_cubefree_number",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the greatest prime factor of the nth cubefree number for n up to 100, then at 1000, 10000 and 100000."
 }

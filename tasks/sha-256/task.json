@@ -6,5 +6,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the SHA-256 digest of a short text string, either with a library or by implementing the algorithm."
 }

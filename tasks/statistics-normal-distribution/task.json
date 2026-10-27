@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Statistics/Normal_distribution",
     "status": "published",
     "tags": ["maths", "generators", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate normally distributed numbers from a uniform random source, then report their mean, standard deviation and a histogram."
 }

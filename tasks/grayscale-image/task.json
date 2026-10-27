@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Grayscale_image",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Extend an image type with grayscale support, adding conversions from colour to grayscale and back using a luminance formula."
 }

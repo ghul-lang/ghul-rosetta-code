@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Generate_Chess960_starting_position",
     "status": "published",
     "tags": ["game", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a random Chess960 starting position for the back rank, with bishops on opposite colours and the king between the rooks."
 }

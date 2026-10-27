@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Bead_sort",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort positive integers with bead sort, a gravity-based method in which beads drop along rods."
 }

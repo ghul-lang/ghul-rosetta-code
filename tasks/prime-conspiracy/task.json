@@ -5,5 +5,6 @@
     "tags": ["primes", "generators"],
     "interest": 3,
     "first_output_ms": 1411,
-    "run_ms": 1435
+    "run_ms": 1435,
+    "summary": "Count last-digit transitions between consecutive primes among the first million primes and report each with its frequency."
 }

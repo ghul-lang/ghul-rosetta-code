@@ -8,5 +8,6 @@
         "unions",
         "pattern-matching"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement an AVL tree, a self-balancing binary search tree, with at least basic operations."
 }

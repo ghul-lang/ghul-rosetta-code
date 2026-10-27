@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mad_Libs",
     "status": "published",
     "tags": ["game", "interactive", "text-processing"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a multiline story with placeholders, prompt for a word for each unique placeholder, then print the completed story."
 }

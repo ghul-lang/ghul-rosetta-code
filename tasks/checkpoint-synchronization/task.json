@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Checkpoint_synchronization",
     "status": "published",
     "tags": ["concurrency", "async", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement checkpoint synchronization among several concurrent tasks so that none proceeds past the checkpoint until all have arrived, race-free."
 }

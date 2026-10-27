@@ -8,5 +8,6 @@
     "data-structures",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find every occurrence of a set of patterns in a text using the Aho-Corasick string-matching algorithm, reporting start positions."
 }

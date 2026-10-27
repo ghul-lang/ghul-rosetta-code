@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
     "interest": 3,
-    "run_ms": 4862
+    "run_ms": 4862,
+    "summary": "Find the five-letter lowercase passwords matching three SHA-256 hashes by brute force across parallel workers."
 }

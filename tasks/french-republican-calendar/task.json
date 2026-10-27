@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/French_Republican_calendar",
     "status": "published",
     "tags": ["date-time", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert dates between the Gregorian and French Republican calendars, checking the results against a set of test dates."
 }

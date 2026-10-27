@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Count_in_factors",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count upward from one, displaying each number as a product of its prime factors."
 }

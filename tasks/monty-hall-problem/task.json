@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Monty_Hall_problem",
     "status": "published",
     "tags": ["simulation", "puzzles", "graphics"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Simulate many games of the Monty Hall problem to compare the results of always switching doors against always staying."
 }

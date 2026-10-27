@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Colour_pinstripe/Display",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw vertical pinstripes that widen from one to four pixels as the display is filled from top to bottom."
 }

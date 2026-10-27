@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "generators"],
     "interest": 3,
-    "run_ms": 39573
+    "run_ms": 39573,
+    "summary": "Build each path from 1 to S through all integers, with neighbors summing to a prime, and count them for S from 2 to 20."
 }

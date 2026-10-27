@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vigenère_cipher/Cryptanalysis",
     "status": "published",
     "tags": ["strings", "algorithms", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Recover the key and plaintext from a Vigenère ciphertext, using only the ciphertext and English letter frequencies."
 }

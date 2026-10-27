@@ -7,5 +7,6 @@
     "strings",
     "parsing"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Write a highlighter that outputs its own source as wiki markup, with keywords in bold and comments in italics."
 }

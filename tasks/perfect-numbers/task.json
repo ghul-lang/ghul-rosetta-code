@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Perfect_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Test whether a positive integer is perfect, meaning its divisors other than itself add up to it."
 }

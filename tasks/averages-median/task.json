@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Averages/Median",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the median of a vector of floating-point numbers, averaging the two middle values for an even count, preferably in linear time."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multi-dimensional_array",
     "status": "published",
     "tags": ["data-structures", "basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Create a four-dimensional array, set and read values in it, and describe how memory is laid out for them."
 }

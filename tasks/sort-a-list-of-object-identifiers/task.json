@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_a_list_of_object_identifiers",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort a list of dotted object identifiers into natural order, comparing each dot-separated field numerically."
 }

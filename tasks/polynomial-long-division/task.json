@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Polynomial_long_division",
     "status": "published",
     "tags": ["maths", "algorithms", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Divide one polynomial by another using polynomial long division on coefficient vectors, returning the quotient and remainder."
 }

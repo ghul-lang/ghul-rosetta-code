@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Modular_inverse",
     "status": "published",
     "tags": ["maths", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the modular multiplicative inverse of 42 modulo 2017, either by an algorithm or with a built-in function."
 }

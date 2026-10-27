@@ -8,5 +8,6 @@
   ],
   "interest": 2,
     "first_output_ms": 791,
-    "run_ms": 794
+    "run_ms": 794,
+    "summary": "Count the implementation sections on each task page of a programming-task wiki, using its API, and report the totals."
 }

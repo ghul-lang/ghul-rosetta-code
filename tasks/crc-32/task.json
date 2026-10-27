@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/CRC-32",
     "status": "published",
     "tags": ["algorithms", "pipes", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the CRC-32 checksum of a fixed ASCII string using the LSB-first variant with initial value FFFFFFFF and a complemented result."
 }

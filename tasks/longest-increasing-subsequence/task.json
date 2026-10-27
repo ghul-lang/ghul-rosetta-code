@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Longest_increasing_subsequence",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find a longest increasing subsequence in each of two given integer lists and show the results."
 }

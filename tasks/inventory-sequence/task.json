@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Inventory_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the inventory sequence, and find the position and value of its first element at or above 1000, then at higher thresholds."
 }

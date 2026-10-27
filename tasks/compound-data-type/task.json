@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compound_data_type",
     "status": "published",
     "tags": ["basics", "classes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Define a point type that bundles independent x and y values into one compound value."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Roots_of_a_quadratic_function",
     "status": "published",
     "tags": ["maths", "unions", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Solve a quadratic equation for its roots, handling non-real roots and avoiding the loss of accuracy that the naive formula suffers with floating-point numbers."
 }

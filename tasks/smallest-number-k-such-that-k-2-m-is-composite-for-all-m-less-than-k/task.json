@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
-    "run_ms": 35902
+    "run_ms": 35902,
+    "summary": "Find the first five values of k for which k plus 2 to the power m is composite for every m less than k."
 }

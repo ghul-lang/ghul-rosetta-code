@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/FizzBuzz",
     "status": "published",
     "tags": ["basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the integers from 1 to 100, replacing multiples of three with Fizz, five with Buzz, and both with FizzBuzz."
 }

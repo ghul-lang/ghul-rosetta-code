@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Implicit_type_conversion",
     "status": "published",
     "tags": ["basics", "classes", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Demonstrate implicit type conversions from the smallest numeric type to the largest, and whether users can define their own."
 }

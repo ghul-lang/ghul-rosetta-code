@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Partition_function_P",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the partition function P(n), the number of ways to write n as a sum of positive parts, and time P(6666)."
 }

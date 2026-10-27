@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/JSON",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read JSON text into data, then build a new structure and serialize it back to valid JSON."
 }

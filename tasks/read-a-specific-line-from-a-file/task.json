@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Read_a_specific_line_from_a_file",
     "status": "published",
     "tags": ["text-processing", "pipes", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Retrieve the seventh line of a file, reporting a message if the file is too short or that line is empty."
 }

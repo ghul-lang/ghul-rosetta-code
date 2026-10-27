@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Memory_layout_of_a_data_structure",
     "status": "published",
     "tags": ["dotnet-interop", "data-structures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define a data structure with a controlled memory layout that matches the 9-pin RS-232 plug definition."
 }

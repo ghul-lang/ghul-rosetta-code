@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hofstadter_Figure-Figure_sequences",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Create the Hofstadter Figure-Figure sequences R and S, and check that the first 40 R values and first 960 S values cover 1 to 1000 once."
 }

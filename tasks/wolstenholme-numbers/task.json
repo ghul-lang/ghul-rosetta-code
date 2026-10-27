@@ -5,5 +5,6 @@
     "tags": ["number-theory", "generators"],
     "interest": 2,
     "first_output_ms": 789,
-    "run_ms": 6259
+    "run_ms": 6259,
+    "summary": "Find the first 20 Wolstenholme numbers and the first 4 prime ones, then the digit counts of some larger terms."
 }

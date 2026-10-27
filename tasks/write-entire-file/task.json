@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Write_entire_file",
     "status": "published",
     "tags": ["basics", "text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to write a string to a file, creating or overwriting it in one operation."
 }

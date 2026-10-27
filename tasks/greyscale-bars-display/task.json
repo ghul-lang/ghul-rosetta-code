@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Greyscale_bars/Display",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw a display of vertical greyscale bars, with 8, 16, 32 and then 64 bars in successive quarters of the screen."
 }

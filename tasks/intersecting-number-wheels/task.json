@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Intersecting_number_wheels",
     "status": "published",
     "tags": ["unions", "pattern-matching", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the first twenty numbers from groups of named number wheels, where a name stands for the next value of that wheel."
 }

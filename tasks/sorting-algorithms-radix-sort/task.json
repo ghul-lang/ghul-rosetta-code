@@ -7,5 +7,6 @@
     "algorithms",
     "closures"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Sort an array of integers with radix sort, distributing values into digit buckets pass by pass."
 }

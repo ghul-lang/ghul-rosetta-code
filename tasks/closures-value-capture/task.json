@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Closures/Value_capture",
     "status": "published",
     "tags": ["basics", "closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create ten closures, each returning the square of its index, to show that each one captures its own value rather than a shared variable."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Native_shebang",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a script that runs itself through a native shebang, which compiles, caches and executes the source."
 }

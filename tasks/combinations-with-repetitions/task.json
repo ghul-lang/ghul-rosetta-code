@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Combinations_with_repetitions",
     "status": "published",
     "tags": ["algorithms", "pipes", "generators", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate all combinations with repetition of k items from n types, showing the doughnut example and counting choices from ten types."
 }

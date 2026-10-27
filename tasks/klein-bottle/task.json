@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Klein_bottle",
     "status": "published",
     "tags": ["graphics", "maths", "operators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw an image of a Klein bottle and show the picture."
 }

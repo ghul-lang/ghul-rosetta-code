@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_an_integer_array",
     "status": "published",
     "tags": ["sorting", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Sort an array of integers into ascending numerical order, using the built-in sort where one exists."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Array_length",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find the number of elements in an array holding the strings apple and orange."
 }

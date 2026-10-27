@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Increment_a_numerical_string",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Add one to a numeric string and return the incremented value as a string."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Binary_digits",
     "status": "published",
     "tags": ["number-theory", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert non-negative integers to their binary digit strings, with no leading zeros or other markers, and print each result on its own line."
 }

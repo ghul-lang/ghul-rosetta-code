@@ -6,5 +6,6 @@
     "maths",
     "optionals"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find intersection points of two Bézier parabolas by applying Steffensen's fixed-point method with Aitken extrapolation to a set of starting estimates."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Robots",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement a clone of the turn-based game Robots, in which the player must escape robots programmed to kill them."
 }

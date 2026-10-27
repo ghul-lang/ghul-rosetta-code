@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_numbers_lexicographically",
     "status": "published",
     "tags": ["sorting", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Order the integers from 1 to n lexicographically, showing the result for a given n, such as 13."
 }

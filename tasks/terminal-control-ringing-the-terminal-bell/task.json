@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Ringing_the_terminal_bell",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Make the terminal ring its bell, for example by printing the bell character."
 }

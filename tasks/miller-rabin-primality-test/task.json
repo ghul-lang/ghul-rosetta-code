@@ -6,5 +6,6 @@
     "primes",
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Implement the probabilistic Miller-Rabin test, which decides whether a given large number is probably prime, using random bases."
 }

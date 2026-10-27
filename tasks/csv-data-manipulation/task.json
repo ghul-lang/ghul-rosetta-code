@@ -6,5 +6,6 @@
         "text-processing",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read a CSV file, add a SUM column holding each row's total, and write the changed data back to a file."
 }

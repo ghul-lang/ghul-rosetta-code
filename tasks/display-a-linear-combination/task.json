@@ -6,5 +6,6 @@
     "strings",
     "maths"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Format a finite linear combination of basis vectors as a readable string, leaving out zero terms and unit coefficients and using minus signs correctly."
 }

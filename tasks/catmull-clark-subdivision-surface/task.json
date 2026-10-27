@@ -7,5 +7,6 @@
         "algorithms",
         "maths"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement Catmull-Clark subdivision, which refines a mesh of points and polygons into a finer mesh of quadrilaterals."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Deal_cards_for_FreeCell",
     "status": "published",
     "tags": ["game", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Deal a numbered FreeCell game using the Microsoft linear congruential shuffle, showing the cards dealt across eight columns."
 }

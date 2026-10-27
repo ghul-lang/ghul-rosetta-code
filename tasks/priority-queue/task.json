@@ -8,5 +8,6 @@
         "generics",
         "generators"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a priority queue with insertion and top removal, then check that dequeuing sample tasks returns them in priority order."
 }

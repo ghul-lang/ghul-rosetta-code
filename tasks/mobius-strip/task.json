@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Möbius_strip",
     "status": "published",
     "tags": ["graphics", "maths", "operators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a Möbius strip, the one-sided surface formed by a twisted band."
 }

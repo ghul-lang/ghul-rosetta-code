@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/EKG_sequence_convergence",
     "status": "published",
     "tags": ["number-theory", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the first ten terms of several EKG sequences, then find the term where the EKG(5) and EKG(7) sequences converge."
 }

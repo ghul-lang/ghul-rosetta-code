@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "number-theory"],
     "interest": 2,
-    "run_ms": 2197
+    "run_ms": 2197,
+    "summary": "Find the digit strings that prime numbers spell in the largest number of bases from 2 to 36, and list those bases."
 }

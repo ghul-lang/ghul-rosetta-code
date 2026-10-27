@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Truncate_a_file",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Truncate a named file to a given byte length, raising an error when the file is missing or the length is not smaller."
 }

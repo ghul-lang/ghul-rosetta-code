@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/URL_decoding",
     "status": "published",
     "tags": ["strings", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Decode a URL-encoded string back to its original text, making sure encoded percent signs are not decoded twice."
 }

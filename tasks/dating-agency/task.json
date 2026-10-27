@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dating_agency",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Model a dating agency scenario in which candidates are suggested by one rule and a sailor chooses whom to date by another."
 }

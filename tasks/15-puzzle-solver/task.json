@@ -5,5 +5,6 @@
     "tags": ["puzzles", "algorithms", "recursion"],
     "interest": 4,
     "first_output_ms": 2318,
-    "run_ms": 2352
+    "run_ms": 2352,
+    "summary": "Find a shortest sequence of tile moves that solves a given Fifteen Puzzle board, plus a harder board as extra credit."
 }

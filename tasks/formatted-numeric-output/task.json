@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Formatted_numeric_output",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Format a decimal number as a fixed-length string with leading zeros."
 }

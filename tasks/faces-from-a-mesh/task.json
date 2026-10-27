@@ -7,5 +7,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check whether two polygon faces given as ordered vertex lists describe the same perimeter, and convert edge-set faces from unordered edge sets into perimeter format."
 }

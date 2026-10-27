@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Read_entire_file",
     "status": "published",
     "tags": ["basics", "text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read a whole text file into a single string, and discuss encoding and memory-mapping where relevant."
 }

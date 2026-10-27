@@ -6,5 +6,6 @@
         "strings",
         "simulation"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Mutate a random DNA sequence of at least 200 bases ten times by swapping, deleting or inserting bases, showing it before and after."
 }

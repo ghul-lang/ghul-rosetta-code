@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jaro-Winkler_distance",
     "status": "published",
     "tags": ["strings", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute Jaro-Winkler distances between misspelled words and dictionary words, and suggest at least two close alternatives for each of nine common misspellings."
 }

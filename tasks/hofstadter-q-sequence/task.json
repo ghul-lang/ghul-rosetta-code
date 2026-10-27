@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hofstadter_Q_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the Hofstadter Q sequence, verify its first ten terms and 1000th term, and count the decreases up to term 100,000."
 }

@@ -6,5 +6,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute RIPEMD-160 hash of a fixed ASCII text, using a library or your own implementation."
 }

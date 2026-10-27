@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Command-line_arguments",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Retrieve and print the command-line arguments passed to a program when it is run."
 }

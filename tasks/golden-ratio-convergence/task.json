@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Golden_ratio/Convergence",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Iterate the golden ratio continued-fraction recurrence until convergence, then report the value, iteration count and error."
 }

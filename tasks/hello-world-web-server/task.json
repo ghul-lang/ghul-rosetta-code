@@ -5,5 +5,6 @@
     "tags": ["concurrency", "dotnet-interop"],
     "interest": 4,
     "first_output_ms": 558,
-    "run_ms": 620
+    "run_ms": 620,
+    "summary": "Run a small web server on port 8080 that serves the text Goodbye, World! to any browser that connects."
 }

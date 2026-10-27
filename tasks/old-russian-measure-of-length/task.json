@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Old_Russian_measure_of_length",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert lengths between old Russian units such as vershoks and arshins and metric units, in both directions."
 }

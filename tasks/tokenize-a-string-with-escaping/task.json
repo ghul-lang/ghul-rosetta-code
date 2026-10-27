@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tokenize_a_string_with_escaping",
     "status": "published",
     "tags": ["strings", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Split a string at each unescaped separator character, keeping empty fields and dropping the escape characters themselves."
 }

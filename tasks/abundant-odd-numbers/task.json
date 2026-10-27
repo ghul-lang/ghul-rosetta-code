@@ -7,5 +7,6 @@
     "pipes"
   ],
   "interest": 3,
-    "run_ms": 1034
+    "run_ms": 1034,
+    "summary": "Find the first 25 abundant odd numbers, plus the thousandth and the first one above a billion."
 }

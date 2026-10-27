@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Object_serialization",
     "status": "published",
     "tags": ["dotnet-interop", "data-structures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Serialize objects from an inheritance hierarchy to a binary file, then read them back and print each one."
 }

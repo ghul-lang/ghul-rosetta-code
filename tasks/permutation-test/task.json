@@ -7,5 +7,6 @@
     "recursion",
     "closures"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Run a permutation test on treatment and control measurements by checking every alternative grouping of the same volunteers."
 }

@@ -6,5 +6,6 @@
     "number-theory",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find Disarium numbers, integers whose digits each raised to their position sum to the number itself, starting with the first eighteen."
 }

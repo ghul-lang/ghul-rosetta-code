@@ -5,5 +5,6 @@
     "tags": ["puzzles", "graphics", "generators", "pipes", "recursion"],
     "interest": 5,
     "first_output_ms": 711,
-    "run_ms": 769
+    "run_ms": 769,
+    "summary": "Solve the N-queens puzzle, placing N queens on an N-by-N board so that none attack each other, for any board size."
 }

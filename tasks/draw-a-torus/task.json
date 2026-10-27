@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Draw_a_torus",
     "status": "published",
     "tags": ["graphics", "maths", "operators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a classic torus, the doughnut-shaped surface, using the language's graphics or text output."
 }

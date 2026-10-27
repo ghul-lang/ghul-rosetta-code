@@ -6,5 +6,6 @@
     "algorithms",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Perform perfect faro shuffles on a deck of even size and count how many shuffles restore the original order, for several deck sizes."
 }

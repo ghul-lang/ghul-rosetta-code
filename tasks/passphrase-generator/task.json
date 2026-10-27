@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Passphrase_generator",
     "status": "published",
     "tags": ["strings", "text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate a passphrase of n words, each capitalised and followed by a number, with hyphens between words."
 }

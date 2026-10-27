@@ -6,5 +6,6 @@
     "basics",
     "recursion"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Compare two numeric lists lexicographically and return whether the first should come before the second."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/100_doors",
     "status": "published",
     "tags": ["puzzles"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Determine which of 100 doors are open after 100 passes, where each pass toggles every nth door."
 }

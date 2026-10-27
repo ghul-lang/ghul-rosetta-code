@@ -6,5 +6,6 @@
     "dotnet-interop",
     "concurrency"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Connect to an HTTPS server that requires the client to present a certificate, proving the client's identity without a password."
 }

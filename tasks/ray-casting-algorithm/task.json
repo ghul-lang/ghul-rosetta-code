@@ -7,5 +7,6 @@
         "graphics",
         "maths"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Decide whether a point lies inside or outside a polygon by counting how many polygon sides a horizontal ray from the point crosses."
 }

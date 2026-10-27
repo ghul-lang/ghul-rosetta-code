@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Achilles_numbers",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "List the first 50 Achilles numbers, the first 20 strong Achilles numbers, and counts of Achilles numbers with 2 to 5 digits."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Amb",
     "status": "published",
     "tags": ["puzzles", "generators", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the Amb operator, which chooses among alternatives so that a constraint is met, and use it to find a valid four-word sentence."
 }

@@ -6,5 +6,6 @@
     "text-processing",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the longest words in a word list whose letters appear in alphabetical order and display them."
 }

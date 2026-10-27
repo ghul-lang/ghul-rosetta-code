@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Nautical_bell",
     "status": "published",
     "tags": ["date-time", "traits"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a program that rings a nautical bell pattern at set times of day, using Greenwich Mean Time unless the locale says otherwise."
 }

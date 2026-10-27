@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiplicative_order",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the multiplicative order of a number modulo m, using the prime factorisation of m and the Chinese remainder theorem."
 }

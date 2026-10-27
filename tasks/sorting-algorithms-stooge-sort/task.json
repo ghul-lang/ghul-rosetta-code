@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Stooge_sort",
     "status": "published",
     "tags": ["sorting", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show stooge sort on an array of integers, a recursive method that repeatedly sorts overlapping two-thirds sections."
 }

@@ -6,5 +6,6 @@
     "strings",
     "optionals"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Check whether a string's characters are all unique, reporting the first duplicated character, its hex value and where it occurs."
 }

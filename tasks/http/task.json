@@ -6,5 +6,6 @@
     "dotnet-interop",
     "concurrency"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Fetch the content at a given URL over plain HTTP and print it to the console."
 }

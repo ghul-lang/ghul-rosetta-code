@@ -6,5 +6,6 @@
     "number-theory",
     "pipes"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Generate the sequence where each term is the smallest number above the previous term that has exactly n divisors, showing at least fifteen terms."
 }

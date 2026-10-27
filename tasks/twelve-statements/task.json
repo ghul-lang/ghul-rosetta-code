@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Twelve_statements",
     "status": "published",
     "tags": ["puzzles", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find which of twelve statements about each other's truth are true, and list near misses that break only one."
 }

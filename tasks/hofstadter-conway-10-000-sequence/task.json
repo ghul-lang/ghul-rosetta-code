@@ -6,5 +6,6 @@
     "number-theory",
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Generate the Hofstadter-Conway sequence and find the maxima of a(n)/n between consecutive powers of two up to 2^20."
 }

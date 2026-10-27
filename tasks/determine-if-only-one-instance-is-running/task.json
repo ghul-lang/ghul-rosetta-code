@@ -6,5 +6,6 @@
         "concurrency",
         "dotnet-interop"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Detect whether another copy of the program is already running, and if so display a message and exit."
 }

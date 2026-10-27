@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Guess_the_number/With_feedback",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Play a number-guessing game in which the computer answers each guess as higher, lower, equal, or invalid."
 }

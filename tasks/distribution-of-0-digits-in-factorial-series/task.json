@@ -7,5 +7,6 @@
     "number-theory"
   ],
   "interest": 3,
-    "run_ms": 1256
+    "run_ms": 1256,
+    "summary": "Compute the mean share of zero digits across the factorials from 1 up to N, for N of 100, 1000 and 10000."
 }

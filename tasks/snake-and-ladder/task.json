@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Snake_and_ladder",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Build a Snakes and Ladders game in which the computer plays against a human player."
 }

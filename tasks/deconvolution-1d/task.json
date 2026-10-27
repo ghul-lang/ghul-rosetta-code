@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Deconvolution/1D",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement deconvolution, the inverse of convolution, to recover one sequence from a convolution result and the other sequence, and verify it on given data."
 }

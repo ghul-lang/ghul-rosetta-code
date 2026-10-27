@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Maze_generation",
     "status": "published",
     "tags": ["algorithms", "graphics", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Generate and display a maze using a depth-first search that carves passages between randomly visited cells."
 }

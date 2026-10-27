@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Execute_a_system_command",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Run either the ls command, or dir on Windows, or the pause command from within a program."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Program_name",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Retrieve the name the program was launched under, so it can tell which script was actually run."
 }

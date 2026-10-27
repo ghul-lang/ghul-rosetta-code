@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Van_Eck_sequence",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the Van Eck sequence, whose terms depend on how far back each previous term last occurred, showing the first ten and terms 991 to 1000."
 }

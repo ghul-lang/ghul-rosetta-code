@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Koch_curve",
     "status": "published",
     "tags": ["fractal", "graphics", "generators", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a Koch curve, the fractal made by recursively replacing each line segment with four smaller segments."
 }

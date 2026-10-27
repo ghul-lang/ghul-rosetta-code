@@ -7,5 +7,6 @@
         "generators",
         "recursion"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Enumerate every nesting of n identical bags as rooted trees, for example listing all nine arrangements of five bags."
 }

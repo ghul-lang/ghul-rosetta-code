@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiplication_tables",
     "status": "published",
     "tags": ["maths", "basics", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print a formatted 12 by 12 multiplication table, showing only the upper triangle of products."
 }

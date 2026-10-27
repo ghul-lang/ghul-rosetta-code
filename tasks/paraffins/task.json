@@ -6,5 +6,6 @@
     "algorithms",
     "recursion"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Enumerate all paraffin (alkane) molecular structures with a given number of carbon atoms, without repeats, and count the isomers."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Klarner-Rado_sequence",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the Klarner-Rado sequence, a sparse ascending sequence built from rules involving 2n+1 and 3n+1, and show terms at chosen positions."
 }

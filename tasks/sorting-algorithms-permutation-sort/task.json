@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Permutation_sort",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort a list by generating its permutations in turn until the sorted arrangement is found."
 }

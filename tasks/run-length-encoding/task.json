@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Run-length_encoding",
     "status": "published",
     "tags": ["text-processing", "strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encode a string of uppercase letters by replacing each run of repeated characters with its length, and decode it back."
 }

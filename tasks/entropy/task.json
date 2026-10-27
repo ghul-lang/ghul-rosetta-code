@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Entropy",
     "status": "published",
     "tags": ["maths", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate the Shannon entropy in bits per symbol of an input string, checking the result for the string 1223334444."
 }

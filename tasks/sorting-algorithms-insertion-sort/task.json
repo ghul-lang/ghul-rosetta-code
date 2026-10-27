@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort integers by inserting each element into the already-sorted prefix, shifting larger values up to make room."
 }

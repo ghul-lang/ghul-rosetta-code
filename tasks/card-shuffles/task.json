@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Card_shuffles",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement riffle and overhand shuffles of a deck for a number of iterations, and compare them with a built-in shuffle."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Short-circuit_evaluation",
     "status": "published",
     "tags": ["basics", "operators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show that the second of two boolean functions is called only when needed by evaluating conjunctions and disjunctions whose functions print their names."
 }

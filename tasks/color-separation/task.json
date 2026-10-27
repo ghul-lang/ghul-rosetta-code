@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Color_separation",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Split an image into one layer per primary color in the RGB, CMY and CMYK color models."
 }

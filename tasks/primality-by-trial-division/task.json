@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Primality_by_trial_division",
     "status": "published",
     "tags": ["primes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Implement a boolean test for primality using trial division, skipping even numbers above two."
 }

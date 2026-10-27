@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Doomsday_rule",
     "status": "published",
     "tags": ["date-time", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Calculate the day of the week for a list of dates using Conway's Doomsday rule and its anchor-day method."
 }

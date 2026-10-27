@@ -6,5 +6,6 @@
         "strings",
         "operators"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert an IPv4 address in CIDR notation to its canonical form by clearing the host bits, such as 87.70.141.1/22 becoming 87.70.140.0/22."
 }

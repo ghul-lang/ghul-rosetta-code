@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pierpont_primes",
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find Pierpont primes of both kinds, showing the first 50 of each and the 250th of each."
 }

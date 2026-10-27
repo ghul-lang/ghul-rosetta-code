@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/De_Bruijn_sequences",
     "status": "published",
     "tags": ["algorithms", "recursion", "strings"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate a de Bruijn sequence for four-digit PIN codes and check which codes it contains, before and after reversal and a digit change."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sylvester's_sequence",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first ten terms of Sylvester's sequence and sum their reciprocals as an exact fraction."
 }

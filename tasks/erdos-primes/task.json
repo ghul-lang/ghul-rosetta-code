@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Erdős-primes",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all Erdős primes below 2500, primes for which every difference p minus a smaller factorial is composite, and optionally count them."
 }

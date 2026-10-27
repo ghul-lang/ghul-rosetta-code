@@ -6,5 +6,6 @@
     "strings",
     "dotnet-interop"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Check whether a string is a valid International Securities Identification Number by testing its format and its checksum."
 }

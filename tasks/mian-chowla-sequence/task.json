@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mian-Chowla_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the Mian-Chowla sequence, a Sidon sequence where each new term is the smallest integer keeping all pairwise sums distinct."
 }

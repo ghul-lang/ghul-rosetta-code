@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic/Integer",
     "status": "published",
     "tags": ["basics", "interactive", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read two integers from the user and display their sum, difference, product, quotient, remainder and power, noting rounding and sign rules."
 }

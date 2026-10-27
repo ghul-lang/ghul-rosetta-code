@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pseudo-random_numbers/Middle-square_method",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement the middle-square pseudo-random number generator, producing six-digit values, and show the first five from a known seed."
 }

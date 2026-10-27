@@ -5,5 +5,6 @@
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "first_output_ms": 1934,
-    "run_ms": 4654
+    "run_ms": 4654,
+    "summary": "Find, for each n from 0 to 49, the least positive m that makes n! + m prime."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Nested",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Search a two-dimensional array of random numbers from 1 to 20 with nested loops, printing elements until a 20 is found and breaking out of both loops."
 }

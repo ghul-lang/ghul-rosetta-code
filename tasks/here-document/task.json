@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Here_document",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to write a multi-line text block that keeps its line breaks and indentation, delimited by a closing token."
 }

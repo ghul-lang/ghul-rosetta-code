@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gosper's_hack",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement Gosper's Hack to find the next larger integer of equal Hamming weight, and apply it ten times to small numbers."
 }

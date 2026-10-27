@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Elementary_cellular_automaton/Infinite_length",
     "status": "published",
     "tags": ["simulation", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Run an elementary cellular automaton on an infinite row, stored as a finite block whose remaining cells are the negation of the nearest block cell."
 }

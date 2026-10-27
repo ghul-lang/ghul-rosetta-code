@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Palindrome_detection",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Check whether a string is a palindrome, including a looser test that ignores spaces, punctuation and letter case."
 }

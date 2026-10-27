@@ -6,5 +6,6 @@
     "date-time",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the next 15 palindromic dates in the yyyy-mm-dd format, where the eight digits read the same backwards."
 }

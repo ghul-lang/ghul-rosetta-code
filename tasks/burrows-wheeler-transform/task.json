@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Burrows–Wheeler_transform",
     "status": "published",
     "tags": ["algorithms", "strings", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the Burrows-Wheeler transform, which rearranges a string into runs of similar characters to help compression."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Do-while",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print an incrementing value starting at zero, looping until it reaches a multiple of six, with the body running at least once."
 }

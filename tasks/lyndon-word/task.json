@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Lyndon_word",
     "status": "published",
     "tags": ["algorithms", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "List all Lyndon words up to a given length over an ordered alphabet, in lexicographic order, using Duval's algorithm."
 }

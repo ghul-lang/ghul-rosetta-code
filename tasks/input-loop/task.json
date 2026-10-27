@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Input_loop",
     "status": "published",
     "tags": ["interactive", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read a text stream line by line or word by word until it runs out of data."
 }

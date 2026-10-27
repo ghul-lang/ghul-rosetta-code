@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Truncatable_primes",
     "status": "published",
     "tags": ["primes", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the largest left-truncatable and right-truncatable primes below one million."
 }

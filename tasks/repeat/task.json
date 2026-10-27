@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Repeat",
     "status": "published",
     "tags": ["basics", "closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a procedure that receives a function and a count, and calls the function that many times."
 }

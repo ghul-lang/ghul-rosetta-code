@@ -7,5 +7,6 @@
         "pipes"
     ],
     "interest": 3,
-    "run_ms": 649
+    "run_ms": 649,
+    "summary": "Find arithmetic numbers, positive integers whose divisors average to an integer, and count the composite ones among the earliest ones."
 }

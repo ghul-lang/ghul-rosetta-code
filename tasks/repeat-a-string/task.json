@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Repeat_a_string",
     "status": "published",
     "tags": ["strings", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Repeat a string a given number of times, and optionally show a simpler way to repeat a single character."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Singly-linked_list/Element_definition",
     "status": "published",
     "tags": ["data-structures", "generics", "classes", "optionals"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Define a data structure for a singly-linked list element holding a numeric value and a mutable link to the next element."
 }

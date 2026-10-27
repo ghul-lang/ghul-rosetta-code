@@ -8,5 +8,6 @@
         "algorithms"
     ],
     "interest": 4,
-    "run_ms": 18310
+    "run_ms": 18310,
+    "summary": "Find the largest left-truncatable prime in a given base, building candidates by prepending digits to smaller primes."
 }

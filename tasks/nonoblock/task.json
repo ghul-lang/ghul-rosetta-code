@@ -7,5 +7,6 @@
     "generators",
     "recursion"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Enumerate every placement of contiguous blocks of given sizes within a row of cells, and show the number of positions for several cases."
 }

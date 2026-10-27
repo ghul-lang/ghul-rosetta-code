@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Variadic_function",
     "status": "published",
     "tags": ["basics", "generics", "classes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that accepts any number of arguments and prints each on its own line, then call it with a list built at runtime."
 }

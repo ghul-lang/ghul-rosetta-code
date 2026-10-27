@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/History_variables",
     "status": "published",
     "tags": ["generics", "data-structures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement history variables that store every value assigned to them, so the full history can be displayed and earlier values recalled."
 }

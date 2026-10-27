@@ -8,5 +8,6 @@
   ],
   "interest": 2,
     "first_output_ms": 651,
-    "run_ms": 651
+    "run_ms": 651,
+    "summary": "Build a library with a hailstone function that also runs as a command-line program, and use it from a second program."
 }

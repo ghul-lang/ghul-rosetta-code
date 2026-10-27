@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_append",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Append a string literal to a string variable using the most natural construct, then show the result."
 }

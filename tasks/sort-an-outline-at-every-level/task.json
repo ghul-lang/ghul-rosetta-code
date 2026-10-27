@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_an_outline_at_every_level",
     "status": "published",
     "tags": ["sorting", "data-structures", "unions", "optionals", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort each level of an indented plain-text outline lexically, ascending or descending, and detect inconsistent indentation characters or widths."
 }

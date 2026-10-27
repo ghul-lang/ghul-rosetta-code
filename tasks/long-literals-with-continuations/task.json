@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Long_literals,_with_continuations",
     "status": "published",
     "tags": ["strings", "basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a program that stores the chemical element names in one long literal spread across lines, then reports the count and last element."
 }

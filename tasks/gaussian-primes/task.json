@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gaussian_primes",
     "status": "published",
     "tags": ["number-theory", "primes", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Find the Gaussian primes with norm under 100 and plot primes on a plane out to radius 50."
 }

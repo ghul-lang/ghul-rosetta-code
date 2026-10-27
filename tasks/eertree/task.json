@@ -7,5 +7,6 @@
         "strings",
         "classes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build an eertree, a data structure for palindromes, from the string eertree and list its sub-palindromes by traversing it."
 }

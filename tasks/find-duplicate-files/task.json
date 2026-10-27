@@ -6,5 +6,6 @@
     "text-processing",
     "pipes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find groups of identical files under a directory that are at least a minimum size, listed from largest to smallest."
 }

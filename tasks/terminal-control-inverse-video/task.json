@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Inverse_video",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Display one word in inverse video followed by another word in normal video on the terminal."
 }

@@ -5,5 +5,6 @@
     "tags": ["number-theory", "generators"],
     "interest": 2,
     "first_output_ms": 4629,
-    "run_ms": 8735
+    "run_ms": 8735,
+    "summary": "Find integers whose digit sum, raised to some power, equals the original integer, listing the first twenty and their exponents."
 }

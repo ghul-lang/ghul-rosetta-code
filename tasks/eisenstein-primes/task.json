@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Eisenstein_primes",
     "status": "published",
     "tags": ["primes", "maths", "graphics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Find the first 100 Eisenstein primes ordered by norm and show their complex values, with a stretch goal of plotting 2000 of them."
 }

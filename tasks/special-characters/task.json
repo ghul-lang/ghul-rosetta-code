@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Special_characters",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "List the special characters that have built-in meaning and show the escape sequence that makes each one literal."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Doubly-linked_list/Traversal",
     "status": "published",
     "tags": ["data-structures", "classes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Traverse a doubly linked list from its head to its tail and then back again from tail to head."
 }

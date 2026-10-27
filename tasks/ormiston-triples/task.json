@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
     "interest": 3,
-    "run_ms": 16487
+    "run_ms": 16487,
+    "summary": "Find the smallest members of the first 25 Ormiston triples, three consecutive primes that are digit anagrams, and count those up to one billion."
 }

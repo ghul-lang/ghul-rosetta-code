@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sort_stability",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Report which built-in sorting routines are available and whether each one preserves the order of records with equal keys."
 }

@@ -7,5 +7,6 @@
         "pipes",
         "data-structures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Check the field format of a pollution-monitoring data file, find duplicated datestamps and count records with good readings for every instrument."
 }

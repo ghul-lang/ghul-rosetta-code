@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tokenize_a_string",
     "status": "published",
     "tags": ["strings", "text-processing"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Split the comma-separated string Hello,How,Are,You,Today into an array of words and display them joined by periods."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Factorize_string_into_Lyndon_words",
     "status": "published",
     "tags": ["algorithms", "strings", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Split a string into a non-decreasing sequence of Lyndon words, a factorization that Duval's algorithm computes in linear time."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sum_of_squares",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find the sum of the squares of the numbers in a vector, returning zero for an empty vector."
 }

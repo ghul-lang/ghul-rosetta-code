@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stern-Brocot_sequence",
     "status": "published",
     "tags": ["number-theory", "pipes", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the Stern-Brocot sequence by inserting sums of neighbouring terms, then report its opening terms and where small numbers first appear."
 }

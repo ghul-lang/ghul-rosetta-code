@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Odd_word_problem",
     "status": "published",
     "tags": ["strings", "recursion", "parsing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Reverse every other word in a stream of letters and punctuation, reading one character at a time and keeping no collection of characters."
 }

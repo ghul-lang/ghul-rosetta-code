@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Associative_array/Iteration",
     "status": "published",
     "tags": ["data-structures", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Iterate over the key-value pairs of an associative array, printing each one, and also iterate over only its keys or values."
 }

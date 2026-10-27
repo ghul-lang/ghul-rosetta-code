@@ -6,5 +6,6 @@
         "maths",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Normalize angles to within a full turn and convert between degrees, gradians, mils and radians."
 }

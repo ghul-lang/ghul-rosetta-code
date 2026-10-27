@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sockets",
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Open a socket to localhost on port 256 and send a short greeting message before closing it."
 }

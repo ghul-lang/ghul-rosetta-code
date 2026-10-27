@@ -7,5 +7,6 @@
         "number-theory"
     ],
     "interest": 4,
-    "run_ms": 55847
+    "run_ms": 55847,
+    "summary": "Find the repunits that are prime in each base from two to sixteen, listing their digit counts up to 1000."
 }

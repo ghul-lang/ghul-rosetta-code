@@ -7,5 +7,6 @@
     "recursion",
     "classes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Build a table of sine, cosine and tangent values, invert each with Thiele's continued-fraction interpolation, and check three identities that give pi."
 }

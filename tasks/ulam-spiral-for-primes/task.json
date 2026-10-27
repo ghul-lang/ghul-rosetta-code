@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ulam_spiral_(for_primes)",
     "status": "published",
     "tags": ["graphics", "primes", "generators"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw an Ulam prime spiral on an N by N grid, marking prime numbers with a dot and leaving other cells blank, starting from a chosen number."
 }

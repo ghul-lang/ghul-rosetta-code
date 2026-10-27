@@ -6,5 +6,6 @@
     "dotnet-interop",
     "optionals"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Look up the manufacturer of a MAC address by calling a web API, returning N/A for unknown addresses."
 }

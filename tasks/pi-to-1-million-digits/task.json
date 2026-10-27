@@ -8,5 +8,6 @@
     "recursion"
   ],
   "interest": 4,
-    "run_ms": 15267
+    "run_ms": 15267,
+    "summary": "Compute pi to one million decimal places and show the first and last digits, timing the calculation."
 }

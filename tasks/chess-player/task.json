@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["game", "interactive", "algorithms"],
     "interest": 5,
-    "run_ms": 1521
+    "run_ms": 1521,
+    "summary": "Write a text-based chess program that plays against a human, which may be split into move generation, search and interface parts."
 }

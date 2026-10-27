@@ -7,5 +7,6 @@
         "text-processing",
         "unions"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Parse an ASCII-art bit diagram of the RFC 1035 message header into a data structure that decodes headers with that layout."
 }

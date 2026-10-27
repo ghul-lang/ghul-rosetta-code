@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Downward_for",
     "status": "published",
     "tags": ["basics", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a for loop that counts down from 10 to 0 and prints each value."
 }

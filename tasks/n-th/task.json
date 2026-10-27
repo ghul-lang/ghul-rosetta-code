@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/N'th",
     "status": "published",
     "tags": ["strings", "pattern-matching", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a function that appends the correct English ordinal suffix to an integer, and show the results for several ranges."
 }

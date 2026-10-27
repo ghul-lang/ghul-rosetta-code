@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multifactorial",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute multifactorials of any degree, and show a table of the first ten members for the first five degrees."
 }

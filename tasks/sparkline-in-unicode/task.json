@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sparkline_in_unicode",
     "status": "published",
     "tags": ["graphics", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a sparkline of a list of numbers using the eight Unicode block characters, with values separated by spaces or commas."
 }

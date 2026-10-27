@@ -6,5 +6,6 @@
     "number-theory",
     "primes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Generate the sequence whose nth term is the nth number that has exactly n divisors, showing at least the first fifteen terms."
 }

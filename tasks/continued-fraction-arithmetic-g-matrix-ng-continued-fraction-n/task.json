@@ -6,5 +6,6 @@
     "maths",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Apply the matrix NG method to a single continued fraction to perform arithmetic such as adding one half, then compute one over root two."
 }

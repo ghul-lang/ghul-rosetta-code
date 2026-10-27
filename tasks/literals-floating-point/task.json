@@ -6,5 +6,6 @@
         "basics",
         "maths"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show the floating-point literal forms available, including exponent notation, other bases and special features."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sealed_classes_and_methods",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Explain how the language supports sealed classes and methods that cannot be inherited, or how to simulate them if it does not."
 }

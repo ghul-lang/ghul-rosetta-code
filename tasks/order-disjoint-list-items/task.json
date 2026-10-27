@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Order_disjoint_list_items",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Reorder the matching items in a list to follow a second list's order, leaving the rest of the list in place."
 }

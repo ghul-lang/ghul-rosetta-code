@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Middle_three_digits",
     "status": "published",
     "tags": ["unions", "pattern-matching", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Return the middle three digits of an integer, or an error when there is no single middle group, and test it on sample values."
 }

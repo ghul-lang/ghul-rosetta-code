@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Extreme_floating_point_values",
     "status": "published",
     "tags": ["maths", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Produce extreme floating-point values such as negative zero, NaN and infinities from ordinary expressions, then print them and do arithmetic with them."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Horner's_rule_for_polynomial_evaluation",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a routine that evaluates a polynomial from its coefficients in increasing powers, using Horner's rule at a given value of x."
 }

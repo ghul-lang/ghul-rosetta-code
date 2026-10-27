@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Comments",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show every way that source text can be marked as a comment and ignored by the compiler or interpreter."
 }

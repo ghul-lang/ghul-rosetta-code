@@ -7,5 +7,6 @@
         "generators",
         "data-structures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate random text by building a Markov chain from a training text, where each word is chosen from the words that followed the previous N words."
 }

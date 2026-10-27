@@ -6,5 +6,6 @@
     "algorithms",
     "classes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Implement the xpat2 subtractive random number generator, seeded with Bentley's method, and reproduce the sequences it produces."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Heapsort",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that sorts a collection of integers with heapsort, building a max-heap and repeatedly removing its largest element."
 }

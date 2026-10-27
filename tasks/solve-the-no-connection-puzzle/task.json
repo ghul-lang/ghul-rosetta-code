@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Solve_the_no_connection_puzzle",
     "status": "published",
     "tags": ["puzzles", "generators"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Solve the no connection puzzle by placing pegs numbered one to eight so that no two connected holes hold adjacent numbers."
 }

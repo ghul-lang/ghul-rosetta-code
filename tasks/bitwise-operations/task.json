@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitwise_operations",
     "status": "published",
     "tags": ["number-theory", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write routines for bitwise AND, OR, XOR, NOT, shifts and rotations on integers, noting any the language lacks."
 }

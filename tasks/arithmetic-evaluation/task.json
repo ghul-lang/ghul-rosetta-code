@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic_evaluation",
     "status": "published",
     "tags": ["parsing", "interactive", "unions", "pattern-matching", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Parse and evaluate arithmetic expressions with the four basic operators and parentheses, by building and walking a syntax tree."
 }

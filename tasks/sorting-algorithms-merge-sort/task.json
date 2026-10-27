@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Merge_sort",
     "status": "published",
     "tags": ["sorting", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a recursive merge sort for a collection of integers, splitting it in halves and merging the sorted parts."
 }

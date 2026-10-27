@@ -6,5 +6,6 @@
     "puzzles",
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Build a 6 by 6 magic square, a singly even order case that needs a different construction from odd orders."
 }

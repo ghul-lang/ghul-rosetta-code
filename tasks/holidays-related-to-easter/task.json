@@ -5,5 +5,6 @@
   "tags": [
     "date-time"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Calculate the dates of Easter and related church feasts for given years, using the computus appropriate to each calendar."
 }

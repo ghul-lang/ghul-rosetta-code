@@ -5,5 +5,6 @@
   "tags": [
     "basics"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Show how to use the Greek letter delta in a variable name by setting it to 1, incrementing it and printing it."
 }

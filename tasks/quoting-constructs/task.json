@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Quoting_constructs",
     "status": "published",
     "tags": ["strings", "basics"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Show the quoting constructs for embedding literal data, explaining where each is used, its limits and whether it interpolates."
 }

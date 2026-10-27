@@ -7,5 +7,6 @@
     "concurrency",
     "text-processing"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Write a function that sends an email from given sender, recipient, copy, subject and message parameters, and explains what it reports on success or failure."
 }

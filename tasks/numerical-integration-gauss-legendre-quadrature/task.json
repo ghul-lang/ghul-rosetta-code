@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numerical_integration/Gauss-Legendre_Quadrature",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the nodes and weights of a Gauss-Legendre quadrature rule and use them to approximate a definite integral."
 }

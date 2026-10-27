@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Walk_a_directory/Recursively",
     "status": "published",
     "tags": ["dotnet-interop", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Walk a directory tree recursively and print the names of files that match a given pattern."
 }

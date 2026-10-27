@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Events",
     "status": "published",
     "tags": ["concurrency", "async", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how to implement a manual-reset event, signaling it after one second so a waiting task is released."
 }

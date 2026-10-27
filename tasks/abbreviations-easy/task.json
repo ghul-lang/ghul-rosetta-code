@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Abbreviations,_easy",
     "status": "published",
     "tags": ["text-processing", "pipes", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Validate user words against a command table whose abbreviations need at least as many letters as its capitals, returning the uppercase command or an error marker."
 }

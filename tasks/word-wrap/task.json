@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Word_wrap",
     "status": "published",
     "tags": ["text-processing", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Wrap a paragraph of text at a given column using a simple greedy algorithm, showing it at two different widths."
 }

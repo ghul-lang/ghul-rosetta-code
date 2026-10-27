@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pick_random_element",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to pick a random element from a list."
 }

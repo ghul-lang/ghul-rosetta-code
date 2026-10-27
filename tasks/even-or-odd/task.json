@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Even_or_odd",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Test whether an integer is even or odd using a built-in predicate, bitwise and, division remainder or modular congruence."
 }

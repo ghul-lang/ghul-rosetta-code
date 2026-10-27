@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Undefined_values",
     "status": "published",
     "tags": ["optionals", "basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how to test a variable for an undefined value and manipulate that status."
 }

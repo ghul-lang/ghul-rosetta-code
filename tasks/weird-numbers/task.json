@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Weird_numbers",
     "status": "published",
     "tags": ["number-theory", "recursion", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first 25 weird numbers, which are abundant yet have no subset of proper divisors summing to them."
 }

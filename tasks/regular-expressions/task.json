@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Regular_expressions",
     "status": "published",
     "tags": ["strings", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Use a regex to test whether text matches a pattern and to replace the matching part of a string."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Reverse_words_in_a_string",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Flip the sequence of whitespace-separated tokens within each of several strings, leaving each token's characters unchanged."
 }

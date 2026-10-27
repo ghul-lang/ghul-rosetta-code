@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "classes"],
     "interest": 3,
-    "run_ms": 886
+    "run_ms": 886,
+    "summary": "Simulate site percolation on a 15-by-15 grid of randomly filled cells, estimating how often a filled route crosses from top to bottom."
 }

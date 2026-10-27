@@ -5,5 +5,6 @@
     "tags": ["number-theory", "primes"],
     "interest": 3,
     "first_output_ms": 767,
-    "run_ms": 811
+    "run_ms": 811,
+    "summary": "Find the first 30 Ormiston pairs, consecutive primes that are digit anagrams of each other, and count those up to one million."
 }

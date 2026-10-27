@@ -7,5 +7,6 @@
     "dotnet-interop",
     "date-time"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Show the notes file when run without arguments, or append a timestamped line of arguments to it when given arguments."
 }

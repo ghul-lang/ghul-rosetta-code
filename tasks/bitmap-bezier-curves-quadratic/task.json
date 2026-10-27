@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Bézier_curves/Quadratic",
     "status": "published",
     "tags": ["graphics", "maths", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a quadratic Bézier curve onto a raster image, using the bitmap type and a line-drawing routine."
 }

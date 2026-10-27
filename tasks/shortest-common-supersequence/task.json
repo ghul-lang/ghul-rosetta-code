@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Shortest_common_supersequence",
     "status": "published",
     "tags": ["algorithms", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the shortest string that contains two given strings as subsequences, and print the result for abcbdab and bdcaba."
 }

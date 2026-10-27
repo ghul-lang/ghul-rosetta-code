@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Check_if_a_polygon_overlaps_with_a_rectangle",
     "status": "published",
     "tags": ["maths", "algorithms", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Check whether a polygon, given by its vertices, intersects a rectangle given as x, y, width and height."
 }

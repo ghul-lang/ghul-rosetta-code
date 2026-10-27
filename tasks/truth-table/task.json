@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Truth_table",
     "status": "published",
     "tags": ["unions", "pattern-matching", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a Boolean expression from the user, in infix or reverse Polish notation, and print its truth table for any number of variables."
 }

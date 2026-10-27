@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 2808,
-    "run_ms": 2838
+    "run_ms": 2838,
+    "summary": "Find the indices n for which the product of the first n primes, plus or minus one, is prime, showing the first ten."
 }

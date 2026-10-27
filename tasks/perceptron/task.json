@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Perceptron",
     "status": "published",
     "tags": ["algorithms", "graphics", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a perceptron that learns to classify random points as above or below a line, and display the result visually."
 }

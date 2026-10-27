@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/UTF-8_encode_and_decode",
     "status": "published",
     "tags": ["text-processing", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encode Unicode code points into UTF-8 byte sequences and decode them back, demonstrated on five sample characters."
 }

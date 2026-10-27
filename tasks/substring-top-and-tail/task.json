@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Substring/Top_and_tail",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Remove the first character, the last character, or both from a string, working on code points rather than code units."
 }

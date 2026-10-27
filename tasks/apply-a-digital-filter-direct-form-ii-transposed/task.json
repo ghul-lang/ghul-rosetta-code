@@ -6,5 +6,6 @@
         "maths",
         "algorithms"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Filter a 20-sample signal with an order-3 Butterworth low-pass filter in direct form II transposed, using given coefficients."
 }

@@ -6,5 +6,6 @@
         "maths",
         "operators"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute where a 3D ray, defined by a start point and direction, meets an infinite plane."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/User_defined_pipe_and_redirection_operators",
     "status": "published",
     "tags": ["pipes", "operators", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Define custom pipe and redirection operators, plus cat, tee, grep and uniq filters, that pass records along one at a time."
 }

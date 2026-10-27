@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Monads/List_monad",
     "status": "published",
     "tags": ["pipes", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a list monad with bind and pure operations, then compose two functions that return lists using bind."
 }

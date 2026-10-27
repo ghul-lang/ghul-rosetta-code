@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap/Histogram",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Add histogram support to a raster image type, then use it to turn a grayscale image into black and white art based on its median luminance."
 }

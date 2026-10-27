@@ -7,5 +7,6 @@
     "data-structures",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Repeatedly merge the two smallest items of a list into their sum appended at the end until one element remains."
 }

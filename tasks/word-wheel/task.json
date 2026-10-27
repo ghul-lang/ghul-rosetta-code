@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Word_wheel",
     "status": "published",
     "tags": ["puzzles", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all words of three or more letters that can be formed from a nine-letter wheel, each containing its central letter, using a dictionary."
 }

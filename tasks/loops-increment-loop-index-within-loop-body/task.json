@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/Increment_loop_index_within_loop_body",
     "status": "published",
     "tags": ["number-theory", "primes", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count primes from 42 upward, skipping ahead by each prime found, until 42 primes are shown, modifying the loop index in the body."
 }

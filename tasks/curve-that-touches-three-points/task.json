@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Curve_that_touches_three_points",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw a curve through three given points, starting at one, passing a medium point and ending at the third, without library curve functions."
 }

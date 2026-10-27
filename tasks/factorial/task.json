@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Factorial",
     "status": "published",
     "tags": ["maths", "recursion"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that returns the factorial of a number, computed iteratively or recursively, with optional handling of negative input."
 }

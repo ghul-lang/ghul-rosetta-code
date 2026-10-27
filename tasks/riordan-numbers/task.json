@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Riordan_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the first thirty-two Riordan numbers, then report digit counts for the 1,000th and 10,000th."
 }

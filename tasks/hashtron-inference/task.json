@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hashtron_inference",
     "status": "published",
     "tags": ["algorithms", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement Hashtron classifier inference, which computes outputs from a program configuration, and use it to produce a 64-bit test value and byte square roots."
 }

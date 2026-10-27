@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Accumulator_factory",
     "status": "published",
     "tags": ["basics", "closures", "generics", "unions"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a function that returns an accumulator, a running-sum function that keeps adding every number it is given and works with ints and floats."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Random_number_generator_(included)",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Name the type of algorithm the default RNG uses, and link to an explanation of it."
 }

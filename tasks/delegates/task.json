@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Delegates",
     "status": "published",
     "tags": ["classes", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a delegator object that forwards a named operation to an optional delegate, falling back to a default when the delegate lacks it."
 }

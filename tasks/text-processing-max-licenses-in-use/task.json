@@ -6,5 +6,6 @@
     "text-processing",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Scan a software license log for checkout and checkin events to find the maximum number of licenses in use and when."
 }

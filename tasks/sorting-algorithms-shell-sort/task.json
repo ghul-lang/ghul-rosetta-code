@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort",
     "status": "published",
     "tags": ["sorting"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sort an array with Shell sort, running insertion sort over a decreasing sequence of gaps until the gap reaches one."
 }

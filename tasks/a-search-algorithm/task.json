@@ -7,5 +7,6 @@
         "graphics",
         "generators"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Find the lowest-cost route across an 8 by 8 grid with a barrier, using the A* search algorithm, and print it."
 }

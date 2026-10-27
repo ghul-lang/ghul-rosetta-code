@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vector_products",
     "status": "published",
     "tags": ["maths", "operators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the dot product, cross product, scalar triple product and vector triple product of three given 3D vectors."
 }

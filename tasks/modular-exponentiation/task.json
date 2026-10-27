@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Modular_exponentiation",
     "status": "published",
     "tags": ["maths", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the last 40 decimal digits of a very large power using fast modular exponentiation."
 }

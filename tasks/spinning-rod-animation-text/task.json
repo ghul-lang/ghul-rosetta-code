@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["graphics", "dotnet-interop"],
     "interest": 4,
-    "run_ms": 2136
+    "run_ms": 2136,
+    "summary": "Animate a four-frame spinning rod with a 0.25 second delay, clearing each frame before the next is drawn."
 }

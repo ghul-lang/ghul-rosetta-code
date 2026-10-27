@@ -6,5 +6,6 @@
         "algorithms",
         "data-structures"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Compute a maximum matching in a general graph using Edmonds' blossom algorithm, which handles odd cycles by shrinking them."
 }

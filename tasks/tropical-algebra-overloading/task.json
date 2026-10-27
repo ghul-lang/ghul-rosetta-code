@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tropical_algebra_overloading",
     "status": "published",
     "tags": ["maths", "classes", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define max-plus tropical addition and multiplication as operators, then check several identities including distributivity and exponentiation."
 }

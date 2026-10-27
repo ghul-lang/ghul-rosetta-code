@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/JSON_pointer",
     "status": "published",
     "tags": ["parsing", "unions", "pattern-matching", "pipes", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Resolve RFC 6901 JSON Pointers against a sample JSON document, returning the addressed value or an error for invalid pointers."
 }

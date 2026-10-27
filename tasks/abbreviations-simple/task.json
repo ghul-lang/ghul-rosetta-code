@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Abbreviations,_simple",
     "status": "published",
     "tags": ["text-processing", "pipes", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Validate user words against a command table that gives each command an explicit minimum abbreviation length, returning the uppercase command or an error marker."
 }

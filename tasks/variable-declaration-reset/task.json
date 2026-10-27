@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Variable_declaration_reset",
     "status": "published",
     "tags": ["basics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show which elements match their preceding element in a short list, to reveal whether a block-scoped variable is reset on each loop iteration."
 }

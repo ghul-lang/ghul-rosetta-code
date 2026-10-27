@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bell_numbers",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate the Bell numbers, the counts of ways to partition a set, showing the first 15, the 50th, and optionally the Bell triangle."
 }

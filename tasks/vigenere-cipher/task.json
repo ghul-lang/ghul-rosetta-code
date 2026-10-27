@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vigenère_cipher",
     "status": "published",
     "tags": ["strings", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Encrypt and decrypt text with a Vigenère cipher, handling keys shorter or longer than the text and discarding non-alphabetic characters."
 }

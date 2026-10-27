@@ -7,5 +7,6 @@
         "recursion",
         "text-processing"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a generator that, given a word list and a seed word or phrase, produces anagrams of the seed."
 }

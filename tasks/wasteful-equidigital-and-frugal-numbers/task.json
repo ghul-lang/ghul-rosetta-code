@@ -5,5 +5,6 @@
     "tags": ["number-theory", "unions", "pattern-matching", "classes"],
     "interest": 2,
     "first_output_ms": 954,
-    "run_ms": 1287
+    "run_ms": 1287,
+    "summary": "Classify numbers as wasteful, equidigital or frugal by comparing their digit counts with those of their prime factorisations, and count each category."
 }

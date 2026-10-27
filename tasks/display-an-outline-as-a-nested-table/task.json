@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Display_an_outline_as_a_nested_table",
     "status": "published",
     "tags": ["data-structures", "classes", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert an indented text outline into a nested HTML or wiki table, with cells spanning the number of leaves under each node."
 }

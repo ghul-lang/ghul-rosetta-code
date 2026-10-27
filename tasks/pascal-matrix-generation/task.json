@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Pascal_matrix_generation",
     "status": "published",
     "tags": ["maths", "closures"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate upper, lower and symmetric Pascal matrices of size n using binomial coefficients, and display the 5-by-5 forms."
 }

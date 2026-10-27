@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Morpion_solitaire",
     "status": "published",
     "tags": ["game", "graphics", "simulation"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Play random legal games of Morpion solitaire, a pencil-and-paper puzzle on an unbounded grid, and show each game's moves."
 }

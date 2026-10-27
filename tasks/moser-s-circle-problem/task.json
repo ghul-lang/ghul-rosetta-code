@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Moser's_circle_problem",
     "status": "published",
     "tags": ["maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the values of Moser's circle problem, the maximum number of regions made by chords between n points on a circle, in two ways."
 }

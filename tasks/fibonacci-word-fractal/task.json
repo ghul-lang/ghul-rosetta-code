@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fibonacci_word/fractal",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw the Fibonacci word fractal by moving forward for each character and turning on each zero by index parity."
 }

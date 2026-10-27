@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Extend_your_language",
     "status": "published",
     "tags": ["closures", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to add a new control-flow construct to the language, such as a four-way branch that takes two conditions."
 }

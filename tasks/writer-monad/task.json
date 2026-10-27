@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Monads/Writer_monad",
     "status": "published",
     "tags": ["algorithms", "generics", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a Writer monad with bind and unit, then compose Writer versions of root, addOne and half to get the golden ratio with a log."
 }

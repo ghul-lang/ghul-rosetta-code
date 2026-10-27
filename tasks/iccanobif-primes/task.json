@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Iccanobif_primes",
     "status": "published",
     "tags": ["number-theory", "primes", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the first ten primes whose reversal is a Fibonacci number, then give the digit counts of the next fifteen."
 }

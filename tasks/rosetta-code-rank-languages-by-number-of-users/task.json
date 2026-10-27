@@ -7,5 +7,6 @@
     "parsing",
     "sorting"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Rank programming languages by how many users are listed for each on a wiki, showing those with at least 100."
 }

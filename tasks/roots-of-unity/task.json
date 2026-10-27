@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Roots_of_unity",
     "status": "published",
     "tags": ["maths", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the nth roots of unity as complex numbers, the solutions of z to the power n equals one."
 }

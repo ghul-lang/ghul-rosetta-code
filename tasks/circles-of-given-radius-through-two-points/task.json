@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Circles_of_given_radius_through_two_points",
     "status": "published",
     "tags": ["maths", "unions", "pattern-matching", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write a function returning the circles of a given radius through two points, handling coincident, diametric and too-distant cases."
 }

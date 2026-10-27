@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multiple_distinct_objects",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create a list of n distinct, initialized objects whose count is set at runtime, and contrast it with the common aliasing mistake."
 }

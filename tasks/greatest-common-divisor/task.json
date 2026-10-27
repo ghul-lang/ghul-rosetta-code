@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Greatest_common_divisor",
     "status": "published",
     "tags": ["maths", "recursion"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find the greatest common divisor of two integers, also called the greatest common factor."
 }

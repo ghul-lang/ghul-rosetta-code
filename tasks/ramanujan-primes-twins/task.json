@@ -8,5 +8,6 @@
     ],
     "interest": 3,
     "first_output_ms": 1853,
-    "run_ms": 2153
+    "run_ms": 2153,
+    "summary": "Count the twins among one million Ramanujan primes, where a twin's partner lies exactly two higher."
 }

@@ -7,5 +7,6 @@
     "maths"
   ],
   "interest": 3,
-    "run_ms": 1653
+    "run_ms": 1653,
+    "summary": "Find Mersenne primes with the Lucas-Lehmer test, up to the 47th one or the limit of available precision."
 }

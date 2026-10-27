@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numerical_integration/Romberg_integration",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Approximate a definite integral by Romberg integration, refining trapezium estimates with Richardson extrapolation until a target accuracy is met."
 }

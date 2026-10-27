@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Floyd's_triangle",
     "status": "published",
     "tags": ["maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Generate the first n rows of Floyd's triangle, a right triangle of consecutive natural numbers, for n equal to 5 and 14."
 }

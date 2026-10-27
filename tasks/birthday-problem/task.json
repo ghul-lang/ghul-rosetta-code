@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "simulation", "graphics"],
     "interest": 4,
-    "run_ms": 1810
+    "run_ms": 1810,
+    "summary": "Estimate by simulation how many random people are needed before two, three, four or five share a birthday with better than even odds."
 }

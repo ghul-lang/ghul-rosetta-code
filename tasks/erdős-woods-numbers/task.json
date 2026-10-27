@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 1756,
-    "run_ms": 2506
+    "run_ms": 2506,
+    "summary": "Compute the first twenty Erdős-Woods numbers with the smallest starting value a for each, where every term shares a factor with an end of its run."
 }

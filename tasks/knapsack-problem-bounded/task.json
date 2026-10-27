@@ -5,5 +5,6 @@
     "tags": [
         "algorithms"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Choose how many copies of each item to pack, up to the available quantity, to maximize total value under a 4 kg weight limit."
 }

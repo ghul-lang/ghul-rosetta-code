@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Chinese_remainder_theorem",
     "status": "published",
     "tags": ["number-theory", "optionals", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve a system of linear congruences with pairwise coprime moduli using the Chinese remainder theorem, returning the least non-negative solution or reporting failure."
 }

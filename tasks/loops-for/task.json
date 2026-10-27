@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/For",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print a right-angled triangle of asterisks, one row longer each line, using one loop nested inside another."
 }

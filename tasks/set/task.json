@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Set",
     "status": "published",
     "tags": ["data-structures", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Demonstrate basic set operations: creating a set, testing membership, union, intersection, difference, subset and equality."
 }

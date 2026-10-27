@@ -6,5 +6,6 @@
     "strings",
     "optionals"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Append the checksum digit to each six-character SEDOL code, and check each input for valid characters."
 }

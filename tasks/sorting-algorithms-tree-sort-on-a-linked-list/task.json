@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Tree_sort_on_a_linked_list",
     "status": "published",
     "tags": ["sorting", "unions", "pattern-matching", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort a doubly linked list by turning it into a binary search tree in place and then relinking it in order."
 }

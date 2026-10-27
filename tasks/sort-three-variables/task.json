@@ -7,5 +7,6 @@
     "generics",
     "basics"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Sort three variables holding arbitrary values, such as numbers or strings, and show the result."
 }

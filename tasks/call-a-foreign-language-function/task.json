@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Call_a_foreign-language_function",
     "status": "published",
     "tags": ["dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how to call a function from a foreign native library, passing it a string and freeing the result."
 }

@@ -5,5 +5,6 @@
     "tags": ["number-theory", "graphics", "generators"],
     "interest": 5,
     "first_output_ms": 584,
-    "run_ms": 630
+    "run_ms": 630,
+    "summary": "Generate the Collatz hailstone sequence for a starting number, verify the sequence for 27, and find the start below 100,000 with the longest sequence."
 }

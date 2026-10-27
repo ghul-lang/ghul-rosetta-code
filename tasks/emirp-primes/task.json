@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Emirp_primes",
     "status": "published",
     "tags": ["primes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find emirps, primes whose digit reversal is a different prime, showing the first twenty, those between 7,700 and 8,000, and the 10,000th."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes"],
     "interest": 2,
-    "run_ms": 591
+    "run_ms": 591,
+    "summary": "Find the first safe and unsafe primes, and count each kind below one million and below ten million."
 }

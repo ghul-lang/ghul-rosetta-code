@@ -5,5 +5,6 @@
     "tags": ["basics", "optionals"],
     "interest": 2,
     "first_output_ms": 741,
-    "run_ms": 758
+    "run_ms": 758,
+    "summary": "Create a program that copies standard input to standard output, as an executable or as a script run by an interpreter."
 }

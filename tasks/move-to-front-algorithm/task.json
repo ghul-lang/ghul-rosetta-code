@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Move-to-front_algorithm",
     "status": "published",
     "tags": ["algorithms", "strings", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encode and decode three strings with the move-to-front transform over a lowercase alphabet, checking that each decoded string matches its original."
 }

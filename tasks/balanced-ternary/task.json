@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Balanced_ternary",
     "status": "published",
     "tags": ["number-theory", "operators", "classes", "pattern-matching"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement balanced ternary integers with arbitrary size, text and native-integer conversion, and arithmetic applied directly to them."
 }

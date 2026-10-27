@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_prepend",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Prepend a string literal to a string variable, using an idiomatic form where one exists, and show the result."
 }

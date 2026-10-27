@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 771,
-    "run_ms": 1594
+    "run_ms": 1594,
+    "summary": "Find every anadrome pair in a word list, pairs of words that spell different words when reversed and have more than six letters."
 }

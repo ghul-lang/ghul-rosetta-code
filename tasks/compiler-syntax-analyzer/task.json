@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/syntax_analyzer",
     "status": "published",
     "tags": ["parsing", "unions"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Parse tokens of a small C-like language into a binary abstract syntax tree and print that tree in a flattened form."
 }

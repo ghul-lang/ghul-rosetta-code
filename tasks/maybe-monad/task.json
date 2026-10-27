@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Monads/Maybe_monad",
     "status": "published",
     "tags": ["unions", "pattern-matching", "generics", "optionals"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Build a Maybe monad with bind and unit operations, then compose two functions that return optional values using bind."
 }

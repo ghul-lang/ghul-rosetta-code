@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/3d_turtle_graphics",
     "status": "published",
     "tags": ["graphics", "operators", "classes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a three-dimensional house with a pyramid roof and a bar chart using turtle-style drawing commands."
 }

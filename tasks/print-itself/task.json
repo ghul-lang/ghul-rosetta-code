@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Print_itself",
     "status": "published",
     "tags": ["basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Make a program print its own source code to standard output."
 }

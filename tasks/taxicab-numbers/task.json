@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Taxicab_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "List the lowest 25 taxicab numbers, each shown with the cubes that sum to it, plus the 2000th and six more."
 }

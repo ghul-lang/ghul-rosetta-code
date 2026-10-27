@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Binomial_transform",
     "status": "published",
     "tags": ["number-theory", "maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement the forward and inverse binomial transforms and apply them to several sequences, showing the first fifteen values of each."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Index_finite_lists_of_positive_integers",
     "status": "published",
     "tags": ["number-theory", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Map finite lists of positive integers to natural numbers and back, with a rank function and its inverse unrank, and round-trip a random list."
 }

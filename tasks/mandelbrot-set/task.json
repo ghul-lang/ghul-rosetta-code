@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mandelbrot_set",
     "status": "published",
     "tags": ["graphics", "fractal", "maths"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Render the Mandelbrot set, a fractal formed by complex numbers whose repeated iteration stays bounded."
 }

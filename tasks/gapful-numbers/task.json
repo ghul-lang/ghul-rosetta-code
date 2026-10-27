@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gapful_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find gapful numbers, which are divisible by the two-digit number their first and last digits form, starting from 100."
 }

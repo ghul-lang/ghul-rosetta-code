@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Box_the_compass",
     "status": "published",
     "tags": ["maths", "pattern-matching", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Map a heading in degrees to one of the thirty-two compass points and print a table of index, point and degree."
 }

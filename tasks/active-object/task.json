@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Active_object",
     "status": "published",
     "tags": ["concurrency", "async", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement an object that integrates its input over real time in a background task, then test it with a sine wave."
 }

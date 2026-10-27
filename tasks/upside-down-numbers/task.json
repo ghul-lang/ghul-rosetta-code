@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Upside-down_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate upside-down numbers, whose outer digit pairs sum to ten, and show the first 50 along with the 500th and 5000th."
 }

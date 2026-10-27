@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "generators"],
     "interest": 3,
-    "run_ms": 2202
+    "run_ms": 2202,
+    "summary": "Generate the first ten Fermat numbers and find prime factors of as many as possible within a short time limit."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/100_prisoners",
     "status": "published",
     "tags": ["simulation", "puzzles"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compare the chance that 100 prisoners all find their own numbers by random drawer picking versus a cycle-following strategy."
 }

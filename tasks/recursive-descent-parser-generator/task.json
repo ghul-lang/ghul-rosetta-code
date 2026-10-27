@@ -5,5 +5,6 @@
     "tags": ["parsing", "text-processing", "unions"],
     "interest": 4,
     "first_output_ms": 1483,
-    "run_ms": 1512
+    "run_ms": 1512,
+    "summary": "Write a generator that turns a grammar description into the source of a recursive descent parser, then use it to produce three-address code."
 }

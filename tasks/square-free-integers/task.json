@@ -7,5 +7,6 @@
     "basics"
   ],
   "interest": 2,
-    "run_ms": 583
+    "run_ms": 583,
+    "summary": "Test whether numbers are square-free and list the square-free integers in a given range, counting them at several scales."
 }

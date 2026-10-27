@@ -6,5 +6,6 @@
     "algorithms",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Generate and validate Verhoeff check digits for integers, optionally showing each digit-by-digit calculation."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Named_parameters",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a function whose arguments are passed by name, and show calls that give the arguments in any order."
 }

@@ -8,5 +8,6 @@
   ],
   "interest": 3,
     "first_output_ms": 580,
-    "run_ms": 895
+    "run_ms": 895,
+    "summary": "Simulate the two-bullet revolver puzzle over four spin and load orderings, reporting the chance of a fatal shot for each."
 }

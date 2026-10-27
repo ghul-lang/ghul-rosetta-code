@@ -7,5 +7,6 @@
         "basics",
         "operators"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Discuss and demonstrate Unicode support, covering literals in source, string handling, input and output, and encodings."
 }

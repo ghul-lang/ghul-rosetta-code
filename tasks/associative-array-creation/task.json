@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Associative_array/Creation",
     "status": "published",
     "tags": ["data-structures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create an associative array, also called a dictionary, map or hash, and populate it with key-value pairs."
 }

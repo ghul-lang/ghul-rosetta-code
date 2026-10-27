@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tau_number",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first 100 tau numbers, the positive integers divisible by their number of divisors."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Erdős-Nicolas_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first eight Erdős-Nicolas numbers, which are not perfect yet equal the sum of their first k divisors, and report k."
 }

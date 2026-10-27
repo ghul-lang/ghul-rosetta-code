@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Return_multiple_values",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show a function handing back two or more results at once, and how the caller receives them."
 }

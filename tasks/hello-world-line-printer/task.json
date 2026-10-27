@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hello_world/Line_printer",
     "status": "solved",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Send the message Hello World! to a line printer attached to the computer, rather than to standard output."
 }

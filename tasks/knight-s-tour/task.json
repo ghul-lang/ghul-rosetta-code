@@ -8,5 +8,6 @@
         "algorithms",
         "pipes"
     ],
-    "interest": 5
+    "interest": 5,
+    "summary": "Find a sequence of legal knight moves that visits every square of an 8 by 8 chessboard exactly once."
 }

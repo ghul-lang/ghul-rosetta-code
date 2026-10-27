@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Trabb_Pardo–Knuth_algorithm",
     "status": "published",
     "tags": ["interactive", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read eleven numbers, then print in reverse order the result of a fixed function, alerting the user when a result exceeds 400."
 }

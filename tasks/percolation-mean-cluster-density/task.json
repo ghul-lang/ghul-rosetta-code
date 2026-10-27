@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "classes"],
     "interest": 3,
-    "run_ms": 1345
+    "run_ms": 1345,
+    "summary": "Estimate the mean density of clusters of ones in random square binary matrices, averaging over repeated runs for growing sizes."
 }

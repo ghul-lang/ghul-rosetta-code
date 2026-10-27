@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Wireworld",
     "status": "published",
     "tags": ["simulation", "graphics", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Animate a Wireworld cellular automaton by reading a circuit layout from a file and stepping its electrons through the grid."
 }

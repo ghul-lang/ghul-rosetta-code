@@ -5,5 +5,6 @@
     "tags": ["maths", "pipes"],
     "interest": 2,
     "first_output_ms": 1558,
-    "run_ms": 1558
+    "run_ms": 1558,
+    "summary": "Find all integer triangle sides from 1 to 13 that satisfy the law of cosines for 60, 90 and 120 degree angles."
 }

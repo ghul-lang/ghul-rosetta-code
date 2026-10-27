@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bifid_cipher",
     "status": "published",
     "tags": ["strings", "classes", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Encrypt and decrypt messages with the Bifid cipher, a Polybius-square cipher using fractionation, and check it on several example messages."
 }

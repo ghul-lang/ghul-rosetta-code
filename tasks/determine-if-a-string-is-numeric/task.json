@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Determine_if_a_string_is_numeric",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write a boolean function that reports whether a string is a valid number in the syntax used for numeric literals, including negatives and decimals."
 }

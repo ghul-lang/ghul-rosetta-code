@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "number-theory", "pipes"],
     "interest": 3,
-    "run_ms": 1784
+    "run_ms": 1784,
+    "summary": "Group prime numbers by their digit anagrams and report the largest anagram groups for each digit length."
 }

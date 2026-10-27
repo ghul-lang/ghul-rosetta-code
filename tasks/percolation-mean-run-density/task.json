@@ -7,5 +7,6 @@
     "maths"
   ],
   "interest": 3,
-    "run_ms": 1559
+    "run_ms": 1559,
+    "summary": "Estimate the mean density of runs of ones in random binary vectors of growing length and compare it with the theoretical value."
 }

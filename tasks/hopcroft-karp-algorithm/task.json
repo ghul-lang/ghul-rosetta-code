@@ -7,5 +7,6 @@
         "data-structures",
         "optionals"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the Hopcroft-Karp algorithm to find a maximum matching in a bipartite graph, using breadth-first and depth-first search phases."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["primes", "pipes"],
     "interest": 3,
-    "run_ms": 916
+    "run_ms": 916,
+    "summary": "Find the first strong and weak primes, which compare each prime with the average of its neighbouring primes, and count them below large limits."
 }

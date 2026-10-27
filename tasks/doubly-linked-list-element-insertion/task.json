@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Doubly-linked_list/Element_insertion",
     "status": "published",
     "tags": ["data-structures", "classes", "generics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Insert element C between A and B in a doubly linked list, using a procedure that keeps the backward links correct."
 }

@@ -5,5 +5,6 @@
     "tags": ["primes", "number-theory"],
     "interest": 2,
     "first_output_ms": 686,
-    "run_ms": 794
+    "run_ms": 794,
+    "summary": "Find primes whose neighboring pair before or after them consists of two tetraprimes, then analyze the gaps between such primes."
 }

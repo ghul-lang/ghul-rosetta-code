@@ -5,5 +5,6 @@
     "tags": ["graphics", "puzzles"],
     "interest": 5,
     "first_output_ms": 1255,
-    "run_ms": 1283
+    "run_ms": 1283,
+    "summary": "Draw a rotating Rubik's cube, though no further detail is given."
 }

@@ -7,5 +7,6 @@
     "maths",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Expand (x-1)^p to get its coefficients, then test primality by checking whether they are all divisible by p."
 }

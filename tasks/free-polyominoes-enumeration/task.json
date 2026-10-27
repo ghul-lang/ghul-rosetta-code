@@ -5,5 +5,6 @@
     "tags": ["puzzles", "algorithms", "graphics"],
     "interest": 4,
     "first_output_ms": 1864,
-    "run_ms": 1941
+    "run_ms": 1941,
+    "summary": "Generate all free polyominoes with n cells, displaying them as coordinates or ASCII art, and count them quickly."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/System_time",
     "status": "solved",
     "tags": ["date-time"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print the current system time, using a system command or a built-in facility, with the units stated."
 }

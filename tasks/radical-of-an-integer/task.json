@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Radical_of_an_integer",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the radical of each integer, multiplying its unique primes, and tally how many have each count of distinct primes."
 }

@@ -6,5 +6,6 @@
     "maths",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Solve Newton's cooling law with Euler's method for step sizes of 2, 5 and 10 seconds, and compare each result to the analytical solution."
 }

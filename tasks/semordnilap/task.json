@@ -6,5 +6,6 @@
     "strings",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Count the unique pairs of single words in a word list that spell each other backward, and print five examples."
 }

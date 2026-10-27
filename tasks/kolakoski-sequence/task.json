@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kolakoski_sequence",
     "status": "published",
     "tags": ["number-theory", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate Kolakoski sequences from several starting cycles and check each sequence against its own run-length encoding."
 }

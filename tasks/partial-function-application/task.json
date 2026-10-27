@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Partial_function_application",
     "status": "published",
     "tags": ["basics", "closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Build a function that maps another function over a sequence, then partially apply it to doubling and squaring."
 }

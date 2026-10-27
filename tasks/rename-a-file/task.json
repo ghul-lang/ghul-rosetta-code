@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Rename_a_file",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Rename a file and a directory in the current directory and again in the filesystem root."
 }

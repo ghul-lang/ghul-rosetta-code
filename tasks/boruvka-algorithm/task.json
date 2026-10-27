@@ -6,5 +6,6 @@
         "algorithms",
         "data-structures"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find a minimum spanning tree of a weighted connected graph using Borůvka's algorithm, which merges trees in rounds."
 }

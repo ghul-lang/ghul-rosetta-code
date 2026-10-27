@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/O'Halloran_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the even integers between 6 and 1000 that cannot be the surface area of any cuboid with integer sides."
 }

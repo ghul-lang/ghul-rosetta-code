@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/For_with_a_specified_step",
     "status": "published",
     "tags": ["basics", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show a for loop whose step is greater than one, so the counter skips values on each pass."
 }

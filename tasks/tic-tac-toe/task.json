@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tic-tac-toe",
     "status": "published",
     "tags": ["game", "interactive", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Play a game of tic-tac-toe that enforces legal moves and announces when a player has won."
 }

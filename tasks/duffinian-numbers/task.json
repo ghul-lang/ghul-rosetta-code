@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Duffinian_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first 50 Duffinian numbers and at least 15 Duffinian triplets, where a Duffinian number is composite and coprime to its divisor sum."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Terminal_control/Dimensions",
     "status": "published",
     "tags": ["basics", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Determine the terminal's height and width and store them in variables for later use."
 }

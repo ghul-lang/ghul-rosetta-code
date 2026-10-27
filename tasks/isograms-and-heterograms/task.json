@@ -6,5 +6,6 @@
     "text-processing",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find isograms and long heterograms in a word list, sorted by repetition count, word length and alphabetical order."
 }

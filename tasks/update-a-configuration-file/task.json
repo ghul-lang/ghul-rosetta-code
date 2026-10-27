@@ -7,5 +7,6 @@
     "optionals",
     "classes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Update a configuration file to uppercase option names, toggle named options on or off with a semicolon, and add a missing entry."
 }

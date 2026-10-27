@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Tree_traversal",
     "status": "published",
     "tags": ["data-structures", "unions", "pattern-matching", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement pre-order, in-order, post-order and level-order traversals of a binary tree of integers and print each for a sample tree."
 }

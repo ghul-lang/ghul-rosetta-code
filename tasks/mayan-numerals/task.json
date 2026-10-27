@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Mayan_numerals",
     "status": "published",
     "tags": ["strings", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Render decimal numbers as Mayan numerals drawn as boxed cartouches built from simple characters, including several large test values."
 }

@@ -6,5 +6,6 @@
         "dotnet-interop",
         "basics"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Read a 32-bit number from the operating system's device-based random source, rather than a software algorithm."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Integer_comparison",
     "status": "published",
     "tags": ["interactive", "pattern-matching"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Read two integers from the user and report whether the first is less than, equal to, or greater than the second, using each comparison."
 }

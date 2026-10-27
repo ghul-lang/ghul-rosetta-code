@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sphenic_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find sphenic numbers, products of three distinct primes, along with consecutive triplets of them and their counts below large limits."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Parametric_polymorphism",
     "status": "published",
     "tags": ["data-structures", "generics", "unions", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define a generic binary tree with a map function over its elements, and show its type signature."
 }

@@ -6,5 +6,6 @@
     "number-theory",
     "maths"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find all d up to 2,200 for which no positive a, b and c satisfy the Pythagorean quadruple equation."
 }

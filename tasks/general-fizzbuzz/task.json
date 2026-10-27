@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/General_FizzBuzz",
     "status": "published",
     "tags": ["interactive"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print a FizzBuzz for any set of user-supplied factors and words, concatenating the words for numbers with several factors."
 }

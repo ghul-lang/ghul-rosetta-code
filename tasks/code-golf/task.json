@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Code_Golf",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Write the shortest program that prints Code Golf, then the shortest one that does so without any string or character literals."
 }

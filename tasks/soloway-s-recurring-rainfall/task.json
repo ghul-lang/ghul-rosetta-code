@@ -6,5 +6,6 @@
     "basics",
     "interactive"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Read integers until the sentinel 99999 is entered, then output their floating-point average, handling bad input sensibly."
 }

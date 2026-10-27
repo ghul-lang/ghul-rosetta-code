@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Gray_code",
     "status": "published",
     "tags": ["algorithms", "number-theory"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write functions to convert binary to Gray code and back, then display all 5-bit values in binary, Gray and decoded forms."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/File_modification_time",
     "status": "published",
     "tags": ["dotnet-interop", "date-time"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Get and set the last-modified time of a file, showing how a program reads and changes file timestamps."
 }

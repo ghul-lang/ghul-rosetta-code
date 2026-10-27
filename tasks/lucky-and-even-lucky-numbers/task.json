@@ -5,5 +5,6 @@
     "tags": ["number-theory", "unions", "pattern-matching", "optionals"],
     "interest": 3,
     "first_output_ms": 668,
-    "run_ms": 706
+    "run_ms": 706,
+    "summary": "Generate lucky and even lucky numbers via a command-line interface that selects by index or value and validates arguments."
 }

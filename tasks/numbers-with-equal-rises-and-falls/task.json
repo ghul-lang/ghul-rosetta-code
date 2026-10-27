@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
     "interest": 2,
-    "run_ms": 1921
+    "run_ms": 1921,
+    "summary": "Generate numbers whose adjacent digits rise and fall equally often, printing the first 200 and confirming the ten millionth."
 }

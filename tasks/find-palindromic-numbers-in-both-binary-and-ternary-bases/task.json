@@ -7,5 +7,6 @@
         "generators"
     ],
     "interest": 4,
-    "run_ms": 1104
+    "run_ms": 1104,
+    "summary": "Find the first six non-negative integers that read as palindromes in both binary and ternary, starting with zero."
 }

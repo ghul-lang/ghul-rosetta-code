@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sierpinski_triangle",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print a Sierpinski triangle of order N as ASCII art built from asterisks."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Particle_swarm_optimization",
     "status": "published",
     "tags": ["algorithms", "maths", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement particle swarm optimisation where candidate solutions move toward local and global best positions, and test it on the McCormick and Michalewicz functions."
 }

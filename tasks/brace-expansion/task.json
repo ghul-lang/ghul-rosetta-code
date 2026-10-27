@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Brace_expansion",
     "status": "published",
     "tags": ["unions", "pattern-matching", "generators", "parsing"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Expand comma-separated brace alternations in a string into every list of strings they stand for, as Unix shells do."
 }

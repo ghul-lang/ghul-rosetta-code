@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hello_world/Standard_error",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print the message Goodbye, World! to standard error rather than standard output."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Fork",
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Spawn a child process that runs alongside and independently of the parent."
 }

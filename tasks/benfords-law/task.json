@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Benford's_law",
     "status": "published",
     "tags": ["graphics", "number-theory", "maths", "pipes"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Tally the leading digits of the first 1000 Fibonacci numbers and compare the actual distribution with Benford's law."
 }

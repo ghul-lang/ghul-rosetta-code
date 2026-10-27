@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Merge_and_aggregate_datasets",
     "status": "published",
     "tags": ["data-structures", "pipes", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Merge two CSV datasets of patients and visits, grouping by patient to get the last visit date and the sum and average of scores."
 }

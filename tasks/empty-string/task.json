@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Empty_string",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how to assign an empty string to a variable, and how to test whether a string is empty or not empty."
 }

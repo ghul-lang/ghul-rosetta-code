@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hilbert_curve",
     "status": "published",
     "tags": ["graphics", "fractal", "recursion"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Draw a Hilbert curve of at least order three, either as graphics or as ASCII art."
 }

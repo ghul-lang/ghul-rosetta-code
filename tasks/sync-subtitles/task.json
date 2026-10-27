@@ -7,5 +7,6 @@
     "dotnet-interop",
     "date-time"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Shift every timestamp in an SRT subtitle file forward or back by a given number of seconds."
 }

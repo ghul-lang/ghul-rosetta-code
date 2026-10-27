@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Natural_sorting",
     "status": "published",
     "tags": ["sorting", "strings", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort strings in natural order, ignoring leading and repeated spaces, treating whitespace alike, disregarding case, and comparing embedded numbers numerically."
 }

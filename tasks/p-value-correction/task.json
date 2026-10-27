@@ -6,5 +6,6 @@
     "maths",
     "algorithms"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Calculate the adjusted p-values for multiple comparisons from a list of p-values, controlling the false discovery rate."
 }

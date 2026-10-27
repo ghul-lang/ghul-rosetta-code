@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Bitmap",
     "status": "published",
     "tags": ["data-structures", "classes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Define a simple RGB raster image type with allocation, filling, pixel setting and pixel reading functions."
 }

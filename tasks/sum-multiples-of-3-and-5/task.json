@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sum_multiples_of_3_and_5",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Sum all positive multiples of 3 or 5 below n for n equal to 1000, and, as an extra, efficiently for n of 1e20 or more."
 }

@@ -7,5 +7,6 @@
         "classes",
         "dotnet-interop"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Write functions that read and write sequences of bits, most significant bit first, padding output to whole bytes."
 }

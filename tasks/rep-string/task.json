@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Rep-string",
     "status": "published",
     "tags": ["strings", "pattern-matching"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find whether a string of ones and zeroes is a rep-string, and report the substring that repeats to fill it."
 }

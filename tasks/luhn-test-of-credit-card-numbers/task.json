@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a Luhn test function that validates card numbers, and apply it to four sample numbers."
 }

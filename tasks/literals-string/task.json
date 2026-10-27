@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Literals/String",
     "status": "published",
     "tags": ["basics", "strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show how character and string literals are written, including verbatim and here strings, and which quotes expand variables."
 }

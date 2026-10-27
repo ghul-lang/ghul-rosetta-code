@@ -6,5 +6,6 @@
         "maths",
         "dotnet-interop"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the signed difference b2 minus b1 between pairs of bearings, normalized to the range minus 180 to plus 180 degrees."
 }

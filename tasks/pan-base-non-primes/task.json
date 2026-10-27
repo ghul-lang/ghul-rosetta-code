@@ -6,5 +6,6 @@
     "primes",
     "number-theory"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Find the first pan-base non-prime decimal strings, count them up to 1000, and compare how many are odd or even."
 }

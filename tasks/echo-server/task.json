@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Echo_server",
     "status": "published",
     "tags": ["concurrency", "dotnet-interop"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Write a TCP server on port 12321 that echoes complete lines to each client, serving many connections at once without stalling."
 }

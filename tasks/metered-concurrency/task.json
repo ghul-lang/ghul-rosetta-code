@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Metered_concurrency",
     "status": "published",
     "tags": ["async", "concurrency"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement a counting semaphore that limits how many concurrent units run at once, with acquire, release and count operations."
 }

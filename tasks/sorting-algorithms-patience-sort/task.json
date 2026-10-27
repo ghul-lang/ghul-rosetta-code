@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorting_algorithms/Patience_sort",
     "status": "published",
     "tags": ["sorting", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort an array of numbers with patience sort, dealing them onto piles and merging the piles back into order."
 }

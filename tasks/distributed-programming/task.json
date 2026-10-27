@@ -8,5 +8,6 @@
     "closures"
   ],
   "interest": 3,
-    "run_ms": 642
+    "run_ms": 642,
+    "summary": "Write two programs, or one with two modes, that run on networked machines and send messages between them over a general protocol."
 }

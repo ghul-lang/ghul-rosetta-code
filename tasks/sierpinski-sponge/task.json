@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sierpinski_sponge",
     "status": "published",
     "tags": ["graphics", "fractal"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Draw a three-dimensional Sierpinski sponge, a fractal solid, as a graphic."
 }

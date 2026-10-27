@@ -6,5 +6,6 @@
     "number-theory",
     "basics"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Write a routine listing an integer's divisors other than itself, show those for 1 to 10, and find the number up to 20,000 with the most."
 }

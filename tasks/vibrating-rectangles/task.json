@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vibrating_rectangles",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw at least twenty non-touching rectangles sharing a common center, animating their colours to fade in from the outside inwards."
 }

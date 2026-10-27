@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Brazilian_numbers",
     "status": "published",
     "tags": ["number-theory", "primes", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that tests Brazilian numbers, where some base writes them with all equal digits, and list the first twenty of three kinds."
 }

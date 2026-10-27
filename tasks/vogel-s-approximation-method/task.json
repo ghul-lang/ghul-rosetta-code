@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Vogel's_approximation_method",
     "status": "published",
     "tags": ["algorithms", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Allocate contractors to tasks with Vogel's approximation method, repeatedly using penalty costs to find a feasible low-cost initial solution and its total cost."
 }

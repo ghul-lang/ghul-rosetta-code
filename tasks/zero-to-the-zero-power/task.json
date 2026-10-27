@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Zero_to_the_zero_power",
     "status": "published",
     "tags": ["maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show the value of zero raised to the power of zero, a case where computing environments disagree."
 }

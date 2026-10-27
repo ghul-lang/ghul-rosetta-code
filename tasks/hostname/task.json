@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hostname",
     "status": "solved",
     "tags": ["dotnet-interop"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Find and return the name of the host machine on which the code is running."
 }

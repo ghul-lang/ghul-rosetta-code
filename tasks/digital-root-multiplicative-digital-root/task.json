@@ -6,5 +6,6 @@
     "number-theory",
     "pipes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Compute the multiplicative persistence and multiplicative digital root of several numbers, then tabulate the first five numbers having each root from 0 to 9."
 }

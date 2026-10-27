@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Y_combinator",
     "status": "published",
     "tags": ["algorithms", "closures", "generics", "recursion"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Define a stateless Y combinator and use it to compute factorials and Fibonacci numbers from anonymous functions."
 }

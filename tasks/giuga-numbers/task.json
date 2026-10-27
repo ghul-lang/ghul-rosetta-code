@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Giuga_numbers",
     "status": "published",
     "tags": ["number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the first four Giuga numbers, composite numbers n where each prime factor f divides n/f minus one, and, if feasible, the fifth."
 }

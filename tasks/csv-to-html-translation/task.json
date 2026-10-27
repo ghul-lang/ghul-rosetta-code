@@ -7,5 +7,6 @@
         "pipes",
         "strings"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Convert simple CSV text into an HTML table, escaping special characters, with optional header row formatting."
 }

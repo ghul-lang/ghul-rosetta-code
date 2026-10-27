@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Black_box",
     "status": "published",
     "tags": ["game", "interactive", "puzzles"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Implement the Black Box guessing game on an 8 by 8 grid with four hidden atoms, deducing their positions from how beams react."
 }

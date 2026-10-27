@@ -7,5 +7,6 @@
         "pipes",
         "text-processing"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the longest deranged anagram in a word list, a pair of anagrams where no letter sits in the same position in both words."
 }

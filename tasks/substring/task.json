@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Substring",
     "status": "published",
     "tags": ["strings", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Extract substrings from a string by position and length, from a position to the end, or relative to a known character or substring."
 }

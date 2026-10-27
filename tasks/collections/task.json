@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Collections",
     "status": "published",
     "tags": ["data-structures", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Create a collection, add a few values to it, and show the result."
 }

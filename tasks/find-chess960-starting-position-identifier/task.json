@@ -6,5 +6,6 @@
     "puzzles",
     "strings"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Compute the Chess960 starting position identifier, SP-ID, for a given back-rank arrangement of pieces."
 }

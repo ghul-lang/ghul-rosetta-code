@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/First-class_functions/Use_numbers_analogously",
     "status": "published",
     "tags": ["closures", "maths"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show that each number times its reciprocal is one, using a multiplier built from two numbers."
 }

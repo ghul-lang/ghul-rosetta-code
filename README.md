@@ -319,14 +319,14 @@ nothing but the index.
 `index.json` lists every task for [ghul.dev](https://ghul.dev)'s Rosetta Code explorer and the
 playground. It is generated rather than committed: `.github/workflows/index.yml` regenerates it on
 every push to main and publishes it as the only file on the `index` branch, which is where both
-read it. CI fails a pull request whose tags or interest scores are missing or invalid:
+read it. CI fails a pull request whose tags, interest scores or summaries are missing or invalid:
 
 ```sh
 dotnet run --project tools/rosetta -- index            # write index.json locally, to look at
 dotnet run --project tools/rosetta -- index --check    # what CI runs
 ```
 
-Two fields in each `task.json` are written by hand:
+Three fields in each `task.json` are written by hand:
 
 - `tags` - one to six tags from `TAGS.json`, most important first. Topic tags say what the task is
   about; language-feature tags name the ghūl features a reader would come to this solution to
@@ -334,6 +334,10 @@ Two fields in each `task.json` are written by hand:
   meaning.
 - `interest` - 1 to 5, how much a stranger would want to run and change it: 5 draws a picture or
   plays a game, 1 prints a constant. The explorer opens on a random task weighted by this.
+- `summary` - one plain sentence saying what the task asks for, so a reader who has never met the
+  task knows what they are looking at. ghul.dev shows it under the task's title and gives it to
+  search engines as the page's description. Write it in your own words rather than quoting the
+  wiki's description, whose text is under the wiki's licence rather than this repository's.
 
 Everything else in an index entry comes from the task's files: its parts, source line counts, its
 `*.png.expected` images, whether it reads standard input (`run.in` or `run.session`), and whether

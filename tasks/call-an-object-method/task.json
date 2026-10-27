@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Call_an_object_method",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to call a static method on a class and an instance method on an object."
 }

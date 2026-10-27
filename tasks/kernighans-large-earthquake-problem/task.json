@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kernighans_large_earthquake_problem",
     "status": "published",
     "tags": ["text-processing", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Filter a data file of earthquake records for entries whose magnitude exceeds 6."
 }

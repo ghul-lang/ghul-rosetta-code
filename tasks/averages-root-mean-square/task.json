@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Averages/Root_mean_square",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the root mean square of the numbers 1 to 10, also called the quadratic mean."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Show_ASCII_table",
     "status": "published",
     "tags": ["basics", "pattern-matching"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Print a table of the ASCII characters with decimal values from 32 to 127."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["algorithms", "unions", "generators"],
     "interest": 4,
-    "run_ms": 542
+    "run_ms": 542,
+    "summary": "Write an interpreter for Binary Lambda Calculus that reads encoded terms and applies them to input, in bit mode or byte mode."
 }

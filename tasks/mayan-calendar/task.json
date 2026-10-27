@@ -5,5 +5,6 @@
   "tags": [
     "date-time"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Convert Gregorian dates to Mayan Calendar Round and Long Count dates using the GMT correlation, for at least fifty years either side of the 2012 rollover."
 }

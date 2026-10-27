@@ -6,5 +6,6 @@
     "algorithms",
     "pipes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find the maximum total of numbers along a downward path through a triangle of numbers, moving to an adjacent number on each row."
 }

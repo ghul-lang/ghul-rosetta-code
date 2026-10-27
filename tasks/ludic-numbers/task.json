@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ludic_numbers",
     "status": "published",
     "tags": ["number-theory", "primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first 25 ludic numbers with a sieve, count those up to 1000, and show the 2000th to 2005th."
 }

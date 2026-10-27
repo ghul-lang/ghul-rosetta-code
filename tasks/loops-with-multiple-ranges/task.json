@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Loops/With_multiple_ranges",
     "status": "published",
     "tags": ["generators", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Reproduce a PL/I loop whose counter steps through several ranges in turn, each with its own start, end and step, and print the resulting sum and product."
 }

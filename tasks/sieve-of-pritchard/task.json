@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sieve_of_Pritchard",
     "status": "published",
     "tags": ["primes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find all primes up to a limit with the Sieve of Pritchard, a wheel-based method, and show the result for the limit 150."
 }

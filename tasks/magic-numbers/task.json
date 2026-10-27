@@ -6,5 +6,6 @@
     "number-theory",
     "generators"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find all magic numbers, base 10 polydivisible numbers whose first n digits divide evenly by n, and count them by digit length."
 }

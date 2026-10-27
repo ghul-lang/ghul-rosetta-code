@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["game", "puzzles", "algorithms"],
     "interest": 4,
-    "run_ms": 944
+    "run_ms": 944,
+    "summary": "Find a solution to a Sokoban box-pushing level, preferably an optimal one, and state the solution format used."
 }

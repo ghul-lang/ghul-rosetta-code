@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Apply_a_callback_to_an_array",
     "status": "published",
     "tags": ["basics", "generics", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Apply a function to each element of a combined set of elements."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hunt_the_Wumpus",
     "status": "published",
     "tags": ["game", "interactive", "pipes", "optionals"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement the classic text game Hunt the Wumpus, in which the player moves through a twenty-room cave and shoots at the beast with arrows."
 }

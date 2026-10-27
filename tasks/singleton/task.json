@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Singleton",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement a singleton, a class that allows exactly one instance so all member access goes to that object."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Optional_parameters",
     "status": "published",
     "tags": ["basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show a sort interface over tables of strings with optional ordering, column and reverse parameters, without implementing the sort."
 }

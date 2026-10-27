@@ -8,5 +8,6 @@
   ],
   "interest": 2,
     "first_output_ms": 669,
-    "run_ms": 691
+    "run_ms": 691,
+    "summary": "Send a GET request to a secure web address, check the server certificate, and print the response to the console."
 }

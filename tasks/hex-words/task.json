@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hex_words",
     "status": "published",
     "tags": ["text-processing", "strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the words of four or more letters from the Unixdict list that use only a to f, ordering them by digital root and decimal value."
 }

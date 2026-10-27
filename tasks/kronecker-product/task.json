@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Kronecker_product",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build the block matrix formed by combining two matrices of any size with the Kronecker operation, and show two samples."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Compiler/Verifying_syntax",
     "status": "published",
     "tags": ["parsing", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Read a stream of tokens and print true or false according to whether it matches a small EBNF grammar, with errors reported on failure."
 }

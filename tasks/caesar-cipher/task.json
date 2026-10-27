@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Caesar_cipher",
     "status": "published",
     "tags": ["strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Encode and decode text with a Caesar cipher, rotating letters by a key from one to twenty-five."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Idiomatically_determine_all_the_lowercase_and_uppercase_letters",
     "status": "published",
     "tags": ["basics", "pipes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show which lower and upper case Latin letters the language's own facilities accept, without relying on a fixed table."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Quaternion",
     "status": "published",
     "tags": ["maths", "classes", "operators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement quaternion arithmetic, including norm, conjugate, and addition and multiplication with reals and other quaternions, then show multiplication is non-commutative."
 }

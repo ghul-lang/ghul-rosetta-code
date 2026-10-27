@@ -7,5 +7,6 @@
         "algorithms"
     ],
     "interest": 3,
-    "run_ms": 1449
+    "run_ms": 1449,
+    "summary": "Search for the first perfect square with N distinct digits in each base N from 2 to 12, showing each number in its base."
 }

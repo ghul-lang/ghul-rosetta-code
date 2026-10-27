@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Greatest_subsequential_sum",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the contiguous subsequence of integers with the largest sum, returning the empty sequence when all values are negative."
 }

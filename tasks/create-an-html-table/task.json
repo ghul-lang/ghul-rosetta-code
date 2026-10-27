@@ -6,5 +6,6 @@
         "text-processing",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate an HTML table with X, Y and Z columns of random integers and an extra column of row numbers."
 }

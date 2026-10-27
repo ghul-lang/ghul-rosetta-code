@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Execute_Computer/Zero",
     "status": "published",
     "tags": ["parsing", "algorithms", "pattern-matching"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Emulate Computer/Zero, a tiny educational machine whose programs can modify themselves, and run sample programs such as 2+2 and 7*8."
 }

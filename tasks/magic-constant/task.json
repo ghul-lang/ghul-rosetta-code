@@ -5,5 +5,6 @@
   "tags": [
     "maths"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Compute magic constants for N by N magic squares, and find the smallest order whose constant exceeds each power of ten up to 10^10."
 }

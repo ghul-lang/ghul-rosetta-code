@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Logical_operations",
     "status": "published",
     "tags": ["basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Compute the and, or and not results of two boolean values, along with any other logical operators available."
 }

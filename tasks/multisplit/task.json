@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Multisplit",
     "status": "published",
     "tags": ["parsing", "strings", "pattern-matching", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Split a string on several ordered separators, keeping which separator matched at each point, with the earlier listed one winning ties."
 }

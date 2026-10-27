@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Enforced_immutability",
     "status": "published",
     "tags": ["classes", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to make values or objects in the language unchangeable once created, preventing any later modification."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Evolutionary_algorithm",
     "status": "published",
     "tags": ["simulation", "strings", "pipes"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Evolve random text toward a target phrase by repeatedly mutating copies of a parent and keeping the fittest copy."
 }

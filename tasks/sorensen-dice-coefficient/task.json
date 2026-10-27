@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Sorensen–Dice_coefficient",
     "status": "published",
     "tags": ["strings", "text-processing", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Score mangled words against a dictionary of names using Sorensen-Dice bigram similarity and report the five closest matches."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/JortSort",
     "status": "published",
     "tags": ["sorting", "generics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Implement JortSort, which sorts an array and reports true only if it was already in order, as a satirical tool."
 }

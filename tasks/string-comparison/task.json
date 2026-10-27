@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/String_comparison",
     "status": "published",
     "tags": ["strings"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compare two strings for equality, ordering and case-insensitive matching, and show how numeric-looking strings compare."
 }

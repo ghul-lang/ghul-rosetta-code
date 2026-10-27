@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Perfect_totient_numbers",
     "status": "published",
     "tags": ["number-theory", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first twenty perfect totient numbers, integers that equal the sum of their iterated totient values."
 }

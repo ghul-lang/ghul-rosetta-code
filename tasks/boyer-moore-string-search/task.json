@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Boyer-Moore_string_search",
     "status": "published",
     "tags": ["algorithms", "strings"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Search for a pattern in text using the Boyer-Moore algorithm, which scans from the right and skips ahead on mismatches."
 }

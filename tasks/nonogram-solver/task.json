@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Nonogram_solver",
     "status": "published",
     "tags": ["puzzles", "recursion"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Find one valid filled grid that matches the run-length clues for each row and column of a nonogram, or report failure."
 }

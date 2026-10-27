@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Snake",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement a snake game in an interactive environment where the snake grows by eating randomly placed items and the game ends when it runs into itself."
 }

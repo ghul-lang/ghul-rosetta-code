@@ -6,5 +6,6 @@
     "strings",
     "dotnet-interop"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Print a small range of integers in binary, octal, hexadecimal and other bases, using standard built-in formatting."
 }

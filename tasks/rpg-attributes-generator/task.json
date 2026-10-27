@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/RPG_attributes_generator",
     "status": "published",
     "tags": ["algorithms", "optionals"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate six character attribute values by summing the three highest of four dice rolls, then check them against two minimum requirements."
 }

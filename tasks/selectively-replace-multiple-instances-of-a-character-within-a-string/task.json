@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Selectively_replace_multiple_instances_of_a_character_within_a_string",
     "status": "published",
     "tags": ["strings"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Replace selected occurrences of letters in the word abracadabra, counting each letter's instances separately, with new characters."
 }

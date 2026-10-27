@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Read_a_configuration_file",
     "status": "published",
     "tags": ["text-processing", "parsing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Parse a settings file of key-value entries, skipping comments and blank lines, and assign variables from each entry."
 }

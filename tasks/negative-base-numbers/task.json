@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Negative_base_numbers",
     "status": "published",
     "tags": ["maths", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Convert numbers to and from negative bases such as negabinary, negaternary and negadecimal, and optionally encode a word in base -62."
 }

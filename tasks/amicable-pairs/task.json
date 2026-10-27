@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "pipes"],
     "interest": 2,
-    "run_ms": 874
+    "run_ms": 874,
+    "summary": "Find every amicable pair below 20,000, where each number's proper divisor sum is the other."
 }

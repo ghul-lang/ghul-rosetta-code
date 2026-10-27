@@ -7,5 +7,6 @@
         "dotnet-interop",
         "pipes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Run three XPath queries against an inventory XML document: the first item, all prices, and all names."
 }

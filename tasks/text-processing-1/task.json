@@ -6,5 +6,6 @@
     "text-processing",
     "parsing"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Parse a file of daily readings, each a date with 24 value-flag pairs, and report per-line statistics plus a summary with the longest run of invalid readings."
 }

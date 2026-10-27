@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Consecutive_primes_with_ascending_or_descending_differences",
     "status": "published",
     "tags": ["primes", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the longest run of consecutive primes below one million with strictly ascending gaps, and the same for strictly descending gaps."
 }

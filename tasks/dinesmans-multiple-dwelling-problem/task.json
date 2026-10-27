@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dinesman's_multiple-dwelling_problem",
     "status": "published",
     "tags": ["puzzles", "pipes", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Solve a puzzle placing five tenants on five floors under a list of constraints, stating the problem in a form close to its wording."
 }

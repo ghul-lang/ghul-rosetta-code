@@ -5,5 +5,6 @@
   "tags": [
     "number-theory"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Find every positive integer that cannot be written as a sum of distinct square numbers, and justify that the list is complete."
 }

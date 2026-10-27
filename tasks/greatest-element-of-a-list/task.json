@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Greatest_element_of_a_list",
     "status": "published",
     "tags": ["algorithms", "generics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Return the maximum of a collection of values whose size is not known until run time."
 }

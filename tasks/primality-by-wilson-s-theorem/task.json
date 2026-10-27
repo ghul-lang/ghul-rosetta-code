@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Primality_by_Wilson's_theorem",
     "status": "published",
     "tags": ["primes", "number-theory"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement a boolean primality test based on Wilson's theorem, which relates primality to the factorial of one less than the number."
 }

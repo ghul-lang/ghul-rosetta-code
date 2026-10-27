@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Numerical_and_alphabetical_suffixes",
     "status": "published",
     "tags": ["parsing", "strings", "pattern-matching", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Expand numbers carrying named, metric, binary or factorial suffixes into full values with commas, showing each input and its result."
 }

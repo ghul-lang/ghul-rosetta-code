@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "pattern-matching"],
     "interest": 2,
-    "run_ms": 12347
+    "run_ms": 12347,
+    "summary": "List the primorials for indices zero through nine, then the digit lengths at indices 10, 100, 1,000, 10,000 and 100,000, using exact integers."
 }

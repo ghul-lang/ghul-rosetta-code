@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Inverted_index",
     "status": "published",
     "tags": ["data-structures", "text-processing"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build an in-memory inverted index over a set of text files, with a user interface that lists the files containing each search term."
 }

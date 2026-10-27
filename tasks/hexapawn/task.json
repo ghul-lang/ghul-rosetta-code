@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Hexapawn",
     "status": "published",
     "tags": ["game", "interactive", "closures"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Implement the game of Hexapawn against the computer, which learns from its losses by remembering good moves and discarding bad ones."
 }

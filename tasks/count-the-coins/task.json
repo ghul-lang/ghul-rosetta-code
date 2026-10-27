@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Count_the_coins",
     "status": "published",
     "tags": ["algorithms", "maths"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Count the ways to make change for a dollar from quarters, dimes, nickels and pennies, then extend the count with dollar and half-dollar coins for $1000."
 }

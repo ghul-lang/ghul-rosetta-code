@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["puzzles", "recursion"],
     "interest": 3,
-    "run_ms": 1066
+    "run_ms": 1066,
+    "summary": "Compute topswops, the maximum number of swaps needed to bring card 1 to the top, for deck sizes one to ten."
 }

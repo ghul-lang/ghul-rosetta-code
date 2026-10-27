@@ -6,5 +6,6 @@
         "date-time",
         "basics"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Print the current date in two formats, yyyy-mm-dd and a long form with the weekday name."
 }

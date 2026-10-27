@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Look-and-say_sequence",
     "status": "published",
     "tags": ["number-theory", "generators", "pipes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Generate successive terms of the look-and-say sequence, where each term describes the runs of digits in the previous one."
 }

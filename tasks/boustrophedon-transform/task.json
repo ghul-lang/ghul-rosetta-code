@@ -5,5 +5,6 @@
     "tags": ["number-theory", "generators", "pipes"],
     "interest": 3,
     "first_output_ms": 990,
-    "run_ms": 1645
+    "run_ms": 1645,
+    "summary": "Write a routine that performs the boustrophedon transform on a sequence, and apply it to several standard sequences like primes and factorials."
 }

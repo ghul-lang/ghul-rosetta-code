@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Modular_arithmetic",
     "status": "published",
     "tags": ["operators", "generics", "traits"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement modular integers with overloaded operators, so that a generic polynomial function gives the same results for modular and ordinary integers."
 }

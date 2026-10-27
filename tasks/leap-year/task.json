@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Leap_year",
     "status": "published",
     "tags": ["date-time", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Check whether a year is a leap year under the Gregorian calendar rules."
 }

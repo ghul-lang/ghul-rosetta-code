@@ -6,5 +6,6 @@
         "algorithms",
         "operators"
     ],
-    "interest": 4
+    "interest": 4,
+    "summary": "Minimize a Boolean function to its minimal sum-of-products form by generating prime implicants and selecting a covering set."
 }

@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["concurrency", "async", "algorithms"],
     "interest": 4,
-    "run_ms": 3430
+    "run_ms": 3430,
+    "summary": "Simulate the dining philosophers problem with concurrent threads sharing forks, and explain how the solution prevents deadlock."
 }

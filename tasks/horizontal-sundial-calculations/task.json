@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Horizontal_sundial_calculations",
     "status": "published",
     "tags": ["maths", "interactive"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Calculate sun hour angles and dial line angles for a horizontal sundial, from 6am to 6pm at a user-entered location."
 }

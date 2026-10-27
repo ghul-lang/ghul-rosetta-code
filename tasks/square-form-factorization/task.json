@@ -7,5 +7,6 @@
     "algorithms"
   ],
   "interest": 4,
-    "run_ms": 1040
+    "run_ms": 1040,
+    "summary": "Factor integers with Shanks' square form factorization, walking cycles of binary quadratic forms to find divisors."
 }

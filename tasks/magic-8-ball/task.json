@@ -6,5 +6,6 @@
     "game",
     "interactive"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Create a Magic 8-Ball toy that answers a user's question with a random fortune-style reply."
 }

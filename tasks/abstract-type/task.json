@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Abstract_type",
     "status": "published",
     "tags": ["basics", "classes", "traits"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how an abstract type with no instances can be declared, including interfaces and partially implemented abstract types where supported."
 }

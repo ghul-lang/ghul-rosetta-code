@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Flipping_bits_game",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Build a game where the player inverts rows or columns of a bit grid to reach a random target configuration."
 }

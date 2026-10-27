@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Polynomial_regression",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Find the polynomial of a given degree that approximates a set of x and y data points, and report its coefficients."
 }

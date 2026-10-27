@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Solve_a_Hopido_puzzle",
     "status": "published",
     "tags": ["puzzles", "recursion", "graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve Hopido puzzles by finding a path through the tiles that uses only diagonal one-tile hops and two-tile horizontal or vertical jumps."
 }

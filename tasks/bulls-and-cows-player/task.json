@@ -5,5 +5,6 @@
     "tags": ["game", "interactive"],
     "interest": 4,
     "first_output_ms": 819,
-    "run_ms": 1851
+    "run_ms": 1851,
+    "summary": "Write a player for Bulls and Cows that narrows its candidate numbers using the score of each previous guess until it wins."
 }

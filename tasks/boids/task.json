@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["simulation", "graphics", "operators"],
     "interest": 5,
-    "run_ms": 1126
+    "run_ms": 1126,
+    "summary": "Simulate flocking birds, called boids, that steer around each other and around fixed obstacles in a graphic or text display."
 }

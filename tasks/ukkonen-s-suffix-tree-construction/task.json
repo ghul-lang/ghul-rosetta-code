@@ -8,5 +8,6 @@
     "strings"
   ],
   "interest": 5,
-    "run_ms": 2766
+    "run_ms": 2766,
+    "summary": "Build a suffix tree with Ukkonen's algorithm for pi's decimal digits, and find the longest repeated substring, timing for linearity."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Non-continuous_subsequences",
     "status": "published",
     "tags": ["pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find every subsequence of a sequence that has a gap between its first and last elements."
 }

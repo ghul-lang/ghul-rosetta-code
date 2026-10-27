@@ -6,5 +6,6 @@
     "maths",
     "recursion"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Compute the determinant and permanent of a matrix, and the Levi-Civita symbol of a permutation of orthonormal basis vectors."
 }

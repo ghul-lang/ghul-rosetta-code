@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Binary_strings",
     "status": "published",
     "tags": ["data-structures", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Build a set of functions for handling binary strings made of arbitrary bytes, covering creation, comparison, substring extraction, replacement and joining."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic/Complex",
     "status": "published",
     "tags": ["maths", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Implement complex numbers with addition, multiplication, negation, inversion and optionally conjugation, and print the results."
 }

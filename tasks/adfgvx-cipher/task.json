@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/ADFGVX_cipher",
     "status": "published",
     "tags": ["strings", "algorithms", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Create a random Polybius square and key, then encrypt and decrypt a short message with the ADFGVX field cipher."
 }

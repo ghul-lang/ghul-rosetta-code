@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Equilibrium_index",
     "status": "published",
     "tags": ["algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that returns the equilibrium indices of a sequence, those where the sum of lower-index elements equals the sum of higher-index ones."
 }

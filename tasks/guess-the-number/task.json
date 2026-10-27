@@ -5,5 +5,6 @@
     "tags": ["game", "interactive"],
     "interest": 3,
     "first_output_ms": 937,
-    "run_ms": 954
+    "run_ms": 954,
+    "summary": "Let the player guess a secret number from one to ten, repeating the prompt until they guess it, then congratulate them."
 }

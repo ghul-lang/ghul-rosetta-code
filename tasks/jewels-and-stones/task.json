@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jewels_and_stones",
     "status": "published",
     "tags": ["puzzles", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Write a function that counts how many letters in a stones string also appear in a jewels string, treating upper and lower case as distinct."
 }

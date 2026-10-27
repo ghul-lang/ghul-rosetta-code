@@ -6,5 +6,6 @@
         "number-theory",
         "pipes"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Print the first fifteen Catalan numbers by extracting them from Pascal's triangle."
 }

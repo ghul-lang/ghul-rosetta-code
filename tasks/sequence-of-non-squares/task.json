@@ -6,5 +6,6 @@
     "maths",
     "basics"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Show that n plus the nearest integer to the square root of n gives the non-square numbers, and confirm no squares occur below one million."
 }

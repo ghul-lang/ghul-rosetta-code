@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Arithmetic_derivative",
     "status": "published",
     "tags": ["number-theory", "recursion", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Compute the Lagarias arithmetic derivative of integers, a function defined by prime factorization and the Leibniz rule."
 }

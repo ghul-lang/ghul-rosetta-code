@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Playfair_cipher",
     "status": "published",
     "tags": ["strings", "generators", "classes"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Implement the Playfair cipher for encrypting and decrypting messages, with J treated as I or Q omitted, and output in capital pairs."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Nth_root",
     "status": "published",
     "tags": ["maths"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Compute the principal nth root of a positive real number using an iterative algorithm."
 }

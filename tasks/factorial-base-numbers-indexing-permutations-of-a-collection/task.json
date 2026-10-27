@@ -5,5 +5,6 @@
     "tags": ["algorithms", "generics"],
     "interest": 3,
     "first_output_ms": 1146,
-    "run_ms": 1789
+    "run_ms": 1789,
+    "summary": "Map factorial base numbers to permutations of a collection, reproducing a table and permuting a shoe of cards from 51-digit factorial base numbers."
 }

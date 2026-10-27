@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Death_Star",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 5
+    "interest": 5,
+    "summary": "Display a large sphere with part of a smaller sphere removed, forming a shape like the Death Star."
 }

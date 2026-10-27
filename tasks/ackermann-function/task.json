@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Ackermann_function",
     "status": "published",
     "tags": ["algorithms", "recursion"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the Ackermann function A(m, n), a deeply recursive function that grows very fast, ideally with arbitrary-precision results."
 }

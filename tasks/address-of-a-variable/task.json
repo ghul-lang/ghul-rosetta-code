@@ -6,5 +6,6 @@
         "basics",
         "dotnet-interop"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show how to get the memory address of a variable and how to set a variable through its address."
 }

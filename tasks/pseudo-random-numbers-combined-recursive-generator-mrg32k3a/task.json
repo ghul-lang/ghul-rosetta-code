@@ -6,5 +6,6 @@
     "algorithms",
     "classes"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Implement the MRG32k3a combined recursive random number generator and check its first outputs against known seed values."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Dutch_national_flag_problem",
     "status": "published",
     "tags": ["sorting", "algorithms", "pattern-matching"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Sort a shuffled set of red, white and blue balls into Dutch national flag order, and check the result is sorted."
 }

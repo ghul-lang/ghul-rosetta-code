@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jacobsthal_numbers",
     "status": "published",
     "tags": ["number-theory", "pipes", "generators"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate the first thirty Jacobsthal and Jacobsthal-Lucas numbers, twenty oblong numbers and ten Jacobsthal primes."
 }

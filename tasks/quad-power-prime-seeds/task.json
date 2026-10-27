@@ -7,5 +7,6 @@
     "number-theory"
   ],
   "interest": 2,
-    "run_ms": 10283
+    "run_ms": 10283,
+    "summary": "Find the first fifty positive integers n for which n to the k plus n plus one is prime for k from one to four."
 }

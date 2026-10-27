@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Singly-linked_list/Element_insertion",
     "status": "published",
     "tags": ["data-structures", "generics", "classes"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Define a method that inserts a new element into a singly-linked list after a given element, then use it to insert C between A and B."
 }

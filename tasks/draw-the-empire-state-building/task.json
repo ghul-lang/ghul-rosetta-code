@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Draw_the_Empire_State_Building",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Draw the Empire State Building as text or graphics, with an optional extra credit for making it rotate."
 }

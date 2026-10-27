@@ -6,5 +6,6 @@
     "operators",
     "maths"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Show how to define an exponentiation operator for matrices, so that a matrix can be raised to an integer power."
 }

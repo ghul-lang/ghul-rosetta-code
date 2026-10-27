@@ -6,5 +6,6 @@
     "primes",
     "generators"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Generate a sequence of primes by trial division, testing each candidate by dividing it by smaller candidates."
 }

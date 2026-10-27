@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["number-theory", "primes", "pipes"],
     "interest": 2,
-    "run_ms": 1449
+    "run_ms": 1449,
+    "summary": "List the long primes, whose decimal reciprocal repeats with length p minus 1, up to 500, and count them up to 64,000."
 }

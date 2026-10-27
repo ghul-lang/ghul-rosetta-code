@@ -6,5 +6,6 @@
     "strings",
     "recursion"
   ],
-  "interest": 2
+  "interest": 2,
+    "summary": "Write functions that convert a non-negative integer to a string in a given base, and parse such a string back, using lowercase letters for digits above nine."
 }

@@ -6,5 +6,6 @@
         "pipes",
         "basics"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "Count how many numbers from a large stream fall into each bin defined by a list of ascending limits, and print the counts."
 }

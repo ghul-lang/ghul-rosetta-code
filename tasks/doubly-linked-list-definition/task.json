@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Doubly-linked_list/Definition",
     "status": "published",
     "tags": ["data-structures", "classes", "generics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Define a data structure for a doubly linked list that supports adding elements at the head, tail and middle, and forbids circular loops."
 }

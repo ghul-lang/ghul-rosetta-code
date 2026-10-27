@@ -5,5 +5,6 @@
     "tags": ["number-theory", "algorithms"],
     "interest": 2,
     "first_output_ms": 2014,
-    "run_ms": 2024
+    "run_ms": 2024,
+    "summary": "Count the integers below one hundred million whose iterated sum of squared digits ends at 89 rather than at 1."
 }

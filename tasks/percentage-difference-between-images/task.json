@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Percentage_difference_between_images",
     "status": "published",
     "tags": ["graphics"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compute the percentage difference between two JPEG images of the same size, or between two bitmaps, to compare compression levels."
 }

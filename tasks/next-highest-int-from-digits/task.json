@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Next_highest_int_from_digits",
     "status": "published",
     "tags": ["algorithms", "pattern-matching", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Find the next larger integer that uses the same digits, returning zero when none exists, for a list of sample numbers."
 }

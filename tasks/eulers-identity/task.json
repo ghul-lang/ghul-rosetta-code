@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Euler's_identity",
     "status": "published",
     "tags": ["maths", "dotnet-interop"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show that e to the power i pi plus one equals zero, reporting the floating-point error when it is only approximately zero."
 }

@@ -6,5 +6,6 @@
         "basics",
         "classes"
     ],
-    "interest": 3
+    "interest": 3,
+    "summary": "Show common pointer and reference operations on values held on the stack, a rarely used and risky practice."
 }

@@ -5,5 +5,6 @@
     "tags": ["number-theory", "algorithms", "generators"],
     "interest": 3,
     "first_output_ms": 519,
-    "run_ms": 518
+    "run_ms": 518,
+    "summary": "Expand fractions into sums of distinct unit fractions with Fibonacci's greedy method, and search small proper fractions for the longest and largest-denominator expansions."
 }

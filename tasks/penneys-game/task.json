@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Penney's_game",
     "status": "published",
     "tags": ["game", "interactive", "generators"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Play Penney's coin-tossing game against a human with random tosses, scoring, and the computer's optimal reply as second player."
 }

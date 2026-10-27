@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Inheritance/Multiple",
     "status": "published",
     "tags": ["traits", "classes", "basics"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Declare Camera and MobilePhone types, then a CameraPhone type that is both, using multiple inheritance or interfaces where the language allows."
 }

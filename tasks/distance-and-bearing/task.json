@@ -9,5 +9,6 @@
   ],
   "interest": 3,
     "first_output_ms": 513,
-    "run_ms": 529
+    "run_ms": 529,
+    "summary": "Work out how far and in what direction each of the twenty nearest airports lies from a given aircraft position."
 }

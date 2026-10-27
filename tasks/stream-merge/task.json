@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Stream_merge",
     "status": "published",
     "tags": ["pattern-matching", "pipes", "generators"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Merge two or more sorted streams into one sorted output stream, reading them incrementally rather than loading them whole."
 }

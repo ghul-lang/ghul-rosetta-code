@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/B-spline",
     "status": "published",
     "tags": ["graphics", "maths"],
-    "interest": 4
+    "interest": 4,
+    "summary": "Generate a B-spline curve from twelve control points, then plot it or save an image without third-party libraries."
 }

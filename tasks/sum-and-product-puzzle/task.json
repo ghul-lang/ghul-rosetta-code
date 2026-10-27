@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["puzzles", "pipes"],
     "interest": 4,
-    "run_ms": 502
+    "run_ms": 502,
+    "summary": "Solve a logic puzzle in which two logicians, one knowing a sum and one a product, deduce two hidden numbers."
 }

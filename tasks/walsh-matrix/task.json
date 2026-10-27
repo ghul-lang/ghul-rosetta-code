@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Walsh_matrix",
     "status": "published",
     "tags": ["maths", "pipes"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Generate naturally ordered Walsh matrices of size 2 to the power k, whose entries are plus or minus one, and display samples."
 }

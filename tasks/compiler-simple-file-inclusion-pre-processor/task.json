@@ -7,5 +7,6 @@
     "generators",
     "recursion"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Write a preprocessor that replaces include directives in a source file with the contents of the named files."
 }

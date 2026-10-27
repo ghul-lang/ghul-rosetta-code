@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Runge-Kutta_method",
     "status": "published",
     "tags": ["maths", "closures"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Solve a differential equation numerically with the fourth-order Runge-Kutta method and compare the results with the exact solution."
 }

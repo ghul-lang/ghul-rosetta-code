@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Jensen's_Device",
     "status": "published",
     "tags": ["basics", "closures"],
-    "interest": 1
+    "interest": 1,
+    "summary": "Show call-by-name evaluation through a summation routine that computes the 100th harmonic number."
 }

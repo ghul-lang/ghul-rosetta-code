@@ -7,5 +7,6 @@
         "pipes",
         "dotnet-interop"
     ],
-    "interest": 2
+    "interest": 2,
+    "summary": "List everything in the current directory in sorted order, one name per line, without extended details."
 }

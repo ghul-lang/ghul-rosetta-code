@@ -6,5 +6,6 @@
     "basics",
     "pipes"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Add up the matrix entries that lie below the main diagonal of a fixed square matrix and display the total."
 }

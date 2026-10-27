@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Empty_directory",
     "status": "published",
     "tags": ["basics", "dotnet-interop"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Test whether a given directory is empty, meaning it contains no files or subdirectories apart from the dot entries."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Long_multiplication",
     "status": "published",
     "tags": ["maths", "algorithms"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Multiply 2 to the power 64 by itself using an explicit long multiplication algorithm, and optionally check the result against built-in arithmetic."
 }

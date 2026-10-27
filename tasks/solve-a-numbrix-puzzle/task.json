@@ -7,5 +7,6 @@
     "recursion",
     "classes"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Solve Numbrix grid puzzles, where a path of consecutive numbers moves only up, down, left or right, and fill in the missing cells."
 }

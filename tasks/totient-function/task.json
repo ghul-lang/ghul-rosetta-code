@@ -6,5 +6,6 @@
     "number-theory",
     "primes"
   ],
-  "interest": 1
+  "interest": 1,
+    "summary": "Compute Euler's totient function, showing values for the first 25 integers and counting primes up to powers of ten."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Number_reversal_game",
     "status": "published",
     "tags": ["game", "interactive"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Play a game in which the player reverses the leftmost digits of a shuffled list of 1 to 9 until sorted, and count the reversals."
 }

@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Variable_size/Get",
     "status": "published",
     "tags": ["dotnet-interop", "basics"],
-    "interest": 2
+    "interest": 2,
+    "summary": "Show how to find the size of a variable."
 }

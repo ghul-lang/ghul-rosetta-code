@@ -7,5 +7,6 @@
     "operators",
     "dotnet-interop"
   ],
-  "interest": 3
+  "interest": 3,
+    "summary": "Compute the conjugate transpose of a complex matrix and test whether it is Hermitian, normal or unitary."
 }

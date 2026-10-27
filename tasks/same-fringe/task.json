@@ -3,5 +3,6 @@
     "url": "https://rosettacode.org/wiki/Same_fringe",
     "status": "published",
     "tags": ["data-structures", "generators", "async", "unions"],
-    "interest": 3
+    "interest": 3,
+    "summary": "Compare the leaves of two binary trees in left-to-right order, stopping as soon as the two sequences differ."
 }
