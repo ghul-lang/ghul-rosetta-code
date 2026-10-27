@@ -1,21 +1,16 @@
 use default
 
-prime_factor_count(n: int) -> int is
-    let remaining mut = n
-    let count mut = 0
-    let factor mut = 2
+prime_factors(n: int) -> int{} is
+    if n > 1 then
+        let factor = from(2) |> find(d => d * d > n \/ n % d == 0)!
+        let prime = if factor * factor > n then n else factor fi
 
-    while factor * factor <= remaining do
-        while remaining % factor == 0 do
-            remaining = remaining / factor
-            count = count + 1
-        od
-
-        factor = factor + 1
-    od
-
-    return if remaining > 1 then count + 1 else count fi
+        yield prime
+        yield in prime_factors(n / prime)
+    fi
 si
+
+prime_factor_count(n: int) -> int => prime_factors(n) |> count()
 
 is_prime(n: int) -> bool => n > 1 /\ 2::n / 2 |> all(d => n % d != 0)
 

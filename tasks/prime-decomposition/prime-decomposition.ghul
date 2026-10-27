@@ -1,32 +1,15 @@
 use default
 
 decompose(n: bigint) -> bigint{} is
-    let factors = LIST()
+    if n > 1n then
+        let factor = from(2L)
+            |> map(d => bigint(d))
+            |> find(d => d * d > n \/ (n % d).is_zero)!
+        let prime = if factor * factor > n then n else factor fi
 
-    let two = 2n
-    let rest mut = n
-
-    while rest % two =~ 0n do
-        factors.add(two)
-        rest = rest / two
-    od
-
-    let divisor mut = 3n
-
-    while divisor * divisor <= rest do
-        if rest % divisor =~ 0n then
-            factors.add(divisor)
-            rest = rest / divisor
-        else
-            divisor = divisor + two
-        fi
-    od
-
-    if rest > 1n then
-        factors.add(rest)
+        yield prime
+        yield in decompose(n / prime)
     fi
-
-    return factors
 si
 
 show(n: bigint) =>
