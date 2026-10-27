@@ -34,15 +34,14 @@ fangs(n: long) -> (long, long){} is
 si
 
 fang_text(n: long) -> string =>
-    (let pairs = fangs(n) |> collect()
-
-     if pairs.count == 0 then
-         "{n}: not a vampire number"
-     else
-         let texts = pairs
-             |> map((a, b) => "{a} x {b}")
-         "{n}: {texts |> join(", ")}"
-     fi)
+    let pairs = fangs(n) |> collect() in
+    if pairs.count == 0 then
+        "{n}: not a vampire number"
+    else
+        let texts = pairs
+            |> map((a, b) => "{a} x {b}")
+        "{n}: {texts |> join(", ")}"
+    fi
 
 from(1000L)
     |> filter(n => "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true))

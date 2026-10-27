@@ -1,13 +1,13 @@
 use default
 
 extended_gcd(a: long, b: long) -> (g: long, x: long, y: long) =>
-    (if b == 0L then
-         (g = a, x = 1L, y = 0L)
-     else
-         let (g, x1, y1) = extended_gcd(b, a % b)
+    if b == 0L then
+        (g = a, x = 1L, y = 0L)
+    else
+        let (g, x1, y1) = extended_gcd(b, a % b)
 
-         (g = g, x = y1, y = x1 - (a / b) * y1)
-     fi)
+        (g = g, x = y1, y = x1 - (a / b) * y1)
+    fi
 
 crt(ns: List[long], as: List[long]) -> long? is
     let big_n mut = 1L

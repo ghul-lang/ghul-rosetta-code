@@ -54,12 +54,11 @@ patch(i: int, j: int) -> Patch =>
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
 
 brightness(p: Patch) -> double =>
-    (let c = p.corners
-     let n = (c[1] - c[0]) × (c[3] - c[0])
-
-     if n.length == 0.0D then 0.6D
-     else 0.55D + 0.45D * abs(n.z) / n.length
-     fi)
+    let c = p.corners in
+    let n = (c[1] - c[0]) × (c[3] - c[0]) in
+    if n.length == 0.0D then 0.6D
+    else 0.55D + 0.45D * abs(n.z) / n.length
+    fi
 
 let patches =
     [patch(i, j) for i in 0..around for j in 0..along]
