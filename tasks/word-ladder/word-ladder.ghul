@@ -10,6 +10,15 @@ neighbours(word: string) -> string{} =>
         |> map(c => "{word[0..i]}{c}{word[i + 1..<0]}"))
     |> filter(words.contains)
 
+path_back(previous: MAP[string, string], start: string, word: string)
+    -> Collections.List[string] =>
+    if word =~ start then
+        LIST([start])
+    else
+        (path_back(previous, start, previous[word]) ++ [word])
+            |> collect()
+    fi
+
 ladder(start: string, goal: string) -> Collections.List[string]? is
     let previous = MAP()
     let queue = Collections.Queue()
@@ -21,13 +30,7 @@ ladder(start: string, goal: string) -> Collections.List[string]? is
         let word = queue.dequeue()
 
         if word =~ goal then
-            let path = LIST([goal])
-
-            while path[0] !~ start do
-                path.insert(0, previous[path[0]])
-            od
-
-            return path
+            return path_back(previous, start, goal)
         fi
 
         for next in neighbours(word) do

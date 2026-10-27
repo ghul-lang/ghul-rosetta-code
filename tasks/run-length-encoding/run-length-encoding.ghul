@@ -1,36 +1,20 @@
 use default
 
-encode(text: string) -> string => (
-    let runs = System.Text.StringBuilder()
+encode(text: string) -> string =>
+    text |> group() |> map(run => "{run.count}{run[0]}") |> join("")
 
-    for run in text |> group() do
-        runs.append(run.count)
-        runs.append(run[0])
-    od
-
-    runs.to_string()
-)
-
-decode(encoded: string) -> string is
-    let text = System.Text.StringBuilder()
-    let at mut = 0
-
-    while at < encoded.length do
-        let start = at
-
-        while char.is_digit(encoded[at]) do
-            at = at + 1
-        od
-
-        let count = int.parse(encoded.substring(start, at - start))
-
-        text.append(encoded[at], count)
-
-        at = at + 1
-    od
-
-    return text.to_string()
-si
+decode(encoded: string) -> string =>
+    if encoded.length == 0 then
+        ""
+    else
+        let
+            digits =
+                encoded |> take_while(c => char.is_digit(c)) |> count(),
+            repeats = int.parse(encoded[0..digits]),
+            letter = encoded[digits]
+        in
+            "{string(letter, repeats)}{decode(encoded[digits + 1..<0])}"
+    fi
 
 let input =
     "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWW"

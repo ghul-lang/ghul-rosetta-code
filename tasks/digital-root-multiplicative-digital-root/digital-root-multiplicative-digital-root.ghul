@@ -3,17 +3,13 @@ use default
 product_of_digits(n: long) -> long =>
     "{n}" |> map(c => long(c - '0')) |> product()
 
-root(n: long) -> (persistence: int, root: long) => (
-    let m mut = n
-    let steps mut = 0
-
-    while m > 9L do
-        m = product_of_digits(m)
-        steps = steps + 1
-    od
-
-    (steps, m)
-)
+root(n: long) -> (persistence: int, root: long) =>
+    if n <= 9L then
+        (0, n)
+    else
+        let (steps, digit) = root(product_of_digits(n)) in
+        (steps + 1, digit)
+    fi
 
 write_line("   number  MP  MDR")
 
