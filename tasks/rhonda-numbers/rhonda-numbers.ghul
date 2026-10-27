@@ -1,17 +1,5 @@
 use default
 
-digits(value: int, base: int) -> List[int] is
-    let result = LIST()
-    let remaining mut = value
-
-    while remaining > 0 do
-        result.add(remaining % base)
-        remaining = remaining / base
-    od
-
-    result
-si
-
 prime_factor_sum(value: int) -> int is
     let total mut = 0
     let remaining mut = value
@@ -33,28 +21,12 @@ is_rhonda(value: int, base: int) -> bool =>
     digits(value, base) |> product() ==
     base * prime_factor_sum(value)
 
-rhondas(base: int) -> int{} is
-    let candidate mut = 1
+rhondas(base: int) -> int{} =>
+    from(2) |> filter(is_rhonda(*, base))
 
-    do
-        candidate = candidate + 1
-
-        if is_rhonda(candidate, base) then
-            yield candidate
-        fi
-    od
-si
-
-is_prime(value: int) -> bool is
-    let divisor mut = 2
-
-    while divisor * divisor <= value do
-        if value % divisor == 0 then return false fi
-        divisor = divisor + 1
-    od
-
-    value > 1
-si
+is_prime(value: int) -> bool =>
+    value > 1 /\
+    2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
 write_line("the first ten Rhonda numbers, shown in base ten:")
 

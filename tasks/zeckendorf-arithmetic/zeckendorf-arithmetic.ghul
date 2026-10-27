@@ -42,15 +42,13 @@ show(value: List[int]) -> string =>
 is_zero(value: List[int]) -> bool =>
     0..width |> all(index => value[index] == 0)
 
-compare(left: List[int], right: List[int]) -> int is
-    for index in 0..width |> reverse() do
-        if left[index] != right[index] then
-            return if left[index] > right[index] then 1 else -1 fi
-        fi
-    od
-
-    0
-si
+compare(left: List[int], right: List[int]) -> int =>
+    let diff = 0..width |> reverse() |> find(i => left[i] != right[i]) in
+    if diff? then
+        if left[diff] > right[diff] then 1 else -1 fi
+    else
+        0
+    fi
 
 normalise(digits: LIST[int]) is
     let settled mut = false
@@ -125,17 +123,13 @@ decrement(value: List[int]) -> LIST[int] is
     result
 si
 
-subtract(left: List[int], right: List[int]) -> LIST[int] is
-    let result mut = copy(left)
-    let remaining mut = copy(right)
-
-    while !is_zero(remaining) do
-        result = decrement(result)
-        remaining = decrement(remaining)
-    od
-
-    result
-si
+subtract(left: List[int], right: List[int]) -> LIST[int] =>
+    let result = copy(left) in
+    if is_zero(right) then
+        result
+    else
+        subtract(decrement(result), decrement(right))
+    fi
 
 fibonacci_multiples(value: List[int], upto: List[int]) -> List[List[int]] is
     let table = LIST[LIST[int]]()
@@ -166,15 +160,10 @@ multiply(left: List[int], right: List[int]) -> List[int] is
         table.add(add(table[table.count - 1], table[table.count - 2]))
     od
 
-    let total mut = blank()
-
-    for index in 0::top do
-        if right[index] == 1 then
-            total = add(total, table[index])
-        fi
-    od
-
-    total
+    0::top
+        |> filter(index => right[index] == 1)
+        |> map(index => table[index])
+        |> reduce(blank(), add)
 si
 
 use DIVISION = (quotient: List[int], remainder: List[int])

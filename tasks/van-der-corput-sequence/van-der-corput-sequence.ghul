@@ -1,19 +1,15 @@
 use default
 
-van_der_corput(n: int, base: int) -> double => (
-    let rest mut = n
-    let weight mut = 1.0D / cast(base)
-    let term mut = 0.0D
+van_der_corput(n: int, base: int) -> double is
+    walk(rest: int, weight: double) -> double =>
+        if rest == 0 then 0.0
+        else
+            cast(rest % base) * weight +
+                walk(rest / base, weight / cast(base))
+        fi
 
-    while rest > 0 do
-        term = term + cast(rest % base) * weight
-
-        rest = rest / base
-        weight = weight / cast(base)
-    od
-
-    term
-)
+    walk(n, 1.0D / cast(base))
+si
 
 let base_2 = 0::9 |> map(n => "{van_der_corput(n, 2)}") |> join()
 

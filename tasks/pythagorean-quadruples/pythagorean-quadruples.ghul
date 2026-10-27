@@ -13,12 +13,7 @@ od
 let represented = repeat(false, limit + 1) |> collect_mutable()
 
 for d in 1::limit do
-    for c in 1..d do
-        if two_squares[d * d - c * c] then
-            represented[d] = true
-            break
-        fi
-    od
+    represented[d] = 1..d |> any(c => two_squares[d * d - c * c])
 od
 
 write_line(1::limit |> filter(d => !represented[d]) |> join(" "))

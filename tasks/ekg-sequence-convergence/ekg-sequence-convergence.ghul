@@ -1,29 +1,19 @@
 use default
 
-shares_factor(left_value: int, right_value: int) -> bool => (
-    let left mut = left_value
-    let right mut = right_value
-
-    while right > 0 do
-        let remainder = left % right
-        left = right
-        right = remainder
-    od
-
-    left > 1
-)
+shares_factor(left_value: int, right_value: int) -> bool =>
+    if right_value > 0 then
+        shares_factor(right_value, left_value % right_value)
+    else
+        left_value > 1
+    fi
 
 ekg(start: int, count: int) -> List[int] is
     let terms = LIST([1, start])
     let used = SET([1, start])
 
     while terms.count < count do
-        let candidate mut = 2
-
-        while used.contains(candidate) \/
-                !shares_factor(candidate, terms[terms.count - 1]) do
-            candidate = candidate + 1
-        od
+        let candidate = from(2) |> find(c =>
+            !used.contains(c) /\ shares_factor(c, terms[terms.count - 1]))!
 
         terms.add(candidate)
         used.add(candidate)

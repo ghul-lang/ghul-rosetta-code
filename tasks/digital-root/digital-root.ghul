@@ -1,12 +1,7 @@
 use default
 use ROOT = (persistence: int, digital_root: long)
 
-digit_sum(value: long) -> long =>
-    if value < 10L then
-        value
-    else
-        value % 10L + digit_sum(value / 10L)
-    fi
+digit_sum(value: long) -> long => digits(value) |> sum()
 
 root(value: long) -> ROOT =>
     if value < 10L then

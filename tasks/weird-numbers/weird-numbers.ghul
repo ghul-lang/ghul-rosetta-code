@@ -19,23 +19,21 @@ proper_divisors(n: int) -> List[int] is
     divisors
 si
 
-sums_to(divisors: List[int], from: int, target: int) -> bool =>
-    if target == 0 then
-        true
-    elif from >= divisors.count then
-        false
-    elif divisors[from] > target then
-        sums_to(divisors, from + 1, target)
-    else
-        sums_to(divisors, from + 1, target - divisors[from]) \/
-            sums_to(divisors, from + 1, target)
-    fi
+sums_to(divisors: List[int], target: int) -> bool =>
+    case (divisors, target)
+    when (_, 0) then true
+    when ([], _) then false
+    when ([d, ..rest], _) then
+        if d > target then sums_to(rest, target)
+        else sums_to(rest, target - d) \/ sums_to(rest, target)
+        fi
+    esac
 
 weird(n: int) -> bool =>
     (let divisors = proper_divisors(n) |> sort_descending() |> collect()
 
      divisors |> sum() > n /\
-         !sums_to(divisors, 0, n))
+         !sums_to(divisors, n))
 
 from(2)
     |> filter(weird)

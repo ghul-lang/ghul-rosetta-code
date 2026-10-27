@@ -33,15 +33,11 @@ let opposite = [
     ("down", "up")
 ] |> collect_map()
 
-let aliases = MAP()
-
-for (short, long) in [
+let aliases = [
     ("n", "north"), ("s", "south"), ("e", "east"), ("w", "west"),
     ("u", "up"), ("d", "down"), ("i", "inventory"), ("inv", "inventory"),
     ("a", "attack")
-] do
-    aliases[short] = long
-od
+] |> collect_mutable_map()
 
 let goal = (x = 1, y = 1, z = 5)
 let rooms = MAP()
@@ -135,20 +131,18 @@ describe()
 while let line = read_line() do
     write_line("> {line}")
 
-    let words =
-        line.to_lower()
-            .split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let tokens = line.to_lower() |> words() |> collect()
 
-    if words.count == 0 then
+    if tokens.count == 0 then
         continue
     fi
 
     let command =
-        if aliases.contains_key(words[0]) then aliases[words[0]]
-        else words[0]
+        if aliases.contains_key(tokens[0]) then aliases[tokens[0]]
+        else tokens[0]
         fi
 
-    let argument = if words.count > 1 then words[1] else "" fi
+    let argument = if tokens.count > 1 then tokens[1] else "" fi
 
     if steps.contains_key(command) then
         move(command)
@@ -188,16 +182,16 @@ while let line = read_line() do
         else
             write_line("you have no {argument}")
         fi
-    elif command =~ "name" /\ words.count > 1 then
-        room().name = line.trim().substring(words[0].length).trim()
+    elif command =~ "name" /\ tokens.count > 1 then
+        room().name = line.trim().substring(tokens[0].length).trim()
         write_line("this room is now called {room().name}")
-    elif command =~ "alias" /\ words.count == 3 then
-        aliases[words[2]] =
+    elif command =~ "alias" /\ tokens.count == 3 then
+        aliases[tokens[2]] =
             if aliases.contains_key(argument) then aliases[argument]
             else argument
             fi
 
-        write_line("{words[2]} now means {aliases[words[2]]}")
+        write_line("{tokens[2]} now means {aliases[tokens[2]]}")
     elif command =~ "look" then
         describe()
     else

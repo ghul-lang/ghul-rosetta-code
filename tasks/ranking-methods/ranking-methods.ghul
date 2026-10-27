@@ -12,23 +12,8 @@ let competitors =
      (score = 41, name = "Barry"),
      (score = 39, name = "Stephen")]
 
-ties(entries: List[ENTRY]) -> List[ENTRY]{} is
-    let tied = LIST()
-
-    for entry in entries do
-        if let [first, ..] = tied /\ first.score != entry.score then
-            yield tied
-
-            tied.clear()
-        fi
-
-        tied.add(entry)
-    od
-
-    if tied.count > 0 then
-        yield tied
-    fi
-si
+ties(entries: List[ENTRY]) -> List[ENTRY]{} =>
+    entries |> group_by(e => e.score) |> map((_, group) => group)
 
 ranked(rank: RANKER) -> string{} is
     let ahead mut = 0

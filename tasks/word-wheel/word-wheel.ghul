@@ -3,19 +3,8 @@ use default
 let wheel = "ndeokgelw"
 let centre = 'k'
 
-available(letters: string) -> MAP[char, int] is
-    let counts = MAP()
-
-    for letter in letters do
-        if !counts.contains_key(letter) then
-            counts[letter] = 0
-        fi
-
-        counts[letter] = counts[letter] + 1
-    od
-
-    return counts
-si
+available(letters: string) -> MAP[char, int] =>
+    MAP(letters |> frequencies())
 
 spellable(word: string) -> bool is
     let left = available(wheel)

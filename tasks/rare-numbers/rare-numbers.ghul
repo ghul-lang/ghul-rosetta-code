@@ -3,15 +3,11 @@ use default
 let square_endings = [0, 1, 4, 5, 6, 9]
 
 reverse_of(n: long) -> long is
-    let remaining mut = n
-    let reversed mut = 0L
+    walk(remaining: long, reversed: long) -> long =>
+        if remaining == 0L then reversed
+        else walk(remaining / 10L, reversed * 10L + remaining % 10L) fi
 
-    while remaining > 0L do
-        reversed = reversed * 10L + remaining % 10L
-        remaining = remaining / 10L
-    od
-
-    return reversed
+    walk(n, 0L)
 si
 
 is_square(n: long) -> bool is

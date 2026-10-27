@@ -46,17 +46,10 @@ fang_text(n: long) -> string is
     fi
 si
 
-let first mut = 0
-let n mut = 1000L
-
-while first < 25 do
-    if "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true) then
-        write_line(fang_text(n))
-        first = first + 1
-    fi
-
-    n = n + 1L
-od
+from(1000L)
+    |> filter(n => "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true))
+    |> take(25)
+    |> each(n => write_line(fang_text(n)))
 
 for candidate in [16758243290880L, 24959017348650L, 14593825548650L] do
     write_line(fang_text(candidate))

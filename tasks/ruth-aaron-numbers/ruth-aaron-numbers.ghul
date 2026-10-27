@@ -87,13 +87,9 @@ runs(with_multiplicity: bool, size: int) -> int{} is
 
         if recent.count > size then recent.remove_at(0) fi
 
-        let alike mut = recent.count == size
-
-        for index in 1..recent.count do
-            if recent[index] != recent[0] then alike = false fi
-        od
-
-        if alike then yield entry.number - size + 1 fi
+        if recent.count == size /\ recent |> all(x => x == recent[0]) then
+            yield entry.number - size + 1
+        fi
     od
 si
 

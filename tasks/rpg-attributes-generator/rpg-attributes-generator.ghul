@@ -11,21 +11,15 @@ attribute() -> int =>
 character() -> List[int] =>
     1::6 |> map(_ => attribute()) |> collect()
 
-let rolled mut = character()
-
-let attempts mut = 1
-
-while !acceptable(rolled) do
-    rolled = character()
-
-    attempts = attempts + 1
-od
-
 acceptable(values: List[int]) -> bool =>
     let total = values |> sum() in
     let strong = values |> filter(* >= 15) |> count() in
     total >= 75 /\ strong >= 2
 
+let (attempts, rolled) =
+    from(1)
+        |> map(attempt => (attempt, character()))
+        |> find(((_, values)) => acceptable(values))!
 
 let total = rolled |> sum()
 

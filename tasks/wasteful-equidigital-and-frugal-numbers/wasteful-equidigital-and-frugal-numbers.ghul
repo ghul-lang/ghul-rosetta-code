@@ -34,17 +34,8 @@ while odd * odd <= limit do
     odd = odd + 2
 od
 
-length_in(value: int, base: int) -> int is
-    let digits mut = 0
-    let remaining mut = value
-
-    while remaining > 0 do
-        digits = digits + 1
-        remaining = remaining / base
-    od
-
-    digits
-si
+length_in(value: int, base: int) -> int =>
+    digits(value, base) |> count()
 
 factor_length(value: int, base: int) -> int is
     let total mut = 0

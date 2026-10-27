@@ -2,39 +2,20 @@ use default
 
 use Implicant = (bits: int, dashes: int)
 
-ones(value: int) -> int is
-    let remaining mut = value
-    let count mut = 0
-
-    while remaining != 0 do
-        count = count + (remaining & 1)
-        remaining = remaining >> 1
-    od
-
-    return count
-si
+ones(value: int) -> int => digits(value, 2) |> sum()
 
 covers(implicant: Implicant, minterm: int) -> bool =>
     (minterm & \implicant.dashes) == implicant.bits
 
-render(implicant: Implicant, variables: int) -> string is
-    let glyphs = LIST()
-
-    for position in 0..variables do
-        let bit = variables - 1 - position
-
-        glyphs.add(
-            if (implicant.dashes >> bit) & 1 == 1 then
-                'X'
-            elif (implicant.bits >> bit) & 1 == 1 then
-                '1'
-            else
-                '0'
+render(implicant: Implicant, variables: int) -> string =>
+    0..variables
+        |> map(position =>
+            let bit = variables - 1 - position in
+            if (implicant.dashes >> bit) & 1 == 1 then 'X'
+            elif (implicant.bits >> bit) & 1 == 1 then '1'
+            else '0'
             fi)
-    od
-
-    return string(glyphs |> collect())
-si
+        |> string()
 
 prime_implicants(minterms: List[int], variables: int) -> List[Implicant] is
     let primes = LIST()
@@ -114,13 +95,8 @@ minimal_cover(minterms: List[int], variables: int) -> List[Implicant] is
         primes |> filter(p => !(essential |> any(e => e =~ p))) |> collect()
 
     let found =
-        for size in 1::spare.count do
-            let choice = smallest_choice(spare, uncovered, size)
-
-            if choice? then
-                break choice
-            fi
-        od
+        1::spare.count
+            |> find_map(size => smallest_choice(spare, uncovered, size))
 
     if let chosen = found then
         return essential ++ chosen |> collect()

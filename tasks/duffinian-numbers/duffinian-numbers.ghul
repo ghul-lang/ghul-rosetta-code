@@ -23,46 +23,17 @@ si
 
 gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
 
-is_composite(value: int) -> bool is
-    let divisor mut = 2
-
-    while divisor * divisor <= value do
-        if value % divisor == 0 then return true fi
-        divisor = divisor + 1
-    od
-
-    false
-si
+is_composite(value: int) -> bool =>
+    2::int(Ghul.Math.sqrt(double(value))) |> any(d => value % d == 0)
 
 is_duffinian(value: int) -> bool =>
     is_composite(value) /\ gcd(value, sigma(value)) == 1
 
-duffinians() -> int{} is
-    let candidate mut = 1
+duffinians() -> int{} => from(2) |> filter(is_duffinian)
 
-    do
-        candidate = candidate + 1
-
-        if is_duffinian(candidate) then
-            yield candidate
-        fi
-    od
-si
-
-triplets() -> int{} is
-    let candidate mut = 1
-
-    do
-        candidate = candidate + 1
-
-        if is_duffinian(candidate) /\
-           is_duffinian(candidate + 1) /\
-           is_duffinian(candidate + 2)
-        then
-            yield candidate
-        fi
-    od
-si
+triplets() -> int{} =>
+    from(2) |> filter(c =>
+        is_duffinian(c) /\ is_duffinian(c + 1) /\ is_duffinian(c + 2))
 
 write_line("the first fifty Duffinian numbers:")
 

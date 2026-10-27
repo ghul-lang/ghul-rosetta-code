@@ -14,13 +14,7 @@ lis(xs: int[]) -> Collections.List[int] is
         od
     od
 
-    let best_index mut = 0
-
-    for i in 0..n do
-        if lengths[i] > lengths[best_index] then
-            best_index = i
-        fi
-    od
+    let best_index = (0..n |> max_by(i => lengths[i]))!
 
     let result = LIST()
     let cur mut = best_index
