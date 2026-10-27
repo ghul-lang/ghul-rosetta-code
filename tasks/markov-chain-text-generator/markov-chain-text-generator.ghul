@@ -28,23 +28,23 @@ generate(
     start: string,
     length: int,
     random: System.Random
-) -> string
-is
-    let out = LIST(start.split([' ']))
-    let size = out.count
+) -> string is
+    // each word drawn from those that followed the last few, until a
+    // prefix is reached that nothing followed
+    chain(prefix: string[]) -> string{} is
+        let choices = by_prefix[prefix |> join(" ")]
 
-    while out.count < length do
-        let prefix = out[(out.count - size)..out.count] |> join(" ")
-        let choices = by_prefix[prefix]
+        if choices.count > 0 then
+            let word = choices[random.next(0, choices.count)]
 
-        if choices.count == 0 then
-            break
+            yield word
+            yield in chain((prefix |> skip(1) ++ [word]) |> collect())
         fi
+    si
 
-        out.add(choices[random.next(0, choices.count)])
-    od
+    let opening = start.split([' '])
 
-    out |> join(" ")
+    (opening ++ chain(opening)) |> take(length) |> join(" ")
 si
 
 wrap(text: string, width: int) -> string{} is
