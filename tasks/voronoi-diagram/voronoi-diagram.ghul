@@ -24,21 +24,9 @@ let places =
         |> collect()
 
 nearest(x: int, y: int) -> int =>
-    (let best mut = 0
-     let closest mut = width * width + height * height
-
-     for at in 0..places.count do
-         let across = x - places[at].x
-         let up = y - places[at].y
-         let away = across * across + up * up
-
-         if away < closest then
-             closest = away
-             best = at
-         fi
-     od
-
-     best)
+    0..places.count |> min_by(at =>
+        (x - places[at].x) * (x - places[at].x) +
+        (y - places[at].y) * (y - places[at].y))!
 
 let image = IMAGE(width, height)
 
