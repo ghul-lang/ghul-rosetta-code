@@ -33,27 +33,22 @@ simulated(people: int, at_least: int, trials: int) -> double =>
 log_factorial(n: int) -> double =>
     1::n |> reduce(0.0D, (s, i) => s + log(double(i)))
 
+// ways[m] counts the ways to place m people over the days seen so far
+// with fewer than at_least on any one day, each day adding j of them
 exact(most: int, at_least: int) -> List[double] is
-    let ways mut = repeat(0.0D, most + 1) |> collect_mutable()
-
-    ways[0] = 1.0D
-
     let inverse_factorial =
         (0..at_least)
             |> map(j => 1.0D / exp(log_factorial(j)))
             |> collect()
 
-    for _ in 0..days do
-        let next = repeat(0.0D, most + 1) |> collect_mutable()
+    let nobody = [if m == 0 then 1.0D else 0.0D fi for m in 0::most]
 
-        for m in 0::most do
-            for j in 0..min(at_least, m + 1) do
-                next[m] = next[m] + ways[m - j] * inverse_factorial[j]
-            od
-        od
-
-        ways = next
-    od
+    let ways = 0..days |> reduce(nobody, (ways, _) => [
+        0..min(at_least, m + 1)
+            |> map(j => ways[m - j] * inverse_factorial[j])
+            |> sum()
+        for m in 0::most
+    ])
 
     (0::most)
         |> map(n =>
@@ -64,28 +59,25 @@ exact(most: int, at_least: int) -> List[double] is
         |> collect()
 si
 
-first_even(chance: (int) -> double, from: int) -> int => (
-    let low mut = from
-    let high mut = 600
-
-    while low < high do
-        let middle = (low + high) / 2
-
-        if chance(middle) > 0.5D then high = middle
-        else low = middle + 1 fi
-    od
-
-    low
-)
+// the smallest group size in low..high whose chance is over a half
+first_even(chance: (int) -> double, low: int, high: int) -> int =>
+    if low >= high then
+        low
+    else
+        let middle = (low + high) / 2 in
+        if chance(middle) > 0.5D then first_even(chance, low, middle)
+        else first_even(chance, middle + 1, high)
+        fi
+    fi
 
 let crossings = LIST()
 let curves = LIST[List[double]]()
 let start mut = 2
 
 for at_least in 2::5 do
-    let estimate = first_even(simulated(*, at_least, 10000), start)
+    let estimate = first_even(simulated(*, at_least, 10000), start, 600)
     let curve = exact(600, at_least)
-    let answer = first_even(n => curve[n], start)
+    let answer = first_even(n => curve[n], start, 600)
 
     curves.add(curve)
 
