@@ -29,8 +29,8 @@ generate(
     length: int,
     random: System.Random
 ) -> string is
-    // each word drawn from those that followed the last few, until a
-    // prefix is reached that nothing followed
+    // Each next word is drawn at random from the words that followed the
+    // current prefix. The chain stops at a prefix that nothing followed.
     chain(prefix: string[]) -> string{} is
         let choices = by_prefix[prefix |> join(" ")]
 

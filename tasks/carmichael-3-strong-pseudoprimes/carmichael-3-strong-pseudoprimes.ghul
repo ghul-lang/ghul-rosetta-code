@@ -20,8 +20,8 @@ is_prime(n: int) -> bool is
     return true
 si
 
-// Chernick's search: for each prime p1, every h3 below it and every d
-// below h3 + p1 that the congruences allow
+// Chernick's method. For each prime p1, try every h3 below p1, and every
+// d below h3 + p1 that meets the two divisibility conditions.
 carmichaels() -> (int, int, int){} is
     for p1 in 2::61 |> filter(is_prime) do
         for h3 in 2..p1 do

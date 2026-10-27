@@ -2,7 +2,8 @@ use default
 use System.Runtime.InteropServices.DllImport
 use System.Runtime.InteropServices.Marshal
 
-// a bodyless static under DllImport is the call into the C library
+// A static method with no body, marked DllImport, calls the C function
+// with the same name.
 class LIBC is
     @DllImport("libc")
     strdup(text: string) -> word static
@@ -13,8 +14,8 @@ class LIBC is
     init() is si
 si
 
-// the string is copied into a C string for the call; strdup's copy is
-// C memory, read back and then freed
+// The string is passed to C as a C string. strdup returns a copy in C
+// memory, which is read back and then freed.
 let copy = LIBC.strdup("Hello World!")
 
 write_line(Marshal.ptr_to_string_ansi(copy))

@@ -19,8 +19,9 @@ matched_at(text: string, at: int) -> (string, char)? =>
 matching_case(greek: char, english: char) -> char =>
     if char.is_upper(english) then char.to_upper(greek) else greek fi
 
-// the Greek letters for text from at onwards, one matched pair at a time;
-// anything no pair matches passes through
+// The Greek letters for text, starting at position at. Pairs of English
+// letters are tried before single letters, and anything that matches
+// neither passes through unchanged.
 letters(text: string, at: int) -> char{} is
     if at < text.length then
         if let (english, greek) = matched_at(text, at) then
@@ -33,7 +34,7 @@ letters(text: string, at: int) -> char{} is
     fi
 si
 
-// a sigma that ends a word takes its final form
+// A sigma at the end of a word is written in its final form, ς.
 final_form(greek: char[], at: int) -> char =>
     let
         ends_word =

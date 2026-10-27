@@ -1,7 +1,7 @@
 use default
 
-// the cells in zig-zag order: by anti-diagonal, alternate diagonals
-// running up and down
+// The cells in the order the zig-zag visits them: one anti-diagonal at a
+// time, going up and down alternately.
 zigzag_order(n: int) -> (int, int){} =>
     [(row, column) for row in 0..n for column in 0..n]
         |> sort_by(((row, column)) =>

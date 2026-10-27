@@ -1,6 +1,7 @@
 use default
 
-// what one sailor leaves: the pile less the monkey's coconut and his share
+// What is left after one sailor gives the monkey a coconut and hides a
+// share.
 after_night(pile: int, sailors: int) -> int =>
     pile - 1 - (pile - 1) / sailors
 
