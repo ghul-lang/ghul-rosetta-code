@@ -51,7 +51,7 @@ is_probable_prime(n: bigint) -> bool is
     return true
 si
 
-primes_to(limit: int) -> List[int] is
+primes_to(limit: int) -> int{} is
     let composite = repeat(false, limit + 1) |> collect_mutable()
 
     let factor mut = 2
@@ -70,7 +70,7 @@ primes_to(limit: int) -> List[int] is
         factor = factor + 1
     od
 
-    return 2::limit |> filter(n => !composite[n]) |> collect()
+    return 2::limit |> filter(n => !composite[n])
 si
 
 let small_primes = primes_to(60_000)

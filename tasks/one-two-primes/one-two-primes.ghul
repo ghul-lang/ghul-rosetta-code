@@ -49,8 +49,7 @@ one_two_numbers(digits: int) -> string{} =>
     0L..(1L << digits)
         |> map(bits =>
             string(0..digits
-                |> map(i => digit_at(bits, digits - 1 - i))
-                |> collect()))
+                |> map(i => digit_at(bits, digits - 1 - i))))
 
 smallest_prime(digits: int) -> string =>
     one_two_numbers(digits) |> find(text => is_prime(bigint.parse(text)))!

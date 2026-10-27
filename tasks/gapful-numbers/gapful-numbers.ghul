@@ -5,8 +5,8 @@ is_gapful(n: int) -> bool =>
     let ends = "{digits[0]}{digits[digits.length - 1]}" in
     n % int.parse(ends) == 0
 
-gapful_from(start: int, wanted: int) -> int[] =>
-    from(start) |> filter(is_gapful) |> take(wanted) |> collect()
+gapful_from(start: int, wanted: int) -> int{} =>
+    from(start) |> filter(is_gapful) |> take(wanted)
 
 write_line("first 30 gapful numbers:")
 write_line(gapful_from(100, 30) |> join())

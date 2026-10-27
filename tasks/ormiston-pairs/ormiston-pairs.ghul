@@ -26,7 +26,6 @@ digit_signature(value: int) -> string =>
 
 let primes = 2..(limit + 1)
     |> filter(candidate => !composite[candidate])
-    |> collect()
 
 let ormiston = primes
     |> pairwise()

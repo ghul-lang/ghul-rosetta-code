@@ -34,7 +34,6 @@ let text = [
 let rows =
     text
     |> map(line => line.trim_end('$').split(['$']))
-    |> collect()
 
 let columns =
     rows

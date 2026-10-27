@@ -30,7 +30,7 @@ roots(base: int) -> List[long] is
 si
 
 reversed(s: string) -> string =>
-    string(s.to_char_array() |> reverse() |> collect())
+    string(s.to_char_array() |> reverse())
 
 show(n: long, base: int) -> string =>
     "{in_base(n, base)}² = {in_base(n * n, base)}"

@@ -12,8 +12,7 @@ remarks_document(remarks: List[Remark]) -> XDocument =>
         [XElement(
             XName.get("CharacterRemarks"),
             remarks
-                |> map((name, remark) => character(name, remark))
-                |> collect())])
+                |> map((name, remark) => character(name, remark)))])
 
 let remarks =
     [

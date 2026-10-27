@@ -90,7 +90,7 @@ attacked(position: POSITION, square: int, by_white: bool) -> bool is
         ray_hits(position, row, column, dr, dc, by_white, "bq"))
 si
 
-castling_targets(position: POSITION, from: int) -> List[int] is
+castling_targets(position: POSITION, from: int) -> int{} is
     let white = position.white_to_move
     let home = if white then 60 else 4 fi
     let (short, long) = if white then ("K", "Q") else ("k", "q") fi
@@ -120,7 +120,7 @@ castling_targets(position: POSITION, from: int) -> List[int] is
     targets
 si
 
-pseudo_moves(position: POSITION) -> List[Move] is
+pseudo_moves(position: POSITION) -> Move{} is
     let moves = LIST()
     let white = position.white_to_move
     let at = (r, k) => position.squares[r * 8 + k]

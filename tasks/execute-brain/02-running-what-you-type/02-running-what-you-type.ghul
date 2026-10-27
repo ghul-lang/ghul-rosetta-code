@@ -62,7 +62,7 @@ run(program: string, input: string) -> string is
         at = at + 1
     od
 
-    string(output |> collect())
+    string(output)
 si
 
 balanced(program: string) -> bool is

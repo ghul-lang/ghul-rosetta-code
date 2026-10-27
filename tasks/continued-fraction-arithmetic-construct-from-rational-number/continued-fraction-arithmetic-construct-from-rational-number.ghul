@@ -14,8 +14,7 @@ r2cf(numerator: long, denominator: long) -> long{} is
 si
 
 show(terms: long{}) -> string =>
-    let all = terms |> collect() in
-    case all
+    case terms
     when [] then "[]"
     when [only] then "[{only}]"
     when [first, ..rest] then "[{first}; {rest |> join()}]"

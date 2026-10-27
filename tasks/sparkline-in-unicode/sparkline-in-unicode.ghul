@@ -25,8 +25,7 @@ sparkline(series: string) -> string is
 
     write_line("min {lowest}, max {highest}")
 
-    return string(values |> map(bar(*, lowest, span))
-                         |> collect())
+    return string(values |> map(bar(*, lowest, span)))
 si
 
 for series in [

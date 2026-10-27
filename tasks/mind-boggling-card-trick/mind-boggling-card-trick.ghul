@@ -2,8 +2,8 @@ use default
 
 let random = System.Random(52)
 
-shuffled[T](items: T{}) -> List[T] =>
-    items |> sort_by(_ => random.next()) |> collect()
+shuffled[T](items: T{}) -> T{} =>
+    items |> sort_by(_ => random.next())
 
 trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
@@ -14,8 +14,8 @@ trial() -> (black_in_black: int, red_in_red: int) is
         |> map(p => p[1]) |> collect_mutable()
 
     let swap = random.next(int.min(black.count, red.count) + 1)
-    let black_bunch = shuffled(black) |> take(swap) |> collect()
-    let red_bunch = shuffled(red) |> take(swap) |> collect()
+    let black_bunch = shuffled(black) |> take(swap) |> memo()
+    let red_bunch = shuffled(red) |> take(swap) |> memo()
 
     for card in black_bunch do black.remove(card) od
     for card in red_bunch do red.remove(card) od

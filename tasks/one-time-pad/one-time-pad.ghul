@@ -9,8 +9,7 @@ letters(text: string) -> string =>
 
 random_group() -> string =>
     string(1::6
-        |> map(_ => char(65 + RandomNumberGenerator.get_int32(26)))
-        |> collect())
+        |> map(_ => char(65 + RandomNumberGenerator.get_int32(26))))
 
 random_line() -> string => 1::6 |> map(_ => random_group()) |> join(" ")
 
@@ -46,8 +45,7 @@ shift(text: string, key: string, direction: int) -> string =>
     string(0..text.length
         |> map(i =>
             let moved = position(text[i]) + direction * position(key[i]) in
-            char(int('A') + (moved + 26) % 26))
-        |> collect())
+            char(int('A') + (moved + 26) % 26)))
 
 round_trip(
     message: string, sender: string, receiver: string

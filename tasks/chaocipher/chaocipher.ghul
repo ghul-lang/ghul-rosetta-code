@@ -45,7 +45,7 @@ chao(text: string, encrypting: bool) -> string is
         advance(left, right, index)
     od
 
-    return string(out |> collect())
+    return string(out)
 si
 
 let plain = "WELLDONEISBETTERTHANWELLSAID"

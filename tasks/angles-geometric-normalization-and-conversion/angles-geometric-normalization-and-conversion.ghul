@@ -21,7 +21,7 @@ let angles =
     ]
 
 for source in scales do
-    let others = scales |> filter(s => s.name !~ source.name) |> collect()
+    let others = scales |> filter(s => s.name !~ source.name) |> memo()
 
     write_line("")
     write_line("{source.name}")

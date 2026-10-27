@@ -1,6 +1,6 @@
 use default
 
-filter(a: double[], b: double[], signal: double[]) -> List[double] is
+filter(a: double[], b: double[], signal: double[]) -> double{} is
     let out = LIST()
 
     for i in 0..signal.count do

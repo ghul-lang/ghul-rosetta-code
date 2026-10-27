@@ -22,7 +22,7 @@ sequence(seed: int) -> List[string] is
 si
 
 canonical(seed: int) -> string =>
-    string("{seed}" |> sort() |> collect())
+    string("{seed}" |> sort())
 
 let lengths = MAP()
 

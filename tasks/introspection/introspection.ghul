@@ -27,7 +27,7 @@ let flags = visible | BindingFlags.NON_PUBLIC
 let integers = assembly.get_types()
     |> flat_map(t => pipe(t.get_fields(flags)))
     |> filter(f => f.field_type == typeof int)
-    |> collect()
+    |> memo()
 
 let has_bloop = integers |> any(f => f.name.trim_start(['$']) =~ "bloop")
 let abs = (typeof System.Math).get_method("Abs", [typeof int])

@@ -15,7 +15,7 @@ normal() -> double{} is
 si
 
 let size = 100000
-let samples = normal() |> take(size) |> collect()
+let samples = normal() |> take(size) |> memo()
 
 let mean =
     samples |> sum() / double(size)

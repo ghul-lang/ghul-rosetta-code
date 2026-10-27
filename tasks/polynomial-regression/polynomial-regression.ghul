@@ -7,7 +7,7 @@ power_sum(xs: double[], k: int) -> double =>
 moment(xs: double[], ys: double[], k: int) -> double =>
     zip(xs, ys) |> sum_by((x, y) => y * pow(x, cast(k)))
 
-solve(a: LIST[LIST[double]], b: LIST[double]) -> double[] is
+solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
     let n = b.count
 
     for column in 0..n do
@@ -42,7 +42,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double[] is
     return solution |> collect()
 si
 
-fit(xs: double[], ys: double[], degree: int) -> double[] =>
+fit(xs: double[], ys: double[], degree: int) -> double{} =>
     solve(
         (0::degree)
             |> map(i =>

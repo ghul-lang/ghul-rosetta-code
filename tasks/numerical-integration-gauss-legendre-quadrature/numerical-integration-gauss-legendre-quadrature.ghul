@@ -31,12 +31,11 @@ root(n: int, i: int) -> double is
     x
 si
 
-nodes_and_weights(n: int) -> List[(node: double, weight: double)] =>
+nodes_and_weights(n: int) -> (node: double, weight: double){} =>
     1::n
         |> map(i =>
             let x = root(n, i), slope = legendre(n, x).slope in
             (node = x, weight = 2.0 / ((1.0 - x * x) * slope * slope)))
-        |> collect()
 
 integrate(f: double -> double, a: double, b: double, n: int) -> double =>
     let half = (b - a) / 2.0, middle = (a + b) / 2.0 in

@@ -11,10 +11,9 @@ ord(c: char) -> int => int(c) - int('A')
 
 chr(n: int) -> char => char(int('A') + (n % 26 + 26) % 26)
 
-counts(text: string) -> int[] =>
+counts(text: string) -> int{} =>
     (0..26)
         |> map(letter => text |> filter(c => ord(c) == letter) |> count())
-        |> collect()
 
 column(text: string, length: int, start: int) -> string =>
     text

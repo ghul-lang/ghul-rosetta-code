@@ -11,7 +11,7 @@ shuffled(items: string) -> string =>
          let j = i + random.next(held.count - i)
          (held[i], held[j]) = (held[j], held[i])
      od
-     string(held |> collect()))
+     string(held))
 
 all_letters(word: string) -> bool =>
     word |> all(char.is_letter)
@@ -20,10 +20,9 @@ no_repeats(word: string) -> bool =>
     (let seen = SET()
      word |> all(seen.add))
 
-read_order(key: string) -> List[int] =>
+read_order(key: string) -> int{} =>
     (0..key.length)
         |> sort_by(column => key[column])
-        |> collect()
 
 column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +

@@ -19,7 +19,7 @@ ask(a: string, b: string) -> int is
     esac
 si
 
-order(items: List[string]) -> List[string] is
+order(items: List[string]) -> string{} is
     let sorted = LIST()
 
     for item in items do

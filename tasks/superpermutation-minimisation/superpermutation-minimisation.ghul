@@ -40,7 +40,7 @@ recursive(n: int) -> string is
     result.to_string()
 si
 
-permutations(letters: string) -> List[string] =>
+permutations(letters: string) -> string{} =>
     if letters.length <= 1 then LIST([letters])
     else
         ["{letters[i]}{rest}"

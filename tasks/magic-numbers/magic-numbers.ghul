@@ -14,7 +14,6 @@ magic_numbers() -> bigint{} is
         let next =
             [n * 10n + bigint(d) for n in current for d in 0::9]
                 |> filter(n => n % bigint(length) =~ 0n)
-                |> collect()
 
         current.clear()
         current.add_range(next)

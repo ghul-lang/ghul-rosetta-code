@@ -31,7 +31,7 @@ position(number: int) -> string is
         place(piece, 0)
     od
 
-    string(squares |> collect())
+    string(squares)
 si
 
 is_legal(rank: string) -> bool =>
@@ -50,7 +50,7 @@ for _ in 1::5 do
     write_line(rank |> map(p => symbols[p]) |> join(""))
 od
 
-let positions = 0..960 |> map(position) |> collect()
+let positions = 0..960 |> map(position) |> memo()
 
 write_line()
 write_line("distinct positions: {positions |> distinct() |> count()}")

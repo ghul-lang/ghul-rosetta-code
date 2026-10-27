@@ -30,7 +30,7 @@ for _ in 1::3 do
         "host opens {game.opened}, switching gives {game.switched}")
 od
 
-let games = 1::rounds |> map(_ => play()) |> collect()
+let games = 1::rounds |> map(_ => play()) |> memo()
 
 let stay_wins = games |> count(g => g.chosen == g.car)
 let switch_wins = games |> count(g => g.switched == g.car)

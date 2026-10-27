@@ -1,6 +1,6 @@
 use default
 
-lis(xs: int[]) -> Collections.List[int] is
+lis(xs: int[]) -> int{} is
     let n = xs.count
     let lengths = repeat(1, n + 1) |> collect_mutable()
     let prev = repeat(-1, n + 1) |> collect_mutable()
@@ -24,7 +24,7 @@ lis(xs: int[]) -> Collections.List[int] is
         cur = prev[cur]
     od
 
-    result |> reverse() |> collect()
+    result |> reverse()
 si
 
 let sequences = [

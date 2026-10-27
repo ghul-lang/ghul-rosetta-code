@@ -1,6 +1,6 @@
 use default
 
-decompose(n: bigint) -> List[bigint] is
+decompose(n: bigint) -> bigint{} is
     let factors = LIST()
 
     let two = 2n

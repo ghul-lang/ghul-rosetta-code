@@ -1,7 +1,7 @@
 use default
 
-digits(n: int) -> List[int] =>
-    "{n}" |> map(c => int(c - '0')) |> collect()
+digits(n: int) -> int{} =>
+    "{n}" |> map(c => int(c - '0'))
 
 qualifies(n: int) -> bool =>
     let ds = digits(n) in

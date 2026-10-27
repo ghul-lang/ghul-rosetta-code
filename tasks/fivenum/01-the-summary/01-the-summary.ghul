@@ -1,7 +1,7 @@
 use default
 use System.Math.*
 
-fivenum(xs_raw: double[]) -> double[] is
+fivenum(xs_raw: double[]) -> double{} is
     let xs = xs_raw |> sort() |> collect()
     let n = xs.count
     let n4 = floor((double(n) + 3.0) / 2.0) / 2.0
@@ -13,7 +13,7 @@ fivenum(xs_raw: double[]) -> double[] is
         let lo = xs[int(floor(di)) - 1], hi = xs[int(ceiling(di)) - 1] in
         0.5 * (lo + hi)
 
-    d |> map(midpoint) |> collect()
+    d |> map(midpoint)
 si
 
 let datasets = [

@@ -83,7 +83,7 @@ let shown mut = null
 
 for step in 0::10 do
     let p = double(step) / 10.0D
-    let grids = 0..trials |> map(_ => GRID(p)) |> collect()
+    let grids = 0..trials |> map(_ => GRID(p)) |> memo()
     let dripped = grids |> filter(g => g.pour()) |> count()
 
     write_line("{p:F1}    {double(dripped) / double(trials):F2}")

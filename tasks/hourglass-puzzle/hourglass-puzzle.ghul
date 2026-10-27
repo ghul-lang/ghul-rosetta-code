@@ -30,7 +30,7 @@ wait(s: State) -> State? =>
             time = s.time + step)
     fi
 
-moves(s: State) -> List[(command: string, next: State)] is
+moves(s: State) -> (command: string, next: State){} is
     let result = LIST()
 
     if let after = wait(s) then

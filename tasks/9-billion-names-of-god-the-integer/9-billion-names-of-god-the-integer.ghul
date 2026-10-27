@@ -7,8 +7,8 @@ at_most(total: int, largest: int) -> int =>
     else at_most(total, largest - 1) + at_most(total - largest, largest)
     fi
 
-row(n: int) -> List[int] =>
-    1::n |> map(first => at_most(n - first, first)) |> collect()
+row(n: int) -> int{} =>
+    1::n |> map(first => at_most(n - first, first))
 
 for n in 1::25 do
     let cells = row(n) |> map(count => "{count,4}") |> join("")

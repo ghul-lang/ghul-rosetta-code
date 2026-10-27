@@ -215,7 +215,7 @@ class MATCHER(grammar: GRAMMAR, text: string) is
         i
     si
 
-    ends(rule: Rule, at: int) -> List[int] is
+    ends(rule: Rule, at: int) -> int{} is
         let result = LIST()
 
         case rule

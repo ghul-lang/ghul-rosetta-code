@@ -23,7 +23,7 @@ riffle_shuffle(deck: List[int], random: Random) -> List[int] is
     merged
 si
 
-overhand_shuffle(deck: List[int], random: Random) -> List[int] is
+overhand_shuffle(deck: List[int], random: Random) -> int{} is
     let remaining = LIST(deck)
     let stacked = LIST()
 
@@ -44,7 +44,7 @@ overhand_shuffle(deck: List[int], random: Random) -> List[int] is
 si
 
 let random = Random(42)
-let deck = LIST(0..10 |> collect())
+let deck = LIST(0..10)
 
 let riffled = riffle_shuffle(deck, random)
 let overhanded = overhand_shuffle(riffled, random)

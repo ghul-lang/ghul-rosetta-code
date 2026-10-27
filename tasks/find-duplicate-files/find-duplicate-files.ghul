@@ -29,7 +29,7 @@ same_contents(root: string, size: long, paths: string{})
                     |> collect()))
         |> filter((_, paths) => paths.count > 1)
 
-duplicates(root: string, minimum: long) -> List[Group] =>
+duplicates(root: string, minimum: long) -> Group{} =>
     Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)
         |> map(path => (path, size = IO.FileInfo(path).length))
         |> filter((_, size) => size >= minimum)
@@ -37,7 +37,6 @@ duplicates(root: string, minimum: long) -> List[Group] =>
         |> flat_map((size, files) =>
             same_contents(root, size, files |> map((path, _) => path)))
         |> sort_by_descending((size, _) => size)
-        |> collect()
 
 let root =
     Path.combine(

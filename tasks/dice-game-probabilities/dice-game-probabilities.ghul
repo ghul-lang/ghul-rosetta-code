@@ -1,6 +1,6 @@
 use default
 
-totals(dice: int, faces: int) -> List[long] is
+totals(dice: int, faces: int) -> long{} is
     let counts = LIST([1L])
 
     for _ in 0..dice do

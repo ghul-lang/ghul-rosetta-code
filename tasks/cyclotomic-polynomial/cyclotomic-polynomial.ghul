@@ -27,7 +27,6 @@ cyclotomic(n: int) -> List[long] is
         [(power = d, exponent = mobius(n / d))
             for d in 1::n if n % d == 0]
             |> filter(f => f.exponent != 0)
-            |> collect()
 
     let degree = factors |> sum_by(f => f.power * f.exponent)
     let series = repeat(0L, degree + 1) |> collect_mutable()

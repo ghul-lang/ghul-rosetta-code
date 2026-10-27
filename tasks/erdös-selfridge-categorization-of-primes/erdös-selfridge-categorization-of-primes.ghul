@@ -45,7 +45,7 @@ let primes =
     2::limit
         |> filter(n => smallest_factor[n] == n)
         |> take(1_000_000)
-        |> collect()
+        |> memo()
 
 for p in primes do
     category[p] = categorise(p)

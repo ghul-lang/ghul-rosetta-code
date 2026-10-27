@@ -14,7 +14,7 @@ si
 
 let random = Random(42)
 
-let value_sets = [[], [10], [10, 20, 30], 1..11 |> collect()]
+let value_sets = [[], [10], [10, 20, 30], 1..11]
 
 for values in value_sets do
     let items = LIST(values)

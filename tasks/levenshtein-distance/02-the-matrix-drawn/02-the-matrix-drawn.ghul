@@ -39,7 +39,7 @@ si
 
 let table = distances(source, target)
 
-alignment() -> List[(row: int, column: int)] is
+alignment() -> (row: int, column: int){} is
     let i mut = source.length
     let j mut = target.length
 

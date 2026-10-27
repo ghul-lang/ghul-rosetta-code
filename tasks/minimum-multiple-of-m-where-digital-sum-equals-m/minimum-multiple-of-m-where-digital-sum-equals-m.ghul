@@ -3,7 +3,7 @@ use default
 least_multiplier(n: long) -> long =>
     from(1L) |> find(m => digits(n * m) |> sum() == n)!
 
-let terms = 1L::70L |> map(least_multiplier) |> collect()
+let terms = 1L::70L |> map(least_multiplier) |> memo()
 
 write_line("The first 40 terms:")
 

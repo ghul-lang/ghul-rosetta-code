@@ -30,8 +30,7 @@ play(board: string, move: Move) -> string =>
                 if i == move.to then board[move.from]
                 elif i == move.from then '.'
                 else board[i]
-                fi)
-            |> collect())
+                fi))
 
 has_won(board: string, side: char) -> bool =>
     let far_rank = if side == 'W' then 0 else 6 fi in

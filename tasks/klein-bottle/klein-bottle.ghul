@@ -66,7 +66,7 @@ let quads =
 
 let image = IMAGE(360, 360)
 
-let flat = quads |> flat_map(q => q) |> collect()
+let flat = quads |> flat_map(q => q) |> memo()
 let low_x = flat |> map(p => p.x) |> reduce(0.0D, min)
 let high_x = flat |> map(p => p.x) |> reduce(0.0D, max)
 let low_y = flat |> map(p => p.y) |> reduce(0.0D, min)

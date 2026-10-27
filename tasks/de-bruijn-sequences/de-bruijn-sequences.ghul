@@ -57,5 +57,5 @@ write_line(sequence[130..<<0])
 write_line()
 
 verify("Original", sequence)
-verify("Reversed", string(sequence |> reverse() |> collect()))
+verify("Reversed", string(sequence |> reverse()))
 verify("4444th digit replaced", "{sequence[0..4443]}.{sequence[4444..<0]}")

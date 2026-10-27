@@ -4,7 +4,7 @@ let original = "hello"
 
 let reference = original
 
-let copy = string(original |> collect())
+let copy = string(original)
 
 write_line("reference is another name for the same string")
 write_line("original == reference: {original == reference}")

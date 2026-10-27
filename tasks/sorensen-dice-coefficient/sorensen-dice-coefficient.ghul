@@ -28,7 +28,7 @@ let tasks =
     IO.File.read_all_lines("rosetta-tasks.txt")
         |> map(name => (name = name, grams = bigrams(name)))
 
-closest(term: string) -> List[(name: string, score: double)] =>
+closest(term: string) -> (name: string, score: double){} =>
     (let wanted = bigrams(term)
 
      let scored =
@@ -47,7 +47,7 @@ closest(term: string) -> List[(name: string, score: double)] =>
               left.name <> right.name
           fi))
 
-     scored[0..5] |> collect())
+     scored[0..5])
 
 for term in ["Primordial primes",
              "Sunkist-Giuliani formula",

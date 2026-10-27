@@ -19,7 +19,6 @@ let commands =
     table.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
     |> map(command =>
         (word = command, minimum = minimum_length(command)))
-    |> collect()
 
 matches(command: (word: string, minimum: int), word: string) -> bool =>
     word.length >= command.minimum /\

@@ -19,7 +19,6 @@ write_columns(
                     "{pair.`0.to_string("G{x_precision}")}\t"
                     "{pair.`1.to_string("G{y_precision}")}"
             )
-            |> collect()
     )
 si
 

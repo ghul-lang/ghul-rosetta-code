@@ -12,7 +12,7 @@ si
 gcd(a: bigint, b: bigint) -> bigint =>
     if b.is_zero then a else gcd(b, a % b) fi
 
-let terms = sylvester(10) |> collect()
+let terms = sylvester(10) |> memo()
 
 write_line("first ten terms:")
 

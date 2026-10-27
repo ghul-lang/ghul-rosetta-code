@@ -28,7 +28,7 @@ goldbach(even: int) -> int =>
 
 let points = (2::limit / 2)
     |> map(half => (even = 2 * half, count = goldbach(2 * half)))
-    |> collect()
+    |> memo()
 
 let tallest =
     points |> reduce(0, (best, point) => Math.max(best, point.count))

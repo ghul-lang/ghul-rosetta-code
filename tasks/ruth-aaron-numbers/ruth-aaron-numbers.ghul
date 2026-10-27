@@ -20,7 +20,7 @@ for candidate in 2..factor_limit do
 od
 
 let small_primes =
-    2..factor_limit |> filter(value => !composite[value]) |> collect()
+    2..factor_limit |> filter(value => !composite[value]) |> memo()
 
 let segment_size = 1_000_000
 

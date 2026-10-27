@@ -94,7 +94,7 @@ key(phase: int, state: int[]) -> string is
     values |> join(",")
 si
 
-solve_phase(phase: int, start: int[]) -> List[int] is
+solve_phase(phase: int, start: int[]) -> int{} is
     let start_key = key(phase, start)
     let goal_key = key(phase, solved)
 

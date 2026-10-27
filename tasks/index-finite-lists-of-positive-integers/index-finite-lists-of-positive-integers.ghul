@@ -8,7 +8,7 @@ rank(values: Collections.List[bigint]) -> bigint =>
         value.to_string() |> reduce(acc * eleven + ten,
             (r, d) => r * eleven + cast(d - '0')))
 
-unrank(index: bigint) -> List[bigint] is
+unrank(index: bigint) -> bigint{} is
     let digits = LIST()
     let remaining mut = index
 

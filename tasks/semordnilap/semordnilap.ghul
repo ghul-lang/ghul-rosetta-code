@@ -1,7 +1,7 @@
 use default
 
 reversed(s: string) -> string =>
-    string(s.to_char_array() |> reverse() |> collect())
+    string(s.to_char_array() |> reverse())
 
 let words = SET(IO.File.read_all_lines("unixdict.txt"))
 

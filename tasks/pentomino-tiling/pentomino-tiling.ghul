@@ -40,10 +40,10 @@ cell_at(row: int, column: int) -> Cell => (row = row, column = column)
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
-orientations(cells: List[(int, int)]) -> List[Shape] is
+orientations(cells: List[(int, int)]) -> Shape{} is
     let found = LIST()
     let current mut =
-        cells |> map((r, c) => cell_at(r, c)) |> collect()
+        cells |> map((r, c) => cell_at(r, c))
 
     for _ in 0..4 do
         for flip in [false, true] do
@@ -57,7 +57,7 @@ orientations(cells: List[(int, int)]) -> List[Shape] is
         od
 
         current =
-            current |> map(c => cell_at(c.column, -c.row)) |> collect()
+            current |> map(c => cell_at(c.column, -c.row))
     od
 
     found
@@ -66,7 +66,7 @@ si
 let shapes =
     pieces
         |> map((name, cells) => (name, orientations(cells)))
-        |> collect()
+        |> memo()
 let board = repeat('.', size * size) |> collect_mutable()
 let used = repeat(false, pieces.count) |> collect_mutable()
 

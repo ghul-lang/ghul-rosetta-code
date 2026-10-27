@@ -24,7 +24,7 @@ class PEAR: Fruit is
     color() -> string => "green"
 si
 
-let fruits = [BANANA(), PEAR()] |> collect()
+let fruits = [BANANA(), PEAR()]
 
 let box = FOOD_BOX(fruits)
 

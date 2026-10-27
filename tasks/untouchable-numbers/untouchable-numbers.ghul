@@ -75,7 +75,7 @@ for first in 0..primes.count do
 od
 
 let untouchable = 1::top |> filter(value => !touched[value])
-                           |> collect()
+                           |> memo()
 
 write_line("the untouchable numbers up to 2000:")
 

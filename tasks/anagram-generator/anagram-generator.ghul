@@ -25,7 +25,7 @@ si
 
 let words = IO.File.read_all_lines("unixdict.txt")
 
-anagrams_of(seed: string, wanted: int) -> List[string] is
+anagrams_of(seed: string, wanted: int) -> string{} is
     let remaining = letter_counts(seed)
 
     let candidates =

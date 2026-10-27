@@ -30,8 +30,7 @@ raised(base: long, exponent: int) -> long =>
 in_base(value: long, base: long) -> string =>
     string(
         to_digits(value, base)
-            |> map(digit => "0123456789"[digit])
-            |> collect())
+            |> map(digit => "0123456789"[digit]))
 
 ternary_palindromes() -> long{} is
     yield 0L

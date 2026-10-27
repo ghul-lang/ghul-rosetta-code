@@ -38,8 +38,7 @@ write_source(path: string) =>
     File.write_all_lines(
         path,
         0..values
-            |> map(_ => "{random.next(1_000_000)}")
-            |> collect())
+            |> map(_ => "{random.next(1_000_000)}"))
 
 split(path: string) -> List[string] is
     let parts = LIST()
@@ -52,7 +51,7 @@ split(path: string) -> List[string] is
             let part = "run-{parts.count}.txt"
 
             File.write_all_lines(
-                part, held |> map(v => "{v}") |> collect())
+                part, held |> map(v => "{v}"))
 
             parts.add(part)
             held.clear()
@@ -75,7 +74,7 @@ split(path: string) -> List[string] is
 si
 
 merge(parts: List[string], into: string) is
-    let runs = parts |> map(RUN) |> collect()
+    let runs = parts |> map(RUN) |> memo()
     let use writer = File.create_text(into)
 
     do

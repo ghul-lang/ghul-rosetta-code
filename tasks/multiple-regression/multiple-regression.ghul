@@ -14,7 +14,7 @@ transpose(m: Matrix) -> Matrix =>
             |> collect())
         |> collect()
 
-solve(a: Matrix, b: List[double]) -> List[double] is
+solve(a: Matrix, b: List[double]) -> double{} is
     let n = b.count
 
     let rows = 0..n
@@ -44,7 +44,7 @@ solve(a: Matrix, b: List[double]) -> List[double] is
     x
 si
 
-regress(y: List[double], x: Matrix) -> List[double] =>
+regress(y: List[double], x: Matrix) -> double{} =>
     let xt = transpose(x), xty = xt * (y |> map(v => [v]) |> collect()) in
     solve(xt * x, xty |> map(row => row[0]) |> collect())
 

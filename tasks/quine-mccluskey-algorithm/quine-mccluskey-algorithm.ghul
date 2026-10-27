@@ -17,7 +17,7 @@ render(implicant: Implicant, variables: int) -> string =>
             fi)
         |> string()
 
-prime_implicants(minterms: List[int], variables: int) -> List[Implicant] is
+prime_implicants(minterms: List[int], variables: int) -> Implicant{} is
     let primes = LIST()
 
     let current mut =
@@ -64,13 +64,13 @@ prime_implicants(minterms: List[int], variables: int) -> List[Implicant] is
         current = combined |> distinct() |> collect()
     od
 
-    return primes |> distinct() |> collect()
+    return primes |> distinct()
 si
 
 // Every prime implicant that alone covers some minterm must be in the
 // answer; the rest is the smallest set of the others that covers what is
 // left, found by trying every combination in increasing size.
-minimal_cover(minterms: List[int], variables: int) -> List[Implicant] is
+minimal_cover(minterms: List[int], variables: int) -> Implicant{} is
     let primes = prime_implicants(minterms, variables)
 
     let essential =

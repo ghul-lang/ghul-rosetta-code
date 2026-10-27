@@ -11,8 +11,8 @@ magic(n: int) -> List[List[int]] =>
                 |> collect())
         |> collect()
 
-column(square: List[List[int]], c: int) -> List[int] =>
-    square |> map(row => row[c]) |> collect()
+column(square: List[List[int]], c: int) -> int{} =>
+    square |> map(row => row[c])
 
 check(square: List[List[int]]) -> bool =>
     let n = square.count, target = n * (n * n + 1) / 2 in

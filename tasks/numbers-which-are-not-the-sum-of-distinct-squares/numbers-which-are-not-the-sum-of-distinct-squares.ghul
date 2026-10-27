@@ -31,7 +31,6 @@ do
     let next = (root + 1) * (root + 1)
     let gaps =
         1..reachable.count |> filter(n => !reachable[n])
-            |> collect()
 
     if let last = gaps |> find(gap => run_after(gap) >= next) then
         write_line("Numbers that are not the sum of distinct squares:")

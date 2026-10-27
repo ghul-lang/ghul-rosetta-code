@@ -9,7 +9,6 @@ linear_combination(scalars: List[int]) -> string =>
         scalars
             |> index()
             |> filter((_, c) => c != 0)
-            |> collect()
     in
     case terms
     when [] then

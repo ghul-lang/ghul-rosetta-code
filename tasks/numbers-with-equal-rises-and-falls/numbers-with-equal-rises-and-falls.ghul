@@ -1,7 +1,7 @@
 use default
 
 balanced(n: int) -> bool =>
-    let pairs = digits(n) |> windows(2) |> collect() in
+    let pairs = digits(n) |> windows(2) |> memo() in
     pairs |> count(pair => pair[0] < pair[1]) ==
     pairs |> count(pair => pair[0] > pair[1])
 
