@@ -5,18 +5,21 @@ use System.DateTime
 // A palindromic yyyymmdd is fixed by its year: the month and day are the
 // year's digits reversed, so each year gives at most one date.
 
-palindrome_date(year: int) -> DateTime? =>
-    let digits = "{year:D4}" |> reverse() |> join("") in
-    let month = int.parse(digits.substring(0, 2)) in
-    let day = int.parse(digits.substring(2)) in
+palindrome_date(year: int) -> DateTime? => (
+    let
+        digits = "{year:D4}" |> reverse() |> join(""),
+        month = int.parse(digits.substring(0, 2)),
+        day = int.parse(digits.substring(2))
+
     let valid = month >= 1 /\ month <= 12 /\ day >= 1 /\
         day <= DateTime.days_in_month(year, month)
-    in
+
     if valid then
         DateTime(year, month, day)
     else
         null
     fi
+)
 
 let dates =
     from(2020)
