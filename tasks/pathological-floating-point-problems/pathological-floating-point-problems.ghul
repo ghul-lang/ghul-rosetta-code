@@ -31,12 +31,14 @@ struct RATIONAL is
             denominator * other.numerator)
 
     decimal(places: int) -> string =>
-        let sign = if numerator.sign < 0 then "-" else "" fi in
-        let n = bigint.abs(numerator), whole = n / denominator in
-        let scaled = (n % denominator) * bigint.pow(10n, places) in
-        let fraction = scaled / denominator in
-        let digits = fraction.to_string().pad_left(places, '0') in
-        "{sign}{whole}.{digits}"
+        let
+            sign = if numerator.sign < 0 then "-" else "" fi,
+            n = bigint.abs(numerator), whole = n / denominator,
+            scaled = (n % denominator) * bigint.pow(10n, places),
+            fraction = scaled / denominator,
+            digits = fraction.to_string().pad_left(places, '0')
+        in
+            "{sign}{whole}.{digits}"
 
 si
 
