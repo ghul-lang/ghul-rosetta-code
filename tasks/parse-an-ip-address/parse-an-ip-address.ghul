@@ -35,11 +35,13 @@ hex(bytes: ubyte[]) -> string =>
     if digits.length == 0 then "0" else digits fi
 
 describe(text: string) -> string =>
-    let (address, port) = split_port(text) in
-    let bytes = address.get_address_bytes() in
-    let space = if bytes.count == 4 then "IPv4" else "IPv6" fi in
-    let port_text = if let p = port then "{p}" else "none" fi in
-    "{text,-30}{hex(bytes),-34}{space} port {port_text}"
+    let
+        (address, port) = split_port(text),
+        bytes = address.get_address_bytes(),
+        space = if bytes.count == 4 then "IPv4" else "IPv6" fi,
+        port_text = if let p = port then "{p}" else "none" fi
+    in
+        "{text,-30}{hex(bytes),-34}{space} port {port_text}"
 
 let inputs = [
     "127.0.0.1",
