@@ -5,10 +5,10 @@ use System.Runtime.InteropServices.Marshal
 // a bodyless static under DllImport is the call into the C library
 class LIBC is
     @DllImport("libc")
-    strdup(text: string) -> word static;
+    strdup(text: string) -> word static
 
     @DllImport("libc")
-    free(pointer: word) static;
+    free(pointer: word) static
 
     init() is si
 si
