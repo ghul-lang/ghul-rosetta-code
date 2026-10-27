@@ -1,13 +1,14 @@
 use default
 
-eban_group(group: int) -> bool =>
-    (let (tens, units) = (group / 10, group % 10)
+eban_group(group: int) -> bool => (
+    let (tens, units) = (group / 10, group % 10)
     let eban_units = units == 0 \/ units == 2 \/
         units == 4 \/ units == 6
     let eban_tens = tens == 0 \/ tens == 3 \/ tens == 4 \/
         tens == 5 \/ tens == 6
     group == 0 \/
-        group < 100 /\ eban_units /\ eban_tens)
+        group < 100 /\ eban_units /\ eban_tens
+)
 
 groups(n: int) -> int{} is
     if n > 0 then

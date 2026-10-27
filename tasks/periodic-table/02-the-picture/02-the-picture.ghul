@@ -28,16 +28,16 @@ position(z: int) -> (row: int, column: int) is
         (row = 1, column = if z == 1 then 1 else 18 fi)
     elif z <= 18 then
         let row = if z <= 10 then 2 else 3 fi
-        let at = z - (if row == 2 then 3 else 11 fi)
+        let at = z - if row == 2 then 3 else 11 fi
 
         (row = row, column = if at < 2 then at + 1 else at + 11 fi)
     elif z <= 54 then
         let row = if z <= 36 then 4 else 5 fi
 
-        (row = row, column = z - (if row == 4 then 19 else 37 fi) + 1)
+        (row = row, column = z - if row == 4 then 19 else 37 fi + 1)
     else
         let row = if z <= 86 then 6 else 7 fi
-        let at = z - (if row == 6 then 55 else 87 fi)
+        let at = z - if row == 6 then 55 else 87 fi
 
         if at < 2 then
             (row = row, column = at + 1)

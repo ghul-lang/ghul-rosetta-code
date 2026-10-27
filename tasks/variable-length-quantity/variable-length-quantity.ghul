@@ -20,9 +20,10 @@ from_octets(octets: List[ubyte]) -> long =>
 as_hex(octet: ubyte) -> string => "{octet:X2}"
 
 [0x200000L, 0x1FFFFFL]
-    |> each(value =>
-        (let octets = to_octets(value)
-         let shown = octets |> map(as_hex) |> join(" ")
+    |> each(value => (
+        let octets = to_octets(value)
+        let shown = octets |> map(as_hex) |> join(" ")
 
-         write_line("{value,8} = 0x{value:X6} -> {shown}"
-             " -> {from_octets(octets)}")))
+        write_line("{value,8} = 0x{value:X6} -> {shown}"
+            " -> {from_octets(octets)}")
+    ))

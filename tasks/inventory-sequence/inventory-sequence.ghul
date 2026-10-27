@@ -39,8 +39,8 @@ inventory()
 write_line("")
 
 (1::10)
-    |> each(n =>
-        (let threshold = n * 1000
-         let found = first_at_least(threshold)
-         write_line("first at least {threshold,6}: {found.value,6}"
-             " at index {found.index,7}")))
+    |> each(n => (
+        let threshold = n * 1000
+        let found = first_at_least(threshold)
+        write_line("first at least {threshold,6}: {found.value,6}"
+            " at index {found.index,7}")))

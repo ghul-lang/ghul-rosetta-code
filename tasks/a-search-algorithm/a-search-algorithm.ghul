@@ -109,16 +109,17 @@ let on_route = SET(route |> map(at))
 for row in 0..size do
     write_line(
         (0..size)
-            |> map(column =>
-                (let square = (row = row, column = column)
+            |> map(column => (
+                let square = (row = row, column = column)
 
-                 if on_route.contains(at(square)) then
-                     "o"
-                 elif blocked(square) then
-                     "#"
-                 else
-                     "."
-                 fi))
+                if on_route.contains(at(square)) then
+                    "o"
+                elif blocked(square) then
+                    "#"
+                else
+                    "."
+                fi
+            ))
             |> join(""))
 od
 

@@ -45,9 +45,10 @@ visible(text: string) -> string =>
  "dogwood",
  "TO BE OR NOT TO BE OR WANT TO BE OR NOT?",
  "SIX.MIXED.PIXIES.SIFT.SIXTY.PIXIE.DUST.BOXES"]
-    |> each(text =>
-        (let transformed = transform(text)
-         write_line("Original text:                {text}")
-         write_line("After transformation:         {visible(transformed)}")
-         write_line("After inverse transformation: {invert(transformed)}")
-         write_line("")))
+    |> each(text => (
+        let transformed = transform(text)
+        write_line("Original text:                {text}")
+        write_line("After transformation:         {visible(transformed)}")
+        write_line("After inverse transformation: {invert(transformed)}")
+        write_line("")
+    ))

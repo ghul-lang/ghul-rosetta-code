@@ -27,7 +27,7 @@ read_order(key: string) -> int{} =>
 
 column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +
-    (if column < length % key.length then 1 else 0 fi)
+    if column < length % key.length then 1 else 0 fi
 
 to_pairs(square: string, text: string) -> string => (
     let pairs = StringBuilder()

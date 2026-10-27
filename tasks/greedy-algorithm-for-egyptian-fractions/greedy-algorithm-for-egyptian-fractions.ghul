@@ -17,7 +17,7 @@ si
 
 describe(numerator: int, denominator: int) -> string =>
     let whole = numerator / denominator in
-    let terms = (if whole > 0 then ["[{whole}]"] else [] fi) ++
+    let terms = if whole > 0 then ["[{whole}]"] else [] fi ++
         (egyptian(cast(numerator % denominator), cast(denominator))
             |> map(unit => "1/{unit}")) in
     "{numerator}/{denominator} = {terms |> join(" + ")}"

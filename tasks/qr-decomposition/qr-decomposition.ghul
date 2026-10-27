@@ -63,7 +63,7 @@ decompose(a: Rows) -> (q: Table, r: Table) => (
     let q mut = identity(m)
     let r mut = multiply(a, identity(n))
 
-    for k in 0..(if m - 1 < n then m - 1 else n fi) do
+    for k in 0..if m - 1 < n then m - 1 else n fi do
         let h = householder(r, k)
 
         q = multiply(q, h)

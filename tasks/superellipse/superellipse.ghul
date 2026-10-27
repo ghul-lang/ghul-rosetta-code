@@ -16,12 +16,13 @@ shaped(turn: double, half_axis: double) -> double => (
 
 outline(steps: int) -> (x: double, y: double){} =>
     (0::steps)
-        |> map(step =>
-            (let angle = 2.0D * pi * double(step) /
+        |> map(step => (
+            let angle = 2.0D * pi * double(step) /
                     double(steps)
 
-             (x = shaped(cos(angle), a),
-              y = shaped(sin(angle), b))))
+            (x = shaped(cos(angle), a),
+             y = shaped(sin(angle), b))
+        ))
 
 let image = IMAGE(560, 560)
 

@@ -37,7 +37,7 @@ search(text: string, pattern: string) -> int{} is
                 fi
             let shift = j - last
 
-            s = s + (if shift > 1 then shift else 1 fi)
+            s = s + if shift > 1 then shift else 1 fi
         fi
     od
 

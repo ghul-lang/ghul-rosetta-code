@@ -37,9 +37,9 @@ as_factorials(value: long) -> string =>
     if let factors = decompose(value, biggest_factorial) then
         factors
             |> distinct()
-            |> map(i =>
-                (let times = factors |> filter(* == i) |> count()
-                 if times == 1 then "{i}!" else "{i}!^{times}" fi))
+            |> map(i => (
+                let times = factors |> filter(* == i) |> count()
+                if times == 1 then "{i}!" else "{i}!^{times}" fi))
             |> join(" x ")
     else
         "not a product of factorials"
@@ -70,6 +70,6 @@ write_line("largest below 100 million: {below_a_hundred_million}"
 write_line("")
 
 [800, 1050, 1800, 2800, 3800]
-    |> each(n =>
-        (let value = numbers[n - 1]
-         write_line("{n,5}: {value,17} = {as_factorials(value)}")))
+    |> each(n => (
+        let value = numbers[n - 1]
+        write_line("{n,5}: {value,17} = {as_factorials(value)}")))

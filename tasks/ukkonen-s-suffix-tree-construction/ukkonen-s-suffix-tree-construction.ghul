@@ -143,7 +143,7 @@ class SUFFIX_TREE is
     si
 
     _length(node: int) -> int =>
-        (if _end[node] < 0 then _leaf_end else _end[node] fi) - _start[node]
+        if _end[node] < 0 then _leaf_end else _end[node] fi - _start[node]
 
     // The deepest internal node spells the longest string that occurs
     // at least twice; of several as long, the one found first in the text.

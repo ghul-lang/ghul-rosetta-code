@@ -26,10 +26,10 @@ filled(column: int, row: int) -> bool =>
     grid[row][column] == '#'
 
 corner(column: int, row: int) -> int =>
-    (if filled(column - 1, row - 1) then 1 else 0 fi) +
-    (if filled(column, row - 1) then 2 else 0 fi) +
-    (if filled(column - 1, row) then 4 else 0 fi) +
-    (if filled(column, row) then 8 else 0 fi)
+    if filled(column - 1, row - 1) then 1 else 0 fi +
+    if filled(column, row - 1) then 2 else 0 fi +
+    if filled(column - 1, row) then 4 else 0 fi +
+    if filled(column, row) then 8 else 0 fi
 
 heading(value: int, previous: Step?) -> Step =>
     case value
