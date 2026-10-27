@@ -1,56 +1,34 @@
 use default
-use System.Text.StringBuilder
+use System.Text.RegularExpressions.Regex
 
 let joined = 2
 let minus = 1
 
-expressions() -> (value: int, text: string){} is
-    for code in 0..19683 do
-        let operators = LIST(9)
-        let rest mut = code
+operators(code: int) -> int[] =>
+    [code / (repeat(3, at) |> product()) % 3 for at in 0..9]
 
-        for _ in 0..9 do
-            operators.add(rest % 3)
+separator(operator: int, at: int) -> string =>
+    if operator == joined then ""
+    elif at == 0 then if operator == minus then "-" else "" fi
+    elif operator == minus then " - "
+    else " + "
+    fi
 
-            rest = rest / 3
-        od
+text_of(operators: int[]) -> string =>
+    0..9 |> map(at => "{separator(operators[at], at)}{at + 1}") |> join("")
 
-        if operators[0] == joined then
-            continue
-        fi
+value_of(text: string) -> int =>
+    Regex.matches(text.replace(" ", ""), "[+-]?[0-9]+")
+        |> map(term => int.parse(term.value))
+        |> sum()
 
-        let text = StringBuilder()
-
-        let total mut = 0
-        let term mut = 0
-        let sign mut = 1
-
-        for at in 0..9 do
-            let digit = at + 1
-
-            if operators[at] == joined then
-                term = term * 10 + digit
-            else
-                total = total + sign * term
-                sign = if operators[at] == minus then -1 else 1 fi
-                term = digit
-
-                if at == 0 then
-                    if operators[at] == minus then
-                        text.append("-")
-                    fi
-                else
-                    text.append(
-                        if operators[at] == minus then " - " else " + " fi)
-                fi
-            fi
-
-            text.append(digit)
-        od
-
-        yield (value = total + sign * term, text = text.to_string())
-    od
-si
+expressions() -> (value: int, text: string){} =>
+    0..19683
+        |> map(operators)
+        |> filter(ops => ops[0] != joined)
+        |> map(ops =>
+            let text = text_of(ops) in
+            (value = value_of(text), text = text))
 
 let all = expressions() |> memo()
 
