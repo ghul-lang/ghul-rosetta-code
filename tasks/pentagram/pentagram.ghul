@@ -2,8 +2,6 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
-use Math = System.Math
-
 let inner = cos(0.4D * pi) / cos(0.2D * pi)
 
 corner(index: int) -> (x: double, y: double) =>
@@ -24,14 +22,16 @@ image.fill(
      (x = 1.2D, y = 1.2D), (x = -1.2D, y = 1.2D)]
 )
 
-image.colour(242ub, 198ub, 62ub)
+image.colour(100ub, 149ub, 237ub)
 image.fill(0..10 |> map(corner) |> collect())
 
 image.colour(148ub, 32ub, 48ub)
 image.stroke(3.0D)
 image.line(
     (0::5)
-        |> map(point => corner(point * 4 % 10))
+        |> map(* * 4)
+        |> map(* % 10)
+        |> map(corner)
         |> collect()
 )
 
