@@ -1,18 +1,5 @@
-recursive, stepping up with chance 0.75
-  seed 1: at step 1 after 1 attempt
-  seed 2: at step 1 after 3 attempts
-  seed 3: at step 1 after 1 attempt
-  seed 4: at step 1 after 5 attempts
-
-iterative, stepping up with chance 0.75
-  seed 1: at step 1 after 1 attempt
-  seed 2: at step 1 after 3 attempts
-  seed 3: at step 1 after 1 attempt
-  seed 4: at step 1 after 5 attempts
-
-recursive, stepping up with chance 0.55
-  seed 1: at step 1 after 1 attempt
-  seed 2: at step 1 after 3 attempts
-  seed 3: at step 1 after 1 attempt
-  seed 4: at step 1 after 9 attempts
-
+seed 1: up
+seed 2: down up up
+seed 3: up
+seed 4: down down down up up up down up up
+seed 5: up
