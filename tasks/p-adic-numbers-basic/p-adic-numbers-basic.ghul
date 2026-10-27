@@ -98,14 +98,16 @@ rational(x: PAdic, p: bigint, k: int) -> string is
         u.`0 * w.`0 + u.`1 * w.`1
 
     reduce(u: (bigint, bigint), w: (bigint, bigint)) -> (bigint, bigint) =>
-        let ww = dot(w, w) in
-        let q = floor_div(2n * dot(u, w) + ww, 2n * ww) in
-        let t = (u.`0 - q * w.`0, u.`1 - q * w.`1) in
-        if dot(t, t) >= ww then
-            w
-        else
-            reduce(w, t)
-        fi
+        let
+            ww = dot(w, w),
+            q = floor_div(2n * dot(u, w) + ww, 2n * ww),
+            t = (u.`0 - q * w.`0, u.`1 - q * w.`1)
+        in
+            if dot(t, t) >= ww then
+                w
+            else
+                reduce(w, t)
+            fi
 
     let (u, w) = ((modulus, 0n), (n, 1n))
     let (a, b) =
