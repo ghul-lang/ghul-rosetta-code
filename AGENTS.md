@@ -104,6 +104,12 @@ let total = (let acc mut = 0
              acc)
 ```
 
+  `is` ... `si` is for the rest: a body that is long or whose control flow is
+  involved, one that returns from the middle (a `return` inside a block exits
+  the block, which works but misses its point), one that returns nothing and is
+  called for its effect, and one whose result is housekeeping, such as a task or
+  an error result, rather than the value the function exists to compute.
+
 - **Open with `use default`.** It brings in `write_line`, the pipes and the collections, which is
   what almost every solution wants; name anything further on its own line after it. A `use` for
   something it already covers, such as `Collections.LIST`, says nothing and goes. Import a whole
@@ -259,6 +265,21 @@ let cells = 0..rows
     |> map(_ => repeat(0, columns) |> collect_mutable())
     |> collect_mutable()
 ```
+
+No terminal at all where the result is read once: a pipe passed to a `for`, a `join`, or a
+function taking a sequence is already what it needs, and a function whose callers only read its
+result returns `T{}` rather than `List[T]` or `T[]`. Where a result is read more than once,
+or indexed, `memo()` computes it once on first use and keeps it, and its result is a `List[T]`
+materialised only as far as it has been read, so an unbounded source needs no guessed limit:
+
+```ghul
+let primes = from(2) |> filter(is_prime) |> memo()
+```
+
+`collect()` is for when the work has to happen at that line: the source reads state that changes
+afterwards, the elements start tasks or threads, several threads read the result, or a .NET API
+or the result's meaning wants an array. `collect_mutable()` is for a result that is then
+mutated.
 
 Filling the grid by index afterwards does not change that: how the elements get there is a separate
 question from how the rows are made.
