@@ -50,23 +50,25 @@ let edges = LIST[(from: SPOT, to: SPOT, bit: string)]()
 let next_leaf mut = 0.0
 
 place(node: Huffman, depth: int) -> SPOT =>
-    if let leaf: LEAF = node then
-        (let at = (x = next_leaf, y = -double(depth))
+    if let leaf: LEAF = node then (
+        let at = (x = next_leaf, y = -double(depth))
 
-         next_leaf = next_leaf + 1.0
-         marks.add((at = at, symbol = leaf.symbol, weight = leaf.weight))
+        next_leaf = next_leaf + 1.0
+        marks.add((at = at, symbol = leaf.symbol, weight = leaf.weight))
 
-         at)
-    else
-        (let left = place(node.left, depth + 1)
-         let right = place(node.right, depth + 1)
+        at
+    )
+    else (
+        let left = place(node.left, depth + 1)
+        let right = place(node.right, depth + 1)
 
-         let at = (x = (left.x + right.x) / 2.0, y = -double(depth))
+        let at = (x = (left.x + right.x) / 2.0, y = -double(depth))
 
-         edges.add((from = at, to = left, bit = "0"))
-         edges.add((from = at, to = right, bit = "1"))
+        edges.add((from = at, to = left, bit = "0"))
+        edges.add((from = at, to = right, bit = "1"))
 
-         at)
+        at
+    )
     fi
 
 let root = place(tree, 0)
