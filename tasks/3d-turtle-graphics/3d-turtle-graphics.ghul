@@ -157,10 +157,12 @@ let yaw = 35.0D * pi / 180.0D
 let elevation = 25.0D * pi / 180.0D
 
 project(p: V3) -> (x: double, y: double) =>
-    let across = p.x * cos(yaw) - p.y * sin(yaw) in
-    let depth = p.x * sin(yaw) + p.y * cos(yaw) in
-    let height = p.z * cos(elevation) + depth * sin(elevation) in
-    (x = across, y = height)
+    let
+        across = p.x * cos(yaw) - p.y * sin(yaw),
+        depth = p.x * sin(yaw) + p.y * cos(yaw),
+        height = p.z * cos(elevation) + depth * sin(elevation)
+    in
+        (x = across, y = height)
 
 let image = IMAGE(480, 360)
 
