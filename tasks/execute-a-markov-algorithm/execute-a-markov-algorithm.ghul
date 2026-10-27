@@ -6,9 +6,11 @@ load(file: string) -> List[RULE] =>
     IO.File.read_all_lines(file)
         |> filter(line => !line.starts_with("#") /\ line.contains(" -> "))
         |> map(line =>
-            let arrow = line.index_of(" -> ") in
-            let replacement = line.substring(arrow + 4).trim() in
-            let stops = replacement.starts_with(".") in
+            let
+                arrow = line.index_of(" -> "),
+                replacement = line.substring(arrow + 4).trim(),
+                stops = replacement.starts_with(".")
+            in
             RULE(
                 line.substring(0, arrow).trim(),
                 if stops then replacement.substring(1) else replacement fi,
