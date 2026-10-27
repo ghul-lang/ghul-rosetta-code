@@ -8,15 +8,14 @@ positions(pieces: string, piece: char) -> List[int] =>
         |> collect()
 
 without(pieces: string, removed: string) -> string =>
-    pieces |> filter(p => removed.index_of(p) < 0) |> join("")
+    pieces |> filter(p => !removed.contains(p)) |> join("")
 
 let knight_pairs =
     [(first, second) for first in 0::4 for second in first + 1::4]
-        |> collect_mutable()
 
 sp_id(pieces: string) -> int =>
     let knights = positions(without(pieces, "QB"), 'N') in
-    let n = knight_pairs.index_of((knights[0], knights[1])) in
+    let n = knight_pairs |> find_index(* =~ (knights[0], knights[1]))! in
     let q = without(pieces, "B").index_of('Q') in
     let bishops = positions(pieces, 'B') in
     let dark = bishops |> find(b => b % 2 == 0)! / 2 in

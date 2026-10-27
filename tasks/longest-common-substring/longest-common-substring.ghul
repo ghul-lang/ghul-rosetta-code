@@ -10,7 +10,7 @@ si
 
 longest_common(left: string, right: string) -> string =>
     substrings(left)
-        |> filter(candidate => right.index_of(candidate) >= 0)
+        |> filter(candidate => right.contains(candidate))
         |> reduce("", (best, candidate) =>
             if candidate.length > best.length then
                 candidate

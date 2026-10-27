@@ -35,9 +35,9 @@ chao(text: string, encrypting: bool) -> string is
     for letter in text do
         let index =
             if encrypting then
-                right.index_of(letter)
+                right |> find_index(* == letter)!
             else
-                left.index_of(letter)
+                left |> find_index(* == letter)!
             fi
 
         out.add(if encrypting then left[index] else right[index] fi)

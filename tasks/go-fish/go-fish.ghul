@@ -141,9 +141,9 @@ while your_books.count + my_books.count < ranks.count do
             break
         fi
 
-        let wanted = ranks.index_of(typed.trim().to_upper())
+        let wanted = ranks |> find_index(* =~ typed.trim().to_upper())
 
-        if wanted < 0 then
+        if !wanted? then
             Std.write_line("there is no such rank")
         elif held(you, wanted) == 0 then
             Std.write_line(

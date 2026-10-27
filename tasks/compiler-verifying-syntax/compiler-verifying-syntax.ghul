@@ -40,7 +40,7 @@ tokens(text: string) -> List[string] is
             od
 
             result.add(text.substring(start, i - start))
-        elif "+-*/=<()".index_of(c) >= 0 then
+        elif "+-*/=<()".contains(c) then
             result.add("{c}")
             i = i + 1
         else

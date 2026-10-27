@@ -113,9 +113,9 @@ class PUZZLE is
             return null
         fi
 
-        let open = cells.index_of(unknown)
+        let open = cells |> find_index(* == unknown)
 
-        if open < 0 then
+        if !open? then
             return cells
         fi
 

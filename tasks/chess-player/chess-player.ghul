@@ -262,7 +262,7 @@ si
 
 in_check(position: POSITION, white: bool) -> bool =>
     let king = if white then 'K' else 'k' fi in
-    attacked(position, position.squares.index_of(king), !white)
+    attacked(position, position.squares |> find_index(* == king)!, !white)
 
 legal_moves(position: POSITION) -> List[Move] =>
     pseudo_moves(position)

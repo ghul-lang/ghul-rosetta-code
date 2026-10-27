@@ -137,7 +137,7 @@ median_cut(colours: List[Weighted], count: int) -> List[Colour] is
         let worst = boxes |> max_by(score)!
         let (low, high) = split(worst)
 
-        boxes[boxes.index_of(worst)] = low
+        boxes[boxes |> find_index(* == worst)!] = low
         boxes.add(high)
     od
 

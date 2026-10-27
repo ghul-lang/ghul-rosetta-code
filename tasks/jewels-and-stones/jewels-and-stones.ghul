@@ -2,7 +2,7 @@ use default
 
 count_jewels(stones: string, jewels: string) -> int =>
     stones
-        |> filter(stone => jewels.index_of(stone) >= 0)
+        |> filter(stone => jewels.contains(stone))
         |> count()
 
 for pair in [(stones = "aAAbbbb", jewels = "aA"),

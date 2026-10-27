@@ -25,7 +25,7 @@ is_well_formed(guess: string) -> bool =>
 score(guess: string) -> (bulls: int, cows: int) => (
     let bulls = 0..4 |> count(i => guess[i] == secret[i])
     let cows = 0..4 |> count(i => guess[i] != secret[i] /\
-        secret.index_of(guess[i]) >= 0)
+        secret.contains(guess[i]))
     (bulls = bulls, cows = cows)
 )
 

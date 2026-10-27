@@ -83,9 +83,9 @@ mark(shape: Shape, at: Cell, name: char) is
 si
 
 tile() -> bool is
-    let next = board.index_of('.')
+    let next = board |> find_index(* == '.')
 
-    if next < 0 then
+    if !next? then
         return true
     fi
 

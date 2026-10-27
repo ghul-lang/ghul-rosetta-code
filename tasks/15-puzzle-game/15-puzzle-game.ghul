@@ -9,9 +9,9 @@ let random = System.Random(20260908)
 let board =
     1::squares |> map(* % squares) |> collect_mutable()
 
-blank() -> int => board.index_of(0)
+blank() -> int => board |> find_index(* == 0)!
 
-neighbours(square: int) -> LIST[int] =>
+neighbours(square: int) -> List[int] =>
     (let found = LIST()
      let row = square / side
      let column = square % side
@@ -73,11 +73,11 @@ while !solved() do
         break
     fi
 
-    let wanted = board.index_of(int.parse(typed.trim()))
+    let wanted = board |> find_index(* == int.parse(typed.trim()))
 
-    if wanted < 0 then
+    if !wanted? then
         Std.write_line("there is no such tile")
-    elif !neighbours(blank()).contains(wanted) then
+    elif !(neighbours(blank()) |> contains(wanted)) then
         Std.write_line("that tile is not next to the space")
     else
         slide(wanted)

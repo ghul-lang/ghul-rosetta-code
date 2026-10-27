@@ -121,6 +121,11 @@ let total = (let acc mut = 0
   nothing to choose by, where the `*` takes its type from the formal it fills.
   The literal stays where the parameter is a receiver (`p => p.name`), appears
   twice, or sits inside a further expression.
+- **A position comes from `find_index`, membership from `contains`.** A list or array
+  position is `xs |> find_index(* == v)`, a `MAYBE[int]` tested with `?` or
+  unwrapped with `!`, never `.index_of(v)` and a `-1` test. A string asks
+  `s.contains(c)` rather than `s.index_of(c) >= 0`; `index_of` stays for where
+  a substring is in a string.
 - **Reach for what has no equivalent in the language next door.** `let x = e in`
   and `assert c else "..." in` as expressions, `if let` and `while let` in place
   of a test followed by a cast, unions with `case` pattern matching in place of

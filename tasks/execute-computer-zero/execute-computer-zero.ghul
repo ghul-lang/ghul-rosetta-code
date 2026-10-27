@@ -30,15 +30,15 @@ assemble(source: string) -> LIST[int] is
             continue
         fi
 
-        let opcode = opcodes.index_of(words[0])
+        let opcode = opcodes |> find_index(* =~ words[0])
         let operand = words[words.count - 1]
         let argument =
-            if opcode >= 0 /\ words.count == 1 then 0
+            if opcode? /\ words.count == 1 then 0
             elif labels.contains_key(operand) then labels[operand]
             else int.parse(operand) fi
 
         memory.add(
-            if opcode >= 0 then opcode * 32 + argument else argument fi)
+            if opcode? then opcode * 32 + argument else argument fi)
     od
 
     while memory.count < 32 do

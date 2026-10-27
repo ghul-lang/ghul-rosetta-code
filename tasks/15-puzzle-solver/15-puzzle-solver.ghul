@@ -20,7 +20,7 @@ class SOLVER is
 
     init(tiles: int[]) is
         _board = LIST(tiles)
-        _blank = _board.index_of(0)
+        _blank = _board |> find_index(* == 0)!
         _path = LIST()
 
         _estimate =
