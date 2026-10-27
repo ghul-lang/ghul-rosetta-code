@@ -1,18 +1,16 @@
 use default
 use System.Text.RegularExpressions.Regex
 
-luhn(digits: string) -> bool is
-    let total mut = 0
+digit_value(i: int, d: int) -> int =>
+    let doubled = if i % 2 == 1 then d * 2 else d fi in
+    doubled / 10 + doubled % 10
 
-    for (i, c) in digits.to_char_array() |> reverse() |> index() do
-        let d = int(c) - int('0')
-        let doubled = if i % 2 == 1 then d * 2 else d fi
-
-        total = total + doubled / 10 + doubled % 10
-    od
-
-    total % 10 == 0
-si
+luhn(digits: string) -> bool =>
+    digits.to_char_array()
+    |> reverse()
+    |> index()
+    |> map(((i, c)) => digit_value(i, int(c) - int('0')))
+    |> sum() % 10 == 0
 
 let format = Regex("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
 
