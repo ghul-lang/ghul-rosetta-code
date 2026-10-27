@@ -33,12 +33,13 @@ si
  ("A B", "B"),
  ("A B", "B A"),
  ("A B B A", "B A")]
-    |> each(example =>
-        (let (items, order) = example
+    |> each(example => (
+        let (items, order) = example
 
-         let result = reorder(items.split([' ']), order.split([' ']))
+        let result = reorder(items.split([' ']), order.split([' ']))
 
-         write_line("M: {items}")
-         write_line("N: {order}")
-         write_line("result: {result |> join(" ")}")
-         write_line("")))
+        write_line("M: {items}")
+        write_line("N: {order}")
+        write_line("result: {result |> join(" ")}")
+        write_line("")
+    ))
