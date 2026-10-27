@@ -17,22 +17,28 @@ class SANDPILE is
         _cells[y * size + x] = at(x, y) + grains
     si
 
+    spill(x: int, y: int, grains: int) is
+        if x >= 0 /\ x < size /\ y >= 0 /\ y < size then
+            add(x, y, grains)
+        fi
+    si
+
     settle() is
         let unstable mut = true
 
         while unstable do
             unstable = false
 
-            for y in 1..size - 1 do
-                for x in 1..size - 1 do
+            for y in 0..size do
+                for x in 0..size do
                     if at(x, y) >= 4 then
                         let spilled = at(x, y) / 4
 
                         add(x, y, -4 * spilled)
-                        add(x - 1, y, spilled)
-                        add(x + 1, y, spilled)
-                        add(x, y - 1, spilled)
-                        add(x, y + 1, spilled)
+                        spill(x - 1, y, spilled)
+                        spill(x + 1, y, spilled)
+                        spill(x, y - 1, spilled)
+                        spill(x, y + 1, spilled)
 
                         unstable = true
                     fi

@@ -81,6 +81,9 @@ for k in 0..size do
     od
 od
 
+show(steps: Cell{}) -> string =>
+    steps |> map((row, column) => "({row}, {column})") |> join(" -> ")
+
 route(from: Cell, to: Cell) -> string => (
     let target = number[to]
     let at mut = number[from]
@@ -91,25 +94,60 @@ route(from: Cell, to: Cell) -> string => (
         steps.add(cells[at])
     od
 
-    steps |> map((row, column) => "({row}, {column})") |> join(" -> ")
+    show(steps)
 )
+
+use Reached = (days: List[int], previous: List[int])
+
+dijkstra(source: int) -> Reached is
+    let days = repeat(unreachable, size) |> collect_mutable()
+    let previous = repeat(-1, size) |> collect_mutable()
+    let settled = repeat(false, size) |> collect_mutable()
+
+    days[source] = 0
+
+    while let nearest = 0..size
+        |> filter(i => !settled[i] /\ days[i] < unreachable)
+        |> min_by(i => days[i])
+    do
+        settled[nearest] = true
+
+        for target in moves(cells[nearest]) do
+            let next_cell = number[target]
+
+            if days[nearest] + 1 < days[next_cell] then
+                days[next_cell] = days[nearest] + 1
+                previous[next_cell] = nearest
+            fi
+        od
+    od
+
+    (days = days, previous = previous)
+si
+
+path(previous: List[int], to: int) -> List[Cell] =>
+    if previous[to] < 0 then [cells[to]]
+    else (path(previous, previous[to]) ++ [cells[to]]) |> collect()
+    fi
 
 let hq: Cell = (11, 11)
 let start = number[hq]
 
 let safe = cells |> filter((row, column) => country[row][column] == '0')
 
+let from_hq = dijkstra(start)
+
 let days =
     safe
-        |> map(cell => distance[start][number[cell]])
+        |> map(cell => from_hq.days[number[cell]])
         |> min()!
 
-let nearest = safe |> filter(cell => distance[start][number[cell]] == days)
+let nearest = safe |> filter(cell => from_hq.days[number[cell]] == days)
 
 write_line("Part 1: {nearest |> count()} routes of {days} days to safety:")
 
 for cell in nearest do
-    write_line("    {route(hq, cell)}")
+    write_line("    {show(path(from_hq.previous, number[cell]))}")
 od
 
 write_line("\nPart 2:")

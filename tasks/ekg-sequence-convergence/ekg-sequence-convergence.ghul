@@ -22,19 +22,16 @@ ekg(start: int, count: int) -> List[int] => (
     terms
 )
 
-let two = ekg(2, 80)
-let five = ekg(5, 80)
-
-write_line("EKG(2): {two |> take(10) |> join(" ")}")
-write_line("EKG(5): {five |> take(10) |> join(" ")}")
-
-let last_difference mut = 0
-
-for index in 0::(two.count - 1) do
-    if two[index] != five[index] then
-        last_difference = index + 1
-    fi
+for start in [2, 5, 7, 9, 10] do
+    write_line("EKG({start,2}): {ekg(start, 10) |> join(" ")}")
 od
 
-write_line(
-    "EKG(2) and EKG(5) converge at term {last_difference + 1}")
+let five = ekg(5, 100), seven = ekg(7, 100)
+
+let last_difference =
+    0..five.count
+        |> filter(index => five[index] != seven[index])
+        |> reduce(0, (_, index) => index + 1)
+
+write_line("")
+write_line("EKG(5) and EKG(7) converge at term {last_difference + 1}")
