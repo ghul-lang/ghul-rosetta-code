@@ -1,5 +1,4 @@
 use default
-use System.Text.StringBuilder
 
 let pairs = [
     ("ch", 'χ'), ("kh", 'χ'), ("ph", 'φ'), ("rh", 'ρ'), ("th", 'θ'),
@@ -12,57 +11,39 @@ let pairs = [
     ("z", 'ζ')
 ]
 
-matched_at(text: string, at: int) -> (string, char)? is
-    for (english, greek) in pairs do
-        if at + english.length <= text.length then
-            if text[at..at + english.length].to_lower() =~ english then
-                return (english, greek)
-            fi
-        fi
-    od
+matched_at(text: string, at: int) -> (string, char)? =>
+    pairs |> find(((english, _)) =>
+        at + english.length <= text.length /\
+        text[at..at + english.length].to_lower() =~ english)
 
-    return null
-si
+matching_case(greek: char, english: char) -> char =>
+    if char.is_upper(english) then char.to_upper(greek) else greek fi
 
-transliterate(text: string) -> string is
-    let built = StringBuilder()
-
-    let at mut = 0
-
-    while at < text.length do
+// the Greek letters for text from at onwards, one matched pair at a time;
+// anything no pair matches passes through
+letters(text: string, at: int) -> char{} is
+    if at < text.length then
         if let (english, greek) = matched_at(text, at) then
-            if char.is_upper(text[at]) then
-                built.append(char.to_upper(greek))
-            else
-                built.append(greek)
-            fi
-
-            at = at + english.length
+            yield matching_case(greek, text[at])
+            yield in letters(text, at + english.length)
         else
-            built.append(text[at])
-
-            at = at + 1
+            yield text[at]
+            yield in letters(text, at + 1)
         fi
-    od
-
-    let greek = "{built}"
-
-    let final_sigma = StringBuilder()
-
-    for place in 0..greek.length do
-        let last = place == greek.length - 1
-
-        let ends_word = last \/ !char.is_letter(greek[place + 1])
-
-        if greek[place] == 'σ' /\ ends_word then
-            final_sigma.append('ς')
-        else
-            final_sigma.append(greek[place])
-        fi
-    od
-
-    return "{final_sigma}"
+    fi
 si
+
+// a sigma that ends a word takes its final form
+final_form(greek: char[], at: int) -> char =>
+    let
+        ends_word =
+            at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
+    in
+        if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
+
+transliterate(text: string) -> string =>
+    let greek = letters(text, 0) |> collect() in
+    string(0..greek.count |> map(final_form(greek, *)) |> collect())
 
 let passage = [
     "I was looking at some rhododendrons in my back garden,",

@@ -54,20 +54,22 @@ convolve(source: IMAGE, kernel: Kernel) -> IMAGE is
 
     for y in 0..source.height do
         for x in 0..source.width do
-            let red mut = 0.0D, green mut = 0.0D, blue mut = 0.0D
+            let around = [
+                (
+                    double(kernel.weights[(j + 1) * 3 + i + 1]),
+                    source.pixel(
+                        clamp(x + i, 0, source.width - 1),
+                        clamp(y + j, 0, source.height - 1))
+                )
+                for j in -1::1 for i in -1::1
+            ]
 
-            for j in -1::1 do
-                for i in -1::1 do
-                    let sx = clamp(x + i, 0, source.width - 1)
-                    let sy = clamp(y + j, 0, source.height - 1)
-                    let p = source.pixel(sx, sy)
-                    let w = double(kernel.weights[(j + 1) * 3 + i + 1])
-
-                    red = red + w * double(p.red)
-                    green = green + w * double(p.green)
-                    blue = blue + w * double(p.blue)
-                od
-            od
+            let red =
+                around |> map(((w, p)) => w * double(p.red)) |> sum()
+            let green =
+                around |> map(((w, p)) => w * double(p.green)) |> sum()
+            let blue =
+                around |> map(((w, p)) => w * double(p.blue)) |> sum()
 
             result.set_pixel(
                 x, y,
