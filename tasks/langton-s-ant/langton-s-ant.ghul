@@ -11,6 +11,33 @@ let black = repeat(false, size * size) |> collect_mutable()
 let row_steps = [-1, 0, 1, 0]
 let column_steps = [0, 1, 0, -1]
 
+use Ant = (row: int, column: int, steps: int, left: bool)
+
+// the walk itself: turn right on white, left on black, flip the square,
+// step on. Yields the ant every so many steps and once more where it
+// leaves the field; black is the grid as it stands at each one
+walk(every: int) -> Ant{} is
+    let row mut = size / 2, column mut = size / 2
+    let facing mut = 0, steps mut = 0
+
+    while row >= 0 /\ row < size /\ column >= 0 /\ column < size do
+        if steps % every == 0 then
+            yield (row = row, column = column, steps = steps, left = false)
+        fi
+
+        let here = row * size + column
+
+        facing = (facing + if black[here] then 3 else 1 fi) % 4
+        black[here] = !black[here]
+
+        row = row + row_steps[facing]
+        column = column + column_steps[facing]
+        steps = steps + 1
+    od
+
+    yield (row = row, column = column, steps = steps, left = true)
+si
+
 draw(image: IMAGE, row: int, column: int) is
     image.clear(250ub, 250ub, 247ub)
     image.colour(30ub, 30ub, 40ub)
@@ -36,31 +63,14 @@ image.view(0.0D, 0.0D, double(size), double(size))
 
 let animation = ANIMATION(pixels, pixels)
 
-let row mut = size / 2
-let column mut = size / 2
-let facing mut = 0
-let steps mut = 0
-
-while row >= 0 /\ row < size /\ column >= 0 /\ column < size do
-    if steps % steps_per_frame == 0 then
-        draw(image, row, column)
-        animation.add(image, 40)
+for ant in walk(steps_per_frame) do
+    if ant.left then
+        write_line("the ant left the field after {ant.steps} steps")
     fi
 
-    let here = row * size + column
-
-    facing = (facing + if black[here] then 3 else 1 fi) % 4
-    black[here] = !black[here]
-
-    row = row + row_steps[facing]
-    column = column + column_steps[facing]
-    steps = steps + 1
+    draw(image, ant.row, ant.column)
+    animation.add(image, if ant.left then 3000 else 40 fi)
 od
-
-write_line("the ant left the field after {steps} steps")
-
-draw(image, row, column)
-animation.add(image, 3000)
 
 animation.write("ant.png")
 
