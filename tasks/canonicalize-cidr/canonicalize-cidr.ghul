@@ -7,12 +7,9 @@ canonicalize(cidr: string) -> string => (
 
     let address =
         octets |> reduce(0L, (packed, octet) => packed * 256L + octet)
-
     let mask =
         if bits == 0 then 0L else (-1L << (32 - bits)) & 0xFFFFFFFFL fi
-
     let network = address & mask
-
     let dotted =
         0..4
             |> map(shift => "{(network >> (24 - 8 * shift)) & 0xFFL}")

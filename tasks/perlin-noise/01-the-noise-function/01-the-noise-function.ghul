@@ -55,6 +55,7 @@ noise(at_x: double, at_y: double, at_z: double) -> double => (
         aa = p[a] + unit_z, ab = p[a + 1] + unit_z,
         b = p[unit_x + 1] + unit_y, ba = p[b] + unit_z,
         bb = p[b + 1] + unit_z
+
     let near =
         lerp(v,
              lerp(u, grad(p[aa], x, y, z), grad(p[ba], x - 1.0, y, z)),
