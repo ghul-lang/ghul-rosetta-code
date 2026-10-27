@@ -1,45 +1,27 @@
 use default
 
-count_of_length(length: int) -> int => (
-    let total mut = 1
+power_of_nine(exponent: int) -> int => repeat(9, exponent) |> product()
 
-    for _ in 1::length / 2 do
-        total = total * 9
-    od
+// how many upside-down numbers have this many digits: the first half is
+// any digits 1 to 9, and the second half and any middle 5 follow from it
+count_of_length(length: int) -> int => power_of_nine(length / 2)
 
-    total
-)
-
-upside_down(index: int) -> string is
-    let length mut = 1
-    let rank mut = index - 1
-
-    while rank >= count_of_length(length) do
-        rank = rank - count_of_length(length)
-        length = length + 1
-    od
-
-    let half = LIST()
-
-    for _ in 1::length / 2 do
-        half.add(rank % 9 + 1)
-        rank = rank / 9
-    od
-
-    half.reverse()
-
-    let text = half |> map(digit => "{digit}") |> collect_mutable()
-
-    if length % 2 == 1 then
-        text.add("5")
+// the length of the number at zero-based rank, and its rank in that length
+locate(rank: int, length: int) -> (int, int) =>
+    if rank < count_of_length(length) then (length, rank)
+    else locate(rank - count_of_length(length), length + 1)
     fi
 
-    for step in 1::half.count do
-        text.add("{10 - half[half.count - step]}")
-    od
-
-    text |> join("")
-si
+upside_down(index: int) -> string =>
+    let
+        (length, rank) = locate(index - 1, 1),
+        size = length / 2,
+        half =
+            [rank / power_of_nine(size - 1 - i) % 9 + 1 for i in 0..size],
+        middle = if length % 2 == 1 then "5" else "" fi,
+        mirror = [10 - half[size - 1 - i] for i in 0..size]
+    in
+        "{half |> join("")}{middle}{mirror |> join("")}"
 
 let first_fifty = 1::50 |> map(upside_down) |> collect()
 

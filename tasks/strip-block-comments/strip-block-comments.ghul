@@ -2,28 +2,19 @@ use default
 
 strip_block_comments(
     text: string, start: string, ended: string
-) -> string is
-    let result mut = ""
-    let pos mut = 0
-
-    while pos < text.length do
-        let open = text.index_of(start, pos)
-
-        if open < 0 then
-            result = "{result}{text[pos..<0]}"
-            pos = text.length
+) -> string =>
+    let open = text.index_of(start) in
+    if open < 0 then
+        text
+    else
+        let close = text.index_of(ended, open + start.length) in
+        if close < 0 then
+            text[0..open]
         else
-            result = "{result}{text[pos..open]}"
-
-            let close = text.index_of(ended, open + start.length)
-
-            pos = if close < 0 then text.length
-                  else close + ended.length fi
+            let rest = text[close + ended.length..<0] in
+            "{text[0..open]}{strip_block_comments(rest, start, ended)}"
         fi
-    od
-
-    result
-si
+    fi
 
 let lines = [
     "  /**",
