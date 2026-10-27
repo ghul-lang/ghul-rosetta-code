@@ -1,6 +1,6 @@
 use default
 
-reorder(items: string[], order: string[]) -> string[] is
+reorder(items: string[], order: string[]) -> string{} is
     let wanted = MAP(order |> frequencies())
 
     let places = LIST()

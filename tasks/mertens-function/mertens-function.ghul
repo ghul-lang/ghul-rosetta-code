@@ -36,7 +36,7 @@ for row in 0..10 do
     write_line("{row * 10,4}:{indent}{cells |> join("")}")
 od
 
-let values = 1::1_000 |> map(mertens) |> collect()
+let values = 1::1_000 |> map(mertens) |> memo()
 
 let zeroes = values |> filter(* == 0) |> count()
 

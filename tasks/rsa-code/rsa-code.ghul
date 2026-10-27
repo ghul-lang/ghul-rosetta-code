@@ -11,11 +11,10 @@ let block_size = 17
 encode(block: Collections.List[ubyte]) -> bigint =>
     block |> reduce(0n, (total, b) => total * 256n + bigint(int(b)))
 
-decode(number: bigint) -> ubyte[] =>
+decode(number: bigint) -> ubyte{} =>
     if number <= 0n then []
     else
         decode(number / 256n) ++ [ubyte(int(number % 256n))]
-        |> collect()
     fi
 
 for message in [

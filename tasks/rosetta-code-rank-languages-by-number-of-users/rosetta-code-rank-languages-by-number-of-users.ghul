@@ -8,7 +8,7 @@ use System.Text.Json.JsonDocumentOptions
 // categories are the subcategories of Category:Language users, fetched from
 // the wiki's API a batch at a time, following its continuation until there
 // is no more.
-languages(api: string) -> List[(name: string, users: int)] is
+languages(api: string) -> (name: string, users: int){} is
     let client = HttpClient()
 
     // The wiki refuses a request that does not say what is making it.

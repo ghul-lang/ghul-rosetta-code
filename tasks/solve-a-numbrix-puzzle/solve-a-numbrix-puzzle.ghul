@@ -19,7 +19,7 @@ class NUMBRIX is
         od
     si
 
-    _neighbours(cell: int) -> List[int] is
+    _neighbours(cell: int) -> int{} is
         let row = cell / _size
         let column = cell % _size
         let result = LIST()

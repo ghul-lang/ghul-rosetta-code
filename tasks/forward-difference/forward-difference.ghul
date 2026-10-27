@@ -5,7 +5,7 @@ differences(xs: List[int]) -> List[int] =>
     |> map(* - *)
     |> collect()
 
-forward(order: int, xs: List[int]) -> List[int] =>
+forward(order: int, xs: List[int]) -> int{} =>
     if order == 0 then xs
     else forward(order - 1, differences(xs))
     fi

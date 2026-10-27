@@ -73,7 +73,7 @@ decompose(a: Rows) -> (q: Table, r: Table) is
     (q, r)
 si
 
-least_squares(a: Rows, b: List[double]) -> List[double] is
+least_squares(a: Rows, b: List[double]) -> double{} is
     let (q, r) = decompose(a)
     let n = a[0].count
     let column = b |> map(y => LIST([y])) |> collect()

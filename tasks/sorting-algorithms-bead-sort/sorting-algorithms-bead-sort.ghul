@@ -1,6 +1,6 @@
 use default
 
-bead_sort(values: List[int]) -> List[int] =>
+bead_sort(values: List[int]) -> int{} =>
     let tallest = values |> reduce(0, (most, value) =>
         if value > most then value else most fi) in
     let beads =
@@ -10,7 +10,6 @@ bead_sort(values: List[int]) -> List[int] =>
         (0..values.count)
         |> map(row => beads |> filter(* > row) |> count())
         |> reverse()
-        |> collect()
 
 for values in [[5, 3, 1, 7, 4, 1, 1, 20], [2, 1], [8]] do
     write_line(

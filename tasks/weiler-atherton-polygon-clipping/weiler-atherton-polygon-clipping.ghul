@@ -39,7 +39,7 @@ contains(polygon: List[P], p: P) -> bool is
     inside
 si
 
-ring(polygon: List[P], crossings: List[Crossing]) -> List[NODE] is
+ring(polygon: List[P], crossings: List[Crossing]) -> NODE{} is
     let nodes = LIST()
 
     for i in 0..polygon.count do

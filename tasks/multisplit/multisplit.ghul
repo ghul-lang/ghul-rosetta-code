@@ -28,7 +28,7 @@ multisplit(text: string, separators: string[]) -> PIECE{} is
 si
 
 let pieces = multisplit("a!===b=!=c", ["==", "!=", "="])
-    |> collect()
+    |> memo()
 
 write_line(pieces
     |> map(piece => "\"{piece.text}\"")

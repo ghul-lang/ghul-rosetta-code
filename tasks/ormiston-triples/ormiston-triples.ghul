@@ -7,7 +7,7 @@ write_line("")
 let top = 1_000_000_000
 let segment_size = 1 << 20
 
-base_primes(bound: int) -> List[int] is
+base_primes(bound: int) -> int{} is
     let composite = repeat(false, bound + 1) |> collect_mutable()
 
     let factor mut = 2
@@ -25,7 +25,7 @@ base_primes(bound: int) -> List[int] is
         factor = factor + 1
     od
 
-    2::bound |> filter(value => !composite[value]) |> collect()
+    2::bound |> filter(value => !composite[value])
 si
 
 primes_below(bound: int) -> int{} is

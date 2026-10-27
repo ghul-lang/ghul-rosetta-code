@@ -63,7 +63,7 @@ flatten(node: NODE, level: int, pad: string) -> string{} is
 si
 
 arrange(outline: List[string], descending: bool) -> Outcome is
-    let indents = outline |> map(indent_of) |> collect()
+    let indents = outline |> map(indent_of) |> memo()
     let leading = indents |> find(indent => indent.length > 0)
 
     if !leading? then

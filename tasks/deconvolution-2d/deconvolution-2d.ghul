@@ -5,7 +5,7 @@ union Tensor is
     ARRAY(items: List[Tensor])
 si
 
-parse_all(text: string) -> List[Tensor] is
+parse_all(text: string) -> Tensor{} is
     let at mut = 0
 
     skip_spaces() is

@@ -3,7 +3,7 @@ use default
 let dots = ["    ", " o  ", " oo ", "ooo ", "oooo"]
 let bar = "===="
 
-vigesimal(n: int) -> List[int] is
+vigesimal(n: int) -> int{} is
     let digits = LIST()
     let rest mut = n
 
@@ -37,9 +37,9 @@ glyph(digit: int) -> string[] is
     rows |> collect()
 si
 
-cartouche(n: int) -> List[string] is
+cartouche(n: int) -> string{} is
     let glyphs = vigesimal(n) |> map(glyph) |> collect()
-    let across = repeat("----", glyphs.count) |> collect()
+    let across = repeat("----", glyphs.count)
 
     let lines = LIST(["+{across |> join("+")}+"])
 

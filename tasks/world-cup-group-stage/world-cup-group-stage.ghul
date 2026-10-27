@@ -21,7 +21,7 @@ outcomes(count: int) -> Collections.List[Result]{} is
     od
 si
 
-standings(results: Collections.List[Result]) -> Collections.List[int] is
+standings(results: Collections.List[Result]) -> int{} is
     let points = repeat(0, 4) |> collect_mutable()
 
     for ((home, away), result) in zip(games, results) do
@@ -36,7 +36,7 @@ standings(results: Collections.List[Result]) -> Collections.List[int] is
         points[away] = points[away] + away_points
     od
 
-    return points |> sort_descending() |> collect()
+    return points |> sort_descending()
 si
 
 let histogram =

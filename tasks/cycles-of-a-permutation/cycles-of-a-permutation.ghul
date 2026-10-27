@@ -8,7 +8,7 @@ permutation_between(before: string, after: string) -> List[int] =>
 
 
 apply(one_line: List[int], text: string) -> string =>
-    string(one_line |> map(source => text[source - 1]) |> collect())
+    string(one_line |> map(source => text[source - 1]))
 
 inverse(one_line: List[int]) -> List[int] is
     let result = LIST(one_line)

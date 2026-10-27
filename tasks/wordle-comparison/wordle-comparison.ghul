@@ -6,7 +6,7 @@ enum Mark is
     GREEN
 si
 
-marks(answer: string, guess: string) -> List[Mark] =>
+marks(answer: string, guess: string) -> Mark{} =>
     let positions = 0..guess.length in
     let unmatched =
         positions
@@ -19,7 +19,6 @@ marks(answer: string, guess: string) -> List[Mark] =>
             elif unmatched.remove(guess[i]) then Mark.YELLOW
             else Mark.GREY
             fi)
-        |> collect()
 
 let pairs = [
     ("ALLOW", "LOLLY"),

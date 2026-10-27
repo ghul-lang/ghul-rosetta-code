@@ -1,6 +1,6 @@
 use default
 
-sieve(limit: int) -> List[int] is
+sieve(limit: int) -> int{} is
     let composite = LIST()
 
     0::limit |> each(_ => composite.add(false))

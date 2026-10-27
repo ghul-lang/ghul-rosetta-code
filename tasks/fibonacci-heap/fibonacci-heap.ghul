@@ -107,7 +107,7 @@ class HEAP is
 
     // The root list and each child list are circular and doubly linked, so
     // a node is spliced in or out without knowing which list it is in.
-    _ring(from: NODE) -> List[NODE] is
+    _ring(from: NODE) -> NODE{} is
         let seen = LIST()
         let at mut = from
 

@@ -38,7 +38,7 @@ b10(n: int) -> string is
         at = parent[at]
     od
 
-    string(digits |> reverse() |> collect())
+    string(digits |> reverse())
 si
 
 let numbers = [

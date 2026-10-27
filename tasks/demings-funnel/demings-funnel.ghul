@@ -109,7 +109,7 @@ let runs = rules
         rule = rule,
         xs = drops(dxs, rule.next),
         ys = drops(dys, rule.next)))
-    |> collect()
+    |> memo()
 
 let reach = runs
     |> flat_map(run => run.xs |> cat(run.ys))

@@ -61,7 +61,7 @@ si
 
 let bernoulli = bernoullis(20)
 
-faulhaber_row(power: int) -> List[RATIONAL] =>
+faulhaber_row(power: int) -> RATIONAL{} =>
     (1::power + 1)
         |> map(exponent => (
             let index = power + 1 - exponent
@@ -69,7 +69,6 @@ faulhaber_row(power: int) -> List[RATIONAL] =>
             RATIONAL(binomial(power + 1, index), bigint(power + 1)) *
                 bernoulli[index]
         ))
-        |> collect()
 
 write_line("the first ten rows of Faulhaber's triangle:")
 

@@ -13,7 +13,7 @@ let board = repeat(0, squares) |> collect_mutable()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
-lines_for(direction: char) -> List[List[int]] =>
+lines_for(direction: char) -> List[int]{} =>
     (let lines = LIST[LIST[int]]()
 
      for major in 0..side do

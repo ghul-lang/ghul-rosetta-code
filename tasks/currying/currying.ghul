@@ -16,7 +16,7 @@ uncurry[A, B, C](f: (A) -> (B) -> C) -> (A, B) -> C =>
     (a, b) => f(a)(b)
 
 repeat_text(text: string, times: int) -> string =>
-    string.join("", repeat(text, times) |> collect())
+    string.join("", repeat(text, times))
 
 let curried = curry(repeat_text)
 

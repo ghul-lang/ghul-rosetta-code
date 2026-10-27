@@ -40,7 +40,6 @@ closest(by_x: List[P], by_y: List[P]) -> Pair is
     let strip =
         by_y
             |> filter(p => Math.abs(p.x - middle) < best.distance)
-            |> collect()
 
     let result mut = best
 

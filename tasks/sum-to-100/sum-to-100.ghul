@@ -52,7 +52,7 @@ expressions() -> (value: int, text: string){} is
     od
 si
 
-let all = expressions() |> collect()
+let all = expressions() |> memo()
 
 write_line("expressions summing to 100:")
 

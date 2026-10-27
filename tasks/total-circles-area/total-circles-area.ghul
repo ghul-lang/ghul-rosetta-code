@@ -49,7 +49,7 @@ on(c: Circle, angle: double) -> (x: double, y: double) =>
 covers(o: Circle, x: double, y: double) -> bool =>
     (x - o.x) * (x - o.x) + (y - o.y) * (y - o.y) < o.r * o.r
 
-crossings(c: Circle, o: Circle) -> List[double] is
+crossings(c: Circle, o: Circle) -> double{} is
     let d = distance(c, o)
 
     if d >= c.r + o.r \/ d <= abs(c.r - o.r) then
@@ -63,7 +63,7 @@ crossings(c: Circle, o: Circle) -> List[double] is
     [base - spread, base + spread]
 si
 
-outer_arcs(c: Circle, others: List[Circle]) -> List[Arc] is
+outer_arcs(c: Circle, others: List[Circle]) -> Arc{} is
     let angles = LIST(
         others
             |> filter(o => !(o =~ c))

@@ -59,7 +59,7 @@ let iccanobif = fibonacci()
     |> map(reversed)
     |> filter(is_prime)
     |> take(15)
-    |> collect()
+    |> memo()
 
 write_line("the first 10 iccanobif primes:")
 write_line(iccanobif |> take(10) |> map(p => "{p}") |> join(" "))

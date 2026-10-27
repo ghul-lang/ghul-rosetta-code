@@ -5,7 +5,7 @@ use System.Math.*
 let n = 17
 
 let residues =
-    1..n |> map(i => i * i % n) |> collect()
+    1..n |> map(i => i * i % n) |> memo()
 
 linked(a: int, b: int) -> bool =>
     let d = ((a - b) % n + n) % n in

@@ -37,7 +37,7 @@ for special in [
     punch(special[0], special.substring(2))
 od
 
-holes(c: char) -> List[int] =>
+holes(c: char) -> int{} =>
     if c == ' ' then LIST()
     elif codes.contains_key(c) then codes[c]
     else throw System.ArgumentException("no card code for '{c}'")

@@ -36,4 +36,4 @@ herd([CAT("felix"), DOG("rex")])
 
 let animals = [CAT("tom"), DOG("spot")]
 
-herd(animals |> collect())
+herd(animals)

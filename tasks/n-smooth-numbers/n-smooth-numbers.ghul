@@ -37,7 +37,7 @@ smooth(bound: int, count: int) -> List[bigint] is
     found
 si
 
-let bounds = 2::29 |> filter(is_prime) |> collect()
+let bounds = 2::29 |> filter(is_prime) |> memo()
 
 write_line("the first 25 n-smooth numbers:")
 

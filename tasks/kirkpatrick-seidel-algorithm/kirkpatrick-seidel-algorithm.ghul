@@ -79,7 +79,7 @@ bridge(points: List[P], a: double) -> (P, P) is
     bridge(kept, a)
 si
 
-upper(points: List[P], first: P, last: P) -> List[P] is
+upper(points: List[P], first: P, last: P) -> P{} is
     if points.count <= 1 /\ first =~ last then
         return [first]
     fi
@@ -103,7 +103,7 @@ upper(points: List[P], first: P, last: P) -> List[P] is
     before ++ after |> collect()
 si
 
-upper_hull(points: List[P]) -> List[P] =>
+upper_hull(points: List[P]) -> P{} =>
     let first = leftmost(points), last = rightmost(points) in
     let between = points |> filter(p => p.x > first.x /\ p.x < last.x) in
     upper(between ++ [first, last] |> collect(), first, last)
@@ -111,10 +111,9 @@ upper_hull(points: List[P]) -> List[P] =>
 flipped(points: P{}) -> List[P] =>
     points |> map(p => P(p.x, -p.y)) |> collect()
 
-backwards(items: List[P]) -> List[P] =>
+backwards(items: List[P]) -> P{} =>
     (0..items.count)
         |> map(i => items[items.count - 1 - i])
-        |> collect()
 
 hull(points: List[P]) -> List[P] =>
     let top = upper_hull(points) in
@@ -124,7 +123,7 @@ hull(points: List[P]) -> List[P] =>
 
 turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
 
-monotone_chain(points: List[P]) -> List[P] is
+monotone_chain(points: List[P]) -> P{} is
     let sorted = points |> sort((a, b) => a.x <> b.x) |> collect()
     let chain = LIST()
 

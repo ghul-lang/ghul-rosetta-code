@@ -28,7 +28,7 @@ best_value(items: List[ITEM], limit: int) -> List[List[int]] is
     return table
 si
 
-packed(items: List[ITEM], limit: int) -> List[ITEM] is
+packed(items: List[ITEM], limit: int) -> ITEM{} is
     let table = best_value(items, limit)
     let chosen = LIST()
 

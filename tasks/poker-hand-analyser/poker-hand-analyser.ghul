@@ -27,7 +27,7 @@ classify(hand: string) -> string is
     if tokens.count != 5 then
         "invalid"
     else
-        let cards = tokens |> map(parse) |> collect()
+        let cards = tokens |> map(parse) |> memo()
         let seen = SET[(int, char)]()
 
         if !(cards |> all(seen.add)) then

@@ -9,7 +9,7 @@ let path = IO.Path.combine(scratch, "foobar.txt")
 
 write_file() is
     IO.File.write_all_lines(
-        path, 1..7 |> map(number => "line {number}") |> collect()
+        path, 1..7 |> map(number => "line {number}")
     )
 si
 
@@ -32,7 +32,6 @@ remove_lines(path: string, start: int, count: int) is
             |> filter(l =>
                 l.index < start - 1 \/ l.index >= start + count - 1)
             |> map(l => l.value)
-            |> collect()
     )
 si
 

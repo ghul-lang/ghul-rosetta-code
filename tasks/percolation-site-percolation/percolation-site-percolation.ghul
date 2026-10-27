@@ -56,7 +56,7 @@ let shown mut = null
 
 for step in 0::10 do
     let p = double(step) / 10.0D
-    let grids = 0..trials |> map(_ => GRID(p)) |> collect()
+    let grids = 0..trials |> map(_ => GRID(p)) |> memo()
     let through = grids |> filter(g => g.percolates()) |> count()
 
     write_line("{p:F1}    {double(through) / double(trials):F3}")

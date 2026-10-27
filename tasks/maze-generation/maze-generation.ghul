@@ -27,7 +27,7 @@ let directions =
     [(across = 1, down = 0), (across = -1, down = 0),
      (across = 0, down = 1), (across = 0, down = -1)]
 
-shuffled() -> Collections.List[(across: int, down: int)] is
+shuffled() -> (across: int, down: int){} is
     let order = LIST(directions)
     let index mut = order.count - 1
 

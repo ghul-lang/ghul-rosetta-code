@@ -1,6 +1,6 @@
 use default
 
-counting_sort(values: List[int], low: int, high: int) -> List[int] is
+counting_sort(values: List[int], low: int, high: int) -> int{} is
     let counts = low..high + 1 |> map(_ => 0) |> collect_mutable()
 
     for value in values do

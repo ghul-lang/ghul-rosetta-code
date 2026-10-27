@@ -3,7 +3,7 @@ use default
 write_line("partitioning divisor sets, which takes a moment")
 write_line("")
 
-divisors(n: int) -> List[int] is
+divisors(n: int) -> int{} is
     let found = LIST()
     let factor mut = 1
 

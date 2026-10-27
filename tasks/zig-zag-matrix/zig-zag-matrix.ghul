@@ -1,6 +1,6 @@
 use default
 
-zigzag(n: int) -> List[LIST[int]] is
+zigzag(n: int) -> LIST[int]{} is
     let cells = 0..n
         |> map(_ => repeat(0, n) |> collect_mutable())
         |> collect()

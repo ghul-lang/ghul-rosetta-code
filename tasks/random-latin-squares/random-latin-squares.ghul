@@ -31,7 +31,7 @@ try_row(rows: List[List[int]], size: int) -> List[int]? is
     return row
 si
 
-latin_square(size: int) -> List[List[int]] is
+latin_square(size: int) -> List[int]{} is
     let found =
         for _ in from(1) do
             let rows = LIST[List[int]]()

@@ -15,7 +15,7 @@ si
 
 let environments = (1..13)
     |> map(ENVIRONMENT(*, 0))
-    |> collect()
+    |> memo()
 
 while !(environments |> all(env => env.value == 1)) do
     environments |> each(hailstone_step)

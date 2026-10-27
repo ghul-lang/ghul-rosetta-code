@@ -8,7 +8,7 @@ is_prime(value: int) -> bool =>
         |> all(divisor => value % divisor != 0))
 
 prime_digit_numbers() -> int{} is
-    let level mut = prime_digits |> collect()
+    let level mut = prime_digits
 
     do
         yield in level

@@ -14,7 +14,7 @@ distance(a: int, b: int) -> double =>
 length(edges: Edge{}) -> double =>
     edges |> sum_by((from, to) => distance(from, to))
 
-spanning_tree(n: int) -> List[Edge] is
+spanning_tree(n: int) -> Edge{} is
     let in_tree = SET([0])
     let edges = LIST()
 
@@ -32,7 +32,7 @@ spanning_tree(n: int) -> List[Edge] is
     edges
 si
 
-perfect_matching(vertices: List[int]) -> List[Edge] =>
+perfect_matching(vertices: List[int]) -> Edge{} =>
     if vertices.count == 0 then
         []
     else
@@ -50,7 +50,7 @@ perfect_matching(vertices: List[int]) -> List[Edge] =>
             |> min_by(matching => length(matching))!
     fi
 
-eulerian_circuit(n: int, edges: List[Edge]) -> List[int] is
+eulerian_circuit(n: int, edges: List[Edge]) -> int{} is
     let unused =
         0..n
             |> map(_ => LIST())

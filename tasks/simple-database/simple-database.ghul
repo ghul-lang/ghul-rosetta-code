@@ -38,13 +38,13 @@ add(file: string, category: string, description: string, date: DateTime) is
 
     IO.File.write_all_lines(
         file,
-        entries |> map(entry => entry.line) |> collect())
+        entries |> map(entry => entry.line))
 si
 
 latest(file: string) -> ENTRY? =>
     read_all(file) |> max_by(entry => entry.date)
 
-latest_by_category(file: string) -> List[ENTRY] is
+latest_by_category(file: string) -> ENTRY{} is
     let newest = read_all(file)
         |> group_by(entry => entry.category)
         |> map(group => group.value |> max_by(entry => entry.date)!)
@@ -56,7 +56,7 @@ latest_by_category(file: string) -> List[ENTRY] is
     newest
 si
 
-by_date(file: string) -> List[ENTRY] is
+by_date(file: string) -> ENTRY{} is
     let all = read_all(file)
 
     all.sort((left, right) => left.date <> right.date)

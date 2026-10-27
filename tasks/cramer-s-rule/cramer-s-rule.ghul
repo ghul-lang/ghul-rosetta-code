@@ -30,13 +30,12 @@ with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
                 |> collect())
         |> collect()
 
-solve(m: Matrix, constants: List[int]) -> List[double] =>
+solve(m: Matrix, constants: List[int]) -> double{} =>
     let denominator = double(determinant(m)) in
     0..m.count
         |> map(column =>
             double(determinant(with_column(m, column, constants))) /
             denominator)
-        |> collect()
 
 let coefficients = [
     [2, -1, 5, 1],

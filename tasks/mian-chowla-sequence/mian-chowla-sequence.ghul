@@ -9,7 +9,7 @@ mian_chowla() -> int{} is
         let fresh = terms
             |> map(term => term + candidate)
             |> cat([candidate + candidate])
-            |> collect()
+            |> memo()
 
         if fresh |> all(sum => !sums.contains(sum)) then
             terms.add(candidate)

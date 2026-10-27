@@ -1,7 +1,7 @@
 use default
 
 sorted_letters(word: string) -> string =>
-    string(word |> sort() |> collect())
+    string(word |> sort())
 
 is_deranged(first: string, second: string) -> bool =>
     0..first.length |> all(i => first[i] != second[i])

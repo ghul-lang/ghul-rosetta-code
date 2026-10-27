@@ -31,7 +31,7 @@ bend(from: Step, to: Step) -> double =>
         atan2(double(to.y), double(to.x)) in
     turn - 2.0D * pi * floor(turn / (2.0D * pi))
 
-spiral(count: int) -> List[Step] is
+spiral(count: int) -> Step{} is
     let points = LIST([(x = 0, y = 0), (x = 0, y = 1)])
     let last mut = (x = 0, y = 1)
     let squared mut = 1
@@ -74,8 +74,8 @@ od
 
 let many = spiral(10000)
 
-let xs = many |> map(p => double(p.x)) |> collect()
-let ys = many |> map(p => double(p.y)) |> collect()
+let xs = many |> map(p => double(p.x)) |> memo()
+let ys = many |> map(p => double(p.y)) |> memo()
 
 let low_x = xs |> reduce(0.0D, min)
 let high_x = xs |> reduce(0.0D, max)

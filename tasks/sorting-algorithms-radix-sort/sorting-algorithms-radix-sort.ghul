@@ -2,8 +2,8 @@ use default
 
 // Least significant digit first, in base 10. Negative numbers are sorted
 // by their magnitude on their own and put first, reversed.
-radix_sort(values: List[int]) -> List[int] is
-    sort_magnitudes(magnitudes: List[int]) -> List[int] is
+radix_sort(values: List[int]) -> int{} is
+    sort_magnitudes(magnitudes: List[int]) -> int{} is
         let current mut = magnitudes |> collect()
         let largest = current |> max() ?? 0
         let place mut = 1
@@ -29,7 +29,7 @@ radix_sort(values: List[int]) -> List[int] is
     let negatives = sort_magnitudes(below)
     let others = sort_magnitudes(above)
 
-    (negatives |> reverse() |> map(- *)) ++ others |> collect()
+    (negatives |> reverse() |> map(- *)) ++ others
 si
 
 let values = [170, 45, 75, -90, -802, 24, 2, 66, 0, -1, 802]

@@ -6,7 +6,7 @@ let opcodes =
 assemble(source: string) -> LIST[int] is
     let lines = source.trim_end().split(['\n'])
         |> map(line => line.split([';'])[0].trim())
-        |> collect()
+        |> memo()
 
     let labels = MAP()
 

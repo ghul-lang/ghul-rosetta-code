@@ -27,7 +27,7 @@ let terms = recaman() |> take(66) |> collect()
 
 let hops = (1..terms.count)
     |> map(n => (from = terms[n - 1], to = terms[n]))
-    |> collect()
+    |> memo()
 
 let highest =
     terms |> reduce(0, (best, term) => max(best, term))

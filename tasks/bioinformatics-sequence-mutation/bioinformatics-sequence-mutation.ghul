@@ -7,7 +7,7 @@ show(label: string, sequence: List[char]) is
     write_line(label)
 
     for (row, line) in sequence |> chunk(50) |> index() do
-        write_line("{row * 50,5}  {string(line |> collect())}")
+        write_line("{row * 50,5}  {string(line)}")
     od
 
     let tally =
