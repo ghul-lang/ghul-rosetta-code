@@ -1,13 +1,13 @@
 use default
 
-let capitals = MAP()
+let capitals = [
+    ("France", "Paris"),
+    ("Japan", "Tokyo"),
+    ("Peru", "Lima")
+] |> MAP()
 
-capitals.add("France", "Paris")
-capitals.add("Japan", "Tokyo")
-capitals.add("Peru", "Lima")
-
-write_line("keys:   {capitals.keys |> sort() |> join(", ")}")
-write_line("values: {capitals.values |> sort() |> join(", ")}")
+write_line("keys:   {capitals.keys |> sort() |> join()}")
+write_line("values: {capitals.values |> sort() |> join()}")
 
 for (country, capital) in capitals do
     write_line("the capital of {country} is {capital}")
