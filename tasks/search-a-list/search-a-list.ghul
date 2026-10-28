@@ -1,22 +1,29 @@
 use default
 
-let haystack =
-    ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight"]
+let haystack = [
+    "Zig", "Zag", "Wally", "Ronald", "Bush", "Krusty", "Charlie", "Bush",
+    "Bozo"
+]
 
-position(needle: string) -> int? is
-    let hit = haystack |> index() |> find(entry => entry.value =~ needle)
+positions(needle: string) -> int{} =>
+    haystack |> index()
+        |> filter(e => e.value =~ needle)
+        |> map(e => e.index)
 
-    if hit? then
-        return hit.index
-    fi
+missing(needle: string) -> int =>
+    throw Ghul.Exception("{needle} is not in the haystack")
 
-    return null
-si
+first_index(needle: string) -> int =>
+    positions(needle) |> first() ?? missing(needle)
 
-for needle in ["five", "dog"] do
-    if let at = position(needle) then
-        write_line("{needle} is at index {at}")
-    else
-        write_line("{needle} is not in the list")
-    fi
+last_index(needle: string) -> int =>
+    positions(needle) |> take_last(1) |> first() ?? missing(needle)
+
+for needle in ["Bush", "Washington"] do
+    try
+        let (first, last) = (first_index(needle), last_index(needle))
+        write_line("{needle}: first at {first}, last at {last}")
+    catch e: Ghul.Exception
+        write_line(e.message)
+    yrt
 od

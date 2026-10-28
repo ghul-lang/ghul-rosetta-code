@@ -1,15 +1,27 @@
 use default
 
+let revised = "2026-10-28"
+
 let elements =
     "hydrogen helium lithium beryllium boron carbon nitrogen oxygen "
-    "fluorine neon sodium magnesium aluminium silicon phosphorus "
-    "sulfur chlorine argon potassium calcium scandium titanium "
-    "vanadium chromium manganese iron cobalt nickel copper zinc "
-    "gallium germanium arsenic selenium bromine krypton"
+    "fluorine neon sodium magnesium aluminum silicon phosphorus sulfur "
+    "chlorine argon potassium calcium scandium titanium vanadium "
+    "chromium manganese iron cobalt nickel copper zinc gallium "
+    "germanium arsenic selenium bromine krypton rubidium strontium "
+    "yttrium zirconium niobium molybdenum technetium ruthenium rhodium "
+    "palladium silver cadmium indium tin antimony tellurium iodine "
+    "xenon cesium barium lanthanum cerium praseodymium neodymium "
+    "promethium samarium europium gadolinium terbium dysprosium "
+    "holmium erbium thulium ytterbium lutetium hafnium tantalum "
+    "tungsten rhenium osmium iridium platinum gold mercury thallium "
+    "lead bismuth polonium astatine radon francium radium actinium "
+    "thorium protactinium uranium neptunium plutonium americium curium "
+    "berkelium californium einsteinium fermium mendelevium nobelium "
+    "lawrencium rutherfordium dubnium seaborgium bohrium hassium "
+    "meitnerium darmstadtium roentgenium copernicium nihonium "
+    "flerovium moscovium livermorium tennessine oganesson"
 
-let names = elements.split([' '])
+let names = words(elements) |> collect()
 
-write_line("{names.count} elements")
-write_line("first: {names[0]}")
-write_line("last: {names[names.count - 1]}")
-write_line("the 26th is {names[25]}")
+write_line("last revised: {revised}")
+write_line("{names.count} elements, the last is {names[names.count - 1]}")

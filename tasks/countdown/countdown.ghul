@@ -49,9 +49,8 @@ solve(numbers: List[Found], target: int, best: Found) -> Found is
                 steps.add_range(numbers[j].steps)
                 steps.add(step)
 
-                let next = LIST(rest)
-                next.add((value = value, steps = steps))
-
+                let entry = (value = value, steps = steps)
+                let next = rest ++ [entry] |> collect()
                 closest = solve(next, target, closest)
 
                 if closest.value == target then

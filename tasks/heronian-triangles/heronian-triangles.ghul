@@ -16,15 +16,13 @@ heron_area(a: int, b: int, c: int) -> long? is
         return null
     fi
 
-    let root = long(System.Math.sqrt(double(sixteen_area_sq)))
+    let root = isqrt(sixteen_area_sq)
 
-    for r in [root - 1L, root, root + 1L] do
-        if r >= 0L /\ r * r == sixteen_area_sq /\ r % 4L == 0L then
-            return r / 4L
-        fi
-    od
-
-    null
+    if root * root == sixteen_area_sq /\ root % 4L == 0L then
+        root / 4L
+    else
+        null
+    fi
 si
 
 try_triangle(a: int, b: int, c: int) -> TRIANGLE? =>

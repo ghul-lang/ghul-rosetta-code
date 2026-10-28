@@ -21,9 +21,7 @@ placements(n: int, queens: List[int]) -> List[int]{} is
     else
         for column in 0..n do
             if safe(queens, queens.count, column) then
-                let extended = LIST(queens)
-                extended.add(column)
-                yield in placements(n, extended)
+                yield in placements(n, queens ++ [column] |> collect())
             fi
         od
     fi
@@ -58,7 +56,7 @@ board(image: IMAGE, solution: List[int], left: int, top: int) is
     od
 si
 
-let solutions = placements(8, LIST()) |> collect()
+let solutions = placements(8, []) |> collect()
 
 let down = (solutions.count + across - 1) / across
 

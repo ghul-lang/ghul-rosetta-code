@@ -14,11 +14,7 @@ let sequence =
 
 let width = 50
 
-let counts = "ACGT" |> collect_mutable_map(base => base, base => 0)
-
-for base in sequence do
-    counts[base] = counts[base] + 1
-od
+let counts = sequence |> frequencies()
 
 for start in 0..sequence.length / width do
     let line = sequence.substring(start * width, width)

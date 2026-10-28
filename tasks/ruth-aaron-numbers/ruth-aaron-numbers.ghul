@@ -4,9 +4,7 @@ write_line("factorising to find consecutive Ruth-Aaron pairs")
 write_line("")
 
 let factor_limit = 10_000
-let composite = LIST(factor_limit)
-
-0..factor_limit |> each(_ => composite.add(false))
+let composite = repeat(false, factor_limit) |> collect_mutable()
 
 for candidate in 2..factor_limit do
     if !composite[candidate] /\ candidate <= factor_limit / candidate then

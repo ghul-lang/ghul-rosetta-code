@@ -1,8 +1,5 @@
 use default
 
-write_line("testing numbers for the super-Poulet property")
-write_line("")
-
 splits_repeated_doubling(value: int) -> bool =>
     let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide
@@ -12,29 +9,14 @@ is_super_poulet(value: int) -> bool =>
         !is_prime(value) /\
         (divisors(value) |> all(splits_repeated_doubling))
 
-report(value: int) -> bool is
-    if value % 1_000_000 == 1 then
-        write_line("  past {value - 1:N0}")
-    fi
-
-    return true
-si
-
-let found =
-    from(3, 2)
-        |> filter(report)
-        |> filter(is_super_poulet)
-        |> take_while(* < 10_100_000)
-        |> collect()
+let super_poulets = from(3, 2) |> filter(is_super_poulet)
 
 write_line("the first 20 super-Poulet numbers:")
-write_line("  {found |> take(20) |> join(" ")}")
+write_line("  {super_poulets |> take(20) |> join(" ")}")
 write_line()
 
-[1_000_000, 10_000_000]
-    |> each(bound => (
-        let passed = found |> take_while(* <= bound) |> count()
+let (position, value) =
+    super_poulets |> index() |> find(e => e.value > 1_000_000)!
 
-        write_line("super-Poulet number {passed + 1} is the first over "
-                   "{bound:N0}: {found[passed]:N0}")
-    ))
+write_line("super-Poulet number {position + 1} is the first over "
+           "1,000,000: {value:N0}")

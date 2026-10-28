@@ -1,26 +1,18 @@
 use default
 
-rotate(text: string, key: int) -> string is
-    let shifted = System.Text.StringBuilder()
+rotate(text: string, key: int) -> string =>
+    text |> map(letter => rotate_letter(letter, key)) |> string()
 
-    for letter in text do
-        let first =
-            if letter >= 'a' /\ letter <= 'z' then int('a')
-            elif letter >= 'A' /\ letter <= 'Z' then int('A')
-            else -1
-            fi
-
-        if first < 0 then
-            shifted.append(letter)
-        else
-            let rotated = (int(letter) - first + key) % 26
-
-            shifted.append(char(first + rotated))
+rotate_letter(letter: char, key: int) -> char =>
+    let first =
+        if letter >= 'a' /\ letter <= 'z' then int('a')
+        elif letter >= 'A' /\ letter <= 'Z' then int('A')
+        else -1
         fi
-    od
-
-    shifted.to_string()
-si
+    in
+    if first < 0 then letter
+    else char(first + (int(letter) - first + key) % 26)
+    fi
 
 encode(text: string, key: int) -> string => rotate(text, key)
 decode(text: string, key: int) -> string => rotate(text, 26 - key)

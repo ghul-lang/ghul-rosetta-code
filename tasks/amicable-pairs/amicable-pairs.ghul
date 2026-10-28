@@ -2,13 +2,8 @@ use default
 
 let limit = 20000
 
-sum_of_proper_divisors(n: int) -> int =>
-    (1::(n / 2))
-        |> filter(divisor => n % divisor == 0)
-        |> sum()
-
 (1::limit)
-    |> map(n => (n, partner = sum_of_proper_divisors(n)))
+    |> map(n => (n, partner = divisor_sum(n) - n))
     |> filter((n, partner) =>
-        partner > n /\ sum_of_proper_divisors(partner) == n)
+        partner > n /\ divisor_sum(partner) - partner == n)
     |> each((n, partner) => write_line("{n} and {partner}"))
