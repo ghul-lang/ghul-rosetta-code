@@ -1,35 +1,4 @@
 use default
-use bigint.mod_pow
-
-let witnesses = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-
-is_prime(n: bigint) -> bool is
-    if n < 2n then
-        return false
-    fi
-
-    if witnesses |> any(small => n % small =~ 0n) then
-        return witnesses |> any(small => n =~ small)
-    fi
-
-    split(m: bigint, shifts: int) -> (bigint, int) =>
-        if m % 2n =~ 0n then
-            split(m / 2n, shifts + 1)
-        else
-            (m, shifts)
-        fi
-
-    let (odd_part, shifts) = split(n - 1n, 0)
-
-    holds(w: bigint) -> bool =>
-        let first = mod_pow(w, odd_part, n) in
-        first =~ 1n \/ first =~ n - 1n \/
-            iterate(first, r => r * r % n)
-                |> take(shifts + 1)
-                |> any(r => r =~ n - 1n)
-
-    witnesses |> all(holds)
-si
 
 largest_truncatable(base: int) -> bigint is
     let radix = bigint(base)

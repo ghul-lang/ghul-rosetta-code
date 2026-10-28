@@ -3,11 +3,6 @@ use default
 write_line("searching each triangle size for an arrangement")
 write_line("")
 
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
 let prime_sum = 0::41 |> map(is_prime) |> collect()
 
 extend(chosen: LIST[int], taken: LIST[bool],

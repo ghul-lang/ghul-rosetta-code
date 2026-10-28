@@ -1,40 +1,6 @@
 use default
 
-let small_primes =
-    (3..1000)
-    |> filter(p =>
-        (2..p) |> take_while(d => d * d <= p) |> all(d => p % d != 0))
-    |> collect()
-
-is_strong_probable_prime(n: bigint, a: bigint) -> bool is
-    let d mut = n - 1n
-    let s mut = 0
-
-    while d.is_even do
-        d = d / 2n
-        s = s + 1
-    od
-
-    let x mut = bigint.mod_pow(a, d, n)
-
-    if x.is_one \/ x =~ n - 1n then
-        return true
-    fi
-
-    for _ in 1..s do
-        x = x * x % n
-
-        if x =~ n - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_prime(n: bigint) -> bool =>
-    [2n, 3n, 5n, 7n, 11n, 13n, 17n]
-    |> all(a => n =~ a \/ is_strong_probable_prime(n, a))
+let small_primes = primes(3) |> take_while(* < 1000) |> collect()
 
 has_small_factor(k: int, m: int, powers: Collections.List[int]) -> bool =>
     (0..small_primes.count)
