@@ -11,25 +11,13 @@ text_of(values: Collections.List[int]) -> string =>
 
 
 binomial_transform(values: Collections.List[int], forward: bool)
-        -> Collections.List[int] is
-    let result = LIST()
-
-    for n in 0..values.count do
-        let total mut = 0
-        let coefficient mut = 1
-
-        for k in 0::n do
-            let sign = if forward \/ (n - k) % 2 == 0 then 1 else -1 fi
-
-            total = total + sign * coefficient * values[k]
-            coefficient = coefficient * (n - k) / (k + 1)
-        od
-
-        result.add(total)
-    od
-
-    return result
-si
+        -> Collections.List[int] =>
+    (0..values.count)
+        |> map(n => (0::n)
+            |> map(k => binomial(n, k) * values[k] *
+                if forward \/ (n - k) % 2 == 0 then 1 else -1 fi)
+            |> sum())
+        |> collect()
 
 show(name: string, values: int[]) is
     let original = from_array(values)
