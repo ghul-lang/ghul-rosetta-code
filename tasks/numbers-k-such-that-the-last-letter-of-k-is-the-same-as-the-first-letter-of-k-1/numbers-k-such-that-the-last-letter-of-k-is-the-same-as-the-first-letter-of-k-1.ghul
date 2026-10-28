@@ -41,7 +41,7 @@ qualifies(k: long) -> bool =>
     let name = english(k) in
     name[name.length - 1] == english(k + 1L)[0]
 
-let found = from(0L) |> filter(qualifies)
+let found = from(0L) |> filter(qualifies) |> memo()
 
 write_line("The first 50 qualifying numbers:")
 
