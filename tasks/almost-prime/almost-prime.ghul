@@ -1,13 +1,7 @@
 use default
 
-smallest_factor(n: int) -> int =>
-    2::n |> find_or_throw(divisor => n % divisor == 0)
-
-prime_factor_count(n: int) -> int =>
-    if n == 1 then 0 else 1 + prime_factor_count(n / smallest_factor(n)) fi
-
 almost_primes(k: int) -> int{} =>
-    from(2) |> filter(n => prime_factor_count(n) == k)
+    from(2) |> filter(n => prime_factors(n) |> count() == k)
 
 for k in 1::5 do
     let first_ten = almost_primes(k) |> take(10) |> map(n => "{n,5}")
