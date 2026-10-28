@@ -19,9 +19,9 @@ si
 
 entropy(word: string) -> double =>
     let total = double(word.length) in
-    "01"
-        |> map(symbol => double(word |> count(c => c == symbol)) / total)
-        |> filter(probability => probability > 0.0D)
+    word
+        |> group_by(c => c)
+        |> map(group => double(group.value.count) / total)
         |> reduce(0.0D, (bits, probability) =>
             bits - probability * Math.log2(probability))
 
