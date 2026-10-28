@@ -1,11 +1,5 @@
 use default
 
-divisor_count(n: int) -> int =>
-    from(1)
-    |> take_while(d => d * d <= n)
-    |> map(d => if n % d == 0 then if d * d == n then 1 else 2 fi else 0 fi)
-    |> sum()
-
 is_tau(n: int) -> bool => n % divisor_count(n) == 0
 
 let first_hundred = from(1)
