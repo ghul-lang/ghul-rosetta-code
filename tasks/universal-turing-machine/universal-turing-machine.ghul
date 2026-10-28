@@ -9,7 +9,7 @@ class MACHINE(
     blank: char,
     rules: string[]
 ) is
-    table: MAP[string, MAP[char, Action]]
+    table: MAP[(string, char), Action]
 
     init(..) is
         table = MAP()
@@ -24,11 +24,7 @@ class MACHINE(
                 else 0
                 esac
 
-            if !table.contains_key(parts[0]) then
-                table[parts[0]] = MAP()
-            fi
-
-            table[parts[0]][parts[1][0]] =
+            table[(parts[0], parts[1][0])] =
                 (write = parts[2][0], move = move, next = parts[4])
         od
     si
@@ -45,7 +41,7 @@ class MACHINE(
                 write_line("{state,-4} {picture(tape, head)}")
             fi
 
-            let action = table[state][tape[head]]
+            let action = table[(state, tape[head])]
             tape[head] = action.write
             head = head + action.move
             state = action.next
