@@ -1,28 +1,25 @@
 use default
-use Ghul.memo_rec
 
-longest_common_subsequence(left: string, right: string) -> string =>
-    let lcs = memo_rec((longest, i: int, j: int) =>
-        if i == left.length \/ j == right.length then
-            ""
-        elif left[i] == right[j] then
-            "{left[i]}{longest(i + 1, j + 1)}"
-        else
-            let dropping_left = longest(i + 1, j)
-            let dropping_right = longest(i, j + 1)
-
+lcs(left: string, right: string) -> string memo =>
+    if left.length == 0 \/ right.length == 0 then
+        ""
+    elif left[0] == right[0] then
+        "{left[0]}{lcs(left[1..<0], right[1..<0])}"
+    else
+        let
+            dropping_left = lcs(left[1..<0], right),
+            dropping_right = lcs(left, right[1..<0])
+        in
             if dropping_left.length >= dropping_right.length then
                 dropping_left
             else
                 dropping_right
             fi
-        fi) in
-    lcs(0, 0)
+    fi
 
 [("1234", "1224533324"),
  ("thisisatest", "testing123testing"),
  ("XMJYAUZ", "MZJAWXU")]
     |> each(pair => (
         let (left, right) = pair
-        write_line("{left} and {right}:"
-            " {longest_common_subsequence(left, right)}")))
+        write_line("{left} and {right}: {lcs(left, right)}")))

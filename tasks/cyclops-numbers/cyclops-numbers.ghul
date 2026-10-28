@@ -19,8 +19,10 @@ cyclops() -> long{} is
     while true do
         let scale = 0..half |> reduce(1L, (acc, _) => acc * 10L)
 
-        for left in zero_free(half) do
-            for right in zero_free(half) do
+        let halves = zero_free(half) |> memo()
+
+        for left in halves do
+            for right in halves do
                 yield (left * 10L + 0L) * scale + right
             od
         od

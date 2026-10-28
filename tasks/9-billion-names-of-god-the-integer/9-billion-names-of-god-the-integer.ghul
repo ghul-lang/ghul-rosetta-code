@@ -1,6 +1,6 @@
 use default
 
-at_most(total: int, largest: int) -> int =>
+at_most(total: int, largest: int) -> int memo =>
     if total == 0 then 1
     elif largest == 0 then 0
     elif largest > total then at_most(total, total)

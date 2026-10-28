@@ -1,6 +1,6 @@
 use default
 
-shortest_supersequence(u: string, v: string) -> string =>
+shortest_supersequence(u: string, v: string) -> string memo =>
     if u.length == 0 then
         v
     elif v.length == 0 then

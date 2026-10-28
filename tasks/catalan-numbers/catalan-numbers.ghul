@@ -1,7 +1,7 @@
 use default
 
 // C(n) = sum over i of C(i) * C(n - 1 - i)
-by_convolution(n: int) -> long is
+by_convolution(n: int) -> long memo is
     if n == 0 then
         return 1L
     fi

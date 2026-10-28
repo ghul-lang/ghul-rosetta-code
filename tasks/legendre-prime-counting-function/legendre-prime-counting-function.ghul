@@ -13,7 +13,7 @@ od
 
 let primes = [long(n) for n in 2..limit if !composite[n]]
 
-phi(x: long, a: int) -> long =>
+phi(x: long, a: int) -> long memo =>
     if a == 0 then
         x
     elif x < primes[a] then

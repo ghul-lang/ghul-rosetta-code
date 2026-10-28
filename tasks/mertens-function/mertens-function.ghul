@@ -23,8 +23,8 @@ mobius(value: int) -> int is
     if factors % 2 == 0 then 1 else -1 fi
 si
 
-mertens(limit: int) -> int =>
-    1::limit |> sum_by(mobius)
+mertens(n: int) -> int memo =>
+    if n == 0 then 0 else mertens(n - 1) + mobius(n) fi
 
 write_line("the Mertens function for 1 to 99:")
 
