@@ -152,14 +152,13 @@ for (i, (name, description)) in examples |> index() do
         |> collect_map()
 
     // nodes sit evenly round a circle
-    let position = node =>
-        (
-            let angle =
-                6.283185307D * double(slot[node]) /
-                double(graph.nodes.count)
-            (x = cx + 80.0D * Ghul.Math.cos(angle),
-             y = cy + 80.0D * Ghul.Math.sin(angle))
-        )
+    let position = node => (
+        let angle =
+            6.283185307D * double(slot[node]) /
+            double(graph.nodes.count)
+        (x = cx + 80.0D * Ghul.Math.cos(angle),
+         y = cy + 80.0D * Ghul.Math.sin(angle))
+    )
 
     image.colour(120ub, 120ub, 120ub)
     image.stroke(2.0D)
