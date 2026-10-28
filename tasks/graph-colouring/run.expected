@@ -20,18 +20,18 @@ Ex2:
   8 nodes, 12 edges, 2 colours
 Ex3:
   1-4 coloured 0-1
-  1-6 coloured 0-2
-  1-8 coloured 0-3
-  3-2 coloured 1-0
-  3-6 coloured 1-2
-  3-8 coloured 1-3
-  5-2 coloured 2-0
-  5-4 coloured 2-1
-  5-8 coloured 2-3
-  7-2 coloured 3-0
-  7-4 coloured 3-1
-  7-6 coloured 3-2
-  8 nodes, 12 edges, 4 colours
+  1-6 coloured 0-1
+  1-8 coloured 0-1
+  3-2 coloured 0-1
+  3-6 coloured 0-1
+  3-8 coloured 0-1
+  5-2 coloured 0-1
+  5-4 coloured 0-1
+  5-8 coloured 0-1
+  7-2 coloured 0-1
+  7-4 coloured 0-1
+  7-6 coloured 0-1
+  8 nodes, 12 edges, 2 colours
 Ex4:
   1-6 coloured 0-1
   7-1 coloured 1-0
