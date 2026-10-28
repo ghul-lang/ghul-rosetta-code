@@ -5,8 +5,7 @@ let most mut = 0
 let peaks = LIST()
 
 for line in IO.File.read_all_lines("mlijobs.txt") do
-    let fields =
-        line.split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let fields = words(line) |> collect()
     let time = fields[3]
 
     if fields[1] =~ "OUT" then

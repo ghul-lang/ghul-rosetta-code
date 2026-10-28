@@ -2,82 +2,14 @@ use default
 
 let search_limit = 1000000
 
-smallest_prime_factors(limit: int) -> List[int] is
-    let factor = LIST()
-
-    0..limit |> each(_ => factor.add(0))
-
-    let prime mut = 2
-
-    while prime * prime < limit do
-        if factor[prime] == 0 then
-            let multiple mut = prime * prime
-
-            while multiple < limit do
-                if factor[multiple] == 0 then
-                    factor[multiple] = prime
-                fi
-
-                multiple = multiple + prime
-            od
-        fi
-
-        prime = prime + 1
-    od
-
-    let n mut = 2
-
-    while n < limit do
-        if factor[n] == 0 then
-            factor[n] = n
-        fi
-
-        n = n + 1
-    od
-
-    return factor
-si
-
-is_sphenic(n: int, factor: List[int]) -> bool => (
-    let rest mut = n
-    let previous mut = 0
-    let total mut = 0
-    let distinct mut = 0
-
-    while rest > 1 do
-        let prime = factor[rest]
-
-        total = total + 1
-
-        if prime != previous then
-            distinct = distinct + 1
-            previous = prime
-        fi
-
-        rest = rest / prime
-    od
-
-    total == 3 /\ distinct == 3
-)
-
-prime_factors(n: int, factor: List[int]) -> List[string] => (
-    let rest mut = n
-    let factors = LIST()
-
-    while rest > 1 do
-        let prime = factor[rest]
-        factors.add("{prime}")
-        rest = rest / prime
-    od
-
-    factors
-)
-
-let factor = smallest_prime_factors(search_limit)
+is_sphenic(n: int) -> bool =>
+    let factors = prime_factors(n) in
+    factors.count == 3 /\
+        factors[0] != factors[1] /\ factors[1] != factors[2]
 
 let sphenics =
     (2..search_limit)
-    |> filter(is_sphenic(*, factor))
+    |> filter(is_sphenic)
     |> collect()
 
 let below_1000 = sphenics |> filter(* < 1000) |> join()
@@ -113,7 +45,7 @@ let sphenic_200000th = sphenics[200000 - 1]
 
 write_line(
     "the 200000th sphenic number is {sphenic_200000th} = {
-        prime_factors(sphenic_200000th, factor) |> join(" x ")
+        prime_factors(sphenic_200000th) |> join(" x ")
     }"
 )
 

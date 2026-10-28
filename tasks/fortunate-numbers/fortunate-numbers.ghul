@@ -3,48 +3,10 @@ use default
 write_line("testing primorial offsets for primality")
 write_line("")
 
-let bases = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-
-passes_miller_rabin(value: bigint, base: bigint) -> bool is
-    if base % value =~ 0n then
-        return true
-    fi
-
-    let odd mut = value - 1n
-    let rounds mut = 0
-
-    while odd % 2n =~ 0n do
-        odd = odd / 2n
-        rounds = rounds + 1
-    od
-
-    let residue mut = bigint.mod_pow(base, odd, value)
-
-    if residue =~ 1n \/ residue =~ value - 1n then
-        return true
-    fi
-
-    for _ in 1..rounds do
-        residue = residue * residue % value
-        if residue =~ value - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_probable_prime(value: bigint) -> bool =>
-    bases |> all(base => passes_miller_rabin(value, cast(base)))
-
-is_prime(value: int) -> bool =>
-    value > 1 /\
-        2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
-
 primorials() -> bigint{} is
     let product mut = 1n
 
-    for prime in from(2) |> filter(is_prime) do
+    for prime in primes() do
         product = product * cast(prime)
 
         yield product
@@ -54,7 +16,7 @@ si
 fortunate(primorial: bigint) -> int =>
     from(1)
         |> map(k => 2 * k + 1)
-        |> find(m => is_probable_prime(primorial + cast(m)))!
+        |> find(m => is_prime(primorial + cast(m)))!
 
 let count = 75
 let seen = LIST[int]()

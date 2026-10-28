@@ -1,29 +1,5 @@
 use default
 
-totient(value: int) -> int is
-    let remaining mut = value
-    let count mut = value
-    let factor mut = 2
-
-    while factor * factor <= remaining do
-        if remaining % factor == 0 then
-            while remaining % factor == 0 do
-                remaining = remaining / factor
-            od
-
-            count = count - count / factor
-        fi
-
-        factor = factor + 1
-    od
-
-    if remaining > 1 then
-        count = count - count / remaining
-    fi
-
-    count
-si
-
 totient_sum(value: int) -> int =>
     if value > 1 then
         let next = totient(value) in

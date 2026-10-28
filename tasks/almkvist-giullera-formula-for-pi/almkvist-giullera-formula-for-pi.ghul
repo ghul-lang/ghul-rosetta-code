@@ -1,12 +1,10 @@
 use default
 
-factorial(n: int) -> bigint => 1::n |> map(bigint) |> product()
-
 power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
 
 integer_term(n: int) -> bigint =>
-    32n * factorial(6 * n) * bigint(532 * n * n + 126 * n + 9) /
-        (3n * bigint.pow(factorial(n), 6))
+    32n * factorial(bigint(6 * n)) * bigint(532 * n * n + 126 * n + 9) /
+        (3n * bigint.pow(factorial(bigint(n)), 6))
 
 square_root(n: bigint) -> bigint =>
     let walk = (x: bigint, y: bigint) -> bigint rec =>

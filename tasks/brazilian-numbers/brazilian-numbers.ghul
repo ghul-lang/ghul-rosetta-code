@@ -18,11 +18,6 @@ si
 is_brazilian(number: int) -> bool =>
     2..number - 1 |> any(same_digits(number, *))
 
-is_prime(number: int) -> bool =>
-    number > 1 /\ ((2..number)
-        |> take_while(divisor => divisor * divisor <= number)
-        |> all(divisor => number % divisor != 0))
-
 from_one() -> int{} => from(1)
 
 show(description: string, candidates: int{}) is

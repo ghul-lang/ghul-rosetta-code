@@ -1,9 +1,7 @@
 use default
-use System.StringSplitOptions
 
 magnitude(line: string) -> double =>
-    double.parse(
-        line.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)[2])
+    double.parse((words(line) |> collect())[2])
 
 IO.File.read_lines("data.txt")
     |> filter(line => magnitude(line) > 6.0D)

@@ -1,36 +1,5 @@
 use default
 
-let bases = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-
-passes_miller_rabin(value: bigint, base: bigint) -> bool is
-    if base % value =~ 0n then
-        return true
-    fi
-
-    split(n: bigint, rounds: int) -> (bigint, int) =>
-        if n % 2n =~ 0n then split(n / 2n, rounds + 1) else (n, rounds) fi
-
-    let (odd, rounds) = split(value - 1n, 0)
-    let residue mut = bigint.mod_pow(base, odd, value)
-
-    if residue =~ 1n \/ residue =~ value - 1n then
-        return true
-    fi
-
-    for _ in 1..rounds do
-        residue = residue * residue % value
-        if residue =~ value - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_prime(value: bigint) -> bool =>
-    value > 1n /\
-    bases |> all(base => passes_miller_rabin(value, cast(base)))
-
 chernick_factors(n: int, m: long) -> bigint{} is
     yield cast(6L * m + 1L)
     yield cast(12L * m + 1L)

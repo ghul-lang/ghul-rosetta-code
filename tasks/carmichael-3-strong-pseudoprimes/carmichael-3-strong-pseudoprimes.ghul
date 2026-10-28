@@ -1,25 +1,5 @@
 use default
 
-is_prime(n: int) -> bool is
-    if n < 2 then
-        return false
-    elif n % 2 == 0 then
-        return n == 2
-    fi
-
-    let factor mut = 3
-
-    while factor * factor <= n do
-        if n % factor == 0 then
-            return false
-        fi
-
-        factor = factor + 2
-    od
-
-    return true
-si
-
 carmichaels() -> (int, int, int){} is
     for p1 in 2::61 |> filter(is_prime) do
         for h3 in 2..p1 do

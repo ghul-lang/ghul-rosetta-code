@@ -3,25 +3,6 @@ use default
 write_line("partitioning divisor sets, which takes a moment")
 write_line("")
 
-divisors(n: int) -> int{} is
-    let found = LIST()
-    let factor mut = 1
-
-    while factor * factor <= n do
-        if n % factor == 0 then
-            found.add(factor)
-
-            if factor != n / factor then
-                found.add(n / factor)
-            fi
-        fi
-
-        factor = factor + 1
-    od
-
-    return found
-si
-
 is_zumkeller(n: int) -> bool is
     let parts = divisors(n)
     let total = parts |> sum()

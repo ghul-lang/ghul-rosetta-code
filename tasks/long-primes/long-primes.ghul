@@ -1,10 +1,5 @@
 use default
 
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
 reciprocal_period(prime: int) -> int? =>
     let remainder mut = 1 in
 

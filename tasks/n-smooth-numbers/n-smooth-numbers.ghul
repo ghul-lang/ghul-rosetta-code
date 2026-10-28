@@ -1,9 +1,5 @@
 use default
 
-is_prime(value: int) -> bool =>
-    value >= 2 /\ 2::int(Ghul.Math.sqrt(double(value)))
-        |> all(d => value % d != 0)
-
 smooth(bound: int, count: int) -> List[bigint] is
     let factors = 2::bound |> filter(is_prime)
                              |> map(bigint)

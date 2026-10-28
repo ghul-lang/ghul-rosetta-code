@@ -1,26 +1,16 @@
 use default
 
-divisor_count(n: long) -> int =>
-    from(1L)
-    |> take_while(d => d * d <= n)
-    |> filter(d => n % d == 0L)
-    |> map(d => if d * d == n then 1 else 2 fi)
-    |> sum()
-
-is_prime(n: int) -> bool =>
-    n >= 2 /\ (2::n |> take_while(d => d * d <= n) |> all(d => n % d != 0))
-
-let primes = from(2) |> filter(is_prime) |> take(50) |> collect()
+let first_primes = primes() |> take(50) |> collect()
 
 // A number with a prime number p of divisors is a prime to the power
 // p - 1, so the nth of them is the nth prime to that power.
 term(n: int) -> bigint =>
     if is_prime(n) then
-        bigint.pow(bigint(primes[n - 1]), n - 1)
+        bigint.pow(bigint(first_primes[n - 1]), n - 1)
     else
         bigint(
             from(1L)
-            |> filter(c => divisor_count(c) == n)
+            |> filter(c => divisor_count(c) == long(n))
             |> skip(n - 1)
             |> first()!
         )

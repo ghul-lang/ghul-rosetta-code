@@ -1,41 +1,5 @@
 use default
 
-let witnesses = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-
-passes(witness: bigint, odd_part: bigint, power: int,
-       value: bigint) -> bool is
-    let residue mut = bigint.mod_pow(witness, odd_part, value)
-
-    if residue =~ 1n \/ residue =~ value - 1n then return true fi
-
-    for _ in 1..power do
-        residue = residue * residue % value
-
-        if residue =~ value - 1n then return true fi
-    od
-
-    false
-si
-
-is_prime(value: bigint) -> bool is
-    if value < 2n then return false fi
-
-    for witness in witnesses do
-        if value =~ witness then return true fi
-        if value % witness =~ 0n then return false fi
-    od
-
-    let odd_part mut = value - 1n
-    let power mut = 0
-
-    while odd_part % 2n =~ 0n do
-        odd_part = odd_part / 2n
-        power = power + 1
-    od
-
-    witnesses |> all(passes(*, odd_part, power, value))
-si
-
 pell_recurrence(first: bigint, second: bigint) -> bigint{} is
     let previous mut = first
     let current mut = second

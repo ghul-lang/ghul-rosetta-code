@@ -1,33 +1,7 @@
 use default
 
-sigma(value: int) -> int is
-    let total mut = 0
-    let divisor mut = 1
-
-    while divisor * divisor <= value do
-        if value % divisor == 0 then
-            total = total + divisor
-
-            let partner = value / divisor
-
-            if partner != divisor then
-                total = total + partner
-            fi
-        fi
-
-        divisor = divisor + 1
-    od
-
-    total
-si
-
-gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
-
-is_composite(value: int) -> bool =>
-    2::int(Ghul.Math.sqrt(double(value))) |> any(d => value % d == 0)
-
 is_duffinian(value: int) -> bool =>
-    is_composite(value) /\ gcd(value, sigma(value)) == 1
+    !is_prime(value) /\ gcd(value, divisor_sum(value)) == 1
 
 duffinians() -> int{} => from(2) |> filter(is_duffinian)
 

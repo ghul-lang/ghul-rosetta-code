@@ -19,7 +19,7 @@ read_numbers(prompt: string) -> int[]? is
 
     write_line("> {line.trim()}")
 
-    return line.split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    return words(line)
         |> map(int.parse)
         |> collect()
 si

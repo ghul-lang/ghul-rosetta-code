@@ -1,51 +1,10 @@
 use default
 
-let small_primes = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
-
-is_probable_prime(n: bigint) -> bool is
-    for p in small_primes do
-        if (n % bigint(p)).is_zero then
-            return n =~ bigint(p)
-        fi
-    od
-
-    let d mut = n - 1n
-    let shifts mut = 0
-
-    while d.is_even do
-        d = d / 2n
-        shifts = shifts + 1
-    od
-
-    for witness in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] do
-        let x mut = bigint.mod_pow(bigint(witness), d, n)
-
-        if !x.is_one /\ x !~ n - 1n then
-            let passed mut = false
-
-            for _ in 1..shifts do
-                x = x * x % n
-
-                if x =~ n - 1n then
-                    passed = true
-                    break
-                fi
-            od
-
-            if !passed then
-                return false
-            fi
-        fi
-    od
-
-    true
-si
-
 ultra_useful(n: int) -> int =>
     let power = bigint.pow(2n, 1 << n) in
     from(0)
         |> map(i => 2 * i + 1)
-        |> find(k => is_probable_prime(power - bigint(k)))!
+        |> find(k => is_prime(power - bigint(k)))!
 
 write_line(" n     k")
 

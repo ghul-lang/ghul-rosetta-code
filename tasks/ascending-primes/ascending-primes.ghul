@@ -5,9 +5,6 @@ ascending_number(mask: int) -> int =>
         |> filter(d => (mask >> (d - 1)) & 1 == 1)
         |> reduce(0, (value, d) => value * 10 + d)
 
-is_prime(n: int) -> bool =>
-    n > 1 /\ 2::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
-
 1::511
     |> map(ascending_number)
     |> filter(is_prime)

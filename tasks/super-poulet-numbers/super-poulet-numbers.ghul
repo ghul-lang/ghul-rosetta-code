@@ -3,39 +3,6 @@ use default
 write_line("testing numbers for the super-Poulet property")
 write_line("")
 
-mod_pow(base: long, exponent: long, modulus: long) -> long is
-    step(result: long, factor: long, remaining: long) -> long =>
-        if remaining == 0L then result
-        elif remaining % 2L == 1L then
-            step(result * factor % modulus,
-                factor * factor % modulus,
-                remaining / 2L)
-        else
-            step(result, factor * factor % modulus, remaining / 2L)
-        fi
-
-    step(1L, base % modulus, exponent)
-si
-
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
-divisors(value: int) -> int{} is
-    for candidate in 1::value do
-        if candidate * candidate > value then break fi
-
-        if value % candidate == 0 then
-            yield candidate
-
-            if value / candidate != candidate then
-                yield value / candidate
-            fi
-        fi
-    od
-si
-
 splits_repeated_doubling(value: int) -> bool =>
     let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide

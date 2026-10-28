@@ -1,12 +1,6 @@
 use default
 
-choose(n: int, k: int) -> long =>
-    if k < 0 \/ k > n then
-        0L
-    else
-        1::k
-            |> reduce(1L, (c, i) => c * long(n - k + i) / long(i))
-    fi
+choose(n: int, k: int) -> long => binomial(long(n), long(k))
 
 matrix(size: int, entry: (int, int) -> long) -> List[List[long]] =>
     0..size

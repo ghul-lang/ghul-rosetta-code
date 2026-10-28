@@ -7,7 +7,7 @@ let program =
 
 let memory =
     LIST(
-        program.split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+        words(program)
             |> map(int.parse))
 
 let ip mut = 0

@@ -66,12 +66,10 @@ one_line(cycle_notation: List[List[int]], size: int)
     return result
 si
 
-gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
-
 order(one_line: List[int]) -> int =>
     cycles(one_line)
         |> map(cycle => cycle.count)
-        |> reduce(1, (acc, length) => acc * length / gcd(acc, length))
+        |> reduce(1, lcm)
 
 signature(one_line: List[int]) -> int =>
     let even_cycles = cycles(one_line)

@@ -34,7 +34,7 @@ grouped(value: bigint) -> string =>
 
 write_line("isqrt of 0 through 65:")
 
-let roots = 0::65 |> map(n => "{isqrt(cast(n))}")
+let roots = 0::65 |> map(n => "{isqrt(bigint(n))}")
 
 write_line(roots |> join(" "))
 

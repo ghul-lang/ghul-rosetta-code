@@ -1,35 +1,23 @@
 use default
+use Ghul.memo_rec
 
-longest_common_subsequence(left: string, right: string) -> string is
-    let known = MAP()
-
-    let longest = (i, j) rec =>
+longest_common_subsequence(left: string, right: string) -> string =>
+    let lcs = memo_rec((longest, i: int, j: int) =>
         if i == left.length \/ j == right.length then
             ""
-        elif known.contains_key((i, j)) then
-            known[(i, j)]
+        elif left[i] == right[j] then
+            "{left[i]}{longest(i + 1, j + 1)}"
         else
-            let answer =
-                if left[i] == right[j] then
-                    "{left[i]}{rec(i + 1, j + 1)}"
-                else
-                    let dropping_left = rec(i + 1, j)
-                    let dropping_right = rec(i, j + 1)
+            let dropping_left = longest(i + 1, j)
+            let dropping_right = longest(i, j + 1)
 
-                    if dropping_left.length >= dropping_right.length then
-                        dropping_left
-                    else
-                        dropping_right
-                    fi
-                fi
-
-            known[(i, j)] = answer
-
-            answer
-        fi
-
-    longest(0, 0)
-si
+            if dropping_left.length >= dropping_right.length then
+                dropping_left
+            else
+                dropping_right
+            fi
+        fi) in
+    lcs(0, 0)
 
 [("1234", "1224533324"),
  ("thisisatest", "testing123testing"),

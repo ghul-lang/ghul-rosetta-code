@@ -1,66 +1,16 @@
 use default
 
-let witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-
-is_probable_prime(n: bigint) -> bool is
-    if n < 2n then
-        return false
-    fi
-
-    for p in witnesses do
-        if n =~ bigint(p) then
-            return true
-        elif (n % bigint(p)).is_zero then
-            return false
-        fi
-    od
-
-    let d mut = n - 1n
-    let shifts mut = 0
-
-    while d.is_even do
-        d = d / 2n
-        shifts = shifts + 1
-    od
-
-    for witness in witnesses do
-        let x mut = bigint.mod_pow(bigint(witness), d, n)
-
-        if !x.is_one /\ x !~ n - 1n then
-            let passed mut = false
-
-            for _ in 1..shifts do
-                x = x * x % n
-
-                if x =~ n - 1n then
-                    passed = true
-                    break
-                fi
-            od
-
-            if !passed then
-                return false
-            fi
-        fi
-    od
-
-    true
-si
-
-is_prime(n: int) -> bool =>
-    n >= 2 /\ (2::n |> take_while(d => d * d <= n) |> all(d => n % d != 0))
-
 let found = LIST()
 let primorial mut = 1n
 let index mut = 0
 
-for p in from(2) |> filter(is_prime) do
+for p in primes() do
     primorial = primorial * bigint(p)
     index = index + 1
 
-    let below = is_probable_prime(primorial - 1n)
+    let below = is_prime(primorial - 1n)
 
-    if below \/ is_probable_prime(primorial + 1n) then
+    if below \/ is_prime(primorial + 1n) then
         found.add(index)
 
         if found.count == 15 then

@@ -1,7 +1,5 @@
 use default
 
-gcd(a: long, b: long) -> long => if b == 0L then a else gcd(b, a % b) fi
-
 count(limit: long) -> (total: long, primitive: long) is
     let total mut = 0L
     let primitive mut = 0L

@@ -1,28 +1,7 @@
 use default
 
-prime_factors(n: int) -> int{} is
-    let remaining mut = n
-    let divisor mut = 2
-
-    while divisor * divisor <= remaining do
-        if remaining % divisor == 0 then
-            yield divisor
-            remaining = remaining / divisor
-        else
-            divisor = divisor + 1
-        fi
-    od
-
-    if remaining > 1 then
-        yield remaining
-    fi
-si
-
-digit_sum(n: int) -> int =>
-    if n < 10 then n else n % 10 + digit_sum(n / 10) fi
-
 is_smith(n: int) -> bool =>
-    let factors = prime_factors(n) |> collect() in
+    let factors = prime_factors(n) in
     factors.count > 1 /\
 
         (factors |> sum_by(digit_sum)) == digit_sum(n)

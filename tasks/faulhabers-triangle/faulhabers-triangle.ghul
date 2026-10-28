@@ -5,8 +5,7 @@ struct RATIONAL is
     denominator: bigint
 
     init(numerator: bigint, denominator: bigint) is
-        let common =
-            bigint.greatest_common_divisor(numerator, denominator)
+        let common = gcd(numerator, denominator)
         let sign = if denominator < 0n then -1n else 1n fi
 
         self.numerator = sign * numerator / common
@@ -32,11 +31,6 @@ si
 
 whole(value: bigint) -> RATIONAL => RATIONAL(value, 1n)
 
-binomial(upper: int, lower: int) -> bigint =>
-    (1::lower)
-        |> reduce(1n, (running, step) =>
-            running * bigint(upper - lower + step) / bigint(step))
-
 bernoullis(count: int) -> List[RATIONAL] is
     let values = LIST()
 
@@ -47,8 +41,8 @@ bernoullis(count: int) -> List[RATIONAL] is
             let total =
                 (0..index)
                     |> reduce(whole(0n), (running, step) =>
-                        running +
-                            whole(binomial(index + 1, step)) * values[step])
+                        running + values[step] * whole(
+                            binomial(bigint(index + 1), bigint(step))))
 
             values.add(whole(-1n) * total * RATIONAL(1n, bigint(index + 1)))
         fi
@@ -66,7 +60,9 @@ faulhaber_row(power: int) -> RATIONAL{} =>
         |> map(exponent => (
             let index = power + 1 - exponent
 
-            RATIONAL(binomial(power + 1, index), bigint(power + 1)) *
+            let upper = bigint(power + 1)
+
+            RATIONAL(binomial(upper, bigint(index)), upper) *
                 bernoulli[index]
         ))
 

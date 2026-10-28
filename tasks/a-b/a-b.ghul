@@ -1,13 +1,11 @@
 use default
 use IO.Std.write
 use IO.Std.read_line
-use System.StringSplitOptions
 
 write("a b: ")
 
 while let entered = read_line() do
-    let fields =
-        entered.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let fields = words(entered) |> collect()
 
     write_line("{int.parse(fields[0]) + int.parse(fields[1])}")
 

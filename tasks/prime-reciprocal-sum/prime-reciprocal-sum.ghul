@@ -1,46 +1,7 @@
 use default
 
-is_probable_prime(n: bigint) -> bool is
-    if n < 2n then
-        return false
-    fi
-
-    let small = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-
-    if small |> any(n =~ *) then
-        return true
-    elif small |> any(p => (n % p).is_zero) then
-        return false
-    fi
-
-    walk(d: bigint, shifts: int) -> (bigint, int) =>
-        if d.is_even then walk(d / 2n, shifts + 1) else (d, shifts) fi
-
-    let (d, s) = walk(n - 1n, 0)
-
-    return small |> all(passes(n, *, d, s))
-si
-
-passes(n: bigint, a: bigint, d: bigint, s: int) -> bool is
-    let x mut = bigint.mod_pow(a, d, n)
-
-    if x.is_one \/ x =~ n - 1n then
-        return true
-    fi
-
-    for _ in 1..s do
-        x = x * x % n
-
-        if x =~ n - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
 next_prime(n: bigint) -> bigint =>
-    from(0) |> map(k => n + bigint(k)) |> find(is_probable_prime)!
+    from(0) |> map(k => n + bigint(k)) |> find(is_prime)!
 
 reciprocal_primes() -> bigint{} is
     let numerator mut = 1n

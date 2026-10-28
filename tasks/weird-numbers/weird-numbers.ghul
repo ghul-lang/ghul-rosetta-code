@@ -1,12 +1,5 @@
 use default
 
-proper_divisors(n: int) -> int{} =>
-    [1] ++ (
-        from(2)
-            |> take_while(d => d * d <= n)
-            |> filter(d => n % d == 0)
-            |> flat_map(d => if d == n / d then [d] else [d, n / d] fi))
-
 sums_to(divisors: List[int], target: int) -> bool =>
     case (divisors, target)
     when (_, 0) then true
@@ -18,10 +11,11 @@ sums_to(divisors: List[int], target: int) -> bool =>
     esac
 
 weird(n: int) -> bool => (
-    let divisors = proper_divisors(n) |> sort_descending() |> collect()
+    let proper =
+        divisors(n) |> filter(d => d != n) |> sort_descending() |> collect()
 
-    divisors |> sum() > n /\
-        !sums_to(divisors, n))
+    proper |> sum() > n /\
+        !sums_to(proper, n))
 
 from(2)
     |> filter(weird)

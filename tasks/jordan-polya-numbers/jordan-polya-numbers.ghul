@@ -2,15 +2,12 @@ use default
 
 let biggest_factorial = 18
 
-factorial(n: int) -> long =>
-    2::n |> reduce(1L, (product, i) => product * long(i))
-
 multiples(value: long, largest: int, limit: long) -> long{} is
     yield value
 
     for i in 2::largest do
-        if value <= limit / factorial(i) then
-            yield in multiples(value * factorial(i), i, limit)
+        if value <= limit / factorial(long(i)) then
+            yield in multiples(value * factorial(long(i)), i, limit)
         fi
     od
 si
@@ -21,8 +18,8 @@ decompose(value: long, largest: int) -> LIST[int]? is
     fi
 
     for i in reverse(2::largest) do
-        if value % factorial(i) == 0L then
-            if let rest = decompose(value / factorial(i), i) then
+        if value % factorial(long(i)) == 0L then
+            if let rest = decompose(value / factorial(long(i)), i) then
                 rest.insert(0, i)
 
                 return rest

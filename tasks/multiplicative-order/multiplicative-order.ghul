@@ -2,57 +2,26 @@ use default
 
 use Factor = (prime: bigint, power: int)
 
-factorise(n: bigint) -> Factor{} is
-    let factors = LIST()
-    let rest mut = n
-    let p mut = 2n
-
-    while p * p <= rest do
-        let power mut = 0
-
-        while (rest % p).is_zero do
-            rest = rest / p
-            power = power + 1
-        od
-
-        if power > 0 then
-            factors.add((prime = p, power = power))
-        fi
-
-        p = p + 1n
-    od
-
-    if rest > 1n then
-        factors.add((prime = rest, power = 1))
-    fi
-
-    factors
-si
-
-gcd(a: bigint, b: bigint) -> bigint => bigint.greatest_common_divisor(a, b)
-
-lcm(a: bigint, b: bigint) -> bigint => a / gcd(a, b) * b
-
 order_part(
     a: bigint, q: Factor, totient: bigint, modulus: bigint
 ) -> bigint =>
     let cofactor = totient / bigint.pow(q.prime, q.power) in
     let walk = (y: bigint, d: int) rec =>
         if y.is_one then bigint.pow(q.prime, d)
-        else rec(bigint.mod_pow(y, q.prime, modulus), d + 1)
+        else rec(mod_pow(y, q.prime, modulus), d + 1)
         fi
     in
-    walk(bigint.mod_pow(a, cofactor, modulus), 0)
+    walk(mod_pow(a, cofactor, modulus), 0)
 
 order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
     let modulus = bigint.pow(factor.prime, factor.power) in
     let totient = modulus / factor.prime * (factor.prime - 1n) in
-    factorise(totient)
+    factorize(totient)
         |> map(order_part(a, *, totient, modulus))
         |> reduce(1n, * * *)
 
 multiplicative_order(a: bigint, m: bigint) -> bigint =>
-    factorise(m)
+    factorize(m)
         |> map(order_modulo_prime_power(a, *))
         |> reduce(1n, lcm)
 

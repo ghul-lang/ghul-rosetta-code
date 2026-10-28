@@ -1,55 +1,14 @@
 use default
 
-passes_round(
-    witness: bigint, n: bigint, odd_part: bigint, twos: int
-) -> bool is
-    let minus_one = n - 1n
-    let x mut = bigint.mod_pow(witness, odd_part, n)
-
-    if x.is_one \/ x =~ minus_one then
-        return true
-    fi
-
-    for _ in 1..twos do
-        x = bigint.mod_pow(x, 2n, n)
-
-        if x =~ minus_one then
-            return true
-        fi
-    od
-
-    false
-si
-
-is_probable_prime(n: bigint) -> bool is
-    if n < 4n then
-        return n > 1n
-    fi
-
-    let odd_part mut = n - 1n
-    let twos mut = 0
-
-    while odd_part.is_even do
-        odd_part = odd_part >> 1
-        twos = twos + 1
-    od
-
-    [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n]
-        |> filter(* < n)
-        |> all(passes_round(*, n, odd_part, twos))
-si
-
 has_factor_up_to(m: int, n: int) -> bool => 2::n |> any(p => m % p == 0)
 
 least_m(n: int, factorial: bigint) -> int =>
     from(1)
         |> filter(m => m == 1 \/ !has_factor_up_to(m, n))
-        |> find(m => is_probable_prime(factorial + bigint(m)))!
-
-factorial(n: int) -> bigint => 1::n |> reduce(1n, (f, k) => f * bigint(k))
+        |> find(m => is_prime(factorial + bigint(m)))!
 
 terms() -> (n: int, m: int){} =>
-    from(0) |> map(n => (n = n, m = least_m(n, factorial(n))))
+    from(0) |> map(n => (n = n, m = least_m(n, factorial(bigint(n)))))
 
 write_line("The first 50 terms:")
 

@@ -1,13 +1,9 @@
 use default
 use System.Math.*
 
-binomial(upper: int, lower: int) -> bigint =>
-    (1::lower)
-        |> reduce(1n, (running, step) =>
-            running * bigint(upper - lower + step) / bigint(step))
-
 simplex(dimension: int) -> bigint{} =>
-    from(1) |> map(index => binomial(index + dimension - 1, dimension))
+    from(1) |> map(index =>
+        binomial(bigint(index + dimension - 1), bigint(dimension)))
 
 triangular_root(value: double) -> double =>
     (sqrt(8.0D * value + 1.0D) - 1.0D) / 2.0D

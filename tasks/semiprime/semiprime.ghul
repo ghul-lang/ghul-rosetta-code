@@ -1,20 +1,7 @@
 use default
 
-prime_factors(n: int, divisor: int) -> int{} is
-    if n > 1 then
-        if divisor * divisor > n then
-            yield n
-        elif n % divisor == 0 then
-            yield divisor
-            yield in prime_factors(n / divisor, divisor)
-        else
-            yield in prime_factors(n, divisor + 1)
-        fi
-    fi
-si
-
 is_semiprime(n: int) -> bool =>
-    prime_factors(n, 2) |> take(3) |> count() == 2
+    prime_factors(n).count == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()
 

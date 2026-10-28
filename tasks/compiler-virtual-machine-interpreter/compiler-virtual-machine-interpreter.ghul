@@ -1,7 +1,6 @@
 use default
 
 use System.BitConverter
-use System.StringSplitOptions
 
 enum Op is
     FETCH, STORE, PUSH,
@@ -115,7 +114,7 @@ let strings = lines |> skip(1) |> take(string_count) |> map(unquote)
 let code = LIST()
 
 for line in lines |> skip(1 + string_count) do
-    let parts = line.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let parts = words(line) |> collect()
 
     assert int.parse(parts[0]) == code.count
     else "address {parts[0]} out of step"

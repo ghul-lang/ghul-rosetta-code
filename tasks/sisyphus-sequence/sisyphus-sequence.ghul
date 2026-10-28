@@ -1,16 +1,7 @@
 use default
 
-let found = LIST[int]()
-let next_candidate mut = 2
-
-is_prime(value: int) -> bool =>
-    !(found |> any(d => d * d <= value /\ value % d == 0))
-
-next_prime() -> int =>
-    let prime = from(next_candidate) |> find(is_prime)! in
-    (next_candidate = prime + 1; found.add(prime); prime)
-
 sisyphus() -> (term: int, prime: int){} is
+    let rising = primes().iterator
     let term mut = 1
     let highest mut = 0
 
@@ -20,7 +11,7 @@ sisyphus() -> (term: int, prime: int){} is
         if term % 2 == 0 then
             term = term / 2
         else
-            highest = next_prime()
+            highest = (rising |> next())!
             term = term + highest
         fi
     od

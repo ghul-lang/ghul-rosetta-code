@@ -1,13 +1,7 @@
 use default
 
-factorial(value: int) -> bigint =>
-    2::value |> reduce(1n, (product, factor) => product * cast(factor))
-
-is_prime(n: int) -> bool =>
-    n > 1 /\ 2::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
-
 nth_prime(index: int) -> int =>
-    from(2) |> filter(is_prime) |> skip(index) |> first()!
+    primes() |> skip(index) |> first()!
 
 fibonacci(index: int) -> bigint is
     walk(previous: bigint, current: bigint, remaining: int) -> bigint =>
@@ -57,4 +51,4 @@ report("alternating", index => (
     else 0n - 1n fi))
 report("primes", index => bigint(nth_prime(index)))
 report("fibonacci", fibonacci)
-report("factorials", factorial)
+report("factorials", index => factorial(bigint(index)))

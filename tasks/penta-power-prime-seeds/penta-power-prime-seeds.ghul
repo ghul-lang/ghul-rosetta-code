@@ -3,52 +3,6 @@ use default
 write_line("searching for seeds, which takes a moment")
 write_line("")
 
-let small_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
-
-is_prime(n: bigint) -> bool is
-    for p in small_primes do
-        if n =~ bigint(p) then
-            return true
-        elif (n % bigint(p)).is_zero then
-            return false
-        fi
-    od
-
-    if n < 2n then
-        return false
-    fi
-
-    walk(d: bigint, shifts: int) -> (bigint, int) =>
-        if d.is_even then walk(d / 2n, shifts + 1) else (d, shifts) fi
-
-    let (d, shifts) = walk(n - 1n, 0)
-
-    for witness in small_primes do
-        let x mut = bigint.mod_pow(bigint(witness), d, n)
-
-        if x.is_one \/ x =~ n - 1n then
-            continue
-        fi
-
-        let composite mut = true
-
-        for _ in 1..shifts do
-            x = x * x % n
-
-            if x =~ n - 1n then
-                composite = false
-                break
-            fi
-        od
-
-        if composite then
-            return false
-        fi
-    od
-
-    true
-si
-
 is_seed(n: long) -> bool =>
     let big = bigint(n) in
     0::4 |> all(k => is_prime(bigint.pow(big, k) + big + 1n))

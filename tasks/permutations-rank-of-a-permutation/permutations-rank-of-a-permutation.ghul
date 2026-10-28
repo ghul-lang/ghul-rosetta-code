@@ -1,8 +1,5 @@
 use default
 
-factorial(n: int) -> bigint =>
-    1::n |> map(bigint) |> reduce(1n, * * *)
-
 // Lexicographic order, read as a number in the factorial base.
 unrank(rank: bigint, n: int) -> List[int] => (
     let left = 0..n |> collect_mutable()
@@ -10,7 +7,7 @@ unrank(rank: bigint, n: int) -> List[int] => (
     let rest mut = rank
 
     for i in 0..n do
-        let place = factorial(n - 1 - i)
+        let place = factorial(bigint(n - 1 - i))
         let index = int(rest / place)
 
         rest = rest % place
@@ -29,7 +26,7 @@ rank(permutation: List[int]) -> bigint => (
         let smaller_later =
             i + 1..n |> count(j => permutation[j] < permutation[i])
 
-        total = total + bigint(smaller_later) * factorial(n - 1 - i)
+        total = total + bigint(smaller_later) * factorial(bigint(n - 1 - i))
     od
 
     total
@@ -56,12 +53,12 @@ write_line("")
 write_line("Four random permutations of 12 items:")
 
 for _ in 1::4 do
-    let r = random_below(factorial(12))
+    let r = random_below(factorial(12n))
 
     write_line("{r,9} -> {show(unrank(r, 12))}")
 od
 
-let limit = factorial(144)
+let limit = factorial(144n)
 let trials = 1_000
 let round_trips =
     1::trials

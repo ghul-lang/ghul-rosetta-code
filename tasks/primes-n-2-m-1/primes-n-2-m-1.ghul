@@ -1,47 +1,5 @@
 use default
 
-is_probable_prime(n: bigint) -> bool is
-    if n < 2n then
-        return false
-    fi
-
-    let small = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-
-    if small |> any(n =~ *) then
-        return true
-    elif small |> any(p => (n % p).is_zero) then
-        return false
-    fi
-
-    let d mut = n - 1n
-    let s mut = 0
-
-    while d.is_even do
-        d = d / 2n
-        s = s + 1
-    od
-
-    return small |> all(passes(n, *, d, s))
-si
-
-passes(n: bigint, a: bigint, d: bigint, s: int) -> bool is
-    let x mut = bigint.mod_pow(a, d, n)
-
-    if x.is_one \/ x =~ n - 1n then
-        return true
-    fi
-
-    for _ in 1..s do
-        x = x * x % n
-
-        if x =~ n - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
 abbreviated(p: bigint) -> string =>
     let digits = "{p}" in
         if digits.length <= 40 then
@@ -54,7 +12,7 @@ for n in 1::50 do
     let (m, p) =
         from(0)
         |> map(m => (m, bigint(n) * bigint.pow(2n, m) + 1n))
-        |> find((_, p) => is_probable_prime(p))!
+        |> find((_, p) => is_prime(p))!
 
     write_line("n: {n,2} m: {m,3} p: {abbreviated(p)}")
 od

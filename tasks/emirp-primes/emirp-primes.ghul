@@ -1,9 +1,5 @@
 use default
 
-is_prime(n: int) -> bool =>
-    n > 1 /\ (n == 2 \/ n % 2 == 1 /\
-        from(3) |> take_while(d => d * d <= n) |> all(d => n % d != 0))
-
 reverse(n: int) -> int is
     walk(m: int, r: int) -> int =>
         if m == 0 then r else walk(m / 10, r * 10 + m % 10) fi

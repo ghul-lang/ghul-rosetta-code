@@ -1,25 +1,7 @@
 use default
 
-prime_factors(n: int) -> int{} is
-    let remaining mut = n
-    let divisor mut = 2
-
-    while divisor * divisor <= remaining do
-        if remaining % divisor == 0 then
-            yield divisor
-            remaining = remaining / divisor
-        else
-            divisor = divisor + 1
-        fi
-    od
-
-    if remaining > 1 then
-        yield remaining
-    fi
-si
-
 min_max_product(n: int) -> int =>
-    let factors = prime_factors(n) |> collect() in
+    let factors = prime_factors(n) in
     case factors
     when [] then 1
     when [first, ..] then first * factors[factors.count - 1]

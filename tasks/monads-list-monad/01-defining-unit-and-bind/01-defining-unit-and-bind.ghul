@@ -8,11 +8,11 @@ unit[T](value: T) -> T{} => [value]
 =>
     values |> flat_map(f)
 
-divisors(n: int) -> int{} =>
+factors(n: int) -> int{} =>
     1::n |> filter(d => n % d == 0)
 
 spellings(n: int) -> string{} =>
     ["{n}", "0b{to_string(n, 2)}"]
 
-write_line((unit(6) >>= divisors) |> join())
-write_line((unit(6) >>= divisors >>= spellings) |> join())
+write_line((unit(6) >>= factors) |> join())
+write_line((unit(6) >>= factors >>= spellings) |> join())

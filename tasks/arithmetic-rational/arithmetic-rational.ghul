@@ -34,9 +34,6 @@ struct FRAC(numerator: long, denominator: long) is
         fi
 si
 
-gcd(a: long, b: long) -> long =>
-    if b == 0L then Math.abs(a) else gcd(b, a % b) fi
-
 frac(numerator: long, denominator: long) -> FRAC =>
     let sign = if denominator < 0L then -1L else 1L fi in
     let divisor = gcd(numerator, denominator) * sign in

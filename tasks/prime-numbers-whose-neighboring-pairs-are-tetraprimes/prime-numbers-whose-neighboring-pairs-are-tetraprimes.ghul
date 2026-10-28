@@ -24,9 +24,6 @@ for p in 2..limit + 3 do
     fi
 od
 
-is_prime(n: int) -> bool =>
-    n > 1 /\ distinct_factors[n] == 1 /\ square_free[n]
-
 is_tetraprime(n: int) -> bool =>
     distinct_factors[n] == 4 /\ square_free[n]
 

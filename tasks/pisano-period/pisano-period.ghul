@@ -22,49 +22,10 @@ pisano_prime(prime: int, power: int) -> int is
     scale
 si
 
-gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
-
-lcm(a: int, b: int) -> int => a / gcd(a, b) * b
-
-pisano(value: int) -> int is
-    let period mut = 1
-    let remaining mut = value
-    let factor mut = 2
-
-    while factor * factor <= remaining do
-        let power mut = 0
-
-        while remaining % factor == 0 do
-            remaining = remaining / factor
-            power = power + 1
-        od
-
-        if power > 0 then
-            period = lcm(period, pisano_prime(factor, power))
-        fi
-
-        factor = factor + 1
-    od
-
-    if remaining > 1 then
-        period = lcm(period, pisano_prime(remaining, 1))
-    fi
-
-    period
-si
-
-is_prime(value: int) -> bool is
-    if value < 2 then return false fi
-
-    let divisor mut = 2
-
-    while divisor * divisor <= value do
-        if value % divisor == 0 then return false fi
-        divisor = divisor + 1
-    od
-
-    true
-si
+pisano(value: int) -> int =>
+    factorize(value)
+        |> map(((p, e)) => pisano_prime(p, e))
+        |> reduce(1, lcm)
 
 in_rows(entries: string{}, per_row: int) is
     let row = LIST()
