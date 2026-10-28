@@ -1,92 +1,10 @@
 use default
-use bigint.mod_pow
-
-let witnesses = [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-
-is_probable_prime(n: bigint) -> bool is
-    if n < 2n then
-        return false
-    fi
-
-    for small in witnesses do
-        if n =~ small then
-            return true
-        elif n % small =~ 0n then
-            return false
-        fi
-    od
-
-    let odd_part mut = n - 1n
-    let shifts mut = 0
-
-    while odd_part % 2n =~ 0n do
-        odd_part = odd_part / 2n
-        shifts = shifts + 1
-    od
-
-    for witness in witnesses do
-        let residue mut = mod_pow(witness, odd_part, n)
-
-        if residue =~ 1n \/ residue =~ n - 1n then
-            continue
-        fi
-
-        let composite mut = true
-
-        for _ in 1..shifts do
-            residue = residue * residue % n
-
-            if residue =~ n - 1n then
-                composite = false
-
-                break
-            fi
-        od
-
-        if composite then
-            return false
-        fi
-    od
-
-    return true
-si
-
-primes_to(limit: int) -> int{} is
-    let composite = repeat(false, limit + 1) |> collect_mutable()
-
-    let factor mut = 2
-
-    while factor * factor <= limit do
-        if !composite[factor] then
-            let multiple mut = factor * factor
-
-            while multiple <= limit do
-                composite[multiple] = true
-
-                multiple = multiple + factor
-            od
-        fi
-
-        factor = factor + 1
-    od
-
-    return 2::limit |> filter(n => !composite[n])
-si
-
-let small_primes = primes_to(60_000)
-
-has_small_factor(n: bigint) -> bool =>
-    small_primes |> any(p => n > bigint(p) /\ n % bigint(p) =~ 0n)
-
-is_prime(n: int) -> bool =>
-    n > 1 /\ 2::n / 2 |> all(d => n % d != 0)
 
 repunit(base: int, digits: int) -> bigint =>
     (bigint.pow(bigint(base), digits) - 1n) / bigint(base - 1)
 
 is_repunit_prime(base: int, digits: int) -> bool =>
-    let value = repunit(base, digits) in
-    !has_small_factor(value) /\ is_probable_prime(value)
+    is_prime(repunit(base, digits))
 
 
 let limit = 1000
@@ -99,8 +17,8 @@ for base in 2::16 do
     IO.Std.out.flush()
 
     let found =
-        2::limit
-            |> filter(is_prime)
+        primes()
+            |> take_while(p => p <= limit)
             |> filter(is_repunit_prime(base, *))
             |> collect()
 

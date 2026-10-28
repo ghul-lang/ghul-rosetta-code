@@ -1,42 +1,5 @@
 use default
 
-is_strong_probable_prime(n: bigint, a: bigint) -> bool is
-    let d mut = n - 1n
-    let s mut = 0
-
-    while d.is_even do
-        d = d / 2n
-        s = s + 1
-    od
-
-    let x mut = bigint.mod_pow(a, d, n)
-
-    if x.is_one \/ x =~ n - 1n then
-        return true
-    fi
-
-    for _ in 1..s do
-        x = x * x % n
-
-        if x =~ n - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_probable_prime(n: bigint) -> bool =>
-    n > 1n /\
-    [2n, 3n, 5n, 7n, 11n, 13n, 17n]
-    |> all(a =>
-        n =~ a \/ (!(n % a).is_zero /\ is_strong_probable_prime(n, a)))
-
-primes() -> int{} =>
-    from(2)
-    |> filter(p =>
-        (2..p) |> take_while(d => d * d <= p) |> all(d => p % d != 0))
-
 wellin_numbers() -> (index: int, last: int, digits: string){} is
     let digits mut = ""
     let index mut = 0
@@ -79,7 +42,7 @@ write_line("the first seven Smarandache-Wellin primes:")
 
 let wellin_primes =
     wellin_numbers()
-    |> filter(w => is_probable_prime(bigint.parse(w.digits)))
+    |> filter(w => is_prime(bigint.parse(w.digits)))
     |> take(7)
 
 for (i, w) in wellin_primes |> index() do
@@ -94,7 +57,7 @@ write_line("the first twenty derived Smarandache-Wellin primes:")
 let derived_primes =
     wellin_numbers()
     |> map(w => (w.index, derived(w.digits)))
-    |> filter((_, d) => is_probable_prime(d))
+    |> filter((_, d) => is_prime(d))
     |> take(20)
 
 for (i, (position, d)) in derived_primes |> index() do
