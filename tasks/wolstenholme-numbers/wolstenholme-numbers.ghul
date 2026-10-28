@@ -3,12 +3,9 @@ use default
 write_line("summing the harmonic numerators")
 write_line("")
 
-let one = 1n
-let two = 2n
-
 wolstenholme(count: int) -> bigint{} is
     let numerator mut = 0n
-    let denominator mut = one
+    let denominator mut = 1n
 
     for k in 1::count do
         let square = bigint(k) * bigint(k)
@@ -16,58 +13,13 @@ wolstenholme(count: int) -> bigint{} is
         numerator = numerator * square + denominator
         denominator = denominator * square
 
-        let common =
-            bigint.greatest_common_divisor(numerator, denominator)
+        let common = gcd(numerator, denominator)
 
         numerator = numerator / common
         denominator = denominator / common
 
         yield numerator
     od
-si
-
-let witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-
-passes(witness: bigint, odd_part: bigint, power: int,
-       value: bigint) -> bool is
-    let residue mut = bigint.mod_pow(witness, odd_part, value)
-
-    if residue =~ one \/ residue =~ value - one then return true fi
-
-    for _ in 1..power do
-        residue = residue * residue % value
-
-        if residue =~ value - one then return true fi
-    od
-
-    false
-si
-
-is_prime(value: bigint) -> bool is
-    for small in witnesses do
-        let witness = bigint(small)
-
-        if value =~ witness then return true fi
-        if (value % witness).is_zero then return false fi
-    od
-
-    if value < two then return false fi
-
-    let odd_part mut = value - one
-    let power mut = 0
-
-    while (odd_part % two).is_zero do
-        odd_part = odd_part / two
-        power = power + 1
-    od
-
-    for small in witnesses do
-        if !passes(bigint(small), odd_part, power, value) then
-            return false
-        fi
-    od
-
-    true
 si
 
 write_line("the first twenty Wolstenholme numbers:")
@@ -79,9 +31,9 @@ od
 write_line("")
 write_line("the first four prime Wolstenholme numbers:")
 
-let primes = wolstenholme(20) |> filter(is_prime) |> take(4)
+let prime_terms = wolstenholme(20) |> filter(is_prime) |> take(4)
 
-for term in primes do
+for term in prime_terms do
     write_line("  {term}")
 od
 

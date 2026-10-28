@@ -4,9 +4,6 @@ use System.Numerics.BitOperations
 
 use Partition = (a: long, b: long, unassigned: long)
 
-is_prime(n: int) -> bool =>
-    n >= 2 /\ 2..n |> all(d => d * d > n \/ n % d != 0)
-
 set_bits(mask: long) -> long{} =>
     0..64 |> map(1L << *) |> filter(bit => mask & bit != 0L)
 
