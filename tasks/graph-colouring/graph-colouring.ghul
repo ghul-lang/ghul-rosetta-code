@@ -5,19 +5,25 @@ use Raster.IMAGE
 use Edge = (from: int, to: int)
 
 class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
-    _neighbours: MAP[int, SET[int]]
+    _neighbours: Map[int, SET[int]]
 
     init(..) is
-        _neighbours = MAP()
+        let outgoing =
+            edges
+            |> flat_map((from, to) => [(from, to), (to, from)])
+            |> group_by((from, to) => from)
 
-        for node in nodes do
-            _neighbours[node] = SET()
-        od
-
-        for (from, to) in edges do
-            _neighbours[from].add(to)
-            _neighbours[to].add(from)
-        od
+        _neighbours =
+            nodes |> collect_map(
+                node => node,
+                node =>
+                    if outgoing.contains_key(node) then
+                        outgoing[node]
+                        |> map((from, to) => to)
+                        |> collect_set()
+                    else
+                        SET()
+                    fi)
     si
 
     neighbours(node: int) -> SET[int] => _neighbours[node]
@@ -26,23 +32,18 @@ class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
 si
 
 parse(description: string) -> GRAPH is
-    let nodes = SET()
-    let edges = LIST()
+    let tokens = [
+        [int.parse(end) for end in token.split(['-'])]
+        for token in description.split([' '])
+    ]
 
-    for token in description.split([' ']) do
-        let ends =
-            token.split(['-'])
-            |> map(int.parse)
-            |> collect()
+    let nodes = tokens |> flat_map(ends => ends) |> collect_set()
 
-        for end in ends do
-            nodes.add(end)
-        od
-
-        if ends.count == 2 then
-            edges.add((from = ends[0], to = ends[1]))
-        fi
-    od
+    let edges =
+        tokens
+        |> filter(ends => ends.count == 2)
+        |> map(ends => (from = ends[0], to = ends[1]))
+        |> collect()
 
     GRAPH(nodes |> sort() |> collect(), edges)
 si
@@ -50,44 +51,22 @@ si
 colour(graph: GRAPH) -> MAP[int, int] is
     let colours = MAP()
 
-    while colours.count < graph.nodes.count do
-        let candidates =
+    let neighbour_colours = node =>
+        graph.neighbours(node)
+        |> filter(colours.contains_key)
+        |> map(other => colours[other])
+        |> collect_set()
+
+    for _ in graph.nodes do
+        // the uncoloured node seeing the most distinct colours,
+        // ties to the higher degree, then to the earlier node
+        let (node, taken) =
             graph.nodes
             |> filter(node => !colours.contains_key(node))
-            |> map(node =>
-                (
-                    saturation =
-                        graph.neighbours(node)
-                        |> filter(colours.contains_key)
-                        |> map(other => colours[other])
-                        |> collect_set()
-                        .count,
-                    degree = graph.degree(node),
-                    node = node
-                ))
-            |> collect()
+            |> map(node => (node, neighbour_colours(node)))
+            |> max_by((node, taken) => (taken.count, graph.degree(node)))!
 
-        let best mut = candidates[0]
-
-        for candidate in candidates do
-            if candidate.saturation > best.saturation \/
-                candidate.saturation == best.saturation /\
-                candidate.degree > best.degree
-            then
-                best = candidate
-            fi
-        od
-
-        let taken: SET[int] =
-            graph.neighbours(best.node)
-            |> filter(colours.contains_key)
-            |> map(other => colours[other])
-            |> collect_set()
-
-        let next =
-            from(0) |> find(c => !taken.contains(c))!
-
-        colours[best.node] = next
+        colours[node] = from(0) |> find(c => !taken.contains(c))!
     od
 
     colours
