@@ -1,36 +1,10 @@
 use default
 
-primes() -> int{} is
-    let found = LIST()
-    let candidate mut = 1
-
-    do
-        candidate = candidate + 1
-
-        let divisible =
-            found |> any(d => d * d <= candidate /\ candidate % d == 0)
-
-        if !divisible then
-            found.add(candidate)
-            yield candidate
-        fi
-    od
-si
-
-digit_sum(value: int) -> int =>
-    if value < 10 then value else value % 10 + digit_sum(value / 10) fi
-
-honakers() -> (position: int, prime: int){} is
-    let position mut = 0
-
-    for prime in primes() do
-        position = position + 1
-
-        if digit_sum(position) == digit_sum(prime) then
-            yield (position = position, prime = prime)
-        fi
-    od
-si
+honakers() -> (position: int, prime: int){} =>
+    primes()
+        |> index()
+        |> map(((i, prime)) => (position = i + 1, prime = prime))
+        |> filter(h => digit_sum(h.position) == digit_sum(h.prime))
 
 write_line("the first fifty Honaker primes:")
 
