@@ -5,40 +5,13 @@ use default
 
 let gamma = 0.57721566490153286
 
-let limit = 10_000_000
-
-let prime = (
-    let sieve = repeat(true, limit) |> collect_mutable()
-
-    sieve[0] = false
-    sieve[1] = false
-
-    for p in 2..limit |> take_while(p => p * p < limit) do
-        if sieve[p] then
-            for multiple in from(p * p, p) |> take_while(* < limit) do
-                sieve[multiple] = false
-            od
-        fi
-    od
-
-    sieve
-)
-
 term(p: int) -> double =>
     let reciprocal = 1.0 / double(p) in
     double.log(1.0 - reciprocal) + reciprocal
 
-let total mut = gamma
-let bound mut = 1000
+for bound in [1000, 10_000, 100_000, 1_000_000, 10_000_000] do
+    let terms = primes() |> take_while(* < bound) |> map(term)
+    let total = gamma + (terms |> sum())
 
-for p in 2..limit do
-    if prime[p] then
-        total = total + term(p)
-    fi
-
-    if p + 1 == bound then
-        write_line("primes below {bound,10:N0}: M = {total:F10}")
-
-        bound = bound * 10
-    fi
+    write_line("primes below {bound,10:N0}: M = {total:F10}")
 od
