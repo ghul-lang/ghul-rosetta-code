@@ -156,7 +156,7 @@ for (i, (name, description)) in examples |> index() do
         (
             let angle =
                 6.283185307D * double(slot[node]) /
-                double(graph.nodes.count);
+                double(graph.nodes.count)
             (x = cx + 80.0D * Ghul.Math.cos(angle),
              y = cy + 80.0D * Ghul.Math.sin(angle))
         )
