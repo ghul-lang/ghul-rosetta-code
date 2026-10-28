@@ -38,9 +38,9 @@ report(below: int, direction: string, offset: int, show: bool) is
     let found =
         (2..below)
         |> filter(p =>
-            is_prime(p) /\
             is_tetraprime(p + offset) /\
-            is_tetraprime(p + offset + 1))
+            is_tetraprime(p + offset + 1) /\
+            is_prime(p))
         |> collect()
 
     write_line("Primes below {below} {direction} by a tetraprime pair:")
