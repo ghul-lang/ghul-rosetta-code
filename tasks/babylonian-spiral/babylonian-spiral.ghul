@@ -6,19 +6,16 @@ use Step = (x: int, y: int)
 
 let signs = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 
-reflections(a: int, b: int) -> Step{} =>
-    [
-        (x = sx * x, y = sy * y)
-        for (x, y) in [(a, b), (b, a)]
-        for (sx, sy) in signs
-    ]
-
 steps_of_length(squared: int) -> List[Step] =>
     from(0)
         |> take_while(a => 2 * a * a <= squared)
         |> map(a => (a, int(round(sqrt(double(squared - a * a))))))
         |> filter(((a, b)) => a * a + b * b == squared)
-        |> flat_map(((a, b)) => reflections(a, b))
+        |> flat_map(((a, b)) => [
+            (x = sx * x, y = sy * y)
+            for (x, y) in [(a, b), (b, a)]
+            for (sx, sy) in signs
+        ])
         |> collect()
 
 bend(from: Step, to: Step) -> double =>
