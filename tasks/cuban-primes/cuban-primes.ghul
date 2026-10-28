@@ -1,51 +1,9 @@
 use default
 
-let small_primes = 2::1_000
-    |> filter(n => 2::n - 1 |> all(d => d * d > n \/ n % d != 0))
-    |> collect()
-
-probably_prime(value: long) -> bool is
-    for small in small_primes do
-        let divisor = long(small)
-
-        if value == divisor then return true fi
-        if value % divisor == 0L then return false fi
-    od
-
-    let subject = bigint(value)
-    let one = 1n
-    let two = 2n
-
-    let odd_part mut = subject - one
-    let power mut = 0
-
-    while (odd_part % two).is_zero do
-        odd_part = odd_part / two
-        power = power + 1
-    od
-
-    for base in [2, 3, 5, 7, 11, 13] do
-        let residue mut =
-            bigint.mod_pow(bigint(base), odd_part, subject)
-        let witnessed mut = residue =~ one \/ residue =~ subject - one
-
-        for _ in 1..power do
-            if witnessed then break fi
-
-            residue = residue * residue % subject
-            witnessed = residue =~ subject - one
-        od
-
-        if !witnessed then return false fi
-    od
-
-    true
-si
-
 cubans() -> long{} =>
     from(1L)
         |> map(n => 3L * n * n + 3L * n + 1L)
-        |> filter(probably_prime)
+        |> filter(is_prime)
 
 write_line("the first 200 cuban primes:")
 

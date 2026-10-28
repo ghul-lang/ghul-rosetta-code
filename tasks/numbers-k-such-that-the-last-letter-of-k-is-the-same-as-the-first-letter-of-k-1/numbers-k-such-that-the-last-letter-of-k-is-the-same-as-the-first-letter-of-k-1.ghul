@@ -37,11 +37,14 @@ english(n: long) -> string =>
         fi
     fi
 
-qualifies(k: long) -> bool =>
-    let name = english(k) in
-    name[name.length - 1] == english(k + 1L)[0]
-
-let found = from(0L) |> filter(qualifies) |> memo()
+let found =
+    from(0L)
+        |> map(k => (number = k, name = english(k)))
+        |> pairwise()
+        |> filter(((now, next)) =>
+            now.name[now.name.length - 1] == next.name[0])
+        |> map(((now, _)) => now.number)
+        |> memo()
 
 write_line("The first 50 qualifying numbers:")
 

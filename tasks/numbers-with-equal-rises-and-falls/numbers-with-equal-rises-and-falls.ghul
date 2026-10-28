@@ -1,9 +1,10 @@
 use default
 
 balanced(n: int) -> bool =>
-    let pairs = digits(n) |> windows(2) |> memo() in
-    pairs |> count(pair => pair[0] < pair[1]) ==
-    pairs |> count(pair => pair[0] > pair[1])
+    digits(n)
+    |> windows(2)
+    |> map(pair => Ghul.Math.sign(pair[1] - pair[0]))
+    |> sum() == 0
 
 sequence() -> int{} => from(1) |> filter(balanced)
 
