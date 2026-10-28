@@ -4,9 +4,7 @@ write_line("multiplying primes to find the primorial primes")
 write_line("")
 
 let sieve_limit = 1_300_000
-let composite = LIST(sieve_limit)
-
-0::sieve_limit |> each(_ => composite.add(false))
+let composite = repeat(false, sieve_limit + 1) |> collect_mutable()
 
 for candidate in 2::sieve_limit do
     if !composite[candidate] /\ candidate <= sieve_limit / candidate then

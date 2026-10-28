@@ -8,16 +8,13 @@ choose(m: int, n: int, from: int, chosen: List[int]) -> List[int]{} is
     fi
 
     for candidate in from..n do
-        let extended = LIST(chosen)
-
-        extended.add(candidate)
-
+        let extended = chosen ++ [candidate] |> collect()
         yield in choose(m, n, candidate + 1, extended)
     od
 si
 
 combinations(m: int, n: int) -> List[int]{} =>
-    choose(m, n, 0, LIST())
+    choose(m, n, 0, [])
 
 for combination in combinations(3, 5) do
     write_line(combination |> join(" "))

@@ -15,17 +15,13 @@ multisets(width: int, lowest: int, chosen: List[int]) -> List[int]{} is
         yield chosen
     else
         for digit in lowest::9 do
-            let extended = LIST(chosen)
-
-            extended.add(digit)
-
-            yield in multisets(width, digit, extended)
+            yield in multisets(width, digit, chosen ++ [digit] |> collect())
         od
     fi
 si
 
 own_sums(width: int) -> long{} is
-    for combination in multisets(width, 0, LIST()) do
+    for combination in multisets(width, 0, []) do
         let total = combination |> map(power(*, width)) |> sum()
 
         if "{total}".length == width then
