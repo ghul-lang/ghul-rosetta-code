@@ -1,22 +1,24 @@
 use default
 
-to_text(bytes: List[ubyte]) -> string =>
+use bstring = ubyte{}
+
+let empty: bstring = []
+
+to_text(bytes: bstring) -> string =>
     bytes |> map(char) |> string()
 
 replace_byte(
-    bytes: List[ubyte], old: ubyte, replacement: ubyte
-) -> List[ubyte] =>
-    let result = bytes
+    bytes: bstring, old: ubyte, replacement: ubyte
+) -> bstring =>
+    bytes
         |> map(b => if b == old then replacement else b fi)
-        |> collect() in
-    result
 
-join_bytes(a: List[ubyte], b: List[ubyte]) -> List[ubyte] =>
-    a ++ b |> collect()
+join_bytes(a: bstring, b: bstring) -> bstring =>
+    a ++ b
 
 let hello = LIST([104ub, 101ub, 108ub, 108ub, 111ub])
 write_line("created: {to_text(hello)}")
-write_line("empty: {LIST[ubyte]().count == 0}")
+write_line("empty: {empty |> count() == 0}")
 
 let same = hello
 write_line("assigned equal: {same =~ hello}")
