@@ -1,4 +1,6 @@
 use default
+use Raster.Anchor
+use Raster.IMAGE
 
 use Edge = (from: int, to: int)
 
@@ -114,7 +116,74 @@ report(name: string, description: string) is
         "{used.count} colours")
 si
 
-report("Ex1", "0-1 1-2 2-0 3")
-report("Ex2", "1-6 1-7 1-8 2-5 2-7 2-8 3-5 3-6 3-8 4-5 4-6 4-7")
-report("Ex3", "1-4 1-6 1-8 3-2 3-6 3-8 5-2 5-4 5-8 7-2 7-4 7-6")
-report("Ex4", "1-6 7-1 8-1 5-2 2-7 2-8 3-5 6-3 3-8 4-5 4-6 4-7")
+let examples = [
+    ("Ex1", "0-1 1-2 2-0 3"),
+    ("Ex2", "1-6 1-7 1-8 2-5 2-7 2-8 3-5 3-6 3-8 4-5 4-6 4-7"),
+    ("Ex3", "1-4 1-6 1-8 3-2 3-6 3-8 5-2 5-4 5-8 7-2 7-4 7-6"),
+    ("Ex4", "1-6 7-1 8-1 5-2 2-7 2-8 3-5 6-3 3-8 4-5 4-6 4-7")
+]
+
+for (name, description) in examples do
+    report(name, description)
+od
+
+write_line("")
+write_line("the colourings are drawn below")
+
+let palette = [
+    (220ub, 70ub, 60ub), (60ub, 150ub, 80ub),
+    (60ub, 110ub, 200ub), (240ub, 190ub, 50ub)
+]
+let size = 240
+let image = IMAGE(size * 2, size * 2)
+
+image.clear(255ub, 255ub, 255ub)
+
+for (i, (name, description)) in examples |> index() do
+    let graph = parse(description)
+    let colours = colour(graph)
+    let cx = double(i % 2 * size + size / 2)
+    let cy = double(i / 2 * size + size / 2 + 8)
+
+    let slot =
+        graph.nodes
+        |> index()
+        |> map(((i, node)) => (node, i))
+        |> collect_map()
+
+    // nodes sit evenly round a circle
+    let position = node => (
+        let angle =
+            6.283185307D * double(slot[node]) /
+            double(graph.nodes.count)
+        (x = cx + 80.0D * Ghul.Math.cos(angle),
+         y = cy + 80.0D * Ghul.Math.sin(angle))
+    )
+
+    image.colour(120ub, 120ub, 120ub)
+    image.stroke(2.0D)
+
+    for (from, to) in graph.edges do
+        let (x0, y0) = position(from)
+        let (x1, y1) = position(to)
+
+        image.line(x0, y0, x1, y1)
+    od
+
+    for node in graph.nodes do
+        let (x, y) = position(node)
+        let (r, g, b) = palette[colours[node]]
+
+        image.colour(r, g, b)
+        image.disc(x, y, 14.0D)
+        image.colour(30ub, 30ub, 30ub)
+        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTRE)
+    od
+
+    image.colour(30ub, 30ub, 30ub)
+    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTRE)
+od
+
+image.write("graphs.png")
+
+image.show("graphs.png")

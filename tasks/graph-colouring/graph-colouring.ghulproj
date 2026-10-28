@@ -5,9 +5,11 @@
 
     <AssemblyName>binary</AssemblyName>
     <GhulCompiler>dotnet ghul-compiler --test-run</GhulCompiler>
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)</RunWorkingDirectory>
   </PropertyGroup>
 
   <ItemGroup>
     <GhulSources Include="**/*.ghul" />
+    <PackageReference Include="ghul.raster" />
   </ItemGroup>
 </Project>
