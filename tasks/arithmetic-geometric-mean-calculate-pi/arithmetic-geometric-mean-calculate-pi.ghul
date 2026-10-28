@@ -16,21 +16,19 @@ newton(n: bigint, root: bigint) -> bigint =>
 
 let scale = power_of_ten(digits + guard)
 
-step(state: State) -> State =>
-    let
-        (a, g, total, weight) = state,
-        next_a = (a + g) / 2n,
-        next_g = integer_sqrt(a * g)
-    in
-        (next_a, next_g,
-            total + weight * (next_a * next_a - next_g * next_g) / scale,
-            weight * 2n)
-
 pi(rounds: int) -> bigint =>
     let
         start = (scale, integer_sqrt(scale * scale / 2n), 0n, 4n),
         (a, _, total, _) =
-            1::rounds |> reduce(start, (state, _) => step(state))
+            1::rounds |> reduce(start, ((a, g, total, weight), _) =>
+                let
+                    next_a = (a + g) / 2n,
+                    next_g = integer_sqrt(a * g)
+                in
+                    (next_a, next_g,
+                        total + weight *
+                            (next_a * next_a - next_g * next_g) / scale,
+                        weight * 2n))
     in
         4n * a * a / (scale - total)
 
