@@ -1,7 +1,5 @@
 use default
 
-use State = (a: bigint, g: bigint, total: bigint, weight: bigint)
-
 let digits = 100
 let guard = 12
 
