@@ -1,33 +1,15 @@
 use default
 
 let limit = 1_000_035
-let composite = LIST(limit + 6)
-
-0::limit + 6 |> each(_ => composite.add(false))
-
-for candidate in 2::limit + 6 do
-    if !composite[candidate] /\ candidate <= (limit + 6) / candidate then
-        let multiple mut = candidate * candidate
-
-        while multiple <= limit + 6 do
-            composite[multiple] = true
-            multiple = multiple + candidate
-        od
-    fi
-od
-
-is_prime(value: int) -> bool => value >= 2 /\ !composite[value]
-
-primes() -> int{} => 2..limit |> filter(is_prime)
 
 group_from(first: int, size: int) -> List[int] =>
     0..size |> map(step => first + step * 6) |> collect()
 
 sexy_groups(size: int) -> List[int]{} =>
-    primes()
+    (primes() |> take_while(p => p < limit))
         |> map(group_from(*, size))
         |> filter(members =>
-            members[size - 1] < limit /\ (members |> all(is_prime)))
+            members[size - 1] < limit /\ (members |> all(p => is_prime(p))))
 
 show(values: List[int]{}) -> string =>
     values |> map(members => "({members |> join(" ")})") |> join(" ")
@@ -48,7 +30,7 @@ kinds |> each(kind => (
 ))
 
 let unsexy =
-    primes()
+    (primes() |> take_while(p => p < limit))
         |> filter(prime => !is_prime(prime - 6) /\ !is_prime(prime + 6))
         |> collect()
 

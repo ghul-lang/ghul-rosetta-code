@@ -1,14 +1,12 @@
 use default
 
-factorial(value: int) -> bigint =>
-    2::value |> map(bigint) |> product()
-
 lah(n: int, k: int) -> bigint =>
-    if k == 1 then factorial(n)
+    if k == 1 then factorial(bigint(n))
     elif k == n then 1n
     elif k > n \/ k < 1 \/ n < 1 then 0n
-    else factorial(n) * factorial(n - 1) /
-         (factorial(k) * factorial(k - 1)) / factorial(n - k)
+    else factorial(bigint(n)) * factorial(bigint(n - 1)) /
+         (factorial(bigint(k)) * factorial(bigint(k - 1))) /
+         factorial(bigint(n - k))
     fi
 
 write_line("unsigned Lah numbers, L(n, k):")

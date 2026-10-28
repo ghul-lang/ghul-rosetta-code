@@ -111,25 +111,24 @@ let cost mut = 0
 while let line = read_line() do
     write_line("> {line}")
 
-    let words =
-        line.split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let fields = words(line) |> collect()
 
-    if words.count == 2 /\ words[0] =~ "fire" then
-        let point = int.parse(words[1])
+    if fields.count == 2 /\ fields[0] =~ "fire" then
+        let point = int.parse(fields[1])
         let result = fire(point)
         cost = cost + if result.starts_with("exits") then 2 else 1 fi
         write_line("beam {point}: {result}")
-    elif words.count == 3 /\ words[0] =~ "guess" then
+    elif fields.count == 3 /\ fields[0] =~ "guess" then
         let cell = (
-            row = int.parse(words[1]) - 1,
-            column = int.parse(words[2]) - 1)
+            row = int.parse(fields[1]) - 1,
+            column = int.parse(fields[2]) - 1)
 
         if !guesses.remove(cell) then
             guesses.add(cell)
         fi
 
         show(false)
-    elif let ["done"] = words then
+    elif let ["done"] = fields then
         let missed =
             atoms |> filter(a => !guesses.contains(a)) |> count()
 

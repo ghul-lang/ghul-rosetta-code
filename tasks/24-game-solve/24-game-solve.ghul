@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math
 
 struct Q(top: long, bottom: long) is
     +(o: Q) -> Q =>
@@ -12,9 +11,6 @@ struct Q(top: long, bottom: long) is
 
     is_zero: bool => top == 0L
 si
-
-gcd(a: long, b: long) -> long =>
-    if b == 0L then Math.abs(a) else gcd(b, a % b) fi
 
 reduced(top: long, bottom: long) -> Q =>
     let g = gcd(top, bottom), sign = if bottom < 0L then -1L else 1L fi in

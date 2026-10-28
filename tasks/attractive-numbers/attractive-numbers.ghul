@@ -1,20 +1,6 @@
 use default
 
-prime_factors(n: int) -> int{} is
-    if n > 1 then
-        let factor = from(2) |> find(d => d * d > n \/ n % d == 0)!
-        let prime = if factor * factor > n then n else factor fi
-
-        yield prime
-        yield in prime_factors(n / prime)
-    fi
-si
-
-prime_factor_count(n: int) -> int => prime_factors(n) |> count()
-
-is_prime(n: int) -> bool => n > 1 /\ 2::n / 2 |> all(d => n % d != 0)
-
 4::120
-    |> filter(n => is_prime(prime_factor_count(n)))
+    |> filter(n => is_prime(prime_factors(n).count))
     |> chunk(10)
     |> each(row => write_line(row |> map(n => "{n,4}") |> join("")))

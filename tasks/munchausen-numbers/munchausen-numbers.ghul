@@ -8,9 +8,7 @@ power(value: int, exponent: int) -> int =>
     fi
 
 digit_powers(number: int) -> int =>
-    "{number}"
-        |> map(character =>
-            int(character) - int('0'))
+    digits(number)
         |> filter(* > 0)
         |> reduce(0, (total, digit) => total + power(digit, digit))
 

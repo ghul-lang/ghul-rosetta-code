@@ -1,27 +1,8 @@
 use default
 
-primes(limit: int) -> int{} is
-    let composite = repeat(false, limit) |> collect_mutable()
-
-    for n in 2..limit do
-        if !composite[n] then
-            yield n
-
-            if n <= limit / n then
-                let multiple mut = n * n
-
-                while multiple < limit do
-                    composite[multiple] = true
-                    multiple = multiple + n
-                od
-            fi
-        fi
-    od
-si
-
 let count = 1_000_000
 let last_digits =
-    primes(15_500_000) |> take(count) |> map(* % 10) |> collect()
+    primes() |> take(count) |> map(* % 10) |> collect()
 
 let transitions =
     1..count

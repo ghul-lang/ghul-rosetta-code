@@ -4,9 +4,6 @@ use System.Math
 
 use Eisenstein = (a: int, b: int)
 
-is_prime(n: int) -> bool =>
-    n >= 2 /\ (2..n |> filter(d => d * d <= n) |> all(d => n % d != 0))
-
 norm(e: Eisenstein) -> int => e.a * e.a - e.a * e.b + e.b * e.b
 
 is_eisenstein_prime(e: Eisenstein) -> bool =>

@@ -2,21 +2,6 @@ use default
 
 let top = 99
 
-is_prime(n: int) -> bool =>
-    n > 1 /\ (2..n) |> take_while(d => d * d <= n) |> all(d => n % d != 0)
-
-prime_factor_sum(n: int) -> int is
-    walk(remaining: int, sum: int, divisor: int) -> int =>
-        if remaining == 1 then sum
-        elif remaining % divisor == 0 then
-            walk(remaining / divisor, sum + divisor, divisor)
-        else
-            walk(remaining, sum, divisor + 1)
-        fi
-
-    walk(n, 0, 2)
-si
-
 let descendants = (0::top) |> map(_ => LIST()) |> collect()
 descendants[0].add(1L)
 
@@ -37,7 +22,7 @@ ancestors(n: int) -> int{} is
     let current mut = n
 
     while current > 1 /\ !is_prime(current) do
-        let parent = prime_factor_sum(current)
+        let parent = prime_factors(current) |> sum()
 
         if parent == current then
             return

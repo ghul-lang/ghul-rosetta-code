@@ -1,13 +1,8 @@
 use default
 
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
 is_wieferich(prime: int) -> bool =>
     let square = bigint(prime) * bigint(prime) in
-    bigint.mod_pow(2n, bigint(prime - 1), square) =~ 1n
+    mod_pow(2n, bigint(prime - 1), square) =~ 1n
 
 write_line("Wieferich primes less than 5000:")
 

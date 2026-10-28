@@ -3,9 +3,6 @@ use default
 write_line("summing digit powers, which takes a moment")
 write_line("")
 
-digit_sum(digits: string) -> int =>
-    digits |> reduce(0, (sum, c) => sum + int(c) - int('0'))
-
 exponents(n: int, highest: int) -> int{} is
     let value = bigint(n)
     let power mut = value
@@ -13,7 +10,7 @@ exponents(n: int, highest: int) -> int{} is
     for e in 2::highest do
         power = power * value
 
-        if digit_sum("{power}") == n then
+        if digit_sum(power) =~ value then
             yield e
         fi
     od

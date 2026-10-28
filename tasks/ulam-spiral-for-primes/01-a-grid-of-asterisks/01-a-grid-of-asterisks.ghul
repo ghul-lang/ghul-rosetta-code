@@ -2,11 +2,6 @@ use default
 
 use POSITION = (x: int, y: int)
 
-is_prime(number: int) -> bool =>
-    number > 1 /\ ((2..number)
-        |> take_while(divisor => divisor * divisor <= number)
-        |> all(divisor => number % divisor != 0))
-
 spiral() -> POSITION{} is
     let x mut = 0
     let y mut = 0

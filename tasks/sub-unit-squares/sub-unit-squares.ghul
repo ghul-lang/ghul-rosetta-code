@@ -1,9 +1,5 @@
 use default
 
-is_square(n: long) -> bool =>
-    let root = long(System.Math.sqrt(double(n))) in
-    root * root == n \/ (root + 1L) * (root + 1L) == n
-
 qualifies(square: long) -> bool =>
     let digits = "{square}" in
 

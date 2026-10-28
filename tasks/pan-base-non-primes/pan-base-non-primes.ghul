@@ -1,9 +1,5 @@
 use default
 
-is_prime(n: long) -> bool =>
-    n >= 2L /\
-        from(2L) |> take_while(d => d * d <= n) |> all(d => n % d != 0L)
-
 value_in(digits: List[int], base: int) -> long =>
     digits
         |> reduce(0L, (value, d) =>

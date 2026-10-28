@@ -1,32 +1,11 @@
 use default
 
-prime_factor_sum(value: int) -> int is
-    let total mut = 0
-    let remaining mut = value
-    let factor mut = 2
-
-    while factor * factor <= remaining do
-        while remaining % factor == 0 do
-            total = total + factor
-            remaining = remaining / factor
-        od
-
-        factor = factor + 1
-    od
-
-    if remaining > 1 then total + remaining else total fi
-si
-
 is_rhonda(value: int, base: int) -> bool =>
     digits(value, base) |> product() ==
-    base * prime_factor_sum(value)
+    base * (prime_factors(value) |> sum())
 
 rhondas(base: int) -> int{} =>
     from(2) |> filter(is_rhonda(*, base))
-
-is_prime(value: int) -> bool =>
-    value > 1 /\
-    2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
 write_line("the first ten Rhonda numbers, shown in base ten:")
 

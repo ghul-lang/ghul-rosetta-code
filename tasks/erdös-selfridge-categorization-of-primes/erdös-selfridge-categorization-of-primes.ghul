@@ -2,65 +2,33 @@ use default
 
 let limit = 15_485_864
 
-let smallest_factor = (
-    let factors = repeat(0, limit + 1) |> collect_mutable()
-
-    for n in 2::limit do
-        if factors[n] == 0 then
-            for multiple in from(n, n) |> take_while(* <= limit) do
-                if factors[multiple] == 0 then
-                    factors[multiple] = n
-                fi
-            od
-        fi
-    od
-
-    factors
-)
-
 let category = repeat(0, limit + 1) |> collect_mutable()
-
-prime_factors(n: int) -> int{} is
-    let rest mut = n
-
-    while rest > 1 do
-        let factor = smallest_factor[rest]
-
-        yield factor
-
-        while rest % factor == 0 do
-            rest = rest / factor
-        od
-    od
-si
 
 categorise(p: int) -> int =>
     1 + (
-        prime_factors(p + 1)
+        factorize(p + 1)
+            |> map(f => f.prime)
             |> filter(* > 3)
             |> map(f => category[f])
             |> max() ?? 0)
 
-let primes =
-    2::limit
-        |> filter(n => smallest_factor[n] == n)
-        |> take(1_000_000)
-        |> memo()
+let first_million = primes() |> take(1_000_000) |> memo()
 
-for p in primes do
+for p in first_million do
     category[p] = categorise(p)
 od
 
 write_line("First 200 primes:")
 
-for (number, group) in primes |> take(200) |> group_by(p => category[p]) do
+for (number, group) in first_million |> take(200)
+        |> group_by(p => category[p]) do
     write_line("\nCategory {number}:")
     write_line("{group}")
 od
 
 write_line("\nFirst million primes:\n")
 
-for (number, group) in primes |> group_by(p => category[p]) do
+for (number, group) in first_million |> group_by(p => category[p]) do
     let first = group[0], last = group[group.count - 1]
 
     write_line(

@@ -22,9 +22,6 @@ od
 
 write_line("100 appears at index {position(100)}")
 
-gcd(a: int, b: int) -> int =>
-    if b == 0 then a else gcd(b, a % b) fi
-
 let all_coprime = 0..999
     |> all(index => gcd(sequence[index], sequence[index + 1]) == 1)
 

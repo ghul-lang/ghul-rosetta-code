@@ -1,12 +1,5 @@
 use default
 
-digit_sum(value: int) -> int =>
-    if value < 10 then
-        value
-    else
-        value % 10 + digit_sum(value / 10)
-    fi
-
 harshad() -> int{} =>
     from(1)
         |> filter(number => number % digit_sum(number) == 0)

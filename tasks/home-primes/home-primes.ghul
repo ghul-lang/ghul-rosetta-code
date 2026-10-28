@@ -5,40 +5,6 @@ let small_primes = [
     53, 59, 61, 67, 71, 73, 79, 83, 89, 97
 ]
 
-passes_miller_rabin(value: bigint, base: bigint) -> bool is
-    if base % value =~ 0n then
-        return true
-    fi
-
-    let odd mut = value - 1n
-    let rounds mut = 0
-
-    while odd % 2n =~ 0n do
-        odd = odd / 2n
-        rounds = rounds + 1
-    od
-
-    let residue mut = bigint.mod_pow(base, odd, value)
-
-    if residue =~ 1n \/ residue =~ value - 1n then
-        return true
-    fi
-
-    for _ in 1..rounds do
-        residue = residue * residue % value
-        if residue =~ value - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_prime(value: bigint) -> bool =>
-    value > 1n /\
-    small_primes
-        |> all(small => passes_miller_rabin(value, cast(small)))
-
 pollard_rho(value: bigint) -> bigint is
     let offset mut = 1n
     let divisor mut = 1n
@@ -52,7 +18,7 @@ pollard_rho(value: bigint) -> bigint is
             slow = (slow * slow + offset) % value
             fast = (fast * fast + offset) % value
             fast = (fast * fast + offset) % value
-            divisor = bigint.greatest_common_divisor(slow - fast, value)
+            divisor = gcd(slow - fast, value)
         od
 
         offset = offset + 1n

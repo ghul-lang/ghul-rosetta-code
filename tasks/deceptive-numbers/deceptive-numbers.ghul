@@ -1,10 +1,5 @@
 use default
 
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
 divides_repunit(value: int) -> bool =>
     let remainder =
         (1..value)

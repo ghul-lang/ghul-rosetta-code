@@ -1,20 +1,5 @@
 use default
 
-let limit = 300_000
-let composite = repeat(false, limit) |> collect_mutable()
-
-let root = int(System.Math.sqrt(double(limit)))
-
-for p in 2::root do
-    if !composite[p] then
-        for multiple in from(p * p, p) |> take_while(* < limit) do
-            composite[multiple] = true
-        od
-    fi
-od
-
-is_prime(n: int) -> bool => n >= 2 /\ !composite[n]
-
 is_de_polignac(n: int) -> bool =>
     from(0)
         |> map(1 << *)

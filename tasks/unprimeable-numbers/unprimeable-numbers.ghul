@@ -1,24 +1,6 @@
 use default
 
 let limit = 10_000_000
-let composite = repeat(false, limit + 1) |> collect_mutable()
-
-let factor mut = 2
-
-while factor * factor <= limit do
-    if !composite[factor] then
-        let multiple mut = factor * factor
-
-        while multiple <= limit do
-            composite[multiple] = true
-            multiple = multiple + factor
-        od
-    fi
-
-    factor = factor + 1
-od
-
-is_prime(value: int) -> bool => value > 1 /\ !composite[value]
 
 is_unprimeable(value: int) -> bool is
     if is_prime(value) then return false fi

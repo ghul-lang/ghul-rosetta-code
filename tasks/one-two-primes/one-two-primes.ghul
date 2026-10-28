@@ -1,47 +1,5 @@
 use default
 
-passes_round(
-    witness: bigint, n: bigint, odd_part: bigint, twos: int
-) -> bool is
-    let minus_one = n - 1n
-    let x mut = bigint.mod_pow(witness, odd_part, n)
-
-    if x.is_one \/ x =~ minus_one then
-        return true
-    fi
-
-    for _ in 1..twos do
-        x = bigint.mod_pow(x, 2n, n)
-
-        if x =~ minus_one then
-            return true
-        fi
-    od
-
-    false
-si
-
-is_prime(n: bigint) -> bool is
-    if n < 4n then
-        return n > 1n
-    fi
-
-    if n.is_even then
-        return false
-    fi
-
-    split(odd_part: bigint, twos: int) -> (bigint, int) =>
-        if odd_part.is_even then
-            split(odd_part >> 1, twos + 1)
-        else (odd_part, twos) fi
-
-    let (odd_part, twos) = split(n - 1n, 0)
-
-    [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n, 29n, 31n, 37n]
-        |> filter(* < n)
-        |> all(passes_round(*, n, odd_part, twos))
-si
-
 digit_at(bits: long, position: int) -> char =>
     if (bits >> position) & 1L == 1L then '2' else '1' fi
 

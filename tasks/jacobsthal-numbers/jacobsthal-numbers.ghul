@@ -30,12 +30,6 @@ jacobsthal_oblongs() -> bigint{} is
     od
 si
 
-is_prime(n: bigint) -> bool =>
-    n > 1n /\
-        stream(two, d => d || d + 1n)
-            |> take_while(d => d * d <= n)
-            |> all(d => n % d !~ 0n)
-
 show(label: string, values: bigint{}, count: int) is
     write_line("{label}:")
     let rows = values |> take(count) |> chunk(10)

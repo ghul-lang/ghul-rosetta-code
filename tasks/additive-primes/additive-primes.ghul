@@ -1,14 +1,5 @@
 use default
 
-is_prime(n: int) -> bool =>
-    n > 1 /\
-    ((2..n)
-        |> take_while(divisor => divisor * divisor <= n)
-        |> all(divisor => n % divisor != 0))
-
-digit_sum(n: int) -> int =>
-    if n == 0 then 0 else n % 10 + digit_sum(n / 10) fi
-
 let additive =
     (2..500)
     |> filter(n => is_prime(n) /\ is_prime(digit_sum(n)))

@@ -1,35 +1,5 @@
 use default
 
-factorize(n: int) -> List[(prime: int, exponent: int)] is
-    let factors = LIST()
-    let remaining mut = n
-    let prime mut = 2
-
-    while prime * prime <= remaining do
-        let exponent mut = 0
-
-        while remaining % prime == 0 do
-            remaining = remaining / prime
-            exponent = exponent + 1
-        od
-
-        if exponent > 0 then
-            factors.add((prime, exponent))
-        fi
-
-        prime = prime + 1
-    od
-
-    if remaining > 1 then
-        factors.add((remaining, 1))
-    fi
-
-    return factors
-si
-
-gcd(a: int, b: int) -> int =>
-    if b == 0 then a else gcd(b, a % b) fi
-
 power(base: int, exponent: int) -> int =>
     if exponent == 0 then 1 else base * power(base, exponent - 1) fi
 
@@ -38,13 +8,6 @@ is_achilles(n: int) -> bool =>
         factors.count > 0 /\
         (factors |> all(factor => factor.exponent >= 2)) /\
         (factors |> map(factor => factor.exponent) |> reduce(0, gcd)) == 1
-
-totient(n: int) -> int =>
-    factorize(n)
-    |> reduce(1, (total, factor) =>
-        total *
-        power(factor.prime, factor.exponent - 1) *
-        (factor.prime - 1))
 
 achilles_numbers() -> int{} =>
     from(1) |> filter(is_achilles)

@@ -1,40 +1,5 @@
 use default
 
-let bases = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
-
-passes_miller_rabin(value: bigint, base: bigint) -> bool is
-    if base % value =~ 0n then
-        return true
-    fi
-
-    let odd mut = value - 1n
-    let rounds mut = 0
-
-    while odd % 2n =~ 0n do
-        odd = odd / 2n
-        rounds = rounds + 1
-    od
-
-    let residue mut = bigint.mod_pow(base, odd, value)
-
-    if residue =~ 1n \/ residue =~ value - 1n then
-        return true
-    fi
-
-    for _ in 1..rounds do
-        residue = residue * residue % value
-        if residue =~ value - 1n then
-            return true
-        fi
-    od
-
-    return false
-si
-
-is_prime(value: bigint) -> bool =>
-    value > 1n /\
-    bases |> all(base => passes_miller_rabin(value, cast(base)))
-
 pollard_rho(value: bigint, budget: int) -> bigint? is
     let slow mut = 2n
     let fast mut = 2n
@@ -44,7 +9,7 @@ pollard_rho(value: bigint, budget: int) -> bigint? is
         slow = (slow * slow + 1n) % value
         fast = (fast * fast + 1n) % value
         fast = (fast * fast + 1n) % value
-        divisor = bigint.greatest_common_divisor(slow - fast, value)
+        divisor = gcd(slow - fast, value)
 
         if divisor !~ 1n then
             return if divisor =~ value then null else divisor fi

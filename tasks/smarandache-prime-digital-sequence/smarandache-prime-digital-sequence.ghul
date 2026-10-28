@@ -2,11 +2,6 @@ use default
 
 let prime_digits = [2, 3, 5, 7]
 
-is_prime(value: int) -> bool =>
-    value > 1 /\ ((2..value)
-        |> take_while(divisor => divisor * divisor <= value)
-        |> all(divisor => value % divisor != 0))
-
 prime_digit_numbers() -> int{} is
     let level mut = prime_digits
 

@@ -16,7 +16,7 @@ minimum_length(command: string) -> int =>
     command |> filter(char.is_upper) |> count()
 
 let commands =
-    table.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    words(table)
     |> map(command =>
         (word = command, minimum = minimum_length(command)))
 
@@ -40,7 +40,7 @@ let input =
     "poweRin"
 
 write_line(
-    input.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    words(input)
     |> map(expand)
     |> join(" ")
 )

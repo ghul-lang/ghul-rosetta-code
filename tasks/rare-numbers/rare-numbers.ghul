@@ -10,24 +10,6 @@ reverse_of(n: long) -> long is
     walk(n, 0L)
 si
 
-is_square(n: long) -> bool is
-    if n < 0L then
-        return false
-    fi
-
-    let root mut = long(System.Math.sqrt(double(n)))
-
-    while root * root > n do
-        root = root - 1L
-    od
-
-    while (root + 1L) * (root + 1L) <= n do
-        root = root + 1L
-    od
-
-    return root * root == n
-si
-
 is_rare(n: long) -> bool =>
     let r = reverse_of(n) in
     n > r /\ is_square(n + r) /\ is_square(n - r)

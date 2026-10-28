@@ -20,7 +20,7 @@ let table =
 
 let commands = LIST()
 
-for token in table.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES) do
+for token in words(table) do
     let minimum mut = 0
 
     if int.try_parse(token, minimum ref) then
@@ -52,7 +52,7 @@ let input =
     "poweRin"
 
 write_line(
-    input.split([' '], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    words(input)
     |> map(expand)
     |> join(" ")
 )

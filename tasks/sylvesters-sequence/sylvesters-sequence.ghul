@@ -9,9 +9,6 @@ sylvester(count: int) -> bigint{} is
     od
 si
 
-gcd(a: bigint, b: bigint) -> bigint =>
-    if b.is_zero then a else gcd(b, a % b) fi
-
 let terms = sylvester(10) |> memo()
 
 write_line("first ten terms:")

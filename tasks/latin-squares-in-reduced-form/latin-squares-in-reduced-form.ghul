@@ -35,8 +35,6 @@ reduced_latin_squares(n: int) -> List[List[int]]{} =>
         |> collect() in
     completions(square, cells)
 
-factorial(n: int) -> long => 1::n |> reduce(1L, (f, k) => f * long(k))
-
 let oeis = [1L, 2L, 12L, 576L, 161_280L, 812_851_200L]
 
 write_line("The four reduced Latin squares of order 4:")
@@ -55,7 +53,7 @@ write_line(
 
 for n in 1::6 do
     let reduced = long(reduced_latin_squares(n) |> count())
-    let total = reduced * factorial(n) * factorial(n - 1)
+    let total = reduced * factorial(long(n)) * factorial(long(n - 1))
 
     write_line("{n,2}{reduced,9}{total,17}{oeis[n - 1],16}")
 od

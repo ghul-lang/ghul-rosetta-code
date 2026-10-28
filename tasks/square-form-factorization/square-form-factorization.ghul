@@ -1,24 +1,5 @@
 use default
 
-square_root(n: bigint) -> bigint is
-    if n < 2n then
-        return n
-    fi
-
-    let x mut = n
-    let y mut = (x + 1n) / 2n
-
-    while y < x do
-        x = y
-        y = (x + n / x) / 2n
-    od
-
-    x
-si
-
-is_square(n: bigint) -> bool =>
-    let r = square_root(n) in r * r =~ n
-
 let multipliers = [
     1, 3, 5, 7, 11, 3 * 5, 3 * 7, 3 * 11, 5 * 7, 5 * 11, 7 * 11,
     3 * 5 * 7, 3 * 5 * 11, 3 * 7 * 11, 5 * 7 * 11, 3 * 5 * 7 * 11
@@ -29,17 +10,17 @@ let multipliers = [
 // cycle to the symmetry point, where the coefficient shares a factor
 // with N.
 squfof(n: bigint) -> bigint? is
-    let s = square_root(n)
+    let s = isqrt(n)
 
     if s * s =~ n then
         return s
     fi
 
-    let bound = 3n * square_root(8n * s)
+    let bound = 3n * isqrt(8n * s)
 
     for k in multipliers do
         let d = bigint(k) * n
-        let p0 = square_root(d)
+        let p0 = isqrt(d)
         let p mut = p0
         let p_previous mut = p0
         let q_previous mut = 1n
@@ -60,7 +41,7 @@ squfof(n: bigint) -> bigint? is
             p_previous = p
 
             if i.is_even /\ is_square(q) then
-                root = square_root(q)
+                root = isqrt(q)
                 found = true
                 break
             fi
@@ -95,7 +76,7 @@ squfof(n: bigint) -> bigint? is
             fi
         od
 
-        let factor = bigint.greatest_common_divisor(n, q_previous)
+        let factor = gcd(n, q_previous)
 
         if !factor.is_one /\ factor !~ n then
             return factor

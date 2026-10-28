@@ -1,9 +1,5 @@
 use default
 
-is_prime(value: long) -> bool =>
-    value > 1L /\
-    2L::long(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0L)
-
 let prime_total mut = 0L
 let prime_index mut = 0
 let last_prime mut = 1L

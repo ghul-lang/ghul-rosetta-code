@@ -7,22 +7,6 @@ let size = 401
 let centre = size / 2
 let limit = size * size
 
-let is_prime = 0::limit |> map(_ => true) |> collect_mutable()
-
-is_prime[0] = false
-is_prime[1] = false
-
-for candidate in 2::limit do
-    if is_prime[candidate] /\ candidate <= limit / candidate then
-        let multiple mut = candidate * candidate
-
-        while multiple <= limit do
-            is_prime[multiple] = false
-            multiple = multiple + candidate
-        od
-    fi
-od
-
 spiral() -> POSITION{} is
     let x mut = 0
     let y mut = 0
@@ -64,7 +48,7 @@ si
 let image = IMAGE(size, size)
 
 for placed in spiral() |> index() |> take(limit) do
-    if is_prime[placed.index + 1] then
+    if is_prime(placed.index + 1) then
         image.set_pixel(
             centre + placed.value.x,
             centre + placed.value.y,

@@ -1,27 +1,5 @@
 use default
 
-let sieve_limit = 10_000_000
-let composite = repeat(false, sieve_limit) |> collect_mutable()
-
-for candidate in 2..sieve_limit do
-    if !composite[candidate] /\ candidate <= sieve_limit / candidate then
-        let multiple mut = candidate * candidate
-
-        while multiple < sieve_limit do
-            composite[multiple] = true
-            multiple = multiple + candidate
-        od
-    fi
-od
-
-is_prime(value: long) -> bool =>
-    if value < cast(sieve_limit) then
-        value >= 2L /\ !composite[cast(value)]
-    else
-        2L::long(Ghul.Math.sqrt(double(value)))
-            |> all(d => value % d != 0L)
-    fi
-
 zero_free(digits: int) -> long{} is
     if digits == 0 then
         yield 0L

@@ -4,14 +4,11 @@ struct FRACTION(numerator: long, denominator: long)
 
 fraction(numerator: long, denominator: long) -> FRACTION =>
     let
-        common = greatest_common_divisor(numerator, denominator),
+        common = gcd(numerator, denominator),
         divisor = long.abs(common),
         sign = if denominator < 0L then -1L else 1L fi
     in
         FRACTION(sign * numerator / divisor, sign * denominator / divisor)
-
-greatest_common_divisor(a: long, b: long) -> long =>
-    if b == 0L then a else greatest_common_divisor(b, a % b) fi
 
 -(a: FRACTION, b: FRACTION) -> FRACTION =>
     fraction(
@@ -36,11 +33,6 @@ bernoulli(n: int) -> FRACTION is
     a[0]
 si
 
-binomial(n: int, k: int) -> long =>
-    1::k
-        |> reduce(1L, (c, i) =>
-            c * long(n - k + i) / long(i))
-
 term(coefficient: FRACTION, power: int) -> string =>
     let
         top = long.abs(coefficient.numerator),
@@ -59,7 +51,7 @@ faulhaber(p: int) -> string =>
         0::p
             |> map(j =>
                 (coefficient =
-                    fraction(binomial(p + 1, j), long(p + 1)) *
+                    fraction(binomial(long(p + 1), long(j)), long(p + 1)) *
                         bernoulli(j),
                  power = p + 1 - j))
             |> filter(t => t.coefficient.numerator != 0L)

@@ -204,8 +204,7 @@ si
 let tokens = LIST()
 
 while let line = read_line() do
-    let fields =
-        line.split([' '], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+    let fields = words(line) |> collect()
 
     if fields.count >= 3 then
         let name = fields[2]
