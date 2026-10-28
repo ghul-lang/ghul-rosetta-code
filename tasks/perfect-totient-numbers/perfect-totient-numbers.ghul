@@ -1,6 +1,6 @@
 use default
 
-totient_sum(value: int) -> int =>
+totient_sum(value: int) -> int memo =>
     if value > 1 then
         let next = totient(value) in
         next + totient_sum(next)

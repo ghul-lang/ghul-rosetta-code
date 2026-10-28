@@ -1,8 +1,10 @@
 use default
 
-female(n: int) -> int => if n == 0 then 1 else n - male(female(n - 1)) fi
+female(n: int) -> int memo =>
+    if n == 0 then 1 else n - male(female(n - 1)) fi
 
-male(n: int) -> int => if n == 0 then 0 else n - female(male(n - 1)) fi
+male(n: int) -> int memo =>
+    if n == 0 then 0 else n - female(male(n - 1)) fi
 
 show(name: string, function: (int) -> int) =>
     write_line("{name} {0..20 |> map(function) |> join(" ")}")

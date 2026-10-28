@@ -1,39 +1,17 @@
 use default
 use System.Math.*
 
-// The reciprocal differences are memoised by their order and starting
-// row, since the continued fraction asks for the same ones repeatedly.
-class THIELE is
-    _x: double[]
-    _y: double[]
-    _rho: MAP[(int, int), double]
-
-    init(x: double[], y: double[]) is
-        _x = x
-        _y = y
-        _rho = MAP()
-    si
-
-    _reciprocal(order: int, i: int) -> double is
+class THIELE(_x: double[], _y: double[]) is
+    _reciprocal(order: int, i: int) -> double memo =>
         if order < 0 then
-            return 0.0
+            0.0
         elif order == 0 then
-            return _y[i]
+            _y[i]
+        else
+            (_x[i] - _x[i + order]) /
+            (_reciprocal(order - 1, i) - _reciprocal(order - 1, i + 1)) +
+            _reciprocal(order - 2, i + 1)
         fi
-
-        let key = (order, i)
-
-        if !_rho.contains_key(key) then
-            let before = _reciprocal(order - 1, i)
-            let after = _reciprocal(order - 1, i + 1)
-
-            _rho[key] =
-                (_x[i] - _x[i + order]) / (before - after) +
-                _reciprocal(order - 2, i + 1)
-        fi
-
-        _rho[key]
-    si
 
     at(value: double) -> double =>
         _y[0] + _fraction(value, 1)

@@ -33,19 +33,7 @@ whole(value: int) -> RATIONAL =>
     RATIONAL(cast(value), 1n)
 
 class SERIES(term: (int) -> RATIONAL) is
-    _known: LIST[RATIONAL]
-
-    init(..) is
-        _known = LIST()
-    si
-
-    at(index: int) -> RATIONAL is
-        while _known.count <= index do
-            _known.add(term(_known.count))
-        od
-
-        return _known[index]
-    si
+    at(index: int) -> RATIONAL memo => term(index)
 
     +(other: SERIES) -> SERIES => SERIES(n => at(n) + other.at(n))
 

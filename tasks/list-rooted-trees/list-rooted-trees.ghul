@@ -1,15 +1,13 @@
 use default
 
-trees(bags: int) -> string{} is
+trees(bags: int) -> List[string] memo =>
     if bags == 1 then
-        yield "()"
-        return
+        ["()"]
+    else
+        forests(bags - 1, null)
+        |> map(forest => "({forest})")
+        |> collect()
     fi
-
-    for forest in forests(bags - 1, null) do
-        yield "({forest})"
-    od
-si
 
 forests(bags: int, largest: string?) -> string{} is
     if bags == 0 then

@@ -8,8 +8,10 @@ amb[T](
     when [] then
         yield LIST()
     when [set, ..others] then
+        let rests = amb(others, accepts) |> memo()
+
         for choice in set do
-            for rest in amb(others, accepts) do
+            for rest in rests do
                 if rest.count == 0 \/ accepts(choice, rest[0]) then
                     let sequence = LIST()
 
