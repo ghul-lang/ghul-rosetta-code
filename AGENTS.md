@@ -83,6 +83,14 @@ So, in rough order of how often it comes up:
   threads or nests, and here it threads:
   `xs |> map(f) |> filter(p) |> join()`, never
   `join(filter(map(xs, f), p), ", ")`.
+  The value the chain is about is its head, and every stage after it is
+  `|> f()`, including the first: a function that transforms a value you
+  already have - `runes`, `graphemes`, `words`, `digits`, `lines` - is a
+  stage, so `text |> runes() |> count()`, never `runes(text) |> count()`.
+  A function that produces a sequence from nothing, or from a parameter
+  that is not the subject, is the head: `from(1) |> …`, `repeat(0, n) |> …`,
+  `1::limit |> …`, `stream(seed, step) |> …`. A call with no chain after it
+  is a call: `let points = runes(text)`, not `text |> runes()`.
 - **Lean towards functions, but use the right tool.** A class earns its place
   when the task is itself about objects, when state and the operations on it
   belong together - a bitmap and its pixels, a parser and its cursor - or when
