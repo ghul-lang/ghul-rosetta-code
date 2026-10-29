@@ -11,7 +11,7 @@ bytes(encoding: System.Text.Encoding, text: string) -> string =>
     encoding.get_bytes(text) |> map(b => "{b:X2}") |> join(" ")
 
 code_points(text: string) -> int =>
-    text.enumerate_runes() |> count()
+    runes(text) |> count()
 
 write_line("source is UTF-8, and a literal holds what it says")
 write_line("  héllo wörld")

@@ -3,14 +3,14 @@ use default
 let text = "the quick 🦊 brown fox"
 
 let points =
-    text.enumerate_runes() |> map(point => "{point}") |> collect()
+    runes(text) |> map(point => "{point}") |> collect()
 
 slice(from: int, length: int) -> string =>
     points[from..from + length] |> join("")
 
 starts_at(wanted: string) -> int =>
     let target =
-        wanted.enumerate_runes()
+        runes(wanted)
             |> map(point => "{point}")
             |> collect() in
     0..points.count - target.count + 1
