@@ -2,7 +2,7 @@
     "task": "Argument destructuring",
     "url": "https://rosettacode.org/wiki/Argument_destructuring",
     "status": "published",
-    "tags": ["basics", "generics"],
-    "interest": 1,
+    "tags": ["basics", "pattern-matching", "generics"],
+    "interest": 2,
     "summary": "Apply a function to a list of stored arguments by unpacking them, showing a spread operator or an apply-style higher-order function."
 }
