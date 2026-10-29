@@ -4,6 +4,7 @@ use default
 // An operator's precedence comes from its first character, and like
 // almost every ghūl operator it groups to the left, so 5 ** 3 ** 2 is
 // (5 ** 3) ** 2.
+
 **(base: bigint, exponent: bigint) -> bigint =>
     bigint.pow(base, int(exponent))
 

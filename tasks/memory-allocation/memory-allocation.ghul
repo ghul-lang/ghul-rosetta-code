@@ -8,6 +8,7 @@ use System.Runtime.InteropServices.Marshal
 // variable lives on the stack. Memory outside the collector's reach is
 // taken and given back by hand through Marshal, which also reads and
 // writes it.
+
 struct POINT(x: int, y: int)
 
 let on_heap = repeat(0, 1000) |> collect()

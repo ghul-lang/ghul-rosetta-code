@@ -8,6 +8,7 @@ value_in(digits: List[int], base: int) -> long =>
 
 // A numeric string n is composite in every base once it is composite in
 // every base up to n itself, so only those bases are tried.
+
 is_pan_base_non_prime(n: int) -> bool =>
     let digits = "{n}" |> map(c => int(c - '0')) |> collect() in
     let lowest = (digits |> max()!) + 1 in

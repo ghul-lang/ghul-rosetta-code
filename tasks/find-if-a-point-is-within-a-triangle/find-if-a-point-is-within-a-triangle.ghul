@@ -8,6 +8,7 @@ use Point = (x: double, y: double)
 
 // Walking round the triangle, the point is inside when it is on the same
 // side of every edge, which is when the three cross products share a sign.
+
 within(p: Point, a: Point, b: Point, c: Point) -> bool =>
     let sides = [
         (b - a) × (p - a),

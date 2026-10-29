@@ -4,6 +4,7 @@ use default
 // row of the Jury array is b[i] = a0 * a[i] - an * a[n - i] over the
 // row before, and the polynomial is stable when every row's first entry
 // outweighs its last.
+
 use Polynomial = List[double]
 
 evaluate(p: Polynomial, z: double) -> double =>

@@ -4,6 +4,7 @@ use default
 // an overflowing result wraps round silently, and the program carries on
 // with the wrong value. The one exception is dividing the most negative
 // value by -1, which throws System.OverflowException.
+
 show(expression: string, compute: () -> string) is
     try
         write_line("    {expression,-46} {compute()}")

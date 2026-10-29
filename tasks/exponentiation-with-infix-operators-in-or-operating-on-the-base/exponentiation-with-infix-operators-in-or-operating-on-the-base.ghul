@@ -2,6 +2,7 @@ use default
 
 // ghūl has no exponentiation operator, so this program declares one. A
 // prefix operator applies to its operand before any infix operator does.
+
 **(base: int, exponent: int) -> int =>
     repeat(base, exponent) |> product()
 

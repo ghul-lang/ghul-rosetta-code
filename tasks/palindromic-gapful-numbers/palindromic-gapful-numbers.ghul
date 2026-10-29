@@ -3,6 +3,7 @@ use default
 // palindromes that start and end with the digit, in increasing order: each
 // length's first half runs upward from the digit, and the second half
 // mirrors it
+
 palindromes(digit: int) -> long{} is
     for length in from(3) do
         let half = (length + 1) / 2

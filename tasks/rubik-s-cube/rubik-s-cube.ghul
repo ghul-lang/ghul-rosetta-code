@@ -63,12 +63,7 @@ square(
     half: double,
     angle: double
 ) -> Collections.List[(x: double, y: double)] =>
-    [
-        (-1.0D, -1.0D),
-        (1.0D, -1.0D),
-        (1.0D, 1.0D),
-        (-1.0D, 1.0D)
-    ]
+    [(-1.0D, -1.0D), (1.0D, -1.0D), (1.0D, 1.0D), (-1.0D, 1.0D)]
         |> map((a, b) =>
             turned(
                 plus(

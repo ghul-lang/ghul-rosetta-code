@@ -5,6 +5,7 @@ use default
 // numbers at least as long as the next square, adding that square extends
 // the run by the square itself, which keeps it longer than every square
 // still to come: nothing above m is ever missing, and m is the last.
+
 let reachable = LIST([true])
 let root mut = 0
 

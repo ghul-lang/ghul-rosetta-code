@@ -3,6 +3,7 @@ use default
 // Counts free trees of carbon atoms with at most four bonds each, rooting
 // each at its centroid so that no molecule is counted twice. A molecule
 // with two central atoms is counted separately, by pairing two halves.
+
 let limit = 33
 let bonds = 4
 

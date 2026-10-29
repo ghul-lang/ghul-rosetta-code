@@ -3,6 +3,7 @@ use System.Math.*
 
 // The library takes and returns radians, so the degree column is the same
 // angle converted on the way in and on the way out.
+
 to_radians(degrees: double) -> double => degrees * pi / 180.0
 to_degrees(radians: double) -> double => radians * 180.0 / pi
 

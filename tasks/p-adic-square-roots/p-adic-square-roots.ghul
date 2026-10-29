@@ -54,6 +54,7 @@ to_digits(n: bigint, p: bigint, k: int) -> List[bigint] =>
     0..k |> map(i => n / bigint.pow(p, i) % p) |> collect()
 
 // the rational a/b nearest to n modulo p^k, by Gauss lattice reduction
+
 rational(n: bigint, p: bigint, k: int) -> (
     top: bigint,
     bottom: bigint
@@ -81,6 +82,7 @@ si
 
 // every residue modulo p^j whose square is u modulo p^j, one digit at a
 // time; for p = 2 a square root is only settled from three digits up
+
 square_roots(
     u: bigint,
     p: bigint,

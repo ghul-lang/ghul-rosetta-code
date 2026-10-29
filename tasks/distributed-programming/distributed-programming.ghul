@@ -11,6 +11,7 @@ use System.Text.Json.JsonSerializerOptions
 
 // The two sides speak JSON-RPC 2.0 over HTTP. Run one copy as
 // `serve http://+:8080/` and another with that address to call it.
+
 json(value: object) -> string =>
     JsonSerializer.serialize(value, JsonSerializerOptions())
 

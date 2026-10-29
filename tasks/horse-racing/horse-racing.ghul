@@ -3,6 +3,7 @@ use default
 // A length is a fifth of a second and two pounds cost a length, so each
 // pound carried is a tenth of a second over the mile. Every time below is
 // what the horse would run carrying its race 4 weight.
+
 use Runner = (horse: string, weight: string, behind: double)
 
 let fillies = SET(["B", "D", "I", "J"])

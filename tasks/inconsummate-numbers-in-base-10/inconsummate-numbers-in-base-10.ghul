@@ -2,6 +2,7 @@ use default
 
 // Every n below 10^7 has a digit sum of at most 63, so any consummate
 // number below 100,000 is n / digit_sum(n) for some n below 6.3 million.
+
 let limit = 100_000
 
 let consummate = (

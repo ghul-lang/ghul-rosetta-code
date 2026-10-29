@@ -2,6 +2,7 @@ use default
 
 // Flipping is its own inverse, so the stacks furthest from sorted are the
 // ones a breadth-first search from the sorted stack reaches last.
+
 flip(stack: string, count: int) -> string =>
     let top = stack.substring(0, count) |> reverse() |> join("")
     in

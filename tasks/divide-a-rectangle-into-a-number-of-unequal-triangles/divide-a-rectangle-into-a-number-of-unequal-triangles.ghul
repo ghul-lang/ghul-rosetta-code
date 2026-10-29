@@ -15,10 +15,7 @@ si
 use Triangle = (a: P, b: P, c: P)
 
 sides(t: Triangle) -> List[double] =>
-    [
-        (t.b - t.a).length, (t.c - t.b).length,
-        (t.a - t.c).length
-    ]
+    [(t.b - t.a).length, (t.c - t.b).length, (t.a - t.c).length]
         |> sort()
         |> collect()
 

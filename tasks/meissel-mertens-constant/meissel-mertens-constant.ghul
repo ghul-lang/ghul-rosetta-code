@@ -2,6 +2,7 @@ use default
 
 // the terms fall off as 1/p², so stopping at ten million leaves an error
 // of about 3e-9
+
 let gamma = 0.57721566490153286
 
 term(p: int) -> double =>

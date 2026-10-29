@@ -9,6 +9,7 @@ use System.Security.Cryptography.SHA256
 // Works on any filesystem .NET can read. Files are grouped by size, then by
 // a SHA-256 of their contents. Hard links are not identified: .NET has no
 // portable way to ask whether two paths name the same file.
+
 use Group = (size: long, paths: string[])
 
 digest(path: string) -> string =>

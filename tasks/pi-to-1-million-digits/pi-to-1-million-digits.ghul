@@ -2,6 +2,7 @@ use default
 use System.Diagnostics.Stopwatch
 
 // The Chudnovsky series, summed by binary splitting.
+
 let c3_over_24 = 640_320n * 640_320n * 640_320n / 24n
 
 split(a: long, b: long) -> (p: bigint, q: bigint, t: bigint) is

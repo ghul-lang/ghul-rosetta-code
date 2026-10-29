@@ -2,6 +2,7 @@ use default
 
 // A p-adic number here is k digits, lowest first, and an exponent: its
 // value is the sum of digit i times p^(i + exponent).
+
 use PAdic = (digits: List[bigint], exponent: int)
 
 floor_div(a: bigint, b: bigint) -> bigint =>
@@ -94,6 +95,7 @@ show(x: PAdic) -> string =>
 // The rational a/b nearest the digits is the shortest vector (a, b) in the
 // lattice of pairs with a = b * N modulo p^k, found by Gauss reduction. It
 // is only a valid answer when b has no factor of p.
+
 rational(x: PAdic, p: bigint, k: int) -> string is
     let modulus = bigint.pow(p, k)
     let n =

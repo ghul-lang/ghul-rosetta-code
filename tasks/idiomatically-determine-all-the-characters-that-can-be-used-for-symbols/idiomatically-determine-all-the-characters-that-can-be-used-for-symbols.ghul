@@ -4,6 +4,7 @@ use System.Globalization.UnicodeCategory
 
 // These are the tests the ghūl compiler's own scanner applies. An
 // identifier is read in UTF-16 code units, so only the basic plane counts.
+
 starts_identifier(c: char) -> bool =>
     if int(c) <= 0x7E then
         char.is_ascii_letter(c) \/ c == '_'

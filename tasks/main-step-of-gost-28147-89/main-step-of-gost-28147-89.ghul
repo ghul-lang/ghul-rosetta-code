@@ -23,6 +23,7 @@ substitute(x: uint) -> uint =>
 
 // the left half is combined with the key element, substituted, rotated
 // left 11 bits and mixed into the right half
+
 main_step(block: ulong, key: uint) -> ulong =>
     let
         low = uint(block & 0xFFFF_FFFFul),

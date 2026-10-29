@@ -1,7 +1,8 @@
 // A line comment runs from the slashes to the end of the line.
+
 /* A block comment runs from the opening marker to the closing one, and
-can span as many lines as it likes. Block comments do not nest: the
-first closing marker ends the comment however many openers precede it. */
+   can span as many lines as it likes. Block comments do not nest: the
+   first closing marker ends the comment however many openers precede it. */
 
 use default
 

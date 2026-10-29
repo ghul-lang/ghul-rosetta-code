@@ -6,6 +6,7 @@ let name = "world"
 // that expands variables and none that suppresses it. There are no verbatim
 // strings and no here-documents; adjacent literals chain instead, which is
 // how a long one is written across several lines.
+
 write_line("a plain string literal")
 write_line("interpolated: hello, {name}")
 write_line("escaped: a tab[\t], a quote[\"], a backslash[\\]")

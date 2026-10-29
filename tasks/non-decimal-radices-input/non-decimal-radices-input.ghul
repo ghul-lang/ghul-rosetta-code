@@ -5,6 +5,7 @@ use System.Globalization.NumberStyles
 
 // Convert.ToInt64 parses bases 2, 8, 10 and 16, and for base 16 accepts a
 // leading 0x as well. Other bases have no built-in parser.
+
 let cases = [
     ("1a", 16), ("0x1A", 16), ("777", 8), ("101010", 2),
     ("-123", 10)

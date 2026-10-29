@@ -73,12 +73,7 @@ square(
     half: double,
     angle: double
 ) -> List[(x: double, y: double)] =>
-    [
-        (-1.0, -1.0),
-        (1.0, -1.0),
-        (1.0, 1.0),
-        (-1.0, 1.0)
-    ]
+    [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(
                 centre + u * (a * half) + v * (b * half),

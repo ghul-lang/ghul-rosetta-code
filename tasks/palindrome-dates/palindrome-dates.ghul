@@ -4,6 +4,7 @@ use System.DateTime
 
 // A palindromic yyyymmdd is fixed by its year: the month and day are the
 // year's digits reversed, so each year gives at most one date.
+
 palindrome_date(year: int) -> DateTime? => (
     let digits = "{year:D4}" |> reverse() |> join(""),
         month = int.parse(digits.substring(0, 2)),

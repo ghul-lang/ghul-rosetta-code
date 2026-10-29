@@ -24,6 +24,7 @@ identity(n: int) -> Matrix =>
 
 // ghūl has no exponentiation operator, so ^ is declared here for a
 // matrix raised to an integer power, by repeated squaring.
+
 ^(m: Matrix, power: int) -> Matrix is
     let result mut = identity(m.count)
     let base mut = m

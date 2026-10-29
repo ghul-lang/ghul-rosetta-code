@@ -12,6 +12,7 @@ lucas(b: bigint) -> bigint{} =>
 
 // successive ratios of the sequence, each truncated to the given number of
 // places, until one repeats the one before it
+
 approximate(b: bigint, places: int) -> (
     value: string,
     iterations: int

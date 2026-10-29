@@ -5,12 +5,7 @@ use Node = (row: int, col: int)
 let size = 10
 
 neighbours(node: Node) -> Node{} =>
-    [
-        (-1, 0),
-        (1, 0),
-        (0, -1),
-        (0, 1)
-    ]
+    [(-1, 0), (1, 0), (0, -1), (0, 1)]
         |> map((dr, dc) => (
             row = node.row + dr,
             col = node.col + dc
