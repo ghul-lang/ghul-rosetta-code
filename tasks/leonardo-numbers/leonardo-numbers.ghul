@@ -15,7 +15,10 @@ leonardo(first: int, second: int, add: int) -> int{} is
 si
 
 show(first: int, second: int, add: int) is
-    let terms = leonardo(first, second, add) |> take(25) |> map(t => "{t}")
+    let terms =
+        leonardo(first, second, add)
+            |> take(25)
+            |> map(t => "{t}")
 
     write_line("L(0)={first} L(1)={second} add={add}")
     write_line("  {terms |> join(" ")}")

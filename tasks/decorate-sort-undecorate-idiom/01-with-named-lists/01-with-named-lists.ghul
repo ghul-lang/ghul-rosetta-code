@@ -1,15 +1,23 @@
 use default
 
-decorate_sort_undecorate[T, K: Ghul.Comparable[K]]
-    (items: T{}, key: (T) -> K) -> T{}
-=>
+decorate_sort_undecorate[T, K: Ghul.Comparable[K]](
+    items: T{},
+    key: (T) -> K
+) -> T{} =>
     let decorated =
-        items |> map(item => (item, key = key(item))) in
+        items |> map(item => (item, key = key(item)))
+    in
     let sorted = decorated |> sort_by(pair => pair.key) in
     sorted |> map(pair => pair.item)
 
-let words =
-    ["Rosetta", "Code", "is", "a", "programming", "chrestomathy", "site"]
+let words = [
+    "Rosetta", "Code", "is", "a", "programming", "chrestomathy",
+    "site"
+]
 
-write_line(words |> decorate_sort_undecorate(w => w.length) |> join())
-write_line(words |> decorate_sort_undecorate(w => w[0]) |> join())
+write_line(
+    words |> decorate_sort_undecorate(w => w.length) |> join()
+)
+write_line(
+    words |> decorate_sort_undecorate(w => w[0]) |> join()
+)

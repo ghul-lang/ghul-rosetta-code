@@ -1,4 +1,7 @@
-enum Color is RED, BLACK, si
+enum Color is
+    RED,
+    BLACK
+si
 
 use default
 use Color.RED
@@ -14,13 +17,21 @@ use Tree.NODE
 
 balance(c: Color, l: Tree, v: int, r: Tree) -> Tree =>
     case (c, l, v, r)
-    when (~BLACK, (~RED, (~RED, a, x, b): NODE, y, m): NODE, z, d) then
+    when
+        (~BLACK, (~RED, (~RED, a, x, b): NODE, y, m): NODE, z, d)
+    then
         NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
-    when (~BLACK, (~RED, a, x, (~RED, b, y, m): NODE): NODE, z, d) then
+    when
+        (~BLACK, (~RED, a, x, (~RED, b, y, m): NODE): NODE, z, d)
+    then
         NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
-    when (~BLACK, a, x, (~RED, (~RED, b, y, m): NODE, z, d): NODE) then
+    when
+        (~BLACK, a, x, (~RED, (~RED, b, y, m): NODE, z, d): NODE)
+    then
         NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
-    when (~BLACK, a, x, (~RED, b, y, (~RED, m, z, d): NODE): NODE) then
+    when
+        (~BLACK, a, x, (~RED, b, y, (~RED, m, z, d): NODE): NODE)
+    then
         NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
     else
         NODE(c, l, v, r)
@@ -49,7 +60,8 @@ insert(tree: Tree, element: int) -> Tree =>
 in_order(tree: Tree) -> string =>
     case tree
     when _: EMPTY then ""
-    when (c, l, v, r): NODE then "{in_order(l)}{v} {in_order(r)}"
+    when (c, l, v, r): NODE then
+        "{in_order(l)}{v} {in_order(r)}"
     esac
 
 black_height(tree: Tree) -> int =>
@@ -75,7 +87,8 @@ is_red(tree: Tree) -> bool =>
     when (c, l, v, r): NODE then c == RED
     esac
 
-let tree = [11, 2, 14, 1, 7, 15, 5, 8, 4] |> reduce(EMPTY, insert)
+let tree = [11, 2, 14, 1, 7, 15, 5, 8, 4]
+    |> reduce(EMPTY, insert)
 
 write_line("in order: {in_order(tree)}")
 write_line("black height: {black_height(tree)}")

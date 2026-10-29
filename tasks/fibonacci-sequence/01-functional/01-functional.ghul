@@ -1,9 +1,10 @@
 use default
 
-let fibonacci_sequence = stream(
-    (0, 1),
-    (previous, current) =>
-        previous || (current, previous + current)
+let fibonacci_sequence = stream((0, 1), (previous, current) =>
+    Ghul.Pipes.STREAM.YIELD(
+        previous,
+        (current, previous + current)
+    )
 )
 
 let fib = n => fibonacci_sequence |> skip(n) |> first()
@@ -12,6 +13,7 @@ fibonacci_sequence
     |> take(10)
     |> index()
     |> each((position, value) =>
-        write_line("fib({position}) = {value}"))
+        write_line("fib({position}) = {value}")
+    )
 
 write_line("fib(30) = {fib(30)}")

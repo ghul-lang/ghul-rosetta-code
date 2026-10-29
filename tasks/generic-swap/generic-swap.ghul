@@ -7,20 +7,20 @@ si
 let a mut = 1
 let b mut = 2
 
-swap(a ref, b ref)
+swap(a ref , b ref )
 
 write_line("ints:    {a} {b}")
 
 let s mut = "first"
 let t mut = "second"
 
-swap(s ref, t ref)
+swap(s ref , t ref )
 
 write_line("strings: {s} {t}")
 
 let p mut = (1, "one")
 let q mut = (2, "two")
 
-swap(p ref, q ref)
+swap(p ref , q ref )
 
 write_line("tuples:  {p} {q}")

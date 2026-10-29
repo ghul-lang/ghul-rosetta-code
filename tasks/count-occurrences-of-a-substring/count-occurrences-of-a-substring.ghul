@@ -5,7 +5,8 @@ occurrences(haystack: string, needle: string) -> int =>
     if at < 0 then
         0
     else
-        1 + occurrences(haystack[at + needle.length..<0], needle)
+        1 +
+        occurrences(haystack[at + needle.length..<0], needle)
     fi
 
 write_line("{occurrences("the three truths", "th")}")

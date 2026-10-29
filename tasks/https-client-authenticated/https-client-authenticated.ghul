@@ -10,19 +10,32 @@ use System.Security.Cryptography.X509Certificates.X509KeyStorageFlags
 // certificate of its own. badssl.com publishes exactly such a certificate
 // and key, reachable only by presenting it.
 fetch(
-    url: string, identity: X509Certificate2, handler: HttpClientHandler
+    url: string,
+    identity: X509Certificate2,
+    handler: HttpClientHandler
 ) -> string is
-    handler.client_certificate_options = ClientCertificateOption.MANUAL
+    handler.client_certificate_options =
+        ClientCertificateOption.MANUAL
     handler.client_certificates.add(identity)
 
     HttpClient(handler).get_string_async(url).result
 si
 
-let pfx = HttpClient().get_byte_array_async(
-    "https://badssl.com/certs/badssl.com-client.p12").result
+let pfx =
+    HttpClient().get_byte_array_async(
+        "https://badssl.com/certs/badssl.com-client.p12"
+    ).result
 let identity = X509CertificateLoader.load_pkcs12(
-    pfx, cast string?("badssl.com"), X509KeyStorageFlags.DEFAULT_KEY_SET,
-    null)
+    pfx,
+    cast string?("badssl.com"),
+    X509KeyStorageFlags.DEFAULT_KEY_SET,
+    null
+)
 
-IO.Std.write(fetch(
-    "https://client.badssl.com/", identity, HttpClientHandler()))
+IO.Std.write(
+    fetch(
+        "https://client.badssl.com/",
+        identity,
+        HttpClientHandler()
+    )
+)

@@ -7,7 +7,9 @@ let words = SET(IO.File.read_all_lines("unixdict.txt"))
 
 let pairs =
     words
-        |> filter(w => let r = reversed(w) in w < r /\ words.contains(r))
+        |> filter(w =>
+            let r = reversed(w) in w < r /\ words.contains(r)
+        )
         |> sort()
         |> collect()
 

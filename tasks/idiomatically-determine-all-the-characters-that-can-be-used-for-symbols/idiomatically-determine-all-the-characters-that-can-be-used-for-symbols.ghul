@@ -4,31 +4,35 @@ use System.Globalization.UnicodeCategory
 
 // These are the tests the ghūl compiler's own scanner applies. An
 // identifier is read in UTF-16 code units, so only the basic plane counts.
-
 starts_identifier(c: char) -> bool =>
     if int(c) <= 0x7E then
         char.is_ascii_letter(c) \/ c == '_'
     else
         char.is_letter(c) \/
-            char.get_unicode_category(c) == UnicodeCategory.LETTER_NUMBER
+        char.get_unicode_category(
+            c
+        ) == UnicodeCategory.LETTER_NUMBER
     fi
 
 continues_identifier(c: char) -> bool =>
-    starts_identifier(c) \/ char.is_ascii_digit(c) \/ (
-        int(c) > 0x7E /\ (
-            let category = char.get_unicode_category(c) in
-            category == UnicodeCategory.DECIMAL_DIGIT_NUMBER \/
-            category == UnicodeCategory.NON_SPACING_MARK \/
-            category == UnicodeCategory.SPACING_COMBINING_MARK \/
-            category == UnicodeCategory.CONNECTOR_PUNCTUATION))
+    starts_identifier(c) \/
+    char.is_ascii_digit(c) \/
+    (
+        int(c) > 0x7E /\
+        let category = char.get_unicode_category(c) in
+        category == UnicodeCategory.DECIMAL_DIGIT_NUMBER \/
+        category == UnicodeCategory.NON_SPACING_MARK \/
+        category == UnicodeCategory.SPACING_COMBINING_MARK \/
+        category == UnicodeCategory.CONNECTOR_PUNCTUATION
+    )
 
-let characters =
-    0..0x10000 |> map(char)
+let characters = 0..0x10000 |> map(char)
 
 let ascii = characters |> take(0x7F)
 
 let ascii_first = ascii |> filter(starts_identifier) |> join("")
-let ascii_later = ascii |> filter(continues_identifier) |> join("")
+let ascii_later =
+    ascii |> filter(continues_identifier) |> join("")
 let all_first = characters |> count(starts_identifier)
 let all_later = characters |> count(continues_identifier)
 

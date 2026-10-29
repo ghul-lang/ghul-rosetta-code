@@ -8,5 +8,8 @@ write_line("word size: {word_bits} bits")
 let one = System.BitConverter.get_bytes(1)
 
 write_line(
-    "endianness: {if one[0] == 1ub then "little" else "big" fi}")
-write_line("BitConverter agrees: {System.BitConverter.is_little_endian}")
+    "endianness: {if one[0] == 1ub then "little" else "big" fi}"
+)
+write_line(
+    "BitConverter agrees: {System.BitConverter.is_little_endian}"
+)

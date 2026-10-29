@@ -7,8 +7,10 @@ let shrink = 0.76D
 let image = IMAGE(500, 500)
 
 branch(
-    x: double, y: double,
-    angle: double, length: double,
+    x: double,
+    y: double,
+    angle: double,
+    length: double,
     depth: int
 ) is
     if depth == 0 then
@@ -21,8 +23,20 @@ branch(
     image.stroke(0.6D * double(depth))
     image.line(x, y, tip_x, tip_y)
 
-    branch(tip_x, tip_y, angle - spread, length * shrink, depth - 1)
-    branch(tip_x, tip_y, angle + spread, length * shrink, depth - 1)
+    branch(
+        tip_x,
+        tip_y,
+        angle - spread,
+        length * shrink,
+        depth - 1
+    )
+    branch(
+        tip_x,
+        tip_y,
+        angle + spread,
+        length * shrink,
+        depth - 1
+    )
 si
 
 image.view(0.0D, 0.0D, 500.0D, 500.0D)

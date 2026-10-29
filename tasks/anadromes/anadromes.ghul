@@ -1,18 +1,22 @@
 use default
 
-reversed(word: string) -> string => word |> reverse() |> join("")
+reversed(word: string) -> string =>
+    word |> reverse() |> join("")
 
-let words =
-    [word.to_lower()
-        for word in IO.File.read_lines("words.txt")
-        if word.length > 6]
-        |> collect_set()
+let words = [
+    word.to_lower()
+    for word in IO.File.read_lines("words.txt")
+    if word.length > 6
+]
+    |> collect_set()
 
-let pairs = words
-    |> sort()
-    |> map(word => (word, reversal = reversed(word)))
-    |> filter((word, reversal) =>
-        word < reversal /\ words.contains(reversal))
+let pairs =
+    words
+        |> sort()
+        |> map(word => (word, reversal = reversed(word)))
+        |> filter((word, reversal) =>
+            word < reversal /\ words.contains(reversal)
+        )
 
 for (word, reversal) in pairs do
     write_line("{word,9} <-> {reversal}")

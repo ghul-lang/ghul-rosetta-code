@@ -17,10 +17,11 @@ exponents(n: int, highest: int) -> int{} is
 si
 
 report(wanted: int, least_ways: int, highest: int) is
-    let found = from(2)
-        |> map(n => (n, exponents(n, highest) |> collect()))
-        |> filter(((_, ways)) => ways.count >= least_ways)
-        |> take(wanted)
+    let found =
+        from(2)
+            |> map(n => (n, exponents(n, highest) |> collect()))
+            |> filter(((_, ways)) => ways.count >= least_ways)
+            |> take(wanted)
 
     for (n, ways) in found do
         write_line(ways |> map(e => "{n}^{e}") |> join())

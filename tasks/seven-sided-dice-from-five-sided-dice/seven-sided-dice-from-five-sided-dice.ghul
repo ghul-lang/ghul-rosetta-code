@@ -15,14 +15,16 @@ dice7() -> int is
 si
 
 check_distribution(
-    generate: () -> int, calls: int, tolerance: double
+    generate: () -> int,
+    calls: int,
+    tolerance: double
 ) -> bool is
     let counts =
         (0..calls)
-        |> map(_ => generate())
-        |> group_by(value => value)
-        |> map(entry => (entry.key, entry.value.count))
-        |> collect_map()
+            |> map(_ => generate())
+            |> group_by(value => value)
+            |> map(entry => (entry.key, entry.value.count))
+            |> collect_map()
 
     let expected = double(calls) / double(counts.count)
     let uniform mut = true
@@ -31,7 +33,12 @@ check_distribution(
         let difference = double(counts[value]) - expected
         let deviation = System.Math.abs(difference) / expected
 
-        let flag = if deviation > tolerance then "  NOT UNIFORM" else "" fi
+        let flag =
+            if deviation > tolerance then
+                "  NOT UNIFORM"
+            else
+                ""
+            fi
         write_line("{value}: {counts[value],8}{flag}")
 
         uniform = uniform /\ deviation <= tolerance
@@ -47,4 +54,5 @@ write_line(
         "every face is within 1% of the expected count"
     else
         "the distribution is not uniform"
-    fi)
+    fi
+)

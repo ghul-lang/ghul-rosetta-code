@@ -2,7 +2,9 @@ use default
 
 let limit = 35_000_000
 
-write_line("summing the divisors of every number up to {limit:N0}")
+write_line(
+    "summing the divisors of every number up to {limit:N0}"
+)
 
 let chowla = repeat(0, limit + 1) |> collect_mutable()
 

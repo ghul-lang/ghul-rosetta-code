@@ -9,7 +9,8 @@ let distinct = 0..n |> map(_ => BOX(0)) |> collect()
 distinct[0].value = 42
 
 write_line(
-    "distinct: {distinct |> map(box => "{box.value}") |> join(" ")}")
+    "distinct: {distinct |> map(box => "{box.value}") |> join(" ")}"
+)
 
 let shared = BOX(0)
 let same = 0..n |> map(_ => shared) |> collect()
@@ -17,4 +18,5 @@ let same = 0..n |> map(_ => shared) |> collect()
 same[0].value = 42
 
 write_line(
-    "shared:   {same |> map(box => "{box.value}") |> join(" ")}")
+    "shared:   {same |> map(box => "{box.value}") |> join(" ")}"
+)

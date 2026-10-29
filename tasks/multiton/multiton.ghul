@@ -1,6 +1,6 @@
 use default
 
-class MULTITON[K, V](create: K -> V private) is
+class MULTITON[K, V](create: (K) -> V private) is
     _instances: MAP[K, V]
     _lock: object
 
@@ -14,7 +14,7 @@ class MULTITON[K, V](create: K -> V private) is
 
         let existing mut
 
-        if _instances.try_get_value(key, existing ref) then
+        if _instances.try_get_value(key, existing ref ) then
             return existing
         fi
 
@@ -48,14 +48,11 @@ si
 
 let made mut = 0
 
-let connections =
-    MULTITON(
-        host => (
-            made = made + 1
+let connections = MULTITON(host => (
+    made = made + 1
 
-            CONNECTION(host)
-        )
-    )
+    CONNECTION(host)
+))
 
 let alpha = connections.get("alpha")
 let beta = connections.get("beta")
@@ -65,22 +62,23 @@ write_line("{alpha}")
 write_line("{beta}")
 
 write_line(
-    "asking twice for alpha gives the same object: {alpha == alpha_again}")
-write_line("alpha and beta are different objects: {alpha != beta}")
+    "asking twice for alpha gives the same object: {alpha == alpha_again}"
+)
+write_line(
+    "alpha and beta are different objects: {alpha != beta}"
+)
 write_line(
     "requests: 3, instances made: {made}, "
-    "instances held: {connections.count}")
+    "instances held: {connections.count}"
+)
 
 let keys = ["one", "two", "three"]
 
-Tasks.Parallel.`for(
-    0,
-    300,
-    i => (
-        let _ = connections.get(keys[i % keys.count])
-    )
-)
+Tasks.Parallel.`for(0, 300, i => (
+    let _ = connections.get(keys[i % keys.count])
+))
 
 write_line(
     "300 more requests over {keys.count} keys, in parallel: "
-    "{made} made in total, {connections.count} held")
+    "{made} made in total, {connections.count} held"
+)

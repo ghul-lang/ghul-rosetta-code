@@ -3,13 +3,17 @@ use default
 use Factor = (prime: bigint, power: int)
 
 order_part(
-    a: bigint, q: Factor, totient: bigint, modulus: bigint
+    a: bigint,
+    q: Factor,
+    totient: bigint,
+    modulus: bigint
 ) -> bigint =>
     let cofactor = totient / bigint.pow(q.prime, q.power) in
-    let walk = (y: bigint, d: int) rec =>
-        if y.is_one then bigint.pow(q.prime, d)
-        else rec(mod_pow(y, q.prime, modulus), d + 1)
-        fi
+    let walk =
+        (y: bigint, d: int) rec =>
+            if y.is_one then bigint.pow(q.prime, d)
+            else rec(mod_pow(y, q.prime, modulus), d + 1)
+            fi
     in
     walk(mod_pow(a, cofactor, modulus), 0)
 
@@ -18,10 +22,10 @@ order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
         modulus = bigint.pow(factor.prime, factor.power),
         totient = modulus / factor.prime * (factor.prime - 1n)
     in
-    totient
-        |> factorize()
-        |> map(order_part(a, *, totient, modulus))
-        |> reduce(1n, * * *)
+        totient
+            |> factorize()
+            |> map(order_part(a, *, totient, modulus))
+            |> reduce(1n, * * *)
 
 multiplicative_order(a: bigint, m: bigint) -> bigint =>
     m
@@ -45,5 +49,7 @@ let cases = [
 ]
 
 for (label, a, m) in cases do
-    write_line("order of {label} modulo {m} = {multiplicative_order(a, m)}")
+    write_line(
+        "order of {label} modulo {m} = {multiplicative_order(a, m)}"
+    )
 od

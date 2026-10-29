@@ -28,5 +28,6 @@ for limit in 2::8 |> map(k => repeat(10L, k) |> product()) do
 
     write_line(
         "Perimeter up to {limit,11:N0}: {total,11:N0} triples, "
-        "{primitive,10:N0} primitive")
+        "{primitive,10:N0} primitive"
+    )
 od

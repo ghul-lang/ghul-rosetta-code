@@ -6,19 +6,26 @@ let width = 12
 let height = 8
 let random = Random(21)
 
-let snake =
-    LIST([(x = 5, y = 4), (x = 4, y = 4), (x = 3, y = 4)])
+let snake = LIST([
+    (x = 5, y = 4),
+    (x = 4, y = 4),
+    (x = 3, y = 4)
+])
 
 let steps = [
     ('w', (dx = 0, dy = -1)),
     ('a', (dx = -1, dy = 0)),
     ('s', (dx = 0, dy = 1)),
     ('d', (dx = 1, dy = 0))
-] |> collect_map()
+]
+    |> collect_map()
 
 new_food() -> (x: int, y: int) is
     while true do
-        let spot = (x = random.next(width), y = random.next(height))
+        let spot = (
+            x = random.next(width),
+            y = random.next(height)
+        )
 
         if !snake.contains(spot) then
             return spot
@@ -41,8 +48,10 @@ show() is
                     elif snake.contains(spot) then "o"
                     elif spot =~ food then "*"
                     else "."
-                    fi)
-                |> join(""))
+                    fi
+                )
+                |> join("")
+        )
     od
 
     write_line("length {snake.count}")
@@ -52,7 +61,8 @@ step() -> bool is
     let head = snake[0]
     let next = (
         x = (head.x + heading.dx + width) % width,
-        y = (head.y + heading.dy + height) % height)
+        y = (head.y + heading.dy + height) % height
+    )
 
     let eats = next =~ food
     let vacated = !eats /\ next =~ snake[snake.count - 1]
@@ -74,7 +84,9 @@ step() -> bool is
     true
 si
 
-write_line("steer with w, a, s and d; each letter moves one square")
+write_line(
+    "steer with w, a, s and d; each letter moves one square"
+)
 show()
 
 let alive mut = true
@@ -92,7 +104,9 @@ while alive do
         if steps.contains_key(key) then
             let turn = steps[key]
 
-            if turn.dx != -heading.dx \/ turn.dy != -heading.dy then
+            if
+                turn.dx != -heading.dx \/ turn.dy != -heading.dy
+            then
                 heading = turn
             fi
         fi
@@ -107,5 +121,7 @@ while alive do
 od
 
 if !alive then
-    write_line("the snake bit itself: game over at length {snake.count}")
+    write_line(
+        "the snake bit itself: game over at length {snake.count}"
+    )
 fi

@@ -7,7 +7,10 @@ let width = 320
 let height = 240
 let seconds = 3
 
-let live = System.Environment.get_environment_variable("GHUL_LIVE_IMAGES")?
+let live =
+    System.Environment.get_environment_variable(
+        "GHUL_LIVE_IMAGES"
+    )?
 
 let random = System.Random()
 let image = IMAGE(width, height)

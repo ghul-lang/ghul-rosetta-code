@@ -21,14 +21,24 @@ show(terms: long{}) -> string =>
     esac
 
 let examples = [
-    [(1L, 2L), (3L, 1L), (23L, 8L), (13L, 11L), (22L, 7L), (-151L, 77L)],
     [
-        (14142L, 10000L), (141421L, 100000L), (1414214L, 1000000L),
+        (1L, 2L),
+        (3L, 1L),
+        (23L, 8L),
+        (13L, 11L),
+        (22L, 7L),
+        (-151L, 77L)
+    ],
+    [
+        (14142L, 10000L), (141421L, 100000L),
+        (1414214L, 1000000L),
         (14142136L, 10000000L)
     ],
     [
-        (31L, 10L), (314L, 100L), (3142L, 1000L), (31428L, 10000L),
-        (314285L, 100000L), (3142857L, 1000000L), (31428571L, 10000000L),
+        (31L, 10L), (314L, 100L), (3142L, 1000L),
+        (31428L, 10000L),
+        (314285L, 100000L), (3142857L, 1000000L),
+        (31428571L, 10000000L),
         (314285714L, 100000000L)
     ]
 ]
@@ -37,7 +47,9 @@ for group in examples do
     for (numerator, denominator) in group do
         let fraction = "{numerator}/{denominator}"
 
-        write_line("{fraction,20} = {show(r2cf(numerator, denominator))}")
+        write_line(
+            "{fraction,20} = {show(r2cf(numerator, denominator))}"
+        )
     od
 
     write_line("")

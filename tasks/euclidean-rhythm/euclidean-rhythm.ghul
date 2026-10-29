@@ -9,8 +9,13 @@ euclid(pulses: int, steps: int) -> string is
     while second_count > 1 do
         let fewer = System.Math.min(first_count, second_count)
         let leftover =
-            if first_count > second_count then first else second fi
-        let leftover_count = first_count + second_count - 2 * fewer
+            if first_count > second_count then
+                first
+            else
+                second
+            fi
+        let leftover_count =
+            first_count + second_count - 2 * fewer
 
         first = "{first}{second}"
         first_count = fewer

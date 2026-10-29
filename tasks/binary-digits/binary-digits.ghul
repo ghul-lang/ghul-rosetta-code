@@ -1,7 +1,11 @@
 use default
 
 binary(value: int) -> string =>
-    if value < 2 then "{value}" else "{binary(value / 2)}{value % 2}" fi
+    if value < 2 then
+        "{value}"
+    else
+        "{binary(value / 2)}{value % 2}"
+    fi
 
 for value in [5, 50, 9000] do
     write_line(binary(value))

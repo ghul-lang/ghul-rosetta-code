@@ -34,10 +34,14 @@ class EERTREE(text: string) is
                 _nodes[parent].edges[letter] = node
 
                 if _nodes[node].length > 1 then
-                    let link =
-                        _extend_from(_nodes[parent].suffix, at, letter)
+                    let link = _extend_from(
+                        _nodes[parent].suffix,
+                        at,
+                        letter
+                    )
 
-                    _nodes[node].suffix = _nodes[link].edges[letter]
+                    _nodes[node].suffix =
+                        _nodes[link].edges[letter]
                 fi
 
                 longest = node
@@ -48,7 +52,8 @@ class EERTREE(text: string) is
     _extend_from(node: int, at: int, letter: char) -> int => (
         let current mut = node
 
-        while at - _nodes[current].length - 1 < 0 \/
+        while
+            at - _nodes[current].length - 1 < 0 \/
             text[at - _nodes[current].length - 1] != letter
         do
             current = _nodes[current].suffix

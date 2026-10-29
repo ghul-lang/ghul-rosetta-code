@@ -19,8 +19,12 @@ attack_masks(n: int) -> ulong[] is
             let r = other / n
             let c = other % n
 
-            if r == row \/ c == column \/
-                    r - c == row - column \/ r + c == row + column then
+            if
+                r == row \/
+                c == column \/
+                r - c == row - column \/
+                r + c == row + column
+            then
                 mask = mask | (1ul << other)
             fi
         od
@@ -32,8 +36,14 @@ attack_masks(n: int) -> ulong[] is
 si
 
 search(
-    attacks: ulong[], left: int, next_black: int, next_white: int,
-    black: ulong, white: ulong, black_reach: ulong, white_reach: ulong
+    attacks: ulong[],
+    left: int,
+    next_black: int,
+    next_white: int,
+    black: ulong,
+    white: ulong,
+    black_reach: ulong,
+    white_reach: ulong
 ) -> Armies? is
     if left == 0 then
         return (black = black, white = white)
@@ -42,12 +52,18 @@ search(
     let taken = black | white
     let everything = (1ul << attacks.count - 1) * 2ul - 1ul
     let for_black =
-        everything & \((1ul << next_black) - 1ul) & \(taken | white_reach)
+        everything &
+        \((1ul << next_black) - 1ul) &
+        \(taken | white_reach)
     let for_white =
-        everything & \((1ul << next_white) - 1ul) & \(taken | black_reach)
+        everything &
+        \((1ul << next_white) - 1ul) &
+        \(taken | black_reach)
 
-    if BitOperations.pop_count(for_black) < left \/
-            BitOperations.pop_count(for_white) < left then
+    if
+        BitOperations.pop_count(for_black) < left \/
+        BitOperations.pop_count(for_white) < left
+    then
         return null
     fi
 
@@ -62,9 +78,15 @@ search(
 
                 if (taken | bit | reach) & other == 0ul then
                     let found = search(
-                        attacks, left - 1, b + 1, w + 1,
-                        black | bit, white | other,
-                        reach, white_reach | attacks[w])
+                        attacks,
+                        left - 1,
+                        b + 1,
+                        w + 1,
+                        black | bit,
+                        white | other,
+                        reach,
+                        white_reach | attacks[w]
+                    )
 
                     if found? then
                         return found
@@ -82,13 +104,16 @@ solve(m: int, n: int) -> Armies? =>
 
 show(armies: Armies, n: int) is
     for row in 0..n do
-        let squares = 0..n |> map(column =>
-            let bit = 1ul << row * n + column in
-            if armies.black & bit != 0ul then "♛"
-            elif armies.white & bit != 0ul then "♕"
-            elif (row + column) % 2 == 0 then "．"
-            else "："
-            fi)
+        let squares =
+            0..n
+                |> map(column =>
+                    let bit = 1ul << row * n + column in
+                    if armies.black & bit != 0ul then "♛"
+                    elif armies.white & bit != 0ul then "♕"
+                    elif (row + column) % 2 == 0 then "．"
+                    else "："
+                    fi
+                )
 
         write_line("    {squares |> join(" ")}")
     od
@@ -132,11 +157,15 @@ si
 
 for (m, n) in [(4, 5), (9, 8), (10, 8)] do
     if let armies = solve(m, n) then
-        write_line("{m} black and {m} white queens on a {n} by {n} board:")
+        write_line(
+            "{m} black and {m} white queens on a {n} by {n} board:"
+        )
         show(armies, n)
         draw(armies, n, "queens-{m}-{n}.png")
     else
-        write_line("{m} of each colour cannot share a {n} by {n} board")
+        write_line(
+            "{m} of each colour cannot share a {n} by {n} board"
+        )
     fi
 
     write_line()

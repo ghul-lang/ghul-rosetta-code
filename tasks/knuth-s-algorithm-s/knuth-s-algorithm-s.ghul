@@ -1,6 +1,9 @@
 use default
 
-s_of_n_creator(n: int, source: System.Random) -> (int) -> int{} is
+s_of_n_creator(
+    n: int,
+    source: System.Random
+) -> (int) -> int{} is
     let sample = LIST()
 
     let seen mut = 0

@@ -5,19 +5,30 @@ egyptian(numerator: bigint, denominator: bigint) -> bigint{} is
         let unit = (denominator + numerator - 1n) / numerator
 
         yield unit
-        yield in
-            egyptian(numerator * unit - denominator, denominator * unit)
+        yield in egyptian(
+            numerator * unit - denominator,
+            denominator * unit
+        )
     fi
 si
 
 describe(numerator: int, denominator: int) -> string =>
     let whole = numerator / denominator in
-    let terms = if whole > 0 then ["[{whole}]"] else [] fi ++
-        (egyptian(cast(numerator % denominator), cast(denominator))
-            |> map(unit => "1/{unit}")) in
+    let terms =
+        if whole > 0 then ["[{whole}]"] else [] fi ++
+        (
+            egyptian(
+                cast(numerator % denominator),
+                cast(denominator)
+            )
+                |> map(unit => "1/{unit}")
+        )
+    in
     "{numerator}/{denominator} = {terms |> join(" + ")}"
 
-for (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)] do
+for
+    (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)]
+do
     write_line(describe(numerator, denominator))
 od
 
@@ -25,7 +36,8 @@ units(numerator: int, denominator: int) -> bigint{} =>
     egyptian(cast(numerator), cast(denominator))
 
 last_unit(numerator: int, denominator: int) -> bigint =>
-    units(numerator, denominator) |> reduce(0n, (_, unit) => unit)
+    units(numerator, denominator)
+        |> reduce(0n, (_, unit) => unit)
 
 report(limit: int) is
     let fractions = {
@@ -44,9 +56,13 @@ report(limit: int) is
 
     write_line("")
     write_line("for proper fractions with terms up to {limit}:")
-    write_line("  most terms: {numerator}/{denominator} with {terms} terms")
+    write_line(
+        "  most terms: {numerator}/{denominator} with {terms} terms"
+    )
     write_line("  largest denominator: {top}/{bottom}")
-    write_line("    with {unit.to_string().length} digits: {unit}")
+    write_line(
+        "    with {unit.to_string().length} digits: {unit}"
+    )
 si
 
 report(99)

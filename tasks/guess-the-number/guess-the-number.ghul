@@ -23,7 +23,7 @@ do
 
     let guess mut = 0
 
-    if !int.try_parse(line, guess ref) then
+    if !int.try_parse(line, guess ref ) then
         write_line("That is not a number.")
 
         continue

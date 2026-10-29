@@ -31,7 +31,8 @@ write_line("the Mertens function for 1 to 99:")
 for row in 0..10 do
     let start = if row == 0 then 1 else row * 10 fi
     let indent = if row == 0 then "   " else "" fi
-    let cells = start::row * 10 + 9 |> map(n => "{mertens(n),3}")
+    let cells =
+        start::row * 10 + 9 |> map(n => "{mertens(n),3}")
 
     write_line("{row * 10,4}:{indent}{cells |> join("")}")
 od
@@ -40,7 +41,8 @@ let values = 1::1_000 |> map(mertens) |> memo()
 
 let zeroes = values |> filter(* == 0) |> count()
 
-let crossings = values |> pairwise() |> count((a, b) => b == 0 /\ a != 0)
+let crossings =
+    values |> pairwise() |> count((a, b) => b == 0 /\ a != 0)
 
 write_line("")
 write_line("M(1) to M(1000) is zero {zeroes} times")

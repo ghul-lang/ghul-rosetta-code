@@ -1,9 +1,11 @@
 use default
 
 struct VECTOR(x: double public, y: double public) is
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
+    +(other: VECTOR) -> VECTOR =>
+        VECTOR(x + other.x, y + other.y)
 
-    -(other: VECTOR) -> VECTOR => VECTOR(x - other.x, y - other.y)
+    -(other: VECTOR) -> VECTOR =>
+        VECTOR(x - other.x, y - other.y)
 
     *(scale: double) -> VECTOR => VECTOR(x * scale, y * scale)
 
@@ -21,7 +23,8 @@ class MONEY(pennies: int) is
 
     get_hash_code() -> int => pennies
 
-    to_string() -> string => "{pennies / 100}.{pennies % 100,2:00}"
+    to_string() -> string =>
+        "{pennies / 100}.{pennies % 100,2:00}"
 si
 
 let a = VECTOR(1.0, 2.0)

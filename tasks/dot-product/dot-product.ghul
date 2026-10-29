@@ -1,11 +1,10 @@
 use default
 
 dot(left: int[], right: int[]) -> int is
-    assert left.count == right.count else "vectors must be the same length"
+    assert left.count == right.count
+        else "vectors must be the same length"
 
-    return left
-        |> zip(right, * * *)
-        |> sum()
+    return left |> zip(right, * * *) |> sum()
 si
 
 write_line("{dot([1, 3, -5], [4, -2, -1])}")

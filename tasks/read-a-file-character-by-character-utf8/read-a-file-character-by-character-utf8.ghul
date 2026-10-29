@@ -8,7 +8,9 @@ characters(path: string) -> string{} is
     while reader.peek() >= 0 do
         let first = char(reader.read())
 
-        if char.is_high_surrogate(first) /\ reader.peek() >= 0 then
+        if
+            char.is_high_surrogate(first) /\ reader.peek() >= 0
+        then
             let second = char(reader.read())
 
             yield "{first}{second}"
@@ -21,7 +23,8 @@ si
 let shown =
     characters("sample.txt")
         |> map(character =>
-            if character =~ "\n" then "\\n" else character fi)
+            if character =~ "\n" then "\\n" else character fi
+        )
         |> collect()
 
 write_line("{shown.count} characters")

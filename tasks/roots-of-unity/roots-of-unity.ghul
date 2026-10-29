@@ -4,17 +4,23 @@ use System.Numerics.Complex
 
 roots_of_unity(n: int) -> Complex{} =>
     (0..n)
-    |> map(k => Complex.from_polar_coordinates(
-        1.0, 2.0 * System.Math.pi * double(k) / double(n)))
+        |> map(k =>
+            Complex.from_polar_coordinates(
+                1.0,
+                2.0 * System.Math.pi * double(k) / double(n)
+            )
+        )
 
 tidy(x: double) -> double =>
     if System.Math.abs(x) < 0.00005 then 0.0 else x fi
 
 show(z: Complex) -> string =>
-    let re = tidy(z.real), im = tidy(z.imaginary) in
-    let sign = if im < 0.0 then "-" else "+" fi in
-    "{re,7:F4} {sign} {System.Math.abs(im):F4}i"
-
+    let
+        re = tidy(z.real),
+        im = tidy(z.imaginary)
+    in
+        let sign = if im < 0.0 then "-" else "+" fi in
+        "{re,7:F4} {sign} {System.Math.abs(im):F4}i"
 
 for n in 1::6 do
     write_line("n = {n}:")

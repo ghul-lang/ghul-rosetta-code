@@ -5,9 +5,13 @@ union Tree[T] is
     NODE(value: T, left: Tree[T], right: Tree[T])
 si
 
-map[T, U](tree: Tree[T], f: T -> U) -> Tree[U] =>
+map[T, U](tree: Tree[T], f: (T) -> U) -> Tree[U] =>
     if let node: Tree.NODE = tree then
-        Tree.NODE(f(node.value), map(node.left, f), map(node.right, f))
+        Tree.NODE(
+            f(node.value),
+            map(node.left, f),
+            map(node.right, f)
+        )
     else
         Tree.LEAF
     fi
@@ -20,10 +24,11 @@ in_order[T](tree: Tree[T]) -> T{} is
     fi
 si
 
-let tree =
-    Tree.NODE(2,
-        Tree.NODE(1, Tree.LEAF, Tree.LEAF),
-        Tree.NODE(3, Tree.LEAF, Tree.LEAF))
+let tree = Tree.NODE(
+    2,
+    Tree.NODE(1, Tree.LEAF, Tree.LEAF),
+    Tree.NODE(3, Tree.LEAF, Tree.LEAF)
+)
 
 let doubled = map(tree, * * 2)
 

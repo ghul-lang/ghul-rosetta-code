@@ -13,7 +13,8 @@ struct P(x: double, y: double) is
 si
 
 struct CIRCLE(centre: P, radius: double) is
-    contains(p: P) -> bool => (p - centre).length <= radius + 1.0e-9
+    contains(p: P) -> bool =>
+        (p - centre).length <= radius + 1.0e-9
 
     to_string() -> string =>
         "centre ({centre.x:F6}, {centre.y:F6}), radius {radius:F6}"
@@ -23,11 +24,17 @@ across(a: P, b: P) -> CIRCLE =>
     CIRCLE((a + b) * 0.5D, (a - b).length / 2.0D)
 
 through(a: P, b: P, c: P) -> CIRCLE =>
-    let ab = b - a, ac = c - a, d = 2.0D * (ab × ac) in
-    let offset = P(
-        (ac.y * (ab ⋅ ab) - ab.y * (ac ⋅ ac)) / d,
-        (ab.x * (ac ⋅ ac) - ac.x * (ab ⋅ ab)) / d) in
-    CIRCLE(a + offset, offset.length)
+    let
+        ab = b - a,
+        ac = c - a,
+        d = 2.0D * (ab × ac)
+    in
+        let offset = P(
+            (ac.y * (ab ⋅ ab) - ab.y * (ac ⋅ ac)) / d,
+            (ab.x * (ac ⋅ ac) - ac.x * (ab ⋅ ab)) / d
+        )
+        in
+        CIRCLE(a + offset, offset.length)
 
 let random = System.Random(1857)
 
@@ -51,8 +58,11 @@ enclose(given: List[P]) -> CIRCLE is
 
                     for k in 0..j do
                         if !circle.contains(points[k]) then
-                            circle =
-                                through(points[i], points[j], points[k])
+                            circle = through(
+                                points[i],
+                                points[j],
+                                points[k]
+                            )
                         fi
                     od
                 fi
@@ -65,8 +75,10 @@ si
 
 let tests = [
     [P(0.0D, 0.0D), P(0.0D, 1.0D), P(1.0D, 0.0D)],
-    [P(5.0D, -2.0D), P(-3.0D, -2.0D), P(-2.0D, 5.0D),
-     P(1.0D, 6.0D), P(0.0D, 2.0D)]
+    [
+        P(5.0D, -2.0D), P(-3.0D, -2.0D), P(-2.0D, 5.0D),
+        P(1.0D, 6.0D), P(0.0D, 2.0D)
+    ]
 ]
 
 for test in tests do
@@ -80,7 +92,8 @@ let scattered =
                 angle = 2.0D * pi * random.next_double(),
                 r = 4.0D * sqrt(random.next_double())
             in
-            P(1.5D * r * cos(angle), r * sin(angle)))
+                P(1.5D * r * cos(angle), r * sin(angle))
+        )
         |> collect()
 
 let circle = enclose(scattered)
@@ -91,8 +104,11 @@ write_line("60 random points: {circle}")
 let image = IMAGE(400, 400)
 
 image.view(
-    circle.centre.x - 7.0D, circle.centre.y - 7.0D,
-    circle.centre.x + 7.0D, circle.centre.y + 7.0D)
+    circle.centre.x - 7.0D,
+    circle.centre.y - 7.0D,
+    circle.centre.x + 7.0D,
+    circle.centre.y + 7.0D
+)
 image.clear(252ub, 252ub, 250ub)
 
 image.colour(40ub, 90ub, 180ub)
@@ -100,7 +116,9 @@ image.stroke(2.0D)
 image.circle(circle.centre.x, circle.centre.y, circle.radius)
 
 for p in scattered do
-    if abs((p - circle.centre).length - circle.radius) < 1.0e-6 then
+    if
+        abs((p - circle.centre).length - circle.radius) < 1.0e-6
+    then
         image.colour(210ub, 50ub, 40ub)
         image.dot(p.x, p.y, 5.0D)
     else

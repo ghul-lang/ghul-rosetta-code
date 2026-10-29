@@ -63,5 +63,4 @@ render(terms: Collections.List[bigint]) -> string =>
     let texts = terms |> map(term => "{term}") in
     texts |> join(" ")
 
-
 write_line("first 16: {render(sequence)}")

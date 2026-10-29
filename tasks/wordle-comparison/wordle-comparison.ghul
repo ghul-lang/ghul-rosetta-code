@@ -12,13 +12,15 @@ marks(answer: string, guess: string) -> Mark{} =>
         positions
             |> filter(i => guess[i] != answer[i])
             |> map(i => answer[i])
-            |> collect_mutable() in
+            |> collect_mutable()
+    in
     positions
         |> map(i =>
             if guess[i] == answer[i] then Mark.GREEN
             elif unmatched.remove(guess[i]) then Mark.YELLOW
             else Mark.GREY
-            fi)
+            fi
+        )
 
 let pairs = [
     ("ALLOW", "LOLLY"),

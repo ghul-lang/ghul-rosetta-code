@@ -4,19 +4,28 @@ from_array(values: int[]) -> Collections.List[int] =>
     let result = values |> collect() in
     result
 
-
 text_of(values: Collections.List[int]) -> string =>
     let texts = values |> map(value => "{value}") in
     texts |> join(" ")
 
-
-binomial_transform(values: Collections.List[int], forward: bool)
-        -> Collections.List[int] =>
+binomial_transform(
+    values: Collections.List[int],
+    forward: bool
+) -> Collections.List[int] =>
     (0..values.count)
-        |> map(n => (0::n)
-            |> map(k => binomial(n, k) * values[k] *
-                if forward \/ (n - k) % 2 == 0 then 1 else -1 fi)
-            |> sum())
+        |> map(n =>
+            (0::n)
+                |> map(k =>
+                    binomial(n, k) *
+                    values[k] *
+                    if forward \/ (n - k) % 2 == 0 then
+                        1
+                    else
+                        -1
+                    fi
+                )
+                |> sum()
+        )
         |> collect()
 
 show(name: string, values: int[]) is
@@ -32,8 +41,14 @@ show(name: string, values: int[]) is
     write_line("  round trip: {text_of(round_trip)}")
 si
 
-show("Catalan", [1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796,
-                 58786, 208012, 742900, 2674440])
-show("prime flip flop", [0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0])
-show("Fibonacci", [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377])
+show("Catalan", [
+    1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796,
+    58786, 208012, 742900, 2674440
+])
+show("prime flip flop", [
+    0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0
+])
+show("Fibonacci", [
+    0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377
+])
 show("Padovan", [1, 0, 0, 1, 0, 1, 1, 1, 2, 2, 3, 4, 5, 7, 9])

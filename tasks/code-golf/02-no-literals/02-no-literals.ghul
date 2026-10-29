@@ -1,1 +1,3 @@
-for c in [67,111,100,101,32,71,111,108,102] do IO.Std.write(char(c)) od
+for c in [67, 111, 100, 101, 32, 71, 111, 108, 102] do
+    IO.Std.write(char(c))
+od

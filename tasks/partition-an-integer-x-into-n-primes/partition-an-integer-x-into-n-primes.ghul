@@ -5,7 +5,9 @@ let composite = repeat(false, limit + 1) |> collect_mutable()
 
 for p in 2..317 do
     if !composite[p] then
-        for multiple in from(p * p, p) |> take_while(* <= limit) do
+        for
+            multiple in from(p * p, p) |> take_while(* <= limit)
+        do
             composite[multiple] = true
         od
     fi
@@ -23,7 +25,9 @@ partition(x: int, n: int, from_index: int) -> List[int]? is
             break
         fi
 
-        if let rest = partition(x - primes[i], n - 1, i + 1) then
+        if let
+            rest = partition(x - primes[i], n - 1, i + 1)
+        then
             return [primes[i]] ++ rest |> collect()
         fi
     od

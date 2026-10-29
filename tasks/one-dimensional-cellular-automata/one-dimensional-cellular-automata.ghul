@@ -11,10 +11,19 @@ live_neighbourhood(cells: string, index: int) -> int =>
 next_generation(cells: string) -> string =>
     (0..cells.length)
         |> map(index =>
-            if live_neighbourhood(cells, index) == 2 then "#" else "_" fi)
+            if live_neighbourhood(cells, index) == 2 then
+                "#"
+            else
+                "_"
+            fi
+        )
         |> join("")
 
-stream("_###_##_#_#_#_#__#__",
-        generation => generation || next_generation(generation))
+stream("_###_##_#_#_#_#__#__", generation =>
+    Ghul.Pipes.STREAM.YIELD(
+        generation,
+        next_generation(generation)
+    )
+)
     |> take(10)
     |> each(generation => write_line(generation))

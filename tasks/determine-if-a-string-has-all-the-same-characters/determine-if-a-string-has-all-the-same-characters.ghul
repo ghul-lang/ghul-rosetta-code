@@ -3,7 +3,11 @@ use default
 first_different(text: string) -> int? =>
     1..text.length |> find(i => text[i] != text[0])
 
-for text in ["", "   ", "2", "333", ".55", "tttTTT", "4444 444k"] do
+for
+    text in [
+        "", "   ", "2", "333", ".55", "tttTTT", "4444 444k"
+    ]
+do
     write_line("\"{text}\" has length {text.length}:")
 
     if let at = first_different(text) then
@@ -11,7 +15,8 @@ for text in ["", "   ", "2", "333", ".55", "tttTTT", "4444 444k"] do
 
         write_line(
             "    not all the same: '{c}' (0x{int(c):X2}) "
-            "differs at position {at + 1}")
+            "differs at position {at + 1}"
+        )
     else
         write_line("    all the same")
     fi

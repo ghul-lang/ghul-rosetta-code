@@ -25,7 +25,8 @@ draw(image: IMAGE, increment: double) is
         image.colour(
             ubyte(255.0D * (1.0D - fade)),
             ubyte(120.0D + 100.0D * fade),
-            255ub)
+            255ub
+        )
         image.line(x, y, next_x, next_y)
 
         x = next_x
@@ -46,7 +47,9 @@ for frame in 0..frames do
     animation.add(image, 100)
 od
 
-write_line("{frames} spirals, the turn between segments going full circle")
+write_line(
+    "{frames} spirals, the turn between segments going full circle"
+)
 
 animation.write("polyspiral.png")
 

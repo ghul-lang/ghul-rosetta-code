@@ -1,9 +1,12 @@
 use default
 
 let english = [
-    0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228, 0.02015,
-    0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406, 0.06749,
-    0.07507, 0.01929, 0.00095, 0.05987, 0.06327, 0.09056, 0.02758,
+    0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228,
+    0.02015,
+    0.06094, 0.06966, 0.00153, 0.00772, 0.04025, 0.02406,
+    0.06749,
+    0.07507, 0.01929, 0.00095, 0.05987, 0.06327, 0.09056,
+    0.02758,
     0.00978, 0.02360, 0.00150, 0.01974, 0.00074
 ]
 
@@ -13,7 +16,9 @@ chr(n: int) -> char => char(int('A') + (n % 26 + 26) % 26)
 
 counts(text: string) -> int{} =>
     (0..26)
-        |> map(letter => text |> filter(c => ord(c) == letter) |> count())
+        |> map(letter =>
+            text |> filter(c => ord(c) == letter) |> count()
+        )
 
 column(text: string, length: int, start: int) -> string =>
     text
@@ -34,19 +39,30 @@ chi_squared(text: string) -> double =>
         |> counts()
         |> index()
         |> sum_by(n => (
-            let expected = english[n.index] * double(text.length)
+            let expected =
+                english[n.index] * double(text.length)
             let difference = double(n.value) - expected
-            difference * difference / expected))
+            difference * difference / expected
+        ))
 
 best_shift(text: string) -> int =>
-    0..26 |> reduce(0, (best, by) =>
-        if chi_squared(shift(text, by)) < chi_squared(shift(text, best))
-        then by else best fi)
+    0..26
+        |> reduce(0, (best, by) =>
+            if
+                chi_squared(shift(text, by)) <
+                chi_squared(shift(text, best))
+            then
+                by
+            else best
+            fi
+        )
 
 decrypt(text: string, key: string) -> string =>
     text
         |> index()
-        |> map(c => chr(ord(c.value) - ord(key[c.index % key.length])))
+        |> map(c =>
+            chr(ord(c.value) - ord(key[c.index % key.length]))
+        )
         |> join("")
 
 let cipher =
@@ -70,13 +86,21 @@ let cipher =
 
 let letters = cipher |> filter(char.is_letter) |> join("")
 
-let average_coincidence = length =>
-    ((0..length)
-        |> sum_by(i => coincidence(column(letters, length, i)))) /
-    double(length)
+let average_coincidence =
+    length =>
+        (
+            (0..length)
+                |> sum_by(i =>
+                    coincidence(column(letters, length, i))
+                )
+        ) /
+        double(length)
 
 let length =
-    1::20 |> find(length => average_coincidence(length) > 0.06) ?? 1
+    1::20
+        |> find(length =>
+            average_coincidence(length) > 0.06
+        ) ?? 1
 
 let key =
     (0..length)

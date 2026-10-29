@@ -36,7 +36,8 @@ si
 sort_tree(node: NODE, descending: bool) is
     let ordered =
         if descending then
-            node.children |> sort_by_descending(child => child.text)
+            node.children
+                |> sort_by_descending(child => child.text)
         else
             node.children |> sort_by(child => child.text)
         fi
@@ -75,13 +76,16 @@ arrange(outline: List[string], descending: bool) -> Outcome is
 
     for indent in indents do
         if indent |> any(* != marker) then
-            return Outcome.INCONSISTENT("indentation mixes tabs and spaces")
+            return Outcome.INCONSISTENT(
+                "indentation mixes tabs and spaces"
+            )
         fi
 
         if indent.length % unit.length != 0 then
             return Outcome.INCONSISTENT(
                 "an indent of {indent.length} is not a multiple "
-                "of the unit of {unit.length}")
+                "of the unit of {unit.length}"
+            )
         fi
     od
 
@@ -106,24 +110,32 @@ show(title: string, outline: List[string], descending: bool) is
     write_line()
 si
 
-let spaced =
-    ["zeta", "    beta", "    gamma", "        lambda", "        kappa",
-     "        mu", "    delta", "alpha", "    theta", "    iota",
-     "    epsilon"]
+let spaced = [
+    "zeta", "    beta", "    gamma", "        lambda",
+    "        kappa",
+    "        mu", "    delta", "alpha", "    theta", "    iota",
+    "    epsilon"
+]
 
-let tabbed =
-    ["zeta", "\tgamma", "\t\tmu", "\t\tlambda", "\t\tkappa", "\tdelta",
-     "\tbeta", "alpha", "\ttheta", "\tiota", "\tepsilon"]
+let tabbed = [
+    "zeta", "\tgamma", "\t\tmu", "\t\tlambda", "\t\tkappa",
+    "\tdelta",
+    "\tbeta", "alpha", "\ttheta", "\tiota", "\tepsilon"
+]
 
-let mixed_characters =
-    ["alpha", "    epsilon", "\tiota", "    theta", "zeta", "    beta",
-     "    delta", "    gamma", "    \tkappa", "        lambda",
-     "        mu"]
+let mixed_characters = [
+    "alpha", "    epsilon", "\tiota", "    theta", "zeta",
+    "    beta",
+    "    delta", "    gamma", "    \tkappa", "        lambda",
+    "        mu"
+]
 
-let mixed_widths =
-    ["zeta", "    beta", "   gamma", "        lambda", "         kappa",
-     "        mu", "    delta", "alpha", "    theta", "    iota",
-     "    epsilon"]
+let mixed_widths = [
+    "zeta", "    beta", "   gamma", "        lambda",
+    "         kappa",
+    "        mu", "    delta", "alpha", "    theta", "    iota",
+    "    epsilon"
+]
 
 show("four spaces, ascending", spaced, false)
 show("four spaces, descending", spaced, true)

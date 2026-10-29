@@ -1,11 +1,7 @@
 use default
 
 letters(matches: (char) -> bool) -> string =>
-    string(
-        (0..65536)
-        |> map(char)
-        |> filter(matches)
-    )
+    string((0..65536) |> map(char) |> filter(matches))
 
 write_line("lowercase {letters(char.is_ascii_letter_lower)}")
 write_line("uppercase {letters(char.is_ascii_letter_upper)}")

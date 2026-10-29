@@ -45,7 +45,11 @@ run(program: string, input: string) -> string is
         when '.' then output.add(char(cells[cell]))
         when ',' then
             let next =
-                if read < input.length then int(input[read]) else 0 fi
+                if read < input.length then
+                    int(input[read])
+                else
+                    0
+                fi
 
             cells[cell] = next
             read = read + 1

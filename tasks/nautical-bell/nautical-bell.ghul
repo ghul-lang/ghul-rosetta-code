@@ -22,7 +22,9 @@ si
 class SIMULATED_CLOCK(start: System.DateTime): Clock is
     _time: System.DateTime
 
-    init(..) is _time = start si
+    init(..) is
+        _time = start
+    si
 
     now: System.DateTime => _time
 
@@ -33,25 +35,27 @@ si
 
 watch(time: System.DateTime) -> string =>
     let hour = time.add_minutes(-1.0).hour in
-        if hour < 4 then "Middle watch"
-        elif hour < 8 then "Morning watch"
-        elif hour < 12 then "Forenoon watch"
-        elif hour < 16 then "Afternoon watch"
-        elif hour < 18 then "First dog watch"
-        elif hour < 20 then "Last dog watch"
-        else "First watch"
-        fi
+    if hour < 4 then "Middle watch"
+    elif hour < 8 then "Morning watch"
+    elif hour < 12 then "Forenoon watch"
+    elif hour < 16 then "Afternoon watch"
+    elif hour < 18 then "First dog watch"
+    elif hour < 20 then "Last dog watch"
+    else "First watch"
+    fi
 
 ring(bells: int) -> string =>
     (0..bells / 2)
-    |> map(_ => "ding-dong")
-    |> cat(if bells % 2 == 1 then ["ding"] else [] fi)
-    |> join(" ")
+        |> map(_ => "ding-dong")
+        |> cat(if bells % 2 == 1 then ["ding"] else [] fi)
+        |> join(" ")
 
 keep_watch(clock: Clock, until: System.DateTime) is
     let now = clock.now
     let half_hours = int(now.time_of_day.total_minutes) / 30 + 1
-    let next mut = now.date.add_minutes(30.0 * double(half_hours))
+    let next mut = now.date.add_minutes(
+        30.0 * double(half_hours)
+    )
 
     while next <= until do
         clock.wait_until(next)
@@ -62,7 +66,8 @@ keep_watch(clock: Clock, until: System.DateTime) is
 
         write_line(
             "{next:HH:mm}  {bells} bell{plural}  "
-            "{watch(next),-15}  {ring(bells)}")
+            "{watch(next),-15}  {ring(bells)}"
+        )
 
         next = next.add_minutes(30.0)
     od
@@ -71,8 +76,18 @@ si
 if let ["--live", ..] = args then
     keep_watch(SYSTEM_CLOCK(), System.DateTime.max_value)
 else
-    let midnight =
-        System.DateTime(2026, 1, 1, 0, 0, 0, System.DateTimeKind.UTC)
+    let midnight = System.DateTime(
+        2026,
+        1,
+        1,
+        0,
+        0,
+        0,
+        System.DateTimeKind.UTC
+    )
 
-    keep_watch(SIMULATED_CLOCK(midnight), midnight.add_days(1.0))
+    keep_watch(
+        SIMULATED_CLOCK(midnight),
+        midnight.add_days(1.0)
+    )
 fi

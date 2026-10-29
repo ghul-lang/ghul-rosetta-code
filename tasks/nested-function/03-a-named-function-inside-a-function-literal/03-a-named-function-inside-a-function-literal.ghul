@@ -1,6 +1,6 @@
 use default
 
-let make_list = (separator) is
+let make_list = separator is
     let counter mut = 0
 
     make_item(item) is
@@ -8,7 +8,9 @@ let make_list = (separator) is
         "{counter}{separator}{item}"
     si
 
-    return ["first", "second", "third"] |> map(make_item) |> join("\n")
+    return ["first", "second", "third"]
+        |> map(make_item)
+        |> join("\n")
 si
 
 write_line(make_list(". "))

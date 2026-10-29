@@ -14,31 +14,39 @@ ask(prompt: string) -> double? is
     write_line("> {line.trim()}")
 
     return double.parse(
-        line, System.Globalization.CultureInfo.invariant_culture)
+        line,
+        System.Globalization.CultureInfo.invariant_culture
+    )
 si
 
 radians(degrees: double) -> double => degrees * pi / 180.0D
 degrees(radians: double) -> double => radians * 180.0D / pi
 
-while let latitude = ask("latitude in degrees, negative for south:"),
-        longitude = ask("longitude in degrees, negative for west:"),
-        meridian = ask("legal meridian in degrees:") do
-
+while let
+    latitude = ask("latitude in degrees, negative for south:"),
+    longitude = ask("longitude in degrees, negative for west:"),
+    meridian = ask("legal meridian in degrees:")
+do
     let sine = sin(radians(latitude))
 
     write_line()
     write_line("sine of latitude:     {sine,8:F3}")
-    write_line("longitude difference: {longitude - meridian,8:F3}")
+    write_line(
+        "longitude difference: {longitude - meridian,8:F3}"
+    )
     write_line()
     write_line("hour    sun hour angle    dial hour line angle")
 
     for hour in -6::6 do
         let sun = 15.0D * double(hour) - (longitude - meridian)
         let line = degrees(atan(sine * tan(radians(sun))))
-        let clock = if hour == 0 then 12 else (hour + 12) % 12 fi
+        let clock =
+            if hour == 0 then 12 else (hour + 12) % 12 fi
         let half = if hour < 0 then "am" else "pm" fi
 
-        write_line("{clock,2}{half}     {sun,10:F3}        {line,10:F3}")
+        write_line(
+            "{clock,2}{half}     {sun,10:F3}        {line,10:F3}"
+        )
     od
 
     write_line()

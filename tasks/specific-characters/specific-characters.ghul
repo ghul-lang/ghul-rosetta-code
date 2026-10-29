@@ -1,7 +1,6 @@
 use default
 
-counts(s: string) -> Map[char, int] =>
-    s |> frequencies()
+counts(s: string) -> Map[char, int] => s |> frequencies()
 
 show(strings: string[]) is
     let tallies = strings |> map(counts) |> collect()
@@ -10,17 +9,25 @@ show(strings: string[]) is
 
     for i in 0..strings.count do
         let chars = tallies[i].keys |> collect()
-        let elsewhere = c =>
-            0..strings.count
-                |> any(j => j != i /\ tallies[j].contains_key(c))
+        let elsewhere =
+            c =>
+                0..strings.count
+                    |> any(j =>
+                        j != i /\ tallies[j].contains_key(c)
+                    )
         let passes =
-            chars |> count(c => tallies[i][c] == 2 /\ !elsewhere(c))
+            chars
+                |> count(c =>
+                    tallies[i][c] == 2 /\ !elsewhere(c)
+                )
 
         specific.add(passes)
         others.add(chars.count - passes)
     od
 
-    write_line("[{strings |> map(s => "\"{s}\"") |> join(", ")}]")
+    write_line(
+        "[{strings |> map(s => "\"{s}\"") |> join(", ")}]"
+    )
     write_line("    specific: [{specific |> join(", ")}]")
     write_line("    not:      [{others |> join(", ")}]")
 si

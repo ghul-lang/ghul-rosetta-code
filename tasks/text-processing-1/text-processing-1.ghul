@@ -49,7 +49,8 @@ for line in lines do
         write_line(
             "Line: {date}  Reject: {24 - accepted,2}  "
             "Accept: {accepted,2}  "
-            "Line_tot: {line_total,10:F3}  Line_avg: {average,10:F3}")
+            "Line_tot: {line_total,10:F3}  Line_avg: {average,10:F3}"
+        )
     fi
 od
 
@@ -61,4 +62,5 @@ write_line("Average  = {total / double(readings),10:F3}")
 write_line("")
 write_line(
     "Maximum run of {longest} consecutive false readings ends at the "
-    "line starting with {longest_ends |> join(", ")}")
+    "line starting with {longest_ends |> join(", ")}"
+)

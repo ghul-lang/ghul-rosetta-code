@@ -23,10 +23,12 @@ let commands = LIST()
 for token in words(table) do
     let minimum mut = 0
 
-    if int.try_parse(token, minimum ref) then
+    if int.try_parse(token, minimum ref ) then
         let last = commands.count - 1
 
-        commands[last] = (word = commands[last].word, minimum = minimum)
+        commands[last] = (
+            word = commands[last].word, minimum = minimum
+        )
     else
         commands.add((word = token, minimum = token.length))
     fi
@@ -43,16 +45,12 @@ matches(command: COMMAND, word: string) -> bool =>
 
 expand(word: string) -> string =>
     commands
-    |> filter(matches(*, word))
-    |> map(command => command.word.to_upper())
-    |> first() ?? "*error*"
+        |> filter(matches(*, word))
+        |> map(command => command.word.to_upper())
+        |> first() ?? "*error*"
 
 let input =
     "riG   rePEAT copies  put mo   rest    types   fup.    6       "
     "poweRin"
 
-write_line(
-    words(input)
-    |> map(expand)
-    |> join(" ")
-)
+write_line(words(input) |> map(expand) |> join(" "))

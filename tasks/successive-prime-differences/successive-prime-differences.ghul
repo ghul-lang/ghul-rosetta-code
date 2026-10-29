@@ -25,8 +25,10 @@ groups(differences: int[]) -> List[int]{} is
         let matched mut = true
 
         for step in 0..differences.count do
-            if primes[start + step + 1] - primes[start + step] !=
-               differences[step]
+            if
+                primes[start + step + 1] -
+                primes[start + step] !=
+                differences[step]
             then
                 matched = false
                 break
@@ -34,7 +36,9 @@ groups(differences: int[]) -> List[int]{} is
         od
 
         if matched then
-            yield LIST(primes[start..start + differences.count + 1])
+            yield LIST(
+                primes[start..start + differences.count + 1]
+            )
         fi
     od
 si
@@ -52,9 +56,11 @@ report(differences: int[]) is
     when [] then
         write_line("  none below {limit}")
     when [first, ..] then
-        write_line("  {found.count} groups, "
-                   "first {render(first)}, "
-                   "last {render(found[found.count - 1])}")
+        write_line(
+            "  {found.count} groups, "
+            "first {render(first)}, "
+            "last {render(found[found.count - 1])}"
+        )
     esac
 si
 

@@ -2,15 +2,18 @@ use default
 use System.Math.*
 
 let dictionary = [
-    "accommodate", "believe", "commitment", "definite", "existence",
-    "government", "height", "knowledge", "maintenance", "occurrence",
+    "accommodate", "believe", "commitment", "definite",
+    "existence",
+    "government", "height", "knowledge", "maintenance",
+    "occurrence",
     "pastime", "privilege", "publicly", "receive", "recommend",
     "relevant", "rhythm", "separate", "success", "tomorrow",
     "twelfth", "until", "weird", "which", "writing"
 ]
 
 let misspelled = [
-    "accomodate", "definately", "goverment", "occured", "publically",
+    "accomodate", "definately", "goverment", "occured",
+    "publically",
     "recieve", "seperate", "untill", "wich"
 ]
 
@@ -47,7 +50,9 @@ jaro_similarity(left: string, right: string) -> double is
     for i in 0..left.length do
         if left_match[i] then
             while !right_match[next] do next = next + 1 od
-            if left[i] != right[next] then mismatches = mismatches + 1 fi
+            if left[i] != right[next] then
+                mismatches = mismatches + 1
+            fi
             next = next + 1
         fi
     od
@@ -64,7 +69,10 @@ jaro_similarity(left: string, right: string) -> double is
     return (left_rate + right_rate + matched) / 3.0D
 si
 
-jaro_winkler_distance(left: string, right: string) -> double => (
+jaro_winkler_distance(
+    left: string,
+    right: string
+) -> double => (
     let similarity = jaro_similarity(left, right)
 
     let prefix mut = 0
@@ -81,10 +89,13 @@ jaro_winkler_distance(left: string, right: string) -> double => (
 )
 
 for word in misspelled do
-    let candidates = dictionary
-        |> map(candidate =>
-            (candidate, jaro_winkler_distance(word, candidate)))
-        |> collect_mutable()
+    let candidates =
+        dictionary
+            |> map(candidate => (
+                candidate,
+                jaro_winkler_distance(word, candidate)
+            ))
+            |> collect_mutable()
 
     candidates.sort(((_, a), (_, b)) => sign(a - b))
 

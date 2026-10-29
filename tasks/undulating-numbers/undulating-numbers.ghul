@@ -1,9 +1,15 @@
 use default
 
-undulating_value(first: int, second: int, length: int) -> long =>
-    0..length |> reduce(0L, (value, position) =>
-        value * 10L +
-            cast(if position % 2 == 0 then first else second fi))
+undulating_value(
+    first: int,
+    second: int,
+    length: int
+) -> long =>
+    0..length
+        |> reduce(0L, (value, position) =>
+            value * 10L +
+            cast(if position % 2 == 0 then first else second fi)
+        )
 
 let limit = 9007199254740992L
 
@@ -13,7 +19,11 @@ for length in 3..17 do
     for first in 1..10 do
         for second in 0..10 do
             if second != first then
-                let value = undulating_value(first, second, length)
+                let value = undulating_value(
+                    first,
+                    second,
+                    length
+                )
 
                 if value < limit then
                     values.add(value)
@@ -24,8 +34,7 @@ for length in 3..17 do
 od
 
 let three_digit = values |> filter(* < 1000L) |> memo()
-let four_digit = values
-    |> filter(v => v >= 1000L /\ v < 10000L)
+let four_digit = values |> filter(v => v >= 1000L /\ v < 10000L)
 
 write_line("three digit:")
 
@@ -35,7 +44,8 @@ for row in 0..9 do
             |> skip(row * 9)
             |> take(9)
             |> map(v => "{v}")
-            |> join(" "))
+            |> join(" ")
+    )
 od
 
 write_line("four digit:")
@@ -46,20 +56,24 @@ for row in 0..9 do
             |> skip(row * 9)
             |> take(9)
             |> map(v => "{v}")
-            |> join(" "))
+            |> join(" ")
+    )
 od
 
 prime(value: long) -> bool =>
-    value >= 2L /\ 2L::long(Ghul.Math.sqrt(double(value)))
+    value >= 2L /\
+    2L::long(Ghul.Math.sqrt(double(value)))
         |> all(d => value % d != 0L)
 
 write_line("three digit primes:")
 
 write_line(
-    three_digit |> filter(prime) |> map(v => "{v}") |> join(" "))
+    three_digit |> filter(prime) |> map(v => "{v}") |> join(" ")
+)
 
 write_line("600th: {values[599]}")
 
 write_line(
     "{values.count} undulating numbers below 2^53, "
-    "the largest is {values[values.count - 1]}")
+    "the largest is {values[values.count - 1]}"
+)

@@ -5,10 +5,12 @@ is_prime(n: int) -> bool =>
 
 // S(k) mod 2^p - 1 is reduced without division: the bits above p are
 // folded back onto the low p bits, since 2^p is 1 modulo 2^p - 1.
-
 is_mersenne_prime(p: int) -> bool =>
-    p == 2 \/ (
-        let mersenne = (1n << p) - 1n, s mut = 4n in
+    p == 2 \/
+    let
+        mersenne = (1n << p) - 1n,
+        s mut = 4n
+    in
         (
             for _ in 0..p - 2 do
                 s = s * s - 2n
@@ -23,9 +25,10 @@ is_mersenne_prime(p: int) -> bool =>
             od
 
             s =~ 0n
-        ))
+        )
 
-let found = 2..2300 |> filter(p => is_prime(p) /\ is_mersenne_prime(p))
+let found =
+    2..2300 |> filter(p => is_prime(p) /\ is_mersenne_prime(p))
 
 write_line("Mersenne primes up to 2^2300 - 1:")
 write_line(found |> map(p => "M{p}") |> join(" "))

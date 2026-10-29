@@ -3,16 +3,19 @@ use default
 use Ordering = (string, string) -> int
 use Row = string[]
 
-lexicographic(left: string, right: string) -> int => left <> right
+lexicographic(left: string, right: string) -> int =>
+    left <> right
 
-sort_table(rows: List[Row]) -> List[Row] =>
-    sort_table(rows, 0)
+sort_table(rows: List[Row]) -> List[Row] => sort_table(rows, 0)
 
 sort_table(rows: List[Row], column: int) -> List[Row] =>
     sort_table(rows, column, lexicographic)
 
-sort_table(rows: List[Row], column: int, ordering: Ordering) -> List[Row] =>
-    sort_table(rows, column, ordering, false)
+sort_table(
+    rows: List[Row],
+    column: int,
+    ordering: Ordering
+) -> List[Row] => sort_table(rows, column, ordering, false)
 
 sort_table(
     rows: List[Row],
@@ -21,13 +24,14 @@ sort_table(
     reverse: bool
 ) -> List[Row] =>
     rows
-    |> sort((left, right) =>
-        if reverse then
-            ordering(right[column], left[column])
-        else
-            ordering(left[column], right[column])
-        fi)
-    |> collect()
+        |> sort((left, right) =>
+            if reverse then
+                ordering(right[column], left[column])
+            else
+                ordering(left[column], right[column])
+            fi
+        )
+        |> collect()
 
 by_length(left: string, right: string) -> int =>
     left.length <> right.length

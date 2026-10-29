@@ -10,7 +10,11 @@ use Player = (name: string, rolls_again: Strategy)
 hold_at_20(banked: int, turn: int, opponent: int) -> bool =>
     turn < 20 /\ banked + turn < goal
 
-chase_the_leader(banked: int, turn: int, opponent: int) -> bool =>
+chase_the_leader(
+    banked: int,
+    turn: int,
+    opponent: int
+) -> bool =>
     banked + turn < goal /\
     (turn < 15 \/ opponent >= 71 \/ banked + turn < opponent)
 
@@ -33,14 +37,18 @@ play(first: Player, second: Player, show: bool) -> int is
         let other = scores[1 - current]
         let turn mut = 0
 
-        while player.rolls_again(scores[current], turn, other) do
+        while
+            player.rolls_again(scores[current], turn, other)
+        do
             let roll = random.next(1, 7)
 
             if roll == 1 then
                 turn = 0
 
                 if show then
-                    write_line("  {player.name} rolls 1 and loses the turn")
+                    write_line(
+                        "  {player.name} rolls 1 and loses the turn"
+                    )
                 fi
 
                 break
@@ -54,7 +62,8 @@ play(first: Player, second: Player, show: bool) -> int is
         if show /\ turn > 0 then
             write_line(
                 "  {player.name} banks {turn}: "
-                "{scores[0]} to {scores[1]}")
+                "{scores[0]} to {scores[1]}"
+            )
         fi
 
         if scores[current] >= goal then
@@ -67,7 +76,9 @@ play(first: Player, second: Player, show: bool) -> int is
     -1
 si
 
-write_line("one game, {strategies[0].name} against {strategies[1].name}:")
+write_line(
+    "one game, {strategies[0].name} against {strategies[1].name}:"
+)
 
 let winner = play(strategies[0], strategies[1], true)
 write_line("{strategies[winner].name} wins")
@@ -85,7 +96,8 @@ for a in strategies do
 
             write_line(
                 "{a.name} going first against {b.name}: "
-                "wins {100.0 * double(wins) / double(games):F1}%")
+                "wins {100.0 * double(wins) / double(games):F1}%"
+            )
         fi
     od
 od

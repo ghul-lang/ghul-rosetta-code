@@ -22,32 +22,52 @@ parse_atom(text: string, at: int) -> PARSE is
     if text[start] == '(' then
         let inner = parse_or(text, start + 1)
 
-        return (value = inner.value, next = skip(text, inner.next) + 1)
+        return (
+            value = inner.value,
+            next = skip(text, inner.next) + 1
+        )
     fi
 
     if text[start] == '!' then
         let operand = parse_atom(text, start + 1)
 
-        return (value = Expression.NOT(operand.value), next = operand.next)
+        return (
+            value = Expression.NOT(operand.value),
+            next = operand.next
+        )
     fi
 
-    (value = Expression.VARIABLE("{text[start]}"), next = start + 1)
+    (
+        value = Expression.VARIABLE("{text[start]}"),
+        next = start + 1
+    )
 si
 
-parse_binary(text: string, at: int, symbol: char,
-             below: SUBPARSER) -> PARSE
-is
+parse_binary(
+    text: string,
+    at: int,
+    symbol: char,
+    below: SUBPARSER
+) -> PARSE is
     let node mut = below(text, at)
 
     do
         let cursor = skip(text, node.next)
 
-        if cursor >= text.length \/ text[cursor] != symbol then break fi
+        if cursor >= text.length \/ text[cursor] != symbol then
+            break
+        fi
 
         let right = below(text, cursor + 1)
 
-        node = (value = Expression.BINARY(symbol, node.value, right.value),
-                next = right.next)
+        node = (
+            value = Expression.BINARY(
+                symbol,
+                node.value,
+                right.value
+            ),
+            next = right.next
+        )
     od
 
     node
@@ -74,7 +94,10 @@ names(expression: Expression) -> string{} is
     esac
 si
 
-evaluate(expression: Expression, values: MAP[string, bool]) -> bool =>
+evaluate(
+    expression: Expression,
+    values: MAP[string, bool]
+) -> bool =>
     case expression
     when leaf: Expression.VARIABLE then
         values[leaf.name]
@@ -85,18 +108,19 @@ evaluate(expression: Expression, values: MAP[string, bool]) -> bool =>
             left = evaluate(pair.left, values),
             right = evaluate(pair.right, values)
         in
-        case pair.symbol
-        when '&' then left /\ right
-        when '|' then left \/ right
-        else left != right
-        esac
+            case pair.symbol
+            when '&' then left /\ right
+            when '|' then left \/ right
+            else left != right
+            esac
     esac
 
 digit(value: bool) -> string => if value then "1" else "0" fi
 
 table(source: string) is
     let expression = parse_or(source, 0).value
-    let variables = expression |> names() |> distinct() |> collect()
+    let variables =
+        expression |> names() |> distinct() |> collect()
 
     write_line("{source}")
     write_line("  {variables |> join(" ")} | result")
@@ -110,14 +134,20 @@ table(source: string) is
             values[variables[column]] = (row >> bit) & 1 == 1
         od
 
-        let inputs = variables |> map(name => digit(values[name]))
+        let inputs =
+            variables |> map(name => digit(values[name]))
 
-        write_line("  {inputs |> join(" ")} | "
-                   "{digit(evaluate(expression, values))}")
+        write_line(
+            "  {inputs |> join(" ")} | "
+            "{digit(evaluate(expression, values))}"
+        )
     od
 
     write_line()
 si
 
-["A & B", "A ^ B ^ C", "A & (B | C)", "!A | B", "(A | B) & (C | D)"]
+[
+    "A & B", "A ^ B ^ C", "A & (B | C)", "!A | B",
+    "(A | B) & (C | D)"
+]
     |> each(table)

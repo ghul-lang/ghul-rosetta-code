@@ -9,12 +9,14 @@ is_inexact_palindrome(text: string) -> bool =>
     text
         |> filter(char.is_letter)
         |> map(char.to_lower)
-        |> reduce("", (letters, character) => "{letters}{character}")
+        |> reduce("", (letters, character) =>
+            "{letters}{character}"
+        )
         |> is_palindrome()
 
 test(
     maybe_palindrome: string,
-    palindrome_check: string -> bool
+    palindrome_check: (string) -> bool
 ) -> string =>
     if palindrome_check(maybe_palindrome) then
         "\"{maybe_palindrome}\" is a palindrome"
@@ -26,6 +28,11 @@ write_line(test("racecar", is_palindrome))
 write_line(test("hello", is_palindrome))
 write_line(test("rotor", is_palindrome))
 
-write_line(test("A man, a plan, a canal: Panama", is_inexact_palindrome))
+write_line(
+    test(
+        "A man, a plan, a canal: Panama",
+        is_inexact_palindrome
+    )
+)
 write_line(test("race car", is_inexact_palindrome))
 write_line(test("hello world", is_inexact_palindrome))

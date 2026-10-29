@@ -3,7 +3,9 @@ use Raster.ANIMATION
 use Raster.IMAGE
 
 enum Cell is
-    EMPTY, TREE, BURNING
+    EMPTY,
+    TREE,
+    BURNING
 si
 
 use Forest = List[List[Cell]]
@@ -19,11 +21,16 @@ let lightning = 0.0002D
 let random = System.Random(2024)
 
 inside(row: int, column: int) -> bool =>
-    row > 0 /\ row < rows - 1 /\ column > 0 /\ column < columns - 1
+    row > 0 /\
+    row < rows - 1 /\
+    column > 0 /\
+    column < columns - 1
 
 near_fire(forest: Forest, row: int, column: int) -> bool =>
     (row - 1::row + 1)
-        |> flat_map(r => column - 1::column + 1 |> map(c => (r, c)))
+        |> flat_map(r =>
+            column - 1::column + 1 |> map(c => (r, c))
+        )
         |> any((r, c) => forest[r][c] == Cell.BURNING)
 
 next(forest: Forest, row: int, column: int) -> Cell =>
@@ -33,7 +40,8 @@ next(forest: Forest, row: int, column: int) -> Cell =>
         case forest[row][column]
         when Cell.BURNING then Cell.EMPTY
         when Cell.TREE then
-            if near_fire(forest, row, column) \/
+            if
+                near_fire(forest, row, column) \/
                 random.next_double() < lightning
             then
                 Cell.BURNING
@@ -41,7 +49,11 @@ next(forest: Forest, row: int, column: int) -> Cell =>
                 Cell.TREE
             fi
         else
-            if random.next_double() < grow then Cell.TREE else Cell.EMPTY fi
+            if random.next_double() < grow then
+                Cell.TREE
+            else
+                Cell.EMPTY
+            fi
         esac
     fi
 
@@ -50,11 +62,15 @@ step(forest: Forest) -> Forest =>
         |> map(row =>
             (0..columns)
                 |> map(next(forest, row, *))
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 census(forest: Forest, state: Cell) -> int =>
-    forest |> flat_map(row => row) |> filter(* == state) |> count()
+    forest
+        |> flat_map(row => row)
+        |> filter(* == state)
+        |> count()
 
 draw(image: IMAGE, forest: Forest) is
     image.clear(60ub, 45ub, 30ub)
@@ -63,7 +79,8 @@ draw(image: IMAGE, forest: Forest) is
         for (column, state) in cells |> index() do
             case state
             when Cell.TREE then image.colour(40ub, 140ub, 60ub)
-            when Cell.BURNING then image.colour(255ub, 140ub, 30ub)
+            when Cell.BURNING then
+                image.colour(255ub, 140ub, 30ub)
             else continue
             esac
 
@@ -71,7 +88,11 @@ draw(image: IMAGE, forest: Forest) is
             let y = double(row * cell)
 
             image.fill_rectangle(
-                x, y, x + double(cell), y + double(cell))
+                x,
+                y,
+                x + double(cell),
+                y + double(cell)
+            )
         od
     od
 si
@@ -81,11 +102,16 @@ let forest mut =
         |> map(row =>
             (0..columns)
                 |> map(column =>
-                    if inside(row, column) /\ random.next_double() < 0.5D
-                    then Cell.TREE
+                    if
+                        inside(row, column) /\
+                        random.next_double() < 0.5D
+                    then
+                        Cell.TREE
                     else Cell.EMPTY
-                    fi)
-                |> collect())
+                    fi
+                )
+                |> collect()
+        )
         |> collect()
 
 let image = IMAGE(columns * cell, rows * cell)

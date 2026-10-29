@@ -10,12 +10,20 @@ digit_counts(value: long) -> List[int] =>
 held(combination: List[int], digit: int) -> int =>
     combination |> count(* == digit)
 
-multisets(width: int, lowest: int, chosen: List[int]) -> List[int]{} is
+multisets(
+    width: int,
+    lowest: int,
+    chosen: List[int]
+) -> List[int]{} is
     if chosen.count == width then
         yield chosen
     else
         for digit in lowest::9 do
-            yield in multisets(width, digit, chosen ++ [digit] |> collect())
+            yield in multisets(
+                width,
+                digit,
+                chosen ++ [digit] |> collect()
+            )
         od
     fi
 si
@@ -27,7 +35,12 @@ own_sums(width: int) -> long{} is
         if "{total}".length == width then
             let counts = digit_counts(total)
 
-            if (0::9) |> all(d => counts[d] == held(combination, d)) then
+            if
+                (0::9)
+                    |> all(d =>
+                        counts[d] == held(combination, d)
+                    )
+            then
                 yield total
             fi
         fi
@@ -39,5 +52,7 @@ for width in 3::9 do
 
     found.sort()
 
-    write_line("{width} digits: {found |> map(v => "{v}") |> join(" ")}")
+    write_line(
+        "{width} digits: {found |> map(v => "{v}") |> join(" ")}"
+    )
 od

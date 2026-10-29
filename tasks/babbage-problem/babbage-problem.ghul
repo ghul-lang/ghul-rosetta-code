@@ -5,6 +5,12 @@ let smallest =
 
 let babbage = 99736L
 
-write_line("smallest: {smallest} squared is {smallest * smallest}")
-write_line("Babbage's: {babbage} squared is {babbage * babbage}")
-write_line("both end in 269696, so Babbage's answer was not the smallest")
+write_line(
+    "smallest: {smallest} squared is {smallest * smallest}"
+)
+write_line(
+    "Babbage's: {babbage} squared is {babbage * babbage}"
+)
+write_line(
+    "both end in 269696, so Babbage's answer was not the smallest"
+)

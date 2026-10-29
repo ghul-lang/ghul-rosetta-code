@@ -12,12 +12,19 @@ count_examples(api: string) is
     let client = HttpClient()
 
     // The wiki refuses a request that does not say what is making it.
-    client.default_request_headers.user_agent
-        .parse_add("ghul-rosetta-code/1.0")
+    client.default_request_headers.user_agent.parse_add(
+        "ghul-rosetta-code/1.0"
+    )
 
-    let get = query =>
-        let text = client.get_string_async("{api}?{query}").result in
-        JsonDocument.parse(text, _[JsonDocumentOptions]).root_element
+    let get =
+        query =>
+            let text =
+                client.get_string_async("{api}?{query}").result
+            in
+            JsonDocument.parse(
+                text,
+                _[JsonDocumentOptions]
+            ).root_element
 
     let listing =
         "action=query&list=categorymembers"
@@ -29,18 +36,23 @@ count_examples(api: string) is
     do
         let batch = get("{listing}{next}")
         let tasks =
-            batch.get_property("query")
-                .get_property("categorymembers")
+            batch.get_property("query").get_property(
+                "categorymembers"
+            )
 
         for task in tasks.enumerate_array() do
-            let title = task.get_property("title").get_string() ?? ""
+            let title =
+                task.get_property("title").get_string() ?? ""
             let page = get(
                 "action=parse&prop=wikitext&format=json&formatversion=2"
-                "&page={System.Uri.escape_data_string(title)}")
+                "&page={System.Uri.escape_data_string(title)}"
+            )
             let text =
-                page.get_property("parse")
-                    .get_property("wikitext").get_string() ?? ""
-            let examples = Regex.matches(text, "=={{{{header\\|").count
+                page.get_property("parse").get_property(
+                    "wikitext"
+                ).get_string() ?? ""
+            let examples =
+                Regex.matches(text, "=={{{{header\\|").count
 
             write_line("{title}: {examples} examples.")
             total = total + examples
@@ -48,11 +60,12 @@ count_examples(api: string) is
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !batch.try_get_property("continue", more ref) then
+        if !batch.try_get_property("continue", more ref ) then
             break
         fi
 
-        let token = more.get_property("cmcontinue").get_string() ?? ""
+        let token =
+            more.get_property("cmcontinue").get_string() ?? ""
 
         next =
             "&cmcontinue={System.Uri.escape_data_string(token)}"

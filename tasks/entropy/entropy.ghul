@@ -6,10 +6,11 @@ entropy(text: string) -> double =>
         groups = group_by(text, c => c).values,
         total = double(text.length)
     in
-    groups
-        |> map(group => double(group.count) / total)
-        |> reduce(0.0D, (bits, probability) =>
-            bits - probability * Math.log2(probability))
+        groups
+            |> map(group => double(group.count) / total)
+            |> reduce(0.0D, (bits, probability) =>
+                bits - probability * Math.log2(probability)
+            )
 
 let text = "1223334444"
 

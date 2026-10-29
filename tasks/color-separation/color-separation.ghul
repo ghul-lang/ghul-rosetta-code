@@ -5,7 +5,9 @@ use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -16,19 +18,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -37,7 +52,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -45,21 +64,28 @@ scene() -> IMAGE is
     image
 si
 
-use Layer = (name: string, row: int, column: int, show: RGB -> RGB)
+use Layer = (
+    name: string,
+    row: int,
+    column: int,
+    show: (RGB) -> RGB
+)
 
 byte(v: double) -> ubyte =>
     ubyte(round(255.0D * clamp(v, 0.0D, 1.0D)))
 
 fraction(b: ubyte) -> double => double(b) / 255.0D
 
-ink(amount: double, r: double, g: double, b: double) -> RGB =>
-    (
-        red = byte(1.0D - amount * (1.0D - r)),
-        green = byte(1.0D - amount * (1.0D - g)),
-        blue = byte(1.0D - amount * (1.0D - b)))
+ink(amount: double, r: double, g: double, b: double) -> RGB => (
+    red = byte(1.0D - amount * (1.0D - r)),
+    green = byte(1.0D - amount * (1.0D - g)),
+    blue = byte(1.0D - amount * (1.0D - b))
+)
 
 cmyk(p: RGB) -> (c: double, m: double, y: double, k: double) is
-    let r = fraction(p.red), g = fraction(p.green), b = fraction(p.blue)
+    let r = fraction(p.red),
+        g = fraction(p.green),
+        b = fraction(p.blue)
     let k = 1.0D - max(r, max(g, b))
 
     if k >= 1.0D then
@@ -68,17 +94,32 @@ cmyk(p: RGB) -> (c: double, m: double, y: double, k: double) is
 
     let rest = 1.0D - k
 
-    ((1.0D - r - k) / rest, (1.0D - g - k) / rest, (1.0D - b - k) / rest, k)
+    (
+        (1.0D - r - k) / rest,
+        (1.0D - g - k) / rest,
+        (1.0D - b - k) / rest,
+        k
+    )
 si
 
 let layers: Layer[] = [
     ("original", 0, 0, p => p),
     ("red", 0, 1, p => (red = p.red, green = 0ub, blue = 0ub)),
-    ("green", 0, 2, p => (red = 0ub, green = p.green, blue = 0ub)),
-    ("blue", 0, 3, p => (red = 0ub, green = 0ub, blue = p.blue)),
-    ("cyan", 1, 1, p => ink(1.0D - fraction(p.red), 0.0D, 1.0D, 1.0D)),
-    ("magenta", 1, 2, p => ink(1.0D - fraction(p.green), 1.0D, 0.0D, 1.0D)),
-    ("yellow", 1, 3, p => ink(1.0D - fraction(p.blue), 1.0D, 1.0D, 0.0D)),
+    ("green", 0, 2, p => (
+        red = 0ub, green = p.green, blue = 0ub
+    )),
+    ("blue", 0, 3, p => (
+        red = 0ub, green = 0ub, blue = p.blue
+    )),
+    ("cyan", 1, 1, p =>
+        ink(1.0D - fraction(p.red), 0.0D, 1.0D, 1.0D)
+    ),
+    ("magenta", 1, 2, p =>
+        ink(1.0D - fraction(p.green), 1.0D, 0.0D, 1.0D)
+    ),
+    ("yellow", 1, 3, p =>
+        ink(1.0D - fraction(p.blue), 1.0D, 1.0D, 0.0D)
+    ),
     ("cyan", 2, 0, p => ink(cmyk(p).c, 0.0D, 1.0D, 1.0D)),
     ("magenta", 2, 1, p => ink(cmyk(p).m, 1.0D, 0.0D, 1.0D)),
     ("yellow", 2, 2, p => ink(cmyk(p).y, 1.0D, 1.0D, 0.0D)),
@@ -103,7 +144,13 @@ for layer in layers do
         for x in 0..source.width do
             let p = layer.show(source.pixel(x, y))
 
-            sheet.set_pixel(left + x, top + y, p.red, p.green, p.blue)
+            sheet.set_pixel(
+                left + x,
+                top + y,
+                p.red,
+                p.green,
+                p.blue
+            )
         od
     od
 
@@ -111,12 +158,18 @@ for layer in layers do
     sheet.text(
         double(left + source.width / 2),
         double(top + source.height + 15),
-        10.0D, layer.name, Anchor.CENTRE)
+        10.0D,
+        layer.name,
+        Anchor.CENTRE
+    )
 od
 
 let key_top = double(10 + cell_height + 40)
 
-for (i, line) in ["top: RGB", "middle: CMY", "bottom: CMYK"] |> index() do
+for
+    (i, line) in ["top: RGB", "middle: CMY", "bottom: CMYK"]
+        |> index()
+do
     let y = key_top + 18.0D * double(i)
 
     sheet.text(90.0D, y, 11.0D, line, Anchor.CENTRE)

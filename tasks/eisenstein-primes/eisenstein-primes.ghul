@@ -14,25 +14,33 @@ is_eisenstein_prime(e: Eisenstein) -> bool =>
         is_prime(norm(e))
     fi
 
-real(e: Eisenstein) -> double => double(e.a) - double(e.b) / 2.0D
+real(e: Eisenstein) -> double =>
+    double(e.a) - double(e.b) / 2.0D
 
 imaginary(e: Eisenstein) -> double =>
     double(e.b) * Math.sqrt(3.0D) / 2.0D
 
 show(e: Eisenstein) -> string =>
-    let im = imaginary(e), sign = if im < 0.0D then "-" else "+" fi in
-    "{real(e),8:F4} {sign} {Math.abs(im):F4}i"
+    let
+        im = imaginary(e),
+        sign = if im < 0.0D then "-" else "+" fi
+    in
+        "{real(e),8:F4} {sign} {Math.abs(im):F4}i"
 
 let reach = 60
 
-let primes =
-    [(a = a, b = b) for a in -reach::reach for b in -reach::reach]
-        |> filter(is_eisenstein_prime)
-        |> sort((x, y) =>
-            if norm(x) != norm(y) then norm(x) - norm(y)
-            elif x.b != y.b then x.b - y.b
-            else x.a - y.a
-            fi)
+let primes = [
+    (a = a, b = b)
+    for a in -reach::reach
+    for b in -reach::reach
+]
+    |> filter(is_eisenstein_prime)
+    |> sort((x, y) =>
+        if norm(x) != norm(y) then norm(x) - norm(y)
+        elif x.b != y.b then x.b - y.b
+        else x.a - y.a
+        fi
+    )
 
 write_line("the first 100 Eisenstein primes, nearest 0 first:")
 
@@ -46,7 +54,9 @@ let plotted = primes |> take(2000) |> collect()
 let largest = plotted[plotted.count - 1]
 
 write_line("")
-write_line("plotted the first 2000, out to norm {norm(largest)}")
+write_line(
+    "plotted the first 2000, out to norm {norm(largest)}"
+)
 
 let image = IMAGE(400, 400)
 let extent = Math.sqrt(double(norm(largest))) * 1.05D

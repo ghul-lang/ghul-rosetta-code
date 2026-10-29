@@ -21,5 +21,7 @@ if let entered = read_line() then
         value = next
     od
 
-    write_line("quiescent at {value:0.0000000000} after {iterations} steps")
+    write_line(
+        "quiescent at {value:0.0000000000} after {iterations} steps"
+    )
 fi

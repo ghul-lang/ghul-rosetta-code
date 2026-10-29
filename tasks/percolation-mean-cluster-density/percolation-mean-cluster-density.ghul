@@ -47,8 +47,12 @@ class CLUSTERS is
                 let column = cell % size
 
                 if column > 0 then pending.push(cell - 1) fi
-                if column < size - 1 then pending.push(cell + 1) fi
-                if cell >= size then pending.push(cell - size) fi
+                if column < size - 1 then
+                    pending.push(cell + 1)
+                fi
+                if cell >= size then
+                    pending.push(cell - size)
+                fi
 
                 if cell < size * size - size then
                     pending.push(cell + size)
@@ -59,29 +63,39 @@ class CLUSTERS is
 si
 
 density(size: int) -> double =>
-    let total = (0..runs)
-        |> sum_by(_ => double(CLUSTERS(size).count)) in
+    let total =
+        (0..runs) |> sum_by(_ => double(CLUSTERS(size).count))
+    in
     total / double(runs) / double(size * size)
 
-write_line("mean cluster density at p = {p}, averaged over {runs} runs")
+write_line(
+    "mean cluster density at p = {p}, averaged over {runs} runs"
+)
 write_line()
 write_line("   n      K(p)      off by")
 
 for size in [4, 16, 64, 256, 1024] do
     let k = density(size)
 
-    write_line("{size,4}   {k:F6}   {Math.abs(k - expected):F6}")
+    write_line(
+        "{size,4}   {k:F6}   {Math.abs(k - expected):F6}"
+    )
 od
 
 let clusters = CLUSTERS(15)
 
 write_line()
-write_line("pictured: the {clusters.count} clusters in a 15 by 15 grid")
+write_line(
+    "pictured: the {clusters.count} clusters in a 15 by 15 grid"
+)
 
 let palette = [
-    (230ub, 25ub, 75ub), (60ub, 180ub, 75ub), (255ub, 190ub, 20ub),
-    (0ub, 130ub, 200ub), (245ub, 130ub, 48ub), (145ub, 30ub, 180ub),
-    (70ub, 200ub, 200ub), (240ub, 50ub, 230ub), (150ub, 190ub, 20ub),
+    (230ub, 25ub, 75ub), (60ub, 180ub, 75ub),
+    (255ub, 190ub, 20ub),
+    (0ub, 130ub, 200ub), (245ub, 130ub, 48ub),
+    (145ub, 30ub, 180ub),
+    (70ub, 200ub, 200ub), (240ub, 50ub, 230ub),
+    (150ub, 190ub, 20ub),
     (170ub, 110ub, 40ub), (128ub, 0ub, 0ub), (0ub, 0ub, 128ub)
 ]
 
@@ -94,7 +108,8 @@ for cell in 0..225 do
     let label = clusters.labels[cell]
 
     if label > 0 then
-        let (red, green, blue) = palette[(label - 1) % palette.count]
+        let (red, green, blue) =
+            palette[(label - 1) % palette.count]
         let x = double(cell % 15)
         let y = double(cell / 15)
 

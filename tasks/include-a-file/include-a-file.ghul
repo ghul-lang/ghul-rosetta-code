@@ -5,5 +5,4 @@ use Greeting.greet
 // file here globs **/*.ghul - and every file's definitions are reached by
 // namespace, so this file uses a function defined in greeting.ghul without
 // naming that file anywhere.
-
 write_line(greet("world"))

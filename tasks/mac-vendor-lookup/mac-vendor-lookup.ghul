@@ -6,9 +6,12 @@ use System.Net.Http.HttpClient
 // at all is null.
 vendor(api: string, mac: string) -> string? is
     try
-        let response = HttpClient().get_async("{api}{mac}").result
+        let response =
+            HttpClient().get_async("{api}{mac}").result
 
-        if response.status_code == System.Net.HttpStatusCode.NOT_FOUND then
+        if
+            response.status_code == System.Net.HttpStatusCode.NOT_FOUND
+        then
             return "N/A"
         elif !response.is_success_status_code then
             return null
@@ -29,8 +32,10 @@ for mac in macs do
     // The registry refuses more than about one request a second.
     System.Threading.Thread.sleep(1500)
 
-    let found =
-        vendor("https://api.macvendors.com/", mac.replace(':', '-'))
+    let found = vendor(
+        "https://api.macvendors.com/",
+        mac.replace(':', '-')
+    )
 
     write_line("{mac,-18} {found ?? "null"}")
 od

@@ -5,7 +5,8 @@ use System.Text.Encoding
 use System.Xml.Linq.XDocument
 
 // The envelope's namespace, which every SOAP message carries.
-soap_ns() -> string => "http://schemas.xmlsoap.org/soap/envelope/"
+soap_ns() -> string =>
+    "http://schemas.xmlsoap.org/soap/envelope/"
 
 // A call is an XML envelope posted to the service, naming the function in
 // the SOAPAction header and in the body; the answer comes back in an
@@ -15,13 +16,18 @@ call(endpoint: string, function: string) -> string is
         "<soap:Envelope xmlns:soap=\"{soap_ns()}\"><soap:Body>"
         "<{function} xmlns=\"http://example.com/soap/\"/>"
         "</soap:Body></soap:Envelope>"
-    let content = StringContent(envelope, Encoding.utf8, "text/xml")
+    let content = StringContent(
+        envelope,
+        Encoding.utf8,
+        "text/xml"
+    )
 
     let action = "\"http://example.com/soap/{function}\""
 
     content.headers.add("SOAPAction", action)
 
-    let reply = HttpClient().post_async(endpoint, content).result
+    let reply =
+        HttpClient().post_async(endpoint, content).result
     let text = reply.content.read_as_string_async().result
     let document = XDocument.parse(text)
 

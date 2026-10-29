@@ -1,10 +1,13 @@
 use default
 
 is_curzon(base: int, n: int) -> bool =>
-    let divisor = bigint(base * n + 1), big_base = bigint(base) in
-    let power = bigint.mod_pow(big_base, bigint(n), divisor) in
-    (power + 1n) % divisor =~ 0n
-
+    let
+        divisor = bigint(base * n + 1),
+        big_base = bigint(base)
+    in
+        let power = bigint.mod_pow(big_base, bigint(n), divisor)
+        in
+        (power + 1n) % divisor =~ 0n
 
 curzon_numbers(base: int) -> int{} =>
     from(1) |> filter(is_curzon(base, *))
@@ -15,13 +18,17 @@ for base in [2, 4, 6, 8, 10] do
     let first_50 = curzon_numbers(base) |> take(50) |> collect()
 
     for row in 0..5 do
-        let cells = (0..10)
-            |> map(column => "{first_50[row * 10 + column],5}")
+        let cells =
+            (0..10)
+                |> map(column =>
+                    "{first_50[row * 10 + column],5}"
+                )
 
         write_line(cells |> join(""))
     od
 
-    let thousandth = (curzon_numbers(base) |> skip(999) |> first())!
+    let thousandth =
+        (curzon_numbers(base) |> skip(999) |> first())!
 
     write_line("the one thousandth: {thousandth}")
     write_line("")

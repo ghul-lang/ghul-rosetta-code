@@ -1,13 +1,17 @@
 use default
 
 left_factorials() -> bigint{} =>
-    stream(
-        (n = 0, factorial = 1n, total = 0n),
+    stream((n = 0, factorial = 1n, total = 0n),
         (n, factorial, total) =>
-            total || (n + 1, factorial * cast(n + 1), total + factorial)
+        Ghul.Pipes.STREAM.YIELD(
+            total,
+            (n + 1, factorial * cast(n + 1), total + factorial)
+        )
     )
 
-write_line("left factorials !0 through !10, then every tenth up to !110:")
+write_line(
+    "left factorials !0 through !10, then every tenth up to !110:"
+)
 
 left_factorials()
     |> index()
@@ -15,11 +19,14 @@ left_factorials()
     |> filter((n, _) => n <= 10 \/ (n >= 20 /\ n % 10 == 0))
     |> each((n, left) => write_line("!{n} = {left}"))
 
-write_line("digit counts of !1000 through !10000, by thousands:")
+write_line(
+    "digit counts of !1000 through !10000, by thousands:"
+)
 
 left_factorials()
     |> index()
     |> take_while((n, _) => n <= 10000)
     |> filter((n, _) => n >= 1000 /\ n % 1000 == 0)
     |> each((n, left) =>
-        write_line("!{n} has {left.to_string().length} digits"))
+        write_line("!{n} has {left.to_string().length} digits")
+    )

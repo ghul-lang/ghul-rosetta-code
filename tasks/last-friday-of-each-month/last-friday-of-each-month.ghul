@@ -2,14 +2,18 @@ use default
 use System
 
 last_friday(year: int, month: int) -> DateTime =>
-    let last_day =
-        DateTime(year, month, DateTime.days_in_month(year, month))
+    let last_day = DateTime(
+        year,
+        month,
+        DateTime.days_in_month(year, month)
+    )
     in
     from(0)
         |> map(back => last_day.add_days(-double(back)))
         |> find(day => day.day_of_week =~ DayOfWeek.FRIDAY)!
 
-last_fridays(year: int) -> DateTime{} => 1::12 |> map(last_friday(year, *))
+last_fridays(year: int) -> DateTime{} =>
+    1::12 |> map(last_friday(year, *))
 
 let year = 2012
 

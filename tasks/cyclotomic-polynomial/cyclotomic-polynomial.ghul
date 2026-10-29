@@ -23,10 +23,12 @@ mobius(n: int) -> int is
 si
 
 cyclotomic(n: int) -> List[long] is
-    let factors =
-        [(power = d, exponent = mobius(n / d))
-            for d in 1::n if n % d == 0]
-            |> filter(f => f.exponent != 0)
+    let factors = [
+        (power = d, exponent = mobius(n / d))
+        for d in 1::n
+        if n % d == 0
+    ]
+        |> filter(f => f.exponent != 0)
 
     let degree = factors |> sum_by(f => f.power * f.exponent)
     let series = repeat(0L, degree + 1) |> collect_mutable()
@@ -45,13 +47,22 @@ cyclotomic(n: int) -> List[long] is
         fi
     od
 
-    if n == 1 then series |> map(- *) |> collect() else series fi
+    if n == 1 then
+        series |> map(- *) |> collect()
+    else
+        series
+    fi
 si
 
 term(coefficient: long, power: int) -> string =>
     let magnitude = System.Math.abs(coefficient) in
     let digits =
-        if magnitude == 1L /\ power > 0 then "" else "{magnitude}" fi in
+        if magnitude == 1L /\ power > 0 then
+            ""
+        else
+            "{magnitude}"
+        fi
+    in
     case power
     when 0 then digits
     when 1 then "{digits}x"
@@ -73,7 +84,8 @@ show(coefficients: List[long]) -> string =>
         |> reverse()
         |> index()
         |> map(((position, (power, coefficient))) =>
-            "{sign(position == 0, coefficient)}{term(coefficient, power)}")
+            "{sign(position == 0, coefficient)}{term(coefficient, power)}"
+        )
         |> join("")
 
 write_line("The first 30 cyclotomic polynomials:")
@@ -88,9 +100,10 @@ let n mut = 0
 while first_order.count < 10 do
     n = n + 1
 
-    let heights = cyclotomic(n)
-        |> map(System.Math.abs)
-        |> filter(h => h >= 1L /\ h <= 10L)
+    let heights =
+        cyclotomic(n)
+            |> map(System.Math.abs)
+            |> filter(h => h >= 1L /\ h <= 10L)
 
     for height in heights do
         if !first_order.contains_key(height) then

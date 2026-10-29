@@ -24,25 +24,34 @@ si
 
 decode(octets: List[int]) -> int =>
     let leader = octets[0] in
-    octets |> skip(1) |> reduce(
-        case octets.count
-        when 1 then leader
-        when 2 then leader & 0x1F
-        when 3 then leader & 0x0F
-        else leader & 0x07
-        esac,
-        (acc, continuation) => (acc << 6) | (continuation & 0x3F))
+    octets
+        |> skip(1)
+        |> reduce(case octets.count
+            when 1 then leader
+            when 2 then leader & 0x1F
+            when 3 then leader & 0x0F
+            else leader & 0x07
+            esac,
+            (acc, continuation) =>
+            (acc << 6) | (continuation & 0x3F)
+        )
 
 hex(octet: int) -> string => "{octet:X2}"
 
-row(character: string, name: string, code_point: string, octets: string)
-    -> string
-=>
+row(
+    character: string,
+    name: string,
+    code_point: string,
+    octets: string
+) -> string =>
     "{character,-11}{name,-38}{code_point,-11}{octets}"
 
 let characters = [
     (code_point = 65, name = "LATIN CAPITAL LETTER A"),
-    (code_point = 246, name = "LATIN SMALL LETTER O WITH DIAERESIS"),
+    (
+        code_point = 246,
+        name = "LATIN SMALL LETTER O WITH DIAERESIS"
+    ),
     (code_point = 1046, name = "CYRILLIC CAPITAL LETTER ZHE"),
     (code_point = 8364, name = "EURO SIGN"),
     (code_point = 119070, name = "MUSICAL SYMBOL G CLEF")
@@ -54,12 +63,15 @@ for character in characters do
     let octets = encode(character.code_point)
     let decoded = decode(octets)
 
-    assert decoded == character.code_point else "the round trip must agree"
+    assert decoded == character.code_point
+        else "the round trip must agree"
 
     write_line(
         row(
             char.convert_from_utf32(decoded),
             character.name,
             "U+{decoded:X4}",
-            octets |> map(hex) |> join(" ")))
+            octets |> map(hex) |> join(" ")
+        )
+    )
 od

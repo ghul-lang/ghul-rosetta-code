@@ -9,20 +9,23 @@ let rho = 28.0D
 let beta = 8.0D / 3.0D
 let dt = 0.004D
 
-rate(at: Point) -> Point =>
-    (x = sigma * (at.y - at.x),
-     y = at.x * (rho - at.z) - at.y,
-     z = at.x * at.y - beta * at.z)
+rate(at: Point) -> Point => (
+    x = sigma * (at.y - at.x),
+    y = at.x * (rho - at.z) - at.y,
+    z = at.x * at.y - beta * at.z
+)
 
-along(at: Point, by: Point, scale: double) -> Point =>
-    (x = at.x + by.x * scale,
-     y = at.y + by.y * scale,
-     z = at.z + by.z * scale)
+along(at: Point, by: Point, scale: double) -> Point => (
+    x = at.x + by.x * scale,
+    y = at.y + by.y * scale,
+    z = at.z + by.z * scale
+)
 
-mean(a: Point, b: Point, c: Point, d: Point) -> Point =>
-    (x = (a.x + 2.0D * b.x + 2.0D * c.x + d.x) / 6.0D,
-     y = (a.y + 2.0D * b.y + 2.0D * c.y + d.y) / 6.0D,
-     z = (a.z + 2.0D * b.z + 2.0D * c.z + d.z) / 6.0D)
+mean(a: Point, b: Point, c: Point, d: Point) -> Point => (
+    x = (a.x + 2.0D * b.x + 2.0D * c.x + d.x) / 6.0D,
+    y = (a.y + 2.0D * b.y + 2.0D * c.y + d.y) / 6.0D,
+    z = (a.z + 2.0D * b.z + 2.0D * c.z + d.z) / 6.0D
+)
 
 step(at: Point) -> STREAM[Point, Point] => (
     let first = rate(at)
@@ -33,7 +36,7 @@ step(at: Point) -> STREAM[Point, Point] => (
     let slope = mean(first, second, third, fourth)
     let next = along(at, slope, dt)
 
-    next || next
+    Ghul.Pipes.STREAM.YIELD(next, next)
 )
 
 let path =

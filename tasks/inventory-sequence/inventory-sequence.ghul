@@ -8,12 +8,12 @@ inventory() -> int{} is
 
         while true do
             let seen mut = 0
-            counts.try_get_value(value, seen ref)
+            counts.try_get_value(value, seen ref )
 
             yield seen
 
             let of_that_count mut = 0
-            counts.try_get_value(seen, of_that_count ref)
+            counts.try_get_value(seen, of_that_count ref )
             counts[seen] = of_that_count + 1
 
             if seen == 0 then
@@ -34,7 +34,8 @@ inventory()
     |> take(100)
     |> chunk(10)
     |> each(row =>
-        write_line(row |> map(n => "{n,5}") |> join("")))
+        write_line(row |> map(n => "{n,5}") |> join(""))
+    )
 
 write_line("")
 
@@ -42,5 +43,8 @@ write_line("")
     |> each(n => (
         let threshold = n * 1000
         let found = first_at_least(threshold)
-        write_line("first at least {threshold,6}: {found.value,6}"
-            " at index {found.index,7}")))
+        write_line(
+            "first at least {threshold,6}: {found.value,6}"
+            " at index {found.index,7}"
+        )
+    ))

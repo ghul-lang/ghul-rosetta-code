@@ -10,7 +10,9 @@ let high = 100
 
 let target = random.next(low, high + 1)
 
-write_line("I am thinking of a number between {low} and {high}.")
+write_line(
+    "I am thinking of a number between {low} and {high}."
+)
 
 do
     write("Your guess: ")
@@ -26,8 +28,14 @@ do
 
     let guess mut = 0
 
-    if !int.try_parse(line, guess ref) \/ guess < low \/ guess > high then
-        write_line("That is not a number between {low} and {high}.")
+    if
+        !int.try_parse(line, guess ref ) \/
+        guess < low \/
+        guess > high
+    then
+        write_line(
+            "That is not a number between {low} and {high}."
+        )
 
         continue
     fi

@@ -8,7 +8,8 @@ let b = 671n
 let order = 1073807281n
 let base: Point = (13693n, 10088n)
 
-modulo(value: bigint, m: bigint) -> bigint => ((value % m) + m) % m
+modulo(value: bigint, m: bigint) -> bigint =>
+    ((value % m) + m) % m
 
 inverse(value: bigint, m: bigint) -> bigint =>
     bigint.mod_pow(modulo(value, m), m - 2n, m)
@@ -70,7 +71,10 @@ sign(hash: bigint, secret: bigint) -> (c: bigint, d: bigint) is
         let u = random_below(order)
         let (x, _) = (u * base)!
         let c = modulo(x, order)
-        let d = modulo(inverse(u, order) * (hash + secret * c), order)
+        let d = modulo(
+            inverse(u, order) * (hash + secret * c),
+            order
+        )
 
         if c !~ 0n /\ d !~ 0n then
             return (c, d)
@@ -78,16 +82,27 @@ sign(hash: bigint, secret: bigint) -> (c: bigint, d: bigint) is
     od
 si
 
-verify(hash: bigint, public_key: Point?, c: bigint, d: bigint) -> bool =>
+verify(
+    hash: bigint,
+    public_key: Point?,
+    c: bigint,
+    d: bigint
+) -> bool =>
     let
         h = inverse(d, order),
-        h1 = modulo(hash * h, order), h2 = modulo(c * h, order),
+        h1 = modulo(hash * h, order),
+        h2 = modulo(c * h, order),
         sum = h1 * base + h2 * public_key
     in
-        if let (x, _) = sum then modulo(x, order) =~ c else false fi
+        if let (x, _) = sum then
+            modulo(x, order) =~ c
+        else
+            false
+        fi
 
 assert on_curve(base) else "base point is not on the curve"
-assert (order * base) == null else "base point does not have order r"
+assert (order * base) == null
+    else "base point does not have order r"
 
 let secret = random_below(order)
 let public_key = secret * base

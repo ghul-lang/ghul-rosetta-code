@@ -5,15 +5,14 @@ arithmetic(values: double[]) -> double =>
     let total = values |> sum() in
     total / cast(values.count)
 
-
 geometric(values: double[]) -> double =>
     Math.pow(values |> product(), 1.0 / cast(values.count))
 
 harmonic(values: double[]) -> double =>
     let reciprocals =
-        values |> reduce(0.0, (running, v) => running + 1.0 / v) in
+        values |> reduce(0.0, (running, v) => running + 1.0 / v)
+    in
     cast(values.count) / reciprocals
-
 
 let one_to_ten = 1::10 |> map(double) |> collect()
 

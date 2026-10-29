@@ -11,13 +11,13 @@ relation(line: string, longest: string) -> string =>
         line_marks = Regex.replace(line, ".", "x"),
         longest_marks = Regex.replace(longest, ".", "x")
     in
-    if !line_marks.starts_with(longest_marks) then
-        "shorter"
-    elif longest_marks.starts_with(line_marks) then
-        "same"
-    else
-        "longer"
-    fi
+        if !line_marks.starts_with(longest_marks) then
+            "shorter"
+        elif longest_marks.starts_with(line_marks) then
+            "same"
+        else
+            "longer"
+        fi
 
 // The lines tied for longest are kept as one string, joined with line
 // breaks, rather than in a list.
@@ -25,7 +25,8 @@ longest_lines(longest: string, ties: string) -> string =>
     if let line = read_line() then
         case relation(line, longest)
         when "longer" then longest_lines(line, line)
-        when "same" then longest_lines(longest, "{ties}\n{line}")
+        when "same" then
+            longest_lines(longest, "{ties}\n{line}")
         else longest_lines(longest, ties)
         esac
     else

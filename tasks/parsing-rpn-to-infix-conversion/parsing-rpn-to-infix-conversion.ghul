@@ -2,7 +2,9 @@ use default
 
 union Expression is
     NUMBER(text: string)
-    OPERATION(symbol: string, left: Expression, right: Expression)
+    OPERATION(symbol: string,
+        left: Expression,
+        right: Expression)
 si
 
 let operators = ["^", "*", "/", "+", "-"]
@@ -16,9 +18,11 @@ precedence(symbol: string) -> int =>
 
 right_associative(symbol: string) -> bool => symbol =~ "^"
 
-needs_parentheses(child: Expression, parent: string,
-                  on_right: bool) -> bool
-=>
+needs_parentheses(
+    child: Expression,
+    parent: string,
+    on_right: bool
+) -> bool =>
     case child
     when value: Expression.NUMBER then false
     when inner: Expression.OPERATION then
@@ -26,7 +30,10 @@ needs_parentheses(child: Expression, parent: string,
         let theirs = precedence(parent)
 
         mine < theirs \/
-            (mine == theirs /\ on_right != right_associative(parent))
+        (
+            mine == theirs /\
+            on_right != right_associative(parent)
+        )
     esac
 
 render(node: Expression) -> string =>
@@ -38,7 +45,11 @@ render(node: Expression) -> string =>
         "{part(operation.right, operation.symbol, true)}"
     esac
 
-part(child: Expression, parent: string, on_right: bool) -> string =>
+part(
+    child: Expression,
+    parent: string,
+    on_right: bool
+) -> string =>
     if needs_parentheses(child, parent, on_right) then
         "( {render(child)} )"
     else
@@ -64,11 +75,14 @@ convert(source: string) is
             stack.add(Expression.NUMBER(token))
         fi
 
-        write_line("  {token,-6}{stack |> map(render) |> join(" ; ")}")
+        write_line(
+            "  {token,-6}{stack |> map(render) |> join(" ; ")}"
+        )
     od
 
     write_line("  infix: {render(stack[0])}")
     write_line()
 si
 
-["3 4 2 * 1 5 - 2 3 ^ ^ / +", "1 2 + 3 4 + ^ 5 6 + ^"] |> each(convert)
+["3 4 2 * 1 5 - 2 3 ^ ^ / +", "1 2 + 3 4 + ^ 5 6 + ^"]
+    |> each(convert)

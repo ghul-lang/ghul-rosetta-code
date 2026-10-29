@@ -6,7 +6,8 @@ count(pattern: string) -> int =>
     let regex = System.Text.RegularExpressions.Regex(pattern) in
     words |> count(regex.is_match)
 
-plausible(feature: int, opposite: int) -> bool => feature > 2 * opposite
+plausible(feature: int, opposite: int) -> bool =>
+    feature > 2 * opposite
 
 let ie_elsewhere = count("(^|[^c])ie")
 let ei_elsewhere = count("(^|[^c])ei")
@@ -16,7 +17,13 @@ let first = plausible(ie_elsewhere, ei_elsewhere)
 let second = plausible(ei_after_c, ie_after_c)
 
 write_line("I before E when not preceded by C:")
-write_line("    {ie_elsewhere} against {ei_elsewhere}, plausible: {first}")
+write_line(
+    "    {ie_elsewhere} against {ei_elsewhere}, plausible: {first}"
+)
 write_line("E before I when preceded by C:")
-write_line("    {ei_after_c} against {ie_after_c}, plausible: {second}")
-write_line("I before E except after C is plausible: {first /\ second}")
+write_line(
+    "    {ei_after_c} against {ie_after_c}, plausible: {second}"
+)
+write_line(
+    "I before E except after C is plausible: {first /\ second}"
+)

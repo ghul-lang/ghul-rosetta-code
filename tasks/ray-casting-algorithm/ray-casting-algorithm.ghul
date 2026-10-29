@@ -6,13 +6,15 @@ use Ring = Collections.List[Point]
 let epsilon = 0.000001D
 
 crosses(point: Point, from: Point, to: Point) -> bool is
-    let (low, high) = if from.y < to.y then (from, to) else (to, from) fi
+    let (low, high) =
+        if from.y < to.y then (from, to) else (to, from) fi
 
-    let y = if point.y == low.y \/ point.y == high.y then
-                point.y + epsilon
-            else
-                point.y
-            fi
+    let y =
+        if point.y == low.y \/ point.y == high.y then
+            point.y + epsilon
+        else
+            point.y
+        fi
 
     let rightmost = System.Math.max(low.x, high.x)
 
@@ -49,40 +51,65 @@ crosses(point: Point, from: Point, to: Point) -> bool is
 si
 
 inside(point: Point, rings: List[Ring]) -> bool =>
-    [true
-        for ring in rings for index in 0..ring.count
-        if crosses(point, ring[index], ring[(index + 1) % ring.count])]
-        .count % 2 == 1
+    [
+        true
+        for ring in rings
+        for index in 0..ring.count
+        if crosses(
+            point,
+            ring[index],
+            ring[(index + 1) % ring.count]
+        )
+    ].count % 2 == 1
 
 ring(corners: List[(double, double)]) -> Ring =>
     corners |> map((x, y) => (x = x, y = y)) |> collect()
 
-let square = [ring([(0.0D, 0.0D), (10.0D, 0.0D), (10.0D, 10.0D),
-                    (0.0D, 10.0D)])]
+let square = [
+    ring([
+        (0.0D, 0.0D), (10.0D, 0.0D), (10.0D, 10.0D),
+        (0.0D, 10.0D)
+    ])
+]
 
-let square_hole =
-    [square[0],
-     ring([(2.5D, 2.5D), (7.5D, 2.5D), (7.5D, 7.5D), (2.5D, 7.5D)])]
+let square_hole = [
+    square[0],
+    ring([
+        (2.5D, 2.5D),
+        (7.5D, 2.5D),
+        (7.5D, 7.5D),
+        (2.5D, 7.5D)
+    ])
+]
 
-let hexagon =
-    [ring([(3.0D, 0.0D), (7.0D, 0.0D), (10.0D, 5.0D), (7.0D, 10.0D),
-           (3.0D, 10.0D), (0.0D, 5.0D)])]
+let hexagon = [
+    ring([
+        (3.0D, 0.0D), (7.0D, 0.0D), (10.0D, 5.0D),
+        (7.0D, 10.0D),
+        (3.0D, 10.0D), (0.0D, 5.0D)
+    ])
+]
 
-let shapes =
-    [(name = "square", rings = square),
-     (name = "square with hole", rings = square_hole),
-     (name = "hexagon", rings = hexagon)]
+let shapes = [
+    (name = "square", rings = square),
+    (name = "square with hole", rings = square_hole),
+    (name = "hexagon", rings = hexagon)
+]
 
-let probes =
-    [(x = 5.0D, y = 5.0D), (x = 5.0D, y = 8.0D), (x = -10.0D, y = 5.0D),
-     (x = 0.0D, y = 5.0D), (x = 10.0D, y = 5.0D), (x = 8.0D, y = 5.0D),
-     (x = 10.0D, y = 10.0D)]
+let probes = [
+    (x = 5.0D, y = 5.0D), (x = 5.0D, y = 8.0D),
+    (x = -10.0D, y = 5.0D),
+    (x = 0.0D, y = 5.0D), (x = 10.0D, y = 5.0D),
+    (x = 8.0D, y = 5.0D),
+    (x = 10.0D, y = 10.0D)
+]
 
 for (name, rings) in shapes do
     write_line(name)
 
     for probe in probes do
-        let verdict = if inside(probe, rings) then "in" else "out" fi
+        let verdict =
+            if inside(probe, rings) then "in" else "out" fi
 
         write_line("  {probe}: {verdict}")
     od
@@ -97,15 +124,15 @@ image.stroke(2.0D)
 image.colour(40ub, 40ub, 60ub)
 
 for hole in square_hole do
-    image.line(
-        hole ++ [hole[0]] |> collect())
+    image.line(hole ++ [hole[0]] |> collect())
 od
 
 for step_x in 0..49 do
     for step_y in 0..49 do
-        let probe =
-            (x = -0.5D + double(step_x) * 0.22D,
-             y = -0.5D + double(step_y) * 0.22D)
+        let probe = (
+            x = -0.5D + double(step_x) * 0.22D,
+            y = -0.5D + double(step_y) * 0.22D
+        )
 
         if inside(probe, square_hole) then
             image.colour(40ub, 140ub, 60ub)

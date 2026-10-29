@@ -1,12 +1,16 @@
 use default
 use System.Math.*
 
-aitken(f: double -> double, p0: double) -> double =>
-    let p1 = f(p0), p2 = f(p1), p1m0 = p1 - p0 in
-    p0 - (p1m0 * p1m0) / (p2 - 2.0 * p1 + p0)
+aitken(f: (double) -> double, p0: double) -> double =>
+    let
+        p1 = f(p0),
+        p2 = f(p1),
+        p1m0 = p1 - p0
+    in
+        p0 - (p1m0 * p1m0) / (p2 - 2.0 * p1 + p0)
 
 steffensen_aitken(
-    f: double -> double,
+    f: (double) -> double,
     initial: double,
     tolerance: double,
     iterations: int
@@ -24,14 +28,20 @@ steffensen_aitken(
     if abs(p - p0) > tolerance then null else p fi
 si
 
-de_casteljau(c0: double, c1: double, c2: double, t: double) -> double =>
+de_casteljau(
+    c0: double,
+    c1: double,
+    c2: double,
+    t: double
+) -> double =>
     let s = 1.0 - t in
     s * (s * c0 + t * c1) + t * (s * c1 + t * c2)
 
 x(t: double) -> double => de_casteljau(2.0, -8.0, 2.0, t)
 y(t: double) -> double => de_casteljau(1.0, 2.0, 3.0, t)
 
-implicit_equation(x: double, y: double) -> double => 5.0 * x * x + y - 5.0
+implicit_equation(x: double, y: double) -> double =>
+    5.0 * x * x + y - 5.0
 
 f(t: double) -> double => implicit_equation(x(t), y(t)) + t
 
@@ -43,7 +53,9 @@ for i in 0::10 do
         let (px, py) = (x(t), y(t))
 
         if abs(implicit_equation(px, py)) <= 0.000001 then
-            write_line("{prefix} intersection at ({px:F6}, {py:F6})")
+            write_line(
+                "{prefix} intersection at ({px:F6}, {py:F6})"
+            )
         else
             write_line("{prefix} spurious solution")
         fi

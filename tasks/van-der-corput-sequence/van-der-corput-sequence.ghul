@@ -5,19 +5,19 @@ van_der_corput(n: int, base: int) -> double is
         if rest == 0 then 0.0
         else
             cast(rest % base) * weight +
-                walk(rest / base, weight / cast(base))
+            walk(rest / base, weight / cast(base))
         fi
 
     walk(n, 1.0D / cast(base))
 si
 
-let base_2 = 0::9 |> map(n => "{van_der_corput(n, 2)}") |> join()
+let base_2 =
+    0::9 |> map(n => "{van_der_corput(n, 2)}") |> join()
 
 write_line("base 2: {base_2}")
 
 for base in 3::5 do
-    let terms = 0::9
-        |> map(n => "{van_der_corput(n, base):F4}")
+    let terms = 0::9 |> map(n => "{van_der_corput(n, base):F4}")
 
     write_line("base {base}: {terms |> join(", ")}")
 od

@@ -18,7 +18,8 @@ for row in 0..16 do
 
         let code = 32 + column * 16 + row
         let last = column == columns - 1
-        let shown = if last then name(code) else "{name(code),-3}" fi
+        let shown =
+            if last then name(code) else "{name(code),-3}" fi
 
         write("{code,3} : {shown}")
     od

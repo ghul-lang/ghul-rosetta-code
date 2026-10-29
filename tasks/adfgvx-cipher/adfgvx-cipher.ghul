@@ -13,16 +13,15 @@ shuffled(items: string) -> string => (
     string(held)
 )
 
-all_letters(word: string) -> bool =>
-    word |> all(char.is_letter)
+all_letters(word: string) -> bool => word |> all(char.is_letter)
 
 no_repeats(word: string) -> bool => (
     let seen = SET()
-    word |> all(seen.add))
+    word |> all(seen.add)
+)
 
 read_order(key: string) -> int{} =>
-    (0..key.length)
-        |> sort_by(column => key[column])
+    (0..key.length) |> sort_by(column => key[column])
 
 column_height(key: string, length: int, column: int) -> int =>
     (length / key.length) +
@@ -32,7 +31,8 @@ to_pairs(square: string, text: string) -> string =>
     text
         |> flat_map(letter =>
             let at = square.index_of(letter) in
-            [labels[at / 6], labels[at % 6]])
+            [labels[at / 6], labels[at % 6]]
+        )
         |> join("")
 
 from_pairs(square: string, pairs: List[char]) -> string =>
@@ -42,7 +42,8 @@ from_pairs(square: string, pairs: List[char]) -> string =>
                 row = labels.index_of(pairs[at * 2]),
                 column = labels.index_of(pairs[at * 2 + 1])
             in
-                square[row * 6 + column])
+                square[row * 6 + column]
+        )
         |> join("")
 
 encrypt(square: string, key: string, text: string) -> string =>
@@ -52,10 +53,15 @@ encrypt(square: string, key: string, text: string) -> string =>
         |> flat_map(column =>
             column..pairs.length
                 |> step(key.length)
-                |> map(at => pairs[at]))
+                |> map(at => pairs[at])
+        )
         |> join("")
 
-decrypt(square: string, key: string, cipher: string) -> string => (
+decrypt(
+    square: string,
+    key: string,
+    cipher: string
+) -> string => (
     let pairs = cipher |> collect_mutable()
     let taken mut = 0
     for column in read_order(key) do
@@ -87,7 +93,7 @@ write_line()
 write_line("   {labels |> join(" ")}")
 
 for row in 0..6 do
-    let letters = square[row * 6 .. row * 6 + 6]
+    let letters = square[row * 6..row * 6 + 6]
 
     write_line("{labels[row]}  {letters |> join(" ")}")
 od

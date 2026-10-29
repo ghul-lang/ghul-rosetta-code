@@ -1,7 +1,9 @@
 use default
 
-let ranks =
-    ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+let ranks = [
+    "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
+    "A"
+]
 let suits = ["C", "D", "H", "S"]
 
 use Card = (rank: int, suit: int)
@@ -50,7 +52,11 @@ play(seed: int) -> (winner: int, rounds: int) is
 
             if hands[0].count < 2 \/ hands[1].count < 2 then
                 winner =
-                    if hands[0].count >= hands[1].count then 0 else 1 fi
+                    if hands[0].count >= hands[1].count then
+                        0
+                    else
+                        1
+                    fi
                 story.add("war, but one hand runs out")
                 break
             fi
@@ -69,7 +75,8 @@ play(seed: int) -> (winner: int, rounds: int) is
 
         write_line(
             "{rounds,3}: {story |> join(", ")}: player {winner + 1} "
-            "takes {pot.count}, {hands[0].count} to {hands[1].count}")
+            "takes {pot.count}, {hands[0].count} to {hands[1].count}"
+        )
     od
 
     let champion = if hands[0].count > 0 then 1 else 2 fi
@@ -80,4 +87,6 @@ si
 let (winner, rounds) = play(37)
 
 write_line()
-write_line("player {winner} has all 52 cards after {rounds} rounds")
+write_line(
+    "player {winner} has all 52 cards after {rounds} rounds"
+)

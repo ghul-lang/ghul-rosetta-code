@@ -10,38 +10,47 @@ let size = 8
 let start = (row = 0, column = 0)
 let goal = (row = 7, column = 7)
 
-let barrier =
-    [(row = 2, column = 4), (row = 2, column = 5),
-     (row = 2, column = 6), (row = 3, column = 6),
-     (row = 4, column = 6), (row = 5, column = 6),
-     (row = 5, column = 5), (row = 5, column = 4),
-     (row = 5, column = 3), (row = 5, column = 2),
-     (row = 4, column = 2), (row = 3, column = 2)]
+let barrier = [
+    (row = 2, column = 4), (row = 2, column = 5),
+    (row = 2, column = 6), (row = 3, column = 6),
+    (row = 4, column = 6), (row = 5, column = 6),
+    (row = 5, column = 5), (row = 5, column = 4),
+    (row = 5, column = 3), (row = 5, column = 2),
+    (row = 4, column = 2), (row = 3, column = 2)
+]
 
 at(square: Square) -> int => square.row * size + square.column
 
-square_at(index: int) -> Square =>
-    (row = index / size, column = index % size)
+square_at(index: int) -> Square => (
+    row = index / size,
+    column = index % size
+)
 
 blocked(square: Square) -> bool =>
     barrier |> any(other => at(other) == at(square))
 
-entering(square: Square) -> int => if blocked(square) then 100 else 1 fi
+entering(square: Square) -> int =>
+    if blocked(square) then 100 else 1 fi
 
 remaining(square: Square) -> int =>
-    max(abs(goal.row - square.row),
-             abs(goal.column - square.column))
+    max(
+        abs(goal.row - square.row),
+        abs(goal.column - square.column)
+    )
 
 inside(square: Square) -> bool =>
-    square.row >= 0 /\ square.row < size /\
-    square.column >= 0 /\ square.column < size
+    square.row >= 0 /\
+    square.row < size /\
+    square.column >= 0 /\
+    square.column < size
 
 steps_from(square: Square) -> Square{} is
     for down in -1::1 do
         for across in -1::1 do
-            let next =
-                (row = square.row + down,
-                 column = square.column + across)
+            let next = (
+                row = square.row + down,
+                column = square.column + across
+            )
 
             if (down != 0 \/ across != 0) /\ inside(next) then
                 yield next
@@ -66,8 +75,10 @@ while open.count > 0 do
     let pick mut = 0
 
     for which in 1..open.count do
-        if cheapest[at(open[which])] + remaining(open[which]) <
-                cheapest[at(open[pick])] + remaining(open[pick]) then
+        if
+            cheapest[at(open[which])] + remaining(open[which]) <
+            cheapest[at(open[pick])] + remaining(open[pick])
+        then
             pick = which
         fi
     od
@@ -120,22 +131,24 @@ for row in 0..size do
                     "."
                 fi
             ))
-            |> join(""))
+            |> join("")
+    )
 od
 
 write_line("")
-write_line("route [{route |> map(s => "({s.row}, {s.column})")
-                        |> join(", ")}]")
+write_line(
+    "route [{route |> map(s => "({s.row}, {s.column})") |> join(", ")}]"
+)
 write_line("cost {cheapest[at(goal)]}")
 
 let image = IMAGE(520, 520)
 
 image.view(-0.15D, -0.15D, 8.15D, 8.15D)
 
-middle(square: Square) ->
-        (x: double, y: double) =>
-    (x = double(square.column) + 0.5D,
-     y = double(size - square.row) - 0.5D)
+middle(square: Square) -> (x: double, y: double) => (
+    x = double(square.column) + 0.5D,
+    y = double(size - square.row) - 0.5D
+)
 
 let board = SHAPES()
 
@@ -144,11 +157,12 @@ for row in 0..size do
         let square = (row = row, column = column)
         let centre = middle(square)
 
-        let cell =
-            [(x = centre.x - 0.5D, y = centre.y - 0.5D),
-             (x = centre.x + 0.5D, y = centre.y - 0.5D),
-             (x = centre.x + 0.5D, y = centre.y + 0.5D),
-             (x = centre.x - 0.5D, y = centre.y + 0.5D)]
+        let cell = [
+            (x = centre.x - 0.5D, y = centre.y - 0.5D),
+            (x = centre.x + 0.5D, y = centre.y - 0.5D),
+            (x = centre.x + 0.5D, y = centre.y + 0.5D),
+            (x = centre.x - 0.5D, y = centre.y + 0.5D)
+        ]
 
         if blocked(square) then
             board.add(cell, 96ub, 104ub, 124ub)
@@ -164,9 +178,11 @@ image.fill(board)
 
 image.colour(40ub, 40ub, 50ub)
 image.stroke(1.4D)
-image.line([(x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
-            (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
-            (x = 0.0D, y = 0.0D)])
+image.line([
+    (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
+    (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
+    (x = 0.0D, y = 0.0D)
+])
 
 image.colour(200ub, 48ub, 40ub)
 image.stroke(3.0D)

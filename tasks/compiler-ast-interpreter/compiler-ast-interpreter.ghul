@@ -17,7 +17,11 @@ load(lines: List[string], cursor: LIST[int]) -> Node is
 
     let kind = line.split([' '])[0]
 
-    if kind =~ "Identifier" \/ kind =~ "Integer" \/ kind =~ "String" then
+    if
+        kind =~ "Identifier" \/
+        kind =~ "Integer" \/
+        kind =~ "String"
+    then
         return Node.LEAF(kind, line[kind.length..<0].trim())
     fi
 
@@ -47,9 +51,14 @@ interpret(node: Node) -> int =>
             fi
             0
         when "If" then
-            if let (_, consequent, alternative): Node.BRANCH = right then
-                interpret(if interpret(left) != 0 then consequent
-                          else alternative fi)
+            if let
+                (_, consequent, alternative): Node.BRANCH = right
+            then
+                interpret(
+                    if interpret(left) != 0 then consequent
+                    else alternative
+                    fi
+                )
             fi
             0
         when "While" then
@@ -57,9 +66,16 @@ interpret(node: Node) -> int =>
                 interpret(right)
             od
             0
-        when "Sequence" then interpret(left); interpret(right); 0
-        when "Prtc" then Std.write(char(interpret(left))); 0
-        when "Prti" then Std.write("{interpret(left)}"); 0
+        when "Sequence" then
+            interpret(left)
+            interpret(right)
+            0
+        when "Prtc" then
+            Std.write(char(interpret(left)))
+            0
+        when "Prti" then
+            Std.write("{interpret(left)}")
+            0
         when "Prts" then
             if let (_, text): Node.LEAF = left then
                 Std.write(unquote(text))
@@ -67,8 +83,10 @@ interpret(node: Node) -> int =>
             0
         when "Negate" then -interpret(left)
         when "Not" then truth(interpret(left) == 0)
-        when "And" then truth(interpret(left) != 0 /\ interpret(right) != 0)
-        when "Or" then truth(interpret(left) != 0 \/ interpret(right) != 0)
+        when "And" then
+            truth(interpret(left) != 0 /\ interpret(right) != 0)
+        when "Or" then
+            truth(interpret(left) != 0 \/ interpret(right) != 0)
         else
             let a = interpret(left)
             let b = interpret(right)
@@ -85,39 +103,49 @@ interpret(node: Node) -> int =>
             when "GreaterEqual" then truth(a >= b)
             when "Equal" then truth(a == b)
             when "NotEqual" then truth(a != b)
-            else throw System.Exception("unknown operator {kind}")
+            else
+                throw System.Exception(
+                    "unknown operator {kind}"
+                )
             esac
         esac
     else 0
     esac
 
 let ast = LIST([
-    "Sequence", "Sequence", "Sequence", "Sequence", "Sequence", ";",
+    "Sequence", "Sequence", "Sequence", "Sequence", "Sequence",
+    ";",
     "Assign", "Identifier count", "Integer 1",
     "Assign", "Identifier n", "Integer 1",
     "Assign", "Identifier limit", "Integer 100",
     "While",
     "Less", "Identifier n", "Identifier limit",
-    "Sequence", "Sequence", "Sequence", "Sequence", "Sequence", ";",
+    "Sequence", "Sequence", "Sequence", "Sequence", "Sequence",
+    ";",
     "Assign", "Identifier k", "Integer 3",
     "Assign", "Identifier p", "Integer 1",
-    "Assign", "Identifier n", "Add", "Identifier n", "Integer 2",
+    "Assign", "Identifier n", "Add", "Identifier n",
+    "Integer 2",
     "While",
     "And",
-    "LessEqual", "Multiply", "Identifier k", "Identifier k", "Identifier n",
+    "LessEqual", "Multiply", "Identifier k", "Identifier k",
+    "Identifier n",
     "Identifier p",
     "Sequence", "Sequence", ";",
     "Assign", "Identifier p",
-    "NotEqual", "Multiply", "Divide", "Identifier n", "Identifier k",
+    "NotEqual", "Multiply", "Divide", "Identifier n",
+    "Identifier k",
     "Identifier k", "Identifier n",
-    "Assign", "Identifier k", "Add", "Identifier k", "Integer 2",
+    "Assign", "Identifier k", "Add", "Identifier k",
+    "Integer 2",
     "If", "Identifier p",
     "If",
     "Sequence", "Sequence", ";",
     "Sequence", "Sequence", ";",
     "Prti", "Identifier n", ";",
     "Prts", "String \" is prime\\n\"", ";",
-    "Assign", "Identifier count", "Add", "Identifier count", "Integer 1",
+    "Assign", "Identifier count", "Add", "Identifier count",
+    "Integer 1",
     ";",
     "Sequence", "Sequence", "Sequence", ";",
     "Prts", "String \"Total primes found: \"", ";",

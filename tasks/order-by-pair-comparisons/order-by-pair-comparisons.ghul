@@ -42,8 +42,10 @@ order(items: List[string]) -> string{} is
     sorted
 si
 
-let colours =
-    ["violet", "red", "green", "indigo", "blue", "yellow", "orange"]
+let colours = [
+    "violet", "red", "green", "indigo", "blue", "yellow",
+    "orange"
+]
 
 write_line("ordering {colours |> join(" ")}")
 

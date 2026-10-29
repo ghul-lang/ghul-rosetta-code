@@ -1,1 +1,16 @@
-use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let newline = string(cast char(10), 1); let source = "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let newline = string(cast char(10), 1); let source = M; let input = IO.StreamReader(IO.Std.open_standard_input()).read_to_end(); let program = string.concat([source.replace(marker, string.concat([quote, source, quote])), newline]); write_line(input =~ program)"; let input = IO.StreamReader(IO.Std.open_standard_input()).read_to_end(); let program = string.concat([source.replace(marker, string.concat([quote, source, quote])), newline]); write_line(input =~ program)
+use IO.Std.write_line
+let quote = string(cast char(34), 1)
+let marker = string(cast char(77), 1)
+let newline = string(cast char(10), 1)
+let source =
+    "use IO.Std.write_line; let quote = string(cast char(34), 1); let marker = string(cast char(77), 1); let newline = string(cast char(10), 1); let source = M; let input = IO.StreamReader(IO.Std.open_standard_input()).read_to_end(); let program = string.concat([source.replace(marker, string.concat([quote, source, quote])), newline]); write_line(input =~ program)"
+let input =
+    IO.StreamReader(IO.Std.open_standard_input()).read_to_end()
+let program = string.concat([
+    source.replace(
+        marker,
+        string.concat([quote, source, quote])
+    ),
+    newline
+])
+write_line(input =~ program)

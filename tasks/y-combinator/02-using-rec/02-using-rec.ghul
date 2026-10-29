@@ -1,20 +1,23 @@
 use IO.Std.write_line
 
-let factorial = n rec => if n <= 1 then 1L else cast(n) * rec(n - 1) fi
+let factorial =
+    n rec => if n <= 1 then 1L else cast(n) * rec(n - 1) fi
 
-let fibonacci = n rec => if n < 2 then n else rec(n - 1) + rec(n - 2) fi
+let fibonacci =
+    n rec => if n < 2 then n else rec(n - 1) + rec(n - 2) fi
 
 let countdown =
-    n rec => if n <= 0 then "liftoff" else "{n}, {rec(n - 1)}" fi
+    n rec =>
+        if n <= 0 then "liftoff" else "{n}, {rec(n - 1)}" fi
 
 let gcd =
-    ((a, b)) rec =>
-        if b == 0 then a else rec((b, a % b)) fi
+    ((a, b)) rec => if b == 0 then a else rec((b, a % b)) fi
 
 for n in 0::10 do
     write_line(
         "factorial({n}) = {factorial(n)}, "
-        "fibonacci({n}) = {fibonacci(n)}")
+        "fibonacci({n}) = {fibonacci(n)}"
+    )
 od
 
 write_line("countdown(5) = {countdown(5)}")

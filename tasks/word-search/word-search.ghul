@@ -1,12 +1,19 @@
 use default
 
-use Placed = (word: string, row: int, column: int, dr: int, dc: int)
+use Placed = (
+    word: string,
+    row: int,
+    column: int,
+    dr: int,
+    dc: int
+)
 
 let size = 10
 let message = "ROSETTACODE"
 
 let directions = [
-    (0, 1), (1, 0), (1, 1), (1, -1), (0, -1), (-1, 0), (-1, -1), (-1, 1)
+    (0, 1), (1, 0), (1, 1), (1, -1), (0, -1), (-1, 0), (-1, -1),
+    (-1, 1)
 ]
 
 let words =
@@ -30,18 +37,36 @@ class GRID is
 
     empty: int => cells |> filter(* == ' ') |> count()
 
-    fits(word: string, row: int, column: int, dr: int, dc: int) -> bool =>
-        0..word.length |> all(i =>
-            let r = row + dr * i, c = column + dc * i in
-            r >= 0 /\ r < size /\ c >= 0 /\ c < size /\
-            (cells[at(r, c)] == ' ' \/ cells[at(r, c)] == word[i]))
+    fits(
+        word: string,
+        row: int,
+        column: int,
+        dr: int,
+        dc: int
+    ) -> bool =>
+        0..word.length
+            |> all(i =>
+                let
+                    r = row + dr * i,
+                    c = column + dc * i
+                in
+                    r >= 0 /\
+                    r < size /\
+                    c >= 0 /\
+                    c < size /\
+                    (
+                        cells[at(r, c)] == ' ' \/
+                        cells[at(r, c)] == word[i]
+                    )
+            )
 
     try_place(word: string) -> bool is
         let (dr, dc) = directions[random.next(directions.count)]
         let row = random.next(size)
         let column = random.next(size)
 
-        if placed |> any(p => p.word =~ word) \/
+        if
+            placed |> any(p => p.word =~ word) \/
             !fits(word, row, column, dr, dc)
         then
             return false
@@ -51,7 +76,8 @@ class GRID is
             (0..word.length)
                 |> map(i => at(row + dr * i, column + dc * i))
 
-        let covered = squares |> filter(s => cells[s] == ' ') |> count()
+        let covered =
+            squares |> filter(s => cells[s] == ' ') |> count()
 
         if empty - covered < message.length then
             return false
@@ -77,7 +103,10 @@ build() -> GRID is
             attempts = attempts + 1
         od
 
-        if grid.empty == message.length /\ grid.placed.count >= 25 then
+        if
+            grid.empty == message.length /\
+            grid.placed.count >= 25
+        then
             return grid
         fi
     od
@@ -98,7 +127,9 @@ write_line("")
 
 for row in 0..size do
     let letters =
-        0..size |> map(c => "{grid.cells[at(row, c)]}") |> join("  ")
+        0..size
+            |> map(c => "{grid.cells[at(row, c)]}")
+            |> join("  ")
 
     write_line("{row}    {letters}")
 od
@@ -106,9 +137,12 @@ od
 write_line("")
 
 ends(p: Placed) -> string =>
-    let last = p.word.length - 1, end_column = p.column + p.dc * last in
-    let end_row = p.row + p.dr * last in
-    "({p.column},{p.row})({end_column},{end_row})"
+    let
+        last = p.word.length - 1,
+        end_column = p.column + p.dc * last
+    in
+        let end_row = p.row + p.dr * last in
+        "({p.column},{p.row})({end_column},{end_row})"
 
 let solutions =
     grid.placed
@@ -117,7 +151,8 @@ let solutions =
         |> collect()
 
 for row in 0..(solutions.count + 1) / 2 do
-    let pair = solutions |> skip(row * 2) |> take(2) |> join("   ")
+    let pair =
+        solutions |> skip(row * 2) |> take(2) |> join("   ")
 
     write_line(pair.trim_end())
 od

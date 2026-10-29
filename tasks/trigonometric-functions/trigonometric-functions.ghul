@@ -3,7 +3,6 @@ use System.Math.*
 
 // The library takes and returns radians, so the degree column is the same
 // angle converted on the way in and on the way out.
-
 to_radians(degrees: double) -> double => degrees * pi / 180.0
 to_degrees(radians: double) -> double => radians * 180.0 / pi
 
@@ -18,6 +17,12 @@ let arcsin = asin(sin(radians))
 let arccos = acos(cos(radians))
 let arctan = atan(tan(radians))
 
-write_line("asin {arcsin} radians, {to_degrees(arcsin)} degrees")
-write_line("acos {arccos} radians, {to_degrees(arccos)} degrees")
-write_line("atan {arctan} radians, {to_degrees(arctan)} degrees")
+write_line(
+    "asin {arcsin} radians, {to_degrees(arcsin)} degrees"
+)
+write_line(
+    "acos {arccos} radians, {to_degrees(arccos)} degrees"
+)
+write_line(
+    "atan {arctan} radians, {to_degrees(arctan)} degrees"
+)

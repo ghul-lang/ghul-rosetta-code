@@ -10,11 +10,14 @@ class MONEY(cents: bigint) is
             raw = cents * rate_per_10000,
             rounded = (raw + 5000n) / 10000n
         in
-        MONEY(rounded)
+            MONEY(rounded)
 
     to_string() -> string =>
-        let whole = cents / 100n, part = cents % 100n in
-        "{whole}.{part,2:00}"
+        let
+            whole = cents / 100n,
+            part = cents % 100n
+        in
+            "{whole}.{part,2:00}"
 si
 
 dollars(units: int, cents: int) -> MONEY =>

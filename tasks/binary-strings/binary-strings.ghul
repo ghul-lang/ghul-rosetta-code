@@ -8,13 +8,13 @@ to_text(bytes: bstring) -> string =>
     bytes |> map(char) |> string()
 
 replace_byte(
-    bytes: bstring, old: ubyte, replacement: ubyte
+    bytes: bstring,
+    old: ubyte,
+    replacement: ubyte
 ) -> bstring =>
-    bytes
-        |> map(b => if b == old then replacement else b fi)
+    bytes |> map(b => if b == old then replacement else b fi)
 
-join_bytes(a: bstring, b: bstring) -> bstring =>
-    a ++ b
+join_bytes(a: bstring, b: bstring) -> bstring => a ++ b
 
 let hello = LIST([104ub, 101ub, 108ub, 108ub, 111ub])
 write_line("created: {to_text(hello)}")

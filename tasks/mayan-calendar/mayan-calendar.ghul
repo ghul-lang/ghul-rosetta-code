@@ -3,20 +3,23 @@ use default
 use System.DateTime
 
 let day_names = [
-    "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi", "Manik’",
-    "Lamat", "Muluk", "Ok", "Chuwen", "Eb", "Ben", "Hix", "Men", "K’ib’",
+    "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi",
+    "Manik’",
+    "Lamat", "Muluk", "Ok", "Chuwen", "Eb", "Ben", "Hix", "Men",
+    "K’ib’",
     "Kaban", "Etz’nab’", "Kawak", "Ajaw"
 ]
 
 let months = [
-    "Pop", "Wo’", "Sip", "Sotz’", "Sek", "Xul", "Yaxk’in", "Mol", "Ch’en",
-    "Yax", "Sak’", "Keh", "Mak", "K’ank’in", "Muwan", "Pax", "K’ayab",
+    "Pop", "Wo’", "Sip", "Sotz’", "Sek", "Xul", "Yaxk’in",
+    "Mol", "Ch’en",
+    "Yax", "Sak’", "Keh", "Mak", "K’ank’in", "Muwan", "Pax",
+    "K’ayab",
     "Kumk’u", "Wayeb’"
 ]
 
 // Days since the creation date 13.0.0.0.0, 11 August 3114 BCE, using the
 // GMT correlation: that day is Julian day number 584283.
-
 let correlation = 584_283
 let julian_day_of_0001_01_01 = 1_721_426
 
@@ -29,27 +32,45 @@ tzolkin(days: int) -> string =>
 
 haab(days: int) -> string =>
     let position = (days + 348) % 365 in
-    let month = months[position / 20], day = position % 20 in
-    if day == 0 then "Chum {month,-9}" else "{day,4} {month,-9}" fi
+    let
+        month = months[position / 20],
+        day = position % 20
+    in
+        if day == 0 then
+            "Chum {month,-9}"
+        else
+            "{day,4} {month,-9}"
+        fi
 
 long_count(days: int) -> string =>
-    let bak_tun = days / 144_000, k_atun = days / 7_200 % 20 in
-    let tun = days / 360 % 20, winal = days / 20 % 18, k_in = days % 20 in
-    "{bak_tun}.{k_atun}.{tun}.{winal}.{k_in}"
+    let
+        bak_tun = days / 144000,
+        k_atun = days / 7200 % 20
+    in
+        let
+            tun = days / 360 % 20,
+            winal = days / 20 % 18,
+            k_in = days % 20
+        in
+            "{bak_tun}.{k_atun}.{tun}.{winal}.{k_in}"
 
-lord_of_the_night(days: int) -> string => "G{(days + 8) % 9 + 1}"
+lord_of_the_night(days: int) -> string =>
+    "G{(days + 8) % 9 + 1}"
 
 let dates = [
     "2004-06-19", "2012-12-18", "2012-12-21", "2019-01-19",
     "2019-03-27", "2020-02-29", "2020-03-01", "2071-05-16"
 ]
 
-write_line("Gregorian   Tzolk’in      Haab’           Long count      Lord")
+write_line(
+    "Gregorian   Tzolk’in      Haab’           Long count      Lord"
+)
 
 for text in dates do
     let days = days_since_creation(DateTime.parse(text))
 
     write_line(
         "{text}  {tzolkin(days)}  {haab(days)}  "
-        "{long_count(days),-14}  {lord_of_the_night(days)}")
+        "{long_count(days),-14}  {lord_of_the_night(days)}"
+    )
 od

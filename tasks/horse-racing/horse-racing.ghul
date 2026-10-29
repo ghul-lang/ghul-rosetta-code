@@ -3,7 +3,6 @@ use default
 // A length is a fifth of a second and two pounds cost a length, so each
 // pound carried is a tenth of a second over the mile. Every time below is
 // what the horse would run carrying its race 4 weight.
-
 use Runner = (horse: string, weight: string, behind: double)
 
 let fillies = SET(["B", "D", "I", "J"])
@@ -15,36 +14,62 @@ pounds(weight: string) -> int =>
 race_4_weight(horse: string) -> string =>
     if fillies.contains(horse) then "8.11" else "9.00" fi
 
-times(winner: double, runners: List[Runner]) -> (string, double){} is
+times(winner: double, runners: List[Runner]) -> (
+    string,
+    double
+){} is
     let lengths mut = 0.0
 
     for (horse, weight, behind) in runners do
         lengths = lengths + behind
 
-        let extra = pounds(race_4_weight(horse)) - pounds(weight)
+        let extra =
+            pounds(race_4_weight(horse)) - pounds(weight)
 
-        yield (horse, winner + lengths / 5.0 + double(extra) / 10.0)
+        yield (
+            horse,
+            winner + lengths / 5.0 + double(extra) / 10.0
+        )
     od
 si
 
 let races = [
-    (96.0, [("A", "9.00", 0.0), ("B", "8.06", 2.0), ("C", "9.04", 1.5)]),
-    (96.4, [("D", "8.10", 0.0), ("E", "9.03", 1.0), ("F", "9.07", 3.0)]),
-    (95.8, [("G", "8.04", 0.0), ("H", "8.10", 1.5), ("I", "9.05", 0.5)])
+    (96.0, [
+        ("A", "9.00", 0.0),
+        ("B", "8.06", 2.0),
+        ("C", "9.04", 1.5)
+    ]),
+    (96.4, [
+        ("D", "8.10", 0.0),
+        ("E", "9.03", 1.0),
+        ("F", "9.07", 3.0)
+    ]),
+    (95.8, [
+        ("G", "8.04", 0.0),
+        ("H", "8.10", 1.5),
+        ("I", "9.05", 0.5)
+    ])
 ]
 
 let adjustments = [
     ("B", -0.4), ("C", 0.4), ("H", -0.3), ("F", -0.4)
-] |> collect_map()
+]
+    |> collect_map()
 
 adjustment(horse: string) -> double =>
-    if adjustments.contains_key(horse) then adjustments[horse] else 0.0 fi
+    if adjustments.contains_key(horse) then
+        adjustments[horse]
+    else
+        0.0
+    fi
 
 let finishers =
     races
         |> flat_map((winner, runners) => times(winner, runners))
-        |> map((horse, time) =>
-            (horse, time = time + adjustment(horse)))
+        |> map((horse, time) => (
+            horse,
+            time = time + adjustment(horse)
+        ))
         |> cat([(horse = "J", time = 95.8)])
         |> sort_by((_, time) => time)
         |> collect()
@@ -53,15 +78,18 @@ write_line("Race 4\n")
 write_line("Pos Horse  Weight  Dist  Sex")
 
 for (i, (horse, time)) in finishers |> index() do
-    let gap = if i == 0 then 0.0 else time - finishers[i - 1].time fi
+    let gap =
+        if i == 0 then 0.0 else time - finishers[i - 1].time fi
     let lengths = double.round(gap * 10.0) / 2.0
     let tied = i > 0 /\ lengths == 0.0
     let position = if tied then "{i}=" else "{i + 1}" fi
-    let sex = if fillies.contains(horse) then "filly" else "colt" fi
+    let sex =
+        if fillies.contains(horse) then "filly" else "colt" fi
 
     write_line(
         "{position,-4}{horse,-7}{race_4_weight(horse),-8}"
-        "{lengths,-6:F1}{sex}")
+        "{lengths,-6:F1}{sex}"
+    )
 od
 
 let winner = finishers[0].time

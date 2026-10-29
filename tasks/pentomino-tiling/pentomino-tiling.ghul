@@ -23,41 +23,51 @@ let pieces = [
 ]
 
 reading_order(a: Cell, b: Cell) -> int =>
-    if a.row != b.row then a.row - b.row else a.column - b.column fi
+    if a.row != b.row then
+        a.row - b.row
+    else
+        a.column - b.column
+    fi
 
 anchored(cells: Cell{}) -> Shape =>
-    let sorted =
-        cells
-            |> sort(reading_order)
-            |> collect() in
+    let sorted = cells |> sort(reading_order) |> collect() in
     let first = sorted[0] in
     sorted
-        |> map(c => cell_at(c.row - first.row, c.column - first.column))
+        |> map(c =>
+            cell_at(c.row - first.row, c.column - first.column)
+        )
         |> collect()
 
-cell_at(row: int, column: int) -> Cell => (row = row, column = column)
+cell_at(row: int, column: int) -> Cell => (
+    row = row, column = column
+)
 
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
 orientations(cells: List[(int, int)]) -> Shape{} is
     let found = LIST()
-    let current mut =
-        cells |> map((r, c) => cell_at(r, c))
+    let current mut = cells |> map((r, c) => cell_at(r, c))
 
     for _ in 0..4 do
         for flip in [false, true] do
-            let turned =
-                anchored(current |> map(c =>
-                    if flip then cell_at(c.row, -c.column) else c fi))
+            let turned = anchored(
+                current
+                    |> map(c =>
+                        if flip then
+                            cell_at(c.row, -c.column)
+                        else
+                            c
+                        fi
+                    )
+            )
 
             if !(found |> any(f => key(f) =~ key(turned))) then
                 found.add(turned)
             fi
         od
 
-        current =
-            current |> map(c => cell_at(c.column, -c.row))
+        current = current |> map(c => cell_at(c.column, -c.row))
     od
 
     found
@@ -71,14 +81,23 @@ let board = repeat('.', size * size) |> collect_mutable()
 let used = repeat(false, pieces.count) |> collect_mutable()
 
 fits(shape: Shape, at: Cell) -> bool =>
-    shape |> all(c =>
-        let r = at.row + c.row, col = at.column + c.column in
-        r >= 0 /\ r < size /\ col >= 0 /\ col < size /\
-        board[r * size + col] == '.')
+    shape
+        |> all(c =>
+            let
+                r = at.row + c.row,
+                col = at.column + c.column
+            in
+                r >= 0 /\
+                r < size /\
+                col >= 0 /\
+                col < size /\
+                board[r * size + col] == '.'
+        )
 
 mark(shape: Shape, at: Cell, name: char) is
     for c in shape do
-        board[(at.row + c.row) * size + at.column + c.column] = name
+        board[(at.row + c.row) * size + at.column + c.column] =
+            name
     od
 si
 
@@ -142,7 +161,11 @@ write_line("tiled on attempt {attempts}:")
 write_line("")
 
 for row in 0..size do
-    write_line(0..size |> map(c => "{board[row * size + c]}") |> join(" "))
+    write_line(
+        0..size
+            |> map(c => "{board[row * size + c]}")
+            |> join(" ")
+    )
 od
 
 let hues = "FILNPTUVWXYZ"
@@ -150,8 +173,10 @@ let hues = "FILNPTUVWXYZ"
 colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let
         h = double(hues.index_of(name)) / 12.0D * 6.0D,
-        f = h - System.Math.floor(h), i = int(h),
-        up = ubyte(90.0D + 150.0D * f), down = ubyte(240.0D - 150.0D * f)
+        f = h - System.Math.floor(h),
+        i = int(h),
+        up = ubyte(90.0D + 150.0D * f),
+        down = ubyte(240.0D - 150.0D * f)
     in
         case i
         when 0 then (red = 240ub, green = up, blue = 90ub)
@@ -178,9 +203,11 @@ for i in 0..size * size do
         tiles.add(
             [
                 (x = x, y = y), (x = x + cell, y = y),
-                (x = x + cell, y = y + cell), (x = x, y = y + cell)
+                (x = x + cell, y = y + cell),
+                (x = x, y = y + cell)
             ],
-            colour(name))
+            colour(name)
+        )
     fi
 od
 

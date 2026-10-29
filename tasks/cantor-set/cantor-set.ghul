@@ -8,19 +8,25 @@ power_of_three(exponent: int) -> int =>
     fi
 
 removed(position: int) -> bool =>
-    position > 0 /\
-        (position % 3 == 1 \/ removed(position / 3))
+    position > 0 /\ (position % 3 == 1 \/ removed(position / 3))
 
 let depth = 4
 let width = power_of_three(depth)
 
 (0::depth)
-    |> map(level => (0..width)
-        |> map(position =>
-            if removed(position / power_of_three(depth - level)) then
-                " "
-            else
-                "*"
-            fi)
-        |> join(""))
+    |> map(level =>
+        (0..width)
+            |> map(position =>
+                if
+                    removed(
+                        position / power_of_three(depth - level)
+                    )
+                then
+                    " "
+                else
+                    "*"
+                fi
+            )
+            |> join("")
+    )
     |> each(line => write_line(line))

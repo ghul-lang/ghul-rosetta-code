@@ -21,10 +21,12 @@ primes.sort()
 for row in 0::(primes.count - 1) / 6 do
     write_line(
         (0::5)
-        |> filter(column => row * 6 + column < primes.count)
-        |> map(column => "{primes[row * 6 + column],12}")
-        |> join("")
+            |> filter(column => row * 6 + column < primes.count)
+            |> map(column => "{primes[row * 6 + column],12}")
+            |> join("")
     )
 od
 
-write_line("{primes.count} primes with strictly descending digits")
+write_line(
+    "{primes.count} primes with strictly descending digits"
+)

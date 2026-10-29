@@ -1,13 +1,17 @@
 use default
 
 common_directory_path(paths: string[]) -> string is
-    let segments = paths |> map(p => p.split(['/'])) |> collect()
+    let segments =
+        paths |> map(p => p.split(['/'])) |> collect()
     let common = LIST()
 
     for i in 0..segments[0].count do
         let candidate = segments[0][i]
 
-        if segments |> all(s => i < s.count /\ s[i] =~ candidate) then
+        if
+            segments
+                |> all(s => i < s.count /\ s[i] =~ candidate)
+        then
             common.add(candidate)
         else
             break

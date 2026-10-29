@@ -23,7 +23,8 @@ entropy(word: string) -> double =>
         |> group_by(c => c)
         |> map(group => double(group.value.count) / total)
         |> reduce(0.0D, (bits, probability) =>
-            bits - probability * Math.log2(probability))
+            bits - probability * Math.log2(probability)
+        )
 
 write_line("   N      length            entropy")
 
@@ -32,4 +33,7 @@ words()
     |> index(1)
     |> each(word => (
         let bits = entropy(word.value)
-        write_line("{word.index,4}{word.value.length,12}{bits,20:F15}")))
+        write_line(
+            "{word.index,4}{word.value.length,12}{bits,20:F15}"
+        )
+    ))

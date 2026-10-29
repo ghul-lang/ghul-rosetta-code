@@ -33,9 +33,15 @@ repeat_until(body: () -> bool) is
     od
 si
 
-for pair in [(true, true), (true, false), (false, true), (false, false)] do
-    if2(
-        pair.`0,
+for
+    pair in [
+        (true, true),
+        (true, false),
+        (false, true),
+        (false, false)
+    ]
+do
+    if2(pair.`0,
         pair.`1,
         () => write_line("{pair}: both"),
         () => write_line("{pair}: the first only"),

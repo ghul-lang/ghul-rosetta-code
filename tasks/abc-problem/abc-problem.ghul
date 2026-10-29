@@ -2,18 +2,24 @@ use default
 
 without(blocks: List[string], at: int) -> List[string] =>
     blocks
-    |> index()
-    |> filter(block => block.index != at)
-    |> map(block => block.value)
-    |> collect()
+        |> index()
+        |> filter(block => block.index != at)
+        |> map(block => block.value)
+        |> collect()
 
 can_spell(word: string, blocks: List[string]) -> bool =>
     word.length == 0 \/
-    (blocks
-        |> index()
-        |> filter(block => block.value.contains(word[0]))
-        |> any(block =>
-            can_spell(word.substring(1), blocks |> without(block.index))))
+    (
+        blocks
+            |> index()
+            |> filter(block => block.value.contains(word[0]))
+            |> any(block =>
+                can_spell(
+                    word.substring(1),
+                    blocks |> without(block.index)
+                )
+            )
+    )
 
 let blocks = [
     "BO", "XK", "DQ", "CP", "NA", "GT", "RE", "TG", "QD", "FS",
@@ -23,6 +29,13 @@ let blocks = [
 can_make_word(word: string) -> bool =>
     can_spell(word.to_upper(), blocks)
 
-for word in ["A", "BARK", "BOOK", "TREAT", "COMMON", "SQUAD", "CONFUSE"] do
-    write_line("can_make_word(\"{word}\") = {can_make_word(word)}")
+for
+    word in [
+        "A", "BARK", "BOOK", "TREAT", "COMMON", "SQUAD",
+        "CONFUSE"
+    ]
+do
+    write_line(
+        "can_make_word(\"{word}\") = {can_make_word(word)}"
+    )
 od

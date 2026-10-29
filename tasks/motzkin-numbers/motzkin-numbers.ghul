@@ -10,8 +10,11 @@ motzkin(count: int) -> bigint{} is
         yield current
 
         let following =
-            (current * bigint(2 * index + 3) +
-             previous * bigint(3 * index)) / bigint(index + 3)
+            (
+                current * bigint(2 * index + 3) +
+                previous * bigint(3 * index)
+            ) /
+            bigint(index + 3)
 
         previous = current
         current = following
@@ -21,7 +24,8 @@ si
 let terms = motzkin(42) |> collect()
 
 for index in 0..terms.count do
-    let mark = if is_prime(terms[index]) then "  prime" else "" fi
+    let mark =
+        if is_prime(terms[index]) then "  prime" else "" fi
 
     write_line("M[{index,2}] = {terms[index],20}{mark}")
 od

@@ -24,11 +24,12 @@ si
 first_repeat(grid: int[][]) -> int? is
     let seen = SET()
 
-    return for row in grid do
-        for value in row do
-            if !seen.add(value) then break value fi
+    return
+        for row in grid do
+            for value in row do
+                if !seen.add(value) then break value fi
+            od
         od
-    od
 si
 
 complete_rows(grid: int[][]) -> string{} is
@@ -39,7 +40,9 @@ complete_rows(grid: int[][]) -> string{} is
             if value < 0 then continue scan fi
         od
 
-        complete.add(row |> map(value => "{value}") |> join(" "))
+        complete.add(
+            row |> map(value => "{value}") |> join(" ")
+        )
     od
 
     complete
@@ -75,7 +78,9 @@ if let repeated = first_repeat(grid) then
     write_line("break out of both loops: {repeated}")
 fi
 
-write_line("rows with no gap: {grid |> complete_rows() |> join(", ")}")
+write_line(
+    "rows with no gap: {grid |> complete_rows() |> join(", ")}"
+)
 
 try
     descend(4)
@@ -89,10 +94,14 @@ od
 
 let running = paused()
 
-write_line("main: the coroutine suspended and control returned here")
+write_line(
+    "main: the coroutine suspended and control returned here"
+)
 
 while ready.count > 0 do
     ready.dequeue()()
 od
 
-write_line("main: the coroutine finished: {running.is_completed}")
+write_line(
+    "main: the coroutine finished: {running.is_completed}"
+)

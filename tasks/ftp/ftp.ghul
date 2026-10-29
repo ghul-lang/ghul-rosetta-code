@@ -9,26 +9,35 @@ use System.Text.Encoding
 // and download a file from it as binary.
 @suppress("deprecated")
 request(url: string, method: string) -> FtpWebResponse is
-    let ftp = cast FtpWebRequest?(System.Net.WebRequest.create(url))!
+    let ftp =
+        cast FtpWebRequest?(System.Net.WebRequest.create(url))!
 
     ftp.method = method
     ftp.use_passive = true
     ftp.use_binary = true
-    ftp.credentials = NetworkCredential("anonymous", "rosetta@example.com")
+    ftp.credentials = NetworkCredential(
+        "anonymous",
+        "rosetta@example.com"
+    )
 
     cast FtpWebResponse?(ftp.get_response())!
 si
 
 list(directory: string) -> string =>
-    IO.StreamReader(request(directory, WebRequestMethods_Ftp.list_directory)
-        .get_response_stream()).read_to_end()
+    IO.StreamReader(
+        request(
+            directory,
+            WebRequestMethods_Ftp.list_directory
+        ).get_response_stream()
+    ).read_to_end()
 
 download(file: string) -> ubyte[] is
     let into = IO.MemoryStream()
 
-    request(file, WebRequestMethods_Ftp.download_file)
-        .get_response_stream()
-        .copy_to(into)
+    request(
+        file,
+        WebRequestMethods_Ftp.download_file
+    ).get_response_stream().copy_to(into)
 
     into.to_array()
 si

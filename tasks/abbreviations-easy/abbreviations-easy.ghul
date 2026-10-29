@@ -17,11 +17,16 @@ minimum_length(command: string) -> int =>
 
 let commands =
     table
-    |> words()
-    |> map(command =>
-        (word = command, minimum = minimum_length(command)))
+        |> words()
+        |> map(command => (
+            word = command,
+            minimum = minimum_length(command)
+        ))
 
-matches(command: (word: string, minimum: int), word: string) -> bool =>
+matches(
+    command: (word: string, minimum: int),
+    word: string
+) -> bool =>
     word.length >= command.minimum /\
     word.length <= command.word.length /\
     string.compare(
@@ -32,16 +37,12 @@ matches(command: (word: string, minimum: int), word: string) -> bool =>
 
 expand(word: string) -> string =>
     commands
-    |> filter(matches(*, word))
-    |> map(command => command.word.to_upper())
-    |> first() ?? "*error*"
+        |> filter(matches(*, word))
+        |> map(command => command.word.to_upper())
+        |> first() ?? "*error*"
 
 let input =
     "riG   rePEAT copies  put mo   rest    types   fup.    6       "
     "poweRin"
 
-write_line(
-    words(input)
-    |> map(expand)
-    |> join(" ")
-)
+write_line(words(input) |> map(expand) |> join(" "))

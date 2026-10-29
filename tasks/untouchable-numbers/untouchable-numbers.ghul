@@ -14,7 +14,9 @@ let sieve_milestone mut = sieved / 10
 
 for divisor in 1::sieved / 2 do
     if divisor >= sieve_milestone then
-        write_line("  summing divisors past {sieve_milestone:N0}")
+        write_line(
+            "  summing divisors past {sieve_milestone:N0}"
+        )
 
         sieve_milestone = sieve_milestone + sieved / 10
     fi
@@ -74,12 +76,16 @@ for first in 0..primes.count do
     od
 od
 
-let untouchable = 1::top |> filter(value => !touched[value])
-                           |> memo()
+let untouchable =
+    1::top |> filter(value => !touched[value]) |> memo()
 
 write_line("the untouchable numbers up to 2000:")
 
-let small = ["{value,6}" for value in untouchable if value <= 2_000]
+let small = [
+    "{value,6}"
+    for value in untouchable
+    if value <= 2_000
+]
 
 for row in 0..(small.count + 9) / 10 do
     let last = min(row * 10 + 10, small.count)

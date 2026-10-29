@@ -8,7 +8,8 @@ class BAD_SYNTAX(text: string init): System.Exception is
     super(text)
 si
 
-in_name(c: char) -> bool => char.is_ascii_letter_or_digit(c) \/ c == '_'
+in_name(c: char) -> bool =>
+    char.is_ascii_letter_or_digit(c) \/ c == '_'
 
 tokens(text: string) -> List[string] is
     let result = LIST()
@@ -28,14 +29,17 @@ tokens(text: string) -> List[string] is
 
             if c == '_' then
                 throw BAD_SYNTAX(
-                    "identifier cannot begin with an underscore")
+                    "identifier cannot begin with an underscore"
+                )
             fi
 
             result.add(text.substring(start, i - start))
         elif char.is_ascii_digit(c) then
             let start = i
 
-            while i < text.length /\ char.is_ascii_digit(text[i]) do
+            while
+                i < text.length /\ char.is_ascii_digit(text[i])
+            do
                 i = i + 1
             od
 
@@ -70,7 +74,9 @@ class VERIFIER(tokens: List[string]) is
         expression()
 
         if !is_next("end of line") then
-            throw BAD_SYNTAX("expected end of line, found {shown(next)}")
+            throw BAD_SYNTAX(
+                "expected end of line, found {shown(next)}"
+            )
         fi
     si
 
@@ -104,7 +110,9 @@ class VERIFIER(tokens: List[string]) is
             sum()
 
             if is_next("=") \/ is_next("<") then
-                throw BAD_SYNTAX("operator '{next}' is non-associative")
+                throw BAD_SYNTAX(
+                    "operator '{next}' is non-associative"
+                )
             fi
         fi
     si
@@ -135,15 +143,21 @@ class VERIFIER(tokens: List[string]) is
             expression()
 
             if !is_next(")") then
-                throw BAD_SYNTAX("expected ')', found {shown(next)}")
+                throw BAD_SYNTAX(
+                    "expected ')', found {shown(next)}"
+                )
             fi
 
             advance()
         elif token =~ "true" \/ token =~ "false" then
             advance()
-        elif keywords |> any(* =~ token) \/
-                !(char.is_ascii_letter_or_digit(token[0])) then
-            throw BAD_SYNTAX("expected operand, found {shown(token)}")
+        elif
+            keywords |> any(* =~ token) \/
+            !(char.is_ascii_letter_or_digit(token[0]))
+        then
+            throw BAD_SYNTAX(
+                "expected operand, found {shown(token)}"
+            )
         else
             advance()
         fi

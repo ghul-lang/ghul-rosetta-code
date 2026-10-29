@@ -4,9 +4,14 @@ use IO.Std.read_line
 use Score = (bulls: int, cows: int)
 
 score(guess: string, secret: string) -> Score =>
-    let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
+    let bulls =
+        0..4 |> filter(i => guess[i] == secret[i]) |> count()
+    in
     let shared =
-        0..4 |> filter(i => secret.contains(guess[i])) |> count() in
+        0..4
+            |> filter(i => secret.contains(guess[i]))
+            |> count()
+    in
     (bulls = bulls, cows = shared - bulls)
 
 let candidates mut =
@@ -14,7 +19,8 @@ let candidates mut =
         |> map(n => "{n}")
         |> filter(s =>
             !s.contains('0') /\
-            0..4 |> all(i => s.last_index_of(s[i]) == i))
+            0..4 |> all(i => s.last_index_of(s[i]) == i)
+        )
         |> collect()
 
 let random = System.Random(4)
@@ -43,7 +49,10 @@ do
     fi
 
     let parts = line |> words() |> collect()
-    let given = (bulls = int.parse(parts[0]), cows = int.parse(parts[1]))
+    let given = (
+        bulls = int.parse(parts[0]),
+        cows = int.parse(parts[1])
+    )
 
     write_line("bulls {given.bulls}, cows {given.cows}")
 

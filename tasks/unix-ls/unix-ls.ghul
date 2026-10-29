@@ -11,7 +11,10 @@ list_here() =>
         |> sort()
         |> each(name => write_line(name))
 
-let scratch = Path.combine(Path.get_temp_path(), "ls-{Guid.new_guid()}")
+let scratch = Path.combine(
+    Path.get_temp_path(),
+    "ls-{Guid.new_guid()}"
+)
 
 Directory.create_directory(scratch)
 

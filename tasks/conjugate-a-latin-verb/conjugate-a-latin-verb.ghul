@@ -2,9 +2,13 @@ use default
 
 let verbs = [
     ("amare", "am", ["o", "as", "at", "amus", "atis", "ant"]),
-    ("monere", "mon", ["eo", "es", "et", "emus", "etis", "ent"]),
+    ("monere", "mon", [
+        "eo", "es", "et", "emus", "etis", "ent"
+    ]),
     ("regere", "reg", ["o", "is", "it", "imus", "itis", "unt"]),
-    ("audire", "aud", ["io", "is", "it", "imus", "itis", "iunt"])
+    ("audire", "aud", [
+        "io", "is", "it", "imus", "itis", "iunt"
+    ])
 ]
 
 for (infinitive, stem, endings) in verbs do

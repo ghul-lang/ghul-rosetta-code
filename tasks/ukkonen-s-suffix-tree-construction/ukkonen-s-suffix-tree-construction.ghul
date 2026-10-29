@@ -79,7 +79,9 @@ class SUFFIX_TREE is
 
                 let edge = text[active_edge]
 
-                if !_children[active_node].contains_key(edge) then
+                if
+                    !_children[active_node].contains_key(edge)
+                then
                     _children[active_node][edge] = _node(i, -1)
 
                     if last >= 0 then
@@ -97,7 +99,10 @@ class SUFFIX_TREE is
                         continue
                     fi
 
-                    if text[_start[next] + active_length] == text[i] then
+                    if
+                        text[_start[next] + active_length] ==
+                        text[i]
+                    then
                         if last >= 0 /\ active_node != root then
                             _link[last] = active_node
                         fi
@@ -143,7 +148,8 @@ class SUFFIX_TREE is
     si
 
     _length(node: int) -> int =>
-        if _end[node] < 0 then _leaf_end else _end[node] fi - _start[node]
+        if _end[node] < 0 then _leaf_end else _end[node] fi -
+        _start[node]
 
     // The deepest internal node spells the longest string that occurs
     // at least twice; of several as long, the one found first in the text.
@@ -168,7 +174,8 @@ class SUFFIX_TREE is
                     if child_depth > best_depth \/ earlier then
                         best_depth = child_depth
                         best_start = _text.index_of(
-                            _text.substring(found, child_depth))
+                            _text.substring(found, child_depth)
+                        )
                     fi
 
                     stack.add((child, child_depth))
@@ -181,12 +188,14 @@ class SUFFIX_TREE is
 si
 
 let samples = [
-    "GEEKSFORGEEKS", "AAAAAAAAAA", "ABCDEFG", "banana", "ATCGATCGA"
+    "GEEKSFORGEEKS", "AAAAAAAAAA", "ABCDEFG", "banana",
+    "ATCGATCGA"
 ]
 
 for text in samples do
     let repeat = SUFFIX_TREE("{text}$").longest_repeat()
-    let shown = if repeat.length > 0 then repeat else "(none)" fi
+    let shown =
+        if repeat.length > 0 then repeat else "(none)" fi
 
     write_line("{text,-15} {shown}")
 od
@@ -201,6 +210,8 @@ for count in [1_000, 10_000, 100_000] do
     let repeat = tree.longest_repeat()
     let elapsed = clock.elapsed.total_milliseconds
 
-    write_line("first {count,7:N0} digits: longest repeat {repeat}")
+    write_line(
+        "first {count,7:N0} digits: longest repeat {repeat}"
+    )
     write_line("    built and searched in {elapsed:F1} ms")
 od

@@ -6,7 +6,9 @@ binomial(n: int, k: int) -> long => (
     let smaller = if k > n - k then n - k else k fi
 
     0..smaller
-        |> reduce(1L, (product, i) => product * cast(n - i) / cast(i + 1))
+        |> reduce(1L, (product, i) =>
+            product * cast(n - i) / cast(i + 1)
+        )
 )
 
 for (n, k) in [(5, 3), (10, 5), (60, 30)] do

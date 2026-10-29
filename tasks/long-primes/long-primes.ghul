@@ -19,7 +19,10 @@ write_line("long primes up to 500:")
 write_line("  {long_primes(500) |> join(" ")}")
 write_line()
 
-[500, 1_000, 2_000, 4_000, 8_000, 16_000, 32_000, 64_000]
+[500, 1000, 2000, 4000, 8000, 16000, 32000, 64000]
     |> each(bound =>
-        write_line("  long primes up to {bound,6:N0}: "
-                   "{long_primes(bound) |> count(),5:N0}"))
+        write_line(
+            "  long primes up to {bound,6:N0}: "
+            "{long_primes(bound) |> count(),5:N0}"
+        )
+    )

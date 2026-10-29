@@ -4,8 +4,10 @@ use System.Text.StringBuilder
 let alphabet_size = 256
 
 compress(text: string) -> List[int] is
-    let codes = 0..alphabet_size
-        |> collect_mutable_map(code => "{char(code)}", code => code)
+    let codes =
+        0..alphabet_size
+            |> collect_mutable_map(code => "{char(code)}",
+                code => code)
 
     let compressed = LIST()
     let current mut = ""
@@ -34,9 +36,10 @@ decompress(compressed: List[int]) -> string is
         return ""
     fi
 
-    let words = 0..alphabet_size
-        |> map(code => "{char(code)}")
-        |> collect_mutable()
+    let words =
+        0..alphabet_size
+            |> map(code => "{char(code)}")
+            |> collect_mutable()
 
     let text = StringBuilder()
     let previous mut = words[compressed[0]]

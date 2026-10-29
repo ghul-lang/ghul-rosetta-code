@@ -4,9 +4,16 @@ let minus_infinity = double.negative_infinity
 
 struct TROPICAL(value: double) is
     ⊕(other: TROPICAL) -> TROPICAL =>
-        TROPICAL(if value > other.value then value else other.value fi)
+        TROPICAL(
+            if value > other.value then
+                value
+            else
+                other.value
+            fi
+        )
 
-    ⊗(other: TROPICAL) -> TROPICAL => TROPICAL(value + other.value)
+    ⊗(other: TROPICAL) -> TROPICAL =>
+        TROPICAL(value + other.value)
 
     ^(power: int) -> TROPICAL =>
         assert power > 0 else "exponent must be positive" in

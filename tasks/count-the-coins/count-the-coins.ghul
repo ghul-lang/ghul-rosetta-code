@@ -16,5 +16,9 @@ si
 let common = [25, 10, 5, 1]
 let all = [100, 50, 25, 10, 5, 1]
 
-write_line("Change for $1, common coins: {ways_to_make(100, common)}")
-write_line("Change for $1000, all coins: {ways_to_make(100_000, all)}")
+write_line(
+    "Change for $1, common coins: {ways_to_make(100, common)}"
+)
+write_line(
+    "Change for $1000, all coins: {ways_to_make(100_000, all)}"
+)

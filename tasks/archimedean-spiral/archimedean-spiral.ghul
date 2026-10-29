@@ -7,8 +7,10 @@ let steps = 2000
 
 let last = turns * 2.0D * pi
 
-at(angle: double) -> (x: double, y: double) =>
-    (x = angle * cos(angle), y = angle * sin(angle))
+at(angle: double) -> (x: double, y: double) => (
+    x = angle * cos(angle),
+    y = angle * sin(angle)
+)
 
 let image = IMAGE(400, 400)
 

@@ -38,7 +38,8 @@ decode(frame: List[ubyte], marker: ubyte) -> List[ubyte] is
     while at < frame.count do
         let milestone = int(frame[at])
 
-        assert milestone > 0 else "a milestone of zero cannot advance"
+        assert milestone > 0
+            else "a milestone of zero cannot advance"
         assert at + milestone <= frame.count
             else "the final milestone runs past the end of the frame"
 
@@ -87,16 +88,25 @@ od
 write_line()
 
 let round_trips =
-    examples |> all(example => decode(encode(example, 0ub), 0ub) =~ example)
+    examples
+        |> all(example =>
+            decode(encode(example, 0ub), 0ub) =~ example
+        )
 
-write_line("every example decodes back to itself: {round_trips}")
+write_line(
+    "every example decodes back to itself: {round_trips}"
+)
 
 try
     let _ = decode([0x03ub, 0x11ub], 0ub)
 
-    write_line("a frame whose milestone runs past the end: accepted")
+    write_line(
+        "a frame whose milestone runs past the end: accepted"
+    )
 catch failed: Ghul.AssertFailedException
-    write_line("a frame whose milestone runs past the end: rejected")
+    write_line(
+        "a frame whose milestone runs past the end: rejected"
+    )
 yrt
 
 write_line()
@@ -106,4 +116,6 @@ let framed = encode(marked, 0x2Fub)
 
 write_line("with 2F as the marker")
 write_line("{hex(marked),-38} {hex(framed)}")
-write_line("decodes back to itself: {decode(framed, 0x2Fub) =~ marked}")
+write_line(
+    "decodes back to itself: {decode(framed, 0x2Fub) =~ marked}"
+)

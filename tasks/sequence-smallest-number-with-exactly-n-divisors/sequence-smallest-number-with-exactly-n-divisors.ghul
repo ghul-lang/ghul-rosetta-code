@@ -2,13 +2,15 @@ use default
 
 divisor_count(n: int) -> int =>
     (1..n + 1)
-    |> take_while(d => d * d <= n)
-    |> filter(d => n % d == 0)
-    |> sum_by(d => if d * d == n then 1 else 2 fi)
+        |> take_while(d => d * d <= n)
+        |> filter(d => n % d == 0)
+        |> sum_by(d => if d * d == n then 1 else 2 fi)
 
 let terms =
     (1::15)
-    |> map(n => from(1) |> find(k => divisor_count(k) == n)!)
+        |> map(n =>
+            from(1) |> find(k => divisor_count(k) == n)!
+        )
 
 write_line("the first 15 terms of the sequence are:")
 write_line(terms |> map(t => "{t}") |> join(" "))

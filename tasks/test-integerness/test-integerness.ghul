@@ -13,7 +13,8 @@ is_integer(x: double) -> bool =>
 is_integer(numerator: bigint, denominator: bigint) -> bool =>
     (numerator % denominator).is_zero
 
-is_integer(z: Complex) -> bool => z.imaginary == 0.0 /\ is_integer(z.real)
+is_integer(z: Complex) -> bool =>
+    z.imaginary == 0.0 /\ is_integer(z.real)
 
 // Close enough, for a double that has picked up rounding error on the
 // way to what should have been an integer.
@@ -24,7 +25,12 @@ for d in [25.000000m, 24.999999m, 25.000100m] do
     write_line("decimal  {d,-12} {is_integer(d)}")
 od
 
-for x in [-2.1e120, -5.0e-2, double.na_n, double.positive_infinity, 25.0] do
+for
+    x in [
+        -2.1e120, -5.0e-2, double.na_n,
+        double.positive_infinity, 25.0
+    ]
+do
     let shown = x.to_string(CultureInfo.invariant_culture)
 
     write_line("double   {shown,-12} {is_integer(x)}")
@@ -34,7 +40,13 @@ for (n, d) in [(5n, 2n), (-6n, 3n), (0n, 7n)] do
     write_line("fraction {"{n}/{d}",-12} {is_integer(n, d)}")
 od
 
-for z in [Complex(5.0, 0.0), Complex(5.0, 1.0), Complex(1.5, 0.0)] do
+for
+    z in [
+        Complex(5.0, 0.0),
+        Complex(5.0, 1.0),
+        Complex(1.5, 0.0)
+    ]
+do
     let shown = "{z.real}+{z.imaginary}i"
 
     write_line("complex  {shown,-12} {is_integer(z)}")

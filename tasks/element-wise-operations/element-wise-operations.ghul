@@ -3,24 +3,28 @@ use default
 class MATRIX(cells: double[][]) is
     _cells
 
-    _both(other: MATRIX, op: (double, double) -> double pure) -> MATRIX =>
+    _both(
+        other: MATRIX,
+        op: (double, double) -> double pure
+    ) -> MATRIX =>
         MATRIX(
             _cells
-            |> zip(
-                other._cells,
-                (a, b) => a |> zip(b, op) |> collect())
-            |> collect())
+                |> zip(other._cells, (a, b) =>
+                    a |> zip(b, op) |> collect()
+                )
+                |> collect()
+        )
 
     _each(op: (double) -> double pure) -> MATRIX =>
         MATRIX(
             _cells
-            |> map(row => row |> map(op) |> collect())
-            |> collect())
+                |> map(row => row |> map(op) |> collect())
+                |> collect()
+        )
 
     // A scalar on the left becomes a matrix of that scalar, which
     // keeps subtraction and division the right way round.
-    constant(value: double) -> MATRIX =>
-        _each(_ => value)
+    constant(value: double) -> MATRIX => _each(_ => value)
 
     +(other: MATRIX) -> MATRIX => _both(other, * + *)
     -(other: MATRIX) -> MATRIX => _both(other, * - *)
@@ -37,8 +41,10 @@ class MATRIX(cells: double[][]) is
 
     to_string() -> string =>
         _cells
-        |> map(row => row |> map(c => "{c,11:F3}") |> join(""))
-        |> join("\n")
+            |> map(row =>
+                row |> map(c => "{c,11:F3}") |> join("")
+            )
+            |> join("\n")
 si
 
 +(k: double, m: MATRIX) -> MATRIX => m.constant(k) + m

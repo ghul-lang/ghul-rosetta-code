@@ -6,44 +6,75 @@ use Polygon = Collections.List[Point]
 
 ⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y
 
-normal(corner: Point, next: Point) -> Point =>
-    (x = corner.y - next.y, y = next.x - corner.x)
+normal(corner: Point, next: Point) -> Point => (
+    x = corner.y - next.y,
+    y = next.x - corner.x
+)
 
 axes(shape: Polygon) -> Point{} =>
     0..shape.count
         |> map(index =>
-            normal(shape[index], shape[(index + 1) % shape.count]))
+            normal(
+                shape[index],
+                shape[(index + 1) % shape.count]
+            )
+        )
 
-spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
-    let alongs = polygon |> map(corner => corner ⋅ axis) |> collect() in
-        (low = alongs |> reduce(alongs[0], System.Math.min),
-         high = alongs |> reduce(alongs[0], System.Math.max))
+spread(polygon: Polygon, axis: Point) -> (
+    low: double,
+    high: double
+) =>
+    let alongs =
+        polygon |> map(corner => corner ⋅ axis) |> collect()
+    in
+    (
+        low = alongs |> reduce(alongs[0], System.Math.min),
+        high = alongs |> reduce(alongs[0], System.Math.max)
+    )
 
-separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
+separated(
+    first: Polygon,
+    second: Polygon,
+    axis: Point
+) -> bool =>
     let
         (low, high) = spread(first, axis),
         (other_low, other_high) = spread(second, axis)
     in
-    high < other_low \/ other_high < low
-
+        high < other_low \/ other_high < low
 
 overlap(first: Polygon, second: Polygon) -> bool =>
-    !(axes(first) ++ axes(second)
-        |> any(separated(first, second, *)))
+    !(
+        axes(first) ++ axes(second)
+            |> any(separated(first, second, *))
+    )
 
 polygon(corners: List[(double, double)]) -> Polygon =>
     corners |> map((x, y) => (x = x, y = y)) |> collect()
 
-let shapes =
-    [(name = "A",
-      corners = polygon([(0.0D, 0.0D), (0.0D, 2.0D), (1.0D, 4.0D),
-                         (2.0D, 2.0D), (2.0D, 0.0D)])),
-     (name = "B",
-      corners = polygon([(4.0D, 0.0D), (4.0D, 2.0D), (5.0D, 4.0D),
-                         (6.0D, 2.0D), (6.0D, 0.0D)])),
-     (name = "C",
-      corners = polygon([(1.0D, 0.0D), (1.0D, 2.0D), (5.0D, 4.0D),
-                         (9.0D, 2.0D), (9.0D, 0.0D)]))]
+let shapes = [
+    (
+        name = "A",
+        corners = polygon([
+            (0.0D, 0.0D), (0.0D, 2.0D), (1.0D, 4.0D),
+            (2.0D, 2.0D), (2.0D, 0.0D)
+        ])
+    ),
+    (
+        name = "B",
+        corners = polygon([
+            (4.0D, 0.0D), (4.0D, 2.0D), (5.0D, 4.0D),
+            (6.0D, 2.0D), (6.0D, 0.0D)
+        ])
+    ),
+    (
+        name = "C",
+        corners = polygon([
+            (1.0D, 0.0D), (1.0D, 2.0D), (5.0D, 4.0D),
+            (9.0D, 2.0D), (9.0D, 0.0D)
+        ])
+    )
+]
 
 for first in 0..shapes.count do
     for second in first + 1..shapes.count do
@@ -67,10 +98,11 @@ image.clear(252ub, 250ub, 245ub)
 
 let drawing = SHAPES()
 
-let colours =
-    [(r = 60ub, g = 110ub, b = 200ub),
-     (r = 220ub, g = 150ub, b = 60ub),
-     (r = 80ub, g = 170ub, b = 110ub)]
+let colours = [
+    (r = 60ub, g = 110ub, b = 200ub),
+    (r = 220ub, g = 150ub, b = 60ub),
+    (r = 80ub, g = 170ub, b = 110ub)
+]
 
 for index in 0..shapes.count do
     let (r, g, b) = colours[index]
@@ -79,14 +111,22 @@ for index in 0..shapes.count do
         shapes[index].corners
             |> map(corner => (corner.x, corner.y))
             |> collect(),
-        r, g, b)
+        r,
+        g,
+        b
+    )
 od
 
 image.fill(drawing)
 
 for shape in shapes do
     image.colour(40ub, 40ub, 60ub)
-    image.text(shape.corners[0].x + 0.1D, 4.2D, 16.0D, shape.name)
+    image.text(
+        shape.corners[0].x + 0.1D,
+        4.2D,
+        16.0D,
+        shape.name
+    )
 od
 
 image.write("polygons.png")

@@ -4,8 +4,11 @@ identity(size: int) -> string{} =>
     (0..size)
         |> map(row =>
             (0..size)
-                |> map(column => if row == column then "1" else "0" fi)
-                |> join(" "))
+                |> map(column =>
+                    if row == column then "1" else "0" fi
+                )
+                |> join(" ")
+        )
 
 for row in identity(5) do
     write_line(row)

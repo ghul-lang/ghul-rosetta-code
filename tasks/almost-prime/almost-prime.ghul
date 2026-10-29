@@ -4,7 +4,8 @@ almost_primes(k: int) -> int{} =>
     from(2) |> filter(n => prime_factors(n) |> count() == k)
 
 for k in 1::5 do
-    let first_ten = almost_primes(k) |> take(10) |> map(n => "{n,5}")
+    let first_ten =
+        almost_primes(k) |> take(10) |> map(n => "{n,5}")
 
     write_line("k = {k}:{first_ten |> join("")}")
 od

@@ -11,9 +11,14 @@ show(label: string, sequence: List[char]) is
     od
 
     let tally =
-        bases |> map(base => "{base} {sequence |> count(* == base)}")
+        bases
+            |> map(base =>
+                "{base} {sequence |> count(* == base)}"
+            )
 
-    write_line("  {sequence.count} bases: {tally |> join("  ")}")
+    write_line(
+        "  {sequence.count} bases: {tally |> join("  ")}"
+    )
     write_line("")
 si
 
@@ -42,7 +47,9 @@ mutate(sequence: LIST[char]) -> string is
 si
 
 let sequence =
-    0..200 |> map(_ => bases[random.next(0, 4)]) |> collect_mutable()
+    0..200
+        |> map(_ => bases[random.next(0, 4)])
+        |> collect_mutable()
 
 show("original sequence:", sequence)
 

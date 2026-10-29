@@ -1,10 +1,10 @@
 use default
 
 union Token(text: string) is
-    NUMBER(..)
-    OPERATOR(..)
-    OPEN(..)
-    CLOSE(..)
+    NUMBER
+    OPERATOR
+    OPEN
+    CLOSE
 si
 
 scan(line: string) -> Token{} is
@@ -12,7 +12,8 @@ scan(line: string) -> Token{} is
         case word
         when "(" then yield Token.OPEN(word)
         when ")" then yield Token.CLOSE(word)
-        when "^", "*", "/", "+", "-" then yield Token.OPERATOR(word)
+        when "^", "*", "/", "+", "-" then
+            yield Token.OPERATOR(word)
         else yield Token.NUMBER(word)
         esac
     od
@@ -32,10 +33,12 @@ binds_tighter(top: string, incoming: string) -> bool =>
 show(tokens: List[Token]) -> string =>
     tokens |> map(token => token.text) |> join(" ")
 
-row(token: string, action: string, operators: string, output: string)
-    -> string
-=>
-    "{token,-7}{action,-38}{operators,-14}{output}"
+row(
+    token: string,
+    action: string,
+    operators: string,
+    output: string
+) -> string => "{token,-7}{action,-38}{operators,-14}{output}"
 
 let line = "3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"
 
@@ -56,7 +59,9 @@ for token in scan(line) do
             operators.count > 0 /\
             isa Token.OPERATOR(operators[operators.count - 1]) /\
             binds_tighter(
-                operators[operators.count - 1].text, operator.text)
+                operators[operators.count - 1].text,
+                operator.text
+            )
         do
             output.add(operators[operators.count - 1])
             operators.remove_at(operators.count - 1)
@@ -84,7 +89,9 @@ for token in scan(line) do
         action = "pop to output until open parenthesis"
     fi
 
-    write_line(row(token.text, action, show(operators), show(output)))
+    write_line(
+        row(token.text, action, show(operators), show(output))
+    )
 od
 
 while operators.count > 0 do
@@ -92,7 +99,13 @@ while operators.count > 0 do
     operators.remove_at(operators.count - 1)
 
     write_line(
-        row("", "pop remaining to output", show(operators), show(output)))
+        row(
+            "",
+            "pop remaining to output",
+            show(operators),
+            show(output)
+        )
+    )
 od
 
 write_line("")

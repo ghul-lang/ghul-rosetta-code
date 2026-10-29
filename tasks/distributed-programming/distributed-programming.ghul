@@ -11,13 +11,15 @@ use System.Text.Json.JsonSerializerOptions
 
 // The two sides speak JSON-RPC 2.0 over HTTP. Run one copy as
 // `serve http://+:8080/` and another with that address to call it.
-
 json(value: object) -> string =>
     JsonSerializer.serialize(value, JsonSerializerOptions())
 
-call(client: HttpClient, url: string, method: string, arguments: object)
-    -> string
-is
+call(
+    client: HttpClient,
+    url: string,
+    method: string,
+    arguments: object
+) -> string is
     let request = MAP()
 
     request["jsonrpc"] = "2.0"
@@ -25,16 +27,23 @@ is
     request["params"] = arguments
     request["id"] = 1
 
-    let content =
-        StringContent(json(request), Encoding.utf8, "application/json")
+    let content = StringContent(
+        json(request),
+        Encoding.utf8,
+        "application/json"
+    )
 
     let text =
-        client.post_async(url, content).result
-            .content.read_as_string_async().result
+        client.post_async(
+            url,
+            content
+        ).result.content.read_as_string_async().result
 
     let reply =
-        JsonDocument.parse(text, _[JsonDocumentOptions])
-            .root_element
+        JsonDocument.parse(
+            text,
+            _[JsonDocumentOptions]
+        ).root_element
 
     if reply.try_get_property("error", _) then
         "error: {reply.get_property("error").get_property("message")}"
@@ -46,18 +55,25 @@ si
 client(url: string) is
     let http = HttpClient()
 
-    write_line("sum(1, 2, 3, 4) = {call(http, url, "sum", [1, 2, 3, 4])}")
-    write_line("upper(\"hello\") = {call(http, url, "upper", ["hello"])}")
+    write_line(
+        "sum(1, 2, 3, 4) = {call(http, url, "sum", [1, 2, 3, 4])}"
+    )
+    write_line(
+        "upper(\"hello\") = {call(http, url, "upper", ["hello"])}"
+    )
     write_line("square(7) = {call(http, url, "square", [7])}")
 si
 
 procedures() -> MAP[string, (JsonElement) -> object] is
     let offered = MAP[string, (JsonElement) -> object]()
 
-    offered["sum"] = p =>
-        cast(p.enumerate_array() |> sum_by(e => e.get_int32()))
+    offered["sum"] =
+        p =>
+            cast(p.enumerate_array()
+                |> sum_by(e => e.get_int32()))
 
-    offered["upper"] = p => (p[0].get_string() ?? "").to_upper_invariant()
+    offered["upper"] =
+        p => (p[0].get_string() ?? "").to_upper_invariant()
 
     offered
 si
@@ -68,13 +84,18 @@ serve(listener: HttpListener) is
     while true do
         let context = listener.get_context()
         let body =
-            IO.StreamReader(context.request.input_stream).read_to_end()
+            IO.StreamReader(
+                context.request.input_stream
+            ).read_to_end()
 
         let request =
-            JsonDocument.parse(body, _[JsonDocumentOptions])
-                .root_element
+            JsonDocument.parse(
+                body,
+                _[JsonDocumentOptions]
+            ).root_element
 
-        let method = request.get_property("method").get_string() ?? ""
+        let method =
+            request.get_property("method").get_string() ?? ""
         let arguments = request.get_property("params")
         let reply = MAP()
 
@@ -94,7 +115,11 @@ serve(listener: HttpListener) is
         let bytes = Encoding.utf8.get_bytes(json(reply))
 
         context.response.content_type = "application/json"
-        context.response.output_stream.write(bytes, 0, bytes.count)
+        context.response.output_stream.write(
+            bytes,
+            0,
+            bytes.count
+        )
         context.response.close()
     od
 si
@@ -116,5 +141,6 @@ when [url, ..] then
 else
     write_line(
         "usage: distributed-programming serve <prefix> | "
-        "distributed-programming <url>")
+        "distributed-programming <url>"
+    )
 esac

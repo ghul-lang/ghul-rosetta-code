@@ -4,8 +4,10 @@ write_line("spelling out the sequence, which takes a moment")
 write_line("")
 
 let small = [
-    "zero", "one", "two", "three", "four", "five", "six", "seven",
-    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "zero", "one", "two", "three", "four", "five", "six",
+    "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+    "fourteen",
     "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
 ]
 
@@ -56,7 +58,11 @@ cardinal(value: int) -> string is
             let name = below_thousand(part)
 
             let scaled =
-                if scale == 0 then name else "{name} {scales[scale - 1]}" fi
+                if scale == 0 then
+                    name
+                else
+                    "{name} {scales[scale - 1]}"
+                fi
 
             named.insert(0, scaled)
         fi
@@ -70,21 +76,27 @@ si
 
 ordinal(value: int) -> string is
     let words = cardinal(value)
-    let cut =
-        System.Math.max(words.last_index_of(' '), words.last_index_of('-'))
+    let cut = System.Math.max(
+        words.last_index_of(' '),
+        words.last_index_of('-')
+    )
     let head = words[0..cut + 1]
     let last = words[cut + 1..<0]
 
-    let special = irregular_ordinals
-        |> find_map(entry => if last =~ entry.`0 then entry.`1 else null fi)
+    let special =
+        irregular_ordinals
+            |> find_map(entry =>
+                if last =~ entry.`0 then entry.`1 else null fi
+            )
 
-    return if let known = special then
-        "{head}{known}"
-    elif last.ends_with("y") then
-        "{head}{last[0..<1]}ieth"
-    else
-        "{words}th"
-    fi
+    return
+        if let known = special then
+            "{head}{known}"
+        elif last.ends_with("y") then
+            "{head}{last[0..<1]}ieth"
+        else
+            "{words}th"
+        fi
 si
 
 letters(word: string) -> int =>
@@ -104,14 +116,20 @@ sentence_words() -> string{} is
         while words.count <= cursor do
             described = described + 1
 
-            for word in cardinal(letters(words[described])).split([' ']) do
+            for
+                word in cardinal(
+                    letters(words[described])
+                ).split([' '])
+            do
                 words.add(word)
             od
 
             words.add("in")
             words.add("the")
 
-            for word in "{ordinal(described + 1)},".split([' ']) do
+            for
+                word in "{ordinal(described + 1)},".split([' '])
+            do
                 words.add(word)
             od
         od
@@ -122,24 +140,22 @@ sentence_words() -> string{} is
 si
 
 sentence_length(word_count: int) -> int =>
-    let characters = words
-        |> take(word_count)
-        |> sum_by(w => w.length) in
+    let characters =
+        words |> take(word_count) |> sum_by(w => w.length)
+    in
     characters + word_count - 1
-
 
 write_line("the lengths of the first 201 words:")
 
-let first_201 = sentence_words()
-    |> take(201)
-    |> map(letters)
+let first_201 = sentence_words() |> take(201) |> map(letters)
 
 for row in 0..9 do
-    let cells = first_201
-        |> skip(row * 25)
-        |> take(25)
-        |> map(n => "{n,3}")
-        |> join("")
+    let cells =
+        first_201
+            |> skip(row * 25)
+            |> take(25)
+            |> map(n => "{n,3}")
+            |> join("")
 
     write_line("{row * 25 + 1,4}:{cells}")
 od
@@ -147,9 +163,12 @@ od
 write_line("sentence length so far: {sentence_length(201)}")
 
 for target in [1_000, 10_000, 100_000, 1_000_000, 10_000_000] do
-    let word = (sentence_words() |> skip(target - 1) |> first())!
+    let word =
+        (sentence_words() |> skip(target - 1) |> first())!
     let length = sentence_length(target)
 
-    write_line("word {target,8} is \"{word}\" with {letters(word)} letters")
+    write_line(
+        "word {target,8} is \"{word}\" with {letters(word)} letters"
+    )
     write_line("    sentence length so far: {length}")
 od

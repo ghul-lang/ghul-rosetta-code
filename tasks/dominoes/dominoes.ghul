@@ -8,18 +8,23 @@ use Grid = List[List[int]]
 parse(lines: List[string]) -> Grid =>
     lines
         |> map(line =>
-            line |> map(c => int(c - '0')) |> collect())
+            line |> map(c => int(c - '0')) |> collect()
+        )
         |> collect()
 
 solve(grid: Grid) -> List[int]? is
-    let partner = repeat(-1, rows * columns) |> collect_mutable()
+    let partner =
+        repeat(-1, rows * columns) |> collect_mutable()
     let used = SET()
 
     value(cell) => grid[cell / columns][cell % columns]
 
     domino(a, b) =>
-        let x = value(a), y = value(b) in
-        if x < y then x * 7 + y else y * 7 + x fi
+        let
+            x = value(a),
+            y = value(b)
+        in
+            if x < y then x * 7 + y else y * 7 + x fi
 
     place(from) is
         let cell mut = from
@@ -33,9 +38,17 @@ solve(grid: Grid) -> List[int]? is
         fi
 
         let right =
-            if cell % columns < columns - 1 then cell + 1 else -1 fi
+            if cell % columns < columns - 1 then
+                cell + 1
+            else
+                -1
+            fi
         let down =
-            if cell / columns < rows - 1 then cell + columns else -1 fi
+            if cell / columns < rows - 1 then
+                cell + columns
+            else
+                -1
+            fi
 
         for other in [right, down] do
             if other >= 0 /\ partner[other] < 0 then
@@ -72,7 +85,8 @@ show(grid: Grid, partner: List[int]) is
                         joined = partner[cell] == cell + 1,
                         gap = if joined then "-" else " " fi
                     in
-                    "{grid[row][column]}{gap}")
+                        "{grid[row][column]}{gap}"
+                )
                 |> join("")
 
         write_line(cells.trim_end())
@@ -83,9 +97,11 @@ show(grid: Grid, partner: List[int]) is
                     |> map(column =>
                         let
                             cell = row * columns + column,
-                            below = partner[cell] == cell + columns
+                            below =
+                                partner[cell] == cell + columns
                         in
-                        if below then "| " else "  " fi)
+                            if below then "| " else "  " fi
+                    )
                     |> join("")
 
             write_line(links.trim_end())
@@ -94,9 +110,8 @@ show(grid: Grid, partner: List[int]) is
 si
 
 shuffled_tableau(random: System.Random) -> Grid is
-    let tiles =
-        [(a, b) for a in 0::6 for b in a::6]
-            |> sort_by(_ => random.next())
+    let tiles = [(a, b) for a in 0::6 for b in a::6]
+        |> sort_by(_ => random.next())
 
     let grid =
         0..rows

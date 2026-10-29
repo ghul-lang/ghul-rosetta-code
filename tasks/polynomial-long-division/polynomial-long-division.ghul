@@ -7,25 +7,35 @@ degree(poly: List[double]) -> int =>
     let highest =
         (0::poly.count - 1)
             |> reverse()
-            |> find(power => poly[power] != 0.0D) in
+            |> find(power => poly[power] != 0.0D)
+    in
     highest ?? -1
 
-divide(numerator: List[double], denominator: List[double]) -> DIVISION is
+divide(
+    numerator: List[double],
+    denominator: List[double]
+) -> DIVISION is
     let divisor_degree = degree(denominator)
     let remainder = numerator |> collect_mutable()
-    let quotient = repeat(0.0D, degree(numerator) - divisor_degree + 1)
-        |> collect_mutable()
+    let quotient =
+        repeat(0.0D, degree(numerator) - divisor_degree + 1)
+            |> collect_mutable()
 
-    while degree(remainder) >= divisor_degree /\ degree(remainder) >= 0 do
+    while
+        degree(remainder) >= divisor_degree /\
+        degree(remainder) >= 0
+    do
         let shift = degree(remainder) - divisor_degree
         let factor =
-            remainder[degree(remainder)] / denominator[divisor_degree]
+            remainder[degree(remainder)] /
+            denominator[divisor_degree]
 
         quotient[shift] = factor
 
         for power in 0::divisor_degree do
             remainder[shift + power] =
-                remainder[shift + power] - factor * denominator[power]
+                remainder[shift + power] -
+                factor * denominator[power]
         od
     od
 
@@ -33,7 +43,9 @@ divide(numerator: List[double], denominator: List[double]) -> DIVISION is
 si
 
 term(size: double, power: int) -> string =>
-    let head = if size == 1.0D /\ power > 0 then "" else "{size:G}" fi in
+    let head =
+        if size == 1.0D /\ power > 0 then "" else "{size:G}" fi
+    in
     case power
     when 0 then head
     when 1 then "{head}x"
@@ -68,7 +80,9 @@ si
 show(numerator: List[double], denominator: List[double]) is
     let split = divide(numerator, denominator)
 
-    write_line("  ({render(numerator)}) / ({render(denominator)})")
+    write_line(
+        "  ({render(numerator)}) / ({render(denominator)})"
+    )
     write_line("    quotient:  {render(split.quotient)}")
     write_line("    remainder: {render(split.remainder)}")
 si

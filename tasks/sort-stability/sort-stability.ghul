@@ -7,8 +7,7 @@ let countries = [
     (country = "UK", city = "Birmingham")
 ]
 
-let by_city = countries
-    |> sort((a, b) => a.city <> b.city)
+let by_city = countries |> sort((a, b) => a.city <> b.city)
 
 for row in by_city do
     write_line("{row.country} {row.city}")

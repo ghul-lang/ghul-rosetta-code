@@ -8,23 +8,35 @@ satisfies_tale(pile: int, sailors: int, nights: int) -> bool =>
         pile % sailors == 0
     else
         pile % sailors == 1 /\
-        satisfies_tale(after_night(pile, sailors), sailors, nights - 1)
+        satisfies_tale(
+            after_night(pile, sailors),
+            sailors,
+            nights - 1
+        )
     fi
 
 hidden_piles(pile: int, sailors: int, nights: int) -> int{} is
     if nights > 0 then
         yield (pile - 1) / sailors
-        yield in
-            hidden_piles(after_night(pile, sailors), sailors, nights - 1)
+        yield in hidden_piles(
+            after_night(pile, sailors),
+            sailors,
+            nights - 1
+        )
     fi
 si
 
 for sailors in [5, 6] do
-    if let total = from(sailors)
-        |> find(satisfies_tale(*, sailors, sailors)) then
-        write_line("{sailors} sailors: smallest pile is {total} coconuts")
+    if let
+        total = from(sailors)
+            |> find(satisfies_tale(*, sailors, sailors))
+    then
+        write_line(
+            "{sailors} sailors: smallest pile is {total} coconuts"
+        )
         write_line(
             "  piles hidden at night: "
-            "{hidden_piles(total, sailors, sailors) |> join(", ")}")
+            "{hidden_piles(total, sailors, sailors) |> join(", ")}"
+        )
     fi
 od

@@ -1,10 +1,12 @@
 use default
 
-let round_two_order =
-    [0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15]
+let round_two_order = [
+    0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15
+]
 
-let round_three_order =
-    [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+let round_three_order = [
+    0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15
+]
 
 rotate_left(value: uint, count: int) -> uint =>
     (value << count) | (value >>> (32 - count))
@@ -35,7 +37,9 @@ word(block: List[ubyte], at: int) -> uint =>
 md4(message: ubyte[]) -> string is
     let block = padded(message)
 
-    let state = LIST([0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u])
+    let state = LIST([
+        0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u
+    ])
 
     let start mut = 0
 
@@ -56,20 +60,35 @@ md4(message: ubyte[]) -> string is
 
             let (mixed, constant, index, shift) =
                 if step < 16 then
-                    ((x & y) | (\x & z), 0u, step,
-                     [3, 7, 11, 19][step % 4])
+                    (
+                        (x & y) | (\x & z),
+                        0u,
+                        step,
+                        [3, 7, 11, 19][step % 4]
+                    )
                 elif step < 32 then
-                    ((x & y) | (x & z) | (y & z), 0x5A827999u,
-                     round_two_order[step - 16], [3, 5, 9, 13][step % 4])
+                    (
+                        (x & y) | (x & z) | (y & z),
+                        0x5A827999u,
+                        round_two_order[step - 16],
+                        [3, 5, 9, 13][step % 4]
+                    )
                 else
-                    (x ^ y ^ z, 0x6ED9EBA1u,
-                     round_three_order[step - 32], [3, 9, 11, 15][step % 4])
+                    (
+                        x ^ y ^ z,
+                        0x6ED9EBA1u,
+                        round_three_order[step - 32],
+                        [3, 9, 11, 15][step % 4]
+                    )
                 fi
 
-            registers[target] =
-                rotate_left(
-                    registers[target] + mixed + words[index] + constant,
-                    shift)
+            registers[target] = rotate_left(
+                registers[target] +
+                mixed +
+                words[index] +
+                constant,
+                shift
+            )
         od
 
         for index in 0..4 do
@@ -79,10 +98,12 @@ md4(message: ubyte[]) -> string is
         start = start + 64
     od
 
-    return
-        ["{(value >>> (8 * index)) & 0xFFu:x2}"
-            for value in state for index in 0..4]
-            |> join("")
+    return [
+        "{(value >>> (8 * index)) & 0xFFu:x2}"
+        for value in state
+        for index in 0..4
+    ]
+        |> join("")
 si
 
 for message in ["", "a", "abc", "Rosetta Code"] do

@@ -6,7 +6,10 @@ primes() -> int{} is
 
     do
         let divisors =
-            found |> take_while(prime => prime * prime <= candidate)
+            found
+                |> take_while(prime =>
+                    prime * prime <= candidate
+                )
 
         if divisors |> all(prime => candidate % prime != 0) then
             found.add(candidate)
@@ -19,9 +22,7 @@ primes() -> int{} is
 si
 
 between(low: int, high: int) -> int{} =>
-    primes()
-        |> skip_while(* < low)
-        |> take_while(* <= high)
+    primes() |> skip_while(* < low) |> take_while(* <= high)
 
 write_line("the first twenty primes:")
 write_line("  {primes() |> take(20) |> join(" ")}")

@@ -13,7 +13,7 @@ kolakoski(values: int[], length: int) -> List[int] is
     for value in cycled() do
         sequence.add(value)
 
-        for _ in 1..sequence[at_run] do
+        for _ in 1 .. sequence[at_run] do
             sequence.add(value)
         od
 

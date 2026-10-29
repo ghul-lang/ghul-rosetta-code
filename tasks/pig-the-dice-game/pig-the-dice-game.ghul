@@ -18,7 +18,8 @@ let turn mut = 0
 while safe |> all(* < 100) do
     IO.Std.write(
         "player {player + 1} (safe {safe[player]}, turn {turn})"
-        " roll? ")
+        " roll? "
+    )
 
     let answer = IO.Std.read_line()
 
@@ -42,7 +43,9 @@ while safe |> all(* < 100) do
         else
             turn = turn + rolled
 
-            write_line("{reply}  rolled {rolled}, turn now {turn}")
+            write_line(
+                "{reply}  rolled {rolled}, turn now {turn}"
+            )
         fi
     else
         safe[player] = safe[player] + turn

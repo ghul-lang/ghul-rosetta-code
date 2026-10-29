@@ -14,20 +14,21 @@ build(points: Collections.List[Point], depth: int) -> Tree is
 
     let axis = depth % points[0].count
     let sorted =
-        points |> sort((a, b) => a[axis] <> b[axis]) |> collect()
+        points
+            |> sort((a, b) => a[axis] <> b[axis])
+            |> collect()
     let middle = sorted.count / 2
 
     Tree.NODE(
         build(sorted[0..middle], depth + 1),
         sorted[middle],
         axis,
-        build(sorted[middle + 1..<0], depth + 1))
+        build(sorted[middle + 1..<0], depth + 1)
+    )
 si
 
 separation(a: Point, b: Point) -> double =>
-    a
-    |> zip(b, (x, y) => (x - y) * (x - y))
-    |> sum()
+    a |> zip(b, (x, y) => (x - y) * (x - y)) |> sum()
 
 use Found = (point: Point, distance: double, visited: int)
 
@@ -48,8 +49,10 @@ nearest(tree: Tree, target: Point) -> Found is
             fi
 
             let offset = target[n.axis] - n.point[n.axis]
-            let near = if offset < 0.0 then n.left else n.right fi
-            let far = if offset < 0.0 then n.right else n.left fi
+            let near =
+                if offset < 0.0 then n.left else n.right fi
+            let far =
+                if offset < 0.0 then n.right else n.left fi
 
             search(near)
 
@@ -64,22 +67,38 @@ nearest(tree: Tree, target: Point) -> Found is
     (
         point = best!,
         distance = System.Math.sqrt(best_distance),
-        visited = visited)
+        visited = visited
+    )
 si
 
 place(p: Point) -> string => p |> map(c => "{c:F6}") |> join()
 
-show(name: string, points: Collections.List[Point], target: Point) is
-    let (point, distance, visited) = nearest(build(points, 0), target)
+show(
+    name: string,
+    points: Collections.List[Point],
+    target: Point
+) is
+    let (point, distance, visited) = nearest(
+        build(points, 0),
+        target
+    )
 
     write_line("{name}")
     write_line("  searching for ({place(target)})")
     write_line("  nearest is ({place(point)})")
-    write_line("  distance {distance:F6}, {visited} nodes visited")
+    write_line(
+        "  distance {distance:F6}, {visited} nodes visited"
+    )
 si
 
-let wikipedia =
-    [[2.0, 3.0], [5.0, 4.0], [9.0, 6.0], [4.0, 7.0], [8.0, 1.0], [7.0, 2.0]]
+let wikipedia = [
+    [2.0, 3.0],
+    [5.0, 4.0],
+    [9.0, 6.0],
+    [4.0, 7.0],
+    [8.0, 1.0],
+    [7.0, 2.0]
+]
     |> map(p => cast Point(p))
     |> collect()
 
@@ -90,6 +109,11 @@ let random = System.Random(42)
 random_point() -> Point =>
     repeat(0, 3) |> map(_ => random.next_double()) |> collect()
 
-let cloud = repeat(0, 1000) |> map(_ => random_point()) |> collect()
+let cloud =
+    repeat(0, 1000) |> map(_ => random_point()) |> collect()
 
-show("1000 random points in the unit cube", cloud, random_point())
+show(
+    "1000 random points in the unit cube",
+    cloud,
+    random_point()
+)

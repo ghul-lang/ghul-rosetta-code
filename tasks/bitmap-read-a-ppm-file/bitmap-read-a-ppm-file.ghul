@@ -12,7 +12,8 @@ class BITMAP is
         self.width = width
         self.height = height
 
-        bytes = repeat(0ub, width * height * 3) |> collect_mutable()
+        bytes =
+            repeat(0ub, width * height * 3) |> collect_mutable()
     si
 
     set_pixel(x: int, y: int, colour: COLOUR) is
@@ -26,11 +27,19 @@ class BITMAP is
     pixel(x: int, y: int) -> COLOUR => (
         let at = (y * width + x) * 3
 
-        (red = bytes[at], green = bytes[at + 1], blue = bytes[at + 2]))
+        (
+            red = bytes[at],
+            green = bytes[at + 1],
+            blue = bytes[at + 2]
+        )
+    )
 si
 
 space(value: ubyte) -> bool =>
-    value == 32ub \/ value == 9ub \/ value == 10ub \/ value == 13ub
+    value == 32ub \/
+    value == 9ub \/
+    value == 10ub \/
+    value == 13ub
 
 read_ppm(path: string) -> BITMAP is
     let raw = IO.File.read_all_bytes(path)
@@ -38,7 +47,10 @@ read_ppm(path: string) -> BITMAP is
     let at mut = 0
 
     let token = () is
-        while at < raw.count /\ (space(raw[at]) \/ raw[at] == 35ub) do
+        while
+            at < raw.count /\
+            (space(raw[at]) \/ raw[at] == 35ub)
+        do
             if raw[at] == 35ub then
                 while at < raw.count /\ raw[at] != 10ub do
                     at = at + 1
@@ -55,8 +67,7 @@ read_ppm(path: string) -> BITMAP is
         od
 
         return string(
-            (from..at)
-                |> map(index => char(raw[index]))
+            (from..at) |> map(index => char(raw[index]))
         )
     si
 
@@ -81,10 +92,9 @@ si
 write_ppm(image: BITMAP, path: string) is
     let file = IO.File.create(path)
 
-    let header =
-        System.Text.Encoding.ascii.get_bytes(
-            "P6\n{image.width} {image.height}\n255\n"
-        )
+    let header = System.Text.Encoding.ascii.get_bytes(
+        "P6\n{image.width} {image.height}\n255\n"
+    )
 
     file.write(header, 0, header.count)
 
@@ -99,12 +109,12 @@ to_grey(image: BITMAP) -> BITMAP is
     let grey = BITMAP(image.width, image.height)
 
     for at in 0..image.width * image.height do
-        let level =
-            ubyte(
-                0.2126D * double(image.bytes[at * 3]) +
-                0.7152D * double(image.bytes[at * 3 + 1]) +
-                0.0722D * double(image.bytes[at * 3 + 2]) + 0.5D
-            )
+        let level = ubyte(
+            0.2126D * double(image.bytes[at * 3]) +
+            0.7152D * double(image.bytes[at * 3 + 1]) +
+            0.0722D * double(image.bytes[at * 3 + 2]) +
+            0.5D
+        )
 
         grey.bytes[at * 3] = level
         grey.bytes[at * 3 + 1] = level
@@ -119,10 +129,13 @@ let source = BITMAP(120, 90)
 for y in 0..source.height do
     for x in 0..source.width do
         source.set_pixel(
-            x, y,
-            (red = ubyte(255 * x / source.width),
-             green = ubyte(255 * y / source.height),
-             blue = 200ub)
+            x,
+            y,
+            (
+                red = ubyte(255 * x / source.width),
+                green = ubyte(255 * y / source.height),
+                blue = 200ub
+            )
         )
     od
 od

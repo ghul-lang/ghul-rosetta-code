@@ -7,13 +7,13 @@ enum Day is
     THURSDAY,
     FRIDAY,
     SATURDAY,
-    SUNDAY,
+    SUNDAY
 si
 
 enum Status is
     OK = 200,
     NOT_FOUND = 404,
-    SERVER_ERROR = 500,
+    SERVER_ERROR = 500
 si
 
 write_line("{Day.SUNDAY} = {cast int(Day.SUNDAY)}")

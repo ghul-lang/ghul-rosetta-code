@@ -4,9 +4,13 @@ use System.Math.*
 let root = if let [root, ..] = args then root else "." fi
 
 let sizes =
-    IO.Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)
-    |> map(path => IO.FileInfo(path).length)
-    |> collect()
+    IO.Directory.enumerate_files(
+        root,
+        "*",
+        IO.SearchOption.ALL_DIRECTORIES
+    )
+        |> map(path => IO.FileInfo(path).length)
+        |> collect()
 
 bucket(size: long) -> int =>
     if size == 0L then
@@ -25,9 +29,11 @@ label(bucket: int) -> string =>
 
 let counts =
     sizes
-    |> group_by(bucket)
-    |> map(entry => (bucket = entry.key, count = entry.value.count))
-    |> sort_by(entry => entry.bucket)
+        |> group_by(bucket)
+        |> map(entry => (
+            bucket = entry.key, count = entry.value.count
+        ))
+        |> sort_by(entry => entry.bucket)
 
 write_line("{sizes.count} files under {root}")
 write_line("")
@@ -43,4 +49,5 @@ let share = 100.0 * double(small |> sum()) / double(total)
 write_line("")
 write_line(
     "{small.count} of {sizes.count} files are under 1000 bytes, "
-    "holding {share:F1}% of the {total} bytes")
+    "holding {share:F1}% of the {total} bytes"
+)

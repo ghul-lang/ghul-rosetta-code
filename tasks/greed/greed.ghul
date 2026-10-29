@@ -6,7 +6,9 @@ let width = 79
 let height = 22
 let random = Random(9)
 
-let grid = LIST(0..width * height |> map(_ => random.next(1, 10)))
+let grid = LIST(
+    0..width * height |> map(_ => random.next(1, 10))
+)
 
 let directions = [
     ('q', (-1, -1)),
@@ -17,7 +19,8 @@ let directions = [
     ('z', (-1, 1)),
     ('x', (0, 1)),
     ('c', (1, 1))
-] |> collect_map()
+]
+    |> collect_map()
 
 let x mut = random.next(width)
 let y mut = random.next(height)
@@ -36,9 +39,11 @@ reach(dx: int, dy: int) -> int is
     let steps = grid[(y + dy) * width + x + dx]
 
     let clear =
-        1::steps |> all(i =>
-            inside(x + dx * i, y + dy * i) /\
-            grid[(y + dy * i) * width + x + dx * i] != 0)
+        1::steps
+            |> all(i =>
+                inside(x + dx * i, y + dy * i) /\
+                grid[(y + dy * i) * width + x + dx * i] != 0
+            )
 
     if clear then steps else 0 fi
 si
@@ -49,10 +54,13 @@ show() is
             (0..width)
                 |> map(column =>
                     if column == x /\ row == y then "@"
-                    elif grid[row * width + column] == 0 then " "
+                    elif grid[row * width + column] == 0 then
+                        " "
                     else "{grid[row * width + column]}"
-                    fi)
-                |> join(""))
+                    fi
+                )
+                |> join("")
+        )
     od
 
     write_line("score {score}")
@@ -100,5 +108,7 @@ while can_move() do
 od
 
 if !can_move() then
-    write_line("no moves left: game over, you ate {score} squares")
+    write_line(
+        "no moves left: game over, you ate {score} squares"
+    )
 fi

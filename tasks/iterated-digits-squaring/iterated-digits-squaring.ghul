@@ -22,8 +22,11 @@ for value in 1::max_after_one_step do
     memo.add(reaches_89(value))
 od
 
-let chains = 1..limit
-    |> filter(value => memo[digit_square_sum(value)])
-    |> count()
+let chains =
+    1..limit
+        |> filter(value => memo[digit_square_sum(value)])
+        |> count()
 
-write_line("{chains:N0} chains starting below {limit:N0} reach 89")
+write_line(
+    "{chains:N0} chains starting below {limit:N0} reach 89"
+)

@@ -4,10 +4,9 @@ use System.Numerics.BitOperations
 
 // 64 cells in a ring, held as the bits of one ulong, starting from a
 // single live cell at bit 0; rule 30 is left XOR (centre OR right).
-
 rule_30(cells: ulong) -> ulong =>
     BitOperations.rotate_right(cells, 1) ^
-        (cells | BitOperations.rotate_left(cells, 1))
+    (cells | BitOperations.rotate_left(cells, 1))
 
 random_bytes() -> int{} is
     let cells mut = 1UL

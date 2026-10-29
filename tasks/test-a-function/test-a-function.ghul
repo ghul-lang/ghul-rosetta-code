@@ -7,7 +7,8 @@ is_palindrome(text: string) -> bool =>
     let letters =
         text.to_lower().to_char_array()
             |> filter(char.is_letter_or_digit)
-            |> collect() in
+            |> collect()
+    in
     letters =~ (letters |> reverse() |> collect())
 
 // MSTest 4 records the text of the checked expression through trailing
@@ -33,7 +34,9 @@ class PALINDROME_TESTS is
 
     @TestMethod()
     case_spaces_and_punctuation_are_ignored() =>
-        is_true(is_palindrome("A man, a plan, a canal: Panama!"))
+        is_true(
+            is_palindrome("A man, a plan, a canal: Panama!")
+        )
 
     @TestMethod()
     a_word_that_does_not_is_not() =>
@@ -41,15 +44,18 @@ class PALINDROME_TESTS is
 si
 
 is_test(method: System.Reflection.MethodInfo) -> bool =>
-    method.get_custom_attributes(typeof TestMethodAttribute, true).count > 0
+    method.get_custom_attributes(
+        typeof TestMethodAttribute,
+        true
+    ).count > 0
 
 // MSTest's own runner is a test host rather than a program, so this
 // finds the test methods itself and reports each one.
 let tests = typeof PALINDROME_TESTS
 let fixture = System.Activator.create_instance(tests)
 let flags = BindingFlags.PUBLIC | BindingFlags.INSTANCE
-let methods = tests.get_methods(flags) |> filter(is_test)
-    |> collect()
+let methods =
+    tests.get_methods(flags) |> filter(is_test) |> collect()
 let passed mut = 0
 
 for method in methods do
@@ -58,7 +64,9 @@ for method in methods do
         passed = passed + 1
         write_line("pass  {method.name}")
     catch e: System.Reflection.TargetInvocationException
-        write_line("FAIL  {method.name}: {e.inner_exception?.message}")
+        write_line(
+            "FAIL  {method.name}: {e.inner_exception?.message}"
+        )
     yrt
 od
 

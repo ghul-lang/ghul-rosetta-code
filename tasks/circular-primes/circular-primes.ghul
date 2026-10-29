@@ -10,7 +10,10 @@ let prime = (
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if sieve[p] then
-            for multiple in from(p * p, p) |> take_while(* < limit) do
+            for
+                multiple in from(p * p, p)
+                    |> take_while(* < limit)
+            do
                 sieve[multiple] = false
             od
         fi
@@ -23,10 +26,15 @@ rotations(n: int) -> int{} =>
     let digits = "{n}" in
     0..digits.length
         |> map(i =>
-            int.parse("{digits.substring(i)}{digits.substring(0, i)}"))
+            int.parse(
+                "{digits.substring(i)}{digits.substring(0, i)}"
+            )
+        )
 
 is_circular(n: int) -> bool =>
-    n |> rotations() |> all(rotation => rotation >= n /\ prime[rotation])
+    n
+        |> rotations()
+        |> all(rotation => rotation >= n /\ prime[rotation])
 
 probably_prime(n: bigint) -> bool is
     strip(d: bigint, s: int) -> (bigint, int) =>
@@ -60,8 +68,7 @@ repunit(n: int) -> bigint => (bigint.pow(10n, n) - 1n) / 9n
 
 write_line("sieving to {limit:N0}")
 
-let circular =
-    2..limit |> filter(is_circular) |> take(19)
+let circular = 2..limit |> filter(is_circular) |> take(19)
 
 write_line("The first 19 circular primes:")
 write_line("{circular}")

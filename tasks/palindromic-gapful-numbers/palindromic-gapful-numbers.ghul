@@ -3,7 +3,6 @@ use default
 // palindromes that start and end with the digit, in increasing order: each
 // length's first half runs upward from the digit, and the second half
 // mirrors it
-
 palindromes(digit: int) -> long{} is
     for length in from(3) do
         let half = (length + 1) / 2
@@ -13,7 +12,11 @@ palindromes(digit: int) -> long{} is
 
         for left in from(low) |> take_while(* < high) do
             let text = "{left}"
-            let mirrored = text |> reverse() |> skip(length % 2) |> join("")
+            let mirrored =
+                text
+                    |> reverse()
+                    |> skip(length % 2)
+                    |> join("")
 
             yield long.parse("{text}{mirrored}")
         od
@@ -21,13 +24,17 @@ palindromes(digit: int) -> long{} is
 si
 
 gapful(digit: int) -> long{} =>
-    palindromes(digit) |> filter(n => n % long(11 * digit) == 0L)
+    palindromes(digit)
+        |> filter(n => n % long(11 * digit) == 0L)
 
 show(title: string, skip_count: int, take_count: int) is
     write_line(title)
 
     for digit in 1::9 do
-        let numbers = gapful(digit) |> skip(skip_count) |> take(take_count)
+        let numbers =
+            gapful(digit)
+                |> skip(skip_count)
+                |> take(take_count)
 
         write_line("{digit}: {numbers |> join(" ")}")
     od

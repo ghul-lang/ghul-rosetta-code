@@ -10,7 +10,10 @@ swaps(deck: int[]) -> int => (
         let last = top_card - 1
 
         for i in 0::(top_card - 1) / 2 do
-            (cards[i], cards[last - i]) = (cards[last - i], cards[i])
+            (cards[i], cards[last - i]) = (
+                cards[last - i],
+                cards[i]
+            )
         od
 
         count = count + 1
@@ -24,7 +27,7 @@ topswops(n: int) -> int => (
 
     let best mut = 0
 
-    let search = (position) rec is
+    let search = position rec is
         if position == n then
             let rounds = swaps(deck.to_array())
 
@@ -33,11 +36,17 @@ topswops(n: int) -> int => (
             fi
         else
             for i in position::(n - 1) do
-                (deck[position], deck[i]) = (deck[i], deck[position])
+                (deck[position], deck[i]) = (
+                    deck[i],
+                    deck[position]
+                )
 
                 rec(position + 1)
 
-                (deck[position], deck[i]) = (deck[i], deck[position])
+                (deck[position], deck[i]) = (
+                    deck[i],
+                    deck[position]
+                )
             od
         fi
     si

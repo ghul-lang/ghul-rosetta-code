@@ -11,12 +11,15 @@ levenshtein(source: string, target: string) -> int is
 
         for j in 1::target.length do
             let same = source[i - 1] == target[j - 1]
-            let substitution = previous[j - 1] + if same then 0 else 1 fi
+            let substitution =
+                previous[j - 1] + if same then 0 else 1 fi
 
             let insertion = previous[j] + 1
             let deletion = current[j - 1] + 1
 
-            current.add(min(substitution, min(insertion, deletion)))
+            current.add(
+                min(substitution, min(insertion, deletion))
+            )
         od
 
         previous = current

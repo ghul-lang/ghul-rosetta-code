@@ -11,16 +11,19 @@ let top = 36
 neighbourhood(cells: List[bool], at: int) -> int =>
     let left = cells[(at + cells.count - 1) % cells.count] in
     let right = cells[(at + 1) % cells.count] in
-        if left then 4 else 0 fi +
-        if cells[at] then 2 else 0 fi +
-        if right then 1 else 0 fi
+    if left then 4 else 0 fi +
+    if cells[at] then 2 else 0 fi +
+    if right then 1 else 0 fi
 
 step(rule: int, cells: List[bool]) -> List[bool] =>
-    let next = 0..cells.count
-        |> map(at => (rule >> neighbourhood(cells, at)) & 1 == 1)
-        |> collect() in
+    let next =
+        0..cells.count
+            |> map(at =>
+                (rule >> neighbourhood(cells, at)) & 1 == 1
+            )
+            |> collect()
+    in
     next
-
 
 single_cell() -> List[bool] =>
     0..width |> map(at => at == width / 2) |> collect()
@@ -28,13 +31,19 @@ single_cell() -> List[bool] =>
 draw(image: IMAGE, rule: int, left: int) is
     image.colour(234ub, 237ub, 244ub)
     image.fill_rectangle(
-        double(left), double(top),
-        double(left + width), double(top + generations))
+        double(left),
+        double(top),
+        double(left + width),
+        double(top + generations)
+    )
 
     image.colour(30ub, 40ub, 70ub)
 
-    let rows = stream(single_cell(), cells => cells || step(rule, cells))
-        |> take(generations)
+    let rows =
+        stream(single_cell(), cells =>
+            Ghul.Pipes.STREAM.YIELD(cells, step(rule, cells))
+        )
+            |> take(generations)
 
     for row in rows |> index() do
         for at in 0..width do
@@ -46,20 +55,30 @@ draw(image: IMAGE, rule: int, left: int) is
 
     image.colour(60ub, 65ub, 80ub)
     image.text(
-        double(left + width / 2), double(top) - 14.0,
-        18.0, "rule {rule}", Anchor.CENTRE)
+        double(left + width / 2),
+        double(top) - 14.0,
+        18.0,
+        "rule {rule}",
+        Anchor.CENTRE
+    )
 si
 
-let image = IMAGE(width * 2 + gap * 3, top + generations + gap * 3)
+let image = IMAGE(
+    width * 2 + gap * 3,
+    top + generations + gap * 3
+)
 
 draw(image, 30, gap)
 draw(image, 110, gap * 2 + width)
 
 image.colour(90ub, 95ub, 110ub)
 image.text(
-    double(gap), double(top + generations + gap + 12), 13.0,
+    double(gap),
+    double(top + generations + gap + 12),
+    13.0,
     "{generations} generations from a single live cell "
-    "on a ring of {width}")
+    "on a ring of {width}"
+)
 
 image.write("space-time.png")
 

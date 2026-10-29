@@ -11,10 +11,18 @@ cubic(a: POINT, b: POINT, c: POINT, d: POINT) -> List[POINT] =>
             let t = double(step) / double(steps)
             let u = 1.0D - t
 
-            (x = u * u * u * a.x + 3.0D * u * u * t * b.x +
-                 3.0D * u * t * t * c.x + t * t * t * d.x,
-             y = u * u * u * a.y + 3.0D * u * u * t * b.y +
-                 3.0D * u * t * t * c.y + t * t * t * d.y)
+            (
+                x =
+                    u * u * u * a.x +
+                    3.0D * u * u * t * b.x +
+                    3.0D * u * t * t * c.x +
+                    t * t * t * d.x,
+                y =
+                    u * u * u * a.y +
+                    3.0D * u * u * t * b.y +
+                    3.0D * u * t * t * c.y +
+                    t * t * t * d.y
+            )
         ))
         |> collect()
 

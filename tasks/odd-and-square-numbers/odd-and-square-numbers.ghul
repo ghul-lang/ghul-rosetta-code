@@ -1,10 +1,13 @@
 use default
 
-let squares = stream(1, n => n * n || n + 1)
+let squares = stream(1, n =>
+    Ghul.Pipes.STREAM.YIELD(n * n, n + 1)
+)
 
 write_line(
     squares
         |> skip_while(* < 100)
         |> take_while(* < 1000)
         |> filter(square => square % 2 == 1)
-        |> join())
+        |> join()
+)

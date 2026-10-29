@@ -93,14 +93,17 @@ sorted() -> Filter => source => in_order(source)
 in_order(source: Stream) -> Stream => (
     let lines = source |> collect_mutable()
 
-    lines.sort((a: string, b: string) -> int => string.compare(a, b))
+    lines.sort((a: string, b: string) -> int =>
+        string.compare(a, b)
+    )
 
     pipe(lines)
 )
 
 let work = IO.Path.combine(
     IO.Path.get_temp_path(),
-    "pipes-{System.Guid.new_guid()}")
+    "pipes-{System.Guid.new_guid()}"
+)
 
 IO.Directory.create_directory(work)
 
@@ -122,11 +125,16 @@ try
     ])
 
     let pioneer_lines =
-        cat(scientists) | grep("ALGOL") | tee(pioneers) | sorted() | uniq()
+        cat(scientists) |
+        grep("ALGOL") |
+        tee(pioneers) |
+        sorted() |
+        uniq()
 
     write_line("the ALGOL pioneers, sorted and deduplicated:")
 
-    pioneer_lines | tee(important) |> each(line => write_line("  {line}"))
+    pioneer_lines | tee(important)
+        |> each(line => write_line("  {line}"))
 
     write_line("")
     write_line("the first two, captured into a value:")
@@ -141,7 +149,9 @@ try
     write_line("lines appended: {appended}")
     write_line("the file now holds: {capture(cat(naur))}")
     write_line("its last line: {capture(tail(1) ◀ naur)}")
-    write_line("from a here-document: {capture(uniq() << "one\ntwo\ntwo")}")
+    write_line(
+        "from a here-document: {capture(uniq() << "one\ntwo\ntwo")}"
+    )
 finally
     IO.Directory.delete(work, true)
 yrt

@@ -1,5 +1,7 @@
 use default
 
-write_line("there is no exponentiation operator, so the library answers")
+write_line(
+    "there is no exponentiation operator, so the library answers"
+)
 write_line("as doubles: {System.Math.pow(0.0, 0.0)}")
 write_line("as big integers: {bigint.pow(0n, 0)}")

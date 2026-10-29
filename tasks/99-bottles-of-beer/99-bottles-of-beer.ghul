@@ -12,7 +12,4 @@ verse(n: int) -> string =>
     "Take one down and pass it around, "
     "{bottles(n - 1)} of beer on the wall.\n"
 
-(1::99)
-    |> reverse()
-    |> map(verse)
-    |> each(v => write_line(v))
+(1::99) |> reverse() |> map(verse) |> each(v => write_line(v))

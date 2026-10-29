@@ -33,7 +33,9 @@ for niven in niven_numbers() |> take(10_000_001) do
     if previous_index > 0 /\ niven - previous > widest then
         widest = niven - previous
 
-        write_line("{widest,3}{previous_index,16:N0}{previous,18:N0}")
+        write_line(
+            "{widest,3}{previous_index,16:N0}{previous,18:N0}"
+        )
     fi
 
     previous = niven

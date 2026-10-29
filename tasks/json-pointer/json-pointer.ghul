@@ -14,7 +14,9 @@ union Resolved is
 si
 
 text(value: string) -> Json => Json.TEXT(value)
-member(key: string, value: Json) -> MEMBER => (key = key, value = value)
+member(key: string, value: Json) -> MEMBER => (
+    key = key, value = value
+)
 
 render(value: Json) -> string =>
     case value
@@ -29,8 +31,10 @@ render_member(entry: MEMBER) -> string =>
     "\"{entry.key}\": {render(entry.value)}"
 
 as_index(token: string) -> int? =>
-    if token.length > 0 /\
-        (token |> all(digit => digit >= '0' /\ digit <= '9')) then
+    if
+        token.length > 0 /\
+        (token |> all(digit => digit >= '0' /\ digit <= '9'))
+    then
         int.parse(token)
     else
         null
@@ -43,20 +47,26 @@ step(node: Json, token: string) -> Resolved =>
             if position < list.items.count then
                 Resolved.FOUND(list.items[position])
             else
-                Resolved.FAILED("index {position} is past the end")
+                Resolved.FAILED(
+                    "index {position} is past the end"
+                )
             fi
         else
             Resolved.FAILED("\"{token}\" is not an array index")
         fi
     when record: Json.OBJECT then
-        let named = record.members |> find(entry => entry.key =~ token) in
+        let named =
+            record.members |> find(entry => entry.key =~ token)
+        in
         if let found = named then
             Resolved.FOUND(found.value)
         else
             Resolved.FAILED("no member named \"{token}\"")
         fi
     else
-        Resolved.FAILED("\"{token}\" has nothing to descend into")
+        Resolved.FAILED(
+            "\"{token}\" has nothing to descend into"
+        )
     esac
 
 decode(token: string) -> string =>
@@ -66,44 +76,66 @@ resolve(document: Json, pointer: string) -> Resolved =>
     if pointer.length == 0 then
         Resolved.FOUND(document)
     elif pointer[0] != '/' then
-        Resolved.FAILED("a pointer must be empty or start with a slash")
+        Resolved.FAILED(
+            "a pointer must be empty or start with a slash"
+        )
     else
-        pointer[1..<0]
-            .split(['/'])
-            |> reduce(Resolved.FOUND(document), (running, token) =>
+        pointer[1..<0].split(['/'])
+            |> reduce(Resolved.FOUND(document),
+                (running, token) =>
                 if running? then
                     step(running.value, decode(token))
                 else
                     running
-                fi)
+                fi
+            )
     fi
 
 let wiki_link = "https://rosettacode.org/wiki/Rosetta_Code"
-let discord_link = "https://discord.com/channels/1011262808001880065"
+let discord_link =
+    "https://discord.com/channels/1011262808001880065"
 
-let document =
-    Json.OBJECT(
-        [member("wiki", Json.OBJECT(
-             [member("links", Json.ARRAY(
-                  [text(wiki_link), text(discord_link)]))])),
-         member("", text("Rosetta")),
-         member(" ", text("Code")),
-         member("g/h", text("chrestomathy")),
-         member("i~j", text("site")),
-         member("abc", Json.ARRAY([text("is"), text("a")])),
-         member("def", Json.OBJECT([member("", text("programming"))]))])
+let document = Json.OBJECT([
+    member(
+        "wiki",
+        Json.OBJECT([
+            member(
+                "links",
+                Json.ARRAY([
+                    text(wiki_link),
+                    text(discord_link)
+                ])
+            )
+        ])
+    ),
+    member("", text("Rosetta")),
+    member(" ", text("Code")),
+    member("g/h", text("chrestomathy")),
+    member("i~j", text("site")),
+    member("abc", Json.ARRAY([text("is"), text("a")])),
+    member(
+        "def",
+        Json.OBJECT([member("", text("programming"))])
+    )
+])
 
-let pointers =
-    ["", "/", "/ ", "/abc", "/def/", "/g~1h", "/i~0j",
-     "/wiki/links/0", "/wiki/links/1", "/wiki/links/2",
-     "/wiki/name", "/no/such/thing", "bad/pointer"]
+let pointers = [
+    "", "/", "/ ", "/abc", "/def/", "/g~1h", "/i~0j",
+    "/wiki/links/0", "/wiki/links/1", "/wiki/links/2",
+    "/wiki/name", "/no/such/thing", "bad/pointer"
+]
 
-pointers |> each(pointer => (
-    let outcome = resolve(document, pointer)
+pointers
+    |> each(pointer => (
+        let outcome = resolve(document, pointer)
 
-    if outcome? then
-        write_line("\"{pointer}\" -> {render(outcome.value)}")
-    else
-        write_line("\"{pointer}\" -> error: {outcome.reason}")
-    fi
-))
+        if outcome? then
+            write_line(
+                "\"{pointer}\" -> {render(outcome.value)}"
+            )
+        else
+            write_line(
+                "\"{pointer}\" -> error: {outcome.reason}"
+            )
+        fi
+    ))

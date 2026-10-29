@@ -3,8 +3,10 @@ use IO.File
 
 replace_in_file(source: string, destination: string) is
     let replaced =
-        File.read_all_text(source)
-            .replace("Goodbye London!", "Hello New York!")
+        File.read_all_text(source).replace(
+            "Goodbye London!",
+            "Hello New York!"
+        )
 
     File.write_all_text(destination, replaced)
 

@@ -7,4 +7,6 @@ use System.Net.Http.HttpClientHandler
 fetch(url: string, handler: HttpClientHandler) -> string =>
     HttpClient(handler).get_string_async(url).result
 
-IO.Std.write(fetch("https://www.example.com", HttpClientHandler()))
+IO.Std.write(
+    fetch("https://www.example.com", HttpClientHandler())
+)

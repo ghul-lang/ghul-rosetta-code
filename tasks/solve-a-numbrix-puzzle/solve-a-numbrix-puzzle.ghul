@@ -8,7 +8,8 @@ class NUMBRIX is
 
     init(rows: int[][]) is
         _size = rows.count
-        _grid = rows |> flat_map(row => row) |> collect_mutable()
+        _grid =
+            rows |> flat_map(row => row) |> collect_mutable()
         _last = _size * _size
         _given = repeat(-1, _last + 1) |> collect_mutable()
 
@@ -56,7 +57,8 @@ class NUMBRIX is
 
         if _given[next] >= 0 then
             return
-                _neighbours(cell) |> any(c => c == _given[next]) /\
+                _neighbours(cell)
+                    |> any(c => c == _given[next]) /\
                 _place(_given[next], next)
         fi
 
@@ -99,7 +101,8 @@ class NUMBRIX is
 
     show() is
         for row in 0.._size do
-            let cells = _grid |> skip(row * _size) |> take(_size)
+            let cells =
+                _grid |> skip(row * _size) |> take(_size)
 
             write_line(cells |> map(v => "{v,3}") |> join(""))
         od

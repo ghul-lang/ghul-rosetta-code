@@ -1,6 +1,10 @@
 use default
 
-fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
+fold_left[T, A](
+    values: T{},
+    seed: A,
+    combine: (A, T) -> A
+) -> A => (
     let running mut = seed
 
     for value in values do
@@ -10,7 +14,11 @@ fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
     running
 )
 
-fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A => (
+fold_right[T, A](
+    values: List[T],
+    seed: A,
+    combine: (T, A) -> A
+) -> A => (
     let running mut = seed
 
     for i in 0..values.count do
@@ -22,13 +30,19 @@ fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A => (
 
 let numbers = [1, 2, 3, 4, 5]
 
-let bracket_left = (running: string, value: int) => "({running} {value})"
-let bracket_right = (value: int, running: string) => "({value} {running})"
+let bracket_left =
+    (running: string, value: int) => "({running} {value})"
+let bracket_right =
+    (value: int, running: string) => "({value} {running})"
 
 let left_sum = fold_left(numbers, 0, * + *)
 let right_sum = fold_right(numbers, 0, * + *)
 
 write_line("left  sum:  {left_sum}")
 write_line("right sum:  {right_sum}")
-write_line("left  tree: {fold_left(numbers, "nil", bracket_left)}")
-write_line("right tree: {fold_right(numbers, "nil", bracket_right)}")
+write_line(
+    "left  tree: {fold_left(numbers, "nil", bracket_left)}"
+)
+write_line(
+    "right tree: {fold_right(numbers, "nil", bracket_right)}"
+)

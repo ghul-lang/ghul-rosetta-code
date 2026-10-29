@@ -20,6 +20,4 @@ sattolo_cycle(shuffled, random)
 
 write_line(shuffled |> map(v => "{v}") |> join(" "))
 
-write_line("{original
-    |> zip(shuffled)
-    |> all(* != *)}")
+write_line("{original |> zip(shuffled) |> all(* != *)}")

@@ -2,9 +2,10 @@ use default
 
 use Math = System.Math
 
-rk4(
-    f: (double, double) -> double, dt: double
-) -> ((double, double)) -> (double, double) =>
+rk4(f: (double, double) -> double, dt: double) -> ((
+    double,
+    double
+)) -> (double, double) =>
     ((t, y)) => (
         let dy1 = dt * f(t, y)
         let dy2 = dt * f(t + dt / 2.0, y + dy1 / 2.0)
@@ -18,8 +19,12 @@ exact(t: double) -> double => Math.pow(t * t + 4.0, 2.0) / 16.0
 
 let advance = rk4((t, y) => t * Math.sqrt(y), 0.1)
 
-let points = stream((0.0, 1.0), point => point || advance(point))
+let points = stream((0.0, 1.0), point =>
+    Ghul.Pipes.STREAM.YIELD(point, advance(point))
+)
 
 for (t, y) in points |> take(101) |> step(10) do
-    write_line("y({t,4:F1}) = {y,12:F6}  error = {y - exact(t):E6}")
+    write_line(
+        "y({t,4:F1}) = {y,12:F6}  error = {y - exact(t):E6}"
+    )
 od

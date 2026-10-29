@@ -8,11 +8,12 @@ use Square = (file: int, rank: int)
 let size = 8
 let start = (file = 0, rank = 0)
 
-let leaps =
-    [(file = 1, rank = 2), (file = 2, rank = 1),
-     (file = 2, rank = -1), (file = 1, rank = -2),
-     (file = -1, rank = -2), (file = -2, rank = -1),
-     (file = -2, rank = 1), (file = -1, rank = 2)]
+let leaps = [
+    (file = 1, rank = 2), (file = 2, rank = 1),
+    (file = 2, rank = -1), (file = 1, rank = -2),
+    (file = -1, rank = -2), (file = -2, rank = -1),
+    (file = -2, rank = 1), (file = -1, rank = 2)
+]
 
 at(square: Square) -> int => square.rank * size + square.file
 
@@ -20,17 +21,22 @@ named(square: Square) -> string =>
     "{char(int('a') + square.file)}{square.rank + 1}"
 
 inside(square: Square) -> bool =>
-    square.file >= 0 /\ square.file < size /\
-    square.rank >= 0 /\ square.rank < size
+    square.file >= 0 /\
+    square.file < size /\
+    square.rank >= 0 /\
+    square.rank < size
 
 let visit_order = repeat(0, size * size) |> collect_mutable()
 
 onward(square: Square) -> Square{} =>
     leaps
-        |> map(leap =>
-            (file = square.file + leap.file,
-             rank = square.rank + leap.rank))
-        |> filter(next => inside(next) /\ visit_order[at(next)] == 0)
+        |> map(leap => (
+            file = square.file + leap.file,
+            rank = square.rank + leap.rank
+        ))
+        |> filter(next =>
+            inside(next) /\ visit_order[at(next)] == 0
+        )
 
 let tour = LIST([start])
 
@@ -40,10 +46,14 @@ while tour.count < size * size do
     let square = tour[tour.count - 1]
 
     let next =
-        square |> onward()
-            |> min_by(candidate => onward(candidate) |> count()) ?? square
+        square
+            |> onward()
+            |> min_by(candidate =>
+                onward(candidate) |> count()
+            ) ?? square
 
-    assert at(next) != at(square) else "the tour reached a dead end"
+    assert at(next) != at(square)
+        else "the tour reached a dead end"
 
     visit_order[at(next)] = tour.count + 1
 
@@ -59,8 +69,10 @@ for row in 0..size do
     write_line(
         (0..size)
             |> map(file =>
-                "{visit_order[at((file = file, rank = rank))],3}")
-            |> join(""))
+                "{visit_order[at((file = file, rank = rank))],3}"
+            )
+            |> join("")
+    )
 od
 
 write_line("")
@@ -69,16 +81,18 @@ for row in 0..size do
     write_line(
         (0..size)
             |> map(step => named(tour[row * size + step]))
-            |> join(" "))
+            |> join(" ")
+    )
 od
 
 let image = IMAGE(520, 520)
 
 image.view(-0.1D, -0.1D, 8.1D, 8.1D)
 
-middle(square: Square) -> (x: double, y: double) =>
-    (x = double(square.file) + 0.5D,
-     y = double(square.rank) + 0.5D)
+middle(square: Square) -> (x: double, y: double) => (
+    x = double(square.file) + 0.5D,
+    y = double(square.rank) + 0.5D
+)
 
 let board = SHAPES()
 
@@ -86,11 +100,12 @@ for rank in 0..size do
     for file in 0..size do
         let corner = (x = double(file), y = double(rank))
 
-        let cell =
-            [corner,
-             (x = corner.x + 1.0D, y = corner.y),
-             (x = corner.x + 1.0D, y = corner.y + 1.0D),
-             (x = corner.x, y = corner.y + 1.0D)]
+        let cell = [
+            corner,
+            (x = corner.x + 1.0D, y = corner.y),
+            (x = corner.x + 1.0D, y = corner.y + 1.0D),
+            (x = corner.x, y = corner.y + 1.0D)
+        ]
 
         if (file + rank) % 2 == 0 then
             board.add(cell, 226ub, 222ub, 212ub)
@@ -109,7 +124,8 @@ for step in 0..tour.count - 1 do
     let to = middle(tour[step + 1])
 
     image.colour(
-        COLOUR_MAP.viridis(double(step) / double(tour.count)))
+        COLOUR_MAP.viridis(double(step) / double(tour.count))
+    )
 
     image.line(from.x, from.y, to.x, to.y)
 od
@@ -119,9 +135,11 @@ image.dot(middle(start).x, middle(start).y, 6.0D)
 
 image.colour(40ub, 40ub, 50ub)
 image.stroke(1.4D)
-image.line([(x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
-            (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
-            (x = 0.0D, y = 0.0D)])
+image.line([
+    (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
+    (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
+    (x = 0.0D, y = 0.0D)
+])
 
 image.write("tour.png")
 

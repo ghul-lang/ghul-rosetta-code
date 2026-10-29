@@ -9,5 +9,7 @@ write_line("{answer} is the answer")
 try
     assert answer == 43 else "the answer should be 43"
 catch _: Ghul.AssertFailedException
-    write_line("a failing assertion throws AssertFailedException")
+    write_line(
+        "a failing assertion throws AssertFailedException"
+    )
 yrt

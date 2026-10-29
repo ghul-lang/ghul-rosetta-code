@@ -4,15 +4,22 @@ digit_of(letter: char) -> int => int(letter) - int('0')
 
 self_describing(value: int) -> bool =>
     let digits = "{value}" in
-        digits
+    digits
         |> index()
         |> all(digit =>
             digit_of(digit.value) ==
-                (digits
-                 |> filter(other => digit_of(other) == digit.index)
-                 |> count()))
+            (
+                digits
+                    |> filter(other =>
+                        digit_of(other) == digit.index
+                    )
+                    |> count()
+            )
+        )
 
-for value in [1210, 2020, 21200, 3211000, 42101000, 1211, 2021] do
+for
+    value in [1210, 2020, 21200, 3211000, 42101000, 1211, 2021]
+do
     write_line("{value} {self_describing(value)}")
 od
 
@@ -21,7 +28,7 @@ write_line("self-describing numbers below 100000:")
 
 write_line(
     (1..100000)
-    |> filter(self_describing)
-    |> map(value => "{value}")
-    |> join(" ")
+        |> filter(self_describing)
+        |> map(value => "{value}")
+        |> join(" ")
 )

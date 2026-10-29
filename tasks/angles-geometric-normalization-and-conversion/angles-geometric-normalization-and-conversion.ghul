@@ -6,22 +6,21 @@ normalize(angle: double, turn: double) -> double =>
 convert(angle: double, from: double, to: double) -> double =>
     normalize(angle, from) / from * to
 
-let scales =
-    [
-        (name = "degrees", turn = 360.0),
-        (name = "gradians", turn = 400.0),
-        (name = "mils", turn = 6400.0),
-        (name = "radians", turn = System.Math.tau)
-    ]
+let scales = [
+    (name = "degrees", turn = 360.0),
+    (name = "gradians", turn = 400.0),
+    (name = "mils", turn = 6400.0),
+    (name = "radians", turn = System.Math.tau)
+]
 
-let angles =
-    [
-        -2.0, -1.0, 0.0, 1.0, 2.0, 6.2831853,
-        16.0, 57.2957795, 359.0, 399.0, 6399.0, 1000000.0
-    ]
+let angles = [
+    -2.0, -1.0, 0.0, 1.0, 2.0, 6.2831853,
+    16.0, 57.2957795, 359.0, 399.0, 6399.0, 1000000.0
+]
 
 for source in scales do
-    let others = scales |> filter(s => s.name !~ source.name) |> memo()
+    let others =
+        scales |> filter(s => s.name !~ source.name) |> memo()
 
     write_line("")
     write_line("{source.name}")
@@ -33,7 +32,9 @@ for source in scales do
     for angle in angles do
         let converted =
             others
-                |> map(s => "{convert(angle, source.turn, s.turn),14:F7}")
+                |> map(s =>
+                    "{convert(angle, source.turn, s.turn),14:F7}"
+                )
                 |> join("")
 
         let normalized = normalize(angle, source.turn)

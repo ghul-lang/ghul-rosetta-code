@@ -2,7 +2,6 @@ use default
 
 // true when a comes strictly before b: the first difference decides, and
 // a list that runs out first comes first
-
 precedes(a: List[int], b: List[int]) -> bool =>
     case (a, b)
     when (_, []) then false

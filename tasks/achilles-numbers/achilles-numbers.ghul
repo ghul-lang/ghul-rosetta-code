@@ -1,16 +1,23 @@
 use default
 
 power(base: int, exponent: int) -> int =>
-    if exponent == 0 then 1 else base * power(base, exponent - 1) fi
+    if exponent == 0 then
+        1
+    else
+        base * power(base, exponent - 1)
+    fi
 
 is_achilles(n: int) -> bool =>
     let factors = factorize(n) in
-        factors.count > 0 /\
-        (factors |> all(factor => factor.exponent >= 2)) /\
-        (factors |> map(factor => factor.exponent) |> reduce(0, gcd)) == 1
+    factors.count > 0 /\
+    (factors |> all(factor => factor.exponent >= 2)) /\
+    (
+        factors
+            |> map(factor => factor.exponent)
+            |> reduce(0, gcd)
+    ) == 1
 
-achilles_numbers() -> int{} =>
-    from(1) |> filter(is_achilles)
+achilles_numbers() -> int{} => from(1) |> filter(is_achilles)
 
 show(heading: string, numbers: int{}) is
     write_line(heading)
@@ -22,18 +29,23 @@ show(heading: string, numbers: int{}) is
     write_line("")
 si
 
-show("first 50 Achilles numbers:", achilles_numbers() |> take(50))
+show(
+    "first 50 Achilles numbers:",
+    achilles_numbers() |> take(50)
+)
 
 show(
     "first 20 strong Achilles numbers:",
-    achilles_numbers() |> filter(n => is_achilles(totient(n))) |> take(20)
+    achilles_numbers()
+        |> filter(n => is_achilles(totient(n)))
+        |> take(20)
 )
 
 for digits in 2::5 do
     let total =
         (power(10, digits - 1)..power(10, digits))
-        |> filter(is_achilles)
-        |> count()
+            |> filter(is_achilles)
+            |> count()
 
     write_line("Achilles numbers with {digits} digits: {total}")
 od

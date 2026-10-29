@@ -1,6 +1,10 @@
 use default
 
-class NODE(name: string, weight: double, own_coverage: double?) is
+class NODE(
+    name: string,
+    weight: double,
+    own_coverage: double?
+) is
     children: LIST[NODE]
 
     init(..) is
@@ -13,21 +17,30 @@ class NODE(name: string, weight: double, own_coverage: double?) is
         elif children.count == 0 then
             0.0D
         else
-            let weighted = children
-                |> sum_by(child => child.weight * child.coverage)
-            let total = children
-                |> sum_by(child => child.weight)
+            let weighted =
+                children
+                    |> sum_by(child =>
+                        child.weight * child.coverage
+                    )
+            let total =
+                children |> sum_by(child => child.weight)
 
             weighted / total
         fi
 
     rows(depth: int) -> string{} is
         let label = "{string(' ', depth * 4)}{name}"
-        let shown_weight = if weight =~ 1.0D then "" else "{weight}" fi
+        let shown_weight =
+            if weight =~ 1.0D then "" else "{weight}" fi
         let shown_coverage =
-            if let given = own_coverage then "{given}" else "" fi
+            if let given = own_coverage then
+                "{given}"
+            else
+                ""
+            fi
 
-        let columns = "{label,-32}|{shown_weight,-8}|{shown_coverage,-10}|"
+        let columns =
+            "{label,-32}|{shown_weight,-8}|{shown_coverage,-10}|"
 
         yield "{columns}{coverage,8:F4}"
 
@@ -83,21 +96,27 @@ let table = [
 ]
 
 parse(line: string) -> (depth: int, node: NODE) => (
-    let
-        cells = line.split(['|']), name = cells[0].trim(),
-        depth = (cells[0].length - cells[0].trim_start().length) / 4,
-        weight_text = cells[1].trim(), coverage_text = cells[2].trim()
+    let cells = line.split(['|']),
+        name = cells[0].trim(),
+        depth =
+            (
+                cells[0].length - cells[0].trim_start().length
+            ) / 4,
+        weight_text = cells[1].trim(),
+        coverage_text = cells[2].trim()
 
     let weight =
         if weight_text.length > 0 then double.parse(weight_text)
-        else 1.0D fi
+        else 1.0D
+        fi
     let coverage =
-        if coverage_text.length > 0 then double.parse(coverage_text)
-        else null fi
+        if coverage_text.length > 0 then
+            double.parse(coverage_text)
+        else null
+        fi
 
     (depth, NODE(name, weight, coverage))
 )
-
 
 let ancestors = LIST()
 let root mut = null
@@ -118,7 +137,9 @@ for line in table do
     ancestors.add(node)
 od
 
-write_line("NAME_HIERARCHY                  |WEIGHT  |COVERAGE  | OVERALL")
+write_line(
+    "NAME_HIERARCHY                  |WEIGHT  |COVERAGE  | OVERALL"
+)
 
 for row in root!.rows(0) do
     write_line(row)

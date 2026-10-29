@@ -17,16 +17,20 @@ substitute(x: uint) -> uint =>
     0..8
         |> map(i =>
             let nibble = int((x >> (4 * i)) & 0xFui) in
-            uint(s_boxes[i][nibble]) << (4 * i))
+            uint(s_boxes[i][nibble]) << (4 * i)
+        )
         |> reduce(0ui, * | *)
 
 // the left half is combined with the key element, substituted, rotated
 // left 11 bits and mixed into the right half
-
 main_step(block: ulong, key: uint) -> ulong =>
     let
-        low = uint(block & 0xFFFF_FFFFul), high = uint(block >> 32),
-        rotated = BitOperations.rotate_left(substitute(low + key), 11),
+        low = uint(block & 0xFFFF_FFFFul),
+        high = uint(block >> 32),
+        rotated = BitOperations.rotate_left(
+            substitute(low + key),
+            11
+        ),
         mixed = rotated ^ high
     in
         (ulong(low) << 32) | ulong(mixed)
@@ -37,11 +41,14 @@ little_endian(bytes: List[int]) -> ulong =>
         |> map((i, b) => ulong(b) << (8 * i))
         |> reduce(0ul, * | *)
 
-let input = little_endian([0x21, 0x04, 0x3B, 0x04, 0x30, 0x04, 0x32, 0x04])
+let input = little_endian([
+    0x21, 0x04, 0x3B, 0x04, 0x30, 0x04, 0x32, 0x04
+])
 let key = uint(little_endian([0xF9, 0x04, 0xC1, 0xE2]))
 let output = main_step(input, key)
 
 write_line(
     0..8
         |> map(i => "[{(output >> (8 * i)) & 0xFFul:x2}]")
-        |> join(""))
+        |> join("")
+)

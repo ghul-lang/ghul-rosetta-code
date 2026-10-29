@@ -26,7 +26,9 @@ write_line("the first 100 arithmetic numbers:")
 arithmetic
     |> take(100)
     |> chunk(10)
-    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(n => "{n,5}") |> join(""))
+    )
 
 write_line("")
 
@@ -40,5 +42,6 @@ for x in [1000, 10000, 100000, 1000000] do
 
     write_line(
         "the {x}th arithmetic number is {nth}, and {composite} of the "
-        "first {x} are composite")
+        "first {x} are composite"
+    )
 od

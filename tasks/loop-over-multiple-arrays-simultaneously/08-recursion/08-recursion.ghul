@@ -1,14 +1,21 @@
 use default
 
 merge(
-    letters: List[char], capitals: List[char], digits: List[int]
+    letters: List[char],
+    capitals: List[char],
+    digits: List[int]
 ) -> string{} =>
-    if let [lh, ..lr] = letters,
-           [ch, ..cr] = capitals,
-           [dh, ..dr] = digits then
+    if let
+        [lh, ..lr] = letters,
+        [ch, ..cr] = capitals,
+        [dh, ..dr] = digits
+    then
         ["{lh}{ch}{dh}"] ++ merge(lr, cr, dr)
     else
         []
     fi
 
-write_line(merge(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3]) |> join("\n"))
+write_line(
+    merge(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3])
+        |> join("\n")
+)

@@ -1,7 +1,9 @@
 use default
 
 circle_sort_pass[T: Ghul.Comparable[T]](
-    values: LIST[T], lo: int, hi: int
+    values: LIST[T],
+    lo: int,
+    hi: int
 ) -> bool is
     if lo == hi then
         return false
@@ -13,7 +15,10 @@ circle_sort_pass[T: Ghul.Comparable[T]](
 
     while low < high do
         if values[low] > values[high] then
-            (values[low], values[high]) = (values[high], values[low])
+            (values[low], values[high]) = (
+                values[high],
+                values[low]
+            )
 
             swapped = true
         fi
@@ -23,7 +28,10 @@ circle_sort_pass[T: Ghul.Comparable[T]](
     od
 
     if low == high /\ values[low] > values[high + 1] then
-        (values[low], values[high + 1]) = (values[high + 1], values[low])
+        (values[low], values[high + 1]) = (
+            values[high + 1],
+            values[low]
+        )
 
         swapped = true
     fi
@@ -32,7 +40,9 @@ circle_sort_pass[T: Ghul.Comparable[T]](
 
     let left_swapped = circle_sort_pass(values, lo, lo + mid)
     let right_swapped = circle_sort_pass(
-        values, lo + mid + 1, hi
+        values,
+        lo + mid + 1,
+        hi
     )
 
     swapped \/ left_swapped \/ right_swapped

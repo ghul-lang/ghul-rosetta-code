@@ -15,7 +15,8 @@ test_entry() is
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 
@@ -32,9 +33,14 @@ test_entry() is
         let page = Encoding.utf8.get_bytes(
             "<title>UTC Time</title>\n"
             "<p>Current time: <strong><span id=\"time3\">22:57:22</span>"
-            " UTC</strong>.</p>\n")
+            " UTC</strong>.</p>\n"
+        )
 
-        context.response.output_stream.write(page, 0, page.count)
+        context.response.output_stream.write(
+            page,
+            0,
+            page.count
+        )
         context.response.close()
     si)
 

@@ -7,14 +7,16 @@ let size = 400
 let extent = 22.0
 
 let big = (centre = (x = 0.0, y = 0.0, z = 0.0), radius = 20.0)
-let small = (centre = (x = 10.0, y = 10.0, z = 18.0), radius = 14.0)
+let small = (
+    centre = (x = 10.0, y = 10.0, z = 18.0),
+    radius = 14.0
+)
 
 let light = (x = -0.5, y = 0.6, z = 1.0)
 
 normalized(v: VECTOR) -> VECTOR =>
     let length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z) in
     (x = v.x / length, y = v.y / length, z = v.z / length)
-
 
 depths(
     centre: VECTOR,
@@ -32,7 +34,11 @@ depths(
 
     let half = sqrt(squared)
 
-    return (hit = true, near = centre.z - half, far = centre.z + half)
+    return (
+        hit = true,
+        near = centre.z - half,
+        far = centre.z + half
+    )
 si
 
 shade(normal: VECTOR) -> ubyte is
@@ -77,14 +83,18 @@ for row in 0..size do
             continue
         fi
 
-        let centre = if hollowed then small.centre else big.centre fi
-        let radius = if hollowed then small.radius else big.radius fi
-        let depth = if hollowed then crater.near else outer.far fi
+        let centre =
+            if hollowed then small.centre else big.centre fi
+        let radius =
+            if hollowed then small.radius else big.radius fi
+        let depth =
+            if hollowed then crater.near else outer.far fi
 
-        let outward =
-            (x = (x - centre.x) / radius,
-             y = (y - centre.y) / radius,
-             z = (depth - centre.z) / radius)
+        let outward = (
+            x = (x - centre.x) / radius,
+            y = (y - centre.y) / radius,
+            z = (depth - centre.z) / radius
+        )
 
         let normal =
             if hollowed then

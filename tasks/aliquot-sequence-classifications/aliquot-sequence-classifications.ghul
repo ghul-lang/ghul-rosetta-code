@@ -39,7 +39,9 @@ si
 classify(k: long) -> (kind: Kind, terms: List[long]) is
     let terms = LIST([k])
 
-    while terms.count < 16 /\ terms[terms.count - 1] <= 1L << 47 do
+    while
+        terms.count < 16 /\ terms[terms.count - 1] <= 1L << 47
+    do
         let last = terms[terms.count - 1]
         let next = proper_divisor_sum(last)
         let seen = terms.contains(next)
@@ -66,10 +68,13 @@ classify(k: long) -> (kind: Kind, terms: List[long]) is
     (Kind.NON_TERMINATING, terms)
 si
 
-let numbers =
-    [1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 28L, 496L,
-     220L, 1184L, 12496L, 1264460L, 790L, 909L, 562L, 1064L, 1488L,
-     15355717786080L]
+let numbers = [
+    1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 28L,
+    496L,
+    220L, 1184L, 12496L, 1264460L, 790L, 909L, 562L, 1064L,
+    1488L,
+    15355717786080L
+]
 
 for k in numbers do
     let (kind, terms) = classify(k)

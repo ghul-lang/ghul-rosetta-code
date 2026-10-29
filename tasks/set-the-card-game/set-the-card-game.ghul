@@ -5,7 +5,12 @@ let shadings = ["solid", "striped", "open"]
 let colours = ["red", "green", "purple"]
 let symbols = ["diamond", "oval", "squiggle"]
 
-struct CARD(number: int, shading: int, colour: int, symbol: int) is
+struct CARD(
+    number: int,
+    shading: int,
+    colour: int,
+    symbol: int
+) is
     features: int[] => [number, shading, colour, symbol]
 
     to_string() -> string =>
@@ -15,16 +20,23 @@ si
 
 is_set(a: CARD, b: CARD, c: CARD) -> bool =>
     (0..4)
-    |> all(i => (a.features[i] + b.features[i] + c.features[i]) % 3 == 0)
+        |> all(i =>
+            (
+                a.features[i] + b.features[i] + c.features[i]
+            ) % 3 == 0
+        )
 
 let pack =
     (0..81)
-    |> map(i => CARD(i / 27, i / 9 % 3, i / 3 % 3, i % 3))
+        |> map(i => CARD(i / 27, i / 9 % 3, i / 3 % 3, i % 3))
 
 let random = System.Random(2026)
 
 deal(count: int) -> Collections.List[CARD] =>
-    pack |> sort_by(_ => random.next()) |> take(count) |> collect()
+    pack
+        |> sort_by(_ => random.next())
+        |> take(count)
+        |> collect()
 
 for count in [9, 12] do
     let cards = deal(count)
@@ -35,10 +47,13 @@ for count in [9, 12] do
         write_line("  {card}")
     od
 
-    let sets =
-        [(cards[i], cards[j], cards[k])
-            for i in 0..count for j in i + 1..count for k in j + 1..count
-            if is_set(cards[i], cards[j], cards[k])]
+    let sets = [
+        (cards[i], cards[j], cards[k])
+        for i in 0..count
+        for j in i + 1..count
+        for k in j + 1..count
+        if is_set(cards[i], cards[j], cards[k])
+    ]
 
     write_line("")
     write_line("sets found: {sets.count}")

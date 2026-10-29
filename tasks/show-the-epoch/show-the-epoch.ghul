@@ -5,7 +5,9 @@ use System.DateTimeKind
 use System.TimeSpan
 
 show(library: string, epoch: DateTime) =>
-    write_line("{library,-22}{epoch,-22:yyyy-MM-dd HH:mm:ss}{epoch.kind}")
+    write_line(
+        "{library,-22}{epoch,-22:yyyy-MM-dd HH:mm:ss}{epoch.kind}"
+    )
 
 let utc_zero = DateTimeOffset(0L, TimeSpan.zero)
 
@@ -15,9 +17,12 @@ show("Unix time", DateTime.unix_epoch)
 show("Windows file time", DateTime.from_file_time_utc(0L))
 
 let instant = DateTime(2026, 9, 21, 12, 0, 0, DateTimeKind.UTC)
-let unix_seconds = DateTimeOffset(instant).to_unix_time_seconds()
+let unix_seconds =
+    DateTimeOffset(instant).to_unix_time_seconds()
 
 write_line()
 write_line("a tick is 100ns since the type's own epoch, so")
-write_line("{instant:yyyy-MM-dd HH:mm:ss} is {instant.ticks} ticks")
+write_line(
+    "{instant:yyyy-MM-dd HH:mm:ss} is {instant.ticks} ticks"
+)
 write_line("and {unix_seconds} seconds of Unix time")

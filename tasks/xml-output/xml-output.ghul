@@ -3,23 +3,30 @@ use System.Xml.Linq
 use Remark = (name: string, remark: string)
 
 character(name: string, remark: string) -> XElement =>
-    XElement(
-        XName.get("Character"),
-        [XAttribute(XName.get("name"), name), remark])
+    XElement(XName.get("Character"), [
+        XAttribute(XName.get("name"), name),
+        remark
+    ])
 
 remarks_document(remarks: List[Remark]) -> XDocument =>
-    XDocument(
-        [XElement(
+    XDocument([
+        XElement(
             XName.get("CharacterRemarks"),
             remarks
-                |> map((name, remark) => character(name, remark)))])
+                |> map((name, remark) =>
+                    character(name, remark)
+                )
+        )
+    ])
 
-let remarks =
-    [
-        (name = "April", remark = "Bubbly: I'm > Tam and <= Emily"),
-        (name = "Tam O'Shanter",
-         remark = "Burns: \"When chapman billies leave the street ...\""),
-        (name = "Emily", remark = "Short & shrift")
-    ]
+let remarks = [
+    (name = "April", remark = "Bubbly: I'm > Tam and <= Emily"),
+    (
+        name = "Tam O'Shanter",
+        remark =
+            "Burns: \"When chapman billies leave the street ...\""
+    ),
+    (name = "Emily", remark = "Short & shrift")
+]
 
 write_line("{remarks_document(remarks)}")

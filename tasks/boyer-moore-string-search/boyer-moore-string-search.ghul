@@ -52,7 +52,9 @@ let hits = search(text, pattern)
 
 write_line("text:    {text}")
 write_line("pattern: {pattern}")
-write_line("matches at: {hits |> map(i => "{i}") |> join(", ")}")
+write_line(
+    "matches at: {hits |> map(i => "{i}") |> join(", ")}"
+)
 
 for hit in hits do
     write_line("  {hit}: {text[hit..hit + pattern.length]}")

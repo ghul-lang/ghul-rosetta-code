@@ -1,18 +1,17 @@
 use default
 
 harshad() -> int{} =>
-    from(1)
-        |> filter(number => number % digit_sum(number) == 0)
+    from(1) |> filter(number => number % digit_sum(number) == 0)
 
-let first_twenty = harshad()
-    |> take(20)
-    |> map(number => "{number}")
-    |> join(" ")
+let first_twenty =
+    harshad()
+        |> take(20)
+        |> map(number => "{number}")
+        |> join(" ")
 
 write_line("first 20 Harshad numbers: {first_twenty}")
 
-let beyond_thousand = harshad()
-    |> filter(* > 1000)
-    |> first_or_throw()
+let beyond_thousand =
+    harshad() |> filter(* > 1000) |> first_or_throw()
 
 write_line("first Harshad number above 1000: {beyond_thousand}")

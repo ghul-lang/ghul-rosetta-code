@@ -8,8 +8,10 @@ report(label: string, path: string) is
     fi
 si
 
-let local_path =
-    IO.Path.combine(System.Environment.current_directory, "input.txt")
+let local_path = IO.Path.combine(
+    System.Environment.current_directory,
+    "input.txt"
+)
 
 IO.File.write_all_text(local_path, "hello, rosetta code!")
 report("input.txt (current directory)", local_path)

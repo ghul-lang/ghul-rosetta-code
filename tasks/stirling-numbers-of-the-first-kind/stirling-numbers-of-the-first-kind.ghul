@@ -13,9 +13,17 @@ rows() -> List[bigint]{} is
             (0::width)
                 |> map(column => (
                     let left =
-                        if column > 0 then previous[column - 1] else 0n fi
+                        if column > 0 then
+                            previous[column - 1]
+                        else
+                            0n
+                        fi
                     let below =
-                        if column < width then previous[column] else 0n fi
+                        if column < width then
+                            previous[column]
+                        else
+                            0n
+                        fi
 
                     left + bigint(width - 1) * below
                 ))
@@ -23,11 +31,15 @@ rows() -> List[bigint]{} is
     od
 si
 
-write_line("unsigned Stirling numbers of the first kind, S1(n, k):")
+write_line(
+    "unsigned Stirling numbers of the first kind, S1(n, k):"
+)
 
 rows()
     |> take(13)
-    |> each(row => write_line(row |> map(v => "{v,11}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(v => "{v,11}") |> join(""))
+    )
 
 write_line()
 

@@ -1,14 +1,19 @@
 use default
 
 strip_comment(line: string, markers: char[]) -> string =>
-    let cut = markers
-        |> map(line.index_of(*))
-        |> filter(i => i >= 0)
-        |> min() ?? line.length
+    let cut =
+        markers
+            |> map(line.index_of(*))
+            |> filter(i => i >= 0)
+            |> min() ?? line.length
     in
     line[0..cut].trim()
 
 let markers = ['#', ';']
 
-write_line(strip_comment("apples, pears # and bananas", markers))
-write_line(strip_comment("apples, pears ; and bananas", markers))
+write_line(
+    strip_comment("apples, pears # and bananas", markers)
+)
+write_line(
+    strip_comment("apples, pears ; and bananas", markers)
+)

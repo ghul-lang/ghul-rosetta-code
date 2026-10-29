@@ -5,7 +5,8 @@ mkdir_p(path: string) is
     let built mut = ""
 
     for part in parts do
-        built = if built =~ "" then part else "{built}/{part}" fi
+        built =
+            if built =~ "" then part else "{built}/{part}" fi
 
         if !IO.Directory.exists(built) then
             IO.Directory.create_directory(built)

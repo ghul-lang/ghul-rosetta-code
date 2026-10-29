@@ -18,17 +18,24 @@ proper_divisors(n: int) -> List[int] is
         fi
     od
 
-    small ++ (large |> reverse()) |> filter(* != n)
-        |> collect()
+    small ++ (large |> reverse()) |> filter(* != n) |> collect()
 si
 
 for n in 1::10 do
-    write_line("{n,2}: [{n |> proper_divisors() |> join(", ")}]")
+    write_line(
+        "{n,2}: [{n |> proper_divisors() |> join(", ")}]"
+    )
 od
 
-let counts = 1::20_000 |> map(n => (n, proper_divisors(n).count))
+let counts =
+    1::20_000 |> map(n => (n, proper_divisors(n).count))
 let (best, most) =
-    counts |> reduce((0, -1), (a, b) => if b.`1 > a.`1 then b else a fi)
+    counts
+        |> reduce((0, -1), (a, b) =>
+            if b.`1 > a.`1 then b else a fi
+        )
 
 write_line("")
-write_line("From 1 to 20,000, {best} has the most proper divisors: {most}")
+write_line(
+    "From 1 to 20,000, {best} has the most proper divisors: {most}"
+)

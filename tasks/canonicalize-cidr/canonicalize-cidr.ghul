@@ -1,33 +1,40 @@
 use default
 
 canonicalize(cidr: string) -> string => (
-    let
-        parts = cidr.split(['/']), bits = int.parse(parts[1]),
+    let parts = cidr.split(['/']),
+        bits = int.parse(parts[1]),
         octets = parts[0].split(['.']) |> map(long.parse)
 
     let address =
-        octets |> reduce(0L, (packed, octet) => packed * 256L + octet)
+        octets
+            |> reduce(0L, (packed, octet) =>
+                packed * 256L + octet
+            )
     let mask =
-        if bits == 0 then 0L else (-1L << (32 - bits)) & 0xFFFFFFFFL fi
+        if bits == 0 then
+            0L
+        else
+            (-1L << (32 - bits)) & 0xFFFFFFFFL
+        fi
     let network = address & mask
     let dotted =
         0..4
-            |> map(shift => "{(network >> (24 - 8 * shift)) & 0xFFL}")
+            |> map(shift =>
+                "{(network >> (24 - 8 * shift)) & 0xFFL}"
+            )
             |> join(".")
 
     "{dotted}/{bits}"
 )
 
-
-let blocks =
-    [
-        "87.70.141.1/22",
-        "36.18.154.103/12",
-        "62.62.197.11/29",
-        "67.137.119.181/4",
-        "161.214.74.21/24",
-        "184.232.176.184/18"
-    ]
+let blocks = [
+    "87.70.141.1/22",
+    "36.18.154.103/12",
+    "62.62.197.11/29",
+    "67.137.119.181/4",
+    "161.214.74.21/24",
+    "184.232.176.184/18"
+]
 
 for block in blocks do
     write_line("{block,-20} {canonicalize(block)}")

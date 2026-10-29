@@ -32,8 +32,10 @@ postfix(infix: string) -> string is
 
             operators.pop()
         elif precedence(c) > 0 then
-            while operators.count > 0 /\
-                    precedence(operators.peek()) >= precedence(c) do
+            while
+                operators.count > 0 /\
+                precedence(operators.peek()) >= precedence(c)
+            do
                 output.append(operators.pop())
             od
 
@@ -130,15 +132,19 @@ matches(pattern: string, text: string) -> bool is
     current.contains(nfa.accept)
 si
 
-let patterns =
-    ["a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c", "a.b+.c?"]
+let patterns = [
+    "a.b.c*", "a.(b|d).c*", "(a.(b|d))*", "a.(b.b)*.c",
+    "a.b+.c?"
+]
 let texts = ["", "abc", "abbc", "abcc", "abad", "abbbc"]
 
 for pattern in patterns do
     write_line("{pattern} (postfix {postfix(pattern)})")
 
     for text in texts do
-        write_line("    {"\"{text}\"",-8} {matches(pattern, text)}")
+        write_line(
+            "    {"\"{text}\"",-8} {matches(pattern, text)}"
+        )
     od
 
     write_line()

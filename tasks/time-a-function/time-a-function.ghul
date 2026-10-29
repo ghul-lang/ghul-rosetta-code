@@ -1,22 +1,24 @@
 use default
 use System.Diagnostics.Stopwatch
+use System.Diagnostics.Process
 
 // Process time rather than wall-clock time, so another program running at
 // the same time does not show up as this one taking longer.
 spent() -> double =>
-    System.Diagnostics.Process.get_current_process()
-        .total_processor_time
-        .total_milliseconds
+    Process.get_current_process().total_processor_time.total_milliseconds
 
 timed(name: string, work: () -> int) =>
     let
-        clock = Stopwatch.start_new(), before = spent(), answer = work(),
+        clock = Stopwatch.start_new(),
+        before = spent(),
+        answer = work(),
         elapsed = clock.elapsed.total_milliseconds,
         processor = spent() - before
     in
         write_line(
             "{name,-22} {answer,12}  {elapsed,8:F2} ms elapsed  "
-            "{processor,8:F2} ms processor")
+            "{processor,8:F2} ms processor"
+        )
 
 count_primes(limit: int) -> int is
     let sieve = repeat(true, limit) |> collect_mutable()

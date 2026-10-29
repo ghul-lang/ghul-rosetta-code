@@ -11,7 +11,9 @@ every_other(x: List[Complex], start: int) -> List[Complex] =>
 
 twiddle(k: int, n: int) -> Complex =>
     Complex.from_polar_coordinates(
-        1.0D, -2.0D * Math.pi * double(k) / double(n))
+        1.0D,
+        -2.0D * Math.pi * double(k) / double(n)
+    )
 
 fft(x: List[Complex]) -> List[Complex] is
     let n = x.count
@@ -24,26 +26,31 @@ fft(x: List[Complex]) -> List[Complex] is
     let odd = fft(every_other(x, 1))
 
     let turned =
-        0..n / 2 |> map(k => twiddle(k, n) * odd[k]) |> collect()
+        0..n / 2
+            |> map(k => twiddle(k, n) * odd[k])
+            |> collect()
 
-    0..n / 2 |> map(k => even[k] + turned[k])
+    0..n / 2
+        |> map(k => even[k] + turned[k])
         |> cat(0..n / 2 |> map(k => even[k] - turned[k]))
         |> collect()
 si
 
-tidy(v: double) -> double => if Math.abs(v) < 1.0e-12 then 0.0D else v fi
+tidy(v: double) -> double =>
+    if Math.abs(v) < 1.0e-12 then 0.0D else v fi
 
 show(c: Complex) -> string =>
     "({tidy(c.real),8:F4}, {tidy(c.imaginary),8:F4})"
 
-let input =
-    [1.0D, 1.0D, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D]
-        |> map(Complex(*, 0.0D))
-        |> collect()
+let input = [1.0D, 1.0D, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D]
+    |> map(Complex(*, 0.0D))
+    |> collect()
 
 write_line("input:  {input |> map(c => c.real) |> join(", ")}")
 write_line("")
 
 for (i, value) in input |> fft() |> index() do
-    write_line("X[{i}] = {show(value)}  magnitude {value.magnitude:F4}")
+    write_line(
+        "X[{i}] = {show(value)}  magnitude {value.magnitude:F4}"
+    )
 od

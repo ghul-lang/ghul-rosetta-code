@@ -17,11 +17,14 @@ si
 
 show(name: string, values: string{}) is
     let from_start = picks(values, [1, 4, 5]) |> join()
-    let from_end = picks(values |> reverse(), [1, 4, 5]) |> join()
+    let from_end =
+        picks(values |> reverse(), [1, 4, 5]) |> join()
 
     write_line("{name}: {values |> join()}")
     write_line("  first, fourth, fifth: {from_start}")
-    write_line("  last, fourth to last, fifth to last: {from_end}")
+    write_line(
+        "  last, fourth to last, fifth to last: {from_end}"
+    )
 si
 
 let days = [
@@ -29,8 +32,9 @@ let days = [
     "Thursday", "Friday", "Saturday"
 ]
 
-let colours = LinkedList(
-    ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"])
+let colours = LinkedList([
+    "Red", "Orange", "Yellow", "Green", "Blue", "Purple"
+])
 
 show("days", days)
 show("colours", colours)

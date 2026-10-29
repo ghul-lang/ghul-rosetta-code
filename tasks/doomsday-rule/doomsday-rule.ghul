@@ -7,7 +7,8 @@ let day_names = [
 
 let month_names = [
     "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "July", "August", "September", "October", "November",
+    "December"
 ]
 
 is_leap_year(year: int) -> bool =>
@@ -30,10 +31,16 @@ anchor_day(year: int, month: int) -> int =>
     esac
 
 doomsday(year: int) -> int =>
-    (2 + 5 * (year % 4) + 4 * (year % 100) + 6 * (year % 400)) % 7
+    (
+        2 + 5 * (year % 4) + 4 * (year % 100) + 6 * (year % 400)
+    ) % 7
 
 day_of_week(year: int, month: int, day: int) -> int =>
-    (((doomsday(year) + day - anchor_day(year, month)) % 7) + 7) % 7
+    (
+        (
+            (doomsday(year) + day - anchor_day(year, month)) % 7
+        ) + 7
+    ) % 7
 
 let dates = [
     (year = 1800, month = 1, day = 6),
@@ -46,7 +53,8 @@ let dates = [
 ]
 
 for date in dates do
-    let name = day_names[day_of_week(date.year, date.month, date.day)]
+    let name =
+        day_names[day_of_week(date.year, date.month, date.day)]
     let month = month_names[date.month - 1]
 
     write_line("{month} {date.day}, {date.year} is a {name}")

@@ -57,5 +57,7 @@ mean_zero_proportion(limit: int) -> double is
 si
 
 for limit in [100, 1000, 10000] do
-    write_line("{limit,6:N0}: {mean_zero_proportion(limit):F10}")
+    write_line(
+        "{limit,6:N0}: {mean_zero_proportion(limit):F10}"
+    )
 od

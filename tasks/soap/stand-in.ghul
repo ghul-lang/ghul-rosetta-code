@@ -15,7 +15,8 @@ test_entry() is
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 
@@ -30,17 +31,23 @@ test_entry() is
     Tasks.TASK.run(() is
         for _ in 1::2 do
             let context = listener.get_context()
-            let action = context.request.headers["SOAPAction"] ?? ""
+            let action =
+                context.request.headers["SOAPAction"] ?? ""
             let parts = action.trim('"').split(['/'])
             let function = parts[parts.count - 1]
             let reply = Encoding.utf8.get_bytes(
                 "<soap:Envelope xmlns:soap=\"{soap_ns()}\"><soap:Body>"
                 "<{function}Response xmlns=\"http://example.com/soap/\">"
                 "<{function}Result>{function} was called</{function}Result>"
-                "</{function}Response></soap:Body></soap:Envelope>")
+                "</{function}Response></soap:Body></soap:Envelope>"
+            )
 
             context.response.content_type = "text/xml"
-            context.response.output_stream.write(reply, 0, reply.count)
+            context.response.output_stream.write(
+                reply,
+                0,
+                reply.count
+            )
             context.response.close()
         od
     si)

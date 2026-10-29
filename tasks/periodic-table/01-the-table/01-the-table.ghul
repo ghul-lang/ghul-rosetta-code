@@ -15,7 +15,8 @@ symbols() -> string[] => [
     "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm",
     "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg",
     "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv",
-    "Ts", "Og"]
+    "Ts", "Og"
+]
 
 position(z: int) -> (row: int, column: int) is
     if z <= 2 then
@@ -24,11 +25,17 @@ position(z: int) -> (row: int, column: int) is
         let row = if z <= 10 then 2 else 3 fi
         let at = z - if row == 2 then 3 else 11 fi
 
-        (row = row, column = if at < 2 then at + 1 else at + 11 fi)
+        (
+            row = row,
+            column = if at < 2 then at + 1 else at + 11 fi
+        )
     elif z <= 54 then
         let row = if z <= 36 then 4 else 5 fi
 
-        (row = row, column = z - if row == 4 then 19 else 37 fi + 1)
+        (
+            row = row,
+            column = z - if row == 4 then 19 else 37 fi + 1
+        )
     else
         let row = if z <= 86 then 6 else 7 fi
         let at = z - if row == 6 then 55 else 87 fi
@@ -47,8 +54,8 @@ let table = symbols()
 
 let grid =
     repeat(0, 9)
-    |> map(_ => repeat(" ", 18) |> collect_mutable())
-    |> collect()
+        |> map(_ => repeat(" ", 18) |> collect_mutable())
+        |> collect()
 
 for z in 1::118 do
     let at = position(z)
@@ -81,5 +88,6 @@ for z in [1, 2, 29, 42, 57, 58, 72, 89, 118] do
     let at = position(z)
 
     write_line(
-        "{z,3} {table[z - 1],-3} row {at.row}, column {at.column}")
+        "{z,3} {table[z - 1],-3} row {at.row}, column {at.column}"
+    )
 od

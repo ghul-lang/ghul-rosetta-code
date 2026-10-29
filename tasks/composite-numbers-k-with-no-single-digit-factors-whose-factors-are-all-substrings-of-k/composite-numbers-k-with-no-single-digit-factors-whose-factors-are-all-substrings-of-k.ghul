@@ -10,7 +10,10 @@ let prime = (
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if sieve[p] then
-            for multiple in from(p * p, p) |> take_while(* < limit) do
+            for
+                multiple in from(p * p, p)
+                    |> take_while(* < limit)
+            do
                 sieve[multiple] = false
             od
         fi
@@ -43,7 +46,9 @@ si
 
 let found =
     11..limit
-        |> filter(k => k % 2 != 0 /\ k % 3 != 0 /\ k % 5 != 0 /\ k % 7 != 0)
+        |> filter(k =>
+            k % 2 != 0 /\ k % 3 != 0 /\ k % 5 != 0 /\ k % 7 != 0
+        )
         |> filter(k => !prime[k] /\ factors_are_substrings(k))
         |> take(20)
 

@@ -16,17 +16,22 @@ towards(index: int) -> double =>
 corner_of(shape: Pentagon, index: int) -> Point => (
     let angle = towards(index)
 
-    (x = shape.x + shape.radius * cos(angle),
-     y = shape.y + shape.radius * sin(angle)))
+    (
+        x = shape.x + shape.radius * cos(angle),
+        y = shape.y + shape.radius * sin(angle)
+    )
+)
 
 inner(shape: Pentagon, index: int) -> Pentagon => (
     let angle = towards(index)
     let smaller = shape.radius * shrink
     let reach = shape.radius - smaller
 
-    (x = shape.x + reach * cos(angle),
-     y = shape.y + reach * sin(angle),
-     radius = smaller)
+    (
+        x = shape.x + reach * cos(angle),
+        y = shape.y + reach * sin(angle),
+        radius = smaller
+    )
 )
 
 flake(shape: Pentagon, order: int) -> Pentagon{} is
@@ -44,15 +49,17 @@ let order = 5
 
 for shown in 1::order do
     write_line(
-        "order {shown}: {flake(whole, shown) |> count()} pentagons")
+        "order {shown}: {flake(whole, shown) |> count()} pentagons"
+    )
 od
 
-let palette =
-    [(red = 214ub, green = 69ub, blue = 65ub),
-     (red = 238ub, green = 150ub, blue = 57ub),
-     (red = 88ub, green = 166ub, blue = 96ub),
-     (red = 58ub, green = 120ub, blue = 190ub),
-     (red = 140ub, green = 86ub, blue = 168ub)]
+let palette = [
+    (red = 214ub, green = 69ub, blue = 65ub),
+    (red = 238ub, green = 150ub, blue = 57ub),
+    (red = 88ub, green = 166ub, blue = 96ub),
+    (red = 58ub, green = 120ub, blue = 190ub),
+    (red = 140ub, green = 86ub, blue = 168ub)
+]
 
 let image = IMAGE(600, 600)
 
@@ -67,9 +74,7 @@ for index in 0..5 do
     let tint = palette[index]
 
     for leaf in flake(inner(whole, index), order - 1) do
-        shapes.add(
-            LIST(0..5 |> map(corner_of(leaf, *))),
-            tint)
+        shapes.add(LIST(0..5 |> map(corner_of(leaf, *))), tint)
     od
 od
 

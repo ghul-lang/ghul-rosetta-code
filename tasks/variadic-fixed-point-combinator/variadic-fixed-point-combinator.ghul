@@ -9,14 +9,13 @@ class SELF_APPLY(_f: (SELF_APPLY) -> Sequence[]) is
 si
 
 fix_star(makers: Maker[]) -> Sequence[] =>
-    let wrap =
-        SELF_APPLY(
-            r =>
-                makers
-                    |> map(make =>
-                            n => make(r.apply(r))(n))
-                    |> collect())
-    in wrap.apply(wrap)
+    let wrap = SELF_APPLY(r =>
+        makers
+            |> map(make => n => make(r.apply(r))(n))
+            |> collect()
+    )
+    in
+    wrap.apply(wrap)
 
 show(label: string, f: Sequence) is
     write(label)
@@ -30,9 +29,11 @@ si
 
 let hofstadter = fix_star([
     (fs: Sequence[]) =>
-        (n: int) => if n == 0 then 1 else n - fs[1](fs[0](n - 1)) fi,
+        (n: int) =>
+            if n == 0 then 1 else n - fs[1](fs[0](n - 1)) fi,
     (fs: Sequence[]) =>
-        (n: int) => if n == 0 then 0 else n - fs[0](fs[1](n - 1)) fi
+        (n: int) =>
+            if n == 0 then 0 else n - fs[0](fs[1](n - 1)) fi
 ])
 
 show("F:", hofstadter[0])

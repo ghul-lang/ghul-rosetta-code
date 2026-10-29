@@ -6,7 +6,9 @@ is_wieferich(prime: int) -> bool =>
 
 write_line("Wieferich primes less than 5000:")
 
-write_line((2..5000)
-    |> filter(is_prime)
-    |> filter(is_wieferich)
-    |> join(" "))
+write_line(
+    (2..5000)
+        |> filter(is_prime)
+        |> filter(is_wieferich)
+        |> join(" ")
+)

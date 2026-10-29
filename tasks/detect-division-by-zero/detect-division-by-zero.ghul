@@ -11,7 +11,11 @@ divides(numerator: int, denominator: int) -> bool is
 si
 
 for denominator in [2, 0] do
-    write_line("10 / {denominator} divides: {divides(10, denominator)}")
+    write_line(
+        "10 / {denominator} divides: {divides(10, denominator)}"
+    )
 od
 
-write_line("10.0 / 0.0 is infinite: {double.is_infinity(10.0 / 0.0)}")
+write_line(
+    "10.0 / 0.0 is infinite: {double.is_infinity(10.0 / 0.0)}"
+)

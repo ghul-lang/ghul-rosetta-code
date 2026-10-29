@@ -4,9 +4,13 @@ let ten = 10n
 let eleven = 11n
 
 rank(values: Collections.List[bigint]) -> bigint =>
-    values |> reduce(1n, (acc, value) =>
-        value.to_string() |> reduce(acc * eleven + ten,
-            (r, d) => r * eleven + cast(d - '0')))
+    values
+        |> reduce(1n, (acc, value) =>
+            value.to_string()
+                |> reduce(acc * eleven + ten, (r, d) =>
+                    r * eleven + cast(d - '0')
+                )
+        )
 
 unrank(index: bigint) -> bigint{} is
     let digits = LIST()
@@ -21,11 +25,12 @@ unrank(index: bigint) -> bigint{} is
 
     digits.reverse()
 
-    let values = digits
-        |> join("")
-        |> words()
-        |> map(bigint.parse)
-        |> collect()
+    let values =
+        digits
+            |> join("")
+            |> words()
+            |> map(bigint.parse)
+            |> collect()
 
     return values
 si
@@ -39,4 +44,6 @@ let restored = unrank(index)
 
 write_line("list:     {sample |> map(v => "{v}") |> join(" ")}")
 write_line("rank:     {index}")
-write_line("unranked: {restored |> map(v => "{v}") |> join(" ")}")
+write_line(
+    "unranked: {restored |> map(v => "{v}") |> join(" ")}"
+)

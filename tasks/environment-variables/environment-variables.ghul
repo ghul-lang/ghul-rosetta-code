@@ -1,11 +1,16 @@
 use default
 use System.Environment
 
-Environment.set_environment_variable("ROSETTA_GREETING", "hello")
+Environment.set_environment_variable(
+    "ROSETTA_GREETING",
+    "hello"
+)
 
 let name = "ROSETTA_GREETING"
 
-if let greeting = Environment.get_environment_variable(name) then
+if let
+    greeting = Environment.get_environment_variable(name)
+then
     write_line("{name} is {greeting}")
 fi
 

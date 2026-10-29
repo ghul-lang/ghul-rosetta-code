@@ -10,7 +10,10 @@ let lines = [
 winner(board: List[char]) -> char? =>
     lines
         |> filter((a, b, c) =>
-            board[a] != ' ' /\ board[a] == board[b] /\ board[b] == board[c])
+            board[a] != ' ' /\
+            board[a] == board[b] /\
+            board[b] == board[c]
+        )
         |> map((a, _, _) => board[a])
         |> first()
 
@@ -19,7 +22,8 @@ free(board: List[char]) -> int{} =>
 
 full(board: List[char]) -> bool => !(board |> any(* == ' '))
 
-other(player: char) -> char => if player == 'X' then 'O' else 'X' fi
+other(player: char) -> char =>
+    if player == 'X' then 'O' else 'X' fi
 
 score(board: LIST[char], player: char) -> int is
     if winner(board)? then
@@ -60,14 +64,19 @@ best_move(board: LIST[char]) -> int is
 si
 
 label(board: List[char], index: int) -> string =>
-    if board[index] == ' ' then "{index + 1}" else "{board[index]}" fi
+    if board[index] == ' ' then
+        "{index + 1}"
+    else
+        "{board[index]}"
+    fi
 
 show(board: List[char]) is
     for row in 0..3 do
         write_line(
             (0..3)
                 |> map(column => label(board, row * 3 + column))
-                |> join(" | "))
+                |> join(" | ")
+        )
     od
 si
 
@@ -91,8 +100,10 @@ while !winner(board)? /\ !full(board) do
         let cell mut = 0
 
         let legal =
-            int.try_parse(line, cell ref) /\
-            cell >= 1 /\ cell <= 9 /\ board[cell - 1] == ' '
+            int.try_parse(line, cell ref ) /\
+            cell >= 1 /\
+            cell <= 9 /\
+            board[cell - 1] == ' '
 
         if !legal then
             write_line("choose a free square from 1 to 9")

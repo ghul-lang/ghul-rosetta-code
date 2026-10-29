@@ -24,17 +24,26 @@ engel(numerator: bigint, denominator: bigint) -> bigint{} is
     od
 si
 
-from_engel(terms: Collections.List[bigint])
-        -> (numerator: bigint, denominator: bigint) =>
-    terms |> reduce((0n, 1n), ((n, d), term) => (n * term + 1n, d * term))
+from_engel(terms: Collections.List[bigint]) -> (
+    numerator: bigint,
+    denominator: bigint
+) =>
+    terms
+        |> reduce((0n, 1n), ((n, d), term) => (
+            n * term + 1n,
+            d * term
+        ))
 
 show(name: string, fractional: string) is
     let numerator = bigint.parse(fractional)
     let denominator = power(10n, fractional.length)
     let terms = numerator |> engel(denominator) |> collect()
     let (rebuilt, scale) = from_engel(terms)
-    let verified = if rebuilt * denominator =~ numerator * scale
-        then "round trips" else "DOES NOT ROUND TRIP" fi
+    let verified =
+        if rebuilt * denominator =~ numerator * scale then
+            "round trips"
+        else "DOES NOT ROUND TRIP"
+        fi
     let shown = terms |> take(30) |> map(term => "{term}")
 
     write_line("{name}: {terms.count} terms, {verified}")
@@ -45,14 +54,20 @@ show("pi - 3", "14159265358979")
 show("e - 2", "71828182845904")
 show("sqrt(2) - 1", "414213562373095")
 
-show("pi - 3, 208 digits",
-     "1415926535897932384626433832795028841971693993751058209749445923"
-     "0781640628620899862803482534211706798214808651328230664709384460"
-     "95505822317253594081284811174502841027019385211")
-show("e - 2, 100 digits",
-     "7182818284590452353602874713526624977572470936999595749669676277"
-     "2407663035354759457138217852516642743")
-show("sqrt(2) - 1, 182 digits",
-     "4142135623730950488016887242096980785696718753769480731766797379"
-     "9073247846210703885038753432764157273501384623091229702492483605"
-     "58507372126441214970999358314132226659275055927558")
+show(
+    "pi - 3, 208 digits",
+    "1415926535897932384626433832795028841971693993751058209749445923"
+    "0781640628620899862803482534211706798214808651328230664709384460"
+    "95505822317253594081284811174502841027019385211"
+)
+show(
+    "e - 2, 100 digits",
+    "7182818284590452353602874713526624977572470936999595749669676277"
+    "2407663035354759457138217852516642743"
+)
+show(
+    "sqrt(2) - 1, 182 digits",
+    "4142135623730950488016887242096980785696718753769480731766797379"
+    "9073247846210703885038753432764157273501384623091229702492483605"
+    "58507372126441214970999358314132226659275055927558"
+)

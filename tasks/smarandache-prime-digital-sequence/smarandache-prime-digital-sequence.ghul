@@ -8,13 +8,16 @@ prime_digit_numbers() -> int{} is
     do
         yield in level
 
-        level =
-            [value * 10 + digit
-                for value in level for digit in prime_digits]
+        level = [
+            value * 10 + digit
+            for value in level
+            for digit in prime_digits
+        ]
     od
 si
 
-smarandache() -> int{} => prime_digit_numbers() |> filter(is_prime)
+smarandache() -> int{} =>
+    prime_digit_numbers() |> filter(is_prime)
 
 write_line("the first 25 Smarandache prime-digital primes:")
 
@@ -22,7 +25,10 @@ smarandache()
     |> take(25)
     |> chunk(5)
     |> each(row =>
-        write_line(row |> map(value => "{value,7}") |> join("")))
+        write_line(row |> map(value => "{value,7}") |> join(""))
+    )
 
 write_line()
-write_line("the hundredth: {smarandache() |> skip(99) |> first_or_throw()}")
+write_line(
+    "the hundredth: {smarandache() |> skip(99) |> first_or_throw()}"
+)

@@ -3,7 +3,6 @@ use default
 // The divisors of n pair off into products of n, so their product is
 // n^(d/2) for d divisors, and the proper divisors multiply to n^(d/2 - 1).
 // That is n cubed exactly when n has eight divisors.
-
 let limit = 500_000
 
 let divisor_count = (
@@ -30,5 +29,7 @@ for row in found |> take(50) |> chunk(10) do
 od
 
 for position in [500, 5_000, 50_000] do
-    write_line("\nThe {position:N0}th: {found[position - 1]:N0}")
+    write_line(
+        "\nThe {position:N0}th: {found[position - 1]:N0}"
+    )
 od

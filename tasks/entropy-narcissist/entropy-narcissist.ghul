@@ -7,8 +7,12 @@ let entropy =
         |> group_by(c => c)
         |> sum_by((_, occurrences) =>
             let share =
-                double(occurrences.count) / double(source.length)
+                double(occurrences.count) /
+                double(source.length)
             in
-            -share * double.log2(share))
+            -share * double.log2(share)
+        )
 
-write_line("entropy of this source: {entropy:F6} bits per character")
+write_line(
+    "entropy of this source: {entropy:F6} bits per character"
+)

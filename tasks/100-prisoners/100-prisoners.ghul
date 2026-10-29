@@ -49,11 +49,16 @@ all_pardoned(finds: (List[int], int) -> bool) -> bool =>
     1::prisoners |> all(finds(cards, *))
 
 success_rate(finds: (List[int], int) -> bool) -> double =>
-    cast(0..trials |> filter(_ => all_pardoned(finds)) |> count()) *
-        100.0D / cast(trials)
+    cast(0..trials
+        |> filter(_ => all_pardoned(finds))
+        |> count()) *
+    100.0D /
+    cast(trials)
 
-write_line("{trials} trials of {prisoners} prisoners "
-           "opening {attempts} drawers each")
+write_line(
+    "{trials} trials of {prisoners} prisoners "
+    "opening {attempts} drawers each"
+)
 
 for (name, finds) in strategies do
     write_line("{name}: {success_rate(finds):F2}%")

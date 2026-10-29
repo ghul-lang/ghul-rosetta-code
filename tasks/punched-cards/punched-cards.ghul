@@ -2,7 +2,9 @@ use default
 use Raster.IMAGE
 use Raster.Anchor
 
-let labels = ["12", "11", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+let labels = [
+    "12", "11", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+]
 
 let codes = MAP[char, List[int]]()
 
@@ -17,30 +19,38 @@ for d in 0..10 do
     punch(char(48 + d), "{d}")
 od
 
-for (letters, zone, first) in [
-    ("ABCDEFGHI", "12", 1), ("JKLMNOPQR", "11", 1), ("STUVWXYZ", "0", 2),
-    ("abcdefghi", "12 0", 1), ("jklmnopqr", "12 11", 1),
-    ("stuvwxyz", "11 0", 2)
-] do
+for
+    (letters, zone, first) in [
+        ("ABCDEFGHI", "12", 1), ("JKLMNOPQR", "11", 1),
+        ("STUVWXYZ", "0", 2),
+        ("abcdefghi", "12 0", 1), ("jklmnopqr", "12 11", 1),
+        ("stuvwxyz", "11 0", 2)
+    ]
+do
     for i in 0..letters.length do
         punch(letters[i], "{zone} {first + i}")
     od
 od
 
-for special in [
-    "& 12", "- 11", "/ 0 1",
-    ". 12 8 3", "< 12 8 4", "( 12 8 5", "+ 12 8 6", "| 12 8 7",
-    "! 11 8 2", "$ 11 8 3", "* 11 8 4", ") 11 8 5", "; 11 8 6",
-    ", 0 8 3", "% 0 8 4", "_ 0 8 5", "> 0 8 6", "? 0 8 7",
-    ": 8 2", "# 8 3", "@ 8 4", "' 8 5", "= 8 6", "\" 8 7"
-] do
+for
+    special in [
+        "& 12", "- 11", "/ 0 1",
+        ". 12 8 3", "< 12 8 4", "( 12 8 5", "+ 12 8 6",
+        "| 12 8 7",
+        "! 11 8 2", "$ 11 8 3", "* 11 8 4", ") 11 8 5",
+        "; 11 8 6",
+        ", 0 8 3", "% 0 8 4", "_ 0 8 5", "> 0 8 6", "? 0 8 7",
+        ": 8 2", "# 8 3", "@ 8 4", "' 8 5", "= 8 6", "\" 8 7"
+    ]
+do
     punch(special[0], special.substring(2))
 od
 
 holes(c: char) -> int{} =>
     if c == ' ' then LIST()
     elif codes.contains_key(c) then codes[c]
-    else throw System.ArgumentException("no card code for '{c}'")
+    else
+        throw System.ArgumentException("no card code for '{c}'")
     fi
 
 let program = [
@@ -55,11 +65,14 @@ for line in program do
     write_line(" {line}")
 
     for row in 0..12 do
-        let marks = 0..line.length |> map(i =>
-            if punched[i] |> any(* == row) then "#"
-            elif row < 2 then "."
-            else labels[row]
-            fi)
+        let marks =
+            0..line.length
+                |> map(i =>
+                    if punched[i] |> any(* == row) then "#"
+                    elif row < 2 then "."
+                    else labels[row]
+                    fi
+                )
 
         write_line(" {marks |> join("")}  {labels[row]}")
     od
@@ -76,14 +89,22 @@ let gap = 20.0D
 
 let image = IMAGE(
     int(card_width + 2.0D * gap),
-    int(gap + double(program.count) * (card_height + gap)))
+    int(gap + double(program.count) * (card_height + gap))
+)
 
 image.view(
-    0.0D, double(image.height), double(image.width), 0.0D)
+    0.0D,
+    double(image.height),
+    double(image.width),
+    0.0D
+)
 image.clear(60ub, 70ub, 80ub)
 
-for (line, number) in
-        program |> index() |> map(iv => (iv.value, iv.index)) do
+for
+    (line, number) in program
+        |> index()
+        |> map(iv => (iv.value, iv.index))
+do
     let left = gap
     let top = gap + double(number) * (card_height + gap)
 
@@ -98,12 +119,23 @@ for (line, number) in
 
     for column in 0..columns do
         let x = left + 26.0D + pitch * double(column)
-        let c = if column < line.length then line[column] else ' ' fi
+        let c =
+            if column < line.length then
+                line[column]
+            else
+                ' '
+            fi
         let punched = holes(c)
 
         if c != ' ' then
             image.colour(40ub, 40ub, 90ub)
-            image.text(x, top + 14.0D, 9.0D, "{c}", Anchor.CENTRE)
+            image.text(
+                x,
+                top + 14.0D,
+                9.0D,
+                "{c}",
+                Anchor.CENTRE
+            )
         fi
 
         for row in 0..12 do
@@ -112,11 +144,20 @@ for (line, number) in
             if punched |> any(* == row) then
                 image.colour(20ub, 20ub, 20ub)
                 image.fill_rectangle(
-                    x - 2.5D, y - 6.0D, x + 2.5D, y + 6.0D)
+                    x - 2.5D,
+                    y - 6.0D,
+                    x + 2.5D,
+                    y + 6.0D
+                )
             elif row >= 2 then
                 image.colour(170ub, 120ub, 90ub)
                 image.text(
-                    x, y + 3.5D, 7.0D, labels[row], Anchor.CENTRE)
+                    x,
+                    y + 3.5D,
+                    7.0D,
+                    labels[row],
+                    Anchor.CENTRE
+                )
             fi
         od
     od

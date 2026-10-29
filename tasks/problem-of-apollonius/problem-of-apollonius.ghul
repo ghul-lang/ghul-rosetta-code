@@ -5,16 +5,22 @@ use Math = System.Math
 use Circle = (x: double, y: double, radius: double)
 
 tangent_to(
-    first: Circle, second: Circle, third: Circle,
-    outside_first: double, outside_second: double,
+    first: Circle,
+    second: Circle,
+    third: Circle,
+    outside_first: double,
+    outside_second: double,
     outside_third: double
 ) -> Circle => (
     let v11 = 2.0D * second.x - 2.0D * first.x
     let v12 = 2.0D * second.y - 2.0D * first.y
     let v13 =
-        first.x * first.x - second.x * second.x +
-        first.y * first.y - second.y * second.y -
-        first.radius * first.radius + second.radius * second.radius
+        first.x * first.x -
+        second.x * second.x +
+        first.y * first.y -
+        second.y * second.y -
+        first.radius * first.radius +
+        second.radius * second.radius
     let v14 =
         2.0D * outside_second * second.radius -
         2.0D * outside_first * first.radius
@@ -22,9 +28,12 @@ tangent_to(
     let v21 = 2.0D * third.x - 2.0D * second.x
     let v22 = 2.0D * third.y - 2.0D * second.y
     let v23 =
-        second.x * second.x - third.x * third.x +
-        second.y * second.y - third.y * third.y -
-        second.radius * second.radius + third.radius * third.radius
+        second.x * second.x -
+        third.x * third.x +
+        second.y * second.y -
+        third.y * third.y -
+        second.radius * second.radius +
+        third.radius * third.radius
     let v24 =
         2.0D * outside_third * third.radius -
         2.0D * outside_second * second.radius
@@ -44,29 +53,49 @@ tangent_to(
 
     let a = n * n + q * q - 1.0D
     let b =
-        2.0D * m * n - 2.0D * n * first.x +
-        2.0D * p * q - 2.0D * q * first.y +
+        2.0D * m * n -
+        2.0D * n * first.x +
+        2.0D * p * q -
+        2.0D * q * first.y +
         2.0D * outside_first * first.radius
     let c =
-        first.x * first.x + m * m - 2.0D * m * first.x +
-        p * p + first.y * first.y - 2.0D * p * first.y -
+        first.x * first.x +
+        m * m -
+        2.0D * m * first.x +
+        p * p +
+        first.y * first.y -
+        2.0D * p * first.y -
         first.radius * first.radius
 
-    let radius = (-b - Math.sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
+    let radius =
+        (-b - Math.sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
 
     (x = m + n * radius, y = p + q * radius, radius = radius)
 )
 
-let given =
-    [(x = 0.0D, y = 0.0D, radius = 1.0D),
-     (x = 4.0D, y = 0.0D, radius = 1.0D),
-     (x = 2.0D, y = 4.0D, radius = 2.0D)]
+let given = [
+    (x = 0.0D, y = 0.0D, radius = 1.0D),
+    (x = 4.0D, y = 0.0D, radius = 1.0D),
+    (x = 2.0D, y = 4.0D, radius = 2.0D)
+]
 
-let inside =
-    tangent_to(given[0], given[1], given[2], 1.0D, 1.0D, 1.0D)
+let inside = tangent_to(
+    given[0],
+    given[1],
+    given[2],
+    1.0D,
+    1.0D,
+    1.0D
+)
 
-let outside =
-    tangent_to(given[0], given[1], given[2], -1.0D, -1.0D, -1.0D)
+let outside = tangent_to(
+    given[0],
+    given[1],
+    given[2],
+    -1.0D,
+    -1.0D,
+    -1.0D
+)
 
 spelled(circle: Circle) -> string =>
     "x = {circle.x:F6}, y = {circle.y:F6}, "

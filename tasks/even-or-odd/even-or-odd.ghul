@@ -5,5 +5,7 @@ even(value: int) -> bool => value % 2 == 0
 also_even(value: int) -> bool => value & 1 == 0
 
 for value in [-3, 0, 7, 12] do
-    write_line("{value}: even {even(value)}, {also_even(value)}")
+    write_line(
+        "{value}: even {even(value)}, {also_even(value)}"
+    )
 od

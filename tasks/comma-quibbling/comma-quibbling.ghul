@@ -2,16 +2,20 @@ use default
 
 quibble(words: string[]) -> string =>
     case words.count
-    when 0 then "\{\}"
-    when 1 then "\{{words[0]}\}"
+    when 0 then "{{}}"
+    when 1 then "{{{words[0]}}}"
     else
         let front = words[0..<1] |> join()
 
-        "\{{front} and {words[words.count - 1]}\}"
+        "{{{front} and {words[words.count - 1]}}}"
     esac
 
-let examples =
-    [[], ["ABC"], ["ABC", "DEF"], ["ABC", "DEF", "G", "H"]]
+let examples = [
+    [],
+    ["ABC"],
+    ["ABC", "DEF"],
+    ["ABC", "DEF", "G", "H"]
+]
 
 for words in examples do
     write_line(quibble(words))

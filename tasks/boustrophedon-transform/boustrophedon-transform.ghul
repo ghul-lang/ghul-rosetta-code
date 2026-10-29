@@ -6,7 +6,8 @@ nth_prime(index: int) -> int =>
 fibonacci(index: int) -> bigint is
     walk(previous: bigint, current: bigint, remaining: int) -> bigint =>
         if remaining == 0 then current
-        else walk(current, previous + current, remaining - 1) fi
+        else walk(current, previous + current, remaining - 1)
+        fi
 
     walk(0n, 1n, index)
 si
@@ -22,7 +23,9 @@ boustrophedon(term: (int) -> bigint, count: int) -> bigint{} is
         following.add(term(index))
 
         for step in 1::index do
-            following.add(following[step - 1] + row[index - step])
+            following.add(
+                following[step - 1] + row[index - step]
+            )
         od
 
         row = following
@@ -43,12 +46,15 @@ report(name: string, term: (int) -> bigint) is
     write_line("          ({digits.length} digits)")
 si
 
-report("unit", index =>
-    if index == 0 then 1n else 0n fi)
+report("unit", index => if index == 0 then 1n else 0n fi)
 report("ones", _ => 1n)
-report("alternating", index => (
-    if index % 2 == 0 then 1n
-    else 0n - 1n fi))
+report("alternating", index =>
+    (
+        if index % 2 == 0 then 1n
+        else 0n - 1n
+        fi
+    )
+)
 report("primes", index => bigint(nth_prime(index)))
 report("fibonacci", fibonacci)
 report("factorials", index => factorial(bigint(index)))

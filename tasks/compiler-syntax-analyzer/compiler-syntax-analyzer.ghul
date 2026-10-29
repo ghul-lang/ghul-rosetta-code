@@ -7,21 +7,32 @@ union Node is
     BRANCH(kind: string, left: Node, right: Node)
 si
 
-class TOKEN(name: string, value: string, line: string, column: string)
+class TOKEN(
+    name: string,
+    value: string,
+    line: string,
+    column: string
+)
 
 use Operator = (kind: string, precedence: int)
 
 let binary = MAP()
 
-for (name, kind, precedence) in [
-    ("Op_multiply", "Multiply", 13), ("Op_divide", "Divide", 13),
-    ("Op_mod", "Mod", 13), ("Op_add", "Add", 12),
-    ("Op_subtract", "Subtract", 12), ("Op_less", "Less", 10),
-    ("Op_lessequal", "LessEqual", 10), ("Op_greater", "Greater", 10),
-    ("Op_greaterequal", "GreaterEqual", 10), ("Op_equal", "Equal", 9),
-    ("Op_notequal", "NotEqual", 9), ("Op_and", "And", 5),
-    ("Op_or", "Or", 4)
-] do
+for
+    (name, kind, precedence) in [
+        ("Op_multiply", "Multiply", 13),
+        ("Op_divide", "Divide", 13),
+        ("Op_mod", "Mod", 13), ("Op_add", "Add", 12),
+        ("Op_subtract", "Subtract", 12),
+        ("Op_less", "Less", 10),
+        ("Op_lessequal", "LessEqual", 10),
+        ("Op_greater", "Greater", 10),
+        ("Op_greaterequal", "GreaterEqual", 10),
+        ("Op_equal", "Equal", 9),
+        ("Op_notequal", "NotEqual", 9), ("Op_and", "And", 5),
+        ("Op_or", "Or", 4)
+    ]
+do
     binary[name] = (kind = kind, precedence = precedence)
 od
 
@@ -49,7 +60,8 @@ class PARSER(tokens: List[TOKEN]) is
         if !accept(name) then
             throw System.Exception(
                 "({token.line}, {token.column}) expecting {name}, "
-                "found {token.name}")
+                "found {token.name}"
+            )
         fi
     si
 
@@ -63,7 +75,8 @@ class PARSER(tokens: List[TOKEN]) is
             advance()
 
             let operand = expression(unary)
-            let kind = if name =~ "Op_not" then "Not" else "Negate" fi
+            let kind =
+                if name =~ "Op_not" then "Not" else "Negate" fi
 
             left = Node.BRANCH(kind, operand, Node.EMPTY)
         elif name =~ "Op_add" then
@@ -75,11 +88,14 @@ class PARSER(tokens: List[TOKEN]) is
         else
             throw System.Exception(
                 "({token.line}, {token.column}) expecting a primary, "
-                "found {name}")
+                "found {name}"
+            )
         fi
 
-        while binary.contains_key(token.name) /\
-                binary[token.name].precedence >= minimum do
+        while
+            binary.contains_key(token.name) /\
+            binary[token.name].precedence >= minimum
+        do
             let operator = binary[token.name]
 
             advance()
@@ -112,7 +128,10 @@ class PARSER(tokens: List[TOKEN]) is
                 fi
 
             return Node.BRANCH(
-                "If", condition, Node.BRANCH("If", then_part, else_part))
+                "If",
+                condition,
+                Node.BRANCH("If", then_part, else_part)
+            )
         elif accept("Keyword_putc") then
             let value = parenthesised()
 
@@ -127,10 +146,25 @@ class PARSER(tokens: List[TOKEN]) is
             do
                 let item =
                     if token.name =~ "String" then
-                        let text = Node.LEAF("String", token.value) in
-                        (advance(); Node.BRANCH("Prts", text, Node.EMPTY))
+                        let text = Node.LEAF(
+                            "String",
+                            token.value
+                        )
+                        in
+                        (
+                            advance()
+                            Node.BRANCH(
+                                "Prts",
+                                text,
+                                Node.EMPTY
+                            )
+                        )
                     else
-                        Node.BRANCH("Prti", expression(0), Node.EMPTY)
+                        Node.BRANCH(
+                            "Prti",
+                            expression(0),
+                            Node.EMPTY
+                        )
                     fi
 
                 list = Node.BRANCH("Sequence", list, item)
@@ -164,9 +198,15 @@ class PARSER(tokens: List[TOKEN]) is
         elif accept("LeftBrace") then
             let list mut = Node.EMPTY
 
-            while !(token.name =~ "RightBrace") /\
-                    !(token.name =~ "End_of_input") do
-                list = Node.BRANCH("Sequence", list, statement())
+            while
+                !(token.name =~ "RightBrace") /\
+                !(token.name =~ "End_of_input")
+            do
+                list = Node.BRANCH(
+                    "Sequence",
+                    list,
+                    statement()
+                )
             od
 
             expect("RightBrace")
@@ -176,7 +216,8 @@ class PARSER(tokens: List[TOKEN]) is
 
         throw System.Exception(
             "({token.line}, {token.column}) expecting a statement, "
-            "found {token.name}")
+            "found {token.name}"
+        )
     si
 
     program() -> Node is
@@ -192,7 +233,8 @@ si
 
 show(node: Node) is
     case node
-    when (kind, value): Node.LEAF then write_line("{kind,-14}{value}")
+    when (kind, value): Node.LEAF then
+        write_line("{kind,-14}{value}")
     when (kind, left, right): Node.BRANCH then
         write_line(kind)
         show(left)
@@ -208,9 +250,13 @@ while let line = read_line() do
 
     if fields.count >= 3 then
         let name = fields[2]
-        let rest = line.substring(line.index_of(name) + name.length)
+        let rest = line.substring(
+            line.index_of(name) + name.length
+        )
 
-        tokens.add(TOKEN(name, rest.trim(), fields[0], fields[1]))
+        tokens.add(
+            TOKEN(name, rest.trim(), fields[0], fields[1])
+        )
     fi
 od
 

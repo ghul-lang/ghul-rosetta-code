@@ -32,7 +32,12 @@ zeckendorf(n: int) -> string is
         fi
     od
 
-    return if digits.length == 0 then "0" else digits.to_string() fi
+    return
+        if digits.length == 0 then
+            "0"
+        else
+            digits.to_string()
+        fi
 si
 
 for n in 0::20 do

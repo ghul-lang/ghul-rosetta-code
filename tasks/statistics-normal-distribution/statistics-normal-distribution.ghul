@@ -17,13 +17,12 @@ si
 let size = 100000
 let samples = normal() |> take(size) |> memo()
 
-let mean =
-    samples |> sum() / double(size)
+let mean = samples |> sum() / double(size)
 
-let deviation =
-    sqrt(
-        samples
-        |> sum_by(x => (x - mean) * (x - mean)) / double(size))
+let deviation = sqrt(
+    samples |> sum_by(x => (x - mean) * (x - mean)) /
+    double(size)
+)
 
 write_line("{size:N0} samples by the Box-Muller transform")
 write_line("mean {mean:F6}, standard deviation {deviation:F6}")
@@ -64,7 +63,12 @@ for bin in 0..bins do
     let x = low + width * double(bin)
     let density = double(counts[bin]) / double(size) / width
 
-    image.fill_rectangle(x + 0.02D, 0.0D, x + width - 0.02D, density)
+    image.fill_rectangle(
+        x + 0.02D,
+        0.0D,
+        x + width - 0.02D,
+        density
+    )
 od
 
 let curve =
@@ -74,7 +78,8 @@ let curve =
                 x = low + double(i) * 0.05D,
                 y = exp(-x * x / 2.0D) / sqrt(2.0D * pi)
             in
-            (x = x, y = y))
+                (x = x, y = y)
+        )
         |> collect()
 
 image.colour(220ub, 60ub, 40ub)

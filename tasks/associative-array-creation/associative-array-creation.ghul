@@ -8,6 +8,11 @@ ages["bob"] = 27
 write_line("alice is {ages["alice"]}")
 write_line("bob is {ages["bob"]}")
 
-let carol = if ages.contains_key("carol") then "known" else "not known" fi
+let carol =
+    if ages.contains_key("carol") then
+        "known"
+    else
+        "not known"
+    fi
 
 write_line("carol is {carol}")

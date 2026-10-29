@@ -12,10 +12,13 @@ sing() is
     for n in 1::99 |> map(100 - *) do
         let some = bottles(n)
 
-        write_line("{some} of beer on the wall, {some} of beer.")
+        write_line(
+            "{some} of beer on the wall, {some} of beer."
+        )
         write_line(
             "Take one down and pass it around, "
-            "{bottles(n - 1)} of beer on the wall.")
+            "{bottles(n - 1)} of beer on the wall."
+        )
         write_line()
     od
 si

@@ -24,15 +24,17 @@ si
 word(block: List[ubyte], at: int) -> uint =>
     0..4
         |> map(index =>
-            uint(block[at + index]) << (24 - 8 * index))
+            uint(block[at + index]) << (24 - 8 * index)
+        )
         |> reduce(0u, * | *)
 
 sha1(message: ubyte[]) -> string is
     let block = padded(message)
 
-    let state =
-        LIST([0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u,
-              0xC3D2E1F0u])
+    let state = LIST([
+        0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u,
+        0xC3D2E1F0u
+    ])
 
     let start mut = 0
 
@@ -45,9 +47,13 @@ sha1(message: ubyte[]) -> string is
         for index in 16..80 do
             schedule.add(
                 rotate_left(
-                    schedule[index - 3] ^ schedule[index - 8] ^
-                    schedule[index - 14] ^ schedule[index - 16],
-                    1))
+                    schedule[index - 3] ^
+                    schedule[index - 8] ^
+                    schedule[index - 14] ^
+                    schedule[index - 16],
+                    1
+                )
+            )
         od
 
         let a mut = state[0]
@@ -69,7 +75,11 @@ sha1(message: ubyte[]) -> string is
                 fi
 
             let rotated =
-                rotate_left(a, 5) + mixed + e + constant + schedule[step]
+                rotate_left(a, 5) +
+                mixed +
+                e +
+                constant +
+                schedule[step]
 
             e = d
             d = c
@@ -93,17 +103,20 @@ si
 hex(digest: ubyte[]) -> string =>
     digest |> map(byte_value => "{byte_value:x2}") |> join("")
 
-let messages =
-    ["", "abc", "Rosetta Code",
-     "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"]
+let messages = [
+    "", "abc", "Rosetta Code",
+    "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
+]
 
 for message in messages do
     let octets = System.Text.Encoding.utf8.get_bytes(message)
 
-    let expected = hex(System.Security.Cryptography.SHA1.hash_data(octets))
+    let expected = hex(
+        System.Security.Cryptography.SHA1.hash_data(octets)
+    )
 
     assert sha1(octets) =~ expected
-    else "does not agree with the digest .NET computes"
+        else "does not agree with the digest .NET computes"
 
     write_line("{sha1(octets)}  \"{message}\"")
 od

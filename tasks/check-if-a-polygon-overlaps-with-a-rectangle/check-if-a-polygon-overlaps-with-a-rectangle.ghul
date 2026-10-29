@@ -10,21 +10,34 @@ si
 
 use Polygon = List[P]
 
-rectangle(x: double, y: double, width: double, height: double) -> Polygon =>
-    [
-        P(x, y), P(x, y + height),
-        P(x + width, y + height), P(x + width, y)]
+rectangle(
+    x: double,
+    y: double,
+    width: double,
+    height: double
+) -> Polygon => [
+    P(x, y), P(x, y + height),
+    P(x + width, y + height), P(x + width, y)
+]
 
 edges(shape: Polygon) -> P{} =>
-    0..shape.count |> map(i => shape[(i + 1) % shape.count] - shape[i])
+    0..shape.count
+        |> map(i => shape[(i + 1) % shape.count] - shape[i])
 
-shadow(shape: Polygon, axis: P) -> (low: double, high: double) =>
-    (low = shape |> map(p => p ⋅ axis) |> min()!,
-     high = shape |> map(p => p ⋅ axis) |> max()!)
+shadow(shape: Polygon, axis: P) -> (
+    low: double,
+    high: double
+) => (
+    low = shape |> map(p => p ⋅ axis) |> min()!,
+    high = shape |> map(p => p ⋅ axis) |> max()!
+)
 
 separated(a: Polygon, b: Polygon, axis: P) -> bool =>
-    let s = shadow(a, axis), t = shadow(b, axis) in
-    s.high < t.low \/ t.high < s.low
+    let
+        s = shadow(a, axis),
+        t = shadow(b, axis)
+    in
+        s.high < t.low \/ t.high < s.low
 
 overlap(a: Polygon, b: Polygon) -> bool =>
     let axes = edges(a) ++ edges(b) |> map(e => e.normal) in
@@ -44,14 +57,19 @@ write_line("polygon = {show(polygon)}")
 write_line("rect1   = (4, 0, 2, 2) => {show(first)}")
 write_line("rect2   = (1, 0, 8, 2) => {show(second)}")
 write_line("")
-write_line("polygon and rect1 overlap? {overlap(polygon, first)}")
-write_line("polygon and rect2 overlap? {overlap(polygon, second)}")
+write_line(
+    "polygon and rect1 overlap? {overlap(polygon, first)}"
+)
+write_line(
+    "polygon and rect2 overlap? {overlap(polygon, second)}"
+)
 
 outline(image: IMAGE, shape: Polygon, dx: double) is
     image.line(
         shape ++ [shape[0]]
             |> map(p => (x = p.x + dx, y = p.y))
-            |> collect())
+            |> collect()
+    )
 si
 
 let image = IMAGE(480, 180)
@@ -70,7 +88,11 @@ for (i, rect) in [first, second] |> index() do
     outline(image, rect, dx)
 
     let verdict =
-        if overlap(polygon, rect) then "overlap" else "no overlap" fi
+        if overlap(polygon, rect) then
+            "overlap"
+        else
+            "no overlap"
+        fi
 
     image.colour(60ub, 60ub, 60ub)
     image.text(dx + 4.5D, -1.4D, 13.0D, verdict, Anchor.CENTRE)

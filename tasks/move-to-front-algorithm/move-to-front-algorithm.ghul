@@ -2,11 +2,10 @@ use default
 use System.Text.StringBuilder
 
 symbol_table() -> LIST[char] =>
-    let symbols = int('a')::int('z')
-        |> map(char)
-        |> collect_mutable() in
+    let symbols =
+        int('a')::int('z') |> map(char) |> collect_mutable()
+    in
     symbols
-
 
 move_to_front(symbols: LIST[char], at: int) is
     let symbol = symbols[at]

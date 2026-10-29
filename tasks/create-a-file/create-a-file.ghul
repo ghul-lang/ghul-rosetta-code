@@ -1,7 +1,9 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-create-a-file")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-create-a-file"
+)
 
 IO.Directory.create_directory(scratch)
 IO.Directory.set_current_directory(scratch)
@@ -26,7 +28,9 @@ for where in ["", "/"] do
     let file = "{where}output.txt"
     let directory = "{where}docs"
 
-    write_line("{file}: {outcome(() => IO.File.write_all_text(file, ""))}")
+    write_line(
+        "{file}: {outcome(() => IO.File.write_all_text(file, ""))}"
+    )
     write_line(
         "{directory}: "
         "{outcome(() => IO.Directory.create_directory(directory))}"

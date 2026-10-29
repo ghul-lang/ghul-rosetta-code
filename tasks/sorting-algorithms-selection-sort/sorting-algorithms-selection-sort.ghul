@@ -10,7 +10,10 @@ selection_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
             fi
         od
 
-        (values[i], values[smallest]) = (values[smallest], values[i])
+        (values[i], values[smallest]) = (
+            values[smallest],
+            values[i]
+        )
     od
 si
 

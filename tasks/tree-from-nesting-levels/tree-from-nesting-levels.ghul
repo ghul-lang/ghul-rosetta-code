@@ -41,8 +41,12 @@ let inputs = [
     [3, 1, 3, 1],
     [1, 2, 3, 1],
     [3, 2, 1, 3],
-    [3, 3, 3, 1, 1, 3, 3, 3]]
+    [3, 3, 3, 1, 1, 3, 3, 3]
+]
 
 inputs
     |> each(levels =>
-        write_line("{levels |> join(", "),24} -> {render(nest(levels))}"))
+        write_line(
+            "{levels |> join(", "),24} -> {render(nest(levels))}"
+        )
+    )

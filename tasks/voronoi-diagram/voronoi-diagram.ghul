@@ -15,18 +15,24 @@ si
 
 let places =
     (0..sites)
-        |> map(_ =>
-            (x = next(width),
-             y = next(height),
-             red = ubyte(80 + next(160)),
-             green = ubyte(80 + next(160)),
-             blue = ubyte(80 + next(160))))
+        |> map(_ => (
+            x = next(width),
+            y = next(height),
+            red = ubyte(80 + next(160)),
+            green = ubyte(80 + next(160)),
+            blue = ubyte(80 + next(160))
+        ))
         |> collect()
 
 nearest(x: int, y: int) -> int =>
-    0..places.count |> min_by(at =>
-        let across = x - places[at].x, up = y - places[at].y in
-        across * across + up * up)!
+    0..places.count
+        |> min_by(at =>
+            let
+                across = x - places[at].x,
+                up = y - places[at].y
+            in
+                across * across + up * up
+        )!
 
 let image = IMAGE(width, height)
 

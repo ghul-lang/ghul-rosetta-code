@@ -1,20 +1,24 @@
 use default
 
-sorted_letters(word: string) -> string =>
-    string(word |> sort())
+sorted_letters(word: string) -> string => string(word |> sort())
 
 is_deranged(first: string, second: string) -> bool =>
     0..first.length |> all(i => first[i] != second[i])
 
 let words = IO.File.read_all_lines("unixdict.txt")
 
-let deranged =
-    [(first = set[i], second = set[j])
-        for set in words |> group_by(sorted_letters) |> map(s => s.value)
-        for i in 0..set.count
-        for j in i + 1::set.count - 1]
-        |> filter(pair => is_deranged(pair.first, pair.second))
+let deranged = [
+    (first = set[i], second = set[j])
+    for set in words
+        |> group_by(sorted_letters)
+        |> map(s => s.value)
+    for i in 0..set.count
+    for j in i + 1::set.count - 1
+]
+    |> filter(pair => is_deranged(pair.first, pair.second))
 
-if let longest = deranged |> max_by(pair => pair.first.length) then
+if let
+    longest = deranged |> max_by(pair => pair.first.length)
+then
     write_line("{longest.first} {longest.second}")
 fi

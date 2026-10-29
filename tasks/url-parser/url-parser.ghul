@@ -8,7 +8,8 @@ let pattern = Regex(
     "(?::(?<port>[0-9]+))?)?"
     "(?<path>[^?#]*)"
     "(?:\\?(?<query>[^#]*))?"
-    "(?:#(?<fragment>.*))?$")
+    "(?:#(?<fragment>.*))?$"
+)
 
 let part_names = [
     "scheme", "username", "password", "domain",
@@ -21,8 +22,10 @@ parse_url(url: string) -> (string, string)[]? =>
         part_names
             |> map(name => (name, m.groups[name].value))
             |> filter(((_, value)) => value.length > 0)
-            |> map(((name, value)) =>
-                (name, if name =~ "port" then ":{value}" else value fi))
+            |> map(((name, value)) => (
+                name,
+                if name =~ "port" then ":{value}" else value fi
+            ))
             |> collect()
     fi
 
@@ -44,7 +47,7 @@ let urls = [
     "foo://example.com:8042/over/there?name=ferret#nose",
     "urn:example:animal:ferret:nose",
     "jdbc:mysql://test_user:ouupppssss@localhost:3306/sakila"
-        "?profileSQL=true",
+    "?profileSQL=true",
     "ftp://ftp.is.co.za/rfc/rfc1808.txt",
     "http://www.ietf.org/rfc/rfc2396.txt#header1",
     "ldap://[2001:db8::7]/c=GB?objectClass=one&objectClass=two",

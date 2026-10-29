@@ -1,11 +1,15 @@
 use default
 
-permutation_between(before: string, after: string) -> List[int] =>
-    let one_line = after
-        |> map(letter => before.index_of(letter) + 1)
-        |> collect() in
+permutation_between(
+    before: string,
+    after: string
+) -> List[int] =>
+    let one_line =
+        after
+            |> map(letter => before.index_of(letter) + 1)
+            |> collect()
+    in
     one_line
-
 
 apply(one_line: List[int], text: string) -> string =>
     string(one_line |> map(source => text[source - 1]))
@@ -20,14 +24,14 @@ inverse(one_line: List[int]) -> List[int] => (
     result
 )
 
-compose(first: List[int], second: List[int])
-        -> List[int] =>
+compose(first: List[int], second: List[int]) -> List[int] =>
     second |> map(source => first[source - 1]) |> collect()
 
 cycles(one_line: List[int]) -> List[List[int]] is
     let destination = inverse(one_line)
     let found = LIST()
-    let seen = repeat(false, one_line.count) |> collect_mutable()
+    let seen =
+        repeat(false, one_line.count) |> collect_mutable()
 
     for start in 0..one_line.count do
         if !seen[start] then
@@ -49,8 +53,10 @@ cycles(one_line: List[int]) -> List[List[int]] is
     return found
 si
 
-one_line(cycle_notation: List[List[int]], size: int)
-        -> List[int] is
+one_line(
+    cycle_notation: List[List[int]],
+    size: int
+) -> List[int] is
     let result = LIST()
 
     for position in 1::size do
@@ -73,18 +79,21 @@ order(one_line: List[int]) -> int =>
         |> reduce(1, lcm)
 
 signature(one_line: List[int]) -> int =>
-    let even_cycles = one_line
-        |> cycles()
-        |> filter(c => c.count % 2 == 0)
-        |> count() in
+    let even_cycles =
+        one_line
+            |> cycles()
+            |> filter(c => c.count % 2 == 0)
+            |> count()
+    in
     if even_cycles % 2 == 0 then 1 else -1 fi
-
 
 show_one_line(one_line: List[int]) -> string => (
     let trimmed = LIST(one_line)
 
-    while trimmed.count > 0 /\
-          trimmed[trimmed.count - 1] == trimmed.count do
+    while
+        trimmed.count > 0 /\
+        trimmed[trimmed.count - 1] == trimmed.count
+    do
         trimmed.remove_at(trimmed.count - 1)
     od
 
@@ -94,7 +103,9 @@ show_one_line(one_line: List[int]) -> string => (
 show_cycles(one_line: List[int]) -> string =>
     one_line
         |> cycles()
-        |> map(cycle => "({cycle |> map(p => "{p}") |> join(" ")})")
+        |> map(cycle =>
+            "({cycle |> map(p => "{p}") |> join(" ")})"
+        )
         |> join(" ")
 
 let days = [
@@ -113,30 +124,49 @@ for (day, (name, letters)) in days |> index() do
     let (next_name, next_letters) = days[(day + 1) % days.count]
     let permutation = permutation_between(letters, next_letters)
 
-    write_line("  {name}->{next_name}: {show_one_line(permutation)}")
+    write_line(
+        "  {name}->{next_name}: {show_one_line(permutation)}"
+    )
     write_line("    cycles: {show_cycles(permutation)}")
-    let order_and_sign = "{order(permutation)}, {signature(permutation)}"
+    let order_and_sign =
+        "{order(permutation)}, {signature(permutation)}"
 
     write_line("    order and signature: {order_and_sign}")
 od
 
-let wed_to_thu = permutation_between(days[2].letters, days[3].letters)
-let thu_to_fri = permutation_between(days[3].letters, days[4].letters)
+let wed_to_thu = permutation_between(
+    days[2].letters,
+    days[3].letters
+)
+let thu_to_fri = permutation_between(
+    days[3].letters,
+    days[4].letters
+)
 
 write_line("")
-write_line("Wed->Thu applied to Wed: {apply(wed_to_thu, days[2].letters)}")
-write_line("Thu->Wed (inverse):      {show_cycles(inverse(wed_to_thu))}")
+write_line(
+    "Wed->Thu applied to Wed: {apply(wed_to_thu, days[2].letters)}"
+)
+write_line(
+    "Thu->Wed (inverse):      {show_cycles(inverse(wed_to_thu))}"
+)
 let thu_to_wed = inverse(wed_to_thu)
 
-write_line("Thu->Wed applied to Thu: {apply(thu_to_wed, days[3].letters)}")
+write_line(
+    "Thu->Wed applied to Thu: {apply(thu_to_wed, days[3].letters)}"
+)
 
 let wed_to_fri = compose(wed_to_thu, thu_to_fri)
 
 write_line("Thu->Fri.Wed->Thu = Wed->Fri:")
 write_line("  {show_cycles(wed_to_fri)}")
-write_line("Wed->Fri applied to Wed: {apply(wed_to_fri, days[2].letters)}")
+write_line(
+    "Wed->Fri applied to Wed: {apply(wed_to_fri, days[2].letters)}"
+)
 
 let rebuilt = one_line(cycles(wed_to_fri), 15)
 
-write_line("Wed->Fri one-line:        {show_one_line(wed_to_fri)}")
+write_line(
+    "Wed->Fri one-line:        {show_one_line(wed_to_fri)}"
+)
 write_line("Wed->Fri from its cycles: {show_one_line(rebuilt)}")

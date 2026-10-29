@@ -4,7 +4,6 @@ use default
 // one. A sequence with an increment is from(start, step), bounded here by
 // take_while. With a zero or negative step that bound is never reached, so
 // only the first ten values are shown.
-
 let cases = [
     (-2, 2, 1, "Normal"),
     (-2, 2, 0, "Zero increment"),
@@ -28,5 +27,7 @@ for (start, stop, step, comment) in cases do
     let more = if values.count > 10 then ", ..." else "" fi
 
     write_line("{comment}")
-    write_line("    from({start}, {step}) up to {stop}: [{shown}{more}]")
+    write_line(
+        "    from({start}, {step}) up to {stop}: [{shown}{more}]"
+    )
 od

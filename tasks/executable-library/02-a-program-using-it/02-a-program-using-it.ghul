@@ -4,15 +4,17 @@ use default
 // project names the library's project in a ProjectReference, and the build
 // copies hailstone.dll beside it. Run it with dotnet run in either part's
 // directory.
-
 use Hailstone.hailstone
 
 let (length, count) =
     1..100_000
         |> group_by(n => hailstone(long(n)).count)
-        |> map((length, starts) => (length, count = starts.count))
+        |> map((length, starts) => (
+            length, count = starts.count
+        ))
         |> max_by((_, count) => count)!
 
 write_line(
     "the most common length below 100,000 is {length}, "
-    "shared by {count} numbers")
+    "shared by {count} numbers"
+)

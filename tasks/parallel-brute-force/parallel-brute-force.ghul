@@ -1,6 +1,7 @@
 use default
 
 use System.Security.Cryptography.SHA256
+use System.Text.Encoding
 use Tasks.Parallel
 use System.Collections.Concurrent.ConcurrentDictionary
 
@@ -10,9 +11,8 @@ let hashes = [
     "74e1bb62f8dabb8125a58852b63bdf6eaef667cb56ac7f7cdba6d7305c50a22f"
 ]
 
-let targets = hashes
-    |> map(System.Convert.from_hex_string)
-    |> collect()
+let targets =
+    hashes |> map(System.Convert.from_hex_string) |> collect()
 
 let found = ConcurrentDictionary[int, string]()
 
@@ -33,8 +33,9 @@ search(first: int) is
 
                     for (i, target) in targets |> index() do
                         if hash =~ target then
-                            found[i] = System.Text.Encoding.ascii
-                                .get_string(word.to_array())
+                            found[i] = Encoding.ascii.get_string(
+                                word.to_array()
+                            )
                         fi
                     od
                 od

@@ -6,11 +6,7 @@ union LinkedList is
 si
 
 union Tree is
-    BRANCH(
-        value: int,
-        left: Tree mut,
-        right: Tree mut
-    )
+    BRANCH(value: int, left: Tree mut, right: Tree mut)
     LEAF
 si
 

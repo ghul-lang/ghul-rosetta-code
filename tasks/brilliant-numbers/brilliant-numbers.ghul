@@ -19,22 +19,26 @@ si
 
 power_of_ten(n: int) -> int => repeat(10, n) |> product()
 
-products(group: List[int]) -> long{} =>
-    [
-        long(p) * long(q)
-        for (i, p) in group |> index()
-        for q in group |> skip(i)
-    ]
+products(group: List[int]) -> long{} => [
+    long(p) * long(q)
+    for (i, p) in group |> index()
+    for q in group |> skip(i)
+]
 
 brilliant_numbers(max_digits: int) -> List[long] =>
-    let primes = primes_below(power_of_ten(max_digits)) |> collect() in
+    let primes =
+        primes_below(power_of_ten(max_digits)) |> collect()
+    in
     1::max_digits
         |> flat_map(digits =>
             let
                 low = power_of_ten(digits - 1),
-                group = primes |> filter(p => p >= low /\ p < low * 10)
+                group =
+                    primes
+                        |> filter(p => p >= low /\ p < low * 10)
             in
-                products(group |> collect()))
+                products(group |> collect())
+        )
         |> sort()
         |> collect()
 
@@ -43,17 +47,24 @@ let brilliant = brilliant_numbers(4)
 write_line("the first 100 brilliant numbers:")
 
 for row in 0..10 do
-    let cells = 0..10 |> map(column => "{brilliant[row * 10 + column],5}")
+    let cells =
+        0..10
+            |> map(column => "{brilliant[row * 10 + column],5}")
 
     write_line(cells |> join(""))
 od
 
 write_line("")
 
-for magnitude in 1::7 |> map(k => repeat(10L, k) |> product()) do
-    let position = brilliant |> take_while(b => b < magnitude) |> count()
+for
+    magnitude in 1::7 |> map(k => repeat(10L, k) |> product())
+do
+    let position =
+        brilliant |> take_while(b => b < magnitude) |> count()
 
     let first = brilliant[position]
 
-    write_line("first >= {magnitude,10}: {first,10} at {position + 1}")
+    write_line(
+        "first >= {magnitude,10}: {first,10} at {position + 1}"
+    )
 od

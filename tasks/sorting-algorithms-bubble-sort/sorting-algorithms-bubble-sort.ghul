@@ -8,7 +8,10 @@ bubble_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
 
         for i in 0..values.count - 1 do
             if values[i] > values[i + 1] then
-                (values[i], values[i + 1]) = (values[i + 1], values[i])
+                (values[i], values[i + 1]) = (
+                    values[i + 1],
+                    values[i]
+                )
 
                 sorted = false
             fi

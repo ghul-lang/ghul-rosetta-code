@@ -31,7 +31,8 @@ is_giuga(value: int) -> bool is
 
     let total = long(value)
 
-    factors |> all(factor => (total / factor - 1L) % factor == 0L)
+    factors
+        |> all(factor => (total / factor - 1L) % factor == 0L)
 si
 
 giugas() -> int{} => from(2) |> filter(is_giuga)
@@ -41,4 +42,3 @@ write_line("the first four Giuga numbers:")
 for value in giugas() |> take(4) do
     write_line("  {value}")
 od
-

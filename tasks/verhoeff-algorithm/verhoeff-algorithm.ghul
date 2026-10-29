@@ -31,7 +31,11 @@ use Step = (i: int, n: int, permuted: int, c: int)
 steps(digits: string) -> Step{} is
     let c mut = 0
 
-    for (i, ch) in digits.to_char_array() |> reverse() |> index() do
+    for
+        (i, ch) in digits.to_char_array()
+            |> reverse()
+            |> index()
+    do
         let n = int(ch) - int('0')
         let permuted = p[i % 8][n]
 
@@ -49,7 +53,9 @@ show_steps(digits: string) is
     write_line("-------------------")
 
     for step in steps(digits) do
-        write_line("{step.i,2}  {step.n}  {step.permuted,7}  {step.c,4}")
+        write_line(
+            "{step.i,2}  {step.n}  {step.permuted,7}  {step.c,4}"
+        )
     od
 si
 
@@ -72,16 +78,24 @@ for number in ["236", "12345", "123456789012"] do
 
     for candidate in ["{number}{digit}", "{number}9"] do
         if show then
-            write_line("Validation calculations for {candidate}")
+            write_line(
+                "Validation calculations for {candidate}"
+            )
             write_line("")
             show_steps(candidate)
             write_line("")
         fi
 
         let verdict =
-            if checksum(candidate) == 0 then "correct" else "incorrect" fi
+            if checksum(candidate) == 0 then
+                "correct"
+            else
+                "incorrect"
+            fi
 
-        write_line("The validation for {candidate} is {verdict}.")
+        write_line(
+            "The validation for {candidate} is {verdict}."
+        )
         write_line("")
     od
 od

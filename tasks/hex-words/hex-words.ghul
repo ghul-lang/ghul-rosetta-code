@@ -1,6 +1,11 @@
 use default
 
-use Entry = (word: string, value: long, root: long, distinct: int)
+use Entry = (
+    word: string,
+    value: long,
+    root: long,
+    distinct: int
+)
 
 digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
@@ -8,16 +13,18 @@ digital_root(n: long) -> long =>
 is_hex_word(word: string) -> bool =>
     word.length >= 4 /\ word |> all(c => c >= 'a' /\ c <= 'f')
 
-let entries = IO.File.read_all_lines("unixdict.txt")
-    |> filter(is_hex_word)
-    |> map(word =>
-        let value = System.Convert.to_int64(word, 16) in
-        (
-            word = word,
-            value = value,
-            root = digital_root(value),
-            distinct = word |> distinct() |> count()
-        ))
+let entries =
+    IO.File.read_all_lines("unixdict.txt")
+        |> filter(is_hex_word)
+        |> map(word =>
+            let value = System.Convert.to_int64(word, 16) in
+            (
+                word = word,
+                value = value,
+                root = digital_root(value),
+                distinct = word |> distinct() |> count()
+            )
+        )
 
 show(title: string, rows: List[Entry]) is
     write_line(title)
@@ -30,15 +37,28 @@ show(title: string, rows: List[Entry]) is
     write_line()
 si
 
-let by_root = entries
-    |> sort((a, b) =>
-        if a.root == b.root then a.word <> b.word else a.root <> b.root fi)
-    |> collect()
+let by_root =
+    entries
+        |> sort((a, b) =>
+            if a.root == b.root then
+                a.word <> b.word
+            else
+                a.root <> b.root
+            fi
+        )
+        |> collect()
 
-let by_value = entries
-    |> filter(entry => entry.distinct >= 4)
-    |> sort((a, b) => b.value <> a.value)
-    |> collect()
+let by_value =
+    entries
+        |> filter(entry => entry.distinct >= 4)
+        |> sort((a, b) => b.value <> a.value)
+        |> collect()
 
-show("Hex words of 4 or more letters, by digital root:", by_root)
-show("With at least 4 distinct letters, largest first:", by_value)
+show(
+    "Hex words of 4 or more letters, by digital root:",
+    by_root
+)
+show(
+    "With at least 4 distinct letters, largest first:",
+    by_value
+)

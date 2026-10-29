@@ -18,7 +18,11 @@ for term in terms do
 od
 
 let (numerator, denominator) =
-    terms |> reduce((0n, 1n), ((n, d), term) => (n * term + d, d * term))
+    terms
+        |> reduce((0n, 1n), ((n, d), term) => (
+            n * term + d,
+            d * term
+        ))
 
 let common = gcd(numerator, denominator)
 

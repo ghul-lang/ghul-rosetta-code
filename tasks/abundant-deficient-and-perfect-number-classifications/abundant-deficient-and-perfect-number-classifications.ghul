@@ -2,7 +2,8 @@ use default
 
 let limit = 20000
 
-let proper_divisor_sums = repeat(0, limit + 1) |> collect_mutable()
+let proper_divisor_sums =
+    repeat(0, limit + 1) |> collect_mutable()
 
 for divisor in 1::limit / 2 do
     let multiple mut = divisor * 2
@@ -15,9 +16,12 @@ for divisor in 1::limit / 2 do
     od
 od
 
-let deficient = 1::limit |> count(n => proper_divisor_sums[n] < n)
-let perfect = 1::limit |> count(n => proper_divisor_sums[n] == n)
-let abundant = 1::limit |> count(n => proper_divisor_sums[n] > n)
+let deficient =
+    1::limit |> count(n => proper_divisor_sums[n] < n)
+let perfect =
+    1::limit |> count(n => proper_divisor_sums[n] == n)
+let abundant =
+    1::limit |> count(n => proper_divisor_sums[n] > n)
 
 write_line("of 1 to {limit}:")
 write_line("  deficient {deficient}")

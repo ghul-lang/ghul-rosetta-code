@@ -30,8 +30,7 @@ factors(value: bigint) -> bigint{} is
     fi
 si
 
-fermat(index: int) -> bigint =>
-    bigint.pow(2n, 1 << index) + 1n
+fermat(index: int) -> bigint => bigint.pow(2n, 1 << index) + 1n
 
 write_line("the first ten Fermat numbers:")
 
@@ -46,9 +45,11 @@ for index in 0..8 do
     let value = fermat(index)
     let found = value |> factors() |> collect()
     let shown = found |> map(f => "{f}") |> join(" * ")
-    let note = if is_prime(value) then " (prime)"
-               elif found.count == 1 then " (no factor found)"
-               else "" fi
+    let note =
+        if is_prime(value) then " (prime)"
+        elif found.count == 1 then " (no factor found)"
+        else ""
+        fi
 
     write_line("F{index} = {shown}{note}")
 od

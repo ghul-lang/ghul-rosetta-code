@@ -32,14 +32,15 @@ cyclops() -> long{} is
 si
 
 blinded(value: long) -> long =>
-    let text = "{value}", middle = text.length / 2 in
-    long.parse("{text[0..middle]}{text[middle + 1..<0]}")
-
+    let
+        text = "{value}",
+        middle = text.length / 2
+    in
+        long.parse("{text[0..middle]}{text[middle + 1..<0]}")
 
 is_palindrome(value: long) -> bool =>
     let text = "{value}" in
     (0..text.length / 2)
-
         |> all(i => text[i] == text[text.length - 1 - i])
 
 report(name: string, numbers: () -> long{}) is
@@ -48,14 +49,19 @@ report(name: string, numbers: () -> long{}) is
     let first_50 = numbers() |> take(50) |> collect()
 
     for row in 0..5 do
-        write_line((0..10)
-            |> map(column => "{first_50[row * 10 + column],10}")
-            |> join(""))
+        write_line(
+            (0..10)
+                |> map(column =>
+                    "{first_50[row * 10 + column],10}"
+                )
+                |> join("")
+        )
     od
 
-    let beyond = numbers()
-        |> index()
-        |> find((position, value) => value > 10_000_000L)
+    let beyond =
+        numbers()
+            |> index()
+            |> find((position, value) => value > 10_000_000L)
 
     if let (position, value) = beyond then
         write_line("first over ten million: {value}")
@@ -66,10 +72,14 @@ report(name: string, numbers: () -> long{}) is
 si
 
 report("cyclops numbers", () => cyclops())
-report("prime cyclops numbers", () => cyclops() |> filter(is_prime))
-report("blind prime cyclops numbers",
-       () => cyclops()
-           |> filter(is_prime)
-           |> filter(c => is_prime(blinded(c))))
-report("palindromic prime cyclops numbers",
-       () => cyclops() |> filter(is_palindrome) |> filter(is_prime))
+report("prime cyclops numbers", () =>
+    cyclops() |> filter(is_prime)
+)
+report("blind prime cyclops numbers", () =>
+    cyclops()
+        |> filter(is_prime)
+        |> filter(c => is_prime(blinded(c)))
+)
+report("palindromic prime cyclops numbers", () =>
+    cyclops() |> filter(is_palindrome) |> filter(is_prime)
+)

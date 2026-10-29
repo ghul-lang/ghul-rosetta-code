@@ -14,12 +14,16 @@ struct RATIONAL is
 
     +(other: RATIONAL) -> RATIONAL =>
         RATIONAL(
-            numerator * other.denominator + other.numerator * denominator,
-            denominator * other.denominator)
+            numerator * other.denominator +
+            other.numerator * denominator,
+            denominator * other.denominator
+        )
 
     *(other: RATIONAL) -> RATIONAL =>
-        RATIONAL(numerator * other.numerator,
-                 denominator * other.denominator)
+        RATIONAL(
+            numerator * other.numerator,
+            denominator * other.denominator
+        )
 
     to_string() -> string =>
         if denominator =~ 1n then
@@ -41,10 +45,21 @@ bernoullis(count: int) -> List[RATIONAL] is
             let total =
                 (0..index)
                     |> reduce(whole(0n), (running, step) =>
-                        running + values[step] * whole(
-                            binomial(bigint(index + 1), bigint(step))))
+                        running +
+                        values[step] *
+                        whole(
+                            binomial(
+                                bigint(index + 1),
+                                bigint(step)
+                            )
+                        )
+                    )
 
-            values.add(whole(-1n) * total * RATIONAL(1n, bigint(index + 1)))
+            values.add(
+                whole(-1n) *
+                total *
+                RATIONAL(1n, bigint(index + 1))
+            )
         fi
     od
 
@@ -63,14 +78,15 @@ faulhaber_row(power: int) -> RATIONAL{} =>
             let upper = bigint(power + 1)
 
             RATIONAL(binomial(upper, bigint(index)), upper) *
-                bernoulli[index]
+            bernoulli[index]
         ))
 
 write_line("the first ten rows of Faulhaber's triangle:")
 
 (0..10)
     |> each(power => (
-        let cells = faulhaber_row(power) |> map(cell => "{cell,8}")
+        let cells =
+            faulhaber_row(power) |> map(cell => "{cell,8}")
 
         write_line("  {cells |> join("")}")
     ))
@@ -82,7 +98,9 @@ let total =
         |> index()
         |> reduce(whole(0n), (running, cell) =>
             running +
-                cell.value * whole(bigint.pow(1000n, cell.index + 1)))
+            cell.value *
+            whole(bigint.pow(1000n, cell.index + 1))
+        )
 
 write_line()
 write_line("using row 18, the sum of k^17 for k = 1 to 1000:")

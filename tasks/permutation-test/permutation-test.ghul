@@ -9,7 +9,8 @@ let n = treatment.count
 let m = control.count
 
 // The difference in means scaled by n * m, so it stays an integer.
-difference(treated: int) -> int => treated * m - (total - treated) * n
+difference(treated: int) -> int =>
+    treated * m - (total - treated) * n
 
 let observed = difference(treatment |> sum())
 let at_most mut = 0
@@ -34,7 +35,8 @@ choose(0, n, 0)
 let groupings = double(at_most + above)
 
 write_line("{at_most + above} alternative groupings")
-percent(count: int) -> double => 100.0 * double(count) / groupings
+percent(count: int) -> double =>
+    100.0 * double(count) / groupings
 
 write_line("difference <= observed: {percent(at_most):F4}%")
 write_line("difference  > observed: {percent(above):F4}%")

@@ -2,9 +2,7 @@ use default
 
 let n = 13
 
-let sorted = (1::n)
-    |> map(i => "{i}")
-    |> sort()
-    |> map(int.parse)
+let sorted =
+    (1::n) |> map(i => "{i}") |> sort() |> map(int.parse)
 
 write_line(sorted |> join())

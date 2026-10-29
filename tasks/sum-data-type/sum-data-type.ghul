@@ -16,12 +16,17 @@ area(shape: Shape) -> double =>
 describe(shape: Shape) -> string =>
     case shape
     when c: Shape.CIRCLE then "circle of radius {c.radius}"
-    when r: Shape.RECTANGLE then "{r.width} by {r.height} rectangle"
-    when t: Shape.TRIANGLE then "triangle {t.base} by {t.height}"
+    when r: Shape.RECTANGLE then
+        "{r.width} by {r.height} rectangle"
+    when t: Shape.TRIANGLE then
+        "triangle {t.base} by {t.height}"
     esac
 
-let shapes: Shape[] =
-    [Shape.CIRCLE(2.0), Shape.RECTANGLE(3.0, 4.0), Shape.TRIANGLE(5.0, 6.0)]
+let shapes: Shape[] = [
+    Shape.CIRCLE(2.0),
+    Shape.RECTANGLE(3.0, 4.0),
+    Shape.TRIANGLE(5.0, 6.0)
+]
 
 for shape in shapes do
     write_line("{describe(shape)}: area {area(shape)}")

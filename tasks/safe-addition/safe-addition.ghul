@@ -19,7 +19,14 @@ safe_add(a: double, b: double) -> INTERVAL is
     fi
 si
 
-for (a, b) in [(1.14, 2000.0), (0.1, 0.2), (1.0, 1.0e-20), (0.5, 0.25)] do
+for
+    (a, b) in [
+        (1.14, 2000.0),
+        (0.1, 0.2),
+        (1.0, 1.0e-20),
+        (0.5, 0.25)
+    ]
+do
     let interval = safe_add(a, b)
 
     write_line("{a:R} + {b:R}")

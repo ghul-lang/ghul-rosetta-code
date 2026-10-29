@@ -2,8 +2,8 @@ use default
 
 sort_disjoint_sublist(values: LIST[int], indices: Set[int]) is
     let positions = indices |> sort() |> collect()
-    let picked = positions |> map(i => values[i]) |> sort()
-        |> collect()
+    let picked =
+        positions |> map(i => values[i]) |> sort() |> collect()
 
     for i in 0..positions.count do
         values[positions[i]] = picked[i]

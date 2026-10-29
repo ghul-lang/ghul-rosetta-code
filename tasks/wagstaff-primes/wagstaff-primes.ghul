@@ -36,9 +36,13 @@ probably_prime(value: bigint) -> bool is
     od
 
     for small in [2, 3, 5, 7] do
-        let residue mut =
-            bigint.mod_pow(bigint(small), odd_part, value)
-        let witnessed mut = residue =~ one \/ residue =~ value - one
+        let residue mut = bigint.mod_pow(
+            bigint(small),
+            odd_part,
+            value
+        )
+        let witnessed mut =
+            residue =~ one \/ residue =~ value - one
 
         for _ in 1..power do
             if witnessed then break fi
@@ -64,8 +68,7 @@ wagstaff(top: int) -> (exponent: int, value: bigint){} is
         fi
 
         if is_odd_prime(exponent) then
-            let value =
-                (bigint.pow(two, exponent) + one) / 3n
+            let value = (bigint.pow(two, exponent) + one) / 3n
 
             if probably_prime(value) then
                 yield (exponent = exponent, value = value)
@@ -79,12 +82,15 @@ let found = wagstaff(2_000) |> collect()
 write_line("the first ten Wagstaff primes:")
 
 for step in 0..10 do
-    write_line("  p = {found[step].exponent,2}: {found[step].value}")
+    write_line(
+        "  p = {found[step].exponent,2}: {found[step].value}"
+    )
 od
 
 write_line("")
 write_line("exponents of the Wagstaff primes after those:")
 
-let rest = found[10..found.count] |> map(entry => "{entry.exponent}")
+let rest =
+    found[10..found.count] |> map(entry => "{entry.exponent}")
 
 write_line("  {rest |> join(" ")}")

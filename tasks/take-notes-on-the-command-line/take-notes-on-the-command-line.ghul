@@ -8,10 +8,14 @@ notes(arguments: string[]) is
             IO.Std.write(IO.File.read_all_text(path))
         fi
     else
-        let stamp = System.DateTime.now.to_string("yyyy-MM-dd HH:mm:ss")
+        let stamp = System.DateTime.now.to_string(
+            "yyyy-MM-dd HH:mm:ss"
+        )
 
         IO.File.append_all_text(
-            path, "{stamp}\n\t{arguments |> join(" ")}\n")
+            path,
+            "{stamp}\n\t{arguments |> join(" ")}\n"
+        )
     fi
 si
 
@@ -20,8 +24,10 @@ if args.count > 0 then
 else
     // Run with no arguments, the program demonstrates itself in a
     // directory of its own, so as not to leave notes behind.
-    let scratch =
-        IO.Path.combine(IO.Path.get_temp_path(), "rosetta-take-notes")
+    let scratch = IO.Path.combine(
+        IO.Path.get_temp_path(),
+        "rosetta-take-notes"
+    )
 
     IO.Directory.create_directory(scratch)
     IO.Directory.set_current_directory(scratch)

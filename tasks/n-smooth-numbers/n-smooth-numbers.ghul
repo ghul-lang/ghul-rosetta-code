@@ -1,20 +1,21 @@
 use default
 
 smooth(bound: int, count: int) -> List[bigint] is
-    let factors = 2::bound |> filter(is_prime)
-                             |> map(bigint)
-                             |> collect()
+    let factors =
+        2::bound |> filter(is_prime) |> map(bigint) |> collect()
 
     let found = LIST()
     found.add(1n)
 
-    let next_index = repeat(0, factors.count) |> collect_mutable()
+    let next_index =
+        repeat(0, factors.count) |> collect_mutable()
 
     while found.count < count do
         let smallest mut = found[next_index[0]] * factors[0]
 
         for which in 1..factors.count do
-            let candidate = found[next_index[which]] * factors[which]
+            let candidate =
+                found[next_index[which]] * factors[which]
 
             if candidate < smallest then
                 smallest = candidate
@@ -22,7 +23,10 @@ smooth(bound: int, count: int) -> List[bigint] is
         od
 
         for which in 0..factors.count do
-            if found[next_index[which]] * factors[which] =~ smallest then
+            if
+                found[next_index[which]] *
+                factors[which] =~ smallest
+            then
                 next_index[which] = next_index[which] + 1
             fi
         od
@@ -38,7 +42,10 @@ let bounds = 2::29 |> filter(is_prime) |> memo()
 write_line("the first 25 n-smooth numbers:")
 
 for bound in bounds do
-    let terms = smooth(bound, 25) |> map(value => "{value}") |> join(" ")
+    let terms =
+        smooth(bound, 25)
+            |> map(value => "{value}")
+            |> join(" ")
 
     write_line("  {bound,2}: {terms}")
 od
@@ -48,7 +55,10 @@ write_line("the 3000th to 3002nd n-smooth numbers:")
 
 for bound in bounds |> filter(* >= 3) do
     let found = smooth(bound, 3_002)
-    let terms = found[2_999..3_002] |> map(value => "{value}") |> join(" ")
+    let terms =
+        found[2_999..3_002]
+            |> map(value => "{value}")
+            |> join(" ")
 
     write_line("  {bound,2}: {terms}")
 od

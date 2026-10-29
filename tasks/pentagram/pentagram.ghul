@@ -6,11 +6,9 @@ let inner = cos(0.4D * pi) / cos(0.2D * pi)
 
 corner(index: int) -> (x: double, y: double) => (
     let radius = if index % 2 == 0 then 1.0D else inner fi
-    let angle = (90.0D + 36.0D * double(index)) *
-            pi / 180.0D
+    let angle = (90.0D + 36.0D * double(index)) * pi / 180.0D
 
-    (x = radius * cos(angle),
-     y = radius * sin(angle))
+    (x = radius * cos(angle), y = radius * sin(angle))
 )
 
 let image = IMAGE(500, 500)

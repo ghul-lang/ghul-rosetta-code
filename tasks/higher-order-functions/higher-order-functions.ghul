@@ -1,7 +1,6 @@
 use default
 
-apply[T,U](f: (T) -> U, argument: T) -> U =>
-    f(argument)
+apply[T, U](f: (T) -> U, argument: T) -> U => f(argument)
 
 shout(text: string) -> string => "{text.to_upper_invariant()}!"
 

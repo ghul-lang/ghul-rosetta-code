@@ -12,16 +12,18 @@ let b = 200.0D
 shaped(turn: double, half_axis: double) -> double => (
     let value = pow(abs(turn), 2.0D / n) * half_axis
 
-    if turn < 0.0D then -value else value fi)
+    if turn < 0.0D then -value else value fi
+)
 
 outline(steps: int) -> (x: double, y: double){} =>
     (0::steps)
         |> map(step => (
-            let angle = 2.0D * pi * double(step) /
-                    double(steps)
+            let angle = 2.0D * pi * double(step) / double(steps)
 
-            (x = shaped(cos(angle), a),
-             y = shaped(sin(angle), b))
+            (
+                x = shaped(cos(angle), a),
+                y = shaped(sin(angle), b)
+            )
         ))
 
 let image = IMAGE(560, 560)

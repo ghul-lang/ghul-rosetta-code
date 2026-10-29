@@ -1,35 +1,39 @@
 use default
 
-let points =
-    ["North", "North by east", "North-northeast",
-     "Northeast by north", "Northeast", "Northeast by east",
-     "East-northeast", "East by north", "East", "East by south",
-     "East-southeast", "Southeast by east", "Southeast",
-     "Southeast by south", "South-southeast", "South by east",
-     "South", "South by west", "South-southwest",
-     "Southwest by south", "Southwest", "Southwest by west",
-     "West-southwest", "West by south", "West", "West by north",
-     "West-northwest", "Northwest by west", "Northwest",
-     "Northwest by north", "North-northwest", "North by west"]
+let points = [
+    "North", "North by east", "North-northeast",
+    "Northeast by north", "Northeast", "Northeast by east",
+    "East-northeast", "East by north", "East", "East by south",
+    "East-southeast", "Southeast by east", "Southeast",
+    "Southeast by south", "South-southeast", "South by east",
+    "South", "South by west", "South-southwest",
+    "Southwest by south", "Southwest", "Southwest by west",
+    "West-southwest", "West by south", "West", "West by north",
+    "West-northwest", "Northwest by west", "Northwest",
+    "Northwest by north", "North-northwest", "North by west"
+]
 
 box(heading: double) -> int =>
     cast(heading / 11.25D + 0.5D) % 32
 
 let headings =
-    0::32 |> map(index => (
-        let base = cast(index) * 11.25D
+    0::32
+        |> map(index => (
+            let base = cast(index) * 11.25D
 
-        case index % 3
-        when 1 then base + 5.62D
-        when 2 then base - 5.62D
-        else base
-        esac
-    ))
+            case index % 3
+            when 1 then base + 5.62D
+            when 2 then base - 5.62D
+            else base
+            esac
+        ))
 
 write_line("index  compass point         degrees")
 
 for heading in headings do
     let point = box(heading)
 
-    write_line("{point + 1,4}   {points[point],-20}{heading,8:F2}")
+    write_line(
+        "{point + 1,4}   {points[point],-20}{heading,8:F2}"
+    )
 od

@@ -49,11 +49,18 @@ let primes_below_15 = 2..15 |> filter(is_prime)
 let primes_below_180 = 2..180 |> filter(is_prime)
 
 write_line("pisano_prime(p, 2) for every prime below 15:")
-in_rows(primes_below_15 |> map(p => "{p,4}:{pisano_prime(p, 2),8}"), 4)
+in_rows(
+    primes_below_15 |> map(p => "{p,4}:{pisano_prime(p, 2),8}"),
+    4
+)
 
 write_line("")
 write_line("pisano_prime(p, 1) for every prime below 180:")
-in_rows(primes_below_180 |> map(p => "{p,4}:{pisano_prime(p, 1),5}"), 6)
+in_rows(
+    primes_below_180
+        |> map(p => "{p,4}:{pisano_prime(p, 1),5}"),
+    6
+)
 
 write_line("")
 write_line("pisano(m) for m from 1 to 180:")

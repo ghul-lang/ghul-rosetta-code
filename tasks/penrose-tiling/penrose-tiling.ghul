@@ -7,15 +7,16 @@ use Math = System.Math
 use Point = (x: double, y: double)
 
 union Half(a: Point, b: Point, c: Point) is
-    THIN(..)
-    FAT(..)
+    THIN
+    FAT
 si
 
 let phi = (1.0D + sqrt(5.0D)) / 2.0D
 
-towards(from: Point, to: Point) -> Point =>
-    (x = from.x + (to.x - from.x) / phi,
-     y = from.y + (to.y - from.y) / phi)
+towards(from: Point, to: Point) -> Point => (
+    x = from.x + (to.x - from.x) / phi,
+    y = from.y + (to.y - from.y) / phi
+)
 
 split(tile: Half) -> Half{} is
     if isa Half.THIN(tile) then
@@ -63,9 +64,19 @@ let shapes = SHAPES()
 
 for tile in tiles do
     if isa Half.FAT(tile) then
-        shapes.add([tile.a, tile.b, tile.c], 232ub, 184ub, 118ub)
+        shapes.add(
+            [tile.a, tile.b, tile.c],
+            232ub,
+            184ub,
+            118ub
+        )
     else
-        shapes.add([tile.a, tile.b, tile.c], 118ub, 164ub, 214ub)
+        shapes.add(
+            [tile.a, tile.b, tile.c],
+            118ub,
+            164ub,
+            214ub
+        )
     fi
 od
 

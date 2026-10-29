@@ -19,7 +19,8 @@ class DELEGATOR is
 
     init() is si
 
-    operation() -> string => delegate?.thing() ?? "default implementation"
+    operation() -> string =>
+        delegate?.thing() ?? "default implementation"
 si
 
 let delegator = DELEGATOR()

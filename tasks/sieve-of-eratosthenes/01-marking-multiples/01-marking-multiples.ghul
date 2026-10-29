@@ -20,10 +20,7 @@ sieve(limit: int) -> int{} is
         prime = prime + 1
     od
 
-    return
-        (2::limit)
-            |> filter(i => !composite[i])
-            |> collect()
+    return (2::limit) |> filter(i => !composite[i]) |> collect()
 si
 
 for prime in sieve(100) do

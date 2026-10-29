@@ -5,7 +5,10 @@ let random = System.Random(42)
 modifier(x: double) -> double =>
     if x < 0.5 then 2.0 * (0.5 - x) else 2.0 * (x - 0.5) fi
 
-modified(generate: () -> double, weight: double -> double) -> double is
+modified(
+    generate: () -> double,
+    weight: (double) -> double
+) -> double is
     do
         let candidate = generate()
 
@@ -18,18 +21,24 @@ si
 let samples = 10_000
 let bins = 20
 
-let sample_bins = 1::samples
-    |> map(_ => modified(() => random.next_double(), modifier))
-    |> map(x => int(x * double(bins)))
-    |> collect()
+let sample_bins =
+    1::samples
+        |> map(_ =>
+            modified(() => random.next_double(), modifier)
+        )
+        |> map(x => int(x * double(bins)))
+        |> collect()
 
-let counts = 0..bins
-    |> map(bin => sample_bins |> count(* == bin))
-    |> collect()
+let counts =
+    0..bins
+        |> map(bin => sample_bins |> count(* == bin))
+        |> collect()
 
 let largest = counts |> max()!
 
-write_line("{samples:N0} samples from the modified distribution:")
+write_line(
+    "{samples:N0} samples from the modified distribution:"
+)
 
 for bin in 0..bins do
     let low = double(bin) / double(bins)

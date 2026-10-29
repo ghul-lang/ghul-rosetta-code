@@ -6,8 +6,9 @@ class MACRO(parameters: List[string], body: string)
 
 let name = "[A-Za-z_][A-Za-z_0-9]*"
 
-let definition =
-    Regex("^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$")
+let definition = Regex(
+    "^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$"
+)
 
 let inclusion = Regex("^#include\\s+\"([^\"]*)\"\\s*$")
 let usage = Regex("#({name})\\s*(\\(([^)#]*)\\))?\\s*#")
@@ -35,7 +36,7 @@ class PREPROCESSOR(debug: bool) is
     si
 
     expand(text: string, used: LIST[string]) -> string =>
-        identifier.replace(text, (m) is
+        identifier.replace(text, m is
             if !defines.contains_key(m.value) then
                 return m.value
             fi
@@ -63,8 +64,10 @@ class PREPROCESSOR(debug: bool) is
         let body = identifier.replace(macro.body, p =>
             let index =
                 (0..macro.parameters.count)
-                    |> find(i => macro.parameters[i] =~ p.value) in
-            if let i = index then arguments[i] else p.value fi)
+                    |> find(i => macro.parameters[i] =~ p.value)
+            in
+            if let i = index then arguments[i] else p.value fi
+        )
 
         used.add(called)
 
@@ -104,21 +107,22 @@ class PREPROCESSOR(debug: bool) is
                 let body = defined.groups[4].value.trim()
 
                 if defines.contains_key(macro) then
-                    output.add("/* {macro} is already defined */")
+                    output.add(
+                        "/* {macro} is already defined */"
+                    )
                 else
                     defines[macro] = MACRO(parameters, body)
 
                     let shown =
-                        if defined.groups[2].success
-                        then "{macro}({parameters |> join(", ")})"
+                        if defined.groups[2].success then
+                            "{macro}({parameters |> join(", ")})"
                         else macro
                         fi
 
                     note("Define {shown} as {body}")
                 fi
             else
-                let replaced =
-                    usage.replace(line, call)
+                let replaced = usage.replace(line, call)
 
                 output.add(replaced)
             fi

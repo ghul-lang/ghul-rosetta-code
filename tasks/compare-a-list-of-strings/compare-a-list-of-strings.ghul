@@ -19,5 +19,7 @@ for strings in lists do
     let equal = $(all_equal(strings))
     let ascending = $(strictly_ascending(strings))
 
-    write_line("{shown,-22} equal: {equal,-5}  ascending: {ascending}")
+    write_line(
+        "{shown,-22} equal: {equal,-5}  ascending: {ascending}"
+    )
 od

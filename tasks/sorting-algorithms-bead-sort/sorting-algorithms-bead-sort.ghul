@@ -1,13 +1,19 @@
 use default
 
 bead_sort(values: List[int]) -> int{} =>
-    let tallest = values |> reduce(0, (most, value) =>
-        if value > most then value else most fi) in
+    let tallest =
+        values
+            |> reduce(0, (most, value) =>
+                if value > most then value else most fi
+            )
+    in
     let beads =
         (0..tallest)
-        |> map(level => values |> filter(* > level) |> count())
-        in
-        (0..values.count)
+            |> map(level =>
+                values |> filter(* > level) |> count()
+            )
+    in
+    (0..values.count)
         |> map(row => beads |> filter(* > row) |> count())
         |> reverse()
 

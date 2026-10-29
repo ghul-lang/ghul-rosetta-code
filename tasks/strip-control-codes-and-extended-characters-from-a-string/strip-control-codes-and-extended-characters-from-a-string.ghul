@@ -1,18 +1,15 @@
 use default
 
 strip_control(text: string) -> string =>
-    string(
-        text
-            |> filter(c => int(c) >= 32 /\ int(c) != 127))
+    string(text |> filter(c => int(c) >= 32 /\ int(c) != 127))
 
 strip_control_and_extended(text: string) -> string =>
-    string(
-        text
-            |> filter(c => int(c) >= 32 /\ int(c) <= 126))
+    string(text |> filter(c => int(c) >= 32 /\ int(c) <= 126))
 
 let sample = "Hello\tWorldCafé"
 
 write_line("original: {sample}")
 write_line("control stripped: {strip_control(sample)}")
 write_line(
-    "control and extended stripped: {strip_control_and_extended(sample)}")
+    "control and extended stripped: {strip_control_and_extended(sample)}"
+)

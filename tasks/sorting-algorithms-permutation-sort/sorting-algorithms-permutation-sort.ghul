@@ -18,15 +18,20 @@ next_permutation[T: Ghul.Comparable[T]](values: LIST[T]) is
             successor = successor - 1
         od
 
-        (values[pivot], values[successor]) =
-            (values[successor], values[pivot])
+        (values[pivot], values[successor]) = (
+            values[successor],
+            values[pivot]
+        )
     fi
 
     let low mut = pivot + 1
     let high mut = values.count - 1
 
     while low < high do
-        (values[low], values[high]) = (values[high], values[low])
+        (values[low], values[high]) = (
+            values[high],
+            values[low]
+        )
 
         low = low + 1
         high = high - 1

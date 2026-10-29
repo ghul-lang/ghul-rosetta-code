@@ -2,13 +2,18 @@ use default
 
 let metric_letters = "KMGTPEZYXWVU"
 
-let words =
-    [(spelling = "greatgross", shortest = 7, factor = 1728n),
-     (spelling = "googols", shortest = 6, factor = bigint.pow(10n, 100)),
-     (spelling = "pairs", shortest = 4, factor = 2n),
-     (spelling = "scores", shortest = 3, factor = 20n),
-     (spelling = "dozens", shortest = 3, factor = 12n),
-     (spelling = "gross", shortest = 2, factor = 144n)]
+let words = [
+    (spelling = "greatgross", shortest = 7, factor = 1728n),
+    (
+        spelling = "googols",
+        shortest = 6,
+        factor = bigint.pow(10n, 100)
+    ),
+    (spelling = "pairs", shortest = 4, factor = 2n),
+    (spelling = "scores", shortest = 3, factor = 20n),
+    (spelling = "dozens", shortest = 3, factor = 12n),
+    (spelling = "gross", shortest = 2, factor = 144n)
+]
 
 shared_prefix(left: string, right: string) -> int =>
     left
@@ -41,9 +46,14 @@ expand(source: string) -> string is
     let scale mut = 0
     let fractional mut = false
 
-    while cursor < text.length /\
-        (char.is_digit(text[cursor]) \/ text[cursor] == ',' \/
-         text[cursor] == '.') do
+    while
+        cursor < text.length /\
+        (
+            char.is_digit(text[cursor]) \/
+            text[cursor] == ',' \/
+            text[cursor] == '.'
+        )
+    do
         if text[cursor] == '.' then
             fractional = true
         elif text[cursor] != ',' then
@@ -55,12 +65,14 @@ expand(source: string) -> string is
         cursor = cursor + 1
     od
 
-    if cursor < text.length /\
-        (text[cursor] == 'e' \/ text[cursor] == 'E') then
+    if
+        cursor < text.length /\
+        (text[cursor] == 'e' \/ text[cursor] == 'E')
+    then
         let marked = cursor + 1
         let signed =
             marked < text.length /\
-                (text[marked] == '+' \/ text[marked] == '-')
+            (text[marked] == '+' \/ text[marked] == '-')
         let start = if signed then marked + 1 else marked fi
         let stop mut = start
 
@@ -71,15 +83,19 @@ expand(source: string) -> string is
         if stop > start then
             let power = int.parse(text[start..stop])
 
-            scale = scale - if signed /\ text[marked] == '-' then -power
-                            else power fi
+            scale =
+                scale -
+                if signed /\ text[marked] == '-' then -power
+                else power
+                fi
 
             cursor = stop
         fi
     fi
 
     let spelt = mantissa |> join("")
-    let value mut = if spelt.length == 0 then 0n else bigint.parse(spelt) fi
+    let value mut =
+        if spelt.length == 0 then 0n else bigint.parse(spelt) fi
     let point mut = scale
 
     if point < 0 then
@@ -102,25 +118,35 @@ expand(source: string) -> string is
             let named =
                 words
                     |> filter(word =>
-                        shared_prefix(lowered, word.spelling) >=
-                            word.shortest)
+                        shared_prefix(
+                            lowered,
+                            word.spelling
+                        ) >= word.shortest
+                    )
                     |> max_by(word =>
-                        shared_prefix(lowered, word.spelling))
+                        shared_prefix(lowered, word.spelling)
+                    )
 
             if let word = named then
                 value = value * word.factor
                 cursor =
-                    cursor + shared_prefix(lowered, word.spelling)
+                    cursor +
+                    shared_prefix(lowered, word.spelling)
             else
-                let place = metric_letters.index_of(char.to_upper(rest[0]))
+                let place = metric_letters.index_of(
+                    char.to_upper(rest[0])
+                )
                 let binary =
-                    rest.length > 1 /\ char.to_lower(rest[1]) == 'i'
+                    rest.length > 1 /\
+                    char.to_lower(rest[1]) == 'i'
 
                 if binary then
-                    value = value * bigint.pow(2n, (place + 1) * 10)
+                    value =
+                        value * bigint.pow(2n, (place + 1) * 10)
                     cursor = cursor + 2
                 else
-                    value = value * bigint.pow(10n, (place + 1) * 3)
+                    value =
+                        value * bigint.pow(10n, (place + 1) * 3)
                     cursor = cursor + 1
                 fi
             fi
@@ -141,24 +167,26 @@ expand(source: string) -> string is
     if negative then "-{rendered}" else rendered fi
 si
 
-let lines =
-    ["2greatGRo   24Gros  288Doz  1,728pairs  172.8SCOre",
-     "1,567      +1.567k    0.1567e-2m",
-     "25.123kK    25.123m   2.5123e-00002G",
-     "25.123kiKI  25.123Mi  2.5123e-00002Gi  +.25123E-7Ei",
-     "-.25123e-34Vikki      2e-77gooGols",
-     "9!   9!!   9!!!   9!!!!   9!!!!!   9!!!!!!   9!!!!!!!   9!!!!!!!!"
-     "   9!!!!!!!!!",
-     ".017k!!"]
+let lines = [
+    "2greatGRo   24Gros  288Doz  1,728pairs  172.8SCOre",
+    "1,567      +1.567k    0.1567e-2m",
+    "25.123kK    25.123m   2.5123e-00002G",
+    "25.123kiKI  25.123Mi  2.5123e-00002Gi  +.25123E-7Ei",
+    "-.25123e-34Vikki      2e-77gooGols",
+    "9!   9!!   9!!!   9!!!!   9!!!!!   9!!!!!!   9!!!!!!!   9!!!!!!!!"
+    "   9!!!!!!!!!",
+    ".017k!!"
+]
 
-lines |> each(line => (
-    let expanded =
-        line.split([' '])
-            |> filter(item => item.length > 0)
-            |> map(expand)
-            |> join("  ")
+lines
+    |> each(line => (
+        let expanded =
+            line.split([' '])
+                |> filter(item => item.length > 0)
+                |> map(expand)
+                |> join("  ")
 
-    write_line("in:  {line}")
-    write_line("out: {expanded}")
-    write_line()
-))
+        write_line("in:  {line}")
+        write_line("out: {expanded}")
+        write_line()
+    ))

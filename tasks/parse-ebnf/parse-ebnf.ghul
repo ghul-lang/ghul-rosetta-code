@@ -26,19 +26,25 @@ class GRAMMAR is
     si
 si
 
-in_name(c: char) -> bool => char.is_letter_or_digit(c) \/ c == '_'
+in_name(c: char) -> bool =>
+    char.is_letter_or_digit(c) \/ c == '_'
 
 class READER(source: string) is
     _at: int
 
     skip() is
-        while _at < source.length /\ char.is_white_space(source[_at]) do
+        while
+            _at < source.length /\
+            char.is_white_space(source[_at])
+        do
             _at = _at + 1
         od
     si
 
-    peek: char =>
-        (skip(); if _at < source.length then source[_at] else '\u0000' fi)
+    peek: char => (
+        skip()
+        if _at < source.length then source[_at] else '\u0000' fi
+    )
 
     take(c: char) -> bool is
         if peek == c then
@@ -91,19 +97,25 @@ class READER(source: string) is
         elif take('[') then
             let inside = expression()
 
-            if !take(']') then throw BAD_GRAMMAR("] expected") fi
+            if !take(']') then
+                throw BAD_GRAMMAR("] expected")
+            fi
 
             return Rule.OPTIONAL(inside)
         elif take('(') then
             let inside = expression()
 
-            if !take(')') then throw BAD_GRAMMAR(") expected") fi
+            if !take(')') then
+                throw BAD_GRAMMAR(") expected")
+            fi
 
             return inside
         elif take('{') then
             let inside = expression()
 
-            if !take('}') then throw BAD_GRAMMAR("}} expected") fi
+            if !take('}') then
+                throw BAD_GRAMMAR("}} expected")
+            fi
 
             return Rule.REPEAT(inside)
         fi
@@ -155,7 +167,9 @@ class READER(source: string) is
             result.order.add(defined)
 
             if !take('.') /\ !take(';') then
-                throw BAD_GRAMMAR(". or ; expected after {defined}")
+                throw BAD_GRAMMAR(
+                    ". or ; expected after {defined}"
+                )
             fi
         od
 
@@ -166,7 +180,9 @@ class READER(source: string) is
         result.comment = literal()
 
         if peek != '\u0000' then
-            throw BAD_GRAMMAR("unexpected text after the grammar")
+            throw BAD_GRAMMAR(
+                "unexpected text after the grammar"
+            )
         fi
 
         for rule in result.rules.values do
@@ -197,7 +213,8 @@ show(rule: Rule) -> string =>
     case rule
     when (text): Rule.TERMINAL then "\"{text}\""
     when (called): Rule.NAME then called
-    when (parts): Rule.SEQUENCE then parts |> map(show) |> join(" ")
+    when (parts): Rule.SEQUENCE then
+        parts |> map(show) |> join(" ")
     when (options): Rule.CHOICE then
         "({options |> map(show) |> join(" | ")})"
     when (body): Rule.REPEAT then "{{ {show(body)} }}"
@@ -223,7 +240,10 @@ class MATCHER(grammar: GRAMMAR, text: string) is
             let start = blank(at)
             let fits = start + literal.length <= text.length
 
-            if fits /\ text.substring(start, literal.length) =~ literal then
+            if
+                fits /\
+                text.substring(start, literal.length) =~ literal
+            then
                 result.add(start + literal.length)
             fi
         when (called): Rule.NAME then
@@ -236,7 +256,9 @@ class MATCHER(grammar: GRAMMAR, text: string) is
 
                 for position in reached do
                     for end in ends(part, position) do
-                        if !next.contains(end) then next.add(end) fi
+                        if !next.contains(end) then
+                            next.add(end)
+                        fi
                     od
                 od
 
@@ -247,7 +269,9 @@ class MATCHER(grammar: GRAMMAR, text: string) is
         when (options): Rule.CHOICE then
             for option in options do
                 for end in ends(option, at) do
-                    if !result.contains(end) then result.add(end) fi
+                    if !result.contains(end) then
+                        result.add(end)
+                    fi
                 od
             od
         when (body): Rule.REPEAT then
@@ -262,7 +286,9 @@ class MATCHER(grammar: GRAMMAR, text: string) is
                     result.add(position)
 
                     for end in ends(body, position) do
-                        if end > position then pending.add(end) fi
+                        if end > position then
+                            pending.add(end)
+                        fi
                     od
                 fi
             od
@@ -279,7 +305,9 @@ class MATCHER(grammar: GRAMMAR, text: string) is
 
     accepts() -> bool =>
         let start = grammar.rules[grammar.order[0]] in
-        start |> ends(0) |> any(end => blank(end) == text.length)
+        start
+            |> ends(0)
+            |> any(end => blank(end) == text.length)
 si
 
 let cases = [
@@ -288,8 +316,10 @@ let cases = [
             "\"a\" {{\n    a = \"a1\" ( \"a2\" | \"a3\" ) {{ \"a4\" }} "
             "[ \"a5\" ] \"a6\" ;\n}} \"z\"",
         tests = [
-            "a1a3a4a4a5a6", "a1 a2a6", "a1 a3 a4 a6", "a1 a4 a5 a6",
-            "a1 a2 a4 a5 a5 a6", "a1 a2 a4 a5 a6 a7", "your ad here"
+            "a1a3a4a4a5a6", "a1 a2a6", "a1 a3 a4 a6",
+            "a1 a4 a5 a6",
+            "a1 a2 a4 a5 a5 a6", "a1 a2 a4 a5 a6 a7",
+            "your ad here"
         ]
     ),
     (
@@ -305,7 +335,8 @@ let cases = [
             "| \"5\" | \"6\" | \"7\" | \"8\" | \"9\" .\n"
             "}}",
         tests = [
-            "2", "2*3 + 4/23 - 7", "(3 + 4) * 6-2+(4*(4))", "-2", "3 +",
+            "2", "2*3 + 4/23 - 7", "(3 + 4) * 6-2+(4*(4))",
+            "-2", "3 +",
             "(4 + 3"
         ]
     ),
@@ -317,12 +348,15 @@ let cases = [
 
 for (source, tests) in cases do
     write_line("grammar:")
-    source.split(['\n']) |> each(line => write_line("    {line}"))
+    source.split(['\n'])
+        |> each(line => write_line("    {line}"))
 
     try
         let grammar = READER(source).grammar()
 
-        if let title = grammar.title then write_line("title: {title}") fi
+        if let title = grammar.title then
+            write_line("title: {title}")
+        fi
         if let comment = grammar.comment then
             write_line("comment: {comment}")
         fi
@@ -330,7 +364,9 @@ for (source, tests) in cases do
         write_line("rules:")
 
         for rule in grammar.order do
-            write_line("    {rule} = {show(grammar.rules[rule])}")
+            write_line(
+                "    {rule} = {show(grammar.rules[rule])}"
+            )
         od
 
         write_line("tests:")

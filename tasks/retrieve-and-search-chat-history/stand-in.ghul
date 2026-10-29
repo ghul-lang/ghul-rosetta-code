@@ -14,7 +14,8 @@ stand_in() -> string is
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 
@@ -31,9 +32,15 @@ stand_in() -> string is
             let context = listener.get_context()
             let path = context.request.url?.absolute_path ?? ""
             let name = IO.Path.get_file_name(path) ?? ""
-            let body = IO.File.read_all_bytes(IO.Path.combine("logs", name))
+            let body = IO.File.read_all_bytes(
+                IO.Path.combine("logs", name)
+            )
 
-            context.response.output_stream.write(body, 0, body.count)
+            context.response.output_stream.write(
+                body,
+                0,
+                body.count
+            )
             context.response.close()
         od
     si)

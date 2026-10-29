@@ -2,7 +2,8 @@ use default
 
 report(words: string[]) is
     let longest_first =
-        words |> sort((left, right) => right.length - left.length)
+        words
+            |> sort((left, right) => right.length - left.length)
 
     for word in longest_first do
         write_line("{word} has length {word.length}")

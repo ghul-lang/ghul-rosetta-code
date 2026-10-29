@@ -4,10 +4,17 @@ map_range(
     (a1, a2): (double, double),
     (b1, b2): (double, double),
     s: double
-) -> double =>
-    b1 + (s - a1) * (b2 - b1) / (a2 - a1)
+) -> double => b1 + (s - a1) * (b2 - b1) / (a2 - a1)
 
 (0::10)
-    |> map(s =>
-        (s, mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))))
-    |> each((s, mapped) => write_line("{s} maps to {mapped:F1}"))
+    |> map(s => (
+        s,
+        mapped = map_range(
+            (0.0D, 10.0D),
+            (-1.0D, 0.0D),
+            cast(s)
+        )
+    ))
+    |> each((s, mapped) =>
+        write_line("{s} maps to {mapped:F1}")
+    )

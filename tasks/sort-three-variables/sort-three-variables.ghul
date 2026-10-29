@@ -1,6 +1,10 @@
 use default
 
-sort_three[T: Ghul.Comparable[T]](x: T ref, y: T ref, z: T ref) is
+sort_three[T: Ghul.Comparable[T]](
+    x: T ref,
+    y: T ref,
+    z: T ref
+) is
     let sorted = [x!, y!, z!] |> sort() |> collect()
 
     x! = sorted[0]
@@ -12,7 +16,7 @@ let x mut = "lions, tigers, and"
 let y mut = "bears, oh my!"
 let z mut = "(from the \"Wizard of OZ\")"
 
-sort_three(x ref, y ref, z ref)
+sort_three(x ref , y ref , z ref )
 
 write_line("x = {x}\ny = {y}\nz = {z}")
 write_line("")
@@ -21,6 +25,6 @@ let a mut = 77444
 let b mut = -12
 let c mut = 0
 
-sort_three(a ref, b ref, c ref)
+sort_three(a ref , b ref , c ref )
 
 write_line("x = {a,6}\ny = {b,6}\nz = {c,6}")

@@ -3,26 +3,30 @@ use default
 square(value: double) -> double => value * value
 
 mean(values: double[]) -> double =>
-    (values |> sum()) /
-    cast(values.count)
+    (values |> sum()) / cast(values.count)
 
 report(truth: double, estimates: double[]) is
     let collective = mean(estimates)
 
-    let average_error =
-        mean(estimates |> map(e => square(e - truth)) |> collect())
+    let average_error = mean(
+        estimates |> map(e => square(e - truth)) |> collect()
+    )
 
     let collective_error = square(collective - truth)
 
-    let diversity =
-        mean(estimates |> map(e => square(e - collective))
-                       |> collect())
+    let diversity = mean(
+        estimates
+            |> map(e => square(e - collective))
+            |> collect()
+    )
 
     let shown = estimates |> map(e => "{e:G}") |> join(" ")
 
     write_line("true value {truth:G}, estimates {shown}")
     write_line("  average individual error {average_error:F3}")
-    write_line("  collective error         {collective_error:F3}")
+    write_line(
+        "  collective error         {collective_error:F3}"
+    )
     write_line("  prediction diversity     {diversity:F3}")
     write_line("")
 si

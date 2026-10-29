@@ -3,30 +3,33 @@ use default
 let digit_set = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 encode(n: int, base: int) -> string =>
-    let walk = (rest: int, digits: string) rec =>
-        if rest == 0 then
-            if digits.length == 0 then "0" else digits fi
-        else
-            let (r, next) =
-                if rest % base < 0
-                then (rest % base - base, rest / base + 1)
-                else (rest % base, rest / base)
-                fi
-            in
-            rec(next, "{digit_set[r]}{digits}")
-        fi
+    let walk =
+        (rest: int, digits: string) rec =>
+            if rest == 0 then
+                if digits.length == 0 then "0" else digits fi
+            else
+                let (r, next) =
+                    if rest % base < 0 then
+                        (rest % base - base, rest / base + 1)
+                    else (rest % base, rest / base)
+                    fi
+                in
+                rec(next, "{digit_set[r]}{digits}")
+            fi
     in
     walk(n, "")
 
 decode(encoded: string, base: int) -> int =>
     encoded
-    |> reduce(0, (value, digit) =>
-        value * base + digit_set.index_of(digit))
+        |> reduce(0, (value, digit) =>
+            value * base + digit_set.index_of(digit)
+        )
 
 for (n, base) in [(10, -2), (146, -3), (15, -10)] do
     let encoded = encode(n, base)
 
     write_line(
         "{n} in base {base} is {encoded}, "
-        "and back again is {decode(encoded, base)}")
+        "and back again is {decode(encoded, base)}"
+    )
 od

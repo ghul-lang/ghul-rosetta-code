@@ -12,12 +12,15 @@ while next <= limit do
 od
 
 is_erdos(prime: int) -> bool =>
-    factorials |> filter(* < prime)
-               |> all(f => !is_prime(prime - f))
+    factorials
+        |> filter(* < prime)
+        |> all(f => !is_prime(prime - f))
 
-let erdos = primes() |> take_while(* <= limit)
-                     |> filter(is_erdos)
-                     |> collect()
+let erdos =
+    primes()
+        |> take_while(* <= limit)
+        |> filter(is_erdos)
+        |> collect()
 
 let below_2500 = erdos |> filter(* < 2_500) |> collect()
 
@@ -33,5 +36,7 @@ od
 write_line("")
 write_line("there are {below_2500.count} of them")
 write_line("")
-write_line("Erdos prime {erdos.count} is {erdos[erdos.count - 1]}, "
-           "the highest below a million")
+write_line(
+    "Erdos prime {erdos.count} is {erdos[erdos.count - 1]}, "
+    "the highest below a million"
+)

@@ -1,17 +1,22 @@
 use default
 
-let small =
-    ["zero", "one", "two", "three", "four", "five", "six", "seven",
-     "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
-     "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+let small = [
+    "zero", "one", "two", "three", "four", "five", "six",
+    "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+    "fourteen",
+    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
+]
 
-let tens =
-    ["twenty", "thirty", "forty", "fifty",
-     "sixty", "seventy", "eighty", "ninety"]
+let tens = [
+    "twenty", "thirty", "forty", "fifty",
+    "sixty", "seventy", "eighty", "ninety"
+]
 
-let scales =
-    ["", "thousand", "million", "billion",
-     "trillion", "quadrillion", "quintillion"]
+let scales = [
+    "", "thousand", "million", "billion",
+    "trillion", "quadrillion", "quintillion"
+]
 
 under_hundred(value: int) -> string =>
     if value < 20 then
@@ -42,27 +47,36 @@ cardinal(value: long) -> string =>
     if value == 0L then
         "zero"
     else
-        value |> groups()
+        value
+            |> groups()
             |> index()
             |> filter(((_, group)) => group > 0)
             |> map(((scale, group)) =>
                 let name = under_thousand(group) in
-                if scale == 0 then name else "{name} {scales[scale]}" fi)
+                if scale == 0 then
+                    name
+                else
+                    "{name} {scales[scale]}"
+                fi
+            )
             |> reverse()
             |> join(" ")
     fi
 
-let irregular =
-    [(spelt = "one", ranked = "first"),
-     (spelt = "two", ranked = "second"),
-     (spelt = "three", ranked = "third"),
-     (spelt = "five", ranked = "fifth"),
-     (spelt = "eight", ranked = "eighth"),
-     (spelt = "nine", ranked = "ninth"),
-     (spelt = "twelve", ranked = "twelfth")]
+let irregular = [
+    (spelt = "one", ranked = "first"),
+    (spelt = "two", ranked = "second"),
+    (spelt = "three", ranked = "third"),
+    (spelt = "five", ranked = "fifth"),
+    (spelt = "eight", ranked = "eighth"),
+    (spelt = "nine", ranked = "ninth"),
+    (spelt = "twelve", ranked = "twelfth")
+]
 
 ranked_word(word: string) -> string =>
-    let special = irregular |> find(entry => entry.spelt =~ word) in
+    let special =
+        irregular |> find(entry => entry.spelt =~ word)
+    in
     if let known = special then
         known.ranked
     elif word[word.length - 1] == 'y' then
@@ -76,7 +90,9 @@ ordinal(value: long) -> string is
     let cut =
         (0..text.length)
             |> reverse()
-            |> find(index => text[index] == ' ' \/ text[index] == '-')
+            |> find(index =>
+                text[index] == ' ' \/ text[index] == '-'
+            )
 
     if let at = cut then
         return "{text[0::at]}{ranked_word(text[at + 1..<0])}"
@@ -86,13 +102,21 @@ ordinal(value: long) -> string is
 si
 
 as_number(text: string) -> long =>
-    if text.contains(".") \/ text.contains("e") \/ text.contains("E") then
+    if
+        text.contains(".") \/
+        text.contains("e") \/
+        text.contains("E")
+    then
         long(double.parse(text))
     else
         long.parse(text)
     fi
 
-["1", "2", "3", "4", "5", "11", "65", "100", "101", "272", "23456",
- "8007006005004003", "00123.0", "1.23e2"]
+[
+    "1", "2", "3", "4", "5", "11", "65", "100", "101", "272",
+    "23456",
+    "8007006005004003", "00123.0", "1.23e2"
+]
     |> each(text =>
-        write_line("{text,18}  {ordinal(as_number(text))}"))
+        write_line("{text,18}  {ordinal(as_number(text))}")
+    )

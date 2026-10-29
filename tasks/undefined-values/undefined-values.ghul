@@ -24,12 +24,18 @@ let names: LIST[string]? = null
 write_line("names is absent: {!names?}")
 let count = names?.count
 
-write_line("its count, or nothing: {count?.to_string() ?? "nothing"}")
+write_line(
+    "its count, or nothing: {count?.to_string() ?? "nothing"}"
+)
 
 let uninitialised: int mut
 
-write_line("a deferred local starts at its default: {uninitialised}")
+write_line(
+    "a deferred local starts at its default: {uninitialised}"
+)
 
 let first_even = [1, 3, 5] |> find(n => n % 2 == 0)
 
-write_line("no even number: {first_even?.to_string() ?? "none"}")
+write_line(
+    "no even number: {first_even?.to_string() ?? "none"}"
+)

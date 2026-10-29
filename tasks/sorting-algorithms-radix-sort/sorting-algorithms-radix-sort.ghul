@@ -9,8 +9,7 @@ radix_sort(values: List[int]) -> int{} is
         let place mut = 1
 
         while largest / place > 0 do
-            let buckets =
-                0..10 |> map(_ => LIST()) |> collect()
+            let buckets = 0..10 |> map(_ => LIST()) |> collect()
 
             for v in current do
                 buckets[v / place % 10].add(v)
@@ -23,8 +22,7 @@ radix_sort(values: List[int]) -> int{} is
         current
     si
 
-    let below =
-        values |> filter(* < 0) |> map(- *) |> collect()
+    let below = values |> filter(* < 0) |> map(- *) |> collect()
     let above = values |> filter(* >= 0) |> collect()
     let negatives = sort_magnitudes(below)
     let others = sort_magnitudes(above)
@@ -35,4 +33,6 @@ si
 let values = [170, 45, 75, -90, -802, 24, 2, 66, 0, -1, 802]
 
 write_line("before: {values |> join(" ")}")
-write_line("after:  {LIST(values) |> radix_sort() |> join(" ")}")
+write_line(
+    "after:  {LIST(values) |> radix_sort() |> join(" ")}"
+)

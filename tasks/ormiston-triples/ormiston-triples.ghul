@@ -1,14 +1,17 @@
 use default
 use System.Math.*
 
-write_line("looking for runs of three primes sharing their digits")
+write_line(
+    "looking for runs of three primes sharing their digits"
+)
 write_line("")
 
 let top = 1_000_000_000
 let segment_size = 1 << 20
 
 base_primes(bound: int) -> int{} is
-    let composite = repeat(false, bound + 1) |> collect_mutable()
+    let composite =
+        repeat(false, bound + 1) |> collect_mutable()
 
     let factor mut = 2
 
@@ -65,7 +68,9 @@ primes_below(bound: int) -> int{} is
 si
 
 signature(value: int) -> long =>
-    value |> digits() |> reduce(0L, (acc, d) => acc + (1L << (4 * d)))
+    value
+        |> digits()
+        |> reduce(0L, (acc, d) => acc + (1L << (4 * d)))
 
 let smallest = LIST()
 let triples mut = 0
@@ -86,8 +91,10 @@ for prime in primes_below(top) do
 
     let mark = signature(prime)
 
-    if two_back > 0 /\ one_back_signature == mark /\
-       two_back_signature == mark
+    if
+        two_back > 0 /\
+        one_back_signature == mark /\
+        two_back_signature == mark
     then
         triples = triples + 1
 
@@ -102,13 +109,18 @@ for prime in primes_below(top) do
     one_back_signature = mark
 od
 
-write_line("the smallest member of the first 25 Ormiston triples:")
+write_line(
+    "the smallest member of the first 25 Ormiston triples:"
+)
 
 for row in 0..5 do
-    let cells = smallest[row * 5..row * 5 + 5] |> map(v => "{v,12:N0}")
+    let cells =
+        smallest[row * 5..row * 5 + 5] |> map(v => "{v,12:N0}")
 
     write_line(cells |> join(""))
 od
 
 write_line("")
-write_line("there are {triples:N0} Ormiston triples below one billion")
+write_line(
+    "there are {triples:N0} Ormiston triples below one billion"
+)

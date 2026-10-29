@@ -3,4 +3,6 @@ use default
 4::120
     |> filter(n => is_prime(prime_factors(n).count))
     |> chunk(10)
-    |> each(row => write_line(row |> map(n => "{n,4}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(n => "{n,4}") |> join(""))
+    )

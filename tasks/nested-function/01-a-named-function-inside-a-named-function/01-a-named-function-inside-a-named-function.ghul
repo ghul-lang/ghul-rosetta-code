@@ -8,8 +8,7 @@ make_list(separator: string) -> string is
         "{counter}{separator}{item}"
     si
 
-    let items = ["first", "second", "third"]
-        |> map(make_item)
+    let items = ["first", "second", "third"] |> map(make_item)
 
     return items |> join("\n")
 si

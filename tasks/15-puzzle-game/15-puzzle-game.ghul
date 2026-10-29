@@ -6,8 +6,7 @@ let squares = side * side
 
 let random = System.Random(20260908)
 
-let board =
-    1::squares |> map(* % squares) |> collect_mutable()
+let board = 1::squares |> map(* % squares) |> collect_mutable()
 
 blank() -> int => board |> find_index(* == 0)!
 
@@ -34,9 +33,10 @@ si
 show() is
     for row in 0..side do
         let line =
-            board[row * side .. row * side + side]
+            board[row * side..row * side + side]
                 |> map(tile =>
-                    if tile == 0 then "  ." else "{tile,3}" fi)
+                    if tile == 0 then "  ." else "{tile,3}" fi
+                )
                 |> join("")
 
         Std.write_line(line)
@@ -47,7 +47,9 @@ si
 
 solved() -> bool =>
     (0..squares)
-        |> all(square => board[square] == (square + 1) % squares)
+        |> all(square =>
+            board[square] == (square + 1) % squares
+        )
 
 // Shuffling by playing legal moves leaves the puzzle solvable,
 // which half of all tile arrangements are not. Twelve moves keeps
@@ -58,7 +60,9 @@ for _ in 0..12 do
     slide(choices[random.next(choices.count)])
 od
 
-Std.write_line("slide a tile next to the space by typing its number")
+Std.write_line(
+    "slide a tile next to the space by typing its number"
+)
 Std.write_line("q gives up")
 Std.write_line()
 
@@ -74,7 +78,8 @@ while !solved() do
         break
     fi
 
-    let wanted = board |> find_index(* == int.parse(typed.trim()))
+    let wanted =
+        board |> find_index(* == int.parse(typed.trim()))
 
     if !wanted? then
         Std.write_line("there is no such tile")

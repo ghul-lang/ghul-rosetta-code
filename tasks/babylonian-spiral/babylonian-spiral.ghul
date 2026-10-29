@@ -9,7 +9,10 @@ let signs = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 steps_of_length(squared: int) -> List[Step] =>
     from(0)
         |> take_while(a => 2 * a * a <= squared)
-        |> map(a => (a, int(round(sqrt(double(squared - a * a))))))
+        |> map(a => (
+            a,
+            int(round(sqrt(double(squared - a * a))))
+        ))
         |> filter(((a, b)) => a * a + b * b == squared)
         |> flat_map(((a, b)) => [
             (x = sx * x, y = sy * y)
@@ -19,8 +22,10 @@ steps_of_length(squared: int) -> List[Step] =>
         |> collect()
 
 bend(from: Step, to: Step) -> double =>
-    let turn = atan2(double(from.y), double(from.x)) -
-        atan2(double(to.y), double(to.x)) in
+    let turn =
+        atan2(double(from.y), double(from.x)) -
+        atan2(double(to.y), double(to.x))
+    in
     turn - 2.0D * pi * floor(turn / (2.0D * pi))
 
 spiral(count: int) -> Step{} is
@@ -38,10 +43,14 @@ spiral(count: int) -> Step{} is
 
         let from = last
 
-        last = candidates
-            |> reduce(candidates[0], (best, next) =>
-                if bend(from, next) < bend(from, best) then next
-                else best fi)
+        last =
+            candidates
+                |> reduce(candidates[0], (best, next) =>
+                    if bend(from, next) < bend(from, best) then
+                        next
+                    else best
+                    fi
+                )
 
         let here = points[points.count - 1]
 
@@ -61,7 +70,8 @@ for row in 0..4 do
             |> skip(row * 10)
             |> take(10)
             |> map(p => "({p.x}, {p.y})")
-            |> join(" "))
+            |> join(" ")
+    )
 od
 
 let many = spiral(10000)
@@ -81,13 +91,19 @@ let half = max(high_x - low_x, high_y - low_y) * 0.52D
 let image = IMAGE(400, 400)
 
 image.view(
-    middle_x - half, middle_y - half, middle_x + half, middle_y + half)
+    middle_x - half,
+    middle_y - half,
+    middle_x + half,
+    middle_y + half
+)
 image.clear(252ub, 250ub, 245ub)
 image.colour(30ub, 60ub, 140ub)
 image.stroke(1.0D)
 image.line(
-    many |> map(p => (x = double(p.x), y = double(p.y)))
-        |> collect())
+    many
+        |> map(p => (x = double(p.x), y = double(p.y)))
+        |> collect()
+)
 
 image.write("spiral.png")
 

@@ -7,7 +7,11 @@ use System.Text.Json.JsonDocumentOptions
 // of Category:Programming Tasks that is not also in the language's own
 // category. The API returns a category's members a batch at a time, and
 // says where to continue from until there are no more.
-members(client: HttpClient, api: string, category: string) -> SET[string] is
+members(
+    client: HttpClient,
+    api: string,
+    category: string
+) -> SET[string] is
     let titles = SET()
     let query =
         "{api}?action=query&list=categorymembers"
@@ -16,24 +20,32 @@ members(client: HttpClient, api: string, category: string) -> SET[string] is
     let next mut = ""
 
     do
-        let text = client.get_string_async("{query}{next}").result
-        let reply = JsonDocument.parse(text, _[JsonDocumentOptions])
+        let text =
+            client.get_string_async("{query}{next}").result
+        let reply = JsonDocument.parse(
+            text,
+            _[JsonDocumentOptions]
+        )
         let root = reply.root_element
         let listed =
-            root.get_property("query")
-                .get_property("categorymembers")
+            root.get_property("query").get_property(
+                "categorymembers"
+            )
 
         for member in listed.enumerate_array() do
-            titles.add(member.get_property("title").get_string() ?? "")
+            titles.add(
+                member.get_property("title").get_string() ?? ""
+            )
         od
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !root.try_get_property("continue", more ref) then
+        if !root.try_get_property("continue", more ref ) then
             break
         fi
 
-        let token = more.get_property("cmcontinue").get_string() ?? ""
+        let token =
+            more.get_property("cmcontinue").get_string() ?? ""
 
         next =
             "&cmcontinue={System.Uri.escape_data_string(token)}"
@@ -43,12 +55,16 @@ members(client: HttpClient, api: string, category: string) -> SET[string] is
     titles
 si
 
-unimplemented(api: string, language: string) -> List[string] => (
+unimplemented(
+    api: string,
+    language: string
+) -> List[string] => (
     let client = HttpClient()
 
     // The wiki refuses a request that does not say what is making it.
-    client.default_request_headers.user_agent
-        .parse_add("ghul-rosetta-code/1.0")
+    client.default_request_headers.user_agent.parse_add(
+        "ghul-rosetta-code/1.0"
+    )
 
     let tasks = members(client, api, "Programming_Tasks")
     let solved = members(client, api, language)
@@ -59,10 +75,16 @@ unimplemented(api: string, language: string) -> List[string] => (
         |> collect()
 )
 
-let language = if let [language, ..] = args then language else "Ghul" fi
-let missing = unimplemented("https://rosettacode.org/w/api.php", language)
+let language =
+    if let [language, ..] = args then language else "Ghul" fi
+let missing = unimplemented(
+    "https://rosettacode.org/w/api.php",
+    language
+)
 
-write_line("{missing.count} tasks are not implemented in {language}:")
+write_line(
+    "{missing.count} tasks are not implemented in {language}:"
+)
 
 for title in missing do
     write_line("    {title}")

@@ -15,23 +15,30 @@ hailstone(n: int) -> int{} is
         fi
 
         current =
-            if current % 2 == 0 then current / 2 else 3 * current + 1 fi
+            if current % 2 == 0 then
+                current / 2
+            else
+                3 * current + 1
+            fi
     od
 si
 
 let limit = 100_000
 
-let lengths =
-    1::limit |> map(n => hailstone(n) |> count())
+let lengths = 1::limit |> map(n => hailstone(n) |> count())
 
 let peak =
     lengths
-    |> index()
-    |> map(entry => (n = entry.index + 1, steps = entry.value))
-    |> reduce((n = 0, steps = 0),
-        (best, item) => if item.steps > best.steps then item
-                        else best
-                        fi)
+        |> index()
+        |> map(entry => (
+            n = entry.index + 1,
+            steps = entry.value
+        ))
+        |> reduce((n = 0, steps = 0), (best, item) =>
+            if item.steps > best.steps then item
+            else best
+            fi
+        )
 
 let tallest = peak.steps
 let longest = peak.n
@@ -39,9 +46,12 @@ let longest = peak.n
 let image = IMAGE(860, 520)
 
 image.view(
-    0.0, 0.0,
-    double(limit), double(tallest) + 18.0,
-    62.0)
+    0.0,
+    0.0,
+    double(limit),
+    double(tallest) + 18.0,
+    62.0
+)
 
 image.colour(80ub, 80ub, 80ub)
 image.stroke(1.0)
@@ -69,7 +79,13 @@ image.colour(200ub, 40ub, 40ub)
 image.stroke(6.0)
 image.line(marked_x, marked_y, marked_x, marked_y)
 
-image.text(marked_x, marked_y + 7.0, 13.0, "{longest}", Anchor.CENTRE)
+image.text(
+    marked_x,
+    marked_y + 7.0,
+    13.0,
+    "{longest}",
+    Anchor.CENTRE
+)
 
 image.write("hailstone.png")
 

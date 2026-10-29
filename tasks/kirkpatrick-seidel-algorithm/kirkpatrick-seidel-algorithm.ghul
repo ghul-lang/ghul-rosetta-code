@@ -15,12 +15,24 @@ median(values: double{}) -> double =>
     sorted[(sorted.count - 1) / 2]
 
 leftmost(points: List[P]) -> P =>
-    points |> reduce(points[0], (b, p) =>
-        if p.x < b.x \/ (p.x == b.x /\ p.y > b.y) then p else b fi)
+    points
+        |> reduce(points[0], (b, p) =>
+            if p.x < b.x \/ (p.x == b.x /\ p.y > b.y) then
+                p
+            else
+                b
+            fi
+        )
 
 rightmost(points: List[P]) -> P =>
-    points |> reduce(points[0], (b, p) =>
-        if p.x > b.x \/ (p.x == b.x /\ p.y > b.y) then p else b fi)
+    points
+        |> reduce(points[0], (b, p) =>
+            if p.x > b.x \/ (p.x == b.x /\ p.y > b.y) then
+                p
+            else
+                b
+            fi
+        )
 
 bridge(points: List[P], a: double) -> (P, P) is
     if points.count == 2 then
@@ -34,10 +46,13 @@ bridge(points: List[P], a: double) -> (P, P) is
 
     for i in 0..points.count / 2 do
         let p = points[2 * i], q = points[2 * i + 1]
-        let (left, right) = if p.x < q.x then (p, q) else (q, p) fi
+        let (left, right) =
+            if p.x < q.x then (p, q) else (q, p) fi
 
         if left.x == right.x then
-            kept.add(if left.y > right.y then left else right fi)
+            kept.add(
+                if left.y > right.y then left else right fi
+            )
         else
             pairs.add((left, right))
         fi
@@ -53,9 +68,12 @@ bridge(points: List[P], a: double) -> (P, P) is
 
     let k = median(pairs |> map((p, q) => slope(p, q)))
     let height = p => p.y - k * p.x
-    let top = points |> map(height) |> reduce(height(points[0]), max)
+    let top =
+        points |> map(height) |> reduce(height(points[0]), max)
     let touching =
-        points |> filter(p => height(p) >= top - 1.0e-12) |> collect()
+        points
+            |> filter(p => height(p) >= top - 1.0e-12)
+            |> collect()
 
     let low = leftmost(touching)
     let high = rightmost(touching)
@@ -84,7 +102,10 @@ upper(points: List[P], first: P, last: P) -> P{} is
         return [first]
     fi
 
-    let (left, right) = bridge(points, median(points |> map(p => p.x)))
+    let (left, right) = bridge(
+        points,
+        median(points |> map(p => p.x))
+    )
 
     let before =
         if left =~ first then [first]
@@ -104,38 +125,56 @@ upper(points: List[P], first: P, last: P) -> P{} is
 si
 
 upper_hull(points: List[P]) -> P{} =>
-    let first = leftmost(points), last = rightmost(points) in
-    let between = points |> filter(p => p.x > first.x /\ p.x < last.x) in
-    upper(between ++ [first, last] |> collect(), first, last)
+    let
+        first = leftmost(points),
+        last = rightmost(points)
+    in
+        let between =
+            points |> filter(p => p.x > first.x /\ p.x < last.x)
+        in
+        upper(
+            between ++ [first, last] |> collect(),
+            first,
+            last
+        )
 
 flipped(points: P{}) -> List[P] =>
     points |> map(p => P(p.x, -p.y)) |> collect()
 
 backwards(items: List[P]) -> P{} =>
-    (0..items.count)
-        |> map(i => items[items.count - 1 - i])
+    (0..items.count) |> map(i => items[items.count - 1 - i])
 
 hull(points: List[P]) -> List[P] =>
     let
         top = upper_hull(points),
         bottom = flipped(upper_hull(flipped(points))),
-        inner = bottom |> backwards() |> skip(1) |> take(bottom.count - 2)
+        inner =
+            bottom
+                |> backwards()
+                |> skip(1)
+                |> take(bottom.count - 2)
     in
         top ++ inner |> collect()
 
-turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
+turns_left(o: P, a: P, b: P) -> bool =>
+    (a - o) × (b - o) >= 0.0D
 
 monotone_chain(points: List[P]) -> P{} is
-    let sorted = points |> sort((a, b) => a.x <> b.x) |> collect()
+    let sorted =
+        points |> sort((a, b) => a.x <> b.x) |> collect()
     let chain = LIST()
 
     for pass in [sorted, backwards(sorted)] do
         let start = chain.count
 
         for p in pass do
-            while chain.count >= start + 2 /\
+            while
+                chain.count >= start + 2 /\
                 turns_left(
-                    chain[chain.count - 2], chain[chain.count - 1], p)
+                    chain[chain.count - 2],
+                    chain[chain.count - 1],
+                    p
+                )
             do
                 chain.remove_at(chain.count - 1)
             od
@@ -157,7 +196,8 @@ let points =
                 angle = 2.0D * pi * random.next_double(),
                 r = sqrt(random.next_double())
             in
-            P(r * cos(angle), r * sin(angle)))
+                P(r * cos(angle), r * sin(angle))
+        )
         |> collect()
 
 let result = hull(points)
@@ -183,7 +223,8 @@ image.stroke(2.0D)
 image.line(
     result ++ [result[0]]
         |> map(p => (x = p.x, y = p.y))
-        |> collect())
+        |> collect()
+)
 
 image.write("hull.png")
 

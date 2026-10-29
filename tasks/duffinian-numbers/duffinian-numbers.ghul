@@ -6,8 +6,12 @@ is_duffinian(value: int) -> bool =>
 duffinians() -> int{} => from(2) |> filter(is_duffinian)
 
 triplets() -> int{} =>
-    from(2) |> filter(c =>
-        is_duffinian(c) /\ is_duffinian(c + 1) /\ is_duffinian(c + 2))
+    from(2)
+        |> filter(c =>
+            is_duffinian(c) /\
+            is_duffinian(c + 1) /\
+            is_duffinian(c + 2)
+        )
 
 write_line("the first fifty Duffinian numbers:")
 

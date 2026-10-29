@@ -13,7 +13,9 @@ let size = repeat(3, order) |> product()
 for down in 0..size do
     write_line(
         (0..size)
-            |> map(across => if filled(across, down) then "#" else " " fi)
+            |> map(across =>
+                if filled(across, down) then "#" else " " fi
+            )
             |> join("")
     )
 od

@@ -1,12 +1,22 @@
 use default
 
-let path =
-    IO.Path.combine(IO.Path.get_temp_path(), "ghul-rosetta-mtime-test.txt")
+let path = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "ghul-rosetta-mtime-test.txt"
+)
 
 IO.File.write_all_text(path, "hello")
 
 let before = IO.File.get_last_write_time_utc(path)
-let target = System.DateTime(2000, 1, 1, 0, 0, 0, System.DateTimeKind.UTC)
+let target = System.DateTime(
+    2000,
+    1,
+    1,
+    0,
+    0,
+    0,
+    System.DateTimeKind.UTC
+)
 
 let is_after_2000 = before > target
 

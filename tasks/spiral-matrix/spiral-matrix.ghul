@@ -1,15 +1,22 @@
 use default
 
-let headings = [(down = 0, across = 1), (down = 1, across = 0),
-                (down = 0, across = -1), (down = -1, across = 0)]
+let headings = [
+    (down = 0, across = 1), (down = 1, across = 0),
+    (down = 0, across = -1), (down = -1, across = 0)
+]
 
 spiral(size: int) -> LIST[int]{} is
-    let grid = 0..size
-        |> map(_ => LIST(0..size |> map(column => -1)))
-        |> collect()
+    let grid =
+        0..size
+            |> map(_ => LIST(0..size |> map(column => -1)))
+            |> collect()
 
-    let free = (row, column) =>
-        row >= 0 /\ row < size /\ column >= 0 /\ column < size /\
+    let free =
+        (row, column) =>
+            row >= 0 /\
+            row < size /\
+            column >= 0 /\
+            column < size /\
             grid[row][column] < 0
 
     let row mut = 0
@@ -36,4 +43,5 @@ si
 
 spiral(5)
     |> each(row =>
-        write_line(row |> map(n => "{n,3}") |> join("")))
+        write_line(row |> map(n => "{n,3}") |> join(""))
+    )

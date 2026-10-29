@@ -14,12 +14,14 @@ let root = "walk-sample"
 
 IO.Directory.create_directory("{root}/sub/deeper")
 
-for (name, dir) in [
-    ("a.txt", root),
-    ("b.log", root),
-    ("c.txt", "{root}/sub"),
-    ("d.txt", "{root}/sub/deeper")
-] do
+for
+    (name, dir) in [
+        ("a.txt", root),
+        ("b.log", root),
+        ("c.txt", "{root}/sub"),
+        ("d.txt", "{root}/sub/deeper")
+    ]
+do
     IO.File.write_all_text("{dir}/{name}", "")
 od
 

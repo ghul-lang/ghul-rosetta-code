@@ -9,12 +9,15 @@ step(cells: string, rule: int) -> string => (
     let next = LIST()
 
     for i in 1..padded.length - 1 do
-        let pattern = (0..3)
-            |> map(offset => padded[i - 1 + offset])
-            |> map(cell => if cell == '#' then 1 else 0 fi)
-            |> reduce(0, (bits, bit) => bits * 2 + bit)
+        let pattern =
+            (0..3)
+                |> map(offset => padded[i - 1 + offset])
+                |> map(cell => if cell == '#' then 1 else 0 fi)
+                |> reduce(0, (bits, bit) => bits * 2 + bit)
 
-        next.add(if (rule >> pattern) & 1 == 1 then '#' else '.' fi)
+        next.add(
+            if (rule >> pattern) & 1 == 1 then '#' else '.' fi
+        )
     od
 
     string(next.to_array())
@@ -32,7 +35,11 @@ si
 for rule in [90, 30] do
     write_line("rule {rule}:")
 
-    for (age, cells) in generations("#", rule) |> take(25) |> index() do
+    for
+        (age, cells) in generations("#", rule)
+            |> take(25)
+            |> index()
+    do
         let margin = string(' ', 25 - age)
 
         write_line("{margin}{cells}")

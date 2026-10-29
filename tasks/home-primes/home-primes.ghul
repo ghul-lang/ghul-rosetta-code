@@ -45,8 +45,11 @@ prime_factors(value: bigint) -> bigint{} is
         yield remaining
     else
         let divisor = pollard_rho(remaining)
-        yield in (prime_factors(divisor) ++
-            prime_factors(remaining / divisor)) |> sort()
+        yield in (
+            prime_factors(divisor) ++
+            prime_factors(remaining / divisor)
+        )
+            |> sort()
     fi
 si
 
@@ -56,8 +59,10 @@ home_prime_chain(start: bigint) -> bigint{} is
     while !is_prime(current) do
         yield current
 
-        let digits = current |> prime_factors()
-            |> map(factor => "{factor}")
+        let digits =
+            current
+                |> prime_factors()
+                |> map(factor => "{factor}")
 
         current = bigint.parse(digits |> join(""))
     od
@@ -68,9 +73,10 @@ si
 show(start: int) is
     let chain = home_prime_chain(cast(start)) |> collect()
     let steps = chain.count - 1
-    let stages = 0..steps
-        |> map(index => "HP{chain[index]}({steps - index})")
-        |> collect_mutable()
+    let stages =
+        0..steps
+            |> map(index => "HP{chain[index]}({steps - index})")
+            |> collect_mutable()
 
     if steps == 0 then
         stages.add("HP{chain[0]}")

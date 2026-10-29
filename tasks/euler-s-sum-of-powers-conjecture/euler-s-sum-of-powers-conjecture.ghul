@@ -12,7 +12,10 @@ search() -> (int, int, int, int, int)? is
             for x2 in x1 + 1..250 do
                 for x3 in x2 + 1..250 do
                     let total =
-                        fifth[x0] + fifth[x1] + fifth[x2] + fifth[x3]
+                        fifth[x0] +
+                        fifth[x1] +
+                        fifth[x2] +
+                        fifth[x3]
 
                     if total > fifth[249] then
                         break

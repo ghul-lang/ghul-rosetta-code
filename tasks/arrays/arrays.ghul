@@ -2,8 +2,12 @@ use default
 
 let fixed = ["apple", "orange", "pear"]
 
-write_line("{$fixed} has {fixed.count}, and fixed[1] is {fixed[1]}")
-write_line("an array indexer only reads, so a list carries the writes")
+write_line(
+    "{$fixed} has {fixed.count}, and fixed[1] is {fixed[1]}"
+)
+write_line(
+    "an array indexer only reads, so a list carries the writes"
+)
 
 let growing = LIST(fixed)
 
@@ -11,4 +15,6 @@ growing.add("lemon")
 
 growing[0] = "quince"
 
-write_line("{$growing} has {growing.count}, and growing[0] is {growing[0]}")
+write_line(
+    "{$growing} has {growing.count}, and growing[0] is {growing[0]}"
+)

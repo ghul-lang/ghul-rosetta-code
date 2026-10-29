@@ -5,12 +5,13 @@ use default
 // numbers at least as long as the next square, adding that square extends
 // the run by the square itself, which keeps it longer than every square
 // still to come: nothing above m is ever missing, and m is the last.
-
 let reachable = LIST([true])
 let root mut = 0
 
 run_after(start: int) -> int =>
-    start + 1..reachable.count |> take_while(n => reachable[n]) |> count()
+    start + 1..reachable.count
+        |> take_while(n => reachable[n])
+        |> count()
 
 do
     root = root + 1
@@ -29,11 +30,14 @@ do
     od
 
     let next = (root + 1) * (root + 1)
-    let gaps =
-        1..reachable.count |> filter(n => !reachable[n])
+    let gaps = 1..reachable.count |> filter(n => !reachable[n])
 
-    if let last = gaps |> find(gap => run_after(gap) >= next) then
-        write_line("Numbers that are not the sum of distinct squares:")
+    if let
+        last = gaps |> find(gap => run_after(gap) >= next)
+    then
+        write_line(
+            "Numbers that are not the sum of distinct squares:"
+        )
         write_line(gaps |> take_while(* <= last) |> join(" "))
 
         break

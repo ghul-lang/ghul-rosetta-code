@@ -17,9 +17,14 @@ walk(every: int) -> Ant{} is
     let row mut = size / 2, column mut = size / 2
     let facing mut = 0, steps mut = 0
 
-    while row >= 0 /\ row < size /\ column >= 0 /\ column < size do
+    while
+        row >= 0 /\ row < size /\ column >= 0 /\ column < size
+    do
         if steps % every == 0 then
-            yield (row = row, column = column, steps = steps, left = false)
+            yield (
+                row = row, column = column, steps = steps,
+                left = false
+            )
         fi
 
         let here = row * size + column
@@ -32,7 +37,9 @@ walk(every: int) -> Ant{} is
         steps = steps + 1
     od
 
-    yield (row = row, column = column, steps = steps, left = true)
+    yield (
+        row = row, column = column, steps = steps, left = true
+    )
 si
 
 draw(image: IMAGE, row: int, column: int) is
@@ -50,8 +57,11 @@ draw(image: IMAGE, row: int, column: int) is
 
     image.colour(220ub, 50ub, 40ub)
     image.fill_rectangle(
-        double(column) - 0.5D, double(row) - 0.5D,
-        double(column) + 1.5D, double(row) + 1.5D)
+        double(column) - 0.5D,
+        double(row) - 0.5D,
+        double(column) + 1.5D,
+        double(row) + 1.5D
+    )
 si
 
 let image = IMAGE(pixels, pixels)
@@ -62,7 +72,9 @@ let animation = ANIMATION(pixels, pixels)
 
 for ant in walk(steps_per_frame) do
     if ant.left then
-        write_line("the ant left the field after {ant.steps} steps")
+        write_line(
+            "the ant left the field after {ant.steps} steps"
+        )
     fi
 
     draw(image, ant.row, ant.column)

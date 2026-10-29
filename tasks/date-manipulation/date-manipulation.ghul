@@ -11,31 +11,49 @@ let offsets = [
     ("CST", -6), ("CDT", -5),
     ("MST", -7), ("MDT", -6),
     ("PST", -8), ("PDT", -7)
-] |> collect_map()
+]
+    |> collect_map()
 
 let format = "MMMM d yyyy h:mmtt"
 let culture = CultureInfo.invariant_culture
 
 parse(text: string) -> DateTimeOffset =>
-    let split = text.last_index_of(' '), zone = text[split + 1..<0] in
-    let clock = DateTime.parse_exact(text[0..split], format, culture) in
-    DateTimeOffset(clock, TimeSpan.from_hours(offsets[zone]))
+    let
+        split = text.last_index_of(' '),
+        zone = text[split + 1..<0]
+    in
+        let clock = DateTime.parse_exact(
+            text[0..split],
+            format,
+            culture
+        )
+        in
+        DateTimeOffset(
+            clock,
+            TimeSpan.from_hours(offsets[zone])
+        )
 
 show(time: DateTimeOffset) -> string =>
     let
         date = time.to_string("MMMM d yyyy h:mm", culture),
         meridiem = time.to_string("tt", culture).to_lower()
     in
-    "{date}{meridiem} (UTC{time.to_string("zzz")})"
+        "{date}{meridiem} (UTC{time.to_string("zzz")})"
 
 let start = parse("March 7 2009 7:30pm EST")
 let later = start.add_hours(12.0)
 
 in_zone(time: DateTimeOffset, id: string) -> DateTimeOffset =>
     TimeZoneInfo.convert_time(
-        time, TimeZoneInfo.find_system_time_zone_by_id(id))
+        time,
+        TimeZoneInfo.find_system_time_zone_by_id(id)
+    )
 
 write_line("Start:           {show(start)}")
 write_line("12 hours later:  {show(later)}")
-write_line("In New York:     {show(in_zone(later, "America/New_York"))}")
-write_line("In London:       {show(in_zone(later, "Europe/London"))}")
+write_line(
+    "In New York:     {show(in_zone(later, "America/New_York"))}"
+)
+write_line(
+    "In London:       {show(in_zone(later, "Europe/London"))}"
+)
