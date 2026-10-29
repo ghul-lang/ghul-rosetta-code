@@ -1,5 +1,7 @@
 use default
 
+use Rgb = (int, int, int)
+
 greet((greeting, name): (string, string)) -> string =>
     "{greeting}, {name}!"
 
@@ -9,7 +11,7 @@ volume([width, height, depth]: int[]) -> int =>
 first_three([a, b, c, ..]: int{}) -> string =>
     "{a}, {b}, {c}, ..."
 
-label((name, [x, y], (r, g, b)): (string, int[], (int, int, int))) -> string =>
+label((name, [x, y], (r, g, b)): (string, int[], Rgb)) -> string =>
     "{name} at ({x}, {y}) in #{r:X2}{g:X2}{b:X2}"
 
 apply[T.., U](f: T.. -> U, arguments: T..) -> U => f(arguments)
