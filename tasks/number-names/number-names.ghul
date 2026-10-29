@@ -48,7 +48,7 @@ cardinal(value: long) -> string is
         return small[0]
     fi
 
-    let parts = groups(value) |> collect()
+    let parts = value |> groups() |> collect()
 
     let named = parts
         |> index()

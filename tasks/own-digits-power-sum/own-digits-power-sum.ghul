@@ -4,7 +4,7 @@ power(base: int, exponent: int) -> long =>
     repeat(long(base), exponent) |> product()
 
 digit_counts(value: long) -> List[int] =>
-    let found = digits(value) |> memo() in
+    let found = value |> digits() |> memo() in
     0::9 |> map(d => found |> count(* == long(d))) |> collect()
 
 held(combination: List[int], digit: int) -> int =>

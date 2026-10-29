@@ -19,7 +19,7 @@ read_numbers(prompt: string) -> int[]? is
 
     write_line("> {line.trim()}")
 
-    return words(line)
+    return line |> words()
         |> map(int.parse)
         |> collect()
 si

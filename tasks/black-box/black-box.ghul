@@ -111,7 +111,7 @@ let cost mut = 0
 while let line = read_line() do
     write_line("> {line}")
 
-    let fields = words(line) |> collect()
+    let fields = line |> words() |> collect()
 
     if fields.count == 2 /\ fields[0] =~ "fire" then
         let point = int.parse(fields[1])

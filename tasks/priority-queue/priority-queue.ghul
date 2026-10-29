@@ -87,4 +87,4 @@ let queue = PRIORITY_QUEUE()
     JOB(2, "Tax return")
 ] |> each(queue.push)
 
-drain(queue) |> each(job => write_line("{job}"))
+queue |> drain() |> each(job => write_line("{job}"))

@@ -7,7 +7,8 @@ let program =
 
 let memory =
     LIST(
-        words(program)
+        program
+            |> words()
             |> map(int.parse))
 
 let ip mut = 0

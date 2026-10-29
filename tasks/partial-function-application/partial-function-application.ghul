@@ -10,6 +10,6 @@ let fsf1 = fs(f1, *)
 let fsf2 = fs(f2, *)
 
 for s in [0::3, [2, 4, 6, 8]] do
-    write_line("fsf1: {fsf1(s) |> join(", ")}")
-    write_line("fsf2: {fsf2(s) |> join(", ")}")
+    write_line("fsf1: {s |> fsf1() |> join(", ")}")
+    write_line("fsf2: {s |> fsf2() |> join(", ")}")
 od

@@ -2,7 +2,7 @@ use default
 
 use Implicant = (bits: int, dashes: int)
 
-ones(value: int) -> int => digits(value, 2) |> sum()
+ones(value: int) -> int => value |> digits(2) |> sum()
 
 covers(implicant: Implicant, minterm: int) -> bool =>
     (minterm & \implicant.dashes) == implicant.bits

@@ -35,7 +35,7 @@ while odd * odd <= limit do
 od
 
 length_in(value: int, base: int) -> int =>
-    digits(value, base) |> count()
+    value |> digits(base) |> count()
 
 factor_length(value: int, base: int) -> int is
     let total mut = 0

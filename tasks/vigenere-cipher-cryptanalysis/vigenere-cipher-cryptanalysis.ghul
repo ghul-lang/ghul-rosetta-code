@@ -23,14 +23,15 @@ column(text: string, length: int, start: int) -> string =>
         |> join("")
 
 coincidence(text: string) -> double =>
-    (counts(text) |> sum_by(n => double(n * (n - 1)))) /
+    (text |> counts() |> sum_by(n => double(n * (n - 1)))) /
     double(text.length * (text.length - 1))
 
 shift(text: string, by: int) -> string =>
     text |> map(c => chr(ord(c) - by)) |> join("")
 
 chi_squared(text: string) -> double =>
-    counts(text)
+    text
+        |> counts()
         |> index()
         |> sum_by(n => (
             let expected = english[n.index] * double(text.length)

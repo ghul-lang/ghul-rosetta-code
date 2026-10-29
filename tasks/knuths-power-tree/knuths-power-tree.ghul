@@ -63,7 +63,7 @@ si
 
 show_path(target: int) is
     build_until(target)
-    let texts = path_to(target) |> map(step => "{step}")
+    let texts = target |> path_to() |> map(step => "{step}")
 
     write_line("path to {target}: {texts |> join(" ")}")
 si

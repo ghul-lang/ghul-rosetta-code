@@ -43,7 +43,7 @@ let histogram =
     (0..4) |> map(_ => repeat(0, 10) |> collect_mutable()) |> collect()
 
 for results in outcomes(games.count) do
-    for (place, points) in standings(results) |> index() do
+    for (place, points) in results |> standings() |> index() do
         histogram[place][points] = histogram[place][points] + 1
     od
 od

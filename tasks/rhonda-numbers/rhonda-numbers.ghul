@@ -1,8 +1,8 @@
 use default
 
 is_rhonda(value: int, base: int) -> bool =>
-    digits(value, base) |> product() ==
-    base * (prime_factors(value) |> sum())
+    value |> digits(base) |> product() ==
+    base * (value |> prime_factors() |> sum())
 
 rhondas(base: int) -> int{} =>
     from(2) |> filter(is_rhonda(*, base))

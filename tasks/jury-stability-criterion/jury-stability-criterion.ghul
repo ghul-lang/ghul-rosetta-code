@@ -31,7 +31,7 @@ is_stable(p: Polynomial) -> bool =>
     p[0] > 0.0 /\
         evaluate(p, 1.0) > 0.0 /\
         sign * evaluate(p, -1.0) > 0.0 /\
-        rows(p) |> all(row =>
+        p |> rows() |> all(row =>
             double.abs(row[0]) > double.abs(row[row.count - 1]))
 
 show(p: Polynomial) -> string =>

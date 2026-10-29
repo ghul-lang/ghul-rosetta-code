@@ -7,7 +7,7 @@ splits_repeated_doubling(value: int) -> bool =>
 is_super_poulet(value: int) -> bool =>
     splits_repeated_doubling(value) /\
         !is_prime(value) /\
-        (divisors(value) |> all(splits_repeated_doubling))
+        (value |> divisors() |> all(splits_repeated_doubling))
 
 let super_poulets = from(3, 2) |> filter(is_super_poulet)
 

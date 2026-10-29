@@ -20,4 +20,4 @@ si
 
 let numbers = [5, 3, 8, 1, 9, 2, 7, 1, 9]
 
-write_line(counting_sort(numbers, 1, 9) |> join())
+write_line(numbers |> counting_sort(1, 9) |> join())

@@ -65,7 +65,7 @@ primes_below(bound: int) -> int{} is
 si
 
 signature(value: int) -> long =>
-    digits(value) |> reduce(0L, (acc, d) => acc + (1L << (4 * d)))
+    value |> digits() |> reduce(0L, (acc, d) => acc + (1L << (4 * d)))
 
 let smallest = LIST()
 let triples mut = 0

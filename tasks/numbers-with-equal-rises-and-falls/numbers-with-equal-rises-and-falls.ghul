@@ -1,7 +1,7 @@
 use default
 
 balanced(n: int) -> bool =>
-    digits(n)
+    n |> digits()
     |> windows(2)
     |> map(pair => Ghul.Math.sign(pair[1] - pair[0]))
     |> sum() == 0

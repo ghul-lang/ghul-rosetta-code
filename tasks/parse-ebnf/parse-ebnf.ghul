@@ -279,7 +279,7 @@ class MATCHER(grammar: GRAMMAR, text: string) is
 
     accepts() -> bool =>
         let start = grammar.rules[grammar.order[0]] in
-        ends(start, 0) |> any(end => blank(end) == text.length)
+        start |> ends(0) |> any(end => blank(end) == text.length)
 si
 
 let cases = [

@@ -5,7 +5,7 @@ adjacent(left: int, right: int) -> bool =>
 
 let floors = [1, 2, 3, 4, 5]
 
-permutations(floors)
+floors |> permutations()
     |> map(order =>
         (baker = order[0], cooper = order[1], fletcher = order[2],
          miller = order[3], smith = order[4]))

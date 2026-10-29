@@ -90,7 +90,7 @@ while outcome.length == 0 do
 
     sense()
 
-    Std.write_line("tunnels lead to {tunnels(player) |> join(", ")}")
+    Std.write_line("tunnels lead to {player |> tunnels() |> join(", ")}")
     Std.write("your move: ")
 
     let typed = Std.read_line()

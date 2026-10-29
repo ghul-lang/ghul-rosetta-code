@@ -138,7 +138,7 @@ run(arguments: List[string]) is
     let outcome = parse(arguments)
 
     if outcome? then
-        write_line("  {evaluate(outcome.request) |> join(" ")}")
+        write_line("  {outcome.request |> evaluate() |> join(" ")}")
     else
         write_line("  error: {outcome.message}")
     fi

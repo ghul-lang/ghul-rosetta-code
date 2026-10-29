@@ -42,7 +42,7 @@ steps(digits: string) -> Step{} is
 si
 
 checksum(digits: string) -> int =>
-    steps(digits) |> reduce(0, (_, step) => step.c)
+    digits |> steps() |> reduce(0, (_, step) => step.c)
 
 show_steps(digits: string) is
     write_line(" i  ni  p[i, ni]  c")

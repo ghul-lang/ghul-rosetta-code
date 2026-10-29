@@ -3,14 +3,14 @@ use default
 let symbols = "0123456789ABCDEF"
 
 in_base(n: long, base: int) -> string =>
-    digits(n, long(base)) |> map(d => symbols[int(d)]) |> string()
+    n |> digits(long(base)) |> map(d => symbols[int(d)]) |> string()
 
 value_of(digits: string, base: int) -> long =>
     digits |> reduce(0L, (total, c) =>
         total * long(base) + long(symbols.index_of(c)))
 
 is_penholodigital(square: long, base: int) -> bool =>
-    let ds = digits(square, long(base)) |> collect() in
+    let ds = square |> digits(long(base)) |> collect() in
     ds.count == base - 1 /\
         ds |> collect_set() |> count() == ds.count /\
         ds |> all(* > 0L)

@@ -21,7 +21,7 @@ let elements =
     "meitnerium darmstadtium roentgenium copernicium nihonium "
     "flerovium moscovium livermorium tennessine oganesson"
 
-let names = words(elements) |> collect()
+let names = elements |> words() |> collect()
 
 write_line("last revised: {revised}")
 write_line("{names.count} elements, the last is {names[names.count - 1]}")

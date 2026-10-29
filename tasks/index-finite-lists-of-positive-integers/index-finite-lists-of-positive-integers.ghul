@@ -21,7 +21,9 @@ unrank(index: bigint) -> bigint{} is
 
     digits.reverse()
 
-    let values = words(digits |> join(""))
+    let values = digits
+        |> join("")
+        |> words()
         |> map(bigint.parse)
         |> collect()
 

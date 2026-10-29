@@ -78,7 +78,7 @@ while !solved() do
 
     if !wanted? then
         Std.write_line("there is no such tile")
-    elif !(neighbours(blank()) |> contains(wanted)) then
+    elif !(blank() |> neighbours() |> contains(wanted)) then
         Std.write_line("that tile is not next to the space")
     else
         slide(wanted)

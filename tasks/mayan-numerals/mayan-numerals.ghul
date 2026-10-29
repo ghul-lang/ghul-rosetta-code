@@ -38,7 +38,7 @@ glyph(digit: int) -> string[] is
 si
 
 cartouche(n: int) -> string{} => (
-    let glyphs = vigesimal(n) |> map(glyph) |> collect()
+    let glyphs = n |> vigesimal() |> map(glyph) |> collect()
     let across = repeat("----", glyphs.count)
 
     let lines = LIST(["+{across |> join("+")}+"])
@@ -53,8 +53,8 @@ cartouche(n: int) -> string{} => (
 )
 
 for n in [4005, 8017, 326205, 886205, 3199999] do
-    write_line("{n:N0} is {vigesimal(n) |> join(".")} in base 20:")
-    cartouche(n) |> each(line => write_line("  {line}"))
+    write_line("{n:N0} is {n |> vigesimal() |> join(".")} in base 20:")
+    n |> cartouche() |> each(line => write_line("  {line}"))
     write_line("")
 od
 

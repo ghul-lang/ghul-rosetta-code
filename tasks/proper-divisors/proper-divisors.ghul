@@ -23,7 +23,7 @@ proper_divisors(n: int) -> List[int] is
 si
 
 for n in 1::10 do
-    write_line("{n,2}: [{proper_divisors(n) |> join(", ")}]")
+    write_line("{n,2}: [{n |> proper_divisors() |> join(", ")}]")
 od
 
 let counts = 1::20_000 |> map(n => (n, proper_divisors(n).count))

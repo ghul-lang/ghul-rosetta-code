@@ -12,9 +12,9 @@ running_maxima(heights: int{}) -> int{} is
 si
 
 water(heights: int[]) -> int => (
-    let left = running_maxima(heights) |> collect()
+    let left = heights |> running_maxima() |> collect()
     let right =
-        running_maxima(heights |> reverse()) |> collect()
+        heights |> reverse() |> running_maxima() |> collect()
     let last = heights.count - 1
 
     (0..heights.count)

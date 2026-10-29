@@ -265,7 +265,8 @@ in_check(position: POSITION, white: bool) -> bool =>
     attacked(position, position.squares |> find_index(* == king)!, !white)
 
 legal_moves(position: POSITION) -> List[Move] =>
-    pseudo_moves(position)
+    position
+        |> pseudo_moves()
         |> filter(m =>
             !in_check(played(position, m), position.white_to_move))
         |> collect()
@@ -331,7 +332,8 @@ si
 
 choose(position: POSITION) -> Move =>
     let ranked =
-        legal_moves(position)
+        position
+            |> legal_moves()
             |> map(m =>
                 let after = played(position, m) in
                 (move = m, score = -search(after, 2, -mate * 2, mate * 2)))
@@ -397,7 +399,8 @@ while true do
 
     let text = line.trim().to_lower()
     let chosen =
-        legal_moves(position)
+        position
+            |> legal_moves()
             |> filter(m => notation(m) =~ text \/ notation(m) =~ "{text}q")
             |> first()
 

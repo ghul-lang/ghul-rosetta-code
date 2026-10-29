@@ -56,7 +56,7 @@ home_prime_chain(start: bigint) -> bigint{} is
     while !is_prime(current) do
         yield current
 
-        let digits = prime_factors(current)
+        let digits = current |> prime_factors()
             |> map(factor => "{factor}")
 
         current = bigint.parse(digits |> join(""))

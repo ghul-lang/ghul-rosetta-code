@@ -55,7 +55,7 @@ let payloads = 0::6 |> map(index => "Payload#{index}") |> collect()
 write_line("filled template:")
 write_line("  {render(fill(template, payloads))}")
 
-let used = positions(template) |> collect_set()
+let used = template |> positions() |> collect_set()
 
 let unused =
     (0..payloads.count)

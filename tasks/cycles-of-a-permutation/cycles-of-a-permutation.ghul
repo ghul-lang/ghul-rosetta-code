@@ -67,12 +67,14 @@ one_line(cycle_notation: List[List[int]], size: int)
 si
 
 order(one_line: List[int]) -> int =>
-    cycles(one_line)
+    one_line
+        |> cycles()
         |> map(cycle => cycle.count)
         |> reduce(1, lcm)
 
 signature(one_line: List[int]) -> int =>
-    let even_cycles = cycles(one_line)
+    let even_cycles = one_line
+        |> cycles()
         |> filter(c => c.count % 2 == 0)
         |> count() in
     if even_cycles % 2 == 0 then 1 else -1 fi
@@ -90,7 +92,8 @@ show_one_line(one_line: List[int]) -> string => (
 )
 
 show_cycles(one_line: List[int]) -> string =>
-    cycles(one_line)
+    one_line
+        |> cycles()
         |> map(cycle => "({cycle |> map(p => "{p}") |> join(" ")})")
         |> join(" ")
 
