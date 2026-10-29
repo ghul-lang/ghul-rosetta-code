@@ -35,8 +35,10 @@ let faces: (normal: Point, u: Point, v: Point, colour: Colour)[] = [
 ]
 
 turned(p: Point, angle: double) -> Point =>
-    let x = p.x * cos(angle) + p.z * sin(angle) in
-    let z = p.z * cos(angle) - p.x * sin(angle) in
+    let
+        x = p.x * cos(angle) + p.z * sin(angle),
+        z = p.z * cos(angle) - p.x * sin(angle)
+    in
     (
         x = x,
         y = p.y * cos(tilt) - z * sin(tilt),

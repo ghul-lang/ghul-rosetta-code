@@ -12,8 +12,10 @@ p(leading: int, nth: int) -> int =>
     in
         from(1)
             |> filter(power =>
-                let scaled = double(power) * log_two in
-                let fraction = scaled - floor(scaled) in
+                let
+                    scaled = double(power) * log_two,
+                    fraction = scaled - floor(scaled)
+                in
                 fraction >= lower /\ fraction < upper
             )
             |> skip(nth - 1)

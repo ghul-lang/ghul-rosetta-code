@@ -19,8 +19,10 @@ expand(m: Matrix, alternating: bool) -> long =>
     else
         0..m.count
             |> sum_by(j =>
-                let negative = alternating /\ j % 2 == 1 in
-                let sign = if negative then -1L else 1L fi in
+                let
+                    negative = alternating /\ j % 2 == 1,
+                    sign = if negative then -1L else 1L fi
+                in
                 sign * m[0][j] * expand(minor(m, j), alternating))
     fi
 

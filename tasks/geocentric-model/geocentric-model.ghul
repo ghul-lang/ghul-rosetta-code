@@ -27,8 +27,10 @@ let bodies: Body[] = [
 ]
 
 around_sun(body: Body, year: double) -> (x: double, y: double) =>
-    let turns = body.start / 360.0D + year / body.period in
-    let angle = 2.0D * pi * turns in
+    let
+        turns = body.start / 360.0D + year / body.period,
+        angle = 2.0D * pi * turns
+    in
     (x = body.radius * cos(angle), y = body.radius * sin(angle))
 
 around_earth(body: Body, year: double) -> (x: double, y: double) =>

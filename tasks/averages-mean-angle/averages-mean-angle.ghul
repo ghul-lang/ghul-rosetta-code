@@ -8,8 +8,10 @@ mean_angle(degrees: List[double]) -> double =>
         degrees
             |> map(degrees_to_radians)
     in
-    let sines = radians |> sum_by(sin) in
-    let cosines = radians |> sum_by(cos) in
+    let
+        sines = radians |> sum_by(sin),
+        cosines = radians |> sum_by(cos)
+    in
     radians_to_degrees(atan2(sines, cosines))
 
 let lists = [[350.0, 10.0], [90.0, 180.0, 270.0, 360.0], [10.0, 20.0, 30.0]]

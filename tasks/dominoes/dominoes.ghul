@@ -67,9 +67,11 @@ show(grid: Grid, partner: List[int]) is
         let cells =
             0..columns
                 |> map(column =>
-                    let cell = row * columns + column in
-                    let joined = partner[cell] == cell + 1 in
-                    let gap = if joined then "-" else " " fi in
+                    let
+                        cell = row * columns + column,
+                        joined = partner[cell] == cell + 1,
+                        gap = if joined then "-" else " " fi
+                    in
                     "{grid[row][column]}{gap}")
                 |> join("")
 
@@ -79,8 +81,10 @@ show(grid: Grid, partner: List[int]) is
             let links =
                 0..columns
                     |> map(column =>
-                        let cell = row * columns + column in
-                        let below = partner[cell] == cell + columns in
+                        let
+                            cell = row * columns + column,
+                            below = partner[cell] == cell + columns
+                        in
                         if below then "| " else "  " fi)
                     |> join("")
 

@@ -68,8 +68,10 @@ show() is
         let cells =
             (0..9)
                 |> map(column =>
-                    let digit = grid[row * 9 + column] in
-                    let text = if digit == 0 then "." else "{digit}" fi in
+                    let
+                        digit = grid[row * 9 + column],
+                        text = if digit == 0 then "." else "{digit}" fi
+                    in
                     if column % 3 == 0 then "| {text}" else text fi)
                 |> join(" ")
 

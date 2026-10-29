@@ -9,8 +9,10 @@ jort_sort[T: Ghul.Comparable[T]](values: T[]) -> bool is
 si
 
 report[T: Ghul.Comparable[T]](values: T[]) =>
-    let shown = values |> map(value => "{value}") |> join(" ") in
-    let answer = if jort_sort(values) then "true" else "false" fi in
+    let
+        shown = values |> map(value => "{value}") |> join(" "),
+        answer = if jort_sort(values) then "true" else "false" fi
+    in
     write_line("[{shown}] was already sorted: {answer}")
 
 report([1, 2, 3, 4, 5])

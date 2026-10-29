@@ -121,8 +121,10 @@ for row in 0::high_y - low_y |> map(high_y - *) do
     let cells =
         (low_x::high_x)
             |> map(column =>
-                let open = known(column - 1, row, 0) in
-                let side = if open then " " else "|" fi in
+                let
+                    open = known(column - 1, row, 0),
+                    side = if open then " " else "|" fi
+                in
                 "{side}{cell(column, row)}")
             |> join("")
 

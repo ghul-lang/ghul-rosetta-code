@@ -50,8 +50,10 @@ shift(text: string, key: string, direction: int) -> string =>
 round_trip(
     message: string, sender: string, receiver: string
 ) -> (sent: string, received: string) =>
-    let sent = shift(message, take_key(sender, message.length), 1) in
-    let key = take_key(receiver, sent.length) in
+    let
+        sent = shift(message, take_key(sender, message.length), 1),
+        key = take_key(receiver, sent.length)
+    in
     (sent = sent, received = shift(sent, key, -1))
 
 let folder =

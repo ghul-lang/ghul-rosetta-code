@@ -77,8 +77,10 @@ od
 let blocks_placed = placed!
 
 pixel(y: int, x: int) -> char =>
-    let row = Math.min(y / 2, grid - 1) in
-    let column = Math.min(x / 2, grid - 1) in
+    let
+        row = Math.min(y / 2, grid - 1),
+        column = Math.min(x / 2, grid - 1)
+    in
     blocks[blocks_placed[row * grid + column]][y - 2 * row][x - 2 * column]
 
 

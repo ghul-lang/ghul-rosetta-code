@@ -135,8 +135,10 @@ let most_called =
         |> group_by(name => name)
         |> map(uses => (name = uses.key, uses = uses.value.count))
         |> sort((a, b) =>
-            let a_literal = if a.name.starts_with("$") then 1 else 0 fi in
-            let b_literal = if b.name.starts_with("$") then 1 else 0 fi in
+            let
+                a_literal = if a.name.starts_with("$") then 1 else 0 fi,
+                b_literal = if b.name.starts_with("$") then 1 else 0 fi
+            in
             if a.uses != b.uses then b.uses <> a.uses
             elif a_literal != b_literal then a_literal <> b_literal
             else a.name <> b.name fi)

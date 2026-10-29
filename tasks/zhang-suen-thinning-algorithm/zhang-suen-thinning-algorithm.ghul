@@ -29,8 +29,10 @@ let black =
         |> map(row =>
             (0..columns)
                 |> map(column =>
-                    let inside = row >= 1 /\ row <= picture.count in
-                    let line = if inside then picture[row - 1] else "" fi in
+                    let
+                        inside = row >= 1 /\ row <= picture.count,
+                        line = if inside then picture[row - 1] else "" fi
+                    in
                     column >= 1 /\ column <= line.length /\
                         line[column - 1] == '#')
                 |> collect_mutable())

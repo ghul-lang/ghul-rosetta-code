@@ -35,8 +35,10 @@ singly_even_magic_square(n: int) -> Square is
             |> map(row =>
                 0..n
                     |> map(column =>
-                        let quadrant = (row / half) * 2 + column / half in
-                        let value = small[row % half][column % half] in
+                        let
+                            quadrant = (row / half) * 2 + column / half,
+                            value = small[row % half][column % half]
+                        in
                         value + offset[quadrant] * cells)
                     |> collect_mutable())
             |> collect()

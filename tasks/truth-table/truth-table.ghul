@@ -81,8 +81,10 @@ evaluate(expression: Expression, values: MAP[string, bool]) -> bool =>
     when negation: Expression.NOT then
         !evaluate(negation.operand, values)
     when pair: Expression.BINARY then
-        let left = evaluate(pair.left, values) in
-        let right = evaluate(pair.right, values) in
+        let
+            left = evaluate(pair.left, values),
+            right = evaluate(pair.right, values)
+        in
         case pair.symbol
         when '&' then left /\ right
         when '|' then left \/ right

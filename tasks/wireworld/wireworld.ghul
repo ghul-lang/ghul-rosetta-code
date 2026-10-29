@@ -9,8 +9,10 @@ let margin = 10
 let frames = 24
 
 read(path: string) -> Grid =>
-    let lines = IO.File.read_all_lines(path) in
-    let width = lines |> map(line => line.length) |> reduce(0, int.max) in
+    let
+        lines = IO.File.read_all_lines(path),
+        width = lines |> map(line => line.length) |> reduce(0, int.max)
+    in
     lines |> map(line => line.pad_right(width)) |> collect()
 
 heads_around(grid: Grid, row: int, column: int) -> int =>

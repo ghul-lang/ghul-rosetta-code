@@ -1,8 +1,10 @@
 use default
 
 modes[T](values: T{}) -> T{} =>
-    let groups = values |> group_by(value => value) in
-    let most = groups.values |> map(group => group.count) |> max()! in
+    let
+        groups = values |> group_by(value => value),
+        most = groups.values |> map(group => group.count) |> max()!
+    in
     groups
         |> filter((_, group) => group.count == most)
         |> map((value, _) => value)

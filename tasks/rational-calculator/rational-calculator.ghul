@@ -16,8 +16,10 @@ struct Q(top: bigint, bottom: bigint) is
 si
 
 make(top: bigint, bottom: bigint) -> Q =>
-    let g = bigint.greatest_common_divisor(top, bottom) in
-    let sign = if bottom.sign < 0 then -1n else 1n fi in
+    let
+        g = bigint.greatest_common_divisor(top, bottom),
+        sign = if bottom.sign < 0 then -1n else 1n fi
+    in
     Q(sign * top / g, sign * bottom / g)
 
 whole(n: bigint) -> Q => Q(n, 1n)

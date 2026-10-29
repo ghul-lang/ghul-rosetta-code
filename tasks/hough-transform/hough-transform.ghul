@@ -14,8 +14,10 @@ pentagon() -> IMAGE => (
     image.line(
         (0::5)
             |> map(i =>
-                let a = pi * (0.5D + 0.4D * double(i)) in
-                let x = 100.0D + 70.0D * cos(a) in
+                let
+                    a = pi * (0.5D + 0.4D * double(i)),
+                    x = 100.0D + 70.0D * cos(a)
+                in
                 (x = x, y = 105.0D - 70.0D * sin(a)))
             |> collect())
 

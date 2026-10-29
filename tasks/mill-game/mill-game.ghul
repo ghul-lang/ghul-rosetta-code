@@ -135,8 +135,10 @@ makes_mill(move: Move, side: char) -> bool is
 si
 
 removable(side: char) -> List[string] =>
-    let pieces = holding(side) in
-    let loose = pieces |> filter(p => !in_mill(p, side)) |> collect() in
+    let
+        pieces = holding(side),
+        loose = pieces |> filter(p => !in_mill(p, side)) |> collect()
+    in
     if loose.count > 0 then loose else pieces fi
 
 pick[T](items: List[T]) -> T => items[random.next(items.count)]

@@ -65,8 +65,10 @@ say(text: string) is
 si
 
 penalised(seat: int, cards: string) =>
-    let drawn = acts(seat, "draw {cards}", "draws {cards}") in
-    let missed = if seat == 0 then "miss" else "misses" fi in
+    let
+        drawn = acts(seat, "draw {cards}", "draws {cards}"),
+        missed = if seat == 0 then "miss" else "misses" fi
+    in
     say("  {drawn} and {missed} a turn")
 
 draw(player: int, count: int) is

@@ -38,8 +38,10 @@ identity(n: int) -> Matrix =>
         |> collect()
 
 show(c: Complex) -> string =>
-    let sign = if c.imaginary < 0.0 then "-" else "+" fi in
-    let size = double.abs(c.imaginary) in
+    let
+        sign = if c.imaginary < 0.0 then "-" else "+" fi,
+        size = double.abs(c.imaginary)
+    in
     "{c.real:0.####}{sign}{size:0.####}i"
 
 print(m: Matrix) =>

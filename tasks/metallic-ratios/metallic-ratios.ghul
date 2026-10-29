@@ -21,8 +21,10 @@ approximate(b: bigint, places: int) -> (value: string, iterations: int) =>
             |> index()
             |> find((_, ratios) => ratios[0] =~ ratios[1])!
     in
-    let digits = pair[1].to_string().pad_left(places + 1, '0') in
-    let split = digits.length - places in
+    let
+        digits = pair[1].to_string().pad_left(places + 1, '0'),
+        split = digits.length - places
+    in
     ("{digits.substring(0, split)}.{digits.substring(split)}", n + 1)
 
 for b in 0::9 do

@@ -20,8 +20,10 @@ spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
          high = alongs |> reduce(alongs[0], System.Math.max))
 
 separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
-    let (low, high) = spread(first, axis) in
-    let (other_low, other_high) = spread(second, axis) in
+    let
+        (low, high) = spread(first, axis),
+        (other_low, other_high) = spread(second, axis)
+    in
     high < other_low \/ other_high < low
 
 
