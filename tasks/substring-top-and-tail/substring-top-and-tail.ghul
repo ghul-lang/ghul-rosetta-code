@@ -1,11 +1,9 @@
 use default
-use System.Globalization.StringInfo
 
 for subject in ["knights", "𝔨𝔫𝔦𝔤𝔥𝔱𝔰"] do
-    let text = StringInfo(subject)
-    let count = text.length_in_text_elements
+    let characters = graphemes(subject) |> collect()
 
-    write_line("no first: {text.substring_by_text_elements(1)}")
-    write_line("no last:  {text.substring_by_text_elements(0, count - 1)}")
-    write_line("no ends:  {text.substring_by_text_elements(1, count - 2)}")
+    write_line("no first: {characters[1..<0] |> string()}")
+    write_line("no last:  {characters[0..<1] |> string()}")
+    write_line("no ends:  {characters[1..<1] |> string()}")
 od
