@@ -1,0 +1,19 @@
+use default
+use Ghul.curry
+use Ghul.uncurry
+
+repeat_text(text: string, times: int) -> string =>
+    string.join("", repeat(text, times))
+
+let plus = curry(int.`+)
+let add_ten = plus(10)
+
+write_line("plus(7)(8) = {plus(7)(8)}")
+write_line("add_ten(32) = {add_ten(32)}")
+write_line("[1, 2, 3] |> map(plus(100)) = {[1, 2, 3] |> map(plus(100))}")
+
+let curried = curry(repeat_text)
+let dashes = curried("-")
+
+write_line("dashes(5) = {dashes(5)}")
+write_line("uncurry(curried)(\"ab\", 3) = {uncurry(curried)("ab", 3)}")

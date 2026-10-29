@@ -1,0 +1,5 @@
+plus(7)(8) = 15
+add_ten(32) = 42
+[1, 2, 3] |> map(plus(100)) = [101, 102, 103]
+dashes(5) = -----
+uncurry(curried)("ab", 3) = ababab
