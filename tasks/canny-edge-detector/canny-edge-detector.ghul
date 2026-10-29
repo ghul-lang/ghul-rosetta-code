@@ -74,8 +74,7 @@ class FIELD is
     si
 
     at(x: int, y: int) -> double =>
-        values[clamp(y, 0, height - 1) * width +
-        clamp(x, 0, width - 1)]
+        values[clamp(y, 0, height - 1) * width + clamp(x, 0, width - 1)]
 
     put(x: int, y: int, v: double) is
         values[y * width + x] = v

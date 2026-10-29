@@ -20,14 +20,16 @@ merkle_root(content: ubyte[]) -> ubyte[] is
     let hashes mut =
         0..(content.count + block_size - 1) / block_size
             |> map(index =>
-                let at = index * block_size in
-                SHA256.hash_data(
-                    content[at..System.Math.min(
+                let
+                    at = index * block_size,
+                    end = System.Math.min(
                         at + block_size,
                         content.count
-                    )]
-                        |> collect()
-                )
+                    )
+                in
+                    SHA256.hash_data(
+                        content[at..end] |> collect()
+                    )
             )
             |> collect()
 

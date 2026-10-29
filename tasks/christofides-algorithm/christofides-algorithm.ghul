@@ -57,8 +57,7 @@ perfect_matching(vertices: List[int]) -> Edge{} =>
                 in
                 [
                     (from = vertices[0], to = vertices[partner])
-                ] ++
-                perfect_matching(rest)
+                ] ++ perfect_matching(rest)
                     |> collect()
             )
             |> min_by(matching => length(matching))!

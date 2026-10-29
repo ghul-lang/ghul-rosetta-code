@@ -83,10 +83,10 @@ let blocks_placed = placed!
 pixel(y: int, x: int) -> char =>
     let
         row = Math.min(y / 2, grid - 1),
-        column = Math.min(x / 2, grid - 1)
+        column = Math.min(x / 2, grid - 1),
+        block = blocks[blocks_placed[row * grid + column]]
     in
-        blocks[blocks_placed[row * grid + column]][y -
-        2 * row][x - 2 * column]
+        block[y - 2 * row][x - 2 * column]
 
 write_line("collapsed on attempt {tries}")
 write_line("")

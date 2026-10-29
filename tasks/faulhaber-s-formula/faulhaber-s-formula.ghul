@@ -67,8 +67,7 @@ faulhaber(p: int) -> string =>
                     fraction(
                         binomial(long(p + 1), long(j)),
                         long(p + 1)
-                    ) *
-                    bernoulli(j),
+                    ) * bernoulli(j),
                 power = p + 1 - j
             ))
             |> filter(t => t.coefficient.numerator != 0L)

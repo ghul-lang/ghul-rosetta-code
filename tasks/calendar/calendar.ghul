@@ -16,12 +16,9 @@ centre(text: string, width: int) -> string =>
 
 month_lines(year: int, month: int) -> string[] =>
     let
-        offset =
-            cast int(System.DateTime(
-                year,
-                month,
-                1
-            ).day_of_week),
+        offset = cast int(
+            System.DateTime(year, month, 1).day_of_week
+        ),
         days = System.DateTime.days_in_month(year, month),
         weeks =
             repeat("  ", offset)

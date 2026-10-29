@@ -2,8 +2,8 @@ use default
 
 next_term(numerator: int, denominator: int) -> (int, int) => (
     denominator,
-    denominator *
-    (2 * (numerator / denominator) + 1) - numerator
+    denominator * (2 * (numerator / denominator) + 1) -
+    numerator
 )
 
 let terms = stream((1, 1), ((numerator, denominator)) =>

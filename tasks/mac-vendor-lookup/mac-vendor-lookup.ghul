@@ -10,7 +10,8 @@ vendor(api: string, mac: string) -> string? is
             HttpClient().get_async("{api}{mac}").result
 
         if
-            response.status_code == System.Net.HttpStatusCode.NOT_FOUND
+            response.status_code ==
+            System.Net.HttpStatusCode.NOT_FOUND
         then
             return "N/A"
         elif !response.is_success_status_code then

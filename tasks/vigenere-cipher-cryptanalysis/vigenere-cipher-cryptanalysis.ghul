@@ -93,8 +93,7 @@ let average_coincidence =
                 |> sum_by(i =>
                     coincidence(column(letters, length, i))
                 )
-        ) /
-        double(length)
+        ) / double(length)
 
 let length =
     1::20

@@ -23,8 +23,8 @@ humble() -> long{} is
 
         for which in 0..factors.count do
             if
-                found[next_index[which]] *
-                factors[which] == smallest
+                found[next_index[which]] * factors[which] ==
+                smallest
             then
                 next_index[which] = next_index[which] + 1
             fi

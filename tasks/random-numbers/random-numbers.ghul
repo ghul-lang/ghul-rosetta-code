@@ -27,8 +27,7 @@ let variance =
             |> sum_by(value =>
                 (value - average) * (value - average)
             )
-    ) /
-    double(sample.count)
+    ) / double(sample.count)
 
 write_line("{sample.count} values")
 let first_five =

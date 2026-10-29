@@ -59,7 +59,8 @@ test_entry() is
         let tls = SslStream(listener.accept_tcp_client().get_stream(),
             false,
             (_, presented, _, _) =>
-            presented?.get_cert_hash_string() =~ identity.thumbprint
+            presented?.get_cert_hash_string() =~
+            identity.thumbprint
         )
 
         tls.authenticate_as_server(certificate, true, false)
