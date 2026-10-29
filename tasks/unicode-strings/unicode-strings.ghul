@@ -56,6 +56,8 @@ let form_c = System.Text.NormalizationForm.FORM_C
 let normalized = decomposed.normalize(form_c)
 
 write_line("normalization comes from .NET too")
-write_line("  {composed} is one char, {decomposed} is two")
+write_line(
+    "  \\u00E9 is {composed.length} char, "
+    "e\\u0301 is {decomposed.length}")
 write_line("  composed =~ decomposed is {composed =~ decomposed}")
 write_line("  after NFC it is {composed =~ normalized}")

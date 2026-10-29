@@ -19,6 +19,6 @@ every .NET encoding is reachable, here for né
   UTF-32   6E 00 00 00 E9 00 00 00
 
 normalization comes from .NET too
-  é is one char, é is two
+  \u00E9 is 1 char, e\u0301 is 2
   composed =~ decomposed is false
   after NFC it is true
