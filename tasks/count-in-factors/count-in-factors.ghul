@@ -19,7 +19,11 @@ factors(n: int) -> int{} is
 si
 
 describe(n: int) -> string =>
-    if n == 1 then "1" else n |> factors() |> map(f => "{f}") |> join(" x ") fi
+    if n == 1 then
+        "1"
+    else
+        n |> factors() |> map(f => "{f}") |> join(" x ")
+    fi
 
 for n in 1::25 do
     write_line("{n}: {describe(n)}")
