@@ -10,7 +10,7 @@ escape("\\n", '\n')
 escape("\\r", '\r')
 escape("\\\\", '\\')
 escape("\\\"", '\"')
-escape("\\u20AC", '€')
+escape("\\u20AC", '\u20AC')
 
 write_line("")
 write_line("a brace in an interpolated string is doubled: {{ }}")

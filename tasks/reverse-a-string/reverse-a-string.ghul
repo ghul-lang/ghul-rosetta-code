@@ -1,7 +1,9 @@
 use default
 
 reverse(text: string) -> string =>
-    text |> reduce("", (reversed, character) => "{character}{reversed}")
+    graphemes(text) |> collect() |> reverse() |> string()
 
 write_line(reverse("asdf"))
 write_line(reverse("Hello, World!"))
+write_line(reverse("as⃝df̅"))
+write_line(reverse("Mañana 😀"))

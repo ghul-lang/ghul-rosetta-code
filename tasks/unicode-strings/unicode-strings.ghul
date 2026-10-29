@@ -11,7 +11,7 @@ bytes(encoding: System.Text.Encoding, text: string) -> string =>
     encoding.get_bytes(text) |> map(b => "{b:X2}") |> join(" ")
 
 code_points(text: string) -> int =>
-    text |> filter(c => !char.is_low_surrogate(c)) |> count()
+    text.enumerate_runes() |> count()
 
 write_line("source is UTF-8, and a literal holds what it says")
 write_line("  héllo wörld")
@@ -34,12 +34,12 @@ write_line("  6 × 7 = {6 × 7}")
 write_line("  evens ∪ odds = {joined}")
 write_line("")
 
-let face = "😀"
+let face = "\uD83D\uDE00"
 
 write_line("a char is a UTF-16 code unit, so this one is two")
 write_line("  {face}: {face.length} chars, {code_points(face)} point")
 write_line("  escaped and literal agree: {face =~ "😀"}")
-write_line("  \\u20AC is {"€"}, \\u0041cat is {"Acat"}")
+write_line("  \\u20AC is {"\u20AC"}, \\u0041cat is {"\u0041cat"}")
 write_line("")
 
 let text = "né"
@@ -50,8 +50,8 @@ write_line("  UTF-16   {bytes(System.Text.Encoding.unicode, text)}")
 write_line("  UTF-32   {bytes(System.Text.Encoding.utf32, text)}")
 write_line("")
 
-let composed = "é"
-let decomposed = "é"
+let composed = "\u00E9"
+let decomposed = "e\u0301"
 let form_c = System.Text.NormalizationForm.FORM_C
 let normalized = decomposed.normalize(form_c)
 
