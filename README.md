@@ -148,7 +148,7 @@ The tests assert the program's output only. There are deliberately no IL snapsho
 with no `il.expected` has its IL ignored.
 
 The tasks `llvm-tasks.txt` lists also build and pass as native executables, compiled for the llvm
-target against ghul-core, the ghul-runtime sources and, for a task that draws, ghul-raster, each
+target against the ghul-runtime library's sources and, for a task that draws, ghul-raster, each
 taken from `libraries/` or else checked out beside this repository, and linked with the
 `ghul-llvm` on the `PATH` or named by `GHUL_LLVM`:
 
@@ -346,7 +346,7 @@ the playground can run it (no `playground-unsupported` marker).
 `wasm` on each part is true when the playground can run that part compiled to WebAssembly: it is
 listed in `wasm-passing.txt`, and it has no `playground-unsupported` marker.
 `wasm-passing.txt` names one program a line, by the part's `id` in the index, under a `#` line
-giving the compiler, ghul-core, ghul-runtime and ghul-raster versions it was checked with. Those are the
+giving the compiler, ghul-runtime and ghul-raster versions it was checked with. Those are the
 versions the playground's compile service builds WebAssembly with, so the file is regenerated
 whenever those move: every program is compiled with `--target wasm` against those versions, run
 under Node, and listed when its output matches `run.expected` and every image it is expected to
