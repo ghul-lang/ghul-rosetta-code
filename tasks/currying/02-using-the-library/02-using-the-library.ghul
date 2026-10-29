@@ -2,12 +2,10 @@ use default
 use Ghul.curry
 use Ghul.uncurry
 
-add(a: int, b: int) -> int => a + b
-
 repeat_text(text: string, times: int) -> string =>
     string.join("", repeat(text, times))
 
-let plus = curry(add)
+let plus = curry(int.`+)
 let add_ten = plus(10)
 
 write_line("plus(7)(8) = {plus(7)(8)}")
