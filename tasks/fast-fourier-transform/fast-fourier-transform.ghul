@@ -44,6 +44,6 @@ let input =
 write_line("input:  {input |> map(c => c.real) |> join(", ")}")
 write_line("")
 
-for (i, value) in fft(input) |> index() do
+for (i, value) in input |> fft() |> index() do
     write_line("X[{i}] = {show(value)}  magnitude {value.magnitude:F4}")
 od

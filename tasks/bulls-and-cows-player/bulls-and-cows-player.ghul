@@ -42,7 +42,7 @@ do
         break
     fi
 
-    let parts = words(line) |> collect()
+    let parts = line |> words() |> collect()
     let given = (bulls = int.parse(parts[0]), cows = int.parse(parts[1]))
 
     write_line("bulls {given.bulls}, cows {given.cows}")

@@ -90,7 +90,7 @@ od
 write_line("")
 write_line("the twelve of size five:")
 
-art(levels[4]) |> each(line => write_line(line))
+levels[4] |> art() |> each(line => write_line(line))
 
 let sixes = levels[5]
 let size = 12.0D

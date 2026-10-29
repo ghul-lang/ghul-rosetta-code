@@ -47,7 +47,8 @@ from_pairs(square: string, pairs: List[char]) -> string =>
 
 encrypt(square: string, key: string, text: string) -> string =>
     let pairs = to_pairs(square, text) in
-    read_order(key)
+    key
+        |> read_order()
         |> flat_map(column =>
             column..pairs.length
                 |> step(key.length)

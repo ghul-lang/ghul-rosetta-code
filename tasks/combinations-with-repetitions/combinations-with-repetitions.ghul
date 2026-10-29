@@ -28,6 +28,6 @@ for pick in picks do
 od
 
 let ten_types = LIST(1::10)
-let ways = combos(ten_types, 3) |> count()
+let ways = ten_types |> combos(3) |> count()
 
 write_line("choosing 3 from 10 types: {ways} ways")

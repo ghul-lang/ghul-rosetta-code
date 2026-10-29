@@ -27,7 +27,7 @@ merkle_root(content: ubyte[]) -> ubyte[] is
             |> collect()
 
     while hashes.count > 1 do
-        hashes = paired(hashes) |> collect()
+        hashes = hashes |> paired() |> collect()
     od
 
     return hashes[0]
@@ -36,6 +36,6 @@ si
 let image = IO.File.read_all_bytes("title.png")
 
 write_line(
-    merkle_root(image)
+    image |> merkle_root()
         |> map(byte_value => "{byte_value:x2}")
         |> join(""))

@@ -204,7 +204,7 @@ si
 let tokens = LIST()
 
 while let line = read_line() do
-    let fields = words(line) |> collect()
+    let fields = line |> words() |> collect()
 
     if fields.count >= 3 then
         let name = fields[2]

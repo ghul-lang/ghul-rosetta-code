@@ -32,7 +32,7 @@ let paragraph =
 for width in [40, 62] do
     write_line("wrapped at {width}:")
 
-    wrapped(paragraph, width) |> each(line => write_line(line))
+    paragraph |> wrapped(width) |> each(line => write_line(line))
 
     write_line("")
 od

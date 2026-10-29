@@ -16,7 +16,8 @@ minimum_length(command: string) -> int =>
     command |> filter(char.is_upper) |> count()
 
 let commands =
-    words(table)
+    table
+    |> words()
     |> map(command =>
         (word = command, minimum = minimum_length(command)))
 

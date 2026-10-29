@@ -12,7 +12,7 @@ sums_to(divisors: List[int], target: int) -> bool =>
 
 weird(n: int) -> bool => (
     let proper =
-        divisors(n) |> filter(d => d != n) |> sort_descending() |> collect()
+        n |> divisors() |> filter(d => d != n) |> sort_descending() |> collect()
 
     proper |> sum() > n /\
         !sums_to(proper, n))

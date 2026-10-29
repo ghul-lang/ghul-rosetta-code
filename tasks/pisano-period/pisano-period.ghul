@@ -23,7 +23,8 @@ pisano_prime(prime: int, power: int) -> int is
 si
 
 pisano(value: int) -> int =>
-    factorize(value)
+    value
+        |> factorize()
         |> map(((p, e)) => pisano_prime(p, e))
         |> reduce(1, lcm)
 

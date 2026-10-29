@@ -69,7 +69,7 @@ strides_of(dimensions: List[int]) -> List[int] =>
         |> collect()
 
 embed(tensor: Tensor, strides: List[int]) -> List[int] is
-    let size = shape(tensor)
+    let size = tensor |> shape()
         |> zip(strides)
         |> sum_by((extent, stride) => (extent - 1) * stride)
 
@@ -147,7 +147,7 @@ show_across_lines(tensor: Tensor) -> string =>
         show(tensor)
     fi
 
-let tests = parse_all(IO.File.read_all_text("test-data.txt"))
+let tests = IO.File.read_all_text("test-data.txt") |> parse_all()
     |> chunk(3)
     |> map(c => (h = c[0], f = c[1], g = c[2]))
     |> collect()

@@ -89,7 +89,7 @@ arrange(outline: List[string], descending: bool) -> Outcome is
 
     sort_tree(root, descending)
 
-    Outcome.SORTED(flatten(root, -1, unit) |> collect())
+    Outcome.SORTED(root |> flatten(-1, unit) |> collect())
 si
 
 show(title: string, outline: List[string], descending: bool) is

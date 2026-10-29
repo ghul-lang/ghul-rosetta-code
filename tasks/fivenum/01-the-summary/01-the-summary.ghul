@@ -23,7 +23,7 @@ let datasets = [
 
 for xs in datasets do
     let data_text = xs |> map(x => "{x}") |> join()
-    let result_text = fivenum(xs) |> map(x => "{x}") |> join()
+    let result_text = xs |> fivenum() |> map(x => "{x}") |> join()
 
     write_line("data: {data_text}")
     write_line("fivenum: {result_text}")

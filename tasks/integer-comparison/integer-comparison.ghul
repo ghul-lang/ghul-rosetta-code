@@ -5,7 +5,7 @@ use IO.Std.read_line
 write("a b: ")
 
 if let entered = read_line() then
-    let fields = words(entered) |> collect()
+    let fields = entered |> words() |> collect()
 
     let first = int.parse(fields[0])
     let second = int.parse(fields[1])

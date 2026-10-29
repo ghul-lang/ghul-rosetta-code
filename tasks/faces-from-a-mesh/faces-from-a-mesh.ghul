@@ -10,7 +10,7 @@ rotations(face: List[int]) -> List[int]{} =>
 
 same_perimeter(one: List[int], other: List[int]) -> bool =>
     one.count == other.count /\
-    rotations(other) |> any(turned => turned =~ one)
+    other |> rotations() |> any(turned => turned =~ one)
 
 perimeter(edges: List[Edge]) -> List[int]? is
     let neighbours = MAP()

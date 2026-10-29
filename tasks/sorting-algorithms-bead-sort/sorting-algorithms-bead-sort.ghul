@@ -13,6 +13,6 @@ bead_sort(values: List[int]) -> int{} =>
 
 for values in [[5, 3, 1, 7, 4, 1, 1, 20], [2, 1], [8]] do
     write_line(
-        "{values |> join(" ")} -> {bead_sort(values) |> join(" ")}"
+        "{values |> join(" ")} -> {values |> bead_sort() |> join(" ")}"
     )
 od

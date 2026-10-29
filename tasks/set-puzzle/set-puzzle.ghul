@@ -52,7 +52,7 @@ puzzle(size: int, wanted: int) -> List[CARD] is
     do
         let cards = deal(size)
 
-        if triples(cards) |> filter(is_set) |> count() == wanted then
+        if cards |> triples() |> filter(is_set) |> count() == wanted then
             return cards
         fi
     od
@@ -73,7 +73,7 @@ for (mode, cards, wanted) in deals do
     write_line()
     write_line("containing {wanted} sets")
 
-    for (a, b, c) in triples(cards) |> filter(is_set) do
+    for (a, b, c) in cards |> triples() |> filter(is_set) do
         write_line()
         write_line("    {a}")
         write_line("    {b}")

@@ -119,7 +119,7 @@ hull(points: List[P]) -> List[P] =>
     let
         top = upper_hull(points),
         bottom = flipped(upper_hull(flipped(points))),
-        inner = backwards(bottom) |> skip(1) |> take(bottom.count - 2)
+        inner = bottom |> backwards() |> skip(1) |> take(bottom.count - 2)
     in
         top ++ inner |> collect()
 

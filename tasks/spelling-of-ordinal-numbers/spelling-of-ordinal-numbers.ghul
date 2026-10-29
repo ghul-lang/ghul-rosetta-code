@@ -42,7 +42,7 @@ cardinal(value: long) -> string =>
     if value == 0L then
         "zero"
     else
-        groups(value)
+        value |> groups()
             |> index()
             |> filter(((_, group)) => group > 0)
             |> map(((scale, group)) =>

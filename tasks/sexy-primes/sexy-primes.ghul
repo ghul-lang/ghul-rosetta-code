@@ -35,4 +35,4 @@ let unsexy =
         |> collect()
 
 write_line("unsexy primes below {limit}: {unsexy.count}")
-write_line("  last: {last(unsexy, 10) |> join(" ")}")
+write_line("  last: {unsexy |> last(10) |> join(" ")}")

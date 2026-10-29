@@ -4,7 +4,7 @@ co9(x: long) -> long is
     let n mut = x
 
     while n >= 10L do
-        n = digits(n) |> sum()
+        n = n |> digits() |> sum()
     od
 
     n

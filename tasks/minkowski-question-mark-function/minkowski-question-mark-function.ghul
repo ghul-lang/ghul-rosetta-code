@@ -88,7 +88,7 @@ inverse(y: double) -> double is
         return 0.0D
     fi
 
-    terms(y)
+    y |> terms()
         |> reverse()
         |> reduce(0.0D, (x, term) => 1.0D / (double(term) + x))
 si

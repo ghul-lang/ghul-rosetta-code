@@ -48,24 +48,24 @@ let start =
 
 write_line("nest form:")
 
-render_nest(start, 0) |> each(line => write_line(line))
+start |> render_nest(0) |> each(line => write_line(line))
 
-let indented = to_indent(start, 0) |> collect()
+let indented = start |> to_indent(0) |> collect()
 
 write_line()
 write_line("indent form:")
 
-render_indent(indented) |> each(line => write_line(line))
+indented |> render_indent() |> each(line => write_line(line))
 
 let (rebuilt, _) = to_nest(indented, 0)
 
 write_line()
 write_line("nest form, rebuilt from the indent form:")
 
-render_nest(rebuilt, 0) |> each(line => write_line(line))
+rebuilt |> render_nest(0) |> each(line => write_line(line))
 
-let before = render_nest(start, 0) |> join("\n")
-let after = render_nest(rebuilt, 0) |> join("\n")
+let before = start |> render_nest(0) |> join("\n")
+let after = rebuilt |> render_nest(0) |> join("\n")
 
 write_line()
 write_line("round trip preserved the tree: {before =~ after}")

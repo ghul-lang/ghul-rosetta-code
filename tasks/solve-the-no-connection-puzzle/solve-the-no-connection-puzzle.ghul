@@ -27,13 +27,13 @@ si
 
 let pegs = 1::8
 
-if let solution = permutations(pegs) |> find(peaceful) then
+if let solution = pegs |> permutations() |> find(peaceful) then
     write_line("one solution:")
 
     draw(solution)
 fi
 
-let total = permutations(pegs) |> filter(peaceful) |> count()
+let total = pegs |> permutations() |> filter(peaceful) |> count()
 
 write_line()
 write_line("solutions in all: {total}")

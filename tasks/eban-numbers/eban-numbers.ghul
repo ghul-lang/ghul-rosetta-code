@@ -17,7 +17,7 @@ groups(n: int) -> int{} is
     fi
 si
 
-is_eban(n: int) -> bool => groups(n) |> all(eban_group)
+is_eban(n: int) -> bool => n |> groups() |> all(eban_group)
 
 eban_up_to(limit: int) -> int{} =>
     1::limit |> filter(is_eban)

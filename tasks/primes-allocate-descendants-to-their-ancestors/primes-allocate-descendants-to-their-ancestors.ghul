@@ -22,7 +22,7 @@ ancestors(n: int) -> int{} is
     let current mut = n
 
     while current > 1 /\ !is_prime(current) do
-        let parent = prime_factors(current) |> sum()
+        let parent = current |> prime_factors() |> sum()
 
         if parent == current then
             return
@@ -43,7 +43,7 @@ abbreviated(list: Collections.List[long]) -> string =>
     fi
 
 for n in 1::top do
-    let chain = ancestors(n) |> sort() |> collect()
+    let chain = n |> ancestors() |> sort() |> collect()
     let children = descendants[n]
 
     write_line("[{n}] level {chain.count}, ancestors: "

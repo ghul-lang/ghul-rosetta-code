@@ -94,7 +94,7 @@ digit(value: bool) -> string => if value then "1" else "0" fi
 
 table(source: string) is
     let expression = parse_or(source, 0).value
-    let variables = names(expression) |> distinct() |> collect()
+    let variables = expression |> names() |> distinct() |> collect()
 
     write_line("{source}")
     write_line("  {variables |> join(" ")} | result")

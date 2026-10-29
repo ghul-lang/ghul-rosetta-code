@@ -3,7 +3,7 @@ use default
 let factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi
 
 digit_factorial_sum(n: int, base_value: int) -> int =>
-    digits(n, base_value)
+    n |> digits(base_value)
         |> sum_by(factorial)
 
 factorions(base_value: int) -> List[int] =>

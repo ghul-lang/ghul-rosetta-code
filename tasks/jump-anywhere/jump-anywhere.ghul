@@ -75,7 +75,7 @@ if let repeated = first_repeat(grid) then
     write_line("break out of both loops: {repeated}")
 fi
 
-write_line("rows with no gap: {complete_rows(grid) |> join(", ")}")
+write_line("rows with no gap: {grid |> complete_rows() |> join(", ")}")
 
 try
     descend(4)

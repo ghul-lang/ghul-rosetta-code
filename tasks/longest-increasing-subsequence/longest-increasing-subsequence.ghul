@@ -34,7 +34,7 @@ let sequences = [
 
 for xs in sequences do
     let xs_text = xs |> map(x => "{x}") |> join()
-    let lis_text = lis(xs) |> map(x => "{x}") |> join()
+    let lis_text = xs |> lis() |> map(x => "{x}") |> join()
 
     write_line("{xs_text}")
     write_line("  -> {lis_text}")

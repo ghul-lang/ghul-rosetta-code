@@ -7,7 +7,8 @@ permutations(items: List[int]) -> List[int]{} is
         yield in 0..items.count |> flat_map(index => (
             let rest = LIST(items)
             rest.remove_at(index)
-            permutations(rest)
+            rest
+            |> permutations()
             |> map(tail => ([items[index]] ++ tail) |> collect())
         ))
     fi

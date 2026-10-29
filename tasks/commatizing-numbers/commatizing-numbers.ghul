@@ -8,7 +8,7 @@ groups(digits: string, period: int) -> string{} =>
     digits |> chunk(period) |> map(part => part |> join(""))
 
 from_left(digits: string, period: int, separator: string) -> string =>
-    groups(digits, period) |> join(separator)
+    digits |> groups(period) |> join(separator)
 
 from_right(digits: string, period: int, separator: string) -> string =>
     let head = (digits.length - 1) % period + 1 in

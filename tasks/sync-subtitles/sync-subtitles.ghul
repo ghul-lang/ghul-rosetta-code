@@ -22,7 +22,7 @@ for seconds in [9, -9] do
     write_line("Shifted by {seconds} seconds:")
     write_line("")
 
-    for line in synced(lines, seconds) |> take(8) do
+    for line in lines |> synced(seconds) |> take(8) do
         write_line(line)
     od
 

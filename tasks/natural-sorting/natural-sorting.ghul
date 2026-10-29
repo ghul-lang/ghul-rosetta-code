@@ -102,8 +102,8 @@ compare_parts(left: string, right: string) -> int =>
     fi
 
 naturally(left: string, right: string) -> int is
-    let first = runs(key(left)) |> collect()
-    let second = runs(key(right)) |> collect()
+    let first = left |> key() |> runs() |> collect()
+    let second = right |> key() |> runs() |> collect()
     let shared = if first.count < second.count then first.count
                  else second.count fi
 

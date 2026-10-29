@@ -27,6 +27,6 @@ let encoded =
     "VG8gZXJyIGlzIGh1bWFuLCBidXQgdG8gcmVhbGx5IGZvdWwgdGhpbmdzIHVwIHlvdSBu"
     "ZWVkIGEgY29tcHV0ZXIuCiAgICAtLSBQYXVsIFIuIEVocmxpY2g="
 
-let bytes = decode(encoded) |> collect()
+let bytes = encoded |> decode() |> collect()
 
 write_line(System.Text.Encoding.utf8.get_string(bytes))

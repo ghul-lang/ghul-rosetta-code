@@ -35,4 +35,4 @@ si
 let values = [170, 45, 75, -90, -802, 24, 2, 66, 0, -1, 802]
 
 write_line("before: {values |> join(" ")}")
-write_line("after:  {radix_sort(LIST(values)) |> join(" ")}")
+write_line("after:  {LIST(values) |> radix_sort() |> join(" ")}")

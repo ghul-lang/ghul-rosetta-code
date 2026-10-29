@@ -40,7 +40,7 @@ while tour.count < size * size do
     let square = tour[tour.count - 1]
 
     let next =
-        onward(square)
+        square |> onward()
             |> min_by(candidate => onward(candidate) |> count()) ?? square
 
     assert at(next) != at(square) else "the tour reached a dead end"

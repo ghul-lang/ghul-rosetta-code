@@ -72,5 +72,5 @@ si
 for seed in ["Petelomax", "rosetta code", "William Shakespeare"] do
     write_line("{seed}:")
 
-    anagrams_of(seed, 3) |> each(phrase => write_line("  {phrase}"))
+    seed |> anagrams_of(3) |> each(phrase => write_line("  {phrase}"))
 od

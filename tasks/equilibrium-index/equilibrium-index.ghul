@@ -15,7 +15,7 @@ si
 
 let sequence = [-7, 1, 5, 2, -4, 3, 0]
 
-let indices = equilibrium_indices(sequence)
+let indices = sequence |> equilibrium_indices()
     |> map(index => "{index}")
     |> join(" ")
 

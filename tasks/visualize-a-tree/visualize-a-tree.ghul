@@ -41,7 +41,7 @@ let tree =
 
 write_line("indented:")
 
-indented(tree, 0) |> each(line => write_line("  {line}"))
+tree |> indented(0) |> each(line => write_line("  {line}"))
 
 write_line()
 write_line("nested:")
@@ -51,4 +51,4 @@ write_line()
 write_line("drawn:")
 write_line("  {tree.name}")
 
-branches(tree, "") |> each(line => write_line("  {line}"))
+tree |> branches("") |> each(line => write_line("  {line}"))

@@ -16,12 +16,14 @@ order_part(
 order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
     let modulus = bigint.pow(factor.prime, factor.power) in
     let totient = modulus / factor.prime * (factor.prime - 1n) in
-    factorize(totient)
+    totient
+        |> factorize()
         |> map(order_part(a, *, totient, modulus))
         |> reduce(1n, * * *)
 
 multiplicative_order(a: bigint, m: bigint) -> bigint =>
-    factorize(m)
+    m
+        |> factorize()
         |> map(order_modulo_prime_power(a, *))
         |> reduce(1n, lcm)
 

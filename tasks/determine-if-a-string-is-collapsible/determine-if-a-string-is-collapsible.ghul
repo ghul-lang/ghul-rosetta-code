@@ -13,7 +13,7 @@ collapsed(text: string) -> char{} is
 si
 
 collapse(text: string) -> string =>
-    collapsed(text) |> map(c => "{c}") |> join("")
+    text |> collapsed() |> map(c => "{c}") |> join("")
 
 let strings = [
     "",
