@@ -1,7 +1,7 @@
 use default
 
 reverse(text: string) -> string =>
-    graphemes(text) |> collect() |> reverse() |> string()
+    graphemes(text) |> reverse() |> string()
 
 write_line(reverse("asdf"))
 write_line(reverse("Hello, World!"))

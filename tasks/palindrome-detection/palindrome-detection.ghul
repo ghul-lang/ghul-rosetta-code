@@ -1,7 +1,7 @@
 use default
 
 reverse(text: string) -> string =>
-    graphemes(text) |> collect() |> reverse() |> string()
+    graphemes(text) |> reverse() |> string()
 
 is_palindrome(text: string) -> bool => text =~ reverse(text)
 

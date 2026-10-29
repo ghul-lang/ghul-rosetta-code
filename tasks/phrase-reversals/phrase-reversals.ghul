@@ -1,7 +1,7 @@
 use default
 
 reversed(s: string) -> string =>
-    graphemes(s) |> collect() |> reverse() |> string()
+    graphemes(s) |> reverse() |> string()
 
 let phrase = "rosetta code phrase reversal"
 let words = phrase.split([' '])
