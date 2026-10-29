@@ -4,6 +4,6 @@ let subjects = ["møøse", "𝔘𝔫𝔦𝔠𝔬𝔡𝔢", "J̲o̲s̲é̲"]
 
 for subject in subjects do
     write_line(
-        "{subject}: {runes(subject) |> count()} code points, "
+        "{subject}: {subject |> runes() |> count()} code points, "
         "{subject.length} UTF-16 code units")
 od
