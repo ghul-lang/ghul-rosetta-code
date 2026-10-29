@@ -153,8 +153,10 @@ let random = System.Random(11)
 let points =
     (0..300)
         |> map(_ =>
-            let angle = 2.0D * pi * random.next_double() in
-            let r = sqrt(random.next_double()) in
+            let
+                angle = 2.0D * pi * random.next_double(),
+                r = sqrt(random.next_double())
+            in
             P(r * cos(angle), r * sin(angle)))
         |> collect()
 

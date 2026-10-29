@@ -89,8 +89,10 @@ claimed_counts(sentence: string) -> MAP[char, int] is
 si
 
 is_autogram(sentence: string, with_punctuation: bool) -> bool =>
-    let actual = actual_counts(sentence, with_punctuation) in
-    let claimed = claimed_counts(sentence) in
+    let
+        actual = actual_counts(sentence, with_punctuation),
+        claimed = claimed_counts(sentence)
+    in
     actual.count == claimed.count /\
 
         actual |> all((character, count) =>

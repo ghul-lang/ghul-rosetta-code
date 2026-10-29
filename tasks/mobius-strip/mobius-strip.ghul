@@ -30,8 +30,10 @@ normal(u: double) -> VEC =>
         (surface(u, h) - surface(u, 0.0D))
 
 turned(p: VEC) -> VEC =>
-    let x = p.x * cos(yaw) - p.y * sin(yaw) in
-    let y = p.x * sin(yaw) + p.y * cos(yaw) in
+    let
+        x = p.x * cos(yaw) - p.y * sin(yaw),
+        y = p.x * sin(yaw) + p.y * cos(yaw)
+    in
     VEC(
         x,
         p.z * cos(pitch) - y * sin(pitch),

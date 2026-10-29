@@ -3,8 +3,10 @@ use System.Math
 use System.Numerics.Complex
 
 show(name: string, value: Complex) =>
-    let sign = if value.imaginary < 0.0 then "-" else "+" fi in
-    let size = Math.abs(value.imaginary) in
+    let
+        sign = if value.imaginary < 0.0 then "-" else "+" fi,
+        size = Math.abs(value.imaginary)
+    in
     write_line("{name,-10} {value.real} {sign} {size}i")
 
 let a = Complex(1.0, 1.0)

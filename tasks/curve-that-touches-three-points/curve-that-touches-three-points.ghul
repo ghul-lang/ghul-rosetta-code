@@ -39,8 +39,10 @@ curve(start: P, middle: P, finish: P, steps: int) -> P{} is
 
     (0::steps)
         |> map(i =>
-            let a = from + turn * double(i) / double(steps) in
-            let x = centre.x + radius * cos(a) in
+            let
+                a = from + turn * double(i) / double(steps),
+                x = centre.x + radius * cos(a)
+            in
             P(x, centre.y + radius * sin(a)))
         |> collect()
 si

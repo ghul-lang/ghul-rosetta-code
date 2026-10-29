@@ -90,8 +90,10 @@ without_leading_zeros(part: string) -> string =>
 
 compare_parts(left: string, right: string) -> int =>
     if is_number(left) /\ is_number(right) then
-        let a = without_leading_zeros(left) in
-        let b = without_leading_zeros(right) in
+        let
+            a = without_leading_zeros(left),
+            b = without_leading_zeros(right)
+        in
         if a.length != b.length then
             a.length <> b.length
         else

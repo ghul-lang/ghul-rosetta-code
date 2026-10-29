@@ -14,8 +14,10 @@ let yaw = pi / 6.0D
 let pitch = pi / 7.0D
 
 project(p: Point) -> Flat =>
-    let x = p.x * cos(yaw) - p.z * sin(yaw) in
-    let z = p.x * sin(yaw) + p.z * cos(yaw) in
+    let
+        x = p.x * cos(yaw) - p.z * sin(yaw),
+        z = p.x * sin(yaw) + p.z * cos(yaw)
+    in
     (x = x, y = p.y * cos(pitch) + z * sin(pitch))
 
 corner(i: int, j: int, k: int) -> Flat =>

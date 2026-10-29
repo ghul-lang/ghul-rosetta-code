@@ -14,8 +14,10 @@ factorials_mod(count: int, modulus: long) -> List[long] => (
 )
 
 is_wilson(p: int, n: int, factorials: List[long], modulus: long) -> bool =>
-    let sign = if n % 2 == 0 then 1L else -1L fi in
-    let product = factorials[n - 1] * factorials[p - n] % modulus in
+    let
+        sign = if n % 2 == 0 then 1L else -1L fi,
+        product = factorials[n - 1] * factorials[p - n] % modulus
+    in
     (product - sign + modulus) % modulus == 0L
 
 orders_of(p: int) -> List[int] =>

@@ -18,8 +18,10 @@ midpoint_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
     h * sum_over(n, i => f(a + h * (double(i) + 0.5)))
 
 trapezium(f: Integrand, a: double, b: double, n: int) -> double =>
-    let h = (b - a) / double(n) in
-    let inner = sum_over(n - 1, i => f(a + h * double(i + 1))) in
+    let
+        h = (b - a) / double(n),
+        inner = sum_over(n - 1, i => f(a + h * double(i + 1)))
+    in
     h * ((f(a) + f(b)) / 2.0 + inner)
 
 simpson(f: Integrand, a: double, b: double, n: int) -> double =>

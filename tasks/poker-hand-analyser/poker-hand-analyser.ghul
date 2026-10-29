@@ -17,8 +17,10 @@ let face_values = [
 ] |> collect_map()
 
 parse(card: string) -> (face: int, suit: char) =>
-    let suit = card[card.length - 1] in
-    let face_text = card[0..(card.length - 1)] in
+    let
+        suit = card[card.length - 1],
+        face_text = card[0..(card.length - 1)]
+    in
     (face_values[face_text], suit)
 
 classify(hand: string) -> string is

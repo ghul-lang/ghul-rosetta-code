@@ -41,9 +41,11 @@ report(birth: DateTime, target: DateTime) is
             elif abs(percentage) < 5.0D then
                 "critical transition"
             else
-                let (trend, next) = quadrants[quadrant] in
-                let ahead = (quadrant + 1) * length / 4 - position in
-                let due = show(target.add_days(double(ahead))) in
+                let
+                    (trend, next) = quadrants[quadrant],
+                    ahead = (quadrant + 1) * length / 4 - position,
+                    due = show(target.add_days(double(ahead)))
+                in
                 "{percentage}% ({trend}, next {next} {due})"
             fi
 

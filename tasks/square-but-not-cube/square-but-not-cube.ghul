@@ -1,8 +1,10 @@
 use default
 
 is_cube(n: long) -> bool =>
-    let estimate = System.Math.cbrt(double(n)) in
-    let root = long(System.Math.round(estimate)) in
+    let
+        estimate = System.Math.cbrt(double(n)),
+        root = long(System.Math.round(estimate))
+    in
     root * root * root == n
 
 squares() -> long{} => from(1L) |> map(n => n * n)

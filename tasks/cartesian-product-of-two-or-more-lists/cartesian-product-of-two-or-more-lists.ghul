@@ -45,8 +45,10 @@ show_binary(left: List[int], right: List[int]) =>
         "{show_numbers(left)} × {show_numbers(right)} = {show(product)}")
 
 show_nary(lists: List[List[int]]) =>
-    let heading = lists |> map(show_numbers) |> join(" × ") in
-    let product = tuples(lists, 0) |> map(show_tuple) in
+    let
+        heading = lists |> map(show_numbers) |> join(" × "),
+        product = tuples(lists, 0) |> map(show_tuple)
+    in
     write_line("{heading} = {show(product)}")
 
 show_binary([1, 2], [3, 4])

@@ -14,8 +14,10 @@ value_of(c: char) -> int =>
     esac
 
 weighted(c: char, position: int) -> int =>
-    let factor = if position % 2 == 1 then 2 else 1 fi in
-    let value = value_of(c) * factor in
+    let
+        factor = if position % 2 == 1 then 2 else 1 fi,
+        value = value_of(c) * factor
+    in
     value / 10 + value % 10
 
 check_digit(cusip: string) -> int =>

@@ -86,8 +86,10 @@ show(reveal: bool) is
         let cells =
             (0..size)
                 |> map(column =>
-                    let cell = (row = row, column = column) in
-                    let guessed = guesses.contains(cell) in
+                    let
+                        cell = (row = row, column = column),
+                        guessed = guesses.contains(cell)
+                    in
                     if reveal /\ atoms.contains(cell) then
                         if guessed then "X" else "*" fi
                     elif guessed then "o"

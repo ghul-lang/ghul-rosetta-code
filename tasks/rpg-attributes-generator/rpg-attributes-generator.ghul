@@ -12,8 +12,10 @@ character() -> List[int] =>
     1::6 |> map(_ => attribute()) |> collect()
 
 acceptable(values: List[int]) -> bool =>
-    let total = values |> sum() in
-    let strong = values |> filter(* >= 15) |> count() in
+    let
+        total = values |> sum(),
+        strong = values |> filter(* >= 15) |> count()
+    in
     total >= 75 /\ strong >= 2
 
 let (attempts, rolled) =

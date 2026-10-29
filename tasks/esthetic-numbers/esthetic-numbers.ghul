@@ -3,8 +3,10 @@ use default
 let digit_symbols = "0123456789abcdef"
 
 render(value: long, base: int) -> string =>
-    let digit = digit_symbols[int(value % cast(base))] in
-    let rest = value / cast(base) in
+    let
+        digit = digit_symbols[int(value % cast(base))],
+        rest = value / cast(base)
+    in
     if rest > 0L then "{render(rest, base)}{digit}" else "{digit}" fi
 
 esthetic(base: int) -> long{} is

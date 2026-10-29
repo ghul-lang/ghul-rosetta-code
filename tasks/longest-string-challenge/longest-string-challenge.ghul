@@ -7,8 +7,10 @@ use IO.Std.read_line
 // another exactly when its run of x's starts with the other's: no
 // length is ever held as a number or compared.
 relation(line: string, longest: string) -> string =>
-    let line_marks = Regex.replace(line, ".", "x") in
-    let longest_marks = Regex.replace(longest, ".", "x") in
+    let
+        line_marks = Regex.replace(line, ".", "x"),
+        longest_marks = Regex.replace(longest, ".", "x")
+    in
     if !line_marks.starts_with(longest_marks) then
         "shorter"
     elif longest_marks.starts_with(line_marks) then

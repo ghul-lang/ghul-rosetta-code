@@ -40,8 +40,10 @@ lines_for(direction: char) -> List[int]{} => (
 )
 
 collapse(values: List[int]) -> List[int] =>
-    let merged = merge_packed(LIST[int](values |> filter(* != 0))) in
-    let padded = merged ++ repeat(0, side - (merged |> count())) in
+    let
+        merged = merge_packed(LIST[int](values |> filter(* != 0))),
+        padded = merged ++ repeat(0, side - (merged |> count()))
+    in
     padded |> collect()
 
 merge_packed(packed: List[int]) -> int{} =>

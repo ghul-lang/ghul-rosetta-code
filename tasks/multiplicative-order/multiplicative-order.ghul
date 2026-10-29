@@ -14,8 +14,10 @@ order_part(
     walk(mod_pow(a, cofactor, modulus), 0)
 
 order_modulo_prime_power(a: bigint, factor: Factor) -> bigint =>
-    let modulus = bigint.pow(factor.prime, factor.power) in
-    let totient = modulus / factor.prime * (factor.prime - 1n) in
+    let
+        modulus = bigint.pow(factor.prime, factor.power),
+        totient = modulus / factor.prime * (factor.prime - 1n)
+    in
     totient
         |> factorize()
         |> map(order_part(a, *, totient, modulus))

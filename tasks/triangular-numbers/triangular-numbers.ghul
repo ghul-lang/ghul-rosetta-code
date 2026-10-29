@@ -9,8 +9,10 @@ triangular_root(value: double) -> double =>
     (sqrt(8.0D * value + 1.0D) - 1.0D) / 2.0D
 
 tetrahedral_root(value: double) -> double =>
-    let offset = sqrt(9.0D * value * value - 1.0D / 27.0D) in
-    let upper = cbrt(3.0D * value + offset) in
+    let
+        offset = sqrt(9.0D * value * value - 1.0D / 27.0D),
+        upper = cbrt(3.0D * value + offset)
+    in
     upper + 1.0D / (3.0D * upper) - 1.0D
 
 pentatopic_root(value: double) -> double =>

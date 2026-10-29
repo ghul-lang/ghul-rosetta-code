@@ -3,8 +3,10 @@ use default
 struct FRACTION(numerator: bigint, denominator: bigint)
 
 fraction(numerator: bigint, denominator: bigint) -> FRACTION =>
-    let divisor = bigint.greatest_common_divisor(numerator, denominator) in
-    let sign = if denominator < 0n then -1n else 1n fi in
+    let
+        divisor = bigint.greatest_common_divisor(numerator, denominator),
+        sign = if denominator < 0n then -1n else 1n fi
+    in
     FRACTION(sign * numerator / divisor, sign * denominator / divisor)
 
 -(a: FRACTION, b: FRACTION) -> FRACTION =>

@@ -70,8 +70,10 @@ od
 let curve =
     (0::160)
         |> map(i =>
-            let x = low + double(i) * 0.05D in
-            let y = exp(-x * x / 2.0D) / sqrt(2.0D * pi) in
+            let
+                x = low + double(i) * 0.05D,
+                y = exp(-x * x / 2.0D) / sqrt(2.0D * pi)
+            in
             (x = x, y = y))
         |> collect()
 

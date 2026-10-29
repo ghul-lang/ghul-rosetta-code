@@ -22,8 +22,10 @@ parse(text: string) -> DateTimeOffset =>
     DateTimeOffset(clock, TimeSpan.from_hours(offsets[zone]))
 
 show(time: DateTimeOffset) -> string =>
-    let date = time.to_string("MMMM d yyyy h:mm", culture) in
-    let meridiem = time.to_string("tt", culture).to_lower() in
+    let
+        date = time.to_string("MMMM d yyyy h:mm", culture),
+        meridiem = time.to_string("tt", culture).to_lower()
+    in
     "{date}{meridiem} (UTC{time.to_string("zzz")})"
 
 let start = parse("March 7 2009 7:30pm EST")

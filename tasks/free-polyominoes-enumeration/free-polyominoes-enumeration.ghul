@@ -19,8 +19,10 @@ width(shape: Shape) -> int =>
     shape |> map(c => c.column) |> reduce(0, int.max) + 1
 
 normalised(cells: Cell{}) -> Shape =>
-    let list = cells |> collect() in
-    let top = list |> map(c => c.row) |> reduce(list[0].row, int.min) in
+    let
+        list = cells |> collect(),
+        top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
+    in
     let left = list |> map(c => c.column) |> reduce(list[0].column, int.min)
     in
     list

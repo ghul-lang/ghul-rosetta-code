@@ -6,8 +6,10 @@ class MONEY(cents: bigint) is
     *(quantity: bigint) -> MONEY => MONEY(cents * quantity)
 
     taxed(rate_per_10000: bigint) -> MONEY =>
-        let raw = cents * rate_per_10000 in
-        let rounded = (raw + 5000n) / 10000n in
+        let
+            raw = cents * rate_per_10000,
+            rounded = (raw + 5000n) / 10000n
+        in
         MONEY(rounded)
 
     to_string() -> string =>

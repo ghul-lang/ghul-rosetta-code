@@ -127,8 +127,10 @@ for (name, make) in inputs do
     let growth =
         (0..sorts.count)
         |> map(i =>
-            let first = log2(times[i][last - 4]) in
-            let exponent = (log2(times[i][last]) - first) / 4.0 in
+            let
+                first = log2(times[i][last - 4]),
+                exponent = (log2(times[i][last]) - first) / 4.0
+            in
             "{sorts[i].name} {exponent:F1}")
         |> join()
 

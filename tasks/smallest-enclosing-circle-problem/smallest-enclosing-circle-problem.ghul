@@ -76,8 +76,10 @@ od
 let scattered =
     (0..60)
         |> map(_ =>
-            let angle = 2.0D * pi * random.next_double() in
-            let r = 4.0D * sqrt(random.next_double()) in
+            let
+                angle = 2.0D * pi * random.next_double(),
+                r = 4.0D * sqrt(random.next_double())
+            in
             P(1.5D * r * cos(angle), r * sin(angle)))
         |> collect()
 

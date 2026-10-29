@@ -22,8 +22,10 @@ let yaw = 0.62D
 let pitch = 0.5D
 
 turned(p: VEC) -> VEC =>
-    let x = p.x * cos(yaw) - p.y * sin(yaw) in
-    let y = p.x * sin(yaw) + p.y * cos(yaw) in
+    let
+        x = p.x * cos(yaw) - p.y * sin(yaw),
+        y = p.x * sin(yaw) + p.y * cos(yaw)
+    in
     VEC(
         x,
         p.z * cos(pitch) - y * sin(pitch),
@@ -54,8 +56,10 @@ patch(i: int, j: int) -> Patch =>
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
 
 brightness(p: Patch) -> double =>
-    let c = p.corners in
-    let n = (c[1] - c[0]) × (c[3] - c[0]) in
+    let
+        c = p.corners,
+        n = (c[1] - c[0]) × (c[3] - c[0])
+    in
     if n.length == 0.0D then 0.6D
     else 0.55D + 0.45D * abs(n.z) / n.length
     fi
