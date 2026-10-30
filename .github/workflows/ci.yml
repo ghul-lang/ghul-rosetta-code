@@ -14,7 +14,7 @@ jobs:
   # What a pull request has to run. A change confined to task directories
   # needs only those tasks; anything else - a package version, the root
   # project, a script, the workflow - can reach every task, so it runs the
-  # lot. The queue runs the lot too, unless the group touches only the ledger.
+  # lot. A queue group is judged the same way, on everything it changes.
   #
   # The test is "outside tasks/" rather than a list of shared paths, so a
   # shared input added later is covered without this job being taught about
