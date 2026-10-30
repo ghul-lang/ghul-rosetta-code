@@ -83,13 +83,16 @@ operator_spelling(kind: KIND) -> string =>
         throw System.Exception("{kind} is not a binary operator")
     esac
 
-class PARSER(tokens: List[TOKEN]) is
-    _at: int
+class PARSER(tokens: Iterator[TOKEN]) is
+    token: TOKEN
 
-    token: TOKEN => tokens[_at]
+    init(..) is
+        advance()
+    si
 
+    // the parser never moves past End_of_input, so there is always a next
     advance() is
-        _at = _at + 1
+        token = (tokens |> next())!
     si
 
     accept(kind: KIND) -> bool =>
@@ -315,6 +318,5 @@ let tokens =
     stdin_lines()
     |> filter(line => line |> words() |> count() >= 3)
     |> map(token)
-    |> collect()
 
-show(PARSER(tokens).program())
+show(PARSER(tokens.iterator).program())
