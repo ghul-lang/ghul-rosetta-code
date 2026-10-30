@@ -1,0 +1,3 @@
+# The program prints its own source, so laying the source out differently
+# would change what it prints.
+print-itself.ghul

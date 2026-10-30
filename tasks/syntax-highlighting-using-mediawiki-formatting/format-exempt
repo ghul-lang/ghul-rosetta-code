@@ -1,0 +1,3 @@
+# The program reads its own source and marks it up, so laying the source out
+# differently would change the markup it prints.
+syntax-highlighting-using-mediawiki-formatting.ghul
