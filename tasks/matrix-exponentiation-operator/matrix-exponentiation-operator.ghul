@@ -7,8 +7,10 @@ use Matrix = List[List[bigint]]
         |> map(i =>
             0..b[0].count
                 |> map(j =>
-                    0..b.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> collect())
+                    0..b.count |> sum_by(k => a[i][k] * b[k][j])
+                )
+                |> collect()
+        )
         |> collect()
 
 identity(n: int) -> Matrix =>
@@ -16,7 +18,8 @@ identity(n: int) -> Matrix =>
         |> map(i =>
             0..n
                 |> map(j => if i == j then 1n else 0n fi)
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 // ghūl has no exponentiation operator, so ^ is declared here for a
@@ -42,5 +45,7 @@ si
 let fibonacci: Matrix = [[1n, 1n], [1n, 0n]]
 
 for power in [0, 1, 2, 10, 50, 100] do
-    write_line("[[1, 1], [1, 0]] ^ {power} = {fibonacci ^ power}")
+    write_line(
+        "[[1, 1], [1, 0]] ^ {power} = {fibonacci ^ power}"
+    )
 od

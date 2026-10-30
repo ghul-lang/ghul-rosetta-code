@@ -22,20 +22,23 @@ while ludic.count < 2005 do
     remaining = kept
 od
 
-write_line(
-    "first 25: {ludic |> take(25) |> join(" ")}")
+write_line("first 25: {ludic |> take(25) |> join(" ")}")
 
 let up_to_1000 = ludic |> filter(* <= 1000) |> count()
 
 write_line("{up_to_1000} ludic numbers <= 1000")
 write_line(
-    "2000th..2005th: {ludic |> skip(1999) |> take(6) |> join(" ")}")
+    "2000th..2005th: {ludic |> skip(1999) |> take(6) |> join(" ")}"
+)
 
 let set = SET(ludic)
-let triplets =
-    ["({x}, {x + 2}, {x + 6})"
-        for x in ludic
-        if x + 6 < 1000 /\ set.contains(x + 2) /\ set.contains(x + 6)]
-        |> join("  ")
+let triplets = [
+    "({x}, {x + 2}, {x + 6})"
+    for x in ludic
+    if x + 6 < 1000 /\
+    set.contains(x + 2) /\
+    set.contains(x + 6)
+]
+    |> join("  ")
 
 write_line("triplets: {triplets}")

@@ -18,7 +18,8 @@ for prime in 2..(limit + 1) do
 
         while multiple <= limit do
             radical[multiple] = radical[multiple] * prime
-            factor_counts[multiple] = factor_counts[multiple] + 1
+            factor_counts[multiple] =
+                factor_counts[multiple] + 1
             composite[multiple] = true
             multiple = multiple + prime
         od
@@ -31,7 +32,8 @@ for row in 0..5 do
     write_line(
         (row * 10 + 1..row * 10 + 11)
             |> map(n => "{radical[n],3}")
-            |> join(" "))
+            |> join(" ")
+    )
 od
 
 for n in [99999, 499999, 999999] do
@@ -53,12 +55,16 @@ for count in 0..8 do
     fi
 od
 
-prime(n: int, factors: List[int], radicals: List[int]) -> bool =>
-    n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
+prime(
+    n: int,
+    factors: List[int],
+    radicals: List[int]
+) -> bool => n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
 
-let primes = (2..(limit + 1))
-    |> filter(prime(*, factor_counts, radical))
-    |> collect()
+let primes =
+    (2..(limit + 1))
+        |> filter(prime(*, factor_counts, radical))
+        |> collect()
 
 let powers mut = 0
 
@@ -74,4 +80,5 @@ od
 write_line(
     "{primes.count:N0} primes plus {powers} prime powers "
     "= {primes.count + powers:N0}, matching the one-factor "
-    "count {distribution[1]:N0}")
+    "count {distribution[1]:N0}"
+)

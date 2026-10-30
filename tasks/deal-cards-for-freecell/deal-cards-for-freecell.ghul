@@ -12,7 +12,8 @@ si
 let ranks = "A23456789TJQK"
 let suits = "CDHS"
 
-name(card: int) -> string => "{ranks[card / 4]}{suits[card % 4]}"
+name(card: int) -> string =>
+    "{ranks[card / 4]}{suits[card % 4]}"
 
 deal(game: int) -> string{} is
     let deck = LIST(0..52)

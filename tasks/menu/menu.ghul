@@ -23,7 +23,7 @@ choose(items: List[string]) -> string is
         let chosen mut = 0
 
         if
-            int.try_parse(entered, chosen ref) /\
+            int.try_parse(entered, chosen ref ) /\
             chosen >= 1 /\
             chosen <= items.count
         then
@@ -34,7 +34,9 @@ choose(items: List[string]) -> string is
     od
 si
 
-let phrases = ["fee fie", "huff and puff", "mirror mirror", "tick tock"]
+let phrases = [
+    "fee fie", "huff and puff", "mirror mirror", "tick tock"
+]
 
 write_line("you chose: {choose(phrases)}")
 write_line("empty list gives: [{choose([])}]")

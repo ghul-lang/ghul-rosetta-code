@@ -9,9 +9,14 @@ double(value: int) -> int => value * 2
 is_even(value: int) -> bool => value % 2 == 0
 
 ethiopian(left: int, right: int) -> int =>
-    stream((multiplier = left, total = right), row =>
-            row || (multiplier = halve(row.multiplier),
-                    total = double(row.total)))
+    stream(
+        (multiplier = left, total = right),
+        row =>
+            row || (
+                multiplier = halve(row.multiplier),
+                total = double(row.total)
+            )
+    )
         |> take_while(row => row.multiplier > 0)
         |> filter(row => !is_even(row.multiplier))
         |> sum_by(row => row.total)

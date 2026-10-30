@@ -14,8 +14,9 @@ si
 derived(digits: string) -> bigint =>
     bigint.parse(
         ('0'::'9')
-        |> map(d => "{digits |> count(c => c == d)}")
-        |> join(""))
+            |> map(d => "{digits |> count(c => c == d)}")
+            |> join("")
+    )
 
 ordinal(n: int) -> string =>
     if n % 100 >= 11 /\ n % 100 <= 13 then
@@ -36,29 +37,34 @@ abbreviated(digits: string) -> string =>
         "{digits[0..20]}...{digits[20..<<0]}"
     fi
 
-write_line("testing concatenated primes for primality, which takes a while")
+write_line(
+    "testing concatenated primes for primality, which takes a while"
+)
 write_line("")
 write_line("the first seven Smarandache-Wellin primes:")
 
 let wellin_primes =
     wellin_numbers()
-    |> filter(w => is_prime(bigint.parse(w.digits)))
-    |> take(7)
+        |> filter(w => is_prime(bigint.parse(w.digits)))
+        |> take(7)
 
 for (i, w) in wellin_primes |> index() do
     write_line(
         "{ordinal(i + 1),4}: index {w.index,4}  digits {w.digits.length,5}"
-        "  last prime {w.last,5}  {abbreviated(w.digits)}")
+        "  last prime {w.last,5}  {abbreviated(w.digits)}"
+    )
 od
 
 write_line("")
-write_line("the first twenty derived Smarandache-Wellin primes:")
+write_line(
+    "the first twenty derived Smarandache-Wellin primes:"
+)
 
 let derived_primes =
     wellin_numbers()
-    |> map(w => (w.index, derived(w.digits)))
-    |> filter((_, d) => is_prime(d))
-    |> take(20)
+        |> map(w => (w.index, derived(w.digits)))
+        |> filter((_, d) => is_prime(d))
+        |> take(20)
 
 for (i, (position, d)) in derived_primes |> index() do
     write_line("{ordinal(i + 1),4}: index {position,4}  {d}")

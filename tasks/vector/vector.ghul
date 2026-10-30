@@ -5,9 +5,11 @@ use System.Math.sin
 use System.Math.sqrt
 
 struct VECTOR(x: double, y: double) is
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
+    +(other: VECTOR) -> VECTOR =>
+        VECTOR(x + other.x, y + other.y)
 
-    -(other: VECTOR) -> VECTOR => VECTOR(x - other.x, y - other.y)
+    -(other: VECTOR) -> VECTOR =>
+        VECTOR(x - other.x, y - other.y)
 
     *(scale: double) -> VECTOR => VECTOR(x * scale, y * scale)
 
@@ -41,5 +43,9 @@ let span = between(start, finish)
 
 write_line("")
 write_line("from {start} to {finish} is {span}")
-write_line("  of length {span.length:F3} at {span.bearing:F3} radians")
-write_line("  rebuilt from those: {from_polar(span.bearing, span.length)}")
+write_line(
+    "  of length {span.length:F3} at {span.bearing:F3} radians"
+)
+write_line(
+    "  rebuilt from those: {from_polar(span.bearing, span.length)}"
+)

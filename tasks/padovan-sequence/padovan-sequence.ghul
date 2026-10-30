@@ -15,43 +15,53 @@ si
 
 let plastic =
     cbrt((9.0D + sqrt(69.0D)) / 18.0D) +
-        cbrt((9.0D - sqrt(69.0D)) / 18.0D)
+    cbrt((9.0D - sqrt(69.0D)) / 18.0D)
 let scaling = 1.0453567932525329623D
 
 floor_padovan(n: int) -> int =>
-    int(floor(
-        pow(plastic, cast(n - 1)) / scaling + 0.5D))
+    int(floor(pow(plastic, cast(n - 1)) / scaling + 0.5D))
 
 l_system() -> string{} is
     let current mut = "A"
 
     do
         yield current
-        current = current
-            |> map(c =>
-                case c
-                when 'A' then "B"
-                when 'B' then "C"
-                else "AB"
-                esac)
-            |> join("")
+        current =
+            current
+                |> map(c =>
+                    case c
+                    when 'A' then "B"
+                    when 'B' then "C"
+                    else "AB"
+                    esac
+                )
+                |> join("")
     od
 si
 
 write_line("first 20 terms:")
-write_line(padovan() |> take(20) |> map(p => "{p}") |> join(" "))
+write_line(
+    padovan() |> take(20) |> map(p => "{p}") |> join(" ")
+)
 
 let by_recurrence = padovan() |> take(64) |> collect()
-let agree = by_recurrence |> index()
-    |> all((n, p) => p == floor_padovan(n))
-write_line("recurrence and floor functions agree to term 63: {agree}")
+let agree =
+    by_recurrence
+        |> index()
+        |> all((n, p) => p == floor_padovan(n))
+write_line(
+    "recurrence and floor functions agree to term 63: {agree}"
+)
 
 write_line("first 10 L-system strings:")
 l_system() |> take(10) |> each(s => write_line(s))
 
 let strings = l_system() |> take(32)
-let lengths_match = strings |> index()
-    |> all((n, s) => s.length == by_recurrence[n])
+let lengths_match =
+    strings
+        |> index()
+        |> all((n, s) => s.length == by_recurrence[n])
 write_line(
     "L-system string lengths are the Padovan sequence "
-    "to term 31: {lengths_match}")
+    "to term 31: {lengths_match}"
+)

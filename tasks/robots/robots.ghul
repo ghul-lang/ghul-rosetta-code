@@ -11,7 +11,10 @@ use Spot = (x: int, y: int)
 
 let keys = ["y", "k", "u", "h", "w", "l", "b", "j", "n"]
 
-anywhere() -> Spot => (x = random.next(width), y = random.next(height))
+anywhere() -> Spot => (
+    x = random.next(width),
+    y = random.next(height)
+)
 
 let player mut = anywhere()
 let robots = LIST()
@@ -31,13 +34,16 @@ draw() is
     write_line("+{"".pad_right(width, '-')}+")
 
     for y in 0..height do
-        let row = 0..width |> map(x =>
-            let spot = (x = x, y = y) in
-            if spot =~ player then "@"
-            elif junk.contains(spot) then "*"
-            elif robots |> any(r => r =~ spot) then "+"
-            else " "
-            fi)
+        let row =
+            0..width
+                |> map(x =>
+                    let spot = (x = x, y = y) in
+                    if spot =~ player then "@"
+                    elif junk.contains(spot) then "*"
+                    elif robots |> any(r => r =~ spot) then "+"
+                    else " "
+                    fi
+                )
 
         write_line("|{row |> join("")}|")
     od
@@ -45,8 +51,12 @@ draw() is
     write_line("+{"".pad_right(width, '-')}+")
 si
 
-write_line("escape the robots (+) by making them crash into each other")
-write_line("move with y k u / h w l / b j n, w to wait, t to teleport")
+write_line(
+    "escape the robots (+) by making them crash into each other"
+)
+write_line(
+    "move with y k u / h w l / b j n, w to wait, t to teleport"
+)
 
 let alive mut = true
 
@@ -70,7 +80,8 @@ while alive /\ robots.count > 0 do
     elif let index = 0..9 |> find(i => keys[i] =~ key) then
         let next = (
             x = clamp(player.x + index % 3 - 1, 0, width - 1),
-            y = clamp(player.y + index / 3 - 1, 0, height - 1))
+            y = clamp(player.y + index / 3 - 1, 0, height - 1)
+        )
 
         if junk.contains(next) then
             write_line("junk is in the way")
@@ -79,7 +90,9 @@ while alive /\ robots.count > 0 do
 
         player = next
     else
-        write_line("move with y k u h l b j n, w to wait, t to teleport")
+        write_line(
+            "move with y k u h l b j n, w to wait, t to teleport"
+        )
         continue
     fi
 
@@ -87,13 +100,15 @@ while alive /\ robots.count > 0 do
         robots
             |> map(r => (
                 x = r.x + toward(r.x, player.x),
-                y = r.y + toward(r.y, player.y)))
+                y = r.y + toward(r.y, player.y)
+            ))
             |> collect()
 
     robots.clear()
 
     for r in moved do
-        let crowded = moved |> filter(o => o =~ r) |> count() > 1
+        let crowded =
+            moved |> filter(o => o =~ r) |> count() > 1
 
         if crowded \/ junk.contains(r) then
             junk.add(r)
@@ -102,7 +117,9 @@ while alive /\ robots.count > 0 do
         fi
     od
 
-    if robots |> any(r => r =~ player) \/ junk.contains(player) then
+    if
+        robots |> any(r => r =~ player) \/ junk.contains(player)
+    then
         alive = false
     fi
 od

@@ -37,8 +37,8 @@ write_source(path: string) =>
     let random = System.Random(2026) in
     File.write_all_lines(
         path,
-        0..values
-            |> map(_ => "{random.next(1_000_000)}"))
+        0..values |> map(_ => "{random.next(1_000_000)}")
+    )
 
 split(path: string) -> List[string] is
     let parts = LIST()
@@ -50,8 +50,7 @@ split(path: string) -> List[string] is
 
             let part = "run-{parts.count}.txt"
 
-            File.write_all_lines(
-                part, held |> map(v => "{v}"))
+            File.write_all_lines(part, held |> map(v => "{v}"))
 
             parts.add(part)
             held.clear()
@@ -89,7 +88,12 @@ merge(parts: List[string], into: string) is
                 |> reduce(
                     live[0],
                     (best, run) =>
-                        if run.head! < best.head! then run else best fi)
+                        if run.head! < best.head! then
+                            run
+                        else
+                            best
+                        fi
+                )
 
         writer.write_line("{taking.take()!}")
     od
@@ -102,12 +106,16 @@ write_source("unsorted.txt")
 
 let parts = split("unsorted.txt")
 
-write_line("{values} values in runs of {chunk}: {parts.count} runs")
+write_line(
+    "{values} values in runs of {chunk}: {parts.count} runs"
+)
 
 merge(parts, "sorted.txt")
 
 let sorted =
-    File.read_all_lines("sorted.txt") |> map(int.parse) |> collect()
+    File.read_all_lines("sorted.txt")
+        |> map(int.parse)
+        |> collect()
 
 let in_memory =
     File.read_all_lines("unsorted.txt")
@@ -117,12 +125,17 @@ let in_memory =
 in_memory.sort()
 
 write_line("merged {sorted.count} values")
-let ordered = 0..sorted.count - 1 |> all(at => sorted[at] <= sorted[at + 1])
+let ordered =
+    0..sorted.count - 1
+        |> all(at => sorted[at] <= sorted[at + 1])
 
 write_line("in order: {ordered}")
-write_line("same as sorting it in memory: {sorted =~ in_memory}")
+write_line(
+    "same as sorting it in memory: {sorted =~ in_memory}"
+)
 let first = sorted[0..3] |> map(v => "{v}") |> join(" ")
-let last = sorted[sorted.count - 3..<0] |> map(v => "{v}") |> join(" ")
+let last =
+    sorted[sorted.count - 3..<0] |> map(v => "{v}") |> join(" ")
 
 write_line("first three: {first}")
 write_line("last three:  {last}")

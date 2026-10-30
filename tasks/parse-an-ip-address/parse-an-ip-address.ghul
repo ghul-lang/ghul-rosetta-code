@@ -7,10 +7,18 @@ use Parsed = (address: IPAddress, port: int?)
 after(text: string, index: int) -> string => text[index + 1..<0]
 
 bracketed(text: string) -> Parsed =>
-    let close = text.index_of(']'), has_port = close + 1 < text.length in
-    let port =
-        if has_port then int.parse(after(text, close + 1)) else null fi in
-    (address = IPAddress.parse(text[1..close]), port = port)
+    let
+        close = text.index_of(']'),
+        has_port = close + 1 < text.length
+    in
+        let port =
+            if has_port then
+                int.parse(after(text, close + 1))
+            else
+                null
+            fi
+        in
+        (address = IPAddress.parse(text[1..close]), port = port)
 
 with_port(text: string) -> Parsed =>
     let colon = text.index_of(':') in
@@ -29,8 +37,9 @@ split_port(text: string) -> Parsed =>
     fi
 
 hex(bytes: ubyte[]) -> string =>
-    let number = bytes
-        |> reduce(0n, (n, b) => n * 256n + bigint(int(b))) in
+    let number =
+        bytes |> reduce(0n, (n, b) => n * 256n + bigint(int(b)))
+    in
     let digits = "{number:X}".trim_start('0') in
     if digits.length == 0 then "0" else digits fi
 

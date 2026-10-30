@@ -31,18 +31,22 @@ left_truncatable(text: string) -> bool =>
 right_truncatable(text: string) -> bool =>
     1::text.length |> all(end => prime(text[0..end]))
 
-let candidates = (2..(limit + 1))
-    |> filter(n => !composite[n] /\ !"{n}".contains('0'))
+let candidates =
+    (2..(limit + 1))
+        |> filter(n => !composite[n] /\ !"{n}".contains('0'))
 
-let largest_left = candidates
-    |> filter(n => left_truncatable("{n}"))
-    |> max()!
+let largest_left =
+    candidates |> filter(n => left_truncatable("{n}")) |> max()!
 
-let largest_right = candidates
-    |> filter(n => right_truncatable("{n}"))
-    |> max()!
+let largest_right =
+    candidates
+        |> filter(n => right_truncatable("{n}"))
+        |> max()!
 
-write_line("largest left-truncatable prime below 1000000: {largest_left}")
+write_line(
+    "largest left-truncatable prime below 1000000: {largest_left}"
+)
 write_line(
     "largest right-truncatable prime below 1000000: "
-    "{largest_right}")
+    "{largest_right}"
+)

@@ -11,9 +11,9 @@ ordinal(n: int) -> string =>
             when 3 then "rd"
             else "th"
             esac
-        fi in
+        fi
+    in
     "{n}{suffix}"
-
 
 for range in [0::25, 250::265, 1000::1025] do
     write_line(range |> map(ordinal) |> join(" "))

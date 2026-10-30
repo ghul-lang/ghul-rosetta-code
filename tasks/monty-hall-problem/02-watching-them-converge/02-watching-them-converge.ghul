@@ -24,7 +24,12 @@ for trial in 1::rounds do
     od
 
     let switched =
-        (0::2 |> find(door => door != chosen /\ door != opened))!
+        (
+            0::2
+                |> find(door =>
+                    door != chosen /\ door != opened
+                )
+        )!
 
     if chosen == car then
         stay_wins = stay_wins + 1
@@ -41,8 +46,10 @@ od
 curve(rates: List[double]) -> List[(x: double, y: double)] =>
     rates
         |> index()
-        |> map(rate =>
-            (x = log10(double(rate.index + 1)), y = rate.value))
+        |> map(rate => (
+            x = log10(double(rate.index + 1)),
+            y = rate.value
+        ))
         |> collect()
 
 let stay_colour = (red = 210ub, green = 130ub, blue = 40ub)
@@ -60,10 +67,12 @@ axes.y_title = "win rate"
 
 axes.x_ticks(
     (0::4)
-        |> map(decade =>
-            (value = double(decade),
-             label = "{System.Math.pow(10.0, double(decade))}"))
-        |> collect())
+        |> map(decade => (
+            value = double(decade),
+            label = "{System.Math.pow(10.0, double(decade))}"
+        ))
+        |> collect()
+)
 
 axes.y_ticks([
     (value = 0.0, label = "0"),

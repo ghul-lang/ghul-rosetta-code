@@ -1,6 +1,7 @@
 use default
 
-is_palindrome(text: string) -> bool => text |> reverse() |> join("") =~ text
+is_palindrome(text: string) -> bool =>
+    text |> reverse() |> join("") =~ text
 
 let found =
     2..500
@@ -9,5 +10,7 @@ let found =
         |> filter(is_palindrome)
         |> collect()
 
-write_line("{found.count} palindromic primes below 500, in base 16:")
+write_line(
+    "{found.count} palindromic primes below 500, in base 16:"
+)
 write_line(found |> join(" "))

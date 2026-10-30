@@ -3,17 +3,26 @@ use default
 invert(a: List[List[double]]) -> List[List[double]] is
     let n = a.count
 
-    let rows = 0..n
-        |> map(i =>
-            a[i]
-                |> cat(0..n |> map(j => if i == j then 1.0 else 0.0 fi))
-                |> collect_mutable())
-        |> collect_mutable()
+    let rows =
+        0..n
+            |> map(i =>
+                a[i]
+                    |> cat(
+                        0..n
+                            |> map(j =>
+                                if i == j then 1.0 else 0.0 fi
+                            )
+                    )
+                    |> collect_mutable()
+            )
+            |> collect_mutable()
 
     for k in 0..n do
-        let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
+        let pivot =
+            k..n |> max_by(i => System.Math.abs(rows[i][k]))!
 
-        assert rows[pivot][k] != 0.0 else "the matrix is singular"
+        assert rows[pivot][k] != 0.0
+            else "the matrix is singular"
 
         (rows[k], rows[pivot]) = (rows[pivot], rows[k])
 

@@ -1,8 +1,13 @@
 use default
 
-let fibonacci = n =>
-    assert n >= 0 else "fibonacci is not defined for a negative argument" in
-    (i rec => if i < 2 then i else rec(i - 1) + rec(i - 2) fi)(n)
+let fibonacci =
+    n =>
+        assert n >= 0
+            else "fibonacci is not defined for a negative argument" in
+        (
+            i rec =>
+                if i < 2 then i else rec(i - 1) + rec(i - 2) fi
+        )(n)
 
 for n in 0::10 do
     write_line("fibonacci({n}) = {fibonacci(n)}")

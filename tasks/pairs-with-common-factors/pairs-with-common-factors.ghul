@@ -10,7 +10,8 @@ for prime in 2::limit do
         let multiple mut = prime
 
         while multiple <= limit do
-            totient[multiple] = totient[multiple] / prime * (prime - 1)
+            totient[multiple] =
+                totient[multiple] / prime * (prime - 1)
             multiple = multiple + prime
         od
     fi
@@ -22,7 +23,10 @@ sharing_a_factor() -> long{} is
     for count in 1::limit do
         coprime_total = coprime_total + long(totient[count])
 
-        yield long(count) * cast(count - 1) / 2L + 1L - coprime_total
+        yield
+            long(count) * cast(count - 1) / 2L +
+            1L -
+            coprime_total
     od
 si
 
@@ -33,9 +37,13 @@ write_line("the first 100 terms:")
 terms
     |> take(100)
     |> chunk(10)
-    |> each(row => write_line(row |> map(term => "{term,5}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(term => "{term,5}") |> join(""))
+    )
 
 write_line()
 
-[1_000, 10_000, 100_000, 1_000_000]
-    |> each(count => write_line("a({count,9:N0}) = {terms[count - 1]:N0}"))
+[1000, 10000, 100000, 1000000]
+    |> each(count =>
+        write_line("a({count,9:N0}) = {terms[count - 1]:N0}")
+    )

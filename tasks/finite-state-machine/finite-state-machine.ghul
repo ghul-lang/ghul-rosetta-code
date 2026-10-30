@@ -57,7 +57,9 @@ while state != EXIT do
         write_line("> {signal}")
 
         if let next = explicit(state, signal) then
-            write_line("{name(state)} -> {signal} -> {name(next)}")
+            write_line(
+                "{name(state)} -> {signal} -> {name(next)}"
+            )
             state = next
         else
             write_line("{signal} does nothing here")

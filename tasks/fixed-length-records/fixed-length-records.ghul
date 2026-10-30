@@ -15,7 +15,11 @@ records(path: string, length: int) -> string{} is
     let whole = bytes.count / length
 
     for record in 0..whole do
-        yield Encoding.ascii.get_string(bytes, record * length, length)
+        yield Encoding.ascii.get_string(
+            bytes,
+            record * length,
+            length
+        )
     od
 si
 
@@ -27,35 +31,46 @@ reverse(record: string) -> string => (
     string(characters)
 )
 
-let scratch =
-    Path.combine(Path.get_temp_path(), "records-{Guid.new_guid()}")
+let scratch = Path.combine(
+    Path.get_temp_path(),
+    "records-{Guid.new_guid()}"
+)
 
 Directory.create_directory(scratch)
 
 let reversed =
-    records("infile.dat", record_length)
-        |> map(reverse)
+    records("infile.dat", record_length) |> map(reverse)
 
 let joined = reversed |> join("")
 
-File.write_all_text(Path.combine(scratch, "outfile.dat"), joined)
+File.write_all_text(
+    Path.combine(scratch, "outfile.dat"),
+    joined
+)
 
 write_line("reversed records, shown with their padding:")
 
 reversed |> each(record => write_line("[{record}]"))
 
-let block = joined.pad_right(block_length).substring(0, block_length)
+let block =
+    joined.pad_right(block_length).substring(0, block_length)
 
 File.write_all_text(Path.combine(scratch, "block.dat"), block)
 
 write_line()
 let block_lines = block_length / block_line_length
 
-write_line("the same bytes as {block_lines} lines of {block_line_length}:")
+write_line(
+    "the same bytes as {block_lines} lines of {block_line_length}:"
+)
 
 0..block_lines
     |> map(line =>
-        block.substring(line * block_line_length, block_line_length))
+        block.substring(
+            line * block_line_length,
+            block_line_length
+        )
+    )
     |> each(line => write_line("[{line.trim_end()}]"))
 
 Directory.delete(scratch, true)

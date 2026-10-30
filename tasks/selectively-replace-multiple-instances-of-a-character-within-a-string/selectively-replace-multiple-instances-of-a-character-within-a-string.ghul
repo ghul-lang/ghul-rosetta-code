@@ -8,7 +8,8 @@ let replacements = [
     (('a', 5), 'D'),
     (('b', 1), 'E'),
     (('r', 2), 'F')
-] |> collect_map()
+]
+    |> collect_map()
 
 let seen = MAP()
 
@@ -16,7 +17,11 @@ let built = StringBuilder()
 
 for letter in "abracadabra" do
     let so_far =
-        if seen.contains_key(letter) then seen[letter] + 1 else 1 fi
+        if seen.contains_key(letter) then
+            seen[letter] + 1
+        else
+            1
+        fi
 
     seen[letter] = so_far
 

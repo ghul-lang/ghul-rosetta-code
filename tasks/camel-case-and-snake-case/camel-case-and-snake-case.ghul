@@ -5,19 +5,17 @@ class NAME(words: Collections.List[string] private) is
     to_camel_case() -> string =>
         _words
             |> index()
-            |> map(
-                (index, word) =>
-                    if index == 0 then
-                        lower_first(word)
-                    else
-                        upper_first(word)
-                    fi)
+            |> map((index, word) =>
+                if index == 0 then
+                    lower_first(word)
+                else
+                    upper_first(word)
+                fi
+            )
             |> join("")
 
     to_snake_case() -> string =>
-        _words
-            |> map(word => word.to_lower())
-            |> join("_")
+        _words |> map(word => word.to_lower()) |> join("_")
 si
 
 parse(text: string) -> NAME is
@@ -25,7 +23,11 @@ parse(text: string) -> NAME is
     let word = StringBuilder()
 
     for character in text.trim() do
-        if character == '_' \/ character == '-' \/ character == ' ' then
+        if
+            character == '_' \/
+            character == '-' \/
+            character == ' '
+        then
             if word.length > 0 then
                 words.add(word.to_string())
                 word.clear()
@@ -69,7 +71,8 @@ let column = 37
 
 write_line(
     "{"input".pad_right(column)} "
-    "{"snake case".pad_right(column)} camel case")
+    "{"snake case".pad_right(column)} camel case"
+)
 
 for test in tests do
     let name = parse(test)
@@ -77,5 +80,6 @@ for test in tests do
     write_line(
         "{quoted(test).pad_right(column)} "
         "{quoted(name.to_snake_case()).pad_right(column)} "
-        "{quoted(name.to_camel_case())}")
+        "{quoted(name.to_camel_case())}"
+    )
 od

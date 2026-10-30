@@ -10,20 +10,27 @@ fivenum(xs_raw: double[]) -> double{} is
         double(n) + 1.0 - n4, double(n)
     ]
     midpoint(di) =>
-        let lo = xs[int(floor(di)) - 1], hi = xs[int(ceiling(di)) - 1] in
-        0.5 * (lo + hi)
+        let
+            lo = xs[int(floor(di)) - 1],
+            hi = xs[int(ceiling(di)) - 1]
+        in
+            0.5 * (lo + hi)
 
     d |> map(midpoint)
 si
 
 let datasets = [
-    [15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0, 47.0, 43.0],
+    [
+        15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0,
+        47.0, 43.0
+    ],
     [36.0, 40.0, 7.0, 39.0, 41.0, 15.0]
 ]
 
 for xs in datasets do
     let data_text = xs |> map(x => "{x}") |> join()
-    let result_text = xs |> fivenum() |> map(x => "{x}") |> join()
+    let result_text =
+        xs |> fivenum() |> map(x => "{x}") |> join()
 
     write_line("data: {data_text}")
     write_line("fivenum: {result_text}")

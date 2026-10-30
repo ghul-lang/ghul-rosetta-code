@@ -60,8 +60,10 @@ show() is
                         board["{"abcdefg"[(column - 2) / 4]}{rank}"]
                     else
                         template[row][column]
-                    fi)
-                |> join(""))
+                    fi
+                )
+                |> join("")
+        )
     od
 si
 
@@ -75,8 +77,11 @@ holding(side: char) -> List[string] =>
 count_of(side: char) -> int => holding(side).count
 
 in_mill(point: string, side: char) -> bool =>
-    mills |> any(m =>
-        m |> any(p => p =~ point) /\ m |> all(p => board[p] == side))
+    mills
+        |> any(m =>
+            m |> any(p => p =~ point) /\
+            m |> all(p => board[p] == side)
+        )
 
 use Move = (from: string?, to: string)
 
@@ -96,7 +101,8 @@ moves(side: char) -> List[Move] is
     for from in holding(side) do
         let targets =
             if flying then empty
-            else neighbours[from] |> filter(p => board[p] == '.')
+            else
+                neighbours[from] |> filter(p => board[p] == '.')
             fi
 
         for to in targets do
@@ -135,9 +141,14 @@ makes_mill(move: Move, side: char) -> bool is
 si
 
 removable(side: char) -> List[string] =>
-    let pieces = holding(side) in
-    let loose = pieces |> filter(p => !in_mill(p, side)) |> collect() in
-    if loose.count > 0 then loose else pieces fi
+    let
+        pieces = holding(side),
+        loose =
+            pieces
+                |> filter(p => !in_mill(p, side))
+                |> collect()
+    in
+        if loose.count > 0 then loose else pieces fi
 
 pick[T](items: List[T]) -> T => items[random.next(items.count)]
 
@@ -150,15 +161,22 @@ computer_move(side: char) -> Move is
         return pick(winning)
     fi
 
-    let threats =
-        [m.to for m in moves(other(side)) if makes_mill(m, other(side))]
+    let threats = [
+        m.to
+        for m in moves(other(side))
+        if makes_mill(m, other(side))
+    ]
 
     let blocking =
         legal
             |> filter(m => threats |> any(t => t =~ m.to))
             |> collect()
 
-    if blocking.count > 0 then pick(blocking) else pick(legal) fi
+    if blocking.count > 0 then
+        pick(blocking)
+    else
+        pick(legal)
+    fi
 si
 
 let autopilot mut = false
@@ -174,7 +192,9 @@ ask(prompt: string) -> string? is
 
     if !line? then
         autopilot = true
-        write_line("(no more input, so your moves are chosen for you)")
+        write_line(
+            "(no more input, so your moves are chosen for you)"
+        )
         return null
     fi
 
@@ -187,20 +207,21 @@ human_move() -> Move? is
     let placing = to_place['W'] > 0
 
     while true do
-        let answer =
-            ask(
-                if placing then "where do you place a piece?"
-                else "which piece do you move, and where to?"
-                fi)
+        let answer = ask(
+            if placing then "where do you place a piece?"
+            else "which piece do you move, and where to?"
+            fi
+        )
 
         if !answer? then
             return null
         fi
 
         let squares =
-            answer
-                .replace("-", " ")
-                .split([' '], REMOVE_EMPTY_ENTRIES)
+            answer.replace("-", " ").split(
+                [' '],
+                REMOVE_EMPTY_ENTRIES
+            )
 
         let chosen =
             legal
@@ -210,7 +231,8 @@ human_move() -> Move? is
                     when (false, [from, to]) then
                         m.from =~ from /\ m.to =~ to
                     else false
-                    esac)
+                    esac
+                )
                 |> first()
 
         if let move = chosen then
@@ -225,7 +247,9 @@ si
 
 human_removal(options: List[string]) -> string? is
     while true do
-        let answer = ask("which of the computer's pieces do you remove?")
+        let answer = ask(
+            "which of the computer's pieces do you remove?"
+        )
 
         if !answer? then
             return null
@@ -242,7 +266,11 @@ human_removal(options: List[string]) -> string? is
 si
 
 acts(side: char, yours: string, theirs: string) -> string =>
-    if side == 'W' then "you {yours}" else "the computer {theirs}" fi
+    if side == 'W' then
+        "you {yours}"
+    else
+        "the computer {theirs}"
+    fi
 
 describe(move: Move, side: char) -> string =>
     if let from = move.from then
@@ -281,7 +309,8 @@ while !winner? do
         let options = removable(other(side))
 
         let taken =
-            if side == 'W' then human_removal(options) ?? pick(options)
+            if side == 'W' then
+                human_removal(options) ?? pick(options)
             else pick(options)
             fi
 
@@ -290,7 +319,9 @@ while !winner? do
         write_line("  a mill: {removes} the piece on {taken}")
     fi
 
-    if to_place[other(side)] == 0 /\ count_of(other(side)) < 3 then
+    if
+        to_place[other(side)] == 0 /\ count_of(other(side)) < 3
+    then
         winner = side
     fi
 

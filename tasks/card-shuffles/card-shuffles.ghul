@@ -8,7 +8,12 @@ riffle_shuffle(deck: List[int], random: Random) -> List[int] is
     let merged = LIST()
 
     while left.count > 0 /\ right.count > 0 do
-        if random.next(0, left.count + right.count) < left.count then
+        if
+            random.next(
+                0,
+                left.count + right.count
+            ) < left.count
+        then
             merged.add(left[0])
             left.remove_at(0)
         else
@@ -28,9 +33,16 @@ overhand_shuffle(deck: List[int], random: Random) -> int{} is
     let stacked = LIST()
 
     while remaining.count > 0 do
-        let wanted = random.next(1, cast(remaining.count / 5) + 2)
+        let wanted = random.next(
+            1,
+            cast(remaining.count / 5) + 2
+        )
         let group =
-            if wanted < remaining.count then wanted else remaining.count fi
+            if wanted < remaining.count then
+                wanted
+            else
+                remaining.count
+            fi
         let taken = LIST(remaining[0..group])
 
         taken.add_range(stacked)

@@ -1,9 +1,6 @@
 use default
 
-amb[T](
-    sets: List[T{}],
-    accepts: (T, T) -> bool
-) -> List[T]{} is
+amb[T](sets: List[T{}], accepts: (T, T) -> bool) -> List[T]{} is
     case sets
     when [] then
         yield LIST()
@@ -12,7 +9,9 @@ amb[T](
 
         for choice in set do
             for rest in rests do
-                if rest.count == 0 \/ accepts(choice, rest[0]) then
+                if
+                    rest.count == 0 \/ accepts(choice, rest[0])
+                then
                     let sequence = LIST()
 
                     sequence.add(choice)
@@ -32,8 +31,7 @@ let sets: List[string{}] = [
     ["slowly", "quickly"]
 ]
 
-let joins =
-    (left, right) => left[left.length - 1] == right[0]
+let joins = (left, right) => left[left.length - 1] == right[0]
 
 for sentence in amb(sets, joins) do
     write_line(sentence |> join(" "))

@@ -3,8 +3,7 @@ use default
 sundaram(limit: int) -> int{} is
     let marked = LIST(limit + 1)
 
-    (0::limit)
-        |> each(_ => marked.add(false))
+    (0::limit) |> each(_ => marked.add(false))
 
     for step in 1::limit do
         if step + step + 2 * step * step > limit then break fi
@@ -26,15 +25,20 @@ si
 
 let limit = 7_800_000
 
-write_line("the first 100 odd primes from the sieve of Sundaram:")
+write_line(
+    "the first 100 odd primes from the sieve of Sundaram:"
+)
 
 sundaram(limit)
     |> take(100)
     |> chunk(10)
-    |> each(row => write_line(row |> map(p => "{p,5}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(p => "{p,5}") |> join(""))
+    )
 
 write_line()
 
-let millionth = sundaram(limit) |> skip(999_999) |> first_or_throw()
+let millionth =
+    sundaram(limit) |> skip(999_999) |> first_or_throw()
 
 write_line("the millionth: {millionth:N0}")

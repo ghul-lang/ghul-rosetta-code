@@ -3,7 +3,9 @@ use Raster.Anchor
 use Raster.IMAGE
 use System.Math.*
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -14,19 +16,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -35,7 +50,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -59,23 +78,33 @@ convolve(source: IMAGE, kernel: Kernel) -> IMAGE is
                     double(kernel.weights[(j + 1) * 3 + i + 1]),
                     source.pixel(
                         clamp(x + i, 0, source.width - 1),
-                        clamp(y + j, 0, source.height - 1))
+                        clamp(y + j, 0, source.height - 1)
+                    )
                 )
-                for j in -1::1 for i in -1::1
+                for j in -1::1
+                for i in -1::1
             ]
 
             let red =
-                around |> map(((w, p)) => w * double(p.red)) |> sum()
+                around
+                    |> map(((w, p)) => w * double(p.red))
+                    |> sum()
             let green =
-                around |> map(((w, p)) => w * double(p.green)) |> sum()
+                around
+                    |> map(((w, p)) => w * double(p.green))
+                    |> sum()
             let blue =
-                around |> map(((w, p)) => w * double(p.blue)) |> sum()
+                around
+                    |> map(((w, p)) => w * double(p.blue))
+                    |> sum()
 
             result.set_pixel(
-                x, y,
+                x,
+                y,
                 channel(red / divisor),
                 channel(green / divisor),
-                channel(blue / divisor))
+                channel(blue / divisor)
+            )
         od
     od
 
@@ -92,24 +121,36 @@ let kernels: Kernel[] = [
 scene().write("scene.png")
 
 let source = IMAGE.read("scene.png")
-kernels |> each(k => write_line("{k.name,-8} {k.weights |> join(" ")}"))
+kernels
+    |> each(k =>
+        write_line("{k.name,-8} {k.weights |> join(" ")}")
+    )
 
-let results = [("original", source)] ++
+let results =
+    [("original", source)] ++
     (kernels |> map(k => (k.name, convolve(source, k))))
 
-let cell_width = source.width + 10, cell_height = source.height + 24
+let cell_width = source.width + 10,
+    cell_height = source.height + 24
 let sheet = IMAGE(cell_width * 3 + 10, cell_height * 2 + 10)
 
 sheet.clear(235ub, 235ub, 230ub)
 
 for (i, (name, image)) in results |> index() do
-    let left = 10 + i % 3 * cell_width, top = 10 + i / 3 * cell_height
+    let left = 10 + i % 3 * cell_width,
+        top = 10 + i / 3 * cell_height
 
     for y in 0..image.height do
         for x in 0..image.width do
             let p = image.pixel(x, y)
 
-            sheet.set_pixel(left + x, top + y, p.red, p.green, p.blue)
+            sheet.set_pixel(
+                left + x,
+                top + y,
+                p.red,
+                p.green,
+                p.blue
+            )
         od
     od
 
@@ -117,7 +158,10 @@ for (i, (name, image)) in results |> index() do
     sheet.text(
         double(left + image.width / 2),
         double(top + image.height + 15),
-        11.0D, name, Anchor.CENTRE)
+        11.0D,
+        name,
+        Anchor.CENTRE
+    )
 od
 
 sheet.write("filters.png")

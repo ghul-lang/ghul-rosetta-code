@@ -42,7 +42,11 @@ run(program: string, input: string) is
         when '.' then write(char(cells[cell]))
         when ',' then
             let next =
-                if read < input.length then int(input[read]) else 0 fi
+                if read < input.length then
+                    int(input[read])
+                else
+                    0
+                fi
 
             cells[cell] = next
             read = read + 1
@@ -63,6 +67,7 @@ si
 run(
     "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++"
     "..+++.>>.<-.<.+++.------.--------.>>+.>++.",
-    "")
+    ""
+)
 
 write_line()

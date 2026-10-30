@@ -1,7 +1,12 @@
 use default
 
-counting_sort(values: List[int], low: int, high: int) -> int{} is
-    let counts = low..high + 1 |> map(_ => 0) |> collect_mutable()
+counting_sort(
+    values: List[int],
+    low: int,
+    high: int
+) -> int{} is
+    let counts =
+        low..high + 1 |> map(_ => 0) |> collect_mutable()
 
     for value in values do
         counts[value - low] = counts[value - low] + 1
@@ -10,7 +15,7 @@ counting_sort(values: List[int], low: int, high: int) -> int{} is
     let result = LIST()
 
     for offset in 0..counts.count do
-        for _ in 0..counts[offset] do
+        for _ in 0 .. counts[offset] do
             result.add(offset + low)
         od
     od

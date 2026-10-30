@@ -12,14 +12,22 @@ p(leading: int, nth: int) -> int =>
     in
         from(1)
             |> filter(power =>
-                let scaled = double(power) * log_two in
-                let fraction = scaled - floor(scaled) in
-                fraction >= lower /\ fraction < upper
+                let
+                    scaled = double(power) * log_two,
+                    fraction = scaled - floor(scaled)
+                in
+                    fraction >= lower /\ fraction < upper
             )
             |> skip(nth - 1)
             |> first()!
 
-let wanted = [(12, 1), (12, 2), (123, 45), (123, 12345), (123, 678910)]
+let wanted = [
+    (12, 1),
+    (12, 2),
+    (123, 45),
+    (123, 12345),
+    (123, 678910)
+]
 
 for (leading, nth) in wanted do
     write_line("p({leading}, {nth}) = {p(leading, nth)}")

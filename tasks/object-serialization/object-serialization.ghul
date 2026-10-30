@@ -25,7 +25,8 @@ try
     IO.File.write_all_text(path, text)
 
     let json = IO.File.read_all_text(path)
-    let read_back = JsonSerializer.deserialize[LIST[ENTRY]](json, null)!
+    let read_back =
+        JsonSerializer.deserialize[LIST[ENTRY]](json, null)!
 
     read_back |> each(entry => write_line("{entry}"))
 

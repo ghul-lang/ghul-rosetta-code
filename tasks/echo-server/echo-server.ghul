@@ -6,7 +6,8 @@ use System.Threading.Thread
 
 echo(client: TcpClient, number: int, log: (string) -> void) is
     let stream = client.get_stream()
-    let reader = IO.StreamReader(stream), writer = IO.StreamWriter(stream)
+    let reader = IO.StreamReader(stream),
+        writer = IO.StreamWriter(stream)
 
     writer.auto_flush = true
 

@@ -15,8 +15,8 @@ class QUEUE[T] is
     si
 
     pop() -> T is
-        assert !is_empty else
-            InvalidOperationException("the queue is empty")
+        assert !is_empty
+            else InvalidOperationException("the queue is empty")
 
         let value = _items[0]
 

@@ -11,7 +11,11 @@ use Card = (colour: string, value: string)
 is_wild(card: Card) -> bool => card.colour =~ "wild"
 
 name(card: Card) -> string =>
-    if is_wild(card) then card.value else "{card.colour} {card.value}" fi
+    if is_wild(card) then
+        card.value
+    else
+        "{card.colour} {card.value}"
+    fi
 
 points(card: Card) -> int =>
     if is_wild(card) then 50
@@ -24,7 +28,8 @@ shuffled(cards: Card{}) -> LIST[Card] =>
         cards
             |> map(c => (card = c, key = random.next()))
             |> sort((a, b) => a.key <> b.key)
-            |> map(p => p.card))
+            |> map(p => p.card)
+    )
 
 new_deck() -> LIST[Card] is
     let deck = LIST[Card]()
@@ -56,7 +61,11 @@ let direction mut = 1
 let verbose mut = true
 
 acts(seat: int, yours: string, theirs: string) -> string =>
-    if seat == 0 then "you {yours}" else "{names[seat]} {theirs}" fi
+    if seat == 0 then
+        "you {yours}"
+    else
+        "{names[seat]} {theirs}"
+    fi
 
 say(text: string) is
     if verbose then
@@ -65,9 +74,11 @@ say(text: string) is
 si
 
 penalised(seat: int, cards: string) =>
-    let drawn = acts(seat, "draw {cards}", "draws {cards}") in
-    let missed = if seat == 0 then "miss" else "misses" fi in
-    say("  {drawn} and {missed} a turn")
+    let
+        drawn = acts(seat, "draw {cards}", "draws {cards}"),
+        missed = if seat == 0 then "miss" else "misses" fi
+    in
+        say("  {drawn} and {missed} a turn")
 
 draw(player: int, count: int) is
     for _ in 0..count do
@@ -77,7 +88,9 @@ draw(player: int, count: int) is
             deck = shuffled(discard)
             discard.clear()
             discard.add(top)
-            say("  the discard pile is shuffled to make a new deck")
+            say(
+                "  the discard pile is shuffled to make a new deck"
+            )
         fi
 
         hands[player].add(deck[0])
@@ -88,7 +101,9 @@ si
 top() -> Card => discard[discard.count - 1]
 
 matches(card: Card) -> bool =>
-    is_wild(card) \/ card.colour =~ colour \/ card.value =~ top().value
+    is_wild(card) \/
+    card.colour =~ colour \/
+    card.value =~ top().value
 
 has_colour(hand: List[Card]) -> bool =>
     hand |> any(c => c.colour =~ colour)
@@ -108,9 +123,17 @@ favourite_colour(hand: List[Card]) -> string =>
 bot_choice(hand: List[Card]) -> int? =>
     (0..hand.count)
         |> filter(i => matches(hand[i]) /\ !is_wild(hand[i]))
-        |> cat(0..hand.count |> filter(i => hand[i].value =~ "wild"))
-        |> cat(0..hand.count |> filter(i =>
-            hand[i].value =~ "wild draw four" /\ !has_colour(hand)))
+        |> cat(
+            0..hand.count
+                |> filter(i => hand[i].value =~ "wild")
+        )
+        |> cat(
+            0..hand.count
+                |> filter(i =>
+                    hand[i].value =~ "wild draw four" /\
+                    !has_colour(hand)
+                )
+        )
         |> first()
 
 let autopilot mut = false
@@ -125,7 +148,9 @@ ask(prompt: string) -> string? is
 
     if !line? then
         autopilot = true
-        write_line("(no more input, so your cards are played for you)")
+        write_line(
+            "(no more input, so your cards are played for you)"
+        )
         return null
     fi
 
@@ -162,13 +187,16 @@ human_choice(hand: List[Card]) -> Choice? is
         let index mut = 0
 
         let valid =
-            int.try_parse(words[0], index ref) /\
-            index >= 1 /\ index <= hand.count
+            int.try_parse(words[0], index ref ) /\
+            index >= 1 /\
+            index <= hand.count
 
         if valid then
             let card = hand[index - 1]
             let chosen =
-                words |> filter(w => colours |> any(c => c =~ w)) |> first()
+                words
+                    |> filter(w => colours |> any(c => c =~ w))
+                    |> first()
 
             if !matches(card) then
                 write_line("{name(card)} does not match")
@@ -178,7 +206,8 @@ human_choice(hand: List[Card]) -> Choice? is
                 return (
                     index = index - 1,
                     colour = chosen ?? card.colour,
-                    uno = words |> any(w => w =~ "uno"))
+                    uno = words |> any(w => w =~ "uno")
+                )
             fi
         fi
     od
@@ -197,7 +226,8 @@ automatic_choice(hand: List[Card]) -> Choice is
         return (
             index = index,
             colour = favourite_colour(rest),
-            uno = random.next(5) != 0)
+            uno = random.next(5) != 0
+        )
     fi
 
     (index = -1, colour = "", uno = false)
@@ -208,21 +238,26 @@ use Played = (card: Card, bluffed: bool)
 play(seat: int, choice: Choice) -> Played is
     let hand = hands[seat]
     let card = hand[choice.index]
-    let bluffed = card.value =~ "wild draw four" /\ has_colour(hand)
+    let bluffed =
+        card.value =~ "wild draw four" /\ has_colour(hand)
 
     hand.remove_at(choice.index)
     discard.add(card)
-    colour = if is_wild(card) then choice.colour else card.colour fi
+    colour =
+        if is_wild(card) then choice.colour else card.colour fi
 
     let calls = if seat == 0 then "call" else "calls" fi
-    let called = if is_wild(card) then " and {calls} {colour}" else "" fi
+    let called =
+        if is_wild(card) then " and {calls} {colour}" else "" fi
     say("{acts(seat, "play", "plays")} {name(card)}{called}")
 
     if hand.count == 1 then
         if choice.uno then
             say("  {names[seat]}: uno!")
         else
-            say("  {acts(seat, "don't", "doesn't")} call uno: two cards")
+            say(
+                "  {acts(seat, "don't", "doesn't")} call uno: two cards"
+            )
             draw(seat, 2)
         fi
     fi
@@ -249,9 +284,11 @@ take_turn(seat: int) -> Played? is
     say(
         if seat == 0 then "you draw {name(drawn)}"
         else "{names[seat]} draws a card"
-        fi)
+        fi
+    )
 
-    let illegal = drawn.value =~ "wild draw four" /\ has_colour(hand)
+    let illegal =
+        drawn.value =~ "wild draw four" /\ has_colour(hand)
 
     if !matches(drawn) \/ illegal then
         return null
@@ -260,7 +297,9 @@ take_turn(seat: int) -> Played? is
     let chosen_colour mut = favourite_colour(hand)
 
     if seat == 0 /\ !autopilot then
-        let answer = ask("play it? (y/n, with a colour if it is wild)")
+        let answer = ask(
+            "play it? (y/n, with a colour if it is wild)"
+        )
 
         if let reply = answer then
             if !reply.starts_with("y") then
@@ -268,13 +307,17 @@ take_turn(seat: int) -> Played? is
             fi
 
             chosen_colour =
-                colours |> filter(reply.contains) |> first() ??
-                    chosen_colour
+                colours
+                    |> filter(reply.contains)
+                    |> first() ?? chosen_colour
         fi
     fi
 
     let last = hand.count - 1
-    play(seat, (index = last, colour = chosen_colour, uno = true))
+    play(
+        seat,
+        (index = last, colour = chosen_colour, uno = true)
+    )
 si
 
 challenges(seat: int) -> bool is
@@ -314,7 +357,9 @@ play_hand(dealer: int) -> int is
     od
 
     colour = top().colour
-    say("{names[dealer]} dealt; the first discard is {name(top())}")
+    say(
+        "{names[dealer]} dealt; the first discard is {name(top())}"
+    )
 
     let seat mut = next_seat(dealer)
 
@@ -357,16 +402,28 @@ play_hand(dealer: int) -> int is
             draw(victim, 2)
             seat = victim
         when "wild draw four" then
-            if hands[player].count > 0 /\ challenges(victim) then
-                let challenger = acts(victim, "challenge", "challenges")
+            if
+                hands[player].count > 0 /\ challenges(victim)
+            then
+                let challenger = acts(
+                    victim,
+                    "challenge",
+                    "challenges"
+                )
 
                 if played.bluffed then
-                    say("  {challenger}: the card was not allowed")
-                    say("  {acts(player, "draw", "draws")} four instead")
+                    say(
+                        "  {challenger}: the card was not allowed"
+                    )
+                    say(
+                        "  {acts(player, "draw", "draws")} four instead"
+                    )
                     draw(player, 4)
                 else
                     say("  {challenger}: the card was allowed")
-                    say("  {acts(victim, "draw", "draws")} six cards")
+                    say(
+                        "  {acts(victim, "draw", "draws")} six cards"
+                    )
                     draw(victim, 6)
                     seat = victim
                 fi
@@ -388,8 +445,12 @@ play_hand(dealer: int) -> int is
     -1
 si
 
-write_line("play a card by its number, naming a colour for a wild card")
-write_line("and adding 'uno' as you go down to one card, or 'd' to draw:")
+write_line(
+    "play a card by its number, naming a colour for a wild card"
+)
+write_line(
+    "and adding 'uno' as you go down to one card, or 'd' to draw:"
+)
 write_line("for example 3, 5 blue, or 2 uno")
 write_line()
 
@@ -416,8 +477,10 @@ while scores |> all(s => s < 500) do
 
     write_line(
         "hand {hand_number}: {names[winner]} went out for {won} points; "
-        "{standings}")
+        "{standings}"
+    )
 od
 
-let champion = 0..4 |> filter(s => scores[s] >= 500) |> first() ?? 0
+let champion =
+    0..4 |> filter(s => scores[s] >= 500) |> first() ?? 0
 write_line("{acts(champion, "win", "wins")} the game")

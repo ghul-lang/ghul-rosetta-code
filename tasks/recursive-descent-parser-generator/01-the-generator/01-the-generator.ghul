@@ -17,7 +17,7 @@ let prelude = [
     "            let start = i",
     "",
     "            while i < text.length /\\ "
-        "char.is_letter_or_digit(text[i]) do",
+    "char.is_letter_or_digit(text[i]) do",
     "                i = i + 1",
     "            od",
     "",
@@ -51,7 +51,7 @@ let prelude = [
     "expect(token: string) is",
     "    if !accept(token) then",
     "        throw System.Exception("
-        "\"expected {{token}}, found {{peek()}}\")",
+    "\"expected {{token}}, found {{peek()}}\")",
     "    fi",
     "si",
     "",
@@ -95,16 +95,23 @@ items(text: string) -> List[Item] is
         if c == '"' then
             let end = text.index_of('"', i + 1)
 
-            result.add(Item.LITERAL(text.substring(i + 1, end - i - 1)))
+            result.add(
+                Item.LITERAL(text.substring(i + 1, end - i - 1))
+            )
             i = end + 1
         elif char.is_letter(c) then
             let start = i
 
-            while i < text.length /\ char.is_letter_or_digit(text[i]) do
+            while
+                i < text.length /\
+                char.is_letter_or_digit(text[i])
+            do
                 i = i + 1
             od
 
-            result.add(Item.RULE(text.substring(start, i - start)))
+            result.add(
+                Item.RULE(text.substring(start, i - start))
+            )
         else
             case c
             when '{' then result.add(Item.OPEN)
@@ -151,14 +158,19 @@ binary(name: string, head: string, pairs: List[List[Item]]) is
     say("")
     say("    do")
 
-    for (pair, place) in
-            pairs |> index() |> map(iv => (iv.value, iv.index)) do
+    for
+        (pair, place) in pairs
+            |> index()
+            |> map(iv => (iv.value, iv.index))
+    do
         let operator = called(pair[0])
         let operand = called(pair[1])
         let keyword = if place == 0 then "if" else "elif" fi
 
         say("        {keyword} accept(\"{operator}\") then")
-        say("            left = emit(left, \"{operator}\", {operand}())")
+        say(
+            "            left = emit(left, \"{operator}\", {operand}())"
+        )
     od
 
     say("        else")

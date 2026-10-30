@@ -6,25 +6,26 @@ hex_dump(data: ubyte[], start: int, length: int) is
 
     while offset < end do
         let count = System.Math.min(16, end - offset)
-        let bytes =
-            0..count |> map(i => data[offset + i])
+        let bytes = 0..count |> map(i => data[offset + i])
         let to_hex = b => "{b,0:x2}"
-        let first_half = bytes |> take(8) |> map(to_hex) |> join(" ")
-        let second_half = bytes |> skip(8) |> map(to_hex) |> join(" ")
+        let first_half =
+            bytes |> take(8) |> map(to_hex) |> join(" ")
+        let second_half =
+            bytes |> skip(8) |> map(to_hex) |> join(" ")
         let hex =
             if second_half.length == 0 then
                 first_half
             else
                 "{first_half}  {second_half}"
-            fi
-            .pad_right(48)
+            fi.pad_right(48)
         let printable = b => b >= 32ub /\ b < 127ub
         let to_ascii_char =
             b => if printable(b) then char(b) else '.' fi
-        let ascii = bytes
-            |> map(to_ascii_char)
-            |> map(c => "{c}")
-            |> join("")
+        let ascii =
+            bytes
+                |> map(to_ascii_char)
+                |> map(c => "{c}")
+                |> join("")
 
         write_line("{offset,0:x8}  {hex}  |{ascii}|")
 

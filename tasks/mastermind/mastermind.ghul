@@ -9,7 +9,9 @@ next_line() -> string is
     let line = read_line()
 
     if !line? then
-        throw System.Exception("input ended before the game did")
+        throw System.Exception(
+            "input ended before the game did"
+        )
     fi
 
     write_line("> {line}")
@@ -22,10 +24,13 @@ ask(prompt: string, low: int, high: int) -> int is
     write_line("{prompt} ({low}-{high})?")
 
     while
-        !int.try_parse(next_line(), value ref) \/
-        value < low \/ value > high
+        !int.try_parse(next_line(), value ref ) \/
+        value < low \/
+        value > high
     do
-        write_line("a whole number from {low} to {high}, please")
+        write_line(
+            "a whole number from {low} to {high}, please"
+        )
     od
 
     value
@@ -36,14 +41,20 @@ tally(text: string, letter: char) -> int =>
 
 score(code: string, guess: string, palette: string) -> string =>
     let exact =
-        0..code.length |> filter(i => code[i] == guess[i]) |> count() in
+        0..code.length
+            |> filter(i => code[i] == guess[i])
+            |> count()
+    in
     let common =
         palette
-            |> sum_by(c => Math.min(tally(code, c), tally(guess, c))) in
-    ""
-        .pad_right(exact, 'X')
-        .pad_right(common, 'O')
-        .pad_right(code.length, '-')
+            |> sum_by(c =>
+                Math.min(tally(code, c), tally(guess, c))
+            )
+    in
+    "".pad_right(exact, 'X').pad_right(common, 'O').pad_right(
+        code.length,
+        '-'
+    )
 
 let colours = ask("how many colours", 2, 20)
 
@@ -69,7 +80,8 @@ let code = (
         fi
     od
 
-    chosen.to_string())
+    chosen.to_string()
+)
 
 let history = LIST()
 
@@ -81,8 +93,7 @@ while !solved /\ history.count < guesses do
     let guess = next_line().to_upper()
 
     let valid =
-        guess.length == length /\
-        guess |> all(palette.contains)
+        guess.length == length /\ guess |> all(palette.contains)
 
     if !valid then
         write_line("{length} letters from {palette}, please")
@@ -102,4 +113,5 @@ od
 write_line(
     if solved then "you found it"
     else "out of guesses; the code was {code}"
-    fi)
+    fi
+)

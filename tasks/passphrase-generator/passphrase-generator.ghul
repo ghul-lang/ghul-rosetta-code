@@ -2,10 +2,11 @@ use default
 
 let random = System.Random(2026)
 
-let words = IO.File.read_all_lines("unixdict.txt")
-    |> filter(w => w.length >= 4 /\ w.length <= 8)
-    |> filter(w => w |> all(char.is_letter(*)))
-    |> collect()
+let words =
+    IO.File.read_all_lines("unixdict.txt")
+        |> filter(w => w.length >= 4 /\ w.length <= 8)
+        |> filter(w => w |> all(char.is_letter(*)))
+        |> collect()
 
 capitalised(word: string) -> string =>
     "{char.to_upper(word[0])}{word[1..<0]}"
@@ -14,7 +15,8 @@ random_word() -> string =>
     let word = words[random.next(words.count)] in
     "{capitalised(word)}{random.next(10, 100)}"
 
-passphrase(n: int) -> string => 1::n |> map(_ => random_word()) |> join("-")
+passphrase(n: int) -> string =>
+    1::n |> map(_ => random_word()) |> join("-")
 
 for n in [3, 5, 7] do
     write_line("{n} words: {passphrase(n)}")

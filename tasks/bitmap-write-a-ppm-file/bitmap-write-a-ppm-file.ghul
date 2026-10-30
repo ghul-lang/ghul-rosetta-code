@@ -12,7 +12,8 @@ class BITMAP is
         self.width = width
         self.height = height
 
-        bytes = repeat(0ub, width * height * 3) |> collect_mutable()
+        bytes =
+            repeat(0ub, width * height * 3) |> collect_mutable()
     si
 
     set_pixel(x: int, y: int, colour: COLOUR) is
@@ -27,10 +28,9 @@ si
 write_ppm(image: BITMAP, path: string) is
     let file = IO.File.create(path)
 
-    let header =
-        System.Text.Encoding.ascii.get_bytes(
-            "P6\n{image.width} {image.height}\n255\n"
-        )
+    let header = System.Text.Encoding.ascii.get_bytes(
+        "P6\n{image.width} {image.height}\n255\n"
+    )
 
     file.write(header, 0, header.count)
 
@@ -46,10 +46,13 @@ let image = BITMAP(200, 150)
 for y in 0..image.height do
     for x in 0..image.width do
         image.set_pixel(
-            x, y,
-            (red = ubyte(255 * x / image.width),
-             green = ubyte(255 * y / image.height),
-             blue = 128ub)
+            x,
+            y,
+            (
+                red = ubyte(255 * x / image.width),
+                green = ubyte(255 * y / image.height),
+                blue = 128ub
+            )
         )
     od
 od

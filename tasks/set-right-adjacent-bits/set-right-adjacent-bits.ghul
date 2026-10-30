@@ -2,7 +2,7 @@ use default
 
 set_right_adjacent(bits: string, n: int) -> string =>
     let remaining mut = 0 in
-        bits
+    bits
         |> map(bit =>
             if bit == '1' then
                 remaining = n
@@ -12,7 +12,8 @@ set_right_adjacent(bits: string, n: int) -> string =>
                 '1'
             else
                 '0'
-            fi)
+            fi
+        )
         |> map(c => "{c}")
         |> join("")
 

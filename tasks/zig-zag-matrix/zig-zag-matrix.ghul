@@ -4,16 +4,27 @@ zigzag_order(n: int) -> (int, int){} =>
     [(row, column) for row in 0..n for column in 0..n]
         |> sort_by(((row, column)) =>
             let diagonal = row + column in
-            diagonal * n + if diagonal % 2 == 0 then column else row fi)
+            diagonal * n +
+            if diagonal % 2 == 0 then column else row fi
+        )
 
 zigzag(n: int) -> int[][] =>
     let
         order = zigzag_order(n) |> collect(),
-        position = MAP(0..order.count |> map(i => (order[i], i)))
+        position = MAP(
+            0..order.count |> map(i => (order[i], i))
+        )
     in
-        [[position[(row, column)] for column in 0..n] for row in 0..n]
+        [
+            [position[(row, column)] for column in 0..n]
+            for row in 0..n
+        ]
 
 let n = 5
 
-zigzag(n) |> each(row =>
-    write_line(row |> map(value => "{value,2}") |> join(" ")))
+zigzag(n)
+    |> each(row =>
+        write_line(
+            row |> map(value => "{value,2}") |> join(" ")
+        )
+    )

@@ -5,12 +5,17 @@ use System.Threading.Thread
 // There is no portable way to play a sound from .NET, so the beat is shown
 // rather than heard: the first beat of each bar is TICK, the others tock.
 
-metronome(beats_per_minute: int, beats_per_bar: int, bars: int) is
+metronome(
+    beats_per_minute: int,
+    beats_per_bar: int,
+    bars: int
+) is
     let interval = 60_000 / beats_per_minute
     let clock = System.Diagnostics.Stopwatch.start_new()
 
     write_line(
-        "{beats_per_minute} beats a minute, {beats_per_bar} to the bar")
+        "{beats_per_minute} beats a minute, {beats_per_bar} to the bar"
+    )
 
     for beat in 0..beats_per_bar * bars do
         let due = long(beat * interval)
@@ -23,7 +28,13 @@ metronome(beats_per_minute: int, beats_per_bar: int, bars: int) is
         let accent = beat % beats_per_bar == 0
         let bar = beat / beats_per_bar + 1
 
-        write_line(if accent then "bar {bar}: TICK" else "        tock" fi)
+        write_line(
+            if accent then
+                "bar {bar}: TICK"
+            else
+                "        tock"
+            fi
+        )
     od
 si
 

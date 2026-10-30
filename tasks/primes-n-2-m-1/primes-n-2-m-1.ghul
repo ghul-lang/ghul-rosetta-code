@@ -2,17 +2,17 @@ use default
 
 abbreviated(p: bigint) -> string =>
     let digits = "{p}" in
-        if digits.length <= 40 then
-            digits
-        else
-            "{digits[0..20]}...{digits[20..<<0]} ({digits.length} digits)"
-        fi
+    if digits.length <= 40 then
+        digits
+    else
+        "{digits[0..20]}...{digits[20..<<0]} ({digits.length} digits)"
+    fi
 
 for n in 1::50 do
     let (m, p) =
         from(0)
-        |> map(m => (m, bigint(n) * bigint.pow(2n, m) + 1n))
-        |> find((_, p) => is_prime(p))!
+            |> map(m => (m, bigint(n) * bigint.pow(2n, m) + 1n))
+            |> find((_, p) => is_prime(p))!
 
     write_line("n: {n,2} m: {m,3} p: {abbreviated(p)}")
 od

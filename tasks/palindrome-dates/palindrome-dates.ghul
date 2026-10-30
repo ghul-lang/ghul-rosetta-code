@@ -6,12 +6,14 @@ use System.DateTime
 // year's digits reversed, so each year gives at most one date.
 
 palindrome_date(year: int) -> DateTime? => (
-    let
-        digits = "{year:D4}" |> reverse() |> join(""),
+    let digits = "{year:D4}" |> reverse() |> join(""),
         month = int.parse(digits.substring(0, 2)),
         day = int.parse(digits.substring(2))
 
-    let valid = month >= 1 /\ month <= 12 /\ day >= 1 /\
+    let valid =
+        month >= 1 /\
+        month <= 12 /\
+        day >= 1 /\
         day <= DateTime.days_in_month(year, month)
 
     if valid then

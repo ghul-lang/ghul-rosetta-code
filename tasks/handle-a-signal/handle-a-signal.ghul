@@ -6,16 +6,16 @@ use System.Threading.Thread
 let interrupted = System.Threading.ManualResetEventSlim(false)
 
 let registration =
-    PosixSignalRegistration.create(
-        PosixSignal.SIGINT,
+    PosixSignalRegistration.create(PosixSignal.SIGINT,
         context is
-            context.cancel = true
-            interrupted.set()
-        si
-    )
+        context.cancel = true
+        interrupted.set()
+    si)
 
 interrupt_this_program() is
-    let sender = System.Diagnostics.ProcessStartInfo("/bin/kill")
+    let sender = System.Diagnostics.ProcessStartInfo(
+        "/bin/kill"
+    )
 
     sender.argument_list.add("-INT")
     sender.argument_list.add("{System.Environment.process_id}")

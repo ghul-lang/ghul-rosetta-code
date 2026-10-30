@@ -15,8 +15,6 @@ is_happy(n: int) -> bool => (
     remaining == 1
 )
 
-let first_eight = from(1)
-    |> filter(is_happy)
-    |> take(8)
+let first_eight = from(1) |> filter(is_happy) |> take(8)
 
 write_line("first happy numbers: {first_eight |> join(" ")}")

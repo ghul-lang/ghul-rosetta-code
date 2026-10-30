@@ -1,26 +1,27 @@
 use default
 
-let ages =
-    [
-        (age = 27, name = "Jonah"),
-        (age = 18, name = "Alan"),
-        (age = 28, name = "Glory"),
-        (age = 18, name = "Popeye"),
-        (age = 28, name = "Alan")
-    ]
+let ages = [
+    (age = 27, name = "Jonah"),
+    (age = 18, name = "Alan"),
+    (age = 28, name = "Glory"),
+    (age = 18, name = "Popeye"),
+    (age = 28, name = "Alan")
+]
 
-let nemeses =
-    [
-        (character = "Jonah", nemesis = "Whales"),
-        (character = "Jonah", nemesis = "Spiders"),
-        (character = "Alan", nemesis = "Ghosts"),
-        (character = "Alan", nemesis = "Zombies"),
-        (character = "Glory", nemesis = "Buffy")
-    ]
+let nemeses = [
+    (character = "Jonah", nemesis = "Whales"),
+    (character = "Jonah", nemesis = "Spiders"),
+    (character = "Alan", nemesis = "Ghosts"),
+    (character = "Alan", nemesis = "Zombies"),
+    (character = "Glory", nemesis = "Buffy")
+]
 
 let by_character = nemeses |> group_by(n => n.character)
 
-["{row.age}, {row.name}, {row.name}, {nemesis.nemesis}"
-    for row in ages if by_character.contains_key(row.name)
-    for nemesis in by_character[row.name]]
+[
+    "{row.age}, {row.name}, {row.name}, {nemesis.nemesis}"
+    for row in ages
+    if by_character.contains_key(row.name)
+    for nemesis in by_character[row.name]
+]
     |> each(row => write_line(row))

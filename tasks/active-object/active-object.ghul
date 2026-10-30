@@ -46,7 +46,9 @@ class INTEGRATOR is
 
             let sample = _input(_now)
 
-            _output = _output + (sample + _previous) * (_now - _last) / 2.0D
+            _output =
+                _output +
+                (sample + _previous) * (_now - _last) / 2.0D
             _previous = sample
             _last = _now
 
@@ -103,5 +105,9 @@ run_for(integrator, 0.5D)
 integrator.stop()
 
 write_line("integral over half a period: {half_period:F4}")
-write_line("integral over a whole period: {abs(full_period):F4}")
-write_line("integral once the input is zero: {abs(integrator.output):F4}")
+write_line(
+    "integral over a whole period: {abs(full_period):F4}"
+)
+write_line(
+    "integral once the input is zero: {abs(integrator.output):F4}"
+)

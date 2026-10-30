@@ -27,7 +27,9 @@ build_tree(leaves: List[Huffman]) -> Huffman => (
         let first = take_lightest(pending)
         let second = take_lightest(pending)
 
-        pending.add(NODE(first, second, first.weight + second.weight))
+        pending.add(
+            NODE(first, second, first.weight + second.weight)
+        )
     od
 
     pending[0]
@@ -37,10 +39,11 @@ let text = "this is an example for huffman encoding"
 
 let weights = text |> frequencies()
 
-let leaves = weights.keys
-    |> sort()
-    |> map(symbol => LEAF(symbol, weights[symbol]))
-    |> collect()
+let leaves =
+    weights.keys
+        |> sort()
+        |> map(symbol => LEAF(symbol, weights[symbol]))
+        |> collect()
 
 let tree = build_tree(leaves)
 
@@ -54,14 +57,22 @@ place(node: Huffman, depth: int) -> SPOT =>
         let at = (x = next_leaf, y = -double(depth))
 
         next_leaf = next_leaf + 1.0
-        marks.add((at = at, symbol = leaf.symbol, weight = leaf.weight))
+        marks.add(
+            (
+                at = at, symbol = leaf.symbol,
+                weight = leaf.weight
+            )
+        )
 
         at
     else
         let left = place(node.left, depth + 1)
         let right = place(node.right, depth + 1)
 
-        let at = (x = (left.x + right.x) / 2.0, y = -double(depth))
+        let at = (
+            x = (left.x + right.x) / 2.0,
+            y = -double(depth)
+        )
 
         edges.add((from = at, to = left, bit = "0"))
         edges.add((from = at, to = right, bit = "1"))
@@ -97,23 +108,43 @@ od
 for edge in edges do
     image.colour(150ub, 150ub, 150ub)
     image.stroke(5.0)
-    image.line(edge.from.x, edge.from.y, edge.from.x, edge.from.y)
+    image.line(
+        edge.from.x,
+        edge.from.y,
+        edge.from.x,
+        edge.from.y
+    )
 od
 
 for mark in marks do
     let shown =
-        if mark.symbol == ' ' then "space" else "{mark.symbol}" fi
+        if mark.symbol == ' ' then
+            "space"
+        else
+            "{mark.symbol}"
+        fi
 
     image.colour(30ub, 70ub, 160ub)
     image.stroke(9.0)
     image.line(mark.at.x, mark.at.y, mark.at.x, mark.at.y)
 
     image.colour(30ub, 30ub, 30ub)
-    image.text(mark.at.x, mark.at.y - 0.42, 15.0, shown, Anchor.CENTRE)
+    image.text(
+        mark.at.x,
+        mark.at.y - 0.42,
+        15.0,
+        shown,
+        Anchor.CENTRE
+    )
 
     image.colour(120ub, 120ub, 120ub)
-    image.text(mark.at.x, mark.at.y - 0.82, 12.0, "{mark.weight}",
-               Anchor.CENTRE)
+    image.text(
+        mark.at.x,
+        mark.at.y - 0.82,
+        12.0,
+        "{mark.weight}",
+        Anchor.CENTRE
+    )
 od
 
 image.write("huffman.png")

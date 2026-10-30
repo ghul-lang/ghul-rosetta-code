@@ -4,7 +4,9 @@ use System.Math
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -15,19 +17,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -36,7 +51,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -51,22 +70,37 @@ median_filter(source: IMAGE) -> IMAGE is
         for x in 0..source.width do
             let window =
                 (-1::1)
-                    |> flat_map(dy => -1::1 |> map(dx => (dx, dy)))
+                    |> flat_map(dy =>
+                        -1::1 |> map(dx => (dx, dy))
+                    )
                     |> map((dx, dy) =>
                         source.pixel(
-                            Math.clamp(x + dx, 0, source.width - 1),
-                            Math.clamp(y + dy, 0, source.height - 1)))
+                            Math.clamp(
+                                x + dx,
+                                0,
+                                source.width - 1
+                            ),
+                            Math.clamp(
+                                y + dy,
+                                0,
+                                source.height - 1
+                            )
+                        )
+                    )
 
-            let middle = pick =>
-                let sorted =
-                    window |> map(pick) |> sort() in
-                (sorted |> collect())[4]
+            let middle =
+                pick =>
+                    let sorted = window |> map(pick) |> sort()
+                    in
+                    (sorted |> collect())[4]
 
             result.set_pixel(
-                x, y,
+                x,
+                y,
                 middle(p => p.red),
                 middle(p => p.green),
-                middle(p => p.blue))
+                middle(p => p.blue)
+            )
         od
     od
 
@@ -79,7 +113,8 @@ let noisy = scene()
 for _ in 0..1500 do
     let shade = if random.next(2) == 0 then 0ub else 255ub fi
 
-    let x = random.next(noisy.width), y = random.next(noisy.height)
+    let x = random.next(noisy.width),
+        y = random.next(noisy.height)
 
     noisy.set_pixel(x, y, shade, shade, shade)
 od
@@ -91,7 +126,9 @@ let cleaned = median_filter(source)
 
 cleaned.write("cleaned.png")
 
-write_line("1500 pixels of salt and pepper, then a 3 x 3 median filter")
+write_line(
+    "1500 pixels of salt and pepper, then a 3 x 3 median filter"
+)
 
 source.show("noisy.png")
 cleaned.show("cleaned.png")

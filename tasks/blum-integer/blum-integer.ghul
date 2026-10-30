@@ -17,16 +17,23 @@ for candidate in 2::limit do
 od
 
 is_blum(value: int) -> bool =>
-    let p = smallest_factor[value], q = value / p in
-    p != q /\ p % 4 == 3 /\ q % 4 == 3 /\ smallest_factor[q] == q
+    let
+        p = smallest_factor[value],
+        q = value / p
+    in
+        p != q /\
+        p % 4 == 3 /\
+        q % 4 == 3 /\
+        smallest_factor[q] == q
 
-
-let blum = 2::limit |> filter(is_blum) |> take(400_000) |> collect()
+let blum =
+    2::limit |> filter(is_blum) |> take(400_000) |> collect()
 
 write_line("the first 50 Blum integers:")
 
 for row in 0..5 do
-    let cells = 0..10 |> map(column => "{blum[row * 10 + column],4}")
+    let cells =
+        0..10 |> map(column => "{blum[row * 10 + column],4}")
 
     write_line(cells |> join(""))
 od
@@ -34,14 +41,20 @@ od
 write_line("")
 
 for position in [26_828, 100_000, 200_000, 300_000, 400_000] do
-    write_line("the {position,7}th Blum integer: {blum[position - 1]}")
+    write_line(
+        "the {position,7}th Blum integer: {blum[position - 1]}"
+    )
 od
 
 write_line("")
-write_line("distribution of the final digit over the first 400,000:")
+write_line(
+    "distribution of the final digit over the first 400,000:"
+)
 
 for digit in [1, 3, 7, 9] do
-    let share = double(blum |> filter(b => b % 10 == digit) |> count())
+    let share = double(
+        blum |> filter(b => b % 10 == digit) |> count()
+    )
 
     write_line("  {digit}: {share / 4000.0D:F3}%")
 od

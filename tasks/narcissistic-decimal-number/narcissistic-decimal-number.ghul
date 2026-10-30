@@ -1,16 +1,24 @@
 use default
 
 power(value: int, exponent: int) -> int =>
-    if exponent == 0 then 1 else value * power(value, exponent - 1) fi
+    if exponent == 0 then
+        1
+    else
+        value * power(value, exponent - 1)
+    fi
 
 is_narcissistic(number: int) -> bool =>
     let width = number |> digits() |> count() in
-    number |> digits() |> map(power(*, width)) |> sum() == number
+    number
+        |> digits()
+        |> map(power(*, width))
+        |> sum() == number
 
-let narcissistic = from(0)
-    |> filter(is_narcissistic)
-    |> take(25)
-    |> map(number => "{number}")
-    |> join(" ")
+let narcissistic =
+    from(0)
+        |> filter(is_narcissistic)
+        |> take(25)
+        |> map(number => "{number}")
+        |> join(" ")
 
 write_line(narcissistic)

@@ -13,14 +13,19 @@ moves(board: string, side: char) -> List[Move] =>
     (0..9)
         |> filter(from => board[from] == side)
         |> flat_map(from =>
-            let ahead = from + if side == 'W' then -3 else 3 fi in
+            let ahead = from + if side == 'W' then -3 else 3 fi
+            in
             [ahead - 1, ahead, ahead + 1]
                 |> filter(to =>
-                    to >= 0 /\ to < 9 /\ to / 3 == ahead / 3 /\
+                    to >= 0 /\
+                    to < 9 /\
+                    to / 3 == ahead / 3 /\
                     if to == ahead then board[to] == '.'
                     else board[to] == other(side)
-                    fi)
-                |> map(to => (from = from, to = to)))
+                    fi
+                )
+                |> map(to => (from = from, to = to))
+        )
         |> collect()
 
 play(board: string, move: Move) -> string =>
@@ -30,21 +35,26 @@ play(board: string, move: Move) -> string =>
                 if i == move.to then board[move.from]
                 elif i == move.from then '.'
                 else board[i]
-                fi))
+                fi
+            )
+    )
 
 has_won(board: string, side: char) -> bool =>
     let far_rank = if side == 'W' then 0 else 6 fi in
     board.substring(far_rank, 3).contains(side) \/
     moves(board, other(side)).count == 0
 
-square(index: int) -> string => "{"abc"[index % 3]}{3 - index / 3}"
+square(index: int) -> string =>
+    "{"abc"[index % 3]}{3 - index / 3}"
 
 let symbols = "WB." |> zip("♙♟．") |> collect_map()
 
 show(board: string) is
     for row in 0..3 do
         let pieces =
-            board.substring(row * 3, 3) |> map(p => symbols[p]) |> join("")
+            board.substring(row * 3, 3)
+                |> map(p => symbols[p])
+                |> join("")
 
         write_line("{3 - row} {pieces}")
     od
@@ -59,9 +69,11 @@ parse(text: string) -> Move? is
         return null
     fi
 
-    let index = at =>
-        (3 - (int(squares[at + 1]) - int('0'))) * 3 +
-        int(squares[at]) - int('a')
+    let index =
+        at =>
+            (3 - (int(squares[at + 1]) - int('0'))) * 3 +
+            int(squares[at]) -
+            int('a')
 
     (from = index(0), to = index(2))
 si
@@ -121,7 +133,10 @@ game(white: (string) -> Move?, verbose: bool) -> char is
         last_move = chosen
 
         if verbose then
-            let (from, to) = (square(chosen.from), square(chosen.to))
+            let (from, to) = (
+                square(chosen.from),
+                square(chosen.to)
+            )
             write_line("the computer plays {from}-{to}")
         fi
 
@@ -153,7 +168,9 @@ human(board: string) -> Move? is
 
         write_line("> {line}")
 
-        if let move = parse(line) /\ legal |> any(m => m =~ move) then
+        if let
+            move = parse(line) /\ legal |> any(m => m =~ move)
+        then
             return move
         fi
 
@@ -183,9 +200,12 @@ write_line("the computer now trains against random play:")
 
 for round in 1::5 do
     let wins =
-        0..20 |> filter(_ => game(trainer, false) == 'B') |> count()
+        0..20
+            |> filter(_ => game(trainer, false) == 'B')
+            |> count()
 
     write_line(
         "  games {round * 20 - 19} to {round * 20}: "
-        "the computer wins {wins}")
+        "the computer wins {wins}"
+    )
 od

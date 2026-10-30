@@ -14,9 +14,11 @@ value_of(c: char) -> int =>
     esac
 
 weighted(c: char, position: int) -> int =>
-    let factor = if position % 2 == 1 then 2 else 1 fi in
-    let value = value_of(c) * factor in
-    value / 10 + value % 10
+    let
+        factor = if position % 2 == 1 then 2 else 1 fi,
+        value = value_of(c) * factor
+    in
+        value / 10 + value % 10
 
 check_digit(cusip: string) -> int =>
     let total = 0..8 |> sum_by(i => weighted(cusip[i], i)) in
@@ -35,6 +37,7 @@ let securities = [
 ]
 
 for (cusip, name) in securities do
-    let verdict = if is_valid(cusip) then "valid" else "invalid" fi
+    let verdict =
+        if is_valid(cusip) then "valid" else "invalid" fi
     write_line("{cusip}  {name,-22} {verdict}")
 od

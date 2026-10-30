@@ -1,14 +1,20 @@
 use default
 
 is_idoneal(value: int) -> bool =>
-    !(from(1)
-        |> take_while(a => 3 * a * a + 2 * a < value)
-        |> any(a =>
-            from(a + 1)
-                |> take_while(b => a * b + b * (a + 1) < value)
-                |> any(b =>
-                    (value - a * b) % (a + b) == 0 /\
-                    (value - a * b) / (a + b) > b)))
+    !(
+        from(1)
+            |> take_while(a => 3 * a * a + 2 * a < value)
+            |> any(a =>
+                from(a + 1)
+                    |> take_while(b =>
+                        a * b + b * (a + 1) < value
+                    )
+                    |> any(b =>
+                        (value - a * b) % (a + b) == 0 /\
+                        (value - a * b) / (a + b) > b
+                    )
+            )
+    )
 
 write_line("the 65 known idoneal numbers:")
 

@@ -9,13 +9,17 @@ escape("\\t", '\t')
 escape("\\n", '\n')
 escape("\\r", '\r')
 escape("\\\\", '\\')
-escape("\\\"", '\"')
-escape("\\u20AC", '\u20AC')
+escape("\\\"", '"')
+escape("\\u20AC", '€')
 
 write_line("")
-write_line("a brace in an interpolated string is doubled: {{ }}")
+write_line(
+    "a brace in an interpolated string is doubled: {{ }}"
+)
 
 let `class = "a keyword is an identifier behind a backtick"
 write_line(`class)
 
-write_line("a backtick ends the digits of a literal: {0x20AC`c}")
+write_line(
+    "a backtick ends the digits of a literal: {0x20AC`c}"
+)

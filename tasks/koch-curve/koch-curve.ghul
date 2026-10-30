@@ -17,9 +17,10 @@ koch(depth: int, from: Point, to: Point) -> Point{} is
     let third = (x = from.x + dx, y = from.y + dy)
     let twice = (x = from.x + 2.0D * dx, y = from.y + 2.0D * dy)
 
-    let peak =
-        (x = third.x + dx * 0.5D - dy * rise,
-         y = third.y + dy * 0.5D + dx * rise)
+    let peak = (
+        x = third.x + dx * 0.5D - dy * rise,
+        y = third.y + dy * 0.5D + dx * rise
+    )
 
     yield in koch(depth - 1, from, third)
     yield in koch(depth - 1, third, peak)

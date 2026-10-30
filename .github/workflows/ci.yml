@@ -186,11 +186,12 @@ jobs:
       run: dotnet run --project tools/rosetta -- show > /dev/null
 
 
-  # The two rules a machine can settle: no statement terminators, and no line
-  # past the limit. Both had a check before this job existed and neither was
-  # run by anything, so both drifted - 39 terminators and 76 over-width lines
-  # had accumulated by the time it was added. A shard builds each task through
-  # its own project, which carries neither check.
+  # The rules a machine can settle: no statement terminators, no line past
+  # the limit, and every source laid out as the formatter writes it. The
+  # first two had a check before this job existed and neither was run by
+  # anything, so both drifted - 39 terminators and 76 over-width lines had
+  # accumulated by the time it was added. A shard builds each task through
+  # its own project, which carries none of the three checks.
   hygiene:
     name: Solution hygiene
 
@@ -198,7 +199,7 @@ jobs:
     container:
       image: mcr.microsoft.com/dotnet/sdk:10.0
 
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
     - uses: actions/checkout@v7
@@ -216,6 +217,9 @@ jobs:
 
     - name: Check the line width
       run: scripts/check-width.sh --hard
+
+    - name: Check every source is as the formatter writes it
+      run: scripts/check-format.sh
 
 
   # The required status check. A shard's own job carries the matrix leg in

@@ -13,4 +13,5 @@ write_line(
     pipe([6])
         |> flat_map(divisors)
         |> flat_map(spellings)
-        |> join())
+        |> join()
+)

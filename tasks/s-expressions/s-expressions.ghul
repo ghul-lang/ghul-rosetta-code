@@ -15,8 +15,10 @@ use SExpr.INTEGER
 use SExpr.REAL
 
 delimits(character: char) -> bool =>
-    character == '(' \/ character == ')' \/
-    character == '"' \/ character <= ' '
+    character == '(' \/
+    character == ')' \/
+    character == '"' \/
+    character <= ' '
 
 skip_space(text: string, at: int) -> int => (
     let i mut = at
@@ -31,13 +33,13 @@ skip_space(text: string, at: int) -> int => (
 atom(token: string) -> SExpr is
     let whole mut = 0
 
-    if int.try_parse(token, whole ref) then
+    if int.try_parse(token, whole ref ) then
         return INTEGER(whole)
     fi
 
     let real mut = 0.0D
 
-    if double.try_parse(token, real ref) then
+    if double.try_parse(token, real ref ) then
         return REAL(real)
     fi
 
@@ -69,7 +71,10 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
             close = close + 1
         od
 
-        return (value = STRING(text[start + 1..close]), next = close + 1)
+        return (
+            value = STRING(text[start + 1..close]),
+            next = close + 1
+        )
     fi
 
     let end mut = start
@@ -83,7 +88,8 @@ si
 
 render(node: SExpr) -> string =>
     case node
-    when (items): LIST then "({items |> map(render) |> join(" ")})"
+    when (items): LIST then
+        "({items |> map(render) |> join(" ")})"
     when (name): SYMBOL then name
     when (text): STRING then "\"{text}\""
     when (value): INTEGER then "{value}"

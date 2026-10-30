@@ -2,8 +2,10 @@ use default
 
 log_gamma(x: double) -> double => (
     let coefficients = [
-        76.18009172947146, -86.50532032941677, 24.01409824083091,
-        -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5
+        76.18009172947146, -86.50532032941677,
+        24.01409824083091,
+        -1.231739572450155, 0.1208650973866179e-2,
+        -0.5395239384953e-5
     ]
     let tmp = x + 5.5 - (x + 0.5) * System.Math.log(x + 5.5)
     let series mut = 1.000000000190015
@@ -59,20 +61,28 @@ upper_gamma(a: double, x: double) -> double is
 si
 
 chi_squared(counts: List[int]) -> double =>
-    let total = double(counts |> sum()) in
-    let expected = total / double(counts.count) in
-    counts
-        |> sum_by(k =>
-            let e = double(k) - expected in e * e / expected)
+    let
+        total = double(counts |> sum()),
+        expected = total / double(counts.count)
+    in
+        counts
+            |> sum_by(k =>
+                let e = double(k) - expected in e * e / expected
+            )
 
 is_uniform(counts: List[int], significance: double) -> bool =>
     let freedom = double(counts.count - 1) in
-    upper_gamma(freedom / 2.0, chi_squared(counts) / 2.0) > significance
+    upper_gamma(
+        freedom / 2.0,
+        chi_squared(counts) / 2.0
+    ) > significance
 
-for counts in [
-    [199809, 200665, 199607, 200270, 199649],
-    [522573, 244456, 139979, 71531, 21461]
-] do
+for
+    counts in [
+        [199809, 200665, 199607, 200270, 199649],
+        [522573, 244456, 139979, 71531, 21461]
+    ]
+do
     let data = LIST(counts)
     let distance = chi_squared(data)
     let freedom = double(data.count - 1)

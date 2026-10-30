@@ -5,7 +5,12 @@ let square_endings = [0, 1, 4, 5, 6, 9]
 reverse_of(n: long) -> long is
     walk(remaining: long, reversed: long) -> long =>
         if remaining == 0L then reversed
-        else walk(remaining / 10L, reversed * 10L + remaining % 10L) fi
+        else
+            walk(
+                remaining / 10L,
+                reversed * 10L + remaining % 10L
+            )
+        fi
 
     walk(n, 0L)
 si
@@ -14,16 +19,16 @@ is_rare(n: long) -> bool =>
     let r = reverse_of(n) in
     n > r /\ is_square(n + r) /\ is_square(n - r)
 
-
 // The sum ends in the last digit of n plus its first, and the difference in
 // their difference, so a pair of those digits that can end neither square
 // rules out every number that starts and ends with them.
-let starts_and_ends =
-    [(first = first, last = last)
-        for first in 1::9 for last in 0::9
-        if square_endings |> any(e => e == (last + first) % 10) /\
-            square_endings
-                |> any(e => e == (last - first + 10) % 10)]
+let starts_and_ends = [
+    (first = first, last = last)
+    for first in 1::9
+    for last in 0::9
+    if square_endings |> any(e => e == (last + first) % 10) /\
+    square_endings |> any(e => e == (last - first + 10) % 10)
+]
 
 let limit = 2_100_000_000L
 
@@ -39,7 +44,11 @@ while block < limit do
         let first_candidate = start + long(pair.last)
 
         let n mut =
-            if first_candidate < start then start else first_candidate fi
+            if first_candidate < start then
+                start
+            else
+                first_candidate
+            fi
 
         while n < stop do
             if is_rare(n) then

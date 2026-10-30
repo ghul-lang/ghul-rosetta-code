@@ -12,11 +12,13 @@ let puzzle = [
     ". . . . 8 . . 7 9"
 ]
 
-let grid =
-    LIST(
-        puzzle
-            |> flat_map(row => row.split([' ']))
-            |> map(cell => if cell =~ "." then 0 else int.parse(cell) fi))
+let grid = LIST(
+    puzzle
+        |> flat_map(row => row.split([' ']))
+        |> map(cell =>
+            if cell =~ "." then 0 else int.parse(cell) fi
+        )
+)
 
 allowed(at: int, digit: int) -> bool is
     let row = at / 9
@@ -24,7 +26,8 @@ allowed(at: int, digit: int) -> bool is
     let box = (row / 3) * 27 + (column / 3) * 3
 
     for i in 0..9 do
-        if grid[row * 9 + i] == digit \/
+        if
+            grid[row * 9 + i] == digit \/
             grid[i * 9 + column] == digit \/
             grid[box + (i / 3) * 9 + i % 3] == digit
         then
@@ -68,9 +71,21 @@ show() is
         let cells =
             (0..9)
                 |> map(column =>
-                    let digit = grid[row * 9 + column] in
-                    let text = if digit == 0 then "." else "{digit}" fi in
-                    if column % 3 == 0 then "| {text}" else text fi)
+                    let
+                        digit = grid[row * 9 + column],
+                        text =
+                            if digit == 0 then
+                                "."
+                            else
+                                "{digit}"
+                            fi
+                    in
+                        if column % 3 == 0 then
+                            "| {text}"
+                        else
+                            text
+                        fi
+                )
                 |> join(" ")
 
         write_line("{cells} |")

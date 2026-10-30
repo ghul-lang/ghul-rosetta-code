@@ -5,12 +5,11 @@ let search_limit = 1000000
 is_sphenic(n: int) -> bool =>
     let factors = prime_factors(n) in
     factors.count == 3 /\
-        factors[0] != factors[1] /\ factors[1] != factors[2]
+    factors[0] != factors[1] /\
+    factors[1] != factors[2]
 
 let sphenics =
-    (2..search_limit)
-    |> filter(is_sphenic)
-    |> collect()
+    (2..search_limit) |> filter(is_sphenic) |> collect()
 
 let below_1000 = sphenics |> filter(* < 1000) |> join()
 
@@ -21,7 +20,8 @@ let triplets = LIST()
 let i mut = 0
 
 while i + 2 < sphenics.count do
-    if sphenics[i + 1] == sphenics[i] + 1 /\
+    if
+        sphenics[i + 1] == sphenics[i] + 1 /\
         sphenics[i + 2] == sphenics[i] + 2
     then
         triplets.add(sphenics[i])
@@ -38,19 +38,25 @@ for first in triplets do
     fi
 od
 
-write_line("sphenic numbers below {search_limit}: {sphenics.count}")
-write_line("sphenic triplets below {search_limit}: {triplets.count}")
+write_line(
+    "sphenic numbers below {search_limit}: {sphenics.count}"
+)
+write_line(
+    "sphenic triplets below {search_limit}: {triplets.count}"
+)
 
 let sphenic_200000th = sphenics[200000 - 1]
 
+let factors_200000th =
+    sphenic_200000th |> prime_factors() |> join(" x ")
+
 write_line(
-    "the 200000th sphenic number is {sphenic_200000th} = {
-        sphenic_200000th |> prime_factors() |> join(" x ")
-    }"
+    "the 200000th sphenic number is {sphenic_200000th} = {factors_200000th}"
 )
 
 let triplet_5000th = triplets[5000 - 1]
 
 write_line(
     "the 5000th sphenic triplet is "
-    "({triplet_5000th}, {triplet_5000th + 1}, {triplet_5000th + 2})")
+    "({triplet_5000th}, {triplet_5000th + 1}, {triplet_5000th + 2})"
+)

@@ -28,12 +28,21 @@ let letters = 0..20 |> map(_ => next_letter()) |> collect()
 let cells =
     0..20
         |> map(index =>
-            let column = index / 4, row = index % 4 in
-            (letter = letters[index],
-             x = double(column) * 1.5D * radius,
-             y = double(row) * rise * radius -
-                 if column % 2 == 1 then rise * radius / 2.0D
-                 else 0.0D fi))
+            let
+                column = index / 4,
+                row = index % 4
+            in
+                (
+                    letter = letters[index],
+                    x = double(column) * 1.5D * radius,
+                    y =
+                        double(row) * rise * radius -
+                        if column % 2 == 1 then
+                            rise * radius / 2.0D
+                        else 0.0D
+                        fi
+                )
+        )
         |> collect()
 
 let chosen = LIST()
@@ -42,8 +51,11 @@ corners(x: double, y: double) -> List[(double, double)] =>
     0..6
         |> map(corner =>
             let angle = double(corner) * pi / 3.0D in
-            (x + radius * 0.92D * cos(angle),
-             y + radius * 0.92D * sin(angle)))
+            (
+                x + radius * 0.92D * cos(angle),
+                y + radius * 0.92D * sin(angle)
+            )
+        )
         |> collect()
 
 draw() is
@@ -56,9 +68,19 @@ draw() is
 
     for cell in cells do
         if chosen |> any(letter => letter == cell.letter) then
-            comb.add(corners(cell.x, cell.y), 230ub, 170ub, 60ub)
+            comb.add(
+                corners(cell.x, cell.y),
+                230ub,
+                170ub,
+                60ub
+            )
         else
-            comb.add(corners(cell.x, cell.y), 120ub, 170ub, 220ub)
+            comb.add(
+                corners(cell.x, cell.y),
+                120ub,
+                170ub,
+                220ub
+            )
         fi
     od
 
@@ -67,8 +89,13 @@ draw() is
     image.colour(30ub, 30ub, 50ub)
 
     for cell in cells do
-        image.text(cell.x, cell.y - 0.3D, 20.0D, "{cell.letter}",
-                   Anchor.CENTRE)
+        image.text(
+            cell.x,
+            cell.y - 0.3D,
+            20.0D,
+            "{cell.letter}",
+            Anchor.CENTRE
+        )
     od
 
     image.write("honeycomb.png")

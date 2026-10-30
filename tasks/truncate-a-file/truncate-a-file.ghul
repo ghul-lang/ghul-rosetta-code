@@ -10,17 +10,24 @@ truncate(path: string, length: long) is
 
     if length >= cast(current) then
         throw System.Exception(
-            "length {length} is not less than the current length {current}")
+            "length {length} is not less than the current length {current}"
+        )
     fi
 
-    let stream = FileStream(path, FileMode.OPEN, FileAccess.WRITE)
+    let stream = FileStream(
+        path,
+        FileMode.OPEN,
+        FileAccess.WRITE
+    )
     stream.set_length(length)
     stream.dispose()
 si
 
 let path = "sample.bin"
 
-IO.File.write_all_bytes(path, [0ub, 1ub, 2ub, 3ub, 4ub, 5ub, 6ub, 7ub])
+IO.File.write_all_bytes(path, [
+    0ub, 1ub, 2ub, 3ub, 4ub, 5ub, 6ub, 7ub
+])
 
 truncate(path, 4L)
 

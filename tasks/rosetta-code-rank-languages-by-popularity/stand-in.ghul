@@ -10,14 +10,14 @@ use System.Text.Encoding
 // interface. Not part of the published solution.
 stand_in() -> string is
     let replies =
-        IO.File.read_all_lines("api-replies.txt")
-            |> skip(1)
+        IO.File.read_all_lines("api-replies.txt") |> skip(1)
     let probe = TcpListener(IPAddress.loopback, 0)
 
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 
@@ -34,7 +34,11 @@ stand_in() -> string is
             let context = listener.get_context()
             let body = Encoding.utf8.get_bytes(reply)
 
-            context.response.output_stream.write(body, 0, body.count)
+            context.response.output_stream.write(
+                body,
+                0,
+                body.count
+            )
             context.response.close()
         od
     si)
@@ -49,7 +53,8 @@ test_entry() is
             |> sort((a, b) =>
                 if a.tasks != b.tasks then b.tasks <> a.tasks
                 else string.compare_ordinal(a.name, b.name)
-                fi)
+                fi
+            )
             |> collect()
 
     let rank mut = 0
@@ -59,16 +64,21 @@ test_entry() is
             rank = i + 1
         fi
 
-        write_line("Rank: {rank,3} ({tasks,5:N0} entries) {name}")
+        write_line(
+            "Rank: {rank,3} ({tasks,5:N0} entries) {name}"
+        )
     od
 
     write_line("... and {ranked.count - 25} more")
 
-    if let place =
-        ranked |> index() |> find(p => p.value.name =~ "Ghul")
+    if let
+        place = ranked
+            |> index()
+            |> find(p => p.value.name =~ "Ghul")
     then
         write_line(
             "Ghul is at position {place.index + 1}, "
-            "with {place.value.tasks:N0}")
+            "with {place.value.tasks:N0}"
+        )
     fi
 si

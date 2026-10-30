@@ -25,7 +25,9 @@ od
 
 let score mut = 0
 
-write_line("put the digits in order by reversing the first few each turn")
+write_line(
+    "put the digits in order by reversing the first few each turn"
+)
 
 while !sorted(digits) do
     write_line()
@@ -52,5 +54,7 @@ od
 
 if sorted(digits) then
     write_line()
-    write_line("{digits |> join(" ")}   in order after {score} reversals")
+    write_line(
+        "{digits |> join(" ")}   in order after {score} reversals"
+    )
 fi

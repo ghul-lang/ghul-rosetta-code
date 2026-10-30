@@ -24,8 +24,12 @@ is_well_formed(guess: string) -> bool =>
 
 score(guess: string) -> (bulls: int, cows: int) => (
     let bulls = 0..4 |> count(i => guess[i] == secret[i])
-    let cows = 0..4 |> count(i => guess[i] != secret[i] /\
-        secret.contains(guess[i]))
+    let cows =
+        0..4
+            |> count(i =>
+                guess[i] != secret[i] /\
+                secret.contains(guess[i])
+            )
     (bulls = bulls, cows = cows)
 )
 
@@ -44,7 +48,9 @@ do
     fi
 
     if !is_well_formed(line) then
-        write_line("A guess is four different digits from 1 to 9.")
+        write_line(
+            "A guess is four different digits from 1 to 9."
+        )
 
         continue
     fi

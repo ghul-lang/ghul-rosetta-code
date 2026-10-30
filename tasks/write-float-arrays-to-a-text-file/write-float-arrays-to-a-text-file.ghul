@@ -1,23 +1,26 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-write-float-arrays")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-write-float-arrays"
+)
 
 IO.Directory.create_directory(scratch)
 
 write_columns(
     path: string,
-    x: double[], x_precision: int,
-    y: double[], y_precision: int
+    x: double[],
+    x_precision: int,
+    y: double[],
+    y_precision: int
 ) is
     IO.File.write_all_lines(
         path,
         x
             |> zip(y)
-            |> map(
-                pair =>
-                    "{pair.`0.to_string("G{x_precision}")}\t"
-                    "{pair.`1.to_string("G{y_precision}")}"
+            |> map(pair =>
+                "{pair.`0.to_string("G{x_precision}")}\t"
+                "{pair.`1.to_string("G{y_precision}")}"
             )
     )
 si

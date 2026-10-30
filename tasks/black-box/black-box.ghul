@@ -10,7 +10,9 @@ use Cell = (row: int, column: int)
 let atoms = SET()
 
 while atoms.count < 4 do
-    atoms.add((row = random.next(size), column = random.next(size)))
+    atoms.add(
+        (row = random.next(size), column = random.next(size))
+    )
 od
 
 let guesses = SET()
@@ -18,14 +20,18 @@ let guesses = SET()
 use Beam = (row: int, column: int, dr: int, dc: int)
 
 entrance(point: int) -> Beam =>
-    let side = (point - 1) / size, offset = (point - 1) % size in
-    let back = size - 1 - offset in
-    case side
-    when 0 then (row = -1, column = offset, dr = 1, dc = 0)
-    when 1 then (row = offset, column = size, dr = 0, dc = -1)
-    when 2 then (row = size, column = back, dr = -1, dc = 0)
-    else (row = back, column = -1, dr = 0, dc = 1)
-    esac
+    let
+        side = (point - 1) / size,
+        offset = (point - 1) % size
+    in
+        let back = size - 1 - offset in
+        case side
+        when 0 then (row = -1, column = offset, dr = 1, dc = 0)
+        when 1 then
+            (row = offset, column = size, dr = 0, dc = -1)
+        when 2 then (row = size, column = back, dr = -1, dc = 0)
+        else (row = back, column = -1, dr = 0, dc = 1)
+        esac
 
 point_at(cell: Cell) -> int =>
     if cell.row < 0 then cell.column + 1
@@ -86,13 +92,16 @@ show(reveal: bool) is
         let cells =
             (0..size)
                 |> map(column =>
-                    let cell = (row = row, column = column) in
-                    let guessed = guesses.contains(cell) in
-                    if reveal /\ atoms.contains(cell) then
-                        if guessed then "X" else "*" fi
-                    elif guessed then "o"
-                    else "."
-                    fi)
+                    let
+                        cell = (row = row, column = column),
+                        guessed = guesses.contains(cell)
+                    in
+                        if reveal /\ atoms.contains(cell) then
+                            if guessed then "X" else "*" fi
+                        elif guessed then "o"
+                        else "."
+                        fi
+                )
                 |> join(" ")
 
         write_line("{row + 1} {cells}")
@@ -102,8 +111,12 @@ show(reveal: bool) is
 si
 
 write_line("four atoms are hidden in an 8 x 8 box")
-write_line("beams enter at 1-8 along the top, 9-16 down the right side,")
-write_line("17-24 back along the bottom and 25-32 up the left side")
+write_line(
+    "beams enter at 1-8 along the top, 9-16 down the right side,"
+)
+write_line(
+    "17-24 back along the bottom and 25-32 up the left side"
+)
 write_line("commands: fire <1-32>, guess <row> <column>, done")
 
 let cost mut = 0
@@ -116,12 +129,15 @@ while let line = read_line() do
     if fields.count == 2 /\ fields[0] =~ "fire" then
         let point = int.parse(fields[1])
         let result = fire(point)
-        cost = cost + if result.starts_with("exits") then 2 else 1 fi
+        cost =
+            cost +
+            if result.starts_with("exits") then 2 else 1 fi
         write_line("beam {point}: {result}")
     elif fields.count == 3 /\ fields[0] =~ "guess" then
         let cell = (
             row = int.parse(fields[1]) - 1,
-            column = int.parse(fields[2]) - 1)
+            column = int.parse(fields[2]) - 1
+        )
 
         if !guesses.remove(cell) then
             guesses.add(cell)
@@ -130,13 +146,19 @@ while let line = read_line() do
         show(false)
     elif let ["done"] = fields then
         let missed =
-            atoms |> filter(a => !guesses.contains(a)) |> count()
+            atoms
+                |> filter(a => !guesses.contains(a))
+                |> count()
 
         show(true)
-        write_line("X is a right guess, * a missed atom, o a wrong guess")
+        write_line(
+            "X is a right guess, * a missed atom, o a wrong guess"
+        )
         write_line("score {cost + 5 * missed}; lower is better")
         break
     else
-        write_line("commands: fire <1-32>, guess <row> <column>, done")
+        write_line(
+            "commands: fire <1-32>, guess <row> <column>, done"
+        )
     fi
 od

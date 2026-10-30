@@ -4,6 +4,10 @@ use System.Numerics.Complex
 let e_i_pi = Complex.exp(Complex(0.0, System.Math.pi))
 let result = e_i_pi + Complex(1.0, 0.0)
 
-write_line("e^(i*pi)     = {e_i_pi.real,0:F15} + {e_i_pi.imaginary,0:F15}i")
-write_line("e^(i*pi) + 1 = {result.real,0:F15} + {result.imaginary,0:F15}i")
+write_line(
+    "e^(i*pi)     = {e_i_pi.real,0:F15} + {e_i_pi.imaginary,0:F15}i"
+)
+write_line(
+    "e^(i*pi) + 1 = {result.real,0:F15} + {result.imaginary,0:F15}i"
+)
 write_line("magnitude of error = {result.magnitude,0:E5}")

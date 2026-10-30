@@ -11,7 +11,7 @@ van_eck() -> int{} is
 
         let previous mut = 0
         let next =
-            if last_seen.try_get_value(term, previous ref) then
+            if last_seen.try_get_value(term, previous ref ) then
                 position - previous
             else
                 0
@@ -24,6 +24,9 @@ van_eck() -> int{} is
     od
 si
 
-write_line("first ten:      {van_eck() |> take(10) |> join(" ")}")
 write_line(
-    "terms 991-1000: {van_eck() |> skip(990) |> take(10) |> join(" ")}")
+    "first ten:      {van_eck() |> take(10) |> join(" ")}"
+)
+write_line(
+    "terms 991-1000: {van_eck() |> skip(990) |> take(10) |> join(" ")}"
+)

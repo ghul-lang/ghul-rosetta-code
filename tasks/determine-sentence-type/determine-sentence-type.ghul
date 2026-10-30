@@ -35,5 +35,7 @@ sentences(source: string) -> string{} is
 si
 
 for sentence in sentences(text) do
-    write_line("{kind(sentence[sentence.length - 1])}  {sentence}")
+    write_line(
+        "{kind(sentence[sentence.length - 1])}  {sentence}"
+    )
 od

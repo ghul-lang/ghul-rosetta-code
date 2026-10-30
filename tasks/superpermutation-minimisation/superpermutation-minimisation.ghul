@@ -25,9 +25,13 @@ recursive(n: int) -> string is
         if is_permutation(window) /\ seen.add(window) then
             let piece = "{window}{letter}{window}"
             let built = result.to_string()
-            let overlap mut = System.Math.min(built.length, piece.length)
+            let overlap mut = System.Math.min(
+                built.length,
+                piece.length
+            )
 
-            let matches = k => built.ends_with(piece.substring(0, k))
+            let matches =
+                k => built.ends_with(piece.substring(0, k))
 
             while overlap > 0 /\ !matches(overlap) do
                 overlap = overlap - 1
@@ -43,13 +47,17 @@ si
 permutations(letters: string) -> string{} =>
     if letters.length <= 1 then LIST([letters])
     else
-        ["{letters[i]}{rest}"
+        [
+            "{letters[i]}{rest}"
             for i in 0..letters.length
-            for rest in permutations(letters.remove(i, 1))]
+            for rest in permutations(letters.remove(i, 1))
+        ]
     fi
 
 contains_all(s: string, n: int) -> bool =>
-    alphabet.substring(0, n) |> permutations() |> all(s.contains)
+    alphabet.substring(0, n)
+        |> permutations()
+        |> all(s.contains)
 
 factorial(n: int) -> int => 1::n |> reduce(1, * * *)
 
@@ -60,7 +68,8 @@ for n in 1::7 do
     let joined = factorial(n) * n
 
     write_line(
-        "{n,2}  {joined,6}  {built.length,9}  {contains_all(built, n)}")
+        "{n,2}  {joined,6}  {built.length,9}  {contains_all(built, n)}"
+    )
 od
 
 write_line("")

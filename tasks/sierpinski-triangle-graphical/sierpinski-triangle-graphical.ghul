@@ -3,11 +3,14 @@ use Raster.IMAGE
 
 use POINT = (x: double, y: double)
 
-midpoint(a: POINT, b: POINT) -> POINT =>
-    (x = (a.x + b.x) / 2.0, y = (a.y + b.y) / 2.0)
+midpoint(a: POINT, b: POINT) -> POINT => (
+    x = (a.x + b.x) / 2.0,
+    y = (a.y + b.y) / 2.0
+)
 
-triangle(a: POINT, b: POINT, c: POINT) -> List[POINT] =>
-    [a, b, c]
+triangle(a: POINT, b: POINT, c: POINT) -> List[POINT] => [
+    a, b, c
+]
 
 let image = IMAGE(512, 456)
 

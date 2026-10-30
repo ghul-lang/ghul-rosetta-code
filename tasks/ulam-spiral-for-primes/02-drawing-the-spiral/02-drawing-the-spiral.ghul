@@ -52,7 +52,10 @@ for placed in spiral() |> index() |> take(limit) do
         image.set_pixel(
             centre + placed.value.x,
             centre + placed.value.y,
-            20ub, 40ub, 100ub)
+            20ub,
+            40ub,
+            100ub
+        )
     fi
 od
 

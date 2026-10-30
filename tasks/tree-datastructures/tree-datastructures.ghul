@@ -25,12 +25,17 @@ to_indent(node: NODE, depth: int) -> LINE{} is
     od
 si
 
-to_nest(lines: List[LINE], position: int) -> (node: NODE, next: int) => (
+to_nest(lines: List[LINE], position: int) -> (
+    node: NODE,
+    next: int
+) => (
     let head = lines[position]
     let children = LIST()
     let cursor mut = position + 1
 
-    while cursor < lines.count /\ lines[cursor].depth > head.depth do
+    while
+        cursor < lines.count /\ lines[cursor].depth > head.depth
+    do
         let (child, following) = to_nest(lines, cursor)
 
         children.add(child)
@@ -41,10 +46,14 @@ to_nest(lines: List[LINE], position: int) -> (node: NODE, next: int) => (
     (node = NODE(head.name, children), next = cursor)
 )
 
-let start =
-    NODE("RosettaCode",
-         [NODE("rocks", [leaf("code"), leaf("comparison"), leaf("wiki")]),
-          NODE("mocks", [leaf("trolling")])])
+let start = NODE("RosettaCode", [
+    NODE("rocks", [
+        leaf("code"),
+        leaf("comparison"),
+        leaf("wiki")
+    ]),
+    NODE("mocks", [leaf("trolling")])
+])
 
 write_line("nest form:")
 

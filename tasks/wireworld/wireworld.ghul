@@ -9,15 +9,26 @@ let margin = 10
 let frames = 24
 
 read(path: string) -> Grid =>
-    let lines = IO.File.read_all_lines(path) in
-    let width = lines |> map(line => line.length) |> reduce(0, int.max) in
-    lines |> map(line => line.pad_right(width)) |> collect()
+    let
+        lines = IO.File.read_all_lines(path),
+        width =
+            lines
+                |> map(line => line.length)
+                |> reduce(0, int.max)
+    in
+        lines |> map(line => line.pad_right(width)) |> collect()
 
 heads_around(grid: Grid, row: int, column: int) -> int =>
-    [(r, c)
-        for r in row - 1::row + 1 for c in column - 1::column + 1
-        if r >= 0 /\ r < grid.count /\ c >= 0 /\ c < grid[r].length /\
-            grid[r][c] == 'H']
+    [
+        (r, c)
+        for r in row - 1::row + 1
+        for c in column - 1::column + 1
+        if r >= 0 /\
+        r < grid.count /\
+        c >= 0 /\
+        c < grid[r].length /\
+        grid[r][c] == 'H'
+    ]
         |> count()
 
 next(grid: Grid, row: int, column: int) -> char =>
@@ -35,7 +46,8 @@ step(grid: Grid) -> Grid =>
         |> map(row =>
             (0..grid[row].length)
                 |> map(next(grid, row, *))
-                |> join(""))
+                |> join("")
+        )
         |> collect()
 
 draw(image: IMAGE, grid: Grid) is
@@ -54,8 +66,11 @@ draw(image: IMAGE, grid: Grid) is
             let y = double(margin + row * cell)
 
             image.fill_rectangle(
-                x + 1.0D, y + 1.0D,
-                x + double(cell) - 1.0D, y + double(cell) - 1.0D)
+                x + 1.0D,
+                y + 1.0D,
+                x + double(cell) - 1.0D,
+                y + double(cell) - 1.0D
+            )
         od
     od
 si

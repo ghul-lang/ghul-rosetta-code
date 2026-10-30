@@ -22,12 +22,15 @@ parse_move(entered: string, total: int) -> Move =>
 
 computer_pick(total: int) -> int =>
     1::3
-    |> find(pick => total + pick <= target /\ (total + pick) % 4 == 1) ??
-        System.Math.min(3, target - total)
+        |> find(pick =>
+            total + pick <= target /\ (total + pick) % 4 == 1
+        ) ??
+    System.Math.min(3, target - total)
 
-ask(prompt: string) -> string? =>
-    (Std.write(prompt)
-     Std.read_line())
+ask(prompt: string) -> string? => (
+    Std.write(prompt)
+    Std.read_line()
+)
 
 let answer = ask("do you want to go first? (y/n): ")
 

@@ -22,19 +22,23 @@ class GRID is
             (0..height * (width + 1))
                 |> map(i =>
                     let column = i % (width + 1) in
-                    column == 0 \/ column == width \/
-                        random.next_double() < p)
+                    column == 0 \/
+                    column == width \/
+                    random.next_double() < p
+                )
                 |> collect()
 
         wet = repeat(false, width * height) |> collect_mutable()
     si
 
-    floor(column: int, row: int) -> bool => floors[row * width + column]
+    floor(column: int, row: int) -> bool =>
+        floors[row * width + column]
 
     side(column: int, row: int) -> bool =>
         sides[row * (width + 1) + column]
 
-    is_wet(column: int, row: int) -> bool => wet[row * width + column]
+    is_wet(column: int, row: int) -> bool =>
+        wet[row * width + column]
 
     pour() -> bool is
         let pending = STACK[(int, int)]()
@@ -51,7 +55,9 @@ class GRID is
             if !is_wet(column, row) then
                 wet[row * width + column] = true
 
-                if row + 1 < height /\ !floor(column, row + 1) then
+                if
+                    row + 1 < height /\ !floor(column, row + 1)
+                then
                     pending.push((column, row + 1))
                 fi
 
@@ -73,11 +79,16 @@ class GRID is
     si
 
     drips() -> int{} =>
-        0..width |> filter(column =>
-            is_wet(column, height - 1) /\ !floor(column, height))
+        0..width
+            |> filter(column =>
+                is_wet(column, height - 1) /\
+                !floor(column, height)
+            )
 si
 
-write_line("p      fraction of {trials} {width} by {height} grids dripping")
+write_line(
+    "p      fraction of {trials} {width} by {height} grids dripping"
+)
 
 let shown mut = null
 
@@ -86,7 +97,9 @@ for step in 0::10 do
     let grids = 0..trials |> map(_ => GRID(p)) |> memo()
     let dripped = grids |> filter(g => g.pour()) |> count()
 
-    write_line("{p:F1}    {double(dripped) / double(trials):F2}")
+    write_line(
+        "{p:F1}    {double(dripped) / double(trials):F2}"
+    )
 
     if step == 5 then
         shown = grids |> find(g => g.drips() |> any(_ => true))
@@ -95,14 +108,19 @@ od
 
 if let grid = shown then
     write_line()
-    write_line("pictured: a grid with walls at p = 0.5 that drips")
+    write_line(
+        "pictured: a grid with walls at p = 0.5 that drips"
+    )
 
     let cell = 30
     let image = IMAGE(width * cell + 20, height * cell + 40)
 
     image.view(
-        -0.33D, double(height) + 0.33D,
-        double(width) + 0.33D, -1.0D)
+        -0.33D,
+        double(height) + 0.33D,
+        double(width) + 0.33D,
+        -1.0D
+    )
 
     image.clear(255ub, 255ub, 255ub)
 
@@ -148,7 +166,10 @@ if let grid = shown then
 
     for column in grid.drips() do
         image.dot(
-            double(column) + 0.5D, double(height) + 0.2D, 5.0D)
+            double(column) + 0.5D,
+            double(height) + 0.2D,
+            5.0D
+        )
     od
 
     image.write("bonds.png")

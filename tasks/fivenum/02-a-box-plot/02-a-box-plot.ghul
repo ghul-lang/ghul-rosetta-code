@@ -13,19 +13,27 @@ fivenum(xs_raw: double[]) -> double[] is
         double(n) + 1.0 - n4, double(n)
     ]
     midpoint(di) =>
-        let lo = xs[int(floor(di)) - 1], hi = xs[int(ceiling(di)) - 1] in
-        0.5 * (lo + hi)
+        let
+            lo = xs[int(floor(di)) - 1],
+            hi = xs[int(ceiling(di)) - 1]
+        in
+            0.5 * (lo + hi)
 
     d |> map(midpoint) |> collect()
 si
 
 let datasets = [
-    (label = "first set",
-     values = [
-        15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0, 47.0, 43.0
-     ]),
-    (label = "second set",
-     values = [36.0, 40.0, 7.0, 39.0, 41.0, 15.0])
+    (
+        label = "first set",
+        values = [
+            15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0,
+            47.0, 43.0
+        ]
+    ),
+    (
+        label = "second set",
+        values = [36.0, 40.0, 7.0, 39.0, 41.0, 15.0]
+    )
 ]
 
 let half = 0.16
@@ -38,24 +46,44 @@ box(image: IMAGE, summary: double[], centre: double) is
     image.colour(dark)
     image.stroke(1.4)
     image.line(summary[0], centre, summary[4], centre)
-    image.line(summary[0], centre - half, summary[0], centre + half)
-    image.line(summary[4], centre - half, summary[4], centre + half)
+    image.line(
+        summary[0],
+        centre - half,
+        summary[0],
+        centre + half
+    )
+    image.line(
+        summary[4],
+        centre - half,
+        summary[4],
+        centre + half
+    )
 
     image.colour(pale)
     image.fill_rectangle(
-        summary[1], centre - half, summary[3], centre + half)
+        summary[1],
+        centre - half,
+        summary[3],
+        centre + half
+    )
 
     image.colour(dark)
-    image.line(
-        [(x = summary[1], y = centre - half),
-         (x = summary[3], y = centre - half),
-         (x = summary[3], y = centre + half),
-         (x = summary[1], y = centre + half),
-         (x = summary[1], y = centre - half)])
+    image.line([
+        (x = summary[1], y = centre - half),
+        (x = summary[3], y = centre - half),
+        (x = summary[3], y = centre + half),
+        (x = summary[1], y = centre + half),
+        (x = summary[1], y = centre - half)
+    ])
 
     image.colour(median_colour)
     image.stroke(2.2)
-    image.line(summary[2], centre - half, summary[2], centre + half)
+    image.line(
+        summary[2],
+        centre - half,
+        summary[2],
+        centre + half
+    )
 si
 
 annotate(image: IMAGE, summary: double[], centre: double) is
@@ -63,14 +91,22 @@ annotate(image: IMAGE, summary: double[], centre: double) is
 
     for at in [0, 2, 4] do
         image.text(
-            summary[at], centre - half - 0.155, 12.0,
-            "{summary[at]}", Anchor.CENTRE)
+            summary[at],
+            centre - half - 0.155,
+            12.0,
+            "{summary[at]}",
+            Anchor.CENTRE
+        )
     od
 
     for at in [1, 3] do
         image.text(
-            summary[at], centre + half + 0.055, 12.0,
-            "{summary[at]}", Anchor.CENTRE)
+            summary[at],
+            centre + half + 0.055,
+            12.0,
+            "{summary[at]}",
+            Anchor.CENTRE
+        )
     od
 si
 
@@ -85,10 +121,12 @@ axes.x_title = "value"
 axes.y_ticks(
     datasets
         |> index()
-        |> map(set =>
-            (value = double(datasets.count - set.index) - 0.5,
-             label = set.value.label))
-        |> collect())
+        |> map(set => (
+            value = double(datasets.count - set.index) - 0.5,
+            label = set.value.label
+        ))
+        |> collect()
+)
 
 axes.fit(0.0, 0.0, 55.0, double(datasets.count))
 axes.draw()

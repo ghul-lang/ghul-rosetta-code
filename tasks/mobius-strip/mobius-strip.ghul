@@ -3,10 +3,15 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC =>
+        VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
+        VEC(
+            y * o.z - z * o.y,
+            z * o.x - x * o.z,
+            x * o.y - y * o.x
+        )
 
     ⋅(o: VEC) -> double => x * o.x + y * o.y + z * o.z
 
@@ -27,15 +32,18 @@ surface(u: double, v: double) -> VEC =>
 normal(u: double) -> VEC =>
     let h = 1.0e-6 in
     (surface(u + h, 0.0D) - surface(u, 0.0D)) ×
-        (surface(u, h) - surface(u, 0.0D))
+    (surface(u, h) - surface(u, 0.0D))
 
 turned(p: VEC) -> VEC =>
-    let x = p.x * cos(yaw) - p.y * sin(yaw) in
-    let y = p.x * sin(yaw) + p.y * cos(yaw) in
-    VEC(
-        x,
-        p.z * cos(pitch) - y * sin(pitch),
-        p.z * sin(pitch) + y * cos(pitch))
+    let
+        x = p.x * cos(yaw) - p.y * sin(yaw),
+        y = p.x * sin(yaw) + p.y * cos(yaw)
+    in
+        VEC(
+            x,
+            p.z * cos(pitch) - y * sin(pitch),
+            p.z * sin(pitch) + y * cos(pitch)
+        )
 
 angle(i: int) -> double =>
     2.0D * pi * double(i) / double(around)
@@ -44,8 +52,7 @@ corner(i: int, j: int) -> VEC =>
     let v = 2.0D * double(j) / double(across) - 1.0D in
     turned(surface(angle(i), v))
 
-depth(quad: Quad) -> double =>
-    quad |> sum_by(c => c.z)
+depth(quad: Quad) -> double => quad |> sum_by(c => c.z)
 
 brightness(quad: Quad) -> double =>
     let n = (quad[1] - quad[0]) × (quad[3] - quad[0]) in
@@ -53,25 +60,30 @@ brightness(quad: Quad) -> double =>
     else 0.3D + 0.7D * abs(n.z) / n.length
     fi
 
-quad(i: int, j: int) -> (at: int, corners: Quad) =>
-    (at = i, corners = [
+quad(i: int, j: int) -> (at: int, corners: Quad) => (
+    at = i,
+    corners = [
         corner(i, j), corner(i + 1, j),
-        corner(i + 1, j + 1), corner(i, j + 1)])
+        corner(i + 1, j + 1), corner(i, j + 1)
+    ]
+)
 
-let quads =
-    [quad(i, j) for i in 0..around for j in 0..across]
-        |> sort((p, q) => depth(p.corners) <> depth(q.corners))
-        |> collect()
+let quads = [quad(i, j) for i in 0..around for j in 0..across]
+    |> sort((p, q) => depth(p.corners) <> depth(q.corners))
+    |> collect()
 
 let start = normal(0.0D)
 let finish = normal(2.0D * pi)
 let turn = start ⋅ finish / (start.length * finish.length)
 
-write_line("a Möbius strip of width 1 around a circle of radius 1")
+write_line(
+    "a Möbius strip of width 1 around a circle of radius 1"
+)
 write_line("{quads.count} quadrilaterals, drawn farthest first")
 write_line(
     "cosine between the normal before and after one circuit: "
-    "{turn:F3}")
+    "{turn:F3}"
+)
 
 let image = IMAGE(420, 300)
 
@@ -88,7 +100,8 @@ for q in quads do
     image.colour(
         ubyte(light * (230.0D - 170.0D * tone)),
         ubyte(light * (120.0D + 30.0D * tone)),
-        ubyte(light * (60.0D + 150.0D * tone)))
+        ubyte(light * (60.0D + 150.0D * tone))
+    )
     image.fill(outline)
 
     image.colour(30ub, 30ub, 40ub)

@@ -17,7 +17,17 @@ let reset = "{escape}[0m"
 paint(text: string, attributes: string) -> string =>
     "{escape}[{attributes}m{text}{reset}"
 
-write_line(colours |> map(c => paint(c.name, "{c.code}")) |> join(" "))
-write_line(colours |> map(c => paint(c.name, "1;{c.code}")) |> join(" "))
-write_line(colours |> map(c => paint("  ", "{c.code + 10}")) |> join(""))
+write_line(
+    colours |> map(c => paint(c.name, "{c.code}")) |> join(" ")
+)
+write_line(
+    colours
+        |> map(c => paint(c.name, "1;{c.code}"))
+        |> join(" ")
+)
+write_line(
+    colours
+        |> map(c => paint("  ", "{c.code + 10}"))
+        |> join("")
+)
 write_line(paint("blinking", "5;31"))

@@ -3,7 +3,9 @@ use IO.Std.read_line
 
 let tokens mut = 12
 
-write_line("take 1, 2 or 3 tokens a turn; taking the last one wins")
+write_line(
+    "take 1, 2 or 3 tokens a turn; taking the last one wins"
+)
 
 while tokens > 0 do
     write_line("{tokens} left. How many do you take?")
@@ -19,7 +21,11 @@ while tokens > 0 do
 
     let taken mut = 0
 
-    if !int.try_parse(line, taken ref) \/ taken < 1 \/ taken > 3 then
+    if
+        !int.try_parse(line, taken ref ) \/
+        taken < 1 \/
+        taken > 3
+    then
         write_line("take 1, 2 or 3")
         continue
     fi

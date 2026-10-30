@@ -2,7 +2,8 @@ use default
 use Tasks.TASK
 
 let numbers = [
-    12757923L, 12878611L, 12878893L, 12757923L, 15808973L, 15780709L,
+    12757923L, 12878611L, 12878893L, 12757923L, 15808973L,
+    15780709L,
     197622519L
 ]
 
@@ -34,11 +35,12 @@ let factorisations =
         |> map(running => running.result)
         |> collect()
 
-let best = (
-    factorisations
-        |> index()
-        |> max_by(entry => entry.value[0])
-)!.index
+let best =
+    (
+        factorisations
+            |> index()
+            |> max_by(entry => entry.value[0])
+    )!.index
 
 for at in 0..numbers.count do
     write_line(

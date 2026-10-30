@@ -12,7 +12,10 @@ tokenize(text: string) -> LIST[string] is
         if char.is_letter(text[i]) then
             let start = i
 
-            while i < text.length /\ char.is_letter_or_digit(text[i]) do
+            while
+                i < text.length /\
+                char.is_letter_or_digit(text[i])
+            do
                 i = i + 1
             od
 
@@ -32,7 +35,8 @@ let tokens = tokenize(source)
 let at mut = 0
 let temporaries mut = 0
 
-peek() -> string => if at < tokens.count then tokens[at] else "" fi
+peek() -> string =>
+    if at < tokens.count then tokens[at] else "" fi
 
 accept(token: string) -> bool is
     if peek() =~ token then
@@ -45,7 +49,9 @@ si
 
 expect(token: string) is
     if !accept(token) then
-        throw System.Exception("expected {token}, found {peek()}")
+        throw System.Exception(
+            "expected {token}, found {peek()}"
+        )
     fi
 si
 

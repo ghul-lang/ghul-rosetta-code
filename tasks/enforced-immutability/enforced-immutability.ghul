@@ -17,7 +17,9 @@ write_line("{richer}")
 let names = LIST(["Ada", "Grace"])
 let readable: Collections.List[string] = names
 
-write_line("through the read-only view: {readable |> join(", ")}")
+write_line(
+    "through the read-only view: {readable |> join(", ")}"
+)
 
 names.add("Alan")
 

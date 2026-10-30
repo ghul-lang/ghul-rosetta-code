@@ -79,8 +79,9 @@ class CHECKERBOARD is
     si
 si
 
-let board = CHECKERBOARD(
-    "8752390146", ["ET AON RIS", "BC/FGHJKLM", "PQD.VWXYZU"])
+let board = CHECKERBOARD("8752390146", [
+    "ET AON RIS", "BC/FGHJKLM", "PQD.VWXYZU"
+])
 
 let message = "you have put on 7.5 pounds since I saw you."
 let encrypted = board.encrypt(message)

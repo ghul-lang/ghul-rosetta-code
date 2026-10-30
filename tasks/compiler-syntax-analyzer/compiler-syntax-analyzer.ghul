@@ -3,11 +3,35 @@ use IO.Std.read_line
 use Kind.*
 
 enum Kind is
-    LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, SEMICOLON, COMMA,
-    ASSIGN, NOT, MULTIPLY, DIVIDE, MOD, ADD, SUBTRACT,
-    LESS, LESS_EQUAL, GREATER, GREATER_EQUAL, EQUAL, NOT_EQUAL, AND, OR,
-    IDENTIFIER, INTEGER, STRING,
-    IF, ELSE, WHILE, PRINT, PUTC,
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    LEFT_BRACE,
+    RIGHT_BRACE,
+    SEMICOLON,
+    COMMA,
+    ASSIGN,
+    NOT,
+    MULTIPLY,
+    DIVIDE,
+    MOD,
+    ADD,
+    SUBTRACT,
+    LESS,
+    LESS_EQUAL,
+    GREATER,
+    GREATER_EQUAL,
+    EQUAL,
+    NOT_EQUAL,
+    AND,
+    OR,
+    IDENTIFIER,
+    INTEGER,
+    STRING,
+    IF,
+    ELSE,
+    WHILE,
+    PRINT,
+    PUTC,
     END_OF_INPUT
 si
 
@@ -28,7 +52,12 @@ union Node is
     OPERATOR(kind: Kind, left: Node, right: Node)
 si
 
-class TOKEN(kind: Kind, value: string, line: string, column: string)
+class TOKEN(
+    kind: Kind,
+    value: string,
+    line: string,
+    column: string
+)
 
 let lexicon = [
     ("LeftParen", LEFT_PAREN), ("RightParen", RIGHT_PAREN),
@@ -49,7 +78,9 @@ let lexicon = [
 ]
 
 let kinds = MAP(lexicon)
-let spellings = MAP(lexicon |> map(((text, kind)) => (kind, text)))
+let spellings = MAP(
+    lexicon |> map(((text, kind)) => (kind, text))
+)
 
 let unary_precedence = 14
 
@@ -80,7 +111,9 @@ operator_spelling(kind: Kind) -> string =>
     when AND then "And"
     when OR then "Or"
     else
-        throw System.Exception("{kind} is not a binary operator")
+        throw System.Exception(
+            "{kind} is not a binary operator"
+        )
     esac
 
 class PARSER(tokens: Iterator[TOKEN]) is
@@ -107,12 +140,12 @@ class PARSER(tokens: Iterator[TOKEN]) is
         if !accept(kind) then
             throw System.Exception(
                 "({token.line}, {token.column}) expecting "
-                "{spellings[kind]}, found {spellings[token.kind]}")
+                "{spellings[kind]}, found {spellings[token.kind]}"
+            )
         fi
     si
 
-    program() -> Node =>
-        statements([END_OF_INPUT])
+    program() -> Node => statements([END_OF_INPUT])
 
     statements(stoppers: Kind{}) -> Node =>
         statements_from(Node.EMPTY, stoppers)
@@ -122,7 +155,9 @@ class PARSER(tokens: Iterator[TOKEN]) is
             list
         else
             statements_from(
-                Node.SEQUENCE(list, statement()), stoppers)
+                Node.SEQUENCE(list, statement()),
+                stoppers
+            )
         fi
 
     statement() -> Node =>
@@ -132,7 +167,11 @@ class PARSER(tokens: Iterator[TOKEN]) is
             let condition = parenthesised()
             let then_part = statement()
             let else_part =
-                if accept(ELSE) then statement() else Node.EMPTY fi
+                if accept(ELSE) then
+                    statement()
+                else
+                    Node.EMPTY
+                fi
             Node.IF(condition, then_part, else_part)
         when PUTC then
             advance()
@@ -156,7 +195,8 @@ class PARSER(tokens: Iterator[TOKEN]) is
         else
             throw System.Exception(
                 "({token.line}, {token.column}) expecting a statement, "
-                "found {spellings[token.kind]}")
+                "found {spellings[token.kind]}"
+            )
         esac
 
     assignment() -> Node => (
@@ -165,21 +205,25 @@ class PARSER(tokens: Iterator[TOKEN]) is
         expect(ASSIGN)
         let value = expression(0)
         expect(SEMICOLON)
-        Node.ASSIGN(target, value))
+        Node.ASSIGN(target, value)
+    )
 
     block() -> Node => (
         advance()
         let list = statements([RIGHT_BRACE, END_OF_INPUT])
         expect(RIGHT_BRACE)
-        list)
+        list
+    )
 
     print_list() -> Node => (
         expect(LEFT_PAREN)
-        let list =
-            print_items(Node.SEQUENCE(Node.EMPTY, print_item()))
+        let list = print_items(
+            Node.SEQUENCE(Node.EMPTY, print_item())
+        )
         expect(RIGHT_PAREN)
         expect(SEMICOLON)
-        list)
+        list
+    )
 
     print_items(list: Node) -> Node =>
         if accept(COMMA) then
@@ -202,7 +246,8 @@ class PARSER(tokens: Iterator[TOKEN]) is
         expect(LEFT_PAREN)
         let inside = expression(0)
         expect(RIGHT_PAREN)
-        inside)
+        inside
+    )
 
     expression(minimum: int) -> Node =>
         binary_tail(primary(), minimum)
@@ -231,16 +276,23 @@ class PARSER(tokens: Iterator[TOKEN]) is
         else
             throw System.Exception(
                 "({token.line}, {token.column}) expecting a primary, "
-                "found {spellings[token.kind]}")
+                "found {spellings[token.kind]}"
+            )
         esac
 
     binary_tail(left: Node, minimum: int) -> Node =>
-        if let precedence = binary_precedence(token.kind) /\
-                precedence >= minimum then
+        if let
+            precedence = binary_precedence(
+                token.kind
+            ) /\ precedence >= minimum
+        then
             let kind = token.kind
             advance()
             let right = expression(precedence + 1)
-            binary_tail(Node.OPERATOR(kind, left, right), minimum)
+            binary_tail(
+                Node.OPERATOR(kind, left, right),
+                minimum
+            )
         else
             left
         fi
@@ -311,12 +363,14 @@ si
 token(line: string) -> TOKEN => (
     let fields = line |> words() |> collect()
     let name = fields[2]
-    let rest = line.substring(line.index_of(name) + name.length).trim()
-    TOKEN(kinds[name], rest, fields[0], fields[1]))
+    let rest =
+        line.substring(line.index_of(name) + name.length).trim()
+    TOKEN(kinds[name], rest, fields[0], fields[1])
+)
 
 let tokens =
     stdin_lines()
-    |> filter(line => line |> words() |> count() >= 3)
-    |> map(token)
+        |> filter(line => line |> words() |> count() >= 3)
+        |> map(token)
 
 show(PARSER(tokens.iterator).program())

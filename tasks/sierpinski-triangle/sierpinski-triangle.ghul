@@ -17,11 +17,13 @@ indent(width: int) -> string =>
 row(number: int) -> string =>
     (0::number)
         |> map(column =>
-            if (number & column) == column then "*" else " " fi)
+            if (number & column) == column then "*" else " " fi
+        )
         |> join(" ")
 
 let size = power_of_two(4)
 
 (0..size)
     |> each(number =>
-        write_line("{indent(size - 1 - number)}{row(number)}"))
+        write_line("{indent(size - 1 - number)}{row(number)}")
+    )

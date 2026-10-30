@@ -9,7 +9,8 @@ conjugate_transpose(m: Matrix) -> Matrix =>
         |> map(j =>
             0..m.count
                 |> map(i => Complex.conjugate(m[i][j]))
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 *(a: Matrix, b: Matrix) -> Matrix =>
@@ -19,28 +20,42 @@ conjugate_transpose(m: Matrix) -> Matrix =>
                 |> map(j =>
                     0..b.count
                         |> map(k => a[i][k] * b[k][j])
-                        |> reduce(Complex.zero, * + *))
-                |> collect())
+                        |> reduce(Complex.zero, * + *)
+                )
+                |> collect()
+        )
         |> collect()
 
 ≈(a: Matrix, b: Matrix) -> bool =>
     0..a.count
         |> all(i =>
             0..a[i].count
-                |> all(j => Complex.abs(a[i][j] - b[i][j]) < 1.0e-12))
+                |> all(j =>
+                    Complex.abs(a[i][j] - b[i][j]) < 1.0e-12
+                )
+        )
 
 identity(n: int) -> Matrix =>
     0..n
         |> map(i =>
             0..n
-                |> map(j => if i == j then Complex.one else Complex.zero fi)
-                |> collect())
+                |> map(j =>
+                    if i == j then
+                        Complex.one
+                    else
+                        Complex.zero
+                    fi
+                )
+                |> collect()
+        )
         |> collect()
 
 show(c: Complex) -> string =>
-    let sign = if c.imaginary < 0.0 then "-" else "+" fi in
-    let size = double.abs(c.imaginary) in
-    "{c.real:0.####}{sign}{size:0.####}i"
+    let
+        sign = if c.imaginary < 0.0 then "-" else "+" fi,
+        size = double.abs(c.imaginary)
+    in
+        "{c.real:0.####}{sign}{size:0.####}i"
 
 print(m: Matrix) =>
     for row in m do

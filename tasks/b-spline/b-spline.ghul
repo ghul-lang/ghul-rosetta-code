@@ -4,9 +4,12 @@ use Raster.IMAGE
 use Point = (x: double, y: double)
 
 let control: Point[] = [
-    (171.0D, 171.0D), (185.0D, 111.0D), (202.0D, 109.0D), (202.0D, 189.0D),
-    (328.0D, 160.0D), (208.0D, 254.0D), (241.0D, 330.0D), (164.0D, 252.0D),
-    (69.0D, 278.0D), (139.0D, 208.0D), (72.0D, 148.0D), (168.0D, 172.0D)
+    (171.0D, 171.0D), (185.0D, 111.0D), (202.0D, 109.0D),
+    (202.0D, 189.0D),
+    (328.0D, 160.0D), (208.0D, 254.0D), (241.0D, 330.0D),
+    (164.0D, 252.0D),
+    (69.0D, 278.0D), (139.0D, 208.0D), (72.0D, 148.0D),
+    (168.0D, 172.0D)
 ]
 
 let degree = 3
@@ -15,12 +18,16 @@ let spans = control.count - degree
 knot(i: int) -> double =>
     double(System.Math.clamp(i - degree, 0, spans))
 
-lerp(a: Point, b: Point, t: double) -> Point =>
-    (x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t)
+lerp(a: Point, b: Point, t: double) -> Point => (
+    x = a.x + (b.x - a.x) * t,
+    y = a.y + (b.y - a.y) * t
+)
 
 de_boor(t: double) -> Point is
     let span = System.Math.min(int(t), spans - 1) + degree
-    let d = LIST(0::degree |> map(j => control[j + span - degree]))
+    let d = LIST(
+        0::degree |> map(j => control[j + span - degree])
+    )
 
     for r in 1::degree do
         for step in 0::degree - r do
@@ -41,7 +48,9 @@ let samples = 400
 
 let curve =
     (0::samples)
-        |> map(s => de_boor(double(spans * s) / double(samples)))
+        |> map(s =>
+            de_boor(double(spans * s) / double(samples))
+        )
         |> collect()
 
 let image = IMAGE(400, 400)
@@ -65,7 +74,9 @@ image.line(curve)
 let first = curve[0]
 let last = curve[curve.count - 1]
 
-write_line("clamped cubic B-spline over {control.count} control points")
+write_line(
+    "clamped cubic B-spline over {control.count} control points"
+)
 write_line("starts at ({first.x:F1}, {first.y:F1})")
 write_line("ends at ({last.x:F1}, {last.y:F1})")
 

@@ -27,12 +27,19 @@ rows(p: Polynomial) -> Polynomial{} is
 si
 
 is_stable(p: Polynomial) -> bool =>
-    let n = p.count - 1, sign = if n % 2 == 0 then 1.0 else -1.0 fi in
-    p[0] > 0.0 /\
+    let
+        n = p.count - 1,
+        sign = if n % 2 == 0 then 1.0 else -1.0 fi
+    in
+        p[0] > 0.0 /\
         evaluate(p, 1.0) > 0.0 /\
         sign * evaluate(p, -1.0) > 0.0 /\
-        p |> rows() |> all(row =>
-            double.abs(row[0]) > double.abs(row[row.count - 1]))
+        p
+            |> rows()
+            |> all(row =>
+                double.abs(row[0]) >
+                double.abs(row[row.count - 1])
+            )
 
 show(p: Polynomial) -> string =>
     let n = p.count - 1 in
@@ -41,8 +48,7 @@ show(p: Polynomial) -> string =>
             |> index()
             |> filter((_, a) => a != 0.0)
             |> map((i, a) => (
-                let
-                    power = n - i,
+                let power = n - i,
                     size = double.abs(a),
                     sign = if a < 0.0 then " - " else " + " fi,
                     unit = size == 1.0 /\ power > 0,
@@ -71,7 +77,8 @@ let polynomials = [
 ]
 
 for p in polynomials do
-    let verdict = if is_stable(p) then "stable" else "not stable" fi
+    let verdict =
+        if is_stable(p) then "stable" else "not stable" fi
 
     write_line("{show(p),-40} {verdict}")
 od

@@ -3,16 +3,12 @@ use System.Convert.to_string
 
 unit[T](value: T) -> T{} => [value]
 
->>=[T, U](values: T{}, f: (T) -> U{})
-    -> U{}
-=>
+>>=[T, U](values: T{}, f: (T) -> U{}) -> U{} =>
     values |> flat_map(f)
 
-factors(n: int) -> int{} =>
-    1::n |> filter(d => n % d == 0)
+factors(n: int) -> int{} => 1::n |> filter(d => n % d == 0)
 
-spellings(n: int) -> string{} =>
-    ["{n}", "0b{to_string(n, 2)}"]
+spellings(n: int) -> string{} => ["{n}", "0b{to_string(n, 2)}"]
 
 write_line((unit(6) >>= factors) |> join())
 write_line((unit(6) >>= factors >>= spellings) |> join())

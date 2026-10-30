@@ -9,7 +9,7 @@ expand(path: string, active: List[string]) -> string{} is
     let full = Path.get_full_path(path)
 
     assert !(active |> any(* =~ full))
-    else "include cycle through {path}"
+        else "include cycle through {path}"
 
     let nested = active |> cat([full]) |> collect()
 
@@ -20,7 +20,10 @@ expand(path: string, active: List[string]) -> string{} is
             let target = directive.substring(9).trim().trim('"')
             let directory = Path.get_directory_name(path) ?? ""
 
-            yield in expand(Path.combine(directory, target), nested)
+            yield in expand(
+                Path.combine(directory, target),
+                nested
+            )
         else
             yield line
         fi

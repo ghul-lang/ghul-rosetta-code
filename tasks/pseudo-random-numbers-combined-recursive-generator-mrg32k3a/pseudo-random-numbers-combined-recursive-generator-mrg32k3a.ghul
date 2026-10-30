@@ -16,8 +16,14 @@ class MRG32K3A is
         let m1 = 4_294_967_087L
         let m2 = 4_294_944_443L
 
-        let x1 = modulo(1_403_580L * _first[1] - 810_728L * _first[2], m1)
-        let x2 = modulo(527_612L * _second[0] - 1_370_589L * _second[2], m2)
+        let x1 = modulo(
+            1_403_580L * _first[1] - 810_728L * _first[2],
+            m1
+        )
+        let x2 = modulo(
+            527_612L * _second[0] - 1_370_589L * _second[2],
+            m2
+        )
 
         _first = [x1, _first[0], _first[1]]
         _second = [x2, _second[0], _second[1]]
@@ -25,7 +31,8 @@ class MRG32K3A is
         modulo(x1 - x2, m1) + 1L
     si
 
-    next_float() -> double => double(next_int()) / 4_294_967_088.0
+    next_float() -> double =>
+        double(next_int()) / 4_294_967_088.0
 si
 
 let first = MRG32K3A(1234567L)

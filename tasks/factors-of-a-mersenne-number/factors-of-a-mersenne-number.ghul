@@ -3,14 +3,18 @@ use default
 find_mersenne_factor(p: int, limit: int) -> bigint? =>
     (1::limit)
         |> map(k => bigint(2 * k * p + 1))
-        |> filter(candidate => mod_pow(2n, bigint(p), candidate) =~ 1n)
+        |> filter(candidate =>
+            mod_pow(2n, bigint(p), candidate) =~ 1n
+        )
         |> first()
 
 show(p: int, limit: int) is
     if let factor = find_mersenne_factor(p, limit) then
         write_line("2^{p} - 1 is divisible by {factor}")
     else
-        write_line("no factor of 2^{p} - 1 found below k = {limit}")
+        write_line(
+            "no factor of 2^{p} - 1 found below k = {limit}"
+        )
     fi
 si
 

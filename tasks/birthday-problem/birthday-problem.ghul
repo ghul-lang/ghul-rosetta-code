@@ -27,7 +27,10 @@ si
 
 simulated(people: int, at_least: int, trials: int) -> double =>
     let hits =
-        0..trials |> filter(_ => shared(people, at_least)) |> count() in
+        0..trials
+            |> filter(_ => shared(people, at_least))
+            |> count()
+    in
     double(hits) / double(trials)
 
 log_factorial(n: int) -> double =>
@@ -39,30 +42,43 @@ exact(most: int, at_least: int) -> List[double] is
             |> map(j => 1.0D / exp(log_factorial(j)))
             |> collect()
 
-    let nobody = [if m == 0 then 1.0D else 0.0D fi for m in 0::most]
-
-    let ways = 0..days |> reduce(nobody, (ways, _) => [
-        0..min(at_least, m + 1)
-            |> map(j => ways[m - j] * inverse_factorial[j])
-            |> sum()
+    let nobody = [
+        if m == 0 then 1.0D else 0.0D fi
         for m in 0::most
-    ])
+    ]
+
+    let ways =
+        0..days
+            |> reduce(nobody, (ways, _) => [
+                0..min(at_least, m + 1)
+                    |> map(j =>
+                        ways[m - j] * inverse_factorial[j]
+                    )
+                    |> sum()
+                for m in 0::most
+            ])
 
     (0::most)
         |> map(n =>
             let log_scale =
-                log_factorial(n) -
-                double(n) * log(double(days)) in
-            1.0D - ways[n] * exp(log_scale))
+                log_factorial(n) - double(n) * log(double(days))
+            in
+            1.0D - ways[n] * exp(log_scale)
+        )
         |> collect()
 si
 
-first_even(chance: (int) -> double, low: int, high: int) -> int =>
+first_even(
+    chance: (int) -> double,
+    low: int,
+    high: int
+) -> int =>
     if low >= high then
         low
     else
         let middle = (low + high) / 2 in
-        if chance(middle) > 0.5D then first_even(chance, low, middle)
+        if chance(middle) > 0.5D then
+            first_even(chance, low, middle)
         else first_even(chance, middle + 1, high)
         fi
     fi
@@ -72,7 +88,11 @@ let curves = LIST[List[double]]()
 let start mut = 2
 
 for at_least in 2::5 do
-    let estimate = first_even(simulated(*, at_least, 10000), start, 600)
+    let estimate = first_even(
+        simulated(*, at_least, 10000),
+        start,
+        600
+    )
     let curve = exact(600, at_least)
     let answer = first_even(n => curve[n], start, 600)
 
@@ -83,7 +103,8 @@ for at_least in 2::5 do
 
     write_line(
         "{at_least} sharing: simulated {estimate}, exactly {answer} "
-        "({100.0D * curve[answer]:F2}%)")
+        "({100.0D * curve[answer]:F2}%)"
+    )
 od
 
 let image = IMAGE(480, 300)
@@ -120,14 +141,24 @@ for (i, at_least) in 2::5 |> index() do
     image.ring(crossing, 0.5D, 4.0D)
     let label = "{crossings[i]}"
 
-    image.text(crossing - 6.0D, 0.56D, 11.0D, label, Anchor.RIGHT)
+    image.text(
+        crossing - 6.0D,
+        0.56D,
+        11.0D,
+        label,
+        Anchor.RIGHT
+    )
 od
 
 image.colour(60ub, 60ub, 60ub)
 image.text(-8.0D, 0.47D, 11.0D, "50%", Anchor.RIGHT)
 image.text(
-    double(most) / 2.0D, -0.12D, 12.0D,
-    "people in the group", Anchor.CENTRE)
+    double(most) / 2.0D,
+    -0.12D,
+    12.0D,
+    "people in the group",
+    Anchor.CENTRE
+)
 
 image.write("birthdays.png")
 

@@ -22,7 +22,8 @@ si
 let first = riordan(32) |> collect()
 
 for row in 0..8 do
-    let line = first[row * 4..row * 4 + 4] |> map(term => "{term,14}")
+    let line =
+        first[row * 4..row * 4 + 4] |> map(term => "{term,14}")
 
     write_line(line |> join(""))
 od
@@ -31,5 +32,7 @@ digits(index: int) -> int =>
     (riordan(index + 1) |> collect())[index].to_string().length
 
 write_line("")
-write_line("the 1,000th Riordan number has {digits(1_000)} digits")
+write_line(
+    "the 1,000th Riordan number has {digits(1_000)} digits"
+)
 write_line("the 10,000th has {digits(10_000)} digits")

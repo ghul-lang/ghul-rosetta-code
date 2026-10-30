@@ -1,6 +1,11 @@
 use default
 
-within(x: double, y: double, centre: double, radius: double) -> bool =>
+within(
+    x: double,
+    y: double,
+    centre: double,
+    radius: double
+) -> bool =>
     x * x + (y - centre) * (y - centre) <= radius * radius
 
 symbol(x: double, y: double, radius: double) -> string =>
@@ -22,15 +27,21 @@ symbol(x: double, y: double, radius: double) -> string =>
 
 taijitu(radius: int) -> string{} is
     for row in -radius::radius do
-        yield ((-2 * radius)::(2 * radius))
-            |> map(column =>
-                symbol(cast(column) / 2.0D, cast(row),
-                    cast(radius)))
-            |> join("")
+        yield
+            ((-2 * radius)::(2 * radius))
+                |> map(column =>
+                    symbol(
+                        cast(column) / 2.0D,
+                        cast(row),
+                        cast(radius)
+                    )
+                )
+                |> join("")
     od
 si
 
 [4, 8]
-    |> each(radius =>
-        (taijitu(radius) |> each(line => write_line(line))
-         write_line("")))
+    |> each(radius => (
+        taijitu(radius) |> each(line => write_line(line))
+        write_line("")
+    ))

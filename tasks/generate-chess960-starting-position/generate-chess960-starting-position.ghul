@@ -1,16 +1,20 @@
 use default
 
-let knight_pairs =
-    [(lower, higher) for lower in 0..5 for higher in lower + 1..5]
+let knight_pairs = [
+    (lower, higher)
+    for lower in 0..5
+    for higher in lower + 1..5
+]
 
 position(number: int) -> string is
     let squares = repeat('.', 8) |> collect_mutable()
 
     place(piece, among_empty) is
-        let square = 0..8
-            |> filter(s => squares[s] == '.')
-            |> skip(among_empty)
-            |> first()!
+        let square =
+            0..8
+                |> filter(s => squares[s] == '.')
+                |> skip(among_empty)
+                |> first()!
 
         squares[square] = piece
     si
@@ -36,12 +40,15 @@ si
 
 is_legal(rank: string) -> bool =>
     let
-        bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect(),
-        rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect(),
+        bishops =
+            0..8 |> filter(s => rank[s] == 'B') |> collect(),
+        rooks =
+            0..8 |> filter(s => rank[s] == 'R') |> collect(),
         king = rank.index_of('K')
     in
         (bishops[0] + bishops[1]) % 2 == 1 /\
-        rooks[0] < king /\ king < rooks[1]
+        rooks[0] < king /\
+        king < rooks[1]
 
 let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
 
@@ -56,5 +63,7 @@ od
 let positions = 0..960 |> map(position) |> memo()
 
 write_line()
-write_line("distinct positions: {positions |> distinct() |> count()}")
+write_line(
+    "distinct positions: {positions |> distinct() |> count()}"
+)
 write_line("all legal: {positions |> all(is_legal)}")

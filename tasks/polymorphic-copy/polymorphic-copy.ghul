@@ -22,14 +22,12 @@ class DOG(name: string, tricks: LIST[string]): Animal is
     speak() -> string =>
         "{name} says woof, and can {string.join(" and ", tricks)}"
 
-    copy() -> Animal =>
-        DOG(name, tricks |> collect_mutable())
+    copy() -> Animal => DOG(name, tricks |> collect_mutable())
 si
 
 duplicate[T: Copyable[T]](value: T) -> T => value.copy()
 
 let animals: LIST[Animal] = _()
-
 animals.add(CAT("Ada"))
 animals.add(DOG("Rex", LIST(["sit", "roll over"])))
 
@@ -38,7 +36,9 @@ for original in animals do
 
     write_line(copy.speak())
     write_line("  same object: {copy == original}")
-    write_line("  same type:   {copy.get_type() == original.get_type()}")
+    write_line(
+        "  same type:   {copy.get_type() == original.get_type()}"
+    )
 od
 
 let original = animals[1]

@@ -1,0 +1,4 @@
+# The block comment sits inside the call, between the argument and the closing
+# parenthesis, which is what the task demonstrates. The formatter writes the
+# call on one line, which can only put the comment after it.
+comments.ghul

@@ -11,7 +11,8 @@ parse(text: string) -> List[Fraction] =>
         |> map(f => f.trim().split(['/']))
         |> map(parts => (
             numerator = bigint.parse(parts[0]),
-            denominator = bigint.parse(parts[1])))
+            denominator = bigint.parse(parts[1])
+        ))
         |> collect()
 
 run(program: List[Fraction], start: bigint) -> bigint{} is
@@ -21,7 +22,9 @@ run(program: List[Fraction], start: bigint) -> bigint{} is
         yield n
 
         let fits =
-            program |> filter(f => n % f.denominator =~ 0n) |> first()
+            program
+                |> filter(f => n % f.denominator =~ 0n)
+                |> first()
 
         if let next = fits then
             n = n * next.numerator / next.denominator

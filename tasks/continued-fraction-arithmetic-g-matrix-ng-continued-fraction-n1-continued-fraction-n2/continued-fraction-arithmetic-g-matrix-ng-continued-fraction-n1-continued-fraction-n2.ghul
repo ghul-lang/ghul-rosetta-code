@@ -3,18 +3,35 @@ use System.Math.*
 
 use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
 
--(u: Row, v: Row) -> Row =>
-    (u.p12 - v.p12, u.p1 - v.p1, u.p2 - v.p2, u.p - v.p)
+-(u: Row, v: Row) -> Row => (
+    u.p12 - v.p12,
+    u.p1 - v.p1,
+    u.p2 - v.p2,
+    u.p - v.p
+)
 
-*(r: Row, t: bigint) -> Row => (r.p12 * t, r.p1 * t, r.p2 * t, r.p * t)
+*(r: Row, t: bigint) -> Row => (
+    r.p12 * t,
+    r.p1 * t,
+    r.p2 * t,
+    r.p * t
+)
 
-input_first(r: Row, t: bigint) -> Row =>
-    (r.p2 + r.p12 * t, r.p + r.p1 * t, r.p12, r.p1)
+input_first(r: Row, t: bigint) -> Row => (
+    r.p2 + r.p12 * t,
+    r.p + r.p1 * t,
+    r.p12,
+    r.p1
+)
 
 exhaust_first(r: Row) -> Row => (r.p12, r.p1, r.p12, r.p1)
 
-input_second(r: Row, t: bigint) -> Row =>
-    (r.p1 + r.p12 * t, r.p12, r.p + r.p2 * t, r.p2)
+input_second(r: Row, t: bigint) -> Row => (
+    r.p1 + r.p12 * t,
+    r.p12,
+    r.p + r.p2 * t,
+    r.p2
+)
 
 exhaust_second(r: Row) -> Row => (r.p12, r.p12, r.p2, r.p2)
 
@@ -39,7 +56,10 @@ square_root_of_two() -> bigint{} => [1n] ++ repeat(2n)
 let patience = 40
 
 combine(
-    top_row: Row, bottom_row: Row, x: bigint{}, y: bigint{}
+    top_row: Row,
+    bottom_row: Row,
+    x: bigint{},
+    y: bigint{}
 ) -> bigint{} is
     let top mut = top_row
     let bottom mut = bottom_row
@@ -52,18 +72,29 @@ combine(
     ratio(n, d) => double(n) / double(d)
 
     settled() =>
-        let (a12, a1, a2, a) = top, (b12, b1, b2, b) = bottom in
-        b12 !~ 0n /\ b1 !~ 0n /\ b2 !~ 0n /\ b !~ 0n /\
-        a12 / b12 =~ a / b /\ a1 / b1 =~ a / b /\ a2 / b2 =~ a / b
+        let
+            (a12, a1, a2, a) = top,
+            (b12, b1, b2, b) = bottom
+        in
+            b12 !~ 0n /\
+            b1 !~ 0n /\
+            b2 !~ 0n /\
+            b !~ 0n /\
+            a12 / b12 =~ a / b /\
+            a1 / b1 =~ a / b /\
+            a2 / b2 =~ a / b
 
     first_is_further() =>
-        let (_, a1, a2, a) = top, (_, b1, b2, b) = bottom in
-        if b =~ 0n /\ b2 =~ 0n then true
-        elif b =~ 0n \/ b2 =~ 0n then false
-        else
-            abs(ratio(a1, b1) - ratio(a, b)) >
+        let
+            (_, a1, a2, a) = top,
+            (_, b1, b2, b) = bottom
+        in
+            if b =~ 0n /\ b2 =~ 0n then true
+            elif b =~ 0n \/ b2 =~ 0n then false
+            else
+                abs(ratio(a1, b1) - ratio(a, b)) >
                 abs(ratio(a2, b2) - ratio(a, b))
-        fi
+            fi
 
     while !is_zero(bottom) do
         if settled() then
@@ -121,15 +152,30 @@ let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
 let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
 run(
-    label: string, operation: (Row, Row), x: bigint{}, y: bigint{}
+    label: string,
+    operation: (Row, Row),
+    x: bigint{},
+    y: bigint{}
 ) =>
     let (top, bottom) = operation in
-    write_line("{label,-15} = {show(combine(top, bottom, x, y))}")
+    write_line(
+        "{label,-15} = {show(combine(top, bottom, x, y))}"
+    )
 
 run("22/7 + 1/2", add, r2cf(22n, 7n), r2cf(1n, 2n))
 run("13/11 * 22/7", multiply, r2cf(13n, 11n), r2cf(22n, 7n))
 run("13/11 - 22/7", subtract, r2cf(13n, 11n), r2cf(22n, 7n))
 run("484/49 / 22/7", divide, r2cf(484n, 49n), r2cf(22n, 7n))
-run("√2 * √2", multiply, square_root_of_two(), square_root_of_two())
+run(
+    "√2 * √2",
+    multiply,
+    square_root_of_two(),
+    square_root_of_two()
+)
 run("√2 + √2", add, square_root_of_two(), square_root_of_two())
-run("√2 / √2", divide, square_root_of_two(), square_root_of_two())
+run(
+    "√2 / √2",
+    divide,
+    square_root_of_two(),
+    square_root_of_two()
+)

@@ -16,7 +16,9 @@ url_encode(text: string) -> string =>
         |> map(percent_encoded)
         |> join("")
 
-["http://foo bar/",
- "ghul.dev/search?q=ghūl language",
- "%25"]
+[
+    "http://foo bar/",
+    "ghul.dev/search?q=ghūl language",
+    "%25"
+]
     |> each(text => write_line("{text} -> {url_encode(text)}"))

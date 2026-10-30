@@ -5,7 +5,8 @@ use System.Convert
 write_line("decimal  binary  octal  hex")
 
 for n in 0::33 do
-    let binary = Convert.to_string(n, 2), octal = Convert.to_string(n, 8)
+    let binary = Convert.to_string(n, 2),
+        octal = Convert.to_string(n, 8)
 
     write_line("{n,7}  {binary,6}  {octal,5}  {n,3:x}")
 od

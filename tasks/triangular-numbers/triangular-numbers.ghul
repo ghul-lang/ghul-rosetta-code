@@ -2,41 +2,58 @@ use default
 use System.Math.*
 
 simplex(dimension: int) -> bigint{} =>
-    from(1) |> map(index =>
-        binomial(bigint(index + dimension - 1), bigint(dimension)))
+    from(1)
+        |> map(index =>
+            binomial(
+                bigint(index + dimension - 1),
+                bigint(dimension)
+            )
+        )
 
 triangular_root(value: double) -> double =>
     (sqrt(8.0D * value + 1.0D) - 1.0D) / 2.0D
 
 tetrahedral_root(value: double) -> double =>
-    let offset = sqrt(9.0D * value * value - 1.0D / 27.0D) in
-    let upper = cbrt(3.0D * value + offset) in
-    upper + 1.0D / (3.0D * upper) - 1.0D
+    let
+        offset = sqrt(9.0D * value * value - 1.0D / 27.0D),
+        upper = cbrt(3.0D * value + offset)
+    in
+        upper + 1.0D / (3.0D * upper) - 1.0D
 
 pentatopic_root(value: double) -> double =>
     let inner = sqrt(24.0D * value + 1.0D) in
     (sqrt(5.0D + 4.0D * inner) - 3.0D) / 2.0D
 
-let families = [(dimension = 2, name = "triangular"),
-                (dimension = 3, name = "tetrahedral"),
-                (dimension = 4, name = "pentatopic"),
-                (dimension = 12, name = "12-simplex")]
+let families = [
+    (dimension = 2, name = "triangular"),
+    (dimension = 3, name = "tetrahedral"),
+    (dimension = 4, name = "pentatopic"),
+    (dimension = 12, name = "12-simplex")
+]
 
-families |> each(family => (
-    write_line("the first 30 {family.name} numbers:")
+families
+    |> each(family => (
+        write_line("the first 30 {family.name} numbers:")
 
-    simplex(family.dimension)
-        |> take(30)
-        |> chunk(6)
-        |> each(row =>
-            write_line(row |> map(value => "{value,12}") |> join("")))
+        simplex(family.dimension)
+            |> take(30)
+            |> chunk(6)
+            |> each(row =>
+                write_line(
+                    row
+                        |> map(value => "{value,12}")
+                        |> join("")
+                )
+            )
 
-    write_line()
-))
+        write_line()
+    ))
 
-let roots = [(name = "triangular", of = triangular_root),
-             (name = "tetrahedral", of = tetrahedral_root),
-             (name = "pentatopic", of = pentatopic_root)]
+let roots = [
+    (name = "triangular", of = triangular_root),
+    (name = "tetrahedral", of = tetrahedral_root),
+    (name = "pentatopic", of = pentatopic_root)
+]
 
 [7140L, 21408696L, 26728085384L, 14545501785001L]
     |> each(value => (
@@ -46,7 +63,10 @@ let roots = [(name = "triangular", of = triangular_root),
 
         roots
             |> each(root =>
-                write_line("  {root.name,12}: {root.of(as_real):F9}"))
+                write_line(
+                    "  {root.name,12}: {root.of(as_real):F9}"
+                )
+            )
 
         write_line()
     ))

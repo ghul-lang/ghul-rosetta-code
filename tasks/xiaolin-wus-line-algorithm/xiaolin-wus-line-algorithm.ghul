@@ -18,8 +18,10 @@ mark(x: int, y: int, steep: bool, weight: double) is
 si
 
 endpoint(
-    x: double, y: double,
-    gradient: double, gap: double,
+    x: double,
+    y: double,
+    gradient: double,
+    gap: double,
     steep: bool
 ) -> (column: int, height: double) is
     let ends_at = round(x)
@@ -34,9 +36,13 @@ endpoint(
     return (column = column, height = height)
 si
 
-line(from_x: double, from_y: double, to_x: double, to_y: double) is
-    let steep =
-        abs(to_y - from_y) > abs(to_x - from_x)
+line(
+    from_x: double,
+    from_y: double,
+    to_x: double,
+    to_y: double
+) is
+    let steep = abs(to_y - from_y) > abs(to_x - from_x)
 
     let ax mut = if steep then from_y else from_x fi
     let ay mut = if steep then from_x else from_y fi
@@ -56,10 +62,20 @@ line(from_x: double, from_y: double, to_x: double, to_y: double) is
     let gradient =
         if bx == ax then 1.0D else (by - ay) / (bx - ax) fi
 
-    let first =
-        endpoint(ax, ay, gradient, rest(ax + 0.5D), steep)
-    let last =
-        endpoint(bx, by, gradient, fraction(bx + 0.5D), steep)
+    let first = endpoint(
+        ax,
+        ay,
+        gradient,
+        rest(ax + 0.5D),
+        steep
+    )
+    let last = endpoint(
+        bx,
+        by,
+        gradient,
+        fraction(bx + 0.5D),
+        steep
+    )
 
     let height mut = first.height + gradient
 
@@ -74,11 +90,11 @@ line(from_x: double, from_y: double, to_x: double, to_y: double) is
 si
 
 for spoke in 0..13 do
-    let angle =
-        pi * (double(spoke) / 12.0D - 0.5D)
+    let angle = pi * (double(spoke) / 12.0D - 0.5D)
 
     line(
-        10.0D, 150.0D,
+        10.0D,
+        150.0D,
         10.0D + 380.0D * cos(angle),
         150.0D - 140.0D * sin(angle)
     )

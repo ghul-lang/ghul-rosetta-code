@@ -5,9 +5,10 @@ pyramid(base: List[int]) -> List[List[int]] => (
 
     while rows[0].count > 1 do
         let below = rows[0]
-        let above = 0..below.count - 1
-            |> map(i => below[i] + below[i + 1])
-            |> collect()
+        let above =
+            0..below.count - 1
+                |> map(i => below[i] + below[i + 1])
+                |> collect()
 
         rows.insert(0, above)
     od
@@ -15,15 +16,16 @@ pyramid(base: List[int]) -> List[List[int]] => (
     rows
 )
 
-let solutions =
-    [(x, z) for x in 0::151 for z in 0::151]
-        |> map((x, z) => pyramid([x, 11, x + z, 4, z]))
-        |> filter(p => p[0][0] == 151 /\ p[2][0] == 40)
+let solutions = [(x, z) for x in 0::151 for z in 0::151]
+    |> map((x, z) => pyramid([x, 11, x + z, 4, z]))
+    |> filter(p => p[0][0] == 151 /\ p[2][0] == 40)
 
 for p in solutions do
     for (depth, row) in p |> index() do
         let indent = string(' ', (p.count - 1 - depth) * 3)
-        write_line("{indent}{row |> map(v => "[{v,4}]") |> join("")}")
+        write_line(
+            "{indent}{row |> map(v => "[{v,4}]") |> join("")}"
+        )
     od
 
     write_line()

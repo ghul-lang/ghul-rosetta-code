@@ -17,7 +17,10 @@ to_quater_imaginary(value: int) -> string => (
     fi
 )
 
-from_quater_imaginary(text: string) -> (real: int, imaginary: int) is
+from_quater_imaginary(text: string) -> (
+    real: int,
+    imaginary: int
+) is
     let real mut = 0
     let imaginary mut = 0
     let power_real mut = 1

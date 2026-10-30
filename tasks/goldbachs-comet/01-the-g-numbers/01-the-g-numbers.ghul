@@ -7,7 +7,9 @@ is_prime[0] = false
 is_prime[1] = false
 
 for candidate in 2::limit do
-    if is_prime[candidate] /\ candidate <= limit / candidate then
+    if
+        is_prime[candidate] /\ candidate <= limit / candidate
+    then
         let multiple mut = candidate * candidate
 
         while multiple <= limit do
@@ -25,8 +27,11 @@ goldbach(even: int) -> int =>
 write_line("the first 100 G numbers:")
 
 for row in 0..10 do
-    let cells = (0..10)
-        |> map(column => "{goldbach(4 + 2 * (row * 10 + column)),3}")
+    let cells =
+        (0..10)
+            |> map(column =>
+                "{goldbach(4 + 2 * (row * 10 + column)),3}"
+            )
 
     write_line(cells |> join(" "))
 od

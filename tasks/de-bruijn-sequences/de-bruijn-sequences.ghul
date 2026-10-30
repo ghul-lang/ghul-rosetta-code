@@ -29,9 +29,11 @@ si
 
 missing_pins(sequence: string) -> List[string] =>
     let wrapped = "{sequence}{sequence[0..3]}" in
-    let seen = 0..wrapped.length - 3
-        |> map(wrapped.substring(*, 4))
-        |> collect_set() in
+    let seen =
+        0..wrapped.length - 3
+            |> map(wrapped.substring(*, 4))
+            |> collect_set()
+    in
     0..10_000
         |> map(pin => pin.to_string("D4"))
         |> filter(pin => !seen.contains(pin))
@@ -58,4 +60,7 @@ write_line()
 
 verify("Original", sequence)
 verify("Reversed", string(sequence |> reverse()))
-verify("4444th digit replaced", "{sequence[0..4443]}.{sequence[4444..<0]}")
+verify(
+    "4444th digit replaced",
+    "{sequence[0..4443]}.{sequence[4444..<0]}"
+)

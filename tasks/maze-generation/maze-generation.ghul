@@ -23,9 +23,10 @@ at(column: int, row: int) -> int => row * columns + column
 inside(column: int, row: int) -> bool =>
     column >= 0 /\ column < columns /\ row >= 0 /\ row < rows
 
-let directions =
-    [(across = 1, down = 0), (across = -1, down = 0),
-     (across = 0, down = 1), (across = 0, down = -1)]
+let directions = [
+    (across = 1, down = 0), (across = -1, down = 0),
+    (across = 0, down = 1), (across = 0, down = -1)
+]
 
 shuffled() -> (across: int, down: int){} => (
     let order = LIST(directions)
@@ -33,7 +34,10 @@ shuffled() -> (across: int, down: int){} => (
 
     while index > 0 do
         let other = random.next(index + 1)
-        (order[index], order[other]) = (order[other], order[index])
+        (order[index], order[other]) = (
+            order[other],
+            order[index]
+        )
         index = index - 1
     od
 
@@ -47,8 +51,10 @@ carve(column: int, row: int) is
         let next_column = column + step.across
         let next_row = row + step.down
 
-        if inside(next_column, next_row) /\
-                !visited[at(next_column, next_row)] then
+        if
+            inside(next_column, next_row) /\
+            !visited[at(next_column, next_row)]
+        then
             if step.across == 1 then
                 right_open[at(column, row)] = true
             elif step.across == -1 then
@@ -66,8 +72,10 @@ si
 
 carve(random.next(columns), random.next(rows))
 
-let image =
-    IMAGE(columns * cell + 2 * margin, rows * cell + 2 * margin)
+let image = IMAGE(
+    columns * cell + 2 * margin,
+    rows * cell + 2 * margin
+)
 
 wall(from_x: int, from_y: int, to_x: int, to_y: int) is
     image.line(
@@ -88,8 +96,9 @@ wall(columns, 0, columns, rows)
 
 for row in 0..rows do
     for column in 0..columns do
-        if column < columns - 1 /\
-                !right_open[at(column, row)] then
+        if
+            column < columns - 1 /\ !right_open[at(column, row)]
+        then
             wall(column + 1, row, column + 1, row + 1)
         fi
 

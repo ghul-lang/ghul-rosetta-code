@@ -5,8 +5,11 @@ rotations(face: List[int]) -> List[int]{} =>
     0..face.count
         |> map(offset =>
             0..face.count
-                |> map(index => face[(index + offset) % face.count])
-                |> collect())
+                |> map(index =>
+                    face[(index + offset) % face.count]
+                )
+                |> collect()
+        )
 
 same_perimeter(one: List[int], other: List[int]) -> bool =>
     one.count == other.count /\
@@ -39,40 +42,72 @@ perimeter(edges: List[Edge]) -> List[int]? is
             let ends = neighbours[current]
 
             yield current
-            let next = if ends[0] == previous then ends[1] else ends[0] fi
+            let next =
+                if ends[0] == previous then
+                    ends[1]
+                else
+                    ends[0]
+                fi
 
             yield in walk_from(current, next)
         fi
     si
 
-    let walk = ([start] ++ walk_from(start, edges[0].to)) |> collect()
+    let walk =
+        ([start] ++ walk_from(start, edges[0].to)) |> collect()
 
-    return
-        if walk.count == edges.count then walk else null fi
+    return if walk.count == edges.count then walk else null fi
 si
 
 edges(pairs: List[(int, int)]) -> List[Edge] =>
-    pairs |> map((from, to) => (from = from, to = to)) |> collect()
+    pairs
+        |> map((from, to) => (from = from, to = to))
+        |> collect()
 
-let perimeters =
-    [(name = "Q", face = [8, 1, 3], against = "R", other = [1, 3, 8]),
-     (name = "U", face = [18, 8, 14, 10, 12, 17, 19],
-      against = "V", other = [8, 14, 10, 12, 17, 19, 18])]
+let perimeters = [
+    (
+        name = "Q",
+        face = [8, 1, 3],
+        against = "R",
+        other = [1, 3, 8]
+    ),
+    (
+        name = "U",
+        face = [18, 8, 14, 10, 12, 17, 19],
+        against = "V",
+        other = [8, 14, 10, 12, 17, 19, 18]
+    )
+]
 
 for (name, face, against, other) in perimeters do
     let verdict =
-        if same_perimeter(face, other) then "same" else "different" fi
+        if same_perimeter(face, other) then
+            "same"
+        else
+            "different"
+        fi
 
     write_line("{name} and {against}: {verdict}")
 od
 
-let faces =
-    [(name = "E", sides = edges([(1, 11), (7, 11), (1, 7)])),
-     (name = "F", sides = edges([(11, 23), (1, 17), (17, 23), (1, 11)])),
-     (name = "G",
-      sides = edges([(8, 14), (17, 19), (10, 12), (10, 14), (12, 17),
-                     (8, 18), (18, 19)])),
-     (name = "H", sides = edges([(1, 3), (9, 11), (3, 11), (1, 11)]))]
+let faces = [
+    (name = "E", sides = edges([(1, 11), (7, 11), (1, 7)])),
+    (
+        name = "F",
+        sides = edges([(11, 23), (1, 17), (17, 23), (1, 11)])
+    ),
+    (
+        name = "G",
+        sides = edges([
+            (8, 14), (17, 19), (10, 12), (10, 14), (12, 17),
+            (8, 18), (18, 19)
+        ])
+    ),
+    (
+        name = "H",
+        sides = edges([(1, 3), (9, 11), (3, 11), (1, 11)])
+    )
+]
 
 for (name, sides) in faces do
     if let walk = perimeter(sides) then

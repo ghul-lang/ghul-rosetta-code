@@ -17,11 +17,13 @@ suit_symbol(suit: Suit) -> string =>
     esac
 
 let pip_names = [
-    "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
+    "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
+    "A"
 ]
 
 struct CARD(pip: int public, suit: Suit public) is
-    describe() -> string => "{pip_names[pip]}{suit_symbol(suit)}"
+    describe() -> string =>
+        "{pip_names[pip]}{suit_symbol(suit)}"
 si
 
 class DECK is
@@ -30,7 +32,12 @@ class DECK is
     init() is
         _cards = LIST()
 
-        for suit in [Suit.HEARTS, Suit.DIAMONDS, Suit.CLUBS, Suit.SPADES] do
+        for
+            suit in [
+                Suit.HEARTS, Suit.DIAMONDS, Suit.CLUBS,
+                Suit.SPADES
+            ]
+        do
             for pip in 0..13 do
                 _cards.add(CARD(pip, suit))
             od
@@ -58,7 +65,8 @@ class DECK is
 
     count: int => _cards.count
 
-    describe() -> string => _cards |> map(c => c.describe()) |> join(" ")
+    describe() -> string =>
+        _cards |> map(c => c.describe()) |> join(" ")
 si
 
 let deck = DECK()

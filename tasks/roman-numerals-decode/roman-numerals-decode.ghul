@@ -12,16 +12,17 @@ value(letter: char) -> int =>
     esac
 
 signed_value(numeral: string, index: int) -> int =>
-    if index + 1 < numeral.length /\
-        value(numeral[index]) < value(numeral[index + 1]) then
+    if
+        index + 1 < numeral.length /\
+        value(numeral[index]) < value(numeral[index + 1])
+    then
         -value(numeral[index])
     else
         value(numeral[index])
     fi
 
 decode(numeral: string) -> int =>
-    (0..numeral.length)
-        |> sum_by(signed_value(numeral, *))
+    (0..numeral.length) |> sum_by(signed_value(numeral, *))
 
 for numeral in ["MCMXC", "MMVIII", "MDCLXVI"] do
     write_line("{numeral} = {decode(numeral)}")

@@ -21,7 +21,9 @@ repeat_text(text: string, times: int) -> string =>
 let curried = curry(repeat_text)
 
 write_line("curried(\"ab\")(3) = {curried("ab")(3)}")
-write_line("uncurry(curried)(\"-\", 5) = {uncurry(curried)("-", 5)}")
+write_line(
+    "uncurry(curried)(\"-\", 5) = {uncurry(curried)("-", 5)}"
+)
 
 let plus = curry(add_int)
 

@@ -4,10 +4,11 @@ use VECTOR = (x: int, y: int, z: int)
 *(a: VECTOR, b: VECTOR) -> int =>
     a.x * b.x + a.y * b.y + a.z * b.z
 
-><(a: VECTOR, b: VECTOR) -> VECTOR =>
-    (x = a.y * b.z - a.z * b.y,
-     y = a.z * b.x - a.x * b.z,
-     z = a.x * b.y - a.y * b.x)
+><(a: VECTOR, b: VECTOR) -> VECTOR => (
+    x = a.y * b.z - a.z * b.y,
+    y = a.z * b.x - a.x * b.z,
+    z = a.x * b.y - a.y * b.x
+)
 
 let a = (x = 3, y = 4, z = 5)
 let b = (x = 4, y = 3, z = 5)

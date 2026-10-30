@@ -2,19 +2,28 @@ use default
 
 has_five_weekends(year: int, month: int) -> bool =>
     System.DateTime.days_in_month(year, month) == 31 /\
-    System.DateTime(year, month, 1).day_of_week == System.DayOfWeek.FRIDAY
+    System.DateTime(
+        year,
+        month,
+        1
+    ).day_of_week == System.DayOfWeek.FRIDAY
 
 let years = 1900::2100
 
-let months =
-    [System.DateTime(year, month, 1)
-        for year in years for month in 1::12
-        if has_five_weekends(year, month)]
+let months = [
+    System.DateTime(year, month, 1)
+    for year in years
+    for month in 1::12
+    if has_five_weekends(year, month)
+]
 
 show(label: string, dates: System.DateTime{}) is
     write_line(label)
 
-    dates |> each(date => write_line("  {date.to_string("yyyy-MM")}"))
+    dates
+        |> each(date =>
+            write_line("  {date.to_string("yyyy-MM")}")
+        )
 si
 
 write_line("{months.count} months have five full weekends")
@@ -26,6 +35,8 @@ show("last five:", months |> skip(months.count - 5))
 let barren =
     years
         |> filter(year =>
-            1::12 |> all(month => !has_five_weekends(year, month)))
+            1::12
+                |> all(month => !has_five_weekends(year, month))
+        )
 
 write_line("{barren |> count()} years have none")

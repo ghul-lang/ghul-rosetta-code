@@ -13,13 +13,15 @@ recaman() -> int{} is
 
         let back = term - index
 
-        term = if back > 0 /\ !seen.contains(back) then back
-               else term + index
-               fi
+        term =
+            if back > 0 /\ !seen.contains(back) then back
+            else term + index
+            fi
     od
 si
 
-let first_fifteen = recaman() |> take(15) |> map(term => "{term}")
+let first_fifteen =
+    recaman() |> take(15) |> map(term => "{term}")
 
 write_line("first fifteen terms:")
 write_line("  {first_fifteen |> join(" ")}")
@@ -51,5 +53,7 @@ for term in recaman() do
 od
 
 write_line("the first duplicated term is {duplicate}")
-write_line("every integer from 0 to 1000 has appeared "
-           "by term {all_reached}")
+write_line(
+    "every integer from 0 to 1000 has appeared "
+    "by term {all_reached}"
+)

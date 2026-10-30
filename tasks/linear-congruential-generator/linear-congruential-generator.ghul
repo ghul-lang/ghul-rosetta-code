@@ -18,8 +18,10 @@ ms_rand(seed: int) -> int{} is
     od
 si
 
-let bsd_text = bsd_rand(0) |> take(10) |> map(n => "{n}") |> join()
-let ms_text = ms_rand(0) |> take(10) |> map(n => "{n}") |> join()
+let bsd_text =
+    bsd_rand(0) |> take(10) |> map(n => "{n}") |> join()
+let ms_text =
+    ms_rand(0) |> take(10) |> map(n => "{n}") |> join()
 
 write_line("BSD rand, seed 0: {bsd_text}")
 write_line("MS rand, seed 0: {ms_text}")

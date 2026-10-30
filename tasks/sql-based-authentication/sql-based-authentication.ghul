@@ -29,11 +29,16 @@ si
 
 digest(salt: ubyte[], password: string) -> ubyte[] =>
     MD5.hash_data(
-        salt |> cat(Encoding.utf8.get_bytes(password)) |> collect())
+        salt
+            |> cat(Encoding.utf8.get_bytes(password))
+            |> collect()
+    )
 
-create_user(db: SqliteConnection, username: string, password: string)
-    -> bool
-is
+create_user(
+    db: SqliteConnection,
+    username: string,
+    password: string
+) -> bool is
     let salt = RandomNumberGenerator.get_bytes(16)
     let use insert = db.create_command()
 
@@ -43,7 +48,10 @@ is
 
     insert.parameters.add_with_value("$user", username)
     insert.parameters.add_with_value("$salt", salt)
-    insert.parameters.add_with_value("$md5", digest(salt, password))
+    insert.parameters.add_with_value(
+        "$md5",
+        digest(salt, password)
+    )
 
     try
         insert.execute_non_query()
@@ -53,9 +61,11 @@ is
     yrt
 si
 
-authenticate_user(db: SqliteConnection, username: string, password: string)
-    -> bool
-is
+authenticate_user(
+    db: SqliteConnection,
+    username: string,
+    password: string
+) -> bool is
     let use select = db.create_command()
 
     select.command_text =
@@ -77,8 +87,11 @@ si
 
 let use db = connect_db()
 
-for (username, password) in [("alice", "wonderland"), ("bob", "builder"),
-    ("alice", "again")]
+for
+    (username, password) in [
+        ("alice", "wonderland"), ("bob", "builder"),
+        ("alice", "again")
+    ]
 do
     let outcome =
         if create_user(db, username, password) then
@@ -90,8 +103,11 @@ do
     write_line("create {username}: {outcome}")
 od
 
-for (username, password) in [("alice", "wonderland"), ("alice", "again"),
-    ("bob", "builder"), ("carol", "anything")]
+for
+    (username, password) in [
+        ("alice", "wonderland"), ("alice", "again"),
+        ("bob", "builder"), ("carol", "anything")
+    ]
 do
     let verdict =
         if authenticate_user(db, username, password) then

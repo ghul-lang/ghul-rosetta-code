@@ -3,7 +3,15 @@ use Raster.Anchor
 use Raster.IMAGE
 use Raster.SHAPES
 
-use Solution = (a: int, b: int, c: int, d: int, e: int, f: int, g: int)
+use Solution = (
+    a: int,
+    b: int,
+    c: int,
+    d: int,
+    e: int,
+    f: int,
+    g: int
+)
 
 solutions(low: int, high: int, unique: bool) -> Solution{} is
     for a in low::high do
@@ -21,14 +29,20 @@ solutions(low: int, high: int, unique: bool) -> Solution{} is
                             let g = total - f
 
                             if
-                                g >= low /\ g <= high /\
-                                (!unique \/
-                                 ([a, b, c, d, e, f, g]
-                                    |> collect_set()).count == 7)
+                                g >= low /\
+                                g <= high /\
+                                (
+                                    !unique \/
+                                    (
+                                        [a, b, c, d, e, f, g]
+                                            |> collect_set()
+                                    ).count == 7
+                                )
                             then
                                 yield (
-                                    a = a, b = b, c = c,
-                                    d = d, e = e, f = f, g = g)
+                                    a = a, b = b, c = c, d = d,
+                                    e = e, f = f, g = g
+                                )
                             fi
                         fi
                     od
@@ -43,7 +57,8 @@ show(low: int, high: int) is
 
     for s in solutions(low, high, true) do
         write_line(
-            "  {s.a} {s.b} {s.c} {s.d} {s.e} {s.f} {s.g}")
+            "  {s.a} {s.b} {s.c} {s.d} {s.e} {s.f} {s.g}"
+        )
     od
 
     write_line("")
@@ -56,17 +71,28 @@ let drop = 60.0
 
 left_of(at: int) -> double => margin + double(at) * step
 
-top_of(at: int) -> double => margin + if at % 2 == 0 then 0.0 else drop fi
+top_of(at: int) -> double =>
+    margin + if at % 2 == 0 then 0.0 else drop fi
 
 outline(at: int) -> (x: double, y: double)[] =>
-    let x = left_of(at), y = top_of(at) in
-    [
-        (x = x, y = y),
-        (x = x + side, y = y),
-        (x = x + side, y = y + side),
-        (x = x, y = y + side)]
+    let
+        x = left_of(at),
+        y = top_of(at)
+    in
+        [
+            (x = x, y = y),
+            (x = x + side, y = y),
+            (x = x + side, y = y + side),
+            (x = x, y = y + side)
+        ]
 
-cell(x: double, y: double, letter: string, value: int, image: IMAGE) is
+cell(
+    x: double,
+    y: double,
+    letter: string,
+    value: int,
+    image: IMAGE
+) is
     image.text(x, y - 8.0, 15.0, letter, Anchor.CENTRE)
     image.text(x, y + 22.0, 28.0, "{value}", Anchor.CENTRE)
 si
@@ -74,7 +100,8 @@ si
 draw(s: Solution) is
     let image = IMAGE(
         int(left_of(3) + side + margin),
-        int(margin + drop + side + margin + 10.0))
+        int(margin + drop + side + margin + 10.0)
+    )
 
     let overlaps = SHAPES()
 
@@ -82,15 +109,18 @@ draw(s: Solution) is
         let x0 = left_of(at)
         let x1 = left_of(at - 1) + side
         let y0 = System.Math.max(top_of(at), top_of(at - 1))
-        let y1 = System.Math.min(top_of(at), top_of(at - 1)) + side
+        let y1 =
+            System.Math.min(top_of(at), top_of(at - 1)) + side
 
         overlaps.add(
             [
                 (x = x0, y = y0),
                 (x = x1, y = y0),
                 (x = x1, y = y1),
-                (x = x0, y = y1)],
-            (red = 224ub, green = 234ub, blue = 250ub))
+                (x = x0, y = y1)
+            ],
+            (red = 224ub, green = 234ub, blue = 250ub)
+        )
     od
 
     image.fill(overlaps)
@@ -106,21 +136,62 @@ draw(s: Solution) is
 
     let shared = margin + drop + side / 2.0 - drop / 2.0
 
-    cell(left_of(0) + step / 2.0, top_of(0) + side / 2.0, "a", s.a, image)
-    cell(left_of(1) + (side - step) / 2.0, shared, "b", s.b, image)
+    cell(
+        left_of(0) + step / 2.0,
+        top_of(0) + side / 2.0,
+        "a",
+        s.a,
+        image
+    )
+    cell(
+        left_of(1) + (side - step) / 2.0,
+        shared,
+        "b",
+        s.b,
+        image
+    )
     cell(
         (left_of(0) + side + left_of(2)) / 2.0,
-        top_of(1) + side / 2.0, "c", s.c, image)
-    cell(left_of(2) + (side - step) / 2.0, shared, "d", s.d, image)
+        top_of(1) + side / 2.0,
+        "c",
+        s.c,
+        image
+    )
+    cell(
+        left_of(2) + (side - step) / 2.0,
+        shared,
+        "d",
+        s.d,
+        image
+    )
     cell(
         (left_of(1) + side + left_of(3)) / 2.0,
-        top_of(2) + side / 2.0, "e", s.e, image)
-    cell(left_of(3) + (side - step) / 2.0, shared, "f", s.f, image)
+        top_of(2) + side / 2.0,
+        "e",
+        s.e,
+        image
+    )
+    cell(
+        left_of(3) + (side - step) / 2.0,
+        shared,
+        "f",
+        s.f,
+        image
+    )
     cell(
         left_of(3) + side - step / 2.0,
-        top_of(3) + side / 2.0, "g", s.g, image)
+        top_of(3) + side / 2.0,
+        "g",
+        s.g,
+        image
+    )
 
-    let sums = [s.a + s.b, s.b + s.c + s.d, s.d + s.e + s.f, s.f + s.g]
+    let sums = [
+        s.a + s.b,
+        s.b + s.c + s.d,
+        s.d + s.e + s.f,
+        s.f + s.g
+    ]
 
     for at in 0..4 do
         let y =
@@ -129,7 +200,12 @@ draw(s: Solution) is
             fi
 
         image.text(
-            left_of(at) + side / 2.0, y, 16.0, "{sums[at]}", Anchor.CENTRE)
+            left_of(at) + side / 2.0,
+            y,
+            16.0,
+            "{sums[at]}",
+            Anchor.CENTRE
+        )
     od
 
     image.write("four-squares.png")
@@ -141,7 +217,8 @@ show(1, 7)
 show(3, 9)
 
 write_line(
-    "any digits 0 to 9: {solutions(0, 9, false) |> count()} solutions")
+    "any digits 0 to 9: {solutions(0, 9, false) |> count()} solutions"
+)
 write_line("")
 
 write_line("the first of them, in place:")

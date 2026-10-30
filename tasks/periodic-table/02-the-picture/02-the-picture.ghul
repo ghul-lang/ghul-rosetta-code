@@ -18,7 +18,8 @@ symbols() -> string[] => [
     "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm",
     "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg",
     "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv",
-    "Ts", "Og"]
+    "Ts", "Og"
+]
 
 // Rows 1 to 3 have a gap in the middle, rows 6 and 7 send their
 // fifteen inner elements down to rows 8 and 9, and the rest fill
@@ -30,11 +31,17 @@ position(z: int) -> (row: int, column: int) is
         let row = if z <= 10 then 2 else 3 fi
         let at = z - if row == 2 then 3 else 11 fi
 
-        (row = row, column = if at < 2 then at + 1 else at + 11 fi)
+        (
+            row = row,
+            column = if at < 2 then at + 1 else at + 11 fi
+        )
     elif z <= 54 then
         let row = if z <= 36 then 4 else 5 fi
 
-        (row = row, column = z - if row == 4 then 19 else 37 fi + 1)
+        (
+            row = row,
+            column = z - if row == 4 then 19 else 37 fi + 1
+        )
     else
         let row = if z <= 86 then 6 else 7 fi
         let at = z - if row == 6 then 55 else 87 fi
@@ -56,7 +63,11 @@ block(at: (row: int, column: int)) -> string =>
     else "d"
     fi
 
-tint(block: string) -> (red: ubyte, green: ubyte, blue: ubyte) =>
+tint(block: string) -> (
+    red: ubyte,
+    green: ubyte,
+    blue: ubyte
+) =>
     case block
     when "s" then (red = 255ub, green = 212ub, blue = 212ub)
     when "p" then (red = 206ub, green = 230ub, blue = 255ub)
@@ -70,33 +81,45 @@ let top = 34.0
 let split = 16.0
 
 row_y(row: int) -> double =>
-    top + double(row - 1) * cell + if row >= 8 then split else 0.0 fi
+    top +
+    double(row - 1) * cell +
+    if row >= 8 then split else 0.0 fi
 
-column_x(column: int) -> double => left + double(column - 1) * cell
+column_x(column: int) -> double =>
+    left + double(column - 1) * cell
 
-box(x: double, y: double, width: double, height: double)
-    -> List[(x: double, y: double)]
-=>
-    [
-        (x = x, y = y),
-        (x = x + width, y = y),
-        (x = x + width, y = y + height),
-        (x = x, y = y + height)]
+box(
+    x: double,
+    y: double,
+    width: double,
+    height: double
+) -> List[(x: double, y: double)] => [
+    (x = x, y = y),
+    (x = x + width, y = y),
+    (x = x + width, y = y + height),
+    (x = x, y = y + height)
+]
 
-glyph(image: IMAGE, at: (row: int, column: int), letters: string) is
+glyph(
+    image: IMAGE,
+    at: (row: int, column: int),
+    letters: string
+) is
     image.text(
         column_x(at.column) + cell / 2.0,
         row_y(at.row) + cell * 0.76,
         16.0,
         letters,
-        Anchor.CENTRE)
+        Anchor.CENTRE
+    )
 si
 
 let table = symbols()
 
 let image = IMAGE(
     int(column_x(18) + cell + 12.0),
-    int(row_y(9) + cell + 12.0))
+    int(row_y(9) + cell + 12.0)
+)
 
 let cells = SHAPES()
 
@@ -105,11 +128,15 @@ for z in 1::118 do
 
     cells.add(
         box(column_x(at.column), row_y(at.row), cell, cell),
-        tint(block(at)))
+        tint(block(at))
+    )
 od
 
 for row in 6::7 do
-    cells.add(box(column_x(3), row_y(row), cell, cell), tint("f"))
+    cells.add(
+        box(column_x(3), row_y(row), cell, cell),
+        tint("f")
+    )
 od
 
 image.fill(cells)
@@ -127,7 +154,8 @@ for z in 1::118 do
         (x = x + cell, y = y),
         (x = x + cell, y = y + cell),
         (x = x, y = y + cell),
-        (x = x, y = y)])
+        (x = x, y = y)
+    ])
 od
 
 for row in 6::7 do
@@ -139,7 +167,8 @@ for row in 6::7 do
         (x = x + cell, y = y),
         (x = x + cell, y = y + cell),
         (x = x, y = y + cell),
-        (x = x, y = y)])
+        (x = x, y = y)
+    ])
 od
 
 image.colour(40ub, 40ub, 40ub)
@@ -150,7 +179,8 @@ for column in 1::18 do
         top - 10.0,
         13.0,
         "{column}",
-        Anchor.CENTRE)
+        Anchor.CENTRE
+    )
 od
 
 for row in 1::9 do
@@ -166,7 +196,8 @@ for row in 1::9 do
         row_y(row) + cell * 0.63,
         13.0,
         label,
-        Anchor.RIGHT)
+        Anchor.RIGHT
+    )
 od
 
 for z in 1::118 do
@@ -197,10 +228,16 @@ for entry in key |> index() do
         (x = x + 18.0, y = key_y - 8.0),
         (x = x + 18.0, y = key_y + 8.0),
         (x = x, y = key_y + 8.0),
-        (x = x, y = key_y - 8.0)])
+        (x = x, y = key_y - 8.0)
+    ])
 
     image.colour(40ub, 40ub, 40ub)
-    image.text(x + 25.0, key_y + 5.0, 13.0, "{entry.value} block")
+    image.text(
+        x + 25.0,
+        key_y + 5.0,
+        13.0,
+        "{entry.value} block"
+    )
 od
 
 image.write("periodic-table.png")

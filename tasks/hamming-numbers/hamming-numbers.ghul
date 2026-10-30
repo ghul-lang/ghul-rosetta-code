@@ -14,16 +14,22 @@ while hamming.count < 1000000 do
     let by_three = three * hamming[next_three]
     let by_five = five * hamming[next_five]
 
-    let best = if bigint.compare(by_two, by_three) < 0
-               then by_two else by_three fi
-    let next = if bigint.compare(by_five, best) < 0
-               then by_five else best fi
+    let best =
+        if bigint.compare(by_two, by_three) < 0 then
+            by_two
+        else by_three
+        fi
+    let next =
+        if bigint.compare(by_five, best) < 0 then
+            by_five
+        else best
+        fi
 
     hamming.add(next)
 
-    if by_two =~ next then next_two = next_two + 1; fi
-    if by_three =~ next then next_three = next_three + 1; fi
-    if by_five =~ next then next_five = next_five + 1; fi
+    if by_two =~ next then next_two = next_two + 1 fi
+    if by_three =~ next then next_three = next_three + 1 fi
+    if by_five =~ next then next_five = next_five + 1 fi
 od
 
 write_line(hamming |> take(20) |> join(" "))

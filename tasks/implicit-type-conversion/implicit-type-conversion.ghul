@@ -5,7 +5,9 @@ class ANIMAL is
 si
 
 class CAT: ANIMAL is
-    init() is super.init() si
+    init() is
+        super.init()
+    si
 si
 
 let cat = CAT()
@@ -21,4 +23,6 @@ write_line("count widened to int?: {maybe_count}")
 let smallest: byte = 5b
 let widened: double = double(int(smallest))
 
-write_line("byte {smallest} widened by explicit cast to {widened}")
+write_line(
+    "byte {smallest} widened by explicit cast to {widened}"
+)

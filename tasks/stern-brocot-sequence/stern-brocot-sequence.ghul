@@ -4,7 +4,9 @@ let sequence = LIST([1, 1])
 let considered mut = 1
 
 while sequence.count < 1200 do
-    sequence.add(sequence[considered] + sequence[considered - 1])
+    sequence.add(
+        sequence[considered] + sequence[considered - 1]
+    )
     sequence.add(sequence[considered])
     considered = considered + 1
 od
@@ -12,7 +14,8 @@ od
 write_line("first 15 members:")
 write_line(sequence |> take(15) |> join())
 
-position(value: int) -> int => sequence |> find_index(* == value)! + 1
+position(value: int) -> int =>
+    sequence |> find_index(* == value)! + 1
 
 write_line("first appearances:")
 
@@ -22,9 +25,13 @@ od
 
 write_line("100 appears at index {position(100)}")
 
-let all_coprime = 0..999
-    |> all(index => gcd(sequence[index], sequence[index + 1]) == 1)
+let all_coprime =
+    0..999
+        |> all(index =>
+            gcd(sequence[index], sequence[index + 1]) == 1
+        )
 
 write_line(
     "consecutive members up to the 1000th are all coprime: "
-    "{all_coprime}")
+    "{all_coprime}"
+)

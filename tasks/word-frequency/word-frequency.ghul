@@ -5,16 +5,21 @@ use System.Text.RegularExpressions.Match
 
 let n = 10
 
-let text = IO.File.read_all_text("les-miserables.txt").to_lower_invariant()
+let text =
+    IO.File.read_all_text(
+        "les-miserables.txt"
+    ).to_lower_invariant()
 let words: Match{} = Regex("\\p{{L}}+").matches(text)
 
 let counts =
     words
-    |> map(word => word.value)
-    |> group_by(word => word)
-    |> map(entry => (word = entry.key, count = entry.value.count))
-    |> sort_by_descending(entry => entry.count)
-    |> take(n)
+        |> map(word => word.value)
+        |> group_by(word => word)
+        |> map(entry => (
+            word = entry.key, count = entry.value.count
+        ))
+        |> sort_by_descending(entry => entry.count)
+        |> take(n)
 
 write_line("rank  word   count")
 

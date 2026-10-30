@@ -11,8 +11,6 @@ reciprocal_factorials() -> decimal{} is
     od
 si
 
-let e = reciprocal_factorials()
-    |> take(30)
-    |> sum()
+let e = reciprocal_factorials() |> take(30) |> sum()
 
 write_line("e = {e}")

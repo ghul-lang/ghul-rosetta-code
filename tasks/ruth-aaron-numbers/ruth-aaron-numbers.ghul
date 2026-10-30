@@ -7,7 +7,10 @@ let factor_limit = 10_000
 let composite = repeat(false, factor_limit) |> collect_mutable()
 
 for candidate in 2..factor_limit do
-    if !composite[candidate] /\ candidate <= factor_limit / candidate then
+    if
+        !composite[candidate] /\
+        candidate <= factor_limit / candidate
+    then
         let multiple mut = candidate * candidate
 
         while multiple < factor_limit do
@@ -18,13 +21,16 @@ for candidate in 2..factor_limit do
 od
 
 let small_primes =
-    2..factor_limit |> filter(value => !composite[value]) |> memo()
+    2..factor_limit
+        |> filter(value => !composite[value])
+        |> memo()
 
 let segment_size = 1_000_000
 
-prime_divisor_sums(with_multiplicity: bool)
-    -> (number: int, sum: int){}
-is
+prime_divisor_sums(with_multiplicity: bool) -> (
+    number: int,
+    sum: int
+){} is
     let low mut = 2
 
     do
@@ -42,7 +48,11 @@ is
 
             let shortfall = low % prime
             let first =
-                if shortfall == 0 then low else low + prime - shortfall fi
+                if shortfall == 0 then
+                    low
+                else
+                    low + prime - shortfall
+                fi
 
             let multiple mut = first
 
@@ -51,14 +61,16 @@ is
 
                 if remaining[offset] % prime == 0 then
                     sums[offset] = sums[offset] + prime
-                    remaining[offset] = remaining[offset] / prime
+                    remaining[offset] =
+                        remaining[offset] / prime
 
                     while remaining[offset] % prime == 0 do
                         if with_multiplicity then
                             sums[offset] = sums[offset] + prime
                         fi
 
-                        remaining[offset] = remaining[offset] / prime
+                        remaining[offset] =
+                            remaining[offset] / prime
                     od
                 fi
 
@@ -70,7 +82,10 @@ is
             let leftover = remaining[offset]
             let extra = if leftover > 1 then leftover else 0 fi
 
-            yield (number = low + offset, sum = sums[offset] + extra)
+            yield (
+                number = low + offset,
+                sum = sums[offset] + extra
+            )
         od
 
         low = high
@@ -85,26 +100,36 @@ runs(with_multiplicity: bool, size: int) -> int{} is
 
         if recent.count > size then recent.remove_at(0) fi
 
-        if recent.count == size /\ recent |> all(x => x == recent[0]) then
+        if
+            recent.count == size /\
+            recent |> all(x => x == recent[0])
+        then
             yield entry.number - size + 1
         fi
     od
 si
 
-let kinds = [(name = "factors", with_multiplicity = true),
-             (name = "divisors", with_multiplicity = false)]
+let kinds = [
+    (name = "factors", with_multiplicity = true),
+    (name = "divisors", with_multiplicity = false)
+]
 
-kinds |> each(kind => (
-    let pairs = runs(kind.with_multiplicity, 2) |> take(30)
+kinds
+    |> each(kind => (
+        let pairs = runs(kind.with_multiplicity, 2) |> take(30)
 
-    write_line("first 30 Ruth-Aaron numbers ({kind.name}):")
-    write_line("  {pairs |> join(" ")}")
-))
+        write_line("first 30 Ruth-Aaron numbers ({kind.name}):")
+        write_line("  {pairs |> join(" ")}")
+    ))
 
 write_line()
 
-kinds |> each(kind => (
-    let triple = runs(kind.with_multiplicity, 3) |> first_or_throw()
+kinds
+    |> each(kind => (
+        let triple =
+            runs(kind.with_multiplicity, 3) |> first_or_throw()
 
-    write_line("first Ruth-Aaron triple ({kind.name}): {triple}")
-))
+        write_line(
+            "first Ruth-Aaron triple ({kind.name}): {triple}"
+        )
+    ))

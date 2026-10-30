@@ -6,37 +6,65 @@ use Raster.IMAGE
 use Rule = (name: string, next: (double, double) -> double)
 
 let dxs = [
-    -0.533D, 0.27D, 0.859D, -0.043D, -0.205D, -0.127D, -0.071D, 0.275D,
-    1.251D, -0.231D, -0.401D, 0.269D, 0.491D, 0.951D, 1.15D, 0.001D,
-    -0.382D, 0.161D, 0.915D, 2.08D, -2.337D, 0.034D, -0.126D, 0.014D,
-    0.709D, 0.129D, -1.093D, -0.483D, -1.193D, 0.02D, -0.051D, 0.047D,
-    -0.095D, 0.695D, 0.34D, -0.182D, 0.287D, 0.213D, -0.423D, -0.021D,
-    -0.134D, 1.798D, 0.021D, -1.099D, -0.361D, 1.636D, -1.134D, 1.315D,
-    0.201D, 0.034D, 0.097D, -0.17D, 0.054D, -0.553D, -0.024D, -0.181D,
-    -0.7D, -0.361D, -0.789D, 0.279D, -0.174D, -0.009D, -0.323D, -0.658D,
-    0.348D, -0.528D, 0.881D, 0.021D, -0.853D, 0.157D, 0.648D, 1.774D,
-    -1.043D, 0.051D, 0.021D, 0.247D, -0.31D, 0.171D, 0.0D, 0.106D,
-    0.024D, -0.386D, 0.962D, 0.765D, -0.125D, -0.289D, 0.521D, 0.017D,
-    0.281D, -0.749D, -0.149D, -2.436D, -0.909D, 0.394D, -0.113D, -0.598D,
-    0.443D, -0.521D, -0.799D, 0.087D]
+    -0.533D, 0.27D, 0.859D, -0.043D, -0.205D, -0.127D, -0.071D,
+    0.275D,
+    1.251D, -0.231D, -0.401D, 0.269D, 0.491D, 0.951D, 1.15D,
+    0.001D,
+    -0.382D, 0.161D, 0.915D, 2.08D, -2.337D, 0.034D, -0.126D,
+    0.014D,
+    0.709D, 0.129D, -1.093D, -0.483D, -1.193D, 0.02D, -0.051D,
+    0.047D,
+    -0.095D, 0.695D, 0.34D, -0.182D, 0.287D, 0.213D, -0.423D,
+    -0.021D,
+    -0.134D, 1.798D, 0.021D, -1.099D, -0.361D, 1.636D, -1.134D,
+    1.315D,
+    0.201D, 0.034D, 0.097D, -0.17D, 0.054D, -0.553D, -0.024D,
+    -0.181D,
+    -0.7D, -0.361D, -0.789D, 0.279D, -0.174D, -0.009D, -0.323D,
+    -0.658D,
+    0.348D, -0.528D, 0.881D, 0.021D, -0.853D, 0.157D, 0.648D,
+    1.774D,
+    -1.043D, 0.051D, 0.021D, 0.247D, -0.31D, 0.171D, 0.0D,
+    0.106D,
+    0.024D, -0.386D, 0.962D, 0.765D, -0.125D, -0.289D, 0.521D,
+    0.017D,
+    0.281D, -0.749D, -0.149D, -2.436D, -0.909D, 0.394D, -0.113D,
+    -0.598D,
+    0.443D, -0.521D, -0.799D, 0.087D
+]
 
 let dys = [
-    0.136D, 0.717D, 0.459D, -0.225D, 1.392D, 0.385D, 0.121D, -0.395D,
-    0.49D, -0.682D, -0.065D, 0.242D, -0.288D, 0.658D, 0.459D, 0.0D,
-    0.426D, 0.205D, -0.765D, -2.188D, -0.742D, -0.01D, 0.089D, 0.208D,
-    0.585D, 0.633D, -0.444D, -0.351D, -1.087D, 0.199D, 0.701D, 0.096D,
-    -0.025D, -0.868D, 1.051D, 0.157D, 0.216D, 0.162D, 0.249D, -0.007D,
-    0.009D, 0.508D, -0.79D, 0.723D, 0.881D, -0.508D, 0.393D, -0.226D,
-    0.71D, 0.038D, -0.217D, 0.831D, 0.48D, 0.407D, 0.447D, -0.295D,
-    1.126D, 0.38D, 0.549D, -0.445D, -0.046D, 0.428D, -0.074D, 0.217D,
-    -0.822D, 0.491D, 1.347D, -0.141D, 1.23D, -0.044D, 0.079D, 0.219D,
-    0.698D, 0.275D, 0.056D, 0.031D, 0.421D, 0.064D, 0.721D, 0.104D,
-    -0.729D, 0.65D, -1.103D, 0.154D, -1.72D, 0.051D, -0.385D, 0.477D,
-    1.537D, -0.901D, 0.939D, -0.411D, 0.341D, -0.411D, 0.106D, 0.224D,
-    -0.947D, -1.424D, -0.542D, -1.032D]
+    0.136D, 0.717D, 0.459D, -0.225D, 1.392D, 0.385D, 0.121D,
+    -0.395D,
+    0.49D, -0.682D, -0.065D, 0.242D, -0.288D, 0.658D, 0.459D,
+    0.0D,
+    0.426D, 0.205D, -0.765D, -2.188D, -0.742D, -0.01D, 0.089D,
+    0.208D,
+    0.585D, 0.633D, -0.444D, -0.351D, -1.087D, 0.199D, 0.701D,
+    0.096D,
+    -0.025D, -0.868D, 1.051D, 0.157D, 0.216D, 0.162D, 0.249D,
+    -0.007D,
+    0.009D, 0.508D, -0.79D, 0.723D, 0.881D, -0.508D, 0.393D,
+    -0.226D,
+    0.71D, 0.038D, -0.217D, 0.831D, 0.48D, 0.407D, 0.447D,
+    -0.295D,
+    1.126D, 0.38D, 0.549D, -0.445D, -0.046D, 0.428D, -0.074D,
+    0.217D,
+    -0.822D, 0.491D, 1.347D, -0.141D, 1.23D, -0.044D, 0.079D,
+    0.219D,
+    0.698D, 0.275D, 0.056D, 0.031D, 0.421D, 0.064D, 0.721D,
+    0.104D,
+    -0.729D, 0.65D, -1.103D, 0.154D, -1.72D, 0.051D, -0.385D,
+    0.477D,
+    1.537D, -0.901D, 0.939D, -0.411D, 0.341D, -0.411D, 0.106D,
+    0.224D,
+    -0.947D, -1.424D, -0.542D, -1.032D
+]
 
-drops(ds: List[double],
-        rule: (double, double) -> double) -> List[double] => (
+drops(
+    ds: List[double],
+    rule: (double, double) -> double
+) -> List[double] => (
     let landed = LIST()
     let at mut = 0.0D
 
@@ -49,20 +77,28 @@ drops(ds: List[double],
     landed
 )
 
-mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
+mean(xs: List[double]) -> double =>
+    (xs |> sum()) / double(xs.count)
 
 deviation(xs: List[double]) -> double =>
     let m = mean(xs) in
     sqrt(
         (xs |> sum_by(x => (x - m) * (x - m))) /
-        double(xs.count))
+        double(xs.count)
+    )
 
 let rules = [
-    (name = "the funnel stays over the target", next = (at, d) => 0.0D),
+    (
+        name = "the funnel stays over the target",
+        next = (at, d) => 0.0D
+    ),
     (name = "shift by the last miss", next = (at, d) => -d),
-    (name = "shift from the target by the last miss",
-     next = (at, d) => -(at + d)),
-    (name = "follow the last marble", next = (at, d) => at + d)]
+    (
+        name = "shift from the target by the last miss",
+        next = (at, d) => -(at + d)
+    ),
+    (name = "follow the last marble", next = (at, d) => at + d)
+]
 
 plot(
     image: IMAGE,
@@ -75,7 +111,10 @@ plot(
     let height = double(image.height) / 2.0D
     let left = double(at % 2) * width
     let top = double(at / 2) * height
-    let middle = (x = left + width / 2.0D, y = top + height / 2.0D)
+    let middle = (
+        x = left + width / 2.0D,
+        y = top + height / 2.0D
+    )
     let scale = (min(width, height) / 2.0D - 14.0D) / reach
 
     image.colour(170ub, 170ub, 170ub)
@@ -85,52 +124,78 @@ plot(
         (x = left + width - 1.0D, y = top + 1.0D),
         (x = left + width - 1.0D, y = top + height - 1.0D),
         (x = left + 1.0D, y = top + height - 1.0D),
-        (x = left + 1.0D, y = top + 1.0D)])
+        (x = left + 1.0D, y = top + 1.0D)
+    ])
 
     image.colour(210ub, 210ub, 210ub)
-    image.line(left + 10.0D, middle.y, left + width - 10.0D, middle.y)
-    image.line(middle.x, top + 10.0D, middle.x, top + height - 10.0D)
+    image.line(
+        left + 10.0D,
+        middle.y,
+        left + width - 10.0D,
+        middle.y
+    )
+    image.line(
+        middle.x,
+        top + 10.0D,
+        middle.x,
+        top + height - 10.0D
+    )
 
     image.colour(30ub, 70ub, 160ub)
 
     for i in 0..xs.count do
-        image.dot(middle.x + xs[i] * scale, middle.y + ys[i] * scale, 2.0D)
+        image.dot(
+            middle.x + xs[i] * scale,
+            middle.y + ys[i] * scale,
+            2.0D
+        )
     od
 
     image.colour(40ub, 40ub, 40ub)
     image.text(
-        left + width / 2.0D, top + 22.0D, 15.0D,
-        "rule {at + 1}", Anchor.CENTRE)
+        left + width / 2.0D,
+        top + 22.0D,
+        15.0D,
+        "rule {at + 1}",
+        Anchor.CENTRE
+    )
 si
 
 let image = IMAGE(640, 640)
 
-let runs = rules
-    |> map(rule => (
-        rule = rule,
-        xs = drops(dxs, rule.next),
-        ys = drops(dys, rule.next)))
-    |> memo()
+let runs =
+    rules
+        |> map(rule => (
+            rule = rule,
+            xs = drops(dxs, rule.next),
+            ys = drops(dys, rule.next)
+        ))
+        |> memo()
 
-let reach = runs
-    |> flat_map(run => run.xs |> cat(run.ys))
-    |> map(abs)
-    |> reduce(0.0D, max)
+let reach =
+    runs
+        |> flat_map(run => run.xs |> cat(run.ys))
+        |> map(abs)
+        |> reduce(0.0D, max)
 
 for run in runs |> index() do
     write_line("rule {run.index + 1}: {run.value.rule.name}")
     write_line(
         "  x mean {mean(run.value.xs),8:F3}"
-        "  deviation {deviation(run.value.xs),8:F3}")
+        "  deviation {deviation(run.value.xs),8:F3}"
+    )
     write_line(
         "  y mean {mean(run.value.ys),8:F3}"
-        "  deviation {deviation(run.value.ys),8:F3}")
+        "  deviation {deviation(run.value.ys),8:F3}"
+    )
     write_line("")
 
     plot(image, run.index, run.value.xs, run.value.ys, reach)
 od
 
-write_line("all four on one scale, the widest drop reaching the frame")
+write_line(
+    "all four on one scale, the widest drop reaching the frame"
+)
 
 image.write("funnel.png")
 

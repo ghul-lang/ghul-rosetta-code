@@ -9,18 +9,22 @@ use System.Reflection.Emit.OperandType
 use System.Text.RegularExpressions.Regex
 
 let opcodes =
-    (typeof OpCodes)
-        .get_fields(BindingFlags.PUBLIC | BindingFlags.STATIC)
+    (typeof OpCodes).get_fields(
+        BindingFlags.PUBLIC | BindingFlags.STATIC
+    )
         |> map(f => cast OpCode(f.get_value(null)))
         |> collect_map(op => int(op.value) & 0xFFFF, op => op)
 
-let calls =
-    [OpCodes.call, OpCodes.callvirt, OpCodes.newobj,
-     OpCodes.ldftn, OpCodes.ldvirtftn]
+let calls = [
+    OpCodes.call, OpCodes.callvirt, OpCodes.newobj,
+    OpCodes.ldftn, OpCodes.ldvirtftn
+]
 
 let everything =
-    BindingFlags.PUBLIC | BindingFlags.NON_PUBLIC |
-    BindingFlags.INSTANCE | BindingFlags.STATIC |
+    BindingFlags.PUBLIC |
+    BindingFlags.NON_PUBLIC |
+    BindingFlags.INSTANCE |
+    BindingFlags.STATIC |
     BindingFlags.DECLARED_ONLY
 
 callees(method: MethodBase) -> MethodBase{} is
@@ -54,10 +58,12 @@ callees(method: MethodBase) -> MethodBase{} is
         at = at + op.size
 
         if calls |> any(c => c.value == op.value) then
-            if let callee = method.module.resolve_method(
-                BitConverter.to_int32(il, at),
-                method.declaring_type?.get_generic_arguments(),
-                generic_args)
+            if let
+                callee = method.module.resolve_method(
+                    BitConverter.to_int32(il, at),
+                    method.declaring_type?.get_generic_arguments(),
+                    generic_args
+                )
             then
                 yield callee
             fi
@@ -74,7 +80,8 @@ operand_size(kind: OperandType, il: ubyte[], at: int) -> int =>
         OperandType.SHORT_INLINE_BR_TARGET,
         OperandType.SHORT_INLINE_I,
         OperandType.SHORT_INLINE_VAR
-    then 1
+    then
+        1
     when OperandType.INLINE_VAR then 2
     when OperandType.INLINE_I8, OperandType.INLINE_R then 8
     when OperandType.INLINE_SWITCH then
@@ -84,7 +91,8 @@ operand_size(kind: OperandType, il: ubyte[], at: int) -> int =>
 
 ghul_name(method: MethodBase) -> string is
     if method.is_constructor then
-        return (method.declaring_type?.name ?? "").split(['`'])[0]
+        return
+            (method.declaring_type?.name ?? "").split(['`'])[0]
     fi
 
     let accessor = Regex.match(method.name, "^[gs]et_(.*)$")
@@ -99,13 +107,17 @@ ghul_name(method: MethodBase) -> string is
         return "[]"
     fi
 
-    return Regex
-        .replace(name, "(?<=[a-z].*)(?<!_)([A-Z])", "_$1")
-        .to_lower_invariant()
+    return
+        Regex.replace(
+            name,
+            "(?<=[a-z].*)(?<!_)([A-Z])",
+            "_$1"
+        ).to_lower_invariant()
 si
 
 let own_types =
-    Assembly.get_executing_assembly().get_types() |> collect_set()
+    Assembly.get_executing_assembly().get_types()
+        |> collect_set()
 
 declared_by_the_program(method: MethodBase) -> bool is
     let owner = method.declaring_type
@@ -128,18 +140,28 @@ let most_called =
     Assembly.get_executing_assembly().get_types()
         |> flat_map(type =>
             type.get_methods(everything) ++
-                type.get_constructors(everything))
+            type.get_constructors(everything)
+        )
         |> flat_map(callees)
         |> filter(declared_by_the_program)
         |> map(ghul_name)
         |> group_by(name => name)
-        |> map(uses => (name = uses.key, uses = uses.value.count))
+        |> map(uses => (
+            name = uses.key, uses = uses.value.count
+        ))
         |> sort((a, b) =>
-            let a_literal = if a.name.starts_with("$") then 1 else 0 fi in
-            let b_literal = if b.name.starts_with("$") then 1 else 0 fi in
-            if a.uses != b.uses then b.uses <> a.uses
-            elif a_literal != b_literal then a_literal <> b_literal
-            else a.name <> b.name fi)
+            let
+                a_literal =
+                    if a.name.starts_with("$") then 1 else 0 fi,
+                b_literal =
+                    if b.name.starts_with("$") then 1 else 0 fi
+            in
+                if a.uses != b.uses then b.uses <> a.uses
+                elif a_literal != b_literal then
+                    a_literal <> b_literal
+                else a.name <> b.name
+                fi
+        )
         |> take(10)
 
 for called in most_called do

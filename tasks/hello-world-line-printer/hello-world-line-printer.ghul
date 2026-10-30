@@ -1,6 +1,7 @@
 use default
 
-let printer = if let [printer, ..] = args then printer else "/dev/lp0" fi
+let printer =
+    if let [printer, ..] = args then printer else "/dev/lp0" fi
 
 let use device = IO.StreamWriter(printer, true)
 

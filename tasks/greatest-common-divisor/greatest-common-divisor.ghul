@@ -1,6 +1,7 @@
 use default
 
-gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
+gcd(a: int, b: int) -> int =>
+    if b == 0 then a else gcd(b, a % b) fi
 
 write_line("gcd(48, 18) = {gcd(48, 18)}")
 write_line("gcd(1071, 462) = {gcd(1071, 462)}")

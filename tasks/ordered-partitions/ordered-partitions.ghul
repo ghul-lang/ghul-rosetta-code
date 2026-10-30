@@ -22,7 +22,10 @@ combinations(items: List[int], k: int) -> List[int]{} is
     fi
 si
 
-partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
+partitions(
+    items: List[int],
+    sizes: List[int]
+) -> List[List[int]]{} is
     case sizes
     when [] then
         yield LIST()
@@ -56,7 +59,10 @@ show(sizes: int[]) is
 
     partitions(items, sizes)
         |> each(partition =>
-            write_line("  ({partition |> map(braces) |> join(", ")})"))
+            write_line(
+                "  ({partition |> map(braces) |> join(", ")})"
+            )
+        )
 si
 
 show([2, 0, 2])

@@ -8,9 +8,13 @@ successor[T](n: Church[T]) -> Church[T] => f => x => f(n(f)(x))
 add[T](a: Church[T], b: Church[T]) -> Church[T] =>
     f => x => a(f)(b(f)(x))
 
-multiply[T](a: Church[T], b: Church[T]) -> Church[T] => f => a(b(f))
+multiply[T](a: Church[T], b: Church[T]) -> Church[T] =>
+    f => a(b(f))
 
-exponentiate[T](a: Church[T], b: Church[(T) -> T]) -> Church[T] => b(a)
+exponentiate[T](
+    a: Church[T],
+    b: Church[(T) -> T]
+) -> Church[T] => b(a)
 
 to_church[T](n: int) -> Church[T] =>
     if n == 0 then zero else successor(to_church(n - 1)) fi
@@ -23,14 +27,18 @@ let four = successor(three)
 write_line("three is {to_int(three)}")
 write_line("four is {to_int(four)}")
 write_line("three plus four is {to_int(add(three, four))}")
-write_line("three times four is {to_int(multiply(three, four))}")
+write_line(
+    "three times four is {to_int(multiply(three, four))}"
+)
 let three_as_exponent = to_church(3)
 let four_as_exponent = to_church(4)
 
 write_line(
     "four to the power three is "
-    "{to_int(exponentiate(four, three_as_exponent))}")
+    "{to_int(exponentiate(four, three_as_exponent))}"
+)
 
 write_line(
     "three to the power four is "
-    "{to_int(exponentiate(three, four_as_exponent))}")
+    "{to_int(exponentiate(three, four_as_exponent))}"
+)

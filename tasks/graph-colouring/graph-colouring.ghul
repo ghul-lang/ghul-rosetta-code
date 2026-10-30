@@ -4,26 +4,34 @@ use Raster.IMAGE
 
 use Edge = (from: int, to: int)
 
-class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
+class GRAPH(
+    nodes: Collections.List[int],
+    edges: Collections.List[Edge]
+) is
     _neighbours: Map[int, SET[int]]
 
     init(..) is
         let outgoing =
             edges
-            |> flat_map((from, to) => [(from, to), (to, from)])
-            |> group_by((from, to) => from)
+                |> flat_map((from, to) => [
+                    (from, to),
+                    (to, from)
+                ])
+                |> group_by((from, to) => from)
 
         _neighbours =
-            nodes |> collect_map(
-                node => node,
-                node =>
-                    if outgoing.contains_key(node) then
-                        outgoing[node]
-                        |> map((from, to) => to)
-                        |> collect_set()
-                    else
-                        SET()
-                    fi)
+            nodes
+                |> collect_map(
+                    node => node,
+                    node =>
+                        if outgoing.contains_key(node) then
+                            outgoing[node]
+                                |> map((from, to) => to)
+                                |> collect_set()
+                        else
+                            SET()
+                        fi
+                )
     si
 
     neighbours(node: int) -> SET[int] => _neighbours[node]
@@ -37,13 +45,14 @@ parse(description: string) -> GRAPH is
         for token in description.split([' '])
     ]
 
-    let nodes = tokens |> flat_map(ends => ends) |> collect_set()
+    let nodes =
+        tokens |> flat_map(ends => ends) |> collect_set()
 
     let edges =
         tokens
-        |> filter(ends => ends.count == 2)
-        |> map(ends => (from = ends[0], to = ends[1]))
-        |> collect()
+            |> filter(ends => ends.count == 2)
+            |> map(ends => (from = ends[0], to = ends[1]))
+            |> collect()
 
     GRAPH(nodes |> sort() |> collect(), edges)
 si
@@ -51,22 +60,27 @@ si
 colour(graph: GRAPH) -> MAP[int, int] is
     let colours = MAP()
 
-    let neighbour_colours = node =>
-        graph.neighbours(node)
-        |> filter(colours.contains_key)
-        |> map(other => colours[other])
-        |> collect_set()
+    let neighbour_colours =
+        node =>
+            graph.neighbours(node)
+                |> filter(colours.contains_key)
+                |> map(other => colours[other])
+                |> collect_set()
 
     for _ in graph.nodes do
         // the uncoloured node seeing the most distinct colours,
         // ties to the higher degree, then to the earlier node
         let (node, taken) =
             graph.nodes
-            |> filter(node => !colours.contains_key(node))
-            |> map(node => (node, neighbour_colours(node)))
-            |> max_by((node, taken) => (taken.count, graph.degree(node)))!
+                |> filter(node => !colours.contains_key(node))
+                |> map(node => (node, neighbour_colours(node)))
+                |> max_by((node, taken) => (
+                    taken.count,
+                    graph.degree(node)
+                ))!
 
-        colours[node] = from(0) |> find(c => !taken.contains(c))!
+        colours[node] =
+            from(0) |> find(c => !taken.contains(c))!
     od
 
     colours
@@ -79,12 +93,16 @@ report(name: string, description: string) is
     write_line("{name}:")
 
     for (from, to) in graph.edges do
-        write_line("  {from}-{to} coloured {colours[from]}-{colours[to]}")
+        write_line(
+            "  {from}-{to} coloured {colours[from]}-{colours[to]}"
+        )
     od
 
     for node in graph.nodes do
         if graph.degree(node) == 0 then
-            write_line("  {node} isolated, coloured {colours[node]}")
+            write_line(
+                "  {node} isolated, coloured {colours[node]}"
+            )
         fi
     od
 
@@ -92,7 +110,8 @@ report(name: string, description: string) is
 
     write_line(
         "  {graph.nodes.count} nodes, {graph.edges.count} edges, "
-        "{used.count} colours")
+        "{used.count} colours"
+    )
 si
 
 let examples = [
@@ -126,17 +145,20 @@ for (i, (name, description)) in examples |> index() do
 
     let slot =
         graph.nodes
-        |> index()
-        |> map(((i, node)) => (node, i))
-        |> collect_map()
+            |> index()
+            |> map(((i, node)) => (node, i))
+            |> collect_map()
 
     // nodes sit evenly round a circle
     let position = node => (
         let angle =
-            6.283185307D * double(slot[node]) /
+            6.283185307D *
+            double(slot[node]) /
             double(graph.nodes.count)
-        (x = cx + 80.0D * Ghul.Math.cos(angle),
-         y = cy + 80.0D * Ghul.Math.sin(angle))
+        (
+            x = cx + 80.0D * Ghul.Math.cos(angle),
+            y = cy + 80.0D * Ghul.Math.sin(angle)
+        )
     )
 
     image.colour(120ub, 120ub, 120ub)

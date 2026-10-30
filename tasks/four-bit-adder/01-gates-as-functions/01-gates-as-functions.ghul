@@ -6,20 +6,28 @@ and(a: bool, b: bool) -> bool => a /\ b
 
 or(a: bool, b: bool) -> bool => a \/ b
 
-xor(a: bool, b: bool) -> bool => or(and(a, not(b)), and(not(a), b))
+xor(a: bool, b: bool) -> bool =>
+    or(and(a, not(b)), and(not(a), b))
 
-half_adder(a: bool, b: bool) -> (sum: bool, carry: bool) =>
-    (sum = xor(a, b), carry = and(a, b))
+half_adder(a: bool, b: bool) -> (sum: bool, carry: bool) => (
+    sum = xor(a, b),
+    carry = and(a, b)
+)
 
-full_adder(a: bool, b: bool, carry_in: bool)
-    -> (sum: bool, carry: bool)
-=>
-    let lower = half_adder(a, b), upper = half_adder(lower.sum, carry_in) in
-    (sum = upper.sum, carry = or(lower.carry, upper.carry))
+full_adder(a: bool, b: bool, carry_in: bool) -> (
+    sum: bool,
+    carry: bool
+) =>
+    let
+        lower = half_adder(a, b),
+        upper = half_adder(lower.sum, carry_in)
+    in
+        (sum = upper.sum, carry = or(lower.carry, upper.carry))
 
-four_bit_adder(a: bool[], b: bool[], carry_in: bool)
-    -> (sum: bool[], carry: bool)
-is
+four_bit_adder(a: bool[], b: bool[], carry_in: bool) -> (
+    sum: bool[],
+    carry: bool
+) is
     let wires = repeat(false, 4) |> collect_mutable()
     let carry mut = carry_in
 
@@ -42,14 +50,23 @@ binary(bits: bool[]) -> string =>
 
 value(added: (sum: bool[], carry: bool)) -> int =>
     added.sum
-    |> reduce(
-        if added.carry then 1 else 0 fi,
-        (total, bit) => total * 2 + if bit then 1 else 0 fi)
+        |> reduce(
+            if added.carry then 1 else 0 fi,
+            (total, bit) => total * 2 + if bit then 1 else 0 fi
+        )
 
 adds_correctly(a: int, b: int) -> bool =>
     value(four_bit_adder(nibble(a), nibble(b), false)) == a + b
 
-for (first, second) in [(9, 5), (7, 1), (15, 15), (8, 8), (3, 12)] do
+for
+    (first, second) in [
+        (9, 5),
+        (7, 1),
+        (15, 15),
+        (8, 8),
+        (3, 12)
+    ]
+do
     let a = nibble(first)
     let b = nibble(second)
     let added = four_bit_adder(a, b, false)
@@ -59,8 +76,7 @@ for (first, second) in [(9, 5), (7, 1), (15, 15), (8, 8), (3, 12)] do
     write_line("{binary(a)} + {binary(b)} = {out}")
 od
 
-let wrong =
-    [(a = a, b = b) for a in 0::15 for b in 0::15]
+let wrong = [(a = a, b = b) for a in 0::15 for b in 0::15]
     |> count(pair => !adds_correctly(pair.a, pair.b))
 
 write_line("")

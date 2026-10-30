@@ -10,8 +10,11 @@ luhn(digits: string) -> bool =>
         digits.to_char_array()
             |> reverse()
             |> index()
-            |> map(((i, c)) => digit_value(i, int(c) - int('0')))
-            |> sum() in
+            |> map(((i, c)) =>
+                digit_value(i, int(c) - int('0'))
+            )
+            |> sum()
+    in
     total % 10 == 0
 
 let format = Regex("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
@@ -26,12 +29,14 @@ is_valid(isin: string) -> bool =>
     luhn(isin |> map(c => "{base_36(c)}") |> join(""))
 
 let cases = [
-    "US0378331005", "US0373831005", "U50378331005", "US03378331005",
+    "US0378331005", "US0373831005", "U50378331005",
+    "US03378331005",
     "AU0000XVGZA3", "AU0000VXGZA3", "FR0000988040"
 ]
 
 for isin in cases do
-    let verdict = if is_valid(isin) then "valid" else "not valid" fi
+    let verdict =
+        if is_valid(isin) then "valid" else "not valid" fi
 
     write_line("{isin,-13} {verdict}")
 od

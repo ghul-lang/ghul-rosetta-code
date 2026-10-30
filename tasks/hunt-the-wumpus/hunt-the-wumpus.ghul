@@ -4,11 +4,11 @@ use default
 // The rooms of a dodecahedron: twenty of them, each
 // joined to three others.
 let caves = [
-    [2, 5, 8],    [1, 3, 10],   [2, 4, 12],   [3, 5, 14],
-    [1, 4, 6],    [5, 7, 15],   [6, 8, 17],   [1, 7, 9],
-    [8, 10, 18],  [2, 9, 11],   [10, 12, 19], [3, 11, 13],
-    [12, 14, 20], [4, 13, 15],  [6, 14, 16],  [15, 17, 20],
-    [7, 16, 18],  [9, 17, 19],  [11, 18, 20], [13, 16, 19]
+    [2, 5, 8], [1, 3, 10], [2, 4, 12], [3, 5, 14],
+    [1, 4, 6], [5, 7, 15], [6, 8, 17], [1, 7, 9],
+    [8, 10, 18], [2, 9, 11], [10, 12, 19], [3, 11, 13],
+    [12, 14, 20], [4, 13, 15], [6, 14, 16], [15, 17, 20],
+    [7, 16, 18], [9, 17, 19], [11, 18, 20], [13, 16, 19]
 ]
 
 let random = System.Random(20260908)
@@ -35,7 +35,8 @@ let player mut = fresh_room()
 
 let arrows mut = 5
 
-tunnels(room: int) -> LIST[int] => caves[room - 1] |> collect_mutable()
+tunnels(room: int) -> LIST[int] =>
+    caves[room - 1] |> collect_mutable()
 
 deadly(room: int) -> bool =>
     room == wumpus \/ bats.contains(room) \/ pits.contains(room)
@@ -43,11 +44,15 @@ deadly(room: int) -> bool =>
 sense() is
     for near in tunnels(player) do
         if near == wumpus then
-            Std.write_line("you smell something terrible nearby")
+            Std.write_line(
+                "you smell something terrible nearby"
+            )
         elif bats.contains(near) then
             Std.write_line("you hear a rustling")
         elif pits.contains(near) then
-            Std.write_line("you feel a cold wind from a nearby cavern")
+            Std.write_line(
+                "you feel a cold wind from a nearby cavern"
+            )
         fi
     od
 si
@@ -82,7 +87,9 @@ enter(room: int) is
     fi
 si
 
-Std.write_line("hunt the wumpus: m to move, s to shoot, then a room")
+Std.write_line(
+    "hunt the wumpus: m to move, s to shoot, then a room"
+)
 
 while outcome.length == 0 do
     Std.write_line()
@@ -90,7 +97,9 @@ while outcome.length == 0 do
 
     sense()
 
-    Std.write_line("tunnels lead to {player |> tunnels() |> join(", ")}")
+    Std.write_line(
+        "tunnels lead to {player |> tunnels() |> join(", ")}"
+    )
     Std.write("your move: ")
 
     let typed = Std.read_line()
@@ -115,12 +124,15 @@ while outcome.length == 0 do
         if int.parse(words[1]) == wumpus then
             outcome = "your arrow finds the wumpus, you win"
         else
-            Std.write_line("your arrow clatters away into the dark")
+            Std.write_line(
+                "your arrow clatters away into the dark"
+            )
 
             disturb_wumpus()
 
             if wumpus == player then
-                outcome = "the wumpus blunders into you and eats you"
+                outcome =
+                    "the wumpus blunders into you and eats you"
             elif arrows == 0 then
                 outcome =
                     "you loose your last arrow, and are defenceless"

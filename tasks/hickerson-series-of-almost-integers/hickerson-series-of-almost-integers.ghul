@@ -3,9 +3,12 @@ use default
 let ln2 = 0.6931471805599453094172321215m
 
 hickerson(n: int) -> decimal =>
-    let factorial = 1::n |> reduce(1m, (f, k) => f * decimal(k)) in
-    let power = 1::n + 1 |> reduce(1m, (p, _) => p * ln2) in
-    factorial / (2m * power)
+    let
+        factorial =
+            1::n |> reduce(1m, (f, k) => f * decimal(k)),
+        power = 1::n + 1 |> reduce(1m, (p, _) => p * ln2)
+    in
+        factorial / (2m * power)
 
 is_almost_integer(h: decimal) -> bool =>
     let tenths = int((h - decimal.floor(h)) * 10m) in
@@ -13,7 +16,12 @@ is_almost_integer(h: decimal) -> bool =>
 
 for n in 1::17 do
     let h = hickerson(n)
-    let verdict = if is_almost_integer(h) then "almost integer" else "no" fi
+    let verdict =
+        if is_almost_integer(h) then
+            "almost integer"
+        else
+            "no"
+        fi
 
     write_line("h({n,2}) = {h,26:F3}  {verdict}")
 od

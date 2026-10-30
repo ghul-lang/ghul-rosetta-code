@@ -8,7 +8,9 @@ show_trace() is
         let method = frame.get_method()
 
         if method? then
-            write_line("  {method.declaring_type?.name}.{method.name}")
+            write_line(
+                "  {method.declaring_type?.name}.{method.name}"
+            )
         fi
     od
 si

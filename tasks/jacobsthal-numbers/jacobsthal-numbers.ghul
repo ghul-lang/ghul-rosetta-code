@@ -34,13 +34,25 @@ show(label: string, values: bigint{}, count: int) is
     write_line("{label}:")
     let rows = values |> take(count) |> chunk(10)
 
-    rows |> each(row =>
-        write_line(row |> map(v => "{v,16}") |> join(" ")))
+    rows
+        |> each(row =>
+            write_line(row |> map(v => "{v,16}") |> join(" "))
+        )
 si
 
 show("first 30 Jacobsthal numbers", jacobsthal(), 30)
-show("first 30 Jacobsthal-Lucas numbers", jacobsthal_lucas(), 30)
-show("first 20 Jacobsthal oblong numbers", jacobsthal_oblongs(), 20)
-show("first 10 Jacobsthal primes",
+show(
+    "first 30 Jacobsthal-Lucas numbers",
+    jacobsthal_lucas(),
+    30
+)
+show(
+    "first 20 Jacobsthal oblong numbers",
+    jacobsthal_oblongs(),
+    20
+)
+show(
+    "first 10 Jacobsthal primes",
     jacobsthal() |> filter(is_prime),
-    10)
+    10
+)

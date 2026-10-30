@@ -3,13 +3,17 @@ use default
 let number_words = MAP()
 
 let units = [
-    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+    "one", "two", "three", "four", "five", "six", "seven",
+    "eight", "nine",
+    "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "fifteen", "sixteen",
     "seventeen", "eighteen", "nineteen"
 ]
 
-let tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy",
-            "eighty", "ninety"]
+let tens = [
+    "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+    "eighty", "ninety"
+]
 
 for (position, word) in units |> index() do
     number_words.add(word, position + 1)
@@ -32,7 +36,10 @@ punctuation_names.add("hyphen", '-')
 count_of[K](counts: MAP[K, int], key: K) -> int =>
     if counts.contains_key(key) then counts[key] else 0 fi
 
-actual_counts(sentence: string, with_punctuation: bool) -> MAP[char, int] is
+actual_counts(
+    sentence: string,
+    with_punctuation: bool
+) -> MAP[char, int] is
     let counts = MAP()
 
     for character in sentence.to_lower() do
@@ -55,9 +62,11 @@ claimed_item(word: string) -> char? is
         return '!'
     fi
 
-    let stem = if bare.ends_with("'s") then bare[0..<2]
-               elif bare.ends_with("s") then bare[0..<1]
-               else bare fi
+    let stem =
+        if bare.ends_with("'s") then bare[0..<2]
+        elif bare.ends_with("s") then bare[0..<1]
+        else bare
+        fi
 
     if punctuation_names.contains_key(stem) then
         return punctuation_names[stem]
@@ -72,7 +81,11 @@ claimed_counts(sentence: string) -> MAP[char, int] is
     let claims = MAP()
     let pending mut = 0
 
-    for word in sentence.to_lower().replace("-", " ").split([' ']) do
+    for
+        word in sentence.to_lower().replace("-", " ").split([
+            ' '
+        ])
+    do
         let bare = word.trim_end([',', '.', ':'])
 
         if number_words.contains_key(bare) then
@@ -89,12 +102,15 @@ claimed_counts(sentence: string) -> MAP[char, int] is
 si
 
 is_autogram(sentence: string, with_punctuation: bool) -> bool =>
-    let actual = actual_counts(sentence, with_punctuation) in
-    let claimed = claimed_counts(sentence) in
-    actual.count == claimed.count /\
-
-        actual |> all((character, count) =>
-            count_of(claimed, character) == count)
+    let
+        actual = actual_counts(sentence, with_punctuation),
+        claimed = claimed_counts(sentence)
+    in
+        actual.count == claimed.count /\
+        actual
+            |> all((character, count) =>
+                count_of(claimed, character) == count
+            )
 
 let sentences = [
     "This sentence employs two a's, two c's, two d's, twenty-eight "
@@ -142,8 +158,11 @@ for (position, sentence) in sentences |> index() do
     let verdict = is_autogram(sentence, with_punctuation)
     let shown = "{sentence[0..40]}..."
 
-    let counted = if with_punctuation then "counted" else "ignored" fi
+    let counted =
+        if with_punctuation then "counted" else "ignored" fi
 
     write_line("{number}. {shown} punctuation {counted}")
-    write_line("   autogram: {if verdict then "yes" else "no" fi}")
+    write_line(
+        "   autogram: {if verdict then "yes" else "no" fi}"
+    )
 od

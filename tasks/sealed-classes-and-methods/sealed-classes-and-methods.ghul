@@ -21,9 +21,12 @@ class HANDLER open is
 si
 
 class SHOUTING_HANDLER: HANDLER is
-    init() is super.init() si
+    init() is
+        super.init()
+    si
 
-    handle(message: string) -> string => super.handle(message).to_upper()
+    handle(message: string) -> string =>
+        super.handle(message).to_upper()
 si
 
 let ledger = LEDGER()
@@ -34,4 +37,3 @@ ledger.record("two")
 write_line("the sealed class holds {ledger.count} entries")
 write_line(HANDLER().handle("a message"))
 write_line(SHOUTING_HANDLER().handle("a message"))
-

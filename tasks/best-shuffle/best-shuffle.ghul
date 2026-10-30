@@ -9,19 +9,28 @@ best_shuffle(text: string) -> string is
 
     let order =
         groups |> flat_map(positions => positions) |> collect()
-    let shift = groups |> map(positions => positions.count) |> max() ?? 0
+    let shift =
+        groups
+            |> map(positions => positions.count)
+            |> max() ?? 0
     let shuffled = repeat(' ', text.length) |> collect_mutable()
 
     for (at, position) in order |> index() do
-        shuffled[position] = text[order[(at + shift) % order.count]]
+        shuffled[position] =
+            text[order[(at + shift) % order.count]]
     od
 
     shuffled |> join("")
 si
 
-for text in ["abracadabra", "seesaw", "elk", "grrrrrr", "up", "a"] do
+for
+    text in [
+        "abracadabra", "seesaw", "elk", "grrrrrr", "up", "a"
+    ]
+do
     let shuffled = best_shuffle(text)
-    let score = 0..text.length |> count(i => text[i] == shuffled[i])
+    let score =
+        0..text.length |> count(i => text[i] == shuffled[i])
 
     write_line("{text}, {shuffled}, ({score})")
 od

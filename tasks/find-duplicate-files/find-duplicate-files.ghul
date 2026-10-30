@@ -16,31 +16,45 @@ digest(path: string) -> string =>
     let bytes = File.read_all_bytes(path) in
     System.Convert.to_hex_string(SHA256.hash_data(bytes))
 
-same_contents(root: string, size: long, paths: string{})
-    -> Group{} =>
+same_contents(
+    root: string,
+    size: long,
+    paths: string{}
+) -> Group{} =>
     paths
         |> group_by(digest)
-        |> map((_, same) =>
-            (size,
-             paths =
+        |> map((_, same) => (
+            size,
+            paths =
                 same
                     |> map(Path.get_relative_path(root, *))
                     |> sort()
-                    |> collect()))
+                    |> collect()
+        ))
         |> filter((_, paths) => paths.count > 1)
 
 duplicates(root: string, minimum: long) -> Group{} =>
-    Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)
+    Directory.enumerate_files(
+        root,
+        "*",
+        IO.SearchOption.ALL_DIRECTORIES
+    )
         |> map(path => (path, size = IO.FileInfo(path).length))
         |> filter((_, size) => size >= minimum)
         |> group_by((_, size) => size)
         |> flat_map((size, files) =>
-            same_contents(root, size, files |> map((path, _) => path)))
+            same_contents(
+                root,
+                size,
+                files |> map((path, _) => path)
+            )
+        )
         |> sort_by_descending((size, _) => size)
 
-let root =
-    Path.combine(
-        Path.get_temp_path(), "duplicates-{System.Guid.new_guid()}")
+let root = Path.combine(
+    Path.get_temp_path(),
+    "duplicates-{System.Guid.new_guid()}"
+)
 
 let contents = [
     ("a.txt", "the same text"),

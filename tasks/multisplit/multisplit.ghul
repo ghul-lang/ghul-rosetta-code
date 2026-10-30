@@ -2,20 +2,28 @@ use default
 
 use PIECE = (text: string, separator: string, at: int)
 
-starts_with(text: string, position: int, separator: string) -> bool =>
+starts_with(
+    text: string,
+    position: int,
+    separator: string
+) -> bool =>
     position + separator.length <= text.length /\
-        text[position..position + separator.length] =~ separator
+    text[position..position + separator.length] =~ separator
 
 multisplit(text: string, separators: string[]) -> PIECE{} is
     let start mut = 0
     let position mut = 0
 
     while position < text.length do
-        if let separator = separators
-            |> find(starts_with(text, position, *))
+        if let
+            separator = separators
+                |> find(starts_with(text, position, *))
         then
-            yield (text = text[start..position],
-                   separator = separator, at = position)
+            yield (
+                text = text[start..position],
+                separator = separator,
+                at = position
+            )
 
             position = position + separator.length
             start = position
@@ -24,17 +32,20 @@ multisplit(text: string, separators: string[]) -> PIECE{} is
         fi
     od
 
-    yield (text = text[start..text.length], separator = "", at = -1)
+    yield (
+        text = text[start..text.length],
+        separator = "",
+        at = -1
+    )
 si
 
-let pieces = multisplit("a!===b=!=c", ["==", "!=", "="])
-    |> memo()
+let pieces =
+    multisplit("a!===b=!=c", ["==", "!=", "="]) |> memo()
 
-write_line(pieces
-    |> map(piece => "\"{piece.text}\"")
-    |> join())
+write_line(pieces |> map(piece => "\"{piece.text}\"") |> join())
 
 pieces
     |> filter(piece => piece.separator.length > 0)
     |> each(piece =>
-        write_line("matched {piece.separator} at {piece.at}"))
+        write_line("matched {piece.separator} at {piece.at}")
+    )

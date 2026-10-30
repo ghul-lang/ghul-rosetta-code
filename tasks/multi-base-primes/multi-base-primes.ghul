@@ -3,7 +3,11 @@ use default
 let digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 in_base(n: int, base: int) -> string =>
-    if n == 0 then "" else "{in_base(n / base, base)}{digits[n % base]}" fi
+    if n == 0 then
+        ""
+    else
+        "{in_base(n / base, base)}{digits[n % base]}"
+    fi
 
 power(base: int, exponent: int) -> int =>
     1::exponent |> reduce(1, (p, _) => p * base)
@@ -12,7 +16,12 @@ for length in 1::4 do
     let bases_of = MAP[string, LIST[int]]()
 
     for base in 2::36 do
-        let low = if length == 1 then 0 else power(base, length - 1) fi
+        let low =
+            if length == 1 then
+                0
+            else
+                power(base, length - 1)
+            fi
 
         for n in low..power(base, length) do
             if is_prime(n) then
@@ -27,15 +36,19 @@ for length in 1::4 do
         od
     od
 
-    let most = bases_of.values |> map(bases => bases.count) |> max()!
+    let most =
+        bases_of.values |> map(bases => bases.count) |> max()!
 
     write_line("{length} character strings, most bases: {most}")
 
-    let winners = bases_of
-        |> filter(e => e.value.count == most)
-        |> sort_by(e => e.key)
+    let winners =
+        bases_of
+            |> filter(e => e.value.count == most)
+            |> sort_by(e => e.key)
 
     for entry in winners do
-        write_line("  {entry.key} -> [{entry.value |> join(" ")}]")
+        write_line(
+            "  {entry.key} -> [{entry.value |> join(" ")}]"
+        )
     od
 od

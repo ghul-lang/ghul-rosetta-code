@@ -3,21 +3,33 @@ use default
 struct FRACTION(numerator: bigint, denominator: bigint)
 
 fraction(numerator: bigint, denominator: bigint) -> FRACTION =>
-    let divisor = bigint.greatest_common_divisor(numerator, denominator) in
-    let sign = if denominator < 0n then -1n else 1n fi in
-    FRACTION(sign * numerator / divisor, sign * denominator / divisor)
+    let
+        divisor = bigint.greatest_common_divisor(
+            numerator,
+            denominator
+        ),
+        sign = if denominator < 0n then -1n else 1n fi
+    in
+        FRACTION(
+            sign * numerator / divisor,
+            sign * denominator / divisor
+        )
 
 -(a: FRACTION, b: FRACTION) -> FRACTION =>
     fraction(
-        a.numerator * b.denominator - b.numerator * a.denominator,
-        a.denominator * b.denominator)
+        a.numerator * b.denominator -
+        b.numerator * a.denominator,
+        a.denominator * b.denominator
+    )
 
 *(k: int, a: FRACTION) -> FRACTION =>
     fraction(bigint(k) * a.numerator, a.denominator)
 
 bernoulli(n: int) -> FRACTION is
     let a =
-        0::n |> map(m => fraction(1n, bigint(m + 1))) |> collect_mutable()
+        0::n
+            |> map(m => fraction(1n, bigint(m + 1)))
+            |> collect_mutable()
 
     for m in 1::n do
         for j in 1::m |> reverse() do
@@ -32,6 +44,8 @@ for n in 0::60 do
     let b = bernoulli(n)
 
     if b.numerator !~ 0n then
-        write_line("B({n,2}) = {b.numerator,45}/{b.denominator}")
+        write_line(
+            "B({n,2}) = {b.numerator,45}/{b.denominator}"
+        )
     fi
 od

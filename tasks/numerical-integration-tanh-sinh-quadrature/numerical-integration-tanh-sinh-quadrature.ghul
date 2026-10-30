@@ -1,10 +1,12 @@
 use default
 use System.Math.*
 
-
 tanh_sinh(
-    f: double -> double, lower: double, upper: double,
-    steps: int, accuracy: double
+    f: double -> double,
+    lower: double,
+    upper: double,
+    steps: int,
+    accuracy: double
 ) -> double is
     let h = 0.1
     let half_width = (upper - lower) / 2.0
@@ -13,7 +15,8 @@ tanh_sinh(
 
     weighted(i) =>
         let
-            t = double(i) * h, s = sinh(t) * quarter_turn,
+            t = double(i) * h,
+            s = sinh(t) * quarter_turn,
             cosh_s = cosh(s),
             slope = cosh(t) * quarter_turn / (cosh_s * cosh_s)
         in

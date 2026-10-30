@@ -55,15 +55,23 @@ let quarter: Matrix = (1L, 0L, 0L, 4L)
 let reciprocal: Matrix = (0L, 1L, 1L, 0L)
 let average_with_one: Matrix = (1L, 1L, 0L, 2L)
 
-write_line("[1; 5, 2] + 1/2 = {show(transform(half_plus, r2cf(13L, 11L)))}")
-write_line("[3; 7] + 1/2    = {show(transform(half_plus, r2cf(22L, 7L)))}")
-write_line("[3; 7] / 4      = {show(transform(quarter, r2cf(22L, 7L)))}")
+write_line(
+    "[1; 5, 2] + 1/2 = {show(transform(half_plus, r2cf(13L, 11L)))}"
+)
+write_line(
+    "[3; 7] + 1/2    = {show(transform(half_plus, r2cf(22L, 7L)))}"
+)
+write_line(
+    "[3; 7] / 4      = {show(transform(quarter, r2cf(22L, 7L)))}"
+)
 
 let inverse_root = transform(reciprocal, square_root_of_two())
 
 write_line("1/√2            = {show(inverse_root)}")
 
-let midpoint =
-    transform(average_with_one, transform(reciprocal, square_root_of_two()))
+let midpoint = transform(
+    average_with_one,
+    transform(reciprocal, square_root_of_two())
+)
 
 write_line("(1 + 1/√2)/2    = {show(midpoint)}")

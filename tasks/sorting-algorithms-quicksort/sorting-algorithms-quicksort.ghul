@@ -5,8 +5,8 @@ quicksort[T: Ghul.Comparable[T]](values: List[T]) -> T{} =>
     when [] then values
     when [pivot, ..rest] then
         quicksort([v for v in rest if v < pivot]) ++
-            [pivot] ++
-            quicksort([v for v in rest if v >= pivot])
+        [pivot] ++
+        quicksort([v for v in rest if v >= pivot])
     esac
 
 write_line("{quicksort([6, 2, 9, 2, 5, 1, 8, 3])}")

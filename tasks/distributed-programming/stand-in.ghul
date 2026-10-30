@@ -11,7 +11,8 @@ stand_in() -> string is
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 

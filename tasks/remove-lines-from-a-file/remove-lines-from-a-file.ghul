@@ -1,7 +1,9 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-remove-lines")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-remove-lines"
+)
 
 IO.Directory.create_directory(scratch)
 
@@ -9,7 +11,8 @@ let path = IO.Path.combine(scratch, "foobar.txt")
 
 write_file() is
     IO.File.write_all_lines(
-        path, 1..7 |> map(number => "line {number}")
+        path,
+        1..7 |> map(number => "line {number}")
     )
 si
 
@@ -30,7 +33,9 @@ remove_lines(path: string, start: int, count: int) is
         lines
             |> index()
             |> filter(l =>
-                l.index < start - 1 \/ l.index >= start + count - 1)
+                l.index < start - 1 \/
+                l.index >= start + count - 1
+            )
             |> map(l => l.value)
     )
 si

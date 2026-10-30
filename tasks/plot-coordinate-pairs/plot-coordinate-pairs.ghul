@@ -12,18 +12,18 @@ let ys = [
 
 let points =
     xs
-    |> zip(ys)
-    |> map(pair => (x = pair.`0, y = pair.`1))
-    |> collect()
+        |> zip(ys)
+        |> map(pair => (x = pair.`0, y = pair.`1))
+        |> collect()
 
-marker(at: POINT) -> List[POINT] =>
-    [(x = at.x - 0.14, y = at.y),
-     (x = at.x, y = at.y + 2.8),
-     (x = at.x + 0.14, y = at.y),
-     (x = at.x, y = at.y - 2.8)]
+marker(at: POINT) -> List[POINT] => [
+    (x = at.x - 0.14, y = at.y),
+    (x = at.x, y = at.y + 2.8),
+    (x = at.x + 0.14, y = at.y),
+    (x = at.x, y = at.y - 2.8)
+]
 
 let image = IMAGE(480, 360)
-
 
 image.view(-1.0, -20.0, 10.0, 200.0)
 

@@ -6,32 +6,39 @@ let terminators = ['.', '!', '?']
 
 // The book is typeset with the curly apostrophe, so a word like "servant's"
 // splits in two if only the typewriter one is taken as part of a word.
-let apostrophes = ['\'', '\u2019']
+let apostrophes = ['\'', '’']
 
 // The book proper sits between Gutenberg's own markers, which are not
 // part of what the task asks to read.
 book_text(path: string) -> string =>
     let whole = IO.File.read_all_text(path) in
-    let start = whole.index_of("*** START OF THE PROJECT GUTENBERG EBOOK")
+    let start = whole.index_of(
+        "*** START OF THE PROJECT GUTENBERG EBOOK"
+    )
     in
-    let finish = whole.index_of("*** END OF THE PROJECT GUTENBERG EBOOK") in
-    let from = whole.index_of('\n', start) + 1 in
-    whole.substring(from, finish - from)
-
+    let
+        finish = whole.index_of(
+            "*** END OF THE PROJECT GUTENBERG EBOOK"
+        ),
+        from = whole.index_of('\n', start) + 1
+    in
+        whole.substring(from, finish - from)
 
 words_of(text: string) -> List[string] is
     let words = LIST()
     let current = System.Text.StringBuilder()
 
-    let flush = () =>
-        if current.length > 0 then
-            words.add(current.to_string().to_lower())
+    let flush =
+        () =>
+            if current.length > 0 then
+                words.add(current.to_string().to_lower())
 
-            current.clear()
-        fi
+                current.clear()
+            fi
 
     for letter in text do
-        if char.is_letter(letter) \/
+        if
+            char.is_letter(letter) \/
             apostrophes |> any(* == letter)
         then
             current.append(letter)
@@ -90,8 +97,16 @@ sentence() -> string is
 
     chosen.add(second)
 
-    while !(terminators |> any(t => "{t}" =~ chosen[chosen.count - 1])) do
-        let pair = (chosen[chosen.count - 2], chosen[chosen.count - 1])
+    while
+        !(
+            terminators
+                |> any(t => "{t}" =~ chosen[chosen.count - 1])
+        )
+    do
+        let pair = (
+            chosen[chosen.count - 2],
+            chosen[chosen.count - 1]
+        )
 
         if !after_two.contains_key(pair) then
             chosen.add(".")

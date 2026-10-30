@@ -5,8 +5,10 @@ extend(prefix: LIST[int], size: int) -> List[int]{} is
         yield prefix
     else
         for candidate in 0..size do
-            if candidate != prefix.count /\
-                !(prefix |> any(* == candidate)) then
+            if
+                candidate != prefix.count /\
+                !(prefix |> any(* == candidate))
+            then
                 prefix.add(candidate)
 
                 yield in extend(prefix, size)
@@ -46,8 +48,13 @@ write_line(" n   counted   subfactorial")
 (0::9)
     |> zip(subfactorials())
     |> each((size, calculated) =>
-        write_line("{size,2}{derangements(size) |> count(),10}"
-                   "{calculated,15}"))
+        write_line(
+            "{size,2}{derangements(size) |> count(),10}"
+            "{calculated,15}"
+        )
+    )
 
 write_line()
-write_line("!20 = {subfactorials() |> skip(20) |> first_or_throw():N0}")
+write_line(
+    "!20 = {subfactorials() |> skip(20) |> first_or_throw():N0}"
+)

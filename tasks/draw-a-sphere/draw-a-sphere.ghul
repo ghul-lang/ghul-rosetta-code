@@ -21,10 +21,15 @@ let towards_light = (
     (x = x / length, y = y / length, z = z / length)
 )
 
-channel(base: double, level: double, gloss: double) -> ubyte => (
+channel(
+    base: double,
+    level: double,
+    gloss: double
+) -> ubyte => (
     let value = base * level + 255.0D * gloss
 
-    ubyte(min(255.0D, max(0.0D, value))))
+    ubyte(min(255.0D, max(0.0D, value)))
+)
 
 let image = IMAGE(size, size)
 
@@ -44,17 +49,14 @@ for down in 0..size do
 
             let level = ambient + 0.9D * max(0.0D, lambert)
 
-            let gloss =
-                pow(
-                    max(
-                        0.0D,
-                        2.0D * lambert * z - towards_light.z
-                    ),
-                    shine
-                )
+            let gloss = pow(
+                max(0.0D, 2.0D * lambert * z - towards_light.z),
+                shine
+            )
 
             image.set_pixel(
-                across, down,
+                across,
+                down,
                 channel(70.0D, level, gloss),
                 channel(130.0D, level, gloss),
                 channel(235.0D, level, gloss)

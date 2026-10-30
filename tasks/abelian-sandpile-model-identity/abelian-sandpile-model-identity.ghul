@@ -47,14 +47,26 @@ class SANDPILE is
 
     rows: List[string] =>
         (0..size)
-            |> map(r => cells |> skip(r * size) |> take(size) |> join(" "))
+            |> map(r =>
+                cells
+                    |> skip(r * size)
+                    |> take(size)
+                    |> join(" ")
+            )
             |> collect()
 si
 
 +(a: SANDPILE, b: SANDPILE) -> SANDPILE =>
-    SANDPILE(a.size, a.cells |> zip(b.cells) |> map(p => p.`0 + p.`1))
+    SANDPILE(
+        a.size,
+        a.cells |> zip(b.cells) |> map(p => p.`0 + p.`1)
+    )
 
-side_by_side(label: string, piles: List[SANDPILE], signs: string[]) is
+side_by_side(
+    label: string,
+    piles: List[SANDPILE],
+    signs: string[]
+) is
     write_line(label)
 
     for r in 0..piles[0].size do
@@ -84,20 +96,30 @@ write_line("4 3 3 / 3 1 2 / 0 2 3 topples to")
 write_line(avalanche.rows |> join(" / "))
 write_line("")
 
-side_by_side("s1 + s2 = s2 + s1:", [s1, s2, s1 + s2], ["+", "="])
+side_by_side(
+    "s1 + s2 = s2 + s1:",
+    [s1, s2, s1 + s2],
+    ["+", "="]
+)
 write_line("s1 + s2 =~ s2 + s1: {s1 + s2 =~ s2 + s1}")
 write_line("")
 side_by_side("s3 + s3_id:", [s3, s3_id, s3 + s3_id], ["+", "="])
 write_line("s3 + s3_id =~ s3: {s3 + s3_id =~ s3}")
 write_line("")
-side_by_side("s3_id + s3_id:", [s3_id, s3_id, s3_id + s3_id], ["+", "="])
+side_by_side(
+    "s3_id + s3_id:",
+    [s3_id, s3_id, s3_id + s3_id],
+    ["+", "="]
+)
 write_line("s3_id + s3_id =~ s3_id: {s3_id + s3_id =~ s3_id}")
 
 let six = SANDPILE.filled(64, 6)
 let identity = SANDPILE(64, six.cells |> map(6 - *))
 
 write_line("")
-write_line("the identity of the 64 x 64 sandpile is drawn below")
+write_line(
+    "the identity of the 64 x 64 sandpile is drawn below"
+)
 
 let shades = [
     (20ub, 20ub, 60ub), (40ub, 120ub, 200ub),

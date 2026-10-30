@@ -1,24 +1,37 @@
 use default
 
 is_valid_iban(raw: string) -> bool is
-    let iban =
-        ["{ch}" for ch in raw if ch != ' '] |> join("")
+    let iban = ["{ch}" for ch in raw if ch != ' '] |> join("")
 
     let is_letter = ch => ch >= 'A' /\ ch <= 'Z'
 
-    if iban.length < 4 \/ !is_letter(iban[0]) \/ !is_letter(iban[1]) then
+    if
+        iban.length < 4 \/
+        !is_letter(iban[0]) \/
+        !is_letter(iban[1])
+    then
         return false
     fi
 
     let rearranged = "{iban[4..<0]}{iban[0..4]}"
 
     let letter_value = ch => "{int(ch) - int('A') + 10}"
-    let numeric = rearranged
-        |> map(ch => if is_letter(ch) then letter_value(ch) else "{ch}" fi)
-        |> join("")
+    let numeric =
+        rearranged
+            |> map(ch =>
+                if is_letter(ch) then
+                    letter_value(ch)
+                else
+                    "{ch}"
+                fi
+            )
+            |> join("")
 
-    let remainder = numeric
-        |> reduce(0, (rem, ch) => (rem * 10 + (int(ch) - int('0'))) % 97)
+    let remainder =
+        numeric
+            |> reduce(0, (rem, ch) =>
+                (rem * 10 + (int(ch) - int('0'))) % 97
+            )
 
     remainder == 1
 si
@@ -29,7 +42,12 @@ let candidates = [
 ]
 
 for candidate in candidates do
-    let verdict = if is_valid_iban(candidate) then "valid" else "invalid" fi
+    let verdict =
+        if is_valid_iban(candidate) then
+            "valid"
+        else
+            "invalid"
+        fi
 
     write_line("{candidate}: {verdict}")
 od

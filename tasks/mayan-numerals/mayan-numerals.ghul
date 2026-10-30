@@ -18,7 +18,8 @@ vigesimal(n: int) -> int{} is
 si
 
 glyph(digit: int) -> string[] is
-    let rows = ["    ", "    ", "    ", "    "] |> collect_mutable()
+    let rows = ["    ", "    ", "    ", "    "]
+        |> collect_mutable()
 
     if digit == 0 then
         rows[3] = " @  "
@@ -53,10 +54,14 @@ cartouche(n: int) -> string{} => (
 )
 
 for n in [4005, 8017, 326205, 886205, 3199999] do
-    write_line("{n:N0} is {n |> vigesimal() |> join(".")} in base 20:")
+    write_line(
+        "{n:N0} is {n |> vigesimal() |> join(".")} in base 20:"
+    )
     n |> cartouche() |> each(line => write_line("  {line}"))
     write_line("")
 od
 
-write_line("3,199,999 is the largest number five glyphs can write,")
+write_line(
+    "3,199,999 is the largest number five glyphs can write,"
+)
 write_line("every place full at nineteen")

@@ -103,7 +103,8 @@ class LCA is
             low = System.Math.min(_beta[u], _beta[v]),
             high = System.Math.max(_beta[u], _beta[v]),
             common = _lambda[high & -low],
-            k = _alfa[u] & _alfa[v] & -(1 << common), h = _lambda[k & -k],
+            k = _alfa[u] & _alfa[v] & -(1 << common),
+            h = _lambda[k & -k],
             j = ((_beta[u] >> h) | 1) << h,
             x = if j == _beta[u] then u else _climb(u, h) fi,
             y = if j == _beta[v] then v else _climb(v, h) fi
@@ -118,7 +119,9 @@ si
 //      5   6    7   8  9  10
 //     /|   |       / \     \
 //   11 12  13     14  15    16
-let parents = [0, 0, 1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 5, 6, 8, 8, 10]
+let parents = [
+    0, 0, 1, 1, 1, 2, 2, 3, 4, 4, 4, 5, 5, 6, 8, 8, 10
+]
 
 let lca = LCA(parents)
 
@@ -140,7 +143,16 @@ naive(u: int, v: int) -> int is
     b
 si
 
-for (u, v) in [(11, 12), (11, 13), (14, 15), (14, 16), (7, 12), (9, 9)] do
+for
+    (u, v) in [
+        (11, 12),
+        (11, 13),
+        (14, 15),
+        (14, 16),
+        (7, 12),
+        (9, 9)
+    ]
+do
     write_line("lca({u,2}, {v,2}) = {lca.query(u, v)}")
 od
 
@@ -151,4 +163,6 @@ let agree =
         |> all((u, v) => lca.query(u, v) == naive(u, v))
 
 write_line("")
-write_line("{nodes * nodes} pairs agree with a walk up the tree: {agree}")
+write_line(
+    "{nodes * nodes} pairs agree with a walk up the tree: {agree}"
+)

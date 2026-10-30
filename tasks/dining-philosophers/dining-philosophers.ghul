@@ -1,8 +1,9 @@
 use default
 use Ghul.Coroutines
 
-let philosophers =
-    ["Aristotle", "Kant", "Spinoza", "Marx", "Russell"]
+let philosophers = [
+    "Aristotle", "Kant", "Spinoza", "Marx", "Russell"
+]
 
 let meals = 2
 let random = System.Random(42)
@@ -22,7 +23,9 @@ dine(name: string, seat: int) -> COROUTINE is
         await forks[lower].acquire()
         await forks[higher].acquire()
 
-        write_line("{name} eats with forks {lower} and {higher}")
+        write_line(
+            "{name} eats with forks {lower} and {higher}"
+        )
         await sleep(random.next(1, 4) * 250)
 
         forks[higher].release()

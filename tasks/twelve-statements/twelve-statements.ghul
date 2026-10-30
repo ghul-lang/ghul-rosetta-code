@@ -1,6 +1,7 @@
 use default
 
-holds(values: List[bool], number: int) -> bool => values[number - 1]
+holds(values: List[bool], number: int) -> bool =>
+    values[number - 1]
 
 how_many(values: List[bool], numbers: List[int]) -> int =>
     numbers |> filter(holds(values, *)) |> count()
@@ -40,27 +41,33 @@ statement_eleventh(values: List[bool]) -> bool =>
 statement_twelfth(values: List[bool]) -> bool =>
     how_many(values, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) == 4
 
-let statements =
-    [statement_first, statement_second, statement_third,
-     statement_fourth, statement_fifth, statement_sixth,
-     statement_seventh, statement_eighth, statement_ninth,
-     statement_tenth, statement_eleventh, statement_twelfth]
+let statements = [
+    statement_first, statement_second, statement_third,
+    statement_fourth, statement_fifth, statement_sixth,
+    statement_seventh, statement_eighth, statement_ninth,
+    statement_tenth, statement_eleventh, statement_twelfth
+]
 
 consistent(values: List[bool]) -> bool =>
-    0..12 |> all(index => statements[index](values) == values[index])
+    0..12
+        |> all(index =>
+            statements[index](values) == values[index]
+        )
 
 assignments() -> bool[]{} =>
     (0..1 << 12)
         |> map(mask =>
-            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect())
+            0..12
+                |> map(bit => (mask >> bit) & 1 == 1)
+                |> collect()
+        )
 
 write_line("consistent assignments:")
 
 assignments()
     |> filter(consistent)
     |> each(values => (
-        let true_ones =
-            1::12 |> filter(holds(values, *))
+        let true_ones = 1::12 |> filter(holds(values, *))
 
         write_line("  true: {true_ones |> join(" ")}")
     ))

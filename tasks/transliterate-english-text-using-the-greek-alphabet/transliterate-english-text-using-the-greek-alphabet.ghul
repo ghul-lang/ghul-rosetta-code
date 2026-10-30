@@ -1,7 +1,8 @@
 use default
 
 let pairs = [
-    ("ch", 'χ'), ("kh", 'χ'), ("ph", 'φ'), ("rh", 'ρ'), ("th", 'θ'),
+    ("ch", 'χ'), ("kh", 'χ'), ("ph", 'φ'), ("rh", 'ρ'),
+    ("th", 'θ'),
     ("ps", 'ψ'), ("ck", 'κ'), ("ee", 'η'), ("oo", 'ω'),
     ("a", 'α'), ("b", 'β'), ("c", 'κ'), ("d", 'δ'), ("e", 'ε'),
     ("f", 'φ'), ("g", 'γ'), ("h", 'η'), ("i", 'ι'), ("j", 'ι'),
@@ -12,12 +13,18 @@ let pairs = [
 ]
 
 matched_at(text: string, at: int) -> (string, char)? =>
-    pairs |> find(((english, _)) =>
-        at + english.length <= text.length /\
-        text[at..at + english.length].to_lower() =~ english)
+    pairs
+        |> find(((english, _)) =>
+            at + english.length <= text.length /\
+            text[at..at + english.length].to_lower() =~ english
+        )
 
 matching_case(greek: char, english: char) -> char =>
-    if char.is_upper(english) then char.to_upper(greek) else greek fi
+    if char.is_upper(english) then
+        char.to_upper(greek)
+    else
+        greek
+    fi
 
 letters(text: string, at: int) -> char{} is
     if at < text.length then
@@ -32,15 +39,16 @@ letters(text: string, at: int) -> char{} is
 si
 
 final_form(greek: char[], at: int) -> char =>
-    let
-        ends_word =
-            at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
+    let ends_word =
+        at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
     in
-        if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
+    if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
 
 transliterate(text: string) -> string =>
     let greek = letters(text, 0) |> collect() in
-    string(0..greek.count |> map(final_form(greek, *)) |> collect())
+    string(
+        0..greek.count |> map(final_form(greek, *)) |> collect()
+    )
 
 let passage = [
     "I was looking at some rhododendrons in my back garden,",
@@ -51,7 +59,11 @@ let passage = [
     "laying in my patio."
 ]
 
-write_line(transliterate("The quick brown fox jumped over the lazy dog."))
+write_line(
+    transliterate(
+        "The quick brown fox jumped over the lazy dog."
+    )
+)
 write_line("")
 
 for line in passage do

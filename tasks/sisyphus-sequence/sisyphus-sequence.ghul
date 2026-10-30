@@ -35,7 +35,8 @@ for step in sequence do
     if milestones |> any(m => m == position) then
         reports.add(
             "term {position,9} is {step.term,7}, "
-            "reached with primes up to {step.prime}")
+            "reached with primes up to {step.prime}"
+        )
     fi
 
     if position == milestones[milestones.count - 1] then
@@ -44,7 +45,9 @@ for step in sequence do
 od
 
 for row in 0..10 do
-    write_line(first_hundred[row * 10..row * 10 + 10] |> join(""))
+    write_line(
+        first_hundred[row * 10..row * 10 + 10] |> join("")
+    )
 od
 
 write_line("")

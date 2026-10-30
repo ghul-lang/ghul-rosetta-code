@@ -34,8 +34,12 @@ image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0D)
 
 drawn(image: IMAGE, from: Point, to: Point) =>
-    let along = to - from, start = from - along, end = to + along in
-    image.line(start.x, start.y, end.x, end.y)
+    let
+        along = to - from,
+        start = from - along,
+        end = to + along
+    in
+        image.line(start.x, start.y, end.x, end.y)
 
 image.colour(20ub, 60ub, 200ub)
 drawn(image, a, b)

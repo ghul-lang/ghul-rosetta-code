@@ -11,8 +11,10 @@ let transitions =
         |> map(group => (group.key, group.value.count))
         |> collect_map()
 
-write_line("{count:N0} first primes. "
-    "Transitions prime % 10 -> next-prime % 10.")
+write_line(
+    "{count:N0} first primes. "
+    "Transitions prime % 10 -> next-prime % 10."
+)
 
 for key in transitions.keys |> sort() do
     let frequency =
@@ -20,5 +22,6 @@ for key in transitions.keys |> sort() do
 
     write_line(
         "{key / 10} -> {key % 10} count: {transitions[key],6} "
-        "frequency: {frequency:F2} %")
+        "frequency: {frequency:F2} %"
+    )
 od

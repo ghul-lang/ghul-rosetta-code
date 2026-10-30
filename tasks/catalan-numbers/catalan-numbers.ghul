@@ -6,15 +6,22 @@ by_convolution(n: int) -> long memo is
         return 1L
     fi
 
-    return (0..n)
-        |> sum_by(i => by_convolution(i) * by_convolution(n - 1 - i))
+    return
+        (0..n)
+            |> sum_by(i =>
+                by_convolution(i) * by_convolution(n - 1 - i)
+            )
 si
 
 // C(n) = 2 * (2n - 1) * C(n - 1) / (n + 1)
 by_recurrence(n: int) -> long =>
-    1::n |> reduce(1L, (c, k) =>
-        2L * (2L * long(k) - 1L) * c / (long(k) + 1L))
+    1::n
+        |> reduce(1L, (c, k) =>
+            2L * (2L * long(k) - 1L) * c / (long(k) + 1L)
+        )
 
 for n in 0::14 do
-    write_line("{n,2}: {by_convolution(n),8} {by_recurrence(n),8}")
+    write_line(
+        "{n,2}: {by_convolution(n),8} {by_recurrence(n),8}"
+    )
 od

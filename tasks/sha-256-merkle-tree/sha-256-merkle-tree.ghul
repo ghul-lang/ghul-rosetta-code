@@ -8,22 +8,29 @@ paired(hashes: List[ubyte[]]) -> ubyte[]{} =>
         |> map(index =>
             if 2 * index + 1 < hashes.count then
                 SHA256.hash_data(
-                    hashes[2 * index] ++
-                        hashes[2 * index + 1] |> collect())
+                    hashes[2 * index] ++ hashes[2 * index + 1]
+                        |> collect()
+                )
             else
                 hashes[2 * index]
-            fi)
+            fi
+        )
 
 merkle_root(content: ubyte[]) -> ubyte[] is
     let hashes mut =
         0..(content.count + block_size - 1) / block_size
             |> map(index =>
-                let at = index * block_size
+                let
+                    at = index * block_size,
+                    end = System.Math.min(
+                        at + block_size,
+                        content.count
+                    )
                 in
-                SHA256.hash_data(
-                    content[at..System.Math.min(at + block_size,
-                                                content.count)]
-                        |> collect()))
+                    SHA256.hash_data(
+                        content[at..end] |> collect()
+                    )
+            )
             |> collect()
 
     while hashes.count > 1 do
@@ -36,6 +43,8 @@ si
 let image = IO.File.read_all_bytes("title.png")
 
 write_line(
-    image |> merkle_root()
+    image
+        |> merkle_root()
         |> map(byte_value => "{byte_value:x2}")
-        |> join(""))
+        |> join("")
+)

@@ -14,14 +14,22 @@ stand_in() -> string is
 
     let ascii = text => Encoding.ascii.get_bytes(text)
 
-    let port_of = listener =>
-        if let bound: IPEndPoint = listener.local_endpoint then bound.port
-        else throw System.Exception("the listener has no address")
-        fi
+    let port_of =
+        listener =>
+            if let
+                bound: IPEndPoint = listener.local_endpoint
+            then
+                bound.port
+            else
+                throw System.Exception(
+                    "the listener has no address"
+                )
+            fi
 
     Tasks.TASK.run(() is
         while true do
-            let connection = control.accept_tcp_client().get_stream()
+            let connection =
+                control.accept_tcp_client().get_stream()
             let reader = IO.StreamReader(connection)
             let writer = IO.StreamWriter(connection)
             let data mut = TcpListener(IPAddress.loopback, 0)
@@ -29,7 +37,7 @@ stand_in() -> string is
             writer.auto_flush = true
             writer.write("220 stand-in ready\r\n")
 
-            let send = (bytes) is
+            let send = bytes is
                 let client = data.accept_tcp_client()
 
                 writer.write("150 sending\r\n")
@@ -44,11 +52,15 @@ stand_in() -> string is
                 let command = line.split([' '])[0]
 
                 case command
-                when "USER" then writer.write("331 password please\r\n")
-                when "PASS" then writer.write("230 logged in\r\n")
+                when "USER" then
+                    writer.write("331 password please\r\n")
+                when "PASS" then
+                    writer.write("230 logged in\r\n")
                 when "PWD" then writer.write("257 \"/\"\r\n")
-                when "CWD" then writer.write("250 directory changed\r\n")
-                when "TYPE" then writer.write("200 type set\r\n")
+                when "CWD" then
+                    writer.write("250 directory changed\r\n")
+                when "TYPE" then
+                    writer.write("200 type set\r\n")
                 when "PASV" then
                     data = TcpListener(IPAddress.loopback, 0)
                     data.start()
@@ -57,7 +69,9 @@ stand_in() -> string is
 
                     let (high, low) = (p / 256, p % 256)
 
-                    writer.write("227 passive (127,0,0,1,{high},{low})\r\n")
+                    writer.write(
+                        "227 passive (127,0,0,1,{high},{low})\r\n"
+                    )
                 when "NLST" then send(ascii("readme.txt\r\n"))
                 when "RETR" then send(ascii("Hello from FTP\n"))
                 when "QUIT" then writer.write("221 bye\r\n")

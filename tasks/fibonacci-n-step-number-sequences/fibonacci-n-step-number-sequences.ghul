@@ -18,10 +18,12 @@ n_step(initial: int[]) -> int{} is
 si
 
 show(name: string, initial: int[]) =>
-    let series = n_step(initial)
-        |> take(10)
-        |> map(value => "{value}")
-        |> join(" ") in
+    let series =
+        n_step(initial)
+            |> take(10)
+            |> map(value => "{value}")
+            |> join(" ")
+    in
     write_line("{name}: {series}")
 
 show("fibonacci", [1, 1])

@@ -22,25 +22,41 @@ let picture = [
 
 let rows = picture.count + 2
 let columns =
-    (picture |> map(line => line.length) |> reduce(0, int.max)) + 2
+    (
+        picture
+            |> map(line => line.length)
+            |> reduce(0, int.max)
+    ) + 2
 
 let black =
     (0..rows)
         |> map(row =>
             (0..columns)
                 |> map(column =>
-                    let inside = row >= 1 /\ row <= picture.count in
-                    let line = if inside then picture[row - 1] else "" fi in
-                    column >= 1 /\ column <= line.length /\
-                        line[column - 1] == '#')
-                |> collect_mutable())
+                    let
+                        inside =
+                            row >= 1 /\ row <= picture.count,
+                        line =
+                            if inside then
+                                picture[row - 1]
+                            else
+                                ""
+                            fi
+                    in
+                        column >= 1 /\
+                        column <= line.length /\
+                        line[column - 1] == '#'
+                )
+                |> collect_mutable()
+        )
         |> collect()
 
 let original =
     black |> map(row => row |> collect()) |> collect()
 
 let around = [
-    (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
+    (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1),
+    (-1, -1)
 ]
 
 neighbours(row: int, column: int) -> List[bool] =>
@@ -102,7 +118,8 @@ od
 write_line("thinned in {passes} rounds:")
 
 for row in black do
-    let line = row |> skip(1) |> map(b => if b then "#" else " " fi)
+    let line =
+        row |> skip(1) |> map(b => if b then "#" else " " fi)
 
     write_line((line |> join("")).trim_end())
 od
@@ -126,7 +143,11 @@ for row in 0..rows do
         fi
 
         image.fill_rectangle(
-            x, y, x + double(cell), y + double(cell))
+            x,
+            y,
+            x + double(cell),
+            y + double(cell)
+        )
     od
 od
 

@@ -5,7 +5,11 @@ union Root is
     APPROXIMATE(x: double)
 si
 
-bisect(f: double -> double, low: double, high: double) -> double is
+bisect(
+    f: double -> double,
+    low: double,
+    high: double
+) -> double is
     let a mut = low
     let b mut = high
 
@@ -23,7 +27,10 @@ bisect(f: double -> double, low: double, high: double) -> double is
 si
 
 roots(
-    f: double -> double, start: double, stop: double, step: double
+    f: double -> double,
+    start: double,
+    stop: double,
+    step: double
 ) -> Root{} is
     let steps = int(System.Math.round((stop - start) / step))
     let x = i => start + double(i) * step
@@ -31,7 +38,9 @@ roots(
     for i in 0::steps do
         if f(x(i)) == 0.0 then
             yield Root.EXACT(x(i))
-        elif i < steps /\ f(x(i + 1)) != 0.0 /\
+        elif
+            i < steps /\
+            f(x(i + 1)) != 0.0 /\
             (f(x(i)) < 0.0) != (f(x(i + 1)) < 0.0)
         then
             yield Root.APPROXIMATE(bisect(f, x(i), x(i + 1)))
@@ -41,7 +50,12 @@ si
 
 let f = x => x * x * x - 3.0 * x * x + 2.0 * x
 
-for (start, stop, step) in [(-1.0, 3.0, 0.1), (-0.95, 3.05, 0.3)] do
+for
+    (start, stop, step) in [
+        (-1.0, 3.0, 0.1),
+        (-0.95, 3.05, 0.3)
+    ]
+do
     write_line("from {start} to {stop} in steps of {step}:")
 
     for root in roots(f, start, stop, step) do

@@ -2,12 +2,15 @@ use default
 use IO.Std.read_line
 
 struct Q(top: bigint, bottom: bigint) is
-    +(o: Q) -> Q => make(top * o.bottom + o.top * bottom, bottom * o.bottom)
-    -(o: Q) -> Q => make(top * o.bottom - o.top * bottom, bottom * o.bottom)
+    +(o: Q) -> Q =>
+        make(top * o.bottom + o.top * bottom, bottom * o.bottom)
+    -(o: Q) -> Q =>
+        make(top * o.bottom - o.top * bottom, bottom * o.bottom)
     *(o: Q) -> Q => make(top * o.top, bottom * o.bottom)
 
     /(o: Q) -> Q =>
-        if o.top.is_zero then throw System.DivideByZeroException()
+        if o.top.is_zero then
+            throw System.DivideByZeroException()
         else make(top * o.bottom, bottom * o.top)
         fi
 
@@ -16,9 +19,11 @@ struct Q(top: bigint, bottom: bigint) is
 si
 
 make(top: bigint, bottom: bigint) -> Q =>
-    let g = bigint.greatest_common_divisor(top, bottom) in
-    let sign = if bottom.sign < 0 then -1n else 1n fi in
-    Q(sign * top / g, sign * bottom / g)
+    let
+        g = bigint.greatest_common_divisor(top, bottom),
+        sign = if bottom.sign < 0 then -1n else 1n fi
+    in
+        Q(sign * top / g, sign * bottom / g)
 
 whole(n: bigint) -> Q => Q(n, 1n)
 
@@ -39,7 +44,8 @@ decimal(q: Q) -> string is
     let text = digits.to_string()
 
     if remainder.is_zero then
-        return if text.length == 0 then "{sign}{integer}"
+        return
+            if text.length == 0 then "{sign}{integer}"
             else "{sign}{integer}.{text}"
             fi
     fi
@@ -99,17 +105,24 @@ class CALCULATOR(line: string, previous: Q?) is
                 _at = _at + 1
                 recurring = digits()
 
-                if !take(')') then throw BAD_INPUT("missing )") fi
+                if !take(')') then
+                    throw BAD_INPUT("missing )")
+                fi
             fi
         fi
 
         let scale = bigint.pow(10n, fraction.length)
-        let value mut = make(bigint.parse("0{integer}{fraction}"), scale)
+        let value mut = make(
+            bigint.parse("0{integer}{fraction}"),
+            scale
+        )
 
         if recurring.length > 0 then
             let nines = bigint.pow(10n, recurring.length) - 1n
 
-            value = value + make(bigint.parse(recurring), scale * nines)
+            value =
+                value +
+                make(bigint.parse(recurring), scale * nines)
         fi
 
         value
@@ -142,7 +155,10 @@ class CALCULATOR(line: string, previous: Q?) is
             return whole(0n) - unary()
         elif take('+') then
             return unary()
-        elif peek == 'a' /\ line.substring(_at).starts_with("abs") then
+        elif
+            peek == 'a' /\
+            line.substring(_at).starts_with("abs")
+        then
             _at = _at + 3
 
             let value = unary()

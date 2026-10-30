@@ -25,7 +25,11 @@ backwards(input: IO.TextReader) -> char =>
 
 words(input: IO.TextReader, reversing: bool) is
     let delimiter =
-        if reversing then backwards(input) else forwards(input) fi
+        if reversing then
+            backwards(input)
+        else
+            forwards(input)
+        fi
 
     write("{delimiter}")
 

@@ -14,4 +14,6 @@ let decimal = largest(10L, 504L, 98764321L)
 let hexadecimal = largest(16L, 360360L, 0xFEDCBA987654321L)
 
 write_line("Largest decimal: {decimal}")
-write_line("Largest hexadecimal: {hexadecimal:X} ({hexadecimal})")
+write_line(
+    "Largest hexadecimal: {hexadecimal:X} ({hexadecimal})"
+)

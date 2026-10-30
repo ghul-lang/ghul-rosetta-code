@@ -18,19 +18,27 @@ ternary(n: bigint) -> string =>
     if n =~ 0n then
         ""
     else
-        let r = int((n % 3n + 3n) % 3n) in
-        let d = if r == 2 then -1 else r fi in
-        "{ternary((n - bigint(d)) / 3n)}{digit_char(d)}"
+        let
+            r = int((n % 3n + 3n) % 3n),
+            d = if r == 2 then -1 else r fi
+        in
+            "{ternary((n - bigint(d)) / 3n)}{digit_char(d)}"
     fi
 
 balanced(n: bigint) -> BT => BT(ternary(n))
 
 value(a: BT) -> bigint =>
     a.digits
-    |> reduce(0n, (total, c) => total * 3n + bigint(digit_value(c)))
+        |> reduce(0n, (total, c) =>
+            total * 3n + bigint(digit_value(c))
+        )
 
 -(a: BT) -> BT is
-    BT(a.digits |> map(c => digit_char(-digit_value(c))) |> join(""))
+    BT(
+        a.digits
+            |> map(c => digit_char(-digit_value(c)))
+            |> join("")
+    )
 si
 
 +(a: BT, b: BT) -> BT is
@@ -83,7 +91,8 @@ si
         if d != 0 then
             let term = b << i
 
-            product = product + if d == 1 then term else -term fi
+            product =
+                product + if d == 1 then term else -term fi
         fi
     od
 

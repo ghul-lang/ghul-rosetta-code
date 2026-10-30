@@ -1,9 +1,10 @@
 use default
 use Collections
 
-suffixes(words: string[], size: int)
-    -> (by_prefix: MAP[string, LIST[string]], prefixes: List[string])
-is
+suffixes(words: string[], size: int) -> (
+    by_prefix: MAP[string, LIST[string]],
+    prefixes: List[string]
+) is
     let by_prefix = MAP()
     let prefixes = LIST()
 
@@ -36,7 +37,9 @@ generate(
             let word = choices[random.next(0, choices.count)]
 
             yield word
-            yield in chain(((prefix |> skip(1)) ++ [word]) |> collect())
+            yield in chain(
+                ((prefix |> skip(1)) ++ [word]) |> collect()
+            )
         fi
     si
 
@@ -49,7 +52,10 @@ wrap(text: string, width: int) -> string{} is
     let line = System.Text.StringBuilder()
 
     for word in text.split([' ']) do
-        if line.length > 0 /\ line.length + 1 + word.length > width then
+        if
+            line.length > 0 /\
+            line.length + 1 + word.length > width
+        then
             yield line.to_string()
 
             line.clear()
@@ -81,20 +87,29 @@ od
 
 let path = if args.count > 0 then args[0] else "alice.txt" fi
 let size = if args.count > 1 then int.parse(args[1]) else 2 fi
-let length = if args.count > 2 then int.parse(args[2]) else 60 fi
+let length =
+    if args.count > 2 then int.parse(args[2]) else 60 fi
 
-let words = IO.File.read_all_text(path).split([' ', '\n', '\r', '\t'])
+let words =
+    IO.File.read_all_text(path).split([' ', '\n', '\r', '\t'])
 let corpus = words |> filter(w => w.length > 0) |> collect()
 let source = suffixes(corpus, size)
 let random = System.Random(2026)
-let start = source.prefixes[random.next(0, source.prefixes.count)]
+let start =
+    source.prefixes[random.next(0, source.prefixes.count)]
 
 write_line("")
 write_line(
     "{length} words from {path}, key {size},"
-    " starting \"{start}\"")
+    " starting \"{start}\""
+)
 write_line("")
 
-for line in wrap(generate(source.by_prefix, start, length, random), 68) do
+for
+    line in wrap(
+        generate(source.by_prefix, start, length, random),
+        68
+    )
+do
     write_line("  {line}")
 od

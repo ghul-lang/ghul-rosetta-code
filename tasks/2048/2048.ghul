@@ -40,14 +40,19 @@ lines_for(direction: char) -> List[int]{} => (
 )
 
 collapse(values: List[int]) -> List[int] =>
-    let merged = merge_packed(LIST[int](values |> filter(* != 0))) in
-    let padded = merged ++ repeat(0, side - (merged |> count())) in
-    padded |> collect()
+    let
+        merged = merge_packed(
+            LIST[int](values |> filter(* != 0))
+        ),
+        padded = merged ++ repeat(0, side - (merged |> count()))
+    in
+        padded |> collect()
 
 merge_packed(packed: List[int]) -> int{} =>
     case packed
     when [] then []
-    when [x, y, ..rest] /\ x == y then [x * 2] ++ merge_packed(rest)
+    when [x, y, ..rest] /\ x == y then
+        [x * 2] ++ merge_packed(rest)
     when [x, ..rest] then [x] ++ merge_packed(rest)
     esac
 
@@ -55,8 +60,9 @@ slide(target: LIST[int], direction: char) -> bool => (
     let before = target |> collect()
 
     for line in lines_for(direction) do
-        let moved =
-            collapse(line |> map(at => target[at]) |> collect())
+        let moved = collapse(
+            line |> map(at => target[at]) |> collect()
+        )
 
         for at in 0..side do
             target[line[at]] = moved[at]
@@ -77,16 +83,20 @@ spawn() is
 si
 
 stuck() -> bool =>
-    !(directions
-        |> any(direction =>
-            slide(board |> collect_mutable(), direction)))
+    !(
+        directions
+            |> any(direction =>
+                slide(board |> collect_mutable(), direction)
+            )
+    )
 
 show() is
     for row in 0..side do
         Std.write_line(
-            board[row * side .. row * side + side]
+            board[row * side..row * side + side]
                 |> map(tile =>
-                    if tile == 0 then "    ." else "{tile,5}" fi)
+                    if tile == 0 then "    ." else "{tile,5}" fi
+                )
                 |> join("")
         )
     od

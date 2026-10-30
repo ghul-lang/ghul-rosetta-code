@@ -41,20 +41,17 @@ let listener = TcpListener(IPAddress.loopback, port)
 
 listener.start()
 
-let serving =
-    Thread(
-        () is
-            let served mut = 0
+let serving = Thread(() is
+    let served mut = 0
 
-            while served < 2 do
-                let client = listener.accept_tcp_client()
+    while served < 2 do
+        let client = listener.accept_tcp_client()
 
-                served = served + 1
+        served = served + 1
 
-                serve(client)
-            od
-        si
-    )
+        serve(client)
+    od
+si)
 
 serving.start()
 
@@ -64,7 +61,9 @@ fetch(path: string) is
     let writer = IO.StreamWriter(stream)
 
     writer.auto_flush = true
-    writer.write("GET {path} HTTP/1.1\r\nHost: localhost\r\n\r\n")
+    writer.write(
+        "GET {path} HTTP/1.1\r\nHost: localhost\r\n\r\n"
+    )
 
     let lines =
         IO.StreamReader(stream).read_to_end().split(['\n'])

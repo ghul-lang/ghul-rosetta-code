@@ -3,5 +3,7 @@ use default
 let subjects = ["møøse", "𝔘𝔫𝔦𝔠𝔬𝔡𝔢", "J̲o̲s̲é̲"]
 
 for subject in subjects do
-    write_line("{subject}: {subject |> graphemes() |> count()} graphemes")
+    write_line(
+        "{subject}: {subject |> graphemes() |> count()} graphemes"
+    )
 od

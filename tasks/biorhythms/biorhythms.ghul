@@ -5,7 +5,11 @@ use System.DateTime
 use System.Globalization.CultureInfo
 use System.Math.*
 
-let cycles = [("Physical", 23), ("Emotional", 28), ("Mental", 33)]
+let cycles = [
+    ("Physical", 23),
+    ("Emotional", 28),
+    ("Mental", 33)
+]
 
 let quadrants = [
     ("up and rising", "peak"),
@@ -41,10 +45,13 @@ report(birth: DateTime, target: DateTime) is
             elif abs(percentage) < 5.0D then
                 "critical transition"
             else
-                let (trend, next) = quadrants[quadrant] in
-                let ahead = (quadrant + 1) * length / 4 - position in
-                let due = show(target.add_days(double(ahead))) in
-                "{percentage}% ({trend}, next {next} {due})"
+                let
+                    (trend, next) = quadrants[quadrant],
+                    ahead =
+                        (quadrant + 1) * length / 4 - position,
+                    due = show(target.add_days(double(ahead)))
+                in
+                    "{percentage}% ({trend}, next {next} {due})"
             fi
 
         write_line("  {label} day {position}: {description}")
@@ -73,7 +80,8 @@ image.line(-wide, 0.0D, wide, 0.0D)
 image.line(0.0D, -1.2D, 0.0D, 1.2D)
 
 let colours = [
-    (200ub, 50ub, 40ub), (40ub, 130ub, 60ub), (40ub, 80ub, 180ub)
+    (200ub, 50ub, 40ub), (40ub, 130ub, 60ub),
+    (40ub, 80ub, 180ub)
 ]
 
 for (i, (label, length)) in cycles |> index() do
@@ -86,9 +94,12 @@ for (i, (label, length)) in cycles |> index() do
             |> map(q =>
                 let day = double(q) / 4.0D in
                 let turn =
-                    (double(centre) + day) / double(length) in
-                (x = day, y = sin(2.0D * pi * turn)))
-            |> collect())
+                    (double(centre) + day) / double(length)
+                in
+                (x = day, y = sin(2.0D * pi * turn))
+            )
+            |> collect()
+    )
     image.text(-wide + 10.0D * double(i), 1.45D, 13.0D, label)
 od
 

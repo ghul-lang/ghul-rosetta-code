@@ -14,7 +14,9 @@ if let entered = read_line() then
     write_line("difference: {a - b}")
     write_line("product: {a * b}")
     write_line("quotient: {a / b}, truncated towards zero")
-    write_line("remainder: {a % b}, signed like the first operand")
+    write_line(
+        "remainder: {a % b}, signed like the first operand"
+    )
 
     let power = System.Math.pow(cast(a), cast(b))
 

@@ -19,13 +19,16 @@ loop_length(n: int) -> int => (
 
 simulated(n: int) -> double =>
     double(1::trials |> sum_by(_ => loop_length(n))) /
-        double(trials)
+    double(trials)
 
 analytical(n: int) -> double =>
     let size = double(n) in
     1::n
         |> sum_by(k =>
-            0..k |> map(i => (size - cast(i)) / size) |> product())
+            0..k
+                |> map(i => (size - cast(i)) / size)
+                |> product()
+        )
 
 write_line(" N    average    analytical    (error)")
 write_line("===  =========  ============  =========")
@@ -33,7 +36,10 @@ write_line("===  =========  ============  =========")
 for n in 1::20 do
     let average = simulated(n)
     let expected = analytical(n)
-    let error = 100.0 * double.abs(average - expected) / expected
+    let error =
+        100.0 * double.abs(average - expected) / expected
 
-    write_line("{n,3}  {average,9:F4}  {expected,12:F4}  ({error,6:F2}%)")
+    write_line(
+        "{n,3}  {average,9:F4}  {expected,12:F4}  ({error,6:F2}%)"
+    )
 od

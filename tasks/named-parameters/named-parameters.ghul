@@ -1,7 +1,6 @@
 use default
 
-sqlen(x: int, y: int, z: int) -> int =>
-    x * x + y * y + z * z
+sqlen(x: int, y: int, z: int) -> int => x * x + y * y + z * z
 
 write_line(sqlen(x = 3, y = 4, z = 0))
 write_line(sqlen(z = 0, x = 3, y = 4))

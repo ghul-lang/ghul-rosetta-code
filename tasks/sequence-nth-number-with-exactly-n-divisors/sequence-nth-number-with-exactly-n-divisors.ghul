@@ -10,9 +10,9 @@ term(n: int) -> bigint =>
     else
         bigint(
             from(1L)
-            |> filter(c => divisor_count(c) == long(n))
-            |> skip(n - 1)
-            |> first()!
+                |> filter(c => divisor_count(c) == long(n))
+                |> skip(n - 1)
+                |> first()!
         )
     fi
 

@@ -4,7 +4,9 @@ survivor(n: int, k: int) -> int =>
     if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi
 
 write_line(
-    "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives")
+    "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives"
+)
 
 write_line(
-    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives")
+    "5 prisoners, every 2nd killed:  prisoner {survivor(5, 2)} survives"
+)

@@ -34,8 +34,7 @@ without(values: long{}, excluded: long{}) -> long{} is
     od
 si
 
-let squares_that_are_not_cubes = without(powers(2), powers(3))
-    |> skip(20)
-    |> take(10)
+let squares_that_are_not_cubes =
+    without(powers(2), powers(3)) |> skip(20) |> take(10)
 
 write_line(squares_that_are_not_cubes |> join(" "))

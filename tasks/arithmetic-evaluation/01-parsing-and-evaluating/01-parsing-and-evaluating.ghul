@@ -31,7 +31,12 @@ parse_term(text: string, at: int) -> PARSED? is
     fi
 
     if text[start] == '(' then
-        if let (expression, next) = parse_expression(text, start + 1) then
+        if let
+            (expression, next) = parse_expression(
+                text,
+                start + 1
+            )
+        then
             let close = skip_spaces(text, next)
 
             if close < text.length /\ text[close] == ')' then
@@ -57,7 +62,11 @@ parse_term(text: string, at: int) -> PARSED? is
     return PARSED(NUMBER(int.parse(digits)), end)
 si
 
-operator_at(text: string, position: int, operators: string) -> int? =>
+operator_at(
+    text: string,
+    position: int,
+    operators: string
+) -> int? =>
     let here = skip_spaces(text, position) in
     if here < text.length /\ operators.contains(text[here]) then
         here
@@ -65,7 +74,11 @@ operator_at(text: string, position: int, operators: string) -> int? =>
         null
     fi
 
-build(operator: char, left: Expression, right: Expression) -> Expression =>
+build(
+    operator: char,
+    left: Expression,
+    right: Expression
+) -> Expression =>
     case operator
     when '+' then ADD(left, right)
     when '-' then SUBTRACT(left, right)
@@ -84,9 +97,15 @@ parse_run(
         let expression mut = left
         let position mut = next
 
-        while let here = operator_at(text, position, operators) do
+        while let
+            here = operator_at(text, position, operators)
+        do
             if let (right, after) = operand(text, here + 1) then
-                expression = build(text[here], expression, right)
+                expression = build(
+                    text[here],
+                    expression,
+                    right
+                )
                 position = after
             else
                 return null
@@ -106,8 +125,11 @@ parse_expression(text: string, at: int) -> PARSED? =>
     parse_run(text, at, "+-", parse_factor)
 
 parse(text: string) -> Expression? is
-    if let (expression, next) = parse_expression(text, 0) /\
-        skip_spaces(text, next) == text.length
+    if let
+        (expression, next) = parse_expression(
+            text,
+            0
+        ) /\ skip_spaces(text, next) == text.length
     then
         return expression
     fi
@@ -118,32 +140,44 @@ si
 evaluate(expression: Expression) -> int =>
     case expression
     when (value): NUMBER then value
-    when (left, right): ADD then evaluate(left) + evaluate(right)
-    when (left, right): SUBTRACT then evaluate(left) - evaluate(right)
-    when (left, right): MULTIPLY then evaluate(left) * evaluate(right)
-    when (left, right): DIVIDE then evaluate(left) / evaluate(right)
+    when (left, right): ADD then
+        evaluate(left) + evaluate(right)
+    when (left, right): SUBTRACT then
+        evaluate(left) - evaluate(right)
+    when (left, right): MULTIPLY then
+        evaluate(left) * evaluate(right)
+    when (left, right): DIVIDE then
+        evaluate(left) / evaluate(right)
     esac
 
 show(expression: Expression) -> string =>
     case expression
     when (value): NUMBER then "{value}"
-    when (left, right): ADD then "(+ {show(left)} {show(right)})"
-    when (left, right): SUBTRACT then "(- {show(left)} {show(right)})"
-    when (left, right): MULTIPLY then "(* {show(left)} {show(right)})"
-    when (left, right): DIVIDE then "(/ {show(left)} {show(right)})"
+    when (left, right): ADD then
+        "(+ {show(left)} {show(right)})"
+    when (left, right): SUBTRACT then
+        "(- {show(left)} {show(right)})"
+    when (left, right): MULTIPLY then
+        "(* {show(left)} {show(right)})"
+    when (left, right): DIVIDE then
+        "(/ {show(left)} {show(right)})"
     esac
 
-for source in [
-    "(1+3)*7",
-    "1+3*7",
-    "2*(3+4)-10/5",
-    "((11+3)*(5-2))/7",
-    "1+*2",
-    "(1+3",
-    "1 2"
-] do
+for
+    source in [
+        "(1+3)*7",
+        "1+3*7",
+        "2*(3+4)-10/5",
+        "((11+3)*(5-2))/7",
+        "1+*2",
+        "(1+3",
+        "1 2"
+    ]
+do
     if let tree = parse(source) then
-        write_line("{source} => {show(tree)} => {evaluate(tree)}")
+        write_line(
+            "{source} => {show(tree)} => {evaluate(tree)}"
+        )
     else
         write_line("{source} => cannot be parsed")
     fi

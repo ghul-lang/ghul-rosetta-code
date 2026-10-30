@@ -8,7 +8,11 @@ namespace Hailstone is
             let term = terms[terms.count - 1]
 
             let next =
-                if term % 2L == 0L then term / 2L else 3L * term + 1L fi
+                if term % 2L == 0L then
+                    term / 2L
+                else
+                    3L * term + 1L
+                fi
 
             terms.add(next)
         od
@@ -19,19 +23,25 @@ namespace Hailstone is
     entry() is
         let sequence = hailstone(27L)
         let first = sequence |> take(4) |> join()
-        let last = sequence |> skip(sequence.count - 4) |> join()
+        let last =
+            sequence |> skip(sequence.count - 4) |> join()
 
         write_line(
             "hailstone(27) has {sequence.count} elements: "
-            "{first}, ..., {last}")
+            "{first}, ..., {last}"
+        )
 
         let (start, length) =
             1..100_000
-                |> map(n => (n, length = hailstone(long(n)).count))
+                |> map(n => (
+                    n,
+                    length = hailstone(long(n)).count
+                ))
                 |> max_by((_, length) => length)!
 
         write_line(
             "{start} has the longest sequence below 100,000: "
-            "{length} elements")
+            "{length} elements"
+        )
     si
 si

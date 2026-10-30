@@ -10,7 +10,8 @@ minor(m: Matrix, column: int) -> Matrix =>
             0..m.count
                 |> filter(* != column)
                 |> map(c => m[row][c])
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 determinant(m: Matrix) -> int =>
@@ -18,24 +19,38 @@ determinant(m: Matrix) -> int =>
     when [[entry]] then entry
     else
         0..m.count
-            |> sum_by(c => sign(c) * m[0][c] * determinant(minor(m, c)))
+            |> sum_by(c =>
+                sign(c) * m[0][c] * determinant(minor(m, c))
+            )
     esac
 
-with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
+with_column(
+    m: Matrix,
+    column: int,
+    values: List[int]
+) -> Matrix =>
     0..m.count
         |> map(row =>
             0..m.count
                 |> map(c =>
-                    if c == column then values[row] else m[row][c] fi)
-                |> collect())
+                    if c == column then
+                        values[row]
+                    else
+                        m[row][c]
+                    fi
+                )
+                |> collect()
+        )
         |> collect()
 
 solve(m: Matrix, constants: List[int]) -> double{} =>
     let denominator = double(determinant(m)) in
     0..m.count
         |> map(column =>
-            double(determinant(with_column(m, column, constants))) /
-            denominator)
+            double(
+                determinant(with_column(m, column, constants))
+            ) / denominator
+        )
 
 let coefficients = [
     [2, -1, 5, 1],
@@ -48,6 +63,9 @@ let constants = [-3, -32, -47, 49]
 
 let names = ["w", "x", "y", "z"]
 
-for (name, value) in names |> zip(solve(coefficients, constants)) do
+for
+    (name, value) in names
+        |> zip(solve(coefficients, constants))
+do
     write_line("{name} = {value}")
 od

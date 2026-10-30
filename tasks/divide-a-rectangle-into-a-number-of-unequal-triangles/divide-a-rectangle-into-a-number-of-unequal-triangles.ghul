@@ -20,24 +20,44 @@ sides(t: Triangle) -> List[double] =>
         |> collect()
 
 similar(s: Triangle, t: Triangle) -> bool =>
-    let x = sides(s), y = sides(t) in
-    0..3 |> all(i => Math.abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6)
+    let
+        x = sides(s),
+        y = sides(t)
+    in
+        0..3
+            |> all(i =>
+                Math.abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6
+            )
 
 area(t: Triangle) -> double =>
     Math.abs((t.b - t.a) × (t.c - t.a)) / 2.0D
 
 all_different(ts: List[Triangle]) -> bool =>
-    0..ts.count |> all(i =>
-        i + 1..ts.count |> all(j => !similar(ts[i], ts[j])))
+    0..ts.count
+        |> all(i =>
+            i + 1..ts.count |> all(j => !similar(ts[i], ts[j]))
+        )
 
 length(e: (P, P, P)) -> double => (e.`1 - e.`0).length
 
 split(t: Triangle, at: double) -> (Triangle, Triangle) => (
-    let edges = [(t.a, t.b, t.c), (t.b, t.c, t.a), (t.c, t.a, t.b)]
+    let edges = [
+        (t.a, t.b, t.c),
+        (t.b, t.c, t.a),
+        (t.c, t.a, t.b)
+    ]
 
     let (p, q, opposite) =
-        edges |> reduce(edges[0], (best, e) =>
-            if length(e) > length(best) then e else best fi)
+        edges
+            |> reduce(
+                edges[0],
+                (best, e) =>
+                    if length(e) > length(best) then
+                        e
+                    else
+                        best
+                    fi
+            )
     let point = p + (q - p) * at
 
     ((p, point, opposite), (point, q, opposite))
@@ -45,11 +65,18 @@ split(t: Triangle, at: double) -> (Triangle, Triangle) => (
 
 let random = System.Random(5)
 
-divide(width: double, height: double, count: int) -> List[Triangle] is
+divide(
+    width: double,
+    height: double,
+    count: int
+) -> List[Triangle] is
     assert count >= 3 else "at least three triangles are needed"
 
     do
-        let top = P(width * (0.2D + 0.6D * random.next_double()), height)
+        let top = P(
+            width * (0.2D + 0.6D * random.next_double()),
+            height
+        )
         let triangles = LIST([
             (P(0.0D, 0.0D), P(0.0D, height), top),
             (P(0.0D, 0.0D), top, P(width, 0.0D)),
@@ -60,16 +87,26 @@ divide(width: double, height: double, count: int) -> List[Triangle] is
 
         while triangles.count < count /\ tries < 1000 do
             let largest =
-                0..triangles.count |> reduce(0, (best, i) =>
-                    if area(triangles[i]) > area(triangles[best]) then i
-                    else best fi)
+                0..triangles.count
+                    |> reduce(0, (best, i) =>
+                        if
+                            area(triangles[i]) >
+                            area(triangles[best])
+                        then
+                            i
+                        else best
+                        fi
+                    )
 
             let at = 0.25D + random.next_double() / 2.0D
             let (first, second) = split(triangles[largest], at)
 
             let candidate =
-                triangles |> index() |> filter(e => e.index != largest)
-                    |> map(e => e.value) |> collect_mutable()
+                triangles
+                    |> index()
+                    |> filter(e => e.index != largest)
+                    |> map(e => e.value)
+                    |> collect_mutable()
 
             candidate.add(first)
             candidate.add(second)
@@ -82,24 +119,38 @@ divide(width: double, height: double, count: int) -> List[Triangle] is
             tries = tries + 1
         od
 
-        if triangles.count == count /\ all_different(triangles) then
+        if
+            triangles.count == count /\ all_different(triangles)
+        then
             return triangles
         fi
     od
 si
 
-write_line("A random point on the top edge, joined to both bottom corners,")
-write_line("cuts the rectangle into three triangles. Then, until there are")
-write_line("enough, the largest triangle is cut from a random point on")
-write_line("its longest side to the opposite corner, and a cut that would")
-write_line("leave two similar triangles is tried again somewhere else.")
+write_line(
+    "A random point on the top edge, joined to both bottom corners,"
+)
+write_line(
+    "cuts the rectangle into three triangles. Then, until there are"
+)
+write_line(
+    "enough, the largest triangle is cut from a random point on"
+)
+write_line(
+    "its longest side to the opposite corner, and a cut that would"
+)
+write_line(
+    "leave two similar triangles is tried again somewhere else."
+)
 write_line("")
 
 for count in [3, 5, 8] do
     let triangles = divide(8.0D, 5.0D, count)
     let total = triangles |> sum_by(area)
 
-    write_line("{count} triangles covering an area of {total:F2}:")
+    write_line(
+        "{count} triangles covering an area of {total:F2}:"
+    )
 
     for t in triangles do
         write_line("  {t.a.show} {t.b.show} {t.c.show}")
@@ -123,8 +174,11 @@ for (i, t) in many |> index() do
     let shade = ubyte(120 + (i * 37) % 120)
 
     tiles.add(
-        [t.a, t.b, t.c] |> map(p => (x = p.x, y = p.y)) |> collect(),
-        (shade - 80ub, shade - 30ub, 255ub - shade / 3ub))
+        [t.a, t.b, t.c]
+            |> map(p => (x = p.x, y = p.y))
+            |> collect(),
+        (shade - 80ub, shade - 30ub, 255ub - shade / 3ub)
+    )
 od
 
 image.fill(tiles)
@@ -132,7 +186,8 @@ image.colour(30ub, 30ub, 50ub)
 image.stroke(1.0D)
 
 for t in many do
-    let corners = [t.a, t.b, t.c, t.a] |> map(p => (x = p.x, y = p.y))
+    let corners = [t.a, t.b, t.c, t.a]
+        |> map(p => (x = p.x, y = p.y))
 
     image.line(corners |> collect())
 od

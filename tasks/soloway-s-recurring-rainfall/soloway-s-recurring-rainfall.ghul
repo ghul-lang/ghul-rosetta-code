@@ -3,7 +3,9 @@ use default
 let total mut = 0L
 let count mut = 0
 
-write_line("Enter integers, one per line; 99999 ends the input:")
+write_line(
+    "Enter integers, one per line; 99999 ends the input:"
+)
 
 while true do
     let line = IO.Std.read_line()
@@ -14,7 +16,7 @@ while true do
 
     let value mut = 0L
 
-    if !long.try_parse(line.trim(), value ref) then
+    if !long.try_parse(line.trim(), value ref ) then
         write_line("skipping {line.trim()}: not an integer")
         continue
     fi

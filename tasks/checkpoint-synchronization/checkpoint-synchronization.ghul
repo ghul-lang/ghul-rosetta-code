@@ -36,7 +36,7 @@ worker(seat: int) -> COROUTINE is
     let name = names[seat]
 
     for cycle in 1::cycles do
-        for _ in 1::turns[seat] do
+        for _ in 1 :: turns[seat] do
             await pause()
         od
 

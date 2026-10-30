@@ -8,7 +8,9 @@ class BIT_WRITER(target: IO.Stream) is
 
     write(bits: int, count: int) is
         for at in 0..count do
-            _accumulator = _accumulator * 2 + (bits >> (count - 1 - at)) % 2
+            _accumulator =
+                _accumulator * 2 +
+                (bits >> (count - 1 - at)) % 2
             _filled = _filled + 1
 
             if _filled == 8 then
@@ -19,7 +21,9 @@ class BIT_WRITER(target: IO.Stream) is
 
     flush() is
         if _filled > 0 then
-            _target.write_byte(ubyte(_accumulator << (8 - _filled)))
+            _target.write_byte(
+                ubyte(_accumulator << (8 - _filled))
+            )
 
             _accumulator = 0
             _filled = 0
@@ -86,7 +90,9 @@ od
 
 writer.flush()
 
-write_line("{bits} ({bits.length} bits) -> {hex(quantized.to_array())}")
+write_line(
+    "{bits} ({bits.length} bits) -> {hex(quantized.to_array())}"
+)
 write_line("")
 
 let text = "Hello, Rosetta Code!"

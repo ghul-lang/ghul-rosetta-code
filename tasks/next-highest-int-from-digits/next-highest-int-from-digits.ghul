@@ -1,29 +1,34 @@
 use default
 
 next_highest(number: string) -> string =>
-    if let pivot = (0..number.length - 1)
-        |> reverse()
-        |> find(i => number[i] < number[i + 1])
+    if let
+        pivot = (0..number.length - 1)
+            |> reverse()
+            |> find(i => number[i] < number[i + 1])
     then
         let tail = number[pivot + 1..<0]
 
-        let successor = tail
-            |> filter(* > number[pivot])
-            |> sort()
-            |> first_or_throw()
+        let successor =
+            tail
+                |> filter(* > number[pivot])
+                |> sort()
+                |> first_or_throw()
 
         let remaining = tail.remove(tail.index_of(successor), 1)
 
-        let ordered = "{remaining}{number[pivot]}"
-            |> sort()
-            |> join("")
+        let ordered =
+            "{remaining}{number[pivot]}" |> sort() |> join("")
 
         "{number[0..pivot]}{successor}{ordered}"
     else
         "0"
     fi
 
-["0", "9", "12", "21", "12453", "738440", "45072010", "95322020",
- "9589776899767587796600"]
+[
+    "0", "9", "12", "21", "12453", "738440", "45072010",
+    "95322020",
+    "9589776899767587796600"
+]
     |> each(number =>
-        write_line("{number,22} -> {next_highest(number)}"))
+        write_line("{number,22} -> {next_highest(number)}")
+    )

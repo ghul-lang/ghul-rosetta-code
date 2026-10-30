@@ -6,21 +6,33 @@ use Circle = (centre: Point, radius: double)
 
 circle_through(a: Point, b: Point, c: Point) -> Circle is
     let determinant =
-        2.0 * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+        2.0 *
+        (
+            a.x * (b.y - c.y) +
+            b.x * (c.y - a.y) +
+            c.x * (a.y - b.y)
+        )
 
-    assert determinant != 0.0 else "the three points are collinear"
+    assert determinant != 0.0
+        else "the three points are collinear"
 
     let a_squared = a.x * a.x + a.y * a.y
     let b_squared = b.x * b.x + b.y * b.y
     let c_squared = c.x * c.x + c.y * c.y
 
     let x =
-        (a_squared * (b.y - c.y) + b_squared * (c.y - a.y) +
-         c_squared * (a.y - b.y)) / determinant
+        (
+            a_squared * (b.y - c.y) +
+            b_squared * (c.y - a.y) +
+            c_squared * (a.y - b.y)
+        ) / determinant
 
     let y =
-        (a_squared * (c.x - b.x) + b_squared * (a.x - c.x) +
-         c_squared * (b.x - a.x)) / determinant
+        (
+            a_squared * (c.x - b.x) +
+            b_squared * (a.x - c.x) +
+            c_squared * (b.x - a.x)
+        ) / determinant
 
     let dx = a.x - x
     let dy = a.y - y
@@ -29,10 +41,12 @@ circle_through(a: Point, b: Point, c: Point) -> Circle is
     return (centre = (x = x, y = y), radius = radius)
 si
 
-let (centre, radius) =
-    circle_through(
-        (x = 22.83, y = 2.07),
-        (x = 14.39, y = 30.24),
-        (x = 33.65, y = 17.31))
+let (centre, radius) = circle_through(
+    (x = 22.83, y = 2.07),
+    (x = 14.39, y = 30.24),
+    (x = 33.65, y = 17.31)
+)
 
-write_line("centre ({centre.x:F4}, {centre.y:F4}) radius {radius:F4}")
+write_line(
+    "centre ({centre.x:F4}, {centre.y:F4}) radius {radius:F4}"
+)

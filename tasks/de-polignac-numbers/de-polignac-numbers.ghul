@@ -6,7 +6,8 @@ is_de_polignac(n: int) -> bool =>
         |> take_while(* < n)
         |> all(power => !is_prime(n - power))
 
-de_polignac_numbers() -> int{} => from(1, 2) |> filter(is_de_polignac)
+de_polignac_numbers() -> int{} =>
+    from(1, 2) |> filter(is_de_polignac)
 
 write_line("First 50 de Polignac numbers:")
 
@@ -17,9 +18,10 @@ od
 write_line()
 
 for position in [1_000, 10_000] do
-    let found = de_polignac_numbers()
-        |> skip(position - 1)
-        |> first_or_throw()
+    let found =
+        de_polignac_numbers()
+            |> skip(position - 1)
+            |> first_or_throw()
 
     write_line("{position:N0}th: {found:N0}")
 od

@@ -83,7 +83,7 @@ class BIPARTITE(left: int, right: int) is
             let taken =
                 if let partner = _partner_of_right[v] then
                     (_distance[partner] ?? -1) == depth + 1 /\
-                        _augment(partner)
+                    _augment(partner)
                 else
                     true
                 fi
@@ -104,8 +104,13 @@ si
 
 use Edge = (from: int, to: int)
 
-check(number: int, left: int, right: int,
-    edges: Collections.List[Edge], expected: int) is
+check(
+    number: int,
+    left: int,
+    right: int,
+    edges: Collections.List[Edge],
+    expected: int
+) is
     let graph = BIPARTITE(left, right)
 
     for (from, to) in edges do
@@ -114,23 +119,44 @@ check(number: int, left: int, right: int,
 
     let result = graph.maximum_matching
 
-    write_line("Test {number}: Result = {result}, Expected = {expected}")
+    write_line(
+        "Test {number}: Result = {result}, Expected = {expected}"
+    )
 si
 
 check(1, 3, 5, [(from = 1, to = 4)], 1)
 
-check(2, 6, 6,
-    [(from = 1, to = 4), (from = 1, to = 5), (from = 5, to = 1)], 2)
+check(
+    2,
+    6,
+    6,
+    [
+        (from = 1, to = 4),
+        (from = 1, to = 5),
+        (from = 5, to = 1)
+    ],
+    2
+)
 
-check(3, 3, 3,
+check(
+    3,
+    3,
+    3,
     [(from = i, to = j) for i in 1::3 for j in 1::3],
-    3)
+    3
+)
 
 check(4, 2, 2, [], 0)
 
-check(5, 4, 4,
+check(
+    5,
+    4,
+    4,
     [
-        (from = 1, to = 1), (from = 1, to = 3), (from = 2, to = 3),
-        (from = 3, to = 4), (from = 4, to = 3), (from = 4, to = 2)
+        (from = 1, to = 1), (from = 1, to = 3),
+        (from = 2, to = 3),
+        (from = 3, to = 4), (from = 4, to = 3),
+        (from = 4, to = 2)
     ],
-    4)
+    4
+)

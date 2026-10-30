@@ -3,9 +3,15 @@ use default
 let digit_symbols = "0123456789abcdef"
 
 render(value: long, base: int) -> string =>
-    let digit = digit_symbols[int(value % cast(base))] in
-    let rest = value / cast(base) in
-    if rest > 0L then "{render(rest, base)}{digit}" else "{digit}" fi
+    let
+        digit = digit_symbols[int(value % cast(base))],
+        rest = value / cast(base)
+    in
+        if rest > 0L then
+            "{render(rest, base)}{digit}"
+        else
+            "{digit}"
+        fi
 
 esthetic(base: int) -> long{} is
     let pending = Queue()
@@ -30,28 +36,35 @@ esthetic(base: int) -> long{} is
 si
 
 for base in 2::16 do
-    let shown = esthetic(base)
-        |> skip(base * 4 - 1)
-        |> take(base * 2 + 1)
-        |> map(render(*, base))
-        |> join(" ")
+    let shown =
+        esthetic(base)
+            |> skip(base * 4 - 1)
+            |> take(base * 2 + 1)
+            |> map(render(*, base))
+            |> join(" ")
 
-    write_line("base {base,2}, esthetic numbers {base * 4} to {base * 6}:")
+    write_line(
+        "base {base,2}, esthetic numbers {base * 4} to {base * 6}:"
+    )
     write_line("  {shown}")
 od
 
 show_range(low: long, high: long) is
-    let matching = esthetic(10)
-        |> filter(* >= low)
-        |> take_while(* <= high)
-        |> map(value => "{value}")
-        |> collect()
+    let matching =
+        esthetic(10)
+            |> filter(* >= low)
+            |> take_while(* <= high)
+            |> map(value => "{value}")
+            |> collect()
 
     write_line("")
-    write_line("base 10 esthetic numbers between {low} and {high}:")
+    write_line(
+        "base 10 esthetic numbers between {low} and {high}:"
+    )
 
     for row in 0..(matching.count + 9) / 10 do
-        let cells = matching |> skip(row * 10) |> take(10) |> join(" ")
+        let cells =
+            matching |> skip(row * 10) |> take(10) |> join(" ")
 
         write_line("  {cells}")
     od

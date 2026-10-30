@@ -21,7 +21,11 @@ stats(start: long) -> (int, long, int) =>
         terms = sequence(start) |> collect(),
         highest = terms |> max()!
     in
-        (terms.count - 1, highest, terms |> find_index(* == highest)!)
+        (
+            terms.count - 1,
+            highest,
+            terms |> find_index(* == highest)!
+        )
 
 write_line("  n   l                h  i")
 

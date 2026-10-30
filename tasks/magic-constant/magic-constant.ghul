@@ -28,7 +28,9 @@ smallest_order_above(limit: bigint) -> bigint is
     low
 si
 
-write_line("\nSmallest order with a magic constant greater than:")
+write_line(
+    "\nSmallest order with a magic constant greater than:"
+)
 
 for power in 1::20 do
     let order = smallest_order_above(bigint.pow(10n, power))

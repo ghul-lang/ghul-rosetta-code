@@ -17,4 +17,6 @@ let student = XName.get("Student")
 let name = XName.get("Name")
 
 XDocument.parse(source).root!.elements(student)
-    |> each(element => write_line(element.attribute(name)!.value))
+    |> each(element =>
+        write_line(element.attribute(name)!.value)
+    )

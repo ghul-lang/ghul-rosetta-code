@@ -12,15 +12,24 @@ class NOT(input: Component private): Component is
     output: bool => !_input.output
 si
 
-class AND(left: Component private, right: Component private): Component is
+class AND(
+    left: Component private,
+    right: Component private
+): Component is
     output: bool => _left.output /\ _right.output
 si
 
-class OR(left: Component private, right: Component private): Component is
+class OR(
+    left: Component private,
+    right: Component private
+): Component is
     output: bool => _left.output \/ _right.output
 si
 
-class XOR(left: Component init, right: Component init): Component is
+class XOR(
+    left: Component init,
+    right: Component init
+): Component is
     _gate: Component
 
     init(..) is
@@ -65,14 +74,19 @@ class FOUR_BIT_ADDER is
 
     init() is
         left = repeat(0, 4) |> map(_ => PIN(false)) |> collect()
-        right = repeat(0, 4) |> map(_ => PIN(false)) |> collect()
+        right =
+            repeat(0, 4) |> map(_ => PIN(false)) |> collect()
 
         let bits = LIST()
         let carried: Component mut = PIN(false)
 
         for at in 0..4 do
             let bit = 3 - at
-            let stage = FULL_ADDER(left[bit], right[bit], carried)
+            let stage = FULL_ADDER(
+                left[bit],
+                right[bit],
+                carried
+            )
 
             bits.add(stage.sum)
             carried = stage.carry
@@ -93,24 +107,37 @@ class FOUR_BIT_ADDER is
 
     total: int =>
         sum
-        |> reduce(
-            if carry.output then 1 else 0 fi,
-            (running, c) => running * 2 + if c.output then 1 else 0 fi)
+            |> reduce(
+                if carry.output then 1 else 0 fi,
+                (running, c) =>
+                    running * 2 + if c.output then 1 else 0 fi
+            )
 si
 
 text(pins: List[Component]) -> string =>
-    pins |> map(c => if c.output then "1" else "0" fi) |> join("")
+    pins
+        |> map(c => if c.output then "1" else "0" fi)
+        |> join("")
 
 let circuit = FOUR_BIT_ADDER()
 
-for (first, second) in [(9, 5), (7, 1), (15, 15), (8, 8), (3, 12)] do
+for
+    (first, second) in [
+        (9, 5),
+        (7, 1),
+        (15, 15),
+        (8, 8),
+        (3, 12)
+    ]
+do
     circuit.drive(first, second)
 
     let carry = if circuit.carry.output then "1" else "0" fi
 
     write_line(
         "{text(circuit.left)} + {text(circuit.right)}"
-        " = {carry}{text(circuit.sum)}")
+        " = {carry}{text(circuit.sum)}"
+    )
 od
 
 let wrong mut = 0

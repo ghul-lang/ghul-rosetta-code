@@ -5,13 +5,17 @@ jort_sort[T: Ghul.Comparable[T]](values: T[]) -> bool is
 
     sorted.sort()
 
-    0..values.count |> all(index => sorted[index] =~ values[index])
+    0..values.count
+        |> all(index => sorted[index] =~ values[index])
 si
 
 report[T: Ghul.Comparable[T]](values: T[]) =>
-    let shown = values |> map(value => "{value}") |> join(" ") in
-    let answer = if jort_sort(values) then "true" else "false" fi in
-    write_line("[{shown}] was already sorted: {answer}")
+    let
+        shown = values |> map(value => "{value}") |> join(" "),
+        answer =
+            if jort_sort(values) then "true" else "false" fi
+    in
+        write_line("[{shown}] was already sorted: {answer}")
 
 report([1, 2, 3, 4, 5])
 report([1, 3, 2, 4, 5])

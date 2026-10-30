@@ -9,9 +9,11 @@ yellowstone(count: int) -> int{} is
         let before_previous = terms[terms.count - 2]
         let candidate mut = 1
 
-        while used.contains(candidate) \/
-                gcd(candidate, previous) != 1 \/
-                gcd(candidate, before_previous) == 1 do
+        while
+            used.contains(candidate) \/
+            gcd(candidate, previous) != 1 \/
+            gcd(candidate, before_previous) == 1
+        do
             candidate = candidate + 1
         od
 

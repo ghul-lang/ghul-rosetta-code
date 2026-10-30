@@ -7,8 +7,11 @@ for police in [2, 4, 6] do
         let fire = 12 - police - sanitation
 
         if
-            fire >= 1 /\ fire <= 7 /\
-            sanitation != police /\ fire != police /\ fire != sanitation
+            fire >= 1 /\
+            fire <= 7 /\
+            sanitation != police /\
+            fire != police /\
+            fire != sanitation
         then
             write_line("{police,6} {sanitation,10} {fire,4}")
         fi

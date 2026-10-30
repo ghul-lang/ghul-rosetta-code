@@ -16,7 +16,11 @@ for n in from(1) do
 od
 
 for row in 0..(counts.count + 9) / 10 do
-    let cells = counts |> skip(row * 10) |> take(10) |> map(c => "{c,3}")
+    let cells =
+        counts
+            |> skip(row * 10)
+            |> take(10)
+            |> map(c => "{c,3}")
 
     write_line(cells |> join(""))
 od

@@ -37,7 +37,8 @@ simplify(points: List[P], epsilon: double) -> List[P] is
     let left = simplify(points[0::far], epsilon)
     let right = simplify(points[far::last], epsilon)
 
-    return left |> take(left.count - 1) |> cat(right) |> collect()
+    return
+        left |> take(left.count - 1) |> cat(right) |> collect()
 si
 
 let line = [
@@ -57,7 +58,9 @@ image.clear(252ub, 252ub, 250ub)
 
 draw(points: List[P], width: double, size: double) is
     image.stroke(width)
-    image.line(points |> map(p => (x = p.x, y = p.y)) |> collect())
+    image.line(
+        points |> map(p => (x = p.x, y = p.y)) |> collect()
+    )
 
     for p in points do
         image.dot(p.x, p.y, size)

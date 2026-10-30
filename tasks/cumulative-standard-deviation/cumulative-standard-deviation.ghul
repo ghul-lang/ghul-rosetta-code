@@ -2,18 +2,23 @@ use default
 use System.Math.sqrt
 
 let standard_deviation =
-    let count mut = 0, total mut = 0.0D, squares mut = 0.0D in
+    let
+        count mut = 0,
+        total mut = 0.0D,
+        squares mut = 0.0D
+    in
+        sample => (
+            count = count + 1
+            total = total + sample
+            squares = squares + sample * sample
 
-    sample => (
-        count = count + 1
-        total = total + sample
-        squares = squares + sample * sample
+            let mean = total / cast(count)
 
-        let mean = total / cast(count)
+            sqrt(squares / cast(count) - mean * mean)
+        )
 
-        sqrt(squares / cast(count) - mean * mean)
-    )
-
-for sample in [2.0D, 4.0D, 4.0D, 4.0D, 5.0D, 5.0D, 7.0D, 9.0D] do
+for
+    sample in [2.0D, 4.0D, 4.0D, 4.0D, 5.0D, 5.0D, 7.0D, 9.0D]
+do
     write_line("after {sample}: {standard_deviation(sample)}")
 od

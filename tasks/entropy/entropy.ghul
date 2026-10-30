@@ -2,12 +2,15 @@ use default
 use System.Math
 
 entropy(text: string) -> double =>
-    let groups = group_by(text, c => c).values in
-    let total = double(text.length) in
-    groups
-        |> map(group => double(group.count) / total)
-        |> reduce(0.0D, (bits, probability) =>
-            bits - probability * Math.log2(probability))
+    let
+        groups = group_by(text, c => c).values,
+        total = double(text.length)
+    in
+        groups
+            |> map(group => double(group.count) / total)
+            |> reduce(0.0D, (bits, probability) =>
+                bits - probability * Math.log2(probability)
+            )
 
 let text = "1223334444"
 

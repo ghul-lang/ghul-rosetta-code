@@ -51,26 +51,31 @@ si
 si
 
 show(p: Point) -> string =>
-    if let (x, y): Point.AT = p then "({x:F6}, {y:F6})" else "zero" fi
+    if let (x, y): Point.AT = p then
+        "({x:F6}, {y:F6})"
+    else
+        "zero"
+    fi
 
 aligned(p: Point, q: Point, r: Point) -> bool =>
-    if
-        let (px, py): Point.AT = p,
-            (qx, qy): Point.AT = q,
-            (rx, ry): Point.AT = r
+    if let
+        (px, py): Point.AT = p,
+        (qx, qy): Point.AT = q,
+        (rx, ry): Point.AT = r
     then
         System.Math.abs(
-            (qx - px) * (ry - py) - (rx - px) * (qy - py)) < 1.0e-9
+            (qx - px) * (ry - py) - (rx - px) * (qy - py)
+        ) < 1.0e-9
     else
         false
     fi
 
 draw(p: Point, q: Point, r: Point, s: Point) is
-    if
-        let (px, py): Point.AT = p,
-            (qx, qy): Point.AT = q,
-            (rx, ry): Point.AT = r,
-            (sx, sy): Point.AT = s
+    if let
+        (px, py): Point.AT = p,
+        (qx, qy): Point.AT = q,
+        (rx, ry): Point.AT = r,
+        (sx, sy): Point.AT = s
     then
         let image = IMAGE(700, 520)
         let least = -cbrt(b)
@@ -81,24 +86,34 @@ draw(p: Point, q: Point, r: Point, s: Point) is
 
         axes.x_title = "x"
         axes.y_title = "y"
-        axes.fit(least - 0.4D, -reach - 0.6D, most, reach + 0.6D)
+        axes.fit(
+            least - 0.4D,
+            -reach - 0.6D,
+            most,
+            reach + 0.6D
+        )
 
         image.colour(150ub, 150ub, 150ub)
         image.stroke(1.0D)
         axes.draw()
 
-        let curve = 0..401
-            |> map(
-                step =>
-                    least + (most - least) * double(step) / 400.0D)
-            |> map(x => (x = x, y = sqrt(x * x * x + b)))
-            |> collect()
+        let curve =
+            0..401
+                |> map(step =>
+                    least +
+                    (most - least) * double(step) / 400.0D
+                )
+                |> map(x => (x = x, y = sqrt(x * x * x + b)))
+                |> collect()
 
         image.colour(30ub, 70ub, 160ub)
         image.stroke(1.6D)
         image.line(curve)
         image.line(
-            curve |> map(at => (x = at.x, y = -at.y)) |> collect())
+            curve
+                |> map(at => (x = at.x, y = -at.y))
+                |> collect()
+        )
 
         let slope = (qy - py) / (qx - px)
         let chord = x => (x = x, y = py + slope * (x - px))
@@ -110,16 +125,22 @@ draw(p: Point, q: Point, r: Point, s: Point) is
 
         image.colour(40ub, 40ub, 40ub)
 
-        for marked in [
-            (x = px, y = py, name = "P"),
-            (x = qx, y = qy, name = "Q"),
-            (x = rx, y = ry, name = "R"),
-            (x = sx, y = sy, name = "S = P + Q")]
+        for
+            marked in [
+                (x = px, y = py, name = "P"),
+                (x = qx, y = qy, name = "Q"),
+                (x = rx, y = ry, name = "R"),
+                (x = sx, y = sy, name = "S = P + Q")
+            ]
         do
             image.dot(marked.x, marked.y, 4.0D)
             image.text(
-                marked.x + 0.14D, marked.y - 0.22D, 14.0D,
-                marked.name, Anchor.LEFT)
+                marked.x + 0.14D,
+                marked.y - 0.22D,
+                14.0D,
+                marked.name,
+                Anchor.LEFT
+            )
         od
 
         image.write("elliptic-curve.png")
@@ -141,7 +162,8 @@ write_line("P + Q     {show(s)}")
 write_line("-(P + Q)  {show(r)}")
 write_line("")
 write_line(
-    "-(P + Q) is where the line through P and Q meets the curve again")
+    "-(P + Q) is where the line through P and Q meets the curve again"
+)
 write_line("  aligned with P and Q: {aligned(p, q, r)}")
 write_line("")
 write_line("P + P     {show(p + p)}")

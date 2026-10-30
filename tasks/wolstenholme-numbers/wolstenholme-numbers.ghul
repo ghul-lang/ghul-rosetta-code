@@ -31,7 +31,8 @@ od
 write_line("")
 write_line("the first four prime Wolstenholme numbers:")
 
-let prime_terms = wolstenholme(20) |> filter(is_prime) |> take(4)
+let prime_terms =
+    wolstenholme(20) |> filter(is_prime) |> take(4)
 
 for term in prime_terms do
     write_line("  {term}")

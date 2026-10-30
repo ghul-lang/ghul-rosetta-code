@@ -14,10 +14,14 @@ pentagon() -> IMAGE => (
     image.line(
         (0::5)
             |> map(i =>
-                let a = pi * (0.5D + 0.4D * double(i)) in
-                let x = 100.0D + 70.0D * cos(a) in
-                (x = x, y = 105.0D - 70.0D * sin(a)))
-            |> collect())
+                let
+                    a = pi * (0.5D + 0.4D * double(i)),
+                    x = 100.0D + 70.0D * cos(a)
+                in
+                    (x = x, y = 105.0D - 70.0D * sin(a))
+            )
+            |> collect()
+    )
 
     image
 )
@@ -41,7 +45,8 @@ for y in 0..size do
                 let rho = dx * cos(theta) + dy * sin(theta)
                 let r = int(round(rho + diagonal))
 
-                votes[r * angles + t] = votes[r * angles + t] + 1
+                votes[r * angles + t] =
+                    votes[r * angles + t] + 1
             od
         fi
     od
@@ -54,12 +59,16 @@ let remaining = LIST(votes)
 
 for _ in 0..5 do
     let best =
-        0..remaining.count |> reduce(0, (b, i) =>
-            if remaining[i] > remaining[b] then i else b fi)
+        0..remaining.count
+            |> reduce(0, (b, i) =>
+                if remaining[i] > remaining[b] then i else b fi
+            )
 
     let r = best / angles, t = best % angles
 
-    peaks.add((t / 2, r - int(round(diagonal)), remaining[best]))
+    peaks.add(
+        (t / 2, r - int(round(diagonal)), remaining[best])
+    )
 
     for dr in -12::12 do
         for dt in -12::12 do
@@ -76,7 +85,9 @@ write_line("the five strongest lines, as angle in degrees")
 write_line("and distance from the centre:")
 
 for p in peaks |> sort((a, b) => a.theta - b.theta) do
-    write_line("  theta {p.theta,3}, rho {p.rho,4} ({p.votes} votes)")
+    write_line(
+        "  theta {p.theta,3}, rho {p.rho,4} ({p.votes} votes)"
+    )
 od
 
 let space = IMAGE(angles, distances)
@@ -86,7 +97,13 @@ for r in 0..distances do
         let level = double(votes[r * angles + t]) / double(most)
         let shade = ubyte(255.0D * sqrt(level))
 
-        space.set_pixel(t, distances - 1 - r, shade, shade, shade)
+        space.set_pixel(
+            t,
+            distances - 1 - r,
+            shade,
+            shade,
+            shade
+        )
     od
 od
 

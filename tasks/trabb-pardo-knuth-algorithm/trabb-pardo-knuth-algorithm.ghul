@@ -2,14 +2,15 @@ use default
 use IO.Std.read_line
 use System.Math
 
-f(x: double) -> double => Math.sqrt(Math.abs(x)) + 5.0 * x * x * x
+f(x: double) -> double =>
+    Math.sqrt(Math.abs(x)) + 5.0 * x * x * x
 
 write_line("enter 11 numbers:")
 
 let numbers =
     (0..11)
-    |> map(_ => double.parse(read_line()!))
-    |> collect_mutable()
+        |> map(_ => double.parse(read_line()!))
+        |> collect_mutable()
 
 numbers.reverse()
 

@@ -36,8 +36,10 @@ bar_chart(values: List[double], size: double) is
     let heading = pen.heading
 
     let tallest =
-        values |> reduce(0.0, (most, value) =>
-            if value > most then value else most fi)
+        values
+            |> reduce(0.0, (most, value) =>
+                if value > most then value else most fi
+            )
 
     let width = size / double(values.count)
 

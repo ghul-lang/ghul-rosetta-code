@@ -24,24 +24,29 @@ let assembly = System.Reflection.Assembly.get_entry_assembly()!
 let visible = BindingFlags.STATIC | BindingFlags.PUBLIC
 let flags = visible | BindingFlags.NON_PUBLIC
 
-let integers = assembly.get_types()
-    |> flat_map(t => pipe(t.get_fields(flags)))
-    |> filter(f => f.field_type == typeof int)
-    |> memo()
+let integers =
+    assembly.get_types()
+        |> flat_map(t => pipe(t.get_fields(flags)))
+        |> filter(f => f.field_type == typeof int)
+        |> memo()
 
-let has_bloop = integers |> any(f => f.name.trim_start(['$']) =~ "bloop")
+let has_bloop =
+    integers |> any(f => f.name.trim_start(['$']) =~ "bloop")
 let abs = (typeof System.Math).get_method("Abs", [typeof int])
 
 write_line("bloop exists: {has_bloop}")
 write_line("abs exists: {abs?}")
 
 if has_bloop /\ abs? then
-    write_line("abs(bloop) = {abs.invoke(null, [cast object(bloop)])}")
+    write_line(
+        "abs(bloop) = {abs.invoke(null, [cast object(bloop)])}"
+    )
 fi
 
 let values = integers |> map(f => cast int(f.get_value(null)!))
 
-let named = integers |> map(f => f.name.trim_start(['$'])) |> sort()
+let named =
+    integers |> map(f => f.name.trim_start(['$'])) |> sort()
 
 write_line("integer globals: {named |> join(", ")}")
 write_line("their sum: {values |> sum()}")

@@ -1,9 +1,8 @@
 use default
 
-let edges =
-    [
-        [1], [2], [0], [1, 2, 4], [3, 5], [2, 6], [5], [4, 6, 7]
-    ]
+let edges = [
+    [1], [2], [0], [1, 2, 4], [3, 5], [2, 6], [5], [4, 6, 7]
+]
 
 let index = repeat(-1, edges.count) |> collect_mutable()
 let low = repeat(0, edges.count) |> collect_mutable()
@@ -58,5 +57,4 @@ for vertex in 0..edges.count do
 od
 
 components
-    |> each(component =>
-        write_line("{component |> join(" ")}"))
+    |> each(component => write_line("{component |> join(" ")}"))

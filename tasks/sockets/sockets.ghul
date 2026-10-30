@@ -23,7 +23,9 @@ let listener =
         write_line("listening on port {wanted}")
         privileged
     else
-        write_line("port {wanted} needs privileges, taking any free port")
+        write_line(
+            "port {wanted} needs privileges, taking any free port"
+        )
 
         let any = listen_on(0)
 
@@ -39,18 +41,15 @@ let bound =
 
 let port = bound.port
 
-let receiving =
-    Thread(
-        () is
-            let server = listener.accept_tcp_client()
+let receiving = Thread(() is
+    let server = listener.accept_tcp_client()
 
-            let reading = IO.StreamReader(server.get_stream())
+    let reading = IO.StreamReader(server.get_stream())
 
-            write_line("server read: {reading.read_line()}")
+    write_line("server read: {reading.read_line()}")
 
-            server.dispose()
-        si
-    )
+    server.dispose()
+si)
 
 receiving.start()
 

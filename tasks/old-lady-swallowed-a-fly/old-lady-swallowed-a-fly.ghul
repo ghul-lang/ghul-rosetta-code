@@ -1,29 +1,49 @@
 use default
 
-let wriggling = "spider that wriggled and jiggled and tickled inside her"
+let wriggling =
+    "spider that wriggled and jiggled and tickled inside her"
 
 let verses = [
     (animal = "fly", caught = "fly", comment = ""),
-    (animal = "spider", caught = wriggling,
-     comment = "It wriggled and jiggled and tickled inside her."),
-    (animal = "bird", caught = "bird",
-     comment = "How absurd, to swallow a bird."),
-    (animal = "cat", caught = "cat",
-     comment = "Imagine that, to swallow a cat."),
-    (animal = "dog", caught = "dog",
-     comment = "What a hog, to swallow a dog."),
-    (animal = "goat", caught = "goat",
-     comment = "She just opened her throat and swallowed a goat."),
-    (animal = "cow", caught = "cow",
-     comment = "I don't know how she swallowed a cow."),
-    (animal = "horse", caught = "horse",
-     comment = "She's dead, of course.")
+    (
+        animal = "spider", caught = wriggling,
+        comment =
+            "It wriggled and jiggled and tickled inside her."
+    ),
+    (
+        animal = "bird", caught = "bird",
+        comment = "How absurd, to swallow a bird."
+    ),
+    (
+        animal = "cat", caught = "cat",
+        comment = "Imagine that, to swallow a cat."
+    ),
+    (
+        animal = "dog", caught = "dog",
+        comment = "What a hog, to swallow a dog."
+    ),
+    (
+        animal = "goat", caught = "goat",
+        comment =
+            "She just opened her throat and swallowed a goat."
+    ),
+    (
+        animal = "cow", caught = "cow",
+        comment = "I don't know how she swallowed a cow."
+    ),
+    (
+        animal = "horse", caught = "horse",
+        comment = "She's dead, of course."
+    )
 ]
 
-let ending = "I don't know why she swallowed the fly. Perhaps she'll die."
+let ending =
+    "I don't know why she swallowed the fly. Perhaps she'll die."
 
 for (n, verse) in verses |> index() do
-    write_line("There was an old lady who swallowed a {verse.animal}.")
+    write_line(
+        "There was an old lady who swallowed a {verse.animal}."
+    )
 
     if verse.comment.length > 0 then
         write_line(verse.comment)
@@ -35,7 +55,8 @@ for (n, verse) in verses |> index() do
             let caught = verses[k - 1].caught
 
             write_line(
-                "She swallowed the {swallowed} to catch the {caught}.")
+                "She swallowed the {swallowed} to catch the {caught}."
+            )
         od
 
         write_line(ending)

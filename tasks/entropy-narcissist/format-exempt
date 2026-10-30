@@ -1,0 +1,3 @@
+# The program reads its own source and measures the entropy of that text, so
+# laying the source out differently would change the number it prints.
+entropy-narcissist.ghul

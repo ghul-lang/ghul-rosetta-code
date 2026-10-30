@@ -15,7 +15,8 @@ to_octets(value: long) -> List[ubyte] => (
 from_octets(octets: List[ubyte]) -> long =>
     octets
         |> reduce(0L, (value, octet) =>
-            (value << 7) | cast(cast(octet) & 0x7F))
+            (value << 7) | cast(cast(octet) & 0x7F)
+        )
 
 as_hex(octet: ubyte) -> string => "{octet:X2}"
 
@@ -24,6 +25,8 @@ as_hex(octet: ubyte) -> string => "{octet:X2}"
         let octets = to_octets(value)
         let shown = octets |> map(as_hex) |> join(" ")
 
-        write_line("{value,8} = 0x{value:X6} -> {shown}"
-            " -> {from_octets(octets)}")
+        write_line(
+            "{value,8} = 0x{value:X6} -> {shown}"
+            " -> {from_octets(octets)}"
+        )
     ))

@@ -22,7 +22,13 @@ for y in 0..height do
     for x in 0..width do
         let stripe = stripes[x / band % stripes.count]
 
-        image.set_pixel(x, y, stripe.red, stripe.green, stripe.blue)
+        image.set_pixel(
+            x,
+            y,
+            stripe.red,
+            stripe.green,
+            stripe.blue
+        )
     od
 od
 

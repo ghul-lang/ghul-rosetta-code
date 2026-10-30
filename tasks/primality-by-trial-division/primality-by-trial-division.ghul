@@ -1,7 +1,8 @@
 use default
 
 is_prime(n: int) -> bool =>
-    n > 1 /\ (n % 2 != 0 \/ n == 2) /\
-        3::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
+    n > 1 /\
+    (n % 2 != 0 \/ n == 2) /\
+    3::int(Ghul.Math.sqrt(double(n))) |> all(d => n % d != 0)
 
 write_line(1::50 |> filter(is_prime) |> join())

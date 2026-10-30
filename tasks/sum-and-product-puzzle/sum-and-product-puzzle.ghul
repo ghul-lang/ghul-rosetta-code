@@ -5,8 +5,11 @@ use Pair = (x: int, y: int)
 sum(pair: Pair) -> int => pair.x + pair.y
 product(pair: Pair) -> int => pair.x * pair.y
 
-let candidates =
-    [(x = x, y = y) for x in 2::100 for y in x + 1::100 - x]
+let candidates = [
+    (x = x, y = y)
+    for x in 2::100
+    for y in x + 1::100 - x
+]
 
 with_sum(pairs: List[Pair], value: int) -> List[Pair] =>
     pairs |> filter(p => sum(p) == value) |> collect()
@@ -18,18 +21,30 @@ let s_knows_p_does_not =
     candidates
         |> filter(pair =>
             with_sum(candidates, sum(pair))
-                |> all(q => with_product(candidates, product(q)).count > 1))
+                |> all(q =>
+                    with_product(
+                        candidates,
+                        product(q)
+                    ).count > 1
+                )
+        )
         |> collect()
 
 let p_now_knows =
     s_knows_p_does_not
         |> filter(pair =>
-            with_product(s_knows_p_does_not, product(pair)).count == 1)
+            with_product(
+                s_knows_p_does_not,
+                product(pair)
+            ).count == 1
+        )
         |> collect()
 
 let s_now_knows =
     p_now_knows
-        |> filter(pair => with_sum(p_now_knows, sum(pair)).count == 1)
+        |> filter(pair =>
+            with_sum(p_now_knows, sum(pair)).count == 1
+        )
 
 for (x, y) in s_now_knows do
     write_line("X = {x}, Y = {y}")

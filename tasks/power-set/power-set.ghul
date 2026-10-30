@@ -3,7 +3,6 @@ use default
 power_set[T](values: List[T]) -> LIST[LIST[T]] is
     if values.count == 0 then
         let empty = _()
-
         empty.add(LIST())
 
         return empty
@@ -11,10 +10,8 @@ power_set[T](values: List[T]) -> LIST[LIST[T]] is
 
     let first = values[0]
     let result = _()
-
     for subset in power_set(values |> skip(1) |> collect()) do
         let with_first = _()
-
         with_first.add(first)
         with_first.add_range(subset)
 

@@ -18,14 +18,18 @@ sieve(even: bool, limit: int) -> List[int] is
 
     let position mut = 1
 
-    while position < survivors.count /\
-        survivors[position] <= survivors.count do
+    while
+        position < survivors.count /\
+        survivors[position] <= survivors.count
+    do
         let spacing = survivors[position]
 
         survivors =
             survivors
                 |> index()
-                |> filter(entry => (entry.index + 1) % spacing != 0)
+                |> filter(entry =>
+                    (entry.index + 1) % spacing != 0
+                )
                 |> map(entry => entry.value)
                 |> collect()
 
@@ -45,8 +49,10 @@ as_number(text: string) -> int? is
     let negative = text.length > 0 /\ text[0] == '-'
     let digits = if negative then text[1..<0] else text fi
 
-    if digits.length == 0 \/
-        !(digits |> all(digit => digit >= '0' /\ digit <= '9')) then
+    if
+        digits.length == 0 \/
+        !(digits |> all(digit => digit >= '0' /\ digit <= '9'))
+    then
         return null
     fi
 
@@ -65,7 +71,8 @@ as_kind(text: string) -> bool? =>
 parse(arguments: List[string]) -> Parsed is
     if arguments.count == 0 then
         return Parsed.REJECTED(
-            "no arguments: expected j [k] [lucky|evenLucky]")
+            "no arguments: expected j [k] [lucky|evenLucky]"
+        )
     fi
 
     if arguments.count > 3 then
@@ -82,7 +89,8 @@ parse(arguments: List[string]) -> Parsed is
             counts = arguments[0..arguments.count - 1]
         else
             return Parsed.REJECTED(
-                "\"{trailing}\" is not lucky or evenLucky")
+                "\"{trailing}\" is not lucky or evenLucky"
+            )
         fi
     fi
 
@@ -103,7 +111,9 @@ parse(arguments: List[string]) -> Parsed is
     let first = as_number(counts[0])!
 
     if first < 1 then
-        return Parsed.REJECTED("the first index must be at least one")
+        return Parsed.REJECTED(
+            "the first index must be at least one"
+        )
     fi
 
     if counts.count == 1 then
@@ -113,7 +123,9 @@ parse(arguments: List[string]) -> Parsed is
     let second = as_number(counts[1])!
 
     if second < 0 then
-        return Parsed.UNDERSTOOD(Request.BY_VALUE(first, -second, even))
+        return Parsed.UNDERSTOOD(
+            Request.BY_VALUE(first, -second, even)
+        )
     fi
 
     Parsed.UNDERSTOOD(Request.BY_INDEX(first, second, even))
@@ -129,7 +141,9 @@ evaluate(request: Request) -> int{} =>
             |> take(indexed.last - indexed.first + 1)
     when valued: Request.BY_VALUE then
         series(valued.even)
-            |> filter(value => value >= valued.low /\ value <= valued.high)
+            |> filter(value =>
+                value >= valued.low /\ value <= valued.high
+            )
     esac
 
 run(arguments: List[string]) is
@@ -138,14 +152,19 @@ run(arguments: List[string]) is
     let outcome = parse(arguments)
 
     if outcome? then
-        write_line("  {outcome.request |> evaluate() |> join(" ")}")
+        write_line(
+            "  {outcome.request |> evaluate() |> join(" ")}"
+        )
     else
         write_line("  error: {outcome.message}")
     fi
 si
 
-[["1", "20"], ["1", "20", "evenLucky"],
- ["6000", "-6100"], ["6000", "-6100", "EVENLUCKY"],
- ["10000"], ["10000", "evenlucky"],
- LIST(), ["1", "2", "3", "4"], ["fish"], ["1", "10", "unlucky"]]
+[
+    ["1", "20"], ["1", "20", "evenLucky"],
+    ["6000", "-6100"], ["6000", "-6100", "EVENLUCKY"],
+    ["10000"], ["10000", "evenlucky"],
+    LIST(), ["1", "2", "3", "4"], ["fish"],
+    ["1", "10", "unlucky"]
+]
     |> each(run)

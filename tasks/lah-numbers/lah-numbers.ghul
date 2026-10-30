@@ -4,27 +4,33 @@ lah(n: int, k: int) -> bigint =>
     if k == 1 then factorial(bigint(n))
     elif k == n then 1n
     elif k > n \/ k < 1 \/ n < 1 then 0n
-    else factorial(bigint(n)) * factorial(bigint(n - 1)) /
-         (factorial(bigint(k)) * factorial(bigint(k - 1))) /
-         factorial(bigint(n - k))
+    else
+        factorial(bigint(n)) *
+        factorial(bigint(n - 1)) /
+        (factorial(bigint(k)) * factorial(bigint(k - 1))) /
+        factorial(bigint(n - k))
     fi
 
 write_line("unsigned Lah numbers, L(n, k):")
 write_line("")
 
-write_line(["{"n/k",3}"] ++ (1::12 |> map(k => "{k,12}"))
-           |> join(""))
+write_line(
+    ["{"n/k",3}"] ++ (1::12 |> map(k => "{k,12}")) |> join("")
+)
 
 for n in 1::12 do
-    write_line((["{n,3}"] ++
-                (1::n |> map(k => "{lah(n, k),12}")))
-               |> join(""))
+    write_line(
+        (["{n,3}"] ++ (1::n |> map(k => "{lah(n, k),12}")))
+            |> join("")
+    )
 od
 
 let largest =
-    1::100 |> map(lah(100, *))
-           |> reduce(0n,
-                     (best, v) => if v > best then v else best fi)
+    1::100
+        |> map(lah(100, *))
+        |> reduce(0n, (best, v) =>
+            if v > best then v else best fi
+        )
 
 write_line("")
 write_line("the largest L(100, k):")

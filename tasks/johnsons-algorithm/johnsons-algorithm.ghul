@@ -24,15 +24,13 @@ weighted(size: int, edges: Collections.List[Edge]) -> Matrix is
     graph
 si
 
-let graph =
-    weighted(4,
-        [
-            (from = 0, to = 1, weight = -5.0),
-            (from = 0, to = 2, weight = 2.0),
-            (from = 0, to = 3, weight = 3.0),
-            (from = 1, to = 2, weight = 4.0),
-            (from = 2, to = 3, weight = 1.0)
-        ])
+let graph = weighted(4, [
+    (from = 0, to = 1, weight = -5.0),
+    (from = 0, to = 2, weight = 2.0),
+    (from = 0, to = 3, weight = 3.0),
+    (from = 1, to = 2, weight = 4.0),
+    (from = 2, to = 3, weight = 1.0)
+])
 
 potentials(graph: Matrix) -> Collections.List[double]? is
     let size = graph.count
@@ -75,22 +73,27 @@ shortest_from(
     source: int
 ) -> Collections.List[double?] is
     let size = graph.count
-    let distance = repeat(cast double?(null), size) |> collect_mutable()
+    let distance =
+        repeat(cast double?(null), size) |> collect_mutable()
 
     distance[source] = 0.0
 
     let settled = repeat(false, size) |> collect_mutable()
 
-    while let u = 0..size
-        |> filter(c => !settled[c] /\ distance[c]?)
-        |> min_by(c => distance[c]!)
+    while let
+        u = 0..size
+            |> filter(c => !settled[c] /\ distance[c]?)
+            |> min_by(c => distance[c]!)
     do
         settled[u] = true
 
         for v in 0..size do
             if let weight = graph[u][v] then
                 let through =
-                    distance[u]! + weight + potential[u] - potential[v]
+                    distance[u]! +
+                    weight +
+                    potential[u] -
+                    potential[v]
 
                 if !distance[v]? \/ through < distance[v]! then
                     distance[v] = through
@@ -103,7 +106,9 @@ shortest_from(
 
     for v in 0..size do
         if let reweighted = distance[v] then
-            result.add(reweighted - potential[source] + potential[v])
+            result.add(
+                reweighted - potential[source] + potential[v]
+            )
         else
             result.add(null)
         fi
@@ -116,13 +121,20 @@ if let potential = potentials(graph) then
     write_line("All pairs shortest paths:")
     write_line(
         "The element (i, j) is the shortest path between vertex i and "
-        "vertex j.")
+        "vertex j."
+    )
 
     for source in 0..graph.count do
         let distances =
             shortest_from(graph, potential, source)
-            |> map(d => if let value = d then "{value}" else "INF" fi)
-            |> join(" ")
+                |> map(d =>
+                    if let value = d then
+                        "{value}"
+                    else
+                        "INF"
+                    fi
+                )
+                |> join(" ")
 
         write_line("[{distances} ]")
     od

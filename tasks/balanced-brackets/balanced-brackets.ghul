@@ -28,7 +28,8 @@ si
 
 for pairs in 0::3 do
     for brackets in arrangements(pairs, pairs) do
-        let verdict = if balanced(brackets) then "OK" else "NOT OK" fi
+        let verdict =
+            if balanced(brackets) then "OK" else "NOT OK" fi
         write_line("{brackets,6}  {verdict}")
     od
 od

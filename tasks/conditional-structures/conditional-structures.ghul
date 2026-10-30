@@ -6,7 +6,7 @@ enum Suit is
     HEARTS,
     DIAMONDS,
     CLUBS,
-    SPADES,
+    SPADES
 si
 
 union Shape is
@@ -32,12 +32,15 @@ colour(suit: Suit) -> string =>
 
 area(shape: Shape) -> int =>
     case shape
-    when circle: Shape.CIRCLE then circle.radius * circle.radius * 3
+    when circle: Shape.CIRCLE then
+        circle.radius * circle.radius * 3
     when square: Shape.SQUARE then square.side * square.side
     esac
 
 size(shape: Shape) -> string =>
-    if let circle: Shape.CIRCLE = shape /\ circle.radius > 10 then
+    if let
+        circle: Shape.CIRCLE = shape /\ circle.radius > 10
+    then
         "a big circle"
     else
         "something else"

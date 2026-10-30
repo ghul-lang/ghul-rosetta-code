@@ -16,20 +16,24 @@ for n in [-2, 0, 3, 7] do
     write_line("{n} is {classify(n)}")
 od
 
-let first_over_ten = for n in [3, 8, 14, 21] do
-    if n > 10 then
-        break n
-    fi
-od
+let first_over_ten =
+    for n in [3, 8, 14, 21] do
+        if n > 10 then
+            break n
+        fi
+    od
 
 write_line("first over ten: {first_over_ten}")
-let over_a_hundred = for n in [3, 8] do
-    if n > 100 then
-        break n
-    fi
-od
+let over_a_hundred =
+    for n in [3, 8] do
+        if n > 100 then
+            break n
+        fi
+    od
 
-write_line("first over a hundred: {over_a_hundred?.to_string() ?? "none"}")
+write_line(
+    "first over a hundred: {over_a_hundred?.to_string() ?? "none"}"
+)
 
 outer: for row in 0..3 do
     for column in 0..3 do

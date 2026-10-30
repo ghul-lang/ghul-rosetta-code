@@ -4,7 +4,8 @@ sorted_string(s: string) -> string => (
     let chars = s |> collect_mutable()
 
     chars.sort((x, y) =>
-        if x < y then -1 elif x == y then 0 else 1 fi)
+        if x < y then -1 elif x == y then 0 else 1 fi
+    )
     chars |> map(c => "{c}") |> join("")
 )
 
@@ -24,8 +25,11 @@ fangs(n: long) -> (long, long){} is
         if n % a == 0L then
             let b = n / a
 
-            if b < low * 10L /\ (a % 10L != 0L \/ b % 10L != 0L) /\
-                    sorted_string("{a}{b}") =~ sorted_string("{n}") then
+            if
+                b < low * 10L /\
+                (a % 10L != 0L \/ b % 10L != 0L) /\
+                sorted_string("{a}{b}") =~ sorted_string("{n}")
+            then
                 yield (a, b)
             fi
         fi
@@ -39,16 +43,21 @@ fang_text(n: long) -> string =>
     if pairs.count == 0 then
         "{n}: not a vampire number"
     else
-        let texts = pairs
-            |> map((a, b) => "{a} x {b}")
+        let texts = pairs |> map((a, b) => "{a} x {b}")
         "{n}: {texts |> join(", ")}"
     fi
 
 from(1000L)
-    |> filter(n => "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true))
+    |> filter(n =>
+        "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true)
+    )
     |> take(25)
     |> each(n => write_line(fang_text(n)))
 
-for candidate in [16758243290880L, 24959017348650L, 14593825548650L] do
+for
+    candidate in [
+        16758243290880L, 24959017348650L, 14593825548650L
+    ]
+do
     write_line(fang_text(candidate))
 od

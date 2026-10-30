@@ -20,4 +20,6 @@ account.deposit(30)
 account.deposit(12)
 
 write_line("{account}")
-write_line("balance read through the property: {account.balance}")
+write_line(
+    "balance read through the property: {account.balance}"
+)

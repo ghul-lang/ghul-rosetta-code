@@ -5,8 +5,7 @@ let guard = 12
 
 power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
 
-factorial(n: int) -> bigint =>
-    2::n |> map(bigint) |> product()
+factorial(n: int) -> bigint => 2::n |> map(bigint) |> product()
 
 let scale = power_of_ten(digits + guard)
 
@@ -20,46 +19,74 @@ si
 
 reciprocal_cubes(terms: int) -> bigint =>
     1::terms
-    |> map(k => scale / (bigint(k) * bigint(k) * bigint(k)))
-    |> sum()
+        |> map(k => scale / (bigint(k) * bigint(k) * bigint(k)))
+        |> sum()
 
 markov(terms: int) -> bigint =>
-    5n * (1::terms
-    |> map(k =>
-        let sign = if k % 2 == 1 then 1n else -1n fi in
-        sign * (factorial(k) * factorial(k) * scale /
-            (factorial(2 * k) * (bigint(k) * bigint(k) * bigint(k))))
-    ) |> sum()) / 2n
+    5n *
+    (
+        1::terms
+            |> map(k =>
+                let sign = if k % 2 == 1 then 1n else -1n fi in
+                sign *
+                (
+                    factorial(k) *
+                    factorial(k) *
+                    scale /
+                    (
+                        factorial(2 * k) *
+                        (bigint(k) * bigint(k) * bigint(k))
+                    )
+                )
+            )
+            |> sum()
+    ) /
+    2n
 
 wedeniwski(terms: int) -> bigint =>
-    (0::terms
-    |> map(k => (
-        let
-            n = bigint(k),
-            sign = if k % 2 == 0 then 1n else -1n fi
+    (
+        0::terms
+            |> map(k => (
+                let n = bigint(k),
+                    sign = if k % 2 == 0 then 1n else -1n fi
 
-        let polynomial =
-            126392n * n * n * n * n * n +
-            412708n * n * n * n * n +
-            531578n * n * n * n +
-            336367n * n * n +
-            104000n * n +
-            12463n
+                let polynomial =
+                    126392n * n * n * n * n * n +
+                    412708n * n * n * n * n +
+                    531578n * n * n * n +
+                    336367n * n * n +
+                    104000n * n +
+                    12463n
 
-        let numerator =
-            factorial(2 * k + 1) * factorial(2 * k + 1) *
-            factorial(2 * k + 1) * factorial(2 * k) *
-            factorial(2 * k) * factorial(2 * k) *
-            factorial(k) * factorial(k) * factorial(k) *
-            polynomial
+                let numerator =
+                    factorial(2 * k + 1) *
+                    factorial(2 * k + 1) *
+                    factorial(2 * k + 1) *
+                    factorial(2 * k) *
+                    factorial(2 * k) *
+                    factorial(2 * k) *
+                    factorial(k) *
+                    factorial(k) *
+                    factorial(k) *
+                    polynomial
 
-        let denominator =
-            factorial(3 * k + 2) * factorial(4 * k + 3) *
-            factorial(4 * k + 3) * factorial(4 * k + 3)
+                let denominator =
+                    factorial(3 * k + 2) *
+                    factorial(4 * k + 3) *
+                    factorial(4 * k + 3) *
+                    factorial(4 * k + 3)
 
-        sign * (numerator * scale / denominator)
-    )) |> sum()) / 24n
+                sign * (numerator * scale / denominator)
+            ))
+            |> sum()
+    ) / 24n
 
-show("1000 terms of the sum of reciprocal cubes:", reciprocal_cubes(1000))
+show(
+    "1000 terms of the sum of reciprocal cubes:",
+    reciprocal_cubes(1000)
+)
 show("158 terms of the Markov representation:", markov(158))
-show("21 terms of the Wedeniwski representation:", wedeniwski(21))
+show(
+    "21 terms of the Wedeniwski representation:",
+    wedeniwski(21)
+)

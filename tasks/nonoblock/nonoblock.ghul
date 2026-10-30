@@ -13,7 +13,12 @@ placements(cells: int, blocks: List[int]) -> List[int]{} is
         for start in 0::cells - first - needed do
             let offset = start + first + 1
 
-            for tail in placements(int.max(cells - offset, 0), rest) do
+            for
+                tail in placements(
+                    int.max(cells - offset, 0),
+                    rest
+                )
+            do
                 let shifted = tail |> map(* + offset)
 
                 yield [start] ++ shifted |> collect()
@@ -22,7 +27,11 @@ placements(cells: int, blocks: List[int]) -> List[int]{} is
     esac
 si
 
-draw(cells: int, blocks: List[int], starts: List[int]) -> string =>
+draw(
+    cells: int,
+    blocks: List[int],
+    starts: List[int]
+) -> string =>
     let filled =
         starts
             |> index()
@@ -30,18 +39,24 @@ draw(cells: int, blocks: List[int], starts: List[int]) -> string =>
             |> collect_set()
     in
     let row =
-        0..cells |> map(c => if filled.contains(c) then "#" else "_" fi)
+        0..cells
+            |> map(c =>
+                if filled.contains(c) then "#" else "_" fi
+            )
     in
     "|{row |> join("|")}|"
 
 let cases: List[(cells: int, blocks: List[int])] = [
-    (5, [2, 1]), (5, []), (10, [8]), (15, [2, 3, 2, 3]), (5, [2, 3])
+    (5, [2, 1]), (5, []), (10, [8]), (15, [2, 3, 2, 3]),
+    (5, [2, 3])
 ]
 
 for (cells, blocks) in cases do
     let found = placements(cells, blocks) |> collect()
 
-    write_line("{cells} cells and {blocks} blocks: {found.count} positions")
+    write_line(
+        "{cells} cells and {blocks} blocks: {found.count} positions"
+    )
 
     for starts in found do
         write_line("    {draw(cells, blocks, starts)}")

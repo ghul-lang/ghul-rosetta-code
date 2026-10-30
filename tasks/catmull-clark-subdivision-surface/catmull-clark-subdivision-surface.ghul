@@ -4,27 +4,47 @@ use Point = (x: double, y: double, z: double)
 use Face = List[int]
 use Mesh = (points: List[Point], faces: List[Face])
 
-+(a: Point, b: Point) -> Point =>
-    (x = a.x + b.x, y = a.y + b.y, z = a.z + b.z)
++(a: Point, b: Point) -> Point => (
+    x = a.x + b.x,
+    y = a.y + b.y,
+    z = a.z + b.z
+)
 
-*(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
+*(p: Point, k: double) -> Point => (
+    x = p.x * k,
+    y = p.y * k,
+    z = p.z * k
+)
 
 centre(points: List[Point]) -> Point =>
-    (points
-        |> reduce((x = 0.0D, y = 0.0D, z = 0.0D),
-                  (a, b) => a + b)) *
+    (
+        points
+            |> reduce(
+                (x = 0.0D, y = 0.0D, z = 0.0D),
+                (a, b) => a + b
+            )
+    ) *
     (1.0D / double(points.count))
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
-    if a < b then (low = a, high = b) else (low = b, high = a) fi
+    if a < b then
+        (low = a, high = b)
+    else
+        (low = b, high = a)
+    fi
 
 subdivided(mesh: Mesh) -> Mesh is
     let (points, faces) = mesh
 
     let face_points =
         faces
-            |> map(face => centre(face |> map(index => points[index])
-                                       |> collect()))
+            |> map(face =>
+                centre(
+                    face
+                        |> map(index => points[index])
+                        |> collect()
+                )
+            )
             |> collect()
 
     let edge_faces = MAP()
@@ -50,7 +70,8 @@ subdivided(mesh: Mesh) -> Mesh is
     let edge_points = MAP()
 
     for (key, touching) in edge_faces do
-        let ends = [points[key.low], points[key.high]] |> collect()
+        let ends = [points[key.low], points[key.high]]
+            |> collect()
 
         let position =
             if touching.count == 1 then
@@ -58,8 +79,14 @@ subdivided(mesh: Mesh) -> Mesh is
             else
                 centre(
                     ends
-                        |> cat(touching |> map(index => face_points[index]))
-                        |> collect())
+                        |> cat(
+                            touching
+                                |> map(index =>
+                                    face_points[index]
+                                )
+                        )
+                        |> collect()
+                )
             fi
 
         edge_points[key] = new_points.count
@@ -79,40 +106,54 @@ subdivided(mesh: Mesh) -> Mesh is
         let touching_faces =
             0..faces.count
                 |> filter(face_index =>
-                    faces[face_index] |> any(* == vertex))
+                    faces[face_index] |> any(* == vertex)
+                )
                 |> collect()
 
         let touching_edges =
             edge_faces
                 |> filter((key, faces_here) =>
-                    key.low == vertex \/ key.high == vertex)
+                    key.low == vertex \/ key.high == vertex
+                )
 
         let border =
-            touching_edges |> filter((key, faces_here) =>
-                faces_here.count == 1)
+            touching_edges
+                |> filter((key, faces_here) =>
+                    faces_here.count == 1
+                )
                 |> collect()
 
         if border.count > 0 then
-            new_points[vertex] =
-                centre(
-                    border
-                        |> map((key, faces_here) =>
-                            centre([points[key.low], points[key.high]]))
-                        |> cat([points[vertex]])
-                        |> collect())
+            new_points[vertex] = centre(
+                border
+                    |> map((key, faces_here) =>
+                        centre([
+                            points[key.low],
+                            points[key.high]
+                        ])
+                    )
+                    |> cat([points[vertex]])
+                    |> collect()
+            )
         else
             let n = double(touching_faces.count)
 
-            let face_average =
-                centre(touching_faces |> map(index => face_points[index])
-                                      |> collect())
+            let face_average = centre(
+                touching_faces
+                    |> map(index => face_points[index])
+                    |> collect()
+            )
 
-            let edge_average =
-                centre(
-                    touching_edges
-                        |> map((key, faces_here) =>
-                            centre([points[key.low], points[key.high]]))
-                        |> collect())
+            let edge_average = centre(
+                touching_edges
+                    |> map((key, faces_here) =>
+                        centre([
+                            points[key.low],
+                            points[key.high]
+                        ])
+                    )
+                    |> collect()
+            )
 
             new_points[vertex] =
                 points[vertex] * ((n - 3.0D) / n) +
@@ -129,30 +170,35 @@ subdivided(mesh: Mesh) -> Mesh is
         for corner in 0..face.count do
             let vertex = face[corner]
             let next = face[(corner + 1) % face.count]
-            let previous = face[(corner + face.count - 1) % face.count]
+            let previous =
+                face[(corner + face.count - 1) % face.count]
 
-            new_faces.add(
-                [vertex,
-                      edge_points[edge_key(vertex, next)],
-                      face_indices[face_index],
-                      edge_points[edge_key(previous, vertex)]])
+            new_faces.add([
+                vertex,
+                edge_points[edge_key(vertex, next)],
+                face_indices[face_index],
+                edge_points[edge_key(previous, vertex)]
+            ])
         od
     od
 
     return (points = new_points, faces = new_faces)
 si
 
-let cube =
-    (points =
-         0..8
-             |> map(corner =>
-                 (x = double(corner % 2) * 2.0D - 1.0D,
-                  y = double(corner / 2 % 2) * 2.0D - 1.0D,
-                  z = double(corner / 4) * 2.0D - 1.0D))
-             |> collect(),
-     faces =
-         [[0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1],
-          [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]])
+let cube = (
+    points =
+        0..8
+            |> map(corner => (
+                x = double(corner % 2) * 2.0D - 1.0D,
+                y = double(corner / 2 % 2) * 2.0D - 1.0D,
+                z = double(corner / 4) * 2.0D - 1.0D
+            ))
+            |> collect(),
+    faces = [
+        [0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1],
+        [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]
+    ]
+)
 
 let rounds = LIST()
 
@@ -168,19 +214,26 @@ for round in 0..rounds.count do
     let radius =
         points
             |> map(point =>
-                System.Math.sqrt(point.x * point.x + point.y * point.y +
-                                 point.z * point.z))
+                System.Math.sqrt(
+                    point.x * point.x +
+                    point.y * point.y +
+                    point.z * point.z
+                )
+            )
             |> reduce(0.0D, (a, b) => System.Math.max(a, b))
 
     write_line(
         "round {round}: {points.count} points, {faces.count} faces, "
-        "radius {radius:F4}")
+        "radius {radius:F4}"
+    )
 od
 
 let image = IMAGE(420, 420)
 
-let turned = p =>
-    (x = p.x * 0.85D + p.z * 0.5D, y = p.y * 0.9D + p.z * 0.3D)
+let turned = p => (
+    x = p.x * 0.85D + p.z * 0.5D,
+    y = p.y * 0.9D + p.z * 0.3D
+)
 
 image.view(-2.0D, -2.0D, 2.0D, 2.0D)
 image.clear(252ub, 250ub, 245ub)
@@ -192,7 +245,9 @@ let (final_points, final_faces) = rounds[rounds.count - 1]
 for face in final_faces do
     for corner in 0..face.count do
         let a = turned(final_points[face[corner]])
-        let z = turned(final_points[face[(corner + 1) % face.count]])
+        let z = turned(
+            final_points[face[(corner + 1) % face.count]]
+        )
 
         image.line(a.x, a.y, z.x, z.y)
     od

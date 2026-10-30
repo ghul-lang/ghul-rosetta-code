@@ -7,8 +7,8 @@ rounds(players: int) -> Collections.List[(int, int)]{} is
     for _ in 1..n do
         yield
             (0..n / 2)
-            |> map(i => (seats[i], seats[n - 1 - i]))
-            |> collect()
+                |> map(i => (seats[i], seats[n - 1 - i]))
+                |> collect()
 
         let last = seats[n - 1]
         seats.remove_at(n - 1)
@@ -25,9 +25,10 @@ schedule(players: int) is
     for (round, games) in rounds(players) |> index() do
         let line =
             games
-            |> map((a, b) =>
-                "{show(a, players),3} v {show(b, players),-3}")
-            |> join(" ")
+                |> map((a, b) =>
+                    "{show(a, players),3} v {show(b, players),-3}"
+                )
+                |> join(" ")
 
         write_line("round {round + 1,2}: {line}".trim_end())
     od

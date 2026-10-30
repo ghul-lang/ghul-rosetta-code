@@ -2,11 +2,8 @@ use default
 use System.Math
 
 root_mean_square(values: Collections.List[double]) -> double =>
-    let squares =
-        values
-            |> sum_by(v => v * v) in
+    let squares = values |> sum_by(v => v * v) in
     Math.sqrt(squares / cast(values.count))
-
 
 let one_to_ten = 1::10 |> map(double) |> collect()
 

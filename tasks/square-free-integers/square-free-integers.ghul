@@ -12,12 +12,17 @@ show(from: long, to: long) is
     let width = "{to}".length + 1
     let per_row = 72 / width
 
-    write_line("Square-free integers from {from:N0} to {to:N0}:")
+    write_line(
+        "Square-free integers from {from:N0} to {to:N0}:"
+    )
 
     for row in 0..(found.count + per_row - 1) / per_row do
-        let cells = found |> skip(row * per_row) |> take(per_row)
+        let cells =
+            found |> skip(row * per_row) |> take(per_row)
 
-        write_line(cells |> map(n => "{n}".pad_left(width)) |> join(""))
+        write_line(
+            cells |> map(n => "{n}".pad_left(width)) |> join("")
+        )
     od
 
     write_line("")

@@ -9,7 +9,10 @@ class GRAPH(order: int public) is
     _in_blossom: LIST[bool]
 
     init(..) is
-        _edges = 0..order |> map(_ => LIST[int]()) |> collect_mutable()
+        _edges =
+            0..order
+                |> map(_ => LIST[int]())
+                |> collect_mutable()
         _match = repeat[int?](null, order) |> collect_mutable()
         _parent = repeat[int?](null, order) |> collect_mutable()
         _base = 0..order |> collect_mutable()
@@ -22,9 +25,11 @@ class GRAPH(order: int public) is
         _edges[b].add(a)
     si
 
-    matched: List[(a: int, b: int)] =>
-        [(a = a, b = _match[a]!)
-            for a in 0..order if (_match[a] ?? -1) > a]
+    matched: List[(a: int, b: int)] => [
+        (a = a, b = _match[a]!)
+        for a in 0..order
+        if (_match[a] ?? -1) > a
+    ]
 
     maximise() is
         for root in 0..order do
@@ -95,7 +100,8 @@ class GRAPH(order: int public) is
             reading = reading + 1
 
             for there in _edges[here] do
-                if _base_of(here) == _base_of(there) \/
+                if
+                    _base_of(here) == _base_of(there) \/
                     (_match[here] ?? -1) == there
                 then
                     continue
@@ -172,26 +178,38 @@ show(name: string, order: int, edges: List[(a: int, b: int)]) is
 
     write_line("{name}: {pairs.count} edges")
     write_line(
-        "  {pairs |> map(p => "{p.a}-{p.b}") |> join("  ")}")
+        "  {pairs |> map(p => "{p.a}-{p.b}") |> join("  ")}"
+    )
 si
 
-show("a five-cycle", 5, [(0, 1), (1, 2), (2, 3), (3, 4), (4, 0)])
+show("a five-cycle", 5, [
+    (0, 1),
+    (1, 2),
+    (2, 3),
+    (3, 4),
+    (4, 0)
+])
 
-show(
-    "a triangle on a tail",
-    5,
-    [(0, 1), (1, 2), (2, 0), (2, 3), (3, 4)])
+show("a triangle on a tail", 5, [
+    (0, 1),
+    (1, 2),
+    (2, 0),
+    (2, 3),
+    (3, 4)
+])
 
-show(
-    "the Petersen graph",
-    10,
-    [
-        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
-        (5, 7), (7, 9), (9, 6), (6, 8), (8, 5),
-        (0, 5), (1, 6), (2, 7), (3, 8), (4, 9)
-    ])
+show("the Petersen graph", 10, [
+    (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
+    (5, 7), (7, 9), (9, 6), (6, 8), (8, 5),
+    (0, 5), (1, 6), (2, 7), (3, 8), (4, 9)
+])
 
-show(
-    "two triangles joined by a bridge",
-    6,
-    [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (2, 3)])
+show("two triangles joined by a bridge", 6, [
+    (0, 1),
+    (1, 2),
+    (2, 0),
+    (3, 4),
+    (4, 5),
+    (5, 3),
+    (2, 3)
+])

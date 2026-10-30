@@ -3,7 +3,7 @@ use default
 enum COLOR is
     RED,
     WHITE,
-    BLUE,
+    BLUE
 si
 
 is_sorted(balls: List[COLOR]) -> bool =>
@@ -33,7 +33,10 @@ dutch_flag_sort(balls: LIST[COLOR]) is
         when COLOR.WHITE then
             mid = mid + 1
         when COLOR.BLUE then
-            (balls[high], balls[mid]) = (balls[mid], balls[high])
+            (balls[high], balls[mid]) = (
+                balls[mid],
+                balls[high]
+            )
             high = high - 1
         esac
     od
@@ -52,10 +55,14 @@ while is_sorted(balls) do
     shuffle(balls, random)
 od
 
-write_line("random order:  {balls |> map(c => "{c}") |> join(", ")}")
+write_line(
+    "random order:  {balls |> map(c => "{c}") |> join(", ")}"
+)
 write_line("already sorted: {is_sorted(balls)}")
 
 dutch_flag_sort(balls)
 
-write_line("sorted order:  {balls |> map(c => "{c}") |> join(", ")}")
+write_line(
+    "sorted order:  {balls |> map(c => "{c}") |> join(", ")}"
+)
 write_line("now sorted:    {is_sorted(balls)}")

@@ -1,9 +1,16 @@
 use default
 
-move(disks: int, source: int, target: int, spare: int) -> void =>
+move(
+    disks: int,
+    source: int,
+    target: int,
+    spare: int
+) -> void =>
     if disks > 0 then
         move(disks - 1, source, spare, target)
-        write_line("move a disk from pole {source} to pole {target}")
+        write_line(
+            "move a disk from pole {source} to pole {target}"
+        )
         move(disks - 1, spare, target, source)
     fi
 

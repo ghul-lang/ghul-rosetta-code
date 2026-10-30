@@ -16,7 +16,9 @@ baz(which: int) is
     fi
 si
 
-bar(which: int) is baz(which) si
+bar(which: int) is
+    baz(which)
+si
 
 foo(which: int) is
     try

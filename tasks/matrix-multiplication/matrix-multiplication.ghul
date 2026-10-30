@@ -2,18 +2,19 @@ use default
 use Matrix = List[List[int]]
 
 multiply(left: Matrix, right: Matrix) -> Matrix =>
-    assert left[0].count == right.count else "shapes do not conform" in
+    assert left[0].count == right.count
+        else "shapes do not conform" in
     left
-    |> map(row =>
-        0..right[0].count
-        |> map(column =>
-            0..right.count
-            |> map(i => row[i] * right[i][column])
-            |> sum()
+        |> map(row =>
+            0..right[0].count
+                |> map(column =>
+                    0..right.count
+                        |> map(i => row[i] * right[i][column])
+                        |> sum()
+                )
+                |> collect()
         )
         |> collect()
-    )
-    |> collect()
 
 let a = [[1, 2], [3, 4], [5, 6]]
 let b = [[1, 2, 3], [4, 5, 6]]

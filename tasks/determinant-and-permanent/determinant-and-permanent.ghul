@@ -10,7 +10,8 @@ minor(m: Matrix, column: int) -> Matrix =>
                 |> index()
                 |> filter((j, _) => j != column)
                 |> map((_, value) => value)
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 expand(m: Matrix, alternating: bool) -> long =>
@@ -19,9 +20,14 @@ expand(m: Matrix, alternating: bool) -> long =>
     else
         0..m.count
             |> sum_by(j =>
-                let negative = alternating /\ j % 2 == 1 in
-                let sign = if negative then -1L else 1L fi in
-                sign * m[0][j] * expand(minor(m, j), alternating))
+                let
+                    negative = alternating /\ j % 2 == 1,
+                    sign = if negative then -1L else 1L fi
+                in
+                    sign *
+                    m[0][j] *
+                    expand(minor(m, j), alternating)
+            )
     fi
 
 determinant(m: Matrix) -> long => expand(m, true)
@@ -37,5 +43,7 @@ let matrices = [
 
 for m in matrices do
     write_line("{m}")
-    write_line("    determinant {determinant(m)}, permanent {permanent(m)}")
+    write_line(
+        "    determinant {determinant(m)}, permanent {permanent(m)}"
+    )
 od

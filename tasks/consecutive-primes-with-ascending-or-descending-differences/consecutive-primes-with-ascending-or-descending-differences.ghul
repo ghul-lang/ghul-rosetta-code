@@ -17,8 +17,10 @@ primes_below(limit: int) -> int{} is
     od
 si
 
-longest_run(primes: Collections.List[int], keeps_going: (int, int) -> bool)
-        -> Collections.List[int] is
+longest_run(
+    primes: Collections.List[int],
+    keeps_going: (int, int) -> bool
+) -> Collections.List[int] is
     let best mut = (start = 0, length = 1)
     let start mut = 0
 

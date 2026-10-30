@@ -12,9 +12,10 @@ use Kind.WASTEFUL
 
 let limit = 20_000_000
 let counted = 1_000_000
-let smallest_factor = (0::limit)
-    |> map(value => if value % 2 == 0 then 2 else value fi)
-    |> collect_mutable()
+let smallest_factor =
+    (0::limit)
+        |> map(value => if value % 2 == 0 then 2 else value fi)
+        |> collect_mutable()
 
 let odd mut = 3
 
@@ -87,18 +88,21 @@ class TALLY is
 
         if value <= counted then below = below + 1 fi
         if found <= 50 then first_fifty.add(value) fi
-        if found == 10_000 then ten_thousandth = value fi
+        if found == 10_000 then ten_thousandth = value
+        fi
     si
 
-    settled(value: int) -> bool => found >= 10_000 /\ value > counted
+    settled(value: int) -> bool =>
+        found >= 10_000 /\ value > counted
 
     show(base: int, name: string) is
         write_line("base {base} {name} numbers")
         write_line("  first fifty:")
 
         for row in 0..5 do
-            let cells = first_fifty[row * 10..row * 10 + 10]
-                            |> map(v => "{v,7}")
+            let cells =
+                first_fifty[row * 10..row * 10 + 10]
+                    |> map(v => "{v,7}")
 
             write_line("   {cells |> join("")}")
         od

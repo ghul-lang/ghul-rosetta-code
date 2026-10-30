@@ -21,9 +21,11 @@ class INCIDENCE_CUBE is
         od
     si
 
-    _index(r: int, c: int, s: int) -> int => (r * _n + c) * _n + s
+    _index(r: int, c: int, s: int) -> int =>
+        (r * _n + c) * _n + s
 
-    _at(r: int, c: int, s: int) -> byte => _cells[_index(r, c, s)]
+    _at(r: int, c: int, s: int) -> byte =>
+        _cells[_index(r, c, s)]
 
     _set(r: int, c: int, s: int, value: byte) is
         _cells[_index(r, c, s)] = value
@@ -33,7 +35,8 @@ class INCIDENCE_CUBE is
         _set(r, c, s, byte(_at(r, c, s) + delta))
     si
 
-    _pick(choices: List[int]) -> int => choices[_random.next(choices.count)]
+    _pick(choices: List[int]) -> int =>
+        choices[_random.next(choices.count)]
 
     _ones_in_rows(c: int, s: int) -> List[int] =>
         0.._n |> filter(r => _at(r, c, s) == 1b) |> collect()
@@ -58,7 +61,12 @@ class INCIDENCE_CUBE is
         _add(r2, c, s, -1b)
         _add(r2, c2, s2, -1b)
 
-        _improper = if _at(r2, c2, s2) == -1b then (r2, c2, s2) else null fi
+        _improper =
+            if _at(r2, c2, s2) == -1b then
+                (r2, c2, s2)
+            else
+                null
+            fi
     si
 
     next() is
@@ -85,49 +93,85 @@ class INCIDENCE_CUBE is
 
     square: Square =>
         0.._n
-            |> map(r => 0.._n
-                |> map(c => 1 + (0.._n |> find(s => _at(r, c, s) == 1b)!))
-                |> collect())
+            |> map(r =>
+                0.._n
+                    |> map(c =>
+                        1 +
+                        (
+                            0.._n
+                                |> find(s =>
+                                    _at(r, c, s) == 1b
+                                )!
+                        )
+                    )
+                    |> collect()
+            )
             |> collect()
 si
 
 reduced(square: Square) -> Square =>
     let n = square.count in
-    let by_column = 1::n
-        |> map(v => 0..n |> find(c => square[0][c] == v)!)
-        |> map(c => 0..n |> map(r => square[r][c]) |> collect())
-        |> collect() in
+    let by_column =
+        1::n
+            |> map(v => 0..n |> find(c => square[0][c] == v)!)
+            |> map(c =>
+                0..n |> map(r => square[r][c]) |> collect()
+            )
+            |> collect()
+    in
     1::n
         |> map(v => 0..n |> find(r => by_column[0][r] == v)!)
-        |> map(r => 0..n |> map(c => by_column[c][r]) |> collect())
+        |> map(r =>
+            0..n |> map(c => by_column[c][r]) |> collect()
+        )
         |> collect()
 
 text(square: Square) -> string =>
-    square |> map(row => row |> map(v => "{v,3}") |> join("")) |> join("\n")
+    square
+        |> map(row => row |> map(v => "{v,3}") |> join(""))
+        |> join("\n")
 
 is_latin(square: Square) -> bool =>
     let n = square.count in
-    0..n |> all(i =>
-        (square[i] |> distinct() |> count()) == n /\
-        (0..n |> map(r => square[r][i]) |> distinct() |> count()) == n)
+    0..n
+        |> all(i =>
+            (square[i] |> distinct() |> count()) == n /\
+            (
+                0..n
+                    |> map(r => square[r][i])
+                    |> distinct()
+                    |> count()
+            ) == n
+        )
 
 cyclic(n: int) -> Square =>
     0..n
-        |> map(r => 0..n |> map(c => (r + c) % n + 1) |> collect())
+        |> map(r =>
+            0..n |> map(c => (r + c) % n + 1) |> collect()
+        )
         |> collect()
 
-tally(n: int, squares: int, random: System.Random)
-    -> (square: string, times: int){} =>
+tally(n: int, squares: int, random: System.Random) -> (
+    square: string,
+    times: int
+){} =>
     let cube = INCIDENCE_CUBE(cyclic(n), random) in
     0..squares
-        |> map(_ => (cube.next(); text(reduced(cube.square))))
+        |> map(_ => (
+            cube.next()
+            text(reduced(cube.square))
+        ))
         |> group_by(x => x)
-        |> map(entry => (square = entry.key, times = entry.value.count))
+        |> map(entry => (
+            square = entry.key, times = entry.value.count
+        ))
         |> sort_by(e => e.square)
 
 let random = System.Random(42)
 
-write_line("Part 1: 10,000 squares of order 4, in reduced form:")
+write_line(
+    "Part 1: 10,000 squares of order 4, in reduced form:"
+)
 
 for (square, times) in tally(4, 10_000, random) do
     write_line()
@@ -139,7 +183,9 @@ let order_5 = tally(5, 10_000, random) |> collect()
 
 write_line()
 write_line("Part 2: 10,000 squares of order 5:")
-write_line("{order_5.count} reduced forms produced, each this many times:")
+write_line(
+    "{order_5.count} reduced forms produced, each this many times:"
+)
 for row in order_5 |> chunk(14) do
     write_line(row |> map(e => "{e.times,4}") |> join(""))
 od
@@ -154,7 +200,9 @@ write_line()
 write_line("Part 3: the 750th square of order 42:")
 write_line(text(cube_42.square))
 
-write_line("\ngenerating 1,000 squares of order 256, the slow part")
+write_line(
+    "\ngenerating 1,000 squares of order 256, the slow part"
+)
 
 let cube_256 = INCIDENCE_CUBE(cyclic(256), random)
 
@@ -164,4 +212,6 @@ od
 
 write_line()
 write_line("Part 4: 1,000 squares of order 256 generated")
-write_line("The last is a Latin square: {is_latin(cube_256.square)}")
+write_line(
+    "The last is a Latin square: {is_latin(cube_256.square)}"
+)

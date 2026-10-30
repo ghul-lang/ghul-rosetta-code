@@ -7,28 +7,44 @@ class SQUARE(letters: string) is
 si
 
 normalize(text: string) -> string =>
-    [if ch == 'J' then 'I' else ch fi
-        for ch in text.to_upper() if ch >= 'A' /\ ch <= 'Z']
+    [
+        if ch == 'J' then 'I' else ch fi
+        for ch in text.to_upper()
+        if ch >= 'A' /\ ch <= 'Z'
+    ]
         |> map(ch => "{ch}")
         |> join("")
 
 encrypt(text: string, square: SQUARE) -> string =>
     let
-        letters = normalize(text), n = letters.length,
+        letters = normalize(text),
+        n = letters.length,
         rows = letters |> map(square.row),
         cols = letters |> map(square.col),
         coords = rows ++ cols |> collect()
     in
         0..n
-            |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
+            |> map(i =>
+                square.at(coords[i * 2], coords[i * 2 + 1])
+            )
             |> join("")
 
 decrypt(text: string, square: SQUARE) -> string =>
-    let letters = normalize(text), n = letters.length in
-    let coords = letters
-        |> flat_map(ch => [square.row(ch), square.col(ch)])
-        |> collect() in
-    0..n |> map(i => square.at(coords[i], coords[n + i])) |> join("")
+    let
+        letters = normalize(text),
+        n = letters.length
+    in
+        let coords =
+            letters
+                |> flat_map(ch => [
+                    square.row(ch),
+                    square.col(ch)
+                ])
+                |> collect()
+        in
+        0..n
+            |> map(i => square.at(coords[i], coords[n + i]))
+            |> join("")
 
 demo(label: string, message: string, square: SQUARE) is
     let encoded = encrypt(message, square)
@@ -43,8 +59,16 @@ si
 let archetype = SQUARE("ABCDEFGHIKLMNOPQRSTUVWXYZ")
 let wiki_square = SQUARE("BGWKZQPNDSIOAXEFCLUMTHYVR")
 
-demo("archetypal square, task's own example", "ATTACKATDAWN", archetype)
-demo("Wikipedia square, Wikipedia's own example", "FLEEATONCE", wiki_square)
+demo(
+    "archetypal square, task's own example",
+    "ATTACKATDAWN",
+    archetype
+)
+demo(
+    "Wikipedia square, Wikipedia's own example",
+    "FLEEATONCE",
+    wiki_square
+)
 demo(
     "task's example message, Wikipedia's square",
     "ATTACKATDAWN",

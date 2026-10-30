@@ -1,8 +1,9 @@
 use default
 
-merged(base: MAP[string, object], update: MAP[string, object])
-    -> MAP[string, object]
-is
+merged(
+    base: MAP[string, object],
+    update: MAP[string, object]
+) -> MAP[string, object] is
     let result = MAP()
 
     for (key, value) in base do
@@ -37,4 +38,6 @@ result.keys
 write_line("")
 write_line("the sources are untouched:")
 write_line("base price is still {base["price"]}")
-write_line("update still has no name: {!update.contains_key("name")}")
+write_line(
+    "update still has no name: {!update.contains_key("name")}"
+)

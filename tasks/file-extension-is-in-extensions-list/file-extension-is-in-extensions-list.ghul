@@ -1,11 +1,14 @@
 use default
 
 has_extension(name: string, extensions: string[]) -> bool =>
-    extensions |> any(ext =>
-        name.to_lower().ends_with(".{ext.to_lower()}"))
+    extensions
+        |> any(ext =>
+            name.to_lower().ends_with(".{ext.to_lower()}")
+        )
 
-let extensions =
-    ["zip", "rar", "7z", "gz", "archive", "A##", "tar.bz2"]
+let extensions = [
+    "zip", "rar", "7z", "gz", "archive", "A##", "tar.bz2"
+]
 
 let names = [
     "MyData.a##", "MyData.tar.Gz", "MyData.gzip",

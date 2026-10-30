@@ -2,12 +2,15 @@ use default
 
 eban_group(group: int) -> bool => (
     let (tens, units) = (group / 10, group % 10)
-    let eban_units = units == 0 \/ units == 2 \/
-        units == 4 \/ units == 6
-    let eban_tens = tens == 0 \/ tens == 3 \/ tens == 4 \/
-        tens == 5 \/ tens == 6
-    group == 0 \/
-        group < 100 /\ eban_units /\ eban_tens
+    let eban_units =
+        units == 0 \/ units == 2 \/ units == 4 \/ units == 6
+    let eban_tens =
+        tens == 0 \/
+        tens == 3 \/
+        tens == 4 \/
+        tens == 5 \/
+        tens == 6
+    group == 0 \/ group < 100 /\ eban_units /\ eban_tens
 )
 
 groups(n: int) -> int{} is
@@ -19,17 +22,14 @@ si
 
 is_eban(n: int) -> bool => n |> groups() |> all(eban_group)
 
-eban_up_to(limit: int) -> int{} =>
-    1::limit |> filter(is_eban)
+eban_up_to(limit: int) -> int{} => 1::limit |> filter(is_eban)
 
 let up_to_1000 = eban_up_to(1000) |> collect()
 write_line("eban numbers up to and including 1000:")
 write_line(up_to_1000 |> join(" "))
 write_line("count: {up_to_1000.count}")
 
-let in_1000_to_4000 = 1000::4000
-    |> filter(is_eban)
-    |> collect()
+let in_1000_to_4000 = 1000::4000 |> filter(is_eban) |> collect()
 write_line("eban numbers between 1000 and 4000 inclusive:")
 write_line(in_1000_to_4000 |> join(" "))
 write_line("count: {in_1000_to_4000.count}")
@@ -37,5 +37,6 @@ write_line("count: {in_1000_to_4000.count}")
 for limit in [10000, 100000, 1000000, 10000000] do
     write_line(
         "count of eban numbers up to {limit}: "
-        "{eban_up_to(limit) |> count()}")
+        "{eban_up_to(limit) |> count()}"
+    )
 od

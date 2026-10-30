@@ -1,7 +1,9 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-write-entire-file")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-write-entire-file"
+)
 
 IO.Directory.create_directory(scratch)
 

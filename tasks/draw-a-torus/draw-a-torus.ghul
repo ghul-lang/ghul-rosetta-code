@@ -3,10 +3,15 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC =>
+        VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
+        VEC(
+            y * o.z - z * o.y,
+            z * o.x - x * o.z,
+            x * o.y - y * o.x
+        )
 
     length: double => sqrt(x * x + y * y + z * z)
 si
@@ -23,20 +28,24 @@ surface(u: double, v: double) -> VEC =>
     VEC(ring * cos(u), ring * sin(u), 0.6D * sin(v))
 
 turned(p: VEC) -> VEC =>
-    let x = p.x * cos(yaw) - p.y * sin(yaw) in
-    let y = p.x * sin(yaw) + p.y * cos(yaw) in
-    VEC(
-        x,
-        p.z * cos(pitch) - y * sin(pitch),
-        p.z * sin(pitch) + y * cos(pitch))
+    let
+        x = p.x * cos(yaw) - p.y * sin(yaw),
+        y = p.x * sin(yaw) + p.y * cos(yaw)
+    in
+        VEC(
+            x,
+            p.z * cos(pitch) - y * sin(pitch),
+            p.z * sin(pitch) + y * cos(pitch)
+        )
 
 corner(i: int, j: int) -> VEC =>
-    let u = 2.0D * pi * double(i) / double(around) in
-    let v = 2.0D * pi * double(j) / double(along) in
-    turned(surface(u, v))
+    let
+        u = 2.0D * pi * double(i) / double(around),
+        v = 2.0D * pi * double(j) / double(along)
+    in
+        turned(surface(u, v))
 
-depth(quad: Quad) -> double =>
-    quad |> sum_by(c => c.z)
+depth(quad: Quad) -> double => quad |> sum_by(c => c.z)
 
 brightness(quad: Quad) -> double =>
     let n = (quad[1] - quad[0]) × (quad[3] - quad[0]) in
@@ -44,15 +53,14 @@ brightness(quad: Quad) -> double =>
     else 0.25D + 0.75D * abs(n.z) / n.length
     fi
 
-quad(i: int, j: int) -> Quad =>
-    [
-        corner(i, j), corner(i + 1, j),
-        corner(i + 1, j + 1), corner(i, j + 1)]
+quad(i: int, j: int) -> Quad => [
+    corner(i, j), corner(i + 1, j),
+    corner(i + 1, j + 1), corner(i, j + 1)
+]
 
-let quads =
-    [quad(i, j) for i in 0..around for j in 0..along]
-        |> sort((p, q) => depth(p) <> depth(q))
-        |> collect()
+let quads = [quad(i, j) for i in 0..around for j in 0..along]
+    |> sort((p, q) => depth(p) <> depth(q))
+    |> collect()
 
 let image = IMAGE(360, 360)
 
@@ -67,7 +75,8 @@ for q in quads do
     image.colour(
         ubyte(60.0D * light),
         ubyte(150.0D * light),
-        ubyte(200.0D * light))
+        ubyte(200.0D * light)
+    )
     image.fill(outline)
 
     image.colour(20ub, 40ub, 60ub)

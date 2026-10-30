@@ -52,9 +52,14 @@ for n in 1::wanted do
 od
 
 for n in [100_000, wanted] do
-    let twins = 1::n |> count(i => is_ramanujan[ramanujan[i] + 2])
+    let twins =
+        1::n |> count(i => is_ramanujan[ramanujan[i] + 2])
 
-    write_line("the {n:N0}th Ramanujan prime is {ramanujan[n]:N0}")
-    write_line("{twins:N0} of the first {n:N0} Ramanujan primes are twins")
+    write_line(
+        "the {n:N0}th Ramanujan prime is {ramanujan[n]:N0}"
+    )
+    write_line(
+        "{twins:N0} of the first {n:N0} Ramanujan primes are twins"
+    )
     write_line("")
 od

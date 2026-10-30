@@ -6,13 +6,18 @@ let text =
     "\"languages\": [\"Ada\", \"ghūl\"]}}"
 
 let parsed =
-    JsonNode.parse(text, null, _[System.Text.Json.JsonDocumentOptions])!
-        .as_object()
+    JsonNode.parse(
+        text,
+        null,
+        _[System.Text.Json.JsonDocumentOptions]
+    )!.as_object()
 let languages = parsed["languages"]!.as_array()
 
 write_line("name = {parsed["name"]!.get_value[string]()}")
 write_line("age = {parsed["age"]!.get_value[int]()}")
-write_line("first language = {languages[0]!.get_value[string]()}")
+write_line(
+    "first language = {languages[0]!.get_value[string]()}"
+)
 
 let created = JsonObject(null)
 

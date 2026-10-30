@@ -1,6 +1,10 @@
 use default
 
-power_mod(base: bigint, exponent: bigint, modulus: bigint) -> bigint =>
+power_mod(
+    base: bigint,
+    exponent: bigint,
+    modulus: bigint
+) -> bigint =>
     if exponent.is_zero then
         1n % modulus
     else
@@ -22,4 +26,6 @@ let m = bigint.pow(10n, 40)
 let digits = power_mod(a, b, m)
 
 write_line(digits)
-write_line("same as mod_pow: {digits =~ bigint.mod_pow(a, b, m)}")
+write_line(
+    "same as mod_pow: {digits =~ bigint.mod_pow(a, b, m)}"
+)

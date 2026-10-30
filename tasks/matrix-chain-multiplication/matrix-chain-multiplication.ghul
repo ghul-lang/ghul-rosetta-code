@@ -1,12 +1,17 @@
 use default
 
-optimal_order(dims: List[long]) -> (cost: long, order: string) is
+optimal_order(dims: List[long]) -> (
+    cost: long,
+    order: string
+) is
     let n = dims.count - 1
     let cost =
-        0..n |> map(_ => repeat(0L, n) |> collect_mutable())
+        0..n
+            |> map(_ => repeat(0L, n) |> collect_mutable())
             |> collect()
     let split =
-        0..n |> map(_ => repeat(0, n) |> collect_mutable())
+        0..n
+            |> map(_ => repeat(0, n) |> collect_mutable())
             |> collect()
 
     for length in 2::n do
@@ -16,8 +21,16 @@ optimal_order(dims: List[long]) -> (cost: long, order: string) is
             let (best, at) =
                 i..j
                     |> map(k =>
-                        let product = dims[i] * dims[k + 1] * dims[j + 1] in
-                        (cost[i][k] + cost[k + 1][j] + product, k))
+                        let product =
+                            dims[i] * dims[k + 1] * dims[j + 1]
+                        in
+                        (
+                            cost[i][k] +
+                            cost[k + 1][j] +
+                            product,
+                            k
+                        )
+                    )
                     |> min_by((c, _) => c)!
 
             cost[i][j] = best
@@ -36,8 +49,14 @@ optimal_order(dims: List[long]) -> (cost: long, order: string) is
 si
 
 let lists = [
-    [1L, 5L, 25L, 30L, 100L, 70L, 2L, 1L, 100L, 250L, 1L, 1000L, 2L],
-    [1000L, 1L, 500L, 12L, 1L, 700L, 2500L, 3L, 2L, 5L, 14L, 10L]
+    [
+        1L, 5L, 25L, 30L, 100L, 70L, 2L, 1L, 100L, 250L, 1L,
+        1000L, 2L
+    ],
+    [
+        1000L, 1L, 500L, 12L, 1L, 700L, 2500L, 3L, 2L, 5L, 14L,
+        10L
+    ]
 ]
 
 for dims in lists do

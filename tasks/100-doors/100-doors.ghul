@@ -1,7 +1,9 @@
 use default
 
-toggle(doors: bool[], pass: int) -> bool[] =>
-    [if (i + 1) % pass == 0 then !doors[i] else doors[i] fi for i in 0..100]
+toggle(doors: bool[], pass: int) -> bool[] => [
+    if (i + 1) % pass == 0 then !doors[i] else doors[i] fi
+    for i in 0..100
+]
 
 let closed = repeat(false, 100) |> collect()
 let doors = 1::100 |> reduce(closed, toggle)

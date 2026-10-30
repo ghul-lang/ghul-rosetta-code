@@ -2,18 +2,25 @@ use default
 
 let alphabet = "0123456789bcdefghjkmnpqrstuvwxyz"
 
-halve(range: (low: double, high: double), upper: bool) ->
-        (low: double, high: double) is
+halve(range: (low: double, high: double), upper: bool) -> (
+    low: double,
+    high: double
+) is
     let middle = (range.low + range.high) / 2.0
 
-    return if upper then
-        (low = middle, high = range.high)
-    else
-        (low = range.low, high = middle)
-    fi
+    return
+        if upper then
+            (low = middle, high = range.high)
+        else
+            (low = range.low, high = middle)
+        fi
 si
 
-encode(latitude: double, longitude: double, precision: int) -> string is
+encode(
+    latitude: double,
+    longitude: double,
+    precision: int
+) -> string is
     let latitudes mut = (low = -90.0, high = 90.0)
     let longitudes mut = (low = -180.0, high = 180.0)
     let bits = LIST[int]()
@@ -22,7 +29,8 @@ encode(latitude: double, longitude: double, precision: int) -> string is
         let longitude_turn = index % 2 == 0
         let (range, value) =
             if longitude_turn then (longitudes, longitude)
-            else (latitudes, latitude) fi
+            else (latitudes, latitude)
+            fi
         let upper = value >= (range.low + range.high) / 2.0
 
         bits.add(if upper then 1 else 0 fi)
@@ -34,19 +42,29 @@ encode(latitude: double, longitude: double, precision: int) -> string is
         fi
     od
 
-    return 0..precision
-        |> map(digit => bits[digit * 5..digit * 5 + 5]
-            |> reduce(0, (value, bit) => value * 2 + bit))
-        |> map(value => alphabet[value])
-        |> string()
+    return
+        0..precision
+            |> map(digit =>
+                bits[digit * 5..digit * 5 + 5]
+                    |> reduce(0, (value, bit) =>
+                        value * 2 + bit
+                    )
+            )
+            |> map(value => alphabet[value])
+            |> string()
 si
 
-decode(hash: string) -> (latitude: (low: double, high: double),
-        longitude: (low: double, high: double)) is
+decode(hash: string) -> (
+    latitude: (low: double, high: double),
+    longitude: (low: double, high: double)
+) is
     let latitudes mut = (low = -90.0, high = 90.0)
     let longitudes mut = (low = -180.0, high = 180.0)
-    let bits = [(alphabet.index_of(character) >> shift) & 1
-        for character in hash for shift in [4, 3, 2, 1, 0]]
+    let bits = [
+        (alphabet.index_of(character) >> shift) & 1
+        for character in hash
+        for shift in [4, 3, 2, 1, 0]
+    ]
 
     for (position, bit) in bits |> index() do
         if position % 2 == 0 then
@@ -67,5 +85,9 @@ let area = decode("gcpue5hp4")
 let latitude = (area.latitude.low + area.latitude.high) / 2.0
 let longitude = (area.longitude.low + area.longitude.high) / 2.0
 
-write_line("{latitude:F6} +/- {(area.latitude.high - latitude):F6}")
-write_line("{longitude:F6} +/- {(area.longitude.high - longitude):F6}")
+write_line(
+    "{latitude:F6} +/- {(area.latitude.high - latitude):F6}"
+)
+write_line(
+    "{longitude:F6} +/- {(area.longitude.high - longitude):F6}"
+)

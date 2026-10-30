@@ -20,6 +20,8 @@ app.start_async(CancellationToken.none).wait()
 
 let client = HttpClient()
 
-write_line(client.get_string_async("http://127.0.0.1:8080/").result)
+write_line(
+    client.get_string_async("http://127.0.0.1:8080/").result
+)
 
 app.stop_async(CancellationToken.none).wait()

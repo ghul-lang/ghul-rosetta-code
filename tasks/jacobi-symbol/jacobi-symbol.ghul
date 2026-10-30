@@ -35,7 +35,8 @@ let columns = 0::20
 write_line("n\\a{columns |> map(a => "{a,3}") |> join("")}")
 
 for n in 1::19 |> filter(n => n % 2 == 1) do
-    let row = columns |> map(a => "{jacobi(a, n),3}") |> join("")
+    let row =
+        columns |> map(a => "{jacobi(a, n),3}") |> join("")
 
     write_line("{n,3}{row}")
 od

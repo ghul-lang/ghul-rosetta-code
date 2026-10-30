@@ -31,8 +31,13 @@ anagrams_of(seed: string, wanted: int) -> string{} is
     let candidates =
         words
             |> filter(word => word.length > 2)
-            |> map(word => (text = word, counts = letter_counts(word)))
-            |> filter(candidate => fits(candidate.counts, remaining))
+            |> map(word => (
+                text = word,
+                counts = letter_counts(word)
+            ))
+            |> filter(candidate =>
+                fits(candidate.counts, remaining)
+            )
             |> sort((a, b) => b.text.length <> a.text.length)
             |> collect()
 
@@ -69,8 +74,12 @@ anagrams_of(seed: string, wanted: int) -> string{} is
     return found
 si
 
-for seed in ["Petelomax", "rosetta code", "William Shakespeare"] do
+for
+    seed in ["Petelomax", "rosetta code", "William Shakespeare"]
+do
     write_line("{seed}:")
 
-    seed |> anagrams_of(3) |> each(phrase => write_line("  {phrase}"))
+    seed
+        |> anagrams_of(3)
+        |> each(phrase => write_line("  {phrase}"))
 od

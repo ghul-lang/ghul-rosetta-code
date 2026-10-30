@@ -4,7 +4,9 @@ use System.Diagnostics.ProcessStartInfo
 
 let arguments = System.Environment.get_command_line_args()
 
-if arguments |> skip(1) |> any(argument => argument =~ "child") then
+if
+    arguments |> skip(1) |> any(argument => argument =~ "child")
+then
     write_line("child: running on my own now")
 else
     let start = ProcessStartInfo("dotnet")
@@ -24,6 +26,8 @@ else
 
         child.wait_for_exit()
 
-        write_line("parent: the child ended with status {child.exit_code}")
+        write_line(
+            "parent: the child ended with status {child.exit_code}"
+        )
     fi
 fi

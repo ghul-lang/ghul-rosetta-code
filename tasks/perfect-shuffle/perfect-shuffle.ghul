@@ -4,7 +4,12 @@ shuffle(deck: List[int]) -> List[int] =>
     let half = deck.count / 2 in
     0..deck.count
         |> map(i =>
-            if i % 2 == 0 then deck[i / 2] else deck[half + i / 2] fi)
+            if i % 2 == 0 then
+                deck[i / 2]
+            else
+                deck[half + i / 2]
+            fi
+        )
         |> collect()
 
 shuffles_needed(size: int) -> int is
@@ -12,11 +17,14 @@ shuffles_needed(size: int) -> int is
 
     walk(deck: List[int], count: int) -> int =>
         if deck =~ original then count
-        else walk(shuffle(deck), count + 1) fi
+        else walk(shuffle(deck), count + 1)
+        fi
 
     walk(shuffle(original), 1)
 si
 
 for size in [8, 24, 52, 100, 1020, 1024, 10000] do
-    write_line("{size,5} cards: {shuffles_needed(size),4} shuffles")
+    write_line(
+        "{size,5} cards: {shuffles_needed(size),4} shuffles"
+    )
 od

@@ -5,25 +5,24 @@ union Rule is
     PAIR(head: string, left: string, right: string)
 si
 
-let grammar =
-    [
-        Rule.PAIR("NP", "Det", "Nom"),
-        Rule.PAIR("Nom", "AP", "Nom"),
-        Rule.WORD("Nom", "book"),
-        Rule.WORD("Nom", "orange"),
-        Rule.WORD("Nom", "man"),
-        Rule.PAIR("AP", "Adv", "A"),
-        Rule.WORD("AP", "heavy"),
-        Rule.WORD("AP", "orange"),
-        Rule.WORD("AP", "tall"),
-        Rule.WORD("Det", "a"),
-        Rule.WORD("Adv", "very"),
-        Rule.WORD("Adv", "extremely"),
-        Rule.WORD("A", "heavy"),
-        Rule.WORD("A", "orange"),
-        Rule.WORD("A", "tall"),
-        Rule.WORD("A", "muscular")
-    ]
+let grammar = [
+    Rule.PAIR("NP", "Det", "Nom"),
+    Rule.PAIR("Nom", "AP", "Nom"),
+    Rule.WORD("Nom", "book"),
+    Rule.WORD("Nom", "orange"),
+    Rule.WORD("Nom", "man"),
+    Rule.PAIR("AP", "Adv", "A"),
+    Rule.WORD("AP", "heavy"),
+    Rule.WORD("AP", "orange"),
+    Rule.WORD("AP", "tall"),
+    Rule.WORD("Det", "a"),
+    Rule.WORD("Adv", "very"),
+    Rule.WORD("Adv", "extremely"),
+    Rule.WORD("A", "heavy"),
+    Rule.WORD("A", "orange"),
+    Rule.WORD("A", "tall"),
+    Rule.WORD("A", "muscular")
+]
 
 parses(sentence: string, start: string) -> bool is
     let words = sentence.split([' '])
@@ -43,7 +42,10 @@ parses(sentence: string, start: string) -> bool is
 
     for at in 0..length do
         for rule in grammar do
-            if let (head, word): Rule.WORD = rule /\ word =~ words[at] then
+            if let
+                (head, word): Rule.WORD = rule /\ word =~
+                words[at]
+            then
                 table[at][at].add(head)
             fi
         od
@@ -55,8 +57,11 @@ parses(sentence: string, start: string) -> bool is
 
             for split in from..to do
                 for rule in grammar do
-                    if let (head, left, right): Rule.PAIR = rule then
-                        if table[from][split].contains(left) /\
+                    if let
+                        (head, left, right): Rule.PAIR = rule
+                    then
+                        if
+                            table[from][split].contains(left) /\
                             table[split + 1][to].contains(right)
                         then
                             table[from][to].add(head)
@@ -70,6 +75,10 @@ parses(sentence: string, start: string) -> bool is
     table[0][length - 1].contains(start)
 si
 
-for sentence in ["a very heavy orange book", "a book very heavy"] do
+for
+    sentence in [
+        "a very heavy orange book", "a book very heavy"
+    ]
+do
     write_line("{sentence}: {parses(sentence, "NP")}")
 od

@@ -10,7 +10,8 @@ combine(a: Matrix, b: Matrix, sign: double) -> Matrix =>
         |> map(i =>
             0..a.count
                 |> map(j => a[i][j] + sign * b[i][j])
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 add(a: Matrix, b: Matrix) -> Matrix => combine(a, b, 1.0)
@@ -21,23 +22,38 @@ quarter(a: Matrix, row: int, column: int) -> Matrix =>
     0..half
         |> map(i =>
             0..half
-                |> map(j => a[row * half + i][column * half + j])
-                |> collect())
+                |> map(j =>
+                    a[row * half + i][column * half + j]
+                )
+                |> collect()
+        )
         |> collect()
 
-join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
+join(
+    c11: Matrix,
+    c12: Matrix,
+    c21: Matrix,
+    c22: Matrix
+) -> Matrix =>
     let half = c11.count in
     0..2 * half
         |> map(i =>
             0..2 * half
                 |> map(j =>
-                    let top = i < half, left = j < half in
-                    let part =
-                        if top then if left then c11 else c12 fi
-                        else if left then c21 else c22 fi
-                        fi in
-                    part[i % half][j % half])
-                |> collect())
+                    let
+                        top = i < half,
+                        left = j < half
+                    in
+                        let part =
+                            if top then
+                                if left then c11 else c12 fi
+                            else if left then c21 else c22 fi
+                            fi
+                        in
+                        part[i % half][j % half]
+                )
+                |> collect()
+        )
         |> collect()
 
 // Seven products of half-size matrices in place of the usual eight.
@@ -63,7 +79,8 @@ strassen(a: Matrix, b: Matrix) -> Matrix is
         add(subtract(add(m1, m4), m5), m7),
         add(m3, m5),
         add(m2, m4),
-        add(add(subtract(m1, m2), m3), m6))
+        add(add(subtract(m1, m2), m3), m6)
+    )
 si
 
 // Pads to the next power of two, since each step halves the size.
@@ -74,15 +91,20 @@ multiply(a: Matrix, b: Matrix) -> Matrix is
         size = size * 2
     od
 
-    let pad = m =>
-        0..size
-            |> map(i =>
-                0..size
-                    |> map(j =>
-                        let inside = i < m.count /\ j < m.count in
-                        if inside then m[i][j] else 0.0 fi)
-                    |> collect())
-            |> collect()
+    let pad =
+        m =>
+            0..size
+                |> map(i =>
+                    0..size
+                        |> map(j =>
+                            let inside =
+                                i < m.count /\ j < m.count
+                            in
+                            if inside then m[i][j] else 0.0 fi
+                        )
+                        |> collect()
+                )
+                |> collect()
 
     let product = strassen(pad(a), pad(b))
 
@@ -96,15 +118,20 @@ naive(a: Matrix, b: Matrix) -> Matrix =>
         |> map(i =>
             0..a.count
                 |> map(j =>
-                    0..a.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> collect())
+                    0..a.count |> sum_by(k => a[i][k] * b[k][j])
+                )
+                |> collect()
+        )
         |> collect()
 
 show(m: Matrix) is
     for row in m do
-        let rounded = row |> map(x => System.Math.round(x, 3) + 0.0)
+        let rounded =
+            row |> map(x => System.Math.round(x, 3) + 0.0)
 
-        write_line(rounded |> map(x => "{x,8:0.###}") |> join(""))
+        write_line(
+            rounded |> map(x => "{x,8:0.###}") |> join("")
+        )
     od
 
     write_line("")
@@ -137,12 +164,21 @@ for (x, y) in [(a, b), (c, d), (e, e)] do
     show(multiply(x, y))
 od
 
-let agrees =
-    [(a, b), (c, d), (e, e)]
-        |> all((x, y) =>
-            let s = multiply(x, y), n = naive(x, y) in
-            0..x.count |> all(i =>
-                0..x.count |> all(j =>
-                    System.Math.abs(s[i][j] - n[i][j]) < 1.0e-9)))
+let agrees = [(a, b), (c, d), (e, e)]
+    |> all((x, y) =>
+        let
+            s = multiply(x, y),
+            n = naive(x, y)
+        in
+            0..x.count
+                |> all(i =>
+                    0..x.count
+                        |> all(j =>
+                            System.Math.abs(
+                                s[i][j] - n[i][j]
+                            ) < 1.0e-9
+                        )
+                )
+    )
 
 write_line("agrees with the usual multiplication: {agrees}")

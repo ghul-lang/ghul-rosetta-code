@@ -3,7 +3,8 @@ use System.Globalization.CultureInfo
 
 show(expression: string, value: double) =>
     write_line(
-        "{expression,-28} {value.to_string(CultureInfo.invariant_culture)}")
+        "{expression,-28} {value.to_string(CultureInfo.invariant_culture)}"
+    )
 
 show(expression: string, value: bool) =>
     write_line("{expression,-28} {value}")
@@ -34,6 +35,9 @@ show("double.is_na_n(nan)", double.is_na_n(not_a_number))
 
 write_line("")
 show("infinity + 1.0", positive_infinity + one)
-show("infinity - infinity", positive_infinity + negative_infinity)
+show(
+    "infinity - infinity",
+    positive_infinity + negative_infinity
+)
 show("infinity * 0.0", positive_infinity * zero)
 show("1.0 / infinity", one / positive_infinity)

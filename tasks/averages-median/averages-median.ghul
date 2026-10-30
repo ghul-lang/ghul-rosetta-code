@@ -3,7 +3,8 @@ use default
 median(values: double{}) -> double is
     let ordered = values |> sort() |> collect()
 
-    assert ordered.count > 0 else "the median of no values is not defined"
+    assert ordered.count > 0
+        else "the median of no values is not defined"
 
     let middle = ordered.count / 2
 

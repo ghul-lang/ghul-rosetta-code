@@ -1,9 +1,7 @@
 use default
 
 differences(xs: List[int]) -> List[int] =>
-    zip(xs[1..<0], xs[0..<1])
-    |> map(* - *)
-    |> collect()
+    zip(xs[1..<0], xs[0..<1]) |> map(* - *) |> collect()
 
 forward(order: int, xs: List[int]) -> int{} =>
     if order == 0 then xs
@@ -13,5 +11,7 @@ forward(order: int, xs: List[int]) -> int{} =>
 let xs: List[int] = [90, 47, 58, 29, 22, 32, 55, 5, 55, 73]
 
 for order in 0..xs.count do
-    write_line("order {order}: {forward(order, xs) |> join(", ")}")
+    write_line(
+        "order {order}: {forward(order, xs) |> join(", ")}"
+    )
 od

@@ -17,7 +17,9 @@ let over_five = moving_average(5)
 
 write_line("number  period 3  period 5")
 
-for number in [1.0, 2.0, 3.0, 4.0, 5.0, 5.0, 4.0, 3.0, 2.0, 1.0] do
+for
+    number in [1.0, 2.0, 3.0, 4.0, 5.0, 5.0, 4.0, 3.0, 2.0, 1.0]
+do
     let three = over_three(number)
     let five = over_five(number)
 

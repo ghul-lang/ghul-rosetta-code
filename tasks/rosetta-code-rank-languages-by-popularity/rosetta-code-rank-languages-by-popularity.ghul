@@ -11,8 +11,9 @@ languages(api: string) -> (name: string, tasks: int){} is
     let client = HttpClient()
 
     // The wiki refuses a request that does not say what is making it.
-    client.default_request_headers.user_agent
-        .parse_add("ghul-rosetta-code/1.0")
+    client.default_request_headers.user_agent.parse_add(
+        "ghul-rosetta-code/1.0"
+    )
 
     let found = LIST()
     let query =
@@ -22,27 +23,39 @@ languages(api: string) -> (name: string, tasks: int){} is
     let next mut = ""
 
     do
-        let text = client.get_string_async("{query}{next}").result
-        let reply = JsonDocument.parse(text, _[JsonDocumentOptions])
+        let text =
+            client.get_string_async("{query}{next}").result
+        let reply = JsonDocument.parse(
+            text,
+            _[JsonDocumentOptions]
+        )
         let root = reply.root_element
 
-        for page in root.get_property("query")
-                .get_property("pages").enumerate_array() do
-            let title = page.get_property("title").get_string() ?? ""
+        for
+            page in root.get_property("query").get_property(
+                "pages"
+            ).enumerate_array()
+        do
+            let title =
+                page.get_property("title").get_string() ?? ""
             let info = page.get_property("categoryinfo")
 
-            found.add((
-                title.substring("Category:".length),
-                info.get_property("pages").get_int32()))
+            found.add(
+                (
+                    title.substring("Category:".length),
+                    info.get_property("pages").get_int32()
+                )
+            )
         od
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !root.try_get_property("continue", more ref) then
+        if !root.try_get_property("continue", more ref ) then
             break
         fi
 
-        let token = more.get_property("gcmcontinue").get_string() ?? ""
+        let token =
+            more.get_property("gcmcontinue").get_string() ?? ""
 
         next =
             "&gcmcontinue={System.Uri.escape_data_string(token)}"
@@ -57,7 +70,8 @@ let ranked =
         |> sort((a, b) =>
             if a.tasks != b.tasks then b.tasks <> a.tasks
             else string.compare_ordinal(a.name, b.name)
-            fi)
+            fi
+        )
         |> collect()
 
 let rank mut = 0
@@ -72,8 +86,13 @@ od
 
 write_line("... and {ranked.count - 25} more")
 
-if let place = ranked |> index() |> find(p => p.value.name =~ "Ghul") then
+if let
+    place = ranked
+        |> index()
+        |> find(p => p.value.name =~ "Ghul")
+then
     write_line(
         "Ghul is at position {place.index + 1}, "
-        "with {place.value.tasks:N0}")
+        "with {place.value.tasks:N0}"
+    )
 fi

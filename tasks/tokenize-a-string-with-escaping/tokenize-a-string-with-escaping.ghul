@@ -1,7 +1,11 @@
 use default
 use System.Text.StringBuilder
 
-tokenize(text: string, separator: char, escape: char) -> string{} is
+tokenize(
+    text: string,
+    separator: char,
+    escape: char
+) -> string{} is
     let token = StringBuilder()
     let escaped mut = false
 

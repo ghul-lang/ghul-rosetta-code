@@ -1,9 +1,11 @@
 use default
 
 is_gapful(n: int) -> bool =>
-    let digits = n.to_string() in
-    let ends = "{digits[0]}{digits[digits.length - 1]}" in
-    n % int.parse(ends) == 0
+    let
+        digits = n.to_string(),
+        ends = "{digits[0]}{digits[digits.length - 1]}"
+    in
+        n % int.parse(ends) == 0
 
 gapful_from(start: int, wanted: int) -> int{} =>
     from(start) |> filter(is_gapful) |> take(wanted)

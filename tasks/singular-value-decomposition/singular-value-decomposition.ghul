@@ -4,8 +4,8 @@ use Matrix = List[LIST[double]]
 
 zeros(rows: int, columns: int) -> Matrix =>
     (0..rows)
-    |> map(_ => repeat(0.0, columns) |> collect_mutable())
-    |> collect()
+        |> map(_ => repeat(0.0, columns) |> collect_mutable())
+        |> collect()
 
 identity(n: int) -> Matrix => (
     let result = zeros(n, n)
@@ -19,8 +19,12 @@ identity(n: int) -> Matrix => (
 
 transpose(a: Matrix) -> Matrix =>
     (0..a[0].count)
-    |> map(j => (0..a.count) |> map(i => a[i][j]) |> collect_mutable())
-    |> collect()
+        |> map(j =>
+            (0..a.count)
+                |> map(i => a[i][j])
+                |> collect_mutable()
+        )
+        |> collect()
 
 column_dot(a: Matrix, p: int, q: int) -> double =>
     a |> sum_by(row => row[p] * row[q])
@@ -53,15 +57,20 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
                 let beta = column_dot(u, q, q)
                 let gamma = column_dot(u, p, q)
 
-                let threshold = 1.0e-12 * System.Math.sqrt(alpha * beta)
+                let threshold =
+                    1.0e-12 * System.Math.sqrt(alpha * beta)
 
                 if System.Math.abs(gamma) > threshold then
                     converged = false
 
                     let zeta = (beta - alpha) / (2.0 * gamma)
-                    let sign = if zeta >= 0.0 then 1.0 else -1.0 fi
-                    let root = System.Math.sqrt(1.0 + zeta * zeta)
-                    let t = sign / (System.Math.abs(zeta) + root)
+                    let sign =
+                        if zeta >= 0.0 then 1.0 else -1.0 fi
+                    let root = System.Math.sqrt(
+                        1.0 + zeta * zeta
+                    )
+                    let t =
+                        sign / (System.Math.abs(zeta) + root)
                     let c = 1.0 / System.Math.sqrt(1.0 + t * t)
 
                     rotate(u, p, q, c, c * t)
@@ -73,28 +82,40 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
 
     let norms =
         (0..n)
-        |> map(j => System.Math.sqrt(column_dot(u, j, j)))
-        |> collect()
+            |> map(j => System.Math.sqrt(column_dot(u, j, j)))
+            |> collect()
 
-    let order = (0..n) |> sort_by_descending(j => norms[j]) |> memo()
+    let order =
+        (0..n) |> sort_by_descending(j => norms[j]) |> memo()
     let last = u.count - 1
 
     let sign = j => if u[last][j] < 0.0 then -1.0 else 1.0 fi
 
-    let scale = j =>
-        if norms[j] > 0.0 then sign(j) / norms[j] else 0.0 fi
+    let scale =
+        j =>
+            if norms[j] > 0.0 then
+                sign(j) / norms[j]
+            else
+                0.0
+            fi
 
     let sorted_u =
         u
-        |> map(row =>
-            order |> map(j => row[j] * scale(j)) |> collect_mutable())
-        |> collect()
+            |> map(row =>
+                order
+                    |> map(j => row[j] * scale(j))
+                    |> collect_mutable()
+            )
+            |> collect()
 
     let sorted_v =
         v
-        |> map(row => order |> map(j => row[j] * sign(j))
-            |> collect_mutable())
-        |> collect()
+            |> map(row =>
+                order
+                    |> map(j => row[j] * sign(j))
+                    |> collect_mutable()
+            )
+            |> collect()
 
     let sigma = order |> map(j => norms[j]) |> collect()
 
@@ -109,18 +130,21 @@ show(m: Matrix) is
     write_line("")
 si
 
-write_line("Enter the number of rows and columns, then each row:")
+write_line(
+    "Enter the number of rows and columns, then each row:"
+)
 
 let size = IO.Std.read_line()!.split([' '])
 let rows = int.parse(size[0])
 
 let a: Matrix =
     (0..rows)
-    |> map(_ =>
-        IO.Std.read_line()!.split([' '])
-        |> map(double.parse)
-        |> collect_mutable())
-    |> collect()
+        |> map(_ =>
+            IO.Std.read_line()!.split([' '])
+                |> map(double.parse)
+                |> collect_mutable()
+        )
+        |> collect()
 
 let (u, sigma, v) = svd(a)
 
@@ -138,11 +162,16 @@ write_line("U * S * V transposed:")
 
 show(
     (0..u.count)
-    |> map(i =>
-        (0..v.count)
-        |> map(j =>
-            (0..sigma.count)
-            |> sum_by(k => u[i][k] * sigma[k] * v[j][k])
-            |> System.Math.round(12))
-        |> collect_mutable())
-    |> collect())
+        |> map(i =>
+            (0..v.count)
+                |> map(j =>
+                    (0..sigma.count)
+                        |> sum_by(k =>
+                            u[i][k] * sigma[k] * v[j][k]
+                        )
+                        |> System.Math.round(12)
+                )
+                |> collect_mutable()
+        )
+        |> collect()
+)

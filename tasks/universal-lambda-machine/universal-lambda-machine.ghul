@@ -45,10 +45,12 @@ evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
     let stack = STACK()
 
     for i in 0..arguments.count do
-        stack.push(Frame.ARGUMENT(arguments[arguments.count - 1 - i]))
+        stack.push(
+            Frame.ARGUMENT(arguments[arguments.count - 1 - i])
+        )
     od
 
-    let settle = (value) is
+    let settle = value is
         while stack.count > 0 do
             if let update: Frame.UPDATE = stack.peek() then
                 update.thunk.value = value
@@ -59,10 +61,15 @@ evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
         od
     si
 
-    let argument = () =>
-        if let (thunk): Frame.ARGUMENT = stack.pop() then thunk
-        else throw System.InvalidOperationException("argument expected")
-        fi
+    let argument =
+        () =>
+            if let (thunk): Frame.ARGUMENT = stack.pop() then
+                thunk
+            else
+                throw System.InvalidOperationException(
+                    "argument expected"
+                )
+            fi
 
     let term mut = Term.VAR(1)
     let env mut = ENV(start, null)
@@ -121,8 +128,11 @@ cons(head: Term, tail: Term) -> Term =>
 bit(b: bool) -> Term => if b then falsity else truth fi
 
 byte(b: int) -> Term =>
-    from(0) |> take(8) |> reduce(falsity, (result, i) =>
-        cons(bit((b >> i) & 1 == 1), result))
+    from(0)
+        |> take(8)
+        |> reduce(falsity, (result, i) =>
+            cons(bit((b >> i) & 1 == 1), result)
+        )
 
 list(items: List[Term]) -> Term =>
     case items
@@ -140,7 +150,8 @@ class READER(bits: List[bool]) is
 
     term() -> Term is
         if !next() then
-            return if !next() then Term.LAM(term())
+            return
+                if !next() then Term.LAM(term())
                 else Term.APP(term(), term())
                 fi
         fi
@@ -159,7 +170,8 @@ constant(term: Term) -> THUNK => (
     let thunk = THUNK(term, null)
 
     thunk.value = Value.CLOSURE(term, null)
-    thunk)
+    thunk
+)
 
 let top = constant(Term.PAIR)
 let zero = constant(Term.ATOM(0))
@@ -167,7 +179,9 @@ let one = constant(Term.ATOM(1))
 
 items(thunk: THUNK, limit: int) -> THUNK{} is
     if limit > 0 then
-        if let (head, tail): Result.CONS = evaluate(thunk, [top]) then
+        if let
+            (head, tail): Result.CONS = evaluate(thunk, [top])
+        then
             yield head
             yield in items(tail, limit - 1)
         fi
@@ -175,18 +189,27 @@ items(thunk: THUNK, limit: int) -> THUNK{} is
 si
 
 bit_of(thunk: THUNK) -> int =>
-    if let (tag): Result.CONSTANT = evaluate(thunk, [zero, one]) then tag
+    if let
+        (tag): Result.CONSTANT = evaluate(thunk, [zero, one])
+    then
+        tag
     else throw System.InvalidOperationException("bit expected")
     fi
 
-bits_of(bytes: List[int]) -> List[bool] =>
-    [(b >> (7 - i)) & 1 == 1 for b in bytes for i in 0..8]
+bits_of(bytes: List[int]) -> List[bool] => [
+    (b >> (7 - i)) & 1 == 1
+    for b in bytes
+    for i in 0..8
+]
 
 run_bits(program: string, limit: int) -> string =>
     let
         bits = program |> map(* == '1') |> collect(),
-        reader = READER(bits), term = reader.term(),
-        input = list(bits |> skip(reader.at) |> map(bit) |> collect())
+        reader = READER(bits),
+        term = reader.term(),
+        input = list(
+            bits |> skip(reader.at) |> map(bit) |> collect()
+        )
     in
         items(THUNK(Term.APP(term, input), null), limit)
             |> map(t => "{bit_of(t)}")
@@ -194,43 +217,65 @@ run_bits(program: string, limit: int) -> string =>
 
 run_bytes(bytes: List[int], limit: int) -> string =>
     let
-        reader = READER(bits_of(bytes)), term = reader.term(),
+        reader = READER(bits_of(bytes)),
+        term = reader.term(),
         used = (reader.at + 7) / 8,
         rest = bytes |> skip(used) |> map(byte) |> collect()
     in
         items(THUNK(Term.APP(term, list(rest)), null), limit)
             |> map(b =>
                 let value =
-                    items(b, 8) |> reduce(0, (a, t) => a * 2 + bit_of(t)) in
-                "{char(value)}")
+                    items(b, 8)
+                        |> reduce(0, (a, t) =>
+                            a * 2 + bit_of(t)
+                        )
+                in
+                "{char(value)}"
+            )
             |> join("")
 
+let the_342_bit_program =
+    "0101000110100000000110000101100111100000100101111101111000010101"
+    "1000000001100001111100000010111111011001011111101100101111010011"
+    "1010111100010000001011100101010001101000000000010110000101011111"
+    "1011111000000101011110111110111111000010110000001011111110101101"
+    "1100000011111100001011011110111001111010000001011000001101100010"
+    "0000101111000111001110"
+
+let the_quine_program =
+    "0001011001000110100000000000010110111100101111001111110111110110"
+    "1000010110010001101000000000000101101111001011110011111101111101"
+    "1010"
+
+let the_100_doors_program =
+    "0001000100010101000110100000010110000011001110110010100011010000"
+    "0000001011111110000001011111010110010110010001101000011111001101"
+    "0010111110111100000000101111111111011001100111111101110000000010"
+    "1111110000001011111010110011011100101011000000101111011001011110"
+    "0111100111101101000000000010110111001110111100000000010000001110"
+    "01110100000000101101110110"
+
+let the_sieve_program =
+    "0001000110011001010001101000000001011000001001000101011111011110"
+    "1001000110100001110011010000000000101101110011100111111101111000"
+    "000001111100110111000000101100000110110"
+
 let programs = [
-    (name = "the 342 bit program", limit = 1000, program =
-        "0101000110100000000110000101100111100000100101111101111000010101"
-        "1000000001100001111100000010111111011001011111101100101111010011"
-        "1010111100010000001011100101010001101000000000010110000101011111"
-        "1011111000000101011110111110111111000010110000001011111110101101"
-        "1100000011111100001011011110111001111010000001011000001101100010"
-        "0000101111000111001110"
+    (
+        name = "the 342 bit program", limit = 1000,
+        program = the_342_bit_program
     ),
-    (name = "the quine", limit = 1000, program =
-        "0001011001000110100000000000010110111100101111001111110111110110"
-        "1000010110010001101000000000000101101111001011110011111101111101"
-        "1010"
+    (
+        name = "the quine", limit = 1000,
+        program = the_quine_program
     ),
-    (name = "100 doors", limit = 100, program =
-        "0001000100010101000110100000010110000011001110110010100011010000"
-        "0000001011111110000001011111010110010110010001101000011111001101"
-        "0010111110111100000000101111111111011001100111111101110000000010"
-        "1111110000001011111010110011011100101011000000101111011001011110"
-        "0111100111101101000000000010110111001110111100000000010000001110"
-        "01110100000000101101110110"
+    (
+        name = "100 doors", limit = 100,
+        program = the_100_doors_program
     ),
-    (name = "the sieve of Eratosthenes", limit = 100, program =
-        "0001000110011001010001101000000001011000001001000101011111011110"
-        "1001000110100001110011010000000000101101110011100111111101111000"
-        "000001111100110111000000101100000110110"
+    (
+        name = "the sieve of Eratosthenes", limit = 100,
+        program = the_sieve_program
     )
 ]
 

@@ -3,57 +3,69 @@ use default
 use PATIENT = (id: string, lastname: string)
 use VISIT = (id: string, date: string, score: double?)
 
-let patients: List[PATIENT] =
-    [(id = "1001", lastname = "Hopper"),
-     (id = "4004", lastname = "Wirth"),
-     (id = "3003", lastname = "Kemeny"),
-     (id = "2002", lastname = "Gosling"),
-     (id = "5005", lastname = "Kurtz")]
+let patients: List[PATIENT] = [
+    (id = "1001", lastname = "Hopper"),
+    (id = "4004", lastname = "Wirth"),
+    (id = "3003", lastname = "Kemeny"),
+    (id = "2002", lastname = "Gosling"),
+    (id = "5005", lastname = "Kurtz")
+]
 
-let visits: List[VISIT] =
-    [(id = "2002", date = "2020-09-10", score = 6.8D),
-     (id = "1001", date = "2020-09-17", score = 5.5D),
-     (id = "4004", date = "2020-09-24", score = 8.4D),
-     (id = "2002", date = "2020-10-08", score = null),
-     (id = "1001", date = "", score = 6.6D),
-     (id = "3003", date = "2020-11-12", score = null),
-     (id = "4004", date = "2020-11-05", score = 7.0D),
-     (id = "1001", date = "2020-11-19", score = 5.3D)]
+let visits: List[VISIT] = [
+    (id = "2002", date = "2020-09-10", score = 6.8D),
+    (id = "1001", date = "2020-09-17", score = 5.5D),
+    (id = "4004", date = "2020-09-24", score = 8.4D),
+    (id = "2002", date = "2020-10-08", score = null),
+    (id = "1001", date = "", score = 6.6D),
+    (id = "3003", date = "2020-11-12", score = null),
+    (id = "4004", date = "2020-11-05", score = 7.0D),
+    (id = "1001", date = "2020-11-19", score = 5.3D)
+]
 
 let by_patient = visits |> group_by(visit => visit.id)
 
 row(cells: string[]) -> string => "| {cells |> join(" | ")} |"
 
-write_line(row(["PATIENT_ID", "LASTNAME", "LAST_VISIT",
-                "SCORE_SUM", "SCORE_AVG"]))
+write_line(
+    row([
+        "PATIENT_ID", "LASTNAME", "LAST_VISIT",
+        "SCORE_SUM", "SCORE_AVG"
+    ])
+)
 
-patients |> each(patient => (
-    let theirs =
-        if by_patient.contains_key(patient.id) then
-            by_patient[patient.id]
-        else
-            LIST()
-        fi
+patients
+    |> each(patient => (
+        let theirs =
+            if by_patient.contains_key(patient.id) then
+                by_patient[patient.id]
+            else
+                LIST()
+            fi
 
-    let latest =
-        theirs
-            |> map(visit => visit.date)
-            |> filter(date => date.length > 0)
-            |> max() ?? ""
+        let latest =
+            theirs
+                |> map(visit => visit.date)
+                |> filter(date => date.length > 0)
+                |> max() ?? ""
 
-    let scores =
-        theirs
-            |> filter(visit => visit.score?)
-            |> map(visit => visit.score!)
+        let scores =
+            theirs
+                |> filter(visit => visit.score?)
+                |> map(visit => visit.score!)
 
-    let total = scores |> sum()
-    let seen = scores |> count()
+        let total = scores |> sum()
+        let seen = scores |> count()
 
-    let sum_cell = if seen > 0 then "{total:F1}" else "" fi
-    let average = total / double(seen)
-    let average_cell = if seen > 0 then "{average:F1}" else "" fi
+        let sum_cell = if seen > 0 then "{total:F1}" else "" fi
+        let average = total / double(seen)
+        let average_cell =
+            if seen > 0 then "{average:F1}" else "" fi
 
-    write_line(row(
-        ["{patient.id,-10}", "{patient.lastname,-8}", "{latest,-10}",
-         "{sum_cell,9}", "{average_cell,9}"]))
-))
+        write_line(
+            row([
+                "{patient.id,-10}", "{patient.lastname,-8}",
+                "{latest,-10}",
+                "{sum_cell,9}", "{average_cell,9}"
+            ])
+        )
+    ))

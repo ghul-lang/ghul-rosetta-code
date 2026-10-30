@@ -21,4 +21,3 @@ for left in [false, true] do
         write_line("  = {a(left) \/ b(right)}")
     od
 od
-

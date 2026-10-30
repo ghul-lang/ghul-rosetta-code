@@ -9,13 +9,17 @@ root(value: long) -> ROOT =>
     else
         let inner = root(digit_sum(value))
 
-        (persistence = inner.persistence + 1,
-         digital_root = inner.digital_root)
+        (
+            persistence = inner.persistence + 1,
+            digital_root = inner.digital_root
+        )
     fi
 
 for number in [627615L, 39390L, 588225L, 393900588225L] do
     let result = root(number)
 
-    write_line("{number} has additive persistence {result.persistence}"
-        " and digital root {result.digital_root}")
+    write_line(
+        "{number} has additive persistence {result.persistence}"
+        " and digital root {result.digital_root}"
+    )
 od

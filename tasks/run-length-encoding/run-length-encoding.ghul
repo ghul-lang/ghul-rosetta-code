@@ -1,7 +1,10 @@
 use default
 
 encode(text: string) -> string =>
-    text |> group() |> map(run => "{run.count}{run[0]}") |> join("")
+    text
+        |> group()
+        |> map(run => "{run.count}{run[0]}")
+        |> join("")
 
 decode(encoded: string) -> string =>
     if encoded.length == 0 then
@@ -9,7 +12,9 @@ decode(encoded: string) -> string =>
     else
         let
             digits =
-                encoded |> take_while(c => char.is_digit(c)) |> count(),
+                encoded
+                    |> take_while(c => char.is_digit(c))
+                    |> count(),
             repeats = int.parse(encoded[0..digits]),
             letter = encoded[digits]
         in
@@ -24,4 +29,6 @@ let encoded = encode(input)
 write_line("input:   {input}")
 write_line("encoded: {encoded}")
 write_line("decoded: {decode(encoded)}")
-write_line("round trip restores the input: {decode(encoded) =~ input}")
+write_line(
+    "round trip restores the input: {decode(encoded) =~ input}"
+)

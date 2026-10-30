@@ -9,8 +9,10 @@ kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
             (0..left[0].count * right[0].count)
                 |> map(column =>
                     left[row / right.count][column / right[0].count] *
-                    right[row % right.count][column % right[0].count])
-                |> collect())
+                    right[row % right.count][column % right[0].count]
+                )
+                |> collect()
+        )
         |> collect()
 
 power(seed: MATRIX, order: int) -> MATRIX =>
@@ -19,8 +21,10 @@ power(seed: MATRIX, order: int) -> MATRIX =>
 plot(cells: MATRIX, path: string) is
     let scale = 4
 
-    let image =
-        IMAGE(cells[0].count * scale, cells.count * scale)
+    let image = IMAGE(
+        cells[0].count * scale,
+        cells.count * scale
+    )
 
     for row in 0..cells.count do
         for column in 0..cells[row].count do
@@ -31,8 +35,11 @@ plot(cells: MATRIX, path: string) is
             for down in 0..scale do
                 for across in 0..scale do
                     image.set_pixel(
-                        column * scale + across, row * scale + down,
-                        40ub, 40ub, 160ub
+                        column * scale + across,
+                        row * scale + down,
+                        40ub,
+                        40ub,
+                        160ub
                     )
                 od
             od

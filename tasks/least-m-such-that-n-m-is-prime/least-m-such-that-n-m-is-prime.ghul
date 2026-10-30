@@ -1,6 +1,7 @@
 use default
 
-has_factor_up_to(m: int, n: int) -> bool => 2::n |> any(p => m % p == 0)
+has_factor_up_to(m: int, n: int) -> bool =>
+    2::n |> any(p => m % p == 0)
 
 least_m(n: int, factorial: bigint) -> int =>
     from(1)
@@ -8,7 +9,11 @@ least_m(n: int, factorial: bigint) -> int =>
         |> find(m => is_prime(factorial + bigint(m)))!
 
 terms() -> (n: int, m: int){} =>
-    from(0) |> map(n => (n = n, m = least_m(n, factorial(bigint(n)))))
+    from(0)
+        |> map(n => (
+            n = n,
+            m = least_m(n, factorial(bigint(n)))
+        ))
 
 write_line("The first 50 terms:")
 
@@ -19,4 +24,6 @@ od
 let first_large = terms() |> find(t => t.m > 1000)!
 
 write_line()
-write_line("First m over 1000: {first_large.m} for n = {first_large.n}")
+write_line(
+    "First m over 1000: {first_large.m} for n = {first_large.n}"
+)

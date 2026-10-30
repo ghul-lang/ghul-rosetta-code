@@ -11,7 +11,11 @@ hailstone(n: int) -> int{} is
         fi
 
         current =
-            if current % 2 == 0 then current / 2 else 3 * current + 1 fi
+            if current % 2 == 0 then
+                current / 2
+            else
+                3 * current + 1
+            fi
     od
 si
 
@@ -25,7 +29,9 @@ write_line("last four: {last}")
 
 let (longest, longest_length) =
     1..100_000
-    |> map(n => (n, hailstone(n) |> count()))
-    |> max_by((_, length) => length)!
+        |> map(n => (n, hailstone(n) |> count()))
+        |> max_by((_, length) => length)!
 
-write_line("longest under 100,000: {longest} (length {longest_length})")
+write_line(
+    "longest under 100,000: {longest} (length {longest_length})"
+)

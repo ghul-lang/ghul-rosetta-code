@@ -3,21 +3,32 @@ use default
 let symbols = "0123456789ABCDEF"
 
 in_base(n: long, base: int) -> string =>
-    n |> digits(long(base)) |> map(d => symbols[int(d)]) |> string()
+    n
+        |> digits(long(base))
+        |> map(d => symbols[int(d)])
+        |> string()
 
 value_of(digits: string, base: int) -> long =>
-    digits |> reduce(0L, (total, c) =>
-        total * long(base) + long(symbols.index_of(c)))
+    digits
+        |> reduce(0L, (total, c) =>
+            total * long(base) + long(symbols.index_of(c))
+        )
 
 is_penholodigital(square: long, base: int) -> bool =>
     let ds = square |> digits(long(base)) |> collect() in
     ds.count == base - 1 /\
-        ds |> collect_set() |> count() == ds.count /\
-        ds |> all(* > 0L)
+    ds |> collect_set() |> count() == ds.count /\
+    ds |> all(* > 0L)
 
 roots(base: int) -> List[long] is
-    let smallest = value_of(symbols.substring(1, base - 1), base)
-    let largest = value_of(reversed(symbols.substring(1, base - 1)), base)
+    let smallest = value_of(
+        symbols.substring(1, base - 1),
+        base
+    )
+    let largest = value_of(
+        reversed(symbols.substring(1, base - 1)),
+        base
+    )
     let modulus = long(base - 1)
     let residue = long(base * (base - 1) / 2) % modulus
 
@@ -43,7 +54,8 @@ for base in 9::15 do
         fi
 
     write_line(
-        "There are {found.count} penholodigital squares in base {base}:")
+        "There are {found.count} penholodigital squares in base {base}:"
+    )
 
     for row in 0..(shown.count + 2) / 3 do
         let cells = shown |> skip(row * 3) |> take(3)

@@ -1,8 +1,12 @@
 use default
 
-use SOLUTION = (colour: List[string], nation: List[string],
-                drink: List[string], smoke: List[string],
-                pet: List[string])
+use SOLUTION = (
+    colour: List[string],
+    nation: List[string],
+    drink: List[string],
+    smoke: List[string],
+    pet: List[string]
+)
 
 permutations(items: List[string]) -> List[string]{} is
     if items.count == 0 then
@@ -32,62 +36,94 @@ si
 house_of(row: List[string], value: string) -> int =>
     row |> find_index(* =~ value)!
 
-together(left: List[string], left_value: string,
-         right: List[string], right_value: string) -> bool =>
+together(
+    left: List[string],
+    left_value: string,
+    right: List[string],
+    right_value: string
+) -> bool =>
     house_of(left, left_value) == house_of(right, right_value)
 
-next_to(left: List[string], left_value: string,
-        right: List[string], right_value: string) -> bool => (
-    let gap = house_of(left, left_value) - house_of(right, right_value)
-    gap == 1 \/ gap == -1)
+next_to(
+    left: List[string],
+    left_value: string,
+    right: List[string],
+    right_value: string
+) -> bool => (
+    let gap =
+        house_of(left, left_value) -
+        house_of(right, right_value)
+    gap == 1 \/ gap == -1
+)
 
 colour_rows() -> List[string]{} =>
     arrangements(["red", "green", "white", "yellow", "blue"])
-        |> filter(row => house_of(row, "green") + 1 ==
-            house_of(row, "white"))
+        |> filter(row =>
+            house_of(row, "green") + 1 == house_of(row, "white")
+        )
 
 nation_rows(colour: List[string]) -> List[string]{} =>
-    arrangements(["English", "Swede", "Dane", "Norwegian", "German"])
+    arrangements([
+        "English", "Swede", "Dane", "Norwegian", "German"
+    ])
         |> filter(row =>
             house_of(row, "Norwegian") == 0 /\
             together(row, "English", colour, "red") /\
-            next_to(row, "Norwegian", colour, "blue"))
+            next_to(row, "Norwegian", colour, "blue")
+        )
 
-drink_rows(colour: List[string], nation: List[string])
-    -> List[string]{} =>
+drink_rows(
+    colour: List[string],
+    nation: List[string]
+) -> List[string]{} =>
     arrangements(["tea", "coffee", "milk", "beer", "water"])
         |> filter(row =>
             house_of(row, "milk") == 2 /\
             together(row, "tea", nation, "Dane") /\
-            together(row, "coffee", colour, "green"))
+            together(row, "coffee", colour, "green")
+        )
 
-smoke_rows(colour: List[string], nation: List[string],
-           drink: List[string]) -> List[string]{} =>
-    arrangements(["Pall Mall", "Dunhill", "Blend", "Blue Master",
-                  "Prince"])
+smoke_rows(
+    colour: List[string],
+    nation: List[string],
+    drink: List[string]
+) -> List[string]{} =>
+    arrangements([
+        "Pall Mall", "Dunhill", "Blend", "Blue Master",
+        "Prince"
+    ])
         |> filter(row =>
             together(row, "Dunhill", colour, "yellow") /\
             together(row, "Blue Master", drink, "beer") /\
             together(row, "Prince", nation, "German") /\
-            next_to(row, "Blend", drink, "water"))
+            next_to(row, "Blend", drink, "water")
+        )
 
-pet_rows(nation: List[string], smoke: List[string])
-    -> List[string]{} =>
+pet_rows(
+    nation: List[string],
+    smoke: List[string]
+) -> List[string]{} =>
     arrangements(["dog", "bird", "cat", "horse", "zebra"])
         |> filter(row =>
             together(row, "dog", nation, "Swede") /\
             together(row, "bird", smoke, "Pall Mall") /\
             next_to(row, "cat", smoke, "Blend") /\
-            next_to(row, "horse", smoke, "Dunhill"))
+            next_to(row, "horse", smoke, "Dunhill")
+        )
 
 solutions() -> SOLUTION{} is
     for colour in colour_rows() do
         for nation in nation_rows(colour) do
             for drink in drink_rows(colour, nation) do
-                for smoke in smoke_rows(colour, nation, drink) do
+                for
+                    smoke in smoke_rows(colour, nation, drink)
+                do
                     for pet in pet_rows(nation, smoke) do
-                        yield (colour = colour, nation = nation,
-                               drink = drink, smoke = smoke, pet = pet)
+                        yield (
+                            colour = colour, nation = nation,
+                            drink = drink, smoke = smoke,
+                            pet = pet
+                        )
                     od
                 od
             od
@@ -104,22 +140,26 @@ pad(text: string, width: int) -> string =>
 
 row_text(house: int, solution: SOLUTION) -> string =>
     "{pad("{house + 1}", 3)}{pad(solution.colour[house], 8)}"
-        "{pad(solution.nation[house], 11)}"
-        "{pad(solution.drink[house], 8)}"
-        "{pad(solution.smoke[house], 12)}{solution.pet[house]}"
+    "{pad(solution.nation[house], 11)}"
+    "{pad(solution.drink[house], 8)}"
+    "{pad(solution.smoke[house], 12)}{solution.pet[house]}"
 
 let found = solutions() |> collect()
 
-write_line("{pad("no", 3)}{pad("colour", 8)}{pad("nation", 11)}"
-    "{pad("drink", 8)}{pad("smoke", 12)}pet")
+write_line(
+    "{pad("no", 3)}{pad("colour", 8)}{pad("nation", 11)}"
+    "{pad("drink", 8)}{pad("smoke", 12)}pet"
+)
 
 for solution in found do
     for house in 0..5 do
         write_line(row_text(house, solution))
     od
 
-    write_line("the {solution.nation[house_of(solution.pet, "zebra")]}"
-        " owns the zebra")
+    write_line(
+        "the {solution.nation[house_of(solution.pet, "zebra")]}"
+        " owns the zebra"
+    )
 od
 
 write_line("solutions found: {found.count}")

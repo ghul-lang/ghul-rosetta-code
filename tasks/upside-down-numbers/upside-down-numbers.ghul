@@ -1,6 +1,7 @@
 use default
 
-power_of_nine(exponent: int) -> int => repeat(9, exponent) |> product()
+power_of_nine(exponent: int) -> int =>
+    repeat(9, exponent) |> product()
 
 count_of_length(length: int) -> int => power_of_nine(length / 2)
 
@@ -13,8 +14,10 @@ upside_down(index: int) -> string =>
     let
         (length, rank) = locate(index - 1, 1),
         size = length / 2,
-        half =
-            [rank / power_of_nine(size - 1 - i) % 9 + 1 for i in 0..size],
+        half = [
+            rank / power_of_nine(size - 1 - i) % 9 + 1
+            for i in 0..size
+        ],
         middle = if length % 2 == 1 then "5" else "" fi,
         mirror = [10 - half[size - 1 - i] for i in 0..size]
     in
@@ -25,11 +28,15 @@ let first_fifty = 1::50 |> map(upside_down) |> collect()
 write_line("the first fifty upside-down numbers:")
 
 for row in 0..5 do
-    write_line("  {first_fifty[row * 10..row * 10 + 10] |> join(" ")}")
+    write_line(
+        "  {first_fifty[row * 10..row * 10 + 10] |> join(" ")}"
+    )
 od
 
 write_line("")
 
 for milestone in [500, 5_000, 50_000, 500_000, 5_000_000] do
-    write_line("number {milestone,9} is {upside_down(milestone)}")
+    write_line(
+        "number {milestone,9} is {upside_down(milestone)}"
+    )
 od

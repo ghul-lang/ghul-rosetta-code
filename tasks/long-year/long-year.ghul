@@ -18,10 +18,12 @@ for row in 2000::2100 |> filter(is_long_year) |> chunk(9) do
     write_line(row |> join(" "))
 od
 
-has_53_weeks(year: int) -> bool => ISOWeek.get_weeks_in_year(year) == 53
+has_53_weeks(year: int) -> bool =>
+    ISOWeek.get_weeks_in_year(year) == 53
 
-let agrees = 1600::2400
-    |> all(year => is_long_year(year) == has_53_weeks(year))
+let agrees =
+    1600::2400
+        |> all(year => is_long_year(year) == has_53_weeks(year))
 
 write_line()
 write_line("Agrees with ISOWeek from 1600 to 2400: {agrees}")

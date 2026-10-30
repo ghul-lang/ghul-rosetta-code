@@ -18,12 +18,13 @@ weird(n: int) -> bool => (
             |> sort_descending()
             |> collect()
 
-    proper |> sum() > n /\
-        !sums_to(proper, n))
+    proper |> sum() > n /\ !sums_to(proper, n)
+)
 
 from(2)
     |> filter(weird)
     |> take(25)
     |> chunk(5)
     |> each(row =>
-        write_line(row |> map(n => "{n,7}") |> join("")))
+        write_line(row |> map(n => "{n,7}") |> join(""))
+    )

@@ -6,7 +6,8 @@ super_d(d: int) -> long{} =>
         |> map(long)
         |> filter(n =>
             let value = bigint(d) * bigint.pow(bigint(n), d) in
-            value.to_string().contains(run))
+            value.to_string().contains(run)
+        )
 
 for d in 2::6 do
     write_line("First 10 super-{d} numbers:")

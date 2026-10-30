@@ -43,13 +43,17 @@ si
 let size = 21
 let centre = size / 2
 
-let grid = (0..size)
-    |> map(row => 0..size |> map(column => " ") |> collect_mutable())
-    |> collect()
+let grid =
+    (0..size)
+        |> map(row =>
+            0..size |> map(column => " ") |> collect_mutable()
+        )
+        |> collect()
 
 for placed in spiral() |> index() |> take(size * size) do
     if is_prime(placed.index + 1) then
-        grid[centre + placed.value.y][centre + placed.value.x] = "*"
+        grid[centre + placed.value.y][centre + placed.value.x] =
+            "*"
     fi
 od
 

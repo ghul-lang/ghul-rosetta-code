@@ -29,7 +29,8 @@ si
 
 chao(text: string, encrypting: bool) -> string is
     let left = "HXUCZVAMDSLKPEFJRIGTWOBNYQ" |> collect_mutable()
-    let right = "PTLNBQDEOYSFAVZKGJRIHWXUMC" |> collect_mutable()
+    let right =
+        "PTLNBQDEOYSFAVZKGJRIHWXUMC" |> collect_mutable()
     let out = LIST()
 
     for letter in text do
@@ -40,7 +41,9 @@ chao(text: string, encrypting: bool) -> string is
                 left |> find_index(* == letter)!
             fi
 
-        out.add(if encrypting then left[index] else right[index] fi)
+        out.add(
+            if encrypting then left[index] else right[index] fi
+        )
 
         advance(left, right, index)
     od

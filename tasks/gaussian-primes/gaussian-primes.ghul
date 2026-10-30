@@ -11,15 +11,20 @@ is_gaussian_prime(a: int, b: int) -> bool =>
     else is_prime(a * a + b * b)
     esac
 
-let primes_under_100 =
-    [(a = a, b = b)
-        for a in -10::10 for b in -10::10
-        if a * a + b * b < 100 /\ is_gaussian_prime(a, b)]
+let primes_under_100 = [
+    (a = a, b = b)
+    for a in -10::10
+    for b in -10::10
+    if a * a + b * b < 100 /\ is_gaussian_prime(a, b)
+]
 
 let count = primes_under_100.count
-let listing = primes_under_100
-    |> map(p => "{p.a}{if p.b >= 0 then "+" else "" fi}{p.b}i")
-    |> join()
+let listing =
+    primes_under_100
+        |> map(p =>
+            "{p.a}{if p.b >= 0 then "+" else "" fi}{p.b}i"
+        )
+        |> join()
 
 write_line("gaussian primes with norm < 100 ({count} total):")
 write_line(listing)
@@ -41,7 +46,9 @@ image.colour(40ub, 92ub, 168ub)
 
 for b in -50::50 do
     for a in -50::50 do
-        if a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b) then
+        if
+            a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b)
+        then
             image.dot(double(a), double(b), 2.0D)
         fi
     od

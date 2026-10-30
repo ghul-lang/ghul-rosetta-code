@@ -1,8 +1,9 @@
 use default
 
-class JOB(priority: int, description: string):
-    Ghul.Comparable[JOB]
-is
+class JOB(
+    priority: int,
+    description: string
+): Ghul.Comparable[JOB] is
     <>(other: JOB) -> int => priority <> other.priority
 
     to_string() -> string => "{priority}  {description}"
@@ -22,7 +23,9 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
 
         let child mut = _heap.count - 1
 
-        while child > 0 /\ _heap[child] < _heap[(child - 1) / 2] do
+        while
+            child > 0 /\ _heap[child] < _heap[(child - 1) / 2]
+        do
             let parent = (child - 1) / 2
 
             _swap(child, parent)
@@ -58,7 +61,10 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
         let smallest mut = parent
 
         for child in [parent * 2 + 1, parent * 2 + 2] do
-            if child < _heap.count /\ _heap[child] < _heap[smallest] then
+            if
+                child < _heap.count /\
+                _heap[child] < _heap[smallest]
+            then
                 smallest = child
             fi
         od
@@ -85,6 +91,7 @@ let queue = PRIORITY_QUEUE()
     JOB(5, "Make tea"),
     JOB(1, "Solve RC tasks"),
     JOB(2, "Tax return")
-] |> each(queue.push)
+]
+    |> each(queue.push)
 
 queue |> drain() |> each(job => write_line("{job}"))

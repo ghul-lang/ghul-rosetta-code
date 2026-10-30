@@ -120,17 +120,10 @@ let stats = (
 )
 ```
 
-  A block of four lines or fewer closes on its last line instead:
-
-```ghul
-let total = (
-    let acc mut = 0
-    for x in xs do acc = acc + x od
-    acc)
-```
-
-  Never put the opening paren on the line below, or line the statements up
-  under it.
+  A short block is laid out the same way: the closing paren always has a line
+  of its own. Never put the opening paren on the line below, or line the
+  statements up under it. The formatter lays blocks out like this, as it does
+  everything else ([Layout is the formatter's](#layout-is-the-formatters)).
 - **An `if`, a `case` or a loop is never parenthesised.** Each is an
   expression closed by its own keyword, so `level + if c then 1 else -1 fi`
   and `if a then 4 else 0 fi + if b then 2 else 0 fi` read as they are.
@@ -378,8 +371,8 @@ name shadows the one being called and draws `shadowed-non-callable`: inline the 
 name the local for what the value is.
 
 Swapping two values is one assignment, `(a, b) = (b, a)`, rather than three through a temporary.
-Wrapping one that runs long goes after the `=`, because a continuation line opening with `(` reads
-as a new statement.
+One that runs long keeps `= (` on its line and breaks between the parentheses: a continuation line
+opening with `(` would read as a new statement.
 
 ## A loop that computes one value is a function
 
@@ -518,25 +511,68 @@ it, 99% of their lines at 68 columns or less. The usual 80 and 100 are already t
 scripts/check-width.sh            # every line over the limits, worst first
 ```
 
-The compiler's formatter can do the wrapping where an expression is simply long. `--format-width`
-gives it the column to wrap at, since it targets 100 by default, and `--format-in-place` rewrites
-the file rather than printing to standard output:
-
-```sh
-dotnet ghul-compiler --format --format-width 76 tasks/<slug>/<slug>.ghul
-```
-
-Both flags need `--format` alongside them; on its own, `--format-width` sets a width for a run that
-then does not format anything.
-
-**Its output carries statement terminators**, which this repository's sources do not
-(ghul-lang/ghul#2298), so it cannot be used unattended here: strip them from what it produces before
-keeping it. Read the result in any case - the formatter is faithful but it is not the author, and a
-solution's line breaks are often deliberate.
+The formatter wraps an expression that is simply long, at 64 columns
+([Layout is the formatter's](#layout-is-the-formatters)).
 
 Where a line is long because of what it says rather than how it is laid out, break it up: a local
 variable for a sub-expression usually reads better than a continuation, and a long string of
 output is better built than written out.
+
+## Layout is the formatter's
+
+Every source is laid out as the compiler's formatter writes it at 64 columns, and CI checks that
+it is. Run it over what you change before opening a pull request:
+
+```sh
+scripts/check-format.sh          # every source the formatter would change, as a diff
+scripts/check-format.sh --fix    # rewrite them
+```
+
+What it does, so that a source written by hand already reads the same:
+
+- Indentation is four spaces a level, and depends only on nesting: nothing is lined up under an
+  opening bracket or the token above.
+- A function header that does not fit puts one parameter a line, and `) -> T =>` on a line of
+  its own.
+- The right-hand side of `=`, `=>`, `return` and `yield` stays on the line where it fits.
+  Otherwise one that opens with a bracket - a block, a tuple, an array literal, a call of a name -
+  stays on the line and breaks inside its brackets, and anything else, a pipe chain, an `if` or a
+  `case`, an operator chain, moves to the next line one level in.
+- Arguments, tuples and parameters that do not fit go one a line between brackets on lines of
+  their own. A last argument that is a function literal or an array literal hugs the call:
+  `map(x =>` with its body on the next line, `f([` ... `])`.
+- An array literal keeps the rows its author wrote - a board stays a board - and a row too long
+  for the width is filled, as many elements a line as fit. One written on one line that does not
+  fit is filled too when its elements are literals and names, and goes one a line otherwise.
+- A pipe chain that does not fit puts every stage on a line of its own, `|>` first, one level
+  in from its head.
+- An operator chain that does not fit breaks after its lowest-precedence operators, with every
+  operand at the first one's indent.
+- An `if`, a loop, a `case` arm or a single-variable `let ... in` written on one line stays on
+  one line where it fits, and one written over several lines stays that way. A header that does
+  not fit - `if`, `elif`, `while`, `for`, a `when` list - puts the keyword alone, the condition
+  one level in, and `then` or `do` alone.
+- Two or more variables in one `let ... in` take block form: `let` alone, a variable a line,
+  `in` alone, the body one level in. Write them so; a chain of single-variable `let ... in`
+  lines is the same thing spelled longer.
+- A string literal is never broken, nor a comment re-wrapped. A line that is long because of a
+  string stays long; break the string into adjacent literals, or build it, to bring it in.
+
+A `format-exempt` file names the sources to leave alone, one path a line relative to the task,
+with the reason on a `#` line above. Two cases earn one. A source that is also its own data - a
+quine, a program that reads its own text - because laying it out differently changes what the
+program prints. And a source whose layout is itself what the entry demonstrates: the Comments
+task's block comment sits inside a call, and the formatter writes that call on one line, which
+can only put the comment after it.
+
+The second case is not a way to keep a layout you prefer. The entry has to be demonstrating the
+very thing the formatter moves, and the `#` line has to say what that is. Everything else goes
+the other way: the formatter's layout stands, and a line that reads badly under it is fixed in
+the code or in the formatter.
+
+The formatter is faithful, not the author: where its layout of something reads badly, the fix
+usually belongs in the code - a local for a sub-expression, a shorter name - or in the formatter,
+not in a hand layout CI will refuse.
 
 ## Reaching shared state from a function
 

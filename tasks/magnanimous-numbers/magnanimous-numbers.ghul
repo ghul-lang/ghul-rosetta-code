@@ -2,9 +2,13 @@ use default
 
 is_magnanimous(value: int) -> bool =>
     let digits = "{value}" in
-    1..digits.length |> all(split => is_prime(
-        System.Convert.to_int32(digits[0..split]) +
-        System.Convert.to_int32(digits[split..<0])))
+    1..digits.length
+        |> all(split =>
+            is_prime(
+                System.Convert.to_int32(digits[0..split]) +
+                System.Convert.to_int32(digits[split..<0])
+            )
+        )
 
 magnanimous() -> int{} => from(0) |> filter(is_magnanimous)
 
@@ -21,8 +25,12 @@ od
 
 write_line("")
 write_line("the 241st to 250th:")
-write_line("  {terms[240..250] |> map(t => "{t,8}") |> join("")}")
+write_line(
+    "  {terms[240..250] |> map(t => "{t,8}") |> join("")}"
+)
 
 write_line("")
 write_line("the 391st to 400th:")
-write_line("  {terms[390..400] |> map(t => "{t,8}") |> join("")}")
+write_line(
+    "  {terms[390..400] |> map(t => "{t,8}") |> join("")}"
+)

@@ -4,8 +4,12 @@ use System.Math
 
 let random = System.Random(3)
 
-write_line("each round we both hide 0 to 3 coins and guess the total")
-write_line("no guessing the same total; the right guess wins the round")
+write_line(
+    "each round we both hide 0 to 3 coins and guess the total"
+)
+write_line(
+    "no guessing the same total; the right guess wins the round"
+)
 write_line("first to three rounds wins")
 
 read_numbers(prompt: string) -> int[]? is
@@ -19,9 +23,7 @@ read_numbers(prompt: string) -> int[]? is
 
     write_line("> {line.trim()}")
 
-    return line |> words()
-        |> map(int.parse)
-        |> collect()
+    return line |> words() |> map(int.parse) |> collect()
 si
 
 computer_guess(coins: int, other: int?) -> int => (
@@ -46,7 +48,11 @@ while mine < 3 /\ yours < 3 do
     let coins = random.next(4)
     let computer_first = round % 2 == 0
     let first =
-        if computer_first then computer_guess(coins, null) else null fi
+        if computer_first then
+            computer_guess(coins, null)
+        else
+            null
+        fi
 
     if let guess = first then
         write_line("I guess {guess}")
@@ -60,8 +66,12 @@ while mine < 3 /\ yours < 3 do
 
     let (hidden, called) = (entered[0], entered[1])
 
-    if hidden < 0 \/ hidden > 3 \/ (first? /\ called == first) then
-        write_line("hide 0 to 3 coins, and do not repeat my guess")
+    if
+        hidden < 0 \/ hidden > 3 \/ (first? /\ called == first)
+    then
+        write_line(
+            "hide 0 to 3 coins, and do not repeat my guess"
+        )
         round = round - 1
         continue
     fi

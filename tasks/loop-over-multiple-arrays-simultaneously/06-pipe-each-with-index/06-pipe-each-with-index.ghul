@@ -3,10 +3,14 @@ use default
 let letters = ['a', 'b', 'c']
 let capitals = ['A', 'B', 'C']
 let digits = [1, 2, 3]
-let count = [letters.count, capitals.count, digits.count] |> min()!
+let count =
+    [letters.count, capitals.count, digits.count] |> min()!
 
 letters
     |> index()
     |> take(count)
     |> each(x =>
-        write_line("{x.value}{capitals[x.index]}{digits[x.index]}"))
+        write_line(
+            "{x.value}{capitals[x.index]}{digits[x.index]}"
+        )
+    )

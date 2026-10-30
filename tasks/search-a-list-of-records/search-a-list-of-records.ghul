@@ -2,19 +2,18 @@ use default
 
 use City = (name: string, population: double)
 
-let cities: List[City] =
-    [
-        ("Lagos", 21.0D),
-        ("Cairo", 15.2D),
-        ("Kinshasa-Brazzaville", 11.3D),
-        ("Greater Johannesburg", 7.55D),
-        ("Mogadishu", 5.85D),
-        ("Khartoum-Omdurman", 4.98D),
-        ("Dar Es Salaam", 4.7D),
-        ("Alexandria", 4.58D),
-        ("Abidjan", 4.4D),
-        ("Casablanca", 3.98D)
-    ]
+let cities: List[City] = [
+    ("Lagos", 21.0D),
+    ("Cairo", 15.2D),
+    ("Kinshasa-Brazzaville", 11.3D),
+    ("Greater Johannesburg", 7.55D),
+    ("Mogadishu", 5.85D),
+    ("Khartoum-Omdurman", 4.98D),
+    ("Dar Es Salaam", 4.7D),
+    ("Alexandria", 4.58D),
+    ("Abidjan", 4.4D),
+    ("Casablanca", 3.98D)
+]
 
 first_index[T](values: List[T], matches: (T) -> bool) -> int? =>
     values
@@ -27,14 +26,18 @@ first_where[T](values: List[T], matches: (T) -> bool) -> T? =>
     values |> filter(matches) |> first()
 
 write_line(
-    "{first_index(cities, city => city.name =~ "Dar Es Salaam")!}")
+    "{first_index(cities, city => city.name =~ "Dar Es Salaam")!}"
+)
 
-if let sparse = first_where(cities, city => city.population < 5.0D) then
+if let
+    sparse = first_where(cities, city => city.population < 5.0D)
+then
     write_line("{sparse.name}")
 fi
 
-let initial =
-    first_where(cities, city => city.name.starts_with("A"))
+let initial = first_where(cities, city =>
+    city.name.starts_with("A")
+)
 
 if initial? then
     write_line("{initial.population}")

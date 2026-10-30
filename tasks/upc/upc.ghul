@@ -43,7 +43,8 @@ digit(seven: string, right: bool) -> int? =>
     0..10 |> find(d => patterns[d] =~ wanted)
 
 read(scan: string) -> List[int]? is
-    if scan[0..3] !~ "101" \/
+    if
+        scan[0..3] !~ "101" \/
         scan[45..50] !~ "01010" \/
         scan[92..95] !~ "101"
     then
@@ -53,7 +54,12 @@ read(scan: string) -> List[int]? is
     let found = LIST()
 
     for place in 0..12 do
-        let at = if place < 6 then 3 + place * 7 else 8 + place * 7 fi
+        let at =
+            if place < 6 then
+                3 + place * 7
+            else
+                8 + place * 7
+            fi
 
         if let read = digit(scan[at..at + 7], place >= 6) then
             found.add(read)
@@ -66,10 +72,13 @@ read(scan: string) -> List[int]? is
 si
 
 sound(found: List[int]) -> bool =>
-    (found
-        |> index()
-        |> sum_by(d =>
-            d.value * if d.index % 2 == 0 then 3 else 1 fi)) % 10 == 0
+    (
+        found
+            |> index()
+            |> sum_by(d =>
+                d.value * if d.index % 2 == 0 then 3 else 1 fi
+            )
+    ) % 10 == 0
 
 turned(scan: string) -> string =>
     0..scan.length

@@ -15,8 +15,10 @@ live_neighbours(grid: Grid, row: int, column: int) -> int is
             let c = column + dc
 
             if
-                r >= 0 /\ r < grid.count /\
-                c >= 0 /\ c < grid[0].count /\
+                r >= 0 /\
+                r < grid.count /\
+                c >= 0 /\
+                c < grid[0].count /\
                 grid[r][c]
             then
                 count = count + 1
@@ -40,9 +42,8 @@ step(grid: Grid) -> Grid is
 
     0..grid.count
         |> map(row =>
-            0..grid[0].count
-                |> map(alive(row, *))
-                |> collect())
+            0..grid[0].count |> map(alive(row, *)) |> collect()
+        )
         |> collect()
 si
 
@@ -50,7 +51,8 @@ show(generation: int, grid: Grid) is
     write_line("generation {generation}")
 
     for row in grid do
-        let cells = row |> map(alive => if alive then "#" else "." fi)
+        let cells =
+            row |> map(alive => if alive then "#" else "." fi)
 
         write_line(cells |> join(""))
     od
@@ -69,7 +71,9 @@ parse(rows: string[]) -> Grid => (
 )
 
 // A blinker, which oscillates with period two.
-let blinker mut = parse([".....", ".....", ".###.", ".....", "....."])
+let blinker mut = parse([
+    ".....", ".....", ".###.", ".....", "....."
+])
 
 for generation in 0::4 do
     show(generation, blinker)

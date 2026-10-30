@@ -12,6 +12,7 @@ fibonacci_sequence
     |> take(10)
     |> index()
     |> each((position, value) =>
-        write_line("fib({position}) = {value}"))
+        write_line("fib({position}) = {value}")
+    )
 
 write_line("fib(30) = {fib(30)}")

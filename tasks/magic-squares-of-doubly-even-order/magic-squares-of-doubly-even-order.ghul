@@ -5,25 +5,35 @@ magic(n: int) -> List[List[int]] =>
         |> map(row =>
             (0..n)
                 |> map(column =>
-                    let i = row * n + column, r = row % 4, c = column % 4 in
-                    let keep = r == c \/ r + c == 3 in
-                    if keep then n * n - i else i + 1 fi)
-                |> collect())
+                    let
+                        i = row * n + column,
+                        r = row % 4,
+                        c = column % 4
+                    in
+                        let keep = r == c \/ r + c == 3 in
+                        if keep then n * n - i else i + 1 fi
+                )
+                |> collect()
+        )
         |> collect()
 
 column(square: List[List[int]], c: int) -> int{} =>
     square |> map(row => row[c])
 
 check(square: List[List[int]]) -> bool =>
-    let n = square.count, target = n * (n * n + 1) / 2 in
-    let lines =
-        square
-            |> cat(0..n |> map(column(square, *)))
-            |> cat([
-                0..n |> map(i => square[i][i]),
-                0..n |> map(i => square[i][n - 1 - i])
-            ]) in
-    lines |> all(line => line |> sum() == target)
+    let
+        n = square.count,
+        target = n * (n * n + 1) / 2
+    in
+        let lines =
+            square
+                |> cat(0..n |> map(column(square, *)))
+                |> cat([
+                    0..n |> map(i => square[i][i]),
+                    0..n |> map(i => square[i][n - 1 - i])
+                ])
+        in
+        lines |> all(line => line |> sum() == target)
 
 let square = magic(8)
 
@@ -32,4 +42,6 @@ for row in square do
 od
 
 write_line("")
-write_line("every row, column and diagonal sums to 260: {check(square)}")
+write_line(
+    "every row, column and diagonal sums to 260: {check(square)}"
+)

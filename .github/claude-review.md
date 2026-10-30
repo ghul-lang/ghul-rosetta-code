@@ -53,10 +53,16 @@ rather than restating them here.
 - **A compiler bug worked around rather than reported.** A solution reshaped to
   avoid a bug ships the workaround to the wiki, where it outlives the bug. The
   task is marked blocked against an issue in `ghul-lang/ghul` instead.
-- **Line width.** 64 columns is the aim and 76 the limit, because the page renders
-  the code in a fixed-width block and ghul.dev in a narrower prose column.
+- **Line width.** How a source is laid out is settled by CI's format check, so
+  layout is not a review question and a hand layout is not a fix. What is a
+  finding: a line still over 76 columns once the formatter has had it, which
+  means the code itself needs taking apart - a local for a sub-expression, a
+  shorter name, a string built rather than written out. 64 columns is where the
+  formatter wraps and 76 the limit, because the page renders the code in a
+  fixed-width block and ghul.dev in a narrower prose column.
 - **Statement terminators.** Sources here carry none: the line break is the
-  terminator, and a `;` at the end of a line is a finding.
+  terminator. The formatter emits none either, so CI's format check already
+  catches a stray `;` and it needs no attention here.
 - **A playground link that cannot work.** A part that imports `Raster`,
   references a package outside the playground's fixed set, or writes to the
   filesystem cannot run in the browser, and needs a `playground-unsupported`

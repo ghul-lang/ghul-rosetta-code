@@ -5,7 +5,10 @@ flip[T](values: LIST[T], upto: int) is
     let high mut = upto
 
     while low < high do
-        (values[low], values[high]) = (values[high], values[low])
+        (values[low], values[high]) = (
+            values[high],
+            values[low]
+        )
 
         low = low + 1
         high = high - 1

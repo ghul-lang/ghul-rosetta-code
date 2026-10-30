@@ -8,12 +8,15 @@ escaped(text: string) -> string =>
             when '<' then "&lt;"
             when '>' then "&gt;"
             else "{character}"
-            esac)
+            esac
+        )
         |> join("")
 
 row(line: string, cell: string) -> string =>
     line.split([','])
-        |> map(value => "      <{cell}>{escaped(value)}</{cell}>")
+        |> map(value =>
+            "      <{cell}>{escaped(value)}</{cell}>"
+        )
         |> join("\n")
 
 table(csv: string) -> string => (
@@ -23,12 +26,13 @@ table(csv: string) -> string => (
         "  <thead>\n    <tr>\n{row(lines[0], "th")}\n    </tr>\n  </thead>"
     let body =
         lines[1..lines.count]
-            |> map(line => "    <tr>\n{row(line, "td")}\n    </tr>")
+            |> map(line =>
+                "    <tr>\n{row(line, "td")}\n    </tr>"
+            )
             |> join("\n")
 
     "<table>\n{head}\n  <tbody>\n{body}\n  </tbody>\n</table>"
 )
-
 
 let csv =
     "Character,Speech\n"

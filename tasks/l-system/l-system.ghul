@@ -1,19 +1,24 @@
 use default
 use Raster
 
-expand(axiom: string, rules: Map[char, string], steps: int) -> string is
+expand(
+    axiom: string,
+    rules: Map[char, string],
+    steps: int
+) -> string is
     let current mut = axiom
 
     for _ in 0..steps do
         current =
             current
-            |> map(symbol =>
-                if rules.contains_key(symbol) then
-                    rules[symbol]
-                else
-                    "{symbol}"
-                fi)
-            |> join("")
+                |> map(symbol =>
+                    if rules.contains_key(symbol) then
+                        rules[symbol]
+                    else
+                        "{symbol}"
+                    fi
+                )
+                |> join("")
     od
 
     return current
@@ -39,7 +44,8 @@ for step in 1..6 do
     write_line("{step} {generation}")
 od
 
-let plant = [('X', "F+[[X]-X]-F[-FX]+X"), ('F', "FF")] |> collect_map()
+let plant = [('X', "F+[[X]-X]-F[-FX]+X"), ('F', "FF")]
+    |> collect_map()
 
 let image = IMAGE(500, 500)
 
@@ -58,10 +64,13 @@ let drawing = [
     ('F', () => pen.forward(2.0)),
     ('+', () => pen.turn(-25.0)),
     ('-', () => pen.turn(25.0))
-] |> collect_mutable_map()
+]
+    |> collect_mutable_map()
 
-drawing['['] = () =>
-    saved.add((x = pen.x, y = pen.y, heading = pen.heading))
+drawing['['] =
+    () => saved.add(
+        (x = pen.x, y = pen.y, heading = pen.heading)
+    )
 
 drawing[']'] = () is
     let top = saved[saved.count - 1]

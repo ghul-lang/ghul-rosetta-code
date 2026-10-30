@@ -13,14 +13,20 @@ solid(c: Cell) -> bool is
         if depth == level then
             true
         else
-            let middles =
-                [x % 3, y % 3, z % 3] |> filter(* == 1) |> count()
+            let middles = [x % 3, y % 3, z % 3]
+                |> filter(* == 1)
+                |> count()
 
             middles < 2 /\ walk(x / 3, y / 3, z / 3, depth + 1)
         fi
 
-    if c.x < 0 \/ c.y < 0 \/ c.z < 0 \/
-        c.x >= size \/ c.y >= size \/ c.z >= size
+    if
+        c.x < 0 \/
+        c.y < 0 \/
+        c.z < 0 \/
+        c.x >= size \/
+        c.y >= size \/
+        c.z >= size
     then
         return false
     fi
@@ -28,32 +34,38 @@ solid(c: Cell) -> bool is
     walk(c.x, c.y, c.z, 0)
 si
 
-project(x: double, y: double, z: double) -> Flat =>
-    (
-        x = (x - z) * cos(pi / 6.0D),
-        y = y - (x + z) * sin(pi / 6.0D))
+project(x: double, y: double, z: double) -> Flat => (
+    x = (x - z) * cos(pi / 6.0D),
+    y = y - (x + z) * sin(pi / 6.0D)
+)
 
 let faces = [
     (
         normal = (x = 1, y = 0, z = 0),
         corners = [(1, 0, 0), (1, 1, 0), (1, 1, 1), (1, 0, 1)],
-        light = 0.7D),
+        light = 0.7D
+    ),
     (
         normal = (x = 0, y = 1, z = 0),
         corners = [(0, 1, 0), (1, 1, 0), (1, 1, 1), (0, 1, 1)],
-        light = 1.0D),
+        light = 1.0D
+    ),
     (
         normal = (x = 0, y = 0, z = 1),
         corners = [(0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1)],
-        light = 0.5D)
+        light = 0.5D
+    )
 ]
 
-let cells =
-    [(x = x, y = y, z = z)
-        for x in 0..size for y in 0..size for z in 0..size]
-        |> filter(solid)
-        |> sort((a, b) => (a.x + a.y + a.z) - (b.x + b.y + b.z))
-        |> collect()
+let cells = [
+    (x = x, y = y, z = z)
+    for x in 0..size
+    for y in 0..size
+    for z in 0..size
+]
+    |> filter(solid)
+    |> sort((a, b) => (a.x + a.y + a.z) - (b.x + b.y + b.z))
+    |> collect()
 
 let image = IMAGE(420, 450)
 let reach = double(size) * 1.05D
@@ -65,21 +77,29 @@ image.stroke(0.8D)
 for c in cells do
     for face in faces do
         let n = face.normal
-        let beside = (x = c.x + n.x, y = c.y + n.y, z = c.z + n.z)
+        let beside = (
+            x = c.x + n.x,
+            y = c.y + n.y,
+            z = c.z + n.z
+        )
 
         if !solid(beside) then
             let outline =
                 face.corners
-                    |> map((dx, dy, dz) => project(
-                        double(c.x + dx),
-                        double(c.y + dy),
-                        double(c.z + dz)))
+                    |> map((dx, dy, dz) =>
+                        project(
+                            double(c.x + dx),
+                            double(c.y + dy),
+                            double(c.z + dz)
+                        )
+                    )
                     |> collect()
 
             image.colour(
                 ubyte(200.0D * face.light),
                 ubyte(90.0D * face.light),
-                ubyte(40.0D * face.light))
+                ubyte(40.0D * face.light)
+            )
             image.fill(outline)
 
             image.colour(30ub, 20ub, 20ub)
@@ -90,7 +110,9 @@ od
 
 let total = size * size * size
 
-write_line("a level {level} sponge: {cells.count} of {total} cubes")
+write_line(
+    "a level {level} sponge: {cells.count} of {total} cubes"
+)
 
 image.write("sponge.png")
 

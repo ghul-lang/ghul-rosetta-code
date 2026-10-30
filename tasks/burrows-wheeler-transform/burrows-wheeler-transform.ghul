@@ -7,8 +7,7 @@ ordinal_order(left: string, right: string) -> int =>
     string.compare_ordinal(left, right)
 
 rotations(text: string) -> string{} =>
-    (0..text.length)
-        |> map(i => "{text[i..<0]}{text[0..i]}")
+    (0..text.length) |> map(i => "{text[i..<0]}{text[0..i]}")
 
 last_character(text: string) -> string =>
     "{text[text.length - 1]}"
@@ -24,10 +23,15 @@ invert(transformed: string) -> string => (
         empty = 0..width |> map(i => "")
 
     let table =
-        0..width |> reduce(empty, (t, _) =>
-            t |> index()
-                |> map(row => "{transformed[row.index]}{row.value}")
-                |> sort(ordinal_order))
+        0..width
+            |> reduce(empty, (t, _) =>
+                t
+                    |> index()
+                    |> map(row =>
+                        "{transformed[row.index]}{row.value}"
+                    )
+                    |> sort(ordinal_order)
+            )
 
     let framed =
         table
@@ -40,15 +44,21 @@ invert(transformed: string) -> string => (
 visible(text: string) -> string =>
     text.replace(start_of_text, '^').replace(end_of_text, '|')
 
-["banana",
- "appellee",
- "dogwood",
- "TO BE OR NOT TO BE OR WANT TO BE OR NOT?",
- "SIX.MIXED.PIXIES.SIFT.SIXTY.PIXIE.DUST.BOXES"]
+[
+    "banana",
+    "appellee",
+    "dogwood",
+    "TO BE OR NOT TO BE OR WANT TO BE OR NOT?",
+    "SIX.MIXED.PIXIES.SIFT.SIXTY.PIXIE.DUST.BOXES"
+]
     |> each(text => (
         let transformed = transform(text)
         write_line("Original text:                {text}")
-        write_line("After transformation:         {visible(transformed)}")
-        write_line("After inverse transformation: {invert(transformed)}")
+        write_line(
+            "After transformation:         {visible(transformed)}"
+        )
+        write_line(
+            "After inverse transformation: {invert(transformed)}"
+        )
         write_line("")
     ))

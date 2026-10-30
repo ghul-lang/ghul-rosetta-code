@@ -28,26 +28,30 @@ wrap(i: int) -> int => (i + grid) % grid
 
 attempt() -> List[int]? is
     let placed = repeat(-1, grid * grid) |> collect_mutable()
-    let options =
-        LIST[LIST[int]](
-            0..grid * grid |> map(_ => LIST(0..blocks.count)))
+    let options = LIST[LIST[int]](
+        0..grid * grid |> map(_ => LIST(0..blocks.count))
+    )
 
     for _ in 0..grid * grid do
-        let open =
-            0..grid * grid |> filter(i => placed[i] < 0)
+        let open = 0..grid * grid |> filter(i => placed[i] < 0)
 
         let least =
-            open |> map(i => options[i].count) |> reduce(99, int.min)
+            open
+                |> map(i => options[i].count)
+                |> reduce(99, int.min)
 
         if least == 0 then
             return null
         fi
 
         let candidates =
-            open |> filter(i => options[i].count == least) |> collect()
+            open
+                |> filter(i => options[i].count == least)
+                |> collect()
 
         let cell = candidates[random.next(candidates.count)]
-        let choice = options[cell][random.next(options[cell].count)]
+        let choice =
+            options[cell][random.next(options[cell].count)]
         let row = cell / grid, column = cell % grid
 
         placed[cell] = choice
@@ -77,10 +81,12 @@ od
 let blocks_placed = placed!
 
 pixel(y: int, x: int) -> char =>
-    let row = Math.min(y / 2, grid - 1) in
-    let column = Math.min(x / 2, grid - 1) in
-    blocks[blocks_placed[row * grid + column]][y - 2 * row][x - 2 * column]
-
+    let
+        row = Math.min(y / 2, grid - 1),
+        column = Math.min(x / 2, grid - 1),
+        block = blocks[blocks_placed[row * grid + column]]
+    in
+        block[y - 2 * row][x - 2 * column]
 
 write_line("collapsed on attempt {tries}")
 write_line("")
@@ -99,8 +105,11 @@ for y in 0..tile do
     for x in 0..tile do
         if pixel(y, x) == '#' then
             image.fill_rectangle(
-                double(x * scale), double(y * scale),
-                double((x + 1) * scale), double((y + 1) * scale))
+                double(x * scale),
+                double(y * scale),
+                double((x + 1) * scale),
+                double((y + 1) * scale)
+            )
         fi
     od
 od

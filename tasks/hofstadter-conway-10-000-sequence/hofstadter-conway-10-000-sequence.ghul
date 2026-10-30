@@ -28,4 +28,6 @@ od
 
 let prize = 1::limit |> filter(n => ratio(n) >= 0.55) |> max()!
 
-write_line("\nMallows' number, the last n with a(n) / n >= 0.55: {prize}")
+write_line(
+    "\nMallows' number, the last n with a(n) / n >= 0.55: {prize}"
+)

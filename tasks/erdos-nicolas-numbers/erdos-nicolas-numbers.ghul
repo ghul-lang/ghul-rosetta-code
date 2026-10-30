@@ -20,11 +20,14 @@ erdos_nicolas(limit: int) -> (value: int, k: int){} is
             if divisors_at_hit[multiple] > 0 then
                 has_later_divisor[multiple] = true
             elif running_sum[multiple] < multiple then
-                running_sum[multiple] = running_sum[multiple] + divisor
-                divisors_used[multiple] = divisors_used[multiple] + 1
+                running_sum[multiple] =
+                    running_sum[multiple] + divisor
+                divisors_used[multiple] =
+                    divisors_used[multiple] + 1
 
                 if running_sum[multiple] == multiple then
-                    divisors_at_hit[multiple] = divisors_used[multiple]
+                    divisors_at_hit[multiple] =
+                        divisors_used[multiple]
                 fi
             fi
             multiple = multiple + divisor
@@ -32,12 +35,17 @@ erdos_nicolas(limit: int) -> (value: int, k: int){} is
     od
 
     for value in 2::limit do
-        if divisors_at_hit[value] > 1 /\ has_later_divisor[value] then
+        if
+            divisors_at_hit[value] > 1 /\
+            has_later_divisor[value]
+        then
             yield (value, divisors_at_hit[value])
         fi
     od
 si
 
 for (value, k) in erdos_nicolas(1_600_000) do
-    write_line("{value,8} equals the sum of its first {k,2} divisors")
+    write_line(
+        "{value,8} equals the sum of its first {k,2} divisors"
+    )
 od

@@ -8,10 +8,16 @@ shortest_supersequence(u: string, v: string) -> string memo =>
     elif u[0] == v[0] then
         "{u[0]}{shortest_supersequence(u[1..<0], v[1..<0])}"
     else
-        let keep_u = "{u[0]}{shortest_supersequence(u[1..<0], v)}"
-        let keep_v = "{v[0]}{shortest_supersequence(u, v[1..<0])}"
+        let keep_u =
+            "{u[0]}{shortest_supersequence(u[1..<0], v)}"
+        let keep_v =
+            "{v[0]}{shortest_supersequence(u, v[1..<0])}"
 
-        if keep_u.length <= keep_v.length then keep_u else keep_v fi
+        if keep_u.length <= keep_v.length then
+            keep_u
+        else
+            keep_v
+        fi
     fi
 
 let u = "abcbdab"

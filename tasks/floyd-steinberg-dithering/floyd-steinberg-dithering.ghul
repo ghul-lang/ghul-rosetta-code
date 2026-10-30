@@ -10,10 +10,12 @@ let height = 360
 let light = (x = -0.45D, y = 0.55D, z = 0.70D)
 
 brightness(pixel_x: int, pixel_y: int) -> double => (
-    let x = (double(pixel_x) - 0.5D * double(width)) /
-            (0.42D * double(height))
-    let y = (0.5D * double(height) - double(pixel_y)) /
-            (0.42D * double(height))
+    let x =
+        (double(pixel_x) - 0.5D * double(width)) /
+        (0.42D * double(height))
+    let y =
+        (0.5D * double(height) - double(pixel_y)) /
+        (0.42D * double(height))
 
     let sky = 0.86D - 0.42D * (y + 1.2D) / 2.4D
     let away = x * x + y * y
@@ -48,9 +50,15 @@ let palette = 2
 nearest(value: double) -> double => (
     let steps = double(palette - 1)
 
-    round(min(1.0D, max(0.0D, value)) * steps) / steps)
+    round(min(1.0D, max(0.0D, value)) * steps) / steps
+)
 
-spread(pixel_x: int, pixel_y: int, error: double, part: double) is
+spread(
+    pixel_x: int,
+    pixel_y: int,
+    error: double,
+    part: double
+) is
     if pixel_x >= 0 /\ pixel_x < width /\ pixel_y < height then
         let at = pixel_y * width + pixel_x
 
@@ -67,7 +75,13 @@ for pixel_y in 0..height do
 
         let shade = ubyte(round(255.0D * chosen))
 
-        dithered.set_pixel(pixel_x, pixel_y, shade, shade, shade)
+        dithered.set_pixel(
+            pixel_x,
+            pixel_y,
+            shade,
+            shade,
+            shade
+        )
 
         spread(pixel_x + 1, pixel_y, error, 7.0D / 16.0D)
         spread(pixel_x - 1, pixel_y + 1, error, 3.0D / 16.0D)
@@ -78,7 +92,9 @@ od
 
 let ink =
     (0..width * height)
-        |> filter(at => dithered.pixel(at % width, at / width).red < 128ub)
+        |> filter(at =>
+            dithered.pixel(at % width, at / width).red < 128ub
+        )
         |> count()
 
 write_line("{width} by {height}, {palette} grey levels")

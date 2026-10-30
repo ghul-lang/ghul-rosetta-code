@@ -5,10 +5,11 @@ use Raster.IMAGE
 use Math = System.Math
 use Point = (x: double, y: double)
 
-let peaks =
-    [(x = -1.2D, y = -0.8D, height = 1.0D, spread = 1.0D),
-     (x = 1.4D, y = 0.9D, height = 1.4D, spread = 0.8D),
-     (x = 0.2D, y = -1.6D, height = -0.9D, spread = 0.7D)]
+let peaks = [
+    (x = -1.2D, y = -0.8D, height = 1.0D, spread = 1.0D),
+    (x = 1.4D, y = 0.9D, height = 1.4D, spread = 0.8D),
+    (x = 0.2D, y = -1.6D, height = -0.9D, spread = 0.7D)
+]
 
 height_at(x: double, y: double) -> double =>
     peaks
@@ -28,18 +29,25 @@ let top = 2.4D
 
 let steps = 120
 
-sample(column: int, row: int) -> Point =>
-    (x = left + (right - left) * double(column) /
-                double(steps),
-     y = bottom + (top - bottom) * double(row) /
-                  double(steps))
+sample(column: int, row: int) -> Point => (
+    x = left + (right - left) * double(column) / double(steps),
+    y = bottom + (top - bottom) * double(row) / double(steps)
+)
 
-crossing(from: Point, from_height: double,
-         to: Point, to_height: double, level: double) -> Point => (
+crossing(
+    from: Point,
+    from_height: double,
+    to: Point,
+    to_height: double,
+    level: double
+) -> Point => (
     let part = (level - from_height) / (to_height - from_height)
 
-    (x = from.x + (to.x - from.x) * part,
-     y = from.y + (to.y - from.y) * part))
+    (
+        x = from.x + (to.x - from.x) * part,
+        y = from.y + (to.y - from.y) * part
+    )
+)
 
 contour(level: double) -> (from: Point, to: Point){} is
     for row in 0..steps do
@@ -60,10 +68,34 @@ contour(level: double) -> (from: Point, to: Point){} is
                 if c > level then 4 else 0 fi +
                 if d > level then 8 else 0 fi
 
-            let south = crossing(south_west, a, south_east, b, level)
-            let east = crossing(south_east, b, north_east, c, level)
-            let north = crossing(north_east, c, north_west, d, level)
-            let west = crossing(north_west, d, south_west, a, level)
+            let south = crossing(
+                south_west,
+                a,
+                south_east,
+                b,
+                level
+            )
+            let east = crossing(
+                south_east,
+                b,
+                north_east,
+                c,
+                level
+            )
+            let north = crossing(
+                north_east,
+                c,
+                north_west,
+                d,
+                level
+            )
+            let west = crossing(
+                north_west,
+                d,
+                south_west,
+                a,
+                level
+            )
 
             let middle = (a + b + c + d) / 4.0D > level
 
@@ -96,8 +128,7 @@ contour(level: double) -> (from: Point, to: Point){} is
     od
 si
 
-let levels =
-    0::12 |> map(step => -0.75D + 0.15D * double(step))
+let levels = 0::12 |> map(step => -0.75D + 0.15D * double(step))
 
 let image = IMAGE(600, 480)
 
@@ -108,11 +139,14 @@ let highest = 1.5D
 
 for pixel_y in 0..image.height do
     for pixel_x in 0..image.width do
-        let spot =
-            image.to_user(double(pixel_x), double(pixel_y))
+        let spot = image.to_user(
+            double(pixel_x),
+            double(pixel_y)
+        )
 
         let part =
-            (height_at(spot.x, spot.y) - lowest) / (highest - lowest)
+            (height_at(spot.x, spot.y) - lowest) /
+            (highest - lowest)
 
         image.colour(COLOUR_MAP.viridis(part))
         image.set_pixel(pixel_x, pixel_y)
@@ -130,7 +164,12 @@ for level in levels do
     write_line("{level,6:F2}{pieces.count,11}")
 
     for piece in pieces do
-        image.line(piece.from.x, piece.from.y, piece.to.x, piece.to.y)
+        image.line(
+            piece.from.x,
+            piece.from.y,
+            piece.to.x,
+            piece.to.y
+        )
     od
 od
 

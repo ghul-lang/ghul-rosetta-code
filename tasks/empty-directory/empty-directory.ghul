@@ -1,28 +1,36 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-empty-directory")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-empty-directory"
+)
 
 IO.Directory.create_directory(scratch)
 
 is_empty(path: string) -> bool =>
     let use entries =
-        IO.Directory.enumerate_file_system_entries(path).iterator in
+        IO.Directory.enumerate_file_system_entries(
+            path
+        ).iterator
+    in
     !entries.move_next()
-
 
 let empty = IO.Path.combine(scratch, "empty")
 let occupied = IO.Path.combine(scratch, "occupied")
 
 IO.Directory.create_directory(empty)
 IO.Directory.create_directory(occupied)
-IO.File.write_all_text(IO.Path.combine(occupied, "note.txt"), "something\n")
+IO.File.write_all_text(
+    IO.Path.combine(occupied, "note.txt"),
+    "something\n"
+)
 
 for path in [empty, occupied] do
     let name = IO.Path.get_file_name(path)
 
     write_line(
-        "{name}: {if is_empty(path) then "empty" else "not empty" fi}")
+        "{name}: {if is_empty(path) then "empty" else "not empty" fi}"
+    )
 od
 
 IO.Directory.delete(scratch, true)

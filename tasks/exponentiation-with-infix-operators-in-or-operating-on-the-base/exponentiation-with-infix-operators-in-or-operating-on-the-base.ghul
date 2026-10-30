@@ -14,6 +14,7 @@ for x in [-5, 5] do
         write_line(
             "x = {x,2}, p = {p}:  -x ** p = {first,4}  "
             "-(x) ** p = {second,4}  (-x) ** p = {third,4}  "
-            "-(x ** p) = {fourth,4}")
+            "-(x ** p) = {fourth,4}"
+        )
     od
 od

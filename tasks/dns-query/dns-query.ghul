@@ -4,11 +4,14 @@ use System.Net.IPAddress
 use System.Net.Sockets.AddressFamily
 
 report(addresses: IPAddress[]) is
-    for (label, family) in [
-        ("IPv4", AddressFamily.INTER_NETWORK),
-        ("IPv6", AddressFamily.INTER_NETWORK_V6)
-    ] do
-        let matching = addresses |> filter(a => a.address_family == family)
+    for
+        (label, family) in [
+            ("IPv4", AddressFamily.INTER_NETWORK),
+            ("IPv6", AddressFamily.INTER_NETWORK_V6)
+        ]
+    do
+        let matching =
+            addresses |> filter(a => a.address_family == family)
 
         for address in matching do
             write_line("{label}: {address}")

@@ -1,8 +1,8 @@
 #!/usr/bin/env ghul
-
 use default
 
-let words = if args.count > 0 then args else ["one", "two", "three"] fi
+let words =
+    if args.count > 0 then args else ["one", "two", "three"] fi
 for (position, word) in words |> index() do
     write_line("arg {position}: {word}")
 od

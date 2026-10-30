@@ -8,7 +8,7 @@ reorder(items: string[], order: string[]) -> string{} is
     for entry in items |> index() do
         let outstanding mut = 0
 
-        wanted.try_get_value(entry.value, outstanding ref)
+        wanted.try_get_value(entry.value, outstanding ref )
 
         if outstanding > 0 then
             wanted[entry.value] = outstanding - 1
@@ -26,17 +26,22 @@ reorder(items: string[], order: string[]) -> string{} is
     reordered.to_array()
 si
 
-[("the cat sat on the mat", "mat cat"),
- ("the cat sat on the mat", "cat mat"),
- ("A B C A B C A B C", "C A C A"),
- ("A B C A B D A B E", "E A D A"),
- ("A B", "B"),
- ("A B", "B A"),
- ("A B B A", "B A")]
+[
+    ("the cat sat on the mat", "mat cat"),
+    ("the cat sat on the mat", "cat mat"),
+    ("A B C A B C A B C", "C A C A"),
+    ("A B C A B D A B E", "E A D A"),
+    ("A B", "B"),
+    ("A B", "B A"),
+    ("A B B A", "B A")
+]
     |> each(example => (
         let (items, order) = example
 
-        let result = reorder(items.split([' ']), order.split([' ']))
+        let result = reorder(
+            items.split([' ']),
+            order.split([' '])
+        )
 
         write_line("M: {items}")
         write_line("N: {order}")

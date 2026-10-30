@@ -12,20 +12,26 @@ let random = System.Random(1963)
 // Box-Muller: a pair of uniform values on (0, 1] becomes a value from the
 // standard normal distribution, which the mean and deviation then place.
 normal() -> double =>
-    mean + deviation * sqrt(-2.0 * log(random.next_double())) *
-        cos(2.0 * pi * random.next_double())
+    mean +
+    deviation *
+    sqrt(-2.0 * log(random.next_double())) *
+    cos(2.0 * pi * random.next_double())
 
 let sample = 0..1000 |> map(_ => normal()) |> collect()
 
 let average = sample |> sum() / double(sample.count)
 
 let variance =
-    (sample
-        |> sum_by(value => (value - average) * (value - average))) /
-    double(sample.count)
+    (
+        sample
+            |> sum_by(value =>
+                (value - average) * (value - average)
+            )
+    ) / double(sample.count)
 
 write_line("{sample.count} values")
-let first_five = sample |> take(5) |> map(v => "{v:F4}") |> join(" ")
+let first_five =
+    sample |> take(5) |> map(v => "{v:F4}") |> join(" ")
 
 write_line("first five: {first_five}")
 write_line("mean {average:F4}")

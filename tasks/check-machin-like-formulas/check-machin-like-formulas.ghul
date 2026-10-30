@@ -1,9 +1,11 @@
 use default
 
 struct GAUSSIAN(real: bigint, imaginary: bigint) is
-    *(other: GAUSSIAN) -> GAUSSIAN => GAUSSIAN(
-        real * other.real - imaginary * other.imaginary,
-        real * other.imaginary + imaginary * other.real)
+    *(other: GAUSSIAN) -> GAUSSIAN =>
+        GAUSSIAN(
+            real * other.real - imaginary * other.imaginary,
+            real * other.imaginary + imaginary * other.real
+        )
 
     conjugate: GAUSSIAN => GAUSSIAN(real, 0n - imaginary)
 si
@@ -16,9 +18,14 @@ tangent_is_one(terms: TERM[]) -> bool is
     for term in terms do
         let angle = GAUSSIAN(
             cast(term.denominator),
-            cast(term.numerator))
+            cast(term.numerator)
+        )
         let factor =
-            if term.multiplier < 0 then angle.conjugate else angle fi
+            if term.multiplier < 0 then
+                angle.conjugate
+            else
+                angle
+            fi
 
         for _ in 0..System.Math.abs(term.multiplier) do
             product = product * factor
@@ -33,10 +40,10 @@ describe(term: TERM) -> string =>
         sign = if term.multiplier < 0 then "-" else "+" fi,
         scale = System.Math.abs(term.multiplier),
         angle = "arctan({term.numerator}/{term.denominator})",
-        scaled = if scale == 1 then angle else "{scale}*{angle}" fi
+        scaled =
+            if scale == 1 then angle else "{scale}*{angle}" fi
     in
         "{sign} {scaled}"
-
 
 let formulas = [
     [TERM(1, 1, 2), TERM(1, 1, 3)],
@@ -82,7 +89,11 @@ let formulas = [
 
 for terms in formulas do
     let verdict =
-        if tangent_is_one(terms) then "correct" else "INCORRECT" fi
+        if tangent_is_one(terms) then
+            "correct"
+        else
+            "INCORRECT"
+        fi
 
     let joined = terms |> map(describe) |> join(" ")
     let sum = joined.trim_start(['+', ' '])
