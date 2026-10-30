@@ -1,13 +1,13 @@
-A = {1, 2, 3, 4}
-B = {3, 4, 5, 6}
+A = [1, 2, 3, 4]
+B = [3, 4, 5, 6]
 3 is in A: true
 10 is in A: false
-A union B = {1, 2, 3, 4, 5, 6}
-A intersect B = {3, 4}
-A - B = {1, 2}
-{1, 2} subset of A: true
+A union B = [1, 2, 3, 4, 5, 6]
+A intersect B = [3, 4]
+A - B = [1, 2]
+[1, 2] subset of A: true
 A subset of B: false
-A = {4, 3, 2, 1}: true
+A = [4, 3, 2, 1]: true
 A = B: false
-after adding 99: {1, 2, 3, 4, 99}
-after removing 99: {1, 2, 3, 4}
+after adding 99: [1, 2, 3, 4, 99]
+after removing 99: [1, 2, 3, 4]

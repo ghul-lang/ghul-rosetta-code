@@ -1,44 +1,35 @@
 use default
 
-render(s: SET[int]) -> string => (
-    let items = s |> collect_mutable()
-    items.sort()
-
-    "{{{items |> join(", ")}}}"
-)
-
 let a = SET([1, 2, 3, 4])
 let b = SET([3, 4, 5, 6])
 
-write_line("A = {render(a)}")
-write_line("B = {render(b)}")
+write_line("A = {a}")
+write_line("B = {b}")
 write_line("3 is in A: {a.contains(3)}")
 write_line("10 is in A: {a.contains(10)}")
 
 let combined = SET(a)
 combined.union_with(b)
-write_line("A union B = {render(combined)}")
+write_line("A union B = {combined}")
 
 let intersection = SET(a)
 intersection.intersect_with(b)
-write_line("A intersect B = {render(intersection)}")
+write_line("A intersect B = {intersection}")
 
 let difference = SET(a)
 difference.except_with(b)
-write_line("A - B = {render(difference)}")
+write_line("A - B = {difference}")
 
-write_line(
-    "{{1, 2}} subset of A: {SET([1, 2]).is_subset_of(a)}"
-)
+write_line("[1, 2] subset of A: {SET([1, 2]).is_subset_of(a)}")
 write_line("A subset of B: {a.is_subset_of(b)}")
 
 write_line(
-    "A = {{4, 3, 2, 1}}: {a.set_equals(SET([4, 3, 2, 1]))}"
+    "A = [4, 3, 2, 1]: {a.set_equals(SET([4, 3, 2, 1]))}"
 )
 write_line("A = B: {a.set_equals(b)}")
 
 let mutable = SET(a)
 mutable.add(99)
-write_line("after adding 99: {render(mutable)}")
+write_line("after adding 99: {mutable}")
 mutable.remove(99)
-write_line("after removing 99: {render(mutable)}")
+write_line("after removing 99: {mutable}")
