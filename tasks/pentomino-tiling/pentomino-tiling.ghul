@@ -203,8 +203,7 @@ for i in 0..size * size do
         tiles.add(
             [
                 (x = x, y = y), (x = x + cell, y = y),
-                (x = x + cell, y = y + cell),
-                (x = x, y = y + cell)
+                (x = x + cell, y = y + cell), (x = x, y = y + cell)
             ],
             colour(name)
         )

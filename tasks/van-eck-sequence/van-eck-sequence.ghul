@@ -11,7 +11,7 @@ van_eck() -> int{} is
 
         let previous mut = 0
         let next =
-            if last_seen.try_get_value(term, previous ref ) then
+            if last_seen.try_get_value(term, previous ref) then
                 position - previous
             else
                 0

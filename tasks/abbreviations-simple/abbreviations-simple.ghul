@@ -23,7 +23,7 @@ let commands = LIST()
 for token in words(table) do
     let minimum mut = 0
 
-    if int.try_parse(token, minimum ref ) then
+    if int.try_parse(token, minimum ref) then
         let last = commands.count - 1
 
         commands[last] = (

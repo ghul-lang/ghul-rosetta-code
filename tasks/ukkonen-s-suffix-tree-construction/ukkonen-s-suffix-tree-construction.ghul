@@ -188,8 +188,7 @@ class SUFFIX_TREE is
 si
 
 let samples = [
-    "GEEKSFORGEEKS", "AAAAAAAAAA", "ABCDEFG", "banana",
-    "ATCGATCGA"
+    "GEEKSFORGEEKS", "AAAAAAAAAA", "ABCDEFG", "banana", "ATCGATCGA"
 ]
 
 for text in samples do

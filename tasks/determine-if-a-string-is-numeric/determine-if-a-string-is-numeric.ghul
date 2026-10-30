@@ -2,7 +2,7 @@ use default
 
 numeric(text: string) -> bool =>
     let parsed mut = 0.0 in
-    double.try_parse(text, parsed ref )
+    double.try_parse(text, parsed ref)
 
 for
     candidate in [

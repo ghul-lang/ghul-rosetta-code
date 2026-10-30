@@ -1,0 +1,5 @@
+# The source writes Unicode code points as \uXXXX escapes, and the formatter
+# rewrites an escape whose code point has a glyph as that character, which
+# changes what this entry shows. Remove this file once the formatter keeps a
+# literal's escapes as they were written.
+special-characters.ghul

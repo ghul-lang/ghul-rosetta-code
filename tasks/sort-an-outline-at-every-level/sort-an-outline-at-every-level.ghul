@@ -111,28 +111,24 @@ show(title: string, outline: List[string], descending: bool) is
 si
 
 let spaced = [
-    "zeta", "    beta", "    gamma", "        lambda",
-    "        kappa",
+    "zeta", "    beta", "    gamma", "        lambda", "        kappa",
     "        mu", "    delta", "alpha", "    theta", "    iota",
     "    epsilon"
 ]
 
 let tabbed = [
-    "zeta", "\tgamma", "\t\tmu", "\t\tlambda", "\t\tkappa",
-    "\tdelta",
+    "zeta", "\tgamma", "\t\tmu", "\t\tlambda", "\t\tkappa", "\tdelta",
     "\tbeta", "alpha", "\ttheta", "\tiota", "\tepsilon"
 ]
 
 let mixed_characters = [
-    "alpha", "    epsilon", "\tiota", "    theta", "zeta",
-    "    beta",
+    "alpha", "    epsilon", "\tiota", "    theta", "zeta", "    beta",
     "    delta", "    gamma", "    \tkappa", "        lambda",
     "        mu"
 ]
 
 let mixed_widths = [
-    "zeta", "    beta", "   gamma", "        lambda",
-    "         kappa",
+    "zeta", "    beta", "   gamma", "        lambda", "         kappa",
     "        mu", "    delta", "alpha", "    theta", "    iota",
     "    epsilon"
 ]

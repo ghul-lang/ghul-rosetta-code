@@ -13,7 +13,7 @@ si
 
 write_line("the first fifty forbidden numbers:")
 
-1::10000
+1::10_000
     |> filter(is_forbidden)
     |> take(50)
     |> chunk(10)

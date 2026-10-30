@@ -31,7 +31,7 @@ write_line(
     "a struct argument is a copy: count is {count.value}"
 )
 
-bump_count_by_reference(count ref )
+bump_count_by_reference(count ref)
 
 write_line("through a reference: count is {count.value}")
 

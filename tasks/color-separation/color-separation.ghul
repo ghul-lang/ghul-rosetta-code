@@ -105,21 +105,11 @@ si
 let layers: Layer[] = [
     ("original", 0, 0, p => p),
     ("red", 0, 1, p => (red = p.red, green = 0ub, blue = 0ub)),
-    ("green", 0, 2, p => (
-        red = 0ub, green = p.green, blue = 0ub
-    )),
-    ("blue", 0, 3, p => (
-        red = 0ub, green = 0ub, blue = p.blue
-    )),
-    ("cyan", 1, 1, p =>
-        ink(1.0D - fraction(p.red), 0.0D, 1.0D, 1.0D)
-    ),
-    ("magenta", 1, 2, p =>
-        ink(1.0D - fraction(p.green), 1.0D, 0.0D, 1.0D)
-    ),
-    ("yellow", 1, 3, p =>
-        ink(1.0D - fraction(p.blue), 1.0D, 1.0D, 0.0D)
-    ),
+    ("green", 0, 2, p => (red = 0ub, green = p.green, blue = 0ub)),
+    ("blue", 0, 3, p => (red = 0ub, green = 0ub, blue = p.blue)),
+    ("cyan", 1, 1, p => ink(1.0D - fraction(p.red), 0.0D, 1.0D, 1.0D)),
+    ("magenta", 1, 2, p => ink(1.0D - fraction(p.green), 1.0D, 0.0D, 1.0D)),
+    ("yellow", 1, 3, p => ink(1.0D - fraction(p.blue), 1.0D, 1.0D, 0.0D)),
     ("cyan", 2, 0, p => ink(cmyk(p).c, 0.0D, 1.0D, 1.0D)),
     ("magenta", 2, 1, p => ink(cmyk(p).m, 1.0D, 0.0D, 1.0D)),
     ("yellow", 2, 2, p => ink(cmyk(p).y, 1.0D, 1.0D, 0.0D)),

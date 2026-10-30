@@ -54,7 +54,7 @@ languages(api: string) -> (name: string, users: int){} is
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !root.try_get_property("continue", more ref ) then
+        if !root.try_get_property("continue", more ref) then
             break
         fi
 

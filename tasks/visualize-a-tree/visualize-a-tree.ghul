@@ -36,11 +36,7 @@ let tree = NODE("kingdom", [
         NODE("vertebrate", [leaf("bird"), leaf("mammal")]),
         NODE("invertebrate", [leaf("mollusc")])
     ]),
-    NODE("plant", [
-        leaf("moss"),
-        leaf("fern"),
-        leaf("conifer")
-    ]),
+    NODE("plant", [leaf("moss"), leaf("fern"), leaf("conifer")]),
     leaf("fungus")
 ])
 

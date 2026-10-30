@@ -101,8 +101,7 @@ od
 write_line()
 
 let encoded = [
-    "|LHello|G|J|M", "\"|m|j|@|e|!t|m|!|?\"", "abc|", "abc|!",
-    "|1"
+    "|LHello|G|J|M", "\"|m|j|@|e|!t|m|!|?\"", "abc|", "abc|!", "|1"
 ]
 
 for text in encoded do

@@ -1,8 +1,7 @@
 use default
 
 let haystack = [
-    "Zig", "Zag", "Wally", "Ronald", "Bush", "Krusty",
-    "Charlie", "Bush",
+    "Zig", "Zag", "Wally", "Ronald", "Bush", "Krusty", "Charlie", "Bush",
     "Bozo"
 ]
 

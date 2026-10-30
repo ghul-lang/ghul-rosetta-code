@@ -299,8 +299,7 @@ lex("{lines |> join("\n")}\n")
 
 for
     source in [
-        "''", "'\\r'", "'xx'", "/* never closed",
-        "\"no closing quote",
+        "''", "'\\r'", "'xx'", "/* never closed", "\"no closing quote",
         "\"a\nb\"", "a | b", "123abc"
     ]
 do

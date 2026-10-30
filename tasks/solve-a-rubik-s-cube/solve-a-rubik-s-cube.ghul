@@ -1,8 +1,7 @@
 use default
 
 let goal = LIST([
-    "UF", "UR", "UB", "UL", "DF", "DR", "DB", "DL", "FR", "FL",
-    "BR", "BL",
+    "UF", "UR", "UB", "UL", "DF", "DR", "DB", "DL", "FR", "FL", "BR", "BL",
     "UFR", "URB", "UBL", "ULF", "DRF", "DFL", "DLB", "DBR"
 ])
 

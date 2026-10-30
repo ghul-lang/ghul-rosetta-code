@@ -11,9 +11,7 @@ read_75000() -> int? =>
     while let line = ask("integer: ") do
         let value mut = 0
 
-        if
-            int.try_parse(line, value ref ) /\ value == 75000
-        then
+        if int.try_parse(line, value ref) /\ value == 75000 then
             break value
         fi
 

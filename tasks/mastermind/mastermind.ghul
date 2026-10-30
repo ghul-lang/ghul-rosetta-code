@@ -24,7 +24,7 @@ ask(prompt: string, low: int, high: int) -> int is
     write_line("{prompt} ({low}-{high})?")
 
     while
-        !int.try_parse(next_line(), value ref ) \/
+        !int.try_parse(next_line(), value ref) \/
         value < low \/
         value > high
     do

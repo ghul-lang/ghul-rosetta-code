@@ -1,10 +1,8 @@
 use default
 
 let small = [
-    "zero", "one", "two", "three", "four", "five", "six",
-    "seven",
-    "eight", "nine", "ten", "eleven", "twelve", "thirteen",
-    "fourteen",
+    "zero", "one", "two", "three", "four", "five", "six", "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
     "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
 ]
 
@@ -113,8 +111,7 @@ as_number(text: string) -> long =>
     fi
 
 [
-    "1", "2", "3", "4", "5", "11", "65", "100", "101", "272",
-    "23456",
+    "1", "2", "3", "4", "5", "11", "65", "100", "101", "272", "23456",
     "8007006005004003", "00123.0", "1.23e2"
 ]
     |> each(text =>

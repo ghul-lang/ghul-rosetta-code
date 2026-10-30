@@ -80,10 +80,7 @@ image.colour(60ub, 60ub, 60ub)
 image.text(5.0, -4.8, 13.0, "leading digit", Anchor.CENTRE)
 
 let keys = [
-    (
-        shade = observed_colour,
-        label = "first 1000 Fibonacci numbers"
-    ),
+    (shade = observed_colour, label = "first 1000 Fibonacci numbers"),
     (shade = benford_colour, label = "Benford's law")
 ]
 

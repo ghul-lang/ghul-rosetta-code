@@ -80,8 +80,7 @@ image.line(-wide, 0.0D, wide, 0.0D)
 image.line(0.0D, -1.2D, 0.0D, 1.2D)
 
 let colours = [
-    (200ub, 50ub, 40ub), (40ub, 130ub, 60ub),
-    (40ub, 80ub, 180ub)
+    (200ub, 50ub, 40ub), (40ub, 130ub, 60ub), (40ub, 80ub, 180ub)
 ]
 
 for (i, (label, length)) in cycles |> index() do

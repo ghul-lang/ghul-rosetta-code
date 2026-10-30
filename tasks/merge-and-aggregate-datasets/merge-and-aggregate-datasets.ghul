@@ -63,8 +63,7 @@ patients
 
         write_line(
             row([
-                "{patient.id,-10}", "{patient.lastname,-8}",
-                "{latest,-10}",
+                "{patient.id,-10}", "{patient.lastname,-8}", "{latest,-10}",
                 "{sum_cell,9}", "{average_cell,9}"
             ])
         )

@@ -187,7 +187,7 @@ human_choice(hand: List[Card]) -> Choice? is
         let index mut = 0
 
         let valid =
-            int.try_parse(words[0], index ref ) /\
+            int.try_parse(words[0], index ref) /\
             index >= 1 /\
             index <= hand.count
 

@@ -3,18 +3,14 @@ use default
 use System.DateTime
 
 let day_names = [
-    "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi",
-    "Manik’",
-    "Lamat", "Muluk", "Ok", "Chuwen", "Eb", "Ben", "Hix", "Men",
-    "K’ib’",
+    "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi", "Manik’",
+    "Lamat", "Muluk", "Ok", "Chuwen", "Eb", "Ben", "Hix", "Men", "K’ib’",
     "Kaban", "Etz’nab’", "Kawak", "Ajaw"
 ]
 
 let months = [
-    "Pop", "Wo’", "Sip", "Sotz’", "Sek", "Xul", "Yaxk’in",
-    "Mol", "Ch’en",
-    "Yax", "Sak’", "Keh", "Mak", "K’ank’in", "Muwan", "Pax",
-    "K’ayab",
+    "Pop", "Wo’", "Sip", "Sotz’", "Sek", "Xul", "Yaxk’in", "Mol", "Ch’en",
+    "Yax", "Sak’", "Keh", "Mak", "K’ank’in", "Muwan", "Pax", "K’ayab",
     "Kumk’u", "Wayeb’"
 ]
 
@@ -45,8 +41,8 @@ haab(days: int) -> string =>
 
 long_count(days: int) -> string =>
     let
-        bak_tun = days / 144000,
-        k_atun = days / 7200 % 20
+        bak_tun = days / 144_000,
+        k_atun = days / 7_200 % 20
     in
         let
             tun = days / 360 % 20,

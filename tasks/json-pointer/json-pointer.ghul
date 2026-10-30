@@ -113,10 +113,7 @@ let document = Json.OBJECT([
     member("g/h", text("chrestomathy")),
     member("i~j", text("site")),
     member("abc", Json.ARRAY([text("is"), text("a")])),
-    member(
-        "def",
-        Json.OBJECT([member("", text("programming"))])
-    )
+    member("def", Json.OBJECT([member("", text("programming"))]))
 ])
 
 let pointers = [

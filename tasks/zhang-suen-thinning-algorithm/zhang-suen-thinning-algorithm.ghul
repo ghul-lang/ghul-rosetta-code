@@ -55,8 +55,7 @@ let original =
     black |> map(row => row |> collect()) |> collect()
 
 let around = [
-    (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1),
-    (-1, -1)
+    (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
 ]
 
 neighbours(row: int, column: int) -> List[bool] =>

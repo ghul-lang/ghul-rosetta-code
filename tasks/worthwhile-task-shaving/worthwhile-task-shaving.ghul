@@ -15,14 +15,12 @@ let shaved = [
 ]
 
 let per_year = [
-    ("50/day", 50.0 * 365.25), ("5/day", 5.0 * 365.25),
-    ("daily", 365.25),
+    ("50/day", 50.0 * 365.25), ("5/day", 5.0 * 365.25), ("daily", 365.25),
     ("weekly", 365.25 / 7.0), ("monthly", 12.0), ("yearly", 1.0)
 ]
 
 let units = [
-    ("second", 1.0, minute), ("minute", minute, hour),
-    ("hour", hour, day),
+    ("second", 1.0, minute), ("minute", minute, hour), ("hour", hour, day),
     ("day", day, 14.0 * day), ("week", week, 9.0 * week),
     ("month", month, year)
 ]

@@ -9,8 +9,7 @@ first_repeat(text: string) -> (first: int, second: int)? =>
         |> find((_, second) => second >= 0)
 
 let strings = [
-    "", ".", "abcABC", "XYZ ZYX",
-    "1234567890ABCDEFGHIJKLMN0PQRSTUVWXYZ"
+    "", ".", "abcABC", "XYZ ZYX", "1234567890ABCDEFGHIJKLMN0PQRSTUVWXYZ"
 ]
 
 for text in strings do

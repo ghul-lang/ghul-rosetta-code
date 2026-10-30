@@ -88,7 +88,8 @@ class TALLY is
 
         if value <= counted then below = below + 1 fi
         if found <= 50 then first_fifty.add(value) fi
-        if found == 10_000 then ten_thousandth = value
+        if found == 10_000 then
+            ten_thousandth = value
         fi
     si
 

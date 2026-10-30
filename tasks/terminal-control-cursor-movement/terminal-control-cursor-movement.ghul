@@ -10,10 +10,7 @@ let moves = [
     (what = "to the start of the line", sequence = "[G"),
     (what = "to the end of the line", sequence = "[999C"),
     (what = "to the top left corner", sequence = "[H"),
-    (
-        what = "to the bottom right corner",
-        sequence = "[999;999H"
-    )
+    (what = "to the bottom right corner", sequence = "[999;999H")
 ]
 
 for move in moves do

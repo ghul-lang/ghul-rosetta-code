@@ -49,10 +49,7 @@ row(
 
 let characters = [
     (code_point = 65, name = "LATIN CAPITAL LETTER A"),
-    (
-        code_point = 246,
-        name = "LATIN SMALL LETTER O WITH DIAERESIS"
-    ),
+    (code_point = 246, name = "LATIN SMALL LETTER O WITH DIAERESIS"),
     (code_point = 1046, name = "CYRILLIC CAPITAL LETTER ZHE"),
     (code_point = 8364, name = "EURO SIGN"),
     (code_point = 119070, name = "MUSICAL SYMBOL G CLEF")

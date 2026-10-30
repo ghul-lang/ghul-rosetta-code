@@ -60,7 +60,8 @@ let hundred_millionth =
     self_numbers() |> skip(99_999_999) |> first_or_throw()
 
 let verdict =
-    if hundred_millionth == 1_022_727_208 then "confirmed"
+    if hundred_millionth == 1_022_727_208 then
+        "confirmed"
     else "wrong"
     fi
 

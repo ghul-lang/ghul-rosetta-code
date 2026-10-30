@@ -559,13 +559,17 @@ What it does, so that a source written by hand already reads the same:
   string stays long; break the string into adjacent literals, or build it, to bring it in.
 
 A `format-exempt` file names the sources to leave alone, one path a line relative to the task,
-with the reason on a `#` line above. Two cases earn one. A source that is also its own data - a
+with the reason on a `#` line above. Three cases earn one. A source that is also its own data - a
 quine, a program that reads its own text - because laying it out differently changes what the
-program prints. And a source whose layout is itself what the entry demonstrates: the Comments
+program prints. A source whose layout is itself what the entry demonstrates: the Comments
 task's block comment sits inside a call, and the formatter writes that call on one line, which
 can only put the comment after it.
 
-The second case is not a way to keep a layout you prefer. The entry has to be demonstrating the
+And a source whose string literals are written as `\uXXXX` escapes, which the formatter rewrites
+as the characters themselves. That one is a formatter bug rather than a layout decision, so those
+exemptions go when it is fixed; each says so.
+
+The layout case is not a way to keep a layout you prefer. The entry has to be demonstrating the
 very thing the formatter moves, and the `#` line has to say what that is. Everything else goes
 the other way: the formatter's layout stands, and a line that reads badly under it is fixed in
 the code or in the formatter.

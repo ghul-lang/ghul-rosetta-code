@@ -8,12 +8,12 @@ inventory() -> int{} is
 
         while true do
             let seen mut = 0
-            counts.try_get_value(value, seen ref )
+            counts.try_get_value(value, seen ref)
 
             yield seen
 
             let of_that_count mut = 0
-            counts.try_get_value(seen, of_that_count ref )
+            counts.try_get_value(seen, of_that_count ref)
             counts[seen] = of_that_count + 1
 
             if seen == 0 then

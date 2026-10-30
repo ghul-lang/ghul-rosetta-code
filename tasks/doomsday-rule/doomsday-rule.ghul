@@ -7,8 +7,7 @@ let day_names = [
 
 let month_names = [
     "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November",
-    "December"
+    "July", "August", "September", "October", "November", "December"
 ]
 
 is_leap_year(year: int) -> bool =>

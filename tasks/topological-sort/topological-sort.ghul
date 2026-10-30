@@ -94,20 +94,14 @@ let libraries = [
         dependencies =
             "std synopsys dware dw03 dw02 dw01 ieee gtech"
     ),
-    (
-        library = "dw04",
-        dependencies = "dw04 ieee dw01 dware gtech"
-    ),
+    (library = "dw04", dependencies = "dw04 ieee dw01 dware gtech"),
     (library = "dw05", dependencies = "dw05 ieee dware"),
     (library = "dw06", dependencies = "dw06 ieee dware"),
     (library = "dw07", dependencies = "ieee dware"),
     (library = "dware", dependencies = "ieee dware"),
     (library = "gtech", dependencies = "ieee gtech"),
     (library = "ramlib", dependencies = "std ieee"),
-    (
-        library = "std_cell_lib",
-        dependencies = "ieee std_cell_lib"
-    ),
+    (library = "std_cell_lib", dependencies = "ieee std_cell_lib"),
     (library = "synopsys", dependencies = "")
 ]
 

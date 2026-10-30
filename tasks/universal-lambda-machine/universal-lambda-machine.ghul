@@ -265,14 +265,8 @@ let programs = [
         name = "the 342 bit program", limit = 1000,
         program = the_342_bit_program
     ),
-    (
-        name = "the quine", limit = 1000,
-        program = the_quine_program
-    ),
-    (
-        name = "100 doors", limit = 100,
-        program = the_100_doors_program
-    ),
+    (name = "the quine", limit = 1000, program = the_quine_program),
+    (name = "100 doors", limit = 100, program = the_100_doors_program),
     (
         name = "the sieve of Eratosthenes", limit = 100,
         program = the_sieve_program
