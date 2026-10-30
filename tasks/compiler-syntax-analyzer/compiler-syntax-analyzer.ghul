@@ -1,12 +1,6 @@
 use default
 use IO.Std.read_line
 
-union Node is
-    EMPTY
-    LEAF(kind: string, value: string)
-    BRANCH(kind: string, left: Node, right: Node)
-si
-
 enum KIND is
     LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, SEMICOLON, COMMA,
     ASSIGN, NOT, MULTIPLY, DIVIDE, MOD, ADD, SUBTRACT,
@@ -14,6 +8,23 @@ enum KIND is
     IDENTIFIER, INTEGER, STRING,
     IF, ELSE, WHILE, PRINT, PUTC,
     END_OF_INPUT
+si
+
+union Node is
+    EMPTY
+    IDENTIFIER(name: string)
+    INTEGER(value: string)
+    STRING(text: string)
+    SEQUENCE(left: Node, right: Node)
+    IF(condition: Node, then_part: Node, else_part: Node)
+    ASSIGN(target: Node, value: Node)
+    WHILE(condition: Node, body: Node)
+    PRTC(value: Node)
+    PRTS(text: Node)
+    PRTI(value: Node)
+    NEGATE(operand: Node)
+    NOT(operand: Node)
+    OPERATOR(kind: KIND, left: Node, right: Node)
 si
 
 class TOKEN(kind: KIND, value: string, line: string, column: string)
@@ -39,24 +50,37 @@ let lexicon = [
 let kinds = MAP(lexicon)
 let spellings = MAP(lexicon |> map(((text, kind)) => (kind, text)))
 
-let unary = 14
+let unary_precedence = 14
 
-binary_operator(kind: KIND) -> (symbol: string, precedence: int)? =>
+binary_precedence(kind: KIND) -> int? =>
     case kind
-    when KIND.MULTIPLY then (symbol = "Multiply", precedence = 13)
-    when KIND.DIVIDE then (symbol = "Divide", precedence = 13)
-    when KIND.MOD then (symbol = "Mod", precedence = 13)
-    when KIND.ADD then (symbol = "Add", precedence = 12)
-    when KIND.SUBTRACT then (symbol = "Subtract", precedence = 12)
-    when KIND.LESS then (symbol = "Less", precedence = 10)
-    when KIND.LESS_EQUAL then (symbol = "LessEqual", precedence = 10)
-    when KIND.GREATER then (symbol = "Greater", precedence = 10)
-    when KIND.GREATER_EQUAL then (symbol = "GreaterEqual", precedence = 10)
-    when KIND.EQUAL then (symbol = "Equal", precedence = 9)
-    when KIND.NOT_EQUAL then (symbol = "NotEqual", precedence = 9)
-    when KIND.AND then (symbol = "And", precedence = 5)
-    when KIND.OR then (symbol = "Or", precedence = 4)
+    when KIND.MULTIPLY, KIND.DIVIDE, KIND.MOD then 13
+    when KIND.ADD, KIND.SUBTRACT then 12
+    when KIND.LESS, KIND.LESS_EQUAL, KIND.GREATER,
+        KIND.GREATER_EQUAL then 10
+    when KIND.EQUAL, KIND.NOT_EQUAL then 9
+    when KIND.AND then 5
+    when KIND.OR then 4
     else null
+    esac
+
+operator_spelling(kind: KIND) -> string =>
+    case kind
+    when KIND.MULTIPLY then "Multiply"
+    when KIND.DIVIDE then "Divide"
+    when KIND.MOD then "Mod"
+    when KIND.ADD then "Add"
+    when KIND.SUBTRACT then "Subtract"
+    when KIND.LESS then "Less"
+    when KIND.LESS_EQUAL then "LessEqual"
+    when KIND.GREATER then "Greater"
+    when KIND.GREATER_EQUAL then "GreaterEqual"
+    when KIND.EQUAL then "Equal"
+    when KIND.NOT_EQUAL then "NotEqual"
+    when KIND.AND then "And"
+    when KIND.OR then "Or"
+    else
+        throw System.Exception("{kind} is not a binary operator")
     esac
 
 class PARSER(tokens: List[TOKEN]) is
@@ -95,7 +119,7 @@ class PARSER(tokens: List[TOKEN]) is
             list
         else
             statements_from(
-                Node.BRANCH("Sequence", list, statement()), stoppers)
+                Node.SEQUENCE(list, statement()), stoppers)
         fi
 
     statement() -> Node =>
@@ -106,13 +130,12 @@ class PARSER(tokens: List[TOKEN]) is
             let then_part = statement()
             let else_part =
                 if accept(KIND.ELSE) then statement() else Node.EMPTY fi
-            Node.BRANCH("If", condition,
-                Node.BRANCH("If", then_part, else_part))
+            Node.IF(condition, then_part, else_part)
         when KIND.PUTC then
             advance()
             let value = parenthesised()
             expect(KIND.SEMICOLON)
-            Node.BRANCH("Prtc", value, Node.EMPTY)
+            Node.PRTC(value)
         when KIND.PRINT then
             advance()
             print_list()
@@ -124,7 +147,7 @@ class PARSER(tokens: List[TOKEN]) is
         when KIND.WHILE then
             advance()
             let condition = parenthesised()
-            Node.BRANCH("While", condition, statement())
+            Node.WHILE(condition, statement())
         when KIND.LEFT_BRACE then
             block()
         else
@@ -134,12 +157,12 @@ class PARSER(tokens: List[TOKEN]) is
         esac
 
     assignment() -> Node => (
-        let target = Node.LEAF("Identifier", token.value)
+        let target = Node.IDENTIFIER(token.value)
         advance()
         expect(KIND.ASSIGN)
         let value = expression(0)
         expect(KIND.SEMICOLON)
-        Node.BRANCH("Assign", target, value))
+        Node.ASSIGN(target, value))
 
     block() -> Node => (
         advance()
@@ -150,14 +173,14 @@ class PARSER(tokens: List[TOKEN]) is
     print_list() -> Node => (
         expect(KIND.LEFT_PAREN)
         let list =
-            print_items(Node.BRANCH("Sequence", Node.EMPTY, print_item()))
+            print_items(Node.SEQUENCE(Node.EMPTY, print_item()))
         expect(KIND.RIGHT_PAREN)
         expect(KIND.SEMICOLON)
         list)
 
     print_items(list: Node) -> Node =>
         if accept(KIND.COMMA) then
-            print_items(Node.BRANCH("Sequence", list, print_item()))
+            print_items(Node.SEQUENCE(list, print_item()))
         else
             list
         fi
@@ -165,11 +188,11 @@ class PARSER(tokens: List[TOKEN]) is
     print_item() -> Node =>
         case token.kind
         when KIND.STRING then
-            let text = Node.LEAF("String", token.value)
+            let text = Node.STRING(token.value)
             advance()
-            Node.BRANCH("Prts", text, Node.EMPTY)
+            Node.PRTS(text)
         else
-            Node.BRANCH("Prti", expression(0), Node.EMPTY)
+            Node.PRTI(expression(0))
         esac
 
     parenthesised() -> Node => (
@@ -187,21 +210,21 @@ class PARSER(tokens: List[TOKEN]) is
             parenthesised()
         when KIND.SUBTRACT then
             advance()
-            Node.BRANCH("Negate", expression(unary), Node.EMPTY)
+            Node.NEGATE(expression(unary_precedence))
         when KIND.NOT then
             advance()
-            Node.BRANCH("Not", expression(unary), Node.EMPTY)
+            Node.NOT(expression(unary_precedence))
         when KIND.ADD then
             advance()
-            expression(unary)
+            expression(unary_precedence)
         when KIND.IDENTIFIER then
-            let value = token.value
+            let name = token.value
             advance()
-            Node.LEAF("Identifier", value)
+            Node.IDENTIFIER(name)
         when KIND.INTEGER then
             let value = token.value
             advance()
-            Node.LEAF("Integer", value)
+            Node.INTEGER(value)
         else
             throw System.Exception(
                 "({token.line}, {token.column}) expecting a primary, "
@@ -209,24 +232,70 @@ class PARSER(tokens: List[TOKEN]) is
         esac
 
     binary_tail(left: Node, minimum: int) -> Node =>
-        if let op = binary_operator(token.kind) /\
-                op.precedence >= minimum then
+        if let precedence = binary_precedence(token.kind) /\
+                precedence >= minimum then
+            let kind = token.kind
             advance()
-            let right = expression(op.precedence + 1)
-            binary_tail(Node.BRANCH(op.symbol, left, right), minimum)
+            let right = expression(precedence + 1)
+            binary_tail(Node.OPERATOR(kind, left, right), minimum)
         else
             left
         fi
 si
 
+leaf(kind: string, value: string) is
+    write_line("{kind,-14}{value}")
+si
+
+unary(kind: string, value: Node) is
+    // the task's tree gives every unary node an empty second child
+    write_line(kind)
+    show(value)
+    write_line(";")
+si
+
+binary(kind: string, left: Node, right: Node) is
+    write_line(kind)
+    show(left)
+    show(right)
+si
+
 show(node: Node) is
     case node
-    when (kind, value): Node.LEAF then write_line("{kind,-14}{value}")
-    when (kind, left, right): Node.BRANCH then
-        write_line(kind)
-        show(left)
-        show(right)
-    else write_line(";")
+    when identifier: Node.IDENTIFIER then
+        leaf("Identifier", identifier.name)
+    when integer: Node.INTEGER then
+        leaf("Integer", integer.value)
+    when literal: Node.STRING then
+        leaf("String", literal.text)
+    when Node.EMPTY then
+        write_line(";")
+    when (condition, then_part, else_part): Node.IF then
+        // the task's output spells an if as an If over the condition and
+        // a second If over the two parts
+        write_line("If")
+        show(condition)
+        write_line("If")
+        show(then_part)
+        show(else_part)
+    when (left, right): Node.SEQUENCE then
+        binary("Sequence", left, right)
+    when (target, value): Node.ASSIGN then
+        binary("Assign", target, value)
+    when (condition, body): Node.WHILE then
+        binary("While", condition, body)
+    when prtc: Node.PRTC then
+        unary("Prtc", prtc.value)
+    when prts: Node.PRTS then
+        unary("Prts", prts.text)
+    when prti: Node.PRTI then
+        unary("Prti", prti.value)
+    when operand: Node.NEGATE then
+        unary("Negate", operand.operand)
+    when operand: Node.NOT then
+        unary("Not", operand.operand)
+    when (kind, left, right): Node.OPERATOR then
+        binary(operator_spelling(kind), left, right)
     esac
 si
 
