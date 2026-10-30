@@ -6,14 +6,18 @@ union Expression is
     BINARY(symbol: char, left: Expression, right: Expression)
 si
 
-use PARSE = (value: Expression, rest: char{})
-use SUBPARSER = (char{}) -> PARSE
+use PARSE = (value: Expression, rest: List[char])
+use SUBPARSER = (List[char]) -> PARSE
 
-parse_atom(tokens: char{}) -> PARSE =>
+parse_atom(tokens: List[char]) -> PARSE =>
     case tokens
     when ['(', ..rest] then
-        let inner = parse_or(rest) in
-        (value = inner.value, rest = inner.rest |> skip(1))
+        case parse_or(rest)
+        when (inner, [')', ..after]) then
+            (value = inner, rest = after)
+        else
+            throw Ghul.Exception("expected ')'")
+        esac
     when ['!', ..rest] then
         let operand = parse_atom(rest) in
         (
@@ -27,7 +31,7 @@ parse_atom(tokens: char{}) -> PARSE =>
     esac
 
 parse_binary(
-    tokens: char{},
+    tokens: List[char],
     symbol: char,
     below: SUBPARSER
 ) -> PARSE is
@@ -52,13 +56,13 @@ parse_binary(
     more(below(tokens))
 si
 
-parse_and(tokens: char{}) -> PARSE =>
+parse_and(tokens: List[char]) -> PARSE =>
     parse_binary(tokens, '&', parse_atom)
 
-parse_xor(tokens: char{}) -> PARSE =>
+parse_xor(tokens: List[char]) -> PARSE =>
     parse_binary(tokens, '^', parse_and)
 
-parse_or(tokens: char{}) -> PARSE =>
+parse_or(tokens: List[char]) -> PARSE =>
     parse_binary(tokens, '|', parse_xor)
 
 names(expression: Expression) -> string{} is
@@ -109,7 +113,9 @@ digit(value: bool) -> string => if value then "1" else "0" fi
 
 table(source: string) is
     let expression =
-        parse_or(source |> filter(c => c != ' ')).value
+        parse_or(
+            source |> filter(c => c != ' ') |> memo()
+        ).value
     let variables =
         expression |> names() |> distinct() |> collect()
 
