@@ -4,7 +4,10 @@ use System.Diagnostics.Stopwatch
 // Process time rather than wall-clock time, so another program running at
 // the same time does not show up as this one taking longer.
 spent() -> double =>
-    System.Diagnostics.Process.get_current_process().total_processor_time.total_milliseconds
+    let process =
+        System.Diagnostics.Process.get_current_process()
+    in
+    process.total_processor_time.total_milliseconds
 
 timed(name: string, work: () -> int) =>
     let

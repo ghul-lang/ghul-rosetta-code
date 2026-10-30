@@ -28,7 +28,14 @@ let declared =
     robot.get_type().get_methods(flags)
         |> filter(m => m.declaring_type == robot.get_type())
         |> map(m =>
-            "{m.name}({m.get_parameters() |> map(p => "{p.parameter_type.name} {p.name}") |> join(", ")}) -> {m.return_type.name}"
+            let parameters =
+                m.get_parameters()
+                    |> map(p =>
+                        "{p.parameter_type.name} {p.name}"
+                    )
+                    |> join(", ")
+            in
+            "{m.name}({parameters}) -> {m.return_type.name}"
         )
         |> collect_mutable()
 

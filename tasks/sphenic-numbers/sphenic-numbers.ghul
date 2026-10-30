@@ -47,8 +47,11 @@ write_line(
 
 let sphenic_200000th = sphenics[200000 - 1]
 
+let factors_200000th =
+    sphenic_200000th |> prime_factors() |> join(" x ")
+
 write_line(
-    "the 200000th sphenic number is {sphenic_200000th} = {sphenic_200000th |> prime_factors() |> join(" x ")}"
+    "the 200000th sphenic number is {sphenic_200000th} = {factors_200000th}"
 )
 
 let triplet_5000th = triplets[5000 - 1]
