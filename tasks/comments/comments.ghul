@@ -6,4 +6,5 @@
 
 use default
 
-write_line("ghul has two kinds of comment") /* and one can sit here */
+write_line(
+    "ghul has two kinds of comment" /* and either can sit mid-line */)
