@@ -1,31 +1,23 @@
 use default
 
-let limit = 15_485_864
-
-let category = repeat(0, limit + 1) |> collect_mutable()
-
-categorise(p: int) -> int =>
+categorise(p: int) -> int memo =>
     1 +
     (
         factorize(p + 1)
             |> map(f => f.prime)
             |> filter(* > 3)
-            |> map(f => category[f])
+            |> map(categorise)
             |> max() ?? 0
     )
 
 let first_million = primes() |> take(1_000_000) |> memo()
-
-for p in first_million do
-    category[p] = categorise(p)
-od
 
 write_line("First 200 primes:")
 
 for
     (number, group) in first_million
         |> take(200)
-        |> group_by(p => category[p])
+        |> group_by(categorise)
 do
     write_line("\nCategory {number}:")
     write_line("{group}")
@@ -35,7 +27,7 @@ write_line("\nFirst million primes:\n")
 
 for
     (number, group) in first_million
-        |> group_by(p => category[p])
+        |> group_by(categorise)
 do
     let first = group[0], last = group[group.count - 1]
 
