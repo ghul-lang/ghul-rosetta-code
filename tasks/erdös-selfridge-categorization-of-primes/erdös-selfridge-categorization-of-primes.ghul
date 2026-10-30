@@ -25,10 +25,7 @@ od
 
 write_line("\nFirst million primes:\n")
 
-for
-    (number, group) in first_million
-        |> group_by(categorise)
-do
+for (number, group) in first_million |> group_by(categorise) do
     let first = group[0], last = group[group.count - 1]
 
     write_line(
