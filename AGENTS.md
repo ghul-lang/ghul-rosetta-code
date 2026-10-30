@@ -371,8 +371,8 @@ name shadows the one being called and draws `shadowed-non-callable`: inline the 
 name the local for what the value is.
 
 Swapping two values is one assignment, `(a, b) = (b, a)`, rather than three through a temporary.
-Wrapping one that runs long goes after the `=`, because a continuation line opening with `(` reads
-as a new statement.
+One that runs long keeps `= (` on its line and breaks between the parentheses: a continuation line
+opening with `(` would read as a new statement.
 
 ## A loop that computes one value is a function
 
