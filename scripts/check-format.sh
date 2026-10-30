@@ -8,12 +8,12 @@
 #   scripts/check-format.sh --fix    rewrite them in place instead
 #
 # A format-exempt file names the sources to leave as they are, one path per line
-# relative to the task directory, with the reason on a # line above them. Two
+# relative to the task directory, with the reason on a # line above them. Three
 # cases earn one: a source that is also its own data - a quine, a program that
-# reads its own text - and a source whose layout is itself what the entry
-# demonstrates, which the formatter would write another way. Not a layout
-# someone would rather have. A third set is exempt while the formatter rewrites
-# \uXXXX escapes as the characters themselves, and goes when that is fixed.
+# reads its own text; a source whose layout is itself what the entry
+# demonstrates, which the formatter would write another way; and a source whose
+# \uXXXX escapes the formatter rewrites as the characters themselves, which is a
+# bug, so those go when it is fixed. Not a layout someone would rather have.
 # See AGENTS.md.
 #
 # Uses the compiler the tool manifest pins. Exits non-zero if any source
