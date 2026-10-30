@@ -29,7 +29,7 @@ for _ in 0..100000 do
     let s_of_n = s_of_n_creator(3, source)
 
     for digit in 0..9 do
-        let _ = s_of_n(digit)
+        s_of_n(digit)
     od
 
     for digit in s_of_n(9) do

@@ -57,7 +57,7 @@ attend(client: TcpClient) is
         od
 
         Monitor.enter(members)
-        let _ = members.remove(joining)
+        members.remove(joining)
         Monitor.exit(members)
 
         announce(nickname, "* {nickname} has left")

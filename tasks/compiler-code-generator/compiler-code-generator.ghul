@@ -77,22 +77,22 @@ od
 
 generate(node: Node) is
     case node
-    when (~"Identifier", name): Node.LEAF then
-        let _ = emit("fetch", "[{slot(variables, name)}]")
-    when (~"Integer", value): Node.LEAF then
-        let _ = emit("push", value)
-    when (~"String", text): Node.LEAF then
-        let _ = emit("push", "{slot(strings, text)}")
-    when (~"Sequence", first, second): Node.BRANCH then
+    when ("Identifier", name): Node.LEAF then
+        emit("fetch", "[{slot(variables, name)}]")
+    when ("Integer", value): Node.LEAF then
+        emit("push", value)
+    when ("String", text): Node.LEAF then
+        emit("push", "{slot(strings, text)}")
+    when ("Sequence", first, second): Node.BRANCH then
         generate(first)
         generate(second)
     when
-        (~"Assign", (_, name): Node.LEAF, value): Node.BRANCH
+        ("Assign", (_, name): Node.LEAF, value): Node.BRANCH
     then
         generate(value)
 
-        let _ = emit("store", "[{slot(variables, name)}]")
-    when (~"While", condition, body): Node.BRANCH then
+        emit("store", "[{slot(variables, name)}]")
+    when ("While", condition, body): Node.BRANCH then
         let top = size
 
         generate(condition)
@@ -103,7 +103,7 @@ generate(node: Node) is
         emit("jmp", "").target = top
         exit.target = size
     when
-        (~"If", condition, (_, yes, no): Node.BRANCH): Node.BRANCH
+        ("If", condition, (_, yes, no): Node.BRANCH): Node.BRANCH
     then
         generate(condition)
 
@@ -124,14 +124,14 @@ generate(node: Node) is
         generate(left)
         generate(right)
 
-        let _ = emit(operators[kind], "")
+        emit(operators[kind], "")
     else
     esac
 si
 
 generate(load())
 
-let _ = emit("halt", "")
+emit("halt", "")
 
 write_line(
     "Datasize: {variables.count} Strings: {strings.count}"

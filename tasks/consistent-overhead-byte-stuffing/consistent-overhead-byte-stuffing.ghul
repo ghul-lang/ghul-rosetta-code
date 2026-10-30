@@ -98,7 +98,7 @@ write_line(
 )
 
 try
-    let _ = decode([0x03ub, 0x11ub], 0ub)
+    decode([0x03ub, 0x11ub], 0ub)
 
     write_line(
         "a frame whose milestone runs past the end: accepted"

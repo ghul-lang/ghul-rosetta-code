@@ -31,14 +31,14 @@ class WALKER is
     walk() -> COROUTINE is
         await _emit(_tree)
 
-        let _ = await _wanted.receive()
+        await _wanted.receive()
 
         _leaves.send(null)
     si
 
     _emit(tree: Tree) -> COROUTINE is
         if isa LEAF(tree) then
-            let _ = await _wanted.receive()
+            await _wanted.receive()
 
             _leaves.send(tree.value)
         elif isa NODE(tree) then

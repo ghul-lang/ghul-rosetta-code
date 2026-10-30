@@ -102,7 +102,7 @@ class HEAP is
     delete(node: NODE) is
         decrease_key(node, int.min_value)
 
-        let _ = extract_minimum()
+        extract_minimum()
     si
 
     // The root list and each child list are circular and doubly linked, so
