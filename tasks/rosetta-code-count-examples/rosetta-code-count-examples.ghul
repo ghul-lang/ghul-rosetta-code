@@ -60,7 +60,7 @@ count_examples(api: string) is
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !batch.try_get_property("continue", more ref ) then
+        if !batch.try_get_property("continue", more ref) then
             break
         fi
 

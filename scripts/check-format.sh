@@ -12,7 +12,9 @@
 # cases earn one: a source that is also its own data - a quine, a program that
 # reads its own text - and a source whose layout is itself what the entry
 # demonstrates, which the formatter would write another way. Not a layout
-# someone would rather have. See AGENTS.md.
+# someone would rather have. A third set is exempt while the formatter rewrites
+# \uXXXX escapes as the characters themselves, and goes when that is fixed.
+# See AGENTS.md.
 #
 # Uses the compiler the tool manifest pins. Exits non-zero if any source
 # differs, or if the formatter could not read one.

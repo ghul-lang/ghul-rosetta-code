@@ -47,8 +47,9 @@ draw(
     "|{row |> join("|")}|"
 
 let cases: List[(cells: int, blocks: List[int])] = [
-    (5, [2, 1]), (5, []), (10, [8]), (15, [2, 3, 2, 3]),
-    (5, [2, 3])
+    (5, [2, 1]), (5, []), (10, [8]), (15, [2, 3, 2, 3]), (5, [
+        2, 3
+    ])
 ]
 
 for (cells, blocks) in cases do

@@ -565,6 +565,10 @@ program prints. And a source whose layout is itself what the entry demonstrates:
 task's block comment sits inside a call, and the formatter writes that call on one line, which
 can only put the comment after it.
 
+And a source whose string literals are written as `\uXXXX` escapes, which the formatter rewrites
+as the characters themselves. That one is a formatter bug rather than a layout decision, so those
+exemptions go when it is fixed; each says so.
+
 The second case is not a way to keep a layout you prefer. The entry has to be demonstrating the
 very thing the formatter moves, and the `#` line has to say what that is. Everything else goes
 the other way: the formatter's layout stands, and a line that reads badly under it is fixed in

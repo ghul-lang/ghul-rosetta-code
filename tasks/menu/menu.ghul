@@ -23,7 +23,7 @@ choose(items: List[string]) -> string is
         let chosen mut = 0
 
         if
-            int.try_parse(entered, chosen ref ) /\
+            int.try_parse(entered, chosen ref) /\
             chosen >= 1 /\
             chosen <= items.count
         then

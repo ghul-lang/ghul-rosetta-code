@@ -90,12 +90,15 @@ write_line(
 )
 
 let palette = [
-    (230ub, 25ub, 75ub), (60ub, 180ub, 75ub),
-    (255ub, 190ub, 20ub),
-    (0ub, 130ub, 200ub), (245ub, 130ub, 48ub),
-    (145ub, 30ub, 180ub),
-    (70ub, 200ub, 200ub), (240ub, 50ub, 230ub),
-    (150ub, 190ub, 20ub),
+    (230ub, 25ub, 75ub), (60ub, 180ub, 75ub), (
+        255ub, 190ub, 20ub
+    ),
+    (0ub, 130ub, 200ub), (245ub, 130ub, 48ub), (
+        145ub, 30ub, 180ub
+    ),
+    (70ub, 200ub, 200ub), (240ub, 50ub, 230ub), (
+        150ub, 190ub, 20ub
+    ),
     (170ub, 110ub, 40ub), (128ub, 0ub, 0ub), (0ub, 0ub, 128ub)
 ]
 

@@ -22,7 +22,7 @@ while tokens > 0 do
     let taken mut = 0
 
     if
-        !int.try_parse(line, taken ref ) \/
+        !int.try_parse(line, taken ref) \/
         taken < 1 \/
         taken > 3
     then

@@ -7,20 +7,14 @@ use TRANSFORM = (string) -> string
 plain_whitespace(text: string) -> string =>
     text
         |> map(letter =>
-            if char.is_white_space(letter) then
-                ' '
-            else
-                letter
-            fi
-        )
+            if char.is_white_space(letter) then ' ' else letter fi)
         |> join("")
 
 single_spaces(text: string) -> string => (
     let kept = LIST()
 
     for letter in text do
-        let after_space =
-            kept.count > 0 /\ kept[kept.count - 1] == ' '
+        let after_space = kept.count > 0 /\ kept[kept.count - 1] == ' '
 
         if letter != ' ' \/ !after_space then
             kept.add(letter)
@@ -35,31 +29,32 @@ single_spaces(text: string) -> string => (
 folded_case(text: string) -> string => text.to_lower()
 
 replaced_letters(text: string) -> string =>
-    text.replace("ß", "ss").replace("ſ", "s").replace("ʒ", "s")
+    text
+        .replace("\u00DF", "ss")
+        .replace("\u017F", "s")
+        .replace("\u0292", "s")
 
 split_ligatures(text: string) -> string =>
-    text.replace("ĳ", "ij").replace("æ", "ae").replace(
-        "œ",
-        "oe"
-    ).replace("ﬁ", "fi").replace("ﬂ", "fl")
+    text
+        .replace("\u0133", "ij")
+        .replace("\u00E6", "ae")
+        .replace("\u0153", "oe")
+        .replace("\uFB01", "fi")
+        .replace("\uFB02", "fl")
 
 bare_letters(text: string) -> string =>
     text.normalize(NormalizationForm.FORM_D)
         |> filter(letter =>
-            CharUnicodeInfo.get_unicode_category(
-                letter
-            ) != UnicodeCategory.NON_SPACING_MARK
-        )
+            CharUnicodeInfo.get_unicode_category(letter) !=
+                UnicodeCategory.NON_SPACING_MARK)
         |> join("")
 
 without_leading_article(text: string) -> string =>
     if text.starts_with("the ") then text[4..<0] else text fi
 
-let transforms = [
-    plain_whitespace, single_spaces, folded_case,
-    replaced_letters,
-    split_ligatures, bare_letters, without_leading_article
-]
+let transforms =
+    [plain_whitespace, single_spaces, folded_case, replaced_letters,
+     split_ligatures, bare_letters, without_leading_article]
 
 key(text: string) -> string =>
     transforms |> reduce(text, (running, step) => step(running))
@@ -70,8 +65,7 @@ runs(text: string) -> string{} is
     for letter in text do
         let broke =
             held.count > 0 /\
-            char.is_digit(held[held.count - 1]) !=
-            char.is_digit(letter)
+                char.is_digit(held[held.count - 1]) != char.is_digit(letter)
 
         if broke then
             yield held |> join("")
@@ -100,11 +94,11 @@ compare_parts(left: string, right: string) -> int =>
             a = without_leading_zeros(left),
             b = without_leading_zeros(right)
         in
-            if a.length != b.length then
-                a.length <> b.length
-            else
-                string.compare_ordinal(a, b)
-            fi
+        if a.length != b.length then
+            a.length <> b.length
+        else
+            string.compare_ordinal(a, b)
+        fi
     else
         string.compare_ordinal(left, right)
     fi
@@ -112,10 +106,8 @@ compare_parts(left: string, right: string) -> int =>
 naturally(left: string, right: string) -> int is
     let first = left |> key() |> runs() |> collect()
     let second = right |> key() |> runs() |> collect()
-    let shared =
-        if first.count < second.count then first.count
-        else second.count
-        fi
+    let shared = if first.count < second.count then first.count
+                 else second.count fi
 
     for index in 0..shared do
         let outcome = compare_parts(first[index], second[index])
@@ -127,17 +119,15 @@ naturally(left: string, right: string) -> int is
 si
 
 visible(text: string) -> string =>
-    text.replace("\t", "\\t").replace("\n", "\\n").replace(
-        "\r",
-        "\\r"
-    ).replace("\u000B", "\\v").replace("\u000C", "\\f")
+    text
+        .replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r")
+        .replace("\u000B", "\\v").replace("\u000C", "\\f")
 
 demonstrate(feature: string, samples: List[string]) is
     write_line("{feature}:")
     write_line("  given:")
 
-    samples
-        |> each(text => write_line("    \"{visible(text)}\""))
+    samples |> each(text => write_line("    \"{visible(text)}\""))
 
     write_line("  naturally:")
 
@@ -148,50 +138,38 @@ demonstrate(feature: string, samples: List[string]) is
     write_line()
 si
 
-demonstrate("ignoring leading spaces", [
-    "ignore leading spaces: 2-2", " ignore leading spaces: 2-1",
-    "  ignore leading spaces: 2+0",
-    "   ignore leading spaces: 2+1"
-])
+demonstrate("ignoring leading spaces",
+    ["ignore leading spaces: 2-2", " ignore leading spaces: 2-1",
+     "  ignore leading spaces: 2+0", "   ignore leading spaces: 2+1"])
 
-demonstrate("ignoring multiple adjacent spaces", [
-    "ignore m.a.s spaces: 2-2", "ignore m.a.s  spaces: 2-1",
-    "ignore m.a.s   spaces: 2+0", "ignore m.a.s    spaces: 2+1"
-])
+demonstrate("ignoring multiple adjacent spaces",
+    ["ignore m.a.s spaces: 2-2", "ignore m.a.s  spaces: 2-1",
+     "ignore m.a.s   spaces: 2+0", "ignore m.a.s    spaces: 2+1"])
 
-demonstrate("equivalent whitespace characters", [
-    "Equiv. spaces: 3-3", "Equiv.\rspaces: 3-2",
-    "Equiv.\u000Cspaces: 3-1",
-    "Equiv.\u000Bspaces: 3+0", "Equiv.\nspaces: 3+1",
-    "Equiv.\tspaces: 3+2"
-])
+demonstrate("equivalent whitespace characters",
+    ["Equiv. spaces: 3-3", "Equiv.\rspaces: 3-2", "Equiv.\u000Cspaces: 3-1",
+     "Equiv.\u000Bspaces: 3+0", "Equiv.\nspaces: 3+1",
+     "Equiv.\tspaces: 3+2"])
 
-demonstrate("case independent", [
-    "cASE INDEPENDENT: 3-2", "caSE INDEPENDENT: 3-1",
-    "casE INDEPENDENT: 3+0", "case INDEPENDENT: 3+1"
-])
+demonstrate("case independent",
+    ["cASE INDEPENDENT: 3-2", "caSE INDEPENDENT: 3-1",
+     "casE INDEPENDENT: 3+0", "case INDEPENDENT: 3+1"])
 
-demonstrate("numeric fields as numbers", [
-    "foo100bar99baz0.txt", "foo100bar10baz0.txt",
-    "foo1000bar99baz10.txt", "foo1000bar99baz9.txt"
-])
+demonstrate("numeric fields as numbers",
+    ["foo100bar99baz0.txt", "foo100bar10baz0.txt",
+     "foo1000bar99baz10.txt", "foo1000bar99baz9.txt"])
 
-demonstrate("title sorts", [
-    "The Wind in the Willows", "The 40th step more",
-    "The 39 steps",
-    "Wanda"
-])
+demonstrate("title sorts",
+    ["The Wind in the Willows", "The 40th step more", "The 39 steps",
+     "Wanda"])
 
-demonstrate("equivalent accented characters", [
-    "Equiv. ý accents: 2-2", "Equiv. Ý accents: 2-1",
-    "Equiv. y accents: 2+0", "Equiv. Y accents: 2+1"
-])
+demonstrate("equivalent accented characters",
+    ["Equiv. \u00FD accents: 2-2", "Equiv. \u00DD accents: 2-1",
+     "Equiv. y accents: 2+0", "Equiv. Y accents: 2+1"])
 
-demonstrate("separated ligatures", [
-    "Ĳ ligatured ij", "no ligature"
-])
+demonstrate("separated ligatures",
+    ["\u0132 ligatured ij", "no ligature"])
 
-demonstrate("character replacements", [
-    "Start with an ʒ: 2-2", "Start with an ſ: 2-1",
-    "Start with an ß: 2+0", "Start with an s: 2+1"
-])
+demonstrate("character replacements",
+    ["Start with an \u0292: 2-2", "Start with an \u017F: 2-1",
+     "Start with an \u00DF: 2+0", "Start with an s: 2+1"])

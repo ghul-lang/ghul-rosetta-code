@@ -24,8 +24,9 @@ last[T](values: List[T], wanted: int) -> T{} =>
 
 let kinds = [
     (size = 2, name = "pairs"), (size = 3, name = "triplets"),
-    (size = 4, name = "quadruplets"),
-    (size = 5, name = "quintuplets")
+    (size = 4, name = "quadruplets"), (
+        size = 5, name = "quintuplets"
+    )
 ]
 
 kinds

@@ -94,8 +94,9 @@ for (mode, cards, wanted) in deals do
 od
 
 let inks = [
-    (220ub, 30ub, 50ub), (20ub, 150ub, 60ub),
-    (110ub, 40ub, 150ub)
+    (220ub, 30ub, 50ub), (20ub, 150ub, 60ub), (
+        110ub, 40ub, 150ub
+    )
 ]
 
 outline(symbol: int, x: double, y: double) -> List[(

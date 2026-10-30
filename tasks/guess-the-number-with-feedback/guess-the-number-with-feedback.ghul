@@ -29,7 +29,7 @@ do
     let guess mut = 0
 
     if
-        !int.try_parse(line, guess ref ) \/
+        !int.try_parse(line, guess ref) \/
         guess < low \/
         guess > high
     then

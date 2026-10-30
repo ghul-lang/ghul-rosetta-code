@@ -8,7 +8,7 @@ reorder(items: string[], order: string[]) -> string{} is
     for entry in items |> index() do
         let outstanding mut = 0
 
-        wanted.try_get_value(entry.value, outstanding ref )
+        wanted.try_get_value(entry.value, outstanding ref)
 
         if outstanding > 0 then
             wanted[entry.value] = outstanding - 1

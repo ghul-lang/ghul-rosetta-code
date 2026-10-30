@@ -24,7 +24,7 @@ write_line("partial application: {add_ten(1)}")
 
 let parsed mut = 0
 
-if int.try_parse("42", parsed ref ) then
+if int.try_parse("42", parsed ref) then
     write_line("written through a ref argument: {parsed}")
 fi
 

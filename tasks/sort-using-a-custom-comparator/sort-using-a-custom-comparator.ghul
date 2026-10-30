@@ -1,8 +1,7 @@
 use default
 
 let words = LIST([
-    "Here", "are", "some", "sample", "strings", "to", "be",
-    "sorted"
+    "Here", "are", "some", "sample", "strings", "to", "be", "sorted"
 ])
 
 compare(left: string, right: string) -> int is

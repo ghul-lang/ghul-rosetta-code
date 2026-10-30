@@ -100,7 +100,7 @@ while !winner(board)? /\ !full(board) do
         let cell mut = 0
 
         let legal =
-            int.try_parse(line, cell ref ) /\
+            int.try_parse(line, cell ref) /\
             cell >= 1 /\
             cell <= 9 /\
             board[cell - 1] == ' '

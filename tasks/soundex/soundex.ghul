@@ -46,12 +46,9 @@ soundex(name: string) -> string is
 si
 
 let names = [
-    "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft",
-    "Tymczak",
-    "Pfister", "Honeyman", "Lee", "Gutierrez", "Jackson",
-    "VanDeusen",
-    "Deusen", "Soundex", "Example", "Lloyd", "Burroughs",
-    "Burrows"
+    "Robert", "Rupert", "Rubin", "Ashcraft", "Ashcroft", "Tymczak",
+    "Pfister", "Honeyman", "Lee", "Gutierrez", "Jackson", "VanDeusen",
+    "Deusen", "Soundex", "Example", "Lloyd", "Burroughs", "Burrows"
 ]
 
 for name in names do

@@ -66,10 +66,12 @@ for
     (kind, name) in [
         ("Multiply", "mul"), ("Divide", "div"), ("Mod", "mod"),
         ("Add", "add"), ("Subtract", "sub"), ("Less", "lt"),
-        ("LessEqual", "le"), ("Greater", "gt"),
-        ("GreaterEqual", "ge"),
-        ("Equal", "eq"), ("NotEqual", "ne"), ("And", "and"),
-        ("Or", "or"),
+        ("LessEqual", "le"), ("Greater", "gt"), (
+            "GreaterEqual", "ge"
+        ),
+        ("Equal", "eq"), ("NotEqual", "ne"), ("And", "and"), (
+            "Or", "or"
+        ),
         ("Negate", "neg"), ("Not", "not"),
         ("Prtc", "prtc"), ("Prti", "prti"), ("Prts", "prts")
     ]

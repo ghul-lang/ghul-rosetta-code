@@ -2,18 +2,15 @@ use default
 use System.Math.*
 
 let dictionary = [
-    "accommodate", "believe", "commitment", "definite",
-    "existence",
-    "government", "height", "knowledge", "maintenance",
-    "occurrence",
+    "accommodate", "believe", "commitment", "definite", "existence",
+    "government", "height", "knowledge", "maintenance", "occurrence",
     "pastime", "privilege", "publicly", "receive", "recommend",
     "relevant", "rhythm", "separate", "success", "tomorrow",
     "twelfth", "until", "weird", "which", "writing"
 ]
 
 let misspelled = [
-    "accomodate", "definately", "goverment", "occured",
-    "publically",
+    "accomodate", "definately", "goverment", "occured", "publically",
     "recieve", "seperate", "untill", "wich"
 ]
 

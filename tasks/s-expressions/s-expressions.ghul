@@ -33,13 +33,13 @@ skip_space(text: string, at: int) -> int => (
 atom(token: string) -> SExpr is
     let whole mut = 0
 
-    if int.try_parse(token, whole ref ) then
+    if int.try_parse(token, whole ref) then
         return INTEGER(whole)
     fi
 
     let real mut = 0.0D
 
-    if double.try_parse(token, real ref ) then
+    if double.try_parse(token, real ref) then
         return REAL(real)
     fi
 

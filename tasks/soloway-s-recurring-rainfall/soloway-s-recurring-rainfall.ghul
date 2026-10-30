@@ -16,7 +16,7 @@ while true do
 
     let value mut = 0L
 
-    if !long.try_parse(line.trim(), value ref ) then
+    if !long.try_parse(line.trim(), value ref) then
         write_line("skipping {line.trim()}: not an integer")
         continue
     fi

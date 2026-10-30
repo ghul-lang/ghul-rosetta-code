@@ -2,8 +2,7 @@ use default
 use System.Globalization.CultureInfo
 
 let suffixes = [
-    "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V",
-    "U"
+    "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"
 ]
 
 let invariant = CultureInfo.invariant_culture

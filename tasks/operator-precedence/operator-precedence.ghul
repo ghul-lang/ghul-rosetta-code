@@ -124,7 +124,7 @@ entry() is
     let box = BOX(1)
 
     assign(n)
-    assign_through(m ref )
+    assign_through(m ref)
     set_field(box)
 
     write_line("  callee assigned to an int          {n}")

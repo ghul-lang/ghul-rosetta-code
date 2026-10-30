@@ -9,12 +9,12 @@ read_through(value: int ref) -> int => value!
 let first mut = 21
 let second mut = 100
 
-double_in_place(first ref )
-double_in_place(second ref )
+double_in_place(first ref)
+double_in_place(second ref)
 
 write_line("first is {first}, second is {second}")
 write_line(
-    "read through a reference: {read_through(first ref )}"
+    "read through a reference: {read_through(first ref)}"
 )
 
 let held mut = 7
@@ -23,7 +23,7 @@ swap(left: int ref, right: int ref) is
     (left!, right!) = (right!, left!)
 si
 
-swap(first ref , held ref )
+swap(first ref, held ref)
 
 write_line(
     "after swapping through two references: {first} and {held}"
