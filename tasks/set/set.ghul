@@ -20,9 +20,7 @@ let difference = SET(a)
 difference.except_with(b)
 write_line("A - B = {difference}")
 
-write_line(
-    "[1, 2] subset of A: {SET([1, 2]).is_subset_of(a)}"
-)
+write_line("[1, 2] subset of A: {SET([1, 2]).is_subset_of(a)}")
 write_line("A subset of B: {a.is_subset_of(b)}")
 
 write_line(
