@@ -1,31 +1,87 @@
 use default
 use IO.Std.read_line
 
-union Node is
-    EMPTY
-    LEAF(kind: string, value: string)
-    BRANCH(kind: string, left: Node, right: Node)
+enum KIND is
+    LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, SEMICOLON, COMMA,
+    ASSIGN, NOT, MULTIPLY, DIVIDE, MOD, ADD, SUBTRACT,
+    LESS, LESS_EQUAL, GREATER, GREATER_EQUAL, EQUAL, NOT_EQUAL, AND, OR,
+    IDENTIFIER, INTEGER, STRING,
+    IF, ELSE, WHILE, PRINT, PUTC,
+    END_OF_INPUT
 si
 
-class TOKEN(name: string, value: string, line: string, column: string)
+union Node is
+    EMPTY
+    IDENTIFIER(name: string)
+    INTEGER(value: string)
+    STRING(text: string)
+    SEQUENCE(left: Node, right: Node)
+    IF(condition: Node, then_part: Node, else_part: Node)
+    ASSIGN(target: Node, value: Node)
+    WHILE(condition: Node, body: Node)
+    PRTC(value: Node)
+    PRTS(text: Node)
+    PRTI(value: Node)
+    NEGATE(operand: Node)
+    NOT(operand: Node)
+    OPERATOR(kind: KIND, left: Node, right: Node)
+si
 
-use Operator = (kind: string, precedence: int)
+class TOKEN(kind: KIND, value: string, line: string, column: string)
 
-let binary = MAP()
+let lexicon = [
+    ("LeftParen", KIND.LEFT_PAREN), ("RightParen", KIND.RIGHT_PAREN),
+    ("LeftBrace", KIND.LEFT_BRACE), ("RightBrace", KIND.RIGHT_BRACE),
+    ("Semicolon", KIND.SEMICOLON), ("Comma", KIND.COMMA),
+    ("Op_assign", KIND.ASSIGN), ("Op_not", KIND.NOT),
+    ("Op_multiply", KIND.MULTIPLY), ("Op_divide", KIND.DIVIDE),
+    ("Op_mod", KIND.MOD), ("Op_add", KIND.ADD),
+    ("Op_subtract", KIND.SUBTRACT), ("Op_less", KIND.LESS),
+    ("Op_lessequal", KIND.LESS_EQUAL), ("Op_greater", KIND.GREATER),
+    ("Op_greaterequal", KIND.GREATER_EQUAL), ("Op_equal", KIND.EQUAL),
+    ("Op_notequal", KIND.NOT_EQUAL), ("Op_and", KIND.AND),
+    ("Op_or", KIND.OR), ("Identifier", KIND.IDENTIFIER),
+    ("Integer", KIND.INTEGER), ("String", KIND.STRING),
+    ("Keyword_if", KIND.IF), ("Keyword_else", KIND.ELSE),
+    ("Keyword_while", KIND.WHILE), ("Keyword_print", KIND.PRINT),
+    ("Keyword_putc", KIND.PUTC), ("End_of_input", KIND.END_OF_INPUT)
+]
 
-for (name, kind, precedence) in [
-    ("Op_multiply", "Multiply", 13), ("Op_divide", "Divide", 13),
-    ("Op_mod", "Mod", 13), ("Op_add", "Add", 12),
-    ("Op_subtract", "Subtract", 12), ("Op_less", "Less", 10),
-    ("Op_lessequal", "LessEqual", 10), ("Op_greater", "Greater", 10),
-    ("Op_greaterequal", "GreaterEqual", 10), ("Op_equal", "Equal", 9),
-    ("Op_notequal", "NotEqual", 9), ("Op_and", "And", 5),
-    ("Op_or", "Or", 4)
-] do
-    binary[name] = (kind = kind, precedence = precedence)
-od
+let kinds = MAP(lexicon)
+let spellings = MAP(lexicon |> map(((text, kind)) => (kind, text)))
 
-let unary = 14
+let unary_precedence = 14
+
+binary_precedence(kind: KIND) -> int? =>
+    case kind
+    when KIND.MULTIPLY, KIND.DIVIDE, KIND.MOD then 13
+    when KIND.ADD, KIND.SUBTRACT then 12
+    when KIND.LESS, KIND.LESS_EQUAL, KIND.GREATER,
+        KIND.GREATER_EQUAL then 10
+    when KIND.EQUAL, KIND.NOT_EQUAL then 9
+    when KIND.AND then 5
+    when KIND.OR then 4
+    else null
+    esac
+
+operator_spelling(kind: KIND) -> string =>
+    case kind
+    when KIND.MULTIPLY then "Multiply"
+    when KIND.DIVIDE then "Divide"
+    when KIND.MOD then "Mod"
+    when KIND.ADD then "Add"
+    when KIND.SUBTRACT then "Subtract"
+    when KIND.LESS then "Less"
+    when KIND.LESS_EQUAL then "LessEqual"
+    when KIND.GREATER then "Greater"
+    when KIND.GREATER_EQUAL then "GreaterEqual"
+    when KIND.EQUAL then "Equal"
+    when KIND.NOT_EQUAL then "NotEqual"
+    when KIND.AND then "And"
+    when KIND.OR then "Or"
+    else
+        throw System.Exception("{kind} is not a binary operator")
+    esac
 
 class PARSER(tokens: List[TOKEN]) is
     _at: int
@@ -36,182 +92,229 @@ class PARSER(tokens: List[TOKEN]) is
         _at = _at + 1
     si
 
-    accept(name: string) -> bool is
-        if token.name =~ name then
+    accept(kind: KIND) -> bool =>
+        if token.kind =~ kind then
             advance()
-            return true
-        fi
-
-        false
-    si
-
-    expect(name: string) is
-        if !accept(name) then
-            throw System.Exception(
-                "({token.line}, {token.column}) expecting {name}, "
-                "found {token.name}")
-        fi
-    si
-
-    expression(minimum: int) -> Node is
-        let left mut = Node.EMPTY
-        let name = token.name
-
-        if name =~ "LeftParen" then
-            left = parenthesised()
-        elif name =~ "Op_subtract" \/ name =~ "Op_not" then
-            advance()
-
-            let operand = expression(unary)
-            let kind = if name =~ "Op_not" then "Not" else "Negate" fi
-
-            left = Node.BRANCH(kind, operand, Node.EMPTY)
-        elif name =~ "Op_add" then
-            advance()
-            left = expression(unary)
-        elif name =~ "Identifier" \/ name =~ "Integer" then
-            left = Node.LEAF(name, token.value)
-            advance()
+            true
         else
-            throw System.Exception(
-                "({token.line}, {token.column}) expecting a primary, "
-                "found {name}")
+            false
         fi
 
-        while binary.contains_key(token.name) /\
-                binary[token.name].precedence >= minimum do
-            let operator = binary[token.name]
+    expect(kind: KIND) is
+        if !accept(kind) then
+            throw System.Exception(
+                "({token.line}, {token.column}) expecting "
+                "{spellings[kind]}, found {spellings[token.kind]}")
+        fi
+    si
 
+    program() -> Node =>
+        statements([KIND.END_OF_INPUT])
+
+    statements(stoppers: KIND{}) -> Node =>
+        statements_from(Node.EMPTY, stoppers)
+
+    statements_from(list: Node, stoppers: KIND{}) -> Node =>
+        if stoppers |> contains(token.kind) then
+            list
+        else
+            statements_from(
+                Node.SEQUENCE(list, statement()), stoppers)
+        fi
+
+    statement() -> Node =>
+        case token.kind
+        when KIND.IF then
             advance()
-
-            let right = expression(operator.precedence + 1)
-
-            left = Node.BRANCH(operator.kind, left, right)
-        od
-
-        left
-    si
-
-    parenthesised() -> Node is
-        expect("LeftParen")
-
-        let inside = expression(0)
-
-        expect("RightParen")
-
-        inside
-    si
-
-    statement() -> Node is
-        if accept("Keyword_if") then
             let condition = parenthesised()
             let then_part = statement()
             let else_part =
-                if accept("Keyword_else") then statement()
-                else Node.EMPTY
-                fi
-
-            return Node.BRANCH(
-                "If", condition, Node.BRANCH("If", then_part, else_part))
-        elif accept("Keyword_putc") then
-            let value = parenthesised()
-
-            expect("Semicolon")
-
-            return Node.BRANCH("Prtc", value, Node.EMPTY)
-        elif accept("Keyword_print") then
-            expect("LeftParen")
-
-            let list mut = Node.EMPTY
-
-            do
-                let item =
-                    if token.name =~ "String" then
-                        let text = Node.LEAF("String", token.value) in
-                        (advance(); Node.BRANCH("Prts", text, Node.EMPTY))
-                    else
-                        Node.BRANCH("Prti", expression(0), Node.EMPTY)
-                    fi
-
-                list = Node.BRANCH("Sequence", list, item)
-
-                if !accept("Comma") then
-                    break
-                fi
-            od
-
-            expect("RightParen")
-            expect("Semicolon")
-
-            return list
-        elif accept("Semicolon") then
-            return Node.EMPTY
-        elif token.name =~ "Identifier" then
-            let target = Node.LEAF("Identifier", token.value)
-
+                if accept(KIND.ELSE) then statement() else Node.EMPTY fi
+            Node.IF(condition, then_part, else_part)
+        when KIND.PUTC then
             advance()
-            expect("Op_assign")
-
-            let value = expression(0)
-
-            expect("Semicolon")
-
-            return Node.BRANCH("Assign", target, value)
-        elif accept("Keyword_while") then
+            let value = parenthesised()
+            expect(KIND.SEMICOLON)
+            Node.PRTC(value)
+        when KIND.PRINT then
+            advance()
+            print_list()
+        when KIND.SEMICOLON then
+            advance()
+            Node.EMPTY
+        when KIND.IDENTIFIER then
+            assignment()
+        when KIND.WHILE then
+            advance()
             let condition = parenthesised()
+            Node.WHILE(condition, statement())
+        when KIND.LEFT_BRACE then
+            block()
+        else
+            throw System.Exception(
+                "({token.line}, {token.column}) expecting a statement, "
+                "found {spellings[token.kind]}")
+        esac
 
-            return Node.BRANCH("While", condition, statement())
-        elif accept("LeftBrace") then
-            let list mut = Node.EMPTY
+    assignment() -> Node => (
+        let target = Node.IDENTIFIER(token.value)
+        advance()
+        expect(KIND.ASSIGN)
+        let value = expression(0)
+        expect(KIND.SEMICOLON)
+        Node.ASSIGN(target, value))
 
-            while !(token.name =~ "RightBrace") /\
-                    !(token.name =~ "End_of_input") do
-                list = Node.BRANCH("Sequence", list, statement())
-            od
+    block() -> Node => (
+        advance()
+        let list = statements([KIND.RIGHT_BRACE, KIND.END_OF_INPUT])
+        expect(KIND.RIGHT_BRACE)
+        list)
 
-            expect("RightBrace")
+    print_list() -> Node => (
+        expect(KIND.LEFT_PAREN)
+        let list =
+            print_items(Node.SEQUENCE(Node.EMPTY, print_item()))
+        expect(KIND.RIGHT_PAREN)
+        expect(KIND.SEMICOLON)
+        list)
 
-            return list
+    print_items(list: Node) -> Node =>
+        if accept(KIND.COMMA) then
+            print_items(Node.SEQUENCE(list, print_item()))
+        else
+            list
         fi
 
-        throw System.Exception(
-            "({token.line}, {token.column}) expecting a statement, "
-            "found {token.name}")
-    si
+    print_item() -> Node =>
+        case token.kind
+        when KIND.STRING then
+            let text = Node.STRING(token.value)
+            advance()
+            Node.PRTS(text)
+        else
+            Node.PRTI(expression(0))
+        esac
 
-    program() -> Node is
-        let list mut = Node.EMPTY
+    parenthesised() -> Node => (
+        expect(KIND.LEFT_PAREN)
+        let inside = expression(0)
+        expect(KIND.RIGHT_PAREN)
+        inside)
 
-        while !(token.name =~ "End_of_input") do
-            list = Node.BRANCH("Sequence", list, statement())
-        od
+    expression(minimum: int) -> Node =>
+        binary_tail(primary(), minimum)
 
-        list
-    si
+    primary() -> Node =>
+        case token.kind
+        when KIND.LEFT_PAREN then
+            parenthesised()
+        when KIND.SUBTRACT then
+            advance()
+            Node.NEGATE(expression(unary_precedence))
+        when KIND.NOT then
+            advance()
+            Node.NOT(expression(unary_precedence))
+        when KIND.ADD then
+            advance()
+            expression(unary_precedence)
+        when KIND.IDENTIFIER then
+            let name = token.value
+            advance()
+            Node.IDENTIFIER(name)
+        when KIND.INTEGER then
+            let value = token.value
+            advance()
+            Node.INTEGER(value)
+        else
+            throw System.Exception(
+                "({token.line}, {token.column}) expecting a primary, "
+                "found {spellings[token.kind]}")
+        esac
+
+    binary_tail(left: Node, minimum: int) -> Node =>
+        if let precedence = binary_precedence(token.kind) /\
+                precedence >= minimum then
+            let kind = token.kind
+            advance()
+            let right = expression(precedence + 1)
+            binary_tail(Node.OPERATOR(kind, left, right), minimum)
+        else
+            left
+        fi
+si
+
+leaf(kind: string, value: string) is
+    write_line("{kind,-14}{value}")
+si
+
+unary(kind: string, value: Node) is
+    // the task's tree gives every unary node an empty second child
+    write_line(kind)
+    show(value)
+    write_line(";")
+si
+
+binary(kind: string, left: Node, right: Node) is
+    write_line(kind)
+    show(left)
+    show(right)
 si
 
 show(node: Node) is
     case node
-    when (kind, value): Node.LEAF then write_line("{kind,-14}{value}")
-    when (kind, left, right): Node.BRANCH then
-        write_line(kind)
-        show(left)
-        show(right)
-    else write_line(";")
+    when identifier: Node.IDENTIFIER then
+        leaf("Identifier", identifier.name)
+    when integer: Node.INTEGER then
+        leaf("Integer", integer.value)
+    when literal: Node.STRING then
+        leaf("String", literal.text)
+    when Node.EMPTY then
+        write_line(";")
+    when (condition, then_part, else_part): Node.IF then
+        // the task's output spells an if as an If over the condition and
+        // a second If over the two parts
+        write_line("If")
+        show(condition)
+        write_line("If")
+        show(then_part)
+        show(else_part)
+    when (left, right): Node.SEQUENCE then
+        binary("Sequence", left, right)
+    when (target, value): Node.ASSIGN then
+        binary("Assign", target, value)
+    when (condition, body): Node.WHILE then
+        binary("While", condition, body)
+    when prtc: Node.PRTC then
+        unary("Prtc", prtc.value)
+    when prts: Node.PRTS then
+        unary("Prts", prts.text)
+    when prti: Node.PRTI then
+        unary("Prti", prti.value)
+    when operand: Node.NEGATE then
+        unary("Negate", operand.operand)
+    when operand: Node.NOT then
+        unary("Not", operand.operand)
+    when (kind, left, right): Node.OPERATOR then
+        binary(operator_spelling(kind), left, right)
     esac
 si
 
-let tokens = LIST()
+stdin_lines() -> string{} is
+    while let line = read_line() do
+        yield line
+    od
+si
 
-while let line = read_line() do
+token(line: string) -> TOKEN => (
     let fields = line |> words() |> collect()
+    let name = fields[2]
+    let rest = line.substring(line.index_of(name) + name.length).trim()
+    TOKEN(kinds[name], rest, fields[0], fields[1]))
 
-    if fields.count >= 3 then
-        let name = fields[2]
-        let rest = line.substring(line.index_of(name) + name.length)
-
-        tokens.add(TOKEN(name, rest.trim(), fields[0], fields[1]))
-    fi
-od
+let tokens =
+    stdin_lines()
+    |> filter(line => line |> words() |> count() >= 3)
+    |> map(token)
+    |> collect()
 
 show(PARSER(tokens).program())
