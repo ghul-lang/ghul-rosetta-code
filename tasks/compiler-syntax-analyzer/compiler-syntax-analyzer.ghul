@@ -1,5 +1,6 @@
 use default
 use IO.Std.read_line
+use Kind.*
 
 enum Kind is
     LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, SEMICOLON, COMMA,
@@ -30,21 +31,21 @@ si
 class TOKEN(kind: Kind, value: string, line: string, column: string)
 
 let lexicon = [
-    ("LeftParen", Kind.LEFT_PAREN), ("RightParen", Kind.RIGHT_PAREN),
-    ("LeftBrace", Kind.LEFT_BRACE), ("RightBrace", Kind.RIGHT_BRACE),
-    ("Semicolon", Kind.SEMICOLON), ("Comma", Kind.COMMA),
-    ("Op_assign", Kind.ASSIGN), ("Op_not", Kind.NOT),
-    ("Op_multiply", Kind.MULTIPLY), ("Op_divide", Kind.DIVIDE),
-    ("Op_mod", Kind.MOD), ("Op_add", Kind.ADD),
-    ("Op_subtract", Kind.SUBTRACT), ("Op_less", Kind.LESS),
-    ("Op_lessequal", Kind.LESS_EQUAL), ("Op_greater", Kind.GREATER),
-    ("Op_greaterequal", Kind.GREATER_EQUAL), ("Op_equal", Kind.EQUAL),
-    ("Op_notequal", Kind.NOT_EQUAL), ("Op_and", Kind.AND),
-    ("Op_or", Kind.OR), ("Identifier", Kind.IDENTIFIER),
-    ("Integer", Kind.INTEGER), ("String", Kind.STRING),
-    ("Keyword_if", Kind.IF), ("Keyword_else", Kind.ELSE),
-    ("Keyword_while", Kind.WHILE), ("Keyword_print", Kind.PRINT),
-    ("Keyword_putc", Kind.PUTC), ("End_of_input", Kind.END_OF_INPUT)
+    ("LeftParen", LEFT_PAREN), ("RightParen", RIGHT_PAREN),
+    ("LeftBrace", LEFT_BRACE), ("RightBrace", RIGHT_BRACE),
+    ("Semicolon", SEMICOLON), ("Comma", COMMA),
+    ("Op_assign", ASSIGN), ("Op_not", NOT),
+    ("Op_multiply", MULTIPLY), ("Op_divide", DIVIDE),
+    ("Op_mod", MOD), ("Op_add", ADD),
+    ("Op_subtract", SUBTRACT), ("Op_less", LESS),
+    ("Op_lessequal", LESS_EQUAL), ("Op_greater", GREATER),
+    ("Op_greaterequal", GREATER_EQUAL), ("Op_equal", EQUAL),
+    ("Op_notequal", NOT_EQUAL), ("Op_and", AND),
+    ("Op_or", OR), ("Identifier", IDENTIFIER),
+    ("Integer", INTEGER), ("String", STRING),
+    ("Keyword_if", IF), ("Keyword_else", ELSE),
+    ("Keyword_while", WHILE), ("Keyword_print", PRINT),
+    ("Keyword_putc", PUTC), ("End_of_input", END_OF_INPUT)
 ]
 
 let kinds = MAP(lexicon)
@@ -54,31 +55,30 @@ let unary_precedence = 14
 
 binary_precedence(kind: Kind) -> int? =>
     case kind
-    when Kind.MULTIPLY, Kind.DIVIDE, Kind.MOD then 13
-    when Kind.ADD, Kind.SUBTRACT then 12
-    when Kind.LESS, Kind.LESS_EQUAL, Kind.GREATER,
-        Kind.GREATER_EQUAL then 10
-    when Kind.EQUAL, Kind.NOT_EQUAL then 9
-    when Kind.AND then 5
-    when Kind.OR then 4
+    when MULTIPLY, DIVIDE, MOD then 13
+    when ADD, SUBTRACT then 12
+    when LESS, LESS_EQUAL, GREATER, GREATER_EQUAL then 10
+    when EQUAL, NOT_EQUAL then 9
+    when AND then 5
+    when OR then 4
     else null
     esac
 
 operator_spelling(kind: Kind) -> string =>
     case kind
-    when Kind.MULTIPLY then "Multiply"
-    when Kind.DIVIDE then "Divide"
-    when Kind.MOD then "Mod"
-    when Kind.ADD then "Add"
-    when Kind.SUBTRACT then "Subtract"
-    when Kind.LESS then "Less"
-    when Kind.LESS_EQUAL then "LessEqual"
-    when Kind.GREATER then "Greater"
-    when Kind.GREATER_EQUAL then "GreaterEqual"
-    when Kind.EQUAL then "Equal"
-    when Kind.NOT_EQUAL then "NotEqual"
-    when Kind.AND then "And"
-    when Kind.OR then "Or"
+    when MULTIPLY then "Multiply"
+    when DIVIDE then "Divide"
+    when MOD then "Mod"
+    when ADD then "Add"
+    when SUBTRACT then "Subtract"
+    when LESS then "Less"
+    when LESS_EQUAL then "LessEqual"
+    when GREATER then "Greater"
+    when GREATER_EQUAL then "GreaterEqual"
+    when EQUAL then "Equal"
+    when NOT_EQUAL then "NotEqual"
+    when AND then "And"
+    when OR then "Or"
     else
         throw System.Exception("{kind} is not a binary operator")
     esac
@@ -112,7 +112,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
     si
 
     program() -> Node =>
-        statements([Kind.END_OF_INPUT])
+        statements([END_OF_INPUT])
 
     statements(stoppers: Kind{}) -> Node =>
         statements_from(Node.EMPTY, stoppers)
@@ -127,31 +127,31 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     statement() -> Node =>
         case token.kind
-        when Kind.IF then
+        when IF then
             advance()
             let condition = parenthesised()
             let then_part = statement()
             let else_part =
-                if accept(Kind.ELSE) then statement() else Node.EMPTY fi
+                if accept(ELSE) then statement() else Node.EMPTY fi
             Node.IF(condition, then_part, else_part)
-        when Kind.PUTC then
+        when PUTC then
             advance()
             let value = parenthesised()
-            expect(Kind.SEMICOLON)
+            expect(SEMICOLON)
             Node.PRTC(value)
-        when Kind.PRINT then
+        when PRINT then
             advance()
             print_list()
-        when Kind.SEMICOLON then
+        when SEMICOLON then
             advance()
             Node.EMPTY
-        when Kind.IDENTIFIER then
+        when IDENTIFIER then
             assignment()
-        when Kind.WHILE then
+        when WHILE then
             advance()
             let condition = parenthesised()
             Node.WHILE(condition, statement())
-        when Kind.LEFT_BRACE then
+        when LEFT_BRACE then
             block()
         else
             throw System.Exception(
@@ -162,27 +162,27 @@ class PARSER(tokens: Iterator[TOKEN]) is
     assignment() -> Node => (
         let target = Node.IDENTIFIER(token.value)
         advance()
-        expect(Kind.ASSIGN)
+        expect(ASSIGN)
         let value = expression(0)
-        expect(Kind.SEMICOLON)
+        expect(SEMICOLON)
         Node.ASSIGN(target, value))
 
     block() -> Node => (
         advance()
-        let list = statements([Kind.RIGHT_BRACE, Kind.END_OF_INPUT])
-        expect(Kind.RIGHT_BRACE)
+        let list = statements([RIGHT_BRACE, END_OF_INPUT])
+        expect(RIGHT_BRACE)
         list)
 
     print_list() -> Node => (
-        expect(Kind.LEFT_PAREN)
+        expect(LEFT_PAREN)
         let list =
             print_items(Node.SEQUENCE(Node.EMPTY, print_item()))
-        expect(Kind.RIGHT_PAREN)
-        expect(Kind.SEMICOLON)
+        expect(RIGHT_PAREN)
+        expect(SEMICOLON)
         list)
 
     print_items(list: Node) -> Node =>
-        if accept(Kind.COMMA) then
+        if accept(COMMA) then
             print_items(Node.SEQUENCE(list, print_item()))
         else
             list
@@ -190,7 +190,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     print_item() -> Node =>
         case token.kind
-        when Kind.STRING then
+        when STRING then
             let text = Node.STRING(token.value)
             advance()
             Node.PRTS(text)
@@ -199,9 +199,9 @@ class PARSER(tokens: Iterator[TOKEN]) is
         esac
 
     parenthesised() -> Node => (
-        expect(Kind.LEFT_PAREN)
+        expect(LEFT_PAREN)
         let inside = expression(0)
-        expect(Kind.RIGHT_PAREN)
+        expect(RIGHT_PAREN)
         inside)
 
     expression(minimum: int) -> Node =>
@@ -209,22 +209,22 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     primary() -> Node =>
         case token.kind
-        when Kind.LEFT_PAREN then
+        when LEFT_PAREN then
             parenthesised()
-        when Kind.SUBTRACT then
+        when SUBTRACT then
             advance()
             Node.NEGATE(expression(unary_precedence))
-        when Kind.NOT then
+        when NOT then
             advance()
             Node.NOT(expression(unary_precedence))
-        when Kind.ADD then
+        when ADD then
             advance()
             expression(unary_precedence)
-        when Kind.IDENTIFIER then
+        when IDENTIFIER then
             let name = token.value
             advance()
             Node.IDENTIFIER(name)
-        when Kind.INTEGER then
+        when INTEGER then
             let value = token.value
             advance()
             Node.INTEGER(value)
