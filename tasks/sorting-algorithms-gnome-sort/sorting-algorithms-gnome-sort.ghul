@@ -7,7 +7,10 @@ gnome_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
         if at == 0 \/ values[at] >= values[at - 1] then
             at = at + 1
         else
-            (values[at], values[at - 1]) = (values[at - 1], values[at])
+            (values[at], values[at - 1]) = (
+                values[at - 1],
+                values[at]
+            )
 
             at = at - 1
         fi

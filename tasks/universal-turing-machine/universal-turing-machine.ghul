@@ -24,13 +24,17 @@ class MACHINE(
                 else 0
                 esac
 
-            table[(parts[0], parts[1][0])] =
-                (write = parts[2][0], move = move, next = parts[4])
+            table[(parts[0], parts[1][0])] = (
+                write = parts[2][0],
+                move = move,
+                next = parts[4]
+            )
         od
     si
 
     run(input: string, show: bool) is
-        let start = if input.length == 0 then "{blank}" else input fi
+        let start =
+            if input.length == 0 then "{blank}" else input fi
         let tape = LIST(start)
         let head mut = 0
         let state mut = initial
@@ -68,38 +72,53 @@ si
 
 picture(tape: List[char], head: int) -> string =>
     (0..tape.count)
-        |> map(i => if i == head then "[{tape[i]}]" else " {tape[i]} " fi)
+        |> map(i =>
+            if i == head then
+                "[{tape[i]}]"
+            else
+                " {tape[i]} "
+            fi
+        )
         |> join("")
 
-let incrementer = MACHINE(
-    "simple incrementer", "q0", "qf", 'B', [
-        "q0 1 1 right q0",
-        "q0 B 1 stay qf"
-    ])
+let incrementer = MACHINE("simple incrementer",
+    "q0",
+    "qf",
+    'B',
+    [
+    "q0 1 1 right q0",
+    "q0 B 1 stay qf"
+])
 
-let busy_beaver = MACHINE(
-    "three-state busy beaver", "a", "halt", '0', [
-        "a 0 1 right b",
-        "a 1 1 left c",
-        "b 0 1 left a",
-        "b 1 1 right b",
-        "c 0 1 left b",
-        "c 1 1 stay halt"
-    ])
+let busy_beaver = MACHINE("three-state busy beaver",
+    "a",
+    "halt",
+    '0',
+    [
+    "a 0 1 right b",
+    "a 1 1 left c",
+    "b 0 1 left a",
+    "b 1 1 right b",
+    "c 0 1 left b",
+    "c 1 1 stay halt"
+])
 
-let five_state = MACHINE(
-    "five-state busy beaver", "A", "H", '0', [
-        "A 0 1 right B",
-        "A 1 1 left C",
-        "B 0 1 right C",
-        "B 1 1 right B",
-        "C 0 1 right D",
-        "C 1 0 left E",
-        "D 0 1 left A",
-        "D 1 1 left D",
-        "E 0 1 stay H",
-        "E 1 0 left A"
-    ])
+let five_state = MACHINE("five-state busy beaver",
+    "A",
+    "H",
+    '0',
+    [
+    "A 0 1 right B",
+    "A 1 1 left C",
+    "B 0 1 right C",
+    "B 1 1 right B",
+    "C 0 1 right D",
+    "C 1 0 left E",
+    "D 0 1 left A",
+    "D 1 1 left D",
+    "E 0 1 stay H",
+    "E 1 0 left A"
+])
 
 incrementer.run("111", true)
 busy_beaver.run("", true)

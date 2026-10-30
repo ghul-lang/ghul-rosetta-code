@@ -3,10 +3,13 @@ use default
 let dice = System.Random(20260909)
 
 attribute() -> int =>
-    let rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect() in
-    let lowest = rolls |> min_by(roll => roll), total = rolls |> sum() in
-    total - (lowest ?? 0)
-
+    let rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect()
+    in
+    let
+        lowest = rolls |> min_by(roll => roll),
+        total = rolls |> sum()
+    in
+        total - (lowest ?? 0)
 
 character() -> List[int] =>
     1::6 |> map(_ => attribute()) |> collect()
@@ -16,7 +19,7 @@ acceptable(values: List[int]) -> bool =>
         total = values |> sum(),
         strong = values |> filter(* >= 15) |> count()
     in
-    total >= 75 /\ strong >= 2
+        total >= 75 /\ strong >= 2
 
 let (attempts, rolled) =
     from(1)
@@ -25,6 +28,8 @@ let (attempts, rolled) =
 
 let total = rolled |> sum()
 
-write_line("attributes: {rolled |> map(value => "{value}") |> join(", ")}")
+write_line(
+    "attributes: {rolled |> map(value => "{value}") |> join(", ")}"
+)
 write_line("total: {total}")
 write_line("rolled {attempts} characters before one qualified")

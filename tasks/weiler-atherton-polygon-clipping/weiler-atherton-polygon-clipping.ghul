@@ -21,7 +21,9 @@ use Crossing = (edge: int, t: double, node: NODE)
 
 area(polygon: List[P]) -> double =>
     (0..polygon.count)
-        |> sum_by(i => polygon[i] × polygon[(i + 1) % polygon.count])
+        |> sum_by(i =>
+            polygon[i] × polygon[(i + 1) % polygon.count]
+        )
 
 contains(polygon: List[P], p: P) -> bool => (
     let inside mut = false
@@ -30,8 +32,10 @@ contains(polygon: List[P], p: P) -> bool => (
         let a = polygon[i]
         let b = polygon[(i + 1) % polygon.count]
 
-        if (a.y > p.y) != (b.y > p.y) /\
-                p.x < a.x + (p.y - a.y) * (b.x - a.x) / (b.y - a.y) then
+        if
+            (a.y > p.y) != (b.y > p.y) /\
+            p.x < a.x + (p.y - a.y) * (b.x - a.x) / (b.y - a.y)
+        then
             inside = !inside
         fi
     od
@@ -63,7 +67,12 @@ clip(subject: List[P], given: List[P]) -> List[List[P]] is
     let window =
         (0..given.count)
             |> map(i =>
-                if flip then given[given.count - 1 - i] else given[i] fi)
+                if flip then
+                    given[given.count - 1 - i]
+                else
+                    given[i]
+                fi
+            )
             |> collect()
 
     let on_subject = LIST()
@@ -82,7 +91,9 @@ clip(subject: List[P], given: List[P]) -> List[List[P]] is
                 let t = (c - a) × q / d
                 let u = (c - a) × r / d
 
-                if t > 0.0D /\ t < 1.0D /\ u > 0.0D /\ u < 1.0D then
+                if
+                    t > 0.0D /\ t < 1.0D /\ u > 0.0D /\ u < 1.0D
+                then
                     let s = NODE(a + r * t, true)
                     let w = NODE(a + r * t, true)
 
@@ -111,7 +122,9 @@ clip(subject: List[P], given: List[P]) -> List[List[P]] is
     let results = LIST[List[P]]()
 
     for start in nodes do
-        if start.crossing /\ start.entering /\ !start.visited then
+        if
+            start.crossing /\ start.entering /\ !start.visited
+        then
             let polygon = LIST()
             let node mut = start
 
@@ -165,7 +178,8 @@ image.view(0.0D, 540.0D, 600.0D, 60.0D)
 image.clear(252ub, 252ub, 250ub)
 
 outline(polygon: List[P]) -> List[(x: double, y: double)] =>
-    polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y))
+    polygon ++ [polygon[0]]
+        |> map(p => (x = p.x, y = p.y))
         |> collect()
 
 image.colour(250ub, 200ub, 90ub)

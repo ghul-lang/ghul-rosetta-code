@@ -23,8 +23,10 @@ encode(values: int{}) -> string =>
     values |> map(encode_one) |> join("")
 
 decode(text: string) -> Decoded is
-    let quoted = text.length >= 2 /\
-        text.starts_with("\"") /\ text.ends_with("\"")
+    let quoted =
+        text.length >= 2 /\
+        text.starts_with("\"") /\
+        text.ends_with("\"")
 
     let body = if quoted then text[1..<1] else text fi
 
@@ -61,7 +63,9 @@ decode(text: string) -> Decoded is
                     if code >= '@' /\ code <= 'z' then
                         int(code) % 32
                     else
-                        return Decoded.ERROR("'|{code}' at {at - 2}")
+                        return Decoded.ERROR(
+                            "'|{code}' at {at - 2}"
+                        )
                     fi
                 esac
 
@@ -75,7 +79,12 @@ si
 show(values: int{}) -> string =>
     values
         |> map(v =>
-            if v >= 32 /\ v < 127 then "{char(v)}" else "[{v}]" fi)
+            if v >= 32 /\ v < 127 then
+                "{char(v)}"
+            else
+                "[{v}]"
+            fi
+        )
         |> join("")
 
 let samples = [
@@ -92,7 +101,8 @@ od
 write_line()
 
 let encoded = [
-    "|LHello|G|J|M", "\"|m|j|@|e|!t|m|!|?\"", "abc|", "abc|!", "|1"
+    "|LHello|G|J|M", "\"|m|j|@|e|!t|m|!|?\"", "abc|", "abc|!",
+    "|1"
 ]
 
 for text in encoded do

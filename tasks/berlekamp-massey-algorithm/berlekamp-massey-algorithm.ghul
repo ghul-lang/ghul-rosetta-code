@@ -3,10 +3,16 @@ use default
 use Register = (connection: List[int], length: int)
 
 predict(
-    sequence: List[int], connection: List[int], length: int, n: int
+    sequence: List[int],
+    connection: List[int],
+    length: int,
+    n: int
 ) -> int =>
-    [connection[k] & sequence[n - k]
-        for k in 1::length if k < connection.count]
+    [
+        connection[k] & sequence[n - k]
+        for k in 1::length
+        if k < connection.count
+    ]
         |> reduce(0, * ^ *)
 
 shortest_register(sequence: List[int]) -> Register is
@@ -27,7 +33,8 @@ shortest_register(sequence: List[int]) -> Register is
 
     for n in 0..sequence.count do
         let discrepancy =
-            sequence[n] ^ predict(sequence, connection, length, n)
+            sequence[n] ^
+            predict(sequence, connection, length, n)
 
         if discrepancy == 0 then
             shift = shift + 1
@@ -56,22 +63,36 @@ polynomial(coefficients: List[int]) -> string =>
             when 0 then "1"
             when 1 then "x"
             else "x^{power}"
-            esac)
+            esac
+        )
         |> join(" + ")
 
 regenerates(
-    sequence: List[int], connection: List[int], length: int
+    sequence: List[int],
+    connection: List[int],
+    length: int
 ) -> bool =>
     length..sequence.count
-        |> all(n => predict(sequence, connection, length, n) == sequence[n])
+        |> all(n =>
+            predict(sequence, connection, length, n) ==
+            sequence[n]
+        )
 
-for sequence in [[0, 0, 1, 1, 0, 1, 0], [0, 1, 1, 0, 1, 1, 0, 1, 1]] do
+for
+    sequence in [
+        [0, 0, 1, 1, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0, 1, 1]
+    ]
+do
     let (connection, length) = shortest_register(sequence)
 
     write_line("sequence:          {sequence}")
-    write_line("connection:        C(x) = {polynomial(connection)}")
+    write_line(
+        "connection:        C(x) = {polynomial(connection)}"
+    )
     write_line("linear complexity: {length}")
     write_line(
-        "regenerates it:    {regenerates(sequence, connection, length)}")
+        "regenerates it:    {regenerates(sequence, connection, length)}"
+    )
     write_line("")
 od

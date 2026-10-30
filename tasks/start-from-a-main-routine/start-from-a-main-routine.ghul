@@ -1,7 +1,9 @@
 use default
 
 entry() is
-    write_line("a function named entry starts the program by default")
+    write_line(
+        "a function named entry starts the program by default"
+    )
 si
 
 @entry()

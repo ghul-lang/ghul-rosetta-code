@@ -12,20 +12,34 @@ let frames = 100
 let tilt = 0.45
 let camera_distance = 9.0
 
-+(a: Point, b: Point) -> Point =>
-    (x = a.x + b.x, y = a.y + b.y, z = a.z + b.z)
++(a: Point, b: Point) -> Point => (
+    x = a.x + b.x,
+    y = a.y + b.y,
+    z = a.z + b.z
+)
 
-*(p: Point, k: double) -> Point =>
-    (x = p.x * k, y = p.y * k, z = p.z * k)
+*(p: Point, k: double) -> Point => (
+    x = p.x * k,
+    y = p.y * k,
+    z = p.z * k
+)
 
-rgb(r: int, g: int, b: int) -> Colour =>
-    (red = ubyte(r), green = ubyte(g), blue = ubyte(b))
+rgb(r: int, g: int, b: int) -> Colour => (
+    red = ubyte(r),
+    green = ubyte(g),
+    blue = ubyte(b)
+)
 
 let x_axis = (x = 1.0, y = 0.0, z = 0.0)
 let y_axis = (x = 0.0, y = 1.0, z = 0.0)
 let z_axis = (x = 0.0, y = 0.0, z = 1.0)
 
-let faces: (normal: Point, u: Point, v: Point, colour: Colour)[] = [
+let faces: (
+    normal: Point,
+    u: Point,
+    v: Point,
+    colour: Colour
+)[] = [
     (y_axis, x_axis, z_axis, rgb(245, 245, 245)),
     (y_axis * -1.0, x_axis, z_axis, rgb(255, 213, 0)),
     (z_axis, x_axis, y_axis, rgb(0, 155, 72)),
@@ -39,10 +53,11 @@ turned(p: Point, angle: double) -> Point =>
         x = p.x * cos(angle) + p.z * sin(angle),
         z = p.z * cos(angle) - p.x * sin(angle)
     in
-    (
-        x = x,
-        y = p.y * cos(tilt) - z * sin(tilt),
-        z = p.y * sin(tilt) + z * cos(tilt))
+        (
+            x = x,
+            y = p.y * cos(tilt) - z * sin(tilt),
+            z = p.y * sin(tilt) + z * cos(tilt)
+        )
 
 project(p: Point) -> (x: double, y: double) =>
     let scale = camera_distance / (camera_distance - p.z) in
@@ -52,11 +67,19 @@ facing(normal: Point, angle: double) -> bool =>
     turned(normal, angle).z * camera_distance > 1.5
 
 square(
-    centre: Point, u: Point, v: Point, half: double, angle: double
+    centre: Point,
+    u: Point,
+    v: Point,
+    half: double,
+    angle: double
 ) -> List[(x: double, y: double)] =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
-            turned(centre + u * (a * half) + v * (b * half), angle))
+            turned(
+                centre + u * (a * half) + v * (b * half),
+                angle
+            )
+        )
         |> map(project)
         |> collect()
 
@@ -69,17 +92,30 @@ draw(image: IMAGE, angle: double) is
     for face in faces |> filter(f => facing(f.normal, angle)) do
         let centre = face.normal * 1.5
 
-        let cube_face = square(centre, face.u, face.v, 1.5, angle)
+        let cube_face = square(
+            centre,
+            face.u,
+            face.v,
+            1.5,
+            angle
+        )
 
         body.add(cube_face, 20ub, 20ub, 20ub)
 
         let sticker_centres = [
             centre + face.u * double(i) + face.v * double(j)
-            for i in -1::1 for j in -1::1
+            for i in -1::1
+            for j in -1::1
         ]
 
         for at in sticker_centres do
-            let sticker = square(at, face.u, face.v, 0.42, angle)
+            let sticker = square(
+                at,
+                face.u,
+                face.v,
+                0.42,
+                angle
+            )
 
             stickers.add(sticker, face.colour)
         od

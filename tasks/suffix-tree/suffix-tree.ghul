@@ -13,8 +13,8 @@ class NODE is
 
     children: Collections.List[NODE] =>
         _edges.values
-        |> sort((a, b) => a.label <> b.label)
-        |> collect()
+            |> sort((a, b) => a.label <> b.label)
+            |> collect()
 
     add(suffix: string) is
         if suffix.length == 0 then
@@ -50,8 +50,12 @@ class NODE is
     si
 
     _shared_prefix(left: string, right: string) -> int =>
-        let limit = System.Math.min(left.length, right.length) in
-        from(0) |> find(i => i == limit \/ left[i] != right[i]) ?? limit
+        let limit = System.Math.min(left.length, right.length)
+        in
+        from(0)
+            |> find(i =>
+                i == limit \/ left[i] != right[i]
+            ) ?? limit
 si
 
 show(node: NODE, depth: int) is

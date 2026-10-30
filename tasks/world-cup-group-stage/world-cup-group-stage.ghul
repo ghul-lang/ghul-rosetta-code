@@ -15,7 +15,11 @@ outcomes(count: int) -> Collections.List[Result]{} is
     fi
 
     for rest in outcomes(count - 1) do
-        for result in [Result.HOME_WIN, Result.DRAW, Result.AWAY_WIN] do
+        for
+            result in [
+                Result.HOME_WIN, Result.DRAW, Result.AWAY_WIN
+            ]
+        do
             yield rest ++ [result] |> collect()
         od
     od
@@ -40,7 +44,9 @@ standings(results: Collections.List[Result]) -> int{} => (
 )
 
 let histogram =
-    (0..4) |> map(_ => repeat(0, 10) |> collect_mutable()) |> collect()
+    (0..4)
+        |> map(_ => repeat(0, 10) |> collect_mutable())
+        |> collect()
 
 for results in outcomes(games.count) do
     for (place, points) in results |> standings() |> index() do
@@ -50,7 +56,9 @@ od
 
 let places = ["1st", "2nd", "3rd", "4th"]
 
-write_line("points     {(0::9) |> map(p => "{p,5}") |> join("")}")
+write_line(
+    "points     {(0::9) |> map(p => "{p,5}") |> join("")}"
+)
 write_line(string('-', 60))
 
 for (place, counts) in histogram |> index() do

@@ -11,10 +11,17 @@ greatest_run(values: int[]) -> RUN is
 
         running =
             if extended > 0 then
-                (start = running.start, finish = index + 1,
-                 total = extended)
+                (
+                    start = running.start,
+                    finish = index + 1,
+                    total = extended
+                )
             else
-                (start = index + 1, finish = index + 1, total = 0)
+                (
+                    start = index + 1,
+                    finish = index + 1,
+                    total = 0
+                )
             fi
 
         if running.total > best.total then
@@ -31,9 +38,12 @@ list(values: int[]) -> string =>
 let values = [-1, -2, 3, 5, 6, -2, -1, 4, -4, 2, -1]
 let best = greatest_run(values)
 
-let greatest = (best.start..best.finish)
-    |> map(index => "{values[index]}")
-    |> join()
+let greatest =
+    (best.start..best.finish)
+        |> map(index => "{values[index]}")
+        |> join()
 
 write_line("sequence: [{list(values)}]")
-write_line("greatest subsequence: [{greatest}], sum {best.total}")
+write_line(
+    "greatest subsequence: [{greatest}], sum {best.total}"
+)

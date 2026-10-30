@@ -11,7 +11,8 @@ show() is
     od
 si
 
-solved() -> bool => board |> index() |> all(c => c.value == c.index + 1)
+solved() -> bool =>
+    board |> index() |> all(c => c.value == c.index + 1)
 
 rotate(cells: List[int], forward: bool) is
     let values = cells |> map(i => board[i]) |> collect()
@@ -19,7 +20,11 @@ rotate(cells: List[int], forward: bool) is
 
     for (k, cell) in cells |> index() do
         let from =
-            if forward then (k + count - 1) % count else (k + 1) % count fi
+            if forward then
+                (k + count - 1) % count
+            else
+                (k + 1) % count
+            fi
 
         board[cell] = values[from]
     od
@@ -54,12 +59,15 @@ let random = System.Random(16)
 let letters = "LRUD"
 
 for _ in 0..3 do
-    let move = "{letters[random.next(4)]}{random.next(size) + 1}"
+    let move =
+        "{letters[random.next(4)]}{random.next(size) + 1}"
 
     apply(move)
 od
 
-write_line("Rotate a row with Ln or Rn, a column with Un or Dn,")
+write_line(
+    "Rotate a row with Ln or Rn, a column with Un or Dn,"
+)
 write_line("n from 1 to 4.")
 write_line("")
 

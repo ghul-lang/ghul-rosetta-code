@@ -35,7 +35,10 @@ class WAVELET(values: List[int] init) is
         _width = 1
 
         let largest =
-            values |> reduce(0, (a, b) => if a > b then a else b fi)
+            values
+                |> reduce(0, (a, b) =>
+                    if a > b then a else b fi
+                )
 
         while (1 << _width) <= largest do
             _width = _width + 1
@@ -49,7 +52,10 @@ class WAVELET(values: List[int] init) is
 
             _levels.add(BITS(holding |> map(set) |> collect()))
 
-            let zeros = holding |> filter(v => !set(v)) |> collect_mutable()
+            let zeros =
+                holding
+                    |> filter(v => !set(v))
+                    |> collect_mutable()
             let ones = holding |> filter(set) |> memo()
 
             _below.add(zeros.count)
@@ -124,7 +130,8 @@ class WAVELET(values: List[int] init) is
             let bits = _levels[level]
 
             if ((limit >> (_width - 1 - level)) & 1) == 1 then
-                found = found + bits.zeros(high) - bits.zeros(low)
+                found =
+                    found + bits.zeros(high) - bits.zeros(low)
                 low = _below[level] + bits.ones(low)
                 high = _below[level] + bits.ones(high)
             else
@@ -153,13 +160,24 @@ let asked = [
 ]
 
 for ask in asked do
-    let answer = matrix.quantile(ask.k - 1, ask.from - 1, ask.until)
+    let answer = matrix.quantile(
+        ask.k - 1,
+        ask.from - 1,
+        ask.until
+    )
 
-    write_line("  [{ask.from}, {ask.until}] k={ask.k}  {answer}")
+    write_line(
+        "  [{ask.from}, {ask.until}] k={ask.k}  {answer}"
+    )
 od
 
 write_line()
-write_line("3415 occurs {matrix.count_of(3415, 0, 5)} time in the sequence")
-write_line("{matrix.count_below(3400, 0, 5)} values are below 3400")
 write_line(
-    "{matrix.count_below(3400, 2, 5)} of the last three are below 3400")
+    "3415 occurs {matrix.count_of(3415, 0, 5)} time in the sequence"
+)
+write_line(
+    "{matrix.count_below(3400, 0, 5)} values are below 3400"
+)
+write_line(
+    "{matrix.count_below(3400, 2, 5)} of the last three are below 3400"
+)

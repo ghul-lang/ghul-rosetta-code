@@ -48,7 +48,8 @@ trits: Trit[] => [TRUE, MAYBE, FALSE]
 
 table(name: string, operator: (Trit, Trit) -> Trit) is
     write_line("")
-    let heading = trits |> map(trit => "{show(trit),6}") |> join("")
+    let heading =
+        trits |> map(trit => "{show(trit),6}") |> join("")
 
     write_line("{name,-8}|{heading}")
     write_line("--------+------------------")
@@ -56,8 +57,10 @@ table(name: string, operator: (Trit, Trit) -> Trit) is
     for left in trits do
         let row =
             trits
-            |> map(right => "{show(operator(left, right)),6}")
-            |> join("")
+                |> map(right =>
+                    "{show(operator(left, right)),6}"
+                )
+                |> join("")
 
         write_line("{show(left),-8}|{row}")
     od

@@ -5,17 +5,27 @@ humble() -> long{} is
     found.add(1L)
 
     let factors = [2L, 3L, 5L, 7L]
-    let next_index = repeat(0, factors.count) |> collect_mutable()
+    let next_index =
+        repeat(0, factors.count) |> collect_mutable()
 
     do
         yield found[found.count - 1]
 
-        let smallest = (0..factors.count
-            |> map(which => found[next_index[which]] * factors[which])
-            |> min())!
+        let smallest =
+            (
+                0..factors.count
+                    |> map(which =>
+                        found[next_index[which]] *
+                        factors[which]
+                    )
+                    |> min()
+            )!
 
         for which in 0..factors.count do
-            if found[next_index[which]] * factors[which] == smallest then
+            if
+                found[next_index[which]] * factors[which] ==
+                smallest
+            then
                 next_index[which] = next_index[which] + 1
             fi
         od
@@ -25,7 +35,10 @@ humble() -> long{} is
 si
 
 let first_fifty =
-    humble() |> take(50) |> map(value => "{value,5}") |> collect()
+    humble()
+        |> take(50)
+        |> map(value => "{value,5}")
+        |> collect()
 
 write_line("the first fifty humble numbers:")
 
@@ -33,13 +46,16 @@ for row in 0..5 do
     write_line(first_fifty[row * 10..row * 10 + 10] |> join(""))
 od
 
-let widths = humble()
-    |> take_while(value => "{value}".length <= 16)
-    |> map(value => "{value}".length)
-    |> frequencies()
+let widths =
+    humble()
+        |> take_while(value => "{value}".length <= 16)
+        |> map(value => "{value}".length)
+        |> frequencies()
 
 write_line("")
-write_line("how many humble numbers have each number of digits:")
+write_line(
+    "how many humble numbers have each number of digits:"
+)
 
 for width in 1::16 do
     write_line("  {width,2} digits: {widths[width]}")

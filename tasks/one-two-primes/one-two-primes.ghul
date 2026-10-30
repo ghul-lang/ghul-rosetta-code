@@ -6,11 +6,15 @@ digit_at(bits: long, position: int) -> char =>
 one_two_numbers(digits: int) -> string{} =>
     0L..(1L << digits)
         |> map(bits =>
-            string(0..digits
-                |> map(i => digit_at(bits, digits - 1 - i))))
+            string(
+                0..digits
+                    |> map(i => digit_at(bits, digits - 1 - i))
+            )
+        )
 
 smallest_prime(digits: int) -> string =>
-    one_two_numbers(digits) |> find(text => is_prime(bigint.parse(text)))!
+    one_two_numbers(digits)
+        |> find(text => is_prime(bigint.parse(text)))!
 
 for digits in 1::20 do
     write_line("{digits,2}: {smallest_prime(digits)}")

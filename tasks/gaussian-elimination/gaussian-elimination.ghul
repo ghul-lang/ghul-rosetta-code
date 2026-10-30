@@ -7,17 +7,21 @@ largest_magnitude(values: double{}) -> double =>
 solve(a: List[List[double]], b: List[double]) -> double{} is
     let n = b.count
 
-    let rows = 0..n
-        |> map(i => a[i] |> cat([b[i]]) |> collect_mutable())
-        |> collect_mutable()
+    let rows =
+        0..n
+            |> map(i =>
+                a[i] |> cat([b[i]]) |> collect_mutable()
+            )
+            |> collect_mutable()
 
-    let scales = rows
-        |> map(row => largest_magnitude(row |> take(n)))
-        |> collect_mutable()
+    let scales =
+        rows
+            |> map(row => largest_magnitude(row |> take(n)))
+            |> collect_mutable()
 
     for k in 0..n do
-        let pivot = k..n
-            |> max_by(i => abs(rows[i][k]) / scales[i])!
+        let pivot =
+            k..n |> max_by(i => abs(rows[i][k]) / scales[i])!
 
         (rows[k], rows[pivot]) = (rows[pivot], rows[k])
         (scales[k], scales[pivot]) = (scales[pivot], scales[k])

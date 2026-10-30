@@ -20,10 +20,12 @@ zodiac(year: int) is
     let branch_index = ((offset % 12) + 12) % 12
     let cycle_position = (((offset % 60) + 60) % 60) + 1
     let element = elements[stem_index / 2]
-    let aspect = if stem_index % 2 == 0 then "yang" else "yin" fi
+    let aspect =
+        if stem_index % 2 == 0 then "yang" else "yin" fi
     let animal = animals[branch_index]
 
-    let stem_branch = "{stems[stem_index]}-{branches[branch_index]}"
+    let stem_branch =
+        "{stems[stem_index]}-{branches[branch_index]}"
 
     write_line(
         "{year}: {element} {animal}, {aspect} "

@@ -35,7 +35,8 @@ draw(image: IMAGE, number: int, left: double) is
     let place mut = number
 
     for quadrant in 0..4 do
-        let flip_x = if quadrant % 2 == 1 then -1.0D else 1.0D fi
+        let flip_x =
+            if quadrant % 2 == 1 then -1.0D else 1.0D fi
         let flip_y = quadrant >= 2
 
         for s in glyphs[place % 10] do
@@ -43,8 +44,11 @@ draw(image: IMAGE, number: int, left: double) is
             let y1 = if flip_y then 3.0D - s.y1 else s.y1 fi
 
             image.line(
-                centre + flip_x * s.x0 * unit, base + y0 * unit,
-                centre + flip_x * s.x1 * unit, base + y1 * unit)
+                centre + flip_x * s.x0 * unit,
+                base + y0 * unit,
+                centre + flip_x * s.x1 * unit,
+                base + y1 * unit
+            )
         od
 
         place = place / 10

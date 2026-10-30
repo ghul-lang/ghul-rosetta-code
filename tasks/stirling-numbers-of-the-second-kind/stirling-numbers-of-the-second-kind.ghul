@@ -24,13 +24,14 @@ write_line("Stirling numbers of the second kind, S2(n, k):")
 write_line("")
 
 write_line(
-    ["{"n/k",3}"] ++ (0::12 |> map(k => "{k,10}"))
-    |> join(""))
+    ["{"n/k",3}"] ++ (0::12 |> map(k => "{k,10}")) |> join("")
+)
 
 for n in 0::12 do
     write_line(
         ["{n,3}"] ++ (row_of(n) |> map(v => "{v,10}"))
-        |> join(""))
+            |> join("")
+    )
 od
 
 let largest = (row_of(100) |> max())!

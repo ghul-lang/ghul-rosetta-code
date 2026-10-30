@@ -33,8 +33,9 @@ position() -> List[char] => (
         let square = random.next(64)
         let piece = pieces[random.next(pieces.length)]
 
-        if board[square] == '.' /\
-           !promotion_square(piece, square)
+        if
+            board[square] == '.' /\
+            !promotion_square(piece, square)
         then
             board[square] = piece
         fi
@@ -69,10 +70,11 @@ rank_to_fen(squares: List[char]) -> string => (
 
 to_fen(board: List[char]) -> string => (
     let ranks =
-       (0..8)
-           |> map(rank =>
-               rank_to_fen(board[rank * 8 .. rank * 8 + 8]))
-           |> join("/")
+        (0..8)
+            |> map(rank =>
+                rank_to_fen(board[rank * 8..rank * 8 + 8])
+            )
+            |> join("/")
 
     "{ranks} w - - 0 1"
 )

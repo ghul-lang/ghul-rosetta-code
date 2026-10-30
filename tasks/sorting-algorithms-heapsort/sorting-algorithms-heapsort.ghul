@@ -1,17 +1,27 @@
 use default
 
-sift_down[T: Ghul.Comparable[T]](values: LIST[T], start: int, end: int) is
+sift_down[T: Ghul.Comparable[T]](
+    values: LIST[T],
+    start: int,
+    end: int
+) is
     let root mut = start
 
     while root * 2 + 1 <= end do
         let child mut = root * 2 + 1
 
-        if child + 1 <= end /\ values[child] < values[child + 1] then
+        if
+            child + 1 <= end /\
+            values[child] < values[child + 1]
+        then
             child = child + 1
         fi
 
         if values[root] < values[child] then
-            (values[root], values[child]) = (values[child], values[root])
+            (values[root], values[child]) = (
+                values[child],
+                values[root]
+            )
 
             root = child
         else

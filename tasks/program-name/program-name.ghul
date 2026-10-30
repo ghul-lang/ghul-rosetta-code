@@ -5,4 +5,6 @@ let invoked = System.Environment.get_command_line_args()[0]
 write_line("invoked as: {IO.Path.get_file_name(invoked)}")
 let assembly = System.Reflection.Assembly.get_entry_assembly()
 
-write_line("assembly:   {assembly?.get_name()?.name ?? "unknown"}")
+write_line(
+    "assembly:   {assembly?.get_name()?.name ?? "unknown"}"
+)

@@ -7,7 +7,10 @@ factorize(text: string) -> string{} is
         let compare mut = start + 1
         let anchor mut = start
 
-        while compare < text.length /\ text[anchor] <= text[compare] do
+        while
+            compare < text.length /\
+            text[anchor] <= text[compare]
+        do
             if text[anchor] < text[compare] then
                 anchor = start
             else
@@ -19,7 +22,7 @@ factorize(text: string) -> string{} is
         let width = compare - anchor
 
         while start <= anchor do
-            yield text[start .. start + width]
+            yield text[start..start + width]
             start = start + width
         od
     od
@@ -28,13 +31,16 @@ si
 let thue_morse mut = "0"
 
 for _ in 1::7 do
-    let flipped = thue_morse
-        |> map(c => if c == '0' then '1' else '0' fi)
-        |> join("")
+    let flipped =
+        thue_morse
+            |> map(c => if c == '0' then '1' else '0' fi)
+            |> join("")
     thue_morse = "{thue_morse}{flipped}"
 od
 
-let examples = ["0", "0001", "0010", "1000110", "001100", thue_morse]
+let examples = [
+    "0", "0001", "0010", "1000110", "001100", thue_morse
+]
 
 for text in examples do
     write_line("{text} = {text |> factorize() |> join(" ")}")

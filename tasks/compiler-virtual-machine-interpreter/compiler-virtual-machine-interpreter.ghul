@@ -3,11 +3,30 @@ use default
 use System.BitConverter
 
 enum Op is
-    FETCH, STORE, PUSH,
-    ADD, SUB, MUL, DIV, MOD,
-    LT, GT, LE, GE, EQ, NE, AND, OR,
-    NEG, NOT, JMP, JZ,
-    PRTC, PRTS, PRTI, HALT
+    FETCH,
+    STORE,
+    PUSH,
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+    MOD,
+    LT,
+    GT,
+    LE,
+    GE,
+    EQ,
+    NE,
+    AND,
+    OR,
+    NEG,
+    NOT,
+    JMP,
+    JZ,
+    PRTC,
+    PRTS,
+    PRTI,
+    HALT
 si
 
 class MACHINE is
@@ -17,7 +36,11 @@ class MACHINE is
     _stack: LIST[int]
     _pc: int
 
-    init(code: ubyte[], strings: List[string], data_size: int) is
+    init(
+        code: ubyte[],
+        strings: List[string],
+        data_size: int
+    ) is
         _code = code
         _strings = strings
         _data = repeat(0, data_size) |> collect_mutable()
@@ -69,7 +92,10 @@ class MACHINE is
         when Op.NE then truth(a != b)
         when Op.AND then truth(a != 0 /\ b != 0)
         when Op.OR then truth(a != 0 \/ b != 0)
-        else throw System.Exception("not a binary operator: {op}")
+        else
+            throw System.Exception(
+                "not a binary operator: {op}"
+            )
         esac
 
     _offset() -> int => BitConverter.to_int32(_code, _pc)
@@ -110,21 +136,26 @@ let header = lines[0].split([' '])
 let data_size = int.parse(header[1])
 let string_count = int.parse(header[3])
 
-let strings = lines |> skip(1) |> take(string_count) |> map(unquote)
+let strings =
+    lines |> skip(1) |> take(string_count) |> map(unquote)
 let code = LIST()
 
 for line in lines |> skip(1 + string_count) do
     let parts = line |> words() |> collect()
 
     assert int.parse(parts[0]) == code.count
-    else "address {parts[0]} out of step"
+        else "address {parts[0]} out of step"
 
-    let op = System.Enum.parse[Op](parts[1].to_upper_invariant())
+    let op = System.Enum.parse[Op](
+        parts[1].to_upper_invariant()
+    )
 
     code.add(ubyte(cast int(op)))
 
     if parts.count > 2 then
-        let operand = int.parse(parts[2].trim(['[', ']', '(', ')']))
+        let operand = int.parse(
+            parts[2].trim(['[', ']', '(', ')'])
+        )
 
         code.add_range(BitConverter.get_bytes(operand))
     fi

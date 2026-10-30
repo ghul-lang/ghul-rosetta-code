@@ -1,7 +1,6 @@
 use default
 
-fs(f: (int) -> int, s: int{}) -> int{} =>
-    s |> map(f)
+fs(f: (int) -> int, s: int{}) -> int{} => s |> map(f)
 
 f1(n: int) -> int => n * 2
 f2(n: int) -> int => n * n

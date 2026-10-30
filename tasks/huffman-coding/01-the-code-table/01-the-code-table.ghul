@@ -23,19 +23,26 @@ build_tree(leaves: List[Huffman]) -> Huffman => (
         let first = take_lightest(pending)
         let second = take_lightest(pending)
 
-        pending.add(NODE(first, second, first.weight + second.weight))
+        pending.add(
+            NODE(first, second, first.weight + second.weight)
+        )
     od
 
     pending[0]
 )
 
-codes(node: Huffman, prefix: string)
-    -> (symbol: char, weight: int, code: string){}
-is
+codes(node: Huffman, prefix: string) -> (
+    symbol: char,
+    weight: int,
+    code: string
+){} is
     if let leaf: LEAF = node then
         let code = if prefix.length == 0 then "0" else prefix fi
 
-        yield (symbol = leaf.symbol, weight = leaf.weight, code = code)
+        yield (
+            symbol = leaf.symbol, weight = leaf.weight,
+            code = code
+        )
     elif let branch: NODE = node then
         yield in codes(branch.left, "{prefix}0")
         yield in codes(branch.right, "{prefix}1")
@@ -46,19 +53,21 @@ let text = "this is an example for huffman encoding"
 
 let weights = text |> frequencies()
 
-let leaves = weights.keys
-    |> sort()
-    |> map(symbol => LEAF(symbol, weights[symbol]))
-    |> collect()
+let leaves =
+    weights.keys
+        |> sort()
+        |> map(symbol => LEAF(symbol, weights[symbol]))
+        |> collect()
 
 let table =
     codes(build_tree(leaves), "")
-    |> sort((left, right) =>
-        if left.weight != right.weight then
-            right.weight - left.weight
-        else
-            int(left.symbol) - int(right.symbol)
-        fi)
+        |> sort((left, right) =>
+            if left.weight != right.weight then
+                right.weight - left.weight
+            else
+                int(left.symbol) - int(right.symbol)
+            fi
+        )
 
 write_line("symbol  weight  code")
 

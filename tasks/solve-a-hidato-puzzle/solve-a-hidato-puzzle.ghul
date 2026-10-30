@@ -16,7 +16,8 @@ let hole = -1
 let blank = 0
 
 let rows = puzzle.count
-cells(line: string) -> string[] => line.split([' '], REMOVE_EMPTY_ENTRIES)
+cells(line: string) -> string[] =>
+    line.split([' '], REMOVE_EMPTY_ENTRIES)
 
 let columns = cells(puzzle[0]).count
 
@@ -27,14 +28,21 @@ let board =
             if cell =~ "." then hole
             elif cell =~ "__" then blank
             else int.parse(cell)
-            fi)
+            fi
+        )
         |> collect_mutable()
 
 let given = SET(board |> filter(* > 0))
 let last = given |> reduce(0, (a, b) => System.Math.max(a, b))
 
 at(row: int, column: int) -> int =>
-    if row < 0 \/ row >= rows \/ column < 0 \/ column >= columns then hole
+    if
+        row < 0 \/
+        row >= rows \/
+        column < 0 \/
+        column >= columns
+    then
+        hole
     else board[row * columns + column]
     fi
 
@@ -80,7 +88,8 @@ show() is
                     if n == hole then "  "
                     elif n == blank then "__"
                     else "{n,2}"
-                    fi)
+                    fi
+                )
                 |> join(" ")
 
         write_line(line.trim_end())

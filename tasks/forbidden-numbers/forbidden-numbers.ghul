@@ -2,23 +2,31 @@ use default
 
 is_forbidden(n: int) -> bool is
     strip(remaining: int) -> int =>
-        if remaining % 4 == 0 then strip(remaining / 4) else remaining fi
+        if remaining % 4 == 0 then
+            strip(remaining / 4)
+        else
+            remaining
+        fi
 
     strip(n) % 8 == 7
 si
 
 write_line("the first fifty forbidden numbers:")
 
-1::10_000
+1::10000
     |> filter(is_forbidden)
     |> take(50)
     |> chunk(10)
-    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(n => "{n,5}") |> join(""))
+    )
 
 write_line("")
 
 for limit in [500, 5_000, 50_000, 500_000] do
     let found = 1::limit |> count(is_forbidden)
 
-    write_line("{found,8:N0} forbidden numbers up to {limit,9:N0}")
+    write_line(
+        "{found,8:N0} forbidden numbers up to {limit,9:N0}"
+    )
 od

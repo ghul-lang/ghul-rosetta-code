@@ -15,7 +15,9 @@ let frames = 40
 let substeps = 25
 
 advance(state: STATE, dt: double) -> STATE =>
-    let rate = state.rate - dt * gravity / length * sin(state.angle) in
+    let rate =
+        state.rate - dt * gravity / length * sin(state.angle)
+    in
     (angle = state.angle + dt * rate, rate = rate)
 
 quarter_period(dt: double) -> double => (

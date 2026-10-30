@@ -5,17 +5,22 @@ write_line("")
 
 let prime_sum = 0::41 |> map(is_prime) |> collect()
 
-extend(chosen: LIST[int], taken: LIST[bool],
-       size: int) -> List[int]{}
-is
+extend(
+    chosen: LIST[int],
+    taken: LIST[bool],
+    size: int
+) -> List[int]{} is
     if chosen.count == size then
         yield chosen
     else
         let final = chosen.count == size - 1
 
         for candidate in 2::size do
-            if (!final \/ candidate == size) /\ !taken[candidate] /\
-                prime_sum[chosen[chosen.count - 1] + candidate] then
+            if
+                (!final \/ candidate == size) /\
+                !taken[candidate] /\
+                prime_sum[chosen[chosen.count - 1] + candidate]
+            then
                 taken[candidate] = true
 
                 chosen.add(candidate)
@@ -31,9 +36,11 @@ is
 si
 
 arrangements(size: int) -> List[int]{} =>
-    extend([1] |> collect_mutable(),
-           repeat(false, size + 1) |> collect_mutable(),
-           size)
+    extend(
+        [1] |> collect_mutable(),
+        repeat(false, size + 1) |> collect_mutable(),
+        size
+    )
 
 let totals = LIST()
 
@@ -43,7 +50,11 @@ for size in 2::20 do
 
     for arrangement in arrangements(size) do
         if !shown then
-            write_line(arrangement |> map(value => "{value,3}") |> join(""))
+            write_line(
+                arrangement
+                    |> map(value => "{value,3}")
+                    |> join("")
+            )
 
             shown = true
         fi

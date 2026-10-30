@@ -3,17 +3,20 @@ use default
 use ENTRY = (score: int, name: string)
 use RANKER = (int, int, int, int) -> string
 
-let competitors =
-    [(score = 44, name = "Solomon"),
-     (score = 42, name = "Jason"),
-     (score = 42, name = "Errol"),
-     (score = 41, name = "Garry"),
-     (score = 41, name = "Bernard"),
-     (score = 41, name = "Barry"),
-     (score = 39, name = "Stephen")]
+let competitors = [
+    (score = 44, name = "Solomon"),
+    (score = 42, name = "Jason"),
+    (score = 42, name = "Errol"),
+    (score = 41, name = "Garry"),
+    (score = 41, name = "Bernard"),
+    (score = 41, name = "Barry"),
+    (score = 39, name = "Stephen")
+]
 
 ties(entries: List[ENTRY]) -> List[ENTRY]{} =>
-    entries |> group_by(e => e.score) |> map((_, group) => group)
+    entries
+        |> group_by(e => e.score)
+        |> map((_, group) => group)
 
 ranked(rank: RANKER) -> string{} is
     let ahead mut = 0
@@ -23,40 +26,64 @@ ranked(rank: RANKER) -> string{} is
         place = place + 1
 
         for member in 0..tied.count do
-            yield "{rank(ahead, tied.count, member, place),5}  "
-                  "{tied[member].score} {tied[member].name}"
+            yield
+                "{rank(ahead, tied.count, member, place),5}  "
+                "{tied[member].score} {tied[member].name}"
         od
 
         ahead = ahead + tied.count
     od
 si
 
-standard(ahead: int, size: int, member: int, place: int) -> string =>
-    "{ahead + 1}"
+standard(
+    ahead: int,
+    size: int,
+    member: int,
+    place: int
+) -> string => "{ahead + 1}"
 
-modified(ahead: int, size: int, member: int, place: int) -> string =>
-    "{ahead + size}"
+modified(
+    ahead: int,
+    size: int,
+    member: int,
+    place: int
+) -> string => "{ahead + size}"
 
-dense(ahead: int, size: int, member: int, place: int) -> string =>
-    "{place}"
+dense(
+    ahead: int,
+    size: int,
+    member: int,
+    place: int
+) -> string => "{place}"
 
-ordinal(ahead: int, size: int, member: int, place: int) -> string =>
-    "{ahead + member + 1}"
+ordinal(
+    ahead: int,
+    size: int,
+    member: int,
+    place: int
+) -> string => "{ahead + member + 1}"
 
-fractional(ahead: int, size: int, member: int, place: int) -> string =>
-    "{double(ahead + ahead + size + 1) / 2.0D:F1}"
+fractional(
+    ahead: int,
+    size: int,
+    member: int,
+    place: int
+) -> string => "{double(ahead + ahead + size + 1) / 2.0D:F1}"
 
-let methods =
-    [(name = "standard", rank = standard),
-     (name = "modified", rank = modified),
-     (name = "dense", rank = dense),
-     (name = "ordinal", rank = ordinal),
-     (name = "fractional", rank = fractional)]
+let methods = [
+    (name = "standard", rank = standard),
+    (name = "modified", rank = modified),
+    (name = "dense", rank = dense),
+    (name = "ordinal", rank = ordinal),
+    (name = "fractional", rank = fractional)
+]
 
-methods |> each(method => (
-    write_line("{method.name} ranking:")
+methods
+    |> each(method => (
+        write_line("{method.name} ranking:")
 
-    ranked(method.rank) |> each(line => write_line("  {line}"))
+        ranked(method.rank)
+            |> each(line => write_line("  {line}"))
 
-    write_line()
-))
+        write_line()
+    ))

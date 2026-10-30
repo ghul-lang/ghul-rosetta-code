@@ -16,6 +16,7 @@ longest_common(left: string, right: string) -> string =>
                 candidate
             else
                 best
-            fi)
+            fi
+        )
 
 write_line(longest_common("thisisatest", "testing123testing"))

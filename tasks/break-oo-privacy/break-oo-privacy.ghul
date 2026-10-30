@@ -3,7 +3,11 @@ use System.Reflection.BindingFlags
 
 class SAFE(combination: string private, contents: string) is
     open(attempt: string) -> string =>
-        if attempt =~ _combination then contents else "it stays shut" fi
+        if attempt =~ _combination then
+            contents
+        else
+            "it stays shut"
+        fi
 si
 
 let safe = SAFE("1234", "a bar of gold")
@@ -19,9 +23,11 @@ for member in fields do
     write_line("{member.name} = {member.get_value(safe)}")
 od
 
-let combination = safe.get_type()
-    .get_field("_combination", hidden)!
-    .get_value(safe)
+let combination =
+    safe.get_type().get_field(
+        "_combination",
+        hidden
+    )!.get_value(safe)
 
 write_line(safe.open("{combination}"))
 

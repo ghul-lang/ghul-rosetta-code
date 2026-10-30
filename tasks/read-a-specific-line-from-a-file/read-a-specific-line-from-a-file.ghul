@@ -1,16 +1,17 @@
 use default
 
-let scratch =
-    IO.Path.combine(
-        IO.Path.get_temp_path(), "rosetta-read-a-specific-line-from-a-file"
-    )
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-read-a-specific-line-from-a-file"
+)
 
 IO.Directory.create_directory(scratch)
 
 let path = IO.Path.combine(scratch, "lines.txt")
 
 IO.File.write_all_lines(
-    path, 1..11 |> map(number => "line {number}")
+    path,
+    1..11 |> map(number => "line {number}")
 )
 
 line(path: string, wanted: int) -> string? =>

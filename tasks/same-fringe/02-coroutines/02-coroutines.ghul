@@ -90,20 +90,25 @@ let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
 let shorter = NODE(LEAF(1), LEAF(2))
 
 report() -> COROUTINE is
-    for (first, second) in [
-        (leaning_left, leaning_right),
-        (leaning_left, differs_last),
-        (leaning_left, differs_first),
-        (leaning_left, shorter)
-    ] do
+    for
+        (first, second) in [
+            (leaning_left, leaning_right),
+            (leaning_left, differs_last),
+            (leaning_left, differs_first),
+            (leaning_left, shorter)
+        ]
+    do
         let (same, leaves) = await compare(first, second)
 
-        let verdict = if same then "same fringe" else "different" fi
-        let counted = if leaves == 1 then "leaf" else "leaves" fi
+        let verdict =
+            if same then "same fringe" else "different" fi
+        let counted =
+            if leaves == 1 then "leaf" else "leaves" fi
 
         write_line(
             "{show(first)} and {show(second)}: {verdict}, "
-            "{leaves} {counted} compared")
+            "{leaves} {counted} compared"
+        )
     od
 si
 

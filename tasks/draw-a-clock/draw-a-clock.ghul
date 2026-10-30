@@ -47,7 +47,9 @@ draw(image: IMAGE, time: System.DateTime) is
 si
 
 let live =
-    System.Environment.get_environment_variable("GHUL_LIVE_IMAGES")?
+    System.Environment.get_environment_variable(
+        "GHUL_LIVE_IMAGES"
+    )?
 
 let image = IMAGE(size, size)
 
@@ -76,7 +78,9 @@ for second in 0..60 do
     fi
 od
 
-write_line("a minute of the clock, from the second it was started")
+write_line(
+    "a minute of the clock, from the second it was started"
+)
 
 animation.write("clock.png")
 

@@ -2,15 +2,21 @@ use default
 
 let limit = 10_000_000
 
-write_line("twin primes below ten million whose sum is a square:")
+write_line(
+    "twin primes below ten million whose sum is a square:"
+)
 
 for lower in 2::limit - 2 do
     let sum = lower * 2 + 2
 
-    if is_prime(lower) /\ is_prime(lower + 2) /\ is_square(sum) then
+    if
+        is_prime(lower) /\ is_prime(lower + 2) /\ is_square(sum)
+    then
         let root = isqrt(sum)
 
-        write_line("  {lower} and {lower + 2} sum to {sum}, "
-                   "which is {root} squared")
+        write_line(
+            "  {lower} and {lower + 2} sum to {sum}, "
+            "which is {root} squared"
+        )
     fi
 od

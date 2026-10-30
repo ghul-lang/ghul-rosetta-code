@@ -3,32 +3,49 @@ use System.Math
 
 struct FRAC(numerator: long, denominator: long) is
     +(other: FRAC) -> FRAC =>
-        frac(numerator * other.denominator + other.numerator * denominator,
-            denominator * other.denominator)
+        frac(
+            numerator * other.denominator +
+            other.numerator * denominator,
+            denominator * other.denominator
+        )
 
     -(other: FRAC) -> FRAC =>
-        frac(numerator * other.denominator - other.numerator * denominator,
-            denominator * other.denominator)
+        frac(
+            numerator * other.denominator -
+            other.numerator * denominator,
+            denominator * other.denominator
+        )
 
     *(other: FRAC) -> FRAC =>
-        frac(numerator * other.numerator, denominator * other.denominator)
+        frac(
+            numerator * other.numerator,
+            denominator * other.denominator
+        )
 
     /(other: FRAC) -> FRAC =>
-        frac(numerator * other.denominator, denominator * other.numerator)
+        frac(
+            numerator * other.denominator,
+            denominator * other.numerator
+        )
 
     ÷(other: FRAC) -> long =>
         let quotient = self / other in
         quotient.numerator / quotient.denominator
 
-    %(other: FRAC) -> FRAC =>
-        self - whole(self ÷ other) * other
+    %(other: FRAC) -> FRAC => self - whole(self ÷ other) * other
 
     <>(other: FRAC) -> int =>
         let
             left = numerator * other.denominator,
             right = other.numerator * denominator
         in
-        if left < right then -1 elif left > right then 1 else 0 fi
+            if left < right then
+                -1
+            elif left > right then
+                1
+            else
+                0
+            fi
 
     to_string() -> string =>
         if denominator == 1L then "{numerator}"
@@ -41,11 +58,12 @@ frac(numerator: long, denominator: long) -> FRAC =>
         sign = if denominator < 0L then -1L else 1L fi,
         divisor = gcd(numerator, denominator) * sign
     in
-    FRAC(numerator / divisor, denominator / divisor)
+        FRAC(numerator / divisor, denominator / divisor)
 
 whole(n: long) -> FRAC => FRAC(n, 1L)
 
--(value: FRAC) -> FRAC => FRAC(-value.numerator, value.denominator)
+-(value: FRAC) -> FRAC =>
+    FRAC(-value.numerator, value.denominator)
 
 abs(value: FRAC) -> FRAC =>
     FRAC(Math.abs(value.numerator), value.denominator)
@@ -76,4 +94,6 @@ for factor in 1..limit do
 od
 
 let perfect = 1..limit |> filter(n => sums[n] =~ whole(2L))
-write_line("perfect numbers below 2^19: {perfect |> join(", ")}")
+write_line(
+    "perfect numbers below 2^19: {perfect |> join(", ")}"
+)

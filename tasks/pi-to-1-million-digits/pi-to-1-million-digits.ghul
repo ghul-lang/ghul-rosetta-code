@@ -53,8 +53,12 @@ si
 decimal(n: bigint) -> string is
     let powers = LIST([1_000_000_000_000_000_000n])
 
-    while powers[powers.count - 1] * powers[powers.count - 1] <= n do
-        powers.add(powers[powers.count - 1] * powers[powers.count - 1])
+    while
+        powers[powers.count - 1] * powers[powers.count - 1] <= n
+    do
+        powers.add(
+            powers[powers.count - 1] * powers[powers.count - 1]
+        )
     od
 
     let text = System.Text.StringBuilder()
@@ -64,12 +68,20 @@ decimal(n: bigint) -> string is
             let digits = part.to_string()
 
             let shown =
-                if padded then digits.pad_left(18, '0') else digits fi
+                if padded then
+                    digits.pad_left(18, '0')
+                else
+                    digits
+                fi
 
             text.append(shown)
         else
             let remainder mut = 0n
-            let high = bigint.div_rem(part, powers[level], remainder ref)
+            let high = bigint.div_rem(
+                part,
+                powers[level],
+                remainder ref
+            )
 
             if padded \/ !high.is_zero then
                 write(high, level - 1, padded)
@@ -84,14 +96,15 @@ decimal(n: bigint) -> string is
     text.to_string()
 si
 
-
 pi_digits(digits: int) -> string =>
     let
-        guard = 10, terms = long(digits / 14 + 2),
+        guard = 10,
+        terms = long(digits / 14 + 2),
         (_, q, t) = split(0L, terms),
         scale = bigint.pow(10n, digits + guard),
         root = square_root(10_005n * scale * scale),
-        pi = q * 426_880n * root / t, text = decimal(pi)
+        pi = q * 426_880n * root / t,
+        text = decimal(pi)
     in
         "{text[0]}.{text.substring(1, digits - 1)}"
 
@@ -101,6 +114,8 @@ write_line("computing a million digits, which takes a while")
 let pi = pi_digits(1_000_000)
 let elapsed = clock.elapsed.total_seconds
 
-write_line("{pi.substring(0, 32)} ... {pi.substring(pi.length - 30)}")
+write_line(
+    "{pi.substring(0, 32)} ... {pi.substring(pi.length - 30)}"
+)
 write_line("{pi.length - 2} decimal places")
 write_line("computed in {elapsed:F2} seconds")

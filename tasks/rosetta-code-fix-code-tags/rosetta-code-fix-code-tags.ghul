@@ -12,9 +12,9 @@ let rules = [
 
 let fixed =
     rules
-    |> reduce(
-        IO.File.read_all_text("input.txt"),
-        (text, (pattern, replacement)) =>
-            Regex.replace(text, pattern, replacement))
+        |> reduce(IO.File.read_all_text("input.txt"),
+            (text, (pattern, replacement)) =>
+            Regex.replace(text, pattern, replacement)
+        )
 
 write_line(fixed)

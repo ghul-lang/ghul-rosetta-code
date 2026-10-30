@@ -23,7 +23,10 @@ closure(g: Graph) -> Graph is
 
         for u in 0..n do
             for v in u + 1..n do
-                if !h[u].contains(v) /\ h[u].count + h[v].count >= n then
+                if
+                    !h[u].contains(v) /\
+                    h[u].count + h[v].count >= n
+                then
                     h[u].add(v)
                     h[v].add(u)
                     changed = true
@@ -35,7 +38,8 @@ closure(g: Graph) -> Graph is
     h
 si
 
-is_complete(g: Graph) -> bool => g |> all(s => s.count == g.count - 1)
+is_complete(g: Graph) -> bool =>
+    g |> all(s => s.count == g.count - 1)
 
 hamiltonian_cycle(g: Graph) -> List[int]? is
     let path = LIST([0])
@@ -67,21 +71,29 @@ si
 
 show_neighbours(g: Graph) =>
     for (v, neighbours) in g |> index() do
-        write_line("    {v}: {neighbours |> sort() |> join(" ")}")
+        write_line(
+            "    {v}: {neighbours |> sort() |> join(" ")}"
+        )
     od
 
 test(name: string, g: Graph) is
     write_line("{name}")
-    write_line("  degrees: {g |> map(s => s.count) |> join(" ")}")
+    write_line(
+        "  degrees: {g |> map(s => s.count) |> join(" ")}"
+    )
     write_line("  closure:")
 
     let h = closure(g)
     show_neighbours(h)
 
     if is_complete(h) then
-        write_line("  closure is complete, so the graph is Hamiltonian")
+        write_line(
+            "  closure is complete, so the graph is Hamiltonian"
+        )
     else
-        write_line("  closure is not complete, so the test is inconclusive")
+        write_line(
+            "  closure is not complete, so the test is inconclusive"
+        )
     fi
 
     if let cycle = hamiltonian_cycle(g) then
@@ -93,9 +105,16 @@ test(name: string, g: Graph) is
     write_line()
 si
 
-let k5_less_one_edge =
-    [(u, v) for u in 0..5 for v in u + 1..5 if (u, v) !~ (0, 1)]
+let k5_less_one_edge = [
+    (u, v)
+    for u in 0..5
+    for v in u + 1..5
+    if (u, v) !~ (0, 1)
+]
 
 test("K5 without the edge 0-1", graph(5, k5_less_one_edge))
-test("A cycle of 5", graph(5, [(0, 1), (1, 2), (2, 3), (3, 4), (4, 0)]))
+test(
+    "A cycle of 5",
+    graph(5, [(0, 1), (1, 2), (2, 3), (3, 4), (4, 0)])
+)
 test("A path of 5", graph(5, [(0, 1), (1, 2), (2, 3), (3, 4)]))

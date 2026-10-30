@@ -14,7 +14,10 @@ widen(n: Number) -> double =>
     esac
 
 add(left: Number, right: Number) -> Number =>
-    if let whole_left: WHOLE = left, whole_right: WHOLE = right then
+    if let
+        whole_left: WHOLE = left,
+        whole_right: WHOLE = right
+    then
         WHOLE(whole_left.value + whole_right.value)
     else
         FRACTIONAL(widen(left) + widen(right))

@@ -12,7 +12,8 @@ let swaps = MAP(
         ("mother", "father"), ("father", "mother"),
         ("wife", "husband"), ("husband", "wife")
     ]
-    |> map((word, swap) => KeyValuePair(word, swap)))
+        |> map((word, swap) => KeyValuePair(word, swap))
+)
 
 reverse_gender(text: string) -> string is
     let word_pattern = Regex("[A-Za-z]+")
@@ -35,5 +36,8 @@ reverse_gender(text: string) -> string is
     ))
 si
 
-write_line(reverse_gender(
-    "She was a soul stripper. She took my heart!"))
+write_line(
+    reverse_gender(
+        "She was a soul stripper. She took my heart!"
+    )
+)

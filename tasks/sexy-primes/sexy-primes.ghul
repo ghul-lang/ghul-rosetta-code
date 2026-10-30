@@ -9,29 +9,40 @@ sexy_groups(size: int) -> List[int]{} =>
     (primes() |> take_while(p => p < limit))
         |> map(group_from(*, size))
         |> filter(members =>
-            members[size - 1] < limit /\ (members |> all(p => is_prime(p))))
+            members[size - 1] < limit /\
+            (members |> all(p => is_prime(p)))
+        )
 
 show(values: List[int]{}) -> string =>
-    values |> map(members => "({members |> join(" ")})") |> join(" ")
+    values
+        |> map(members => "({members |> join(" ")})")
+        |> join(" ")
 
 last[T](values: List[T], wanted: int) -> T{} =>
     let extra = values.count - wanted in
     values |> skip(if extra > 0 then extra else 0 fi)
 
-let kinds =
-    [(size = 2, name = "pairs"), (size = 3, name = "triplets"),
-     (size = 4, name = "quadruplets"), (size = 5, name = "quintuplets")]
+let kinds = [
+    (size = 2, name = "pairs"), (size = 3, name = "triplets"),
+    (size = 4, name = "quadruplets"),
+    (size = 5, name = "quintuplets")
+]
 
-kinds |> each(kind => (
-    let found = sexy_groups(kind.size) |> collect()
+kinds
+    |> each(kind => (
+        let found = sexy_groups(kind.size) |> collect()
 
-    write_line("sexy prime {kind.name} below {limit}: {found.count}")
-    write_line("  last: {show(last(found, 5))}")
-))
+        write_line(
+            "sexy prime {kind.name} below {limit}: {found.count}"
+        )
+        write_line("  last: {show(last(found, 5))}")
+    ))
 
 let unsexy =
     (primes() |> take_while(p => p < limit))
-        |> filter(prime => !is_prime(prime - 6) /\ !is_prime(prime + 6))
+        |> filter(prime =>
+            !is_prime(prime - 6) /\ !is_prime(prime + 6)
+        )
         |> collect()
 
 write_line("unsexy primes below {limit}: {unsexy.count}")

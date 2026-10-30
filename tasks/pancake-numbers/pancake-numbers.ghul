@@ -4,7 +4,8 @@ use default
 // ones a breadth-first search from the sorted stack reaches last.
 
 flip(stack: string, count: int) -> string =>
-    let top = stack.substring(0, count) |> reverse() |> join("") in
+    let top = stack.substring(0, count) |> reverse() |> join("")
+    in
     "{top}{stack.substring(count)}"
 
 furthest(n: int) -> (flips: int, example: string) is

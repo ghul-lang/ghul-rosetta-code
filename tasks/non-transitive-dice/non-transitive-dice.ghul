@@ -3,17 +3,20 @@ use default
 use Die = List[int]
 
 beats(x: Die, y: Die) -> int =>
-    let wins =
-        x |> flat_map(a => y |> map(b => a <> b))
-    in
+    let wins = x |> flat_map(a => y |> map(b => a <> b)) in
     (wins |> count(w => w > 0)) - (wins |> count(w => w < 0))
 
 let dice =
     1::4
         |> flat_map(a =>
-            a::4 |> flat_map(b =>
-                b::4 |> flat_map(c =>
-                    c::4 |> map(d => [a, b, c, d]))))
+            a::4
+                |> flat_map(b =>
+                    b::4
+                        |> flat_map(c =>
+                            c::4 |> map(d => [a, b, c, d])
+                        )
+                )
+        )
         |> collect()
 
 // chains of distinct dice, each beaten by the one after it, whose first die
@@ -46,13 +49,15 @@ chains(length: int) -> List[Die]{} is
 si
 
 write_line(
-    "There are {dice.count} four-faced dice with faces from 1 to 4.\n")
+    "There are {dice.count} four-faced dice with faces from 1 to 4.\n"
+)
 
 for length in [3, 4] do
     let found = chains(length) |> collect()
 
     write_line(
-        "{found.count} ordered lists of {length} non-transitive dice:")
+        "{found.count} ordered lists of {length} non-transitive dice:"
+    )
 
     for chain in found do
         write_line("    {chain}")

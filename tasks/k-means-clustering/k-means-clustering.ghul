@@ -14,8 +14,10 @@ let sample_size = 30_000
 apart(a: Point, b: Point) -> double =>
     (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 
-nearest(centres: Collections.List[Point], at: Point) ->
-        (index: int, distance: double) is
+nearest(centres: Collections.List[Point], at: Point) -> (
+    index: int,
+    distance: double
+) is
     let best mut = 0
     let closest mut = apart(centres[0], at)
 
@@ -37,8 +39,7 @@ let points =
             let angle = random.next_double() * 2.0D * pi
             let radius = sqrt(random.next_double())
 
-            (x = radius * cos(angle),
-             y = radius * sin(angle))
+            (x = radius * cos(angle), y = radius * sin(angle))
         ))
         |> collect()
 
@@ -56,7 +57,10 @@ seeded_centres() -> Collections.List[Point] is
         let target mut = random.next_double() * total
         let chosen mut = 0
 
-        while chosen < weights.count - 1 /\ target > weights[chosen] do
+        while
+            chosen < weights.count - 1 /\
+            target > weights[chosen]
+        do
             target = target - weights[chosen]
             chosen = chosen + 1
         od
@@ -83,21 +87,31 @@ recentred() -> Collections.List[Point] is
         let which = membership[index]
         let at = points[index]
 
-        totals[which] =
-            (x = totals[which].x + at.x, y = totals[which].y + at.y)
+        totals[which] = (
+            x = totals[which].x + at.x,
+            y = totals[which].y + at.y
+        )
 
         sizes[which] = sizes[which] + 1
     od
 
-    return (0..clusters)
-        |> map(which =>
-            if sizes[which] == 0 then
-                centres[which]
-            else
-                (x = totals[which].x / double(sizes[which]),
-                 y = totals[which].y / double(sizes[which]))
-            fi)
-        |> collect()
+    return
+        (0..clusters)
+            |> map(which =>
+                if sizes[which] == 0 then
+                    centres[which]
+                else
+                    (
+                        x =
+                            totals[which].x /
+                            double(sizes[which]),
+                        y =
+                            totals[which].y /
+                            double(sizes[which])
+                    )
+                fi
+            )
+            |> collect()
 si
 
 let passes mut = 0
@@ -125,8 +139,10 @@ for which in membership do
     sizes[which] = sizes[which] + 1
 od
 
-write_line("{sample_size} points, {clusters} clusters, "
-           "{passes} passes")
+write_line(
+    "{sample_size} points, {clusters} clusters, "
+    "{passes} passes"
+)
 write_line("")
 write_line("cluster   size   centroid")
 
@@ -135,7 +151,8 @@ for which in 0..clusters do
 
     write_line(
         "{which,7}{sizes[which],7}   "
-        "({at.x,7:F4}, {at.y,7:F4})")
+        "({at.x,7:F4}, {at.y,7:F4})"
+    )
 od
 
 let image = IMAGE(600, 600)

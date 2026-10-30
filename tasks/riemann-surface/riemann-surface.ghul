@@ -4,10 +4,15 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC =>
+        VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
+        VEC(
+            y * o.z - z * o.y,
+            z * o.x - x * o.z,
+            x * o.y - y * o.x
+        )
 
     length: double => sqrt(x * x + y * y + z * z)
 si
@@ -26,32 +31,33 @@ turned(p: VEC) -> VEC =>
         x = p.x * cos(yaw) - p.y * sin(yaw),
         y = p.x * sin(yaw) + p.y * cos(yaw)
     in
-    VEC(
-        x,
-        p.z * cos(pitch) - y * sin(pitch),
-        p.z * sin(pitch) + y * cos(pitch))
+        VEC(
+            x,
+            p.z * cos(pitch) - y * sin(pitch),
+            p.z * sin(pitch) + y * cos(pitch)
+        )
 
 angle(i: int) -> double =>
-    2.0D * pi * double(turns) *
-    double(i) / double(around)
+    2.0D * pi * double(turns) * double(i) / double(around)
 
 radius(j: int) -> double => reach * double(j) / double(along)
 
 corner(i: int, j: int) -> VEC =>
-    let t = angle(i), r = radius(j) in
-    VEC(
-        r * cos(t),
-        r * sin(t),
-        sqrt(r) * cos(t / 2.0D))
+    let
+        t = angle(i),
+        r = radius(j)
+    in
+        VEC(r * cos(t), r * sin(t), sqrt(r) * cos(t / 2.0D))
 
-patch(i: int, j: int) -> Patch =>
-    (
-        corners = [
-            turned(corner(i, j)),
-            turned(corner(i + 1, j)),
-            turned(corner(i + 1, j + 1)),
-            turned(corner(i, j + 1))],
-        phase = angle(i) / (2.0D * pi * double(turns)))
+patch(i: int, j: int) -> Patch => (
+    corners = [
+        turned(corner(i, j)),
+        turned(corner(i + 1, j)),
+        turned(corner(i + 1, j + 1)),
+        turned(corner(i, j + 1))
+    ],
+    phase = angle(i) / (2.0D * pi * double(turns))
+)
 
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
 
@@ -60,14 +66,13 @@ brightness(p: Patch) -> double =>
         c = p.corners,
         n = (c[1] - c[0]) × (c[3] - c[0])
     in
-    if n.length == 0.0D then 0.6D
-    else 0.55D + 0.45D * abs(n.z) / n.length
-    fi
+        if n.length == 0.0D then 0.6D
+        else 0.55D + 0.45D * abs(n.z) / n.length
+        fi
 
-let patches =
-    [patch(i, j) for i in 0..around for j in 0..along]
-        |> sort((p, q) => depth(p) <> depth(q))
-        |> collect()
+let patches = [patch(i, j) for i in 0..around for j in 0..along]
+    |> sort((p, q) => depth(p) <> depth(q))
+    |> collect()
 
 let image = IMAGE(620, 560)
 
@@ -84,15 +89,22 @@ for p in patches do
     image.colour(
         ubyte(double(tint.red) * light),
         ubyte(double(tint.green) * light),
-        ubyte(double(tint.blue) * light))
+        ubyte(double(tint.blue) * light)
+    )
 
     image.fill(outline)
     image.line(outline ++ [outline[0]] |> collect())
 od
 
-write_line("the surface of w = sqrt(z), over two turns of the z plane")
-write_line("height is the real part of w, and colour is its argument")
-write_line("{patches.count} quadrilaterals, drawn farthest first")
+write_line(
+    "the surface of w = sqrt(z), over two turns of the z plane"
+)
+write_line(
+    "height is the real part of w, and colour is its argument"
+)
+write_line(
+    "{patches.count} quadrilaterals, drawn farthest first"
+)
 
 image.write("riemann.png")
 

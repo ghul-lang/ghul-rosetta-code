@@ -6,7 +6,11 @@ use System.Diagnostics.Stopwatch
 use System.Math
 
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)
-use Sorter = (name: string, sort: (LIST[int]) -> void, colour: Colour)
+use Sorter = (
+    name: string,
+    sort: (LIST[int]) -> void,
+    colour: Colour
+)
 
 insertion_sort(xs: LIST[int]) is
     for i in 1..xs.count do
@@ -80,7 +84,8 @@ let inputs = [
     ("ones", n => repeat(1, n) |> collect()),
     ("range", (n: int) => (0..n) |> collect()),
     ("shuffled", (n: int) =>
-        (0..n) |> sort_by(_ => random.next()) |> collect())
+        (0..n) |> sort_by(_ => random.next()) |> collect()
+    )
 ]
 
 let sorts: Sorter[] = [
@@ -94,13 +99,17 @@ let powers = (6::14) |> collect()
 
 microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
     (0..3)
-    |> map(_ =>
-        let copy = LIST(data), clock = Stopwatch.start_new() in
-        (
-            sort(copy)
-            clock.elapsed.total_milliseconds * 1000.0
-        ))
-    |> min()!
+        |> map(_ =>
+            let
+                copy = LIST(data),
+                clock = Stopwatch.start_new()
+            in
+                (
+                    sort(copy)
+                    clock.elapsed.total_milliseconds * 1000.0
+                )
+        )
+        |> min()!
 
 log2(x: double) -> double => Math.log2(Math.max(x, 1.0))
 
@@ -109,33 +118,41 @@ for (name, make) in inputs do
 
     let times =
         sorts
-        |> map(sorter =>
-            data |> map(microseconds(sorter.sort, *)) |> collect())
-        |> collect()
+            |> map(sorter =>
+                data
+                    |> map(microseconds(sorter.sort, *))
+                    |> collect()
+            )
+            |> collect()
 
     write_line("{name}: time in microseconds")
     write_line(
         "{"n",7}"
-        "{sorts |> map((label, _, _) => "{label,11}") |> join("")}")
+        "{sorts |> map((label, _, _) => "{label,11}") |> join("")}"
+    )
 
     for (row, p) in powers |> index() do
-        let cells = times |> map(t => "{t[row],11:F0}") |> join("")
+        let cells =
+            times |> map(t => "{t[row],11:F0}") |> join("")
         write_line("{1 << p,7}{cells}")
     od
 
     let last = powers.count - 1
     let growth =
         (0..sorts.count)
-        |> map(i =>
-            let
-                first = log2(times[i][last - 4]),
-                exponent = (log2(times[i][last]) - first) / 4.0
-            in
-            "{sorts[i].name} {exponent:F1}")
-        |> join()
+            |> map(i =>
+                let
+                    first = log2(times[i][last - 4]),
+                    exponent =
+                        (log2(times[i][last]) - first) / 4.0
+                in
+                    "{sorts[i].name} {exponent:F1}"
+            )
+            |> join()
 
     write_line(
-        "growth exponent from n = {1 << powers[last - 4]} up: {growth}")
+        "growth exponent from n = {1 << powers[last - 4]} up: {growth}"
+    )
 
     let image = IMAGE(480, 360)
     let axes = AXES(image)
@@ -157,8 +174,12 @@ for (name, make) in inputs do
         image.stroke(2.0)
         image.line(
             zip(powers, t)
-            |> map((p, time) => (x = double(p), y = log2(time)))
-            |> collect())
+                |> map((p, time) => (
+                    x = double(p),
+                    y = log2(time)
+                ))
+                |> collect()
+        )
     od
 
     image.write("{name}.png")

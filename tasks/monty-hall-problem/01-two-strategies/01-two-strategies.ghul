@@ -4,7 +4,12 @@ let random = System.Random(2026)
 
 let rounds = 100000
 
-play() -> (car: int, chosen: int, opened: int, switched: int) => (
+play() -> (
+    car: int,
+    chosen: int,
+    opened: int,
+    switched: int
+) => (
     let car = random.next(3)
     let chosen = random.next(3)
 
@@ -15,9 +20,17 @@ play() -> (car: int, chosen: int, opened: int, switched: int) => (
     od
 
     let switched =
-        (0::2 |> find(door => door != chosen /\ door != opened))!
+        (
+            0::2
+                |> find(door =>
+                    door != chosen /\ door != opened
+                )
+        )!
 
-    (car = car, chosen = chosen, opened = opened, switched = switched)
+    (
+        car = car, chosen = chosen, opened = opened,
+        switched = switched
+    )
 )
 
 write_line("the first three games")
@@ -27,7 +40,8 @@ for _ in 1::3 do
 
     write_line(
         "  car behind {game.car}, player picks {game.chosen}, "
-        "host opens {game.opened}, switching gives {game.switched}")
+        "host opens {game.opened}, switching gives {game.switched}"
+    )
 od
 
 let games = 1::rounds |> map(_ => play()) |> memo()

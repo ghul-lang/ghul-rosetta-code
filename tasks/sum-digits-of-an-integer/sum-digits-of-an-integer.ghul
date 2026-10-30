@@ -9,6 +9,15 @@ digit_sum(value: int, base: int) -> int is
     walk(value, 0)
 si
 
-for (value, base) in [(1, 10), (1234, 10), (0xFE, 16), (0xF0E, 16)] do
-    write_line("{value} in base {base}: {digit_sum(value, base)}")
+for
+    (value, base) in [
+        (1, 10),
+        (1234, 10),
+        (0xFE, 16),
+        (0xF0E, 16)
+    ]
+do
+    write_line(
+        "{value} in base {base}: {digit_sum(value, base)}"
+    )
 od

@@ -10,16 +10,21 @@ lcs(left: string, right: string) -> string memo =>
             dropping_left = lcs(left[1..<0], right),
             dropping_right = lcs(left, right[1..<0])
         in
-            if dropping_left.length >= dropping_right.length then
+            if
+                dropping_left.length >= dropping_right.length
+            then
                 dropping_left
             else
                 dropping_right
             fi
     fi
 
-[("1234", "1224533324"),
- ("thisisatest", "testing123testing"),
- ("XMJYAUZ", "MZJAWXU")]
+[
+    ("1234", "1224533324"),
+    ("thisisatest", "testing123testing"),
+    ("XMJYAUZ", "MZJAWXU")
+]
     |> each(pair => (
         let (left, right) = pair
-        write_line("{left} and {right}: {lcs(left, right)}")))
+        write_line("{left} and {right}: {lcs(left, right)}")
+    ))

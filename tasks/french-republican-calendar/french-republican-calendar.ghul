@@ -2,17 +2,21 @@ use default
 use System.DateTime
 
 let republican_months = [
-    "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
-    "Germinal", "Floréal", "Prairial", "Messidor", "Thermidor", "Fructidor"
+    "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse",
+    "Ventôse",
+    "Germinal", "Floréal", "Prairial", "Messidor", "Thermidor",
+    "Fructidor"
 ]
 
 let sansculottides = [
     "Fête de la vertu", "Fête du génie", "Fête du travail",
-    "Fête de l'opinion", "Fête des récompenses", "Fête de la Révolution"
+    "Fête de l'opinion", "Fête des récompenses",
+    "Fête de la Révolution"
 ]
 
 let gregorian_months = [
-    "January", "February", "March", "April", "May", "June", "July",
+    "January", "February", "March", "April", "May", "June",
+    "July",
     "August", "September", "October", "November", "December"
 ]
 
@@ -21,8 +25,7 @@ let epoch = DateTime(1792, 9, 22)
 is_leap(republican_year: int) -> bool =>
     let following = republican_year + 1 in
     following % 4 == 0 /\
-
-        (following % 100 != 0 \/ following % 400 == 0)
+    (following % 100 != 0 \/ following % 400 == 0)
 
 days_in(republican_year: int) -> int =>
     if is_leap(republican_year) then 366 else 365 fi
@@ -74,5 +77,7 @@ for (year, month, day) in samples do
     let republican = to_republican(date)
 
     write_line("{describe(date)} = {republican}")
-    write_line("{republican} = {describe(to_gregorian(republican))}")
+    write_line(
+        "{republican} = {describe(to_gregorian(republican))}"
+    )
 od

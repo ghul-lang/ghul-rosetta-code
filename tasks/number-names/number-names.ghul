@@ -1,8 +1,10 @@
 use default
 
 let small = [
-    "zero", "one", "two", "three", "four", "five", "six", "seven",
-    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "zero", "one", "two", "three", "four", "five", "six",
+    "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+    "fourteen",
     "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
 ]
 
@@ -50,18 +52,25 @@ cardinal(value: long) -> string is
 
     let parts = value |> groups() |> collect()
 
-    let named = parts
-        |> index()
-        |> filter(((_, group)) => group != 0)
-        |> map(((at, group)) =>
-            let name = below_thousand(group) in
-            if at == 0 then name else "{name} {scales[at - 1]}" fi)
-        |> reverse()
-        |> collect()
+    let named =
+        parts
+            |> index()
+            |> filter(((_, group)) => group != 0)
+            |> map(((at, group)) =>
+                let name = below_thousand(group) in
+                if at == 0 then
+                    name
+                else
+                    "{name} {scales[at - 1]}"
+                fi
+            )
+            |> reverse()
+            |> collect()
 
     if named.count > 1 /\ parts[0] != 0 /\ parts[0] < 100 then
         let last = named[named.count - 1]
-        let leading = named |> take(named.count - 1) |> join(" ")
+        let leading =
+            named |> take(named.count - 1) |> join(" ")
 
         return "{leading} and {last}"
     fi

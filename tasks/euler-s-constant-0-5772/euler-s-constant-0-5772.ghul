@@ -1,19 +1,32 @@
 use default
 
 euler_maclaurin(n: int) -> double =>
-    let size = double(n), harmonic = 1::n |> sum_by(k => 1.0 / double(k)) in
-    let bernoulli = [
-        1.0 / 6.0, -1.0 / 30.0, 1.0 / 42.0, -1.0 / 30.0, 5.0 / 66.0,
-        -691.0 / 2730.0, 7.0 / 6.0
-    ] in
-    let correction =
-        bernoulli
-            |> index()
-            |> sum_by((i, b) =>
-                let power = 2 * (i + 1), exponent = double(power) in
-                b / (exponent * double.pow(size, exponent)))
+    let
+        size = double(n),
+        harmonic = 1::n |> sum_by(k => 1.0 / double(k))
     in
-    harmonic - double.log(size) - 1.0 / (2.0 * size) + correction
+        let bernoulli = [
+            1.0 / 6.0, -1.0 / 30.0, 1.0 / 42.0, -1.0 / 30.0,
+            5.0 / 66.0,
+            -691.0 / 2730.0, 7.0 / 6.0
+        ]
+        in
+        let correction =
+            bernoulli
+                |> index()
+                |> sum_by((i, b) =>
+                    let
+                        power = 2 * (i + 1),
+                        exponent = double(power)
+                    in
+                        b /
+                        (exponent * double.pow(size, exponent))
+                )
+        in
+        harmonic -
+        double.log(size) -
+        1.0 / (2.0 * size) +
+        correction
 
 brent_mcmillan(digits: int) -> string is
     let scale = bigint.pow(10n, digits + 10)
@@ -21,7 +34,9 @@ brent_mcmillan(digits: int) -> string is
 
     let ln_2 =
         1::(4 * digits)
-            |> sum_by(k => scale / (bigint(k) * bigint.pow(2n, k)))
+            |> sum_by(k =>
+                scale / (bigint(k) * bigint.pow(2n, k))
+            )
 
     let a mut = -5n * ln_2
     let b mut = scale
@@ -42,5 +57,9 @@ brent_mcmillan(digits: int) -> string is
     "0.{gamma.substring(0, digits)}"
 si
 
-write_line("Euler-Maclaurin, n = 10, in double: {euler_maclaurin(10):F15}")
-write_line("Brent-McMillan to 50 places:        {brent_mcmillan(50)}")
+write_line(
+    "Euler-Maclaurin, n = 10, in double: {euler_maclaurin(10):F15}"
+)
+write_line(
+    "Brent-McMillan to 50 places:        {brent_mcmillan(50)}"
+)

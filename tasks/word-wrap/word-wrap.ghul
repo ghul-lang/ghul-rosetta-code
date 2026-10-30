@@ -4,8 +4,14 @@ use System.Text.StringBuilder
 wrapped(text: string, width: int) -> string{} is
     let line = StringBuilder()
 
-    for word in text.split([' ']) |> filter(word => word.length > 0) do
-        if line.length > 0 /\ line.length + 1 + word.length > width then
+    for
+        word in text.split([' '])
+            |> filter(word => word.length > 0)
+    do
+        if
+            line.length > 0 /\
+            line.length + 1 + word.length > width
+        then
             yield line.to_string()
 
             line.clear()
@@ -32,7 +38,9 @@ let paragraph =
 for width in [40, 62] do
     write_line("wrapped at {width}:")
 
-    paragraph |> wrapped(width) |> each(line => write_line(line))
+    paragraph
+        |> wrapped(width)
+        |> each(line => write_line(line))
 
     write_line("")
 od

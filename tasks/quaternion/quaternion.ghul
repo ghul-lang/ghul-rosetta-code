@@ -28,8 +28,10 @@ struct QUATERNION(a: double, b: double, c: double, d: double) is
         a == q.a /\ b == q.b /\ c == q.c /\ d == q.d
 
     get_hash_code() -> int =>
-        a.get_hash_code() ^ b.get_hash_code() ^
-            c.get_hash_code() ^ d.get_hash_code()
+        a.get_hash_code() ^
+        b.get_hash_code() ^
+        c.get_hash_code() ^
+        d.get_hash_code()
 
     to_string() -> string => "({a}, {b}, {c}, {d})"
 si

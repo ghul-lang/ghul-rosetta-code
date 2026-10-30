@@ -14,14 +14,15 @@ let face_values = [
     ("q", 12),
     ("k", 13),
     ("a", 14)
-] |> collect_map()
+]
+    |> collect_map()
 
 parse(card: string) -> (face: int, suit: char) =>
     let
         suit = card[card.length - 1],
         face_text = card[0..(card.length - 1)]
     in
-    (face_values[face_text], suit)
+        (face_values[face_text], suit)
 
 classify(hand: string) -> string is
     let tokens = hand.split([' '])
@@ -35,21 +36,23 @@ classify(hand: string) -> string is
         if !(cards |> all(seen.add)) then
             "invalid"
         else
-            let faces = cards
-                |> map(c => c.face)
-                |> sort()
-                |> collect()
+            let faces =
+                cards |> map(c => c.face) |> sort() |> collect()
             let suits = cards |> map(c => c.suit) |> collect()
 
-            let groups = faces
-                |> frequencies()
-                |> map(kv => kv.value)
-                |> sort()
-                |> collect()
+            let groups =
+                faces
+                    |> frequencies()
+                    |> map(kv => kv.value)
+                    |> sort()
+                    |> collect()
             let is_flush = suits |> all(* =~ suits[0])
 
             let is_straight =
-                (faces[4] - faces[0] == 4 /\ groups.count == 5) \/
+                (
+                    faces[4] - faces[0] == 4 /\
+                    groups.count == 5
+                ) \/
                 faces =~ [2, 3, 4, 5, 14]
 
             if is_straight /\ is_flush then

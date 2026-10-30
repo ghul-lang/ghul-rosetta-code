@@ -17,14 +17,25 @@ let centres = [
 
 let radius = 22.0D
 
-draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
+draw_spinner(
+    image: IMAGE,
+    cx: double,
+    cy: double,
+    angle: double
+) is
     // faint spokes
     image.colour(60ub, 60ub, 80ub)
     image.stroke(1.0D)
 
     for s in 0..spokes do
-        let a = double(s) * 360.0D / double(spokes) * pi / 180.0D
-        image.line(cx, cy, cx + radius * cos(a), cy + radius * sin(a))
+        let a =
+            double(s) * 360.0D / double(spokes) * pi / 180.0D
+        image.line(
+            cx,
+            cy,
+            cx + radius * cos(a),
+            cy + radius * sin(a)
+        )
     od
 
     // bright hand
@@ -32,7 +43,11 @@ draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
     image.stroke(2.0D)
     let radians = angle * pi / 180.0D
     image.line(
-        cx, cy, cx + radius * cos(radians), cy + radius * sin(radians))
+        cx,
+        cy,
+        cx + radius * cos(radians),
+        cy + radius * sin(radians)
+    )
 si
 
 let image = IMAGE(size, size)

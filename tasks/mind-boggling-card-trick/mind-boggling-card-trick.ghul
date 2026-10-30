@@ -8,13 +8,20 @@ shuffled[T](items: T{}) -> T{} =>
 trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
     let pairs = deck |> chunk(2)
-    let black = pairs |> filter(p => p[0] == 'B')
-        |> map(p => p[1]) |> collect_mutable()
-    let red = pairs |> filter(p => p[0] != 'B')
-        |> map(p => p[1]) |> collect_mutable()
+    let black =
+        pairs
+            |> filter(p => p[0] == 'B')
+            |> map(p => p[1])
+            |> collect_mutable()
+    let red =
+        pairs
+            |> filter(p => p[0] != 'B')
+            |> map(p => p[1])
+            |> collect_mutable()
 
     let swap = random.next(int.min(black.count, red.count) + 1)
-    let black_bunch = black |> shuffled() |> take(swap) |> memo()
+    let black_bunch =
+        black |> shuffled() |> take(swap) |> memo()
     let red_bunch = red |> shuffled() |> take(swap) |> memo()
 
     for card in black_bunch do black.remove(card) od
@@ -28,9 +35,15 @@ si
 
 for number in 1::10 do
     let (black_in_black, red_in_red) = trial()
-    let holds = if black_in_black == red_in_red then "holds" else "FAILS" fi
+    let holds =
+        if black_in_black == red_in_red then
+            "holds"
+        else
+            "FAILS"
+        fi
 
     write_line(
         "trial {number,2}: {black_in_black,2} black in the black pile, "
-        "{red_in_red,2} red in the red pile: {holds}")
+        "{red_in_red,2} red in the red pile: {holds}"
+    )
 od

@@ -46,7 +46,8 @@ to_reduced_row_echelon_form(m: LIST[LIST[double]]) is
             let factor = m[other][lead]
 
             for column in 0..columns do
-                m[other][column] = m[other][column] - factor * m[r][column]
+                m[other][column] =
+                    m[other][column] - factor * m[r][column]
             od
         od
 
@@ -54,17 +55,18 @@ to_reduced_row_echelon_form(m: LIST[LIST[double]]) is
     od
 si
 
-let matrix =
-    [
-        [1.0, 2.0, -1.0, -4.0],
-        [2.0, 3.0, -1.0, -11.0],
-        [-2.0, 0.0, -3.0, 22.0]
-    ]
-        |> map(row => row |> collect_mutable())
-        |> collect_mutable()
+let matrix = [
+    [1.0, 2.0, -1.0, -4.0],
+    [2.0, 3.0, -1.0, -11.0],
+    [-2.0, 0.0, -3.0, 22.0]
+]
+    |> map(row => row |> collect_mutable())
+    |> collect_mutable()
 
 to_reduced_row_echelon_form(matrix)
 
 for row in matrix do
-    write_line(row |> map(value => "{value + 0.0,8:F3}") |> join(""))
+    write_line(
+        row |> map(value => "{value + 0.0,8:F3}") |> join("")
+    )
 od

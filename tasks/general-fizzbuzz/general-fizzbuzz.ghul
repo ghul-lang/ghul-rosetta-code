@@ -15,8 +15,8 @@ for _ in 0..3 do
 od
 
 for n in 1::max_n do
-    let label =
-        [f.word for f in factors if n % f.factor == 0] |> join("")
+    let label = [f.word for f in factors if n % f.factor == 0]
+        |> join("")
 
     write_line(if label.length == 0 then "{n}" else label fi)
 od

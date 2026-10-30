@@ -16,9 +16,15 @@ closer(p: Pair, q: Pair) -> Pair =>
 pair(a: P, b: P) -> Pair => ((a - b).length, a, b)
 
 brute_force(points: List[P]) -> Pair =>
-    [pair(points[i], points[j])
-        for i in 0..points.count for j in i + 1..points.count]
-        |> reduce((double.max_value, points[0], points[0]), closer)
+    [
+        pair(points[i], points[j])
+        for i in 0..points.count
+        for j in i + 1..points.count
+    ]
+        |> reduce(
+            (double.max_value, points[0], points[0]),
+            closer
+        )
 
 closest(by_x: List[P], by_y: List[P]) -> Pair is
     if by_x.count <= 3 then
@@ -33,13 +39,19 @@ closest(by_x: List[P], by_y: List[P]) -> Pair is
     let left = SET(left_x)
 
     let left_y = by_y |> filter(left.contains) |> collect()
-    let right_y = by_y |> filter(p => !left.contains(p)) |> collect()
+    let right_y =
+        by_y |> filter(p => !left.contains(p)) |> collect()
 
-    let best = closer(closest(left_x, left_y), closest(right_x, right_y))
+    let best = closer(
+        closest(left_x, left_y),
+        closest(right_x, right_y)
+    )
 
     let strip =
         by_y
-            |> filter(p => Math.abs(p.x - middle) < best.distance)
+            |> filter(p =>
+                Math.abs(p.x - middle) < best.distance
+            )
 
     let result mut = best
 
@@ -59,13 +71,15 @@ si
 let random = System.Random(2)
 let points =
     (0..2000)
-        |> map(_ => P(random.next_double(), random.next_double()))
+        |> map(_ =>
+            P(random.next_double(), random.next_double())
+        )
         |> collect()
 
-let fast =
-    closest(
-        points |> sort((a, b) => a.x <> b.x) |> collect(),
-        points |> sort((a, b) => a.y <> b.y) |> collect())
+let fast = closest(
+    points |> sort((a, b) => a.x <> b.x) |> collect(),
+    points |> sort((a, b) => a.y <> b.y) |> collect()
+)
 
 let slow = brute_force(points)
 

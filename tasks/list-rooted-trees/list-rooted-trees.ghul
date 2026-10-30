@@ -5,8 +5,8 @@ trees(bags: int) -> List[string] memo =>
         ["()"]
     else
         forests(bags - 1, null)
-        |> map(forest => "({forest})")
-        |> collect()
+            |> map(forest => "({forest})")
+            |> collect()
     fi
 
 forests(bags: int, largest: string?) -> string{} is
@@ -34,7 +34,9 @@ plural(count: int, noun: string) -> string =>
 for bags in 1::5 do
     let ways = trees(bags) |> collect()
 
-    write_line("{plural(bags, "bag")}, {plural(ways.count, "way")}")
+    write_line(
+        "{plural(bags, "bag")}, {plural(ways.count, "way")}"
+    )
 
     for way in ways do
         write_line("  {way}")

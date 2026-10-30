@@ -1,12 +1,16 @@
 use default
 
 is_abc_word(word: string) -> bool =>
-    let a = word.index_of('a'), b = word.index_of('b'),
+    let
+        a = word.index_of('a'),
+        b = word.index_of('b'),
         c = word.index_of('c')
     in
-    a >= 0 /\ a < b /\ b < c
+        a >= 0 /\ a < b /\ b < c
 
-let words = IO.File.read_all_lines("unixdict.txt") |> filter(is_abc_word)
+let words =
+    IO.File.read_all_lines("unixdict.txt")
+        |> filter(is_abc_word)
 
 for (position, word) in words |> index() do
     write_line("{position + 1,2}: {word}")

@@ -3,19 +3,27 @@ use default
 bigrams(phrase: string) -> Map[string, int] =>
     phrase.to_lower().split([' '])
         |> flat_map(word =>
-            word |> windows(2) |> map(pair => pair |> string()))
+            word |> windows(2) |> map(pair => pair |> string())
+        )
         |> frequencies()
 
-shared(left: Map[string, int], right: Map[string, int]) -> int =>
+shared(
+    left: Map[string, int],
+    right: Map[string, int]
+) -> int =>
     left
         |> filter(entry => right.contains_key(entry.key))
         |> sum_by(entry =>
-            System.Math.min(entry.value, right[entry.key]))
+            System.Math.min(entry.value, right[entry.key])
+        )
 
 size(counted: Map[string, int]) -> int =>
     counted.values |> sum()
 
-coefficient(left: Map[string, int], right: Map[string, int]) -> double => (
+coefficient(
+    left: Map[string, int],
+    right: Map[string, int]
+) -> double => (
     let total = size(left) + size(right)
 
     if total == 0 then
@@ -34,9 +42,10 @@ closest(term: string) -> (name: string, score: double){} => (
 
     let scored =
         tasks
-            |> map(task =>
-                (name = task.name,
-                 score = coefficient(wanted, task.grams)))
+            |> map(task => (
+                name = task.name,
+                score = coefficient(wanted, task.grams)
+            ))
             |> collect_mutable()
 
     scored.sort((left, right) => (
@@ -52,10 +61,14 @@ closest(term: string) -> (name: string, score: double){} => (
     scored[0..5]
 )
 
-for term in ["Primordial primes",
-             "Sunkist-Giuliani formula",
-             "Sieve of Euripides",
-             "Chowder numbers"] do
+for
+    term in [
+        "Primordial primes",
+        "Sunkist-Giuliani formula",
+        "Sieve of Euripides",
+        "Chowder numbers"
+    ]
+do
     write_line(term)
 
     for (name, score) in closest(term) do

@@ -15,7 +15,9 @@ try_row(rows: List[List[int]], size: int) -> List[int]? is
             0..size
                 |> filter(symbol =>
                     !taken[symbol] /\
-                    rows |> all(above => above[column] != symbol))
+                    rows
+                        |> all(above => above[column] != symbol)
+                )
                 |> collect()
 
         if free.count == 0 then

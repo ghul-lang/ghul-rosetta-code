@@ -17,7 +17,9 @@ si
 try
     deepen(1)
 catch _: System.InsufficientExecutionStackException
-    write_line("the runtime stopped it short of overflowing the stack")
+    write_line(
+        "the runtime stopped it short of overflowing the stack"
+    )
 yrt
 
 write_line("reached depth {reached}")

@@ -3,8 +3,13 @@ use System.DateTime
 use System.Environment
 use System.Environment_SpecialFolder.USER_PROFILE
 
-class ENTRY(date: DateTime, category: string, description: string) is
-    line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"
+class ENTRY(
+    date: DateTime,
+    category: string,
+    description: string
+) is
+    line: string =>
+        "{date:yyyy-MM-dd}\t{category}\t{description}"
 
     read(line: string) -> ENTRY? static is
         let parts = line.split(['\t'])
@@ -31,27 +36,37 @@ read_all(file: string) -> LIST[ENTRY] =>
         LIST()
     fi
 
-add(file: string, category: string, description: string, date: DateTime) is
+add(
+    file: string,
+    category: string,
+    description: string,
+    date: DateTime
+) is
     let entries = read_all(file)
 
     entries.add(ENTRY(date, category, description))
 
     IO.File.write_all_lines(
         file,
-        entries |> map(entry => entry.line))
+        entries |> map(entry => entry.line)
+    )
 si
 
 latest(file: string) -> ENTRY? =>
     read_all(file) |> max_by(entry => entry.date)
 
 latest_by_category(file: string) -> ENTRY{} is
-    let newest = read_all(file)
-        |> group_by(entry => entry.category)
-        |> map(group => group.value |> max_by(entry => entry.date)!)
-        |> collect_mutable()
+    let newest =
+        read_all(file)
+            |> group_by(entry => entry.category)
+            |> map(group =>
+                group.value |> max_by(entry => entry.date)!
+            )
+            |> collect_mutable()
 
     newest.sort((left, right) =>
-        string.compare(left.category, right.category))
+        string.compare(left.category, right.category)
+    )
 
     newest
 si
@@ -84,15 +99,31 @@ demo() is
     let file = IO.Path.combine(IO.Path.get_temp_path(), name)
 
     try
-        add(file, "book", "The Go Programming Language",
-            DateTime.parse("2026-01-14"))
-        add(file, "film", "Solaris", DateTime.parse("2026-02-02"))
-        add(file, "book", "Programming in Lua",
-            DateTime.parse("2026-03-21"))
+        add(
+            file,
+            "book",
+            "The Go Programming Language",
+            DateTime.parse("2026-01-14")
+        )
+        add(
+            file,
+            "film",
+            "Solaris",
+            DateTime.parse("2026-02-02")
+        )
+        add(
+            file,
+            "book",
+            "Programming in Lua",
+            DateTime.parse("2026-03-21")
+        )
 
         write_line("latest: {latest(file)}")
         write_line()
-        show("latest of each category:", latest_by_category(file))
+        show(
+            "latest of each category:",
+            latest_by_category(file)
+        )
         write_line()
         show("all, by date:", by_date(file))
     finally
@@ -101,9 +132,15 @@ demo() is
 si
 
 entry(args: string[]) -> int is
-    let stored = Environment.get_environment_variable("SIMPLE_DATABASE")
-    let file = stored ?? IO.Path.combine(
-        Environment.get_folder_path(USER_PROFILE), ".simple-database")
+    let stored = Environment.get_environment_variable(
+        "SIMPLE_DATABASE"
+    )
+    let file =
+        stored ??
+        IO.Path.combine(
+            Environment.get_folder_path(USER_PROFILE),
+            ".simple-database"
+        )
 
     if args.count == 0 then
         usage()
@@ -130,7 +167,10 @@ entry(args: string[]) -> int is
     when "latest" then
         write_line("{latest(file)}")
     when "latest-each" then
-        show("latest of each category:", latest_by_category(file))
+        show(
+            "latest of each category:",
+            latest_by_category(file)
+        )
     when "all" then
         show("all, by date:", by_date(file))
     when "demo" then

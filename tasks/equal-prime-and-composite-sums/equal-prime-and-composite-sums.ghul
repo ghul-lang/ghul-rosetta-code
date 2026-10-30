@@ -16,7 +16,8 @@ take_prime() is
 si
 
 take_composite() is
-    last_composite = from(last_composite + 1L) |> find(v => !is_prime(v))!
+    last_composite =
+        from(last_composite + 1L) |> find(v => !is_prime(v))!
 
     composite_index = composite_index + 1
     composite_total = composite_total + last_composite
@@ -25,16 +26,20 @@ si
 take_prime()
 take_composite()
 
-write_line("sums that are both the first n primes "
-           "and the first m composites:")
+write_line(
+    "sums that are both the first n primes "
+    "and the first m composites:"
+)
 
 let wanted = 6
 let found mut = 0
 
 while found < wanted do
     if prime_total == composite_total then
-        write_line("  n = {prime_index,6} m = {composite_index,6} "
-                   "sum = {prime_total}")
+        write_line(
+            "  n = {prime_index,6} m = {composite_index,6} "
+            "sum = {prime_total}"
+        )
 
         found = found + 1
         take_prime()

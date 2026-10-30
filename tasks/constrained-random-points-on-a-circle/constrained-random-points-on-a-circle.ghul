@@ -5,7 +5,10 @@ let random = System.Random(10)
 
 candidates() -> (x: int, y: int){} is
     while true do
-        yield (x = random.next(-15, 16), y = random.next(-15, 16))
+        yield (
+            x = random.next(-15, 16),
+            y = random.next(-15, 16)
+        )
     od
 si
 
@@ -13,10 +16,13 @@ in_ring(p: (x: int, y: int)) -> bool =>
     let square = p.x * p.x + p.y * p.y in
     square >= 100 /\ square <= 225
 
-let points = candidates() |> filter(in_ring) |> take(100) |> collect()
+let points =
+    candidates() |> filter(in_ring) |> take(100) |> collect()
 let distinct = points |> collect_set()
 
-write_line("{points.count} points, {distinct.count} of them different")
+write_line(
+    "{points.count} points, {distinct.count} of them different"
+)
 write_line("")
 
 for y in -15::15 do

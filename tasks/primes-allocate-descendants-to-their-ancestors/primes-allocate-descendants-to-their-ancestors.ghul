@@ -46,12 +46,17 @@ for n in 1::top do
     let chain = n |> ancestors() |> sort() |> collect()
     let children = descendants[n]
 
-    write_line("[{n}] level {chain.count}, ancestors: "
-        "{if chain.count == 0 then "none" else chain |> join(" ") fi}")
-    write_line("    {children.count} descendants: {abbreviated(children)}")
+    write_line(
+        "[{n}] level {chain.count}, ancestors: "
+        "{if chain.count == 0 then "none" else chain |> join(" ") fi}"
+    )
+    write_line(
+        "    {children.count} descendants: {abbreviated(children)}"
+    )
 od
 
 write_line("")
 write_line(
     "total descendants: "
-    "{(1::top) |> sum_by(n => descendants[n].count)}")
+    "{(1::top) |> sum_by(n => descendants[n].count)}"
+)

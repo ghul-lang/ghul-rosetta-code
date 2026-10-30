@@ -18,14 +18,16 @@ loaded7() -> int =>
     if random.next(100) < 5 then 7 else dice7() fi
 
 check_distribution(
-    generate: () -> int, calls: int, delta: double
+    generate: () -> int,
+    calls: int,
+    delta: double
 ) -> bool is
     let counts =
         (0..calls)
-        |> map(_ => generate())
-        |> group_by(value => value)
-        |> map(entry => (entry.key, entry.value.count))
-        |> collect_map()
+            |> map(_ => generate())
+            |> group_by(value => value)
+            |> map(entry => (entry.key, entry.value.count))
+            |> collect_map()
 
     let expected = double(calls) / double(counts.count)
     let flat mut = true
@@ -37,7 +39,8 @@ check_distribution(
 
         write_line(
             "  {value}: {counts[value],7}  {100.0 * deviation,5:F2}% off"
-            "{if within then "" else "  <- too far from flat" fi}")
+            "{if within then "" else "  <- too far from flat" fi}"
+        )
 
         flat = flat /\ within
     od
@@ -45,13 +48,17 @@ check_distribution(
     return flat
 si
 
-for (name, generate) in [("dice7", dice7), ("loaded7", loaded7)] do
+for
+    (name, generate) in [("dice7", dice7), ("loaded7", loaded7)]
+do
     write_line("{name}, 1000000 calls, delta 1%:")
 
     if check_distribution(generate, 1_000_000, 0.01) then
         write_line("  flat enough")
     else
-        write_line("  error: the distribution is not flat enough")
+        write_line(
+            "  error: the distribution is not flat enough"
+        )
     fi
 
     write_line("")

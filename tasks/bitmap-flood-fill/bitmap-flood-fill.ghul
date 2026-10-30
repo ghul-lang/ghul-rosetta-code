@@ -9,11 +9,12 @@ let steps = 240
 around(radius: double) -> List[POINT] =>
     (0..steps + 1)
         |> map(step => (
-            let angle =
-                2.0D * pi * double(step) / double(steps)
+            let angle = 2.0D * pi * double(step) / double(steps)
 
-            (x = 150.0D + radius * cos(angle),
-             y = 150.0D + radius * sin(angle))
+            (
+                x = 150.0D + radius * cos(angle),
+                y = 150.0D + radius * sin(angle)
+            )
         ))
         |> collect()
 

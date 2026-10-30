@@ -3,7 +3,9 @@ use IO.Std.read_line
 
 let dictionary =
     IO.File.read_all_lines("unixdict.txt")
-        |> filter(w => w.length >= 3 /\ w |> all(c => c >= 'a' /\ c <= 'z'))
+        |> filter(w =>
+            w.length >= 3 /\ w |> all(c => c >= 'a' /\ c <= 'z')
+        )
 
 let words = SET(dictionary)
 
@@ -43,7 +45,8 @@ for player in 1::2 do
 od
 
 let random = System.Random(7)
-let starters = dictionary |> filter(w => w.length <= 4) |> collect()
+let starters =
+    dictionary |> filter(w => w.length <= 4) |> collect()
 let used = LIST()
 let last mut = starters[random.next(starters.count)]
 
@@ -56,10 +59,14 @@ let turn mut = 0
 
 while names.count == 2 do
     let player = names[turn % 2]
-    let entered = ask("{player}, a word one letter away from {last}:")
+    let entered = ask(
+        "{player}, a word one letter away from {last}:"
+    )
 
     if !entered? \/ entered =~ "" then
-        write_line("{player} gives up after {used.count - 1} words")
+        write_line(
+            "{player} gives up after {used.count - 1} words"
+        )
         break
     fi
 
@@ -68,7 +75,9 @@ while names.count == 2 do
     elif used |> any(* =~ entered) then
         write_line("{entered} has been played already")
     elif !one_apart(last, entered) then
-        write_line("{entered} is not one letter away from {last}")
+        write_line(
+            "{entered} is not one letter away from {last}"
+        )
     else
         used.add(entered)
         last = entered

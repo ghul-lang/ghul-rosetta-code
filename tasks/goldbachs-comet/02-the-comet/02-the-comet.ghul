@@ -11,7 +11,9 @@ is_prime[0] = false
 is_prime[1] = false
 
 for candidate in 2::limit do
-    if is_prime[candidate] /\ candidate <= limit / candidate then
+    if
+        is_prime[candidate] /\ candidate <= limit / candidate
+    then
         let multiple mut = candidate * candidate
 
         while multiple <= limit do
@@ -26,28 +28,38 @@ goldbach(even: int) -> int =>
         |> filter(p => is_prime[p] /\ is_prime[even - p])
         |> count()
 
-let points = (2::limit / 2)
-    |> map(half => (even = 2 * half, count = goldbach(2 * half)))
-    |> memo()
+let points =
+    (2::limit / 2)
+        |> map(half => (
+            even = 2 * half,
+            count = goldbach(2 * half)
+        ))
+        |> memo()
 
 let tallest =
-    points |> reduce(0, (best, point) => Math.max(best, point.count))
+    points
+        |> reduce(0, (best, point) =>
+            Math.max(best, point.count)
+        )
 
 let bands = [
-    (residue = 0, red = 200ub, green = 40ub, blue = 40ub,
-     label = "multiples of 6"),
-    (residue = 2, red = 30ub, green = 90ub, blue = 190ub,
-     label = "6n + 2"),
-    (residue = 4, red = 20ub, green = 140ub, blue = 70ub,
-     label = "6n + 4")
+    (
+        residue = 0, red = 200ub, green = 40ub, blue = 40ub,
+        label = "multiples of 6"
+    ),
+    (
+        residue = 2, red = 30ub, green = 90ub, blue = 190ub,
+        label = "6n + 2"
+    ),
+    (
+        residue = 4, red = 20ub, green = 140ub, blue = 70ub,
+        label = "6n + 4"
+    )
 ]
 
 let image = IMAGE(760, 480)
 
-image.view(
-    0.0, 0.0,
-    double(limit), double(tallest) + 2.0,
-    52.0)
+image.view(0.0, 0.0, double(limit), double(tallest) + 2.0, 52.0)
 
 image.colour(80ub, 80ub, 80ub)
 image.stroke(1.0)
@@ -84,7 +96,13 @@ for entry in bands |> index() do
     image.line(140.0, y, 210.0, y)
 
     image.colour(60ub, 60ub, 60ub)
-    image.text(230.0, y - step / 3.0, 13.0, band.label, Anchor.LEFT)
+    image.text(
+        230.0,
+        y - step / 3.0,
+        13.0,
+        band.label,
+        Anchor.LEFT
+    )
 od
 
 image.write("comet.png")

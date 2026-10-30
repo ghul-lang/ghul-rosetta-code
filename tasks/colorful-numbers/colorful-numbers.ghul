@@ -40,7 +40,8 @@ si
 let digits = LIST(2::9)
 
 let candidates = (0::9) ++ arrangements(0, digits)
-let colorful = candidates |> filter(is_colorful) |> collect_mutable()
+let colorful =
+    candidates |> filter(is_colorful) |> collect_mutable()
 
 colorful.sort()
 
@@ -50,13 +51,20 @@ write_line("the colorful numbers below 100:")
 write_line("  {small |> join(" ")}")
 
 write_line("")
-write_line("the largest colorful number is {colorful[colorful.count - 1]}")
+write_line(
+    "the largest colorful number is {colorful[colorful.count - 1]}"
+)
 
 write_line("")
-write_line("how many colorful numbers each order of magnitude holds:")
+write_line(
+    "how many colorful numbers each order of magnitude holds:"
+)
 
 for width in 1::8 do
-    let below = colorful |> filter(v => "{v}".length == width) |> count()
+    let below =
+        colorful
+            |> filter(v => "{v}".length == width)
+            |> count()
 
     write_line("  {width} digit: {below}")
 od

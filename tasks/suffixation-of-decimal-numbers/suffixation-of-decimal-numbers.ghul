@@ -2,7 +2,8 @@ use default
 use System.Globalization.CultureInfo
 
 let suffixes = [
-    "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"
+    "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V",
+    "U"
 ]
 
 let invariant = CultureInfo.invariant_culture
@@ -11,7 +12,10 @@ suffize(text: string, digits: int?, base: int) -> string is
     let cleaned = text.trim().replace(",", "")
     let signed = cleaned[0] == '+' \/ cleaned[0] == '-'
     let sign = if signed then "{cleaned[0]}" else "" fi
-    let value = double.parse(cleaned.substring(sign.length), invariant)
+    let value = double.parse(
+        cleaned.substring(sign.length),
+        invariant
+    )
     let step = if base == 2 then 1024.0 else 1000.0 fi
     let number mut = value
     let index mut = 0
@@ -28,7 +32,8 @@ suffize(text: string, digits: int?, base: int) -> string is
 
         let binary = base == 2 /\ index > 0
 
-        suffix = "{suffixes[index]}{if binary then "i" else "" fi}"
+        suffix =
+            "{suffixes[index]}{if binary then "i" else "" fi}"
     fi
 
     let shown =
@@ -53,12 +58,15 @@ let tests = [
     ("1.2e101", null, 10)
 ]
 
-write_line("number                          digits  suffix  result")
+write_line(
+    "number                          digits  suffix  result"
+)
 
 for (text, digits, base) in tests do
     let places = if let d = digits then "{d}" else "all" fi
     let kind = if base == 2 then "binary" else "metric" fi
 
     write_line(
-        "{text,-31} {places,-7} {kind,-7} {suffize(text, digits, base)}")
+        "{text,-31} {places,-7} {kind,-7} {suffize(text, digits, base)}"
+    )
 od

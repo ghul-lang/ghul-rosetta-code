@@ -53,23 +53,39 @@ solve() -> string? is
 
             let blocked =
                 cells[next] == '#' \/
-                (pushed /\ (cells[beyond] == '#' \/ boxes[beyond] == '$'))
+                (
+                    pushed /\
+                    (
+                        cells[beyond] == '#' \/
+                        boxes[beyond] == '$'
+                    )
+                )
 
             if blocked then
                 continue
             fi
 
             let after =
-                if pushed then put(put(boxes, next, ' '), beyond, '$')
+                if pushed then
+                    put(put(boxes, next, ' '), beyond, '$')
                 else boxes
                 fi
 
             if seen.add("{next}:{after}") then
                 let move =
-                    if pushed then char.to_upper(name) else name fi
+                    if pushed then
+                        char.to_upper(name)
+                    else
+                        name
+                    fi
 
                 queue.enqueue(
-                    (player = next, boxes = after, path = "{path}{move}"))
+                    (
+                        player = next,
+                        boxes = after,
+                        path = "{path}{move}"
+                    )
+                )
             fi
         od
     od

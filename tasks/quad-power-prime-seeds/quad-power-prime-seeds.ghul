@@ -36,5 +36,7 @@ od
 write_line("")
 
 for (limit, seed, index) in milestones do
-    write_line("First over {limit,10:N0}: {seed,10:N0}, index {index}")
+    write_line(
+        "First over {limit,10:N0}: {seed,10:N0}, index {index}"
+    )
 od

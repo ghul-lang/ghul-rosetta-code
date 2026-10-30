@@ -23,7 +23,8 @@ deep_copy(node: NODE) -> NODE is
 
         seen[source] = copy
 
-        source.links |> each(link => copy.links.add(copy_into(link)))
+        source.links
+            |> each(link => copy.links.add(copy_into(link)))
 
         copy
     si
@@ -51,5 +52,7 @@ let copy_of_b = copy.links[0]
 let copy_of_c = copy_of_b.links[0]
 
 write_line("the cycle is a cycle: {copy_of_c.links[0] == copy}")
-write_line("the self link too:    {copy_of_c.links[1] == copy_of_c}")
+write_line(
+    "the self link too:    {copy_of_c.links[1] == copy_of_c}"
+)
 write_line("and nothing is shared: {copy_of_b == b}")

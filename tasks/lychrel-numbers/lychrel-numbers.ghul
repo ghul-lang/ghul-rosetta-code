@@ -30,7 +30,11 @@ si
 let seen = SET()
 let seeds = LIST()
 let related_count mut = 0
-let palindromic_starts = [n for n in 1::10000 if is_palindrome(bigint(n))]
+let palindromic_starts = [
+    n
+    for n in 1::10000
+    if is_palindrome(bigint(n))
+]
 
 for n in 1::10000 do
     if n % 1000 == 0 then
@@ -53,10 +57,13 @@ for n in 1::10000 do
 od
 
 let seeds_text = seeds |> map(n => "{n}") |> join()
-let related_starts = palindromic_starts
-    |> filter(n => seeds.contains(n) \/ seen.contains(bigint(n)))
-    |> map(n => "{n}")
-    |> join()
+let related_starts =
+    palindromic_starts
+        |> filter(n =>
+            seeds.contains(n) \/ seen.contains(bigint(n))
+        )
+        |> map(n => "{n}")
+        |> join()
 
 write_line("seed Lychrel candidates: {seeds.count}")
 write_line("{seeds_text}")

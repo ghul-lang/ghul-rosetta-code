@@ -27,12 +27,11 @@ describe(value: int) -> Candidate is
 si
 
 candidates(size: int) -> List[Candidate] =>
-    let lowest =
-        repeat(10, size - 1) |> reduce(1, * * *) in
-        lowest..lowest * 10
-            |> map(describe)
-            |> filter(candidate => candidate.mask != 0)
-            |> collect()
+    let lowest = repeat(10, size - 1) |> reduce(1, * * *) in
+    lowest..lowest * 10
+        |> map(describe)
+        |> filter(candidate => candidate.mask != 0)
+        |> collect()
 
 for size in 2::5 do
     IO.Std.write("{size}-digit fractions: ")
@@ -60,7 +59,8 @@ for size in 2::5 do
 
                 let matches =
                     bottom != 0 /\
-                    numerator.value * bottom == denominator.value * top
+                    numerator.value * bottom ==
+                    denominator.value * top
 
                 if matches then
                     found = found + 1
@@ -68,7 +68,8 @@ for size in 2::5 do
                     if shown.count < 12 then
                         shown.add(
                             "{numerator.value}/{denominator.value} = "
-                            "{top}/{bottom} by omitting {digit}'s")
+                            "{top}/{bottom} by omitting {digit}'s"
+                        )
                     fi
                 fi
             od

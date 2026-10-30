@@ -6,10 +6,11 @@ use Step = (x: double, y: double, corner: int)
 
 let random = System.Random(20260918)
 
-let corners =
-    [(x = 0.0D, y = 0.0D),
-     (x = 1.0D, y = 0.0D),
-     (x = 0.5D, y = System.Math.sqrt(3.0D) / 2.0D)]
+let corners = [
+    (x = 0.0D, y = 0.0D),
+    (x = 1.0D, y = 0.0D),
+    (x = 0.5D, y = System.Math.sqrt(3.0D) / 2.0D)
+]
 
 let image = IMAGE(640, 560)
 
@@ -17,10 +18,11 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
     let chosen = random.next(corners.count)
     let corner = corners[chosen]
 
-    let next =
-        (x = (at.x + corner.x) / 2.0D,
-         y = (at.y + corner.y) / 2.0D,
-         corner = chosen)
+    let next = (
+        x = (at.x + corner.x) / 2.0D,
+        y = (at.y + corner.y) / 2.0D,
+        corner = chosen
+    )
 
     next || next
 )
@@ -32,10 +34,11 @@ plot(at: Step) is
     image.blend(int(spot.x), int(spot.y), 0.6D)
 si
 
-let start =
-    (x = 0.3D + random.next_double() * 0.4D,
-     y = 0.1D + random.next_double() * 0.3D,
-     corner = 0)
+let start = (
+    x = 0.3D + random.next_double() * 0.4D,
+    y = 0.1D + random.next_double() * 0.3D,
+    corner = 0
+)
 
 image.view(-0.03D, -0.03D, 1.03D, 0.90D)
 

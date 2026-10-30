@@ -12,23 +12,29 @@ struct SAILOR(name: string) is
 si
 
 struct AGENCY(ladies: List[LADY]) is
-    suggestions: LADY{} => ladies |> filter(lady => lady.is_nice)
+    suggestions: LADY{} =>
+        ladies |> filter(lady => lady.is_nice)
 si
 
 let agency = AGENCY(
     [
         "Ada", "Beatrice", "Cora", "Delia", "Edith",
         "Flora", "Grace", "Hazel", "Iris", "Juno"
-    ] |> map(LADY) |> collect()
+    ]
+        |> map(LADY)
+        |> collect()
 )
 
 let sailor = SAILOR("Popeye")
 
 let suggested = agency.suggestions |> map(lady => lady.name)
 
-let dated = agency.suggestions
-    |> filter(sailor.finds_lovable(*))
-    |> map(lady => lady.name)
+let dated =
+    agency.suggestions
+        |> filter(sailor.finds_lovable(*))
+        |> map(lady => lady.name)
 
 write_line("The agency suggests: {suggested |> join(", ")}")
-write_line("{sailor.name} offers to date: {dated |> join(", ")}")
+write_line(
+    "{sailor.name} offers to date: {dated |> join(", ")}"
+)

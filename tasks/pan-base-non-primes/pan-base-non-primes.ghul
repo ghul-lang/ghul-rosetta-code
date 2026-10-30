@@ -3,24 +3,29 @@ use default
 value_in(digits: List[int], base: int) -> long =>
     digits
         |> reduce(0L, (value, d) =>
-            value * long(base) + long(d))
+            value * long(base) + long(d)
+        )
 
 // A numeric string n is composite in every base once it is composite in
 // every base up to n itself, so only those bases are tried.
 
 is_pan_base_non_prime(n: int) -> bool =>
-    let digits = "{n}" |> map(c => int(c - '0'))
-        |> collect() in
+    let digits = "{n}" |> map(c => int(c - '0')) |> collect() in
     let lowest = (digits |> max()!) + 1 in
     lowest..int.max(lowest + 1, n + 1)
         |> all(base => !is_prime(value_in(digits, base)))
 
-let found = 2::1000 |> filter(is_pan_base_non_prime) |> collect()
+let found =
+    2::1000 |> filter(is_pan_base_non_prime) |> collect()
 
 write_line("The first 40 pan-base non-primes:")
 write_line(found |> take(40) |> join(" "))
 write_line("\nThe first 20 odd pan-base non-primes:")
-write_line(found |> filter(n => n % 2 == 1) |> take(20) |> join(" "))
+write_line(
+    found |> filter(n => n % 2 == 1) |> take(20) |> join(" ")
+)
 let odd = found |> count(n => n % 2 == 1)
 
-write_line("\nThere are {found.count} up to 1000, {odd} of them odd.")
+write_line(
+    "\nThere are {found.count} up to 1000, {odd} of them odd."
+)

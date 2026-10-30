@@ -9,7 +9,10 @@ pseudoprimes_up_to(a: int, limit: int) -> List[int] =>
 
 for a in 1::20 do
     let found = pseudoprimes_up_to(a, 12000)
-    let first_twenty = found |> take(20) |> map(x => "{x}") |> join()
+    let first_twenty =
+        found |> take(20) |> map(x => "{x}") |> join()
 
-    write_line("base {a}: count = {found.count}, first 20: {first_twenty}")
+    write_line(
+        "base {a}: count = {found.count}, first 20: {first_twenty}"
+    )
 od

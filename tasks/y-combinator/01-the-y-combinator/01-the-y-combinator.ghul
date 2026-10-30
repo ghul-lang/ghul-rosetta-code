@@ -5,31 +5,35 @@ class SELF_APPLY[A, B](_f: (SELF_APPLY[A, B]) -> (A -> B)) is
 si
 
 y[A, B](f: (A -> B) -> (A -> B)) -> (A -> B) =>
-    let wrap =
-        SELF_APPLY[A, B](
-            (r: SELF_APPLY[A, B]) => (a: A) => f(r.apply(r))(a))
-    in wrap.apply(wrap)
+    let wrap = SELF_APPLY[A, B]((r: SELF_APPLY[A, B]) =>
+        (a: A) => f(r.apply(r))(a)
+    )
+    in
+    wrap.apply(wrap)
 
-let factorial =
-    y(recurse => n =>
-        if n <= 1 then 1L else cast(n) * recurse(n - 1) fi)
+let factorial = y(recurse =>
+    n => if n <= 1 then 1L else cast(n) * recurse(n - 1) fi
+)
 
-let fibonacci =
-    y(recurse => n =>
-        if n < 2 then n else recurse(n - 1) + recurse(n - 2) fi)
+let fibonacci = y(recurse =>
+    n => if n < 2 then n else recurse(n - 1) + recurse(n - 2) fi
+)
 
-let countdown =
-    y(recurse => n =>
-        if n <= 0 then "liftoff" else "{n}, {recurse(n - 1)}" fi)
+let countdown = y(recurse =>
+    n =>
+        if n <= 0 then "liftoff" else "{n}, {recurse(n - 1)}" fi
+)
 
-let gcd =
-    y(recurse => ((a, b): (int, int)) =>
-        if b == 0 then a else recurse((b, a % b)) fi)
+let gcd = y(recurse =>
+    ((a, b): (int, int)) =>
+        if b == 0 then a else recurse((b, a % b)) fi
+)
 
 for n in 0::10 do
     write_line(
         "factorial({n}) = {factorial(n)}, "
-        "fibonacci({n}) = {fibonacci(n)}")
+        "fibonacci({n}) = {fibonacci(n)}"
+    )
 od
 
 write_line("countdown(5) = {countdown(5)}")

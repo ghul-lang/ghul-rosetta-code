@@ -18,11 +18,15 @@ for i in 0::seeds do
     let angle = 2.0D * pi * phi * n
 
     image.circle(
-        r * sin(angle), r * cos(angle),
-        5.0D * n / double(seeds))
+        r * sin(angle),
+        r * cos(angle),
+        5.0D * n / double(seeds)
+    )
 od
 
-write_line("{seeds} seeds, each turned the golden angle from the last")
+write_line(
+    "{seeds} seeds, each turned the golden angle from the last"
+)
 
 image.write("sunflower.png")
 

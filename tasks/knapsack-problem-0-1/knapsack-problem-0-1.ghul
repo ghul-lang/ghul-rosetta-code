@@ -3,9 +3,12 @@ use default
 use ITEM = (name: string, weight: int, value: int)
 
 best_value(items: List[ITEM], limit: int) -> List[List[int]] is
-    let table = 0::items.count
-        |> map(_ => repeat(0, limit + 1) |> collect_mutable())
-        |> collect()
+    let table =
+        0::items.count
+            |> map(_ =>
+                repeat(0, limit + 1) |> collect_mutable()
+            )
+            |> collect()
 
     for at in 0..items.count do
         let item = items[at]
@@ -18,9 +21,14 @@ best_value(items: List[ITEM], limit: int) -> List[List[int]] is
                     without
                 else
                     let taken =
-                        table[at][capacity - item.weight] + item.value
+                        table[at][capacity - item.weight] +
+                        item.value
 
-                    if taken > without then taken else without fi
+                    if taken > without then
+                        taken
+                    else
+                        without
+                    fi
                 fi
         od
     od

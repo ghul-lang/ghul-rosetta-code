@@ -1,21 +1,37 @@
 use default
 
-use Convergents = (h1: double, h2: double, k1: double, k2: double)
+use Convergents = (
+    h1: double,
+    h2: double,
+    k1: double,
+    k2: double
+)
 
-evaluate(a: (int) -> double, b: (int) -> double, terms: int) -> double is
+evaluate(
+    a: (int) -> double,
+    b: (int) -> double,
+    terms: int
+) -> double is
     let start: Convergents = (a(0), 1.0, 1.0, 0.0)
 
-    let last = 1::terms |> reduce(start, (c, n) =>
-        let
-            h = a(n) * c.h1 + b(n) * c.h2,
-            k = a(n) * c.k1 + b(n) * c.k2
-        in
-            (h / k, c.h1 / k, 1.0, c.k1 / k))
+    let last =
+        1::terms
+            |> reduce(start, (c, n) =>
+                let
+                    h = a(n) * c.h1 + b(n) * c.h2,
+                    k = a(n) * c.k1 + b(n) * c.k2
+                in
+                    (h / k, c.h1 / k, 1.0, c.k1 / k)
+            )
 
     last.h1 / last.k1
 si
 
-let sqrt2 = evaluate(n => if n == 0 then 1.0 else 2.0 fi, n => 1.0, 10000)
+let sqrt2 = evaluate(
+    n => if n == 0 then 1.0 else 2.0 fi,
+    n => 1.0,
+    10000
+)
 
 let e = evaluate(
     n => if n == 0 then 2.0 else double(n) fi,

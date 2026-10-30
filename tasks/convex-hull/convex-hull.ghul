@@ -4,14 +4,15 @@ use Raster.IMAGE
 
 use Point = (x: int, y: int)
 
-let points =
-    [(x = 16, y = 3), (x = 12, y = 17), (x = 0, y = 6),
-     (x = -4, y = -6), (x = 16, y = 6), (x = 16, y = -7),
-     (x = 16, y = -3), (x = 17, y = -4), (x = 5, y = 19),
-     (x = 19, y = -8), (x = 3, y = 16), (x = 12, y = 13),
-     (x = 3, y = -4), (x = 17, y = 5), (x = -3, y = 15),
-     (x = -3, y = -9), (x = 0, y = 11), (x = -9, y = -3),
-     (x = -4, y = -2), (x = 12, y = 10)]
+let points = [
+    (x = 16, y = 3), (x = 12, y = 17), (x = 0, y = 6),
+    (x = -4, y = -6), (x = 16, y = 6), (x = 16, y = -7),
+    (x = 16, y = -3), (x = 17, y = -4), (x = 5, y = 19),
+    (x = 19, y = -8), (x = 3, y = 16), (x = 12, y = 13),
+    (x = 3, y = -4), (x = 17, y = 5), (x = -3, y = 15),
+    (x = -3, y = -9), (x = 0, y = 11), (x = -9, y = -3),
+    (x = -4, y = -2), (x = 12, y = 10)
+]
 
 turn(from: Point, through: Point, to: Point) -> int =>
     (through.x - from.x) * (to.y - from.y) -
@@ -21,9 +22,14 @@ half_hull(ordered: Collections.List[Point]) -> LIST[Point] is
     let side = LIST()
 
     for at in ordered do
-        while side.count > 1 /\
-                turn(side[side.count - 2],
-                     side[side.count - 1], at) <= 0 do
+        while
+            side.count > 1 /\
+            turn(
+                side[side.count - 2],
+                side[side.count - 1],
+                at
+            ) <= 0
+        do
             side.remove_at(side.count - 1)
         od
 
@@ -38,7 +44,8 @@ si
 let ordered =
     points
         |> sort((a, b) =>
-            if a.x != b.x then a.x - b.x else a.y - b.y fi)
+            if a.x != b.x then a.x - b.x else a.y - b.y fi
+        )
         |> collect()
 
 let backwards =
@@ -67,9 +74,9 @@ let axes = AXES(image)
 axes.fit(-11.0D, -11.0D, 21.0D, 21.0D)
 axes.draw()
 
-let corners =
-    LIST(hull |> map(at =>
-        (x = double(at.x), y = double(at.y))))
+let corners = LIST(
+    hull |> map(at => (x = double(at.x), y = double(at.y)))
+)
 
 image.colour(206ub, 224ub, 244ub)
 image.fill(corners)

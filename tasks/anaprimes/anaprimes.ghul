@@ -4,7 +4,10 @@ let sieve_limit = 10_000_000
 let composite = repeat(false, sieve_limit) |> collect_mutable()
 
 for candidate in 2..sieve_limit do
-    if !composite[candidate] /\ candidate <= sieve_limit / candidate then
+    if
+        !composite[candidate] /\
+        candidate <= sieve_limit / candidate
+    then
         let multiple mut = candidate * candidate
 
         while multiple < sieve_limit do
@@ -14,7 +17,8 @@ for candidate in 2..sieve_limit do
     fi
 od
 
-digit_signature(value: int) -> string => "{value}" |> sort() |> join("")
+digit_signature(value: int) -> string =>
+    "{value}" |> sort() |> join("")
 
 report(bound: int) is
     let groups =
@@ -22,7 +26,8 @@ report(bound: int) is
             |> filter(candidate => !composite[candidate])
             |> group_by(digit_signature)
 
-    let largest = groups.values |> map(members => members.count) |> max()
+    let largest =
+        groups.values |> map(members => members.count) |> max()
 
     if let size = largest then
         let winner =
@@ -31,12 +36,14 @@ report(bound: int) is
                 |> min_by(members => members[0])
 
         if let group = winner then
-            write_line("  below {bound,10:N0}: {size,4} anaprimes, "
-                       "from {group[0]:N0} to {group[size - 1]:N0}")
+            write_line(
+                "  below {bound,10:N0}: {size,4} anaprimes, "
+                "from {group[0]:N0} to {group[size - 1]:N0}"
+            )
         fi
     fi
 si
 
 write_line("largest anagram group of primes:")
 
-[1_000, 10_000, 100_000, 1_000_000, 10_000_000] |> each(report)
+[1000, 10000, 100000, 1000000, 10000000] |> each(report)

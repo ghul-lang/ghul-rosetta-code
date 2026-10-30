@@ -17,25 +17,27 @@ recaman() -> int{} is
 
         let back = term - index
 
-        term = if back > 0 /\ !seen.contains(back) then back
-               else term + index
-               fi
+        term =
+            if back > 0 /\ !seen.contains(back) then back
+            else term + index
+            fi
     od
 si
 
 let terms = recaman() |> take(66) |> collect()
 
-let hops = (1..terms.count)
-    |> map(n => (from = terms[n - 1], to = terms[n]))
-    |> memo()
+let hops =
+    (1..terms.count)
+        |> map(n => (from = terms[n - 1], to = terms[n]))
+        |> memo()
 
 let highest =
     terms |> reduce(0, (best, term) => max(best, term))
 
 let widest =
     hops
-    |> map(hop => abs(hop.to - hop.from))
-    |> reduce(0, (best, span) => max(best, span))
+        |> map(hop => abs(hop.to - hop.from))
+        |> reduce(0, (best, span) => max(best, span))
 
 let deepest = double(widest) / 2.0
 
@@ -49,7 +51,8 @@ let margin = 12.0
 
 let image = IMAGE(
     int((right - left) * scale + 2.0 * margin),
-    int((top - bottom) * scale + 2.0 * margin))
+    int((top - bottom) * scale + 2.0 * margin)
+)
 
 image.view(left, bottom, right, top, margin)
 

@@ -25,10 +25,14 @@ show("first == first", first == first)
 write_line("")
 write_line("case")
 show("shouting =~ first", shouting =~ first)
-show("shouting.to_lower() =~ first.to_lower()",
-    shouting.to_lower() =~ first.to_lower())
-show("string.compare(shouting, first, ignore_case)",
-    string.compare(shouting, first, ignore_case))
+show(
+    "shouting.to_lower() =~ first.to_lower()",
+    shouting.to_lower() =~ first.to_lower()
+)
+show(
+    "string.compare(shouting, first, ignore_case)",
+    string.compare(shouting, first, ignore_case)
+)
 
 write_line("")
 write_line("numeric strings compare as text")

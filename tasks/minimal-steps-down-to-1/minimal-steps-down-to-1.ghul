@@ -3,9 +3,11 @@ use default
 use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
-moves(value: int, divisors: List[int],
-      subtractors: List[int]) -> MOVE{}
-is
+moves(
+    value: int,
+    divisors: List[int],
+    subtractors: List[int]
+) -> MOVE{} is
     for divisor in divisors do
         if value % divisor == 0 then
             yield (next = value / divisor, label = "/{divisor}")
@@ -14,18 +16,24 @@ is
 
     for subtractor in subtractors do
         if value > subtractor then
-            yield (next = value - subtractor, label = "-{subtractor}")
+            yield (
+                next = value - subtractor,
+                label = "-{subtractor}"
+            )
         fi
     od
 si
 
-solve(divisors: List[int], subtractors: List[int],
-      limit: int) -> List[STEP]
-is
+solve(
+    divisors: List[int],
+    subtractors: List[int],
+    limit: int
+) -> List[STEP] is
     let table = [
         (steps = 0, next = 0, label = ""),
         (steps = 0, next = 0, label = "")
-    ] |> collect_mutable()
+    ]
+        |> collect_mutable()
 
     for value in 2::limit do
         let cheapest =
@@ -33,8 +41,13 @@ is
                 |> min_by(move => table[move.next].steps)
 
         if let best = cheapest then
-            table.add((steps = table[best.next].steps + 1,
-                       next = best.next, label = best.label))
+            table.add(
+                (
+                    steps = table[best.next].steps + 1,
+                    next = best.next,
+                    label = best.label
+                )
+            )
         fi
     od
 
@@ -57,7 +70,8 @@ route(table: List[STEP], value: int) -> string => (
 )
 
 deepest_in(table: List[STEP], limit: int) is
-    let deepest = 1::limit |> map(value => table[value].steps) |> max()
+    let deepest =
+        1::limit |> map(value => table[value].steps) |> max()
 
     if let most = deepest then
         let hardest =
@@ -65,24 +79,29 @@ deepest_in(table: List[STEP], limit: int) is
                 |> filter(value => table[value].steps == most)
                 |> collect()
 
-        write_line("  1 to {limit:N0}: maximum of {most} steps, "
-                   "reached {hardest.count} times:")
+        write_line(
+            "  1 to {limit:N0}: maximum of {most} steps, "
+            "reached {hardest.count} times:"
+        )
         write_line("    {hardest |> join(" ")}")
     fi
 
 si
 
-[1, 2] |> each(subtractor => (
-    let table = solve([2, 3], [subtractor], 50_000)
+[1, 2]
+    |> each(subtractor => (
+        let table = solve([2, 3], [subtractor], 50_000)
 
-    write_line("divisors 2 and 3, subtractor {subtractor}:")
+        write_line("divisors 2 and 3, subtractor {subtractor}:")
 
-    for value in 1::10 do
-        write_line("  {value,3}: {table[value].steps} steps  "
-                   "{route(table, value)}".trim_end())
-    od
+        for value in 1::10 do
+            write_line(
+                "  {value,3}: {table[value].steps} steps  "
+                "{route(table, value)}".trim_end()
+            )
+        od
 
-    [2_000, 20_000, 50_000] |> each(deepest_in(table, *))
+        [2000, 20000, 50000] |> each(deepest_in(table, *))
 
-    write_line()
-))
+        write_line()
+    ))

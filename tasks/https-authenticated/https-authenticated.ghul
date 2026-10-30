@@ -6,14 +6,19 @@ use System.Text.Encoding
 // The task: an HTTPS request carrying a user name and password, as HTTP
 // basic authentication.
 fetch(
-    url: string, user: string, password: string, handler: HttpClientHandler
+    url: string,
+    user: string,
+    password: string,
+    handler: HttpClientHandler
 ) -> string is
     let client = HttpClient(handler)
     let pair = Encoding.utf8.get_bytes("{user}:{password}")
 
     client.default_request_headers.authorization =
         System.Net.Http.Headers.AuthenticationHeaderValue(
-            "Basic", System.Convert.to_base64_string(pair))
+            "Basic",
+            System.Convert.to_base64_string(pair)
+        )
 
     let response = client.get_async(url).result
     let body = response.content.read_as_string_async().result
@@ -21,6 +26,11 @@ fetch(
     "{cast int(response.status_code)} {body}"
 si
 
-IO.Std.write(fetch(
-    "https://httpbin.org/basic-auth/rosetta/code", "rosetta", "code",
-    HttpClientHandler()))
+IO.Std.write(
+    fetch(
+        "https://httpbin.org/basic-auth/rosetta/code",
+        "rosetta",
+        "code",
+        HttpClientHandler()
+    )
+)

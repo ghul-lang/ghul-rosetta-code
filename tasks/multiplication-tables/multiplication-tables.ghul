@@ -9,7 +9,12 @@ for row in 1::12 do
     let cells =
         (1::12)
             |> map(column =>
-                if column < row then "    " else "{row * column,4}" fi)
+                if column < row then
+                    "    "
+                else
+                    "{row * column,4}"
+                fi
+            )
             |> join("")
 
     write_line("{row,3}{cells}")

@@ -11,16 +11,20 @@ use Alternation.LITERAL
 use Alternation.SEQUENCE
 use Alternation.BRANCHES
 
-take_pending(pending: StringBuilder, items: LIST[Alternation]) is
+take_pending(
+    pending: StringBuilder,
+    items: LIST[Alternation]
+) is
     if pending.length > 0 then
         items.add(LITERAL(pending.to_string()))
         pending.clear()
     fi
 si
 
-parse(text: string, start: int, nested: bool)
-    -> (tree: Alternation, next: int)
-is
+parse(text: string, start: int, nested: bool) -> (
+    tree: Alternation,
+    next: int
+) is
     let branches = LIST()
     let pending = StringBuilder()
 

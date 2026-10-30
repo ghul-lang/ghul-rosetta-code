@@ -11,12 +11,12 @@ use System.Guid
 
 take(lock_path: string) -> IO.FileStream? is
     try
-        return
-            File.open(
-                lock_path,
-                FileMode.OPEN_OR_CREATE,
-                FileAccess.READ_WRITE,
-                FileShare.NONE)
+        return File.open(
+            lock_path,
+            FileMode.OPEN_OR_CREATE,
+            FileAccess.READ_WRITE,
+            FileShare.NONE
+        )
     catch e: IO.IOException
         return null
     yrt
@@ -48,7 +48,10 @@ let lock_path =
     if is_second then
         arguments[arguments.count - 1]
     else
-        Path.combine(Path.get_temp_path(), "one-instance-{Guid.new_guid()}")
+        Path.combine(
+            Path.get_temp_path(),
+            "one-instance-{Guid.new_guid()}"
+        )
     fi
 
 if let held = take(lock_path) then

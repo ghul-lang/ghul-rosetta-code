@@ -9,8 +9,7 @@ rot13(c: char) -> char =>
         c
     fi
 
-rot13(s: string) -> string =>
-    string(s |> map(rot13))
+rot13(s: string) -> string => string(s |> map(rot13))
 
 while let line = IO.Std.read_line() do
     write_line(rot13(line))

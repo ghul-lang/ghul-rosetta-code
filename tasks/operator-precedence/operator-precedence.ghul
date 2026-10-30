@@ -19,7 +19,10 @@ levels() -> string{} is
     yield row("range", "..  ::  ..<  ::<", "left")
     yield row("user-3", "", "left")
     yield row(
-        "relational", "==  !=  =~  !~  <  <=  >  >=", "left")
+        "relational",
+        "==  !=  =~  !~  <  <=  >  >=",
+        "left"
+    )
     yield row("user-2", "", "left")
     yield row("boolean", "/\\  \\/", "left")
     yield row("user-1", "??", "right")
@@ -30,7 +33,9 @@ si
 class E is
     text: string
 
-    init(text: string) is self.text = text; si
+    init(text: string) is
+        self.text = text
+    si
 
     to_string() -> string => text
 
@@ -70,16 +75,24 @@ lifted(a: E, b: E, c: E) -> string =>
 class BOX is
     value: int public
 
-    init(value: int) is self.value = value; si
+    init(value: int) is
+        self.value = value
+    si
 si
 
 // Arguments are passed by value: a callee that assigns to its
 // parameter changes only its own copy. A `ref` argument passes the
 // variable itself. A class value is a reference, so a callee can
 // still change the fields of the object it refers to.
-assign(n: int mut) is n = 99; si
-assign_through(n: int ref) is n! = 99; si
-set_field(b: BOX) is b.value = 99; si
+assign(n: int mut) is
+    n = 99
+si
+assign_through(n: int ref) is
+    n! = 99
+si
+set_field(b: BOX) is
+    b.value = 99
+si
 
 entry() is
     write_line("precedence, highest first")
@@ -111,10 +124,12 @@ entry() is
     let box = BOX(1)
 
     assign(n)
-    assign_through(m ref)
+    assign_through(m ref )
     set_field(box)
 
     write_line("  callee assigned to an int          {n}")
     write_line("  callee assigned through an int ref {m}")
-    write_line("  callee set a field of a class      {box.value}")
+    write_line(
+        "  callee set a field of a class      {box.value}"
+    )
 si

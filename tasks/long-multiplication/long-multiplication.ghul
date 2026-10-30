@@ -7,8 +7,10 @@ digits_of(s: string) -> List[int] =>
 multiply(a: string, b: string) -> string is
     let da = digits_of(a)
     let db = digits_of(b)
-    let result = 0::(da.count + db.count) |> map(_ => 0)
-        |> collect_mutable()
+    let result =
+        0::(da.count + db.count)
+            |> map(_ => 0)
+            |> collect_mutable()
 
     for i in 0..da.count do
         for j in 0..db.count do

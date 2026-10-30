@@ -7,15 +7,17 @@ selected(wanted: (int) -> bool) -> int{} =>
 
 report(name: string, wanted: (int) -> bool, first: int) is
     write_line("first {first} {name} primes:")
-    write_line("  {selected(wanted) |> take(first) |> join(" ")}")
+    write_line(
+        "  {selected(wanted) |> take(first) |> join(" ")}"
+    )
 
     for bound in [1_000_000, 10_000_000] do
         let total =
-            selected(wanted)
-                |> take_while(* < bound)
-                |> count()
+            selected(wanted) |> take_while(* < bound) |> count()
 
-        write_line("  {name} primes below {bound:N0}: {total:N0}")
+        write_line(
+            "  {name} primes below {bound:N0}: {total:N0}"
+        )
     od
 si
 

@@ -11,10 +11,10 @@ coefficients(p: int) -> long{} is
 si
 
 term(coefficient: long, power: int) -> string => (
-    let
-        size = long.abs(coefficient),
+    let size = long.abs(coefficient),
         sign = if coefficient < 0L then " - " else " + " fi,
-        number = if size == 1L /\ power > 0 then "" else "{size}" fi
+        number =
+            if size == 1L /\ power > 0 then "" else "{size}" fi
 
     let x =
         case power
@@ -27,28 +27,34 @@ term(coefficient: long, power: int) -> string => (
 )
 
 expansion(p: int) -> string =>
-    (coefficients(p)
-        |> index()
-        |> map((k, coefficient) => term(coefficient, p - k))
-        |> join("")).substring(3)
+    (
+        coefficients(p)
+            |> index()
+            |> map((k, coefficient) => term(coefficient, p - k))
+            |> join("")
+    ).substring(3)
 
 is_prime(p: int) -> bool =>
     p >= 2 /\
     coefficients(p)
         |> index()
         |> all((k, coefficient) =>
-            let adjusted = case k
+            let adjusted =
+                case k
                 when 0 then coefficient - 1L
                 when p then coefficient + 1L
                 else coefficient
                 esac
             in
-            adjusted % cast(p) == 0L)
+            adjusted % cast(p) == 0L
+        )
 
 for p in 0::7 do
     write_line("(x-1)^{p} = {expansion(p)}")
 od
 
 for limit in [35, 50] do
-    write_line("primes under {limit}: {0..limit |> filter(is_prime)}")
+    write_line(
+        "primes under {limit}: {0..limit |> filter(is_prime)}"
+    )
 od

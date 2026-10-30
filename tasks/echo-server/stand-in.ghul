@@ -17,8 +17,12 @@ test_entry() is
     listener.start()
 
     let port =
-        if let bound: IPEndPoint = listener.local_endpoint then bound.port
-        else throw System.Exception("the listener has no address")
+        if let bound: IPEndPoint = listener.local_endpoint then
+            bound.port
+        else
+            throw System.Exception(
+                "the listener has no address"
+            )
         fi
 
     let log = LIST[string]()

@@ -23,24 +23,30 @@ for word in IO.File.read_all_lines("unixdict.txt") do
 od
 
 let representable = groups |> map(g => g.value.count) |> sum()
-let textonyms = groups |> filter(g => g.value.count > 1)
-    |> collect()
+let textonyms =
+    groups |> filter(g => g.value.count > 1) |> collect()
 
 write_line(
     "There are {representable} words in unixdict.txt which can be "
-    "represented by the digit key mapping.")
+    "represented by the digit key mapping."
+)
 write_line(
-    "They require {groups.count} digit combinations to represent them.")
-write_line("{textonyms.count} digit combinations represent textonyms.")
+    "They require {groups.count} digit combinations to represent them."
+)
+write_line(
+    "{textonyms.count} digit combinations represent textonyms."
+)
 write_line("")
 
-let most = textonyms |> sort((a, b) => b.value.count <> a.value.count)
+let most =
+    textonyms |> sort((a, b) => b.value.count <> a.value.count)
 
 for group in most |> take(5) do
     write_line("{group.key,-8} {group.value |> join(", ")}")
 od
 
-let longest = textonyms |> sort((a, b) => b.key.length <> a.key.length)
+let longest =
+    textonyms |> sort((a, b) => b.key.length <> a.key.length)
 
 write_line("")
 

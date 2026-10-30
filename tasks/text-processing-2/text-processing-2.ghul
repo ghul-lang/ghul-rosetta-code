@@ -10,17 +10,23 @@ let records =
         |> map(line =>
             line.split(
                 [' ', '\t'],
-                StringSplitOptions.REMOVE_EMPTY_ENTRIES))
+                StringSplitOptions.REMOVE_EMPTY_ENTRIES
+            )
+        )
         |> collect()
 
 let wrong_width =
-    records |> count(fields => fields.count != fields_per_record)
+    records
+        |> count(fields => fields.count != fields_per_record)
 
 let all_good =
     records
         |> count(fields =>
             1::instruments
-                |> all(reading => int.parse(fields[reading * 2]) >= 1))
+                |> all(reading =>
+                    int.parse(fields[reading * 2]) >= 1
+                )
+        )
 
 let duplicates =
     records
@@ -34,10 +40,14 @@ write_line("{records.count} records read")
 if wrong_width == 0 then
     write_line("every record has {fields_per_record} fields")
 else
-    write_line("{wrong_width} records have some other number of fields")
+    write_line(
+        "{wrong_width} records have some other number of fields"
+    )
 fi
 
 write_line("{all_good} records have every instrument working")
-write_line("{duplicates.count} datestamps appear more than once:")
+write_line(
+    "{duplicates.count} datestamps appear more than once:"
+)
 
 duplicates |> each(date => write_line("  {date}"))

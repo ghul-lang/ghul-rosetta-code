@@ -8,7 +8,8 @@ nth_root(a: double, n: int) -> double is
     do
         let power = System.Math.pow(estimate, order - 1.0)
 
-        let next = ((order - 1.0) * estimate + a / power) / order
+        let next =
+            ((order - 1.0) * estimate + a / power) / order
 
         if System.Math.abs(next - estimate) < 1.0e-12 then
             return next

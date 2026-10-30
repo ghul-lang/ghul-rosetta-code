@@ -1,6 +1,8 @@
 use default
 
-let values = [1, 2, 3, "a", "b", "c", 2, 3, 4, "b", "v", "d", "a"]
+let values = [
+    1, 2, 3, "a", "b", "c", 2, 3, 4, "b", "v", "d", "a"
+]
 
 write_line(values |> distinct() |> join())
 

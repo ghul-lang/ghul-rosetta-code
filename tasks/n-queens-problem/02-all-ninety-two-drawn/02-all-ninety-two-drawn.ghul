@@ -9,11 +9,13 @@ let margin = 12
 let header = 40
 
 safe(queens: List[int], row: int, column: int) -> bool =>
-    queens |> index()
+    queens
+        |> index()
         |> all((placed_row, placed_column) =>
             placed_column != column /\
-                placed_row - placed_column != row - column /\
-                placed_row + placed_column != row + column)
+            placed_row - placed_column != row - column /\
+            placed_row + placed_column != row + column
+        )
 
 placements(n: int, queens: List[int]) -> List[int]{} is
     if queens.count == n then
@@ -21,7 +23,10 @@ placements(n: int, queens: List[int]) -> List[int]{} is
     else
         for column in 0..n do
             if safe(queens, queens.count, column) then
-                yield in placements(n, queens ++ [column] |> collect())
+                yield in placements(
+                    n,
+                    queens ++ [column] |> collect()
+                )
             fi
         od
     fi
@@ -40,7 +45,8 @@ board(image: IMAGE, solution: List[int], left: int, top: int) is
                 double(left + column * cell),
                 double(top + row * cell),
                 double(left + column * cell + cell),
-                double(top + row * cell + cell))
+                double(top + row * cell + cell)
+            )
         od
     od
 
@@ -52,7 +58,8 @@ board(image: IMAGE, solution: List[int], left: int, top: int) is
         image.dot(
             double(left + placed.value * cell) + half,
             double(top + placed.index * cell) + half,
-            0.32 * double(cell))
+            0.32 * double(cell)
+        )
     od
 si
 
@@ -62,18 +69,24 @@ let down = (solutions.count + across - 1) / across
 
 let image = IMAGE(
     margin * 2 + across * (side + gap) - gap,
-    header + margin + down * (side + gap) - gap)
+    header + margin + down * (side + gap) - gap
+)
 
 image.colour(70ub, 75ub, 90ub)
 image.text(
-    double(margin), 26.0, 16.0,
-    "all {solutions.count} solutions to the eight queens problem")
+    double(margin),
+    26.0,
+    16.0,
+    "all {solutions.count} solutions to the eight queens problem"
+)
 
 for solution in solutions |> index() do
     board(
-        image, solution.value,
+        image,
+        solution.value,
         margin + solution.index % across * (side + gap),
-        header + solution.index / across * (side + gap))
+        header + solution.index / across * (side + gap)
+    )
 od
 
 image.write("queens.png")

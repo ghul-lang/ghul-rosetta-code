@@ -29,16 +29,19 @@ write_line(HOLDER().public_method())
 write_line(HOLDER().reaches_its_own())
 write_line(outer())
 
-let first = for row in 0..3 do
-    rows: for column in 0..3 do
-        if column == 2 then
-            continue rows
-        fi
+let first =
+    for row in 0..3 do
+        rows: for column in 0..3 do
+            if column == 2 then
+                continue rows
+            fi
 
-        if row == 2 then
-            break 42
-        fi
+            if row == 2 then
+                break 42
+            fi
+        od
     od
-od
 
-write_line("a label names a loop, and break carries a value out: {first}")
+write_line(
+    "a label names a loop, and break carries a value out: {first}"
+)

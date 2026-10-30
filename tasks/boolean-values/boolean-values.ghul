@@ -15,5 +15,7 @@ let unknown: bool? = null
 if unknown ?? false then
     write_line("an absent bool counted as true")
 else
-    write_line("an optional bool needs a fallback to be a condition")
+    write_line(
+        "an optional bool needs a fallback to be a condition"
+    )
 fi

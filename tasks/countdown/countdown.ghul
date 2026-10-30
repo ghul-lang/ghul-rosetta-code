@@ -6,8 +6,10 @@ use Found = (value: int, steps: LIST[string])
 
 use Move = (value: int, step: string)
 
-move(a: int, operator: string, b: int, value: int) -> Move =>
-    (value = value, step = "{a} {operator} {b} = {value}")
+move(a: int, operator: string, b: int, value: int) -> Move => (
+    value = value,
+    step = "{a} {operator} {b} = {value}"
+)
 
 combinations(a: int, b: int) -> Move{} is
     let (large, small) = if a >= b then (a, b) else (b, a) fi
@@ -27,9 +29,14 @@ combinations(a: int, b: int) -> Move{} is
     fi
 si
 
-solve(numbers: List[Found], target: int, best: Found) -> Found is
+solve(
+    numbers: List[Found],
+    target: int,
+    best: Found
+) -> Found is
     let closest mut =
-        numbers |> min_by(f => Math.abs(f.value - target)) ?? best
+        numbers
+            |> min_by(f => Math.abs(f.value - target)) ?? best
 
     if closest.value == target then
         return closest
@@ -79,7 +86,9 @@ play(numbers: int[], target: int) is
     od
 
     if result.value != target then
-        write_line("  no exact answer; {result.value} is the closest")
+        write_line(
+            "  no exact answer; {result.value} is the closest"
+        )
     fi
 
     write_line()
@@ -89,7 +98,8 @@ play([3, 6, 25, 50, 75, 100], 952)
 
 let random = Random(1)
 let pool = LIST([
-    1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10,
+    1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10,
+    10,
     25, 50, 75, 100
 ])
 let chosen = LIST()

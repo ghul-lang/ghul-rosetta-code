@@ -1,10 +1,21 @@
 use default
 
-use Bounty = (name: string, value: int, weight: double, volume: double)
+use Bounty = (
+    name: string,
+    value: int,
+    weight: double,
+    volume: double
+)
 
-let panacea = (name = "panacea", value = 3000, weight = 0.3, volume = 0.025)
-let ichor = (name = "ichor", value = 1800, weight = 0.2, volume = 0.015)
-let gold = (name = "gold", value = 2500, weight = 2.0, volume = 0.002)
+let panacea = (
+    name = "panacea", value = 3000, weight = 0.3, volume = 0.025
+)
+let ichor = (
+    name = "ichor", value = 1800, weight = 0.2, volume = 0.015
+)
+let gold = (
+    name = "gold", value = 2500, weight = 2.0, volume = 0.002
+)
 
 let weight_limit = 25.0
 let volume_limit = 0.25
@@ -12,7 +23,8 @@ let volume_limit = 0.25
 most_of(item: Bounty) -> int =>
     System.Math.min(
         int(weight_limit / item.weight),
-        int(volume_limit / item.volume))
+        int(volume_limit / item.volume)
+    )
 
 let best_value mut = 0
 let best mut = (panaceas = 0, ichors = 0, golds = 0)
@@ -31,10 +43,10 @@ for panaceas in 0::most_of(panacea) do
             break
         fi
 
-        let golds =
-            System.Math.min(
-                int((weight_limit - weight) / gold.weight),
-                int((volume_limit - volume) / gold.volume))
+        let golds = System.Math.min(
+            int((weight_limit - weight) / gold.weight),
+            int((volume_limit - volume) / gold.volume)
+        )
 
         let value =
             panaceas * panacea.value +
@@ -43,7 +55,10 @@ for panaceas in 0::most_of(panacea) do
 
         if value > best_value then
             best_value = value
-            best = (panaceas = panaceas, ichors = ichors, golds = golds)
+            best = (
+                panaceas = panaceas, ichors = ichors,
+                golds = golds
+            )
         fi
     od
 od
@@ -63,7 +78,9 @@ let volume =
 write_line("Maximum value achievable is {best_value}")
 write_line(
     "This is achieved by carrying (one solution) "
-    "{panaceas} panacea, {ichors} ichor and {golds} gold")
+    "{panaceas} panacea, {ichors} ichor and {golds} gold"
+)
 write_line(
     "The weight to carry is {weight:F1} "
-    "and the volume used is {volume:F3}")
+    "and the volume used is {volume:F3}"
+)

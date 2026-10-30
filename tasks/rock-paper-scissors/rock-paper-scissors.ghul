@@ -36,16 +36,16 @@ counters(move: Move) -> Move =>
     esac
 
 let random = Random(7)
-let counts =
-    [("rock", 1), ("paper", 1), ("scissors", 1)]
-        |> collect_mutable_map()
+let counts = [("rock", 1), ("paper", 1), ("scissors", 1)]
+    |> collect_mutable_map()
 
 let computer_wins mut = 0
 let player_wins mut = 0
 let ties mut = 0
 
 let choose_computer_move = () is
-    let total = counts["rock"] + counts["paper"] + counts["scissors"]
+    let total =
+        counts["rock"] + counts["paper"] + counts["scissors"]
     let target = random.next(0, total)
 
     if target < counts["rock"] then
@@ -84,4 +84,6 @@ while line? do
     line = read_line()
 od
 
-write_line("you: {player_wins}, computer: {computer_wins}, ties: {ties}")
+write_line(
+    "you: {player_wins}, computer: {computer_wins}, ties: {ties}"
+)

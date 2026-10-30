@@ -1,6 +1,9 @@
 use Raster.IMAGE
 
-circle(centre_x: int, centre_y: int, radius: int) -> (int, int){} is
+circle(centre_x: int, centre_y: int, radius: int) -> (
+    int,
+    int
+){} is
     let x mut = radius
     let y mut = 0
     let error mut = 1 - radius

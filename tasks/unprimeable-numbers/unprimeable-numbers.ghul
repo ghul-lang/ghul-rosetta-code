@@ -10,7 +10,9 @@ is_unprimeable(value: int) -> bool is
     while place <= value do
         let kept = value - value / place % 10 * place
 
-        if 0::9 |> any(d => is_prime(kept + d * place)) then return false fi
+        if 0::9 |> any(d => is_prime(kept + d * place)) then
+            return false
+        fi
 
         place = place * 10
     od
@@ -39,7 +41,9 @@ write_line("")
 write_line("the 600th unprimeable number is {terms[599]:N0}")
 
 write_line("")
-write_line("the lowest unprimeable number ending in each digit:")
+write_line(
+    "the lowest unprimeable number ending in each digit:"
+)
 
 for last in 0::9 do
     let lowest = (unprimeables() |> find(c => c % 10 == last))!

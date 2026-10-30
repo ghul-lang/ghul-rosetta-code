@@ -1,6 +1,7 @@
 use default
 
-bits(n: int) -> string => System.Convert.to_string(n, 2).pad_left(5, '0')
+bits(n: int) -> string =>
+    System.Convert.to_string(n, 2).pad_left(5, '0')
 
 encode(n: int) -> int => n ^ (n >>> 1)
 

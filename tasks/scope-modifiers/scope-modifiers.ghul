@@ -29,7 +29,9 @@ write_line("counters made: {COUNTER.made}")
 
 second.limit = 50
 
-write_line("second's limit is assignable from here: {second.limit}")
+write_line(
+    "second's limit is assignable from here: {second.limit}"
+)
 
 if counter > 0 then
     let inner = "visible only inside this if"

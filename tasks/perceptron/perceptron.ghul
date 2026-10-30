@@ -34,11 +34,15 @@ train(p: V3) is
 si
 
 correct() -> int =>
-    points |> filter(p => guess(p) == above(p.x, p.y)) |> count()
+    points
+        |> filter(p => guess(p) == above(p.x, p.y))
+        |> count()
 
 write_line("the line to learn is y = {slope}x + {intercept}")
 write_line()
-write_line("after   0 passes: {correct(),4} of {points.count} correct")
+write_line(
+    "after   0 passes: {correct(),4} of {points.count} correct"
+)
 
 for pass in 1::100 do
     for p in points do
@@ -48,7 +52,8 @@ for pass in 1::100 do
     if pass <= 3 \/ pass % 25 == 0 then
         write_line(
             "after {pass,3} passes: "
-            "{correct(),4} of {points.count} correct")
+            "{correct(),4} of {points.count} correct"
+        )
     fi
 od
 
@@ -58,10 +63,15 @@ let learned_intercept = -weights.bias / weights.y
 write_line()
 write_line(
     "the perceptron's line is y = "
-    "{learned_slope:F3}x + {learned_intercept:F2}")
+    "{learned_slope:F3}x + {learned_intercept:F2}"
+)
 
-write_line("in the picture, blue points are guessed above the line,")
-write_line("green below and red wrongly; the line learned is orange")
+write_line(
+    "in the picture, blue points are guessed above the line,"
+)
+write_line(
+    "green below and red wrongly; the line learned is orange"
+)
 
 let image = IMAGE(400, 400)
 
@@ -83,14 +93,15 @@ od
 
 image.stroke(1.5D)
 image.colour(30ub, 30ub, 30ub)
-image.line(
-    -1.0D, intercept - slope,
-    1.0D, intercept + slope)
+image.line(-1.0D, intercept - slope, 1.0D, intercept + slope)
 
 image.colour(230ub, 140ub, 20ub)
 image.line(
-    -1.0D, learned_intercept - learned_slope,
-    1.0D, learned_intercept + learned_slope)
+    -1.0D,
+    learned_intercept - learned_slope,
+    1.0D,
+    learned_intercept + learned_slope
+)
 
 image.write("perceptron.png")
 

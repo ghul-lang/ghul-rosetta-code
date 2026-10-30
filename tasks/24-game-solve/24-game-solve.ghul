@@ -3,9 +3,15 @@ use IO.Std.read_line
 
 struct Q(top: long, bottom: long) is
     +(o: Q) -> Q =>
-        reduced(top * o.bottom + o.top * bottom, bottom * o.bottom)
+        reduced(
+            top * o.bottom + o.top * bottom,
+            bottom * o.bottom
+        )
     -(o: Q) -> Q =>
-        reduced(top * o.bottom - o.top * bottom, bottom * o.bottom)
+        reduced(
+            top * o.bottom - o.top * bottom,
+            bottom * o.bottom
+        )
     *(o: Q) -> Q => reduced(top * o.top, bottom * o.bottom)
     /(o: Q) -> Q => reduced(top * o.bottom, bottom * o.top)
 
@@ -13,8 +19,11 @@ struct Q(top: long, bottom: long) is
 si
 
 reduced(top: long, bottom: long) -> Q =>
-    let g = gcd(top, bottom), sign = if bottom < 0L then -1L else 1L fi in
-    Q(sign * top / g, sign * bottom / g)
+    let
+        g = gcd(top, bottom),
+        sign = if bottom < 0L then -1L else 1L fi
+    in
+        Q(sign * top / g, sign * bottom / g)
 
 use Term = (value: Q, text: string)
 
@@ -22,7 +31,8 @@ let target = Q(24L, 1L)
 
 solve(terms: List[Term]) -> string? is
     if let [only] = terms then
-        return if only.value =~ target then only.text else null fi
+        return
+            if only.value =~ target then only.text else null fi
     fi
 
     for i in 0..terms.count do
@@ -38,14 +48,31 @@ solve(terms: List[Term]) -> string? is
                 let joined = LIST()
 
                 if i < j then
-                    joined.add((a.value + b.value, "({a.text} + {b.text})"))
-                    joined.add((a.value * b.value, "({a.text} * {b.text})"))
+                    joined.add(
+                        (
+                            a.value + b.value,
+                            "({a.text} + {b.text})"
+                        )
+                    )
+                    joined.add(
+                        (
+                            a.value * b.value,
+                            "({a.text} * {b.text})"
+                        )
+                    )
                 fi
 
-                joined.add((a.value - b.value, "({a.text} - {b.text})"))
+                joined.add(
+                    (a.value - b.value, "({a.text} - {b.text})")
+                )
 
                 if !b.value.is_zero then
-                    joined.add((a.value / b.value, "({a.text} / {b.text})"))
+                    joined.add(
+                        (
+                            a.value / b.value,
+                            "({a.text} / {b.text})"
+                        )
+                    )
                 fi
 
                 for term in joined do
@@ -71,7 +98,8 @@ while let line = read_line() do
         (0..digits.length)
             |> map(i =>
                 let d = long(digits[i]) - 48L in
-                (value = Q(d, 1L), text = "{d}"))
+                (value = Q(d, 1L), text = "{d}")
+            )
             |> collect()
 
     if let found = solve(terms) then

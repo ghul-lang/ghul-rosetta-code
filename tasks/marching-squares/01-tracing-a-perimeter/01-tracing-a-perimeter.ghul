@@ -1,10 +1,10 @@
 use default
 
 union Step(across: int, down: int, name: string) is
-    NORTH(..)
-    EAST(..)
-    SOUTH(..)
-    WEST(..)
+    NORTH
+    EAST
+    SOUTH
+    WEST
 si
 
 let north = Step.NORTH(0, -1, "N")
@@ -12,17 +12,20 @@ let east = Step.EAST(1, 0, "E")
 let south = Step.SOUTH(0, 1, "S")
 let west = Step.WEST(-1, 0, "W")
 
-let grid =
-    [".....",
-     ".....",
-     "..##.",
-     "..##.",
-     "...#.",
-     "....."]
+let grid = [
+    ".....",
+    ".....",
+    "..##.",
+    "..##.",
+    "...#.",
+    "....."
+]
 
 filled(column: int, row: int) -> bool =>
-    row >= 0 /\ row < grid.count /\
-    column >= 0 /\ column < grid[row].length /\
+    row >= 0 /\
+    row < grid.count /\
+    column >= 0 /\
+    column < grid[row].length /\
     grid[row][column] == '#'
 
 corner(column: int, row: int) -> int =>
@@ -50,13 +53,17 @@ heading(value: int, previous: Step?) -> Step =>
             south
         fi
     else
-        throw System.Exception("{value} is not a perimeter corner")
+        throw System.Exception(
+            "{value} is not a perimeter corner"
+        )
     esac
 
-let inked =
-    [(column = column, row = row)
-        for row in 0..grid.count for column in 0..grid[row].length
-        if filled(column, row)]
+let inked = [
+    (column = column, row = row)
+    for row in 0..grid.count
+    for column in 0..grid[row].length
+    if filled(column, row)
+]
 
 assert inked.count > 0 else "the grid has no filled cell"
 
@@ -64,11 +71,14 @@ let start = inked[0]
 
 walk(column: int, row: int, previous: Step?) -> Step{} =>
     let facing = heading(corner(column, row), previous) in
-    if column + facing.across == start.column /\
-        row + facing.down == start.row then
+    if
+        column + facing.across == start.column /\
+        row + facing.down == start.row
+    then
         [facing]
     else
-        [facing] ++ walk(column + facing.across, row + facing.down, facing)
+        [facing] ++
+        walk(column + facing.across, row + facing.down, facing)
     fi
 
 let path = walk(start.column, start.row, null)

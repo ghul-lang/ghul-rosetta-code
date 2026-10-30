@@ -17,7 +17,8 @@ si
 class CIRCLE(x: double, y: double, r: double): Shape is
     super(x, y)
 
-    describe() -> string => "a circle of radius {r} at ({x}, {y})"
+    describe() -> string =>
+        "a circle of radius {r} at ({x}, {y})"
 
     copy() -> Shape => CIRCLE(x, y, r)
 si
@@ -26,13 +27,20 @@ let shapes = [POINT(1.0, 2.0), CIRCLE(3.0, 4.0, 5.0)]
 
 shapes |> each(shape => write_line(shape.describe()))
 
-shapes |> each(shape =>
-    let copy = shape.copy() in
-    write_line("{copy.describe()}, the same object: {copy == shape}"))
+shapes
+    |> each(shape =>
+        let copy = shape.copy() in
+        write_line(
+            "{copy.describe()}, the same object: {copy == shape}"
+        )
+    )
 
-shapes |> each(shape =>
-    write_line(
-        case shape
-        when circle: CIRCLE then "radius {circle.r}"
-        when _: POINT then "no radius: a point has none"
-        esac))
+shapes
+    |> each(shape =>
+        write_line(
+            case shape
+            when circle: CIRCLE then "radius {circle.r}"
+            when _: POINT then "no radius: a point has none"
+            esac
+        )
+    )

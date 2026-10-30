@@ -7,7 +7,11 @@ multiples(value: long, largest: int, limit: long) -> long{} is
 
     for i in 2::largest do
         if value <= limit / factorial(long(i)) then
-            yield in multiples(value * factorial(long(i)), i, limit)
+            yield in multiples(
+                value * factorial(long(i)),
+                i,
+                limit
+            )
         fi
     od
 si
@@ -19,7 +23,9 @@ decompose(value: long, largest: int) -> LIST[int]? is
 
     for i in reverse(2::largest) do
         if value % factorial(long(i)) == 0L then
-            if let rest = decompose(value / factorial(long(i)), i) then
+            if let
+                rest = decompose(value / factorial(long(i)), i)
+            then
                 rest.insert(0, i)
 
                 return rest
@@ -36,7 +42,8 @@ as_factorials(value: long) -> string =>
             |> distinct()
             |> map(i => (
                 let times = factors |> filter(* == i) |> count()
-                if times == 1 then "{i}!" else "{i}!^{times}" fi))
+                if times == 1 then "{i}!" else "{i}!^{times}" fi
+            ))
             |> join(" x ")
     else
         "not a product of factorials"
@@ -44,10 +51,11 @@ as_factorials(value: long) -> string =>
 
 let limit = 1L << 53
 
-let numbers = multiples(1L, biggest_factorial, limit)
-    |> distinct()
-    |> sort()
-    |> collect()
+let numbers =
+    multiples(1L, biggest_factorial, limit)
+        |> distinct()
+        |> sort()
+        |> collect()
 
 write_line("the first 50 Jordan-Polya numbers:")
 
@@ -55,18 +63,23 @@ numbers
     |> take(50)
     |> chunk(10)
     |> each(row =>
-        write_line(row |> map(n => "{n,7}") |> join("")))
+        write_line(row |> map(n => "{n,7}") |> join(""))
+    )
 
-let below_a_hundred_million = numbers
-    |> take_while(* < 100000000L)
-    |> reduce(1L, (largest, n) => n)
+let below_a_hundred_million =
+    numbers
+        |> take_while(* < 100000000L)
+        |> reduce(1L, (largest, n) => n)
 
 write_line("")
-write_line("largest below 100 million: {below_a_hundred_million}"
-    " = {as_factorials(below_a_hundred_million)}")
+write_line(
+    "largest below 100 million: {below_a_hundred_million}"
+    " = {as_factorials(below_a_hundred_million)}"
+)
 write_line("")
 
 [800, 1050, 1800, 2800, 3800]
     |> each(n => (
         let value = numbers[n - 1]
-        write_line("{n,5}: {value,17} = {as_factorials(value)}")))
+        write_line("{n,5}: {value,17} = {as_factorials(value)}")
+    ))

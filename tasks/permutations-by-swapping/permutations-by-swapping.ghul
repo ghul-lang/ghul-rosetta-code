@@ -3,7 +3,10 @@ use default
 use STEP = (order: List[int], sign: int)
 
 swap(values: LIST[int], left: int, right: int) is
-    (values[left], values[right]) = (values[right], values[left])
+    (values[left], values[right]) = (
+        values[right],
+        values[left]
+    )
 si
 
 permutations(size: int) -> STEP{} is
@@ -20,9 +23,12 @@ permutations(size: int) -> STEP{} is
         for index in 0..size do
             let target = index + facing[index]
 
-            if target >= 0 /\ target < size /\
+            if
+                target >= 0 /\
+                target < size /\
                 values[index] > values[target] /\
-                values[index] > mobile then
+                values[index] > mobile
+            then
                 mobile = values[index]
                 position = index
             fi
@@ -43,12 +49,18 @@ permutations(size: int) -> STEP{} is
     od
 si
 
-[3, 4] |> each(size => (
-    write_line("permutations of {size} items, by adjacent swaps:")
+[3, 4]
+    |> each(size => (
+        write_line(
+            "permutations of {size} items, by adjacent swaps:"
+        )
 
-    permutations(size)
-        |> each(step =>
-            write_line("  {step.order |> join(" ")}  sign {step.sign,2}"))
+        permutations(size)
+            |> each(step =>
+                write_line(
+                    "  {step.order |> join(" ")}  sign {step.sign,2}"
+                )
+            )
 
-    write_line()
-))
+        write_line()
+    ))

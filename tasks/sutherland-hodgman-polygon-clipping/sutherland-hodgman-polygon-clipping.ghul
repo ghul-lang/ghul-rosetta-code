@@ -3,29 +3,37 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
-let subject =
-    [(x = 50.0D, y = 150.0D), (x = 200.0D, y = 50.0D),
-     (x = 350.0D, y = 150.0D), (x = 350.0D, y = 300.0D),
-     (x = 250.0D, y = 300.0D), (x = 200.0D, y = 250.0D),
-     (x = 150.0D, y = 350.0D), (x = 100.0D, y = 250.0D),
-     (x = 100.0D, y = 200.0D)]
+let subject = [
+    (x = 50.0D, y = 150.0D), (x = 200.0D, y = 50.0D),
+    (x = 350.0D, y = 150.0D), (x = 350.0D, y = 300.0D),
+    (x = 250.0D, y = 300.0D), (x = 200.0D, y = 250.0D),
+    (x = 150.0D, y = 350.0D), (x = 100.0D, y = 250.0D),
+    (x = 100.0D, y = 200.0D)
+]
 
-let window =
-    [(x = 100.0D, y = 100.0D), (x = 300.0D, y = 100.0D),
-     (x = 300.0D, y = 300.0D), (x = 100.0D, y = 300.0D)]
+let window = [
+    (x = 100.0D, y = 100.0D), (x = 300.0D, y = 100.0D),
+    (x = 300.0D, y = 300.0D), (x = 100.0D, y = 300.0D)
+]
 
 side(at: Point, from: Point, to: Point) -> double =>
     (to.x - from.x) * (at.y - from.y) -
     (to.y - from.y) * (at.x - from.x)
 
-crossing(first: Point, second: Point, from: Point, to: Point) ->
-        Point => (
+crossing(
+    first: Point,
+    second: Point,
+    from: Point,
+    to: Point
+) -> Point => (
     let near = side(first, from, to)
     let far = side(second, from, to)
     let part = near / (near - far)
 
-    (x = first.x + (second.x - first.x) * part,
-     y = first.y + (second.y - first.y) * part)
+    (
+        x = first.x + (second.x - first.x) * part,
+        y = first.y + (second.y - first.y) * part
+    )
 )
 
 same(a: Point, b: Point) -> bool => a.x == b.x /\ a.y == b.y
@@ -36,13 +44,16 @@ extend(kept: LIST[Point], at: Point) is
     fi
 si
 
-clip(polygon: Collections.List[Point], from: Point, to: Point) ->
-        LIST[Point] is
+clip(
+    polygon: Collections.List[Point],
+    from: Point,
+    to: Point
+) -> LIST[Point] is
     let kept = LIST()
 
     for index in 0..polygon.count do
-        let previous = polygon[(index + polygon.count - 1) %
-                               polygon.count]
+        let previous =
+            polygon[(index + polygon.count - 1) % polygon.count]
         let at = polygon[index]
 
         let here = side(at, from, to) >= 0.0D
@@ -57,7 +68,9 @@ clip(polygon: Collections.List[Point], from: Point, to: Point) ->
         fi
     od
 
-    if kept.count > 1 /\ same(kept[0], kept[kept.count - 1]) then
+    if
+        kept.count > 1 /\ same(kept[0], kept[kept.count - 1])
+    then
         kept.remove_at(kept.count - 1)
     fi
 
@@ -67,10 +80,11 @@ si
 let clipped mut = LIST(subject)
 
 for index in 0..window.count do
-    clipped =
-        clip(clipped,
-             window[index],
-             window[(index + 1) % window.count])
+    clipped = clip(
+        clipped,
+        window[index],
+        window[(index + 1) % window.count]
+    )
 od
 
 write_line("clipped polygon of {clipped.count} points:")

@@ -18,7 +18,10 @@ search(base: string, today: DateTime, wanted: string) is
         write_line(url)
         write_line("------")
 
-        for line in log.split(['\n']) |> filter(l => l.contains(wanted)) do
+        for
+            line in log.split(['\n'])
+                |> filter(l => l.contains(wanted))
+        do
             write_line(line)
         od
 
@@ -27,9 +30,12 @@ search(base: string, today: DateTime, wanted: string) is
 si
 
 let wanted = args[0]
-let berlin =
-    System.TimeZoneInfo.find_system_time_zone_by_id("Europe/Berlin")
-let now =
-    System.TimeZoneInfo.convert_time_from_utc(DateTime.utc_now, berlin)
+let berlin = System.TimeZoneInfo.find_system_time_zone_by_id(
+    "Europe/Berlin"
+)
+let now = System.TimeZoneInfo.convert_time_from_utc(
+    DateTime.utc_now,
+    berlin
+)
 
 search("http://tclers.tk/conferences/tcl/", now, wanted)

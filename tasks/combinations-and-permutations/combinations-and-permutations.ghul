@@ -12,18 +12,25 @@ let g = 7.0
 let coefficients = [
     0.99999999999980993, 676.5203681218851, -1259.1392167224028,
     771.32342877765313, -176.61502916214059, 12.507343278686905,
-    -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
+    -0.13857109526572012, 9.9843695780195716e-6,
+    1.5056327351493116e-7
 ]
 
 log_gamma(x: double) -> double =>
     let
-        xm = x - 1.0, t = xm + g + 0.5,
-        term = (sum, i) => sum + coefficients[i] / (xm + double(i)),
+        xm = x - 1.0,
+        t = xm + g + 0.5,
+        term =
+            (sum, i) =>
+                sum + coefficients[i] / (xm + double(i)),
         a = 1::8 |> reduce(coefficients[0], term),
-        half_log_2pi = 0.5 * System.Math.log(2.0 * System.Math.pi)
+        half_log_2pi =
+            0.5 * System.Math.log(2.0 * System.Math.pi)
     in
-        half_log_2pi + (xm + 0.5) *
-            System.Math.log(t) - t + System.Math.log(a)
+        half_log_2pi +
+        (xm + 0.5) * System.Math.log(t) -
+        t +
+        System.Math.log(a)
 
 // A value too large for a double is shown as a mantissa and a
 // decimal exponent, both taken from the natural log rather than
@@ -38,8 +45,7 @@ scientific(ln_value: double) -> string =>
 
 approx_npk(n: int, k: int) -> string =>
     scientific(
-        log_gamma(double(n + 1)) -
-        log_gamma(double(n - k + 1))
+        log_gamma(double(n + 1)) - log_gamma(double(n - k + 1))
     )
 
 approx_nck(n: int, k: int) -> string =>
@@ -57,14 +63,18 @@ truncated(v: bigint) -> string =>
         "{text[0..32]}... ({text.length - 32} more digits)"
     fi
 
-write_line("permutations from 1 to 12, exact integer arithmetic:")
+write_line(
+    "permutations from 1 to 12, exact integer arithmetic:"
+)
 
 for k in 1::11 do
     write_line("P(12,{k}) = {npk(12, k)}")
 od
 
 write_line("")
-write_line("combinations from 10 to 60, exact integer arithmetic:")
+write_line(
+    "combinations from 10 to 60, exact integer arithmetic:"
+)
 
 for step in 1::5 do
     let k = step * 10
@@ -73,7 +83,9 @@ for step in 1::5 do
 od
 
 write_line("")
-write_line("permutations from 5 to 15000, exact and approximate:")
+write_line(
+    "permutations from 5 to 15000, exact and approximate:"
+)
 
 for n in [5, 50, 500, 1000, 5000, 15000] do
     let k = n / 3
@@ -83,7 +95,9 @@ for n in [5, 50, 500, 1000, 5000, 15000] do
 od
 
 write_line("")
-write_line("combinations from 100 to 1000, exact and approximate:")
+write_line(
+    "combinations from 100 to 1000, exact and approximate:"
+)
 
 for n in 1::10 do
     let m = n * 100

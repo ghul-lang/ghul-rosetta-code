@@ -19,7 +19,9 @@ show(text: string, target: char) is
     let result = squeeze(text, target)
 
     write_line("squeeze character: '{target}'")
-    write_line("original: length = {text.length}, string = <<<{text}>>>")
+    write_line(
+        "original: length = {text.length}, string = <<<{text}>>>"
+    )
     write_line(
         "squeezed: length = {result.length}, string = <<<{result}>>>"
     )

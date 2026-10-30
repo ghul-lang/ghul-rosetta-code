@@ -5,25 +5,36 @@ use Raster.IMAGE
 use EDGE = (start: string, finish: string, cost: int)
 use REACHED = (cost: int, previous: string)
 
-shortest_paths(edges: EDGE[], nodes: string[], source: string)
-    -> MAP[string, REACHED] is
+shortest_paths(
+    edges: EDGE[],
+    nodes: string[],
+    source: string
+) -> MAP[string, REACHED] is
     let best = MAP[string, REACHED]()
     let unvisited = LIST(nodes)
 
     best[source] = (cost = 0, previous = "")
 
-    while let nearest = unvisited
-        |> filter(best.contains_key)
-        |> min_by(node => best[node].cost)
+    while let
+        nearest = unvisited
+            |> filter(best.contains_key)
+            |> min_by(node => best[node].cost)
     do
         unvisited.remove(nearest)
 
-        for edge in edges |> filter(edge => edge.start =~ nearest) do
+        for
+            edge in edges
+                |> filter(edge => edge.start =~ nearest)
+        do
             let through = best[nearest].cost + edge.cost
 
-            if !best.contains_key(edge.finish) \/
-                through < best[edge.finish].cost then
-                best[edge.finish] = (cost = through, previous = nearest)
+            if
+                !best.contains_key(edge.finish) \/
+                through < best[edge.finish].cost
+            then
+                best[edge.finish] = (
+                    cost = through, previous = nearest
+                )
             fi
         od
     od
@@ -40,14 +51,21 @@ let edges = [
     (start = "c", finish = "d", cost = 11),
     (start = "c", finish = "f", cost = 2),
     (start = "d", finish = "e", cost = 6),
-    (start = "e", finish = "f", cost = 9)]
+    (start = "e", finish = "f", cost = 9)
+]
 
 let nodes = ["a", "b", "c", "d", "e", "f"]
 
 let places = MAP[string, (x: double, y: double)]()
 let labels = MAP[string, (x: double, y: double)]()
 
-place(node: string, x: double, y: double, at: double, above: double) is
+place(
+    node: string,
+    x: double,
+    y: double,
+    at: double,
+    above: double
+) is
     places[node] = (x = x, y = y)
     labels[node] = (x = at, y = above)
 si
@@ -63,7 +81,7 @@ let best = shortest_paths(edges, nodes, "a")
 
 on_tree(edge: EDGE) -> bool =>
     best.contains_key(edge.finish) /\
-        best[edge.finish].previous =~ edge.start
+    best[edge.finish].previous =~ edge.start
 
 let tree_colour = (red = 35ub, green = 85ub, blue = 170ub)
 let other_colour = (red = 190ub, green = 194ub, blue = 205ub)
@@ -80,11 +98,17 @@ down(pixels: double) -> double =>
     image.to_user(0.0, 0.0).y - image.to_user(0.0, pixels).y
 
 label(x: double, y: double, height: double, text: string) is
-    let half = across(image.text_width(height, text) / 2.0 + 4.0)
+    let half = across(
+        image.text_width(height, text) / 2.0 + 4.0
+    )
 
     image.colour(255ub, 255ub, 255ub)
     image.fill_rectangle(
-        x - half, y - down(4.0), x + half, y + down(height + 2.0))
+        x - half,
+        y - down(4.0),
+        x + half,
+        y + down(height + 2.0)
+    )
 
     image.colour(ink)
     image.text(x, y, height, text, Anchor.CENTRE)
@@ -112,7 +136,9 @@ for edge in edges do
     label(
         (from.x + to.x) / 2.0,
         (from.y + to.y) / 2.0 - down(5.0),
-        13.0, "{edge.cost}")
+        13.0,
+        "{edge.cost}"
+    )
 od
 
 for node in nodes do
@@ -126,13 +152,22 @@ for node in nodes do
     image.dot(place.x, place.y, 16.0)
 
     image.colour(255ub, 255ub, 255ub)
-    image.text(place.x, place.y - down(6.0), 17.0, node, Anchor.CENTRE)
+    image.text(
+        place.x,
+        place.y - down(6.0),
+        17.0,
+        node,
+        Anchor.CENTRE
+    )
 od
 
 image.colour(ink)
 image.text(
-    -0.4, 2.80, 15.0,
-    "shortest path tree from a, with edge costs")
+    -0.4,
+    2.80,
+    15.0,
+    "shortest path tree from a, with edge costs"
+)
 
 image.write("dijkstra.png")
 

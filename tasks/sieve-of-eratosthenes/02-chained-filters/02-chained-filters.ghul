@@ -15,7 +15,11 @@ count_up(out: Numbers) -> COROUTINE is
     out.send(null)
 si
 
-drop_multiples(prime: int, into: Numbers, out: Numbers) -> COROUTINE is
+drop_multiples(
+    prime: int,
+    into: Numbers,
+    out: Numbers
+) -> COROUTINE is
     do
         let value = await into.receive()
 

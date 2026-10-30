@@ -28,7 +28,8 @@ for _ in 0..60 do
     image.dot(
         -120.0D + 240.0D * random.next_double(),
         200.0D + 270.0D * random.next_double(),
-        0.8D)
+        0.8D
+    )
 od
 
 let bottom mut = 0.0D
@@ -37,7 +38,12 @@ for tier in tiers do
     image.colour(95ub, 95ub, 105ub)
     let left = -tier.half_width
 
-    image.fill_rectangle(left, bottom, tier.half_width, tier.top)
+    image.fill_rectangle(
+        left,
+        bottom,
+        tier.half_width,
+        tier.top
+    )
 
     image.colour(120ub, 120ub, 130ub)
     image.fill_rectangle(left, bottom, left + 3.0D, tier.top)
@@ -69,8 +75,11 @@ while double(floor) * floor_height < 340.0D do
             fi
 
             image.fill_rectangle(
-                x, y + 1.0D,
-                x + window_width - 1.5D, y + floor_height - 1.0D)
+                x,
+                y + 1.0D,
+                x + window_width - 1.5D,
+                y + floor_height - 1.0D
+            )
 
             x = x + window_width
         od

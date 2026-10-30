@@ -1,13 +1,24 @@
 use default
 
-let table = (0..256)
-    |> map(n => 0..8 |> reduce(uint(n), (c, _) =>
-        if (c & 1u) != 0u then 0xEDB88320u ^ (c >> 1) else c >> 1 fi))
-    |> collect()
+let table =
+    (0..256)
+        |> map(n =>
+            0..8
+                |> reduce(uint(n), (c, _) =>
+                    if (c & 1u) != 0u then
+                        0xEDB88320u ^ (c >> 1)
+                    else
+                        c >> 1
+                    fi
+                )
+        )
+        |> collect()
 
 crc32(data: ubyte[]) -> uint =>
-    let step = (crc, b) =>
-        table[int((crc ^ uint(b)) & 0xFFu)] ^ (crc >> 8) in
+    let step =
+        (crc, b) =>
+            table[int((crc ^ uint(b)) & 0xFFu)] ^ (crc >> 8)
+    in
     (data |> reduce(0xFFFFFFFFu, step)) ^ 0xFFFFFFFFu
 
 let text = "The quick brown fox jumps over the lazy dog"

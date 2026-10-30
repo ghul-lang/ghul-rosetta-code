@@ -8,8 +8,13 @@ let points = [
 ]
 
 distance(a: int, b: int) -> double =>
-    let (ax, ay) = points[a], (bx, by) = points[b] in
-    double.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by))
+    let
+        (ax, ay) = points[a],
+        (bx, by) = points[b]
+    in
+        double.sqrt(
+            (ax - bx) * (ax - bx) + (ay - by) * (ay - by)
+        )
 
 length(edges: Edge{}) -> double =>
     edges |> sum_by((from, to) => distance(from, to))
@@ -20,9 +25,12 @@ spanning_tree(n: int) -> Edge{} => (
 
     while in_tree.count < n do
         let next =
-            [(from, to)
-                for from in in_tree for to in 0..n
-                if !in_tree.contains(to)]
+            [
+                (from, to)
+                for from in in_tree
+                for to in 0..n
+                if !in_tree.contains(to)
+            ]
                 |> min_by((from, to) => distance(from, to))!
 
         edges.add(next)
@@ -41,20 +49,22 @@ perfect_matching(vertices: List[int]) -> Edge{} =>
                 let rest =
                     vertices
                         |> index()
-                        |> filter((at, _) => at != 0 /\ at != partner)
+                        |> filter((at, _) =>
+                            at != 0 /\ at != partner
+                        )
                         |> map((_, vertex) => vertex)
                         |> collect()
                 in
-                [(from = vertices[0], to = vertices[partner])] ++
-                    perfect_matching(rest) |> collect())
+                [
+                    (from = vertices[0], to = vertices[partner])
+                ] ++ perfect_matching(rest)
+                    |> collect()
+            )
             |> min_by(matching => length(matching))!
     fi
 
 eulerian_circuit(n: int, edges: List[Edge]) -> int{} is
-    let unused =
-        0..n
-            |> map(_ => LIST())
-            |> collect()
+    let unused = 0..n |> map(_ => LIST()) |> collect()
     let used = repeat(false, edges.count) |> collect_mutable()
 
     for (edge, (from, to)) in edges |> index() do
@@ -67,7 +77,8 @@ eulerian_circuit(n: int, edges: List[Edge]) -> int{} is
 
     while stack.count > 0 do
         let vertex = stack.peek()
-        let next = unused[vertex] |> find((edge, _) => !used[edge])
+        let next =
+            unused[vertex] |> find((edge, _) => !used[edge])
 
         if let (edge, other) = next then
             used[edge] = true
@@ -83,14 +94,18 @@ si
 let n = points.count
 let tree = spanning_tree(n)
 
-let odd = 0..n
-    |> filter(v =>
-        tree |> count((from, to) => from == v \/ to == v) % 2 == 1)
-    |> collect()
+let odd =
+    0..n
+        |> filter(v =>
+            tree
+                |> count((from, to) =>
+                    from == v \/ to == v
+                ) % 2 == 1
+        )
+        |> collect()
 
 let matching = perfect_matching(odd)
-let circuit =
-    eulerian_circuit(n, tree ++ matching |> collect())
+let circuit = eulerian_circuit(n, tree ++ matching |> collect())
 
 let visited = SET()
 let tour = circuit |> filter(visited.add) |> collect_mutable()
@@ -98,7 +113,9 @@ let tour = circuit |> filter(visited.add) |> collect_mutable()
 tour.add(tour[0])
 
 let tour_edges =
-    tour |> windows(2) |> map(pair => (from = pair[0], to = pair[1]))
+    tour
+        |> windows(2)
+        |> map(pair => (from = pair[0], to = pair[1]))
 
 write_line("points:            {points}")
 write_line("spanning tree:     {tree}")

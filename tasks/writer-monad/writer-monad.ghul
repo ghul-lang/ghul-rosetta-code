@@ -4,12 +4,18 @@ use System.Math.sqrt
 
 use Writer[T] = (value: T, log: string)
 
-unit[T](value: T, note: string) -> Writer[T] =>
-    (value = value, log = "  {note,-17}: {value}\n")
+unit[T](value: T, note: string) -> Writer[T] => (
+    value = value,
+    log = "  {note,-17}: {value}\n"
+)
 
->>=[T, U](writer: Writer[T], f: (T) -> Writer[U]) -> Writer[U] => (
+>>=[T, U](
+    writer: Writer[T],
+    f: (T) -> Writer[U]
+) -> Writer[U] => (
     let next = f(writer.value)
-    (value = next.value, log = "{writer.log}{next.log}"))
+    (value = next.value, log = "{writer.log}{next.log}")
+)
 
 root(value: int) -> Writer[double] =>
     unit(sqrt(cast(value)), "Took square root")
@@ -20,7 +26,8 @@ add_one(value: double) -> Writer[double] =>
 half(value: double) -> Writer[double] =>
     unit(value / 2.0D, "Divided by two")
 
-let golden = unit(5, "Initial value") >>= root >>= add_one >>= half
+let golden =
+    unit(5, "Initial value") >>= root >>= add_one >>= half
 
 write_line("The golden ratio is {golden.value}")
 write_line()

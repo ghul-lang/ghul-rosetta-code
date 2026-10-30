@@ -39,7 +39,8 @@ for spoke in 0..24 do
     let angle = 2.0D * pi * double(spoke) / 24.0D
 
     line(
-        200, 200,
+        200,
+        200,
         200 + int(180.0D * cos(angle)),
         200 + int(180.0D * sin(angle))
     )

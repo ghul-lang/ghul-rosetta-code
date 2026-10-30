@@ -9,7 +9,9 @@ parse_all(text: string) -> Tensor{} is
     let at mut = 0
 
     skip_spaces() is
-        while at < text.length /\ char.is_white_space(text[at]) do
+        while
+            at < text.length /\ char.is_white_space(text[at])
+        do
             at = at + 1
         od
     si
@@ -69,9 +71,11 @@ strides_of(dimensions: List[int]) -> List[int] =>
         |> collect()
 
 embed(tensor: Tensor, strides: List[int]) -> List[int] is
-    let size = tensor |> shape()
-        |> zip(strides)
-        |> sum_by((extent, stride) => (extent - 1) * stride)
+    let size =
+        tensor
+            |> shape()
+            |> zip(strides)
+            |> sum_by((extent, stride) => (extent - 1) * stride)
 
     let values = repeat(0, size + 1) |> collect_mutable()
 
@@ -81,7 +85,11 @@ embed(tensor: Tensor, strides: List[int]) -> List[int] is
             values[offset] = value
         when (items): Tensor.ARRAY then
             for (i, item) in items |> index() do
-                place(item, level + 1, offset + i * strides[level])
+                place(
+                    item,
+                    level + 1,
+                    offset + i * strides[level]
+                )
             od
         esac
     si
@@ -104,17 +112,24 @@ deconvolve_1d(g: List[int], f: List[int]) -> List[int] is
 si
 
 reshape(
-    values: List[int], dimensions: List[int], strides: List[int]
+    values: List[int],
+    dimensions: List[int],
+    strides: List[int]
 ) -> Tensor is
     build(level, offset) =>
         if level == dimensions.count then
             Tensor.SCALAR(values[offset])
         else
             Tensor.ARRAY(
-                0..dimensions[level]
+                0 .. dimensions[level]
                     |> map(i =>
-                        build(level + 1, offset + i * strides[level]))
-                    |> collect())
+                        build(
+                            level + 1,
+                            offset + i * strides[level]
+                        )
+                    )
+                    |> collect()
+            )
         fi
 
     build(0, 0)
@@ -126,10 +141,15 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
     let h_shape =
         g_shape
             |> zip(shape(f))
-            |> map((g_extent, f_extent) => g_extent - f_extent + 1)
+            |> map((g_extent, f_extent) =>
+                g_extent - f_extent + 1
+            )
             |> collect()
 
-    let h_values = deconvolve_1d(embed(g, strides), embed(f, strides))
+    let h_values = deconvolve_1d(
+        embed(g, strides),
+        embed(f, strides)
+    )
 
     reshape(h_values, h_shape, strides)
 )
@@ -137,7 +157,8 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
 show(tensor: Tensor) -> string =>
     case tensor
     when (value): Tensor.SCALAR then "{value}"
-    when (items): Tensor.ARRAY then "[{items |> map(show) |> join(", ")}]"
+    when (items): Tensor.ARRAY then
+        "[{items |> map(show) |> join(", ")}]"
     esac
 
 show_across_lines(tensor: Tensor) -> string =>
@@ -147,10 +168,12 @@ show_across_lines(tensor: Tensor) -> string =>
         show(tensor)
     fi
 
-let tests = IO.File.read_all_text("test-data.txt") |> parse_all()
-    |> chunk(3)
-    |> map(c => (h = c[0], f = c[1], g = c[2]))
-    |> collect()
+let tests =
+    IO.File.read_all_text("test-data.txt")
+        |> parse_all()
+        |> chunk(3)
+        |> map(c => (h = c[0], f = c[1], g = c[2]))
+        |> collect()
 
 for (dimension, (h, f, g)) in tests |> index() do
     let h_found = deconvolve(g, f) =~ h
@@ -158,7 +181,8 @@ for (dimension, (h, f, g)) in tests |> index() do
 
     write_line(
         "dimension {dimension + 1}: deconv(g, f) = h {h_found}, "
-        "deconv(g, h) = f {f_found}")
+        "deconv(g, h) = f {f_found}"
+    )
 od
 
 let (h, f, g) = tests[2]

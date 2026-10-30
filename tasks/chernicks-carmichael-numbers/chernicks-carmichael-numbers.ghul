@@ -29,5 +29,7 @@ for n in 3::9 do
     let carmichael = factors |> product()
 
     write_line("a({n}) = U({n}, {m}) = {carmichael}")
-    write_line("     = {factors |> map(f => "{f}") |> join(" * ")}")
+    write_line(
+        "     = {factors |> map(f => "{f}") |> join(" * ")}"
+    )
 od

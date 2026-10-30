@@ -7,12 +7,19 @@ checksum(code: string) -> int =>
         |> filter(char.is_digit)
         |> index()
         |> reduce(0, (total, digit) =>
-            total + digit_value(digit.value) *
-                if digit.index % 2 == 0 then 1 else 3 fi)
+            total +
+            digit_value(digit.value) *
+            if digit.index % 2 == 0 then 1 else 3 fi
+        )
 
-for code in ["978-0596528126", "978-0596528120",
-             "978-1788399081", "978-1788399083"] do
-    let verdict = if checksum(code) % 10 == 0 then "good" else "bad" fi
+for
+    code in [
+        "978-0596528126", "978-0596528120",
+        "978-1788399081", "978-1788399083"
+    ]
+do
+    let verdict =
+        if checksum(code) % 10 == 0 then "good" else "bad" fi
 
     write_line("{code}: {verdict}")
 od

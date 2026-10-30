@@ -14,11 +14,13 @@ largest_truncatable(base: int) -> bigint is
 
     while level.count > 0 do
         largest = level |> max_by(c => c)!
-        level =
-            [bigint(digit) * place + candidate
-                for candidate in level for digit in 1::base - 1]
-                |> filter(is_prime)
-                |> collect()
+        level = [
+            bigint(digit) * place + candidate
+            for candidate in level
+            for digit in 1::base - 1
+        ]
+            |> filter(is_prime)
+            |> collect()
 
         place = place * radix
     od

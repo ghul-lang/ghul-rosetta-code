@@ -11,18 +11,25 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
     init(..) is
         _grid =
             "{key}ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            |> clean()
-            |> distinct()
-            |> map(c => "{c}")
-            |> join("")
+                |> clean()
+                |> distinct()
+                |> map(c => "{c}")
+                |> join("")
     si
 
     clean(text: string) -> char{} =>
         text.to_upper_invariant()
-        |> filter(c => c >= 'A' /\ c <= 'Z')
-        |> filter(c => alphabet != Alphabet.NO_Q \/ c != 'Q')
-        |> map(c =>
-            if alphabet == Alphabet.J_IS_I /\ c == 'J' then 'I' else c fi)
+            |> filter(c => c >= 'A' /\ c <= 'Z')
+            |> filter(c =>
+                alphabet != Alphabet.NO_Q \/ c != 'Q'
+            )
+            |> map(c =>
+                if alphabet == Alphabet.J_IS_I /\ c == 'J' then
+                    'I'
+                else
+                    c
+                fi
+            )
 
     digraphs(text: string) -> (char, char){} is
         let letters = text |> clean() |> collect()
@@ -31,7 +38,9 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         while i < letters.count do
             let first = letters[i]
 
-            if i + 1 < letters.count /\ letters[i + 1] != first then
+            if
+                i + 1 < letters.count /\ letters[i + 1] != first
+            then
                 yield (first, letters[i + 1])
                 i = i + 2
             else
@@ -42,8 +51,11 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
     si
 
     shift(pair: (char, char), step: int) -> string =>
-        let (a, b) = pair, (row_a, col_a) = position(a) in
-        let (row_b, col_b) = position(b) in
+        let
+            (a, b) = pair,
+            (row_a, col_a) = position(a)
+        in
+            let (row_b, col_b) = position(b) in
             if row_a == row_b then
                 "{at(row_a, col_a + step)}{at(row_b, col_b + step)}"
             elif col_a == col_b then
@@ -56,7 +68,6 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         let index = _grid.index_of(c) in
         (index / 5, index % 5)
 
-
     at(row: int, col: int) -> char =>
         _grid[(row + 5) % 5 * 5 + (col + 5) % 5]
 
@@ -67,7 +78,10 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         text |> digraphs() |> map(shift(*, -1)) |> join(" ")
 
     prepared(text: string) -> string =>
-        text |> digraphs() |> map((a, b) => "{a}{b}") |> join(" ")
+        text
+            |> digraphs()
+            |> map((a, b) => "{a}{b}")
+            |> join(" ")
 si
 
 let key = "Playfair example"

@@ -1,7 +1,6 @@
 use IO.Std.write_line
 
-halve(n: int) -> int? =>
-    if n % 2 == 0 then n / 2 else null fi
+halve(n: int) -> int? => if n % 2 == 0 then n / 2 else null fi
 
 describe(n: int) -> string? =>
     if n > 0 then "positive {n}" else null fi

@@ -1,7 +1,9 @@
 use default
 
 rotate(text: string, key: int) -> string =>
-    text |> map(letter => rotate_letter(letter, key)) |> string()
+    text
+        |> map(letter => rotate_letter(letter, key))
+        |> string()
 
 rotate_letter(letter: char, key: int) -> char =>
     let first =
@@ -15,7 +17,8 @@ rotate_letter(letter: char, key: int) -> char =>
     fi
 
 encode(text: string, key: int) -> string => rotate(text, key)
-decode(text: string, key: int) -> string => rotate(text, 26 - key)
+decode(text: string, key: int) -> string =>
+    rotate(text, 26 - key)
 
 let message = "The Quick Brown Fox Jumps Over The Lazy Dog!"
 let encoded = encode(message, 3)

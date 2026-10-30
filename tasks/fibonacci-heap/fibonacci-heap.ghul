@@ -220,7 +220,12 @@ class HEAP is
 
     _cut(node: NODE, above: NODE) is
         if above.child == node then
-            above.child = if node.right == node then null else node.right fi
+            above.child =
+                if node.right == node then
+                    null
+                else
+                    node.right
+                fi
         fi
 
         _unlink(node)
@@ -259,25 +264,35 @@ drain(heap: HEAP) -> string => (
 
 let first = HEAP()
 
-[23, 7, 21, 3, 17, 24] |> each(key => first.insert(key, "a{key}"))
+[23, 7, 21, 3, 17, 24]
+    |> each(key => first.insert(key, "a{key}"))
 
-write_line("first holds {first.count}, least {first.minimum!.key}")
+write_line(
+    "first holds {first.count}, least {first.minimum!.key}"
+)
 
 let second = HEAP()
 
-[18, 52, 38, 39, 41] |> each(key => second.insert(key, "b{key}"))
+[18, 52, 38, 39, 41]
+    |> each(key => second.insert(key, "b{key}"))
 
-write_line("second holds {second.count}, least {second.minimum!.key}")
+write_line(
+    "second holds {second.count}, least {second.minimum!.key}"
+)
 
 first.merge(second)
 
-write_line("merged holds {first.count}, least {first.minimum!.key}")
+write_line(
+    "merged holds {first.count}, least {first.minimum!.key}"
+)
 
 let watched = first.insert(46, "watched")
 
 first.decrease_key(watched, 5)
 
-write_line("46 decreased to {watched.key}, least {first.minimum!.key}")
+write_line(
+    "46 decreased to {watched.key}, least {first.minimum!.key}"
+)
 
 let doomed = first.insert(99, "doomed")
 

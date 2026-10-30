@@ -9,7 +9,10 @@ heron_area(a: int, b: int, c: int) -> long? is
         2L * al * al * bl * bl +
         2L * bl * bl * cl * cl +
         2L * cl * cl * al * al
-    let squares = al * al * al * al + bl * bl * bl * bl + cl * cl * cl * cl
+    let squares =
+        al * al * al * al +
+        bl * bl * bl * bl +
+        cl * cl * cl * cl
     let sixteen_area_sq = cross_terms - squares
 
     if sixteen_area_sq <= 0L then
@@ -50,10 +53,16 @@ si
 
 let triangles =
     (1::200)
-        |> flat_map(a => (a::200)
-            |> flat_map(b => (b::200)
-                |> filter(c => a + b > c /\ gcd(gcd(a, b), c) == 1)
-                |> map(try_triangle(a, b, *))))
+        |> flat_map(a =>
+            (a::200)
+                |> flat_map(b =>
+                    (b::200)
+                        |> filter(c =>
+                            a + b > c /\ gcd(gcd(a, b), c) == 1
+                        )
+                        |> map(try_triangle(a, b, *))
+                )
+        )
         |> filter(t => t?)
         |> map(t => t!)
         |> sort(compare_triangles)
@@ -72,7 +81,9 @@ write_line(
     "primitive Heronian triangles with sides <= 200: {triangles.count}"
 )
 write_line("")
-write_line("first ten, ordered by area, then perimeter, then longest side:")
+write_line(
+    "first ten, ordered by area, then perimeter, then longest side:"
+)
 
 for t in triangles |> take(10) do
     describe(t)

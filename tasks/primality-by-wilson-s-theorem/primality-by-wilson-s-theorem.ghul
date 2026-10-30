@@ -6,11 +6,14 @@ factorial_mod(n: long, m: long) -> long =>
 is_wilson_prime(p: long) -> bool =>
     p > 1L /\ factorial_mod(p - 1L, p) == p - 1L
 
-let tested = [2L, 3L, 9L, 15L, 29L, 37L, 47L, 57L, 67L, 77L, 87L, 97L,
-    237L, 409L, 659L]
+let tested = [
+    2L, 3L, 9L, 15L, 29L, 37L, 47L, 57L, 67L, 77L, 87L, 97L,
+    237L, 409L, 659L
+]
 
 for p in tested do
-    let verdict = if is_wilson_prime(p) then "prime" else "composite" fi
+    let verdict =
+        if is_wilson_prime(p) then "prime" else "composite" fi
     write_line("{p,4} {verdict}")
 od
 
@@ -18,6 +21,7 @@ write_line("")
 write_line("primes below 100:")
 write_line(
     (1L..100L)
-    |> filter(is_wilson_prime)
-    |> map(p => "{p}")
-    |> join(" "))
+        |> filter(is_wilson_prime)
+        |> map(p => "{p}")
+        |> join(" ")
+)

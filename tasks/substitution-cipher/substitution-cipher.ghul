@@ -15,7 +15,8 @@ substitute(text: string, from: string, to: string) -> string =>
                 if i >= 0 then char.to_lower(to[i]) else c fi
             else
                 c
-            fi)
+            fi
+        )
         |> string()
 
 encrypt(text: string) -> string =>
@@ -34,4 +35,6 @@ File.write_all_text("decrypted.txt", decrypt(ciphertext))
 write_line("original:  {source}")
 write_line("encrypted: {File.read_all_text("cipher.txt")}")
 write_line("decrypted: {File.read_all_text("decrypted.txt")}")
-write_line("round trip ok: {File.read_all_text("decrypted.txt") =~ source}")
+write_line(
+    "round trip ok: {File.read_all_text("decrypted.txt") =~ source}"
+)

@@ -31,13 +31,18 @@ branches(node: NODE, prefix: string) -> string{} is
     od
 si
 
-let tree =
-    NODE("kingdom",
-         [NODE("animal",
-               [NODE("vertebrate", [leaf("bird"), leaf("mammal")]),
-                NODE("invertebrate", [leaf("mollusc")])]),
-          NODE("plant", [leaf("moss"), leaf("fern"), leaf("conifer")]),
-          leaf("fungus")])
+let tree = NODE("kingdom", [
+    NODE("animal", [
+        NODE("vertebrate", [leaf("bird"), leaf("mammal")]),
+        NODE("invertebrate", [leaf("mollusc")])
+    ]),
+    NODE("plant", [
+        leaf("moss"),
+        leaf("fern"),
+        leaf("conifer")
+    ]),
+    leaf("fungus")
+])
 
 write_line("indented:")
 

@@ -24,7 +24,8 @@ draw(image: IMAGE, frame: int) is
         image.colour(
             channel(hue, 0.0D),
             channel(hue, 1.0D / 3.0D),
-            channel(hue, 2.0D / 3.0D))
+            channel(hue, 2.0D / 3.0D)
+        )
 
         let left = inset
         let top = inset
@@ -34,7 +35,8 @@ draw(image: IMAGE, frame: int) is
         image.line([
             (x = left, y = top), (x = right, y = top),
             (x = right, y = bottom), (x = left, y = bottom),
-            (x = left, y = top)])
+            (x = left, y = top)
+        ])
     od
 si
 
@@ -46,7 +48,9 @@ for frame in 0..frames do
     animation.add(image, 50)
 od
 
-write_line("{rectangles} rectangles around one centre, the colour fading")
+write_line(
+    "{rectangles} rectangles around one centre, the colour fading"
+)
 write_line("in from the outermost to the innermost")
 
 animation.write("rectangles.png")

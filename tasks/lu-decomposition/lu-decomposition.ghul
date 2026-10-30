@@ -7,13 +7,20 @@ use Matrix = List[List[double]]
         |> map(i =>
             0..b[0].count
                 |> map(j =>
-                    0..b.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> collect())
+                    0..b.count |> sum_by(k => a[i][k] * b[k][j])
+                )
+                |> collect()
+        )
         |> collect()
 
-square(n: int, cell: (int, int) -> double) -> LIST[LIST[double]] =>
+square(
+    n: int,
+    cell: (int, int) -> double
+) -> LIST[LIST[double]] =>
     0..n
-        |> map(i => 0..n |> map(cell(i, *)) |> collect_mutable())
+        |> map(i =>
+            0..n |> map(cell(i, *)) |> collect_mutable()
+        )
         |> collect_mutable()
 
 pivot(a: Matrix) -> Matrix => (
@@ -22,20 +29,29 @@ pivot(a: Matrix) -> Matrix => (
 
     for column in 0..n do
         let best =
-            column..n |> max_by(row => double.abs(a[row][column]))!
+            column..n
+                |> max_by(row => double.abs(a[row][column]))!
 
-        (order[column], order[best]) = (order[best], order[column])
+        (order[column], order[best]) = (
+            order[best],
+            order[column]
+        )
     od
 
     square(n, (i, j) => if order[i] == j then 1.0 else 0.0 fi)
 )
 
-decompose(a: Matrix)
-    -> (lower: Matrix, upper: Matrix, permutation: Matrix) is
+decompose(a: Matrix) -> (
+    lower: Matrix,
+    upper: Matrix,
+    permutation: Matrix
+) is
     let n = a.count
     let p = pivot(a)
     let pa = p * a
-    let lower = square(n, (i, j) => if i == j then 1.0 else 0.0 fi)
+    let lower = square(n, (i, j) =>
+        if i == j then 1.0 else 0.0 fi
+    )
     let upper = square(n, (_, _) => 0.0)
 
     for j in 0..n do
@@ -61,7 +77,8 @@ show(name: string, m: Matrix, format: string) is
     write_line(name)
 
     for row in m do
-        let cells = row |> map(v => v.to_string(format).pad_left(10))
+        let cells =
+            row |> map(v => v.to_string(format).pad_left(10))
 
         write_line(cells |> join(""))
     od

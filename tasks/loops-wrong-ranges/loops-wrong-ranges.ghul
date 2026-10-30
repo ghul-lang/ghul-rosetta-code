@@ -28,5 +28,7 @@ for (start, stop, step, comment) in cases do
     let more = if values.count > 10 then ", ..." else "" fi
 
     write_line("{comment}")
-    write_line("    from({start}, {step}) up to {stop}: [{shown}{more}]")
+    write_line(
+        "    from({start}, {step}) up to {stop}: [{shown}{more}]"
+    )
 od

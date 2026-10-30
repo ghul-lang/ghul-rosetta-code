@@ -3,9 +3,9 @@ use default
 summarize(term: string) -> string =>
     let counts = term |> frequencies() in
     counts.keys
-    |> sort((left, right) => right <> left)
-    |> map(digit => "{counts[digit]}{digit}")
-    |> join("")
+        |> sort((left, right) => right <> left)
+        |> map(digit => "{counts[digit]}{digit}")
+        |> join("")
 
 sequence(seed: int) -> List[string] => (
     let terms = LIST()
@@ -21,8 +21,7 @@ sequence(seed: int) -> List[string] => (
     terms
 )
 
-canonical(seed: int) -> string =>
-    string("{seed}" |> sort())
+canonical(seed: int) -> string => string("{seed}" |> sort())
 
 let lengths = MAP()
 
@@ -38,8 +37,8 @@ let longest = lengths.values |> max() ?? 0
 
 let winners =
     (1..1000000)
-    |> filter(seed => lengths[canonical(seed)] == longest)
-    |> collect()
+        |> filter(seed => lengths[canonical(seed)] == longest)
+        |> collect()
 
 write_line("seed values: {winners |> join(" ")}")
 write_line("")

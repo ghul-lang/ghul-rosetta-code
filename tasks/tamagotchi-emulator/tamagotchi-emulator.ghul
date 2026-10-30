@@ -29,7 +29,8 @@ class PET(name: string) is
     show() is
         write_line(
             "{face} {name}, age {age}: "
-            "hunger {hunger}/10, happiness {happiness}/10")
+            "hunger {hunger}/10, happiness {happiness}/10"
+        )
 
         if poops > 0 then
             let droppings = "".pad_right(poops, '@')
@@ -58,7 +59,8 @@ class PET(name: string) is
         cause_of_death =
             if hunger >= 10 then "starved"
             elif happiness <= 0 then "died of loneliness"
-            elif sick /\ random.next(6) == 0 then "died of its illness"
+            elif sick /\ random.next(6) == 0 then
+                "died of its illness"
             elif age >= 24 then "died peacefully of old age"
             else null
             fi
@@ -86,7 +88,8 @@ while pet.alive do
         pet.hunger = max(pet.hunger - 4, 0)
         write_line("{pet.name} eats")
     when "play" then
-        let hand = if random.next(2) == 0 then "left" else "right" fi
+        let hand =
+            if random.next(2) == 0 then "left" else "right" fi
         write_line("{pet.name} hid a treat: left or right?")
 
         let guess = read_line() ?? ""
@@ -105,7 +108,9 @@ while pet.alive do
         write_line("all clean")
     when "cure" then
         if pet.poops > 0 then
-            write_line("clean up first, or {pet.name} will get sick again")
+            write_line(
+                "clean up first, or {pet.name} will get sick again"
+            )
         else
             pet.sick = false
             write_line("{pet.name} feels better")

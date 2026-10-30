@@ -22,8 +22,10 @@ let gun = [
 ]
 
 in_gun(row: int, column: int) -> bool =>
-    row >= 0 /\ row < gun.count /\
-    column >= 0 /\ column < gun[row].length /\
+    row >= 0 /\
+    row < gun.count /\
+    column >= 0 /\
+    column < gun[row].length /\
     gun[row][column] == '#'
 
 start() -> Grid =>
@@ -31,7 +33,8 @@ start() -> Grid =>
         |> map(row =>
             (0..columns)
                 |> map(column => in_gun(row - 4, column - 4))
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 live_neighbours(grid: Grid, row: int, column: int) -> int is
@@ -64,7 +67,8 @@ step(grid: Grid) -> Grid =>
         |> map(row =>
             (0..columns)
                 |> map(survives(grid, row, *))
-                |> collect())
+                |> collect()
+        )
         |> collect()
 
 draw(image: IMAGE, grid: Grid) is
@@ -78,7 +82,8 @@ draw(image: IMAGE, grid: Grid) is
                     double(column * cell),
                     double(row * cell),
                     double(column * cell + cell),
-                    double(row * cell + cell))
+                    double(row * cell + cell)
+                )
             fi
         od
     od

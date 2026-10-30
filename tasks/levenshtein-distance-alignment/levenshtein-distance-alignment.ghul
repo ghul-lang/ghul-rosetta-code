@@ -1,22 +1,39 @@
 use default
 
-align(a: string, b: string)
-    -> (top: string, bottom: string, distance: int) is
-    let d = 0::a.length
-        |> map(i => 0::b.length
-            |> map(j => if i == 0 then j elif j == 0 then i else 0 fi)
-            |> collect_mutable())
-        |> collect()
+align(a: string, b: string) -> (
+    top: string,
+    bottom: string,
+    distance: int
+) is
+    let d =
+        0::a.length
+            |> map(i =>
+                0::b.length
+                    |> map(j =>
+                        if i == 0 then
+                            j
+                        elif j == 0 then
+                            i
+                        else
+                            0
+                        fi
+                    )
+                    |> collect_mutable()
+            )
+            |> collect()
 
     for i in 1::a.length do
         for j in 1::b.length do
-            let substitution = if a[i - 1] == b[j - 1] then 0 else 1 fi
+            let substitution =
+                if a[i - 1] == b[j - 1] then 0 else 1 fi
 
-            d[i][j] = [
-                d[i - 1][j - 1] + substitution,
-                d[i - 1][j] + 1,
-                d[i][j - 1] + 1
-            ] |> min()!
+            d[i][j] =
+                [
+                    d[i - 1][j - 1] + substitution,
+                    d[i - 1][j] + 1,
+                    d[i][j - 1] + 1
+                ]
+                    |> min()!
         od
     od
 
@@ -29,7 +46,9 @@ align(a: string, b: string)
         let matched = i > 0 /\ j > 0 /\ a[i - 1] == b[j - 1]
         let cost = if matched then 0 else 1 fi
 
-        if i > 0 /\ j > 0 /\ d[i][j] == d[i - 1][j - 1] + cost then
+        if
+            i > 0 /\ j > 0 /\ d[i][j] == d[i - 1][j - 1] + cost
+        then
             i = i - 1
             j = j - 1
             top.insert(0, a[i])
@@ -52,7 +71,12 @@ align(a: string, b: string)
     )
 si
 
-for (a, b) in [("place", "palace"), ("rosettacode", "raisethysword")] do
+for
+    (a, b) in [
+        ("place", "palace"),
+        ("rosettacode", "raisethysword")
+    ]
+do
     let (top, bottom, distance) = align(a, b)
 
     write_line(top)

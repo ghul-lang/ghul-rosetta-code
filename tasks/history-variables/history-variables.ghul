@@ -7,7 +7,8 @@ class HISTORIC[T] is
         _past = LIST([initial])
     si
 
-    value: T public => _past[_past.count - 1],
+    value: T public
+        => _past[_past.count - 1],
         = new_value is
             _past.add(new_value)
         si

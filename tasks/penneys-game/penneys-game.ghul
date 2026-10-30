@@ -54,8 +54,9 @@ while true do
         write_line("You choose first. Your sequence?")
     fi
 
-    let player =
-        ask_sequence(if computer_first then computer else null fi)
+    let player = ask_sequence(
+        if computer_first then computer else null fi
+    )
 
     if !player? then
         break
@@ -71,7 +72,9 @@ while true do
     for coin in tosses() do
         seen = "{seen}{coin}"
 
-        if seen.ends_with(player) \/ seen.ends_with(computer) then
+        if
+            seen.ends_with(player) \/ seen.ends_with(computer)
+        then
             break
         fi
     od

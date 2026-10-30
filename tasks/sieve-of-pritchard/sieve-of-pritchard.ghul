@@ -60,4 +60,6 @@ next_member(wheel: SET[int], length: int) -> int is
     return length + 1
 si
 
-write_line("{pritchard(150) |> map(prime => "{prime}") |> join(" ")}")
+write_line(
+    "{pritchard(150) |> map(prime => "{prime}") |> join(" ")}"
+)

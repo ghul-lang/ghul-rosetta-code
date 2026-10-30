@@ -58,10 +58,11 @@ leaf[T](value: T) -> Tree[T] => NODE(value, EMPTY, EMPTY)
 show[T](label: string, values: T{}) =>
     write_line("{label,-12} {values |> join(" ")}")
 
-let tree =
-    NODE(1,
-        NODE(2, NODE(4, leaf(7), EMPTY), leaf(5)),
-        NODE(3, NODE(6, leaf(8), leaf(9)), EMPTY))
+let tree = NODE(
+    1,
+    NODE(2, NODE(4, leaf(7), EMPTY), leaf(5)),
+    NODE(3, NODE(6, leaf(8), leaf(9)), EMPTY)
+)
 
 show("preorder:", preorder(tree))
 show("inorder:", inorder(tree))

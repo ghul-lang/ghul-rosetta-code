@@ -4,17 +4,19 @@ qualifies(square: long) -> bool =>
     let
         digits = "{square}",
 
-    // A leading 1 would become a leading zero, so the smaller number would
-    // have fewer digits than the square it came from.
+        // A leading 1 would become a leading zero, so the smaller number would
+        // have fewer digits than the square it came from.
         leading = digits[0] != '1' \/ square == 1L,
         units = long.parse("".pad_left(digits.length, '1'))
     in
-
-    leading /\ !digits.contains('0') /\ is_square(square - units)
+        leading /\
+        !digits.contains('0') /\
+        is_square(square - units)
 
 write_line(
     from(1L)
-    |> map(n => n * n)
-    |> filter(qualifies)
-    |> take(7)
-    |> join(" "))
+        |> map(n => n * n)
+        |> filter(qualifies)
+        |> take(7)
+        |> join(" ")
+)

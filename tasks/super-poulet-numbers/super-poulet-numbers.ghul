@@ -6,8 +6,8 @@ splits_repeated_doubling(value: int) -> bool =>
 
 is_super_poulet(value: int) -> bool =>
     splits_repeated_doubling(value) /\
-        !is_prime(value) /\
-        (value |> divisors() |> all(splits_repeated_doubling))
+    !is_prime(value) /\
+    (value |> divisors() |> all(splits_repeated_doubling))
 
 let super_poulets = from(3, 2) |> filter(is_super_poulet)
 
@@ -18,5 +18,7 @@ write_line()
 let (position, value) =
     super_poulets |> index() |> find(e => e.value > 1_000_000)!
 
-write_line("super-Poulet number {position + 1} is the first over "
-           "1,000,000: {value:N0}")
+write_line(
+    "super-Poulet number {position + 1} is the first over "
+    "1,000,000: {value:N0}"
+)

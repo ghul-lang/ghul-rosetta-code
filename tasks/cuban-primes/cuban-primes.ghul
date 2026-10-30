@@ -7,7 +7,8 @@ cubans() -> long{} =>
 
 write_line("the first 200 cuban primes:")
 
-let head = cubans() |> take(200) |> map(p => "{p,12:N0}") |> collect()
+let head =
+    cubans() |> take(200) |> map(p => "{p,12:N0}") |> collect()
 
 for row in 0..25 do
     write_line(head[row * 8..row * 8 + 8] |> join(""))

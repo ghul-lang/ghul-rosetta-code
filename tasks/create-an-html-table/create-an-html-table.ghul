@@ -18,11 +18,13 @@ let body =
             "    <tr>\n"
             "{cell("td", "{number}")}\n"
             "{values |> map(cell("td", *)) |> join("\n")}\n"
-            "    </tr>")
+            "    </tr>"
+        )
         |> join("\n")
 
 write_line(
     "<table>\n"
     "  <thead>\n    <tr>\n{heading}\n    </tr>\n  </thead>\n"
     "  <tbody>\n{body}\n  </tbody>\n"
-    "</table>")
+    "</table>"
+)

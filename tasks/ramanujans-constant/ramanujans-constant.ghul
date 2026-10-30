@@ -87,7 +87,9 @@ show(heegner: int, value: bigint) =>
         whole = rounded / power_of_ten(shown),
         fraction = (rounded % power_of_ten(shown)).to_string()
     in
-        write_line("{heegner,5}  {whole}.{fraction.pad_left(shown, '0')}")
+        write_line(
+            "{heegner,5}  {whole}.{fraction.pad_left(shown, '0')}"
+        )
 
 let pi_value = pi()
 

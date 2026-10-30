@@ -1,10 +1,9 @@
 use default
 
-let edges =
-    [
-        ("a", "b"), ("a", "c"), ("b", "c"),
-        ("d", "e"), ("d", "f"), ("e", "f")
-    ]
+let edges = [
+    ("a", "b"), ("a", "c"), ("b", "c"),
+    ("d", "e"), ("d", "f"), ("e", "f")
+]
 
 let neighbours = MAP[string, SET[string]]()
 
@@ -41,8 +40,9 @@ search(
         return
     fi
 
-    let pivot = (candidates ++ excluded)
-        |> max_by(v => neighbours[v].count)!
+    let pivot =
+        (candidates ++ excluded)
+            |> max_by(v => neighbours[v].count)!
 
     let branches =
         candidates
@@ -58,17 +58,15 @@ search(
                 |> collect_set(),
             excluded
                 |> filter(adjacent.contains)
-                |> collect_set())
+                |> collect_set()
+        )
 
         candidates.remove(vertex)
         excluded.add(vertex)
     od
 si
 
-search(
-    SET(),
-    neighbours.keys |> collect_set(),
-    SET())
+search(SET(), neighbours.keys |> collect_set(), SET())
 
 cliques.sort((a, b) => a[0] <> b[0])
 

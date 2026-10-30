@@ -16,12 +16,16 @@ class GRID is
                 |> map(_ => random.next_double() < p)
                 |> collect()
 
-        reached = repeat(false, size * size) |> collect_mutable()
+        reached =
+            repeat(false, size * size) |> collect_mutable()
     si
 
     is_filled(column: int, row: int) -> bool =>
-        column >= 0 /\ column < size /\ row >= 0 /\ row < size /\
-            filled[row * size + column]
+        column >= 0 /\
+        column < size /\
+        row >= 0 /\
+        row < size /\
+        filled[row * size + column]
 
     is_reached(column: int, row: int) -> bool =>
         reached[row * size + column]
@@ -36,7 +40,10 @@ class GRID is
         while pending.count > 0 do
             let (column, row) = pending.pop()
 
-            if is_filled(column, row) /\ !is_reached(column, row) then
+            if
+                is_filled(column, row) /\
+                !is_reached(column, row)
+            then
                 reached[row * size + column] = true
 
                 pending.push((column + 1, row))
@@ -50,26 +57,36 @@ class GRID is
     si
 si
 
-write_line("p      fraction of {trials} {size} by {size} grids percolating")
+write_line(
+    "p      fraction of {trials} {size} by {size} grids percolating"
+)
 
 let shown mut = null
 
 for step in 0::10 do
     let p = double(step) / 10.0D
     let grids = 0..trials |> map(_ => GRID(p)) |> memo()
-    let through = grids |> filter(g => g.percolates()) |> count()
+    let through =
+        grids |> filter(g => g.percolates()) |> count()
 
-    write_line("{p:F1}    {double(through) / double(trials):F3}")
+    write_line(
+        "{p:F1}    {double(through) / double(trials):F3}"
+    )
 
     if step == 6 then
-        shown = grids |> find(g =>
-            0..size |> any(g.is_reached(*, size - 1)))
+        shown =
+            grids
+                |> find(g =>
+                    0..size |> any(g.is_reached(*, size - 1))
+                )
     fi
 od
 
 if let grid = shown then
     write_line()
-    write_line("pictured: a grid filled at p = 0.6 that percolates")
+    write_line(
+        "pictured: a grid filled at p = 0.6 that percolates"
+    )
 
     let cell = 24
     let image = IMAGE(size * cell, size * cell)
@@ -91,7 +108,11 @@ if let grid = shown then
             fi
 
             image.fill_rectangle(
-                x + 0.04D, y + 0.04D, x + 0.96D, y + 0.96D)
+                x + 0.04D,
+                y + 0.04D,
+                x + 0.96D,
+                y + 0.96D
+            )
         od
     od
 

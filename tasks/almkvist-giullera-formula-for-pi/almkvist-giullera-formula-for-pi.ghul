@@ -1,14 +1,18 @@
 use default
 
-power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
+power_of_ten(exponent: int) -> bigint =>
+    bigint.pow(10n, exponent)
 
 integer_term(n: int) -> bigint =>
-    32n * factorial(bigint(6 * n)) * bigint(532 * n * n + 126 * n + 9) /
-        (3n * bigint.pow(factorial(bigint(n)), 6))
+    32n *
+    factorial(bigint(6 * n)) *
+    bigint(532 * n * n + 126 * n + 9) /
+    (3n * bigint.pow(factorial(bigint(n)), 6))
 
 square_root(n: bigint) -> bigint =>
-    let walk = (x: bigint, y: bigint) -> bigint rec =>
-        if y < x then rec(y, (y + n / y) / 2n) else x fi
+    let walk =
+        (x: bigint, y: bigint) -> bigint rec =>
+            if y < x then rec(y, (y + n / y) / 2n) else x fi
     in
     walk(n, (n + 1n) / 2n)
 
@@ -19,12 +23,15 @@ od
 let precision = 150
 let digits = 70
 
-let reciprocal_pi_squared = from(0)
-    |> map(n =>
-        integer_term(n) * power_of_ten(precision) /
-            power_of_ten(6 * n + 3))
-    |> take_while(* > 0n)
-    |> sum()
+let reciprocal_pi_squared =
+    from(0)
+        |> map(n =>
+            integer_term(n) *
+            power_of_ten(precision) /
+            power_of_ten(6 * n + 3)
+        )
+        |> take_while(* > 0n)
+        |> sum()
 
 let pi_squared =
     power_of_ten(precision + 2 * digits) / reciprocal_pi_squared

@@ -4,7 +4,9 @@ use System.Math
 
 use Colour = (red: int, green: int, blue: int)
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -15,19 +17,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -36,7 +51,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -47,7 +66,8 @@ si
 hue(h: double) -> Colour =>
     let
         part = (h * 6.0D) - Math.floor(h * 6.0D),
-        sector = int(h * 6.0D) % 6, up = int(255.0D * part),
+        sector = int(h * 6.0D) % 6,
+        up = int(255.0D * part),
         down = int(255.0D * (1.0D - part))
     in
         case sector
@@ -61,14 +81,19 @@ hue(h: double) -> Colour =>
 
 put(image: IMAGE, x: int, y: int, c: Colour) is
     image.set_pixel(
-        x, y, ubyte(c.red), ubyte(c.green), ubyte(c.blue))
+        x,
+        y,
+        ubyte(c.red),
+        ubyte(c.green),
+        ubyte(c.blue)
+    )
 si
 
-of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Colour =>
-    (
-        red = int(p.red),
-        green = int(p.green),
-        blue = int(p.blue))
+of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Colour => (
+    red = int(p.red),
+    green = int(p.green),
+    blue = int(p.blue)
+)
 
 picture() -> IMAGE is
     let image = scene()
@@ -87,11 +112,14 @@ si
 use Weighted = (colour: Colour, count: int)
 
 channel(c: Colour, axis: int) -> int =>
-    case axis when 0 then c.red when 1 then c.green else c.blue esac
+    case axis
+    when 0 then c.red
+    when 1 then c.green
+    else c.blue
+    esac
 
 spread(box: List[Weighted], axis: int) -> int =>
-    let values =
-        box |> map(w => channel(w.colour, axis)) in
+    let values = box |> map(w => channel(w.colour, axis)) in
     (values |> max()!) - (values |> min()!)
 
 widest(box: List[Weighted]) -> int =>
@@ -99,12 +127,17 @@ widest(box: List[Weighted]) -> int =>
 
 score(box: List[Weighted]) -> int => spread(box, widest(box))
 
-split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
+split(box: List[Weighted]) -> (
+    List[Weighted],
+    List[Weighted]
+) is
     let axis = widest(box)
     let sorted =
         box
             |> sort((a, b) =>
-                channel(a.colour, axis) - channel(b.colour, axis))
+                channel(a.colour, axis) -
+                channel(b.colour, axis)
+            )
             |> collect()
 
     let total = sorted |> sum_by(w => w.count)
@@ -120,19 +153,28 @@ split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
 
     (
         sorted |> take(cut) |> collect(),
-        sorted |> skip(cut) |> collect())
+        sorted |> skip(cut) |> collect()
+    )
 si
 
 average(box: List[Weighted]) -> Colour is
     let n = box |> sum_by(w => w.count)
 
     weighted(axis) =>
-        (box |> sum_by(w => channel(w.colour, axis) * w.count)) / n
+        (
+            box
+                |> sum_by(w =>
+                    channel(w.colour, axis) * w.count
+                )
+        ) / n
 
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
+median_cut(
+    colours: List[Weighted],
+    count: int
+) -> List[Colour] => (
     let boxes = LIST[List[Weighted]]([colours])
 
     while boxes.count < count do
@@ -147,8 +189,12 @@ median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
 )
 
 distance(a: Colour, b: Colour) -> int =>
-    let dr = a.red - b.red, dg = a.green - b.green, db = a.blue - b.blue in
-    dr * dr + dg * dg + db * db
+    let
+        dr = a.red - b.red,
+        dg = a.green - b.green,
+        db = a.blue - b.blue
+    in
+        dr * dr + dg * dg + db * db
 
 nearest(palette: List[Colour], c: Colour) -> Colour =>
     palette |> min_by(distance(*, c))!
@@ -157,9 +203,11 @@ picture().write("picture.png")
 
 let input = IMAGE.read("picture.png")
 
-let pixels =
-    [of(input.pixel(x, y))
-        for y in 0..input.height for x in 0..input.width]
+let pixels = [
+    of(input.pixel(x, y))
+    for y in 0..input.height
+    for x in 0..input.width
+]
 
 let counts = pixels |> frequencies()
 
@@ -170,7 +218,9 @@ let colours =
 
 let palette = median_cut(colours, 16)
 
-write_line("{colours.count} colours reduced to {palette.count}:")
+write_line(
+    "{colours.count} colours reduced to {palette.count}:"
+)
 
 for row in 0..4 do
     write_line(
@@ -178,11 +228,15 @@ for row in 0..4 do
             |> skip(row * 4)
             |> take(4)
             |> map(c => "#{c.red:X2}{c.green:X2}{c.blue:X2}")
-            |> join("  "))
+            |> join("  ")
+    )
 od
 
 let scale = 2
-let output = IMAGE(input.width * 2 * scale, input.height * scale)
+let output = IMAGE(
+    input.width * 2 * scale,
+    input.height * scale
+)
 
 for y in 0..input.height * scale do
     for x in 0..input.width * scale do

@@ -4,10 +4,14 @@ write_line("multiplying primes to find the primorial primes")
 write_line("")
 
 let sieve_limit = 1_300_000
-let composite = repeat(false, sieve_limit + 1) |> collect_mutable()
+let composite =
+    repeat(false, sieve_limit + 1) |> collect_mutable()
 
 for candidate in 2::sieve_limit do
-    if !composite[candidate] /\ candidate <= sieve_limit / candidate then
+    if
+        !composite[candidate] /\
+        candidate <= sieve_limit / candidate
+    then
         let multiple mut = candidate * candidate
 
         while multiple <= sieve_limit do
@@ -29,12 +33,16 @@ write_line("the first ten primorial numbers:")
 
 (0..10)
     |> each(index =>
-        write_line("  primorial({index}) = {primorial(index)}"))
+        write_line("  primorial({index}) = {primorial(index)}")
+    )
 
 write_line()
 write_line("digits in larger primorial numbers:")
 
-[10, 100, 1_000, 10_000, 100_000]
+[10, 100, 1000, 10000, 100000]
     |> each(index =>
-        write_line("  primorial({index,7:N0}) has "
-                   "{primorial(index).to_string().length,7:N0} digits"))
+        write_line(
+            "  primorial({index,7:N0}) has "
+            "{primorial(index).to_string().length,7:N0} digits"
+        )
+    )

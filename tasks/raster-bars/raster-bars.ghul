@@ -11,11 +11,26 @@ let frames = 60
 let thickness = 24
 
 let bars = [
-    (colour = (red = 1.0D, green = 0.25D, blue = 0.2D), phase = 0.0D),
-    (colour = (red = 1.0D, green = 0.8D, blue = 0.2D), phase = 0.35D),
-    (colour = (red = 0.3D, green = 1.0D, blue = 0.35D), phase = 0.7D),
-    (colour = (red = 0.25D, green = 0.6D, blue = 1.0D), phase = 1.05D),
-    (colour = (red = 0.8D, green = 0.35D, blue = 1.0D), phase = 1.4D)
+    (
+        colour = (red = 1.0D, green = 0.25D, blue = 0.2D),
+        phase = 0.0D
+    ),
+    (
+        colour = (red = 1.0D, green = 0.8D, blue = 0.2D),
+        phase = 0.35D
+    ),
+    (
+        colour = (red = 0.3D, green = 1.0D, blue = 0.35D),
+        phase = 0.7D
+    ),
+    (
+        colour = (red = 0.25D, green = 0.6D, blue = 1.0D),
+        phase = 1.05D
+    ),
+    (
+        colour = (red = 0.8D, green = 0.35D, blue = 1.0D),
+        phase = 1.4D
+    )
 ]
 
 channel(value: double) -> ubyte =>
@@ -31,7 +46,8 @@ draw_bar(image: IMAGE, colour: Colour, top: double) is
         image.colour(
             channel(colour.red * shine + glint),
             channel(colour.green * shine + glint),
-            channel(colour.blue * shine + glint))
+            channel(colour.blue * shine + glint)
+        )
 
         image.fill_rectangle(0.0D, y, double(width), y + 1.0D)
     od
@@ -43,8 +59,7 @@ draw(image: IMAGE, time: double) is
     let travel = double(height - thickness) / 2.0D
 
     for bar in bars do
-        let top =
-            round(travel + travel * sin(time - bar.phase))
+        let top = round(travel + travel * sin(time - bar.phase))
 
         draw_bar(image, bar.colour, top)
     od
@@ -60,7 +75,9 @@ for frame in 0..frames do
     animation.add(image, 40)
 od
 
-write_line("{bars.count} bars, one period of their sway in {frames} frames")
+write_line(
+    "{bars.count} bars, one period of their sway in {frames} frames"
+)
 
 animation.write("bars.png")
 

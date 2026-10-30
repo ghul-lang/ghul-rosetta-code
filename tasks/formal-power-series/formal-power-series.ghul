@@ -1,69 +1,96 @@
 use default
 
 struct RATIONAL(numerator: bigint, denominator: bigint) is
-    +(other: RATIONAL) -> RATIONAL => reduced(
-        numerator * other.denominator + other.numerator * denominator,
-        denominator * other.denominator)
+    +(other: RATIONAL) -> RATIONAL =>
+        reduced(
+            numerator * other.denominator +
+            other.numerator * denominator,
+            denominator * other.denominator
+        )
 
-    -(other: RATIONAL) -> RATIONAL => reduced(
-        numerator * other.denominator - other.numerator * denominator,
-        denominator * other.denominator)
+    -(other: RATIONAL) -> RATIONAL =>
+        reduced(
+            numerator * other.denominator -
+            other.numerator * denominator,
+            denominator * other.denominator
+        )
 
-    *(other: RATIONAL) -> RATIONAL => reduced(
-        numerator * other.numerator, denominator * other.denominator)
+    *(other: RATIONAL) -> RATIONAL =>
+        reduced(
+            numerator * other.numerator,
+            denominator * other.denominator
+        )
 
-    /(other: RATIONAL) -> RATIONAL => reduced(
-        numerator * other.denominator, denominator * other.numerator)
+    /(other: RATIONAL) -> RATIONAL =>
+        reduced(
+            numerator * other.denominator,
+            denominator * other.numerator
+        )
 
     to_string() -> string =>
         if denominator =~ 1n then "{numerator}"
-        else "{numerator}/{denominator}" fi
+        else "{numerator}/{denominator}"
+        fi
 si
 
 reduced(numerator: bigint, denominator: bigint) -> RATIONAL =>
     let
-        divisor = bigint.greatest_common_divisor(numerator, denominator),
+        divisor = bigint.greatest_common_divisor(
+            numerator,
+            denominator
+        ),
         sign = if denominator < 0n then -1 else 1 fi,
         scale = divisor * cast(sign)
     in
         RATIONAL(numerator / scale, denominator / scale)
 
-
-whole(value: int) -> RATIONAL =>
-    RATIONAL(cast(value), 1n)
+whole(value: int) -> RATIONAL => RATIONAL(cast(value), 1n)
 
 class SERIES(term: (int) -> RATIONAL) is
     at(index: int) -> RATIONAL memo => term(index)
 
-    +(other: SERIES) -> SERIES => SERIES(n => at(n) + other.at(n))
+    +(other: SERIES) -> SERIES =>
+        SERIES(n => at(n) + other.at(n))
 
-    -(other: SERIES) -> SERIES => SERIES(n => at(n) - other.at(n))
+    -(other: SERIES) -> SERIES =>
+        SERIES(n => at(n) - other.at(n))
 
-    *(other: SERIES) -> SERIES => SERIES(n =>
-        (0::n)
-            |> map(k => at(k) * other.at(n - k))
-            |> reduce(whole(0), * + *))
+    *(other: SERIES) -> SERIES =>
+        SERIES(n =>
+            (0::n)
+                |> map(k => at(k) * other.at(n - k))
+                |> reduce(whole(0), * + *)
+        )
 
     /(other: SERIES) -> SERIES is
         let quotient mut = SERIES(_ => whole(0))
 
         quotient = SERIES(n => (
-            let carried = (1::n)
-                |> map(k => other.at(k) * quotient.at(n - k))
-                |> reduce(whole(0), * + *)
+            let carried =
+                (1::n)
+                    |> map(k =>
+                        other.at(k) * quotient.at(n - k)
+                    )
+                    |> reduce(whole(0), * + *)
 
-            (at(n) - carried) / other.at(0)))
+            (at(n) - carried) / other.at(0)
+        ))
 
         return quotient
     si
 
-    differentiate() -> SERIES => SERIES(n => at(n + 1) * whole(n + 1))
+    differentiate() -> SERIES =>
+        SERIES(n => at(n + 1) * whole(n + 1))
 
     integrate() -> SERIES =>
-        SERIES(n => if n == 0 then whole(0) else at(n - 1) / whole(n) fi)
+        SERIES(n =>
+            if n == 0 then whole(0) else at(n - 1) / whole(n) fi
+        )
 
     show(name: string, count: int) =>
-        let terms = 0..count |> map(n => at(n).to_string()) |> join() in
+        let terms =
+            0..count |> map(n => at(n).to_string()) |> join()
+        in
         write_line("{name}: {terms}")
 si
 

@@ -8,7 +8,8 @@ class LIBC is
     init() is si
 si
 
-own_abs(value: int) -> int => if value < 0 then -value else value fi
+own_abs(value: int) -> int =>
+    if value < 0 then -value else value fi
 
 use Choice = (source: string, absolute: (int) -> int)
 
@@ -24,7 +25,8 @@ report(library: string) is
 
     write_line("{library}: {source}")
 
-    [-7, 0, 42] |> each(v => write_line("  abs({v}) = {absolute(v)}"))
+    [-7, 0, 42]
+        |> each(v => write_line("  abs({v}) = {absolute(v)}"))
 si
 
 report("libc")

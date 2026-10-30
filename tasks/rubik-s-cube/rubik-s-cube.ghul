@@ -9,20 +9,34 @@ use Colour = (red: ubyte, green: ubyte, blue: ubyte)
 let size = 300
 let tilt = 0.45D
 
-plus(a: Point, b: Point) -> Point =>
-    (x = a.x + b.x, y = a.y + b.y, z = a.z + b.z)
+plus(a: Point, b: Point) -> Point => (
+    x = a.x + b.x,
+    y = a.y + b.y,
+    z = a.z + b.z
+)
 
-times(p: Point, k: double) -> Point =>
-    (x = p.x * k, y = p.y * k, z = p.z * k)
+times(p: Point, k: double) -> Point => (
+    x = p.x * k,
+    y = p.y * k,
+    z = p.z * k
+)
 
-rgb(r: int, g: int, b: int) -> Colour =>
-    (red = ubyte(r), green = ubyte(g), blue = ubyte(b))
+rgb(r: int, g: int, b: int) -> Colour => (
+    red = ubyte(r),
+    green = ubyte(g),
+    blue = ubyte(b)
+)
 
 let x_axis = (x = 1.0D, y = 0.0D, z = 0.0D)
 let y_axis = (x = 0.0D, y = 1.0D, z = 0.0D)
 let z_axis = (x = 0.0D, y = 0.0D, z = 1.0D)
 
-let faces: (normal: Point, u: Point, v: Point, colour: Colour)[] = [
+let faces: (
+    normal: Point,
+    u: Point,
+    v: Point,
+    colour: Colour
+)[] = [
     (y_axis, x_axis, z_axis, rgb(245, 245, 245)),
     (times(y_axis, -1.0D), x_axis, z_axis, rgb(255, 213, 0)),
     (z_axis, x_axis, y_axis, rgb(0, 155, 72)),
@@ -36,19 +50,29 @@ turned(p: Point, angle: double) -> Point =>
         x = p.x * cos(angle) + p.z * sin(angle),
         z = p.z * cos(angle) - p.x * sin(angle)
     in
-    (
-        x = x,
-        y = p.y * cos(tilt) - z * sin(tilt),
-        z = p.y * sin(tilt) + z * cos(tilt))
+        (
+            x = x,
+            y = p.y * cos(tilt) - z * sin(tilt),
+            z = p.y * sin(tilt) + z * cos(tilt)
+        )
 
 square(
-    centre: Point, u: Point, v: Point, half: double, angle: double
+    centre: Point,
+    u: Point,
+    v: Point,
+    half: double,
+    angle: double
 ) -> Collections.List[(x: double, y: double)] =>
     [(-1.0D, -1.0D), (1.0D, -1.0D), (1.0D, 1.0D), (-1.0D, 1.0D)]
         |> map((a, b) =>
             turned(
-                plus(centre, plus(times(u, a * half), times(v, b * half))),
-                angle))
+                plus(
+                    centre,
+                    plus(times(u, a * half), times(v, b * half))
+                ),
+                angle
+            )
+        )
         |> map(p => (x = p.x, y = p.y))
         |> collect()
 
@@ -62,7 +86,13 @@ draw(image: IMAGE, angle: double) is
         if turned(face.normal, angle).z > 0.0D then
             let centre = times(face.normal, 1.5D)
 
-            let outline = square(centre, face.u, face.v, 1.5D, angle)
+            let outline = square(
+                centre,
+                face.u,
+                face.v,
+                1.5D,
+                angle
+            )
 
             body.add(outline, 20ub, 20ub, 20ub)
 
@@ -72,11 +102,20 @@ draw(image: IMAGE, angle: double) is
                         centre,
                         plus(
                             times(face.u, double(i)),
-                            times(face.v, double(j))))
+                            times(face.v, double(j))
+                        )
+                    )
 
                     stickers.add(
-                        square(at, face.u, face.v, 0.42D, angle),
-                        face.colour)
+                        square(
+                            at,
+                            face.u,
+                            face.v,
+                            0.42D,
+                            angle
+                        ),
+                        face.colour
+                    )
                 od
             od
         fi
@@ -92,7 +131,9 @@ image.view(-2.8D, -2.8D, 2.8D, 2.8D)
 
 draw(image, -pi / 5.0D)
 
-write_line("a solved cube, white on top, green facing, red to the right")
+write_line(
+    "a solved cube, white on top, green facing, red to the right"
+)
 
 image.write("rubik.png")
 

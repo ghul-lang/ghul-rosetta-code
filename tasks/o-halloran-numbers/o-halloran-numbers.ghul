@@ -1,18 +1,21 @@
 use default
 
 let areas = [
-        2 * (length * width + height * (length + width))
-        for length in 1::12
-        for width in length::16
-        for height in width::166
-    ]
+    2 * (length * width + height * (length + width))
+    for length in 1::12
+    for width in length::16
+    for height in width::166
+]
     |> filter(* < 1000)
     |> collect_set()
 
-let o_halloran = (7::999)
-    |> filter(n => n % 2 == 0 /\ areas.contains(n) == false)
-    |> collect()
+let o_halloran =
+    (7::999)
+        |> filter(n => n % 2 == 0 /\ areas.contains(n) == false)
+        |> collect()
 
-write_line("even values below 1000 that are no cuboid's surface area:")
+write_line(
+    "even values below 1000 that are no cuboid's surface area:"
+)
 write_line(o_halloran |> join(" "))
 write_line("count: {o_halloran.count}")

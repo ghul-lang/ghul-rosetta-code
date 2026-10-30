@@ -4,7 +4,9 @@ at_most(total: int, largest: int) -> int memo =>
     if total == 0 then 1
     elif largest == 0 then 0
     elif largest > total then at_most(total, total)
-    else at_most(total, largest - 1) + at_most(total - largest, largest)
+    else
+        at_most(total, largest - 1) +
+        at_most(total - largest, largest)
     fi
 
 row(n: int) -> int{} =>
@@ -37,13 +39,22 @@ p(n: int) -> bigint is
 
     for m in 1::n do
         term(offset) =>
-            if offset <= m then partitions[m - offset] else 0n fi
+            if offset <= m then
+                partitions[m - offset]
+            else
+                0n
+            fi
 
-        let total = from(1)
-            |> take_while(k => pentagonal(k) <= m)
-            |> sum_by(k =>
-                let pair = term(pentagonal(k)) + term(pentagonal(-k)) in
-                if k % 2 == 1 then pair else -pair fi)
+        let total =
+            from(1)
+                |> take_while(k => pentagonal(k) <= m)
+                |> sum_by(k =>
+                    let pair =
+                        term(pentagonal(k)) +
+                        term(pentagonal(-k))
+                    in
+                    if k % 2 == 1 then pair else -pair fi
+                )
 
         partitions.add(total)
     od

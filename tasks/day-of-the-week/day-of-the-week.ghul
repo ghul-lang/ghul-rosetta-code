@@ -7,8 +7,11 @@ christmas_days() -> DateTime{} is
     od
 si
 
-let sundays = christmas_days()
-    |> filter(christmas => christmas.day_of_week == DayOfWeek.SUNDAY)
+let sundays =
+    christmas_days()
+        |> filter(christmas =>
+            christmas.day_of_week == DayOfWeek.SUNDAY
+        )
 
 write_line("Christmas falls on a Sunday in:")
 sundays |> each(christmas => write_line("{christmas:yyyy}"))

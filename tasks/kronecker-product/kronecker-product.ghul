@@ -2,11 +2,14 @@ use default
 
 kronecker(left: int[][], right: int[][]) -> int[][] =>
     (0..left.count * right.count)
-        |> map(row => (0..left[0].count * right[0].count)
-            |> map(column =>
-                left[row / right.count][column / right[0].count] *
-                    right[row % right.count][column % right[0].count])
-            |> collect())
+        |> map(row =>
+            (0..left[0].count * right[0].count)
+                |> map(column =>
+                    left[row / right.count][column / right[0].count] *
+                    right[row % right.count][column % right[0].count]
+                )
+                |> collect()
+        )
         |> collect()
 
 pad(text: string, width: int) -> string =>
@@ -19,15 +22,26 @@ pad(text: string, width: int) -> string =>
 show(matrix: int[][]) =>
     let width =
         ["{value}".length for row in matrix for value in row]
-            |> max() ?? 1 in
+            |> max() ?? 1
+    in
     matrix
-        |> each(row => write_line(row
-            |> map(value => pad("{value}", width))
-            |> join(" ")))
+        |> each(row =>
+            write_line(
+                row
+                    |> map(value => pad("{value}", width))
+                    |> join(" ")
+            )
+        )
 
-for pair in [(left = [[1, 2], [3, 4]], right = [[0, 5], [6, 7]]),
-             (left = [[0, 1, 0], [1, 1, 1], [0, 1, 0]],
-              right = [[1, 1, 1, 1], [1, 0, 0, 1], [1, 1, 1, 1]])] do
+for
+    pair in [
+        (left = [[1, 2], [3, 4]], right = [[0, 5], [6, 7]]),
+        (
+            left = [[0, 1, 0], [1, 1, 1], [0, 1, 0]],
+            right = [[1, 1, 1, 1], [1, 0, 0, 1], [1, 1, 1, 1]]
+        )
+    ]
+do
     show(kronecker(pair.left, pair.right))
 
     write_line("")

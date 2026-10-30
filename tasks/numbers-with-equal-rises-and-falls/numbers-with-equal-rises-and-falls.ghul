@@ -1,10 +1,11 @@
 use default
 
 balanced(n: int) -> bool =>
-    n |> digits()
-    |> windows(2)
-    |> map(pair => Ghul.Math.sign(pair[1] - pair[0]))
-    |> sum() == 0
+    n
+        |> digits()
+        |> windows(2)
+        |> map(pair => Ghul.Math.sign(pair[1] - pair[0]))
+        |> sum() == 0
 
 sequence() -> int{} => from(1) |> filter(balanced)
 
@@ -15,8 +16,9 @@ let first_200 = sequence() |> take(200) |> collect()
 for row in 0::19 do
     write_line(
         (0::9)
-        |> map(column => "{first_200[row * 10 + column],5}")
-        |> join(""))
+            |> map(column => "{first_200[row * 10 + column],5}")
+            |> join("")
+    )
 od
 
 let ten_millionth = sequence() |> skip(10000000 - 1) |> first()

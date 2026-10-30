@@ -4,7 +4,9 @@ q_sequence(count: int) -> List[int] => (
     let terms = LIST([0, 1, 1])
 
     for n in 3::count do
-        terms.add(terms[n - terms[n - 1]] + terms[n - terms[n - 2]])
+        terms.add(
+            terms[n - terms[n - 1]] + terms[n - terms[n - 2]]
+        )
     od
 
     terms
@@ -12,11 +14,16 @@ q_sequence(count: int) -> List[int] => (
 
 let terms = q_sequence(100000)
 
-write_line("first ten terms: {terms |> skip(1) |> take(10) |> join(" ")}")
+write_line(
+    "first ten terms: {terms |> skip(1) |> take(10) |> join(" ")}"
+)
 write_line("term 1000: {terms[1000]}")
 
-let descents = (2::100000)
-    |> filter(n => terms[n] < terms[n - 1])
-    |> count()
+let descents =
+    (2::100000)
+        |> filter(n => terms[n] < terms[n - 1])
+        |> count()
 
-write_line("terms below their predecessor up to 100000: {descents}")
+write_line(
+    "terms below their predecessor up to 100000: {descents}"
+)

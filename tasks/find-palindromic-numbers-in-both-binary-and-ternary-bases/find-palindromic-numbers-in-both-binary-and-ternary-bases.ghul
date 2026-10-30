@@ -18,7 +18,10 @@ to_digits(value: long, base: long) -> List[int] => (
 )
 
 from_digits(digits: List[int], base: long) -> long =>
-    digits |> reduce(0L, (value, digit) => value * base + long(digit))
+    digits
+        |> reduce(0L, (value, digit) =>
+            value * base + long(digit)
+        )
 
 is_palindrome(digits: List[int]) -> bool =>
     0..digits.count / 2
@@ -30,7 +33,8 @@ raised(base: long, exponent: int) -> long =>
 in_base(value: long, base: long) -> string =>
     string(
         to_digits(value, base)
-            |> map(digit => "0123456789"[digit]))
+            |> map(digit => "0123456789"[digit])
+    )
 
 ternary_palindromes() -> long{} is
     yield 0L
@@ -43,9 +47,13 @@ ternary_palindromes() -> long{} is
 
         for half in lowest::highest do
             let front = to_digits(half, 3L)
-            let mirrored = front |> take(length / 2) |> reverse()
+            let mirrored =
+                front |> take(length / 2) |> reverse()
 
-            yield from_digits(front ++ mirrored |> collect(), 3L)
+            yield from_digits(
+                front ++ mirrored |> collect(),
+                3L
+            )
         od
     od
 si
@@ -56,4 +64,6 @@ ternary_palindromes()
     |> each(value =>
         write_line(
             "{value,12}  base 2 {in_base(value, 2L)}  "
-            "base 3 {in_base(value, 3L)}"))
+            "base 3 {in_base(value, 3L)}"
+        )
+    )

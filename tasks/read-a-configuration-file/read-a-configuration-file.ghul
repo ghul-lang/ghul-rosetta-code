@@ -3,14 +3,20 @@ use default
 let settings = MAP()
 
 value(name: string) -> string =>
-    if settings.contains_key(name) then settings[name] else "" fi
+    if settings.contains_key(name) then
+        settings[name]
+    else
+        ""
+    fi
 
 is_set(name: string) -> bool => settings.contains_key(name)
 
 for line in IO.File.read_all_lines("config") do
     let entry = line.trim()
 
-    if entry.length == 0 \/ entry[0] == '#' \/ entry[0] == ';' then
+    if
+        entry.length == 0 \/ entry[0] == '#' \/ entry[0] == ';'
+    then
         continue
     fi
 
@@ -20,15 +26,23 @@ for line in IO.File.read_all_lines("config") do
         settings[entry.to_lower()] = ""
     else
         settings[entry.substring(0, split).to_lower()] =
-            entry.substring(split + 1).trim_start(['=', ' ']).trim()
+            entry.substring(split + 1).trim_start([
+                '=', ' '
+            ]).trim()
     fi
 od
 
 write_line("fullname = {value("fullname")}")
 write_line("favouritefruit = {value("favouritefruit")}")
-write_line("needspeeling = {is_set("needspeeling").to_string().to_lower()}")
-write_line("seedsremoved = {is_set("seedsremoved").to_string().to_lower()}")
+write_line(
+    "needspeeling = {is_set("needspeeling").to_string().to_lower()}"
+)
+write_line(
+    "seedsremoved = {is_set("seedsremoved").to_string().to_lower()}"
+)
 
 for member in value("otherfamily").split([',']) |> index() do
-    write_line("otherfamily({member.index + 1}) = {member.value.trim()}")
+    write_line(
+        "otherfamily({member.index + 1}) = {member.value.trim()}"
+    )
 od

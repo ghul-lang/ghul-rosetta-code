@@ -18,4 +18,6 @@ modular_inverse(a: int, m: int) -> int? => (
 let inverse = modular_inverse(42, 2017)!
 
 write_line("inverse of 42 modulo 2017: {inverse}")
-write_line("check: 42 * {inverse} mod 2017 = {42 * inverse % 2017}")
+write_line(
+    "check: 42 * {inverse} mod 2017 = {42 * inverse % 2017}"
+)

@@ -19,7 +19,9 @@ send(name: string, argument: int) -> string is
         return "{name} is not a method of CALCULATOR"
     fi
 
-    let result = method.invoke(calculator, [cast object(argument)])
+    let result = method.invoke(calculator, [
+        cast object(argument)
+    ])
 
     "{name}({argument}) = {result}"
 si

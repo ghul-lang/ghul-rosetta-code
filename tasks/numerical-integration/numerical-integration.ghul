@@ -5,29 +5,51 @@ use Integrand = double -> double
 sum_over(n: int, term: int -> double) -> double =>
     0..n |> sum_by(term)
 
-left_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
+left_rectangle(
+    f: Integrand,
+    a: double,
+    b: double,
+    n: int
+) -> double =>
     let h = (b - a) / double(n) in
     h * sum_over(n, i => f(a + h * double(i)))
 
-right_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
+right_rectangle(
+    f: Integrand,
+    a: double,
+    b: double,
+    n: int
+) -> double =>
     let h = (b - a) / double(n) in
     h * sum_over(n, i => f(a + h * double(i + 1)))
 
-midpoint_rectangle(f: Integrand, a: double, b: double, n: int) -> double =>
+midpoint_rectangle(
+    f: Integrand,
+    a: double,
+    b: double,
+    n: int
+) -> double =>
     let h = (b - a) / double(n) in
     h * sum_over(n, i => f(a + h * (double(i) + 0.5)))
 
-trapezium(f: Integrand, a: double, b: double, n: int) -> double =>
+trapezium(
+    f: Integrand,
+    a: double,
+    b: double,
+    n: int
+) -> double =>
     let
         h = (b - a) / double(n),
         inner = sum_over(n - 1, i => f(a + h * double(i + 1)))
     in
-    h * ((f(a) + f(b)) / 2.0 + inner)
+        h * ((f(a) + f(b)) / 2.0 + inner)
 
 simpson(f: Integrand, a: double, b: double, n: int) -> double =>
     let
         h = (b - a) / double(n),
-        middles = sum_over(n, i => f(a + h * double(i) + h / 2.0)),
+        middles = sum_over(n, i =>
+            f(a + h * double(i) + h / 2.0)
+        ),
         joins = sum_over(n - 1, i => f(a + h * double(i + 1)))
     in
         h / 6.0 * (f(a) + f(b) + 4.0 * middles + 2.0 * joins)
@@ -41,21 +63,43 @@ let methods = [
 ]
 
 let cases = [
-    (name = "x cubed on [0, 1]", f = x => x * x * x,
-     a = 0.0, b = 1.0, n = 100),
-    (name = "1/x on [1, 100]", f = x => 1.0 / x,
-     a = 1.0, b = 100.0, n = 1_000),
-    (name = "x on [0, 5000]", f = x => x,
-     a = 0.0, b = 5000.0, n = 5_000_000),
-    (name = "x on [0, 6000]", f = x => x,
-     a = 0.0, b = 6000.0, n = 6_000_000)
+    (
+        name = "x cubed on [0, 1]",
+        f = x => x * x * x,
+        a = 0.0,
+        b = 1.0,
+        n = 100
+    ),
+    (
+        name = "1/x on [1, 100]",
+        f = x => 1.0 / x,
+        a = 1.0,
+        b = 100.0,
+        n = 1_000
+    ),
+    (
+        name = "x on [0, 5000]",
+        f = x => x,
+        a = 0.0,
+        b = 5000.0,
+        n = 5_000_000
+    ),
+    (
+        name = "x on [0, 6000]",
+        f = x => x,
+        a = 0.0,
+        b = 6000.0,
+        n = 6_000_000
+    )
 ]
 
 for c in cases do
     write_line("{c.name}, {c.n:N0} steps:")
 
     for m in methods do
-        write_line("  {m.name,-20}{m.rule(c.f, c.a, c.b, c.n),20:F6}")
+        write_line(
+            "  {m.name,-20}{m.rule(c.f, c.a, c.b, c.n),20:F6}"
+        )
     od
 
     write_line()

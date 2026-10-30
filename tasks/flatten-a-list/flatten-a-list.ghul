@@ -26,20 +26,20 @@ si
 show(node: Nested) -> string =>
     case node
     when (value): ATOM then "{value}"
-    when (items): LIST then "[{items |> map(show) |> join(", ")}]"
+    when (items): LIST then
+        "[{items |> map(show) |> join(", ")}]"
     esac
 
-let input =
-    list([
-        list([atom(1)]),
-        atom(2),
-        list([list([atom(3), atom(4)]), atom(5)]),
-        list([list([list([])])]),
-        list([list([list([atom(6)])])]),
-        atom(7),
-        atom(8),
-        list([])
-    ])
+let input = list([
+    list([atom(1)]),
+    atom(2),
+    list([list([atom(3), atom(4)]), atom(5)]),
+    list([list([list([])])]),
+    list([list([list([atom(6)])])]),
+    atom(7),
+    atom(8),
+    list([])
+])
 
 write_line(show(input))
 write_line("[{input |> flatten() |> join(", ")}]")

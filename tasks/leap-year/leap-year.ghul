@@ -4,7 +4,8 @@ is_leap_year(year: int) -> bool =>
     year % 4 == 0 /\ (year % 100 != 0 \/ year % 400 == 0)
 
 for year in [1900, 1994, 1996, 2000, 2024, 2100] do
-    let kind = if is_leap_year(year) then "leap" else "common" fi
+    let kind =
+        if is_leap_year(year) then "leap" else "common" fi
 
     write_line("{year} is a {kind} year")
 od

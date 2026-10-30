@@ -1,17 +1,33 @@
 use default
 use Point = (x: double, y: double, z: double)
 
--(a: Point, b: Point) -> Point =>
-    (x = a.x - b.x, y = a.y - b.y, z = a.z - b.z)
+-(a: Point, b: Point) -> Point => (
+    x = a.x - b.x,
+    y = a.y - b.y,
+    z = a.z - b.z
+)
 
-+(a: Point, b: Point) -> Point =>
-    (x = a.x + b.x, y = a.y + b.y, z = a.z + b.z)
++(a: Point, b: Point) -> Point => (
+    x = a.x + b.x,
+    y = a.y + b.y,
+    z = a.z + b.z
+)
 
-*(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
+*(p: Point, k: double) -> Point => (
+    x = p.x * k,
+    y = p.y * k,
+    z = p.z * k
+)
 
-⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
+⋅(a: Point, b: Point) -> double =>
+    a.x * b.x + a.y * b.y + a.z * b.z
 
-meeting(from: Point, along: Point, on: Point, normal: Point) -> Point? =>
+meeting(
+    from: Point,
+    along: Point,
+    on: Point,
+    normal: Point
+) -> Point? =>
     if along ⋅ normal == 0.0D then
         null
     else
@@ -25,4 +41,5 @@ let plane_through = (x = 0.0D, y = 0.0D, z = 5.0D)
 let plane_normal = (x = 0.0D, y = 0.0D, z = 1.0D)
 
 write_line(
-    "{meeting(ray_from, ray_along, plane_through, plane_normal)}")
+    "{meeting(ray_from, ray_along, plane_through, plane_normal)}"
+)

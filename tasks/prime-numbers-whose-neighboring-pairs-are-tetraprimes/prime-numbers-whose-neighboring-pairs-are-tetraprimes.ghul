@@ -9,7 +9,8 @@ for p in 2..limit + 3 do
         let multiple mut = p
 
         while multiple < limit + 3 do
-            distinct_factors[multiple] = distinct_factors[multiple] + 1
+            distinct_factors[multiple] =
+                distinct_factors[multiple] + 1
             multiple = multiple + p
         od
 
@@ -31,19 +32,30 @@ median(sorted: Collections.List[int]) -> int =>
     if sorted.count % 2 == 1 then
         sorted[sorted.count / 2]
     else
-        (sorted[sorted.count / 2 - 1] + sorted[sorted.count / 2]) / 2
+        (
+            sorted[sorted.count / 2 - 1] +
+            sorted[sorted.count / 2]
+        ) / 2
     fi
 
-report(below: int, direction: string, offset: int, show: bool) is
+report(
+    below: int,
+    direction: string,
+    offset: int,
+    show: bool
+) is
     let found =
         (2..below)
-        |> filter(p =>
-            is_tetraprime(p + offset) /\
-            is_tetraprime(p + offset + 1) /\
-            is_prime(p))
-        |> collect()
+            |> filter(p =>
+                is_tetraprime(p + offset) /\
+                is_tetraprime(p + offset + 1) /\
+                is_prime(p)
+            )
+            |> collect()
 
-    write_line("Primes below {below} {direction} by a tetraprime pair:")
+    write_line(
+        "Primes below {below} {direction} by a tetraprime pair:"
+    )
 
     if show then
         for row in found |> chunk(10) do
@@ -53,20 +65,26 @@ report(below: int, direction: string, offset: int, show: bool) is
 
     let sevens =
         found
-        |> count(p => (p + offset) % 7 == 0 \/ (p + offset + 1) % 7 == 0)
+            |> count(p =>
+                (p + offset) % 7 == 0 \/
+                (p + offset + 1) % 7 == 0
+            )
 
     let gaps =
-        found |> pairwise()
-        |> map(((a, b)) => b - a)
-        |> sort()
-        |> collect()
+        found
+            |> pairwise()
+            |> map(((a, b)) => b - a)
+            |> sort()
+            |> collect()
 
     write_line(
         "Found {found.count} such primes, of which {sevens} have 7 "
-        "as a factor of one of the pair")
+        "as a factor of one of the pair"
+    )
     write_line(
         "gaps between the primes: min {gaps[0]}, "
-        "median {median(gaps)}, max {gaps[gaps.count - 1]}")
+        "median {median(gaps)}, max {gaps[gaps.count - 1]}"
+    )
     write_line("")
 si
 

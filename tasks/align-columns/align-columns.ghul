@@ -11,16 +11,24 @@ pad(word: string, width: int, alignment: Alignment) -> string =>
     when _: Alignment.LEFT then word.pad_right(width)
     when _: Alignment.RIGHT then word.pad_left(width)
     when _: Alignment.CENTRE then
-        word
-        .pad_left(word.length + (width - word.length) / 2)
-        .pad_right(width)
+        word.pad_left(
+            word.length + (width - word.length) / 2
+        ).pad_right(width)
     esac
 
-line(row: string[], widths: int[], alignment: Alignment) -> string =>
-    (row
-     |> index()
-     |> map((column, word) => pad(word, widths[column], alignment))
-     |> join(" ")).trim_end()
+line(
+    row: string[],
+    widths: int[],
+    alignment: Alignment
+) -> string =>
+    (
+        row
+            |> index()
+            |> map((column, word) =>
+                pad(word, widths[column], alignment)
+            )
+            |> join(" ")
+    ).trim_end()
 
 let text = [
     "Given$a$text$file$of$many$lines,$where$fields$within$a$line$",
@@ -31,30 +39,36 @@ let text = [
     "justified,$right$justified,$or$center$justified$within$its$column."
 ]
 
-let rows =
-    text
-    |> map(line => line.trim_end('$').split(['$']))
+let rows = text |> map(line => line.trim_end('$').split(['$']))
 
 let columns =
     rows
-    |> reduce(0, (widest, row) =>
-        if row.count > widest then row.count else widest fi)
+        |> reduce(0, (widest, row) =>
+            if row.count > widest then row.count else widest fi
+        )
 
 let widths =
     (0..columns)
-    |> map(column =>
-        rows
-        |> filter(row => column < row.count)
-        |> reduce(0, (widest, row) =>
-            if row[column].length > widest then
-                row[column].length
-            else
-                widest
-            fi))
-    |> collect()
+        |> map(column =>
+            rows
+                |> filter(row => column < row.count)
+                |> reduce(0, (widest, row) =>
+                    if row[column].length > widest then
+                        row[column].length
+                    else
+                        widest
+                    fi
+                )
+        )
+        |> collect()
 
-for alignment in [Alignment.LEFT, Alignment.RIGHT, Alignment.CENTRE] do
-    rows |> each(row => write_line(line(row, widths, alignment)))
+for
+    alignment in [
+        Alignment.LEFT, Alignment.RIGHT, Alignment.CENTRE
+    ]
+do
+    rows
+        |> each(row => write_line(line(row, widths, alignment)))
 
     write_line("")
 od

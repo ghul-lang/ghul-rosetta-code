@@ -1,8 +1,10 @@
 use default
 
-running_sums(values: int{})
-    -> (length: int, last: int, sum: int){}
-is
+running_sums(values: int{}) -> (
+    length: int,
+    last: int,
+    sum: int
+){} is
     let length mut = 0
     let total mut = 0
 
@@ -25,7 +27,10 @@ write_line("length    last     sum")
 
 summaries
     |> each(summary =>
-        write_line("{summary.length,6}{summary.last,8}{summary.sum,8}"))
+        write_line(
+            "{summary.length,6}{summary.last,8}{summary.sum,8}"
+        )
+    )
 
 write_line()
 write_line("{summaries.count} such sequences below 1000")

@@ -16,7 +16,8 @@ let rows = board.count
 let columns = (board[0].length + 1) / 2
 
 let hops = [
-    (-3, 0), (3, 0), (0, -3), (0, 3), (-2, -2), (-2, 2), (2, -2), (2, 2)
+    (-3, 0), (3, 0), (0, -3), (0, 3), (-2, -2), (-2, 2),
+    (2, -2), (2, 2)
 ]
 
 let open = LIST()
@@ -31,11 +32,15 @@ od
 
 let order = MAP[Square, int]()
 
-free(s: Square) -> bool => open.contains(s) /\ !order.contains_key(s)
+free(s: Square) -> bool =>
+    open.contains(s) /\ !order.contains_key(s)
 
 moves(s: Square) -> List[Square] =>
     hops
-        |> map((dr, dc) => (row = s.row + dr, column = s.column + dc))
+        |> map((dr, dc) => (
+            row = s.row + dr,
+            column = s.column + dc
+        ))
         |> filter(free)
         |> collect()
 
@@ -47,7 +52,8 @@ hop(s: Square, step: int) -> bool is
     fi
 
     let next =
-        moves(s) |> sort((a, b) => moves(a).count - moves(b).count)
+        moves(s)
+            |> sort((a, b) => moves(a).count - moves(b).count)
 
     for candidate in next do
         if hop(candidate, step + 1) then
@@ -69,7 +75,12 @@ for row in 0..rows do
         (0..columns)
             |> map(column =>
                 let s = (row = row, column = column) in
-                if order.contains_key(s) then "{order[s],3}" else "   " fi)
+                if order.contains_key(s) then
+                    "{order[s],3}"
+                else
+                    "   "
+                fi
+            )
             |> join("")
 
     write_line(line.trim_end())
@@ -86,7 +97,11 @@ for s in open do
 
     image.colour(200ub, 215ub, 235ub)
     image.fill_rectangle(
-        x + 2.0D, y + 2.0D, x + cell - 2.0D, y + cell - 2.0D)
+        x + 2.0D,
+        y + 2.0D,
+        x + cell - 2.0D,
+        y + cell - 2.0D
+    )
 od
 
 let path =
@@ -94,7 +109,8 @@ let path =
         |> sort((a, b) => order[a] - order[b])
         |> map(s => (
             x = cell * (double(s.column) + 0.5D),
-            y = cell * (double(s.row) + 0.5D)))
+            y = cell * (double(s.row) + 0.5D)
+        ))
         |> collect()
 
 image.colour(30ub, 60ub, 140ub)
@@ -110,7 +126,10 @@ image.colour(90ub, 90ub, 100ub)
 for s in open do
     image.text(
         cell * double(s.column) + 5.0D,
-        cell * double(s.row) + 15.0D, 11.0D, "{order[s]}")
+        cell * double(s.row) + 15.0D,
+        11.0D,
+        "{order[s]}"
+    )
 od
 
 image.write("hopido.png")

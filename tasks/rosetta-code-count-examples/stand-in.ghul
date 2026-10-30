@@ -10,14 +10,14 @@ use System.Text.Encoding
 // interface. Not part of the published solution.
 stand_in() -> string is
     let replies =
-        IO.File.read_all_lines("api-replies.txt")
-            |> skip(1)
+        IO.File.read_all_lines("api-replies.txt") |> skip(1)
     let probe = TcpListener(IPAddress.loopback, 0)
 
     probe.start()
 
     let port =
-        if let bound: IPEndPoint = probe.local_endpoint then bound.port
+        if let bound: IPEndPoint = probe.local_endpoint then
+            bound.port
         else throw System.Exception("the probe has no address")
         fi
 
@@ -34,7 +34,11 @@ stand_in() -> string is
             let context = listener.get_context()
             let body = Encoding.utf8.get_bytes(reply)
 
-            context.response.output_stream.write(body, 0, body.count)
+            context.response.output_stream.write(
+                body,
+                0,
+                body.count
+            )
             context.response.close()
         od
     si)

@@ -10,12 +10,22 @@ class ACCOUNT(
     shell: string
 ) is
     to_string() -> string =>
-        [name, password, "{uid}", "{gid}", gecos, directory, shell]
+        [
+            name,
+            password,
+            "{uid}",
+            "{gid}",
+            gecos,
+            directory,
+            shell
+        ]
             |> join(":")
 si
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-append-a-record")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-append-a-record"
+)
 
 IO.Directory.create_directory(scratch)
 
@@ -23,29 +33,41 @@ let path = IO.Path.combine(scratch, "passwd")
 
 let first = [
     ACCOUNT(
-        "jsmith", "x", 1001, 1000,
+        "jsmith",
+        "x",
+        1001,
+        1000,
         "Joe Smith,Room 1007,(234)555-8917,"
         "(234)555-0077,jsmith@rosettacode.org",
-        "/home/jsmith", "/bin/bash"
+        "/home/jsmith",
+        "/bin/bash"
     ),
     ACCOUNT(
-        "jdoe", "x", 1002, 1000,
+        "jdoe",
+        "x",
+        1002,
+        1000,
         "Jane Doe,Room 1004,(234)555-8914,"
         "(234)555-0044,jdoe@rosettacode.org",
-        "/home/jdoe", "/bin/bash"
+        "/home/jdoe",
+        "/bin/bash"
     )
 ]
 
 IO.File.write_all_lines(
-    path, first |> map(account => "{account}")
+    path,
+    first |> map(account => "{account}")
 )
 
-let added =
-    ACCOUNT(
-        "xyz", "x", 1003, 1000,
-        "X Yz,Room 1003,(234)555-8913,(234)555-0033,xyz@rosettacode.org",
-        "/home/xyz", "/bin/bash"
-    )
+let added = ACCOUNT(
+    "xyz",
+    "x",
+    1003,
+    1000,
+    "X Yz,Room 1003,(234)555-8913,(234)555-0033,xyz@rosettacode.org",
+    "/home/xyz",
+    "/bin/bash"
+)
 
 let appending = IO.File.append_text(path)
 

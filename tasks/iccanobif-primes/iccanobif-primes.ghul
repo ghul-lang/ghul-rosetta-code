@@ -20,14 +20,22 @@ reversed(value: bigint) -> bigint => (
     bigint.parse(string(digits))
 )
 
-let iccanobif = fibonacci()
-    |> map(reversed)
-    |> filter(is_prime)
-    |> take(15)
-    |> memo()
+let iccanobif =
+    fibonacci()
+        |> map(reversed)
+        |> filter(is_prime)
+        |> take(15)
+        |> memo()
 
 write_line("the first 10 iccanobif primes:")
-write_line(iccanobif |> take(10) |> map(p => "{p}") |> join(" "))
+write_line(
+    iccanobif |> take(10) |> map(p => "{p}") |> join(" ")
+)
 write_line("")
 write_line("digit counts of the next 5:")
-write_line(iccanobif |> skip(10) |> map(p => "{"{p}".length}") |> join(" "))
+write_line(
+    iccanobif
+        |> skip(10)
+        |> map(p => "{"{p}".length}")
+        |> join(" ")
+)

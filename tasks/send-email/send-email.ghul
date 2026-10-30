@@ -15,7 +15,10 @@ send_email(
     subject: string,
     text: string
 ) is
-    let message = MailMessage(MailAddress(from), MailAddress(to))
+    let message = MailMessage(
+        MailAddress(from),
+        MailAddress(to)
+    )
 
     message.cc.add(cc)
     message.subject = subject
@@ -25,5 +28,11 @@ send_email(
 si
 
 send_email(
-    "smtp.example.com", 587, "sender@example.com", "recipient@example.com",
-    "copy@example.com", "Rosetta Code", "Hello from the task.")
+    "smtp.example.com",
+    587,
+    "sender@example.com",
+    "recipient@example.com",
+    "copy@example.com",
+    "Rosetta Code",
+    "Hello from the task."
+)

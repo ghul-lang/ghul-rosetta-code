@@ -3,7 +3,10 @@ use default
 let marker = "Traceback (most recent call last):"
 
 let text = IO.File.read_all_text("Traceback.txt")
-let paragraphs = text.split("\n\n", System.StringSplitOptions.NONE)
+let paragraphs = text.split(
+    "\n\n",
+    System.StringSplitOptions.NONE
+)
 
 for paragraph in paragraphs do
     let start = paragraph.index_of(marker)

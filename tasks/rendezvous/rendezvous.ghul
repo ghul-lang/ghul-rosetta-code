@@ -67,7 +67,9 @@ class PRINTER is
 
                 request.replies.send(PRINTED)
             elif let reserve = _reserve then
-                request.replies.send(await reserve.submit(request.line))
+                request.replies.send(
+                    await reserve.submit(request.line)
+                )
             else
                 request.replies.send(NO_INK)
             fi

@@ -4,7 +4,8 @@ horner(coefficients: int[], x: int) -> int =>
     coefficients
         |> reverse()
         |> reduce(0, (accumulator, coefficient) =>
-            accumulator * x + coefficient)
+            accumulator * x + coefficient
+        )
 
 let coefficients = [-19, 7, -4, 6]
 

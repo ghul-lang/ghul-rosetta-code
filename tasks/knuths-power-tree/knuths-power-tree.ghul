@@ -55,7 +55,10 @@ exponentiate[T: INumber[T]](base: T, exponent: int) -> T is
     for index in 1..steps.count do
         let step = steps[index]
 
-        computed.add(step, computed[parent[step]] * computed[added[step]])
+        computed.add(
+            step,
+            computed[parent[step]] * computed[added[step]]
+        )
     od
 
     return computed[exponent]

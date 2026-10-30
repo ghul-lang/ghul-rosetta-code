@@ -2,7 +2,8 @@ use default
 
 prime(value: int) -> bool =>
     value >= 2 /\
-        2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
+    2::int(Ghul.Math.sqrt(double(value)))
+        |> all(d => value % d != 0)
 
 population_count(value: int) -> int =>
     System.Convert.to_string(value, 2)
@@ -13,10 +14,8 @@ pernicious(value: int) -> bool => prime(population_count(value))
 
 write_line("first 25:")
 
-write_line(
-    from(1) |> filter(pernicious) |> take(25) |> join())
+write_line(from(1) |> filter(pernicious) |> take(25) |> join())
 
 write_line("between 888888877 and 888888888:")
 
-write_line(
-    888888877::888888888 |> filter(pernicious) |> join())
+write_line(888888877::888888888 |> filter(pernicious) |> join())

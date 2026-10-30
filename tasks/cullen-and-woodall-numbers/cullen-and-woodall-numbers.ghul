@@ -4,11 +4,17 @@ cullen(n: int) -> bigint => (bigint(n) << n) + 1n
 
 woodall(n: int) -> bigint => (bigint(n) << n) - 1n
 
-let small_primes = primes(3L) |> take_while(p => p <= 20_000L) |> memo()
+let small_primes =
+    primes(3L) |> take_while(p => p <= 20_000L) |> memo()
 
 has_small_factor(n: int, offset: long) -> bool =>
-    n > 10 /\ small_primes |> any(p =>
-        (long(n) % p * mod_pow(2L, long(n), p) + offset) % p == 0L)
+    n > 10 /\
+    small_primes
+        |> any(p =>
+            (
+                long(n) % p * mod_pow(2L, long(n), p) + offset
+            ) % p == 0L
+        )
 
 is_cullen_prime(n: int) -> bool =>
     !has_small_factor(n, 1L) /\ is_prime(cullen(n))
@@ -24,8 +30,12 @@ write_line(from(1) |> map(woodall) |> take(20) |> join(" "))
 write_line()
 write_line("searching for Cullen primes, which takes a while")
 write_line("First 5 Cullen primes, as n:")
-write_line(from(1) |> filter(is_cullen_prime) |> take(5) |> join(" "))
+write_line(
+    from(1) |> filter(is_cullen_prime) |> take(5) |> join(" ")
+)
 write_line()
 write_line("searching for Woodall primes")
 write_line("First 12 Woodall primes, as n:")
-write_line(from(1) |> filter(is_woodall_prime) |> take(12) |> join(" "))
+write_line(
+    from(1) |> filter(is_woodall_prime) |> take(12) |> join(" ")
+)

@@ -14,7 +14,9 @@ killings(n: int, k: int) -> int{} is
 si
 
 show(n: int, k: int) =>
-    write_line("n = {n}, k = {k}: killed {killings(n, k) |> join(", ")}")
+    write_line(
+        "n = {n}, k = {k}: killed {killings(n, k) |> join(", ")}"
+    )
 
 show(5, 2)
 show(7, 3)

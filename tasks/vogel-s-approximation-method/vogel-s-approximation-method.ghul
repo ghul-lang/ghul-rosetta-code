@@ -1,7 +1,11 @@
 use default
 
 use Cell = (row: int, column: int)
-use Line = (penalty: int, cheapest: int, cells: Collections.List[Cell])
+use Line = (
+    penalty: int,
+    cheapest: int,
+    cells: Collections.List[Cell]
+)
 
 let tasks = ["A", "B", "C", "D", "E"]
 let contractors = ["W", "X", "Y", "Z"]
@@ -18,19 +22,28 @@ let demand = [30, 20, 70, 30, 60] |> collect_mutable()
 
 let allocation =
     (0..contractors.count)
-    |> map(_ => repeat(0, tasks.count) |> collect_mutable())
-    |> collect()
+        |> map(_ => repeat(0, tasks.count) |> collect_mutable())
+        |> collect()
 
 line(cells: Collections.List[Cell]) -> Line =>
     let prices =
-        cells |> map((r, c) => costs[r][c]) |> sort() |> collect() in
+        cells
+            |> map((r, c) => costs[r][c])
+            |> sort()
+            |> collect()
+    in
     let penalty =
-        if prices.count > 1 then prices[1] - prices[0] else prices[0] fi in
+        if prices.count > 1 then
+            prices[1] - prices[0]
+        else
+            prices[0]
+        fi
+    in
     (penalty, prices[0], cells)
 
-
 active_lines() -> Line{} is
-    let rows = (0..contractors.count) |> filter(r => supply[r] > 0)
+    let rows =
+        (0..contractors.count) |> filter(r => supply[r] > 0)
     let columns = (0..tasks.count) |> filter(c => demand[c] > 0)
 
     for r in rows do
@@ -45,10 +58,11 @@ si
 while demand |> any(* > 0) do
     let chosen =
         active_lines()
-        |> sort_by(l => l.cheapest)
-        |> max_by(l => l.penalty)!
+            |> sort_by(l => l.cheapest)
+            |> max_by(l => l.penalty)!
 
-    let (row, column) = chosen.cells |> min_by((r, c) => costs[r][c])!
+    let (row, column) =
+        chosen.cells |> min_by((r, c) => costs[r][c])!
     let amount = System.Math.min(supply[row], demand[column])
 
     allocation[row][column] = amount
@@ -57,7 +71,8 @@ while demand |> any(* > 0) do
 
     write_line(
         "penalty {chosen.penalty,2}: "
-        "{tasks[column]}-{contractors[row]}({amount})")
+        "{tasks[column]}-{contractors[row]}({amount})"
+    )
 od
 
 write_line("")
@@ -66,15 +81,17 @@ write_line("   {tasks |> map(t => "{t,3}") |> join("")}")
 for (row, amounts) in allocation |> index() do
     let cells =
         amounts
-        |> map(a => if a > 0 then "{a,3}" else "   " fi)
-        |> join("")
+            |> map(a => if a > 0 then "{a,3}" else "   " fi)
+            |> join("")
 
     write_line("{contractors[row]}  {cells}".trim_end())
 od
 
-let total =
-    [allocation[r][c] * costs[r][c]
-        for r in 0..contractors.count for c in 0..tasks.count]
+let total = [
+    allocation[r][c] * costs[r][c]
+    for r in 0..contractors.count
+    for c in 0..tasks.count
+]
     |> sum()
 
 write_line("")

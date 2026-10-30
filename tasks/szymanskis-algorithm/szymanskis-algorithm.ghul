@@ -10,14 +10,14 @@ class FLAG is
         state = 0
     si
 
-    read() -> int => Volatile.read(state ref)
+    read() -> int => Volatile.read(state ref )
 
     // The algorithm needs each flag a process sets to be visible before it
     // reads the others. A volatile write may still be overtaken by a later
     // read, which lets two processes each miss the other and both wait for
     // ever; an interlocked exchange is a full fence.
     write(value: int) is
-        Interlocked.exchange(state ref, value)
+        Interlocked.exchange(state ref , value)
     si
 si
 
@@ -30,7 +30,10 @@ let counter = LIST([0])
 let occupancy = LIST([0, 0])
 
 all_within(from: int, to: int, allowed: int[]) -> bool =>
-    from..to |> all(i => allowed |> any(value => value == flags[i].read()))
+    from..to
+        |> all(i =>
+            allowed |> any(value => value == flags[i].read())
+        )
 
 any_is(value: int) -> bool =>
     0..workers |> any(i => flags[i].read() == value)
@@ -39,7 +42,7 @@ enter(me: int) is
     flags[me].write(1)
 
     while !all_within(0, workers, [0, 1, 2]) do
-        Thread.yield()
+        Thread.`yield()
     od
 
     flags[me].write(3)
@@ -48,20 +51,20 @@ enter(me: int) is
         flags[me].write(2)
 
         while !any_is(4) do
-            Thread.yield()
+            Thread.`yield()
         od
     fi
 
     flags[me].write(4)
 
     while !all_within(0, me, [0, 1]) do
-        Thread.yield()
+        Thread.`yield()
     od
 si
 
 leave(me: int) is
     while !all_within(me + 1, workers, [0, 1, 4]) do
-        Thread.yield()
+        Thread.`yield()
     od
 
     flags[me].write(0)
@@ -87,9 +90,12 @@ work(me: int) is
     od
 si
 
-let threads = 0..workers
-    |> map(i => Thread(System.Threading.ThreadStart(() => work(i))))
-    |> collect()
+let threads =
+    0..workers
+        |> map(i =>
+            Thread(System.Threading.ThreadStart(() => work(i)))
+        )
+        |> collect()
 
 threads |> each(thread => thread.start())
 threads |> each(thread => thread.join())
@@ -97,4 +103,6 @@ threads |> each(thread => thread.join())
 write_line("workers: {workers}, rounds each: {rounds}")
 write_line("counter: {counter[0]}, expected {workers * rounds}")
 write_line("most workers inside at once: {occupancy[1]}")
-write_line("every flag back to zero: {all_within(0, workers, [0])}")
+write_line(
+    "every flag back to zero: {all_within(0, workers, [0])}"
+)

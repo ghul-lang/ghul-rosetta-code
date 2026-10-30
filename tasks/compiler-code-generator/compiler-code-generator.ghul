@@ -15,8 +15,15 @@ load() -> Node is
         return Node.EMPTY
     fi
 
-    if kind =~ "Identifier" \/ kind =~ "Integer" \/ kind =~ "String" then
-        return Node.LEAF(kind, line.substring(kind.length).trim())
+    if
+        kind =~ "Identifier" \/
+        kind =~ "Integer" \/
+        kind =~ "String"
+    then
+        return Node.LEAF(
+            kind,
+            line.substring(kind.length).trim()
+        )
     fi
 
     let left = load()
@@ -55,14 +62,18 @@ si
 
 let operators = MAP[string, string]()
 
-for (kind, name) in [
-    ("Multiply", "mul"), ("Divide", "div"), ("Mod", "mod"),
-    ("Add", "add"), ("Subtract", "sub"), ("Less", "lt"),
-    ("LessEqual", "le"), ("Greater", "gt"), ("GreaterEqual", "ge"),
-    ("Equal", "eq"), ("NotEqual", "ne"), ("And", "and"), ("Or", "or"),
-    ("Negate", "neg"), ("Not", "not"),
-    ("Prtc", "prtc"), ("Prti", "prti"), ("Prts", "prts")
-] do
+for
+    (kind, name) in [
+        ("Multiply", "mul"), ("Divide", "div"), ("Mod", "mod"),
+        ("Add", "add"), ("Subtract", "sub"), ("Less", "lt"),
+        ("LessEqual", "le"), ("Greater", "gt"),
+        ("GreaterEqual", "ge"),
+        ("Equal", "eq"), ("NotEqual", "ne"), ("And", "and"),
+        ("Or", "or"),
+        ("Negate", "neg"), ("Not", "not"),
+        ("Prtc", "prtc"), ("Prti", "prti"), ("Prts", "prts")
+    ]
+do
     operators[kind] = name
 od
 
@@ -77,7 +88,9 @@ generate(node: Node) is
     when (~"Sequence", first, second): Node.BRANCH then
         generate(first)
         generate(second)
-    when (~"Assign", (_, name): Node.LEAF, value): Node.BRANCH then
+    when
+        (~"Assign", (_, name): Node.LEAF, value): Node.BRANCH
+    then
         generate(value)
 
         let _ = emit("store", "[{slot(variables, name)}]")
@@ -91,7 +104,9 @@ generate(node: Node) is
         generate(body)
         emit("jmp", "").target = top
         exit.target = size
-    when (~"If", condition, (_, yes, no): Node.BRANCH): Node.BRANCH then
+    when
+        (~"If", condition, (_, yes, no): Node.BRANCH): Node.BRANCH
+    then
         generate(condition)
 
         let skip = emit("jz", "")
@@ -120,13 +135,16 @@ generate(load())
 
 let _ = emit("halt", "")
 
-write_line("Datasize: {variables.count} Strings: {strings.count}")
+write_line(
+    "Datasize: {variables.count} Strings: {strings.count}"
+)
 strings |> each(s => write_line(s))
 
 for i in code do
     if i.name =~ "jz" \/ i.name =~ "jmp" then
         write_line(
-            "{i.at,4} {i.name,-7}({i.target - i.at - 1}) {i.target}")
+            "{i.at,4} {i.name,-7}({i.target - i.at - 1}) {i.target}"
+        )
     elif i.operand =~ "" then
         write_line("{i.at,4} {i.name}")
     else

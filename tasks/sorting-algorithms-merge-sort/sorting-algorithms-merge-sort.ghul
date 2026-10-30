@@ -9,10 +9,14 @@ merge_sort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] is
 
     return merge(
         merge_sort(values[0..middle]),
-        merge_sort(values[middle..<0]))
+        merge_sort(values[middle..<0])
+    )
 si
 
-merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] =>
+merge[T: Ghul.Comparable[T]](
+    left: List[T],
+    right: List[T]
+) -> List[T] =>
     case (left, right)
     when ([], _) then right
     when (_, []) then left
@@ -25,4 +29,8 @@ merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] =>
     esac
 
 write_line([5, 3, 8, 1, 9, 2, 7] |> merge_sort() |> join())
-write_line(["pear", "apple", "quince", "banana"] |> merge_sort() |> join())
+write_line(
+    ["pear", "apple", "quince", "banana"]
+        |> merge_sort()
+        |> join()
+)

@@ -1,7 +1,9 @@
 use default
 
 strip_block_comments(
-    text: string, start: string, ended: string
+    text: string,
+    start: string,
+    ended: string
 ) -> string =>
     let open = text.index_of(start) in
     if open < 0 then
@@ -35,4 +37,6 @@ let lines = [
     "    }}"
 ]
 
-write_line(strip_block_comments(lines |> join("\n"), "/*", "*/"))
+write_line(
+    strip_block_comments(lines |> join("\n"), "/*", "*/")
+)

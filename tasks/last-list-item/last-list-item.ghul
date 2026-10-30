@@ -1,6 +1,7 @@
 use default
 
-let items = [6, 81, 243, 14, 25, 49, 123, 69, 11] |> collect_mutable()
+let items = [6, 81, 243, 14, 25, 49, 123, 69, 11]
+    |> collect_mutable()
 
 write_line("{items |> join()}")
 

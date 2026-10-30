@@ -3,5 +3,7 @@ use default
 entry(args: string[]) is
     write_line("{args.count} arguments:")
 
-    args |> index() |> each(a => write_line("  {a.index}: {a.value}"))
+    args
+        |> index()
+        |> each(a => write_line("  {a.index}: {a.value}"))
 si

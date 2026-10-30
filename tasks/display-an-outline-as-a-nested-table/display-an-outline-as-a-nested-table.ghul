@@ -4,19 +4,20 @@ use CELL = (text: string, width: int, colour: string)
 
 class NODE(text: string, children: LIST[NODE])
 
-let outline =
-    ["Display an outline as a nested table.",
-     "    Parse the outline to a tree,",
-     "        measuring the indent of each line,",
-     "        translating the indentation to a nested structure,",
-     "        and padding the tree to even depth.",
-     "    count the leaves descending from each node,",
-     "        defining the width of a leaf as 1,",
-     "        and the width of a parent node as a sum.",
-     "            (The sum of the widths of its children)",
-     "    and write out a table with 'colspan' values",
-     "        either as a wiki table,",
-     "        or as HTML."]
+let outline = [
+    "Display an outline as a nested table.",
+    "    Parse the outline to a tree,",
+    "        measuring the indent of each line,",
+    "        translating the indentation to a nested structure,",
+    "        and padding the tree to even depth.",
+    "    count the leaves descending from each node,",
+    "        defining the width of a leaf as 1,",
+    "        and the width of a parent node as a sum.",
+    "            (The sum of the widths of its children)",
+    "    and write out a table with 'colspan' values",
+    "        either as a wiki table,",
+    "        or as HTML."
+]
 
 let root_colour = "#ffffe6"
 let palette = ["#ffebd2", "#f0fff0", "#e6ffff"]
@@ -68,15 +69,18 @@ width(node: NODE) -> int =>
     if node.children.count == 0 then
         1
     else
-        node.children
-            |> sum_by(width)
+        node.children |> sum_by(width)
     fi
 
-gather(node: NODE, level: int, colour: string,
-       rows: List[LIST[CELL]])
-is
+gather(
+    node: NODE,
+    level: int,
+    colour: string,
+    rows: List[LIST[CELL]]
+) is
     rows[level].add(
-        (text = node.text, width = width(node), colour = colour))
+        (text = node.text, width = width(node), colour = colour)
+    )
 
     for entry in node.children |> index() do
         let shade =
@@ -99,7 +103,9 @@ let rows = 0::bottom |> map(_ => LIST()) |> collect()
 
 gather(tree, 0, root_colour, rows)
 
-write_line("{{| class=\"wikitable\" style=\"text-align: center;\"")
+write_line(
+    "{{| class=\"wikitable\" style=\"text-align: center;\""
+)
 
 for row in rows do
     write_line("|-")
@@ -108,11 +114,15 @@ for row in rows do
         if cell.text.length == 0 then
             write_line("|  | ")
         elif cell.width > 1 then
-            write_line("| style=\"background: {cell.colour}; \" "
-                       "colspan={cell.width} | {cell.text}")
+            write_line(
+                "| style=\"background: {cell.colour}; \" "
+                "colspan={cell.width} | {cell.text}"
+            )
         else
-            write_line("| style=\"background: {cell.colour}; \" | "
-                       "{cell.text}")
+            write_line(
+                "| style=\"background: {cell.colour}; \" | "
+                "{cell.text}"
+            )
         fi
     od
 od

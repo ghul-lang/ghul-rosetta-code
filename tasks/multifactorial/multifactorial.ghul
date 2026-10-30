@@ -8,6 +8,9 @@ multifactorial(n: int, degree: int) -> long =>
 write_line("degree  n = 1 .. 10")
 
 for degree in 1::5 do
-    let row = 1::10 |> map(n => "{multifactorial(n, degree),8}") |> join("")
+    let row =
+        1::10
+            |> map(n => "{multifactorial(n, degree),8}")
+            |> join("")
     write_line("{degree,6}{row}")
 od

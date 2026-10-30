@@ -24,20 +24,22 @@ od
 digit_signature(value: int) -> string =>
     value |> digits() |> sort() |> string()
 
-let primes = 2..(limit + 1)
-    |> filter(candidate => !composite[candidate])
+let primes =
+    2..(limit + 1) |> filter(candidate => !composite[candidate])
 
-let ormiston = primes
-    |> pairwise()
-    |> filter((a, b) => digit_signature(a) =~ digit_signature(b))
+let ormiston =
+    primes
+        |> pairwise()
+        |> filter((a, b) =>
+            digit_signature(a) =~ digit_signature(b)
+        )
 
 write_line("first 30 Ormiston pairs:")
 
 ormiston |> take(30) |> each((a, b) => write_line("({a}, {b})"))
 
-let up_to_million = ormiston
-    |> take_while((a, b) => b <= 1000000)
-    |> count()
+let up_to_million =
+    ormiston |> take_while((a, b) => b <= 1000000) |> count()
 
 write_line("{up_to_million} pairs up to 1000000")
 write_line("{ormiston |> count()} pairs up to 10000000")

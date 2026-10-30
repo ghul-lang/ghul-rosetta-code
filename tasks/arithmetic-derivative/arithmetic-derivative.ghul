@@ -22,15 +22,19 @@ si
 
 write_line("the arithmetic derivative of -99 through 100:")
 
-let values = -99::100 |> map(n => "{derivative(bigint(n)),5}")
-                        |> collect()
+let values =
+    -99::100
+        |> map(n => "{derivative(bigint(n)),5}")
+        |> collect()
 
 for row in 0..20 do
     write_line(values[row * 10..row * 10 + 10] |> join(""))
 od
 
 write_line("")
-write_line("the arithmetic derivative of ten to the power m, over seven:")
+write_line(
+    "the arithmetic derivative of ten to the power m, over seven:"
+)
 
 let ten = 10n
 let seven = 7n

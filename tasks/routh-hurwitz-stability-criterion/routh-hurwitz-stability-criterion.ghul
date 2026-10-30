@@ -2,36 +2,47 @@ use default
 
 let epsilon = 1.0e-9
 
-next_row(above: List[double], row: List[double]) -> LIST[double] =>
+next_row(
+    above: List[double],
+    row: List[double]
+) -> LIST[double] =>
     (0..row.count)
-    |> map(k =>
-        if k + 1 < row.count then
-            (row[0] * above[k + 1] - above[0] * row[k + 1]) / row[0]
-        else
-            0.0
-        fi)
-    |> collect_mutable()
+        |> map(k =>
+            if k + 1 < row.count then
+                (
+                    row[0] * above[k + 1] -
+                    above[0] * row[k + 1]
+                ) /
+                row[0]
+            else
+                0.0
+            fi
+        )
+        |> collect_mutable()
 
 derivative(row: List[double], order: int) -> LIST[double] =>
     (0..row.count)
-    |> map(k => row[k] * double(order - 2 * k))
-    |> collect_mutable()
+        |> map(k => row[k] * double(order - 2 * k))
+        |> collect_mutable()
 
-routh_array(
-    coefficients: double[]
-) -> (rows: LIST[LIST[double]], on_axis: bool) is
+routh_array(coefficients: double[]) -> (
+    rows: LIST[LIST[double]],
+    on_axis: bool
+) is
     let degree = coefficients.count - 1
     let width = degree / 2 + 1
 
-    let row_from = start =>
-        (0..width)
-        |> map(k =>
-            if start + 2 * k <= degree then
-                coefficients[start + 2 * k]
-            else
-                0.0
-            fi)
-        |> collect_mutable()
+    let row_from =
+        start =>
+            (0..width)
+                |> map(k =>
+                    if start + 2 * k <= degree then
+                        coefficients[start + 2 * k]
+                    else
+                        0.0
+                    fi
+                )
+                |> collect_mutable()
 
     let rows = LIST[LIST[double]]([row_from(0), row_from(1)])
     let on_axis mut = false
@@ -40,8 +51,10 @@ routh_array(
         let above = rows[r - 2]
 
         if rows[r - 1] |> all(* == 0.0) then
-            write_line("  row s{degree - r + 1} is zero: "
-                "using the auxiliary polynomial's derivative")
+            write_line(
+                "  row s{degree - r + 1} is zero: "
+                "using the auxiliary polynomial's derivative"
+            )
             rows[r - 1] = derivative(above, degree - r + 2)
             on_axis = true
         fi
@@ -49,7 +62,8 @@ routh_array(
         if rows[r - 1][0] == 0.0 then
             write_line(
                 "  zero in the first column of row s{degree - r + 1}: "
-                "replaced by a small positive number")
+                "replaced by a small positive number"
+            )
             rows[r - 1][0] = epsilon
         fi
 
@@ -61,7 +75,9 @@ si
 
 sign_changes(column: Collections.List[double]) -> int =>
     (1..column.count)
-    |> count(i => (column[i - 1] < 0.0) != (column[i] < 0.0))
+        |> count(i =>
+            (column[i - 1] < 0.0) != (column[i] < 0.0)
+        )
 
 test(coefficients: double[]) is
     let listed = coefficients |> map(c => "{c}") |> join()
@@ -75,14 +91,20 @@ test(coefficients: double[]) is
         write_line("  s{degree - r,-2}|{cells}")
     od
 
-    let changes = sign_changes(rows |> map(row => row[0]) |> collect())
+    let changes = sign_changes(
+        rows |> map(row => row[0]) |> collect()
+    )
 
     if changes == 0 /\ on_axis then
-        write_line("  marginally stable: roots on the imaginary axis")
+        write_line(
+            "  marginally stable: roots on the imaginary axis"
+        )
     elif changes == 0 then
         write_line("  stable")
     else
-        write_line("  unstable: {changes} root(s) in the right half plane")
+        write_line(
+            "  unstable: {changes} root(s) in the right half plane"
+        )
     fi
 
     write_line("")

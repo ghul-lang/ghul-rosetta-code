@@ -7,7 +7,12 @@ let numbers = ["one", "two", "three"]
 let symbols = ["oval", "squiggle", "diamond"]
 let shadings = ["solid", "open", "striped"]
 
-struct CARD(colour: int, number: int, symbol: int, shading: int) is
+struct CARD(
+    colour: int,
+    number: int,
+    symbol: int,
+    shading: int
+) is
     to_string() -> string =>
         "{colours[colour]}, {numbers[number]}, "
         "{symbols[symbol]}, {shadings[shading]}"
@@ -52,7 +57,12 @@ puzzle(size: int, wanted: int) -> List[CARD] is
     do
         let cards = deal(size)
 
-        if cards |> triples() |> filter(is_set) |> count() == wanted then
+        if
+            cards
+                |> triples()
+                |> filter(is_set)
+                |> count() == wanted
+        then
             return cards
         fi
     od
@@ -84,25 +94,48 @@ for (mode, cards, wanted) in deals do
 od
 
 let inks = [
-    (220ub, 30ub, 50ub), (20ub, 150ub, 60ub), (110ub, 40ub, 150ub)]
+    (220ub, 30ub, 50ub), (20ub, 150ub, 60ub),
+    (110ub, 40ub, 150ub)
+]
 
-outline(symbol: int, x: double, y: double)
-        -> List[(x: double, y: double)] =>
+outline(symbol: int, x: double, y: double) -> List[(
+    x: double,
+    y: double
+)] =>
     let steps = 32 in
     (0..steps)
         |> map(i =>
-            let turn = double(i) / double(steps), t = 2.0D * pi * turn in
-            case symbol
-            when 0 then
-                (x = x + 8.0D * cos(t), y = y + 18.0D * sin(t))
-            when 1 then
-                let dy = 18.0D * sin(t) in
-                (x = x + 7.0D * cos(t) + 4.0D * sin(dy / 6.0D),
-                 y = y + dy)
-            else
-                let s = sin(t), c = cos(t), k = 1.0D / (abs(s) + abs(c)) in
-                (x = x + 9.0D * c * k, y = y + 19.0D * s * k)
-            esac)
+            let
+                turn = double(i) / double(steps),
+                t = 2.0D * pi * turn
+            in
+                case symbol
+                when 0 then
+                    (
+                        x = x + 8.0D * cos(t),
+                        y = y + 18.0D * sin(t)
+                    )
+                when 1 then
+                    let dy = 18.0D * sin(t) in
+                    (
+                        x =
+                            x +
+                            7.0D * cos(t) +
+                            4.0D * sin(dy / 6.0D),
+                        y = y + dy
+                    )
+                else
+                    let
+                        s = sin(t),
+                        c = cos(t),
+                        k = 1.0D / (abs(s) + abs(c))
+                    in
+                        (
+                            x = x + 9.0D * c * k,
+                            y = y + 19.0D * s * k
+                        )
+                esac
+        )
         |> collect()
 
 let card_width = 120.0D
@@ -111,26 +144,42 @@ let gap = 12.0D
 
 let image = IMAGE(
     int(4.0D * card_width + 5.0D * gap),
-    int(3.0D * card_height + 4.0D * gap))
+    int(3.0D * card_height + 4.0D * gap)
+)
 
 image.view(
-    0.0D, double(image.height), double(image.width), 0.0D)
+    0.0D,
+    double(image.height),
+    double(image.width),
+    0.0D
+)
 image.clear(40ub, 90ub, 60ub)
 
-for (card, place) in
-        deals[1].cards |> index() |> map(iv => (iv.value, iv.index)) do
+for
+    (card, place) in deals[1].cards
+        |> index()
+        |> map(iv => (iv.value, iv.index))
+do
     let left = gap + double(place % 4) * (card_width + gap)
     let top = gap + double(place / 4) * (card_height + gap)
     let (red, green, blue) = inks[card.colour]
 
     image.colour(255ub, 255ub, 252ub)
     image.fill_rectangle(
-        left, top, left + card_width, top + card_height)
+        left,
+        top,
+        left + card_width,
+        top + card_height
+    )
 
     for i in 0..card.number + 1 do
         let offset = double(i) - double(card.number) / 2.0D
         let x = left + card_width / 2.0D + 26.0D * offset
-        let shape = outline(card.symbol, x, top + card_height / 2.0D)
+        let shape = outline(
+            card.symbol,
+            x,
+            top + card_height / 2.0D
+        )
 
         if card.shading == 0 then
             image.colour(red, green, blue)
@@ -139,7 +188,8 @@ for (card, place) in
             image.colour(
                 ubyte(255 - (255 - int(red)) / 3),
                 ubyte(255 - (255 - int(green)) / 3),
-                ubyte(255 - (255 - int(blue)) / 3))
+                ubyte(255 - (255 - int(blue)) / 3)
+            )
             image.fill(shape)
         fi
 

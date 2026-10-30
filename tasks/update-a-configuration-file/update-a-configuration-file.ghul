@@ -1,14 +1,26 @@
 use default
 
-class OPTION(name: string, value: string public, enabled: bool public) is
+class OPTION(
+    name: string,
+    value: string public,
+    enabled: bool public
+) is
     to_string() -> string =>
-        let text = if value.length > 0 then "{name} {value}" else name fi in
+        let text =
+            if value.length > 0 then
+                "{name} {value}"
+            else
+                name
+            fi
+        in
         if enabled then text else "; {text}" fi
 si
 
 // Tabs, control codes and anything outside ASCII are dropped.
 cleaned(line: string) -> string =>
-    (line |> filter(c => c >= ' ' /\ c <= '~') |> string()).trim()
+    (
+        line |> filter(c => c >= ' ' /\ c <= '~') |> string()
+    ).trim()
 
 parse(line: string) -> OPTION? is
     let enabled = !line.starts_with(";")
@@ -18,7 +30,8 @@ parse(line: string) -> OPTION? is
         return null
     fi
 
-    let skip_empty = System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
+    let skip_empty =
+        System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
     let words = body.split([' '], skip_empty)
     let value = words |> skip(1) |> join(" ")
 

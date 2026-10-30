@@ -5,7 +5,8 @@ let random = System.Random(2024)
 // a base between 2 and n - 2
 
 random_base(n: bigint) -> bigint =>
-    bigint(random.next_int64(0L, long.max_value)) % (n - 3n) + 2n
+    bigint(random.next_int64(0L, long.max_value)) % (n - 3n) +
+    2n
 
 is_probably_prime(n: bigint, rounds: int) -> bool is
     if n < 4n then
@@ -53,7 +54,8 @@ let numbers = [
 
 for n in numbers do
     let prime = is_probably_prime(n, 20)
-    let verdict = if prime then "probably prime" else "composite" fi
+    let verdict =
+        if prime then "probably prime" else "composite" fi
 
     write_line("{n,40}  {verdict}")
 od

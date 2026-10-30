@@ -7,17 +7,21 @@ let size = 3
 let source = System.Random(20260909)
 
 fresh() -> LIST[int] =>
-    0..size * size |> map(_ => source.next(2)) |> collect_mutable()
+    0..size * size
+        |> map(_ => source.next(2))
+        |> collect_mutable()
 
 flip_row(board: LIST[int], row: int) is
     for column in 0..size do
-        board[row * size + column] = 1 - board[row * size + column]
+        board[row * size + column] =
+            1 - board[row * size + column]
     od
 si
 
 flip_column(board: LIST[int], column: int) is
     for row in 0..size do
-        board[row * size + column] = 1 - board[row * size + column]
+        board[row * size + column] =
+            1 - board[row * size + column]
     od
 si
 
@@ -27,14 +31,14 @@ same(left: List[int], right: List[int]) -> bool =>
 show(caption: string, board: List[int]) is
     write_line(caption)
 
-    let letters =
-        0..size |> map(c => "{char(int('a') + c)}")
+    let letters = 0..size |> map(c => "{char(int('a') + c)}")
 
     write_line("   {letters |> join(" ")}")
 
     for row in 0..size do
         let cells =
-            0..size |> map(column => "{board[row * size + column]}")
+            0..size
+                |> map(column => "{board[row * size + column]}")
 
         write_line("{row + 1}  {cells |> join(" ")}")
     od

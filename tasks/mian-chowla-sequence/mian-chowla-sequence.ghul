@@ -6,10 +6,11 @@ mian_chowla() -> int{} is
     let candidate mut = 1
 
     while true do
-        let fresh = terms
-            |> map(term => term + candidate)
-            |> cat([candidate + candidate])
-            |> memo()
+        let fresh =
+            terms
+                |> map(term => term + candidate)
+                |> cat([candidate + candidate])
+                |> memo()
 
         if fresh |> all(sum => !sums.contains(sum)) then
             terms.add(candidate)
@@ -28,7 +29,8 @@ mian_chowla()
     |> take(30)
     |> chunk(10)
     |> each(row =>
-        write_line(row |> map(n => "{n,6}") |> join("")))
+        write_line(row |> map(n => "{n,6}") |> join(""))
+    )
 
 write_line("")
 write_line("terms 91 to 100:")
@@ -38,4 +40,5 @@ mian_chowla()
     |> take(10)
     |> chunk(5)
     |> each(row =>
-        write_line(row |> map(n => "{n,8}") |> join("")))
+        write_line(row |> map(n => "{n,8}") |> join(""))
+    )

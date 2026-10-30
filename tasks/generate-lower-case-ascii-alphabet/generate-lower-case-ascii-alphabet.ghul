@@ -5,4 +5,6 @@ let letters = 'a'::'z' |> collect()
 let last = letters.count - 1
 
 write_line(letters |> join(""))
-write_line("{letters.count} letters, {letters[0]} to {letters[last]}")
+write_line(
+    "{letters.count} letters, {letters[0]} to {letters[last]}"
+)

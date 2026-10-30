@@ -1,10 +1,15 @@
 use default
 
 stooge_sort[T: Ghul.Comparable[T]](
-    values: LIST[T], low: int, high: int
+    values: LIST[T],
+    low: int,
+    high: int
 ) is
     if values[high] < values[low] then
-        (values[low], values[high]) = (values[high], values[low])
+        (values[low], values[high]) = (
+            values[high],
+            values[low]
+        )
     fi
 
     if high - low > 1 then

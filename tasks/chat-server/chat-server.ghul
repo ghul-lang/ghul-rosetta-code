@@ -24,8 +24,7 @@ si
 announce(except: string, what: string) is
     Monitor.enter(members)
 
-    let listening =
-        members |> filter(m => m.nickname !~ except)
+    let listening = members |> filter(m => m.nickname !~ except)
 
     Monitor.exit(members)
 
@@ -71,19 +70,16 @@ let listener = TcpListener(IPAddress.loopback, port)
 
 listener.start()
 
-let door =
-    Thread(
-        () is
-            for _ in 0..2 do
-                let client = listener.accept_tcp_client()
-                let attending = Thread(() => attend(client))
+let door = Thread(() is
+    for _ in 0..2 do
+        let client = listener.accept_tcp_client()
+        let attending = Thread(() => attend(client))
 
-                attending.is_background = true
+        attending.is_background = true
 
-                attending.start()
-            od
-        si
-    )
+        attending.start()
+    od
+si)
 
 door.is_background = true
 
@@ -148,9 +144,8 @@ bob.listen()
 bob.leave()
 
 [alice, bob]
-    |> each(
-        visitor is
-            write_line("{visitor.nickname} saw")
+    |> each(visitor is
+        write_line("{visitor.nickname} saw")
 
-            visitor.heard |> each(line => write_line("  {line}"))
-        si)
+        visitor.heard |> each(line => write_line("  {line}"))
+    si)

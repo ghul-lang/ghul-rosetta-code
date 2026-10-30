@@ -2,7 +2,9 @@ use default
 use Raster.IMAGE
 use System.Math
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -13,19 +15,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -34,7 +49,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -52,7 +71,12 @@ reduced(image: IMAGE) -> IMAGE is
             let p = image.pixel(x, y)
 
             copy.set_pixel(
-                x, y, coarse(p.red), coarse(p.green), coarse(p.blue))
+                x,
+                y,
+                coarse(p.red),
+                coarse(p.green),
+                coarse(p.blue)
+            )
         od
     od
 
@@ -64,7 +88,7 @@ gap(a: ubyte, b: ubyte) -> long =>
 
 difference(a: IMAGE, b: IMAGE) -> double is
     assert a.width == b.width /\ a.height == b.height
-    else "the images are not the same size"
+        else "the images are not the same size"
 
     let total mut = 0L
 
@@ -72,8 +96,10 @@ difference(a: IMAGE, b: IMAGE) -> double is
         for x in 0..a.width do
             let p = a.pixel(x, y), q = b.pixel(x, y)
 
-            total = total +
-                gap(p.red, q.red) + gap(p.green, q.green) +
+            total =
+                total +
+                gap(p.red, q.red) +
+                gap(p.green, q.green) +
                 gap(p.blue, q.blue)
         od
     od
@@ -91,9 +117,13 @@ reduced(original).write("reduced.png")
 let first = IMAGE.read("original.png")
 let second = IMAGE.read("reduced.png")
 
-write_line("original.png against reduced.png, 16 levels a channel")
+write_line(
+    "original.png against reduced.png, 16 levels a channel"
+)
 write_line("difference: {difference(first, second):F5}%")
-write_line("original.png against itself: {difference(first, first):F5}%")
+write_line(
+    "original.png against itself: {difference(first, first):F5}%"
+)
 
 first.show("original.png")
 second.show("reduced.png")

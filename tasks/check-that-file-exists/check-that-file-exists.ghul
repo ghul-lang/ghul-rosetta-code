@@ -5,7 +5,7 @@ report(path: string) =>
         file = IO.File.exists(path),
         directory = IO.Directory.exists(path)
     in
-    write_line("{path}: file {file}, directory {directory}")
+        write_line("{path}: file {file}, directory {directory}")
 
 for path in ["input.txt", "docs", "`Abdu'l-Bahá.txt"] do
     report(path)

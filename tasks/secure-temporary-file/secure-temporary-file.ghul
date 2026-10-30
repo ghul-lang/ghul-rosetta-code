@@ -1,20 +1,27 @@
 use default
 use IO
 
-create_secure_temp_file(dir: string, prefix: string) -> string is
+create_secure_temp_file(
+    dir: string,
+    prefix: string
+) -> string is
     let attempt mut = 0
 
-    let path = do
-        let candidate = "{dir}/{prefix}{attempt}.tmp"
+    let path =
+        do
+            let candidate = "{dir}/{prefix}{attempt}.tmp"
 
-        try
-            let use _ = FileStream(
-                candidate, FileMode.CREATE_NEW, FileAccess.WRITE)
-            break candidate
-        catch e: IO.IOException
-            attempt = attempt + 1
-        yrt
-    od
+            try
+                let use _ = FileStream(
+                    candidate,
+                    FileMode.CREATE_NEW,
+                    FileAccess.WRITE
+                )
+                break candidate
+            catch e: IO.IOException
+                attempt = attempt + 1
+            yrt
+        od
 
     path!
 si

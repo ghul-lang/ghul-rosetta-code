@@ -1,7 +1,9 @@
 use default
 
-permute[T](digits: Collections.List[int], items: Collections.List[T])
-        -> List[T] is
+permute[T](
+    digits: Collections.List[int],
+    items: Collections.List[T]
+) -> List[T] is
     let result = LIST(items)
 
     for (place, digit) in digits |> index() do
@@ -40,10 +42,14 @@ si
 parse_digits(text: string) -> List[int] =>
     text.split(['.']) |> map(int.parse) |> collect()
 
-show[T](digits: Collections.List[int], items: Collections.List[T]) =>
+show[T](
+    digits: Collections.List[int],
+    items: Collections.List[T]
+) =>
     let number = digits |> map(d => "{d}") |> join(".") in
     let arrangement =
-        permute(digits, items) |> map(i => "{i}") |> join("") in
+        permute(digits, items) |> map(i => "{i}") |> join("")
+    in
     write_line("{number} -> {arrangement}")
 
 for digits in factorial_base_numbers(3) do
@@ -51,16 +57,20 @@ for digits in factorial_base_numbers(3) do
 od
 
 write_line("")
-let permutations_of_eleven = factorial_base_numbers(10) |> count()
+let permutations_of_eleven =
+    factorial_base_numbers(10) |> count()
 
-write_line("permutations of 11 digits: {permutations_of_eleven}")
+write_line(
+    "permutations of 11 digits: {permutations_of_eleven}"
+)
 write_line("")
 
 let shoe = LIST()
 
 for suit in ["♠", "♥", "♦", "♣"] do
     let ranks = [
-        "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"
+        "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4",
+        "3", "2"
     ]
 
     for rank in ranks do

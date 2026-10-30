@@ -4,9 +4,11 @@ let pair_bound = 1200
 
 cube(x: long) -> long => x * x * x
 
-let taxis =
-    [cube(long(a)) + cube(long(b))
-        for a in 1..pair_bound for b in (a + 1)..pair_bound]
+let taxis = [
+    cube(long(a)) + cube(long(b))
+    for a in 1..pair_bound
+    for b in (a + 1)..pair_bound
+]
     |> sort()
     |> group_by(value => value)
     |> filter((_, group) => group.count > 1)
@@ -22,11 +24,11 @@ cube_root(value: long) -> long => (
 
 expressions(taxi: long) -> string =>
     from(1L)
-    |> take_while(a => cube(a) * 2L < taxi)
-    |> map(a => (a, cube_root(taxi - cube(a))))
-    |> filter((_, b) => b > 0L)
-    |> map((a, b) => "{a}^3 + {b}^3")
-    |> join(" = ")
+        |> take_while(a => cube(a) * 2L < taxi)
+        |> map(a => (a, cube_root(taxi - cube(a))))
+        |> filter((_, b) => b > 0L)
+        |> map((a, b) => "{a}^3 + {b}^3")
+        |> join(" = ")
 
 show(rank: int, taxis: List[long]) =>
     let taxi = taxis[rank - 1] in

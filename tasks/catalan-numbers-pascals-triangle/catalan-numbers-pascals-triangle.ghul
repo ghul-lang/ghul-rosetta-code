@@ -5,7 +5,8 @@ let wanted = 15
 let triangle = LIST[List[int]]()
 
 for n in 0::2 * wanted do
-    let previous: List[int] = if n == 0 then [] else triangle[n - 1] fi
+    let previous: List[int] =
+        if n == 0 then [] else triangle[n - 1] fi
 
     let row =
         0::n
@@ -14,7 +15,8 @@ for n in 0::2 * wanted do
                     1
                 else
                     previous[k - 1] + previous[k]
-                fi)
+                fi
+            )
             |> collect()
 
     triangle.add(row)

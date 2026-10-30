@@ -1,20 +1,22 @@
 use default
 use System.Math.*
 
-let shifts =
-    [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
-     5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
-     4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
-     6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21]
+let shifts = [
+    7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+    5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+    4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+    6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
+]
 
 let sines =
     0..64
         |> map(step =>
             uint(
                 floor(
-                    abs(
-                        sin(double(step + 1))) *
-                    4294967296.0D)))
+                    abs(sin(double(step + 1))) * 4294967296.0D
+                )
+            )
+        )
         |> collect()
 
 rotate_left(value: uint, count: int) -> uint =>
@@ -41,21 +43,24 @@ si
 word(block: List[ubyte], at: int) -> uint =>
     0..4
         |> map(byte_index =>
-            uint(block[at + byte_index]) << (8 * byte_index))
+            uint(block[at + byte_index]) << (8 * byte_index)
+        )
         |> reduce(0u, (bits, more) => bits | more)
 
 md5(message: ubyte[]) -> string is
     let block = padded(message)
 
-    let state =
-        LIST([0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u])
+    let state = LIST([
+        0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u
+    ])
 
     let start mut = 0
 
     while start < block.count do
         let words =
-            0..16 |> map(index => word(block, start + index * 4))
-                  |> collect()
+            0..16
+                |> map(index => word(block, start + index * 4))
+                |> collect()
 
         let a mut = state[0]
         let b mut = state[1]
@@ -74,9 +79,10 @@ md5(message: ubyte[]) -> string is
                     (c ^ (b | \d), (7 * step) % 16)
                 fi
 
-            let rotated =
-                rotate_left(a + mixed + sines[step] + words[index],
-                            shifts[step])
+            let rotated = rotate_left(
+                a + mixed + sines[step] + words[index],
+                shifts[step]
+            )
 
             a = d
             d = c
@@ -92,10 +98,12 @@ md5(message: ubyte[]) -> string is
         start = start + 64
     od
 
-    return
-        ["{(value >>> (8 * index)) & 0xFFu:x2}"
-            for value in state for index in 0..4]
-            |> join("")
+    return [
+        "{(value >>> (8 * index)) & 0xFFu:x2}"
+        for value in state
+        for index in 0..4
+    ]
+        |> join("")
 si
 
 let tests = [
@@ -103,18 +111,28 @@ let tests = [
     ("a", "0cc175b9c0f1b6a831c399e269772661"),
     ("abc", "900150983cd24fb0d6963f7d28e17f72"),
     ("message digest", "f96b697d7cb7938d525a2f31aaf161d0"),
-    ("abcdefghijklmnopqrstuvwxyz", "c3fcd3d76192e4007dfb496cca67e13b"),
-    ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-        "d174ab98d277d9f5a5611c2c9f419d9f"),
-    ("1234567890123456789012345678901234567890"
+    (
+        "abcdefghijklmnopqrstuvwxyz",
+        "c3fcd3d76192e4007dfb496cca67e13b"
+    ),
+    (
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        "d174ab98d277d9f5a5611c2c9f419d9f"
+    ),
+    (
+        "1234567890123456789012345678901234567890"
         "1234567890123456789012345678901234567890",
-        "57edf4a22be3c955ac49da2e2107b67a")
+        "57edf4a22be3c955ac49da2e2107b67a"
+    )
 ]
 
 for (message, expected) in tests do
-    let digest = md5(System.Text.Encoding.utf8.get_bytes(message))
+    let digest = md5(
+        System.Text.Encoding.utf8.get_bytes(message)
+    )
 
-    assert digest =~ expected else "does not agree with RFC 1321"
+    assert digest =~ expected
+        else "does not agree with RFC 1321"
 
     write_line("{digest}  \"{message}\"")
 od

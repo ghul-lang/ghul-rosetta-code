@@ -13,7 +13,8 @@ quickselect(values: List[int], k: int) -> int is
     else
         quickselect(
             values |> filter(* > pivot) |> collect(),
-            k - lowers.count - pivots.count)
+            k - lowers.count - pivots.count
+        )
     fi
 si
 
@@ -21,5 +22,6 @@ let values = [9, 8, 7, 6, 5, 0, 1, 2, 3, 4]
 
 for k in 0..values.count do
     write_line(
-        "largest {k + 1}: {quickselect(values, values.count - 1 - k)}")
+        "largest {k + 1}: {quickselect(values, values.count - 1 - k)}"
+    )
 od

@@ -3,8 +3,7 @@ use default
 let factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi
 
 digit_factorial_sum(n: int, base_value: int) -> int =>
-    n |> digits(base_value)
-        |> sum_by(factorial)
+    n |> digits(base_value) |> sum_by(factorial)
 
 factorions(base_value: int) -> List[int] =>
     1..1_500_000
@@ -15,5 +14,6 @@ for base_value in [9, 10, 11, 12] do
     let found = factorions(base_value)
     write_line(
         "base {base_value}: {found |> join(" ")} "
-        "({found.count} factorions)")
+        "({found.count} factorions)"
+    )
 od

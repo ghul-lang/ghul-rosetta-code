@@ -3,20 +3,32 @@ use Raster.IMAGE
 use Point = (x: double, y: double, z: double)
 use System.Math.*
 
--(a: Point, b: Point) -> Point =>
-    (x = a.x - b.x, y = a.y - b.y, z = a.z - b.z)
+-(a: Point, b: Point) -> Point => (
+    x = a.x - b.x,
+    y = a.y - b.y,
+    z = a.z - b.z
+)
 
-+(a: Point, b: Point) -> Point =>
-    (x = a.x + b.x, y = a.y + b.y, z = a.z + b.z)
++(a: Point, b: Point) -> Point => (
+    x = a.x + b.x,
+    y = a.y + b.y,
+    z = a.z + b.z
+)
 
-*(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
+*(p: Point, k: double) -> Point => (
+    x = p.x * k,
+    y = p.y * k,
+    z = p.z * k
+)
 
-⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
+⋅(a: Point, b: Point) -> double =>
+    a.x * b.x + a.y * b.y + a.z * b.z
 
-×(a: Point, b: Point) -> Point =>
-    (x = a.y * b.z - a.z * b.y,
-     y = a.z * b.x - a.x * b.z,
-     z = a.x * b.y - a.y * b.x)
+×(a: Point, b: Point) -> Point => (
+    x = a.y * b.z - a.z * b.y,
+    y = a.z * b.x - a.x * b.z,
+    z = a.x * b.y - a.y * b.x
+)
 
 length(p: Point) -> double => sqrt(p ⋅ p)
 
@@ -27,62 +39,98 @@ class FACE(a: Point, b: Point, c: Point) is
 
     outside(p: Point) -> bool => normal ⋅ (p - a) > 0.000000001D
 
-    edges: (from: Point, to: Point){} =>
-        [(from = a, to = b), (from = b, to = c), (from = c, to = a)]
-            |> pipe()
+    edges: (from: Point, to: Point){} => [
+        (from = a, to = b),
+        (from = b, to = c),
+        (from = c, to = a)
+    ]
+        |> pipe()
 si
 
-same_edge(one: (from: Point, to: Point),
-          other: (from: Point, to: Point)) -> bool =>
-    one.from =~ other.to /\ one.to =~ other.from
+same_edge(
+    one: (from: Point, to: Point),
+    other: (from: Point, to: Point)
+) -> bool => one.from =~ other.to /\ one.to =~ other.from
 
 hull(points: List[Point]) -> List[FACE] is
-    let furthest = (from, along) =>
-        points |> reduce(points[0], (best, candidate) =>
-            if (candidate - from) ⋅ along > (best - from) ⋅ along then
-                candidate
-            else
-                best
-            fi)
+    let furthest =
+        (from, along) =>
+            points
+                |> reduce(
+                    points[0],
+                    (best, candidate) =>
+                        if
+                            (candidate - from) ⋅ along >
+                            (best - from) ⋅ along
+                        then
+                            candidate
+                        else
+                            best
+                        fi
+                )
 
-    let low = furthest((x = 0.0D, y = 0.0D, z = 0.0D),
-                       (x = -1.0D, y = 0.0D, z = 0.0D))
+    let low = furthest(
+        (x = 0.0D, y = 0.0D, z = 0.0D),
+        (x = -1.0D, y = 0.0D, z = 0.0D)
+    )
 
-    let high = furthest((x = 0.0D, y = 0.0D, z = 0.0D),
-                        (x = 1.0D, y = 0.0D, z = 0.0D))
+    let high = furthest(
+        (x = 0.0D, y = 0.0D, z = 0.0D),
+        (x = 1.0D, y = 0.0D, z = 0.0D)
+    )
 
     let apex =
-        points |> reduce(points[0], (best, candidate) =>
-            if length((candidate - low) × (high - low)) >
-               length((best - low) × (high - low)) then
-                candidate
-            else
-                best
-            fi)
+        points
+            |> reduce(
+                points[0],
+                (best, candidate) =>
+                    if
+                        length(
+                            (candidate - low) × (high - low)
+                        ) >
+                        length((best - low) × (high - low))
+                    then
+                        candidate
+                    else
+                        best
+                    fi
+            )
 
     let face = FACE(low, high, apex)
 
     let peak =
-        points |> reduce(points[0], (best, candidate) =>
-            if abs(face.normal ⋅ (candidate - low)) >
-               abs(face.normal ⋅ (best - low)) then
-                candidate
-            else
-                best
-            fi)
+        points
+            |> reduce(
+                points[0],
+                (best, candidate) =>
+                    if
+                        abs(face.normal ⋅ (candidate - low)) >
+                        abs(face.normal ⋅ (best - low))
+                    then
+                        candidate
+                    else
+                        best
+                    fi
+            )
 
     let faces =
         if face.outside(peak) then
-            LIST([FACE(low, apex, high), FACE(low, high, peak),
-                  FACE(high, apex, peak), FACE(apex, low, peak)])
+            LIST([
+                FACE(low, apex, high), FACE(low, high, peak),
+                FACE(high, apex, peak), FACE(apex, low, peak)
+            ])
         else
-            LIST([FACE(low, high, apex), FACE(low, apex, peak),
-                  FACE(apex, high, peak), FACE(high, low, peak)])
+            LIST([
+                FACE(low, high, apex), FACE(low, apex, peak),
+                FACE(apex, high, peak), FACE(high, low, peak)
+            ])
         fi
 
     for point in points do
         let visible =
-            faces |> filter(face => face.outside(point)) |> collect()
+            faces
+                |> filter(face => face.outside(point))
+                |> collect()
 
         if visible.count == 0 then
             continue
@@ -92,9 +140,12 @@ hull(points: List[Point]) -> List[FACE] is
             visible
                 |> flat_map(face => face.edges)
                 |> filter(edge =>
-                    !(visible
-                        |> flat_map(face => face.edges)
-                        |> any(same_edge(edge, *))))
+                    !(
+                        visible
+                            |> flat_map(face => face.edges)
+                            |> any(same_edge(edge, *))
+                    )
+                )
 
         for gone in visible do
             faces.remove(gone)
@@ -109,8 +160,7 @@ hull(points: List[Point]) -> List[FACE] is
 si
 
 let cloud =
-    let seed mut = 1u
-    in
+    let seed mut = 1u in
     0..60
         |> map(_ =>
             let next = () is
@@ -121,48 +171,63 @@ let cloud =
                 return double(drawn) / 500.0D - 1.0D
             si
             in
-            (x = next(), y = next(), z = next()))
+            (x = next(), y = next(), z = next())
+        )
         |> collect()
 
-let shapes =
-    [(name = "tetrahedron",
-      points = [(x = 0.0D, y = 0.0D, z = 0.0D),
-                (x = 1.0D, y = 0.0D, z = 0.0D),
-                (x = 0.0D, y = 1.0D, z = 0.0D),
-                (x = 0.0D, y = 0.0D, z = 1.0D)]),
-     (name = "cube with points inside",
-      points =
-          0..8
-              |> map(corner =>
-                  (x = double(corner % 2) * 2.0D - 1.0D,
-                   y = double(corner / 2 % 2) * 2.0D - 1.0D,
-                   z = double(corner / 4) * 2.0D - 1.0D))
-              |> cat([(x = 0.0D, y = 0.0D, z = 0.0D),
-                      (x = 0.5D, y = -0.25D, z = 0.125D)])
-              |> collect()),
-     (name = "cloud of 60 points", points = cloud)]
+let shapes = [
+    (
+        name = "tetrahedron",
+        points = [
+            (x = 0.0D, y = 0.0D, z = 0.0D),
+            (x = 1.0D, y = 0.0D, z = 0.0D),
+            (x = 0.0D, y = 1.0D, z = 0.0D),
+            (x = 0.0D, y = 0.0D, z = 1.0D)
+        ]
+    ),
+    (
+        name = "cube with points inside",
+        points =
+            0..8
+                |> map(corner => (
+                    x = double(corner % 2) * 2.0D - 1.0D,
+                    y = double(corner / 2 % 2) * 2.0D - 1.0D,
+                    z = double(corner / 4) * 2.0D - 1.0D
+                ))
+                |> cat([
+                    (x = 0.0D, y = 0.0D, z = 0.0D),
+                    (x = 0.5D, y = -0.25D, z = 0.125D)
+                ])
+                |> collect()
+    ),
+    (name = "cloud of 60 points", points = cloud)
+]
 
 for (name, points) in shapes do
     let faces = hull(points)
 
     let outlier =
-        points |> any(point => faces |> any(face => face.outside(point)))
+        points
+            |> any(point =>
+                faces |> any(face => face.outside(point))
+            )
 
     assert !outlier else "a point lies outside the hull"
 
     let area =
         faces
             |> map(face => face.area)
-            |> reduce(0.0D, (running, part) =>
-                running + part)
+            |> reduce(0.0D, (running, part) => running + part)
 
     write_line("{name}: {faces.count} faces, area {area:F6}")
 od
 
 let image = IMAGE(420, 420)
 
-let turned = p =>
-    (x = p.x * 0.8D + p.z * 0.6D, y = p.y * 0.9D + p.z * 0.3D)
+let turned = p => (
+    x = p.x * 0.8D + p.z * 0.6D,
+    y = p.y * 0.9D + p.z * 0.3D
+)
 
 image.view(-2.2D, -2.2D, 2.2D, 2.2D)
 image.clear(252ub, 250ub, 245ub)

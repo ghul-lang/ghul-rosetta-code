@@ -5,24 +5,36 @@ luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
     ubyte(
         0.2126D * double(red) +
         0.7152D * double(green) +
-        0.0722D * double(blue) + 0.5D
+        0.0722D * double(blue) +
+        0.5D
     )
 
 to_grey(colour: IMAGE) -> ubyte[] =>
     (0..colour.width * colour.height)
         |> map(at => (
-            let seen =
-               colour.pixel(at % colour.width, at / colour.width)
+            let seen = colour.pixel(
+                at % colour.width,
+                at / colour.width
+            )
 
-            luminance(seen.red, seen.green, seen.blue)))
+            luminance(seen.red, seen.green, seen.blue)
+        ))
         |> collect()
 
-to_colour(levels: ubyte[], width: int, height: int) -> IMAGE => (
+to_colour(
+    levels: ubyte[],
+    width: int,
+    height: int
+) -> IMAGE => (
     let image = IMAGE(width, height)
 
     for at in 0..levels.count do
         image.set_pixel(
-            at % width, at / width, levels[at], levels[at], levels[at]
+            at % width,
+            at / width,
+            levels[at],
+            levels[at],
+            levels[at]
         )
     od
 
@@ -37,7 +49,8 @@ let colour = IMAGE(width, height)
 for y in 0..height do
     for x in 0..width do
         colour.set_pixel(
-            x, y,
+            x,
+            y,
             ubyte(255 * x / width),
             ubyte(255 * y / height),
             ubyte(255 - 255 * x / width)
@@ -46,19 +59,25 @@ for y in 0..height do
 od
 
 colour.colour(255ub, 0ub, 0ub)
-colour.fill([(x = 30.0D, y = 30.0D),
-             (x = 110.0D, y = 30.0D),
-             (x = 70.0D, y = 110.0D)])
+colour.fill([
+    (x = 30.0D, y = 30.0D),
+    (x = 110.0D, y = 30.0D),
+    (x = 70.0D, y = 110.0D)
+])
 
 colour.colour(0ub, 255ub, 0ub)
-colour.fill([(x = 120.0D, y = 30.0D),
-             (x = 200.0D, y = 30.0D),
-             (x = 160.0D, y = 110.0D)])
+colour.fill([
+    (x = 120.0D, y = 30.0D),
+    (x = 200.0D, y = 30.0D),
+    (x = 160.0D, y = 110.0D)
+])
 
 colour.colour(0ub, 0ub, 255ub)
-colour.fill([(x = 210.0D, y = 30.0D),
-             (x = 290.0D, y = 30.0D),
-             (x = 250.0D, y = 110.0D)])
+colour.fill([
+    (x = 210.0D, y = 30.0D),
+    (x = 290.0D, y = 30.0D),
+    (x = 250.0D, y = 110.0D)
+])
 
 colour.write("colour.png")
 

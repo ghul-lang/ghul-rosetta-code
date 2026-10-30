@@ -7,23 +7,28 @@ gap() -> int => -2
 
 highest(values: int[]) -> int =>
     values
-    |> reduce(0, (best, value) => if value > best then value else best fi)
+        |> reduce(0, (best, value) =>
+            if value > best then value else best fi
+        )
 
 matrix(first: string, second: string) -> List[List[int]] is
-    let scores = 0::first.length
-        |> map(_ => repeat(0, second.length + 1) |> collect_mutable())
-        |> collect()
+    let scores =
+        0::first.length
+            |> map(_ =>
+                repeat(0, second.length + 1)
+                    |> collect_mutable()
+            )
+            |> collect()
 
     for i in 1::first.length do
         for j in 1::second.length do
-            scores[i][j] =
-                highest([
-                    0,
-                    scores[i - 1][j - 1] +
-                        score(first[i - 1], second[j - 1]),
-                    scores[i - 1][j] + gap(),
-                    scores[i][j - 1] + gap()
-                ])
+            scores[i][j] = highest([
+                0,
+                scores[i - 1][j - 1] +
+                score(first[i - 1], second[j - 1]),
+                scores[i - 1][j] + gap(),
+                scores[i][j - 1] + gap()
+            ])
         od
     od
 
@@ -64,7 +69,8 @@ trace(
         cells.add("({i},{j})")
 
         let diagonal =
-            scores[i - 1][j - 1] + score(first[i - 1], second[j - 1])
+            scores[i - 1][j - 1] +
+            score(first[i - 1], second[j - 1])
 
         if scores[i][j] == diagonal then
             top.add(first[i - 1])
@@ -99,7 +105,11 @@ si
 show(first: string, second: string) is
     let scores = matrix(first, second)
     let (row, column) = best_cell(scores)
-    let (a_aligned, b_aligned, path) = trace(first, second, scores)
+    let (a_aligned, b_aligned, path) = trace(
+        first,
+        second,
+        scores
+    )
 
     write_line("sequences: {first} and {second}")
     write_line("highest score: {scores[row][column]}")
@@ -108,7 +118,9 @@ show(first: string, second: string) is
     write_line("path: {path}")
     write_line("")
     let heading =
-        second |> map(character => "{character}".pad_left(3)) |> join("")
+        second
+            |> map(character => "{character}".pad_left(3))
+            |> join("")
 
     write_line("       {heading}")
 
@@ -116,7 +128,9 @@ show(first: string, second: string) is
         let label = if i == 0 then " " else "{first[i - 1]}" fi
 
         let row =
-            scores[i] |> map(value => "{value}".pad_left(3)) |> join("")
+            scores[i]
+                |> map(value => "{value}".pad_left(3))
+                |> join("")
 
         write_line("  {label} {row}")
     od

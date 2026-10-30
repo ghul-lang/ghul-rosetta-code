@@ -13,23 +13,40 @@ let possible = [
     (month = "May", day = 19), (month = "June", day = 17),
     (month = "June", day = 18), (month = "July", day = 14),
     (month = "July", day = 16), (month = "August", day = 14),
-    (month = "August", day = 15), (month = "August", day = 17)]
+    (month = "August", day = 15), (month = "August", day = 17)
+]
 
-let albert_knows_bernard_does_not = possible
-    |> filter(date =>
-        possible
-            |> filter(other => other.month =~ date.month)
-            |> all(other => sharing_the_day(possible, other.day) > 1))
-    |> collect()
+let albert_knows_bernard_does_not =
+    possible
+        |> filter(date =>
+            possible
+                |> filter(other => other.month =~ date.month)
+                |> all(other =>
+                    sharing_the_day(possible, other.day) > 1
+                )
+        )
+        |> collect()
 
-let bernard_now_knows = albert_knows_bernard_does_not
-    |> filter(date =>
-        sharing_the_day(albert_knows_bernard_does_not, date.day) == 1)
-    |> collect()
+let bernard_now_knows =
+    albert_knows_bernard_does_not
+        |> filter(date =>
+            sharing_the_day(
+                albert_knows_bernard_does_not,
+                date.day
+            ) == 1
+        )
+        |> collect()
 
-let birthday = bernard_now_knows
-    |> filter(date =>
-        sharing_the_month(bernard_now_knows, date.month) == 1)
-    |> only()
+let birthday =
+    bernard_now_knows
+        |> filter(date =>
+            sharing_the_month(
+                bernard_now_knows,
+                date.month
+            ) == 1
+        )
+        |> only()
 
-write_line("Cheryl's birthday is {birthday.month} {birthday.day}")
+write_line(
+    "Cheryl's birthday is {birthday.month} {birthday.day}"
+)

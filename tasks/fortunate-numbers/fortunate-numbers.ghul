@@ -34,8 +34,8 @@ let unique = seen |> collect_set() |> sort() |> collect()
 write_line("first 50 fortunate numbers:")
 
 for row in 0..5 do
-    let cells = 0..10
-        |> map(column => "{unique[row * 10 + column],3}")
+    let cells =
+        0..10 |> map(column => "{unique[row * 10 + column],3}")
 
     write_line(cells |> join(" "))
 od

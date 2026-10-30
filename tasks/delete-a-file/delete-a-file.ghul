@@ -1,7 +1,9 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-delete-a-file")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-delete-a-file"
+)
 
 IO.Directory.create_directory(scratch)
 IO.Directory.set_current_directory(scratch)
@@ -36,7 +38,9 @@ delete_directory(path: string) -> string is
 si
 
 for where in ["", "/"] do
-    write_line("{where}input.txt: {delete_file("{where}input.txt")}")
+    write_line(
+        "{where}input.txt: {delete_file("{where}input.txt")}"
+    )
     write_line("{where}docs: {delete_directory("{where}docs")}")
 od
 

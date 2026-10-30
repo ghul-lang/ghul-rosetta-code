@@ -24,11 +24,14 @@ circles(a: P, b: P, r: double) -> Circles is
     let d = (b - a).length
 
     if d == 0.0D then
-        return if r == 0.0D then Circles.POINT else Circles.ANY fi
+        return
+            if r == 0.0D then Circles.POINT else Circles.ANY fi
     fi
 
     if r == 0.0D then
-        return Circles.NONE("a radius of zero describes no circle")
+        return Circles.NONE(
+            "a radius of zero describes no circle"
+        )
     fi
 
     if d > 2.0D * r then

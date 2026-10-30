@@ -9,10 +9,17 @@ bits_set(value: int) -> int =>
 
 walsh(order: int) -> string{} =>
     (0..order)
-        |> map(row => (0..order)
-            |> map(column =>
-                if bits_set(row & column) % 2 == 0 then " 1" else "-1" fi)
-            |> join(" "))
+        |> map(row =>
+            (0..order)
+                |> map(column =>
+                    if bits_set(row & column) % 2 == 0 then
+                        " 1"
+                    else
+                        "-1"
+                    fi
+                )
+                |> join(" ")
+        )
 
 for order in [2, 4, 8] do
     write_line("W({order}):")

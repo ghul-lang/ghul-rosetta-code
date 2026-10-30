@@ -3,10 +3,12 @@
 
 use default
 
-∘(f: (int) -> int, g: (int) -> int) -> (int) -> int => x => f(g(x))
+∘(f: (int) -> int, g: (int) -> int) -> (int) -> int =>
+    x => f(g(x))
 
 @suppress("non-snake-case-name")
-BadlyNamed() -> string => "declared with a name the convention rejects"
+BadlyNamed() -> string =>
+    "declared with a name the convention rejects"
 
 @System.Obsolete("superseded, but still callable")
 superseded() -> string => "carrying a .NET attribute"
@@ -21,8 +23,12 @@ let increment = n => n + 1
 
 let composed = double ∘ increment
 
-write_line("@@precedence places an operator: composed(5) = {composed(5)}")
-write_line("@suppress silences one diagnostic, for one declaration:")
+write_line(
+    "@@precedence places an operator: composed(5) = {composed(5)}"
+)
+write_line(
+    "@suppress silences one diagnostic, for one declaration:"
+)
 write_line("  {BadlyNamed()}")
 write_line("a pragma naming no built-in is a .NET attribute:")
 write_line("  {superseded()}")

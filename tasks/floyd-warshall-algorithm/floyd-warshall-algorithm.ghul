@@ -10,8 +10,10 @@ let edges = [
     (from = 4, to = 2, weight = -1)
 ]
 
-let dist = MAP([(i, j) for i in 1::n for j in 1::n]
-    |> map((i, j) => ((i, j), if i == j then 0 else inf fi)))
+let dist = MAP(
+    [(i, j) for i in 1::n for j in 1::n]
+        |> map((i, j) => ((i, j), if i == j then 0 else inf fi))
+)
 let next_hop = MAP()
 
 for e in edges do
@@ -49,5 +51,8 @@ path(u: int, v: int) -> string => (
 write_line("pair     dist    path")
 
 [(i, j) for i in 1::n for j in 1::n if i != j]
-    |> each((i, j) => write_line(
-        "{i} -> {j}    {dist[(i, j)],4}     {path(i, j)}"))
+    |> each((i, j) =>
+        write_line(
+            "{i} -> {j}    {dist[(i, j)],4}     {path(i, j)}"
+        )
+    )

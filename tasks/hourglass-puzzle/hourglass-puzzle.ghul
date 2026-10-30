@@ -10,10 +10,24 @@ use State = (small: int, large: int, time: int)
 
 flip(s: State, which: string) -> State =>
     case which
-    when "4" then (small = small - s.small, large = s.large, time = s.time)
-    when "7" then (small = s.small, large = large - s.large, time = s.time)
+    when "4" then
+        (
+            small = small - s.small,
+            large = s.large,
+            time = s.time
+        )
+    when "7" then
+        (
+            small = s.small,
+            large = large - s.large,
+            time = s.time
+        )
     else
-        (small = small - s.small, large = large - s.large, time = s.time)
+        (
+            small = small - s.small,
+            large = large - s.large,
+            time = s.time
+        )
     esac
 
 running(s: State) -> List[int] =>
@@ -23,11 +37,14 @@ wait(s: State) -> State? =>
     let sands = running(s) in
     if sands.count == 0 then null
     else
-        let step = sands |> reduce(sands[0], (a, b) => min(a, b)) in
+        let step =
+            sands |> reduce(sands[0], (a, b) => min(a, b))
+        in
         (
             small = max(s.small - step, 0),
             large = max(s.large - step, 0),
-            time = s.time + step)
+            time = s.time + step
+        )
     fi
 
 moves(s: State) -> (command: string, next: State){} => (
@@ -38,7 +55,9 @@ moves(s: State) -> (command: string, next: State){} => (
     fi
 
     for which in ["4", "7", "both"] do
-        result.add((command = "flip {which}", next = flip(s, which)))
+        result.add(
+            (command = "flip {which}", next = flip(s, which))
+        )
     od
 
     result
@@ -61,7 +80,8 @@ plan(start: State) -> List[string]? is
         for (command, next) in moves(state) do
             if next.time <= target /\ !seen.contains(next) then
                 seen.add(next)
-                let longer = path ++ [command] |> collect_mutable()
+                let longer =
+                    path ++ [command] |> collect_mutable()
 
                 queue.enqueue((state = next, path = longer))
             fi
@@ -74,10 +94,15 @@ si
 show(s: State) =>
     write_line(
         "{s.time} minutes gone; sand left to fall: "
-        "{s.small} in the 4, {s.large} in the 7")
+        "{s.small} in the 4, {s.large} in the 7"
+    )
 
-write_line("measure exactly {target} minutes with 4 and 7 minute glasses")
-write_line("say flip 4, flip 7, flip both, wait, done, hint or quit")
+write_line(
+    "measure exactly {target} minutes with 4 and 7 minute glasses"
+)
+write_line(
+    "say flip 4, flip 7, flip both, wait, done, hint or quit"
+)
 write_line("the clock starts now, with both glasses run out")
 
 let state mut = (small = 0, large = 0, time = 0)
@@ -109,7 +134,9 @@ do
         if let steps = plan(state) then
             write_line("from here: {steps |> join(", ")}, done")
         else
-            write_line("{target} minutes is out of reach from here")
+            write_line(
+                "{target} minutes is out of reach from here"
+            )
         fi
     elif command =~ "wait" then
         if let after = wait(state) then
@@ -126,6 +153,8 @@ do
             write_line("flip 4, flip 7 or flip both")
         fi
     else
-        write_line("say flip 4 or 7 or both, wait, done, hint or quit")
+        write_line(
+            "say flip 4 or 7 or both, wait, done, hint or quit"
+        )
     fi
 od

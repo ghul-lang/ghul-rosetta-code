@@ -50,7 +50,9 @@ write_line("the first 50 self numbers:")
 self_numbers()
     |> take(50)
     |> chunk(10)
-    |> each(row => write_line(row |> map(value => "{value,5}") |> join("")))
+    |> each(row =>
+        write_line(row |> map(value => "{value,5}") |> join(""))
+    )
 
 write_line()
 
@@ -58,7 +60,13 @@ let hundred_millionth =
     self_numbers() |> skip(99_999_999) |> first_or_throw()
 
 let verdict =
-    if hundred_millionth == 1_022_727_208 then "confirmed" else "wrong" fi
+    if hundred_millionth == 1_022_727_208 then "confirmed"
+    else "wrong"
+    fi
 
-write_line("the 100,000,000th self number: {hundred_millionth:N0}")
-write_line("the conjecture that it is 1,022,727,208 is {verdict}")
+write_line(
+    "the 100,000,000th self number: {hundred_millionth:N0}"
+)
+write_line(
+    "the conjecture that it is 1,022,727,208 is {verdict}"
+)

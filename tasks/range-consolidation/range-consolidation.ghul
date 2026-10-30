@@ -19,19 +19,23 @@ by_lower_bound(left: RANGE, right: RANGE) -> int =>
     fi
 
 consolidate(ranges: List[RANGE]) -> List[RANGE] is
-    let sorted = ranges
-        |> map(normalised)
-        |> sort(by_lower_bound)
+    let sorted =
+        ranges |> map(normalised) |> sort(by_lower_bound)
     let merged = LIST()
 
     for bounds in sorted do
         let last_index = merged.count - 1
 
-        if merged.count > 0 /\ bounds.low <= merged[last_index].high then
+        if
+            merged.count > 0 /\
+            bounds.low <= merged[last_index].high
+        then
             let last = merged[last_index]
 
             if bounds.high > last.high then
-                merged[last_index] = (low = last.low, high = bounds.high)
+                merged[last_index] = (
+                    low = last.low, high = bounds.high
+                )
             fi
         else
             merged.add(bounds)

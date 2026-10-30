@@ -18,4 +18,6 @@ while !converged do
 od
 
 write_line("phi is {ratio:F12} after {iterations} iterations")
-write_line("the error against (1 + sqrt 5) / 2 is {ratio - target:E6}")
+write_line(
+    "the error against (1 + sqrt 5) / 2 is {ratio - target:E6}"
+)

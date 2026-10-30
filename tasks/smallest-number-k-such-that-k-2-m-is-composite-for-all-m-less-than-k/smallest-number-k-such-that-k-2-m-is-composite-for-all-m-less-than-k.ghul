@@ -1,22 +1,31 @@
 use default
 
-let small_primes = primes(3) |> take_while(* < 1000) |> collect()
+let small_primes =
+    primes(3) |> take_while(* < 1000) |> collect()
 
-has_small_factor(k: int, m: int, powers: Collections.List[int]) -> bool =>
+has_small_factor(
+    k: int,
+    m: int,
+    powers: Collections.List[int]
+) -> bool =>
     (0..small_primes.count)
-    |> any(i =>
-        (k + powers[i]) % small_primes[i] == 0 /\
-        bigint(k) + bigint.pow(2n, m) !~ bigint(small_primes[i]))
+        |> any(i =>
+            (k + powers[i]) % small_primes[i] == 0 /\
+            bigint(k) + bigint.pow(2n, m) !~
+            bigint(small_primes[i])
+        )
 
 always_composite(k: int) -> bool is
-    let powers = small_primes |> map(_ => 1) |> collect_mutable()
+    let powers =
+        small_primes |> map(_ => 1) |> collect_mutable()
 
     for m in 1..k do
         for i in 0..small_primes.count do
             powers[i] = powers[i] * 2 % small_primes[i]
         od
 
-        if !has_small_factor(k, m, powers) /\
+        if
+            !has_small_factor(k, m, powers) /\
             is_prime(bigint(k) + bigint.pow(2n, m))
         then
             return false
@@ -26,13 +35,15 @@ always_composite(k: int) -> bool is
     return true
 si
 
-write_line("testing odd numbers for a composite k - 2^m at every m")
+write_line(
+    "testing odd numbers for a composite k - 2^m at every m"
+)
 
 let found =
     from(3, 2)
-    |> filter(always_composite)
-    |> take(5)
-    |> map(k => "{k}")
-    |> join(" ")
+        |> filter(always_composite)
+        |> take(5)
+        |> map(k => "{k}")
+        |> join(" ")
 
 write_line("the first 5 terms: {found}")

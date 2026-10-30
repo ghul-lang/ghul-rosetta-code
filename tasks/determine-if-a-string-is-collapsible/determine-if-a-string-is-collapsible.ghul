@@ -30,7 +30,11 @@ let strings = [
 for s in strings do
     let c = collapse(s)
 
-    write_line("original : length = {s.length}, string = <<<{s}>>>")
-    write_line("collapsed: length = {c.length}, string = <<<{c}>>>")
+    write_line(
+        "original : length = {s.length}, string = <<<{s}>>>"
+    )
+    write_line(
+        "collapsed: length = {c.length}, string = <<<{c}>>>"
+    )
     write_line("")
 od

@@ -7,7 +7,11 @@ use PAdic = (digits: List[bigint], exponent: int)
 
 floor_div(a: bigint, b: bigint) -> bigint =>
     let q = a / b in
-    if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then q - 1n else q fi
+    if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then
+        q - 1n
+    else
+        q
+    fi
 
 modulo(a: bigint, m: bigint) -> bigint => ((a % m) + m) % m
 
@@ -24,7 +28,10 @@ inverse(value: bigint, m: bigint) -> bigint is
 si
 
 without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
-    walk(rest: bigint, count: int) -> (rest: bigint, count: int) =>
+    walk(rest: bigint, count: int) -> (
+        rest: bigint,
+        count: int
+    ) =>
         if rest !~ 0n /\ rest % p =~ 0n then
             walk(rest / p, count + 1)
         else
@@ -75,7 +82,9 @@ add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
 si
 
 show(x: PAdic) -> string =>
-    let text = x.digits |> reverse() |> map(d => "{d}") |> join("") in
+    let text =
+        x.digits |> reverse() |> map(d => "{d}") |> join("")
+    in
     if x.exponent >= 0 then
         "...{text}{string('0', x.exponent)}"
     else
@@ -97,7 +106,10 @@ rational(x: PAdic, p: bigint, k: int) -> string is
     dot(u: (bigint, bigint), w: (bigint, bigint)) -> bigint =>
         u.`0 * w.`0 + u.`1 * w.`1
 
-    reduce(u: (bigint, bigint), w: (bigint, bigint)) -> (bigint, bigint) =>
+    reduce(u: (bigint, bigint), w: (bigint, bigint)) -> (
+        bigint,
+        bigint
+    ) =>
         let
             ww = dot(w, w),
             q = floor_div(2n * dot(u, w) + ww, 2n * ww),
@@ -126,7 +138,10 @@ rational(x: PAdic, p: bigint, k: int) -> string is
     let bottom = if x.exponent < 0 then b * shift else b fi
     let sign = if bottom < 0n then -1n else 1n fi
     let common = bigint.greatest_common_divisor(top, bottom)
-    let (num, den) = (sign * top / common, sign * bottom / common)
+    let (num, den) = (
+        sign * top / common,
+        sign * bottom / common
+    )
 
     if den =~ 1n then "{num}" else "{num}/{den}" fi
 si
@@ -154,5 +169,7 @@ for (a, b, p, k, c, d) in examples do
 
     write_line("    {first,-11} {show(x)}")
     write_line("    {second,-11} {show(y)}")
-    write_line("    {"sum",-11} {show(sum)} = {rational(sum, p, k)}\n")
+    write_line(
+        "    {"sum",-11} {show(sum)} = {rational(sum, p, k)}\n"
+    )
 od

@@ -1,12 +1,12 @@
 use default
 
-tau(value: int) -> int =>
-    1::value |> count(n => value % n == 0)
+tau(value: int) -> int => 1::value |> count(n => value % n == 0)
 
 write_line("the number of divisors of 1 to 100:")
 
 for row in 0..10 do
-    let cells = row * 10 + 1::row * 10 + 10 |> map(n => "{tau(n),4}")
+    let cells =
+        row * 10 + 1::row * 10 + 10 |> map(n => "{tau(n),4}")
 
     write_line(cells |> join(""))
 od

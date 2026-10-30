@@ -6,7 +6,8 @@ let jumps = [
     (4, 14), (9, 31), (17, 7), (20, 38), (28, 84), (40, 59),
     (51, 67), (54, 34), (62, 19), (63, 81), (64, 60), (71, 91),
     (87, 24), (93, 73), (95, 75), (99, 78)
-] |> collect_map()
+]
+    |> collect_map()
 
 let random = Random(3)
 
@@ -14,7 +15,9 @@ move(who: string, rolls: string, square: int) -> int is
     let roll = random.next(1, 7)
 
     if square + roll > 100 then
-        write_line("{who} {rolls} {roll} and cannot move from {square}")
+        write_line(
+            "{who} {rolls} {roll} and cannot move from {square}"
+        )
         return square
     fi
 
@@ -29,7 +32,8 @@ move(who: string, rolls: string, square: int) -> int is
     write_line(
         if next > landed then "  a ladder up to {next}"
         else "  a snake down to {next}"
-        fi)
+        fi
+    )
 
     next
 si

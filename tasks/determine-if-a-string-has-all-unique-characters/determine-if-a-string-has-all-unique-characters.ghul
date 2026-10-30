@@ -2,11 +2,15 @@ use default
 
 first_repeat(text: string) -> (first: int, second: int)? =>
     0..text.length
-        |> map(i => (first = i, second = text.index_of(text[i], i + 1)))
+        |> map(i => (
+            first = i,
+            second = text.index_of(text[i], i + 1)
+        ))
         |> find((_, second) => second >= 0)
 
 let strings = [
-    "", ".", "abcABC", "XYZ ZYX", "1234567890ABCDEFGHIJKLMN0PQRSTUVWXYZ"
+    "", ".", "abcABC", "XYZ ZYX",
+    "1234567890ABCDEFGHIJKLMN0PQRSTUVWXYZ"
 ]
 
 for text in strings do
@@ -17,7 +21,8 @@ for text in strings do
 
         write_line(
             "    not unique: '{c}' (0x{int(c):X2}) "
-            "is at positions {first + 1} and {second + 1}")
+            "is at positions {first + 1} and {second + 1}"
+        )
     else
         write_line("    all unique")
     fi

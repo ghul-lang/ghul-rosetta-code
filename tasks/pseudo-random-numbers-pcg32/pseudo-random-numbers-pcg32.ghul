@@ -6,7 +6,10 @@ class PCG32 is
 
     init(seed: ulong, sequence: ulong) is
         _increment = (sequence << 1) | 1ul
-        _state = (_increment + seed) * 6364136223846793005ul + _increment
+        _state =
+            (
+                _increment + seed
+            ) * 6364136223846793005ul + _increment
     si
 
     next_int() -> uint is

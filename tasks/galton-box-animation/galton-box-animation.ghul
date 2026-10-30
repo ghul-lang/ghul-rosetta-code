@@ -72,7 +72,11 @@ let released mut = 0
 let tick mut = 0
 
 while released < balls \/ falling.count > 0 do
-    for ball in falling |> filter(b => b.row == rows) |> collect() do
+    for
+        ball in falling
+            |> filter(b => b.row == rows)
+            |> collect()
+    do
         bins[ball.slot] = bins[ball.slot] + 1
         falling.remove(ball)
     od

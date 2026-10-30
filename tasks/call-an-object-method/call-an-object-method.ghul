@@ -11,7 +11,8 @@ class GREETER(name: string) is
 
     greet_twice() -> string => "{greet()} and again: {greet()}"
 
-    +(other: GREETER) -> GREETER => GREETER("{name} and {other.name}")
+    +(other: GREETER) -> GREETER =>
+        GREETER("{name} and {other.name}")
 si
 
 let greeter = GREETER("world")
@@ -20,7 +21,7 @@ write_line(greeter.greet())
 write_line(greeter.greet_twice())
 write_line(GREETER.greeting)
 write_line((greeter + GREETER("everyone")).greet())
-write_line(greeter. +(GREETER("you")).greet())
+write_line(greeter.`+(GREETER("you")).greet())
 
 let greet = greeter.greet
 

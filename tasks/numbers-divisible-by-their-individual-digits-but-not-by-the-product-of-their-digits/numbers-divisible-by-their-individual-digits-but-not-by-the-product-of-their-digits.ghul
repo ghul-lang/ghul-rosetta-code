@@ -2,7 +2,8 @@ use default
 
 qualifies(n: int) -> bool =>
     let ds = digits(n) in
-    ds |> all(d => d != 0 /\ n % d == 0) /\ n % (ds |> product()) != 0
+    ds |> all(d => d != 0 /\ n % d == 0) /\
+    n % (ds |> product()) != 0
 
 let found = 1..1000 |> filter(qualifies) |> collect()
 

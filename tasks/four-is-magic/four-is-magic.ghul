@@ -1,8 +1,10 @@
 use default
 
 let small = [
-    "zero", "one", "two", "three", "four", "five", "six", "seven",
-    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+    "zero", "one", "two", "three", "four", "five", "six",
+    "seven",
+    "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+    "fourteen",
     "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"
 ]
 

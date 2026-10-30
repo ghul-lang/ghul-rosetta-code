@@ -6,9 +6,10 @@ let masses = MAP()
 for line in IO.File.read_all_lines("masses.txt") do
     let fields = line.split([' '])
 
-    masses[fields[0]] =
-        decimal.parse(
-            fields[1], System.Globalization.CultureInfo.invariant_culture)
+    masses[fields[0]] = decimal.parse(
+        fields[1],
+        System.Globalization.CultureInfo.invariant_culture
+    )
 od
 
 class FORMULA(text: string) is
@@ -40,7 +41,9 @@ class FORMULA(text: string) is
         let symbol = text.substring(start, _at - start)
 
         if !masses.contains_key(symbol) then
-            throw System.ArgumentException("unknown element {symbol}")
+            throw System.ArgumentException(
+                "unknown element {symbol}"
+            )
         fi
 
         masses[symbol]

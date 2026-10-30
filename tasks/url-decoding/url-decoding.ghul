@@ -15,10 +15,15 @@ decoded_bytes(text: string, at: int) -> ubyte{} is
 si
 
 url_decode(text: string) -> string =>
-    Encoding.utf8.get_string(decoded_bytes(text, 0) |> collect())
+    Encoding.utf8.get_string(
+        decoded_bytes(text, 0) |> collect()
+    )
 
-["http%3A%2F%2Ffoo%20bar%2F",
- "google.com/search?q=%60Abdu%27l-Bah%C3%A1",
- "%25%32%35"]
+[
+    "http%3A%2F%2Ffoo%20bar%2F",
+    "google.com/search?q=%60Abdu%27l-Bah%C3%A1",
+    "%25%32%35"
+]
     |> each(encoded =>
-        write_line("{encoded} -> {url_decode(encoded)}"))
+        write_line("{encoded} -> {url_decode(encoded)}")
+    )

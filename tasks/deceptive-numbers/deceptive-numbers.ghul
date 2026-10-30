@@ -3,12 +3,17 @@ use default
 divides_repunit(value: int) -> bool =>
     let remainder =
         (1..value)
-            |> reduce(0, (running, _) => (running * 10 + 1) % value) in
+            |> reduce(0, (running, _) =>
+                (running * 10 + 1) % value
+            )
+    in
     remainder == 0
 
 let deceptive =
     from(7)
-        |> filter(candidate => candidate % 2 != 0 /\ candidate % 5 != 0)
+        |> filter(candidate =>
+            candidate % 2 != 0 /\ candidate % 5 != 0
+        )
         |> filter(candidate => !is_prime(candidate))
         |> filter(divides_repunit)
 
@@ -18,4 +23,5 @@ deceptive
     |> take(25)
     |> chunk(5)
     |> each(row =>
-        write_line(row |> map(value => "{value,7}") |> join("")))
+        write_line(row |> map(value => "{value,7}") |> join(""))
+    )

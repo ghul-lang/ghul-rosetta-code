@@ -12,5 +12,7 @@ apply[T, U](values: T[], callback: T -> U) -> U{} => (
 
 shout(word: string) -> string => "{word.to_upper()}!"
 
-write_line("{$([1, 2, 3, 4, 5] |> apply(value => value * value))}")
+write_line(
+    "{$([1, 2, 3, 4, 5] |> apply(value => value * value))}"
+)
 write_line("{$(["frog", "newt", "toad"] |> apply(shout))}")

@@ -3,4 +3,6 @@ use default
 let now = System.DateTimeOffset.utc_now
 
 write_line("system time (UTC): {now:yyyy-MM-dd HH:mm:ss.fff}")
-write_line("seconds since the Unix epoch: {now.to_unix_time_seconds()}")
+write_line(
+    "seconds since the Unix epoch: {now.to_unix_time_seconds()}"
+)

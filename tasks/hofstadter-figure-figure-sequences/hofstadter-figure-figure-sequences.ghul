@@ -9,7 +9,11 @@ r_sequence() -> int{} is
 
     do
         let step =
-            if skipped.count >= n then skipped[n - 1] else value + 1 fi
+            if skipped.count >= n then
+                skipped[n - 1]
+            else
+                value + 1
+            fi
 
         for missing in (value + 1)..(value + step) do
             skipped.add(missing)
@@ -29,7 +33,8 @@ s_sequence() -> int{} is
 
     for candidate in from(1) do
         if candidate == in_r.current then
-            assert in_r.move_next() else "the R sequence never runs out"
+            assert in_r.move_next()
+                else "the R sequence never runs out"
         else
             yield candidate
         fi
@@ -45,12 +50,13 @@ ffs(n: int) -> int =>
 write_line("first ten of R: {1::10 |> map(ffr) |> join(", ")}")
 write_line("first ten of S: {1::10 |> map(ffs) |> join(", ")}")
 
-let covered = r_sequence()
-    |> take(40)
-    |> cat(s_sequence() |> take(960))
-    |> sort()
-    |> index(1)
-    |> all(entry => entry.value == entry.index)
+let covered =
+    r_sequence()
+        |> take(40)
+        |> cat(s_sequence() |> take(960))
+        |> sort()
+        |> index(1)
+        |> all(entry => entry.value == entry.index)
 
 write_line("")
 write_line(
@@ -59,4 +65,5 @@ write_line(
         " 1 to 1000, each exactly once"
     else
         "the first 40 of R and first 960 of S do not cover 1 to 1000"
-    fi)
+    fi
+)

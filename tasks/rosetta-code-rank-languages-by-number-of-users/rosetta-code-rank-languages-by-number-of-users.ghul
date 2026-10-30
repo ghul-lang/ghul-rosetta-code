@@ -12,8 +12,9 @@ languages(api: string) -> (name: string, users: int){} is
     let client = HttpClient()
 
     // The wiki refuses a request that does not say what is making it.
-    client.default_request_headers.user_agent
-        .parse_add("ghul-rosetta-code/1.0")
+    client.default_request_headers.user_agent.parse_add(
+        "ghul-rosetta-code/1.0"
+    )
 
     let found = LIST()
     let query =
@@ -23,29 +24,42 @@ languages(api: string) -> (name: string, users: int){} is
     let next mut = ""
 
     do
-        let text = client.get_string_async("{query}{next}").result
-        let reply = JsonDocument.parse(text, _[JsonDocumentOptions])
+        let text =
+            client.get_string_async("{query}{next}").result
+        let reply = JsonDocument.parse(
+            text,
+            _[JsonDocumentOptions]
+        )
         let root = reply.root_element
 
-        for page in root.get_property("query")
-                .get_property("pages").enumerate_array() do
-            let title = page.get_property("title").get_string() ?? ""
+        for
+            page in root.get_property("query").get_property(
+                "pages"
+            ).enumerate_array()
+        do
+            let title =
+                page.get_property("title").get_string() ?? ""
             let info = page.get_property("categoryinfo")
 
             let name =
-                title.substring("Category:".length)
-                    .replace(" User", "")
+                title.substring("Category:".length).replace(
+                    " User",
+                    ""
+                )
 
-            found.add((name, info.get_property("pages").get_int32()))
+            found.add(
+                (name, info.get_property("pages").get_int32())
+            )
         od
 
         let more: System.Text.Json.JsonElement mut = _
 
-        if !root.try_get_property("continue", more ref) then
+        if !root.try_get_property("continue", more ref ) then
             break
         fi
 
-        let token = more.get_property("gcmcontinue").get_string() ?? ""
+        let token =
+            more.get_property("gcmcontinue").get_string() ?? ""
 
         next =
             "&gcmcontinue={System.Uri.escape_data_string(token)}"
@@ -61,7 +75,8 @@ let ranked =
         |> sort((a, b) =>
             if a.users != b.users then b.users <> a.users
             else string.compare_ordinal(a.name, b.name)
-            fi)
+            fi
+        )
         |> collect()
 
 let rank mut = 0

@@ -1,8 +1,7 @@
 use default
 
 magic_square(n: int) -> int{} is
-    let cells =
-        repeat(0, n * n) |> collect_mutable()
+    let cells = repeat(0, n * n) |> collect_mutable()
 
     let row mut = 0
     let column mut = n / 2
@@ -29,5 +28,8 @@ let square = magic_square(n)
 let magic_number = n * (n * n + 1) / 2
 
 write_line("5 by 5 magic square, magic number {magic_number}:")
-square |> chunk(n)
-    |> each(row => write_line(row |> map(value => "{value,3}") |> join("")))
+square
+    |> chunk(n)
+    |> each(row =>
+        write_line(row |> map(value => "{value,3}") |> join(""))
+    )

@@ -6,6 +6,7 @@ non_square(n: int) -> int =>
 
 write_line(1::22 |> map(non_square) |> join(" "))
 
-let squares = 1..1_000_000 |> count(n => is_square(non_square(n)))
+let squares =
+    1..1_000_000 |> count(n => is_square(non_square(n)))
 
 write_line("squares for n below one million: {squares}")

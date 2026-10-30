@@ -2,15 +2,25 @@ use default
 
 let extents = [2, 3, 4, 5]
 
-let cells = 0..extents[0]
-    |> map(_ => 0..extents[1]
-        |> map(_ => 0..extents[2]
-            |> map(_ => repeat(0, extents[3]) |> collect_mutable())
-            |> collect())
-        |> collect())
-    |> collect()
+let cells =
+    0..extents[0]
+        |> map(_ =>
+            0..extents[1]
+                |> map(_ =>
+                    0..extents[2]
+                        |> map(_ =>
+                            repeat(0, extents[3])
+                                |> collect_mutable()
+                        )
+                        |> collect()
+                )
+                |> collect()
+        )
+        |> collect()
 
-write_line("{extents.count} dimensions, extents {extents |> join(" by ")}")
+write_line(
+    "{extents.count} dimensions, extents {extents |> join(" by ")}"
+)
 
 cells[1][2][3][4] = 42
 
@@ -21,8 +31,10 @@ let size = extents |> product()
 let flat = repeat(0, size) |> collect_mutable()
 
 at(index: int[]) -> int =>
-    0..extents.count |> reduce(0, (offset, dimension) =>
-        offset * extents[dimension] + index[dimension])
+    0..extents.count
+        |> reduce(0, (offset, dimension) =>
+            offset * extents[dimension] + index[dimension]
+        )
 
 flat[at([1, 2, 3, 4])] = 42
 

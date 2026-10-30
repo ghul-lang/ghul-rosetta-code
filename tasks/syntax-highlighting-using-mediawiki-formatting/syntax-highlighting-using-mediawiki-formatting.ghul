@@ -1,21 +1,28 @@
 use default
 
 let keywords = SET([
-    "abstract", "assert", "await", "break", "case", "cast", "catch",
-    "class", "continue", "default", "do", "elif", "else", "enum", "esac",
-    "false", "fi", "field", "finally", "for", "if", "impl", "in", "is",
-    "isa", "let", "mut", "namespace", "null", "od", "operator", "partial",
-    "private", "protected", "public", "pure", "rec", "ref", "return",
-    "self", "si", "stable", "static", "struct", "super", "then", "throw",
-    "trait", "true", "try", "typeof", "union", "use", "when", "while",
+    "abstract", "assert", "await", "break", "case", "cast",
+    "catch",
+    "class", "continue", "default", "do", "elif", "else",
+    "enum", "esac",
+    "false", "fi", "field", "finally", "for", "if", "impl",
+    "in", "is",
+    "isa", "let", "mut", "namespace", "null", "od", "operator",
+    "partial",
+    "private", "protected", "public", "pure", "rec", "ref",
+    "return",
+    "self", "si", "stable", "static", "struct", "super", "then",
+    "throw",
+    "trait", "true", "try", "typeof", "union", "use", "when",
+    "while",
     "yield", "yrt"
 ])
 
 escaped(text: string) -> string =>
-    text.replace("&", "&amp;")
-        .replace("'", "&apos;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
+    text.replace("&", "&amp;").replace("'", "&apos;").replace(
+        "<",
+        "&lt;"
+    ).replace(">", "&gt;")
 
 // A string literal runs to its closing quote, skipping an escaped one;
 // the interpolated expressions inside it are left as part of the string.
@@ -37,8 +44,14 @@ highlight(line: string) -> string is
     while i < line.length do
         let c = line[i]
 
-        if c == '/' /\ i + 1 < line.length /\ line[i + 1] == '/' then
-            out.append("''").append(escaped(line.substring(i))).append("''")
+        if
+            c == '/' /\
+            i + 1 < line.length /\
+            line[i + 1] == '/'
+        then
+            out.append("''").append(
+                escaped(line.substring(i))
+            ).append("''")
             i = line.length
         elif c == '"' \/ c == '\'' then
             let stop = string_end(line, i)
@@ -48,8 +61,10 @@ highlight(line: string) -> string is
         elif char.is_letter(c) \/ c == '_' then
             let start = i
 
-            let word_char = (k: int) =>
-                char.is_letter_or_digit(line[k]) \/ line[k] == '_'
+            let word_char =
+                (k: int) =>
+                    char.is_letter_or_digit(line[k]) \/
+                    line[k] == '_'
 
             while i < line.length /\ word_char(i) do
                 i = i + 1
@@ -71,7 +86,8 @@ highlight(line: string) -> string is
     out.to_string()
 si
 
-let source = "syntax-highlighting-using-mediawiki-formatting.ghul"
+let source =
+    "syntax-highlighting-using-mediawiki-formatting.ghul"
 
 for line in IO.File.read_all_lines(source) do
     write_line(highlight(line))

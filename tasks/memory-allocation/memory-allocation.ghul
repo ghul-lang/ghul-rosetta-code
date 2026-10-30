@@ -14,7 +14,9 @@ struct POINT(x: int, y: int)
 let on_heap = repeat(0, 1000) |> collect()
 let on_stack = POINT(3, 4)
 
-write_line("managed array of {on_heap.count} ints, left to the collector")
+write_line(
+    "managed array of {on_heap.count} ints, left to the collector"
+)
 write_line("struct in a local: {on_stack.x}, {on_stack.y}")
 
 let size = 4 * 10
@@ -25,7 +27,9 @@ for i in 0..10 do
 od
 
 let squares =
-    0..10 |> map(i => Marshal.read_int32(block, 4 * i)) |> join(" ")
+    0..10
+        |> map(i => Marshal.read_int32(block, 4 * i))
+        |> join(" ")
 
 write_line("unmanaged block of {size} bytes holds: {squares}")
 

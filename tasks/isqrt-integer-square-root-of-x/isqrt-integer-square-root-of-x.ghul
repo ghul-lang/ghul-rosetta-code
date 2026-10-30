@@ -47,4 +47,6 @@ let seven = 7n
     |> filter(power => power % 2 == 1)
     |> each(power =>
         write_line(
-            "7^{power,-2} {grouped(isqrt(bigint.pow(seven, power)))}"))
+            "7^{power,-2} {grouped(isqrt(bigint.pow(seven, power)))}"
+        )
+    )

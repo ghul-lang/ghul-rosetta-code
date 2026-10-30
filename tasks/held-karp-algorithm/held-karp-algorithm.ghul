@@ -1,25 +1,39 @@
 use default
 
-held_karp(cost: List[List[int]]) -> (total: int, tour: List[int]) is
+held_karp(cost: List[List[int]]) -> (
+    total: int,
+    tour: List[int]
+) is
     let n = cost.count
     let subsets = 1 << n
     let unreached = int.max_value
 
-    let best = 0..subsets
-        |> map(_ => repeat(unreached, n) |> collect_mutable())
-        |> collect()
+    let best =
+        0..subsets
+            |> map(_ =>
+                repeat(unreached, n) |> collect_mutable()
+            )
+            |> collect()
 
-    let previous = 0..subsets
-        |> map(_ => repeat(-1, n) |> collect_mutable())
-        |> collect()
+    let previous =
+        0..subsets
+            |> map(_ => repeat(-1, n) |> collect_mutable())
+            |> collect()
 
     best[1][0] = 0
 
     for visited in 0..subsets |> filter(s => s & 1 == 1) do
-        for last in 0..n |> filter(c => best[visited][c] != unreached) do
-            for next in 0..n |> filter(c => visited & (1 << c) == 0) do
+        for
+            last in 0..n
+                |> filter(c => best[visited][c] != unreached)
+        do
+            for
+                next in 0..n
+                    |> filter(c => visited & (1 << c) == 0)
+            do
                 let extended = visited | (1 << next)
-                let total = best[visited][last] + cost[last][next]
+                let total =
+                    best[visited][last] + cost[last][next]
 
                 if total < best[extended][next] then
                     best[extended][next] = total
@@ -31,8 +45,8 @@ held_karp(cost: List[List[int]]) -> (total: int, tour: List[int]) is
 
     let everything = subsets - 1
 
-    let final = 1..n
-        |> min_by(c => best[everything][c] + cost[c][0])!
+    let final =
+        1..n |> min_by(c => best[everything][c] + cost[c][0])!
 
     let tour = LIST([0])
     let visited mut = everything
@@ -47,7 +61,10 @@ held_karp(cost: List[List[int]]) -> (total: int, tour: List[int]) is
 
     tour.add(0)
 
-    (total = best[everything][final] + cost[final][0], tour = tour)
+    (
+        total = best[everything][final] + cost[final][0],
+        tour = tour
+    )
 si
 
 let cost = [

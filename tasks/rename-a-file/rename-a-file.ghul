@@ -1,7 +1,9 @@
 use default
 
-let scratch =
-    IO.Path.combine(IO.Path.get_temp_path(), "rosetta-rename-a-file")
+let scratch = IO.Path.combine(
+    IO.Path.get_temp_path(),
+    "rosetta-rename-a-file"
+)
 
 IO.Directory.create_directory(scratch)
 IO.Directory.set_current_directory(scratch)

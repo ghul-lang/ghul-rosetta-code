@@ -6,7 +6,8 @@ struct BOUNDED is
     init(value: int) is
         if value < 1 \/ value > 10 then
             throw System.Exception(
-                "{value} is outside the range 1..10")
+                "{value} is outside the range 1..10"
+            )
         fi
 
         self.value = value

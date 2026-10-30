@@ -22,8 +22,9 @@ for document in documents do
 od
 
 for term in ["what", "is", "done", "absent"] do
-    let hits = if index.contains_key(term)
-        then index[term] |> sort() |> map(n => "{n}") |> join()
+    let hits =
+        if index.contains_key(term) then
+            index[term] |> sort() |> map(n => "{n}") |> join()
         else ""
         fi
 

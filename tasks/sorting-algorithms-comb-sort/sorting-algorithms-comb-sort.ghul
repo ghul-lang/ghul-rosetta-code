@@ -14,7 +14,10 @@ comb_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
 
         for i in 0..values.count - gap do
             if values[i] > values[i + gap] then
-                (values[i], values[i + gap]) = (values[i + gap], values[i])
+                (values[i], values[i + gap]) = (
+                    values[i + gap],
+                    values[i]
+                )
 
                 sorted = false
             fi

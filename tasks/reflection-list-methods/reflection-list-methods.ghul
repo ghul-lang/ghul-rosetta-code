@@ -24,15 +24,17 @@ si
 let robot = ROBOT()
 let flags = BindingFlags.INSTANCE | BindingFlags.PUBLIC
 
-let declared = robot.get_type().get_methods(flags)
-    |> filter(m => m.declaring_type == robot.get_type())
-    |> map(m => "{m.name}({m.get_parameters()
-        |> map(p => "{p.parameter_type.name} {p.name}")
-        |> join(", ")}) -> {m.return_type.name}")
-    |> collect_mutable()
+let declared =
+    robot.get_type().get_methods(flags)
+        |> filter(m => m.declaring_type == robot.get_type())
+        |> map(m =>
+            "{m.name}({m.get_parameters() |> map(p => "{p.parameter_type.name} {p.name}") |> join(", ")}) -> {m.return_type.name}"
+        )
+        |> collect_mutable()
 
 declared.sort((left: string, right: string) -> int =>
-    string.compare(left, right))
+    string.compare(left, right)
+)
 
 declared |> each(line => write_line(line))
 

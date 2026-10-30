@@ -4,25 +4,33 @@ use Matrix = List[List[double]]
 
 transpose(m: Matrix) -> Matrix =>
     0..m[0].count
-        |> map(c => 0..m.count |> map(r => m[r][c]) |> collect())
+        |> map(c =>
+            0..m.count |> map(r => m[r][c]) |> collect()
+        )
         |> collect()
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count
-        |> map(r => 0..b[0].count
-            |> map(c => 0..b.count |> sum_by(k => a[r][k] * b[k][c]))
-            |> collect())
+        |> map(r =>
+            0..b[0].count
+                |> map(c =>
+                    0..b.count |> sum_by(k => a[r][k] * b[k][c])
+                )
+                |> collect()
+        )
         |> collect()
 
 solve(a: Matrix, b: List[double]) -> double{} is
     let n = b.count
 
-    let rows = 0..n
-        |> map(i => a[i] ++ [b[i]] |> collect_mutable())
-        |> collect_mutable()
+    let rows =
+        0..n
+            |> map(i => a[i] ++ [b[i]] |> collect_mutable())
+            |> collect_mutable()
 
     for k in 0..n do
-        let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
+        let pivot =
+            k..n |> max_by(i => System.Math.abs(rows[i][k]))!
         (rows[k], rows[pivot]) = (rows[pivot], rows[k])
 
         for i in k + 1..n do
@@ -45,14 +53,21 @@ solve(a: Matrix, b: List[double]) -> double{} is
 si
 
 regress(y: List[double], x: Matrix) -> double{} =>
-    let xt = transpose(x), xty = xt * (y |> map(v => [v]) |> collect()) in
-    solve(xt * x, xty |> map(row => row[0]) |> collect())
+    let
+        xt = transpose(x),
+        xty = xt * (y |> map(v => [v]) |> collect())
+    in
+        solve(xt * x, xty |> map(row => row[0]) |> collect())
 
-let heights = [1.47, 1.50, 1.52, 1.55, 1.57, 1.60, 1.63, 1.65, 1.68,
-               1.70, 1.73, 1.75, 1.78, 1.80, 1.83]
+let heights = [
+    1.47, 1.50, 1.52, 1.55, 1.57, 1.60, 1.63, 1.65, 1.68,
+    1.70, 1.73, 1.75, 1.78, 1.80, 1.83
+]
 
-let weights = [52.21, 53.12, 54.48, 55.84, 57.20, 58.57, 59.93, 61.29,
-               63.11, 64.47, 66.28, 68.10, 69.92, 72.19, 74.46]
+let weights = [
+    52.21, 53.12, 54.48, 55.84, 57.20, 58.57, 59.93, 61.29,
+    63.11, 64.47, 66.28, 68.10, 69.92, 72.19, 74.46
+]
 
 let x = heights |> map(h => [1.0, h, h * h]) |> collect()
 

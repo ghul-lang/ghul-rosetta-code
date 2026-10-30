@@ -5,7 +5,9 @@ let composite = repeat(false, limit) |> collect_mutable()
 
 for p in 2..200 do
     if !composite[p] then
-        for multiple in from(p * p, p) |> take_while(* < limit) do
+        for
+            multiple in from(p * p, p) |> take_while(* < limit)
+        do
             composite[multiple] = true
         od
     fi
@@ -26,7 +28,8 @@ prime_count(n: long) -> long =>
     if n < 2L then
         0L
     else
-        let a = prime_count(long(System.Math.sqrt(double(n)))) in
+        let a = prime_count(long(System.Math.sqrt(double(n))))
+        in
         phi(n, int(a)) + a - 1L
     fi
 

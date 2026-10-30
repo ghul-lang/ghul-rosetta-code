@@ -1,11 +1,12 @@
 use default
 
-let given =
-    [
-        "ABCD", "CABD", "ACDB", "DACB", "BCDA", "ACBD", "ADCB", "CDAB",
-        "DABC", "BCAD", "CADB", "CDBA", "CBAD", "ABDC", "ADBC", "BDCA",
-        "DCBA", "BACD", "BADC", "BDAC", "CBDA", "DBCA", "DCAB"
-    ]
+let given = [
+    "ABCD", "CABD", "ACDB", "DACB", "BCDA", "ACBD", "ADCB",
+    "CDAB",
+    "DABC", "BCAD", "CADB", "CDBA", "CBAD", "ABDC", "ADBC",
+    "BDCA",
+    "DCBA", "BACD", "BADC", "BDAC", "CBDA", "DBCA", "DCAB"
+]
 
 let complete = given.count + 1
 
@@ -14,6 +15,8 @@ uses_at(position: int, letter: char) -> int =>
 
 under_represented(position: int) -> char =>
     "ABCD"
-        |> find(letter => uses_at(position, letter) < complete / 4)!
+        |> find(letter =>
+            uses_at(position, letter) < complete / 4
+        )!
 
 write_line(0..4 |> map(under_represented) |> string())

@@ -4,7 +4,9 @@ use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
+pt(x: double, y: double) -> (x: double, y: double) => (
+    x = x, y = y
+)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -15,19 +17,32 @@ scene() -> IMAGE is
         image.colour(
             ubyte(40.0D + 200.0D * t),
             ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t))
+            ubyte(160.0D - 60.0D * t)
+        )
         image.fill_rectangle(
-            0.0D, double(y), 160.0D, double(y + 1))
+            0.0D,
+            double(y),
+            160.0D,
+            double(y + 1)
+        )
     od
 
     image.colour(255ub, 220ub, 60ub)
     image.disc(112.0D, 42.0D, 15.0D)
 
     image.colour(90ub, 60ub, 120ub)
-    image.fill([pt(0.0D, 80.0D), pt(45.0D, 30.0D), pt(95.0D, 80.0D)])
+    image.fill([
+        pt(0.0D, 80.0D),
+        pt(45.0D, 30.0D),
+        pt(95.0D, 80.0D)
+    ])
 
     image.colour(60ub, 110ub, 70ub)
-    image.fill([pt(55.0D, 80.0D), pt(105.0D, 48.0D), pt(160.0D, 80.0D)])
+    image.fill([
+        pt(55.0D, 80.0D),
+        pt(105.0D, 48.0D),
+        pt(160.0D, 80.0D)
+    ])
 
     image.colour(70ub, 150ub, 60ub)
     image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
@@ -36,7 +51,11 @@ scene() -> IMAGE is
     image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
 
     image.colour(120ub, 25ub, 30ub)
-    image.fill([pt(18.0D, 88.0D), pt(37.0D, 75.0D), pt(56.0D, 88.0D)])
+    image.fill([
+        pt(18.0D, 88.0D),
+        pt(37.0D, 75.0D),
+        pt(56.0D, 88.0D)
+    ])
 
     image.colour(250ub, 245ub, 235ub)
     image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
@@ -44,9 +63,14 @@ scene() -> IMAGE is
     image
 si
 
-lerp(a: double, b: double, t: double) -> double => a + (b - a) * t
+lerp(a: double, b: double, t: double) -> double =>
+    a + (b - a) * t
 
-bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
+bilinear(source: IMAGE, x: double, y: double) -> (
+    double,
+    double,
+    double
+) is
     let x0 = min(int(floor(x)), source.width - 1)
     let y0 = min(int(floor(y)), source.height - 1)
     let x1 = min(x0 + 1, source.width - 1)
@@ -56,11 +80,11 @@ bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     let a = source.pixel(x0, y0), b = source.pixel(x1, y0)
     let c = source.pixel(x0, y1), d = source.pixel(x1, y1)
 
-    mix(pick) =>
-        lerp(
-            lerp(double(pick(a)), double(pick(b)), tx),
-            lerp(double(pick(c)), double(pick(d)), tx),
-            ty)
+    mix(pick) => lerp(
+        lerp(double(pick(a)), double(pick(b)), tx),
+        lerp(double(pick(c)), double(pick(d)), tx),
+        ty
+    )
 
     (mix(p => p.red), mix(p => p.green), mix(p => p.blue))
 si
@@ -79,10 +103,12 @@ enlarge(source: IMAGE, factor: double) -> IMAGE is
             let (r, g, b) = bilinear(source, sx, sy)
 
             result.set_pixel(
-                x, y,
+                x,
+                y,
                 ubyte(round(r)),
                 ubyte(round(g)),
-                ubyte(round(b)))
+                ubyte(round(b))
+            )
         od
     od
 

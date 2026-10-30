@@ -7,11 +7,14 @@ use System.Globalization.NumberStyles
 // leading 0x as well. Other bases have no built-in parser.
 
 let cases = [
-    ("1a", 16), ("0x1A", 16), ("777", 8), ("101010", 2), ("-123", 10)
+    ("1a", 16), ("0x1A", 16), ("777", 8), ("101010", 2),
+    ("-123", 10)
 ]
 
 for (text, base) in cases do
-    write_line("{text,-8} in base {base,2}: {Convert.to_int64(text, base)}")
+    write_line(
+        "{text,-8} in base {base,2}: {Convert.to_int64(text, base)}"
+    )
 od
 
 let hex = int.parse("ff", NumberStyles.HEX_NUMBER)

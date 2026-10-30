@@ -18,17 +18,24 @@ pells() -> bigint{} => pell_recurrence(0n, 1n)
 
 pell_lucas() -> bigint{} => pell_recurrence(2n, 2n)
 
-approximations() -> (numerator: bigint, denominator: bigint){} =>
+approximations() -> (
+    numerator: bigint,
+    denominator: bigint
+){} =>
     pells()
         |> windows(2)
-        |> map(pair =>
-            (numerator = pair[0] + pair[1], denominator = pair[1]))
+        |> map(pair => (
+            numerator = pair[0] + pair[1],
+            denominator = pair[1]
+        ))
 
 pell_primes() -> (index: int, value: bigint){} =>
     pells()
         |> index()
         |> filter(entry => is_prime(entry.value))
-        |> map(entry => (index = entry.index, value = entry.value))
+        |> map(entry => (
+            index = entry.index, value = entry.value
+        ))
 
 newman_shanks_williams() -> bigint{} =>
     pells() |> chunk(2) |> map(pair => pair[0] + pair[1])
@@ -41,7 +48,11 @@ near_isosceles_triples() -> TRIANGLE{} is
 
     for value in pells() do
         if position % 2 == 1 /\ position > 1 then
-            yield (short = running, long = running + 1n, hypotenuse = value)
+            yield (
+                short = running,
+                long = running + 1n,
+                hypotenuse = value
+            )
         fi
 
         running = running + value
@@ -57,7 +68,9 @@ write_line("the first 10 Pell-Lucas numbers:")
 write_line("  {pell_lucas() |> take(10) |> join(" ")}")
 
 write_line()
-write_line("the first 10 approximations to the square root of two:")
+write_line(
+    "the first 10 approximations to the square root of two:"
+)
 
 approximations()
     |> take(10)
@@ -65,7 +78,9 @@ approximations()
         let value =
             double(ratio.numerator) / double(ratio.denominator)
 
-        write_line("  {ratio.numerator}/{ratio.denominator} = {value:F15}")
+        write_line(
+            "  {ratio.numerator}/{ratio.denominator} = {value:F15}"
+        )
     ))
 
 write_line()
@@ -73,11 +88,15 @@ write_line("the first 10 Pell primes, with their indices:")
 
 pell_primes()
     |> take(10)
-    |> each(prime => write_line("  {prime.index,4}: {prime.value}"))
+    |> each(prime =>
+        write_line("  {prime.index,4}: {prime.value}")
+    )
 
 write_line()
 write_line("the first 10 Newman-Shanks-Williams numbers:")
-write_line("  {newman_shanks_williams() |> take(10) |> join(" ")}")
+write_line(
+    "  {newman_shanks_williams() |> take(10) |> join(" ")}"
+)
 
 write_line()
 write_line("the first 10 near isosceles right triangles:")
@@ -85,4 +104,7 @@ write_line("the first 10 near isosceles right triangles:")
 near_isosceles_triples()
     |> take(10)
     |> each(triple =>
-        write_line("  {triple.short}, {triple.long}, {triple.hypotenuse}"))
+        write_line(
+            "  {triple.short}, {triple.long}, {triple.hypotenuse}"
+        )
+    )

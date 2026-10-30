@@ -1,6 +1,11 @@
 use default
 
-choose(m: int, n: int, from: int, chosen: List[int]) -> List[int]{} is
+choose(
+    m: int,
+    n: int,
+    from: int,
+    chosen: List[int]
+) -> List[int]{} is
     if chosen.count == m then
         yield chosen
 

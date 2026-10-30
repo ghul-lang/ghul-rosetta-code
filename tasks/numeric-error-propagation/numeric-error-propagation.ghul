@@ -1,7 +1,6 @@
 use default
 use System.Math.*
 
-
 struct UNCERTAIN(value: double, error: double) is
     +(other: UNCERTAIN) -> UNCERTAIN =>
         UNCERTAIN(value + other.value, added_error(other))
@@ -15,19 +14,27 @@ struct UNCERTAIN(value: double, error: double) is
 
     /(other: UNCERTAIN) -> UNCERTAIN =>
         let quotient = value / other.value in
-        UNCERTAIN(quotient, abs(quotient) * relative_with(other))
+        UNCERTAIN(
+            quotient,
+            abs(quotient) * relative_with(other)
+        )
 
     +(c: double) -> UNCERTAIN => UNCERTAIN(value + c, error)
     -(c: double) -> UNCERTAIN => UNCERTAIN(value - c, error)
-    *(c: double) -> UNCERTAIN => UNCERTAIN(value * c, abs(c * error))
-    /(c: double) -> UNCERTAIN => UNCERTAIN(value / c, abs(error / c))
+    *(c: double) -> UNCERTAIN =>
+        UNCERTAIN(value * c, abs(c * error))
+    /(c: double) -> UNCERTAIN =>
+        UNCERTAIN(value / c, abs(error / c))
 
     added_error(other: UNCERTAIN) -> double =>
         sqrt(error * error + other.error * other.error)
 
     relative_with(other: UNCERTAIN) -> double =>
-        let mine = error / value, theirs = other.error / other.value in
-        sqrt(mine * mine + theirs * theirs)
+        let
+            mine = error / value,
+            theirs = other.error / other.value
+        in
+            sqrt(mine * mine + theirs * theirs)
 
     to_string() -> string => "{value} ± {error}"
 si

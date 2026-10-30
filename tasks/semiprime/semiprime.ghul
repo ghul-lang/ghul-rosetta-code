@@ -1,7 +1,6 @@
 use default
 
-is_semiprime(n: int) -> bool =>
-    prime_factors(n).count == 2
+is_semiprime(n: int) -> bool => prime_factors(n).count == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()
 
@@ -9,5 +8,6 @@ write_line("semiprimes up to 100: {up_to_100}")
 
 for n in [1679, 1234, 5, 9, 2093] do
     write_line(
-        "{n} is {if is_semiprime(n) then "" else "not " fi}semiprime")
+        "{n} is {if is_semiprime(n) then "" else "not " fi}semiprime"
+    )
 od

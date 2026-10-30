@@ -28,5 +28,7 @@ for n in 3::6 do
     let fair = 1::samples |> count(_ => unbiased(n) == 1)
     let percent = k => 100.0 * double(k) / double(samples)
 
-    write_line("{n}   {percent(biased),14:F2}%   {percent(fair),17:F2}%")
+    write_line(
+        "{n}   {percent(biased),14:F2}%   {percent(fair),17:F2}%"
+    )
 od

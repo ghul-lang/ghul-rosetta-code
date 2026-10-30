@@ -4,17 +4,22 @@ permutations(items: List[int]) -> List[int]{} is
     if items.count == 0 then
         yield LIST()
     else
-        yield in 0..items.count |> flat_map(index => (
-            let rest = LIST(items)
-            rest.remove_at(index)
-            rest
-            |> permutations()
-            |> map(tail => ([items[index]] ++ tail) |> collect())
-        ))
+        yield in 0..items.count
+            |> flat_map(index => (
+                let rest = LIST(items)
+                rest.remove_at(index)
+                rest
+                    |> permutations()
+                    |> map(tail =>
+                        ([items[index]] ++ tail) |> collect()
+                    )
+            ))
     fi
 si
 
 permutations(LIST([1, 2, 3]))
-    |> each(permutation => write_line(permutation
-        |> map(value => "{value}")
-        |> join(" ")))
+    |> each(permutation =>
+        write_line(
+            permutation |> map(value => "{value}") |> join(" ")
+        )
+    )
