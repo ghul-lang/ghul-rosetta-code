@@ -558,9 +558,17 @@ What it does, so that a source written by hand already reads the same:
 - A string literal is never broken, nor a comment re-wrapped. A line that is long because of a
   string stays long; break the string into adjacent literals, or build it, to bring it in.
 
-A task whose source is also its data - a quine, a program that reads its own text - names the
-sources to leave alone in a `format-exempt` file, one path a line relative to the task, with the
-reason on a `#` line above.
+A `format-exempt` file names the sources to leave alone, one path a line relative to the task,
+with the reason on a `#` line above. Two cases earn one. A source that is also its own data - a
+quine, a program that reads its own text - because laying it out differently changes what the
+program prints. And a source whose layout is itself what the entry demonstrates: the Comments
+task's block comment sits inside a call, and the formatter writes that call on one line, which
+can only put the comment after it.
+
+The second case is not a way to keep a layout you prefer. The entry has to be demonstrating the
+very thing the formatter moves, and the `#` line has to say what that is. Everything else goes
+the other way: the formatter's layout stands, and a line that reads badly under it is fixed in
+the code or in the formatter.
 
 The formatter is faithful, not the author: where its layout of something reads badly, the fix
 usually belongs in the code - a local for a sub-expression, a shorter name - or in the formatter,
