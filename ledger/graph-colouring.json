@@ -2,5 +2,8 @@
   "title": "Graph colouring",
   "slug": "graph-colouring",
   "state": "published",
-  "published_hash": "56875829f4103e4839ecffbb01630c60d4071b340eaab781180e0d1d1a472642"
+  "published_hash": "298e78cb100b52b2050363a6a43f9ab9ca706975b2c531a75e6c509c891a7741",
+  "image_hashes": {
+    "Ghul-graph-colouring-graphs.png": "ec2ecc608d74098064d2e78830db93feca7013f5"
+  }
 }
