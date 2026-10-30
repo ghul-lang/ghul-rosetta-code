@@ -76,7 +76,7 @@ read_ppm(path: string) -> BITMAP is
     let width = int.parse(token())
     let height = int.parse(token())
 
-    let _ = token()
+    token()
 
     at = at + 1
 

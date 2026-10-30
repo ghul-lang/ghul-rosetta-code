@@ -2,7 +2,7 @@ use default
 
 divides(numerator: int, denominator: int) -> bool is
     try
-        let _ = numerator / denominator
+        numerator / denominator
 
         return true
     catch _: System.DivideByZeroException

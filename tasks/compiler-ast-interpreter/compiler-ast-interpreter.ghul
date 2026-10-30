@@ -41,8 +41,8 @@ truth(value: bool) -> int => if value then 1 else 0 fi
 interpret(node: Node) -> int =>
     case node
     when Node.EMPTY then 0
-    when (~"Integer", value): Node.LEAF then int.parse(value)
-    when (~"Identifier", name): Node.LEAF then globals[name]
+    when ("Integer", value): Node.LEAF then int.parse(value)
+    when ("Identifier", name): Node.LEAF then globals[name]
     when (kind, left, right): Node.BRANCH then
         case kind
         when "Assign" then

@@ -66,13 +66,13 @@ search(vertex: int) is
             while
                 preorder[candidates.peek()]! > preorder[next]!
             do
-                let _ = candidates.pop()
+                candidates.pop()
             od
         fi
     od
 
     if candidates.peek() == vertex then
-        let _ = candidates.pop()
+        candidates.pop()
 
         let closed mut = -1
 
