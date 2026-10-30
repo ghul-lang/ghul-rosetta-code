@@ -6,18 +6,34 @@ let step = 8.0D
 
 let diagonal = step * Math.sqrt(2.0D)
 
-expand(order: int) -> string => (
-    let current mut = "F--XF--F--XF"
-
-    for _ in 0..order do
-        current = current.replace("X", "XF+G+XF--F--XF+G+X")
-    od
-
-    current
-)
-
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)
+
+bend() is
+    pen.forward(step)
+    pen.turn(45.0D)
+    pen.forward(diagonal)
+    pen.turn(45.0D)
+si
+
+fold() is
+    pen.forward(step)
+    pen.turn(-90.0D)
+    pen.forward(step)
+    pen.turn(-90.0D)
+si
+
+curve(n: int) is
+    if n > 0 then
+        curve(n - 1)
+        bend()
+        curve(n - 1)
+        fold()
+        curve(n - 1)
+        bend()
+        curve(n - 1)
+    fi
+si
 
 image.view(0.0D, 0.0D, 540.0D, 540.0D)
 image.colour(0ub, 0ub, 160ub)
@@ -25,17 +41,12 @@ image.stroke(1.2D)
 
 pen.move_to(266.0D, 514.0D)
 
-for letter in expand(order) do
-    if letter == 'F' then
-        pen.forward(step)
-    elif letter == 'G' then
-        pen.forward(diagonal)
-    elif letter == '+' then
-        pen.turn(45.0D)
-    elif letter == '-' then
-        pen.turn(-45.0D)
-    fi
-od
+pen.forward(step)
+pen.turn(-90.0D)
+curve(order)
+fold()
+curve(order)
+pen.forward(step)
 
 image.write("sierpinski.png")
 
