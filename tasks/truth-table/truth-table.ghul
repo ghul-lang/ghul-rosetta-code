@@ -113,9 +113,7 @@ digit(value: bool) -> string => if value then "1" else "0" fi
 
 table(source: string) is
     let expression =
-        parse_or(
-            source |> filter(c => c != ' ') |> memo()
-        ).value
+        parse_or(source |> filter(* != ' ') |> memo()).value
     let variables =
         expression |> names() |> distinct() |> collect()
 
