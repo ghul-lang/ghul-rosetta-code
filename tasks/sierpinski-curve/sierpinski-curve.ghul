@@ -10,20 +10,27 @@ let image = IMAGE(540, 540)
 let pen = TURTLE(image)
 
 bend() is
-    pen.forward(step); pen.turn(45.0D)
-    pen.forward(diagonal); pen.turn(45.0D)
+    pen.forward(step)
+    pen.turn(45.0D)
+    pen.forward(diagonal)
+    pen.turn(45.0D)
 si
 
 fold() is
-    pen.forward(step); pen.turn(-90.0D)
-    pen.forward(step); pen.turn(-90.0D)
+    pen.forward(step)
+    pen.turn(-90.0D)
+    pen.forward(step)
+    pen.turn(-90.0D)
 si
 
 curve(n: int) is
     if n > 0 then
-        curve(n - 1); bend()
-        curve(n - 1); fold()
-        curve(n - 1); bend()
+        curve(n - 1)
+        bend()
+        curve(n - 1)
+        fold()
+        curve(n - 1)
+        bend()
         curve(n - 1)
     fi
 si
@@ -34,9 +41,12 @@ image.stroke(1.2D)
 
 pen.move_to(266.0D, 514.0D)
 
-pen.forward(step); pen.turn(-90.0D)
-curve(order); fold()
-curve(order); pen.forward(step)
+pen.forward(step)
+pen.turn(-90.0D)
+curve(order)
+fold()
+curve(order)
+pen.forward(step)
 
 image.write("sierpinski.png")
 
