@@ -117,13 +117,12 @@ namespace Rosetta is
                 writer.write_null("commit")
             fi
 
-            // The ghul.raster release the tasks are built and tested with, which
-            // a part whose raster is true needs.
-            if let raster = _raster_version() then
-                writer.write_string("raster_version", raster)
-            else
-                writer.write_null("raster_version")
-            fi
+            // The releases the tasks are built and tested with: the compiler,
+            // the runtime, and ghul.raster, which a part whose raster is true
+            // needs.
+            _write_version(writer, "compiler_version", _compiler_version())
+            _write_version(writer, "runtime_version", _package_version("ghul.runtime"))
+            _write_version(writer, "raster_version", _package_version("ghul.raster"))
 
             writer.write_start_object("tags")
 
@@ -474,16 +473,47 @@ namespace Rosetta is
             return lines
         si
 
-        _raster_version() -> string? is
+        _write_version(writer: Utf8JsonWriter, name: string, version: string?) is
+            if let found = version then
+                writer.write_string(name, found)
+            else
+                writer.write_null(name)
+            fi
+        si
+
+        _package_version(package: string) -> string? is
             let props = IO.Path.combine(_root, "Directory.Packages.props")
 
             if !IO.File.exists(props) then
                 return null
             fi
 
-            let found = Regex.match(IO.File.read_all_text(props), "Include=\"ghul\\.raster\"\\s+Version=\"([^\"]+)\"")
+            let found = Regex.match(IO.File.read_all_text(props), "Include=\"{Regex.escape(package)}\"\\s+Version=\"([^\"]+)\"")
 
             return if found.success then found.groups[1].value else null fi
+        si
+
+        _compiler_version() -> string? is
+            let manifest = IO.Path.combine(_root, ".config", "dotnet-tools.json")
+
+            if !IO.File.exists(manifest) then
+                return null
+            fi
+
+            let document = JsonDocument.parse(IO.File.read_all_text(manifest), _)
+            let tools: JsonElement mut
+            let compiler: JsonElement mut
+            let version: JsonElement mut
+
+            if !document.root_element.try_get_property("tools", tools ref) \/ !tools.try_get_property("ghul.compiler", compiler ref) then
+                return null
+            fi
+
+            if !compiler.try_get_property("version", version ref) \/ version.value_kind != JsonValueKind.STRING then
+                return null
+            fi
+
+            return version.get_string()
         si
 
         _uses_raster(project: string) -> bool =>
