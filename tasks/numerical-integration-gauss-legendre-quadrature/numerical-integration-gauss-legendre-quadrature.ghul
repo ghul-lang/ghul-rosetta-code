@@ -51,7 +51,7 @@ nodes_and_weights(n: int) -> (node: double, weight: double){} =>
         )
 
 integrate(
-    f: (double) -> double,
+    f: double -> double,
     a: double,
     b: double,
     n: int

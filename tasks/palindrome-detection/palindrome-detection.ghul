@@ -16,7 +16,7 @@ is_inexact_palindrome(text: string) -> bool =>
 
 test(
     maybe_palindrome: string,
-    palindrome_check: (string) -> bool
+    palindrome_check: string -> bool
 ) -> string =>
     if palindrome_check(maybe_palindrome) then
         "\"{maybe_palindrome}\" is a palindrome"

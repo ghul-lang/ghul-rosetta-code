@@ -6,9 +6,7 @@ let names = [
 ]
 
 lucas(b: bigint) -> bigint{} =>
-    stream((1n, 1n), ((x, y)) =>
-        Ghul.Pipes.STREAM.YIELD(x, (y, b * y + x))
-    )
+    stream((1n, 1n), ((x, y)) => x || (y, b * y + x))
 
 // successive ratios of the sequence, each truncated to the given number of
 // places, until one repeats the one before it

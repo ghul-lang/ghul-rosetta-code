@@ -1,6 +1,6 @@
 use default
 
-apply[T, U](values: T[], callback: (T) -> U) -> U{} => (
+apply[T, U](values: T[], callback: T -> U) -> U{} => (
     let applied = LIST()
 
     for value in values do

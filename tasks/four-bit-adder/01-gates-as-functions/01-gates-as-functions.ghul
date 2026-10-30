@@ -50,8 +50,10 @@ binary(bits: bool[]) -> string =>
 
 value(added: (sum: bool[], carry: bool)) -> int =>
     added.sum
-        |> reduce(if added.carry then 1 else 0 fi,
-            (total, bit) => total * 2 + if bit then 1 else 0 fi)
+        |> reduce(
+            if added.carry then 1 else 0 fi,
+            (total, bit) => total * 2 + if bit then 1 else 0 fi
+        )
 
 adds_correctly(a: int, b: int) -> bool =>
     value(four_bit_adder(nibble(a), nibble(b), false)) == a + b

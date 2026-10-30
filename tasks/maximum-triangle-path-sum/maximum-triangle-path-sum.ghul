@@ -28,14 +28,15 @@ let triangle = [
 let best =
     triangle
         |> reverse()
-        |> reduce(repeat(0, triangle.count + 1) |> collect(),
+        |> reduce(
+            repeat(0, triangle.count + 1) |> collect(),
             (below: List[int], row: List[int]) -> List[int] =>
-            row
-                |> index()
-                |> map((i, value) =>
-                    value + int.max(below[i], below[i + 1])
-                )
-                |> collect()
+                row
+                    |> index()
+                    |> map((i, value) =>
+                        value + int.max(below[i], below[i + 1])
+                    )
+                    |> collect()
         )
 
 write_line("The maximum total is {best[0]}")

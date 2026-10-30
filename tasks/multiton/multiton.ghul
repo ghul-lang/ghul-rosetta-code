@@ -1,6 +1,6 @@
 use default
 
-class MULTITON[K, V](create: (K) -> V private) is
+class MULTITON[K, V](create: K -> V private) is
     _instances: MAP[K, V]
     _lock: object
 

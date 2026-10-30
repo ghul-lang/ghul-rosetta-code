@@ -5,7 +5,7 @@ union Tree[T] is
     NODE(value: T, left: Tree[T], right: Tree[T])
 si
 
-map[T, U](tree: Tree[T], f: (T) -> U) -> Tree[U] =>
+map[T, U](tree: Tree[T], f: T -> U) -> Tree[U] =>
     if let node: Tree.NODE = tree then
         Tree.NODE(
             f(node.value),

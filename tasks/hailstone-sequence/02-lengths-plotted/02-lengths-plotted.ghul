@@ -34,10 +34,12 @@ let peak =
             n = entry.index + 1,
             steps = entry.value
         ))
-        |> reduce((n = 0, steps = 0), (best, item) =>
-            if item.steps > best.steps then item
-            else best
-            fi
+        |> reduce(
+            (n = 0, steps = 0),
+            (best, item) =>
+                if item.steps > best.steps then item
+                else best
+                fi
         )
 
 let tallest = peak.steps

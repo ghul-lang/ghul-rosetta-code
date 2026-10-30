@@ -68,7 +68,7 @@ use Layer = (
     name: string,
     row: int,
     column: int,
-    show: (RGB) -> RGB
+    show: RGB -> RGB
 )
 
 byte(v: double) -> ubyte =>

@@ -107,9 +107,10 @@ class FOUR_BIT_ADDER is
 
     total: int =>
         sum
-            |> reduce(if carry.output then 1 else 0 fi,
+            |> reduce(
+                if carry.output then 1 else 0 fi,
                 (running, c) =>
-                running * 2 + if c.output then 1 else 0 fi
+                    running * 2 + if c.output then 1 else 0 fi
             )
 si
 

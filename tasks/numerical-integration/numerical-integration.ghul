@@ -1,8 +1,8 @@
 use default
 
-use Integrand = (double) -> double
+use Integrand = double -> double
 
-sum_over(n: int, term: (int) -> double) -> double =>
+sum_over(n: int, term: int -> double) -> double =>
     0..n |> sum_by(term)
 
 left_rectangle(

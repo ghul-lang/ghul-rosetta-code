@@ -7,7 +7,7 @@ modifier(x: double) -> double =>
 
 modified(
     generate: () -> double,
-    weight: (double) -> double
+    weight: double -> double
 ) -> double is
     do
         let candidate = generate()

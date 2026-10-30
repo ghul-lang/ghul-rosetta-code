@@ -29,10 +29,10 @@ from_engel(terms: Collections.List[bigint]) -> (
     denominator: bigint
 ) =>
     terms
-        |> reduce((0n, 1n), ((n, d), term) => (
-            n * term + 1n,
-            d * term
-        ))
+        |> reduce(
+            (0n, 1n),
+            ((n, d), term) => (n * term + 1n, d * term)
+        )
 
 show(name: string, fractional: string) is
     let numerator = bigint.parse(fractional)

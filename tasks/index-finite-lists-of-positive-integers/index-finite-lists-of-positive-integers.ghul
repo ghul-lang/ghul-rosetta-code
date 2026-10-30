@@ -7,8 +7,9 @@ rank(values: Collections.List[bigint]) -> bigint =>
     values
         |> reduce(1n, (acc, value) =>
             value.to_string()
-                |> reduce(acc * eleven + ten, (r, d) =>
-                    r * eleven + cast(d - '0')
+                |> reduce(
+                    acc * eleven + ten,
+                    (r, d) => r * eleven + cast(d - '0')
                 )
         )
 

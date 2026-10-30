@@ -32,8 +32,9 @@ compile_order(graph: MAP[string, SET[string]]) -> (
 ) is
     let pending =
         graph.keys
-            |> collect_mutable_map(name => name, name =>
-                SET(graph[name])
+            |> collect_mutable_map(
+                name => name,
+                name => SET(graph[name])
             )
 
     let ordered = LIST()

@@ -41,12 +41,14 @@ for
         (false, false)
     ]
 do
-    if2(pair.`0,
+    if2(
+        pair.`0,
         pair.`1,
         () => write_line("{pair}: both"),
         () => write_line("{pair}: the first only"),
         () => write_line("{pair}: the second only"),
-        () => write_line("{pair}: neither"))
+        () => write_line("{pair}: neither")
+    )
 od
 
 unless(false, () => write_line("unless false, this runs"))

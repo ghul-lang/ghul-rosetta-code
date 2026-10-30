@@ -20,10 +20,7 @@ next_generation(cells: string) -> string =>
         |> join("")
 
 stream("_###_##_#_#_#_#__#__", generation =>
-    Ghul.Pipes.STREAM.YIELD(
-        generation,
-        next_generation(generation)
-    )
+    generation || next_generation(generation)
 )
     |> take(10)
     |> each(generation => write_line(generation))

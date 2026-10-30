@@ -97,10 +97,7 @@ let sorts: Sorter[] = [
 
 let powers = (6::14) |> collect()
 
-microseconds(
-    sort: (LIST[int]) -> void,
-    data: int[]
-) -> double =>
+microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
     (0..3)
         |> map(_ =>
             let

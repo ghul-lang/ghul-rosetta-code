@@ -2,7 +2,7 @@ use default
 use System.Math.*
 
 romberg(
-    f: (double) -> double,
+    f: double -> double,
     lower: double,
     upper: double,
     steps: int,

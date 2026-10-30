@@ -31,8 +31,9 @@ let counts =
     1::20_000 |> map(n => (n, proper_divisors(n).count))
 let (best, most) =
     counts
-        |> reduce((0, -1), (a, b) =>
-            if b.`1 > a.`1 then b else a fi
+        |> reduce(
+            (0, -1),
+            (a, b) => if b.`1 > a.`1 then b else a fi
         )
 
 write_line("")

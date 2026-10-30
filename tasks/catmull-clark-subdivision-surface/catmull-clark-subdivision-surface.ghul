@@ -19,8 +19,9 @@ use Mesh = (points: List[Point], faces: List[Face])
 centre(points: List[Point]) -> Point =>
     (
         points
-            |> reduce((x = 0.0D, y = 0.0D, z = 0.0D), (a, b) =>
-                a + b
+            |> reduce(
+                (x = 0.0D, y = 0.0D, z = 0.0D),
+                (a, b) => a + b
             )
     ) *
     (1.0D / double(points.count))

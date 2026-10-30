@@ -20,12 +20,14 @@ a(
 si
 
 for k in 0::10 do
-    let result = a(k,
+    let result = a(
+        k,
         () => 1,
         () => -1,
         () => -1,
         () => 1,
-        () => 0)
+        () => 0
+    )
 
     write_line("k = {k,2}: {result}")
 od

@@ -45,11 +45,15 @@ spiral(count: int) -> Step{} is
 
         last =
             candidates
-                |> reduce(candidates[0], (best, next) =>
-                    if bend(from, next) < bend(from, best) then
-                        next
-                    else best
-                    fi
+                |> reduce(
+                    candidates[0],
+                    (best, next) =>
+                        if
+                            bend(from, next) < bend(from, best)
+                        then
+                            next
+                        else best
+                        fi
                 )
 
         let here = points[points.count - 1]

@@ -1,8 +1,6 @@
 use default
 
-let squares = stream(1, n =>
-    Ghul.Pipes.STREAM.YIELD(n * n, n + 1)
-)
+let squares = stream(1, n => n * n || n + 1)
 
 write_line(
     squares

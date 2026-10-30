@@ -96,17 +96,21 @@ write_line("4 3 3 / 3 1 2 / 0 2 3 topples to")
 write_line(avalanche.rows |> join(" / "))
 write_line("")
 
-side_by_side("s1 + s2 = s2 + s1:", [s1, s2, s1 + s2], [
-    "+", "="
-])
+side_by_side(
+    "s1 + s2 = s2 + s1:",
+    [s1, s2, s1 + s2],
+    ["+", "="]
+)
 write_line("s1 + s2 =~ s2 + s1: {s1 + s2 =~ s2 + s1}")
 write_line("")
 side_by_side("s3 + s3_id:", [s3, s3_id, s3 + s3_id], ["+", "="])
 write_line("s3 + s3_id =~ s3: {s3 + s3_id =~ s3}")
 write_line("")
-side_by_side("s3_id + s3_id:", [s3_id, s3_id, s3_id + s3_id], [
-    "+", "="
-])
+side_by_side(
+    "s3_id + s3_id:",
+    [s3_id, s3_id, s3_id + s3_id],
+    ["+", "="]
+)
 write_line("s3_id + s3_id =~ s3_id: {s3_id + s3_id =~ s3_id}")
 
 let six = SANDPILE.filled(64, 6)

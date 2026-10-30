@@ -41,7 +41,7 @@ draw(image: IMAGE, rule: int, left: int) is
 
     let rows =
         stream(single_cell(), cells =>
-            Ghul.Pipes.STREAM.YIELD(cells, step(rule, cells))
+            cells || step(rule, cells)
         )
             |> take(generations)
 

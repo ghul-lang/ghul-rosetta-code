@@ -30,9 +30,7 @@ let single_cell =
 for rule in [90, 30, 110] do
     write_line("rule {rule}")
 
-    stream(single_cell, cells =>
-        Ghul.Pipes.STREAM.YIELD(cells, step(rule, cells))
-    )
+    stream(single_cell, cells => cells || step(rule, cells))
         |> take(16)
         |> each(cells => write_line(show(cells)))
 

@@ -23,7 +23,7 @@ add(left: Number, right: Number) -> Number =>
         FRACTIONAL(widen(left) + widen(right))
     fi
 
-accumulator(initial: Number) -> (Number) -> Number =>
+accumulator(initial: Number) -> Number -> Number =>
     let sum mut = initial in
 
     value => (

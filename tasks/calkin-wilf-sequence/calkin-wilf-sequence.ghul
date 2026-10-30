@@ -6,11 +6,13 @@ next_term(numerator: int, denominator: int) -> (int, int) => (
     numerator
 )
 
-let terms = stream((1, 1), ((numerator, denominator)) =>
-    Ghul.Pipes.STREAM.YIELD(
-        "{numerator}/{denominator}",
-        next_term(numerator, denominator)
-    )
+let terms = stream(
+    (1, 1),
+    ((numerator, denominator)) =>
+        "{numerator}/{denominator}" || next_term(
+            numerator,
+            denominator
+        )
 )
 
 write_line(terms |> take(20) |> join(" "))

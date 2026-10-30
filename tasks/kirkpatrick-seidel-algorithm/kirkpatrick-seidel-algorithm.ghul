@@ -16,22 +16,26 @@ median(values: double{}) -> double =>
 
 leftmost(points: List[P]) -> P =>
     points
-        |> reduce(points[0], (b, p) =>
-            if p.x < b.x \/ (p.x == b.x /\ p.y > b.y) then
-                p
-            else
-                b
-            fi
+        |> reduce(
+            points[0],
+            (b, p) =>
+                if p.x < b.x \/ (p.x == b.x /\ p.y > b.y) then
+                    p
+                else
+                    b
+                fi
         )
 
 rightmost(points: List[P]) -> P =>
     points
-        |> reduce(points[0], (b, p) =>
-            if p.x > b.x \/ (p.x == b.x /\ p.y > b.y) then
-                p
-            else
-                b
-            fi
+        |> reduce(
+            points[0],
+            (b, p) =>
+                if p.x > b.x \/ (p.x == b.x /\ p.y > b.y) then
+                    p
+                else
+                    b
+                fi
         )
 
 bridge(points: List[P], a: double) -> (P, P) is

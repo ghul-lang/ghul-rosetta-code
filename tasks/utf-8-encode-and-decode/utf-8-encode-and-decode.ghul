@@ -26,14 +26,15 @@ decode(octets: List[int]) -> int =>
     let leader = octets[0] in
     octets
         |> skip(1)
-        |> reduce(case octets.count
+        |> reduce(
+            case octets.count
             when 1 then leader
             when 2 then leader & 0x1F
             when 3 then leader & 0x0F
             else leader & 0x07
             esac,
             (acc, continuation) =>
-            (acc << 6) | (continuation & 0x3F)
+                (acc << 6) | (continuation & 0x3F)
         )
 
 hex(octet: int) -> string => "{octet:X2}"

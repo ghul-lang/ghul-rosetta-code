@@ -15,8 +15,7 @@ label(
     (name, [x, y], (r, g, b)): (string, int[], Rgb)
 ) -> string => "{name} at ({x}, {y}) in #{r:X2}{g:X2}{b:X2}"
 
-apply[T.., U](f: (T..) -> U, arguments: T..) -> U =>
-    f(arguments)
+apply[T.., U](f: T.. -> U, arguments: T..) -> U => f(arguments)
 
 cuboid(width: int, height: int, depth: int) -> int =>
     width * height * depth

@@ -16,7 +16,7 @@ class PARTICLE(
 
 class PROBLEM(
     name: string,
-    f: (V2) -> double,
+    f: V2 -> double,
     low: V2,
     high: V2,
     omega: double,

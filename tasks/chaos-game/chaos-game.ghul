@@ -24,7 +24,7 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
         corner = chosen
     )
 
-    Ghul.Pipes.STREAM.YIELD(next, next)
+    next || next
 )
 
 plot(at: Step) is

@@ -21,14 +21,16 @@ class GRAPH(
 
         _neighbours =
             nodes
-                |> collect_map(node => node, node =>
-                    if outgoing.contains_key(node) then
-                        outgoing[node]
-                            |> map((from, to) => to)
-                            |> collect_set()
-                    else
-                        SET()
-                    fi
+                |> collect_map(
+                    node => node,
+                    node =>
+                        if outgoing.contains_key(node) then
+                            outgoing[node]
+                                |> map((from, to) => to)
+                                |> collect_set()
+                        else
+                            SET()
+                        fi
                 )
     si
 

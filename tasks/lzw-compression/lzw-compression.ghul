@@ -6,8 +6,10 @@ let alphabet_size = 256
 compress(text: string) -> List[int] is
     let codes =
         0..alphabet_size
-            |> collect_mutable_map(code => "{char(code)}",
-                code => code)
+            |> collect_mutable_map(
+                code => "{char(code)}",
+                code => code
+            )
 
     let compressed = LIST()
     let current mut = ""

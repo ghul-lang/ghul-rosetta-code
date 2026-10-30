@@ -5,8 +5,6 @@ complement(text: string) -> string =>
         |> map(digit => if digit == '0' then "1" else "0" fi)
         |> join("")
 
-stream("0", step =>
-    Ghul.Pipes.STREAM.YIELD(step, "{step}{complement(step)}")
-)
+stream("0", step => step || "{step}{complement(step)}")
     |> take(7)
     |> each(step => write_line(step))

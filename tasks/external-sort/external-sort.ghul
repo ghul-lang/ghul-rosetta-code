@@ -85,12 +85,14 @@ merge(parts: List[string], into: string) is
 
         let taking =
             live
-                |> reduce(live[0], (best, run) =>
-                    if run.head! < best.head! then
-                        run
-                    else
-                        best
-                    fi
+                |> reduce(
+                    live[0],
+                    (best, run) =>
+                        if run.head! < best.head! then
+                            run
+                        else
+                            best
+                        fi
                 )
 
         writer.write_line("{taking.take()!}")

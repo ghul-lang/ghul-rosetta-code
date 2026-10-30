@@ -19,8 +19,9 @@ exact(t: double) -> double => Math.pow(t * t + 4.0, 2.0) / 16.0
 
 let advance = rk4((t, y) => t * Math.sqrt(y), 0.1)
 
-let points = stream((0.0, 1.0), point =>
-    Ghul.Pipes.STREAM.YIELD(point, advance(point))
+let points = stream(
+    (0.0, 1.0),
+    point => point || advance(point)
 )
 
 for (t, y) in points |> take(101) |> step(10) do

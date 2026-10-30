@@ -56,15 +56,17 @@ hull(points: List[Point]) -> List[FACE] is
     let furthest =
         (from, along) =>
             points
-                |> reduce(points[0], (best, candidate) =>
-                    if
-                        (candidate - from) ⋅ along >
-                        (best - from) ⋅ along
-                    then
-                        candidate
-                    else
-                        best
-                    fi
+                |> reduce(
+                    points[0],
+                    (best, candidate) =>
+                        if
+                            (candidate - from) ⋅ along >
+                            (best - from) ⋅ along
+                        then
+                            candidate
+                        else
+                            best
+                        fi
                 )
 
     let low = furthest(
@@ -79,30 +81,36 @@ hull(points: List[Point]) -> List[FACE] is
 
     let apex =
         points
-            |> reduce(points[0], (best, candidate) =>
-                if
-                    length((candidate - low) × (high - low)) >
-                    length((best - low) × (high - low))
-                then
-                    candidate
-                else
-                    best
-                fi
+            |> reduce(
+                points[0],
+                (best, candidate) =>
+                    if
+                        length(
+                            (candidate - low) × (high - low)
+                        ) >
+                        length((best - low) × (high - low))
+                    then
+                        candidate
+                    else
+                        best
+                    fi
             )
 
     let face = FACE(low, high, apex)
 
     let peak =
         points
-            |> reduce(points[0], (best, candidate) =>
-                if
-                    abs(face.normal ⋅ (candidate - low)) >
-                    abs(face.normal ⋅ (best - low))
-                then
-                    candidate
-                else
-                    best
-                fi
+            |> reduce(
+                points[0],
+                (best, candidate) =>
+                    if
+                        abs(face.normal ⋅ (candidate - low)) >
+                        abs(face.normal ⋅ (best - low))
+                    then
+                        candidate
+                    else
+                        best
+                    fi
             )
 
     let faces =

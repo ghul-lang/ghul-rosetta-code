@@ -49,8 +49,14 @@ split(t: Triangle, at: double) -> (Triangle, Triangle) => (
 
     let (p, q, opposite) =
         edges
-            |> reduce(edges[0], (best, e) =>
-                if length(e) > length(best) then e else best fi
+            |> reduce(
+                edges[0],
+                (best, e) =>
+                    if length(e) > length(best) then
+                        e
+                    else
+                        best
+                    fi
             )
     let point = p + (q - p) * at
 

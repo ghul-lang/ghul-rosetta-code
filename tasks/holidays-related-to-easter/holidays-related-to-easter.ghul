@@ -50,7 +50,7 @@ in_gregorian(date: DateTime) -> string =>
 
 feasts(
     easter: DateTime,
-    shown: (DateTime) -> string,
+    shown: DateTime -> string,
     days: List[(string, int)]
 ) -> string =>
     days

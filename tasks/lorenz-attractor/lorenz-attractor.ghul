@@ -36,7 +36,7 @@ step(at: Point) -> STREAM[Point, Point] => (
     let slope = mean(first, second, third, fourth)
     let next = along(at, slope, dt)
 
-    Ghul.Pipes.STREAM.YIELD(next, next)
+    next || next
 )
 
 let path =

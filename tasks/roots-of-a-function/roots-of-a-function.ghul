@@ -6,7 +6,7 @@ union Root is
 si
 
 bisect(
-    f: (double) -> double,
+    f: double -> double,
     low: double,
     high: double
 ) -> double is
@@ -27,7 +27,7 @@ bisect(
 si
 
 roots(
-    f: (double) -> double,
+    f: double -> double,
     start: double,
     stop: double,
     step: double
