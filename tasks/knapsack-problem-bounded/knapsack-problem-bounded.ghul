@@ -13,17 +13,11 @@ let items = [
     (name = "apple", weight = 39, value = 40, pieces = 3),
     (name = "cheese", weight = 23, value = 30, pieces = 1),
     (name = "beer", weight = 52, value = 10, pieces = 3),
-    (
-        name = "suntan cream", weight = 11, value = 70,
-        pieces = 1
-    ),
+    (name = "suntan cream", weight = 11, value = 70, pieces = 1),
     (name = "camera", weight = 32, value = 30, pieces = 1),
     (name = "trousers", weight = 48, value = 10, pieces = 2),
     (name = "umbrella", weight = 73, value = 40, pieces = 1),
-    (
-        name = "waterproof trousers", weight = 42, value = 70,
-        pieces = 1
-    ),
+    (name = "waterproof trousers", weight = 42, value = 70, pieces = 1),
     (
         name = "waterproof overclothes", weight = 43,
         value = 75, pieces = 1

@@ -47,11 +47,7 @@ to_nest(lines: List[LINE], position: int) -> (
 )
 
 let start = NODE("RosettaCode", [
-    NODE("rocks", [
-        leaf("code"),
-        leaf("comparison"),
-        leaf("wiki")
-    ]),
+    NODE("rocks", [leaf("code"), leaf("comparison"), leaf("wiki")]),
     NODE("mocks", [leaf("trolling")])
 ])
 

@@ -36,12 +36,8 @@ let opposite = [
     |> collect_map()
 
 let aliases = [
-    ("n", "north"), ("s", "south"), ("e", "east"), (
-        "w", "west"
-    ),
-    ("u", "up"), ("d", "down"), ("i", "inventory"), (
-        "inv", "inventory"
-    ),
+    ("n", "north"), ("s", "south"), ("e", "east"), ("w", "west"),
+    ("u", "up"), ("d", "down"), ("i", "inventory"), ("inv", "inventory"),
     ("a", "attack")
 ]
     |> collect_mutable_map()

@@ -53,9 +53,8 @@ si
 
 for
     (start, goal) in [
-        ("boy", "man"), ("girl", "lady"), ("john", "jane"), (
-            "child", "adult"
-        ),
+        ("boy", "man"), ("girl", "lady"), ("john", "jane"),
+        ("child", "adult"),
         ("cat", "dog"), ("lead", "gold"), ("white", "black")
     ]
 do

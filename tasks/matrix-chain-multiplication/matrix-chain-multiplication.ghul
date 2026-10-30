@@ -49,14 +49,8 @@ optimal_order(dims: List[long]) -> (
 si
 
 let lists = [
-    [
-        1L, 5L, 25L, 30L, 100L, 70L, 2L, 1L, 100L, 250L, 1L,
-        1000L, 2L
-    ],
-    [
-        1000L, 1L, 500L, 12L, 1L, 700L, 2500L, 3L, 2L, 5L, 14L,
-        10L
-    ]
+    [1L, 5L, 25L, 30L, 100L, 70L, 2L, 1L, 100L, 250L, 1L, 1000L, 2L],
+    [1000L, 1L, 500L, 12L, 1L, 700L, 2500L, 3L, 2L, 5L, 14L, 10L]
 ]
 
 for dims in lists do

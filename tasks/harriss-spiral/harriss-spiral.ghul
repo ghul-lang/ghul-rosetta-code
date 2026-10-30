@@ -99,14 +99,7 @@ let starts = [
     (x + scaled(4), high, 270.0D, scaled(5), 3, 6.0D),
     (x + scaled(1), high, 0.0D, scaled(4), 4, 6.0D),
     (x - scaled(4), y - scaled(1), 0.0D, scaled(5), 2, 10.0D),
-    (
-        x - scaled(4),
-        y - scaled(3),
-        -270.0D,
-        scaled(4),
-        3,
-        12.0D
-    ),
+    (x - scaled(4), y - scaled(3), -270.0D, scaled(4), 3, 12.0D),
     (x - scaled(1), y - scaled(3), 180.0D, scaled(3), 4, 12.0D),
     (x - scaled(1), y - base, 270.0D, scaled(2), 5, 14.0D),
     (x, y - base, 0.0D, scaled(1), 6, 14.0D),

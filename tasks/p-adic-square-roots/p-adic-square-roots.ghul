@@ -117,9 +117,7 @@ square_roots(
 si
 
 let examples = [
-    (2n, 20, 497n, 10496n), (5n, 14, 86n, 25n), (
-        7n, 10, -19n, 1n
-    )
+    (2n, 20, 497n, 10496n), (5n, 14, 86n, 25n), (7n, 10, -19n, 1n)
 ]
 
 for (p, k, a, b) in examples do

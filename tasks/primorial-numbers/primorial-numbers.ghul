@@ -39,7 +39,7 @@ write_line("the first ten primorial numbers:")
 write_line()
 write_line("digits in larger primorial numbers:")
 
-[10, 100, 1000, 10000, 100000]
+[10, 100, 1_000, 10_000, 100_000]
     |> each(index =>
         write_line(
             "  primorial({index,7:N0}) has "

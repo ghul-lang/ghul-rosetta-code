@@ -21,9 +21,8 @@ od
 
 for
     (letters, zone, first) in [
-        ("ABCDEFGHI", "12", 1), ("JKLMNOPQR", "11", 1), (
-            "STUVWXYZ", "0", 2
-        ),
+        ("ABCDEFGHI", "12", 1), ("JKLMNOPQR", "11", 1),
+        ("STUVWXYZ", "0", 2),
         ("abcdefghi", "12 0", 1), ("jklmnopqr", "12 11", 1),
         ("stuvwxyz", "11 0", 2)
     ]

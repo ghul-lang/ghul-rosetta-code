@@ -41,8 +41,8 @@ haab(days: int) -> string =>
 
 long_count(days: int) -> string =>
     let
-        bak_tun = days / 144000,
-        k_atun = days / 7200 % 20
+        bak_tun = days / 144_000,
+        k_atun = days / 7_200 % 20
     in
         let
             tun = days / 360 % 20,

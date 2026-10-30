@@ -64,10 +64,7 @@ deviation(xs: List[double]) -> double =>
     )
 
 let rules = [
-    (
-        name = "the funnel stays over the target",
-        next = (at, d) => 0.0D
-    ),
+    (name = "the funnel stays over the target", next = (at, d) => 0.0D),
     (name = "shift by the last miss", next = (at, d) => -d),
     (
         name = "shift from the target by the last miss",

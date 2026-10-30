@@ -4,11 +4,7 @@ let metric_letters = "KMGTPEZYXWVU"
 
 let words = [
     (spelling = "greatgross", shortest = 7, factor = 1728n),
-    (
-        spelling = "googols",
-        shortest = 6,
-        factor = bigint.pow(10n, 100)
-    ),
+    (spelling = "googols", shortest = 6, factor = bigint.pow(10n, 100)),
     (spelling = "pairs", shortest = 4, factor = 2n),
     (spelling = "scores", shortest = 3, factor = 20n),
     (spelling = "dozens", shortest = 3, factor = 12n),
