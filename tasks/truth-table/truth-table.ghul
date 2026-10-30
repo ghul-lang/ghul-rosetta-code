@@ -6,81 +6,64 @@ union Expression is
     BINARY(symbol: char, left: Expression, right: Expression)
 si
 
-use PARSE = (value: Expression, next: int)
-use SUBPARSER = (string, int) -> PARSE
+use PARSE = (value: Expression, rest: List[char])
+use SUBPARSER = (List[char]) -> PARSE
 
-skip(text: string, at: int) -> int =>
-    if at < text.length /\ text[at] == ' ' then
-        skip(text, at + 1)
-    else
-        at
-    fi
-
-parse_atom(text: string, at: int) -> PARSE is
-    let start = skip(text, at)
-
-    if text[start] == '(' then
-        let inner = parse_or(text, start + 1)
-
-        return (
-            value = inner.value,
-            next = skip(text, inner.next) + 1
-        )
-    fi
-
-    if text[start] == '!' then
-        let operand = parse_atom(text, start + 1)
-
-        return (
+parse_atom(tokens: List[char]) -> PARSE =>
+    case tokens
+    when ['(', ..rest] then
+        case parse_or(rest)
+        when (inner, [')', ..after]) then
+            (value = inner, rest = after)
+        else
+            throw Ghul.Exception("expected ')'")
+        esac
+    when ['!', ..rest] then
+        let operand = parse_atom(rest) in
+        (
             value = Expression.NOT(operand.value),
-            next = operand.next
+            rest = operand.rest
         )
-    fi
-
-    (
-        value = Expression.VARIABLE("{text[start]}"),
-        next = start + 1
-    )
-si
+    when [name, ..rest] then
+        (value = Expression.VARIABLE("{name}"), rest = rest)
+    when [] then
+        throw Ghul.Exception("expected an operand")
+    esac
 
 parse_binary(
-    text: string,
-    at: int,
+    tokens: List[char],
     symbol: char,
     below: SUBPARSER
 ) -> PARSE is
-    let node mut = below(text, at)
+    more(left: PARSE) -> PARSE =>
+        case left.rest
+        when [~symbol, ..rest] then
+            let right = below(rest) in
+            more(
+                (
+                    value = Expression.BINARY(
+                        symbol,
+                        left.value,
+                        right.value
+                    ),
+                    rest = right.rest
+                )
+            )
+        else
+            left
+        esac
 
-    do
-        let cursor = skip(text, node.next)
-
-        if cursor >= text.length \/ text[cursor] != symbol then
-            break
-        fi
-
-        let right = below(text, cursor + 1)
-
-        node = (
-            value = Expression.BINARY(
-                symbol,
-                node.value,
-                right.value
-            ),
-            next = right.next
-        )
-    od
-
-    node
+    more(below(tokens))
 si
 
-parse_and(text: string, at: int) -> PARSE =>
-    parse_binary(text, at, '&', parse_atom)
+parse_and(tokens: List[char]) -> PARSE =>
+    parse_binary(tokens, '&', parse_atom)
 
-parse_xor(text: string, at: int) -> PARSE =>
-    parse_binary(text, at, '^', parse_and)
+parse_xor(tokens: List[char]) -> PARSE =>
+    parse_binary(tokens, '^', parse_and)
 
-parse_or(text: string, at: int) -> PARSE =>
-    parse_binary(text, at, '|', parse_xor)
+parse_or(tokens: List[char]) -> PARSE =>
+    parse_binary(tokens, '|', parse_xor)
 
 names(expression: Expression) -> string{} is
     case expression
@@ -115,33 +98,35 @@ evaluate(
             esac
     esac
 
+assignments(count: int) -> bool{}{} =>
+    if count == 0 then
+        [[]]
+    else
+        {
+            [bit] ++ rest
+            for bit in [false, true]
+            for rest in assignments(count - 1)
+        }
+    fi
+
 digit(value: bool) -> string => if value then "1" else "0" fi
 
 table(source: string) is
-    let expression = parse_or(source, 0).value
+    let expression =
+        parse_or(source |> filter(* != ' ') |> memo()).value
     let variables =
         expression |> names() |> distinct() |> collect()
 
-    write_line("{source}")
+    write_line(source)
     write_line("  {variables |> join(" ")} | result")
 
-    for row in 0..(1 << variables.count) do
-        let values = MAP()
-
-        for column in 0..variables.count do
-            let bit = variables.count - 1 - column
-
-            values[variables[column]] = (row >> bit) & 1 == 1
-        od
-
-        let inputs =
-            variables |> map(name => digit(values[name]))
-
-        write_line(
-            "  {inputs |> join(" ")} | "
-            "{digit(evaluate(expression, values))}"
-        )
-    od
+    assignments(variables.count)
+        |> map(bits => (
+            let values = variables |> zip(bits) |> MAP()
+            let result = digit(evaluate(expression, values))
+            "  {bits |> map(digit) |> join(" ")} | {result}"
+        ))
+        |> each(write_line)
 
     write_line()
 si
