@@ -126,7 +126,7 @@ table(source: string) is
             let result = digit(evaluate(expression, values))
             "  {bits |> map(digit) |> join(" ")} | {result}"
         ))
-        |> each(line => write_line(line))
+        |> each(write_line)
 
     write_line()
 si
