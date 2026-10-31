@@ -126,10 +126,6 @@ declared_by_the_program(method: MethodBase) -> bool is
         return false
     fi
 
-    if method.name.starts_with("$anon_") then
-        return true
-    fi
-
     let compiler_owned =
         owner.name.starts_with("$") /\ owner.name !~ "$globals"
 
@@ -150,17 +146,9 @@ let most_called =
             name = uses.key, uses = uses.value.count
         ))
         |> sort((a, b) =>
-            let
-                a_literal =
-                    if a.name.starts_with("$") then 1 else 0 fi,
-                b_literal =
-                    if b.name.starts_with("$") then 1 else 0 fi
-            in
-                if a.uses != b.uses then b.uses <> a.uses
-                elif a_literal != b_literal then
-                    a_literal <> b_literal
-                else a.name <> b.name
-                fi
+            if a.uses != b.uses then b.uses <> a.uses
+            else a.name <> b.name
+            fi
         )
         |> take(10)
 
