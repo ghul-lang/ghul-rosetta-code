@@ -3,9 +3,9 @@ use Raster.ANIMATION
 use Raster.IMAGE
 use System.Math.*
 
-let size = 150
+let size = 300
 let frames = 72
-let segments = 100
+let segments = 200
 
 draw(image: IMAGE, increment: double) is
     image.clear(15ub, 15ub, 25ub)
@@ -38,7 +38,7 @@ si
 
 let image = IMAGE(size, size)
 
-image.view(-250.0D, -250.0D, 250.0D, 250.0D)
+image.view(-500.0D, -500.0D, 500.0D, 500.0D)
 
 let animation = ANIMATION(size, size)
 
