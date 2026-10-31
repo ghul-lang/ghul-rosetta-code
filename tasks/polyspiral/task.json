@@ -2,7 +2,10 @@
     "task": "Polyspiral",
     "url": "https://rosettacode.org/wiki/Polyspiral",
     "status": "published",
-    "tags": ["graphics", "maths"],
+    "tags": [
+        "graphics",
+        "maths"
+    ],
     "interest": 4,
-    "summary": "Draw an animation of polyspirals, one spiral per frame, with the turn angle increasing between frames."
+    "summary": "Draw an animation of polyspirals, one spiral per frame, with the turn angle increasing between frames. 300x300 frames with 200 segments for a sharper image on a normal screen."
 }
