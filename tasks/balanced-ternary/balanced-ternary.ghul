@@ -18,8 +18,7 @@ digit(c: char) -> int =>
     else 0
     esac
 
-parse(s: string) -> BT =>
-    BT(s |> reverse() |> map(digit))
+parse(s: string) -> BT => BT(s |> reverse() |> map(digit))
 
 balanced(n: bigint) -> BT => BT(digits(n))
 
