@@ -384,22 +384,23 @@ is the task's own shape stays a loop.
 
 Which of these spellings is available is decided by the representation, before any loop is
 written. A value the algorithm walks element by element - the digits of a number, the cells of a
-row, the symbols of a numeral - is held as a `List` of those elements, least significant first
-where position carries weight, and rendered to a `string` only in `to_string`. Held as the string
-that displays it, every operation goes through indices, `mut` cursors and a carry variable, and
-trimming leading zeroes is a loop; held as a list, addition is a `case` over
-`([x, ..xs], [y, ..ys])`, negation is a `map`, and the trim is `skip_while`.
+row, the symbols of a numeral - is held as a sequence of those elements, `T{}`, least significant
+first where position carries weight, and rendered to a `string` only in `to_string`. Held as the
+string that displays it, every operation goes through indices, `mut` cursors and a carry
+variable, and trimming leading zeroes is a loop; held as a sequence, addition is a `case` over
+`([x, ..xs], [y, ..ys])`, negation is a `map`, and the trim is `skip_while`. A sequence pattern
+matches a lazy `T{}` directly, so nothing is collected on the way.
 
 ```ghul
-add(a: List[int], b: List[int]) -> List[int] =>
+add(a: int{}, b: int{}) -> int{} =>
     case (a, b)
     when ([], _) then b
     when (_, []) then a
     when ([x, ..xs], [y, ..ys]) then
         case x + y
-        when 2 then cons(-1, add(xs, add(ys, [1])))
-        when -2 then cons(1, add(xs, add(ys, [-1])))
-        else trim(cons(x + y, add(xs, ys)))
+        when 2 then [-1] ++ add(xs, add(ys, [1]))
+        when -2 then [1] ++ add(xs, add(ys, [-1]))
+        else trim([x + y] ++ add(xs, ys))
         esac
     esac
 ```
