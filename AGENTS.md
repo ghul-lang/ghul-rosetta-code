@@ -911,8 +911,7 @@ hundred pages at once.
 
 The pull request needs nothing from anybody. `.github/workflows/ledger.yml` approves a change that
 touches only `ledger/` and `tasks/*/task.json`. `scripts/publish.sh` arms auto-merge when it raises
-the pull request, and the merge queue lands it when the shards pass. The workflow cannot arm it
-itself: a pull request armed with a workflow's own token never enters the queue.
+the pull request, and it lands when the shards pass; the workflow only approves.
 That path test is the whole distinction between what lands unread and what does not, so a
 ledger-only pull request must carry nothing else - not a compiler pin, not a recaptured
 expectation, not a solution. Raise those separately.
@@ -941,7 +940,7 @@ build each task as they go.
 Locally, run the tests for the tasks you created or edited, and no others: name them on one command
 line (`tasks/<slug-a> tasks/<slug-b>`). A new task has to be run anyway to capture its expectation,
 and an edited one to show it still passes. A task nobody touched cannot have changed, and CI runs the
-touched tasks on every pull request and every merge queue group, and the whole suite whenever
+touched tasks on every pull request, and the whole suite whenever
 something outside the tasks changes (`scripts/tasks-to-test.sh` decides), so adding solutions
 never calls for running all of them. Whether
 to run the whole suite, or a subset, is a judgement call only when something every task depends on

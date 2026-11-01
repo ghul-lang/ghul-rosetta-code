@@ -129,8 +129,8 @@ gh pr create \
     --title "Record $PUBLISHED published sections' digests" \
     --technical "Record the digest of each section the publish run put on the wiki"
 
-# Armed here rather than by the ledger workflow, whose token cannot put a pull
-# request into the merge queue. The queue still runs the task shards on it.
+# Armed here, by the raiser: the ledger workflow only approves, and the pull
+# request lands once its shards pass.
 gh pr merge "$BRANCH" --auto --squash
 
 echo
