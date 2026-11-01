@@ -87,7 +87,6 @@ tasks/avl-tree
 tasks/babbage-problem
 tasks/babylonian-spiral
 tasks/balanced-brackets
-tasks/balanced-ternary
 tasks/barnsley-fern
 tasks/base64-decode-data
 tasks/bell-numbers

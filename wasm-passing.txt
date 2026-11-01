@@ -87,7 +87,6 @@ b-spline
 babbage-problem
 babylonian-spiral
 balanced-brackets
-balanced-ternary
 barnsley-fern
 base64-decode-data
 bell-numbers
