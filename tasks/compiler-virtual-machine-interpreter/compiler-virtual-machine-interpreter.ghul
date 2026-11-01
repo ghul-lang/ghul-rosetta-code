@@ -30,13 +30,13 @@ enum Op is
 si
 
 class MACHINE is
-    _code: ubyte[]
+    _code: ARRAY[ubyte]
     _strings: List[string]
     _data: LIST[int]
     _stack: LIST[int]
     _pc: int
 
-    init(code: ubyte[], strings: List[string], data_size: int) is
+    init(code: ARRAY[ubyte], strings: List[string], data_size: int) is
         _code = code
         _strings = strings
         _data = repeat(0, data_size) |> collect_mutable()

@@ -49,9 +49,10 @@ class BIT_READER(source: IO.Stream) is
     si
 si
 
-hex(bytes: ubyte[]) -> string => bytes |> map(b => "{b:X2}") |> join(" ")
+hex(bytes: ARRAY[ubyte]) -> string =>
+    bytes |> map(b => "{b:X2}") |> join(" ")
 
-pack(text: string) -> ubyte[] => (
+pack(text: string) -> ARRAY[ubyte] => (
     let packed = IO.MemoryStream()
     let writer = BIT_WRITER(packed)
 
@@ -64,7 +65,7 @@ pack(text: string) -> ubyte[] => (
     packed.to_array()
 )
 
-unpack(packed: ubyte[], count: int) -> string => (
+unpack(packed: ARRAY[ubyte], count: int) -> string => (
     let reader = BIT_READER(IO.MemoryStream(packed))
     let text = System.Text.StringBuilder()
 

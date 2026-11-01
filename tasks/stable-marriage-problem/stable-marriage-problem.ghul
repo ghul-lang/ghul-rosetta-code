@@ -88,11 +88,11 @@ let women_preferences = [
 ]
     |> collect_map()
 
-rank(preferences: string[], name: string) -> int =>
+rank(preferences: ARRAY[string], name: string) -> int =>
     preferences |> find_index(* =~ name)!
 
 prefers(
-    preferences: Map[string, string[]],
+    preferences: Map[string, ARRAY[string]],
     judge: string,
     a: string,
     b: string
