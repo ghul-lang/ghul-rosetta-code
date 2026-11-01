@@ -65,10 +65,12 @@ my @CONSTRUCTS = (
       note => '`memo` on a function caches its results - a call with arguments equal to an earlier call\'s returns the cached result, recursive calls included' },
 );
 
-# A block is recognised by its first line: the start of any note.
-my @OPENERS = ('// `T{}` is', '// `T[]` is', '// `list()` returns', '// `|>` is', '// `~>` is',
-               '// `*` as an', '// `=~` compares', '// `==` compares', '// `if let`', '// `case ... when`',
-               '// `LIST()`', '// `SET()`', '// `MAP()`', '// `ARRAY()`', '// `memo` on', '// `yield` in');
+# The block is the run of comment lines straight after the head whose first
+# line opens with a backtick - `// \``. No comment a solution writes itself
+# opens that way there, so the block is found whatever its wording, and is
+# replaced in full each time: a reworded note, or a construct added to or
+# removed from the source, leaves exactly one current block. The block ends at
+# the first line that is not a comment, and is always followed by a blank line.
 
 my $mode = shift @ARGV // '--check';
 my @files = @ARGV ? @ARGV : default_files();
@@ -186,7 +188,7 @@ sub with_notes {
     pop @head while @head && $head[-1] =~ /^\s*$/;
     my @rest = @src[$i .. $#src];
     shift @rest while @rest && $rest[0] =~ /^\s*$/;
-    if (@rest && grep { index($rest[0], $_) == 0 } @OPENERS) {
+    if (@rest && $rest[0] =~ m{^// `}) {
         shift @rest while @rest && $rest[0] =~ m{^//};
         shift @rest while @rest && $rest[0] =~ /^\s*$/;
     }

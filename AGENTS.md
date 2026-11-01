@@ -685,7 +685,10 @@ matching, `memo`), every one that appears, in that fixed order - a note comes
 after the ones whose terms it uses. They are not written by hand:
 `scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
 checks them, and the wording changes only in that table, so every solution says
-the same thing the same way. They say what a construct is, never why it was
+the same thing the same way. Run `--fix` after changing a solution: it replaces
+the whole block, so the notes always match the source. The script finds the
+block as the comment lines after the `use` lines that open with a backtick, so
+a solution's own first comment never opens with one. They say what a construct is, never why it was
 used, and nothing about the algorithm. Beyond them, most solutions carry no
 words, and that is the shape a reader of the wiki expects.
 When a reader would be left with a question, the first three answers are not
