@@ -17,9 +17,10 @@ use strict; use warnings;
 my $WIDTH = 76;
 
 # Each construct: a name, the patterns that detect it (on every line that is
-# not a whole-line comment), the note, and for a library type its name, so
-# that a solution declaring a type of that name itself gets no note for it - text, or a sub that builds the
-# text from which of the patterns matched.
+# not a whole-line comment), and the note - text, or a sub that builds the
+# text from which of the patterns matched. A library type also carries its
+# name as `type`, so that a solution declaring a type of that name itself
+# gets no note for it.
 my @CONSTRUCTS = (
     { name => 'sequence', patterns => [qr/[A-Za-z_\]\)]\{\}/],
       note => '`T{}` is the lazy sequence trait - elements are read on demand and in order from its source' },
