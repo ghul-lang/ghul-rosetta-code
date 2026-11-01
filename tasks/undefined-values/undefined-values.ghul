@@ -1,5 +1,6 @@
 use default
 
+// `MAP()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `if let` pattern-matches

@@ -1,5 +1,6 @@
 use default
 
+// `SET()` and `LIST()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 

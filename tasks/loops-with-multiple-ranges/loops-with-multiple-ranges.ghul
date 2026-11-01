@@ -1,9 +1,9 @@
 use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+//  order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
-// sequence
+//  sequence
 // `==` compares identity
 
 stepped(start: int, stop: int, step: int) -> int{} is

@@ -4,10 +4,10 @@ use default
 // `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+//  `a => f(a, b)`
 // `==` compares identity
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
+//  and tail
 
 let bases = ['A', 'C', 'G', 'T']
 let random = System.Random(1969)

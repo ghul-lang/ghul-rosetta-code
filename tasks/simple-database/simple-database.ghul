@@ -4,13 +4,13 @@ use System.Environment
 use System.Environment_SpecialFolder.USER_PROFILE
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+//  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
+//  and tail
 
 class ENTRY(date: DateTime, category: string, description: string) is
     line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"

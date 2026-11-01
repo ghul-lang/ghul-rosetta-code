@@ -2,6 +2,7 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
+// `LIST()` builds its collection eagerly
 // `==` compares identity
 // `case ... when` pattern-matches
 

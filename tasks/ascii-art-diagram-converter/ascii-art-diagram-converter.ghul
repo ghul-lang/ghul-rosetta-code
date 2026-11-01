@@ -1,10 +1,11 @@
 use default
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
-// list head and tail
+//  list head and tail
 
 class FIELD(name: string, offset: int, width: int)
 

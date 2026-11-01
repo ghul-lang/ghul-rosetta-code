@@ -4,7 +4,7 @@ use Point = (x: double, y: double)
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+//  `a => f(a, b)`
 
 -(a: Point, b: Point) -> Point => (a.x - b.x, a.y - b.y)
 

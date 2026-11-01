@@ -1,6 +1,7 @@
 use default
 use System.Diagnostics.Stopwatch
 
+// `LIST()` builds its collection eagerly
 // `==` compares identity
 
 // The Chudnovsky series, summed by binary splitting.

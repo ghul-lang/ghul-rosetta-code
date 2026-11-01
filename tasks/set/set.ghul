@@ -1,5 +1,7 @@
 use default
 
+// `SET()` builds its collection eagerly
+
 let a = SET([1, 2, 3, 4])
 let b = SET([3, 4, 5, 6])
 

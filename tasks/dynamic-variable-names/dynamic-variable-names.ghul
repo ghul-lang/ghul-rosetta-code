@@ -1,6 +1,8 @@
 use default
 use IO.Std.read_line
 
+// `MAP()` builds its collection eagerly
+
 let variables = MAP()
 
 write_line("Enter a variable name:")

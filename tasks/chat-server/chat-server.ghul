@@ -7,9 +7,10 @@ use System.Net.Sockets.TcpListener
 use System.Threading.Monitor
 use System.Threading.Thread
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+//  `a => f(a, b)`
 // `=~` compares values (structural equality)
 // `if let` pattern-matches
 

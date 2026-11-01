@@ -2,7 +2,7 @@ use default
 
 // `==` compares identity
 // `memo` on a function caches its results - a call with arguments equal to
-// an earlier call's returns the cached result, recursive calls included
+//  an earlier call's returns the cached result, recursive calls included
 
 shortest_supersequence(u: string, v: string) -> string memo =>
     if u.length == 0 then

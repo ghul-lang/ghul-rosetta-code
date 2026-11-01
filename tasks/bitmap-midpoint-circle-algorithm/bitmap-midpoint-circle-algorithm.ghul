@@ -1,9 +1,9 @@
 use Raster.IMAGE
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+//  order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
-// sequence
+//  sequence
 
 circle(centre_x: int, centre_y: int, radius: int) -> (int, int){} is
     let x mut = radius

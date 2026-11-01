@@ -8,7 +8,7 @@ use DIVISION = (quotient: double[], remainder: double[])
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
+//  and tail
 
 degree(poly: double[]) -> int =>
     let highest =

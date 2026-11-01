@@ -3,8 +3,8 @@ use IO.Std.write
 use IO.Std.read_line
 
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-// index materialises the source only as far as that index and caches what
-// it read
+//  index materialises the source only as far as that index and caches what
+//  it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `if let` pattern-matches
 

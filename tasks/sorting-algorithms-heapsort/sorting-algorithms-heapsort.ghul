@@ -1,5 +1,6 @@
 use default
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 sift_down[T: Ghul.Comparable[T]](values: LIST[T], start: int, end: int) is

@@ -1,9 +1,9 @@
 use default
 
-// `LIST()` builds its collection eagerly
+// `LIST()` and `MAP()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+//  `a => f(a, b)`
 // `if let` pattern-matches
 
 let limit = 20_000_000

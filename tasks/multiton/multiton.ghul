@@ -1,5 +1,6 @@
 use default
 
+// `MAP()` builds its collection eagerly
 // `==` compares identity
 
 class MULTITON[K, V](create: K -> V private) is

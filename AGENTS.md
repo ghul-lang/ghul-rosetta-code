@@ -691,6 +691,7 @@ block as the comment lines after the `use` lines that open with a backtick, so
 a solution's own first comment never opens with one. They say what a construct is, never why it was
 used, and nothing about the algorithm. Beyond them, most solutions carry no
 words, and that is the shape a reader of the wiki expects.
+
 When a reader would be left with a question, the first three answers are not
 words at all, in this order:
 
