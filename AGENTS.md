@@ -400,7 +400,7 @@ add(a: int{}, b: int{}) -> int{} =>
         case x + y
         when 2 then [-1] ++ add(xs, add(ys, [1]))
         when -2 then [1] ++ add(xs, add(ys, [-1]))
-        else trim([x + y] ++ add(xs, ys))
+        else [x + y] ++ add(xs, ys)
         esac
     esac
 ```
