@@ -61,6 +61,7 @@ run(program: string, input: string) is
             if cells[cell] != 0 then
                 at = matching_bracket[at]
             fi
+        else
         esac
 
         at = at + 1

@@ -89,6 +89,7 @@ run(memory: LIST[int]) -> int is
             if accumulator == 0 then counter = argument fi
         when "JMP" then counter = argument
         when "STP" then return accumulator
+        else
         esac
     od
 

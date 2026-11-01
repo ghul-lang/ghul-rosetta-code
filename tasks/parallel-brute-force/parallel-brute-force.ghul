@@ -4,9 +4,7 @@ use System.Security.Cryptography.SHA256
 use Tasks.Parallel
 use System.Collections.Concurrent.ConcurrentDictionary
 
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-// index materialises the source only as far as that index and caches what
-// it read
+// `ARRAY()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality)
 
@@ -16,7 +14,7 @@ let hashes = [
     "74e1bb62f8dabb8125a58852b63bdf6eaef667cb56ac7f7cdba6d7305c50a22f"
 ]
 
-let targets = hashes |> map(System.Convert.from_hex_string) |> list()
+let targets = hashes |> map(System.Convert.from_hex_string) |> ARRAY()
 
 let found = ConcurrentDictionary[int, string]()
 
