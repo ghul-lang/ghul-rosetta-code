@@ -6,7 +6,7 @@ let root = if let [root, ..] = args then root else "." fi
 let sizes =
     IO.Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)
         |> map(path => IO.FileInfo(path).length)
-        |> collect()
+        |> list()
 
 bucket(size: long) -> int =>
     if size == 0L then
@@ -37,7 +37,7 @@ for (b, count) in counts do
 od
 
 let total = sizes |> sum()
-let small = sizes |> filter(* < 1000L) |> collect()
+let small = sizes |> filter(* < 1000L) |> list()
 let share = 100.0 * double(small |> sum()) / double(total)
 
 write_line("")

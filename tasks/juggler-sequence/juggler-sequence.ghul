@@ -18,7 +18,7 @@ si
 
 stats(start: long) -> (int, long, int) =>
     let
-        terms = sequence(start) |> collect(),
+        terms = sequence(start) |> list(),
         highest = terms |> max()!
     in
         (terms.count - 1, highest, terms |> find_index(* == highest)!)

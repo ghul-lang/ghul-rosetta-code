@@ -26,7 +26,7 @@ parse_url(url: string) -> (string, string)[]? =>
                 name,
                 if name =~ "port" then ":{value}" else value fi
             ))
-            |> collect()
+            |> list()
     fi
 
 show(url: string, indent: string) is

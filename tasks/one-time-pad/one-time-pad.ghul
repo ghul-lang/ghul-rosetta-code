@@ -23,7 +23,7 @@ is_unused(line: string) -> bool =>
     !line.starts_with("#") /\ !line.starts_with("-")
 
 take_key(path: string, length: int) -> string is
-    let lines = File.read_all_lines(path) |> collect_mutable()
+    let lines = File.read_all_lines(path) |> LIST()
     let key = System.Text.StringBuilder()
 
     for i in 0..lines.count do

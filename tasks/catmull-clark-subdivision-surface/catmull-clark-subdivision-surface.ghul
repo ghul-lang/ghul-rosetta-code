@@ -1,8 +1,8 @@
 use default
 use Raster.IMAGE
 use Point = (x: double, y: double, z: double)
-use Face = List[int]
-use Mesh = (points: List[Point], faces: List[Face])
+use Face = int[]
+use Mesh = (points: Point[], faces: Face[])
 
 +(a: Point, b: Point) -> Point => (
     x = a.x + b.x,
@@ -12,7 +12,7 @@ use Mesh = (points: List[Point], faces: List[Face])
 
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
-centre(points: List[Point]) -> Point =>
+centre(points: Point[]) -> Point =>
     (points |> reduce((x = 0.0D, y = 0.0D, z = 0.0D), (a, b) => a + b)) *
     (1.0D / double(points.count))
 
@@ -29,9 +29,9 @@ subdivided(mesh: Mesh) -> Mesh is
     let face_points =
         faces
             |> map(face =>
-                centre(face |> map(index => points[index]) |> collect())
+                centre(face |> map(index => points[index]) |> list())
             )
-            |> collect()
+            |> list()
 
     let edge_faces = MAP()
 
@@ -56,7 +56,7 @@ subdivided(mesh: Mesh) -> Mesh is
     let edge_points = MAP()
 
     for (key, touching) in edge_faces do
-        let ends = [points[key.low], points[key.high]] |> collect()
+        let ends = [points[key.low], points[key.high]] |> list()
 
         let position =
             if touching.count == 1 then
@@ -65,7 +65,7 @@ subdivided(mesh: Mesh) -> Mesh is
                 centre(
                     ends
                         |> cat(touching |> map(index => face_points[index]))
-                        |> collect()
+                        |> list()
                 )
             fi
 
@@ -88,7 +88,7 @@ subdivided(mesh: Mesh) -> Mesh is
                 |> filter(face_index =>
                     faces[face_index] |> any(* == vertex)
                 )
-                |> collect()
+                |> list()
 
         let touching_edges =
             edge_faces
@@ -99,7 +99,7 @@ subdivided(mesh: Mesh) -> Mesh is
         let border =
             touching_edges
                 |> filter((key, faces_here) => faces_here.count == 1)
-                |> collect()
+                |> list()
 
         if border.count > 0 then
             new_points[vertex] = centre(
@@ -111,15 +111,13 @@ subdivided(mesh: Mesh) -> Mesh is
                         ])
                     )
                     |> cat([points[vertex]])
-                    |> collect()
+                    |> list()
             )
         else
             let n = double(touching_faces.count)
 
             let face_average = centre(
-                touching_faces
-                    |> map(index => face_points[index])
-                    |> collect()
+                touching_faces |> map(index => face_points[index]) |> list()
             )
 
             let edge_average = centre(
@@ -130,7 +128,7 @@ subdivided(mesh: Mesh) -> Mesh is
                             points[key.high]
                         ])
                     )
-                    |> collect()
+                    |> list()
             )
 
             new_points[vertex] =
@@ -170,7 +168,7 @@ let cube = (
                 y = double(corner / 2 % 2) * 2.0D - 1.0D,
                 z = double(corner / 4) * 2.0D - 1.0D
             ))
-            |> collect(),
+            |> list(),
     faces = [
         [0, 1, 3, 2], [4, 6, 7, 5], [0, 4, 5, 1],
         [2, 3, 7, 6], [0, 2, 6, 4], [1, 5, 7, 3]

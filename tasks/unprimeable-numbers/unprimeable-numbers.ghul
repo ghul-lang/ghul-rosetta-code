@@ -32,7 +32,7 @@ unprimeables() -> int{} is
     od
 si
 
-let terms = unprimeables() |> take(600) |> collect()
+let terms = unprimeables() |> take(600) |> list()
 
 write_line("the first 35 unprimeable numbers:")
 write_line("  {terms[0..35] |> map(t => "{t}") |> join(" ")}")

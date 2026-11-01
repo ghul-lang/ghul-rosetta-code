@@ -24,15 +24,13 @@ engel(numerator: bigint, denominator: bigint) -> bigint{} is
     od
 si
 
-from_engel(terms: Collections.List[bigint]) -> (
-    numerator: bigint,
-    denominator: bigint
-) => terms |> reduce((0n, 1n), ((n, d), term) => (n * term + 1n, d * term))
+from_engel(terms: bigint[]) -> (numerator: bigint, denominator: bigint) =>
+    terms |> reduce((0n, 1n), ((n, d), term) => (n * term + 1n, d * term))
 
 show(name: string, fractional: string) is
     let numerator = bigint.parse(fractional)
     let denominator = power(10n, fractional.length)
-    let terms = numerator |> engel(denominator) |> collect()
+    let terms = numerator |> engel(denominator) |> list()
     let (rebuilt, scale) = from_engel(terms)
     let verified =
         if rebuilt * denominator =~ numerator * scale then

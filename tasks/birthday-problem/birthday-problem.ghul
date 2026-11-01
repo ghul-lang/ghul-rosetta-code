@@ -5,7 +5,7 @@ use System.Math.*
 
 let days = 365
 let random = System.Random(365)
-let counts = repeat(0, days) |> collect_mutable()
+let counts = repeat(0, days) |> LIST()
 
 shared(people: int, at_least: int) -> bool is
     for day in 0..days do
@@ -33,9 +33,9 @@ simulated(people: int, at_least: int, trials: int) -> double =>
 log_factorial(n: int) -> double =>
     1::n |> reduce(0.0D, (s, i) => s + log(double(i)))
 
-exact(most: int, at_least: int) -> List[double] is
+exact(most: int, at_least: int) -> double[] is
     let inverse_factorial =
-        (0..at_least) |> map(j => 1.0D / exp(log_factorial(j))) |> collect()
+        (0..at_least) |> map(j => 1.0D / exp(log_factorial(j))) |> list()
 
     let nobody = [if m == 0 then 1.0D else 0.0D fi for m in 0::most]
 
@@ -54,7 +54,7 @@ exact(most: int, at_least: int) -> List[double] is
             in
             1.0D - ways[n] * exp(log_scale)
         )
-        |> collect()
+        |> list()
 si
 
 first_even(chance: (int) -> double, low: int, high: int) -> int =>
@@ -69,7 +69,7 @@ first_even(chance: (int) -> double, low: int, high: int) -> int =>
     fi
 
 let crossings = LIST()
-let curves = LIST[List[double]]()
+let curves = LIST[double[]]()
 let start mut = 2
 
 for at_least in 2::5 do
@@ -111,7 +111,7 @@ for (i, at_least) in 2::5 |> index() do
         (1::most / 4)
             |> map(* * 4)
             |> map(n => (x = double(n), y = curves[i][n]))
-            |> collect()
+            |> list()
 
     image.colour(r, g, b)
     image.stroke(2.0D)

@@ -21,7 +21,7 @@ encrypt(text: string, square: SQUARE) -> string =>
         n = letters.length,
         rows = letters |> map(square.row),
         cols = letters |> map(square.col),
-        coords = rows ++ cols |> collect()
+        coords = rows ++ cols |> list()
     in
         0..n
             |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
@@ -38,7 +38,7 @@ decrypt(text: string, square: SQUARE) -> string =>
                     square.row(ch),
                     square.col(ch)
                 ])
-                |> collect()
+                |> list()
         in
         0..n |> map(i => square.at(coords[i], coords[n + i])) |> join("")
 

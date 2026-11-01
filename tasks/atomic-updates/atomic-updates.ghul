@@ -13,7 +13,7 @@ class BUCKETS is
 
     count: int => _values.count
 
-    values: List[int] => _values
+    values: int[] => _values
 
     total: int => _values |> sum()
 

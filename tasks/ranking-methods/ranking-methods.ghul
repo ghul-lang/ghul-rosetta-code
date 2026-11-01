@@ -13,7 +13,7 @@ let competitors = [
     (score = 39, name = "Stephen")
 ]
 
-ties(entries: List[ENTRY]) -> List[ENTRY]{} =>
+ties(entries: ENTRY[]) -> ENTRY[]{} =>
     entries |> group_by(e => e.score) |> map((_, group) => group)
 
 ranked(rank: RANKER) -> string{} is

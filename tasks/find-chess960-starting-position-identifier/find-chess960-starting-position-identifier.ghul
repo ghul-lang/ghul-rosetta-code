@@ -1,11 +1,11 @@
 use default
 
-positions(pieces: string, piece: char) -> List[int] =>
+positions(pieces: string, piece: char) -> int[] =>
     pieces
         |> index()
         |> filter((_, p) => p == piece)
         |> map((i, _) => i)
-        |> collect()
+        |> list()
 
 without(pieces: string, removed: string) -> string =>
     pieces |> filter(p => !removed.contains(p)) |> join("")
@@ -27,7 +27,7 @@ sp_id(pieces: string) -> int =>
     in
         96 * n + 16 * q + 4 * dark + light
 
-let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
+let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> MAP()
 
 for pieces in ["QNRBBNKR", "RNBQKBNR", "RQNBBKRN", "RNQBBKRN"] do
     let shown = pieces |> map(p => symbols[p]) |> join("")

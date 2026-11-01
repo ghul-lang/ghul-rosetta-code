@@ -1,6 +1,6 @@
 use default
 
-safe(queens: List[int], row: int, column: int) -> bool =>
+safe(queens: int[], row: int, column: int) -> bool =>
     queens
         |> index()
         |> all((placed_row, placed_column) =>
@@ -9,13 +9,13 @@ safe(queens: List[int], row: int, column: int) -> bool =>
             placed_row + placed_column != row + column
         )
 
-placements(n: int, queens: List[int]) -> List[int]{} is
+placements(n: int, queens: int[]) -> int[]{} is
     if queens.count == n then
         yield queens
     else
         for column in 0..n do
             if safe(queens, queens.count, column) then
-                yield in placements(n, queens ++ [column] |> collect())
+                yield in placements(n, queens ++ [column] |> list())
             fi
         od
     fi

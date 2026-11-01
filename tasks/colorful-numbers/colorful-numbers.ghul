@@ -3,7 +3,7 @@ use default
 is_colorful(value: int) -> bool is
     if value < 10 then return true fi
 
-    let figures = Ghul.Pipes.digits(value) |> collect()
+    let figures = Ghul.Pipes.digits(value) |> list()
 
     if figures |> any(d => d < 2) then return false fi
 
@@ -22,7 +22,7 @@ is_colorful(value: int) -> bool is
     true
 si
 
-arrangements(prefix: int, available: List[int]) -> int{} is
+arrangements(prefix: int, available: int[]) -> int{} is
     for chosen in available do
         let value = prefix * 10 + chosen
         let rest = LIST(available)
@@ -40,7 +40,7 @@ si
 let digits = LIST(2::9)
 
 let candidates = (0::9) ++ arrangements(0, digits)
-let colorful = candidates |> filter(is_colorful) |> collect_mutable()
+let colorful = candidates |> filter(is_colorful) |> LIST()
 
 colorful.sort()
 

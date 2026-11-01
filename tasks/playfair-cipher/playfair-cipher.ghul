@@ -30,7 +30,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
             )
 
     digraphs(text: string) -> (char, char){} is
-        let letters = text |> clean() |> collect()
+        let letters = text |> clean() |> list()
         let i mut = 0
 
         while i < letters.count do

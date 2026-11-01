@@ -23,7 +23,7 @@ use Term = (value: Q, text: string)
 
 let target = Q(24L, 1L)
 
-solve(terms: List[Term]) -> string? is
+solve(terms: Term[]) -> string? is
     if let [only] = terms then
         return if only.value =~ target then only.text else null fi
     fi
@@ -52,7 +52,7 @@ solve(terms: List[Term]) -> string? is
                 fi
 
                 for term in joined do
-                    let next = rest ++ [term] |> collect()
+                    let next = rest ++ [term] |> list()
 
                     if let found = solve(next) then
                         return found
@@ -76,7 +76,7 @@ while let line = read_line() do
                 let d = long(digits[i]) - 48L in
                 (value = Q(d, 1L), text = "{d}")
             )
-            |> collect()
+            |> list()
 
     if let found = solve(terms) then
         let text = found.substring(1, found.length - 2)

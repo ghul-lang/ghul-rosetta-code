@@ -4,7 +4,7 @@ let limit = 35_000_000
 
 write_line("summing the divisors of every number up to {limit:N0}")
 
-let chowla = repeat(0, limit + 1) |> collect_mutable()
+let chowla = repeat(0, limit + 1) |> LIST()
 
 for divisor in 2::limit / 2 do
     let multiple mut = divisor * 2

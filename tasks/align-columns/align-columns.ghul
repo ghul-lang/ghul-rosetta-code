@@ -54,7 +54,7 @@ let widths =
                     fi
                 )
         )
-        |> collect()
+        |> list()
 
 for
     alignment in [

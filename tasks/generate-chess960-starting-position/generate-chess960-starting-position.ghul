@@ -7,7 +7,7 @@ let knight_pairs = [
 ]
 
 position(number: int) -> string is
-    let squares = repeat('.', 8) |> collect_mutable()
+    let squares = repeat('.', 8) |> LIST()
 
     place(piece, among_empty) is
         let square =
@@ -40,15 +40,15 @@ si
 
 is_legal(rank: string) -> bool =>
     let
-        bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect(),
-        rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect(),
+        bishops = 0..8 |> filter(s => rank[s] == 'B') |> list(),
+        rooks = 0..8 |> filter(s => rank[s] == 'R') |> list(),
         king = rank.index_of('K')
     in
         (bishops[0] + bishops[1]) % 2 == 1 /\
         rooks[0] < king /\
         king < rooks[1]
 
-let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
+let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> MAP()
 
 let random = System.Random(960)
 
@@ -58,7 +58,7 @@ for _ in 1::5 do
     write_line(rank |> map(p => symbols[p]) |> join(""))
 od
 
-let positions = 0..960 |> map(position) |> memo()
+let positions = 0..960 |> map(position) |> list()
 
 write_line()
 write_line("distinct positions: {positions |> distinct() |> count()}")

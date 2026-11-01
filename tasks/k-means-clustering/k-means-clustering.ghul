@@ -14,10 +14,7 @@ let sample_size = 30_000
 apart(a: Point, b: Point) -> double =>
     (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 
-nearest(centres: Collections.List[Point], at: Point) -> (
-    index: int,
-    distance: double
-) is
+nearest(centres: Point[], at: Point) -> (index: int, distance: double) is
     let best mut = 0
     let closest mut = apart(centres[0], at)
 
@@ -41,14 +38,14 @@ let points =
 
             (x = radius * cos(angle), y = radius * sin(angle))
         ))
-        |> collect()
+        |> list()
 
-seeded_centres() -> Collections.List[Point] is
+seeded_centres() -> Point[] is
     let centres = LIST([points[random.next(points.count)]])
 
     while centres.count < clusters do
         let weights =
-            points |> map(at => nearest(centres, at).distance) |> collect()
+            points |> map(at => nearest(centres, at).distance) |> list()
 
         let total = weights |> sum()
 
@@ -67,9 +64,9 @@ seeded_centres() -> Collections.List[Point] is
 si
 
 let centres mut = seeded_centres()
-let membership = points |> map(_ => 0) |> collect_mutable()
+let membership = points |> map(_ => 0) |> LIST()
 
-recentred() -> Collections.List[Point] is
+recentred() -> Point[] is
     let totals = LIST()
     let sizes = LIST()
 
@@ -102,7 +99,7 @@ recentred() -> Collections.List[Point] is
                     )
                 fi
             )
-            |> collect()
+            |> list()
 si
 
 let passes mut = 0
@@ -124,7 +121,7 @@ while !settled do
     centres = recentred()
 od
 
-let sizes = repeat(0, clusters) |> collect_mutable()
+let sizes = repeat(0, clusters) |> LIST()
 
 for which in membership do
     sizes[which] = sizes[which] + 1

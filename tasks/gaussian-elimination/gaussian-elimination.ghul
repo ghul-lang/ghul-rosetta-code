@@ -4,18 +4,13 @@ use System.Math.*
 largest_magnitude(values: double{}) -> double =>
     values |> reduce(0.0, (m, v) => max(m, abs(v)))
 
-solve(a: List[List[double]], b: List[double]) -> double{} is
+solve(a: double[][], b: double[]) -> double{} is
     let n = b.count
 
-    let rows =
-        0..n
-            |> map(i => a[i] |> cat([b[i]]) |> collect_mutable())
-            |> collect_mutable()
+    let rows = 0..n |> map(i => a[i] |> cat([b[i]]) |> LIST()) |> LIST()
 
     let scales =
-        rows
-            |> map(row => largest_magnitude(row |> take(n)))
-            |> collect_mutable()
+        rows |> map(row => largest_magnitude(row |> take(n))) |> LIST()
 
     for k in 0..n do
         let pivot = k..n |> max_by(i => abs(rows[i][k]) / scales[i])!
@@ -32,7 +27,7 @@ solve(a: List[List[double]], b: List[double]) -> double{} is
         od
     od
 
-    let x = repeat(0.0, n) |> collect_mutable()
+    let x = repeat(0.0, n) |> LIST()
 
     for k in 0..n |> reverse() do
         let known = k + 1..n |> sum_by(j => rows[k][j] * x[j])

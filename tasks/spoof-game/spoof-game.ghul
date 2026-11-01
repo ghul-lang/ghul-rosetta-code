@@ -19,7 +19,7 @@ read_numbers(prompt: string) -> int[]? is
 
     write_line("> {line.trim()}")
 
-    return line |> words() |> map(int.parse) |> collect()
+    return line |> words() |> map(int.parse) |> list()
 si
 
 computer_guess(coins: int, other: int?) -> int => (

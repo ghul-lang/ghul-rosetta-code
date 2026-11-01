@@ -1,6 +1,6 @@
 use default
 
-merge_sort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] is
+merge_sort[T: Ghul.Comparable[T]](values: T[]) -> T[] is
     if values.count <= 1 then
         return values
     fi
@@ -13,15 +13,15 @@ merge_sort[T: Ghul.Comparable[T]](values: List[T]) -> List[T] is
     )
 si
 
-merge[T: Ghul.Comparable[T]](left: List[T], right: List[T]) -> List[T] =>
+merge[T: Ghul.Comparable[T]](left: T[], right: T[]) -> T[] =>
     case (left, right)
     when ([], _) then right
     when (_, []) then left
     when ([x, ..xr], [y, ..yr]) then
         if x <= y then
-            [x] ++ merge(xr, right) |> collect()
+            [x] ++ merge(xr, right) |> list()
         else
-            [y] ++ merge(left, yr) |> collect()
+            [y] ++ merge(left, yr) |> list()
         fi
     esac
 

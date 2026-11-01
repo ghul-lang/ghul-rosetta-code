@@ -43,8 +43,8 @@ final_form(greek: char[], at: int) -> char =>
     if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
 
 transliterate(text: string) -> string =>
-    let greek = letters(text, 0) |> collect() in
-    string(0..greek.count |> map(final_form(greek, *)) |> collect())
+    let greek = letters(text, 0) |> list() in
+    string(0..greek.count |> map(final_form(greek, *)) |> list())
 
 let passage = [
     "I was looking at some rhododendrons in my back garden,",

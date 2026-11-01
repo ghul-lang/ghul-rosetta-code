@@ -1,6 +1,6 @@
 use default
 
-use Matrix = List[List[int]]
+use Matrix = int[][]
 
 sign(column: int) -> int => if column % 2 == 0 then 1 else -1 fi
 
@@ -10,9 +10,9 @@ minor(m: Matrix, column: int) -> Matrix =>
             0..m.count
                 |> filter(* != column)
                 |> map(c => m[row][c])
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 determinant(m: Matrix) -> int =>
     case m
@@ -22,7 +22,7 @@ determinant(m: Matrix) -> int =>
             |> sum_by(c => sign(c) * m[0][c] * determinant(minor(m, c)))
     esac
 
-with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
+with_column(m: Matrix, column: int, values: int[]) -> Matrix =>
     0..m.count
         |> map(row =>
             0..m.count
@@ -33,11 +33,11 @@ with_column(m: Matrix, column: int, values: List[int]) -> Matrix =>
                         m[row][c]
                     fi
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
-solve(m: Matrix, constants: List[int]) -> double{} =>
+solve(m: Matrix, constants: int[]) -> double{} =>
     let denominator = double(determinant(m)) in
     0..m.count
         |> map(column =>

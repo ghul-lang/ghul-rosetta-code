@@ -133,10 +133,7 @@ evaluate(expression: Expression) -> int =>
         evaluate(left) / evaluate(right)
     esac
 
-node(expression: Expression) -> (
-    label: string,
-    children: List[Expression]
-) =>
+node(expression: Expression) -> (label: string, children: Expression[]) =>
     case expression
     when (value): NUMBER then
         (label = "{value}", children = LIST())

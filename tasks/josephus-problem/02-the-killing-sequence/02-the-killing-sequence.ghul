@@ -1,7 +1,7 @@
 use default
 
 killings(n: int, k: int) -> int{} is
-    let standing = 0..n |> collect_mutable()
+    let standing = 0..n |> LIST()
     let at mut = 0
 
     while standing.count > 1 do

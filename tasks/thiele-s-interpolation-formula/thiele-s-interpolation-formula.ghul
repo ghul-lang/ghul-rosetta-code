@@ -27,10 +27,10 @@ class THIELE(_x: double[], _y: double[]) is
         fi
 si
 
-let xs = 0..32 |> map(i => double(i) * 0.05) |> collect()
-let sines = xs |> map(sin) |> collect()
-let cosines = xs |> map(cos) |> collect()
-let tangents = xs |> map(tan) |> collect()
+let xs = 0..32 |> map(i => double(i) * 0.05) |> list()
+let sines = xs |> map(sin) |> list()
+let cosines = xs |> map(cos) |> list()
+let tangents = xs |> map(tan) |> list()
 
 let inverse_sin = THIELE(sines, xs)
 let inverse_cos = THIELE(cosines, xs)

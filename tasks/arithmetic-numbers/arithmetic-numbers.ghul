@@ -2,8 +2,8 @@ use default
 
 let limit = 1_400_000
 
-let divisor_sum = repeat(0, limit + 1) |> collect_mutable()
-let divisor_count = repeat(0, limit + 1) |> collect_mutable()
+let divisor_sum = repeat(0, limit + 1) |> LIST()
+let divisor_count = repeat(0, limit + 1) |> LIST()
 
 for divisor in 1::limit do
     let multiple mut = divisor
@@ -19,7 +19,7 @@ od
 let arithmetic =
     1::limit
         |> filter(n => divisor_sum[n] % divisor_count[n] == 0)
-        |> collect()
+        |> list()
 
 write_line("the first 100 arithmetic numbers:")
 

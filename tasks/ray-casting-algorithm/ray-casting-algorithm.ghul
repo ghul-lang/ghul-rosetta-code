@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 use Point = (x: double, y: double)
-use Ring = Collections.List[Point]
+use Ring = Point[]
 
 let epsilon = 0.000001D
 
@@ -49,7 +49,7 @@ crosses(point: Point, from: Point, to: Point) -> bool is
         fi
 si
 
-inside(point: Point, rings: List[Ring]) -> bool =>
+inside(point: Point, rings: Ring[]) -> bool =>
     [
         true
         for ring in rings
@@ -57,8 +57,8 @@ inside(point: Point, rings: List[Ring]) -> bool =>
         if crosses(point, ring[index], ring[(index + 1) % ring.count])
     ].count % 2 == 1
 
-ring(corners: List[(double, double)]) -> Ring =>
-    corners |> map((x, y) => (x = x, y = y)) |> collect()
+ring(corners: (double, double)[]) -> Ring =>
+    corners |> map((x, y) => (x = x, y = y)) |> list()
 
 let square = [
     ring([
@@ -110,7 +110,7 @@ image.stroke(2.0D)
 image.colour(40ub, 40ub, 60ub)
 
 for hole in square_hole do
-    image.line(hole ++ [hole[0]] |> collect())
+    image.line(hole ++ [hole[0]] |> list())
 od
 
 for step_x in 0..49 do

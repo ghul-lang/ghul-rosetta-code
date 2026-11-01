@@ -1,6 +1,6 @@
 use default
 
-deconvolve(g: int[], f: int[]) -> List[int] => (
+deconvolve(g: int[], f: int[]) -> int[] => (
     let h = LIST()
 
     for n in 0..g.count - f.count + 1 do
@@ -22,7 +22,7 @@ let g = [
     55, 36, 29, -43, -7
 ]
 
-show(name: string, values: Collections.List[int]) =>
+show(name: string, values: int[]) =>
     write_line("{name} = [{values |> map(v => "{v}") |> join(", ")}]")
 
 show("h", h)

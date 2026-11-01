@@ -2,7 +2,7 @@ use default
 use Raster.IMAGE
 use Raster.SHAPES
 use Point = (x: double, y: double)
-use Polygon = Collections.List[Point]
+use Polygon = Point[]
 
 ⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y
 
@@ -18,7 +18,7 @@ axes(shape: Polygon) -> Point{} =>
         )
 
 spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
-    let alongs = polygon |> map(corner => corner ⋅ axis) |> collect() in
+    let alongs = polygon |> map(corner => corner ⋅ axis) |> list() in
     (
         low = alongs |> reduce(alongs[0], System.Math.min),
         high = alongs |> reduce(alongs[0], System.Math.max)
@@ -34,8 +34,8 @@ separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
 overlap(first: Polygon, second: Polygon) -> bool =>
     !(axes(first) ++ axes(second) |> any(separated(first, second, *)))
 
-polygon(corners: List[(double, double)]) -> Polygon =>
-    corners |> map((x, y) => (x = x, y = y)) |> collect()
+polygon(corners: (double, double)[]) -> Polygon =>
+    corners |> map((x, y) => (x = x, y = y)) |> list()
 
 let shapes = [
     (
@@ -95,7 +95,7 @@ for index in 0..shapes.count do
     drawing.add(
         shapes[index].corners
             |> map(corner => (corner.x, corner.y))
-            |> collect(),
+            |> list(),
         r,
         g,
         b

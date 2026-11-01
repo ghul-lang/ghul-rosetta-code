@@ -11,7 +11,7 @@ use System.Runtime.InteropServices.Marshal
 
 struct POINT(x: int, y: int)
 
-let on_heap = repeat(0, 1000) |> collect()
+let on_heap = repeat(0, 1000) |> list()
 let on_stack = POINT(3, 4)
 
 write_line("managed array of {on_heap.count} ints, left to the collector")

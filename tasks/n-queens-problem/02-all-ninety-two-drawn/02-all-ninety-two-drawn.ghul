@@ -8,7 +8,7 @@ let across = 12
 let margin = 12
 let header = 40
 
-safe(queens: List[int], row: int, column: int) -> bool =>
+safe(queens: int[], row: int, column: int) -> bool =>
     queens
         |> index()
         |> all((placed_row, placed_column) =>
@@ -17,19 +17,19 @@ safe(queens: List[int], row: int, column: int) -> bool =>
             placed_row + placed_column != row + column
         )
 
-placements(n: int, queens: List[int]) -> List[int]{} is
+placements(n: int, queens: int[]) -> int[]{} is
     if queens.count == n then
         yield queens
     else
         for column in 0..n do
             if safe(queens, queens.count, column) then
-                yield in placements(n, queens ++ [column] |> collect())
+                yield in placements(n, queens ++ [column] |> list())
             fi
         od
     fi
 si
 
-board(image: IMAGE, solution: List[int], left: int, top: int) is
+board(image: IMAGE, solution: int[], left: int, top: int) is
     for row in 0..8 do
         for column in 0..8 do
             if (row + column) % 2 == 1 then
@@ -60,7 +60,7 @@ board(image: IMAGE, solution: List[int], left: int, top: int) is
     od
 si
 
-let solutions = placements(8, []) |> collect()
+let solutions = placements(8, []) |> list()
 
 let down = (solutions.count + across - 1) / across
 

@@ -29,7 +29,7 @@ for _ in 1::5 do
 od
 
 let generator = SPLITMIX64(987654321ul)
-let counts = repeat(0, 5) |> collect_mutable()
+let counts = repeat(0, 5) |> LIST()
 
 for _ in 1::100_000 do
     let bucket = int(generator.next_float() * 5.0)

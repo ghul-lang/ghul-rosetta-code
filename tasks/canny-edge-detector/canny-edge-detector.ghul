@@ -62,7 +62,7 @@ class FIELD is
     init(width: int, height: int) is
         self.width = width
         self.height = height
-        values = repeat(0.0D, width * height) |> collect_mutable()
+        values = repeat(0.0D, width * height) |> LIST()
     si
 
     at(x: int, y: int) -> double =>
@@ -126,7 +126,7 @@ si
 canny(f: FIELD, low: double, high: double) -> FIELD is
     let w = f.width, h = f.height
     let magnitude = FIELD(w, h)
-    let direction = repeat(0, w * h) |> collect_mutable()
+    let direction = repeat(0, w * h) |> LIST()
 
     for y in 0..h do
         for x in 0..w do

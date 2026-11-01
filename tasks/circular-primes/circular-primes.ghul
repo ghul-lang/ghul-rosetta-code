@@ -3,7 +3,7 @@ use default
 let limit = 1_000_000
 
 let prime = (
-    let sieve = repeat(true, limit) |> collect_mutable()
+    let sieve = repeat(true, limit) |> LIST()
 
     sieve[0] = false
     sieve[1] = false

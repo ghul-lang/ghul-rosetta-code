@@ -19,7 +19,7 @@ for base in 2::16 do
         primes()
             |> take_while(p => p <= limit)
             |> filter(is_repunit_prime(base, *))
-            |> collect()
+            |> list()
 
     write_line(
         if found.count == 0 then

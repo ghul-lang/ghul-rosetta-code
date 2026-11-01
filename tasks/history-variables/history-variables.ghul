@@ -13,7 +13,7 @@ class HISTORIC[T] is
             _past.add(new_value)
         si
 
-    history: Collections.List[T] => _past
+    history: T[] => _past
 
     rollback() is
         if _past.count > 1 then

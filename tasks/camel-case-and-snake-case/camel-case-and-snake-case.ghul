@@ -1,7 +1,7 @@
 use default
 use System.Text.StringBuilder
 
-class NAME(words: Collections.List[string] private) is
+class NAME(words: string[] private) is
     to_camel_case() -> string =>
         _words
             |> index()

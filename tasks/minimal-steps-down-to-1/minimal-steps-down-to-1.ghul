@@ -3,7 +3,7 @@ use default
 use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
-moves(value: int, divisors: List[int], subtractors: List[int]) -> MOVE{} is
+moves(value: int, divisors: int[], subtractors: int[]) -> MOVE{} is
     for divisor in divisors do
         if value % divisor == 0 then
             yield (next = value / divisor, label = "/{divisor}")
@@ -17,16 +17,12 @@ moves(value: int, divisors: List[int], subtractors: List[int]) -> MOVE{} is
     od
 si
 
-solve(
-    divisors: List[int],
-    subtractors: List[int],
-    limit: int
-) -> List[STEP] is
+solve(divisors: int[], subtractors: int[], limit: int) -> STEP[] is
     let table = [
         (steps = 0, next = 0, label = ""),
         (steps = 0, next = 0, label = "")
     ]
-        |> collect_mutable()
+        |> LIST()
 
     for value in 2::limit do
         let cheapest =
@@ -47,7 +43,7 @@ solve(
     table
 si
 
-route(table: List[STEP], value: int) -> string => (
+route(table: STEP[], value: int) -> string => (
     let legs = LIST()
     let current mut = value
 
@@ -62,14 +58,14 @@ route(table: List[STEP], value: int) -> string => (
     legs |> join(" ")
 )
 
-deepest_in(table: List[STEP], limit: int) is
+deepest_in(table: STEP[], limit: int) is
     let deepest = 1::limit |> map(value => table[value].steps) |> max()
 
     if let most = deepest then
         let hardest =
             (1::limit)
                 |> filter(value => table[value].steps == most)
-                |> collect()
+                |> list()
 
         write_line(
             "  1 to {limit:N0}: maximum of {most} steps, "

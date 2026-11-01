@@ -1,7 +1,7 @@
 namespace Hailstone is
     use default
 
-    hailstone(n: long) -> List[long] => (
+    hailstone(n: long) -> long[] => (
         let terms = LIST([n])
 
         while terms[terms.count - 1] != 1L do

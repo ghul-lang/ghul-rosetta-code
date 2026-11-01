@@ -3,11 +3,11 @@ use default
 class FIELD(name: string, offset: int, width: int)
 
 union Diagram is
-    HEADER(fields: List[FIELD], width: int) default
+    HEADER(fields: FIELD[], width: int) default
     REJECTED(why: string)
 si
 
-cells(row: string) -> List[string]? is
+cells(row: string) -> string[]? is
     let trimmed = row.trim()
 
     if

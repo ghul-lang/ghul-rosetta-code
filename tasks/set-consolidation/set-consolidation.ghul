@@ -27,7 +27,7 @@ render(sets: List[Set[string]]) -> string =>
     sets |> map(one => "{{{one |> sort() |> join(", ")}}}") |> join(" ")
 
 show(groups: string[][]) is
-    let sets = groups |> map(SET) |> collect()
+    let sets = groups |> map(SET) |> list()
 
     write_line("{render(sets)}")
     write_line("  consolidates to {render(consolidate(sets))}")

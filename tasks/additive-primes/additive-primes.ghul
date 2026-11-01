@@ -1,9 +1,7 @@
 use default
 
 let additive =
-    (2..500)
-        |> filter(n => is_prime(n) /\ is_prime(digit_sum(n)))
-        |> collect()
+    (2..500) |> filter(n => is_prime(n) /\ is_prime(digit_sum(n))) |> list()
 
 for row in additive |> chunk(10) do
     write_line(row |> map(n => "{n,4}") |> join(""))

@@ -15,7 +15,7 @@ let candidates mut =
         |> filter(s =>
             !s.contains('0') /\ 0..4 |> all(i => s.last_index_of(s[i]) == i)
         )
-        |> collect()
+        |> list()
 
 let random = System.Random(4)
 
@@ -42,7 +42,7 @@ do
         break
     fi
 
-    let parts = line |> words() |> collect()
+    let parts = line |> words() |> list()
     let given = (bulls = int.parse(parts[0]), cows = int.parse(parts[1]))
 
     write_line("bulls {given.bulls}, cows {given.cows}")
@@ -53,5 +53,5 @@ do
     fi
 
     candidates =
-        candidates |> filter(c => score(guess, c) =~ given) |> collect()
+        candidates |> filter(c => score(guess, c) =~ given) |> list()
 od

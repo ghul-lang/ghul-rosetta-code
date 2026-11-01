@@ -11,7 +11,7 @@ struct SAILOR(name: string) is
         last_letter(name) % 2 == last_letter(lady.name) % 2
 si
 
-struct AGENCY(ladies: List[LADY]) is
+struct AGENCY(ladies: LADY[]) is
     suggestions: LADY{} => ladies |> filter(lady => lady.is_nice)
 si
 
@@ -21,7 +21,7 @@ let agency = AGENCY(
         "Flora", "Grace", "Hazel", "Iris", "Juno"
     ]
         |> map(LADY)
-        |> collect()
+        |> list()
 )
 
 let sailor = SAILOR("Popeye")

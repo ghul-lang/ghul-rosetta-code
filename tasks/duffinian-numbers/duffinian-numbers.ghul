@@ -13,7 +13,7 @@ triplets() -> int{} =>
 
 write_line("the first fifty Duffinian numbers:")
 
-let first_fifty = duffinians() |> take(50) |> map(v => "{v,5}") |> collect()
+let first_fifty = duffinians() |> take(50) |> map(v => "{v,5}") |> list()
 
 for row in 0..5 do
     write_line(first_fifty[row * 10..row * 10 + 10] |> join(""))

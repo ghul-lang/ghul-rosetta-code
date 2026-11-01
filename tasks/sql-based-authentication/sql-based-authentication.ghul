@@ -28,9 +28,7 @@ connect_db() -> SqliteConnection is
 si
 
 digest(salt: ubyte[], password: string) -> ubyte[] =>
-    MD5.hash_data(
-        salt |> cat(Encoding.utf8.get_bytes(password)) |> collect()
-    )
+    MD5.hash_data(salt |> cat(Encoding.utf8.get_bytes(password)) |> ARRAY())
 
 create_user(
     db: SqliteConnection,

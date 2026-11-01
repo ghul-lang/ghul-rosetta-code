@@ -1,7 +1,7 @@
 use default
 
 use Cell = (row: int, column: int)
-use Line = (penalty: int, cheapest: int, cells: Collections.List[Cell])
+use Line = (penalty: int, cheapest: int, cells: Cell[])
 
 let tasks = ["A", "B", "C", "D", "E"]
 let contractors = ["W", "X", "Y", "Z"]
@@ -13,17 +13,16 @@ let costs = [
     [50, 12, 50, 15, 11]
 ]
 
-let supply = [50, 60, 50, 50] |> collect_mutable()
-let demand = [30, 20, 70, 30, 60] |> collect_mutable()
+let supply = [50, 60, 50, 50] |> LIST()
+let demand = [30, 20, 70, 30, 60] |> LIST()
 
 let allocation =
     (0..contractors.count)
-        |> map(_ => repeat(0, tasks.count) |> collect_mutable())
-        |> collect()
+        |> map(_ => repeat(0, tasks.count) |> LIST())
+        |> list()
 
-line(cells: Collections.List[Cell]) -> Line =>
-    let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> collect()
-    in
+line(cells: Cell[]) -> Line =>
+    let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> list() in
     let penalty =
         if prices.count > 1 then
             prices[1] - prices[0]
@@ -38,11 +37,11 @@ active_lines() -> Line{} is
     let columns = (0..tasks.count) |> filter(c => demand[c] > 0)
 
     for r in rows do
-        yield line(columns |> map(c => (r, c)) |> collect())
+        yield line(columns |> map(c => (r, c)) |> list())
     od
 
     for c in columns do
-        yield line(rows |> map(r => (r, c)) |> collect())
+        yield line(rows |> map(r => (r, c)) |> list())
     od
 si
 

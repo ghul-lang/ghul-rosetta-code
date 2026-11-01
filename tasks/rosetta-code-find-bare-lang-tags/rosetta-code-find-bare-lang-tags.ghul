@@ -21,7 +21,7 @@ bare_tags(page: string) -> (language: string, page: string){} is
 si
 
 report(pages: string[], show_pages: bool) is
-    let found = pages |> flat_map(bare_tags) |> collect()
+    let found = pages |> flat_map(bare_tags) |> list()
 
     write_line("{found.count} bare language tags.")
     write_line("")

@@ -7,8 +7,8 @@ use default
 let limit = 33
 let bonds = 4
 
-let rooted = repeat(0L, limit + 1) |> collect_mutable()
-let unrooted = repeat(0L, limit + 1) |> collect_mutable()
+let rooted = repeat(0L, limit + 1) |> LIST()
+let unrooted = repeat(0L, limit + 1) |> LIST()
 
 rooted[0] = 1L
 rooted[1] = 1L

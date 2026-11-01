@@ -8,7 +8,7 @@ trait Fruit: Eatable is
     color() -> string
 si
 
-class FOOD_BOX[T: Eatable](items: List[T]) is
+class FOOD_BOX[T: Eatable](items: T[]) is
     count() -> int => items.count
 si
 

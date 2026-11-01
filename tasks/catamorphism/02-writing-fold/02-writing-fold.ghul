@@ -10,7 +10,7 @@ fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
     running
 )
 
-fold_right[T, A](values: List[T], seed: A, combine: (T, A) -> A) -> A => (
+fold_right[T, A](values: T[], seed: A, combine: (T, A) -> A) -> A => (
     let running mut = seed
 
     for i in 0..values.count do

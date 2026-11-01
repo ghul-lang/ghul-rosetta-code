@@ -29,8 +29,8 @@ corner(i: int, j: int, k: int) -> Flat =>
         )
     )
 
-outline(corners: (int, int, int)[]) -> List[Flat] =>
-    corners |> map((i, j, k) => corner(i, j, k)) |> collect()
+outline(corners: (int, int, int)[]) -> Flat[] =>
+    corners |> map((i, j, k) => corner(i, j, k)) |> list()
 
 let top = outline([(0, 1, 0), (1, 1, 0), (1, 1, 1), (0, 1, 1)])
 let front = outline([
@@ -65,7 +65,7 @@ image.colour(20ub, 30ub, 60ub)
 image.stroke(2.0D)
 
 for (points, _) in faces do
-    image.line(points ++ [points[0]] |> collect())
+    image.line(points ++ [points[0]] |> list())
 od
 
 write_line("a {width} x {height} x {depth} cuboid, three faces visible")

@@ -23,7 +23,7 @@ let steps = [
     ("up", (x = 0, y = 0, z = 1)),
     ("down", (x = 0, y = 0, z = -1))
 ]
-    |> collect_map()
+    |> MAP()
 
 let opposite = [
     ("north", "south"),
@@ -33,14 +33,14 @@ let opposite = [
     ("up", "down"),
     ("down", "up")
 ]
-    |> collect_map()
+    |> MAP()
 
 let aliases = [
     ("n", "north"), ("s", "south"), ("e", "east"), ("w", "west"),
     ("u", "up"), ("d", "down"), ("i", "inventory"), ("inv", "inventory"),
     ("a", "attack")
 ]
-    |> collect_mutable_map()
+    |> MAP()
 
 let goal = (x = 1, y = 1, z = 5)
 let rooms = MAP()
@@ -70,7 +70,7 @@ describe() is
         write_line("here: {current.items |> join(", ")}")
     fi
 
-    let exits = current.exits |> collect_mutable()
+    let exits = current.exits |> LIST()
     exits.sort()
     let listed = if exits.count == 0 then "none" else exits |> join() fi
     write_line("exits: {listed}")
@@ -134,7 +134,7 @@ describe()
 while let line = read_line() do
     write_line("> {line}")
 
-    let tokens = line.to_lower() |> words() |> collect()
+    let tokens = line.to_lower() |> words() |> list()
 
     if tokens.count == 0 then
         continue

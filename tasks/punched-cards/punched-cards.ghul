@@ -6,12 +6,12 @@ let labels = [
     "12", "11", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
 ]
 
-let codes = MAP[char, List[int]]()
+let codes = MAP[char, int[]]()
 
 row_of(label: string) -> int => 0..12 |> find(i => labels[i] =~ label) ?? -1
 
 punch(c: char, holes: string) is
-    codes[c] = holes.split([' ']) |> map(row_of) |> collect()
+    codes[c] = holes.split([' ']) |> map(row_of) |> list()
 si
 
 for d in 0..10 do
@@ -56,7 +56,7 @@ let program = [
 ]
 
 for line in program do
-    let punched = 0..line.length |> map(i => holes(line[i])) |> collect()
+    let punched = 0..line.length |> map(i => holes(line[i])) |> list()
 
     write_line(" {line}")
 

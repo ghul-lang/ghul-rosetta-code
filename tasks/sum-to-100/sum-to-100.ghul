@@ -48,7 +48,7 @@ expressions() -> (value: int, text: string){} =>
         |> filter(ops => ops[0] != joined)
         |> map(ops => (value = value_of(ops), text = text_of(ops)))
 
-let all = expressions() |> memo()
+let all = expressions() |> list()
 
 write_line("expressions summing to 100:")
 
@@ -61,7 +61,7 @@ let counts =
     all
         |> group_by(expression => expression.value)
         |> map(group => (group.key, group.value.count))
-        |> collect_map()
+        |> MAP()
 
 let most = counts.keys |> max_by(value => counts[value])
 

@@ -3,7 +3,7 @@ use default
 // A p-adic number here is k digits, lowest first, and an exponent: its
 // value is the sum of digit i times p^(i + exponent).
 
-use PAdic = (digits: List[bigint], exponent: int)
+use PAdic = (digits: bigint[], exponent: int)
 
 floor_div(a: bigint, b: bigint) -> bigint =>
     let q = a / b in
@@ -58,11 +58,11 @@ to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic => (
 add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
     let exponent = int.min(x.exponent, y.exponent)
 
-    aligned(z: PAdic) -> List[bigint] =>
+    aligned(z: PAdic) -> bigint[] =>
         repeat(0n, z.exponent - exponent)
             |> cat(z.digits)
             |> take(k)
-            |> collect()
+            |> list()
 
     let a = aligned(x), b = aligned(y)
     let digits = LIST()

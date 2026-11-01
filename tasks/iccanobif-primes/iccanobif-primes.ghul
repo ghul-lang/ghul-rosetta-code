@@ -21,7 +21,7 @@ reversed(value: bigint) -> bigint => (
 )
 
 let iccanobif =
-    fibonacci() |> map(reversed) |> filter(is_prime) |> take(15) |> memo()
+    fibonacci() |> map(reversed) |> filter(is_prime) |> take(15) |> list()
 
 write_line("the first 10 iccanobif primes:")
 write_line(iccanobif |> take(10) |> map(p => "{p}") |> join(" "))

@@ -94,7 +94,7 @@ for (i, (label, length)) in cycles |> index() do
                 let turn = (double(centre) + day) / double(length) in
                 (x = day, y = sin(2.0D * pi * turn))
             )
-            |> collect()
+            |> list()
     )
     image.text(-wide + 10.0D * double(i), 1.45D, 13.0D, label)
 od

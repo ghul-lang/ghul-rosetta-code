@@ -1,6 +1,6 @@
 use default
 
-combinations(items: List[int], k: int) -> List[int]{} is
+combinations(items: int[], k: int) -> int[]{} is
     if k == 0 then
         yield LIST()
     elif items.count >= k then
@@ -22,13 +22,13 @@ combinations(items: List[int], k: int) -> List[int]{} is
     fi
 si
 
-partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
+partitions(items: int[], sizes: int[]) -> int[][]{} is
     case sizes
     when [] then
         yield LIST()
     when [size, ..rest] then
         for block in combinations(items, size) do
-            let remaining = items |> except(block) |> collect()
+            let remaining = items |> except(block) |> list()
 
             for tail in partitions(remaining, rest) do
                 let whole = LIST()
@@ -45,11 +45,11 @@ partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
     esac
 si
 
-braces(block: List[int]) -> string => "{{" "{block |> join(", ")}" "}}"
+braces(block: int[]) -> string => "{{" "{block |> join(", ")}" "}}"
 
 show(sizes: int[]) is
     let total = sizes |> sum()
-    let items = 1::total |> collect()
+    let items = 1::total |> list()
 
     write_line("partitions({sizes |> join(", ")}):")
 

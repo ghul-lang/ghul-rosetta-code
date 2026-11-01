@@ -61,7 +61,7 @@ let triangles =
         |> filter(t => t?)
         |> map(t => t!)
         |> sort(compare_triangles)
-        |> collect()
+        |> list()
 
 describe(t: TRIANGLE) is
     let perimeter = t.a + t.b + t.c

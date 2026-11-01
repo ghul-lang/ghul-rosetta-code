@@ -22,7 +22,7 @@ let places =
             green = ubyte(80 + next(160)),
             blue = ubyte(80 + next(160))
         ))
-        |> collect()
+        |> list()
 
 nearest(x: int, y: int) -> int =>
     0..places.count

@@ -2,7 +2,7 @@ use default
 
 use LINE = (depth: int, name: string)
 
-class NODE(name: string, children: List[NODE])
+class NODE(name: string, children: NODE[])
 
 leaf(name: string) -> NODE => NODE(name, LIST())
 
@@ -14,7 +14,7 @@ render_nest(node: NODE, depth: int) -> string{} is
     od
 si
 
-render_indent(lines: List[LINE]) -> string{} =>
+render_indent(lines: LINE[]) -> string{} =>
     lines |> map(line => "{line.depth} {line.name}")
 
 to_indent(node: NODE, depth: int) -> LINE{} is
@@ -25,7 +25,7 @@ to_indent(node: NODE, depth: int) -> LINE{} is
     od
 si
 
-to_nest(lines: List[LINE], position: int) -> (node: NODE, next: int) => (
+to_nest(lines: LINE[], position: int) -> (node: NODE, next: int) => (
     let head = lines[position]
     let children = LIST()
     let cursor mut = position + 1
@@ -50,7 +50,7 @@ write_line("nest form:")
 
 start |> render_nest(0) |> each(line => write_line(line))
 
-let indented = start |> to_indent(0) |> collect()
+let indented = start |> to_indent(0) |> list()
 
 write_line()
 write_line("indent form:")

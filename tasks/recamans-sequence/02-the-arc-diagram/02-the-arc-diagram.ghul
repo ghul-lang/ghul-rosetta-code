@@ -24,12 +24,12 @@ recaman() -> int{} is
     od
 si
 
-let terms = recaman() |> take(66) |> collect()
+let terms = recaman() |> take(66) |> list()
 
 let hops =
     (1..terms.count)
         |> map(n => (from = terms[n - 1], to = terms[n]))
-        |> memo()
+        |> list()
 
 let highest = terms |> reduce(0, (best, term) => max(best, term))
 

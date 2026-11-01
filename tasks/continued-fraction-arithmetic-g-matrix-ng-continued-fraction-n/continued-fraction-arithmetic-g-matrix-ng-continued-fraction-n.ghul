@@ -40,7 +40,7 @@ si
 
 show(terms: long{}) -> string =>
     let
-        shown = terms |> take(21) |> collect(),
+        shown = terms |> take(21) |> list(),
         rest = shown |> skip(1) |> take(19) |> join(),
         more = if shown.count > 20 then ", ..." else "" fi
     in

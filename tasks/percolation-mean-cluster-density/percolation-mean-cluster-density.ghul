@@ -18,11 +18,9 @@ class CLUSTERS is
         self.size = size
 
         filled =
-            (0..size * size)
-                |> map(_ => random.next_double() < p)
-                |> collect()
+            (0..size * size) |> map(_ => random.next_double() < p) |> list()
 
-        labels = repeat(0, size * size) |> collect_mutable()
+        labels = repeat(0, size * size) |> LIST()
         count = 0
 
         for cell in 0..size * size do

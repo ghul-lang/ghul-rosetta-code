@@ -40,7 +40,7 @@ wrap(angle: double) -> double => angle - turn * floor(angle / turn)
 distance(a: Circle, b: Circle) -> double =>
     sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
 
-inside(c: Circle, others: List[Circle]) -> bool =>
+inside(c: Circle, others: Circle[]) -> bool =>
     others |> any(o => !(o =~ c) /\ distance(o, c) + c.r <= o.r)
 
 on(c: Circle, angle: double) -> (x: double, y: double) => (
@@ -65,7 +65,7 @@ crossings(c: Circle, o: Circle) -> double{} is
     [base - spread, base + spread]
 si
 
-outer_arcs(c: Circle, others: List[Circle]) -> Arc{} is
+outer_arcs(c: Circle, others: Circle[]) -> Arc{} is
     let angles = LIST(
         others
             |> filter(o => !(o =~ c))
@@ -89,7 +89,7 @@ outer_arcs(c: Circle, others: List[Circle]) -> Arc{} is
             in
                 !(others |> any(o => !(o =~ c) /\ covers(o, p.x, p.y)))
         )
-        |> collect()
+        |> list()
 si
 
 area_under(arc: Arc) -> double =>
@@ -102,9 +102,9 @@ area_under(arc: Arc) -> double =>
     )
 
 let all = LIST(circles)
-let kept = all |> filter(c => !inside(c, all)) |> collect()
+let kept = all |> filter(c => !inside(c, all)) |> list()
 
-let arcs = kept |> flat_map(outer_arcs(*, kept)) |> collect()
+let arcs = kept |> flat_map(outer_arcs(*, kept)) |> list()
 let area = arcs |> sum_by(area_under)
 
 let hidden = circles.count - kept.count
@@ -142,7 +142,7 @@ for arc in arcs do
                 let t = double(i) / 32.0D in
                 on(c, arc.from + (arc.to - arc.from) * t)
             )
-            |> collect()
+            |> list()
     )
 od
 

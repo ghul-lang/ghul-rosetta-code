@@ -11,7 +11,7 @@ one_of_n(n: int) -> int =>
 
 let lines = 10
 let trials = 1000000
-let counts = repeat(0, lines + 1) |> collect_mutable()
+let counts = repeat(0, lines + 1) |> LIST()
 
 for trial in 1::trials do
     let chosen = one_of_n(lines)

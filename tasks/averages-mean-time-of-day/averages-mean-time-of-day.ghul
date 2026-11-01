@@ -7,12 +7,12 @@ to_angle(time: string) -> double =>
     let seconds = System.TimeSpan.parse(time).total_seconds in
     tau * seconds / seconds_per_day
 
-mean_angle(angles: List[double]) -> double =>
+mean_angle(angles: double[]) -> double =>
     atan2(angles |> sum_by(sin), angles |> sum_by(cos))
 
-mean_time(times: List[string]) -> string =>
+mean_time(times: string[]) -> string =>
     let
-        angle = mean_angle(times |> map(to_angle) |> collect()),
+        angle = mean_angle(times |> map(to_angle) |> list()),
         turn = if angle < 0.0 then angle + tau else angle fi,
         seconds = round(turn / tau * seconds_per_day)
     in

@@ -1,28 +1,25 @@
 use default
 
-use Matrix = List[List[double]]
+use Matrix = double[][]
 
 transpose(m: Matrix) -> Matrix =>
     0..m[0].count
-        |> map(c => 0..m.count |> map(r => m[r][c]) |> collect())
-        |> collect()
+        |> map(c => 0..m.count |> map(r => m[r][c]) |> list())
+        |> list()
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count
         |> map(r =>
             0..b[0].count
                 |> map(c => 0..b.count |> sum_by(k => a[r][k] * b[k][c]))
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
-solve(a: Matrix, b: List[double]) -> double{} is
+solve(a: Matrix, b: double[]) -> double{} is
     let n = b.count
 
-    let rows =
-        0..n
-            |> map(i => a[i] ++ [b[i]] |> collect_mutable())
-            |> collect_mutable()
+    let rows = 0..n |> map(i => a[i] ++ [b[i]] |> LIST()) |> LIST()
 
     for k in 0..n do
         let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
@@ -37,7 +34,7 @@ solve(a: Matrix, b: List[double]) -> double{} is
         od
     od
 
-    let x = repeat(0.0, n) |> collect_mutable()
+    let x = repeat(0.0, n) |> LIST()
 
     for k in 0..n |> reverse() do
         let known = k + 1..n |> sum_by(j => rows[k][j] * x[j])
@@ -47,12 +44,12 @@ solve(a: Matrix, b: List[double]) -> double{} is
     x
 si
 
-regress(y: List[double], x: Matrix) -> double{} =>
+regress(y: double[], x: Matrix) -> double{} =>
     let
         xt = transpose(x),
-        xty = xt * (y |> map(v => [v]) |> collect())
+        xty = xt * (y |> map(v => [v]) |> list())
     in
-        solve(xt * x, xty |> map(row => row[0]) |> collect())
+        solve(xt * x, xty |> map(row => row[0]) |> list())
 
 let heights = [
     1.47, 1.50, 1.52, 1.55, 1.57, 1.60, 1.63, 1.65, 1.68,
@@ -64,7 +61,7 @@ let weights = [
     63.11, 64.47, 66.28, 68.10, 69.92, 72.19, 74.46
 ]
 
-let x = heights |> map(h => [1.0, h, h * h]) |> collect()
+let x = heights |> map(h => [1.0, h, h * h]) |> list()
 
 let beta = regress(weights, x)
 

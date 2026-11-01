@@ -1,7 +1,7 @@
 use default
 
 magic_numbers() -> bigint{} is
-    let current = 1::9 |> map(bigint) |> collect_mutable()
+    let current = 1::9 |> map(bigint) |> LIST()
     let length mut = 1
 
     yield 0n
@@ -19,7 +19,7 @@ magic_numbers() -> bigint{} is
     od
 si
 
-let magic = magic_numbers() |> collect()
+let magic = magic_numbers() |> list()
 
 write_line("There are {magic.count} magic numbers, counting zero.")
 write_line("The largest is {magic[magic.count - 1]}.\n")

@@ -11,7 +11,7 @@ let live = System.Environment.get_environment_variable("GHUL_LIVE_IMAGES")?
 
 let random = System.Random()
 let image = IMAGE(width, height)
-let noise = repeat(0ub, width * height / 8) |> collect()
+let noise = repeat(0ub, width * height / 8) |> ARRAY()
 
 draw_noise() is
     random.next_bytes(noise)

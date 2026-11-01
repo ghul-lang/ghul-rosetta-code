@@ -11,7 +11,7 @@ let round_three_order = [
 rotate_left(value: uint, count: int) -> uint =>
     (value << count) | (value >>> (32 - count))
 
-padded(message: ubyte[]) -> List[ubyte] is
+padded(message: ubyte[]) -> ubyte[] is
     let bits = ulong(message.count) * 8ul
 
     let block = LIST(message)
@@ -29,7 +29,7 @@ padded(message: ubyte[]) -> List[ubyte] is
     return block
 si
 
-word(block: List[ubyte], at: int) -> uint =>
+word(block: ubyte[], at: int) -> uint =>
     0..4
         |> map(index => uint(block[at + index]) << (8 * index))
         |> reduce(0u, * | *)
@@ -45,9 +45,7 @@ md4(message: ubyte[]) -> string is
 
     while start < block.count do
         let words =
-            0..16
-                |> map(index => word(block, start + index * 4))
-                |> collect()
+            0..16 |> map(index => word(block, start + index * 4)) |> list()
 
         let registers = LIST(state)
 

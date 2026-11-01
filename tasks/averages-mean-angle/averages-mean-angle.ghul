@@ -3,7 +3,7 @@ use System.Math.*
 use double.degrees_to_radians
 use double.radians_to_degrees
 
-mean_angle(degrees: List[double]) -> double =>
+mean_angle(degrees: double[]) -> double =>
     let radians = degrees |> map(degrees_to_radians) in
     let
         sines = radians |> sum_by(sin),

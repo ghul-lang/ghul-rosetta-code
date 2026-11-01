@@ -41,7 +41,7 @@ lookup(env: ENV?, index: int) -> THUNK => (
     e.first
 )
 
-evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
+evaluate(start: THUNK, arguments: THUNK[]) -> Result is
     let stack = STACK()
 
     for i in 0..arguments.count do
@@ -130,13 +130,13 @@ byte(b: int) -> Term =>
             cons(bit((b >> i) & 1 == 1), result)
         )
 
-list(items: List[Term]) -> Term =>
+list(items: Term[]) -> Term =>
     case items
     when [] then falsity
     when [x, ..rest] then cons(x, list(rest))
     esac
 
-class READER(bits: List[bool]) is
+class READER(bits: bool[]) is
     at: int public
 
     next() -> bool is
@@ -188,7 +188,7 @@ bit_of(thunk: THUNK) -> int =>
     else throw System.InvalidOperationException("bit expected")
     fi
 
-bits_of(bytes: List[int]) -> List[bool] => [
+bits_of(bytes: int[]) -> bool[] => [
     (b >> (7 - i)) & 1 == 1
     for b in bytes
     for i in 0..8
@@ -196,21 +196,21 @@ bits_of(bytes: List[int]) -> List[bool] => [
 
 run_bits(program: string, limit: int) -> string =>
     let
-        bits = program |> map(* == '1') |> collect(),
+        bits = program |> map(* == '1') |> list(),
         reader = READER(bits),
         term = reader.term(),
-        input = list(bits |> skip(reader.at) |> map(bit) |> collect())
+        input = list(bits |> skip(reader.at) |> map(bit) |> list())
     in
         items(THUNK(Term.APP(term, input), null), limit)
             |> map(t => "{bit_of(t)}")
             |> join("")
 
-run_bytes(bytes: List[int], limit: int) -> string =>
+run_bytes(bytes: int[], limit: int) -> string =>
     let
         reader = READER(bits_of(bytes)),
         term = reader.term(),
         used = (reader.at + 7) / 8,
-        rest = bytes |> skip(used) |> map(byte) |> collect()
+        rest = bytes |> skip(used) |> map(byte) |> list()
     in
         items(THUNK(Term.APP(term, list(rest)), null), limit)
             |> map(b =>
@@ -274,9 +274,9 @@ let symbolic =
     IO.File.read_all_bytes("symbolic.Blc")
         |> map(int)
         |> cat(query |> map(int))
-        |> collect()
+        |> list()
 
-let hilbert = IO.File.read_all_bytes("hilbert.Blc") |> map(int) |> collect()
+let hilbert = IO.File.read_all_bytes("hilbert.Blc") |> map(int) |> list()
 
 write_line()
 write_line("byte mode")

@@ -13,14 +13,14 @@ running_maxima(heights: int{}) -> int{} is
     od
 si
 
-depths(heights: int[]) -> List[int] => (
-    let left = heights |> running_maxima() |> collect()
-    let right = heights |> reverse() |> running_maxima() |> collect()
+depths(heights: int[]) -> int[] => (
+    let left = heights |> running_maxima() |> list()
+    let right = heights |> reverse() |> running_maxima() |> list()
     let last = heights.count - 1
 
     (0..heights.count)
         |> map(i => Math.min(left[i], right[last - i]) - heights[i])
-        |> collect()
+        |> list()
 )
 
 let series = [

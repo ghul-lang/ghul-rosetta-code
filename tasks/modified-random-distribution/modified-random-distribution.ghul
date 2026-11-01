@@ -22,10 +22,9 @@ let sample_bins =
     1::samples
         |> map(_ => modified(() => random.next_double(), modifier))
         |> map(x => int(x * double(bins)))
-        |> collect()
+        |> list()
 
-let counts =
-    0..bins |> map(bin => sample_bins |> count(* == bin)) |> collect()
+let counts = 0..bins |> map(bin => sample_bins |> count(* == bin)) |> list()
 
 let largest = counts |> max()!
 

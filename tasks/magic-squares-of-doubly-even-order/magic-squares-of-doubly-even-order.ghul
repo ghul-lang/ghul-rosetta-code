@@ -1,6 +1,6 @@
 use default
 
-magic(n: int) -> List[List[int]] =>
+magic(n: int) -> int[][] =>
     (0..n)
         |> map(row =>
             (0..n)
@@ -13,14 +13,13 @@ magic(n: int) -> List[List[int]] =>
                         let keep = r == c \/ r + c == 3 in
                         if keep then n * n - i else i + 1 fi
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
-column(square: List[List[int]], c: int) -> int{} =>
-    square |> map(row => row[c])
+column(square: int[][], c: int) -> int{} => square |> map(row => row[c])
 
-check(square: List[List[int]]) -> bool =>
+check(square: int[][]) -> bool =>
     let
         n = square.count,
         target = n * (n * n + 1) / 2

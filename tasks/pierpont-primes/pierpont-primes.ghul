@@ -29,7 +29,7 @@ pierpont(offset: bigint) -> bigint{} =>
     three_smooth() |> map(* + offset) |> filter(is_prime)
 
 report(kind: string, offset: bigint) is
-    let found = pierpont(offset) |> take(250) |> collect()
+    let found = pierpont(offset) |> take(250) |> list()
 
     write_line("first 50 Pierpont primes of the {kind} kind:")
 

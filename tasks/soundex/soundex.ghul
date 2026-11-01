@@ -14,8 +14,7 @@ code(c: char) -> char =>
 
 // H and W do not separate two letters with the same code; a vowel does.
 soundex(name: string) -> string is
-    let letters =
-        name.to_char_array() |> filter(char.is_letter) |> collect()
+    let letters = name.to_char_array() |> filter(char.is_letter) |> list()
 
     if letters.count == 0 then
         return ""

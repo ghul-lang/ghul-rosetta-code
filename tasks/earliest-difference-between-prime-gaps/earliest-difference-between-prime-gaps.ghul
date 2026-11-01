@@ -3,7 +3,7 @@ use default
 let limit = 20_000_000
 
 let composite = (
-    let sieve = repeat(false, limit) |> collect_mutable()
+    let sieve = repeat(false, limit) |> LIST()
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if !sieve[p] then

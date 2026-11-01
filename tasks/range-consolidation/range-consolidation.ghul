@@ -18,7 +18,7 @@ by_lower_bound(left: RANGE, right: RANGE) -> int =>
         0
     fi
 
-consolidate(ranges: List[RANGE]) -> List[RANGE] is
+consolidate(ranges: RANGE[]) -> RANGE[] is
     let sorted = ranges |> map(normalised) |> sort(by_lower_bound)
     let merged = LIST()
 
@@ -39,7 +39,7 @@ consolidate(ranges: List[RANGE]) -> List[RANGE] is
     return merged
 si
 
-show(ranges: List[RANGE]) -> string =>
+show(ranges: RANGE[]) -> string =>
     ranges |> map(bounds => "[{bounds.low}, {bounds.high}]") |> join()
 
 let inputs = [

@@ -14,9 +14,9 @@ class GRID is
         filled =
             (0..size * size)
                 |> map(_ => random.next_double() < p)
-                |> collect()
+                |> ARRAY()
 
-        reached = repeat(false, size * size) |> collect_mutable()
+        reached = repeat(false, size * size) |> LIST()
     si
 
     is_filled(column: int, row: int) -> bool =>
@@ -59,7 +59,7 @@ let shown mut = null
 
 for step in 0::10 do
     let p = double(step) / 10.0D
-    let grids = 0..trials |> map(_ => GRID(p)) |> memo()
+    let grids = 0..trials |> map(_ => GRID(p)) |> list()
     let through = grids |> filter(g => g.percolates()) |> count()
 
     write_line("{p:F1}    {double(through) / double(trials):F3}")

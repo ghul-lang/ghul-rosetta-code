@@ -16,7 +16,7 @@ distance(p: P, from: P, to: P) -> double =>
     else Math.abs(line × (p - from)) / line.length
     fi
 
-simplify(points: List[P], epsilon: double) -> List[P] is
+simplify(points: P[], epsilon: double) -> P[] is
     let last = points.count - 1
     let far mut = 0
     let farthest mut = 0.0D
@@ -37,7 +37,7 @@ simplify(points: List[P], epsilon: double) -> List[P] is
     let left = simplify(points[0::far], epsilon)
     let right = simplify(points[far::last], epsilon)
 
-    return left |> take(left.count - 1) |> cat(right) |> collect()
+    return left |> take(left.count - 1) |> cat(right) |> list()
 si
 
 let line = [
@@ -55,9 +55,9 @@ let image = IMAGE(400, 400)
 image.view(-0.5D, -0.5D, 9.5D, 9.5D)
 image.clear(252ub, 252ub, 250ub)
 
-draw(points: List[P], width: double, size: double) is
+draw(points: P[], width: double, size: double) is
     image.stroke(width)
-    image.line(points |> map(p => (x = p.x, y = p.y)) |> collect())
+    image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
 
     for p in points do
         image.dot(p.x, p.y, size)

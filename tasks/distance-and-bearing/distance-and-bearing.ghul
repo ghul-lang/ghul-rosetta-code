@@ -8,10 +8,8 @@ use System.Text.RegularExpressions.Regex
 let csv_field = Regex("(?<=^|,)(\"[^\"]*\"|[^,]*)")
 let earth_radius = 6371.0 / 1.852
 
-fields(line: string) -> List[string] =>
-    csv_field.matches(line)
-        |> map(found => found.value.trim('"'))
-        |> collect()
+fields(line: string) -> string[] =>
+    csv_field.matches(line) |> map(found => found.value.trim('"')) |> list()
 
 use Airport = (
     name: string,

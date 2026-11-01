@@ -5,7 +5,7 @@ toggle(doors: bool[], pass: int) -> bool[] => [
     for i in 0..100
 ]
 
-let closed = repeat(false, 100) |> collect()
+let closed = repeat(false, 100) |> list()
 let doors = 1::100 |> reduce(closed, toggle)
 
 let open_doors = 1::100 |> filter(door => doors[door - 1])

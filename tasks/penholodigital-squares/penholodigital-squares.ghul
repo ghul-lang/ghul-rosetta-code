@@ -12,12 +12,12 @@ value_of(digits: string, base: int) -> long =>
         )
 
 is_penholodigital(square: long, base: int) -> bool =>
-    let ds = square |> digits(long(base)) |> collect() in
+    let ds = square |> digits(long(base)) |> list() in
     ds.count == base - 1 /\
-    ds |> collect_set() |> count() == ds.count /\
+    ds |> SET() |> count() == ds.count /\
     ds |> all(* > 0L)
 
-roots(base: int) -> List[long] is
+roots(base: int) -> long[] is
     let smallest = value_of(symbols.substring(1, base - 1), base)
     let largest = value_of(reversed(symbols.substring(1, base - 1)), base)
     let modulus = long(base - 1)
@@ -28,7 +28,7 @@ roots(base: int) -> List[long] is
         |> take_while(n => n * n <= largest)
         |> filter(n => n * n % modulus == residue)
         |> filter(n => is_penholodigital(n * n, base))
-        |> collect()
+        |> list()
 si
 
 reversed(s: string) -> string => string(s.to_char_array() |> reverse())

@@ -21,7 +21,7 @@ timed(name: string, work: () -> int) =>
         )
 
 count_primes(limit: int) -> int is
-    let sieve = repeat(true, limit) |> collect_mutable()
+    let sieve = repeat(true, limit) |> LIST()
     let found mut = 0
 
     for candidate in 2..limit do

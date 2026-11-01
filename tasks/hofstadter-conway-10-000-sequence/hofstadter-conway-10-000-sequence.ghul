@@ -3,7 +3,7 @@ use default
 let limit = 1 << 20
 
 let a = (
-    let terms = repeat(0, limit + 1) |> collect_mutable()
+    let terms = repeat(0, limit + 1) |> LIST()
 
     terms[1] = 1
     terms[2] = 1

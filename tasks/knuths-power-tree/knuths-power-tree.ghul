@@ -9,7 +9,7 @@ let cursor mut = 0
 
 queue.add(1)
 
-path_to(target: int) -> Collections.List[int] => (
+path_to(target: int) -> int[] => (
     let steps = LIST()
     let current mut = target
 

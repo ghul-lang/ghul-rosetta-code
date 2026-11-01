@@ -20,7 +20,7 @@ pentagon() -> IMAGE => (
                 in
                     (x = x, y = 105.0D - 70.0D * sin(a))
             )
-            |> collect()
+            |> list()
     )
 
     image
@@ -32,7 +32,7 @@ let source = IMAGE.read("pentagon.png")
 let diagonal = sqrt(2.0D) * double(size) / 2.0D
 let distances = int(2.0D * diagonal) + 1
 
-let votes = repeat(0, angles * distances) |> collect_mutable()
+let votes = repeat(0, angles * distances) |> LIST()
 
 for y in 0..size do
     for x in 0..size do

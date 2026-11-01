@@ -101,21 +101,21 @@ top() -> Card => discard[discard.count - 1]
 matches(card: Card) -> bool =>
     is_wild(card) \/ card.colour =~ colour \/ card.value =~ top().value
 
-has_colour(hand: List[Card]) -> bool => hand |> any(c => c.colour =~ colour)
+has_colour(hand: Card[]) -> bool => hand |> any(c => c.colour =~ colour)
 
 next_seat(seat: int) -> int => (seat + direction + 4) % 4
 
-in_colour(hand: List[Card], wanted: string) -> int =>
+in_colour(hand: Card[], wanted: string) -> int =>
     hand |> filter(card => card.colour =~ wanted) |> count()
 
-favourite_colour(hand: List[Card]) -> string =>
+favourite_colour(hand: Card[]) -> string =>
     colours
         |> map(c => (colour = c, count = in_colour(hand, c)))
         |> sort((a, b) => b.count <> a.count)
         |> map(p => p.colour)
         |> first() ?? "red"
 
-bot_choice(hand: List[Card]) -> int? =>
+bot_choice(hand: Card[]) -> int? =>
     (0..hand.count)
         |> filter(i => matches(hand[i]) /\ !is_wild(hand[i]))
         |> cat(0..hand.count |> filter(i => hand[i].value =~ "wild"))
@@ -149,7 +149,7 @@ si
 
 use Choice = (index: int, colour: string, uno: bool)
 
-human_choice(hand: List[Card]) -> Choice? is
+human_choice(hand: Card[]) -> Choice? is
     write_line("your hand:")
 
     for row in 0..(hand.count + 3) / 4 do
@@ -202,13 +202,13 @@ human_choice(hand: List[Card]) -> Choice? is
     null
 si
 
-automatic_choice(hand: List[Card]) -> Choice is
+automatic_choice(hand: Card[]) -> Choice is
     if let index = bot_choice(hand) then
         let rest =
             (0..hand.count)
                 |> filter(i => i != index)
                 |> map(i => hand[i])
-                |> collect()
+                |> list()
 
         return (
             index = index,

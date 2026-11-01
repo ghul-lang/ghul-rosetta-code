@@ -5,7 +5,7 @@ isogram_order(word: string) -> int =>
         word
             |> group_by(c => c)
             |> map((_, occurrences) => occurrences.count)
-            |> collect_set()
+            |> SET()
     in
     if counts.count == 1 then counts |> first()! else 0 fi
 

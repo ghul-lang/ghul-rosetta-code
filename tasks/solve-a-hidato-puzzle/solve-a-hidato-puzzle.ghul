@@ -29,7 +29,7 @@ let board =
             else int.parse(cell)
             fi
         )
-        |> collect_mutable()
+        |> LIST()
 
 let given = SET(board |> filter(* > 0))
 let last = given |> reduce(0, (a, b) => System.Math.max(a, b))

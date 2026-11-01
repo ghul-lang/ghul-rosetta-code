@@ -342,7 +342,7 @@ stdin_lines() -> string{} is
 si
 
 token(line: string) -> TOKEN => (
-    let fields = line |> words() |> collect()
+    let fields = line |> words() |> list()
     let name = fields[2]
     let rest = line.substring(line.index_of(name) + name.length).trim()
     TOKEN(kinds[name], rest, fields[0], fields[1])

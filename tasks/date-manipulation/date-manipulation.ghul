@@ -12,7 +12,7 @@ let offsets = [
     ("MST", -7), ("MDT", -6),
     ("PST", -8), ("PDT", -7)
 ]
-    |> collect_map()
+    |> MAP()
 
 let format = "MMMM d yyyy h:mmtt"
 let culture = CultureInfo.invariant_culture

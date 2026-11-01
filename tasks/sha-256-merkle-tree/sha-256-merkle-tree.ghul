@@ -3,12 +3,12 @@ use System.Security.Cryptography.SHA256
 
 let block_size = 1024
 
-paired(hashes: List[ubyte[]]) -> ubyte[]{} =>
+paired(hashes: ubyte[][]) -> ubyte[]{} =>
     0..(hashes.count + 1) / 2
         |> map(index =>
             if 2 * index + 1 < hashes.count then
                 SHA256.hash_data(
-                    hashes[2 * index] ++ hashes[2 * index + 1] |> collect()
+                    hashes[2 * index] ++ hashes[2 * index + 1] |> ARRAY()
                 )
             else
                 hashes[2 * index]
@@ -23,12 +23,12 @@ merkle_root(content: ubyte[]) -> ubyte[] is
                     at = index * block_size,
                     end = System.Math.min(at + block_size, content.count)
                 in
-                    SHA256.hash_data(content[at..end] |> collect())
+                    SHA256.hash_data(content[at..end] |> ARRAY())
             )
-            |> collect()
+            |> ARRAY()
 
     while hashes.count > 1 do
-        hashes = hashes |> paired() |> collect()
+        hashes = hashes |> paired() |> ARRAY()
     od
 
     return hashes[0]

@@ -1,6 +1,6 @@
 use default
 
-let words = IO.File.read_lines("unixdict.txt") |> collect_set()
+let words = IO.File.read_lines("unixdict.txt") |> SET()
 
 neighbours(word: string) -> string{} =>
     (0..word.length)
@@ -15,14 +15,14 @@ path_back(
     previous: MAP[string, string],
     start: string,
     word: string
-) -> Collections.List[string] =>
+) -> string[] =>
     if word =~ start then
         LIST([start])
     else
-        (path_back(previous, start, previous[word]) ++ [word]) |> collect()
+        (path_back(previous, start, previous[word]) ++ [word]) |> list()
     fi
 
-ladder(start: string, goal: string) -> Collections.List[string]? is
+ladder(start: string, goal: string) -> string[]? is
     let previous = MAP()
     let queue = Collections.Queue()
 

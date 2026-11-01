@@ -8,7 +8,7 @@ honakers() -> (position: int, prime: int){} =>
 
 write_line("the first fifty Honaker primes:")
 
-let first_fifty = honakers() |> take(50) |> collect()
+let first_fifty = honakers() |> take(50) |> list()
 
 for row in 0..10 do
     let cells =

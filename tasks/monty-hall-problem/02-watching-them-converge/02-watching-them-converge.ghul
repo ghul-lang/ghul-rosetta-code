@@ -37,11 +37,11 @@ for trial in 1::rounds do
     switching.add(double(switch_wins) / double(trial))
 od
 
-curve(rates: List[double]) -> List[(x: double, y: double)] =>
+curve(rates: double[]) -> (x: double, y: double)[] =>
     rates
         |> index()
         |> map(rate => (x = log10(double(rate.index + 1)), y = rate.value))
-        |> collect()
+        |> list()
 
 let stay_colour = (red = 210ub, green = 130ub, blue = 40ub)
 let switch_colour = (red = 40ub, green = 85ub, blue = 165ub)
@@ -62,7 +62,7 @@ axes.x_ticks(
             value = double(decade),
             label = "{System.Math.pow(10.0, double(decade))}"
         ))
-        |> collect()
+        |> list()
 )
 
 axes.y_ticks([

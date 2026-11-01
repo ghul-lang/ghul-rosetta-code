@@ -47,7 +47,7 @@ same_edge(
     other: (from: Point, to: Point)
 ) -> bool => one.from =~ other.to /\ one.to =~ other.from
 
-hull(points: List[Point]) -> List[FACE] is
+hull(points: Point[]) -> FACE[] is
     let furthest =
         (from, along) =>
             points
@@ -120,8 +120,7 @@ hull(points: List[Point]) -> List[FACE] is
         fi
 
     for point in points do
-        let visible =
-            faces |> filter(face => face.outside(point)) |> collect()
+        let visible = faces |> filter(face => face.outside(point)) |> list()
 
         if visible.count == 0 then
             continue
@@ -164,7 +163,7 @@ let cloud =
             in
             (x = next(), y = next(), z = next())
         )
-        |> collect()
+        |> list()
 
 let shapes = [
     (
@@ -189,7 +188,7 @@ let shapes = [
                     (x = 0.0D, y = 0.0D, z = 0.0D),
                     (x = 0.5D, y = -0.25D, z = 0.125D)
                 ])
-                |> collect()
+                |> list()
     ),
     (name = "cloud of 60 points", points = cloud)
 ]

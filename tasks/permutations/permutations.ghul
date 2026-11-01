@@ -1,6 +1,6 @@
 use default
 
-permutations(items: List[int]) -> List[int]{} is
+permutations(items: int[]) -> int[]{} is
     if items.count == 0 then
         yield LIST()
     else
@@ -10,7 +10,7 @@ permutations(items: List[int]) -> List[int]{} is
                 rest.remove_at(index)
                 rest
                     |> permutations()
-                    |> map(tail => ([items[index]] ++ tail) |> collect())
+                    |> map(tail => ([items[index]] ++ tail) |> list())
             ))
     fi
 si

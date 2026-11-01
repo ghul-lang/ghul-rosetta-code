@@ -1,6 +1,6 @@
 use default
 
-sums_to(divisors: List[int], target: int) -> bool =>
+sums_to(divisors: int[], target: int) -> bool =>
     case (divisors, target)
     when (_, 0) then true
     when ([], _) then false
@@ -16,7 +16,7 @@ weird(n: int) -> bool => (
             |> divisors()
             |> filter(d => d != n)
             |> sort_descending()
-            |> collect()
+            |> list()
 
     proper |> sum() > n /\ !sums_to(proper, n)
 )

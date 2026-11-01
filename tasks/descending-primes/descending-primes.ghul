@@ -14,7 +14,7 @@ let found = LIST()
 
 descending(0, 9, found)
 
-let primes = found |> collect_mutable()
+let primes = found |> LIST()
 
 primes.sort()
 

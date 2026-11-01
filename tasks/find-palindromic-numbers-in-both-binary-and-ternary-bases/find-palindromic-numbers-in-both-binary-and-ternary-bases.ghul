@@ -1,6 +1,6 @@
 use default
 
-to_digits(value: long, base: long) -> List[int] => (
+to_digits(value: long, base: long) -> int[] => (
     let digits = LIST()
     let remaining mut = value
 
@@ -17,10 +17,10 @@ to_digits(value: long, base: long) -> List[int] => (
     digits
 )
 
-from_digits(digits: List[int], base: long) -> long =>
+from_digits(digits: int[], base: long) -> long =>
     digits |> reduce(0L, (value, digit) => value * base + long(digit))
 
-is_palindrome(digits: List[int]) -> bool =>
+is_palindrome(digits: int[]) -> bool =>
     0..digits.count / 2
         |> all(i => digits[i] == digits[digits.count - 1 - i])
 
@@ -43,7 +43,7 @@ ternary_palindromes() -> long{} is
             let front = to_digits(half, 3L)
             let mirrored = front |> take(length / 2) |> reverse()
 
-            yield from_digits(front ++ mirrored |> collect(), 3L)
+            yield from_digits(front ++ mirrored |> list(), 3L)
         od
     od
 si

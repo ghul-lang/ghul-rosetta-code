@@ -2,7 +2,7 @@ use default
 
 let limit = 20000
 
-let proper_divisor_sums = repeat(0, limit + 1) |> collect_mutable()
+let proper_divisor_sums = repeat(0, limit + 1) |> LIST()
 
 for divisor in 1::limit / 2 do
     let multiple mut = divisor * 2

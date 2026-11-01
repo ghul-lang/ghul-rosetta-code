@@ -14,7 +14,7 @@ write_line("{account}")
 write_line("{richer}")
 
 let names = LIST(["Ada", "Grace"])
-let readable: Collections.List[string] = names
+let readable: string[] = names
 
 write_line("through the read-only view: {readable |> join(", ")}")
 
@@ -22,7 +22,7 @@ names.add("Alan")
 
 write_line("the view sees the change: {readable |> join(", ")}")
 
-let frozen = names |> collect()
+let frozen = names |> ARRAY()
 
 names.add("Edsger")
 

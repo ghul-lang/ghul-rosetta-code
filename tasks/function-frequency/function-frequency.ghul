@@ -112,8 +112,7 @@ ghul_name(method: MethodBase) -> string is
         ).to_lower_invariant()
 si
 
-let own_types =
-    Assembly.get_executing_assembly().get_types() |> collect_set()
+let own_types = Assembly.get_executing_assembly().get_types() |> SET()
 
 declared_by_the_program(method: MethodBase) -> bool is
     let owner = method.declaring_type

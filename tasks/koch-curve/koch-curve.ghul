@@ -31,7 +31,7 @@ si
 let start = (x = 0.0D, y = 0.0D)
 let finish = (x = 1.0D, y = 0.0D)
 
-let points = koch(5, start, finish) |> collect_mutable()
+let points = koch(5, start, finish) |> LIST()
 
 points.add(finish)
 

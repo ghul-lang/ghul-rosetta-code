@@ -2,7 +2,7 @@ use default
 
 let limit = 1000000
 
-let composite = repeat(false, limit + 1) |> collect_mutable()
+let composite = repeat(false, limit + 1) |> LIST()
 
 let root mut = 2
 

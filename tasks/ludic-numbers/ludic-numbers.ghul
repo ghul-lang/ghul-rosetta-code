@@ -1,6 +1,6 @@
 use default
 
-let remaining mut = 2..25000 |> collect_mutable()
+let remaining mut = 2..25000 |> LIST()
 let ludic = LIST()
 
 while ludic.count < 2005 do

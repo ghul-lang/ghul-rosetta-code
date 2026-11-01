@@ -1,10 +1,6 @@
 use default
 
-merge(
-    letters: List[char],
-    capitals: List[char],
-    digits: List[int]
-) -> string{} =>
+merge(letters: char[], capitals: char[], digits: int[]) -> string{} =>
     if let
         [lh, ..lr] = letters,
         [ch, ..cr] = capitals,

@@ -48,7 +48,7 @@ cardinal(value: long) -> string is
         return small[0]
     fi
 
-    let parts = value |> groups() |> collect()
+    let parts = value |> groups() |> list()
 
     let named =
         parts
@@ -63,7 +63,7 @@ cardinal(value: long) -> string is
                 fi
             )
             |> reverse()
-            |> collect()
+            |> list()
 
     if named.count > 1 /\ parts[0] != 0 /\ parts[0] < 100 then
         let last = named[named.count - 1]

@@ -38,7 +38,7 @@ let drops =
             drop.y = double(height + i % 80)
             drop
         ))
-        |> collect()
+        |> ARRAY()
 
 step() is
     for drop in drops do

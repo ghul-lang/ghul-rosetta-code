@@ -102,7 +102,7 @@ letters(word: string) -> int => word |> filter(char.is_letter) |> count()
 let opening =
     "Four is the number of letters in the first word of this sentence,"
 
-let words = opening.split([' ']) |> collect_mutable()
+let words = opening.split([' ']) |> LIST()
 
 let described mut = 0
 

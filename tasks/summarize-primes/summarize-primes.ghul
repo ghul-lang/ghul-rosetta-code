@@ -17,7 +17,7 @@ let summaries =
         |> filter(is_prime)
         |> running_sums()
         |> filter(summary => is_prime(summary.sum))
-        |> collect()
+        |> list()
 
 write_line("length    last     sum")
 

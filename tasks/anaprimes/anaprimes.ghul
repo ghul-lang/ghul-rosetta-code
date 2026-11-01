@@ -1,7 +1,7 @@
 use default
 
 let sieve_limit = 10_000_000
-let composite = repeat(false, sieve_limit) |> collect_mutable()
+let composite = repeat(false, sieve_limit) |> LIST()
 
 for candidate in 2..sieve_limit do
     if !composite[candidate] /\ candidate <= sieve_limit / candidate then

@@ -74,7 +74,7 @@ median_filter(source: IMAGE) -> IMAGE is
             let middle =
                 pick =>
                     let sorted = window |> map(pick) |> sort() in
-                    (sorted |> collect())[4]
+                    (sorted |> list())[4]
 
             result.set_pixel(
                 x,

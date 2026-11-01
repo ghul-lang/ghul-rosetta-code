@@ -4,7 +4,7 @@ term(coefficient: int, index: int) -> string =>
     let size = int.abs(coefficient) in
     if size == 1 then "e({index})" else "{size}*e({index})" fi
 
-linear_combination(scalars: List[int]) -> string =>
+linear_combination(scalars: int[]) -> string =>
     let terms = scalars |> index() |> filter((_, c) => c != 0) in
     case terms
     when [] then

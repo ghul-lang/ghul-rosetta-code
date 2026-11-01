@@ -35,7 +35,7 @@ AXES(image).draw()
 image.colour(180ub, 30ub, 60ub)
 image.stroke(2.0D)
 
-image.line(outline(720) |> collect())
+image.line(outline(720) |> list())
 
 image.write("superellipse.png")
 

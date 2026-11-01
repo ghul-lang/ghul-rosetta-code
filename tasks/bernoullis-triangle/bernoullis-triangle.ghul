@@ -1,6 +1,6 @@
 use default
 
-bernoulli(rows: int) -> List[int]{} is
+bernoulli(rows: int) -> int[]{} is
     let row mut = LIST()
     row.add(1)
 

@@ -8,9 +8,9 @@ let margin = 5
 
 let random = System.Random(20260918)
 
-let visited = repeat(false, columns * rows) |> collect_mutable()
-let right_open = repeat(false, columns * rows) |> collect_mutable()
-let down_open = repeat(false, columns * rows) |> collect_mutable()
+let visited = repeat(false, columns * rows) |> LIST()
+let right_open = repeat(false, columns * rows) |> LIST()
+let down_open = repeat(false, columns * rows) |> LIST()
 
 at(column: int, row: int) -> int => row * columns + column
 
@@ -109,7 +109,7 @@ neighbours(i: int) -> int{} =>
         |> map(c => at(c.column, c.row))
         |> filter(open(i, *))
 
-shortest_path(start: int, finish: int) -> List[int] is
+shortest_path(start: int, finish: int) -> int[] is
     let previous = MAP()
     let queue = Collections.Queue()
 
@@ -147,7 +147,7 @@ centre(i: int) -> (x: double, y: double) => (
 
 image.colour(210ub, 50ub, 40ub)
 image.stroke(4.0D)
-image.line(path |> map(centre) |> collect())
+image.line(path |> map(centre) |> list())
 
 image.write("solved.png")
 

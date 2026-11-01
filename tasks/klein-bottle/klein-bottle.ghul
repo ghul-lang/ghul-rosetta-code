@@ -11,7 +11,7 @@ struct VEC(x: double, y: double, z: double) is
     length: double => sqrt(x * x + y * y + z * z)
 si
 
-use Quad = List[VEC]
+use Quad = VEC[]
 
 let around = 40
 let along = 40
@@ -88,11 +88,11 @@ quad(i: int, j: int) -> Quad => [
 
 let quads = [quad(i, j) for i in 0..around for j in 0..along]
     |> sort((p, q) => depth(p) <> depth(q))
-    |> collect()
+    |> list()
 
 let image = IMAGE(360, 360)
 
-let flat = quads |> flat_map(q => q) |> memo()
+let flat = quads |> flat_map(q => q) |> list()
 let low_x = flat |> map(p => p.x) |> reduce(0.0D, min)
 let high_x = flat |> map(p => p.x) |> reduce(0.0D, max)
 let low_y = flat |> map(p => p.y) |> reduce(0.0D, min)
@@ -112,7 +112,7 @@ image.stroke(0.6D)
 
 for q in quads do
     let light = brightness(q)
-    let outline = q |> map(p => (x = p.x, y = p.y)) |> collect()
+    let outline = q |> map(p => (x = p.x, y = p.y)) |> list()
 
     image.colour(
         ubyte(60.0D * light),
@@ -122,7 +122,7 @@ for q in quads do
     image.fill(outline)
 
     image.colour(20ub, 40ub, 60ub)
-    image.line(outline ++ [outline[0]] |> collect())
+    image.line(outline ++ [outline[0]] |> list())
 od
 
 write_line("a Klein bottle, immersed in three dimensions")

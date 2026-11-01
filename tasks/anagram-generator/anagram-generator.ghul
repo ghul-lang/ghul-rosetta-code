@@ -1,7 +1,7 @@
 use default
 
 letter_counts(text: string) -> LIST[int] => (
-    let counts = repeat(0, 26) |> collect_mutable()
+    let counts = repeat(0, 26) |> LIST()
 
     for letter in text do
         if char.is_letter(letter) then
@@ -14,10 +14,10 @@ letter_counts(text: string) -> LIST[int] => (
     counts
 )
 
-fits(word: List[int], available: List[int]) -> bool =>
+fits(word: int[], available: int[]) -> bool =>
     0..26 |> all(i => word[i] <= available[i])
 
-adjust(counts: LIST[int], by: List[int], sign: int) is
+adjust(counts: LIST[int], by: int[], sign: int) is
     for letter in 0..26 do
         counts[letter] = counts[letter] + sign * by[letter]
     od
@@ -34,7 +34,7 @@ anagrams_of(seed: string, wanted: int) -> string{} is
             |> map(word => (text = word, counts = letter_counts(word)))
             |> filter(candidate => fits(candidate.counts, remaining))
             |> sort((a, b) => b.text.length <> a.text.length)
-            |> collect()
+            |> list()
 
     let found = LIST()
     let chosen = LIST()

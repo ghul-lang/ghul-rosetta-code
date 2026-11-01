@@ -24,7 +24,7 @@ si
 let workers = 4
 let rounds = 500
 
-let flags = 0..workers |> map(i => FLAG()) |> collect()
+let flags = 0..workers |> map(i => FLAG()) |> list()
 
 let counter = LIST([0])
 let occupancy = LIST([0, 0])
@@ -90,7 +90,7 @@ si
 let threads =
     0..workers
         |> map(i => Thread(System.Threading.ThreadStart(() => work(i))))
-        |> collect()
+        |> list()
 
 threads |> each(thread => thread.start())
 threads |> each(thread => thread.join())

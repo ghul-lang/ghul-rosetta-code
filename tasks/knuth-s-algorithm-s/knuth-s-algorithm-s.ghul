@@ -20,7 +20,7 @@ si
 
 let source = System.Random(20260909)
 
-let counts = repeat(0, 10) |> collect_mutable()
+let counts = repeat(0, 10) |> LIST()
 
 for _ in 0..100000 do
     let s_of_n = s_of_n_creator(3, source)

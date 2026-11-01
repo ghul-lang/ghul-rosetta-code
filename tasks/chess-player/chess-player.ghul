@@ -296,13 +296,13 @@ in_check(position: POSITION, white: bool) -> bool =>
     let king = if white then 'K' else 'k' fi in
     attacked(position, position.squares |> find_index(* == king)!, !white)
 
-legal_moves(position: POSITION) -> List[Move] =>
+legal_moves(position: POSITION) -> Move[] =>
     position
         |> pseudo_moves()
         |> filter(m =>
             !in_check(played(position, m), position.white_to_move)
         )
-        |> collect()
+        |> list()
 
 value(piece: char) -> int =>
     case char.to_lower(piece)
@@ -380,7 +380,7 @@ choose(position: POSITION) -> Move =>
                 (move = m, score = -search(after, 2, -mate * 2, mate * 2))
             )
             |> sort((a, b) => b.score <> a.score)
-            |> collect()
+            |> list()
     in
     ranked[0].move
 
@@ -394,7 +394,7 @@ notation(move: Move) -> string =>
     in
     "{name(move.from)}{name(move.to)}{promotion}"
 
-let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> collect_map()
+let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> MAP()
 
 show(position: POSITION) is
     for row in 0..8 do

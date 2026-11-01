@@ -37,7 +37,7 @@ quarter_arc(image: IMAGE, from: Point, to: Point) is
                     y = centre.y + radius * sin(a)
                 )
             )
-            |> collect()
+            |> list()
     )
 si
 

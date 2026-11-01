@@ -13,7 +13,7 @@ let words =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(w => w.length >= 3 /\ w.length <= size)
         |> filter(w => w |> all(c => c >= 'a' /\ c <= 'z'))
-        |> collect()
+        |> list()
 
 let random = System.Random(42)
 
@@ -24,7 +24,7 @@ class GRID is
     placed: LIST[Placed]
 
     init() is
-        cells = repeat(' ', size * size) |> collect_mutable()
+        cells = repeat(' ', size * size) |> LIST()
         placed = LIST()
     si
 
@@ -125,7 +125,7 @@ let solutions =
     grid.placed
         |> sort((a, b) => a.word <> b.word)
         |> map(p => "{p.word,-10} {ends(p),-12}")
-        |> collect()
+        |> list()
 
 for row in 0..(solutions.count + 1) / 2 do
     let pair = solutions |> skip(row * 2) |> take(2) |> join("   ")

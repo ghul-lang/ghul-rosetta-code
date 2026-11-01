@@ -6,7 +6,7 @@ use Step = (x: int, y: int)
 
 let signs = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 
-steps_of_length(squared: int) -> List[Step] =>
+steps_of_length(squared: int) -> Step[] =>
     from(0)
         |> take_while(a => 2 * a * a <= squared)
         |> map(a => (a, int(round(sqrt(double(squared - a * a))))))
@@ -16,7 +16,7 @@ steps_of_length(squared: int) -> List[Step] =>
             for (x, y) in [(a, b), (b, a)]
             for (sx, sy) in signs
         ])
-        |> collect()
+        |> list()
 
 bend(from: Step, to: Step) -> double =>
     let turn =
@@ -75,8 +75,8 @@ od
 
 let many = spiral(10000)
 
-let xs = many |> map(p => double(p.x)) |> memo()
-let ys = many |> map(p => double(p.y)) |> memo()
+let xs = many |> map(p => double(p.x)) |> list()
+let ys = many |> map(p => double(p.y)) |> list()
 
 let low_x = xs |> reduce(0.0D, min)
 let high_x = xs |> reduce(0.0D, max)
@@ -98,9 +98,7 @@ image.view(
 image.clear(252ub, 250ub, 245ub)
 image.colour(30ub, 60ub, 140ub)
 image.stroke(1.0D)
-image.line(
-    many |> map(p => (x = double(p.x), y = double(p.y))) |> collect()
-)
+image.line(many |> map(p => (x = double(p.x), y = double(p.y))) |> list())
 
 image.write("spiral.png")
 

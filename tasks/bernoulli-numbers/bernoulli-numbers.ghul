@@ -19,8 +19,7 @@ fraction(numerator: bigint, denominator: bigint) -> FRACTION =>
     fraction(bigint(k) * a.numerator, a.denominator)
 
 bernoulli(n: int) -> FRACTION is
-    let a =
-        0::n |> map(m => fraction(1n, bigint(m + 1))) |> collect_mutable()
+    let a = 0::n |> map(m => fraction(1n, bigint(m + 1))) |> LIST()
 
     for m in 1::n do
         for j in 1::m |> reverse() do

@@ -3,7 +3,7 @@ use default
 let bases = ['A', 'C', 'G', 'T']
 let random = System.Random(1969)
 
-show(label: string, sequence: List[char]) is
+show(label: string, sequence: char[]) is
     write_line(label)
 
     for (row, line) in sequence |> chunk(50) |> index() do
@@ -41,8 +41,7 @@ mutate(sequence: LIST[char]) -> string is
     esac
 si
 
-let sequence =
-    0..200 |> map(_ => bases[random.next(0, 4)]) |> collect_mutable()
+let sequence = 0..200 |> map(_ => bases[random.next(0, 4)]) |> LIST()
 
 show("original sequence:", sequence)
 

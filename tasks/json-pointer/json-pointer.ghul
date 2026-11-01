@@ -4,8 +4,8 @@ use MEMBER = (key: string, value: Json)
 
 union Json is
     TEXT(value: string)
-    ARRAY(items: List[Json])
-    OBJECT(members: List[MEMBER])
+    ARRAY(items: Json[])
+    OBJECT(members: MEMBER[])
 si
 
 union Resolved is

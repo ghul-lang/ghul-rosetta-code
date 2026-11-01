@@ -9,7 +9,7 @@ use Filter = (string{}) -> string{}
 <<(next: Filter, text: string) -> Stream => next(pipe(text.split(['\n'])))
 
 ▶(source: Stream, path: string) -> int is
-    let lines = source |> collect()
+    let lines = source |> list()
 
     IO.File.write_all_lines(path, lines)
 
@@ -17,7 +17,7 @@ use Filter = (string{}) -> string{}
 si
 
 ▶▶(source: Stream, path: string) -> int is
-    let lines = source |> collect()
+    let lines = source |> list()
 
     IO.File.append_all_lines(path, lines)
 
@@ -90,7 +90,7 @@ si
 sorted() -> Filter => source => in_order(source)
 
 in_order(source: Stream) -> Stream => (
-    let lines = source |> collect_mutable()
+    let lines = source |> LIST()
 
     lines.sort((a: string, b: string) -> int => string.compare(a, b))
 

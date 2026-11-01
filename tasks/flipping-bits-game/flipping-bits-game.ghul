@@ -6,8 +6,7 @@ let size = 3
 
 let source = System.Random(20260909)
 
-fresh() -> LIST[int] =>
-    0..size * size |> map(_ => source.next(2)) |> collect_mutable()
+fresh() -> LIST[int] => 0..size * size |> map(_ => source.next(2)) |> LIST()
 
 flip_row(board: LIST[int], row: int) is
     for column in 0..size do
@@ -21,10 +20,10 @@ flip_column(board: LIST[int], column: int) is
     od
 si
 
-same(left: List[int], right: List[int]) -> bool =>
+same(left: int[], right: int[]) -> bool =>
     0..size * size |> all(cell => left[cell] == right[cell])
 
-show(caption: string, board: List[int]) is
+show(caption: string, board: int[]) is
     write_line(caption)
 
     let letters = 0..size |> map(c => "{char(int('a') + c)}")

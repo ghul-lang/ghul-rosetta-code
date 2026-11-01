@@ -12,7 +12,7 @@ marks(answer: string, guess: string) -> Mark{} =>
         positions
             |> filter(i => guess[i] != answer[i])
             |> map(i => answer[i])
-            |> collect_mutable()
+            |> LIST()
     in
     positions
         |> map(i =>

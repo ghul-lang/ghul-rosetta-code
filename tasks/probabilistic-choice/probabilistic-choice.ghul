@@ -13,7 +13,7 @@ let items = [
 
 let random = System.Random(42)
 let trials = 1_000_000
-let counts = repeat(0, items.count) |> collect_mutable()
+let counts = repeat(0, items.count) |> LIST()
 
 pick(roll: double) -> int is
     let remaining mut = roll

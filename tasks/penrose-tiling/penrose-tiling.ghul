@@ -49,10 +49,10 @@ spoke(index: int) -> Half => (
     fi
 )
 
-let tiles mut = 0..10 |> map(spoke) |> collect()
+let tiles mut = 0..10 |> map(spoke) |> list()
 
 for _ in 0..6 do
-    tiles = tiles |> flat_map(split) |> collect()
+    tiles = tiles |> flat_map(split) |> list()
 od
 
 let image = IMAGE(660, 440)

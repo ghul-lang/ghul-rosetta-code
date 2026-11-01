@@ -1,6 +1,6 @@
 use default
 
-runs(values: List[int]) -> List[int]{} is
+runs(values: int[]) -> int[]{} is
     let groups = LIST()
     let current = LIST()
 
@@ -23,7 +23,7 @@ runs(values: List[int]) -> List[int]{} is
     groups
 si
 
-format_run(run: List[int]) -> string =>
+format_run(run: int[]) -> string =>
     if run.count >= 3 then
         "{run[0]}-{run[run.count - 1]}"
     else

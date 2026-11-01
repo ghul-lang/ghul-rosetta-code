@@ -3,7 +3,7 @@ use Raster.IMAGE
 use Raster.SHAPES
 
 use Cell = (row: int, column: int)
-use Shape = List[Cell]
+use Shape = Cell[]
 
 at(row: int, column: int) -> Cell => (row = row, column = column)
 
@@ -24,7 +24,7 @@ width(shape: Shape) -> int =>
 
 normalised(cells: Cell{}) -> Shape =>
     let
-        list = cells |> collect(),
+        list = cells |> ARRAY(),
         top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
     in
         let left =
@@ -33,7 +33,7 @@ normalised(cells: Cell{}) -> Shape =>
         list
             |> map(c => at(c.row - top, c.column - left))
             |> sort(reading_order)
-            |> collect()
+            |> ARRAY()
 
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
@@ -51,7 +51,7 @@ canonical(shape: Shape) -> Shape => (
     (forms |> min_by(key))!
 )
 
-grow(shapes: List[Shape]) -> List[Shape] is
+grow(shapes: Shape[]) -> Shape[] is
     let seen = MAP()
 
     for shape in shapes do
@@ -60,7 +60,7 @@ grow(shapes: List[Shape]) -> List[Shape] is
                 let next = at(cell.row + dr, cell.column + dc)
 
                 if !has(shape, next) then
-                    let cells = shape ++ [next] |> collect()
+                    let cells = shape ++ [next] |> ARRAY()
                     let bigger = canonical(cells)
 
                     seen[key(bigger)] = bigger
@@ -69,7 +69,7 @@ grow(shapes: List[Shape]) -> List[Shape] is
         od
     od
 
-    seen.values |> sort_by(key) |> collect()
+    seen.values |> sort_by(key) |> ARRAY()
 si
 
 row_of(shape: Shape, row: int) -> string =>
@@ -78,13 +78,13 @@ row_of(shape: Shape, row: int) -> string =>
         |> map(filled => if filled then "#" else " " fi)
         |> join("")
 
-art(shapes: List[Shape]) -> string{} =>
+art(shapes: Shape[]) -> string{} =>
     let tallest = shapes |> map(height) |> reduce(0, int.max) in
     (0..tallest)
         |> map(row => shapes |> map(row_of(*, row)) |> join("  "))
         |> map(line => line.trim_end())
 
-let levels = LIST[List[Shape]]([[[at(0, 0)]]])
+let levels = LIST[Shape[]]([[[at(0, 0)]]])
 
 while levels.count < 10 do
     levels.add(grow(levels[levels.count - 1]))

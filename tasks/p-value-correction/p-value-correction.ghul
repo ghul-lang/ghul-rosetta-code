@@ -15,16 +15,15 @@ let p_values = [
 
 let n = p_values.count
 
-let ascending =
-    0..n |> sort((a, b) => p_values[a] <> p_values[b]) |> collect()
-let descending = ascending |> reverse() |> collect()
+let ascending = 0..n |> sort((a, b) => p_values[a] <> p_values[b]) |> list()
+let descending = ascending |> reverse() |> list()
 
 running(
-    order: List[int],
+    order: int[],
     factor: (int) -> double,
     keep_lower: bool
-) -> List[double] is
-    let adjusted = repeat(0.0, n) |> collect_mutable()
+) -> double[] is
+    let adjusted = repeat(0.0, n) |> LIST()
     let bound mut = if keep_lower then 1.0 else 0.0 fi
 
     for rank in 0..n do
@@ -43,33 +42,32 @@ si
 
 let harmonic = 1::n |> sum_by(i => 1.0 / double(i))
 
-benjamini_hochberg() -> List[double] =>
+benjamini_hochberg() -> double[] =>
     running(descending, rank => double(n) / double(n - rank), true)
 
-benjamini_yekutieli() -> List[double] =>
+benjamini_yekutieli() -> double[] =>
     running(
         descending,
         rank => harmonic * double(n) / double(n - rank),
         true
     )
 
-bonferroni() -> List[double] =>
-    p_values |> map(p => System.Math.min(1.0, double(n) * p)) |> collect()
+bonferroni() -> double[] =>
+    p_values |> map(p => System.Math.min(1.0, double(n) * p)) |> list()
 
-hochberg() -> List[double] =>
+hochberg() -> double[] =>
     running(descending, rank => double(rank + 1), true)
 
-holm() -> List[double] =>
-    running(ascending, rank => double(n - rank), false)
+holm() -> double[] => running(ascending, rank => double(n - rank), false)
 
-hommel() -> List[double] is
-    let sorted = ascending |> map(i => p_values[i]) |> collect()
+hommel() -> double[] is
+    let sorted = ascending |> map(i => p_values[i]) |> list()
     let smallest =
         0..n
             |> map(i => double(n) * sorted[i] / double(i + 1))
             |> min() ?? 1.0
-    let q = repeat(smallest, n) |> collect_mutable()
-    let floor = repeat(smallest, n) |> collect_mutable()
+    let q = repeat(smallest, n) |> LIST()
+    let floor = repeat(smallest, n) |> LIST()
 
     for m in (2::n - 1) |> reverse() do
         let tail = n - m + 1
@@ -91,7 +89,7 @@ hommel() -> List[double] is
         od
     od
 
-    let adjusted = repeat(0.0, n) |> collect_mutable()
+    let adjusted = repeat(0.0, n) |> LIST()
 
     for rank in 0..n do
         adjusted[ascending[rank]] = System.Math.max(
@@ -103,7 +101,7 @@ hommel() -> List[double] is
     adjusted
 si
 
-show(name: string, adjusted: List[double]) is
+show(name: string, adjusted: double[]) is
     write_line(name)
 
     for row in 0..n / 5 do

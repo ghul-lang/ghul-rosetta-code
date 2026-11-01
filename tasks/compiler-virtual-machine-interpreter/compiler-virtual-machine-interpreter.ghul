@@ -31,15 +31,15 @@ si
 
 class MACHINE is
     _code: ARRAY[ubyte]
-    _strings: List[string]
+    _strings: string[]
     _data: LIST[int]
     _stack: LIST[int]
     _pc: int
 
-    init(code: ARRAY[ubyte], strings: List[string], data_size: int) is
+    init(code: ARRAY[ubyte], strings: string[], data_size: int) is
         _code = code
         _strings = strings
-        _data = repeat(0, data_size) |> collect_mutable()
+        _data = repeat(0, data_size) |> LIST()
         _stack = LIST()
     si
 
@@ -134,7 +134,7 @@ let strings = lines |> skip(1) |> take(string_count) |> map(unquote)
 let code = LIST()
 
 for line in lines |> skip(1 + string_count) do
-    let parts = line |> words() |> collect()
+    let parts = line |> words() |> list()
 
     assert int.parse(parts[0]) == code.count
         else "address {parts[0]} out of step"
@@ -150,4 +150,4 @@ for line in lines |> skip(1 + string_count) do
     fi
 od
 
-MACHINE(code.to_array(), strings |> collect(), data_size).run()
+MACHINE(code.to_array(), strings |> list(), data_size).run()

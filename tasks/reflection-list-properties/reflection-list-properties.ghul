@@ -17,7 +17,7 @@ let flags = BindingFlags.INSTANCE | BindingFlags.PUBLIC
 let properties =
     book.get_type().get_properties(flags)
         |> filter(p => p.declaring_type == book.get_type())
-        |> collect_mutable()
+        |> LIST()
 
 properties.sort((left, right) => string.compare(left.name, right.name))
 

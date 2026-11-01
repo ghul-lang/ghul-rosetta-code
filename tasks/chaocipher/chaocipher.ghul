@@ -28,8 +28,8 @@ advance(left: LIST[char], right: LIST[char], index: int) is
 si
 
 chao(text: string, encrypting: bool) -> string is
-    let left = "HXUCZVAMDSLKPEFJRIGTWOBNYQ" |> collect_mutable()
-    let right = "PTLNBQDEOYSFAVZKGJRIHWXUMC" |> collect_mutable()
+    let left = "HXUCZVAMDSLKPEFJRIGTWOBNYQ" |> LIST()
+    let right = "PTLNBQDEOYSFAVZKGJRIHWXUMC" |> LIST()
     let out = LIST()
 
     for letter in text do

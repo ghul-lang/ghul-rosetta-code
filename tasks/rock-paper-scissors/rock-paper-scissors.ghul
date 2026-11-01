@@ -36,8 +36,7 @@ counters(move: Move) -> Move =>
     esac
 
 let random = Random(7)
-let counts = [("rock", 1), ("paper", 1), ("scissors", 1)]
-    |> collect_mutable_map()
+let counts = [("rock", 1), ("paper", 1), ("scissors", 1)] |> MAP()
 
 let computer_wins mut = 0
 let player_wins mut = 0

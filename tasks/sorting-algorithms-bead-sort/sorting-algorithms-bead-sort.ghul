@@ -1,6 +1,6 @@
 use default
 
-bead_sort(values: List[int]) -> int{} =>
+bead_sort(values: int[]) -> int{} =>
     let tallest =
         values
             |> reduce(0, (most, value) =>

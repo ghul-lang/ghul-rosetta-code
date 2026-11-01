@@ -2,7 +2,7 @@ use default
 
 class RULE(pattern: string, replacement: string, stops: bool)
 
-load(file: string) -> List[RULE] =>
+load(file: string) -> RULE[] =>
     IO.File.read_all_lines(file)
         |> filter(line => !line.starts_with("#") /\ line.contains(" -> "))
         |> map(line =>
@@ -21,9 +21,9 @@ load(file: string) -> List[RULE] =>
                     stops
                 )
         )
-        |> collect()
+        |> list()
 
-run(rules: List[RULE], input: string) -> string is
+run(rules: RULE[], input: string) -> string is
     let text mut = input
 
     do

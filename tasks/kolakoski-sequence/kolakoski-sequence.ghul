@@ -1,6 +1,6 @@
 use default
 
-kolakoski(values: int[], length: int) -> List[int] is
+kolakoski(values: int[], length: int) -> int[] is
     let cycled = () is
         do
             yield in values
@@ -27,10 +27,10 @@ kolakoski(values: int[], length: int) -> List[int] is
     return sequence[0..length]
 si
 
-run_lengths(sequence: List[int]) -> List[int] =>
-    sequence |> group() |> map(run => run.count) |> collect()
+run_lengths(sequence: int[]) -> int[] =>
+    sequence |> group() |> map(run => run.count) |> list()
 
-self_describing(sequence: List[int]) -> bool => (
+self_describing(sequence: int[]) -> bool => (
     let runs = run_lengths(sequence)
     0..runs.count - 1 |> all(i => runs[i] == sequence[i])
 )

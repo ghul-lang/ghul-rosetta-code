@@ -33,11 +33,11 @@ let order = MAP[Square, int]()
 
 free(s: Square) -> bool => open.contains(s) /\ !order.contains_key(s)
 
-moves(s: Square) -> List[Square] =>
+moves(s: Square) -> Square[] =>
     hops
         |> map((dr, dc) => (row = s.row + dr, column = s.column + dc))
         |> filter(free)
-        |> collect()
+        |> list()
 
 hop(s: Square, step: int) -> bool is
     order[s] = step
@@ -104,7 +104,7 @@ let path =
             x = cell * (double(s.column) + 0.5D),
             y = cell * (double(s.row) + 0.5D)
         ))
-        |> collect()
+        |> list()
 
 image.colour(30ub, 60ub, 140ub)
 image.stroke(2.0D)

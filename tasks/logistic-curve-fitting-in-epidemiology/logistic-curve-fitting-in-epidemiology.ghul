@@ -75,7 +75,7 @@ image.line(
     (0::cases.count * 4)
         |> map(q => double(q) / 4.0D)
         |> map(t => (x = t, y = log10(model(r, t))))
-        |> collect()
+        |> list()
 )
 
 image.colour(40ub, 80ub, 170ub)

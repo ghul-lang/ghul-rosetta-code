@@ -1,13 +1,13 @@
 use default
 
-without(blocks: List[string], at: int) -> List[string] =>
+without(blocks: string[], at: int) -> string[] =>
     blocks
         |> index()
         |> filter(block => block.index != at)
         |> map(block => block.value)
-        |> collect()
+        |> list()
 
-can_spell(word: string, blocks: List[string]) -> bool =>
+can_spell(word: string, blocks: string[]) -> bool =>
     word.length == 0 \/
     (
         blocks

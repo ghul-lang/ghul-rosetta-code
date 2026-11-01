@@ -8,7 +8,7 @@ class SANDPILE is
 
     init(size: int, cells: int{}) is
         self.size = size
-        self.cells = cells |> collect_mutable()
+        self.cells = cells |> LIST()
         topple()
     si
 
@@ -45,16 +45,16 @@ class SANDPILE is
         od
     si
 
-    rows: List[string] =>
+    rows: string[] =>
         (0..size)
             |> map(r => cells |> skip(r * size) |> take(size) |> join(" "))
-            |> collect()
+            |> list()
 si
 
 +(a: SANDPILE, b: SANDPILE) -> SANDPILE =>
     SANDPILE(a.size, a.cells |> zip(b.cells) |> map(p => p.`0 + p.`1))
 
-side_by_side(label: string, piles: List[SANDPILE], signs: string[]) is
+side_by_side(label: string, piles: SANDPILE[], signs: string[]) is
     write_line(label)
 
     for r in 0..piles[0].size do

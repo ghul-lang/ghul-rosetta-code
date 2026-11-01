@@ -30,9 +30,9 @@ si
 let factorisations =
     numbers
         |> map(number => TASK.run(() => factors(number)))
-        |> collect()
+        |> list()
         |> map(running => running.result)
-        |> collect()
+        |> list()
 
 let best =
     (factorisations |> index() |> max_by(entry => entry.value[0]))!.index

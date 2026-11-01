@@ -38,11 +38,7 @@ extend(kept: LIST[Point], at: Point) is
     fi
 si
 
-clip(
-    polygon: Collections.List[Point],
-    from: Point,
-    to: Point
-) -> LIST[Point] is
+clip(polygon: Point[], from: Point, to: Point) -> LIST[Point] is
     let kept = LIST()
 
     for index in 0..polygon.count do
@@ -88,8 +84,7 @@ let image = IMAGE(520, 520)
 
 image.view(20.0D, 20.0D, 380.0D, 380.0D)
 
-closed(polygon: Collections.List[Point]) -> List[Point] =>
-    polygon ++ [polygon[0]] |> collect()
+closed(polygon: Point[]) -> Point[] => polygon ++ [polygon[0]] |> list()
 
 image.colour(210ub, 232ub, 214ub)
 image.fill(clipped)

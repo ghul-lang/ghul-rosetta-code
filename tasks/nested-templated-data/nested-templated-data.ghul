@@ -2,19 +2,19 @@ use default
 
 union Template is
     INDEX(position: int)
-    GROUP(items: List[Template])
+    GROUP(items: Template[])
 si
 
 union Filled is
     PAYLOAD(text: string)
-    GROUP(items: List[Filled])
+    GROUP(items: Filled[])
 si
 
 at(position: int) -> Template => Template.INDEX(position)
 
-group(items: List[Template]) -> Template => Template.GROUP(items)
+group(items: Template[]) -> Template => Template.GROUP(items)
 
-fill(template: Template, payloads: List[string]) -> Filled =>
+fill(template: Template, payloads: string[]) -> Filled =>
     case template
     when leaf: Template.INDEX then
         if leaf.position < payloads.count then
@@ -23,7 +23,7 @@ fill(template: Template, payloads: List[string]) -> Filled =>
             Filled.PAYLOAD("<no payload for {leaf.position}>")
         fi
     when nested: Template.GROUP then
-        Filled.GROUP(nested.items |> map(fill(*, payloads)) |> collect())
+        Filled.GROUP(nested.items |> map(fill(*, payloads)) |> list())
     esac
 
 render(filled: Filled) -> string =>
@@ -52,12 +52,12 @@ let template = group([
     ])
 ])
 
-let payloads = 0::6 |> map(index => "Payload#{index}") |> collect()
+let payloads = 0::6 |> map(index => "Payload#{index}") |> list()
 
 write_line("filled template:")
 write_line("  {render(fill(template, payloads))}")
 
-let used = template |> positions() |> collect_set()
+let used = template |> positions() |> SET()
 
 let unused =
     (0..payloads.count)

@@ -32,7 +32,7 @@ merge_two[T: Comparable[T]](left: T{}, right: T{}) -> T{} is
     od
 si
 
-merge_all[T: Comparable[T]](streams: List[T{}]) -> T{} =>
+merge_all[T: Comparable[T]](streams: T{}[]) -> T{} =>
     case streams.count
     when 0 then LIST()
     when 1 then streams[0]

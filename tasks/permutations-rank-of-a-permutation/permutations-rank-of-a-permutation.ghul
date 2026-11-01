@@ -1,8 +1,8 @@
 use default
 
 // Lexicographic order, read as a number in the factorial base.
-unrank(rank: bigint, n: int) -> List[int] => (
-    let left = 0..n |> collect_mutable()
+unrank(rank: bigint, n: int) -> int[] => (
+    let left = 0..n |> LIST()
     let result = LIST()
     let rest mut = rank
 
@@ -18,7 +18,7 @@ unrank(rank: bigint, n: int) -> List[int] => (
     result
 )
 
-rank(permutation: List[int]) -> bigint => (
+rank(permutation: int[]) -> bigint => (
     let n = permutation.count
     let total mut = 0n
 
@@ -42,7 +42,7 @@ random_below(limit: bigint) -> bigint =>
             total * 1_000_000_000n + limb
         ) % limit
 
-show(permutation: List[int]) -> string => "({permutation |> join(", ")})"
+show(permutation: int[]) -> string => "({permutation |> join(", ")})"
 
 for r in 0..6 do
     let permutation = unrank(bigint(r), 3)

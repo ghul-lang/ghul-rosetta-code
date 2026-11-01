@@ -2,14 +2,13 @@ use default
 
 let text = "the quick 🦊 brown fox"
 
-let points = text |> runes() |> map(point => "{point}") |> collect()
+let points = text |> runes() |> map(point => "{point}") |> list()
 
 slice(from: int, length: int) -> string =>
     points[from..from + length] |> join("")
 
 starts_at(wanted: string) -> int =>
-    let target = wanted |> runes() |> map(point => "{point}") |> collect()
-    in
+    let target = wanted |> runes() |> map(point => "{point}") |> list() in
     0..points.count - target.count + 1
         |> find(at => slice(at, target.count) =~ wanted) ?? -1
 

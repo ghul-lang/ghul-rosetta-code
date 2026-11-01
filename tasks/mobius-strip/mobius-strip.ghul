@@ -13,7 +13,7 @@ struct VEC(x: double, y: double, z: double) is
     length: double => sqrt(self ⋅ self)
 si
 
-use Quad = List[VEC]
+use Quad = VEC[]
 
 let around = 90
 let across = 8
@@ -64,7 +64,7 @@ quad(i: int, j: int) -> (at: int, corners: Quad) => (
 
 let quads = [quad(i, j) for i in 0..around for j in 0..across]
     |> sort((p, q) => depth(p.corners) <> depth(q.corners))
-    |> collect()
+    |> list()
 
 let start = normal(0.0D)
 let finish = normal(2.0D * pi)
@@ -86,7 +86,7 @@ image.stroke(0.6D)
 for q in quads do
     let light = brightness(q.corners)
     let tone = 0.5D + 0.5D * cos(angle(q.at))
-    let outline = q.corners |> map(p => (x = p.x, y = p.y)) |> collect()
+    let outline = q.corners |> map(p => (x = p.x, y = p.y)) |> list()
 
     image.colour(
         ubyte(light * (230.0D - 170.0D * tone)),
@@ -96,7 +96,7 @@ for q in quads do
     image.fill(outline)
 
     image.colour(30ub, 30ub, 40ub)
-    image.line(outline ++ [outline[0]] |> collect())
+    image.line(outline ++ [outline[0]] |> list())
 od
 
 image.write("mobius.png")

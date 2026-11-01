@@ -20,8 +20,7 @@ let my_books = LIST()
 let you_hold = LIST()
 let you_lack = LIST()
 
-held(hand: List[int], rank: int) -> int =>
-    hand |> filter(* == rank) |> count()
+held(hand: int[], rank: int) -> int => hand |> filter(* == rank) |> count()
 
 name_of(rank: int) -> string => ranks[rank]
 
@@ -32,7 +31,7 @@ cards(count: int, rank: int) -> string =>
         "{count} {name_of(rank)}s"
     fi
 
-sorted_hand(hand: List[int]) -> string =>
+sorted_hand(hand: int[]) -> string =>
     hand |> sort() |> map(name_of) |> join(" ")
 
 draw() -> int? =>
@@ -83,10 +82,9 @@ si
 my_choice() -> int => (
     let mine = (0..ranks.count) |> filter(rank => held(me, rank) > 0)
 
-    let known = mine |> filter(you_hold.contains) |> collect()
+    let known = mine |> filter(you_hold.contains) |> list()
 
-    let untried =
-        mine |> filter(rank => !you_lack.contains(rank)) |> collect()
+    let untried = mine |> filter(rank => !you_lack.contains(rank)) |> list()
 
     let pool =
         if known.count > 0 then known

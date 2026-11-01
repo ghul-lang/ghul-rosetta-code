@@ -6,7 +6,7 @@ class REVOLVER is
     _chambers: LIST[bool]
 
     init() is
-        _chambers = repeat(false, 6) |> collect_mutable()
+        _chambers = repeat(false, 6) |> LIST()
     si
 
     _rotate() is

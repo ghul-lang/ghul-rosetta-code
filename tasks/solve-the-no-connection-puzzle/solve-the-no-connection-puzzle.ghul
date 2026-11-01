@@ -10,11 +10,11 @@ let connections = [
     (from = 5, to = 7)
 ]
 
-peaceful(pegs: List[int]) -> bool =>
+peaceful(pegs: int[]) -> bool =>
     connections
         |> all(line => Math.abs(pegs[line.from] - pegs[line.to]) > 1)
 
-draw(pegs: List[int]) is
+draw(pegs: int[]) is
     write_line("      {pegs[0]}   {pegs[1]}")
     write_line("     /|\\ /|\\")
     write_line("    / | X | \\")

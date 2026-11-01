@@ -51,7 +51,7 @@ in_gregorian(date: DateTime) -> string =>
 feasts(
     easter: DateTime,
     shown: DateTime -> string,
-    days: List[(string, int)]
+    days: (string, int)[]
 ) -> string =>
     days
         |> map((name, offset) =>

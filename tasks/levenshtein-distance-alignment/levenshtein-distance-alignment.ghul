@@ -18,9 +18,9 @@ align(a: string, b: string) -> (
                             0
                         fi
                     )
-                    |> collect_mutable()
+                    |> LIST()
             )
-            |> collect()
+            |> list()
 
     for i in 1::a.length do
         for j in 1::b.length do

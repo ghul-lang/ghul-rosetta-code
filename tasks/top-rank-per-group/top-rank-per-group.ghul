@@ -2,7 +2,7 @@ use default
 
 use Employee = (name: string, id: string, salary: int, department: string)
 
-let staff: List[Employee] = [
+let staff: Employee[] = [
     ("Tyler Bennett", "E10297", 32000, "D101"),
     ("John Rappl", "E21437", 47000, "D050"),
     ("George Woltman", "E00127", 53500, "D101"),
@@ -19,17 +19,14 @@ let staff: List[Employee] = [
 ]
 
 top_earners(department: string, wanted: int) -> Employee{} => (
-    let earners =
-        staff
-            |> filter(e => e.department =~ department)
-            |> collect_mutable()
+    let earners = staff |> filter(e => e.department =~ department) |> LIST()
 
     earners.sort((a, b) => b.salary <> a.salary)
 
     earners |> take(wanted)
 )
 
-let departments = staff |> map(e => e.department) |> collect_mutable()
+let departments = staff |> map(e => e.department) |> LIST()
 
 departments.sort()
 

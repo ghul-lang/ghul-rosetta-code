@@ -2,13 +2,13 @@ use default
 
 let elements = [1, 2, 3, 4]
 
-selected(mask: int) -> List[int] =>
+selected(mask: int) -> int[] =>
     (0..elements.count)
         |> filter(index => (mask & (1 << index)) != 0)
         |> map(index => elements[index])
-        |> collect()
+        |> list()
 
-continuous(chosen: List[int]) -> bool =>
+continuous(chosen: int[]) -> bool =>
     chosen[chosen.count - 1] - chosen[0] + 1 == chosen.count
 
 (1..(1 << elements.count))

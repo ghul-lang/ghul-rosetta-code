@@ -22,7 +22,7 @@ mobius(n: int) -> int is
     if remaining > 1 then -sign else sign fi
 si
 
-cyclotomic(n: int) -> List[long] is
+cyclotomic(n: int) -> long[] is
     let factors = [
         (power = d, exponent = mobius(n / d))
         for d in 1::n
@@ -31,7 +31,7 @@ cyclotomic(n: int) -> List[long] is
         |> filter(f => f.exponent != 0)
 
     let degree = factors |> sum_by(f => f.power * f.exponent)
-    let series = repeat(0L, degree + 1) |> collect_mutable()
+    let series = repeat(0L, degree + 1) |> LIST()
     series[0] = 1L
 
     for (power, exponent) in factors do
@@ -48,7 +48,7 @@ cyclotomic(n: int) -> List[long] is
     od
 
     if n == 1 then
-        series |> map(- *) |> collect()
+        series |> map(- *) |> list()
     else
         series
     fi
@@ -77,7 +77,7 @@ sign(leading: bool, coefficient: long) -> string =>
     when (false, false) then " + "
     esac
 
-show(coefficients: List[long]) -> string =>
+show(coefficients: long[]) -> string =>
     coefficients
         |> index()
         |> filter(t => t.value != 0L)

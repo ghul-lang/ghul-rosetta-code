@@ -5,7 +5,7 @@ humble() -> long{} is
     found.add(1L)
 
     let factors = [2L, 3L, 5L, 7L]
-    let next_index = repeat(0, factors.count) |> collect_mutable()
+    let next_index = repeat(0, factors.count) |> LIST()
 
     do
         yield found[found.count - 1]
@@ -30,7 +30,7 @@ humble() -> long{} is
 si
 
 let first_fifty =
-    humble() |> take(50) |> map(value => "{value,5}") |> collect()
+    humble() |> take(50) |> map(value => "{value,5}") |> list()
 
 write_line("the first fifty humble numbers:")
 

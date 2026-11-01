@@ -1,6 +1,6 @@
 use default
 
-use Die = List[int]
+use Die = int[]
 
 beats(x: Die, y: Die) -> int =>
     let wins = x |> flat_map(a => y |> map(b => a <> b)) in
@@ -14,12 +14,12 @@ let dice =
                     b::4 |> flat_map(c => c::4 |> map(d => [a, b, c, d]))
                 )
         )
-        |> collect()
+        |> list()
 
 // chains of distinct dice, each beaten by the one after it, whose first die
 // beats the last
 
-extend(chain: List[Die], length: int) -> List[Die]{} is
+extend(chain: Die[], length: int) -> Die[]{} is
     if chain.count == length then
         if beats(chain[0], chain[length - 1]) > 0 then
             yield chain
@@ -31,7 +31,7 @@ extend(chain: List[Die], length: int) -> List[Die]{} is
             let fresh = !(chain |> any(used => used =~ die))
 
             if fresh /\ beats(last, die) < 0 then
-                let longer = chain ++ [die] |> collect()
+                let longer = chain ++ [die] |> list()
 
                 yield in extend(longer, length)
             fi
@@ -39,7 +39,7 @@ extend(chain: List[Die], length: int) -> List[Die]{} is
     fi
 si
 
-chains(length: int) -> List[Die]{} is
+chains(length: int) -> Die[]{} is
     for die in dice do
         yield in extend([die], length)
     od
@@ -50,7 +50,7 @@ write_line(
 )
 
 for length in [3, 4] do
-    let found = chains(length) |> collect()
+    let found = chains(length) |> list()
 
     write_line(
         "{found.count} ordered lists of {length} non-transitive dice:"

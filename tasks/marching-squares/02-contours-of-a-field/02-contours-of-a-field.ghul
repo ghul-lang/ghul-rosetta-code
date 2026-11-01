@@ -130,7 +130,7 @@ image.stroke(1.1D)
 write_line("level   segments")
 
 for level in levels do
-    let pieces = contour(level) |> collect()
+    let pieces = contour(level) |> list()
 
     write_line("{level,6:F2}{pieces.count,11}")
 

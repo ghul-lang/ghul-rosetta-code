@@ -8,7 +8,7 @@ assemble(source: string) -> LIST[int] is
     let lines =
         source.trim_end().split(['\n'])
             |> map(line => line.split([';'])[0].trim())
-            |> memo()
+            |> list()
 
     let labels = MAP()
 
@@ -27,8 +27,7 @@ assemble(source: string) -> LIST[int] is
             else
                 line
             fi
-        let words =
-            body.split([' ']) |> filter(w => w.length > 0) |> collect()
+        let words = body.split([' ']) |> filter(w => w.length > 0) |> list()
 
         if words.count == 0 then
             memory.add(0)

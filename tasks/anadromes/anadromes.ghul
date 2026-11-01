@@ -7,7 +7,7 @@ let words = [
     for word in IO.File.read_lines("words.txt")
     if word.length > 6
 ]
-    |> collect_set()
+    |> SET()
 
 let pairs =
     words

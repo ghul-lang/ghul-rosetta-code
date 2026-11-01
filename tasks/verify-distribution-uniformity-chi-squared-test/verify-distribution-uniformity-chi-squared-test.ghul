@@ -58,7 +58,7 @@ upper_gamma(a: double, x: double) -> double is
     prefactor(a, x) * h
 si
 
-chi_squared(counts: List[int]) -> double =>
+chi_squared(counts: int[]) -> double =>
     let
         total = double(counts |> sum()),
         expected = total / double(counts.count)
@@ -66,7 +66,7 @@ chi_squared(counts: List[int]) -> double =>
         counts
             |> sum_by(k => let e = double(k) - expected in e * e / expected)
 
-is_uniform(counts: List[int], significance: double) -> bool =>
+is_uniform(counts: int[], significance: double) -> bool =>
     let freedom = double(counts.count - 1) in
     upper_gamma(freedom / 2.0, chi_squared(counts) / 2.0) > significance
 

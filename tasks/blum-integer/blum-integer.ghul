@@ -1,7 +1,7 @@
 use default
 
 let limit = 8_900_000
-let smallest_factor = repeat(0, limit + 1) |> collect_mutable()
+let smallest_factor = repeat(0, limit + 1) |> LIST()
 
 for candidate in 2::limit do
     if smallest_factor[candidate] == 0 then
@@ -23,7 +23,7 @@ is_blum(value: int) -> bool =>
     in
         p != q /\ p % 4 == 3 /\ q % 4 == 3 /\ smallest_factor[q] == q
 
-let blum = 2::limit |> filter(is_blum) |> take(400_000) |> collect()
+let blum = 2::limit |> filter(is_blum) |> take(400_000) |> list()
 
 write_line("the first 50 Blum integers:")
 

@@ -4,7 +4,7 @@ let edges = [
     [1], [2], [0], [1, 2, 4], [3, 5], [2, 6], [5], [4, 6, 7]
 ]
 
-let reversed = 0..edges.count |> map(_ => LIST()) |> collect()
+let reversed = 0..edges.count |> map(_ => LIST()) |> list()
 
 for vertex in 0..edges.count do
     for next in edges[vertex] do
@@ -12,7 +12,7 @@ for vertex in 0..edges.count do
     od
 od
 
-let visited = repeat(false, edges.count) |> collect_mutable()
+let visited = repeat(false, edges.count) |> LIST()
 let order = LIST[int]()
 
 visit(vertex: int) is
@@ -29,7 +29,7 @@ visit(vertex: int) is
     order.add(vertex)
 si
 
-let root = repeat(-1, edges.count) |> collect_mutable()
+let root = repeat(-1, edges.count) |> LIST()
 
 assign(vertex: int, component: int) is
     if root[vertex] >= 0 then

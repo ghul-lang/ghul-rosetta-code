@@ -15,7 +15,7 @@ decoded_bytes(text: string, at: int) -> ubyte{} is
 si
 
 url_decode(text: string) -> string =>
-    Encoding.utf8.get_string(decoded_bytes(text, 0) |> collect())
+    Encoding.utf8.get_string(decoded_bytes(text, 0) |> ARRAY())
 
 [
     "http%3A%2F%2Ffoo%20bar%2F",

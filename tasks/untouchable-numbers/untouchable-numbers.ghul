@@ -8,7 +8,7 @@ let top = 100_000
 
 let sieved = int(pow(cast(top), 1.5D))
 
-let aliquot = repeat(0, sieved + 1) |> collect_mutable()
+let aliquot = repeat(0, sieved + 1) |> LIST()
 
 let sieve_milestone mut = sieved / 10
 
@@ -27,7 +27,7 @@ for divisor in 1::sieved / 2 do
     od
 od
 
-let touched = repeat(false, top + 1) |> collect_mutable()
+let touched = repeat(false, top + 1) |> LIST()
 
 for value in 2::sieved do
     let sum = aliquot[value]
@@ -37,7 +37,7 @@ for value in 2::sieved do
     fi
 od
 
-let composite = repeat(false, top + 1) |> collect_mutable()
+let composite = repeat(false, top + 1) |> LIST()
 
 let factor mut = 2
 
@@ -54,7 +54,7 @@ while factor * factor <= top do
     factor = factor + 1
 od
 
-let primes = 2::top |> filter(p => !composite[p]) |> collect()
+let primes = 2::top |> filter(p => !composite[p]) |> list()
 
 for prime in primes do
     if prime + 1 <= top then
@@ -74,7 +74,7 @@ for first in 0..primes.count do
     od
 od
 
-let untouchable = 1::top |> filter(value => !touched[value]) |> memo()
+let untouchable = 1::top |> filter(value => !touched[value]) |> list()
 
 write_line("the untouchable numbers up to 2000:")
 

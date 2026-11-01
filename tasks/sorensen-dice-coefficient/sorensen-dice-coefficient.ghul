@@ -37,7 +37,7 @@ closest(term: string) -> (name: string, score: double){} => (
                 name = task.name,
                 score = coefficient(wanted, task.grams)
             ))
-            |> collect_mutable()
+            |> LIST()
 
     scored.sort((left, right) => (
         let by_score = right.score <> left.score

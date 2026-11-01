@@ -220,7 +220,7 @@ Where a type does have to be written, write it once, at the site that needs it:
 
 - On the constructor (`LIST[int]()`) rather than on the local, when nothing later pins the
   element type - a list that is only printed, say. A local declared at an interface type
-  (`let rows: List[int] = LIST()`) is the exception: the annotation is the point, so it stays and
+  (`let rows: int[] = LIST()`) is the exception: the annotation is the point, so it stays and
   the constructor's arguments go.
 - On the cast (`cast bigint(n)`) where no slot pins the target, rather than moving it to a `let`
   annotation. Where a slot does pin it - a typed initializer, an assignment, a return, an operand,
@@ -299,18 +299,19 @@ does not name `System.Linq`. Nor `Ghul.Internal`, which holds the attributes car
 facts between assemblies and is not reachable from source; nor `MAYBE`, which is one of the three
 carriers behind `T?` and is spelled `T?` wherever it is written.
 
-A list of `n` copies of a value is `repeat(value, n) |> collect_mutable()`, not
+A list of `n` copies of a value is `repeat(value, n) |> LIST()`, not
 `LIST[T](System.Linq.Enumerable.repeat(value, n))`; `repeat(value)`, `from(start)` and
 `from(start, step)` are the unbounded forms.
 
 ## A collection is built by a pipe, not by a loop
 
-A list whose elements are a function of what it is built from is built by a pipe ending in a
-`collect_*`, not by declaring an empty `LIST` and adding to it in a `for`:
+A list whose elements are a function of what it is built from is built by a pipe ending in the
+collection's constructor - `LIST()`, `SET()`, `MAP()`, or `ARRAY()` for an array - not by
+declaring an empty `LIST` and adding to it in a `for`:
 
 ```ghul
-let doubled = values |> map(value => value * 2) |> collect_mutable()
-let flags = repeat(false, limit) |> collect_mutable()
+let doubled = values |> map(value => value * 2) |> LIST()
+let flags = repeat(false, limit) |> LIST()
 ```
 
 A grid is the same shape twice, with one rule: the outer level is `map` and never `repeat`, because
@@ -318,34 +319,37 @@ A grid is the same shape twice, with one rule: the outer level is `map` and neve
 
 ```ghul
 let cells = 0..rows
-    |> map(_ => repeat(0, columns) |> collect_mutable())
-    |> collect_mutable()
+    |> map(_ => repeat(0, columns) |> LIST())
+    |> LIST()
 ```
 
 No terminal at all where the result is read once: a pipe passed to a `for`, a `join`, or a
 function taking a sequence is already what it needs, and a function whose callers only read its
-result returns `T{}` rather than `List[T]` or `T[]`. Where a result is read more than once,
-or indexed, `memo()` computes it once on first use and keeps it, and its result is a `List[T]`
-materialised only as far as it has been read, so an unbounded source needs no guessed limit:
+result returns `T{}` rather than `T[]`. Where a result is read more than once, or indexed,
+`list()` gives it as a `T[]`, computed once on first use and kept, materialised only as far as it
+has been read, so an unbounded source needs no guessed limit:
 
 ```ghul
-let primes = from(2) |> filter(is_prime) |> memo()
+let primes = from(2) |> filter(is_prime) |> list()
 ```
 
-`collect()` is for when the work has to happen at that line: the source reads state that changes
-afterwards, the elements start tasks or threads, several threads read the result, or a .NET API
-or the result's meaning wants an array. `collect_mutable()` is for a result that is then
-mutated.
+`T[]` is `Collections.List[T]`, the read-only list, and an array is `ARRAY[T]`: an array is a
+`T[]`, so a literal or an `ARRAY()` result passes wherever a `T[]` is expected. `ARRAY()` is for
+when the work has to happen at that line: the source reads state that changes afterwards, the
+elements start tasks or threads, several threads read the result, or a .NET API or the result's
+meaning wants an array, and then the type it goes into is written `ARRAY[T]`. `LIST()` is for a
+result that is then mutated. The `collect*` terminals are the older names for the same
+constructors and are not written in new solutions.
 
 Filling the grid by index afterwards does not change that: how the elements get there is a separate
 question from how the rows are made.
 
-An array literal is already a `List[T]`, so `LIST(...)` around one builds a second collection to
+An array literal is already a `T[]`, so `LIST(...)` around one builds a second collection to
 hold the same elements: write the literal on its own where nothing mutates the value, and keep
 `LIST` for a list something adds to, removes from, sorts in place or assigns by index. A type that
-is written follows the same rule - a return type, parameter or field is `List[T]` where nothing
+is written follows the same rule - a return type, parameter or field is `T[]` where nothing
 downstream mutates it, and `MAP` and `SET` give way to `Map` and `Set` on the same terms. A
-function that builds its result by mutation keeps a `LIST` local and returns it as a `List[T]`,
+function that builds its result by mutation keeps a `LIST` local and returns it as a `T[]`,
 which needs no conversion.
 
 The loop stays where the body does more than add one element, where each element depends on the
@@ -421,7 +425,7 @@ add(a: int{}, b: int{}) -> int{} =>
   element, in place of a `mut` accumulator the loop updates.
 
 ```ghul
-merge(xs: List[int], ys: List[int]) -> int{} =>
+merge(xs: int[], ys: int[]) -> int{} =>
     case (xs, ys)
     when ([], _) then ys
     when (_, []) then xs
@@ -654,7 +658,7 @@ read_ppm(path: string) -> BITMAP is
         return string(
             (from..at)
                 |> map(index => cast char(raw[index]))
-                |> collect()
+                |> ARRAY()
         )
     si
 

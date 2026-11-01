@@ -23,7 +23,7 @@ for word in IO.File.read_all_lines("unixdict.txt") do
 od
 
 let representable = groups |> map(g => g.value.count) |> sum()
-let textonyms = groups |> filter(g => g.value.count > 1) |> collect()
+let textonyms = groups |> filter(g => g.value.count > 1) |> list()
 
 write_line(
     "There are {representable} words in unixdict.txt which can be "

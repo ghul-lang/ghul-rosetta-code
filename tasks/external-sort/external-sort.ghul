@@ -40,7 +40,7 @@ write_source(path: string) =>
         0..values |> map(_ => "{random.next(1_000_000)}")
     )
 
-split(path: string) -> List[string] is
+split(path: string) -> string[] is
     let parts = LIST()
     let held = LIST()
 
@@ -72,12 +72,12 @@ split(path: string) -> List[string] is
     parts
 si
 
-merge(parts: List[string], into: string) is
-    let runs = parts |> map(RUN) |> memo()
+merge(parts: string[], into: string) is
+    let runs = parts |> map(RUN) |> list()
     let use writer = File.create_text(into)
 
     do
-        let live = runs |> filter(run => run.head?) |> collect()
+        let live = runs |> filter(run => run.head?) |> list()
 
         if live.count == 0 then
             break
@@ -110,13 +110,10 @@ write_line("{values} values in runs of {chunk}: {parts.count} runs")
 
 merge(parts, "sorted.txt")
 
-let sorted =
-    File.read_all_lines("sorted.txt") |> map(int.parse) |> collect()
+let sorted = File.read_all_lines("sorted.txt") |> map(int.parse) |> list()
 
 let in_memory =
-    File.read_all_lines("unsorted.txt")
-        |> map(int.parse)
-        |> collect_mutable()
+    File.read_all_lines("unsorted.txt") |> map(int.parse) |> LIST()
 
 in_memory.sort()
 

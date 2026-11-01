@@ -2,11 +2,9 @@ use default
 
 use ITEM = (name: string, weight: int, value: int)
 
-best_value(items: List[ITEM], limit: int) -> List[List[int]] is
+best_value(items: ITEM[], limit: int) -> int[][] is
     let table =
-        0::items.count
-            |> map(_ => repeat(0, limit + 1) |> collect_mutable())
-            |> collect()
+        0::items.count |> map(_ => repeat(0, limit + 1) |> LIST()) |> list()
 
     for at in 0..items.count do
         let item = items[at]
@@ -33,7 +31,7 @@ best_value(items: List[ITEM], limit: int) -> List[List[int]] is
     return table
 si
 
-packed(items: List[ITEM], limit: int) -> ITEM{} is
+packed(items: ITEM[], limit: int) -> ITEM{} is
     let table = best_value(items, limit)
     let chosen = LIST()
 

@@ -11,7 +11,7 @@ sequence() -> int{} => from(1) |> filter(balanced)
 
 write_line("the first 200 numbers with equal rises and falls:")
 
-let first_200 = sequence() |> take(200) |> collect()
+let first_200 = sequence() |> take(200) |> list()
 
 for row in 0::19 do
     write_line(

@@ -3,7 +3,7 @@ use System.Math.log10
 use Raster.Anchor
 use Raster.IMAGE
 
-let leading_counts = 1::10 |> map(_ => 0) |> collect_mutable()
+let leading_counts = 1::10 |> map(_ => 0) |> LIST()
 
 let previous mut = 0n
 let current mut = 1n
@@ -23,7 +23,7 @@ let actual = (1::9) |> map(digit => double(leading_counts[digit]) / 10.0)
 let expected =
     (1::9)
         |> map(digit => 100.0 * log10(1.0 + 1.0 / double(digit)))
-        |> collect()
+        |> list()
 
 let observed_colour = (red = 40ub, green = 90ub, blue = 180ub)
 let benford_colour = (red = 225ub, green = 145ub, blue = 45ub)

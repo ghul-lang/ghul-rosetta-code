@@ -15,7 +15,7 @@ let counted = 1_000_000
 let smallest_factor =
     (0::limit)
         |> map(value => if value % 2 == 0 then 2 else value fi)
-        |> collect_mutable()
+        |> LIST()
 
 let odd mut = 3
 

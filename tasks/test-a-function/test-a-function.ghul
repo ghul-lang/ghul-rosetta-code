@@ -7,9 +7,9 @@ is_palindrome(text: string) -> bool =>
     let letters =
         text.to_lower().to_char_array()
             |> filter(char.is_letter_or_digit)
-            |> collect()
+            |> list()
     in
-    letters =~ (letters |> reverse() |> collect())
+    letters =~ (letters |> reverse() |> list())
 
 // MSTest 4 records the text of the checked expression through trailing
 // optional parameters, which a call has to supply.
@@ -46,7 +46,7 @@ is_test(method: System.Reflection.MethodInfo) -> bool =>
 let tests = typeof PALINDROME_TESTS
 let fixture = System.Activator.create_instance(tests)
 let flags = BindingFlags.PUBLIC | BindingFlags.INSTANCE
-let methods = tests.get_methods(flags) |> filter(is_test) |> collect()
+let methods = tests.get_methods(flags) |> filter(is_test) |> list()
 let passed mut = 0
 
 for method in methods do

@@ -1,6 +1,6 @@
 use default
 
-klarner_rado(count: int) -> Collections.List[int] is
+klarner_rado(count: int) -> int[] is
     let sequence = LIST()
     sequence.add(1)
 

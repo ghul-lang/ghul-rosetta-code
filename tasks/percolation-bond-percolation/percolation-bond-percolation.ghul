@@ -16,7 +16,7 @@ class GRID is
         floors =
             (0..(height + 1) * width)
                 |> map(_ => random.next_double() < p)
-                |> collect()
+                |> ARRAY()
 
         sides =
             (0..height * (width + 1))
@@ -26,9 +26,9 @@ class GRID is
                     column == width \/
                     random.next_double() < p
                 )
-                |> collect()
+                |> ARRAY()
 
-        wet = repeat(false, width * height) |> collect_mutable()
+        wet = repeat(false, width * height) |> LIST()
     si
 
     floor(column: int, row: int) -> bool => floors[row * width + column]
@@ -86,7 +86,7 @@ let shown mut = null
 
 for step in 0::10 do
     let p = double(step) / 10.0D
-    let grids = 0..trials |> map(_ => GRID(p)) |> memo()
+    let grids = 0..trials |> map(_ => GRID(p)) |> list()
     let dripped = grids |> filter(g => g.pour()) |> count()
 
     write_line("{p:F1}    {double(dripped) / double(trials):F2}")

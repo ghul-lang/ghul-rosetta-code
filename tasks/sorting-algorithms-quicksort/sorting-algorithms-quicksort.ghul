@@ -1,6 +1,6 @@
 use default
 
-quicksort[T: Ghul.Comparable[T]](values: List[T]) -> T{} =>
+quicksort[T: Ghul.Comparable[T]](values: T[]) -> T{} =>
     case values
     when [] then values
     when [pivot, ..rest] then

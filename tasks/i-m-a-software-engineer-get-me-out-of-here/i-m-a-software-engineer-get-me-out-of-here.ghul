@@ -35,8 +35,7 @@ let cells = [
     if char.is_digit(country[row][column])
 ]
 
-let number =
-    cells |> index() |> map((i, cell) => (cell, i)) |> collect_map()
+let number = cells |> index() |> map((i, cell) => (cell, i)) |> MAP()
 
 moves(cell: Cell) -> Cell{} =>
     let
@@ -64,14 +63,11 @@ let distance =
         |> map(i =>
             0..size
                 |> map(j => if i == j then 0 else unreachable fi)
-                |> collect_mutable()
+                |> LIST()
         )
-        |> collect()
+        |> list()
 
-let next =
-    0..size
-        |> map(i => 0..size |> map(j => j) |> collect_mutable())
-        |> collect()
+let next = 0..size |> map(i => 0..size |> map(j => j) |> LIST()) |> list()
 
 for (i, cell) in cells |> index() do
     for target in moves(cell) do
@@ -110,12 +106,12 @@ route(from: Cell, to: Cell) -> string => (
     show(steps)
 )
 
-use Reached = (days: List[int], previous: List[int])
+use Reached = (days: int[], previous: int[])
 
 dijkstra(source: int) -> Reached is
-    let days = repeat(unreachable, size) |> collect_mutable()
-    let previous = repeat(-1, size) |> collect_mutable()
-    let settled = repeat(false, size) |> collect_mutable()
+    let days = repeat(unreachable, size) |> LIST()
+    let previous = repeat(-1, size) |> LIST()
+    let settled = repeat(false, size) |> LIST()
 
     days[source] = 0
 
@@ -139,10 +135,10 @@ dijkstra(source: int) -> Reached is
     (days = days, previous = previous)
 si
 
-path(previous: List[int], to: int) -> List[Cell] =>
+path(previous: int[], to: int) -> Cell[] =>
     if previous[to] < 0 then [cells[to]]
     else
-        (path(previous, previous[to]) ++ [cells[to]]) |> collect()
+        (path(previous, previous[to]) ++ [cells[to]]) |> list()
     fi
 
 let hq: Cell = (11, 11)

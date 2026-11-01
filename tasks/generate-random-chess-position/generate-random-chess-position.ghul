@@ -16,8 +16,8 @@ promotion_square(piece: char, square: int) -> bool =>
     (piece == 'P' /\ rank_of(square) == 0) \/
     (piece == 'p' /\ rank_of(square) == 7)
 
-position() -> List[char] => (
-    let board = repeat('.', 64) |> collect_mutable()
+position() -> char[] => (
+    let board = repeat('.', 64) |> LIST()
 
     let white_king = random.next(64)
     let black_king mut = random.next(64)
@@ -41,7 +41,7 @@ position() -> List[char] => (
     board
 )
 
-rank_to_fen(squares: List[char]) -> string => (
+rank_to_fen(squares: char[]) -> string => (
     let text = StringBuilder()
     let empty mut = 0
 
@@ -65,7 +65,7 @@ rank_to_fen(squares: List[char]) -> string => (
     text.to_string()
 )
 
-to_fen(board: List[char]) -> string => (
+to_fen(board: char[]) -> string => (
     let ranks =
         (0..8)
             |> map(rank => rank_to_fen(board[rank * 8..rank * 8 + 8]))

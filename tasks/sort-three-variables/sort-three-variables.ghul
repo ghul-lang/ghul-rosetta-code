@@ -1,7 +1,7 @@
 use default
 
 sort_three[T: Ghul.Comparable[T]](x: T ref, y: T ref, z: T ref) is
-    let sorted = [x!, y!, z!] |> sort() |> collect()
+    let sorted = [x!, y!, z!] |> sort() |> list()
 
     x! = sorted[0]
     y! = sorted[1]

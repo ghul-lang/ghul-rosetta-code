@@ -7,7 +7,7 @@ use System.Math.*
 let radius = 1.0D
 let rise = sqrt(3.0D)
 
-let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> collect_mutable()
+let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> LIST()
 
 let seed mut = 20260920u
 
@@ -23,7 +23,7 @@ next_letter() -> char is
     return letter
 si
 
-let letters = 0..20 |> map(_ => next_letter()) |> collect()
+let letters = 0..20 |> map(_ => next_letter()) |> list()
 
 let cells =
     0..20
@@ -43,11 +43,11 @@ let cells =
                         fi
                 )
         )
-        |> collect()
+        |> list()
 
 let chosen = LIST()
 
-corners(x: double, y: double) -> List[(double, double)] =>
+corners(x: double, y: double) -> (double, double)[] =>
     0..6
         |> map(corner =>
             let angle = double(corner) * pi / 3.0D in
@@ -56,7 +56,7 @@ corners(x: double, y: double) -> List[(double, double)] =>
                 y + radius * 0.92D * sin(angle)
             )
         )
-        |> collect()
+        |> list()
 
 draw() is
     let image = IMAGE(420, 300)

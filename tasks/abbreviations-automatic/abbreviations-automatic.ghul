@@ -11,7 +11,7 @@ shortest_unique(line: string) -> int? is
     distinct(length) =>
         words
             |> map(word => word.substring(0, int.min(length, word.length)))
-            |> collect_set()
+            |> SET()
             |> count()
 
     from(1) |> find(length => distinct(length) == words.count)

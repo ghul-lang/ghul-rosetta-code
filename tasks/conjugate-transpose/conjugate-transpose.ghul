@@ -2,14 +2,14 @@ use default
 
 use System.Numerics.Complex
 
-use Matrix = List[List[Complex]]
+use Matrix = Complex[][]
 
 conjugate_transpose(m: Matrix) -> Matrix =>
     0..m[0].count
         |> map(j =>
-            0..m.count |> map(i => Complex.conjugate(m[i][j])) |> collect()
+            0..m.count |> map(i => Complex.conjugate(m[i][j])) |> list()
         )
-        |> collect()
+        |> list()
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count
@@ -20,9 +20,9 @@ conjugate_transpose(m: Matrix) -> Matrix =>
                         |> map(k => a[i][k] * b[k][j])
                         |> reduce(Complex.zero, * + *)
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 ≈(a: Matrix, b: Matrix) -> bool =>
     0..a.count
@@ -42,9 +42,9 @@ identity(n: int) -> Matrix =>
                         Complex.zero
                     fi
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 show(c: Complex) -> string =>
     let

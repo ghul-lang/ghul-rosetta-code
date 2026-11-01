@@ -26,8 +26,7 @@ solutions(low: int, high: int, unique: bool) -> Solution{} is
                                 (
                                     !unique \/
                                     (
-                                        [a, b, c, d, e, f, g]
-                                            |> collect_set()
+                                        [a, b, c, d, e, f, g] |> SET()
                                     ).count == 7
                                 )
                             then
@@ -113,7 +112,7 @@ draw(s: Solution) is
     for at in 0..4 do
         let corners = outline(at)
 
-        image.line(corners ++ [corners[0]] |> collect())
+        image.line(corners ++ [corners[0]] |> list())
     od
 
     let shared = margin + drop + side / 2.0 - drop / 2.0

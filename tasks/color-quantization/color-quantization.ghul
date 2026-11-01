@@ -105,22 +105,22 @@ channel(c: Colour, axis: int) -> int =>
     else c.blue
     esac
 
-spread(box: List[Weighted], axis: int) -> int =>
+spread(box: Weighted[], axis: int) -> int =>
     let values = box |> map(w => channel(w.colour, axis)) in
     (values |> max()!) - (values |> min()!)
 
-widest(box: List[Weighted]) -> int => 0..3 |> max_by(spread(box, *))!
+widest(box: Weighted[]) -> int => 0..3 |> max_by(spread(box, *))!
 
-score(box: List[Weighted]) -> int => spread(box, widest(box))
+score(box: Weighted[]) -> int => spread(box, widest(box))
 
-split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
+split(box: Weighted[]) -> (Weighted[], Weighted[]) is
     let axis = widest(box)
     let sorted =
         box
             |> sort((a, b) =>
                 channel(a.colour, axis) - channel(b.colour, axis)
             )
-            |> collect()
+            |> list()
 
     let total = sorted |> sum_by(w => w.count)
 
@@ -133,10 +133,10 @@ split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
 
     let cut = walk(1, sorted[0].count)
 
-    (sorted |> take(cut) |> collect(), sorted |> skip(cut) |> collect())
+    (sorted |> take(cut) |> list(), sorted |> skip(cut) |> list())
 si
 
-average(box: List[Weighted]) -> Colour is
+average(box: Weighted[]) -> Colour is
     let n = box |> sum_by(w => w.count)
 
     weighted(axis) =>
@@ -145,8 +145,8 @@ average(box: List[Weighted]) -> Colour is
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
-    let boxes = LIST[List[Weighted]]([colours])
+median_cut(colours: Weighted[], count: int) -> Colour[] => (
+    let boxes = LIST[Weighted[]]([colours])
 
     while boxes.count < count do
         let worst = boxes |> max_by(score)!
@@ -156,7 +156,7 @@ median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
         boxes.add(high)
     od
 
-    boxes |> map(average) |> collect()
+    boxes |> map(average) |> list()
 )
 
 distance(a: Colour, b: Colour) -> int =>
@@ -167,7 +167,7 @@ distance(a: Colour, b: Colour) -> int =>
     in
         dr * dr + dg * dg + db * db
 
-nearest(palette: List[Colour], c: Colour) -> Colour =>
+nearest(palette: Colour[], c: Colour) -> Colour =>
     palette |> min_by(distance(*, c))!
 
 picture().write("picture.png")
@@ -183,7 +183,7 @@ let pixels = [
 let counts = pixels |> frequencies()
 
 let colours =
-    counts |> map(kv => (colour = kv.key, count = kv.value)) |> collect()
+    counts |> map(kv => (colour = kv.key, count = kv.value)) |> list()
 
 let palette = median_cut(colours, 16)
 

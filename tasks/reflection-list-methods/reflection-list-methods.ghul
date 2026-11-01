@@ -35,7 +35,7 @@ let declared =
             in
             "{m.name}({parameters}) -> {m.return_type.name}"
         )
-        |> collect_mutable()
+        |> LIST()
 
 declared.sort((left: string, right: string) -> int =>
     string.compare(left, right)

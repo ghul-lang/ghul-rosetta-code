@@ -85,7 +85,7 @@ union Item is
     BAR
 si
 
-items(text: string) -> List[Item] is
+items(text: string) -> Item[] is
     let result = LIST[Item]()
     let i mut = 0
 
@@ -120,7 +120,7 @@ items(text: string) -> List[Item] is
     result
 si
 
-alternatives(parts: List[Item]) -> List[List[Item]] is
+alternatives(parts: Item[]) -> Item[][] is
     let result = LIST([LIST[Item]()])
 
     for part in parts do
@@ -145,7 +145,7 @@ called(item: Item) -> string =>
     else ""
     esac
 
-binary(name: string, head: string, pairs: List[List[Item]]) is
+binary(name: string, head: string, pairs: Item[][]) is
     say("{name}() -> string is")
     say("    let left mut = {head}()")
     say("")
@@ -171,7 +171,7 @@ binary(name: string, head: string, pairs: List[List[Item]]) is
     say("si")
 si
 
-choice(name: string, options: List[List[Item]]) is
+choice(name: string, options: Item[][]) is
     say("{name}() -> string is")
 
     for option in options do
@@ -210,7 +210,7 @@ while let line = read_line() do
     say("")
 
     if parts |> any(p => isa Item.OPEN(p)) then
-        let body = parts |> skip(2) |> take(parts.count - 3) |> collect()
+        let body = parts |> skip(2) |> take(parts.count - 3) |> list()
 
         binary(name, called(parts[0]), alternatives(body))
     else

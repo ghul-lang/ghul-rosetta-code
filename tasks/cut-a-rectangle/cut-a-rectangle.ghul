@@ -13,7 +13,7 @@ class CUTTER is
         self.height = height
         self.width = width
         last = (height + 1) * (width + 1) - 1
-        grid = repeat(0, last + 1) |> collect_mutable()
+        grid = repeat(0, last + 1) |> LIST()
         steps = [-1, -width - 1, 1, width + 1]
         moves = [(0, -1), (-1, 0), (0, 1), (1, 0)]
         count = 0L

@@ -1,20 +1,18 @@
 use default
 
-use Matrix = List[List[double]]
+use Matrix = double[][]
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count
         |> map(i =>
             0..b[0].count
                 |> map(j => 0..b.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 square(n: int, cell: (int, int) -> double) -> LIST[LIST[double]] =>
-    0..n
-        |> map(i => 0..n |> map(cell(i, *)) |> collect_mutable())
-        |> collect_mutable()
+    0..n |> map(i => 0..n |> map(cell(i, *)) |> LIST()) |> LIST()
 
 pivot(a: Matrix) -> Matrix => (
     let n = a.count

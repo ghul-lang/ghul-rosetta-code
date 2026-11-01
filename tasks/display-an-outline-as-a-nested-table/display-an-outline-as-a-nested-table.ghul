@@ -24,7 +24,7 @@ let palette = ["#ffebd2", "#f0fff0", "#e6ffff"]
 
 margin(line: string) -> int => line |> take_while(* == ' ') |> count()
 
-parse(lines: List[string]) -> NODE is
+parse(lines: string[]) -> NODE is
     let unit = lines |> map(margin) |> filter(* > 0) |> min()
     let step = unit ?? 1
     let root = NODE(lines[0].trim(), LIST())
@@ -93,7 +93,7 @@ let bottom = deepest(tree)
 
 pad(tree, 0, bottom)
 
-let rows = 0::bottom |> map(_ => LIST()) |> collect()
+let rows = 0::bottom |> map(_ => LIST()) |> list()
 
 gather(tree, 0, root_colour, rows)
 

@@ -21,7 +21,7 @@ motzkin(count: int) -> bigint{} is
     od
 si
 
-let terms = motzkin(42) |> collect()
+let terms = motzkin(42) |> list()
 
 for index in 0..terms.count do
     let mark = if is_prime(terms[index]) then "  prime" else "" fi

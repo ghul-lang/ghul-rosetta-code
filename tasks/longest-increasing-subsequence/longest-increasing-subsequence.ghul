@@ -2,8 +2,8 @@ use default
 
 lis(xs: int[]) -> int{} is
     let n = xs.count
-    let lengths = repeat(1, n + 1) |> collect_mutable()
-    let prev = repeat(-1, n + 1) |> collect_mutable()
+    let lengths = repeat(1, n + 1) |> LIST()
+    let prev = repeat(-1, n + 1) |> LIST()
 
     for i in 0..n do
         for j in 0..i do

@@ -8,7 +8,7 @@ si
 
 let games = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
 
-outcomes(count: int) -> Collections.List[Result]{} is
+outcomes(count: int) -> Result[]{} is
     if count == 0 then
         yield LIST()
         return
@@ -20,13 +20,13 @@ outcomes(count: int) -> Collections.List[Result]{} is
                 Result.HOME_WIN, Result.DRAW, Result.AWAY_WIN
             ]
         do
-            yield rest ++ [result] |> collect()
+            yield rest ++ [result] |> list()
         od
     od
 si
 
-standings(results: Collections.List[Result]) -> int{} => (
-    let points = repeat(0, 4) |> collect_mutable()
+standings(results: Result[]) -> int{} => (
+    let points = repeat(0, 4) |> LIST()
 
     for ((home, away), result) in zip(games, results) do
         let (home_points, away_points) =
@@ -43,8 +43,7 @@ standings(results: Collections.List[Result]) -> int{} => (
     points |> sort_descending()
 )
 
-let histogram =
-    (0..4) |> map(_ => repeat(0, 10) |> collect_mutable()) |> collect()
+let histogram = (0..4) |> map(_ => repeat(0, 10) |> LIST()) |> list()
 
 for results in outcomes(games.count) do
     for (place, points) in results |> standings() |> index() do

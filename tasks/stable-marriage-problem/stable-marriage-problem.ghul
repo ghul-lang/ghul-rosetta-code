@@ -42,7 +42,7 @@ let men_preferences = [
         "bea", "dee", "cath", "ivy", "hope"
     ])
 ]
-    |> collect_map()
+    |> MAP()
 
 let women_preferences = [
     ("abi", [
@@ -86,7 +86,7 @@ let women_preferences = [
         "jon", "col", "ian", "fred", "dan"
     ])
 ]
-    |> collect_map()
+    |> MAP()
 
 rank(preferences: ARRAY[string], name: string) -> int =>
     preferences |> find_index(* =~ name)!
@@ -157,7 +157,7 @@ engaged_to.keys
 
 write_line("stable: {is_stable(engaged_to)}")
 
-let first = engaged_to.keys |> sort() |> collect()
+let first = engaged_to.keys |> sort() |> list()
 (engaged_to[first[0]], engaged_to[first[1]]) = (
     engaged_to[first[1]],
     engaged_to[first[0]]
