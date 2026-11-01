@@ -1,6 +1,6 @@
 use default
 
-struct BT(digits: List[int]) is
+struct BT(digits: int{}) is
     to_string() -> string =>
         digits
             |> reverse()
@@ -8,15 +8,8 @@ struct BT(digits: List[int]) is
             |> string()
 si
 
-cons(d: int, rest: List[int]) -> List[int] =>
-    [d] ++ rest |> collect()
-
-trim(ds: List[int]) -> List[int] =>
-    ds
-        |> reverse()
-        |> skip_while(d => d == 0)
-        |> reverse()
-        |> collect()
+trim(ds: int{}) -> int{} =>
+    ds |> reverse() |> skip_while(d => d == 0) |> reverse()
 
 digit(c: char) -> int =>
     case c
@@ -26,9 +19,9 @@ digit(c: char) -> int =>
     esac
 
 parse(s: string) -> BT =>
-    BT(s |> reverse() |> map(digit) |> collect())
+    BT(s |> reverse() |> map(digit))
 
-balanced(n: bigint) -> BT => BT(digits(n) |> collect())
+balanced(n: bigint) -> BT => BT(digits(n))
 
 digits(n: bigint) -> int{} =>
     case int((n % 3n + 3n) % 3n)
@@ -42,19 +35,19 @@ value(a: BT) -> bigint =>
         |> reverse()
         |> reduce(0n, (t, d) => t * 3n + bigint(d))
 
-add(a: List[int], b: List[int]) -> List[int] =>
+add(a: int{}, b: int{}) -> int{} =>
     case (a, b)
     when ([], _) then b
     when (_, []) then a
     when ([x, ..xs], [y, ..ys]) then
         case x + y
-        when 2 then cons(-1, add(xs, add(ys, [1])))
-        when -2 then cons(1, add(xs, add(ys, [-1])))
-        else trim(cons(x + y, add(xs, ys)))
+        when 2 then [-1] ++ add(xs, add(ys, [1]))
+        when -2 then [1] ++ add(xs, add(ys, [-1]))
+        else trim([x + y] ++ add(xs, ys))
         esac
     esac
 
--(a: BT) -> BT => BT(a.digits |> map(d => -d) |> collect())
+-(a: BT) -> BT => BT(a.digits |> map(d => -d))
 
 +(a: BT, b: BT) -> BT => BT(add(a.digits, b.digits))
 
@@ -71,7 +64,7 @@ add(a: List[int], b: List[int]) -> List[int] =>
             else -b
             esac
         in
-        scaled + BT(cons(0, (BT(rest) * b).digits))
+        scaled + BT([0] ++ (BT(rest) * b).digits)
     esac
 
 let a = parse("+-0++0+")
