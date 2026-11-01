@@ -9,7 +9,7 @@ struct BT(digits: int{}) is
 si
 
 trim(ds: int{}) -> int{} =>
-    ds |> reverse() |> skip_while(d => d == 0) |> reverse()
+    ds |> reverse() |> skip_while(* == 0) |> reverse()
 
 digit(c: char) -> int =>
     case c
