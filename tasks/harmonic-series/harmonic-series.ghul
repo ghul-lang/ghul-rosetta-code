@@ -5,6 +5,7 @@ use default
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `if let` pattern-matches
 
 harmonic_numbers() -> (n: int, value: double){} is
     let sum mut = 0.0

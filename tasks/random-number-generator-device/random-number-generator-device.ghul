@@ -1,7 +1,7 @@
 use default
 
+// `ARRAY()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `ARRAY()` builds a collection eagerly
 
 random_32_bits() -> uint is
     let use device = IO.File.open_read("/dev/urandom")

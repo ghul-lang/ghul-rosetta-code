@@ -8,9 +8,10 @@ use System.Threading.Monitor
 use System.Threading.Thread
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality)
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `=~` compares values (structural equality)
+// `if let` pattern-matches
 
 let port = 12345
 

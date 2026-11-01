@@ -4,9 +4,11 @@ use System.Text.Encoding
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `==` compares identity
+// `ARRAY()` builds its collection eagerly
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 decoded_bytes(text: string, at: int) -> ubyte{} is
     if at < text.length then

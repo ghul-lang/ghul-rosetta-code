@@ -2,8 +2,14 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
 // `=~` compares values (structural equality)
 
 three_smooth() -> bigint{} is

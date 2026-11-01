@@ -1,8 +1,8 @@
 use default
 use IO.Std.write
 
-// `case ... when` pattern-matches
 // `==` compares identity
+// `case ... when` pattern-matches
 
 name(code: int) -> string =>
     case code

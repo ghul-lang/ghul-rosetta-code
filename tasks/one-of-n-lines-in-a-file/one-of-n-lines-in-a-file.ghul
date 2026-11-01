@@ -1,9 +1,9 @@
 use default
 use System.Random
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
-// `LIST()` builds a collection eagerly
 
 let chance = Random(20260921)
 

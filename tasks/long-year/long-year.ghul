@@ -2,8 +2,8 @@ use default
 
 use System.Globalization.ISOWeek
 
-// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 december_31_weekday(year: int) -> int =>
     (year + year / 4 - year / 100 + year / 400) % 7

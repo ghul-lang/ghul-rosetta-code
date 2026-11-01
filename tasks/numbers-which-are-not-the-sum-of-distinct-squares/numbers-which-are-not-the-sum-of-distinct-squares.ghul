@@ -1,9 +1,9 @@
 use default
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `if let` pattern-matches
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `if let` pattern-matches
 
 // Squares are added one at a time, tracking every sum of distinct squares
 // seen so far. If a missing number m is followed by a run of reachable

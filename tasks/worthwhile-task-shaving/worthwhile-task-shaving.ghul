@@ -1,6 +1,7 @@
 use default
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 let minute = 60.0
 let hour = 60.0 * minute

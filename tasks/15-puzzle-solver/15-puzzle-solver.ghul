@@ -4,6 +4,7 @@ use default
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `==` compares identity
 
 let names = ["up", "down", "left", "right"]
 let row_steps = [-1, 1, 0, 0]

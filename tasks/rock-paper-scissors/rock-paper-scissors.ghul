@@ -2,9 +2,10 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `case ... when` pattern-matches
-// `=~` compares values (structural equality)
+// `MAP()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+// `case ... when` pattern-matches
 
 union Move is
     ROCK

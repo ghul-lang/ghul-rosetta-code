@@ -1,7 +1,7 @@
 use default
 
-// `case ... when` pattern-matches
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
 
 union Expression is
     NUMBER(value: double)

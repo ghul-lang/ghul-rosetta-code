@@ -1,7 +1,7 @@
 use default
 
+// `MAP()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `MAP()` builds a collection eagerly
 
 let capitals = [
     ("France", "Paris"),

@@ -2,8 +2,8 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `SET()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `SET()` builds a collection eagerly
 
 rotations(word: string) -> string{} =>
     0..word.length |> map(i => "{word.substring(i)}{word.substring(0, i)}")

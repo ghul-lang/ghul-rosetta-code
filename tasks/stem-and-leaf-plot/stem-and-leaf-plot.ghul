@@ -6,6 +6,7 @@ use default
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `==` compares identity
 
 let data = [
     12, 127, 28, 42, 39, 113, 42, 18, 44, 118, 44, 37, 113, 124, 37, 48,

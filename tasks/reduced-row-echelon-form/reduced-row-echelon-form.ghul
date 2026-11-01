@@ -1,8 +1,8 @@
 use default
 
-// `==` compares identity
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
+// `==` compares identity
 
 to_reduced_row_echelon_form(m: LIST[LIST[double]]) is
     let columns = m[0].count

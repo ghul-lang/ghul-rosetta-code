@@ -1,6 +1,7 @@
 use default
 use System.Math
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `case ... when` pattern-matches
 
 apply(operator: string, left: double, right: double) -> double =>

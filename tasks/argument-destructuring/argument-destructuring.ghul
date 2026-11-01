@@ -2,9 +2,9 @@ use default
 
 use Rgb = (int, int, int)
 
-// `T[]` is the read-only list trait - elements can be read by index
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 greet((greeting, name): (string, string)) -> string => "{greeting}, {name}!"

@@ -9,9 +9,12 @@ use Pentagon = (x: double, y: double, radius: double)
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `==` compares identity
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
 
 let golden = (1.0D + sqrt(5.0D)) / 2.0D
 let shrink = 1.0D / (1.0D + golden)

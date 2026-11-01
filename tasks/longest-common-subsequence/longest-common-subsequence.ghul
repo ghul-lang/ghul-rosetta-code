@@ -1,9 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 // `memo` on a function caches its results - a call with arguments equal to
 // an earlier call's returns the cached result, recursive calls included
-// `==` compares identity
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 lcs(left: string, right: string) -> string memo =>
     if left.length == 0 \/ right.length == 0 then

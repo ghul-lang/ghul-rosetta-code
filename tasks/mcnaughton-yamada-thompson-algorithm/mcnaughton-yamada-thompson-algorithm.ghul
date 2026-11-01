@@ -1,7 +1,7 @@
 use default
 
-// `if let` and `case ... when` pattern-match
 // `==` compares identity
+// `if let` and `case ... when` pattern-match
 
 class STATE is
     label: char? public

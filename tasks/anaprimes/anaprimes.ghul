@@ -1,7 +1,8 @@
 use default
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
+// `==` compares identity
 // `if let` pattern-matches
 
 let sieve_limit = 10_000_000

@@ -3,9 +3,10 @@ use System.Text.StringBuilder
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
 
 wrapped(text: string, width: int) -> string{} is
     let line = StringBuilder()

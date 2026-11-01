@@ -1,8 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
 // and tail
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 min_max_product(n: int) -> int =>
     let factors = prime_factors(n) in

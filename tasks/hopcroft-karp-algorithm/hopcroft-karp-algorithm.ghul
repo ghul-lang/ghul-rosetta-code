@@ -1,8 +1,8 @@
 use default
 
-// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-// `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
 class BIPARTITE(left: int, right: int) is
     _adjacent: LIST[LIST[int]]

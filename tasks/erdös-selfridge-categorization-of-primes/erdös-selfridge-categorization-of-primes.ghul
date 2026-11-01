@@ -1,10 +1,13 @@
 use default
 
-// `memo` on a function caches its results - a call with arguments equal to
-// an earlier call's returns the cached result, recursive calls included
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `memo` on a function caches its results - a call with arguments equal to
+// an earlier call's returns the cached result, recursive calls included
 
 categorise(p: int) -> int memo =>
     1 +

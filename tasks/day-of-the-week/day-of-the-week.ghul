@@ -6,6 +6,7 @@ use System
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 christmas_days() -> DateTime{} is
     for year in 2008::2121 do

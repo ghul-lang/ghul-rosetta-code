@@ -3,8 +3,8 @@ use Ghul.Coroutines
 
 use Numbers = CHANNEL[int?]
 
-// `if let` pattern-matches
 // `==` compares identity
+// `if let` pattern-matches
 
 let limit = 100
 

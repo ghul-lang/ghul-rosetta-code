@@ -3,10 +3,10 @@ use Raster.Anchor
 use Raster.IMAGE
 use System.Math.*
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 // index materialises the source only as far as that index and caches what
 // it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let cases = [
     27, 27, 27, 44, 44, 59, 59, 59, 59, 59, 59, 59, 59, 60, 60, 61, 61,

@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 class COUNTER is
     instance: COUNTER static
 

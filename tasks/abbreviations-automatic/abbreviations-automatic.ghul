@@ -1,9 +1,9 @@
 use default
 use System.StringSplitOptions
 
-// `==` compares identity
+// `SET()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `SET()` builds a collection eagerly
+// `==` compares identity
 
 shortest_unique(line: string) -> int? is
     let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)

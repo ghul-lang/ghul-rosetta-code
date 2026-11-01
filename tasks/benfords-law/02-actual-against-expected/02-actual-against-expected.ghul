@@ -3,11 +3,11 @@ use System.Math.log10
 use Raster.Anchor
 use Raster.IMAGE
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 // index materialises the source only as far as that index and caches what
 // it read
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let leading_counts = 1::10 |> map(_ => 0) |> LIST()
 

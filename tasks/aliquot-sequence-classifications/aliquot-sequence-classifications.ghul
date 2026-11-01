@@ -1,7 +1,7 @@
 use default
 
-// `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
 // and tail
 

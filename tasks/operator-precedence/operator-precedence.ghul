@@ -5,6 +5,7 @@ use default
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
 
 row(level: string, ops: string, assoc: string) -> string =>
     "  {level,-16}{ops,-30}{assoc}"

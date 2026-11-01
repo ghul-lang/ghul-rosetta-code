@@ -1,7 +1,7 @@
 use IO.Std.write_line
 
-// `if let` pattern-matches
 // `==` compares identity
+// `if let` pattern-matches
 
 union Maybe[T] is
     JUST(value: T)

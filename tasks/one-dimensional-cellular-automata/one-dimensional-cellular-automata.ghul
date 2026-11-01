@@ -1,9 +1,9 @@
 use default
 
-// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `==` compares identity
 
 alive(cells: string, index: int) -> bool =>
     index >= 0 /\ index < cells.length /\ cells[index] == '#'

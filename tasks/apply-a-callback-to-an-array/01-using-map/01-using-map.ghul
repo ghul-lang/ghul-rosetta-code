@@ -1,3 +1,5 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 write_line("{$([1, 2, 3, 4, 5] |> map(value => value * value))}")

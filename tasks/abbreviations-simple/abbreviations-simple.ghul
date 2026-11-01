@@ -3,10 +3,10 @@ use System
 
 use COMMAND = (word: string, minimum: int)
 
-// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
+// `==` compares identity
 
 let table =
     "add 1  alter 3  backup 2  bottom 1  Cappend 2  change 1  Schange  "

@@ -1,23 +1,23 @@
 #!/usr/bin/perl
 # Keep each solution's construct notes current: a comment block after the
 # `use` lines with one note for each ghūl construct the solution uses that a
-# reader from another language may not know, at most three, in the order the
-# constructs first appear. The wording comes from the table below and nowhere
-# else, so every solution says the same thing the same way. See AGENTS.md.
+# reader from another language may not know. Every construct present gets its
+# note, in the fixed order of the table below, which puts a note after the
+# ones whose terms it uses. The wording comes from the table and nowhere else,
+# so every solution says the same thing the same way. See AGENTS.md.
 #
 #   scripts/construct-notes.pl --check [file...]   list sources whose notes differ
 #   scripts/construct-notes.pl --fix   [file...]   rewrite them in place
-#   scripts/construct-notes.pl --count [file...]   print how many notes each source gets
+#   scripts/construct-notes.pl --count [file...]   print how many note lines each source gets
 #
 # With no files, every task's main source is considered: tasks/<slug>/<slug>.ghul
 # and tasks/<slug>/<part>/<part>.ghul, less the ones a format-exempt file names.
 use strict; use warnings;
 
 my $WIDTH = 76;
-my $LIMIT = 3;
 
-# Each construct: a name, the patterns that detect it (on code with comments
-# and string literals removed), and the note - text, or a sub that builds the
+# Each construct: a name, the patterns that detect it (on every line that is
+# not a whole-line comment), and the note - text, or a sub that builds the
 # text from which of the patterns matched.
 my @CONSTRUCTS = (
     { name => 'sequence', patterns => [qr/[A-Za-z_\]\)]\{\}/],
@@ -26,6 +26,17 @@ my @CONSTRUCTS = (
       note => '`T[]` is the read-only list trait - elements can be read by index' },
     { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
       note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read' },
+    { name => 'constructors', patterns => [map { my $n = $_; qr/(?:\|>\s*|^\s*)$n\(\)/ } qw(LIST SET MAP ARRAY)],
+      note => sub {
+          my ($hit, $first) = @_;
+          my @present = sort { $first->[$a] <=> $first->[$b] } grep { $hit->[$_] } 0 .. 3;
+          return undef unless @present;
+          my @names = map { '`' . (qw(LIST SET MAP ARRAY))[$_] . '()`' } @present;
+          my $list = @names == 1 ? $names[0] : join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
+          return $list . (@names == 1 ? ' builds its collection eagerly' : ' build their collections eagerly');
+      } },
+    { name => 'yield', patterns => [qr/\byield\b/],
+      note => '`yield` in a function makes it a generator, returning a lazy `T{}` sequence' },
     { name => 'thread-first', patterns => [qr/\|>/, qr/~>/],
       note => '`|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`' },
     { name => 'absent-coalescing', patterns => [qr/~>/],
@@ -50,19 +61,8 @@ my @CONSTRUCTS = (
           $text .= ', and `[x, ..rest]` matches a list head and tail' if $hit->[2];
           return $text;
       } },
-    { name => 'constructors', patterns => [map { my $n = $_; qr/(?:\|>\s*|^\s*)$n\(\)/ } qw(LIST SET MAP ARRAY)],
-      note => sub {
-          my ($hit, $first) = @_;
-          my @present = sort { $first->[$a] <=> $first->[$b] } grep { $hit->[$_] } 0 .. 3;
-          return undef unless @present;
-          my @names = map { '`' . (qw(LIST SET MAP ARRAY))[$_] . '()`' } @present;
-          my $list = @names == 1 ? $names[0] : join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
-          return $list . (@names == 1 ? ' builds' : ' build') . ' a collection eagerly';
-      } },
     { name => 'memo', patterns => [qr/\bmemo\s+(?:=>|is\b|rec\b|pure\b)|\b(?:rec|pure)\s+memo\b|\bmemo\s*$/],
       note => '`memo` on a function caches its results - a call with arguments equal to an earlier call\'s returns the cached result, recursive calls included' },
-    { name => 'yield', patterns => [qr/\byield\b/],
-      note => '`yield` in a function makes it a generator, returning a lazy `T{}` sequence' },
 );
 
 # A block is recognised by its first line: the start of any note.
@@ -110,8 +110,8 @@ sub default_files {
     return sort @all;
 }
 
-# The note lines a source wants: at most $LIMIT notes, each wrapped to $WIDTH,
-# in order of the construct's first appearance.
+# The note lines a source wants: one note for each construct it uses, each
+# wrapped to $WIDTH, in the order of the table.
 sub wanted_notes {
     my ($lines) = @_;
     my @first;   # per construct: per pattern, the first line it matched
@@ -131,17 +131,12 @@ sub wanted_notes {
     for my $c (0 .. $#CONSTRUCTS) {
         my $patterns = $CONSTRUCTS[$c]{patterns};
         my @hit = map { defined $first[$c][$_] ? 1 : 0 } 0 .. $#$patterns;
-        my @lines_hit = grep { defined } @{ $first[$c] || [] };
-        next unless @lines_hit;
-        my $at = (sort { $a <=> $b } @lines_hit)[0];
+        next unless grep { $_ } @hit;
         my $note = $CONSTRUCTS[$c]{note};
         my $text = ref $note ? $note->(\@hit, $first[$c]) : $note;
-        next unless defined $text;
-        push @notes, [$at, $c, $text];
+        push @notes, $text if defined $text;
     }
-    @notes = sort { $a->[0] <=> $b->[0] || $a->[1] <=> $b->[1] } @notes;
-    splice @notes, $LIMIT if @notes > $LIMIT;
-    return map { wrap($_->[2]) } @notes;
+    return map { wrap($_) } @notes;
 }
 
 # One note as comment lines no wider than $WIDTH. A backtick span is never
@@ -162,14 +157,11 @@ sub wrap {
     return @out;
 }
 
-# Code only: no comment, no string or character literal contents.
+# A whole-line comment is not code: it is skipped, so the notes never detect
+# themselves. Everything else on the line counts.
 sub strip {
-    my ($s) = @_;
-    return '' if $s =~ /^\s*\/\//;
-    $s =~ s{//.*$}{};
-    $s =~ s{"(?:[^"\\]|\\.)*"}{""}g;
-    $s =~ s{'(?:[^'\\]|\\.)*'}{''}g;
-    return $s;
+    my ($line) = @_;
+    return $line =~ m{^\s*//} ? '' : $line;
 }
 
 # The source with its note block replaced. The block sits after the head -

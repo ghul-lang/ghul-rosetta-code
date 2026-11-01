@@ -5,6 +5,7 @@ use default
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
 // `==` compares identity
+// `case ... when` pattern-matches
 
 union Tree is
     LEAF(value: int)

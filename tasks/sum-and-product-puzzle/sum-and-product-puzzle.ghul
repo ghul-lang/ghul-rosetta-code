@@ -7,6 +7,7 @@ use Pair = (x: int, y: int)
 // index materialises the source only as far as that index and caches what
 // it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 sum(pair: Pair) -> int => pair.x + pair.y
 product(pair: Pair) -> int => pair.x * pair.y

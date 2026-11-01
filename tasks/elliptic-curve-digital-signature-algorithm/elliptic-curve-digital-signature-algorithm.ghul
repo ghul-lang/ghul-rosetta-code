@@ -2,8 +2,8 @@ use default
 
 use Point = (x: bigint, y: bigint)
 
-// `if let` pattern-matches
 // `=~` compares values (structural equality) - `==` compares identity
+// `if let` pattern-matches
 
 let p = 1073741789n
 let a = 355n

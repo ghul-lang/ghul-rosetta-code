@@ -1,7 +1,7 @@
 use default
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 
 let limit = 1 << 20
 

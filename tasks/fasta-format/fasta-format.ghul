@@ -4,9 +4,9 @@ use Record = (name: string, sequence: string)
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `if let` pattern-matches
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `if let` pattern-matches
 
 records(lines: string{}) -> Record{} is
     let name mut = null

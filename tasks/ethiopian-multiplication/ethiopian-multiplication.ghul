@@ -2,8 +2,8 @@ use default
 
 use ROW = (multiplier: int, total: int)
 
-// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 halve(value: int) -> int => value / 2
 

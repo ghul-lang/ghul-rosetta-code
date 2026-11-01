@@ -1,9 +1,9 @@
 use default
 use System.Math.*
 
-// `==` compares identity
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
+// `==` compares identity
 
 let dictionary = [
     "accommodate", "believe", "commitment", "definite", "existence",

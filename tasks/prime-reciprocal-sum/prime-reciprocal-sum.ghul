@@ -1,10 +1,10 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 next_prime(n: bigint) -> bigint =>
     from(0) |> map(k => n + bigint(k)) |> find(is_prime)!

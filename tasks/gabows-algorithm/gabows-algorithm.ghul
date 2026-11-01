@@ -2,8 +2,8 @@ use default
 
 use Edge = (from: int, to: int)
 
-// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 let size = 13
 

@@ -2,8 +2,8 @@ use default
 
 use COLOUR = (red: ubyte, green: ubyte, blue: ubyte)
 
+// `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 
 class BITMAP is
     width: int

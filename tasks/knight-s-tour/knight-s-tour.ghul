@@ -5,10 +5,11 @@ use Raster.SHAPES
 
 use Square = (file: int, rank: int)
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 let size = 8
 let start = (file = 0, rank = 0)

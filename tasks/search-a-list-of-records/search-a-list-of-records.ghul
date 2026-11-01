@@ -3,8 +3,9 @@ use default
 use City = (name: string, population: double)
 
 // `T[]` is the read-only list trait - elements can be read by index
-// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
 let cities: City[] = [
     ("Lagos", 21.0D),
