@@ -394,7 +394,7 @@ notation(move: Move) -> string =>
     in
     "{name(move.from)}{name(move.to)}{promotion}"
 
-let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> collect_map()
+let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> MAP()
 
 show(position: POSITION) is
     for row in 0..8 do

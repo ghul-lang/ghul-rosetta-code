@@ -64,9 +64,7 @@ survives(grid: Grid, row: int, column: int) -> bool =>
 
 step(grid: Grid) -> Grid =>
     (0..rows)
-        |> map(row =>
-            (0..columns) |> map(survives(grid, row, *)) |> list()
-        )
+        |> map(row => (0..columns) |> map(survives(grid, row, *)) |> list())
         |> list()
 
 draw(image: IMAGE, grid: Grid) is

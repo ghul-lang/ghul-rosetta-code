@@ -28,7 +28,7 @@ class GRID is
                 )
                 |> ARRAY()
 
-        wet = repeat(false, width * height) |> collect_mutable()
+        wet = repeat(false, width * height) |> LIST()
     si
 
     floor(column: int, row: int) -> bool => floors[row * width + column]

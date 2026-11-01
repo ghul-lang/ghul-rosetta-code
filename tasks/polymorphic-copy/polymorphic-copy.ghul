@@ -22,7 +22,7 @@ class DOG(name: string, tricks: LIST[string]): Animal is
     speak() -> string =>
         "{name} says woof, and can {string.join(" and ", tricks)}"
 
-    copy() -> Animal => DOG(name, tricks |> collect_mutable())
+    copy() -> Animal => DOG(name, tricks |> LIST())
 si
 
 duplicate[T: Copyable[T]](value: T) -> T => value.copy()

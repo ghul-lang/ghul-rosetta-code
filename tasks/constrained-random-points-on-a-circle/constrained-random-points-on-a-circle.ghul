@@ -14,7 +14,7 @@ in_ring(p: (x: int, y: int)) -> bool =>
     square >= 100 /\ square <= 225
 
 let points = candidates() |> filter(in_ring) |> take(100) |> list()
-let distinct = points |> collect_set()
+let distinct = points |> SET()
 
 write_line("{points.count} points, {distinct.count} of them different")
 write_line("")

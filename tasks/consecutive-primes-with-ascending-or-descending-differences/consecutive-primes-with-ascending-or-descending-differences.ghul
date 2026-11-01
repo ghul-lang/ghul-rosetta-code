@@ -1,7 +1,7 @@
 use default
 
 primes_below(limit: int) -> int{} is
-    let composite = repeat(false, limit) |> collect_mutable()
+    let composite = repeat(false, limit) |> LIST()
 
     for candidate in 2..limit do
         if !composite[candidate] then
@@ -17,10 +17,7 @@ primes_below(limit: int) -> int{} is
     od
 si
 
-longest_run(
-    primes: int[],
-    keeps_going: (int, int) -> bool
-) -> int[] is
+longest_run(primes: int[], keeps_going: (int, int) -> bool) -> int[] is
     let best mut = (start = 0, length = 1)
     let start mut = 0
 

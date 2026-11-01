@@ -28,7 +28,7 @@ interpret(program: string, operations: Map[char, () -> void]) is
     od
 si
 
-let rabbits = [('I', "M"), ('M', "MI")] |> collect_map()
+let rabbits = [('I', "M"), ('M', "MI")] |> MAP()
 
 let generation mut = "I"
 
@@ -40,7 +40,7 @@ for step in 1..6 do
     write_line("{step} {generation}")
 od
 
-let plant = [('X', "F+[[X]-X]-F[-FX]+X"), ('F', "FF")] |> collect_map()
+let plant = [('X', "F+[[X]-X]-F[-FX]+X"), ('F', "FF")] |> MAP()
 
 let image = IMAGE(500, 500)
 
@@ -60,7 +60,7 @@ let drawing = [
     ('+', () => pen.turn(-25.0)),
     ('-', () => pen.turn(25.0))
 ]
-    |> collect_mutable_map()
+    |> MAP()
 
 drawing['['] =
     () => saved.add((x = pen.x, y = pen.y, heading = pen.heading))

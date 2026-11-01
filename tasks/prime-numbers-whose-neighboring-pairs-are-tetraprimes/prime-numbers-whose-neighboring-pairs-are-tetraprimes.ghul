@@ -1,8 +1,8 @@
 use default
 
 let limit = 10_000_000
-let distinct_factors = repeat(0, limit + 3) |> collect_mutable()
-let square_free = repeat(true, limit + 3) |> collect_mutable()
+let distinct_factors = repeat(0, limit + 3) |> LIST()
+let square_free = repeat(true, limit + 3) |> LIST()
 
 for p in 2..limit + 3 do
     if distinct_factors[p] == 0 then

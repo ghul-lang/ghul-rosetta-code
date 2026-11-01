@@ -8,9 +8,9 @@ class NUMBRIX is
 
     init(rows: int[][]) is
         _size = rows.count
-        _grid = rows |> flat_map(row => row) |> collect_mutable()
+        _grid = rows |> flat_map(row => row) |> LIST()
         _last = _size * _size
-        _given = repeat(-1, _last + 1) |> collect_mutable()
+        _given = repeat(-1, _last + 1) |> LIST()
 
         for cell in 0.._last do
             if _grid[cell] > 0 then

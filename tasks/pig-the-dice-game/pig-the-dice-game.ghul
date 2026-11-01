@@ -11,7 +11,7 @@ class DIE(seed: int init) is
 si
 
 let die = DIE(2026)
-let safe = repeat(0, 2) |> collect_mutable()
+let safe = repeat(0, 2) |> LIST()
 let player mut = 0
 let turn mut = 0
 

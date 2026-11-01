@@ -27,7 +27,7 @@ show(1L, 145L)
 show(1_000_000_000_000L, 1_000_000_000_145L)
 
 let limit = 1_000_000
-let square_free = repeat(true, limit + 1) |> collect_mutable()
+let square_free = repeat(true, limit + 1) |> LIST()
 
 for d in 2::1000 do
     let square = d * d

@@ -41,8 +41,7 @@ mutate(sequence: LIST[char]) -> string is
     esac
 si
 
-let sequence =
-    0..200 |> map(_ => bases[random.next(0, 4)]) |> collect_mutable()
+let sequence = 0..200 |> map(_ => bases[random.next(0, 4)]) |> LIST()
 
 show("original sequence:", sequence)
 

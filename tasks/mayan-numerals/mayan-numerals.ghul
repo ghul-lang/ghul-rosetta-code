@@ -18,7 +18,7 @@ vigesimal(n: int) -> int{} is
 si
 
 glyph(digit: int) -> string[] is
-    let rows = ["    ", "    ", "    ", "    "] |> collect_mutable()
+    let rows = ["    ", "    ", "    ", "    "] |> LIST()
 
     if digit == 0 then
         rows[3] = " @  "

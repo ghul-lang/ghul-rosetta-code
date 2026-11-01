@@ -20,8 +20,7 @@ let my_books = LIST()
 let you_hold = LIST()
 let you_lack = LIST()
 
-held(hand: int[], rank: int) -> int =>
-    hand |> filter(* == rank) |> count()
+held(hand: int[], rank: int) -> int => hand |> filter(* == rank) |> count()
 
 name_of(rank: int) -> string => ranks[rank]
 
@@ -85,8 +84,7 @@ my_choice() -> int => (
 
     let known = mine |> filter(you_hold.contains) |> list()
 
-    let untried =
-        mine |> filter(rank => !you_lack.contains(rank)) |> list()
+    let untried = mine |> filter(rank => !you_lack.contains(rank)) |> list()
 
     let pool =
         if known.count > 0 then known

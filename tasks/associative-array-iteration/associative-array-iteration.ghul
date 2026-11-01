@@ -5,7 +5,7 @@ let capitals = [
     ("Japan", "Tokyo"),
     ("Peru", "Lima")
 ]
-    |> collect_map()
+    |> MAP()
 
 write_line("keys:   {capitals.keys |> sort() |> join()}")
 write_line("values: {capitals.values |> sort() |> join()}")

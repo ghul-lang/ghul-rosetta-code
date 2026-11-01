@@ -12,8 +12,7 @@ class SUBTRACTIVE is
             s.add((s[n - 2] - s[n - 1] + modulus) % modulus)
         od
 
-        _state =
-            0..55 |> map(n => s[34 * (n + 1) % 55]) |> collect_mutable()
+        _state = 0..55 |> map(n => s[34 * (n + 1) % 55]) |> LIST()
         _index = 0
 
         for _ in 55..220 do

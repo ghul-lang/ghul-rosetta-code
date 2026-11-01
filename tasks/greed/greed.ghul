@@ -18,7 +18,7 @@ let directions = [
     ('x', (0, 1)),
     ('c', (1, 1))
 ]
-    |> collect_map()
+    |> MAP()
 
 let x mut = random.next(width)
 let y mut = random.next(height)

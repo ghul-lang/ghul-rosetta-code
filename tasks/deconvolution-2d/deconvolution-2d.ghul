@@ -58,7 +58,7 @@ si
 
 shape(tensor: Tensor) -> int[] =>
     if let (items): Tensor.ARRAY = tensor then
-        [items.count] ++ shape(items[0]) |> ARRAY()
+        [items.count] ++ shape(items[0]) |> collect()
     else
         []
     fi
@@ -66,7 +66,7 @@ shape(tensor: Tensor) -> int[] =>
 strides_of(dimensions: int[]) -> int[] =>
     0..dimensions.count
         |> map(level => dimensions[level + 1..<0] |> product())
-        |> ARRAY()
+        |> collect()
 
 embed(tensor: Tensor, strides: int[]) -> int[] is
     let size =
@@ -75,7 +75,7 @@ embed(tensor: Tensor, strides: int[]) -> int[] is
             |> zip(strides)
             |> sum_by((extent, stride) => (extent - 1) * stride)
 
-    let values = repeat(0, size + 1) |> collect_mutable()
+    let values = repeat(0, size + 1) |> LIST()
 
     place(t, level, offset) is
         case t
@@ -105,11 +105,7 @@ deconvolve_1d(g: int[], f: int[]) -> int[] is
     h
 si
 
-reshape(
-    values: int[],
-    dimensions: int[],
-    strides: int[]
-) -> Tensor is
+reshape(values: int[], dimensions: int[], strides: int[]) -> Tensor is
     build(level, offset) =>
         if level == dimensions.count then
             Tensor.SCALAR(values[offset])
@@ -119,7 +115,7 @@ reshape(
                     |> map(i =>
                         build(level + 1, offset + i * strides[level])
                     )
-                    |> ARRAY()
+                    |> collect()
             )
         fi
 
@@ -133,7 +129,7 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
         g_shape
             |> zip(shape(f))
             |> map((g_extent, f_extent) => g_extent - f_extent + 1)
-            |> ARRAY()
+            |> collect()
 
     let h_values = deconvolve_1d(embed(g, strides), embed(f, strides))
 
@@ -159,7 +155,7 @@ let tests =
         |> parse_all()
         |> chunk(3)
         |> map(c => (h = c[0], f = c[1], g = c[2]))
-        |> ARRAY()
+        |> collect()
 
 for (dimension, (h, f, g)) in tests |> index() do
     let h_found = deconvolve(g, f) =~ h

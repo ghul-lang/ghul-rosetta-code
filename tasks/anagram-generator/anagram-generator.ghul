@@ -1,7 +1,7 @@
 use default
 
 letter_counts(text: string) -> LIST[int] => (
-    let counts = repeat(0, 26) |> collect_mutable()
+    let counts = repeat(0, 26) |> LIST()
 
     for letter in text do
         if char.is_letter(letter) then

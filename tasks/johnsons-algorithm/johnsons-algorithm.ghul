@@ -34,7 +34,7 @@ let graph = weighted(4, [
 
 potentials(graph: Matrix) -> double[]? is
     let size = graph.count
-    let potential = repeat(0.0, size) |> collect_mutable()
+    let potential = repeat(0.0, size) |> LIST()
 
     relax() is
         let changed mut = false
@@ -73,11 +73,11 @@ shortest_from(
     source: int
 ) -> double?[] is
     let size = graph.count
-    let distance = repeat(cast double?(null), size) |> collect_mutable()
+    let distance = repeat(cast double?(null), size) |> LIST()
 
     distance[source] = 0.0
 
-    let settled = repeat(false, size) |> collect_mutable()
+    let settled = repeat(false, size) |> LIST()
 
     while let
         u = 0..size

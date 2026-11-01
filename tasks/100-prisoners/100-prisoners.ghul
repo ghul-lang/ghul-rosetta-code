@@ -12,7 +12,7 @@ let strategies = [
 ]
 
 shuffled_cards() -> int[] => (
-    let cards = 1::prisoners |> collect_mutable()
+    let cards = 1::prisoners |> LIST()
     for i in 0..cards.count do
         let j = i + random.next(cards.count - i)
         (cards[i], cards[j]) = (cards[j], cards[i])
@@ -32,7 +32,7 @@ follows_the_cycle(cards: int[], prisoner: int) -> bool => (
 )
 
 opens_at_random(cards: int[], prisoner: int) -> bool => (
-    let unopened = 1::prisoners |> collect_mutable()
+    let unopened = 1::prisoners |> LIST()
     for i in 0..attempts do
         let j = i + random.next(unopened.count - i)
         let drawer = unopened[j]

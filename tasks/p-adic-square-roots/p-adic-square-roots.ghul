@@ -92,7 +92,7 @@ square_roots(u: bigint, p: bigint, digits: int) -> bigint[] is
 
         roots = [r + bigint(t) * step for r in roots for t in 0..int(p)]
             |> filter(r => modulo(r * r - u, modulus) =~ 0n)
-            |> collect_set()
+            |> SET()
             |> sort()
             |> ARRAY()
     od

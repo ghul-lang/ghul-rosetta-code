@@ -2,13 +2,10 @@ use default
 
 rounds(players: int) -> (int, int)[]{} is
     let n = if players % 2 == 0 then players else players + 1 fi
-    let seats = (1::n) |> collect_mutable()
+    let seats = (1::n) |> LIST()
 
     for _ in 1..n do
-        yield
-            (0..n / 2)
-                |> map(i => (seats[i], seats[n - 1 - i]))
-                |> list()
+        yield (0..n / 2) |> map(i => (seats[i], seats[n - 1 - i])) |> list()
 
         let last = seats[n - 1]
         seats.remove_at(n - 1)

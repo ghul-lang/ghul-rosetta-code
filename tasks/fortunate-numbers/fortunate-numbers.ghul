@@ -29,7 +29,7 @@ for (i, primorial) in primorials() |> take(count) |> index() do
     fi
 od
 
-let unique = seen |> collect_set() |> sort() |> list()
+let unique = seen |> SET() |> sort() |> list()
 
 write_line("first 50 fortunate numbers:")
 

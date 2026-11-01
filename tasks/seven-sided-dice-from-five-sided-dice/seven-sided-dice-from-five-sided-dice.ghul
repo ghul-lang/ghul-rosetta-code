@@ -24,7 +24,7 @@ check_distribution(
             |> map(_ => generate())
             |> group_by(value => value)
             |> map(entry => (entry.key, entry.value.count))
-            |> collect_map()
+            |> MAP()
 
     let expected = double(calls) / double(counts.count)
     let uniform mut = true

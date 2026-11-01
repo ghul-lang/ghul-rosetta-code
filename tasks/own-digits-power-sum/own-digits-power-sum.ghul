@@ -35,7 +35,7 @@ own_sums(width: int) -> long{} is
 si
 
 for width in 3::9 do
-    let found = own_sums(width) |> collect_mutable()
+    let found = own_sums(width) |> LIST()
 
     found.sort()
 

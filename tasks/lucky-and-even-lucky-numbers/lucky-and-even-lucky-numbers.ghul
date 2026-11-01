@@ -13,8 +13,7 @@ si
 
 sieve(even: bool, limit: int) -> int[] is
     let start = if even then 2 else 1 fi
-    let survivors mut =
-        from(start, 2) |> take_while(* <= limit) |> list()
+    let survivors mut = from(start, 2) |> take_while(* <= limit) |> list()
 
     let position mut = 1
 

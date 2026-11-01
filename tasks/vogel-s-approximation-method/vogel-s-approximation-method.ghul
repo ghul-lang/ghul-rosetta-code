@@ -13,17 +13,16 @@ let costs = [
     [50, 12, 50, 15, 11]
 ]
 
-let supply = [50, 60, 50, 50] |> collect_mutable()
-let demand = [30, 20, 70, 30, 60] |> collect_mutable()
+let supply = [50, 60, 50, 50] |> LIST()
+let demand = [30, 20, 70, 30, 60] |> LIST()
 
 let allocation =
     (0..contractors.count)
-        |> map(_ => repeat(0, tasks.count) |> collect_mutable())
+        |> map(_ => repeat(0, tasks.count) |> LIST())
         |> list()
 
 line(cells: Cell[]) -> Line =>
-    let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> list()
-    in
+    let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> list() in
     let penalty =
         if prices.count > 1 then
             prices[1] - prices[0]

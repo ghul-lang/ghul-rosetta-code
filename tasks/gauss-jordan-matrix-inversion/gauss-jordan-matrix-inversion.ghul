@@ -8,9 +8,9 @@ invert(a: double[][]) -> double[][] is
             |> map(i =>
                 a[i]
                     |> cat(0..n |> map(j => if i == j then 1.0 else 0.0 fi))
-                    |> collect_mutable()
+                    |> LIST()
             )
-            |> collect_mutable()
+            |> LIST()
 
     for k in 0..n do
         let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!

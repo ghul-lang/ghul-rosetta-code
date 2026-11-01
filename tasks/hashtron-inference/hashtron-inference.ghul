@@ -60,9 +60,7 @@ let square_root_program =
         |> list()
 
 let roots =
-    0..256
-        |> map(n => inference(uint(n), 4, square_root_program))
-        |> list()
+    0..256 |> map(n => inference(uint(n), 4, square_root_program)) |> list()
 
 for row in roots |> chunk(16) do
     write_line(row |> map(root => "{root,3}") |> join(""))

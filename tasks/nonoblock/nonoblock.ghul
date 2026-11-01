@@ -27,7 +27,7 @@ draw(cells: int, blocks: int[], starts: int[]) -> string =>
         starts
             |> index()
             |> flat_map((i, start) => start..start + blocks[i])
-            |> collect_set()
+            |> SET()
     in
     let row =
         0..cells |> map(c => if filled.contains(c) then "#" else "_" fi)

@@ -10,7 +10,7 @@ has_small_factor(k: int, m: int, powers: int[]) -> bool =>
         )
 
 always_composite(k: int) -> bool is
-    let powers = small_primes |> map(_ => 1) |> collect_mutable()
+    let powers = small_primes |> map(_ => 1) |> LIST()
 
     for m in 1..k do
         for i in 0..small_primes.count do

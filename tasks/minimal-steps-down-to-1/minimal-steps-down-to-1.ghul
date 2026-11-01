@@ -17,16 +17,12 @@ moves(value: int, divisors: int[], subtractors: int[]) -> MOVE{} is
     od
 si
 
-solve(
-    divisors: int[],
-    subtractors: int[],
-    limit: int
-) -> STEP[] is
+solve(divisors: int[], subtractors: int[], limit: int) -> STEP[] is
     let table = [
         (steps = 0, next = 0, label = ""),
         (steps = 0, next = 0, label = "")
     ]
-        |> collect_mutable()
+        |> LIST()
 
     for value in 2::limit do
         let cheapest =

@@ -2,10 +2,8 @@ use default
 
 optimal_order(dims: long[]) -> (cost: long, order: string) is
     let n = dims.count - 1
-    let cost =
-        0..n |> map(_ => repeat(0L, n) |> collect_mutable()) |> list()
-    let split =
-        0..n |> map(_ => repeat(0, n) |> collect_mutable()) |> list()
+    let cost = 0..n |> map(_ => repeat(0L, n) |> LIST()) |> list()
+    let split = 0..n |> map(_ => repeat(0, n) |> LIST()) |> list()
 
     for length in 2::n do
         for i in 0::n - length do

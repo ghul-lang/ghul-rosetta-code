@@ -6,14 +6,9 @@ held_karp(cost: int[][]) -> (total: int, tour: int[]) is
     let unreached = int.max_value
 
     let best =
-        0..subsets
-            |> map(_ => repeat(unreached, n) |> collect_mutable())
-            |> list()
+        0..subsets |> map(_ => repeat(unreached, n) |> LIST()) |> list()
 
-    let previous =
-        0..subsets
-            |> map(_ => repeat(-1, n) |> collect_mutable())
-            |> list()
+    let previous = 0..subsets |> map(_ => repeat(-1, n) |> LIST()) |> list()
 
     best[1][0] = 0
 

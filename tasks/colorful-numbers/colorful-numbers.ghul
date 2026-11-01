@@ -40,7 +40,7 @@ si
 let digits = LIST(2::9)
 
 let candidates = (0::9) ++ arrangements(0, digits)
-let colorful = candidates |> filter(is_colorful) |> collect_mutable()
+let colorful = candidates |> filter(is_colorful) |> LIST()
 
 colorful.sort()
 

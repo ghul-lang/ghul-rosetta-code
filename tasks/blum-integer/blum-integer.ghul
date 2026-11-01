@@ -1,7 +1,7 @@
 use default
 
 let limit = 8_900_000
-let smallest_factor = repeat(0, limit + 1) |> collect_mutable()
+let smallest_factor = repeat(0, limit + 1) |> LIST()
 
 for candidate in 2::limit do
     if smallest_factor[candidate] == 0 then

@@ -4,7 +4,7 @@ let random = System.Random(2011)
 let trials = 100_000
 
 loop_length(n: int) -> int => (
-    let seen = repeat(false, n + 1) |> collect_mutable()
+    let seen = repeat(false, n + 1) |> LIST()
     let x mut = 1
     let length mut = 0
 

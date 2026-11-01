@@ -4,7 +4,7 @@ totals(dice: int, faces: int) -> long{} is
     let counts = LIST([1L])
 
     for _ in 0..dice do
-        let next = repeat(0L, counts.count + faces) |> collect_mutable()
+        let next = repeat(0L, counts.count + faces) |> LIST()
 
         for (total, ways) in counts |> index() do
             for face in 1::faces do

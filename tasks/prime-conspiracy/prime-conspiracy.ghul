@@ -8,7 +8,7 @@ let transitions =
         |> map(i => last_digits[i - 1] * 10 + last_digits[i])
         |> group_by(key => key)
         |> map(group => (group.key, group.value.count))
-        |> collect_map()
+        |> MAP()
 
 write_line(
     "{count:N0} first primes. "

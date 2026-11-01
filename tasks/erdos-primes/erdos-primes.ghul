@@ -14,8 +14,7 @@ od
 is_erdos(prime: int) -> bool =>
     factorials |> filter(* < prime) |> all(f => !is_prime(prime - f))
 
-let erdos =
-    primes() |> take_while(* <= limit) |> filter(is_erdos) |> list()
+let erdos = primes() |> take_while(* <= limit) |> filter(is_erdos) |> list()
 
 let below_2500 = erdos |> filter(* < 2_500) |> list()
 

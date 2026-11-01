@@ -120,8 +120,7 @@ hull(points: Point[]) -> FACE[] is
         fi
 
     for point in points do
-        let visible =
-            faces |> filter(face => face.outside(point)) |> list()
+        let visible = faces |> filter(face => face.outside(point)) |> list()
 
         if visible.count == 0 then
             continue

@@ -24,7 +24,7 @@ letters(s: string) -> string =>
         |> string()
 
 solve(names: string{}) is
-    let states = names |> collect_set() |> sort() |> list()
+    let states = names |> SET() |> sort() |> list()
     let groups = MAP()
 
     for i in 0..states.count do

@@ -6,7 +6,7 @@ use default
 let limit = 100_000
 
 let consummate = (
-    let seen = repeat(false, limit) |> collect_mutable()
+    let seen = repeat(false, limit) |> LIST()
 
     for n in 1..6_300_000 do
         let s = digit_sum(n)

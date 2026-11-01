@@ -2,12 +2,7 @@ use default
 
 use Register = (connection: int[], length: int)
 
-predict(
-    sequence: int[],
-    connection: int[],
-    length: int,
-    n: int
-) -> int =>
+predict(sequence: int[], connection: int[], length: int, n: int) -> int =>
     [
         connection[k] & sequence[n - k]
         for k in 1::length
@@ -66,11 +61,7 @@ polynomial(coefficients: int[]) -> string =>
         )
         |> join(" + ")
 
-regenerates(
-    sequence: int[],
-    connection: int[],
-    length: int
-) -> bool =>
+regenerates(sequence: int[], connection: int[], length: int) -> bool =>
     length..sequence.count
         |> all(n => predict(sequence, connection, length, n) == sequence[n])
 

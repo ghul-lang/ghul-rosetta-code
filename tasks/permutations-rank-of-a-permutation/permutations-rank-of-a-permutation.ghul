@@ -2,7 +2,7 @@ use default
 
 // Lexicographic order, read as a number in the factorial base.
 unrank(rank: bigint, n: int) -> int[] => (
-    let left = 0..n |> collect_mutable()
+    let left = 0..n |> LIST()
     let result = LIST()
     let rest mut = rank
 

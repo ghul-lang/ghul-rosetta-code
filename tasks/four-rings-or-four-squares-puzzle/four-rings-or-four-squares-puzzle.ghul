@@ -26,8 +26,7 @@ solutions(low: int, high: int, unique: bool) -> Solution{} is
                                 (
                                     !unique \/
                                     (
-                                        [a, b, c, d, e, f, g]
-                                            |> collect_set()
+                                        [a, b, c, d, e, f, g] |> SET()
                                     ).count == 7
                                 )
                             then

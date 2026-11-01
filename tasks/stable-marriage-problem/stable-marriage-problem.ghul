@@ -42,7 +42,7 @@ let men_preferences = [
         "bea", "dee", "cath", "ivy", "hope"
     ])
 ]
-    |> collect_map()
+    |> MAP()
 
 let women_preferences = [
     ("abi", [
@@ -86,7 +86,7 @@ let women_preferences = [
         "jon", "col", "ian", "fred", "dan"
     ])
 ]
-    |> collect_map()
+    |> MAP()
 
 rank(preferences: ARRAY[string], name: string) -> int =>
     preferences |> find_index(* =~ name)!

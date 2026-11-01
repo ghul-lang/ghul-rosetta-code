@@ -117,9 +117,7 @@ subdivided(mesh: Mesh) -> Mesh is
             let n = double(touching_faces.count)
 
             let face_average = centre(
-                touching_faces
-                    |> map(index => face_points[index])
-                    |> list()
+                touching_faces |> map(index => face_points[index]) |> list()
             )
 
             let edge_average = centre(

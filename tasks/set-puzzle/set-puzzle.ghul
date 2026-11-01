@@ -33,9 +33,7 @@ triples(cards: CARD[]) -> Triple{} is
 si
 
 let deck =
-    (0..81)
-        |> map(i => CARD(i % 3, i / 3 % 3, i / 9 % 3, i / 27))
-        |> collect_mutable()
+    (0..81) |> map(i => CARD(i % 3, i / 3 % 3, i / 9 % 3, i / 27)) |> LIST()
 
 let random = System.Random(81)
 

@@ -15,19 +15,19 @@ class LCA is
 
     init(parents: int[]) is
         let n = parents.count - 1
-        let child = repeat(0, n + 1) |> collect_mutable()
-        let sibling = repeat(0, n + 1) |> collect_mutable()
+        let child = repeat(0, n + 1) |> LIST()
+        let sibling = repeat(0, n + 1) |> LIST()
 
         for v in (1::n) |> reverse() do
             sibling[v] = child[parents[v]]
             child[parents[v]] = v
         od
 
-        let pi = repeat(0, n + 1) |> collect_mutable()
-        let beta = repeat(0, n + 1) |> collect_mutable()
-        let alfa = repeat(0, n + 1) |> collect_mutable()
-        let tau = repeat(0, n + 1) |> collect_mutable()
-        let lambda = repeat(0, n + 1) |> collect_mutable()
+        let pi = repeat(0, n + 1) |> LIST()
+        let beta = repeat(0, n + 1) |> LIST()
+        let alfa = repeat(0, n + 1) |> LIST()
+        let tau = repeat(0, n + 1) |> LIST()
+        let lambda = repeat(0, n + 1) |> LIST()
 
         lambda[0] = -1
 

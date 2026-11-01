@@ -26,7 +26,7 @@ outcomes(count: int) -> Result[]{} is
 si
 
 standings(results: Result[]) -> int{} => (
-    let points = repeat(0, 4) |> collect_mutable()
+    let points = repeat(0, 4) |> LIST()
 
     for ((home, away), result) in zip(games, results) do
         let (home_points, away_points) =
@@ -43,8 +43,7 @@ standings(results: Result[]) -> int{} => (
     points |> sort_descending()
 )
 
-let histogram =
-    (0..4) |> map(_ => repeat(0, 10) |> collect_mutable()) |> list()
+let histogram = (0..4) |> map(_ => repeat(0, 10) |> LIST()) |> list()
 
 for results in outcomes(games.count) do
     for (place, points) in results |> standings() |> index() do

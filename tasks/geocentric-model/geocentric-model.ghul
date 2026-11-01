@@ -82,9 +82,7 @@ draw(image: IMAGE, frame: int) is
 
     for body in bodies do
         let trail =
-            (0::frame)
-                |> map(f => around_earth(body, year_of(f)))
-                |> list()
+            (0::frame) |> map(f => around_earth(body, year_of(f))) |> list()
 
         let here = trail[trail.count - 1]
         let marker = if body.name =~ "Sun" then 4.0D else 2.5D fi

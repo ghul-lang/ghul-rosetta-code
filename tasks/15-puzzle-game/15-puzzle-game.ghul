@@ -6,7 +6,7 @@ let squares = side * side
 
 let random = System.Random(20260908)
 
-let board = 1::squares |> map(* % squares) |> collect_mutable()
+let board = 1::squares |> map(* % squares) |> LIST()
 
 blank() -> int => board |> find_index(* == 0)!
 

@@ -10,7 +10,7 @@ class INCIDENCE_CUBE is
 
     init(square: Square, random: System.Random) is
         _n = square.count
-        _cells = repeat(0b, _n * _n * _n) |> collect_mutable()
+        _cells = repeat(0b, _n * _n * _n) |> LIST()
         _random = random
         _improper = null
 
@@ -125,9 +125,7 @@ is_latin(square: Square) -> bool =>
         )
 
 cyclic(n: int) -> Square =>
-    0..n
-        |> map(r => 0..n |> map(c => (r + c) % n + 1) |> list())
-        |> list()
+    0..n |> map(r => 0..n |> map(c => (r + c) % n + 1) |> list()) |> list()
 
 tally(n: int, squares: int, random: System.Random) -> (
     square: string,

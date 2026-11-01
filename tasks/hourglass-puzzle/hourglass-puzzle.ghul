@@ -18,8 +18,7 @@ flip(s: State, which: string) -> State =>
         (small = small - s.small, large = large - s.large, time = s.time)
     esac
 
-running(s: State) -> int[] =>
-    [s.small, s.large] |> filter(* > 0) |> list()
+running(s: State) -> int[] => [s.small, s.large] |> filter(* > 0) |> list()
 
 wait(s: State) -> State? =>
     let sands = running(s) in
@@ -64,7 +63,7 @@ plan(start: State) -> string[]? is
         for (command, next) in moves(state) do
             if next.time <= target /\ !seen.contains(next) then
                 seen.add(next)
-                let longer = path ++ [command] |> collect_mutable()
+                let longer = path ++ [command] |> LIST()
 
                 queue.enqueue((state = next, path = longer))
             fi

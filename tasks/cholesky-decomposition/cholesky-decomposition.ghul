@@ -2,10 +2,7 @@ use default
 
 cholesky(a: double[][]) -> double[][] is
     let size = a.count
-    let l =
-        0..size
-            |> map(_ => repeat(0.0, size) |> collect_mutable())
-            |> list()
+    let l = 0..size |> map(_ => repeat(0.0, size) |> LIST()) |> list()
 
     for i in 0..size do
         for k in 0::i do

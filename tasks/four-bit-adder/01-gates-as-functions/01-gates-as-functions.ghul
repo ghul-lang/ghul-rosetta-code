@@ -24,7 +24,7 @@ four_bit_adder(a: bool[], b: bool[], carry_in: bool) -> (
     sum: bool[],
     carry: bool
 ) is
-    let wires = repeat(false, 4) |> collect_mutable()
+    let wires = repeat(false, 4) |> LIST()
     let carry mut = carry_in
 
     for at in 0..4 do

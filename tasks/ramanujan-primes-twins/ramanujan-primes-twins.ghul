@@ -3,7 +3,7 @@ use default
 let wanted = 1_000_000
 let limit = 35_000_000
 
-let composite = repeat(false, limit + 1) |> collect_mutable()
+let composite = repeat(false, limit + 1) |> LIST()
 
 let factor mut = 2
 
@@ -21,7 +21,7 @@ while factor * factor <= limit do
     factor = factor + 1
 od
 
-let counted = repeat(0, limit + 1) |> collect_mutable()
+let counted = repeat(0, limit + 1) |> LIST()
 
 let seen mut = 0
 
@@ -35,7 +35,7 @@ od
 
 // R(n) is one past the largest x where the primes in (x/2, x] number fewer
 // than n, so walking x upward leaves each entry holding the last such x.
-let ramanujan = repeat(0, wanted + 2) |> collect_mutable()
+let ramanujan = repeat(0, wanted + 2) |> LIST()
 
 for x in 1::limit do
     let between = counted[x] - counted[x / 2]
@@ -45,7 +45,7 @@ for x in 1::limit do
     fi
 od
 
-let is_ramanujan = repeat(false, limit + 3) |> collect_mutable()
+let is_ramanujan = repeat(false, limit + 3) |> LIST()
 
 for n in 1::wanted do
     is_ramanujan[ramanujan[n]] = true

@@ -49,7 +49,7 @@ class WAVELET(values: int[] init) is
 
             _levels.add(BITS(holding |> map(set) |> list()))
 
-            let zeros = holding |> filter(v => !set(v)) |> collect_mutable()
+            let zeros = holding |> filter(v => !set(v)) |> LIST()
             let ones = holding |> filter(set) |> list()
 
             _below.add(zeros.count)

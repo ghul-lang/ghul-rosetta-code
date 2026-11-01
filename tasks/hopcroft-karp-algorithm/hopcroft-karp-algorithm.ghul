@@ -104,13 +104,7 @@ si
 
 use Edge = (from: int, to: int)
 
-check(
-    number: int,
-    left: int,
-    right: int,
-    edges: Edge[],
-    expected: int
-) is
+check(number: int, left: int, right: int, edges: Edge[], expected: int) is
     let graph = BIPARTITE(left, right)
 
     for (from, to) in edges do

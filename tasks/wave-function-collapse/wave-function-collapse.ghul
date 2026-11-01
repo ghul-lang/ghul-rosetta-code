@@ -27,7 +27,7 @@ fits_below(top: int, bottom: int) -> bool =>
 wrap(i: int) -> int => (i + grid) % grid
 
 attempt() -> int[]? is
-    let placed = repeat(-1, grid * grid) |> collect_mutable()
+    let placed = repeat(-1, grid * grid) |> LIST()
     let options = LIST[LIST[int]](
         0..grid * grid |> map(_ => LIST(0..blocks.count))
     )

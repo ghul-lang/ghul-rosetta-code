@@ -5,7 +5,7 @@ use System.Math.*
 
 let days = 365
 let random = System.Random(365)
-let counts = repeat(0, days) |> collect_mutable()
+let counts = repeat(0, days) |> LIST()
 
 shared(people: int, at_least: int) -> bool is
     for day in 0..days do

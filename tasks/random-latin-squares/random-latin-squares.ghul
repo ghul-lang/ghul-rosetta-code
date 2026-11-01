@@ -7,8 +7,8 @@ let random = System.Random(1783)
 // still paint itself into a corner, and the square is started again when it
 // does.
 try_row(rows: int[][], size: int) -> int[]? is
-    let row = repeat(-1, size) |> collect_mutable()
-    let taken = repeat(false, size) |> collect_mutable()
+    let row = repeat(-1, size) |> LIST()
+    let taken = repeat(false, size) |> LIST()
 
     for column in 0..size do
         let free =

@@ -39,7 +39,7 @@ for n in [99999, 499999, 999999] do
     write_line("radical[{n}] = {radical[n]}")
 od
 
-let distribution = repeat(0, 8) |> collect_mutable()
+let distribution = repeat(0, 8) |> LIST()
 
 for n in 1..(limit + 1) do
     let count = factor_counts[n]
@@ -58,9 +58,7 @@ prime(n: int, factors: int[], radicals: int[]) -> bool =>
     n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
 
 let primes =
-    (2..(limit + 1))
-        |> filter(prime(*, factor_counts, radical))
-        |> list()
+    (2..(limit + 1)) |> filter(prime(*, factor_counts, radical)) |> list()
 
 let powers mut = 0
 

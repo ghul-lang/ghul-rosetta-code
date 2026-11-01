@@ -61,7 +61,7 @@ perfect_matching(vertices: int[]) -> Edge{} =>
 
 eulerian_circuit(n: int, edges: Edge[]) -> int{} is
     let unused = 0..n |> map(_ => LIST()) |> list()
-    let used = repeat(false, edges.count) |> collect_mutable()
+    let used = repeat(false, edges.count) |> LIST()
 
     for (edge, (from, to)) in edges |> index() do
         unused[from].add((edge, other = to))
@@ -100,7 +100,7 @@ let matching = perfect_matching(odd)
 let circuit = eulerian_circuit(n, tree ++ matching |> list())
 
 let visited = SET()
-let tour = circuit |> filter(visited.add) |> collect_mutable()
+let tour = circuit |> filter(visited.add) |> LIST()
 
 tour.add(tour[0])
 

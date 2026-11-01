@@ -12,10 +12,7 @@ name(c: Card) -> string => "{ranks[c.rank]}{suits[c.suit]}"
 
 play(seed: int) -> (winner: int, rounds: int) is
     let random = System.Random(seed)
-    let deck =
-        (0..52)
-            |> map(i => (rank = i % 13, suit = i / 13))
-            |> collect_mutable()
+    let deck = (0..52) |> map(i => (rank = i % 13, suit = i / 13)) |> LIST()
 
     for i in 0..51 do
         let other = i + random.next(52 - i)

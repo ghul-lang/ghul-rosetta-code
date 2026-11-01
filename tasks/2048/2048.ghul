@@ -9,7 +9,7 @@ let directions = "wasd"
 
 let random = System.Random(20260908)
 
-let board = repeat(0, squares) |> collect_mutable()
+let board = repeat(0, squares) |> LIST()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
@@ -78,12 +78,7 @@ spawn() is
 si
 
 stuck() -> bool =>
-    !(
-        directions
-            |> any(direction =>
-                slide(board |> collect_mutable(), direction)
-            )
-    )
+    !(directions |> any(direction => slide(board |> LIST(), direction)))
 
 show() is
     for row in 0..side do

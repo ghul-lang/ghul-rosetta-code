@@ -14,7 +14,7 @@ value_of(digits: string, base: int) -> long =>
 is_penholodigital(square: long, base: int) -> bool =>
     let ds = square |> digits(long(base)) |> list() in
     ds.count == base - 1 /\
-    ds |> collect_set() |> count() == ds.count /\
+    ds |> SET() |> count() == ds.count /\
     ds |> all(* > 0L)
 
 roots(base: int) -> long[] is

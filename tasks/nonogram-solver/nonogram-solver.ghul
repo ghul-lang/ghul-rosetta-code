@@ -154,7 +154,7 @@ let problems =
 for (number, problem) in problems |> index() do
     let puzzle = PUZZLE(clues_of(problem.rows), clues_of(problem.columns))
     let size = puzzle.rows * puzzle.columns
-    let start = repeat(unknown, size) |> collect_mutable()
+    let start = repeat(unknown, size) |> LIST()
 
     write_line("problem {number + 1}: {puzzle.columns} by {puzzle.rows}")
 

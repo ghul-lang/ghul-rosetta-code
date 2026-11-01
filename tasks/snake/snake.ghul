@@ -18,7 +18,7 @@ let steps = [
     ('s', (dx = 0, dy = 1)),
     ('d', (dx = 1, dy = 0))
 ]
-    |> collect_map()
+    |> MAP()
 
 new_food() -> (x: int, y: int) is
     while true do

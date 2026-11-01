@@ -42,7 +42,7 @@ let black =
                         column <= line.length /\
                         line[column - 1] == '#'
                 )
-                |> collect_mutable()
+                |> LIST()
         )
         |> ARRAY()
 

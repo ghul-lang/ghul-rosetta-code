@@ -54,9 +54,7 @@ md5(message: ubyte[]) -> string is
 
     while start < block.count do
         let words =
-            0..16
-                |> map(index => word(block, start + index * 4))
-                |> list()
+            0..16 |> map(index => word(block, start + index * 4)) |> list()
 
         let a mut = state[0]
         let b mut = state[1]

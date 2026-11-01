@@ -90,7 +90,7 @@ si
 sorted() -> Filter => source => in_order(source)
 
 in_order(source: Stream) -> Stream => (
-    let lines = source |> collect_mutable()
+    let lines = source |> LIST()
 
     lines.sort((a: string, b: string) -> int => string.compare(a, b))
 

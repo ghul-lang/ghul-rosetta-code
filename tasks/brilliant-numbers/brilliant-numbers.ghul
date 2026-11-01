@@ -1,7 +1,7 @@
 use default
 
 primes_below(limit: int) -> int{} is
-    let composite = repeat(false, limit) |> collect_mutable()
+    let composite = repeat(false, limit) |> LIST()
 
     for candidate in 2..limit do
         if !composite[candidate] then

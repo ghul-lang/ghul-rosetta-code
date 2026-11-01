@@ -7,7 +7,7 @@ use default
 let limit = 500_000
 
 let divisor_count = (
-    let counts = repeat(0, limit + 1) |> collect_mutable()
+    let counts = repeat(0, limit + 1) |> LIST()
 
     for d in 1::limit do
         for multiple in from(d, d) |> take_while(* <= limit) do

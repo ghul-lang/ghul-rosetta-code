@@ -9,7 +9,7 @@ let replacements = [
     (('b', 1), 'E'),
     (('r', 2), 'F')
 ]
-    |> collect_map()
+    |> MAP()
 
 let seen = MAP()
 

@@ -4,9 +4,7 @@ use Rows = double[][]
 use Table = LIST[LIST[double]]
 
 zeros(rows: int, columns: int) -> Table =>
-    0..rows
-        |> map(_ => repeat(0.0, columns) |> collect_mutable())
-        |> collect_mutable()
+    0..rows |> map(_ => repeat(0.0, columns) |> LIST()) |> LIST()
 
 identity(size: int) -> Table => (
     let result = zeros(size, size)
@@ -78,7 +76,7 @@ least_squares(a: Rows, b: double[]) -> double{} => (
     let n = a[0].count
     let column = b |> map(y => LIST([y])) |> list()
     let qtb = multiply(transpose(q), column)
-    let x = repeat(0.0, n) |> collect_mutable()
+    let x = repeat(0.0, n) |> LIST()
 
     for i in (0..n) |> reverse() do
         let known = i + 1..n |> sum_by(j => r[i][j] * x[j])

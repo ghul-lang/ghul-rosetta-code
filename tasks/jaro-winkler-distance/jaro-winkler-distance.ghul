@@ -89,7 +89,7 @@ for word in misspelled do
                 candidate,
                 jaro_winkler_distance(word, candidate)
             ))
-            |> collect_mutable()
+            |> LIST()
 
     candidates.sort(((_, a), (_, b)) => sign(a - b))
 

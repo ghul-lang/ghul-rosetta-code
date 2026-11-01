@@ -1,7 +1,7 @@
 use default
 
 de_bruijn(k: int, n: int) -> string is
-    let a = repeat(0, k * n) |> collect_mutable()
+    let a = repeat(0, k * n) |> LIST()
     let digits = LIST()
 
     extend(t, p) is
@@ -30,9 +30,7 @@ si
 missing_pins(sequence: string) -> string[] =>
     let wrapped = "{sequence}{sequence[0..3]}" in
     let seen =
-        0..wrapped.length - 3
-            |> map(wrapped.substring(*, 4))
-            |> collect_set()
+        0..wrapped.length - 3 |> map(wrapped.substring(*, 4)) |> SET()
     in
     0..10_000
         |> map(pin => pin.to_string("D4"))

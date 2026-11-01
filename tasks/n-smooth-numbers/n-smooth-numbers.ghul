@@ -6,7 +6,7 @@ smooth(bound: int, count: int) -> bigint[] is
     let found = LIST()
     found.add(1n)
 
-    let next_index = repeat(0, factors.count) |> collect_mutable()
+    let next_index = repeat(0, factors.count) |> LIST()
 
     while found.count < count do
         let smallest mut = found[next_index[0]] * factors[0]

@@ -1,7 +1,7 @@
 use default
 
 let size = 4
-let board = 1::16 |> collect_mutable()
+let board = 1::16 |> LIST()
 
 show() is
     for row in 0..size do

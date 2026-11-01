@@ -8,10 +8,7 @@ text_of(values: int[]) -> string =>
     let texts = values |> map(value => "{value}") in
     texts |> join(" ")
 
-binomial_transform(
-    values: int[],
-    forward: bool
-) -> int[] =>
+binomial_transform(values: int[], forward: bool) -> int[] =>
     (0..values.count)
         |> map(n =>
             (0::n)

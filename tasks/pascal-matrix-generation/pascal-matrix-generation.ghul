@@ -3,16 +3,13 @@ use default
 choose(n: int, k: int) -> long => binomial(long(n), long(k))
 
 matrix(size: int, entry: (int, int) -> long) -> long[][] =>
-    0..size
-        |> map(i => 0..size |> map(entry(i, *)) |> list())
-        |> list()
+    0..size |> map(i => 0..size |> map(entry(i, *)) |> list()) |> list()
 
 upper(size: int) -> long[][] => matrix(size, (i, j) => choose(j, i))
 
 lower(size: int) -> long[][] => matrix(size, (i, j) => choose(i, j))
 
-symmetric(size: int) -> long[][] =>
-    matrix(size, (i, j) => choose(i + j, i))
+symmetric(size: int) -> long[][] => matrix(size, (i, j) => choose(i + j, i))
 
 show(title: string, m: long[][]) is
     write_line("{title}:")

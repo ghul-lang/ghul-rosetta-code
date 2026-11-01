@@ -1,7 +1,7 @@
 use default
 
 let limit = 1_000_000
-let composite = repeat(false, limit + 1) |> collect_mutable()
+let composite = repeat(false, limit + 1) |> LIST()
 
 let factor mut = 2
 

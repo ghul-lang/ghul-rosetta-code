@@ -57,13 +57,10 @@ project(p: Point) -> (x: double, y: double) =>
 facing(normal: Point, angle: double) -> bool =>
     turned(normal, angle).z * camera_distance > 1.5
 
-square(
-    centre: Point,
-    u: Point,
-    v: Point,
-    half: double,
-    angle: double
-) -> (x: double, y: double)[] =>
+square(centre: Point, u: Point, v: Point, half: double, angle: double) -> (
+    x: double,
+    y: double
+)[] =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(centre + u * (a * half) + v * (b * half), angle)

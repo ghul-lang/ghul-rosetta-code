@@ -36,7 +36,7 @@ let races = [
 let adjustments = [
     ("B", -0.4), ("C", 0.4), ("H", -0.3), ("F", -0.4)
 ]
-    |> collect_map()
+    |> MAP()
 
 adjustment(horse: string) -> double =>
     if adjustments.contains_key(horse) then

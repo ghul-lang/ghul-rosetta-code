@@ -59,8 +59,8 @@ let matrix = [
     [2.0, 3.0, -1.0, -11.0],
     [-2.0, 0.0, -3.0, 22.0]
 ]
-    |> map(row => row |> collect_mutable())
-    |> collect_mutable()
+    |> map(row => row |> LIST())
+    |> LIST()
 
 to_reduced_row_echelon_form(matrix)
 

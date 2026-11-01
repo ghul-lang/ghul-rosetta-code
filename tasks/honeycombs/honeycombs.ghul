@@ -7,7 +7,7 @@ use System.Math.*
 let radius = 1.0D
 let rise = sqrt(3.0D)
 
-let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> collect_mutable()
+let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> LIST()
 
 let seed mut = 20260920u
 

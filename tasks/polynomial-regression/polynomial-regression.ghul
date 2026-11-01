@@ -26,7 +26,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
         od
     od
 
-    let solution = repeat(0.0, n) |> collect_mutable()
+    let solution = repeat(0.0, n) |> LIST()
 
     for row in (0..n) |> reverse() do
         let known = (row + 1..n) |> sum_by(k => a[row][k] * solution[k])
@@ -41,12 +41,10 @@ fit(xs: double[], ys: double[], degree: int) -> double{} =>
     solve(
         (0::degree)
             |> map(i =>
-                (0::degree)
-                    |> map(j => power_sum(xs, i + j))
-                    |> collect_mutable()
+                (0::degree) |> map(j => power_sum(xs, i + j)) |> LIST()
             )
-            |> collect_mutable(),
-        (0::degree) |> map(moment(xs, ys, *)) |> collect_mutable()
+            |> LIST(),
+        (0::degree) |> map(moment(xs, ys, *)) |> LIST()
     )
 
 let x = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]

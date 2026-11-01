@@ -17,7 +17,7 @@ promotion_square(piece: char, square: int) -> bool =>
     (piece == 'p' /\ rank_of(square) == 7)
 
 position() -> char[] => (
-    let board = repeat('.', 64) |> collect_mutable()
+    let board = repeat('.', 64) |> LIST()
 
     let white_king = random.next(64)
     let black_king mut = random.next(64)

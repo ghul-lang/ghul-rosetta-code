@@ -7,7 +7,7 @@ let knight_pairs = [
 ]
 
 position(number: int) -> string is
-    let squares = repeat('.', 8) |> collect_mutable()
+    let squares = repeat('.', 8) |> LIST()
 
     place(piece, among_empty) is
         let square =
@@ -48,7 +48,7 @@ is_legal(rank: string) -> bool =>
         rooks[0] < king /\
         king < rooks[1]
 
-let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
+let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> MAP()
 
 let random = System.Random(960)
 

@@ -23,7 +23,7 @@ od
 let cliques = LIST[string[]]()
 
 report(clique: SET[string]) is
-    let members = clique |> collect_mutable()
+    let members = clique |> LIST()
 
     members.sort()
 
@@ -49,9 +49,9 @@ search(
         let adjacent = neighbours[vertex]
 
         search(
-            clique ++ [vertex] |> collect_set(),
-            candidates |> filter(adjacent.contains) |> collect_set(),
-            excluded |> filter(adjacent.contains) |> collect_set()
+            clique ++ [vertex] |> SET(),
+            candidates |> filter(adjacent.contains) |> SET(),
+            excluded |> filter(adjacent.contains) |> SET()
         )
 
         candidates.remove(vertex)
@@ -59,7 +59,7 @@ search(
     od
 si
 
-search(SET(), neighbours.keys |> collect_set(), SET())
+search(SET(), neighbours.keys |> SET(), SET())
 
 cliques.sort((a, b) => a[0] <> b[0])
 

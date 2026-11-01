@@ -1,7 +1,7 @@
 use default
 
 let limit = 1_000_000
-let is_prime = repeat(true, limit + 1) |> collect_mutable()
+let is_prime = repeat(true, limit + 1) |> LIST()
 
 is_prime[0] = false
 is_prime[1] = false

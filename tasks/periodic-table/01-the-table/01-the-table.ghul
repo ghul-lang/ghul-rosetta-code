@@ -46,10 +46,7 @@ si
 
 let table = symbols()
 
-let grid =
-    repeat(0, 9)
-        |> map(_ => repeat(" ", 18) |> collect_mutable())
-        |> list()
+let grid = repeat(0, 9) |> map(_ => repeat(" ", 18) |> LIST()) |> list()
 
 for z in 1::118 do
     let at = position(z)

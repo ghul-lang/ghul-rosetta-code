@@ -26,7 +26,7 @@ read_all(file: string) -> LIST[ENTRY] =>
             |> map(ENTRY.read)
             |> filter(entry => entry?)
             |> map(entry => entry!)
-            |> collect_mutable()
+            |> LIST()
     else
         LIST()
     fi
@@ -47,7 +47,7 @@ latest_by_category(file: string) -> ENTRY{} is
         read_all(file)
             |> group_by(entry => entry.category)
             |> map(group => group.value |> max_by(entry => entry.date)!)
-            |> collect_mutable()
+            |> LIST()
 
     newest.sort((left, right) =>
         string.compare(left.category, right.category)

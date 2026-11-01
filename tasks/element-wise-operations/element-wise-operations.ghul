@@ -11,9 +11,7 @@ class MATRIX(cells: double[][]) is
         )
 
     _each(op: (double) -> double pure) -> MATRIX =>
-        MATRIX(
-            _cells |> map(row => row |> map(op) |> list()) |> list()
-        )
+        MATRIX(_cells |> map(row => row |> map(op) |> list()) |> list())
 
     // A scalar on the left becomes a matrix of that scalar, which
     // keeps subtraction and division the right way round.

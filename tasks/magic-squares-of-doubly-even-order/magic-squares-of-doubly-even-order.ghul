@@ -17,8 +17,7 @@ magic(n: int) -> int[][] =>
         )
         |> list()
 
-column(square: int[][], c: int) -> int{} =>
-    square |> map(row => row[c])
+column(square: int[][], c: int) -> int{} => square |> map(row => row[c])
 
 check(square: int[][]) -> bool =>
     let

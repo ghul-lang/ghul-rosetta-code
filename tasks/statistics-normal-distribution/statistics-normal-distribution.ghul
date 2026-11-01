@@ -31,7 +31,7 @@ let low = -4.0D
 let width = 0.5D
 let bins = 16
 
-let counts = repeat(0, bins) |> collect_mutable()
+let counts = repeat(0, bins) |> LIST()
 
 for x in samples do
     let bin = int(floor((x - low) / width))

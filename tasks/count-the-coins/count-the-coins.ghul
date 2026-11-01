@@ -1,7 +1,7 @@
 use default
 
 ways_to_make(amount: int, coins: int[]) -> long is
-    let ways = repeat(0L, amount + 1) |> collect_mutable()
+    let ways = repeat(0L, amount + 1) |> LIST()
     ways[0] = 1L
 
     for coin in coins do

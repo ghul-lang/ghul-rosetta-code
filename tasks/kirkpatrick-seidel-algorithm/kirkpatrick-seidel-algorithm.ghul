@@ -128,8 +128,7 @@ upper_hull(points: P[]) -> P{} =>
         in
         upper(between ++ [first, last] |> list(), first, last)
 
-flipped(points: P{}) -> P[] =>
-    points |> map(p => P(p.x, -p.y)) |> list()
+flipped(points: P{}) -> P[] => points |> map(p => P(p.x, -p.y)) |> list()
 
 backwards(items: P[]) -> P{} =>
     (0..items.count) |> map(i => items[items.count - 1 - i])
@@ -204,9 +203,7 @@ od
 
 image.colour(200ub, 50ub, 40ub)
 image.stroke(2.0D)
-image.line(
-    result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> list()
-)
+image.line(result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> list())
 
 image.write("hull.png")
 

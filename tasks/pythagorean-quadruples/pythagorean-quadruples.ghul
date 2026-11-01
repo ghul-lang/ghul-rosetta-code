@@ -2,7 +2,7 @@ use default
 
 let limit = 2_200
 
-let two_squares = repeat(false, 2 * limit * limit + 1) |> collect_mutable()
+let two_squares = repeat(false, 2 * limit * limit + 1) |> LIST()
 
 for a in 1::limit do
     for b in a::limit do
@@ -10,7 +10,7 @@ for a in 1::limit do
     od
 od
 
-let represented = repeat(false, limit + 1) |> collect_mutable()
+let represented = repeat(false, limit + 1) |> LIST()
 
 for d in 1::limit do
     represented[d] = 1..d |> any(c => two_squares[d * d - c * c])

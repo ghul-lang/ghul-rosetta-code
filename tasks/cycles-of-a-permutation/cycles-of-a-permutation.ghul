@@ -25,7 +25,7 @@ compose(first: int[], second: int[]) -> int[] =>
 cycles(one_line: int[]) -> int[][] is
     let destination = inverse(one_line)
     let found = LIST()
-    let seen = repeat(false, one_line.count) |> collect_mutable()
+    let seen = repeat(false, one_line.count) |> LIST()
 
     for start in 0..one_line.count do
         if !seen[start] then

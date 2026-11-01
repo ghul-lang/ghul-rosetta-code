@@ -16,14 +16,12 @@ statement_third(values: bool[]) -> bool =>
 statement_fourth(values: bool[]) -> bool =>
     !holds(values, 5) \/ (holds(values, 6) /\ holds(values, 7))
 
-statement_fifth(values: bool[]) -> bool =>
-    how_many(values, [2, 3, 4]) == 0
+statement_fifth(values: bool[]) -> bool => how_many(values, [2, 3, 4]) == 0
 
 statement_sixth(values: bool[]) -> bool =>
     how_many(values, [1, 3, 5, 7, 9, 11]) == 4
 
-statement_seventh(values: bool[]) -> bool =>
-    how_many(values, [2, 3]) == 1
+statement_seventh(values: bool[]) -> bool => how_many(values, [2, 3]) == 1
 
 statement_eighth(values: bool[]) -> bool =>
     !holds(values, 7) \/ (holds(values, 5) /\ holds(values, 6))
@@ -53,7 +51,7 @@ consistent(values: bool[]) -> bool =>
 assignments() -> bool[]{} =>
     (0..1 << 12)
         |> map(mask =>
-            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> ARRAY()
+            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect()
         )
 
 write_line("consistent assignments:")

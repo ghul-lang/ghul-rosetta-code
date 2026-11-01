@@ -16,7 +16,7 @@ class GRID is
                 |> map(_ => random.next_double() < p)
                 |> ARRAY()
 
-        reached = repeat(false, size * size) |> collect_mutable()
+        reached = repeat(false, size * size) |> LIST()
     si
 
     is_filled(column: int, row: int) -> bool =>

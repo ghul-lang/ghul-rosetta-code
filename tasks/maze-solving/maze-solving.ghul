@@ -8,9 +8,9 @@ let margin = 5
 
 let random = System.Random(20260918)
 
-let visited = repeat(false, columns * rows) |> collect_mutable()
-let right_open = repeat(false, columns * rows) |> collect_mutable()
-let down_open = repeat(false, columns * rows) |> collect_mutable()
+let visited = repeat(false, columns * rows) |> LIST()
+let right_open = repeat(false, columns * rows) |> LIST()
+let down_open = repeat(false, columns * rows) |> LIST()
 
 at(column: int, row: int) -> int => row * columns + column
 

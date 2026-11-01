@@ -61,7 +61,7 @@ let counts =
     all
         |> group_by(expression => expression.value)
         |> map(group => (group.key, group.value.count))
-        |> collect_map()
+        |> MAP()
 
 let most = counts.keys |> max_by(value => counts[value])
 

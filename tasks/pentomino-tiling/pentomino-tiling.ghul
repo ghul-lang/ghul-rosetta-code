@@ -71,8 +71,8 @@ si
 
 let shapes =
     pieces |> map((name, cells) => (name, orientations(cells))) |> list()
-let board = repeat('.', size * size) |> collect_mutable()
-let used = repeat(false, pieces.count) |> collect_mutable()
+let board = repeat('.', size * size) |> LIST()
+let used = repeat(false, pieces.count) |> LIST()
 
 fits(shape: Shape, at: Cell) -> bool =>
     shape

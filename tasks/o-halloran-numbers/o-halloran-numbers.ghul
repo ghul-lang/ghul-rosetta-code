@@ -7,7 +7,7 @@ let areas = [
     for height in width::166
 ]
     |> filter(* < 1000)
-    |> collect_set()
+    |> SET()
 
 let o_halloran =
     (7::999)

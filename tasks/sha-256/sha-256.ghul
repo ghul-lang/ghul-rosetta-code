@@ -54,9 +54,7 @@ sha256(message: ubyte[]) -> string is
 
     while start < block.count do
         let schedule =
-            0..16
-                |> map(index => word(block, start + index * 4))
-                |> collect_mutable()
+            0..16 |> map(index => word(block, start + index * 4)) |> LIST()
 
         for index in 16..64 do
             let previous = schedule[index - 15]

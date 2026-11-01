@@ -8,7 +8,7 @@ let shown = SET()
 
 for word in words |> filter(w => w.length > 2) |> sort() do
     let ring = rotations(word)
-    let distinct = ring |> collect_set()
+    let distinct = ring |> SET()
 
     if distinct.count > 1 /\ ring |> all(words.contains) then
         let key = ring |> sort() |> join(" ")

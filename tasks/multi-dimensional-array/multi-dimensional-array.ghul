@@ -8,9 +8,7 @@ let cells =
             0..extents[1]
                 |> map(_ =>
                     0..extents[2]
-                        |> map(_ =>
-                            repeat(0, extents[3]) |> collect_mutable()
-                        )
+                        |> map(_ => repeat(0, extents[3]) |> LIST())
                         |> list()
                 )
                 |> list()
@@ -25,7 +23,7 @@ write_line("cells[1][2][3][4] = {cells[1][2][3][4]}")
 write_line("cells[0][0][0][0] = {cells[0][0][0][0]}")
 
 let size = extents |> product()
-let flat = repeat(0, size) |> collect_mutable()
+let flat = repeat(0, size) |> LIST()
 
 at(index: int[]) -> int =>
     0..extents.count

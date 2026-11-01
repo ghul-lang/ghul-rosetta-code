@@ -8,15 +8,8 @@ trial() -> (black_in_black: int, red_in_red: int) is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
     let pairs = deck |> chunk(2)
     let black =
-        pairs
-            |> filter(p => p[0] == 'B')
-            |> map(p => p[1])
-            |> collect_mutable()
-    let red =
-        pairs
-            |> filter(p => p[0] != 'B')
-            |> map(p => p[1])
-            |> collect_mutable()
+        pairs |> filter(p => p[0] == 'B') |> map(p => p[1]) |> LIST()
+    let red = pairs |> filter(p => p[0] != 'B') |> map(p => p[1]) |> LIST()
 
     let swap = random.next(int.min(black.count, red.count) + 1)
     let black_bunch = black |> shuffled() |> take(swap) |> list()

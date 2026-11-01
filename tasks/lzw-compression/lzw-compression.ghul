@@ -35,8 +35,7 @@ decompress(compressed: int[]) -> string is
         return ""
     fi
 
-    let words =
-        0..alphabet_size |> map(code => "{char(code)}") |> collect_mutable()
+    let words = 0..alphabet_size |> map(code => "{char(code)}") |> LIST()
 
     let text = StringBuilder()
     let previous mut = words[compressed[0]]

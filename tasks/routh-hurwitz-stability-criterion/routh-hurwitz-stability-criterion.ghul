@@ -11,12 +11,10 @@ next_row(above: double[], row: double[]) -> LIST[double] =>
                 0.0
             fi
         )
-        |> collect_mutable()
+        |> LIST()
 
 derivative(row: double[], order: int) -> LIST[double] =>
-    (0..row.count)
-        |> map(k => row[k] * double(order - 2 * k))
-        |> collect_mutable()
+    (0..row.count) |> map(k => row[k] * double(order - 2 * k)) |> LIST()
 
 routh_array(coefficients: double[]) -> (
     rows: LIST[LIST[double]],
@@ -35,7 +33,7 @@ routh_array(coefficients: double[]) -> (
                         0.0
                     fi
                 )
-                |> collect_mutable()
+                |> LIST()
 
     let rows = LIST[LIST[double]]([row_from(0), row_from(1)])
     let on_axis mut = false

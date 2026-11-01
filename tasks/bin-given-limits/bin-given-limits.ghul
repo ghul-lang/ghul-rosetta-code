@@ -1,7 +1,7 @@
 use default
 
 bin(limits: int[], data: int[]) -> int[] => (
-    let counts = repeat(0, limits.count + 1) |> collect_mutable()
+    let counts = repeat(0, limits.count + 1) |> LIST()
 
     for value in data do
         let slot = limits |> count(value >= *)

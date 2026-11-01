@@ -29,9 +29,7 @@ let columns = bitmap[0].length
 
 let width = 2 * columns + rows + 2
 let canvas =
-    (0..rows + 1)
-        |> map(_ => repeat(' ', width) |> collect_mutable())
-        |> list()
+    (0..rows + 1) |> map(_ => repeat(' ', width) |> LIST()) |> list()
 
 filled(row: int, column: int) -> bool =>
     row >= 0 /\

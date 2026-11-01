@@ -19,10 +19,7 @@ transpose(m: Matrix) -> Matrix =>
 solve(a: Matrix, b: double[]) -> double{} is
     let n = b.count
 
-    let rows =
-        0..n
-            |> map(i => a[i] ++ [b[i]] |> collect_mutable())
-            |> collect_mutable()
+    let rows = 0..n |> map(i => a[i] ++ [b[i]] |> LIST()) |> LIST()
 
     for k in 0..n do
         let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
@@ -37,7 +34,7 @@ solve(a: Matrix, b: double[]) -> double{} is
         od
     od
 
-    let x = repeat(0.0, n) |> collect_mutable()
+    let x = repeat(0.0, n) |> LIST()
 
     for k in 0..n |> reverse() do
         let known = k + 1..n |> sum_by(j => rows[k][j] * x[j])

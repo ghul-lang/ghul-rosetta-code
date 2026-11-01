@@ -5,7 +5,7 @@ let labels = "ADFGVX"
 let random = System.Random(20260908)
 
 shuffled(items: string) -> string => (
-    let held = items |> collect_mutable()
+    let held = items |> LIST()
     for i in 0..held.count do
         let j = i + random.next(held.count - i)
         (held[i], held[j]) = (held[j], held[i])
@@ -55,7 +55,7 @@ encrypt(square: string, key: string, text: string) -> string =>
         |> join("")
 
 decrypt(square: string, key: string, cipher: string) -> string => (
-    let pairs = cipher |> collect_mutable()
+    let pairs = cipher |> LIST()
     let taken mut = 0
     for column in read_order(key) do
         let height = column_height(key, cipher.length, column)

@@ -1,7 +1,7 @@
 use default
 
 magic_square(n: int) -> int{} is
-    let cells = repeat(0, n * n) |> collect_mutable()
+    let cells = repeat(0, n * n) |> LIST()
 
     let row mut = 0
     let column mut = n / 2

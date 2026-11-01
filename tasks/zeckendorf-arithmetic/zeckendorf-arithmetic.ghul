@@ -3,7 +3,7 @@ use default
 let width = 48
 
 blank() -> LIST[int] =>
-    let digits = repeat(0, width) |> collect_mutable() in
+    let digits = repeat(0, width) |> LIST() in
     digits
 
 copy(value: int[]) -> LIST[int] => (
@@ -38,8 +38,7 @@ show(value: int[]) -> string =>
         0::top |> reverse() |> map(index => "{value[index]}") |> join("")
     fi
 
-is_zero(value: int[]) -> bool =>
-    0..width |> all(index => value[index] == 0)
+is_zero(value: int[]) -> bool => 0..width |> all(index => value[index] == 0)
 
 compare(left: int[], right: int[]) -> int =>
     let diff = 0..width |> reverse() |> find(i => left[i] != right[i]) in
@@ -130,10 +129,7 @@ subtract(left: int[], right: int[]) -> LIST[int] =>
         subtract(decrement(result), decrement(right))
     fi
 
-fibonacci_multiples(
-    value: int[],
-    upto: int[]
-) -> int[][] => (
+fibonacci_multiples(value: int[], upto: int[]) -> int[][] => (
     let table = LIST[LIST[int]]()
 
     table.add(copy(value))

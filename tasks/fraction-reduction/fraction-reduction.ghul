@@ -3,7 +3,7 @@ use default
 use Candidate = (value: int, mask: int, reduced: int[])
 
 describe(value: int) -> Candidate is
-    let reduced = repeat(0, 10) |> collect_mutable()
+    let reduced = repeat(0, 10) |> LIST()
     let places = value |> digits() |> list()
 
     let mask mut = 0

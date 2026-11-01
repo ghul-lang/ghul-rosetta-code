@@ -32,7 +32,7 @@ reduced_latin_squares(n: int) -> int[][]{} =>
                         else 0
                         fi
                     )
-                    |> collect_mutable()
+                    |> LIST()
             )
             |> list()
     in

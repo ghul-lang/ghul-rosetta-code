@@ -32,11 +32,7 @@ extend(chosen: LIST[int], taken: LIST[bool], size: int) -> int[]{} is
 si
 
 arrangements(size: int) -> int[]{} =>
-    extend(
-        [1] |> collect_mutable(),
-        repeat(false, size + 1) |> collect_mutable(),
-        size
-    )
+    extend([1] |> LIST(), repeat(false, size + 1) |> LIST(), size)
 
 let totals = LIST()
 

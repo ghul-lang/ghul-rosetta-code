@@ -11,7 +11,7 @@ class TALLY is
     histogram: LIST[int]
 
     init() is
-        histogram = repeat(0, bins) |> collect_mutable()
+        histogram = repeat(0, bins) |> LIST()
     si
 
     add(x: double) is

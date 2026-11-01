@@ -68,8 +68,7 @@ si
 play(numbers: int[], target: int) is
     write_line("using {numbers |> join(", ")} to make {target}")
 
-    let start =
-        numbers |> map(n => (value = n, steps = LIST())) |> list()
+    let start = numbers |> map(n => (value = n, steps = LIST())) |> list()
 
     let nothing = (value = 0, steps = LIST())
     let result = solve(start, target, nothing)

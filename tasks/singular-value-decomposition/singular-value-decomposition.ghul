@@ -3,9 +3,7 @@ use default
 use Matrix = List[LIST[double]]
 
 zeros(rows: int, columns: int) -> Matrix =>
-    (0..rows)
-        |> map(_ => repeat(0.0, columns) |> collect_mutable())
-        |> list()
+    (0..rows) |> map(_ => repeat(0.0, columns) |> LIST()) |> list()
 
 identity(n: int) -> Matrix => (
     let result = zeros(n, n)
@@ -19,7 +17,7 @@ identity(n: int) -> Matrix => (
 
 transpose(a: Matrix) -> Matrix =>
     (0..a[0].count)
-        |> map(j => (0..a.count) |> map(i => a[i][j]) |> collect_mutable())
+        |> map(j => (0..a.count) |> map(i => a[i][j]) |> LIST())
         |> list()
 
 column_dot(a: Matrix, p: int, q: int) -> double =>
@@ -72,9 +70,7 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
     od
 
     let norms =
-        (0..n)
-            |> map(j => System.Math.sqrt(column_dot(u, j, j)))
-            |> list()
+        (0..n) |> map(j => System.Math.sqrt(column_dot(u, j, j))) |> list()
 
     let order = (0..n) |> sort_by_descending(j => norms[j]) |> list()
     let last = u.count - 1
@@ -91,16 +87,12 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
 
     let sorted_u =
         u
-            |> map(row =>
-                order |> map(j => row[j] * scale(j)) |> collect_mutable()
-            )
+            |> map(row => order |> map(j => row[j] * scale(j)) |> LIST())
             |> list()
 
     let sorted_v =
         v
-            |> map(row =>
-                order |> map(j => row[j] * sign(j)) |> collect_mutable()
-            )
+            |> map(row => order |> map(j => row[j] * sign(j)) |> LIST())
             |> list()
 
     let sigma = order |> map(j => norms[j]) |> list()
@@ -124,9 +116,7 @@ let rows = int.parse(size[0])
 let a: Matrix =
     (0..rows)
         |> map(_ =>
-            IO.Std.read_line()!.split([' '])
-                |> map(double.parse)
-                |> collect_mutable()
+            IO.Std.read_line()!.split([' ']) |> map(double.parse) |> LIST()
         )
         |> list()
 
@@ -153,7 +143,7 @@ show(
                         |> sum_by(k => u[i][k] * sigma[k] * v[j][k])
                         |> System.Math.round(12)
                 )
-                |> collect_mutable()
+                |> LIST()
         )
         |> list()
 )

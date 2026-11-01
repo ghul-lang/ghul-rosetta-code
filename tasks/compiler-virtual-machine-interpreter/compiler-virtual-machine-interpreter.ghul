@@ -39,7 +39,7 @@ class MACHINE is
     init(code: ARRAY[ubyte], strings: string[], data_size: int) is
         _code = code
         _strings = strings
-        _data = repeat(0, data_size) |> collect_mutable()
+        _data = repeat(0, data_size) |> LIST()
         _stack = LIST()
     si
 

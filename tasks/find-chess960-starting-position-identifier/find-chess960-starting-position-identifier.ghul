@@ -27,7 +27,7 @@ sp_id(pieces: string) -> int =>
     in
         96 * n + 16 * q + 4 * dark + light
 
-let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
+let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> MAP()
 
 for pieces in ["QNRBBNKR", "RNBQKBNR", "RQNBBKRN", "RNQBBKRN"] do
     let shown = pieces |> map(p => symbols[p]) |> join("")

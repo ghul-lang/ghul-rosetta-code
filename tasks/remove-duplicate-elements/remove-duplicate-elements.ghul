@@ -8,4 +8,4 @@ write_line(values |> distinct() |> join())
 
 let words = ["pear", "apple", "pear", "quince", "apple"]
 
-write_line(words |> collect_set() |> sort() |> join())
+write_line(words |> SET() |> sort() |> join())

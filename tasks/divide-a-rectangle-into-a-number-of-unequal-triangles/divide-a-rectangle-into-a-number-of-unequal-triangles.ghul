@@ -90,7 +90,7 @@ divide(width: double, height: double, count: int) -> Triangle[] is
                     |> index()
                     |> filter(e => e.index != largest)
                     |> map(e => e.value)
-                    |> collect_mutable()
+                    |> LIST()
 
             candidate.add(first)
             candidate.add(second)

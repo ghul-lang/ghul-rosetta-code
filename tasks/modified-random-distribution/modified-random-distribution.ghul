@@ -24,8 +24,7 @@ let sample_bins =
         |> map(x => int(x * double(bins)))
         |> list()
 
-let counts =
-    0..bins |> map(bin => sample_bins |> count(* == bin)) |> list()
+let counts = 0..bins |> map(bin => sample_bins |> count(* == bin)) |> list()
 
 let largest = counts |> max()!
 

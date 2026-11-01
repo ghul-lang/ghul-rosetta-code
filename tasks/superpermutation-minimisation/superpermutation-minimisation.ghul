@@ -3,7 +3,7 @@ use default
 let alphabet = "ABCDEFG"
 
 is_permutation(s: string) -> bool =>
-    s.to_char_array() |> collect_set() |> count() == s.length
+    s.to_char_array() |> SET() |> count() == s.length
 
 // Every permutation of n - 1 letters, in the order they first appear in
 // the superpermutation of n - 1, is written out as itself, the new

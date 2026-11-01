@@ -9,7 +9,7 @@ best_shuffle(text: string) -> string is
 
     let order = groups |> flat_map(positions => positions) |> list()
     let shift = groups |> map(positions => positions.count) |> max() ?? 0
-    let shuffled = repeat(' ', text.length) |> collect_mutable()
+    let shuffled = repeat(' ', text.length) |> LIST()
 
     for (at, position) in order |> index() do
         shuffled[position] = text[order[(at + shift) % order.count]]

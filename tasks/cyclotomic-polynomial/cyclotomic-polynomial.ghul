@@ -31,7 +31,7 @@ cyclotomic(n: int) -> long[] is
         |> filter(f => f.exponent != 0)
 
     let degree = factors |> sum_by(f => f.power * f.exponent)
-    let series = repeat(0L, degree + 1) |> collect_mutable()
+    let series = repeat(0L, degree + 1) |> LIST()
     series[0] = 1L
 
     for (power, exponent) in factors do

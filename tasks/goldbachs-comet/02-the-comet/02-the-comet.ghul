@@ -5,7 +5,7 @@ use Raster.AXES
 use Raster.IMAGE
 
 let limit = 2_000
-let is_prime = 0::limit |> map(_ => true) |> collect_mutable()
+let is_prime = 0::limit |> map(_ => true) |> LIST()
 
 is_prime[0] = false
 is_prime[1] = false

@@ -15,7 +15,7 @@ let names =
     ).split([' '])
 
 longest_chain(words: string[]) -> string[] is
-    let used = repeat(false, words.count) |> collect_mutable()
+    let used = repeat(false, words.count) |> LIST()
     let path = LIST()
     let best = LIST()
 

@@ -15,7 +15,7 @@ let face_values = [
     ("k", 13),
     ("a", 14)
 ]
-    |> collect_map()
+    |> MAP()
 
 parse(card: string) -> (face: int, suit: char) =>
     let

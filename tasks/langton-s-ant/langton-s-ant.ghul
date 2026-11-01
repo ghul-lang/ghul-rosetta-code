@@ -6,7 +6,7 @@ let size = 100
 let pixels = 180
 let steps_per_frame = 250
 
-let black = repeat(false, size * size) |> collect_mutable()
+let black = repeat(false, size * size) |> LIST()
 
 let row_steps = [-1, 0, 1, 0]
 let column_steps = [0, 1, 0, -1]

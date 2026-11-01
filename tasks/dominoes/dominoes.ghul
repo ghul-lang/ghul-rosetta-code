@@ -6,12 +6,10 @@ let columns = 8
 use Grid = int[][]
 
 parse(lines: string[]) -> Grid =>
-    lines
-        |> map(line => line |> map(c => int(c - '0')) |> list())
-        |> list()
+    lines |> map(line => line |> map(c => int(c - '0')) |> list()) |> list()
 
 solve(grid: Grid) -> int[]? is
-    let partner = repeat(-1, rows * columns) |> collect_mutable()
+    let partner = repeat(-1, rows * columns) |> LIST()
     let used = SET()
 
     value(cell) => grid[cell / columns][cell % columns]
@@ -109,10 +107,7 @@ shuffled_tableau(random: System.Random) -> Grid is
     let tiles = [(a, b) for a in 0::6 for b in a::6]
         |> sort_by(_ => random.next())
 
-    let grid =
-        0..rows
-            |> map(_ => repeat(0, columns) |> collect_mutable())
-            |> list()
+    let grid = 0..rows |> map(_ => repeat(0, columns) |> LIST()) |> list()
 
     for (i, (a, b)) in tiles |> index() do
         let row = i / 4, column = (i % 4) * 2

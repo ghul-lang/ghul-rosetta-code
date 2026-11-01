@@ -6,8 +6,7 @@ f(x: double) -> double => Math.sqrt(Math.abs(x)) + 5.0 * x * x * x
 
 write_line("enter 11 numbers:")
 
-let numbers =
-    (0..11) |> map(_ => double.parse(read_line()!)) |> collect_mutable()
+let numbers = (0..11) |> map(_ => double.parse(read_line()!)) |> LIST()
 
 numbers.reverse()
 

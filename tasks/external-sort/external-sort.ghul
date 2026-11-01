@@ -110,13 +110,10 @@ write_line("{values} values in runs of {chunk}: {parts.count} runs")
 
 merge(parts, "sorted.txt")
 
-let sorted =
-    File.read_all_lines("sorted.txt") |> map(int.parse) |> list()
+let sorted = File.read_all_lines("sorted.txt") |> map(int.parse) |> list()
 
 let in_memory =
-    File.read_all_lines("unsorted.txt")
-        |> map(int.parse)
-        |> collect_mutable()
+    File.read_all_lines("unsorted.txt") |> map(int.parse) |> LIST()
 
 in_memory.sort()
 

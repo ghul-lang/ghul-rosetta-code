@@ -22,9 +22,7 @@ class GRAPH(nodes: int[], edges: Edge[]) is
                     node => node,
                     node =>
                         if outgoing.contains_key(node) then
-                            outgoing[node]
-                                |> map((from, to) => to)
-                                |> collect_set()
+                            outgoing[node] |> map((from, to) => to) |> SET()
                         else
                             SET()
                         fi
@@ -42,7 +40,7 @@ parse(description: string) -> GRAPH is
         for token in description.split([' '])
     ]
 
-    let nodes = tokens |> flat_map(ends => ends) |> collect_set()
+    let nodes = tokens |> flat_map(ends => ends) |> SET()
 
     let edges =
         tokens
@@ -61,7 +59,7 @@ colour(graph: GRAPH) -> MAP[int, int] is
             graph.neighbours(node)
                 |> filter(colours.contains_key)
                 |> map(other => colours[other])
-                |> collect_set()
+                |> SET()
 
     for _ in graph.nodes do
         // the uncoloured node seeing the most distinct colours,
@@ -97,7 +95,7 @@ report(name: string, description: string) is
         fi
     od
 
-    let used = colours.values |> collect_set()
+    let used = colours.values |> SET()
 
     write_line(
         "  {graph.nodes.count} nodes, {graph.edges.count} edges, "
@@ -135,10 +133,7 @@ for (i, (name, description)) in examples |> index() do
     let cy = double(i / 2 * size + size / 2 + 8)
 
     let slot =
-        graph.nodes
-            |> index()
-            |> map(((i, node)) => (node, i))
-            |> collect_map()
+        graph.nodes |> index() |> map(((i, node)) => (node, i)) |> MAP()
 
     // nodes sit evenly round a circle
     let position = node => (

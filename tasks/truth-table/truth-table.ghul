@@ -49,14 +49,11 @@ parse_binary(tokens: char[], symbol: char, below: SUBPARSER) -> PARSE is
     more(below(tokens))
 si
 
-parse_and(tokens: char[]) -> PARSE =>
-    parse_binary(tokens, '&', parse_atom)
+parse_and(tokens: char[]) -> PARSE => parse_binary(tokens, '&', parse_atom)
 
-parse_xor(tokens: char[]) -> PARSE =>
-    parse_binary(tokens, '^', parse_and)
+parse_xor(tokens: char[]) -> PARSE => parse_binary(tokens, '^', parse_and)
 
-parse_or(tokens: char[]) -> PARSE =>
-    parse_binary(tokens, '|', parse_xor)
+parse_or(tokens: char[]) -> PARSE => parse_binary(tokens, '|', parse_xor)
 
 names(expression: Expression) -> string{} is
     case expression
