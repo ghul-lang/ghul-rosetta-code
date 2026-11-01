@@ -5,24 +5,20 @@ struct RATIONAL is
     denominator: bigint
 
     init(n: bigint, d: bigint) is
-        let divisor =
-            bigint.greatest_common_divisor(n, d) *
-            bigint(d.sign)
+        let divisor = bigint.greatest_common_divisor(n, d) * bigint(d.sign)
         numerator = n / divisor
         denominator = d / divisor
     si
 
     +(other: RATIONAL) -> RATIONAL =>
         RATIONAL(
-            numerator * other.denominator +
-            other.numerator * denominator,
+            numerator * other.denominator + other.numerator * denominator,
             denominator * other.denominator
         )
 
     -(other: RATIONAL) -> RATIONAL =>
         RATIONAL(
-            numerator * other.denominator -
-            other.numerator * denominator,
+            numerator * other.denominator - other.numerator * denominator,
             denominator * other.denominator
         )
 
@@ -43,8 +39,7 @@ struct RATIONAL is
             sign = if numerator.sign < 0 then "-" else "" fi,
             n = bigint.abs(numerator),
             whole = n / denominator,
-            scaled =
-                (n % denominator) * bigint.pow(10n, places),
+            scaled = (n % denominator) * bigint.pow(10n, places),
             fraction = scaled / denominator,
             digits = fraction.to_string().pad_left(places, '0')
         in
@@ -61,9 +56,7 @@ let v = LIST([whole(0n), whole(2n), whole(-4n)])
 for n in 3::100 do
     let a = v[n - 1]
     let b = v[n - 2]
-    v.add(
-        whole(111n) - whole(1130n) / a + whole(3000n) / (a * b)
-    )
+    v.add(whole(111n) - whole(1130n) / a + whole(3000n) / (a * b))
 od
 
 let naive = LIST([0.0, 2.0, -4.0])
@@ -77,9 +70,7 @@ od
 write_line("           exact                    double")
 
 for n in [3, 4, 5, 6, 7, 8, 20, 30, 50, 100] do
-    write_line(
-        "  n = {n,3}  {v[n].decimal(20),-23}  {naive[n]:R}"
-    )
+    write_line("  n = {n,3}  {v[n].decimal(20),-23}  {naive[n]:R}")
 od
 
 write_line()
@@ -88,10 +79,7 @@ write_line("Task 2: the Chaotic Bank Society")
 let e =
     0::40
         |> map(k =>
-            RATIONAL(
-                1n,
-                1::k |> reduce(1n, (f, i) => f * bigint(i))
-            )
+            RATIONAL(1n, 1::k |> reduce(1n, (f, i) => f * bigint(i)))
         )
         |> reduce(whole(0n), * + *)
 
@@ -124,14 +112,7 @@ let b8 = b4 * b4
 
 let f =
     RATIONAL(1335n, 4n) * b6 +
-    a *
-    a *
-    (
-        whole(11n) * a * a * b2 -
-        b6 -
-        whole(121n) * b4 -
-        whole(2n)
-    ) +
+    a * a * (whole(11n) * a * a * b2 - b6 - whole(121n) * b4 - whole(2n)) +
     RATIONAL(11n, 2n) * b8 +
     a / (whole(2n) * b)
 

@@ -24,13 +24,7 @@ rgb(r: int, g: int, b: int) -> Colour => (
     blue = ubyte(b)
 )
 
-let earth: Body = (
-    "Earth",
-    1.0D,
-    1.0D,
-    100.46D,
-    rgb(60, 110, 220)
-)
+let earth: Body = ("Earth", 1.0D, 1.0D, 100.46D, rgb(60, 110, 220))
 
 let bodies: Body[] = [
     ("Sun", 0.0D, 1.0D, 0.0D, rgb(255, 190, 40)),
@@ -39,23 +33,14 @@ let bodies: Body[] = [
     ("Mars", 1.524D, 1.8809D, 355.45D, rgb(220, 70, 50))
 ]
 
-around_sun(body: Body, year: double) -> (
-    x: double,
-    y: double
-) =>
+around_sun(body: Body, year: double) -> (x: double, y: double) =>
     let
         turns = body.start / 360.0D + year / body.period,
         angle = 2.0D * pi * turns
     in
-        (
-            x = body.radius * cos(angle),
-            y = body.radius * sin(angle)
-        )
+        (x = body.radius * cos(angle), y = body.radius * sin(angle))
 
-around_earth(body: Body, year: double) -> (
-    x: double,
-    y: double
-) =>
+around_earth(body: Body, year: double) -> (x: double, y: double) =>
     let
         p = around_sun(body, year),
         e = around_sun(earth, year)
@@ -89,8 +74,7 @@ retrograde_loops(body: Body) -> int is
     loops
 si
 
-year_of(frame: int) -> double =>
-    shown * double(frame) / double(frames)
+year_of(frame: int) -> double => shown * double(frame) / double(frames)
 
 draw(image: IMAGE, frame: int) is
     image.clear(8ub, 8ub, 20ub)
@@ -103,14 +87,9 @@ draw(image: IMAGE, frame: int) is
                 |> collect()
 
         let here = trail[trail.count - 1]
-        let marker =
-            if body.name =~ "Sun" then 4.0D else 2.5D fi
+        let marker = if body.name =~ "Sun" then 4.0D else 2.5D fi
 
-        image.colour(
-            body.colour.red,
-            body.colour.green,
-            body.colour.blue
-        )
+        image.colour(body.colour.red, body.colour.green, body.colour.blue)
 
         if trail.count > 1 then
             image.line(trail)
@@ -119,20 +98,14 @@ draw(image: IMAGE, frame: int) is
         image.dot(here.x, here.y, marker)
     od
 
-    image.colour(
-        earth.colour.red,
-        earth.colour.green,
-        earth.colour.blue
-    )
+    image.colour(earth.colour.red, earth.colour.green, earth.colour.blue)
     image.dot(0.0D, 0.0D, 3.5D)
 si
 
 for body in bodies do
     let loops = retrograde_loops(body)
 
-    write_line(
-        "{body.name,-8} {loops,2} retrograde loops in {years} years"
-    )
+    write_line("{body.name,-8} {loops,2} retrograde loops in {years} years")
 od
 
 let image = IMAGE(size, size)

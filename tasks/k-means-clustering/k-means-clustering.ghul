@@ -48,19 +48,14 @@ seeded_centres() -> Collections.List[Point] is
 
     while centres.count < clusters do
         let weights =
-            points
-                |> map(at => nearest(centres, at).distance)
-                |> collect()
+            points |> map(at => nearest(centres, at).distance) |> collect()
 
         let total = weights |> sum()
 
         let target mut = random.next_double() * total
         let chosen mut = 0
 
-        while
-            chosen < weights.count - 1 /\
-            target > weights[chosen]
-        do
+        while chosen < weights.count - 1 /\ target > weights[chosen] do
             target = target - weights[chosen]
             chosen = chosen + 1
         od
@@ -102,12 +97,8 @@ recentred() -> Collections.List[Point] is
                     centres[which]
                 else
                     (
-                        x =
-                            totals[which].x /
-                            double(sizes[which]),
-                        y =
-                            totals[which].y /
-                            double(sizes[which])
+                        x = totals[which].x / double(sizes[which]),
+                        y = totals[which].y / double(sizes[which])
                     )
                 fi
             )

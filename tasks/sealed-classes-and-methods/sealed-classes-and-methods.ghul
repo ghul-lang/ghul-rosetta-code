@@ -25,8 +25,7 @@ class SHOUTING_HANDLER: HANDLER is
         super.init()
     si
 
-    handle(message: string) -> string =>
-        super.handle(message).to_upper()
+    handle(message: string) -> string => super.handle(message).to_upper()
 si
 
 let ledger = LEDGER()

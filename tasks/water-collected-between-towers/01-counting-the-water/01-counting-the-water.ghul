@@ -13,14 +13,11 @@ si
 
 water(heights: int[]) -> int => (
     let left = heights |> running_maxima() |> collect()
-    let right =
-        heights |> reverse() |> running_maxima() |> collect()
+    let right = heights |> reverse() |> running_maxima() |> collect()
     let last = heights.count - 1
 
     (0..heights.count)
-        |> sum_by(i =>
-            Math.min(left[i], right[last - i]) - heights[i]
-        )
+        |> sum_by(i => Math.min(left[i], right[last - i]) - heights[i])
 )
 
 let series = [

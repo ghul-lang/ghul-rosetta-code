@@ -14,10 +14,7 @@ bar(value: double, lowest: double, span: double) -> char =>
 
 sparkline(series: string) -> string is
     let values =
-        series.split(
-            separators,
-            StringSplitOptions.REMOVE_EMPTY_ENTRIES
-        )
+        series.split(separators, StringSplitOptions.REMOVE_EMPTY_ENTRIES)
             |> map(double.parse)
 
     let ordered = values |> sort() |> collect()

@@ -2,8 +2,6 @@ use default
 
 write_line(
     IO.File.read_all_lines("unixdict.txt")
-        |> filter(word =>
-            word.length > 11 /\ word.contains("the")
-        )
+        |> filter(word => word.length > 11 /\ word.contains("the"))
         |> join("\n")
 )

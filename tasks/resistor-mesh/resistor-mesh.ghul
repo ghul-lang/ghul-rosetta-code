@@ -6,47 +6,31 @@ let size = 10
 
 neighbours(node: Node) -> Node{} =>
     [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        |> map((dr, dc) => (
-            row = node.row + dr,
-            col = node.col + dc
-        ))
+        |> map((dr, dc) => (row = node.row + dr, col = node.col + dc))
         |> filter(n =>
-            n.row >= 0 /\
-            n.row < size /\
-            n.col >= 0 /\
-            n.col < size
+            n.row >= 0 /\ n.row < size /\ n.col >= 0 /\ n.col < size
         )
 
 index_of(node: Node) -> int => node.row * size + node.col
 
-solve(
-    matrix: LIST[LIST[double]],
-    rhs: LIST[double]
-) -> List[double] is
+solve(matrix: LIST[LIST[double]], rhs: LIST[double]) -> List[double] is
     let n = rhs.count
 
     for column in 0..n do
         let pivot =
             (column..n)
-                |> max_by(row =>
-                    System.Math.abs(matrix[row][column])
-                )!
+                |> max_by(row => System.Math.abs(matrix[row][column]))!
 
-        (matrix[column], matrix[pivot]) = (
-            matrix[pivot],
-            matrix[column]
-        )
+        (matrix[column], matrix[pivot]) = (matrix[pivot], matrix[column])
         (rhs[column], rhs[pivot]) = (rhs[pivot], rhs[column])
 
         for row in column + 1..n do
-            let factor =
-                matrix[row][column] / matrix[column][column]
+            let factor = matrix[row][column] / matrix[column][column]
 
             if factor != 0.0 then
                 for k in column..n do
                     matrix[row][k] =
-                        matrix[row][k] -
-                        factor * matrix[column][k]
+                        matrix[row][k] - factor * matrix[column][k]
                 od
 
                 rhs[row] = rhs[row] - factor * rhs[column]
@@ -57,9 +41,7 @@ solve(
     let result = repeat(0.0, n) |> collect_mutable()
 
     for row in (0..n) |> reverse() do
-        let known =
-            (row + 1..n)
-                |> sum_by(k => matrix[row][k] * result[k])
+        let known = (row + 1..n) |> sum_by(k => matrix[row][k] * result[k])
 
         result[row] = (rhs[row] - known) / matrix[row][row]
     od
@@ -99,6 +81,4 @@ si
 let a = (row = 1, col = 1)
 let b = (row = 6, col = 7)
 
-write_line(
-    "R between {a} and {b} = {resistance(a, b):F14} ohms"
-)
+write_line("R between {a} and {b} = {resistance(a, b):F14} ohms")

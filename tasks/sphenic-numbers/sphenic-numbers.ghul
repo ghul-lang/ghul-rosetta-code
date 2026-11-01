@@ -8,8 +8,7 @@ is_sphenic(n: int) -> bool =>
     factors[0] != factors[1] /\
     factors[1] != factors[2]
 
-let sphenics =
-    (2..search_limit) |> filter(is_sphenic) |> collect()
+let sphenics = (2..search_limit) |> filter(is_sphenic) |> collect()
 
 let below_1000 = sphenics |> filter(* < 1000) |> join()
 
@@ -38,17 +37,12 @@ for first in triplets do
     fi
 od
 
-write_line(
-    "sphenic numbers below {search_limit}: {sphenics.count}"
-)
-write_line(
-    "sphenic triplets below {search_limit}: {triplets.count}"
-)
+write_line("sphenic numbers below {search_limit}: {sphenics.count}")
+write_line("sphenic triplets below {search_limit}: {triplets.count}")
 
 let sphenic_200000th = sphenics[200000 - 1]
 
-let factors_200000th =
-    sphenic_200000th |> prime_factors() |> join(" x ")
+let factors_200000th = sphenic_200000th |> prime_factors() |> join(" x ")
 
 write_line(
     "the 200000th sphenic number is {sphenic_200000th} = {factors_200000th}"

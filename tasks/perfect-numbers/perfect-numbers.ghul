@@ -5,8 +5,7 @@ is_perfect(n: int) -> bool is
         return false
     fi
 
-    let divisors =
-        (1::n / 2) |> filter(d => n % d == 0) |> sum()
+    let divisors = (1::n / 2) |> filter(d => n % d == 0) |> sum()
 
     return divisors == n
 si

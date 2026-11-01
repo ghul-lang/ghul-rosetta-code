@@ -30,9 +30,7 @@ for neighbours in adjacent do
 od
 
 write_line("Constructed digraph:")
-write_line(
-    "Digraph has {size} vertices and {edges.count} edges"
-)
+write_line("Digraph has {size} vertices and {edges.count} edges")
 write_line("Adjacency lists:")
 
 for vertex in 0..size do
@@ -63,9 +61,7 @@ search(vertex: int) is
         if !preorder[next]? then
             search(next)
         elif !component[next]? then
-            while
-                preorder[candidates.peek()]! > preorder[next]!
-            do
+            while preorder[candidates.peek()]! > preorder[next]! do
                 candidates.pop()
             od
         fi
@@ -107,19 +103,12 @@ for which in 0..components do
     write_line("Component {which}: {members}")
 od
 
-connected(a: int, b: int) -> bool =>
-    component[a]! == component[b]!
+connected(a: int, b: int) -> bool => component[a]! == component[b]!
 
 write_line("")
 write_line("Example connectivity checks:")
-write_line(
-    "Vertices 0 and 3 strongly connected? {connected(0, 3)}"
-)
-write_line(
-    "Vertices 0 and 7 strongly connected? {connected(0, 7)}"
-)
-write_line(
-    "Vertices 9 and 12 strongly connected? {connected(9, 12)}"
-)
+write_line("Vertices 0 and 3 strongly connected? {connected(0, 3)}")
+write_line("Vertices 0 and 7 strongly connected? {connected(0, 7)}")
+write_line("Vertices 9 and 12 strongly connected? {connected(9, 12)}")
 write_line("Component ID of vertex 5: {component[5]!}")
 write_line("Component ID of vertex 8: {component[8]!}")

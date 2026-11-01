@@ -7,23 +7,14 @@ bigrams(phrase: string) -> Map[string, int] =>
         )
         |> frequencies()
 
-shared(
-    left: Map[string, int],
-    right: Map[string, int]
-) -> int =>
+shared(left: Map[string, int], right: Map[string, int]) -> int =>
     left
         |> filter(entry => right.contains_key(entry.key))
-        |> sum_by(entry =>
-            System.Math.min(entry.value, right[entry.key])
-        )
+        |> sum_by(entry => System.Math.min(entry.value, right[entry.key]))
 
-size(counted: Map[string, int]) -> int =>
-    counted.values |> sum()
+size(counted: Map[string, int]) -> int => counted.values |> sum()
 
-coefficient(
-    left: Map[string, int],
-    right: Map[string, int]
-) -> double => (
+coefficient(left: Map[string, int], right: Map[string, int]) -> double => (
     let total = size(left) + size(right)
 
     if total == 0 then

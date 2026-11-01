@@ -1,11 +1,7 @@
 use default
 use System.Math
 
-apply(
-    operator: string,
-    left: double,
-    right: double
-) -> double =>
+apply(operator: string, left: double, right: double) -> double =>
     case operator
     when "+" then left + right
     when "-" then left - right

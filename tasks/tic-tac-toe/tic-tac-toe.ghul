@@ -10,20 +10,16 @@ let lines = [
 winner(board: List[char]) -> char? =>
     lines
         |> filter((a, b, c) =>
-            board[a] != ' ' /\
-            board[a] == board[b] /\
-            board[b] == board[c]
+            board[a] != ' ' /\ board[a] == board[b] /\ board[b] == board[c]
         )
         |> map((a, _, _) => board[a])
         |> first()
 
-free(board: List[char]) -> int{} =>
-    0..9 |> filter(i => board[i] == ' ')
+free(board: List[char]) -> int{} => 0..9 |> filter(i => board[i] == ' ')
 
 full(board: List[char]) -> bool => !(board |> any(* == ' '))
 
-other(player: char) -> char =>
-    if player == 'X' then 'O' else 'X' fi
+other(player: char) -> char => if player == 'X' then 'O' else 'X' fi
 
 score(board: LIST[char], player: char) -> int is
     if winner(board)? then

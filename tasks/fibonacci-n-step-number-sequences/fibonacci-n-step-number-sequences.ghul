@@ -19,10 +19,7 @@ si
 
 show(name: string, initial: int[]) =>
     let series =
-        n_step(initial)
-            |> take(10)
-            |> map(value => "{value}")
-            |> join(" ")
+        n_step(initial) |> take(10) |> map(value => "{value}") |> join(" ")
     in
     write_line("{name}: {series}")
 

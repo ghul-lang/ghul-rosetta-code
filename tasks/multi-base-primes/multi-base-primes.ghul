@@ -36,8 +36,7 @@ for length in 1::4 do
         od
     od
 
-    let most =
-        bases_of.values |> map(bases => bases.count) |> max()!
+    let most = bases_of.values |> map(bases => bases.count) |> max()!
 
     write_line("{length} character strings, most bases: {most}")
 
@@ -47,8 +46,6 @@ for length in 1::4 do
             |> sort_by(e => e.key)
 
     for entry in winners do
-        write_line(
-            "  {entry.key} -> [{entry.value |> join(" ")}]"
-        )
+        write_line("  {entry.key} -> [{entry.value |> join(" ")}]")
     od
 od

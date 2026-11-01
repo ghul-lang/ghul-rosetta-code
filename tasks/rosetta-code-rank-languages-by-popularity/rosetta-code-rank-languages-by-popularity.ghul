@@ -23,12 +23,8 @@ languages(api: string) -> (name: string, tasks: int){} is
     let next mut = ""
 
     do
-        let text =
-            client.get_string_async("{query}{next}").result
-        let reply = JsonDocument.parse(
-            text,
-            _[JsonDocumentOptions]
-        )
+        let text = client.get_string_async("{query}{next}").result
+        let reply = JsonDocument.parse(text, _[JsonDocumentOptions])
         let root = reply.root_element
 
         for
@@ -36,8 +32,7 @@ languages(api: string) -> (name: string, tasks: int){} is
                 "pages"
             ).enumerate_array()
         do
-            let title =
-                page.get_property("title").get_string() ?? ""
+            let title = page.get_property("title").get_string() ?? ""
             let info = page.get_property("categoryinfo")
 
             found.add(
@@ -54,8 +49,7 @@ languages(api: string) -> (name: string, tasks: int){} is
             break
         fi
 
-        let token =
-            more.get_property("gcmcontinue").get_string() ?? ""
+        let token = more.get_property("gcmcontinue").get_string() ?? ""
 
         next =
             "&gcmcontinue={System.Uri.escape_data_string(token)}"
@@ -86,11 +80,7 @@ od
 
 write_line("... and {ranked.count - 25} more")
 
-if let
-    place = ranked
-        |> index()
-        |> find(p => p.value.name =~ "Ghul")
-then
+if let place = ranked |> index() |> find(p => p.value.name =~ "Ghul") then
     write_line(
         "Ghul is at position {place.index + 1}, "
         "with {place.value.tasks:N0}"

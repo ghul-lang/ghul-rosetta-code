@@ -23,9 +23,7 @@ si
 
 word(block: List[ubyte], at: int) -> uint =>
     0..4
-        |> map(index =>
-            uint(block[at + index]) << (24 - 8 * index)
-        )
+        |> map(index => uint(block[at + index]) << (24 - 8 * index))
         |> reduce(0u, * | *)
 
 sha1(message: ubyte[]) -> string is
@@ -75,11 +73,7 @@ sha1(message: ubyte[]) -> string is
                 fi
 
             let rotated =
-                rotate_left(a, 5) +
-                mixed +
-                e +
-                constant +
-                schedule[step]
+                rotate_left(a, 5) + mixed + e + constant + schedule[step]
 
             e = d
             d = c
@@ -111,9 +105,7 @@ let messages = [
 for message in messages do
     let octets = System.Text.Encoding.utf8.get_bytes(message)
 
-    let expected = hex(
-        System.Security.Cryptography.SHA1.hash_data(octets)
-    )
+    let expected = hex(System.Security.Cryptography.SHA1.hash_data(octets))
 
     assert sha1(octets) =~ expected
         else "does not agree with the digest .NET computes"

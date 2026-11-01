@@ -17,11 +17,7 @@ let width = power_of_three(depth)
     |> map(level =>
         (0..width)
             |> map(position =>
-                if
-                    removed(
-                        position / power_of_three(depth - level)
-                    )
-                then
+                if removed(position / power_of_three(depth - level)) then
                     " "
                 else
                     "*"

@@ -40,8 +40,7 @@ class EERTREE(text: string) is
                         letter
                     )
 
-                    _nodes[node].suffix =
-                        _nodes[link].edges[letter]
+                    _nodes[node].suffix = _nodes[link].edges[letter]
                 fi
 
                 longest = node

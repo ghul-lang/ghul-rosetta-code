@@ -9,9 +9,7 @@ amb[T](sets: List[T{}], accepts: (T, T) -> bool) -> List[T]{} is
 
         for choice in set do
             for rest in rests do
-                if
-                    rest.count == 0 \/ accepts(choice, rest[0])
-                then
+                if rest.count == 0 \/ accepts(choice, rest[0]) then
                     let sequence = LIST()
 
                     sequence.add(choice)

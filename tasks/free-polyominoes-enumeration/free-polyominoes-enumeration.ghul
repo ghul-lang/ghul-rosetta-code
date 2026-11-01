@@ -5,9 +5,7 @@ use Raster.SHAPES
 use Cell = (row: int, column: int)
 use Shape = List[Cell]
 
-at(row: int, column: int) -> Cell => (
-    row = row, column = column
-)
+at(row: int, column: int) -> Cell => (row = row, column = column)
 
 reading_order(a: Cell, b: Cell) -> int =>
     if a.row != b.row then
@@ -16,8 +14,7 @@ reading_order(a: Cell, b: Cell) -> int =>
         a.column - b.column
     fi
 
-has(shape: Shape, cell: Cell) -> bool =>
-    shape |> any(c => c =~ cell)
+has(shape: Shape, cell: Cell) -> bool => shape |> any(c => c =~ cell)
 
 height(shape: Shape) -> int =>
     shape |> map(c => c.row) |> reduce(0, int.max) + 1
@@ -28,15 +25,10 @@ width(shape: Shape) -> int =>
 normalised(cells: Cell{}) -> Shape =>
     let
         list = cells |> collect(),
-        top =
-            list
-                |> map(c => c.row)
-                |> reduce(list[0].row, int.min)
+        top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
     in
         let left =
-            list
-                |> map(c => c.column)
-                |> reduce(list[0].column, int.min)
+            list |> map(c => c.column) |> reduce(list[0].column, int.min)
         in
         list
             |> map(c => at(c.row - top, c.column - left))
@@ -51,15 +43,9 @@ canonical(shape: Shape) -> Shape => (
     let current mut = shape
 
     for _ in 0..4 do
-        current = normalised(
-            current |> map(c => at(c.column, -c.row))
-        )
+        current = normalised(current |> map(c => at(c.column, -c.row)))
         forms.add(current)
-        forms.add(
-            normalised(
-                current |> map(c => at(c.row, -c.column))
-            )
-        )
+        forms.add(normalised(current |> map(c => at(c.row, -c.column))))
     od
 
     (forms |> min_by(key))!
@@ -70,9 +56,7 @@ grow(shapes: List[Shape]) -> List[Shape] is
 
     for shape in shapes do
         for cell in shape do
-            for
-                (dr, dc) in [(0, 1), (1, 0), (0, -1), (-1, 0)]
-            do
+            for (dr, dc) in [(0, 1), (1, 0), (0, -1), (-1, 0)] do
                 let next = at(cell.row + dr, cell.column + dc)
 
                 if !has(shape, next) then
@@ -97,9 +81,7 @@ row_of(shape: Shape, row: int) -> string =>
 art(shapes: List[Shape]) -> string{} =>
     let tallest = shapes |> map(height) |> reduce(0, int.max) in
     (0..tallest)
-        |> map(row =>
-            shapes |> map(row_of(*, row)) |> join("  ")
-        )
+        |> map(row => shapes |> map(row_of(*, row)) |> join("  "))
         |> map(line => line.trim_end())
 
 let levels = LIST[List[Shape]]([[[at(0, 0)]]])
@@ -109,9 +91,7 @@ while levels.count < 10 do
 od
 
 for (i, shapes) in levels |> index() do
-    write_line(
-        "{i + 1,2} cells: {shapes.count,5} free polyominoes"
-    )
+    write_line("{i + 1,2} cells: {shapes.count,5} free polyominoes")
 od
 
 write_line("")

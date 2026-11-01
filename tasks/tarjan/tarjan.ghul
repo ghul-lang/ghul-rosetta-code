@@ -56,5 +56,4 @@ for vertex in 0..edges.count do
     fi
 od
 
-components
-    |> each(component => write_line("{component |> join(" ")}"))
+components |> each(component => write_line("{component |> join(" ")}"))

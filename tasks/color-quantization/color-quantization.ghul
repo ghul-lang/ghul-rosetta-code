@@ -4,9 +4,7 @@ use System.Math
 
 use Colour = (red: int, green: int, blue: int)
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -19,12 +17,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -80,13 +73,7 @@ hue(h: double) -> Colour =>
         esac
 
 put(image: IMAGE, x: int, y: int, c: Colour) is
-    image.set_pixel(
-        x,
-        y,
-        ubyte(c.red),
-        ubyte(c.green),
-        ubyte(c.blue)
-    )
+    image.set_pixel(x, y, ubyte(c.red), ubyte(c.green), ubyte(c.blue))
 si
 
 of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Colour => (
@@ -122,21 +109,16 @@ spread(box: List[Weighted], axis: int) -> int =>
     let values = box |> map(w => channel(w.colour, axis)) in
     (values |> max()!) - (values |> min()!)
 
-widest(box: List[Weighted]) -> int =>
-    0..3 |> max_by(spread(box, *))!
+widest(box: List[Weighted]) -> int => 0..3 |> max_by(spread(box, *))!
 
 score(box: List[Weighted]) -> int => spread(box, widest(box))
 
-split(box: List[Weighted]) -> (
-    List[Weighted],
-    List[Weighted]
-) is
+split(box: List[Weighted]) -> (List[Weighted], List[Weighted]) is
     let axis = widest(box)
     let sorted =
         box
             |> sort((a, b) =>
-                channel(a.colour, axis) -
-                channel(b.colour, axis)
+                channel(a.colour, axis) - channel(b.colour, axis)
             )
             |> collect()
 
@@ -151,30 +133,19 @@ split(box: List[Weighted]) -> (
 
     let cut = walk(1, sorted[0].count)
 
-    (
-        sorted |> take(cut) |> collect(),
-        sorted |> skip(cut) |> collect()
-    )
+    (sorted |> take(cut) |> collect(), sorted |> skip(cut) |> collect())
 si
 
 average(box: List[Weighted]) -> Colour is
     let n = box |> sum_by(w => w.count)
 
     weighted(axis) =>
-        (
-            box
-                |> sum_by(w =>
-                    channel(w.colour, axis) * w.count
-                )
-        ) / n
+        (box |> sum_by(w => channel(w.colour, axis) * w.count)) / n
 
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(
-    colours: List[Weighted],
-    count: int
-) -> List[Colour] => (
+median_cut(colours: List[Weighted], count: int) -> List[Colour] => (
     let boxes = LIST[List[Weighted]]([colours])
 
     while boxes.count < count do
@@ -212,15 +183,11 @@ let pixels = [
 let counts = pixels |> frequencies()
 
 let colours =
-    counts
-        |> map(kv => (colour = kv.key, count = kv.value))
-        |> collect()
+    counts |> map(kv => (colour = kv.key, count = kv.value)) |> collect()
 
 let palette = median_cut(colours, 16)
 
-write_line(
-    "{colours.count} colours reduced to {palette.count}:"
-)
+write_line("{colours.count} colours reduced to {palette.count}:")
 
 for row in 0..4 do
     write_line(
@@ -233,10 +200,7 @@ for row in 0..4 do
 od
 
 let scale = 2
-let output = IMAGE(
-    input.width * 2 * scale,
-    input.height * scale
-)
+let output = IMAGE(input.width * 2 * scale, input.height * scale)
 
 for y in 0..input.height * scale do
     for x in 0..input.width * scale do

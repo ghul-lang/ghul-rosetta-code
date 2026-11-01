@@ -3,11 +3,7 @@ use default
 use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
-moves(
-    value: int,
-    divisors: List[int],
-    subtractors: List[int]
-) -> MOVE{} is
+moves(value: int, divisors: List[int], subtractors: List[int]) -> MOVE{} is
     for divisor in divisors do
         if value % divisor == 0 then
             yield (next = value / divisor, label = "/{divisor}")
@@ -16,10 +12,7 @@ moves(
 
     for subtractor in subtractors do
         if value > subtractor then
-            yield (
-                next = value - subtractor,
-                label = "-{subtractor}"
-            )
+            yield (next = value - subtractor, label = "-{subtractor}")
         fi
     od
 si
@@ -70,8 +63,7 @@ route(table: List[STEP], value: int) -> string => (
 )
 
 deepest_in(table: List[STEP], limit: int) is
-    let deepest =
-        1::limit |> map(value => table[value].steps) |> max()
+    let deepest = 1::limit |> map(value => table[value].steps) |> max()
 
     if let most = deepest then
         let hardest =

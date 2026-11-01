@@ -21,16 +21,11 @@ let permutation = [
     243, 141, 128, 195, 78, 66, 215, 61, 156, 180
 ]
 
-let p =
-    (0..512)
-        |> map(index => permutation[index % 256])
-        |> collect()
+let p = (0..512) |> map(index => permutation[index % 256]) |> collect()
 
-fade(t: double) -> double =>
-    t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
+fade(t: double) -> double => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 
-lerp(t: double, a: double, b: double) -> double =>
-    a + t * (b - a)
+lerp(t: double, a: double, b: double) -> double => a + t * (b - a)
 
 grad(hash: int, x: double, y: double, z: double) -> double => (
     let h = hash & 15, u = if h < 8 then x else y fi
@@ -66,11 +61,7 @@ noise(at_x: double, at_y: double, at_z: double) -> double => (
 
     let near = lerp(
         v,
-        lerp(
-            u,
-            grad(p[aa], x, y, z),
-            grad(p[ba], x - 1.0, y, z)
-        ),
+        lerp(u, grad(p[aa], x, y, z), grad(p[ba], x - 1.0, y, z)),
         lerp(
             u,
             grad(p[ab], x, y - 1.0, z),

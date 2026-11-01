@@ -12,14 +12,9 @@ with_sum_column(line: string, index: int) -> string =>
 let rows =
     IO.File.read_all_lines("input.csv")
         |> index()
-        |> map((position, line) =>
-            with_sum_column(line, position)
-        )
+        |> map((position, line) => with_sum_column(line, position))
 
-let output = IO.Path.combine(
-    IO.Path.get_temp_path(),
-    "rosetta-sums.csv"
-)
+let output = IO.Path.combine(IO.Path.get_temp_path(), "rosetta-sums.csv")
 
 IO.File.write_all_lines(output, rows)
 

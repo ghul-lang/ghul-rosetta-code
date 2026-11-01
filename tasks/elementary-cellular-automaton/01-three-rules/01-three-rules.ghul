@@ -10,22 +10,17 @@ neighbourhood(cells: List[bool], at: int) -> int =>
 step(rule: int, cells: List[bool]) -> List[bool] =>
     let next =
         0..cells.count
-            |> map(at =>
-                (rule >> neighbourhood(cells, at)) & 1 == 1
-            )
+            |> map(at => (rule >> neighbourhood(cells, at)) & 1 == 1)
             |> collect()
     in
     next
 
 show(cells: List[bool]) -> string =>
-    cells
-        |> map(cell => if cell then "#" else "." fi)
-        |> join("")
+    cells |> map(cell => if cell then "#" else "." fi) |> join("")
 
 let width = 31
 
-let single_cell =
-    0..width |> map(at => at == width / 2) |> collect()
+let single_cell = 0..width |> map(at => at == width / 2) |> collect()
 
 for rule in [90, 30, 110] do
     write_line("rule {rule}")

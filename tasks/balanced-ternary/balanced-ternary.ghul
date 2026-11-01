@@ -2,10 +2,7 @@ use default
 
 struct BT(digits: int{}) is
     to_string() -> string =>
-        digits
-            |> reverse()
-            |> map(d => "-0+"[d + 1])
-            |> string()
+        digits |> reverse() |> map(d => "-0+"[d + 1]) |> string()
 si
 
 trim(ds: int{}) -> int{} =>
@@ -30,9 +27,7 @@ digits(n: bigint) -> int{} =>
     esac
 
 value(a: BT) -> bigint =>
-    a.digits
-        |> reverse()
-        |> reduce(0n, (t, d) => t * 3n + bigint(d))
+    a.digits |> reverse() |> reduce(0n, (t, d) => t * 3n + bigint(d))
 
 add(a: int{}, b: int{}) -> int{} =>
     case (a, b)

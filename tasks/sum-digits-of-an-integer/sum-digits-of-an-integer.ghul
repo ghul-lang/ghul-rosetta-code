@@ -17,7 +17,5 @@ for
         (0xF0E, 16)
     ]
 do
-    write_line(
-        "{value} in base {base}: {digit_sum(value, base)}"
-    )
+    write_line("{value} in base {base}: {digit_sum(value, base)}")
 od

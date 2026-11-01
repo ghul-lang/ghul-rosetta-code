@@ -3,10 +3,7 @@ use default
 use STEP = (order: List[int], sign: int)
 
 swap(values: LIST[int], left: int, right: int) is
-    (values[left], values[right]) = (
-        values[right],
-        values[left]
-    )
+    (values[left], values[right]) = (values[right], values[left])
 si
 
 permutations(size: int) -> STEP{} is
@@ -51,9 +48,7 @@ si
 
 [3, 4]
     |> each(size => (
-        write_line(
-            "permutations of {size} items, by adjacent swaps:"
-        )
+        write_line("permutations of {size} items, by adjacent swaps:")
 
         permutations(size)
             |> each(step =>

@@ -6,10 +6,7 @@ reverse_of(n: long) -> long is
     walk(remaining: long, reversed: long) -> long =>
         if remaining == 0L then reversed
         else
-            walk(
-                remaining / 10L,
-                reversed * 10L + remaining % 10L
-            )
+            walk(remaining / 10L, reversed * 10L + remaining % 10L)
         fi
 
     walk(n, 0L)

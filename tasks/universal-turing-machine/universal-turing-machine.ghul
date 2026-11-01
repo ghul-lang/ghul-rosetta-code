@@ -33,8 +33,7 @@ class MACHINE(
     si
 
     run(input: string, show: bool) is
-        let start =
-            if input.length == 0 then "{blank}" else input fi
+        let start = if input.length == 0 then "{blank}" else input fi
         let tape = LIST(start)
         let head mut = 0
         let state mut = initial
@@ -81,20 +80,12 @@ picture(tape: List[char], head: int) -> string =>
         )
         |> join("")
 
-let incrementer = MACHINE("simple incrementer",
-    "q0",
-    "qf",
-    'B',
-    [
+let incrementer = MACHINE("simple incrementer", "q0", "qf", 'B', [
     "q0 1 1 right q0",
     "q0 B 1 stay qf"
 ])
 
-let busy_beaver = MACHINE("three-state busy beaver",
-    "a",
-    "halt",
-    '0',
-    [
+let busy_beaver = MACHINE("three-state busy beaver", "a", "halt", '0', [
     "a 0 1 right b",
     "a 1 1 left c",
     "b 0 1 left a",
@@ -103,11 +94,7 @@ let busy_beaver = MACHINE("three-state busy beaver",
     "c 1 1 stay halt"
 ])
 
-let five_state = MACHINE("five-state busy beaver",
-    "A",
-    "H",
-    '0',
-    [
+let five_state = MACHINE("five-state busy beaver", "A", "H", '0', [
     "A 0 1 right B",
     "A 1 1 left C",
     "B 0 1 right C",

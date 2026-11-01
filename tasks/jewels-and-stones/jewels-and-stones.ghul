@@ -12,7 +12,5 @@ for
 do
     let found = count_jewels(pair.stones, pair.jewels)
 
-    write_line(
-        "{pair.stones} contains {found} of {pair.jewels}"
-    )
+    write_line("{pair.stones} contains {found} of {pair.jewels}")
 od

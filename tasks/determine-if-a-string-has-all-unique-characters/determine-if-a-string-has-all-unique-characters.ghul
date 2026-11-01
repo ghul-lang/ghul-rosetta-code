@@ -2,10 +2,7 @@ use default
 
 first_repeat(text: string) -> (first: int, second: int)? =>
     0..text.length
-        |> map(i => (
-            first = i,
-            second = text.index_of(text[i], i + 1)
-        ))
+        |> map(i => (first = i, second = text.index_of(text[i], i + 1)))
         |> find((_, second) => second >= 0)
 
 let strings = [

@@ -45,14 +45,10 @@ CountItems(items: int[]) -> int => items.count
 let counter = COUNTER()
 counter.bump()
 
-write_line(
-    "total area {total_area([SQUARE(2.0), SQUARE(3.0)])}"
-)
+write_line("total area {total_area([SQUARE(2.0), SQUARE(3.0)])}")
 write_line("counter at {counter.bump()}")
 write_line("{Colour.GREEN} {Reading.CELSIUS(21.5)}")
-write_line(
-    "point {Point(3, 4).x}, {CountItems([1, 2, 3])} items"
-)
+write_line("point {Point(3, 4).x}, {CountItems([1, 2, 3])} items")
 
 // .NET names are read in ghūl's conventions
 write_line("{System.DateTime.days_in_month(2024, 2)} days")

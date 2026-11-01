@@ -49,7 +49,5 @@ let cases = [
 ]
 
 for (label, a, m) in cases do
-    write_line(
-        "order of {label} modulo {m} = {multiplicative_order(a, m)}"
-    )
+    write_line("order of {label} modulo {m} = {multiplicative_order(a, m)}")
 od

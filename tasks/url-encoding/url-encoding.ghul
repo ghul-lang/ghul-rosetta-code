@@ -12,9 +12,7 @@ percent_encoded(octet: ubyte) -> string => (
 )
 
 url_encode(text: string) -> string =>
-    Encoding.utf8.get_bytes(text)
-        |> map(percent_encoded)
-        |> join("")
+    Encoding.utf8.get_bytes(text) |> map(percent_encoded) |> join("")
 
 [
     "http://foo bar/",

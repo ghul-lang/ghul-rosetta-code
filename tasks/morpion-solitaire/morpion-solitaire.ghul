@@ -129,9 +129,7 @@ let listed =
         )
 
 for group in 0..(played.count + 3) / 4 do
-    write_line(
-        listed |> skip(group * 4) |> take(4) |> join("  ")
-    )
+    write_line(listed |> skip(group * 4) |> take(4) |> join("  "))
 od
 
 let low_x = points |> map(p => p.`0) |> min()!
@@ -141,10 +139,7 @@ let high_y = points |> map(p => p.`1) |> max()!
 
 let cell = 36
 
-let image = IMAGE(
-    (high_x - low_x + 2) * cell,
-    (high_y - low_y + 2) * cell
-)
+let image = IMAGE((high_x - low_x + 2) * cell, (high_y - low_y + 2) * cell)
 
 image.view(
     double(low_x) - 1.0D,
@@ -159,21 +154,11 @@ image.colour(225ub, 225ub, 230ub)
 image.stroke(1.0D)
 
 for x in low_x - 1::high_x + 1 do
-    image.line(
-        double(x),
-        double(low_y - 1),
-        double(x),
-        double(high_y + 1)
-    )
+    image.line(double(x), double(low_y - 1), double(x), double(high_y + 1))
 od
 
 for y in low_y - 1::high_y + 1 do
-    image.line(
-        double(low_x - 1),
-        double(y),
-        double(high_x + 1),
-        double(y)
-    )
+    image.line(double(low_x - 1), double(y), double(high_x + 1), double(y))
 od
 
 image.colour(40ub, 90ub, 170ub)
@@ -198,11 +183,7 @@ for (x, y) in start do
     image.dot(double(x), double(y), 7.0D)
 od
 
-for
-    (m, n) in played
-        |> index()
-        |> map(im => (im.value, im.index + 1))
-do
+for (m, n) in played |> index() |> map(im => (im.value, im.index + 1)) do
     image.colour(255ub, 255ub, 255ub)
     image.dot(double(m.x), double(m.y), 12.0D)
     image.colour(200ub, 40ub, 40ub)

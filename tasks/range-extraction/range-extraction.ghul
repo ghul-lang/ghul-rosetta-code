@@ -6,8 +6,7 @@ runs(values: List[int]) -> List[int]{} is
 
     for value in values do
         if
-            current.count == 0 \/
-            current[current.count - 1] == value - 1
+            current.count == 0 \/ current[current.count - 1] == value - 1
         then
             current.add(value)
         else

@@ -6,18 +6,14 @@ and(a: bool, b: bool) -> bool => a /\ b
 
 or(a: bool, b: bool) -> bool => a \/ b
 
-xor(a: bool, b: bool) -> bool =>
-    or(and(a, not(b)), and(not(a), b))
+xor(a: bool, b: bool) -> bool => or(and(a, not(b)), and(not(a), b))
 
 half_adder(a: bool, b: bool) -> (sum: bool, carry: bool) => (
     sum = xor(a, b),
     carry = and(a, b)
 )
 
-full_adder(a: bool, b: bool, carry_in: bool) -> (
-    sum: bool,
-    carry: bool
-) =>
+full_adder(a: bool, b: bool, carry_in: bool) -> (sum: bool, carry: bool) =>
     let
         lower = half_adder(a, b),
         upper = half_adder(lower.sum, carry_in)

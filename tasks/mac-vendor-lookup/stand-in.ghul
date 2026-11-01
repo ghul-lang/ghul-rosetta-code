@@ -38,17 +38,12 @@ test_entry() is
             let context = listener.get_context()
             let path = context.request.url?.absolute_path ?? ""
             let asked = path.trim_start('/')
-            let found =
-                known |> find(k => asked.starts_with(k.`0))
+            let found = known |> find(k => asked.starts_with(k.`0))
 
             if let (_, name) = found then
                 let body = Encoding.utf8.get_bytes(name)
 
-                context.response.output_stream.write(
-                    body,
-                    0,
-                    body.count
-                )
+                context.response.output_stream.write(body, 0, body.count)
             else
                 context.response.status_code = 404
             fi

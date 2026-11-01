@@ -9,9 +9,7 @@ parse_all(text: string) -> Tensor{} is
     let at mut = 0
 
     skip_spaces() is
-        while
-            at < text.length /\ char.is_white_space(text[at])
-        do
+        while at < text.length /\ char.is_white_space(text[at]) do
             at = at + 1
         od
     si
@@ -85,11 +83,7 @@ embed(tensor: Tensor, strides: List[int]) -> List[int] is
             values[offset] = value
         when (items): Tensor.ARRAY then
             for (i, item) in items |> index() do
-                place(
-                    item,
-                    level + 1,
-                    offset + i * strides[level]
-                )
+                place(item, level + 1, offset + i * strides[level])
             od
         esac
     si
@@ -123,10 +117,7 @@ reshape(
             Tensor.ARRAY(
                 0 .. dimensions[level]
                     |> map(i =>
-                        build(
-                            level + 1,
-                            offset + i * strides[level]
-                        )
+                        build(level + 1, offset + i * strides[level])
                     )
                     |> collect()
             )
@@ -141,15 +132,10 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
     let h_shape =
         g_shape
             |> zip(shape(f))
-            |> map((g_extent, f_extent) =>
-                g_extent - f_extent + 1
-            )
+            |> map((g_extent, f_extent) => g_extent - f_extent + 1)
             |> collect()
 
-    let h_values = deconvolve_1d(
-        embed(g, strides),
-        embed(f, strides)
-    )
+    let h_values = deconvolve_1d(embed(g, strides), embed(f, strides))
 
     reshape(h_values, h_shape, strides)
 )

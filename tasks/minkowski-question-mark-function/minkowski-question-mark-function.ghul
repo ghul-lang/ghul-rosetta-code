@@ -157,13 +157,7 @@ do
     let y = question(marked.x)
 
     image.dot(marked.x, y, 4.0D)
-    image.text(
-        marked.x + 0.02D,
-        y - 0.03D,
-        13.0D,
-        marked.name,
-        Anchor.LEFT
-    )
+    image.text(marked.x + 0.02D, y - 0.03D, 13.0D, marked.name, Anchor.LEFT)
 od
 
 image.write("question-mark.png")

@@ -3,9 +3,7 @@ use Raster.Anchor
 use Raster.IMAGE
 use System.Math.*
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -18,12 +16,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -64,8 +57,7 @@ si
 
 use Kernel = (name: string, weights: int[], divisor: int)
 
-channel(value: double) -> ubyte =>
-    ubyte(clamp(round(value), 0.0D, 255.0D))
+channel(value: double) -> ubyte => ubyte(clamp(round(value), 0.0D, 255.0D))
 
 convolve(source: IMAGE, kernel: Kernel) -> IMAGE is
     let result = IMAGE(source.width, source.height)
@@ -85,18 +77,11 @@ convolve(source: IMAGE, kernel: Kernel) -> IMAGE is
                 for i in -1::1
             ]
 
-            let red =
-                around
-                    |> map(((w, p)) => w * double(p.red))
-                    |> sum()
+            let red = around |> map(((w, p)) => w * double(p.red)) |> sum()
             let green =
-                around
-                    |> map(((w, p)) => w * double(p.green))
-                    |> sum()
+                around |> map(((w, p)) => w * double(p.green)) |> sum()
             let blue =
-                around
-                    |> map(((w, p)) => w * double(p.blue))
-                    |> sum()
+                around |> map(((w, p)) => w * double(p.blue)) |> sum()
 
             result.set_pixel(
                 x,
@@ -121,36 +106,25 @@ let kernels: Kernel[] = [
 scene().write("scene.png")
 
 let source = IMAGE.read("scene.png")
-kernels
-    |> each(k =>
-        write_line("{k.name,-8} {k.weights |> join(" ")}")
-    )
+kernels |> each(k => write_line("{k.name,-8} {k.weights |> join(" ")}"))
 
 let results =
     [("original", source)] ++
     (kernels |> map(k => (k.name, convolve(source, k))))
 
-let cell_width = source.width + 10,
-    cell_height = source.height + 24
+let cell_width = source.width + 10, cell_height = source.height + 24
 let sheet = IMAGE(cell_width * 3 + 10, cell_height * 2 + 10)
 
 sheet.clear(235ub, 235ub, 230ub)
 
 for (i, (name, image)) in results |> index() do
-    let left = 10 + i % 3 * cell_width,
-        top = 10 + i / 3 * cell_height
+    let left = 10 + i % 3 * cell_width, top = 10 + i / 3 * cell_height
 
     for y in 0..image.height do
         for x in 0..image.width do
             let p = image.pixel(x, y)
 
-            sheet.set_pixel(
-                left + x,
-                top + y,
-                p.red,
-                p.green,
-                p.blue
-            )
+            sheet.set_pixel(left + x, top + y, p.red, p.green, p.blue)
         od
     od
 

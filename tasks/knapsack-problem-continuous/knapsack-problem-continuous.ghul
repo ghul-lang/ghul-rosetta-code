@@ -21,10 +21,7 @@ let taken = LIST()
 let remaining mut = capacity
 
 let by_density =
-    items
-        |> sort((a, b) =>
-            b.value / b.weight <> a.value / a.weight
-        )
+    items |> sort((a, b) => b.value / b.weight <> a.value / a.weight)
 
 for item in by_density do
     if remaining <= 0.0 then

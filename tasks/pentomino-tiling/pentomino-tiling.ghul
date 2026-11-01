@@ -33,14 +33,10 @@ anchored(cells: Cell{}) -> Shape =>
     let sorted = cells |> sort(reading_order) |> collect() in
     let first = sorted[0] in
     sorted
-        |> map(c =>
-            cell_at(c.row - first.row, c.column - first.column)
-        )
+        |> map(c => cell_at(c.row - first.row, c.column - first.column))
         |> collect()
 
-cell_at(row: int, column: int) -> Cell => (
-    row = row, column = column
-)
+cell_at(row: int, column: int) -> Cell => (row = row, column = column)
 
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
@@ -74,9 +70,7 @@ orientations(cells: List[(int, int)]) -> Shape{} is
 si
 
 let shapes =
-    pieces
-        |> map((name, cells) => (name, orientations(cells)))
-        |> memo()
+    pieces |> map((name, cells) => (name, orientations(cells))) |> memo()
 let board = repeat('.', size * size) |> collect_mutable()
 let used = repeat(false, pieces.count) |> collect_mutable()
 
@@ -96,8 +90,7 @@ fits(shape: Shape, at: Cell) -> bool =>
 
 mark(shape: Shape, at: Cell, name: char) is
     for c in shape do
-        board[(at.row + c.row) * size + at.column + c.column] =
-            name
+        board[(at.row + c.row) * size + at.column + c.column] = name
     od
 si
 
@@ -161,11 +154,7 @@ write_line("tiled on attempt {attempts}:")
 write_line("")
 
 for row in 0..size do
-    write_line(
-        0..size
-            |> map(c => "{board[row * size + c]}")
-            |> join(" ")
-    )
+    write_line(0..size |> map(c => "{board[row * size + c]}") |> join(" "))
 od
 
 let hues = "FILNPTUVWXYZ"

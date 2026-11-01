@@ -30,6 +30,4 @@ let magic_number = n * (n * n + 1) / 2
 write_line("5 by 5 magic square, magic number {magic_number}:")
 square
     |> chunk(n)
-    |> each(row =>
-        write_line(row |> map(value => "{value,3}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(value => "{value,3}") |> join("")))

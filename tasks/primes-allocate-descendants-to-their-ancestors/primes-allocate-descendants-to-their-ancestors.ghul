@@ -50,9 +50,7 @@ for n in 1::top do
         "[{n}] level {chain.count}, ancestors: "
         "{if chain.count == 0 then "none" else chain |> join(" ") fi}"
     )
-    write_line(
-        "    {children.count} descendants: {abbreviated(children)}"
-    )
+    write_line("    {children.count} descendants: {abbreviated(children)}")
 od
 
 write_line("")

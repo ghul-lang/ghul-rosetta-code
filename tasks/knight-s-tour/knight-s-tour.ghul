@@ -34,9 +34,7 @@ onward(square: Square) -> Square{} =>
             file = square.file + leap.file,
             rank = square.rank + leap.rank
         ))
-        |> filter(next =>
-            inside(next) /\ visit_order[at(next)] == 0
-        )
+        |> filter(next => inside(next) /\ visit_order[at(next)] == 0)
 
 let tour = LIST([start])
 
@@ -48,12 +46,9 @@ while tour.count < size * size do
     let next =
         square
             |> onward()
-            |> min_by(candidate =>
-                onward(candidate) |> count()
-            ) ?? square
+            |> min_by(candidate => onward(candidate) |> count()) ?? square
 
-    assert at(next) != at(square)
-        else "the tour reached a dead end"
+    assert at(next) != at(square) else "the tour reached a dead end"
 
     visit_order[at(next)] = tour.count + 1
 
@@ -123,9 +118,7 @@ for step in 0..tour.count - 1 do
     let from = middle(tour[step])
     let to = middle(tour[step + 1])
 
-    image.colour(
-        COLOUR_MAP.viridis(double(step) / double(tour.count))
-    )
+    image.colour(COLOUR_MAP.viridis(double(step) / double(tour.count)))
 
     image.line(from.x, from.y, to.x, to.y)
 od

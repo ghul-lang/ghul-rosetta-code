@@ -38,16 +38,13 @@ letters(text: string, at: int) -> char{} is
 si
 
 final_form(greek: char[], at: int) -> char =>
-    let ends_word =
-        at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
+    let ends_word = at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
     in
     if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
 
 transliterate(text: string) -> string =>
     let greek = letters(text, 0) |> collect() in
-    string(
-        0..greek.count |> map(final_form(greek, *)) |> collect()
-    )
+    string(0..greek.count |> map(final_form(greek, *)) |> collect())
 
 let passage = [
     "I was looking at some rhododendrons in my back garden,",
@@ -58,11 +55,7 @@ let passage = [
     "laying in my patio."
 ]
 
-write_line(
-    transliterate(
-        "The quick brown fox jumped over the lazy dog."
-    )
-)
+write_line(transliterate("The quick brown fox jumped over the lazy dog."))
 write_line("")
 
 for line in passage do

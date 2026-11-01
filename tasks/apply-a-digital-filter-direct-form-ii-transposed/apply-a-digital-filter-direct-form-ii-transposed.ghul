@@ -1,10 +1,6 @@
 use default
 
-filter(
-    a: double[],
-    b: double[],
-    signal: double[]
-) -> double{} => (
+filter(a: double[], b: double[], signal: double[]) -> double{} => (
     let out = LIST()
 
     for i in 0..signal.count do
@@ -36,5 +32,4 @@ let signal = [
     0.0259303398477, 0.490105989562, 0.549391221511, 0.9047198589
 ]
 
-filter(a, b, signal)
-    |> each(value => write_line("{value,12:F8}"))
+filter(a, b, signal) |> each(value => write_line("{value,12:F8}"))

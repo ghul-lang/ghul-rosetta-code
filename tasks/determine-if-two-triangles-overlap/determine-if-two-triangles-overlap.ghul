@@ -20,12 +20,7 @@ shadow(t: Triangle, axis: P) -> (low: double, high: double) =>
         high = lengths |> reduce(lengths[0], max)
     )
 
-separated(
-    a: Triangle,
-    b: Triangle,
-    axis: P,
-    touching: bool
-) -> bool =>
+separated(a: Triangle, b: Triangle, axis: P, touching: bool) -> bool =>
     let
         s = shadow(a, axis),
         t = shadow(b, axis)
@@ -43,16 +38,11 @@ overlap(a: Triangle, b: Triangle, touching: bool) -> bool =>
 
 triangle(text: string) -> Triangle =>
     let numbers =
-        text.split(
-            ['(', ')', ','],
-            StringSplitOptions.REMOVE_EMPTY_ENTRIES
-        )
+        text.split(['(', ')', ','], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
             |> map(double.parse)
             |> collect()
     in
-    (0..3)
-        |> map(i => P(numbers[2 * i], numbers[2 * i + 1]))
-        |> collect()
+    (0..3) |> map(i => P(numbers[2 * i], numbers[2 * i + 1])) |> collect()
 
 let pairs = [
     ("(0,0),(5,0),(0,5)", "(0,0),(5,0),(0,6)"),
@@ -66,8 +56,7 @@ let pairs = [
     |> map((a, b) => (triangle(a), triangle(b)))
     |> collect()
 
-show(t: Triangle) -> string =>
-    t |> map(p => p.show) |> join(",")
+show(t: Triangle) -> string => t |> map(p => p.show) |> join(",")
 
 for (a, b) in pairs do
     let verdict =
@@ -84,9 +73,7 @@ let (a, b) = pairs[pairs.count - 1]
 
 write_line("")
 write_line("the last pair touch at a corner")
-write_line(
-    "overlapping if touching counts: {overlap(a, b, true)}"
-)
+write_line("overlapping if touching counts: {overlap(a, b, true)}")
 write_line("overlapping if it does not: {overlap(a, b, false)}")
 
 let panel = 120
@@ -95,8 +82,7 @@ let image = IMAGE(panel * 4, panel * 2)
 image.clear(252ub, 250ub, 245ub)
 
 for (i, (a, b)) in pairs |> index() do
-    let left = double(i % 4 * panel),
-        top = double(i / 4 * panel)
+    let left = double(i % 4 * panel), top = double(i / 4 * panel)
     let all = a ++ b |> collect()
     let low_x = all |> map(p => p.x) |> reduce(all[0].x, min)
     let high_x = all |> map(p => p.x) |> reduce(all[0].x, max)
@@ -109,15 +95,12 @@ for (i, (a, b)) in pairs |> index() do
         y = top + 105.0D - (p.y - low_y) * scale
     )
 
-    let first = (a, 60ub, 110ub, 200ub),
-        second = (b, 200ub, 90ub, 40ub)
+    let first = (a, 60ub, 110ub, 200ub), second = (b, 200ub, 90ub, 40ub)
 
     for (shape, r, g, blue) in [first, second] do
         image.colour(r, g, blue)
         image.stroke(2.0D)
-        image.line(
-            shape ++ [shape[0]] |> map(place) |> collect()
-        )
+        image.line(shape ++ [shape[0]] |> map(place) |> collect())
     od
 od
 

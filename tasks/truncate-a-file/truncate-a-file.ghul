@@ -14,11 +14,7 @@ truncate(path: string, length: long) is
         )
     fi
 
-    let stream = FileStream(
-        path,
-        FileMode.OPEN,
-        FileAccess.WRITE
-    )
+    let stream = FileStream(path, FileMode.OPEN, FileAccess.WRITE)
     stream.set_length(length)
     stream.dispose()
 si

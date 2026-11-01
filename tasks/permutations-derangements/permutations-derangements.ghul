@@ -39,8 +39,7 @@ si
 
 write_line("the derangements of four items:")
 
-derangements(4)
-    |> each(one => write_line("  {one |> join(" ")}"))
+derangements(4) |> each(one => write_line("  {one |> join(" ")}"))
 
 write_line()
 write_line(" n   counted   subfactorial")
@@ -55,6 +54,4 @@ write_line(" n   counted   subfactorial")
     )
 
 write_line()
-write_line(
-    "!20 = {subfactorials() |> skip(20) |> first_or_throw():N0}"
-)
+write_line("!20 = {subfactorials() |> skip(20) |> first_or_throw():N0}")

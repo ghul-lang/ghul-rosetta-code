@@ -1,10 +1,6 @@
 use default
 
-sort_three[T: Ghul.Comparable[T]](
-    x: T ref,
-    y: T ref,
-    z: T ref
-) is
+sort_three[T: Ghul.Comparable[T]](x: T ref, y: T ref, z: T ref) is
     let sorted = [x!, y!, z!] |> sort() |> collect()
 
     x! = sorted[0]

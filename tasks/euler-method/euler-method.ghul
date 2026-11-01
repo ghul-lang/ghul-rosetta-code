@@ -7,15 +7,12 @@ let initial = 100.0
 cooling(t: double, temperature: double) -> double =>
     -k * (temperature - room)
 
-exact(t: double) -> double =>
-    room + (initial - room) * double.exp(-k * t)
+exact(t: double) -> double => room + (initial - room) * double.exp(-k * t)
 
-euler(
-    f: (double, double) -> double,
-    y0: double,
-    step: int,
-    end: int
-) -> (time: int, value: double){} is
+euler(f: (double, double) -> double, y0: double, step: int, end: int) -> (
+    time: int,
+    value: double
+){} is
     let y mut = y0
 
     for t in from(0, step) |> take_while(* <= end) do

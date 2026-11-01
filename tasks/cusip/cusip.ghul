@@ -24,8 +24,7 @@ check_digit(cusip: string) -> int =>
     let total = 0..8 |> sum_by(i => weighted(cusip[i], i)) in
     (10 - total % 10) % 10
 
-is_valid(cusip: string) -> bool =>
-    check_digit(cusip) == value_of(cusip[8])
+is_valid(cusip: string) -> bool => check_digit(cusip) == value_of(cusip[8])
 
 let securities = [
     ("037833100", "Apple Incorporated"),
@@ -37,7 +36,6 @@ let securities = [
 ]
 
 for (cusip, name) in securities do
-    let verdict =
-        if is_valid(cusip) then "valid" else "invalid" fi
+    let verdict = if is_valid(cusip) then "valid" else "invalid" fi
     write_line("{cusip}  {name,-22} {verdict}")
 od

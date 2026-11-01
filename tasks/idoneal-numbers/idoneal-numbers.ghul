@@ -6,9 +6,7 @@ is_idoneal(value: int) -> bool =>
             |> take_while(a => 3 * a * a + 2 * a < value)
             |> any(a =>
                 from(a + 1)
-                    |> take_while(b =>
-                        a * b + b * (a + 1) < value
-                    )
+                    |> take_while(b => a * b + b * (a + 1) < value)
                     |> any(b =>
                         (value - a * b) % (a + b) == 0 /\
                         (value - a * b) / (a + b) > b

@@ -5,16 +5,14 @@ use System.Math.*
 
 is_integer(d: decimal) -> bool => d == decimal.truncate(d)
 
-is_integer(x: double) -> bool =>
-    double.is_finite(x) /\ x == floor(x)
+is_integer(x: double) -> bool => double.is_finite(x) /\ x == floor(x)
 
 // A fraction is held in lowest terms, so it is an integer exactly when
 // its denominator divides its numerator.
 is_integer(numerator: bigint, denominator: bigint) -> bool =>
     (numerator % denominator).is_zero
 
-is_integer(z: Complex) -> bool =>
-    z.imaginary == 0.0 /\ is_integer(z.real)
+is_integer(z: Complex) -> bool => z.imaginary == 0.0 /\ is_integer(z.real)
 
 // Close enough, for a double that has picked up rounding error on the
 // way to what should have been an integer.

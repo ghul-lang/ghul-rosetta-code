@@ -1,15 +1,10 @@
 use default
 
-reversed(s: string) -> string =>
-    s |> graphemes() |> reverse() |> string()
+reversed(s: string) -> string => s |> graphemes() |> reverse() |> string()
 
 let phrase = "rosetta code phrase reversal"
 let words = phrase.split([' '])
 
 write_line("Reversed:            {reversed(phrase)}")
-write_line(
-    "Words reversed:      {words |> map(reversed) |> join(" ")}"
-)
-write_line(
-    "Word order reversed: {words |> reverse() |> join(" ")}"
-)
+write_line("Words reversed:      {words |> map(reversed) |> join(" ")}")
+write_line("Word order reversed: {words |> reverse() |> join(" ")}")

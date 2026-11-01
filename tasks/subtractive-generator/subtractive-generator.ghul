@@ -13,9 +13,7 @@ class SUBTRACTIVE is
         od
 
         _state =
-            0..55
-                |> map(n => s[34 * (n + 1) % 55])
-                |> collect_mutable()
+            0..55 |> map(n => s[34 * (n + 1) % 55]) |> collect_mutable()
         _index = 0
 
         for _ in 55..220 do
@@ -28,9 +26,7 @@ class SUBTRACTIVE is
     next() -> int is
         let value =
             (
-                _state[_index] -
-                _state[(_index + 31) % 55] +
-                1_000_000_000
+                _state[_index] - _state[(_index + 31) % 55] + 1_000_000_000
             ) % 1_000_000_000
 
         _state[_index] = value

@@ -1,11 +1,6 @@
 use default
 
-use Token = (
-    line: int,
-    column: int,
-    name: string,
-    value: string
-)
+use Token = (line: int, column: int, name: string, value: string)
 
 class LEXER is
     _source: string
@@ -40,13 +35,7 @@ class LEXER is
 
                 yield
                     case word
-                    when
-                        "if",
-                        "else",
-                        "while",
-                        "print",
-                        "putc"
-                    then
+                    when "if", "else", "while", "print", "putc" then
                         (line, column, "Keyword_{word}", "")
                     else
                         (line, column, "Identifier", word)
@@ -58,12 +47,7 @@ class LEXER is
                     throw _error(line, column, "invalid number")
                 fi
 
-                yield (
-                    line,
-                    column,
-                    "Integer",
-                    _source[start.._at]
-                )
+                yield (line, column, "Integer", _source[start.._at])
             elif c == '\'' then
                 let code = _character(line, column)
 
@@ -71,19 +55,9 @@ class LEXER is
             elif c == '"' then
                 _string(line, column)
 
-                yield (
-                    line,
-                    column,
-                    "String",
-                    _source[start.._at]
-                )
+                yield (line, column, "String", _source[start.._at])
             else
-                yield (
-                    line,
-                    column,
-                    _operator(c, line, column),
-                    ""
-                )
+                yield (line, column, _operator(c, line, column), "")
             fi
         od
     si
@@ -110,8 +84,7 @@ class LEXER is
         c
     si
 
-    _is_word(c: char) -> bool =>
-        char.is_letter_or_digit(c) \/ c == '_'
+    _is_word(c: char) -> bool => char.is_letter_or_digit(c) \/ c == '_'
 
     _skip() is
         do
@@ -125,11 +98,7 @@ class LEXER is
 
                 while !(_peek(0) == '*' /\ _peek(1) == '/') do
                     if _at >= _source.length then
-                        throw _error(
-                            line,
-                            column,
-                            "end of file in comment"
-                        )
+                        throw _error(line, column, "end of file in comment")
                     fi
 
                     _advance()
@@ -148,20 +117,12 @@ class LEXER is
         when 'n' then '\n'
         when '\\' then '\\'
         else
-            throw _error(
-                line,
-                column,
-                "unknown escape sequence"
-            )
+            throw _error(line, column, "unknown escape sequence")
         esac
 
     _character(line: int, column: int) -> int is
         if _peek(0) == '\'' then
-            throw _error(
-                line,
-                column,
-                "empty character constant"
-            )
+            throw _error(line, column, "empty character constant")
         fi
 
         let c mut = _advance()
@@ -171,11 +132,7 @@ class LEXER is
         fi
 
         if _peek(0) != '\'' then
-            throw _error(
-                line,
-                column,
-                "multi-character constant"
-            )
+            throw _error(line, column, "multi-character constant")
         fi
 
         _advance()
@@ -186,17 +143,9 @@ class LEXER is
     _string(line: int, column: int) is
         while _peek(0) != '"' do
             if _at >= _source.length then
-                throw _error(
-                    line,
-                    column,
-                    "end of file in string literal"
-                )
+                throw _error(line, column, "end of file in string literal")
             elif _peek(0) == '\n' then
-                throw _error(
-                    line,
-                    column,
-                    "end of line in string literal"
-                )
+                throw _error(line, column, "end of line in string literal")
             elif _advance() == '\\' then
                 _escape(line, column)
             fi
@@ -205,11 +154,7 @@ class LEXER is
         _advance()
     si
 
-    _either(
-        next: char,
-        both: string,
-        single: string
-    ) -> string is
+    _either(next: char, both: string, single: string) -> string is
         if _peek(0) == next then
             _advance()
             return both
@@ -218,21 +163,12 @@ class LEXER is
         single
     si
 
-    _doubled(
-        c: char,
-        name: string,
-        line: int,
-        column: int
-    ) -> string =>
+    _doubled(c: char, name: string, line: int, column: int) -> string =>
         if _peek(0) == c then
             _advance()
             name
         else
-            throw _error(
-                line,
-                column,
-                "unrecognized character '{c}'"
-            )
+            throw _error(line, column, "unrecognized character '{c}'")
         fi
 
     _operator(c: char, line: int, column: int) -> string =>
@@ -256,30 +192,16 @@ class LEXER is
         when ';' then "Semicolon"
         when ',' then "Comma"
         else
-            throw _error(
-                line,
-                column,
-                "unrecognized character '{c}'"
-            )
+            throw _error(line, column, "unrecognized character '{c}'")
         esac
 
-    _error(
-        line: int,
-        column: int,
-        message: string
-    ) -> System.Exception =>
-        System.Exception(
-            "line {line}, column {column}: {message}"
-        )
+    _error(line: int, column: int, message: string) -> System.Exception =>
+        System.Exception("line {line}, column {column}: {message}")
 si
 
 lex(source: string) is
     try
-        for
-            (line, column, name, value) in LEXER(
-                source
-            ).tokens()
-        do
+        for (line, column, name, value) in LEXER(source).tokens() do
             let row = "{line,5} {column,6}   {name,-15} {value}"
 
             write_line(row.trim_end())

@@ -2,7 +2,6 @@ use default
 use System.Net.Http.HttpClient
 
 // The task: fetch a URL and print what it holds.
-fetch(url: string) -> string =>
-    HttpClient().get_string_async(url).result
+fetch(url: string) -> string => HttpClient().get_string_async(url).result
 
 IO.Std.write(fetch("http://example.com"))

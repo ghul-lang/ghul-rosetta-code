@@ -22,9 +22,7 @@ run(program: List[Fraction], start: bigint) -> bigint{} is
         yield n
 
         let fits =
-            program
-                |> filter(f => n % f.denominator =~ 0n)
-                |> first()
+            program |> filter(f => n % f.denominator =~ 0n) |> first()
 
         if let next = fits then
             n = n * next.numerator / next.denominator

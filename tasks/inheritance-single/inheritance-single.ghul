@@ -28,9 +28,7 @@ class COLLIE: Dog is
     si
 si
 
-write_line(
-    "Animal <- Dog <- Lab: {isa Animal(LAB())}, {isa Dog(LAB())}"
-)
+write_line("Animal <- Dog <- Lab: {isa Animal(LAB())}, {isa Dog(LAB())}")
 write_line(
     "Animal <- Dog <- Collie: {isa Animal(COLLIE())}, "
     "{isa Dog(COLLIE())}"

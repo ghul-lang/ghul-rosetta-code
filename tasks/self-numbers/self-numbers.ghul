@@ -42,17 +42,14 @@ for value in 1::limit do
     digit_sum = digit_sum + change
 od
 
-self_numbers() -> int{} =>
-    1::limit |> filter(value => !is_generated(value))
+self_numbers() -> int{} => 1::limit |> filter(value => !is_generated(value))
 
 write_line("the first 50 self numbers:")
 
 self_numbers()
     |> take(50)
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(value => "{value,5}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(value => "{value,5}") |> join("")))
 
 write_line()
 
@@ -65,9 +62,5 @@ let verdict =
     else "wrong"
     fi
 
-write_line(
-    "the 100,000,000th self number: {hundred_millionth:N0}"
-)
-write_line(
-    "the conjecture that it is 1,022,727,208 is {verdict}"
-)
+write_line("the 100,000,000th self number: {hundred_millionth:N0}")
+write_line("the conjecture that it is 1,022,727,208 is {verdict}")

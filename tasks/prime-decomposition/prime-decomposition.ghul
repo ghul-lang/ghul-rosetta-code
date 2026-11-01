@@ -14,8 +14,7 @@ decompose(n: bigint) -> bigint{} is
 si
 
 show(n: bigint) =>
-    let rendered = n |> decompose() |> map(factor => "{factor}")
-    in
+    let rendered = n |> decompose() |> map(factor => "{factor}") in
     write_line("{n} = {rendered |> join(" x ")}")
 
 for

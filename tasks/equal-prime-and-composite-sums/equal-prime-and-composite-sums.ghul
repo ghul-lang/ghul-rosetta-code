@@ -16,8 +16,7 @@ take_prime() is
 si
 
 take_composite() is
-    last_composite =
-        from(last_composite + 1L) |> find(v => !is_prime(v))!
+    last_composite = from(last_composite + 1L) |> find(v => !is_prime(v))!
 
     composite_index = composite_index + 1
     composite_total = composite_total + last_composite

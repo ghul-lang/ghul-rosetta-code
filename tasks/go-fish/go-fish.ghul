@@ -46,11 +46,7 @@ draw() -> int? =>
         card
     fi
 
-hand_over(
-    from_hand: LIST[int],
-    to_hand: LIST[int],
-    rank: int
-) -> int => (
+hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int => (
     let moved = held(from_hand, rank)
 
     for _ in 0..moved do
@@ -61,20 +57,14 @@ hand_over(
     moved
 )
 
-lay_down_books(
-    hand: LIST[int],
-    books: LIST[int],
-    owner: string
-) is
+lay_down_books(hand: LIST[int], books: LIST[int], owner: string) is
     for rank in 0..ranks.count do
         if held(hand, rank) == 4 then
             hand_over(hand, LIST(), rank)
 
             books.add(rank)
 
-            Std.write_line(
-                "{owner} lay down a book of {name_of(rank)}s"
-            )
+            Std.write_line("{owner} lay down a book of {name_of(rank)}s")
         fi
     od
 si
@@ -91,15 +81,12 @@ si
 // not already found you to be out of, and among those the rank I hold
 // most of.
 my_choice() -> int => (
-    let mine =
-        (0..ranks.count) |> filter(rank => held(me, rank) > 0)
+    let mine = (0..ranks.count) |> filter(rank => held(me, rank) > 0)
 
     let known = mine |> filter(you_hold.contains) |> collect()
 
     let untried =
-        mine
-            |> filter(rank => !you_lack.contains(rank))
-            |> collect()
+        mine |> filter(rank => !you_lack.contains(rank)) |> collect()
 
     let pool =
         if known.count > 0 then known
@@ -126,9 +113,7 @@ for _ in 0..9 do
     if let card = draw() then me.add(card) fi
 od
 
-Std.write_line(
-    "go fish: ask me for a rank you hold, or quit to give up"
-)
+Std.write_line("go fish: ask me for a rank you hold, or quit to give up")
 
 let your_turn mut = true
 
@@ -155,8 +140,7 @@ while your_books.count + my_books.count < ranks.count do
             break
         fi
 
-        let wanted =
-            ranks |> find_index(* =~ typed.trim().to_upper())
+        let wanted = ranks |> find_index(* =~ typed.trim().to_upper())
 
         if !wanted? then
             Std.write_line("there is no such rank")
@@ -174,9 +158,7 @@ while your_books.count + my_books.count < ranks.count do
             let moved = hand_over(me, you, wanted)
 
             if moved > 0 then
-                Std.write_line(
-                    "I hand over {cards(moved, wanted)}"
-                )
+                Std.write_line("I hand over {cards(moved, wanted)}")
             else
                 Std.write_line("go fish")
 
@@ -203,9 +185,7 @@ while your_books.count + my_books.count < ranks.count do
             if moved > 0 then
                 you_hold.remove(wanted)
 
-                Std.write_line(
-                    "you hand over {cards(moved, wanted)}"
-                )
+                Std.write_line("you hand over {cards(moved, wanted)}")
             else
                 you_hold.remove(wanted)
 
@@ -224,9 +204,7 @@ while your_books.count + my_books.count < ranks.count do
 od
 
 Std.write_line()
-Std.write_line(
-    "you {your_books.count} books, I {my_books.count} books"
-)
+Std.write_line("you {your_books.count} books, I {my_books.count} books")
 Std.write_line(
     if your_books.count > my_books.count then "you win"
     elif my_books.count > your_books.count then "I win"

@@ -4,9 +4,7 @@ let text =
     "Now is the time for all good men to come to the aid of their country"
 
 let counts =
-    text
-        |> filter(char.is_letter)
-        |> group_by(char.to_lower_invariant)
+    text |> filter(char.is_letter) |> group_by(char.to_lower_invariant)
 
 for letter in counts.keys |> sort_by(k => k) do
     write_line("{letter}: {counts[letter].count}")

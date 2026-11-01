@@ -15,8 +15,7 @@ random_word() -> string =>
     let word = words[random.next(words.count)] in
     "{capitalised(word)}{random.next(10, 100)}"
 
-passphrase(n: int) -> string =>
-    1::n |> map(_ => random_word()) |> join("-")
+passphrase(n: int) -> string => 1::n |> map(_ => random_word()) |> join("-")
 
 for n in [3, 5, 7] do
     write_line("{n} words: {passphrase(n)}")

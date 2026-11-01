@@ -12,8 +12,7 @@ class BITMAP is
         self.width = width
         self.height = height
 
-        bytes =
-            repeat(0ub, width * height * 3) |> collect_mutable()
+        bytes = repeat(0ub, width * height * 3) |> collect_mutable()
     si
 
     set_pixel(x: int, y: int, colour: COLOUR) is
@@ -27,19 +26,12 @@ class BITMAP is
     pixel(x: int, y: int) -> COLOUR => (
         let at = (y * width + x) * 3
 
-        (
-            red = bytes[at],
-            green = bytes[at + 1],
-            blue = bytes[at + 2]
-        )
+        (red = bytes[at], green = bytes[at + 1], blue = bytes[at + 2])
     )
 si
 
 space(value: ubyte) -> bool =>
-    value == 32ub \/
-    value == 9ub \/
-    value == 10ub \/
-    value == 13ub
+    value == 32ub \/ value == 9ub \/ value == 10ub \/ value == 13ub
 
 read_ppm(path: string) -> BITMAP is
     let raw = IO.File.read_all_bytes(path)
@@ -47,10 +39,7 @@ read_ppm(path: string) -> BITMAP is
     let at mut = 0
 
     let token = () is
-        while
-            at < raw.count /\
-            (space(raw[at]) \/ raw[at] == 35ub)
-        do
+        while at < raw.count /\ (space(raw[at]) \/ raw[at] == 35ub) do
             if raw[at] == 35ub then
                 while at < raw.count /\ raw[at] != 10ub do
                     at = at + 1
@@ -66,9 +55,7 @@ read_ppm(path: string) -> BITMAP is
             at = at + 1
         od
 
-        return string(
-            (from..at) |> map(index => char(raw[index]))
-        )
+        return string((from..at) |> map(index => char(raw[index])))
     si
 
     assert token() =~ "P6" else "not a binary PPM"

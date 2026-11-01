@@ -36,10 +36,7 @@ let cells = [
 ]
 
 let number =
-    cells
-        |> index()
-        |> map((i, cell) => (cell, i))
-        |> collect_map()
+    cells |> index() |> map((i, cell) => (cell, i)) |> collect_map()
 
 moves(cell: Cell) -> Cell{} =>
     let
@@ -56,13 +53,8 @@ moves(cell: Cell) -> Cell{} =>
             (1, 0),
             (1, 1)
         ]
-            |> map((dr, dc) => (
-                row + dr * step,
-                column + dc * step
-            ))
-            |> filter(target =>
-                step > 0 /\ number.contains_key(target)
-            )
+            |> map((dr, dc) => (row + dr * step, column + dc * step))
+            |> filter(target => step > 0 /\ number.contains_key(target))
 
 let size = cells.count
 let unreachable = size
@@ -71,9 +63,7 @@ let distance =
     0..size
         |> map(i =>
             0..size
-                |> map(j =>
-                    if i == j then 0 else unreachable fi
-                )
+                |> map(j => if i == j then 0 else unreachable fi)
                 |> collect_mutable()
         )
         |> collect()
@@ -105,9 +95,7 @@ for k in 0..size do
 od
 
 show(steps: Cell{}) -> string =>
-    steps
-        |> map((row, column) => "({row}, {column})")
-        |> join(" -> ")
+    steps |> map((row, column) => "({row}, {column})") |> join(" -> ")
 
 route(from: Cell, to: Cell) -> string => (
     let target = number[to]
@@ -154,33 +142,24 @@ si
 path(previous: List[int], to: int) -> List[Cell] =>
     if previous[to] < 0 then [cells[to]]
     else
-        (path(previous, previous[to]) ++ [cells[to]])
-            |> collect()
+        (path(previous, previous[to]) ++ [cells[to]]) |> collect()
     fi
 
 let hq: Cell = (11, 11)
 let start = number[hq]
 
-let safe =
-    cells
-        |> filter((row, column) => country[row][column] == '0')
+let safe = cells |> filter((row, column) => country[row][column] == '0')
 
 let from_hq = dijkstra(start)
 
-let days =
-    safe |> map(cell => from_hq.days[number[cell]]) |> min()!
+let days = safe |> map(cell => from_hq.days[number[cell]]) |> min()!
 
-let nearest =
-    safe |> filter(cell => from_hq.days[number[cell]] == days)
+let nearest = safe |> filter(cell => from_hq.days[number[cell]] == days)
 
-write_line(
-    "Part 1: {nearest |> count()} routes of {days} days to safety:"
-)
+write_line("Part 1: {nearest |> count()} routes of {days} days to safety:")
 
 for cell in nearest do
-    write_line(
-        "    {show(path(from_hq.previous, number[cell]))}"
-    )
+    write_line("    {show(path(from_hq.previous, number[cell]))}")
 od
 
 write_line("\nPart 2:")
@@ -192,35 +171,21 @@ let (longest, from, to) =
         |> filter((d, _, _) => d < unreachable)
         |> max_by((d, _, _) => d)!
 
-write_line(
-    "    the longest shortest route takes {longest} days:"
-)
+write_line("    the longest shortest route takes {longest} days:")
 write_line("    {route(cells[from], cells[to])}")
 
 let unreached =
-    cells
-        |> filter(cell =>
-            distance[start][number[cell]] == unreachable
-        )
+    cells |> filter(cell => distance[start][number[cell]] == unreachable)
 
-write_line(
-    "\nCells that cannot be reached from HQ: {unreached}"
-)
+write_line("\nCells that cannot be reached from HQ: {unreached}")
 
 let furthest =
     cells
-        |> filter(cell =>
-            distance[start][number[cell]] < unreachable
-        )
+        |> filter(cell => distance[start][number[cell]] < unreachable)
         |> map(cell => distance[start][number[cell]])
         |> max()!
 
 let slowest =
-    cells
-        |> filter(cell =>
-            distance[start][number[cell]] == furthest
-        )
+    cells |> filter(cell => distance[start][number[cell]] == furthest)
 
-write_line(
-    "Cells furthest from HQ, at {furthest} days: {slowest}"
-)
+write_line("Cells furthest from HQ, at {furthest} days: {slowest}")

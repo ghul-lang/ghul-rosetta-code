@@ -20,19 +20,14 @@ shortest_paths(
     do
         unvisited.remove(nearest)
 
-        for
-            edge in edges
-                |> filter(edge => edge.start =~ nearest)
-        do
+        for edge in edges |> filter(edge => edge.start =~ nearest) do
             let through = best[nearest].cost + edge.cost
 
             if
                 !best.contains_key(edge.finish) \/
                 through < best[edge.finish].cost
             then
-                best[edge.finish] = (
-                    cost = through, previous = nearest
-                )
+                best[edge.finish] = (cost = through, previous = nearest)
             fi
         od
     od
@@ -67,9 +62,7 @@ write_line("shortest path tree from a:")
 
 nodes
     |> filter(node => best.contains_key(node) /\ node !~ "a")
-    |> each(node =>
-        write_line("    {best[node].previous} -> {node}")
-    )
+    |> each(node => write_line("    {best[node].previous} -> {node}"))
 
 write_line("")
 

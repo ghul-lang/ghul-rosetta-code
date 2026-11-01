@@ -66,10 +66,7 @@ jaro_similarity(left: string, right: string) -> double is
     return (left_rate + right_rate + matched) / 3.0D
 si
 
-jaro_winkler_distance(
-    left: string,
-    right: string
-) -> double => (
+jaro_winkler_distance(left: string, right: string) -> double => (
     let similarity = jaro_similarity(left, right)
 
     let prefix mut = 0

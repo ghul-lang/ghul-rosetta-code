@@ -106,16 +106,12 @@ write_source("unsorted.txt")
 
 let parts = split("unsorted.txt")
 
-write_line(
-    "{values} values in runs of {chunk}: {parts.count} runs"
-)
+write_line("{values} values in runs of {chunk}: {parts.count} runs")
 
 merge(parts, "sorted.txt")
 
 let sorted =
-    File.read_all_lines("sorted.txt")
-        |> map(int.parse)
-        |> collect()
+    File.read_all_lines("sorted.txt") |> map(int.parse) |> collect()
 
 let in_memory =
     File.read_all_lines("unsorted.txt")
@@ -125,17 +121,12 @@ let in_memory =
 in_memory.sort()
 
 write_line("merged {sorted.count} values")
-let ordered =
-    0..sorted.count - 1
-        |> all(at => sorted[at] <= sorted[at + 1])
+let ordered = 0..sorted.count - 1 |> all(at => sorted[at] <= sorted[at + 1])
 
 write_line("in order: {ordered}")
-write_line(
-    "same as sorting it in memory: {sorted =~ in_memory}"
-)
+write_line("same as sorting it in memory: {sorted =~ in_memory}")
 let first = sorted[0..3] |> map(v => "{v}") |> join(" ")
-let last =
-    sorted[sorted.count - 3..<0] |> map(v => "{v}") |> join(" ")
+let last = sorted[sorted.count - 3..<0] |> map(v => "{v}") |> join(" ")
 
 write_line("first three: {first}")
 write_line("last three:  {last}")

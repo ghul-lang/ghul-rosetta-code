@@ -6,10 +6,7 @@ class PCG32 is
 
     init(seed: ulong, sequence: ulong) is
         _increment = (sequence << 1) | 1ul
-        _state =
-            (
-                _increment + seed
-            ) * 6364136223846793005ul + _increment
+        _state = (_increment + seed) * 6364136223846793005ul + _increment
     si
 
     next_int() -> uint is
@@ -22,8 +19,7 @@ class PCG32 is
         (shifted >> rotation) | (shifted << (-rotation & 31))
     si
 
-    next_float() -> double =>
-        double(next_int()) / 4_294_967_296.0
+    next_float() -> double => double(next_int()) / 4_294_967_296.0
 si
 
 let first = PCG32(42ul, 54ul)

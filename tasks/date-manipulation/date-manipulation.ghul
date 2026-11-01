@@ -22,16 +22,8 @@ parse(text: string) -> DateTimeOffset =>
         split = text.last_index_of(' '),
         zone = text[split + 1..<0]
     in
-        let clock = DateTime.parse_exact(
-            text[0..split],
-            format,
-            culture
-        )
-        in
-        DateTimeOffset(
-            clock,
-            TimeSpan.from_hours(offsets[zone])
-        )
+        let clock = DateTime.parse_exact(text[0..split], format, culture) in
+        DateTimeOffset(clock, TimeSpan.from_hours(offsets[zone]))
 
 show(time: DateTimeOffset) -> string =>
     let
@@ -51,9 +43,5 @@ in_zone(time: DateTimeOffset, id: string) -> DateTimeOffset =>
 
 write_line("Start:           {show(start)}")
 write_line("12 hours later:  {show(later)}")
-write_line(
-    "In New York:     {show(in_zone(later, "America/New_York"))}"
-)
-write_line(
-    "In London:       {show(in_zone(later, "Europe/London"))}"
-)
+write_line("In New York:     {show(in_zone(later, "America/New_York"))}")
+write_line("In London:       {show(in_zone(later, "Europe/London"))}")

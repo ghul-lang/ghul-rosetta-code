@@ -14,9 +14,7 @@ union Resolved is
 si
 
 text(value: string) -> Json => Json.TEXT(value)
-member(key: string, value: Json) -> MEMBER => (
-    key = key, value = value
-)
+member(key: string, value: Json) -> MEMBER => (key = key, value = value)
 
 render(value: Json) -> string =>
     case value
@@ -47,26 +45,20 @@ step(node: Json, token: string) -> Resolved =>
             if position < list.items.count then
                 Resolved.FOUND(list.items[position])
             else
-                Resolved.FAILED(
-                    "index {position} is past the end"
-                )
+                Resolved.FAILED("index {position} is past the end")
             fi
         else
             Resolved.FAILED("\"{token}\" is not an array index")
         fi
     when record: Json.OBJECT then
-        let named =
-            record.members |> find(entry => entry.key =~ token)
-        in
+        let named = record.members |> find(entry => entry.key =~ token) in
         if let found = named then
             Resolved.FOUND(found.value)
         else
             Resolved.FAILED("no member named \"{token}\"")
         fi
     else
-        Resolved.FAILED(
-            "\"{token}\" has nothing to descend into"
-        )
+        Resolved.FAILED("\"{token}\" has nothing to descend into")
     esac
 
 decode(token: string) -> string =>
@@ -76,13 +68,10 @@ resolve(document: Json, pointer: string) -> Resolved =>
     if pointer.length == 0 then
         Resolved.FOUND(document)
     elif pointer[0] != '/' then
-        Resolved.FAILED(
-            "a pointer must be empty or start with a slash"
-        )
+        Resolved.FAILED("a pointer must be empty or start with a slash")
     else
         pointer[1..<0].split(['/'])
-            |> reduce(Resolved.FOUND(document),
-                (running, token) =>
+            |> reduce(Resolved.FOUND(document), (running, token) =>
                 if running? then
                     step(running.value, decode(token))
                 else
@@ -92,8 +81,7 @@ resolve(document: Json, pointer: string) -> Resolved =>
     fi
 
 let wiki_link = "https://rosettacode.org/wiki/Rosetta_Code"
-let discord_link =
-    "https://discord.com/channels/1011262808001880065"
+let discord_link = "https://discord.com/channels/1011262808001880065"
 
 let document = Json.OBJECT([
     member(
@@ -127,12 +115,8 @@ pointers
         let outcome = resolve(document, pointer)
 
         if outcome? then
-            write_line(
-                "\"{pointer}\" -> {render(outcome.value)}"
-            )
+            write_line("\"{pointer}\" -> {render(outcome.value)}")
         else
-            write_line(
-                "\"{pointer}\" -> error: {outcome.reason}"
-            )
+            write_line("\"{pointer}\" -> error: {outcome.reason}")
         fi
     ))

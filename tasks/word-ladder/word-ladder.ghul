@@ -19,14 +19,10 @@ path_back(
     if word =~ start then
         LIST([start])
     else
-        (path_back(previous, start, previous[word]) ++ [word])
-            |> collect()
+        (path_back(previous, start, previous[word]) ++ [word]) |> collect()
     fi
 
-ladder(
-    start: string,
-    goal: string
-) -> Collections.List[string]? is
+ladder(start: string, goal: string) -> Collections.List[string]? is
     let previous = MAP()
     let queue = Collections.Queue()
 

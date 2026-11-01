@@ -21,13 +21,9 @@ rectangle(
 ]
 
 edges(shape: Polygon) -> P{} =>
-    0..shape.count
-        |> map(i => shape[(i + 1) % shape.count] - shape[i])
+    0..shape.count |> map(i => shape[(i + 1) % shape.count] - shape[i])
 
-shadow(shape: Polygon, axis: P) -> (
-    low: double,
-    high: double
-) => (
+shadow(shape: Polygon, axis: P) -> (low: double, high: double) => (
     low = shape |> map(p => p ⋅ axis) |> min()!,
     high = shape |> map(p => p ⋅ axis) |> max()!
 )
@@ -57,12 +53,8 @@ write_line("polygon = {show(polygon)}")
 write_line("rect1   = (4, 0, 2, 2) => {show(first)}")
 write_line("rect2   = (1, 0, 8, 2) => {show(second)}")
 write_line("")
-write_line(
-    "polygon and rect1 overlap? {overlap(polygon, first)}"
-)
-write_line(
-    "polygon and rect2 overlap? {overlap(polygon, second)}"
-)
+write_line("polygon and rect1 overlap? {overlap(polygon, first)}")
+write_line("polygon and rect2 overlap? {overlap(polygon, second)}")
 
 outline(image: IMAGE, shape: Polygon, dx: double) is
     image.line(

@@ -26,9 +26,7 @@ class TALLY is
 
     mean: double => total / double(count)
 
-    deviation: double => sqrt(
-        squares / double(count) - mean * mean
-    )
+    deviation: double => sqrt(squares / double(count) - mean * mean)
 si
 
 let random = System.Random(100)
@@ -50,9 +48,7 @@ for size in sizes do
     samples() |> take(size) |> each(tally.add)
     tallies.add(tally)
 
-    write_line(
-        "{size,10}   {tally.mean:F6}   {tally.deviation:F6}"
-    )
+    write_line("{size,10}   {tally.mean:F6}   {tally.deviation:F6}")
 od
 
 write_line()
@@ -81,18 +77,13 @@ let image = IMAGE(int(panel) * shown.count, 200)
 image.view(0.0D, 0.0D, panel * double(shown.count), 200.0D)
 image.clear(252ub, 252ub, 250ub)
 
-for
-    (which, place) in shown
-        |> index()
-        |> map(iv => (iv.value, iv.index))
-do
+for (which, place) in shown |> index() |> map(iv => (iv.value, iv.index)) do
     let tally = tallies[which]
     let left = panel * double(place) + 15.0D
     let width = (panel - 30.0D) / double(bins)
 
     for bin in 0..bins do
-        let share =
-            double(tally.histogram[bin]) / double(tally.count)
+        let share = double(tally.histogram[bin]) / double(tally.count)
         let x = left + width * double(bin)
 
         image.colour(60ub, 110ub, 190ub)

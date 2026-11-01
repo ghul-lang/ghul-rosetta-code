@@ -29,9 +29,7 @@ si
 
 digest(salt: ubyte[], password: string) -> ubyte[] =>
     MD5.hash_data(
-        salt
-            |> cat(Encoding.utf8.get_bytes(password))
-            |> collect()
+        salt |> cat(Encoding.utf8.get_bytes(password)) |> collect()
     )
 
 create_user(
@@ -48,10 +46,7 @@ create_user(
 
     insert.parameters.add_with_value("$user", username)
     insert.parameters.add_with_value("$salt", salt)
-    insert.parameters.add_with_value(
-        "$md5",
-        digest(salt, password)
-    )
+    insert.parameters.add_with_value("$md5", digest(salt, password))
 
     try
         insert.execute_non_query()

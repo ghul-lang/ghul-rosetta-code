@@ -28,8 +28,7 @@ inverse(value: bigint, modulus: bigint) -> bigint => (
     modulo(s0, modulus)
 )
 
-modulo(value: bigint, m: bigint) -> bigint =>
-    ((value % m) + m) % m
+modulo(value: bigint, m: bigint) -> bigint => ((value % m) + m) % m
 
 smallest_start(n: int) -> bigint? is
     let primes = 2..n |> filter(is_prime) |> collect()
@@ -69,11 +68,7 @@ smallest_start(n: int) -> bigint? is
                             |> map(w => (a ^ w, b, free ^ w))
                             |> cat(
                                 set_bits(far & free)
-                                    |> map(w => (
-                                        a,
-                                        b ^ w,
-                                        free ^ w
-                                    ))
+                                    |> map(w => (a, b ^ w, free ^ w))
                             )
                             |> collect()
                     fi
@@ -108,9 +103,7 @@ let found =
         |> filter((_, start) => start?)
         |> take(20)
 
-write_line(
-    "The first 20 Erdős–Woods numbers and their smallest starts:"
-)
+write_line("The first 20 Erdős–Woods numbers and their smallest starts:")
 
 for (k, start) in found do
     write_line("{k,3} -> {start!}")

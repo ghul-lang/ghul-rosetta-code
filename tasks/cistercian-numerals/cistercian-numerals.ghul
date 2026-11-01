@@ -35,8 +35,7 @@ draw(image: IMAGE, number: int, left: double) is
     let place mut = number
 
     for quadrant in 0..4 do
-        let flip_x =
-            if quadrant % 2 == 1 then -1.0D else 1.0D fi
+        let flip_x = if quadrant % 2 == 1 then -1.0D else 1.0D fi
         let flip_y = quadrant >= 2
 
         for s in glyphs[place % 10] do

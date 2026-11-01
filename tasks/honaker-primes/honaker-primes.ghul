@@ -3,13 +3,8 @@ use default
 honakers() -> (position: int, prime: int){} =>
     primes()
         |> index()
-        |> map(((i, prime)) => (
-            position = i + 1,
-            prime = prime
-        ))
-        |> filter(h =>
-            digit_sum(h.position) == digit_sum(h.prime)
-        )
+        |> map(((i, prime)) => (position = i + 1, prime = prime))
+        |> filter(h => digit_sum(h.position) == digit_sum(h.prime))
 
 write_line("the first fifty Honaker primes:")
 

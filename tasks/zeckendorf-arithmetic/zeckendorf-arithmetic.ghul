@@ -20,19 +20,14 @@ read(text: string) -> List[int] => (
     let digits = blank()
 
     for entry in text |> reverse() |> index() do
-        digits[entry.index] =
-            if entry.value == '1' then 1 else 0 fi
+        digits[entry.index] = if entry.value == '1' then 1 else 0 fi
     od
 
     digits
 )
 
 highest(value: List[int]) -> int =>
-    let found =
-        0..width
-            |> reverse()
-            |> find(index => value[index] != 0)
-    in
+    let found = 0..width |> reverse() |> find(index => value[index] != 0) in
     found ?? -1
 
 show(value: List[int]) -> string =>
@@ -40,19 +35,14 @@ show(value: List[int]) -> string =>
     if top < 0 then
         "0"
     else
-        0::top
-            |> reverse()
-            |> map(index => "{value[index]}")
-            |> join("")
+        0::top |> reverse() |> map(index => "{value[index]}") |> join("")
     fi
 
 is_zero(value: List[int]) -> bool =>
     0..width |> all(index => value[index] == 0)
 
 compare(left: List[int], right: List[int]) -> int =>
-    let diff =
-        0..width |> reverse() |> find(i => left[i] != right[i])
-    in
+    let diff = 0..width |> reverse() |> find(i => left[i] != right[i]) in
     if diff? then
         if left[diff] > right[diff] then 1 else -1 fi
     else
@@ -150,9 +140,7 @@ fibonacci_multiples(
     table.add(add(value, value))
 
     while compare(table[table.count - 1], upto) <= 0 do
-        table.add(
-            add(table[table.count - 1], table[table.count - 2])
-        )
+        table.add(add(table[table.count - 1], table[table.count - 2]))
     od
 
     table
@@ -171,9 +159,7 @@ multiply(left: List[int], right: List[int]) -> List[int] is
     table.add(add(left, left))
 
     while table.count <= top do
-        table.add(
-            add(table[table.count - 1], table[table.count - 2])
-        )
+        table.add(add(table[table.count - 1], table[table.count - 2]))
     od
 
     0::top

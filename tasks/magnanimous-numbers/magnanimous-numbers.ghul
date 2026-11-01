@@ -25,12 +25,8 @@ od
 
 write_line("")
 write_line("the 241st to 250th:")
-write_line(
-    "  {terms[240..250] |> map(t => "{t,8}") |> join("")}"
-)
+write_line("  {terms[240..250] |> map(t => "{t,8}") |> join("")}")
 
 write_line("")
 write_line("the 391st to 400th:")
-write_line(
-    "  {terms[390..400] |> map(t => "{t,8}") |> join("")}"
-)
+write_line("  {terms[390..400] |> map(t => "{t,8}") |> join("")}")

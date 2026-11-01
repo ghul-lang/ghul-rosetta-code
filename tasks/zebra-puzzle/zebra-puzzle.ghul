@@ -41,8 +41,7 @@ together(
     left_value: string,
     right: List[string],
     right_value: string
-) -> bool =>
-    house_of(left, left_value) == house_of(right, right_value)
+) -> bool => house_of(left, left_value) == house_of(right, right_value)
 
 next_to(
     left: List[string],
@@ -50,9 +49,7 @@ next_to(
     right: List[string],
     right_value: string
 ) -> bool => (
-    let gap =
-        house_of(left, left_value) -
-        house_of(right, right_value)
+    let gap = house_of(left, left_value) - house_of(right, right_value)
     gap == 1 \/ gap == -1
 )
 
@@ -72,10 +69,7 @@ nation_rows(colour: List[string]) -> List[string]{} =>
             next_to(row, "Norwegian", colour, "blue")
         )
 
-drink_rows(
-    colour: List[string],
-    nation: List[string]
-) -> List[string]{} =>
+drink_rows(colour: List[string], nation: List[string]) -> List[string]{} =>
     arrangements(["tea", "coffee", "milk", "beer", "water"])
         |> filter(row =>
             house_of(row, "milk") == 2 /\
@@ -99,10 +93,7 @@ smoke_rows(
             next_to(row, "Blend", drink, "water")
         )
 
-pet_rows(
-    nation: List[string],
-    smoke: List[string]
-) -> List[string]{} =>
+pet_rows(nation: List[string], smoke: List[string]) -> List[string]{} =>
     arrangements(["dog", "bird", "cat", "horse", "zebra"])
         |> filter(row =>
             together(row, "dog", nation, "Swede") /\
@@ -115,14 +106,11 @@ solutions() -> SOLUTION{} is
     for colour in colour_rows() do
         for nation in nation_rows(colour) do
             for drink in drink_rows(colour, nation) do
-                for
-                    smoke in smoke_rows(colour, nation, drink)
-                do
+                for smoke in smoke_rows(colour, nation, drink) do
                     for pet in pet_rows(nation, smoke) do
                         yield (
-                            colour = colour, nation = nation,
-                            drink = drink, smoke = smoke,
-                            pet = pet
+                            colour = colour, nation = nation, drink = drink,
+                            smoke = smoke, pet = pet
                         )
                     od
                 od

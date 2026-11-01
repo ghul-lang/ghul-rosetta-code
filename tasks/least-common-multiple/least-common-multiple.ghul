@@ -1,8 +1,7 @@
 use default
 use System.Math
 
-gcd(a: int, b: int) -> int =>
-    if b == 0 then a else gcd(b, a % b) fi
+gcd(a: int, b: int) -> int => if b == 0 then a else gcd(b, a % b) fi
 
 lcm(a: int, b: int) -> int =>
     if a == 0 \/ b == 0 then

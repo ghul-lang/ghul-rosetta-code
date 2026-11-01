@@ -15,7 +15,4 @@ merge(
         []
     fi
 
-write_line(
-    merge(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3])
-        |> join("\n")
-)
+write_line(merge(['a', 'b', 'c'], ['A', 'B', 'C'], [1, 2, 3]) |> join("\n"))

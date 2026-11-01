@@ -31,13 +31,9 @@ update["year"] = 1974
 
 let result = merged(base, update)
 
-result.keys
-    |> sort()
-    |> each(key => write_line("{key,-6} {result[key]}"))
+result.keys |> sort() |> each(key => write_line("{key,-6} {result[key]}"))
 
 write_line("")
 write_line("the sources are untouched:")
 write_line("base price is still {base["price"]}")
-write_line(
-    "update still has no name: {!update.contains_key("name")}"
-)
+write_line("update still has no name: {!update.contains_key("name")}")

@@ -2,8 +2,7 @@ use default
 use Matrix = List[List[int]]
 
 multiply(left: Matrix, right: Matrix) -> Matrix =>
-    assert left[0].count == right.count
-        else "shapes do not conform" in
+    assert left[0].count == right.count else "shapes do not conform" in
     left
         |> map(row =>
             0..right[0].count

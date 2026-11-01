@@ -5,8 +5,7 @@ dimensions() -> (width: int, height: int)? =>
         null
     else
         let size = (
-            width = IO.Std.window_width,
-            height = IO.Std.window_height
+            width = IO.Std.window_width, height = IO.Std.window_height
         )
         in
         if size.width > 0 /\ size.height > 0 then
@@ -19,7 +18,5 @@ dimensions() -> (width: int, height: int)? =>
 if let size = dimensions() then
     write_line("{size.width} columns by {size.height} rows")
 else
-    write_line(
-        "standard output has no terminal dimensions to read"
-    )
+    write_line("standard output has no terminal dimensions to read")
 fi

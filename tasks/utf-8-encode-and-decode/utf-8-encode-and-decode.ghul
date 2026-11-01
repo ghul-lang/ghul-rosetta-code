@@ -33,8 +33,7 @@ decode(octets: List[int]) -> int =>
             when 3 then leader & 0x0F
             else leader & 0x07
             esac,
-            (acc, continuation) =>
-                (acc << 6) | (continuation & 0x3F)
+            (acc, continuation) => (acc << 6) | (continuation & 0x3F)
         )
 
 hex(octet: int) -> string => "{octet:X2}"
@@ -44,8 +43,7 @@ row(
     name: string,
     code_point: string,
     octets: string
-) -> string =>
-    "{character,-11}{name,-38}{code_point,-11}{octets}"
+) -> string => "{character,-11}{name,-38}{code_point,-11}{octets}"
 
 let characters = [
     (code_point = 65, name = "LATIN CAPITAL LETTER A"),
@@ -61,8 +59,7 @@ for character in characters do
     let octets = encode(character.code_point)
     let decoded = decode(octets)
 
-    assert decoded == character.code_point
-        else "the round trip must agree"
+    assert decoded == character.code_point else "the round trip must agree"
 
     write_line(
         row(

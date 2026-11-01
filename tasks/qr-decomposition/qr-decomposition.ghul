@@ -23,8 +23,7 @@ multiply(a: Rows, b: Rows) -> Table is
 
     for i in 0..a.count do
         for j in 0..b[0].count do
-            result[i][j] =
-                0..b.count |> sum_by(k => a[i][k] * b[k][j])
+            result[i][j] = 0..b.count |> sum_by(k => a[i][k] * b[k][j])
         od
     od
 
@@ -33,9 +32,7 @@ si
 
 transpose(a: Rows) -> Rows =>
     0..a[0].count
-        |> map(j =>
-            0..a.count |> map(i => a[i][j]) |> collect()
-        )
+        |> map(j => 0..a.count |> map(i => a[i][j]) |> collect())
         |> collect()
 
 householder(a: Rows, k: int) -> Table is
@@ -46,17 +43,14 @@ householder(a: Rows, k: int) -> Table is
     let first = column[0] + sign * norm
     let v =
         0..column.count
-            |> map(i =>
-                if i == 0 then 1.0 else column[i] / first fi
-            )
+            |> map(i => if i == 0 then 1.0 else column[i] / first fi)
             |> collect()
     let beta = 2.0 / (v |> sum_by(x => x * x))
     let h = identity(m)
 
     for i in 0..v.count do
         for j in 0..v.count do
-            h[k + i][k + j] =
-                h[k + i][k + j] - beta * v[i] * v[j]
+            h[k + i][k + j] = h[k + i][k + j] - beta * v[i] * v[j]
         od
     od
 
@@ -127,7 +121,5 @@ let design = xs |> map(x => LIST([1.0, x, x * x])) |> collect()
 
 let fit = least_squares(design, LIST(ys))
 
-write_line(
-    "Fitting y = a + bx + cx² to the polynomial regression data:"
-)
+write_line("Fitting y = a + bx + cx² to the polynomial regression data:")
 write_line(fit |> map(c => "{c:F6}") |> join("  "))

@@ -47,8 +47,7 @@ report(birth: DateTime, target: DateTime) is
             else
                 let
                     (trend, next) = quadrants[quadrant],
-                    ahead =
-                        (quadrant + 1) * length / 4 - position,
+                    ahead = (quadrant + 1) * length / 4 - position,
                     due = show(target.add_days(double(ahead)))
                 in
                     "{percentage}% ({trend}, next {next} {due})"
@@ -92,9 +91,7 @@ for (i, (label, length)) in cycles |> index() do
         (-span * 4::span * 4)
             |> map(q =>
                 let day = double(q) / 4.0D in
-                let turn =
-                    (double(centre) + day) / double(length)
-                in
+                let turn = (double(centre) + day) / double(length) in
                 (x = day, y = sin(2.0D * pi * turn))
             )
             |> collect()

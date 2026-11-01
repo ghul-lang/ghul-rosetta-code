@@ -9,10 +9,7 @@ IO.Directory.create_directory(scratch)
 
 let path = IO.Path.combine(scratch, "lines.txt")
 
-IO.File.write_all_lines(
-    path,
-    1..11 |> map(number => "line {number}")
-)
+IO.File.write_all_lines(path, 1..11 |> map(number => "line {number}"))
 
 line(path: string, wanted: int) -> string? =>
     cursor(use IO.File.read_lines(path).iterator)

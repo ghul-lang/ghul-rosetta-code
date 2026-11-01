@@ -53,9 +53,7 @@ heading(value: int, previous: Step?) -> Step =>
             south
         fi
     else
-        throw System.Exception(
-            "{value} is not a perimeter corner"
-        )
+        throw System.Exception("{value} is not a perimeter corner")
     esac
 
 let inked = [
@@ -77,8 +75,7 @@ walk(column: int, row: int, previous: Step?) -> Step{} =>
     then
         [facing]
     else
-        [facing] ++
-        walk(column + facing.across, row + facing.down, facing)
+        [facing] ++ walk(column + facing.across, row + facing.down, facing)
     fi
 
 let path = walk(start.column, start.row, null)

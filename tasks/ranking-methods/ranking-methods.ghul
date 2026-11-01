@@ -14,9 +14,7 @@ let competitors = [
 ]
 
 ties(entries: List[ENTRY]) -> List[ENTRY]{} =>
-    entries
-        |> group_by(e => e.score)
-        |> map((_, group) => group)
+    entries |> group_by(e => e.score) |> map((_, group) => group)
 
 ranked(rank: RANKER) -> string{} is
     let ahead mut = 0
@@ -35,40 +33,19 @@ ranked(rank: RANKER) -> string{} is
     od
 si
 
-standard(
-    ahead: int,
-    size: int,
-    member: int,
-    place: int
-) -> string => "{ahead + 1}"
+standard(ahead: int, size: int, member: int, place: int) -> string =>
+    "{ahead + 1}"
 
-modified(
-    ahead: int,
-    size: int,
-    member: int,
-    place: int
-) -> string => "{ahead + size}"
+modified(ahead: int, size: int, member: int, place: int) -> string =>
+    "{ahead + size}"
 
-dense(
-    ahead: int,
-    size: int,
-    member: int,
-    place: int
-) -> string => "{place}"
+dense(ahead: int, size: int, member: int, place: int) -> string => "{place}"
 
-ordinal(
-    ahead: int,
-    size: int,
-    member: int,
-    place: int
-) -> string => "{ahead + member + 1}"
+ordinal(ahead: int, size: int, member: int, place: int) -> string =>
+    "{ahead + member + 1}"
 
-fractional(
-    ahead: int,
-    size: int,
-    member: int,
-    place: int
-) -> string => "{double(ahead + ahead + size + 1) / 2.0D:F1}"
+fractional(ahead: int, size: int, member: int, place: int) -> string =>
+    "{double(ahead + ahead + size + 1) / 2.0D:F1}"
 
 let methods = [
     (name = "standard", rank = standard),
@@ -82,8 +59,7 @@ methods
     |> each(method => (
         write_line("{method.name} ranking:")
 
-        ranked(method.rank)
-            |> each(line => write_line("  {line}"))
+        ranked(method.rank) |> each(line => write_line("  {line}"))
 
         write_line()
     ))

@@ -8,9 +8,7 @@ is_abc_word(word: string) -> bool =>
     in
         a >= 0 /\ a < b /\ b < c
 
-let words =
-    IO.File.read_all_lines("unixdict.txt")
-        |> filter(is_abc_word)
+let words = IO.File.read_all_lines("unixdict.txt") |> filter(is_abc_word)
 
 for (position, word) in words |> index() do
     write_line("{position + 1,2}: {word}")

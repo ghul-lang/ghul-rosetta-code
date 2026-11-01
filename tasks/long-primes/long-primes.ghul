@@ -9,8 +9,7 @@ reciprocal_period(prime: int) -> int? =>
         if remainder == 1 then break length fi
     od
 
-is_long(prime: int) -> bool =>
-    reciprocal_period(prime) =~ prime - 1
+is_long(prime: int) -> bool => reciprocal_period(prime) =~ prime - 1
 
 long_primes(bound: int) -> int{} =>
     2::bound |> filter(is_prime) |> filter(is_long)

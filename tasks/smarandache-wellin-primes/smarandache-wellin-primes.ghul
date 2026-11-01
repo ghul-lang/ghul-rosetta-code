@@ -13,9 +13,7 @@ si
 
 derived(digits: string) -> bigint =>
     bigint.parse(
-        ('0'::'9')
-            |> map(d => "{digits |> count(c => c == d)}")
-            |> join("")
+        ('0'::'9') |> map(d => "{digits |> count(c => c == d)}") |> join("")
     )
 
 ordinal(n: int) -> string =>
@@ -37,9 +35,7 @@ abbreviated(digits: string) -> string =>
         "{digits[0..20]}...{digits[20..<<0]}"
     fi
 
-write_line(
-    "testing concatenated primes for primality, which takes a while"
-)
+write_line("testing concatenated primes for primality, which takes a while")
 write_line("")
 write_line("the first seven Smarandache-Wellin primes:")
 
@@ -56,9 +52,7 @@ for (i, w) in wellin_primes |> index() do
 od
 
 write_line("")
-write_line(
-    "the first twenty derived Smarandache-Wellin primes:"
-)
+write_line("the first twenty derived Smarandache-Wellin primes:")
 
 let derived_primes =
     wellin_numbers()

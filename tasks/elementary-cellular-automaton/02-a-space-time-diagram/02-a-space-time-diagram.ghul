@@ -18,9 +18,7 @@ neighbourhood(cells: List[bool], at: int) -> int =>
 step(rule: int, cells: List[bool]) -> List[bool] =>
     let next =
         0..cells.count
-            |> map(at =>
-                (rule >> neighbourhood(cells, at)) & 1 == 1
-            )
+            |> map(at => (rule >> neighbourhood(cells, at)) & 1 == 1)
             |> collect()
     in
     next
@@ -40,9 +38,7 @@ draw(image: IMAGE, rule: int, left: int) is
     image.colour(30ub, 40ub, 70ub)
 
     let rows =
-        stream(single_cell(), cells =>
-            cells || step(rule, cells)
-        )
+        stream(single_cell(), cells => cells || step(rule, cells))
             |> take(generations)
 
     for row in rows |> index() do
@@ -63,10 +59,7 @@ draw(image: IMAGE, rule: int, left: int) is
     )
 si
 
-let image = IMAGE(
-    width * 2 + gap * 3,
-    top + generations + gap * 3
-)
+let image = IMAGE(width * 2 + gap * 3, top + generations + gap * 3)
 
 draw(image, 30, gap)
 draw(image, 110, gap * 2 + width)

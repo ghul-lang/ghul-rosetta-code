@@ -18,8 +18,7 @@ class XORSHIFT_STAR is
         uint((x * 0x2545F4914F6CDD1Dul) >> 32)
     si
 
-    next_float() -> double =>
-        double(next_int()) / 4_294_967_296.0
+    next_float() -> double => double(next_int()) / 4_294_967_296.0
 si
 
 let first = XORSHIFT_STAR(1234567ul)

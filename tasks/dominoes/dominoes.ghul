@@ -7,14 +7,11 @@ use Grid = List[List[int]]
 
 parse(lines: List[string]) -> Grid =>
     lines
-        |> map(line =>
-            line |> map(c => int(c - '0')) |> collect()
-        )
+        |> map(line => line |> map(c => int(c - '0')) |> collect())
         |> collect()
 
 solve(grid: Grid) -> List[int]? is
-    let partner =
-        repeat(-1, rows * columns) |> collect_mutable()
+    let partner = repeat(-1, rows * columns) |> collect_mutable()
     let used = SET()
 
     value(cell) => grid[cell / columns][cell % columns]
@@ -97,8 +94,7 @@ show(grid: Grid, partner: List[int]) is
                     |> map(column =>
                         let
                             cell = row * columns + column,
-                            below =
-                                partner[cell] == cell + columns
+                            below = partner[cell] == cell + columns
                         in
                             if below then "| " else "  " fi
                     )

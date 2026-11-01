@@ -15,19 +15,14 @@ placements(n: int, queens: List[int]) -> List[int]{} is
     else
         for column in 0..n do
             if safe(queens, queens.count, column) then
-                yield in placements(
-                    n,
-                    queens ++ [column] |> collect()
-                )
+                yield in placements(n, queens ++ [column] |> collect())
             fi
         od
     fi
 si
 
 for n in 1::8 do
-    write_line(
-        "{n} by {n}: {placements(n, []) |> count()} solutions"
-    )
+    write_line("{n} by {n}: {placements(n, []) |> count()} solutions")
 od
 
 write_line("an 8 queens solution:")
@@ -38,9 +33,7 @@ if let first_solution = placements(8, []) |> first() then
         |> each((row, column) =>
             write_line(
                 (0..8)
-                    |> map(c =>
-                        if c == column then "♕" else "．" fi
-                    )
+                    |> map(c => if c == column then "♕" else "．" fi)
                     |> join(" ")
             )
         )

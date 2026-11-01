@@ -2,9 +2,7 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -17,12 +15,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -69,8 +62,7 @@ class FIELD is
     init(width: int, height: int) is
         self.width = width
         self.height = height
-        values =
-            repeat(0.0D, width * height) |> collect_mutable()
+        values = repeat(0.0D, width * height) |> collect_mutable()
     si
 
     at(x: int, y: int) -> double =>
@@ -120,9 +112,7 @@ blur(f: FIELD) -> FIELD is
                 for i in 0..5 do
                     let weight = gaussian[j][i]
 
-                    total =
-                        total +
-                        weight * f.at(x + i - 2, y + j - 2)
+                    total = total + weight * f.at(x + i - 2, y + j - 2)
                 od
             od
 
@@ -160,8 +150,7 @@ canny(f: FIELD, low: double, high: double) -> FIELD is
             magnitude.put(x, y, sqrt(gx * gx + gy * gy))
 
             let angle = atan2(gy, gx) * 180.0D / pi
-            let sector =
-                int(round((angle + 180.0D) / 45.0D)) % 4
+            let sector = int(round((angle + 180.0D) / 45.0D)) % 4
 
             direction[y * w + x] = sector
         od
@@ -228,15 +217,10 @@ let edges = canny(blur(greyscale(input)), 20.0D, 50.0D)
 
 let found = edges.values |> filter(* > 0.0D) |> count()
 
-write_line(
-    "{found} of {edges.width * edges.height} pixels are on an edge"
-)
+write_line("{found} of {edges.width * edges.height} pixels are on an edge")
 
 let scale = 2
-let output = IMAGE(
-    edges.width * 2 * scale,
-    edges.height * scale
-)
+let output = IMAGE(edges.width * 2 * scale, edges.height * scale)
 
 for y in 0..edges.height * scale do
     for x in 0..edges.width * scale do
@@ -245,13 +229,7 @@ for y in 0..edges.height * scale do
         let shade = if on then 255ub else 0ub fi
 
         output.set_pixel(x, y, p.red, p.green, p.blue)
-        output.set_pixel(
-            x + edges.width * scale,
-            y,
-            shade,
-            shade,
-            shade
-        )
+        output.set_pixel(x + edges.width * scale, y, shade, shade, shade)
     od
 od
 

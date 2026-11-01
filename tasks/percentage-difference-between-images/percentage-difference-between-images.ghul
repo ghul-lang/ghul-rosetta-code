@@ -2,9 +2,7 @@ use default
 use Raster.IMAGE
 use System.Math
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -17,12 +15,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -83,8 +76,7 @@ reduced(image: IMAGE) -> IMAGE is
     copy
 si
 
-gap(a: ubyte, b: ubyte) -> long =>
-    long(Math.abs(int(a) - int(b)))
+gap(a: ubyte, b: ubyte) -> long => long(Math.abs(int(a) - int(b)))
 
 difference(a: IMAGE, b: IMAGE) -> double is
     assert a.width == b.width /\ a.height == b.height
@@ -117,13 +109,9 @@ reduced(original).write("reduced.png")
 let first = IMAGE.read("original.png")
 let second = IMAGE.read("reduced.png")
 
-write_line(
-    "original.png against reduced.png, 16 levels a channel"
-)
+write_line("original.png against reduced.png, 16 levels a channel")
 write_line("difference: {difference(first, second):F5}%")
-write_line(
-    "original.png against itself: {difference(first, first):F5}%"
-)
+write_line("original.png against itself: {difference(first, first):F5}%")
 
 first.show("original.png")
 second.show("reduced.png")

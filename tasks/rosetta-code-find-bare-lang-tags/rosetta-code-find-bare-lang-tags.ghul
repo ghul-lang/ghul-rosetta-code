@@ -13,8 +13,7 @@ bare_tags(page: string) -> (language: string, page: string){} is
 
     for found in matches do
         if found.groups[1].success then
-            language =
-                found.groups[1].value.to_lower_invariant()
+            language = found.groups[1].value.to_lower_invariant()
         else
             yield (language, page)
         fi
@@ -27,15 +26,9 @@ report(pages: string[], show_pages: bool) is
     write_line("{found.count} bare language tags.")
     write_line("")
 
-    for
-        (language, tags) in found
-            |> group_by(tag => tag.language)
-    do
+    for (language, tags) in found |> group_by(tag => tag.language) do
         let where =
-            tags
-                |> map(tag => "[[{tag.page}]]")
-                |> distinct()
-                |> join()
+            tags |> map(tag => "[[{tag.page}]]") |> distinct() |> join()
 
         write_line(
             "{tags.count} in {language}"

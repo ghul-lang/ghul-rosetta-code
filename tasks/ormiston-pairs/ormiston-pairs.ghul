@@ -24,15 +24,12 @@ od
 digit_signature(value: int) -> string =>
     value |> digits() |> sort() |> string()
 
-let primes =
-    2..(limit + 1) |> filter(candidate => !composite[candidate])
+let primes = 2..(limit + 1) |> filter(candidate => !composite[candidate])
 
 let ormiston =
     primes
         |> pairwise()
-        |> filter((a, b) =>
-            digit_signature(a) =~ digit_signature(b)
-        )
+        |> filter((a, b) => digit_signature(a) =~ digit_signature(b))
 
 write_line("first 30 Ormiston pairs:")
 

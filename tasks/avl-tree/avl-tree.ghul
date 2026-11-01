@@ -12,12 +12,7 @@ height(tree: Tree) -> int =>
     esac
 
 node(left: Tree, key: int, right: Tree) -> Tree =>
-    Tree.NODE(
-        left,
-        key,
-        right,
-        1 + int.max(height(left), height(right))
-    )
+    Tree.NODE(left, key, right, 1 + int.max(height(left), height(right)))
 
 balance(tree: Tree) -> int =>
     case tree
@@ -27,22 +22,14 @@ balance(tree: Tree) -> int =>
 
 rotate_right(tree: Tree) -> Tree =>
     if let n: Tree.NODE = tree, pivot: Tree.NODE = n.left then
-        node(
-            pivot.left,
-            pivot.key,
-            node(pivot.right, n.key, n.right)
-        )
+        node(pivot.left, pivot.key, node(pivot.right, n.key, n.right))
     else
         tree
     fi
 
 rotate_left(tree: Tree) -> Tree =>
     if let n: Tree.NODE = tree, pivot: Tree.NODE = n.right then
-        node(
-            node(n.left, n.key, pivot.left),
-            pivot.key,
-            pivot.right
-        )
+        node(node(n.left, n.key, pivot.left), pivot.key, pivot.right)
     else
         tree
     fi
@@ -53,15 +40,11 @@ rebalance(tree: Tree) -> Tree =>
         let tilt = balance(n)
 
         if tilt > 1 /\ balance(n.left) < 0 then
-            rotate_right(
-                node(rotate_left(n.left), n.key, n.right)
-            )
+            rotate_right(node(rotate_left(n.left), n.key, n.right))
         elif tilt > 1 then
             rotate_right(tree)
         elif tilt < -1 /\ balance(n.right) > 0 then
-            rotate_left(
-                node(n.left, n.key, rotate_right(n.right))
-            )
+            rotate_left(node(n.left, n.key, rotate_right(n.right)))
         elif tilt < -1 then
             rotate_left(tree)
         else

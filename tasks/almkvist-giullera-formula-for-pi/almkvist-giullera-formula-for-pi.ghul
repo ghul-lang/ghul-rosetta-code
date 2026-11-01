@@ -1,7 +1,6 @@
 use default
 
-power_of_ten(exponent: int) -> bigint =>
-    bigint.pow(10n, exponent)
+power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
 
 integer_term(n: int) -> bigint =>
     32n *

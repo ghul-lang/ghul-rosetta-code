@@ -46,7 +46,5 @@ let inputs = [
 
 inputs
     |> each(levels =>
-        write_line(
-            "{levels |> join(", "),24} -> {render(nest(levels))}"
-        )
+        write_line("{levels |> join(", "),24} -> {render(nest(levels))}")
     )

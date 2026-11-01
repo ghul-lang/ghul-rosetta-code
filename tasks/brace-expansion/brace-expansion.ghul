@@ -11,10 +11,7 @@ use Alternation.LITERAL
 use Alternation.SEQUENCE
 use Alternation.BRANCHES
 
-take_pending(
-    pending: StringBuilder,
-    items: LIST[Alternation]
-) is
+take_pending(pending: StringBuilder, items: LIST[Alternation]) is
     if pending.length > 0 then
         items.add(LITERAL(pending.to_string()))
         pending.clear()
@@ -120,8 +117,7 @@ expand(tree: Alternation) -> string{} is
     fi
 si
 
-expansions(text: string) -> string{} =>
-    expand(parse(text, 0, false).tree)
+expansions(text: string) -> string{} => expand(parse(text, 0, false).tree)
 
 let inputs = [
     "~/{{Downloads,Pictures}}/*.{{jpg,gif,png}}",

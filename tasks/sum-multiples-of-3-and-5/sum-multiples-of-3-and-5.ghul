@@ -1,9 +1,7 @@
 use default
 
 sum_of_multiples(below: long) -> long =>
-    (1L..below)
-        |> filter(n => n % 3L == 0L \/ n % 5L == 0L)
-        |> sum()
+    (1L..below) |> filter(n => n % 3L == 0L \/ n % 5L == 0L) |> sum()
 
 for below in [10L, 1000L, 1000000L] do
     write_line("below {below,8}: {sum_of_multiples(below)}")

@@ -16,8 +16,7 @@ let faces = [
     [1, 8, 5, 10, 1, 0, 4, 7]
 ]
 
-let solved =
-    0..40 |> map(i => if i < 20 then i else 0 fi) |> collect()
+let solved = 0..40 |> map(i => if i < 20 then i else 0 fi) |> collect()
 
 apply(move: int, state: int[]) -> int[] is
     let face = faces[move / 3]
@@ -50,8 +49,7 @@ apply(move: int, state: int[]) -> int[] is
 
             if turn == move % 3 then
                 turned[target + 20] =
-                    turned[target + 20] %
-                    if corner > 0 then 3 else 2 fi
+                    turned[target + 20] % if corner > 0 then 3 else 2 fi
             fi
         od
     od
@@ -61,8 +59,7 @@ si
 
 inverse(move: int) -> int => move + 2 - 2 * (move % 3)
 
-slice(cubie: int) -> int =>
-    if cubie > 7 then 2 else cubie & 1 fi
+slice(cubie: int) -> int => if cubie > 7 then 2 else cubie & 1 fi
 
 key(phase: int, state: int[]) -> string is
     let values =
@@ -70,9 +67,7 @@ key(phase: int, state: int[]) -> string is
             state[20..32]
         elif phase == 2 then
             let edges =
-                (0..12)
-                    |> map(e => (state[e] / 8) << e)
-                    |> reduce(0, * | *)
+                (0..12) |> map(e => (state[e] / 8) << e) |> reduce(0, * | *)
 
             [edges | state[31]] ++ state[32..40]
         elif phase == 3 then
@@ -83,9 +78,7 @@ key(phase: int, state: int[]) -> string is
 
             let corners =
                 (0..8)
-                    |> map(c =>
-                        ((state[c + 12] - 12) & 5) << 3 * c
-                    )
+                    |> map(c => ((state[c + 12] - 12) & 5) << 3 * c)
                     |> reduce(0, * | *)
 
             let parity =
@@ -228,6 +221,5 @@ let scramble = [0, 14, 7, 12, 5, 9, 1, 16, 3, 11]
 
 solve(
     "scrambled by {scramble |> map(notation) |> join(" ")}",
-    scramble
-        |> reduce(solved, (state, move) => apply(move, state))
+    scramble |> reduce(solved, (state, move) => apply(move, state))
 )

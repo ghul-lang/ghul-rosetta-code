@@ -12,8 +12,7 @@ let control: Point[] = [
 let degree = 3
 let spans = control.count - degree
 
-knot(i: int) -> double =>
-    double(System.Math.clamp(i - degree, 0, spans))
+knot(i: int) -> double => double(System.Math.clamp(i - degree, 0, spans))
 
 lerp(a: Point, b: Point, t: double) -> Point => (
     x = a.x + (b.x - a.x) * t,
@@ -22,9 +21,7 @@ lerp(a: Point, b: Point, t: double) -> Point => (
 
 de_boor(t: double) -> Point is
     let span = System.Math.min(int(t), spans - 1) + degree
-    let d = LIST(
-        0::degree |> map(j => control[j + span - degree])
-    )
+    let d = LIST(0::degree |> map(j => control[j + span - degree]))
 
     for r in 1::degree do
         for step in 0::degree - r do
@@ -45,9 +42,7 @@ let samples = 400
 
 let curve =
     (0::samples)
-        |> map(s =>
-            de_boor(double(spans * s) / double(samples))
-        )
+        |> map(s => de_boor(double(spans * s) / double(samples)))
         |> collect()
 
 let image = IMAGE(400, 400)
@@ -71,9 +66,7 @@ image.line(curve)
 let first = curve[0]
 let last = curve[curve.count - 1]
 
-write_line(
-    "clamped cubic B-spline over {control.count} control points"
-)
+write_line("clamped cubic B-spline over {control.count} control points")
 write_line("starts at ({first.x:F1}, {first.y:F1})")
 write_line("ends at ({last.x:F1}, {last.y:F1})")
 

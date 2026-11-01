@@ -14,8 +14,7 @@ test_entry() is
     listener.start()
 
     Tasks.TASK.run(() is
-        let connection =
-            listener.accept_tcp_client().get_stream()
+        let connection = listener.accept_tcp_client().get_stream()
         let reader = IO.StreamReader(connection)
         let writer = IO.StreamWriter(connection)
 
@@ -32,8 +31,7 @@ test_entry() is
 
                 while text !~ "." do
                     let shown =
-                        text.starts_with("Subject:") \/
-                        !text.contains(':')
+                        text.starts_with("Subject:") \/ !text.contains(':')
 
                     if shown /\ text.length > 0 then
                         write_line("  | {text}")
@@ -41,10 +39,7 @@ test_entry() is
 
                     text = reader.read_line() ?? "."
                 od
-            elif
-                line.starts_with("MAIL") \/
-                line.starts_with("RCPT")
-            then
+            elif line.starts_with("MAIL") \/ line.starts_with("RCPT") then
                 write_line("  {line}")
             fi
 
@@ -59,9 +54,7 @@ test_entry() is
         if let bound: IPEndPoint = listener.local_endpoint then
             bound.port
         else
-            throw System.Exception(
-                "the listener has no address"
-            )
+            throw System.Exception("the listener has no address")
         fi
 
     write_line("sending:")

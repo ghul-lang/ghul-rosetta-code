@@ -16,11 +16,7 @@ halve(range: (low: double, high: double), upper: bool) -> (
         fi
 si
 
-encode(
-    latitude: double,
-    longitude: double,
-    precision: int
-) -> string is
+encode(latitude: double, longitude: double, precision: int) -> string is
     let latitudes mut = (low = -90.0, high = 90.0)
     let longitudes mut = (low = -180.0, high = 180.0)
     let bits = LIST[int]()
@@ -46,9 +42,7 @@ encode(
         0..precision
             |> map(digit =>
                 bits[digit * 5..digit * 5 + 5]
-                    |> reduce(0, (value, bit) =>
-                        value * 2 + bit
-                    )
+                    |> reduce(0, (value, bit) => value * 2 + bit)
             )
             |> map(value => alphabet[value])
             |> string()
@@ -85,9 +79,5 @@ let area = decode("gcpue5hp4")
 let latitude = (area.latitude.low + area.latitude.high) / 2.0
 let longitude = (area.longitude.low + area.longitude.high) / 2.0
 
-write_line(
-    "{latitude:F6} +/- {(area.latitude.high - latitude):F6}"
-)
-write_line(
-    "{longitude:F6} +/- {(area.longitude.high - longitude):F6}"
-)
+write_line("{latitude:F6} +/- {(area.latitude.high - latitude):F6}")
+write_line("{longitude:F6} +/- {(area.longitude.high - longitude):F6}")

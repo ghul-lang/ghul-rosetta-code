@@ -12,9 +12,7 @@ evaluate(p: Polynomial, z: double) -> double =>
 
 next_row(row: Polynomial) -> Polynomial =>
     let n = row.count - 1 in
-    0..n
-        |> map(i => row[0] * row[i] - row[n] * row[n - i])
-        |> collect()
+    0..n |> map(i => row[0] * row[i] - row[n] * row[n - i]) |> collect()
 
 rows(p: Polynomial) -> Polynomial{} is
     let row mut = p
@@ -37,8 +35,7 @@ is_stable(p: Polynomial) -> bool =>
         p
             |> rows()
             |> all(row =>
-                double.abs(row[0]) >
-                double.abs(row[row.count - 1])
+                double.abs(row[0]) > double.abs(row[row.count - 1])
             )
 
 show(p: Polynomial) -> string =>
@@ -77,8 +74,7 @@ let polynomials = [
 ]
 
 for p in polynomials do
-    let verdict =
-        if is_stable(p) then "stable" else "not stable" fi
+    let verdict = if is_stable(p) then "stable" else "not stable" fi
 
     write_line("{show(p),-40} {verdict}")
 od

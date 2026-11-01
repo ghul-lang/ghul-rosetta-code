@@ -60,12 +60,7 @@ md4(message: ubyte[]) -> string is
 
             let (mixed, constant, index, shift) =
                 if step < 16 then
-                    (
-                        (x & y) | (\x & z),
-                        0u,
-                        step,
-                        [3, 7, 11, 19][step % 4]
-                    )
+                    ((x & y) | (\x & z), 0u, step, [3, 7, 11, 19][step % 4])
                 elif step < 32 then
                     (
                         (x & y) | (x & z) | (y & z),
@@ -83,10 +78,7 @@ md4(message: ubyte[]) -> string is
                 fi
 
             registers[target] = rotate_left(
-                registers[target] +
-                mixed +
-                words[index] +
-                constant,
+                registers[target] + mixed + words[index] + constant,
                 shift
             )
         od

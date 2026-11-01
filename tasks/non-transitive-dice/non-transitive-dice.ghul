@@ -11,10 +11,7 @@ let dice =
         |> flat_map(a =>
             a::4
                 |> flat_map(b =>
-                    b::4
-                        |> flat_map(c =>
-                            c::4 |> map(d => [a, b, c, d])
-                        )
+                    b::4 |> flat_map(c => c::4 |> map(d => [a, b, c, d]))
                 )
         )
         |> collect()

@@ -12,8 +12,7 @@ class BITMAP is
         self.width = width
         self.height = height
 
-        _pixels =
-            repeat(0ub, width * height * 3) |> collect_mutable()
+        _pixels = repeat(0ub, width * height * 3) |> collect_mutable()
     si
 
     fill(colour: COLOUR) is
@@ -29,11 +28,7 @@ class BITMAP is
     pixel(x: int, y: int) -> COLOUR => (
         let at = (y * width + x) * 3
 
-        (
-            red = _pixels[at],
-            green = _pixels[at + 1],
-            blue = _pixels[at + 2]
-        )
+        (red = _pixels[at], green = _pixels[at + 1], blue = _pixels[at + 2])
     )
 
     _write(at: int, colour: COLOUR) is

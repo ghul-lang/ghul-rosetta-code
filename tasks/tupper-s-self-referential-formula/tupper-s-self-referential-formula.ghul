@@ -29,13 +29,7 @@ mark(x: int, y: int) is
 
     for down in 0..cell do
         for across in 0..cell do
-            image.set_pixel(
-                left + across,
-                top + down,
-                0ub,
-                0ub,
-                0ub
-            )
+            image.set_pixel(left + across, top + down, 0ub, 0ub, 0ub)
         od
     od
 si

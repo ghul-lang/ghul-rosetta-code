@@ -9,10 +9,7 @@ class THIELE(_x: double[], _y: double[]) is
             _y[i]
         else
             (_x[i] - _x[i + order]) /
-            (
-                _reciprocal(order - 1, i) -
-                _reciprocal(order - 1, i + 1)
-            ) +
+            (_reciprocal(order - 1, i) - _reciprocal(order - 1, i + 1)) +
             _reciprocal(order - 2, i + 1)
         fi
 

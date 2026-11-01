@@ -1,8 +1,7 @@
 use default
 use System.Math.*
 
-power_sum(xs: double[], k: int) -> double =>
-    xs |> sum_by(pow(*, cast(k)))
+power_sum(xs: double[], k: int) -> double => xs |> sum_by(pow(*, cast(k)))
 
 moment(xs: double[], ys: double[], k: int) -> double =>
     zip(xs, ys) |> sum_by((x, y) => y * pow(x, cast(k)))
@@ -11,8 +10,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
     let n = b.count
 
     for column in 0..n do
-        let pivot =
-            (column..n) |> max_by(row => abs(a[row][column]))!
+        let pivot = (column..n) |> max_by(row => abs(a[row][column]))!
 
         (a[column], a[pivot]) = (a[pivot], a[column])
         (b[column], b[pivot]) = (b[pivot], b[column])
@@ -31,8 +29,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
     let solution = repeat(0.0, n) |> collect_mutable()
 
     for row in (0..n) |> reverse() do
-        let known =
-            (row + 1..n) |> sum_by(k => a[row][k] * solution[k])
+        let known = (row + 1..n) |> sum_by(k => a[row][k] * solution[k])
 
         solution[row] = (b[row] - known) / a[row][row]
     od
@@ -49,9 +46,7 @@ fit(xs: double[], ys: double[], degree: int) -> double{} =>
                     |> collect_mutable()
             )
             |> collect_mutable(),
-        (0::degree)
-            |> map(moment(xs, ys, *))
-            |> collect_mutable()
+        (0::degree) |> map(moment(xs, ys, *)) |> collect_mutable()
     )
 
 let x = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
@@ -63,6 +58,4 @@ let y = [
 let coefficients = fit(x, y, 2)
 
 write_line("coefficients, highest power first:")
-write_line(
-    coefficients |> reverse() |> map(c => "{c:F6}") |> join()
-)
+write_line(coefficients |> reverse() |> map(c => "{c:F6}") |> join())

@@ -68,8 +68,7 @@ class SOLVER is
             let from = _blank
             let target = row * 4 + column
             let tile = _board[target]
-            let change =
-                distance(tile, from) - distance(tile, target)
+            let change = distance(tile, from) - distance(tile, target)
 
             _slide(target, from, tile, change, move)
 
@@ -89,13 +88,7 @@ class SOLVER is
         next
     si
 
-    _slide(
-        blank: int,
-        tile_at: int,
-        tile: int,
-        change: int,
-        move: int
-    ) is
+    _slide(blank: int, tile_at: int, tile: int, change: int, move: int) is
         _board[tile_at] = tile
         _board[blank] = 0
         _blank = blank
@@ -126,10 +119,6 @@ write_line("")
 
 for line in 0..(moves.count + 7) / 8 do
     write_line(
-        moves
-            |> skip(line * 8)
-            |> take(8)
-            |> map(m => names[m])
-            |> join()
+        moves |> skip(line * 8) |> take(8) |> map(m => names[m]) |> join()
     )
 od

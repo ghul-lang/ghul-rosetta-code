@@ -64,9 +64,7 @@ write_line("{beta}")
 write_line(
     "asking twice for alpha gives the same object: {alpha == alpha_again}"
 )
-write_line(
-    "alpha and beta are different objects: {alpha != beta}"
-)
+write_line("alpha and beta are different objects: {alpha != beta}")
 write_line(
     "requests: 3, instances made: {made}, "
     "instances held: {connections.count}"

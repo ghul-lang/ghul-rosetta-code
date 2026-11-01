@@ -2,9 +2,7 @@ use default
 use IO.Std.read_line
 use System.Text.RegularExpressions.Regex
 
-write_line(
-    "Enter a story with <blanks>, ending with an empty line:"
-)
+write_line("Enter a story with <blanks>, ending with an empty line:")
 
 let story = LIST()
 

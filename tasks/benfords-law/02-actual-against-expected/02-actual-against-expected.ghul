@@ -18,14 +18,11 @@ for _ in 1::1000 do
     current = next
 od
 
-let actual =
-    (1::9) |> map(digit => double(leading_counts[digit]) / 10.0)
+let actual = (1::9) |> map(digit => double(leading_counts[digit]) / 10.0)
 
 let expected =
     (1::9)
-        |> map(digit =>
-            100.0 * log10(1.0 + 1.0 / double(digit))
-        )
+        |> map(digit => 100.0 * log10(1.0 + 1.0 / double(digit)))
         |> collect()
 
 let observed_colour = (red = 40ub, green = 90ub, blue = 180ub)
@@ -65,12 +62,7 @@ for entry in actual |> index() do
     box(middle - 0.36, 0.0, middle - 0.03, entry.value)
 
     image.colour(benford_colour)
-    box(
-        middle + 0.03,
-        0.0,
-        middle + 0.36,
-        expected[entry.index]
-    )
+    box(middle + 0.03, 0.0, middle + 0.36, expected[entry.index])
 
     image.colour(60ub, 60ub, 60ub)
     image.text(middle, -2.1, 14.0, "{digit}", Anchor.CENTRE)
@@ -91,13 +83,7 @@ for key in keys |> index() do
     box(3.8, y - 0.55, 4.15, y + 0.55)
 
     image.colour(60ub, 60ub, 60ub)
-    image.text(
-        4.35,
-        y - 0.45,
-        12.0,
-        key.value.label,
-        Anchor.LEFT
-    )
+    image.text(4.35, y - 0.45, 12.0, key.value.label, Anchor.LEFT)
 od
 
 image.write("benford.png")

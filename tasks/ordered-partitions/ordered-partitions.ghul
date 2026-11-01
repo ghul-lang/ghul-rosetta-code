@@ -22,10 +22,7 @@ combinations(items: List[int], k: int) -> List[int]{} is
     fi
 si
 
-partitions(
-    items: List[int],
-    sizes: List[int]
-) -> List[List[int]]{} is
+partitions(items: List[int], sizes: List[int]) -> List[List[int]]{} is
     case sizes
     when [] then
         yield LIST()
@@ -48,8 +45,7 @@ partitions(
     esac
 si
 
-braces(block: List[int]) -> string =>
-    "{{" "{block |> join(", ")}" "}}"
+braces(block: List[int]) -> string => "{{" "{block |> join(", ")}" "}}"
 
 show(sizes: int[]) is
     let total = sizes |> sum()
@@ -59,9 +55,7 @@ show(sizes: int[]) is
 
     partitions(items, sizes)
         |> each(partition =>
-            write_line(
-                "  ({partition |> map(braces) |> join(", ")})"
-            )
+            write_line("  ({partition |> map(braces) |> join(", ")})")
         )
 si
 

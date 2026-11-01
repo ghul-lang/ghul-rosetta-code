@@ -7,10 +7,7 @@ factorize(text: string) -> string{} is
         let compare mut = start + 1
         let anchor mut = start
 
-        while
-            compare < text.length /\
-            text[anchor] <= text[compare]
-        do
+        while compare < text.length /\ text[anchor] <= text[compare] do
             if text[anchor] < text[compare] then
                 anchor = start
             else
@@ -32,9 +29,7 @@ let thue_morse mut = "0"
 
 for _ in 1::7 do
     let flipped =
-        thue_morse
-            |> map(c => if c == '0' then '1' else '0' fi)
-            |> join("")
+        thue_morse |> map(c => if c == '0' then '1' else '0' fi) |> join("")
     thue_morse = "{thue_morse}{flipped}"
 od
 

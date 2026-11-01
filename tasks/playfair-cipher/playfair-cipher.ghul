@@ -20,9 +20,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
     clean(text: string) -> char{} =>
         text.to_upper_invariant()
             |> filter(c => c >= 'A' /\ c <= 'Z')
-            |> filter(c =>
-                alphabet != Alphabet.NO_Q \/ c != 'Q'
-            )
+            |> filter(c => alphabet != Alphabet.NO_Q \/ c != 'Q')
             |> map(c =>
                 if alphabet == Alphabet.J_IS_I /\ c == 'J' then
                     'I'
@@ -38,9 +36,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         while i < letters.count do
             let first = letters[i]
 
-            if
-                i + 1 < letters.count /\ letters[i + 1] != first
-            then
+            if i + 1 < letters.count /\ letters[i + 1] != first then
                 yield (first, letters[i + 1])
                 i = i + 2
             else
@@ -78,10 +74,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
         text |> digraphs() |> map(shift(*, -1)) |> join(" ")
 
     prepared(text: string) -> string =>
-        text
-            |> digraphs()
-            |> map((a, b) => "{a}{b}")
-            |> join(" ")
+        text |> digraphs() |> map((a, b) => "{a}{b}") |> join(" ")
 si
 
 let key = "Playfair example"

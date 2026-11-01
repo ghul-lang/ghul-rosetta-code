@@ -13,8 +13,7 @@ si
 term(coefficient: long, power: int) -> string => (
     let size = long.abs(coefficient),
         sign = if coefficient < 0L then " - " else " + " fi,
-        number =
-            if size == 1L /\ power > 0 then "" else "{size}" fi
+        number = if size == 1L /\ power > 0 then "" else "{size}" fi
 
     let x =
         case power
@@ -54,7 +53,5 @@ for p in 0::7 do
 od
 
 for limit in [35, 50] do
-    write_line(
-        "primes under {limit}: {0..limit |> filter(is_prime)}"
-    )
+    write_line("primes under {limit}: {0..limit |> filter(is_prime)}")
 od

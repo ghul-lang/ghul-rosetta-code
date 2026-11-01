@@ -1,8 +1,7 @@
 use default
 
 repeats(text: string, size: int) -> bool =>
-    0..text.length
-        |> all(index => text[index] == text[index % size])
+    0..text.length |> all(index => text[index] == text[index % size])
 
 for
     text in [
@@ -12,9 +11,7 @@ for
     ]
 do
     if let
-        size = (1::text.length / 2)
-            |> reverse()
-            |> find(repeats(text, *))
+        size = (1::text.length / 2) |> reverse() |> find(repeats(text, *))
     then
         write_line("{text} repeats {text[0..size]}")
     else

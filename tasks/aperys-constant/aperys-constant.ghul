@@ -33,10 +33,7 @@ markov(terms: int) -> bigint =>
                     factorial(k) *
                     factorial(k) *
                     scale /
-                    (
-                        factorial(2 * k) *
-                        (bigint(k) * bigint(k) * bigint(k))
-                    )
+                    (factorial(2 * k) * (bigint(k) * bigint(k) * bigint(k)))
                 )
             )
             |> sum()
@@ -47,8 +44,7 @@ wedeniwski(terms: int) -> bigint =>
     (
         0::terms
             |> map(k => (
-                let n = bigint(k),
-                    sign = if k % 2 == 0 then 1n else -1n fi
+                let n = bigint(k), sign = if k % 2 == 0 then 1n else -1n fi
 
                 let polynomial =
                     126392n * n * n * n * n * n +
@@ -81,12 +77,6 @@ wedeniwski(terms: int) -> bigint =>
             |> sum()
     ) / 24n
 
-show(
-    "1000 terms of the sum of reciprocal cubes:",
-    reciprocal_cubes(1000)
-)
+show("1000 terms of the sum of reciprocal cubes:", reciprocal_cubes(1000))
 show("158 terms of the Markov representation:", markov(158))
-show(
-    "21 terms of the Wedeniwski representation:",
-    wedeniwski(21)
-)
+show("21 terms of the Wedeniwski representation:", wedeniwski(21))

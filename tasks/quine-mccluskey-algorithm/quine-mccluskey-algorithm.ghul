@@ -18,10 +18,7 @@ render(implicant: Implicant, variables: int) -> string =>
         )
         |> string()
 
-prime_implicants(
-    minterms: List[int],
-    variables: int
-) -> Implicant{} is
+prime_implicants(minterms: List[int], variables: int) -> Implicant{} is
     let primes = LIST()
 
     let current mut =
@@ -32,8 +29,7 @@ prime_implicants(
 
     while current.count > 0 do
         let combined = LIST()
-        let used =
-            repeat(false, current.count) |> collect_mutable()
+        let used = repeat(false, current.count) |> collect_mutable()
 
         for i in 0..current.count do
             for j in i + 1..current.count do
@@ -77,10 +73,7 @@ si
 // Every prime implicant that alone covers some minterm must be in the
 // answer; the rest is the smallest set of the others that covers what is
 // left, found by trying every combination in increasing size.
-minimal_cover(
-    minterms: List[int],
-    variables: int
-) -> Implicant{} is
+minimal_cover(minterms: List[int], variables: int) -> Implicant{} is
     let primes = prime_implicants(minterms, variables)
 
     let essential =
@@ -104,15 +97,11 @@ minimal_cover(
     fi
 
     let spare =
-        primes
-            |> filter(p => !(essential |> any(e => e =~ p)))
-            |> collect()
+        primes |> filter(p => !(essential |> any(e => e =~ p))) |> collect()
 
     let found =
         1::spare.count
-            |> find_map(size =>
-                smallest_choice(spare, uncovered, size)
-            )
+            |> find_map(size => smallest_choice(spare, uncovered, size))
 
     if let chosen = found then
         return essential ++ chosen |> collect()
@@ -137,9 +126,7 @@ search(
     chosen: LIST[Implicant]
 ) -> List[Implicant]? is
     if chosen.count == size then
-        if
-            uncovered |> all(m => chosen |> any(covers(*, m)))
-        then
+        if uncovered |> all(m => chosen |> any(covers(*, m))) then
             return chosen |> collect()
         fi
 
@@ -149,13 +136,7 @@ search(
     for i in start..spare.count do
         chosen.add(spare[i])
 
-        let found = search(
-            spare,
-            uncovered,
-            size,
-            i + 1,
-            chosen
-        )
+        let found = search(spare, uncovered, size, i + 1, chosen)
 
         chosen.remove_at(chosen.count - 1)
 
@@ -176,7 +157,5 @@ for (minterms, variables) in examples do
     let cover = minimal_cover(minterms, variables)
 
     write_line("minterms {minterms |> join(", ")}")
-    write_line(
-        "  {cover |> map(render(*, variables)) |> join(" ")}"
-    )
+    write_line("  {cover |> map(render(*, variables)) |> join(" ")}")
 od

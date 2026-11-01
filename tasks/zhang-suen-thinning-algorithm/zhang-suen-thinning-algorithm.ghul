@@ -22,11 +22,7 @@ let picture = [
 
 let rows = picture.count + 2
 let columns =
-    (
-        picture
-            |> map(line => line.length)
-            |> reduce(0, int.max)
-    ) + 2
+    (picture |> map(line => line.length) |> reduce(0, int.max)) + 2
 
 let black =
     (0..rows)
@@ -34,8 +30,7 @@ let black =
             (0..columns)
                 |> map(column =>
                     let
-                        inside =
-                            row >= 1 /\ row <= picture.count,
+                        inside = row >= 1 /\ row <= picture.count,
                         line =
                             if inside then
                                 picture[row - 1]
@@ -51,17 +46,14 @@ let black =
         )
         |> collect()
 
-let original =
-    black |> map(row => row |> collect()) |> collect()
+let original = black |> map(row => row |> collect()) |> collect()
 
 let around = [
     (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
 ]
 
 neighbours(row: int, column: int) -> List[bool] =>
-    around
-        |> map((dr, dc) => black[row + dr][column + dc])
-        |> collect()
+    around |> map((dr, dc) => black[row + dr][column + dc]) |> collect()
 
 thins(row: int, column: int, first: bool) -> bool is
     if !black[row][column] then
@@ -70,8 +62,7 @@ thins(row: int, column: int, first: bool) -> bool is
 
     let p = neighbours(row, column)
     let dark = p |> filter(b => b) |> count()
-    let rises =
-        0..8 |> filter(i => !p[i] /\ p[(i + 1) % 8]) |> count()
+    let rises = 0..8 |> filter(i => !p[i] /\ p[(i + 1) % 8]) |> count()
 
     if dark < 2 \/ dark > 6 \/ rises != 1 then
         return false
@@ -117,8 +108,7 @@ od
 write_line("thinned in {passes} rounds:")
 
 for row in black do
-    let line =
-        row |> skip(1) |> map(b => if b then "#" else " " fi)
+    let line = row |> skip(1) |> map(b => if b then "#" else " " fi)
 
     write_line((line |> join("")).trim_end())
 od
@@ -141,12 +131,7 @@ for row in 0..rows do
             image.colour(255ub, 255ub, 255ub)
         fi
 
-        image.fill_rectangle(
-            x,
-            y,
-            x + double(cell),
-            y + double(cell)
-        )
+        image.fill_rectangle(x, y, x + double(cell), y + double(cell))
     od
 od
 

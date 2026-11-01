@@ -18,15 +18,11 @@ first_index(needle: string) -> int =>
     positions(needle) |> first() ?? missing(needle)
 
 last_index(needle: string) -> int =>
-    positions(needle) |> take_last(1) |> first() ??
-    missing(needle)
+    positions(needle) |> take_last(1) |> first() ?? missing(needle)
 
 for needle in ["Bush", "Washington"] do
     try
-        let (first, last) = (
-            first_index(needle),
-            last_index(needle)
-        )
+        let (first, last) = (first_index(needle), last_index(needle))
         write_line("{needle}: first at {first}, last at {last}")
     catch e: Ghul.Exception
         write_line(e.message)

@@ -9,15 +9,11 @@ next_highest(number: string) -> string =>
         let tail = number[pivot + 1..<0]
 
         let successor =
-            tail
-                |> filter(* > number[pivot])
-                |> sort()
-                |> first_or_throw()
+            tail |> filter(* > number[pivot]) |> sort() |> first_or_throw()
 
         let remaining = tail.remove(tail.index_of(successor), 1)
 
-        let ordered =
-            "{remaining}{number[pivot]}" |> sort() |> join("")
+        let ordered = "{remaining}{number[pivot]}" |> sort() |> join("")
 
         "{number[0..pivot]}{successor}{ordered}"
     else
@@ -28,6 +24,4 @@ next_highest(number: string) -> string =>
     "0", "9", "12", "21", "12453", "738440", "45072010", "95322020",
     "9589776899767587796600"
 ]
-    |> each(number =>
-        write_line("{number,22} -> {next_highest(number)}")
-    )
+    |> each(number => write_line("{number,22} -> {next_highest(number)}"))

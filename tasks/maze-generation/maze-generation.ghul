@@ -34,10 +34,7 @@ shuffled() -> (across: int, down: int){} => (
 
     while index > 0 do
         let other = random.next(index + 1)
-        (order[index], order[other]) = (
-            order[other],
-            order[index]
-        )
+        (order[index], order[other]) = (order[other], order[index])
         index = index - 1
     od
 
@@ -72,10 +69,7 @@ si
 
 carve(random.next(columns), random.next(rows))
 
-let image = IMAGE(
-    columns * cell + 2 * margin,
-    rows * cell + 2 * margin
-)
+let image = IMAGE(columns * cell + 2 * margin, rows * cell + 2 * margin)
 
 wall(from_x: int, from_y: int, to_x: int, to_y: int) is
     image.line(
@@ -96,9 +90,7 @@ wall(columns, 0, columns, rows)
 
 for row in 0..rows do
     for column in 0..columns do
-        if
-            column < columns - 1 /\ !right_open[at(column, row)]
-        then
+        if column < columns - 1 /\ !right_open[at(column, row)] then
             wall(column + 1, row, column + 1, row + 1)
         fi
 

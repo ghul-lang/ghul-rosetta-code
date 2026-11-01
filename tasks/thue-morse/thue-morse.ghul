@@ -1,9 +1,7 @@
 use default
 
 complement(text: string) -> string =>
-    text
-        |> map(digit => if digit == '0' then "1" else "0" fi)
-        |> join("")
+    text |> map(digit => if digit == '0' then "1" else "0" fi) |> join("")
 
 stream("0", step => step || "{step}{complement(step)}")
     |> take(7)

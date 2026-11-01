@@ -19,7 +19,5 @@ let pairs = [
 ]
 
 for (from, to) in pairs do
-    write_line(
-        "{from,14:F4} {to,14:F4} {difference(from, to),11:F4}"
-    )
+    write_line("{from,14:F4} {to,14:F4} {difference(from, to),11:F4}")
 od

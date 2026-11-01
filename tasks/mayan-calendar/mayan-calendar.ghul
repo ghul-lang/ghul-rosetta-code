@@ -51,17 +51,14 @@ long_count(days: int) -> string =>
         in
             "{bak_tun}.{k_atun}.{tun}.{winal}.{k_in}"
 
-lord_of_the_night(days: int) -> string =>
-    "G{(days + 8) % 9 + 1}"
+lord_of_the_night(days: int) -> string => "G{(days + 8) % 9 + 1}"
 
 let dates = [
     "2004-06-19", "2012-12-18", "2012-12-21", "2019-01-19",
     "2019-03-27", "2020-02-29", "2020-03-01", "2071-05-16"
 ]
 
-write_line(
-    "Gregorian   Tzolk’in      Haab’           Long count      Lord"
-)
+write_line("Gregorian   Tzolk’in      Haab’           Long count      Lord")
 
 for text in dates do
     let days = days_since_creation(DateTime.parse(text))

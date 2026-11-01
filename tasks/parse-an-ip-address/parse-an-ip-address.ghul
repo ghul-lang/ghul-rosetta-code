@@ -37,9 +37,7 @@ split_port(text: string) -> Parsed =>
     fi
 
 hex(bytes: ubyte[]) -> string =>
-    let number =
-        bytes |> reduce(0n, (n, b) => n * 256n + bigint(int(b)))
-    in
+    let number = bytes |> reduce(0n, (n, b) => n * 256n + bigint(int(b))) in
     let digits = "{number:X}".trim_start('0') in
     if digits.length == 0 then "0" else digits fi
 

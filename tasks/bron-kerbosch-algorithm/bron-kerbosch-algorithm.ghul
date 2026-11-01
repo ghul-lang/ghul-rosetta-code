@@ -41,24 +41,17 @@ search(
     fi
 
     let pivot =
-        (candidates ++ excluded)
-            |> max_by(v => neighbours[v].count)!
+        (candidates ++ excluded) |> max_by(v => neighbours[v].count)!
 
-    let branches =
-        candidates
-            |> filter(v => !neighbours[pivot].contains(v))
+    let branches = candidates |> filter(v => !neighbours[pivot].contains(v))
 
     for vertex in branches do
         let adjacent = neighbours[vertex]
 
         search(
             clique ++ [vertex] |> collect_set(),
-            candidates
-                |> filter(adjacent.contains)
-                |> collect_set(),
-            excluded
-                |> filter(adjacent.contains)
-                |> collect_set()
+            candidates |> filter(adjacent.contains) |> collect_set(),
+            excluded |> filter(adjacent.contains) |> collect_set()
         )
 
         candidates.remove(vertex)

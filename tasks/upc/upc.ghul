@@ -29,14 +29,10 @@ let rows = [
 ]
 
 bits(row: string) -> string =>
-    row
-        |> map(c => if c == '#' then '1' else '0' fi)
-        |> string()
+    row |> map(c => if c == '#' then '1' else '0' fi) |> string()
 
 flipped(seven: string) -> string =>
-    seven
-        |> map(c => if c == '1' then '0' else '1' fi)
-        |> string()
+    seven |> map(c => if c == '1' then '0' else '1' fi) |> string()
 
 digit(seven: string, right: bool) -> int? =>
     let wanted = if right then flipped(seven) else seven fi in
@@ -75,15 +71,11 @@ sound(found: List[int]) -> bool =>
     (
         found
             |> index()
-            |> sum_by(d =>
-                d.value * if d.index % 2 == 0 then 3 else 1 fi
-            )
+            |> sum_by(d => d.value * if d.index % 2 == 0 then 3 else 1 fi)
     ) % 10 == 0
 
 turned(scan: string) -> string =>
-    0..scan.length
-        |> map(at => scan[scan.length - 1 - at])
-        |> string()
+    0..scan.length |> map(at => scan[scan.length - 1 - at]) |> string()
 
 for row in rows do
     let scan = bits(row)

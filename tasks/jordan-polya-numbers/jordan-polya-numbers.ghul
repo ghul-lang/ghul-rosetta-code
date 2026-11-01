@@ -7,11 +7,7 @@ multiples(value: long, largest: int, limit: long) -> long{} is
 
     for i in 2::largest do
         if value <= limit / factorial(long(i)) then
-            yield in multiples(
-                value * factorial(long(i)),
-                i,
-                limit
-            )
+            yield in multiples(value * factorial(long(i)), i, limit)
         fi
     od
 si
@@ -23,9 +19,7 @@ decompose(value: long, largest: int) -> LIST[int]? is
 
     for i in reverse(2::largest) do
         if value % factorial(long(i)) == 0L then
-            if let
-                rest = decompose(value / factorial(long(i)), i)
-            then
+            if let rest = decompose(value / factorial(long(i)), i) then
                 rest.insert(0, i)
 
                 return rest
@@ -62,14 +56,10 @@ write_line("the first 50 Jordan-Polya numbers:")
 numbers
     |> take(50)
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(n => "{n,7}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,7}") |> join("")))
 
 let below_a_hundred_million =
-    numbers
-        |> take_while(* < 100000000L)
-        |> reduce(1L, (largest, n) => n)
+    numbers |> take_while(* < 100000000L) |> reduce(1L, (largest, n) => n)
 
 write_line("")
 write_line(

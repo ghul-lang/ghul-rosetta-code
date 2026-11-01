@@ -12,20 +12,13 @@ luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
 to_grey(colour: IMAGE) -> ubyte[] =>
     (0..colour.width * colour.height)
         |> map(at => (
-            let seen = colour.pixel(
-                at % colour.width,
-                at / colour.width
-            )
+            let seen = colour.pixel(at % colour.width, at / colour.width)
 
             luminance(seen.red, seen.green, seen.blue)
         ))
         |> collect()
 
-to_colour(
-    levels: ubyte[],
-    width: int,
-    height: int
-) -> IMAGE => (
+to_colour(levels: ubyte[], width: int, height: int) -> IMAGE => (
     let image = IMAGE(width, height)
 
     for at in 0..levels.count do

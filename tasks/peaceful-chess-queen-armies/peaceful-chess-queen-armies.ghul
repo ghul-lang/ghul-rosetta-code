@@ -52,13 +52,9 @@ search(
     let taken = black | white
     let everything = (1ul << attacks.count - 1) * 2ul - 1ul
     let for_black =
-        everything &
-        \((1ul << next_black) - 1ul) &
-        \(taken | white_reach)
+        everything & \((1ul << next_black) - 1ul) & \(taken | white_reach)
     let for_white =
-        everything &
-        \((1ul << next_white) - 1ul) &
-        \(taken | black_reach)
+        everything & \((1ul << next_white) - 1ul) & \(taken | black_reach)
 
     if
         BitOperations.pop_count(for_black) < left \/
@@ -157,15 +153,11 @@ si
 
 for (m, n) in [(4, 5), (9, 8), (10, 8)] do
     if let armies = solve(m, n) then
-        write_line(
-            "{m} black and {m} white queens on a {n} by {n} board:"
-        )
+        write_line("{m} black and {m} white queens on a {n} by {n} board:")
         show(armies, n)
         draw(armies, n, "queens-{m}-{n}.png")
     else
-        write_line(
-            "{m} of each colour cannot share a {n} by {n} board"
-        )
+        write_line("{m} of each colour cannot share a {n} by {n} board")
     fi
 
     write_line()

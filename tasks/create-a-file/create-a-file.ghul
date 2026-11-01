@@ -28,9 +28,7 @@ for where in ["", "/"] do
     let file = "{where}output.txt"
     let directory = "{where}docs"
 
-    write_line(
-        "{file}: {outcome(() => IO.File.write_all_text(file, ""))}"
-    )
+    write_line("{file}: {outcome(() => IO.File.write_all_text(file, ""))}")
     write_line(
         "{directory}: "
         "{outcome(() => IO.Directory.create_directory(directory))}"

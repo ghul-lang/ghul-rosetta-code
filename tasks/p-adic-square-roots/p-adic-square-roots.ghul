@@ -24,10 +24,7 @@ inverse(value: bigint, m: bigint) -> bigint => (
     modulo(s0, m)
 )
 
-without_p(n: bigint, p: bigint) -> (
-    rest: bigint,
-    count: int
-) => (
+without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) => (
     let rest mut = n
     let count mut = 0
 
@@ -40,9 +37,7 @@ without_p(n: bigint, p: bigint) -> (
 )
 
 show(digits: List[bigint], exponent: int) -> string =>
-    let text =
-        digits |> reverse() |> map(d => "{d}") |> join("")
-    in
+    let text = digits |> reverse() |> map(d => "{d}") |> join("") in
     if exponent >= 0 then
         "...{text}{string('0', exponent)}.0"
     else
@@ -55,10 +50,7 @@ to_digits(n: bigint, p: bigint, k: int) -> List[bigint] =>
 
 // the rational a/b nearest to n modulo p^k, by Gauss lattice reduction
 
-rational(n: bigint, p: bigint, k: int) -> (
-    top: bigint,
-    bottom: bigint
-) is
+rational(n: bigint, p: bigint, k: int) -> (top: bigint, bottom: bigint) is
     dot(u: (bigint, bigint), w: (bigint, bigint)) -> bigint =>
         u.`0 * w.`0 + u.`1 * w.`1
 
@@ -83,11 +75,7 @@ si
 // every residue modulo p^j whose square is u modulo p^j, one digit at a
 // time; for p = 2 a square root is only settled from three digits up
 
-square_roots(
-    u: bigint,
-    p: bigint,
-    digits: int
-) -> List[bigint] is
+square_roots(u: bigint, p: bigint, digits: int) -> List[bigint] is
     let start = if p =~ 2n then 3 else 1 fi
     let modulus mut = bigint.pow(p, start)
 
@@ -102,11 +90,7 @@ square_roots(
 
         modulus = modulus * p
 
-        roots = [
-            r + bigint(t) * step
-            for r in roots
-            for t in 0..int(p)
-        ]
+        roots = [r + bigint(t) * step for r in roots for t in 0..int(p)]
             |> filter(r => modulo(r * r - u, modulus) =~ 0n)
             |> collect_set()
             |> sort()
@@ -138,9 +122,7 @@ for (p, k, a, b) in examples do
     let roots = square_roots(u, p, precision)
 
     if roots.count == 0 then
-        write_line(
-            "    no square root: not a square modulo {p}\n"
-        )
+        write_line("    no square root: not a square modulo {p}\n")
         continue
     fi
 
@@ -149,12 +131,8 @@ for (p, k, a, b) in examples do
     let exponent = valuation / 2
 
     write_line("    the two square roots are:")
-    write_line(
-        "        {show(to_digits(root, p, k), exponent)}"
-    )
-    write_line(
-        "        {show(to_digits(negated, p, k), exponent)}"
-    )
+    write_line("        {show(to_digits(root, p, k), exponent)}")
+    write_line("        {show(to_digits(negated, p, k), exponent)}")
 
     let square = modulo(root * root, bigint.pow(p, k))
     let (n, d) = rational(square, p, k)
@@ -172,7 +150,5 @@ for (p, k, a, b) in examples do
     write_line("    the square of a root is {shown}")
     let (numerator, denominator) = (num / common, den / common)
 
-    write_line(
-        "    which is the rational {numerator} / {denominator}\n"
-    )
+    write_line("    which is the rational {numerator} / {denominator}\n")
 od

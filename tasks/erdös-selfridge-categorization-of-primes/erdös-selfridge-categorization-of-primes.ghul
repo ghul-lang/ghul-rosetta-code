@@ -14,11 +14,7 @@ let first_million = primes() |> take(1_000_000) |> memo()
 
 write_line("First 200 primes:")
 
-for
-    (number, group) in first_million
-        |> take(200)
-        |> group_by(categorise)
-do
+for (number, group) in first_million |> take(200) |> group_by(categorise) do
     write_line("\nCategory {number}:")
     write_line("{group}")
 od

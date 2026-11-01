@@ -28,9 +28,7 @@ assemble(source: string) -> LIST[int] is
                 line
             fi
         let words =
-            body.split([' '])
-                |> filter(w => w.length > 0)
-                |> collect()
+            body.split([' ']) |> filter(w => w.length > 0) |> collect()
 
         if words.count == 0 then
             memory.add(0)
@@ -78,8 +76,7 @@ run(memory: LIST[int]) -> int is
         when "ADD" then
             accumulator = (accumulator + memory[argument]) % 256
         when "SUB" then
-            accumulator =
-                (accumulator - memory[argument] + 256) % 256
+            accumulator = (accumulator - memory[argument] + 256) % 256
         when "BRZ" then
             if accumulator == 0 then counter = argument fi
         when "JMP" then counter = argument

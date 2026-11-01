@@ -23,10 +23,7 @@ let commands =
             minimum = minimum_length(command)
         ))
 
-matches(
-    command: (word: string, minimum: int),
-    word: string
-) -> bool =>
+matches(command: (word: string, minimum: int), word: string) -> bool =>
     word.length >= command.minimum /\
     word.length <= command.word.length /\
     string.compare(

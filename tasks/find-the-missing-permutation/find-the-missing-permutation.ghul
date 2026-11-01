@@ -12,9 +12,6 @@ uses_at(position: int, letter: char) -> int =>
     given |> count(word => word[position] == letter)
 
 under_represented(position: int) -> char =>
-    "ABCD"
-        |> find(letter =>
-            uses_at(position, letter) < complete / 4
-        )!
+    "ABCD" |> find(letter => uses_at(position, letter) < complete / 4)!
 
 write_line(0..4 |> map(under_represented) |> string())

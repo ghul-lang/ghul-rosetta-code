@@ -13,8 +13,7 @@ let points = [
     "Northwest by north", "North-northwest", "North by west"
 ]
 
-box(heading: double) -> int =>
-    cast(heading / 11.25D + 0.5D) % 32
+box(heading: double) -> int => cast(heading / 11.25D + 0.5D) % 32
 
 let headings =
     0::32
@@ -33,7 +32,5 @@ write_line("index  compass point         degrees")
 for heading in headings do
     let point = box(heading)
 
-    write_line(
-        "{point + 1,4}   {points[point],-20}{heading,8:F2}"
-    )
+    write_line("{point + 1,4}   {points[point],-20}{heading,8:F2}")
 od

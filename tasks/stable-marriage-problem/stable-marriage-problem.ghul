@@ -96,8 +96,7 @@ prefers(
     judge: string,
     a: string,
     b: string
-) -> bool =>
-    rank(preferences[judge], a) < rank(preferences[judge], b)
+) -> bool => rank(preferences[judge], a) < rank(preferences[judge], b)
 
 engage() -> MAP[string, string] is
     let engaged_to = MAP()
@@ -116,14 +115,7 @@ engage() -> MAP[string, string] is
         if !engaged_to.contains_key(woman) then
             free.remove_at(0)
             engaged_to[woman] = man
-        elif
-            prefers(
-                women_preferences,
-                woman,
-                man,
-                engaged_to[woman]
-            )
-        then
+        elif prefers(women_preferences, woman, man, engaged_to[woman]) then
             free.remove_at(0)
             free.add(engaged_to[woman])
             engaged_to[woman] = man
@@ -154,20 +146,14 @@ is_stable(engaged_to: MAP[string, string]) -> bool =>
                 )
         )
 
-find_partner(
-    engaged_to: MAP[string, string],
-    man: string
-) -> string =>
-    engaged_to.keys
-        |> find(woman => engaged_to[woman] =~ man) ?? ""
+find_partner(engaged_to: MAP[string, string], man: string) -> string =>
+    engaged_to.keys |> find(woman => engaged_to[woman] =~ man) ?? ""
 
 let engaged_to = engage()
 
 engaged_to.keys
     |> sort()
-    |> each(woman =>
-        write_line("{woman} - {engaged_to[woman]}")
-    )
+    |> each(woman => write_line("{woman} - {engaged_to[woman]}"))
 
 write_line("stable: {is_stable(engaged_to)}")
 

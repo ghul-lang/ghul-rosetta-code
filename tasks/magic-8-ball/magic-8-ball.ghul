@@ -13,13 +13,9 @@ let answers = [
 
 let random = System.Random(8)
 
-write_line(
-    "Ask the Magic 8-Ball a question, or press enter to stop."
-)
+write_line("Ask the Magic 8-Ball a question, or press enter to stop.")
 
-while let
-    question = IO.Std.read_line() /\ question.trim().length > 0
-do
+while let question = IO.Std.read_line() /\ question.trim().length > 0 do
     write_line("> {question}")
     write_line(answers[random.next(answers.count)])
 od

@@ -47,9 +47,7 @@ for frame in 0..frames do
     animation.add(image, 100)
 od
 
-write_line(
-    "{frames} spirals, the turn between segments going full circle"
-)
+write_line("{frames} spirals, the turn between segments going full circle")
 
 animation.write("polyspiral.png")
 

@@ -24,14 +24,10 @@ distances(source: string, target: string) -> List[List[int]] is
 
         for j in 1::target.length do
             let same = source[i - 1] == target[j - 1]
-            let substitution =
-                previous[j - 1] + if same then 0 else 1 fi
+            let substitution = previous[j - 1] + if same then 0 else 1 fi
 
             current.add(
-                min(
-                    substitution,
-                    min(previous[j] + 1, current[j - 1] + 1)
-                )
+                min(substitution, min(previous[j] + 1, current[j - 1] + 1))
             )
         od
 
@@ -50,15 +46,10 @@ alignment() -> (row: int, column: int){} is
     let path = LIST([(row = i, column = j)])
 
     while i > 0 \/ j > 0 do
-        let same =
-            i > 0 /\ j > 0 /\ source[i - 1] == target[j - 1]
+        let same = i > 0 /\ j > 0 /\ source[i - 1] == target[j - 1]
         let step = if same then 0 else 1 fi
 
-        if
-            i > 0 /\
-            j > 0 /\
-            table[i][j] == table[i - 1][j - 1] + step
-        then
+        if i > 0 /\ j > 0 /\ table[i][j] == table[i - 1][j - 1] + step then
             i = i - 1
             j = j - 1
         elif i > 0 /\ table[i][j] == table[i - 1][j] + 1 then
@@ -104,9 +95,7 @@ for row in 0::source.length do
                 (x = to.x, y = to.y),
                 (x = at.x, y = to.y)
             ],
-            COLOUR_MAP.viridis(
-                double(table[row][column]) / highest
-            )
+            COLOUR_MAP.viridis(double(table[row][column]) / highest)
         )
     od
 od
@@ -116,9 +105,7 @@ image.fill(cells)
 image.colour(225ub, 60ub, 60ub)
 image.stroke(2.4)
 image.line(
-    alignment()
-        |> map(step => centre(step.row, step.column))
-        |> collect()
+    alignment() |> map(step => centre(step.row, step.column)) |> collect()
 )
 
 for row in 0::source.length do

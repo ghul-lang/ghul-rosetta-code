@@ -17,15 +17,9 @@ let window = [
 ]
 
 side(at: Point, from: Point, to: Point) -> double =>
-    (to.x - from.x) * (at.y - from.y) -
-    (to.y - from.y) * (at.x - from.x)
+    (to.x - from.x) * (at.y - from.y) - (to.y - from.y) * (at.x - from.x)
 
-crossing(
-    first: Point,
-    second: Point,
-    from: Point,
-    to: Point
-) -> Point => (
+crossing(first: Point, second: Point, from: Point, to: Point) -> Point => (
     let near = side(first, from, to)
     let far = side(second, from, to)
     let part = near / (near - far)
@@ -52,8 +46,7 @@ clip(
     let kept = LIST()
 
     for index in 0..polygon.count do
-        let previous =
-            polygon[(index + polygon.count - 1) % polygon.count]
+        let previous = polygon[(index + polygon.count - 1) % polygon.count]
         let at = polygon[index]
 
         let here = side(at, from, to) >= 0.0D
@@ -68,9 +61,7 @@ clip(
         fi
     od
 
-    if
-        kept.count > 1 /\ same(kept[0], kept[kept.count - 1])
-    then
+    if kept.count > 1 /\ same(kept[0], kept[kept.count - 1]) then
         kept.remove_at(kept.count - 1)
     fi
 

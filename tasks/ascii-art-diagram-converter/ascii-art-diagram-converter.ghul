@@ -42,13 +42,7 @@ read(diagram: string) -> Diagram is
                     )
                 fi
 
-                fields.add(
-                    FIELD(
-                        cell.trim(),
-                        at,
-                        (cell.length + 1) / 3
-                    )
-                )
+                fields.add(FIELD(cell.trim(), at, (cell.length + 1) / 3))
 
                 at = at + (cell.length + 1) / 3
             od
@@ -61,15 +55,11 @@ read(diagram: string) -> Diagram is
                 )
             fi
         else
-            return Diagram.REJECTED(
-                "a row not bounded by '|': {trimmed}"
-            )
+            return Diagram.REJECTED("a row not bounded by '|': {trimmed}")
         fi
     od
 
-    if
-        width != 8 /\ width != 16 /\ width != 32 /\ width != 64
-    then
+    if width != 8 /\ width != 16 /\ width != 32 /\ width != 64 then
         return Diagram.REJECTED("a header {width} bits wide")
     fi
 
@@ -80,8 +70,7 @@ bits_of(message: string) -> string =>
     string(
         message
             |> flat_map(c =>
-                let nibble = System.Convert.to_int32("{c}", 16)
-                in
+                let nibble = System.Convert.to_int32("{c}", 16) in
                 0..4
                     |> map(b =>
                         if (nibble >> (3 - b)) & 1 == 1 then '1'
@@ -110,9 +99,7 @@ let message = "78477bbf5496e12e1bf169a4"
 
 case read(rfc1035)
 when header: Diagram.HEADER then
-    write_line(
-        "{header.fields.count} fields, {header.width} bits a row"
-    )
+    write_line("{header.fields.count} fields, {header.width} bits a row")
     write_line()
 
     let bits = bits_of(message)

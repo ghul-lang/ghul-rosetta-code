@@ -8,29 +8,19 @@ fraction(numerator: long, denominator: long) -> FRACTION =>
         divisor = long.abs(common),
         sign = if denominator < 0L then -1L else 1L fi
     in
-        FRACTION(
-            sign * numerator / divisor,
-            sign * denominator / divisor
-        )
+        FRACTION(sign * numerator / divisor, sign * denominator / divisor)
 
 -(a: FRACTION, b: FRACTION) -> FRACTION =>
     fraction(
-        a.numerator * b.denominator -
-        b.numerator * a.denominator,
+        a.numerator * b.denominator - b.numerator * a.denominator,
         a.denominator * b.denominator
     )
 
 *(a: FRACTION, b: FRACTION) -> FRACTION =>
-    fraction(
-        a.numerator * b.numerator,
-        a.denominator * b.denominator
-    )
+    fraction(a.numerator * b.numerator, a.denominator * b.denominator)
 
 bernoulli(n: int) -> FRACTION is
-    let a =
-        0::n
-            |> map(m => fraction(1L, long(m + 1)))
-            |> collect_mutable()
+    let a = 0::n |> map(m => fraction(1L, long(m + 1))) |> collect_mutable()
 
     for m in 1::n do
         for j in 1::m |> reverse() do
@@ -64,10 +54,8 @@ faulhaber(p: int) -> string =>
         0::p
             |> map(j => (
                 coefficient =
-                    fraction(
-                        binomial(long(p + 1), long(j)),
-                        long(p + 1)
-                    ) * bernoulli(j),
+                    fraction(binomial(long(p + 1), long(j)), long(p + 1)) *
+                    bernoulli(j),
                 power = p + 1 - j
             ))
             |> filter(t => t.coefficient.numerator != 0L)

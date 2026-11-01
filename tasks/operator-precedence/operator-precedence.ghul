@@ -18,11 +18,7 @@ levels() -> string{} is
     yield row("user-4", "", "left")
     yield row("range", "..  ::  ..<  ::<", "left")
     yield row("user-3", "", "left")
-    yield row(
-        "relational",
-        "==  !=  =~  !~  <  <=  >  >=",
-        "left"
-    )
+    yield row("relational", "==  !=  =~  !~  <  <=  >  >=", "left")
     yield row("user-2", "", "left")
     yield row("boolean", "/\\  \\/", "left")
     yield row("user-1", "??", "right")
@@ -69,8 +65,7 @@ si
 // `@precedence` overrides the precedence of all implementations
 // of one operator spelling within its scope.
 @precedence("<*>", "user-8")
-lifted(a: E, b: E, c: E) -> string =>
-    "  a <*> b *** c   {a <*> b *** c}"
+lifted(a: E, b: E, c: E) -> string => "  a <*> b *** c   {a <*> b *** c}"
 
 class BOX is
     value: int public
@@ -129,7 +124,5 @@ entry() is
 
     write_line("  callee assigned to an int          {n}")
     write_line("  callee assigned through an int ref {m}")
-    write_line(
-        "  callee set a field of a class      {box.value}"
-    )
+    write_line("  callee set a field of a class      {box.value}")
 si

@@ -35,8 +35,7 @@ for row in 0..height do
 
         if steps < limit then
             let level =
-                log(double(steps) + 1.0D) /
-                log(double(limit) + 1.0D)
+                log(double(steps) + 1.0D) / log(double(limit) + 1.0D)
 
             image.set_pixel(
                 column,

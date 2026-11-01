@@ -15,14 +15,11 @@ si
 
 depths(heights: int[]) -> List[int] => (
     let left = heights |> running_maxima() |> collect()
-    let right =
-        heights |> reverse() |> running_maxima() |> collect()
+    let right = heights |> reverse() |> running_maxima() |> collect()
     let last = heights.count - 1
 
     (0..heights.count)
-        |> map(i =>
-            Math.min(left[i], right[last - i]) - heights[i]
-        )
+        |> map(i => Math.min(left[i], right[last - i]) - heights[i])
         |> collect()
 )
 
@@ -38,13 +35,9 @@ let series = [
 
 let gap = 2.5
 
-let span =
-    (
-        series |> sum_by(towers => double(towers.count) + gap)
-    ) - gap
+let span = (series |> sum_by(towers => double(towers.count) + gap)) - gap
 
-let tallest =
-    series |> flat_map(towers => towers |> pipe()) |> max() ?? 0
+let tallest = series |> flat_map(towers => towers |> pipe()) |> max() ?? 0
 
 let image = IMAGE(1000, 300)
 
@@ -68,13 +61,7 @@ image.colour(water)
 box(0.0, ceiling + 1.8, 1.2, ceiling + 2.8)
 
 image.colour(70ub, 70ub, 70ub)
-image.text(
-    2.0,
-    ceiling + 2.0,
-    14.0,
-    "water collected",
-    Anchor.LEFT
-)
+image.text(2.0, ceiling + 2.0, 14.0, "water collected", Anchor.LEFT)
 
 let at mut = 0.0
 
@@ -90,12 +77,7 @@ for towers in series do
         box(left, 0.0, left + 1.0, height)
 
         image.colour(water)
-        box(
-            left,
-            height,
-            left + 1.0,
-            height + double(depth[column])
-        )
+        box(left, height, left + 1.0, height + double(depth[column]))
     od
 
     image.colour(70ub, 70ub, 70ub)

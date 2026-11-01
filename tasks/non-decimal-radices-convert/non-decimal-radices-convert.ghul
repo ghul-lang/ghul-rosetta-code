@@ -28,7 +28,5 @@ for (n, base) in cases do
     let text = to_base(n, base)
     let back = from_base(text, base)
 
-    write_line(
-        "{n} in base {base} is {text}, which reads back as {back}"
-    )
+    write_line("{n} in base {base} is {text}, which reads back as {back}")
 od

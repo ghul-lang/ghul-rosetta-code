@@ -69,8 +69,7 @@ si
 
 display() -> COROUTINE is
     for _ in 1::rounds do
-        let shown =
-            buckets.values |> map(v => "{v}") |> join(" ")
+        let shown = buckets.values |> map(v => "{v}") |> join(" ")
 
         write_line("{shown}  total {buckets.total}")
 

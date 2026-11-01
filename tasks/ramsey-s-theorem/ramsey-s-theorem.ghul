@@ -49,8 +49,7 @@ uniform(q: (int, int, int, int)) -> bool =>
             (b, d),
             (c, d)
         ],
-        links =
-            pairs |> filter((x, y) => linked(x, y)) |> count()
+        links = pairs |> filter((x, y) => linked(x, y)) |> count()
     in
         links == 0 \/ links == 6
 
@@ -94,13 +93,7 @@ for i in 0..n do
     image.colour(200ub, 60ub, 40ub)
     image.dot(p.x, p.y, 11.0D)
     image.colour(255ub, 255ub, 255ub)
-    image.text(
-        p.x,
-        p.y - 0.03D,
-        11.0D,
-        "{i}",
-        Raster.Anchor.CENTRE
-    )
+    image.text(p.x, p.y - 0.03D, 11.0D, "{i}", Raster.Anchor.CENTRE)
 od
 
 image.write("paley.png")

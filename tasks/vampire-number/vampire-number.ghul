@@ -3,9 +3,7 @@ use default
 sorted_string(s: string) -> string => (
     let chars = s |> collect_mutable()
 
-    chars.sort((x, y) =>
-        if x < y then -1 elif x == y then 0 else 1 fi
-    )
+    chars.sort((x, y) => if x < y then -1 elif x == y then 0 else 1 fi)
     chars |> map(c => "{c}") |> join("")
 )
 
@@ -48,9 +46,7 @@ fang_text(n: long) -> string =>
     fi
 
 from(1000L)
-    |> filter(n =>
-        "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true)
-    )
+    |> filter(n => "{n}".length % 2 == 0 /\ fangs(n) |> any(_ => true))
     |> take(25)
     |> each(n => write_line(fang_text(n)))
 

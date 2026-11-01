@@ -22,10 +22,7 @@ let steps = [
 
 new_food() -> (x: int, y: int) is
     while true do
-        let spot = (
-            x = random.next(width),
-            y = random.next(height)
-        )
+        let spot = (x = random.next(width), y = random.next(height))
 
         if !snake.contains(spot) then
             return spot
@@ -84,9 +81,7 @@ step() -> bool is
     true
 si
 
-write_line(
-    "steer with w, a, s and d; each letter moves one square"
-)
+write_line("steer with w, a, s and d; each letter moves one square")
 show()
 
 let alive mut = true
@@ -104,9 +99,7 @@ while alive do
         if steps.contains_key(key) then
             let turn = steps[key]
 
-            if
-                turn.dx != -heading.dx \/ turn.dy != -heading.dy
-            then
+            if turn.dx != -heading.dx \/ turn.dy != -heading.dy then
                 heading = turn
             fi
         fi
@@ -121,7 +114,5 @@ while alive do
 od
 
 if !alive then
-    write_line(
-        "the snake bit itself: game over at length {snake.count}"
-    )
+    write_line("the snake bit itself: game over at length {snake.count}")
 fi

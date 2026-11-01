@@ -2,10 +2,7 @@ use default
 use System.StringSplitOptions
 
 shortest_unique(line: string) -> int? is
-    let words = line.split(
-        ' ',
-        StringSplitOptions.REMOVE_EMPTY_ENTRIES
-    )
+    let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 
     if words.count == 0 then
         return null
@@ -13,9 +10,7 @@ shortest_unique(line: string) -> int? is
 
     distinct(length) =>
         words
-            |> map(word =>
-                word.substring(0, int.min(length, word.length))
-            )
+            |> map(word => word.substring(0, int.min(length, word.length)))
             |> collect_set()
             |> count()
 

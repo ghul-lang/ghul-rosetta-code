@@ -5,8 +5,7 @@ let guard = 12
 
 power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
 
-integer_sqrt(n: bigint) -> bigint =>
-    if n < 2n then n else newton(n, n) fi
+integer_sqrt(n: bigint) -> bigint => if n < 2n then n else newton(n, n) fi
 
 newton(n: bigint, root: bigint) -> bigint =>
     let next = (root + n / root) / 2n in
@@ -16,12 +15,7 @@ let scale = power_of_ten(digits + guard)
 
 pi(rounds: int) -> bigint =>
     let
-        start = (
-            scale,
-            integer_sqrt(scale * scale / 2n),
-            0n,
-            4n
-        ),
+        start = (scale, integer_sqrt(scale * scale / 2n), 0n, 4n),
         (a, _, total, _) =
             1::rounds
                 |> reduce(start, ((a, g, total, weight), _) =>
@@ -34,10 +28,7 @@ pi(rounds: int) -> bigint =>
                             next_g,
                             total +
                             weight *
-                            (
-                                next_a * next_a -
-                                next_g * next_g
-                            ) /
+                            (next_a * next_a - next_g * next_g) /
                             scale,
                             weight * 2n
                         )

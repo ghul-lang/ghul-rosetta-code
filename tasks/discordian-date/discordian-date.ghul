@@ -25,8 +25,7 @@ discordian(date: DateTime) -> string =>
         "St. Tib's Day, YOLD {year}"
     else
         let leap = DateTime.is_leap_year(date.year),
-            leap_shift =
-                if leap /\ date.month > 2 then 1 else 0 fi,
+            leap_shift = if leap /\ date.month > 2 then 1 else 0 fi,
             day = date.day_of_year - 1 - leap_shift,
             season = day / 73,
             day_of_season = day % 73 + 1

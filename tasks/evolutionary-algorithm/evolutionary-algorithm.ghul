@@ -10,9 +10,7 @@ let random = Random(3)
 random_letter() -> char => letters[random.next(letters.length)]
 
 fitness(candidate: string) -> int =>
-    0..target.length
-        |> filter(i => candidate[i] == target[i])
-        |> count()
+    0..target.length |> filter(i => candidate[i] == target[i]) |> count()
 
 mutate(parent: string, rate: double) -> string =>
     parent
@@ -23,8 +21,7 @@ mutate(parent: string, rate: double) -> string =>
         )
         |> string()
 
-let parent mut =
-    0..target.length |> map(_ => random_letter()) |> string()
+let parent mut = 0..target.length |> map(_ => random_letter()) |> string()
 
 let generation mut = 0
 
@@ -43,9 +40,7 @@ while parent !~ target do
             )
 
     if fitness(fittest) > fitness(parent) then
-        write_line(
-            "{generation,4}: {fittest} ({fitness(fittest)})"
-        )
+        write_line("{generation,4}: {fittest} ({fitness(fittest)})")
     fi
 
     parent = fittest

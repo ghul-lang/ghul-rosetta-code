@@ -9,9 +9,7 @@ IO.Directory.create_directory(scratch)
 
 is_empty(path: string) -> bool =>
     let use entries =
-        IO.Directory.enumerate_file_system_entries(
-            path
-        ).iterator
+        IO.Directory.enumerate_file_system_entries(path).iterator
     in
     !entries.move_next()
 
@@ -20,10 +18,7 @@ let occupied = IO.Path.combine(scratch, "occupied")
 
 IO.Directory.create_directory(empty)
 IO.Directory.create_directory(occupied)
-IO.File.write_all_text(
-    IO.Path.combine(occupied, "note.txt"),
-    "something\n"
-)
+IO.File.write_all_text(IO.Path.combine(occupied, "note.txt"), "something\n")
 
 for path in [empty, occupied] do
     let name = IO.Path.get_file_name(path)

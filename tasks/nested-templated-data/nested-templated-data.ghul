@@ -12,8 +12,7 @@ si
 
 at(position: int) -> Template => Template.INDEX(position)
 
-group(items: List[Template]) -> Template =>
-    Template.GROUP(items)
+group(items: List[Template]) -> Template => Template.GROUP(items)
 
 fill(template: Template, payloads: List[string]) -> Filled =>
     case template
@@ -24,9 +23,7 @@ fill(template: Template, payloads: List[string]) -> Filled =>
             Filled.PAYLOAD("<no payload for {leaf.position}>")
         fi
     when nested: Template.GROUP then
-        Filled.GROUP(
-            nested.items |> map(fill(*, payloads)) |> collect()
-        )
+        Filled.GROUP(nested.items |> map(fill(*, payloads)) |> collect())
     esac
 
 render(filled: Filled) -> string =>
@@ -55,8 +52,7 @@ let template = group([
     ])
 ])
 
-let payloads =
-    0::6 |> map(index => "Payload#{index}") |> collect()
+let payloads = 0::6 |> map(index => "Payload#{index}") |> collect()
 
 write_line("filled template:")
 write_line("  {render(fill(template, payloads))}")

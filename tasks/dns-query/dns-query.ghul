@@ -10,8 +10,7 @@ report(addresses: IPAddress[]) is
             ("IPv6", AddressFamily.INTER_NETWORK_V6)
         ]
     do
-        let matching =
-            addresses |> filter(a => a.address_family == family)
+        let matching = addresses |> filter(a => a.address_family == family)
 
         for address in matching do
             write_line("{label}: {address}")

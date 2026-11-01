@@ -71,10 +71,7 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
             close = close + 1
         od
 
-        return (
-            value = STRING(text[start + 1..close]),
-            next = close + 1
-        )
+        return (value = STRING(text[start + 1..close]), next = close + 1)
     fi
 
     let end mut = start

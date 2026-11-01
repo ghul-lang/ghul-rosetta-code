@@ -8,9 +8,7 @@ notes(arguments: string[]) is
             IO.Std.write(IO.File.read_all_text(path))
         fi
     else
-        let stamp = System.DateTime.now.to_string(
-            "yyyy-MM-dd HH:mm:ss"
-        )
+        let stamp = System.DateTime.now.to_string("yyyy-MM-dd HH:mm:ss")
 
         IO.File.append_all_text(
             path,

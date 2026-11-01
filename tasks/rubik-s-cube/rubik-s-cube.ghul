@@ -31,12 +31,7 @@ let x_axis = (x = 1.0D, y = 0.0D, z = 0.0D)
 let y_axis = (x = 0.0D, y = 1.0D, z = 0.0D)
 let z_axis = (x = 0.0D, y = 0.0D, z = 1.0D)
 
-let faces: (
-    normal: Point,
-    u: Point,
-    v: Point,
-    colour: Colour
-)[] = [
+let faces: (normal: Point, u: Point, v: Point, colour: Colour)[] = [
     (y_axis, x_axis, z_axis, rgb(245, 245, 245)),
     (times(y_axis, -1.0D), x_axis, z_axis, rgb(255, 213, 0)),
     (z_axis, x_axis, y_axis, rgb(0, 155, 72)),
@@ -66,10 +61,7 @@ square(
     [(-1.0D, -1.0D), (1.0D, -1.0D), (1.0D, 1.0D), (-1.0D, 1.0D)]
         |> map((a, b) =>
             turned(
-                plus(
-                    centre,
-                    plus(times(u, a * half), times(v, b * half))
-                ),
+                plus(centre, plus(times(u, a * half), times(v, b * half))),
                 angle
             )
         )
@@ -86,13 +78,7 @@ draw(image: IMAGE, angle: double) is
         if turned(face.normal, angle).z > 0.0D then
             let centre = times(face.normal, 1.5D)
 
-            let outline = square(
-                centre,
-                face.u,
-                face.v,
-                1.5D,
-                angle
-            )
+            let outline = square(centre, face.u, face.v, 1.5D, angle)
 
             body.add(outline, 20ub, 20ub, 20ub)
 
@@ -107,13 +93,7 @@ draw(image: IMAGE, angle: double) is
                     )
 
                     stickers.add(
-                        square(
-                            at,
-                            face.u,
-                            face.v,
-                            0.42D,
-                            angle
-                        ),
+                        square(at, face.u, face.v, 0.42D, angle),
                         face.colour
                     )
                 od
@@ -131,9 +111,7 @@ image.view(-2.8D, -2.8D, 2.8D, 2.8D)
 
 draw(image, -pi / 5.0D)
 
-write_line(
-    "a solved cube, white on top, green facing, red to the right"
-)
+write_line("a solved cube, white on top, green facing, red to the right")
 
 image.write("rubik.png")
 

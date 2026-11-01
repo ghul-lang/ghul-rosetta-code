@@ -32,10 +32,7 @@ compile_order(graph: MAP[string, SET[string]]) -> (
 ) is
     let pending =
         graph.keys
-            |> collect_mutable_map(
-                name => name,
-                name => SET(graph[name])
-            )
+            |> collect_mutable_map(name => name, name => SET(graph[name]))
 
     let ordered = LIST()
 
@@ -68,9 +65,7 @@ compile_order(graph: MAP[string, SET[string]]) -> (
 si
 
 report(heading: string, rows: List[ROW]) is
-    let (ordered, blocked) = compile_order(
-        dependency_graph(rows)
-    )
+    let (ordered, blocked) = compile_order(dependency_graph(rows))
 
     write_line(heading)
     write_line("    compile order: {ordered |> join(" ")}")
@@ -91,8 +86,7 @@ let libraries = [
     (library = "dw02", dependencies = "ieee dw02 dware"),
     (
         library = "dw03",
-        dependencies =
-            "std synopsys dware dw03 dw02 dw01 ieee gtech"
+        dependencies = "std synopsys dware dw03 dw02 dw01 ieee gtech"
     ),
     (library = "dw04", dependencies = "dw04 ieee dw01 dware gtech"),
     (library = "dw05", dependencies = "dw05 ieee dware"),
@@ -121,7 +115,4 @@ let with_cycle =
 
 report("as given:", libraries)
 write_line("")
-report(
-    "with dw04 added to the dependencies of dw01:",
-    with_cycle
-)
+report("with dw04 added to the dependencies of dw01:", with_cycle)

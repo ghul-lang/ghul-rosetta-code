@@ -17,11 +17,7 @@ load(lines: List[string], cursor: LIST[int]) -> Node is
 
     let kind = line.split([' '])[0]
 
-    if
-        kind =~ "Identifier" \/
-        kind =~ "Integer" \/
-        kind =~ "String"
-    then
+    if kind =~ "Identifier" \/ kind =~ "Integer" \/ kind =~ "String" then
         return Node.LEAF(kind, line[kind.length..<0].trim())
     fi
 
@@ -51,9 +47,7 @@ interpret(node: Node) -> int =>
             fi
             0
         when "If" then
-            if let
-                (_, consequent, alternative): Node.BRANCH = right
-            then
+            if let (_, consequent, alternative): Node.BRANCH = right then
                 interpret(
                     if interpret(left) != 0 then consequent
                     else alternative
@@ -104,9 +98,7 @@ interpret(node: Node) -> int =>
             when "Equal" then truth(a == b)
             when "NotEqual" then truth(a != b)
             else
-                throw System.Exception(
-                    "unknown operator {kind}"
-                )
+                throw System.Exception("unknown operator {kind}")
             esac
         esac
     else 0

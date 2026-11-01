@@ -1,12 +1,10 @@
 use default
 use System.Math.*
 
-non_square(n: int) -> int =>
-    n + int(floor(0.5 + sqrt(double(n))))
+non_square(n: int) -> int => n + int(floor(0.5 + sqrt(double(n))))
 
 write_line(1::22 |> map(non_square) |> join(" "))
 
-let squares =
-    1..1_000_000 |> count(n => is_square(non_square(n)))
+let squares = 1..1_000_000 |> count(n => is_square(non_square(n)))
 
 write_line("squares for n below one million: {squares}")

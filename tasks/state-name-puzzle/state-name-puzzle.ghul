@@ -48,9 +48,7 @@ solve(names: string{}) is
                 if i != k /\ i != l /\ j != k /\ j != l then
                     let left = "{states[i]} + {states[j]}"
 
-                    write_line(
-                        "{left} = {states[k]} + {states[l]}"
-                    )
+                    write_line("{left} = {states[k]} + {states[l]}")
                 fi
             od
         od

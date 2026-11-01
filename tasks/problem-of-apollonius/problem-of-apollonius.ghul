@@ -67,8 +67,7 @@ tangent_to(
         2.0D * p * first.y -
         first.radius * first.radius
 
-    let radius =
-        (-b - Math.sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
+    let radius = (-b - Math.sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
 
     (x = m + n * radius, y = p + q * radius, radius = radius)
 )
@@ -79,23 +78,9 @@ let given = [
     (x = 2.0D, y = 4.0D, radius = 2.0D)
 ]
 
-let inside = tangent_to(
-    given[0],
-    given[1],
-    given[2],
-    1.0D,
-    1.0D,
-    1.0D
-)
+let inside = tangent_to(given[0], given[1], given[2], 1.0D, 1.0D, 1.0D)
 
-let outside = tangent_to(
-    given[0],
-    given[1],
-    given[2],
-    -1.0D,
-    -1.0D,
-    -1.0D
-)
+let outside = tangent_to(given[0], given[1], given[2], -1.0D, -1.0D, -1.0D)
 
 spelled(circle: Circle) -> string =>
     "x = {circle.x:F6}, y = {circle.y:F6}, "

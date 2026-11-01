@@ -25,19 +25,13 @@ first_index[T](values: List[T], matches: (T) -> bool) -> int? =>
 first_where[T](values: List[T], matches: (T) -> bool) -> T? =>
     values |> filter(matches) |> first()
 
-write_line(
-    "{first_index(cities, city => city.name =~ "Dar Es Salaam")!}"
-)
+write_line("{first_index(cities, city => city.name =~ "Dar Es Salaam")!}")
 
-if let
-    sparse = first_where(cities, city => city.population < 5.0D)
-then
+if let sparse = first_where(cities, city => city.population < 5.0D) then
     write_line("{sparse.name}")
 fi
 
-let initial = first_where(cities, city =>
-    city.name.starts_with("A")
-)
+let initial = first_where(cities, city => city.name.starts_with("A"))
 
 if initial? then
     write_line("{initial.population}")

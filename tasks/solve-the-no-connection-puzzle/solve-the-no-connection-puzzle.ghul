@@ -12,18 +12,14 @@ let connections = [
 
 peaceful(pegs: List[int]) -> bool =>
     connections
-        |> all(line =>
-            Math.abs(pegs[line.from] - pegs[line.to]) > 1
-        )
+        |> all(line => Math.abs(pegs[line.from] - pegs[line.to]) > 1)
 
 draw(pegs: List[int]) is
     write_line("      {pegs[0]}   {pegs[1]}")
     write_line("     /|\\ /|\\")
     write_line("    / | X | \\")
     write_line("   /  |/ \\|  \\")
-    write_line(
-        "  {pegs[2]}---{pegs[3]}---{pegs[4]}---{pegs[5]}"
-    )
+    write_line("  {pegs[2]}---{pegs[3]}---{pegs[4]}---{pegs[5]}")
     write_line("   \\  |\\ /|  /")
     write_line("    \\ | X | /")
     write_line("     \\|/ \\|/")
@@ -38,8 +34,7 @@ if let solution = pegs |> permutations() |> find(peaceful) then
     draw(solution)
 fi
 
-let total =
-    pegs |> permutations() |> filter(peaceful) |> count()
+let total = pegs |> permutations() |> filter(peaceful) |> count()
 
 write_line()
 write_line("solutions in all: {total}")

@@ -18,9 +18,7 @@ separator(operator: int, at: int) -> string =>
     fi
 
 text_of(operators: int[]) -> string =>
-    0..9
-        |> map(at => "{separator(operators[at], at)}{at + 1}")
-        |> join("")
+    0..9 |> map(at => "{separator(operators[at], at)}{at + 1}") |> join("")
 
 add_digit(sum: Sum, operator: int, digit: int) -> Sum =>
     if operator == joined then
@@ -48,10 +46,7 @@ expressions() -> (value: int, text: string){} =>
     0..19683
         |> map(operators)
         |> filter(ops => ops[0] != joined)
-        |> map(ops => (
-            value = value_of(ops),
-            text = text_of(ops)
-        ))
+        |> map(ops => (value = value_of(ops), text = text_of(ops)))
 
 let all = expressions() |> memo()
 
@@ -73,24 +68,15 @@ let most = counts.keys |> max_by(value => counts[value])
 assert most? else "some sum has the most expressions"
 
 write_line("")
-write_line(
-    "{most} has the most expressions, {counts[most]} of them"
-)
+write_line("{most} has the most expressions, {counts[most]} of them")
 
 let unreachable =
-    from(1)
-        |> filter(sum => !counts.contains_key(sum))
-        |> first()
+    from(1) |> filter(sum => !counts.contains_key(sum)) |> first()
 
 assert unreachable? else "some positive sum has no expression"
 
-write_line(
-    "{unreachable} is the lowest positive sum with no expression"
-)
+write_line("{unreachable} is the lowest positive sum with no expression")
 
-let highest =
-    counts.keys
-        |> sort((left, right) => right - left)
-        |> take(10)
+let highest = counts.keys |> sort((left, right) => right - left) |> take(10)
 
 write_line("ten highest sums: {highest |> join(", ")}")

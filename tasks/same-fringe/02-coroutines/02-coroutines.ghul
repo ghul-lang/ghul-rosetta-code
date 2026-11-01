@@ -100,10 +100,8 @@ report() -> COROUTINE is
     do
         let (same, leaves) = await compare(first, second)
 
-        let verdict =
-            if same then "same fringe" else "different" fi
-        let counted =
-            if leaves == 1 then "leaf" else "leaves" fi
+        let verdict = if same then "same fringe" else "different" fi
+        let counted = if leaves == 1 then "leaf" else "leaves" fi
 
         write_line(
             "{show(first)} and {show(second)}: {verdict}, "

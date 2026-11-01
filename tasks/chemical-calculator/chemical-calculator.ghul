@@ -41,9 +41,7 @@ class FORMULA(text: string) is
         let symbol = text.substring(start, _at - start)
 
         if !masses.contains_key(symbol) then
-            throw System.ArgumentException(
-                "unknown element {symbol}"
-            )
+            throw System.ArgumentException("unknown element {symbol}")
         fi
 
         masses[symbol]

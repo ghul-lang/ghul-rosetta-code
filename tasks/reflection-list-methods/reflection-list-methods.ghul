@@ -30,9 +30,7 @@ let declared =
         |> map(m =>
             let parameters =
                 m.get_parameters()
-                    |> map(p =>
-                        "{p.parameter_type.name} {p.name}"
-                    )
+                    |> map(p => "{p.parameter_type.name} {p.name}")
                     |> join(", ")
             in
             "{m.name}({parameters}) -> {m.return_type.name}"

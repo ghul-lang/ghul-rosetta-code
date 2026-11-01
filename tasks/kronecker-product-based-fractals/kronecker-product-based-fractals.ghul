@@ -21,10 +21,7 @@ power(seed: MATRIX, order: int) -> MATRIX =>
 plot(cells: MATRIX, path: string) is
     let scale = 4
 
-    let image = IMAGE(
-        cells[0].count * scale,
-        cells.count * scale
-    )
+    let image = IMAGE(cells[0].count * scale, cells.count * scale)
 
     for row in 0..cells.count do
         for column in 0..cells[row].count do

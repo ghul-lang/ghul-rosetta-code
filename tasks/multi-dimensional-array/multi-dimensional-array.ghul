@@ -9,8 +9,7 @@ let cells =
                 |> map(_ =>
                     0..extents[2]
                         |> map(_ =>
-                            repeat(0, extents[3])
-                                |> collect_mutable()
+                            repeat(0, extents[3]) |> collect_mutable()
                         )
                         |> collect()
                 )
@@ -18,9 +17,7 @@ let cells =
         )
         |> collect()
 
-write_line(
-    "{extents.count} dimensions, extents {extents |> join(" by ")}"
-)
+write_line("{extents.count} dimensions, extents {extents |> join(" by ")}")
 
 cells[1][2][3][4] = 42
 

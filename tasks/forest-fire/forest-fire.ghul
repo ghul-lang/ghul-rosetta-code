@@ -21,16 +21,11 @@ let lightning = 0.0002D
 let random = System.Random(2024)
 
 inside(row: int, column: int) -> bool =>
-    row > 0 /\
-    row < rows - 1 /\
-    column > 0 /\
-    column < columns - 1
+    row > 0 /\ row < rows - 1 /\ column > 0 /\ column < columns - 1
 
 near_fire(forest: Forest, row: int, column: int) -> bool =>
     (row - 1::row + 1)
-        |> flat_map(r =>
-            column - 1::column + 1 |> map(c => (r, c))
-        )
+        |> flat_map(r => column - 1::column + 1 |> map(c => (r, c)))
         |> any((r, c) => forest[r][c] == Cell.BURNING)
 
 next(forest: Forest, row: int, column: int) -> Cell =>
@@ -60,17 +55,12 @@ next(forest: Forest, row: int, column: int) -> Cell =>
 step(forest: Forest) -> Forest =>
     (0..rows)
         |> map(row =>
-            (0..columns)
-                |> map(next(forest, row, *))
-                |> collect()
+            (0..columns) |> map(next(forest, row, *)) |> collect()
         )
         |> collect()
 
 census(forest: Forest, state: Cell) -> int =>
-    forest
-        |> flat_map(row => row)
-        |> filter(* == state)
-        |> count()
+    forest |> flat_map(row => row) |> filter(* == state) |> count()
 
 draw(image: IMAGE, forest: Forest) is
     image.clear(60ub, 45ub, 30ub)
@@ -87,12 +77,7 @@ draw(image: IMAGE, forest: Forest) is
             let x = double(column * cell)
             let y = double(row * cell)
 
-            image.fill_rectangle(
-                x,
-                y,
-                x + double(cell),
-                y + double(cell)
-            )
+            image.fill_rectangle(x, y, x + double(cell), y + double(cell))
         od
     od
 si
@@ -103,8 +88,7 @@ let forest mut =
             (0..columns)
                 |> map(column =>
                     if
-                        inside(row, column) /\
-                        random.next_double() < 0.5D
+                        inside(row, column) /\ random.next_double() < 0.5D
                     then
                         Cell.TREE
                     else Cell.EMPTY

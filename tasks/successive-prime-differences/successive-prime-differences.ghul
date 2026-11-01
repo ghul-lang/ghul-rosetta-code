@@ -26,8 +26,7 @@ groups(differences: int[]) -> List[int]{} is
 
         for step in 0..differences.count do
             if
-                primes[start + step + 1] -
-                primes[start + step] !=
+                primes[start + step + 1] - primes[start + step] !=
                 differences[step]
             then
                 matched = false
@@ -36,9 +35,7 @@ groups(differences: int[]) -> List[int]{} is
         od
 
         if matched then
-            yield LIST(
-                primes[start..start + differences.count + 1]
-            )
+            yield LIST(primes[start..start + differences.count + 1])
         fi
     od
 si

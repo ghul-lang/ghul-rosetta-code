@@ -40,8 +40,7 @@ blinded(value: long) -> long =>
 
 is_palindrome(value: long) -> bool =>
     let text = "{value}" in
-    (0..text.length / 2)
-        |> all(i => text[i] == text[text.length - 1 - i])
+    (0..text.length / 2) |> all(i => text[i] == text[text.length - 1 - i])
 
 report(name: string, numbers: () -> long{}) is
     write_line("first 50 {name}:")
@@ -51,9 +50,7 @@ report(name: string, numbers: () -> long{}) is
     for row in 0..5 do
         write_line(
             (0..10)
-                |> map(column =>
-                    "{first_50[row * 10 + column],10}"
-                )
+                |> map(column => "{first_50[row * 10 + column],10}")
                 |> join("")
         )
     od
@@ -72,13 +69,9 @@ report(name: string, numbers: () -> long{}) is
 si
 
 report("cyclops numbers", () => cyclops())
-report("prime cyclops numbers", () =>
-    cyclops() |> filter(is_prime)
-)
+report("prime cyclops numbers", () => cyclops() |> filter(is_prime))
 report("blind prime cyclops numbers", () =>
-    cyclops()
-        |> filter(is_prime)
-        |> filter(c => is_prime(blinded(c)))
+    cyclops() |> filter(is_prime) |> filter(c => is_prime(blinded(c)))
 )
 report("palindromic prime cyclops numbers", () =>
     cyclops() |> filter(is_palindrome) |> filter(is_prime)

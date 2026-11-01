@@ -23,9 +23,7 @@ write_line("\nMDR: first five numbers")
 
 for target in 0::9 do
     let numbers =
-        from(0L)
-            |> filter(n => root(n).root == long(target))
-            |> take(5)
+        from(0L) |> filter(n => root(n).root == long(target)) |> take(5)
 
     write_line("{target,3}: {numbers}")
 od

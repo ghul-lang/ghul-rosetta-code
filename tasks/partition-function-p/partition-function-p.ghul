@@ -8,9 +8,7 @@ partitions(n: int) -> bigint is
         if first < 0 then total
         else
             let second = m - k * (3 * k + 1) / 2 in
-            let pair =
-                p[first] +
-                if second >= 0 then p[second] else 0n fi
+            let pair = p[first] + if second >= 0 then p[second] else 0n fi
             in
             walk(
                 m,
@@ -30,7 +28,5 @@ partitions(n: int) -> bigint is
     p[n]
 si
 
-write_line(
-    "P(1) .. P(12): {1::12 |> map(partitions) |> join(" ")}"
-)
+write_line("P(1) .. P(12): {1::12 |> map(partitions) |> join(" ")}")
 write_line("P(6666) = {partitions(6666)}")

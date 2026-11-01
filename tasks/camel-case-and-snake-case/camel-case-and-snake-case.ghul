@@ -23,11 +23,7 @@ parse(text: string) -> NAME is
     let word = StringBuilder()
 
     for character in text.trim() do
-        if
-            character == '_' \/
-            character == '-' \/
-            character == ' '
-        then
+        if character == '_' \/ character == '-' \/ character == ' ' then
             if word.length > 0 then
                 words.add(word.to_string())
                 word.clear()

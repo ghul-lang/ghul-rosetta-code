@@ -26,9 +26,7 @@ write_line("the first 100 arithmetic numbers:")
 arithmetic
     |> take(100)
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(n => "{n,5}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
 
 write_line("")
 
@@ -36,9 +34,7 @@ for x in [1000, 10000, 100000, 1000000] do
     let nth = arithmetic[x - 1]
 
     let composite =
-        arithmetic
-            |> take(x)
-            |> count(n => n > 1 /\ divisor_count[n] > 2)
+        arithmetic |> take(x) |> count(n => n > 1 /\ divisor_count[n] > 2)
 
     write_line(
         "the {x}th arithmetic number is {nth}, and {composite} of the "

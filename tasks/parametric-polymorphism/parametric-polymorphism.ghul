@@ -7,11 +7,7 @@ si
 
 map[T, U](tree: Tree[T], f: T -> U) -> Tree[U] =>
     if let node: Tree.NODE = tree then
-        Tree.NODE(
-            f(node.value),
-            map(node.left, f),
-            map(node.right, f)
-        )
+        Tree.NODE(f(node.value), map(node.left, f), map(node.right, f))
     else
         Tree.LEAF
     fi

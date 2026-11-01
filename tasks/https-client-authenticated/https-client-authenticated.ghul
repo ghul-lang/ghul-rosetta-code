@@ -14,8 +14,7 @@ fetch(
     identity: X509Certificate2,
     handler: HttpClientHandler
 ) -> string is
-    handler.client_certificate_options =
-        ClientCertificateOption.MANUAL
+    handler.client_certificate_options = ClientCertificateOption.MANUAL
     handler.client_certificates.add(identity)
 
     HttpClient(handler).get_string_async(url).result
@@ -33,9 +32,5 @@ let identity = X509CertificateLoader.load_pkcs12(
 )
 
 IO.Std.write(
-    fetch(
-        "https://client.badssl.com/",
-        identity,
-        HttpClientHandler()
-    )
+    fetch("https://client.badssl.com/", identity, HttpClientHandler())
 )

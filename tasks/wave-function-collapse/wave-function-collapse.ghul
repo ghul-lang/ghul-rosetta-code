@@ -36,22 +36,17 @@ attempt() -> List[int]? is
         let open = 0..grid * grid |> filter(i => placed[i] < 0)
 
         let least =
-            open
-                |> map(i => options[i].count)
-                |> reduce(99, int.min)
+            open |> map(i => options[i].count) |> reduce(99, int.min)
 
         if least == 0 then
             return null
         fi
 
         let candidates =
-            open
-                |> filter(i => options[i].count == least)
-                |> collect()
+            open |> filter(i => options[i].count == least) |> collect()
 
         let cell = candidates[random.next(candidates.count)]
-        let choice =
-            options[cell][random.next(options[cell].count)]
+        let choice = options[cell][random.next(options[cell].count)]
         let row = cell / grid, column = cell % grid
 
         placed[cell] = choice

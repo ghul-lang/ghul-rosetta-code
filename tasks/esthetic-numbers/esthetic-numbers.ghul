@@ -43,9 +43,7 @@ for base in 2::16 do
             |> map(render(*, base))
             |> join(" ")
 
-    write_line(
-        "base {base,2}, esthetic numbers {base * 4} to {base * 6}:"
-    )
+    write_line("base {base,2}, esthetic numbers {base * 4} to {base * 6}:")
     write_line("  {shown}")
 od
 
@@ -58,13 +56,10 @@ show_range(low: long, high: long) is
             |> collect()
 
     write_line("")
-    write_line(
-        "base 10 esthetic numbers between {low} and {high}:"
-    )
+    write_line("base 10 esthetic numbers between {low} and {high}:")
 
     for row in 0..(matching.count + 9) / 10 do
-        let cells =
-            matching |> skip(row * 10) |> take(10) |> join(" ")
+        let cells = matching |> skip(row * 10) |> take(10) |> join(" ")
 
         write_line("  {cells}")
     od

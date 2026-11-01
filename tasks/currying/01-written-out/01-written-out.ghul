@@ -9,11 +9,9 @@ let add_ten = add(10)
 write_line("add_ten(5) = {add_ten(5)}")
 write_line("add_ten(32) = {add_ten(32)}")
 
-curry[A, B, C](f: (A, B) -> C) -> (A) -> (B) -> C =>
-    a => b => f(a, b)
+curry[A, B, C](f: (A, B) -> C) -> (A) -> (B) -> C => a => b => f(a, b)
 
-uncurry[A, B, C](f: (A) -> (B) -> C) -> (A, B) -> C =>
-    (a, b) => f(a)(b)
+uncurry[A, B, C](f: (A) -> (B) -> C) -> (A, B) -> C => (a, b) => f(a)(b)
 
 repeat_text(text: string, times: int) -> string =>
     string.join("", repeat(text, times))
@@ -21,9 +19,7 @@ repeat_text(text: string, times: int) -> string =>
 let curried = curry(repeat_text)
 
 write_line("curried(\"ab\")(3) = {curried("ab")(3)}")
-write_line(
-    "uncurry(curried)(\"-\", 5) = {uncurry(curried)("-", 5)}"
-)
+write_line("uncurry(curried)(\"-\", 5) = {uncurry(curried)("-", 5)}")
 
 let plus = curry(add_int)
 

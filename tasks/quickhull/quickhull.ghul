@@ -15,14 +15,9 @@ use System.Math.*
     z = a.z + b.z
 )
 
-*(p: Point, k: double) -> Point => (
-    x = p.x * k,
-    y = p.y * k,
-    z = p.z * k
-)
+*(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
-⋅(a: Point, b: Point) -> double =>
-    a.x * b.x + a.y * b.y + a.z * b.z
+⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
 
 ×(a: Point, b: Point) -> Point => (
     x = a.y * b.z - a.z * b.y,
@@ -85,9 +80,7 @@ hull(points: List[Point]) -> List[FACE] is
                 points[0],
                 (best, candidate) =>
                     if
-                        length(
-                            (candidate - low) × (high - low)
-                        ) >
+                        length((candidate - low) × (high - low)) >
                         length((best - low) × (high - low))
                     then
                         candidate
@@ -128,9 +121,7 @@ hull(points: List[Point]) -> List[FACE] is
 
     for point in points do
         let visible =
-            faces
-                |> filter(face => face.outside(point))
-                |> collect()
+            faces |> filter(face => face.outside(point)) |> collect()
 
         if visible.count == 0 then
             continue
@@ -207,10 +198,7 @@ for (name, points) in shapes do
     let faces = hull(points)
 
     let outlier =
-        points
-            |> any(point =>
-                faces |> any(face => face.outside(point))
-            )
+        points |> any(point => faces |> any(face => face.outside(point)))
 
     assert !outlier else "a point lies outside the hull"
 
@@ -224,10 +212,7 @@ od
 
 let image = IMAGE(420, 420)
 
-let turned = p => (
-    x = p.x * 0.8D + p.z * 0.6D,
-    y = p.y * 0.9D + p.z * 0.3D
-)
+let turned = p => (x = p.x * 0.8D + p.z * 0.6D, y = p.y * 0.9D + p.z * 0.3D)
 
 image.view(-2.2D, -2.2D, 2.2D, 2.2D)
 image.clear(252ub, 250ub, 245ub)

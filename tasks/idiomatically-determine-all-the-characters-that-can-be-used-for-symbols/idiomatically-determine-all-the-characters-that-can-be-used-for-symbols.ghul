@@ -10,9 +10,7 @@ starts_identifier(c: char) -> bool =>
         char.is_ascii_letter(c) \/ c == '_'
     else
         char.is_letter(c) \/
-        char.get_unicode_category(
-            c
-        ) == UnicodeCategory.LETTER_NUMBER
+        char.get_unicode_category(c) == UnicodeCategory.LETTER_NUMBER
     fi
 
 continues_identifier(c: char) -> bool =>
@@ -32,8 +30,7 @@ let characters = 0..0x10000 |> map(char)
 let ascii = characters |> take(0x7F)
 
 let ascii_first = ascii |> filter(starts_identifier) |> join("")
-let ascii_later =
-    ascii |> filter(continues_identifier) |> join("")
+let ascii_later = ascii |> filter(continues_identifier) |> join("")
 let all_first = characters |> count(starts_identifier)
 let all_later = characters |> count(continues_identifier)
 

@@ -24,10 +24,7 @@ for member in fields do
 od
 
 let combination =
-    safe.get_type().get_field(
-        "_combination",
-        hidden
-    )!.get_value(safe)
+    safe.get_type().get_field("_combination", hidden)!.get_value(safe)
 
 write_line(safe.open("{combination}"))
 

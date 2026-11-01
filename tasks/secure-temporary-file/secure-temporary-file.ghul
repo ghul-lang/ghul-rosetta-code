@@ -1,10 +1,7 @@
 use default
 use IO
 
-create_secure_temp_file(
-    dir: string,
-    prefix: string
-) -> string is
+create_secure_temp_file(dir: string, prefix: string) -> string is
     let attempt mut = 0
 
     let path =

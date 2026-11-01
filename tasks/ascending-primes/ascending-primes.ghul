@@ -10,6 +10,4 @@ ascending_number(mask: int) -> int =>
     |> filter(is_prime)
     |> sort()
     |> chunk(8)
-    |> each(row =>
-        write_line(row |> map(n => "{n,10}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,10}") |> join("")))

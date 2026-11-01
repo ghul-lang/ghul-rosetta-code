@@ -17,16 +17,12 @@ write_line("the first fifty forbidden numbers:")
     |> filter(is_forbidden)
     |> take(50)
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(n => "{n,5}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
 
 write_line("")
 
 for limit in [500, 5_000, 50_000, 500_000] do
     let found = 1::limit |> count(is_forbidden)
 
-    write_line(
-        "{found,8:N0} forbidden numbers up to {limit,9:N0}"
-    )
+    write_line("{found,8:N0} forbidden numbers up to {limit,9:N0}")
 od

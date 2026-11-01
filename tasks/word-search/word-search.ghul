@@ -1,12 +1,6 @@
 use default
 
-use Placed = (
-    word: string,
-    row: int,
-    column: int,
-    dr: int,
-    dc: int
-)
+use Placed = (word: string, row: int, column: int, dr: int, dc: int)
 
 let size = 10
 let message = "ROSETTACODE"
@@ -36,13 +30,7 @@ class GRID is
 
     empty: int => cells |> filter(* == ' ') |> count()
 
-    fits(
-        word: string,
-        row: int,
-        column: int,
-        dr: int,
-        dc: int
-    ) -> bool =>
+    fits(word: string, row: int, column: int, dr: int, dc: int) -> bool =>
         0..word.length
             |> all(i =>
                 let
@@ -53,10 +41,7 @@ class GRID is
                     r < size /\
                     c >= 0 /\
                     c < size /\
-                    (
-                        cells[at(r, c)] == ' ' \/
-                        cells[at(r, c)] == word[i]
-                    )
+                    (cells[at(r, c)] == ' ' \/ cells[at(r, c)] == word[i])
             )
 
     try_place(word: string) -> bool is
@@ -72,11 +57,9 @@ class GRID is
         fi
 
         let squares =
-            (0..word.length)
-                |> map(i => at(row + dr * i, column + dc * i))
+            (0..word.length) |> map(i => at(row + dr * i, column + dc * i))
 
-        let covered =
-            squares |> filter(s => cells[s] == ' ') |> count()
+        let covered = squares |> filter(s => cells[s] == ' ') |> count()
 
         if empty - covered < message.length then
             return false
@@ -102,10 +85,7 @@ build() -> GRID is
             attempts = attempts + 1
         od
 
-        if
-            grid.empty == message.length /\
-            grid.placed.count >= 25
-        then
+        if grid.empty == message.length /\ grid.placed.count >= 25 then
             return grid
         fi
     od
@@ -126,9 +106,7 @@ write_line("")
 
 for row in 0..size do
     let letters =
-        0..size
-            |> map(c => "{grid.cells[at(row, c)]}")
-            |> join("  ")
+        0..size |> map(c => "{grid.cells[at(row, c)]}") |> join("  ")
 
     write_line("{row}    {letters}")
 od
@@ -150,8 +128,7 @@ let solutions =
         |> collect()
 
 for row in 0..(solutions.count + 1) / 2 do
-    let pair =
-        solutions |> skip(row * 2) |> take(2) |> join("   ")
+    let pair = solutions |> skip(row * 2) |> take(2) |> join("   ")
 
     write_line(pair.trim_end())
 od

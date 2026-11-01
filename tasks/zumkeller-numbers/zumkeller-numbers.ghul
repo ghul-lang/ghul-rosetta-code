@@ -33,18 +33,11 @@ si
 
 column(n: int, width: int) -> string => "{n}".pad_left(width)
 
-show(
-    heading: string,
-    numbers: int{},
-    per_line: int,
-    width: int
-) is
+show(heading: string, numbers: int{}, per_line: int, width: int) is
     write_line(heading)
 
     for row in numbers |> chunk(per_line) do
-        write_line(
-            "    {row |> map(column(*, width)) |> join("")}"
-        )
+        write_line("    {row |> map(column(*, width)) |> join("")}")
     od
 
     write_line("")
@@ -61,9 +54,7 @@ show(
 
 show(
     "first 40 odd Zumkeller numbers:",
-    counting
-        |> filter(n => n % 2 == 1 /\ is_zumkeller(n))
-        |> take(40),
+    counting |> filter(n => n % 2 == 1 /\ is_zumkeller(n)) |> take(40),
     10,
     8
 )
@@ -71,9 +62,7 @@ show(
 show(
     "first 40 odd Zumkeller numbers not ending in five:",
     counting
-        |> filter(n =>
-            n % 2 == 1 /\ n % 5 != 0 /\ is_zumkeller(n)
-        )
+        |> filter(n => n % 2 == 1 /\ n % 5 != 0 /\ is_zumkeller(n))
         |> take(40),
     10,
     9

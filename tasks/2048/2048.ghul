@@ -41,9 +41,7 @@ lines_for(direction: char) -> List[int]{} => (
 
 collapse(values: List[int]) -> List[int] =>
     let
-        merged = merge_packed(
-            LIST[int](values |> filter(* != 0))
-        ),
+        merged = merge_packed(LIST[int](values |> filter(* != 0))),
         padded = merged ++ repeat(0, side - (merged |> count()))
     in
         padded |> collect()
@@ -60,9 +58,7 @@ slide(target: LIST[int], direction: char) -> bool => (
     let before = target |> collect()
 
     for line in lines_for(direction) do
-        let moved = collapse(
-            line |> map(at => target[at]) |> collect()
-        )
+        let moved = collapse(line |> map(at => target[at]) |> collect())
 
         for at in 0..side do
             target[line[at]] = moved[at]
@@ -73,8 +69,7 @@ slide(target: LIST[int], direction: char) -> bool => (
 )
 
 spawn() is
-    let empty =
-        0..squares |> filter(at => board[at] == 0) |> collect()
+    let empty = 0..squares |> filter(at => board[at] == 0) |> collect()
 
     if empty.count > 0 then
         board[empty[random.next(empty.count)]] =
@@ -94,9 +89,7 @@ show() is
     for row in 0..side do
         Std.write_line(
             board[row * side..row * side + side]
-                |> map(tile =>
-                    if tile == 0 then "    ." else "{tile,5}" fi
-                )
+                |> map(tile => if tile == 0 then "    ." else "{tile,5}" fi)
                 |> join("")
         )
     od

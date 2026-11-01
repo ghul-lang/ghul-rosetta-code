@@ -1,8 +1,7 @@
 use default
 
 in_order[T: Ghul.Comparable[T]](values: List[T]) -> bool =>
-    (0..values.count - 1)
-        |> all(i => values[i] <= values[i + 1])
+    (0..values.count - 1) |> all(i => values[i] <= values[i + 1])
 
 next_permutation[T: Ghul.Comparable[T]](values: LIST[T]) is
     let pivot mut = values.count - 2
@@ -28,10 +27,7 @@ next_permutation[T: Ghul.Comparable[T]](values: LIST[T]) is
     let high mut = values.count - 1
 
     while low < high do
-        (values[low], values[high]) = (
-            values[high],
-            values[low]
-        )
+        (values[low], values[high]) = (values[high], values[low])
 
         low = low + 1
         high = high - 1

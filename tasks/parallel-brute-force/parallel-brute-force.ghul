@@ -10,8 +10,7 @@ let hashes = [
     "74e1bb62f8dabb8125a58852b63bdf6eaef667cb56ac7f7cdba6d7305c50a22f"
 ]
 
-let targets =
-    hashes |> map(System.Convert.from_hex_string) |> collect()
+let targets = hashes |> map(System.Convert.from_hex_string) |> collect()
 
 let found = ConcurrentDictionary[int, string]()
 

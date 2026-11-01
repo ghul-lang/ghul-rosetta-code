@@ -37,6 +37,4 @@ let lines = [
     "    }}"
 ]
 
-write_line(
-    strip_block_comments(lines |> join("\n"), "/*", "*/")
-)
+write_line(strip_block_comments(lines |> join("\n"), "/*", "*/"))

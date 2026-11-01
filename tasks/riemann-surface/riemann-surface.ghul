@@ -4,15 +4,10 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC =>
-        VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(
-            y * o.z - z * o.y,
-            z * o.x - x * o.z,
-            x * o.y - y * o.x
-        )
+        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
 
     length: double => sqrt(x * x + y * y + z * z)
 si
@@ -83,8 +78,7 @@ image.stroke(0.4D)
 for p in patches do
     let light = brightness(p)
     let tint = COLOUR_MAP.hue(p.phase)
-    let outline =
-        p.corners |> map(c => (x = c.x, y = c.y)) |> collect()
+    let outline = p.corners |> map(c => (x = c.x, y = c.y)) |> collect()
 
     image.colour(
         ubyte(double(tint.red) * light),
@@ -96,15 +90,9 @@ for p in patches do
     image.line(outline ++ [outline[0]] |> collect())
 od
 
-write_line(
-    "the surface of w = sqrt(z), over two turns of the z plane"
-)
-write_line(
-    "height is the real part of w, and colour is its argument"
-)
-write_line(
-    "{patches.count} quadrilaterals, drawn farthest first"
-)
+write_line("the surface of w = sqrt(z), over two turns of the z plane")
+write_line("height is the real part of w, and colour is its argument")
+write_line("{patches.count} quadrilaterals, drawn farthest first")
 
 image.write("riemann.png")
 

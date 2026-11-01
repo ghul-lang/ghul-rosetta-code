@@ -22,8 +22,7 @@ let outline = [
 let root_colour = "#ffffe6"
 let palette = ["#ffebd2", "#f0fff0", "#e6ffff"]
 
-margin(line: string) -> int =>
-    line |> take_while(* == ' ') |> count()
+margin(line: string) -> int => line |> take_while(* == ' ') |> count()
 
 parse(lines: List[string]) -> NODE is
     let unit = lines |> map(margin) |> filter(* > 0) |> min()
@@ -72,12 +71,7 @@ width(node: NODE) -> int =>
         node.children |> sum_by(width)
     fi
 
-gather(
-    node: NODE,
-    level: int,
-    colour: string,
-    rows: List[LIST[CELL]]
-) is
+gather(node: NODE, level: int, colour: string, rows: List[LIST[CELL]]) is
     rows[level].add(
         (text = node.text, width = width(node), colour = colour)
     )
@@ -103,9 +97,7 @@ let rows = 0::bottom |> map(_ => LIST()) |> collect()
 
 gather(tree, 0, root_colour, rows)
 
-write_line(
-    "{{| class=\"wikitable\" style=\"text-align: center;\""
-)
+write_line("{{| class=\"wikitable\" style=\"text-align: center;\"")
 
 for row in rows do
     write_line("|-")

@@ -9,8 +9,7 @@ use Point = (x: double, y: double, z: double)
 let size = 180
 let frames = 40
 
-dot(a: Point, b: Point) -> double =>
-    a.x * b.x + a.y * b.y + a.z * b.z
+dot(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
 
 scale(p: Point, k: double) -> Point => (
     x = p.x * k,
@@ -18,14 +17,8 @@ scale(p: Point, k: double) -> Point => (
     z = p.z * k
 )
 
-let up = scale(
-    (x = 1.0D, y = 1.0D, z = 1.0D),
-    1.0D / sqrt(3.0D)
-)
-let across = scale(
-    (x = 1.0D, y = -1.0D, z = 0.0D),
-    1.0D / sqrt(2.0D)
-)
+let up = scale((x = 1.0D, y = 1.0D, z = 1.0D), 1.0D / sqrt(3.0D))
+let across = scale((x = 1.0D, y = -1.0D, z = 0.0D), 1.0D / sqrt(2.0D))
 let toward = (
     x = up.y * across.z - up.z * across.y,
     y = up.z * across.x - up.x * across.z,
@@ -50,10 +43,7 @@ let faces = [
     (corners = [4, 5, 7, 6], normal = (x = 0.0D, y = 0.0D, z = 1.0D))
 ]
 
-let light = scale(
-    (x = -0.5D, y = 0.8D, z = 0.4D),
-    1.0D / sqrt(1.05D)
-)
+let light = scale((x = -0.5D, y = 0.8D, z = 0.4D), 1.0D / sqrt(1.05D))
 
 turned(p: Point, angle: double) -> Point =>
     let
@@ -82,8 +72,7 @@ draw(image: IMAGE, angle: double) is
                     |> map(p => (x = p.x, y = p.y))
                     |> collect()
 
-            let bright =
-                0.3D + 0.7D * max(0.0D, dot(normal, light))
+            let bright = 0.3D + 0.7D * max(0.0D, dot(normal, light))
 
             shapes.add(
                 outline,
@@ -120,12 +109,8 @@ for frame in 0..frames do
     animation.add(image, 50)
 od
 
-write_line(
-    "{frames} frames, a third of a turn: the cube looks the same"
-)
-write_line(
-    "again after 120 degrees about its vertical diagonal"
-)
+write_line("{frames} frames, a third of a turn: the cube looks the same")
+write_line("again after 120 degrees about its vertical diagonal")
 
 animation.write("cube.png")
 

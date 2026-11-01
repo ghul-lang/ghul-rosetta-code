@@ -23,16 +23,12 @@ class SQUARE(side: double private): Polygon is
     area() -> double => _side * _side
 si
 
-class TRIANGLE(
-    base: double private,
-    height: double private
-): Polygon is
+class TRIANGLE(base: double private, height: double private): Polygon is
     super(3)
 
     area() -> double => _base * _height / 2.0D
 
-    describe() -> string =>
-        "{super.describe()}, and it is a triangle"
+    describe() -> string => "{super.describe()}, and it is a triangle"
 si
 
 let shapes: Shape[] = [SQUARE(3.0D), TRIANGLE(4.0D, 5.0D)]

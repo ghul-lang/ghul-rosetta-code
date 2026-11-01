@@ -12,8 +12,7 @@ class BITMAP is
         self.width = width
         self.height = height
 
-        bytes =
-            repeat(0ub, width * height * 3) |> collect_mutable()
+        bytes = repeat(0ub, width * height * 3) |> collect_mutable()
     si
 
     set_pixel(x: int, y: int, colour: COLOUR) is

@@ -24,10 +24,10 @@ airport(line: string) -> Airport =>
     let f = fields(line) in
     (f[1], f[3], f[5], (double.parse(f[6]), double.parse(f[7])))
 
-distance_and_bearing(
-    from: (double, double),
-    to: (double, double)
-) -> (distance: double, bearing: double) => (
+distance_and_bearing(from: (double, double), to: (double, double)) -> (
+    distance: double,
+    bearing: double
+) => (
     let (phi1, lambda1) = from,
         (phi2, lambda2) = to,
         p1 = degrees_to_radians(phi1),
@@ -39,17 +39,13 @@ distance_and_bearing(
         sin(dp / 2.0) * sin(dp / 2.0) +
         cos(p1) * cos(p2) * sin(dl / 2.0) * sin(dl / 2.0)
 
-    let c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a)),
-        y = sin(dl) * cos(p2)
+    let c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a)), y = sin(dl) * cos(p2)
 
     let x = cos(p1) * sin(p2) - sin(p1) * cos(p2) * cos(dl)
 
     let angle = radians_to_degrees(atan2(y, x))
 
-    (
-        earth_radius * c,
-        if angle < 0.0 then angle + 360.0 else angle fi
-    )
+    (earth_radius * c, if angle < 0.0 then angle + 360.0 else angle fi)
 )
 
 let plane = (51.514669, 2.198581)
