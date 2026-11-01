@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use POINT = (x: double, y: double)
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T[]` is the read-only list trait - elements can be read by index
 
 midpoint(a: POINT, b: POINT) -> POINT => (
     x = (a.x + b.x) / 2.0,

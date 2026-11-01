@@ -7,6 +7,11 @@ use System.Net.Sockets.TcpListener
 use System.Threading.Monitor
 use System.Threading.Thread
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `=~` compares values (structural equality); `==` compares identity.
 // `*` as an argument leaves that parameter open: partial application.

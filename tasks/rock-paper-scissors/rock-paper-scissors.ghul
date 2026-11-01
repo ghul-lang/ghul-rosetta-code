@@ -2,9 +2,9 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `=~` compares values (structural equality); `==` compares identity.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `case ... when` pattern-matches
+// `=~` compares values (structural equality) - `==` compares identity
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 union Move is
     ROCK

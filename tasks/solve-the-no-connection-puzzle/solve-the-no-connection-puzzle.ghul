@@ -1,9 +1,9 @@
 use default
 use System.Math
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T[]` is the read-only list trait - elements can be read by index
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let connections = [
     (from = 0, to = 2), (from = 0, to = 3), (from = 0, to = 4),

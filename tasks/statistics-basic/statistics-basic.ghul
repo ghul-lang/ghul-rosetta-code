@@ -2,6 +2,11 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `LIST()` builds a collection eagerly
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
 // `T{}` is a lazy sequence of `T`, read by iterating it.

@@ -1,6 +1,6 @@
 use default
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T[]` is the read-only list trait - elements can be read by index
 
 // The top row holds the eight most frequent letters, leaving two blank
 // columns whose digits prefix the letters in the two rows below. '/' is

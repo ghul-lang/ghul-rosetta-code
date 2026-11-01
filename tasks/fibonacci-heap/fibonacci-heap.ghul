@@ -1,8 +1,9 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` pattern-matches
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 class NODE(key: int public, value: string public) is
     left: NODE public

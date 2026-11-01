@@ -1,6 +1,6 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
 let printer = if let [printer, ..] = args then printer else "/dev/lp0" fi
 

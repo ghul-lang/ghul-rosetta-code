@@ -1,5 +1,10 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `if let` pattern-matches
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `*` as an argument leaves that parameter open: partial application.
 // `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.

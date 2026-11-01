@@ -1,8 +1,10 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `case ... when` pattern-matches
 
 coefficients(p: int) -> long{} is
     let binomial mut = 1L

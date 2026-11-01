@@ -2,9 +2,10 @@ use default
 
 use Employee = (name: string, id: string, salary: int, department: string)
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is the read-only list trait - elements can be read by index
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let staff: Employee[] = [
     ("Tyler Bennett", "E10297", 32000, "D101"),

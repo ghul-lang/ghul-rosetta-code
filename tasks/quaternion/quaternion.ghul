@@ -1,7 +1,7 @@
 use default
 use System.Math
 
-// `=~` compares values (structural equality); `==` compares identity.
+// `=~` compares values (structural equality) - `==` compares identity
 
 struct QUATERNION(a: double, b: double, c: double, d: double) is
     norm: double => Math.sqrt(a * a + b * b + c * c + d * d)

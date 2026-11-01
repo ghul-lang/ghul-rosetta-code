@@ -1,6 +1,11 @@
 use default
 use IO.Std.read_line
 
+// `=~` compares values (structural equality) - `==` compares identity
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+
 // `~>` skips the call if its left value is absent; `??` gives a fallback.
 // `=~` compares values (structural equality); `==` compares identity.
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.

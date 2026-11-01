@@ -1,7 +1,7 @@
 use default
 
-// `=~` compares values (structural equality); `==` compares identity.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` pattern-matches
 
 let multipliers = [
     1, 3, 5, 7, 11, 3 * 5, 3 * 7, 3 * 11, 5 * 7, 5 * 11, 7 * 11,

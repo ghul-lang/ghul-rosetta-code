@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 let low mut = 1
 let high mut = 100

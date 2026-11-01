@@ -2,6 +2,8 @@ use default
 use System.DateTime
 use System.Net.Http.HttpClient
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 
 // The task: fetch the last ten days of the Tcl chatroom's logs and print

@@ -3,6 +3,9 @@ use IO.Std.read_line
 use System.Random
 use System.Math.*
 
+// `if let` and `case ... when` pattern-match
+// `=~` compares values (structural equality) - `==` compares identity
+
 // `~>` skips the call if its left value is absent; `??` gives a fallback.
 // `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
 // `=~` compares values (structural equality); `==` compares identity.

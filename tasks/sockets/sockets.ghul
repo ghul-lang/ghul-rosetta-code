@@ -5,7 +5,7 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Thread
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 listen_on(port: int) -> TcpListener? is
     let listener = TcpListener(IPAddress.loopback, port)

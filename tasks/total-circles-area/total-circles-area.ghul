@@ -5,9 +5,9 @@ use System.Math.*
 use Circle = (x: double, y: double, r: double)
 use Arc = (circle: Circle, from: double, to: double)
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `=~` compares values (structural equality); `==` compares identity.
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
 
 let circles: Circle[] = [
     (1.6417233788D, 1.6121789534D, 0.0848270516D),

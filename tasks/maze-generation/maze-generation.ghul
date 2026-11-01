@@ -1,7 +1,8 @@
 use default
 use Raster.IMAGE
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
 
 let columns = 24
 let rows = 16

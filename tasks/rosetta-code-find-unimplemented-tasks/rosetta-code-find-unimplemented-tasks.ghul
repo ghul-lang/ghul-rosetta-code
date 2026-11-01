@@ -3,6 +3,10 @@ use System.Net.Http.HttpClient
 use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 // `~>` skips the call if its left value is absent; `??` gives a fallback.
 // `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.

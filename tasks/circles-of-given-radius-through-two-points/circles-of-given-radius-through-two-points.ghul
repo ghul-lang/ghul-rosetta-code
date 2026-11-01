@@ -2,7 +2,7 @@ use default
 use Raster.IMAGE
 use System.Math
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` and `case ... when` pattern-match
 
 struct P(x: double, y: double) is
     +(o: P) -> P => P(x + o.x, y + o.y)

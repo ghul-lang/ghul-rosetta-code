@@ -1,6 +1,6 @@
 use IO.Std.write_line
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 union Maybe[T] is
     JUST(value: T)

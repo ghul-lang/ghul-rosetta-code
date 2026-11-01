@@ -1,8 +1,8 @@
 use default
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `=~` compares values (structural equality); `==` compares identity.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T[]` is the read-only list trait - elements can be read by index
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+// `=~` compares values (structural equality) - `==` compares identity
 
 search[T: Ghul.Comparable[T]](values: T[], sought: T) -> int? is
     let low mut = 0

@@ -1,9 +1,10 @@
 use default
 use Collections
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
 
 suffixes(words: string[], size: int) -> (
     by_prefix: MAP[string, LIST[string]],

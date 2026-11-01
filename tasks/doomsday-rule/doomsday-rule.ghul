@@ -1,6 +1,6 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 let day_names = [
     "Sunday", "Monday", "Tuesday", "Wednesday",

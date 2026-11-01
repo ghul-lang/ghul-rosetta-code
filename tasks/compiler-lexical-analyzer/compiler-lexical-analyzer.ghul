@@ -2,9 +2,11 @@ use default
 
 use Token = (line: int, column: int, name: string, value: string)
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `case ... when` pattern-matches
 
 class LEXER is
     _source: string

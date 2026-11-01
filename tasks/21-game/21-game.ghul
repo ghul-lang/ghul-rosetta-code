@@ -1,9 +1,9 @@
 use default
 use IO.Std
 
-// `=~` compares values (structural equality); `==` compares identity.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `=~` compares values (structural equality) - `==` compares identity
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
 
 let target = 21
 

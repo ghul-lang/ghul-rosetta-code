@@ -4,9 +4,10 @@ use System.Numerics.BitOperations
 
 use Partition = (a: long, b: long, free: long)
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `=~` compares values (structural equality); `==` compares identity.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
 
 set_bits(mask: long) -> long{} =>
     0..64 |> map(1L << *) |> filter(bit => mask & bit != 0L)

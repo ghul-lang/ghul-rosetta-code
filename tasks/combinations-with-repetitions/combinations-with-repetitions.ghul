@@ -1,8 +1,10 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
 
 combos[T](items: T[], k: int) -> T[]{} is
     if k == 0 then

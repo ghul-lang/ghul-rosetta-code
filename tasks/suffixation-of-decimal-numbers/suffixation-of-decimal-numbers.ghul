@@ -1,7 +1,7 @@
 use default
 use System.Globalization.CultureInfo
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 let suffixes = [
     "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"

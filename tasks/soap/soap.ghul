@@ -4,6 +4,9 @@ use System.Net.Http.StringContent
 use System.Text.Encoding
 use System.Xml.Linq.XDocument
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `=~` compares values (structural equality); `==` compares identity.
 // `~>` skips the call if its left value is absent; `??` gives a fallback.

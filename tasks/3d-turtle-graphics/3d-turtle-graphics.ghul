@@ -2,8 +2,8 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 struct V3(x: double, y: double, z: double) is
     +(o: V3) -> V3 => V3(x + o.x, y + o.y, z + o.z)

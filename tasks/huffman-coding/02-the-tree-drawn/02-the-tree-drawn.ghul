@@ -4,6 +4,10 @@ use Raster.IMAGE
 
 use SPOT = (x: double, y: double)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `T[]` is the read-only list trait - elements can be read by index
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
 // `list()` makes a lazy `T[]`: elements are produced once, on first access.

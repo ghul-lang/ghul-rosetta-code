@@ -2,9 +2,11 @@ use default
 
 use Record = (name: string, sequence: string)
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `if let` pattern-matches
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
 
 records(lines: string{}) -> Record{} is
     let name mut = null

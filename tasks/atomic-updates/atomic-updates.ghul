@@ -1,5 +1,5 @@
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 // The scheduler is cooperative and only changes coroutine at an await,
 // so a method with no await in it runs to completion undisturbed.

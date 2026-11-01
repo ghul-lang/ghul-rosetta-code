@@ -4,9 +4,9 @@ use Matrix = double?[][]
 
 use Edge = (from: int, to: int, weight: double)
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T[]` is the read-only list trait - elements can be read by index
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 weighted(size: int, edges: Edge[]) -> Matrix is
     let graph = LIST()

@@ -1,6 +1,6 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 for i in 1::100 do
     write_line(

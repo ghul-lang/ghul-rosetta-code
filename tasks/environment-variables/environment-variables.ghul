@@ -1,7 +1,7 @@
 use default
 use System.Environment
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 Environment.set_environment_variable("ROSETTA_GREETING", "hello")
 

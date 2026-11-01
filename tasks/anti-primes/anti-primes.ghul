@@ -1,8 +1,10 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 anti_primes() -> int{} is
     let most mut = 0

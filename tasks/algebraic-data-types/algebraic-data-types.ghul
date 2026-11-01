@@ -1,5 +1,5 @@
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `case ... when` pattern-matches
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 enum Color is
     RED,

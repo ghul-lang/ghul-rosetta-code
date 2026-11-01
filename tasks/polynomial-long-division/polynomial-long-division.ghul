@@ -3,9 +3,10 @@ use System.Math
 
 use DIVISION = (quotient: double[], remainder: double[])
 
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `T[]` is the read-only list trait - elements can be read by index
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 degree(poly: double[]) -> int =>
     let highest =

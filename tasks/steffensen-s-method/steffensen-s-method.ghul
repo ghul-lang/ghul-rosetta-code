@@ -1,7 +1,7 @@
 use default
 use System.Math.*
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 aitken(f: double -> double, p0: double) -> double =>
     let

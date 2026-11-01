@@ -1,7 +1,8 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `if let` and `case ... when` pattern-match
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
 
 union Step(across: int, down: int, name: string) is
     NORTH

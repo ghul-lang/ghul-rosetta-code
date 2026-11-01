@@ -2,8 +2,7 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `case ... when` pattern-matches
 
 run(program: string, input: string) -> string is
     let cells = LIST()

@@ -1,8 +1,10 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
 
 choose(m: int, n: int, from: int, chosen: int[]) -> int[]{} is
     if chosen.count == m then

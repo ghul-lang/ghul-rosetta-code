@@ -3,9 +3,11 @@ use System.Math.*
 
 use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
 
-// `=~` compares values (structural equality); `==` compares identity.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `=~` compares values (structural equality) - `==` compares identity
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
 
 -(u: Row, v: Row) -> Row => (
     u.p12 - v.p12,

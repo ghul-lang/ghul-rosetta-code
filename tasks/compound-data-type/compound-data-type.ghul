@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality); `==` compares identity.
+// `=~` compares values (structural equality) - `==` compares identity
 
 // A struct is a value type, so a copy is a separate point.
 struct POINT(x: int, y: int)

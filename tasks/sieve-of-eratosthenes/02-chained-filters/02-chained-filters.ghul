@@ -3,7 +3,7 @@ use Ghul.Coroutines
 
 use Numbers = CHANNEL[int?]
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 let limit = 100
 

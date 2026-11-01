@@ -1,8 +1,8 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let english = [
     0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228, 0.02015,

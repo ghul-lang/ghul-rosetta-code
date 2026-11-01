@@ -9,6 +9,10 @@ use System.Text.Json.JsonElement
 use System.Text.Json.JsonSerializer
 use System.Text.Json.JsonSerializerOptions
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `~>` skips the call if its left value is absent; `??` gives a fallback.
 // `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.

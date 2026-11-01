@@ -1,8 +1,10 @@
 use default
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
 
 // every way to place the blocks, leftmost first, each separated by at
 // least one empty cell; yields the start position of each block

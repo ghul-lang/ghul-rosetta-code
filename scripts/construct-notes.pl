@@ -1,8 +1,8 @@
 #!/usr/bin/perl
-# Keep each solution's construct notes current: up to three one-line comments
-# after the `use` lines, one per ghūl construct the solution uses that a
-# reader coming from another language may not know, in the order the
-# constructs first appear. The notes come from the table below and nowhere
+# Keep each solution's construct notes current: a comment block after the
+# `use` lines with one note for each ghūl construct the solution uses that a
+# reader from another language may not know, at most three, in the order the
+# constructs first appear. The wording comes from the table below and nowhere
 # else, so every solution says the same thing the same way. See AGENTS.md.
 #
 #   scripts/construct-notes.pl --check [file...]   list sources whose notes differ
@@ -13,20 +13,54 @@
 # and tasks/<slug>/<part>/<part>.ghul, less the ones a format-exempt file names.
 use strict; use warnings;
 
-my @NOTES = (
-    [qr/[A-Za-z_\]\)]\{\}/,                          '`T{}` is a lazy sequence of `T`, read by iterating it.'],
-    [qr/[A-Za-z_\]\)\?]\[\]/,                        '`T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.'],
-    [qr/\|>/,                                        '`x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.'],
-    [qr/[(,]\s*\*(?:\s*[,)]|\s+[-+*\/%<>=!&|~]|\s*\.\w)/, '`*` as an argument leaves that parameter open: partial application.'],
-    [qr/=~|!~/,                                      '`=~` compares values (structural equality); `==` compares identity.'],
-    [qr/\bif let\b|\bwhen\b/,                        '`if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.'],
-    [qr/(?:\|>\s*|^\s*)list\(\)/,                    '`list()` makes a lazy `T[]`: elements are produced once, on first access.'],
-    [qr/(?:\|>\s*|^\s*)(?:LIST|SET|MAP|ARRAY)\(\)/,  '`LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.'],
-    [qr/~>|\?\?/,                                    '`~>` skips the call if its left value is absent; `??` gives a fallback.'],
-    [qr/\byield\b/,                                  '`yield` makes the function a generator: it returns a lazy `T{}`.'],
-);
-my %IS_NOTE = map { ("// $_->[1]" => 1) } @NOTES;
+my $WIDTH = 76;
 my $LIMIT = 3;
+
+# Each construct: a name, the patterns that detect it (on code with comments
+# and string literals removed), and the note - text, or a sub that builds the
+# text from which of the patterns matched.
+my @CONSTRUCTS = (
+    { name => 'sequence', patterns => [qr/[A-Za-z_\]\)]\{\}/],
+      note => '`T{}` is the lazy sequence trait - elements are read on demand and in order from its source' },
+    { name => 'list', patterns => [qr/[A-Za-z_\]\)\?]\[\]/],
+      note => '`T[]` is the read-only list trait - elements can be read by index' },
+    { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
+      note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read, and `count` reads it all' },
+    { name => 'thread-first', patterns => [qr/\|>/, qr/~>/],
+      note => '`|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`' },
+    { name => 'absent-coalescing', patterns => [qr/~>/],
+      note => '`~>` is the absent-coalescing thread-first operator - it skips the call when the left value is absent, and the result is then absent too' },
+    { name => 'partial', patterns => [qr/[(,]\s*\*(?:\s*[,)]|\s+[-+*\/%<>=!&|~]|\s*\.\w)/],
+      note => '`*` as an argument is partial application - `f(*, b)` means `a => f(a, b)`' },
+    { name => 'equality', patterns => [qr/=~|!~/],
+      note => '`=~` compares values (structural equality) - `==` compares identity' },
+    { name => 'patterns', patterns => [qr/\bif let\b/, qr/\bwhen\b/, qr/\[\s*(?:\]|\w+\s*,\s*\.\.|\.\.)/],
+      note => sub {
+          my ($hit) = @_;
+          my @subjects = grep { $hit->[$_] } (0, 1);
+          return undef unless @subjects;
+          my $subject = join ' and ', map { ('`if let`', '`case ... when`')[$_] } @subjects;
+          my $text = $subject . (@subjects == 1 ? ' pattern-matches' : ' pattern-match');
+          $text .= ', and `[x, ..rest]` matches a list head and tail' if $hit->[2];
+          return $text;
+      } },
+    { name => 'constructors', patterns => [map { my $n = $_; qr/(?:\|>\s*|^\s*)$n\(\)/ } qw(LIST SET MAP ARRAY)],
+      note => sub {
+          my ($hit, $first) = @_;
+          my @present = sort { $first->[$a] <=> $first->[$b] } grep { $hit->[$_] } 0 .. 3;
+          return undef unless @present;
+          my @names = map { '`' . (qw(LIST SET MAP ARRAY))[$_] . '()`' } @present;
+          my $list = @names == 1 ? $names[0] : join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
+          return $list . (@names == 1 ? ' builds' : ' build') . ' a collection eagerly';
+      } },
+    { name => 'yield', patterns => [qr/\byield\b/],
+      note => '`yield` in a function makes it a generator, returning a lazy `T{}` sequence' },
+);
+
+# A block is recognised by its first line: the start of any note.
+my @OPENERS = ('// `T{}` is', '// `T[]` is', '// `list()` returns', '// `|>` is', '// `~>` is',
+               '// `*` as an', '// `=~` compares', '// `if let`', '// `case ... when`',
+               '// `LIST()`', '// `SET()`', '// `MAP()`', '// `ARRAY()`', '// `yield` in');
 
 my $mode = shift @ARGV // '--check';
 my @files = @ARGV ? @ARGV : default_files();
@@ -38,9 +72,8 @@ for my $file (@files) {
     chomp @lines;
     my @wanted = wanted_notes(\@lines);
     my @rewritten = with_notes(\@lines, \@wanted);
-    my $same = join("\n", @lines) eq join("\n", @rewritten);
     if ($mode eq '--count') { printf "%d\t%s\n", scalar @wanted, $file; next; }
-    next if $same;
+    next if join("\n", @lines) eq join("\n", @rewritten);
     $differ++;
     if ($mode eq '--fix') {
         open my $out, '>', $file or die "$file: $!";
@@ -69,21 +102,56 @@ sub default_files {
     return sort @all;
 }
 
-# The notes a source wants, in order of first appearance, at most $LIMIT.
+# The note lines a source wants: at most $LIMIT notes, each wrapped to $WIDTH,
+# in order of the construct's first appearance.
 sub wanted_notes {
     my ($lines) = @_;
-    my %first;
+    my @first;   # per construct: per pattern, the first line it matched
     my $n = 0;
     for my $raw (@$lines) {
         $n++;
         my $code = strip($raw);
-        for my $i (0 .. $#NOTES) {
-            next if exists $first{$i};
-            $first{$i} = $n if $code =~ $NOTES[$i][0];
+        for my $c (0 .. $#CONSTRUCTS) {
+            my $patterns = $CONSTRUCTS[$c]{patterns};
+            for my $p (0 .. $#$patterns) {
+                next if defined $first[$c][$p];
+                $first[$c][$p] = $n if $code =~ $patterns->[$p];
+            }
         }
     }
-    my @order = sort { $first{$a} <=> $first{$b} || $a <=> $b } keys %first;
-    return map { "// $NOTES[$_][1]" } @order[0 .. ($#order < $LIMIT - 1 ? $#order : $LIMIT - 1)];
+    my @notes;
+    for my $c (0 .. $#CONSTRUCTS) {
+        my $patterns = $CONSTRUCTS[$c]{patterns};
+        my @hit = map { defined $first[$c][$_] ? 1 : 0 } 0 .. $#$patterns;
+        my @lines_hit = grep { defined } @{ $first[$c] || [] };
+        next unless @lines_hit;
+        my $at = (sort { $a <=> $b } @lines_hit)[0];
+        my $note = $CONSTRUCTS[$c]{note};
+        my $text = ref $note ? $note->(\@hit, $first[$c]) : $note;
+        next unless defined $text;
+        push @notes, [$at, $c, $text];
+    }
+    @notes = sort { $a->[0] <=> $b->[0] || $a->[1] <=> $b->[1] } @notes;
+    splice @notes, $LIMIT if @notes > $LIMIT;
+    return map { wrap($_->[2]) } @notes;
+}
+
+# One note as comment lines no wider than $WIDTH. A backtick span is never
+# broken across lines.
+sub wrap {
+    my ($text) = @_;
+    my @out;
+    my $line = '//';
+    my @words = $text =~ /`[^`]*`[^\s`]*|[^\s`]+/g;
+    for my $word (@words) {
+        if (length("$line $word") > $WIDTH && $line ne '//') {
+            push @out, $line;
+            $line = '//';
+        }
+        $line .= " $word";
+    }
+    push @out, $line;
+    return @out;
 }
 
 # Code only: no comment, no string or character literal contents.
@@ -96,13 +164,13 @@ sub strip {
     return $s;
 }
 
-# The source with its note block replaced: the block sits after the leading
-# `use` lines and the blank line that follows them, and before everything else.
+# The source with its note block replaced. The block sits after the head -
+# a shebang line, if any, and the leading `use` lines, a multi-line `use`
+# alias included - and before everything else; an existing block is the run
+# of comment lines there that opens with a note.
 sub with_notes {
     my ($lines, $wanted) = @_;
     my @src = @$lines;
-    # The head is a shebang line, if any, and the leading `use` lines, a
-    # multi-line `use` alias included (its brackets close before it ends).
     my $i = 0;
     my $depth = 0;
     while ($i < @src) {
@@ -118,8 +186,8 @@ sub with_notes {
     pop @head while @head && $head[-1] =~ /^\s*$/;
     my @rest = @src[$i .. $#src];
     shift @rest while @rest && $rest[0] =~ /^\s*$/;
-    if (@rest && $IS_NOTE{$rest[0]}) {
-        shift @rest while @rest && $IS_NOTE{$rest[0]};
+    if (@rest && grep { index($rest[0], $_) == 0 } @OPENERS) {
+        shift @rest while @rest && $rest[0] =~ m{^//};
         shift @rest while @rest && $rest[0] =~ /^\s*$/;
     }
     my @out = @head;

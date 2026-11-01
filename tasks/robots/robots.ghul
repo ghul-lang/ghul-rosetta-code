@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Math.*
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `ARRAY()` builds a collection eagerly
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `=~` compares values (structural equality); `==` compares identity.
 // `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.

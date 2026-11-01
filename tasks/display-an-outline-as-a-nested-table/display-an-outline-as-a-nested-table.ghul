@@ -2,6 +2,11 @@ use default
 
 use CELL = (text: string, width: int, colour: string)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `T[]` is the read-only list trait - elements can be read by index
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `*` as an argument leaves that parameter open: partial application.
 // `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.

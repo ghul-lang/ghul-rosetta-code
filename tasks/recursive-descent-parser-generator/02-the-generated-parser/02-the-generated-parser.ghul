@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality) - `==` compares identity
+
 // `~>` skips the call if its left value is absent; `??` gives a fallback.
 // `=~` compares values (structural equality); `==` compares identity.
 

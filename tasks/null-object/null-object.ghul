@@ -1,6 +1,6 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 is_null(text: string?) -> bool => !text?
 

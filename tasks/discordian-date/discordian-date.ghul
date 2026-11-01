@@ -2,7 +2,7 @@ use default
 
 use System.DateTime
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 let seasons = [
     "Chaos", "Discord", "Confusion", "Bureaucracy",

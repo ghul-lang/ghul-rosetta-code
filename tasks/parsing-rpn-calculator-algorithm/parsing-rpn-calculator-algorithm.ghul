@@ -1,7 +1,7 @@
 use default
 use System.Math
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 apply(operator: string, left: double, right: double) -> double =>
     case operator

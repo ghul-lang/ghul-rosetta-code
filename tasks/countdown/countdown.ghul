@@ -6,9 +6,11 @@ use Found = (value: int, steps: LIST[string])
 
 use Move = (value: int, step: string)
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `T[]` is the read-only list trait - elements can be read by index
 
 move(a: int, operator: string, b: int, value: int) -> Move => (
     value = value,

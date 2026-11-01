@@ -2,9 +2,10 @@ use default
 
 use IO.Path
 
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 // directive: #include "path", relative to the including file
 // includes nest to any depth; an include cycle is an error

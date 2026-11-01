@@ -2,7 +2,7 @@ use default
 use Raster.IMAGE
 use Point = (x: double, y: double)
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 -(a: Point, b: Point) -> Point => (x = a.x - b.x, y = a.y - b.y)
 +(a: Point, b: Point) -> Point => (x = a.x + b.x, y = a.y + b.y)

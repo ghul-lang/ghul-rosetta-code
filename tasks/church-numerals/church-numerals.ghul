@@ -1,7 +1,8 @@
 use default
 use Church[T] = ((T) -> T) -> (T) -> T
 
-// `*` as an argument leaves that parameter open: partial application.
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
 
 zero[T](f: (T) -> T) -> (T) -> T => x => x
 

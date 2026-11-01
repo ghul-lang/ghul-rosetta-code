@@ -1,7 +1,7 @@
 use default
 use IO.Std.write
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `case ... when` pattern-matches
 
 name(code: int) -> string =>
     case code

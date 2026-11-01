@@ -1,7 +1,7 @@
 use default
 
-// `=~` compares values (structural equality); `==` compares identity.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` pattern-matches
 
 legendre(a: bigint, p: bigint) -> bigint =>
     bigint.mod_pow(a, (p - 1n) / 2n, p)

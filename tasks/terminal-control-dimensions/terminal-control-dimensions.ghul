@@ -1,6 +1,6 @@
 use default
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` pattern-matches
 
 dimensions() -> (width: int, height: int)? =>
     if IO.Std.is_output_redirected then

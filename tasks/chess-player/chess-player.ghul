@@ -4,6 +4,12 @@ use System.Math.*
 
 use Move = (from: int, to: int, promotion: char)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `T{}` is a lazy sequence of `T`, read by iterating it.
 // `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.

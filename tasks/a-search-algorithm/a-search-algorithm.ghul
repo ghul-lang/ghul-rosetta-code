@@ -6,6 +6,12 @@ use System.Math.*
 use Math = System.Math
 use Square = (row: int, column: int)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `T{}` is a lazy sequence of `T`, read by iterating it.
 // `yield` makes the function a generator: it returns a lazy `T{}`.

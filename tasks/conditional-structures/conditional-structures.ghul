@@ -2,7 +2,7 @@ use default
 use Suit.HEARTS
 use Suit.SPADES
 
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `if let` and `case ... when` pattern-match
 
 enum Suit is
     HEARTS,

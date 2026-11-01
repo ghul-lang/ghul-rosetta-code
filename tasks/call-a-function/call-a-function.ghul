@@ -1,6 +1,7 @@
 use default
 
-// `*` as an argument leaves that parameter open: partial application.
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
 
 greeting() -> string => "no arguments"
 

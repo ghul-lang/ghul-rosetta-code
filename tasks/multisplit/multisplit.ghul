@@ -2,9 +2,10 @@ use default
 
 use PIECE = (text: string, separator: string, at: int)
 
-// `=~` compares values (structural equality); `==` compares identity.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `=~` compares values (structural equality) - `==` compares identity
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
 
 starts_with(text: string, position: int, separator: string) -> bool =>
     position + separator.length <= text.length /\
