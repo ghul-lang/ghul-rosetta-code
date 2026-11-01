@@ -4,17 +4,16 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [ main ]
-  merge_group:
 
-# There is no run on a push to main. The merge queue tests the pull request
-# merged with main and main is fast-forwarded to the commit it tested, so a
-# run afterwards tests that same tree a second time.
+# There is no run on a push to main: a pull request's run tests it merged
+# with main, and the merge is squashed onto what it tested. Two pull
+# requests that break each other show up as a red main on the next one.
 
 jobs:
   # What a pull request has to run. A change confined to task directories
   # needs only those tasks; anything else - a package version, the root
   # project, a script, the workflow - can reach every task, so it runs the
-  # lot. A queue group is judged the same way, on everything it changes.
+  # lot.
   #
   # The test is "outside tasks/" rather than a list of shared paths, so a
   # shared input added later is covered without this job being taught about
@@ -40,17 +39,16 @@ jobs:
     - id: pick
       env:
         EVENT: ${{ github.event_name }}
-        BASE: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-        HEAD: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
+        BASE: ${{ github.event.pull_request.base.sha }}
+        HEAD: ${{ github.event.pull_request.head.sha }}
       run: |
         set -euo pipefail
 
         CHANGED=$(git diff --name-only "$BASE" "$HEAD")
         echo "changed:"; echo "$CHANGED" | sed 's/^/  /'
 
-        # The decision is the base commit's copy of scripts/tasks-to-test.sh,
-        # for a pull request and a queue group alike: the one in the change
-        # could be part of what it is judging. A base without it runs the
+        # The decision is the base commit's copy of scripts/tasks-to-test.sh:
+        # the one in the change could be part of what it is judging. A base without it runs the
         # whole suite.
         DECIDE=$(mktemp -d)
 

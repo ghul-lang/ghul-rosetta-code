@@ -7,7 +7,7 @@
 #
 #   git diff --name-only BASE HEAD | scripts/tasks-to-test.sh
 #
-# ci.yml asks here for a pull request and for a merge queue group alike.
+# ci.yml asks here for every pull request.
 # A path ledger-only.sh accepts - a ledger entry, or a task.json - records a
 # task's state and runs nothing, so it names no task to run; asking that
 # script rather than repeating its pattern keeps the two answers the same.
