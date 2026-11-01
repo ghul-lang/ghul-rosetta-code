@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 cocktail_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     let swapped mut = true
 

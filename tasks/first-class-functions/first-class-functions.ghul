@@ -2,6 +2,8 @@ use Ghul
 use default
 use System.Math.*
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let cube = x => x * x * x
 let cube_root = x => cbrt(x)
 

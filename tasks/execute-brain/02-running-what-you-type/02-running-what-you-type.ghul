@@ -2,6 +2,9 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
+// `==` compares identity
+// `case ... when` pattern-matches
+
 run(program: string, input: string) -> string is
     let cells = LIST()
 
@@ -61,6 +64,7 @@ run(program: string, input: string) -> string is
             if cells[cell] != 0 then
                 at = matching_bracket[at]
             fi
+        else
         esac
 
         at = at + 1

@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let ordinals = [
     "first", "second", "third", "fourth", "fifth", "sixth",
     "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"

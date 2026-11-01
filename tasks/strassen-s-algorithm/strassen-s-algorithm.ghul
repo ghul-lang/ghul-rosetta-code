@@ -2,6 +2,10 @@ use default
 
 use Matrix = double[][]
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 zeros(n: int) -> Matrix =>
     0..n |> map(_ => repeat(0.0, n) |> collect()) |> collect()
 

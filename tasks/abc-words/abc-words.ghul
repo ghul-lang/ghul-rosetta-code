@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 is_abc_word(word: string) -> bool =>
     let
         a = word.index_of('a'),

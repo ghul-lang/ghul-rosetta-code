@@ -1,6 +1,10 @@
 use default
 use Church[T] = ((T) -> T) -> (T) -> T
 
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+
 zero[T](f: (T) -> T) -> (T) -> T => x => x
 
 successor[T](n: Church[T]) -> Church[T] => f => x => f(n(f)(x))

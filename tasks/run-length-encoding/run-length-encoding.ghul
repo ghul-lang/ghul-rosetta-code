@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+
 encode(text: string) -> string =>
     text |> group() |> map(run => "{run.count}{run[0]}") |> join("")
 

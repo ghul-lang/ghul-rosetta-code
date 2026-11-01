@@ -3,6 +3,9 @@ use Ghul.Coroutines
 
 use Numbers = CHANNEL[int?]
 
+// `==` compares identity
+// `if let` pattern-matches
+
 let limit = 100
 
 count_up(out: Numbers) -> COROUTINE is

@@ -2,6 +2,10 @@ use default
 
 use Factor = (prime: bigint, power: int)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+
 order_part(
     a: bigint,
     q: Factor,

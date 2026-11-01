@@ -1,6 +1,8 @@
 use default
 use System.Xml.Linq
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let source =
     "<Students>"
     "  <Student Name=\"April\" Gender=\"F\" DateOfBirth=\"1989-01-02\" />"

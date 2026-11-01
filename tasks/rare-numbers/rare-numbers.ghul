@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let square_endings = [0, 1, 4, 5, 6, 9]
 
 reverse_of(n: long) -> long is

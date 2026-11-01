@@ -1,5 +1,11 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 bigrams(phrase: string) -> Map[string, int] =>
     phrase.to_lower().split([' '])
         |> flat_map(word =>

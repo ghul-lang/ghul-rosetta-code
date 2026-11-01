@@ -4,6 +4,11 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double, z: double)
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let sigma = 10.0D
 let rho = 28.0D
 let beta = 8.0D / 3.0D

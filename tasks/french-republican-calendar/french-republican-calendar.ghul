@@ -1,6 +1,11 @@
 use default
 use System.DateTime
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+
 let republican_months = [
     "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
     "Germinal", "Floréal", "Prairial", "Messidor", "Thermidor", "Fructidor"

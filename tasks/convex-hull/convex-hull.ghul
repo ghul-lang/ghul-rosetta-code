@@ -4,6 +4,13 @@ use Raster.IMAGE
 
 use Point = (x: int, y: int)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let points = [
     (x = 16, y = 3), (x = 12, y = 17), (x = 0, y = 6),
     (x = -4, y = -6), (x = 16, y = 6), (x = 16, y = -7),

@@ -3,6 +3,14 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `LIST()` builds its collection eagerly
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let rise = System.Math.sqrt(3.0D) / 2.0D
 
 koch(depth: int, from: Point, to: Point) -> Point{} is

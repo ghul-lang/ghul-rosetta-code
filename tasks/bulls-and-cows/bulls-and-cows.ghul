@@ -2,6 +2,9 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 // Seeded, so the transcript below reproduces.
 let random = System.Random(3)
 

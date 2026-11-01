@@ -2,6 +2,12 @@ use default
 
 use Register = (connection: int[], length: int)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+
 predict(sequence: int[], connection: int[], length: int, n: int) -> int =>
     [
         connection[k] & sequence[n - k]

@@ -1,5 +1,9 @@
 use default
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 // Counts free trees of carbon atoms with at most four bonds each, rooting
 // each at its centroid so that no molecule is counted twice. A molecule
 // with two central atoms is counted separately, by pairing two halves.

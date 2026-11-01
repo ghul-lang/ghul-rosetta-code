@@ -2,6 +2,13 @@ use default
 
 use Entry = (word: string, value: long, root: long, distinct: int)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
 

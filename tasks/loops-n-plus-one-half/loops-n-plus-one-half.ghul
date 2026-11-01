@@ -1,5 +1,7 @@
 use IO.Std
 
+// `==` compares identity
+
 for value in 1::10 do
     Std.write("{value}")
 

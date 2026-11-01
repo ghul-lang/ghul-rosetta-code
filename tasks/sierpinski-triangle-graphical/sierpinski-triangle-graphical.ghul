@@ -3,6 +3,9 @@ use Raster.IMAGE
 
 use POINT = (x: double, y: double)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
+
 midpoint(a: POINT, b: POINT) -> POINT => (
     x = (a.x + b.x) / 2.0,
     y = (a.y + b.y) / 2.0

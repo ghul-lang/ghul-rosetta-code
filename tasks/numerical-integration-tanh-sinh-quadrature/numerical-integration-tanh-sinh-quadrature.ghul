@@ -1,6 +1,8 @@
 use default
 use System.Math.*
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 tanh_sinh(
     f: double -> double,
     lower: double,

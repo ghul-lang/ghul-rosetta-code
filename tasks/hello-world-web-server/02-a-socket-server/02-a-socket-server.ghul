@@ -4,6 +4,12 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Thread
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let port = 8080
 
 serve(client: TcpClient) is

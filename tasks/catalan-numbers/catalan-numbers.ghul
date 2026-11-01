@@ -1,5 +1,10 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `memo` on a function caches its results - a call with arguments equal to
+// an earlier call's returns the cached result, recursive calls included
+
 // C(n) = sum over i of C(i) * C(n - 1 - i)
 by_convolution(n: int) -> long memo is
     if n == 0 then

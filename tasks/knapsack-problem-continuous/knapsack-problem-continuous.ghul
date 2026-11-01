@@ -2,6 +2,8 @@ use default
 
 use Item = (name: string, weight: double, value: double)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let items = [
     (name = "beef", weight = 3.8, value = 36.0),
     (name = "pork", weight = 5.4, value = 43.0),

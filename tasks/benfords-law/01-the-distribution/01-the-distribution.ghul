@@ -1,6 +1,9 @@
 use default
 use System.Math.log10
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let leading_counts = 1::10 |> map(_ => 0) |> LIST()
 
 let previous mut = 0n

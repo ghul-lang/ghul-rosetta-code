@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality)
+
 let digits = 60
 let shown = 40
 let guard = 20

@@ -1,6 +1,8 @@
 use default
 use System.InvalidOperationException
 
+// `==` compares identity
+
 class QUEUE[T] is
     _items: LIST[T]
 

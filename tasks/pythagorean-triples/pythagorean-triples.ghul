@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 count(limit: long) -> (total: long, primitive: long) is
     let total mut = 0L
     let primitive mut = 0L

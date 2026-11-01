@@ -3,6 +3,16 @@ use System.Threading.Interlocked
 use System.Threading.Thread
 use System.Threading.Volatile
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `ARRAY()` builds its collection eagerly
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 class FLAG is
     state: int field
 
@@ -24,7 +34,7 @@ si
 let workers = 4
 let rounds = 500
 
-let flags = 0..workers |> map(i => FLAG()) |> list()
+let flags = 0..workers |> map(i => FLAG()) |> ARRAY()
 
 let counter = LIST([0])
 let occupancy = LIST([0, 0])

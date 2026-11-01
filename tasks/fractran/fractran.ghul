@@ -2,6 +2,18 @@ use default
 
 use Fraction = (numerator: bigint, denominator: bigint)
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 let source =
     "17/91, 78/85, 19/51, 23/38, 29/33, 77/29, 95/23, "
     "77/19, 1/17, 11/13, 13/11, 15/14, 15/2, 55/1"

@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 is_tau(n: int) -> bool => n % divisor_count(n) == 0
 
 let first_hundred = from(1) |> filter(is_tau) |> take(100)

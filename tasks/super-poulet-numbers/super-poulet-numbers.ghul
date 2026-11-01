@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 splits_repeated_doubling(value: int) -> bool =>
     let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide

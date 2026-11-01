@@ -3,6 +3,10 @@ use default
 use System.Text.RegularExpressions.Regex
 use System.Text.RegularExpressions.Match
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let n = 10
 
 let text = IO.File.read_all_text("les-miserables.txt").to_lower_invariant()

@@ -4,6 +4,8 @@ use Raster.IMAGE
 
 use Step = (x: double, y: double, corner: int)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let random = System.Random(20260918)
 
 let corners = [

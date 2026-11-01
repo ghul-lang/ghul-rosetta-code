@@ -1,5 +1,14 @@
 use default
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `case ... when` pattern-matches
+
 let opcodes = LIST([
     "NOP", "LDA", "STA", "ADD", "SUB", "BRZ", "JMP", "STP"
 ])
@@ -80,6 +89,7 @@ run(memory: LIST[int]) -> int is
             if accumulator == 0 then counter = argument fi
         when "JMP" then counter = argument
         when "STP" then return accumulator
+        else
         esac
     od
 

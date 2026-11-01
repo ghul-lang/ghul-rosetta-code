@@ -2,6 +2,8 @@ use default
 
 use Math = System.Math
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 rk4(f: (double, double) -> double, dt: double) -> ((double, double)) -> (
     double,
     double

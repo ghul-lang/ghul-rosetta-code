@@ -1,6 +1,8 @@
 use default
 use System.Runtime.InteropServices.Marshal
 
+// `==` compares identity
+
 let word_bits = Marshal.size_of[word]() * 8
 
 write_line("word size: {word_bits} bits")

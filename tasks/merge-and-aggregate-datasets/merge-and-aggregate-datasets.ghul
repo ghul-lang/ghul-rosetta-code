@@ -3,6 +3,10 @@ use default
 use PATIENT = (id: string, lastname: string)
 use VISIT = (id: string, date: string, score: double?)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let patients: PATIENT[] = [
     (id = "1001", lastname = "Hopper"),
     (id = "4004", lastname = "Wirth"),

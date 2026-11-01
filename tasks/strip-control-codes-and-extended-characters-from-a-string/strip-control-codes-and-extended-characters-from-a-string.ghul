@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 strip_control(text: string) -> string =>
     string(text |> filter(c => int(c) >= 32 /\ int(c) != 127))
 

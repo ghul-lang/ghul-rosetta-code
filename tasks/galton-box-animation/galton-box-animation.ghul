@@ -2,6 +2,10 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
+// `LIST()` and `ARRAY()` build their collections eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 class BALL is
     row: int public
     slot: int public

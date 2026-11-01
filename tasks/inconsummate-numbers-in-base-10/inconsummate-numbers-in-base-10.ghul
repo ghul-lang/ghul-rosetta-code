@@ -1,5 +1,12 @@
 use default
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 // Every n below 10^7 has a digit sum of at most 63, so any consummate
 // number below 100,000 is n / digit_sum(n) for some n below 6.3 million.
 

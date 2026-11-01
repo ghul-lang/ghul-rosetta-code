@@ -1,5 +1,15 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
+// list head and tail
+
 union Rule is
     TERMINAL(text: string)
     NAME(name: string)

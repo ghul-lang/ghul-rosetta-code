@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
+
 union Value is
     NUMBER(digit: int)
     WHEEL(name: char)

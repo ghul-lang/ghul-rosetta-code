@@ -3,6 +3,9 @@ use System.Math.*
 use double.degrees_to_radians
 use double.radians_to_degrees
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 mean_angle(degrees: double[]) -> double =>
     let radians = degrees |> map(degrees_to_radians) in
     let

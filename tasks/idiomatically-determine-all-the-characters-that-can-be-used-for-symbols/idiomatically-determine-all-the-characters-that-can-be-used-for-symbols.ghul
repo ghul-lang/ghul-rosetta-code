@@ -2,6 +2,9 @@ use default
 
 use System.Globalization.UnicodeCategory
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 // These are the tests the ghūl compiler's own scanner applies. An
 // identifier is read in UTF-16 code units, so only the basic plane counts.
 

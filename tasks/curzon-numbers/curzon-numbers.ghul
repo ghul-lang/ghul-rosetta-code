@@ -1,5 +1,15 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `=~` compares values (structural equality)
+
 is_curzon(base: int, n: int) -> bool =>
     let
         divisor = bigint(base * n + 1),

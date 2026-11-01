@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 set_right_adjacent(bits: string, n: int) -> string =>
     let remaining mut = 0 in
     bits

@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let letters = ['a', 'b', 'c'].iterator
 let capitals = ['A', 'B', 'C'].iterator
 let digits = [1, 2, 3].iterator

@@ -4,6 +4,10 @@ use IO.File
 use IO.Path
 use System.Security.Cryptography.RandomNumberGenerator
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+
 letters(text: string) -> string =>
     string([char.to_upper(c) for c in text if char.is_letter(c)])
 

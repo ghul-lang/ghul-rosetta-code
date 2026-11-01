@@ -1,5 +1,9 @@
 use default
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 b10(n: int) -> string is
     let parent = repeat(-1, n) |> LIST()
     let digit = repeat('0', n) |> LIST()

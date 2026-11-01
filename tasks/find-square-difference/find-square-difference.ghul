@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `if let` pattern-matches
+
 let found = from(1) |> find(n => n * n - (n - 1) * (n - 1) > 1000)
 
 if let n = found then

@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 with_sum_column(line: string, index: int) -> string =>
     if index == 0 then
         "{line},SUM"

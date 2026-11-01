@@ -1,5 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches
+
 sorted_letters(word: string) -> string => string(word |> sort())
 
 is_deranged(first: string, second: string) -> bool =>

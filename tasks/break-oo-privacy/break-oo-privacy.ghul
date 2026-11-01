@@ -1,6 +1,9 @@
 use default
 use System.Reflection.BindingFlags
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+
 class SAFE(combination: string private, contents: string) is
     open(attempt: string) -> string =>
         if attempt =~ _combination then

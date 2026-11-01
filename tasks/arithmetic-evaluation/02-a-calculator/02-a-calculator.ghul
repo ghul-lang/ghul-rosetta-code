@@ -2,6 +2,12 @@ use default
 use IO.Std.read_line
 use IO.Std.write
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
+// list head and tail
+
 union Expression is
     NUMBER(value: int)
     ADD(left: Expression, right: Expression)

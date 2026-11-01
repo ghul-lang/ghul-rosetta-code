@@ -1,5 +1,13 @@
 use default
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+
 let data = [
     12, 127, 28, 42, 39, 113, 42, 18, 44, 118, 44, 37, 113, 124, 37, 48,
     127, 36, 29, 31, 125, 139, 131, 115, 105, 132, 104, 123, 35, 113, 122,

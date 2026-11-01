@@ -2,6 +2,9 @@ use default
 use Raster.IMAGE
 use System.Math
 
+// `==` compares identity
+// `if let` and `case ... when` pattern-match
+
 struct P(x: double, y: double) is
     +(o: P) -> P => P(x + o.x, y + o.y)
     -(o: P) -> P => P(x - o.x, y - o.y)

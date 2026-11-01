@@ -1,5 +1,10 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+
 prime(value: int) -> bool =>
     value >= 2 /\
     2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)

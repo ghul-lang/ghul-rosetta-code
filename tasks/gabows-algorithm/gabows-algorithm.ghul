@@ -2,6 +2,9 @@ use default
 
 use Edge = (from: int, to: int)
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let size = 13
 
 let edges = [

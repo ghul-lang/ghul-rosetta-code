@@ -1,5 +1,11 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+
 term(coefficient: int, index: int) -> string =>
     let size = int.abs(coefficient) in
     if size == 1 then "e({index})" else "{size}*e({index})" fi

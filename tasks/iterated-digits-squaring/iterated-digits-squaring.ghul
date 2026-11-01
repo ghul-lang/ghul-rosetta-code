@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 digit_square_sum(value: int) -> int =>
     value |> digits() |> map(d => d * d) |> sum()
 

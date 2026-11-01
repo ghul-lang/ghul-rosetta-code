@@ -1,6 +1,8 @@
 use default
 use System.Diagnostics.Stopwatch
 
+// `==` compares identity
+
 square_root(n: bigint) -> bigint is
     let bits = int(n.get_bit_length())
 

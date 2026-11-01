@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `if let` pattern-matches
+
 first_repeat(text: string) -> (first: int, second: int)? =>
     0..text.length
         |> map(i => (first = i, second = text.index_of(text[i], i + 1)))

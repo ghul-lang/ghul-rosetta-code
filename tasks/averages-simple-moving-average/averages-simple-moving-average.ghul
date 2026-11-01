@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 moving_average(period: int) -> (double) -> double =>
     let window = Queue() in
     number is

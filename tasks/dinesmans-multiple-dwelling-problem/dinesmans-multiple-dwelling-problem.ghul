@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 adjacent(left: int, right: int) -> bool =>
     if left > right then left - right else right - left fi == 1
 

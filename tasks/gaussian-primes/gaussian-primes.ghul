@@ -3,6 +3,10 @@ use System.Math.*
 use Raster.IMAGE
 use Raster.AXES
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `case ... when` pattern-matches
+
 is_gaussian_prime(a: int, b: int) -> bool =>
     case (a, b)
     when (0, 0) then false

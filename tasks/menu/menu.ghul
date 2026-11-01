@@ -2,6 +2,10 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 choose(items: string[]) -> string is
     if items.count == 0 then
         return ""

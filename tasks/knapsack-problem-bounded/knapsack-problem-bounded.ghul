@@ -2,6 +2,13 @@ use default
 
 use Item = (name: string, weight: int, value: int, pieces: int)
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let items = [
     (name = "map", weight = 9, value = 150, pieces = 1),
     (name = "compass", weight = 13, value = 35, pieces = 1),

@@ -3,6 +3,12 @@ use IO.Std.read_line
 
 use Score = (bulls: int, cows: int)
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+
 score(guess: string, secret: string) -> Score =>
     let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
     let shared = 0..4 |> filter(i => secret.contains(guess[i])) |> count()

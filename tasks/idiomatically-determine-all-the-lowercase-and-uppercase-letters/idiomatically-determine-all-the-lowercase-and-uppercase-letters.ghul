@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 letters(matches: (char) -> bool) -> string =>
     string((0..65536) |> map(char) |> filter(matches))
 

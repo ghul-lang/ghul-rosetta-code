@@ -1,6 +1,8 @@
 use default
 use System.Environment
 
+// `if let` pattern-matches
+
 Environment.set_environment_variable("ROSETTA_GREETING", "hello")
 
 let name = "ROSETTA_GREETING"

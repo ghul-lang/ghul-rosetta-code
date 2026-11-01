@@ -3,6 +3,8 @@ use default
 use System.Text.RegularExpressions.Regex
 use IO.Std.read_line
 
+// `if let` and `case ... when` pattern-match
+
 // Every character becomes an x, so one line is at least as long as
 // another exactly when its run of x's starts with the other's: no
 // length is ever held as a number or compared.

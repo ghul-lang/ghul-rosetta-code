@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 // Flipping is its own inverse, so the stacks furthest from sorted are the
 // ones a breadth-first search from the sorted stack reaches last.
 

@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality)
+
 mkdir_p(path: string) is
     let parts = path.split(['/'])
     let built mut = ""

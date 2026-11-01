@@ -4,6 +4,8 @@ use Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.map_get
 use System.Net.Http.HttpClient
 use System.Threading.CancellationToken
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let no_arguments: ARRAY[string] = []
 
 let builder = WebApplication.create_builder(no_arguments)

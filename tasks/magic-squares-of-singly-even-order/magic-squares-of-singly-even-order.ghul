@@ -2,6 +2,16 @@ use default
 
 use Square = int[][]
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+
 odd_magic_square(n: int) -> Square => (
     let square = 0..n |> map(_ => repeat(0, n) |> LIST()) |> list()
     let (row, column) mut = (0, n / 2)

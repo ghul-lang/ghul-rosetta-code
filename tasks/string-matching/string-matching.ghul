@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+
 let text = "the rain in spain stays mainly in the plain"
 
 let wanted = "ain"

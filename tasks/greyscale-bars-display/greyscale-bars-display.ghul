@@ -1,6 +1,8 @@
 use default
 use Raster.IMAGE
 
+// `==` compares identity
+
 let width = 512
 let height = 256
 let band = height / 4

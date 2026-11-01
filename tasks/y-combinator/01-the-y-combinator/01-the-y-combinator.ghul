@@ -1,5 +1,7 @@
 use IO.Std.write_line
 
+// `==` compares identity
+
 class SELF_APPLY[A, B](_f: (SELF_APPLY[A, B]) -> (A -> B)) is
     apply(r: SELF_APPLY[A, B]) -> (A -> B) => _f(r)
 si

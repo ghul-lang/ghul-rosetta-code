@@ -1,5 +1,8 @@
 use default
 
+// `SET()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let values = [
     1, 2, 3, "a", "b", "c", 2, 3, 4, "b", "v", "d", "a"
 ]

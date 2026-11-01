@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 shares_factor(left_value: int, right_value: int) -> bool =>
     if right_value > 0 then
         shares_factor(right_value, left_value % right_value)

@@ -1,6 +1,11 @@
 use default
 use System.Text.StringBuilder
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let random = System.Random(20260908)
 
 let pieces = "PNBRQpnbrq"

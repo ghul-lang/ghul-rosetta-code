@@ -1,5 +1,8 @@
 use default
 
+// `==` compares identity
+// `if let` and `case ... when` pattern-match
+
 union Expression is
     NUMBER(value: int)
     ADD(left: Expression, right: Expression)

@@ -1,6 +1,9 @@
 use default
 use System.Text.RegularExpressions.Regex
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 digit_value(i: int, d: int) -> int =>
     let doubled = if i % 2 == 1 then d * 2 else d fi in
     doubled / 10 + doubled % 10

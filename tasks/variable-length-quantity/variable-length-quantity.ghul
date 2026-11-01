@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 to_octets(value: long) -> ubyte[] => (
     let octets = LIST([ubyte(value & 0x7FL)])
     let rest mut = value >> 7

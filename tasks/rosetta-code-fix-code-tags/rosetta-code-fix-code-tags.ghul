@@ -2,6 +2,8 @@ use default
 
 use System.Text.RegularExpressions.Regex
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let tag = "syntaxhighlight"
 
 let rules = [

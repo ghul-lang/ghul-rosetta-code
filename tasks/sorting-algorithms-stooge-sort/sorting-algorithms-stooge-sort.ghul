@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 stooge_sort[T: Ghul.Comparable[T]](values: LIST[T], low: int, high: int) is
     if values[high] < values[low] then
         (values[low], values[high]) = (values[high], values[low])

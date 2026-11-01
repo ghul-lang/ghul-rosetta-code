@@ -1,5 +1,11 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+// `if let` pattern-matches
+
 repeats(text: string, size: int) -> bool =>
     0..text.length |> all(index => text[index] == text[index % size])
 

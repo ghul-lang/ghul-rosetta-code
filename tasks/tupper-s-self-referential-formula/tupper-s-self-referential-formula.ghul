@@ -1,6 +1,8 @@
 use default
 use Raster.IMAGE
 
+// `=~` compares values (structural equality)
+
 let k = bigint.parse(
     "960939379918958884971672962127852754715004339660"
     "129306651505519271702802395266424689642842174350"

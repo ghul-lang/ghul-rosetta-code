@@ -2,6 +2,8 @@ use default
 use IO.Std.read_line
 use System.Math.*
 
+// `==` compares identity
+
 ask(prompt: string) -> double? is
     write_line(prompt)
 

@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 product_of_digits(n: long) -> long =>
     "{n}" |> map(c => long(c - '0')) |> product()
 

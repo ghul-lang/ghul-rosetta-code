@@ -3,6 +3,10 @@ use default
 use Raster.IMAGE
 use System.Diagnostics.Stopwatch
 
+// `ARRAY()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let width = 320
 let height = 240
 let seconds = 3

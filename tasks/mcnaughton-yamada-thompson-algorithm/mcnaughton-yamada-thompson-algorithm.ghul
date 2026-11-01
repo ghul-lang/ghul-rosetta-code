@@ -1,5 +1,8 @@
 use default
 
+// `==` compares identity
+// `if let` and `case ... when` pattern-match
+
 class STATE is
     label: char? public
     edge1: STATE? public

@@ -1,5 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches
+
 lookup(table: MAP[string, int], key: string) -> int? =>
     if table.contains_key(key) then table[key] else null fi
 

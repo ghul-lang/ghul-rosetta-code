@@ -1,5 +1,13 @@
 use default
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `MAP()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+
 let count = 1_000_000
 let last_digits = primes() |> take(count) |> map(* % 10) |> list()
 

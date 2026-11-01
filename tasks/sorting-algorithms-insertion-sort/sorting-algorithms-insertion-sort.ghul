@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 insertion_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     for i in 1..values.count do
         let sought = values[i]

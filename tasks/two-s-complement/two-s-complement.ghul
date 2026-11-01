@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 bits(value: int) -> string =>
     (0..32)
         |> map(position => "{(value >> (31 - position)) & 1}")

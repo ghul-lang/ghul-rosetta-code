@@ -1,5 +1,8 @@
 use default
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 descending(so_far: int, next_digit: int, found: LIST[int]) is
     if so_far > 0 /\ is_prime(so_far) then
         found.add(so_far)

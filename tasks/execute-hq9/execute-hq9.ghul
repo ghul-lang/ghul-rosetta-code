@@ -1,6 +1,9 @@
 use default
 use IO.Std.read_line
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
+
 bottles(n: int) -> string =>
     case n
     when 0 then "no more bottles"

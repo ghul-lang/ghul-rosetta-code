@@ -1,5 +1,12 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `==` compares identity
+
 let prisoners = 100
 let attempts = 50
 let trials = 10000

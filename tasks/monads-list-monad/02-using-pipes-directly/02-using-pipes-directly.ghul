@@ -1,6 +1,11 @@
 use default
 use System.Convert.to_string
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 divisors(n: int) -> int{} => pipe(1::n) |> filter(d => n % d == 0)
 
 spellings(n: int) -> string{} => pipe(["{n}", "0b{to_string(n, 2)}"])

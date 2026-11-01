@@ -1,6 +1,10 @@
 use default
 use System.Random
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let chance = Random(20260921)
 
 one_of_n(n: int) -> int =>

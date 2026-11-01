@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+// and tail
+
 union Shape is
     CIRCLE(radius: double)
     RECTANGLE(width: double, height: double)

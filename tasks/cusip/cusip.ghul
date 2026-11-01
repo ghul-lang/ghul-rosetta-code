@@ -1,5 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `case ... when` pattern-matches
+
 value_of(c: char) -> int =>
     case c
     when '*' then 36

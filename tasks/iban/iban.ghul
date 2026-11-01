@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 is_valid_iban(raw: string) -> bool is
     let iban = ["{ch}" for ch in raw if ch != ' '] |> join("")
 

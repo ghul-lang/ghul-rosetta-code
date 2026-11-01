@@ -1,5 +1,11 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches
+
 class NODE(key: int public, value: string public) is
     left: NODE public
     right: NODE public

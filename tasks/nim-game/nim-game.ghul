@@ -1,6 +1,8 @@
 use default
 use IO.Std.read_line
 
+// `==` compares identity
+
 let tokens mut = 12
 
 write_line("take 1, 2 or 3 tokens a turn; taking the last one wins")

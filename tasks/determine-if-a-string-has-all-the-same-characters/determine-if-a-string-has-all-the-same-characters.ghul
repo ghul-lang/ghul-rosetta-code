@@ -1,5 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches
+
 first_different(text: string) -> int? =>
     1..text.length |> find(i => text[i] != text[0])
 

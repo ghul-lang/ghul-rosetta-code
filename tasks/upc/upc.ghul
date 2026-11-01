@@ -1,5 +1,10 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 let patterns = [
     "0001101", "0011001", "0010011", "0111101", "0100011",
     "0110001", "0101111", "0111011", "0110111", "0001011"

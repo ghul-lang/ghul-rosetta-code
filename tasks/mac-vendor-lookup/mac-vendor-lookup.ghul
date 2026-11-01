@@ -1,6 +1,8 @@
 use default
 use System.Net.Http.HttpClient
 
+// `==` compares identity
+
 // The task: ask an online registry who made the device a MAC address
 // belongs to. An address it does not know is "N/A"; a failure to reach it
 // at all is null.

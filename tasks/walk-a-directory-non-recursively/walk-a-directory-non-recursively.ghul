@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let root = "walk-sample"
 
 IO.Directory.create_directory(root)

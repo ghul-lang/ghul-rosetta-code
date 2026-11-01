@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 class MULTITON[K, V](create: K -> V private) is
     _instances: MAP[K, V]
     _lock: object

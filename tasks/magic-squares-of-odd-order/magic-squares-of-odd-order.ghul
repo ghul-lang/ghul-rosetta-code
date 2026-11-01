@@ -1,5 +1,11 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 magic_square(n: int) -> int{} is
     let cells = repeat(0, n * n) |> LIST()
 

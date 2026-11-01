@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality) - `==` compares identity
+
 struct VECTOR(x: double public, y: double public) is
     +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
 

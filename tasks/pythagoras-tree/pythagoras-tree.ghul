@@ -1,5 +1,7 @@
 use Raster.IMAGE
 
+// `==` compares identity
+
 let image = IMAGE(800, 600)
 
 square(x1: double, y1: double, x2: double, y2: double, depth: int) is

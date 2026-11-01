@@ -1,3 +1,5 @@
+// `=~` compares values (structural equality) - `==` compares identity
+
 @@suppress("deprecated")
 @@precedence("∘", "user-8")
 

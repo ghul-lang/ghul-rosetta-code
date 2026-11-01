@@ -1,6 +1,9 @@
 use default
 use System.Globalization.CultureInfo
 
+// `==` compares identity
+// `if let` pattern-matches
+
 let suffixes = [
     "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"
 ]

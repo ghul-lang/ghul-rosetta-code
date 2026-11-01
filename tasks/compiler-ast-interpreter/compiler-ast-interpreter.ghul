@@ -1,6 +1,11 @@
 use IO.Std
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
+// list head and tail
+
 union Node is
     EMPTY
     LEAF(kind: string, value: string)

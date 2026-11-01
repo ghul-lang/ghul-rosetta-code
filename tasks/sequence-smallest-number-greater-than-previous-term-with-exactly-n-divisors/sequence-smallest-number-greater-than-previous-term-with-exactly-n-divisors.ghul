@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 divisor_count(n: int) -> int =>
     1::n
         |> take_while(d => d * d <= n)

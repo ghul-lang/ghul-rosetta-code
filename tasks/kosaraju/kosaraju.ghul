@@ -1,5 +1,11 @@
 use default
 
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+// index materialises the source only as far as that index and caches what
+// it read
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let edges = [
     [1], [2], [0], [1, 2, 4], [3, 5], [2, 6], [5], [4, 6, 7]
 ]

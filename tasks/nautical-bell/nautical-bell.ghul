@@ -1,5 +1,9 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 trait Clock is
     now: System.DateTime
     wait_until(time: System.DateTime)

@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let lines = IO.File.read_all_lines("readings.txt")
 let separators = ['\t', ' ']
 let skip_empty = System.StringSplitOptions.REMOVE_EMPTY_ENTRIES

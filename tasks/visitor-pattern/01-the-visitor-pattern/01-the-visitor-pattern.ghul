@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 trait Visitor[T] is
     visit_number(number: NUMBER) -> T
     visit_add(add: ADD) -> T

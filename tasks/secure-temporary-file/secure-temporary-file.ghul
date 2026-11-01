@@ -1,6 +1,8 @@
 use default
 use IO
 
+// `=~` compares values (structural equality)
+
 create_secure_temp_file(dir: string, prefix: string) -> string is
     let attempt mut = 0
 

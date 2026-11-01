@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 ultra_useful(n: int) -> int =>
     let power = bigint.pow(2n, 1 << n) in
     from(0)

@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let n = 13
 
 let sorted = (1::n) |> map(i => "{i}") |> sort() |> map(int.parse)

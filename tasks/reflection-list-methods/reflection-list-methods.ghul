@@ -1,6 +1,10 @@
 use default
 use System.Reflection.BindingFlags
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 class ROBOT is
     _charge: int
 

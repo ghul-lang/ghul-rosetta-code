@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 euclid(pulses: int, steps: int) -> string is
     let first mut = "1"
     let first_count mut = pulses

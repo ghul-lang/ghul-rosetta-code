@@ -6,6 +6,9 @@ use System.TimeSpan
 use System.TimeZoneInfo
 use System.Globalization.CultureInfo
 
+// `MAP()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let offsets = [
     ("EST", -5), ("EDT", -4),
     ("CST", -6), ("CDT", -5),

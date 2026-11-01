@@ -1,6 +1,8 @@
 use default
 use IO.Std.write
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 for row in 1::5 do
     for _ in 1::row do
         write("*")

@@ -1,5 +1,9 @@
 use default
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+
 struct FRACTION(numerator: bigint, denominator: bigint)
 
 fraction(numerator: bigint, denominator: bigint) -> FRACTION =>

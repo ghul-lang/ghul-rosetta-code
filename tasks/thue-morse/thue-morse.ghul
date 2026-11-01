@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 complement(text: string) -> string =>
     text |> map(digit => if digit == '0' then "1" else "0" fi) |> join("")
 

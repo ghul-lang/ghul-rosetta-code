@@ -2,6 +2,8 @@ use default
 use IO.Std.write
 use Ghul.Coroutines
 
+// `T[]` is the read-only list trait - elements can be read by index
+
 @suppress("non-pascal-case-name")
 class OUT_OF_INK: System.Exception is
     init() is

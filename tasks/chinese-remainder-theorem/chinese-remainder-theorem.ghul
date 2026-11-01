@@ -1,5 +1,10 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 extended_gcd(a: long, b: long) -> (g: long, x: long, y: long) =>
     if b == 0L then
         (g = a, x = 1L, y = 0L)

@@ -1,5 +1,8 @@
 use default
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let items = [
     ("aleph", 1.0 / 5.0),
     ("beth", 1.0 / 6.0),

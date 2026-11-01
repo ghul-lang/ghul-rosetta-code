@@ -1,5 +1,11 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 counting_sort(values: int[], low: int, high: int) -> int{} is
     let counts = low..high + 1 |> map(_ => 0) |> LIST()
 

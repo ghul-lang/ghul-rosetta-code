@@ -219,6 +219,9 @@ jobs:
     - name: Check every source is as the formatter writes it
       run: scripts/check-format.sh
 
+    - name: Check every solution carries its construct notes
+      run: scripts/construct-notes.pl --check
+
 
   # The required status check. A shard's own job carries the matrix leg in
   # its name, so the name changes whenever the shard count does; this job's

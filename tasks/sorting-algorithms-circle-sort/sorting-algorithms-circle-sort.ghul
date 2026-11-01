@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 circle_sort_pass[T: Ghul.Comparable[T]](
     values: LIST[T],
     lo: int,

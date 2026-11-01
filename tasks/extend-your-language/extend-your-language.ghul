@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 if2(
     first: bool,
     second: bool,

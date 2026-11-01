@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 rotate(text: string, key: int) -> string =>
     text |> map(letter => rotate_letter(letter, key)) |> string()
 

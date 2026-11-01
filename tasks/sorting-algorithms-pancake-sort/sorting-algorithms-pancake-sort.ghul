@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 flip[T](values: LIST[T], upto: int) is
     let low mut = 0
     let high mut = upto

@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 swap[T](values: LIST[T], i: int, j: int) is
     (values[i], values[j]) = (values[j], values[i])
 si

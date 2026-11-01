@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 sum_of_multiples(below: long) -> long =>
     (1L..below) |> filter(n => n % 3L == 0L \/ n % 5L == 0L) |> sum()
 

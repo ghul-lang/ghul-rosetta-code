@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 let plates = STACK()
 
 plates.push("bottom")

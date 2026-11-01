@@ -3,6 +3,9 @@ use default
 use System.Random
 use System.Security.Cryptography.RandomNumberGenerator
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality)
+
 rolls(generator: Random) -> string =>
     (0..10) |> map(_ => "{generator.next(1, 7)}") |> join(" ")
 

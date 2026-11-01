@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 digit_sum(value: int, base: int) -> int is
     walk(remaining: int, total: int) -> int =>
         if remaining == 0 then total

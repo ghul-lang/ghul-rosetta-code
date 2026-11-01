@@ -3,6 +3,8 @@ use Raster.ANIMATION
 use Raster.IMAGE
 use System.Math.*
 
+// `==` compares identity
+
 let size = 180
 
 point(second: double, radius: double) -> (double, double) =>

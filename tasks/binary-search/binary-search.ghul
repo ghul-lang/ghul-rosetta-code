@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `=~` compares values (structural equality)
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 search[T: Ghul.Comparable[T]](values: T[], sought: T) -> int? is
     let low mut = 0
     let high mut = values.count - 1

@@ -1,6 +1,8 @@
 use default
 use System.Text.Encoding
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 percent_encoded(octet: ubyte) -> string => (
     let character = char(octet)
 

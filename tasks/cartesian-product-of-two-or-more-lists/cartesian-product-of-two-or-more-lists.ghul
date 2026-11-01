@@ -1,5 +1,13 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `yield` in a function makes it a generator, returning a lazy `T{}`
+// sequence
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 pairs(left: int[], right: int[]) -> (first: int, second: int){} is
     for first in left do
         for second in right do

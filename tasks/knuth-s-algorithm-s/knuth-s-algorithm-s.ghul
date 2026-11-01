@@ -1,5 +1,10 @@
 use default
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 s_of_n_creator(n: int, source: System.Random) -> (int) -> int{} is
     let sample = LIST()
 

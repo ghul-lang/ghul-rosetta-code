@@ -1,6 +1,11 @@
 use default
 use System.Random
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 riffle_shuffle(deck: int[], random: Random) -> int[] is
     let half = deck.count / 2
     let left = LIST(deck[0..half])

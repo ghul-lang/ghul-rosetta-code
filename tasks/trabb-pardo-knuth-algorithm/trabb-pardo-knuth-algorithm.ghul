@@ -2,6 +2,9 @@ use default
 use IO.Std.read_line
 use System.Math
 
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 f(x: double) -> double => Math.sqrt(Math.abs(x)) + 5.0 * x * x * x
 
 write_line("enter 11 numbers:")

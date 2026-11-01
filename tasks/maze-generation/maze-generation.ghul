@@ -1,6 +1,10 @@
 use default
 use Raster.IMAGE
 
+// `T{}` is the lazy sequence trait - elements are read on demand and in
+// order from its source
+// `==` compares identity
+
 let columns = 24
 let rows = 16
 let cell = 22

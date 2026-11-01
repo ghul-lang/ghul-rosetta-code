@@ -1,6 +1,9 @@
 use default
 use Raster
 
+// `MAP()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 expand(axiom: string, rules: Map[char, string], steps: int) -> string is
     let current mut = axiom
 

@@ -1,6 +1,13 @@
 use default
 use System.Text.StringBuilder
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `*` as an argument is partial application - `f(*, b)` means
+// `a => f(a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+
 symbol_table() -> LIST[char] =>
     let symbols = int('a')::int('z') |> map(char) |> LIST() in
     symbols

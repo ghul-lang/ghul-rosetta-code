@@ -1,5 +1,8 @@
 use default
 
+// `=~` compares values (structural equality)
+// `if let` pattern-matches
+
 union Rule is
     WORD(head: string, word: string)
     PAIR(head: string, left: string, right: string)

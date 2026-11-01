@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `case ... when` pattern-matches
+
 let points = [
     "North", "North by east", "North-northeast",
     "Northeast by north", "Northeast", "Northeast by east",

@@ -1,3 +1,7 @@
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `case ... when` pattern-matches
+
 enum Color is
     RED,
     BLACK

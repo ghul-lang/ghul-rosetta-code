@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality)
+
 let path = IO.Path.combine(
     IO.Path.get_temp_path(),
     "ghul-rosetta-mtime-test.txt"

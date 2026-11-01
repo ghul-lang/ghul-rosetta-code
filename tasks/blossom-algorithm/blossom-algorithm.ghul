@@ -1,5 +1,11 @@
 use default
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+
 class GRAPH(order: int public) is
     _edges: LIST[LIST[int]]
     _match: LIST[int?]

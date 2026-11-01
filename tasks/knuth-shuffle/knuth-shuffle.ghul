@@ -1,6 +1,8 @@
 use default
 use System.Random
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 knuth_shuffle(items: LIST[int], random: Random) is
     let i mut = items.count - 1
 

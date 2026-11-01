@@ -1,5 +1,7 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 difference(exponent: int, a: int, b: int) -> bigint =>
     bigint.pow(bigint(a), exponent) - bigint.pow(bigint(b), exponent)
 

@@ -1,5 +1,8 @@
 use default
 
+// `SET()` builds its collection eagerly
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 reversed(word: string) -> string => word |> reverse() |> join("")
 
 let words = [

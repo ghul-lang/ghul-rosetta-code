@@ -1,5 +1,7 @@
 #!/usr/bin/env ghul
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 let words = if args.count > 0 then args else ["Hello,", "world!"] fi
 write_line(words |> join(" "))

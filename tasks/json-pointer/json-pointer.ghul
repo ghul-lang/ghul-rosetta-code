@@ -2,6 +2,12 @@ use default
 
 use MEMBER = (key: string, value: Json)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
+// list head and tail
+
 union Json is
     TEXT(value: string)
     ARRAY(items: Json[])

@@ -1,6 +1,8 @@
 use default
 use IO.Std.read_line
 
+// `case ... when` pattern-matches
+
 let low mut = 1
 let high mut = 100
 let tries mut = 0

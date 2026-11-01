@@ -2,6 +2,9 @@ use default
 
 use RUN = (start: int, finish: int, total: int)
 
+// `T[]` is the read-only list trait - elements can be read by index
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+
 greatest_run(values: int[]) -> RUN is
     let best mut = (start = 0, finish = 0, total = 0)
     let running mut = best

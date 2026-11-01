@@ -1,5 +1,8 @@
 use default
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
+
 let alphabet = "0123456789bcdefghjkmnpqrstuvwxyz"
 
 halve(range: (low: double, high: double), upper: bool) -> (

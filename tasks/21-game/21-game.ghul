@@ -1,6 +1,10 @@
 use default
 use IO.Std
 
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
+// `case ... when` pattern-matches
+
 let target = 21
 
 union Move is
