@@ -31,15 +31,11 @@ rows() -> List[bigint]{} is
     od
 si
 
-write_line(
-    "unsigned Stirling numbers of the first kind, S1(n, k):"
-)
+write_line("unsigned Stirling numbers of the first kind, S1(n, k):")
 
 rows()
     |> take(13)
-    |> each(row =>
-        write_line(row |> map(v => "{v,11}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(v => "{v,11}") |> join("")))
 
 write_line()
 

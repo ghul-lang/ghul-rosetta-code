@@ -60,9 +60,7 @@ for frame in 0..frames do
     animation.add(image, 40)
 od
 
-write_line(
-    "{bars.count} bars, one period of their sway in {frames} frames"
-)
+write_line("{bars.count} bars, one period of their sway in {frames} frames")
 
 animation.write("bars.png")
 

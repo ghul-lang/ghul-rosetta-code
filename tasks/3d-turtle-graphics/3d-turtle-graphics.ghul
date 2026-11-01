@@ -166,21 +166,14 @@ project(p: V3) -> (x: double, y: double) =>
 
 let image = IMAGE(480, 360)
 
-let points =
-    turtle.drawn
-        |> flat_map(s => [project(s.from), project(s.to)])
+let points = turtle.drawn |> flat_map(s => [project(s.from), project(s.to)])
 
 let low_x = points |> map(p => p.x) |> reduce(0.0D, min)
 let high_x = points |> map(p => p.x) |> reduce(0.0D, max)
 let low_y = points |> map(p => p.y) |> reduce(0.0D, min)
 let high_y = points |> map(p => p.y) |> reduce(0.0D, max)
 
-image.view(
-    low_x - 20.0D,
-    low_y - 20.0D,
-    high_x + 20.0D,
-    high_y + 20.0D
-)
+image.view(low_x - 20.0D, low_y - 20.0D, high_x + 20.0D, high_y + 20.0D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0D)
 

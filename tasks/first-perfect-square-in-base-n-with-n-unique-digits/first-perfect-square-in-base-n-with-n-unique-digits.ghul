@@ -9,10 +9,7 @@ is_pandigital(square: long, base: int) -> bool is
     walk(remaining: long, seen: int) -> bool =>
         if remaining == 0L then seen == wanted
         else
-            walk(
-                remaining / radix,
-                seen | (1 << int(remaining % radix))
-            )
+            walk(remaining / radix, seen | (1 << int(remaining % radix)))
         fi
 
     walk(square, 0)
@@ -33,8 +30,7 @@ in_base(value: long, base: int) -> string is
 si
 
 smallest_root(base: int) -> int =>
-    let lowest = System.Math.pow(double(base), double(base - 1))
-    in
+    let lowest = System.Math.pow(double(base), double(base - 1)) in
     int(System.Math.ceiling(System.Math.sqrt(lowest)))
 
 for base in 2::13 do

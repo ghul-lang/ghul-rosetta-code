@@ -4,9 +4,7 @@ class RULE(pattern: string, replacement: string, stops: bool)
 
 load(file: string) -> List[RULE] =>
     IO.File.read_all_lines(file)
-        |> filter(line =>
-            !line.starts_with("#") /\ line.contains(" -> ")
-        )
+        |> filter(line => !line.starts_with("#") /\ line.contains(" -> "))
         |> map(line =>
             let
                 arrow = line.index_of(" -> "),

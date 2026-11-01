@@ -1,10 +1,6 @@
 use default
 
-undulating_value(
-    first: int,
-    second: int,
-    length: int
-) -> long =>
+undulating_value(first: int, second: int, length: int) -> long =>
     0..length
         |> reduce(0L, (value, position) =>
             value * 10L +
@@ -19,11 +15,7 @@ for length in 3..17 do
     for first in 1..10 do
         for second in 0..10 do
             if second != first then
-                let value = undulating_value(
-                    first,
-                    second,
-                    length
-                )
+                let value = undulating_value(first, second, length)
 
                 if value < limit then
                     values.add(value)
@@ -62,14 +54,11 @@ od
 
 prime(value: long) -> bool =>
     value >= 2L /\
-    2L::long(Ghul.Math.sqrt(double(value)))
-        |> all(d => value % d != 0L)
+    2L::long(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0L)
 
 write_line("three digit primes:")
 
-write_line(
-    three_digit |> filter(prime) |> map(v => "{v}") |> join(" ")
-)
+write_line(three_digit |> filter(prime) |> map(v => "{v}") |> join(" "))
 
 write_line("600th: {values[599]}")
 

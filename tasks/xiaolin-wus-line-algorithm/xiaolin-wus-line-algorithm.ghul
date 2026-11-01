@@ -36,12 +36,7 @@ endpoint(
     return (column = column, height = height)
 si
 
-line(
-    from_x: double,
-    from_y: double,
-    to_x: double,
-    to_y: double
-) is
+line(from_x: double, from_y: double, to_x: double, to_y: double) is
     let steep = abs(to_y - from_y) > abs(to_x - from_x)
 
     let ax mut = if steep then from_y else from_x fi
@@ -59,23 +54,10 @@ line(
         by = held_y
     fi
 
-    let gradient =
-        if bx == ax then 1.0D else (by - ay) / (bx - ax) fi
+    let gradient = if bx == ax then 1.0D else (by - ay) / (bx - ax) fi
 
-    let first = endpoint(
-        ax,
-        ay,
-        gradient,
-        rest(ax + 0.5D),
-        steep
-    )
-    let last = endpoint(
-        bx,
-        by,
-        gradient,
-        fraction(bx + 0.5D),
-        steep
-    )
+    let first = endpoint(ax, ay, gradient, rest(ax + 0.5D), steep)
+    let last = endpoint(bx, by, gradient, fraction(bx + 0.5D), steep)
 
     let height mut = first.height + gradient
 

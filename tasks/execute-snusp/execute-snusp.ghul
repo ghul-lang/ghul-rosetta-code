@@ -4,10 +4,8 @@ use IO.Std.write
 use Point = (x: int, y: int)
 
 run(lines: List[string]) is
-    let width =
-        lines |> map(l => l.length) |> reduce(0, int.max)
-    let at_start =
-        (0..lines.count) |> find(y => lines[y].contains('$'))
+    let width = lines |> map(l => l.length) |> reduce(0, int.max)
+    let at_start = (0..lines.count) |> find(y => lines[y].contains('$'))
 
     let ip mut =
         if let y = at_start then
@@ -20,22 +18,15 @@ run(lines: List[string]) is
     let cell mut = 0
     let calls = STACK()
 
-    get() =>
-        if memory.contains_key(cell) then memory[cell] else 0 fi
+    get() => if memory.contains_key(cell) then memory[cell] else 0 fi
 
     step() is
         ip = (x = ip.x + heading.x, y = ip.y + heading.y)
     si
 
-    while
-        ip.y >= 0 /\
-        ip.y < lines.count /\
-        ip.x >= 0 /\
-        ip.x < width
-    do
+    while ip.y >= 0 /\ ip.y < lines.count /\ ip.x >= 0 /\ ip.x < width do
         let line = lines[ip.y]
-        let op =
-            if ip.x < line.length then line[ip.x] else ' ' fi
+        let op = if ip.x < line.length then line[ip.x] else ' ' fi
 
         case op
         when '>' then cell = cell + 1

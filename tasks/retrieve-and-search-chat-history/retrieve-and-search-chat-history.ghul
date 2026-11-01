@@ -18,10 +18,7 @@ search(base: string, today: DateTime, wanted: string) is
         write_line(url)
         write_line("------")
 
-        for
-            line in log.split(['\n'])
-                |> filter(l => l.contains(wanted))
-        do
+        for line in log.split(['\n']) |> filter(l => l.contains(wanted)) do
             write_line(line)
         od
 

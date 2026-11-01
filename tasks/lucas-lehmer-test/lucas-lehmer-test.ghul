@@ -28,8 +28,7 @@ is_mersenne_prime(p: int) -> bool =>
             s =~ 0n
         )
 
-let found =
-    2..2300 |> filter(p => is_prime(p) /\ is_mersenne_prime(p))
+let found = 2..2300 |> filter(p => is_prime(p) /\ is_mersenne_prime(p))
 
 write_line("Mersenne primes up to 2^2300 - 1:")
 write_line(found |> map(p => "M{p}") |> join(" "))

@@ -35,8 +35,7 @@ let personal_space = 1.5D
 
 row_of(y: double) -> int => rows - 1 - int(floor(y / 2.0D))
 
-column_of(x: double) -> int =>
-    (int(floor(x)) % columns + columns) % columns
+column_of(x: double) -> int => (int(floor(x)) % columns + columns) % columns
 
 is_wall(point: VEC) -> bool =>
     point.y < 0.0D \/
@@ -71,28 +70,21 @@ steer(boid: BOID, flock: List[BOID]) -> VEC is
             )
             |> collect()
 
-    let force mut =
-        VEC(0.04D, 0.0D) + wall_push(boid.position) * 1.5D
+    let force mut = VEC(0.04D, 0.0D) + wall_push(boid.position) * 1.5D
 
     if near.count > 0 then
         let n = double(near.count)
 
         let centre =
-            near
-                |> map(o => o.position)
-                |> reduce(VEC(0.0D, 0.0D), * + *)
+            near |> map(o => o.position) |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let heading =
-            near
-                |> map(o => o.velocity)
-                |> reduce(VEC(0.0D, 0.0D), * + *)
+            near |> map(o => o.velocity) |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let crowding =
             near
                 |> filter(o =>
-                    (
-                        o.position - boid.position
-                    ).length < personal_space
+                    (o.position - boid.position).length < personal_space
                 )
                 |> map(o => boid.position - o.position)
                 |> reduce(VEC(0.0D, 0.0D), * + *)
@@ -108,8 +100,7 @@ steer(boid: BOID, flock: List[BOID]) -> VEC is
 si
 
 move(boid: BOID, flock: List[BOID]) -> bool is
-    boid.velocity =
-        (boid.velocity + steer(boid, flock)).limited(0.4D, 0.8D)
+    boid.velocity = (boid.velocity + steer(boid, flock)).limited(0.4D, 0.8D)
 
     let next = boid.position + boid.velocity
 
@@ -120,8 +111,7 @@ move(boid: BOID, flock: List[BOID]) -> bool is
 
     let wrapped = next.x >= width
 
-    boid.position =
-        if wrapped then VEC(next.x - width, next.y) else next fi
+    boid.position = if wrapped then VEC(next.x - width, next.y) else next fi
 
     wrapped
 si
@@ -160,10 +150,7 @@ let random = System.Random(1)
 
 let flock = [
     BOID(
-        VEC(
-            double(c.index) + 0.5D,
-            height - 2.0D * double(r.index) - 1.0D
-        ),
+        VEC(double(c.index) + 0.5D, height - 2.0D * double(r.index) - 1.0D),
         VEC(0.3D, random.next_double() * 0.4D - 0.2D)
     )
     for r in cave |> index()
@@ -190,12 +177,7 @@ for _ in 0..frames do
     od
 
     bumps =
-        bumps +
-        (
-            flock
-                |> filter(boid => is_wall(boid.position))
-                |> count()
-        )
+        bumps + (flock |> filter(boid => is_wall(boid.position)) |> count())
 od
 
 write_line("{flock.count} boids, {frames} frames")

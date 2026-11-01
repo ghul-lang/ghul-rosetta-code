@@ -37,24 +37,17 @@ toward(turn: int) -> int => (facing - turn + 4) % 4
 visited.add((0, 0))
 
 write_line("you are at the entrance of an endless maze")
-write_line(
-    "go ahead, right, back or left; exit at the entrance, or quit"
-)
+write_line("go ahead, right, back or left; exit at the entrance, or quit")
 
 do
-    let paths =
-        0..4
-            |> filter(t => passage(x, y, toward(t)))
-            |> collect()
+    let paths = 0..4 |> filter(t => passage(x, y, toward(t))) |> collect()
 
     write_line()
 
     if paths.count == 0 then
         write_line("walls on every side")
     else
-        write_line(
-            "paths: {paths |> map(t => turns[t]) |> join(" ")}"
-        )
+        write_line("paths: {paths |> map(t => turns[t]) |> join(" ")}")
     fi
 
     let line = read_line()
@@ -94,29 +87,21 @@ do
     fi
 od
 
-let low_x =
-    visited |> map(v => v.`0) |> reduce(0, (a, b) => min(a, b))
-let high_x =
-    visited |> map(v => v.`0) |> reduce(0, (a, b) => max(a, b))
-let low_y =
-    visited |> map(v => v.`1) |> reduce(0, (a, b) => min(a, b))
-let high_y =
-    visited |> map(v => v.`1) |> reduce(0, (a, b) => max(a, b))
+let low_x = visited |> map(v => v.`0) |> reduce(0, (a, b) => min(a, b))
+let high_x = visited |> map(v => v.`0) |> reduce(0, (a, b) => max(a, b))
+let low_y = visited |> map(v => v.`1) |> reduce(0, (a, b) => min(a, b))
+let high_y = visited |> map(v => v.`1) |> reduce(0, (a, b) => max(a, b))
 
 known(column: int, row: int, side: int) -> bool =>
     decided.contains_key((column, row, side)) /\
     decided[(column, row, side)]
 
 write_line()
-write_line(
-    "the part explored, E the entrance, @ where you stopped:"
-)
+write_line("the part explored, E the entrance, @ where you stopped:")
 
 wall_above(row: int) -> string =>
     (low_x::high_x)
-        |> map(column =>
-            if known(column, row, 1) then "+  " else "+--" fi
-        )
+        |> map(column => if known(column, row, 1) then "+  " else "+--" fi)
         |> join("")
 
 cell(column: int, row: int) -> string =>

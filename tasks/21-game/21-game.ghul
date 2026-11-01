@@ -34,8 +34,7 @@ ask(prompt: string) -> string? => (
 
 let answer = ask("do you want to go first? (y/n): ")
 
-let players_turn mut =
-    answer? /\ answer.to_lower().starts_with("y")
+let players_turn mut = answer? /\ answer.to_lower().starts_with("y")
 
 let total mut = 0
 

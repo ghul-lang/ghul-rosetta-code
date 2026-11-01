@@ -14,8 +14,7 @@ dice7() -> int is
     od
 si
 
-loaded7() -> int =>
-    if random.next(100) < 5 then 7 else dice7() fi
+loaded7() -> int => if random.next(100) < 5 then 7 else dice7() fi
 
 check_distribution(
     generate: () -> int,
@@ -48,17 +47,13 @@ check_distribution(
     return flat
 si
 
-for
-    (name, generate) in [("dice7", dice7), ("loaded7", loaded7)]
-do
+for (name, generate) in [("dice7", dice7), ("loaded7", loaded7)] do
     write_line("{name}, 1000000 calls, delta 1%:")
 
     if check_distribution(generate, 1_000_000, 0.01) then
         write_line("  flat enough")
     else
-        write_line(
-            "  error: the distribution is not flat enough"
-        )
+        write_line("  error: the distribution is not flat enough")
     fi
 
     write_line("")

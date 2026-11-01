@@ -3,8 +3,7 @@ use System.Convert.to_string
 
 unit[T](value: T) -> T{} => [value]
 
->>=[T, U](values: T{}, f: (T) -> U{}) -> U{} =>
-    values |> flat_map(f)
+>>=[T, U](values: T{}, f: (T) -> U{}) -> U{} => values |> flat_map(f)
 
 factors(n: int) -> int{} => 1::n |> filter(d => n % d == 0)
 

@@ -19,9 +19,7 @@ let random = System.Random(10)
 let spread = () => random.next_double() * 2.0D - 1.0D
 
 let points =
-    (0..2000)
-        |> map(_ => V3(spread(), spread(), 1.0D))
-        |> collect()
+    (0..2000) |> map(_ => V3(spread(), spread(), 1.0D)) |> collect()
 
 let weights mut = V3(spread(), spread(), spread())
 
@@ -34,15 +32,11 @@ train(p: V3) is
 si
 
 correct() -> int =>
-    points
-        |> filter(p => guess(p) == above(p.x, p.y))
-        |> count()
+    points |> filter(p => guess(p) == above(p.x, p.y)) |> count()
 
 write_line("the line to learn is y = {slope}x + {intercept}")
 write_line()
-write_line(
-    "after   0 passes: {correct(),4} of {points.count} correct"
-)
+write_line("after   0 passes: {correct(),4} of {points.count} correct")
 
 for pass in 1::100 do
     for p in points do
@@ -66,12 +60,8 @@ write_line(
     "{learned_slope:F3}x + {learned_intercept:F2}"
 )
 
-write_line(
-    "in the picture, blue points are guessed above the line,"
-)
-write_line(
-    "green below and red wrongly; the line learned is orange"
-)
+write_line("in the picture, blue points are guessed above the line,")
+write_line("green below and red wrongly; the line learned is orange")
 
 let image = IMAGE(400, 400)
 

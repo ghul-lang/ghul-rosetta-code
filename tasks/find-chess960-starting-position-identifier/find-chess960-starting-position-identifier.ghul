@@ -19,9 +19,7 @@ let knight_pairs = [
 sp_id(pieces: string) -> int =>
     let
         knights = positions(without(pieces, "QB"), 'N'),
-        n =
-            knight_pairs
-                |> find_index(* =~ (knights[0], knights[1]))!,
+        n = knight_pairs |> find_index(* =~ (knights[0], knights[1]))!,
         q = without(pieces, "B").index_of('Q'),
         bishops = positions(pieces, 'B'),
         dark = bishops |> find(b => b % 2 == 0)! / 2,
@@ -31,9 +29,7 @@ sp_id(pieces: string) -> int =>
 
 let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> collect_map()
 
-for
-    pieces in ["QNRBBNKR", "RNBQKBNR", "RQNBBKRN", "RNQBBKRN"]
-do
+for pieces in ["QNRBBNKR", "RNBQKBNR", "RQNBBKRN", "RNQBBKRN"] do
     let shown = pieces |> map(p => symbols[p]) |> join("")
 
     write_line("{pieces} {shown}: {sp_id(pieces)}")

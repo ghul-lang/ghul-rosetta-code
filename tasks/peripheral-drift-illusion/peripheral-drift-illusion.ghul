@@ -9,10 +9,7 @@ let radius = spacing / 3.0D
 let offset = radius / 2.5D
 let step = 2.0D * pi / 15.0D
 
-let image = IMAGE(
-    int(spacing) * (columns + 1),
-    int(spacing) * (rows + 1)
-)
+let image = IMAGE(int(spacing) * (columns + 1), int(spacing) * (rows + 1))
 
 image.view(
     0.0D,

@@ -13,8 +13,7 @@ struct P(x: double, y: double) is
 si
 
 struct CIRCLE(centre: P, radius: double) is
-    contains(p: P) -> bool =>
-        (p - centre).length <= radius + 1.0e-9
+    contains(p: P) -> bool => (p - centre).length <= radius + 1.0e-9
 
     to_string() -> string =>
         "centre ({centre.x:F6}, {centre.y:F6}), radius {radius:F6}"
@@ -116,9 +115,7 @@ image.stroke(2.0D)
 image.circle(circle.centre.x, circle.centre.y, circle.radius)
 
 for p in scattered do
-    if
-        abs((p - circle.centre).length - circle.radius) < 1.0e-6
-    then
+    if abs((p - circle.centre).length - circle.radius) < 1.0e-6 then
         image.colour(210ub, 50ub, 40ub)
         image.dot(p.x, p.y, 5.0D)
     else

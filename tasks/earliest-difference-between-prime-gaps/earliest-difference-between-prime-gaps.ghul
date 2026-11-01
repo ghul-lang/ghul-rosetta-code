@@ -7,10 +7,7 @@ let composite = (
 
     for p in 2..limit |> take_while(p => p * p < limit) do
         if !sieve[p] then
-            for
-                multiple in from(p * p, p)
-                    |> take_while(* < limit)
-            do
+            for multiple in from(p * p, p) |> take_while(* < limit) do
                 sieve[multiple] = true
             od
         fi
@@ -48,16 +45,13 @@ do
                 first_start.contains_key(gap + 2)
             )
             |> find(gap =>
-                int.abs(
-                    first_start[gap + 2] - first_start[gap]
-                ) > m
+                int.abs(first_start[gap + 2] - first_start[gap]) > m
             )
 
     write_line("Earliest difference > {m:N0}:")
 
     if let gap = found then
-        let start = first_start[gap],
-            next = first_start[gap + 2]
+        let start = first_start[gap], next = first_start[gap + 2]
         let difference = int.abs(next - start)
 
         write_line(

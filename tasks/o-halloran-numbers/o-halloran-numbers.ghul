@@ -14,8 +14,6 @@ let o_halloran =
         |> filter(n => n % 2 == 0 /\ areas.contains(n) == false)
         |> collect()
 
-write_line(
-    "even values below 1000 that are no cuboid's surface area:"
-)
+write_line("even values below 1000 that are no cuboid's surface area:")
 write_line(o_halloran |> join(" "))
 write_line("count: {o_halloran.count}")

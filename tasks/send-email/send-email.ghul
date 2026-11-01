@@ -15,10 +15,7 @@ send_email(
     subject: string,
     text: string
 ) is
-    let message = MailMessage(
-        MailAddress(from),
-        MailAddress(to)
-    )
+    let message = MailMessage(MailAddress(from), MailAddress(to))
 
     message.cc.add(cc)
     message.subject = subject

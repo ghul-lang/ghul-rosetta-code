@@ -36,8 +36,7 @@ si
 sort_tree(node: NODE, descending: bool) is
     let ordered =
         if descending then
-            node.children
-                |> sort_by_descending(child => child.text)
+            node.children |> sort_by_descending(child => child.text)
         else
             node.children |> sort_by(child => child.text)
         fi
@@ -76,9 +75,7 @@ arrange(outline: List[string], descending: bool) -> Outcome is
 
     for indent in indents do
         if indent |> any(* != marker) then
-            return Outcome.INCONSISTENT(
-                "indentation mixes tabs and spaces"
-            )
+            return Outcome.INCONSISTENT("indentation mixes tabs and spaces")
         fi
 
         if indent.length % unit.length != 0 then

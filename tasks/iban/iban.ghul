@@ -5,11 +5,7 @@ is_valid_iban(raw: string) -> bool is
 
     let is_letter = ch => ch >= 'A' /\ ch <= 'Z'
 
-    if
-        iban.length < 4 \/
-        !is_letter(iban[0]) \/
-        !is_letter(iban[1])
-    then
+    if iban.length < 4 \/ !is_letter(iban[0]) \/ !is_letter(iban[1]) then
         return false
     fi
 

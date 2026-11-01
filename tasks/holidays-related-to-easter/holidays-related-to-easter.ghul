@@ -78,20 +78,11 @@ for year in years do
         write_line("{year} Julian computus, Julian calendar:")
         write_line("    {feasts(easter, in_julian, western)}")
     else
-        let catholic = gregorian_easter(year),
-            eastern = julian_easter(year)
+        let catholic = gregorian_easter(year), eastern = julian_easter(year)
 
-        write_line(
-            "{year} Gregorian computus, Gregorian calendar:"
-        )
-        write_line(
-            "    {feasts(catholic, in_gregorian, western)}"
-        )
-        write_line(
-            "{year} Julian computus, Gregorian calendar:"
-        )
-        write_line(
-            "    {feasts(eastern, in_gregorian, orthodox)}"
-        )
+        write_line("{year} Gregorian computus, Gregorian calendar:")
+        write_line("    {feasts(catholic, in_gregorian, western)}")
+        write_line("{year} Julian computus, Gregorian calendar:")
+        write_line("    {feasts(eastern, in_gregorian, orthodox)}")
     fi
 od

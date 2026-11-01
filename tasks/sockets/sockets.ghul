@@ -23,9 +23,7 @@ let listener =
         write_line("listening on port {wanted}")
         privileged
     else
-        write_line(
-            "port {wanted} needs privileges, taking any free port"
-        )
+        write_line("port {wanted} needs privileges, taking any free port")
 
         let any = listen_on(0)
 

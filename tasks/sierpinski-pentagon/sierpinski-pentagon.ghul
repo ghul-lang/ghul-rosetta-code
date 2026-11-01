@@ -10,8 +10,7 @@ use Pentagon = (x: double, y: double, radius: double)
 let golden = (1.0D + sqrt(5.0D)) / 2.0D
 let shrink = 1.0D / (1.0D + golden)
 
-towards(index: int) -> double =>
-    pi / 2.0D + 0.4D * pi * double(index)
+towards(index: int) -> double => pi / 2.0D + 0.4D * pi * double(index)
 
 corner_of(shape: Pentagon, index: int) -> Point => (
     let angle = towards(index)
@@ -48,9 +47,7 @@ let whole = (x = 0.0D, y = 0.0D, radius = 1.0D)
 let order = 5
 
 for shown in 1::order do
-    write_line(
-        "order {shown}: {flake(whole, shown) |> count()} pentagons"
-    )
+    write_line("order {shown}: {flake(whole, shown) |> count()} pentagons")
 od
 
 let palette = [

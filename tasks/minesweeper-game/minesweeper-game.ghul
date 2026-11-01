@@ -26,8 +26,7 @@ neighbours(cell: int) -> int{} is
         for dx in -1::1 do
             let (nx, ny) = (x + dx, y + dy)
 
-            let on_grid =
-                nx >= 0 /\ nx < width /\ ny >= 0 /\ ny < height
+            let on_grid = nx >= 0 /\ nx < width /\ ny >= 0 /\ ny < height
 
             if (dx != 0 \/ dy != 0) /\ on_grid then
                 yield ny * width + nx
@@ -72,9 +71,7 @@ show(reveal: bool) is
 si
 
 write_line("there are {mines.count} mines")
-write_line(
-    "enter 'c x y' to clear a square or 'm x y' to mark one"
-)
+write_line("enter 'c x y' to clear a square or 'm x y' to mark one")
 show(false)
 
 let finished mut = false
@@ -89,10 +86,7 @@ while !finished do
     write_line("> {line}")
 
     let parts = line.split([' '])
-    let (x, y) = (
-        int.parse(parts[1]) - 1,
-        int.parse(parts[2]) - 1
-    )
+    let (x, y) = (int.parse(parts[1]) - 1, int.parse(parts[2]) - 1)
     let cell = y * width + x
 
     if parts[0] =~ "m" then

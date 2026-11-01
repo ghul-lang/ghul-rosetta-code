@@ -23,9 +23,7 @@ build_tree(leaves: List[Huffman]) -> Huffman => (
         let first = take_lightest(pending)
         let second = take_lightest(pending)
 
-        pending.add(
-            NODE(first, second, first.weight + second.weight)
-        )
+        pending.add(NODE(first, second, first.weight + second.weight))
     od
 
     pending[0]
@@ -39,10 +37,7 @@ codes(node: Huffman, prefix: string) -> (
     if let leaf: LEAF = node then
         let code = if prefix.length == 0 then "0" else prefix fi
 
-        yield (
-            symbol = leaf.symbol, weight = leaf.weight,
-            code = code
-        )
+        yield (symbol = leaf.symbol, weight = leaf.weight, code = code)
     elif let branch: NODE = node then
         yield in codes(branch.left, "{prefix}0")
         yield in codes(branch.right, "{prefix}1")

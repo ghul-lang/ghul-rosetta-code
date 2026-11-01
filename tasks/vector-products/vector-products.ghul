@@ -1,8 +1,7 @@
 use default
 use VECTOR = (x: int, y: int, z: int)
 
-*(a: VECTOR, b: VECTOR) -> int =>
-    a.x * b.x + a.y * b.y + a.z * b.z
+*(a: VECTOR, b: VECTOR) -> int => a.x * b.x + a.y * b.y + a.z * b.z
 
 ><(a: VECTOR, b: VECTOR) -> VECTOR => (
     x = a.y * b.z - a.z * b.y,

@@ -22,8 +22,7 @@ describe(n: int) -> Maybe[string] =>
 text(value: Maybe[string]) -> string =>
     if let (inner): JUST = value then inner else "nothing" fi
 
-show(n: int) =>
-    write_line("{n}: {text(unit(n) >>= halve >>= describe)}")
+show(n: int) => write_line("{n}: {text(unit(n) >>= halve >>= describe)}")
 
 show(8)
 show(7)

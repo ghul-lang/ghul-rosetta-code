@@ -10,9 +10,7 @@ use Hailstone.hailstone
 let (length, count) =
     1..100_000
         |> group_by(n => hailstone(long(n)).count)
-        |> map((length, starts) => (
-            length, count = starts.count
-        ))
+        |> map((length, starts) => (length, count = starts.count))
         |> max_by((_, count) => count)!
 
 write_line(

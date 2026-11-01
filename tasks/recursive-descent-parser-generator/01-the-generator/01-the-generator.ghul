@@ -95,23 +95,16 @@ items(text: string) -> List[Item] is
         if c == '"' then
             let end = text.index_of('"', i + 1)
 
-            result.add(
-                Item.LITERAL(text.substring(i + 1, end - i - 1))
-            )
+            result.add(Item.LITERAL(text.substring(i + 1, end - i - 1)))
             i = end + 1
         elif char.is_letter(c) then
             let start = i
 
-            while
-                i < text.length /\
-                char.is_letter_or_digit(text[i])
-            do
+            while i < text.length /\ char.is_letter_or_digit(text[i]) do
                 i = i + 1
             od
 
-            result.add(
-                Item.RULE(text.substring(start, i - start))
-            )
+            result.add(Item.RULE(text.substring(start, i - start)))
         else
             case c
             when '{' then result.add(Item.OPEN)
@@ -159,18 +152,14 @@ binary(name: string, head: string, pairs: List[List[Item]]) is
     say("    do")
 
     for
-        (pair, place) in pairs
-            |> index()
-            |> map(iv => (iv.value, iv.index))
+        (pair, place) in pairs |> index() |> map(iv => (iv.value, iv.index))
     do
         let operator = called(pair[0])
         let operand = called(pair[1])
         let keyword = if place == 0 then "if" else "elif" fi
 
         say("        {keyword} accept(\"{operator}\") then")
-        say(
-            "            left = emit(left, \"{operator}\", {operand}())"
-        )
+        say("            left = emit(left, \"{operator}\", {operand}())")
     od
 
     say("        else")
@@ -221,11 +210,7 @@ while let line = read_line() do
     say("")
 
     if parts |> any(p => isa Item.OPEN(p)) then
-        let body =
-            parts
-                |> skip(2)
-                |> take(parts.count - 3)
-                |> collect()
+        let body = parts |> skip(2) |> take(parts.count - 3) |> collect()
 
         binary(name, called(parts[0]), alternatives(body))
     else

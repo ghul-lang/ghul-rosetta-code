@@ -5,9 +5,7 @@ use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -20,12 +18,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -64,15 +57,9 @@ scene() -> IMAGE is
     image
 si
 
-use Layer = (
-    name: string,
-    row: int,
-    column: int,
-    show: RGB -> RGB
-)
+use Layer = (name: string, row: int, column: int, show: RGB -> RGB)
 
-byte(v: double) -> ubyte =>
-    ubyte(round(255.0D * clamp(v, 0.0D, 1.0D)))
+byte(v: double) -> ubyte => ubyte(round(255.0D * clamp(v, 0.0D, 1.0D)))
 
 fraction(b: ubyte) -> double => double(b) / 255.0D
 
@@ -83,9 +70,7 @@ ink(amount: double, r: double, g: double, b: double) -> RGB => (
 )
 
 cmyk(p: RGB) -> (c: double, m: double, y: double, k: double) is
-    let r = fraction(p.red),
-        g = fraction(p.green),
-        b = fraction(p.blue)
+    let r = fraction(p.red), g = fraction(p.green), b = fraction(p.blue)
     let k = 1.0D - max(r, max(g, b))
 
     if k >= 1.0D then
@@ -94,12 +79,7 @@ cmyk(p: RGB) -> (c: double, m: double, y: double, k: double) is
 
     let rest = 1.0D - k
 
-    (
-        (1.0D - r - k) / rest,
-        (1.0D - g - k) / rest,
-        (1.0D - b - k) / rest,
-        k
-    )
+    ((1.0D - r - k) / rest, (1.0D - g - k) / rest, (1.0D - b - k) / rest, k)
 si
 
 let layers: Layer[] = [
@@ -134,13 +114,7 @@ for layer in layers do
         for x in 0..source.width do
             let p = layer.show(source.pixel(x, y))
 
-            sheet.set_pixel(
-                left + x,
-                top + y,
-                p.red,
-                p.green,
-                p.blue
-            )
+            sheet.set_pixel(left + x, top + y, p.red, p.green, p.blue)
         od
     od
 
@@ -156,10 +130,7 @@ od
 
 let key_top = double(10 + cell_height + 40)
 
-for
-    (i, line) in ["top: RGB", "middle: CMY", "bottom: CMYK"]
-        |> index()
-do
+for (i, line) in ["top: RGB", "middle: CMY", "bottom: CMYK"] |> index() do
     let y = key_top + 18.0D * double(i)
 
     sheet.text(90.0D, y, 11.0D, line, Anchor.CENTRE)

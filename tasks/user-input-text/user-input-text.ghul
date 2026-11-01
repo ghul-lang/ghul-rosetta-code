@@ -19,7 +19,5 @@ read_75000() -> int? =>
     od
 
 if let text = ask("string: "), number = read_75000() then
-    write_line(
-        "read the string {text} and the integer {number}"
-    )
+    write_line("read the string {text} and the integer {number}")
 fi

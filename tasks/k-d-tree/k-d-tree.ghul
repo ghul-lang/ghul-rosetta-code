@@ -13,10 +13,7 @@ build(points: Collections.List[Point], depth: int) -> Tree is
     fi
 
     let axis = depth % points[0].count
-    let sorted =
-        points
-            |> sort((a, b) => a[axis] <> b[axis])
-            |> collect()
+    let sorted = points |> sort((a, b) => a[axis] <> b[axis]) |> collect()
     let middle = sorted.count / 2
 
     Tree.NODE(
@@ -49,10 +46,8 @@ nearest(tree: Tree, target: Point) -> Found is
             fi
 
             let offset = target[n.axis] - n.point[n.axis]
-            let near =
-                if offset < 0.0 then n.left else n.right fi
-            let far =
-                if offset < 0.0 then n.right else n.left fi
+            let near = if offset < 0.0 then n.left else n.right fi
+            let far = if offset < 0.0 then n.right else n.left fi
 
             search(near)
 
@@ -73,22 +68,13 @@ si
 
 place(p: Point) -> string => p |> map(c => "{c:F6}") |> join()
 
-show(
-    name: string,
-    points: Collections.List[Point],
-    target: Point
-) is
-    let (point, distance, visited) = nearest(
-        build(points, 0),
-        target
-    )
+show(name: string, points: Collections.List[Point], target: Point) is
+    let (point, distance, visited) = nearest(build(points, 0), target)
 
     write_line("{name}")
     write_line("  searching for ({place(target)})")
     write_line("  nearest is ({place(point)})")
-    write_line(
-        "  distance {distance:F6}, {visited} nodes visited"
-    )
+    write_line("  distance {distance:F6}, {visited} nodes visited")
 si
 
 let wikipedia = [
@@ -109,11 +95,6 @@ let random = System.Random(42)
 random_point() -> Point =>
     repeat(0, 3) |> map(_ => random.next_double()) |> collect()
 
-let cloud =
-    repeat(0, 1000) |> map(_ => random_point()) |> collect()
+let cloud = repeat(0, 1000) |> map(_ => random_point()) |> collect()
 
-show(
-    "1000 random points in the unit cube",
-    cloud,
-    random_point()
-)
+show("1000 random points in the unit cube", cloud, random_point())

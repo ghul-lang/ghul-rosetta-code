@@ -89,9 +89,7 @@ for token in scan(line) do
         action = "pop to output until open parenthesis"
     fi
 
-    write_line(
-        row(token.text, action, show(operators), show(output))
-    )
+    write_line(row(token.text, action, show(operators), show(output)))
 od
 
 while operators.count > 0 do
@@ -99,12 +97,7 @@ while operators.count > 0 do
     operators.remove_at(operators.count - 1)
 
     write_line(
-        row(
-            "",
-            "pop remaining to output",
-            show(operators),
-            show(output)
-        )
+        row("", "pop remaining to output", show(operators), show(output))
     )
 od
 

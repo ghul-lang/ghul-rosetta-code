@@ -12,16 +12,12 @@ let tested = [
 ]
 
 for p in tested do
-    let verdict =
-        if is_wilson_prime(p) then "prime" else "composite" fi
+    let verdict = if is_wilson_prime(p) then "prime" else "composite" fi
     write_line("{p,4} {verdict}")
 od
 
 write_line("")
 write_line("primes below 100:")
 write_line(
-    (1L..100L)
-        |> filter(is_wilson_prime)
-        |> map(p => "{p}")
-        |> join(" ")
+    (1L..100L) |> filter(is_wilson_prime) |> map(p => "{p}") |> join(" ")
 )

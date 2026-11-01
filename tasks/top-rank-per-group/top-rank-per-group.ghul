@@ -1,11 +1,6 @@
 use default
 
-use Employee = (
-    name: string,
-    id: string,
-    salary: int,
-    department: string
-)
+use Employee = (name: string, id: string, salary: int, department: string)
 
 let staff: List[Employee] = [
     ("Tyler Bennett", "E10297", 32000, "D101"),
@@ -34,8 +29,7 @@ top_earners(department: string, wanted: int) -> Employee{} => (
     earners |> take(wanted)
 )
 
-let departments =
-    staff |> map(e => e.department) |> collect_mutable()
+let departments = staff |> map(e => e.department) |> collect_mutable()
 
 departments.sort()
 
@@ -46,9 +40,7 @@ departments
 
         top_earners(department, 3)
             |> each(e =>
-                write_line(
-                    "    {e.name,-16} {e.id}  {e.salary,6}"
-                )
+                write_line("    {e.name,-16} {e.id}  {e.salary,6}")
             )
 
         write_line("")

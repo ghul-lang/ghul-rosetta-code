@@ -17,18 +17,13 @@ describe(numerator: int, denominator: int) -> string =>
     let terms =
         if whole > 0 then ["[{whole}]"] else [] fi ++
         (
-            egyptian(
-                cast(numerator % denominator),
-                cast(denominator)
-            )
+            egyptian(cast(numerator % denominator), cast(denominator))
                 |> map(unit => "1/{unit}")
         )
     in
     "{numerator}/{denominator} = {terms |> join(" + ")}"
 
-for
-    (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)]
-do
+for (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)] do
     write_line(describe(numerator, denominator))
 od
 
@@ -36,8 +31,7 @@ units(numerator: int, denominator: int) -> bigint{} =>
     egyptian(cast(numerator), cast(denominator))
 
 last_unit(numerator: int, denominator: int) -> bigint =>
-    units(numerator, denominator)
-        |> reduce(0n, (_, unit) => unit)
+    units(numerator, denominator) |> reduce(0n, (_, unit) => unit)
 
 report(limit: int) is
     let fractions = {
@@ -48,21 +42,16 @@ report(limit: int) is
 
     let (numerator, denominator) =
         fractions |> max_by(((n, d)) => units(n, d) |> count())!
-    let (top, bottom) =
-        fractions |> max_by(((n, d)) => last_unit(n, d))!
+    let (top, bottom) = fractions |> max_by(((n, d)) => last_unit(n, d))!
 
     let terms = units(numerator, denominator) |> count()
     let unit = last_unit(top, bottom)
 
     write_line("")
     write_line("for proper fractions with terms up to {limit}:")
-    write_line(
-        "  most terms: {numerator}/{denominator} with {terms} terms"
-    )
+    write_line("  most terms: {numerator}/{denominator} with {terms} terms")
     write_line("  largest denominator: {top}/{bottom}")
-    write_line(
-        "    with {unit.to_string().length} digits: {unit}"
-    )
+    write_line("    with {unit.to_string().length} digits: {unit}")
 si
 
 report(99)

@@ -1,11 +1,6 @@
 use default
 
-within(
-    x: double,
-    y: double,
-    centre: double,
-    radius: double
-) -> bool =>
+within(x: double, y: double, centre: double, radius: double) -> bool =>
     x * x + (y - centre) * (y - centre) <= radius * radius
 
 symbol(x: double, y: double, radius: double) -> string =>
@@ -30,11 +25,7 @@ taijitu(radius: int) -> string{} is
         yield
             ((-2 * radius)::(2 * radius))
                 |> map(column =>
-                    symbol(
-                        cast(column) / 2.0D,
-                        cast(row),
-                        cast(radius)
-                    )
+                    symbol(cast(column) / 2.0D, cast(row), cast(radius))
                 )
                 |> join("")
     od

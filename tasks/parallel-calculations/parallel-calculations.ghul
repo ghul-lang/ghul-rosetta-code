@@ -35,11 +35,7 @@ let factorisations =
         |> collect()
 
 let best =
-    (
-        factorisations
-            |> index()
-            |> max_by(entry => entry.value[0])
-    )!.index
+    (factorisations |> index() |> max_by(entry => entry.value[0]))!.index
 
 for at in 0..numbers.count do
     write_line(

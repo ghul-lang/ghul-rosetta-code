@@ -17,10 +17,7 @@ fringe(tree: Tree) -> int{} is
     fi
 si
 
-compare(first: Tree, second: Tree) -> (
-    same: bool,
-    leaves: int
-) is
+compare(first: Tree, second: Tree) -> (same: bool, leaves: int) is
     let left = fringe(first).iterator
     let right = fringe(second).iterator
 

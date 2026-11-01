@@ -73,8 +73,7 @@ shortest_from(
     source: int
 ) -> Collections.List[double?] is
     let size = graph.count
-    let distance =
-        repeat(cast double?(null), size) |> collect_mutable()
+    let distance = repeat(cast double?(null), size) |> collect_mutable()
 
     distance[source] = 0.0
 
@@ -90,10 +89,7 @@ shortest_from(
         for v in 0..size do
             if let weight = graph[u][v] then
                 let through =
-                    distance[u]! +
-                    weight +
-                    potential[u] -
-                    potential[v]
+                    distance[u]! + weight + potential[u] - potential[v]
 
                 if !distance[v]? \/ through < distance[v]! then
                     distance[v] = through
@@ -106,9 +102,7 @@ shortest_from(
 
     for v in 0..size do
         if let reweighted = distance[v] then
-            result.add(
-                reweighted - potential[source] + potential[v]
-            )
+            result.add(reweighted - potential[source] + potential[v])
         else
             result.add(null)
         fi

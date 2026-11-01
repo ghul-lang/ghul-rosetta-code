@@ -24,9 +24,7 @@ encrypt(text: string, square: SQUARE) -> string =>
         coords = rows ++ cols |> collect()
     in
         0..n
-            |> map(i =>
-                square.at(coords[i * 2], coords[i * 2 + 1])
-            )
+            |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
             |> join("")
 
 decrypt(text: string, square: SQUARE) -> string =>
@@ -42,9 +40,7 @@ decrypt(text: string, square: SQUARE) -> string =>
                 ])
                 |> collect()
         in
-        0..n
-            |> map(i => square.at(coords[i], coords[n + i]))
-            |> join("")
+        0..n |> map(i => square.at(coords[i], coords[n + i])) |> join("")
 
 demo(label: string, message: string, square: SQUARE) is
     let encoded = encrypt(message, square)
@@ -59,16 +55,8 @@ si
 let archetype = SQUARE("ABCDEFGHIKLMNOPQRSTUVWXYZ")
 let wiki_square = SQUARE("BGWKZQPNDSIOAXEFCLUMTHYVR")
 
-demo(
-    "archetypal square, task's own example",
-    "ATTACKATDAWN",
-    archetype
-)
-demo(
-    "Wikipedia square, Wikipedia's own example",
-    "FLEEATONCE",
-    wiki_square
-)
+demo("archetypal square, task's own example", "ATTACKATDAWN", archetype)
+demo("Wikipedia square, Wikipedia's own example", "FLEEATONCE", wiki_square)
 demo(
     "task's example message, Wikipedia's square",
     "ATTACKATDAWN",

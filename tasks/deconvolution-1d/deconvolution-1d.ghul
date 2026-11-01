@@ -5,8 +5,7 @@ deconvolve(g: int[], f: int[]) -> List[int] => (
 
     for n in 0..g.count - f.count + 1 do
         let lower = System.Math.max(0, n - f.count + 1)
-        let overlap =
-            (lower..n) |> map(i => f[n - i] * h[i]) |> sum()
+        let overlap = (lower..n) |> map(i => f[n - i] * h[i]) |> sum()
 
         h.add((g[n] - overlap) / f[0])
     od
@@ -24,9 +23,7 @@ let g = [
 ]
 
 show(name: string, values: Collections.List[int]) =>
-    write_line(
-        "{name} = [{values |> map(v => "{v}") |> join(", ")}]"
-    )
+    write_line("{name} = [{values |> map(v => "{v}") |> join(", ")}]")
 
 show("h", h)
 show("deconv(g, f)", deconvolve(g, f))

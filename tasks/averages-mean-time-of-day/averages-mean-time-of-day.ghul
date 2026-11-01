@@ -20,6 +20,4 @@ mean_time(times: List[string]) -> string =>
 
 let times = ["23:00:17", "23:40:20", "00:12:45", "00:17:19"]
 
-write_line(
-    "mean time of {times |> join(", ")} is {mean_time(times)}"
-)
+write_line("mean time of {times |> join(", ")} is {mean_time(times)}")

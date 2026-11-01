@@ -21,9 +21,7 @@ let population = 7.8e9
 
 model(r: double, t: double) -> double =>
     let growth = exp(r * t) in
-    start *
-    growth /
-    (1.0D + start * (growth - 1.0D) / population)
+    start * growth / (1.0D + start * (growth - 1.0D) / population)
 
 error(r: double) -> double =>
     cases
@@ -47,9 +45,7 @@ golden_section(low: double, high: double) -> double => (
 
 let r = golden_section(0.0D, 0.5D)
 
-write_line(
-    "the r that fits the world Covid-19 data best is {r:F8}"
-)
+write_line("the r that fits the world Covid-19 data best is {r:F8}")
 write_line("so R0 is roughly e^(12r) = {exp(12.0D * r):F7}")
 
 let image = IMAGE(420, 280)

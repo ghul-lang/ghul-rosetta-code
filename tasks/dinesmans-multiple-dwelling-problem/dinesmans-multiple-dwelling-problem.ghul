@@ -16,16 +16,10 @@ floors
     ))
     |> filter(floors => floors.baker != 5)
     |> filter(floors => floors.cooper != 1)
-    |> filter(floors =>
-        floors.fletcher != 1 /\ floors.fletcher != 5
-    )
+    |> filter(floors => floors.fletcher != 1 /\ floors.fletcher != 5)
     |> filter(floors => floors.miller > floors.cooper)
-    |> filter(floors =>
-        !adjacent(floors.smith, floors.fletcher)
-    )
-    |> filter(floors =>
-        !adjacent(floors.fletcher, floors.cooper)
-    )
+    |> filter(floors => !adjacent(floors.smith, floors.fletcher))
+    |> filter(floors => !adjacent(floors.fletcher, floors.cooper))
     |> each(floors => (
         write_line("Baker lives on floor {floors.baker}")
         write_line("Cooper lives on floor {floors.cooper}")

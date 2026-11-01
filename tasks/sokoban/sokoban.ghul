@@ -14,8 +14,7 @@ let level = [
 let width = level[0].length
 let cells = level |> join("")
 
-let goals =
-    0..cells.length |> filter(i => cells[i] == '.') |> memo()
+let goals = 0..cells.length |> filter(i => cells[i] == '.') |> memo()
 
 let moves = [
     (step = -1, name = 'l'),
@@ -53,13 +52,7 @@ solve() -> string? is
 
             let blocked =
                 cells[next] == '#' \/
-                (
-                    pushed /\
-                    (
-                        cells[beyond] == '#' \/
-                        boxes[beyond] == '$'
-                    )
-                )
+                (pushed /\ (cells[beyond] == '#' \/ boxes[beyond] == '$'))
 
             if blocked then
                 continue
@@ -80,11 +73,7 @@ solve() -> string? is
                     fi
 
                 queue.enqueue(
-                    (
-                        player = next,
-                        boxes = after,
-                        path = "{path}{move}"
-                    )
+                    (player = next, boxes = after, path = "{path}{move}")
                 )
             fi
         od

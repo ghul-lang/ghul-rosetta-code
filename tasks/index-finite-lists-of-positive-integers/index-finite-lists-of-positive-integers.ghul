@@ -27,24 +27,16 @@ unrank(index: bigint) -> bigint{} is
     digits.reverse()
 
     let values =
-        digits
-            |> join("")
-            |> words()
-            |> map(bigint.parse)
-            |> collect()
+        digits |> join("") |> words() |> map(bigint.parse) |> collect()
 
     return values
 si
 
-let sample = [1, 2, 3, 10, 100, 987654321, 1]
-    |> map(bigint)
-    |> collect()
+let sample = [1, 2, 3, 10, 100, 987654321, 1] |> map(bigint) |> collect()
 
 let index = rank(sample)
 let restored = unrank(index)
 
 write_line("list:     {sample |> map(v => "{v}") |> join(" ")}")
 write_line("rank:     {index}")
-write_line(
-    "unranked: {restored |> map(v => "{v}") |> join(" ")}"
-)
+write_line("unranked: {restored |> map(v => "{v}") |> join(" ")}")

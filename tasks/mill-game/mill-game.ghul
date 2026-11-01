@@ -79,8 +79,7 @@ count_of(side: char) -> int => holding(side).count
 in_mill(point: string, side: char) -> bool =>
     mills
         |> any(m =>
-            m |> any(p => p =~ point) /\
-            m |> all(p => board[p] == side)
+            m |> any(p => p =~ point) /\ m |> all(p => board[p] == side)
         )
 
 use Move = (from: string?, to: string)
@@ -143,10 +142,7 @@ si
 removable(side: char) -> List[string] =>
     let
         pieces = holding(side),
-        loose =
-            pieces
-                |> filter(p => !in_mill(p, side))
-                |> collect()
+        loose = pieces |> filter(p => !in_mill(p, side)) |> collect()
     in
         if loose.count > 0 then loose else pieces fi
 
@@ -154,8 +150,7 @@ pick[T](items: List[T]) -> T => items[random.next(items.count)]
 
 computer_move(side: char) -> Move is
     let legal = moves(side)
-    let winning =
-        legal |> filter(makes_mill(*, side)) |> collect()
+    let winning = legal |> filter(makes_mill(*, side)) |> collect()
 
     if winning.count > 0 then
         return pick(winning)
@@ -168,9 +163,7 @@ computer_move(side: char) -> Move is
     ]
 
     let blocking =
-        legal
-            |> filter(m => threats |> any(t => t =~ m.to))
-            |> collect()
+        legal |> filter(m => threats |> any(t => t =~ m.to)) |> collect()
 
     if blocking.count > 0 then
         pick(blocking)
@@ -192,9 +185,7 @@ ask(prompt: string) -> string? is
 
     if !line? then
         autopilot = true
-        write_line(
-            "(no more input, so your moves are chosen for you)"
-        )
+        write_line("(no more input, so your moves are chosen for you)")
         return null
     fi
 
@@ -218,10 +209,7 @@ human_move() -> Move? is
         fi
 
         let squares =
-            answer.replace("-", " ").split(
-                [' '],
-                REMOVE_EMPTY_ENTRIES
-            )
+            answer.replace("-", " ").split([' '], REMOVE_EMPTY_ENTRIES)
 
         let chosen =
             legal
@@ -247,9 +235,7 @@ si
 
 human_removal(options: List[string]) -> string? is
     while true do
-        let answer = ask(
-            "which of the computer's pieces do you remove?"
-        )
+        let answer = ask("which of the computer's pieces do you remove?")
 
         if !answer? then
             return null
@@ -319,9 +305,7 @@ while !winner? do
         write_line("  a mill: {removes} the piece on {taken}")
     fi
 
-    if
-        to_place[other(side)] == 0 /\ count_of(other(side)) < 3
-    then
+    if to_place[other(side)] == 0 /\ count_of(other(side)) < 3 then
         winner = side
     fi
 

@@ -12,10 +12,8 @@ last_friday(year: int, month: int) -> DateTime =>
         |> map(back => last_day.add_days(-double(back)))
         |> find(day => day.day_of_week =~ DayOfWeek.FRIDAY)!
 
-last_fridays(year: int) -> DateTime{} =>
-    1::12 |> map(last_friday(year, *))
+last_fridays(year: int) -> DateTime{} => 1::12 |> map(last_friday(year, *))
 
 let year = 2012
 
-last_fridays(year)
-    |> each(friday => write_line("{friday:yyyy-MM-dd}"))
+last_fridays(year) |> each(friday => write_line("{friday:yyyy-MM-dd}"))

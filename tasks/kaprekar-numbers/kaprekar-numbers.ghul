@@ -9,15 +9,12 @@ kaprekar(n: int) -> bool =>
             right > 0L /\ square / p + right == long(n)
         )
 
-let below_ten_thousand =
-    (1::9999) |> filter(n => n == 1 \/ kaprekar(n))
+let below_ten_thousand = (1::9999) |> filter(n => n == 1 \/ kaprekar(n))
 
 write_line("Kaprekar numbers below 10000:")
 write_line(below_ten_thousand |> join())
 
 let below_million =
-    (1..1000000)
-        |> filter(n => n == 1 \/ kaprekar(n))
-        |> count()
+    (1..1000000) |> filter(n => n == 1 \/ kaprekar(n)) |> count()
 
 write_line("{below_million} Kaprekar numbers below 1000000")

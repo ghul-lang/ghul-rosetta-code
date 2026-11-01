@@ -3,15 +3,9 @@ use IO.Std.read_line
 
 struct Q(top: long, bottom: long) is
     +(o: Q) -> Q =>
-        reduced(
-            top * o.bottom + o.top * bottom,
-            bottom * o.bottom
-        )
+        reduced(top * o.bottom + o.top * bottom, bottom * o.bottom)
     -(o: Q) -> Q =>
-        reduced(
-            top * o.bottom - o.top * bottom,
-            bottom * o.bottom
-        )
+        reduced(top * o.bottom - o.top * bottom, bottom * o.bottom)
     *(o: Q) -> Q => reduced(top * o.top, bottom * o.bottom)
     /(o: Q) -> Q => reduced(top * o.bottom, bottom * o.top)
 
@@ -31,8 +25,7 @@ let target = Q(24L, 1L)
 
 solve(terms: List[Term]) -> string? is
     if let [only] = terms then
-        return
-            if only.value =~ target then only.text else null fi
+        return if only.value =~ target then only.text else null fi
     fi
 
     for i in 0..terms.count do
@@ -48,31 +41,14 @@ solve(terms: List[Term]) -> string? is
                 let joined = LIST()
 
                 if i < j then
-                    joined.add(
-                        (
-                            a.value + b.value,
-                            "({a.text} + {b.text})"
-                        )
-                    )
-                    joined.add(
-                        (
-                            a.value * b.value,
-                            "({a.text} * {b.text})"
-                        )
-                    )
+                    joined.add((a.value + b.value, "({a.text} + {b.text})"))
+                    joined.add((a.value * b.value, "({a.text} * {b.text})"))
                 fi
 
-                joined.add(
-                    (a.value - b.value, "({a.text} - {b.text})")
-                )
+                joined.add((a.value - b.value, "({a.text} - {b.text})"))
 
                 if !b.value.is_zero then
-                    joined.add(
-                        (
-                            a.value / b.value,
-                            "({a.text} / {b.text})"
-                        )
-                    )
+                    joined.add((a.value / b.value, "({a.text} / {b.text})"))
                 fi
 
                 for term in joined do

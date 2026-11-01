@@ -35,8 +35,7 @@ let circles: Circle[] = [
 
 let turn = 2.0D * pi
 
-wrap(angle: double) -> double =>
-    angle - turn * floor(angle / turn)
+wrap(angle: double) -> double => angle - turn * floor(angle / turn)
 
 distance(a: Circle, b: Circle) -> double =>
     sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
@@ -60,8 +59,7 @@ crossings(c: Circle, o: Circle) -> double{} is
     fi
 
     let base = atan2(o.y - c.y, o.x - c.x)
-    let cosine =
-        (c.r * c.r + d * d - o.r * o.r) / (2.0D * c.r * d)
+    let cosine = (c.r * c.r + d * d - o.r * o.r) / (2.0D * c.r * d)
     let spread = acos(cosine)
 
     [base - spread, base + spread]
@@ -83,22 +81,13 @@ outer_arcs(c: Circle, others: List[Circle]) -> Arc{} is
     angles.add(angles[0] + 2.0D * pi)
 
     (0..angles.count - 1)
-        |> map(i => (
-            circle = c,
-            from = angles[i],
-            to = angles[i + 1]
-        ))
+        |> map(i => (circle = c, from = angles[i], to = angles[i + 1]))
         |> filter(arc =>
             let
                 middle = (arc.from + arc.to) / 2.0D,
                 p = on(c, middle)
             in
-                !(
-                    others
-                        |> any(o =>
-                            !(o =~ c) /\ covers(o, p.x, p.y)
-                        )
-                )
+                !(others |> any(o => !(o =~ c) /\ covers(o, p.x, p.y)))
         )
         |> collect()
 si

@@ -3,15 +3,10 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC =>
-        VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(
-            y * o.z - z * o.y,
-            z * o.x - x * o.z,
-            x * o.y - y * o.x
-        )
+        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
 
     ⋅(o: VEC) -> double => x * o.x + y * o.y + z * o.z
 
@@ -45,8 +40,7 @@ turned(p: VEC) -> VEC =>
             p.z * sin(pitch) + y * cos(pitch)
         )
 
-angle(i: int) -> double =>
-    2.0D * pi * double(i) / double(around)
+angle(i: int) -> double => 2.0D * pi * double(i) / double(around)
 
 corner(i: int, j: int) -> VEC =>
     let v = 2.0D * double(j) / double(across) - 1.0D in
@@ -76,9 +70,7 @@ let start = normal(0.0D)
 let finish = normal(2.0D * pi)
 let turn = start ⋅ finish / (start.length * finish.length)
 
-write_line(
-    "a Möbius strip of width 1 around a circle of radius 1"
-)
+write_line("a Möbius strip of width 1 around a circle of radius 1")
 write_line("{quads.count} quadrilaterals, drawn farthest first")
 write_line(
     "cosine between the normal before and after one circuit: "
@@ -94,8 +86,7 @@ image.stroke(0.6D)
 for q in quads do
     let light = brightness(q.corners)
     let tone = 0.5D + 0.5D * cos(angle(q.at))
-    let outline =
-        q.corners |> map(p => (x = p.x, y = p.y)) |> collect()
+    let outline = q.corners |> map(p => (x = p.x, y = p.y)) |> collect()
 
     image.colour(
         ubyte(light * (230.0D - 170.0D * tone)),

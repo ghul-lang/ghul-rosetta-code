@@ -88,8 +88,7 @@ while pet.alive do
         pet.hunger = max(pet.hunger - 4, 0)
         write_line("{pet.name} eats")
     when "play" then
-        let hand =
-            if random.next(2) == 0 then "left" else "right" fi
+        let hand = if random.next(2) == 0 then "left" else "right" fi
         write_line("{pet.name} hid a treat: left or right?")
 
         let guess = read_line() ?? ""
@@ -108,9 +107,7 @@ while pet.alive do
         write_line("all clean")
     when "cure" then
         if pet.poops > 0 then
-            write_line(
-                "clean up first, or {pet.name} will get sick again"
-            )
+            write_line("clean up first, or {pet.name} will get sick again")
         else
             pet.sick = false
             write_line("{pet.name} feels better")

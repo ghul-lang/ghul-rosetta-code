@@ -6,9 +6,7 @@ class MACRO(parameters: List[string], body: string)
 
 let name = "[A-Za-z_][A-Za-z_0-9]*"
 
-let definition = Regex(
-    "^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$"
-)
+let definition = Regex("^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$")
 
 let inclusion = Regex("^#include\\s+\"([^\"]*)\"\\s*$")
 let usage = Regex("#({name})\\s*(\\(([^)#]*)\\))?\\s*#")
@@ -107,9 +105,7 @@ class PREPROCESSOR(debug: bool) is
                 let body = defined.groups[4].value.trim()
 
                 if defines.contains_key(macro) then
-                    output.add(
-                        "/* {macro} is already defined */"
-                    )
+                    output.add("/* {macro} is already defined */")
                 else
                     defines[macro] = MACRO(parameters, body)
 

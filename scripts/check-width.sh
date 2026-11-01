@@ -22,7 +22,7 @@ set -eo pipefail
 # count below does not depend on the locale, so the plain one is used always.
 export LC_ALL=C
 
-SOFT=64
+SOFT=76
 HARD=76
 
 ROOT=${CHECK_WIDTH_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}

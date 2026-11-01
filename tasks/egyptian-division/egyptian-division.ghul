@@ -3,10 +3,7 @@ use default
 use ROW = (power_of_2: int, doubling: int)
 use SUMS = (answer: int, accumulator: int)
 
-divide(dividend: int, divisor: int) -> (
-    answer: int,
-    remainder: int
-) =>
+divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
     let table =
         stream(
             (power_of_2 = 1, doubling = divisor),
@@ -24,25 +21,17 @@ divide(dividend: int, divisor: int) -> (
             |> reduce(
                 (answer = 0, accumulator = 0),
                 (sums, row) =>
-                    if
-                        sums.accumulator + row.doubling <=
-                        dividend
-                    then
+                    if sums.accumulator + row.doubling <= dividend then
                         (
-                            answer =
-                                sums.answer + row.power_of_2,
-                            accumulator =
-                                sums.accumulator + row.doubling
+                            answer = sums.answer + row.power_of_2,
+                            accumulator = sums.accumulator + row.doubling
                         )
                     else
                         sums
                     fi
             )
     in
-    (
-        answer = sums.answer,
-        remainder = dividend - sums.accumulator
-    )
+    (answer = sums.answer, remainder = dividend - sums.accumulator)
 
 let result = divide(580, 34)
 

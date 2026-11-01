@@ -9,16 +9,12 @@ use System.Text.Encoding
 // and download a file from it as binary.
 @suppress("deprecated")
 request(url: string, method: string) -> FtpWebResponse is
-    let ftp =
-        cast FtpWebRequest?(System.Net.WebRequest.create(url))!
+    let ftp = cast FtpWebRequest?(System.Net.WebRequest.create(url))!
 
     ftp.method = method
     ftp.use_passive = true
     ftp.use_binary = true
-    ftp.credentials = NetworkCredential(
-        "anonymous",
-        "rosetta@example.com"
-    )
+    ftp.credentials = NetworkCredential("anonymous", "rosetta@example.com")
 
     cast FtpWebResponse?(ftp.get_response())!
 si

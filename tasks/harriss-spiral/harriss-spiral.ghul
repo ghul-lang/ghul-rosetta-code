@@ -14,14 +14,8 @@ let colours = [
 ]
 
 quarter_arc(image: IMAGE, from: Point, to: Point) is
-    let middle = (
-        x = (from.x + to.x) / 2.0D,
-        y = (from.y + to.y) / 2.0D
-    )
-    let half = (
-        x = (to.x - from.x) / 2.0D,
-        y = (to.y - from.y) / 2.0D
-    )
+    let middle = (x = (from.x + to.x) / 2.0D, y = (from.y + to.y) / 2.0D)
+    let half = (x = (to.x - from.x) / 2.0D, y = (to.y - from.y) / 2.0D)
     let centre = (x = middle.x + half.y, y = middle.y - half.x)
 
     let start = atan2(from.y - centre.y, from.x - centre.x)
@@ -87,8 +81,7 @@ let x = 450.0D
 let y = 630.0D
 let base = 525.0D / plastic / plastic
 
-scaled(power: int) -> double =>
-    base / pow(plastic, double(power))
+scaled(power: int) -> double => base / pow(plastic, double(power))
 
 let left = x - (scaled(1) + scaled(3))
 let high = y - (base + scaled(2))
@@ -107,19 +100,10 @@ let starts = [
 ]
 
 for (sx, sy, degrees, length, steps, width) in starts do
-    harriss(
-        image,
-        (x = sx, y = sy),
-        degrees,
-        length,
-        steps,
-        width
-    )
+    harriss(image, (x = sx, y = sy), degrees, length, steps, width)
 od
 
-write_line(
-    "a nest of Harriss spirals, each arc {plastic} times smaller"
-)
+write_line("a nest of Harriss spirals, each arc {plastic} times smaller")
 
 image.write("harriss.png")
 

@@ -45,8 +45,6 @@ inventory
     |> each(price => write_line("  {price.value}"))
 
 let names =
-    inventory
-        |> xpath_select_elements("//name")
-        |> map(name => name.value)
+    inventory |> xpath_select_elements("//name") |> map(name => name.value)
 
 write_line("names: {$names}")

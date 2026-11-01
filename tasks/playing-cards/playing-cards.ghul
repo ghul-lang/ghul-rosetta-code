@@ -21,8 +21,7 @@ let pip_names = [
 ]
 
 struct CARD(pip: int public, suit: Suit public) is
-    describe() -> string =>
-        "{pip_names[pip]}{suit_symbol(suit)}"
+    describe() -> string => "{pip_names[pip]}{suit_symbol(suit)}"
 si
 
 class DECK is
@@ -64,8 +63,7 @@ class DECK is
 
     count: int => _cards.count
 
-    describe() -> string =>
-        _cards |> map(c => c.describe()) |> join(" ")
+    describe() -> string => _cards |> map(c => c.describe()) |> join(" ")
 si
 
 let deck = DECK()

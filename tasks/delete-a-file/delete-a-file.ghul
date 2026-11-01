@@ -38,9 +38,7 @@ delete_directory(path: string) -> string is
 si
 
 for where in ["", "/"] do
-    write_line(
-        "{where}input.txt: {delete_file("{where}input.txt")}"
-    )
+    write_line("{where}input.txt: {delete_file("{where}input.txt")}")
     write_line("{where}docs: {delete_directory("{where}docs")}")
 od
 

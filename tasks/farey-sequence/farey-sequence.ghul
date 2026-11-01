@@ -13,8 +13,7 @@ farey(order: int) -> (numerator: int, denominator: int){} is
 
         let following = (
             numerator = step * high.numerator - low.numerator,
-            denominator =
-                step * high.denominator - low.denominator
+            denominator = step * high.denominator - low.denominator
         )
 
         low = high
@@ -23,17 +22,13 @@ farey(order: int) -> (numerator: int, denominator: int){} is
 si
 
 for order in 1::11 do
-    let terms =
-        farey(order)
-            |> map(f => "{f.numerator}/{f.denominator}")
+    let terms = farey(order) |> map(f => "{f.numerator}/{f.denominator}")
 
     write_line("F{order,-3}{terms |> join(" ")}")
 od
 
 write_line("")
-write_line(
-    "the number of fractions in each of these sequences:"
-)
+write_line("the number of fractions in each of these sequences:")
 
 for order in 1::10 do
     let size = farey(order * 100) |> count()

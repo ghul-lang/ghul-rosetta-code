@@ -6,15 +6,9 @@ use Circle = (centre: Point, radius: double)
 
 circle_through(a: Point, b: Point, c: Point) -> Circle is
     let determinant =
-        2.0 *
-        (
-            a.x * (b.y - c.y) +
-            b.x * (c.y - a.y) +
-            c.x * (a.y - b.y)
-        )
+        2.0 * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
 
-    assert determinant != 0.0
-        else "the three points are collinear"
+    assert determinant != 0.0 else "the three points are collinear"
 
     let a_squared = a.x * a.x + a.y * a.y
     let b_squared = b.x * b.x + b.y * b.y
@@ -47,6 +41,4 @@ let (centre, radius) = circle_through(
     (x = 33.65, y = 17.31)
 )
 
-write_line(
-    "centre ({centre.x:F4}, {centre.y:F4}) radius {radius:F4}"
-)
+write_line("centre ({centre.x:F4}, {centre.y:F4}) radius {radius:F4}")

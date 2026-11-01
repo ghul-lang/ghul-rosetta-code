@@ -38,9 +38,7 @@ area(shape: Shape) -> int =>
     esac
 
 size(shape: Shape) -> string =>
-    if let
-        circle: Shape.CIRCLE = shape /\ circle.radius > 10
-    then
+    if let circle: Shape.CIRCLE = shape /\ circle.radius > 10 then
         "a big circle"
     else
         "something else"

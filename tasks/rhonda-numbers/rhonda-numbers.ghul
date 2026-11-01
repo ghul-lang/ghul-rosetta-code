@@ -4,14 +4,12 @@ is_rhonda(value: int, base: int) -> bool =>
     value |> digits(base) |> product() ==
     base * (value |> prime_factors() |> sum())
 
-rhondas(base: int) -> int{} =>
-    from(2) |> filter(is_rhonda(*, base))
+rhondas(base: int) -> int{} => from(2) |> filter(is_rhonda(*, base))
 
 write_line("the first ten Rhonda numbers, shown in base ten:")
 
 for base in 2::36 |> filter(b => !is_prime(b)) do
-    let found =
-        rhondas(base) |> take(10) |> map(term => "{term,8}")
+    let found = rhondas(base) |> take(10) |> map(term => "{term,8}")
 
     write_line("base {base,2}:{found |> join("")}")
 od

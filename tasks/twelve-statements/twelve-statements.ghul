@@ -1,7 +1,6 @@
 use default
 
-holds(values: List[bool], number: int) -> bool =>
-    values[number - 1]
+holds(values: List[bool], number: int) -> bool => values[number - 1]
 
 how_many(values: List[bool], numbers: List[int]) -> int =>
     numbers |> filter(holds(values, *)) |> count()
@@ -49,17 +48,12 @@ let statements = [
 ]
 
 consistent(values: List[bool]) -> bool =>
-    0..12
-        |> all(index =>
-            statements[index](values) == values[index]
-        )
+    0..12 |> all(index => statements[index](values) == values[index])
 
 assignments() -> bool[]{} =>
     (0..1 << 12)
         |> map(mask =>
-            0..12
-                |> map(bit => (mask >> bit) & 1 == 1)
-                |> collect()
+            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect()
         )
 
 write_line("consistent assignments:")

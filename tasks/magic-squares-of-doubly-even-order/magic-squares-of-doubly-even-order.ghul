@@ -42,6 +42,4 @@ for row in square do
 od
 
 write_line("")
-write_line(
-    "every row, column and diagonal sums to 260: {check(square)}"
-)
+write_line("every row, column and diagonal sums to 260: {check(square)}")

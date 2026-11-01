@@ -44,8 +44,7 @@ let player_wins mut = 0
 let ties mut = 0
 
 let choose_computer_move = () is
-    let total =
-        counts["rock"] + counts["paper"] + counts["scissors"]
+    let total = counts["rock"] + counts["paper"] + counts["scissors"]
     let target = random.next(0, total)
 
     if target < counts["rock"] then
@@ -65,8 +64,7 @@ while line? do
     let move_text = line
     let player_move = parse(move_text)
     let computer_move = choose_computer_move()
-    let played =
-        "you: {name(player_move)}, computer: {name(computer_move)}"
+    let played = "you: {name(player_move)}, computer: {name(computer_move)}"
 
     counts[move_text] = counts[move_text] + 1
 
@@ -84,6 +82,4 @@ while line? do
     line = read_line()
 od
 
-write_line(
-    "you: {player_wins}, computer: {computer_wins}, ties: {ties}"
-)
+write_line("you: {player_wins}, computer: {computer_wins}, ties: {ties}")

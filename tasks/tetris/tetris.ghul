@@ -34,10 +34,7 @@ rotated(piece: Piece) -> Piece => (
     size = piece.size,
     cells =
         piece.cells
-            |> map(c => (
-                row = c.column,
-                column = piece.size - 1 - c.row
-            ))
+            |> map(c => (row = c.column, column = piece.size - 1 - c.row))
             |> collect()
 )
 
@@ -68,12 +65,10 @@ free(r: int, k: int) -> bool =>
     well[r * width + k] == '.'
 
 fits(piece: Piece, row: int, column: int) -> bool =>
-    piece.cells
-        |> all(c => free(row + c.row, column + c.column))
+    piece.cells |> all(c => free(row + c.row, column + c.column))
 
 squares(piece: Piece, row: int, column: int) -> int{} =>
-    piece.cells
-        |> map(c => (row + c.row) * width + column + c.column)
+    piece.cells |> map(c => (row + c.row) * width + column + c.column)
 
 let current mut = draw()
 let next mut = draw()
@@ -107,10 +102,7 @@ show() is
                 |> join("")
 
     for r in 0..height do
-        let line =
-            0..width
-                |> map(k => symbol(r * width + k))
-                |> join("")
+        let line = 0..width |> map(k => symbol(r * width + k)) |> join("")
 
         let side =
             if r == 0 then "  next"
@@ -150,9 +142,7 @@ lock() -> bool is
     fits(current, row, column)
 si
 
-write_line(
-    "keys: a left, d right, w rotate, s soft drop, x hard drop"
-)
+write_line("keys: a left, d right, w rotate, s soft drop, x hard drop")
 show()
 
 let playing mut = true

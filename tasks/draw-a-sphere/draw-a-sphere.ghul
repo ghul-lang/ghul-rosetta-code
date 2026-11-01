@@ -21,11 +21,7 @@ let towards_light = (
     (x = x / length, y = y / length, z = z / length)
 )
 
-channel(
-    base: double,
-    level: double,
-    gloss: double
-) -> ubyte => (
+channel(base: double, level: double, gloss: double) -> ubyte => (
     let value = base * level + 255.0D * gloss
 
     ubyte(min(255.0D, max(0.0D, value)))

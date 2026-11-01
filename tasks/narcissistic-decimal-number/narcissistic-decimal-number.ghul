@@ -9,10 +9,7 @@ power(value: int, exponent: int) -> int =>
 
 is_narcissistic(number: int) -> bool =>
     let width = number |> digits() |> count() in
-    number
-        |> digits()
-        |> map(power(*, width))
-        |> sum() == number
+    number |> digits() |> map(power(*, width)) |> sum() == number
 
 let narcissistic =
     from(0)

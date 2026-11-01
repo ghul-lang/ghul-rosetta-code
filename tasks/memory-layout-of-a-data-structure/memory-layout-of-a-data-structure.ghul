@@ -11,11 +11,7 @@ struct FLAGS(
 )
 
 @System.Runtime.InteropServices.StructLayout(LayoutKind.SEQUENTIAL)
-struct HEADER(
-    kind: int field,
-    length: short field,
-    checksum: byte field
-)
+struct HEADER(kind: int field, length: short field, checksum: byte field)
 
 layout[T: struct](name: string) is
     write_line("{name}: {Marshal.size_of[T]()} bytes")

@@ -19,13 +19,8 @@ hash(n: uint, salt: uint, max: uint) -> uint => (
     uint((ulong(m) * ulong(max)) >> 32)
 )
 
-infer_bit(
-    command: uint,
-    bit: int,
-    program: List[Stage]
-) -> bool => (
-    let input = command | (uint(bit) << 16),
-        first_stage = program[0]
+infer_bit(command: uint, bit: int, program: List[Stage]) -> bool => (
+    let input = command | (uint(bit) << 16), first_stage = program[0]
 
     let start = (
         input = hash(input, first_stage.salt, first_stage.max),
@@ -37,20 +32,13 @@ infer_bit(
             |> skip(1)
             |> reduce(start, (state, stage) =>
                 let room = state.room - stage.max in
-                (
-                    input = hash(state.input, stage.salt, room),
-                    room = room
-                )
+                (input = hash(state.input, stage.salt, room), room = room)
             )
 
     result.input & 1u != 0u
 )
 
-inference(
-    command: uint,
-    bits: int,
-    program: List[Stage]
-) -> ulong =>
+inference(command: uint, bits: int, program: List[Stage]) -> ulong =>
     if program.count == 0 then
         0ul
     else
@@ -81,9 +69,6 @@ for row in roots |> chunk(16) do
 od
 
 let correct =
-    0..256
-        |> all(n =>
-            roots[n] == ulong(System.Math.sqrt(double(n)))
-        )
+    0..256 |> all(n => roots[n] == ulong(System.Math.sqrt(double(n))))
 
 write_line("every square root correct: {correct}")

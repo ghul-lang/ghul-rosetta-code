@@ -20,10 +20,7 @@ outline(steps: int) -> (x: double, y: double){} =>
         |> map(step => (
             let angle = 2.0D * pi * double(step) / double(steps)
 
-            (
-                x = shaped(cos(angle), a),
-                y = shaped(sin(angle), b)
-            )
+            (x = shaped(cos(angle), a), y = shaped(sin(angle), b))
         ))
 
 let image = IMAGE(560, 560)

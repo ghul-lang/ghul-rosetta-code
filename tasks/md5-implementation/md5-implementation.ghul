@@ -11,11 +11,7 @@ let shifts = [
 let sines =
     0..64
         |> map(step =>
-            uint(
-                floor(
-                    abs(sin(double(step + 1))) * 4294967296.0D
-                )
-            )
+            uint(floor(abs(sin(double(step + 1))) * 4294967296.0D))
         )
         |> collect()
 
@@ -124,12 +120,9 @@ let tests = [
 ]
 
 for (message, expected) in tests do
-    let digest = md5(
-        System.Text.Encoding.utf8.get_bytes(message)
-    )
+    let digest = md5(System.Text.Encoding.utf8.get_bytes(message))
 
-    assert digest =~ expected
-        else "does not agree with RFC 1321"
+    assert digest =~ expected else "does not agree with RFC 1321"
 
     write_line("{digest}  \"{message}\"")
 od

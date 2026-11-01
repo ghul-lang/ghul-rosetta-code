@@ -13,10 +13,7 @@ check_digit(sedol: string) -> char? =>
     let values = sedol |> map(value) |> collect() in
     if values.count == 6 /\ values |> all(v => v?) then
         let total =
-            values
-                |> zip(weights)
-                |> map(((v, w)) => v! * w)
-                |> sum()
+            values |> zip(weights) |> map(((v, w)) => v! * w) |> sum()
         in
         char(int('0') + (10 - total % 10) % 10)
     fi

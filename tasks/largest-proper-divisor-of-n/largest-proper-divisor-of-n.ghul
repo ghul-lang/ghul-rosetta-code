@@ -17,7 +17,6 @@ si
 largest_proper_divisor(n: int) -> int =>
     if n == 1 then 1 else n / smallest_prime_factor(n) fi
 
-let divisors =
-    1::100 |> map(n => "{largest_proper_divisor(n)}") |> join()
+let divisors = 1::100 |> map(n => "{largest_proper_divisor(n)}") |> join()
 
 write_line(divisors)

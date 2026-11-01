@@ -5,12 +5,10 @@ at_most(total: int, largest: int) -> int memo =>
     elif largest == 0 then 0
     elif largest > total then at_most(total, total)
     else
-        at_most(total, largest - 1) +
-        at_most(total - largest, largest)
+        at_most(total, largest - 1) + at_most(total - largest, largest)
     fi
 
-row(n: int) -> int{} =>
-    1::n |> map(first => at_most(n - first, first))
+row(n: int) -> int{} => 1::n |> map(first => at_most(n - first, first))
 
 for n in 1::25 do
     let cells = row(n) |> map(count => "{count,4}") |> join("")
@@ -49,10 +47,7 @@ p(n: int) -> bigint is
             from(1)
                 |> take_while(k => pentagonal(k) <= m)
                 |> sum_by(k =>
-                    let pair =
-                        term(pentagonal(k)) +
-                        term(pentagonal(-k))
-                    in
+                    let pair = term(pentagonal(k)) + term(pentagonal(-k)) in
                     if k % 2 == 1 then pair else -pair fi
                 )
 

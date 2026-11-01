@@ -45,9 +45,7 @@ let cubics = [("p", p), ("q", q), ("r", r)]
 write_line("Subprogram (1):")
 
 for (name, a) in quadratics do
-    write_line(
-        "  {name}: mono {a |> take(3)} -> bern {to_bernstein_2(a)}"
-    )
+    write_line("  {name}: mono {a |> take(3)} -> bern {to_bernstein_2(a)}")
 od
 
 write_line("Subprogram (2):")
@@ -56,9 +54,7 @@ for (name, a) in quadratics do
     for x in [0.25, 7.5] do
         let value = de_casteljau(to_bernstein_2(a), x)
 
-        write_line(
-            "  {name}({x}) = {value} (mono {horner(a, x)})"
-        )
+        write_line("  {name}({x}) = {value} (mono {horner(a, x)})")
     od
 od
 
@@ -74,9 +70,7 @@ for (name, a) in cubics do
     for x in [0.25, 7.5] do
         let value = de_casteljau(to_bernstein_3(a), x)
 
-        write_line(
-            "  {name}({x}) = {value} (mono {horner(a, x)})"
-        )
+        write_line("  {name}({x}) = {value} (mono {horner(a, x)})")
     od
 od
 

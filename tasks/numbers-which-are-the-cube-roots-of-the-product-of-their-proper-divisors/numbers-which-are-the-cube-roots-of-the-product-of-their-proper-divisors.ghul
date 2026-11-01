@@ -19,9 +19,7 @@ let divisor_count = (
 )
 
 let found =
-    1::limit
-        |> filter(n => n == 1 \/ divisor_count[n] == 8)
-        |> collect()
+    1::limit |> filter(n => n == 1 \/ divisor_count[n] == 8) |> collect()
 
 write_line("The first 50:")
 
@@ -30,7 +28,5 @@ for row in found |> take(50) |> chunk(10) do
 od
 
 for position in [500, 5_000, 50_000] do
-    write_line(
-        "\nThe {position:N0}th: {found[position - 1]:N0}"
-    )
+    write_line("\nThe {position:N0}th: {found[position - 1]:N0}")
 od

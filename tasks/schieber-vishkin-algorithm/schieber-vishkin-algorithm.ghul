@@ -163,6 +163,4 @@ let agree =
         |> all((u, v) => lca.query(u, v) == naive(u, v))
 
 write_line("")
-write_line(
-    "{nodes * nodes} pairs agree with a walk up the tree: {agree}"
-)
+write_line("{nodes * nodes} pairs agree with a walk up the tree: {agree}")

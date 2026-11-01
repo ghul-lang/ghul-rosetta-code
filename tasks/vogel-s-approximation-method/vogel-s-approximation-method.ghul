@@ -1,11 +1,7 @@
 use default
 
 use Cell = (row: int, column: int)
-use Line = (
-    penalty: int,
-    cheapest: int,
-    cells: Collections.List[Cell]
-)
+use Line = (penalty: int, cheapest: int, cells: Collections.List[Cell])
 
 let tasks = ["A", "B", "C", "D", "E"]
 let contractors = ["W", "X", "Y", "Z"]
@@ -26,11 +22,7 @@ let allocation =
         |> collect()
 
 line(cells: Collections.List[Cell]) -> Line =>
-    let prices =
-        cells
-            |> map((r, c) => costs[r][c])
-            |> sort()
-            |> collect()
+    let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> collect()
     in
     let penalty =
         if prices.count > 1 then
@@ -42,8 +34,7 @@ line(cells: Collections.List[Cell]) -> Line =>
     (penalty, prices[0], cells)
 
 active_lines() -> Line{} is
-    let rows =
-        (0..contractors.count) |> filter(r => supply[r] > 0)
+    let rows = (0..contractors.count) |> filter(r => supply[r] > 0)
     let columns = (0..tasks.count) |> filter(c => demand[c] > 0)
 
     for r in rows do
@@ -61,8 +52,7 @@ while demand |> any(* > 0) do
             |> sort_by(l => l.cheapest)
             |> max_by(l => l.penalty)!
 
-    let (row, column) =
-        chosen.cells |> min_by((r, c) => costs[r][c])!
+    let (row, column) = chosen.cells |> min_by((r, c) => costs[r][c])!
     let amount = System.Math.min(supply[row], demand[column])
 
     allocation[row][column] = amount
@@ -80,9 +70,7 @@ write_line("   {tasks |> map(t => "{t,3}") |> join("")}")
 
 for (row, amounts) in allocation |> index() do
     let cells =
-        amounts
-            |> map(a => if a > 0 then "{a,3}" else "   " fi)
-            |> join("")
+        amounts |> map(a => if a > 0 then "{a,3}" else "   " fi) |> join("")
 
     write_line("{contractors[row]}  {cells}".trim_end())
 od

@@ -16,9 +16,7 @@ let p_values = [
 let n = p_values.count
 
 let ascending =
-    0..n
-        |> sort((a, b) => p_values[a] <> p_values[b])
-        |> collect()
+    0..n |> sort((a, b) => p_values[a] <> p_values[b]) |> collect()
 let descending = ascending |> reverse() |> collect()
 
 running(
@@ -46,11 +44,7 @@ si
 let harmonic = 1::n |> sum_by(i => 1.0 / double(i))
 
 benjamini_hochberg() -> List[double] =>
-    running(
-        descending,
-        rank => double(n) / double(n - rank),
-        true
-    )
+    running(descending, rank => double(n) / double(n - rank), true)
 
 benjamini_yekutieli() -> List[double] =>
     running(
@@ -60,9 +54,7 @@ benjamini_yekutieli() -> List[double] =>
     )
 
 bonferroni() -> List[double] =>
-    p_values
-        |> map(p => System.Math.min(1.0, double(n) * p))
-        |> collect()
+    p_values |> map(p => System.Math.min(1.0, double(n) * p)) |> collect()
 
 hochberg() -> List[double] =>
     running(descending, rank => double(rank + 1), true)
@@ -83,9 +75,7 @@ hommel() -> List[double] is
         let tail = n - m + 1
         let q1 =
             tail..n
-                |> map(i =>
-                    double(m) * sorted[i] / double(i - tail + 2)
-                )
+                |> map(i => double(m) * sorted[i] / double(i - tail + 2))
                 |> min() ?? 1.0
 
         for i in 0..tail do
@@ -120,9 +110,7 @@ show(name: string, adjusted: List[double]) is
         let cells = adjusted |> skip(row * 5) |> take(5)
 
         let text =
-            cells
-                |> map(v => v.to_string("0.000000e+00"))
-                |> join(" ")
+            cells |> map(v => v.to_string("0.000000e+00")) |> join(" ")
 
         write_line("[{row * 5 + 1,2}] {text}")
     od

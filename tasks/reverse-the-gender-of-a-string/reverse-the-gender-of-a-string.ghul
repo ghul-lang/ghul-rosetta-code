@@ -36,8 +36,4 @@ reverse_gender(text: string) -> string is
     ))
 si
 
-write_line(
-    reverse_gender(
-        "She was a soul stripper. She took my heart!"
-    )
-)
+write_line(reverse_gender("She was a soul stripper. She took my heart!"))

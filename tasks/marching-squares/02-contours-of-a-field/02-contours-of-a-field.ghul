@@ -68,34 +68,10 @@ contour(level: double) -> (from: Point, to: Point){} is
                 if c > level then 4 else 0 fi +
                 if d > level then 8 else 0 fi
 
-            let south = crossing(
-                south_west,
-                a,
-                south_east,
-                b,
-                level
-            )
-            let east = crossing(
-                south_east,
-                b,
-                north_east,
-                c,
-                level
-            )
-            let north = crossing(
-                north_east,
-                c,
-                north_west,
-                d,
-                level
-            )
-            let west = crossing(
-                north_west,
-                d,
-                south_west,
-                a,
-                level
-            )
+            let south = crossing(south_west, a, south_east, b, level)
+            let east = crossing(south_east, b, north_east, c, level)
+            let north = crossing(north_east, c, north_west, d, level)
+            let west = crossing(north_west, d, south_west, a, level)
 
             let middle = (a + b + c + d) / 4.0D > level
 
@@ -139,14 +115,9 @@ let highest = 1.5D
 
 for pixel_y in 0..image.height do
     for pixel_x in 0..image.width do
-        let spot = image.to_user(
-            double(pixel_x),
-            double(pixel_y)
-        )
+        let spot = image.to_user(double(pixel_x), double(pixel_y))
 
-        let part =
-            (height_at(spot.x, spot.y) - lowest) /
-            (highest - lowest)
+        let part = (height_at(spot.x, spot.y) - lowest) / (highest - lowest)
 
         image.colour(COLOUR_MAP.viridis(part))
         image.set_pixel(pixel_x, pixel_y)
@@ -164,12 +135,7 @@ for level in levels do
     write_line("{level,6:F2}{pieces.count,11}")
 
     for piece in pieces do
-        image.line(
-            piece.from.x,
-            piece.from.y,
-            piece.to.x,
-            piece.to.y
-        )
+        image.line(piece.from.x, piece.from.y, piece.to.x, piece.to.y)
     od
 od
 

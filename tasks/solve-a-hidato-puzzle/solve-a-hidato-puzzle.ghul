@@ -16,8 +16,7 @@ let hole = -1
 let blank = 0
 
 let rows = puzzle.count
-cells(line: string) -> string[] =>
-    line.split([' '], REMOVE_EMPTY_ENTRIES)
+cells(line: string) -> string[] => line.split([' '], REMOVE_EMPTY_ENTRIES)
 
 let columns = cells(puzzle[0]).count
 
@@ -36,12 +35,7 @@ let given = SET(board |> filter(* > 0))
 let last = given |> reduce(0, (a, b) => System.Math.max(a, b))
 
 at(row: int, column: int) -> int =>
-    if
-        row < 0 \/
-        row >= rows \/
-        column < 0 \/
-        column >= columns
-    then
+    if row < 0 \/ row >= rows \/ column < 0 \/ column >= columns then
         hole
     else board[row * columns + column]
     fi

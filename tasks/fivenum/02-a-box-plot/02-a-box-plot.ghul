@@ -29,10 +29,7 @@ let datasets = [
             15.0, 6.0, 42.0, 41.0, 7.0, 36.0, 49.0, 40.0, 39.0, 47.0, 43.0
         ]
     ),
-    (
-        label = "second set",
-        values = [36.0, 40.0, 7.0, 39.0, 41.0, 15.0]
-    )
+    (label = "second set", values = [36.0, 40.0, 7.0, 39.0, 41.0, 15.0])
 ]
 
 let half = 0.16
@@ -45,18 +42,8 @@ box(image: IMAGE, summary: double[], centre: double) is
     image.colour(dark)
     image.stroke(1.4)
     image.line(summary[0], centre, summary[4], centre)
-    image.line(
-        summary[0],
-        centre - half,
-        summary[0],
-        centre + half
-    )
-    image.line(
-        summary[4],
-        centre - half,
-        summary[4],
-        centre + half
-    )
+    image.line(summary[0], centre - half, summary[0], centre + half)
+    image.line(summary[4], centre - half, summary[4], centre + half)
 
     image.colour(pale)
     image.fill_rectangle(
@@ -77,12 +64,7 @@ box(image: IMAGE, summary: double[], centre: double) is
 
     image.colour(median_colour)
     image.stroke(2.2)
-    image.line(
-        summary[2],
-        centre - half,
-        summary[2],
-        centre + half
-    )
+    image.line(summary[2], centre - half, summary[2], centre + half)
 si
 
 annotate(image: IMAGE, summary: double[], centre: double) is

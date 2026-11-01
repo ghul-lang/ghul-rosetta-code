@@ -38,12 +38,7 @@ for tier in tiers do
     image.colour(95ub, 95ub, 105ub)
     let left = -tier.half_width
 
-    image.fill_rectangle(
-        left,
-        bottom,
-        tier.half_width,
-        tier.top
-    )
+    image.fill_rectangle(left, bottom, tier.half_width, tier.top)
 
     image.colour(120ub, 120ub, 130ub)
     image.fill_rectangle(left, bottom, left + 3.0D, tier.top)

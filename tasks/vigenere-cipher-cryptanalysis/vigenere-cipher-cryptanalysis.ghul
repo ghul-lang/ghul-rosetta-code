@@ -13,9 +13,7 @@ chr(n: int) -> char => char(int('A') + (n % 26 + 26) % 26)
 
 counts(text: string) -> int{} =>
     (0..26)
-        |> map(letter =>
-            text |> filter(c => ord(c) == letter) |> count()
-        )
+        |> map(letter => text |> filter(c => ord(c) == letter) |> count())
 
 column(text: string, length: int, start: int) -> string =>
     text
@@ -36,8 +34,7 @@ chi_squared(text: string) -> double =>
         |> counts()
         |> index()
         |> sum_by(n => (
-            let expected =
-                english[n.index] * double(text.length)
+            let expected = english[n.index] * double(text.length)
             let difference = double(n.value) - expected
             difference * difference / expected
         ))
@@ -57,9 +54,7 @@ best_shift(text: string) -> int =>
 decrypt(text: string, key: string) -> string =>
     text
         |> index()
-        |> map(c =>
-            chr(ord(c.value) - ord(key[c.index % key.length]))
-        )
+        |> map(c => chr(ord(c.value) - ord(key[c.index % key.length])))
         |> join("")
 
 let cipher =
@@ -87,16 +82,11 @@ let average_coincidence =
     length =>
         (
             (0..length)
-                |> sum_by(i =>
-                    coincidence(column(letters, length, i))
-                )
+                |> sum_by(i => coincidence(column(letters, length, i)))
         ) / double(length)
 
 let length =
-    1::20
-        |> find(length =>
-            average_coincidence(length) > 0.06
-        ) ?? 1
+    1::20 |> find(length => average_coincidence(length) > 0.06) ?? 1
 
 let key =
     (0..length)

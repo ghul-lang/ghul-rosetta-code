@@ -44,10 +44,7 @@ let values = LinkedList.NODE(
             8,
             LinkedList.NODE(
                 1,
-                LinkedList.NODE(
-                    9,
-                    LinkedList.NODE(2, LinkedList.EMPTY)
-                )
+                LinkedList.NODE(9, LinkedList.NODE(2, LinkedList.EMPTY))
             )
         )
     )

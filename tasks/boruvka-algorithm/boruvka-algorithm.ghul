@@ -67,9 +67,7 @@ od
 
 chosen
     |> each(edge =>
-        write_line(
-            "{edge.from}--{edge.to} weight {edge.weight}"
-        )
+        write_line("{edge.from}--{edge.to} weight {edge.weight}")
     )
 
 let total = chosen |> sum_by(edge => edge.weight)

@@ -4,9 +4,7 @@ use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (
-    x = x, y = y
-)
+pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
@@ -19,12 +17,7 @@ scene() -> IMAGE is
             ubyte(70.0D + 100.0D * t),
             ubyte(160.0D - 60.0D * t)
         )
-        image.fill_rectangle(
-            0.0D,
-            double(y),
-            160.0D,
-            double(y + 1)
-        )
+        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
     od
 
     image.colour(255ub, 220ub, 60ub)
@@ -63,14 +56,9 @@ scene() -> IMAGE is
     image
 si
 
-lerp(a: double, b: double, t: double) -> double =>
-    a + (b - a) * t
+lerp(a: double, b: double, t: double) -> double => a + (b - a) * t
 
-bilinear(source: IMAGE, x: double, y: double) -> (
-    double,
-    double,
-    double
-) is
+bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     let x0 = min(int(floor(x)), source.width - 1)
     let y0 = min(int(floor(y)), source.height - 1)
     let x1 = min(x0 + 1, source.width - 1)

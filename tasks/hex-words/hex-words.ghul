@@ -1,11 +1,6 @@
 use default
 
-use Entry = (
-    word: string,
-    value: long,
-    root: long,
-    distinct: int
-)
+use Entry = (word: string, value: long, root: long, distinct: int)
 
 digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
@@ -54,11 +49,5 @@ let by_value =
         |> sort((a, b) => b.value <> a.value)
         |> collect()
 
-show(
-    "Hex words of 4 or more letters, by digital root:",
-    by_root
-)
-show(
-    "With at least 4 distinct letters, largest first:",
-    by_value
-)
+show("Hex words of 4 or more letters, by digital root:", by_root)
+show("With at least 4 distinct letters, largest first:", by_value)

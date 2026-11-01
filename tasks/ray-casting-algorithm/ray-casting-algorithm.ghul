@@ -6,8 +6,7 @@ use Ring = Collections.List[Point]
 let epsilon = 0.000001D
 
 crosses(point: Point, from: Point, to: Point) -> bool is
-    let (low, high) =
-        if from.y < to.y then (from, to) else (to, from) fi
+    let (low, high) = if from.y < to.y then (from, to) else (to, from) fi
 
     let y =
         if point.y == low.y \/ point.y == high.y then
@@ -55,11 +54,7 @@ inside(point: Point, rings: List[Ring]) -> bool =>
         true
         for ring in rings
         for index in 0..ring.count
-        if crosses(
-            point,
-            ring[index],
-            ring[(index + 1) % ring.count]
-        )
+        if crosses(point, ring[index], ring[(index + 1) % ring.count])
     ].count % 2 == 1
 
 ring(corners: List[(double, double)]) -> Ring =>
@@ -100,8 +95,7 @@ for (name, rings) in shapes do
     write_line(name)
 
     for probe in probes do
-        let verdict =
-            if inside(probe, rings) then "in" else "out" fi
+        let verdict = if inside(probe, rings) then "in" else "out" fi
 
         write_line("  {probe}: {verdict}")
     od

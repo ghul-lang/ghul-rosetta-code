@@ -54,10 +54,7 @@ let first = [
     )
 ]
 
-IO.File.write_all_lines(
-    path,
-    first |> map(account => "{account}")
-)
+IO.File.write_all_lines(path, first |> map(account => "{account}"))
 
 let added = ACCOUNT(
     "xyz",

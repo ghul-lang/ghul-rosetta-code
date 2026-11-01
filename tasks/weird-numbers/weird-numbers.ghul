@@ -25,6 +25,4 @@ from(2)
     |> filter(weird)
     |> take(25)
     |> chunk(5)
-    |> each(row =>
-        write_line(row |> map(n => "{n,7}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,7}") |> join("")))

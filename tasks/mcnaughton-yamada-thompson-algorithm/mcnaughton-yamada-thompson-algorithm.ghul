@@ -142,9 +142,7 @@ for pattern in patterns do
     write_line("{pattern} (postfix {postfix(pattern)})")
 
     for text in texts do
-        write_line(
-            "    {"\"{text}\"",-8} {matches(pattern, text)}"
-        )
+        write_line("    {"\"{text}\"",-8} {matches(pattern, text)}")
     od
 
     write_line()

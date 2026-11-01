@@ -15,9 +15,7 @@ let puzzle = [
 let grid = LIST(
     puzzle
         |> flat_map(row => row.split([' ']))
-        |> map(cell =>
-            if cell =~ "." then 0 else int.parse(cell) fi
-        )
+        |> map(cell => if cell =~ "." then 0 else int.parse(cell) fi)
 )
 
 allowed(at: int, digit: int) -> bool is

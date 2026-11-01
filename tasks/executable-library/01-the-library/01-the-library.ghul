@@ -23,8 +23,7 @@ namespace Hailstone is
     entry() is
         let sequence = hailstone(27L)
         let first = sequence |> take(4) |> join()
-        let last =
-            sequence |> skip(sequence.count - 4) |> join()
+        let last = sequence |> skip(sequence.count - 4) |> join()
 
         write_line(
             "hailstone(27) has {sequence.count} elements: "
@@ -33,10 +32,7 @@ namespace Hailstone is
 
         let (start, length) =
             1..100_000
-                |> map(n => (
-                    n,
-                    length = hailstone(long(n)).count
-                ))
+                |> map(n => (n, length = hailstone(long(n)).count))
                 |> max_by((_, length) => length)!
 
         write_line(

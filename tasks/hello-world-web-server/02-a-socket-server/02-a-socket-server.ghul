@@ -61,9 +61,7 @@ fetch(path: string) is
     let writer = IO.StreamWriter(stream)
 
     writer.auto_flush = true
-    writer.write(
-        "GET {path} HTTP/1.1\r\nHost: localhost\r\n\r\n"
-    )
+    writer.write("GET {path} HTTP/1.1\r\nHost: localhost\r\n\r\n")
 
     let lines =
         IO.StreamReader(stream).read_to_end().split(['\n'])

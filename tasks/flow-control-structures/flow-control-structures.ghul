@@ -31,9 +31,7 @@ let over_a_hundred =
         fi
     od
 
-write_line(
-    "first over a hundred: {over_a_hundred?.to_string() ?? "none"}"
-)
+write_line("first over a hundred: {over_a_hundred?.to_string() ?? "none"}")
 
 outer: for row in 0..3 do
     for column in 0..3 do

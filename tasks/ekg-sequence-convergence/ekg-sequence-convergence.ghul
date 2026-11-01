@@ -38,6 +38,4 @@ let last_difference =
         |> reduce(0, (_, index) => index + 1)
 
 write_line("")
-write_line(
-    "EKG(5) and EKG(7) converge at term {last_difference + 1}"
-)
+write_line("EKG(5) and EKG(7) converge at term {last_difference + 1}")

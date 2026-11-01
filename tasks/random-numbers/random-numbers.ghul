@@ -22,16 +22,11 @@ let sample = 0..1000 |> map(_ => normal()) |> collect()
 let average = sample |> sum() / double(sample.count)
 
 let variance =
-    (
-        sample
-            |> sum_by(value =>
-                (value - average) * (value - average)
-            )
-    ) / double(sample.count)
+    (sample |> sum_by(value => (value - average) * (value - average))) /
+    double(sample.count)
 
 write_line("{sample.count} values")
-let first_five =
-    sample |> take(5) |> map(v => "{v:F4}") |> join(" ")
+let first_five = sample |> take(5) |> map(v => "{v:F4}") |> join(" ")
 
 write_line("first five: {first_five}")
 write_line("mean {average:F4}")

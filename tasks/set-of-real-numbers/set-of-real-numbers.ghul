@@ -26,57 +26,31 @@ without(left: RealSet, right: RealSet) -> RealSet =>
 
 samples(low: double, high: double, steps: int) -> double{} =>
     (0::steps)
-        |> map(step =>
-            low + (high - low) * double(step) / double(steps)
-        )
+        |> map(step => low + (high - low) * double(step) / double(steps))
 
-is_empty(
-    set: RealSet,
-    low: double,
-    high: double,
-    steps: int
-) -> bool =>
+is_empty(set: RealSet, low: double, high: double, steps: int) -> bool =>
     samples(low, high, steps) |> all(value => !set(value))
 
-extent(
-    set: RealSet,
-    low: double,
-    high: double,
-    steps: int
-) -> double =>
-    let inside =
-        samples(low, high, steps) |> filter(set) |> count()
-    in
+extent(set: RealSet, low: double, high: double, steps: int) -> double =>
+    let inside = samples(low, high, steps) |> filter(set) |> count() in
     (high - low) * double(inside) / double(steps)
 
 let examples = [
     (
         name = "(0,1] u [0,2)",
-        set = joined(
-            open_closed(0.0D, 1.0D),
-            closed_open(0.0D, 2.0D)
-        )
+        set = joined(open_closed(0.0D, 1.0D), closed_open(0.0D, 2.0D))
     ),
     (
         name = "[0,2) n (1,2]",
-        set = shared(
-            closed_open(0.0D, 2.0D),
-            open_closed(1.0D, 2.0D)
-        )
+        set = shared(closed_open(0.0D, 2.0D), open_closed(1.0D, 2.0D))
     ),
     (
         name = "[0,3) - (0,1)",
-        set = without(
-            closed_open(0.0D, 3.0D),
-            open_range(0.0D, 1.0D)
-        )
+        set = without(closed_open(0.0D, 3.0D), open_range(0.0D, 1.0D))
     ),
     (
         name = "[0,3) - [0,1]",
-        set = without(
-            closed_open(0.0D, 3.0D),
-            closed_range(0.0D, 1.0D)
-        )
+        set = without(closed_open(0.0D, 3.0D), closed_range(0.0D, 1.0D))
     )
 ]
 
@@ -85,9 +59,7 @@ write_line("membership:")
 examples
     |> each(example => (
         let answers = [0.0D, 1.0D, 2.0D]
-            |> map(value =>
-                "{value:F0}: {example.set(value),-5}"
-            )
+            |> map(value => "{value:F0}: {example.set(value),-5}")
             |> join(" ")
 
         write_line("  {example.name}   {answers.trim_end()}")
@@ -112,15 +84,10 @@ probes
 
 let ripples: RealSet =
     value =>
-        0.0D < value /\
-        value < 10.0D /\
-        abs(sin(pi * value * value)) > 0.5D
+        0.0D < value /\ value < 10.0D /\ abs(sin(pi * value * value)) > 0.5D
 
 let waves: RealSet =
-    value =>
-        0.0D < value /\
-        value < 10.0D /\
-        abs(sin(pi * value)) > 0.5D
+    value => 0.0D < value /\ value < 10.0D /\ abs(sin(pi * value)) > 0.5D
 
 write_line()
 write_line(

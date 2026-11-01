@@ -40,10 +40,8 @@ si
 
 is_legal(rank: string) -> bool =>
     let
-        bishops =
-            0..8 |> filter(s => rank[s] == 'B') |> collect(),
-        rooks =
-            0..8 |> filter(s => rank[s] == 'R') |> collect(),
+        bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect(),
+        rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect(),
         king = rank.index_of('K')
     in
         (bishops[0] + bishops[1]) % 2 == 1 /\
@@ -63,7 +61,5 @@ od
 let positions = 0..960 |> map(position) |> memo()
 
 write_line()
-write_line(
-    "distinct positions: {positions |> distinct() |> count()}"
-)
+write_line("distinct positions: {positions |> distinct() |> count()}")
 write_line("all legal: {positions |> all(is_legal)}")

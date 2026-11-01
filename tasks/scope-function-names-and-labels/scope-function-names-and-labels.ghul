@@ -42,6 +42,4 @@ let first =
         od
     od
 
-write_line(
-    "a label names a loop, and break carries a value out: {first}"
-)
+write_line("a label names a loop, and break carries a value out: {first}")

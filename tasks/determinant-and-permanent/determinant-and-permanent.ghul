@@ -24,9 +24,7 @@ expand(m: Matrix, alternating: bool) -> long =>
                     negative = alternating /\ j % 2 == 1,
                     sign = if negative then -1L else 1L fi
                 in
-                    sign *
-                    m[0][j] *
-                    expand(minor(m, j), alternating)
+                    sign * m[0][j] * expand(minor(m, j), alternating)
             )
     fi
 
@@ -43,7 +41,5 @@ let matrices = [
 
 for m in matrices do
     write_line("{m}")
-    write_line(
-        "    determinant {determinant(m)}, permanent {permanent(m)}"
-    )
+    write_line("    determinant {determinant(m)}, permanent {permanent(m)}")
 od

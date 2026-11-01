@@ -4,10 +4,7 @@ use System.Math.*
 simplex(dimension: int) -> bigint{} =>
     from(1)
         |> map(index =>
-            binomial(
-                bigint(index + dimension - 1),
-                bigint(dimension)
-            )
+            binomial(bigint(index + dimension - 1), bigint(dimension))
         )
 
 triangular_root(value: double) -> double =>
@@ -39,11 +36,7 @@ families
             |> take(30)
             |> chunk(6)
             |> each(row =>
-                write_line(
-                    row
-                        |> map(value => "{value,12}")
-                        |> join("")
-                )
+                write_line(row |> map(value => "{value,12}") |> join(""))
             )
 
         write_line()
@@ -63,9 +56,7 @@ let roots = [
 
         roots
             |> each(root =>
-                write_line(
-                    "  {root.name,12}: {root.of(as_real):F9}"
-                )
+                write_line("  {root.name,12}: {root.of(as_real):F9}")
             )
 
         write_line()

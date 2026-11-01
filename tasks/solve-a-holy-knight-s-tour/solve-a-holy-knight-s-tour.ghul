@@ -16,9 +16,7 @@ let board = [
 
 let rows = board.count
 let columns =
-    board
-        |> map(line => (line.length + 1) / 2)
-        |> reduce(0, int.max)
+    board |> map(line => (line.length + 1) / 2) |> reduce(0, int.max)
 
 let jumps = [
     (-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)
@@ -43,15 +41,11 @@ od
 
 let order = MAP[Square, int]()
 
-free(s: Square) -> bool =>
-    open.contains(s) /\ !order.contains_key(s)
+free(s: Square) -> bool => open.contains(s) /\ !order.contains_key(s)
 
 moves(s: Square) -> List[Square] =>
     jumps
-        |> map((dr, dc) => (
-            row = s.row + dr,
-            column = s.column + dc
-        ))
+        |> map((dr, dc) => (row = s.row + dr, column = s.column + dc))
         |> filter(free)
         |> collect()
 
@@ -62,9 +56,7 @@ tour(s: Square, step: int) -> bool is
         return true
     fi
 
-    let next =
-        moves(s)
-            |> sort((a, b) => moves(a).count - moves(b).count)
+    let next = moves(s) |> sort((a, b) => moves(a).count - moves(b).count)
 
     for candidate in next do
         if tour(candidate, step + 1) then

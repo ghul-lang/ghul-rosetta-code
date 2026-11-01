@@ -8,11 +8,7 @@ struct V2(x: double, y: double) is
     *(k: double) -> V2 => V2(x * k, y * k)
 si
 
-class PARTICLE(
-    position: V2 public,
-    velocity: V2 public,
-    best: V2 public
-)
+class PARTICLE(position: V2 public, velocity: V2 public, best: V2 public)
 
 class PROBLEM(
     name: string,
@@ -37,10 +33,7 @@ clamp(p: V2, problem: PROBLEM) -> V2 =>
         Math.clamp(p.y, problem.low.y, problem.high.y)
     )
 
-swarm(problem: PROBLEM) -> (
-    best: V2,
-    particles: List[PARTICLE]
-) is
+swarm(problem: PROBLEM) -> (best: V2, particles: List[PARTICLE]) is
     let f = problem.f
     let span = problem.high - problem.low
 
@@ -54,10 +47,7 @@ swarm(problem: PROBLEM) -> (
                 in
                 PARTICLE(
                     at,
-                    V2(
-                        between(-span.x, span.x),
-                        between(-span.y, span.y)
-                    ),
+                    V2(between(-span.x, span.x), between(-span.y, span.y)),
                     at
                 )
             )
@@ -71,8 +61,7 @@ swarm(problem: PROBLEM) -> (
                 p.velocity * problem.omega +
                 (p.best - p.position) *
                 (problem.phi_p * random.next_double()) +
-                (best - p.position) *
-                (problem.phi_g * random.next_double())
+                (best - p.position) * (problem.phi_g * random.next_double())
 
             p.position = clamp(p.position + p.velocity, problem)
 
@@ -99,25 +88,19 @@ mccormick(p: V2) -> double =>
 michalewicz(p: V2) -> double =>
     let term =
         (x, i) =>
-            Math.sin(x) *
-            Math.pow(Math.sin(i * x * x / Math.pi), 20.0D)
+            Math.sin(x) * Math.pow(Math.sin(i * x * x / Math.pi), 20.0D)
     in
     -(term(p.x, 1.0D) + term(p.y, 2.0D))
 
-draw(
-    problem: PROBLEM,
-    found: (best: V2, particles: List[PARTICLE])
-) is
+draw(problem: PROBLEM, found: (best: V2, particles: List[PARTICLE])) is
     let size = 300
     let image = IMAGE(size, size)
     let span = problem.high - problem.low
 
     let at =
         (column, row) => V2(
-            problem.low.x +
-            span.x * (double(column) + 0.5D) / double(size),
-            problem.high.y -
-            span.y * (double(row) + 0.5D) / double(size)
+            problem.low.x + span.x * (double(column) + 0.5D) / double(size),
+            problem.high.y - span.y * (double(row) + 0.5D) / double(size)
         )
 
     let values = LIST()
@@ -128,16 +111,12 @@ draw(
         od
     od
 
-    let low =
-        values |> reduce(values[0], (a, b) => Math.min(a, b))
-    let high =
-        values |> reduce(values[0], (a, b) => Math.max(a, b))
+    let low = values |> reduce(values[0], (a, b) => Math.min(a, b))
+    let high = values |> reduce(values[0], (a, b) => Math.max(a, b))
 
     for row in 0..size do
         for column in 0..size do
-            let t =
-                (values[row * size + column] - low) /
-                (high - low)
+            let t = (values[row * size + column] - low) / (high - low)
             let s = Math.sqrt(t)
 
             image.set_pixel(
@@ -150,12 +129,7 @@ draw(
         od
     od
 
-    image.view(
-        problem.low.x,
-        problem.low.y,
-        problem.high.x,
-        problem.high.y
-    )
+    image.view(problem.low.x, problem.low.y, problem.high.x, problem.high.y)
 
     image.colour(255ub, 255ub, 255ub)
 
@@ -198,9 +172,7 @@ let problems = [
     )
 ]
 
-write_line(
-    "each picture shows the swarm after its last iteration"
-)
+write_line("each picture shows the swarm after its last iteration")
 write_line("and rings the best point found")
 write_line()
 
@@ -208,9 +180,7 @@ for problem in problems do
     let found = swarm(problem)
     let b = found.best
 
-    write_line(
-        "{problem.name}: f({b.x:F5}, {b.y:F5}) = {problem.f(b):F5}"
-    )
+    write_line("{problem.name}: f({b.x:F5}, {b.y:F5}) = {problem.f(b):F5}")
 
     draw(problem, found)
 od

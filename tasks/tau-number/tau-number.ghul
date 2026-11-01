@@ -6,6 +6,4 @@ let first_hundred = from(1) |> filter(is_tau) |> take(100)
 
 first_hundred
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(n => "{n,6}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,6}") |> join("")))

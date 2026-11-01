@@ -53,15 +53,11 @@ drops(
     landed
 )
 
-mean(xs: List[double]) -> double =>
-    (xs |> sum()) / double(xs.count)
+mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
 
 deviation(xs: List[double]) -> double =>
     let m = mean(xs) in
-    sqrt(
-        (xs |> sum_by(x => (x - m) * (x - m))) /
-        double(xs.count)
-    )
+    sqrt((xs |> sum_by(x => (x - m) * (x - m))) / double(xs.count))
 
 let rules = [
     (name = "the funnel stays over the target", next = (at, d) => 0.0D),
@@ -84,10 +80,7 @@ plot(
     let height = double(image.height) / 2.0D
     let left = double(at % 2) * width
     let top = double(at / 2) * height
-    let middle = (
-        x = left + width / 2.0D,
-        y = top + height / 2.0D
-    )
+    let middle = (x = left + width / 2.0D, y = top + height / 2.0D)
     let scale = (min(width, height) / 2.0D - 14.0D) / reach
 
     image.colour(170ub, 170ub, 170ub)
@@ -101,27 +94,13 @@ plot(
     ])
 
     image.colour(210ub, 210ub, 210ub)
-    image.line(
-        left + 10.0D,
-        middle.y,
-        left + width - 10.0D,
-        middle.y
-    )
-    image.line(
-        middle.x,
-        top + 10.0D,
-        middle.x,
-        top + height - 10.0D
-    )
+    image.line(left + 10.0D, middle.y, left + width - 10.0D, middle.y)
+    image.line(middle.x, top + 10.0D, middle.x, top + height - 10.0D)
 
     image.colour(30ub, 70ub, 160ub)
 
     for i in 0..xs.count do
-        image.dot(
-            middle.x + xs[i] * scale,
-            middle.y + ys[i] * scale,
-            2.0D
-        )
+        image.dot(middle.x + xs[i] * scale, middle.y + ys[i] * scale, 2.0D)
     od
 
     image.colour(40ub, 40ub, 40ub)
@@ -166,9 +145,7 @@ for run in runs |> index() do
     plot(image, run.index, run.value.xs, run.value.ys, reach)
 od
 
-write_line(
-    "all four on one scale, the widest drop reaching the frame"
-)
+write_line("all four on one scale, the widest drop reaching the frame")
 
 image.write("funnel.png")
 

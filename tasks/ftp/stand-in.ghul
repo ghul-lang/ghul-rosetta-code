@@ -16,20 +16,15 @@ stand_in() -> string is
 
     let port_of =
         listener =>
-            if let
-                bound: IPEndPoint = listener.local_endpoint
-            then
+            if let bound: IPEndPoint = listener.local_endpoint then
                 bound.port
             else
-                throw System.Exception(
-                    "the listener has no address"
-                )
+                throw System.Exception("the listener has no address")
             fi
 
     Tasks.TASK.run(() is
         while true do
-            let connection =
-                control.accept_tcp_client().get_stream()
+            let connection = control.accept_tcp_client().get_stream()
             let reader = IO.StreamReader(connection)
             let writer = IO.StreamWriter(connection)
             let data mut = TcpListener(IPAddress.loopback, 0)
@@ -69,9 +64,7 @@ stand_in() -> string is
 
                     let (high, low) = (p / 256, p % 256)
 
-                    writer.write(
-                        "227 passive (127,0,0,1,{high},{low})\r\n"
-                    )
+                    writer.write("227 passive (127,0,0,1,{high},{low})\r\n")
                 when "NLST" then send(ascii("readme.txt\r\n"))
                 when "RETR" then send(ascii("Hello from FTP\n"))
                 when "QUIT" then writer.write("221 bye\r\n")

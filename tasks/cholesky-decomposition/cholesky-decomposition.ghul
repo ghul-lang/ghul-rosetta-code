@@ -25,9 +25,7 @@ si
 
 show(a: List[List[double]]) is
     for row in a do
-        write_line(
-            row |> map(value => "{value,10:F5}") |> join("")
-        )
+        write_line(row |> map(value => "{value,10:F5}") |> join(""))
     od
 
     write_line("")

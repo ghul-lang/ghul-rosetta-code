@@ -85,11 +85,7 @@ ray_hits(
     holds(position, r, k, white, kinds)
 si
 
-attacked(
-    position: POSITION,
-    square: int,
-    by_white: bool
-) -> bool is
+attacked(position: POSITION, square: int, by_white: bool) -> bool is
     let row = square / 8
     let column = square % 8
     let pawn_row = if by_white then row + 1 else row - 1 fi
@@ -98,55 +94,26 @@ attacked(
     holds(position, pawn_row, column + 1, by_white, "p") \/
     knight_steps
         |> any((dr, dc) =>
-            holds(
-                position,
-                row + dr,
-                column + dc,
-                by_white,
-                "n"
-            )
+            holds(position, row + dr, column + dc, by_white, "n")
         ) \/
     king_steps
         |> any((dr, dc) =>
-            holds(
-                position,
-                row + dr,
-                column + dc,
-                by_white,
-                "k"
-            )
+            holds(position, row + dr, column + dc, by_white, "k")
         ) \/
     rook_steps
         |> any((dr, dc) =>
-            ray_hits(
-                position,
-                row,
-                column,
-                dr,
-                dc,
-                by_white,
-                "rq"
-            )
+            ray_hits(position, row, column, dr, dc, by_white, "rq")
         ) \/
     bishop_steps
         |> any((dr, dc) =>
-            ray_hits(
-                position,
-                row,
-                column,
-                dr,
-                dc,
-                by_white,
-                "bq"
-            )
+            ray_hits(position, row, column, dr, dc, by_white, "bq")
         )
 si
 
 castling_targets(position: POSITION, from: int) -> int{} is
     let white = position.white_to_move
     let home = if white then 60 else 4 fi
-    let (short, long) =
-        if white then ("K", "Q") else ("k", "q") fi
+    let (short, long) = if white then ("K", "Q") else ("k", "q") fi
     let targets = LIST()
 
     if from != home \/ attacked(position, home, !white) then
@@ -161,19 +128,13 @@ castling_targets(position: POSITION, from: int) -> int{} is
     let kingside = [home + 1, home + 2]
     let queenside = [home - 1, home - 2]
 
-    if
-        position.castling.contains(short) /\
-        open(kingside, kingside)
-    then
+    if position.castling.contains(short) /\ open(kingside, kingside) then
         targets.add(home + 2)
     fi
 
     let rook_path = [home - 1, home - 2, home - 3]
 
-    if
-        position.castling.contains(long) /\
-        open(queenside, rook_path)
-    then
+    if position.castling.contains(long) /\ open(queenside, rook_path) then
         targets.add(home - 2)
     fi
 
@@ -231,16 +192,10 @@ pseudo_moves(position: POSITION) -> Move{} is
 
             let ahead = row + forward
 
-            if
-                on_board(ahead, column) /\
-                at(ahead, column) == '.'
-            then
+            if on_board(ahead, column) /\ at(ahead, column) == '.' then
                 add(from, ahead * 8 + column)
 
-                if
-                    row == start /\
-                    at(row + 2 * forward, column) == '.'
-                then
+                if row == start /\ at(row + 2 * forward, column) == '.' then
                     add(from, (row + 2 * forward) * 8 + column)
                 fi
             fi
@@ -328,10 +283,7 @@ played(position: POSITION, move: Move) -> POSITION is
     for (square, rights) in corners do
         if move.from == square \/ move.to == square then
             for right in rights do
-                next.castling = next.castling.replace(
-                    "{right}",
-                    ""
-                )
+                next.castling = next.castling.replace("{right}", "")
             od
         fi
     od
@@ -342,20 +294,13 @@ si
 
 in_check(position: POSITION, white: bool) -> bool =>
     let king = if white then 'K' else 'k' fi in
-    attacked(
-        position,
-        position.squares |> find_index(* == king)!,
-        !white
-    )
+    attacked(position, position.squares |> find_index(* == king)!, !white)
 
 legal_moves(position: POSITION) -> List[Move] =>
     position
         |> pseudo_moves()
         |> filter(m =>
-            !in_check(
-                played(position, m),
-                position.white_to_move
-            )
+            !in_check(played(position, m), position.white_to_move)
         )
         |> collect()
 
@@ -383,8 +328,7 @@ evaluate(position: POSITION) -> int =>
             let
                 piece = position.squares[s],
                 minor = "nbp".contains(char.to_lower(piece)),
-                bonus =
-                    if minor then 2 * centrality(s) else 0 fi,
+                bonus = if minor then 2 * centrality(s) else 0 fi,
                 worth = value(piece) + bonus
             in
                 if position.mine(piece) then
@@ -396,12 +340,7 @@ evaluate(position: POSITION) -> int =>
 
 let mate = 100000
 
-search(
-    position: POSITION,
-    depth: int,
-    alpha: int,
-    beta: int
-) -> int is
+search(position: POSITION, depth: int, alpha: int, beta: int) -> int is
     let moves = legal_moves(position)
 
     if moves.count == 0 then
@@ -417,17 +356,8 @@ search(
 
     let captured = m => value(position.squares[m.to])
 
-    for
-        move in moves
-            |> sort((a, b) => captured(b) <> captured(a))
-    do
-        let score =
-            -search(
-                played(position, move),
-                depth - 1,
-                -beta,
-                -best
-            )
+    for move in moves |> sort((a, b) => captured(b) <> captured(a)) do
+        let score = -search(played(position, move), depth - 1, -beta, -best)
 
         if score > best then
             best = score
@@ -447,19 +377,14 @@ choose(position: POSITION) -> Move =>
             |> legal_moves()
             |> map(m =>
                 let after = played(position, m) in
-                (
-                    move = m,
-                    score =
-                        -search(after, 2, -mate * 2, mate * 2)
-                )
+                (move = m, score = -search(after, 2, -mate * 2, mate * 2))
             )
             |> sort((a, b) => b.score <> a.score)
             |> collect()
     in
     ranked[0].move
 
-name(square: int) -> string =>
-    "{"abcdefgh"[square % 8]}{8 - square / 8}"
+name(square: int) -> string => "{"abcdefgh"[square % 8]}{8 - square / 8}"
 
 notation(move: Move) -> string =>
     let promotion =
@@ -469,16 +394,13 @@ notation(move: Move) -> string =>
     in
     "{name(move.from)}{name(move.to)}{promotion}"
 
-let symbols =
-    "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> collect_map()
+let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> collect_map()
 
 show(position: POSITION) is
     for row in 0..8 do
         let pieces =
             0..8
-                |> map(k =>
-                    symbols[position.squares[row * 8 + k]]
-                )
+                |> map(k => symbols[position.squares[row * 8 + k]])
                 |> join(" ")
 
         write_line("{8 - row} {pieces}")
@@ -508,9 +430,7 @@ si
 
 let position mut = POSITION()
 
-write_line(
-    "you play white; enter moves like e2e4, or e7e8q to promote"
-)
+write_line("you play white; enter moves like e2e4, or e7e8q to promote")
 show(position)
 
 while true do
@@ -527,9 +447,7 @@ while true do
     let chosen =
         position
             |> legal_moves()
-            |> filter(m =>
-                notation(m) =~ text \/ notation(m) =~ "{text}q"
-            )
+            |> filter(m => notation(m) =~ text \/ notation(m) =~ "{text}q")
             |> first()
 
     if !chosen? then

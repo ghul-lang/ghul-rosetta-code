@@ -21,9 +21,7 @@ let primes_under_100 = [
 let count = primes_under_100.count
 let listing =
     primes_under_100
-        |> map(p =>
-            "{p.a}{if p.b >= 0 then "+" else "" fi}{p.b}i"
-        )
+        |> map(p => "{p.a}{if p.b >= 0 then "+" else "" fi}{p.b}i")
         |> join()
 
 write_line("gaussian primes with norm < 100 ({count} total):")
@@ -46,9 +44,7 @@ image.colour(40ub, 92ub, 168ub)
 
 for b in -50::50 do
     for a in -50::50 do
-        if
-            a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b)
-        then
+        if a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b) then
             image.dot(double(a), double(b), 2.0D)
         fi
     od

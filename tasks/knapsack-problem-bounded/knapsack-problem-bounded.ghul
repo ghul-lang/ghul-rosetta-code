@@ -18,10 +18,7 @@ let items = [
     (name = "trousers", weight = 48, value = 10, pieces = 2),
     (name = "umbrella", weight = 73, value = 40, pieces = 1),
     (name = "waterproof trousers", weight = 42, value = 70, pieces = 1),
-    (
-        name = "waterproof overclothes", weight = 43,
-        value = 75, pieces = 1
-    ),
+    (name = "waterproof overclothes", weight = 43, value = 75, pieces = 1),
     (name = "note-case", weight = 22, value = 80, pieces = 1),
     (name = "sunglasses", weight = 7, value = 20, pieces = 1),
     (name = "towel", weight = 18, value = 12, pieces = 2),
@@ -32,15 +29,11 @@ let items = [
 let capacity = 400
 
 let copies =
-    items
-        |> flat_map(item => repeat(item, item.pieces))
-        |> collect()
+    items |> flat_map(item => repeat(item, item.pieces)) |> collect()
 
 let best =
     0::copies.count
-        |> map(_ =>
-            repeat(0, capacity + 1) |> collect_mutable()
-        )
+        |> map(_ => repeat(0, capacity + 1) |> collect_mutable())
         |> collect()
 
 for at in 0..copies.count do

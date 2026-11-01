@@ -7,10 +7,7 @@ divisor_count(n: int) -> int =>
         |> sum_by(d => if d * d == n then 1 else 2 fi)
 
 let terms =
-    (1::15)
-        |> map(n =>
-            from(1) |> find(k => divisor_count(k) == n)!
-        )
+    (1::15) |> map(n => from(1) |> find(k => divisor_count(k) == n)!)
 
 write_line("the first 15 terms of the sequence are:")
 write_line(terms |> map(t => "{t}") |> join(" "))

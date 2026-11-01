@@ -39,9 +39,7 @@ let sequence =
 write_line("first 100 terms:")
 
 for row in 0..10 do
-    let cells =
-        0..10
-            |> map(column => "{sequence[row * 10 + column],4}")
+    let cells = 0..10 |> map(column => "{sequence[row * 10 + column],4}")
 
     write_line(cells |> join(""))
 od

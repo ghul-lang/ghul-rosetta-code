@@ -11,10 +11,7 @@ let frames = 24
 read(path: string) -> Grid =>
     let
         lines = IO.File.read_all_lines(path),
-        width =
-            lines
-                |> map(line => line.length)
-                |> reduce(0, int.max)
+        width = lines |> map(line => line.length) |> reduce(0, int.max)
     in
         lines |> map(line => line.pad_right(width)) |> collect()
 
@@ -44,9 +41,7 @@ next(grid: Grid, row: int, column: int) -> char =>
 step(grid: Grid) -> Grid =>
     (0..grid.count)
         |> map(row =>
-            (0..grid[row].length)
-                |> map(next(grid, row, *))
-                |> join("")
+            (0..grid[row].length) |> map(next(grid, row, *)) |> join("")
         )
         |> collect()
 

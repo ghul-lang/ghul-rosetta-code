@@ -43,9 +43,7 @@ while safe |> all(* < 100) do
         else
             turn = turn + rolled
 
-            write_line(
-                "{reply}  rolled {rolled}, turn now {turn}"
-            )
+            write_line("{reply}  rolled {rolled}, turn now {turn}")
         fi
     else
         safe[player] = safe[player] + turn

@@ -14,8 +14,7 @@ struct RATIONAL is
 
     +(other: RATIONAL) -> RATIONAL =>
         RATIONAL(
-            numerator * other.denominator +
-            other.numerator * denominator,
+            numerator * other.denominator + other.numerator * denominator,
             denominator * other.denominator
         )
 
@@ -47,19 +46,10 @@ bernoullis(count: int) -> List[RATIONAL] is
                     |> reduce(whole(0n), (running, step) =>
                         running +
                         values[step] *
-                        whole(
-                            binomial(
-                                bigint(index + 1),
-                                bigint(step)
-                            )
-                        )
+                        whole(binomial(bigint(index + 1), bigint(step)))
                     )
 
-            values.add(
-                whole(-1n) *
-                total *
-                RATIONAL(1n, bigint(index + 1))
-            )
+            values.add(whole(-1n) * total * RATIONAL(1n, bigint(index + 1)))
         fi
     od
 
@@ -85,8 +75,7 @@ write_line("the first ten rows of Faulhaber's triangle:")
 
 (0..10)
     |> each(power => (
-        let cells =
-            faulhaber_row(power) |> map(cell => "{cell,8}")
+        let cells = faulhaber_row(power) |> map(cell => "{cell,8}")
 
         write_line("  {cells |> join("")}")
     ))
@@ -97,9 +86,7 @@ let total =
     row
         |> index()
         |> reduce(whole(0n), (running, cell) =>
-            running +
-            cell.value *
-            whole(bigint.pow(1000n, cell.index + 1))
+            running + cell.value * whole(bigint.pow(1000n, cell.index + 1))
         )
 
 write_line()

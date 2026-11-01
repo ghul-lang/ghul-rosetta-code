@@ -59,8 +59,7 @@ for size in 2::5 do
 
                 let matches =
                     bottom != 0 /\
-                    numerator.value * bottom ==
-                    denominator.value * top
+                    numerator.value * bottom == denominator.value * top
 
                 if matches then
                     found = found + 1

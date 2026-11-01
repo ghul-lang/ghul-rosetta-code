@@ -29,14 +29,10 @@ square_at(index: int) -> Square => (
 blocked(square: Square) -> bool =>
     barrier |> any(other => at(other) == at(square))
 
-entering(square: Square) -> int =>
-    if blocked(square) then 100 else 1 fi
+entering(square: Square) -> int => if blocked(square) then 100 else 1 fi
 
 remaining(square: Square) -> int =>
-    max(
-        abs(goal.row - square.row),
-        abs(goal.column - square.column)
-    )
+    max(abs(goal.row - square.row), abs(goal.column - square.column))
 
 inside(square: Square) -> bool =>
     square.row >= 0 /\

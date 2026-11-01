@@ -7,10 +7,7 @@ by_convolution(n: int) -> long memo is
     fi
 
     return
-        (0..n)
-            |> sum_by(i =>
-                by_convolution(i) * by_convolution(n - 1 - i)
-            )
+        (0..n) |> sum_by(i => by_convolution(i) * by_convolution(n - 1 - i))
 si
 
 // C(n) = 2 * (2n - 1) * C(n - 1) / (n + 1)
@@ -21,7 +18,5 @@ by_recurrence(n: int) -> long =>
         )
 
 for n in 0::14 do
-    write_line(
-        "{n,2}: {by_convolution(n),8} {by_recurrence(n),8}"
-    )
+    write_line("{n,2}: {by_convolution(n),8} {by_recurrence(n),8}")
 od

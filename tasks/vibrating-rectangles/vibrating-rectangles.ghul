@@ -48,9 +48,7 @@ for frame in 0..frames do
     animation.add(image, 50)
 od
 
-write_line(
-    "{rectangles} rectangles around one centre, the colour fading"
-)
+write_line("{rectangles} rectangles around one centre, the colour fading")
 write_line("in from the outermost to the innermost")
 
 animation.write("rectangles.png")

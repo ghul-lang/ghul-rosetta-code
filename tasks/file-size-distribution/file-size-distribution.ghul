@@ -4,11 +4,7 @@ use System.Math.*
 let root = if let [root, ..] = args then root else "." fi
 
 let sizes =
-    IO.Directory.enumerate_files(
-        root,
-        "*",
-        IO.SearchOption.ALL_DIRECTORIES
-    )
+    IO.Directory.enumerate_files(root, "*", IO.SearchOption.ALL_DIRECTORIES)
         |> map(path => IO.FileInfo(path).length)
         |> collect()
 
@@ -30,9 +26,7 @@ label(bucket: int) -> string =>
 let counts =
     sizes
         |> group_by(bucket)
-        |> map(entry => (
-            bucket = entry.key, count = entry.value.count
-        ))
+        |> map(entry => (bucket = entry.key, count = entry.value.count))
         |> sort_by(entry => entry.bucket)
 
 write_line("{sizes.count} files under {root}")

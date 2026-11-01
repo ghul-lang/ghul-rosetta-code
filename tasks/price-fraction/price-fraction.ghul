@@ -9,10 +9,8 @@ let bands = [
 ]
 
 rescale(price: double) -> double =>
-    assert price >= 0.0D /\ price < 1.01D
-        else "price out of range" in
-    bands
-        |> find(((upper_bound, _)) => price < upper_bound)?.`1!
+    assert price >= 0.0D /\ price < 1.01D else "price out of range" in
+    bands |> find(((upper_bound, _)) => price < upper_bound)?.`1!
 
 let shown =
     0::100

@@ -26,10 +26,7 @@ for token in words(table) do
     if int.try_parse(token, minimum ref) then
         let last = commands.count - 1
 
-        commands[last] = (
-            word = commands[last].word,
-            minimum = minimum
-        )
+        commands[last] = (word = commands[last].word, minimum = minimum)
     else
         commands.add((word = token, minimum = token.length))
     fi

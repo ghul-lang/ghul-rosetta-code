@@ -11,11 +11,7 @@ prepared(text: string) -> string =>
         |> map(char.to_upper_invariant)
         |> join("")
 
-shifted(
-    text: string,
-    key: string,
-    direction: int
-) -> string => (
+shifted(text: string, key: string, direction: int) -> string => (
     let letters = prepared(text)
     let word = prepared(key)
     let result = StringBuilder()
@@ -23,8 +19,7 @@ shifted(
     for at in 0..letters.length do
         let letter = int(letters[at]) - int('A')
         let shift = int(word[at % word.length]) - int('A')
-        let moved =
-            ((letter + direction * shift) % 26 + 26) % 26
+        let moved = ((letter + direction * shift) % 26 + 26) % 26
 
         result.append(char(moved + cast('A')))
     od
@@ -32,11 +27,9 @@ shifted(
     result.to_string()
 )
 
-encrypt(text: string, key: string) -> string =>
-    shifted(text, key, 1)
+encrypt(text: string, key: string) -> string => shifted(text, key, 1)
 
-decrypt(text: string, key: string) -> string =>
-    shifted(text, key, -1)
+decrypt(text: string, key: string) -> string => shifted(text, key, -1)
 
 let key = "Vigenere Cipher"
 

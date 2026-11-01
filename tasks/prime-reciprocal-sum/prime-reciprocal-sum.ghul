@@ -24,9 +24,7 @@ abbreviated(p: bigint) -> string =>
         "{digits[0..20]}...{digits[20..<<0]} {digits.length} digits"
     fi
 
-write_line(
-    "primality is tested with Miller-Rabin, which is probabilistic"
-)
+write_line("primality is tested with Miller-Rabin, which is probabilistic")
 write_line("for numbers of more than 25 digits")
 write_line("")
 

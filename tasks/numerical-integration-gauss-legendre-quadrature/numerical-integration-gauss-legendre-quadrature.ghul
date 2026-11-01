@@ -1,10 +1,7 @@
 use default
 use System.Math.*
 
-legendre(n: int, x: double) -> (
-    value: double,
-    slope: double
-) => (
+legendre(n: int, x: double) -> (value: double, slope: double) => (
     let previous mut = 1.0
     let current mut = x
 
@@ -12,14 +9,12 @@ legendre(n: int, x: double) -> (
         let order = double(k)
         let next =
             (
-                (2.0 * order - 1.0) * x * current -
-                (order - 1.0) * previous
+                (2.0 * order - 1.0) * x * current - (order - 1.0) * previous
             ) / order
         (previous, current) = (current, next)
     od
 
-    let slope =
-        double(n) * (x * current - previous) / (x * x - 1.0)
+    let slope = double(n) * (x * current - previous) / (x * x - 1.0)
 
     (value = current, slope = slope)
 )
@@ -43,19 +38,10 @@ nodes_and_weights(n: int) -> (node: double, weight: double){} =>
                 x = root(n, i),
                 slope = legendre(n, x).slope
             in
-                (
-                    node = x,
-                    weight =
-                        2.0 / ((1.0 - x * x) * slope * slope)
-                )
+                (node = x, weight = 2.0 / ((1.0 - x * x) * slope * slope))
         )
 
-integrate(
-    f: double -> double,
-    a: double,
-    b: double,
-    n: int
-) -> double =>
+integrate(f: double -> double, a: double, b: double, n: int) -> double =>
     let
         half = (b - a) / 2.0,
         middle = (a + b) / 2.0
@@ -63,9 +49,7 @@ integrate(
         half *
         (
             nodes_and_weights(n)
-                |> sum_by(nw =>
-                    nw.weight * f(half * nw.node + middle)
-                )
+                |> sum_by(nw => nw.weight * f(half * nw.node + middle))
         )
 
 write_line("Nodes and weights for 5 points:")

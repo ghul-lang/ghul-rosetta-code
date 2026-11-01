@@ -31,8 +31,7 @@ let hops =
         |> map(n => (from = terms[n - 1], to = terms[n]))
         |> memo()
 
-let highest =
-    terms |> reduce(0, (best, term) => max(best, term))
+let highest = terms |> reduce(0, (best, term) => max(best, term))
 
 let widest =
     hops

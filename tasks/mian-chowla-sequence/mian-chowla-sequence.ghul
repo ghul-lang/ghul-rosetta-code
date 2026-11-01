@@ -28,9 +28,7 @@ write_line("the first 30 terms:")
 mian_chowla()
     |> take(30)
     |> chunk(10)
-    |> each(row =>
-        write_line(row |> map(n => "{n,6}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,6}") |> join("")))
 
 write_line("")
 write_line("terms 91 to 100:")
@@ -39,6 +37,4 @@ mian_chowla()
     |> skip(90)
     |> take(10)
     |> chunk(5)
-    |> each(row =>
-        write_line(row |> map(n => "{n,8}") |> join(""))
-    )
+    |> each(row => write_line(row |> map(n => "{n,8}") |> join("")))

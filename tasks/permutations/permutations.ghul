@@ -10,16 +10,12 @@ permutations(items: List[int]) -> List[int]{} is
                 rest.remove_at(index)
                 rest
                     |> permutations()
-                    |> map(tail =>
-                        ([items[index]] ++ tail) |> collect()
-                    )
+                    |> map(tail => ([items[index]] ++ tail) |> collect())
             ))
     fi
 si
 
 permutations(LIST([1, 2, 3]))
     |> each(permutation =>
-        write_line(
-            permutation |> map(value => "{value}") |> join(" ")
-        )
+        write_line(permutation |> map(value => "{value}") |> join(" "))
     )

@@ -4,18 +4,14 @@ use Matrix = List[List[double]]
 
 transpose(m: Matrix) -> Matrix =>
     0..m[0].count
-        |> map(c =>
-            0..m.count |> map(r => m[r][c]) |> collect()
-        )
+        |> map(c => 0..m.count |> map(r => m[r][c]) |> collect())
         |> collect()
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count
         |> map(r =>
             0..b[0].count
-                |> map(c =>
-                    0..b.count |> sum_by(k => a[r][k] * b[k][c])
-                )
+                |> map(c => 0..b.count |> sum_by(k => a[r][k] * b[k][c]))
                 |> collect()
         )
         |> collect()
@@ -29,8 +25,7 @@ solve(a: Matrix, b: List[double]) -> double{} is
             |> collect_mutable()
 
     for k in 0..n do
-        let pivot =
-            k..n |> max_by(i => System.Math.abs(rows[i][k]))!
+        let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
         (rows[k], rows[pivot]) = (rows[pivot], rows[k])
 
         for i in k + 1..n do

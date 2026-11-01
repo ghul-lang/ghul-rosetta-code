@@ -14,8 +14,7 @@ euclid(pulses: int, steps: int) -> string is
             else
                 second
             fi
-        let leftover_count =
-            first_count + second_count - 2 * fewer
+        let leftover_count = first_count + second_count - 2 * fewer
 
         first = "{first}{second}"
         first_count = fewer

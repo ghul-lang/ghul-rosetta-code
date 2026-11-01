@@ -1,25 +1,18 @@
 use default
 
 difference(exponent: int, a: int, b: int) -> bigint =>
-    bigint.pow(bigint(a), exponent) -
-    bigint.pow(bigint(b), exponent)
+    bigint.pow(bigint(a), exponent) - bigint.pow(bigint(b), exponent)
 
 zsigmondy(exponent: int, a: int, b: int) -> bigint is
     let greatest mut = difference(exponent, a, b)
 
     for lesser in 1..exponent do
         let smaller = difference(lesser, a, b)
-        let common mut = bigint.greatest_common_divisor(
-            greatest,
-            smaller
-        )
+        let common mut = bigint.greatest_common_divisor(greatest, smaller)
 
         while common > 1n do
             greatest = greatest / common
-            common = bigint.greatest_common_divisor(
-                greatest,
-                smaller
-            )
+            common = bigint.greatest_common_divisor(greatest, smaller)
         od
     od
 
@@ -31,13 +24,10 @@ let radices = [
     (7, 1), (3, 2), (5, 3), (7, 3), (7, 5)
 ]
 
-write_line(
-    "Zsigmondy numbers, the first twenty of each sequence:"
-)
+write_line("Zsigmondy numbers, the first twenty of each sequence:")
 
 for (a, b) in radices do
-    let terms =
-        1::20 |> map(n => "{zsigmondy(n, a, b)}") |> join(" ")
+    let terms = 1::20 |> map(n => "{zsigmondy(n, a, b)}") |> join(" ")
 
     write_line("")
     write_line("a = {a}, b = {b}")

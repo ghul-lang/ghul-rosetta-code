@@ -5,18 +5,12 @@ use System.Math.*
 use Math = System.Math
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)
 
-from_hsv(
-    hue: double,
-    saturation: double,
-    value: double
-) -> Colour => (
+from_hsv(hue: double, saturation: double, value: double) -> Colour => (
     let sextant = hue / 60.0D
     let rising = value * (1.0D - saturation)
-    let falling =
-        value * (1.0D - saturation * (sextant - floor(sextant)))
+    let falling = value * (1.0D - saturation * (sextant - floor(sextant)))
     let climbing =
-        value *
-        (1.0D - saturation * (1.0D - sextant + floor(sextant)))
+        value * (1.0D - saturation * (1.0D - sextant + floor(sextant)))
 
     let channels =
         case int(floor(sextant)) % 6
@@ -65,9 +59,7 @@ for pixel_y in 0..size do
                     angle
                 fi
 
-            image.colour(
-                from_hsv(turned, min(1.0D, away / radius), 1.0D)
-            )
+            image.colour(from_hsv(turned, min(1.0D, away / radius), 1.0D))
 
             image.blend(pixel_x, pixel_y, covered)
         fi

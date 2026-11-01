@@ -6,10 +6,7 @@ canonicalize(cidr: string) -> string => (
         octets = parts[0].split(['.']) |> map(long.parse)
 
     let address =
-        octets
-            |> reduce(0L, (packed, octet) =>
-                packed * 256L + octet
-            )
+        octets |> reduce(0L, (packed, octet) => packed * 256L + octet)
     let mask =
         if bits == 0 then
             0L
@@ -19,9 +16,7 @@ canonicalize(cidr: string) -> string => (
     let network = address & mask
     let dotted =
         0..4
-            |> map(shift =>
-                "{(network >> (24 - 8 * shift)) & 0xFFL}"
-            )
+            |> map(shift => "{(network >> (24 - 8 * shift)) & 0xFFL}")
             |> join(".")
 
     "{dotted}/{bits}"

@@ -33,8 +33,7 @@ shortest_register(sequence: List[int]) -> Register is
 
     for n in 0..sequence.count do
         let discrepancy =
-            sequence[n] ^
-            predict(sequence, connection, length, n)
+            sequence[n] ^ predict(sequence, connection, length, n)
 
         if discrepancy == 0 then
             shift = shift + 1
@@ -73,10 +72,7 @@ regenerates(
     length: int
 ) -> bool =>
     length..sequence.count
-        |> all(n =>
-            predict(sequence, connection, length, n) ==
-            sequence[n]
-        )
+        |> all(n => predict(sequence, connection, length, n) == sequence[n])
 
 for
     sequence in [
@@ -87,9 +83,7 @@ do
     let (connection, length) = shortest_register(sequence)
 
     write_line("sequence:          {sequence}")
-    write_line(
-        "connection:        C(x) = {polynomial(connection)}"
-    )
+    write_line("connection:        C(x) = {polynomial(connection)}")
     write_line("linear complexity: {length}")
     write_line(
         "regenerates it:    {regenerates(sequence, connection, length)}"

@@ -13,8 +13,7 @@ struct QUATERNION(a: double, b: double, c: double, d: double) is
     +(q: QUATERNION) -> QUATERNION =>
         QUATERNION(a + q.a, b + q.b, c + q.c, d + q.d)
 
-    *(r: double) -> QUATERNION =>
-        QUATERNION(a * r, b * r, c * r, d * r)
+    *(r: double) -> QUATERNION => QUATERNION(a * r, b * r, c * r, d * r)
 
     *(q: QUATERNION) -> QUATERNION =>
         QUATERNION(

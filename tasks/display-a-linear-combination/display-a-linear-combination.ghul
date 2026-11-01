@@ -5,8 +5,7 @@ term(coefficient: int, index: int) -> string =>
     if size == 1 then "e({index})" else "{size}*e({index})" fi
 
 linear_combination(scalars: List[int]) -> string =>
-    let terms = scalars |> index() |> filter((_, c) => c != 0)
-    in
+    let terms = scalars |> index() |> filter((_, c) => c != 0) in
     case terms
     when [] then
         "0"
@@ -15,8 +14,7 @@ linear_combination(scalars: List[int]) -> string =>
         let tail =
             rest
                 |> map((i, c) =>
-                    let sign = if c < 0 then " - " else " + " fi
-                    in
+                    let sign = if c < 0 then " - " else " + " fi in
                     "{sign}{term(c, i + 1)}"
                 )
                 |> join("")

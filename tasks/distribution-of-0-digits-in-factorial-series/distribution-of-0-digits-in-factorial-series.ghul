@@ -42,9 +42,7 @@ mean_zero_proportion(limit: int) -> double is
         let top_digits = digit_count(top)
 
         let lower_zeros =
-            limbs
-                |> take(limbs.count - 1)
-                |> sum_by(zeros_in(*, 9))
+            limbs |> take(limbs.count - 1) |> sum_by(zeros_in(*, 9))
 
         let zeros = zeros_in(top, top_digits) + lower_zeros
 
@@ -57,7 +55,5 @@ mean_zero_proportion(limit: int) -> double is
 si
 
 for limit in [100, 1000, 10000] do
-    write_line(
-        "{limit,6:N0}: {mean_zero_proportion(limit):F10}"
-    )
+    write_line("{limit,6:N0}: {mean_zero_proportion(limit):F10}")
 od

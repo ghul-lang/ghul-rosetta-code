@@ -18,8 +18,7 @@ for prime in 2..(limit + 1) do
 
         while multiple <= limit do
             radical[multiple] = radical[multiple] * prime
-            factor_counts[multiple] =
-                factor_counts[multiple] + 1
+            factor_counts[multiple] = factor_counts[multiple] + 1
             composite[multiple] = true
             multiple = multiple + prime
         od
@@ -55,11 +54,8 @@ for count in 0..8 do
     fi
 od
 
-prime(
-    n: int,
-    factors: List[int],
-    radicals: List[int]
-) -> bool => n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
+prime(n: int, factors: List[int], radicals: List[int]) -> bool =>
+    n >= 2 /\ factors[n] == 1 /\ radicals[n] == n
 
 let primes =
     (2..(limit + 1))

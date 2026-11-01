@@ -6,10 +6,7 @@ use System.Text.RegularExpressions.Regex
 utc_time(url: string) -> string? =>
     let
         page = HttpClient().get_string_async(url).result,
-        found = Regex.match(
-            page,
-            "(\\d\\d:\\d\\d:\\d\\d)</span> UTC"
-        )
+        found = Regex.match(page, "(\\d\\d:\\d\\d:\\d\\d)</span> UTC")
     in
         if found.success then
             "{found.groups[1].value} UTC"

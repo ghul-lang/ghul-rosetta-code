@@ -67,8 +67,7 @@ cardinal(value: long) -> string is
 
     if named.count > 1 /\ parts[0] != 0 /\ parts[0] < 100 then
         let last = named[named.count - 1]
-        let leading =
-            named |> take(named.count - 1) |> join(" ")
+        let leading = named |> take(named.count - 1) |> join(" ")
 
         return "{leading} and {last}"
     fi

@@ -20,9 +20,7 @@ romberg(
         intervals = intervals * 2
 
         let h = width / double(intervals)
-        let inner =
-            1..intervals
-                |> sum_by(j => f(lower + double(j) * h))
+        let inner = 1..intervals |> sum_by(j => f(lower + double(j) * h))
 
         let row = LIST([(ends / 2.0 + inner) * h])
         let factor mut = 1.0
@@ -30,9 +28,7 @@ romberg(
         for k in 1::i do
             factor = factor * 4.0
             let above = rows[i - 1][k - 1]
-            row.add(
-                (factor * row[k - 1] - above) / (factor - 1.0)
-            )
+            row.add((factor * row[k - 1] - above) / (factor - 1.0))
         od
 
         rows.add(row)

@@ -6,9 +6,7 @@ let width = 79
 let height = 22
 let random = Random(9)
 
-let grid = LIST(
-    0..width * height |> map(_ => random.next(1, 10))
-)
+let grid = LIST(0..width * height |> map(_ => random.next(1, 10)))
 
 let directions = [
     ('q', (-1, -1)),
@@ -108,7 +106,5 @@ while can_move() do
 od
 
 if !can_move() then
-    write_line(
-        "no moves left: game over, you ate {score} squares"
-    )
+    write_line("no moves left: game over, you ate {score} squares")
 fi

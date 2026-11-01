@@ -29,10 +29,7 @@ text_of(expression: Expression) -> string =>
     esac
 
 let expression = Expression.ADD(
-    Expression.MULTIPLY(
-        Expression.NUMBER(3.0),
-        Expression.NUMBER(4.0)
-    ),
+    Expression.MULTIPLY(Expression.NUMBER(3.0), Expression.NUMBER(4.0)),
     Expression.NEGATE(Expression.NUMBER(5.0))
 )
 
@@ -45,6 +42,4 @@ let expressions = [
 ]
 
 expressions
-    |> each(each =>
-        write_line("{text_of(each),-28} {value_of(each)}")
-    )
+    |> each(each => write_line("{text_of(each),-28} {value_of(each)}"))

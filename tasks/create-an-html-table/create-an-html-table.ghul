@@ -5,15 +5,13 @@ let columns = ["X", "Y", "Z"]
 cell(tag: string, text: string) -> string =>
     "      <{tag} align=\"right\">{text}</{tag}>"
 
-let heading =
-    [""] ++ columns |> map(cell("th", *)) |> join("\n")
+let heading = [""] ++ columns |> map(cell("th", *)) |> join("\n")
 
 let body =
     1::3
         |> map(number =>
             let values =
-                0..columns.count
-                    |> map(column => "{number * 100 + column}")
+                0..columns.count |> map(column => "{number * 100 + column}")
             in
             "    <tr>\n"
             "{cell("td", "{number}")}\n"

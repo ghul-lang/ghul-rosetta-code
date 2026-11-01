@@ -68,19 +68,9 @@ draw() is
 
     for cell in cells do
         if chosen |> any(letter => letter == cell.letter) then
-            comb.add(
-                corners(cell.x, cell.y),
-                230ub,
-                170ub,
-                60ub
-            )
+            comb.add(corners(cell.x, cell.y), 230ub, 170ub, 60ub)
         else
-            comb.add(
-                corners(cell.x, cell.y),
-                120ub,
-                170ub,
-                220ub
-            )
+            comb.add(corners(cell.x, cell.y), 120ub, 170ub, 220ub)
         fi
     od
 

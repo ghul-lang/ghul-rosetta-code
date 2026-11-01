@@ -36,9 +36,7 @@ for original in animals do
 
     write_line(copy.speak())
     write_line("  same object: {copy == original}")
-    write_line(
-        "  same type:   {copy.get_type() == original.get_type()}"
-    )
+    write_line("  same type:   {copy.get_type() == original.get_type()}")
 od
 
 let original = animals[1]

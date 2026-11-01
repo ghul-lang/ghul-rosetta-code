@@ -45,9 +45,7 @@ for step in sequence do
 od
 
 for row in 0..10 do
-    write_line(
-        first_hundred[row * 10..row * 10 + 10] |> join("")
-    )
+    write_line(first_hundred[row * 10..row * 10 + 10] |> join(""))
 od
 
 write_line("")

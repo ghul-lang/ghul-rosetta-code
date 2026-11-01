@@ -4,9 +4,7 @@ use Square = List[List[int]]
 
 odd_magic_square(n: int) -> Square => (
     let square =
-        0..n
-            |> map(_ => repeat(0, n) |> collect_mutable())
-            |> collect()
+        0..n |> map(_ => repeat(0, n) |> collect_mutable()) |> collect()
     let (row, column) mut = (0, n / 2)
 
     for value in 1::n * n do
@@ -41,11 +39,8 @@ singly_even_magic_square(n: int) -> Square is
                 0..n
                     |> map(column =>
                         let
-                            quadrant =
-                                (row / half) * 2 +
-                                column / half,
-                            value =
-                                small[row % half][column % half]
+                            quadrant = (row / half) * 2 + column / half,
+                            value = small[row % half][column % half]
                         in
                             value + offset[quadrant] * cells
                     )
@@ -84,12 +79,7 @@ is_magic(square: Square) -> bool =>
     in
         let lines =
             (0..n |> map(i => square[i] |> sum()))
-                |> cat(
-                    0..n
-                        |> map(j =>
-                            0..n |> sum_by(i => square[i][j])
-                        )
-                )
+                |> cat(0..n |> map(j => 0..n |> sum_by(i => square[i][j])))
                 |> cat([
                     0..n |> sum_by(i => square[i][i]),
                     0..n |> sum_by(i => square[i][n - 1 - i])
@@ -105,6 +95,4 @@ od
 
 let magic = is_magic(square)
 
-write_line(
-    "\nevery row, column and diagonal sums to 111: {magic}"
-)
+write_line("\nevery row, column and diagonal sums to 111: {magic}")

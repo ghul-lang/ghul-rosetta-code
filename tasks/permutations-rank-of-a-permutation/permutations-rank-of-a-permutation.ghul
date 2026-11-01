@@ -24,12 +24,9 @@ rank(permutation: List[int]) -> bigint => (
 
     for i in 0..n do
         let smaller_later =
-            i + 1..n
-                |> count(j => permutation[j] < permutation[i])
+            i + 1..n |> count(j => permutation[j] < permutation[i])
 
-        total =
-            total +
-            bigint(smaller_later) * factorial(bigint(n - 1 - i))
+        total = total + bigint(smaller_later) * factorial(bigint(n - 1 - i))
     od
 
     total
@@ -45,15 +42,12 @@ random_below(limit: bigint) -> bigint =>
             total * 1_000_000_000n + limb
         ) % limit
 
-show(permutation: List[int]) -> string =>
-    "({permutation |> join(", ")})"
+show(permutation: List[int]) -> string => "({permutation |> join(", ")})"
 
 for r in 0..6 do
     let permutation = unrank(bigint(r), 3)
 
-    write_line(
-        "{r} -> {show(permutation)} -> {rank(permutation)}"
-    )
+    write_line("{r} -> {show(permutation)} -> {rank(permutation)}")
 od
 
 write_line("")
@@ -76,6 +70,4 @@ let round_trips =
 
 write_line("")
 write_line("144! has {limit.to_string().length} digits")
-write_line(
-    "{round_trips} of {trials} random ranks of 144 items round-trip"
-)
+write_line("{round_trips} of {trials} random ranks of 144 items round-trip")

@@ -12,10 +12,7 @@ let tree = SET()
 touches(x: int, y: int) -> bool =>
     -1..2
         |> any(across =>
-            -1..2
-                |> any(up =>
-                    tree.contains((x = x + across, y = y + up))
-                )
+            -1..2 |> any(up => tree.contains((x = x + across, y = y + up)))
         )
 
 grow() -> (x: int, y: int){} is

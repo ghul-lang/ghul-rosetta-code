@@ -1,8 +1,7 @@
 use default
 use IO.Std.write
 
-is_letter(character: char) -> bool =>
-    character >= 'a' /\ character <= 'z'
+is_letter(character: char) -> bool => character >= 'a' /\ character <= 'z'
 
 forwards(input: IO.TextReader) -> char =>
     let character = char(input.read()) in

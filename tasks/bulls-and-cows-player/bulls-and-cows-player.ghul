@@ -4,13 +4,8 @@ use IO.Std.read_line
 use Score = (bulls: int, cows: int)
 
 score(guess: string, secret: string) -> Score =>
-    let bulls =
-        0..4 |> filter(i => guess[i] == secret[i]) |> count()
-    in
-    let shared =
-        0..4
-            |> filter(i => secret.contains(guess[i]))
-            |> count()
+    let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
+    let shared = 0..4 |> filter(i => secret.contains(guess[i])) |> count()
     in
     (bulls = bulls, cows = shared - bulls)
 
@@ -18,8 +13,7 @@ let candidates mut =
     (1234::9876)
         |> map(n => "{n}")
         |> filter(s =>
-            !s.contains('0') /\
-            0..4 |> all(i => s.last_index_of(s[i]) == i)
+            !s.contains('0') /\ 0..4 |> all(i => s.last_index_of(s[i]) == i)
         )
         |> collect()
 
@@ -49,10 +43,7 @@ do
     fi
 
     let parts = line |> words() |> collect()
-    let given = (
-        bulls = int.parse(parts[0]),
-        cows = int.parse(parts[1])
-    )
+    let given = (bulls = int.parse(parts[0]), cows = int.parse(parts[1]))
 
     write_line("bulls {given.bulls}, cows {given.cows}")
 
@@ -62,7 +53,5 @@ do
     fi
 
     candidates =
-        candidates
-            |> filter(c => score(guess, c) =~ given)
-            |> collect()
+        candidates |> filter(c => score(guess, c) =~ given) |> collect()
 od

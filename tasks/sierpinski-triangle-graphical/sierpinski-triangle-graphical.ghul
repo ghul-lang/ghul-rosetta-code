@@ -28,12 +28,7 @@ draw(a: POINT, b: POINT, c: POINT, order: int) is
     draw(midpoint(a, c), midpoint(b, c), c, order - 1)
 si
 
-draw(
-    (x = 0.5, y = 0.87),
-    (x = 0.0, y = 0.01),
-    (x = 1.0, y = 0.01),
-    6
-)
+draw((x = 0.5, y = 0.87), (x = 0.0, y = 0.01), (x = 1.0, y = 0.01), 6)
 
 image.write("sierpinski.png")
 

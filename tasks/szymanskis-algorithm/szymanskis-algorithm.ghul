@@ -30,10 +30,7 @@ let counter = LIST([0])
 let occupancy = LIST([0, 0])
 
 all_within(from: int, to: int, allowed: int[]) -> bool =>
-    from..to
-        |> all(i =>
-            allowed |> any(value => value == flags[i].read())
-        )
+    from..to |> all(i => allowed |> any(value => value == flags[i].read()))
 
 any_is(value: int) -> bool =>
     0..workers |> any(i => flags[i].read() == value)
@@ -92,9 +89,7 @@ si
 
 let threads =
     0..workers
-        |> map(i =>
-            Thread(System.Threading.ThreadStart(() => work(i)))
-        )
+        |> map(i => Thread(System.Threading.ThreadStart(() => work(i))))
         |> collect()
 
 threads |> each(thread => thread.start())
@@ -103,6 +98,4 @@ threads |> each(thread => thread.join())
 write_line("workers: {workers}, rounds each: {rounds}")
 write_line("counter: {counter[0]}, expected {workers * rounds}")
 write_line("most workers inside at once: {occupancy[1]}")
-write_line(
-    "every flag back to zero: {all_within(0, workers, [0])}"
-)
+write_line("every flag back to zero: {all_within(0, workers, [0])}")

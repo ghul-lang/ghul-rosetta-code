@@ -7,10 +7,7 @@ let size = 400
 let extent = 22.0
 
 let big = (centre = (x = 0.0, y = 0.0, z = 0.0), radius = 20.0)
-let small = (
-    centre = (x = 10.0, y = 10.0, z = 18.0),
-    radius = 14.0
-)
+let small = (centre = (x = 10.0, y = 10.0, z = 18.0), radius = 14.0)
 
 let light = (x = -0.5, y = 0.6, z = 1.0)
 
@@ -18,12 +15,11 @@ normalized(v: VECTOR) -> VECTOR =>
     let length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z) in
     (x = v.x / length, y = v.y / length, z = v.z / length)
 
-depths(
-    centre: VECTOR,
-    radius: double,
-    x: double,
-    y: double
-) -> (hit: bool, near: double, far: double) is
+depths(centre: VECTOR, radius: double, x: double, y: double) -> (
+    hit: bool,
+    near: double,
+    far: double
+) is
     let dx = x - centre.x
     let dy = y - centre.y
     let squared = radius * radius - dx * dx - dy * dy
@@ -34,11 +30,7 @@ depths(
 
     let half = sqrt(squared)
 
-    return (
-        hit = true,
-        near = centre.z - half,
-        far = centre.z + half
-    )
+    return (hit = true, near = centre.z - half, far = centre.z + half)
 si
 
 shade(normal: VECTOR) -> ubyte is
@@ -75,20 +67,15 @@ for row in 0..size do
         let crater = depths(small.centre, small.radius, x, y)
 
         let hollowed =
-            crater.hit /\
-            crater.near < outer.far /\
-            crater.far > outer.far
+            crater.hit /\ crater.near < outer.far /\ crater.far > outer.far
 
         if hollowed /\ crater.near < outer.near then
             continue
         fi
 
-        let centre =
-            if hollowed then small.centre else big.centre fi
-        let radius =
-            if hollowed then small.radius else big.radius fi
-        let depth =
-            if hollowed then crater.near else outer.far fi
+        let centre = if hollowed then small.centre else big.centre fi
+        let radius = if hollowed then small.radius else big.radius fi
+        let depth = if hollowed then crater.near else outer.far fi
 
         let outward = (
             x = (x - centre.x) / radius,

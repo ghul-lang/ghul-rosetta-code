@@ -31,8 +31,7 @@ test_entry() is
     Tasks.TASK.run(() is
         for _ in 1::2 do
             let context = listener.get_context()
-            let action =
-                context.request.headers["SOAPAction"] ?? ""
+            let action = context.request.headers["SOAPAction"] ?? ""
             let parts = action.trim('"').split(['/'])
             let function = parts[parts.count - 1]
             let reply = Encoding.utf8.get_bytes(
@@ -43,11 +42,7 @@ test_entry() is
             )
 
             context.response.content_type = "text/xml"
-            context.response.output_stream.write(
-                reply,
-                0,
-                reply.count
-            )
+            context.response.output_stream.write(reply, 0, reply.count)
             context.response.close()
         od
     si)

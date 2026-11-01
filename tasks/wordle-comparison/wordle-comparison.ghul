@@ -32,9 +32,7 @@ let pairs = [
 
 for (answer, guess) in pairs do
     let shown =
-        marks(answer, guess)
-            |> map(m => m.to_string().to_lower())
-            |> join()
+        marks(answer, guess) |> map(m => m.to_string().to_lower()) |> join()
 
     write_line("{answer} v {guess} => ({shown})")
 od

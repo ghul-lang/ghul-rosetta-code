@@ -1,9 +1,6 @@
 use default
 
-pairs(left: List[int], right: List[int]) -> (
-    first: int,
-    second: int
-){} is
+pairs(left: List[int], right: List[int]) -> (first: int, second: int){} is
     for first in left do
         for second in right do
             yield (first, second)
@@ -36,13 +33,11 @@ show(values: string{}) -> string => "{{{values |> join(", ")}}}"
 show_numbers(values: List[int]) -> string =>
     show(values |> map(value => "{value}"))
 
-show_tuple(values: List[int]) -> string =>
-    "({values |> join(", ")})"
+show_tuple(values: List[int]) -> string => "({values |> join(", ")})"
 
 show_binary(left: List[int], right: List[int]) =>
     let product =
-        pairs(left, right)
-            |> map(pair => "({pair.first}, {pair.second})")
+        pairs(left, right) |> map(pair => "({pair.first}, {pair.second})")
     in
     write_line(
         "{show_numbers(left)} × {show_numbers(right)} = {show(product)}"

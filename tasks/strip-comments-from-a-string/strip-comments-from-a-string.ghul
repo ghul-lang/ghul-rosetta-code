@@ -11,9 +11,5 @@ strip_comment(line: string, markers: char[]) -> string =>
 
 let markers = ['#', ';']
 
-write_line(
-    strip_comment("apples, pears # and bananas", markers)
-)
-write_line(
-    strip_comment("apples, pears ; and bananas", markers)
-)
+write_line(strip_comment("apples, pears # and bananas", markers))
+write_line(strip_comment("apples, pears ; and bananas", markers))

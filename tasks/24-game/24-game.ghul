@@ -31,10 +31,7 @@ parse_atom(text: string, at: int) -> Parsed => (
     if start >= text.length then
         Parsed.BAD("the expression ends too soon")
     elif char.is_digit(text[start]) then
-        Parsed.OK(
-            char.get_numeric_value(text[start]),
-            start + 1
-        )
+        Parsed.OK(char.get_numeric_value(text[start]), start + 1)
     elif text[start] != '(' then
         Parsed.BAD("{text[start]} does not belong here")
     else
@@ -111,48 +108,28 @@ sorted_digits(text: string) -> string => (
 
 runs_digits_together(text: string) -> bool =>
     (0..text.length - 1)
-        |> any(at =>
-            char.is_digit(text[at]) /\
-            char.is_digit(text[at + 1])
-        )
+        |> any(at => char.is_digit(text[at]) /\ char.is_digit(text[at + 1]))
 
-judge(entered: string, dealt: string) -> (
-    told: string,
-    solved: bool
-) =>
+judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
     if runs_digits_together(entered) then
         (
-            told =
-                "digits cannot be run together into longer numbers",
+            told = "digits cannot be run together into longer numbers",
             solved = false
         )
     elif sorted_digits(entered) !~ sorted_digits(dealt) then
-        (
-            told = "use each of {dealt} exactly once",
-            solved = false
-        )
+        (told = "use each of {dealt} exactly once", solved = false)
     else
         case parse_sum(entered, 0)
         when bad: Parsed.BAD then
             (told = bad.complaint, solved = false)
         when parsed: Parsed.OK then
-            if
-                skip_spaces(entered, parsed.at) < entered.length
-            then
-                (
-                    told = "the expression does not end there",
-                    solved = false
-                )
-            elif
-                System.Math.abs(
-                    parsed.value - target
-                ) < 0.000001D
-            then
+            if skip_spaces(entered, parsed.at) < entered.length then
+                (told = "the expression does not end there", solved = false)
+            elif System.Math.abs(parsed.value - target) < 0.000001D then
                 (told = "that is 24, well done", solved = true)
             else
                 (
-                    told =
-                        "that comes to {parsed.value}, not 24",
+                    told = "that comes to {parsed.value}, not 24",
                     solved = false
                 )
             fi
@@ -161,13 +138,10 @@ judge(entered: string, dealt: string) -> (
 
 let random = System.Random(20260908)
 
-let dealt =
-    (0..4) |> map(_ => "123456789"[random.next(9)]) |> join(" ")
+let dealt = (0..4) |> map(_ => "123456789"[random.next(9)]) |> join(" ")
 
 Std.write_line("make 24 from {dealt}")
-Std.write_line(
-    "use + - * / and brackets, each digit once, q to quit"
-)
+Std.write_line("use + - * / and brackets, each digit once, q to quit")
 
 while true do
     Std.write("expression: ")

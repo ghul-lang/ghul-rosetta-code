@@ -24,9 +24,7 @@ consolidate(input: List[Set[string]]) -> List[Set[string]] is
 si
 
 render(sets: List[Set[string]]) -> string =>
-    sets
-        |> map(one => "{{{one |> sort() |> join(", ")}}}")
-        |> join(" ")
+    sets |> map(one => "{{{one |> sort() |> join(", ")}}}") |> join(" ")
 
 show(groups: string[][]) is
     let sets = groups |> map(SET) |> collect()

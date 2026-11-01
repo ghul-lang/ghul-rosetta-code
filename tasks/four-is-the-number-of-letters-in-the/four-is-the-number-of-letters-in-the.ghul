@@ -97,8 +97,7 @@ ordinal(value: int) -> string is
         fi
 si
 
-letters(word: string) -> int =>
-    word |> filter(char.is_letter) |> count()
+letters(word: string) -> int => word |> filter(char.is_letter) |> count()
 
 let opening =
     "Four is the number of letters in the first word of this sentence,"
@@ -114,20 +113,14 @@ sentence_words() -> string{} is
         while words.count <= cursor do
             described = described + 1
 
-            for
-                word in cardinal(
-                    letters(words[described])
-                ).split([' '])
-            do
+            for word in cardinal(letters(words[described])).split([' ']) do
                 words.add(word)
             od
 
             words.add("in")
             words.add("the")
 
-            for
-                word in "{ordinal(described + 1)},".split([' '])
-            do
+            for word in "{ordinal(described + 1)},".split([' ']) do
                 words.add(word)
             od
         od
@@ -138,9 +131,7 @@ sentence_words() -> string{} is
 si
 
 sentence_length(word_count: int) -> int =>
-    let characters =
-        words |> take(word_count) |> sum_by(w => w.length)
-    in
+    let characters = words |> take(word_count) |> sum_by(w => w.length) in
     characters + word_count - 1
 
 write_line("the lengths of the first 201 words:")
@@ -161,12 +152,9 @@ od
 write_line("sentence length so far: {sentence_length(201)}")
 
 for target in [1_000, 10_000, 100_000, 1_000_000, 10_000_000] do
-    let word =
-        (sentence_words() |> skip(target - 1) |> first())!
+    let word = (sentence_words() |> skip(target - 1) |> first())!
     let length = sentence_length(target)
 
-    write_line(
-        "word {target,8} is \"{word}\" with {letters(word)} letters"
-    )
+    write_line("word {target,8} is \"{word}\" with {letters(word)} letters")
     write_line("    sentence length so far: {length}")
 od

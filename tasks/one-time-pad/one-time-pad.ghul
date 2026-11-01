@@ -5,22 +5,12 @@ use IO.Path
 use System.Security.Cryptography.RandomNumberGenerator
 
 letters(text: string) -> string =>
-    string([
-        char.to_upper(c)
-        for c in text
-        if char.is_letter(c)
-    ])
+    string([char.to_upper(c) for c in text if char.is_letter(c)])
 
 random_group() -> string =>
-    string(
-        1::6
-            |> map(_ =>
-                char(65 + RandomNumberGenerator.get_int32(26))
-            )
-    )
+    string(1::6 |> map(_ => char(65 + RandomNumberGenerator.get_int32(26))))
 
-random_line() -> string =>
-    1::6 |> map(_ => random_group()) |> join(" ")
+random_line() -> string => 1::6 |> map(_ => random_group()) |> join(" ")
 
 generate(path: string, lines: int) =>
     File.write_all_lines(
@@ -55,25 +45,18 @@ shift(text: string, key: string, direction: int) -> string =>
     string(
         0..text.length
             |> map(i =>
-                let moved =
-                    position(text[i]) +
-                    direction * position(key[i])
+                let moved = position(text[i]) + direction * position(key[i])
                 in
                 char(int('A') + (moved + 26) % 26)
             )
     )
 
-round_trip(
-    message: string,
-    sender: string,
-    receiver: string
-) -> (sent: string, received: string) =>
+round_trip(message: string, sender: string, receiver: string) -> (
+    sent: string,
+    received: string
+) =>
     let
-        sent = shift(
-            message,
-            take_key(sender, message.length),
-            1
-        ),
+        sent = shift(message, take_key(sender, message.length), 1),
         key = take_key(receiver, sent.length)
     in
         (sent = sent, received = shift(sent, key, -1))
@@ -97,8 +80,7 @@ let (sent, received) = round_trip(
 )
 
 let used =
-    File.read_all_lines(pad("sender.1tp"))
-        |> count(l => l.starts_with("-"))
+    File.read_all_lines(pad("sender.1tp")) |> count(l => l.starts_with("-"))
 
 write_line("With the Wikipedia pad:")
 write_line("  message:    {message}")
@@ -109,22 +91,13 @@ write_line("  lines used: {used}")
 generate(pad("fresh.1tp"), 5)
 File.copy(pad("fresh.1tp"), pad("fresh-copy.1tp"))
 
-let secret = letters(
-    "A one-time pad is only as secret as its pad"
-)
-let trip = round_trip(
-    secret,
-    pad("fresh.1tp"),
-    pad("fresh-copy.1tp")
-)
-let unused =
-    File.read_all_lines(pad("fresh.1tp")) |> count(is_unused)
+let secret = letters("A one-time pad is only as secret as its pad")
+let trip = round_trip(secret, pad("fresh.1tp"), pad("fresh-copy.1tp"))
+let unused = File.read_all_lines(pad("fresh.1tp")) |> count(is_unused)
 
 write_line()
 write_line("With a freshly generated pad of 5 lines:")
-write_line(
-    "  round trip recovers the message: {trip.received =~ secret}"
-)
+write_line("  round trip recovers the message: {trip.received =~ secret}")
 write_line("  lines left unused: {unused}")
 
 IO.Directory.delete(folder, true)

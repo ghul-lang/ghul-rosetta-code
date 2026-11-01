@@ -2,17 +2,13 @@ use default
 
 next_term(numerator: int, denominator: int) -> (int, int) => (
     denominator,
-    denominator * (2 * (numerator / denominator) + 1) -
-    numerator
+    denominator * (2 * (numerator / denominator) + 1) - numerator
 )
 
 let terms = stream(
     (1, 1),
     ((numerator, denominator)) =>
-        "{numerator}/{denominator}" || next_term(
-            numerator,
-            denominator
-        )
+        "{numerator}/{denominator}" || next_term(numerator, denominator)
 )
 
 write_line(terms |> take(20) |> join(" "))
@@ -25,11 +21,9 @@ quotients(left: int, right: int) -> int{} is
 si
 
 continued_fraction(numerator: int, denominator: int) -> int{} =>
-    let terms = quotients(numerator, denominator) |> collect()
-    in
+    let terms = quotients(numerator, denominator) |> collect() in
     if terms.count % 2 == 0 then
-        (terms |> take(terms.count - 1)) ++
-        [terms[terms.count - 1] - 1, 1]
+        (terms |> take(terms.count - 1)) ++ [terms[terms.count - 1] - 1, 1]
     else
         terms
     fi
@@ -45,6 +39,4 @@ let bits =
         )
         |> string()
 
-write_line(
-    "83116/51639 is term {System.Convert.to_int64(bits, 2)}"
-)
+write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}")

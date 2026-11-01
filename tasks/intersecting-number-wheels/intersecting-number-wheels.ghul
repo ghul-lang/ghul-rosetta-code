@@ -47,13 +47,10 @@ show(wheels: (name: char, values: Value[])[]) is
     let wheel_set = WHEEL_SET(wheels)
 
     for (name, values) in wheels do
-        write_line(
-            "{name}: {values |> map(describe) |> join(" ")}"
-        )
+        write_line("{name}: {values |> map(describe) |> join(" ")}")
     od
 
-    let generated =
-        1::20 |> map(_ => "{wheel_set.next(wheels[0].name)}")
+    let generated = 1::20 |> map(_ => "{wheel_set.next(wheels[0].name)}")
 
     write_line("  {generated |> join(" ")}")
 si

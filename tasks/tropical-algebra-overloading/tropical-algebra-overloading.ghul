@@ -12,8 +12,7 @@ struct TROPICAL(value: double) is
             fi
         )
 
-    ⊗(other: TROPICAL) -> TROPICAL =>
-        TROPICAL(value + other.value)
+    ⊗(other: TROPICAL) -> TROPICAL => TROPICAL(value + other.value)
 
     ^(power: int) -> TROPICAL =>
         assert power > 0 else "exponent must be positive" in
@@ -28,8 +27,7 @@ si
 let zero = TROPICAL(minus_infinity)
 let one = TROPICAL(0.0D)
 
-show(text: string, result: TROPICAL) =>
-    write_line("{text} is {result}")
+show(text: string, result: TROPICAL) => write_line("{text} is {result}")
 
 show("2 ⊗ -2", TROPICAL(2.0D) ⊗ TROPICAL(-2.0D))
 show("-0.001 ⊕ -Inf", TROPICAL(-0.001D) ⊕ zero)

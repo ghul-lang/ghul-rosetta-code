@@ -19,17 +19,14 @@ sieve(even: bool, limit: int) -> List[int] is
     let position mut = 1
 
     while
-        position < survivors.count /\
-        survivors[position] <= survivors.count
+        position < survivors.count /\ survivors[position] <= survivors.count
     do
         let spacing = survivors[position]
 
         survivors =
             survivors
                 |> index()
-                |> filter(entry =>
-                    (entry.index + 1) % spacing != 0
-                )
+                |> filter(entry => (entry.index + 1) % spacing != 0)
                 |> map(entry => entry.value)
                 |> collect()
 
@@ -111,9 +108,7 @@ parse(arguments: List[string]) -> Parsed is
     let first = as_number(counts[0])!
 
     if first < 1 then
-        return Parsed.REJECTED(
-            "the first index must be at least one"
-        )
+        return Parsed.REJECTED("the first index must be at least one")
     fi
 
     if counts.count == 1 then
@@ -123,9 +118,7 @@ parse(arguments: List[string]) -> Parsed is
     let second = as_number(counts[1])!
 
     if second < 0 then
-        return Parsed.UNDERSTOOD(
-            Request.BY_VALUE(first, -second, even)
-        )
+        return Parsed.UNDERSTOOD(Request.BY_VALUE(first, -second, even))
     fi
 
     Parsed.UNDERSTOOD(Request.BY_INDEX(first, second, even))
@@ -141,9 +134,7 @@ evaluate(request: Request) -> int{} =>
             |> take(indexed.last - indexed.first + 1)
     when valued: Request.BY_VALUE then
         series(valued.even)
-            |> filter(value =>
-                value >= valued.low /\ value <= valued.high
-            )
+            |> filter(value => value >= valued.low /\ value <= valued.high)
     esac
 
 run(arguments: List[string]) is
@@ -152,9 +143,7 @@ run(arguments: List[string]) is
     let outcome = parse(arguments)
 
     if outcome? then
-        write_line(
-            "  {outcome.request |> evaluate() |> join(" ")}"
-        )
+        write_line("  {outcome.request |> evaluate() |> join(" ")}")
     else
         write_line("  error: {outcome.message}")
     fi

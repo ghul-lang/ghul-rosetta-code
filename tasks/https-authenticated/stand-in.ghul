@@ -44,16 +44,12 @@ test_entry() is
         if let bound: IPEndPoint = listener.local_endpoint then
             bound.port
         else
-            throw System.Exception(
-                "the listener has no address"
-            )
+            throw System.Exception("the listener has no address")
         fi
 
     Tasks.TASK.run(() is
         for _ in 1::2 do
-            let tls = SslStream(
-                listener.accept_tcp_client().get_stream()
-            )
+            let tls = SslStream(listener.accept_tcp_client().get_stream())
 
             tls.authenticate_as_server(certificate)
 

@@ -36,11 +36,7 @@ test_entry() is
             " UTC</strong>.</p>\n"
         )
 
-        context.response.output_stream.write(
-            page,
-            0,
-            page.count
-        )
+        context.response.output_stream.write(page, 0, page.count)
         context.response.close()
     si)
 

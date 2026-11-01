@@ -23,9 +23,7 @@ write_line("A - B = {difference}")
 write_line("[1, 2] subset of A: {SET([1, 2]).is_subset_of(a)}")
 write_line("A subset of B: {a.is_subset_of(b)}")
 
-write_line(
-    "A = [4, 3, 2, 1]: {a.set_equals(SET([4, 3, 2, 1]))}"
-)
+write_line("A = [4, 3, 2, 1]: {a.set_equals(SET([4, 3, 2, 1]))}")
 write_line("A = B: {a.set_equals(b)}")
 
 let mutable = SET(a)

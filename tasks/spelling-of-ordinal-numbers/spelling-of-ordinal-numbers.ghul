@@ -72,9 +72,7 @@ let irregular = [
 ]
 
 ranked_word(word: string) -> string =>
-    let special =
-        irregular |> find(entry => entry.spelt =~ word)
-    in
+    let special = irregular |> find(entry => entry.spelt =~ word) in
     if let known = special then
         known.ranked
     elif word[word.length - 1] == 'y' then
@@ -88,9 +86,7 @@ ordinal(value: long) -> string is
     let cut =
         (0..text.length)
             |> reverse()
-            |> find(index =>
-                text[index] == ' ' \/ text[index] == '-'
-            )
+            |> find(index => text[index] == ' ' \/ text[index] == '-')
 
     if let at = cut then
         return "{text[0::at]}{ranked_word(text[at + 1..<0])}"
@@ -100,11 +96,7 @@ ordinal(value: long) -> string is
 si
 
 as_number(text: string) -> long =>
-    if
-        text.contains(".") \/
-        text.contains("e") \/
-        text.contains("E")
-    then
+    if text.contains(".") \/ text.contains("e") \/ text.contains("E") then
         long(double.parse(text))
     else
         long.parse(text)
@@ -114,6 +106,4 @@ as_number(text: string) -> long =>
     "1", "2", "3", "4", "5", "11", "65", "100", "101", "272", "23456",
     "8007006005004003", "00123.0", "1.23e2"
 ]
-    |> each(text =>
-        write_line("{text,18}  {ordinal(as_number(text))}")
-    )
+    |> each(text => write_line("{text,18}  {ordinal(as_number(text))}"))

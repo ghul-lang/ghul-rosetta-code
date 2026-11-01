@@ -27,9 +27,7 @@ let count mut = COUNT(1)
 
 bump_count(count)
 
-write_line(
-    "a struct argument is a copy: count is {count.value}"
-)
+write_line("a struct argument is a copy: count is {count.value}")
 
 bump_count_by_reference(count ref)
 

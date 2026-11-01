@@ -1,14 +1,12 @@
 use default
 
-let wriggling =
-    "spider that wriggled and jiggled and tickled inside her"
+let wriggling = "spider that wriggled and jiggled and tickled inside her"
 
 let verses = [
     (animal = "fly", caught = "fly", comment = ""),
     (
         animal = "spider", caught = wriggling,
-        comment =
-            "It wriggled and jiggled and tickled inside her."
+        comment = "It wriggled and jiggled and tickled inside her."
     ),
     (
         animal = "bird", caught = "bird",
@@ -24,26 +22,19 @@ let verses = [
     ),
     (
         animal = "goat", caught = "goat",
-        comment =
-            "She just opened her throat and swallowed a goat."
+        comment = "She just opened her throat and swallowed a goat."
     ),
     (
         animal = "cow", caught = "cow",
         comment = "I don't know how she swallowed a cow."
     ),
-    (
-        animal = "horse", caught = "horse",
-        comment = "She's dead, of course."
-    )
+    (animal = "horse", caught = "horse", comment = "She's dead, of course.")
 ]
 
-let ending =
-    "I don't know why she swallowed the fly. Perhaps she'll die."
+let ending = "I don't know why she swallowed the fly. Perhaps she'll die."
 
 for (n, verse) in verses |> index() do
-    write_line(
-        "There was an old lady who swallowed a {verse.animal}."
-    )
+    write_line("There was an old lady who swallowed a {verse.animal}.")
 
     if verse.comment.length > 0 then
         write_line(verse.comment)

@@ -42,10 +42,7 @@ let start = (
 
 image.view(-0.03D, -0.03D, 1.03D, 0.90D)
 
-stream(start, toward_a_corner)
-    |> skip(20)
-    |> take(150000)
-    |> each(plot)
+stream(start, toward_a_corner) |> skip(20) |> take(150000) |> each(plot)
 
 image.write("chaos.png")
 

@@ -29,16 +29,10 @@ test_entry() is
 
     Tasks.TASK.run(() is
         let context = listener.get_context()
-        let body = Encoding.utf8.get_bytes(
-            "Hello from a local page\n"
-        )
+        let body = Encoding.utf8.get_bytes("Hello from a local page\n")
 
         context.response.content_type = "text/plain"
-        context.response.output_stream.write(
-            body,
-            0,
-            body.count
-        )
+        context.response.output_stream.write(body, 0, body.count)
         context.response.close()
     si)
 

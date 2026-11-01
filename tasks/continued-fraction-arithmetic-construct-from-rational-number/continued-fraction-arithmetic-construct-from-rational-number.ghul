@@ -37,9 +37,7 @@ for group in examples do
     for (numerator, denominator) in group do
         let fraction = "{numerator}/{denominator}"
 
-        write_line(
-            "{fraction,20} = {show(r2cf(numerator, denominator))}"
-        )
+        write_line("{fraction,20} = {show(r2cf(numerator, denominator))}")
     od
 
     write_line("")

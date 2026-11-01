@@ -3,15 +3,10 @@ use Raster.IMAGE
 use System.Math.*
 
 struct VEC(x: double, y: double, z: double) is
-    -(other: VEC) -> VEC =>
-        VEC(x - other.x, y - other.y, z - other.z)
+    -(other: VEC) -> VEC => VEC(x - other.x, y - other.y, z - other.z)
 
     ×(o: VEC) -> VEC =>
-        VEC(
-            y * o.z - z * o.y,
-            z * o.x - x * o.z,
-            x * o.y - y * o.x
-        )
+        VEC(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
 
     length: double => sqrt(x * x + y * y + z * z)
 si
@@ -82,9 +77,7 @@ for q in quads do
     image.line(outline ++ [outline[0]] |> collect())
 od
 
-write_line(
-    "a catenoid, the surface of revolution of y = cosh(x)"
-)
+write_line("a catenoid, the surface of revolution of y = cosh(x)")
 write_line("{quads.count} quadrilaterals, drawn farthest first")
 
 image.write("catenoid.png")

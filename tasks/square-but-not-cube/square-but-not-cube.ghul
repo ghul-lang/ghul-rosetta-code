@@ -9,11 +9,7 @@ is_cube(n: long) -> bool =>
 
 squares() -> long{} => from(1L) |> map(n => n * n)
 
-let last =
-    squares()
-        |> filter(s => !is_cube(s))
-        |> skip(29)
-        |> first()!
+let last = squares() |> filter(s => !is_cube(s)) |> skip(29) |> first()!
 
 for square in squares() |> take_while(* <= last) do
     if is_cube(square) then

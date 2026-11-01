@@ -24,8 +24,7 @@ read_order(key: string) -> int{} =>
     (0..key.length) |> sort_by(column => key[column])
 
 column_height(key: string, length: int, column: int) -> int =>
-    (length / key.length) +
-    if column < length % key.length then 1 else 0 fi
+    (length / key.length) + if column < length % key.length then 1 else 0 fi
 
 to_pairs(square: string, text: string) -> string =>
     text
@@ -51,17 +50,11 @@ encrypt(square: string, key: string, text: string) -> string =>
     key
         |> read_order()
         |> flat_map(column =>
-            column..pairs.length
-                |> step(key.length)
-                |> map(at => pairs[at])
+            column..pairs.length |> step(key.length) |> map(at => pairs[at])
         )
         |> join("")
 
-decrypt(
-    square: string,
-    key: string,
-    cipher: string
-) -> string => (
+decrypt(square: string, key: string, cipher: string) -> string => (
     let pairs = cipher |> collect_mutable()
     let taken mut = 0
     for column in read_order(key) do

@@ -4,9 +4,7 @@ let keys = ["hydrogen", "helium", "lithium", "beryllium"]
 let values = [1, 2, 3, 4]
 
 let elements =
-    keys
-        |> zip(values)
-        |> collect_map(pair => pair.`0, pair => pair.`1)
+    keys |> zip(values) |> collect_map(pair => pair.`0, pair => pair.`1)
 
 for key in keys do
     write_line("{key,-10} {elements[key]}")

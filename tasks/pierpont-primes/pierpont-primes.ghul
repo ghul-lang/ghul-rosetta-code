@@ -14,8 +14,7 @@ three_smooth() -> bigint{} is
         let doubled = found[next_double] * 2n
         let tripled = found[next_triple] * 3n
 
-        value =
-            if doubled < tripled then doubled else tripled fi
+        value = if doubled < tripled then doubled else tripled fi
 
         if doubled =~ value then
             next_double = next_double + 1
@@ -38,9 +37,7 @@ report(kind: string, offset: bigint) is
         |> take(50)
         |> chunk(10)
         |> each(row =>
-            write_line(
-                row |> map(prime => "{prime,9}") |> join("")
-            )
+            write_line(row |> map(prime => "{prime,9}") |> join(""))
         )
 
     write_line("250th: {found[249]}")

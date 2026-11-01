@@ -64,16 +64,11 @@ chi_squared(counts: List[int]) -> double =>
         expected = total / double(counts.count)
     in
         counts
-            |> sum_by(k =>
-                let e = double(k) - expected in e * e / expected
-            )
+            |> sum_by(k => let e = double(k) - expected in e * e / expected)
 
 is_uniform(counts: List[int], significance: double) -> bool =>
     let freedom = double(counts.count - 1) in
-    upper_gamma(
-        freedom / 2.0,
-        chi_squared(counts) / 2.0
-    ) > significance
+    upper_gamma(freedom / 2.0, chi_squared(counts) / 2.0) > significance
 
 for
     counts in [

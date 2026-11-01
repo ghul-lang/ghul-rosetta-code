@@ -87,6 +87,4 @@ si
 let (winner, rounds) = play(37)
 
 write_line()
-write_line(
-    "player {winner} has all 52 cards after {rounds} rounds"
-)
+write_line("player {winner} has all 52 cards after {rounds} rounds")

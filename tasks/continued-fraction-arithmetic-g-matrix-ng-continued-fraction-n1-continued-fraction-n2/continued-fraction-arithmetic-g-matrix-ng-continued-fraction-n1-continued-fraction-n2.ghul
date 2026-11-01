@@ -10,12 +10,7 @@ use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
     u.p - v.p
 )
 
-*(r: Row, t: bigint) -> Row => (
-    r.p12 * t,
-    r.p1 * t,
-    r.p2 * t,
-    r.p * t
-)
+*(r: Row, t: bigint) -> Row => (r.p12 * t, r.p1 * t, r.p2 * t, r.p * t)
 
 input_first(r: Row, t: bigint) -> Row => (
     r.p2 + r.p12 * t,
@@ -151,31 +146,14 @@ let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
 let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
 let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
-run(
-    label: string,
-    operation: (Row, Row),
-    x: bigint{},
-    y: bigint{}
-) =>
+run(label: string, operation: (Row, Row), x: bigint{}, y: bigint{}) =>
     let (top, bottom) = operation in
-    write_line(
-        "{label,-15} = {show(combine(top, bottom, x, y))}"
-    )
+    write_line("{label,-15} = {show(combine(top, bottom, x, y))}")
 
 run("22/7 + 1/2", add, r2cf(22n, 7n), r2cf(1n, 2n))
 run("13/11 * 22/7", multiply, r2cf(13n, 11n), r2cf(22n, 7n))
 run("13/11 - 22/7", subtract, r2cf(13n, 11n), r2cf(22n, 7n))
 run("484/49 / 22/7", divide, r2cf(484n, 49n), r2cf(22n, 7n))
-run(
-    "√2 * √2",
-    multiply,
-    square_root_of_two(),
-    square_root_of_two()
-)
+run("√2 * √2", multiply, square_root_of_two(), square_root_of_two())
 run("√2 + √2", add, square_root_of_two(), square_root_of_two())
-run(
-    "√2 / √2",
-    divide,
-    square_root_of_two(),
-    square_root_of_two()
-)
+run("√2 / √2", divide, square_root_of_two(), square_root_of_two())

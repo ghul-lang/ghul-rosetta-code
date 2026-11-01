@@ -4,10 +4,7 @@ use Raster.IMAGE
 
 use Edge = (from: int, to: int)
 
-class GRAPH(
-    nodes: Collections.List[int],
-    edges: Collections.List[Edge]
-) is
+class GRAPH(nodes: Collections.List[int], edges: Collections.List[Edge]) is
     _neighbours: Map[int, SET[int]]
 
     init(..) is
@@ -45,8 +42,7 @@ parse(description: string) -> GRAPH is
         for token in description.split([' '])
     ]
 
-    let nodes =
-        tokens |> flat_map(ends => ends) |> collect_set()
+    let nodes = tokens |> flat_map(ends => ends) |> collect_set()
 
     let edges =
         tokens
@@ -79,8 +75,7 @@ colour(graph: GRAPH) -> MAP[int, int] is
                     graph.degree(node)
                 ))!
 
-        colours[node] =
-            from(0) |> find(c => !taken.contains(c))!
+        colours[node] = from(0) |> find(c => !taken.contains(c))!
     od
 
     colours
@@ -93,16 +88,12 @@ report(name: string, description: string) is
     write_line("{name}:")
 
     for (from, to) in graph.edges do
-        write_line(
-            "  {from}-{to} coloured {colours[from]}-{colours[to]}"
-        )
+        write_line("  {from}-{to} coloured {colours[from]}-{colours[to]}")
     od
 
     for node in graph.nodes do
         if graph.degree(node) == 0 then
-            write_line(
-                "  {node} isolated, coloured {colours[node]}"
-            )
+            write_line("  {node} isolated, coloured {colours[node]}")
         fi
     od
 
@@ -152,9 +143,7 @@ for (i, (name, description)) in examples |> index() do
     // nodes sit evenly round a circle
     let position = node => (
         let angle =
-            6.283185307D *
-            double(slot[node]) /
-            double(graph.nodes.count)
+            6.283185307D * double(slot[node]) / double(graph.nodes.count)
         (
             x = cx + 80.0D * Ghul.Math.cos(angle),
             y = cy + 80.0D * Ghul.Math.sin(angle)

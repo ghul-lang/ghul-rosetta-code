@@ -32,6 +32,4 @@ let (longest, longest_length) =
         |> map(n => (n, hailstone(n) |> count()))
         |> max_by((_, length) => length)!
 
-write_line(
-    "longest under 100,000: {longest} (length {longest_length})"
-)
+write_line("longest under 100,000: {longest} (length {longest_length})")

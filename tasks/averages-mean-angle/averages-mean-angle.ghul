@@ -18,7 +18,5 @@ let lists = [
 ]
 
 for angles in lists do
-    write_line(
-        "mean angle of {angles} is {mean_angle(angles):F4} degrees"
-    )
+    write_line("mean angle of {angles} is {mean_angle(angles):F4} degrees")
 od

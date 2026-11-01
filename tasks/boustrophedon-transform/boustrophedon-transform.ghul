@@ -1,7 +1,6 @@
 use default
 
-nth_prime(index: int) -> int =>
-    primes() |> skip(index) |> first()!
+nth_prime(index: int) -> int => primes() |> skip(index) |> first()!
 
 fibonacci(index: int) -> bigint is
     walk(previous: bigint, current: bigint, remaining: int) -> bigint =>
@@ -23,9 +22,7 @@ boustrophedon(term: (int) -> bigint, count: int) -> bigint{} is
         following.add(term(index))
 
         for step in 1::index do
-            following.add(
-                following[step - 1] + row[index - step]
-            )
+            following.add(following[step - 1] + row[index - step])
         od
 
         row = following

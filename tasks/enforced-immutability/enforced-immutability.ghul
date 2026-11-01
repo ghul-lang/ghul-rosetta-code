@@ -1,8 +1,7 @@
 use default
 
 class ACCOUNT(owner: string, balance: int) pure is
-    with_deposit(amount: int) -> ACCOUNT =>
-        ACCOUNT(owner, balance + amount)
+    with_deposit(amount: int) -> ACCOUNT => ACCOUNT(owner, balance + amount)
 
     to_string() -> string => "{owner}: {balance}"
 si
@@ -17,9 +16,7 @@ write_line("{richer}")
 let names = LIST(["Ada", "Grace"])
 let readable: Collections.List[string] = names
 
-write_line(
-    "through the read-only view: {readable |> join(", ")}"
-)
+write_line("through the read-only view: {readable |> join(", ")}")
 
 names.add("Alan")
 

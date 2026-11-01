@@ -14,17 +14,12 @@ struct UNCERTAIN(value: double, error: double) is
 
     /(other: UNCERTAIN) -> UNCERTAIN =>
         let quotient = value / other.value in
-        UNCERTAIN(
-            quotient,
-            abs(quotient) * relative_with(other)
-        )
+        UNCERTAIN(quotient, abs(quotient) * relative_with(other))
 
     +(c: double) -> UNCERTAIN => UNCERTAIN(value + c, error)
     -(c: double) -> UNCERTAIN => UNCERTAIN(value - c, error)
-    *(c: double) -> UNCERTAIN =>
-        UNCERTAIN(value * c, abs(c * error))
-    /(c: double) -> UNCERTAIN =>
-        UNCERTAIN(value / c, abs(error / c))
+    *(c: double) -> UNCERTAIN => UNCERTAIN(value * c, abs(c * error))
+    /(c: double) -> UNCERTAIN => UNCERTAIN(value / c, abs(error / c))
 
     added_error(other: UNCERTAIN) -> double =>
         sqrt(error * error + other.error * other.error)

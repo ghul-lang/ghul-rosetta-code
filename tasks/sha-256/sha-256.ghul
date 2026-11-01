@@ -39,9 +39,7 @@ si
 
 word(block: List[ubyte], at: int) -> uint =>
     0..4
-        |> map(index =>
-            uint(block[at + index]) << (24 - 8 * index)
-        )
+        |> map(index => uint(block[at + index]) << (24 - 8 * index))
         |> reduce(0u, * | *)
 
 sha256(message: ubyte[]) -> string is
@@ -75,10 +73,7 @@ sha256(message: ubyte[]) -> string is
                 (recent >>> 10)
 
             schedule.add(
-                schedule[index - 16] +
-                spread +
-                schedule[index - 7] +
-                mixed
+                schedule[index - 16] + spread + schedule[index - 7] + mixed
             )
         od
 
@@ -113,11 +108,7 @@ sha256(message: ubyte[]) -> string is
                 rotate_right(a, 22)
 
             let first =
-                h +
-                sum_e +
-                choice +
-                round_constants[step] +
-                schedule[step]
+                h + sum_e + choice + round_constants[step] + schedule[step]
 
             working[7] = g
             working[6] = f

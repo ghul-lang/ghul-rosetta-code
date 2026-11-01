@@ -28,10 +28,7 @@ main_step(block: ulong, key: uint) -> ulong =>
     let
         low = uint(block & 0xFFFF_FFFFul),
         high = uint(block >> 32),
-        rotated = BitOperations.rotate_left(
-            substitute(low + key),
-            11
-        ),
+        rotated = BitOperations.rotate_left(substitute(low + key), 11),
         mixed = rotated ^ high
     in
         (ulong(low) << 32) | ulong(mixed)
@@ -49,7 +46,5 @@ let key = uint(little_endian([0xF9, 0x04, 0xC1, 0xE2]))
 let output = main_step(input, key)
 
 write_line(
-    0..8
-        |> map(i => "[{(output >> (8 * i)) & 0xFFul:x2}]")
-        |> join("")
+    0..8 |> map(i => "[{(output >> (8 * i)) & 0xFFul:x2}]") |> join("")
 )

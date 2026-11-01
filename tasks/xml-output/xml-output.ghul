@@ -12,10 +12,7 @@ remarks_document(remarks: List[Remark]) -> XDocument =>
     XDocument([
         XElement(
             XName.get("CharacterRemarks"),
-            remarks
-                |> map((name, remark) =>
-                    character(name, remark)
-                )
+            remarks |> map((name, remark) => character(name, remark))
         )
     ])
 
@@ -23,8 +20,7 @@ let remarks = [
     (name = "April", remark = "Bubbly: I'm > Tam and <= Emily"),
     (
         name = "Tam O'Shanter",
-        remark =
-            "Burns: \"When chapman billies leave the street ...\""
+        remark = "Burns: \"When chapman billies leave the street ...\""
     ),
     (name = "Emily", remark = "Short & shrift")
 ]

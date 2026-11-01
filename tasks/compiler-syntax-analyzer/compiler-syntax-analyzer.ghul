@@ -52,12 +52,7 @@ union Node is
     OPERATOR(kind: Kind, left: Node, right: Node)
 si
 
-class TOKEN(
-    kind: Kind,
-    value: string,
-    line: string,
-    column: string
-)
+class TOKEN(kind: Kind, value: string, line: string, column: string)
 
 let lexicon = [
     ("LeftParen", LEFT_PAREN), ("RightParen", RIGHT_PAREN),
@@ -78,9 +73,7 @@ let lexicon = [
 ]
 
 let kinds = MAP(lexicon)
-let spellings = MAP(
-    lexicon |> map(((text, kind)) => (kind, text))
-)
+let spellings = MAP(lexicon |> map(((text, kind)) => (kind, text)))
 
 let unary_precedence = 14
 
@@ -111,9 +104,7 @@ operator_spelling(kind: Kind) -> string =>
     when AND then "And"
     when OR then "Or"
     else
-        throw System.Exception(
-            "{kind} is not a binary operator"
-        )
+        throw System.Exception("{kind} is not a binary operator")
     esac
 
 class PARSER(tokens: Iterator[TOKEN]) is
@@ -154,10 +145,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
         if stoppers |> contains(token.kind) then
             list
         else
-            statements_from(
-                Node.SEQUENCE(list, statement()),
-                stoppers
-            )
+            statements_from(Node.SEQUENCE(list, statement()), stoppers)
         fi
 
     statement() -> Node =>
@@ -217,9 +205,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     print_list() -> Node => (
         expect(LEFT_PAREN)
-        let list = print_items(
-            Node.SEQUENCE(Node.EMPTY, print_item())
-        )
+        let list = print_items(Node.SEQUENCE(Node.EMPTY, print_item()))
         expect(RIGHT_PAREN)
         expect(SEMICOLON)
         list
@@ -249,8 +235,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
         inside
     )
 
-    expression(minimum: int) -> Node =>
-        binary_tail(primary(), minimum)
+    expression(minimum: int) -> Node => binary_tail(primary(), minimum)
 
     primary() -> Node =>
         case token.kind
@@ -282,17 +267,13 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     binary_tail(left: Node, minimum: int) -> Node =>
         if let
-            precedence = binary_precedence(
-                token.kind
-            ) /\ precedence >= minimum
+            precedence = binary_precedence(token.kind) /\ precedence >=
+            minimum
         then
             let kind = token.kind
             advance()
             let right = expression(precedence + 1)
-            binary_tail(
-                Node.OPERATOR(kind, left, right),
-                minimum
-            )
+            binary_tail(Node.OPERATOR(kind, left, right), minimum)
         else
             left
         fi
@@ -363,8 +344,7 @@ si
 token(line: string) -> TOKEN => (
     let fields = line |> words() |> collect()
     let name = fields[2]
-    let rest =
-        line.substring(line.index_of(name) + name.length).trim()
+    let rest = line.substring(line.index_of(name) + name.length).trim()
     TOKEN(kinds[name], rest, fields[0], fields[1])
 )
 

@@ -45,9 +45,7 @@ evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
     let stack = STACK()
 
     for i in 0..arguments.count do
-        stack.push(
-            Frame.ARGUMENT(arguments[arguments.count - 1 - i])
-        )
+        stack.push(Frame.ARGUMENT(arguments[arguments.count - 1 - i]))
     od
 
     let settle = value is
@@ -66,9 +64,7 @@ evaluate(start: THUNK, arguments: List[THUNK]) -> Result is
             if let (thunk): Frame.ARGUMENT = stack.pop() then
                 thunk
             else
-                throw System.InvalidOperationException(
-                    "argument expected"
-                )
+                throw System.InvalidOperationException("argument expected")
             fi
 
     let term mut = Term.VAR(1)
@@ -179,9 +175,7 @@ let one = constant(Term.ATOM(1))
 
 items(thunk: THUNK, limit: int) -> THUNK{} is
     if limit > 0 then
-        if let
-            (head, tail): Result.CONS = evaluate(thunk, [top])
-        then
+        if let (head, tail): Result.CONS = evaluate(thunk, [top]) then
             yield head
             yield in items(tail, limit - 1)
         fi
@@ -189,9 +183,7 @@ items(thunk: THUNK, limit: int) -> THUNK{} is
 si
 
 bit_of(thunk: THUNK) -> int =>
-    if let
-        (tag): Result.CONSTANT = evaluate(thunk, [zero, one])
-    then
+    if let (tag): Result.CONSTANT = evaluate(thunk, [zero, one]) then
         tag
     else throw System.InvalidOperationException("bit expected")
     fi
@@ -207,9 +199,7 @@ run_bits(program: string, limit: int) -> string =>
         bits = program |> map(* == '1') |> collect(),
         reader = READER(bits),
         term = reader.term(),
-        input = list(
-            bits |> skip(reader.at) |> map(bit) |> collect()
-        )
+        input = list(bits |> skip(reader.at) |> map(bit) |> collect())
     in
         items(THUNK(Term.APP(term, input), null), limit)
             |> map(t => "{bit_of(t)}")
@@ -225,10 +215,7 @@ run_bytes(bytes: List[int], limit: int) -> string =>
         items(THUNK(Term.APP(term, list(rest)), null), limit)
             |> map(b =>
                 let value =
-                    items(b, 8)
-                        |> reduce(0, (a, t) =>
-                            a * 2 + bit_of(t)
-                        )
+                    items(b, 8) |> reduce(0, (a, t) => a * 2 + bit_of(t))
                 in
                 "{char(value)}"
             )
@@ -289,10 +276,7 @@ let symbolic =
         |> cat(query |> map(int))
         |> collect()
 
-let hilbert =
-    IO.File.read_all_bytes("hilbert.Blc")
-        |> map(int)
-        |> collect()
+let hilbert = IO.File.read_all_bytes("hilbert.Blc") |> map(int) |> collect()
 
 write_line()
 write_line("byte mode")

@@ -9,8 +9,7 @@ for p in 2..limit + 3 do
         let multiple mut = p
 
         while multiple < limit + 3 do
-            distinct_factors[multiple] =
-                distinct_factors[multiple] + 1
+            distinct_factors[multiple] = distinct_factors[multiple] + 1
             multiple = multiple + p
         od
 
@@ -25,25 +24,16 @@ for p in 2..limit + 3 do
     fi
 od
 
-is_tetraprime(n: int) -> bool =>
-    distinct_factors[n] == 4 /\ square_free[n]
+is_tetraprime(n: int) -> bool => distinct_factors[n] == 4 /\ square_free[n]
 
 median(sorted: Collections.List[int]) -> int =>
     if sorted.count % 2 == 1 then
         sorted[sorted.count / 2]
     else
-        (
-            sorted[sorted.count / 2 - 1] +
-            sorted[sorted.count / 2]
-        ) / 2
+        (sorted[sorted.count / 2 - 1] + sorted[sorted.count / 2]) / 2
     fi
 
-report(
-    below: int,
-    direction: string,
-    offset: int,
-    show: bool
-) is
+report(below: int, direction: string, offset: int, show: bool) is
     let found =
         (2..below)
             |> filter(p =>
@@ -53,9 +43,7 @@ report(
             )
             |> collect()
 
-    write_line(
-        "Primes below {below} {direction} by a tetraprime pair:"
-    )
+    write_line("Primes below {below} {direction} by a tetraprime pair:")
 
     if show then
         for row in found |> chunk(10) do
@@ -66,16 +54,11 @@ report(
     let sevens =
         found
             |> count(p =>
-                (p + offset) % 7 == 0 \/
-                (p + offset + 1) % 7 == 0
+                (p + offset) % 7 == 0 \/ (p + offset + 1) % 7 == 0
             )
 
     let gaps =
-        found
-            |> pairwise()
-            |> map(((a, b)) => b - a)
-            |> sort()
-            |> collect()
+        found |> pairwise() |> map(((a, b)) => b - a) |> sort() |> collect()
 
     write_line(
         "Found {found.count} such primes, of which {sevens} have 7 "

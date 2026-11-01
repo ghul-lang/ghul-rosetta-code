@@ -10,20 +10,10 @@ use Mesh = (points: List[Point], faces: List[Face])
     z = a.z + b.z
 )
 
-*(p: Point, k: double) -> Point => (
-    x = p.x * k,
-    y = p.y * k,
-    z = p.z * k
-)
+*(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
 centre(points: List[Point]) -> Point =>
-    (
-        points
-            |> reduce(
-                (x = 0.0D, y = 0.0D, z = 0.0D),
-                (a, b) => a + b
-            )
-    ) *
+    (points |> reduce((x = 0.0D, y = 0.0D, z = 0.0D), (a, b) => a + b)) *
     (1.0D / double(points.count))
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
@@ -39,11 +29,7 @@ subdivided(mesh: Mesh) -> Mesh is
     let face_points =
         faces
             |> map(face =>
-                centre(
-                    face
-                        |> map(index => points[index])
-                        |> collect()
-                )
+                centre(face |> map(index => points[index]) |> collect())
             )
             |> collect()
 
@@ -70,8 +56,7 @@ subdivided(mesh: Mesh) -> Mesh is
     let edge_points = MAP()
 
     for (key, touching) in edge_faces do
-        let ends = [points[key.low], points[key.high]]
-            |> collect()
+        let ends = [points[key.low], points[key.high]] |> collect()
 
         let position =
             if touching.count == 1 then
@@ -79,12 +64,7 @@ subdivided(mesh: Mesh) -> Mesh is
             else
                 centre(
                     ends
-                        |> cat(
-                            touching
-                                |> map(index =>
-                                    face_points[index]
-                                )
-                        )
+                        |> cat(touching |> map(index => face_points[index]))
                         |> collect()
                 )
             fi
@@ -118,9 +98,7 @@ subdivided(mesh: Mesh) -> Mesh is
 
         let border =
             touching_edges
-                |> filter((key, faces_here) =>
-                    faces_here.count == 1
-                )
+                |> filter((key, faces_here) => faces_here.count == 1)
                 |> collect()
 
         if border.count > 0 then
@@ -170,8 +148,7 @@ subdivided(mesh: Mesh) -> Mesh is
         for corner in 0..face.count do
             let vertex = face[corner]
             let next = face[(corner + 1) % face.count]
-            let previous =
-                face[(corner + face.count - 1) % face.count]
+            let previous = face[(corner + face.count - 1) % face.count]
 
             new_faces.add([
                 vertex,
@@ -245,9 +222,7 @@ let (final_points, final_faces) = rounds[rounds.count - 1]
 for face in final_faces do
     for corner in 0..face.count do
         let a = turned(final_points[face[corner]])
-        let z = turned(
-            final_points[face[(corner + 1) % face.count]]
-        )
+        let z = turned(final_points[face[(corner + 1) % face.count]])
 
         image.line(a.x, a.y, z.x, z.y)
     od

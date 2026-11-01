@@ -8,9 +8,7 @@ let make_list = separator is
         "{counter}{separator}{item}"
     si
 
-    return ["first", "second", "third"]
-        |> map(make_item)
-        |> join("\n")
+    return ["first", "second", "third"] |> map(make_item) |> join("\n")
 si
 
 write_line(make_list(". "))

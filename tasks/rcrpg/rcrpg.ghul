@@ -62,8 +62,7 @@ room() -> ROOM => rooms[here]
 describe() is
     let current = room()
     let (x, y, z) = here
-    let called =
-        if let name = current.name then " ({name})" else "" fi
+    let called = if let name = current.name then " ({name})" else "" fi
 
     write_line("you are at {x},{y},{z}{called}")
 
@@ -73,25 +72,18 @@ describe() is
 
     let exits = current.exits |> collect_mutable()
     exits.sort()
-    let listed =
-        if exits.count == 0 then "none" else exits |> join() fi
+    let listed = if exits.count == 0 then "none" else exits |> join() fi
     write_line("exits: {listed}")
 si
 
 neighbour(direction: string) -> Place =>
     let step = steps[direction] in
-    (
-        x = here.x + step.x,
-        y = here.y + step.y,
-        z = here.z + step.z
-    )
+    (x = here.x + step.x, y = here.y + step.y, z = here.z + step.z)
 
 move(direction: string) is
     if !room().exits.contains(direction) then
         write_line("there is no way {direction}")
-    elif
-        direction =~ "up" /\ !room().items.contains("ladder")
-    then
+    elif direction =~ "up" /\ !room().items.contains("ladder") then
         write_line("you need a ladder in this room to climb up")
     else
         here = neighbour(direction)
@@ -105,9 +97,7 @@ si
 
 attack(direction: string) is
     if !(equipped =~ "sledge") then
-        write_line(
-            "you need to equip a sledge to break through"
-        )
+        write_line("you need to equip a sledge to break through")
         return
     fi
 
@@ -124,11 +114,7 @@ attack(direction: string) is
     write_line("you break a hole in the {direction} wall")
 si
 
-move_items(
-    from: LIST[string],
-    to: LIST[string],
-    what: string
-) -> bool is
+move_items(from: LIST[string], to: LIST[string], what: string) -> bool is
     let chosen =
         if what =~ "all" then from
         elif from.contains(what) then [what]
@@ -164,9 +150,7 @@ while let line = read_line() do
 
     if steps.contains_key(command) then
         move(command)
-    elif
-        command =~ "attack" /\ steps.contains_key(argument)
-    then
+    elif command =~ "attack" /\ steps.contains_key(argument) then
         attack(argument)
     elif command =~ "take" then
         if move_items(room().items, carrying, argument) then
@@ -203,8 +187,7 @@ while let line = read_line() do
             write_line("you have no {argument}")
         fi
     elif command =~ "name" /\ tokens.count > 1 then
-        room().name =
-            line.trim().substring(tokens[0].length).trim()
+        room().name = line.trim().substring(tokens[0].length).trim()
         write_line("this room is now called {room().name}")
     elif command =~ "alias" /\ tokens.count == 3 then
         aliases[tokens[2]] =
@@ -217,12 +200,8 @@ while let line = read_line() do
     elif command =~ "look" then
         describe()
     else
-        write_line(
-            "commands: north, south, east, west, up, down,"
-        )
-        write_line(
-            "attack <direction>, take <item|all>, drop <item|all>,"
-        )
+        write_line("commands: north, south, east, west, up, down,")
+        write_line("attack <direction>, take <item|all>, drop <item|all>,")
         write_line("equip <item>, inventory, name <name>,")
         write_line("alias <command> <new name>, look")
     fi

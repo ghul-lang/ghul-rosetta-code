@@ -13,8 +13,7 @@ moves(board: string, side: char) -> List[Move] =>
     (0..9)
         |> filter(from => board[from] == side)
         |> flat_map(from =>
-            let ahead = from + if side == 'W' then -3 else 3 fi
-            in
+            let ahead = from + if side == 'W' then -3 else 3 fi in
             [ahead - 1, ahead, ahead + 1]
                 |> filter(to =>
                     to >= 0 /\
@@ -44,17 +43,14 @@ has_won(board: string, side: char) -> bool =>
     board.substring(far_rank, 3).contains(side) \/
     moves(board, other(side)).count == 0
 
-square(index: int) -> string =>
-    "{"abc"[index % 3]}{3 - index / 3}"
+square(index: int) -> string => "{"abc"[index % 3]}{3 - index / 3}"
 
 let symbols = "WB." |> zip("♙♟．") |> collect_map()
 
 show(board: string) is
     for row in 0..3 do
         let pieces =
-            board.substring(row * 3, 3)
-                |> map(p => symbols[p])
-                |> join("")
+            board.substring(row * 3, 3) |> map(p => symbols[p]) |> join("")
 
         write_line("{3 - row} {pieces}")
     od
@@ -133,10 +129,7 @@ game(white: (string) -> Move?, verbose: bool) -> char is
         last_move = chosen
 
         if verbose then
-            let (from, to) = (
-                square(chosen.from),
-                square(chosen.to)
-            )
+            let (from, to) = (square(chosen.from), square(chosen.to))
             write_line("the computer plays {from}-{to}")
         fi
 
@@ -168,9 +161,7 @@ human(board: string) -> Move? is
 
         write_line("> {line}")
 
-        if let
-            move = parse(line) /\ legal |> any(m => m =~ move)
-        then
+        if let move = parse(line) /\ legal |> any(m => m =~ move) then
             return move
         fi
 
@@ -199,10 +190,7 @@ od
 write_line("the computer now trains against random play:")
 
 for round in 1::5 do
-    let wins =
-        0..20
-            |> filter(_ => game(trainer, false) == 'B')
-            |> count()
+    let wins = 0..20 |> filter(_ => game(trainer, false) == 'B') |> count()
 
     write_line(
         "  games {round * 20 - 19} to {round * 20}: "
