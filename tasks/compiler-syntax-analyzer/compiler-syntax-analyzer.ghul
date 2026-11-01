@@ -4,7 +4,7 @@ use Kind.*
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `if let` and `case ... when` pattern-match
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.

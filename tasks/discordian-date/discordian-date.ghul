@@ -2,6 +2,7 @@ use default
 
 use System.DateTime
 
+// `==` compares identity
 // `case ... when` pattern-matches
 
 let seasons = [

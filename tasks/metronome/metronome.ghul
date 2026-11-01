@@ -2,6 +2,8 @@ use default
 
 use System.Threading.Thread
 
+// `==` compares identity
+
 // There is no portable way to play a sound from .NET, so the beat is shown
 // rather than heard: the first beat of each bar is TICK, the others tock.
 

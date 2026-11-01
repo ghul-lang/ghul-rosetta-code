@@ -11,8 +11,7 @@ use SOLUTION = (
 // `T[]` is the read-only list trait - elements can be read by index
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-// sequence
+// `=~` compares values (structural equality) - `==` compares identity
 
 permutations(items: string[]) -> string[]{} is
     if items.count == 0 then

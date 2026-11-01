@@ -3,8 +3,7 @@ use System.Text.StringBuilder
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+// `==` compares identity
 
 union Alternation is
     LITERAL(text: string)

@@ -2,8 +2,7 @@ use default
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `LIST()` builds a collection eagerly
-// `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+// `==` compares identity
 
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.

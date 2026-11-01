@@ -3,6 +3,7 @@ use System
 
 use COMMAND = (word: string, minimum: int)
 
+// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`

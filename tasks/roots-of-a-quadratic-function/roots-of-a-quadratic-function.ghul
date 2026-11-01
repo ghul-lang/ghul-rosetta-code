@@ -2,6 +2,7 @@ use default
 
 use Math = System.Math
 
+// `==` compares identity
 // `case ... when` pattern-matches
 
 union Roots is

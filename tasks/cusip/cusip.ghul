@@ -1,6 +1,7 @@
 use default
 
 // `case ... when` pattern-matches
+// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 value_of(c: char) -> int =>

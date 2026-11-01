@@ -2,11 +2,11 @@ use default
 use IO.Std.read_line
 use System.Random
 
+// `=~` compares values (structural equality) - `==` compares identity
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let random = Random(11)
 

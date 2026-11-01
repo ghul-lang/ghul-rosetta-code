@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 even(value: int) -> bool => value % 2 == 0
 
 also_even(value: int) -> bool => value & 1 == 0

@@ -2,10 +2,9 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `==` compares identity
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
 
 r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator

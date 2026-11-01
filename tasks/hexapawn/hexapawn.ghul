@@ -4,10 +4,10 @@ use System.Random
 
 use Move = (from: int, to: int)
 
+// `=~` compares values (structural equality) - `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
 // `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
 // list head and tail
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let random = Random(8)
 let start = "BBB...WWW"

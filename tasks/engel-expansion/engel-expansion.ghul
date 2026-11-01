@@ -2,11 +2,11 @@ use default
 use System.Numerics.INumber
 use System.Numerics.IMultiplyOperators.`*
 
+// `=~` compares values (structural equality) - `==` compares identity
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `T[]` is the read-only list trait - elements can be read by index
 
 power[T: INumber[T]](base: T, exponent: int) -> T =>
     if exponent == 0 then

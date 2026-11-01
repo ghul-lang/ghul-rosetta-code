@@ -2,6 +2,7 @@ use default
 use IO.Std.read_line
 
 // `if let` and `case ... when` pattern-match
+// `==` compares identity
 
 enum State is
     READY,

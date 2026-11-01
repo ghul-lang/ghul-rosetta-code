@@ -4,8 +4,7 @@ use Stage = (salt: uint, max: uint)
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+// `==` compares identity
 
 hash(n: uint, salt: uint, max: uint) -> uint => (
     let m mut = n - salt

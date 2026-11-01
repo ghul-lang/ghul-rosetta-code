@@ -4,11 +4,9 @@ use Matrix = (a1: long, a: long, b1: long, b: long)
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `==` compares identity
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-// index materialises the source only as far as that index and caches what
-// it read, and `count` reads it all
 
 r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator

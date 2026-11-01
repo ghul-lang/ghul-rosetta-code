@@ -1,9 +1,8 @@
 use default
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `=~` compares values (structural equality) - `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
 
 let round_constants = [
     0x428A2F98u, 0x71374491u, 0xB5C0FBCFu, 0xE9B5DBA5u, 0x3956C25Bu,

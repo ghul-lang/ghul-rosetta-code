@@ -1,9 +1,9 @@
 use default
 use System.Text.StringBuilder
 
+// `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 
 let random = System.Random(20260908)
 

@@ -5,6 +5,7 @@ use Raster.IMAGE
 use Stroke = (x0: double, y0: double, x1: double, y1: double)
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let glyphs: Stroke[][] = [

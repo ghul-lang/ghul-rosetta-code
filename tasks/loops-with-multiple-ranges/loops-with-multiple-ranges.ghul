@@ -4,6 +4,7 @@ use default
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
+// `==` compares identity
 
 stepped(start: int, stop: int, step: int) -> int{} is
     let value mut = start

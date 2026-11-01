@@ -10,7 +10,7 @@ use Move = (value: int, step: string)
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
 
 move(a: int, operator: string, b: int, value: int) -> Move => (
     value = value,

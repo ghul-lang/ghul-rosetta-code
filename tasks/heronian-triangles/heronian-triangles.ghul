@@ -1,10 +1,9 @@
 use default
 use TRIANGLE = (a: int, b: int, c: int, area: long)
 
+// `==` compares identity
 // `if let` pattern-matches
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
 
 heron_area(a: int, b: int, c: int) -> long? is
     let al = long(a)

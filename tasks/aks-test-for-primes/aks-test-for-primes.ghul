@@ -2,9 +2,9 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `==` compares identity
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `case ... when` pattern-matches
 
 coefficients(p: int) -> long{} is
     let binomial mut = 1L

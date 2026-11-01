@@ -4,6 +4,7 @@ use Matrix = bigint[][]
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 *(a: Matrix, b: Matrix) -> Matrix =>
     0..a.count

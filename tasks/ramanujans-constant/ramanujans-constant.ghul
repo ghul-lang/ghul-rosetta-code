@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 
 let digits = 60
 let shown = 40

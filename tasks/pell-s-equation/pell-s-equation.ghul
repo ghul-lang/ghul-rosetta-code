@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 
 pell(n: int) -> (x: bigint, y: bigint) is
     let root = int(System.Math.sqrt(double(n)))

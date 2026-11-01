@@ -2,6 +2,7 @@ use default
 use IO.Std.write
 
 // `case ... when` pattern-matches
+// `==` compares identity
 
 name(code: int) -> string =>
     case code

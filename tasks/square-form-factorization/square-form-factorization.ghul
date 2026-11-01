@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 // `if let` pattern-matches
 
 let multipliers = [

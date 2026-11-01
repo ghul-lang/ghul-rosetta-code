@@ -2,6 +2,8 @@ use default
 
 use System.DateTime
 
+// `==` compares identity
+
 let day_names = [
     "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi", "Manik’",
     "Lamat", "Muluk", "Ok", "Chuwen", "Eb", "Ben", "Hix", "Men", "K’ib’",

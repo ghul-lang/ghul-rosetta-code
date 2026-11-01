@@ -3,8 +3,7 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `T[]` is the read-only list trait - elements can be read by index
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-// sequence
+// `==` compares identity
 
 permutations(items: int[]) -> int[]{} is
     if items.count == 0 then

@@ -1,5 +1,6 @@
 use default
 
+// `==` compares identity
 // `case ... when` pattern-matches
 
 let day_names = [

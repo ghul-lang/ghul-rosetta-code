@@ -5,7 +5,7 @@ use Matrix = int[][]
 // `T[]` is the read-only list trait - elements can be read by index
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
 // and tail
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 sign(column: int) -> int => if column % 2 == 0 then 1 else -1 fi
 

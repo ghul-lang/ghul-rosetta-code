@@ -3,7 +3,7 @@ use default
 // `T[]` is the read-only list trait - elements can be read by index
 // `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
 // list head and tail
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `=~` compares values (structural equality) - `==` compares identity
 
 union Rule is
     TERMINAL(text: string)

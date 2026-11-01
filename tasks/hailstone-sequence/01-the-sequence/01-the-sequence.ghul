@@ -4,9 +4,7 @@ use default
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-// index materialises the source only as far as that index and caches what
-// it read, and `count` reads it all
+// `==` compares identity
 
 hailstone(n: int) -> int{} is
     let current mut = n

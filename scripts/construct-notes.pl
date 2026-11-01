@@ -25,15 +25,21 @@ my @CONSTRUCTS = (
     { name => 'list', patterns => [qr/[A-Za-z_\]\)\?]\[\]/],
       note => '`T[]` is the read-only list trait - elements can be read by index' },
     { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
-      note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read, and `count` reads it all' },
+      note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read' },
     { name => 'thread-first', patterns => [qr/\|>/, qr/~>/],
       note => '`|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`' },
     { name => 'absent-coalescing', patterns => [qr/~>/],
       note => '`~>` is the absent-coalescing thread-first operator - it skips the call when the left value is absent, and the result is then absent too' },
     { name => 'partial', patterns => [qr/[(,]\s*\*(?:\s*[,)]|\s+[-+*\/%<>=!&|~]|\s*\.\w)/],
       note => '`*` as an argument is partial application - `f(*, b)` means `a => f(a, b)`' },
-    { name => 'equality', patterns => [qr/=~|!~/],
-      note => '`=~` compares values (structural equality) - `==` compares identity' },
+    { name => 'equality', patterns => [qr/=~|!~/, qr/==|!=/],
+      note => sub {
+          my ($hit) = @_;
+          my @parts;
+          push @parts, '`=~` compares values (structural equality)' if $hit->[0];
+          push @parts, '`==` compares identity' if $hit->[1];
+          return @parts ? join(' - ', @parts) : undef;
+      } },
     { name => 'patterns', patterns => [qr/\bif let\b/, qr/\bwhen\b/, qr/\[\s*(?:\]|\w+\s*,\s*\.\.|\.\.)/],
       note => sub {
           my ($hit) = @_;
@@ -59,7 +65,7 @@ my @CONSTRUCTS = (
 
 # A block is recognised by its first line: the start of any note.
 my @OPENERS = ('// `T{}` is', '// `T[]` is', '// `list()` returns', '// `|>` is', '// `~>` is',
-               '// `*` as an', '// `=~` compares', '// `if let`', '// `case ... when`',
+               '// `*` as an', '// `=~` compares', '// `==` compares', '// `if let`', '// `case ... when`',
                '// `LIST()`', '// `SET()`', '// `MAP()`', '// `ARRAY()`', '// `yield` in');
 
 my $mode = shift @ARGV // '--check';

@@ -2,6 +2,7 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 triples(n: int) -> (int, int, int){} => [

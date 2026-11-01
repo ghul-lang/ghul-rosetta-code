@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`

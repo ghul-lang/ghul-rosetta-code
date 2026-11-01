@@ -2,6 +2,7 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
+// `==` compares identity
 
 split(text: string) -> string{} => (
     let runs = LIST()

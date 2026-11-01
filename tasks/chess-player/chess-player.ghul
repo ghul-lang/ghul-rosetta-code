@@ -4,11 +4,10 @@ use System.Math.*
 
 use Move = (from: int, to: int, promotion: char)
 
+// `=~` compares values (structural equality) - `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
 
 // `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
 // `T{}` is a lazy sequence of `T`, read by iterating it.

@@ -1,6 +1,8 @@
 use default
 use IO.Std.write
 
+// `==` compares identity
+
 is_letter(character: char) -> bool => character >= 'a' /\ character <= 'z'
 
 forwards(input: IO.TextReader) -> char =>

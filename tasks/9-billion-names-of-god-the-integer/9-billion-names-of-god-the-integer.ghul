@@ -1,9 +1,9 @@
 use default
 
+// `==` compares identity
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `LIST()` builds a collection eagerly
 
 at_most(total: int, largest: int) -> int memo =>
     if total == 0 then 1

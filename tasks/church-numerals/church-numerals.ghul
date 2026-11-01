@@ -1,6 +1,7 @@
 use default
 use Church[T] = ((T) -> T) -> (T) -> T
 
+// `==` compares identity
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 

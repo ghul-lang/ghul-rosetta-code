@@ -1,6 +1,7 @@
 use default
 use IO.Std.read_line
 
+// `==` compares identity
 // `if let` pattern-matches
 
 struct Q(top: bigint, bottom: bigint) is

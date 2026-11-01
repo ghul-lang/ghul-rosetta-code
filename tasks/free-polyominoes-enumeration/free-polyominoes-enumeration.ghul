@@ -6,8 +6,8 @@ use Cell = (row: int, column: int)
 use Shape = Cell[]
 
 // `T[]` is the read-only list trait - elements can be read by index
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality) - `==` compares identity
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 at(row: int, column: int) -> Cell => (row = row, column = column)
 

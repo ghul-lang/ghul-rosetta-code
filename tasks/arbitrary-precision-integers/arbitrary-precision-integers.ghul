@@ -2,6 +2,8 @@ use default
 use System.Numerics.INumber
 use System.Numerics.IMultiplyOperators.`*
 
+// `==` compares identity
+
 power[T: INumber[T]](base: T, exponent: int) -> T =>
     if exponent == 0 then
         T.one

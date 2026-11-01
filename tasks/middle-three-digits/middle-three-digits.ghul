@@ -1,6 +1,8 @@
 use default
 use System.Math
 
+// `==` compares identity
+
 union Middle is
     DIGITS(value: string) default
     REFUSED(reason: string)

@@ -4,7 +4,7 @@ use default
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 
 three_smooth() -> bigint{} is
     let found = LIST()

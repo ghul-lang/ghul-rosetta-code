@@ -6,7 +6,7 @@ use Graph = List[SET[int]]
 // order from its source
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 // index materialises the source only as far as that index and caches what
-// it read, and `count` reads it all
+// it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 graph(n: int, edges: (int, int){}) -> Graph => (

@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 let lines = IO.File.read_all_lines("readings.txt")
 let separators = ['\t', ' ']
 let skip_empty = System.StringSplitOptions.REMOVE_EMPTY_ENTRIES

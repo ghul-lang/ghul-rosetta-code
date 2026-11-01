@@ -3,6 +3,7 @@ use System.Text.StringBuilder
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 class NAME(words: string[] private) is
     to_camel_case() -> string =>

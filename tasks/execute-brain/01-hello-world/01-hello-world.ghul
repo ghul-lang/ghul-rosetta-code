@@ -1,6 +1,7 @@
 use IO.Std.write
 use default
 
+// `==` compares identity
 // `case ... when` pattern-matches
 
 run(program: string, input: string) is

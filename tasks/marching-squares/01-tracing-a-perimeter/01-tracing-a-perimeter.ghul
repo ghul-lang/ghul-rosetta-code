@@ -1,5 +1,6 @@
 use default
 
+// `==` compares identity
 // `if let` and `case ... when` pattern-match
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source

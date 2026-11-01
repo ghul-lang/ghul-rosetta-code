@@ -7,7 +7,7 @@ use REACHED = (cost: int, previous: string)
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 
 shortest_paths(
     edges: EDGE[],

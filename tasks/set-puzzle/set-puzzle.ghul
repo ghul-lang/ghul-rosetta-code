@@ -2,11 +2,10 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
+// `==` compares identity
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 // `T[]` is the read-only list trait - elements can be read by index
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
 
 let colours = ["red", "green", "purple"]
 let numbers = ["one", "two", "three"]

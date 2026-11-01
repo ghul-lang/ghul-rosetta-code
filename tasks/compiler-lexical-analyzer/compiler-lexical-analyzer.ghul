@@ -6,7 +6,7 @@ use Token = (line: int, column: int, name: string, value: string)
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `case ... when` pattern-matches
+// `==` compares identity
 
 class LEXER is
     _source: string

@@ -1,6 +1,7 @@
 use default
 use System.Globalization.CultureInfo
 
+// `==` compares identity
 // `if let` pattern-matches
 
 let suffixes = [

@@ -4,7 +4,7 @@ use default
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `if let` pattern-matches
+// `==` compares identity
 
 let biggest_factorial = 18
 

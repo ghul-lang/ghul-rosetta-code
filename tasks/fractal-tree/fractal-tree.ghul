@@ -1,6 +1,8 @@
 use Raster.IMAGE
 use System.Math.*
 
+// `==` compares identity
+
 let spread = 0.4D
 let shrink = 0.76D
 

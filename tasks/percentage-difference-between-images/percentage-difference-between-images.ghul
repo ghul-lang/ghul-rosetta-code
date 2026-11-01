@@ -2,6 +2,8 @@ use default
 use Raster.IMAGE
 use System.Math
 
+// `==` compares identity
+
 pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is

@@ -8,7 +8,7 @@ use Raster.IMAGE
 // order from its source
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `==` compares identity
 
 hailstone(n: int) -> int{} is
     let current mut = n

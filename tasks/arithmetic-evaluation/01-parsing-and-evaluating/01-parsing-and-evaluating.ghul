@@ -1,5 +1,6 @@
 use default
 
+// `==` compares identity
 // `if let` and `case ... when` pattern-match
 
 union Expression is

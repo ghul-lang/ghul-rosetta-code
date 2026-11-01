@@ -1,6 +1,8 @@
 use Raster.IMAGE
 use System.Math.*
 
+// `==` compares identity
+
 let image = IMAGE(400, 300)
 
 image.colour(0ub, 0ub, 0ub)

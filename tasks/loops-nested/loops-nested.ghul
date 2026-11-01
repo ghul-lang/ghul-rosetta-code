@@ -2,6 +2,7 @@ use IO.Std.write
 use default
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
 
 grid(size: int, random: System.Random) -> int[][] => [
     [random.next(1, 21) for _ in 1::size]

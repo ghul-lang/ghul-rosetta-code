@@ -2,6 +2,7 @@ use default
 use Suit.HEARTS
 use Suit.SPADES
 
+// `==` compares identity
 // `if let` and `case ... when` pattern-match
 
 enum Suit is

@@ -1,6 +1,7 @@
 use default
 
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
+// `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
 
 // `~>` skips the call if its left value is absent; `??` gives a fallback.

@@ -2,6 +2,7 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `==` compares identity
 // `if let` pattern-matches
 
 ask(prompt: string) -> string? is

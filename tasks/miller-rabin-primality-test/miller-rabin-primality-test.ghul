@@ -1,6 +1,6 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
+// `=~` compares values (structural equality)
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let random = System.Random(2024)

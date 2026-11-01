@@ -4,6 +4,7 @@ use Ghul.Coroutines
 use Numbers = CHANNEL[int?]
 
 // `if let` pattern-matches
+// `==` compares identity
 
 let limit = 100
 

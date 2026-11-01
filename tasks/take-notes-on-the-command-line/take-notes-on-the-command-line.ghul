@@ -1,6 +1,7 @@
 use default
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `==` compares identity
 
 notes(arguments: string[]) is
     let path = "NOTES.TXT"

@@ -1,5 +1,7 @@
 use default
 
+// `==` compares identity
+
 shortest_supersequence(u: string, v: string) -> string memo =>
     if u.length == 0 then
         v

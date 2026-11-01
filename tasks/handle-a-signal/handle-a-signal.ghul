@@ -3,6 +3,8 @@ use System.Runtime.InteropServices.PosixSignal
 use System.Runtime.InteropServices.PosixSignalRegistration
 use System.Threading.Thread
 
+// `==` compares identity
+
 let interrupted = System.Threading.ManualResetEventSlim(false)
 
 let registration = PosixSignalRegistration.create(PosixSignal.SIGINT,
