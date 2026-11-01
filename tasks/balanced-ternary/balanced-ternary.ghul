@@ -1,107 +1,61 @@
 use default
 
-struct BT(digits: string) is
-    to_string() -> string => digits
+struct BT(digits: List[int]) is
+    to_string() -> string =>
+        digits |> reverse() |> map(d => "-0+"[d + 1]) |> string()
 si
 
-digit_value(c: char) -> int =>
-    case c
-    when '+' then 1
-    when '-' then -1
-    else 0
+cons(d: int, rest: List[int]) -> List[int] => [d] ++ rest |> collect()
+
+trim(ds: List[int]) -> List[int] =>
+    ds |> reverse() |> skip_while(d => d == 0) |> reverse() |> collect()
+
+digit(c: char) -> int =>
+    case c when '+' then 1 when '-' then -1 else 0 esac
+
+parse(s: string) -> BT => BT(s |> reverse() |> map(digit) |> collect())
+
+balanced(n: bigint) -> BT => BT(digits(n) |> collect())
+
+digits(n: bigint) -> int{} =>
+    case int((n % 3n + 3n) % 3n)
+    when 0 then if n =~ 0n then [] else [0] ++ digits(n / 3n) fi
+    when 1 then [1] ++ digits((n - 1n) / 3n)
+    else [-1] ++ digits((n + 1n) / 3n)
     esac
 
-digit_char(v: int) -> char =>
-    if v == 1 then '+' elif v == -1 then '-' else '0' fi
-
-ternary(n: bigint) -> string =>
-    if n =~ 0n then
-        ""
-    else
-        let
-            r = int((n % 3n + 3n) % 3n),
-            d = if r == 2 then -1 else r fi
-        in
-            "{ternary((n - bigint(d)) / 3n)}{digit_char(d)}"
-    fi
-
-balanced(n: bigint) -> BT => BT(ternary(n))
-
 value(a: BT) -> bigint =>
-    a.digits
-        |> reduce(0n, (total, c) =>
-            total * 3n + bigint(digit_value(c))
-        )
+    a.digits |> reverse() |> reduce(0n, (t, d) => t * 3n + bigint(d))
 
--(a: BT) -> BT is
-    BT(
-        a.digits
-            |> map(c => digit_char(-digit_value(c)))
-            |> join("")
-    )
-si
+add(a: List[int], b: List[int]) -> List[int] =>
+    case (a, b)
+    when ([], _) then b
+    when (_, []) then a
+    when ([x, ..xs], [y, ..ys]) then
+        case x + y
+        when 2 then cons(-1, add(xs, add(ys, [1])))
+        when -2 then cons(1, add(xs, add(ys, [-1])))
+        else trim(cons(x + y, add(xs, ys)))
+        esac
+    esac
 
-+(a: BT, b: BT) -> BT is
-    let chars = LIST()
-    let carry mut = 0
-    let i mut = a.digits.length - 1
-    let j mut = b.digits.length - 1
+-(a: BT) -> BT => BT(a.digits |> map(d => -d) |> collect())
 
-    while i >= 0 \/ j >= 0 \/ carry != 0 do
-        let sum mut = carry
-
-        if i >= 0 then
-            sum = sum + digit_value(a.digits[i])
-            i = i - 1
-        fi
-
-        if j >= 0 then
-            sum = sum + digit_value(b.digits[j])
-            j = j - 1
-        fi
-
-        let d mut = sum % 3
-        if d < 0 then d = d + 3 fi
-        if d == 2 then d = -1 fi
-
-        carry = (sum - d) / 3
-        chars.add(digit_char(d))
-    od
-
-    while chars.count > 1 /\ chars[chars.count - 1] == '0' do
-        chars.remove_at(chars.count - 1)
-    od
-
-    chars.reverse()
-    BT(chars |> map(c => "{c}") |> join(""))
-si
++(a: BT, b: BT) -> BT => BT(add(a.digits, b.digits))
 
 -(a: BT, b: BT) -> BT => a + -b
 
-<<(a: BT, places: int) -> BT =>
-    let zeroes = repeat('0', places) |> join("") in
-    BT("{a.digits}{zeroes}")
+*(a: BT, b: BT) -> BT =>
+    case a.digits
+    when [] then a
+    when [d, ..rest] then
+        let scaled = case d when 0 then BT([]) when 1 then b else -b esac in
+        scaled + BT(cons(0, (BT(rest) * b).digits))
+    esac
 
-*(a: BT, b: BT) -> BT is
-    let product mut = BT("0")
-
-    for i in 0..a.digits.length do
-        let d = digit_value(a.digits[a.digits.length - 1 - i])
-
-        if d != 0 then
-            let term = b << i
-
-            product =
-                product + if d == 1 then term else -term fi
-        fi
-    od
-
-    product
-si
-
-let a = BT("+-0++0+")
-let b = balanced(bigint(-436))
-let c = BT("+-++-")
+let a = parse("+-0++0+")
+let b = balanced(-436n)
+let c = parse("+-++-")
 
 write_line("a = {value(a)}")
 write_line("b = {value(b)}")
