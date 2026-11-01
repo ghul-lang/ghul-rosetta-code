@@ -6,7 +6,7 @@ name: Ledger
 # that has already changed. Left to be reviewed by hand it was not reviewed at
 # all - ten solutions and a hundred and sixty-seven records sat on branches
 # that were never pushed - so a pull request touching only the ledger is
-# approved here, and lands through the merge queue once its raiser arms it.
+# approved here, and lands once its raiser arms auto-merge.
 #
 # Everything else still needs a person, a solution above all. The path test
 # below is the whole of that distinction, so widening it widens what lands
