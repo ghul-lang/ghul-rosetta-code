@@ -1,5 +1,7 @@
 use default
 
+// `LIST()` builds its collection eagerly
+
 let pairs = LIST([
     (name = "Oxygen", value = "O"),
     (name = "Helium", value = "He"),

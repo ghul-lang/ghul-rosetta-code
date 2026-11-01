@@ -1,5 +1,7 @@
 use default
 
+// `MAP()` builds its collection eagerly
+
 let ages = MAP()
 
 ages.add("alice", 30)

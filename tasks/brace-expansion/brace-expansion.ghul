@@ -2,10 +2,11 @@ use default
 use System.Text.StringBuilder
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+//  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
+// `LIST()` builds its collection eagerly
 // `yield` in a function makes it a generator, returning a lazy `T{}`
-// sequence
+//  sequence
 // `==` compares identity
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 

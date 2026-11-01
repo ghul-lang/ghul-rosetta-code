@@ -1,5 +1,6 @@
 use default
 
+// `LIST()` builds its collection eagerly
 // `=~` compares values (structural equality) - `==` compares identity
 
 write_line("Enter an expression:")

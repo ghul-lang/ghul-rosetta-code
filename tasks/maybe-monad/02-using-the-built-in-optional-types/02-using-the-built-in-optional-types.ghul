@@ -2,7 +2,7 @@ use IO.Std.write_line
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `~>` is the absent-coalescing thread-first operator - it skips the call
-// when the left value is absent, and the result is then absent too
+//  when the left value is absent, and the result is then absent too
 // `==` compares identity
 
 halve(n: int) -> int? => if n % 2 == 0 then n / 2 else null fi

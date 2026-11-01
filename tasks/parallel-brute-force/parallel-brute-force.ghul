@@ -4,7 +4,7 @@ use System.Security.Cryptography.SHA256
 use Tasks.Parallel
 use System.Collections.Concurrent.ConcurrentDictionary
 
-// `ARRAY()` builds its collection eagerly
+// `ARRAY()` and `LIST()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality)
 

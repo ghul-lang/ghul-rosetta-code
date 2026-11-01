@@ -1,6 +1,7 @@
 use default
 use IO.Std.read_line
 
+// `MAP()` builds its collection eagerly
 // `==` compares identity
 
 let masses = MAP()

@@ -1,6 +1,7 @@
 use default
 use System.Diagnostics.Stopwatch
 
+// `LIST()` and `MAP()` build their collections eagerly
 // `==` compares identity
 
 square_root(n: bigint) -> bigint is

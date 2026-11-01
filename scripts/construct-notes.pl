@@ -26,7 +26,7 @@ my @CONSTRUCTS = (
       note => '`T[]` is the read-only list trait - elements can be read by index' },
     { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
       note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read' },
-    { name => 'constructors', patterns => [map { my $n = $_; qr/(?:\|>\s*|^\s*)$n\(\)/ } qw(LIST SET MAP ARRAY)],
+    { name => 'constructors', patterns => [map { my $n = $_; qr/\b$n\b\s*(?:\[[^\]]*\])?\s*\(/ } qw(LIST SET MAP ARRAY)],
       note => sub {
           my ($hit, $first) = @_;
           my @present = sort { $first->[$a] <=> $first->[$b] } grep { $hit->[$_] } 0 .. 3;
@@ -141,17 +141,19 @@ sub wanted_notes {
     return map { wrap($_) } @notes;
 }
 
-# One note as comment lines no wider than $WIDTH. A backtick span is never
-# broken across lines.
+# One note as comment lines no wider than $WIDTH, its continuation lines
+# indented by two spaces. A backtick span is never broken across lines.
 sub wrap {
     my ($text) = @_;
     my @out;
     my $line = '//';
+    my $lead = '//';
     my @words = $text =~ /`[^`]*`[^\s`]*|[^\s`]+/g;
     for my $word (@words) {
-        if (length("$line $word") > $WIDTH && $line ne '//') {
+        if (length("$line $word") > $WIDTH && $line ne $lead) {
             push @out, $line;
-            $line = '//';
+            $lead = '//  ';
+            $line = '// ';
         }
         $line .= " $word";
     }

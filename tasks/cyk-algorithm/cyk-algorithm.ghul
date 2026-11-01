@@ -1,5 +1,6 @@
 use default
 
+// `SET()` builds its collection eagerly
 // `=~` compares values (structural equality)
 // `if let` pattern-matches
 

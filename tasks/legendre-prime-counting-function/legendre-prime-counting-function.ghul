@@ -3,7 +3,7 @@ use default
 // `LIST()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
-// `a => f(a, b)`
+//  `a => f(a, b)`
 // `==` compares identity
 
 let limit = 40_000

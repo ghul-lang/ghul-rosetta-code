@@ -9,9 +9,10 @@ use System.Text.Json.JsonElement
 use System.Text.Json.JsonSerializer
 use System.Text.Json.JsonSerializerOptions
 
+// `MAP()` builds its collection eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-// and tail
+//  and tail
 
 // The two sides speak JSON-RPC 2.0 over HTTP. Run one copy as
 // `serve http://+:8080/` and another with that address to call it.

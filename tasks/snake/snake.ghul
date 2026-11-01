@@ -2,7 +2,7 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `MAP()` builds its collection eagerly
+// `LIST()` and `MAP()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality) - `==` compares identity
 

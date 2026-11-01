@@ -1,1 +1,1 @@
-undefined-values.ghul(35,54,35,67): warning definite-assignment: uninitialised may be used before it is assigned [variable declared here: undefined-values.ghul(33,5)] [undefined-values.ghulproj]
+undefined-values.ghul(36,54,36,67): warning definite-assignment: uninitialised may be used before it is assigned [variable declared here: undefined-values.ghul(34,5)] [undefined-values.ghulproj]

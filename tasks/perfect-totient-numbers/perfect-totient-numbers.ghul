@@ -1,11 +1,11 @@
 use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
-// order from its source
+//  order from its source
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `memo` on a function caches its results - a call with arguments equal to
-// an earlier call's returns the cached result, recursive calls included
+//  an earlier call's returns the cached result, recursive calls included
 
 totient_sum(value: int) -> int memo =>
     if value > 1 then

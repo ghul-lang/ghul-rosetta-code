@@ -3,6 +3,7 @@ use System.Numerics.INumber
 use System.Numerics.IMultiplyOperators.`*
 
 // `T[]` is the read-only list trait - elements can be read by index
+// `MAP()` and `LIST()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 

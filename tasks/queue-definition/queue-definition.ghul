@@ -1,6 +1,7 @@
 use default
 use System.InvalidOperationException
 
+// `LIST()` builds its collection eagerly
 // `==` compares identity
 
 class QUEUE[T] is

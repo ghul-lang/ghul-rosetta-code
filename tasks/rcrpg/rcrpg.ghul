@@ -5,9 +5,9 @@ use System.Random
 use Place = (x: int, y: int, z: int)
 
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-// index materialises the source only as far as that index and caches what
-// it read
-// `MAP()` and `LIST()` build their collections eagerly
+//  index materialises the source only as far as that index and caches what
+//  it read
+// `SET()`, `MAP()` and `LIST()` build their collections eagerly
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality) - `==` compares identity
 // `if let` pattern-matches

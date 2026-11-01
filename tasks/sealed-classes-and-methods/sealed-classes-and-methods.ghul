@@ -1,5 +1,7 @@
 use default
 
+// `LIST()` builds its collection eagerly
+
 class LEDGER is
     _entries: LIST[string]
 
