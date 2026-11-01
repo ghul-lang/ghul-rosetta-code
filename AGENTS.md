@@ -677,12 +677,12 @@ functions is a lean, not a rule; see "Lean towards functions" above.
 
 ## When a solution carries words, and when it does not
 
-Every solution carries its **construct notes**: up to three one-line comments
-after the `use` lines, one for each ghūl construct in the source that a reader
-from another language may not know (`T{}`, `T[]`, `|>`, `*` as an argument,
-`=~`, pattern matching, `list()`, the collection constructors, `~>`, `memo`,
-`yield`),
-in the order they first appear. They are not written by hand:
+Every solution carries its **construct notes**: a comment block after the
+`use` lines with a note for each ghūl construct in the source that a reader
+from another language may not know (`T{}`, `T[]`, `list()`, the collection
+constructors, `yield`, `|>`, `~>`, `*` as an argument, `=~` and `==`, pattern
+matching, `memo`), every one that appears, in that fixed order - a note comes
+after the ones whose terms it uses. They are not written by hand:
 `scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
 checks them, and the wording changes only in that table, so every solution says
 the same thing the same way. They say what a construct is, never why it was
