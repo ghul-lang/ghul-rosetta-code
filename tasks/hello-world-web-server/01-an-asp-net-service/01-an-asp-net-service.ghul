@@ -4,7 +4,7 @@ use Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.map_get
 use System.Net.Http.HttpClient
 use System.Threading.CancellationToken
 
-let no_arguments: string[] = []
+let no_arguments: ARRAY[string] = []
 
 let builder = WebApplication.create_builder(no_arguments)
 

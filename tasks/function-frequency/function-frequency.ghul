@@ -71,7 +71,7 @@ callees(method: MethodBase) -> MethodBase{} is
     od
 si
 
-operand_size(kind: OperandType, il: ubyte[], at: int) -> int =>
+operand_size(kind: OperandType, il: ARRAY[ubyte], at: int) -> int =>
     case kind
     when OperandType.INLINE_NONE then 0
     when

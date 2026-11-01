@@ -9,10 +9,10 @@ use Value.NUMBER
 use Value.WHEEL
 
 class WHEEL_SET is
-    _values: MAP[char, Value[]]
+    _values: MAP[char, ARRAY[Value]]
     _position: MAP[char, int]
 
-    init(wheels: (name: char, values: Value[])[]) is
+    init(wheels: ARRAY[(name: char, values: ARRAY[Value])]) is
         _values = MAP()
         _position = MAP()
 
@@ -43,7 +43,7 @@ describe(value: Value) -> string =>
     when wheel: WHEEL then "{wheel.name}"
     esac
 
-show(wheels: (name: char, values: Value[])[]) is
+show(wheels: ARRAY[(name: char, values: ARRAY[Value])]) is
     let wheel_set = WHEEL_SET(wheels)
 
     for (name, values) in wheels do
@@ -55,7 +55,7 @@ show(wheels: (name: char, values: Value[])[]) is
     write_line("  {generated |> join(" ")}")
 si
 
-let simple: (name: char, values: Value[])[] = [
+let simple: ARRAY[(name: char, values: ARRAY[Value])] = [
     (name = 'A', values = [NUMBER(1), NUMBER(2), NUMBER(3)])
 ]
 

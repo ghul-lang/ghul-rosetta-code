@@ -27,7 +27,7 @@ list(directory: string) -> string =>
         ).get_response_stream()
     ).read_to_end()
 
-download(file: string) -> ubyte[] is
+download(file: string) -> ARRAY[ubyte] is
     let into = IO.MemoryStream()
 
     request(
