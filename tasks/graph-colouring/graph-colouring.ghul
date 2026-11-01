@@ -59,7 +59,7 @@ colour(graph: GRAPH) -> MAP[int, int] is
             graph.neighbours(node)
                 |> filter(colours.contains_key)
                 |> map(other => colours[other])
-                |> SET()
+                |> SET[int]()
 
     for _ in graph.nodes do
         // the uncoloured node seeing the most distinct colours,
