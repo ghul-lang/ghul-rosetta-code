@@ -8,7 +8,8 @@ use System.Guid
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
-// `ARRAY()` builds its collection eagerly
+// `ARRAY[T]` is a fixed-size, read-only array
+// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`

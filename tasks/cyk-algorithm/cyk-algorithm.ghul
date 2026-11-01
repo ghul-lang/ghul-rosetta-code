@@ -1,6 +1,7 @@
 use default
 
-// `SET()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
+// `SET[T]` is a mutable set, holding each element once
 // `=~` compares values (structural equality)
 // `if let` pattern-matches
 

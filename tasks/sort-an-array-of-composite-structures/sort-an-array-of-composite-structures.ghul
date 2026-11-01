@@ -1,6 +1,6 @@
 use default
 
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
 
 let pairs = LIST([
     (name = "Oxygen", value = "O"),

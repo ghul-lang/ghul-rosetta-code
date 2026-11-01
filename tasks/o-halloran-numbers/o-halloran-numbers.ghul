@@ -1,9 +1,10 @@
 use default
 
+// `SET[T]` is a mutable set, holding each element once
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read
-// `SET()` builds its collection eagerly
+// `|> SET()` reads the whole sequence into a new `SET`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `*` as an argument is partial application - `f(*, b)` means
 //  `a => f(a, b)`

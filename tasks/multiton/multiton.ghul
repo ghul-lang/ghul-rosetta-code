@@ -1,6 +1,6 @@
 use default
 
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
 // `==` compares identity
 
 class MULTITON[K, V](create: K -> V private) is

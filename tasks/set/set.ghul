@@ -1,6 +1,6 @@
 use default
 
-// `SET()` builds its collection eagerly
+// `SET[T]` is a mutable set, holding each element once
 
 let a = SET([1, 2, 3, 4])
 let b = SET([3, 4, 5, 6])

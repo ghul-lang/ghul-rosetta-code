@@ -1,7 +1,8 @@
 use default
 use System.StringSplitOptions
 
-// `SET()` builds its collection eagerly
+// `SET[T]` is a mutable set, holding each element once
+// `|> SET()` reads the whole sequence into a new `SET`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 
