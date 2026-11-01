@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 harshad() -> int{} =>
     from(1) |> filter(number => number % digit_sum(number) == 0)
 

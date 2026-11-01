@@ -5,6 +5,10 @@ use double.radians_to_degrees
 
 use System.Text.RegularExpressions.Regex
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let csv_field = Regex("(?<=^|,)(\"[^\"]*\"|[^,]*)")
 let earth_radius = 6371.0 / 1.852
 

@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 bigrams(phrase: string) -> Map[string, int] =>
     phrase.to_lower().split([' '])
         |> flat_map(word =>

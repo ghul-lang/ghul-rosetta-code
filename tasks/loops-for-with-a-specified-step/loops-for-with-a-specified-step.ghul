@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 for value in 0::20 |> step(5) do
     write_line("{value}")
 od

@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 let width = 6
 let height = 4
 let random = Random(4)

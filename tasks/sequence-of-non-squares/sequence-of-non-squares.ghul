@@ -1,6 +1,8 @@
 use default
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 non_square(n: int) -> int => n + int(floor(0.5 + sqrt(double(n))))
 
 write_line(1::22 |> map(non_square) |> join(" "))

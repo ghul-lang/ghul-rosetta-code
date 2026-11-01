@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 encode(text: string) -> string =>
     text |> group() |> map(run => "{run.count}{run[0]}") |> join("")
 

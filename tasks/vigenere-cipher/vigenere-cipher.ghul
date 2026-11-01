@@ -1,6 +1,8 @@
 use default
 use System.Text.StringBuilder
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_alphabetic(character: char) -> bool =>
     (character >= 'A' /\ character <= 'Z') \/
     (character >= 'a' /\ character <= 'z')

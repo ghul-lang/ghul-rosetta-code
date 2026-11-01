@@ -2,6 +2,9 @@ use default
 
 use Point = (x: bigint, y: bigint)
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let p = 1073741789n
 let a = 355n
 let b = 671n

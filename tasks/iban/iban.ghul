@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_valid_iban(raw: string) -> bool is
     let iban = ["{ch}" for ch in raw if ch != ' '] |> join("")
 

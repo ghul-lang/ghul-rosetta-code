@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 is_lynch_bell(n: long, base: long) -> bool =>
     let ds = digits(n, base) in
     ds |> all(d => d != 0L /\ n % d == 0L) /\

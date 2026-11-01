@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 union SExpr is
     LIST(items: SExpr[])
     SYMBOL(name: string)

@@ -1,6 +1,9 @@
 use default
 use System.Convert.to_string
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 unit[T](value: T) -> T{} => [value]
 
 >>=[T, U](values: T{}, f: (T) -> U{}) -> U{} => values |> flat_map(f)

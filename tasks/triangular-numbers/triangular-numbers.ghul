@@ -1,6 +1,9 @@
 use default
 use System.Math.*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 simplex(dimension: int) -> bigint{} =>
     from(1)
         |> map(index =>

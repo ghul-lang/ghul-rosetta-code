@@ -1,5 +1,8 @@
 use Raster.IMAGE
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 circle(centre_x: int, centre_y: int, radius: int) -> (int, int){} is
     let x mut = radius
     let y mut = 0

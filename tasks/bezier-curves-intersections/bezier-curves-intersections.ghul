@@ -6,6 +6,10 @@ use Point = (x: double, y: double)
 use Curve = (p0: Point, p1: Point, p2: Point, from: double, to: double)
 use Hit = (t: double, s: double, at: Point)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let tolerance = 1.0e-9
 
 pt(x: double, y: double) -> Point => (x = x, y = y)

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_semiprime(n: int) -> bool => prime_factors(n).count == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()

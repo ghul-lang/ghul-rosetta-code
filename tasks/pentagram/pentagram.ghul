@@ -2,6 +2,10 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+// `*` as an argument leaves that parameter open: partial application.
+
 let inner = cos(0.4D * pi) / cos(0.2D * pi)
 
 corner(index: int) -> (x: double, y: double) => (

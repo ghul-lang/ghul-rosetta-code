@@ -2,6 +2,9 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 write("a b: ")
 
 while let entered = read_line() do

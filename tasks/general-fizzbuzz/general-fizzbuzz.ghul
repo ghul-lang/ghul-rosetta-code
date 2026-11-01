@@ -1,6 +1,8 @@
 use default
 use IO.Std.read_line
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 write_line("Enter the maximum:")
 
 let max_n = int.parse(read_line()!)

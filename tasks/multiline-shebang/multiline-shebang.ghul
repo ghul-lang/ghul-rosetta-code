@@ -1,6 +1,8 @@
 #!/usr/bin/env ghul
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let words = if args.count > 0 then args else ["one", "two", "three"] fi
 for (position, word) in words |> index() do
     write_line("arg {position}: {word}")

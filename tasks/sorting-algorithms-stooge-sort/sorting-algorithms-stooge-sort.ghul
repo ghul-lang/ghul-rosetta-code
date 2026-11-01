@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 stooge_sort[T: Ghul.Comparable[T]](values: LIST[T], low: int, high: int) is
     if values[high] < values[low] then
         (values[low], values[high]) = (values[high], values[low])

@@ -1,6 +1,10 @@
 use default
 use Edge = (from: int, to: int)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 rotations(face: int[]) -> int[]{} =>
     0..face.count
         |> map(offset =>

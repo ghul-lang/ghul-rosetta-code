@@ -1,6 +1,10 @@
 use default
 use TRIANGLE = (a: int, b: int, c: int, area: long)
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 heron_area(a: int, b: int, c: int) -> long? is
     let al = long(a)
     let bl = long(b)

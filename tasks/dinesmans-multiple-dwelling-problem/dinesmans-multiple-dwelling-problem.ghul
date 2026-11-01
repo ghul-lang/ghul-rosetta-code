@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 adjacent(left: int, right: int) -> bool =>
     if left > right then left - right else right - left fi == 1
 

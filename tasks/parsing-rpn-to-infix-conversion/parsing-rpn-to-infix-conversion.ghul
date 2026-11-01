@@ -1,5 +1,9 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 union Expression is
     NUMBER(text: string)
     OPERATION(symbol: string, left: Expression, right: Expression)

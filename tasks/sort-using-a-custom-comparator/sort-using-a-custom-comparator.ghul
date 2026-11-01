@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let words = LIST([
     "Here", "are", "some", "sample", "strings", "to", "be", "sorted"
 ])

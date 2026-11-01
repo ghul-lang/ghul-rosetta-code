@@ -5,6 +5,10 @@ use Raster.SHAPES
 
 use Solution = (a: int, b: int, c: int, d: int, e: int, f: int, g: int)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 solutions(low: int, high: int, unique: bool) -> Solution{} is
     for a in low::high do
         for b in low::high do

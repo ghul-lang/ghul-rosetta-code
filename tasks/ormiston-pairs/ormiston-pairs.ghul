@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let limit = 10000000
 
 let composite = LIST()

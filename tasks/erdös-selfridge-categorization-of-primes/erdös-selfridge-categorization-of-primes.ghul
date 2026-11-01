@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 categorise(p: int) -> int memo =>
     1 +
     (

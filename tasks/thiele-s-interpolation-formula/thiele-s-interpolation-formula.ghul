@@ -1,6 +1,10 @@
 use default
 use System.Math.*
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 class THIELE(_x: double[], _y: double[]) is
     _reciprocal(order: int, i: int) -> double memo =>
         if order < 0 then

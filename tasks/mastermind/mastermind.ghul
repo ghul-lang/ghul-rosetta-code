@@ -3,6 +3,10 @@ use IO.Std.read_line
 use System.Math
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let random = Random(5)
 
 next_line() -> string is

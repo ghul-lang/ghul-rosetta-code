@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 is_smith(n: int) -> bool =>
     let factors = prime_factors(n) in
     factors.count > 1 /\ (factors |> sum_by(digit_sum)) == digit_sum(n)

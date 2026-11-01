@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `*` as an argument leaves that parameter open: partial application.
+
 fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
     let running mut = seed
 

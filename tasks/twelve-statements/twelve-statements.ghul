@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 holds(values: bool[], number: int) -> bool => values[number - 1]
 
 how_many(values: bool[], numbers: int[]) -> int =>

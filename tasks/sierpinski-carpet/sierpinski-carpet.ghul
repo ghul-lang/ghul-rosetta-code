@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let order = 3
 
 filled(x: int, y: int) -> bool =>

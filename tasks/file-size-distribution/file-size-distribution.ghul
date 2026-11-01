@@ -1,6 +1,10 @@
 use default
 use System.Math.*
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let root = if let [root, ..] = args then root else "." fi
 
 let sizes =

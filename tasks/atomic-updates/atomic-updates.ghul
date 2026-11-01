@@ -1,3 +1,6 @@
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // The scheduler is cooperative and only changes coroutine at an await,
 // so a method with no await in it runs to completion undisturbed.
 

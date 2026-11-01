@@ -3,6 +3,10 @@ use Raster.IMAGE
 use Point = (x: double, y: double, z: double)
 use System.Math.*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 -(a: Point, b: Point) -> Point => (
     x = a.x - b.x,
     y = a.y - b.y,

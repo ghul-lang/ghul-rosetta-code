@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 euclid(pulses: int, steps: int) -> string is
     let first mut = "1"
     let first_count mut = pulses

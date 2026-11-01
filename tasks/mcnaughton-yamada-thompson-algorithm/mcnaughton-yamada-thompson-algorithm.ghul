@@ -1,5 +1,7 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 class STATE is
     label: char? public
     edge1: STATE? public

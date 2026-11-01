@@ -5,6 +5,10 @@ use Raster.SHAPES
 use Cell = (row: int, column: int)
 use Shape = Cell[]
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 at(row: int, column: int) -> Cell => (row = row, column = column)
 
 reading_order(a: Cell, b: Cell) -> int =>

@@ -3,6 +3,9 @@ use default
 use Raster.IMAGE
 use System.Diagnostics.Stopwatch
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 let width = 320
 let height = 240
 let seconds = 3

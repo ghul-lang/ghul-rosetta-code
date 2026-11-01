@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 divisor_count(n: int) -> int =>
     1::n
         |> take_while(d => d * d <= n)

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_forbidden(n: int) -> bool is
     strip(remaining: int) -> int =>
         if remaining % 4 == 0 then

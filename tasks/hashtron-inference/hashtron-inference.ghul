@@ -2,6 +2,10 @@ use default
 
 use Stage = (salt: uint, max: uint)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 hash(n: uint, salt: uint, max: uint) -> uint => (
     let m mut = n - salt
 

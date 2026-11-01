@@ -6,6 +6,10 @@ use System.Math.*
 use Math = System.Math
 use Point = (x: double, y: double)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 union Half(a: Point, b: Point, c: Point) is
     THIN
     FAT

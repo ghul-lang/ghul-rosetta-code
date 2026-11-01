@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 shares_factor(left_value: int, right_value: int) -> bool =>
     if right_value > 0 then
         shares_factor(right_value, left_value % right_value)

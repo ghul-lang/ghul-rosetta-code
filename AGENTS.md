@@ -677,7 +677,16 @@ functions is a lean, not a rule; see "Lean towards functions" above.
 
 ## When a solution carries words, and when it does not
 
-Most solutions carry none, and that is the shape a reader of the wiki expects.
+Every solution carries its **construct notes**: up to three one-line comments
+after the `use` lines, one for each ghūl construct in the source that a reader
+from another language may not know (`T{}`, `T[]`, `|>`, `*` as an argument,
+`=~`, pattern matching, `list()`, the collection constructors, `~>`, `yield`),
+in the order they first appear. They are not written by hand:
+`scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
+checks them, and the wording changes only in that table, so every solution says
+the same thing the same way. They say what a construct is, never why it was
+used, and nothing about the algorithm. Beyond them, most solutions carry no
+words, and that is the shape a reader of the wiki expects.
 When a reader would be left with a question, the first three answers are not
 words at all, in this order:
 

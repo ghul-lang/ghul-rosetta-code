@@ -6,6 +6,10 @@ use System.Math.*
 use Point = (x: double, y: double, z: double)
 use Flat = (x: double, y: double)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let width = 2.0D
 let height = 3.0D
 let depth = 4.0D

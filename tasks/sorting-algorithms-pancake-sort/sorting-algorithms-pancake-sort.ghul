@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 flip[T](values: LIST[T], upto: int) is
     let low mut = 0
     let high mut = upto

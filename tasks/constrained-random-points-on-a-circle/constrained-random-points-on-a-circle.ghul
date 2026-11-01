@@ -1,6 +1,10 @@
 use default
 use Raster.IMAGE
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let random = System.Random(10)
 
 candidates() -> (x: int, y: int){} is

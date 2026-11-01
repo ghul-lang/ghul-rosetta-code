@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 neighbourhood(cells: bool[], at: int) -> int =>
     let left = cells[(at + cells.count - 1) % cells.count] in
     let right = cells[(at + 1) % cells.count] in

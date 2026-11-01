@@ -6,6 +6,10 @@ use Found = (value: int, steps: LIST[string])
 
 use Move = (value: int, step: string)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 move(a: int, operator: string, b: int, value: int) -> Move => (
     value = value,
     step = "{a} {operator} {b} = {value}"

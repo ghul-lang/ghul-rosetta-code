@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 cubans() -> long{} =>
     from(1L) |> map(n => 3L * n * n + 3L * n + 1L) |> filter(is_prime)
 

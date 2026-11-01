@@ -1,6 +1,8 @@
 use default
 use System.Runtime.InteropServices.NativeLibrary
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 class LIBC is
     @System.Runtime.InteropServices.DllImport("libc")
     abs(value: int) -> int static

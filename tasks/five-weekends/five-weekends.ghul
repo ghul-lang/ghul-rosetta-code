@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 has_five_weekends(year: int, month: int) -> bool =>
     System.DateTime.days_in_month(year, month) == 31 /\
     System.DateTime(year, month, 1).day_of_week == System.DayOfWeek.FRIDAY

@@ -2,6 +2,10 @@ use default
 
 use MEMBER = (key: string, value: Json)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 union Json is
     TEXT(value: string)
     ARRAY(items: Json[])

@@ -1,5 +1,9 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 struct RATIONAL(numerator: bigint, denominator: bigint) is
     +(other: RATIONAL) -> RATIONAL =>
         reduced(

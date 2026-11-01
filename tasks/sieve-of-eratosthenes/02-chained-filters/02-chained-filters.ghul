@@ -3,6 +3,8 @@ use Ghul.Coroutines
 
 use Numbers = CHANNEL[int?]
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 let limit = 100
 
 count_up(out: Numbers) -> COROUTINE is

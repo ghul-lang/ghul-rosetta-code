@@ -2,6 +2,8 @@ use default
 use Suit.HEARTS
 use Suit.SPADES
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 enum Suit is
     HEARTS,
     DIAMONDS,

@@ -3,6 +3,8 @@ use default
 use System.Random
 use System.Security.Cryptography.RandomNumberGenerator
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 rolls(generator: Random) -> string =>
     (0..10) |> map(_ => "{generator.next(1, 7)}") |> join(" ")
 

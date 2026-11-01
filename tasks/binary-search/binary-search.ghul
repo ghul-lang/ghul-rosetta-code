@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `=~` compares values (structural equality); `==` compares identity.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 search[T: Ghul.Comparable[T]](values: T[], sought: T) -> int? is
     let low mut = 0
     let high mut = values.count - 1

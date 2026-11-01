@@ -2,6 +2,10 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 let size = 100
 let pixels = 180
 let steps_per_frame = 250

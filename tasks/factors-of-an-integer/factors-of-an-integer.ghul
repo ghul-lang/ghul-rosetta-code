@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 factors(n: int) -> int{} => 1::n |> filter(d => n % d == 0)
 
 for n in [1, 45, 53, 64, 1024] do

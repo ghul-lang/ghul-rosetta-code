@@ -2,6 +2,10 @@ use default
 
 use ROW = (library: string, dependencies: string)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
     let graph = MAP()
 

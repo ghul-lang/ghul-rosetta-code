@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 // true when a comes strictly before b: the first difference decides, and
 // a list that runs out first comes first
 

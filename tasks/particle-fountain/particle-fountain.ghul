@@ -2,6 +2,9 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 class DROP is
     x: double public
     y: double public

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 rot13(c: char) -> char =>
     if c >= 'a' /\ c <= 'z' then
         char((int(c) - int('a') + 13) % 26 + int('a'))

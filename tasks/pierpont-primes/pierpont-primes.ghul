@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `=~` compares values (structural equality); `==` compares identity.
+
 three_smooth() -> bigint{} is
     let found = LIST()
     let next_double mut = 0

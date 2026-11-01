@@ -2,6 +2,10 @@ use default
 use Stream = string{}
 use Filter = (string{}) -> string{}
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 |(source: Stream, next: Filter) -> Stream => next(source)
 
 ◀(next: Filter, path: string) -> Stream => next(cat(path))

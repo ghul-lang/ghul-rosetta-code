@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 strip_control(text: string) -> string =>
     string(text |> filter(c => int(c) >= 32 /\ int(c) != 127))
 

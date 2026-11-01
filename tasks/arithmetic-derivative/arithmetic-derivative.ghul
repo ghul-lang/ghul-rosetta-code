@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 derivative(value: bigint) -> bigint is
     if value.sign < 0 then return 0n - derivative(-value) fi
     if value < 2n then return 0n fi

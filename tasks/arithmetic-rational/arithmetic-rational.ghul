@@ -1,6 +1,9 @@
 use default
 use System.Math
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 struct FRAC(numerator: long, denominator: long) is
     +(other: FRAC) -> FRAC =>
         frac(

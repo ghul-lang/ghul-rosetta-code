@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let real = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
     "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",

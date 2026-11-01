@@ -5,6 +5,10 @@ use System.Math.*
 
 use Math = System.Math
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let n = 2.5D
 let a = 200.0D
 let b = 200.0D

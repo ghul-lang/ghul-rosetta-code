@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 circle_sort_pass[T: Ghul.Comparable[T]](
     values: LIST[T],
     lo: int,

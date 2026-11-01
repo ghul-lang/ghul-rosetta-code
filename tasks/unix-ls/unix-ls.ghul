@@ -5,6 +5,9 @@ use IO.Path
 use System.Environment
 use System.Guid
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 list_here() =>
     Directory.get_file_system_entries(".")
         |> map(entry => Path.get_file_name(entry) ?? entry)

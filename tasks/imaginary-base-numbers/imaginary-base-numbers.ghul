@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 to_quater_imaginary(value: int) -> string => (
     let digits = LIST()
     let remaining mut = value

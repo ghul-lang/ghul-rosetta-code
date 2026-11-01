@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 has_extension(name: string, extensions: string[]) -> bool =>
     extensions |> any(ext => name.to_lower().ends_with(".{ext.to_lower()}"))
 

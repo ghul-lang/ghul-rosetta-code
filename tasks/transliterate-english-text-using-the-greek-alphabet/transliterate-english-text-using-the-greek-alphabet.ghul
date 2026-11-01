@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 let pairs = [
     ("ch", 'χ'), ("kh", 'χ'), ("ph", 'φ'), ("rh", 'ρ'), ("th", 'θ'),
     ("ps", 'ψ'), ("ck", 'κ'), ("ee", 'η'), ("oo", 'ω'),

@@ -2,6 +2,8 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 ask(prompt: string) -> string? is
     write(prompt)
     read_line()

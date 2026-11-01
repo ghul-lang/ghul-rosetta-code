@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let fibonacci_sequence = stream(
     (0, 1),
     (previous, current) => previous || (current, previous + current)

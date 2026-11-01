@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 union Huffman(weight: int) is
     LEAF(symbol: char, ..)
     NODE(left: Huffman, right: Huffman, ..)

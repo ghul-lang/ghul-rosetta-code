@@ -1,5 +1,8 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let two = 2n
 let three = 3n
 let five = 5n

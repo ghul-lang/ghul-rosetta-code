@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 is_prime(n: int) -> bool =>
     n >= 2 /\ 2..n |> all(d => d * d > n \/ n % d != 0)
 

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 ackermann(m: int, n: int) -> int memo =>
     if m == 0 then
         n + 1

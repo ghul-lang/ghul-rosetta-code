@@ -3,6 +3,10 @@ use Raster.AXES
 use Raster.IMAGE
 use System.Math.log10
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let random = System.Random(2026)
 
 let rounds = 10000

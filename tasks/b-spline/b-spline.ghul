@@ -3,6 +3,10 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let control: Point[] = [
     (171.0D, 171.0D), (185.0D, 111.0D), (202.0D, 109.0D), (202.0D, 189.0D),
     (328.0D, 160.0D), (208.0D, 254.0D), (241.0D, 330.0D), (164.0D, 252.0D),

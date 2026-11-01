@@ -1,6 +1,8 @@
 use IO.Std.write
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 grid(size: int, random: System.Random) -> int[][] => [
     [random.next(1, 21) for _ in 1::size]
     for _ in 1::size

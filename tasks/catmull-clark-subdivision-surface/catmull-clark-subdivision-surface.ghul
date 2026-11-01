@@ -4,6 +4,10 @@ use Point = (x: double, y: double, z: double)
 use Face = int[]
 use Mesh = (points: Point[], faces: Face[])
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 +(a: Point, b: Point) -> Point => (
     x = a.x + b.x,
     y = a.y + b.y,

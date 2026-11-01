@@ -3,6 +3,8 @@ use Raster.IMAGE
 
 use POINT = (x: double, y: double)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 midpoint(a: POINT, b: POINT) -> POINT => (
     x = (a.x + b.x) / 2.0,
     y = (a.y + b.y) / 2.0

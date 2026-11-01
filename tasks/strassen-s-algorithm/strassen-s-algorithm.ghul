@@ -2,6 +2,10 @@ use default
 
 use Matrix = double[][]
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 zeros(n: int) -> Matrix =>
     0..n |> map(_ => repeat(0.0, n) |> collect()) |> collect()
 

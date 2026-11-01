@@ -1,6 +1,10 @@
 use default
 use RESULT = (is_lychrel: bool, values: bigint[])
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 write_line("reversing and adding, which takes a moment")
 write_line("")
 

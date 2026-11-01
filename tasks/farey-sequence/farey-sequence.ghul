@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 farey(order: int) -> (numerator: int, denominator: int){} is
     let low mut = (numerator = 0, denominator = 1)
     let high mut = (numerator = 1, denominator = order)

@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 triples(n: int) -> (int, int, int){} is
     for a in 1::n do
         for b in a::n do

@@ -3,6 +3,10 @@ use default
 use Cell = (row: int, column: int)
 use Line = (penalty: int, cheapest: int, cells: Cell[])
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 let tasks = ["A", "B", "C", "D", "E"]
 let contractors = ["W", "X", "Y", "Z"]
 

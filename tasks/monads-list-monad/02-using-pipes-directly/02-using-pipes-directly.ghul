@@ -1,6 +1,9 @@
 use default
 use System.Convert.to_string
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 divisors(n: int) -> int{} => pipe(1::n) |> filter(d => n % d == 0)
 
 spellings(n: int) -> string{} => pipe(["{n}", "0b{to_string(n, 2)}"])

@@ -1,5 +1,7 @@
 use default
 
+// `*` as an argument leaves that parameter open: partial application.
+
 greeting() -> string => "no arguments"
 
 add(left: int, right: int) -> int => left + right

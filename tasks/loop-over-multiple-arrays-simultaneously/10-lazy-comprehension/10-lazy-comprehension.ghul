@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let letters = ['a', 'b', 'c']
 let capitals = ['A', 'B', 'C']
 let digits = [1, 2, 3]

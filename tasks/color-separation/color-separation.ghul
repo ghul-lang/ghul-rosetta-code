@@ -5,6 +5,9 @@ use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is

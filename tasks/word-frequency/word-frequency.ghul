@@ -3,6 +3,9 @@ use default
 use System.Text.RegularExpressions.Regex
 use System.Text.RegularExpressions.Match
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let n = 10
 
 let text = IO.File.read_all_text("les-miserables.txt").to_lower_invariant()

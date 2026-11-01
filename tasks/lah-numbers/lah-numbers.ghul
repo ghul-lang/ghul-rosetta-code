@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 lah(n: int, k: int) -> bigint =>
     if k == 1 then factorial(bigint(n))
     elif k == n then 1n

@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `*` as an argument leaves that parameter open: partial application.
+
 let nadir = 13
 
 rotate(alphabet: LIST[char], by: int) is

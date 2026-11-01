@@ -2,6 +2,9 @@ use default
 
 use RUN = (start: int, finish: int, total: int)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 greatest_run(values: int[]) -> RUN is
     let best mut = (start = 0, finish = 0, total = 0)
     let running mut = best

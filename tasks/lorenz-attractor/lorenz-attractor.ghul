@@ -4,6 +4,9 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double, z: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let sigma = 10.0D
 let rho = 28.0D
 let beta = 8.0D / 3.0D

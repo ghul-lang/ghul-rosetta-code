@@ -2,6 +2,9 @@ use default
 
 use Factor = (prime: bigint, power: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 order_part(
     a: bigint,
     q: Factor,

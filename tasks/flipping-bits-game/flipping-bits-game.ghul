@@ -2,6 +2,10 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 let size = 3
 
 let source = System.Random(20260909)

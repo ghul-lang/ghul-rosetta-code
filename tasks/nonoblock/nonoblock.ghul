@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 // every way to place the blocks, leftmost first, each separated by at
 // least one empty cell; yields the start position of each block
 

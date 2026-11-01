@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 struct GAUSSIAN(real: bigint, imaginary: bigint) is
     *(other: GAUSSIAN) -> GAUSSIAN =>
         GAUSSIAN(

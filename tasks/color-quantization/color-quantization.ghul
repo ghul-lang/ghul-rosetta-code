@@ -4,6 +4,10 @@ use System.Math
 
 use Colour = (red: int, green: int, blue: int)
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is

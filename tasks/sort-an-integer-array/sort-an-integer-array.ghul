@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let numbers = [2, 4, 3, 1, 2]
 
 write_line(numbers |> sort() |> join())

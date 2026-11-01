@@ -1,6 +1,8 @@
 use default
 use System.Math
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 entropy(text: string) -> double =>
     let
         groups = group_by(text, c => c).values,

@@ -2,6 +2,8 @@ use default
 
 use System.DateTime
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // A palindromic yyyymmdd is fixed by its year: the month and day are the
 // year's digits reversed, so each year gives at most one date.
 

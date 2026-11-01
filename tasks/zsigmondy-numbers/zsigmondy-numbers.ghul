@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 difference(exponent: int, a: int, b: int) -> bigint =>
     bigint.pow(bigint(a), exponent) - bigint.pow(bigint(b), exponent)
 

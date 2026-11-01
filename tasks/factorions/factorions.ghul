@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let factorial = n rec => if n <= 1 then 1 else n * rec(n - 1) fi
 
 digit_factorial_sum(n: int, base_value: int) -> int =>

@@ -8,6 +8,10 @@ use System.Math
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)
 use Sorter = (name: string, sort: (LIST[int]) -> void, colour: Colour)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 insertion_sort(xs: LIST[int]) is
     for i in 1..xs.count do
         let x = xs[i]

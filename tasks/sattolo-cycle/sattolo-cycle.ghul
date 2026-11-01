@@ -1,6 +1,8 @@
 use default
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 sattolo_cycle(items: LIST[int], random: Random) is
     let i mut = items.count - 1
 

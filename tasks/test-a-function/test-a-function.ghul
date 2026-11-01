@@ -3,6 +3,10 @@ use System.Reflection.BindingFlags
 
 use Microsoft.VisualStudio.TestTools.UnitTesting
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+// `=~` compares values (structural equality); `==` compares identity.
+
 is_palindrome(text: string) -> bool =>
     let letters =
         text.to_lower().to_char_array()

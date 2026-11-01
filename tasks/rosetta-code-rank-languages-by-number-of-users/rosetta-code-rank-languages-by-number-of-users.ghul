@@ -3,6 +3,10 @@ use System.Net.Http.HttpClient
 use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // The task: rank the languages by how many of the wiki's users say they use
 // each, which is the size of the category X User for each language X. Those
 // categories are the subcategories of Category:Language users, fetched from

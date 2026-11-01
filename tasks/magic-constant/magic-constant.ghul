@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 constant(n: bigint) -> bigint => n * (n * n + 1n) / 2n
 
 let first = 3::22 |> map(n => constant(bigint(n))) |> join(" ")

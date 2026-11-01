@@ -1,5 +1,8 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 in_order[T: Ghul.Comparable[T]](values: T[]) -> bool =>
     (0..values.count - 1) |> all(i => values[i] <= values[i + 1])
 

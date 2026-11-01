@@ -2,6 +2,10 @@ use default
 use Raster.IMAGE
 use System.Math.*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 let colours = ["red", "green", "purple"]
 let numbers = ["one", "two", "three"]
 let symbols = ["oval", "squiggle", "diamond"]

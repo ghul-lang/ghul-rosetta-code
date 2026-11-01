@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 summarize(term: string) -> string =>
     let counts = term |> frequencies() in
     counts.keys

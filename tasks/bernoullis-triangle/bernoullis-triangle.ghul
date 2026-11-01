@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 bernoulli(rows: int) -> int[]{} is
     let row mut = LIST()
     row.add(1)

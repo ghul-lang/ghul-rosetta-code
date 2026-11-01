@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 cholesky(a: double[][]) -> double[][] is
     let size = a.count
     let l = 0..size |> map(_ => repeat(0.0, size) |> LIST()) |> list()

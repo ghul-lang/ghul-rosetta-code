@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 // A length is a fifth of a second and two pounds cost a length, so each
 // pound carried is a tenth of a second over the mile. Every time below is
 // what the horse would run carrying its race 4 weight.

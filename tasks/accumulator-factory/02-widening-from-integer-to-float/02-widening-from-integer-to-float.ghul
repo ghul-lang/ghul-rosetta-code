@@ -1,5 +1,7 @@
 use IO.Std.write_line
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 union Number is
     WHOLE(value: int)
     FRACTIONAL(value: double)

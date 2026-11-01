@@ -1,6 +1,10 @@
 use default
 use System.Security.Cryptography.SHA256
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let block_size = 1024
 
 paired(hashes: ubyte[][]) -> ubyte[]{} =>

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 multiplier(a: double, b: double) -> (double) -> double => m => a * b * m
 
 let x = 2.0D

@@ -1,6 +1,10 @@
 use Ghul.Pipes
 use Raster.IMAGE
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
     ubyte(
         0.2126D * double(red) +

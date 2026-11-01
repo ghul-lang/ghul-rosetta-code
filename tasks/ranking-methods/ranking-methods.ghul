@@ -3,6 +3,10 @@ use default
 use ENTRY = (score: int, name: string)
 use RANKER = (int, int, int, int) -> string
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let competitors = [
     (score = 44, name = "Solomon"),
     (score = 42, name = "Jason"),

@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 term(coefficient: int, index: int) -> string =>
     let size = int.abs(coefficient) in
     if size == 1 then "e({index})" else "{size}*e({index})" fi

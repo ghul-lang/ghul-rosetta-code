@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let ln2 = 0.6931471805599453094172321215m
 
 hickerson(n: int) -> decimal =>

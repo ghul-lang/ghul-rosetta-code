@@ -1,6 +1,8 @@
 use default
 use System.Math
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 apply(operator: string, left: double, right: double) -> double =>
     case operator
     when "+" then left + right

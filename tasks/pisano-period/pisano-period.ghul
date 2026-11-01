@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 pisano_prime(prime: int, power: int) -> int is
     let period mut = 0
     let previous mut = 0

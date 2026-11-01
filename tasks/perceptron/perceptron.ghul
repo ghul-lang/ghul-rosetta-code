@@ -1,6 +1,9 @@
 use default
 use Raster.IMAGE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 struct V3(x: double, y: double, bias: double) is
     +(o: V3) -> V3 => V3(x + o.x, y + o.y, bias + o.bias)
     *(k: double) -> V3 => V3(x * k, y * k, bias * k)

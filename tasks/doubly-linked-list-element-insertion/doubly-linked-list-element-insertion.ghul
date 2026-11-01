@@ -1,5 +1,7 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 class NODE[T](value: T) is
     next: NODE[T]?
     previous: NODE[T]?

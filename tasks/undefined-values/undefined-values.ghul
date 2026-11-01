@@ -1,5 +1,8 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 lookup(table: MAP[string, int], key: string) -> int? =>
     if table.contains_key(key) then table[key] else null fi
 

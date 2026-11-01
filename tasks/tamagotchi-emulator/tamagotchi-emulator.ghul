@@ -3,6 +3,10 @@ use IO.Std.read_line
 use System.Random
 use System.Math.*
 
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let random = Random(12)
 
 class PET(name: string) is

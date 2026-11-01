@@ -5,6 +5,10 @@ use Raster.SHAPES
 
 use Square = (file: int, rank: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 let size = 8
 let start = (file = 0, rank = 0)
 

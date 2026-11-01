@@ -3,6 +3,10 @@ use default
 use PATIENT = (id: string, lastname: string)
 use VISIT = (id: string, date: string, score: double?)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 let patients: PATIENT[] = [
     (id = "1001", lastname = "Hopper"),
     (id = "4004", lastname = "Wirth"),

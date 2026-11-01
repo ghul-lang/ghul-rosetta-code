@@ -2,6 +2,9 @@ use default
 
 use UNIT = (name: string, metres: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let units = [
     (name = "tochka", metres = 0.00254),
     (name = "liniya", metres = 0.0254),

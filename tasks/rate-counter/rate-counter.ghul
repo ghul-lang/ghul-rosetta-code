@@ -2,6 +2,8 @@ use default
 
 use System.Diagnostics.Stopwatch
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 class RATE_COUNTER is
     _clock: Stopwatch
     _jobs: int

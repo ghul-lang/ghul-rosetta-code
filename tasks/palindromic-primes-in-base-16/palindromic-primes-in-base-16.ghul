@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 is_palindrome(text: string) -> bool => text |> reverse() |> join("") =~ text
 
 let found =

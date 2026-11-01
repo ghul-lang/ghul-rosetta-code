@@ -2,6 +2,10 @@ use default
 
 use Action = (write: char, move: int, next: string)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `=~` compares values (structural equality); `==` compares identity.
+
 class MACHINE(
     name: string,
     initial: string,

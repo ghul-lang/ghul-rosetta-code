@@ -2,6 +2,10 @@ use default
 
 use CELL = (text: string, width: int, colour: string)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 class NODE(text: string, children: LIST[NODE])
 
 let outline = [

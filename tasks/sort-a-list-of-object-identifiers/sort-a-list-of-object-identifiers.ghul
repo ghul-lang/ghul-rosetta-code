@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 compare_oids(a: string, b: string) -> int is
     let left = a.split(['.']) |> map(int.parse) |> list()
     let right = b.split(['.']) |> map(int.parse) |> list()

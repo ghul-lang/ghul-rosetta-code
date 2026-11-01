@@ -1,4 +1,6 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 write_line(repeat("ha", 5) |> join(""))
 write_line(string('*', 5))

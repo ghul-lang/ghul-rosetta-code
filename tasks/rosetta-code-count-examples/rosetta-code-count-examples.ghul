@@ -4,6 +4,8 @@ use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
 use System.Text.RegularExpressions.Regex
 
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 // The task: count the examples on every task page, which is the number of
 // language headers in its wikitext. The API lists the tasks a batch at a
 // time, continuing until there are no more, and gives each page's wikitext

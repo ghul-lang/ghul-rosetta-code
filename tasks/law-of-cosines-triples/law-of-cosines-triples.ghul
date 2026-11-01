@@ -2,6 +2,10 @@ use default
 
 use Triple = (a: long, b: long, c: long)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 exact_root(square: long) -> long? =>
     let
         estimate = System.Math.sqrt(double(square)),

@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_gapful(n: int) -> bool =>
     let
         digits = n.to_string(),

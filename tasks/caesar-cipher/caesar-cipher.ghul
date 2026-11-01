@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 rotate(text: string, key: int) -> string =>
     text |> map(letter => rotate_letter(letter, key)) |> string()
 

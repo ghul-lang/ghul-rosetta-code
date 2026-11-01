@@ -2,6 +2,9 @@ use default
 use IO.Std.read_line
 use System.Math
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 f(x: double) -> double => Math.sqrt(Math.abs(x)) + 5.0 * x * x * x
 
 write_line("enter 11 numbers:")

@@ -3,6 +3,8 @@ use System.Xml.Linq
 use System.Xml.XPath.Extensions.xpath_select_element
 use System.Xml.XPath.Extensions.xpath_select_elements
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let source =
     "<inventory title=\"OmniCorp Store #45x10^3\">"
     "  <section name=\"health\">"

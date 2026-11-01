@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 first_repeat(text: string) -> (first: int, second: int)? =>
     0..text.length
         |> map(i => (first = i, second = text.index_of(text[i], i + 1)))

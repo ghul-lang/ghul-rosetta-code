@@ -4,6 +4,10 @@ use Raster.Anchor
 use Raster.IMAGE
 use System.Math.*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 recaman() -> int{} is
     let seen = SET()
     let term mut = 0

@@ -1,6 +1,8 @@
 use IO.Std.write
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 run(program: string, input: string) is
     let cells = LIST()
 

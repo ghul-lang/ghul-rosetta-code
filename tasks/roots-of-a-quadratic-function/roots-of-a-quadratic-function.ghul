@@ -2,6 +2,8 @@ use default
 
 use Math = System.Math
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 union Roots is
     REAL(first: double, second: double)
     COMPLEX(re: double, im: double)

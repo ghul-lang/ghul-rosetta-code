@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 sift_down[T: Ghul.Comparable[T]](values: LIST[T], start: int, end: int) is
     let root mut = start
 

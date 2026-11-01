@@ -1,5 +1,7 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 split(text: string) -> string{} => (
     let runs = LIST()
 

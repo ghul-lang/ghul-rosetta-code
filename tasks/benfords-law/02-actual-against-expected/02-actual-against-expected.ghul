@@ -3,6 +3,10 @@ use System.Math.log10
 use Raster.Anchor
 use Raster.IMAGE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let leading_counts = 1::10 |> map(_ => 0) |> LIST()
 
 let previous mut = 0n

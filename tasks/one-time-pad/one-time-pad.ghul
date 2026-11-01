@@ -4,6 +4,9 @@ use IO.File
 use IO.Path
 use System.Security.Cryptography.RandomNumberGenerator
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 letters(text: string) -> string =>
     string([char.to_upper(c) for c in text if char.is_letter(c)])
 

@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 is_pseudoprime(a: int, x: int) -> bool =>
     let power = mod_pow(long(a), long(x - 1), long(x)) in
     x > 1 /\ !is_prime(x) /\ power == 1L

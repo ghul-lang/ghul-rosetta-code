@@ -1,6 +1,8 @@
 use default
 use System.Environment
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 Environment.set_environment_variable("ROSETTA_GREETING", "hello")
 
 let name = "ROSETTA_GREETING"

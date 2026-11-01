@@ -3,6 +3,10 @@ use System.Math
 
 use DIVISION = (quotient: double[], remainder: double[])
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 degree(poly: double[]) -> int =>
     let highest =
         (0::poly.count - 1)

@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 union Nested is
     ATOM(value: int)
     LIST(items: Nested[])

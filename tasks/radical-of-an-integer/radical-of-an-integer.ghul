@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 let limit = 1000000
 
 let radical = LIST()

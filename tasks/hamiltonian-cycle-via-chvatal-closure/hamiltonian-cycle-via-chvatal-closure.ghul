@@ -2,6 +2,10 @@ use default
 
 use Graph = List[SET[int]]
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 graph(n: int, edges: (int, int){}) -> Graph => (
     let adjacency = 0..n |> map(_ => SET()) |> list()
 

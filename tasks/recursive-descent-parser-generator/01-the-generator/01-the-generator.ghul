@@ -1,6 +1,10 @@
 use default
 use IO.Std.read_line
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let prelude = [
     "use default",
     "",

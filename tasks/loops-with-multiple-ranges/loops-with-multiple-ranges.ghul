@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 stepped(start: int, stop: int, step: int) -> int{} is
     let value mut = start
 

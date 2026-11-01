@@ -1,6 +1,10 @@
 use default
 use System.Random
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 riffle_shuffle(deck: int[], random: Random) -> int[] is
     let half = deck.count / 2
     let left = LIST(deck[0..half])

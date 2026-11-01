@@ -2,6 +2,10 @@ use default
 
 use System.Numerics.BitOperations
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // 64 cells in a ring, held as the bits of one ulong, starting from a
 // single live cell at bit 0; rule 30 is left XOR (centre OR right).
 

@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let random = System.Random(3)
 
 rand_n(n: int) -> int => if random.next(n) == 0 then 1 else 0 fi

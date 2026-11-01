@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator
     let n2 mut = denominator

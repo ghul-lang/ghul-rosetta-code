@@ -1,6 +1,8 @@
 use default
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 tanh_sinh(
     f: double -> double,
     lower: double,

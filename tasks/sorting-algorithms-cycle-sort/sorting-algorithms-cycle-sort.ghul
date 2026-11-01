@@ -1,5 +1,8 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 cycle_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     for start in 0..values.count - 1 do
         let item mut = values[start]

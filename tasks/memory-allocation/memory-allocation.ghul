@@ -2,6 +2,9 @@ use default
 
 use System.Runtime.InteropServices.Marshal
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 // Managed memory is never freed explicitly: constructing an object or
 // an array takes it from the garbage-collected heap, and the collector
 // reclaims it once nothing refers to it. A struct held in a local

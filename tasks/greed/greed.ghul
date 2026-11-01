@@ -2,6 +2,9 @@ use default
 use IO.Std.read_line
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 let width = 79
 let height = 22
 let random = Random(9)

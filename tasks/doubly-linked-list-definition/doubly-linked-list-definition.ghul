@@ -1,5 +1,9 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 class NODE[T](value: T) is
     next: NODE[T]?
     previous: NODE[T]?

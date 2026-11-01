@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_tau(n: int) -> bool => n % divisor_count(n) == 0
 
 let first_hundred = from(1) |> filter(is_tau) |> take(100)

@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 toggle(doors: bool[], pass: int) -> bool[] => [
     if (i + 1) % pass == 0 then !doors[i] else doors[i] fi
     for i in 0..100

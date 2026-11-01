@@ -4,6 +4,10 @@ use Raster.SHAPES
 use Raster.Anchor
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let radius = 1.0D
 let rise = sqrt(3.0D)
 

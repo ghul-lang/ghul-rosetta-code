@@ -1,6 +1,8 @@
 use default
 use System.Xml.Linq
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let source =
     "<Students>"
     "  <Student Name=\"April\" Gender=\"F\" DateOfBirth=\"1989-01-02\" />"

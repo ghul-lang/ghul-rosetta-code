@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 insertion_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     for i in 1..values.count do
         let sought = values[i]

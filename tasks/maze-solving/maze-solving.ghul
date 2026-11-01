@@ -1,6 +1,10 @@
 use default
 use Raster.IMAGE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 let columns = 24
 let rows = 16
 let cell = 22

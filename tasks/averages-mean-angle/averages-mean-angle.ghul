@@ -3,6 +3,9 @@ use System.Math.*
 use double.degrees_to_radians
 use double.radians_to_degrees
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 mean_angle(degrees: double[]) -> double =>
     let radians = degrees |> map(degrees_to_radians) in
     let

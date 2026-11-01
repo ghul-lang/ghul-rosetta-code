@@ -3,6 +3,9 @@ use System.Net.Dns
 use System.Net.IPAddress
 use System.Net.Sockets.AddressFamily
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 report(addresses: IPAddress[]) is
     for
         (label, family) in [

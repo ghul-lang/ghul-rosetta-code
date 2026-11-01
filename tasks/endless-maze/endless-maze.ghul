@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Math.*
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let random = System.Random(2026)
 
 let steps = [(1, 0), (0, 1), (-1, 0), (0, -1)]

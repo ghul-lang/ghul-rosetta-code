@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // Least significant digit first, in base 10. Negative numbers are sorted
 // by their magnitude on their own and put first, reversed.
 radix_sort(values: int[]) -> int{} is

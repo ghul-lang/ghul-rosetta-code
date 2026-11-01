@@ -4,6 +4,8 @@ use Raster.IMAGE
 
 use Step = (x: double, y: double, corner: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let random = System.Random(20260918)
 
 let corners = [

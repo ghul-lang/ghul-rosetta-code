@@ -2,6 +2,8 @@ use default
 
 use Item = (name: string, weight: double, value: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let items = [
     (name = "beef", weight = 3.8, value = 36.0),
     (name = "pork", weight = 5.4, value = 43.0),

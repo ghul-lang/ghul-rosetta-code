@@ -1,6 +1,8 @@
 use default
 use System.Text.Encoding
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 percent_encoded(octet: ubyte) -> string => (
     let character = char(octet)
 

@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 let smallest = from(1) |> find(c => c * c % 1000000 == 269696) ?? 0
 
 let babbage = 99736L

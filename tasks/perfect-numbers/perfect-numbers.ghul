@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_perfect(n: int) -> bool is
     if n < 2 then
         return false

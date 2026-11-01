@@ -5,6 +5,10 @@ use Raster.IMAGE
 
 use Rule = (name: string, next: (double, double) -> double)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let dxs = [
     -0.533D, 0.27D, 0.859D, -0.043D, -0.205D, -0.127D, -0.071D, 0.275D,
     1.251D, -0.231D, -0.401D, 0.269D, 0.491D, 0.951D, 1.15D, 0.001D,

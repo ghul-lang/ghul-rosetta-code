@@ -5,6 +5,9 @@ use System.DateTime
 use System.Globalization.CultureInfo
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let cycles = [
     ("Physical", 23),
     ("Emotional", 28),

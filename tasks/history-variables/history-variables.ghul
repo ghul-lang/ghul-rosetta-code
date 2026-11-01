@@ -1,5 +1,7 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 class HISTORIC[T] is
     _past: LIST[T]
 

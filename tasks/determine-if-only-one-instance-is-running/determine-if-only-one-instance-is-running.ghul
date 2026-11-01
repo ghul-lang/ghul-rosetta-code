@@ -9,6 +9,8 @@ use System.Diagnostics.ProcessStartInfo
 use System.Environment
 use System.Guid
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 take(lock_path: string) -> IO.FileStream? is
     try
         return File.open(

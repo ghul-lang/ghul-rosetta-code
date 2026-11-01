@@ -1,6 +1,8 @@
 use default
 use System.Text.RegularExpressions.Regex
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 digit_value(i: int, d: int) -> int =>
     let doubled = if i % 2 == 1 then d * 2 else d fi in
     doubled / 10 + doubled % 10

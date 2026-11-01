@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 b10(n: int) -> string is
     let parent = repeat(-1, n) |> LIST()
     let digit = repeat('0', n) |> LIST()

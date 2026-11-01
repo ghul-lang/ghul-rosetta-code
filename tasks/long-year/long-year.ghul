@@ -2,6 +2,8 @@ use default
 
 use System.Globalization.ISOWeek
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 december_31_weekday(year: int) -> int =>
     (year + year / 4 - year / 100 + year / 400) % 7
 

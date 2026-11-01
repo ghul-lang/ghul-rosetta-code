@@ -2,6 +2,10 @@ use default
 use System.Numerics.INumber
 use System.Numerics.IMultiplyOperators.`*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 power[T: INumber[T]](base: T, exponent: int) -> T =>
     if exponent == 0 then
         T.one

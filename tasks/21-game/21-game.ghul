@@ -1,6 +1,10 @@
 use default
 use IO.Std
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 let target = 21
 
 union Move is

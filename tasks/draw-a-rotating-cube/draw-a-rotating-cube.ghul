@@ -6,6 +6,9 @@ use System.Math.*
 
 use Point = (x: double, y: double, z: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let size = 180
 let frames = 40
 

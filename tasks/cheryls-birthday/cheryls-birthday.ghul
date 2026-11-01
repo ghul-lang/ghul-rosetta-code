@@ -2,6 +2,10 @@ use default
 
 use DATE = (month: string, day: int)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 sharing_the_day(dates: DATE[], day: int) -> int =>
     dates |> filter(date => date.day == day) |> count()
 

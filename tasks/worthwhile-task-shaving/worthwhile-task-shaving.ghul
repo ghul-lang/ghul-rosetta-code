@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 let minute = 60.0
 let hour = 60.0 * minute
 let day = 24.0 * hour

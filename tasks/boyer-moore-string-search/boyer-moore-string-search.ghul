@@ -1,5 +1,7 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 search(text: string, pattern: string) -> int{} is
     let m = pattern.length
     let n = text.length

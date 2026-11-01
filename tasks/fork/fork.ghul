@@ -2,6 +2,9 @@ use default
 use System.Diagnostics.Process
 use System.Diagnostics.ProcessStartInfo
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let arguments = System.Environment.get_command_line_args()
 
 if arguments |> skip(1) |> any(argument => argument =~ "child") then

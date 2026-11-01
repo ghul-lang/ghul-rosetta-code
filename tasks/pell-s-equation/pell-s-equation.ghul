@@ -1,5 +1,7 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+
 pell(n: int) -> (x: bigint, y: bigint) is
     let root = int(System.Math.sqrt(double(n)))
     let (y, z, r) mut = (root, 1, root * 2)

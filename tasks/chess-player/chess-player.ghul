@@ -4,6 +4,10 @@ use System.Math.*
 
 use Move = (from: int, to: int, promotion: char)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 class POSITION is
     squares: LIST[char] public
     white_to_move: bool public

@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Math
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let random = System.Random(3)
 
 write_line("each round we both hide 0 to 3 coins and guess the total")

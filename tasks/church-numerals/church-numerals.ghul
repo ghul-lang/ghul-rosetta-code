@@ -1,6 +1,8 @@
 use default
 use Church[T] = ((T) -> T) -> (T) -> T
 
+// `*` as an argument leaves that parameter open: partial application.
+
 zero[T](f: (T) -> T) -> (T) -> T => x => x
 
 successor[T](n: Church[T]) -> Church[T] => f => x => f(n(f)(x))

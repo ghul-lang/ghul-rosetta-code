@@ -2,6 +2,10 @@ use default
 
 use Die = int[]
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 beats(x: Die, y: Die) -> int =>
     let wins = x |> flat_map(a => y |> map(b => a <> b)) in
     (wins |> count(w => w > 0)) - (wins |> count(w => w < 0))

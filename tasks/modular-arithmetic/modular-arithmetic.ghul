@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 trait Ring[T] is
     +(other: T) -> T
     *(other: T) -> T

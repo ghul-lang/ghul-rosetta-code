@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 best_shuffle(text: string) -> string is
     let groups =
         0..text.length

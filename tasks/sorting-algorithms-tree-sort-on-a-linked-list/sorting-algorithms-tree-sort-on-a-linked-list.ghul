@@ -1,5 +1,9 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 union LinkedList is
     NODE(value: int, next: LinkedList mut)
     EMPTY

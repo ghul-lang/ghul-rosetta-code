@@ -5,6 +5,10 @@ use System.Math.*
 use Cell = (x: int, y: int, z: int)
 use Flat = (x: double, y: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let level = 2
 let size = 9
 

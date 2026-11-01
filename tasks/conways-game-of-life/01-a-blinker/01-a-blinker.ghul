@@ -2,6 +2,10 @@ use default
 
 use Grid = bool[][]
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 live_neighbours(grid: Grid, row: int, column: int) -> int is
     let count mut = 0
 

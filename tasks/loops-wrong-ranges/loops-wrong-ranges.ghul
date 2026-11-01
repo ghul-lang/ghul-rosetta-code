@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 // ghūl's ranges, a..b and a::b, have no increment: they always count up by
 // one. A sequence with an increment is from(start, step), bounded here by
 // take_while. With a zero or negative step that bound is never reached, so

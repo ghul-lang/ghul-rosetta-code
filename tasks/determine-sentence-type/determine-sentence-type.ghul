@@ -1,5 +1,9 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 let text =
     "hi there, how are you today? I'd like to present to you the washing "
     "machine 9001. You have been nominated to win one of these! Just make "

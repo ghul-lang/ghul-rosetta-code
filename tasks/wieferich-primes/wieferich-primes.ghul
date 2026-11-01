@@ -1,5 +1,8 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_wieferich(prime: int) -> bool =>
     let square = bigint(prime) * bigint(prime) in
     mod_pow(2n, bigint(prime - 1), square) =~ 1n

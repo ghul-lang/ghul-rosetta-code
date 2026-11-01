@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Random
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let random = Random(50)
 let colours = ["red", "yellow", "green", "blue"]
 let names = ["you", "bot 1", "bot 2", "bot 3"]

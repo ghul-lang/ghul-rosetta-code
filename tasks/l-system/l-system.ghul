@@ -1,6 +1,9 @@
 use default
 use Raster
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 expand(axiom: string, rules: Map[char, string], steps: int) -> string is
     let current mut = axiom
 

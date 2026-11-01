@@ -1,6 +1,9 @@
 use default
 use System.Reflection.BindingFlags
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 class SAFE(combination: string private, contents: string) is
     open(attempt: string) -> string =>
         if attempt =~ _combination then

@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 let metric_letters = "KMGTPEZYXWVU"
 
 let words = [

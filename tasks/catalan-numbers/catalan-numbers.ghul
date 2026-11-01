@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // C(n) = sum over i of C(i) * C(n - 1 - i)
 by_convolution(n: int) -> long memo is
     if n == 0 then

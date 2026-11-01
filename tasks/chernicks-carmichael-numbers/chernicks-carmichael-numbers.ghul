@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 chernick_factors(n: int, m: long) -> bigint{} is
     yield cast(6L * m + 1L)
     yield cast(12L * m + 1L)

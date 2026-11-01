@@ -1,5 +1,8 @@
 use default
 
+// `*` as an argument leaves that parameter open: partial application.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 kaprekar(n: int) -> bool =>
     let square = long(n) * long(n) in
     iterate(10L, * * 10L)

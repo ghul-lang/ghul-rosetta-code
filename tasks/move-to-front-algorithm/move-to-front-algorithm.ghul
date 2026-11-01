@@ -1,6 +1,10 @@
 use default
 use System.Text.StringBuilder
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 symbol_table() -> LIST[char] =>
     let symbols = int('a')::int('z') |> map(char) |> LIST() in
     symbols

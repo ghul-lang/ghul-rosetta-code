@@ -2,6 +2,9 @@ use default
 use IO.Std.read_line
 use System.Text.RegularExpressions.Regex
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 write_line("Enter a story with <blanks>, ending with an empty line:")
 
 let story = LIST()

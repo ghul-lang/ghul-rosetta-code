@@ -4,6 +4,10 @@ use System.Net.Http.StringContent
 use System.Text.Encoding
 use System.Xml.Linq.XDocument
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+
 // The envelope's namespace, which every SOAP message carries.
 soap_ns() -> string => "http://schemas.xmlsoap.org/soap/envelope/"
 

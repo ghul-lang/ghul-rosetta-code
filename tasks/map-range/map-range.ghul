@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 map_range(
     (a1, a2): (double, double),
     (b1, b2): (double, double),

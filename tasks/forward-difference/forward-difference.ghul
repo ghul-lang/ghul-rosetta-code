@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 differences(xs: int[]) -> int[] =>
     zip(xs[1..<0], xs[0..<1]) |> map(* - *) |> list()
 

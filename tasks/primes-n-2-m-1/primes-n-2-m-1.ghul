@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 abbreviated(p: bigint) -> string =>
     let digits = "{p}" in
     if digits.length <= 40 then

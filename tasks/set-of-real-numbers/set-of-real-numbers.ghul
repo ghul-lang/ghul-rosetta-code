@@ -3,6 +3,9 @@ use System.Math.*
 
 use RealSet = (double) -> bool
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 open_range(low: double, high: double) -> RealSet =>
     value => low < value /\ value < high
 

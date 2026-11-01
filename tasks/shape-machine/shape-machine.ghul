@@ -2,6 +2,8 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 write("start: ")
 
 if let entered = read_line() then

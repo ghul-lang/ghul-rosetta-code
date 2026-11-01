@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 trait Visitor[T] is
     visit_number(number: NUMBER) -> T
     visit_add(add: ADD) -> T

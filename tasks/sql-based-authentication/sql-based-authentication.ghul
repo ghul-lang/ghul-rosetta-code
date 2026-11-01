@@ -6,6 +6,10 @@ use System.Security.Cryptography.MD5
 use System.Security.Cryptography.RandomNumberGenerator
 use System.Text.Encoding
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 // SQLite, through Microsoft.Data.Sqlite, stands in for MySQL: an
 // in-memory database needs no server, and the table and the three
 // operations are the ones the task gives.

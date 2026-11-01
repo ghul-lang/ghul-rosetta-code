@@ -2,6 +2,8 @@ use default
 
 use Edge = (from: int, to: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let size = 13
 
 let edges = [

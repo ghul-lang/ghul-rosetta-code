@@ -1,6 +1,10 @@
 use default
 use System.Math.*
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 write_line("sieving the divisor sums up to the limit")
 write_line("")
 

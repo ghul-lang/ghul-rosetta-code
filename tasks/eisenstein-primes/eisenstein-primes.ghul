@@ -4,6 +4,9 @@ use System.Math
 
 use Eisenstein = (a: int, b: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 norm(e: Eisenstein) -> int => e.a * e.a - e.a * e.b + e.b * e.b
 
 is_eisenstein_prime(e: Eisenstein) -> bool =>

@@ -7,6 +7,10 @@ use Math = System.Math
 use Point = (x: double, y: double)
 use Pentagon = (x: double, y: double, radius: double)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let golden = (1.0D + sqrt(5.0D)) / 2.0D
 let shrink = 1.0D / (1.0D + golden)
 

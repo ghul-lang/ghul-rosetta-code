@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 shell_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     let gap mut = values.count / 2
 

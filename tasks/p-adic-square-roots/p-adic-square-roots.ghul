@@ -1,5 +1,9 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 floor_div(a: bigint, b: bigint) -> bigint =>
     let q = a / b in
     if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then

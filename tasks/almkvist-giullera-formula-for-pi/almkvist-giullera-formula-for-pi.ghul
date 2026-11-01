@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
 
 integer_term(n: int) -> bigint =>

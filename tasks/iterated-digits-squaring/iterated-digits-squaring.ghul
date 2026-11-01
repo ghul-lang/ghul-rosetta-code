@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 digit_square_sum(value: int) -> int =>
     value |> digits() |> map(d => d * d) |> sum()
 

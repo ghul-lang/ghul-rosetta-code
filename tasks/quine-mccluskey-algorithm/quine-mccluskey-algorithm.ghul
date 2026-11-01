@@ -2,6 +2,10 @@ use default
 
 use Implicant = (bits: int, dashes: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 ones(value: int) -> int => value |> digits(2) |> sum()
 
 covers(implicant: Implicant, minterm: int) -> bool =>

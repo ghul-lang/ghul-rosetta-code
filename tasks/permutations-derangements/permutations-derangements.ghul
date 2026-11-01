@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 extend(prefix: LIST[int], size: int) -> int[]{} is
     if prefix.count == size then
         yield prefix

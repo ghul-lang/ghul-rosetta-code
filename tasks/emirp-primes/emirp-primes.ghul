@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 reverse(n: int) -> int is
     walk(m: int, r: int) -> int =>
         if m == 0 then r else walk(m / 10, r * 10 + m % 10) fi

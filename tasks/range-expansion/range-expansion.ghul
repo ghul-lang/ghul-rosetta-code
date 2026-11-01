@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 expand(part: string) -> int{} is
     let split_at =
         (1..part.length)

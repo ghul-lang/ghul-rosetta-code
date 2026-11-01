@@ -2,6 +2,10 @@ use default
 
 use POSITION = (x: int, y: int)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 spiral() -> POSITION{} is
     let x mut = 0
     let y mut = 0

@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 // Coefficients are given from the highest power down, a0 first. Each
 // row of the Jury array is b[i] = a0 * a[i] - an * a[n - i] over the
 // row before, and the polynomial is stable when every row's first entry

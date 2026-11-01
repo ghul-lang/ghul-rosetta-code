@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 power_of_three(exponent: int) -> int =>
     if exponent == 0 then
         1

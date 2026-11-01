@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let queue = Queue()
 
 report_empty(pending: Queue[string]) =>

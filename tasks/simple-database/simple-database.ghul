@@ -3,6 +3,10 @@ use System.DateTime
 use System.Environment
 use System.Environment_SpecialFolder.USER_PROFILE
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 class ENTRY(date: DateTime, category: string, description: string) is
     line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"
 

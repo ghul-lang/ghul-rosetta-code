@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 erdos_nicolas(limit: int) -> (value: int, k: int){} is
     let running_sum = LIST(limit + 1)
     let divisors_used = LIST(limit + 1)

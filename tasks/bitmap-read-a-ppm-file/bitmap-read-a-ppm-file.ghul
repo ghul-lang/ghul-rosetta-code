@@ -2,6 +2,10 @@ use default
 
 use COLOUR = (red: ubyte, green: ubyte, blue: ubyte)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `=~` compares values (structural equality); `==` compares identity.
+
 class BITMAP is
     width: int
     height: int

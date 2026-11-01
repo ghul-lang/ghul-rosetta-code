@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 struct BT(digits: int{}) is
     to_string() -> string =>
         digits |> reverse() |> map(d => "-0+"[d + 1]) |> string()

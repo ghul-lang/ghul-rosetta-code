@@ -1,6 +1,9 @@
 use default
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+
 let target = "METHINKS IT IS LIKE A WEASEL"
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 let c = 100

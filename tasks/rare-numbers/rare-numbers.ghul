@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let square_endings = [0, 1, 4, 5, 6, 9]
 
 reverse_of(n: long) -> long is

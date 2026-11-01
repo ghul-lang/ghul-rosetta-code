@@ -4,6 +4,10 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Thread
 
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let port = 8080
 
 serve(client: TcpClient) is

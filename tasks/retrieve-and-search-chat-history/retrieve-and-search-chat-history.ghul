@@ -2,6 +2,8 @@ use default
 use System.DateTime
 use System.Net.Http.HttpClient
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // The task: fetch the last ten days of the Tcl chatroom's logs and print
 // the lines that mention a string, under the address of the log each came
 // from. The logs are named for the day in the server's own time zone, so

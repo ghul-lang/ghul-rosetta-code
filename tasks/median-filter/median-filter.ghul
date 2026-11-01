@@ -4,6 +4,9 @@ use System.Math
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is

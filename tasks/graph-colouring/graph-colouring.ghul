@@ -4,6 +4,10 @@ use Raster.IMAGE
 
 use Edge = (from: int, to: int)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 class GRAPH(nodes: int[], edges: Edge[]) is
     _neighbours: Map[int, SET[int]]
 

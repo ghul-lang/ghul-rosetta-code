@@ -1,6 +1,9 @@
 use default
 use System.Math.log10
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 let leading_counts = 1::10 |> map(_ => 0) |> LIST()
 
 let previous mut = 0n

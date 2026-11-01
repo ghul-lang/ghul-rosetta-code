@@ -1,5 +1,8 @@
 use default
 
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `=~` compares values (structural equality); `==` compares identity.
+
 write_line("Enter an expression:")
 
 let source = IO.Std.read_line() ?? ""

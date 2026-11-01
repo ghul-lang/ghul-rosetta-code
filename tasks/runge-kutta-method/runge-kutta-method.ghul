@@ -2,6 +2,8 @@ use default
 
 use Math = System.Math
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 rk4(f: (double, double) -> double, dt: double) -> ((double, double)) -> (
     double,
     double

@@ -2,6 +2,10 @@ use default
 use Raster.IMAGE
 use System.Math
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 struct P(x: double, y: double) is
     -(o: P) -> P => P(x - o.x, y - o.y)
     ×(o: P) -> double => x * o.y - y * o.x

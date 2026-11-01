@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use System.Random
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let random = Random(11)
 
 toss() -> char => if random.next(2) == 0 then 'H' else 'T' fi

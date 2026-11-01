@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 digit_of(letter: char) -> int => int(letter) - int('0')
 
 self_describing(value: int) -> bool =>

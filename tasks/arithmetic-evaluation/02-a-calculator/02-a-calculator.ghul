@@ -2,6 +2,10 @@ use default
 use IO.Std.read_line
 use IO.Std.write
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 union Expression is
     NUMBER(value: int)
     ADD(left: Expression, right: Expression)

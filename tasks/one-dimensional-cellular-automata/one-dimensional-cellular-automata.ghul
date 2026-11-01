@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 alive(cells: string, index: int) -> bool =>
     index >= 0 /\ index < cells.length /\ cells[index] == '#'
 

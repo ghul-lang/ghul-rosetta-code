@@ -1,5 +1,8 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 abundant_odd(start: long) -> long{} =>
     from(start, 2L) |> filter(n => divisor_sum(n) > 2L * n)
 

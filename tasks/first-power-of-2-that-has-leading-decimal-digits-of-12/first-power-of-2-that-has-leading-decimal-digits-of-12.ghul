@@ -2,6 +2,8 @@ use default
 use System.Math.floor
 use System.Math.log10
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let log_two = log10(2.0D)
 
 p(leading: int, nth: int) -> int =>

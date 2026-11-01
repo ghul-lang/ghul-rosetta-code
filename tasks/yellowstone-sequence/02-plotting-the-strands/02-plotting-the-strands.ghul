@@ -2,6 +2,10 @@ use default
 use Raster.AXES
 use Raster.IMAGE
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 yellowstone(count: int) -> int[] is
     let terms = LIST([1, 2, 3])
     let used = SET([1, 2, 3])

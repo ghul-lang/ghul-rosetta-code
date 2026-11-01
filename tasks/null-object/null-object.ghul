@@ -1,5 +1,7 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 is_null(text: string?) -> bool => !text?
 
 is_null(number: int?) -> bool => !number?

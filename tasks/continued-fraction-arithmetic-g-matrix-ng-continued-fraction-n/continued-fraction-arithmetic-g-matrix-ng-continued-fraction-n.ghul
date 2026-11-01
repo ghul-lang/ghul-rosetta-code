@@ -2,6 +2,10 @@ use default
 
 use Matrix = (a1: long, a: long, b1: long, b: long)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 r2cf(numerator: long, denominator: long) -> long{} is
     let n1 mut = numerator
     let n2 mut = denominator

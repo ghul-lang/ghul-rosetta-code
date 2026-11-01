@@ -1,6 +1,8 @@
 use default
 use IO.File
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let plain_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
 

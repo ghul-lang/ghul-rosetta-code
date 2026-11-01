@@ -3,6 +3,10 @@ use System.Math.*
 
 use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 -(u: Row, v: Row) -> Row => (
     u.p12 - v.p12,
     u.p1 - v.p1,

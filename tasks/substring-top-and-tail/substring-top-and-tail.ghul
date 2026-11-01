@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 for subject in ["knights", "𝔨𝔫𝔦𝔤𝔥𝔱𝔰"] do
     let characters = subject |> graphemes() |> list()
 

@@ -2,6 +2,9 @@ use default
 
 use Point = (x: double, y: double)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 -(a: Point, b: Point) -> Point => (a.x - b.x, a.y - b.y)
 
 ×(a: Point, b: Point) -> double => a.x * b.y - a.y * b.x

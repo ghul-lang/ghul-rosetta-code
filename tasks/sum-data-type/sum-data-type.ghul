@@ -1,5 +1,8 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 union Shape is
     CIRCLE(radius: double)
     RECTANGLE(width: double, height: double)

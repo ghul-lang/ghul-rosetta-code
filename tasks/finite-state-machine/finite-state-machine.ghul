@@ -1,6 +1,8 @@
 use default
 use IO.Std.read_line
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 enum State is
     READY,
     WAITING,

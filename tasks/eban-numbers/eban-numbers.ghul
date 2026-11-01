@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 eban_group(group: int) -> bool => (
     let (tens, units) = (group / 10, group % 10)
     let eban_units = units == 0 \/ units == 2 \/ units == 4 \/ units == 6

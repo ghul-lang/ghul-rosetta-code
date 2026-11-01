@@ -4,6 +4,9 @@ use System.Math.log
 use System.Math.pi
 use System.Math.sqrt
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let mean = 1.0
 let deviation = 0.5
 

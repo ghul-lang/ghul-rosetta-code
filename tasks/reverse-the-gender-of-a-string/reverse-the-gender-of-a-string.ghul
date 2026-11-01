@@ -1,6 +1,8 @@
 use default
 use System.Text.RegularExpressions.Regex
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let swaps = MAP(
     [
         ("she", "he"), ("he", "she"),

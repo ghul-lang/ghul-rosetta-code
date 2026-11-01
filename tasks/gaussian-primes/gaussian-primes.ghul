@@ -3,6 +3,9 @@ use System.Math.*
 use Raster.IMAGE
 use Raster.AXES
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_gaussian_prime(a: int, b: int) -> bool =>
     case (a, b)
     when (0, 0) then false

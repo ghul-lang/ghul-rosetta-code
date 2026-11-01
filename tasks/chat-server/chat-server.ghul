@@ -7,6 +7,10 @@ use System.Net.Sockets.TcpListener
 use System.Threading.Monitor
 use System.Threading.Thread
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+// `*` as an argument leaves that parameter open: partial application.
+
 let port = 12345
 
 class MEMBER(nickname: string, writer: StreamWriter)

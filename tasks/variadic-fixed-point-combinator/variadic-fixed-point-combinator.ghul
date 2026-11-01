@@ -4,6 +4,9 @@ use default
 use Sequence = (int) -> int
 use Maker = (Sequence[]) -> Sequence
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 class SELF_APPLY(_f: (SELF_APPLY) -> Sequence[]) is
     apply(r: SELF_APPLY) -> Sequence[] => _f(r)
 si

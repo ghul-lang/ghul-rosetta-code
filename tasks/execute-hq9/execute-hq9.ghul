@@ -1,6 +1,9 @@
 use default
 use IO.Std.read_line
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 bottles(n: int) -> string =>
     case n
     when 0 then "no more bottles"

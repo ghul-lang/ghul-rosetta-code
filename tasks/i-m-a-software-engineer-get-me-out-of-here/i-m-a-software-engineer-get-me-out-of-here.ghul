@@ -2,6 +2,10 @@ use default
 
 use Cell = (row: int, column: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 let country = [
     "         00000         ",
     "      00003130000      ",

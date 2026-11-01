@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 // Nodes are numbered from 1, and node 0 stands above the root. The
 // preprocessing follows Knuth's presentation of the algorithm: pi is a
 // node's preorder number, beta the number with the most trailing zeros

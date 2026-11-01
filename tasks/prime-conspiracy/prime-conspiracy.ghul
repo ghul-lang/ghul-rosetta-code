@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let count = 1_000_000
 let last_digits = primes() |> take(count) |> map(* % 10) |> list()
 

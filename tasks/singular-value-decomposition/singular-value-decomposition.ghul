@@ -2,6 +2,10 @@ use default
 
 use Matrix = List[LIST[double]]
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 zeros(rows: int, columns: int) -> Matrix =>
     (0..rows) |> map(_ => repeat(0.0, columns) |> LIST()) |> list()
 

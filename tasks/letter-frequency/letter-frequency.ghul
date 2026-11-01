@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let text =
     "Now is the time for all good men to come to the aid of their country"
 

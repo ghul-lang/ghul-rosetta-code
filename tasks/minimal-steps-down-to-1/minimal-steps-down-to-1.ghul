@@ -3,6 +3,10 @@ use default
 use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+
 moves(value: int, divisors: int[], subtractors: int[]) -> MOVE{} is
     for divisor in divisors do
         if value % divisor == 0 then

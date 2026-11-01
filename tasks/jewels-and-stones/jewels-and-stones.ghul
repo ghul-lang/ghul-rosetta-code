@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 count_jewels(stones: string, jewels: string) -> int =>
     stones |> filter(stone => jewels.contains(stone)) |> count()
 

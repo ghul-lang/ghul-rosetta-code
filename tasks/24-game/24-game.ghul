@@ -1,6 +1,10 @@
 use IO.Std
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 union Parsed is
     OK(value: double, at: int) default
     BAD(complaint: string)

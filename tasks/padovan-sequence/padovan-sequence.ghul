@@ -1,6 +1,10 @@
 use default
 use System.Math.*
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `yield` makes the function a generator: it returns a lazy `T{}`.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 padovan() -> int{} is
     let window mut = (1, 1, 1)
 

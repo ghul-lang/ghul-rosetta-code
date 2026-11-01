@@ -3,6 +3,8 @@ use default
 use ROW = (power_of_2: int, doubling: int)
 use SUMS = (answer: int, accumulator: int)
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
     let table =
         stream(

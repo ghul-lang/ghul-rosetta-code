@@ -2,6 +2,8 @@ use default
 use IO.Std.write
 use Ghul.Coroutines
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+
 @suppress("non-pascal-case-name")
 class OUT_OF_INK: System.Exception is
     init() is

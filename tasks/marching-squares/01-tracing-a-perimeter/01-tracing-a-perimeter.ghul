@@ -1,5 +1,8 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+
 union Step(across: int, down: int, name: string) is
     NORTH
     EAST

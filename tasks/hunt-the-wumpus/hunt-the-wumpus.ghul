@@ -1,6 +1,10 @@
 use IO.Std
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 // The rooms of a dodecahedron: twenty of them, each
 // joined to three others.
 let caves = [

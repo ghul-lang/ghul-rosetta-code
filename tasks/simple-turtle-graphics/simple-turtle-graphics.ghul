@@ -1,6 +1,9 @@
 use default
 use Raster
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let image = IMAGE(640, 360)
 
 let pen = TURTLE(image)

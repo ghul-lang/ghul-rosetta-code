@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let n = 13
 
 let sorted = (1::n) |> map(i => "{i}") |> sort() |> map(int.parse)

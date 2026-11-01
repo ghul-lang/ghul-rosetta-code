@@ -1,5 +1,9 @@
 use default
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 extended_gcd(a: long, b: long) -> (g: long, x: long, y: long) =>
     if b == 0L then
         (g = a, x = 1L, y = 0L)

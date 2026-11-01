@@ -1,6 +1,8 @@
 use default
 use System.Text.Json.JsonSerializer
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 class ENTRY(
     name: string public,
     legs: int public,

@@ -1,6 +1,8 @@
 use default
 use System.Random
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 knuth_shuffle(items: LIST[int], random: Random) is
     let i mut = items.count - 1
 

@@ -3,6 +3,10 @@ use System.Net.Http.HttpClient
 use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
 
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 // The task: list the tasks a language has not solved. That is every member
 // of Category:Programming Tasks that is not also in the language's own
 // category. The API returns a category's members a batch at a time, and

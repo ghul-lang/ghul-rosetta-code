@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 sum_of_multiples(below: long) -> long =>
     (1L..below) |> filter(n => n % 3L == 0L \/ n % 5L == 0L) |> sum()
 

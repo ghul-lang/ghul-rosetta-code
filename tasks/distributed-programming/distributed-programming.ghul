@@ -9,6 +9,10 @@ use System.Text.Json.JsonElement
 use System.Text.Json.JsonSerializer
 use System.Text.Json.JsonSerializerOptions
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `~>` skips the call if its left value is absent; `??` gives a fallback.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 // The two sides speak JSON-RPC 2.0 over HTTP. Run one copy as
 // `serve http://+:8080/` and another with that address to call it.
 

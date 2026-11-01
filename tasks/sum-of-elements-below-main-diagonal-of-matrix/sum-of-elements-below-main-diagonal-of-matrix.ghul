@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 let matrix = [
     [1, 3, 7, 8, 10],
     [2, 4, 16, 14, 4],

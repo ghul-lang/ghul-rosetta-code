@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 swap[T](values: LIST[T], i: int, j: int) is
     (values[i], values[j]) = (values[j], values[i])
 si

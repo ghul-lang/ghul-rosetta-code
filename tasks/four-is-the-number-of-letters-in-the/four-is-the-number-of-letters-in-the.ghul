@@ -1,5 +1,9 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `=~` compares values (structural equality); `==` compares identity.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 write_line("spelling out the sequence, which takes a moment")
 write_line("")
 

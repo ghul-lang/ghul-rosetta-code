@@ -3,6 +3,10 @@ use Raster.IMAGE
 
 use Tier = (half_width: double, top: double)
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 let tiers: Tier[] = [
     (half_width = 60.0D, top = 30.0D),
     (half_width = 52.0D, top = 60.0D),

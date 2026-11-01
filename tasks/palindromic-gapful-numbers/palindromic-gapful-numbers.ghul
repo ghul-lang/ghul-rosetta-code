@@ -1,5 +1,9 @@
 use default
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `*` as an argument leaves that parameter open: partial application.
+
 // palindromes that start and end with the digit, in increasing order: each
 // length's first half runs upward from the digit, and the second half
 // mirrors it

@@ -13,6 +13,10 @@ use Body = (
     colour: Colour
 )
 
+// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 let size = 160
 let years = 8.0D
 let shown = 2.2D

@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 let found = from(1) |> find(n => n * n - (n - 1) * (n - 1) > 1000)
 
 if let n = found then

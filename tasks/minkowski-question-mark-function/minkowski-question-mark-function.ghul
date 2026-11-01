@@ -5,6 +5,10 @@ use Raster.IMAGE
 use System.Math.floor
 use System.Math.sqrt
 
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 question(x: double) -> double is
     let whole = floor(x)
 

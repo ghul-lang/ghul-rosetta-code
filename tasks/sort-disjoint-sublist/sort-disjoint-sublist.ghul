@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `list()` makes a lazy `T[]`: elements are produced once, on first access.
+
 sort_disjoint_sublist(values: LIST[int], indices: Set[int]) is
     let positions = indices |> sort() |> list()
     let picked = positions |> map(i => values[i]) |> sort() |> list()

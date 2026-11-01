@@ -1,5 +1,9 @@
 use default
 
+// `=~` compares values (structural equality); `==` compares identity.
+// `T{}` is a lazy sequence of `T`, read by iterating it.
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 is_curzon(base: int, n: int) -> bool =>
     let
         divisor = bigint(base * n + 1),

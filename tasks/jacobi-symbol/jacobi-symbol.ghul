@@ -1,5 +1,7 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+
 jacobi(a: int, n: int) -> int is
     assert n > 0 /\ n % 2 == 1 else "n must be positive and odd"
 

@@ -1,5 +1,8 @@
 use default
 
+// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
+// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
+
 descending(so_far: int, next_digit: int, found: LIST[int]) is
     if so_far > 0 /\ is_prime(so_far) then
         found.add(so_far)

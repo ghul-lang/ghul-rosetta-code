@@ -1,5 +1,7 @@
 use default
 
+// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
+
 for i in 1::100 do
     write_line(
         case (i % 3, i % 5)
