@@ -1,6 +1,6 @@
 use default
 
-// `SET()` builds its collection eagerly
+// `SET[T]` is a mutable set, holding each element once
 // `==` compares identity
 // `if let` and `case ... when` pattern-match
 

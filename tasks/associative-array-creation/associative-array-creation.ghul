@@ -1,6 +1,6 @@
 use default
 
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
 
 let ages = MAP()
 

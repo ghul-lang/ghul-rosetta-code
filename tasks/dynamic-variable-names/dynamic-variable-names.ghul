@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
 
 let variables = MAP()
 

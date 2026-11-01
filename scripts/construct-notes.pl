@@ -24,16 +24,25 @@ my @CONSTRUCTS = (
       note => '`T{}` is the lazy sequence trait - elements are read on demand and in order from its source' },
     { name => 'list', patterns => [qr/[A-Za-z_\]\)\?]\[\]/],
       note => '`T[]` is the read-only list trait - elements can be read by index' },
+    { name => 'LIST', patterns => [qr/\bLIST\b/],
+      note => '`LIST[T]` is a mutable list that grows as elements are added' },
+    { name => 'SET', patterns => [qr/\bSET\b/],
+      note => '`SET[T]` is a mutable set, holding each element once' },
+    { name => 'MAP', patterns => [qr/\bMAP\b/],
+      note => '`MAP[K, V]` is a mutable map from keys to values' },
+    { name => 'ARRAY', patterns => [qr/\bARRAY\b/],
+      note => '`ARRAY[T]` is a fixed-size, read-only array' },
     { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
       note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read' },
-    { name => 'constructors', patterns => [map { my $n = $_; qr/\b$n\b\s*(?:\[[^\]]*\])?\s*\(/ } qw(LIST SET MAP ARRAY)],
+    { name => 'pipe-constructors', patterns => [map { my $n = $_; qr/\|>\s*$n\b\s*(?:\[[^\]]*\])?\s*\(/ } qw(LIST SET MAP ARRAY)],
       note => sub {
-          my ($hit, $first) = @_;
-          my @present = sort { $first->[$a] <=> $first->[$b] } grep { $hit->[$_] } 0 .. 3;
-          return undef unless @present;
-          my @names = map { '`' . (qw(LIST SET MAP ARRAY))[$_] . '()`' } @present;
-          my $list = @names == 1 ? $names[0] : join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
-          return $list . (@names == 1 ? ' builds its collection eagerly' : ' build their collections eagerly');
+          my ($hit) = @_;
+          my @names = map { '`|> ' . (qw(LIST SET MAP ARRAY))[$_] . '()`' } grep { $hit->[$_] } 0 .. 3;
+          return undef unless @names;
+          return "$names[0] reads the whole sequence into a new `" . (qw(LIST SET MAP ARRAY))[(grep { $hit->[$_] } 0 .. 3)[0]] . '`'
+              if @names == 1;
+          my $list = join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
+          return "$list read the whole sequence into new collections";
       } },
     { name => 'yield', patterns => [qr/\byield\b/],
       note => '`yield` in a function makes it a generator, returning a lazy `T{}` sequence' },

@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
 // `==` compares identity
 
 let columns = 24

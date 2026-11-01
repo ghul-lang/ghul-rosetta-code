@@ -1,6 +1,7 @@
 use default
 
-// `ARRAY()` builds its collection eagerly
+// `ARRAY[T]` is a fixed-size, read-only array
+// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 random_32_bits() -> uint is

@@ -1,7 +1,7 @@
 use default
 
 // `T[]` is the read-only list trait - elements can be read by index
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
 // `==` compares identity
 
 // The top row holds the eight most frequent letters, leaving two blank

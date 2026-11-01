@@ -2,7 +2,9 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `LIST()` and `MAP()` build their collections eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
+// `MAP[K, V]` is a mutable map from keys to values
+// `|> MAP()` reads the whole sequence into a new `MAP`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality) - `==` compares identity
 

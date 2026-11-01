@@ -1,7 +1,7 @@
 use default
 use System.InvalidOperationException
 
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
 // `==` compares identity
 
 class QUEUE[T] is

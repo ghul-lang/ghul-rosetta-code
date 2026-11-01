@@ -2,7 +2,7 @@ use default
 use IO.Std.read_line
 use System.Text.RegularExpressions.Regex
 
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 write_line("Enter a story with <blanks>, ending with an empty line:")

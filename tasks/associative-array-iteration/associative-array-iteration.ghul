@@ -1,6 +1,7 @@
 use default
 
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
+// `|> MAP()` reads the whole sequence into a new `MAP`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let capitals = [

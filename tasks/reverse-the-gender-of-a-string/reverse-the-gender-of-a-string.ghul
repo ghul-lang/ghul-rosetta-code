@@ -1,7 +1,7 @@
 use default
 use System.Text.RegularExpressions.Regex
 
-// `MAP()` builds its collection eagerly
+// `MAP[K, V]` is a mutable map from keys to values
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 let swaps = MAP(

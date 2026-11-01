@@ -2,7 +2,7 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
 // `==` compares identity
 // `case ... when` pattern-matches
 

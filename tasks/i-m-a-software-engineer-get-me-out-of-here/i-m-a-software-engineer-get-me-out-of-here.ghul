@@ -5,10 +5,12 @@ use Cell = (row: int, column: int)
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
+// `LIST[T]` is a mutable list that grows as elements are added
+// `MAP[K, V]` is a mutable map from keys to values
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read
-// `MAP()` and `LIST()` build their collections eagerly
+// `|> LIST()` and `|> MAP()` read the whole sequence into new collections
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 

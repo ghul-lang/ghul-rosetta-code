@@ -1,7 +1,8 @@
 use default
 use System.Diagnostics.Stopwatch
 
-// `LIST()` builds its collection eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
+// `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 // Process time rather than wall-clock time, so another program running at

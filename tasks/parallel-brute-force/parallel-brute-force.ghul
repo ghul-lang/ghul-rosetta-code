@@ -4,7 +4,9 @@ use System.Security.Cryptography.SHA256
 use Tasks.Parallel
 use System.Collections.Concurrent.ConcurrentDictionary
 
-// `ARRAY()` and `LIST()` build their collections eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
+// `ARRAY[T]` is a fixed-size, read-only array
+// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality)
 

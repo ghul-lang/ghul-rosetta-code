@@ -4,7 +4,8 @@ use EDGE = (start: string, finish: string, cost: int)
 use REACHED = (cost: int, previous: string)
 
 // `T[]` is the read-only list trait - elements can be read by index
-// `MAP()` and `LIST()` build their collections eagerly
+// `LIST[T]` is a mutable list that grows as elements are added
+// `MAP[K, V]` is a mutable map from keys to values
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality) - `==` compares identity
 
