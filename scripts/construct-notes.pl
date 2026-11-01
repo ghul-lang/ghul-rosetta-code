@@ -17,24 +17,27 @@ use strict; use warnings;
 my $WIDTH = 76;
 
 # Each construct: a name, the patterns that detect it (on every line that is
-# not a whole-line comment), and the note - text, or a sub that builds the
+# not a whole-line comment), the note, and for a library type its name, so
+# that a solution declaring a type of that name itself gets no note for it - text, or a sub that builds the
 # text from which of the patterns matched.
 my @CONSTRUCTS = (
     { name => 'sequence', patterns => [qr/[A-Za-z_\]\)]\{\}/],
       note => '`T{}` is the lazy sequence trait - elements are read on demand and in order from its source' },
     { name => 'list', patterns => [qr/[A-Za-z_\]\)\?]\[\]/],
       note => '`T[]` is the read-only list trait - elements can be read by index' },
-    { name => 'LIST', patterns => [qr/\bLIST\b/],
+    { name => 'LIST', type => 'LIST', patterns => [qr/\bLIST\b/],
       note => '`LIST[T]` is a mutable list that grows as elements are added' },
-    { name => 'SET', patterns => [qr/\bSET\b/],
+    { name => 'SET', type => 'SET', patterns => [qr/\bSET\b/],
       note => '`SET[T]` is a mutable set, holding each element once' },
-    { name => 'MAP', patterns => [qr/\bMAP\b/],
+    { name => 'MAP', type => 'MAP', patterns => [qr/\bMAP\b/],
       note => '`MAP[K, V]` is a mutable map from keys to values' },
-    { name => 'STACK', patterns => [qr/\bSTACK\b/],
+    { name => 'STACK', type => 'STACK', patterns => [qr/\bSTACK\b/],
       note => '`STACK[T]` is a mutable last-in, first-out stack' },
-    { name => 'QUEUE', patterns => [qr/\bQUEUE\b/],
+    { name => 'QUEUE', type => 'QUEUE', patterns => [qr/\bQUEUE\b/],
       note => '`QUEUE[T]` is a mutable first-in, first-out queue' },
-    { name => 'ARRAY', patterns => [qr/\bARRAY\b/],
+    { name => 'LINKED_LIST', type => 'LINKED_LIST', patterns => [qr/\bLINKED_LIST\b/],
+      note => '`LINKED_LIST[T]` is a mutable doubly linked list' },
+    { name => 'ARRAY', type => 'ARRAY', patterns => [qr/\bARRAY\b/],
       note => '`ARRAY[T]` is a fixed-size, read-only array' },
     { name => 'list()', patterns => [qr/(?:\|>\s*|^\s*)list\(\)/],
       note => '`list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read' },
@@ -142,8 +145,13 @@ sub wanted_notes {
             }
         }
     }
+    # A type the solution declares itself is its own, not the library one a
+    # type note describes.
+    my %declared = map { /^\s*(?:class|struct|union|trait|enum)\s+([A-Za-z_][A-Za-z0-9_]*)/ ? ($1 => 1) : () } @$lines;
+
     my @notes;
     for my $c (0 .. $#CONSTRUCTS) {
+        next if defined $CONSTRUCTS[$c]{type} && $declared{$CONSTRUCTS[$c]{type}};
         my $patterns = $CONSTRUCTS[$c]{patterns};
         my @hit = map { defined $first[$c][$_] ? 1 : 0 } 0 .. $#$patterns;
         next unless grep { $_ } @hit;

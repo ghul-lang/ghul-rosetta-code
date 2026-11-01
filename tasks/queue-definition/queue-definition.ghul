@@ -2,7 +2,6 @@ use default
 use System.InvalidOperationException
 
 // `LIST[T]` is a mutable list that grows as elements are added
-// `QUEUE[T]` is a mutable first-in, first-out queue
 // `==` compares identity
 
 class QUEUE[T] is

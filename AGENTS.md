@@ -679,8 +679,9 @@ functions is a lean, not a rule; see "Lean towards functions" above.
 
 Every solution carries its **construct notes**: a comment block after the
 `use` lines with a note for each ghūl construct in the source that a reader
-from another language may not know (`T{}`, `T[]`, the `LIST`, `SET`, `MAP` and
-`ARRAY` types, `list()`, a collection constructor ending a pipe, `yield`, `|>`, `~>`, `*` as an argument, `=~` and `==`, pattern
+from another language may not know (`T{}`, `T[]`, the `LIST`, `SET`, `MAP`, `STACK`,
+`QUEUE`, `LINKED_LIST` and `ARRAY` types (not where the solution declares a type
+of that name itself), `list()`, a collection constructor ending a pipe, `yield`, `|>`, `~>`, `*` as an argument, `=~` and `==`, pattern
 matching, `memo`), every one that appears, in that fixed order - a note comes
 after the ones whose terms it uses. They are not written by hand:
 `scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
