@@ -4,11 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [ main ]
-  merge_group:
 
-# There is no run on a push to main. The merge queue tests the pull request
-# merged with main and main is fast-forwarded to the commit it tested, so a
-# run afterwards tests that same tree a second time.
+# There is no run on a push to main: a pull request's run tests it merged
+# with main, and the merge is squashed onto what it tested. Two pull
+# requests that break each other show up as a red main on the next one.
 
 jobs:
   # What a pull request has to run. A change confined to task directories
@@ -40,8 +39,8 @@ jobs:
     - id: pick
       env:
         EVENT: ${{ github.event_name }}
-        BASE: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-        HEAD: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
+        BASE: ${{ github.event.pull_request.base.sha }}
+        HEAD: ${{ github.event.pull_request.head.sha }}
       run: |
         set -euo pipefail
 
