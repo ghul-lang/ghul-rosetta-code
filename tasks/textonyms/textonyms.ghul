@@ -6,10 +6,6 @@ use default
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 let keys = "22233344455566677778889999"
 
 digits(word: string) -> string? =>

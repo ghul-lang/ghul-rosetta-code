@@ -8,9 +8,6 @@ use System.Math.*
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 let cases = [
     27, 27, 27, 44, 44, 59, 59, 59, 59, 59, 59, 59, 59, 60, 60, 61, 61,
     66, 83, 219, 239, 392, 534, 631, 897, 1350, 2023, 2820, 4587, 6067,

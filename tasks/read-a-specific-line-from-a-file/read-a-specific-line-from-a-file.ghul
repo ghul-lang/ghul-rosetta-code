@@ -4,9 +4,6 @@ use default
 // `if let` pattern-matches
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 let scratch = IO.Path.combine(
     IO.Path.get_temp_path(),
     "rosetta-read-a-specific-line-from-a-file"

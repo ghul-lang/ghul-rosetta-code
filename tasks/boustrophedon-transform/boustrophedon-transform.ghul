@@ -5,10 +5,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-
 nth_prime(index: int) -> int => primes() |> skip(index) |> first()!
 
 fibonacci(index: int) -> bigint is

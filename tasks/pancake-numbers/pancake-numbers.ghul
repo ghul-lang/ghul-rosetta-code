@@ -3,8 +3,6 @@ use default
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 // Flipping is its own inverse, so the stacks furthest from sorted are the
 // ones a breadth-first search from the sorted stack reaches last.
 

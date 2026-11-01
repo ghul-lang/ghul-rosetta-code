@@ -9,10 +9,6 @@ use Score = (bulls: int, cows: int)
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `=~` compares values (structural equality); `==` compares identity.
-
 score(guess: string, secret: string) -> Score =>
     let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
     let shared = 0..4 |> filter(i => secret.contains(guess[i])) |> count()

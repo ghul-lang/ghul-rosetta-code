@@ -8,10 +8,6 @@ use System.Math.*
 // it read
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let size = 200
 let angles = 360
 

@@ -4,10 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `if let` pattern-matches
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 let sieve_limit = 10_000_000
 let composite = repeat(false, sieve_limit) |> LIST()
 

@@ -6,10 +6,6 @@ use System.DateTime
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-// `=~` compares values (structural equality); `==` compares identity.
-
 let republican_months = [
     "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
     "Germinal", "Floréal", "Prairial", "Messidor", "Thermidor", "Fructidor"

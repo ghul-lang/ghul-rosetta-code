@@ -5,10 +5,6 @@ use default
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `*` as an argument leaves that parameter open: partial application.
-
 // The divisors of n pair off into products of n, so their product is
 // n^(d/2) for d divisors, and the proper divisors multiply to n^(d/2 - 1).
 // That is n cubed exactly when n has eight divisors.

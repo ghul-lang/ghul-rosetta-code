@@ -6,10 +6,6 @@ use default
 // it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `*` as an argument leaves that parameter open: partial application.
-
 let search_limit = 1000000
 
 is_sphenic(n: int) -> bool =>

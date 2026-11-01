@@ -6,10 +6,6 @@ use System.Math.*
 // `=~` compares values (structural equality) - `==` compares identity
 // `if let` and `case ... when` pattern-match
 
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `=~` compares values (structural equality); `==` compares identity.
-
 let random = Random(12)
 
 class PET(name: string) is

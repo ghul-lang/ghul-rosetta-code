@@ -3,8 +3,6 @@ use default
 // `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 van_der_corput(n: int, base: int) -> double is
     walk(rest: int, weight: double) -> double =>
         if rest == 0 then 0.0

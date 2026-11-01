@@ -4,10 +4,6 @@ use default
 // `==` compares identity
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 align(a: string, b: string) -> (
     top: string,
     bottom: string,

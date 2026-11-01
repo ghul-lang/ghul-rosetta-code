@@ -6,9 +6,6 @@ use default
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 qualifies(n: int) -> bool =>
     let ds = digits(n) in
     ds |> all(d => d != 0 /\ n % d == 0) /\ n % (ds |> product()) != 0

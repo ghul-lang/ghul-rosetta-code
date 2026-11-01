@@ -9,10 +9,6 @@ use Parsed = (address: IPAddress, port: int?)
 // `a => f(a, b)`
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-
 after(text: string, index: int) -> string => text[index + 1..<0]
 
 bracketed(text: string) -> Parsed =>

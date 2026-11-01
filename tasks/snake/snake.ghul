@@ -6,10 +6,6 @@ use System.Random
 // `MAP()` builds a collection eagerly
 // `=~` compares values (structural equality) - `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `=~` compares values (structural equality); `==` compares identity.
-
 let width = 12
 let height = 8
 let random = Random(21)

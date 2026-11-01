@@ -5,9 +5,6 @@ use default
 // `a => f(a, b)`
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-
 let sequence = LIST([1, 1])
 let considered mut = 1
 

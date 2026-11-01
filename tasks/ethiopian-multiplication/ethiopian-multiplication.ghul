@@ -5,8 +5,6 @@ use ROW = (multiplier: int, total: int)
 // `==` compares identity
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 halve(value: int) -> int => value / 2
 
 double(value: int) -> int => value * 2

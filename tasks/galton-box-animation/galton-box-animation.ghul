@@ -6,9 +6,6 @@ use Raster.IMAGE
 // `LIST()` and `ARRAY()` build a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 class BALL is
     row: int public
     slot: int public

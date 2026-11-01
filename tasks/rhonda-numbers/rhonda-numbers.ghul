@@ -5,10 +5,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `*` as an argument leaves that parameter open: partial application.
-
 is_rhonda(value: int, base: int) -> bool =>
     value |> digits(base) |> product() ==
     base * (value |> prime_factors() |> sum())

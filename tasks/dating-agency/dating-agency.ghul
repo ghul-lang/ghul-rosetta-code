@@ -4,10 +4,6 @@ use default
 // `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 struct LADY(name: string) is
     is_nice: bool => name |> sum_by(int) % 2 == 0
 si

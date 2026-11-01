@@ -4,10 +4,6 @@ use default
 // `==` compares identity
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 write_line("partitioning divisor sets, which takes a moment")
 write_line("")
 

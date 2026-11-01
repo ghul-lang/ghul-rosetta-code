@@ -7,9 +7,6 @@ use Tasks.TASK
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 let numbers = [
     12757923L, 12878611L, 12878893L, 12757923L, 15808973L, 15780709L,
     197622519L

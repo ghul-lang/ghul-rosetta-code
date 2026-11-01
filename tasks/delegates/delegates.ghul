@@ -1,7 +1,5 @@
 use default
 
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
-
 trait Delegate is
     thing() -> string? => null
 si

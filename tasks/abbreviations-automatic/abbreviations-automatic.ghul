@@ -5,9 +5,6 @@ use System.StringSplitOptions
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `SET()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 shortest_unique(line: string) -> int? is
     let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 

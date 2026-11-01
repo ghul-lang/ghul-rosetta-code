@@ -7,10 +7,6 @@ use IO.Std.read_line
 // order from its source
 // `T[]` is the read-only list trait - elements can be read by index
 
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 let questions mut = 0
 
 ask(a: string, b: string) -> int is

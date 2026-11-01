@@ -4,9 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 struct FRACTION(numerator: long, denominator: long)
 
 fraction(numerator: long, denominator: long) -> FRACTION =>

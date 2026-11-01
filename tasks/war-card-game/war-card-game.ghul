@@ -4,9 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let ranks = [
     "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
     "A"

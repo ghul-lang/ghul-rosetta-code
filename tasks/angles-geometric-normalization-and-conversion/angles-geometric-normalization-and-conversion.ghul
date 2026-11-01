@@ -6,10 +6,6 @@ use default
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `=~` compares values (structural equality)
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `=~` compares values (structural equality); `==` compares identity.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 normalize(angle: double, turn: double) -> double =>
     angle - turn * System.Math.truncate(angle / turn) + 0.0
 

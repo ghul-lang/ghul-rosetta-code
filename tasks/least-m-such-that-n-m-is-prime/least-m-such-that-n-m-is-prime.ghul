@@ -5,9 +5,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 has_factor_up_to(m: int, n: int) -> bool => 2::n |> any(p => m % p == 0)
 
 least_m(n: int, factorial: bigint) -> int =>

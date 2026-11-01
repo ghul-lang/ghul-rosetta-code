@@ -6,10 +6,6 @@ use Entry = (word: string, value: long, root: long, distinct: int)
 // `T[]` is the read-only list trait - elements can be read by index
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
 

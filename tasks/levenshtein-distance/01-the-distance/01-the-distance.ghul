@@ -7,9 +7,6 @@ use System.Math.min
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 levenshtein(source: string, target: string) -> int is
     let previous mut = 0::target.length |> list()
 

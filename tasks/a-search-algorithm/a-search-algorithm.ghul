@@ -11,10 +11,6 @@ use Square = (row: int, column: int)
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-
 let size = 8
 let start = (row = 0, column = 0)
 let goal = (row = 7, column = 7)

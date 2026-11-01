@@ -10,9 +10,6 @@ use Eisenstein = (a: int, b: int)
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 norm(e: Eisenstein) -> int => e.a * e.a - e.a * e.b + e.b * e.b
 
 is_eisenstein_prime(e: Eisenstein) -> bool =>

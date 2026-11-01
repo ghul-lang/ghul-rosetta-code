@@ -4,10 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `T[]` is the read-only list trait - elements can be read by index
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-
 let edges = [
     [1], [2], [0], [1, 2, 4], [3, 5], [2, 6], [5], [4, 6, 7]
 ]

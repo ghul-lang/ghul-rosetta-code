@@ -6,10 +6,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 is_de_polignac(n: int) -> bool =>
     from(0)
         |> map(1 << *)

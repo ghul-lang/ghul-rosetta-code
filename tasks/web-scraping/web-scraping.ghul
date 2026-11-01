@@ -2,8 +2,6 @@ use default
 use System.Net.Http.HttpClient
 use System.Text.RegularExpressions.Regex
 
-// `~>` skips the call if its left value is absent; `??` gives a fallback.
-
 // The task: fetch a page and pull just the UTC time out of its HTML.
 utc_time(url: string) -> string? =>
     let

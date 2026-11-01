@@ -6,9 +6,6 @@ use System.Random
 // `MAP()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let jumps = [
     (4, 14), (9, 31), (17, 7), (20, 38), (28, 84), (40, 59),
     (51, 67), (54, 34), (62, 19), (63, 81), (64, 60), (71, 91),

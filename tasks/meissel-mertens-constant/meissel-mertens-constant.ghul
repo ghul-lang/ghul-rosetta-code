@@ -4,9 +4,6 @@ use default
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-
 // the terms fall off as 1/p², so stopping at ten million leaves an error
 // of about 3e-9
 

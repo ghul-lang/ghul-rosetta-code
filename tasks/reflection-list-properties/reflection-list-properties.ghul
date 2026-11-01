@@ -5,9 +5,6 @@ use System.Reflection.BindingFlags
 // `==` compares identity
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 class BOOK(title: string, pages: int) is
     borrowed: bool public
 

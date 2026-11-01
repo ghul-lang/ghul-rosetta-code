@@ -5,9 +5,6 @@ use System.Random
 // `==` compares identity
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let chance = Random(20260921)
 
 one_of_n(n: int) -> int =>

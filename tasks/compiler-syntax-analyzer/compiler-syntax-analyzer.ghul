@@ -6,10 +6,6 @@ use Kind.*
 // `if let` and `case ... when` pattern-match
 // `=~` compares values (structural equality)
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-// `=~` compares values (structural equality); `==` compares identity.
-
 enum Kind is
     LEFT_PAREN,
     RIGHT_PAREN,

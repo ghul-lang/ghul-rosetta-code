@@ -4,10 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `=~` compares values (structural equality)
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `=~` compares values (structural equality); `==` compares identity.
-
 let random = System.Random(6)
 
 class REVOLVER is

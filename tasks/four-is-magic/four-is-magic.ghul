@@ -5,10 +5,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `=~` compares values (structural equality); `==` compares identity.
-
 let small = [
     "zero", "one", "two", "three", "four", "five", "six", "seven",
     "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",

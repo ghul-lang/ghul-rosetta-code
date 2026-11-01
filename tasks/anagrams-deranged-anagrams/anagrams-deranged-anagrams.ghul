@@ -4,9 +4,6 @@ use default
 // `==` compares identity
 // `if let` pattern-matches
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 sorted_letters(word: string) -> string => string(word |> sort())
 
 is_deranged(first: string, second: string) -> bool =>

@@ -7,10 +7,6 @@ use Square = List[LIST[int]]
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-
 fits(square: Square, row: int, column: int, value: int) -> bool =>
     0..square.count
         |> all(k => square[row][k] != value /\ square[k][column] != value)

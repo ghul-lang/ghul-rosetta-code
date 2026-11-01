@@ -4,9 +4,6 @@ use default
 // `==` compares identity
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 trait Clock is
     now: System.DateTime
     wait_until(time: System.DateTime)

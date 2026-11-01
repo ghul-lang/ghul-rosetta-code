@@ -8,10 +8,6 @@ use Item = (name: string, weight: int, value: int, pieces: int)
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `LIST()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let items = [
     (name = "map", weight = 9, value = 150, pieces = 1),
     (name = "compass", weight = 13, value = 35, pieces = 1),

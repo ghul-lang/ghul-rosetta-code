@@ -4,10 +4,6 @@ use default
 // `LIST()` and `SET()` build a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-
 de_bruijn(k: int, n: int) -> string is
     let a = repeat(0, k * n) |> LIST()
     let digits = LIST()

@@ -7,10 +7,6 @@ use default
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 balanced(text: string) -> bool =>
     let counts =
         "abc" |> map(letter => text |> count(* == letter)) |> list()

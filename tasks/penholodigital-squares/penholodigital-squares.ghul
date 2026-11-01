@@ -6,10 +6,6 @@ use default
 // it read
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let symbols = "0123456789ABCDEF"
 
 in_base(n: long, base: int) -> string =>

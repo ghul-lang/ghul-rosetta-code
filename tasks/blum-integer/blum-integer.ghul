@@ -4,10 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 let limit = 8_900_000
 let smallest_factor = repeat(0, limit + 1) |> LIST()
 

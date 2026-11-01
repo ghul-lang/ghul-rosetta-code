@@ -4,9 +4,6 @@ use default
 // `==` compares identity
 // `if let` pattern-matches
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 first_different(text: string) -> int? =>
     1..text.length |> find(i => text[i] != text[0])
 

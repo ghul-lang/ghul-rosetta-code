@@ -7,10 +7,6 @@ use System.StringSplitOptions
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-// `*` as an argument leaves that parameter open: partial application.
-
 let bars = "▁▂▃▄▅▆▇█"
 
 let separators = [' ', ',', '\t']

@@ -7,10 +7,6 @@ use Square = (row: int, column: int)
 // `==` compares identity
 // `T[]` is the read-only list trait - elements can be read by index
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 let board = [
     "  0 0 0",
     "  0   0 0",

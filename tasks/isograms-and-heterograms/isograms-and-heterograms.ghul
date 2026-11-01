@@ -4,9 +4,6 @@ use default
 // `SET()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 isogram_order(word: string) -> int =>
     let counts =
         word

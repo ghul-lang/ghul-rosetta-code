@@ -7,10 +7,6 @@ use System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
 // `=~` compares values (structural equality) - `==` compares identity
 // `MAP()` builds a collection eagerly
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `T[]` is a read-only list: an array, a `LIST` or a lazy list all fit.
-
 let random = Random(9)
 
 let mills = [

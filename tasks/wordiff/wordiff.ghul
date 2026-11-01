@@ -5,10 +5,6 @@ use IO.Std.read_line
 // `=~` compares values (structural equality) - `==` compares identity
 // `if let` pattern-matches
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `=~` compares values (structural equality); `==` compares identity.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 let dictionary =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(w => w.length >= 3 /\ w |> all(c => c >= 'a' /\ c <= 'z'))

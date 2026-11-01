@@ -4,9 +4,6 @@ use default
 // `*` as an argument is partial application - `f(*, b)` means
 // `a => f(a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `*` as an argument leaves that parameter open: partial application.
-
 let numbers = [1, 2, 3, 4, 5]
 
 let largest = (left, right) => if left > right then left else right fi

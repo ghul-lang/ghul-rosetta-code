@@ -5,8 +5,6 @@ use System.Xml.XPath.Extensions.xpath_select_elements
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 let source =
     "<inventory title=\"OmniCorp Store #45x10^3\">"
     "  <section name=\"health\">"

@@ -4,9 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `==` compares identity
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-
 let limit = 35_000_000
 
 write_line("summing the divisors of every number up to {limit:N0}")

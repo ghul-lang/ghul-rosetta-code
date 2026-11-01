@@ -7,10 +7,6 @@ use System.Math.*
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-
 let bins = 10
 
 class TALLY is

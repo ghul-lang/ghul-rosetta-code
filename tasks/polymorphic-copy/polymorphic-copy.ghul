@@ -4,10 +4,6 @@ use default
 // `LIST()` builds a collection eagerly
 // `if let` pattern-matches
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `LIST()`, `SET()`, `MAP()` and `ARRAY()` build the collection eagerly.
-// `if let` and `case ... when` pattern-match; `[x, ..rest]` matches a list.
-
 trait Copyable[T] is
     copy() -> T
 si

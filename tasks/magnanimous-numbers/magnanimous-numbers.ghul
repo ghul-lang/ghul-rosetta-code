@@ -7,10 +7,6 @@ use default
 // index materialises the source only as far as that index and caches what
 // it read
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `list()` makes a lazy `T[]`: elements are produced once, on first access.
-
 is_magnanimous(value: int) -> bool =>
     let digits = "{value}" in
     1..digits.length

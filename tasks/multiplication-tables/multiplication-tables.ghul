@@ -2,8 +2,6 @@ use default
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 let heading = 1::12 |> map(column => "{column,4}") |> join("")
 
 write_line("  x{heading}")

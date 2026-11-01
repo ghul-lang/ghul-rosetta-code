@@ -6,10 +6,6 @@ use default
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 // sequence
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-// `T{}` is a lazy sequence of `T`, read by iterating it.
-// `yield` makes the function a generator: it returns a lazy `T{}`.
-
 let limit = 10_000_000
 
 is_unprimeable(value: int) -> bool is

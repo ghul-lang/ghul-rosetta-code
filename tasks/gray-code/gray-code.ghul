@@ -2,8 +2,6 @@ use default
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
-// `x |> f(a, b)` is `f(x, a, b)`: the left value is the first argument.
-
 bits(n: int) -> string => System.Convert.to_string(n, 2).pad_left(5, '0')
 
 encode(n: int) -> int => n ^ (n >>> 1)
