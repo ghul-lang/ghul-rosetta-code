@@ -194,7 +194,7 @@ implementations in fifty other languages.
   No clocks and no local paths.
 - A program that reads from standard input is driven by a `run.in` beside the test, and its
   transcript is the expectation. That is how an interactive task is tested here.
-- Keep lines under 64 columns, and never past 76. A solution is read in a fixed-width block on
+- Keep lines within 76 columns. A solution is read in a fixed-width block on
   Rosetta Code and in a prose column about 77 characters wide on ghul.dev, so anything longer
   scrolls out of sight. `scripts/check-width.sh` reports the offenders.
 - Rosetta Code's syntax highlighter has no ghūl lexer, so the code goes in a

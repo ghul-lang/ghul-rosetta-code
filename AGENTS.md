@@ -502,8 +502,8 @@ A solution is read in a column, not in your editor: on Rosetta Code it sits in a
 and on ghul.dev it sits in a prose column narrower than that. A line that runs past the edge either
 wraps in the middle of an expression or scrolls out of sight, and neither reads well.
 
-**Aim for 64 columns. Never exceed 76.** Those come from where the code is read rather than from
-habit. ghul.dev renders an example in a prose column about 77 characters wide at the size it uses,
+**Never exceed 76 columns.** That comes from where the code is read rather than from habit.
+ghul.dev renders an example in a prose column about 77 characters wide at the size it uses,
 so a line past that scrolls out of sight - and the examples written for that site sit well inside
 it, 99% of their lines at 68 columns or less. The usual 80 and 100 are already too wide here.
 
@@ -511,7 +511,7 @@ it, 99% of their lines at 68 columns or less. The usual 80 and 100 are already t
 scripts/check-width.sh            # every line over the limits, worst first
 ```
 
-The formatter wraps an expression that is simply long, at 64 columns
+The formatter wraps an expression that is simply long, at 76 columns
 ([Layout is the formatter's](#layout-is-the-formatters)).
 
 Where a line is long because of what it says rather than how it is laid out, break it up: a local
@@ -520,8 +520,9 @@ output is better built than written out.
 
 ## Layout is the formatter's
 
-Every source is laid out as the compiler's formatter writes it at 64 columns, and CI checks that
-it is. Run it over what you change before opening a pull request:
+Every source starts as the compiler's formatter writes it at 76 columns, and CI checks that it
+stays so unless a `format-exempt` file says otherwise. Run it over what you change before opening
+a pull request:
 
 ```sh
 scripts/check-format.sh          # every source the formatter would change, as a diff
@@ -559,24 +560,21 @@ What it does, so that a source written by hand already reads the same:
   string stays long; break the string into adjacent literals, or build it, to bring it in.
 
 A `format-exempt` file names the sources to leave alone, one path a line relative to the task,
-with the reason on a `#` line above. Three cases earn one. A source that is also its own data - a
-quine, a program that reads its own text - because laying it out differently changes what the
-program prints. A source whose layout is itself what the entry demonstrates: the Comments
-task's block comment sits inside a call, and the formatter writes that call on one line, which
-can only put the comment after it.
+with the reason on a `#` line above. The formatter's layout is the baseline, not the law: where
+it writes a line that reads worse than a hand layout would - a short `case` spread over five
+lines, a pipe chain rejoined so its stages no longer line up with what each does, a table of
+arguments wrapped out of its columns - lay it out by hand and name the source here, with the `#`
+line saying what the hand layout shows that the formatter's does not. The line is for the next
+reader, who otherwise runs `--fix` and undoes it. Three further cases always earn one: a source
+that is also its own data - a quine, a program that reads its own text - because laying it out
+differently changes what the program prints; a source whose layout is itself what the entry
+demonstrates, such as the Comments task's block comment inside a call; and a source whose string
+literals are written as `\uXXXX` escapes, which the formatter rewrites as the characters
+themselves - a formatter bug rather than a layout decision, so those exemptions go when it is
+fixed, and each says so.
 
-And a source whose string literals are written as `\uXXXX` escapes, which the formatter rewrites
-as the characters themselves. That one is a formatter bug rather than a layout decision, so those
-exemptions go when it is fixed; each says so.
-
-The layout case is not a way to keep a layout you prefer. The entry has to be demonstrating the
-very thing the formatter moves, and the `#` line has to say what that is. Everything else goes
-the other way: the formatter's layout stands, and a line that reads badly under it is fixed in
-the code or in the formatter.
-
-The formatter is faithful, not the author: where its layout of something reads badly, the fix
-usually belongs in the code - a local for a sub-expression, a shorter name - or in the formatter,
-not in a hand layout CI will refuse.
+A hand layout still keeps to 76 columns, four-space indentation that depends only on nesting,
+and no statement terminators; what it chooses is where the breaks fall.
 
 ## Reaching shared state from a function
 

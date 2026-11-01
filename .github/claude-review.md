@@ -57,9 +57,9 @@ rather than restating them here.
   layout is not a review question and a hand layout is not a fix. What is a
   finding: a line still over 76 columns once the formatter has had it, which
   means the code itself needs taking apart - a local for a sub-expression, a
-  shorter name, a string built rather than written out. 64 columns is where the
-  formatter wraps and 76 the limit, because the page renders the code in a
-  fixed-width block and ghul.dev in a narrower prose column.
+  shorter name, a string built rather than written out. 76 columns is both where
+  the formatter wraps and the limit, because the page renders the code in a
+  fixed-width block and ghul.dev in a prose column of about that width.
 - **Statement terminators.** Sources here carry none: the line break is the
   terminator. The formatter emits none either, so CI's format check already
   catches a stray `;` and it needs no attention here.

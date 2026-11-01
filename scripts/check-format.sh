@@ -1,20 +1,17 @@
 #!/bin/bash
 
 # Report solution sources the formatter would change. Every source is laid out
-# as the compiler's formatter lays it out at 64 columns, and a source that
+# as the compiler's formatter lays it out at 76 columns, and a source that
 # differs from what the formatter writes fails the check. See AGENTS.md.
 #
 #   scripts/check-format.sh          list the sources that differ, with a diff
 #   scripts/check-format.sh --fix    rewrite them in place instead
 #
 # A format-exempt file names the sources to leave as they are, one path per line
-# relative to the task directory, with the reason on a # line above them. Three
-# cases earn one: a source that is also its own data - a quine, a program that
-# reads its own text; a source whose layout is itself what the entry
-# demonstrates, which the formatter would write another way; and a source whose
-# \uXXXX escapes the formatter rewrites as the characters themselves, which is a
-# bug, so those go when it is fixed. Not a layout someone would rather have.
-# See AGENTS.md.
+# relative to the task directory, with the reason on a # line above them: a hand
+# layout that reads better than the formatter's, saying what it shows; a source
+# that is also its own data; a layout the entry itself demonstrates; or \uXXXX
+# escapes the formatter would rewrite as characters. See AGENTS.md.
 #
 # Uses the compiler the tool manifest pins. Exits non-zero if any source
 # differs, or if the formatter could not read one.
@@ -22,7 +19,7 @@
 set -eo pipefail
 
 ROOT=${CHECK_FORMAT_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}
-WIDTH=64
+WIDTH=76
 
 cd "$ROOT"
 
