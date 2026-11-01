@@ -68,8 +68,8 @@ jobs:
         fi
 
     # Approval only. Auto-merge is armed by whoever raised the pull request:
-    # auto-merge armed with this workflow's token never enters the merge
-    # queue, since GitHub starts no workflow run for what that token does.
+    # GitHub starts no workflow run for what this workflow's token does, so a
+    # merge it armed would land without the shards having run.
     - name: Approve
       if: steps.scope.outputs.ledger_only == 'true'
       env:
