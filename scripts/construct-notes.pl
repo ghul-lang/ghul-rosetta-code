@@ -59,6 +59,8 @@ my @CONSTRUCTS = (
           my $list = @names == 1 ? $names[0] : join(', ', @names[0 .. $#names - 1]) . ' and ' . $names[-1];
           return $list . (@names == 1 ? ' builds' : ' build') . ' a collection eagerly';
       } },
+    { name => 'memo', patterns => [qr/\bmemo\s+(?:=>|is\b|rec\b|pure\b)|\b(?:rec|pure)\s+memo\b|\bmemo\s*$/],
+      note => '`memo` on a function caches its results - a call with arguments equal to an earlier call\'s returns the cached result, recursive calls included' },
     { name => 'yield', patterns => [qr/\byield\b/],
       note => '`yield` in a function makes it a generator, returning a lazy `T{}` sequence' },
 );
@@ -66,7 +68,7 @@ my @CONSTRUCTS = (
 # A block is recognised by its first line: the start of any note.
 my @OPENERS = ('// `T{}` is', '// `T[]` is', '// `list()` returns', '// `|>` is', '// `~>` is',
                '// `*` as an', '// `=~` compares', '// `==` compares', '// `if let`', '// `case ... when`',
-               '// `LIST()`', '// `SET()`', '// `MAP()`', '// `ARRAY()`', '// `yield` in');
+               '// `LIST()`', '// `SET()`', '// `MAP()`', '// `ARRAY()`', '// `memo` on', '// `yield` in');
 
 my $mode = shift @ARGV // '--check';
 my @files = @ARGV ? @ARGV : default_files();

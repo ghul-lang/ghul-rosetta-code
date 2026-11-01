@@ -1,9 +1,10 @@
 use default
 
+// `memo` on a function caches its results - a call with arguments equal to
+// an earlier call's returns the cached result, recursive calls included
 // `==` compares identity
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 // order from its source
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 at_most(total: int, largest: int) -> int memo =>
     if total == 0 then 1

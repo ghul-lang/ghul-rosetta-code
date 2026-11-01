@@ -680,7 +680,8 @@ functions is a lean, not a rule; see "Lean towards functions" above.
 Every solution carries its **construct notes**: up to three one-line comments
 after the `use` lines, one for each ghūl construct in the source that a reader
 from another language may not know (`T{}`, `T[]`, `|>`, `*` as an argument,
-`=~`, pattern matching, `list()`, the collection constructors, `~>`, `yield`),
+`=~`, pattern matching, `list()`, the collection constructors, `~>`, `memo`,
+`yield`),
 in the order they first appear. They are not written by hand:
 `scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
 checks them, and the wording changes only in that table, so every solution says
