@@ -2,18 +2,31 @@ use default
 
 struct BT(digits: List[int]) is
     to_string() -> string =>
-        digits |> reverse() |> map(d => "-0+"[d + 1]) |> string()
+        digits
+            |> reverse()
+            |> map(d => "-0+"[d + 1])
+            |> string()
 si
 
-cons(d: int, rest: List[int]) -> List[int] => [d] ++ rest |> collect()
+cons(d: int, rest: List[int]) -> List[int] =>
+    [d] ++ rest |> collect()
 
 trim(ds: List[int]) -> List[int] =>
-    ds |> reverse() |> skip_while(d => d == 0) |> reverse() |> collect()
+    ds
+        |> reverse()
+        |> skip_while(d => d == 0)
+        |> reverse()
+        |> collect()
 
 digit(c: char) -> int =>
-    case c when '+' then 1 when '-' then -1 else 0 esac
+    case c
+    when '+' then 1
+    when '-' then -1
+    else 0
+    esac
 
-parse(s: string) -> BT => BT(s |> reverse() |> map(digit) |> collect())
+parse(s: string) -> BT =>
+    BT(s |> reverse() |> map(digit) |> collect())
 
 balanced(n: bigint) -> BT => BT(digits(n) |> collect())
 
@@ -25,7 +38,9 @@ digits(n: bigint) -> int{} =>
     esac
 
 value(a: BT) -> bigint =>
-    a.digits |> reverse() |> reduce(0n, (t, d) => t * 3n + bigint(d))
+    a.digits
+        |> reverse()
+        |> reduce(0n, (t, d) => t * 3n + bigint(d))
 
 add(a: List[int], b: List[int]) -> List[int] =>
     case (a, b)
@@ -49,7 +64,13 @@ add(a: List[int], b: List[int]) -> List[int] =>
     case a.digits
     when [] then a
     when [d, ..rest] then
-        let scaled = case d when 0 then BT([]) when 1 then b else -b esac in
+        let scaled =
+            case d
+            when 0 then BT([])
+            when 1 then b
+            else -b
+            esac
+        in
         scaled + BT(cons(0, (BT(rest) * b).digits))
     esac
 
