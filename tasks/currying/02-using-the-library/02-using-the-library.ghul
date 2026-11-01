@@ -1,6 +1,4 @@
 use default
-use Ghul.curry
-use Ghul.uncurry
 
 repeat_text(text: string, times: int) -> string =>
     string.join("", repeat(text, times))
