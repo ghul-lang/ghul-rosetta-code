@@ -5,20 +5,20 @@ use Row = string[]
 
 lexicographic(left: string, right: string) -> int => left <> right
 
-sort_table(rows: List[Row]) -> List[Row] => sort_table(rows, 0)
+sort_table(rows: Row[]) -> Row[] => sort_table(rows, 0)
 
-sort_table(rows: List[Row], column: int) -> List[Row] =>
+sort_table(rows: Row[], column: int) -> Row[] =>
     sort_table(rows, column, lexicographic)
 
-sort_table(rows: List[Row], column: int, ordering: Ordering) -> List[Row] =>
+sort_table(rows: Row[], column: int, ordering: Ordering) -> Row[] =>
     sort_table(rows, column, ordering, false)
 
 sort_table(
-    rows: List[Row],
+    rows: Row[],
     column: int,
     ordering: Ordering,
     reverse: bool
-) -> List[Row] =>
+) -> Row[] =>
     rows
         |> sort((left, right) =>
             if reverse then
@@ -27,11 +27,11 @@ sort_table(
                 ordering(left[column], right[column])
             fi
         )
-        |> collect()
+        |> list()
 
 by_length(left: string, right: string) -> int => left.length <> right.length
 
-show(caption: string, rows: List[Row]) is
+show(caption: string, rows: Row[]) is
     write_line(caption)
 
     for row in rows do

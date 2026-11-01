@@ -220,7 +220,7 @@ Where a type does have to be written, write it once, at the site that needs it:
 
 - On the constructor (`LIST[int]()`) rather than on the local, when nothing later pins the
   element type - a list that is only printed, say. A local declared at an interface type
-  (`let rows: List[int] = LIST()`) is the exception: the annotation is the point, so it stays and
+  (`let rows: int[] = LIST()`) is the exception: the annotation is the point, so it stays and
   the constructor's arguments go.
 - On the cast (`cast bigint(n)`) where no slot pins the target, rather than moving it to a `let`
   annotation. Where a slot does pin it - a typed initializer, an assignment, a return, an operand,
@@ -324,28 +324,30 @@ let cells = 0..rows
 
 No terminal at all where the result is read once: a pipe passed to a `for`, a `join`, or a
 function taking a sequence is already what it needs, and a function whose callers only read its
-result returns `T{}` rather than `List[T]` or `T[]`. Where a result is read more than once,
-or indexed, `memo()` computes it once on first use and keeps it, and its result is a `List[T]`
-materialised only as far as it has been read, so an unbounded source needs no guessed limit:
+result returns `T{}` rather than `T[]`. Where a result is read more than once, or indexed,
+`list()` gives it as a `T[]`, computed once on first use and kept, materialised only as far as it
+has been read, so an unbounded source needs no guessed limit:
 
 ```ghul
-let primes = from(2) |> filter(is_prime) |> memo()
+let primes = from(2) |> filter(is_prime) |> list()
 ```
 
-`collect()` is for when the work has to happen at that line: the source reads state that changes
-afterwards, the elements start tasks or threads, several threads read the result, or a .NET API
-or the result's meaning wants an array. `collect_mutable()` is for a result that is then
-mutated.
+`T[]` is `Collections.List[T]`, the read-only list, and an array is `ARRAY[T]`: an array is a
+`T[]`, so a literal or a `collect()` result passes wherever a `T[]` is expected. `collect()` is
+for when the work has to happen at that line: the source reads state that changes afterwards, the
+elements start tasks or threads, several threads read the result, or a .NET API or the result's
+meaning wants an array, and then the type it goes into is written `ARRAY[T]`. `collect_mutable()`
+is for a result that is then mutated.
 
 Filling the grid by index afterwards does not change that: how the elements get there is a separate
 question from how the rows are made.
 
-An array literal is already a `List[T]`, so `LIST(...)` around one builds a second collection to
+An array literal is already a `T[]`, so `LIST(...)` around one builds a second collection to
 hold the same elements: write the literal on its own where nothing mutates the value, and keep
 `LIST` for a list something adds to, removes from, sorts in place or assigns by index. A type that
-is written follows the same rule - a return type, parameter or field is `List[T]` where nothing
+is written follows the same rule - a return type, parameter or field is `T[]` where nothing
 downstream mutates it, and `MAP` and `SET` give way to `Map` and `Set` on the same terms. A
-function that builds its result by mutation keeps a `LIST` local and returns it as a `List[T]`,
+function that builds its result by mutation keeps a `LIST` local and returns it as a `T[]`,
 which needs no conversion.
 
 The loop stays where the body does more than add one element, where each element depends on the
@@ -421,7 +423,7 @@ add(a: int{}, b: int{}) -> int{} =>
   element, in place of a `mut` accumulator the loop updates.
 
 ```ghul
-merge(xs: List[int], ys: List[int]) -> int{} =>
+merge(xs: int[], ys: int[]) -> int{} =>
     case (xs, ys)
     when ([], _) then ys
     when (_, []) then xs

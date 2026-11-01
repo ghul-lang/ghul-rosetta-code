@@ -19,7 +19,7 @@ si
 report(wanted: int, least_ways: int, highest: int) is
     let found =
         from(2)
-            |> map(n => (n, exponents(n, highest) |> collect()))
+            |> map(n => (n, exponents(n, highest) |> list()))
             |> filter(((_, ways)) => ways.count >= least_ways)
             |> take(wanted)
 

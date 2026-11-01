@@ -8,13 +8,13 @@ report(truth: double, estimates: double[]) is
     let collective = mean(estimates)
 
     let average_error = mean(
-        estimates |> map(e => square(e - truth)) |> collect()
+        estimates |> map(e => square(e - truth)) |> list()
     )
 
     let collective_error = square(collective - truth)
 
     let diversity = mean(
-        estimates |> map(e => square(e - collective)) |> collect()
+        estimates |> map(e => square(e - collective)) |> list()
     )
 
     let shown = estimates |> map(e => "{e:G}") |> join(" ")

@@ -1,6 +1,6 @@
 use default
 
-invert(a: List[List[double]]) -> List[List[double]] is
+invert(a: double[][]) -> double[][] is
     let n = a.count
 
     let rows =
@@ -34,10 +34,10 @@ invert(a: List[List[double]]) -> List[List[double]] is
         od
     od
 
-    rows |> map(row => row |> skip(n) |> collect()) |> collect()
+    rows |> map(row => row |> skip(n) |> list()) |> list()
 si
 
-show(matrix: List[List[double]]) =>
+show(matrix: double[][]) =>
     for row in matrix do
         write_line(row |> map(v => "{v,10:F5}") |> join(""))
     od

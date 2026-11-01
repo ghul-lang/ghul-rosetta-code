@@ -58,14 +58,14 @@ class FULL_ADDER(
 si
 
 class FOUR_BIT_ADDER is
-    left: List[PIN]
-    right: List[PIN]
+    left: PIN[]
+    right: PIN[]
     sum: LIST[Component]
     carry: Component
 
     init() is
-        left = repeat(0, 4) |> map(_ => PIN(false)) |> collect()
-        right = repeat(0, 4) |> map(_ => PIN(false)) |> collect()
+        left = repeat(0, 4) |> map(_ => PIN(false)) |> list()
+        right = repeat(0, 4) |> map(_ => PIN(false)) |> list()
 
         let bits = LIST()
         let carried: Component mut = PIN(false)
@@ -99,7 +99,7 @@ class FOUR_BIT_ADDER is
             )
 si
 
-text(pins: List[Component]) -> string =>
+text(pins: Component[]) -> string =>
     pins |> map(c => if c.output then "1" else "0" fi) |> join("")
 
 let circuit = FOUR_BIT_ADDER()

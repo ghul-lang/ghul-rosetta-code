@@ -6,7 +6,7 @@ use POINT = (x: double, y: double)
 
 let steps = 240
 
-around(radius: double) -> List[POINT] =>
+around(radius: double) -> POINT[] =>
     (0..steps + 1)
         |> map(step => (
             let angle = 2.0D * pi * double(step) / double(steps)
@@ -16,7 +16,7 @@ around(radius: double) -> List[POINT] =>
                 y = 150.0D + radius * sin(angle)
             )
         ))
-        |> collect()
+        |> list()
 
 let image = IMAGE(300, 300)
 

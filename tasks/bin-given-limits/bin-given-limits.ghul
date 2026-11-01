@@ -1,6 +1,6 @@
 use default
 
-bin(limits: List[int], data: List[int]) -> List[int] => (
+bin(limits: int[], data: int[]) -> int[] => (
     let counts = repeat(0, limits.count + 1) |> collect_mutable()
 
     for value in data do
@@ -12,7 +12,7 @@ bin(limits: List[int], data: List[int]) -> List[int] => (
     counts
 )
 
-show(limits: List[int], counts: List[int]) is
+show(limits: int[], counts: int[]) is
     write_line("{"<",13}{limits[0],6}{counts[0],8}")
 
     for i in 1..limits.count do

@@ -1,17 +1,17 @@
 use default
 
-from_array(values: int[]) -> Collections.List[int] =>
-    let result = values |> collect() in
+from_array(values: int[]) -> int[] =>
+    let result = values |> list() in
     result
 
-text_of(values: Collections.List[int]) -> string =>
+text_of(values: int[]) -> string =>
     let texts = values |> map(value => "{value}") in
     texts |> join(" ")
 
 binomial_transform(
-    values: Collections.List[int],
+    values: int[],
     forward: bool
-) -> Collections.List[int] =>
+) -> int[] =>
     (0..values.count)
         |> map(n =>
             (0::n)
@@ -26,7 +26,7 @@ binomial_transform(
                 )
                 |> sum()
         )
-        |> collect()
+        |> list()
 
 show(name: string, values: int[]) is
     let original = from_array(values)

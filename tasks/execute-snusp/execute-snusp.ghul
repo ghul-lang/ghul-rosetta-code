@@ -3,7 +3,7 @@ use IO.Std.write
 
 use Point = (x: int, y: int)
 
-run(lines: List[string]) is
+run(lines: string[]) is
     let width = lines |> map(l => l.length) |> reduce(0, int.max)
     let at_start = (0..lines.count) |> find(y => lines[y].contains('$'))
 

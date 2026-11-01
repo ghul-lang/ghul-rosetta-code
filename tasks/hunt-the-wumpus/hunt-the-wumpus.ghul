@@ -74,7 +74,7 @@ enter(room: int) is
         Std.write_line("a giant bat carries you off")
 
         let empty =
-            (1::caves.count) |> filter(room => !deadly(room)) |> collect()
+            (1::caves.count) |> filter(room => !deadly(room)) |> list()
 
         enter(empty[random.next(empty.count)])
     fi

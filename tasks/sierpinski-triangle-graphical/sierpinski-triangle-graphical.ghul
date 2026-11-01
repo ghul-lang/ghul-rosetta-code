@@ -8,7 +8,7 @@ midpoint(a: POINT, b: POINT) -> POINT => (
     y = (a.y + b.y) / 2.0
 )
 
-triangle(a: POINT, b: POINT, c: POINT) -> List[POINT] => [
+triangle(a: POINT, b: POINT, c: POINT) -> POINT[] => [
     a, b, c
 ]
 

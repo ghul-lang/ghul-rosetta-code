@@ -4,7 +4,7 @@ cullen(n: int) -> bigint => (bigint(n) << n) + 1n
 
 woodall(n: int) -> bigint => (bigint(n) << n) - 1n
 
-let small_primes = primes(3L) |> take_while(p => p <= 20_000L) |> memo()
+let small_primes = primes(3L) |> take_while(p => p <= 20_000L) |> list()
 
 has_small_factor(n: int, offset: long) -> bool =>
     n > 10 /\

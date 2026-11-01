@@ -3,12 +3,12 @@ use default
 counts(s: string) -> Map[char, int] => s |> frequencies()
 
 show(strings: string[]) is
-    let tallies = strings |> map(counts) |> collect()
+    let tallies = strings |> map(counts) |> list()
     let specific = LIST()
     let others = LIST()
 
     for i in 0..strings.count do
-        let chars = tallies[i].keys |> collect()
+        let chars = tallies[i].keys |> list()
         let elsewhere =
             c =>
                 0..strings.count

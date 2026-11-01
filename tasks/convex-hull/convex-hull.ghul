@@ -18,7 +18,7 @@ turn(from: Point, through: Point, to: Point) -> int =>
     (through.x - from.x) * (to.y - from.y) -
     (through.y - from.y) * (to.x - from.x)
 
-half_hull(ordered: Collections.List[Point]) -> LIST[Point] is
+half_hull(ordered: Point[]) -> LIST[Point] is
     let side = LIST()
 
     for at in ordered do
@@ -40,12 +40,12 @@ si
 let ordered =
     points
         |> sort((a, b) => if a.x != b.x then a.x - b.x else a.y - b.y fi)
-        |> collect()
+        |> list()
 
 let backwards =
     (0..ordered.count)
         |> map(step => ordered[ordered.count - 1 - step])
-        |> collect()
+        |> list()
 
 let hull = half_hull(ordered)
 

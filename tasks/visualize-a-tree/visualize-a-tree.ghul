@@ -1,6 +1,6 @@
 use default
 
-class NODE(name: string, children: List[NODE])
+class NODE(name: string, children: NODE[])
 
 leaf(name: string) -> NODE => NODE(name, LIST())
 

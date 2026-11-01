@@ -1,7 +1,7 @@
 use default
 
 union Decoded is
-    VALUES(values: List[int])
+    VALUES(values: int[])
     ERROR(message: string)
 si
 
@@ -110,7 +110,7 @@ for text in encoded do
     esac
 od
 
-let all_values = 0..256 |> collect()
+let all_values = 0..256 |> list()
 let round_trip = decode(encode(all_values))
 
 write_line()

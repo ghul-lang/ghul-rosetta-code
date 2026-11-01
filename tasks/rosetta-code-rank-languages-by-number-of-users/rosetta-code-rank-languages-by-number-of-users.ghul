@@ -66,7 +66,7 @@ let ranked =
             else string.compare_ordinal(a.name, b.name)
             fi
         )
-        |> collect()
+        |> list()
 
 let rank mut = 0
 

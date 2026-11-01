@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-use MATRIX = List[List[int]]
+use MATRIX = int[][]
 
 kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
     (0..left.count * right.count)
@@ -11,9 +11,9 @@ kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
                     left[row / right.count][column / right[0].count] *
                     right[row % right.count][column % right[0].count]
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 power(seed: MATRIX, order: int) -> MATRIX =>
     1..order |> reduce(seed, (r, _) => kronecker(r, seed))

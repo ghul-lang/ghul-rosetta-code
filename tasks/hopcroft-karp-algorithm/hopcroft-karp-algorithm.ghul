@@ -108,7 +108,7 @@ check(
     number: int,
     left: int,
     right: int,
-    edges: Collections.List[Edge],
+    edges: Edge[],
     expected: int
 ) is
     let graph = BIPARTITE(left, right)

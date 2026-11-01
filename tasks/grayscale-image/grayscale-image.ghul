@@ -16,7 +16,7 @@ to_grey(colour: IMAGE) -> ubyte[] =>
 
             luminance(seen.red, seen.green, seen.blue)
         ))
-        |> collect()
+        |> list()
 
 to_colour(levels: ubyte[], width: int, height: int) -> IMAGE => (
     let image = IMAGE(width, height)

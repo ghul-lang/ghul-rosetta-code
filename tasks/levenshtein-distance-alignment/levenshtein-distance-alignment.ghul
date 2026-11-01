@@ -20,7 +20,7 @@ align(a: string, b: string) -> (
                     )
                     |> collect_mutable()
             )
-            |> collect()
+            |> list()
 
     for i in 1::a.length do
         for j in 1::b.length do

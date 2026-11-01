@@ -3,14 +3,14 @@ use default
 let rows = 7
 let columns = 8
 
-use Grid = List[List[int]]
+use Grid = int[][]
 
-parse(lines: List[string]) -> Grid =>
+parse(lines: string[]) -> Grid =>
     lines
-        |> map(line => line |> map(c => int(c - '0')) |> collect())
-        |> collect()
+        |> map(line => line |> map(c => int(c - '0')) |> list())
+        |> list()
 
-solve(grid: Grid) -> List[int]? is
+solve(grid: Grid) -> int[]? is
     let partner = repeat(-1, rows * columns) |> collect_mutable()
     let used = SET()
 
@@ -72,7 +72,7 @@ solve(grid: Grid) -> List[int]? is
     if place(0) then partner else null fi
 si
 
-show(grid: Grid, partner: List[int]) is
+show(grid: Grid, partner: int[]) is
     for row in 0..rows do
         let cells =
             0..columns
@@ -112,7 +112,7 @@ shuffled_tableau(random: System.Random) -> Grid is
     let grid =
         0..rows
             |> map(_ => repeat(0, columns) |> collect_mutable())
-            |> collect()
+            |> list()
 
     for (i, (a, b)) in tiles |> index() do
         let row = i / 4, column = (i % 4) * 2

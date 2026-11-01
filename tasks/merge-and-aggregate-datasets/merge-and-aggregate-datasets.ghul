@@ -3,7 +3,7 @@ use default
 use PATIENT = (id: string, lastname: string)
 use VISIT = (id: string, date: string, score: double?)
 
-let patients: List[PATIENT] = [
+let patients: PATIENT[] = [
     (id = "1001", lastname = "Hopper"),
     (id = "4004", lastname = "Wirth"),
     (id = "3003", lastname = "Kemeny"),
@@ -11,7 +11,7 @@ let patients: List[PATIENT] = [
     (id = "5005", lastname = "Kurtz")
 ]
 
-let visits: List[VISIT] = [
+let visits: VISIT[] = [
     (id = "2002", date = "2020-09-10", score = 6.8D),
     (id = "1001", date = "2020-09-17", score = 5.5D),
     (id = "4004", date = "2020-09-24", score = 8.4D),

@@ -3,7 +3,7 @@ use default
 // every way to place the blocks, leftmost first, each separated by at
 // least one empty cell; yields the start position of each block
 
-placements(cells: int, blocks: List[int]) -> List[int]{} is
+placements(cells: int, blocks: int[]) -> int[]{} is
     case blocks
     when [] then
         yield []
@@ -16,13 +16,13 @@ placements(cells: int, blocks: List[int]) -> List[int]{} is
             for tail in placements(int.max(cells - offset, 0), rest) do
                 let shifted = tail |> map(* + offset)
 
-                yield [start] ++ shifted |> collect()
+                yield [start] ++ shifted |> list()
             od
         od
     esac
 si
 
-draw(cells: int, blocks: List[int], starts: List[int]) -> string =>
+draw(cells: int, blocks: int[], starts: int[]) -> string =>
     let filled =
         starts
             |> index()
@@ -34,12 +34,12 @@ draw(cells: int, blocks: List[int], starts: List[int]) -> string =>
     in
     "|{row |> join("|")}|"
 
-let cases: List[(cells: int, blocks: List[int])] = [
+let cases: (cells: int, blocks: int[])[] = [
     (5, [2, 1]), (5, []), (10, [8]), (15, [2, 3, 2, 3]), (5, [2, 3])
 ]
 
 for (cells, blocks) in cases do
-    let found = placements(cells, blocks) |> collect()
+    let found = placements(cells, blocks) |> list()
 
     write_line("{cells} cells and {blocks} blocks: {found.count} positions")
 

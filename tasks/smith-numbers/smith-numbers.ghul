@@ -4,7 +4,7 @@ is_smith(n: int) -> bool =>
     let factors = prime_factors(n) in
     factors.count > 1 /\ (factors |> sum_by(digit_sum)) == digit_sum(n)
 
-let smith = (1..10_000) |> filter(is_smith) |> collect()
+let smith = (1..10_000) |> filter(is_smith) |> list()
 
 write_line("{smith.count} Smith numbers below 10000:")
 

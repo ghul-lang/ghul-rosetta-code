@@ -8,7 +8,7 @@ struct P(x: double, y: double) is
     normal: P => P(-y, x)
 si
 
-use Polygon = List[P]
+use Polygon = P[]
 
 rectangle(
     x: double,
@@ -60,7 +60,7 @@ outline(image: IMAGE, shape: Polygon, dx: double) is
     image.line(
         shape ++ [shape[0]]
             |> map(p => (x = p.x + dx, y = p.y))
-            |> collect()
+            |> list()
     )
 si
 

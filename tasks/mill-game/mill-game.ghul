@@ -71,8 +71,8 @@ let to_place = [('W', 9), ('B', 9)] |> collect_mutable_map()
 
 other(side: char) -> char => if side == 'W' then 'B' else 'W' fi
 
-holding(side: char) -> List[string] =>
-    board.keys |> filter(p => board[p] == side) |> collect()
+holding(side: char) -> string[] =>
+    board.keys |> filter(p => board[p] == side) |> list()
 
 count_of(side: char) -> int => holding(side).count
 
@@ -84,14 +84,14 @@ in_mill(point: string, side: char) -> bool =>
 
 use Move = (from: string?, to: string)
 
-moves(side: char) -> List[Move] is
+moves(side: char) -> Move[] is
     let empty = holding('.')
 
     if to_place[side] > 0 then
         return
             empty
                 |> map(p => (from = cast string?(null), to = p))
-                |> collect()
+                |> list()
     fi
 
     let flying = count_of(side) == 3
@@ -139,18 +139,18 @@ makes_mill(move: Move, side: char) -> bool is
     made
 si
 
-removable(side: char) -> List[string] =>
+removable(side: char) -> string[] =>
     let
         pieces = holding(side),
-        loose = pieces |> filter(p => !in_mill(p, side)) |> collect()
+        loose = pieces |> filter(p => !in_mill(p, side)) |> list()
     in
         if loose.count > 0 then loose else pieces fi
 
-pick[T](items: List[T]) -> T => items[random.next(items.count)]
+pick[T](items: T[]) -> T => items[random.next(items.count)]
 
 computer_move(side: char) -> Move is
     let legal = moves(side)
-    let winning = legal |> filter(makes_mill(*, side)) |> collect()
+    let winning = legal |> filter(makes_mill(*, side)) |> list()
 
     if winning.count > 0 then
         return pick(winning)
@@ -163,7 +163,7 @@ computer_move(side: char) -> Move is
     ]
 
     let blocking =
-        legal |> filter(m => threats |> any(t => t =~ m.to)) |> collect()
+        legal |> filter(m => threats |> any(t => t =~ m.to)) |> list()
 
     if blocking.count > 0 then
         pick(blocking)
@@ -233,7 +233,7 @@ human_move() -> Move? is
     return null
 si
 
-human_removal(options: List[string]) -> string? is
+human_removal(options: string[]) -> string? is
     while true do
         let answer = ask("which of the computer's pieces do you remove?")
 

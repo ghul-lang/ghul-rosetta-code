@@ -26,7 +26,7 @@ od
 
 is_tetraprime(n: int) -> bool => distinct_factors[n] == 4 /\ square_free[n]
 
-median(sorted: Collections.List[int]) -> int =>
+median(sorted: int[]) -> int =>
     if sorted.count % 2 == 1 then
         sorted[sorted.count / 2]
     else
@@ -41,7 +41,7 @@ report(below: int, direction: string, offset: int, show: bool) is
                 is_tetraprime(p + offset + 1) /\
                 is_prime(p)
             )
-            |> collect()
+            |> list()
 
     write_line("Primes below {below} {direction} by a tetraprime pair:")
 
@@ -58,7 +58,7 @@ report(below: int, direction: string, offset: int, show: bool) is
             )
 
     let gaps =
-        found |> pairwise() |> map(((a, b)) => b - a) |> sort() |> collect()
+        found |> pairwise() |> map(((a, b)) => b - a) |> sort() |> list()
 
     write_line(
         "Found {found.count} such primes, of which {sevens} have 7 "

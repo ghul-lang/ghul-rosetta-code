@@ -20,7 +20,7 @@ class CLUSTERS is
         filled =
             (0..size * size)
                 |> map(_ => random.next_double() < p)
-                |> collect()
+                |> list()
 
         labels = repeat(0, size * size) |> collect_mutable()
         count = 0

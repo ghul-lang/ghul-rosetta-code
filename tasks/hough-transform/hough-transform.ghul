@@ -20,7 +20,7 @@ pentagon() -> IMAGE => (
                 in
                     (x = x, y = 105.0D - 70.0D * sin(a))
             )
-            |> collect()
+            |> list()
     )
 
     image

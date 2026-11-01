@@ -109,7 +109,7 @@ neighbours(i: int) -> int{} =>
         |> map(c => at(c.column, c.row))
         |> filter(open(i, *))
 
-shortest_path(start: int, finish: int) -> List[int] is
+shortest_path(start: int, finish: int) -> int[] is
     let previous = MAP()
     let queue = Collections.Queue()
 
@@ -147,7 +147,7 @@ centre(i: int) -> (x: double, y: double) => (
 
 image.colour(210ub, 50ub, 40ub)
 image.stroke(4.0D)
-image.line(path |> map(centre) |> collect())
+image.line(path |> map(centre) |> list())
 
 image.write("solved.png")
 

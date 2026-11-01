@@ -10,7 +10,7 @@ let board = 1::squares |> map(* % squares) |> collect_mutable()
 
 blank() -> int => board |> find_index(* == 0)!
 
-neighbours(square: int) -> List[int] => (
+neighbours(square: int) -> int[] => (
     let found = LIST()
     let row = square / side
     let column = square % side

@@ -7,7 +7,7 @@ let height = 12
 let random = Random(6)
 
 use Cell = (row: int, column: int)
-use Piece = (name: char, size: int, cells: List[Cell])
+use Piece = (name: char, size: int, cells: Cell[])
 
 shape(name: char, size: int, rows: string[]) -> Piece => (
     name = name,
@@ -16,7 +16,7 @@ shape(name: char, size: int, rows: string[]) -> Piece => (
         (0..size * size)
             |> filter(i => rows[i / size][i % size] == '#')
             |> map(i => (row = i / size, column = i % size))
-            |> collect()
+            |> list()
 )
 
 let pieces = [
@@ -35,7 +35,7 @@ rotated(piece: Piece) -> Piece => (
     cells =
         piece.cells
             |> map(c => (row = c.column, column = piece.size - 1 - c.row))
-            |> collect()
+            |> list()
 )
 
 let well = LIST(repeat('.', width * height))
@@ -125,7 +125,7 @@ lock() -> bool is
     let full =
         (0..height)
             |> filter(r => 0..width |> all(k => !free(r, k)))
-            |> collect()
+            |> list()
 
     for r in full do
         well.remove_range(r * width, width)

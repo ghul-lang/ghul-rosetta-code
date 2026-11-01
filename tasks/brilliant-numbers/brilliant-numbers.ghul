@@ -19,24 +19,24 @@ si
 
 power_of_ten(n: int) -> int => repeat(10, n) |> product()
 
-products(group: List[int]) -> long{} => [
+products(group: int[]) -> long{} => [
     long(p) * long(q)
     for (i, p) in group |> index()
     for q in group |> skip(i)
 ]
 
-brilliant_numbers(max_digits: int) -> List[long] =>
-    let primes = primes_below(power_of_ten(max_digits)) |> collect() in
+brilliant_numbers(max_digits: int) -> long[] =>
+    let primes = primes_below(power_of_ten(max_digits)) |> list() in
     1::max_digits
         |> flat_map(digits =>
             let
                 low = power_of_ten(digits - 1),
                 group = primes |> filter(p => p >= low /\ p < low * 10)
             in
-                products(group |> collect())
+                products(group |> list())
         )
         |> sort()
-        |> collect()
+        |> list()
 
 let brilliant = brilliant_numbers(4)
 

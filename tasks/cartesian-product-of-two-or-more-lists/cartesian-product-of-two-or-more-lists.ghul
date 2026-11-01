@@ -1,6 +1,6 @@
 use default
 
-pairs(left: List[int], right: List[int]) -> (first: int, second: int){} is
+pairs(left: int[], right: int[]) -> (first: int, second: int){} is
     for first in left do
         for second in right do
             yield (first, second)
@@ -8,7 +8,7 @@ pairs(left: List[int], right: List[int]) -> (first: int, second: int){} is
     od
 si
 
-tuples(lists: List[List[int]], at: int) -> List[int]{} is
+tuples(lists: int[][], at: int) -> int[]{} is
     if at == lists.count then
         yield LIST()
     else
@@ -30,12 +30,12 @@ si
 
 show(values: string{}) -> string => "{{{values |> join(", ")}}}"
 
-show_numbers(values: List[int]) -> string =>
+show_numbers(values: int[]) -> string =>
     show(values |> map(value => "{value}"))
 
-show_tuple(values: List[int]) -> string => "({values |> join(", ")})"
+show_tuple(values: int[]) -> string => "({values |> join(", ")})"
 
-show_binary(left: List[int], right: List[int]) =>
+show_binary(left: int[], right: int[]) =>
     let product =
         pairs(left, right) |> map(pair => "({pair.first}, {pair.second})")
     in
@@ -43,7 +43,7 @@ show_binary(left: List[int], right: List[int]) =>
         "{show_numbers(left)} × {show_numbers(right)} = {show(product)}"
     )
 
-show_nary(lists: List[List[int]]) =>
+show_nary(lists: int[][]) =>
     let
         heading = lists |> map(show_numbers) |> join(" × "),
         product = tuples(lists, 0) |> map(show_tuple)

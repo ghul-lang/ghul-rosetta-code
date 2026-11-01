@@ -5,14 +5,14 @@ use default
 // row before, and the polynomial is stable when every row's first entry
 // outweighs its last.
 
-use Polynomial = List[double]
+use Polynomial = double[]
 
 evaluate(p: Polynomial, z: double) -> double =>
     p |> reduce(0.0, (total, a) => total * z + a)
 
 next_row(row: Polynomial) -> Polynomial =>
     let n = row.count - 1 in
-    0..n |> map(i => row[0] * row[i] - row[n] * row[n - i]) |> collect()
+    0..n |> map(i => row[0] * row[i] - row[n] * row[n - i]) |> list()
 
 rows(p: Polynomial) -> Polynomial{} is
     let row mut = p

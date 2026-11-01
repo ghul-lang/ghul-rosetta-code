@@ -3,7 +3,7 @@ use Collections
 
 suffixes(words: string[], size: int) -> (
     by_prefix: MAP[string, LIST[string]],
-    prefixes: List[string]
+    prefixes: string[]
 ) is
     let by_prefix = MAP()
     let prefixes = LIST()
@@ -37,7 +37,7 @@ generate(
             let word = choices[random.next(0, choices.count)]
 
             yield word
-            yield in chain(((prefix |> skip(1)) ++ [word]) |> collect())
+            yield in chain(((prefix |> skip(1)) ++ [word]) |> list())
         fi
     si
 
@@ -85,7 +85,7 @@ let size = if args.count > 1 then int.parse(args[1]) else 2 fi
 let length = if args.count > 2 then int.parse(args[2]) else 60 fi
 
 let words = IO.File.read_all_text(path).split([' ', '\n', '\r', '\t'])
-let corpus = words |> filter(w => w.length > 0) |> collect()
+let corpus = words |> filter(w => w.length > 0) |> list()
 let source = suffixes(corpus, size)
 let random = System.Random(2026)
 let start = source.prefixes[random.next(0, source.prefixes.count)]

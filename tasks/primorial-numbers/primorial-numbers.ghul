@@ -21,7 +21,7 @@ let primes =
     (2::sieve_limit)
         |> filter(candidate => !composite[candidate])
         |> map(bigint)
-        |> collect()
+        |> list()
 
 primorial(index: int) -> bigint => primes[0..index] |> product()
 

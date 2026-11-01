@@ -4,15 +4,15 @@ let dice = System.Random(20260909)
 
 attribute() -> int =>
     let
-        rolls = 1::4 |> map(_ => dice.next(1, 7)) |> collect(),
+        rolls = 1::4 |> map(_ => dice.next(1, 7)) |> list(),
         lowest = rolls |> min_by(roll => roll),
         total = rolls |> sum()
     in
         total - (lowest ?? 0)
 
-character() -> List[int] => 1::6 |> map(_ => attribute()) |> collect()
+character() -> int[] => 1::6 |> map(_ => attribute()) |> list()
 
-acceptable(values: List[int]) -> bool =>
+acceptable(values: int[]) -> bool =>
     let
         total = values |> sum(),
         strong = values |> filter(* >= 15) |> count()

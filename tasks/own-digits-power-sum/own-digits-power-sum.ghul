@@ -3,19 +3,19 @@ use default
 power(base: int, exponent: int) -> long =>
     repeat(long(base), exponent) |> product()
 
-digit_counts(value: long) -> List[int] =>
-    let found = value |> digits() |> memo() in
-    0::9 |> map(d => found |> count(* == long(d))) |> collect()
+digit_counts(value: long) -> int[] =>
+    let found = value |> digits() |> list() in
+    0::9 |> map(d => found |> count(* == long(d))) |> list()
 
-held(combination: List[int], digit: int) -> int =>
+held(combination: int[], digit: int) -> int =>
     combination |> count(* == digit)
 
-multisets(width: int, lowest: int, chosen: List[int]) -> List[int]{} is
+multisets(width: int, lowest: int, chosen: int[]) -> int[]{} is
     if chosen.count == width then
         yield chosen
     else
         for digit in lowest::9 do
-            yield in multisets(width, digit, chosen ++ [digit] |> collect())
+            yield in multisets(width, digit, chosen ++ [digit] |> list())
         od
     fi
 si

@@ -9,7 +9,7 @@ let start = "BBB...WWW"
 
 other(side: char) -> char => if side == 'W' then 'B' else 'W' fi
 
-moves(board: string, side: char) -> List[Move] =>
+moves(board: string, side: char) -> Move[] =>
     (0..9)
         |> filter(from => board[from] == side)
         |> flat_map(from =>
@@ -25,7 +25,7 @@ moves(board: string, side: char) -> List[Move] =>
                 )
                 |> map(to => (from = from, to = to))
         )
-        |> collect()
+        |> list()
 
 play(board: string, move: Move) -> string =>
     string(
@@ -76,7 +76,7 @@ si
 
 let memory = MAP[string, LIST[Move]]()
 
-options(board: string) -> List[Move] is
+options(board: string) -> Move[] is
     if !memory.contains_key(board) then
         memory[board] = LIST(moves(board, 'B'))
     fi

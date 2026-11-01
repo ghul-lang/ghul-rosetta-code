@@ -21,7 +21,7 @@ quotients(left: int, right: int) -> int{} is
 si
 
 continued_fraction(numerator: int, denominator: int) -> int{} =>
-    let terms = quotients(numerator, denominator) |> collect() in
+    let terms = quotients(numerator, denominator) |> list() in
     if terms.count % 2 == 0 then
         (terms |> take(terms.count - 1)) ++ [terms[terms.count - 1] - 1, 1]
     else

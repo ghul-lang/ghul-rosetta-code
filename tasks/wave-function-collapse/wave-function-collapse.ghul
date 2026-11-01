@@ -26,7 +26,7 @@ fits_below(top: int, bottom: int) -> bool =>
 
 wrap(i: int) -> int => (i + grid) % grid
 
-attempt() -> List[int]? is
+attempt() -> int[]? is
     let placed = repeat(-1, grid * grid) |> collect_mutable()
     let options = LIST[LIST[int]](
         0..grid * grid |> map(_ => LIST(0..blocks.count))
@@ -43,7 +43,7 @@ attempt() -> List[int]? is
         fi
 
         let candidates =
-            open |> filter(i => options[i].count == least) |> collect()
+            open |> filter(i => options[i].count == least) |> list()
 
         let cell = candidates[random.next(candidates.count)]
         let choice = options[cell][random.next(options[cell].count)]

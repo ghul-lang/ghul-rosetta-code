@@ -28,7 +28,7 @@ month_lines(year: int, month: int) -> string[] =>
         weeks ++
         repeat(string(' ', month_width), 6)
             |> take(8)
-            |> collect()
+            |> list()
 
 calendar(year: int, page_width: int) -> string{} is
     let cell = month_width + gap.length
@@ -39,7 +39,7 @@ calendar(year: int, page_width: int) -> string{} is
     yield centre("{year}", width)
 
     for row in 1::12 |> chunk(across) do
-        let months = row |> map(month_lines(year, *)) |> collect()
+        let months = row |> map(month_lines(year, *)) |> list()
 
         yield ""
 

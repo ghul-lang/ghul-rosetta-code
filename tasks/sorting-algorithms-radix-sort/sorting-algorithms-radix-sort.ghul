@@ -2,28 +2,28 @@ use default
 
 // Least significant digit first, in base 10. Negative numbers are sorted
 // by their magnitude on their own and put first, reversed.
-radix_sort(values: List[int]) -> int{} is
-    sort_magnitudes(magnitudes: List[int]) -> int{} is
-        let current mut = magnitudes |> collect()
+radix_sort(values: int[]) -> int{} is
+    sort_magnitudes(magnitudes: int[]) -> int{} is
+        let current mut = magnitudes |> list()
         let largest = current |> max() ?? 0
         let place mut = 1
 
         while largest / place > 0 do
-            let buckets = 0..10 |> map(_ => LIST()) |> collect()
+            let buckets = 0..10 |> map(_ => LIST()) |> list()
 
             for v in current do
                 buckets[v / place % 10].add(v)
             od
 
-            current = buckets |> flat_map(b => b) |> collect()
+            current = buckets |> flat_map(b => b) |> list()
             place = place * 10
         od
 
         current
     si
 
-    let below = values |> filter(* < 0) |> map(- *) |> collect()
-    let above = values |> filter(* >= 0) |> collect()
+    let below = values |> filter(* < 0) |> map(- *) |> list()
+    let above = values |> filter(* >= 0) |> list()
     let negatives = sort_magnitudes(below)
     let others = sort_magnitudes(above)
 

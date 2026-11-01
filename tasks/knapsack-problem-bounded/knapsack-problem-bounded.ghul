@@ -29,12 +29,12 @@ let items = [
 let capacity = 400
 
 let copies =
-    items |> flat_map(item => repeat(item, item.pieces)) |> collect()
+    items |> flat_map(item => repeat(item, item.pieces)) |> list()
 
 let best =
     0::copies.count
         |> map(_ => repeat(0, capacity + 1) |> collect_mutable())
-        |> collect()
+        |> list()
 
 for at in 0..copies.count do
     let copy = copies[at]

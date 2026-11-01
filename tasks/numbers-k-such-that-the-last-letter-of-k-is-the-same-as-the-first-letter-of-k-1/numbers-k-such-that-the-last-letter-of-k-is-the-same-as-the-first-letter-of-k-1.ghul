@@ -55,7 +55,7 @@ let found =
             now.name[now.name.length - 1] == next.name[0]
         )
         |> map(((now, _)) => now.number)
-        |> memo()
+        |> list()
 
 write_line("The first 50 qualifying numbers:")
 
@@ -67,7 +67,7 @@ for size in [1_000, 10_000, 100_000, 1_000_000] do
     IO.Std.write("\nspelling out numbers until {size:N0} of them match: ")
     IO.Std.out.flush()
 
-    let first = found |> take(size) |> collect()
+    let first = found |> take(size) |> list()
 
     write_line("done")
     let breakdown =

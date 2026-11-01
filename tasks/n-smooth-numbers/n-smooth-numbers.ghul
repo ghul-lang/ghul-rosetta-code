@@ -1,7 +1,7 @@
 use default
 
-smooth(bound: int, count: int) -> List[bigint] is
-    let factors = 2::bound |> filter(is_prime) |> map(bigint) |> collect()
+smooth(bound: int, count: int) -> bigint[] is
+    let factors = 2::bound |> filter(is_prime) |> map(bigint) |> list()
 
     let found = LIST()
     found.add(1n)
@@ -31,7 +31,7 @@ smooth(bound: int, count: int) -> List[bigint] is
     found
 si
 
-let bounds = 2::29 |> filter(is_prime) |> memo()
+let bounds = 2::29 |> filter(is_prime) |> list()
 
 write_line("the first 25 n-smooth numbers:")
 

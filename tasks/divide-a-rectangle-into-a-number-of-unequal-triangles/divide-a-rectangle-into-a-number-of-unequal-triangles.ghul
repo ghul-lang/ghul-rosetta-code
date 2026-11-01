@@ -14,10 +14,10 @@ si
 
 use Triangle = (a: P, b: P, c: P)
 
-sides(t: Triangle) -> List[double] =>
+sides(t: Triangle) -> double[] =>
     [(t.b - t.a).length, (t.c - t.b).length, (t.a - t.c).length]
         |> sort()
-        |> collect()
+        |> list()
 
 similar(s: Triangle, t: Triangle) -> bool =>
     let
@@ -28,7 +28,7 @@ similar(s: Triangle, t: Triangle) -> bool =>
 
 area(t: Triangle) -> double => Math.abs((t.b - t.a) × (t.c - t.a)) / 2.0D
 
-all_different(ts: List[Triangle]) -> bool =>
+all_different(ts: Triangle[]) -> bool =>
     0..ts.count
         |> all(i => i + 1..ts.count |> all(j => !similar(ts[i], ts[j])))
 
@@ -59,7 +59,7 @@ split(t: Triangle, at: double) -> (Triangle, Triangle) => (
 
 let random = System.Random(5)
 
-divide(width: double, height: double, count: int) -> List[Triangle] is
+divide(width: double, height: double, count: int) -> Triangle[] is
     assert count >= 3 else "at least three triangles are needed"
 
     do
@@ -144,7 +144,7 @@ for (i, t) in many |> index() do
     let shade = ubyte(120 + (i * 37) % 120)
 
     tiles.add(
-        [t.a, t.b, t.c] |> map(p => (x = p.x, y = p.y)) |> collect(),
+        [t.a, t.b, t.c] |> map(p => (x = p.x, y = p.y)) |> list(),
         (shade - 80ub, shade - 30ub, 255ub - shade / 3ub)
     )
 od
@@ -156,7 +156,7 @@ image.stroke(1.0D)
 for t in many do
     let corners = [t.a, t.b, t.c, t.a] |> map(p => (x = p.x, y = p.y))
 
-    image.line(corners |> collect())
+    image.line(corners |> list())
 od
 
 image.write("triangles.png")

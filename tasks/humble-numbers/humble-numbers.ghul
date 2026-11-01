@@ -30,7 +30,7 @@ humble() -> long{} is
 si
 
 let first_fifty =
-    humble() |> take(50) |> map(value => "{value,5}") |> collect()
+    humble() |> take(50) |> map(value => "{value,5}") |> list()
 
 write_line("the first fifty humble numbers:")
 

@@ -57,7 +57,7 @@ square(
     v: Point,
     half: double,
     angle: double
-) -> Collections.List[(x: double, y: double)] =>
+) -> (x: double, y: double)[] =>
     [(-1.0D, -1.0D), (1.0D, -1.0D), (1.0D, 1.0D), (-1.0D, 1.0D)]
         |> map((a, b) =>
             turned(
@@ -66,7 +66,7 @@ square(
             )
         )
         |> map(p => (x = p.x, y = p.y))
-        |> collect()
+        |> list()
 
 draw(image: IMAGE, angle: double) is
     image.clear(250ub, 250ub, 247ub)

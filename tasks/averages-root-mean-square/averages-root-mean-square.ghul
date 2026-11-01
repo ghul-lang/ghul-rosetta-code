@@ -1,10 +1,10 @@
 use default
 use System.Math
 
-root_mean_square(values: Collections.List[double]) -> double =>
+root_mean_square(values: double[]) -> double =>
     let squares = values |> sum_by(v => v * v) in
     Math.sqrt(squares / cast(values.count))
 
-let one_to_ten = 1::10 |> map(double) |> collect()
+let one_to_ten = 1::10 |> map(double) |> list()
 
 write_line("{root_mean_square(one_to_ten)}")

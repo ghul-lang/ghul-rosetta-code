@@ -3,7 +3,7 @@ use IO.Std.read_line
 
 let random = System.Random(9)
 
-shuffled() -> List[int] => (
+shuffled() -> int[] => (
     let digits = 1::9 |> collect_mutable()
 
     for i in 0..8 do
@@ -14,7 +14,7 @@ shuffled() -> List[int] => (
     digits
 )
 
-sorted(digits: List[int]) -> bool =>
+sorted(digits: int[]) -> bool =>
     0..8 |> all(i => digits[i] < digits[i + 1])
 
 let digits mut = shuffled()
@@ -45,7 +45,7 @@ while !sorted(digits) do
         (0..flips)
             |> map(i => digits[flips - 1 - i])
             |> cat(digits |> skip(flips))
-            |> collect()
+            |> ARRAY()
 
     score = score + 1
 od

@@ -1,6 +1,6 @@
 use default
 
-bell_triangle() -> List[bigint]{} is
+bell_triangle() -> bigint[]{} is
     let row mut = LIST()
 
     row.add(1n)
@@ -20,7 +20,7 @@ bell_triangle() -> List[bigint]{} is
     od
 si
 
-let rows = bell_triangle() |> take(50) |> collect()
+let rows = bell_triangle() |> take(50) |> list()
 
 write_line("first fifteen and fiftieth Bell numbers:")
 

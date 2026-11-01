@@ -29,7 +29,7 @@ combinations(a: int, b: int) -> Move{} is
     fi
 si
 
-solve(numbers: List[Found], target: int, best: Found) -> Found is
+solve(numbers: Found[], target: int, best: Found) -> Found is
     let closest mut =
         numbers |> min_by(f => Math.abs(f.value - target)) ?? best
 
@@ -52,7 +52,7 @@ solve(numbers: List[Found], target: int, best: Found) -> Found is
                 steps.add(step)
 
                 let entry = (value = value, steps = steps)
-                let next = rest ++ [entry] |> collect()
+                let next = rest ++ [entry] |> list()
                 closest = solve(next, target, closest)
 
                 if closest.value == target then
@@ -69,7 +69,7 @@ play(numbers: int[], target: int) is
     write_line("using {numbers |> join(", ")} to make {target}")
 
     let start =
-        numbers |> map(n => (value = n, steps = LIST())) |> collect()
+        numbers |> map(n => (value = n, steps = LIST())) |> list()
 
     let nothing = (value = 0, steps = LIST())
     let result = solve(start, target, nothing)

@@ -12,7 +12,7 @@ is_magnanimous(value: int) -> bool =>
 
 magnanimous() -> int{} => from(0) |> filter(is_magnanimous)
 
-let terms = magnanimous() |> take(400) |> collect()
+let terms = magnanimous() |> take(400) |> list()
 
 write_line("the first 45 magnanimous numbers:")
 

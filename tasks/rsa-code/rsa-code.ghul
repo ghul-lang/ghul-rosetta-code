@@ -8,7 +8,7 @@ let d = bigint.parse("5617843187844953170308463622230283376298685")
 
 let block_size = 17
 
-encode(block: Collections.List[ubyte]) -> bigint =>
+encode(block: ubyte[]) -> bigint =>
     block |> reduce(0n, (total, b) => total * 256n + bigint(int(b)))
 
 decode(number: bigint) -> ubyte{} =>
@@ -41,7 +41,7 @@ do
         decrypted.add_range(decode(restored))
     od
 
-    let text = Encoding.utf8.get_string(decrypted |> collect())
+    let text = Encoding.utf8.get_string(decrypted |> ARRAY())
     write_line("decrypted: {text}")
     write_line("")
 od

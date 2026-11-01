@@ -72,7 +72,7 @@ wagstaff(top: int) -> (exponent: int, value: bigint){} is
     od
 si
 
-let found = wagstaff(2_000) |> collect()
+let found = wagstaff(2_000) |> ARRAY()
 
 write_line("the first ten Wagstaff primes:")
 

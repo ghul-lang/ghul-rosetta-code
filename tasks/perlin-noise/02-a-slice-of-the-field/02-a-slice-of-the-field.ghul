@@ -23,7 +23,7 @@ let permutation = [
     243, 141, 128, 195, 78, 66, 215, 61, 156, 180
 ]
 
-let p = (0..512) |> map(index => permutation[index % 256]) |> collect()
+let p = (0..512) |> map(index => permutation[index % 256]) |> list()
 
 fade(t: double) -> double => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 

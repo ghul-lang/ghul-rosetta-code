@@ -19,7 +19,7 @@ cyclops() -> long{} is
     while true do
         let scale = 0..half |> reduce(1L, (acc, _) => acc * 10L)
 
-        let halves = zero_free(half) |> memo()
+        let halves = zero_free(half) |> list()
 
         for left in halves do
             for right in halves do
@@ -45,7 +45,7 @@ is_palindrome(value: long) -> bool =>
 report(name: string, numbers: () -> long{}) is
     write_line("first 50 {name}:")
 
-    let first_50 = numbers() |> take(50) |> collect()
+    let first_50 = numbers() |> take(50) |> list()
 
     for row in 0..5 do
         write_line(

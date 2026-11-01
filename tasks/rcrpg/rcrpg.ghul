@@ -134,7 +134,7 @@ describe()
 while let line = read_line() do
     write_line("> {line}")
 
-    let tokens = line.to_lower() |> words() |> collect()
+    let tokens = line.to_lower() |> words() |> list()
 
     if tokens.count == 0 then
         continue

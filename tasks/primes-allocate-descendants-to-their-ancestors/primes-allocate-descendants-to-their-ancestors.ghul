@@ -2,7 +2,7 @@ use default
 
 let top = 99
 
-let descendants = (0::top) |> map(_ => LIST()) |> collect()
+let descendants = (0::top) |> map(_ => LIST()) |> list()
 descendants[0].add(1L)
 
 for p in (2::top) |> filter(is_prime) do
@@ -33,7 +33,7 @@ ancestors(n: int) -> int{} is
     od
 si
 
-abbreviated(list: Collections.List[long]) -> string =>
+abbreviated(list: long[]) -> string =>
     if list.count == 0 then
         "none"
     elif list.count <= 6 then
@@ -43,7 +43,7 @@ abbreviated(list: Collections.List[long]) -> string =>
     fi
 
 for n in 1::top do
-    let chain = n |> ancestors() |> sort() |> collect()
+    let chain = n |> ancestors() |> sort() |> list()
     let children = descendants[n]
 
     write_line(

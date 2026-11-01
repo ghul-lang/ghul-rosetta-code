@@ -6,13 +6,13 @@ class MATRIX(cells: double[][]) is
     _both(other: MATRIX, op: (double, double) -> double pure) -> MATRIX =>
         MATRIX(
             _cells
-                |> zip(other._cells, (a, b) => a |> zip(b, op) |> collect())
-                |> collect()
+                |> zip(other._cells, (a, b) => a |> zip(b, op) |> list())
+                |> list()
         )
 
     _each(op: (double) -> double pure) -> MATRIX =>
         MATRIX(
-            _cells |> map(row => row |> map(op) |> collect()) |> collect()
+            _cells |> map(row => row |> map(op) |> list()) |> list()
         )
 
     // A scalar on the left becomes a matrix of that scalar, which

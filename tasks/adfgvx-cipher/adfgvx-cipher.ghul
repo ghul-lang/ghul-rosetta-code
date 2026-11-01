@@ -34,7 +34,7 @@ to_pairs(square: string, text: string) -> string =>
         )
         |> join("")
 
-from_pairs(square: string, pairs: List[char]) -> string =>
+from_pairs(square: string, pairs: char[]) -> string =>
     0..pairs.count / 2
         |> map(at =>
             let
@@ -74,7 +74,7 @@ let words =
         |> filter(word => word.length == 9)
         |> filter(all_letters)
         |> filter(no_repeats)
-        |> collect()
+        |> list()
 
 let key = words[random.next(words.count)].to_upper()
 

@@ -6,7 +6,7 @@ let random = System.Random(1783)
 // and its column, so every Latin square of the size is reachable. A row can
 // still paint itself into a corner, and the square is started again when it
 // does.
-try_row(rows: List[List[int]], size: int) -> List[int]? is
+try_row(rows: int[][], size: int) -> int[]? is
     let row = repeat(-1, size) |> collect_mutable()
     let taken = repeat(false, size) |> collect_mutable()
 
@@ -17,7 +17,7 @@ try_row(rows: List[List[int]], size: int) -> List[int]? is
                     !taken[symbol] /\
                     rows |> all(above => above[column] != symbol)
                 )
-                |> collect()
+                |> list()
 
         if free.count == 0 then
             return null
@@ -32,10 +32,10 @@ try_row(rows: List[List[int]], size: int) -> List[int]? is
     return row
 si
 
-latin_square(size: int) -> List[int]{} is
+latin_square(size: int) -> int[]{} is
     let found =
         for _ in from(1) do
-            let rows = LIST[List[int]]()
+            let rows = LIST[int[]]()
 
             for _ in 0..size do
                 if let row = try_row(rows, size) then

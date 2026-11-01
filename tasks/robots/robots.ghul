@@ -93,7 +93,7 @@ while alive /\ robots.count > 0 do
                 x = r.x + toward(r.x, player.x),
                 y = r.y + toward(r.y, player.y)
             ))
-            |> collect()
+            |> ARRAY()
 
     robots.clear()
 

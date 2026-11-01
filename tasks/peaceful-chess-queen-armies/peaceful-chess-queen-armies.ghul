@@ -32,7 +32,7 @@ attack_masks(n: int) -> ulong[] is
         masks.add(mask)
     od
 
-    return masks |> collect()
+    return masks |> list()
 si
 
 search(

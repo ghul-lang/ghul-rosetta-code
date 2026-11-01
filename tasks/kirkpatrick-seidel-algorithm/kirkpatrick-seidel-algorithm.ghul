@@ -11,10 +11,10 @@ si
 slope(p: P, q: P) -> double => (q.y - p.y) / (q.x - p.x)
 
 median(values: double{}) -> double =>
-    let sorted = values |> sort() |> collect() in
+    let sorted = values |> sort() |> list() in
     sorted[(sorted.count - 1) / 2]
 
-leftmost(points: List[P]) -> P =>
+leftmost(points: P[]) -> P =>
     points
         |> reduce(
             points[0],
@@ -26,7 +26,7 @@ leftmost(points: List[P]) -> P =>
                 fi
         )
 
-rightmost(points: List[P]) -> P =>
+rightmost(points: P[]) -> P =>
     points
         |> reduce(
             points[0],
@@ -38,7 +38,7 @@ rightmost(points: List[P]) -> P =>
                 fi
         )
 
-bridge(points: List[P], a: double) -> (P, P) is
+bridge(points: P[], a: double) -> (P, P) is
     if points.count == 2 then
         let p = points[0], q = points[1]
 
@@ -71,7 +71,7 @@ bridge(points: List[P], a: double) -> (P, P) is
     let height = p => p.y - k * p.x
     let top = points |> map(height) |> reduce(height(points[0]), max)
     let touching =
-        points |> filter(p => height(p) >= top - 1.0e-12) |> collect()
+        points |> filter(p => height(p) >= top - 1.0e-12) |> list()
 
     let low = leftmost(touching)
     let high = rightmost(touching)
@@ -95,7 +95,7 @@ bridge(points: List[P], a: double) -> (P, P) is
     bridge(kept, a)
 si
 
-upper(points: List[P], first: P, last: P) -> P{} is
+upper(points: P[], first: P, last: P) -> P{} is
     if points.count <= 1 /\ first =~ last then
         return [first]
     fi
@@ -106,46 +106,46 @@ upper(points: List[P], first: P, last: P) -> P{} is
         if left =~ first then [first]
         else
             let part = points |> filter(p => p.x <= left.x) in
-            upper(part |> collect(), first, left)
+            upper(part |> list(), first, left)
         fi
 
     let after =
         if right =~ last then [last]
         else
             let part = points |> filter(p => p.x >= right.x) in
-            upper(part |> collect(), right, last)
+            upper(part |> list(), right, last)
         fi
 
-    before ++ after |> collect()
+    before ++ after |> list()
 si
 
-upper_hull(points: List[P]) -> P{} =>
+upper_hull(points: P[]) -> P{} =>
     let
         first = leftmost(points),
         last = rightmost(points)
     in
         let between = points |> filter(p => p.x > first.x /\ p.x < last.x)
         in
-        upper(between ++ [first, last] |> collect(), first, last)
+        upper(between ++ [first, last] |> list(), first, last)
 
-flipped(points: P{}) -> List[P] =>
-    points |> map(p => P(p.x, -p.y)) |> collect()
+flipped(points: P{}) -> P[] =>
+    points |> map(p => P(p.x, -p.y)) |> list()
 
-backwards(items: List[P]) -> P{} =>
+backwards(items: P[]) -> P{} =>
     (0..items.count) |> map(i => items[items.count - 1 - i])
 
-hull(points: List[P]) -> List[P] =>
+hull(points: P[]) -> P[] =>
     let
         top = upper_hull(points),
         bottom = flipped(upper_hull(flipped(points))),
         inner = bottom |> backwards() |> skip(1) |> take(bottom.count - 2)
     in
-        top ++ inner |> collect()
+        top ++ inner |> list()
 
 turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
 
-monotone_chain(points: List[P]) -> P{} is
-    let sorted = points |> sort((a, b) => a.x <> b.x) |> collect()
+monotone_chain(points: P[]) -> P{} is
+    let sorted = points |> sort((a, b) => a.x <> b.x) |> list()
     let chain = LIST()
 
     for pass in [sorted, backwards(sorted)] do
@@ -182,7 +182,7 @@ let points =
             in
                 P(r * cos(angle), r * sin(angle))
         )
-        |> collect()
+        |> list()
 
 let result = hull(points)
 let agrees = SET(result).set_equals(monotone_chain(points))
@@ -205,7 +205,7 @@ od
 image.colour(200ub, 50ub, 40ub)
 image.stroke(2.0D)
 image.line(
-    result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> collect()
+    result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> list()
 )
 
 image.write("hull.png")

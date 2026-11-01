@@ -23,8 +23,8 @@ let pack = (0..81) |> map(i => CARD(i / 27, i / 9 % 3, i / 3 % 3, i % 3))
 
 let random = System.Random(2026)
 
-deal(count: int) -> Collections.List[CARD] =>
-    pack |> sort_by(_ => random.next()) |> take(count) |> collect()
+deal(count: int) -> CARD[] =>
+    pack |> sort_by(_ => random.next()) |> take(count) |> list()
 
 for count in [9, 12] do
     let cards = deal(count)

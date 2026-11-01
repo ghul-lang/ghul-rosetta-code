@@ -13,7 +13,7 @@ let board = repeat(0, squares) |> collect_mutable()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
-lines_for(direction: char) -> List[int]{} => (
+lines_for(direction: char) -> int[]{} => (
     let lines = LIST[LIST[int]]()
 
     for major in 0..side do
@@ -39,14 +39,14 @@ lines_for(direction: char) -> List[int]{} => (
     lines
 )
 
-collapse(values: List[int]) -> List[int] =>
+collapse(values: int[]) -> int[] =>
     let
         merged = merge_packed(LIST[int](values |> filter(* != 0))),
         padded = merged ++ repeat(0, side - (merged |> count()))
     in
-        padded |> collect()
+        padded |> ARRAY()
 
-merge_packed(packed: List[int]) -> int{} =>
+merge_packed(packed: int[]) -> int{} =>
     case packed
     when [] then []
     when [x, y, ..rest] /\ x == y then
@@ -55,10 +55,10 @@ merge_packed(packed: List[int]) -> int{} =>
     esac
 
 slide(target: LIST[int], direction: char) -> bool => (
-    let before = target |> collect()
+    let before = target |> ARRAY()
 
     for line in lines_for(direction) do
-        let moved = collapse(line |> map(at => target[at]) |> collect())
+        let moved = collapse(line |> map(at => target[at]) |> ARRAY())
 
         for at in 0..side do
             target[line[at]] = moved[at]
@@ -69,7 +69,7 @@ slide(target: LIST[int], direction: char) -> bool => (
 )
 
 spawn() is
-    let empty = 0..squares |> filter(at => board[at] == 0) |> collect()
+    let empty = 0..squares |> filter(at => board[at] == 0) |> ARRAY()
 
     if empty.count > 0 then
         board[empty[random.next(empty.count)]] =

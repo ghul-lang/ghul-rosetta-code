@@ -2,7 +2,7 @@ use default
 
 use City = (name: string, population: double)
 
-let cities: List[City] = [
+let cities: City[] = [
     ("Lagos", 21.0D),
     ("Cairo", 15.2D),
     ("Kinshasa-Brazzaville", 11.3D),
@@ -15,14 +15,14 @@ let cities: List[City] = [
     ("Casablanca", 3.98D)
 ]
 
-first_index[T](values: List[T], matches: (T) -> bool) -> int? =>
+first_index[T](values: T[], matches: (T) -> bool) -> int? =>
     values
         |> index()
         |> filter(entry => matches(entry.value))
         |> map(entry => entry.index)
         |> first()
 
-first_where[T](values: List[T], matches: (T) -> bool) -> T? =>
+first_where[T](values: T[], matches: (T) -> bool) -> T? =>
     values |> filter(matches) |> first()
 
 write_line("{first_index(cities, city => city.name =~ "Dar Es Salaam")!}")

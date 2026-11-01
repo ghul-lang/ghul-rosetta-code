@@ -18,8 +18,8 @@ flip(s: State, which: string) -> State =>
         (small = small - s.small, large = large - s.large, time = s.time)
     esac
 
-running(s: State) -> List[int] =>
-    [s.small, s.large] |> filter(* > 0) |> collect()
+running(s: State) -> int[] =>
+    [s.small, s.large] |> filter(* > 0) |> list()
 
 wait(s: State) -> State? =>
     let sands = running(s) in
@@ -47,7 +47,7 @@ moves(s: State) -> (command: string, next: State){} => (
     result
 )
 
-plan(start: State) -> List[string]? is
+plan(start: State) -> string[]? is
     let seen = SET()
     let queue = Collections.Queue()
 

@@ -22,7 +22,7 @@ is_set(t: Triple) -> bool =>
     (a.symbol + b.symbol + c.symbol) % 3 == 0 /\
     (a.shading + b.shading + c.shading) % 3 == 0
 
-triples(cards: List[CARD]) -> Triple{} is
+triples(cards: CARD[]) -> Triple{} is
     for i in 0..cards.count do
         for j in i + 1..cards.count do
             for k in j + 1..cards.count do
@@ -39,16 +39,16 @@ let deck =
 
 let random = System.Random(81)
 
-deal(size: int) -> List[CARD] is
+deal(size: int) -> CARD[] is
     for i in 0..size do
         let other = i + random.next(deck.count - i)
         (deck[i], deck[other]) = (deck[other], deck[i])
     od
 
-    return deck |> take(size) |> collect()
+    return deck |> take(size) |> list()
 si
 
-puzzle(size: int, wanted: int) -> List[CARD] is
+puzzle(size: int, wanted: int) -> CARD[] is
     do
         let cards = deal(size)
 
@@ -116,7 +116,7 @@ outline(symbol: int, x: double, y: double) -> List[(
                         (x = x + 9.0D * c * k, y = y + 19.0D * s * k)
                 esac
         )
-        |> collect()
+        |> list()
 
 let card_width = 120.0D
 let card_height = 72.0D
@@ -161,7 +161,7 @@ do
 
         image.colour(red, green, blue)
         image.stroke(2.0D)
-        image.line(shape ++ [shape[0]] |> collect())
+        image.line(shape ++ [shape[0]] |> list())
     od
 od
 

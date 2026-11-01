@@ -43,7 +43,7 @@ write_line("prime factors:")
 
 for index in 0..8 do
     let value = fermat(index)
-    let found = value |> factors() |> collect()
+    let found = value |> factors() |> list()
     let shown = found |> map(f => "{f}") |> join(" * ")
     let note =
         if is_prime(value) then " (prime)"

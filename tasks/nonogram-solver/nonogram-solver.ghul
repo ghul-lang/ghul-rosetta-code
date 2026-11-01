@@ -4,12 +4,12 @@ use Cells = LIST[int]
 
 let unknown = -1
 
-clues_of(text: string) -> List[List[int]] =>
+clues_of(text: string) -> int[][] =>
     text.split([' '])
-        |> map(word => word |> map(c => int(c) - 64) |> collect())
-        |> collect()
+        |> map(word => word |> map(c => int(c) - 64) |> list())
+        |> list()
 
-arrangements(clues: List[int], length: int) -> List[long] is
+arrangements(clues: int[], length: int) -> long[] is
     let found = LIST()
 
     place(i, start, mask) is
@@ -35,10 +35,10 @@ si
 class PUZZLE is
     rows: int
     columns: int
-    lines: List[List[int]]
-    choices: List[List[long]]
+    lines: int[][]
+    choices: long[][]
 
-    init(row_clues: List[List[int]], column_clues: List[List[int]]) is
+    init(row_clues: int[][], column_clues: int[][]) is
         rows = row_clues.count
         columns = column_clues.count
 
@@ -49,14 +49,14 @@ class PUZZLE is
                     (0..columns)
                         |> map(c => 0..rows |> map(r => r * columns + c))
                 )
-                |> map(line => line |> collect())
-                |> collect()
+                |> map(line => line |> list())
+                |> list()
 
         choices =
             row_clues
                 |> map(arrangements(*, columns))
                 |> cat(column_clues |> map(arrangements(*, rows)))
-                |> collect()
+                |> list()
     si
 
     propagate(cells: Cells) -> bool is
@@ -83,7 +83,7 @@ class PUZZLE is
                         |> filter(a =>
                             a & empty == 0L /\ a & filled == filled
                         )
-                        |> collect()
+                        |> list()
 
                 if fits.count == 0 then
                     return false

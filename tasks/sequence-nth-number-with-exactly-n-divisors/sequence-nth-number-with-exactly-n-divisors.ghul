@@ -1,6 +1,6 @@
 use default
 
-let first_primes = primes() |> take(50) |> collect()
+let first_primes = primes() |> take(50) |> list()
 
 // A number with a prime number p of divisors is a prime to the power
 // p - 1, so the nth of them is the nth prime to that power.

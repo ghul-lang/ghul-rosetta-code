@@ -1,19 +1,19 @@
 use default
 
-use Point = Collections.List[double]
+use Point = double[]
 
 union Tree is
     EMPTY
     NODE(left: Tree, point: Point, axis: int, right: Tree)
 si
 
-build(points: Collections.List[Point], depth: int) -> Tree is
+build(points: Point[], depth: int) -> Tree is
     if points.count == 0 then
         return Tree.EMPTY
     fi
 
     let axis = depth % points[0].count
-    let sorted = points |> sort((a, b) => a[axis] <> b[axis]) |> collect()
+    let sorted = points |> sort((a, b) => a[axis] <> b[axis]) |> ARRAY()
     let middle = sorted.count / 2
 
     Tree.NODE(
@@ -68,7 +68,7 @@ si
 
 place(p: Point) -> string => p |> map(c => "{c:F6}") |> join()
 
-show(name: string, points: Collections.List[Point], target: Point) is
+show(name: string, points: Point[], target: Point) is
     let (point, distance, visited) = nearest(build(points, 0), target)
 
     write_line("{name}")
@@ -86,15 +86,15 @@ let wikipedia = [
     [7.0, 2.0]
 ]
     |> map(p => cast Point(p))
-    |> collect()
+    |> ARRAY()
 
 show("Wikipedia example", wikipedia, [9.0, 2.0])
 
 let random = System.Random(42)
 
 random_point() -> Point =>
-    repeat(0, 3) |> map(_ => random.next_double()) |> collect()
+    repeat(0, 3) |> map(_ => random.next_double()) |> ARRAY()
 
-let cloud = repeat(0, 1000) |> map(_ => random_point()) |> collect()
+let cloud = repeat(0, 1000) |> map(_ => random_point()) |> ARRAY()
 
 show("1000 random points in the unit cube", cloud, random_point())

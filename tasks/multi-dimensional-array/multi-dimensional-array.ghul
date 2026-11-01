@@ -11,11 +11,11 @@ let cells =
                         |> map(_ =>
                             repeat(0, extents[3]) |> collect_mutable()
                         )
-                        |> collect()
+                        |> list()
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 write_line("{extents.count} dimensions, extents {extents |> join(" by ")}")
 

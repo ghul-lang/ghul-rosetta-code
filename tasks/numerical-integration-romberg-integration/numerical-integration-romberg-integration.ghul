@@ -8,7 +8,7 @@ romberg(
     steps: int,
     accuracy: double
 ) -> double is
-    let rows = LIST[List[double]]()
+    let rows = LIST[double[]]()
     let width = upper - lower
     let ends = f(lower) + f(upper)
 

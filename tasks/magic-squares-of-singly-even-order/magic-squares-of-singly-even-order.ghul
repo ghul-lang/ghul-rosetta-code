@@ -1,10 +1,10 @@
 use default
 
-use Square = List[List[int]]
+use Square = int[][]
 
 odd_magic_square(n: int) -> Square => (
     let square =
-        0..n |> map(_ => repeat(0, n) |> collect_mutable()) |> collect()
+        0..n |> map(_ => repeat(0, n) |> collect_mutable()) |> list()
     let (row, column) mut = (0, n / 2)
 
     for value in 1::n * n do
@@ -46,7 +46,7 @@ singly_even_magic_square(n: int) -> Square is
                     )
                     |> collect_mutable()
             )
-            |> collect()
+            |> list()
 
     for row in 0..half do
         let middle = row == half / 2

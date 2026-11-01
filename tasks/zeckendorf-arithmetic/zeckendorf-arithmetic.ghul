@@ -6,7 +6,7 @@ blank() -> LIST[int] =>
     let digits = repeat(0, width) |> collect_mutable() in
     digits
 
-copy(value: List[int]) -> LIST[int] => (
+copy(value: int[]) -> LIST[int] => (
     let digits = blank()
 
     for index in 0..width do
@@ -16,7 +16,7 @@ copy(value: List[int]) -> LIST[int] => (
     digits
 )
 
-read(text: string) -> List[int] => (
+read(text: string) -> int[] => (
     let digits = blank()
 
     for entry in text |> reverse() |> index() do
@@ -26,11 +26,11 @@ read(text: string) -> List[int] => (
     digits
 )
 
-highest(value: List[int]) -> int =>
+highest(value: int[]) -> int =>
     let found = 0..width |> reverse() |> find(index => value[index] != 0) in
     found ?? -1
 
-show(value: List[int]) -> string =>
+show(value: int[]) -> string =>
     let top = highest(value) in
     if top < 0 then
         "0"
@@ -38,10 +38,10 @@ show(value: List[int]) -> string =>
         0::top |> reverse() |> map(index => "{value[index]}") |> join("")
     fi
 
-is_zero(value: List[int]) -> bool =>
+is_zero(value: int[]) -> bool =>
     0..width |> all(index => value[index] == 0)
 
-compare(left: List[int], right: List[int]) -> int =>
+compare(left: int[], right: int[]) -> int =>
     let diff = 0..width |> reverse() |> find(i => left[i] != right[i]) in
     if diff? then
         if left[diff] > right[diff] then 1 else -1 fi
@@ -92,7 +92,7 @@ normalise(digits: LIST[int]) is
     od
 si
 
-add(left: List[int], right: List[int]) -> LIST[int] is
+add(left: int[], right: int[]) -> LIST[int] is
     let total = blank()
 
     for index in 0..width do
@@ -104,7 +104,7 @@ add(left: List[int], right: List[int]) -> LIST[int] is
     total
 si
 
-decrement(value: List[int]) -> LIST[int] => (
+decrement(value: int[]) -> LIST[int] => (
     let result = copy(value)
     let lowest = 0..width |> find(index => result[index] == 1)
 
@@ -122,7 +122,7 @@ decrement(value: List[int]) -> LIST[int] => (
     result
 )
 
-subtract(left: List[int], right: List[int]) -> LIST[int] =>
+subtract(left: int[], right: int[]) -> LIST[int] =>
     let result = copy(left) in
     if is_zero(right) then
         result
@@ -131,9 +131,9 @@ subtract(left: List[int], right: List[int]) -> LIST[int] =>
     fi
 
 fibonacci_multiples(
-    value: List[int],
-    upto: List[int]
-) -> List[List[int]] => (
+    value: int[],
+    upto: int[]
+) -> int[][] => (
     let table = LIST[LIST[int]]()
 
     table.add(copy(value))
@@ -146,7 +146,7 @@ fibonacci_multiples(
     table
 )
 
-multiply(left: List[int], right: List[int]) -> List[int] is
+multiply(left: int[], right: int[]) -> int[] is
     let top = highest(right)
 
     if top < 0 then
@@ -168,9 +168,9 @@ multiply(left: List[int], right: List[int]) -> List[int] is
         |> reduce(blank(), add)
 si
 
-use DIVISION = (quotient: List[int], remainder: List[int])
+use DIVISION = (quotient: int[], remainder: int[])
 
-divide(left: List[int], right: List[int]) -> DIVISION is
+divide(left: int[], right: int[]) -> DIVISION is
     let table = fibonacci_multiples(right, left)
     let quotient = blank()
     let remainder mut = copy(left)

@@ -34,7 +34,7 @@ si
 
 whole(value: bigint) -> RATIONAL => RATIONAL(value, 1n)
 
-bernoullis(count: int) -> List[RATIONAL] is
+bernoullis(count: int) -> RATIONAL[] is
     let values = LIST()
 
     for index in 0::count do

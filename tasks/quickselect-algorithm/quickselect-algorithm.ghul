@@ -1,10 +1,10 @@
 use default
 
-quickselect(values: List[int], k: int) -> int is
+quickselect(values: int[], k: int) -> int is
     let pivot = values[values.count / 2]
 
-    let lowers = values |> filter(* < pivot) |> collect()
-    let pivots = values |> filter(* == pivot) |> collect()
+    let lowers = values |> filter(* < pivot) |> list()
+    let pivots = values |> filter(* == pivot) |> list()
 
     if k < lowers.count then
         quickselect(lowers, k)
@@ -12,7 +12,7 @@ quickselect(values: List[int], k: int) -> int is
         pivot
     else
         quickselect(
-            values |> filter(* > pivot) |> collect(),
+            values |> filter(* > pivot) |> list(),
             k - lowers.count - pivots.count
         )
     fi

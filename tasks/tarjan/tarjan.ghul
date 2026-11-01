@@ -9,7 +9,7 @@ let low = repeat(0, edges.count) |> collect_mutable()
 let on_stack = repeat(false, edges.count) |> collect_mutable()
 
 let stack = STACK[int]()
-let components = LIST[List[int]]()
+let components = LIST[int[]]()
 
 let next_index mut = 0
 

@@ -37,7 +37,7 @@ through(a: P, b: P, c: P) -> CIRCLE =>
 
 let random = System.Random(1857)
 
-enclose(given: List[P]) -> CIRCLE is
+enclose(given: P[]) -> CIRCLE is
     let points = LIST(given)
 
     for i in 0..points.count do
@@ -93,7 +93,7 @@ let scattered =
             in
                 P(1.5D * r * cos(angle), r * sin(angle))
         )
-        |> collect()
+        |> list()
 
 let circle = enclose(scattered)
 

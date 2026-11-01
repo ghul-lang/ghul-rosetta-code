@@ -38,7 +38,7 @@ digit(seven: string, right: bool) -> int? =>
     let wanted = if right then flipped(seven) else seven fi in
     0..10 |> find(d => patterns[d] =~ wanted)
 
-read(scan: string) -> List[int]? is
+read(scan: string) -> int[]? is
     if
         scan[0..3] !~ "101" \/
         scan[45..50] !~ "01010" \/
@@ -67,7 +67,7 @@ read(scan: string) -> List[int]? is
     found
 si
 
-sound(found: List[int]) -> bool =>
+sound(found: int[]) -> bool =>
     (
         found
             |> index()

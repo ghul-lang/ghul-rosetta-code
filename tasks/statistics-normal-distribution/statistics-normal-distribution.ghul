@@ -15,7 +15,7 @@ normal() -> double{} is
 si
 
 let size = 100000
-let samples = normal() |> take(size) |> memo()
+let samples = normal() |> take(size) |> list()
 
 let mean = samples |> sum() / double(size)
 
@@ -74,7 +74,7 @@ let curve =
             in
                 (x = x, y = y)
         )
-        |> collect()
+        |> list()
 
 image.colour(220ub, 60ub, 40ub)
 image.stroke(2.5D)

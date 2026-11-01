@@ -19,7 +19,7 @@ let cases = [
 
 for (start, stop, step, comment) in cases do
     let values =
-        from(start, step) |> take_while(* <= stop) |> take(11) |> collect()
+        from(start, step) |> take_while(* <= stop) |> take(11) |> list()
 
     let shown = values |> take(10) |> join()
     let more = if values.count > 10 then ", ..." else "" fi

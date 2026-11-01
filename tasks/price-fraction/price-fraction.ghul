@@ -19,7 +19,7 @@ let shown =
 
             "{price:F2} -> {rescale(price):F2}"
         ))
-        |> collect()
+        |> list()
 
 for row in 0..21 do
     let last = System.Math.min(row * 5 + 5, shown.count)

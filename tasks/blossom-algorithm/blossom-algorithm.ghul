@@ -22,7 +22,7 @@ class GRAPH(order: int public) is
         _edges[b].add(a)
     si
 
-    matched: List[(a: int, b: int)] => [
+    matched: (a: int, b: int)[] => [
         (a = a, b = _match[a]!)
         for a in 0..order
         if (_match[a] ?? -1) > a
@@ -163,7 +163,7 @@ class GRAPH(order: int public) is
     si
 si
 
-show(name: string, order: int, edges: List[(a: int, b: int)]) is
+show(name: string, order: int, edges: (a: int, b: int)[]) is
     let graph = GRAPH(order)
 
     edges |> each(edge => graph.join(edge.a, edge.b))

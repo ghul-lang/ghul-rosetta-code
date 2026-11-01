@@ -1,14 +1,14 @@
 use default
 
 use SOLUTION = (
-    colour: List[string],
-    nation: List[string],
-    drink: List[string],
-    smoke: List[string],
-    pet: List[string]
+    colour: string[],
+    nation: string[],
+    drink: string[],
+    smoke: string[],
+    pet: string[]
 )
 
-permutations(items: List[string]) -> List[string]{} is
+permutations(items: string[]) -> string[]{} is
     if items.count == 0 then
         yield LIST()
     else
@@ -29,37 +29,37 @@ permutations(items: List[string]) -> List[string]{} is
     fi
 si
 
-arrangements(items: string[]) -> List[string]{} is
+arrangements(items: string[]) -> string[]{} is
     yield in permutations(LIST(items))
 si
 
-house_of(row: List[string], value: string) -> int =>
+house_of(row: string[], value: string) -> int =>
     row |> find_index(* =~ value)!
 
 together(
-    left: List[string],
+    left: string[],
     left_value: string,
-    right: List[string],
+    right: string[],
     right_value: string
 ) -> bool => house_of(left, left_value) == house_of(right, right_value)
 
 next_to(
-    left: List[string],
+    left: string[],
     left_value: string,
-    right: List[string],
+    right: string[],
     right_value: string
 ) -> bool => (
     let gap = house_of(left, left_value) - house_of(right, right_value)
     gap == 1 \/ gap == -1
 )
 
-colour_rows() -> List[string]{} =>
+colour_rows() -> string[]{} =>
     arrangements(["red", "green", "white", "yellow", "blue"])
         |> filter(row =>
             house_of(row, "green") + 1 == house_of(row, "white")
         )
 
-nation_rows(colour: List[string]) -> List[string]{} =>
+nation_rows(colour: string[]) -> string[]{} =>
     arrangements([
         "English", "Swede", "Dane", "Norwegian", "German"
     ])
@@ -69,7 +69,7 @@ nation_rows(colour: List[string]) -> List[string]{} =>
             next_to(row, "Norwegian", colour, "blue")
         )
 
-drink_rows(colour: List[string], nation: List[string]) -> List[string]{} =>
+drink_rows(colour: string[], nation: string[]) -> string[]{} =>
     arrangements(["tea", "coffee", "milk", "beer", "water"])
         |> filter(row =>
             house_of(row, "milk") == 2 /\
@@ -78,10 +78,10 @@ drink_rows(colour: List[string], nation: List[string]) -> List[string]{} =>
         )
 
 smoke_rows(
-    colour: List[string],
-    nation: List[string],
-    drink: List[string]
-) -> List[string]{} =>
+    colour: string[],
+    nation: string[],
+    drink: string[]
+) -> string[]{} =>
     arrangements([
         "Pall Mall", "Dunhill", "Blend", "Blue Master",
         "Prince"
@@ -93,7 +93,7 @@ smoke_rows(
             next_to(row, "Blend", drink, "water")
         )
 
-pet_rows(nation: List[string], smoke: List[string]) -> List[string]{} =>
+pet_rows(nation: string[], smoke: string[]) -> string[]{} =>
     arrangements(["dog", "bird", "cat", "horse", "zebra"])
         |> filter(row =>
             together(row, "dog", nation, "Swede") /\
@@ -132,7 +132,7 @@ row_text(house: int, solution: SOLUTION) -> string =>
     "{pad(solution.drink[house], 8)}"
     "{pad(solution.smoke[house], 12)}{solution.pet[house]}"
 
-let found = solutions() |> collect()
+let found = solutions() |> list()
 
 write_line(
     "{pad("no", 3)}{pad("colour", 8)}{pad("nation", 11)}"

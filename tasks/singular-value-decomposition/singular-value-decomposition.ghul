@@ -5,7 +5,7 @@ use Matrix = List[LIST[double]]
 zeros(rows: int, columns: int) -> Matrix =>
     (0..rows)
         |> map(_ => repeat(0.0, columns) |> collect_mutable())
-        |> collect()
+        |> list()
 
 identity(n: int) -> Matrix => (
     let result = zeros(n, n)
@@ -20,7 +20,7 @@ identity(n: int) -> Matrix => (
 transpose(a: Matrix) -> Matrix =>
     (0..a[0].count)
         |> map(j => (0..a.count) |> map(i => a[i][j]) |> collect_mutable())
-        |> collect()
+        |> list()
 
 column_dot(a: Matrix, p: int, q: int) -> double =>
     a |> sum_by(row => row[p] * row[q])
@@ -40,7 +40,7 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
     fi
 
     let n = a[0].count
-    let u = a |> map(row => row) |> collect()
+    let u = a |> map(row => row) |> list()
     let v = identity(n)
     let converged mut = false
 
@@ -74,9 +74,9 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
     let norms =
         (0..n)
             |> map(j => System.Math.sqrt(column_dot(u, j, j)))
-            |> collect()
+            |> list()
 
-    let order = (0..n) |> sort_by_descending(j => norms[j]) |> memo()
+    let order = (0..n) |> sort_by_descending(j => norms[j]) |> list()
     let last = u.count - 1
 
     let sign = j => if u[last][j] < 0.0 then -1.0 else 1.0 fi
@@ -94,16 +94,16 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
             |> map(row =>
                 order |> map(j => row[j] * scale(j)) |> collect_mutable()
             )
-            |> collect()
+            |> list()
 
     let sorted_v =
         v
             |> map(row =>
                 order |> map(j => row[j] * sign(j)) |> collect_mutable()
             )
-            |> collect()
+            |> list()
 
-    let sigma = order |> map(j => norms[j]) |> collect()
+    let sigma = order |> map(j => norms[j]) |> list()
 
     return (sorted_u, sigma, sorted_v)
 si
@@ -128,7 +128,7 @@ let a: Matrix =
                 |> map(double.parse)
                 |> collect_mutable()
         )
-        |> collect()
+        |> list()
 
 let (u, sigma, v) = svd(a)
 
@@ -155,5 +155,5 @@ show(
                 )
                 |> collect_mutable()
         )
-        |> collect()
+        |> list()
 )

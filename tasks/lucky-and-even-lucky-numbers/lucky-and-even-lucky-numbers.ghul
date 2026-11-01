@@ -11,10 +11,10 @@ union Parsed is
     REJECTED(message: string)
 si
 
-sieve(even: bool, limit: int) -> List[int] is
+sieve(even: bool, limit: int) -> int[] is
     let start = if even then 2 else 1 fi
     let survivors mut =
-        from(start, 2) |> take_while(* <= limit) |> collect()
+        from(start, 2) |> take_while(* <= limit) |> list()
 
     let position mut = 1
 
@@ -28,7 +28,7 @@ sieve(even: bool, limit: int) -> List[int] is
                 |> index()
                 |> filter(entry => (entry.index + 1) % spacing != 0)
                 |> map(entry => entry.value)
-                |> collect()
+                |> list()
 
         position = position + 1
     od
@@ -39,7 +39,7 @@ si
 let lucky_numbers = sieve(false, 150_000)
 let even_lucky_numbers = sieve(true, 150_000)
 
-series(even: bool) -> List[int] =>
+series(even: bool) -> int[] =>
     if even then even_lucky_numbers else lucky_numbers fi
 
 as_number(text: string) -> int? is
@@ -65,7 +65,7 @@ as_kind(text: string) -> bool? =>
     else null
     esac
 
-parse(arguments: List[string]) -> Parsed is
+parse(arguments: string[]) -> Parsed is
     if arguments.count == 0 then
         return Parsed.REJECTED(
             "no arguments: expected j [k] [lucky|evenLucky]"
@@ -137,7 +137,7 @@ evaluate(request: Request) -> int{} =>
             |> filter(value => value >= valued.low /\ value <= valued.high)
     esac
 
-run(arguments: List[string]) is
+run(arguments: string[]) is
     write_line("lucky {arguments |> join(" ")}".trim_end())
 
     let outcome = parse(arguments)

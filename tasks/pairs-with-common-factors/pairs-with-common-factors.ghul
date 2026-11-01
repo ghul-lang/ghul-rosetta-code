@@ -26,7 +26,7 @@ sharing_a_factor() -> long{} is
     od
 si
 
-let terms = sharing_a_factor() |> collect()
+let terms = sharing_a_factor() |> list()
 
 write_line("the first 100 terms:")
 

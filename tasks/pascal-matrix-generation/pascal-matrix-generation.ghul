@@ -2,19 +2,19 @@ use default
 
 choose(n: int, k: int) -> long => binomial(long(n), long(k))
 
-matrix(size: int, entry: (int, int) -> long) -> List[List[long]] =>
+matrix(size: int, entry: (int, int) -> long) -> long[][] =>
     0..size
-        |> map(i => 0..size |> map(entry(i, *)) |> collect())
-        |> collect()
+        |> map(i => 0..size |> map(entry(i, *)) |> list())
+        |> list()
 
-upper(size: int) -> List[List[long]] => matrix(size, (i, j) => choose(j, i))
+upper(size: int) -> long[][] => matrix(size, (i, j) => choose(j, i))
 
-lower(size: int) -> List[List[long]] => matrix(size, (i, j) => choose(i, j))
+lower(size: int) -> long[][] => matrix(size, (i, j) => choose(i, j))
 
-symmetric(size: int) -> List[List[long]] =>
+symmetric(size: int) -> long[][] =>
     matrix(size, (i, j) => choose(i + j, i))
 
-show(title: string, m: List[List[long]]) is
+show(title: string, m: long[][]) is
     write_line("{title}:")
 
     for row in m do

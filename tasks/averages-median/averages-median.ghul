@@ -1,7 +1,7 @@
 use default
 
 median(values: double{}) -> double is
-    let ordered = values |> sort() |> collect()
+    let ordered = values |> sort() |> list()
 
     assert ordered.count > 0 else "the median of no values is not defined"
 

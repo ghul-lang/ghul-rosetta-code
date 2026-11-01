@@ -1,10 +1,10 @@
 use default
 
-use Register = (connection: List[int], length: int)
+use Register = (connection: int[], length: int)
 
 predict(
-    sequence: List[int],
-    connection: List[int],
+    sequence: int[],
+    connection: int[],
     length: int,
     n: int
 ) -> int =>
@@ -15,13 +15,13 @@ predict(
     ]
         |> reduce(0, * ^ *)
 
-shortest_register(sequence: List[int]) -> Register is
+shortest_register(sequence: int[]) -> Register is
     let connection = LIST([1])
     let previous mut = LIST([1])
     let length mut = 0
     let shift mut = 1
 
-    subtract_shifted(target: LIST[int], shifted: List[int]) is
+    subtract_shifted(target: LIST[int], shifted: int[]) is
         for (i, coefficient) in shifted |> index() do
             while target.count <= i + shift do
                 target.add(0)
@@ -53,7 +53,7 @@ shortest_register(sequence: List[int]) -> Register is
     (connection, length)
 si
 
-polynomial(coefficients: List[int]) -> string =>
+polynomial(coefficients: int[]) -> string =>
     coefficients
         |> index()
         |> filter((_, c) => c == 1)
@@ -67,8 +67,8 @@ polynomial(coefficients: List[int]) -> string =>
         |> join(" + ")
 
 regenerates(
-    sequence: List[int],
-    connection: List[int],
+    sequence: int[],
+    connection: int[],
     length: int
 ) -> bool =>
     length..sequence.count

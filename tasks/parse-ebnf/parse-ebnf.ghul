@@ -3,8 +3,8 @@ use default
 union Rule is
     TERMINAL(text: string)
     NAME(name: string)
-    SEQUENCE(parts: List[Rule])
-    CHOICE(options: List[Rule])
+    SEQUENCE(parts: Rule[])
+    CHOICE(options: Rule[])
     REPEAT(body: Rule)
     OPTIONAL(body: Rule)
 si

@@ -34,7 +34,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
         solution[row] = (b[row] - known) / a[row][row]
     od
 
-    return solution |> collect()
+    return solution |> list()
 si
 
 fit(xs: double[], ys: double[], degree: int) -> double{} =>

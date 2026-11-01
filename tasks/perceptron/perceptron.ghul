@@ -19,7 +19,7 @@ let random = System.Random(10)
 let spread = () => random.next_double() * 2.0D - 1.0D
 
 let points =
-    (0..2000) |> map(_ => V3(spread(), spread(), 1.0D)) |> collect()
+    (0..2000) |> map(_ => V3(spread(), spread(), 1.0D)) |> ARRAY()
 
 let weights mut = V3(spread(), spread(), spread())
 

@@ -8,7 +8,7 @@ character(name: string, remark: string) -> XElement =>
         remark
     ])
 
-remarks_document(remarks: List[Remark]) -> XDocument =>
+remarks_document(remarks: Remark[]) -> XDocument =>
     XDocument([
         XElement(
             XName.get("CharacterRemarks"),

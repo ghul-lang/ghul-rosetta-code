@@ -41,7 +41,7 @@ si
 write_line("first 20 terms:")
 write_line(padovan() |> take(20) |> map(p => "{p}") |> join(" "))
 
-let by_recurrence = padovan() |> take(64) |> collect()
+let by_recurrence = padovan() |> take(64) |> list()
 let agree = by_recurrence |> index() |> all((n, p) => p == floor_padovan(n))
 write_line("recurrence and floor functions agree to term 63: {agree}")
 

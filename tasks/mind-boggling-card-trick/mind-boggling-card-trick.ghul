@@ -19,8 +19,8 @@ trial() -> (black_in_black: int, red_in_red: int) is
             |> collect_mutable()
 
     let swap = random.next(int.min(black.count, red.count) + 1)
-    let black_bunch = black |> shuffled() |> take(swap) |> memo()
-    let red_bunch = red |> shuffled() |> take(swap) |> memo()
+    let black_bunch = black |> shuffled() |> take(swap) |> list()
+    let red_bunch = red |> shuffled() |> take(swap) |> list()
 
     for card in black_bunch do black.remove(card) od
     for card in red_bunch do red.remove(card) od

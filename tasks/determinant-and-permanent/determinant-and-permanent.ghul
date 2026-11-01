@@ -1,6 +1,6 @@
 use default
 
-use Matrix = List[List[long]]
+use Matrix = long[][]
 
 minor(m: Matrix, column: int) -> Matrix =>
     m
@@ -10,9 +10,9 @@ minor(m: Matrix, column: int) -> Matrix =>
                 |> index()
                 |> filter((j, _) => j != column)
                 |> map((_, value) => value)
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 expand(m: Matrix, alternating: bool) -> long =>
     if m.count == 0 then

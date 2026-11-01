@@ -69,7 +69,7 @@ class MACHINE(
     si
 si
 
-picture(tape: List[char], head: int) -> string =>
+picture(tape: char[], head: int) -> string =>
     (0..tape.count)
         |> map(i =>
             if i == head then

@@ -8,7 +8,7 @@ is_sphenic(n: int) -> bool =>
     factors[0] != factors[1] /\
     factors[1] != factors[2]
 
-let sphenics = (2..search_limit) |> filter(is_sphenic) |> collect()
+let sphenics = (2..search_limit) |> filter(is_sphenic) |> list()
 
 let below_1000 = sphenics |> filter(* < 1000) |> join()
 

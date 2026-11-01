@@ -36,7 +36,7 @@ proper_divisor_sum(n: long) -> long is
     sigma - n
 si
 
-classify(k: long) -> (kind: Kind, terms: List[long]) is
+classify(k: long) -> (kind: Kind, terms: long[]) is
     let terms = LIST([k])
 
     while terms.count < 16 /\ terms[terms.count - 1] <= 1L << 47 do

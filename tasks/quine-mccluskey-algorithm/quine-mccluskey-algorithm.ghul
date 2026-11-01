@@ -18,14 +18,14 @@ render(implicant: Implicant, variables: int) -> string =>
         )
         |> string()
 
-prime_implicants(minterms: List[int], variables: int) -> Implicant{} is
+prime_implicants(minterms: int[], variables: int) -> Implicant{} is
     let primes = LIST()
 
     let current mut =
         minterms
             |> map(m => (bits = m, dashes = 0))
             |> distinct()
-            |> collect()
+            |> ARRAY()
 
     while current.count > 0 do
         let combined = LIST()
@@ -64,7 +64,7 @@ prime_implicants(minterms: List[int], variables: int) -> Implicant{} is
             fi
         od
 
-        current = combined |> distinct() |> collect()
+        current = combined |> distinct() |> ARRAY()
     od
 
     return primes |> distinct()
@@ -73,7 +73,7 @@ si
 // Every prime implicant that alone covers some minterm must be in the
 // answer; the rest is the smallest set of the others that covers what is
 // left, found by trying every combination in increasing size.
-minimal_cover(minterms: List[int], variables: int) -> Implicant{} is
+minimal_cover(minterms: int[], variables: int) -> Implicant{} is
     let primes = prime_implicants(minterms, variables)
 
     let essential =
@@ -85,49 +85,49 @@ minimal_cover(minterms: List[int], variables: int) -> Implicant{} is
                         primes |> count(covers(*, m)) == 1
                     )
             )
-            |> collect()
+            |> ARRAY()
 
     let uncovered =
         minterms
             |> filter(m => !(essential |> any(covers(*, m))))
-            |> collect()
+            |> ARRAY()
 
     if uncovered.count == 0 then
         return essential
     fi
 
     let spare =
-        primes |> filter(p => !(essential |> any(e => e =~ p))) |> collect()
+        primes |> filter(p => !(essential |> any(e => e =~ p))) |> ARRAY()
 
     let found =
         1::spare.count
             |> find_map(size => smallest_choice(spare, uncovered, size))
 
     if let chosen = found then
-        return essential ++ chosen |> collect()
+        return essential ++ chosen |> ARRAY()
     fi
 
     return essential
 si
 
 smallest_choice(
-    spare: List[Implicant],
-    uncovered: List[int],
+    spare: Implicant[],
+    uncovered: int[],
     size: int
-) -> List[Implicant]? =>
+) -> Implicant[]? =>
     let chosen = LIST() in
     search(spare, uncovered, size, 0, chosen)
 
 search(
-    spare: List[Implicant],
-    uncovered: List[int],
+    spare: Implicant[],
+    uncovered: int[],
     size: int,
     start: int,
     chosen: LIST[Implicant]
-) -> List[Implicant]? is
+) -> Implicant[]? is
     if chosen.count == size then
         if uncovered |> all(m => chosen |> any(covers(*, m))) then
-            return chosen |> collect()
+            return chosen |> ARRAY()
         fi
 
         return null

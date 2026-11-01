@@ -37,7 +37,7 @@ fangs(n: long) -> (long, long){} is
 si
 
 fang_text(n: long) -> string =>
-    let pairs = n |> fangs() |> collect() in
+    let pairs = n |> fangs() |> list() in
     if pairs.count == 0 then
         "{n}: not a vampire number"
     else

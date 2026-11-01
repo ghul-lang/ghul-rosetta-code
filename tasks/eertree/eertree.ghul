@@ -61,7 +61,7 @@ class EERTREE(text: string) is
         current
     )
 
-    palindromes: Collections.List[string] is
+    palindromes: string[] is
         let found = LIST()
 
         walk(node, palindrome) is
@@ -80,7 +80,7 @@ class EERTREE(text: string) is
         walk(0, "")
         walk(1, "")
 
-        found |> sort() |> collect()
+        found |> sort() |> list()
     si
 si
 

@@ -12,7 +12,7 @@ move_to_front(symbols: LIST[char], at: int) is
     symbols.insert(0, symbol)
 si
 
-encode(text: string) -> List[int] is
+encode(text: string) -> int[] is
     let symbols = symbol_table()
     let indices = LIST(text.length)
 
@@ -26,7 +26,7 @@ encode(text: string) -> List[int] is
     return indices
 si
 
-decode(indices: List[int]) -> string is
+decode(indices: int[]) -> string is
     let symbols = symbol_table()
     let text = StringBuilder()
 

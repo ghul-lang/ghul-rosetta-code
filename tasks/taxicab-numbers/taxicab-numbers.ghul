@@ -13,7 +13,7 @@ let taxis = [
     |> group_by(value => value)
     |> filter((_, group) => group.count > 1)
     |> map((value, _) => value)
-    |> collect()
+    |> list()
 
 cube_root(value: long) -> long => (
     let cube_root_of = System.Math.cbrt(cast(value))
@@ -30,7 +30,7 @@ expressions(taxi: long) -> string =>
         |> map((a, b) => "{a}^3 + {b}^3")
         |> join(" = ")
 
-show(rank: int, taxis: List[long]) =>
+show(rank: int, taxis: long[]) =>
     let taxi = taxis[rank - 1] in
     write_line("{rank}: {taxi} = {expressions(taxi)}")
 

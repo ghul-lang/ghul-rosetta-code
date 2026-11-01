@@ -61,14 +61,14 @@ wall_push(point: VEC) -> VEC is
     push
 si
 
-steer(boid: BOID, flock: List[BOID]) -> VEC is
+steer(boid: BOID, flock: BOID[]) -> VEC is
     let near =
         flock
             |> filter(other =>
                 !(other == boid) /\
                 (other.position - boid.position).length < sight
             )
-            |> collect()
+            |> list()
 
     let force mut = VEC(0.04D, 0.0D) + wall_push(boid.position) * 1.5D
 
@@ -99,7 +99,7 @@ steer(boid: BOID, flock: List[BOID]) -> VEC is
     force
 si
 
-move(boid: BOID, flock: List[BOID]) -> bool is
+move(boid: BOID, flock: BOID[]) -> bool is
     boid.velocity = (boid.velocity + steer(boid, flock)).limited(0.4D, 0.8D)
 
     let next = boid.position + boid.velocity
@@ -116,7 +116,7 @@ move(boid: BOID, flock: List[BOID]) -> bool is
     wrapped
 si
 
-draw(image: IMAGE, flock: List[BOID]) is
+draw(image: IMAGE, flock: BOID[]) is
     image.clear(235ub, 240ub, 245ub)
     image.colour(90ub, 80ub, 70ub)
 

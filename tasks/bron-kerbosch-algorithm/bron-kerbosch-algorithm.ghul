@@ -20,7 +20,7 @@ for (from, to) in edges do
     link(to, from)
 od
 
-let cliques = LIST[List[string]]()
+let cliques = LIST[string[]]()
 
 report(clique: SET[string]) is
     let members = clique |> collect_mutable()

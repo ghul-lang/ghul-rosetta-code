@@ -9,7 +9,7 @@ sylvester(count: int) -> bigint{} is
     od
 si
 
-let terms = sylvester(10) |> memo()
+let terms = sylvester(10) |> list()
 
 write_line("first ten terms:")
 

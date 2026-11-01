@@ -1,6 +1,6 @@
 use default
 
-to_octets(value: long) -> List[ubyte] => (
+to_octets(value: long) -> ubyte[] => (
     let octets = LIST([ubyte(value & 0x7FL)])
     let rest mut = value >> 7
 
@@ -12,7 +12,7 @@ to_octets(value: long) -> List[ubyte] => (
     octets
 )
 
-from_octets(octets: List[ubyte]) -> long =>
+from_octets(octets: ubyte[]) -> long =>
     octets
         |> reduce(0L, (value, octet) =>
             (value << 7) | cast(cast(octet) & 0x7F)

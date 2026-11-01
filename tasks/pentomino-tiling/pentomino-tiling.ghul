@@ -3,7 +3,7 @@ use Raster.IMAGE
 use Raster.SHAPES
 
 use Cell = (row: int, column: int)
-use Shape = List[Cell]
+use Shape = Cell[]
 
 let size = 8
 
@@ -30,18 +30,18 @@ reading_order(a: Cell, b: Cell) -> int =>
     fi
 
 anchored(cells: Cell{}) -> Shape =>
-    let sorted = cells |> sort(reading_order) |> collect() in
+    let sorted = cells |> sort(reading_order) |> list() in
     let first = sorted[0] in
     sorted
         |> map(c => cell_at(c.row - first.row, c.column - first.column))
-        |> collect()
+        |> list()
 
 cell_at(row: int, column: int) -> Cell => (row = row, column = column)
 
 key(shape: Shape) -> string =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
-orientations(cells: List[(int, int)]) -> Shape{} is
+orientations(cells: (int, int)[]) -> Shape{} is
     let found = LIST()
     let current mut = cells |> map((r, c) => cell_at(r, c))
 
@@ -70,7 +70,7 @@ orientations(cells: List[(int, int)]) -> Shape{} is
 si
 
 let shapes =
-    pieces |> map((name, cells) => (name, orientations(cells))) |> memo()
+    pieces |> map((name, cells) => (name, orientations(cells))) |> list()
 let board = repeat('.', size * size) |> collect_mutable()
 let used = repeat(false, pieces.count) |> collect_mutable()
 

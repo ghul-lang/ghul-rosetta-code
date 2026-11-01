@@ -67,7 +67,7 @@ home_prime_chain(start: bigint) -> bigint{} is
 si
 
 show(start: int) is
-    let chain = home_prime_chain(cast(start)) |> collect()
+    let chain = home_prime_chain(cast(start)) |> list()
     let steps = chain.count - 1
     let stages =
         0..steps

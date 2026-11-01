@@ -4,7 +4,7 @@ largest_truncatable(base: int) -> bigint is
     let radix = bigint(base)
 
     let level mut =
-        1::base - 1 |> map(bigint) |> filter(is_prime) |> collect()
+        1::base - 1 |> map(bigint) |> filter(is_prime) |> list()
 
     let place mut = radix
     let largest mut = 0n
@@ -17,7 +17,7 @@ largest_truncatable(base: int) -> bigint is
             for digit in 1::base - 1
         ]
             |> filter(is_prime)
-            |> collect()
+            |> list()
 
         place = place * radix
     od

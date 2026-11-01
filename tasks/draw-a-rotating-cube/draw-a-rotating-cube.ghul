@@ -32,7 +32,7 @@ let corners =
             y = if i & 2 == 0 then -1.0D else 1.0D fi,
             z = if i & 4 == 0 then -1.0D else 1.0D fi
         ))
-        |> collect()
+        |> list()
 
 let faces = [
     (corners = [0, 2, 6, 4], normal = (x = -1.0D, y = 0.0D, z = 0.0D)),
@@ -70,7 +70,7 @@ draw(image: IMAGE, angle: double) is
                 face.corners
                     |> map(i => turned(corners[i], angle))
                     |> map(p => (x = p.x, y = p.y))
-                    |> collect()
+                    |> list()
 
             let bright = 0.3D + 0.7D * max(0.0D, dot(normal, light))
 
@@ -91,7 +91,7 @@ draw(image: IMAGE, angle: double) is
     image.stroke(1.5D)
 
     for outline in outlines do
-        image.line(outline ++ [outline[0]] |> collect())
+        image.line(outline ++ [outline[0]] |> list())
     od
 si
 

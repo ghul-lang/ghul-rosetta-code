@@ -33,7 +33,7 @@ clamp(p: V2, problem: PROBLEM) -> V2 =>
         Math.clamp(p.y, problem.low.y, problem.high.y)
     )
 
-swarm(problem: PROBLEM) -> (best: V2, particles: List[PARTICLE]) is
+swarm(problem: PROBLEM) -> (best: V2, particles: PARTICLE[]) is
     let f = problem.f
     let span = problem.high - problem.low
 
@@ -51,7 +51,7 @@ swarm(problem: PROBLEM) -> (best: V2, particles: List[PARTICLE]) is
                     at
                 )
             )
-            |> collect()
+            |> list()
 
     let best mut = (particles |> min_by(p => f(p.best)))!.best
 
@@ -92,7 +92,7 @@ michalewicz(p: V2) -> double =>
     in
     -(term(p.x, 1.0D) + term(p.y, 2.0D))
 
-draw(problem: PROBLEM, found: (best: V2, particles: List[PARTICLE])) is
+draw(problem: PROBLEM, found: (best: V2, particles: PARTICLE[])) is
     let size = 300
     let image = IMAGE(size, size)
     let span = problem.high - problem.low

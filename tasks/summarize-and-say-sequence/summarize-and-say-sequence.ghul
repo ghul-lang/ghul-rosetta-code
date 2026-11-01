@@ -7,7 +7,7 @@ summarize(term: string) -> string =>
         |> map(digit => "{counts[digit]}{digit}")
         |> join("")
 
-sequence(seed: int) -> List[string] => (
+sequence(seed: int) -> string[] => (
     let terms = LIST()
     let seen = SET()
 
@@ -38,7 +38,7 @@ let longest = lengths.values |> max() ?? 0
 let winners =
     (1..1000000)
         |> filter(seed => lengths[canonical(seed)] == longest)
-        |> collect()
+        |> list()
 
 write_line("seed values: {winners |> join(" ")}")
 write_line("")

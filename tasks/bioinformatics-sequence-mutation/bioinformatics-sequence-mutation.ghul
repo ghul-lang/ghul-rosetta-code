@@ -3,7 +3,7 @@ use default
 let bases = ['A', 'C', 'G', 'T']
 let random = System.Random(1969)
 
-show(label: string, sequence: List[char]) is
+show(label: string, sequence: char[]) is
     write_line(label)
 
     for (row, line) in sequence |> chunk(50) |> index() do

@@ -10,7 +10,7 @@ si
 
 fix_star(makers: Maker[]) -> Sequence[] =>
     let wrap = SELF_APPLY(r =>
-        makers |> map(make => n => make(r.apply(r))(n)) |> collect()
+        makers |> map(make => n => make(r.apply(r))(n)) |> ARRAY()
     )
     in
     wrap.apply(wrap)

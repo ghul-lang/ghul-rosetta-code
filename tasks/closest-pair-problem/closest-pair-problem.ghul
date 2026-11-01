@@ -15,7 +15,7 @@ closer(p: Pair, q: Pair) -> Pair =>
 
 pair(a: P, b: P) -> Pair => ((a - b).length, a, b)
 
-brute_force(points: List[P]) -> Pair =>
+brute_force(points: P[]) -> Pair =>
     [
         pair(points[i], points[j])
         for i in 0..points.count
@@ -23,7 +23,7 @@ brute_force(points: List[P]) -> Pair =>
     ]
         |> reduce((double.max_value, points[0], points[0]), closer)
 
-closest(by_x: List[P], by_y: List[P]) -> Pair is
+closest(by_x: P[], by_y: P[]) -> Pair is
     if by_x.count <= 3 then
         return brute_force(by_x)
     fi
@@ -31,12 +31,12 @@ closest(by_x: List[P], by_y: List[P]) -> Pair is
     let half = by_x.count / 2
     let middle = by_x[half - 1].x
 
-    let left_x = by_x |> take(half) |> collect()
-    let right_x = by_x |> skip(half) |> collect()
+    let left_x = by_x |> take(half) |> list()
+    let right_x = by_x |> skip(half) |> list()
     let left = SET(left_x)
 
-    let left_y = by_y |> filter(left.contains) |> collect()
-    let right_y = by_y |> filter(p => !left.contains(p)) |> collect()
+    let left_y = by_y |> filter(left.contains) |> list()
+    let right_y = by_y |> filter(p => !left.contains(p)) |> list()
 
     let best = closer(closest(left_x, left_y), closest(right_x, right_y))
 
@@ -61,11 +61,11 @@ let random = System.Random(2)
 let points =
     (0..2000)
         |> map(_ => P(random.next_double(), random.next_double()))
-        |> collect()
+        |> list()
 
 let fast = closest(
-    points |> sort((a, b) => a.x <> b.x) |> collect(),
-    points |> sort((a, b) => a.y <> b.y) |> collect()
+    points |> sort((a, b) => a.x <> b.x) |> list(),
+    points |> sort((a, b) => a.y <> b.y) |> list()
 )
 
 let slow = brute_force(points)

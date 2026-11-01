@@ -21,7 +21,7 @@ triples(k: long, limit: long) -> Triple{} =>
         |> map(t => (a = t.a, b = t.b, c = t.c!))
 
 for (degrees, k) in [(90, 0L), (60, 1L), (120, -1L)] do
-    let found = triples(k, 13L) |> collect()
+    let found = triples(k, 13L) |> list()
 
     write_line("{degrees} degrees: {found.count} triples")
 

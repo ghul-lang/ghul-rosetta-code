@@ -8,7 +8,7 @@ let philosophers = [
 let meals = 2
 let random = System.Random(42)
 
-let forks = philosophers |> map(_ => MUTEX()) |> collect()
+let forks = philosophers |> map(_ => MUTEX()) |> list()
 
 dine(name: string, seat: int) -> COROUTINE is
     let left = seat

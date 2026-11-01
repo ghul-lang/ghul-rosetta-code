@@ -77,10 +77,10 @@ library_sort(xs: LIST[int]) => xs.sort()
 let random = System.Random(1)
 
 let inputs = [
-    ("ones", n => repeat(1, n) |> collect()),
-    ("range", (n: int) => (0..n) |> collect()),
+    ("ones", n => repeat(1, n) |> list()),
+    ("range", (n: int) => (0..n) |> list()),
     ("shuffled", (n: int) =>
-        (0..n) |> sort_by(_ => random.next()) |> collect()
+        (0..n) |> sort_by(_ => random.next()) |> list()
     )
 ]
 
@@ -91,7 +91,7 @@ let sorts: Sorter[] = [
     ("library", library_sort, (150ub, 90ub, 170ub))
 ]
 
-let powers = (6::14) |> collect()
+let powers = (6::14) |> list()
 
 microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
     (0..3)
@@ -115,9 +115,9 @@ for (name, make) in inputs do
     let times =
         sorts
             |> map(sorter =>
-                data |> map(microseconds(sorter.sort, *)) |> collect()
+                data |> map(microseconds(sorter.sort, *)) |> list()
             )
-            |> collect()
+            |> list()
 
     write_line("{name}: time in microseconds")
     write_line(
@@ -167,7 +167,7 @@ for (name, make) in inputs do
         image.line(
             zip(powers, t)
                 |> map((p, time) => (x = double(p), y = log2(time)))
-                |> collect()
+                |> list()
         )
     od
 

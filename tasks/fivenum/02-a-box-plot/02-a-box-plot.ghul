@@ -5,7 +5,7 @@ use Raster.IMAGE
 use System.Math.*
 
 fivenum(xs_raw: double[]) -> double[] is
-    let xs = xs_raw |> sort() |> collect()
+    let xs = xs_raw |> sort() |> list()
     let n = xs.count
     let n4 = floor((double(n) + 3.0) / 2.0) / 2.0
     let d = [
@@ -19,7 +19,7 @@ fivenum(xs_raw: double[]) -> double[] is
         in
             0.5 * (lo + hi)
 
-    d |> map(midpoint) |> collect()
+    d |> map(midpoint) |> list()
 si
 
 let datasets = [
@@ -106,7 +106,7 @@ axes.y_ticks(
             value = double(datasets.count - set.index) - 0.5,
             label = set.value.label
         ))
-        |> collect()
+        |> list()
 )
 
 axes.fit(0.0, 0.0, 55.0, double(datasets.count))

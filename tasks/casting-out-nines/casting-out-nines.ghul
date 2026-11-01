@@ -23,7 +23,7 @@ od
 write_line("part 2: k where co9(k) = co9(k^2), for k in 1L::100L")
 
 let kaprekar_like =
-    1L::100L |> filter(k => co9(k) == co9(k * k)) |> collect()
+    1L::100L |> filter(k => co9(k) == co9(k * k)) |> list()
 let kaprekar_text = kaprekar_like |> map(k => "{k}") |> join()
 
 write_line("  {kaprekar_like.count} of 100 numbers: {kaprekar_text}")
@@ -45,7 +45,7 @@ write_line(
 let base16_like =
     (1L::100L)
         |> filter(k => co9_fast(k, 16L) == co9_fast(k * k, 16L))
-        |> collect()
+        |> list()
 let base16_text = base16_like |> map(k => "{k}") |> join()
 
 write_line("  {base16_like.count} of 100 numbers: {base16_text}")

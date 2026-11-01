@@ -3,7 +3,7 @@ use default
 // true when a comes strictly before b: the first difference decides, and
 // a list that runs out first comes first
 
-precedes(a: List[int], b: List[int]) -> bool =>
+precedes(a: int[], b: int[]) -> bool =>
     case (a, b)
     when (_, []) then false
     when ([], _) then true
@@ -11,7 +11,7 @@ precedes(a: List[int], b: List[int]) -> bool =>
         if x != y then x < y else precedes(a_rest, b_rest) fi
     esac
 
-let cases: List[(List[int], List[int])] = [
+let cases: (int[], int[])[] = [
     ([1, 2, 1, 3, 2], [1, 2, 0, 4, 4, 0, 0, 0]),
     ([1, 2, 0, 4, 4, 0, 0, 0], [1, 2, 1, 3, 2]),
     ([1, 2, 3], [1, 2, 3, 4]),

@@ -10,7 +10,7 @@ let records =
         |> map(line =>
             line.split([' ', '\t'], StringSplitOptions.REMOVE_EMPTY_ENTRIES)
         )
-        |> collect()
+        |> list()
 
 let wrong_width =
     records |> count(fields => fields.count != fields_per_record)
@@ -27,7 +27,7 @@ let duplicates =
         |> group_by(fields => fields[0])
         |> filter((_, seen) => seen.count > 1)
         |> map((date, _) => date)
-        |> collect()
+        |> list()
 
 write_line("{records.count} records read")
 

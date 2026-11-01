@@ -11,8 +11,8 @@ class NODE is
 
     label: string => _label
 
-    children: Collections.List[NODE] =>
-        _edges.values |> sort((a, b) => a.label <> b.label) |> collect()
+    children: NODE[] =>
+        _edges.values |> sort((a, b) => a.label <> b.label) |> list()
 
     add(suffix: string) is
         if suffix.length == 0 then

@@ -30,7 +30,7 @@ house(size: double) is
     pen.face(heading)
 si
 
-bar_chart(values: List[double], size: double) is
+bar_chart(values: double[], size: double) is
     let x = pen.x
     let y = pen.y
     let heading = pen.heading

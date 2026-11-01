@@ -2,7 +2,7 @@ use default
 use System.Text.RegularExpressions.Regex
 use System.Text.RegularExpressions.Match
 
-class MACRO(parameters: List[string], body: string)
+class MACRO(parameters: string[], body: string)
 
 let name = "[A-Za-z_][A-Za-z_0-9]*"
 
@@ -12,11 +12,11 @@ let inclusion = Regex("^#include\\s+\"([^\"]*)\"\\s*$")
 let usage = Regex("#({name})\\s*(\\(([^)#]*)\\))?\\s*#")
 let identifier = Regex(name)
 
-split(list: string) -> List[string] =>
+split(list: string) -> string[] =>
     list.split([','])
         |> map(s => s.trim())
         |> filter(s => s.length > 0)
-        |> collect()
+        |> ARRAY()
 
 class PREPROCESSOR(debug: bool) is
     defines: MAP[string, MACRO]

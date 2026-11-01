@@ -23,7 +23,7 @@ let shown =
         |> map(character =>
             if character =~ "\n" then "\\n" else character fi
         )
-        |> collect()
+        |> list()
 
 write_line("{shown.count} characters")
 write_line(shown |> join(" "))

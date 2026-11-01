@@ -21,7 +21,7 @@ let entries =
             )
         )
 
-show(title: string, rows: List[Entry]) is
+show(title: string, rows: Entry[]) is
     write_line(title)
 
     for row in rows do
@@ -41,13 +41,13 @@ let by_root =
                 a.root <> b.root
             fi
         )
-        |> collect()
+        |> list()
 
 let by_value =
     entries
         |> filter(entry => entry.distinct >= 4)
         |> sort((a, b) => b.value <> a.value)
-        |> collect()
+        |> list()
 
 show("Hex words of 4 or more letters, by digital root:", by_root)
 show("With at least 4 distinct letters, largest first:", by_value)

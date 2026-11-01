@@ -19,11 +19,11 @@ si
 
 use Crossing = (edge: int, t: double, node: NODE)
 
-area(polygon: List[P]) -> double =>
+area(polygon: P[]) -> double =>
     (0..polygon.count)
         |> sum_by(i => polygon[i] × polygon[(i + 1) % polygon.count])
 
-contains(polygon: List[P], p: P) -> bool => (
+contains(polygon: P[], p: P) -> bool => (
     let inside mut = false
 
     for i in 0..polygon.count do
@@ -41,7 +41,7 @@ contains(polygon: List[P], p: P) -> bool => (
     inside
 )
 
-ring(polygon: List[P], crossings: List[Crossing]) -> NODE{} is
+ring(polygon: P[], crossings: Crossing[]) -> NODE{} is
     let nodes = LIST()
 
     for i in 0..polygon.count do
@@ -60,7 +60,7 @@ ring(polygon: List[P], crossings: List[Crossing]) -> NODE{} is
     nodes
 si
 
-clip(subject: List[P], given: List[P]) -> List[List[P]] is
+clip(subject: P[], given: P[]) -> P[][] is
     let flip = (area(subject) > 0.0D) != (area(given) > 0.0D)
     let window =
         (0..given.count)
@@ -71,7 +71,7 @@ clip(subject: List[P], given: List[P]) -> List[List[P]] is
                     given[i]
                 fi
             )
-            |> collect()
+            |> list()
 
     let on_subject = LIST()
     let on_window = LIST()
@@ -115,7 +115,7 @@ clip(subject: List[P], given: List[P]) -> List[List[P]] is
         fi
     od
 
-    let results = LIST[List[P]]()
+    let results = LIST[P[]]()
 
     for start in nodes do
         if start.crossing /\ start.entering /\ !start.visited then
@@ -171,8 +171,8 @@ let image = IMAGE(600, 560)
 image.view(0.0D, 540.0D, 600.0D, 60.0D)
 image.clear(252ub, 252ub, 250ub)
 
-outline(polygon: List[P]) -> List[(x: double, y: double)] =>
-    polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y)) |> collect()
+outline(polygon: P[]) -> (x: double, y: double)[] =>
+    polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y)) |> list()
 
 image.colour(250ub, 200ub, 90ub)
 

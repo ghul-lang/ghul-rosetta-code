@@ -2,10 +2,10 @@ use default
 
 use DATE = (month: string, day: int)
 
-sharing_the_day(dates: List[DATE], day: int) -> int =>
+sharing_the_day(dates: DATE[], day: int) -> int =>
     dates |> filter(date => date.day == day) |> count()
 
-sharing_the_month(dates: List[DATE], month: string) -> int =>
+sharing_the_month(dates: DATE[], month: string) -> int =>
     dates |> filter(date => date.month =~ month) |> count()
 
 let possible = [
@@ -23,14 +23,14 @@ let albert_knows_bernard_does_not =
                 |> filter(other => other.month =~ date.month)
                 |> all(other => sharing_the_day(possible, other.day) > 1)
         )
-        |> collect()
+        |> list()
 
 let bernard_now_knows =
     albert_knows_bernard_does_not
         |> filter(date =>
             sharing_the_day(albert_knows_bernard_does_not, date.day) == 1
         )
-        |> collect()
+        |> list()
 
 let birthday =
     bernard_now_knows

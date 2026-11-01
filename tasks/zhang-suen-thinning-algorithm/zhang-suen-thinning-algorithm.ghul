@@ -44,16 +44,16 @@ let black =
                 )
                 |> collect_mutable()
         )
-        |> collect()
+        |> ARRAY()
 
-let original = black |> map(row => row |> collect()) |> collect()
+let original = black |> map(row => row |> ARRAY()) |> ARRAY()
 
 let around = [
     (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
 ]
 
-neighbours(row: int, column: int) -> List[bool] =>
-    around |> map((dr, dc) => black[row + dr][column + dc]) |> collect()
+neighbours(row: int, column: int) -> bool[] =>
+    around |> map((dr, dc) => black[row + dr][column + dc]) |> ARRAY()
 
 thins(row: int, column: int, first: bool) -> bool is
     if !black[row][column] then

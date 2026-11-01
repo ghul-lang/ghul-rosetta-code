@@ -98,12 +98,12 @@ draw(p: Point, q: Point, r: Point, s: Point) is
                     least + (most - least) * double(step) / 400.0D
                 )
                 |> map(x => (x = x, y = sqrt(x * x * x + b)))
-                |> collect()
+                |> list()
 
         image.colour(30ub, 70ub, 160ub)
         image.stroke(1.6D)
         image.line(curve)
-        image.line(curve |> map(at => (x = at.x, y = -at.y)) |> collect())
+        image.line(curve |> map(at => (x = at.x, y = -at.y)) |> list())
 
         let slope = (qy - py) / (qx - px)
         let chord = x => (x = x, y = py + slope * (x - px))

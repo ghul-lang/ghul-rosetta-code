@@ -40,8 +40,8 @@ si
 
 is_legal(rank: string) -> bool =>
     let
-        bishops = 0..8 |> filter(s => rank[s] == 'B') |> collect(),
-        rooks = 0..8 |> filter(s => rank[s] == 'R') |> collect(),
+        bishops = 0..8 |> filter(s => rank[s] == 'B') |> list(),
+        rooks = 0..8 |> filter(s => rank[s] == 'R') |> list(),
         king = rank.index_of('K')
     in
         (bishops[0] + bishops[1]) % 2 == 1 /\
@@ -58,7 +58,7 @@ for _ in 1::5 do
     write_line(rank |> map(p => symbols[p]) |> join(""))
 od
 
-let positions = 0..960 |> map(position) |> memo()
+let positions = 0..960 |> map(position) |> list()
 
 write_line()
 write_line("distinct positions: {positions |> distinct() |> count()}")

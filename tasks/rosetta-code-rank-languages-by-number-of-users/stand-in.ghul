@@ -51,7 +51,7 @@ test_entry() is
                 else string.compare_ordinal(a.name, b.name)
                 fi
             )
-            |> collect()
+            |> list()
 
     let rank mut = 0
 

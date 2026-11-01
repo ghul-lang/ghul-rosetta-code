@@ -29,7 +29,7 @@ si
 
 digest(salt: ubyte[], password: string) -> ubyte[] =>
     MD5.hash_data(
-        salt |> cat(Encoding.utf8.get_bytes(password)) |> collect()
+        salt |> cat(Encoding.utf8.get_bytes(password)) |> ARRAY()
     )
 
 create_user(

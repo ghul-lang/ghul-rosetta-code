@@ -12,9 +12,9 @@ let cell = 38
 let left = 46
 let top = 58
 
-distances(source: string, target: string) -> List[List[int]] is
-    let rows = LIST[List[int]]()
-    let first = 0::target.length |> collect()
+distances(source: string, target: string) -> int[][] is
+    let rows = LIST[int[]]()
+    let first = 0::target.length |> list()
 
     rows.add(first)
 
@@ -105,7 +105,7 @@ image.fill(cells)
 image.colour(225ub, 60ub, 60ub)
 image.stroke(2.4)
 image.line(
-    alignment() |> map(step => centre(step.row, step.column)) |> collect()
+    alignment() |> map(step => centre(step.row, step.column)) |> list()
 )
 
 for row in 0::source.length do

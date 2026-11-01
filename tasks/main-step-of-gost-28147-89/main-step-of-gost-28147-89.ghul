@@ -33,7 +33,7 @@ main_step(block: ulong, key: uint) -> ulong =>
     in
         (ulong(low) << 32) | ulong(mixed)
 
-little_endian(bytes: List[int]) -> ulong =>
+little_endian(bytes: int[]) -> ulong =>
     bytes
         |> index()
         |> map((i, b) => ulong(b) << (8 * i))

@@ -19,12 +19,12 @@ is_eban(n: int) -> bool => n |> groups() |> all(eban_group)
 
 eban_up_to(limit: int) -> int{} => 1::limit |> filter(is_eban)
 
-let up_to_1000 = eban_up_to(1000) |> collect()
+let up_to_1000 = eban_up_to(1000) |> list()
 write_line("eban numbers up to and including 1000:")
 write_line(up_to_1000 |> join(" "))
 write_line("count: {up_to_1000.count}")
 
-let in_1000_to_4000 = 1000::4000 |> filter(is_eban) |> collect()
+let in_1000_to_4000 = 1000::4000 |> filter(is_eban) |> list()
 write_line("eban numbers between 1000 and 4000 inclusive:")
 write_line(in_1000_to_4000 |> join(" "))
 write_line("count: {in_1000_to_4000.count}")

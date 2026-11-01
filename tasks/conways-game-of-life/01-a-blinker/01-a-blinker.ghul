@@ -1,6 +1,6 @@
 use default
 
-use Grid = List[List[bool]]
+use Grid = bool[][]
 
 live_neighbours(grid: Grid, row: int, column: int) -> int is
     let count mut = 0
@@ -41,8 +41,8 @@ step(grid: Grid) -> Grid is
     si
 
     0..grid.count
-        |> map(row => 0..grid[0].count |> map(alive(row, *)) |> collect())
-        |> collect()
+        |> map(row => 0..grid[0].count |> map(alive(row, *)) |> list())
+        |> list()
 si
 
 show(generation: int, grid: Grid) is
@@ -61,7 +61,7 @@ parse(rows: string[]) -> Grid => (
     let grid = LIST()
 
     for row in rows do
-        grid.add(row |> map(* == '#') |> collect())
+        grid.add(row |> map(* == '#') |> list())
     od
 
     grid

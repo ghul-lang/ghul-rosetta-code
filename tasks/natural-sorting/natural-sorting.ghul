@@ -104,8 +104,8 @@ compare_parts(left: string, right: string) -> int =>
     fi
 
 naturally(left: string, right: string) -> int is
-    let first = left |> key() |> runs() |> collect()
-    let second = right |> key() |> runs() |> collect()
+    let first = left |> key() |> runs() |> list()
+    let second = right |> key() |> runs() |> list()
     let shared = if first.count < second.count then first.count
                  else second.count fi
 
@@ -123,7 +123,7 @@ visible(text: string) -> string =>
         .replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r")
         .replace("\u000B", "\\v").replace("\u000C", "\\f")
 
-demonstrate(feature: string, samples: List[string]) is
+demonstrate(feature: string, samples: string[]) is
     write_line("{feature}:")
     write_line("  given:")
 

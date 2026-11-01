@@ -27,7 +27,7 @@ de_bruijn(k: int, n: int) -> string is
     digits |> map(d => "{d}") |> join("")
 si
 
-missing_pins(sequence: string) -> List[string] =>
+missing_pins(sequence: string) -> string[] =>
     let wrapped = "{sequence}{sequence[0..3]}" in
     let seen =
         0..wrapped.length - 3
@@ -37,9 +37,9 @@ missing_pins(sequence: string) -> List[string] =>
     0..10_000
         |> map(pin => pin.to_string("D4"))
         |> filter(pin => !seen.contains(pin))
-        |> collect()
+        |> list()
 
-describe(missing: List[string]) -> string =>
+describe(missing: string[]) -> string =>
     if missing.count == 0 then
         "no PINs missing"
     else

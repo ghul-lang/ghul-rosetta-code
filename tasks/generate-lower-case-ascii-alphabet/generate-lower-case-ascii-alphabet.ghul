@@ -1,6 +1,6 @@
 use default
 
-let letters = 'a'::'z' |> collect()
+let letters = 'a'::'z' |> list()
 
 let last = letters.count - 1
 

@@ -38,9 +38,9 @@ let dys = [
 ]
 
 drops(
-    ds: List[double],
+    ds: double[],
     rule: (double, double) -> double
-) -> List[double] => (
+) -> double[] => (
     let landed = LIST()
     let at mut = 0.0D
 
@@ -53,9 +53,9 @@ drops(
     landed
 )
 
-mean(xs: List[double]) -> double => (xs |> sum()) / double(xs.count)
+mean(xs: double[]) -> double => (xs |> sum()) / double(xs.count)
 
-deviation(xs: List[double]) -> double =>
+deviation(xs: double[]) -> double =>
     let m = mean(xs) in
     sqrt((xs |> sum_by(x => (x - m) * (x - m))) / double(xs.count))
 
@@ -72,8 +72,8 @@ let rules = [
 plot(
     image: IMAGE,
     at: int,
-    xs: List[double],
-    ys: List[double],
+    xs: double[],
+    ys: double[],
     reach: double
 ) is
     let width = double(image.width) / 2.0D
@@ -122,7 +122,7 @@ let runs =
             xs = drops(dxs, rule.next),
             ys = drops(dys, rule.next)
         ))
-        |> memo()
+        |> list()
 
 let reach =
     runs

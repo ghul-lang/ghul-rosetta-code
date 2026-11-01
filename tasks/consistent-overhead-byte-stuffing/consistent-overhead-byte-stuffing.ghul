@@ -1,6 +1,6 @@
 use default
 
-encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
+encode(data: ubyte[], marker: ubyte) -> ubyte[] is
     let frame = LIST()
     let block = LIST()
 
@@ -31,7 +31,7 @@ encode(data: List[ubyte], marker: ubyte) -> List[ubyte] is
     frame
 si
 
-decode(frame: List[ubyte], marker: ubyte) -> List[ubyte] is
+decode(frame: ubyte[], marker: ubyte) -> ubyte[] is
     let data = LIST()
     let at mut = 0
 
@@ -56,7 +56,7 @@ decode(frame: List[ubyte], marker: ubyte) -> List[ubyte] is
     data
 si
 
-hex(bytes: List[ubyte]) -> string =>
+hex(bytes: ubyte[]) -> string =>
     if bytes.count > 8 then
         "{bytes[0..4] |> map(b => "{b:X2}") |> join(" ")} ... "
         "{bytes[bytes.count - 2..<0] |> map(b => "{b:X2}") |> join(" ")} "
@@ -65,15 +65,15 @@ hex(bytes: List[ubyte]) -> string =>
         bytes |> map(b => "{b:X2}") |> join(" ")
     fi
 
-let examples: List[ubyte][] = [
+let examples: ubyte[][] = [
     [0ub],
     [0ub, 0ub],
     [0x11ub, 0x22ub, 0ub, 0x33ub],
     [0x11ub, 0x22ub, 0x33ub, 0x44ub],
     [0x11ub, 0ub, 0ub, 0ub],
-    1::254 |> map(ubyte) |> collect(),
-    0::254 |> map(ubyte) |> collect(),
-    1::255 |> map(ubyte) |> collect()
+    1::254 |> map(ubyte) |> list(),
+    0::254 |> map(ubyte) |> list(),
+    1::255 |> map(ubyte) |> list()
 ]
 
 write_line("unencoded                              encoded")

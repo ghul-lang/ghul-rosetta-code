@@ -14,7 +14,7 @@ for candidate in 2::sieve_limit do
     fi
 od
 
-neighbourhoods() -> List[int]{} =>
+neighbourhoods() -> int[]{} =>
     (2::sieve_limit)
         |> filter(candidate => !composite[candidate])
         |> windows(3)

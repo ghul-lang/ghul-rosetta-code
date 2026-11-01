@@ -1,6 +1,6 @@
 use default
 
-let fifth = 0..250 |> map(n => repeat(long(n), 5) |> product()) |> collect()
+let fifth = 0..250 |> map(n => repeat(long(n), 5) |> product()) |> list()
 let root = 1..250 |> map(n => (fifth[n], n)) |> collect_map()
 
 search() -> (int, int, int, int, int)? is

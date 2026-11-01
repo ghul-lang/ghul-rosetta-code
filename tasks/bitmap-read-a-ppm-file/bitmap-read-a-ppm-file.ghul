@@ -85,7 +85,7 @@ write_ppm(image: BITMAP, path: string) is
 
     file.write(header, 0, header.count)
 
-    let pixels = image.bytes |> collect()
+    let pixels = image.bytes |> ARRAY()
 
     file.write(pixels, 0, pixels.count)
 

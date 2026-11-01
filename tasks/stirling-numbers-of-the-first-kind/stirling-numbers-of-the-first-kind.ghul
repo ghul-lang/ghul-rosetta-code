@@ -1,7 +1,7 @@
 use default
 
-rows() -> List[bigint]{} is
-    let row mut = [1n] |> collect()
+rows() -> bigint[]{} is
+    let row mut = [1n] |> list()
 
     do
         yield row
@@ -27,7 +27,7 @@ rows() -> List[bigint]{} is
 
                     left + bigint(width - 1) * below
                 ))
-                |> collect()
+                |> list()
     od
 si
 

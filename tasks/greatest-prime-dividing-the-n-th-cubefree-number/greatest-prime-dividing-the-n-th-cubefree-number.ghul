@@ -34,7 +34,7 @@ let sequence =
     (1::limit)
         |> filter(n => is_cubefree[n])
         |> map(n => largest_prime_factor[n])
-        |> collect()
+        |> list()
 
 write_line("first 100 terms:")
 

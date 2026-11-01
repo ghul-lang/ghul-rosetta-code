@@ -18,9 +18,9 @@ primes_below(limit: int) -> int{} is
 si
 
 longest_run(
-    primes: Collections.List[int],
+    primes: int[],
     keeps_going: (int, int) -> bool
-) -> Collections.List[int] is
+) -> int[] is
     let best mut = (start = 0, length = 1)
     let start mut = 0
 
@@ -40,9 +40,9 @@ longest_run(
     return primes[best.start..best.start + best.length]
 si
 
-let primes = primes_below(1_000_000) |> collect()
+let primes = primes_below(1_000_000) |> list()
 
-show(name: string, run: Collections.List[int]) =>
+show(name: string, run: int[]) =>
     write_line("{name}: {run |> map(p => "{p}") |> join(" ")}")
 
 show("ascending", longest_run(primes, * < *))

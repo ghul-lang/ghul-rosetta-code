@@ -1,6 +1,6 @@
 use default
 
-choose(m: int, n: int, from: int, chosen: List[int]) -> List[int]{} is
+choose(m: int, n: int, from: int, chosen: int[]) -> int[]{} is
     if chosen.count == m then
         yield chosen
 
@@ -8,12 +8,12 @@ choose(m: int, n: int, from: int, chosen: List[int]) -> List[int]{} is
     fi
 
     for candidate in from..n do
-        let extended = chosen ++ [candidate] |> collect()
+        let extended = chosen ++ [candidate] |> list()
         yield in choose(m, n, candidate + 1, extended)
     od
 si
 
-combinations(m: int, n: int) -> List[int]{} => choose(m, n, 0, [])
+combinations(m: int, n: int) -> int[]{} => choose(m, n, 0, [])
 
 for combination in combinations(3, 5) do
     write_line(combination |> join(" "))

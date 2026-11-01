@@ -23,7 +23,7 @@ let rows = letters[0].count
 let bitmap =
     (0..rows)
         |> map(row => letters |> map(l => l[row]) |> join(" "))
-        |> collect()
+        |> list()
 
 let columns = bitmap[0].length
 
@@ -31,7 +31,7 @@ let width = 2 * columns + rows + 2
 let canvas =
     (0..rows + 1)
         |> map(_ => repeat(' ', width) |> collect_mutable())
-        |> collect()
+        |> list()
 
 filled(row: int, column: int) -> bool =>
     row >= 0 /\

@@ -1,6 +1,6 @@
 use default
 
-class AUTOMATON(patterns: List[string] private) is
+class AUTOMATON(patterns: string[] private) is
     _moves: LIST[MAP[char, int]]
     _fail: LIST[int]
     _found: LIST[LIST[int]]

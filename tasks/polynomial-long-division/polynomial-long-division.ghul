@@ -1,9 +1,9 @@
 use default
 use System.Math
 
-use DIVISION = (quotient: List[double], remainder: List[double])
+use DIVISION = (quotient: double[], remainder: double[])
 
-degree(poly: List[double]) -> int =>
+degree(poly: double[]) -> int =>
     let highest =
         (0::poly.count - 1)
             |> reverse()
@@ -11,7 +11,7 @@ degree(poly: List[double]) -> int =>
     in
     highest ?? -1
 
-divide(numerator: List[double], denominator: List[double]) -> DIVISION is
+divide(numerator: double[], denominator: double[]) -> DIVISION is
     let divisor_degree = degree(denominator)
     let remainder = numerator |> collect_mutable()
     let quotient =
@@ -42,7 +42,7 @@ term(size: double, power: int) -> string =>
     else "{head}x^{power}"
     esac
 
-render(poly: List[double]) -> string is
+render(poly: double[]) -> string is
     let top = degree(poly)
 
     if top < 0 then return "0" fi
@@ -67,7 +67,7 @@ render(poly: List[double]) -> string is
     parts |> join(" ")
 si
 
-show(numerator: List[double], denominator: List[double]) is
+show(numerator: double[], denominator: double[]) is
     let split = divide(numerator, denominator)
 
     write_line("  ({render(numerator)}) / ({render(denominator)})")

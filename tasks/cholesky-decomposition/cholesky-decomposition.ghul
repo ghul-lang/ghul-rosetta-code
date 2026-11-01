@@ -1,11 +1,11 @@
 use default
 
-cholesky(a: List[List[double]]) -> List[List[double]] is
+cholesky(a: double[][]) -> double[][] is
     let size = a.count
     let l =
         0..size
             |> map(_ => repeat(0.0, size) |> collect_mutable())
-            |> collect()
+            |> list()
 
     for i in 0..size do
         for k in 0::i do
@@ -23,7 +23,7 @@ cholesky(a: List[List[double]]) -> List[List[double]] is
     return l
 si
 
-show(a: List[List[double]]) is
+show(a: double[][]) is
     for row in a do
         write_line(row |> map(value => "{value,10:F5}") |> join(""))
     od

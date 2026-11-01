@@ -16,7 +16,7 @@ let faces = [
     [1, 8, 5, 10, 1, 0, 4, 7]
 ]
 
-let solved = 0..40 |> map(i => if i < 20 then i else 0 fi) |> collect()
+let solved = 0..40 |> map(i => if i < 20 then i else 0 fi) |> list()
 
 apply(move: int, state: int[]) -> int[] is
     let face = faces[move / 3]

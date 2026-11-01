@@ -1,11 +1,11 @@
 use default
 
-amb[T](sets: List[T{}], accepts: (T, T) -> bool) -> List[T]{} is
+amb[T](sets: T{}[], accepts: (T, T) -> bool) -> T[]{} is
     case sets
     when [] then
         yield LIST()
     when [set, ..others] then
-        let rests = amb(others, accepts) |> memo()
+        let rests = amb(others, accepts) |> list()
 
         for choice in set do
             for rest in rests do
@@ -22,7 +22,7 @@ amb[T](sets: List[T{}], accepts: (T, T) -> bool) -> List[T]{} is
     esac
 si
 
-let sets: List[string{}] = [
+let sets: string{}[] = [
     ["the", "that", "a"],
     ["frog", "elephant", "thing"],
     ["walked", "treaded", "grows"],

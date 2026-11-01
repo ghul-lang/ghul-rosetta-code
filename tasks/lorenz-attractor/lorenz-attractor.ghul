@@ -43,7 +43,7 @@ let path =
     stream((x = 1.0D, y = 1.0D, z = 1.0D), step)
         |> skip(400)
         |> take(20000)
-        |> collect()
+        |> list()
 
 let image = IMAGE(560, 700)
 

@@ -1,8 +1,8 @@
 use default
 
-let small_primes = primes(3) |> take_while(* < 1000) |> collect()
+let small_primes = primes(3) |> take_while(* < 1000) |> list()
 
-has_small_factor(k: int, m: int, powers: Collections.List[int]) -> bool =>
+has_small_factor(k: int, m: int, powers: int[]) -> bool =>
     (0..small_primes.count)
         |> any(i =>
             (k + powers[i]) % small_primes[i] == 0 /\

@@ -2,7 +2,7 @@ use default
 
 use ROW = (library: string, dependencies: string)
 
-dependency_graph(rows: List[ROW]) -> MAP[string, SET[string]] is
+dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
     let graph = MAP()
 
     for row in rows do
@@ -27,8 +27,8 @@ dependency_graph(rows: List[ROW]) -> MAP[string, SET[string]] is
 si
 
 compile_order(graph: MAP[string, SET[string]]) -> (
-    ordered: List[string],
-    blocked: List[string]
+    ordered: string[],
+    blocked: string[]
 ) is
     let pending =
         graph.keys
@@ -41,7 +41,7 @@ compile_order(graph: MAP[string, SET[string]]) -> (
             pending.keys
                 |> filter(name => pending[name].count == 0)
                 |> sort()
-                |> collect()
+                |> list()
 
         if ready.count == 0 then
             break
@@ -59,12 +59,12 @@ compile_order(graph: MAP[string, SET[string]]) -> (
         od
     od
 
-    let blocked = pending.keys |> sort() |> collect()
+    let blocked = pending.keys |> sort() |> list()
 
     return (ordered = ordered, blocked = blocked)
 si
 
-report(heading: string, rows: List[ROW]) is
+report(heading: string, rows: ROW[]) is
     let (ordered, blocked) = compile_order(dependency_graph(rows))
 
     write_line(heading)
@@ -111,7 +111,7 @@ let with_cycle =
                 row
             fi
         )
-        |> collect()
+        |> list()
 
 report("as given:", libraries)
 write_line("")

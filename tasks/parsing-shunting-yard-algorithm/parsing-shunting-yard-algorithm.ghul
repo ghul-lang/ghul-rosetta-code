@@ -30,7 +30,7 @@ binds_tighter(top: string, incoming: string) -> bool =>
     precedence(top) > precedence(incoming) \/
     (precedence(top) == precedence(incoming) /\ incoming !~ "^")
 
-show(tokens: List[Token]) -> string =>
+show(tokens: Token[]) -> string =>
     tokens |> map(token => token.text) |> join(" ")
 
 row(

@@ -57,9 +57,9 @@ euclid_mullin(count: int) -> bigint{} is
     od
 si
 
-let sequence = euclid_mullin(16) |> collect()
+let sequence = euclid_mullin(16) |> list()
 
-render(terms: Collections.List[bigint]) -> string =>
+render(terms: bigint[]) -> string =>
     let texts = terms |> map(term => "{term}") in
     texts |> join(" ")
 

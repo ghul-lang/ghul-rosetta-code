@@ -1,6 +1,6 @@
 use default
 
-encode(code_point: int) -> List[int] is
+encode(code_point: int) -> int[] is
     let octets = LIST(4)
 
     if code_point < 0x80 then
@@ -22,7 +22,7 @@ encode(code_point: int) -> List[int] is
     return octets
 si
 
-decode(octets: List[int]) -> int =>
+decode(octets: int[]) -> int =>
     let leader = octets[0] in
     octets
         |> skip(1)

@@ -1,6 +1,6 @@
 use default
 
-shuffle(deck: List[int]) -> List[int] =>
+shuffle(deck: int[]) -> int[] =>
     let half = deck.count / 2 in
     0..deck.count
         |> map(i =>
@@ -10,12 +10,12 @@ shuffle(deck: List[int]) -> List[int] =>
                 deck[half + i / 2]
             fi
         )
-        |> collect()
+        |> list()
 
 shuffles_needed(size: int) -> int is
-    let original = 0..size |> collect()
+    let original = 0..size |> list()
 
-    walk(deck: List[int], count: int) -> int =>
+    walk(deck: int[], count: int) -> int =>
         if deck =~ original then count
         else walk(shuffle(deck), count + 1)
         fi

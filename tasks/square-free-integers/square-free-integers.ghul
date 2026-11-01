@@ -8,7 +8,7 @@ is_square_free(n: long) -> bool =>
         |> all(d => n % (d * d) != 0L)
 
 show(from: long, to: long) is
-    let found = from::to |> filter(is_square_free) |> collect()
+    let found = from::to |> filter(is_square_free) |> list()
     let width = "{to}".length + 1
     let per_row = 72 / width
 

@@ -30,7 +30,7 @@ multisplit(text: string, separators: string[]) -> PIECE{} is
     yield (text = text[start..text.length], separator = "", at = -1)
 si
 
-let pieces = multisplit("a!===b=!=c", ["==", "!=", "="]) |> memo()
+let pieces = multisplit("a!===b=!=c", ["==", "!=", "="]) |> list()
 
 write_line(pieces |> map(piece => "\"{piece.text}\"") |> join())
 

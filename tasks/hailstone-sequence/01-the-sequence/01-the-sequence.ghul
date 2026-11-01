@@ -19,7 +19,7 @@ hailstone(n: int) -> int{} is
     od
 si
 
-let sequence = hailstone(27) |> collect()
+let sequence = hailstone(27) |> list()
 write_line("length of hailstone(27): {sequence.count}")
 let first = sequence[0..4] |> join()
 let last = sequence[4..<<0] |> join()

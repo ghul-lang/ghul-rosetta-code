@@ -21,7 +21,7 @@ book_text(path: string) -> string =>
     whole.substring(from, finish - from)
 
 
-words_of(text: string) -> List[string] is
+words_of(text: string) -> string[] is
     let words = LIST()
     let current = System.Text.StringBuilder()
 
@@ -78,7 +78,7 @@ for i in 0..words.count - 2 do
     after_two[pair].add(next)
 od
 
-pick(choices: List[string]) -> string =>
+pick(choices: string[]) -> string =>
     choices[random.next(0, choices.count)]
 
 sentence() -> string is

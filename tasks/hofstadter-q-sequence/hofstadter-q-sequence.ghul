@@ -1,6 +1,6 @@
 use default
 
-q_sequence(count: int) -> List[int] => (
+q_sequence(count: int) -> int[] => (
     let terms = LIST([0, 1, 1])
 
     for n in 3::count do

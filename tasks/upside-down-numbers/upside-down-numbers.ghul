@@ -22,7 +22,7 @@ upside_down(index: int) -> string =>
     in
         "{half |> join("")}{middle}{mirror |> join("")}"
 
-let first_fifty = 1::50 |> map(upside_down) |> collect()
+let first_fifty = 1::50 |> map(upside_down) |> list()
 
 write_line("the first fifty upside-down numbers:")
 

@@ -1,8 +1,8 @@
 use default
 
 compare_oids(a: string, b: string) -> int is
-    let left = a.split(['.']) |> map(int.parse) |> collect()
-    let right = b.split(['.']) |> map(int.parse) |> collect()
+    let left = a.split(['.']) |> map(int.parse) |> list()
+    let right = b.split(['.']) |> map(int.parse) |> list()
 
     for i in 0..left.count do
         if i >= right.count then

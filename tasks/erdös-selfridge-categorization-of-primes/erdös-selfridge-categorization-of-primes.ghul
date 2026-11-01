@@ -10,7 +10,7 @@ categorise(p: int) -> int memo =>
             |> max() ?? 0
     )
 
-let first_million = primes() |> take(1_000_000) |> memo()
+let first_million = primes() |> take(1_000_000) |> list()
 
 write_line("First 200 primes:")
 

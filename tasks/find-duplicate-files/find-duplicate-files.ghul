@@ -25,7 +25,7 @@ same_contents(root: string, size: long, paths: string{}) -> Group{} =>
                 same
                     |> map(Path.get_relative_path(root, *))
                     |> sort()
-                    |> collect()
+                    |> ARRAY()
         ))
         |> filter((_, paths) => paths.count > 1)
 

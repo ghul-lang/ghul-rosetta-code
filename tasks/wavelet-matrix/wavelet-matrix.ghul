@@ -1,6 +1,6 @@
 use default
 
-class BITS(flags: List[bool] init) is
+class BITS(flags: bool[] init) is
     _ones_before: LIST[int]
 
     init(..) is
@@ -24,7 +24,7 @@ class BITS(flags: List[bool] init) is
     zeros(before: int) -> int => before - _ones_before[before]
 si
 
-class WAVELET(values: List[int] init) is
+class WAVELET(values: int[] init) is
     _levels: LIST[BITS]
     _below: LIST[int]
     _width: int
@@ -41,16 +41,16 @@ class WAVELET(values: List[int] init) is
             _width = _width + 1
         od
 
-        let holding: List[int] mut = values |> collect()
+        let holding: int[] mut = values |> list()
 
         for level in 0.._width do
             let bit = _width - 1 - level
             let set = v => ((v >> bit) & 1) == 1
 
-            _levels.add(BITS(holding |> map(set) |> collect()))
+            _levels.add(BITS(holding |> map(set) |> list()))
 
             let zeros = holding |> filter(v => !set(v)) |> collect_mutable()
-            let ones = holding |> filter(set) |> memo()
+            let ones = holding |> filter(set) |> list()
 
             _below.add(zeros.count)
 

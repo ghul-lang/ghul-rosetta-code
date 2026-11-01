@@ -16,7 +16,7 @@ take_lightest(pending: LIST[Huffman]) -> Huffman is
     lightest
 si
 
-build_tree(leaves: List[Huffman]) -> Huffman => (
+build_tree(leaves: Huffman[]) -> Huffman => (
     let pending = LIST(leaves)
 
     while pending.count > 1 do
@@ -52,7 +52,7 @@ let leaves =
     weights.keys
         |> sort()
         |> map(symbol => LEAF(symbol, weights[symbol]))
-        |> collect()
+        |> list()
 
 let table =
     codes(build_tree(leaves), "")

@@ -38,7 +38,7 @@ jaro(left: string, right: string) -> double is
         (0..right.length)
             |> filter(taken.contains)
             |> map(j => right[j])
-            |> collect()
+            |> list()
 
     let transposed =
         (0..match_count)

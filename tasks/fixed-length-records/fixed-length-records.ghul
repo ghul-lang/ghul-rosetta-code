@@ -20,7 +20,7 @@ records(path: string, length: int) -> string{} is
 si
 
 reverse(record: string) -> string => (
-    let characters = record |> collect()
+    let characters = record |> ARRAY()
 
     System.Array.reverse(characters)
 

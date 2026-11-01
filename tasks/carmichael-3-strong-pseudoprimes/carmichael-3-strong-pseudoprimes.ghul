@@ -28,7 +28,7 @@ carmichaels() -> (int, int, int){} is
     od
 si
 
-let found = carmichaels() |> collect()
+let found = carmichaels() |> list()
 
 for (p1, p2, p3) in found do
     write_line("{p1,4} x {p2,5} x {p3,6} = {p1 * p2 * p3,10}")

@@ -11,7 +11,7 @@ struct VEC(x: double, y: double, z: double) is
     length: double => sqrt(x * x + y * y + z * z)
 si
 
-use Quad = List[VEC]
+use Quad = VEC[]
 
 let around = 48
 let along = 24
@@ -55,7 +55,7 @@ quad(i: int, j: int) -> Quad => [
 
 let quads = [quad(i, j) for i in 0..around for j in 0..along]
     |> sort((p, q) => depth(p) <> depth(q))
-    |> collect()
+    |> list()
 
 let image = IMAGE(360, 360)
 
@@ -65,7 +65,7 @@ image.stroke(0.6D)
 
 for q in quads do
     let light = brightness(q)
-    let outline = q |> map(p => (x = p.x, y = p.y)) |> collect()
+    let outline = q |> map(p => (x = p.x, y = p.y)) |> list()
 
     image.colour(
         ubyte(60.0D * light),
@@ -75,7 +75,7 @@ for q in quads do
     image.fill(outline)
 
     image.colour(20ub, 40ub, 60ub)
-    image.line(outline ++ [outline[0]] |> collect())
+    image.line(outline ++ [outline[0]] |> list())
 od
 
 write_line("a torus, radii 1.5 and 0.6")

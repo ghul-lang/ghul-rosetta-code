@@ -2,7 +2,7 @@ use default
 
 balanced(text: string) -> bool =>
     let counts =
-        "abc" |> map(letter => text |> count(* == letter)) |> collect()
+        "abc" |> map(letter => text |> count(* == letter)) |> list()
     in
     counts |> all(* == counts[0])
 

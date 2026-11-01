@@ -34,11 +34,11 @@ glyph(digit: int) -> string[] is
         fi
     fi
 
-    rows |> collect()
+    rows |> list()
 si
 
 cartouche(n: int) -> string{} => (
-    let glyphs = n |> vigesimal() |> map(glyph) |> collect()
+    let glyphs = n |> vigesimal() |> map(glyph) |> list()
     let across = repeat("----", glyphs.count)
 
     let lines = LIST(["+{across |> join("+")}+"])

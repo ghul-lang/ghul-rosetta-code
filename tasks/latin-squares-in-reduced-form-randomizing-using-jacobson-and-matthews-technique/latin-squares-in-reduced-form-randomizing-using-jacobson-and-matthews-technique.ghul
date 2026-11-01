@@ -1,6 +1,6 @@
 use default
 
-use Square = List[List[int]]
+use Square = int[][]
 
 class INCIDENCE_CUBE is
     _n: int
@@ -33,16 +33,16 @@ class INCIDENCE_CUBE is
         _set(r, c, s, byte(_at(r, c, s) + delta))
     si
 
-    _pick(choices: List[int]) -> int => choices[_random.next(choices.count)]
+    _pick(choices: int[]) -> int => choices[_random.next(choices.count)]
 
-    _ones_in_rows(c: int, s: int) -> List[int] =>
-        0.._n |> filter(r => _at(r, c, s) == 1b) |> collect()
+    _ones_in_rows(c: int, s: int) -> int[] =>
+        0.._n |> filter(r => _at(r, c, s) == 1b) |> list()
 
-    _ones_in_columns(r: int, s: int) -> List[int] =>
-        0.._n |> filter(c => _at(r, c, s) == 1b) |> collect()
+    _ones_in_columns(r: int, s: int) -> int[] =>
+        0.._n |> filter(c => _at(r, c, s) == 1b) |> list()
 
-    _ones_in_symbols(r: int, c: int) -> List[int] =>
-        0.._n |> filter(s => _at(r, c, s) == 1b) |> collect()
+    _ones_in_symbols(r: int, c: int) -> int[] =>
+        0.._n |> filter(s => _at(r, c, s) == 1b) |> list()
 
     _move(r: int, c: int, s: int) is
         let r2 = _pick(_ones_in_rows(c, s))
@@ -95,9 +95,9 @@ class INCIDENCE_CUBE is
                     |> map(c =>
                         1 + (0.._n |> find(s => _at(r, c, s) == 1b)!)
                     )
-                    |> collect()
+                    |> list()
             )
-            |> collect()
+            |> list()
 si
 
 reduced(square: Square) -> Square =>
@@ -105,13 +105,13 @@ reduced(square: Square) -> Square =>
     let by_column =
         1::n
             |> map(v => 0..n |> find(c => square[0][c] == v)!)
-            |> map(c => 0..n |> map(r => square[r][c]) |> collect())
-            |> collect()
+            |> map(c => 0..n |> map(r => square[r][c]) |> list())
+            |> list()
     in
     1::n
         |> map(v => 0..n |> find(r => by_column[0][r] == v)!)
-        |> map(r => 0..n |> map(c => by_column[c][r]) |> collect())
-        |> collect()
+        |> map(r => 0..n |> map(c => by_column[c][r]) |> list())
+        |> list()
 
 text(square: Square) -> string =>
     square |> map(row => row |> map(v => "{v,3}") |> join("")) |> join("\n")
@@ -126,8 +126,8 @@ is_latin(square: Square) -> bool =>
 
 cyclic(n: int) -> Square =>
     0..n
-        |> map(r => 0..n |> map(c => (r + c) % n + 1) |> collect())
-        |> collect()
+        |> map(r => 0..n |> map(c => (r + c) % n + 1) |> list())
+        |> list()
 
 tally(n: int, squares: int, random: System.Random) -> (
     square: string,
@@ -153,7 +153,7 @@ for (square, times) in tally(4, 10_000, random) do
     write_line("  produced {times} times")
 od
 
-let order_5 = tally(5, 10_000, random) |> collect()
+let order_5 = tally(5, 10_000, random) |> list()
 
 write_line()
 write_line("Part 2: 10,000 squares of order 5:")

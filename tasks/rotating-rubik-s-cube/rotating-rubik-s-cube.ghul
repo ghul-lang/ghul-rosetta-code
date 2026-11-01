@@ -63,13 +63,13 @@ square(
     v: Point,
     half: double,
     angle: double
-) -> List[(x: double, y: double)] =>
+) -> (x: double, y: double)[] =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(centre + u * (a * half) + v * (b * half), angle)
         )
         |> map(project)
-        |> collect()
+        |> list()
 
 draw(image: IMAGE, angle: double) is
     image.clear(250ub, 250ub, 247ub)

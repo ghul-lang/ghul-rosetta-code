@@ -3,7 +3,7 @@ use default
 class NODE(text: string, children: LIST[NODE])
 
 union Outcome is
-    SORTED(lines: List[string]) default
+    SORTED(lines: string[]) default
     INCONSISTENT(reason: string)
 si
 
@@ -12,7 +12,7 @@ indent_of(line: string) -> string =>
         |> take_while(letter => letter == ' ' \/ letter == '\t')
         |> join("")
 
-build(lines: List[string], unit: int) -> NODE is
+build(lines: string[], unit: int) -> NODE is
     let root = NODE("", LIST())
     let ancestors = LIST()
 
@@ -62,8 +62,8 @@ flatten(node: NODE, level: int, pad: string) -> string{} is
     od
 si
 
-arrange(outline: List[string], descending: bool) -> Outcome is
-    let indents = outline |> map(indent_of) |> memo()
+arrange(outline: string[], descending: bool) -> Outcome is
+    let indents = outline |> map(indent_of) |> list()
     let leading = indents |> find(indent => indent.length > 0)
 
     if !leading? then
@@ -90,10 +90,10 @@ arrange(outline: List[string], descending: bool) -> Outcome is
 
     sort_tree(root, descending)
 
-    Outcome.SORTED(root |> flatten(-1, unit) |> collect())
+    Outcome.SORTED(root |> flatten(-1, unit) |> list())
 si
 
-show(title: string, outline: List[string], descending: bool) is
+show(title: string, outline: string[], descending: bool) is
     write_line("{title}:")
 
     let outcome = arrange(outline, descending)

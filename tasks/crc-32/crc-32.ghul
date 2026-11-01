@@ -12,7 +12,7 @@ let table =
                     fi
                 )
         )
-        |> collect()
+        |> list()
 
 crc32(data: ubyte[]) -> uint =>
     let step = (crc, b) => table[int((crc ^ uint(b)) & 0xFFu)] ^ (crc >> 8)

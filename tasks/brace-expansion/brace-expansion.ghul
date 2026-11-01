@@ -3,8 +3,8 @@ use System.Text.StringBuilder
 
 union Alternation is
     LITERAL(text: string)
-    SEQUENCE(items: List[Alternation])
-    BRANCHES(branches: List[Alternation])
+    SEQUENCE(items: Alternation[])
+    BRANCHES(branches: Alternation[])
 si
 
 use Alternation.LITERAL
@@ -93,7 +93,7 @@ parse(text: string, start: int, nested: bool) -> (
     return (tree = SEQUENCE(unpaired), next = position)
 si
 
-expand_from(items: List[Alternation], at: int) -> string{} is
+expand_from(items: Alternation[], at: int) -> string{} is
     if at == items.count then
         yield ""
     else

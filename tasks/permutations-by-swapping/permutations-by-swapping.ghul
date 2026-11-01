@@ -1,6 +1,6 @@
 use default
 
-use STEP = (order: List[int], sign: int)
+use STEP = (order: int[], sign: int)
 
 swap(values: LIST[int], left: int, right: int) is
     (values[left], values[right]) = (values[right], values[left])

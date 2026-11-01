@@ -16,7 +16,7 @@ class SOLVER is
     _estimate: int
     _path: LIST[int]
 
-    path: List[int] => _path
+    path: int[] => _path
 
     init(tiles: int[]) is
         _board = LIST(tiles)

@@ -2,7 +2,7 @@ use default
 use Raster.AXES
 use Raster.IMAGE
 
-yellowstone(count: int) -> List[int] is
+yellowstone(count: int) -> int[] is
     let terms = LIST([1, 2, 3])
     let used = SET([1, 2, 3])
 
@@ -38,7 +38,7 @@ let points =
     terms
         |> index()
         |> map(term => (x = double(term.index + 1), y = double(term.value)))
-        |> collect()
+        |> list()
 
 let image = IMAGE(760, 470)
 

@@ -12,7 +12,7 @@ let areas = [
 let o_halloran =
     (7::999)
         |> filter(n => n % 2 == 0 /\ areas.contains(n) == false)
-        |> collect()
+        |> list()
 
 write_line("even values below 1000 that are no cuboid's surface area:")
 write_line(o_halloran |> join(" "))

@@ -19,7 +19,7 @@ hash(n: uint, salt: uint, max: uint) -> uint => (
     uint((ulong(m) * ulong(max)) >> 32)
 )
 
-infer_bit(command: uint, bit: int, program: List[Stage]) -> bool => (
+infer_bit(command: uint, bit: int, program: Stage[]) -> bool => (
     let input = command | (uint(bit) << 16), first_stage = program[0]
 
     let start = (
@@ -38,7 +38,7 @@ infer_bit(command: uint, bit: int, program: List[Stage]) -> bool => (
     result.input & 1u != 0u
 )
 
-inference(command: uint, bits: int, program: List[Stage]) -> ulong =>
+inference(command: uint, bits: int, program: Stage[]) -> ulong =>
     if program.count == 0 then
         0ul
     else
@@ -57,12 +57,12 @@ let square_root_program =
         |> map(m => uint.parse(m.value))
         |> chunk(2)
         |> map(pair => (salt = pair[0], max = pair[1]))
-        |> collect()
+        |> list()
 
 let roots =
     0..256
         |> map(n => inference(uint(n), 4, square_root_program))
-        |> collect()
+        |> list()
 
 for row in roots |> chunk(16) do
     write_line(row |> map(root => "{root,3}") |> join(""))

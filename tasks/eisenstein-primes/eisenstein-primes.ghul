@@ -44,7 +44,7 @@ for row in 0..25 do
     write_line(four |> map(show) |> join("  "))
 od
 
-let plotted = primes |> take(2000) |> collect()
+let plotted = primes |> take(2000) |> list()
 let largest = plotted[plotted.count - 1]
 
 write_line("")

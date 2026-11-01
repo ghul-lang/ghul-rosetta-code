@@ -8,9 +8,9 @@ kronecker(left: int[][], right: int[][]) -> int[][] =>
                     left[row / right.count][column / right[0].count] *
                     right[row % right.count][column % right[0].count]
                 )
-                |> collect()
+                |> list()
         )
-        |> collect()
+        |> list()
 
 pad(text: string, width: int) -> string =>
     if text.length >= width then

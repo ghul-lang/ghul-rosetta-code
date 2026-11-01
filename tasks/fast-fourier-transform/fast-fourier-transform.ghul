@@ -2,12 +2,12 @@ use default
 use System.Math
 use System.Numerics.Complex
 
-every_other(x: List[Complex], start: int) -> List[Complex] =>
+every_other(x: Complex[], start: int) -> Complex[] =>
     x
         |> index()
         |> filter(e => e.index % 2 == start)
         |> map(e => e.value)
-        |> collect()
+        |> list()
 
 twiddle(k: int, n: int) -> Complex =>
     Complex.from_polar_coordinates(
@@ -15,7 +15,7 @@ twiddle(k: int, n: int) -> Complex =>
         -2.0D * Math.pi * double(k) / double(n)
     )
 
-fft(x: List[Complex]) -> List[Complex] is
+fft(x: Complex[]) -> Complex[] is
     let n = x.count
 
     if n <= 1 then
@@ -25,12 +25,12 @@ fft(x: List[Complex]) -> List[Complex] is
     let even = fft(every_other(x, 0))
     let odd = fft(every_other(x, 1))
 
-    let turned = 0..n / 2 |> map(k => twiddle(k, n) * odd[k]) |> collect()
+    let turned = 0..n / 2 |> map(k => twiddle(k, n) * odd[k]) |> list()
 
     0..n / 2
         |> map(k => even[k] + turned[k])
         |> cat(0..n / 2 |> map(k => even[k] - turned[k]))
-        |> collect()
+        |> list()
 si
 
 tidy(v: double) -> double => if Math.abs(v) < 1.0e-12 then 0.0D else v fi
@@ -40,7 +40,7 @@ show(c: Complex) -> string =>
 
 let input = [1.0D, 1.0D, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D]
     |> map(Complex(*, 0.0D))
-    |> collect()
+    |> list()
 
 write_line("input:  {input |> map(c => c.real) |> join(", ")}")
 write_line("")

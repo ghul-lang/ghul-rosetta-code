@@ -87,11 +87,11 @@ class LCA is
 
         down(child[0])
 
-        _pi = pi |> collect()
-        _beta = beta |> collect()
-        _alfa = alfa |> collect()
-        _tau = tau |> collect()
-        _lambda = lambda |> collect()
+        _pi = pi |> list()
+        _beta = beta |> list()
+        _alfa = alfa |> list()
+        _tau = tau |> list()
+        _lambda = lambda |> list()
     si
 
     _climb(v: int, h: int) -> int =>

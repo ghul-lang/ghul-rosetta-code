@@ -2,7 +2,7 @@ use default
 
 union Tensor is
     SCALAR(value: int)
-    ARRAY(items: List[Tensor])
+    ARRAY(items: Tensor[])
 si
 
 parse_all(text: string) -> Tensor{} is
@@ -56,19 +56,19 @@ parse_all(text: string) -> Tensor{} is
     found
 si
 
-shape(tensor: Tensor) -> List[int] =>
+shape(tensor: Tensor) -> int[] =>
     if let (items): Tensor.ARRAY = tensor then
-        [items.count] ++ shape(items[0]) |> collect()
+        [items.count] ++ shape(items[0]) |> ARRAY()
     else
         []
     fi
 
-strides_of(dimensions: List[int]) -> List[int] =>
+strides_of(dimensions: int[]) -> int[] =>
     0..dimensions.count
         |> map(level => dimensions[level + 1..<0] |> product())
-        |> collect()
+        |> ARRAY()
 
-embed(tensor: Tensor, strides: List[int]) -> List[int] is
+embed(tensor: Tensor, strides: int[]) -> int[] is
     let size =
         tensor
             |> shape()
@@ -92,7 +92,7 @@ embed(tensor: Tensor, strides: List[int]) -> List[int] is
     values
 si
 
-deconvolve_1d(g: List[int], f: List[int]) -> List[int] is
+deconvolve_1d(g: int[], f: int[]) -> int[] is
     let h = LIST()
 
     for n in 0..g.count - f.count + 1 do
@@ -106,9 +106,9 @@ deconvolve_1d(g: List[int], f: List[int]) -> List[int] is
 si
 
 reshape(
-    values: List[int],
-    dimensions: List[int],
-    strides: List[int]
+    values: int[],
+    dimensions: int[],
+    strides: int[]
 ) -> Tensor is
     build(level, offset) =>
         if level == dimensions.count then
@@ -119,7 +119,7 @@ reshape(
                     |> map(i =>
                         build(level + 1, offset + i * strides[level])
                     )
-                    |> collect()
+                    |> ARRAY()
             )
         fi
 
@@ -133,7 +133,7 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
         g_shape
             |> zip(shape(f))
             |> map((g_extent, f_extent) => g_extent - f_extent + 1)
-            |> collect()
+            |> ARRAY()
 
     let h_values = deconvolve_1d(embed(g, strides), embed(f, strides))
 
@@ -159,7 +159,7 @@ let tests =
         |> parse_all()
         |> chunk(3)
         |> map(c => (h = c[0], f = c[1], g = c[2]))
-        |> collect()
+        |> ARRAY()
 
 for (dimension, (h, f, g)) in tests |> index() do
     let h_found = deconvolve(g, f) =~ h

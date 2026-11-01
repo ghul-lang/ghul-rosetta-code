@@ -135,7 +135,7 @@ evaluate(expression: Expression) -> int =>
 
 node(expression: Expression) -> (
     label: string,
-    children: List[Expression]
+    children: Expression[]
 ) =>
     case expression
     when (value): NUMBER then

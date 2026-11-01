@@ -40,7 +40,7 @@ write_line("you are at the entrance of an endless maze")
 write_line("go ahead, right, back or left; exit at the entrance, or quit")
 
 do
-    let paths = 0..4 |> filter(t => passage(x, y, toward(t))) |> collect()
+    let paths = 0..4 |> filter(t => passage(x, y, toward(t))) |> list()
 
     write_line()
 
