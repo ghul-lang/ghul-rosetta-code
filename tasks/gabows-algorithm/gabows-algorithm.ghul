@@ -3,6 +3,7 @@ use default
 use Edge = (from: int, to: int)
 
 // `LIST[T]` is a mutable list that grows as elements are added
+// `STACK[T]` is a mutable last-in, first-out stack
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 

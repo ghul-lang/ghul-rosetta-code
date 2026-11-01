@@ -2,6 +2,7 @@ use default
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `==` compares identity
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
@@ -47,7 +48,7 @@ class BIPARTITE(left: int, right: int) is
     si
 
     _layer() -> bool is
-        let waiting = Queue()
+        let waiting = QUEUE()
 
         for u in 0..left do
             if _partner_of_left[u]? then

@@ -5,6 +5,7 @@ use default
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
 // `MAP[K, V]` is a mutable map from keys to values
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read
@@ -120,7 +121,7 @@ solve_phase(phase: int, start: int[]) -> int{} is
         return found
     fi
 
-    let queue = Collections.Queue()
+    let queue = QUEUE()
     let direction = MAP()
     let last_move = MAP()
     let previous = MAP()

@@ -5,6 +5,7 @@ use default
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
 // `MAP[K, V]` is a mutable map from keys to values
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
@@ -36,7 +37,7 @@ class AUTOMATON(patterns: string[] private) is
             _found[state].add(number)
         od
 
-        let queue = Queue(_moves[0].values)
+        let queue = QUEUE(_moves[0].values)
 
         while queue.count > 0 do
             let state = queue.dequeue()

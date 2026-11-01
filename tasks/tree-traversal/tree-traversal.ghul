@@ -2,6 +2,7 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
@@ -44,7 +45,7 @@ postorder[T](tree: Tree[T]) -> T{} is
 si
 
 levelorder[T](tree: Tree[T]) -> T{} is
-    let pending = Queue[Tree[T]]()
+    let pending = QUEUE[Tree[T]]()
 
     pending.enqueue(tree)
 

@@ -7,6 +7,7 @@ use Edge = (from: int, to: int)
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
 // `SET[T]` is a mutable set, holding each element once
+// `STACK[T]` is a mutable last-in, first-out stack
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read

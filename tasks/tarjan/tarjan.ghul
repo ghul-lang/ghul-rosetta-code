@@ -2,6 +2,7 @@ use default
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
+// `STACK[T]` is a mutable last-in, first-out stack
 // `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
