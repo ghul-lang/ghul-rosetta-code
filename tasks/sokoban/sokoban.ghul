@@ -1,6 +1,7 @@
 use default
 
 // `SET[T]` is a mutable set, holding each element once
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read
@@ -40,7 +41,7 @@ solve() -> string? is
     let initial = cells.replace('@', ' ').replace('.', ' ')
 
     let seen = SET()
-    let queue = Collections.Queue()
+    let queue = QUEUE()
 
     seen.add("{start}:{initial}")
     queue.enqueue((player = start, boxes = initial, path = ""))

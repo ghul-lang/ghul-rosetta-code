@@ -36,7 +36,7 @@ let days = [
     "Thursday", "Friday", "Saturday"
 ]
 
-let colours = LinkedList([
+let colours = LINKED_LIST([
     "Red", "Orange", "Yellow", "Green", "Blue", "Purple"
 ])
 

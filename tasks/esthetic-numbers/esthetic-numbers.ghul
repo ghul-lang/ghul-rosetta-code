@@ -2,6 +2,7 @@ use default
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
 //  it read
@@ -25,7 +26,7 @@ render(value: long, base: int) -> string =>
         fi
 
 esthetic(base: int) -> long{} is
-    let pending = Queue()
+    let pending = QUEUE()
 
     for digit in 1..base do
         pending.enqueue((long(digit), digit))

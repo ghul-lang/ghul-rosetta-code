@@ -6,13 +6,14 @@ use System.Runtime.CompilerServices.ICriticalNotifyCompletion
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
 // `SET[T]` is a mutable set, holding each element once
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
 
-let ready = Queue[() -> void]()
+let ready = QUEUE[() -> void]()
 
 struct PAUSE: ICriticalNotifyCompletion is
     init() is si

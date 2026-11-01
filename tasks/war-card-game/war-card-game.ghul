@@ -1,6 +1,7 @@
 use default
 
 // `LIST[T]` is a mutable list that grows as elements are added
+// `QUEUE[T]` is a mutable first-in, first-out queue
 // `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
@@ -24,7 +25,7 @@ play(seed: int) -> (winner: int, rounds: int) is
         (deck[i], deck[other]) = (deck[other], deck[i])
     od
 
-    let hands = [Collections.Queue(), Collections.Queue()]
+    let hands = [QUEUE(), QUEUE()]
 
     for i in 0..52 do
         hands[i % 2].enqueue(deck[i])

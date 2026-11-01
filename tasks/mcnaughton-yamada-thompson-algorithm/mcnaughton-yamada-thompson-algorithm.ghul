@@ -1,6 +1,7 @@
 use default
 
 // `SET[T]` is a mutable set, holding each element once
+// `STACK[T]` is a mutable last-in, first-out stack
 // `==` compares identity
 // `if let` and `case ... when` pattern-match
 
