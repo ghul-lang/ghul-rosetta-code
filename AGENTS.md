@@ -299,18 +299,19 @@ does not name `System.Linq`. Nor `Ghul.Internal`, which holds the attributes car
 facts between assemblies and is not reachable from source; nor `MAYBE`, which is one of the three
 carriers behind `T?` and is spelled `T?` wherever it is written.
 
-A list of `n` copies of a value is `repeat(value, n) |> collect_mutable()`, not
+A list of `n` copies of a value is `repeat(value, n) |> LIST()`, not
 `LIST[T](System.Linq.Enumerable.repeat(value, n))`; `repeat(value)`, `from(start)` and
 `from(start, step)` are the unbounded forms.
 
 ## A collection is built by a pipe, not by a loop
 
-A list whose elements are a function of what it is built from is built by a pipe ending in a
-`collect_*`, not by declaring an empty `LIST` and adding to it in a `for`:
+A list whose elements are a function of what it is built from is built by a pipe ending in the
+collection's constructor - `LIST()`, `SET()`, `MAP()`, or `ARRAY()` for an array - not by
+declaring an empty `LIST` and adding to it in a `for`:
 
 ```ghul
-let doubled = values |> map(value => value * 2) |> collect_mutable()
-let flags = repeat(false, limit) |> collect_mutable()
+let doubled = values |> map(value => value * 2) |> LIST()
+let flags = repeat(false, limit) |> LIST()
 ```
 
 A grid is the same shape twice, with one rule: the outer level is `map` and never `repeat`, because
@@ -318,8 +319,8 @@ A grid is the same shape twice, with one rule: the outer level is `map` and neve
 
 ```ghul
 let cells = 0..rows
-    |> map(_ => repeat(0, columns) |> collect_mutable())
-    |> collect_mutable()
+    |> map(_ => repeat(0, columns) |> LIST())
+    |> LIST()
 ```
 
 No terminal at all where the result is read once: a pipe passed to a `for`, a `join`, or a
@@ -333,11 +334,12 @@ let primes = from(2) |> filter(is_prime) |> list()
 ```
 
 `T[]` is `Collections.List[T]`, the read-only list, and an array is `ARRAY[T]`: an array is a
-`T[]`, so a literal or a `collect()` result passes wherever a `T[]` is expected. `collect()` is
-for when the work has to happen at that line: the source reads state that changes afterwards, the
+`T[]`, so a literal or an `ARRAY()` result passes wherever a `T[]` is expected. `ARRAY()` is for
+when the work has to happen at that line: the source reads state that changes afterwards, the
 elements start tasks or threads, several threads read the result, or a .NET API or the result's
-meaning wants an array, and then the type it goes into is written `ARRAY[T]`. `collect_mutable()`
-is for a result that is then mutated.
+meaning wants an array, and then the type it goes into is written `ARRAY[T]`. `LIST()` is for a
+result that is then mutated. The `collect*` terminals are the older names for the same
+constructors and are not written in new solutions.
 
 Filling the grid by index afterwards does not change that: how the elements get there is a separate
 question from how the rows are made.
@@ -656,7 +658,7 @@ read_ppm(path: string) -> BITMAP is
         return string(
             (from..at)
                 |> map(index => cast char(raw[index]))
-                |> collect()
+                |> ARRAY()
         )
     si
 

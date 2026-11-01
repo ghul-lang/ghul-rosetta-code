@@ -24,7 +24,7 @@ class GRAPH(nodes: int[], edges: Edge[]) is
                         if outgoing.contains_key(node) then
                             outgoing[node] |> map((from, to) => to) |> SET()
                         else
-                            SET()
+                            SET[int]()
                         fi
                 )
     si
