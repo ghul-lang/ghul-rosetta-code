@@ -1,0 +1,11 @@
+{
+  "task": "Matrix digital rain",
+  "url": "https://rosettacode.org/wiki/Matrix_digital_rain",
+  "status": "solved",
+  "tags": [
+    "graphics",
+    "simulation"
+  ],
+  "interest": 4,
+  "summary": "Reproduce the falling green characters of the Matrix digital rain effect from the film The Matrix in a terminal."
+}

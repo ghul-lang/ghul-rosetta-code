@@ -1,0 +1,6 @@
+{
+  "title": "Compile-time calculation",
+  "state": "rejected",
+  "reason": "no-equivalent",
+  "note": "ghul has no compile-time evaluation: every initializer runs when the program starts"
+}
