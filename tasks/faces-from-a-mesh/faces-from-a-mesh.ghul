@@ -95,7 +95,7 @@ let faces = [
 
 for (name, sides) in faces do
     if let walk = perimeter(sides) then
-        write_line("{name}: {$walk}")
+        write_line("{name}: {walk}")
     else
         write_line("{name}: not a simple face")
     fi

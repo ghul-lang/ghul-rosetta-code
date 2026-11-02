@@ -17,7 +17,7 @@ let lists = [
 for strings in lists do
     let shown = $(strings)
     let equal = $(all_equal(strings))
-    let ascending = $(strictly_ascending(strings))
+    let ascending = strictly_ascending(strings)
 
     write_line("{shown,-22} equal: {equal,-5}  ascending: {ascending}")
 od

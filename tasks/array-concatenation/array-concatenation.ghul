@@ -3,10 +3,10 @@ use default
 let first = [1, 2, 3]
 let second = [4, 5, 6]
 
-write_line("{$(first |> cat(second))}")
+write_line("{first ++ second}")
 
 let grown = LIST(first)
 
 grown.add_range(second)
 
-write_line("{$grown}")
+write_line("{grown}")
