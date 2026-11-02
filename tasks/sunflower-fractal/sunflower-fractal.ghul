@@ -8,7 +8,7 @@ let image = IMAGE(400, 400)
 
 image.view(-200.0D, -200.0D, 200.0D, 200.0D)
 image.clear(255ub, 255ub, 255ub)
-image.colour(0ub, 0ub, 255ub)
+image.color(0ub, 0ub, 255ub)
 image.stroke(1.0D)
 
 for i in 0::seeds do

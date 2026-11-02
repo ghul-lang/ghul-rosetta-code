@@ -1,6 +1,6 @@
 use default
 use Raster.Anchor
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 use Raster.SHAPES
 
@@ -104,14 +104,14 @@ for row in 0::source.length do
                 (x = to.x, y = to.y),
                 (x = at.x, y = to.y)
             ],
-            COLOUR_MAP.viridis(double(table[row][column]) / highest)
+            COLOR_MAP.viridis(double(table[row][column]) / highest)
         )
     od
 od
 
 image.fill(cells)
 
-image.colour(225ub, 60ub, 60ub)
+image.color(225ub, 60ub, 60ub)
 image.stroke(2.4)
 image.line(
     alignment() |> map(step => centre(step.row, step.column)) |> list()
@@ -122,9 +122,9 @@ for row in 0::source.length do
         let shade = double(table[row][column]) / highest
 
         if shade < 0.55 then
-            image.colour(250ub, 250ub, 250ub)
+            image.color(250ub, 250ub, 250ub)
         else
-            image.colour(35ub, 40ub, 35ub)
+            image.color(35ub, 40ub, 35ub)
         fi
 
         let middle = centre(row, column)
@@ -134,12 +134,12 @@ for row in 0::source.length do
             middle.y + 5.0,
             15.0,
             "{table[row][column]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 od
 
-image.colour(70ub, 75ub, 90ub)
+image.color(70ub, 75ub, 90ub)
 
 for column in 1::target.length do
     let middle = centre(0, column)
@@ -149,7 +149,7 @@ for column in 1::target.length do
         double(top) - 9.0,
         17.0,
         "{target[column - 1]}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 od
 

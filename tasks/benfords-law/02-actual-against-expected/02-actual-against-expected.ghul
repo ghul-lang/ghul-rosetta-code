@@ -47,7 +47,7 @@ box(left: double, bottom: double, right: double, top: double) is
     ])
 si
 
-image.colour(215ub, 215ub, 215ub)
+image.color(215ub, 215ub, 215ub)
 image.stroke(1.0)
 
 for step in 0::6 do
@@ -57,25 +57,25 @@ for step in 0::6 do
     image.text(0.15, y - 0.4, 12.0, "{step * 5}%", Anchor.RIGHT)
 od
 
-image.colour(120ub, 120ub, 120ub)
+image.color(120ub, 120ub, 120ub)
 image.line(0.3, 0.0, 9.7, 0.0)
 
 for entry in actual |> index() do
     let digit = entry.index + 1
     let middle = double(digit)
 
-    image.colour(observed_colour)
+    image.color(observed_colour)
     box(middle - 0.36, 0.0, middle - 0.03, entry.value)
 
-    image.colour(benford_colour)
+    image.color(benford_colour)
     box(middle + 0.03, 0.0, middle + 0.36, expected[entry.index])
 
-    image.colour(60ub, 60ub, 60ub)
-    image.text(middle, -2.1, 14.0, "{digit}", Anchor.CENTRE)
+    image.color(60ub, 60ub, 60ub)
+    image.text(middle, -2.1, 14.0, "{digit}", Anchor.CENTER)
 od
 
-image.colour(60ub, 60ub, 60ub)
-image.text(5.0, -4.8, 13.0, "leading digit", Anchor.CENTRE)
+image.color(60ub, 60ub, 60ub)
+image.text(5.0, -4.8, 13.0, "leading digit", Anchor.CENTER)
 
 let keys = [
     (shade = observed_colour, label = "first 1000 Fibonacci numbers"),
@@ -85,10 +85,10 @@ let keys = [
 for key in keys |> index() do
     let y = 31.0 - 2.6 * double(key.index)
 
-    image.colour(key.value.shade)
+    image.color(key.value.shade)
     box(3.8, y - 0.55, 4.15, y + 0.55)
 
-    image.colour(60ub, 60ub, 60ub)
+    image.color(60ub, 60ub, 60ub)
     image.text(4.35, y - 0.45, 12.0, key.value.label, Anchor.LEFT)
 od
 

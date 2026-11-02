@@ -73,11 +73,11 @@ let image = IMAGE(300, 300)
 
 image.view(-20.0D, -40.0D, 230.0D, 210.0D)
 image.clear(252ub, 250ub, 245ub)
-image.colour(40ub, 80ub, 170ub)
+image.color(40ub, 80ub, 170ub)
 image.stroke(2.5D)
 image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
 
-image.colour(210ub, 50ub, 40ub)
+image.color(210ub, 50ub, 40ub)
 
 for p in [start, middle, finish] do
     image.dot(p.x, p.y, 5.0D)

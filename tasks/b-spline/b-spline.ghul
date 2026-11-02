@@ -56,17 +56,17 @@ let image = IMAGE(400, 400)
 
 image.clear(252ub, 250ub, 245ub)
 
-image.colour(190ub, 190ub, 200ub)
+image.color(190ub, 190ub, 200ub)
 image.stroke(1.0D)
 image.line(control)
 
-image.colour(200ub, 60ub, 50ub)
+image.color(200ub, 60ub, 50ub)
 
 for p in control do
     image.dot(p.x, p.y, 3.0D)
 od
 
-image.colour(30ub, 70ub, 150ub)
+image.color(30ub, 70ub, 150ub)
 image.stroke(2.5D)
 image.line(curve)
 

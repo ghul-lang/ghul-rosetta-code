@@ -155,7 +155,7 @@ image.view(
 
 image.clear(255ub, 255ub, 255ub)
 
-image.colour(225ub, 225ub, 230ub)
+image.color(225ub, 225ub, 230ub)
 image.stroke(1.0D)
 
 for x in low_x - 1::high_x + 1 do
@@ -166,7 +166,7 @@ for y in low_y - 1::high_y + 1 do
     image.line(double(low_x - 1), double(y), double(high_x + 1), double(y))
 od
 
-image.colour(40ub, 90ub, 170ub)
+image.color(40ub, 90ub, 170ub)
 image.stroke(2.0D)
 
 for m in played do
@@ -182,23 +182,23 @@ for m in played do
     )
 od
 
-image.colour(20ub, 20ub, 20ub)
+image.color(20ub, 20ub, 20ub)
 
 for (x, y) in start do
     image.dot(double(x), double(y), 7.0D)
 od
 
 for (m, n) in played |> index() |> map(im => (im.value, im.index + 1)) do
-    image.colour(255ub, 255ub, 255ub)
+    image.color(255ub, 255ub, 255ub)
     image.dot(double(m.x), double(m.y), 12.0D)
-    image.colour(200ub, 40ub, 40ub)
+    image.color(200ub, 40ub, 40ub)
     image.circle(double(m.x), double(m.y), 0.36D)
     image.text(
         double(m.x),
         double(m.y) - 0.16D,
         12.0D,
         "{n}",
-        Raster.Anchor.CENTRE
+        Raster.Anchor.CENTER
     )
 od
 

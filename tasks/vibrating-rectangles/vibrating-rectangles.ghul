@@ -20,7 +20,7 @@ draw(image: IMAGE, frame: int) is
         let inset = spacing * double(ring) + 2.0D
         let hue = double(frame - 2 * ring) / double(frames)
 
-        image.colour(
+        image.color(
             channel(hue, 0.0D),
             channel(hue, 1.0D / 3.0D),
             channel(hue, 2.0D / 3.0D)

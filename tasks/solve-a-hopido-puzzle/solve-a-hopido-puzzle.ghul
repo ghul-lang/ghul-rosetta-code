@@ -99,7 +99,7 @@ for s in open do
     let x = cell * double(s.column)
     let y = cell * double(s.row)
 
-    image.colour(200ub, 215ub, 235ub)
+    image.color(200ub, 215ub, 235ub)
     image.fill_rectangle(
         x + 2.0D,
         y + 2.0D,
@@ -117,15 +117,15 @@ let path =
         ))
         |> list()
 
-image.colour(30ub, 60ub, 140ub)
+image.color(30ub, 60ub, 140ub)
 image.stroke(2.0D)
 image.line(path)
-image.colour(200ub, 40ub, 40ub)
+image.color(200ub, 40ub, 40ub)
 image.dot(path[0].x, path[0].y, 7.0D)
-image.colour(30ub, 60ub, 140ub)
+image.color(30ub, 60ub, 140ub)
 image.ring(path[path.count - 1].x, path[path.count - 1].y, 7.0D)
 
-image.colour(90ub, 90ub, 100ub)
+image.color(90ub, 90ub, 100ub)
 
 for s in open do
     image.text(

@@ -60,7 +60,7 @@ let extent = sqrt(double(norm(largest))) * 1.05D
 
 image.view(-extent, -extent, extent, extent)
 image.clear(10ub, 12ub, 25ub)
-image.colour(120ub, 200ub, 255ub)
+image.color(120ub, 200ub, 255ub)
 
 for e in plotted do
     image.dot(real(e), imaginary(e), 1.6D)

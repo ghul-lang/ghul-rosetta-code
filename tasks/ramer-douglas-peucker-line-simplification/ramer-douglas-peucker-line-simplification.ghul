@@ -70,10 +70,10 @@ draw(points: P[], width: double, size: double) is
     od
 si
 
-image.colour(170ub, 170ub, 180ub)
+image.color(170ub, 170ub, 180ub)
 draw(line, 6.0D, 7.0D)
 
-image.colour(200ub, 50ub, 40ub)
+image.color(200ub, 50ub, 40ub)
 draw(simple, 2.0D, 4.0D)
 
 image.write("simplified.png")

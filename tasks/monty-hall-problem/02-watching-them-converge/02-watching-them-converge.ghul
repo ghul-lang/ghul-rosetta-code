@@ -55,7 +55,7 @@ let switch_colour = (red = 40ub, green = 85ub, blue = 165ub)
 
 let image = IMAGE(760, 460)
 
-image.colour(95ub, 100ub, 115ub)
+image.color(95ub, 100ub, 115ub)
 image.stroke(1.0)
 
 let axes = AXES(image)
@@ -86,7 +86,7 @@ axes.key("staying", stay_colour)
 axes.fit(0.0, 0.0, 4.0, 1.0)
 axes.draw()
 
-image.colour(195ub, 200ub, 210ub)
+image.color(195ub, 200ub, 210ub)
 
 for line in [1.0 / 3.0, 2.0 / 3.0] do
     image.line(0.0, line, 4.0, line)
@@ -94,10 +94,10 @@ od
 
 image.stroke(1.4)
 
-image.colour(stay_colour)
+image.color(stay_colour)
 image.line(curve(staying))
 
-image.colour(switch_colour)
+image.color(switch_colour)
 image.line(curve(switching))
 
 image.write("monty-hall.png")

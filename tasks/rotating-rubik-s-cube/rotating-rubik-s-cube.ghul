@@ -95,7 +95,7 @@ draw(image: IMAGE, angle: double) is
         for at in sticker_centres do
             let sticker = square(at, face.u, face.v, 0.42, angle)
 
-            stickers.add(sticker, face.colour)
+            stickers.add(sticker, face.color)
         od
     od
 

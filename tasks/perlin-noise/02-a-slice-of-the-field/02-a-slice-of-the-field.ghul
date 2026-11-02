@@ -1,5 +1,5 @@
 use default
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
@@ -100,7 +100,7 @@ for y in 0..image.height do
     for x in 0..image.width do
         let value = noise(double(x) / cell, double(y) / cell, 0.5)
 
-        let shade = COLOUR_MAP.viridis(0.5 + value / 1.2)
+        let shade = COLOR_MAP.viridis(0.5 + value / 1.2)
 
         image.set_pixel(x, y, shade.red, shade.green, shade.blue)
     od

@@ -52,7 +52,7 @@ let image = IMAGE(860, 520)
 
 image.view(0.0, 0.0, double(limit), double(tallest) + 18.0, 62.0)
 
-image.colour(80ub, 80ub, 80ub)
+image.color(80ub, 80ub, 80ub)
 image.stroke(1.0)
 
 let axes = AXES(image)
@@ -61,7 +61,7 @@ axes.x_title = "n"
 axes.y_title = "steps"
 axes.draw()
 
-image.colour(40ub, 70ub, 150ub)
+image.color(40ub, 70ub, 150ub)
 image.stroke(1.1)
 
 for entry in lengths |> index() do
@@ -74,11 +74,11 @@ od
 let marked_x = double(longest)
 let marked_y = double(tallest)
 
-image.colour(200ub, 40ub, 40ub)
+image.color(200ub, 40ub, 40ub)
 image.stroke(6.0)
 image.line(marked_x, marked_y, marked_x, marked_y)
 
-image.text(marked_x, marked_y + 7.0, 13.0, "{longest}", Anchor.CENTRE)
+image.text(marked_x, marked_y + 7.0, 13.0, "{longest}", Anchor.CENTER)
 
 image.write("hailstone.png")
 

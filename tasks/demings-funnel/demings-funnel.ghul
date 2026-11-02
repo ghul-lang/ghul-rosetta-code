@@ -80,7 +80,7 @@ plot(image: IMAGE, at: int, xs: double[], ys: double[], reach: double) is
     let middle = (x = left + width / 2.0D, y = top + height / 2.0D)
     let scale = (min(width, height) / 2.0D - 14.0D) / reach
 
-    image.colour(170ub, 170ub, 170ub)
+    image.color(170ub, 170ub, 170ub)
     image.stroke(1.0D)
     image.line([
         (x = left + 1.0D, y = top + 1.0D),
@@ -90,23 +90,23 @@ plot(image: IMAGE, at: int, xs: double[], ys: double[], reach: double) is
         (x = left + 1.0D, y = top + 1.0D)
     ])
 
-    image.colour(210ub, 210ub, 210ub)
+    image.color(210ub, 210ub, 210ub)
     image.line(left + 10.0D, middle.y, left + width - 10.0D, middle.y)
     image.line(middle.x, top + 10.0D, middle.x, top + height - 10.0D)
 
-    image.colour(30ub, 70ub, 160ub)
+    image.color(30ub, 70ub, 160ub)
 
     for i in 0..xs.count do
         image.dot(middle.x + xs[i] * scale, middle.y + ys[i] * scale, 2.0D)
     od
 
-    image.colour(40ub, 40ub, 40ub)
+    image.color(40ub, 40ub, 40ub)
     image.text(
         left + width / 2.0D,
         top + 22.0D,
         15.0D,
         "rule {at + 1}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 si
 

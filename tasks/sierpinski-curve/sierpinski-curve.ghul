@@ -36,7 +36,7 @@ curve(n: int) is
 si
 
 image.view(0.0D, 0.0D, 540.0D, 540.0D)
-image.colour(0ub, 0ub, 160ub)
+image.color(0ub, 0ub, 160ub)
 image.stroke(1.2D)
 
 pen.move_to(266.0D, 514.0D)

@@ -97,7 +97,7 @@ glyph(image: IMAGE, at: (row: int, column: int), letters: string) is
         row_y(at.row) + cell * 0.76,
         16.0,
         letters,
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 si
 
@@ -125,7 +125,7 @@ od
 
 image.fill(cells)
 
-image.colour(120ub, 120ub, 120ub)
+image.color(120ub, 120ub, 120ub)
 image.stroke(0.8)
 
 for z in 1::118 do
@@ -155,7 +155,7 @@ for row in 6::7 do
     ])
 od
 
-image.colour(40ub, 40ub, 40ub)
+image.color(40ub, 40ub, 40ub)
 
 for column in 1::18 do
     image.text(
@@ -163,7 +163,7 @@ for column in 1::18 do
         top - 10.0,
         13.0,
         "{column}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 od
 
@@ -203,10 +203,10 @@ let key_y = row_y(1) + cell * 0.5
 for entry in key |> index() do
     let x = column_x(4) + double(entry.index) * 104.0
 
-    image.colour(tint(entry.value))
+    image.color(tint(entry.value))
     image.fill_rectangle(x, key_y - 8.0, x + 18.0, key_y + 8.0)
 
-    image.colour(120ub, 120ub, 120ub)
+    image.color(120ub, 120ub, 120ub)
     image.line([
         (x = x, y = key_y - 8.0),
         (x = x + 18.0, y = key_y - 8.0),
@@ -215,7 +215,7 @@ for entry in key |> index() do
         (x = x, y = key_y - 8.0)
     ])
 
-    image.colour(40ub, 40ub, 40ub)
+    image.color(40ub, 40ub, 40ub)
     image.text(x + 25.0, key_y + 5.0, 13.0, "{entry.value} block")
 od
 

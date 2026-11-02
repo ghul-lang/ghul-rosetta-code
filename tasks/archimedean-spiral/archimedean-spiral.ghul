@@ -21,7 +21,7 @@ let image = IMAGE(400, 400)
 
 image.view(-last, -last, last, last)
 
-image.colour(0ub, 0ub, 160ub)
+image.color(0ub, 0ub, 160ub)
 image.stroke(1.5D)
 
 image.line(

@@ -137,20 +137,20 @@ draw(armies: Armies, n: int, file: string) is
             let bit = 1ul << row * n + column
 
             if (row + column) % 2 == 0 then
-                image.colour(238ub, 216ub, 181ub)
+                image.color(238ub, 216ub, 181ub)
             else
-                image.colour(181ub, 136ub, 99ub)
+                image.color(181ub, 136ub, 99ub)
             fi
 
             image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
 
             if armies.black & bit != 0ul then
-                image.colour(25ub, 25ub, 25ub)
+                image.color(25ub, 25ub, 25ub)
                 image.disc(x + 0.5D, y + 0.5D, 0.32D)
             elif armies.white & bit != 0ul then
-                image.colour(25ub, 25ub, 25ub)
+                image.color(25ub, 25ub, 25ub)
                 image.disc(x + 0.5D, y + 0.5D, 0.33D)
-                image.colour(250ub, 250ub, 250ub)
+                image.color(250ub, 250ub, 250ub)
                 image.disc(x + 0.5D, y + 0.5D, 0.29D)
             fi
         od

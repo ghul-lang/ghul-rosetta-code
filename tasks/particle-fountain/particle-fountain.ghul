@@ -72,7 +72,7 @@ draw(image: IMAGE) is
             let fall = clamp(drop.dy / 3.8D, -1.0D, 1.0D)
             let shade = ubyte(170 + int(80.0D * fall * fall))
 
-            image.colour(shade - 60ub, shade, 255ub)
+            image.color(shade - 60ub, shade, 255ub)
             image.dot(drop.x, drop.y, 0.8D)
         fi
     od

@@ -77,7 +77,7 @@ let image = IMAGE(480, 240)
 image.view(-wide - 1.0D, -1.55D, wide + 1.0D, 1.75D)
 image.clear(252ub, 250ub, 245ub)
 
-image.colour(200ub, 200ub, 205ub)
+image.color(200ub, 200ub, 205ub)
 image.stroke(1.0D)
 image.line(-wide, 0.0D, wide, 0.0D)
 image.line(0.0D, -1.2D, 0.0D, 1.2D)
@@ -89,7 +89,7 @@ let colours = [
 for (i, (label, length)) in cycles |> index() do
     let (r, g, b) = colours[i]
 
-    image.colour(r, g, b)
+    image.color(r, g, b)
     image.stroke(2.0D)
     image.line(
         (-span * 4::span * 4)
@@ -103,8 +103,8 @@ for (i, (label, length)) in cycles |> index() do
     image.text(-wide + 10.0D * double(i), 1.45D, 13.0D, label)
 od
 
-image.colour(60ub, 60ub, 60ub)
-image.text(0.0D, -1.45D, 12.0D, show(target), Anchor.CENTRE)
+image.color(60ub, 60ub, 60ub)
+image.text(0.0D, -1.45D, 12.0D, show(target), Anchor.CENTER)
 
 image.write("biorhythms.png")
 

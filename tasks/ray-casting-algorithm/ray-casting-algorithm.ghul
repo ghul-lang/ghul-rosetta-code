@@ -114,7 +114,7 @@ image.view(-1.0D, -1.0D, 11.0D, 11.0D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0D)
 
-image.colour(40ub, 40ub, 60ub)
+image.color(40ub, 40ub, 60ub)
 
 for hole in square_hole do
     image.line(hole ++ [hole[0]] |> list())
@@ -128,9 +128,9 @@ for step_x in 0..49 do
         )
 
         if inside(probe, square_hole) then
-            image.colour(40ub, 140ub, 60ub)
+            image.color(40ub, 140ub, 60ub)
         else
-            image.colour(200ub, 90ub, 70ub)
+            image.color(200ub, 90ub, 70ub)
         fi
 
         image.dot(probe.x, probe.y, 1.6D)

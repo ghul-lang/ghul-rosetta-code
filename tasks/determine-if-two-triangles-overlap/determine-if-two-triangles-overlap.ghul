@@ -107,7 +107,7 @@ for (i, (a, b)) in pairs |> index() do
     let first = (a, 60ub, 110ub, 200ub), second = (b, 200ub, 90ub, 40ub)
 
     for (shape, r, g, blue) in [first, second] do
-        image.colour(r, g, blue)
+        image.color(r, g, blue)
         image.stroke(2.0D)
         image.line(shape ++ [shape[0]] |> map(place) |> list())
     od

@@ -136,14 +136,14 @@ axes.x_title = "x"
 axes.y_title = "?(x)"
 axes.fit(0.0D, 0.0D, 1.0D, 1.0D)
 
-image.colour(150ub, 150ub, 150ub)
+image.color(150ub, 150ub, 150ub)
 image.stroke(1.0D)
 axes.draw()
 
-image.colour(210ub, 210ub, 210ub)
+image.color(210ub, 210ub, 210ub)
 image.line(0.0D, 0.0D, 1.0D, 1.0D)
 
-image.colour(30ub, 70ub, 160ub)
+image.color(30ub, 70ub, 160ub)
 image.stroke(1.6D)
 image.line(
     0..1201
@@ -152,7 +152,7 @@ image.line(
         |> list()
 )
 
-image.colour(40ub, 40ub, 40ub)
+image.color(40ub, 40ub, 40ub)
 
 for
     marked in [

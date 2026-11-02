@@ -57,7 +57,7 @@ draw(image: IMAGE, number: int, left: double) is
         place = place / 10
     od
 
-    image.text(centre, 12.0D, 12.0D, "{number}", Anchor.CENTRE)
+    image.text(centre, 12.0D, 12.0D, "{number}", Anchor.CENTER)
 si
 
 let width = int(cell) * numbers.count
@@ -65,7 +65,7 @@ let image = IMAGE(width, 130)
 
 image.view(0.0D, 0.0D, double(width), 130.0D)
 image.clear(250ub, 247ub, 238ub)
-image.colour(60ub, 40ub, 30ub)
+image.color(60ub, 40ub, 30ub)
 
 for (i, number) in numbers |> index() do
     draw(image, number, cell * double(i))

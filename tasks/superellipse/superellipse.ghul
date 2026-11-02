@@ -31,12 +31,12 @@ let image = IMAGE(560, 560)
 
 image.view(-230.0D, -230.0D, 230.0D, 230.0D, 56.0D)
 
-image.colour(120ub, 120ub, 120ub)
+image.color(120ub, 120ub, 120ub)
 image.stroke(1.0D)
 
 AXES(image).draw()
 
-image.colour(180ub, 30ub, 60ub)
+image.color(180ub, 30ub, 60ub)
 image.stroke(2.0D)
 
 image.line(outline(720) |> list())

@@ -114,13 +114,13 @@ image.stroke(2.0D)
 trace(curve: Curve) -> Point[] =>
     (0::100) |> map(i => point_at(curve, double(i) / 100.0D)) |> list()
 
-image.colour(40ub, 90ub, 170ub)
+image.color(40ub, 90ub, 170ub)
 image.line(trace(first))
 
-image.colour(190ub, 70ub, 40ub)
+image.color(190ub, 70ub, 40ub)
 image.line(trace(second))
 
-image.colour(20ub, 20ub, 20ub)
+image.color(20ub, 20ub, 20ub)
 
 for h in hits do
     image.ring(h.at.x, h.at.y, 5.0D)

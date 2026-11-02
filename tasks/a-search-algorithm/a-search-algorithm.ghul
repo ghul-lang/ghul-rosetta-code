@@ -179,7 +179,7 @@ od
 
 image.fill(board)
 
-image.colour(40ub, 40ub, 50ub)
+image.color(40ub, 40ub, 50ub)
 image.stroke(1.4D)
 image.line([
     (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
@@ -187,7 +187,7 @@ image.line([
     (x = 0.0D, y = 0.0D)
 ])
 
-image.colour(200ub, 48ub, 40ub)
+image.color(200ub, 48ub, 40ub)
 image.stroke(3.0D)
 image.line(LIST(route |> map(middle)))
 
@@ -197,7 +197,7 @@ for square in route do
     image.dot(centre.x, centre.y, 4.5D)
 od
 
-image.colour(24ub, 40ub, 72ub)
+image.color(24ub, 40ub, 72ub)
 image.stroke(2.4D)
 
 for square in [start, goal] do

@@ -37,9 +37,9 @@ image.clear(252ub, 250ub, 245ub)
 
 for p in darts() |> take(4000) do
     if inside(p) then
-        image.colour(40ub, 90ub, 180ub)
+        image.color(40ub, 90ub, 180ub)
     else
-        image.colour(210ub, 70ub, 50ub)
+        image.color(210ub, 70ub, 50ub)
     fi
 
     image.dot(p.x, p.y, 1.5D)

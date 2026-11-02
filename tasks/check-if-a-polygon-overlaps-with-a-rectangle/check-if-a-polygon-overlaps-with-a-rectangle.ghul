@@ -81,10 +81,10 @@ image.stroke(2.0D)
 for (i, rect) in [first, second] |> index() do
     let dx = 11.0D * double(i)
 
-    image.colour(60ub, 110ub, 200ub)
+    image.color(60ub, 110ub, 200ub)
     outline(image, polygon, dx)
 
-    image.colour(200ub, 90ub, 40ub)
+    image.color(200ub, 90ub, 40ub)
     outline(image, rect, dx)
 
     let verdict =
@@ -94,8 +94,8 @@ for (i, rect) in [first, second] |> index() do
             "no overlap"
         fi
 
-    image.colour(60ub, 60ub, 60ub)
-    image.text(dx + 4.5D, -1.4D, 13.0D, verdict, Anchor.CENTRE)
+    image.color(60ub, 60ub, 60ub)
+    image.text(dx + 4.5D, -1.4D, 13.0D, verdict, Anchor.CENTER)
 od
 
 image.write("overlap.png")

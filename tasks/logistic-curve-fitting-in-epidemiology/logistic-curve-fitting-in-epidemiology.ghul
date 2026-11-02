@@ -58,14 +58,14 @@ let days = double(cases.count)
 image.view(-16.0D, 0.8D, days + 2.0D, 6.6D)
 image.clear(252ub, 250ub, 245ub)
 
-image.colour(215ub, 215ub, 220ub)
+image.color(215ub, 215ub, 220ub)
 image.stroke(1.0D)
 
 for power in 1::6 do
     image.line(0.0D, double(power), days, double(power))
 od
 
-image.colour(90ub, 90ub, 100ub)
+image.color(90ub, 90ub, 100ub)
 
 for power in 1::6 do
     let y = double(power) - 0.07D
@@ -73,7 +73,7 @@ for power in 1::6 do
     image.text(-2.0D, y, 10.0D, "1e{power}", Anchor.RIGHT)
 od
 
-image.colour(200ub, 60ub, 40ub)
+image.color(200ub, 60ub, 40ub)
 image.stroke(2.0D)
 image.line(
     (0::cases.count * 4)
@@ -82,7 +82,7 @@ image.line(
         |> list()
 )
 
-image.colour(40ub, 80ub, 170ub)
+image.color(40ub, 80ub, 170ub)
 
 for (day, count) in cases |> index() do
     image.dot(double(day), log10(double(count)), 2.5D)

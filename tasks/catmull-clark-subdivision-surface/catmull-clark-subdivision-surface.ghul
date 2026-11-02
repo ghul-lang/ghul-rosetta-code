@@ -224,7 +224,7 @@ let turned = p => (
 image.view(-2.0D, -2.0D, 2.0D, 2.0D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(1.2D)
-image.colour(60ub, 90ub, 170ub)
+image.color(60ub, 90ub, 170ub)
 
 let (final_points, final_faces) = rounds[rounds.count - 1]
 

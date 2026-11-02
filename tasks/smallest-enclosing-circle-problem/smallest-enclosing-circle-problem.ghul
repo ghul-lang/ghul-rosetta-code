@@ -116,16 +116,16 @@ image.view(
 )
 image.clear(252ub, 252ub, 250ub)
 
-image.colour(40ub, 90ub, 180ub)
+image.color(40ub, 90ub, 180ub)
 image.stroke(2.0D)
 image.circle(circle.centre.x, circle.centre.y, circle.radius)
 
 for p in scattered do
     if abs((p - circle.centre).length - circle.radius) < 1.0e-6 then
-        image.colour(210ub, 50ub, 40ub)
+        image.color(210ub, 50ub, 40ub)
         image.dot(p.x, p.y, 5.0D)
     else
-        image.colour(40ub, 40ub, 40ub)
+        image.color(40ub, 40ub, 40ub)
         image.dot(p.x, p.y, 3.0D)
     fi
 od

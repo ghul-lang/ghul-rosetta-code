@@ -15,7 +15,7 @@ pentagon() -> IMAGE => (
     let image = IMAGE(size, size)
 
     image.clear(255ub, 255ub, 255ub)
-    image.colour(0ub, 0ub, 0ub)
+    image.color(0ub, 0ub, 0ub)
     image.stroke(2.0D)
     image.line(
         (0::5)

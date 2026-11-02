@@ -44,13 +44,13 @@ let pale = (red = 160ub, green = 185ub, blue = 225ub)
 let median_colour = (red = 195ub, green = 70ub, blue = 45ub)
 
 box(image: IMAGE, summary: double[], centre: double) is
-    image.colour(dark)
+    image.color(dark)
     image.stroke(1.4)
     image.line(summary[0], centre, summary[4], centre)
     image.line(summary[0], centre - half, summary[0], centre + half)
     image.line(summary[4], centre - half, summary[4], centre + half)
 
-    image.colour(pale)
+    image.color(pale)
     image.fill_rectangle(
         summary[1],
         centre - half,
@@ -58,7 +58,7 @@ box(image: IMAGE, summary: double[], centre: double) is
         centre + half
     )
 
-    image.colour(dark)
+    image.color(dark)
     image.line([
         (x = summary[1], y = centre - half),
         (x = summary[3], y = centre - half),
@@ -67,13 +67,13 @@ box(image: IMAGE, summary: double[], centre: double) is
         (x = summary[1], y = centre - half)
     ])
 
-    image.colour(median_colour)
+    image.color(median_colour)
     image.stroke(2.2)
     image.line(summary[2], centre - half, summary[2], centre + half)
 si
 
 annotate(image: IMAGE, summary: double[], centre: double) is
-    image.colour(80ub, 85ub, 100ub)
+    image.color(80ub, 85ub, 100ub)
 
     for at in [0, 2, 4] do
         image.text(
@@ -81,7 +81,7 @@ annotate(image: IMAGE, summary: double[], centre: double) is
             centre - half - 0.155,
             12.0,
             "{summary[at]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 
@@ -91,14 +91,14 @@ annotate(image: IMAGE, summary: double[], centre: double) is
             centre + half + 0.055,
             12.0,
             "{summary[at]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 si
 
 let image = IMAGE(740, 320)
 
-image.colour(95ub, 100ub, 115ub)
+image.color(95ub, 100ub, 115ub)
 image.stroke(1.0)
 
 let axes = AXES(image)

@@ -87,25 +87,25 @@ let image = IMAGE(900, 360)
 
 image.view(-0.7, -deepest - 1.1, next_leaf - 0.3, 0.5, 14.0)
 
-image.colour(120ub, 140ub, 190ub)
+image.color(120ub, 140ub, 190ub)
 image.stroke(1.6)
 
 for edge in edges do
     image.line(edge.from.x, edge.from.y, edge.to.x, edge.to.y)
 od
 
-image.colour(120ub, 120ub, 120ub)
+image.color(120ub, 120ub, 120ub)
 
 for edge in edges do
     let x = (edge.from.x * 2.0 + edge.to.x) / 3.0
     let y = (edge.from.y * 2.0 + edge.to.y) / 3.0
     let aside = if edge.bit =~ "0" then -0.16 else 0.16 fi
 
-    image.text(x + aside, y, 11.0, edge.bit, Anchor.CENTRE)
+    image.text(x + aside, y, 11.0, edge.bit, Anchor.CENTER)
 od
 
 for edge in edges do
-    image.colour(150ub, 150ub, 150ub)
+    image.color(150ub, 150ub, 150ub)
     image.stroke(5.0)
     image.line(edge.from.x, edge.from.y, edge.from.x, edge.from.y)
 od
@@ -118,20 +118,20 @@ for mark in marks do
             "{mark.symbol}"
         fi
 
-    image.colour(30ub, 70ub, 160ub)
+    image.color(30ub, 70ub, 160ub)
     image.stroke(9.0)
     image.line(mark.at.x, mark.at.y, mark.at.x, mark.at.y)
 
-    image.colour(30ub, 30ub, 30ub)
-    image.text(mark.at.x, mark.at.y - 0.42, 15.0, shown, Anchor.CENTRE)
+    image.color(30ub, 30ub, 30ub)
+    image.text(mark.at.x, mark.at.y - 0.42, 15.0, shown, Anchor.CENTER)
 
-    image.colour(120ub, 120ub, 120ub)
+    image.color(120ub, 120ub, 120ub)
     image.text(
         mark.at.x,
         mark.at.y - 0.82,
         12.0,
         "{mark.weight}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 od
 

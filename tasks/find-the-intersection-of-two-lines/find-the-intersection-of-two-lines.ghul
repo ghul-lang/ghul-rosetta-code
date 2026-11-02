@@ -44,14 +44,14 @@ drawn(image: IMAGE, from: Point, to: Point) =>
     in
         image.line(start.x, start.y, end.x, end.y)
 
-image.colour(20ub, 60ub, 200ub)
+image.color(20ub, 60ub, 200ub)
 drawn(image, a, b)
 
-image.colour(200ub, 60ub, 20ub)
+image.color(200ub, 60ub, 20ub)
 drawn(image, c, d)
 
 if let point = meeting then
-    image.colour(20ub, 120ub, 40ub)
+    image.color(20ub, 120ub, 40ub)
     image.dot(point.x, point.y, 5.0D)
     image.text(point.x + 0.3D, point.y + 0.3D, 16.0D, "{point}")
 fi

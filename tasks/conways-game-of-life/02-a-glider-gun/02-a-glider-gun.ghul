@@ -78,7 +78,7 @@ step(grid: Grid) -> Grid =>
 
 draw(image: IMAGE, grid: Grid) is
     image.clear(250ub, 250ub, 247ub)
-    image.colour(35ub, 70ub, 130ub)
+    image.color(35ub, 70ub, 130ub)
 
     for row in 0..rows do
         for column in 0..columns do

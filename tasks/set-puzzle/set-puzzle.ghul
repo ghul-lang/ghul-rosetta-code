@@ -31,7 +31,7 @@ use Triple = (CARD, CARD, CARD)
 
 is_set(t: Triple) -> bool =>
     let (a, b, c) = t in
-    (a.colour + b.colour + c.colour) % 3 == 0 /\
+    (a.color + b.color + c.color) % 3 == 0 /\
     (a.number + b.number + c.number) % 3 == 0 /\
     (a.symbol + b.symbol + c.symbol) % 3 == 0 /\
     (a.shading + b.shading + c.shading) % 3 == 0
@@ -149,9 +149,9 @@ for
 do
     let left = gap + double(place % 4) * (card_width + gap)
     let top = gap + double(place / 4) * (card_height + gap)
-    let (red, green, blue) = inks[card.colour]
+    let (red, green, blue) = inks[card.color]
 
-    image.colour(255ub, 255ub, 252ub)
+    image.color(255ub, 255ub, 252ub)
     image.fill_rectangle(left, top, left + card_width, top + card_height)
 
     for i in 0..card.number + 1 do
@@ -160,10 +160,10 @@ do
         let shape = outline(card.symbol, x, top + card_height / 2.0D)
 
         if card.shading == 0 then
-            image.colour(red, green, blue)
+            image.color(red, green, blue)
             image.fill(shape)
         elif card.shading == 2 then
-            image.colour(
+            image.color(
                 ubyte(255 - (255 - int(red)) / 3),
                 ubyte(255 - (255 - int(green)) / 3),
                 ubyte(255 - (255 - int(blue)) / 3)
@@ -171,7 +171,7 @@ do
             image.fill(shape)
         fi
 
-        image.colour(red, green, blue)
+        image.color(red, green, blue)
         image.stroke(2.0D)
         image.line(shape ++ [shape[0]] |> list())
     od

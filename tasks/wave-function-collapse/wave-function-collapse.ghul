@@ -102,7 +102,7 @@ let scale = 12
 let image = IMAGE(tile * scale, tile * scale)
 
 image.clear(250ub, 250ub, 245ub)
-image.colour(30ub, 40ub, 60ub)
+image.color(30ub, 40ub, 60ub)
 
 for y in 0..tile do
     for x in 0..tile do

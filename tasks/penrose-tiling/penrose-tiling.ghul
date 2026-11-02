@@ -80,7 +80,7 @@ od
 
 image.fill(shapes)
 
-image.colour(60ub, 60ub, 70ub)
+image.color(60ub, 60ub, 70ub)
 
 for tile in tiles do
     image.line([tile.c, tile.a, tile.b])

@@ -84,13 +84,13 @@ if let (first, second): Circles.TWO = circles(a, b, r) then
     image.clear(252ub, 250ub, 245ub)
     image.stroke(2.0D)
 
-    image.colour(60ub, 110ub, 200ub)
+    image.color(60ub, 110ub, 200ub)
     image.circle(first.x, first.y, r)
 
-    image.colour(200ub, 90ub, 40ub)
+    image.color(200ub, 90ub, 40ub)
     image.circle(second.x, second.y, r)
 
-    image.colour(30ub, 30ub, 30ub)
+    image.color(30ub, 30ub, 30ub)
     image.dot(a.x, a.y, 4.0D)
     image.dot(b.x, b.y, 4.0D)
     image.ring(first.x, first.y, 3.0D)

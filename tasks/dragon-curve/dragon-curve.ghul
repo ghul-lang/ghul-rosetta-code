@@ -19,7 +19,7 @@ dragon(depth: int, angle: double) is
     dragon(depth - 1, -90.0D)
 si
 
-image.colour(0ub, 0ub, 160ub)
+image.color(0ub, 0ub, 160ub)
 image.stroke(1.0D)
 
 pen.move_to(468.0D, 150.0D)

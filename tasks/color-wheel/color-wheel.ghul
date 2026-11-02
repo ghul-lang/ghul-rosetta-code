@@ -59,7 +59,7 @@ for pixel_y in 0..size do
                     angle
                 fi
 
-            image.colour(from_hsv(turned, min(1.0D, away / radius), 1.0D))
+            image.color(from_hsv(turned, min(1.0D, away / radius), 1.0D))
 
             image.blend(pixel_x, pixel_y, covered)
         fi

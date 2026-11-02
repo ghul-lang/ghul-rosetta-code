@@ -67,7 +67,7 @@ harriss(
         let quadrant = int(round(angle / 90.0D))
         let colour = colours[(quadrant % 4 + 4) % 4]
 
-        image.colour(colour.red, colour.green, colour.blue)
+        image.color(colour.red, colour.green, colour.blue)
         image.stroke(width)
         quarter_arc(image, here, next)
 

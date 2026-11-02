@@ -41,7 +41,7 @@ y_of(row: int) -> double => top + double(row) * 11.0D
 draw(image: IMAGE) is
     image.clear(245ub, 242ub, 232ub)
 
-    image.colour(90ub, 90ub, 100ub)
+    image.color(90ub, 90ub, 100ub)
 
     for row in 0..rows do
         for pin in 0::row do
@@ -51,7 +51,7 @@ draw(image: IMAGE) is
 
     let floor = double(height - 4)
 
-    image.colour(40ub, 90ub, 160ub)
+    image.color(40ub, 90ub, 160ub)
 
     for (slot, count) in bins |> index() do
         let x = x_of(rows, slot)
@@ -63,7 +63,7 @@ draw(image: IMAGE) is
         od
     od
 
-    image.colour(200ub, 60ub, 40ub)
+    image.color(200ub, 60ub, 40ub)
 
     for ball in falling do
         let x = x_of(ball.row, ball.slot)

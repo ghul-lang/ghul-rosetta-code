@@ -18,7 +18,7 @@ let radius = 22.0D
 
 draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
     // faint spokes
-    image.colour(60ub, 60ub, 80ub)
+    image.color(60ub, 60ub, 80ub)
     image.stroke(1.0D)
 
     for s in 0..spokes do
@@ -27,7 +27,7 @@ draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
     od
 
     // bright hand
-    image.colour(255ub, 220ub, 80ub)
+    image.color(255ub, 220ub, 80ub)
     image.stroke(2.0D)
     let radians = angle * pi / 180.0D
     image.line(

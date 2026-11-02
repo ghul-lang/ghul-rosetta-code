@@ -134,13 +134,13 @@ draw(problem: PROBLEM, found: (best: V2, particles: PARTICLE[])) is
 
     image.view(problem.low.x, problem.low.y, problem.high.x, problem.high.y)
 
-    image.colour(255ub, 255ub, 255ub)
+    image.color(255ub, 255ub, 255ub)
 
     for p in found.particles do
         image.dot(p.position.x, p.position.y, 2.0D)
     od
 
-    image.colour(0ub, 200ub, 255ub)
+    image.color(0ub, 200ub, 255ub)
     image.stroke(2.5D)
     image.ring(found.best.x, found.best.y, 9.0D)
 

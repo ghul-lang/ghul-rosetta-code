@@ -155,7 +155,7 @@ for (i, (name, description)) in examples |> index() do
         )
     )
 
-    image.colour(120ub, 120ub, 120ub)
+    image.color(120ub, 120ub, 120ub)
     image.stroke(2.0D)
 
     for (from, to) in graph.edges do
@@ -169,14 +169,14 @@ for (i, (name, description)) in examples |> index() do
         let (x, y) = position(node)
         let (r, g, b) = palette[colours[node]]
 
-        image.colour(r, g, b)
+        image.color(r, g, b)
         image.disc(x, y, 14.0D)
-        image.colour(30ub, 30ub, 30ub)
-        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTRE)
+        image.color(30ub, 30ub, 30ub)
+        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTER)
     od
 
-    image.colour(30ub, 30ub, 30ub)
-    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTRE)
+    image.color(30ub, 30ub, 30ub)
+    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTER)
 od
 
 image.write("graphs.png")

@@ -66,10 +66,10 @@ let water = (red = 90ub, green = 160ub, blue = 220ub)
 
 let ceiling = double(tallest)
 
-image.colour(water)
+image.color(water)
 box(0.0, ceiling + 1.8, 1.2, ceiling + 2.8)
 
-image.colour(70ub, 70ub, 70ub)
+image.color(70ub, 70ub, 70ub)
 image.text(2.0, ceiling + 2.0, 14.0, "water collected", Anchor.LEFT)
 
 let at mut = 0.0
@@ -82,14 +82,14 @@ for towers in series do
         let left = at + double(column)
         let height = double(towers[column])
 
-        image.colour(stone)
+        image.color(stone)
         box(left, 0.0, left + 1.0, height)
 
-        image.colour(water)
+        image.color(water)
         box(left, height, left + 1.0, height + double(depth[column]))
     od
 
-    image.colour(70ub, 70ub, 70ub)
+    image.color(70ub, 70ub, 70ub)
     image.stroke(1.2)
     image.line(at, 0.0, at + double(towers.count), 0.0)
 
@@ -98,7 +98,7 @@ for towers in series do
         -2.4,
         15.0,
         "{volume}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 
     at = at + double(towers.count) + gap

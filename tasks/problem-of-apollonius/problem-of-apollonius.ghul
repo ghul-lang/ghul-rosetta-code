@@ -98,16 +98,16 @@ image.view(-2.3D, -2.3D, 6.3D, 6.3D)
 
 image.stroke(2.0D)
 
-image.colour(40ub, 40ub, 48ub)
+image.color(40ub, 40ub, 48ub)
 
 for circle in given do
     image.circle(circle.x, circle.y, circle.radius)
 od
 
-image.colour(200ub, 50ub, 50ub)
+image.color(200ub, 50ub, 50ub)
 image.circle(inside.x, inside.y, inside.radius)
 
-image.colour(40ub, 150ub, 70ub)
+image.color(40ub, 150ub, 70ub)
 image.circle(outside.x, outside.y, outside.radius)
 
 image.write("apollonius.png")

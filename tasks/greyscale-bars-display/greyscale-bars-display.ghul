@@ -20,7 +20,7 @@ for quarter in 0..4 do
         let left = double(bar * bar_width)
         let right = left + double(bar_width)
 
-        image.colour(grey, grey, grey)
+        image.color(grey, grey, grey)
         image.fill_rectangle(left, top, right, top + double(band))
     od
 

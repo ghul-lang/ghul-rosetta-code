@@ -62,9 +62,9 @@ draw(image: IMAGE, grid: Grid) is
     for (row, line) in grid |> index() do
         for (column, state) in line |> index() do
             case state
-            when 'H' then image.colour(80ub, 150ub, 255ub)
-            when 't' then image.colour(240ub, 90ub, 60ub)
-            when '.' then image.colour(235ub, 190ub, 60ub)
+            when 'H' then image.color(80ub, 150ub, 255ub)
+            when 't' then image.color(240ub, 90ub, 60ub)
+            when '.' then image.color(235ub, 190ub, 60ub)
             else continue
             esac
 

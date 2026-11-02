@@ -126,7 +126,7 @@ si
 
 draw(image: IMAGE, flock: BOID[]) is
     image.clear(235ub, 240ub, 245ub)
-    image.colour(90ub, 80ub, 70ub)
+    image.color(90ub, 80ub, 70ub)
 
     for (row, line) in cave |> index() do
         for (column, c) in line |> index() do
@@ -144,7 +144,7 @@ draw(image: IMAGE, flock: BOID[]) is
         od
     od
 
-    image.colour(200ub, 40ub, 40ub)
+    image.color(200ub, 40ub, 40ub)
 
     for boid in flock do
         image.dot(boid.position.x, boid.position.y, 2.0D)

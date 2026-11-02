@@ -18,7 +18,7 @@ triangle(a: POINT, b: POINT, c: POINT) -> POINT[] => [
 let image = IMAGE(512, 456)
 
 image.view(0.0, 0.0, 1.0, 0.89)
-image.colour(30ub, 90ub, 160ub)
+image.color(30ub, 90ub, 160ub)
 
 draw(a: POINT, b: POINT, c: POINT, order: int) is
     if order == 0 then

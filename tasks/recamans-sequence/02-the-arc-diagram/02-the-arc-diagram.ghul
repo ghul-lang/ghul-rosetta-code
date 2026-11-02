@@ -64,7 +64,7 @@ let image = IMAGE(
 
 image.view(left, bottom, right, top, margin)
 
-image.colour(170ub, 170ub, 170ub)
+image.color(170ub, 170ub, 170ub)
 image.stroke(1.0)
 image.line(0.0, 0.0, double(highest), 0.0)
 
@@ -73,10 +73,10 @@ for tick in 0::highest / 25 do
     let label = "{tick * 25}"
 
     image.line(at, -1.5, at, 1.5)
-    image.text(at, bottom + 2.5, 13.0, label, Anchor.CENTRE)
+    image.text(at, bottom + 2.5, 13.0, label, Anchor.CENTER)
 od
 
-image.colour(30ub, 70ub, 160ub)
+image.color(30ub, 70ub, 160ub)
 image.stroke(1.4)
 
 for hop in hops |> index() do

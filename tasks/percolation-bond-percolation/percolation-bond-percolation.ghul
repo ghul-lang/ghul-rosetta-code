@@ -124,7 +124,7 @@ if let grid = shown then
     for row in 0..height do
         for column in 0..width do
             if grid.is_wet(column, row) then
-                image.colour(120ub, 170ub, 235ub)
+                image.color(120ub, 170ub, 235ub)
 
                 let x = double(column)
                 let y = double(row)
@@ -134,7 +134,7 @@ if let grid = shown then
         od
     od
 
-    image.colour(30ub, 30ub, 40ub)
+    image.color(30ub, 30ub, 40ub)
     image.stroke(3.0D)
 
     for row in 0::height do
@@ -159,7 +159,7 @@ if let grid = shown then
         od
     od
 
-    image.colour(40ub, 100ub, 210ub)
+    image.color(40ub, 100ub, 210ub)
 
     for column in grid.drips() do
         image.dot(double(column) + 0.5D, double(height) + 0.2D, 5.0D)

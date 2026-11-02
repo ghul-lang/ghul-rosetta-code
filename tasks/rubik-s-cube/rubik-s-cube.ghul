@@ -96,7 +96,7 @@ draw(image: IMAGE, angle: double) is
 
                     stickers.add(
                         square(at, face.u, face.v, 0.42D, angle),
-                        face.colour
+                        face.color
                     )
                 od
             od

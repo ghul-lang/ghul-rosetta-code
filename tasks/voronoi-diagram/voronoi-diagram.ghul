@@ -49,7 +49,7 @@ for y in 0..height do
     od
 od
 
-image.colour(0ub, 0ub, 0ub)
+image.color(0ub, 0ub, 0ub)
 
 for site in places do
     image.fill([

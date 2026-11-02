@@ -162,15 +162,15 @@ for (name, make) in inputs do
     axes.fit(6.0, 0.0, 14.0, 18.0)
 
     for sorter in sorts do
-        axes.key(sorter.name, sorter.colour)
+        axes.key(sorter.name, sorter.color)
     od
 
-    image.colour(150ub, 150ub, 150ub)
+    image.color(150ub, 150ub, 150ub)
     image.stroke(1.0)
     axes.draw()
 
     for ((_, _, colour), t) in zip(sorts, times) do
-        image.colour(colour.red, colour.green, colour.blue)
+        image.color(colour.red, colour.green, colour.blue)
         image.stroke(2.0)
         image.line(
             zip(powers, t)

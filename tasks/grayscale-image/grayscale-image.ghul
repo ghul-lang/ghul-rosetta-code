@@ -16,7 +16,7 @@ luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
     )
 
 to_grey(colour: IMAGE) -> ubyte[] =>
-    (0..colour.width * colour.height)
+    (0..color.width * colour.height)
         |> map(at => (
             let seen = colour.pixel(at % colour.width, at / colour.width)
 
@@ -57,21 +57,21 @@ for y in 0..height do
     od
 od
 
-colour.colour(255ub, 0ub, 0ub)
+colour.color(255ub, 0ub, 0ub)
 colour.fill([
     (x = 30.0D, y = 30.0D),
     (x = 110.0D, y = 30.0D),
     (x = 70.0D, y = 110.0D)
 ])
 
-colour.colour(0ub, 255ub, 0ub)
+colour.color(0ub, 255ub, 0ub)
 colour.fill([
     (x = 120.0D, y = 30.0D),
     (x = 200.0D, y = 30.0D),
     (x = 160.0D, y = 110.0D)
 ])
 
-colour.colour(0ub, 0ub, 255ub)
+colour.color(0ub, 0ub, 255ub)
 colour.fill([
     (x = 210.0D, y = 30.0D),
     (x = 290.0D, y = 30.0D),

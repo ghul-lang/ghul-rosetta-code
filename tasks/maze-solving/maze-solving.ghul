@@ -89,7 +89,7 @@ wall(from_x: int, from_y: int, to_x: int, to_y: int) is
     )
 si
 
-image.colour(30ub, 40ub, 90ub)
+image.color(30ub, 40ub, 90ub)
 image.stroke(2.4D)
 
 wall(0, 0, columns, 0)
@@ -162,7 +162,7 @@ centre(i: int) -> (x: double, y: double) => (
     y = double(margin + (i / columns) * cell + cell / 2)
 )
 
-image.colour(210ub, 50ub, 40ub)
+image.color(210ub, 50ub, 40ub)
 image.stroke(4.0D)
 image.line(path |> map(centre) |> list())
 

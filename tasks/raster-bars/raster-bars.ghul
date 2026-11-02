@@ -27,7 +27,7 @@ draw_bar(image: IMAGE, colour: Colour, top: double) is
         let glint = pow(shine, 12.0D) * 0.5D
         let y = top + double(row)
 
-        image.colour(
+        image.color(
             channel(colour.red * shine + glint),
             channel(colour.green * shine + glint),
             channel(colour.blue * shine + glint)
@@ -45,7 +45,7 @@ draw(image: IMAGE, time: double) is
     for bar in bars do
         let top = round(travel + travel * sin(time - bar.phase))
 
-        draw_bar(image, bar.colour, top)
+        draw_bar(image, bar.color, top)
     od
 si
 

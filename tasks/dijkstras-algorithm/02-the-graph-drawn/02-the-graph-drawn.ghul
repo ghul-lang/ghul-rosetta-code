@@ -95,7 +95,7 @@ down(pixels: double) -> double =>
 label(x: double, y: double, height: double, text: string) is
     let half = across(image.text_width(height, text) / 2.0 + 4.0)
 
-    image.colour(255ub, 255ub, 255ub)
+    image.color(255ub, 255ub, 255ub)
     image.fill_rectangle(
         x - half,
         y - down(4.0),
@@ -103,8 +103,8 @@ label(x: double, y: double, height: double, text: string) is
         y + down(height + 2.0)
     )
 
-    image.colour(ink)
-    image.text(x, y, height, text, Anchor.CENTRE)
+    image.color(ink)
+    image.text(x, y, height, text, Anchor.CENTER)
 si
 
 for edge in edges do
@@ -112,10 +112,10 @@ for edge in edges do
     let to = places[edge.finish]
 
     if on_tree(edge) then
-        image.colour(tree_colour)
+        image.color(tree_colour)
         image.stroke(3.5)
     else
-        image.colour(other_colour)
+        image.color(other_colour)
         image.stroke(2.0)
     fi
 
@@ -141,14 +141,14 @@ for node in nodes do
 
     label(at.x, at.y, 14.0, "cost {best[node].cost}")
 
-    image.colour(tree_colour)
+    image.color(tree_colour)
     image.dot(place.x, place.y, 16.0)
 
-    image.colour(255ub, 255ub, 255ub)
-    image.text(place.x, place.y - down(6.0), 17.0, node, Anchor.CENTRE)
+    image.color(255ub, 255ub, 255ub)
+    image.text(place.x, place.y - down(6.0), 17.0, node, Anchor.CENTER)
 od
 
-image.colour(ink)
+image.color(ink)
 image.text(-0.4, 2.80, 15.0, "shortest path tree from a, with edge costs")
 
 image.write("dijkstra.png")
