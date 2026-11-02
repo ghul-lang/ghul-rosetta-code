@@ -158,13 +158,13 @@ let board = SHAPES()
 for row in 0..size do
     for column in 0..size do
         let square = (row = row, column = column)
-        let centre = middle(square)
+        let center = middle(square)
 
         let cell = [
-            (x = centre.x - 0.5D, y = centre.y - 0.5D),
-            (x = centre.x + 0.5D, y = centre.y - 0.5D),
-            (x = centre.x + 0.5D, y = centre.y + 0.5D),
-            (x = centre.x - 0.5D, y = centre.y + 0.5D)
+            (x = center.x - 0.5D, y = center.y - 0.5D),
+            (x = center.x + 0.5D, y = center.y - 0.5D),
+            (x = center.x + 0.5D, y = center.y + 0.5D),
+            (x = center.x - 0.5D, y = center.y + 0.5D)
         ]
 
         if blocked(square) then
@@ -192,18 +192,18 @@ image.stroke(3.0D)
 image.line(LIST(route |> map(middle)))
 
 for square in route do
-    let centre = middle(square)
+    let center = middle(square)
 
-    image.dot(centre.x, centre.y, 4.5D)
+    image.dot(center.x, center.y, 4.5D)
 od
 
 image.color(24ub, 40ub, 72ub)
 image.stroke(2.4D)
 
 for square in [start, goal] do
-    let centre = middle(square)
+    let center = middle(square)
 
-    image.ring(centre.x, centre.y, 9.0D)
+    image.ring(center.x, center.y, 9.0D)
 od
 
 image.write("route.png")

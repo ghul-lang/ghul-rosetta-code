@@ -1,11 +1,11 @@
 use default
 use Raster.IMAGE
 
-use Colour = (red: ubyte, green: ubyte, blue: ubyte)
+use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
 // `case ... when` pattern-matches
 
-from_hsv(hue: double, saturation: double, value: double) -> Colour => (
+from_hsv(hue: double, saturation: double, value: double) -> Color => (
     let sextant = hue / 60.0D
     let rising = value * (1.0D - saturation)
     let falling = value * (1.0D - saturation * (sextant - floor(sextant)))
@@ -41,12 +41,12 @@ let image = IMAGE(size, size)
 
 image.clear(24ub, 24ub, 28ub)
 
-let centre = 0.5D * double(size)
+let center = 0.5D * double(size)
 
 for pixel_y in 0..size do
     for pixel_x in 0..size do
-        let across = double(pixel_x) + 0.5D - centre
-        let down = double(pixel_y) + 0.5D - centre
+        let across = double(pixel_x) + 0.5D - center
+        let down = double(pixel_y) + 0.5D - center
         let away = sqrt(across * across + down * down)
         let covered = min(1.0D, max(0.0D, radius + 0.5D - away))
 

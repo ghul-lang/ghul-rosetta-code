@@ -97,7 +97,7 @@ for p in patches do
 od
 
 write_line("the surface of w = sqrt(z), over two turns of the z plane")
-write_line("height is the real part of w, and colour is its argument")
+write_line("height is the real part of w, and color is its argument")
 write_line("{patches.count} quadrilaterals, drawn farthest first")
 
 image.write("riemann.png")

@@ -85,7 +85,7 @@ for _ in 0..5 do
 od
 
 write_line("the five strongest lines, as angle in degrees")
-write_line("and distance from the centre:")
+write_line("and distance from the center:")
 
 for p in peaks |> sort((a, b) => a.theta - b.theta) do
     write_line("  theta {p.theta,3}, rho {p.rho,4} ({p.votes} votes)")

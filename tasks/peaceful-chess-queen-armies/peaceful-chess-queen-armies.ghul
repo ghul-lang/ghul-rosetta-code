@@ -166,7 +166,7 @@ for (m, n) in [(4, 5), (9, 8), (10, 8)] do
         show(armies, n)
         draw(armies, n, "queens-{m}-{n}.png")
     else
-        write_line("{m} of each colour cannot share a {n} by {n} board")
+        write_line("{m} of each color cannot share a {n} by {n} board")
     fi
 
     write_line()

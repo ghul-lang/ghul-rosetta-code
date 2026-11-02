@@ -69,11 +69,11 @@ side_by_side(label: string, piles: SANDPILE[], signs: string[]) is
     write_line(label)
 
     for r in 0..piles[0].size do
-        let centre = r == piles[0].size / 2
+        let center = r == piles[0].size / 2
         let line mut = piles[0].rows[r]
 
         for (i, pile) in piles |> skip(1) |> index() do
-            let sign = if centre then signs[i] else " " fi
+            let sign = if center then signs[i] else " " fi
 
             line = "{line}  {sign}  {pile.rows[r]}"
         od

@@ -50,8 +50,8 @@ curve(rates: double[]) -> (x: double, y: double)[] =>
         |> map(rate => (x = log10(double(rate.index + 1)), y = rate.value))
         |> list()
 
-let stay_colour = (red = 210ub, green = 130ub, blue = 40ub)
-let switch_colour = (red = 40ub, green = 85ub, blue = 165ub)
+let stay_color = (red = 210ub, green = 130ub, blue = 40ub)
+let switch_color = (red = 40ub, green = 85ub, blue = 165ub)
 
 let image = IMAGE(760, 460)
 
@@ -80,8 +80,8 @@ axes.y_ticks([
     (value = 1.0, label = "1")
 ])
 
-axes.key("switching", switch_colour)
-axes.key("staying", stay_colour)
+axes.key("switching", switch_color)
+axes.key("staying", stay_color)
 
 axes.fit(0.0, 0.0, 4.0, 1.0)
 axes.draw()
@@ -94,10 +94,10 @@ od
 
 image.stroke(1.4)
 
-image.color(stay_colour)
+image.color(stay_color)
 image.line(curve(staying))
 
-image.color(switch_colour)
+image.color(switch_color)
 image.line(curve(switching))
 
 image.write("monty-hall.png")

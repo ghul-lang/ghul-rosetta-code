@@ -83,7 +83,7 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
     if near.count > 0 then
         let n = double(near.count)
 
-        let centre =
+        let center =
             near |> map(o => o.position) |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let heading =
@@ -99,7 +99,7 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
 
         force =
             force +
-            (centre * (1.0D / n) - boid.position) * 0.01D +
+            (center * (1.0D / n) - boid.position) * 0.01D +
             (heading * (1.0D / n) - boid.velocity) * 0.05D +
             crowding * 0.1D
     fi

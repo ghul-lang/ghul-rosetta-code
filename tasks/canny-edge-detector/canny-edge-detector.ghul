@@ -80,14 +80,14 @@ class FIELD is
     si
 si
 
-greyscale(image: IMAGE) -> FIELD is
-    let grey = FIELD(image.width, image.height)
+grayscale(image: IMAGE) -> FIELD is
+    let gray = FIELD(image.width, image.height)
 
     for y in 0..image.height do
         for x in 0..image.width do
             let p = image.pixel(x, y)
 
-            grey.put(
+            gray.put(
                 x,
                 y,
                 0.299D * double(p.red) +
@@ -97,7 +97,7 @@ greyscale(image: IMAGE) -> FIELD is
         od
     od
 
-    grey
+    gray
 si
 
 let gaussian = [
@@ -220,7 +220,7 @@ si
 scene().write("scene.png")
 
 let input = IMAGE.read("scene.png")
-let edges = canny(blur(greyscale(input)), 20.0D, 50.0D)
+let edges = canny(blur(grayscale(input)), 20.0D, 50.0D)
 
 let found = edges.values |> filter(* > 0.0D) |> count()
 

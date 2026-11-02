@@ -21,12 +21,12 @@ let sample_size = 30_000
 apart(a: Point, b: Point) -> double =>
     (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 
-nearest(centres: Point[], at: Point) -> (index: int, distance: double) is
+nearest(centers: Point[], at: Point) -> (index: int, distance: double) is
     let best mut = 0
-    let closest mut = apart(centres[0], at)
+    let closest mut = apart(centers[0], at)
 
-    for index in 1..centres.count do
-        let gap = apart(centres[index], at)
+    for index in 1..centers.count do
+        let gap = apart(centers[index], at)
 
         if gap < closest then
             best = index
@@ -47,12 +47,12 @@ let points =
         ))
         |> list()
 
-seeded_centres() -> Point[] is
-    let centres = LIST([points[random.next(points.count)]])
+seeded_centers() -> Point[] is
+    let centers = LIST([points[random.next(points.count)]])
 
-    while centres.count < clusters do
+    while centers.count < clusters do
         let weights =
-            points |> map(at => nearest(centres, at).distance) |> list()
+            points |> map(at => nearest(centers, at).distance) |> list()
 
         let total = weights |> sum()
 
@@ -64,16 +64,16 @@ seeded_centres() -> Point[] is
             chosen = chosen + 1
         od
 
-        centres.add(points[chosen])
+        centers.add(points[chosen])
     od
 
-    return centres
+    return centers
 si
 
-let centres mut = seeded_centres()
+let centers mut = seeded_centers()
 let membership = points |> map(_ => 0) |> LIST()
 
-recentred() -> Point[] is
+recentered() -> Point[] is
     let totals = LIST()
     let sizes = LIST()
 
@@ -98,7 +98,7 @@ recentred() -> Point[] is
         (0..clusters)
             |> map(which =>
                 if sizes[which] == 0 then
-                    centres[which]
+                    centers[which]
                 else
                     (
                         x = totals[which].x / double(sizes[which]),
@@ -117,7 +117,7 @@ while !settled do
     passes = passes + 1
 
     for index in 0..points.count do
-        let pick = nearest(centres, points[index]).index
+        let pick = nearest(centers, points[index]).index
 
         if pick != membership[index] then
             membership[index] = pick
@@ -125,7 +125,7 @@ while !settled do
         fi
     od
 
-    centres = recentred()
+    centers = recentered()
 od
 
 let sizes = repeat(0, clusters) |> LIST()
@@ -142,7 +142,7 @@ write_line("")
 write_line("cluster   size   centroid")
 
 for which in 0..clusters do
-    let at = centres[which]
+    let at = centers[which]
 
     write_line(
         "{which,7}{sizes[which],7}   "
@@ -163,7 +163,7 @@ od
 
 image.stroke(2.0D)
 
-for at in centres do
+for at in centers do
     image.color(255ub, 255ub, 255ub)
     image.dot(at.x, at.y, 6.0D)
 

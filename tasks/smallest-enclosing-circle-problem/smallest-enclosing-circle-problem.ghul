@@ -18,11 +18,11 @@ struct P(x: double, y: double) is
     length: double => sqrt(self ⋅ self)
 si
 
-struct CIRCLE(centre: P, radius: double) is
-    contains(p: P) -> bool => (p - centre).length <= radius + 1.0e-9
+struct CIRCLE(center: P, radius: double) is
+    contains(p: P) -> bool => (p - center).length <= radius + 1.0e-9
 
     to_string() -> string =>
-        "centre ({centre.x:F6}, {centre.y:F6}), radius {radius:F6}"
+        "center ({center.x:F6}, {center.y:F6}), radius {radius:F6}"
 si
 
 across(a: P, b: P) -> CIRCLE =>
@@ -109,19 +109,19 @@ write_line("60 random points: {circle}")
 let image = IMAGE(400, 400)
 
 image.view(
-    circle.centre.x - 7.0D,
-    circle.centre.y - 7.0D,
-    circle.centre.x + 7.0D,
-    circle.centre.y + 7.0D
+    circle.center.x - 7.0D,
+    circle.center.y - 7.0D,
+    circle.center.x + 7.0D,
+    circle.center.y + 7.0D
 )
 image.clear(252ub, 252ub, 250ub)
 
 image.color(40ub, 90ub, 180ub)
 image.stroke(2.0D)
-image.circle(circle.centre.x, circle.centre.y, circle.radius)
+image.circle(circle.center.x, circle.center.y, circle.radius)
 
 for p in scattered do
-    if abs((p - circle.centre).length - circle.radius) < 1.0e-6 then
+    if abs((p - circle.center).length - circle.radius) < 1.0e-6 then
         image.color(210ub, 50ub, 40ub)
         image.dot(p.x, p.y, 5.0D)
     else

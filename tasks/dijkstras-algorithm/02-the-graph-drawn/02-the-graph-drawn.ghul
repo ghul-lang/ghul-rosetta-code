@@ -78,8 +78,8 @@ on_tree(edge: EDGE) -> bool =>
     best.contains_key(edge.finish) /\
     best[edge.finish].previous =~ edge.start
 
-let tree_colour = (red = 35ub, green = 85ub, blue = 170ub)
-let other_colour = (red = 190ub, green = 194ub, blue = 205ub)
+let tree_color = (red = 35ub, green = 85ub, blue = 170ub)
+let other_color = (red = 190ub, green = 194ub, blue = 205ub)
 let ink = (red = 55ub, green = 60ub, blue = 75ub)
 
 let image = IMAGE(740, 520)
@@ -112,10 +112,10 @@ for edge in edges do
     let to = places[edge.finish]
 
     if on_tree(edge) then
-        image.color(tree_colour)
+        image.color(tree_color)
         image.stroke(3.5)
     else
-        image.color(other_colour)
+        image.color(other_color)
         image.stroke(2.0)
     fi
 
@@ -141,7 +141,7 @@ for node in nodes do
 
     label(at.x, at.y, 14.0, "cost {best[node].cost}")
 
-    image.color(tree_colour)
+    image.color(tree_color)
     image.dot(place.x, place.y, 16.0)
 
     image.color(255ub, 255ub, 255ub)

@@ -16,7 +16,7 @@ si
 
 union Circles is
     TWO(first: P, second: P)
-    ONE(centre: P)
+    ONE(center: P)
     ANY
     POINT
     NONE(reason: string)
@@ -61,9 +61,9 @@ for (a, b, r) in inputs do
     let result =
         case circles(a, b, r)
         when (first, second): Circles.TWO then
-            "centres {first.show} and {second.show}"
-        when (centre): Circles.ONE then
-            "a diameter: one circle, centre {centre.show}"
+            "centers {first.show} and {second.show}"
+        when (center): Circles.ONE then
+            "a diameter: one circle, center {center.show}"
         when _: Circles.ANY then
             "the points coincide: any circle through them"
         when _: Circles.POINT then

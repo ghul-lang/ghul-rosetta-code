@@ -157,14 +157,14 @@ let path = shortest_path(at(0, 0), at(columns - 1, rows - 1))
 
 write_line("{path.count} cells from the top left to the bottom right")
 
-centre(i: int) -> (x: double, y: double) => (
+center(i: int) -> (x: double, y: double) => (
     x = double(margin + (i % columns) * cell + cell / 2),
     y = double(margin + (i / columns) * cell + cell / 2)
 )
 
 image.color(210ub, 50ub, 40ub)
 image.stroke(4.0D)
-image.line(path |> map(centre) |> list())
+image.line(path |> map(center) |> list())
 
 image.write("solved.png")
 

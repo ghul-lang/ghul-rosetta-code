@@ -1,5 +1,5 @@
-centre (0.500000, 0.500000), radius 0.707107
-centre (1.000000, 1.000000), radius 5.000000
+center (0.500000, 0.500000), radius 0.707107
+center (1.000000, 1.000000), radius 5.000000
 
-60 random points: centre (0.357080, 1.127185), radius 5.455295
+60 random points: center (0.357080, 1.127185), radius 5.455295
 <<image circle.png>>

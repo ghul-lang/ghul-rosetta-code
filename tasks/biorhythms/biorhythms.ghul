@@ -68,7 +68,7 @@ report(date("1809-01-12"), date("1863-11-19"))
 
 let birth = date("1943-03-09")
 let target = date("1972-07-11")
-let centre = int((target - birth).total_days)
+let center = int((target - birth).total_days)
 let span = 16
 let wide = double(span)
 
@@ -82,12 +82,12 @@ image.stroke(1.0D)
 image.line(-wide, 0.0D, wide, 0.0D)
 image.line(0.0D, -1.2D, 0.0D, 1.2D)
 
-let colours = [
+let colors = [
     (200ub, 50ub, 40ub), (40ub, 130ub, 60ub), (40ub, 80ub, 180ub)
 ]
 
 for (i, (label, length)) in cycles |> index() do
-    let (r, g, b) = colours[i]
+    let (r, g, b) = colors[i]
 
     image.color(r, g, b)
     image.stroke(2.0D)
@@ -95,7 +95,7 @@ for (i, (label, length)) in cycles |> index() do
         (-span * 4::span * 4)
             |> map(q =>
                 let day = double(q) / 4.0D in
-                let turn = (double(centre) + day) / double(length) in
+                let turn = (double(center) + day) / double(length) in
                 (x = day, y = sin(2.0D * pi * turn))
             )
             |> list()

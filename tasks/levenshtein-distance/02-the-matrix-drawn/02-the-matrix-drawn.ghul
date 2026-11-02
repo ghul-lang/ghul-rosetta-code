@@ -78,7 +78,7 @@ corner(row: int, column: int) -> (x: double, y: double) => (
     y = double(top + row * cell)
 )
 
-centre(row: int, column: int) -> (x: double, y: double) => (
+center(row: int, column: int) -> (x: double, y: double) => (
     x = double(left + column * cell) + 0.5 * double(cell),
     y = double(top + row * cell) + 0.5 * double(cell)
 )
@@ -114,7 +114,7 @@ image.fill(cells)
 image.color(225ub, 60ub, 60ub)
 image.stroke(2.4)
 image.line(
-    alignment() |> map(step => centre(step.row, step.column)) |> list()
+    alignment() |> map(step => center(step.row, step.column)) |> list()
 )
 
 for row in 0::source.length do
@@ -127,7 +127,7 @@ for row in 0::source.length do
             image.color(35ub, 40ub, 35ub)
         fi
 
-        let middle = centre(row, column)
+        let middle = center(row, column)
 
         image.text(
             middle.x,
@@ -142,7 +142,7 @@ od
 image.color(70ub, 75ub, 90ub)
 
 for column in 1::target.length do
-    let middle = centre(0, column)
+    let middle = center(0, column)
 
     image.text(
         middle.x,
@@ -154,7 +154,7 @@ for column in 1::target.length do
 od
 
 for row in 1::source.length do
-    let middle = centre(row, 0)
+    let middle = center(row, 0)
 
     image.text(
         double(left) - 9.0,

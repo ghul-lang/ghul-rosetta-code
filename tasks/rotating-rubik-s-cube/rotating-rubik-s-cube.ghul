@@ -62,13 +62,13 @@ project(p: Point) -> (x: double, y: double) =>
 facing(normal: Point, angle: double) -> bool =>
     turned(normal, angle).z * camera_distance > 1.5
 
-square(centre: Point, u: Point, v: Point, half: double, angle: double) -> (
+square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
     x: double,
     y: double
 )[] =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
-            turned(centre + u * (a * half) + v * (b * half), angle)
+            turned(center + u * (a * half) + v * (b * half), angle)
         )
         |> map(project)
         |> list()
@@ -80,19 +80,19 @@ draw(image: IMAGE, angle: double) is
     let stickers = SHAPES()
 
     for face in faces |> filter(f => facing(f.normal, angle)) do
-        let centre = face.normal * 1.5
+        let center = face.normal * 1.5
 
-        let cube_face = square(centre, face.u, face.v, 1.5, angle)
+        let cube_face = square(center, face.u, face.v, 1.5, angle)
 
         body.add(cube_face, 20ub, 20ub, 20ub)
 
-        let sticker_centres = [
-            centre + face.u * double(i) + face.v * double(j)
+        let sticker_centers = [
+            center + face.u * double(i) + face.v * double(j)
             for i in -1::1
             for j in -1::1
         ]
 
-        for at in sticker_centres do
+        for at in sticker_centers do
             let sticker = square(at, face.u, face.v, 0.42, angle)
 
             stickers.add(sticker, face.color)

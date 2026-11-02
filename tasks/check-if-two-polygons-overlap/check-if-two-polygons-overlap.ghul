@@ -93,14 +93,14 @@ image.clear(252ub, 250ub, 245ub)
 
 let drawing = SHAPES()
 
-let colours = [
+let colors = [
     (r = 60ub, g = 110ub, b = 200ub),
     (r = 220ub, g = 150ub, b = 60ub),
     (r = 80ub, g = 170ub, b = 110ub)
 ]
 
 for index in 0..shapes.count do
-    let (r, g, b) = colours[index]
+    let (r, g, b) = colors[index]
 
     drawing.add(
         shapes[index].corners
