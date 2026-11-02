@@ -498,10 +498,10 @@ si
 // section already there says so rather than claiming to have added one. `note` names what a batch
 // of edits is doing beyond the ordinary update or addition - a reader scanning recent changes for
 // a run of edits from one account otherwise has nothing to tell them apart.
-edit_summary(placement: PLACEMENT, note: string?) -> string =>
+edit_summary(placement: Placement, note: string?) -> string =>
     let base =
         case placement
-        when _: PLACEMENT.REPLACES then "Update the ghūl solution"
+        when _: Placement.REPLACES then "Update the ghūl solution"
         else "Add a ghūl solution"
         esac
     in
@@ -582,7 +582,7 @@ self_test() is
 
     check_that(
         "a ghul section out of alphabetical order is replaced, not duplicated",
-        isa PLACEMENT.REPLACES(splice.placement(out_of_order, "ghul"))
+        isa Placement.REPLACES(splice.placement(out_of_order, "ghul"))
     )
 
     check_that(
@@ -620,7 +620,7 @@ self_test() is
 
     check_that(
         "a ghul section with a display name is replaced, not duplicated",
-        isa PLACEMENT.REPLACES(splice.placement(aliased, "ghul"))
+        isa Placement.REPLACES(splice.placement(aliased, "ghul"))
     )
 
     // A page already carrying two ghul sections, one after the other.
@@ -642,7 +642,7 @@ self_test() is
     // A placement claiming the whole page, which is what the confinement check cannot see.
     check_that(
         "wiping the page passes the confinement check, which is why it is not the only one",
-        splice.is_confined(page, section, PLACEMENT.REPLACES(0, page.length))
+        splice.is_confined(page, section, Placement.REPLACES(0, page.length))
     )
 
     let markdown = MARKDOWN_TO_WIKI()
@@ -900,7 +900,7 @@ adopt(root: string, slugs: LIST[string]) is
 
         let placement = splice.placement(page, SITE.language)
 
-        if let replaced: PLACEMENT.REPLACES = placement then
+        if let replaced: Placement.REPLACES = placement then
             let live = page.substring(replaced.start, replaced.end - replaced.start).trim()
             let expected = IO.File.read_all_text(markup).trim()
 
@@ -998,7 +998,7 @@ diff(root: string, slugs: LIST[string]) is
 
         let page = pages[entry.title]
 
-        if let replaced: PLACEMENT.REPLACES = splice.placement(page, SITE.language) then
+        if let replaced: Placement.REPLACES = splice.placement(page, SITE.language) then
             let live = page.substring(replaced.start, replaced.end - replaced.start).trim()
             let section = IO.File.read_all_text(markup).trim()
 
@@ -1099,9 +1099,9 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
 
         let where =
             case placement
-            when _: PLACEMENT.REPLACES then "replacing the ghul section already there"
-            when before: PLACEMENT.INSERTED_BEFORE then "ahead of {before.language}"
-            when _: PLACEMENT.APPENDED then "at the end of the page"
+            when _: Placement.REPLACES then "replacing the ghul section already there"
+            when before: Placement.INSERTED_BEFORE then "ahead of {before.language}"
+            when _: Placement.APPENDED then "at the end of the page"
             esac
 
         let spliced = splice.splice(page, SITE.language, section)
@@ -1149,7 +1149,7 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
         // repository put there, which is what `published_hash` records. Comparing against what
         // is about to be sent instead would refuse every update, since an update is a change by
         // definition.
-        if let replaced: PLACEMENT.REPLACES = placement /\ !replace then
+        if let replaced: Placement.REPLACES = placement /\ !replace then
             let live = page.substring(replaced.start, replaced.end - replaced.start).trim()
 
             if !entry.published_hash? then
@@ -1183,7 +1183,7 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
         // removes that section and no more.
         let allowed_removals =
             case placement
-            when replaced: PLACEMENT.REPLACES then
+            when replaced: Placement.REPLACES then
                 page.substring(replaced.start, replaced.end - replaced.start).split(['\n']).count
             else
                 0

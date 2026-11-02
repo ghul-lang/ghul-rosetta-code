@@ -4,7 +4,7 @@ namespace Rosetta is
     use Collections
 
     // Where a language's section belongs in a task page, and what is already there.
-    union PLACEMENT is
+    union Placement is
         REPLACES(start: int, end: int)
         INSERTED_BEFORE(start: int, language: string)
         APPENDED(start: int)
@@ -64,7 +64,7 @@ namespace Rosetta is
         //
         // Sections for the language that follow one another are replaced together, so a page
         // already carrying a duplicate ends up with one section rather than keeping both.
-        placement(page: string, language: string) -> PLACEMENT is
+        placement(page: string, language: string) -> Placement is
             let headers = _headers(page)
 
             for i in 0..headers.count do
@@ -82,18 +82,18 @@ namespace Rosetta is
                             page.length
                         fi
 
-                    return PLACEMENT.REPLACES(headers[i].index, end)
+                    return Placement.REPLACES(headers[i].index, end)
                 fi
             od
 
             for i in 0..headers.count do
                 if _before(language, _name(headers[i])) then
-                    return PLACEMENT.INSERTED_BEFORE(
+                    return Placement.INSERTED_BEFORE(
                         headers[i].index, _name(headers[i]))
                 fi
             od
 
-            return PLACEMENT.APPENDED(page.length)
+            return Placement.APPENDED(page.length)
         si
 
         // The check that matters, and the reason it does not consult the placement: a splice
@@ -130,19 +130,19 @@ namespace Rosetta is
         // survive unchanged, and so does everything after whatever it replaces. A splice that
         // fails this has gone wrong somewhere, and an edit to a live page is the wrong place to
         // discover that.
-        is_confined(page: string, spliced: string, placement: PLACEMENT) -> bool is
+        is_confined(page: string, spliced: string, placement: Placement) -> bool is
             let head =
                 case placement
-                when replaced: PLACEMENT.REPLACES then replaced.start
-                when inserted: PLACEMENT.INSERTED_BEFORE then inserted.start
-                when appended: PLACEMENT.APPENDED then appended.start
+                when replaced: Placement.REPLACES then replaced.start
+                when inserted: Placement.INSERTED_BEFORE then inserted.start
+                when appended: Placement.APPENDED then appended.start
                 esac
 
             let tail =
                 case placement
-                when replaced: PLACEMENT.REPLACES then replaced.end
-                when _: PLACEMENT.INSERTED_BEFORE then head
-                when appended: PLACEMENT.APPENDED then appended.start
+                when replaced: Placement.REPLACES then replaced.end
+                when _: Placement.INSERTED_BEFORE then head
+                when appended: Placement.APPENDED then appended.start
                 esac
 
             if head > spliced.length \/ tail > page.length then
@@ -174,11 +174,11 @@ namespace Rosetta is
                 let body = "{section.trim_end()}\n\n"
 
                 case placement(page, language)
-                when replaced: PLACEMENT.REPLACES then
+                when replaced: Placement.REPLACES then
                     "{page.substring(0, replaced.start)}{body}{page.substring(replaced.end)}"
-                when inserted: PLACEMENT.INSERTED_BEFORE then
+                when inserted: Placement.INSERTED_BEFORE then
                     "{page.substring(0, inserted.start)}{body}{page.substring(inserted.start)}"
-                when _: PLACEMENT.APPENDED then
+                when _: Placement.APPENDED then
                     "{page.trim_end()}\n\n{body.trim_end()}\n"
                 esac
             lav
