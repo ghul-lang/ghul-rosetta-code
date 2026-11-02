@@ -14,15 +14,13 @@ product(lists: int[][]) -> int[][] =>
 show(lists: int[][]) =>
     write_line("{lists |> join(" × ")} = {product(lists)}")
 
-let empty = ARRAY[int]([])
-
 show([[1, 2], [3, 4]])
 show([[3, 4], [1, 2]])
-show([[1, 2], empty])
-show([empty, [1, 2]])
+show([[1, 2], []])
+show([[], [1, 2]])
 
 write_line("")
 
 show([[1776, 1789], [7, 12], [4, 14, 23], [0, 1]])
 show([[1, 2, 3], [30], [500, 100]])
-show([[1, 2, 3], empty, [500, 100]])
+show([[1, 2, 3], [], [500, 100]])

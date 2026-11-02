@@ -1,6 +1,5 @@
 use default
 
-// C(n) = sum over i of C(i) * C(n - 1 - i)
 by_convolution(n: int) -> long memo is
     if n == 0 then
         return 1L
@@ -10,7 +9,6 @@ by_convolution(n: int) -> long memo is
         (0..n) |> sum_by(i => by_convolution(i) * by_convolution(n - 1 - i))
 si
 
-// C(n) = 2 * (2n - 1) * C(n - 1) / (n + 1)
 by_recurrence(n: int) -> long =>
     1::n
         |> reduce(1L, (c, k) =>

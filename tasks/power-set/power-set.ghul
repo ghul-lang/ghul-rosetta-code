@@ -9,6 +9,6 @@ power_set[T](values: T[]) -> T[][] =>
             |> list()
     esac
 
-write_line("{power_set(ARRAY[int]([]))}")
+write_line("{power_set([])}")
 write_line("{power_set([1, 2, 3])}")
 write_line("{power_set(["a", "b"])}")

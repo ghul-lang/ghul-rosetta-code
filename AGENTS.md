@@ -173,6 +173,9 @@ distance(a: POINT, b: POINT) -> double =>
   something the file already has; a name as common as `List`, `LIST`, `MAP` or `SET` is imported
   and written bare rather than reached through its namespace. Something uncommon that a solution
   names once, a static method in particular, is written with its namespace instead.
+- **A `use` of a type the file declares goes straight after that declaration.** `use Suit.*`
+  brings an enum's members or a union's variants into scope, and belongs on the line after the
+  type's closing `si`, not with the `use` lines at the head of the file.
 - **A function literal that only forwards its parameter is not written.**
   Where the body is one call or one operator and the parameter appears once,
   as a whole argument or operand, write the call with `*` in its place:
@@ -702,6 +705,10 @@ gets. Where the scan is wrong for a task, `"notation": false` in its `task.json`
 leaves the list out. The notes say what a construct is, never why it was used,
 and nothing about the algorithm. Beyond them, most solutions carry no words, and
 that is the shape a reader of the wiki expects.
+
+A comment that restates a formula the next lines compute, such as
+`// C(n) = sum over i of C(i) * C(n - 1 - i)` above the function that sums it, is left out: a
+reader who knows the formula doesn't need it, and one who doesn't won't learn it from one line.
 
 When a reader would be left with a question, the first three answers are not
 words at all, in this order:
