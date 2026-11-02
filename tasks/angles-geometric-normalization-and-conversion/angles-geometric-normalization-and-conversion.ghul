@@ -7,7 +7,7 @@ use default
 // `=~` compares values (structural equality)
 
 normalize(angle: double, turn: double) -> double =>
-    angle - turn * System.Math.truncate(angle / turn) + 0.0
+    angle - turn * truncate(angle / turn) + 0.0
 
 convert(angle: double, from: double, to: double) -> double =>
     normalize(angle, from) / from * to
@@ -16,7 +16,7 @@ let scales = [
     (name = "degrees", turn = 360.0),
     (name = "gradians", turn = 400.0),
     (name = "mils", turn = 6400.0),
-    (name = "radians", turn = System.Math.tau)
+    (name = "radians", turn = tau)
 ]
 
 let angles = [

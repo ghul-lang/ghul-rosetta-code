@@ -32,8 +32,8 @@ in_base(value: long, base: int) -> string is
 si
 
 smallest_root(base: int) -> int =>
-    let lowest = System.Math.pow(double(base), double(base - 1)) in
-    int(System.Math.ceiling(System.Math.sqrt(lowest)))
+    let lowest = pow(double(base), double(base - 1)) in
+    int(ceiling(sqrt(lowest)))
 
 for base in 2::13 do
     let found =

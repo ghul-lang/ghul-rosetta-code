@@ -32,7 +32,7 @@ solve(a: Matrix, b: double[]) -> double{} is
     let rows = 0..n |> map(i => a[i] ++ [b[i]] |> LIST()) |> LIST()
 
     for k in 0..n do
-        let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
+        let pivot = k..n |> max_by(i => abs(rows[i][k]))!
         (rows[k], rows[pivot]) = (rows[pivot], rows[k])
 
         for i in k + 1..n do

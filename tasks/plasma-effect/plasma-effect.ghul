@@ -1,5 +1,5 @@
 use Raster.IMAGE
-use System.Math.*
+use Ghul.Math
 
 let width = 480
 let height = 360

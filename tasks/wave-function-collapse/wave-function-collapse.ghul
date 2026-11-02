@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -86,8 +85,8 @@ let blocks_placed = placed!
 
 pixel(y: int, x: int) -> char =>
     let
-        row = Math.min(y / 2, grid - 1),
-        column = Math.min(x / 2, grid - 1),
+        row = min(y / 2, grid - 1),
+        column = min(x / 2, grid - 1),
         block = blocks[blocks_placed[row * grid + column]]
     in
         block[y - 2 * row][x - 2 * column]

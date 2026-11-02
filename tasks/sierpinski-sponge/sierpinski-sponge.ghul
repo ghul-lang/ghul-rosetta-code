@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 use Cell = (x: int, y: int, z: int)
 use Flat = (x: double, y: double)

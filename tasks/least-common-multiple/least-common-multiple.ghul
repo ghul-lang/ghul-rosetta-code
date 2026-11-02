@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `==` compares identity
 
@@ -9,7 +8,7 @@ lcm(a: int, b: int) -> int =>
     if a == 0 \/ b == 0 then
         0
     else
-        Math.abs(a / gcd(a, b) * b)
+        abs(a / gcd(a, b) * b)
     fi
 
 for (a, b) in [(12, 18), (-6, 14), (35, 0)] do

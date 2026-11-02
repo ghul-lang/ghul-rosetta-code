@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
@@ -72,8 +71,8 @@ median_filter(source: IMAGE) -> IMAGE is
                     |> flat_map(dy => -1::1 |> map(dx => (dx, dy)))
                     |> map((dx, dy) =>
                         source.pixel(
-                            Math.clamp(x + dx, 0, source.width - 1),
-                            Math.clamp(y + dy, 0, source.height - 1)
+                            clamp(x + dx, 0, source.width - 1),
+                            clamp(y + dy, 0, source.height - 1)
                         )
                     )
 

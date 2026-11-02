@@ -11,7 +11,7 @@ let random = System.Random(20260918)
 let corners = [
     (x = 0.0D, y = 0.0D),
     (x = 1.0D, y = 0.0D),
-    (x = 0.5D, y = System.Math.sqrt(3.0D) / 2.0D)
+    (x = 0.5D, y = sqrt(3.0D) / 2.0D)
 ]
 
 let image = IMAGE(640, 560)

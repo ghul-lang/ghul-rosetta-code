@@ -1,13 +1,10 @@
-use System.Math
+use Ghul.Math
 use Raster.IMAGE
 
 let size = 256
 
 shade(value: int, phase: double) -> ubyte =>
-    ubyte(
-        127.5D *
-        (1.0D - Math.cos(2.0D * Math.pi * double(value) / 256.0D + phase))
-    )
+    ubyte(127.5D * (1.0D - cos(2.0D * pi * double(value) / 256.0D + phase)))
 
 let image = IMAGE(size, size)
 

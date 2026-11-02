@@ -35,7 +35,7 @@ recursive(n: int) -> string is
         if is_permutation(window) /\ seen.add(window) then
             let piece = "{window}{letter}{window}"
             let built = result.to_string()
-            let overlap mut = System.Math.min(built.length, piece.length)
+            let overlap mut = min(built.length, piece.length)
 
             let matches = k => built.ends_with(piece.substring(0, k))
 

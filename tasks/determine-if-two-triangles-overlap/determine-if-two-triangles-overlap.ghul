@@ -2,7 +2,6 @@ use default
 use Raster.Anchor
 use Raster.IMAGE
 use System.StringSplitOptions
-use System.Math.*
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source

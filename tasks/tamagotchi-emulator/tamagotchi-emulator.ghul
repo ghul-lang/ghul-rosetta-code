@@ -1,7 +1,6 @@
 use default
 use IO.Std.read_line
 use System.Random
-use System.Math.*
 
 // `=~` compares values (structural equality) - `==` compares identity
 // `if let` and `case ... when` pattern-match

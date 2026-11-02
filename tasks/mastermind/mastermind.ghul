@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math
 use System.Random
 
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -46,7 +45,7 @@ score(code: string, guess: string, palette: string) -> string =>
         0..code.length |> filter(i => code[i] == guess[i]) |> count()
     in
     let common =
-        palette |> sum_by(c => Math.min(tally(code, c), tally(guess, c)))
+        palette |> sum_by(c => min(tally(code, c), tally(guess, c)))
     in
     "".pad_right(exact, 'X').pad_right(common, 'O').pad_right(
         code.length,
@@ -58,7 +57,7 @@ let colours = ask("how many colours", 2, 20)
 write_line("may colours repeat in the code (y/n)?")
 let repeats = next_line().to_lower().starts_with("y")
 
-let longest = if repeats then 10 else Math.min(10, colours) fi
+let longest = if repeats then 10 else min(10, colours) fi
 let length = ask("how long is the code", 4, longest)
 let guesses = ask("how many guesses", 7, 20)
 

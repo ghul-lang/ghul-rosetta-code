@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by

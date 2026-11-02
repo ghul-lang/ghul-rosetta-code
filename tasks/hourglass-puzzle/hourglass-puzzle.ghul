@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math.*
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source

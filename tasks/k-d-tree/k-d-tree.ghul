@@ -66,11 +66,7 @@ nearest(tree: Tree, target: Point) -> Found is
 
     search(tree)
 
-    (
-        point = best!,
-        distance = System.Math.sqrt(best_distance),
-        visited = visited
-    )
+    (point = best!, distance = sqrt(best_distance), visited = visited)
 si
 
 place(p: Point) -> string => p |> map(c => "{c:F6}") |> join()

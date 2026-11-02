@@ -1,7 +1,6 @@
 use default
 use Raster.IMAGE
 
-use Math = System.Math
 use Circle = (x: double, y: double, radius: double)
 
 tangent_to(
@@ -67,7 +66,7 @@ tangent_to(
         2.0D * p * first.y -
         first.radius * first.radius
 
-    let radius = (-b - Math.sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
+    let radius = (-b - sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
 
     (x = m + n * radius, y = p + q * radius, radius = radius)
 )

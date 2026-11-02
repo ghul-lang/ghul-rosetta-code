@@ -1,9 +1,4 @@
 use default
-use System.Math.sin
-use System.Math.cos
-use System.Math.asin
-use System.Math.sqrt
-use System.Math.pi
 
 let earth_radius_km = 6372.8D
 

@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
@@ -15,7 +14,7 @@ running_maxima(heights: int{}) -> int{} is
     let highest mut = 0
 
     for height in heights do
-        highest = Math.max(highest, height)
+        highest = max(highest, height)
 
         yield highest
     od
@@ -27,7 +26,7 @@ water(heights: int[]) -> int => (
     let last = heights.count - 1
 
     (0..heights.count)
-        |> sum_by(i => Math.min(left[i], right[last - i]) - heights[i])
+        |> sum_by(i => min(left[i], right[last - i]) - heights[i])
 )
 
 let series = [

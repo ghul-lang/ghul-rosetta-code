@@ -1,5 +1,4 @@
 use default
-use System.Math
 use System.Numerics.Complex
 
 // `T[]` is the read-only list trait - elements can be read by index
@@ -19,10 +18,7 @@ every_other(x: Complex[], start: int) -> Complex[] =>
         |> list()
 
 twiddle(k: int, n: int) -> Complex =>
-    Complex.from_polar_coordinates(
-        1.0D,
-        -2.0D * Math.pi * double(k) / double(n)
-    )
+    Complex.from_polar_coordinates(1.0D, -2.0D * pi * double(k) / double(n))
 
 fft(x: Complex[]) -> Complex[] is
     let n = x.count
@@ -42,7 +38,7 @@ fft(x: Complex[]) -> Complex[] is
         |> list()
 si
 
-tidy(v: double) -> double => if Math.abs(v) < 1.0e-12 then 0.0D else v fi
+tidy(v: double) -> double => if abs(v) < 1.0e-12 then 0.0D else v fi
 
 show(c: Complex) -> string =>
     "({tidy(c.real),8:F4}, {tidy(c.imaginary),8:F4})"

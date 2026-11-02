@@ -1,7 +1,5 @@
 use default
 
-use Math = System.Math
-
 // `==` compares identity
 // `case ... when` pattern-matches
 
@@ -14,12 +12,12 @@ solve(a: double, b: double, c: double) -> Roots is
     let discriminant = b * b - 4.0 * a * c
 
     if discriminant < 0.0 then
-        let im = Math.sqrt(-discriminant) / (2.0 * a)
+        let im = sqrt(-discriminant) / (2.0 * a)
         return Roots.COMPLEX(-b / (2.0 * a), im)
     fi
 
     let sign = if b < 0.0 then -1.0 else 1.0 fi
-    let q = -(b + sign * Math.sqrt(discriminant)) / 2.0
+    let q = -(b + sign * sqrt(discriminant)) / 2.0
 
     if q == 0.0 then
         return Roots.REAL(0.0, 0.0)

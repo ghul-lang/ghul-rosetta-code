@@ -2,7 +2,6 @@ use default
 use Raster.COLOUR_MAP
 use Raster.IMAGE
 
-use Math = System.Math
 use Point = (x: double, y: double)
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
@@ -28,8 +27,7 @@ height_at(x: double, y: double) -> double =>
             let up = y - peak.y
             let away = across * across + up * up
 
-            peak.height *
-            Math.exp(-away / (2.0D * peak.spread * peak.spread))
+            peak.height * exp(-away / (2.0D * peak.spread * peak.spread))
         ))
 
 let left = -3.0D

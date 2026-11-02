@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
@@ -11,7 +10,7 @@ entropy(text: string) -> double =>
         groups
             |> map(group => double(group.count) / total)
             |> reduce(0.0D, (bits, probability) =>
-                bits - probability * Math.log2(probability)
+                bits - probability * log2(probability)
             )
 
 let text = "1223334444"

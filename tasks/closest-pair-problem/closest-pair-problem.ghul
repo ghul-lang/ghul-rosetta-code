@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `SET[T]` is a mutable set, holding each element once
@@ -11,7 +10,7 @@ use System.Math
 
 struct P(x: double, y: double) is
     -(o: P) -> P => P(x - o.x, y - o.y)
-    length: double => Math.sqrt(x * x + y * y)
+    length: double => sqrt(x * x + y * y)
     show: string => "({x:F4}, {y:F4})"
 si
 
@@ -47,7 +46,7 @@ closest(by_x: P[], by_y: P[]) -> Pair is
 
     let best = closer(closest(left_x, left_y), closest(right_x, right_y))
 
-    let strip = by_y |> filter(p => Math.abs(p.x - middle) < best.distance)
+    let strip = by_y |> filter(p => abs(p.x - middle) < best.distance)
 
     let result mut = best
 

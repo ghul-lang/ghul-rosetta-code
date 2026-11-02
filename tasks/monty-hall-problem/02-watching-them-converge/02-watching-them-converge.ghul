@@ -1,7 +1,6 @@
 use default
 use Raster.AXES
 use Raster.IMAGE
-use System.Math.log10
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -68,7 +67,7 @@ axes.x_ticks(
     (0::4)
         |> map(decade => (
             value = double(decade),
-            label = "{System.Math.pow(10.0, double(decade))}"
+            label = "{pow(10.0, double(decade))}"
         ))
         |> list()
 )

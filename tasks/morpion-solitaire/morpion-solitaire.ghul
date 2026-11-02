@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 use Move = (x: int, y: int, d: int, k: int)
 

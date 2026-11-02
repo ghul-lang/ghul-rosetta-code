@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
@@ -23,10 +22,10 @@ estimate(throws: int) -> double =>
     4.0D * double(hits) / double(throws)
 
 for power in 2::7 do
-    let throws = int(Math.pow(10.0D, double(power)))
+    let throws = int(pow(10.0D, double(power)))
     let pi = estimate(throws)
 
-    let error = Math.abs(pi - Math.pi)
+    let error = abs(pi - Ghul.Math.pi)
 
     write_line("{throws,10} throws: pi is about {pi:F6}, off by {error:F6}")
 od

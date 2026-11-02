@@ -110,8 +110,8 @@ class LCA is
 
     query(u: int, v: int) -> int =>
         let
-            low = System.Math.min(_beta[u], _beta[v]),
-            high = System.Math.max(_beta[u], _beta[v]),
+            low = min(_beta[u], _beta[v]),
+            high = max(_beta[u], _beta[v]),
             common = _lambda[high & -low],
             k = _alfa[u] & _alfa[v] & -(1 << common),
             h = _lambda[k & -k],

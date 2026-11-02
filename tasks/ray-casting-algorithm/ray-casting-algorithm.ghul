@@ -22,13 +22,13 @@ crosses(point: Point, from: Point, to: Point) -> bool is
             point.y
         fi
 
-    let rightmost = System.Math.max(low.x, high.x)
+    let rightmost = max(low.x, high.x)
 
     if y < low.y \/ y > high.y \/ point.x >= rightmost then
         return false
     fi
 
-    if point.x < System.Math.min(low.x, high.x) then
+    if point.x < min(low.x, high.x) then
         return true
     fi
 

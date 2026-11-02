@@ -1,5 +1,4 @@
 use default
-use Math = System.Math
 use Raster.Anchor
 use Raster.IMAGE
 
@@ -17,7 +16,7 @@ running_maxima(heights: int{}) -> int{} is
     let highest mut = 0
 
     for height in heights do
-        highest = Math.max(highest, height)
+        highest = max(highest, height)
 
         yield highest
     od
@@ -29,7 +28,7 @@ depths(heights: int[]) -> int[] => (
     let last = heights.count - 1
 
     (0..heights.count)
-        |> map(i => Math.min(left[i], right[last - i]) - heights[i])
+        |> map(i => min(left[i], right[last - i]) - heights[i])
         |> list()
 )
 

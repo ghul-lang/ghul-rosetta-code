@@ -41,7 +41,7 @@ let board =
         |> LIST()
 
 let given = SET(board |> filter(* > 0))
-let last = given |> reduce(0, (a, b) => System.Math.max(a, b))
+let last = given |> reduce(0, (a, b) => max(a, b))
 
 at(row: int, column: int) -> int =>
     if row < 0 \/ row >= rows \/ column < 0 \/ column >= columns then

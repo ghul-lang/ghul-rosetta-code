@@ -3,7 +3,6 @@ use Raster.Anchor
 use Raster.COLOUR_MAP
 use Raster.IMAGE
 use Raster.SHAPES
-use System.Math.min
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source

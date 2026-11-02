@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `==` compares identity
 
@@ -9,7 +8,7 @@ union Middle is
 si
 
 middle_three(value: int) -> Middle is
-    let digits = "{Math.abs(long(value))}"
+    let digits = "{abs(long(value))}"
 
     if digits.length < 3 then
         return Middle.REFUSED("fewer than three digits")

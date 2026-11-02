@@ -50,10 +50,7 @@ for at in 0..copies.count do
 
         best[at + 1][room] =
             if room >= copy.weight then
-                System.Math.max(
-                    without,
-                    best[at][room - copy.weight] + copy.value
-                )
+                max(without, best[at][room - copy.weight] + copy.value)
             else
                 without
             fi

@@ -35,7 +35,7 @@ roots(base: int) -> long[] is
     let modulus = long(base - 1)
     let residue = long(base * (base - 1) / 2) % modulus
 
-    from(long(System.Math.sqrt(double(smallest))))
+    from(long(sqrt(double(smallest))))
         |> filter(n => n * n >= smallest)
         |> take_while(n => n * n <= largest)
         |> filter(n => n * n % modulus == residue)

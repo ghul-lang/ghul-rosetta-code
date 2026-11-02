@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `STACK[T]` is a mutable last-in, first-out stack

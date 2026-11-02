@@ -98,7 +98,7 @@ let balance =
 let naive_balance =
     1::25
         |> reduce(
-            System.Math.e - 1.0,
+            Ghul.Math.e - 1.0,
             (bal, year) => bal * double(year) - 1.0
         )
 
@@ -127,16 +127,11 @@ let x = 77617.0
 let y = 33096.0
 
 let naive_f =
-    333.75 * System.Math.pow(y, 6.0) +
+    333.75 * pow(y, 6.0) +
     x *
     x *
-    (
-        11.0 * x * x * y * y -
-        System.Math.pow(y, 6.0) -
-        121.0 * System.Math.pow(y, 4.0) -
-        2.0
-    ) +
-    5.5 * System.Math.pow(y, 8.0) +
+    (11.0 * x * x * y * y - pow(y, 6.0) - 121.0 * pow(y, 4.0) - 2.0) +
+    5.5 * pow(y, 8.0) +
     x / (2.0 * y)
 
 write_line("  in double precision: {naive_f:R}")

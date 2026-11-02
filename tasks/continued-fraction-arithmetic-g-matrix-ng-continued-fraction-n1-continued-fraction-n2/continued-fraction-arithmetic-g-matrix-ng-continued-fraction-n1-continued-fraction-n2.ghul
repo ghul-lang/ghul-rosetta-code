@@ -1,5 +1,4 @@
 use default
-use System.Math.*
 
 use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
 

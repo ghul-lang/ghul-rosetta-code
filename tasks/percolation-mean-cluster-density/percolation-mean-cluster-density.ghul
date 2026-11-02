@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -81,7 +80,7 @@ write_line("   n      K(p)      off by")
 for size in [4, 16, 64, 256, 1024] do
     let k = density(size)
 
-    write_line("{size,4}   {k:F6}   {Math.abs(k - expected):F6}")
+    write_line("{size,4}   {k:F6}   {abs(k - expected):F6}")
 od
 
 let clusters = CLUSTERS(15)

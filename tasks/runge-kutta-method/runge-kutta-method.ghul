@@ -1,7 +1,5 @@
 use default
 
-use Math = System.Math
-
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 rk4(f: (double, double) -> double, dt: double) -> ((double, double)) -> (
@@ -17,9 +15,9 @@ rk4(f: (double, double) -> double, dt: double) -> ((double, double)) -> (
         (t + dt, y + (dy1 + 2.0 * dy2 + 2.0 * dy3 + dy4) / 6.0)
     )
 
-exact(t: double) -> double => Math.pow(t * t + 4.0, 2.0) / 16.0
+exact(t: double) -> double => pow(t * t + 4.0, 2.0) / 16.0
 
-let advance = rk4((t, y) => t * Math.sqrt(y), 0.1)
+let advance = rk4((t, y) => t * sqrt(y), 0.1)
 
 let points = stream((0.0, 1.0), point => point || advance(point))
 

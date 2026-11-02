@@ -3,7 +3,6 @@ use default
 use Raster.AXES
 use Raster.IMAGE
 use System.Diagnostics.Stopwatch
-use System.Math
 
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)
 use Sorter = (name: string, sort: (LIST[int]) -> void, colour: Colour)
@@ -116,7 +115,7 @@ microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
         )
         |> min()!
 
-log2(x: double) -> double => Math.log2(Math.max(x, 1.0))
+log2(x: double) -> double => Ghul.Math.log2(max(x, 1.0))
 
 for (name, make) in inputs do
     let data = powers |> map(p => make(1 << p))

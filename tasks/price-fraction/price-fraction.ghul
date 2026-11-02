@@ -27,7 +27,7 @@ let shown =
         |> list()
 
 for row in 0..21 do
-    let last = System.Math.min(row * 5 + 5, shown.count)
+    let last = min(row * 5 + 5, shown.count)
 
     write_line(shown[row * 5..last] |> join("   "))
 od

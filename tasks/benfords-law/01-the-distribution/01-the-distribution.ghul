@@ -1,5 +1,4 @@
 use default
-use System.Math.log10
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `|> LIST()` reads the whole sequence into a new `LIST`

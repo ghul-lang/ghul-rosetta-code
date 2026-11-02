@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math.*
 
 // `SET[T]` is a mutable set, holding each element once
 // `MAP[K, V]` is a mutable map from keys to values

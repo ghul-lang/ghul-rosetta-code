@@ -1,6 +1,6 @@
 use Raster.ANIMATION
 use Raster.IMAGE
-use System.Math.*
+use Ghul.Math
 
 use STATE = (angle: double, rate: double)
 

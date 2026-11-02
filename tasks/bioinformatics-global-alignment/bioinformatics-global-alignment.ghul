@@ -8,7 +8,7 @@ use default
 // `==` compares identity
 
 overlap(left: string, right: string) -> int => (
-    let longest = System.Math.min(left.length, right.length)
+    let longest = min(left.length, right.length)
     let size mut = longest
 
     while size > 0 /\ !left.ends_with(right[0..size]) do

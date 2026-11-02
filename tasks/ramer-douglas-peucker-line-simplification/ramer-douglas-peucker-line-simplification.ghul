@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
@@ -13,14 +12,14 @@ struct P(x: double, y: double) is
     -(o: P) -> P => P(x - o.x, y - o.y)
     ×(o: P) -> double => x * o.y - y * o.x
 
-    length: double => Math.sqrt(x * x + y * y)
+    length: double => sqrt(x * x + y * y)
     to_string() -> string => "({x}, {y})"
 si
 
 distance(p: P, from: P, to: P) -> double =>
     let line = to - from in
     if line.length == 0.0D then (p - from).length
-    else Math.abs(line × (p - from)) / line.length
+    else abs(line × (p - from)) / line.length
     fi
 
 simplify(points: P[], epsilon: double) -> P[] is

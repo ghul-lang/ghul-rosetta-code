@@ -19,7 +19,7 @@ cholesky(a: double[][]) -> double[][] is
 
             l[i][k] =
                 if i == k then
-                    System.Math.sqrt(a[i][i] - overlap)
+                    sqrt(a[i][i] - overlap)
                 else
                     (a[i][k] - overlap) / l[k][k]
                 fi

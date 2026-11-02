@@ -1,9 +1,7 @@
 use default
 use Raster.IMAGE
 use Raster.SHAPES
-use System.Math.*
 
-use Math = System.Math
 use Square = (row: int, column: int)
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in

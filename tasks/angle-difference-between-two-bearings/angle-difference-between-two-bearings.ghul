@@ -1,7 +1,7 @@
 use default
 
 difference(from: double, to: double) -> double =>
-    System.Math.ieeeremainder(to - from, 360.0)
+    ieeeremainder(to - from, 360.0)
 
 let pairs = [
     (20.0, 45.0),

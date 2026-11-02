@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 use Point = (x: double, y: double)
 use Curve = (p0: Point, p1: Point, p2: Point, from: double, to: double)

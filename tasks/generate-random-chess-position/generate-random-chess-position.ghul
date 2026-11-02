@@ -15,8 +15,8 @@ file_of(square: int) -> int => square % 8
 rank_of(square: int) -> int => square / 8
 
 adjacent(one: int, other: int) -> bool =>
-    System.Math.abs(file_of(one) - file_of(other)) <= 1 /\
-    System.Math.abs(rank_of(one) - rank_of(other)) <= 1
+    abs(file_of(one) - file_of(other)) <= 1 /\
+    abs(rank_of(one) - rank_of(other)) <= 1
 
 promotion_square(piece: char, square: int) -> bool =>
     (piece == 'P' /\ rank_of(square) == 0) \/

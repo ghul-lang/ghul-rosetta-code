@@ -117,7 +117,7 @@ naive(a: Matrix, b: Matrix) -> Matrix =>
 
 show(m: Matrix) is
     for row in m do
-        let rounded = row |> map(x => System.Math.round(x, 3) + 0.0)
+        let rounded = row |> map(x => round(x, 3) + 0.0)
 
         write_line(rounded |> map(x => "{x,8:0.###}") |> join(""))
     od
@@ -160,10 +160,7 @@ let agrees = [(a, b), (c, d), (e, e)]
         in
             0..x.count
                 |> all(i =>
-                    0..x.count
-                        |> all(j =>
-                            System.Math.abs(s[i][j] - n[i][j]) < 1.0e-9
-                        )
+                    0..x.count |> all(j => abs(s[i][j] - n[i][j]) < 1.0e-9)
                 )
     )
 

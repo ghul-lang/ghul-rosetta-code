@@ -39,9 +39,9 @@ let product mut = 1
 
 for range in ranges do
     for j in range do
-        sum = sum + System.Math.abs(j)
+        sum = sum + abs(j)
 
-        if System.Math.abs(product) < 134217728 /\ j != 0 then
+        if abs(product) < 134217728 /\ j != 0 then
             product = product * j
         fi
     od

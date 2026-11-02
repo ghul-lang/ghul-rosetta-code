@@ -66,7 +66,7 @@ while demand |> any(* > 0) do
             |> max_by(l => l.penalty)!
 
     let (row, column) = chosen.cells |> min_by((r, c) => costs[r][c])!
-    let amount = System.Math.min(supply[row], demand[column])
+    let amount = min(supply[row], demand[column])
 
     allocation[row][column] = amount
     supply[row] = supply[row] - amount

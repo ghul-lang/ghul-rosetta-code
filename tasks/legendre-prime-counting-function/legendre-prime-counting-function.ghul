@@ -33,11 +33,11 @@ prime_count(n: long) -> long =>
     if n < 2L then
         0L
     else
-        let a = prime_count(long(System.Math.sqrt(double(n)))) in
+        let a = prime_count(long(sqrt(double(n)))) in
         phi(n, int(a)) + a - 1L
     fi
 
 for exponent in 0::9 do
-    let n = long(System.Math.pow(10.0, double(exponent)))
+    let n = long(pow(10.0, double(exponent)))
     write_line("10^{exponent} {prime_count(n),12:N0}")
 od

@@ -1,5 +1,4 @@
 use default
-use Math = System.Math
 use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE

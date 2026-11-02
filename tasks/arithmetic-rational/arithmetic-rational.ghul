@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
@@ -61,7 +60,7 @@ whole(n: long) -> FRAC => FRAC(n, 1L)
 -(value: FRAC) -> FRAC => FRAC(-value.numerator, value.denominator)
 
 abs(value: FRAC) -> FRAC =>
-    FRAC(Math.abs(value.numerator), value.denominator)
+    FRAC(Ghul.Math.abs(value.numerator), value.denominator)
 
 let a = frac(3L, 4L)
 let b = frac(-5L, 6L)

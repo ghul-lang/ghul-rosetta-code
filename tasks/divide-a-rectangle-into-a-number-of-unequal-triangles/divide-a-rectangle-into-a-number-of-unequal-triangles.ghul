@@ -1,7 +1,6 @@
 use default
 use Raster.IMAGE
 use Raster.SHAPES
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -17,7 +16,7 @@ struct P(x: double, y: double) is
     -(o: P) -> P => P(x - o.x, y - o.y)
     *(k: double) -> P => P(x * k, y * k)
     ×(o: P) -> double => x * o.y - y * o.x
-    length: double => Math.sqrt(x * x + y * y)
+    length: double => sqrt(x * x + y * y)
     show: string => "({x:F2}, {y:F2})"
 si
 
@@ -33,9 +32,9 @@ similar(s: Triangle, t: Triangle) -> bool =>
         x = sides(s),
         y = sides(t)
     in
-        0..3 |> all(i => Math.abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6)
+        0..3 |> all(i => abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6)
 
-area(t: Triangle) -> double => Math.abs((t.b - t.a) × (t.c - t.a)) / 2.0D
+area(t: Triangle) -> double => abs((t.b - t.a) × (t.c - t.a)) / 2.0D
 
 all_different(ts: Triangle[]) -> bool =>
     0..ts.count

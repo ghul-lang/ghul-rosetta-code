@@ -21,7 +21,7 @@ pritchard(limit: int) -> int{} is
         if length < limit then
             extend(wheel, length, prime, limit)
 
-            length = System.Math.min(length * prime, limit)
+            length = min(length * prime, limit)
         fi
 
         for member in wheel |> ARRAY() do
@@ -45,7 +45,7 @@ pritchard(limit: int) -> int{} is
 si
 
 extend(wheel: SET[int], length: int, prime: int, limit: int) is
-    let target = System.Math.min(length * prime, limit)
+    let target = min(length * prime, limit)
 
     for member in wheel |> ARRAY() do
         let step mut = member + length

@@ -1,5 +1,4 @@
 use default
-use System.Math.*
 use double.degrees_to_radians
 use double.radians_to_degrees
 
