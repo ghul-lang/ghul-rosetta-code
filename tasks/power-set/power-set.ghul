@@ -16,7 +16,8 @@ power_set[T](values: T[]) -> T[][] =>
     when [] then [[]]
     when [first, ..rest] then
         let subsets = power_set(rest) in
-        [subset for subset in subsets] ++ [[first] ++ subset |> list() for subset in subsets] |> list()
+        subsets ++ [[first] ++ subset |> list() for subset in subsets]
+            |> list()
     esac
 
 braced[T](values: T{}) -> string => "{{{values |> join(", ")}}}"

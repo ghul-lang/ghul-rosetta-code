@@ -15,7 +15,11 @@ product(lists: int[][]) -> int[][] =>
     case lists
     when [] then [[]]
     when [first, ..rest] then
-        [[head] ++ tail |> list() for head in first for tail in product(rest)]
+        [
+            [head] ++ tail |> list()
+            for head in first
+            for tail in product(rest)
+        ]
     esac
 
 braced(values: string{}) -> string => "{{{values |> join(", ")}}}"

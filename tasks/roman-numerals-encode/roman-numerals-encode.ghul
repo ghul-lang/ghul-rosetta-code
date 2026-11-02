@@ -10,7 +10,9 @@ let numerals = [
 ]
 
 roman(n: int) -> string =>
-    if let (value, symbol) = numerals |> find(((value, _)) => value <= n) then
+    if let
+        (value, symbol) = numerals |> find(((value, _)) => value <= n)
+    then
         "{symbol}{roman(n - value)}"
     else
         ""
