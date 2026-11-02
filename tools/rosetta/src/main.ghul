@@ -20,6 +20,7 @@ use Rosetta
 //   rosetta adopt <slug> ...          record the live section as ours, when it matches wiki-out/
 //   rosetta render-notes <path>      a task's notes.md as wiki markup, to stdout
 //   rosetta section <slug>           the task's ghul section as wiki markup, to stdout
+//   rosetta notation <file> ...      the notation list the section derives for each source
 //   rosetta wiki-out <slug> ...       write each task's section to wiki-out/<slug>.wiki
 //   rosetta index [--check] [--commit <sha>]
 //                                    write index.json, or only validate the tags it would carry;
@@ -1343,6 +1344,15 @@ else
                 IO.Std.write(CONTROL_PICTURES.render(text))
             fi
         fi
+    when "notation" then
+        // The notation list the publisher derives for each source named.
+        for file in arguments do
+            write_line("{file}:")
+
+            for note in NOTATION.scan(IO.File.read_all_text(file)) do
+                write_line("* {note}")
+            od
+        od
     when "section" then
         if arguments.count < 1 then
             error.write_line("usage: rosetta section <slug>")

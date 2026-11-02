@@ -1,0 +1,159 @@
+namespace Rosetta is
+    use System.Text.RegularExpressions.Regex
+    use System.Text.RegularExpressions.RegexOptions
+    use Collections
+    use Ghul.Pipes
+
+    // One ghūl construct a reader from another language may not know: the
+    // patterns that detect it in a line of code, and the note that explains
+    // it, built from which of the patterns matched. A library type also
+    // carries its name, so a solution that declares a type of that name
+    // itself gets no note for it.
+    class CONSTRUCT(type: string? public, patterns: ARRAY[Regex] public, note: (bool[]) -> string? public)
+
+    // The notation list for a solution: one note for each construct its code
+    // uses, in the fixed order of the table, which puts a note after the ones
+    // whose terms it uses. The wording comes from the table and nowhere else,
+    // so every solution says the same thing the same way.
+    class NOTATION is
+        _constructs: LIST[CONSTRUCT] static
+
+        _declared: Regex static
+
+        init() static is
+            _declared = Regex("^\\s*(?:class|struct|union|trait|enum)\\s+([A-Za-z_][A-Za-z0-9_]*)")
+            _constructs = LIST[CONSTRUCT]()
+
+            fixed(null, ["[A-Za-z_\\]\\)]\\{{\\}}"],
+                "`T{{}}` is the lazy sequence trait - elements are read on demand and in order from its source")
+            fixed(null, ["[A-Za-z_\\]\\)\\?]\\[\\]"],
+                "`T[]` is the read-only list trait - elements can be read by index")
+            library("LIST", "`LIST[T]` is a mutable list that grows as elements are added")
+            library("SET", "`SET[T]` is a mutable set, holding each element once")
+            library("MAP", "`MAP[K, V]` is a mutable map from keys to values")
+            library("STACK", "`STACK[T]` is a mutable last-in, first-out stack")
+            library("QUEUE", "`QUEUE[T]` is a mutable first-in, first-out queue")
+            library("LINKED_LIST", "`LINKED_LIST[T]` is a mutable doubly linked list")
+            library("ARRAY", "`ARRAY[T]` is a fixed-size, read-only array")
+            fixed(null, ["(?:\\|>\\s*|^\\s*)list\\(\\)"],
+                "`list()` returns a `T[]` over a `T{{}}` sequence. It is lazy - a read by index materialises the source only as far as that index and caches what it read")
+
+            let collections = ["LIST", "SET", "MAP", "ARRAY"]
+
+            add(
+                null,
+                collections |> map(name => "\\|>\\s*{name}\\b\\s*(?:\\[[^\\]]*\\])?\\s*\\(") |> list(),
+                hit => (
+                    let names = 0..4 |> filter(i => hit[i]) |> map(i => collections[i]) |> list()
+                    let shown = names |> map(name => "`|> {name}()`") |> list()
+
+                    if shown.count == 0 then
+                        null
+                    elif shown.count == 1 then
+                        "{shown[0]} reads the whole sequence into a new `{names[0]}`"
+                    else
+                        "{shown |> take(shown.count - 1) |> join(", ")} and {shown[shown.count - 1]} read the whole sequence into new collections"
+                    fi
+                ))
+
+            fixed(null, ["\\byield\\b"],
+                "`yield` in a function makes it a generator, returning a lazy `T{{}}` sequence")
+            fixed(null, ["\\|>", "~>"],
+                "`|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`")
+            fixed(null, ["~>"],
+                "`~>` is the absent-coalescing thread-first operator - it skips the call when the left value is absent, and the result is then absent too")
+            fixed(null, ["[(,]\\s*\\*(?:\\s*[,)]|\\s+[-+*/%<>=!&|~]|\\s*\\.\\w)"],
+                "`*` as an argument is partial application - `f(*, b)` means `a => f(a, b)`")
+
+            add(
+                null,
+                ["=~|!~", "==|!="],
+                hit => (
+                    let parts = LIST[string]()
+
+                    if hit[0] then
+                        parts.add("`=~` compares values (structural equality)")
+                    fi
+
+                    if hit[1] then
+                        parts.add("`==` compares identity")
+                    fi
+
+                    if parts.count > 0 then parts |> join(" - ") else null fi
+                ))
+
+            add(
+                null,
+                ["\\bif let\\b", "\\bwhen\\b", "\\[\\s*(?:\\]|\\w+\\s*,\\s*\\.\\.|\\.\\.)"],
+                hit => (
+                    let subjects = LIST[string]()
+
+                    if hit[0] then
+                        subjects.add("`if let`")
+                    fi
+
+                    if hit[1] then
+                        subjects.add("`case ... when`")
+                    fi
+
+                    if subjects.count == 0 then
+                        return null
+                    fi
+
+                    let verb = if subjects.count == 1 then " pattern-matches" else " pattern-match" fi
+                    let tail = if hit[2] then ", and `[x, ..rest]` matches a list head and tail" else "" fi
+
+                    "{subjects |> join(" and ")}{verb}{tail}"
+                ))
+
+            fixed(null, ["\\bmemo\\s+(?:=>|is\\b|rec\\b|pure\\b)|\\b(?:rec|pure)\\s+memo\\b|\\bmemo\\s*$"],
+                "`memo` on a function caches its results - a call with arguments equal to an earlier call's returns the cached result, recursive calls included")
+        si
+
+        fixed(type: string?, patterns: string[], text: string) static =>
+            add(type, patterns, _ => text)
+
+        library(name: string, text: string) static =>
+            fixed(name, ["\\b{name}\\b"], text)
+
+        add(type: string?, patterns: string[], note: (bool[]) -> string?) static =>
+            _constructs.add(CONSTRUCT(type, patterns |> map(p => Regex(p)) |> ARRAY(), note))
+
+        // The notes a source wants. A whole-line comment is not code, so it
+        // is skipped and a note never detects itself.
+        scan(source: string) -> LIST[string] static is
+            let lines = Regex.split(source, "\n")
+            let code = lines |> map(line => if Regex.is_match(line, "^\\s*//") then "" else line fi) |> list()
+
+            let declared = SET[string]()
+
+            for line in lines do
+                let found = _declared.match(line)
+
+                if found.success then
+                    declared.add(found.groups[1].value)
+                fi
+            od
+
+            let notes = LIST[string]()
+
+            for construct in _constructs do
+                if let type = construct.type /\ declared.contains(type) then
+                    continue
+                fi
+
+                let hit = construct.patterns |> map(pattern => code |> any(line => pattern.is_match(line))) |> list()
+
+                if !(hit |> any(h => h)) then
+                    continue
+                fi
+
+                if let text = construct.note(hit) then
+                    notes.add(text)
+                fi
+            od
+
+            notes
+        si
+    si
+si

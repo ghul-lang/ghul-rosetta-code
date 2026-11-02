@@ -685,23 +685,23 @@ functions is a lean, not a rule; see "Lean towards functions" above.
 
 ## When a solution carries words, and when it does not
 
-Every solution carries its **construct notes**: a comment block after the
-`use` lines with a note for each ghūl construct in the source that a reader
-from another language may not know - `T{}`, `T[]`, the `LIST`, `SET`, `MAP`,
-`STACK`, `QUEUE`, `LINKED_LIST` and `ARRAY` types, `list()`, a collection
-constructor ending a pipe, `yield`, `|>`, `~>`, `*` as an argument, `=~` and
-`==`, pattern matching, `memo` - every one that appears, in that fixed order: a
-note comes after the ones whose terms it uses. A solution that declares a type
-named like one of those library types gets no note for it, as the name is its
-own. They are not written by hand:
-`scripts/construct-notes.pl --fix` keeps them current from a fixed table, CI
-checks them, and the wording changes only in that table, so every solution says
-the same thing the same way. Run `--fix` after changing a solution: it replaces
-the whole block, so the notes always match the source. The script finds the
-block as the comment lines after the `use` lines that open with a backtick, so
-a solution's own first comment never opens with one. They say what a construct is, never why it was
-used, and nothing about the algorithm. Beyond them, most solutions carry no
-words, and that is the shape a reader of the wiki expects.
+Every published section lists its **notation**: a note above the code for each
+ghūl construct in the source that a reader from another language may not know -
+`T{}`, `T[]`, the `LIST`, `SET`, `MAP`, `STACK`, `QUEUE`, `LINKED_LIST` and
+`ARRAY` types, `list()`, a collection constructor ending a pipe, `yield`, `|>`,
+`~>`, `*` as an argument, `=~` and `==`, pattern matching, `memo` - every one
+that appears, in that fixed order: a note comes after the ones whose terms it
+uses. A solution that declares a type named like one of those library types
+gets no note for it, as the name is its own. The list is derived from the code
+when the section is rendered (`tools/rosetta`, `notation.ghul`), from a fixed
+table whose wording is the only wording, so every solution says the same thing
+the same way. Nothing for it goes in the source: CI fails a source that carries
+a comment block of notes (`scripts/construct-notes.pl --fix` removes one).
+`dotnet run --project tools/rosetta -- notation <file>` shows the list a source
+gets. Where the scan is wrong for a task, `"notation": false` in its `task.json`
+leaves the list out. The notes say what a construct is, never why it was used,
+and nothing about the algorithm. Beyond them, most solutions carry no words, and
+that is the shape a reader of the wiki expects.
 
 When a reader would be left with a question, the first three answers are not
 words at all, in this order:
