@@ -10,15 +10,15 @@ if [ "$(wc -l < "$1")" != "2" ]; then
     exit 1
 fi
 
-if ! grep -q '^primes below 100000  *9592 ' "$1" ; then
-    echo "the first line should count 9592 primes:"
+if ! grep -q '^primes below 1000000  *78498 ' "$1" ; then
+    echo "the first line should count 78498 primes:"
     cat "$1"
 
     exit 1
 fi
 
-if ! grep -q '^primes below 1000000  *78498 ' "$1" ; then
-    echo "the second line should count 78498 primes:"
+if ! grep -q '^primes below 10000000  *664579 ' "$1" ; then
+    echo "the second line should count 664579 primes:"
     cat "$1"
 
     exit 1

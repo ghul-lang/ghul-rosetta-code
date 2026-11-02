@@ -1,17 +1,12 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `if let` pattern-matches
 
-greatest[T: Ghul.Comparable[T]](values: T{}) -> T? =>
-    values |> max_by(value => value)
-
-if let biggest = greatest([3, 9, 4, 1]) then
-    write_line("{biggest}")
+if let greatest = [3, 9, 4, 1] |> max() then
+    write_line("{greatest}")
 fi
 
-if let longest = greatest(["pear", "fig", "quince"]) then
-    write_line("{longest}")
+if let greatest = ["pear", "fig", "quince"] |> max() then
+    write_line("{greatest}")
 fi

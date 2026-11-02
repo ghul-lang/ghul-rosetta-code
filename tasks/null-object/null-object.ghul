@@ -1,30 +1,18 @@
 use default
 
+// `=~` compares values (structural equality)
 // `if let` pattern-matches
 
-is_null(text: string?) -> bool => !text?
+full_name(user: string) -> string? =>
+    if user =~ "alice" then "Alice Liddell" else null fi
 
-is_null(number: int?) -> bool => !number?
+let present = full_name("alice")
+let absent = full_name("bob")
 
-describe(text: string?) -> string =>
-    if let value = text then "\"{value}\"" else "null" fi
+write_line("present is null: {!present?}")
+write_line("absent is null:  {!absent?}")
+write_line("absent, with a fallback: {absent ?? "none"}")
 
-describe(number: int?) -> string =>
-    if let value = number then "{value}" else "null" fi
-
-let text: string? = "hello"
-let nothing: string? = null
-let number: int? = 42
-let no_number: int? = null
-
-write_line("text is null:      {is_null(text)}")
-write_line("nothing is null:   {is_null(nothing)}")
-write_line("number is null:    {is_null(number)}")
-write_line("no_number is null: {is_null(no_number)}")
-write_line("")
-write_line("text:      {describe(text)}")
-write_line("nothing:   {describe(nothing)}")
-write_line("number:    {describe(number)}")
-write_line("no_number: {describe(no_number)}")
-write_line("")
-write_line("nothing, with a fallback: {nothing ?? "none"}")
+if let name = present then
+    write_line("present holds \"{name}\", {name.length} characters")
+fi

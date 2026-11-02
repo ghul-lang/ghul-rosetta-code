@@ -442,6 +442,14 @@ digit_sum(value: int, base: int) -> int is
 si
 ```
 
+## Print a value in the form ghūl already gives it
+
+Where interpolation already writes a value readably - a list as `[1, 2, 3]`, a tuple as
+`(1, "one")`, a list of lists as `[[], [1], [1, 2]]` - print it that way, with `"{value}"`. Code
+that rebuilds the text in another notation, such as braces for a set, is code the reader has to
+read past to get to the answer. A list stands for a set without being written as one. Format the
+output by hand only where the task asks for a form the default does not give.
+
 ## Output that has to line up is ASCII
 
 The wiki's monospace font has no box-drawing, geometric or most mathematical characters, so a

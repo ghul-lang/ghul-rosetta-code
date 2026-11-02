@@ -1,27 +1,22 @@
 use default
 
-roman(n: int) -> string is
-    let values = [
-        1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1
-    ]
-    let symbols = [
-        "M", "CM", "D", "CD", "C", "XC",
-        "L", "XL", "X", "IX", "V", "IV", "I"
-    ]
+// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
+// `if let` pattern-matches
 
-    let numeral = System.Text.StringBuilder()
-    let remaining mut = n
+let numerals = [
+    (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"),
+    (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"),
+    (5, "V"), (4, "IV"), (1, "I")
+]
 
-    for i in 0..values.count do
-        while remaining >= values[i] do
-            numeral.append(symbols[i])
-
-            remaining = remaining - values[i]
-        od
-    od
-
-    return numeral.to_string()
-si
+roman(n: int) -> string =>
+    if let
+        (value, symbol) = numerals |> find(((value, _)) => value <= n)
+    then
+        "{symbol}{roman(n - value)}"
+    else
+        ""
+    fi
 
 for n in [1990, 2008, 1666, 4, 9, 3999] do
     write_line("{n,4} = {roman(n)}")
