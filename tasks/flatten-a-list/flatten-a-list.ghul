@@ -3,7 +3,6 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
@@ -12,21 +11,16 @@ use default
 
 union Nested is
     ATOM(value: int)
-    LIST(items: Nested[])
+    GROUP(items: Nested[])
 si
 
-use Nested.ATOM
-use Nested.LIST
-
-atom(value: int) -> Nested => ATOM(value)
-
-list(items: Nested[]) -> Nested => LIST(items)
+use Nested.*
 
 flatten(node: Nested) -> int{} is
     case node
     when (value): ATOM then
         yield value
-    when (items): LIST then
+    when (items): GROUP then
         for item in items do
             yield in flatten(item)
         od
@@ -36,19 +30,18 @@ si
 show(node: Nested) -> string =>
     case node
     when (value): ATOM then "{value}"
-    when (items): LIST then
-        "[{items |> map(show) |> join(", ")}]"
+    when (items): GROUP then "[{items |> map(show) |> join(", ")}]"
     esac
 
-let input = list([
-    list([atom(1)]),
-    atom(2),
-    list([list([atom(3), atom(4)]), atom(5)]),
-    list([list([list([])])]),
-    list([list([list([atom(6)])])]),
-    atom(7),
-    atom(8),
-    list([])
+let input = GROUP([
+    GROUP([ATOM(1)]),
+    ATOM(2),
+    GROUP([GROUP([ATOM(3), ATOM(4)]), ATOM(5)]),
+    GROUP([GROUP([GROUP([])])]),
+    GROUP([GROUP([GROUP([ATOM(6)])])]),
+    ATOM(7),
+    ATOM(8),
+    GROUP([])
 ])
 
 write_line(show(input))

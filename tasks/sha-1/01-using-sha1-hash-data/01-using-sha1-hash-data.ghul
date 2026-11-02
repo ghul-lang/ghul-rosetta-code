@@ -1,0 +1,19 @@
+use default
+
+use System.Security.Cryptography.SHA1
+
+sha1(text: string) -> string =>
+    System.Convert.to_hex_string_lower(
+        SHA1.hash_data(System.Text.Encoding.utf8.get_bytes(text))
+    )
+
+let messages = [
+    "",
+    "abc",
+    "Rosetta Code",
+    "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
+]
+
+for text in messages do
+    write_line("{sha1(text)}  \"{text}\"")
+od
