@@ -22,7 +22,7 @@ product(lists: int[][]) -> int[][] =>
 
 show(lists: int[][]) =>
     let factors = lists |> map(list => $(list)) |> join(" × ") in
-    write_line("{factors} = {$(product(lists))}")
+    write_line("{factors} = {product(lists)}")
 
 let empty = ARRAY[int]([])
 
