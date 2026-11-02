@@ -125,13 +125,25 @@ namespace Rosetta is
             let lines = Regex.split(source, "\n")
             let code = lines |> map(line => if Regex.is_match(line, "^\\s*//") then "" else line fi) |> list()
 
+            // A union variant named like a library type, `LIST(items: T[])`,
+            // is the solution's own name too.
             let declared = SET[string]()
+            let in_union mut = false
 
             for line in lines do
                 let found = _declared.match(line)
 
                 if found.success then
                     declared.add(found.groups[1].value)
+                    in_union = Regex.is_match(line, "^\\s*union\\b")
+                elif in_union then
+                    let variant = Regex.match(line, "^\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?:\\(|;|$)")
+
+                    if Regex.is_match(line, "^si\\b") then
+                        in_union = false
+                    elif variant.success then
+                        declared.add(variant.groups[1].value)
+                    fi
                 fi
             od
 
