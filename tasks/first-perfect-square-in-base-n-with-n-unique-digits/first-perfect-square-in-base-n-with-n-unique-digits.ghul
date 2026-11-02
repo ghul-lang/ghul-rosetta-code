@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let digit_glyphs = "0123456789ABCDEF"
 
 is_pandigital(square: long, base: int) -> bool is

@@ -1,12 +1,6 @@
 use IO.Std
 use default
 
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-// `case ... when` pattern-matches
-
 union Parsed is
     OK(value: double, at: int) default
     BAD(complaint: string)

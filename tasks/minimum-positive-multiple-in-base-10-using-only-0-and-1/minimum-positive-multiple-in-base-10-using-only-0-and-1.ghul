@@ -1,11 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `QUEUE[T]` is a mutable first-in, first-out queue
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 b10(n: int) -> string is
     let parent = repeat(-1, n) |> LIST()
     let digit = repeat('0', n) |> LIST()

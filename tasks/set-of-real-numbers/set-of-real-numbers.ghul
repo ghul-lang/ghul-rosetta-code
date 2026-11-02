@@ -2,10 +2,6 @@ use default
 
 use RealSet = (double) -> bool
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 open_range(low: double, high: double) -> RealSet =>
     value => low < value /\ value < high
 

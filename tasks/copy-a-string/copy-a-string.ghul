@@ -1,7 +1,5 @@
 use default
 
-// `=~` compares values (structural equality) - `==` compares identity
-
 let original = "hello"
 
 let reference = original

@@ -1,9 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality)
-// `if let` pattern-matches
-
 find_mersenne_factor(p: int, limit: int) -> bigint? =>
     (1::limit)
         |> map(k => bigint(2 * k * p + 1))

@@ -5,18 +5,6 @@ use Raster.SHAPES
 use Cell = (row: int, column: int)
 use Shape = Cell[]
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 at(row: int, column: int) -> Cell => (row = row, column = column)
 
 reading_order(a: Cell, b: Cell) -> int =>

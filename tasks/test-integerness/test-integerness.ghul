@@ -2,8 +2,6 @@ use default
 use System.Numerics.Complex
 use System.Globalization.CultureInfo
 
-// `==` compares identity
-
 is_integer(d: decimal) -> bool => d == decimal.truncate(d)
 
 is_integer(x: double) -> bool => double.is_finite(x) /\ x == floor(x)

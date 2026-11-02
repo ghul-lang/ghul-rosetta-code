@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 say(term: string) -> string =>
     term |> group() |> map(run => "{run.count}{run[0]}") |> string()
 

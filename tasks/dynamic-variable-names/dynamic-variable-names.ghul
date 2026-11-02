@@ -1,8 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `MAP[K, V]` is a mutable map from keys to values
-
 let variables = MAP()
 
 write_line("Enter a variable name:")

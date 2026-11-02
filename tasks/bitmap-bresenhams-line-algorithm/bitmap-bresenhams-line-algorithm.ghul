@@ -1,8 +1,6 @@
 use Raster.IMAGE
 use Ghul.Math
 
-// `==` compares identity
-
 let image = IMAGE(400, 400)
 
 line(from_x: int, from_y: int, to_x: int, to_y: int) is

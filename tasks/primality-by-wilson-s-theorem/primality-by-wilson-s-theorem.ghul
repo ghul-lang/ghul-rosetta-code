@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 factorial_mod(n: long, m: long) -> long =>
     (1L::n) |> reduce(1L, (product, k) => product * k % m)
 

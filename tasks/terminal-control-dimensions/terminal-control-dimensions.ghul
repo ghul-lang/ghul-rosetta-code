@@ -1,7 +1,5 @@
 use default
 
-// `if let` pattern-matches
-
 dimensions() -> (width: int, height: int)? =>
     if IO.Std.is_output_redirected then
         null

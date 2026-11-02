@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let value mut = 0
 
 do

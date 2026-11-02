@@ -1,7 +1,5 @@
 use default
 
-// `if let` pattern-matches
-
 class NODE[T](value: T) is
     next: NODE[T]?
 

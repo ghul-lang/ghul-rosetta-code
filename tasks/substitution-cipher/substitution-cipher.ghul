@@ -1,9 +1,6 @@
 use default
 use IO.File
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality)
-
 let plain_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
 

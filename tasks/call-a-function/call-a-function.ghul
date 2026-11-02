@@ -1,9 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-
 greeting() -> string => "no arguments"
 
 add(left: int, right: int) -> int => left + right

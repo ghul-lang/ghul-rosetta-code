@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 multiplier(a: double, b: double) -> (double) -> double => m => a * b * m
 
 let x = 2.0D

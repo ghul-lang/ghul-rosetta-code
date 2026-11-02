@@ -2,8 +2,6 @@ use default
 use System.Runtime.InteropServices.Marshal
 use System.Runtime.InteropServices.LayoutKind
 
-// `==` compares identity
-
 @System.Runtime.InteropServices.StructLayout(LayoutKind.SEQUENTIAL)
 struct FLAGS(
     carry: byte field,

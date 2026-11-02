@@ -2,9 +2,6 @@ use default
 use System.Diagnostics.Process
 use System.Diagnostics.ProcessStartInfo
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality)
-
 let arguments = System.Environment.get_command_line_args()
 
 if arguments |> skip(1) |> any(argument => argument =~ "child") then

@@ -1,13 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 pritchard(limit: int) -> int{} is
     let wheel = SET([1])
 

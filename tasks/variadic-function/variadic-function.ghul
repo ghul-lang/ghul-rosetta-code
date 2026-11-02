@@ -1,7 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-
 print_all[T](values: T[]) is
     for value in values do
         write_line("{value}")

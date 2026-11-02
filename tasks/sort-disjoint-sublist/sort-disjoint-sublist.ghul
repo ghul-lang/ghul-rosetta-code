@@ -1,12 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 sort_disjoint_sublist(values: LIST[int], indices: Set[int]) is
     let positions = indices |> sort() |> list()
     let picked = positions |> map(i => values[i]) |> sort() |> list()

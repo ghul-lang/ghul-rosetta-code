@@ -1,9 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `==` compares identity
-// `if let` and `case ... when` pattern-match
-
 enum State is
     READY,
     WAITING,

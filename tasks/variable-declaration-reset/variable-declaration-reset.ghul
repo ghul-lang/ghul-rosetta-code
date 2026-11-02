@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let values = [1, 2, 2, 3, 4, 4, 5]
 
 for index in 0..values.count do

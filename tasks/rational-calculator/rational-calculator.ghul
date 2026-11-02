@@ -1,10 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `==` compares identity
-// `if let` pattern-matches
-
 struct Q(top: bigint, bottom: bigint) is
     +(o: Q) -> Q => make(top * o.bottom + o.top * bottom, bottom * o.bottom)
     -(o: Q) -> Q => make(top * o.bottom - o.top * bottom, bottom * o.bottom)

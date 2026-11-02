@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let text =
     "Now is the time for all good men to come to the aid of their country"
 

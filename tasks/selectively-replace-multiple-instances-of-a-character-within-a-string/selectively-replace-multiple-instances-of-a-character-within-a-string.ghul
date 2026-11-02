@@ -1,10 +1,6 @@
 use default
 use System.Text.StringBuilder
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `|> MAP()` reads the whole sequence into a new `MAP`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let replacements = [
     (('a', 1), 'A'),
     (('a', 2), 'B'),

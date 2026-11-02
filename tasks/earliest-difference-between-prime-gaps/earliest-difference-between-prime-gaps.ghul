@@ -1,13 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `if let` pattern-matches
-
 let limit = 20_000_000
 
 let composite = (

@@ -2,12 +2,6 @@ use default
 
 use System.Numerics.BitOperations
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 // 64 cells in a ring, held as the bits of one ulong, starting from a
 // single live cell at bit 0; rule 30 is left XOR (centre OR right).
 

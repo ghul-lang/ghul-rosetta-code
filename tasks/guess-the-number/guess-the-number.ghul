@@ -2,8 +2,6 @@ use default
 use IO.Std.read_line
 use IO.Std.write
 
-// `==` compares identity
-
 // Seeded, so the transcript below reproduces.
 let random = System.Random(7)
 

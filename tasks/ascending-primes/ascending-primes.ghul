@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 ascending_number(mask: int) -> int =>
     1::9
         |> filter(d => (mask >> (d - 1)) & 1 == 1)

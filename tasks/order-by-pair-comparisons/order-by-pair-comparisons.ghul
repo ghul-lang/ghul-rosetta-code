@@ -1,14 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-//  and tail
-
 let questions mut = 0
 
 ask(a: string, b: string) -> int is

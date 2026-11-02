@@ -2,12 +2,6 @@ use default
 
 use COLOUR = (red: ubyte, green: ubyte, blue: ubyte)
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> LIST()` and `|> ARRAY()` read the whole sequence into new collections
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 class BITMAP is
     width: int
     height: int

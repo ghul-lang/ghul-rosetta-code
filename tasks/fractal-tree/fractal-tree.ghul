@@ -1,8 +1,6 @@
 use Raster.IMAGE
 use Ghul.Math
 
-// `==` compares identity
-
 let spread = 0.4D
 let shrink = 0.76D
 

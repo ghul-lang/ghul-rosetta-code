@@ -2,9 +2,6 @@ use default
 
 use Convergents = (h1: double, h2: double, k1: double, k2: double)
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 evaluate(a: (int) -> double, b: (int) -> double, terms: int) -> double is
     let start: Convergents = (a(0), 1.0, 1.0, 0.0)
 

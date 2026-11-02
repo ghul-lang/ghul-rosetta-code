@@ -2,9 +2,6 @@ use default
 use Raster.IMAGE
 use Point = (x: double, y: double)
 
-// `==` compares identity
-// `if let` pattern-matches
-
 -(a: Point, b: Point) -> Point => (x = a.x - b.x, y = a.y - b.y)
 +(a: Point, b: Point) -> Point => (x = a.x + b.x, y = a.y + b.y)
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k)

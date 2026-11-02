@@ -1,11 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 farey(order: int) -> (numerator: int, denominator: int){} is
     let low mut = (numerator = 0, denominator = 1)
     let high mut = (numerator = 1, denominator = order)

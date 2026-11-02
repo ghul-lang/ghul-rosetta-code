@@ -1,14 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `==` compares identity
-
 is_pseudoprime(a: int, x: int) -> bool =>
     let power = mod_pow(long(a), long(x - 1), long(x)) in
     x > 1 /\ !is_prime(x) /\ power == 1L

@@ -1,7 +1,5 @@
 use IO.Std.write_line
 
-// `==` compares identity
-
 survivor(n: int, k: int) -> int =>
     if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi
 

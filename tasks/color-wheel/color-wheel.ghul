@@ -3,8 +3,6 @@ use Raster.IMAGE
 
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
-// `case ... when` pattern-matches
-
 from_hsv(hue: double, saturation: double, value: double) -> Color => (
     let sextant = hue / 60.0D
     let rising = value * (1.0D - saturation)

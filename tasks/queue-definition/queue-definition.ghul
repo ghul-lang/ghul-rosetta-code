@@ -1,9 +1,6 @@
 use default
 use System.InvalidOperationException
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `==` compares identity
-
 class QUEUE[T] is
     _items: LIST[T]
 

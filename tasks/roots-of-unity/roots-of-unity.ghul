@@ -2,10 +2,6 @@ use default
 
 use System.Numerics.Complex
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 roots_of_unity(n: int) -> Complex{} =>
     (0..n)
         |> map(k =>

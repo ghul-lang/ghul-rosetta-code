@@ -1,8 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 entry(args: string[]) is
     write_line("{args.count} arguments:")
 

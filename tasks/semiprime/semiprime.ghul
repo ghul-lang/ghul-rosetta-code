@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 is_semiprime(n: int) -> bool => prime_factors(n).count == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()

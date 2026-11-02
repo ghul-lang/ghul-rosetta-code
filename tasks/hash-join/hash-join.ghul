@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let ages = [
     (age = 27, name = "Jonah"),
     (age = 18, name = "Alan"),

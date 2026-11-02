@@ -1,7 +1,5 @@
 use default
 
-// `=~` compares values (structural equality)
-
 power_mod(base: bigint, exponent: bigint, modulus: bigint) -> bigint =>
     if exponent.is_zero then
         1n % modulus

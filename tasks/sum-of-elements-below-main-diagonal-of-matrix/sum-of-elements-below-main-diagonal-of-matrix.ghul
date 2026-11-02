@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let matrix = [
     [1, 3, 7, 8, 10],
     [2, 4, 16, 14, 4],

@@ -1,8 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `==` compares identity
-
 ask(prompt: string) -> double? is
     write_line(prompt)
 

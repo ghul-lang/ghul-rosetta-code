@@ -3,12 +3,6 @@ use Raster.IMAGE
 
 use Move = (x: int, y: int, d: int, k: int)
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let random = System.Random(7)
 
 let steps = [

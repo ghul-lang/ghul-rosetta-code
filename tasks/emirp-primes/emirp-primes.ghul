@@ -1,10 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 reverse(n: int) -> int is
     walk(m: int, r: int) -> int =>
         if m == 0 then r else walk(m / 10, r * 10 + m % 10) fi

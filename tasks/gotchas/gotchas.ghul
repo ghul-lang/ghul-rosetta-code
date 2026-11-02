@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 // == compares identity, not characters
 let literal = "hello"
 let built = "{"hel"}{"lo"}"

@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 factorial(n: int) -> bigint =>
     1::n |> reduce(1n, (acc, i) => acc * bigint(i))
 

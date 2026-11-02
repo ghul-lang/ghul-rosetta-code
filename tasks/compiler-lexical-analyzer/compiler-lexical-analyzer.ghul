@@ -2,15 +2,6 @@ use default
 
 use Token = (line: int, column: int, name: string, value: string)
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-// `case ... when` pattern-matches
-
 class LEXER is
     _source: string
     _at: int

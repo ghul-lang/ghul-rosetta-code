@@ -1,11 +1,6 @@
 use default
 use System.Random
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let chance = Random(20260921)
 
 one_of_n(n: int) -> int =>

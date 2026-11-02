@@ -1,11 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `QUEUE[T]` is a mutable first-in, first-out queue
-// `==` compares identity
-// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-
 class BIPARTITE(left: int, right: int) is
     _adjacent: LIST[LIST[int]]
     _partner_of_left: LIST[int?]

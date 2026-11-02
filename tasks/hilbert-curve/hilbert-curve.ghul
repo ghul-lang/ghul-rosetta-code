@@ -1,7 +1,5 @@
 use Raster
 
-// `==` compares identity
-
 let order = 6
 let step = 8.0D
 

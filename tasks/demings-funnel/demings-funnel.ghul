@@ -4,13 +4,6 @@ use Raster.IMAGE
 
 use Rule = (name: string, next: (double, double) -> double)
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let dxs = [
     -0.533D, 0.27D, 0.859D, -0.043D, -0.205D, -0.127D, -0.071D, 0.275D,
     1.251D, -0.231D, -0.401D, 0.269D, 0.491D, 0.951D, 1.15D, 0.001D,

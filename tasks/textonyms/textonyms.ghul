@@ -1,13 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `if let` pattern-matches
-
 let keys = "22233344455566677778889999"
 
 digits(word: string) -> string? =>

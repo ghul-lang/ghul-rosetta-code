@@ -1,15 +1,6 @@
 use default
 use Tasks.TASK
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `ARRAY[T]` is a fixed-size, read-only array
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let numbers = [
     12757923L, 12878611L, 12878893L, 12757923L, 15808973L, 15780709L,
     197622519L

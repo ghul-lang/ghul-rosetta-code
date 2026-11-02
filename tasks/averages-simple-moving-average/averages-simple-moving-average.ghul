@@ -1,8 +1,5 @@
 use default
 
-// `QUEUE[T]` is a mutable first-in, first-out queue
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 moving_average(period: int) -> (double) -> double =>
     let window = QUEUE() in
     number is

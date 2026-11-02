@@ -4,15 +4,6 @@ use Raster.SHAPES
 
 use Square = (row: int, column: int)
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let size = 8
 let start = (row = 0, column = 0)
 let goal = (row = 7, column = 7)
