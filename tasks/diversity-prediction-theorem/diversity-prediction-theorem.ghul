@@ -26,5 +26,5 @@ report(truth: double, estimates: double[]) is
     write_line("")
 si
 
-report(49.0D, [48.0D, 47.0D, 51.0D])
-report(49.0D, [48.0D, 47.0D, 51.0D, 42.0D])
+report(49.0, [48.0, 47.0, 51.0])
+report(49.0, [48.0, 47.0, 51.0, 42.0])

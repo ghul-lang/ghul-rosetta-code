@@ -11,7 +11,7 @@ class NODE(name: string, weight: double, own_coverage: double?) is
         if let given = own_coverage then
             given
         elif children.count == 0 then
-            0.0D
+            0.0
         else
             let weighted =
                 children |> sum_by(child => child.weight * child.coverage)
@@ -22,7 +22,7 @@ class NODE(name: string, weight: double, own_coverage: double?) is
 
     rows(depth: int) -> string{} is
         let label = "{string(' ', depth * 4)}{name}"
-        let shown_weight = if weight =~ 1.0D then "" else "{weight}" fi
+        let shown_weight = if weight =~ 1.0 then "" else "{weight}" fi
         let shown_coverage =
             if let given = own_coverage then
                 "{given}"
@@ -94,7 +94,7 @@ parse(line: string) -> (depth: int, node: NODE) => (
 
     let weight =
         if weight_text.length > 0 then double.parse(weight_text)
-        else 1.0D
+        else 1.0
         fi
     let coverage =
         if coverage_text.length > 0 then

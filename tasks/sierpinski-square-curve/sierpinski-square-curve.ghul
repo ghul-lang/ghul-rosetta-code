@@ -1,7 +1,7 @@
 use Raster
 
 let order = 4
-let step = 8.0D
+let step = 8.0
 
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)
@@ -14,46 +14,46 @@ corner(depth: int) is
     corner(depth - 1)
 
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
     pen.forward(step)
-    pen.turn(90.0D)
+    pen.turn(90.0)
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
 
     corner(depth - 1)
 
     pen.forward(step)
-    pen.turn(90.0D)
+    pen.turn(90.0)
     pen.forward(step)
-    pen.turn(90.0D)
+    pen.turn(90.0)
 
     corner(depth - 1)
 
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
     pen.forward(step)
-    pen.turn(90.0D)
+    pen.turn(90.0)
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
 
     corner(depth - 1)
 si
 
-image.view(0.0D, 0.0D, 540.0D, 540.0D)
+image.view(0.0, 0.0, 540.0, 540.0)
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 
-pen.move_to(266.0D, 26.0D)
+pen.move_to(266.0, 26.0)
 
 pen.forward(step)
-pen.turn(90.0D)
+pen.turn(90.0)
 
 corner(order)
 
 pen.forward(step)
-pen.turn(90.0D)
+pen.turn(90.0)
 pen.forward(step)
-pen.turn(90.0D)
+pen.turn(90.0)
 
 corner(order)
 

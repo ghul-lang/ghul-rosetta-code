@@ -43,11 +43,11 @@ show(shape: Polygon) -> string =>
     "[{shape |> map(p => "[{p.x}, {p.y}]") |> join(", ")}]"
 
 let polygon: Polygon = [
-    P(0.0D, 0.0D), P(0.0D, 2.0D), P(1.0D, 4.0D),
-    P(2.0D, 2.0D), P(2.0D, 0.0D)
+    P(0.0, 0.0), P(0.0, 2.0), P(1.0, 4.0),
+    P(2.0, 2.0), P(2.0, 0.0)
 ]
-let first = rectangle(4.0D, 0.0D, 2.0D, 2.0D)
-let second = rectangle(1.0D, 0.0D, 8.0D, 2.0D)
+let first = rectangle(4.0, 0.0, 2.0, 2.0)
+let second = rectangle(1.0, 0.0, 8.0, 2.0)
 
 write_line("polygon = {show(polygon)}")
 write_line("rect1   = (4, 0, 2, 2) => {show(first)}")
@@ -64,12 +64,12 @@ si
 
 let image = IMAGE(480, 180)
 
-image.view(-0.5D, -2.2D, 21.0D, 5.85D)
+image.view(-0.5, -2.2, 21.0, 5.85)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 for (i, rect) in [first, second] |> index() do
-    let dx = 11.0D * double(i)
+    let dx = 11.0 * double(i)
 
     image.color(60ub, 110ub, 200ub)
     outline(image, polygon, dx)
@@ -85,7 +85,7 @@ for (i, rect) in [first, second] |> index() do
         fi
 
     image.color(60ub, 60ub, 60ub)
-    image.text(dx + 4.5D, -1.4D, 13.0D, verdict, Anchor.CENTER)
+    image.text(dx + 4.5, -1.4, 13.0, verdict, Anchor.CENTER)
 od
 
 image.write("overlap.png")

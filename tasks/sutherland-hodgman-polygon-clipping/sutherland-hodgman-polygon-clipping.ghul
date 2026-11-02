@@ -4,16 +4,16 @@ use Raster.IMAGE
 use Point = (x: double, y: double)
 
 let subject = [
-    (x = 50.0D, y = 150.0D), (x = 200.0D, y = 50.0D),
-    (x = 350.0D, y = 150.0D), (x = 350.0D, y = 300.0D),
-    (x = 250.0D, y = 300.0D), (x = 200.0D, y = 250.0D),
-    (x = 150.0D, y = 350.0D), (x = 100.0D, y = 250.0D),
-    (x = 100.0D, y = 200.0D)
+    (x = 50.0, y = 150.0), (x = 200.0, y = 50.0),
+    (x = 350.0, y = 150.0), (x = 350.0, y = 300.0),
+    (x = 250.0, y = 300.0), (x = 200.0, y = 250.0),
+    (x = 150.0, y = 350.0), (x = 100.0, y = 250.0),
+    (x = 100.0, y = 200.0)
 ]
 
 let window = [
-    (x = 100.0D, y = 100.0D), (x = 300.0D, y = 100.0D),
-    (x = 300.0D, y = 300.0D), (x = 100.0D, y = 300.0D)
+    (x = 100.0, y = 100.0), (x = 300.0, y = 100.0),
+    (x = 300.0, y = 300.0), (x = 100.0, y = 300.0)
 ]
 
 side(at: Point, from: Point, to: Point) -> double =>
@@ -45,8 +45,8 @@ clip(polygon: Point[], from: Point, to: Point) -> LIST[Point] is
         let previous = polygon[(index + polygon.count - 1) % polygon.count]
         let at = polygon[index]
 
-        let here = side(at, from, to) >= 0.0D
-        let before = side(previous, from, to) >= 0.0D
+        let here = side(at, from, to) >= 0.0
+        let before = side(previous, from, to) >= 0.0
 
         if here != before then
             extend(kept, crossing(previous, at, from, to))
@@ -82,14 +82,14 @@ od
 
 let image = IMAGE(520, 520)
 
-image.view(20.0D, 20.0D, 380.0D, 380.0D)
+image.view(20.0, 20.0, 380.0, 380.0)
 
 closed(polygon: Point[]) -> Point[] => polygon ++ [polygon[0]] |> list()
 
 image.color(210ub, 232ub, 214ub)
 image.fill(clipped)
 
-image.stroke(2.0D)
+image.stroke(2.0)
 
 image.color(180ub, 60ub, 60ub)
 image.line(closed(subject))
@@ -98,11 +98,11 @@ image.color(70ub, 70ub, 180ub)
 image.line(closed(window))
 
 image.color(30ub, 120ub, 60ub)
-image.stroke(2.6D)
+image.stroke(2.6)
 image.line(closed(clipped))
 
 for at in clipped do
-    image.dot(at.x, at.y, 4.0D)
+    image.dot(at.x, at.y, 4.0)
 od
 
 image.write("clipped.png")

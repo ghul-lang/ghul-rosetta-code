@@ -1,10 +1,10 @@
 use default
 
-let earth_radius_km = 6372.8D
+let earth_radius_km = 6372.8
 
-radians(degrees: double) -> double => degrees * pi / 180.0D
+radians(degrees: double) -> double => degrees * pi / 180.0
 
-haversine(theta: double) -> double => sin(theta / 2.0D) * sin(theta / 2.0D)
+haversine(theta: double) -> double => sin(theta / 2.0) * sin(theta / 2.0)
 
 great_circle_distance(
     (latitude_1, longitude_1): (double, double),
@@ -17,10 +17,10 @@ great_circle_distance(
         cos(radians(latitude_2)) *
         haversine(radians(longitude_2 - longitude_1))
     in
-    2.0D * radius * asin(sqrt(chord))
+    2.0 * radius * asin(sqrt(chord))
 
-let nashville = (36.12D, -86.67D)
-let los_angeles = (33.94D, -118.40D)
+let nashville = (36.12, -86.67)
+let los_angeles = (33.94, -118.40)
 
 let distance = great_circle_distance(
     nashville,

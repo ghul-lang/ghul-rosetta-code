@@ -61,11 +61,11 @@ write_line("hull of {hull.count}: {spelled}")
 let image = IMAGE(600, 600)
 
 image.color(90ub, 90ub, 100ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 let axes = AXES(image)
 
-axes.fit(-11.0D, -11.0D, 21.0D, 21.0D)
+axes.fit(-11.0, -11.0, 21.0, 21.0)
 axes.draw()
 
 let corners = LIST(hull |> map(at => (x = double(at.x), y = double(at.y))))
@@ -76,17 +76,17 @@ image.fill(corners)
 corners.add(corners[0])
 
 image.color(40ub, 92ub, 168ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(corners)
 
 for at in points do
     image.color(60ub, 60ub, 70ub)
-    image.dot(double(at.x), double(at.y), 3.5D)
+    image.dot(double(at.x), double(at.y), 3.5)
 od
 
 for at in hull do
     image.color(216ub, 64ub, 48ub)
-    image.dot(double(at.x), double(at.y), 5.0D)
+    image.dot(double(at.x), double(at.y), 5.0)
 od
 
 image.write("hull.png")

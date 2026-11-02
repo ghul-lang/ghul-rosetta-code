@@ -1,7 +1,7 @@
 use Raster
 
 let order = 3
-let step = 18.0D
+let step = 18.0
 
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)
@@ -38,13 +38,13 @@ peano(depth: int, angle: double) is
     peano(depth - 1, angle)
 si
 
-image.view(0.0D, 0.0D, 540.0D, 540.0D)
+image.view(0.0, 0.0, 540.0, 540.0)
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 
-pen.move_to(24.0D, 24.0D)
+pen.move_to(24.0, 24.0)
 
-peano(order, 90.0D)
+peano(order, 90.0)
 
 image.write("peano.png")
 

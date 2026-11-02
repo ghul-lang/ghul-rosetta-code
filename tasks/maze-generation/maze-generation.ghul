@@ -81,7 +81,7 @@ wall(from_x: int, from_y: int, to_x: int, to_y: int) is
 si
 
 image.color(30ub, 40ub, 90ub)
-image.stroke(2.4D)
+image.stroke(2.4)
 
 wall(0, 0, columns, 0)
 wall(0, rows, columns, rows)

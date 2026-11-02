@@ -3,7 +3,7 @@ use Raster.IMAGE
 use Point = (x: double, y: double)
 use Ring = Point[]
 
-let epsilon = 0.000001D
+let epsilon = 0.000001
 
 crosses(point: Point, from: Point, to: Point) -> bool is
     let (low, high) = if from.y < to.y then (from, to) else (to, from) fi
@@ -29,14 +29,14 @@ crosses(point: Point, from: Point, to: Point) -> bool is
         if low.x != high.x then
             (high.y - low.y) / (high.x - low.x)
         else
-            0.0D
+            0.0
         fi
 
     let point_slope =
         if low.x != point.x then
             (y - low.y) / (point.x - low.x)
         else
-            0.0D
+            0.0
         fi
 
     return
@@ -62,20 +62,20 @@ ring(corners: (double, double)[]) -> Ring =>
 
 let square = [
     ring([
-        (0.0D, 0.0D), (10.0D, 0.0D), (10.0D, 10.0D),
-        (0.0D, 10.0D)
+        (0.0, 0.0), (10.0, 0.0), (10.0, 10.0),
+        (0.0, 10.0)
     ])
 ]
 
 let square_hole = [
     square[0],
-    ring([(2.5D, 2.5D), (7.5D, 2.5D), (7.5D, 7.5D), (2.5D, 7.5D)])
+    ring([(2.5, 2.5), (7.5, 2.5), (7.5, 7.5), (2.5, 7.5)])
 ]
 
 let hexagon = [
     ring([
-        (3.0D, 0.0D), (7.0D, 0.0D), (10.0D, 5.0D), (7.0D, 10.0D),
-        (3.0D, 10.0D), (0.0D, 5.0D)
+        (3.0, 0.0), (7.0, 0.0), (10.0, 5.0), (7.0, 10.0),
+        (3.0, 10.0), (0.0, 5.0)
     ])
 ]
 
@@ -86,9 +86,9 @@ let shapes = [
 ]
 
 let probes = [
-    (x = 5.0D, y = 5.0D), (x = 5.0D, y = 8.0D), (x = -10.0D, y = 5.0D),
-    (x = 0.0D, y = 5.0D), (x = 10.0D, y = 5.0D), (x = 8.0D, y = 5.0D),
-    (x = 10.0D, y = 10.0D)
+    (x = 5.0, y = 5.0), (x = 5.0, y = 8.0), (x = -10.0, y = 5.0),
+    (x = 0.0, y = 5.0), (x = 10.0, y = 5.0), (x = 8.0, y = 5.0),
+    (x = 10.0, y = 10.0)
 ]
 
 for (name, rings) in shapes do
@@ -103,9 +103,9 @@ od
 
 let image = IMAGE(480, 360)
 
-image.view(-1.0D, -1.0D, 11.0D, 11.0D)
+image.view(-1.0, -1.0, 11.0, 11.0)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 image.color(40ub, 40ub, 60ub)
 
@@ -116,8 +116,8 @@ od
 for step_x in 0..49 do
     for step_y in 0..49 do
         let probe = (
-            x = -0.5D + double(step_x) * 0.22D,
-            y = -0.5D + double(step_y) * 0.22D
+            x = -0.5 + double(step_x) * 0.22,
+            y = -0.5 + double(step_y) * 0.22
         )
 
         if inside(probe, square_hole) then
@@ -126,7 +126,7 @@ for step_x in 0..49 do
             image.color(200ub, 90ub, 70ub)
         fi
 
-        image.dot(probe.x, probe.y, 1.6D)
+        image.dot(probe.x, probe.y, 1.6)
     od
 od
 

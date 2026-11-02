@@ -1,7 +1,7 @@
 use Raster
 
 let order = 12
-let step = 6.0D
+let step = 6.0
 
 let image = IMAGE(620, 440)
 let pen = TURTLE(image)
@@ -12,17 +12,17 @@ dragon(depth: int, angle: double) is
         return
     fi
 
-    dragon(depth - 1, 90.0D)
+    dragon(depth - 1, 90.0)
     pen.turn(angle)
-    dragon(depth - 1, -90.0D)
+    dragon(depth - 1, -90.0)
 si
 
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
-pen.move_to(468.0D, 150.0D)
+pen.move_to(468.0, 150.0)
 
-dragon(order, 90.0D)
+dragon(order, 90.0)
 
 image.write("dragon.png")
 

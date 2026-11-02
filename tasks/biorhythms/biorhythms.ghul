@@ -23,7 +23,7 @@ date(text: string) -> DateTime =>
 show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
 
 level(position: int, length: int) -> double =>
-    sin(2.0D * pi * double(position) / double(length))
+    sin(2.0 * pi * double(position) / double(length))
 
 report(birth: DateTime, target: DateTime) is
     let days = int((target - birth).total_days)
@@ -34,14 +34,14 @@ report(birth: DateTime, target: DateTime) is
         let position = days % length
         let quadrant = position * 4 / length
         let value = level(position, length)
-        let percentage = floor(value * 1000.0D) / 10.0D
+        let percentage = floor(value * 1000.0) / 10.0
 
         let description =
-            if percentage > 95.0D then
+            if percentage > 95.0 then
                 "peak"
-            elif percentage < -95.0D then
+            elif percentage < -95.0 then
                 "valley"
-            elif abs(percentage) < 5.0D then
+            elif abs(percentage) < 5.0 then
                 "critical transition"
             else
                 let
@@ -69,13 +69,13 @@ let wide = double(span)
 
 let image = IMAGE(480, 240)
 
-image.view(-wide - 1.0D, -1.55D, wide + 1.0D, 1.75D)
+image.view(-wide - 1.0, -1.55, wide + 1.0, 1.75)
 image.clear(252ub, 250ub, 245ub)
 
 image.color(200ub, 200ub, 205ub)
-image.stroke(1.0D)
-image.line(-wide, 0.0D, wide, 0.0D)
-image.line(0.0D, -1.2D, 0.0D, 1.2D)
+image.stroke(1.0)
+image.line(-wide, 0.0, wide, 0.0)
+image.line(0.0, -1.2, 0.0, 1.2)
 
 let colors = [
     (200ub, 50ub, 40ub), (40ub, 130ub, 60ub), (40ub, 80ub, 180ub)
@@ -85,21 +85,21 @@ for (i, (label, length)) in cycles |> index() do
     let (r, g, b) = colors[i]
 
     image.color(r, g, b)
-    image.stroke(2.0D)
+    image.stroke(2.0)
     image.line(
         (-span * 4::span * 4)
             |> map(q =>
-                let day = double(q) / 4.0D in
+                let day = double(q) / 4.0 in
                 let turn = (double(center) + day) / double(length) in
-                (x = day, y = sin(2.0D * pi * turn))
+                (x = day, y = sin(2.0 * pi * turn))
             )
             |> list()
     )
-    image.text(-wide + 10.0D * double(i), 1.45D, 13.0D, label)
+    image.text(-wide + 10.0 * double(i), 1.45, 13.0, label)
 od
 
 image.color(60ub, 60ub, 60ub)
-image.text(0.0D, -1.45D, 12.0D, show(target), Anchor.CENTER)
+image.text(0.0, -1.45, 12.0, show(target), Anchor.CENTER)
 
 image.write("biorhythms.png")
 

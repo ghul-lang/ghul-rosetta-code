@@ -41,22 +41,22 @@ let shapes = [
     (
         name = "A",
         corners = polygon([
-            (0.0D, 0.0D), (0.0D, 2.0D), (1.0D, 4.0D),
-            (2.0D, 2.0D), (2.0D, 0.0D)
+            (0.0, 0.0), (0.0, 2.0), (1.0, 4.0),
+            (2.0, 2.0), (2.0, 0.0)
         ])
     ),
     (
         name = "B",
         corners = polygon([
-            (4.0D, 0.0D), (4.0D, 2.0D), (5.0D, 4.0D),
-            (6.0D, 2.0D), (6.0D, 0.0D)
+            (4.0, 0.0), (4.0, 2.0), (5.0, 4.0),
+            (6.0, 2.0), (6.0, 0.0)
         ])
     ),
     (
         name = "C",
         corners = polygon([
-            (1.0D, 0.0D), (1.0D, 2.0D), (5.0D, 4.0D),
-            (9.0D, 2.0D), (9.0D, 0.0D)
+            (1.0, 0.0), (1.0, 2.0), (5.0, 4.0),
+            (9.0, 2.0), (9.0, 0.0)
         ])
     )
 ]
@@ -78,7 +78,7 @@ od
 
 let image = IMAGE(480, 300)
 
-image.view(-1.0D, -1.0D, 10.0D, 5.0D)
+image.view(-1.0, -1.0, 10.0, 5.0)
 image.clear(252ub, 250ub, 245ub)
 
 let drawing = SHAPES()
@@ -106,7 +106,7 @@ image.fill(drawing)
 
 for shape in shapes do
     image.color(40ub, 40ub, 60ub)
-    image.text(shape.corners[0].x + 0.1D, 4.2D, 16.0D, shape.name)
+    image.text(shape.corners[0].x + 0.1, 4.2, 16.0, shape.name)
 od
 
 image.write("polygons.png")

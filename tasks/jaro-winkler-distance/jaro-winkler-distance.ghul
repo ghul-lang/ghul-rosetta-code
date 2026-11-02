@@ -15,7 +15,7 @@ let misspelled = [
 
 jaro_similarity(left: string, right: string) -> double is
     if left.length == 0 /\ right.length == 0 then
-        return 1.0D
+        return 1.0
     fi
 
     let window = (max(left.length, right.length) / 2) - 1
@@ -54,15 +54,15 @@ jaro_similarity(left: string, right: string) -> double is
     od
 
     if matches == 0 then
-        return 0.0D
+        return 0.0
     fi
 
     let m = double(matches)
-    let matched = (m - cast(mismatches) / 2.0D) / m
+    let matched = (m - cast(mismatches) / 2.0) / m
     let left_rate = m / cast(left.length)
     let right_rate = m / cast(right.length)
 
-    return (left_rate + right_rate + matched) / 3.0D
+    return (left_rate + right_rate + matched) / 3.0
 si
 
 jaro_winkler_distance(left: string, right: string) -> double => (
@@ -76,9 +76,9 @@ jaro_winkler_distance(left: string, right: string) -> double => (
         prefix = prefix + 1
     od
 
-    let boost = cast(prefix) * 0.1D * (1.0D - similarity)
+    let boost = cast(prefix) * 0.1 * (1.0 - similarity)
 
-    1.0D - (similarity + boost)
+    1.0 - (similarity + boost)
 )
 
 for word in misspelled do

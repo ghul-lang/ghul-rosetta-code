@@ -9,7 +9,7 @@ union Half(a: Point, b: Point, c: Point) is
     FAT
 si
 
-let phi = (1.0D + sqrt(5.0D)) / 2.0D
+let phi = (1.0 + sqrt(5.0)) / 2.0
 
 towards(from: Point, to: Point) -> Point => (
     x = from.x + (to.x - from.x) / phi,
@@ -33,12 +33,12 @@ split(tile: Half) -> Half{} is
 si
 
 spoke(index: int) -> Half => (
-    let low = double(2 * index - 1) * pi / 10.0D
-    let high = double(2 * index + 1) * pi / 10.0D
+    let low = double(2 * index - 1) * pi / 10.0
+    let high = double(2 * index + 1) * pi / 10.0
 
     let first = (x = cos(low), y = sin(low))
     let second = (x = cos(high), y = sin(high))
-    let middle = (x = 0.0D, y = 0.0D)
+    let middle = (x = 0.0, y = 0.0)
 
     if index % 2 == 0 then
         Half.THIN(middle, second, first)
@@ -55,8 +55,8 @@ od
 
 let image = IMAGE(660, 440)
 
-image.view(-0.62D, -0.4133D, 0.62D, 0.4133D)
-image.stroke(1.0D)
+image.view(-0.62, -0.4133, 0.62, 0.4133)
+image.stroke(1.0)
 
 let shapes = SHAPES()
 

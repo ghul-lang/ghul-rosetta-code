@@ -8,11 +8,11 @@ let steps = 240
 around(radius: double) -> POINT[] =>
     (0..steps + 1)
         |> map(step => (
-            let angle = 2.0D * pi * double(step) / double(steps)
+            let angle = 2.0 * pi * double(step) / double(steps)
 
             (
-                x = 150.0D + radius * cos(angle),
-                y = 150.0D + radius * sin(angle)
+                x = 150.0 + radius * cos(angle),
+                y = 150.0 + radius * sin(angle)
             )
         ))
         |> list()
@@ -20,10 +20,10 @@ around(radius: double) -> POINT[] =>
 let image = IMAGE(300, 300)
 
 image.color(0ub, 0ub, 0ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
-image.line(around(120.0D))
-image.line(around(50.0D))
+image.line(around(120.0))
+image.line(around(50.0))
 
 image.color(230ub, 180ub, 60ub)
 image.flood_fill(150, 90)

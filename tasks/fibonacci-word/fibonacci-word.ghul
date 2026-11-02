@@ -21,7 +21,7 @@ entropy(word: string) -> double =>
     word
         |> group_by(c => c)
         |> map(group => double(group.value.count) / total)
-        |> reduce(0.0D, (bits, probability) =>
+        |> reduce(0.0, (bits, probability) =>
             bits - probability * log2(probability)
         )
 

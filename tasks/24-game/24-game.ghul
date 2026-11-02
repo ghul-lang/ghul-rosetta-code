@@ -6,7 +6,7 @@ union Parsed is
     BAD(complaint: string)
 si
 
-let target = 24.0D
+let target = 24.0
 
 skip_spaces(text: string, at: int) -> int =>
     if at < text.length /\ text[at] == ' ' then
@@ -125,7 +125,7 @@ judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
         when parsed: Parsed.OK then
             if skip_spaces(entered, parsed.at) < entered.length then
                 (told = "the expression does not end there", solved = false)
-            elif abs(parsed.value - target) < 0.000001D then
+            elif abs(parsed.value - target) < 0.000001 then
                 (told = "that is 24, well done", solved = true)
             else
                 (

@@ -97,10 +97,10 @@ to_grey(image: BITMAP) -> BITMAP is
 
     for at in 0..image.width * image.height do
         let level = ubyte(
-            0.2126D * double(image.bytes[at * 3]) +
-            0.7152D * double(image.bytes[at * 3 + 1]) +
-            0.0722D * double(image.bytes[at * 3 + 2]) +
-            0.5D
+            0.2126 * double(image.bytes[at * 3]) +
+            0.7152 * double(image.bytes[at * 3 + 1]) +
+            0.0722 * double(image.bytes[at * 3 + 2]) +
+            0.5
         )
 
         grey.bytes[at * 3] = level

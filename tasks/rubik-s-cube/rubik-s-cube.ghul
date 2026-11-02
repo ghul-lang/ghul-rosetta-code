@@ -6,7 +6,7 @@ use Point = (x: double, y: double, z: double)
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
 let size = 300
-let tilt = 0.45D
+let tilt = 0.45
 
 plus(a: Point, b: Point) -> Point => (
     x = a.x + b.x,
@@ -26,17 +26,17 @@ rgb(r: int, g: int, b: int) -> Color => (
     blue = ubyte(b)
 )
 
-let x_axis = (x = 1.0D, y = 0.0D, z = 0.0D)
-let y_axis = (x = 0.0D, y = 1.0D, z = 0.0D)
-let z_axis = (x = 0.0D, y = 0.0D, z = 1.0D)
+let x_axis = (x = 1.0, y = 0.0, z = 0.0)
+let y_axis = (x = 0.0, y = 1.0, z = 0.0)
+let z_axis = (x = 0.0, y = 0.0, z = 1.0)
 
 let faces: (normal: Point, u: Point, v: Point, color: Color)[] = [
     (y_axis, x_axis, z_axis, rgb(245, 245, 245)),
-    (times(y_axis, -1.0D), x_axis, z_axis, rgb(255, 213, 0)),
+    (times(y_axis, -1.0), x_axis, z_axis, rgb(255, 213, 0)),
     (z_axis, x_axis, y_axis, rgb(0, 155, 72)),
-    (times(z_axis, -1.0D), x_axis, y_axis, rgb(0, 70, 173)),
+    (times(z_axis, -1.0), x_axis, y_axis, rgb(0, 70, 173)),
     (x_axis, y_axis, z_axis, rgb(183, 18, 52)),
-    (times(x_axis, -1.0D), y_axis, z_axis, rgb(255, 88, 0))
+    (times(x_axis, -1.0), y_axis, z_axis, rgb(255, 88, 0))
 ]
 
 turned(p: Point, angle: double) -> Point =>
@@ -54,7 +54,7 @@ square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
     x: double,
     y: double
 )[] =>
-    [(-1.0D, -1.0D), (1.0D, -1.0D), (1.0D, 1.0D), (-1.0D, 1.0D)]
+    [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(
                 plus(center, plus(times(u, a * half), times(v, b * half))),
@@ -71,10 +71,10 @@ draw(image: IMAGE, angle: double) is
     let stickers = SHAPES()
 
     for face in faces do
-        if turned(face.normal, angle).z > 0.0D then
-            let center = times(face.normal, 1.5D)
+        if turned(face.normal, angle).z > 0.0 then
+            let center = times(face.normal, 1.5)
 
-            let outline = square(center, face.u, face.v, 1.5D, angle)
+            let outline = square(center, face.u, face.v, 1.5, angle)
 
             body.add(outline, 20ub, 20ub, 20ub)
 
@@ -89,7 +89,7 @@ draw(image: IMAGE, angle: double) is
                     )
 
                     stickers.add(
-                        square(at, face.u, face.v, 0.42D, angle),
+                        square(at, face.u, face.v, 0.42, angle),
                         face.color
                     )
                 od
@@ -103,9 +103,9 @@ si
 
 let image = IMAGE(size, size)
 
-image.view(-2.8D, -2.8D, 2.8D, 2.8D)
+image.view(-2.8, -2.8, 2.8, 2.8)
 
-draw(image, -pi / 5.0D)
+draw(image, -pi / 5.0)
 
 write_line("a solved cube, white on top, green facing, red to the right")
 

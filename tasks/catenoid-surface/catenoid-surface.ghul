@@ -14,8 +14,8 @@ use Quad = VEC[]
 
 let around = 48
 let along = 16
-let yaw = 0.5D
-let pitch = 0.45D
+let yaw = 0.5
+let pitch = 0.45
 
 surface(u: double, v: double) -> VEC =>
     VEC(cosh(v) * cos(u), cosh(v) * sin(u), v)
@@ -33,8 +33,8 @@ turned(p: VEC) -> VEC =>
 
 corner(i: int, j: int) -> VEC =>
     let
-        u = 2.0D * pi * double(i) / double(around),
-        v = -1.2D + 2.4D * double(j) / double(along)
+        u = 2.0 * pi * double(i) / double(around),
+        v = -1.2 + 2.4 * double(j) / double(along)
     in
         turned(surface(u, v))
 
@@ -42,8 +42,8 @@ depth(quad: Quad) -> double => quad |> sum_by(c => c.z)
 
 brightness(quad: Quad) -> double =>
     let n = (quad[1] - quad[0]) × (quad[3] - quad[0]) in
-    if n.length == 0.0D then 0.5D
-    else 0.25D + 0.75D * abs(n.z) / n.length
+    if n.length == 0.0 then 0.5
+    else 0.25 + 0.75 * abs(n.z) / n.length
     fi
 
 quad(i: int, j: int) -> Quad => [
@@ -57,18 +57,18 @@ let quads = [quad(i, j) for i in 0..around for j in 0..along]
 
 let image = IMAGE(360, 360)
 
-image.view(-2.2D, -2.2D, 2.2D, 2.2D)
+image.view(-2.2, -2.2, 2.2, 2.2)
 image.clear(248ub, 248ub, 244ub)
-image.stroke(0.6D)
+image.stroke(0.6)
 
 for q in quads do
     let light = brightness(q)
     let outline = q |> map(p => (x = p.x, y = p.y)) |> list()
 
     image.color(
-        ubyte(60.0D * light),
-        ubyte(150.0D * light),
-        ubyte(200.0D * light)
+        ubyte(60.0 * light),
+        ubyte(150.0 * light),
+        ubyte(200.0 * light)
     )
     image.fill(outline)
 

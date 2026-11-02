@@ -10,7 +10,7 @@ let shifts = [
 let sines =
     0..64
         |> map(step =>
-            uint(floor(abs(sin(double(step + 1))) * 4294967296.0D))
+            uint(floor(abs(sin(double(step + 1))) * 4294967296.0))
         )
         |> list()
 

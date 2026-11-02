@@ -9,15 +9,15 @@ pentagon() -> IMAGE => (
 
     image.clear(255ub, 255ub, 255ub)
     image.color(0ub, 0ub, 0ub)
-    image.stroke(2.0D)
+    image.stroke(2.0)
     image.line(
         (0::5)
             |> map(i =>
                 let
-                    a = pi * (0.5D + 0.4D * double(i)),
-                    x = 100.0D + 70.0D * cos(a)
+                    a = pi * (0.5 + 0.4 * double(i)),
+                    x = 100.0 + 70.0 * cos(a)
                 in
-                    (x = x, y = 105.0D - 70.0D * sin(a))
+                    (x = x, y = 105.0 - 70.0 * sin(a))
             )
             |> list()
     )
@@ -28,8 +28,8 @@ pentagon() -> IMAGE => (
 pentagon().write("pentagon.png")
 
 let source = IMAGE.read("pentagon.png")
-let diagonal = sqrt(2.0D) * double(size) / 2.0D
-let distances = int(2.0D * diagonal) + 1
+let diagonal = sqrt(2.0) * double(size) / 2.0
+let distances = int(2.0 * diagonal) + 1
 
 let votes = repeat(0, angles * distances) |> LIST()
 
@@ -89,7 +89,7 @@ let space = IMAGE(angles, distances)
 for r in 0..distances do
     for t in 0..angles do
         let level = double(votes[r * angles + t]) / double(most)
-        let shade = ubyte(255.0D * sqrt(level))
+        let shade = ubyte(255.0 * sqrt(level))
 
         space.set_pixel(t, distances - 1 - r, shade, shade, shade)
     od

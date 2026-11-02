@@ -13,8 +13,8 @@ use Body = (
 )
 
 let size = 160
-let years = 8.0D
-let shown = 2.2D
+let years = 8.0
+let shown = 2.2
 let frames = 88
 
 rgb(r: int, g: int, b: int) -> Color => (
@@ -23,19 +23,19 @@ rgb(r: int, g: int, b: int) -> Color => (
     blue = ubyte(b)
 )
 
-let earth: Body = ("Earth", 1.0D, 1.0D, 100.46D, rgb(60, 110, 220))
+let earth: Body = ("Earth", 1.0, 1.0, 100.46, rgb(60, 110, 220))
 
 let bodies: Body[] = [
-    ("Sun", 0.0D, 1.0D, 0.0D, rgb(255, 190, 40)),
-    ("Mercury", 0.387D, 0.2408D, 252.25D, rgb(170, 170, 170)),
-    ("Venus", 0.723D, 0.6152D, 181.98D, rgb(230, 200, 120)),
-    ("Mars", 1.524D, 1.8809D, 355.45D, rgb(220, 70, 50))
+    ("Sun", 0.0, 1.0, 0.0, rgb(255, 190, 40)),
+    ("Mercury", 0.387, 0.2408, 252.25, rgb(170, 170, 170)),
+    ("Venus", 0.723, 0.6152, 181.98, rgb(230, 200, 120)),
+    ("Mars", 1.524, 1.8809, 355.45, rgb(220, 70, 50))
 ]
 
 around_sun(body: Body, year: double) -> (x: double, y: double) =>
     let
-        turns = body.start / 360.0D + year / body.period,
-        angle = 2.0D * pi * turns
+        turns = body.start / 360.0 + year / body.period,
+        angle = 2.0 * pi * turns
     in
         (x = body.radius * cos(angle), y = body.radius * sin(angle))
 
@@ -54,7 +54,7 @@ turning(body: Body, from: double, to: double) -> double =>
         atan2(a.x * b.y - a.y * b.x, a.x * b.x + a.y * b.y)
 
 retrograde_loops(body: Body) -> int is
-    let steps = int(years * 2000.0D)
+    let steps = int(years * 2000.0)
     let loops mut = 0
     let backwards mut = false
 
@@ -63,11 +63,11 @@ retrograde_loops(body: Body) -> int is
         let previous = years * double(step - 1) / double(steps)
         let change = turning(body, previous, year)
 
-        if change < 0.0D /\ !backwards then
+        if change < 0.0 /\ !backwards then
             loops = loops + 1
         fi
 
-        backwards = change < 0.0D
+        backwards = change < 0.0
     od
 
     loops
@@ -77,14 +77,14 @@ year_of(frame: int) -> double => shown * double(frame) / double(frames)
 
 draw(image: IMAGE, frame: int) is
     image.clear(8ub, 8ub, 20ub)
-    image.stroke(1.0D)
+    image.stroke(1.0)
 
     for body in bodies do
         let trail =
             (0::frame) |> map(f => around_earth(body, year_of(f))) |> list()
 
         let here = trail[trail.count - 1]
-        let marker = if body.name =~ "Sun" then 4.0D else 2.5D fi
+        let marker = if body.name =~ "Sun" then 4.0 else 2.5 fi
 
         image.color(body.color.red, body.color.green, body.color.blue)
 
@@ -96,7 +96,7 @@ draw(image: IMAGE, frame: int) is
     od
 
     image.color(earth.color.red, earth.color.green, earth.color.blue)
-    image.dot(0.0D, 0.0D, 3.5D)
+    image.dot(0.0, 0.0, 3.5)
 si
 
 for body in bodies do
@@ -107,7 +107,7 @@ od
 
 let image = IMAGE(size, size)
 
-image.view(-2.7D, -2.7D, 2.7D, 2.7D)
+image.view(-2.7, -2.7, 2.7, 2.7)
 
 let animation = ANIMATION(size, size)
 

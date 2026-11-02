@@ -61,7 +61,7 @@ ring(polygon: P[], crossings: Crossing[]) -> NODE{} is
 si
 
 clip(subject: P[], given: P[]) -> P[][] is
-    let flip = (area(subject) > 0.0D) != (area(given) > 0.0D)
+    let flip = (area(subject) > 0.0) != (area(given) > 0.0)
     let window =
         (0..given.count)
             |> map(i =>
@@ -85,11 +85,11 @@ clip(subject: P[], given: P[]) -> P[][] is
             let q = window[(j + 1) % window.count] - c
             let d = r × q
 
-            if d != 0.0D then
+            if d != 0.0 then
                 let t = (c - a) × q / d
                 let u = (c - a) × r / d
 
-                if t > 0.0D /\ t < 1.0D /\ u > 0.0D /\ u < 1.0D then
+                if t > 0.0 /\ t < 1.0 /\ u > 0.0 /\ u < 1.0 then
                     let s = NODE(a + r * t, true)
                     let w = NODE(a + r * t, true)
 
@@ -148,13 +148,13 @@ clip(subject: P[], given: P[]) -> P[][] is
 si
 
 let subject = [
-    P(180.0D, 420.0D), P(180.0D, 120.0D), P(520.0D, 120.0D),
-    P(520.0D, 420.0D), P(420.0D, 420.0D), P(320.0D, 220.0D)
+    P(180.0, 420.0), P(180.0, 120.0), P(520.0, 120.0),
+    P(520.0, 420.0), P(420.0, 420.0), P(320.0, 220.0)
 ]
 
 let window = [
-    P(60.0D, 220.0D), P(330.0D, 120.0D), P(410.0D, 290.0D),
-    P(80.0D, 480.0D), P(280.0D, 280.0D)
+    P(60.0, 220.0), P(330.0, 120.0), P(410.0, 290.0),
+    P(80.0, 480.0), P(280.0, 280.0)
 ]
 
 let pieces = clip(subject, window)
@@ -168,7 +168,7 @@ od
 
 let image = IMAGE(600, 560)
 
-image.view(0.0D, 540.0D, 600.0D, 60.0D)
+image.view(0.0, 540.0, 600.0, 60.0)
 image.clear(252ub, 252ub, 250ub)
 
 outline(polygon: P[]) -> (x: double, y: double)[] =>
@@ -180,7 +180,7 @@ for piece in pieces do
     image.fill(outline(piece))
 od
 
-image.stroke(2.0D)
+image.stroke(2.0)
 image.color(40ub, 90ub, 180ub)
 image.line(outline(subject))
 image.color(200ub, 50ub, 40ub)

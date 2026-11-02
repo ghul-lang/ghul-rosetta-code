@@ -21,10 +21,10 @@ class TURTLE is
     drawn: LIST[Segment]
 
     init() is
-        at = V3(0.0D, 0.0D, 0.0D)
-        heading = V3(1.0D, 0.0D, 0.0D)
-        left = V3(0.0D, 1.0D, 0.0D)
-        up = V3(0.0D, 0.0D, 1.0D)
+        at = V3(0.0, 0.0, 0.0)
+        heading = V3(1.0, 0.0, 0.0)
+        left = V3(0.0, 1.0, 0.0)
+        up = V3(0.0, 0.0, 1.0)
         color = (40ub, 40ub, 40ub)
         drawing = true
         drawn = LIST()
@@ -40,7 +40,7 @@ class TURTLE is
     si
 
     turn(degrees: double) is
-        let a = degrees * pi / 180.0D
+        let a = degrees * pi / 180.0
         let h = heading * cos(a) + left * sin(a)
 
         left = left * cos(a) - heading * sin(a)
@@ -48,7 +48,7 @@ class TURTLE is
     si
 
     pitch(degrees: double) is
-        let a = degrees * pi / 180.0D
+        let a = degrees * pi / 180.0
         let h = heading * cos(a) + up * sin(a)
 
         up = up * cos(a) - heading * sin(a)
@@ -61,7 +61,7 @@ si
 rectangle(t: TURTLE, a: double, b: double) is
     for side in [a, b, a, b] do
         t.forward(side)
-        t.turn(90.0D)
+        t.turn(90.0)
     od
 si
 
@@ -69,14 +69,14 @@ box(t: TURTLE, width: double, depth: double, height: double) is
     rectangle(t, width, depth)
 
     for along in [width, depth, width, depth] do
-        t.pitch(90.0D)
+        t.pitch(90.0)
         t.forward(height)
-        t.pitch(-90.0D)
+        t.pitch(-90.0)
         t.forward(along)
-        t.pitch(-90.0D)
+        t.pitch(-90.0)
         t.forward(height)
-        t.pitch(90.0D)
-        t.turn(90.0D)
+        t.pitch(90.0)
+        t.turn(90.0)
     od
 si
 
@@ -85,30 +85,30 @@ house(t: TURTLE, size: double) is
 
     box(t, size, size, size)
 
-    let apex = size / 2.0D
-    let rise = size / sqrt(2.0D)
+    let apex = size / 2.0
+    let rise = size / sqrt(2.0)
     let slant = sqrt(apex * apex + apex * apex + rise * rise)
-    let climb = asin(rise / slant) * 180.0D / pi
+    let climb = asin(rise / slant) * 180.0 / pi
 
-    t.pitch(90.0D)
+    t.pitch(90.0)
     t.forward(size)
-    t.pitch(-90.0D)
+    t.pitch(-90.0)
 
     for _ in 0..4 do
-        t.turn(45.0D)
+        t.turn(45.0)
         t.pitch(climb)
         t.forward(slant)
-        t.pitch(180.0D)
+        t.pitch(180.0)
         t.forward(slant)
-        t.pitch(180.0D - climb)
-        t.turn(-45.0D)
+        t.pitch(180.0 - climb)
+        t.turn(-45.0)
         t.forward(size)
-        t.turn(90.0D)
+        t.turn(90.0)
     od
 
-    t.pitch(-90.0D)
+    t.pitch(-90.0)
     t.forward(size)
-    t.pitch(90.0D)
+    t.pitch(90.0)
 
     assert (t.at - start.`0).length < 1.0e-9
 si
@@ -116,18 +116,18 @@ si
 bar_chart(t: TURTLE, values: double[], size: double) is
     let start = t.state
     let width = size / double(values.count)
-    let most = values |> reduce(0.0D, max)
+    let most = values |> reduce(0.0, max)
 
     for value in values do
-        box(t, width * 0.8D, width * 0.8D, size * value / most)
+        box(t, width * 0.8, width * 0.8, size * value / most)
 
         t.forward(width)
     od
 
     t.drawing = false
-    t.turn(180.0D)
+    t.turn(180.0)
     t.forward(size)
-    t.turn(180.0D)
+    t.turn(180.0)
     t.drawing = true
 
     assert (t.at - start.`0).length < 1.0e-9
@@ -136,24 +136,24 @@ si
 let turtle = TURTLE()
 
 turtle.color = (170ub, 40ub, 40ub)
-house(turtle, 100.0D)
+house(turtle, 100.0)
 
-turtle.turn(-90.0D)
+turtle.turn(-90.0)
 turtle.drawing = false
-turtle.forward(260.0D)
+turtle.forward(260.0)
 turtle.drawing = true
-turtle.turn(90.0D)
+turtle.turn(90.0)
 turtle.color = (40ub, 90ub, 170ub)
-bar_chart(turtle, [0.5D, 0.33333D, 2.0D, 1.3D, 0.5D], 200.0D)
+bar_chart(turtle, [0.5, 0.33333, 2.0, 1.3, 0.5], 200.0)
 
 let at_home = turtle.state
 
 write_line("{turtle.drawn.count} segments drawn")
-let facing = (at_home.`1 - V3(1.0D, 0.0D, 0.0D)).length < 1.0e-9
+let facing = (at_home.`1 - V3(1.0, 0.0, 0.0)).length < 1.0e-9
 write_line("facing the way it started: {facing}")
 
-let yaw = 35.0D * pi / 180.0D
-let elevation = 25.0D * pi / 180.0D
+let yaw = 35.0 * pi / 180.0
+let elevation = 25.0 * pi / 180.0
 
 project(p: V3) -> (x: double, y: double) =>
     let
@@ -167,14 +167,14 @@ let image = IMAGE(480, 360)
 
 let points = turtle.drawn |> flat_map(s => [project(s.from), project(s.to)])
 
-let low_x = points |> map(p => p.x) |> reduce(0.0D, min)
-let high_x = points |> map(p => p.x) |> reduce(0.0D, max)
-let low_y = points |> map(p => p.y) |> reduce(0.0D, min)
-let high_y = points |> map(p => p.y) |> reduce(0.0D, max)
+let low_x = points |> map(p => p.x) |> reduce(0.0, min)
+let high_x = points |> map(p => p.x) |> reduce(0.0, max)
+let low_y = points |> map(p => p.y) |> reduce(0.0, min)
+let high_y = points |> map(p => p.y) |> reduce(0.0, max)
 
-image.view(low_x - 20.0D, low_y - 20.0D, high_x + 20.0D, high_y + 20.0D)
+image.view(low_x - 20.0, low_y - 20.0, high_x + 20.0, high_y + 20.0)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 for (from, to, (r, g, b)) in turtle.drawn do
     let a = project(from), z = project(to)

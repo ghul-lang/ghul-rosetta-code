@@ -8,41 +8,41 @@ let segments = 200
 
 draw(image: IMAGE, increment: double) is
     image.clear(15ub, 15ub, 25ub)
-    image.stroke(1.0D)
+    image.stroke(1.0)
 
-    let x mut = 0.0D
-    let y mut = 0.0D
-    let length mut = 5.0D
+    let x mut = 0.0
+    let y mut = 0.0
+    let length mut = 5.0
     let angle mut = increment
 
     for segment in 0..segments do
-        let radians = angle * pi / 180.0D
+        let radians = angle * pi / 180.0
         let next_x = x + length * cos(radians)
         let next_y = y + length * sin(radians)
         let fade = double(segment) / double(segments)
 
         image.color(
-            ubyte(255.0D * (1.0D - fade)),
-            ubyte(120.0D + 100.0D * fade),
+            ubyte(255.0 * (1.0 - fade)),
+            ubyte(120.0 + 100.0 * fade),
             255ub
         )
         image.line(x, y, next_x, next_y)
 
         x = next_x
         y = next_y
-        length = length + 3.0D
+        length = length + 3.0
         angle = angle + increment
     od
 si
 
 let image = IMAGE(size, size)
 
-image.view(-500.0D, -500.0D, 500.0D, 500.0D)
+image.view(-500.0, -500.0, 500.0, 500.0)
 
 let animation = ANIMATION(size, size)
 
 for frame in 0..frames do
-    draw(image, 90.0D + 360.0D * double(frame) / double(frames))
+    draw(image, 90.0 + 360.0 * double(frame) / double(frames))
     animation.add(image, 100)
 od
 

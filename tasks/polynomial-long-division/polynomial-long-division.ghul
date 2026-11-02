@@ -6,7 +6,7 @@ degree(poly: double[]) -> int =>
     let highest =
         (0::poly.count - 1)
             |> reverse()
-            |> find(power => poly[power] != 0.0D)
+            |> find(power => poly[power] != 0.0)
     in
     highest ?? -1
 
@@ -14,7 +14,7 @@ divide(numerator: double[], denominator: double[]) -> DIVISION is
     let divisor_degree = degree(denominator)
     let remainder = numerator |> LIST()
     let quotient =
-        repeat(0.0D, degree(numerator) - divisor_degree + 1) |> LIST()
+        repeat(0.0, degree(numerator) - divisor_degree + 1) |> LIST()
 
     while degree(remainder) >= divisor_degree /\ degree(remainder) >= 0 do
         let shift = degree(remainder) - divisor_degree
@@ -33,7 +33,7 @@ divide(numerator: double[], denominator: double[]) -> DIVISION is
 si
 
 term(size: double, power: int) -> string =>
-    let head = if size == 1.0D /\ power > 0 then "" else "{size:G}" fi in
+    let head = if size == 1.0 /\ power > 0 then "" else "{size:G}" fi in
     case power
     when 0 then head
     when 1 then "{head}x"
@@ -50,9 +50,9 @@ render(poly: double[]) -> string is
     for power in 0::top |> reverse() do
         let size = abs(poly[power])
 
-        if poly[power] != 0.0D then
+        if poly[power] != 0.0 then
             let sign =
-                if poly[power] < 0.0D then
+                if poly[power] < 0.0 then
                     if parts.count == 0 then "-" else "- " fi
                 else
                     if parts.count == 0 then "" else "+ " fi
@@ -75,6 +75,6 @@ si
 
 write_line("polynomial long division:")
 
-show([-42.0D, 0.0D, -12.0D, 1.0D], [-3.0D, 1.0D])
-show([-1.0D, 0.0D, 0.0D, 0.0D, 1.0D], [-1.0D, 0.0D, 1.0D])
-show([2.0D, 3.0D], [1.0D, 0.0D, 1.0D])
+show([-42.0, 0.0, -12.0, 1.0], [-3.0, 1.0])
+show([-1.0, 0.0, 0.0, 0.0, 1.0], [-1.0, 0.0, 1.0])
+show([2.0, 3.0], [1.0, 0.0, 1.0])

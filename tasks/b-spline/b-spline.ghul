@@ -4,9 +4,9 @@ use Raster.IMAGE
 use Point = (x: double, y: double)
 
 let control: Point[] = [
-    (171.0D, 171.0D), (185.0D, 111.0D), (202.0D, 109.0D), (202.0D, 189.0D),
-    (328.0D, 160.0D), (208.0D, 254.0D), (241.0D, 330.0D), (164.0D, 252.0D),
-    (69.0D, 278.0D), (139.0D, 208.0D), (72.0D, 148.0D), (168.0D, 172.0D)
+    (171.0, 171.0), (185.0, 111.0), (202.0, 109.0), (202.0, 189.0),
+    (328.0, 160.0), (208.0, 254.0), (241.0, 330.0), (164.0, 252.0),
+    (69.0, 278.0), (139.0, 208.0), (72.0, 148.0), (168.0, 172.0)
 ]
 
 let degree = 3
@@ -50,17 +50,17 @@ let image = IMAGE(400, 400)
 image.clear(252ub, 250ub, 245ub)
 
 image.color(190ub, 190ub, 200ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 image.line(control)
 
 image.color(200ub, 60ub, 50ub)
 
 for p in control do
-    image.dot(p.x, p.y, 3.0D)
+    image.dot(p.x, p.y, 3.0)
 od
 
 image.color(30ub, 70ub, 150ub)
-image.stroke(2.5D)
+image.stroke(2.5)
 image.line(curve)
 
 let first = curve[0]

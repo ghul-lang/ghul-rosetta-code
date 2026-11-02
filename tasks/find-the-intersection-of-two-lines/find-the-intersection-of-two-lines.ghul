@@ -13,15 +13,15 @@ crossing(a: Point, b: Point, c: Point, d: Point) -> Point? is
 
     let divisor = along × across
 
-    if divisor == 0.0D then
+    if divisor == 0.0 then
         return null
     fi
 
     return a + along * ((c - a) × across / divisor)
 si
 
-let (a, b) = ((x = 4.0D, y = 0.0D), (x = 6.0D, y = 10.0D))
-let (c, d) = ((x = 0.0D, y = 3.0D), (x = 10.0D, y = 7.0D))
+let (a, b) = ((x = 4.0, y = 0.0), (x = 6.0, y = 10.0))
+let (c, d) = ((x = 0.0, y = 3.0), (x = 10.0, y = 7.0))
 
 let meeting = crossing(a, b, c, d)
 
@@ -29,9 +29,9 @@ write_line("{meeting}")
 
 let image = IMAGE(480, 360)
 
-image.view(-1.0D, -1.0D, 11.0D, 11.0D)
+image.view(-1.0, -1.0, 11.0, 11.0)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 drawn(image: IMAGE, from: Point, to: Point) =>
     let
@@ -49,8 +49,8 @@ drawn(image, c, d)
 
 if let point = meeting then
     image.color(20ub, 120ub, 40ub)
-    image.dot(point.x, point.y, 5.0D)
-    image.text(point.x + 0.3D, point.y + 0.3D, 16.0D, "{point}")
+    image.dot(point.x, point.y, 5.0)
+    image.text(point.x + 0.3, point.y + 0.3, 16.0, "{point}")
 fi
 
 image.write("crossing.png")

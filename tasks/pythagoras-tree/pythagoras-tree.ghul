@@ -15,8 +15,8 @@ square(x1: double, y1: double, x2: double, y2: double, depth: int) is
     let x4 = x1 - up
     let y4 = y1 - across
 
-    let x5 = x4 + 0.5D * (across - up)
-    let y5 = y4 - 0.5D * (across + up)
+    let x5 = x4 + 0.5 * (across - up)
+    let y5 = y4 - 0.5 * (across + up)
 
     image.color(0ub, ubyte(90 + 20 * depth), 0ub)
 
@@ -26,7 +26,7 @@ square(x1: double, y1: double, x2: double, y2: double, depth: int) is
     square(x5, y5, x3, y3, depth - 1)
 si
 
-square(340.0D, 580.0D, 460.0D, 580.0D, 7)
+square(340.0, 580.0, 460.0, 580.0, 7)
 
 image.write("pythagoras.png")
 

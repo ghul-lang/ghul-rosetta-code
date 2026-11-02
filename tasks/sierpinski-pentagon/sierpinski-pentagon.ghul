@@ -5,10 +5,10 @@ use Raster.SHAPES
 use Point = (x: double, y: double)
 use Pentagon = (x: double, y: double, radius: double)
 
-let golden = (1.0D + sqrt(5.0D)) / 2.0D
-let shrink = 1.0D / (1.0D + golden)
+let golden = (1.0 + sqrt(5.0)) / 2.0
+let shrink = 1.0 / (1.0 + golden)
 
-towards(index: int) -> double => pi / 2.0D + 0.4D * pi * double(index)
+towards(index: int) -> double => pi / 2.0 + 0.4 * pi * double(index)
 
 corner_of(shape: Pentagon, index: int) -> Point => (
     let angle = towards(index)
@@ -41,7 +41,7 @@ flake(shape: Pentagon, order: int) -> Pentagon{} is
     fi
 si
 
-let whole = (x = 0.0D, y = 0.0D, radius = 1.0D)
+let whole = (x = 0.0, y = 0.0, radius = 1.0)
 let order = 5
 
 for shown in 1::order do
@@ -58,8 +58,8 @@ let palette = [
 
 let image = IMAGE(600, 600)
 
-let half = sin(0.4D * pi) + 0.04D
-let middle = (1.0D - cos(pi / 5.0D)) / 2.0D
+let half = sin(0.4 * pi) + 0.04
+let middle = (1.0 - cos(pi / 5.0)) / 2.0
 
 image.view(-half, middle - half, half, middle + half)
 

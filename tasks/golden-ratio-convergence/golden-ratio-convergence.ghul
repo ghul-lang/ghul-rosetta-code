@@ -1,16 +1,16 @@
 use default
 
-let target = (1.0D + sqrt(5.0D)) / 2.0D
+let target = (1.0 + sqrt(5.0)) / 2.0
 
-let ratio mut = 1.0D
+let ratio mut = 1.0
 let iterations mut = 0
 
 let converged mut = false
 
 while !converged do
-    let following = 1.0D + 1.0D / ratio
+    let following = 1.0 + 1.0 / ratio
 
-    converged = abs(following - ratio) <= 1.0e-5D
+    converged = abs(following - ratio) <= 1.0e-5
     ratio = following
     iterations = iterations + 1
 od

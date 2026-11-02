@@ -5,12 +5,12 @@ use Raster.IMAGE
 let size = 180
 
 point(second: double, radius: double) -> (double, double) =>
-    let angle = pi / 2.0D - second * pi / 30.0D in
+    let angle = pi / 2.0 - second * pi / 30.0 in
     (radius * cos(angle), radius * sin(angle))
 
 hand(image: IMAGE, at: double, length: double, width: double) is
     let (x, y) = point(at, length)
-    let (tail_x, tail_y) = point(at + 30.0D, 0.15D)
+    let (tail_x, tail_y) = point(at + 30.0, 0.15)
 
     image.stroke(width)
     image.line(tail_x, tail_y, x, y)
@@ -20,36 +20,36 @@ draw(image: IMAGE, time: System.DateTime) is
     image.clear(245ub, 242ub, 235ub)
 
     image.color(40ub, 40ub, 50ub)
-    image.stroke(3.0D)
-    image.circle(0.0D, 0.0D, 1.0D)
+    image.stroke(3.0)
+    image.circle(0.0, 0.0, 1.0)
 
     for tick in 0..60 do
         let long = tick % 5 == 0
-        let inner = if long then 0.8D else 0.88D fi
+        let inner = if long then 0.8 else 0.88 fi
         let (x0, y0) = point(double(tick), inner)
-        let (x1, y1) = point(double(tick), 0.94D)
+        let (x1, y1) = point(double(tick), 0.94)
 
-        image.stroke(if long then 3.0D else 1.0D fi)
+        image.stroke(if long then 3.0 else 1.0 fi)
         image.line(x0, y0, x1, y1)
     od
 
     let second = double(time.second)
-    let minute = double(time.minute) + second / 60.0D
-    let hour = double(time.hour % 12) + minute / 60.0D
+    let minute = double(time.minute) + second / 60.0
+    let hour = double(time.hour % 12) + minute / 60.0
 
-    hand(image, 5.0D * hour, 0.5D, 5.0D)
-    hand(image, minute, 0.75D, 3.0D)
+    hand(image, 5.0 * hour, 0.5, 5.0)
+    hand(image, minute, 0.75, 3.0)
 
     image.color(200ub, 40ub, 40ub)
-    hand(image, second, 0.85D, 1.5D)
-    image.disc(0.0D, 0.0D, 0.05D)
+    hand(image, second, 0.85, 1.5)
+    image.disc(0.0, 0.0, 0.05)
 si
 
 let live = System.Environment.get_environment_variable("GHUL_LIVE_IMAGES")?
 
 let image = IMAGE(size, size)
 
-image.view(-1.1D, -1.1D, 1.1D, 1.1D)
+image.view(-1.1, -1.1, 1.1, 1.1)
 
 let animation = ANIMATION(size, size)
 
@@ -66,9 +66,9 @@ for second in 0..60 do
         image.write("clock.png")
         image.show("clock.png")
 
-        let wait = time.add_seconds(1.0D) - System.DateTime.now
+        let wait = time.add_seconds(1.0) - System.DateTime.now
 
-        if wait.total_milliseconds > 0.0D then
+        if wait.total_milliseconds > 0.0 then
             System.Threading.Thread.sleep(wait)
         fi
     fi

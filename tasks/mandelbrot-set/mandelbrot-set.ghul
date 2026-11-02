@@ -6,14 +6,14 @@ let height = 450
 let limit = 300
 
 escape(cx: double, cy: double) -> int => (
-    let x mut = 0.0D
-    let y mut = 0.0D
+    let x mut = 0.0
+    let y mut = 0.0
     let steps mut = 0
 
-    while steps < limit /\ x * x + y * y <= 4.0D do
+    while steps < limit /\ x * x + y * y <= 4.0 do
         let next = x * x - y * y + cx
 
-        y = 2.0D * x * y + cy
+        y = 2.0 * x * y + cy
         x = next
         steps = steps + 1
     od
@@ -22,27 +22,26 @@ escape(cx: double, cy: double) -> int => (
 )
 
 band(level: double, phase: double) -> ubyte =>
-    ubyte(127.5D * (1.0D - cos(6.0D * pi * level + phase)))
+    ubyte(127.5 * (1.0 - cos(6.0 * pi * level + phase)))
 
 let image = IMAGE(width, height)
 
 for row in 0..height do
     for column in 0..width do
-        let cx = -2.2D + 3.0D * double(column) / double(width)
-        let cy = -1.2D + 2.4D * double(row) / double(height)
+        let cx = -2.2 + 3.0 * double(column) / double(width)
+        let cy = -1.2 + 2.4 * double(row) / double(height)
 
         let steps = escape(cx, cy)
 
         if steps < limit then
-            let level =
-                log(double(steps) + 1.0D) / log(double(limit) + 1.0D)
+            let level = log(double(steps) + 1.0) / log(double(limit) + 1.0)
 
             image.set_pixel(
                 column,
                 row,
-                band(level, 0.0D),
-                band(level, 2.1D),
-                band(level, 4.2D)
+                band(level, 0.0),
+                band(level, 2.1),
+                band(level, 4.2)
             )
         else
             image.set_pixel(column, row, 0ub, 0ub, 0ub)

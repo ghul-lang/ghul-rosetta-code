@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
-let plastic = 1.324718D
+let plastic = 1.324718
 
 let colors = [
     (red = 200ub, green = 60ub, blue = 50ub),
@@ -13,24 +13,24 @@ let colors = [
 ]
 
 quarter_arc(image: IMAGE, from: Point, to: Point) is
-    let middle = (x = (from.x + to.x) / 2.0D, y = (from.y + to.y) / 2.0D)
-    let half = (x = (to.x - from.x) / 2.0D, y = (to.y - from.y) / 2.0D)
+    let middle = (x = (from.x + to.x) / 2.0, y = (from.y + to.y) / 2.0)
+    let half = (x = (to.x - from.x) / 2.0, y = (to.y - from.y) / 2.0)
     let center = (x = middle.x + half.y, y = middle.y - half.x)
 
     let start = atan2(from.y - center.y, from.x - center.x)
     let finish = atan2(to.y - center.y, to.x - center.x)
     let sweep mut = finish - start
 
-    if sweep > pi then sweep = sweep - 2.0D * pi fi
-    if sweep < -pi then sweep = sweep + 2.0D * pi fi
+    if sweep > pi then sweep = sweep - 2.0 * pi fi
+    if sweep < -pi then sweep = sweep + 2.0 * pi fi
 
     let size = sqrt(half.x * half.x + half.y * half.y)
-    let radius = sqrt(2.0D) * size
+    let radius = sqrt(2.0) * size
 
     image.line(
         (0::24)
             |> map(i =>
-                let a = start + sweep * double(i) / 24.0D in
+                let a = start + sweep * double(i) / 24.0 in
                 (
                     x = center.x + radius * cos(a),
                     y = center.y + radius * sin(a)
@@ -53,13 +53,13 @@ harriss(
     let side mut = length
 
     for step in 0..steps do
-        let radians = angle * pi / 180.0D
+        let radians = angle * pi / 180.0
         let next = (
             x = here.x + side * cos(radians),
             y = here.y + side * sin(radians)
         )
 
-        let quadrant = int(round(angle / 90.0D))
+        let quadrant = int(round(angle / 90.0))
         let color = colors[(quadrant % 4 + 4) % 4]
 
         image.color(color.red, color.green, color.blue)
@@ -67,7 +67,7 @@ harriss(
         quarter_arc(image, here, next)
 
         here = next
-        angle = angle - 90.0D
+        angle = angle - 90.0
         side = side / plastic
     od
 si
@@ -76,9 +76,9 @@ let image = IMAGE(820, 660)
 
 image.clear(225ub, 225ub, 220ub)
 
-let x = 450.0D
-let y = 630.0D
-let base = 525.0D / plastic / plastic
+let x = 450.0
+let y = 630.0
+let base = 525.0 / plastic / plastic
 
 scaled(power: int) -> double => base / pow(plastic, double(power))
 
@@ -86,16 +86,16 @@ let left = x - (scaled(1) + scaled(3))
 let high = y - (base + scaled(2))
 
 let starts = [
-    (left, y - scaled(7), 180.0D, scaled(6), 2, 6.0D),
-    (left, high, 270.0D, scaled(5), 3, 6.0D),
-    (x + scaled(4), high, 270.0D, scaled(5), 3, 6.0D),
-    (x + scaled(1), high, 0.0D, scaled(4), 4, 6.0D),
-    (x - scaled(4), y - scaled(1), 0.0D, scaled(5), 2, 10.0D),
-    (x - scaled(4), y - scaled(3), -270.0D, scaled(4), 3, 12.0D),
-    (x - scaled(1), y - scaled(3), 180.0D, scaled(3), 4, 12.0D),
-    (x - scaled(1), y - base, 270.0D, scaled(2), 5, 14.0D),
-    (x, y - base, 0.0D, scaled(1), 6, 14.0D),
-    (x, y, -90.0D, base, 7, 18.0D)
+    (left, y - scaled(7), 180.0, scaled(6), 2, 6.0),
+    (left, high, 270.0, scaled(5), 3, 6.0),
+    (x + scaled(4), high, 270.0, scaled(5), 3, 6.0),
+    (x + scaled(1), high, 0.0, scaled(4), 4, 6.0),
+    (x - scaled(4), y - scaled(1), 0.0, scaled(5), 2, 10.0),
+    (x - scaled(4), y - scaled(3), -270.0, scaled(4), 3, 12.0),
+    (x - scaled(1), y - scaled(3), 180.0, scaled(3), 4, 12.0),
+    (x - scaled(1), y - base, 270.0, scaled(2), 5, 14.0),
+    (x, y - base, 0.0, scaled(1), 6, 14.0),
+    (x, y, -90.0, base, 7, 18.0)
 ]
 
 for (sx, sy, degrees, length, steps, width) in starts do

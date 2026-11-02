@@ -1,6 +1,6 @@
 use default
 
-let log_two = log10(2.0D)
+let log_two = log10(2.0)
 
 p(leading: int, nth: int) -> int =>
     let

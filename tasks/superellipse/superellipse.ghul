@@ -2,35 +2,35 @@ use default
 use Raster.AXES
 use Raster.IMAGE
 
-let n = 2.5D
-let a = 200.0D
-let b = 200.0D
+let n = 2.5
+let a = 200.0
+let b = 200.0
 
 shaped(turn: double, half_axis: double) -> double => (
-    let value = pow(abs(turn), 2.0D / n) * half_axis
+    let value = pow(abs(turn), 2.0 / n) * half_axis
 
-    if turn < 0.0D then -value else value fi
+    if turn < 0.0 then -value else value fi
 )
 
 outline(steps: int) -> (x: double, y: double){} =>
     (0::steps)
         |> map(step => (
-            let angle = 2.0D * pi * double(step) / double(steps)
+            let angle = 2.0 * pi * double(step) / double(steps)
 
             (x = shaped(cos(angle), a), y = shaped(sin(angle), b))
         ))
 
 let image = IMAGE(560, 560)
 
-image.view(-230.0D, -230.0D, 230.0D, 230.0D, 56.0D)
+image.view(-230.0, -230.0, 230.0, 230.0, 56.0)
 
 image.color(120ub, 120ub, 120ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 AXES(image).draw()
 
 image.color(180ub, 30ub, 60ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 image.line(outline(720) |> list())
 

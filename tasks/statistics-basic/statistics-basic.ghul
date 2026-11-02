@@ -51,7 +51,7 @@ for size in sizes do
 od
 
 write_line()
-write_line("1/sqrt(12) = {1.0D / sqrt(12.0D):F6}")
+write_line("1/sqrt(12) = {1.0 / sqrt(12.0):F6}")
 write_line()
 write_line("histogram of the 1000 sample:")
 
@@ -63,23 +63,23 @@ for bin in 0..bins do
     let low = double(bin) / double(bins)
 
     write_line(
-        "  {low:F1} - {low + 0.1D:F1} {n,4} "
+        "  {low:F1} - {low + 0.1:F1} {n,4} "
         "{"".pad_right(n * 50 / tallest, '#')}"
     )
 od
 
 let shown = [0, 2, 4]
-let panel = 220.0D
+let panel = 220.0
 
 let image = IMAGE(int(panel) * shown.count, 200)
 
-image.view(0.0D, 0.0D, panel * double(shown.count), 200.0D)
+image.view(0.0, 0.0, panel * double(shown.count), 200.0)
 image.clear(252ub, 252ub, 250ub)
 
 for (which, place) in shown |> index() |> map(iv => (iv.value, iv.index)) do
     let tally = tallies[which]
-    let left = panel * double(place) + 15.0D
-    let width = (panel - 30.0D) / double(bins)
+    let left = panel * double(place) + 15.0
+    let width = (panel - 30.0) / double(bins)
 
     for bin in 0..bins do
         let share = double(tally.histogram[bin]) / double(tally.count)
@@ -87,21 +87,21 @@ for (which, place) in shown |> index() |> map(iv => (iv.value, iv.index)) do
 
         image.color(60ub, 110ub, 190ub)
         image.fill_rectangle(
-            x + 1.0D,
-            30.0D,
-            x + width - 1.0D,
-            30.0D + share * 1000.0D
+            x + 1.0,
+            30.0,
+            x + width - 1.0,
+            30.0 + share * 1000.0
         )
     od
 
     image.color(220ub, 60ub, 40ub)
-    image.line(left, 130.0D, left + panel - 30.0D, 130.0D)
+    image.line(left, 130.0, left + panel - 30.0, 130.0)
 
     image.color(40ub, 40ub, 40ub)
     image.text(
-        left + (panel - 30.0D) / 2.0D,
-        10.0D,
-        13.0D,
+        left + (panel - 30.0) / 2.0,
+        10.0,
+        13.0,
         "{tally.count:N0} samples",
         Raster.Anchor.CENTER
     )

@@ -79,7 +79,7 @@ for row in 0..rows do
     write_line(line.trim_end())
 od
 
-let cell = 48.0D
+let cell = 48.0
 let image = IMAGE(int(cell) * columns, int(cell) * rows)
 
 image.clear(245ub, 240ub, 225ub)
@@ -89,38 +89,33 @@ for s in open do
     let y = cell * double(s.row)
 
     image.color(200ub, 215ub, 235ub)
-    image.fill_rectangle(
-        x + 2.0D,
-        y + 2.0D,
-        x + cell - 2.0D,
-        y + cell - 2.0D
-    )
+    image.fill_rectangle(x + 2.0, y + 2.0, x + cell - 2.0, y + cell - 2.0)
 od
 
 let path =
     open
         |> sort((a, b) => order[a] - order[b])
         |> map(s => (
-            x = cell * (double(s.column) + 0.5D),
-            y = cell * (double(s.row) + 0.5D)
+            x = cell * (double(s.column) + 0.5),
+            y = cell * (double(s.row) + 0.5)
         ))
         |> list()
 
 image.color(30ub, 60ub, 140ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(path)
 image.color(200ub, 40ub, 40ub)
-image.dot(path[0].x, path[0].y, 7.0D)
+image.dot(path[0].x, path[0].y, 7.0)
 image.color(30ub, 60ub, 140ub)
-image.ring(path[path.count - 1].x, path[path.count - 1].y, 7.0D)
+image.ring(path[path.count - 1].x, path[path.count - 1].y, 7.0)
 
 image.color(90ub, 90ub, 100ub)
 
 for s in open do
     image.text(
-        cell * double(s.column) + 5.0D,
-        cell * double(s.row) + 15.0D,
-        11.0D,
+        cell * double(s.column) + 5.0,
+        cell * double(s.row) + 15.0,
+        11.0,
         "{order[s]}"
     )
 od

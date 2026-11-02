@@ -10,13 +10,13 @@ let tolerance = 1.0e-9
 pt(x: double, y: double) -> Point => (x = x, y = y)
 
 middle(a: Point, b: Point) -> Point =>
-    pt((a.x + b.x) / 2.0D, (a.y + b.y) / 2.0D)
+    pt((a.x + b.x) / 2.0, (a.y + b.y) / 2.0)
 
 point_at(c: Curve, t: double) -> Point =>
-    let u = 1.0D - t in
+    let u = 1.0 - t in
     pt(
-        u * u * c.p0.x + 2.0D * u * t * c.p1.x + t * t * c.p2.x,
-        u * u * c.p0.y + 2.0D * u * t * c.p1.y + t * t * c.p2.y
+        u * u * c.p0.x + 2.0 * u * t * c.p1.x + t * t * c.p2.x,
+        u * u * c.p0.y + 2.0 * u * t * c.p1.y + t * t * c.p2.y
     )
 
 halves(c: Curve) -> (Curve, Curve) =>
@@ -26,7 +26,7 @@ halves(c: Curve) -> (Curve, Curve) =>
     in
         let
             split = middle(left, right),
-            t = (c.from + c.to) / 2.0D
+            t = (c.from + c.to) / 2.0
         in
             ((c.p0, left, split, c.from, t), (split, right, c.p2, t, c.to))
 
@@ -61,8 +61,8 @@ intersect(a: Curve, b: Curve, hits: LIST[Hit]) is
     fi
 
     if size(a) < tolerance /\ size(b) < tolerance then
-        let t = (a.from + a.to) / 2.0D
-        let s = (b.from + b.to) / 2.0D
+        let t = (a.from + a.to) / 2.0
+        let s = (b.from + b.to) / 2.0
 
         if !(hits |> any(h => near(h.t, t) /\ near(h.s, s))) then
             hits.add((t, s, middle(a.p0, a.p2)))
@@ -81,10 +81,10 @@ intersect(a: Curve, b: Curve, hits: LIST[Hit]) is
     od
 si
 
-whole(p0: Point, p1: Point, p2: Point) -> Curve => (p0, p1, p2, 0.0D, 1.0D)
+whole(p0: Point, p1: Point, p2: Point) -> Curve => (p0, p1, p2, 0.0, 1.0)
 
-let first = whole(pt(-1.0D, 0.0D), pt(0.0D, 10.0D), pt(1.0D, 0.0D))
-let second = whole(pt(2.0D, 1.0D), pt(-8.0D, 2.0D), pt(2.0D, 3.0D))
+let first = whole(pt(-1.0, 0.0), pt(0.0, 10.0), pt(1.0, 0.0))
+let second = whole(pt(2.0, 1.0), pt(-8.0, 2.0), pt(2.0, 3.0))
 
 let hits = LIST()
 
@@ -100,12 +100,12 @@ od
 
 let image = IMAGE(380, 350)
 
-image.view(-3.5D, -0.8D, 3.5D, 5.6D)
+image.view(-3.5, -0.8, 3.5, 5.6)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 trace(curve: Curve) -> Point[] =>
-    (0::100) |> map(i => point_at(curve, double(i) / 100.0D)) |> list()
+    (0::100) |> map(i => point_at(curve, double(i) / 100.0)) |> list()
 
 image.color(40ub, 90ub, 170ub)
 image.line(trace(first))
@@ -116,7 +116,7 @@ image.line(trace(second))
 image.color(20ub, 20ub, 20ub)
 
 for h in hits do
-    image.ring(h.at.x, h.at.y, 5.0D)
+    image.ring(h.at.x, h.at.y, 5.0)
 od
 
 image.write("intersections.png")

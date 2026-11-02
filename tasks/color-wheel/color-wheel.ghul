@@ -4,11 +4,11 @@ use Raster.IMAGE
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
 from_hsv(hue: double, saturation: double, value: double) -> Color => (
-    let sextant = hue / 60.0D
-    let rising = value * (1.0D - saturation)
-    let falling = value * (1.0D - saturation * (sextant - floor(sextant)))
+    let sextant = hue / 60.0
+    let rising = value * (1.0 - saturation)
+    let falling = value * (1.0 - saturation * (sextant - floor(sextant)))
     let climbing =
-        value * (1.0D - saturation * (1.0D - sextant + floor(sextant)))
+        value * (1.0 - saturation * (1.0 - sextant + floor(sextant)))
 
     let channels =
         case int(floor(sextant)) % 6
@@ -26,38 +26,38 @@ from_hsv(hue: double, saturation: double, value: double) -> Color => (
         esac
 
     (
-        red = ubyte(round(255.0D * channels.red)),
-        green = ubyte(round(255.0D * channels.green)),
-        blue = ubyte(round(255.0D * channels.blue))
+        red = ubyte(round(255.0 * channels.red)),
+        green = ubyte(round(255.0 * channels.green)),
+        blue = ubyte(round(255.0 * channels.blue))
     )
 )
 
 let size = 480
-let radius = 224.0D
+let radius = 224.0
 
 let image = IMAGE(size, size)
 
 image.clear(24ub, 24ub, 28ub)
 
-let center = 0.5D * double(size)
+let center = 0.5 * double(size)
 
 for pixel_y in 0..size do
     for pixel_x in 0..size do
-        let across = double(pixel_x) + 0.5D - center
-        let down = double(pixel_y) + 0.5D - center
+        let across = double(pixel_x) + 0.5 - center
+        let down = double(pixel_y) + 0.5 - center
         let away = sqrt(across * across + down * down)
-        let covered = min(1.0D, max(0.0D, radius + 0.5D - away))
+        let covered = min(1.0, max(0.0, radius + 0.5 - away))
 
-        if covered > 0.0D then
-            let angle = atan2(-down, across) * 180.0D / pi
+        if covered > 0.0 then
+            let angle = atan2(-down, across) * 180.0 / pi
             let turned =
-                if angle < 0.0D then
-                    angle + 360.0D
+                if angle < 0.0 then
+                    angle + 360.0
                 else
                     angle
                 fi
 
-            image.color(from_hsv(turned, min(1.0D, away / radius), 1.0D))
+            image.color(from_hsv(turned, min(1.0, away / radius), 1.0))
 
             image.blend(pixel_x, pixel_y, covered)
         fi
@@ -69,8 +69,8 @@ image.write("wheel.png")
 write_line("hue   saturation 1, value 1")
 
 for hue in 0::5 do
-    let degrees = double(hue) * 60.0D
-    let shade = from_hsv(degrees, 1.0D, 1.0D)
+    let degrees = double(hue) * 60.0
+    let shade = from_hsv(degrees, 1.0, 1.0)
 
     write_line(
         "{degrees,3:F0}   "

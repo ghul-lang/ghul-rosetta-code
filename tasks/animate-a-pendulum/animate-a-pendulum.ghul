@@ -4,9 +4,9 @@ use Ghul.Math
 
 use STATE = (angle: double, rate: double)
 
-let gravity = 9.81D
-let length = 1.0D
-let swing = 1.0D
+let gravity = 9.81
+let length = 1.0
+let swing = 1.0
 
 let width = 240
 let height = 180
@@ -19,10 +19,10 @@ advance(state: STATE, dt: double) -> STATE =>
     (angle = state.angle + dt * rate, rate = rate)
 
 quarter_period(dt: double) -> double => (
-    let state mut = (angle = swing, rate = 0.0D)
-    let elapsed mut = 0.0D
+    let state mut = (angle = swing, rate = 0.0)
+    let elapsed mut = 0.0
 
-    while state.angle > 0.0D do
+    while state.angle > 0.0 do
         state = advance(state, dt)
         elapsed = elapsed + dt
     od
@@ -37,31 +37,31 @@ draw(image: IMAGE, angle: double) is
     image.clear()
 
     image.color(140ub, 140ub, 150ub)
-    image.stroke(2.0D)
-    image.line(0.0D, 0.0D, x, y)
+    image.stroke(2.0)
+    image.line(0.0, 0.0, x, y)
 
     image.color(60ub, 60ub, 70ub)
-    image.dot(0.0D, 0.0D, 5.0D)
+    image.dot(0.0, 0.0, 5.0)
 
     image.color(200ub, 50ub, 40ub)
-    image.dot(x, y, 12.0D)
+    image.dot(x, y, 12.0)
 si
 
 // The pendulum passing vertical is easy to detect and comes a
 // quarter of a period after release, so that interval is timed and
 // scaled to a frame time that divides the period exactly.
-let period = 4.0D * quarter_period(0.0002D)
+let period = 4.0 * quarter_period(0.0002)
 
 let tick = period / double(frames * substeps)
-let delay = int(round(1000.0D * period / double(frames)))
+let delay = int(round(1000.0 * period / double(frames)))
 
 let image = IMAGE(width, height)
 
-image.view(-1.05D, -1.15D, 1.05D, 0.25D)
+image.view(-1.05, -1.15, 1.05, 0.25)
 
 let animation = ANIMATION(width, height)
 
-let state mut = (angle = swing, rate = 0.0D)
+let state mut = (angle = swing, rate = 0.0)
 
 for _ in 0..frames do
     draw(image, state.angle)

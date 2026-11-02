@@ -17,9 +17,9 @@ let balls = 60
 let width = 240
 let height = 180
 
-let pin_spacing = 20.0D
-let top = 20.0D
-let ball_size = 4.0D
+let pin_spacing = 20.0
+let top = 20.0
+let ball_size = 4.0
 
 let random = System.Random(12)
 
@@ -27,10 +27,10 @@ let bins = repeat(0, rows + 1) |> LIST()
 let falling = LIST()
 
 x_of(row: int, slot: int) -> double =>
-    let offset = double(slot) - double(row) / 2.0D in
-    double(width) / 2.0D + offset * pin_spacing
+    let offset = double(slot) - double(row) / 2.0 in
+    double(width) / 2.0 + offset * pin_spacing
 
-y_of(row: int) -> double => top + double(row) * 11.0D
+y_of(row: int) -> double => top + double(row) * 11.0
 
 draw(image: IMAGE) is
     image.clear(245ub, 242ub, 232ub)
@@ -39,7 +39,7 @@ draw(image: IMAGE) is
 
     for row in 0..rows do
         for pin in 0::row do
-            image.dot(x_of(row, pin), y_of(row), 2.0D)
+            image.dot(x_of(row, pin), y_of(row), 2.0)
         od
     od
 
@@ -51,9 +51,9 @@ draw(image: IMAGE) is
         let x = x_of(rows, slot)
 
         for i in 0..count do
-            let y = floor - ball_size * (double(i) + 0.5D)
+            let y = floor - ball_size * (double(i) + 0.5)
 
-            image.dot(x, y, ball_size / 2.0D)
+            image.dot(x, y, ball_size / 2.0)
         od
     od
 
@@ -62,7 +62,7 @@ draw(image: IMAGE) is
     for ball in falling do
         let x = x_of(ball.row, ball.slot)
 
-        image.dot(x, y_of(ball.row) - 5.0D, ball_size / 2.0D)
+        image.dot(x, y_of(ball.row) - 5.0, ball_size / 2.0)
     od
 si
 

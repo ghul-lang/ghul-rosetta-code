@@ -161,11 +161,11 @@ let hues = "FILNPTUVWXYZ"
 
 color(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let
-        h = double(hues.index_of(name)) / 12.0D * 6.0D,
+        h = double(hues.index_of(name)) / 12.0 * 6.0,
         f = h - floor(h),
         i = int(h),
-        up = ubyte(90.0D + 150.0D * f),
-        down = ubyte(240.0D - 150.0D * f)
+        up = ubyte(90.0 + 150.0 * f),
+        down = ubyte(240.0 - 150.0 * f)
     in
         case i
         when 0 then (red = 240ub, green = up, blue = 90ub)
@@ -176,7 +176,7 @@ color(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
         else (red = 240ub, green = 90ub, blue = down)
         esac
 
-let cell = 40.0D
+let cell = 40.0
 let image = IMAGE(320, 320)
 let tiles = SHAPES()
 
@@ -201,7 +201,7 @@ od
 
 image.fill(tiles)
 image.color(30ub, 30ub, 30ub)
-image.stroke(2.5D)
+image.stroke(2.5)
 
 for i in 0..size * size do
     let r = i / size, c = i % size

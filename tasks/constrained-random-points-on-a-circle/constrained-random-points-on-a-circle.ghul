@@ -31,18 +31,18 @@ od
 
 let image = IMAGE(248, 248)
 
-image.view(-15.5D, -15.5D, 15.5D, 15.5D)
+image.view(-15.5, -15.5, 15.5, 15.5)
 image.clear(252ub, 250ub, 245ub)
 
 image.color(210ub, 210ub, 215ub)
-image.stroke(1.0D)
-image.circle(0.0D, 0.0D, 10.0D)
-image.circle(0.0D, 0.0D, 15.0D)
+image.stroke(1.0)
+image.circle(0.0, 0.0, 10.0)
+image.circle(0.0, 0.0, 15.0)
 
 image.color(40ub, 80ub, 170ub)
 
 for p in distinct do
-    image.dot(double(p.x), double(p.y), 3.0D)
+    image.dot(double(p.x), double(p.y), 3.0)
 od
 
 image.write("ring.png")

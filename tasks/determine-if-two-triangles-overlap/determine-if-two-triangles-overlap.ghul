@@ -87,18 +87,18 @@ for (i, (a, b)) in pairs |> index() do
     let high_x = all |> map(p => p.x) |> reduce(all[0].x, max)
     let low_y = all |> map(p => p.y) |> reduce(all[0].y, min)
     let high_y = all |> map(p => p.y) |> reduce(all[0].y, max)
-    let scale = 90.0D / max(high_x - low_x, high_y - low_y)
+    let scale = 90.0 / max(high_x - low_x, high_y - low_y)
 
     let place = p => (
-        x = left + 15.0D + (p.x - low_x) * scale,
-        y = top + 105.0D - (p.y - low_y) * scale
+        x = left + 15.0 + (p.x - low_x) * scale,
+        y = top + 105.0 - (p.y - low_y) * scale
     )
 
     let first = (a, 60ub, 110ub, 200ub), second = (b, 200ub, 90ub, 40ub)
 
     for (shape, r, g, blue) in [first, second] do
         image.color(r, g, blue)
-        image.stroke(2.0D)
+        image.stroke(2.0)
         image.line(shape ++ [shape[0]] |> map(place) |> list())
     od
 od

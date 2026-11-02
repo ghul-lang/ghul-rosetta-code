@@ -3,8 +3,8 @@ use default
 let standard_deviation =
     let
         count mut = 0,
-        total mut = 0.0D,
-        squares mut = 0.0D
+        total mut = 0.0,
+        squares mut = 0.0
     in
         sample => (
             count = count + 1
@@ -16,6 +16,6 @@ let standard_deviation =
             sqrt(squares / cast(count) - mean * mean)
         )
 
-for sample in [2.0D, 4.0D, 4.0D, 4.0D, 5.0D, 5.0D, 7.0D, 9.0D] do
+for sample in [2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0] do
     write_line("after {sample}: {standard_deviation(sample)}")
 od

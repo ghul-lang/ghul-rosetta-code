@@ -7,7 +7,7 @@ entropy(text: string) -> double =>
     in
         groups
             |> map(group => double(group.count) / total)
-            |> reduce(0.0D, (bits, probability) =>
+            |> reduce(0.0, (bits, probability) =>
                 bits - probability * log2(probability)
             )
 

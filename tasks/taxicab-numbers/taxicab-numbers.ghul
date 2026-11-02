@@ -17,7 +17,7 @@ let taxis = [
 
 cube_root(value: long) -> long => (
     let cube_root_of = cbrt(cast(value))
-    let root = long(floor(cube_root_of + 0.5D))
+    let root = long(floor(cube_root_of + 0.5))
 
     if root * root * root == value then root else 0L fi
 )

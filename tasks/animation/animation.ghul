@@ -17,7 +17,7 @@ for frame in 0..base.length do
 
     image.clear(0ub, 0ub, 0ub)
     image.color(255ub, 255ub, 255ub)
-    image.text(10.0D, 35.0D, 24.0D, rotated)
+    image.text(10.0, 35.0, 24.0, rotated)
 
     animation.add(image, 100)
 od

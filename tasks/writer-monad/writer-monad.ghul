@@ -16,10 +16,9 @@ unit[T](value: T, note: string) -> Writer[T] => (
 root(value: int) -> Writer[double] =>
     unit(sqrt(cast(value)), "Took square root")
 
-add_one(value: double) -> Writer[double] => unit(value + 1.0D, "Added one")
+add_one(value: double) -> Writer[double] => unit(value + 1.0, "Added one")
 
-half(value: double) -> Writer[double] =>
-    unit(value / 2.0D, "Divided by two")
+half(value: double) -> Writer[double] => unit(value / 2.0, "Divided by two")
 
 let golden = unit(5, "Initial value") >>= root >>= add_one >>= half
 

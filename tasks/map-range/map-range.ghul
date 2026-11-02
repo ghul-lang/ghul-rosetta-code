@@ -7,8 +7,5 @@ map_range(
 ) -> double => b1 + (s - a1) * (b2 - b1) / (a2 - a1)
 
 (0::10)
-    |> map(s => (
-        s,
-        mapped = map_range((0.0D, 10.0D), (-1.0D, 0.0D), cast(s))
-    ))
+    |> map(s => (s, mapped = map_range((0.0, 10.0), (-1.0, 0.0), cast(s))))
     |> each((s, mapped) => write_line("{s} maps to {mapped:F1}"))

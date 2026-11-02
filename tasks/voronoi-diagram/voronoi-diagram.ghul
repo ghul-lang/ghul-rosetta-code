@@ -48,10 +48,10 @@ image.color(0ub, 0ub, 0ub)
 
 for site in places do
     image.fill([
-        (x = double(site.x) - 3.0D, y = double(site.y) - 3.0D),
-        (x = double(site.x) + 3.0D, y = double(site.y) - 3.0D),
-        (x = double(site.x) + 3.0D, y = double(site.y) + 3.0D),
-        (x = double(site.x) - 3.0D, y = double(site.y) + 3.0D)
+        (x = double(site.x) - 3.0, y = double(site.y) - 3.0),
+        (x = double(site.x) + 3.0, y = double(site.y) - 3.0),
+        (x = double(site.x) + 3.0, y = double(site.y) + 3.0),
+        (x = double(site.x) - 3.0, y = double(site.y) + 3.0)
     ])
 od
 

@@ -1,24 +1,24 @@
 use default
 use Raster.IMAGE
 
-let inner = cos(0.4D * pi) / cos(0.2D * pi)
+let inner = cos(0.4 * pi) / cos(0.2 * pi)
 
 corner(index: int) -> (x: double, y: double) => (
-    let radius = if index % 2 == 0 then 1.0D else inner fi
-    let angle = (90.0D + 36.0D * double(index)) * pi / 180.0D
+    let radius = if index % 2 == 0 then 1.0 else inner fi
+    let angle = (90.0 + 36.0 * double(index)) * pi / 180.0
 
     (x = radius * cos(angle), y = radius * sin(angle))
 )
 
 let image = IMAGE(500, 500)
 
-image.view(-1.12D, -1.12D, 1.12D, 1.12D)
+image.view(-1.12, -1.12, 1.12, 1.12)
 
 image.color(100ub, 149ub, 237ub)
 image.fill(0..10 |> map(corner) |> list())
 
 image.color(64ub, 64ub, 64ub)
-image.stroke(4.0D)
+image.stroke(4.0)
 image.line((0::5) |> map(* * 4) |> map(* % 10) |> map(corner) |> list())
 
 image.write("pentagram.png")

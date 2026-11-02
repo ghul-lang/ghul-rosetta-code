@@ -5,8 +5,8 @@ let random = System.Random(1809)
 
 normal() -> double{} is
     while true do
-        let r = sqrt(-2.0D * log(1.0D - random.next_double()))
-        let angle = 2.0D * pi * random.next_double()
+        let r = sqrt(-2.0 * log(1.0 - random.next_double()))
+        let angle = 2.0 * pi * random.next_double()
 
         yield r * cos(angle)
         yield r * sin(angle)
@@ -26,8 +26,8 @@ write_line("{size:N0} samples by the Box-Muller transform")
 write_line("mean {mean:F6}, standard deviation {deviation:F6}")
 write_line()
 
-let low = -4.0D
-let width = 0.5D
+let low = -4.0
+let width = 0.5
 let bins = 16
 
 let counts = repeat(0, bins) |> LIST()
@@ -52,7 +52,7 @@ od
 
 let image = IMAGE(480, 260)
 
-image.view(low, -0.03D, -low, 0.45D)
+image.view(low, -0.03, -low, 0.45)
 image.clear(252ub, 252ub, 250ub)
 
 image.color(60ub, 110ub, 190ub)
@@ -61,27 +61,27 @@ for bin in 0..bins do
     let x = low + width * double(bin)
     let density = double(counts[bin]) / double(size) / width
 
-    image.fill_rectangle(x + 0.02D, 0.0D, x + width - 0.02D, density)
+    image.fill_rectangle(x + 0.02, 0.0, x + width - 0.02, density)
 od
 
 let curve =
     (0::160)
         |> map(i =>
             let
-                x = low + double(i) * 0.05D,
-                y = exp(-x * x / 2.0D) / sqrt(2.0D * pi)
+                x = low + double(i) * 0.05,
+                y = exp(-x * x / 2.0) / sqrt(2.0 * pi)
             in
                 (x = x, y = y)
         )
         |> list()
 
 image.color(220ub, 60ub, 40ub)
-image.stroke(2.5D)
+image.stroke(2.5)
 image.line(curve)
 
 image.color(80ub, 80ub, 80ub)
-image.stroke(1.0D)
-image.line(low, 0.0D, -low, 0.0D)
+image.stroke(1.0)
+image.line(low, 0.0, -low, 0.0)
 
 image.write("normal.png")
 

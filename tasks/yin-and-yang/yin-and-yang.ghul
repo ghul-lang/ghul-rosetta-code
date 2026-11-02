@@ -4,17 +4,17 @@ within(x: double, y: double, centre: double, radius: double) -> bool =>
     x * x + (y - centre) * (y - centre) <= radius * radius
 
 symbol(x: double, y: double, radius: double) -> string =>
-    if !within(x, y, 0.0D, radius) then
+    if !within(x, y, 0.0, radius) then
         " "
-    elif within(x, y, -radius / 2.0D, radius / 6.0D) then
+    elif within(x, y, -radius / 2.0, radius / 6.0) then
         "#"
-    elif within(x, y, radius / 2.0D, radius / 6.0D) then
+    elif within(x, y, radius / 2.0, radius / 6.0) then
         "."
-    elif within(x, y, -radius / 2.0D, radius / 2.0D) then
+    elif within(x, y, -radius / 2.0, radius / 2.0) then
         "."
-    elif within(x, y, radius / 2.0D, radius / 2.0D) then
+    elif within(x, y, radius / 2.0, radius / 2.0) then
         "#"
-    elif x < 0.0D then
+    elif x < 0.0 then
         "."
     else
         "#"
@@ -25,7 +25,7 @@ taijitu(radius: int) -> string{} is
         yield
             ((-2 * radius)::(2 * radius))
                 |> map(column =>
-                    symbol(cast(column) / 2.0D, cast(row), cast(radius))
+                    symbol(cast(column) / 2.0, cast(row), cast(radius))
                 )
                 |> join("")
     od

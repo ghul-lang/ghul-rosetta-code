@@ -16,9 +16,9 @@ use Patch = (corners: VEC[], phase: double)
 let turns = 2
 let around = 64 * turns
 let along = 22
-let reach = 2.2D
-let yaw = 0.62D
-let pitch = 0.5D
+let reach = 2.2
+let yaw = 0.62
+let pitch = 0.5
 
 turned(p: VEC) -> VEC =>
     let
@@ -32,7 +32,7 @@ turned(p: VEC) -> VEC =>
         )
 
 angle(i: int) -> double =>
-    2.0D * pi * double(turns) * double(i) / double(around)
+    2.0 * pi * double(turns) * double(i) / double(around)
 
 radius(j: int) -> double => reach * double(j) / double(along)
 
@@ -41,7 +41,7 @@ corner(i: int, j: int) -> VEC =>
         t = angle(i),
         r = radius(j)
     in
-        VEC(r * cos(t), r * sin(t), sqrt(r) * cos(t / 2.0D))
+        VEC(r * cos(t), r * sin(t), sqrt(r) * cos(t / 2.0))
 
 patch(i: int, j: int) -> Patch => (
     corners = [
@@ -50,7 +50,7 @@ patch(i: int, j: int) -> Patch => (
         turned(corner(i + 1, j + 1)),
         turned(corner(i, j + 1))
     ],
-    phase = angle(i) / (2.0D * pi * double(turns))
+    phase = angle(i) / (2.0 * pi * double(turns))
 )
 
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
@@ -60,8 +60,8 @@ brightness(p: Patch) -> double =>
         c = p.corners,
         n = (c[1] - c[0]) × (c[3] - c[0])
     in
-        if n.length == 0.0D then 0.6D
-        else 0.55D + 0.45D * abs(n.z) / n.length
+        if n.length == 0.0 then 0.6
+        else 0.55 + 0.45 * abs(n.z) / n.length
         fi
 
 let patches = [patch(i, j) for i in 0..around for j in 0..along]
@@ -70,9 +70,9 @@ let patches = [patch(i, j) for i in 0..around for j in 0..along]
 
 let image = IMAGE(620, 560)
 
-image.view(-2.6D, -2.4D, 2.6D, 2.3D)
+image.view(-2.6, -2.4, 2.6, 2.3)
 image.clear(252ub, 252ub, 250ub)
-image.stroke(0.4D)
+image.stroke(0.4)
 
 for p in patches do
     let light = brightness(p)

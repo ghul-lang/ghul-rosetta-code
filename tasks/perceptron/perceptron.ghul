@@ -7,22 +7,22 @@ struct V3(x: double, y: double, bias: double) is
     ⋅(o: V3) -> double => x * o.x + y * o.y + bias * o.bias
 si
 
-let slope = 0.7D
-let intercept = 0.1D
-let rate = 0.01D
+let slope = 0.7
+let intercept = 0.1
+let rate = 0.01
 
 above(x: double, y: double) -> int =>
     if y > slope * x + intercept then 1 else -1 fi
 
 let random = System.Random(10)
 
-let spread = () => random.next_double() * 2.0D - 1.0D
+let spread = () => random.next_double() * 2.0 - 1.0
 
-let points = (0..2000) |> map(_ => V3(spread(), spread(), 1.0D)) |> ARRAY()
+let points = (0..2000) |> map(_ => V3(spread(), spread(), 1.0)) |> ARRAY()
 
 let weights mut = V3(spread(), spread(), spread())
 
-guess(p: V3) -> int => if weights ⋅ p >= 0.0D then 1 else -1 fi
+guess(p: V3) -> int => if weights ⋅ p >= 0.0 then 1 else -1 fi
 
 train(p: V3) is
     let error = above(p.x, p.y) - guess(p)
@@ -64,31 +64,31 @@ write_line("green below and red wrongly; the line learned is orange")
 
 let image = IMAGE(400, 400)
 
-image.view(-1.0D, -1.0D, 1.0D, 1.0D)
+image.view(-1.0, -1.0, 1.0, 1.0)
 image.clear(250ub, 250ub, 250ub)
 
 for p in points do
     if guess(p) != above(p.x, p.y) then
         image.color(220ub, 30ub, 30ub)
-        image.dot(p.x, p.y, 3.0D)
+        image.dot(p.x, p.y, 3.0)
     elif guess(p) == 1 then
         image.color(60ub, 110ub, 200ub)
-        image.dot(p.x, p.y, 2.0D)
+        image.dot(p.x, p.y, 2.0)
     else
         image.color(90ub, 170ub, 90ub)
-        image.dot(p.x, p.y, 2.0D)
+        image.dot(p.x, p.y, 2.0)
     fi
 od
 
-image.stroke(1.5D)
+image.stroke(1.5)
 image.color(30ub, 30ub, 30ub)
-image.line(-1.0D, intercept - slope, 1.0D, intercept + slope)
+image.line(-1.0, intercept - slope, 1.0, intercept + slope)
 
 image.color(230ub, 140ub, 20ub)
 image.line(
-    -1.0D,
+    -1.0,
     learned_intercept - learned_slope,
-    1.0D,
+    1.0,
     learned_intercept + learned_slope
 )
 

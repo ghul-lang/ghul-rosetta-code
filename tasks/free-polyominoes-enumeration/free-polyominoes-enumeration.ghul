@@ -100,7 +100,7 @@ write_line("the twelve of size five:")
 levels[4] |> art() |> each(line => write_line(line))
 
 let sixes = levels[5]
-let size = 12.0D
+let size = 12.0
 let columns = 7
 let panel = 90
 let rows = (sixes.count + columns - 1) / columns
@@ -116,7 +116,7 @@ for (i, shape) in sixes |> index() do
     for c in shape do
         let x = left + size * double(c.column)
         let y = top + size * double(c.row)
-        let far = size - 1.0D
+        let far = size - 1.0
 
         tiles.add(
             [

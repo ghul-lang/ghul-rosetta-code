@@ -4,10 +4,10 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double, z: double)
 
-let sigma = 10.0D
-let rho = 28.0D
-let beta = 8.0D / 3.0D
-let dt = 0.004D
+let sigma = 10.0
+let rho = 28.0
+let beta = 8.0 / 3.0
+let dt = 0.004
 
 rate(at: Point) -> Point => (
     x = sigma * (at.y - at.x),
@@ -22,15 +22,15 @@ along(at: Point, by: Point, scale: double) -> Point => (
 )
 
 mean(a: Point, b: Point, c: Point, d: Point) -> Point => (
-    x = (a.x + 2.0D * b.x + 2.0D * c.x + d.x) / 6.0D,
-    y = (a.y + 2.0D * b.y + 2.0D * c.y + d.y) / 6.0D,
-    z = (a.z + 2.0D * b.z + 2.0D * c.z + d.z) / 6.0D
+    x = (a.x + 2.0 * b.x + 2.0 * c.x + d.x) / 6.0,
+    y = (a.y + 2.0 * b.y + 2.0 * c.y + d.y) / 6.0,
+    z = (a.z + 2.0 * b.z + 2.0 * c.z + d.z) / 6.0
 )
 
 step(at: Point) -> STREAM[Point, Point] => (
     let first = rate(at)
-    let second = rate(along(at, first, dt / 2.0D))
-    let third = rate(along(at, second, dt / 2.0D))
+    let second = rate(along(at, first, dt / 2.0))
+    let third = rate(along(at, second, dt / 2.0))
     let fourth = rate(along(at, third, dt))
 
     let slope = mean(first, second, third, fourth)
@@ -40,15 +40,15 @@ step(at: Point) -> STREAM[Point, Point] => (
 )
 
 let path =
-    stream((x = 1.0D, y = 1.0D, z = 1.0D), step)
+    stream((x = 1.0, y = 1.0, z = 1.0), step)
         |> skip(400)
         |> take(20000)
         |> list()
 
 let image = IMAGE(560, 700)
 
-image.view(-22.0D, 0.0D, 22.0D, 55.0D)
-image.stroke(1.0D)
+image.view(-22.0, 0.0, 22.0, 55.0)
+image.stroke(1.0)
 
 for at in 0..path.count - 1 do
     let part = double(at) / double(path.count)

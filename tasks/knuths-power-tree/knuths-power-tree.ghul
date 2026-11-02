@@ -77,4 +77,4 @@ for exponent in 0..18 do
 od
 
 write_line("3^191 = {exponentiate(3n, 191)}")
-write_line("1.1^81 = {exponentiate(1.1D, 81)}")
+write_line("1.1^81 = {exponentiate(1.1, 81)}")

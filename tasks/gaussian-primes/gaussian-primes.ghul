@@ -32,10 +32,10 @@ let axes = AXES(image)
 
 axes.x_title = "real"
 axes.y_title = "imaginary"
-axes.fit(-54.0D, -54.0D, 54.0D, 54.0D)
+axes.fit(-54.0, -54.0, 54.0, 54.0)
 
 image.color(90ub, 90ub, 100ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 axes.draw()
 
@@ -44,7 +44,7 @@ image.color(40ub, 92ub, 168ub)
 for b in -50::50 do
     for a in -50::50 do
         if a * a + b * b <= 50 * 50 /\ is_gaussian_prime(a, b) then
-            image.dot(double(a), double(b), 2.0D)
+            image.dot(double(a), double(b), 2.0)
         fi
     od
 od

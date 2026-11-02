@@ -50,7 +50,7 @@ all_pardoned(finds: (int[], int) -> bool) -> bool =>
 
 success_rate(finds: (int[], int) -> bool) -> double =>
     cast(0..trials |> filter(_ => all_pardoned(finds)) |> count()) *
-    100.0D /
+    100.0 /
     cast(trials)
 
 write_line(

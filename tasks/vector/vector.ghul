@@ -21,18 +21,18 @@ from_polar(angle: double, length: double) -> VECTOR =>
 
 between(from: VECTOR, to: VECTOR) -> VECTOR => to - from
 
-let a = VECTOR(5.0D, 7.0D)
-let b = VECTOR(2.0D, 3.0D)
+let a = VECTOR(5.0, 7.0)
+let b = VECTOR(2.0, 3.0)
 
 write_line("a           {a}")
 write_line("b           {b}")
 write_line("a + b       {a + b}")
 write_line("a - b       {a - b}")
-write_line("a * 11      {a * 11.0D}")
-write_line("a / 2       {a / 2.0D}")
+write_line("a * 11      {a * 11.0}")
+write_line("a / 2       {a / 2.0}")
 
-let start = VECTOR(1.0D, 1.0D)
-let finish = VECTOR(4.0D, 5.0D)
+let start = VECTOR(1.0, 1.0)
+let finish = VECTOR(4.0, 5.0)
 let span = between(start, finish)
 
 write_line("")

@@ -5,12 +5,12 @@ use Raster.SHAPES
 use Point = (x: double, y: double, z: double)
 use Flat = (x: double, y: double)
 
-let width = 2.0D
-let height = 3.0D
-let depth = 4.0D
+let width = 2.0
+let height = 3.0
+let depth = 4.0
 
-let yaw = pi / 6.0D
-let pitch = pi / 7.0D
+let yaw = pi / 6.0
+let pitch = pi / 7.0
 
 project(p: Point) -> Flat =>
     let
@@ -22,9 +22,9 @@ project(p: Point) -> Flat =>
 corner(i: int, j: int, k: int) -> Flat =>
     project(
         (
-            x = width * double(i) - width / 2.0D,
-            y = height * double(j) - height / 2.0D,
-            z = depth * double(k) - depth / 2.0D
+            x = width * double(i) - width / 2.0,
+            y = height * double(j) - height / 2.0,
+            z = depth * double(k) - depth / 2.0
         )
     )
 
@@ -40,11 +40,11 @@ let front = outline([
 ])
 let side = outline([(0, 0, 0), (0, 0, 1), (0, 1, 1), (0, 1, 0)])
 
-let faces = [(top, 1.0D), (front, 0.75D), (side, 0.55D)]
+let faces = [(top, 1.0), (front, 0.75), (side, 0.55)]
 
 let image = IMAGE(300, 300)
 
-image.view(-3.5D, -3.5D, 3.5D, 3.5D)
+image.view(-3.5, -3.5, 3.5, 3.5)
 image.clear(250ub, 250ub, 247ub)
 
 let shapes = SHAPES()
@@ -52,16 +52,16 @@ let shapes = SHAPES()
 for (points, light) in faces do
     shapes.add(
         points,
-        ubyte(80.0D * light),
-        ubyte(120.0D * light),
-        ubyte(240.0D * light)
+        ubyte(80.0 * light),
+        ubyte(120.0 * light),
+        ubyte(240.0 * light)
     )
 od
 
 image.fill(shapes)
 
 image.color(20ub, 30ub, 60ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 for (points, _) in faces do
     image.line(points ++ [points[0]] |> list())
