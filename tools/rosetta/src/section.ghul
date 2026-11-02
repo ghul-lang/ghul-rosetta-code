@@ -160,7 +160,7 @@ namespace Rosetta is
             let entries = if wants_notation(slug) then NOTATION.scan(code) else LIST[string]() fi
 
             if entries.count > 0 then
-                text.append("Notation used below:\n")
+                text.append("In the code below:\n")
 
                 for entry in entries do
                     text.append("* {Regex.replace(entry, "`([^`]+)`", "<code><nowiki>$1</nowiki></code>")}\n")

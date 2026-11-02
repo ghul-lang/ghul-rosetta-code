@@ -13,8 +13,7 @@ struct Vector(x: double public, y: double public) is
     to_string() -> string => "({x}, {y})"
 si
 
-// Operators declared as global functions, taking both operands, for a type
-// that declares none of its own.
+// Operators declared as global functions, taking both operands
 struct Money(pennies: int public) is
     to_string() -> string => "{pennies / 100}.{pennies % 100,2:00}"
 si
