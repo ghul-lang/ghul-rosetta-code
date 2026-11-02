@@ -1,5 +1,4 @@
 use default
-use Suit.*
 
 enum Suit is
     HEARTS,
@@ -7,6 +6,8 @@ enum Suit is
     CLUBS,
     SPADES
 si
+
+use Suit.*
 
 union Shape is
     CIRCLE(radius: int)

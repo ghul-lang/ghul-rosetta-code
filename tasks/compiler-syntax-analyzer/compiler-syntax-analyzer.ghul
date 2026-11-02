@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use Kind.*
 
 enum Kind is
     LEFT_PAREN,
@@ -34,6 +33,8 @@ enum Kind is
     PUTC,
     END_OF_INPUT
 si
+
+use Kind.*
 
 union Node is
     EMPTY
