@@ -58,6 +58,10 @@ namespace Rosetta is
 
             fixed(null, ["\\byield\\b"],
                 "`yield` in a function makes it a generator, returning a lazy `T{{}}` sequence")
+            fixed(null, ["\\bstream\\("],
+                "`stream(seed, step)` builds a sequence from a state - `step` returns `value || next_state`, which yields `value` and continues from `next_state`")
+            fixed(null, ["\\biterate\\("],
+                "`iterate(seed, next)` is the sequence `seed`, `next(seed)`, `next(next(seed))` and so on, without end")
             fixed(null, ["\\|>", "~>"],
                 "`|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`")
             fixed(null, ["~>"],
