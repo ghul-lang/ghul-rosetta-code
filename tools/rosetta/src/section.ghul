@@ -156,8 +156,20 @@ namespace Rosetta is
                 text.append("\n\n")
             fi
 
+            let (entries, code) = notation(IO.File.read_all_text(source))
+
+            if entries.count > 0 then
+                text.append("Notation used below:\n")
+
+                for entry in entries do
+                    text.append("* {Regex.replace(entry, "`([^`]+)`", "<code><nowiki>$1</nowiki></code>")}\n")
+                od
+
+                text.append("\n")
+            fi
+
             text.append("<syntaxhighlight lang=\"ghul\">")
-            text.append(IO.File.read_all_text(source))
+            text.append(code)
             text.append("</syntaxhighlight>\n\n")
 
             if output.length > 0 then
@@ -167,6 +179,50 @@ namespace Rosetta is
             fi
 
             return true
+        si
+
+        // The notation comments a source opens with, after its `use` lines,
+        // lifted out of the code: one entry for each `// `x` is ...` line,
+        // with any continuation lines (`//  ...`) joined to it, and the
+        // source without them. A source with no such block comes back whole.
+        notation(source: string) -> (entries: LIST[string], code: string) is
+            let lines = Regex.split(source, "\n")
+            let entries = LIST[string]()
+            let kept = LIST[string]()
+            let i mut = 0
+
+            while i < lines.count /\ (lines[i].starts_with("use ") \/ lines[i].trim().length == 0) do
+                kept.add(lines[i])
+                i = i + 1
+            od
+
+            while i < lines.count do
+                let line = lines[i]
+
+                if line.starts_with("// `") then
+                    entries.add(line.substring(3).trim())
+                elif line.starts_with("//  ") /\ entries.count > 0 then
+                    entries[entries.count - 1] = "{entries[entries.count - 1]} {line.substring(2).trim()}"
+                else
+                    break
+                fi
+
+                i = i + 1
+            od
+
+            if entries.count == 0 then
+                return (entries, source)
+            fi
+
+            if i < lines.count /\ lines[i].trim().length == 0 then
+                i = i + 1
+            fi
+
+            for j in i..lines.count do
+                kept.add(lines[j])
+            od
+
+            return (entries, kept |> join("\n"))
         si
 
         // What the program prints, with trailing newlines dropped: the text
