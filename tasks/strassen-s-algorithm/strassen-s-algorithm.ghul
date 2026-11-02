@@ -160,10 +160,7 @@ let agrees = [(a, b), (c, d), (e, e)]
         in
             0..x.count
                 |> all(i =>
-                    0..x.count
-                        |> all(j =>
-                            abs(s[i][j] - n[i][j]) < 1.0e-9
-                        )
+                    0..x.count |> all(j => abs(s[i][j] - n[i][j]) < 1.0e-9)
                 )
     )
 

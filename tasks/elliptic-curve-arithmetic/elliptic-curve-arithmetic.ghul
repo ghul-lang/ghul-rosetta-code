@@ -68,9 +68,7 @@ aligned(p: Point, q: Point, r: Point) -> bool =>
         (qx, qy): Point.AT = q,
         (rx, ry): Point.AT = r
     then
-        abs(
-            (qx - px) * (ry - py) - (rx - px) * (qy - py)
-        ) < 1.0e-9
+        abs((qx - px) * (ry - py) - (rx - px) * (qy - py)) < 1.0e-9
     else
         false
     fi

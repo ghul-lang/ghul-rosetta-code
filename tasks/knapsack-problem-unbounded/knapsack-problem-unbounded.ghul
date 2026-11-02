@@ -10,10 +10,7 @@ let weight_limit = 25.0
 let volume_limit = 0.25
 
 most_of(item: Bounty) -> int =>
-    min(
-        int(weight_limit / item.weight),
-        int(volume_limit / item.volume)
-    )
+    min(int(weight_limit / item.weight), int(volume_limit / item.volume))
 
 let best_value mut = 0
 let best mut = (panaceas = 0, ichors = 0, golds = 0)

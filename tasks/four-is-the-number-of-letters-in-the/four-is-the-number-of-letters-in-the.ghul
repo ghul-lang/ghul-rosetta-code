@@ -84,10 +84,7 @@ si
 
 ordinal(value: int) -> string is
     let words = cardinal(value)
-    let cut = max(
-        words.last_index_of(' '),
-        words.last_index_of('-')
-    )
+    let cut = max(words.last_index_of(' '), words.last_index_of('-'))
     let head = words[0..cut + 1]
     let last = words[cut + 1..<0]
 

@@ -14,8 +14,7 @@ let connections = [
 ]
 
 peaceful(pegs: int[]) -> bool =>
-    connections
-        |> all(line => abs(pegs[line.from] - pegs[line.to]) > 1)
+    connections |> all(line => abs(pegs[line.from] - pegs[line.to]) > 1)
 
 draw(pegs: int[]) is
     write_line("      {pegs[0]}   {pegs[1]}")

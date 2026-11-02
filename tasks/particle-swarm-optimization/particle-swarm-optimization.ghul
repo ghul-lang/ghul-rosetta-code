@@ -92,10 +92,7 @@ mccormick(p: V2) -> double =>
     1.0D
 
 michalewicz(p: V2) -> double =>
-    let term =
-        (x, i) =>
-            sin(x) * pow(sin(i * x * x / pi), 20.0D)
-    in
+    let term = (x, i) => sin(x) * pow(sin(i * x * x / pi), 20.0D) in
     -(term(p.x, 1.0D) + term(p.y, 2.0D))
 
 draw(problem: PROBLEM, found: (best: V2, particles: PARTICLE[])) is

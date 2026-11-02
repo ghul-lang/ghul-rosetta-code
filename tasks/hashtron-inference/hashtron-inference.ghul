@@ -75,7 +75,6 @@ for row in roots |> chunk(16) do
     write_line(row |> map(root => "{root,3}") |> join(""))
 od
 
-let correct =
-    0..256 |> all(n => roots[n] == ulong(sqrt(double(n))))
+let correct = 0..256 |> all(n => roots[n] == ulong(sqrt(double(n))))
 
 write_line("every square root correct: {correct}")

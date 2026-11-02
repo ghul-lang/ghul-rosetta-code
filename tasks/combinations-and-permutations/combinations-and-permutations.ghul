@@ -25,10 +25,7 @@ log_gamma(x: double) -> double =>
         a = 1::8 |> reduce(coefficients[0], term),
         half_log_2pi = 0.5 * log(2.0 * pi)
     in
-        half_log_2pi +
-        (xm + 0.5) * log(t) -
-        t +
-        log(a)
+        half_log_2pi + (xm + 0.5) * log(t) - t + log(a)
 
 // A value too large for a double is shown as a mantissa and a
 // decimal exponent, both taken from the natural log rather than

@@ -38,8 +38,7 @@ let points =
         |> map(half => (even = 2 * half, count = goldbach(2 * half)))
         |> list()
 
-let tallest =
-    points |> reduce(0, (best, point) => max(best, point.count))
+let tallest = points |> reduce(0, (best, point) => max(best, point.count))
 
 let bands = [
     (

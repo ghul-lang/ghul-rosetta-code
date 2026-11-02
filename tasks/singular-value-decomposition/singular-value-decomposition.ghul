@@ -77,8 +77,7 @@ svd(a: Matrix) -> (u: Matrix, sigma: double[], v: Matrix) is
         od
     od
 
-    let norms =
-        (0..n) |> map(j => sqrt(column_dot(u, j, j))) |> list()
+    let norms = (0..n) |> map(j => sqrt(column_dot(u, j, j))) |> list()
 
     let order = (0..n) |> sort_by_descending(j => norms[j]) |> list()
     let last = u.count - 1

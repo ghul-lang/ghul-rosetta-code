@@ -100,10 +100,7 @@ hommel() -> double[] is
     let adjusted = repeat(0.0, n) |> LIST()
 
     for rank in 0..n do
-        adjusted[ascending[rank]] = max(
-            floor[rank],
-            sorted[rank]
-        )
+        adjusted[ascending[rank]] = max(floor[rank], sorted[rank])
     od
 
     adjusted

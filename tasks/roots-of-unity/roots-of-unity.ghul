@@ -15,8 +15,7 @@ roots_of_unity(n: int) -> Complex{} =>
             )
         )
 
-tidy(x: double) -> double =>
-    if abs(x) < 0.00005 then 0.0 else x fi
+tidy(x: double) -> double => if abs(x) < 0.00005 then 0.0 else x fi
 
 show(z: Complex) -> string =>
     let

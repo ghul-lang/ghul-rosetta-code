@@ -41,8 +41,7 @@ class NUMBRIX is
     )
 
     _distance(a: int, b: int) -> int =>
-        abs(a / _size - b / _size) +
-        abs(a % _size - b % _size)
+        abs(a / _size - b / _size) + abs(a % _size - b % _size)
 
     // The next given number further on has to stay within reach.
     _reachable(cell: int, n: int) -> bool is

@@ -1,7 +1,6 @@
 use default
 use Raster.IMAGE
 
-
 let size = 480
 let centre = double(size) / 2.0D
 let radius = 208.0D

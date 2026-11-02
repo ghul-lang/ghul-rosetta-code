@@ -29,8 +29,7 @@ class MATRIX(cells: double[][]) is
     -(other: MATRIX) -> MATRIX => _both(other, * - *)
     *(other: MATRIX) -> MATRIX => _both(other, * * *)
     /(other: MATRIX) -> MATRIX => _both(other, * / *)
-    ^(other: MATRIX) -> MATRIX =>
-        _both(other, (a, b) => pow(a, b))
+    ^(other: MATRIX) -> MATRIX => _both(other, (a, b) => pow(a, b))
 
     +(k: double) -> MATRIX => _each(* + k)
     -(k: double) -> MATRIX => _each(* - k)

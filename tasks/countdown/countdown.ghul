@@ -41,8 +41,7 @@ combinations(a: int, b: int) -> Move{} is
 si
 
 solve(numbers: Found[], target: int, best: Found) -> Found is
-    let closest mut =
-        numbers |> min_by(f => abs(f.value - target)) ?? best
+    let closest mut = numbers |> min_by(f => abs(f.value - target)) ?? best
 
     if closest.value == target then
         return closest

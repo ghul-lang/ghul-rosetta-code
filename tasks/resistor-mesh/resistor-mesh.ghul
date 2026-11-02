@@ -25,9 +25,7 @@ solve(matrix: LIST[LIST[double]], rhs: LIST[double]) -> double[] is
     let n = rhs.count
 
     for column in 0..n do
-        let pivot =
-            (column..n)
-                |> max_by(row => abs(matrix[row][column]))!
+        let pivot = (column..n) |> max_by(row => abs(matrix[row][column]))!
 
         (matrix[column], matrix[pivot]) = (matrix[pivot], matrix[column])
         (rhs[column], rhs[pivot]) = (rhs[pivot], rhs[column])
