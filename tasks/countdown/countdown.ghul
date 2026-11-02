@@ -1,5 +1,4 @@
 use default
-use System.Math
 use System.Random
 
 use Found = (value: int, steps: LIST[string])
@@ -43,7 +42,7 @@ si
 
 solve(numbers: Found[], target: int, best: Found) -> Found is
     let closest mut =
-        numbers |> min_by(f => Math.abs(f.value - target)) ?? best
+        numbers |> min_by(f => abs(f.value - target)) ?? best
 
     if closest.value == target then
         return closest

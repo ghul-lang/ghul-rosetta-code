@@ -177,7 +177,7 @@ let hues = "FILNPTUVWXYZ"
 colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let
         h = double(hues.index_of(name)) / 12.0D * 6.0D,
-        f = h - System.Math.floor(h),
+        f = h - floor(h),
         i = int(h),
         up = ubyte(90.0D + 150.0D * f),
         down = ubyte(240.0D - 150.0D * f)

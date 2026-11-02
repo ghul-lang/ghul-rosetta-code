@@ -17,7 +17,7 @@ bigrams(phrase: string) -> Map[string, int] =>
 shared(left: Map[string, int], right: Map[string, int]) -> int =>
     left
         |> filter(entry => right.contains_key(entry.key))
-        |> sum_by(entry => System.Math.min(entry.value, right[entry.key]))
+        |> sum_by(entry => min(entry.value, right[entry.key]))
 
 size(counted: Map[string, int]) -> int => counted.values |> sum()
 

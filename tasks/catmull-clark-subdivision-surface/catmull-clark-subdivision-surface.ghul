@@ -200,13 +200,13 @@ for round in 0..rounds.count do
     let radius =
         points
             |> map(point =>
-                System.Math.sqrt(
+                sqrt(
                     point.x * point.x +
                     point.y * point.y +
                     point.z * point.z
                 )
             )
-            |> reduce(0.0D, (a, b) => System.Math.max(a, b))
+            |> reduce(0.0D, (a, b) => max(a, b))
 
     write_line(
         "round {round}: {points.count} points, {faces.count} faces, "

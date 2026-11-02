@@ -1,5 +1,4 @@
 use default
-use System.Math.*
 
 agm(a: double, g: double) -> double =>
     if abs(a - g) <= 1.0e-15 * abs(a) then a

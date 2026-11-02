@@ -40,7 +40,7 @@ let block mut = 10L
 while block < limit do
     for pair in starts_and_ends do
         let start = block * long(pair.first)
-        let stop = System.Math.min(start + block, limit)
+        let stop = min(start + block, limit)
 
         let first_candidate = start + long(pair.last)
 

@@ -23,8 +23,8 @@ let taxis = [
     |> list()
 
 cube_root(value: long) -> long => (
-    let cube_root_of = System.Math.cbrt(cast(value))
-    let root = long(System.Math.floor(cube_root_of + 0.5D))
+    let cube_root_of = cbrt(cast(value))
+    let root = long(floor(cube_root_of + 0.5D))
 
     if root * root * root == value then root else 0L fi
 )

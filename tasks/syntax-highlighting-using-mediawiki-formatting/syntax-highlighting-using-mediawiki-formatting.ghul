@@ -27,7 +27,7 @@ string_end(line: string, start: int) -> int is
         i = i + if line[i] == '\\' then 2 else 1 fi
     od
 
-    System.Math.min(i + 1, line.length)
+    min(i + 1, line.length)
 si
 
 highlight(line: string) -> string is

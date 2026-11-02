@@ -6,7 +6,7 @@ use Point = (x: double, y: double)
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 shoelace_area(vertices: Point[]) -> double =>
-    System.Math.abs(
+    abs(
         zip(vertices, vertices |> skip(1) |> cat([vertices[0]]))
             |> sum_by((a, b) => a.x * b.y - b.x * a.y)
     ) / 2.0

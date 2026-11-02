@@ -11,9 +11,9 @@ safe_add(a: double, b: double) -> INTERVAL is
     let error = (a - (sum - b_part)) + (b - b_part)
 
     if error > 0.0 then
-        INTERVAL(sum, System.Math.bit_increment(sum))
+        INTERVAL(sum, bit_increment(sum))
     elif error < 0.0 then
-        INTERVAL(System.Math.bit_decrement(sum), sum)
+        INTERVAL(bit_decrement(sum), sum)
     else
         INTERVAL(sum, sum)
     fi

@@ -1,5 +1,4 @@
 use default
-use Math = System.Math
 use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
@@ -40,7 +39,7 @@ let points =
         |> list()
 
 let tallest =
-    points |> reduce(0, (best, point) => Math.max(best, point.count))
+    points |> reduce(0, (best, point) => max(best, point.count))
 
 let bands = [
     (

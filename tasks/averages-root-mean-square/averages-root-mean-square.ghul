@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
@@ -9,7 +8,7 @@ use System.Math
 
 root_mean_square(values: double[]) -> double =>
     let squares = values |> sum_by(v => v * v) in
-    Math.sqrt(squares / cast(values.count))
+    sqrt(squares / cast(values.count))
 
 let one_to_ten = 1::10 |> map(double) |> list()
 

@@ -1,7 +1,4 @@
 use default
-use System.Math.abs
-use System.Math.pi
-use System.Math.sin
 use System.Threading.AutoResetEvent
 use System.Threading.Thread
 

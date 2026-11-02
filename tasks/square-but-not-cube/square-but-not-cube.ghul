@@ -9,8 +9,8 @@ use default
 
 is_cube(n: long) -> bool =>
     let
-        estimate = System.Math.cbrt(double(n)),
-        root = long(System.Math.round(estimate))
+        estimate = cbrt(double(n)),
+        root = long(round(estimate))
     in
         root * root * root == n
 

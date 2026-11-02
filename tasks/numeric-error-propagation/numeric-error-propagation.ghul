@@ -1,5 +1,4 @@
 use default
-use System.Math.*
 
 struct UNCERTAIN(value: double, error: double) is
     +(other: UNCERTAIN) -> UNCERTAIN =>

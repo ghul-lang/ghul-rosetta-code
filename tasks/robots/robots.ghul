@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math.*
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `SET[T]` is a mutable set, holding each element once

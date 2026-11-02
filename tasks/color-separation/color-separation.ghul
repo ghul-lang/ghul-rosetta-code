@@ -1,7 +1,6 @@
 use default
 use Raster.Anchor
 use Raster.IMAGE
-use System.Math.*
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 

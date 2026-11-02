@@ -56,7 +56,7 @@ class NODE is
     si
 
     _shared_prefix(left: string, right: string) -> int =>
-        let limit = System.Math.min(left.length, right.length) in
+        let limit = min(left.length, right.length) in
         from(0) |> find(i => i == limit \/ left[i] != right[i]) ?? limit
 si
 

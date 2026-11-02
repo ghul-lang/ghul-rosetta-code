@@ -38,11 +38,11 @@ running(
         let value = factor(rank) * p_values[order[rank]]
 
         bound =
-            if keep_lower then System.Math.min(bound, value)
-            else System.Math.max(bound, value)
+            if keep_lower then min(bound, value)
+            else max(bound, value)
             fi
 
-        adjusted[order[rank]] = System.Math.min(1.0, bound)
+        adjusted[order[rank]] = min(1.0, bound)
     od
 
     adjusted
@@ -61,7 +61,7 @@ benjamini_yekutieli() -> double[] =>
     )
 
 bonferroni() -> double[] =>
-    p_values |> map(p => System.Math.min(1.0, double(n) * p)) |> list()
+    p_values |> map(p => min(1.0, double(n) * p)) |> list()
 
 hochberg() -> double[] =>
     running(descending, rank => double(rank + 1), true)
@@ -85,7 +85,7 @@ hommel() -> double[] is
                 |> min() ?? 1.0
 
         for i in 0..tail do
-            q[i] = System.Math.min(double(m) * sorted[i], q1)
+            q[i] = min(double(m) * sorted[i], q1)
         od
 
         for i in tail..n do
@@ -93,14 +93,14 @@ hommel() -> double[] is
         od
 
         for i in 0..n do
-            floor[i] = System.Math.max(floor[i], q[i])
+            floor[i] = max(floor[i], q[i])
         od
     od
 
     let adjusted = repeat(0.0, n) |> LIST()
 
     for rank in 0..n do
-        adjusted[ascending[rank]] = System.Math.max(
+        adjusted[ascending[rank]] = max(
             floor[rank],
             sorted[rank]
         )

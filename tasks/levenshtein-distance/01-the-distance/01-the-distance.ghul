@@ -1,5 +1,4 @@
 use default
-use System.Math.min
 
 // `LIST[T]` is a mutable list that grows as elements are added
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by

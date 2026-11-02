@@ -166,7 +166,7 @@ human_choice(hand: Card[]) -> Choice? is
 
     for row in 0..(hand.count + 3) / 4 do
         let cards =
-            (row * 4..System.Math.min(row * 4 + 4, hand.count))
+            (row * 4..min(row * 4 + 4, hand.count))
                 |> map(i => "{i + 1}: {name(hand[i])}")
                 |> join()
 

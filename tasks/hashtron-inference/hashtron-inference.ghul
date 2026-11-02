@@ -76,6 +76,6 @@ for row in roots |> chunk(16) do
 od
 
 let correct =
-    0..256 |> all(n => roots[n] == ulong(System.Math.sqrt(double(n))))
+    0..256 |> all(n => roots[n] == ulong(sqrt(double(n))))
 
 write_line("every square root correct: {correct}")

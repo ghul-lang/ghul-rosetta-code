@@ -1,7 +1,6 @@
 use default
 use Raster.ANIMATION
 use Raster.IMAGE
-use System.Math.*
 
 // `==` compares identity
 

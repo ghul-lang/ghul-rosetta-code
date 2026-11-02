@@ -24,7 +24,7 @@ invert(a: double[][]) -> double[][] is
             |> LIST()
 
     for k in 0..n do
-        let pivot = k..n |> max_by(i => System.Math.abs(rows[i][k]))!
+        let pivot = k..n |> max_by(i => abs(rows[i][k]))!
 
         assert rows[pivot][k] != 0.0 else "the matrix is singular"
 

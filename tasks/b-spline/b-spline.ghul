@@ -19,7 +19,7 @@ let control: Point[] = [
 let degree = 3
 let spans = control.count - degree
 
-knot(i: int) -> double => double(System.Math.clamp(i - degree, 0, spans))
+knot(i: int) -> double => double(clamp(i - degree, 0, spans))
 
 lerp(a: Point, b: Point, t: double) -> Point => (
     x = a.x + (b.x - a.x) * t,
@@ -27,7 +27,7 @@ lerp(a: Point, b: Point, t: double) -> Point => (
 )
 
 de_boor(t: double) -> Point is
-    let span = System.Math.min(int(t), spans - 1) + degree
+    let span = min(int(t), spans - 1) + degree
     let d = LIST(0::degree |> map(j => control[j + span - degree]))
 
     for r in 1::degree do

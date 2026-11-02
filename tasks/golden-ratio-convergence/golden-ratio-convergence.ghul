@@ -1,6 +1,4 @@
 use default
-use System.Math.abs
-use System.Math.sqrt
 
 let target = (1.0D + sqrt(5.0D)) / 2.0D
 

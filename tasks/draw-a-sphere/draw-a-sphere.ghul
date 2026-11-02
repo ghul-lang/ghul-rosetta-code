@@ -1,8 +1,6 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
-use Math = System.Math
 
 let size = 480
 let centre = double(size) / 2.0D

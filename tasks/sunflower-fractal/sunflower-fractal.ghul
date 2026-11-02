@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 let seeds = 3000
 let phi = (sqrt(5.0D) + 1.0D) / 2.0D

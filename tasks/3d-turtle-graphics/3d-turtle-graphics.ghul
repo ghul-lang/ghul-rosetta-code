@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added

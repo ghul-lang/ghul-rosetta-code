@@ -35,7 +35,7 @@ roots(
     stop: double,
     step: double
 ) -> Root{} is
-    let steps = int(System.Math.round((stop - start) / step))
+    let steps = int(round((stop - start) / step))
     let x = i => start + double(i) * step
 
     for i in 0::steps do

@@ -1,6 +1,5 @@
 use default
 use IO.Std.write
-use System.Math.sqrt
 
 use Writer[T] = (value: T, log: string)
 

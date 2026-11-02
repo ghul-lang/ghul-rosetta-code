@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by

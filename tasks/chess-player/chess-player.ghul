@@ -1,6 +1,5 @@
 use default
 use IO.Std.read_line
-use System.Math.*
 
 use Move = (from: int, to: int, promotion: char)
 

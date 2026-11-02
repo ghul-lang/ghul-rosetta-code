@@ -107,7 +107,7 @@ deconvolve_1d(g: int[], f: int[]) -> int[] is
     let h = LIST()
 
     for n in 0..g.count - f.count + 1 do
-        let lower = System.Math.max(0, n - f.count + 1)
+        let lower = max(0, n - f.count + 1)
         let overlap = lower..n |> sum_by(i => f[n - i] * h[i])
 
         h.add((g[n] - overlap) / f[0])

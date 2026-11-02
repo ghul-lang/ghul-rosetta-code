@@ -1,8 +1,6 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
-use Math = System.Math
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)
 
 // `case ... when` pattern-matches

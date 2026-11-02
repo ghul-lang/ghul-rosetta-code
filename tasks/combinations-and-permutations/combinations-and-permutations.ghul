@@ -23,21 +23,21 @@ log_gamma(x: double) -> double =>
         t = xm + g + 0.5,
         term = (sum, i) => sum + coefficients[i] / (xm + double(i)),
         a = 1::8 |> reduce(coefficients[0], term),
-        half_log_2pi = 0.5 * System.Math.log(2.0 * System.Math.pi)
+        half_log_2pi = 0.5 * log(2.0 * pi)
     in
         half_log_2pi +
-        (xm + 0.5) * System.Math.log(t) -
+        (xm + 0.5) * log(t) -
         t +
-        System.Math.log(a)
+        log(a)
 
 // A value too large for a double is shown as a mantissa and a
 // decimal exponent, both taken from the natural log rather than
 // from the value itself.
 scientific(ln_value: double) -> string =>
     let
-        log10 = ln_value / System.Math.log(10.0),
-        exponent = System.Math.floor(log10),
-        mantissa = System.Math.pow(10.0, log10 - exponent)
+        log10 = ln_value / log(10.0),
+        exponent = floor(log10),
+        mantissa = pow(10.0, log10 - exponent)
     in
         "{mantissa,0:F6}e+{int(exponent)}"
 

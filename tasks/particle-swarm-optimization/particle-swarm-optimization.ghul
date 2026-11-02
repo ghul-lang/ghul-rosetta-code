@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -36,8 +35,8 @@ between(low: double, high: double) -> double =>
 
 clamp(p: V2, problem: PROBLEM) -> V2 =>
     V2(
-        Math.clamp(p.x, problem.low.x, problem.high.x),
-        Math.clamp(p.y, problem.low.y, problem.high.y)
+        Ghul.Math.clamp(p.x, problem.low.x, problem.high.x),
+        Ghul.Math.clamp(p.y, problem.low.y, problem.high.y)
     )
 
 swarm(problem: PROBLEM) -> (best: V2, particles: PARTICLE[]) is
@@ -86,7 +85,7 @@ swarm(problem: PROBLEM) -> (best: V2, particles: PARTICLE[]) is
 si
 
 mccormick(p: V2) -> double =>
-    Math.sin(p.x + p.y) +
+    sin(p.x + p.y) +
     (p.x - p.y) * (p.x - p.y) -
     1.5D * p.x +
     2.5D * p.y +
@@ -95,7 +94,7 @@ mccormick(p: V2) -> double =>
 michalewicz(p: V2) -> double =>
     let term =
         (x, i) =>
-            Math.sin(x) * Math.pow(Math.sin(i * x * x / Math.pi), 20.0D)
+            sin(x) * pow(sin(i * x * x / pi), 20.0D)
     in
     -(term(p.x, 1.0D) + term(p.y, 2.0D))
 
@@ -118,13 +117,13 @@ draw(problem: PROBLEM, found: (best: V2, particles: PARTICLE[])) is
         od
     od
 
-    let low = values |> reduce(values[0], (a, b) => Math.min(a, b))
-    let high = values |> reduce(values[0], (a, b) => Math.max(a, b))
+    let low = values |> reduce(values[0], (a, b) => min(a, b))
+    let high = values |> reduce(values[0], (a, b) => max(a, b))
 
     for row in 0..size do
         for column in 0..size do
             let t = (values[row * size + column] - low) / (high - low)
-            let s = Math.sqrt(t)
+            let s = sqrt(t)
 
             image.set_pixel(
                 column,
@@ -170,7 +169,7 @@ let problems = [
         "Michalewicz",
         michalewicz,
         V2(0.0D, 0.0D),
-        V2(Math.pi, Math.pi),
+        V2(pi, pi),
         0.3D,
         0.3D,
         0.3D,

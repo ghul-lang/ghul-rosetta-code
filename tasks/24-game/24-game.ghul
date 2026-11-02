@@ -131,7 +131,7 @@ judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
         when parsed: Parsed.OK then
             if skip_spaces(entered, parsed.at) < entered.length then
                 (told = "the expression does not end there", solved = false)
-            elif System.Math.abs(parsed.value - target) < 0.000001D then
+            elif abs(parsed.value - target) < 0.000001D then
                 (told = "that is 24, well done", solved = true)
             else
                 (

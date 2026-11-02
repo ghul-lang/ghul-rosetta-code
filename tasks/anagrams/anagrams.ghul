@@ -9,7 +9,7 @@ let sets =
     IO.File.read_all_lines("unixdict.txt") |> group_by(sorted_letters)
 
 let largest =
-    sets.values |> reduce(0, (n, words) => System.Math.max(n, words.count))
+    sets.values |> reduce(0, (n, words) => max(n, words.count))
 
 sets.values
     |> filter(words => words.count == largest)

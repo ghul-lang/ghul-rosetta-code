@@ -1,7 +1,6 @@
 use default
 use Raster.IMAGE
 use Raster.SHAPES
-use System.Math.*
 
 use Point = (x: double, y: double, z: double)
 use Flat = (x: double, y: double)

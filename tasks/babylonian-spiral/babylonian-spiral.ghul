@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 use Step = (x: int, y: int)
 

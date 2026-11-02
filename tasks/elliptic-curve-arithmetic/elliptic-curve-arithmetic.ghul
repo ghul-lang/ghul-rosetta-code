@@ -2,8 +2,6 @@ use default
 use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
-use System.Math.cbrt
-use System.Math.sqrt
 
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
 //  index materialises the source only as far as that index and caches what
@@ -70,7 +68,7 @@ aligned(p: Point, q: Point, r: Point) -> bool =>
         (qx, qy): Point.AT = q,
         (rx, ry): Point.AT = r
     then
-        System.Math.abs(
+        abs(
             (qx - px) * (ry - py) - (rx - px) * (qy - py)
         ) < 1.0e-9
     else

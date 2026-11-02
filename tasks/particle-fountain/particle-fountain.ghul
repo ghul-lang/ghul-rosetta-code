@@ -69,7 +69,7 @@ draw(image: IMAGE) is
 
     for drop in drops do
         if drop.y <= double(height) then
-            let fall = System.Math.clamp(drop.dy / 3.8D, -1.0D, 1.0D)
+            let fall = clamp(drop.dy / 3.8D, -1.0D, 1.0D)
             let shade = ubyte(170 + int(80.0D * fall * fall))
 
             image.colour(shade - 60ub, shade, 255ub)

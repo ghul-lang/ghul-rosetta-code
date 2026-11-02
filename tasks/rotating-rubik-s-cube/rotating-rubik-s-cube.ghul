@@ -2,7 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 use Raster.SHAPES
-use System.Math.*
 
 use Point = (x: double, y: double, z: double)
 use Colour = (red: ubyte, green: ubyte, blue: ubyte)

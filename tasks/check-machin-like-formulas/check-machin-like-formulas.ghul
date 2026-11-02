@@ -28,7 +28,7 @@ tangent_is_one(terms: TERM[]) -> bool is
                 angle
             fi
 
-        for _ in 0..System.Math.abs(term.multiplier) do
+        for _ in 0..abs(term.multiplier) do
             product = product * factor
         od
     od
@@ -39,7 +39,7 @@ si
 describe(term: TERM) -> string =>
     let
         sign = if term.multiplier < 0 then "-" else "+" fi,
-        scale = System.Math.abs(term.multiplier),
+        scale = abs(term.multiplier),
         angle = "arctan({term.numerator}/{term.denominator})",
         scaled = if scale == 1 then angle else "{scale}*{angle}" fi
     in

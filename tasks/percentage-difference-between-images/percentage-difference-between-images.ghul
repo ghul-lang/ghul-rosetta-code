@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 // `==` compares identity
 
@@ -78,7 +77,7 @@ reduced(image: IMAGE) -> IMAGE is
     copy
 si
 
-gap(a: ubyte, b: ubyte) -> long => long(Math.abs(int(a) - int(b)))
+gap(a: ubyte, b: ubyte) -> long => long(abs(int(a) - int(b)))
 
 difference(a: IMAGE, b: IMAGE) -> double is
     assert a.width == b.width /\ a.height == b.height

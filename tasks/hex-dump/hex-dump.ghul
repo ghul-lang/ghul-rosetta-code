@@ -9,10 +9,10 @@ use default
 
 hex_dump(data: ubyte[], start: int, length: int) is
     let offset mut = start
-    let end = System.Math.min(start + length, data.count)
+    let end = min(start + length, data.count)
 
     while offset < end do
-        let count = System.Math.min(16, end - offset)
+        let count = min(16, end - offset)
         let bytes = 0..count |> map(i => data[offset + i])
         let to_hex = b => "{b,0:x2}"
         let first_half = bytes |> take(8) |> map(to_hex) |> join(" ")

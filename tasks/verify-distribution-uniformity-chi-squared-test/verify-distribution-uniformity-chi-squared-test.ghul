@@ -9,7 +9,7 @@ log_gamma(x: double) -> double => (
         76.18009172947146, -86.50532032941677, 24.01409824083091,
         -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5
     ]
-    let tmp = x + 5.5 - (x + 0.5) * System.Math.log(x + 5.5)
+    let tmp = x + 5.5 - (x + 0.5) * log(x + 5.5)
     let series mut = 1.000000000190015
     let y mut = x
 
@@ -18,11 +18,11 @@ log_gamma(x: double) -> double => (
         series = series + c / y
     od
 
-    -tmp + System.Math.log(2.5066282746310005 * series / x)
+    -tmp + log(2.5066282746310005 * series / x)
 )
 
 prefactor(a: double, x: double) -> double =>
-    System.Math.exp(-x + a * System.Math.log(x) - log_gamma(a))
+    exp(-x + a * log(x) - log_gamma(a))
 
 // The regularised upper incomplete gamma function Q(a, x), by its series
 // below a + 1 and its continued fraction above.
@@ -52,9 +52,9 @@ upper_gamma(a: double, x: double) -> double is
 
         b = b + 2.0
         dd = an * dd + b
-        dd = if System.Math.abs(dd) < tiny then tiny else dd fi
+        dd = if abs(dd) < tiny then tiny else dd fi
         c = b + an / c
-        c = if System.Math.abs(c) < tiny then tiny else c fi
+        c = if abs(c) < tiny then tiny else c fi
         dd = 1.0 / dd
         h = h * dd * c
     od

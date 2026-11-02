@@ -67,7 +67,7 @@ cyclotomic(n: int) -> long[] is
 si
 
 term(coefficient: long, power: int) -> string =>
-    let magnitude = System.Math.abs(coefficient) in
+    let magnitude = abs(coefficient) in
     let digits =
         if magnitude == 1L /\ power > 0 then
             ""
@@ -114,7 +114,7 @@ while first_order.count < 10 do
 
     let heights =
         cyclotomic(n)
-            |> map(System.Math.abs)
+            |> map(abs)
             |> filter(h => h >= 1L /\ h <= 10L)
 
     for height in heights do

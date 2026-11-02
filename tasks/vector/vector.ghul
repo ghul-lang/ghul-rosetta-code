@@ -1,8 +1,4 @@
 use default
-use System.Math.atan2
-use System.Math.cos
-use System.Math.sin
-use System.Math.sqrt
 
 struct VECTOR(x: double, y: double) is
     +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)

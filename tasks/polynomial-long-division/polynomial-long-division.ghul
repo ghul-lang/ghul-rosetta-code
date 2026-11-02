@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 use DIVISION = (quotient: double[], remainder: double[])
 
@@ -57,7 +56,7 @@ render(poly: double[]) -> string is
     let parts = LIST()
 
     for power in 0::top |> reverse() do
-        let size = Math.abs(poly[power])
+        let size = abs(poly[power])
 
         if poly[power] != 0.0D then
             let sign =

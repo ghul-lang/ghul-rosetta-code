@@ -30,8 +30,8 @@ axes(shape: Polygon) -> Point{} =>
 spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
     let alongs = polygon |> map(corner => corner ⋅ axis) |> list() in
     (
-        low = alongs |> reduce(alongs[0], System.Math.min),
-        high = alongs |> reduce(alongs[0], System.Math.max)
+        low = alongs |> reduce(alongs[0], min),
+        high = alongs |> reduce(alongs[0], max)
     )
 
 separated(first: Polygon, second: Polygon, axis: Point) -> bool =>

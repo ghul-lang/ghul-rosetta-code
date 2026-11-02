@@ -10,7 +10,7 @@ let weight_limit = 25.0
 let volume_limit = 0.25
 
 most_of(item: Bounty) -> int =>
-    System.Math.min(
+    min(
         int(weight_limit / item.weight),
         int(volume_limit / item.volume)
     )
@@ -32,7 +32,7 @@ for panaceas in 0::most_of(panacea) do
             break
         fi
 
-        let golds = System.Math.min(
+        let golds = min(
             int((weight_limit - weight) / gold.weight),
             int((volume_limit - volume) / gold.volume)
         )

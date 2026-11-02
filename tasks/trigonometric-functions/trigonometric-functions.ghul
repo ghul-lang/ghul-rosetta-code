@@ -1,5 +1,4 @@
 use default
-use System.Math.*
 
 // The library takes and returns radians, so the degree column is the same
 // angle converted on the way in and on the way out.

@@ -37,7 +37,7 @@ check_distribution(
 
     for value in counts.keys |> sort() do
         let difference = double(counts[value]) - expected
-        let deviation = System.Math.abs(difference) / expected
+        let deviation = abs(difference) / expected
         let within = deviation <= delta
 
         write_line(

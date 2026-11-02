@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math.*
 
 use Circle = (x: double, y: double, r: double)
 use Arc = (circle: Circle, from: double, to: double)

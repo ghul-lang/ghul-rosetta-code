@@ -1,9 +1,7 @@
 use default
 use Raster.AXES
 use Raster.IMAGE
-use System.Math.*
 
-use Math = System.Math
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source

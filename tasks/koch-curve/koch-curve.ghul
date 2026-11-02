@@ -12,7 +12,7 @@ use Point = (x: double, y: double)
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 
-let rise = System.Math.sqrt(3.0D) / 2.0D
+let rise = sqrt(3.0D) / 2.0D
 
 koch(depth: int, from: Point, to: Point) -> Point{} is
     if depth == 0 then

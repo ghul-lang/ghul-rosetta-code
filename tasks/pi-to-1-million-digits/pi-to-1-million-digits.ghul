@@ -37,7 +37,7 @@ square_root(n: bigint) -> bigint is
     let bits = int(n.get_bit_length())
 
     if bits <= 50 then
-        return bigint(System.Math.sqrt(double(n)))
+        return bigint(sqrt(double(n)))
     fi
 
     let shift = bits / 4

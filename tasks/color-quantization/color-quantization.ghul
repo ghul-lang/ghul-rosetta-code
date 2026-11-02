@@ -1,6 +1,5 @@
 use default
 use Raster.IMAGE
-use System.Math
 
 use Colour = (red: int, green: int, blue: int)
 
@@ -70,7 +69,7 @@ si
 
 hue(h: double) -> Colour =>
     let
-        part = (h * 6.0D) - Math.floor(h * 6.0D),
+        part = (h * 6.0D) - floor(h * 6.0D),
         sector = int(h * 6.0D) % 6,
         up = int(255.0D * part),
         down = int(255.0D * (1.0D - part))

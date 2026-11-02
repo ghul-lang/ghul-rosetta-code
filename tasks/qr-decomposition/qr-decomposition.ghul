@@ -47,7 +47,7 @@ transpose(a: Rows) -> Rows =>
 householder(a: Rows, k: int) -> Table is
     let m = a.count
     let column = k..m |> map(i => a[i][k]) |> list()
-    let norm = System.Math.sqrt(column |> sum_by(x => x * x))
+    let norm = sqrt(column |> sum_by(x => x * x))
     let sign = if column[0] < 0.0 then -1.0 else 1.0 fi
     let first = column[0] + sign * norm
     let v =

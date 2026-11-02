@@ -1,5 +1,4 @@
 use default
-use System.Math
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
@@ -29,7 +28,7 @@ entropy(word: string) -> double =>
         |> group_by(c => c)
         |> map(group => double(group.value.count) / total)
         |> reduce(0.0D, (bits, probability) =>
-            bits - probability * Math.log2(probability)
+            bits - probability * log2(probability)
         )
 
 write_line("   N      length            entropy")

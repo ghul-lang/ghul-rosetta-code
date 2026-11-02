@@ -31,7 +31,7 @@ for item in by_density do
         break
     fi
 
-    let portion = System.Math.min(item.weight, remaining)
+    let portion = min(item.weight, remaining)
 
     taken.add(
         (
