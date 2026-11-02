@@ -6,16 +6,16 @@ use default
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
 //  and tail
 
-enum COLOR is
+enum Color is
     RED,
     WHITE,
     BLUE
 si
 
-is_sorted(balls: COLOR[]) -> bool =>
+is_sorted(balls: Color[]) -> bool =>
     0..balls.count - 1 |> all(i => balls[i] <= balls[i + 1])
 
-shuffle(balls: LIST[COLOR], random: System.Random) is
+shuffle(balls: LIST[Color], random: System.Random) is
     let i mut = balls.count - 1
 
     while i > 0 do
@@ -25,20 +25,20 @@ shuffle(balls: LIST[COLOR], random: System.Random) is
     od
 si
 
-dutch_flag_sort(balls: LIST[COLOR]) is
+dutch_flag_sort(balls: LIST[Color]) is
     let low mut = 0
     let mid mut = 0
     let high mut = balls.count - 1
 
     while mid <= high do
         case balls[mid]
-        when COLOR.RED then
+        when Color.RED then
             (balls[low], balls[mid]) = (balls[mid], balls[low])
             low = low + 1
             mid = mid + 1
-        when COLOR.WHITE then
+        when Color.WHITE then
             mid = mid + 1
-        when COLOR.BLUE then
+        when Color.BLUE then
             (balls[high], balls[mid]) = (balls[mid], balls[high])
             high = high - 1
         esac
@@ -47,9 +47,9 @@ si
 
 let random = System.Random(42)
 let balls = LIST([
-    COLOR.RED, COLOR.RED, COLOR.RED,
-    COLOR.WHITE, COLOR.WHITE, COLOR.WHITE,
-    COLOR.BLUE, COLOR.BLUE, COLOR.BLUE
+    Color.RED, Color.RED, Color.RED,
+    Color.WHITE, Color.WHITE, Color.WHITE,
+    Color.BLUE, Color.BLUE, Color.BLUE
 ])
 
 shuffle(balls, random)
