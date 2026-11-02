@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 for count in 0::10 |> reverse() do
     write_line("{count}")
 od

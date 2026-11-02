@@ -1,11 +1,5 @@
 use default
 
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let permutation = [
     151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225,
     140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148,

@@ -1,8 +1,5 @@
 use default
 
-// `STACK[T]` is a mutable last-in, first-out stack
-// `==` compares identity
-
 let plates = STACK()
 
 plates.push("bottom")

@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let given = [
     "ABCD", "CABD", "ACDB", "DACB", "BCDA", "ACBD", "ADCB", "CDAB",
     "DABC", "BCAD", "CADB", "CDBA", "CBAD", "ABDC", "ADBC", "BDCA",

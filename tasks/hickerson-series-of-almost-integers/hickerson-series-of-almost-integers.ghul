@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let ln2 = 0.6931471805599453094172321215m
 
 hickerson(n: int) -> decimal =>

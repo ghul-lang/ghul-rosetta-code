@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 van_der_corput(n: int, base: int) -> double is
     walk(rest: int, weight: double) -> double =>
         if rest == 0 then 0.0

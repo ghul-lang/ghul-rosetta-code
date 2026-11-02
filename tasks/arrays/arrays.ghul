@@ -1,7 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-
 let fixed = ["apple", "orange", "pear"]
 
 write_line("{$fixed} has {fixed.count}, and fixed[1] is {fixed[1]}")

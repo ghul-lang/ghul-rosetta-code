@@ -2,10 +2,6 @@ use default
 
 use RANGE = (low: double, high: double)
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 normalised(bounds: RANGE) -> RANGE =>
     if bounds.low <= bounds.high then
         bounds

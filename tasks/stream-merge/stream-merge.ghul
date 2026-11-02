@@ -1,15 +1,6 @@
 use default
 use Ghul.Comparable
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-//  and tail
-
 merge_two[T: Comparable[T]](left: T{}, right: T{}) -> T{} is
     let ahead = left.iterator
     let behind = right.iterator

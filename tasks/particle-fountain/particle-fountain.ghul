@@ -2,11 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 class DROP is
     x: double public
     y: double public

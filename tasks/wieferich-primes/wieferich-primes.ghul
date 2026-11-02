@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality)
-
 is_wieferich(prime: int) -> bool =>
     let square = bigint(prime) * bigint(prime) in
     mod_pow(2n, bigint(prime - 1), square) =~ 1n

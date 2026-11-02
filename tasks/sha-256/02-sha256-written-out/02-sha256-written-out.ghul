@@ -1,13 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 let round_constants = [
     0x428A2F98u, 0x71374491u, 0xB5C0FBCFu, 0xE9B5DBA5u, 0x3956C25Bu,
     0x59F111F1u, 0x923F82A4u, 0xAB1C5ED5u, 0xD807AA98u, 0x12835B01u,

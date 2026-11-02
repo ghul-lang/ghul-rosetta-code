@@ -1,9 +1,5 @@
 use default
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `|> MAP()` reads the whole sequence into a new `MAP`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let random = System.Random(12345)
 
 dice5() -> int => random.next(1, 6)

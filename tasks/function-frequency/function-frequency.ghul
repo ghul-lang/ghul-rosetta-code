@@ -8,18 +8,6 @@ use System.Reflection.Emit.OpCodes
 use System.Reflection.Emit.OperandType
 use System.Text.RegularExpressions.Regex
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `SET[T]` is a mutable set, holding each element once
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> SET()` reads the whole sequence into a new `SET`
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-// `if let` and `case ... when` pattern-match, and `[x, ..rest]` matches a
-//  list head and tail
-
 let opcodes =
     (typeof OpCodes).get_fields(BindingFlags.PUBLIC | BindingFlags.STATIC)
         |> map(f => cast OpCode(f.get_value(null)))

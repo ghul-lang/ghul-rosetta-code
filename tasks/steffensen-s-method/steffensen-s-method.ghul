@@ -1,7 +1,5 @@
 use default
 
-// `if let` pattern-matches
-
 aitken(f: double -> double, p0: double) -> double =>
     let
         p1 = f(p0),

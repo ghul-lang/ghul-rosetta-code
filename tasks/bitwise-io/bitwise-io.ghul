@@ -1,9 +1,5 @@
 use default
 
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 // Bits are written most significant first and read back the same way.
 class BIT_WRITER(target: IO.Stream) is
     _target

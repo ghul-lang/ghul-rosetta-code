@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 class U0(message: string): System.Exception is
     super(message)
 si

@@ -1,8 +1,6 @@
 use default
 use System.Diagnostics.Stopwatch
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 // Process time rather than wall-clock time, so another program running at
 // the same time does not show up as this one taking longer.
 spent() -> double =>

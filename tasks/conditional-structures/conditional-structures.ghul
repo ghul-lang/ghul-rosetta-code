@@ -1,9 +1,6 @@
 use default
 use Suit.*
 
-// `==` compares identity
-// `if let` and `case ... when` pattern-match
-
 enum Suit is
     HEARTS,
     DIAMONDS,

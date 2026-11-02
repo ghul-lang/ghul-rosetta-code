@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 class ANIMAL is
     init() is si
 

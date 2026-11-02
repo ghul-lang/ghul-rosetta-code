@@ -1,12 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-// `memo` on a function caches its results - a call with arguments equal to
-//  an earlier call's returns the cached result, recursive calls included
-
 struct RATIONAL(numerator: bigint, denominator: bigint) is
     +(other: RATIONAL) -> RATIONAL =>
         reduced(

@@ -1,14 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-//  and tail
-
 merge(left: int[], right: int[]) -> int{} =>
     case (left, right)
     when ([], _) then right

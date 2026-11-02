@@ -1,8 +1,6 @@
 use default
 use System.Globalization.CultureInfo
 
-// `==` compares identity
-
 show(expression: string, value: double) =>
     write_line(
         "{expression,-28} {value.to_string(CultureInfo.invariant_culture)}"

@@ -1,11 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 reciprocal_factorials() -> decimal{} is
     let term mut = 1m
     let n mut = 1

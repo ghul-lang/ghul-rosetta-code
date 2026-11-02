@@ -1,8 +1,5 @@
 use default
 
-// `=~` compares values (structural equality)
-// `if let` pattern-matches
-
 full_name(user: string) -> string? =>
     if user =~ "alice" then "Alice Liddell" else null fi
 

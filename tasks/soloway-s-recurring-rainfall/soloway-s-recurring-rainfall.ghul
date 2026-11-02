@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let total mut = 0L
 let count mut = 0
 

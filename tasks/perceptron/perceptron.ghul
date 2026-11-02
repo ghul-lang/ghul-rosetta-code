@@ -1,11 +1,6 @@
 use default
 use Raster.IMAGE
 
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> ARRAY()` reads the whole sequence into a new `ARRAY`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 struct V3(x: double, y: double, bias: double) is
     +(o: V3) -> V3 => V3(x + o.x, y + o.y, bias + o.bias)
     *(k: double) -> V3 => V3(x * k, y * k, bias * k)

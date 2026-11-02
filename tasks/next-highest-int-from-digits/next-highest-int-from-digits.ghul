@@ -1,10 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `if let` pattern-matches
-
 next_highest(number: string) -> string =>
     if let
         pivot = (0..number.length - 1)

@@ -5,8 +5,6 @@ use System.Net.NetworkCredential
 use System.Net.WebRequestMethods_Ftp
 use System.Text.Encoding
 
-// `ARRAY[T]` is a fixed-size, read-only array
-
 // The task: through FTP in passive mode, change to a directory, list it,
 // and download a file from it as binary.
 @suppress("deprecated")

@@ -1,9 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let limit = 2_200
 
 let two_squares = repeat(false, 2 * limit * limit + 1) |> LIST()

@@ -1,10 +1,6 @@
 use default
 use System.Diagnostics.Stopwatch
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `==` compares identity
-
 square_root(n: bigint) -> bigint is
     let bits = int(n.get_bit_length())
 

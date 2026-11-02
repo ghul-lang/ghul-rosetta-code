@@ -1,7 +1,5 @@
 use default
 
-// `=~` compares values (structural equality)
-
 let encoding = IO.Std.output_encoding.web_name
 
 if encoding !~ "utf-8" then

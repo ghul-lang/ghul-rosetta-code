@@ -1,8 +1,6 @@
 use default
 use ROOT = (persistence: int, digital_root: long)
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 digit_sum(value: long) -> long => value |> digits() |> sum()
 
 root(value: long) -> ROOT =>

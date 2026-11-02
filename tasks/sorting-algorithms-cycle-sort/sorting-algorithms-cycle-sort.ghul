@@ -1,9 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 cycle_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     for start in 0..values.count - 1 do
         let item mut = values[start]

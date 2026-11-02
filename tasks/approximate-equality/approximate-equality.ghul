@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 ≈(left: double, right: double) -> bool is
     if left == right then
         return true

@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let source = System.Random(20260909)
 
 do

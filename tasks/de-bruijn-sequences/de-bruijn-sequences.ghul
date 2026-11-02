@@ -1,17 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|> LIST()` and `|> SET()` read the whole sequence into new collections
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `==` compares identity
-
 de_bruijn(k: int, n: int) -> string is
     let a = repeat(0, k * n) |> LIST()
     let digits = LIST()

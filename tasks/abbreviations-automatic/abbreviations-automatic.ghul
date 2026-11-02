@@ -1,11 +1,6 @@
 use default
 use System.StringSplitOptions
 
-// `SET[T]` is a mutable set, holding each element once
-// `|> SET()` reads the whole sequence into a new `SET`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 shortest_unique(line: string) -> int? is
     let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 

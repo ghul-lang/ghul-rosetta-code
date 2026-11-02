@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let empty = ""
 
 let filled = "text"

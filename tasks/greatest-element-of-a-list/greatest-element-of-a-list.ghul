@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `if let` pattern-matches
-
 if let greatest = [3, 9, 4, 1] |> max() then
     write_line("{greatest}")
 fi

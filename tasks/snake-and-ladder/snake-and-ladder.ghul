@@ -2,11 +2,6 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `|> MAP()` reads the whole sequence into a new `MAP`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let jumps = [
     (4, 14), (9, 31), (17, 7), (20, 38), (28, 84), (40, 59),
     (51, 67), (54, 34), (62, 19), (63, 81), (64, 60), (71, 91),

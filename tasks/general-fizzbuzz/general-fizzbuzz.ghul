@@ -1,10 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 write_line("Enter the maximum:")
 
 let max_n = int.parse(read_line()!)

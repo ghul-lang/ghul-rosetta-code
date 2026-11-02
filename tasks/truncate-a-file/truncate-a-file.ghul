@@ -1,8 +1,6 @@
 use default
 use IO
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 truncate(path: string, length: long) is
     if !IO.File.exists(path) then
         throw System.Exception("no such file: {path}")

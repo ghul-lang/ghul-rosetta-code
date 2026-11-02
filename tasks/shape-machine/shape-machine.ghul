@@ -2,9 +2,6 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
-// `==` compares identity
-// `if let` pattern-matches
-
 write("start: ")
 
 if let entered = read_line() then

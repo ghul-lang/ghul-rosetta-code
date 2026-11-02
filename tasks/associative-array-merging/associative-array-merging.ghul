@@ -1,8 +1,5 @@
 use default
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 merged(
     base: MAP[string, object],
     update: MAP[string, object]

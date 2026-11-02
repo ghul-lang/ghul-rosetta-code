@@ -2,10 +2,6 @@ use IO.Std.read_line
 use IO.Std.write
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `==` compares identity
-// `case ... when` pattern-matches
-
 run(program: string, input: string) -> string is
     let cells = LIST()
 

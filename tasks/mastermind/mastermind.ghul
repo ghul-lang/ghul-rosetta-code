@@ -2,12 +2,6 @@ use default
 use IO.Std.read_line
 use System.Random
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 let random = Random(5)
 
 next_line() -> string is

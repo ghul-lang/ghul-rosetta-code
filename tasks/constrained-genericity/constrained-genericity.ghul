@@ -1,7 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-
 trait Eatable is
     eat() -> string
 si

@@ -1,9 +1,6 @@
 use default
 use System.Diagnostics.Stopwatch
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `==` compares identity
-
 // The Chudnovsky series, summed by binary splitting.
 
 let c3_over_24 = 640_320n * 640_320n * 640_320n / 24n

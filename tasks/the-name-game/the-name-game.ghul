@@ -1,8 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `==` compares identity
-
 verse(name: string) -> string => (
     let lower = name.to_lower()
     let first = lower[0]

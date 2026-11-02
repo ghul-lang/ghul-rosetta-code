@@ -1,14 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-
 let random = System.Random(3)
 
 write_line("each round we both hide 0 to 3 coins and guess the total")

@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 // ghūl has no exponentiation operator, so this program declares one. A
 // prefix operator applies to its operand before any infix operator does.
 

@@ -2,13 +2,6 @@ use default
 use Raster.AXES
 use Raster.IMAGE
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let n = 2.5D
 let a = 200.0D
 let b = 200.0D

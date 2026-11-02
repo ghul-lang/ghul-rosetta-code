@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 visible_everywhere() -> string =>
     "a namespace-scope function, visible to the whole assembly"
 

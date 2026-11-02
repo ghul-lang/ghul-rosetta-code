@@ -1,11 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `if let` pattern-matches
-
 class NODE[T](value: T) is
     next: NODE[T]?
     previous: NODE[T]?

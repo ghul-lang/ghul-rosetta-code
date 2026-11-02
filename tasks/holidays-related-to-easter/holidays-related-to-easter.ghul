@@ -3,11 +3,6 @@ use default
 use System.DateTime
 use System.Globalization.JulianCalendar
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-
 let julian = JulianCalendar()
 
 julian_easter(year: int) -> DateTime =>

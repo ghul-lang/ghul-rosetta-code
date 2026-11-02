@@ -1,7 +1,5 @@
 use Raster.IMAGE
 
-// `==` compares identity
-
 let width = 640
 let height = 400
 

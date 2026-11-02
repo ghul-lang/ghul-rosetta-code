@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 rot13(c: char) -> char =>
     if c >= 'a' /\ c <= 'z' then
         char((int(c) - int('a') + 13) % 26 + int('a'))

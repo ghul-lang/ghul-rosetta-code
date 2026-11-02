@@ -1,12 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `==` compares identity
-
 erdos_nicolas(limit: int) -> (value: int, k: int){} is
     let running_sum = LIST(limit + 1)
     let divisors_used = LIST(limit + 1)

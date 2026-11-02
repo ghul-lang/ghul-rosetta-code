@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 let numbers = [2, 4, 3, 1, 2]
 
 write_line(numbers |> sort() |> join())

@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 let answer = 42
 
 assert answer == 42

@@ -1,8 +1,5 @@
 use default
 
-// `==` compares identity
-// `case ... when` pattern-matches
-
 union Roots is
     REAL(first: double, second: double)
     COMPLEX(re: double, im: double)

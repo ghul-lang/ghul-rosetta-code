@@ -2,15 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let size = 100
 let pixels = 180
 let steps_per_frame = 250

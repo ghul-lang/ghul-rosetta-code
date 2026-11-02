@@ -2,9 +2,6 @@ use default
 
 use System.DateTime
 
-// `==` compares identity
-// `case ... when` pattern-matches
-
 let seasons = [
     "Chaos", "Discord", "Confusion", "Bureaucracy",
     "The Aftermath"

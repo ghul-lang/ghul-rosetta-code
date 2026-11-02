@@ -1,10 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 in_base(n: int, base: int) -> string =>

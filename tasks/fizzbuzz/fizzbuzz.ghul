@@ -1,7 +1,5 @@
 use default
 
-// `case ... when` pattern-matches
-
 for i in 1::100 do
     write_line(
         case (i % 3, i % 5)

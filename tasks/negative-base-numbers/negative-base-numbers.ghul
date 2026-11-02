@@ -1,8 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 let digit_set = "0123456789abcdefghijklmnopqrstuvwxyz"
 
 encode(n: int, base: int) -> string =>

@@ -1,11 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-// `if let` pattern-matches
-
 let sieve_limit = 10_000_000
 let composite = repeat(false, sieve_limit) |> LIST()
 

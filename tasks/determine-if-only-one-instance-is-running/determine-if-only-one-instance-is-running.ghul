@@ -9,8 +9,6 @@ use System.Diagnostics.ProcessStartInfo
 use System.Environment
 use System.Guid
 
-// `if let` pattern-matches
-
 take(lock_path: string) -> IO.FileStream? is
     try
         return File.open(

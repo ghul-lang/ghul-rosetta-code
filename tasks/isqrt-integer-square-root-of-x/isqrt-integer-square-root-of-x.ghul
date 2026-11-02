@@ -1,9 +1,6 @@
 use default
 use System.Globalization.CultureInfo
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 isqrt(x: bigint) -> bigint is
     let two = 2n
     let four = 4n

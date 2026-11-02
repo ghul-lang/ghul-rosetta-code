@@ -1,12 +1,5 @@
 use default
 
-// `T[]` is the read-only list trait - elements can be read by index
-// `SET[T]` is a mutable set, holding each element once
-// `ARRAY[T]` is a fixed-size, read-only array
-// `|> SET()` and `|> ARRAY()` read the whole sequence into new collections
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `=~` compares values (structural equality) - `==` compares identity
-
 floor_div(a: bigint, b: bigint) -> bigint =>
     let q = a / b in
     if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then

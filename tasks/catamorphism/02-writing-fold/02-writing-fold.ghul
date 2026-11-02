@@ -1,11 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-
 fold_left[T, A](values: T{}, seed: A, combine: (A, T) -> A) -> A => (
     let running mut = seed
 

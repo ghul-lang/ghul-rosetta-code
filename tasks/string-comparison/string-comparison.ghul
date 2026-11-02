@@ -1,8 +1,6 @@
 use default
 use System.StringComparison
 
-// `=~` compares values (structural equality) - `==` compares identity
-
 show(expression: string, result: object) =>
     write_line("{expression,-40} {result}")
 

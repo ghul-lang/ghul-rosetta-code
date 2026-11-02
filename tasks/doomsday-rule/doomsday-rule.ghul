@@ -1,8 +1,5 @@
 use default
 
-// `==` compares identity
-// `case ... when` pattern-matches
-
 let day_names = [
     "Sunday", "Monday", "Tuesday", "Wednesday",
     "Thursday", "Friday", "Saturday"

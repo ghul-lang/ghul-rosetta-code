@@ -1,9 +1,6 @@
 use default
 use IO.Std.write
 
-// `==` compares identity
-// `case ... when` pattern-matches
-
 name(code: int) -> string =>
     case code
     when 32 then "Spc"

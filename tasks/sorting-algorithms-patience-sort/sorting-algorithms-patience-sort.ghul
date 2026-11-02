@@ -1,15 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-// `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-
 top(pile: LIST[int]) -> int => pile[pile.count - 1]
 
 patience_sort(values: int[]) -> int{} is

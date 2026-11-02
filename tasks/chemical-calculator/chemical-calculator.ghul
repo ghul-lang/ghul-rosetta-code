@@ -1,9 +1,6 @@
 use default
 use IO.Std.read_line
 
-// `MAP[K, V]` is a mutable map from keys to values
-// `==` compares identity
-
 let masses = MAP()
 
 for line in IO.File.read_all_lines("masses.txt") do

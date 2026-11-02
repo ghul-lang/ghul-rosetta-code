@@ -1,23 +1,6 @@
 use default
 use Raster.IMAGE
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `MAP[K, V]` is a mutable map from keys to values
-// `QUEUE[T]` is a mutable first-in, first-out queue
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
-// `|> LIST()` reads the whole sequence into a new `LIST`
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `*` as an argument is partial application - `f(*, b)` means
-//  `a => f(a, b)`
-// `==` compares identity
-// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
-//  and tail
-
 let columns = 24
 let rows = 16
 let cell = 22

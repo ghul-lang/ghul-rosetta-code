@@ -2,8 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-// `==` compares identity
-
 let size = 180
 
 point(second: double, radius: double) -> (double, double) =>

@@ -1,9 +1,6 @@
 use IO.Std.write_line
 use Ghul.Coroutines
 
-// `=~` compares values (structural equality) - `==` compares identity
-// `case ... when` pattern-matches
-
 union Tree is
     LEAF(value: int)
     NODE(left: Tree, right: Tree)

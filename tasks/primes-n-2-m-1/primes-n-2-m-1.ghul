@@ -1,7 +1,5 @@
 use default
 
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 abbreviated(p: bigint) -> string =>
     let digits = "{p}" in
     if digits.length <= 40 then

@@ -1,7 +1,5 @@
 use default
 
-// `==` compares identity
-
 write_line("police sanitation fire")
 
 for police in [2, 4, 6] do

@@ -1,12 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `LIST[T]` is a mutable list that grows as elements are added
-// `SET[T]` is a mutable set, holding each element once
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
-
 yellowstone(count: int) -> int{} is
     let terms = LIST([1, 2, 3])
     let used = SET([1, 2, 3])

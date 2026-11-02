@@ -1,8 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-
 comb_sort[T: Ghul.Comparable[T]](values: LIST[T]) is
     let gap mut = values.count
     let sorted mut = false

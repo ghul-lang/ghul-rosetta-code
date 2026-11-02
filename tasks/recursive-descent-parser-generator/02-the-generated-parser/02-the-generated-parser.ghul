@@ -1,8 +1,5 @@
 use default
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `=~` compares values (structural equality) - `==` compares identity
-
 write_line("Enter an expression:")
 
 let source = IO.Std.read_line() ?? ""

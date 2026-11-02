@@ -1,7 +1,5 @@
 use IO.Std.write_line
 
-// `==` compares identity
-
 let factorial = n rec => if n <= 1 then 1L else cast(n) * rec(n - 1) fi
 
 let fibonacci = n rec => if n < 2 then n else rec(n - 1) + rec(n - 2) fi
