@@ -13,14 +13,14 @@ struct V3(x: double, y: double, z: double) is
     length: double => sqrt(self ⋅ self)
 si
 
-use Segment = (from: V3, to: V3, colour: (ubyte, ubyte, ubyte))
+use Segment = (from: V3, to: V3, color: (ubyte, ubyte, ubyte))
 
 class TURTLE is
     at: V3 public
     heading: V3 public
     left: V3 public
     up: V3 public
-    colour: (ubyte, ubyte, ubyte) public
+    color: (ubyte, ubyte, ubyte) public
     drawing: bool public
     drawn: LIST[Segment]
 
@@ -29,7 +29,7 @@ class TURTLE is
         heading = V3(1.0D, 0.0D, 0.0D)
         left = V3(0.0D, 1.0D, 0.0D)
         up = V3(0.0D, 0.0D, 1.0D)
-        colour = (40ub, 40ub, 40ub)
+        color = (40ub, 40ub, 40ub)
         drawing = true
         drawn = LIST()
     si
@@ -38,7 +38,7 @@ class TURTLE is
         let next = at + heading * distance
 
         if drawing then
-            drawn.add((at, next, colour))
+            drawn.add((at, next, color))
         fi
         at = next
     si

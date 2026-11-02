@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-use Colour = (red: int, green: int, blue: int)
+use Color = (red: int, green: int, blue: int)
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -67,7 +67,7 @@ scene() -> IMAGE is
     image
 si
 
-hue(h: double) -> Colour =>
+hue(h: double) -> Color =>
     let
         part = (h * 6.0D) - floor(h * 6.0D),
         sector = int(h * 6.0D) % 6,
@@ -83,11 +83,11 @@ hue(h: double) -> Colour =>
         else (255, 0, down)
         esac
 
-put(image: IMAGE, x: int, y: int, c: Colour) is
+put(image: IMAGE, x: int, y: int, c: Color) is
     image.set_pixel(x, y, ubyte(c.red), ubyte(c.green), ubyte(c.blue))
 si
 
-of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Colour => (
+of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Color => (
     red = int(p.red),
     green = int(p.green),
     blue = int(p.blue)
@@ -107,9 +107,9 @@ picture() -> IMAGE is
     image
 si
 
-use Weighted = (colour: Colour, count: int)
+use Weighted = (color: Color, count: int)
 
-channel(c: Colour, axis: int) -> int =>
+channel(c: Color, axis: int) -> int =>
     case axis
     when 0 then c.red
     when 1 then c.green
@@ -147,7 +147,7 @@ split(box: Weighted[]) -> (Weighted[], Weighted[]) is
     (sorted |> take(cut) |> list(), sorted |> skip(cut) |> list())
 si
 
-average(box: Weighted[]) -> Colour is
+average(box: Weighted[]) -> Color is
     let n = box |> sum_by(w => w.count)
 
     weighted(axis) =>
@@ -156,8 +156,8 @@ average(box: Weighted[]) -> Colour is
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(colours: Weighted[], count: int) -> Colour[] => (
-    let boxes = LIST[Weighted[]]([colours])
+median_cut(colors: Weighted[], count: int) -> Color[] => (
+    let boxes = LIST[Weighted[]]([colors])
 
     while boxes.count < count do
         let worst = boxes |> max_by(score)!
@@ -170,7 +170,7 @@ median_cut(colours: Weighted[], count: int) -> Colour[] => (
     boxes |> map(average) |> list()
 )
 
-distance(a: Colour, b: Colour) -> int =>
+distance(a: Color, b: Color) -> int =>
     let
         dr = a.red - b.red,
         dg = a.green - b.green,
@@ -178,7 +178,7 @@ distance(a: Colour, b: Colour) -> int =>
     in
         dr * dr + dg * dg + db * db
 
-nearest(palette: Colour[], c: Colour) -> Colour =>
+nearest(palette: Color[], c: Color) -> Color =>
     palette |> min_by(distance(*, c))!
 
 picture().write("picture.png")
@@ -193,12 +193,12 @@ let pixels = [
 
 let counts = pixels |> frequencies()
 
-let colours =
-    counts |> map(kv => (colour = kv.key, count = kv.value)) |> list()
+let colors =
+    counts |> map(kv => (color = kv.key, count = kv.value)) |> list()
 
-let palette = median_cut(colours, 16)
+let palette = median_cut(colors, 16)
 
-write_line("{colours.count} colours reduced to {palette.count}:")
+write_line("{colors.count} colors reduced to {palette.count}:")
 
 for row in 0..4 do
     write_line(

@@ -4,8 +4,8 @@ use Raster.AXES
 use Raster.IMAGE
 use System.Diagnostics.Stopwatch
 
-use Colour = (red: ubyte, green: ubyte, blue: ubyte)
-use Sorter = (name: string, sort: (LIST[int]) -> void, colour: Colour)
+use Color = (red: ubyte, green: ubyte, blue: ubyte)
+use Sorter = (name: string, sort: (LIST[int]) -> void, color: Color)
 
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
@@ -169,8 +169,8 @@ for (name, make) in inputs do
     image.stroke(1.0)
     axes.draw()
 
-    for ((_, _, colour), t) in zip(sorts, times) do
-        image.color(colour.red, colour.green, colour.blue)
+    for ((_, _, color), t) in zip(sorts, times) do
+        image.color(color.red, color.green, color.blue)
         image.stroke(2.0)
         image.line(
             zip(powers, t)

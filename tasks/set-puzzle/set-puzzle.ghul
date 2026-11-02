@@ -16,14 +16,14 @@ use Raster.IMAGE
 // `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
 //  and tail
 
-let colours = ["red", "green", "purple"]
+let colors = ["red", "green", "purple"]
 let numbers = ["one", "two", "three"]
 let symbols = ["oval", "squiggle", "diamond"]
 let shadings = ["solid", "open", "striped"]
 
-struct CARD(colour: int, number: int, symbol: int, shading: int) is
+struct CARD(color: int, number: int, symbol: int, shading: int) is
     to_string() -> string =>
-        "{colours[colour]}, {numbers[number]}, "
+        "{colors[color]}, {numbers[number]}, "
         "{symbols[symbol]}, {shadings[shading]}"
 si
 

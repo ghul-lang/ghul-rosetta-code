@@ -15,10 +15,10 @@ luminance(red: ubyte, green: ubyte, blue: ubyte) -> ubyte =>
         0.5D
     )
 
-to_grey(colour: IMAGE) -> ubyte[] =>
-    (0..color.width * colour.height)
+to_grey(color: IMAGE) -> ubyte[] =>
+    (0..color.width * color.height)
         |> map(at => (
-            let seen = colour.pixel(at % colour.width, at / colour.width)
+            let seen = color.pixel(at % color.width, at / color.width)
 
             luminance(seen.red, seen.green, seen.blue)
         ))
@@ -43,11 +43,11 @@ to_colour(levels: ubyte[], width: int, height: int) -> IMAGE => (
 let width = 300
 let height = 200
 
-let colour = IMAGE(width, height)
+let color = IMAGE(width, height)
 
 for y in 0..height do
     for x in 0..width do
-        colour.set_pixel(
+        color.set_pixel(
             x,
             y,
             ubyte(255 * x / width),
@@ -57,32 +57,32 @@ for y in 0..height do
     od
 od
 
-colour.color(255ub, 0ub, 0ub)
-colour.fill([
+color.color(255ub, 0ub, 0ub)
+color.fill([
     (x = 30.0D, y = 30.0D),
     (x = 110.0D, y = 30.0D),
     (x = 70.0D, y = 110.0D)
 ])
 
-colour.color(0ub, 255ub, 0ub)
-colour.fill([
+color.color(0ub, 255ub, 0ub)
+color.fill([
     (x = 120.0D, y = 30.0D),
     (x = 200.0D, y = 30.0D),
     (x = 160.0D, y = 110.0D)
 ])
 
-colour.color(0ub, 0ub, 255ub)
-colour.fill([
+color.color(0ub, 0ub, 255ub)
+color.fill([
     (x = 210.0D, y = 30.0D),
     (x = 290.0D, y = 30.0D),
     (x = 250.0D, y = 110.0D)
 ])
 
-colour.write("colour.png")
+color.write("color.png")
 
-let grey = to_colour(to_grey(colour), width, height)
+let grey = to_colour(to_grey(color), width, height)
 
 grey.write("grey.png")
 
-colour.show("colour.png")
+color.show("color.png")
 grey.show("grey.png")
