@@ -3,8 +3,11 @@ checks it:
 
 - `snake_case` for variables, functions, methods and properties.
 - `PascalCase` for namespaces, traits, abstract classes, unions and enums.
-- `UPPER_SNAKE_CASE` for concrete classes, structs, union variants and enum
-  members.
+- `UPPER_SNAKE_CASE` for union variants and enum members.
+
+Concrete classes and structs may use either `PascalCase` or `UPPER_SNAKE_CASE`.
+The library's own types use `UPPER_SNAKE_CASE`, so `LIST[int]` reads as a
+library type and `Point` as one of yours.
 
 A `static` field or property reads as a named constant, so it can be written in
 either `snake_case` or `UPPER_SNAKE_CASE`. Keywords are all lowercase.
