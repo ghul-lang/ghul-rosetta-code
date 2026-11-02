@@ -429,7 +429,12 @@ image_file(root: string, slug: string, name: string) -> string is
     )
 
     // The captured expectation stands in for the file a task driven by the runner has not written.
-    let source = if IO.File.exists(animation) then animation else "{animation}.expected" fi
+    let source =
+        if IO.File.exists(animation) then
+            animation
+        else
+            task_file(root, slug, "{IO.Path.get_file_name(animation)}.expected")
+        fi
 
     // Named so the caller reports the file the task was meant to write.
     if !IO.File.exists(source) then
