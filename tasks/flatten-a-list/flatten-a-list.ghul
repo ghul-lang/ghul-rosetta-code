@@ -2,7 +2,7 @@ use default
 
 union Nested is
     ATOM(value: int)
-    GROUP(items: Nested[])
+    LIST(items: Nested[])
 si
 
 use Nested.*
@@ -11,7 +11,7 @@ flatten(node: Nested) -> int{} is
     case node
     when (value): ATOM then
         yield value
-    when (items): GROUP then
+    when (items): LIST then
         for item in items do
             yield in flatten(item)
         od
@@ -21,18 +21,18 @@ si
 show(node: Nested) -> string =>
     case node
     when (value): ATOM then "{value}"
-    when (items): GROUP then "[{items |> map(show) |> join(", ")}]"
+    when (items): LIST then "[{items |> map(show) |> join(", ")}]"
     esac
 
-let input = GROUP([
-    GROUP([ATOM(1)]),
+let input = LIST([
+    LIST([ATOM(1)]),
     ATOM(2),
-    GROUP([GROUP([ATOM(3), ATOM(4)]), ATOM(5)]),
-    GROUP([GROUP([GROUP([])])]),
-    GROUP([GROUP([GROUP([ATOM(6)])])]),
+    LIST([LIST([ATOM(3), ATOM(4)]), ATOM(5)]),
+    LIST([LIST([LIST([])])]),
+    LIST([LIST([LIST([ATOM(6)])])]),
     ATOM(7),
     ATOM(8),
-    GROUP([])
+    LIST([])
 ])
 
 write_line(show(input))
