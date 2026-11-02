@@ -4,5 +4,5 @@
   "state": "published",
   "reason": "2252",
   "note": "recursive generator consumed inside a range/list loop drops iterations (ghul#2252); natural solution needs that shape",
-  "published_hash": "bca62bdba5a6afa6fbf663a9a7480b2ff062f48aabed914a80426af48e8cf0c8"
+  "published_hash": "769b1ae744c205c874243d0d98bf63d92cfdbb5842b11392ce7c4ced5bae47d0"
 }
