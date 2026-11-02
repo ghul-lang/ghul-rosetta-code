@@ -1,36 +1,8 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
 
-look_and_say(seed: string) -> string{} is
-    let current mut = seed
+say(term: string) -> string =>
+    term |> group() |> map(run => "{run.count}{run[0]}") |> string()
 
-    do
-        yield current
-
-        let said = System.Text.StringBuilder()
-        let i mut = 0
-
-        while i < current.length do
-            let digit = current[i]
-            let run mut = 0
-
-            while i < current.length /\ current[i] == digit do
-                run = run + 1
-                i = i + 1
-            od
-
-            said.append(run)
-            said.append(digit)
-        od
-
-        current = said.to_string()
-    od
-si
-
-look_and_say("1") |> take(10) |> each(term => write_line(term))
+iterate("1", say) |> take(10) |> each(term => write_line(term))

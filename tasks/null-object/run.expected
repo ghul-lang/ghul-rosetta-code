@@ -1,11 +1,4 @@
-text is null:      false
-nothing is null:   true
-number is null:    false
-no_number is null: true
-
-text:      "hello"
-nothing:   null
-number:    42
-no_number: null
-
-nothing, with a fallback: none
+present is null: false
+absent is null:  true
+absent, with a fallback: none
+present holds "Alice Liddell", 13 characters
