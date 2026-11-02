@@ -1,6 +1,5 @@
 use default
-use Suit.HEARTS
-use Suit.SPADES
+use Suit.*
 
 // `==` compares identity
 // `if let` and `case ... when` pattern-match
@@ -27,9 +26,9 @@ describe(value: int) -> string is
     fi
 si
 
-colour(suit: Suit) -> string =>
+color(suit: Suit) -> string =>
     case suit
-    when HEARTS, Suit.DIAMONDS then "red"
+    when HEARTS, DIAMONDS then "red"
     else "black"
     esac
 
@@ -48,7 +47,7 @@ size(shape: Shape) -> string =>
     fi
 
 write_line("{describe(-2)}, {describe(0)}, {describe(7)}")
-write_line("{colour(HEARTS)}, {colour(SPADES)}")
+write_line("{color(HEARTS)}, {color(SPADES)}")
 write_line("{area(Shape.CIRCLE(2))}, {area(Shape.SQUARE(3))}")
 write_line("{size(Shape.CIRCLE(20))}, {size(Shape.SQUARE(1))}")
 
