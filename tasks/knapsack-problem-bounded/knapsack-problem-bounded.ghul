@@ -1,7 +1,5 @@
 use default
 
-use Item = (name: string, weight: int, value: int, pieces: int)
-
 let items = [
     (name = "map", weight = 9, value = 150, pieces = 1),
     (name = "compass", weight = 13, value = 35, pieces = 1),

@@ -1,8 +1,6 @@
 use default
 use Raster.IMAGE
 
-use RGB = (red: ubyte, green: ubyte, blue: ubyte)
-
 pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
 
 scene() -> IMAGE is

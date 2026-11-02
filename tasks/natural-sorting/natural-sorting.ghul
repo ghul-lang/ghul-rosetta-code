@@ -2,8 +2,6 @@ use default
 use System.Globalization
 use System.Text.NormalizationForm
 
-use TRANSFORM = (string) -> string
-
 plain_whitespace(text: string) -> string =>
     text
         |> map(letter =>

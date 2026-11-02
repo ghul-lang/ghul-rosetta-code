@@ -23,8 +23,6 @@ let moves = [
     (step = width, name = 'd')
 ]
 
-use State = (player: int, boxes: string, path: string)
-
 put(text: string, at: int, value: char) -> string =>
     text.remove(at, 1).insert(at, "{value}")
 
