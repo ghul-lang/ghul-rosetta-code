@@ -760,6 +760,23 @@ self_test() is
 
     check_that("exactly the foreign titles come back", foreign.count =~ 3)
 
+    let notes = (source: string) => NOTATION.scan(source) |> join("\n")
+
+    check_that(
+        "a stream gets its note",
+        notes("let fibs = stream((0, 1), ((a, b)) => a || (b, a + b))").contains("`stream(seed, step)`")
+    )
+
+    check_that(
+        "an iterate gets its note",
+        notes("let terms = iterate(\"1\", say)").contains("`iterate(seed, next)`")
+    )
+
+    check_that(
+        "a || in a string alone gets no stream note",
+        !notes("let s = \"a || b\"").contains("`stream(seed, step)`")
+    )
+
     if failures > 0 then
         error.write_line("{failures} checks failed")
 
