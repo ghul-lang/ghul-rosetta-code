@@ -19,7 +19,7 @@ fortunate(primorial: bigint) -> int =>
         |> find(m => is_prime(primorial + cast(m)))!
 
 let count = 75
-let seen = LIST[int]()
+let seen = LIST()
 
 for (i, primorial) in primorials() |> take(count) |> index() do
     seen.add(fortunate(primorial))

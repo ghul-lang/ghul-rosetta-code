@@ -19,7 +19,7 @@ si
 encode(latitude: double, longitude: double, precision: int) -> string is
     let latitudes mut = (low = -90.0, high = 90.0)
     let longitudes mut = (low = -180.0, high = 180.0)
-    let bits = LIST[int]()
+    let bits = LIST()
 
     for index in 0..precision * 5 do
         let longitude_turn = index % 2 == 0

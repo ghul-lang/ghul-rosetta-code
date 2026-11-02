@@ -45,7 +45,7 @@ bridge(points: P[], a: double) -> (P, P) is
     fi
 
     let kept = LIST()
-    let pairs = LIST[(P, P)]()
+    let pairs = LIST()
 
     for i in 0..points.count / 2 do
         let p = points[2 * i], q = points[2 * i + 1]

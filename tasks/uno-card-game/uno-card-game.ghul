@@ -32,7 +32,7 @@ shuffled(cards: Card{}) -> LIST[Card] =>
     )
 
 new_deck() -> LIST[Card] is
-    let deck = LIST[Card]()
+    let deck = LIST()
     let values = ["skip", "reverse", "draw two"]
 
     for colour in colours do
@@ -52,7 +52,7 @@ new_deck() -> LIST[Card] is
     shuffled(deck)
 si
 
-let hands = LIST[LIST[Card]](0..4 |> map(_ => LIST[Card]()))
+let hands = LIST[LIST[Card]](0..4 |> map(_ => LIST()))
 let scores = LIST[int]([0, 0, 0, 0])
 let deck mut = LIST[Card]()
 let discard = LIST[Card]()

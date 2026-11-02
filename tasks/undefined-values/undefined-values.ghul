@@ -3,7 +3,7 @@ use default
 lookup(table: MAP[string, int], key: string) -> int? =>
     if table.contains_key(key) then table[key] else null fi
 
-let ages = MAP[string, int]()
+let ages = MAP()
 
 ages["Ada"] = 36
 

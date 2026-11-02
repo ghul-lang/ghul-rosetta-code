@@ -32,7 +32,7 @@ solve(names: string{}) is
             let key = letters("{states[i]}{states[j]}")
 
             if !groups.contains_key(key) then
-                groups[key] = LIST[(int, int)]()
+                groups[key] = LIST()
             fi
 
             groups[key].add((i, j))

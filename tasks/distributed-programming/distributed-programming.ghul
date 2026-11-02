@@ -59,7 +59,7 @@ client(url: string) is
 si
 
 procedures() -> MAP[string, (JsonElement) -> object] is
-    let offered = MAP[string, (JsonElement) -> object]()
+    let offered = MAP()
 
     offered["sum"] =
         p => cast(p.enumerate_array() |> sum_by(e => e.get_int32()))

@@ -39,7 +39,7 @@ let changes = [
 ]
 
 let output = LIST[string]()
-let options = MAP[string, OPTION]()
+let options = MAP()
 let order = LIST[(line: string?, option: string?)]()
 
 for raw in IO.File.read_all_lines("config.txt") do

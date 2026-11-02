@@ -28,7 +28,7 @@ do
     let blocks =
         Encoding.utf8.get_bytes(message) |> chunk(block_size) |> map(encode)
 
-    let decrypted = LIST[ubyte]()
+    let decrypted = LIST()
 
     for block in blocks do
         let encrypted = bigint.mod_pow(block, e, n)

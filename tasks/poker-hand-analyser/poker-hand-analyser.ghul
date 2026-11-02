@@ -31,7 +31,7 @@ classify(hand: string) -> string is
         "invalid"
     else
         let cards = tokens |> map(parse) |> list()
-        let seen = SET[(int, char)]()
+        let seen = SET()
 
         if !(cards |> all(seen.add)) then
             "invalid"

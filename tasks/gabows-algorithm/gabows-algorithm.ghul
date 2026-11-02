@@ -16,7 +16,7 @@ let edges = [
 let adjacent = LIST[LIST[int]]()
 
 for _ in 0..size do
-    adjacent.add(LIST[int]())
+    adjacent.add(LIST())
 od
 
 for (from, to) in edges do

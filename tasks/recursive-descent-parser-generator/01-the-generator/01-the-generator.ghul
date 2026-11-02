@@ -86,7 +86,7 @@ union Item is
 si
 
 items(text: string) -> Item[] is
-    let result = LIST[Item]()
+    let result = LIST()
     let i mut = 0
 
     while i < text.length do
@@ -125,7 +125,7 @@ alternatives(parts: Item[]) -> Item[][] is
 
     for part in parts do
         if isa Item.BAR(part) then
-            result.add(LIST[Item]())
+            result.add(LIST())
         else
             result[result.count - 1].add(part)
         fi
@@ -199,7 +199,7 @@ choice(name: string, options: Item[][]) is
     say("si")
 si
 
-let rules = LIST[string]()
+let rules = LIST()
 
 while let line = read_line() do
     let equals = line.index_of('=')

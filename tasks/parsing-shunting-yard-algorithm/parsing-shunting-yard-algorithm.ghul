@@ -42,7 +42,7 @@ row(
 
 let line = "3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"
 
-let operators = LIST[Token]()
+let operators = LIST()
 let output = LIST[Token]()
 
 write_line(row("token", "action", "stack", "output"))
