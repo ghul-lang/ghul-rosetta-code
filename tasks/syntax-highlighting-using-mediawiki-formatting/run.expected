@@ -27,7 +27,7 @@
          i = i + '''if''' line[i] == &apos;\\&apos; '''then''' 2 '''else''' 1 '''fi'''
      '''od'''
  
-     System.Math.min(i + 1, line.length)
+     min(i + 1, line.length)
  '''si'''
  
  highlight(line: string) -&gt; string '''is'''
