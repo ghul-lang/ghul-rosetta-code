@@ -30,10 +30,13 @@ namespace Rosetta is
         // The digest of a published section, which is what lets a later run
         // tell a wiki edit from one made here. Any stable hash would do;
         // this one is short enough to sit in the ledger and read.
+        // MediaWiki saves text in Unicode normal form C, so a section holding
+        // a combining mark comes back composed: the digest is of that form,
+        // which the section sent and the section saved share.
         digest(section: string) -> string static =>
             System.Convert.to_hex_string(
                 System.Security.Cryptography.SHA256.hash_data(
-                    System.Text.Encoding.utf8.get_bytes(section))).to_lower()
+                    System.Text.Encoding.utf8.get_bytes(section.normalize(System.Text.NormalizationForm.FORM_C)))).to_lower()
 
         // Whether the section this repository would post now differs from the
         // one it last posted, so the wiki shows an older solution.
