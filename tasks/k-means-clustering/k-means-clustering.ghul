@@ -31,7 +31,7 @@ si
 let points =
     (1::sample_size)
         |> map(_ => (
-            let angle = random.next_double() * 2.0D * pi
+            let angle = random.next_double() * 2.0 * pi
             let radius = sqrt(random.next_double())
 
             (x = radius * cos(angle), y = radius * sin(angle))
@@ -69,7 +69,7 @@ recentered() -> Point[] is
     let sizes = LIST()
 
     for _ in 0..clusters do
-        totals.add((x = 0.0D, y = 0.0D))
+        totals.add((x = 0.0, y = 0.0))
         sizes.add(0)
     od
 
@@ -143,23 +143,23 @@ od
 
 let image = IMAGE(600, 600)
 
-image.view(-1.06D, -1.06D, 1.06D, 1.06D)
+image.view(-1.06, -1.06, 1.06, 1.06)
 
 for index in 0..points.count do
     let shade = double(membership[index]) / double(clusters)
 
     image.color(COLOR_MAP.hue(shade))
-    image.dot(points[index].x, points[index].y, 1.4D)
+    image.dot(points[index].x, points[index].y, 1.4)
 od
 
-image.stroke(2.0D)
+image.stroke(2.0)
 
 for at in centers do
     image.color(255ub, 255ub, 255ub)
-    image.dot(at.x, at.y, 6.0D)
+    image.dot(at.x, at.y, 6.0)
 
     image.color(30ub, 30ub, 40ub)
-    image.ring(at.x, at.y, 6.0D)
+    image.ring(at.x, at.y, 6.0)
 od
 
 image.write("clusters.png")

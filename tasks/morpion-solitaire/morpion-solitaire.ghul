@@ -141,16 +141,16 @@ let cell = 36
 let image = IMAGE((high_x - low_x + 2) * cell, (high_y - low_y + 2) * cell)
 
 image.view(
-    double(low_x) - 1.0D,
-    double(low_y) - 1.0D,
-    double(high_x) + 1.0D,
-    double(high_y) + 1.0D
+    double(low_x) - 1.0,
+    double(low_y) - 1.0,
+    double(high_x) + 1.0,
+    double(high_y) + 1.0
 )
 
 image.clear(255ub, 255ub, 255ub)
 
 image.color(225ub, 225ub, 230ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 for x in low_x - 1::high_x + 1 do
     image.line(double(x), double(low_y - 1), double(x), double(high_y + 1))
@@ -161,7 +161,7 @@ for y in low_y - 1::high_y + 1 do
 od
 
 image.color(40ub, 90ub, 170ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 
 for m in played do
     let step = steps[m.d]
@@ -179,18 +179,18 @@ od
 image.color(20ub, 20ub, 20ub)
 
 for (x, y) in start do
-    image.dot(double(x), double(y), 7.0D)
+    image.dot(double(x), double(y), 7.0)
 od
 
 for (m, n) in played |> index() |> map(im => (im.value, im.index + 1)) do
     image.color(255ub, 255ub, 255ub)
-    image.dot(double(m.x), double(m.y), 12.0D)
+    image.dot(double(m.x), double(m.y), 12.0)
     image.color(200ub, 40ub, 40ub)
-    image.circle(double(m.x), double(m.y), 0.36D)
+    image.circle(double(m.x), double(m.y), 0.36)
     image.text(
         double(m.x),
-        double(m.y) - 0.16D,
-        12.0D,
+        double(m.y) - 0.16,
+        12.0,
         "{n}",
         Raster.Anchor.CENTER
     )

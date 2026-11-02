@@ -137,11 +137,11 @@ write_line("cost {cheapest[at(goal)]}")
 
 let image = IMAGE(520, 520)
 
-image.view(-0.15D, -0.15D, 8.15D, 8.15D)
+image.view(-0.15, -0.15, 8.15, 8.15)
 
 middle(square: Square) -> (x: double, y: double) => (
-    x = double(square.column) + 0.5D,
-    y = double(size - square.row) - 0.5D
+    x = double(square.column) + 0.5,
+    y = double(size - square.row) - 0.5
 )
 
 let board = SHAPES()
@@ -152,10 +152,10 @@ for row in 0..size do
         let center = middle(square)
 
         let cell = [
-            (x = center.x - 0.5D, y = center.y - 0.5D),
-            (x = center.x + 0.5D, y = center.y - 0.5D),
-            (x = center.x + 0.5D, y = center.y + 0.5D),
-            (x = center.x - 0.5D, y = center.y + 0.5D)
+            (x = center.x - 0.5, y = center.y - 0.5),
+            (x = center.x + 0.5, y = center.y - 0.5),
+            (x = center.x + 0.5, y = center.y + 0.5),
+            (x = center.x - 0.5, y = center.y + 0.5)
         ]
 
         if blocked(square) then
@@ -171,30 +171,30 @@ od
 image.fill(board)
 
 image.color(40ub, 40ub, 50ub)
-image.stroke(1.4D)
+image.stroke(1.4)
 image.line([
-    (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
-    (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
-    (x = 0.0D, y = 0.0D)
+    (x = 0.0, y = 0.0), (x = 8.0, y = 0.0),
+    (x = 8.0, y = 8.0), (x = 0.0, y = 8.0),
+    (x = 0.0, y = 0.0)
 ])
 
 image.color(200ub, 48ub, 40ub)
-image.stroke(3.0D)
+image.stroke(3.0)
 image.line(LIST(route |> map(middle)))
 
 for square in route do
     let center = middle(square)
 
-    image.dot(center.x, center.y, 4.5D)
+    image.dot(center.x, center.y, 4.5)
 od
 
 image.color(24ub, 40ub, 72ub)
-image.stroke(2.4D)
+image.stroke(2.4)
 
 for square in [start, goal] do
     let center = middle(square)
 
-    image.ring(center.x, center.y, 9.0D)
+    image.ring(center.x, center.y, 9.0)
 od
 
 image.write("route.png")

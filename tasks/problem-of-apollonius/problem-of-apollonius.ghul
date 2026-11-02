@@ -11,8 +11,8 @@ tangent_to(
     outside_second: double,
     outside_third: double
 ) -> Circle => (
-    let v11 = 2.0D * second.x - 2.0D * first.x
-    let v12 = 2.0D * second.y - 2.0D * first.y
+    let v11 = 2.0 * second.x - 2.0 * first.x
+    let v12 = 2.0 * second.y - 2.0 * first.y
     let v13 =
         first.x * first.x -
         second.x * second.x +
@@ -21,11 +21,11 @@ tangent_to(
         first.radius * first.radius +
         second.radius * second.radius
     let v14 =
-        2.0D * outside_second * second.radius -
-        2.0D * outside_first * first.radius
+        2.0 * outside_second * second.radius -
+        2.0 * outside_first * first.radius
 
-    let v21 = 2.0D * third.x - 2.0D * second.x
-    let v22 = 2.0D * third.y - 2.0D * second.y
+    let v21 = 2.0 * third.x - 2.0 * second.x
+    let v22 = 2.0 * third.y - 2.0 * second.y
     let v23 =
         second.x * second.x -
         third.x * third.x +
@@ -34,8 +34,8 @@ tangent_to(
         second.radius * second.radius +
         third.radius * third.radius
     let v24 =
-        2.0D * outside_third * third.radius -
-        2.0D * outside_second * second.radius
+        2.0 * outside_third * third.radius -
+        2.0 * outside_second * second.radius
 
     let w12 = v12 / v11
     let w13 = v13 / v11
@@ -50,36 +50,36 @@ tangent_to(
     let m = -w12 * p - w13
     let n = w14 - w12 * q
 
-    let a = n * n + q * q - 1.0D
+    let a = n * n + q * q - 1.0
     let b =
-        2.0D * m * n -
-        2.0D * n * first.x +
-        2.0D * p * q -
-        2.0D * q * first.y +
-        2.0D * outside_first * first.radius
+        2.0 * m * n -
+        2.0 * n * first.x +
+        2.0 * p * q -
+        2.0 * q * first.y +
+        2.0 * outside_first * first.radius
     let c =
         first.x * first.x +
         m * m -
-        2.0D * m * first.x +
+        2.0 * m * first.x +
         p * p +
         first.y * first.y -
-        2.0D * p * first.y -
+        2.0 * p * first.y -
         first.radius * first.radius
 
-    let radius = (-b - sqrt(b * b - 4.0D * a * c)) / (2.0D * a)
+    let radius = (-b - sqrt(b * b - 4.0 * a * c)) / (2.0 * a)
 
     (x = m + n * radius, y = p + q * radius, radius = radius)
 )
 
 let given = [
-    (x = 0.0D, y = 0.0D, radius = 1.0D),
-    (x = 4.0D, y = 0.0D, radius = 1.0D),
-    (x = 2.0D, y = 4.0D, radius = 2.0D)
+    (x = 0.0, y = 0.0, radius = 1.0),
+    (x = 4.0, y = 0.0, radius = 1.0),
+    (x = 2.0, y = 4.0, radius = 2.0)
 ]
 
-let inside = tangent_to(given[0], given[1], given[2], 1.0D, 1.0D, 1.0D)
+let inside = tangent_to(given[0], given[1], given[2], 1.0, 1.0, 1.0)
 
-let outside = tangent_to(given[0], given[1], given[2], -1.0D, -1.0D, -1.0D)
+let outside = tangent_to(given[0], given[1], given[2], -1.0, -1.0, -1.0)
 
 spelled(circle: Circle) -> string =>
     "x = {circle.x:F6}, y = {circle.y:F6}, "
@@ -94,9 +94,9 @@ write_line("externally  {spelled(outside)}")
 
 let image = IMAGE(600, 600)
 
-image.view(-2.3D, -2.3D, 6.3D, 6.3D)
+image.view(-2.3, -2.3, 6.3, 6.3)
 
-image.stroke(2.0D)
+image.stroke(2.0)
 
 image.color(40ub, 40ub, 48ub)
 

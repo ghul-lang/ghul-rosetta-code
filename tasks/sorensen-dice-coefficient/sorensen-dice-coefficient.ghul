@@ -18,7 +18,7 @@ coefficient(left: Map[string, int], right: Map[string, int]) -> double => (
     let total = size(left) + size(right)
 
     if total == 0 then
-        0.0D
+        0.0
     else
         double(2 * shared(left, right)) / cast(total)
     fi

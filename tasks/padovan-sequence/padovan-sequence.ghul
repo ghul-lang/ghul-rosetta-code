@@ -13,11 +13,11 @@ padovan() -> int{} is
 si
 
 let plastic =
-    cbrt((9.0D + sqrt(69.0D)) / 18.0D) + cbrt((9.0D - sqrt(69.0D)) / 18.0D)
-let scaling = 1.0453567932525329623D
+    cbrt((9.0 + sqrt(69.0)) / 18.0) + cbrt((9.0 - sqrt(69.0)) / 18.0)
+let scaling = 1.0453567932525329623
 
 floor_padovan(n: int) -> int =>
-    int(floor(pow(plastic, cast(n - 1)) / scaling + 0.5D))
+    int(floor(pow(plastic, cast(n - 1)) / scaling + 0.5))
 
 l_system() -> string{} is
     let current mut = "A"

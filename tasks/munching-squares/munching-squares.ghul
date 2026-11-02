@@ -4,7 +4,7 @@ use Raster.IMAGE
 let size = 256
 
 shade(value: int, phase: double) -> ubyte =>
-    ubyte(127.5D * (1.0D - cos(2.0D * pi * double(value) / 256.0D + phase)))
+    ubyte(127.5 * (1.0 - cos(2.0 * pi * double(value) / 256.0 + phase)))
 
 let image = IMAGE(size, size)
 
@@ -15,9 +15,9 @@ for y in 0..size do
         image.set_pixel(
             x,
             y,
-            shade(value, 0.0D),
-            shade(value, 2.1D),
-            shade(value, 4.2D)
+            shade(value, 0.0),
+            shade(value, 2.1),
+            shade(value, 4.2)
         )
     od
 od

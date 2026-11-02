@@ -14,20 +14,19 @@ si
 let width = 240
 let height = 180
 let total = 1500
-let gravity = 0.1D
+let gravity = 0.1
 let warm_up = 200
 let frames = 50
 
 let random = System.Random(7)
 
-spread(half: double) -> double =>
-    (random.next_double() * 2.0D - 1.0D) * half
+spread(half: double) -> double => (random.next_double() * 2.0 - 1.0) * half
 
 launch(drop: DROP) is
-    drop.x = double(width / 2) + spread(1.5D)
+    drop.x = double(width / 2) + spread(1.5)
     drop.y = double(height - 10)
-    drop.dx = spread(0.9D)
-    drop.dy = -3.8D + spread(0.3D)
+    drop.dx = spread(0.9)
+    drop.dy = -3.8 + spread(0.3)
 si
 
 let drops =
@@ -43,7 +42,7 @@ let drops =
 step() is
     for drop in drops do
         if drop.y > double(height) then
-            if random.next_double() < 0.1D then
+            if random.next_double() < 0.1 then
                 launch(drop)
             fi
 
@@ -64,11 +63,11 @@ draw(image: IMAGE) is
 
     for drop in drops do
         if drop.y <= double(height) then
-            let fall = clamp(drop.dy / 3.8D, -1.0D, 1.0D)
-            let shade = ubyte(170 + int(80.0D * fall * fall))
+            let fall = clamp(drop.dy / 3.8, -1.0, 1.0)
+            let shade = ubyte(170 + int(80.0 * fall * fall))
 
             image.color(shade - 60ub, shade, 255ub)
-            image.dot(drop.x, drop.y, 0.8D)
+            image.dot(drop.x, drop.y, 0.8)
         fi
     od
 si

@@ -2,21 +2,21 @@ use default
 use Raster.IMAGE
 
 let seeds = 3000
-let phi = (sqrt(5.0D) + 1.0D) / 2.0D
+let phi = (sqrt(5.0) + 1.0) / 2.0
 
 let image = IMAGE(400, 400)
 
-image.view(-200.0D, -200.0D, 200.0D, 200.0D)
+image.view(-200.0, -200.0, 200.0, 200.0)
 image.clear(255ub, 255ub, 255ub)
 image.color(0ub, 0ub, 255ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 for i in 0::seeds do
     let n = double(i)
     let r = pow(n, phi) / double(seeds)
-    let angle = 2.0D * pi * phi * n
+    let angle = 2.0 * pi * phi * n
 
-    image.circle(r * sin(angle), r * cos(angle), 5.0D * n / double(seeds))
+    image.circle(r * sin(angle), r * cos(angle), 5.0 * n / double(seeds))
 od
 
 write_line("{seeds} seeds, each turned the golden angle from the last")

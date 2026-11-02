@@ -18,8 +18,8 @@ ask(prompt: string) -> double? is
     )
 si
 
-radians(degrees: double) -> double => degrees * pi / 180.0D
-degrees(radians: double) -> double => radians * 180.0D / pi
+radians(degrees: double) -> double => degrees * pi / 180.0
+degrees(radians: double) -> double => radians * 180.0 / pi
 
 while let
     latitude = ask("latitude in degrees, negative for south:"),
@@ -35,7 +35,7 @@ do
     write_line("hour    sun hour angle    dial hour line angle")
 
     for hour in -6::6 do
-        let sun = 15.0D * double(hour) - (longitude - meridian)
+        let sun = 15.0 * double(hour) - (longitude - meridian)
         let line = degrees(atan(sine * tan(radians(sun))))
         let clock = if hour == 0 then 12 else (hour + 12) % 12 fi
         let half = if hour < 0 then "am" else "pm" fi

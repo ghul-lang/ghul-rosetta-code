@@ -61,10 +61,10 @@ draw(image: IMAGE, grid: Grid) is
             let y = double(margin + row * cell)
 
             image.fill_rectangle(
-                x + 1.0D,
-                y + 1.0D,
-                x + double(cell) - 1.0D,
-                y + double(cell) - 1.0D
+                x + 1.0,
+                y + 1.0,
+                x + double(cell) - 1.0,
+                y + double(cell) - 1.0
             )
         od
     od

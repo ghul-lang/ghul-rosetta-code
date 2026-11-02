@@ -8,7 +8,7 @@ van_der_corput(n: int, base: int) -> double is
             walk(rest / base, weight / cast(base))
         fi
 
-    walk(n, 1.0D / cast(base))
+    walk(n, 1.0 / cast(base))
 si
 
 let base_2 = 0::9 |> map(n => "{van_der_corput(n, 2)}") |> join()

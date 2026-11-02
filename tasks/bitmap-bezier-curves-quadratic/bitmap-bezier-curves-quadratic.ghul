@@ -9,27 +9,27 @@ quadratic(a: POINT, b: POINT, c: POINT) -> POINT[] =>
     (0..steps + 1)
         |> map(step => (
             let t = double(step) / double(steps)
-            let u = 1.0D - t
+            let u = 1.0 - t
 
             (
-                x = u * u * a.x + 2.0D * u * t * b.x + t * t * c.x,
-                y = u * u * a.y + 2.0D * u * t * b.y + t * t * c.y
+                x = u * u * a.x + 2.0 * u * t * b.x + t * t * c.x,
+                y = u * u * a.y + 2.0 * u * t * b.y + t * t * c.y
             )
         ))
         |> list()
 
-let start = (x = 20.0D, y = 220.0D)
-let control = (x = 160.0D, y = 10.0D)
-let finish = (x = 280.0D, y = 180.0D)
+let start = (x = 20.0, y = 220.0)
+let control = (x = 160.0, y = 10.0)
+let finish = (x = 280.0, y = 180.0)
 
 let image = IMAGE(300, 240)
 
 image.color(190ub, 190ub, 190ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 image.line([start, control, finish])
 
 image.color(0ub, 0ub, 160ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(quadratic(start, control, finish))
 
 image.write("quadratic.png")

@@ -31,7 +31,7 @@ accumulator(initial: Number) -> Number -> Number =>
 let x = accumulator(WHOLE(1))
 x(WHOLE(5))
 accumulator(WHOLE(3))
-write_line("{x(FRACTIONAL(2.3D))}")
+write_line("{x(FRACTIONAL(2.3))}")
 
 let y = accumulator(WHOLE(10))
 y(WHOLE(5))

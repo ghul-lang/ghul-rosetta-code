@@ -82,11 +82,11 @@ od
 
 let image = IMAGE(520, 520)
 
-image.view(-0.1D, -0.1D, 8.1D, 8.1D)
+image.view(-0.1, -0.1, 8.1, 8.1)
 
 middle(square: Square) -> (x: double, y: double) => (
-    x = double(square.file) + 0.5D,
-    y = double(square.rank) + 0.5D
+    x = double(square.file) + 0.5,
+    y = double(square.rank) + 0.5
 )
 
 let board = SHAPES()
@@ -97,9 +97,9 @@ for rank in 0..size do
 
         let cell = [
             corner,
-            (x = corner.x + 1.0D, y = corner.y),
-            (x = corner.x + 1.0D, y = corner.y + 1.0D),
-            (x = corner.x, y = corner.y + 1.0D)
+            (x = corner.x + 1.0, y = corner.y),
+            (x = corner.x + 1.0, y = corner.y + 1.0),
+            (x = corner.x, y = corner.y + 1.0)
         ]
 
         if (file + rank) % 2 == 0 then
@@ -112,7 +112,7 @@ od
 
 image.fill(board)
 
-image.stroke(2.6D)
+image.stroke(2.6)
 
 for step in 0..tour.count - 1 do
     let from = middle(tour[step])
@@ -124,14 +124,14 @@ for step in 0..tour.count - 1 do
 od
 
 image.color(190ub, 40ub, 40ub)
-image.dot(middle(start).x, middle(start).y, 6.0D)
+image.dot(middle(start).x, middle(start).y, 6.0)
 
 image.color(40ub, 40ub, 50ub)
-image.stroke(1.4D)
+image.stroke(1.4)
 image.line([
-    (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),
-    (x = 8.0D, y = 8.0D), (x = 0.0D, y = 8.0D),
-    (x = 0.0D, y = 0.0D)
+    (x = 0.0, y = 0.0), (x = 8.0, y = 0.0),
+    (x = 8.0, y = 8.0), (x = 0.0, y = 8.0),
+    (x = 0.0, y = 0.0)
 ])
 
 image.write("tour.png")

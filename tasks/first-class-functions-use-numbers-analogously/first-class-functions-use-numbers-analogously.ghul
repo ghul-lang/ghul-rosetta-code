@@ -2,12 +2,12 @@ use default
 
 multiplier(a: double, b: double) -> (double) -> double => m => a * b * m
 
-let x = 2.0D
-let xi = 0.5D
-let y = 4.0D
-let yi = 0.25D
+let x = 2.0
+let xi = 0.5
+let y = 4.0
+let yi = 0.25
 let z = x + y
-let zi = 1.0D / (x + y)
+let zi = 1.0 / (x + y)
 
 let numbers = [x, y, z]
 
@@ -16,5 +16,5 @@ let inverses = [xi, yi, zi]
 for (number, inverse) in numbers |> zip(inverses) do
     let unity = multiplier(number, inverse)
 
-    write_line("{number} * {inverse} * 1 = {unity(1.0D):F6}")
+    write_line("{number} * {inverse} * 1 = {unity(1.0):F6}")
 od

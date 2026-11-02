@@ -93,38 +93,35 @@ outline(symbol: int, x: double, y: double) -> List[(
         |> map(i =>
             let
                 turn = double(i) / double(steps),
-                t = 2.0D * pi * turn
+                t = 2.0 * pi * turn
             in
                 case symbol
                 when 0 then
-                    (x = x + 8.0D * cos(t), y = y + 18.0D * sin(t))
+                    (x = x + 8.0 * cos(t), y = y + 18.0 * sin(t))
                 when 1 then
-                    let dy = 18.0D * sin(t) in
-                    (
-                        x = x + 7.0D * cos(t) + 4.0D * sin(dy / 6.0D),
-                        y = y + dy
-                    )
+                    let dy = 18.0 * sin(t) in
+                    (x = x + 7.0 * cos(t) + 4.0 * sin(dy / 6.0), y = y + dy)
                 else
                     let
                         s = sin(t),
                         c = cos(t),
-                        k = 1.0D / (abs(s) + abs(c))
+                        k = 1.0 / (abs(s) + abs(c))
                     in
-                        (x = x + 9.0D * c * k, y = y + 19.0D * s * k)
+                        (x = x + 9.0 * c * k, y = y + 19.0 * s * k)
                 esac
         )
         |> list()
 
-let card_width = 120.0D
-let card_height = 72.0D
-let gap = 12.0D
+let card_width = 120.0
+let card_height = 72.0
+let gap = 12.0
 
 let image = IMAGE(
-    int(4.0D * card_width + 5.0D * gap),
-    int(3.0D * card_height + 4.0D * gap)
+    int(4.0 * card_width + 5.0 * gap),
+    int(3.0 * card_height + 4.0 * gap)
 )
 
-image.view(0.0D, double(image.height), double(image.width), 0.0D)
+image.view(0.0, double(image.height), double(image.width), 0.0)
 image.clear(40ub, 90ub, 60ub)
 
 for
@@ -140,9 +137,9 @@ do
     image.fill_rectangle(left, top, left + card_width, top + card_height)
 
     for i in 0..card.number + 1 do
-        let offset = double(i) - double(card.number) / 2.0D
-        let x = left + card_width / 2.0D + 26.0D * offset
-        let shape = outline(card.symbol, x, top + card_height / 2.0D)
+        let offset = double(i) - double(card.number) / 2.0
+        let x = left + card_width / 2.0 + 26.0 * offset
+        let shape = outline(card.symbol, x, top + card_height / 2.0)
 
         if card.shading == 0 then
             image.color(red, green, blue)
@@ -157,7 +154,7 @@ do
         fi
 
         image.color(red, green, blue)
-        image.stroke(2.0D)
+        image.stroke(2.0)
         image.line(shape ++ [shape[0]] |> list())
     od
 od

@@ -18,14 +18,13 @@ struct CIRCLE(center: P, radius: double) is
         "center ({center.x:F6}, {center.y:F6}), radius {radius:F6}"
 si
 
-across(a: P, b: P) -> CIRCLE =>
-    CIRCLE((a + b) * 0.5D, (a - b).length / 2.0D)
+across(a: P, b: P) -> CIRCLE => CIRCLE((a + b) * 0.5, (a - b).length / 2.0)
 
 through(a: P, b: P, c: P) -> CIRCLE =>
     let
         ab = b - a,
         ac = c - a,
-        d = 2.0D * (ab × ac)
+        d = 2.0 * (ab × ac)
     in
         let offset = P(
             (ac.y * (ab ⋅ ab) - ab.y * (ac ⋅ ac)) / d,
@@ -44,11 +43,11 @@ enclose(given: P[]) -> CIRCLE is
         (points[i], points[other]) = (points[other], points[i])
     od
 
-    let circle mut = CIRCLE(points[0], 0.0D)
+    let circle mut = CIRCLE(points[0], 0.0)
 
     for i in 1..points.count do
         if !circle.contains(points[i]) then
-            circle = CIRCLE(points[i], 0.0D)
+            circle = CIRCLE(points[i], 0.0)
 
             for j in 0..i do
                 if !circle.contains(points[j]) then
@@ -72,10 +71,10 @@ enclose(given: P[]) -> CIRCLE is
 si
 
 let tests = [
-    [P(0.0D, 0.0D), P(0.0D, 1.0D), P(1.0D, 0.0D)],
+    [P(0.0, 0.0), P(0.0, 1.0), P(1.0, 0.0)],
     [
-        P(5.0D, -2.0D), P(-3.0D, -2.0D), P(-2.0D, 5.0D),
-        P(1.0D, 6.0D), P(0.0D, 2.0D)
+        P(5.0, -2.0), P(-3.0, -2.0), P(-2.0, 5.0),
+        P(1.0, 6.0), P(0.0, 2.0)
     ]
 ]
 
@@ -87,10 +86,10 @@ let scattered =
     (0..60)
         |> map(_ =>
             let
-                angle = 2.0D * pi * random.next_double(),
-                r = 4.0D * sqrt(random.next_double())
+                angle = 2.0 * pi * random.next_double(),
+                r = 4.0 * sqrt(random.next_double())
             in
-                P(1.5D * r * cos(angle), r * sin(angle))
+                P(1.5 * r * cos(angle), r * sin(angle))
         )
         |> list()
 
@@ -102,24 +101,24 @@ write_line("60 random points: {circle}")
 let image = IMAGE(400, 400)
 
 image.view(
-    circle.center.x - 7.0D,
-    circle.center.y - 7.0D,
-    circle.center.x + 7.0D,
-    circle.center.y + 7.0D
+    circle.center.x - 7.0,
+    circle.center.y - 7.0,
+    circle.center.x + 7.0,
+    circle.center.y + 7.0
 )
 image.clear(252ub, 252ub, 250ub)
 
 image.color(40ub, 90ub, 180ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.circle(circle.center.x, circle.center.y, circle.radius)
 
 for p in scattered do
     if abs((p - circle.center).length - circle.radius) < 1.0e-6 then
         image.color(210ub, 50ub, 40ub)
-        image.dot(p.x, p.y, 5.0D)
+        image.dot(p.x, p.y, 5.0)
     else
         image.color(40ub, 40ub, 40ub)
-        image.dot(p.x, p.y, 3.0D)
+        image.dot(p.x, p.y, 3.0)
     fi
 od
 

@@ -15,8 +15,8 @@ let rows = 60
 let cell = 3
 let generations = 120
 
-let grow = 0.03D
-let lightning = 0.0002D
+let grow = 0.03
+let lightning = 0.0002
 
 let random = System.Random(2024)
 
@@ -86,7 +86,7 @@ let forest mut =
             (0..columns)
                 |> map(column =>
                     if
-                        inside(row, column) /\ random.next_double() < 0.5D
+                        inside(row, column) /\ random.next_double() < 0.5
                     then
                         Cell.TREE
                     else Cell.EMPTY

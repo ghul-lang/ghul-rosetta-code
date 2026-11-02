@@ -76,17 +76,17 @@ write_line("brute force:        {slow.distance:F6}")
 
 let image = IMAGE(400, 400)
 
-image.view(0.0D, 0.0D, 1.0D, 1.0D)
+image.view(0.0, 0.0, 1.0, 1.0)
 image.clear(252ub, 250ub, 245ub)
 image.color(120ub, 130ub, 150ub)
 
 for p in points do
-    image.dot(p.x, p.y, 1.5D)
+    image.dot(p.x, p.y, 1.5)
 od
 
 image.color(210ub, 40ub, 40ub)
-image.ring(fast.a.x, fast.a.y, 7.0D)
-image.ring(fast.b.x, fast.b.y, 7.0D)
+image.ring(fast.a.x, fast.a.y, 7.0)
+image.ring(fast.b.x, fast.b.y, 7.0)
 
 image.write("closest.png")
 

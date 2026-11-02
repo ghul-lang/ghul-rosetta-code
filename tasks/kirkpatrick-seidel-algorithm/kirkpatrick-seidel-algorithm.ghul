@@ -140,7 +140,7 @@ hull(points: P[]) -> P[] =>
     in
         top ++ inner |> list()
 
-turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0D
+turns_left(o: P, a: P, b: P) -> bool => (a - o) × (b - o) >= 0.0
 
 monotone_chain(points: P[]) -> P{} is
     let sorted = points |> sort((a, b) => a.x <> b.x) |> list()
@@ -175,7 +175,7 @@ let points =
     (0..300)
         |> map(_ =>
             let
-                angle = 2.0D * pi * random.next_double(),
+                angle = 2.0 * pi * random.next_double(),
                 r = sqrt(random.next_double())
             in
                 P(r * cos(angle), r * sin(angle))
@@ -192,16 +192,16 @@ write_line("the same set as the monotone chain finds: {agrees}")
 
 let image = IMAGE(360, 360)
 
-image.view(-1.1D, -1.1D, 1.1D, 1.1D)
+image.view(-1.1, -1.1, 1.1, 1.1)
 image.clear(252ub, 250ub, 245ub)
 image.color(120ub, 130ub, 150ub)
 
 for p in points do
-    image.dot(p.x, p.y, 2.0D)
+    image.dot(p.x, p.y, 2.0)
 od
 
 image.color(200ub, 50ub, 40ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> list())
 
 image.write("hull.png")

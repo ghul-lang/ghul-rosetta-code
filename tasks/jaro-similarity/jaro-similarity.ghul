@@ -4,9 +4,9 @@ jaro(left: string, right: string) -> double is
     if left.length == 0 \/ right.length == 0 then
         return
             if left.length == right.length then
-                1.0D
+                1.0
             else
-                0.0D
+                0.0
             fi
     fi
 
@@ -30,7 +30,7 @@ jaro(left: string, right: string) -> double is
     let match_count = matched_left.count
 
     if match_count == 0 then
-        return 0.0D
+        return 0.0
     fi
 
     let matched_right =
@@ -45,14 +45,14 @@ jaro(left: string, right: string) -> double is
             |> count()
 
     let matches = double(match_count)
-    let half_transpositions = cast(transposed) / 2.0D
+    let half_transpositions = cast(transposed) / 2.0
 
     return
         (
             matches / cast(left.length) +
             matches / cast(right.length) +
             (matches - half_transpositions) / matches
-        ) / 3.0D
+        ) / 3.0
 si
 
 [

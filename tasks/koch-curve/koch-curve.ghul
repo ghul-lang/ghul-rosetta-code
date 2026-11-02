@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
-let rise = sqrt(3.0D) / 2.0D
+let rise = sqrt(3.0) / 2.0
 
 koch(depth: int, from: Point, to: Point) -> Point{} is
     if depth == 0 then
@@ -11,15 +11,15 @@ koch(depth: int, from: Point, to: Point) -> Point{} is
         return
     fi
 
-    let dx = (to.x - from.x) / 3.0D
-    let dy = (to.y - from.y) / 3.0D
+    let dx = (to.x - from.x) / 3.0
+    let dy = (to.y - from.y) / 3.0
 
     let third = (x = from.x + dx, y = from.y + dy)
-    let twice = (x = from.x + 2.0D * dx, y = from.y + 2.0D * dy)
+    let twice = (x = from.x + 2.0 * dx, y = from.y + 2.0 * dy)
 
     let peak = (
-        x = third.x + dx * 0.5D - dy * rise,
-        y = third.y + dy * 0.5D + dx * rise
+        x = third.x + dx * 0.5 - dy * rise,
+        y = third.y + dy * 0.5 + dx * rise
     )
 
     yield in koch(depth - 1, from, third)
@@ -28,8 +28,8 @@ koch(depth: int, from: Point, to: Point) -> Point{} is
     yield in koch(depth - 1, twice, to)
 si
 
-let start = (x = 0.0D, y = 0.0D)
-let finish = (x = 1.0D, y = 0.0D)
+let start = (x = 0.0, y = 0.0)
+let finish = (x = 1.0, y = 0.0)
 
 let points = koch(5, start, finish) |> LIST()
 
@@ -37,9 +37,9 @@ points.add(finish)
 
 let image = IMAGE(660, 220)
 
-image.view(-0.1D, -0.06D, 1.1D, 0.34D)
+image.view(-0.1, -0.06, 1.1, 0.34)
 image.color(30ub, 60ub, 170ub)
-image.stroke(1.4D)
+image.stroke(1.4)
 
 image.line(points)
 

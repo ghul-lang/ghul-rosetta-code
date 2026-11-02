@@ -32,25 +32,25 @@ solid(c: Cell) -> bool is
 si
 
 project(x: double, y: double, z: double) -> Flat => (
-    x = (x - z) * cos(pi / 6.0D),
-    y = y - (x + z) * sin(pi / 6.0D)
+    x = (x - z) * cos(pi / 6.0),
+    y = y - (x + z) * sin(pi / 6.0)
 )
 
 let faces = [
     (
         normal = (x = 1, y = 0, z = 0),
         corners = [(1, 0, 0), (1, 1, 0), (1, 1, 1), (1, 0, 1)],
-        light = 0.7D
+        light = 0.7
     ),
     (
         normal = (x = 0, y = 1, z = 0),
         corners = [(0, 1, 0), (1, 1, 0), (1, 1, 1), (0, 1, 1)],
-        light = 1.0D
+        light = 1.0
     ),
     (
         normal = (x = 0, y = 0, z = 1),
         corners = [(0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1)],
-        light = 0.5D
+        light = 0.5
     )
 ]
 
@@ -65,11 +65,11 @@ let cells = [
     |> list()
 
 let image = IMAGE(420, 450)
-let reach = double(size) * 1.05D
+let reach = double(size) * 1.05
 
-image.view(-reach, -1.07D * reach, reach, 1.07D * reach)
+image.view(-reach, -1.07 * reach, reach, 1.07 * reach)
 image.clear(250ub, 248ub, 240ub)
-image.stroke(0.8D)
+image.stroke(0.8)
 
 for c in cells do
     for face in faces do
@@ -89,9 +89,9 @@ for c in cells do
                     |> list()
 
             image.color(
-                ubyte(200.0D * face.light),
-                ubyte(90.0D * face.light),
-                ubyte(40.0D * face.light)
+                ubyte(200.0 * face.light),
+                ubyte(90.0 * face.light),
+                ubyte(40.0 * face.light)
             )
             image.fill(outline)
 

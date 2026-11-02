@@ -37,7 +37,7 @@ atom(token: string) -> SExpr is
         return INTEGER(whole)
     fi
 
-    let real mut = 0.0D
+    let real mut = 0.0
 
     if double.try_parse(token, real ref) then
         return REAL(real)

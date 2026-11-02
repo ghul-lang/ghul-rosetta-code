@@ -12,14 +12,14 @@ let patients: PATIENT[] = [
 ]
 
 let visits: VISIT[] = [
-    (id = "2002", date = "2020-09-10", score = 6.8D),
-    (id = "1001", date = "2020-09-17", score = 5.5D),
-    (id = "4004", date = "2020-09-24", score = 8.4D),
+    (id = "2002", date = "2020-09-10", score = 6.8),
+    (id = "1001", date = "2020-09-17", score = 5.5),
+    (id = "4004", date = "2020-09-24", score = 8.4),
     (id = "2002", date = "2020-10-08", score = null),
-    (id = "1001", date = "", score = 6.6D),
+    (id = "1001", date = "", score = 6.6),
     (id = "3003", date = "2020-11-12", score = null),
-    (id = "4004", date = "2020-11-05", score = 7.0D),
-    (id = "1001", date = "2020-11-19", score = 5.3D)
+    (id = "4004", date = "2020-11-05", score = 7.0),
+    (id = "1001", date = "2020-11-19", score = 5.3)
 ]
 
 let by_patient = visits |> group_by(visit => visit.id)

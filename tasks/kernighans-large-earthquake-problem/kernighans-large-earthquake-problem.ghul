@@ -4,5 +4,5 @@ magnitude(line: string) -> double =>
     double.parse((words(line) |> list())[2])
 
 IO.File.read_lines("data.txt")
-    |> filter(line => magnitude(line) > 6.0D)
+    |> filter(line => magnitude(line) > 6.0)
     |> each(line => write_line(line))

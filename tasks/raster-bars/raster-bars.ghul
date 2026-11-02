@@ -10,21 +10,21 @@ let frames = 60
 let thickness = 24
 
 let bars = [
-    (color = (red = 1.0D, green = 0.25D, blue = 0.2D), phase = 0.0D),
-    (color = (red = 1.0D, green = 0.8D, blue = 0.2D), phase = 0.35D),
-    (color = (red = 0.3D, green = 1.0D, blue = 0.35D), phase = 0.7D),
-    (color = (red = 0.25D, green = 0.6D, blue = 1.0D), phase = 1.05D),
-    (color = (red = 0.8D, green = 0.35D, blue = 1.0D), phase = 1.4D)
+    (color = (red = 1.0, green = 0.25, blue = 0.2), phase = 0.0),
+    (color = (red = 1.0, green = 0.8, blue = 0.2), phase = 0.35),
+    (color = (red = 0.3, green = 1.0, blue = 0.35), phase = 0.7),
+    (color = (red = 0.25, green = 0.6, blue = 1.0), phase = 1.05),
+    (color = (red = 0.8, green = 0.35, blue = 1.0), phase = 1.4)
 ]
 
 channel(value: double) -> ubyte =>
-    ubyte(round(255.0D * clamp(value, 0.0D, 1.0D)))
+    ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
 
 draw_bar(image: IMAGE, color: Color, top: double) is
     for row in 0..thickness do
-        let across = (double(row) + 0.5D) / double(thickness)
+        let across = (double(row) + 0.5) / double(thickness)
         let shine = sin(across * pi)
-        let glint = pow(shine, 12.0D) * 0.5D
+        let glint = pow(shine, 12.0) * 0.5
         let y = top + double(row)
 
         image.color(
@@ -33,14 +33,14 @@ draw_bar(image: IMAGE, color: Color, top: double) is
             channel(color.blue * shine + glint)
         )
 
-        image.fill_rectangle(0.0D, y, double(width), y + 1.0D)
+        image.fill_rectangle(0.0, y, double(width), y + 1.0)
     od
 si
 
 draw(image: IMAGE, time: double) is
     image.clear(0ub, 0ub, 10ub)
 
-    let travel = double(height - thickness) / 2.0D
+    let travel = double(height - thickness) / 2.0
 
     for bar in bars do
         let top = round(travel + travel * sin(time - bar.phase))
@@ -53,7 +53,7 @@ let image = IMAGE(width, height)
 let animation = ANIMATION(width, height)
 
 for frame in 0..frames do
-    let time = 2.0D * pi * double(frame) / double(frames)
+    let time = 2.0 * pi * double(frame) / double(frames)
 
     draw(image, time)
     animation.add(image, 40)

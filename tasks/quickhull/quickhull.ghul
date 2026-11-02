@@ -29,9 +29,9 @@ length(p: Point) -> double => sqrt(p ⋅ p)
 class FACE(a: Point, b: Point, c: Point) is
     normal: Point => (b - a) × (c - a)
 
-    area: double => length(normal) / 2.0D
+    area: double => length(normal) / 2.0
 
-    outside(p: Point) -> bool => normal ⋅ (p - a) > 0.000000001D
+    outside(p: Point) -> bool => normal ⋅ (p - a) > 0.000000001
 
     edges: (from: Point, to: Point){} => [
         (from = a, to = b),
@@ -64,13 +64,13 @@ hull(points: Point[]) -> FACE[] is
                 )
 
     let low = furthest(
-        (x = 0.0D, y = 0.0D, z = 0.0D),
-        (x = -1.0D, y = 0.0D, z = 0.0D)
+        (x = 0.0, y = 0.0, z = 0.0),
+        (x = -1.0, y = 0.0, z = 0.0)
     )
 
     let high = furthest(
-        (x = 0.0D, y = 0.0D, z = 0.0D),
-        (x = 1.0D, y = 0.0D, z = 0.0D)
+        (x = 0.0, y = 0.0, z = 0.0),
+        (x = 1.0, y = 0.0, z = 0.0)
     )
 
     let apex =
@@ -157,7 +157,7 @@ let cloud =
 
                 let drawn = int(seed >>> 16) % 1000
 
-                return double(drawn) / 500.0D - 1.0D
+                return double(drawn) / 500.0 - 1.0
             si
             in
             (x = next(), y = next(), z = next())
@@ -168,10 +168,10 @@ let shapes = [
     (
         name = "tetrahedron",
         points = [
-            (x = 0.0D, y = 0.0D, z = 0.0D),
-            (x = 1.0D, y = 0.0D, z = 0.0D),
-            (x = 0.0D, y = 1.0D, z = 0.0D),
-            (x = 0.0D, y = 0.0D, z = 1.0D)
+            (x = 0.0, y = 0.0, z = 0.0),
+            (x = 1.0, y = 0.0, z = 0.0),
+            (x = 0.0, y = 1.0, z = 0.0),
+            (x = 0.0, y = 0.0, z = 1.0)
         ]
     ),
     (
@@ -179,13 +179,13 @@ let shapes = [
         points =
             0..8
                 |> map(corner => (
-                    x = double(corner % 2) * 2.0D - 1.0D,
-                    y = double(corner / 2 % 2) * 2.0D - 1.0D,
-                    z = double(corner / 4) * 2.0D - 1.0D
+                    x = double(corner % 2) * 2.0 - 1.0,
+                    y = double(corner / 2 % 2) * 2.0 - 1.0,
+                    z = double(corner / 4) * 2.0 - 1.0
                 ))
                 |> cat([
-                    (x = 0.0D, y = 0.0D, z = 0.0D),
-                    (x = 0.5D, y = -0.25D, z = 0.125D)
+                    (x = 0.0, y = 0.0, z = 0.0),
+                    (x = 0.5, y = -0.25, z = 0.125)
                 ])
                 |> list()
     ),
@@ -203,18 +203,18 @@ for (name, points) in shapes do
     let area =
         faces
             |> map(face => face.area)
-            |> reduce(0.0D, (running, part) => running + part)
+            |> reduce(0.0, (running, part) => running + part)
 
     write_line("{name}: {faces.count} faces, area {area:F6}")
 od
 
 let image = IMAGE(420, 420)
 
-let turned = p => (x = p.x * 0.8D + p.z * 0.6D, y = p.y * 0.9D + p.z * 0.3D)
+let turned = p => (x = p.x * 0.8 + p.z * 0.6, y = p.y * 0.9 + p.z * 0.3)
 
-image.view(-2.2D, -2.2D, 2.2D, 2.2D)
+image.view(-2.2, -2.2, 2.2, 2.2)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 image.color(60ub, 90ub, 170ub)
 
 for face in hull(cloud) do

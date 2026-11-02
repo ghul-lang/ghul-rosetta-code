@@ -119,7 +119,7 @@ draw(armies: Armies, n: int, file: string) is
     let square = 44
     let image = IMAGE(n * square, n * square)
 
-    image.view(0.0D, double(n), double(n), 0.0D)
+    image.view(0.0, double(n), double(n), 0.0)
 
     for row in 0..n do
         for column in 0..n do
@@ -133,16 +133,16 @@ draw(armies: Armies, n: int, file: string) is
                 image.color(181ub, 136ub, 99ub)
             fi
 
-            image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
+            image.fill_rectangle(x, y, x + 1.0, y + 1.0)
 
             if armies.black & bit != 0ul then
                 image.color(25ub, 25ub, 25ub)
-                image.disc(x + 0.5D, y + 0.5D, 0.32D)
+                image.disc(x + 0.5, y + 0.5, 0.32)
             elif armies.white & bit != 0ul then
                 image.color(25ub, 25ub, 25ub)
-                image.disc(x + 0.5D, y + 0.5D, 0.33D)
+                image.disc(x + 0.5, y + 0.5, 0.33)
                 image.color(250ub, 250ub, 250ub)
-                image.disc(x + 0.5D, y + 0.5D, 0.29D)
+                image.disc(x + 0.5, y + 0.5, 0.29)
             fi
         od
     od

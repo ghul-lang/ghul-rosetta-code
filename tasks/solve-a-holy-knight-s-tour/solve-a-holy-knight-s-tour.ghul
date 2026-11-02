@@ -87,7 +87,7 @@ for row in 0..rows do
     write_line(line.trim_end())
 od
 
-let cell = 40.0D
+let cell = 40.0
 let image = IMAGE(int(cell) * columns, int(cell) * rows)
 
 image.clear(245ub, 240ub, 225ub)
@@ -110,16 +110,16 @@ let path =
     open
         |> sort((a, b) => order[a] - order[b])
         |> map(s => (
-            x = cell * (double(s.column) + 0.5D),
-            y = cell * (double(s.row) + 0.5D)
+            x = cell * (double(s.column) + 0.5),
+            y = cell * (double(s.row) + 0.5)
         ))
         |> list()
 
 image.color(30ub, 60ub, 140ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(path)
 image.color(200ub, 40ub, 40ub)
-image.dot(path[0].x, path[0].y, 6.0D)
+image.dot(path[0].x, path[0].y, 6.0)
 
 image.write("tour.png")
 

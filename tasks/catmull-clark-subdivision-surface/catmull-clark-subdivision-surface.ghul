@@ -13,8 +13,8 @@ use Mesh = (points: Point[], faces: Face[])
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
 center(points: Point[]) -> Point =>
-    (points |> reduce((x = 0.0D, y = 0.0D, z = 0.0D), (a, b) => a + b)) *
-    (1.0D / double(points.count))
+    (points |> reduce((x = 0.0, y = 0.0, z = 0.0), (a, b) => a + b)) *
+    (1.0 / double(points.count))
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
     if a < b then
@@ -132,9 +132,9 @@ subdivided(mesh: Mesh) -> Mesh is
             )
 
             new_points[vertex] =
-                points[vertex] * ((n - 3.0D) / n) +
-                face_average * (1.0D / n) +
-                edge_average * (2.0D / n)
+                points[vertex] * ((n - 3.0) / n) +
+                face_average * (1.0 / n) +
+                edge_average * (2.0 / n)
         fi
     od
 
@@ -164,9 +164,9 @@ let cube = (
     points =
         0..8
             |> map(corner => (
-                x = double(corner % 2) * 2.0D - 1.0D,
-                y = double(corner / 2 % 2) * 2.0D - 1.0D,
-                z = double(corner / 4) * 2.0D - 1.0D
+                x = double(corner % 2) * 2.0 - 1.0,
+                y = double(corner / 2 % 2) * 2.0 - 1.0,
+                z = double(corner / 4) * 2.0 - 1.0
             ))
             |> list(),
     faces = [
@@ -195,7 +195,7 @@ for round in 0..rounds.count do
                     point.z * point.z
                 )
             )
-            |> reduce(0.0D, (a, b) => max(a, b))
+            |> reduce(0.0, (a, b) => max(a, b))
 
     write_line(
         "round {round}: {points.count} points, {faces.count} faces, "
@@ -205,14 +205,11 @@ od
 
 let image = IMAGE(420, 420)
 
-let turned = p => (
-    x = p.x * 0.85D + p.z * 0.5D,
-    y = p.y * 0.9D + p.z * 0.3D
-)
+let turned = p => (x = p.x * 0.85 + p.z * 0.5, y = p.y * 0.9 + p.z * 0.3)
 
-image.view(-2.0D, -2.0D, 2.0D, 2.0D)
+image.view(-2.0, -2.0, 2.0, 2.0)
 image.clear(252ub, 250ub, 245ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 image.color(60ub, 90ub, 170ub)
 
 let (final_points, final_faces) = rounds[rounds.count - 1]

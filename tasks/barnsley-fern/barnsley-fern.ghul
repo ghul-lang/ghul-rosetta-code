@@ -5,30 +5,30 @@ let random = System.Random(20260918)
 next(x: double, y: double) -> (x: double, y: double) => (
     let choice = random.next_double()
 
-    if choice < 0.01D then
-        (x = 0.0D, y = 0.16D * y)
-    elif choice < 0.86D then
-        (x = 0.85D * x + 0.04D * y, y = -0.04D * x + 0.85D * y + 1.6D)
-    elif choice < 0.93D then
-        (x = 0.2D * x - 0.26D * y, y = 0.23D * x + 0.22D * y + 1.6D)
+    if choice < 0.01 then
+        (x = 0.0, y = 0.16 * y)
+    elif choice < 0.86 then
+        (x = 0.85 * x + 0.04 * y, y = -0.04 * x + 0.85 * y + 1.6)
+    elif choice < 0.93 then
+        (x = 0.2 * x - 0.26 * y, y = 0.23 * x + 0.22 * y + 1.6)
     else
-        (x = -0.15D * x + 0.28D * y, y = 0.26D * x + 0.24D * y + 0.44D)
+        (x = -0.15 * x + 0.28 * y, y = 0.26 * x + 0.24 * y + 0.44)
     fi
 )
 
 let image = IMAGE(320, 640)
 
-image.view(-2.6D, -0.25D, 2.9D, 10.75D)
+image.view(-2.6, -0.25, 2.9, 10.75)
 image.color(24ub, 104ub, 40ub)
 
-let point mut = (x = 0.0D, y = 0.0D)
+let point mut = (x = 0.0, y = 0.0)
 
 for _ in 0..200000 do
     point = next(point.x, point.y)
 
     let at = image.to_pixel(point.x, point.y)
 
-    image.blend(int(at.x), int(at.y), 0.5D)
+    image.blend(int(at.x), int(at.y), 0.5)
 od
 
 image.write("fern.png")

@@ -38,10 +38,10 @@ si
 
 *(r: double, q: QUATERNION) -> QUATERNION => q * r
 
-let q = QUATERNION(1.0D, 2.0D, 3.0D, 4.0D)
-let q1 = QUATERNION(2.0D, 3.0D, 4.0D, 5.0D)
-let q2 = QUATERNION(3.0D, 4.0D, 5.0D, 6.0D)
-let r = 7.0D
+let q = QUATERNION(1.0, 2.0, 3.0, 4.0)
+let q1 = QUATERNION(2.0, 3.0, 4.0, 5.0)
+let q2 = QUATERNION(3.0, 4.0, 5.0, 6.0)
+let r = 7.0
 
 write_line("q  = {q}")
 write_line("q1 = {q1}")

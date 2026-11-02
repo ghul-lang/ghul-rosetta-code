@@ -5,25 +5,25 @@ use Raster.IMAGE
 let width = 240
 let height = 180
 let rectangles = 21
-let spacing = 4.0D
+let spacing = 4.0
 let frames = 42
 
 channel(hue: double, offset: double) -> ubyte =>
-    let wave = 0.5D + 0.5D * cos(2.0D * pi * (hue - offset)) in
-    ubyte(round(40.0D + 215.0D * wave))
+    let wave = 0.5 + 0.5 * cos(2.0 * pi * (hue - offset)) in
+    ubyte(round(40.0 + 215.0 * wave))
 
 draw(image: IMAGE, frame: int) is
     image.clear(10ub, 10ub, 15ub)
-    image.stroke(2.0D)
+    image.stroke(2.0)
 
     for ring in 0..rectangles do
-        let inset = spacing * double(ring) + 2.0D
+        let inset = spacing * double(ring) + 2.0
         let hue = double(frame - 2 * ring) / double(frames)
 
         image.color(
-            channel(hue, 0.0D),
-            channel(hue, 1.0D / 3.0D),
-            channel(hue, 2.0D / 3.0D)
+            channel(hue, 0.0),
+            channel(hue, 1.0 / 3.0),
+            channel(hue, 2.0 / 3.0)
         )
 
         let left = inset

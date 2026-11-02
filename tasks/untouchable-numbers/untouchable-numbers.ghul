@@ -5,7 +5,7 @@ write_line("")
 
 let top = 100_000
 
-let sieved = int(pow(cast(top), 1.5D))
+let sieved = int(pow(cast(top), 1.5))
 
 let aliquot = repeat(0, sieved + 1) |> LIST()
 
@@ -91,7 +91,7 @@ write_line("")
 write_line("how many untouchable numbers there are up to:")
 
 for power in 1::5 do
-    let bound = int(pow(10.0D, cast(power)))
+    let bound = int(pow(10.0, cast(power)))
     let found = untouchable |> filter(* <= bound) |> count()
 
     write_line("  {bound,7}: {found}")

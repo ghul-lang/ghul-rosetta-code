@@ -2,10 +2,10 @@ use Ghul.Pipes
 use Raster.IMAGE
 use Ghul.Math
 
-let turns = 5.0D
+let turns = 5.0
 let steps = 2000
 
-let last = turns * 2.0D * pi
+let last = turns * 2.0 * pi
 
 at(angle: double) -> (x: double, y: double) => (
     x = angle * cos(angle),
@@ -17,7 +17,7 @@ let image = IMAGE(400, 400)
 image.view(-last, -last, last, last)
 
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.5D)
+image.stroke(1.5)
 
 image.line(
     (0..steps + 1)

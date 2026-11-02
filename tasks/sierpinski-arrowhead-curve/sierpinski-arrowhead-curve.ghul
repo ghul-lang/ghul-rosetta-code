@@ -1,7 +1,7 @@
 use Raster
 
 let order = 6
-let step = 8.0D
+let step = 8.0
 
 let image = IMAGE(560, 480)
 let pen = TURTLE(image)
@@ -19,13 +19,13 @@ arrowhead(depth: int, angle: double) is
     arrowhead(depth - 1, -angle)
 si
 
-image.view(0.0D, 0.0D, 560.0D, 480.0D)
+image.view(0.0, 0.0, 560.0, 480.0)
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 
-pen.move_to(24.0D, 22.0D)
+pen.move_to(24.0, 22.0)
 
-arrowhead(order, 60.0D)
+arrowhead(order, 60.0)
 
 image.write("arrowhead.png")
 

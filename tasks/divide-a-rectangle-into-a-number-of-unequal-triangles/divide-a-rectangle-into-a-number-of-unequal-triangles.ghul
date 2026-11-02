@@ -25,7 +25,7 @@ similar(s: Triangle, t: Triangle) -> bool =>
     in
         0..3 |> all(i => abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6)
 
-area(t: Triangle) -> double => abs((t.b - t.a) × (t.c - t.a)) / 2.0D
+area(t: Triangle) -> double => abs((t.b - t.a) × (t.c - t.a)) / 2.0
 
 all_different(ts: Triangle[]) -> bool =>
     0..ts.count
@@ -62,11 +62,11 @@ divide(width: double, height: double, count: int) -> Triangle[] is
     assert count >= 3 else "at least three triangles are needed"
 
     do
-        let top = P(width * (0.2D + 0.6D * random.next_double()), height)
+        let top = P(width * (0.2 + 0.6 * random.next_double()), height)
         let triangles = LIST([
-            (P(0.0D, 0.0D), P(0.0D, height), top),
-            (P(0.0D, 0.0D), top, P(width, 0.0D)),
-            (P(width, 0.0D), top, P(width, height))
+            (P(0.0, 0.0), P(0.0, height), top),
+            (P(0.0, 0.0), top, P(width, 0.0)),
+            (P(width, 0.0), top, P(width, height))
         ])
 
         let tries mut = 0
@@ -81,7 +81,7 @@ divide(width: double, height: double, count: int) -> Triangle[] is
                         fi
                     )
 
-            let at = 0.25D + random.next_double() / 2.0D
+            let at = 0.25 + random.next_double() / 2.0
             let (first, second) = split(triangles[largest], at)
 
             let candidate =
@@ -116,7 +116,7 @@ write_line("leave two similar triangles is tried again somewhere else.")
 write_line("")
 
 for count in [3, 5, 8] do
-    let triangles = divide(8.0D, 5.0D, count)
+    let triangles = divide(8.0, 5.0, count)
     let total = triangles |> sum_by(area)
 
     write_line("{count} triangles covering an area of {total:F2}:")
@@ -128,7 +128,7 @@ for count in [3, 5, 8] do
     write_line("")
 od
 
-let many = divide(8.0D, 5.0D, 30)
+let many = divide(8.0, 5.0, 30)
 
 write_line("30 triangles, drawn below")
 write_line("no two similar: {all_different(many)}")
@@ -136,7 +136,7 @@ write_line("no two similar: {all_different(many)}")
 let image = IMAGE(480, 300)
 let tiles = SHAPES()
 
-image.view(-0.1D, -0.1D, 8.1D, 5.1D)
+image.view(-0.1, -0.1, 8.1, 5.1)
 image.clear(250ub, 250ub, 245ub)
 
 for (i, t) in many |> index() do
@@ -150,7 +150,7 @@ od
 
 image.fill(tiles)
 image.color(30ub, 30ub, 50ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 for t in many do
     let corners = [t.a, t.b, t.c, t.a] |> map(p => (x = p.x, y = p.y))

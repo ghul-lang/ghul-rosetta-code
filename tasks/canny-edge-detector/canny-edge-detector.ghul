@@ -7,48 +7,48 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = double(y) / 80.0D
+        let t = double(y) / 80.0
 
         image.color(
-            ubyte(40.0D + 200.0D * t),
-            ubyte(70.0D + 100.0D * t),
-            ubyte(160.0D - 60.0D * t)
+            ubyte(40.0 + 200.0 * t),
+            ubyte(70.0 + 100.0 * t),
+            ubyte(160.0 - 60.0 * t)
         )
-        image.fill_rectangle(0.0D, double(y), 160.0D, double(y + 1))
+        image.fill_rectangle(0.0, double(y), 160.0, double(y + 1))
     od
 
     image.color(255ub, 220ub, 60ub)
-    image.disc(112.0D, 42.0D, 15.0D)
+    image.disc(112.0, 42.0, 15.0)
 
     image.color(90ub, 60ub, 120ub)
     image.fill([
-        pt(0.0D, 80.0D),
-        pt(45.0D, 30.0D),
-        pt(95.0D, 80.0D)
+        pt(0.0, 80.0),
+        pt(45.0, 30.0),
+        pt(95.0, 80.0)
     ])
 
     image.color(60ub, 110ub, 70ub)
     image.fill([
-        pt(55.0D, 80.0D),
-        pt(105.0D, 48.0D),
-        pt(160.0D, 80.0D)
+        pt(55.0, 80.0),
+        pt(105.0, 48.0),
+        pt(160.0, 80.0)
     ])
 
     image.color(70ub, 150ub, 60ub)
-    image.fill_rectangle(0.0D, 80.0D, 160.0D, 120.0D)
+    image.fill_rectangle(0.0, 80.0, 160.0, 120.0)
 
     image.color(200ub, 35ub, 40ub)
-    image.fill_rectangle(22.0D, 88.0D, 52.0D, 110.0D)
+    image.fill_rectangle(22.0, 88.0, 52.0, 110.0)
 
     image.color(120ub, 25ub, 30ub)
     image.fill([
-        pt(18.0D, 88.0D),
-        pt(37.0D, 75.0D),
-        pt(56.0D, 88.0D)
+        pt(18.0, 88.0),
+        pt(37.0, 75.0),
+        pt(56.0, 88.0)
     ])
 
     image.color(250ub, 245ub, 235ub)
-    image.fill_rectangle(33.0D, 97.0D, 41.0D, 110.0D)
+    image.fill_rectangle(33.0, 97.0, 41.0, 110.0)
 
     image
 si
@@ -61,7 +61,7 @@ class FIELD is
     init(width: int, height: int) is
         self.width = width
         self.height = height
-        values = repeat(0.0D, width * height) |> LIST()
+        values = repeat(0.0, width * height) |> LIST()
     si
 
     at(x: int, y: int) -> double =>
@@ -82,9 +82,9 @@ grayscale(image: IMAGE) -> FIELD is
             gray.put(
                 x,
                 y,
-                0.299D * double(p.red) +
-                0.587D * double(p.green) +
-                0.114D * double(p.blue)
+                0.299 * double(p.red) +
+                0.587 * double(p.green) +
+                0.114 * double(p.blue)
             )
         od
     od
@@ -93,11 +93,11 @@ grayscale(image: IMAGE) -> FIELD is
 si
 
 let gaussian = [
-    [2.0D, 4.0D, 5.0D, 4.0D, 2.0D],
-    [4.0D, 9.0D, 12.0D, 9.0D, 4.0D],
-    [5.0D, 12.0D, 15.0D, 12.0D, 5.0D],
-    [4.0D, 9.0D, 12.0D, 9.0D, 4.0D],
-    [2.0D, 4.0D, 5.0D, 4.0D, 2.0D]
+    [2.0, 4.0, 5.0, 4.0, 2.0],
+    [4.0, 9.0, 12.0, 9.0, 4.0],
+    [5.0, 12.0, 15.0, 12.0, 5.0],
+    [4.0, 9.0, 12.0, 9.0, 4.0],
+    [2.0, 4.0, 5.0, 4.0, 2.0]
 ]
 
 blur(f: FIELD) -> FIELD is
@@ -105,7 +105,7 @@ blur(f: FIELD) -> FIELD is
 
     for y in 0..f.height do
         for x in 0..f.width do
-            let total mut = 0.0D
+            let total mut = 0.0
 
             for j in 0..5 do
                 for i in 0..5 do
@@ -115,7 +115,7 @@ blur(f: FIELD) -> FIELD is
                 od
             od
 
-            result.put(x, y, total / 159.0D)
+            result.put(x, y, total / 159.0)
         od
     od
 
@@ -133,23 +133,23 @@ canny(f: FIELD, low: double, high: double) -> FIELD is
 
             let gx =
                 n(1, -1) +
-                2.0D * n(1, 0) +
+                2.0 * n(1, 0) +
                 n(1, 1) -
                 n(-1, -1) -
-                2.0D * n(-1, 0) -
+                2.0 * n(-1, 0) -
                 n(-1, 1)
             let gy =
                 n(-1, 1) +
-                2.0D * n(0, 1) +
+                2.0 * n(0, 1) +
                 n(1, 1) -
                 n(-1, -1) -
-                2.0D * n(0, -1) -
+                2.0 * n(0, -1) -
                 n(1, -1)
 
             magnitude.put(x, y, sqrt(gx * gx + gy * gy))
 
-            let angle = atan2(gy, gx) * 180.0D / pi
-            let sector = int(round((angle + 180.0D) / 45.0D)) % 4
+            let angle = atan2(gy, gx) * 180.0 / pi
+            let sector = int(round((angle + 180.0) / 45.0)) % 4
 
             direction[y * w + x] = sector
         od
@@ -178,7 +178,7 @@ canny(f: FIELD, low: double, high: double) -> FIELD is
     for y in 0..h do
         for x in 0..w do
             if thin.at(x, y) >= high then
-                edges.put(x, y, 1.0D)
+                edges.put(x, y, 1.0)
                 pending.push((x, y))
             fi
         od
@@ -196,10 +196,10 @@ canny(f: FIELD, low: double, high: double) -> FIELD is
                     nx < w /\
                     ny >= 0 /\
                     ny < h /\
-                    edges.at(nx, ny) == 0.0D /\
+                    edges.at(nx, ny) == 0.0 /\
                     thin.at(nx, ny) >= low
                 then
-                    edges.put(nx, ny, 1.0D)
+                    edges.put(nx, ny, 1.0)
                     pending.push((nx, ny))
                 fi
             od
@@ -212,9 +212,9 @@ si
 scene().write("scene.png")
 
 let input = IMAGE.read("scene.png")
-let edges = canny(blur(grayscale(input)), 20.0D, 50.0D)
+let edges = canny(blur(grayscale(input)), 20.0, 50.0)
 
-let found = edges.values |> filter(* > 0.0D) |> count()
+let found = edges.values |> filter(* > 0.0) |> count()
 
 write_line("{found} of {edges.width * edges.height} pixels are on an edge")
 
@@ -224,7 +224,7 @@ let output = IMAGE(edges.width * 2 * scale, edges.height * scale)
 for y in 0..edges.height * scale do
     for x in 0..edges.width * scale do
         let p = input.pixel(x / scale, y / scale)
-        let on = edges.at(x / scale, y / scale) > 0.0D
+        let on = edges.at(x / scale, y / scale) > 0.0
         let shade = if on then 255ub else 0ub fi
 
         output.set_pixel(x, y, p.red, p.green, p.blue)

@@ -11,14 +11,14 @@ si
 
 distance(p: P, from: P, to: P) -> double =>
     let line = to - from in
-    if line.length == 0.0D then (p - from).length
+    if line.length == 0.0 then (p - from).length
     else abs(line × (p - from)) / line.length
     fi
 
 simplify(points: P[], epsilon: double) -> P[] is
     let last = points.count - 1
     let far mut = 0
-    let farthest mut = 0.0D
+    let farthest mut = 0.0
 
     for i in 1..last do
         let d = distance(points[i], points[0], points[last])
@@ -40,18 +40,18 @@ simplify(points: P[], epsilon: double) -> P[] is
 si
 
 let line = [
-    P(0.0D, 0.0D), P(1.0D, 0.1D), P(2.0D, -0.1D), P(3.0D, 5.0D),
-    P(4.0D, 6.0D), P(5.0D, 7.0D), P(6.0D, 8.1D), P(7.0D, 9.0D),
-    P(8.0D, 9.0D), P(9.0D, 9.0D)
+    P(0.0, 0.0), P(1.0, 0.1), P(2.0, -0.1), P(3.0, 5.0),
+    P(4.0, 6.0), P(5.0, 7.0), P(6.0, 8.1), P(7.0, 9.0),
+    P(8.0, 9.0), P(9.0, 9.0)
 ]
 
-let simple = simplify(line, 1.0D)
+let simple = simplify(line, 1.0)
 
 write_line(simple |> join(" "))
 
 let image = IMAGE(400, 400)
 
-image.view(-0.5D, -0.5D, 9.5D, 9.5D)
+image.view(-0.5, -0.5, 9.5, 9.5)
 image.clear(252ub, 252ub, 250ub)
 
 draw(points: P[], width: double, size: double) is
@@ -64,10 +64,10 @@ draw(points: P[], width: double, size: double) is
 si
 
 image.color(170ub, 170ub, 180ub)
-draw(line, 6.0D, 7.0D)
+draw(line, 6.0, 7.0)
 
 image.color(200ub, 50ub, 40ub)
-draw(simple, 2.0D, 4.0D)
+draw(simple, 2.0, 4.0)
 
 image.write("simplified.png")
 

@@ -13,14 +13,14 @@ is_eisenstein_prime(e: Eisenstein) -> bool =>
         is_prime(norm(e))
     fi
 
-real(e: Eisenstein) -> double => double(e.a) - double(e.b) / 2.0D
+real(e: Eisenstein) -> double => double(e.a) - double(e.b) / 2.0
 
-imaginary(e: Eisenstein) -> double => double(e.b) * sqrt(3.0D) / 2.0D
+imaginary(e: Eisenstein) -> double => double(e.b) * sqrt(3.0) / 2.0
 
 show(e: Eisenstein) -> string =>
     let
         im = imaginary(e),
-        sign = if im < 0.0D then "-" else "+" fi
+        sign = if im < 0.0 then "-" else "+" fi
     in
         "{real(e),8:F4} {sign} {abs(im):F4}i"
 
@@ -50,14 +50,14 @@ write_line("")
 write_line("plotted the first 2000, out to norm {norm(largest)}")
 
 let image = IMAGE(400, 400)
-let extent = sqrt(double(norm(largest))) * 1.05D
+let extent = sqrt(double(norm(largest))) * 1.05
 
 image.view(-extent, -extent, extent, extent)
 image.clear(10ub, 12ub, 25ub)
 image.color(120ub, 200ub, 255ub)
 
 for e in plotted do
-    image.dot(real(e), imaginary(e), 1.6D)
+    image.dot(real(e), imaginary(e), 1.6)
 od
 
 image.write("eisenstein.png")

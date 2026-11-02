@@ -25,20 +25,20 @@ struct TROPICAL(value: double) is
 si
 
 let zero = TROPICAL(minus_infinity)
-let one = TROPICAL(0.0D)
+let one = TROPICAL(0.0)
 
 show(text: string, result: TROPICAL) => write_line("{text} is {result}")
 
-show("2 ⊗ -2", TROPICAL(2.0D) ⊗ TROPICAL(-2.0D))
-show("-0.001 ⊕ -Inf", TROPICAL(-0.001D) ⊕ zero)
+show("2 ⊗ -2", TROPICAL(2.0) ⊗ TROPICAL(-2.0))
+show("-0.001 ⊕ -Inf", TROPICAL(-0.001) ⊕ zero)
 show("0 ⊗ -Inf", one ⊗ zero)
-show("1.5 ⊕ -1", TROPICAL(1.5D) ⊕ TROPICAL(-1.0D))
-show("-0.5 ⊗ 0", TROPICAL(-0.5D) ⊗ one)
-show("5 ^ 7", TROPICAL(5.0D) ^ 7)
+show("1.5 ⊕ -1", TROPICAL(1.5) ⊕ TROPICAL(-1.0))
+show("-0.5 ⊗ 0", TROPICAL(-0.5) ⊗ one)
+show("5 ^ 7", TROPICAL(5.0) ^ 7)
 
-let a = TROPICAL(5.0D)
-let b = TROPICAL(8.0D)
-let c = TROPICAL(7.0D)
+let a = TROPICAL(5.0)
+let b = TROPICAL(8.0)
+let c = TROPICAL(7.0)
 
 show("5 ⊗ (8 ⊕ 7)", a ⊗ (b ⊕ c))
 show("5 ⊗ 8 ⊕ 5 ⊗ 7", a ⊗ b ⊕ a ⊗ c)

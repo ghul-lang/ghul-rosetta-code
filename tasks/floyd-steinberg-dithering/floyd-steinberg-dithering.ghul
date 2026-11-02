@@ -4,24 +4,24 @@ use Raster.IMAGE
 let width = 480
 let height = 360
 
-let light = (x = -0.45D, y = 0.55D, z = 0.70D)
+let light = (x = -0.45, y = 0.55, z = 0.70)
 
 brightness(pixel_x: int, pixel_y: int) -> double => (
     let x =
-        (double(pixel_x) - 0.5D * double(width)) / (0.42D * double(height))
+        (double(pixel_x) - 0.5 * double(width)) / (0.42 * double(height))
     let y =
-        (0.5D * double(height) - double(pixel_y)) / (0.42D * double(height))
+        (0.5 * double(height) - double(pixel_y)) / (0.42 * double(height))
 
-    let sky = 0.86D - 0.42D * (y + 1.2D) / 2.4D
+    let sky = 0.86 - 0.42 * (y + 1.2) / 2.4
     let away = x * x + y * y
 
-    if away > 1.0D then
+    if away > 1.0 then
         sky
     else
-        let z = sqrt(1.0D - away)
+        let z = sqrt(1.0 - away)
         let facing = x * light.x + y * light.y + z * light.z
 
-        0.06D + 0.94D * max(0.0D, facing)
+        0.06 + 0.94 * max(0.0, facing)
     fi
 )
 
@@ -33,7 +33,7 @@ let grey = LIST()
 for pixel_y in 0..height do
     for pixel_x in 0..width do
         let value = brightness(pixel_x, pixel_y)
-        let shade = ubyte(round(255.0D * value))
+        let shade = ubyte(round(255.0 * value))
 
         grey.add(value)
         source.set_pixel(pixel_x, pixel_y, shade, shade, shade)
@@ -45,7 +45,7 @@ let palette = 2
 nearest(value: double) -> double => (
     let steps = double(palette - 1)
 
-    round(min(1.0D, max(0.0D, value)) * steps) / steps
+    round(min(1.0, max(0.0, value)) * steps) / steps
 )
 
 spread(pixel_x: int, pixel_y: int, error: double, part: double) is
@@ -63,14 +63,14 @@ for pixel_y in 0..height do
         let chosen = nearest(wanted)
         let error = wanted - chosen
 
-        let shade = ubyte(round(255.0D * chosen))
+        let shade = ubyte(round(255.0 * chosen))
 
         dithered.set_pixel(pixel_x, pixel_y, shade, shade, shade)
 
-        spread(pixel_x + 1, pixel_y, error, 7.0D / 16.0D)
-        spread(pixel_x - 1, pixel_y + 1, error, 3.0D / 16.0D)
-        spread(pixel_x, pixel_y + 1, error, 5.0D / 16.0D)
-        spread(pixel_x + 1, pixel_y + 1, error, 1.0D / 16.0D)
+        spread(pixel_x + 1, pixel_y, error, 7.0 / 16.0)
+        spread(pixel_x - 1, pixel_y + 1, error, 3.0 / 16.0)
+        spread(pixel_x, pixel_y + 1, error, 5.0 / 16.0)
+        spread(pixel_x + 1, pixel_y + 1, error, 1.0 / 16.0)
     od
 od
 

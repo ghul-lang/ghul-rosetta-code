@@ -15,12 +15,12 @@ let cases = [
     928436, 1000249, 1082054, 1174652
 ]
 
-let start = 27.0D
+let start = 27.0
 let population = 7.8e9
 
 model(r: double, t: double) -> double =>
     let growth = exp(r * t) in
-    start * growth / (1.0D + start * (growth - 1.0D) / population)
+    start * growth / (1.0 + start * (growth - 1.0) / population)
 
 error(r: double) -> double =>
     cases
@@ -29,7 +29,7 @@ error(r: double) -> double =>
         |> sum_by(d => d * d)
 
 golden_section(low: double, high: double) -> double => (
-    let ratio = (sqrt(5.0D) - 1.0D) / 2.0D
+    let ratio = (sqrt(5.0) - 1.0) / 2.0
     let a mut = low, b mut = high
 
     while b - a > 1.0e-12 do
@@ -39,40 +39,40 @@ golden_section(low: double, high: double) -> double => (
         if error(c) < error(d) then b = d else a = c fi
     od
 
-    (a + b) / 2.0D
+    (a + b) / 2.0
 )
 
-let r = golden_section(0.0D, 0.5D)
+let r = golden_section(0.0, 0.5)
 
 write_line("the r that fits the world Covid-19 data best is {r:F8}")
-write_line("so R0 is roughly e^(12r) = {exp(12.0D * r):F7}")
+write_line("so R0 is roughly e^(12r) = {exp(12.0 * r):F7}")
 
 let image = IMAGE(420, 280)
 let days = double(cases.count)
 
-image.view(-16.0D, 0.8D, days + 2.0D, 6.6D)
+image.view(-16.0, 0.8, days + 2.0, 6.6)
 image.clear(252ub, 250ub, 245ub)
 
 image.color(215ub, 215ub, 220ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 
 for power in 1::6 do
-    image.line(0.0D, double(power), days, double(power))
+    image.line(0.0, double(power), days, double(power))
 od
 
 image.color(90ub, 90ub, 100ub)
 
 for power in 1::6 do
-    let y = double(power) - 0.07D
+    let y = double(power) - 0.07
 
-    image.text(-2.0D, y, 10.0D, "1e{power}", Anchor.RIGHT)
+    image.text(-2.0, y, 10.0, "1e{power}", Anchor.RIGHT)
 od
 
 image.color(200ub, 60ub, 40ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(
     (0::cases.count * 4)
-        |> map(q => double(q) / 4.0D)
+        |> map(q => double(q) / 4.0)
         |> map(t => (x = t, y = log10(model(r, t))))
         |> list()
 )
@@ -80,7 +80,7 @@ image.line(
 image.color(40ub, 80ub, 170ub)
 
 for (day, count) in cases |> index() do
-    image.dot(double(day), log10(double(count)), 2.5D)
+    image.dot(double(day), log10(double(count)), 2.5)
 od
 
 image.write("fit.png")

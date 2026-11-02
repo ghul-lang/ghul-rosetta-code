@@ -6,11 +6,11 @@ struct P(x: double, y: double) is
     length: double => sqrt(x * x + y * y)
 si
 
-let full = 2.0D * pi
+let full = 2.0 * pi
 
 center_of(a: P, b: P, c: P) -> P => (
     let d =
-        2.0D * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
+        2.0 * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
 
     let a2 = a.x * a.x + a.y * a.y,
         b2 = b.x * b.x + b.y * b.y,
@@ -34,8 +34,8 @@ curve(start: P, middle: P, finish: P, steps: int) -> P{} is
 
     let wrap = a => a - full * floor(a / full)
 
-    if (wrap(through - from) < wrap(turn)) != (turn > 0.0D) then
-        turn = if turn > 0.0D then turn - full else turn + full fi
+    if (wrap(through - from) < wrap(turn)) != (turn > 0.0) then
+        turn = if turn > 0.0 then turn - full else turn + full fi
     fi
 
     (0::steps)
@@ -49,9 +49,9 @@ curve(start: P, middle: P, finish: P, steps: int) -> P{} is
         |> list()
 si
 
-let start = P(10.0D, 10.0D)
-let middle = P(100.0D, 200.0D)
-let finish = P(200.0D, 10.0D)
+let start = P(10.0, 10.0)
+let middle = P(100.0, 200.0)
+let finish = P(200.0, 10.0)
 
 let center = center_of(start, middle, finish)
 
@@ -63,16 +63,16 @@ let points = curve(start, middle, finish, 100)
 
 let image = IMAGE(300, 300)
 
-image.view(-20.0D, -40.0D, 230.0D, 210.0D)
+image.view(-20.0, -40.0, 230.0, 210.0)
 image.clear(252ub, 250ub, 245ub)
 image.color(40ub, 80ub, 170ub)
-image.stroke(2.5D)
+image.stroke(2.5)
 image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
 
 image.color(210ub, 50ub, 40ub)
 
 for p in [start, middle, finish] do
-    image.dot(p.x, p.y, 5.0D)
+    image.dot(p.x, p.y, 5.0)
 od
 
 image.write("curve.png")

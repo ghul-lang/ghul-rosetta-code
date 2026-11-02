@@ -3,18 +3,18 @@ use Raster.IMAGE
 
 let columns = 15
 let rows = 14
-let spacing = 50.0D
-let radius = spacing / 3.0D
-let offset = radius / 2.5D
-let step = 2.0D * pi / 15.0D
+let spacing = 50.0
+let radius = spacing / 3.0
+let offset = radius / 2.5
+let step = 2.0 * pi / 15.0
 
 let image = IMAGE(int(spacing) * (columns + 1), int(spacing) * (rows + 1))
 
 image.view(
-    0.0D,
+    0.0,
     spacing * double(rows + 1),
     spacing * double(columns + 1),
-    0.0D
+    0.0
 )
 
 image.clear(0ub, 125ub, 0ub)

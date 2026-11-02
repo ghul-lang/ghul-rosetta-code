@@ -9,36 +9,36 @@ cubic(a: POINT, b: POINT, c: POINT, d: POINT) -> POINT[] =>
     (0..steps + 1)
         |> map(step => (
             let t = double(step) / double(steps)
-            let u = 1.0D - t
+            let u = 1.0 - t
 
             (
                 x =
                     u * u * u * a.x +
-                    3.0D * u * u * t * b.x +
-                    3.0D * u * t * t * c.x +
+                    3.0 * u * u * t * b.x +
+                    3.0 * u * t * t * c.x +
                     t * t * t * d.x,
                 y =
                     u * u * u * a.y +
-                    3.0D * u * u * t * b.y +
-                    3.0D * u * t * t * c.y +
+                    3.0 * u * u * t * b.y +
+                    3.0 * u * t * t * c.y +
                     t * t * t * d.y
             )
         ))
         |> list()
 
-let start = (x = 20.0D, y = 200.0D)
-let first = (x = 60.0D, y = 20.0D)
-let second = (x = 240.0D, y = 220.0D)
-let finish = (x = 280.0D, y = 40.0D)
+let start = (x = 20.0, y = 200.0)
+let first = (x = 60.0, y = 20.0)
+let second = (x = 240.0, y = 220.0)
+let finish = (x = 280.0, y = 40.0)
 
 let image = IMAGE(300, 240)
 
 image.color(190ub, 190ub, 190ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 image.line([start, first, second, finish])
 
 image.color(0ub, 0ub, 160ub)
-image.stroke(2.0D)
+image.stroke(2.0)
 image.line(cubic(start, first, second, finish))
 
 image.write("cubic.png")

@@ -2,16 +2,16 @@ use default
 use Raster.IMAGE
 
 let size = 480
-let centre = double(size) / 2.0D
-let radius = 208.0D
+let centre = double(size) / 2.0
+let radius = 208.0
 
-let ambient = 0.14D
-let shine = 28.0D
+let ambient = 0.14
+let shine = 28.0
 
 let towards_light = (
-    let x = -0.45D
-    let y = 0.55D
-    let z = 0.70D
+    let x = -0.45
+    let y = 0.55
+    let z = 0.70
 
     let length = sqrt(x * x + y * y + z * z)
 
@@ -19,40 +19,40 @@ let towards_light = (
 )
 
 channel(base: double, level: double, gloss: double) -> ubyte => (
-    let value = base * level + 255.0D * gloss
+    let value = base * level + 255.0 * gloss
 
-    ubyte(min(255.0D, max(0.0D, value)))
+    ubyte(min(255.0, max(0.0, value)))
 )
 
 let image = IMAGE(size, size)
 
 for down in 0..size do
     for across in 0..size do
-        let x = (double(across) + 0.5D - centre) / radius
-        let y = (centre - double(down) - 0.5D) / radius
+        let x = (double(across) + 0.5 - centre) / radius
+        let y = (centre - double(down) - 0.5) / radius
         let square = x * x + y * y
 
-        if square <= 1.0D then
-            let z = sqrt(1.0D - square)
+        if square <= 1.0 then
+            let z = sqrt(1.0 - square)
 
             let lambert =
                 x * towards_light.x +
                 y * towards_light.y +
                 z * towards_light.z
 
-            let level = ambient + 0.9D * max(0.0D, lambert)
+            let level = ambient + 0.9 * max(0.0, lambert)
 
             let gloss = pow(
-                max(0.0D, 2.0D * lambert * z - towards_light.z),
+                max(0.0, 2.0 * lambert * z - towards_light.z),
                 shine
             )
 
             image.set_pixel(
                 across,
                 down,
-                channel(70.0D, level, gloss),
-                channel(130.0D, level, gloss),
-                channel(235.0D, level, gloss)
+                channel(70.0, level, gloss),
+                channel(130.0, level, gloss),
+                channel(235.0, level, gloss)
             )
         fi
     od

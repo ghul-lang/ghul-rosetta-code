@@ -6,7 +6,7 @@ use Raster.IMAGE
 question(x: double) -> double is
     let whole = floor(x)
 
-    if x < 0.0D \/ x >= 1.0D then
+    if x < 0.0 \/ x >= 1.0 then
         return whole + question(x - whole)
     fi
 
@@ -15,11 +15,11 @@ question(x: double) -> double is
     let r mut = 1L
     let s mut = 1L
 
-    let y mut = 0.0D
-    let step mut = 1.0D
+    let y mut = 0.0
+    let step mut = 1.0
 
     do
-        step = step / 2.0D
+        step = step / 2.0
 
         if y + step == y then
             break
@@ -49,16 +49,16 @@ terms(y: double) -> int{} is
     let run mut = 1
 
     for _ in 0..60 do
-        if rest == 0.0D then
+        if rest == 0.0 then
             break
         fi
 
-        rest = rest * 2.0D
+        rest = rest * 2.0
 
-        let next = if rest >= 1.0D then 1 else 0 fi
+        let next = if rest >= 1.0 then 1 else 0 fi
 
-        if rest >= 1.0D then
-            rest = rest - 1.0D
+        if rest >= 1.0 then
+            rest = rest - 1.0
         fi
 
         if next == bit then
@@ -78,43 +78,43 @@ si
 inverse(y: double) -> double is
     let whole = floor(y)
 
-    if y < 0.0D \/ y >= 1.0D then
+    if y < 0.0 \/ y >= 1.0 then
         return whole + inverse(y - whole)
     fi
 
-    if y == 0.0D then
-        return 0.0D
+    if y == 0.0 then
+        return 0.0
     fi
 
     y
         |> terms()
         |> reverse()
-        |> reduce(0.0D, (x, term) => 1.0D / (double(term) + x))
+        |> reduce(0.0, (x, term) => 1.0 / (double(term) + x))
 si
 
-let phi = (1.0D + sqrt(5.0D)) / 2.0D
+let phi = (1.0 + sqrt(5.0)) / 2.0
 
 write_line(
-    "?(31/7)     {question(31.0D / 7.0D):F10}"
-    "   71/16 is {71.0D / 16.0D:F10}"
+    "?(31/7)     {question(31.0 / 7.0):F10}"
+    "   71/16 is {71.0 / 16.0:F10}"
 )
 write_line(
     "?(phi)      {question(phi):F10}"
-    "   5/3 is {5.0D / 3.0D:F10}"
+    "   5/3 is {5.0 / 3.0:F10}"
 )
 write_line(
-    "?-1(-5/9)  {inverse(-5.0D / 9.0D):F10}"
-    "   (sqrt(13) - 7)/6 is {(sqrt(13.0D) - 7.0D) / 6.0D:F10}"
+    "?-1(-5/9)  {inverse(-5.0 / 9.0):F10}"
+    "   (sqrt(13) - 7)/6 is {(sqrt(13.0) - 7.0) / 6.0:F10}"
 )
 write_line("")
 
 write_line("the two undo each other:")
 
-for x in [0.125D, 1.0D / 3.0D, phi - 1.0D, 0.9D] do
+for x in [0.125, 1.0 / 3.0, phi - 1.0, 0.9] do
     write_line("  ?-1(?({x:F6})) = {inverse(question(x)):F6}")
 od
 
-for y in [0.25D, 0.6D, 5.0D / 9.0D] do
+for y in [0.25, 0.6, 5.0 / 9.0] do
     write_line("  ?(?-1({y:F6})) = {question(inverse(y)):F6}")
 od
 
@@ -125,20 +125,20 @@ let axes = AXES(image)
 
 axes.x_title = "x"
 axes.y_title = "?(x)"
-axes.fit(0.0D, 0.0D, 1.0D, 1.0D)
+axes.fit(0.0, 0.0, 1.0, 1.0)
 
 image.color(150ub, 150ub, 150ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 axes.draw()
 
 image.color(210ub, 210ub, 210ub)
-image.line(0.0D, 0.0D, 1.0D, 1.0D)
+image.line(0.0, 0.0, 1.0, 1.0)
 
 image.color(30ub, 70ub, 160ub)
-image.stroke(1.6D)
+image.stroke(1.6)
 image.line(
     0..1201
-        |> map(step => double(step) / 1200.0D)
+        |> map(step => double(step) / 1200.0)
         |> map(x => (x = x, y = question(x)))
         |> list()
 )
@@ -147,15 +147,15 @@ image.color(40ub, 40ub, 40ub)
 
 for
     marked in [
-        (x = 1.0D / 3.0D, name = "1/3"),
-        (x = phi - 1.0D, name = "phi - 1"),
-        (x = sqrt(2.0D) - 1.0D, name = "sqrt(2) - 1")
+        (x = 1.0 / 3.0, name = "1/3"),
+        (x = phi - 1.0, name = "phi - 1"),
+        (x = sqrt(2.0) - 1.0, name = "sqrt(2) - 1")
     ]
 do
     let y = question(marked.x)
 
-    image.dot(marked.x, y, 4.0D)
-    image.text(marked.x + 0.02D, y - 0.03D, 13.0D, marked.name, Anchor.LEFT)
+    image.dot(marked.x, y, 4.0)
+    image.text(marked.x + 0.02, y - 0.03, 13.0, marked.name, Anchor.LEFT)
 od
 
 image.write("question-mark.png")

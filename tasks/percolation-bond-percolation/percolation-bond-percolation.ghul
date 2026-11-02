@@ -85,7 +85,7 @@ write_line("p      fraction of {trials} {width} by {height} grids dripping")
 let shown mut = null
 
 for step in 0::10 do
-    let p = double(step) / 10.0D
+    let p = double(step) / 10.0
     let grids = 0..trials |> map(_ => GRID(p)) |> list()
     let dripped = grids |> filter(g => g.pour()) |> count()
 
@@ -103,7 +103,7 @@ if let grid = shown then
     let cell = 30
     let image = IMAGE(width * cell + 20, height * cell + 40)
 
-    image.view(-0.33D, double(height) + 0.33D, double(width) + 0.33D, -1.0D)
+    image.view(-0.33, double(height) + 0.33, double(width) + 0.33, -1.0)
 
     image.clear(255ub, 255ub, 255ub)
 
@@ -115,13 +115,13 @@ if let grid = shown then
                 let x = double(column)
                 let y = double(row)
 
-                image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
+                image.fill_rectangle(x, y, x + 1.0, y + 1.0)
             fi
         od
     od
 
     image.color(30ub, 30ub, 40ub)
-    image.stroke(3.0D)
+    image.stroke(3.0)
 
     for row in 0::height do
         for column in 0..width do
@@ -129,7 +129,7 @@ if let grid = shown then
                 let x = double(column)
                 let y = double(row)
 
-                image.line(x, y, x + 1.0D, y)
+                image.line(x, y, x + 1.0, y)
             fi
         od
     od
@@ -140,7 +140,7 @@ if let grid = shown then
                 let x = double(column)
                 let y = double(row)
 
-                image.line(x, y, x, y + 1.0D)
+                image.line(x, y, x, y + 1.0)
             fi
         od
     od
@@ -148,7 +148,7 @@ if let grid = shown then
     image.color(40ub, 100ub, 210ub)
 
     for column in grid.drips() do
-        image.dot(double(column) + 0.5D, double(height) + 0.2D, 5.0D)
+        image.dot(double(column) + 0.5, double(height) + 0.2, 5.0)
     od
 
     image.write("bonds.png")

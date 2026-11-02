@@ -1,9 +1,9 @@
 use default
 use Raster.IMAGE
 
-let p = 0.5D
+let p = 0.5
 let runs = 5
-let expected = 0.065770D
+let expected = 0.065770
 
 let random = System.Random(3)
 
@@ -87,7 +87,7 @@ let palette = [
 
 let image = IMAGE(15 * 24, 15 * 24)
 
-image.view(0.0D, 15.0D, 15.0D, 0.0D)
+image.view(0.0, 15.0, 15.0, 0.0)
 image.clear(250ub, 250ub, 250ub)
 
 for cell in 0..225 do
@@ -99,7 +99,7 @@ for cell in 0..225 do
         let y = double(cell / 15)
 
         image.color(red, green, blue)
-        image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
+        image.fill_rectangle(x, y, x + 1.0, y + 1.0)
     fi
 od
 

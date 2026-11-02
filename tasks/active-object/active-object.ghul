@@ -2,8 +2,8 @@ use default
 use System.Threading.AutoResetEvent
 use System.Threading.Thread
 
-let frequency = 0.5D
-let step = 0.001D
+let frequency = 0.5
+let step = 0.001
 
 // The integrator samples only when the clock is advanced, and the advance
 // waits for that sample to be taken, so the number of samples is what the
@@ -21,7 +21,7 @@ class INTEGRATOR is
     _running: bool
 
     init() is
-        _input = t => 0.0D
+        _input = t => 0.0
         _sample_due = AutoResetEvent(false)
         _sample_taken = AutoResetEvent(false)
         _running = true
@@ -43,7 +43,7 @@ class INTEGRATOR is
 
             let sample = _input(_now)
 
-            _output = _output + (sample + _previous) * (_now - _last) / 2.0D
+            _output = _output + (sample + _previous) * (_now - _last) / 2.0
             _previous = sample
             _last = _now
 
@@ -83,19 +83,19 @@ si
 
 let integrator = INTEGRATOR()
 
-integrator.input(t => sin(2.0D * pi * frequency * t))
+integrator.input(t => sin(2.0 * pi * frequency * t))
 
-run_for(integrator, 1.0D)
+run_for(integrator, 1.0)
 
 let half_period = integrator.output
 
-run_for(integrator, 1.0D)
+run_for(integrator, 1.0)
 
 let full_period = integrator.output
 
-integrator.input(t => 0.0D)
+integrator.input(t => 0.0)
 
-run_for(integrator, 0.5D)
+run_for(integrator, 0.5)
 
 integrator.stop()
 

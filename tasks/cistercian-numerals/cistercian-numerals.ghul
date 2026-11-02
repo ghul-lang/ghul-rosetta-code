@@ -6,41 +6,41 @@ use Stroke = (x0: double, y0: double, x1: double, y1: double)
 
 let glyphs: Stroke[][] = [
     [],
-    [(0.0D, 3.0D, 1.0D, 3.0D)],
-    [(0.0D, 2.0D, 1.0D, 2.0D)],
-    [(0.0D, 3.0D, 1.0D, 2.0D)],
-    [(0.0D, 2.0D, 1.0D, 3.0D)],
-    [(0.0D, 3.0D, 1.0D, 3.0D), (0.0D, 2.0D, 1.0D, 3.0D)],
-    [(1.0D, 2.0D, 1.0D, 3.0D)],
-    [(0.0D, 3.0D, 1.0D, 3.0D), (1.0D, 2.0D, 1.0D, 3.0D)],
-    [(0.0D, 2.0D, 1.0D, 2.0D), (1.0D, 2.0D, 1.0D, 3.0D)],
+    [(0.0, 3.0, 1.0, 3.0)],
+    [(0.0, 2.0, 1.0, 2.0)],
+    [(0.0, 3.0, 1.0, 2.0)],
+    [(0.0, 2.0, 1.0, 3.0)],
+    [(0.0, 3.0, 1.0, 3.0), (0.0, 2.0, 1.0, 3.0)],
+    [(1.0, 2.0, 1.0, 3.0)],
+    [(0.0, 3.0, 1.0, 3.0), (1.0, 2.0, 1.0, 3.0)],
+    [(0.0, 2.0, 1.0, 2.0), (1.0, 2.0, 1.0, 3.0)],
     [
-        (0.0D, 3.0D, 1.0D, 3.0D), (0.0D, 2.0D, 1.0D, 2.0D),
-        (1.0D, 2.0D, 1.0D, 3.0D)
+        (0.0, 3.0, 1.0, 3.0), (0.0, 2.0, 1.0, 2.0),
+        (1.0, 2.0, 1.0, 3.0)
     ]
 ]
 
 let numbers = [0, 1, 20, 300, 4000, 5555, 6789, 1978]
 
-let cell = 90.0D
-let unit = 22.0D
+let cell = 90.0
+let unit = 22.0
 
 draw(image: IMAGE, number: int, left: double) is
-    let center = left + cell / 2.0D
-    let base = 40.0D
+    let center = left + cell / 2.0
+    let base = 40.0
 
-    image.stroke(3.0D)
-    image.line(center, base, center, base + 3.0D * unit)
+    image.stroke(3.0)
+    image.line(center, base, center, base + 3.0 * unit)
 
     let place mut = number
 
     for quadrant in 0..4 do
-        let flip_x = if quadrant % 2 == 1 then -1.0D else 1.0D fi
+        let flip_x = if quadrant % 2 == 1 then -1.0 else 1.0 fi
         let flip_y = quadrant >= 2
 
         for s in glyphs[place % 10] do
-            let y0 = if flip_y then 3.0D - s.y0 else s.y0 fi
-            let y1 = if flip_y then 3.0D - s.y1 else s.y1 fi
+            let y0 = if flip_y then 3.0 - s.y0 else s.y0 fi
+            let y1 = if flip_y then 3.0 - s.y1 else s.y1 fi
 
             image.line(
                 center + flip_x * s.x0 * unit,
@@ -53,13 +53,13 @@ draw(image: IMAGE, number: int, left: double) is
         place = place / 10
     od
 
-    image.text(center, 12.0D, 12.0D, "{number}", Anchor.CENTER)
+    image.text(center, 12.0, 12.0, "{number}", Anchor.CENTER)
 si
 
 let width = int(cell) * numbers.count
 let image = IMAGE(width, 130)
 
-image.view(0.0D, 0.0D, double(width), 130.0D)
+image.view(0.0, 0.0, double(width), 130.0)
 image.clear(250ub, 247ub, 238ub)
 image.color(60ub, 40ub, 30ub)
 

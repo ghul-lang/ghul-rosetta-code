@@ -2,25 +2,25 @@ use Raster
 use Ghul.Math
 
 let order = 4
-let step = 8.0D
+let step = 8.0
 
-let diagonal = step * sqrt(2.0D)
+let diagonal = step * sqrt(2.0)
 
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)
 
 bend() is
     pen.forward(step)
-    pen.turn(45.0D)
+    pen.turn(45.0)
     pen.forward(diagonal)
-    pen.turn(45.0D)
+    pen.turn(45.0)
 si
 
 fold() is
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
     pen.forward(step)
-    pen.turn(-90.0D)
+    pen.turn(-90.0)
 si
 
 curve(n: int) is
@@ -35,14 +35,14 @@ curve(n: int) is
     fi
 si
 
-image.view(0.0D, 0.0D, 540.0D, 540.0D)
+image.view(0.0, 0.0, 540.0, 540.0)
 image.color(0ub, 0ub, 160ub)
-image.stroke(1.2D)
+image.stroke(1.2)
 
-pen.move_to(266.0D, 514.0D)
+pen.move_to(266.0, 514.0)
 
 pen.forward(step)
-pen.turn(-90.0D)
+pen.turn(-90.0)
 curve(order)
 fold()
 curve(order)

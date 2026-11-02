@@ -7,9 +7,9 @@ use Step = (x: double, y: double, corner: int)
 let random = System.Random(20260918)
 
 let corners = [
-    (x = 0.0D, y = 0.0D),
-    (x = 1.0D, y = 0.0D),
-    (x = 0.5D, y = sqrt(3.0D) / 2.0D)
+    (x = 0.0, y = 0.0),
+    (x = 1.0, y = 0.0),
+    (x = 0.5, y = sqrt(3.0) / 2.0)
 ]
 
 let image = IMAGE(640, 560)
@@ -19,8 +19,8 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
     let corner = corners[chosen]
 
     let next = (
-        x = (at.x + corner.x) / 2.0D,
-        y = (at.y + corner.y) / 2.0D,
+        x = (at.x + corner.x) / 2.0,
+        y = (at.y + corner.y) / 2.0,
         corner = chosen
     )
 
@@ -30,17 +30,17 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
 plot(at: Step) is
     let spot = image.to_pixel(at.x, at.y)
 
-    image.color(COLOR_MAP.hue(double(at.corner) / 3.0D))
-    image.blend(int(spot.x), int(spot.y), 0.6D)
+    image.color(COLOR_MAP.hue(double(at.corner) / 3.0))
+    image.blend(int(spot.x), int(spot.y), 0.6)
 si
 
 let start = (
-    x = 0.3D + random.next_double() * 0.4D,
-    y = 0.1D + random.next_double() * 0.3D,
+    x = 0.3 + random.next_double() * 0.4,
+    y = 0.1 + random.next_double() * 0.3,
     corner = 0
 )
 
-image.view(-0.03D, -0.03D, 1.03D, 0.90D)
+image.view(-0.03, -0.03, 1.03, 0.90)
 
 stream(start, toward_a_corner) |> skip(20) |> take(150000) |> each(plot)
 

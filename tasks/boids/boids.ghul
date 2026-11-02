@@ -12,7 +12,7 @@ struct VEC(x: double, y: double) is
     limited(low: double, high: double) -> VEC =>
         if length > high then
             self * (high / length)
-        elif length < low /\ length > 0.0D then
+        elif length < low /\ length > 0.0 then
             self * (low / length)
         else
             self
@@ -26,23 +26,23 @@ let cave = IO.File.read_all_lines("cave.txt")
 let columns = cave[0].length
 let rows = cave.count
 let width = double(columns)
-let height = 2.0D * double(rows)
+let height = 2.0 * double(rows)
 
 let frames = 240
-let sight = 6.0D
-let personal_space = 1.5D
+let sight = 6.0
+let personal_space = 1.5
 
-row_of(y: double) -> int => rows - 1 - int(floor(y / 2.0D))
+row_of(y: double) -> int => rows - 1 - int(floor(y / 2.0))
 
 column_of(x: double) -> int => (int(floor(x)) % columns + columns) % columns
 
 is_wall(point: VEC) -> bool =>
-    point.y < 0.0D \/
+    point.y < 0.0 \/
     point.y >= height \/
     cave[row_of(point.y)][column_of(point.x)] == '#'
 
 wall_push(point: VEC) -> VEC is
-    let push mut = VEC(0.0D, 0.0D)
+    let push mut = VEC(0.0, 0.0)
 
     for dx in -3::3 do
         for dy in -6::6 do
@@ -50,9 +50,9 @@ wall_push(point: VEC) -> VEC is
 
             if is_wall(probe) then
                 let away = point - probe
-                let distance = max(away.length, 0.5D)
+                let distance = max(away.length, 0.5)
 
-                push = push + away * pow(distance, -3.0D)
+                push = push + away * pow(distance, -3.0)
             fi
         od
     od
@@ -69,16 +69,16 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
             )
             |> list()
 
-    let force mut = VEC(0.04D, 0.0D) + wall_push(boid.position) * 1.5D
+    let force mut = VEC(0.04, 0.0) + wall_push(boid.position) * 1.5
 
     if near.count > 0 then
         let n = double(near.count)
 
         let center =
-            near |> map(o => o.position) |> reduce(VEC(0.0D, 0.0D), * + *)
+            near |> map(o => o.position) |> reduce(VEC(0.0, 0.0), * + *)
 
         let heading =
-            near |> map(o => o.velocity) |> reduce(VEC(0.0D, 0.0D), * + *)
+            near |> map(o => o.velocity) |> reduce(VEC(0.0, 0.0), * + *)
 
         let crowding =
             near
@@ -86,25 +86,25 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
                     (o.position - boid.position).length < personal_space
                 )
                 |> map(o => boid.position - o.position)
-                |> reduce(VEC(0.0D, 0.0D), * + *)
+                |> reduce(VEC(0.0, 0.0), * + *)
 
         force =
             force +
-            (center * (1.0D / n) - boid.position) * 0.01D +
-            (heading * (1.0D / n) - boid.velocity) * 0.05D +
-            crowding * 0.1D
+            (center * (1.0 / n) - boid.position) * 0.01 +
+            (heading * (1.0 / n) - boid.velocity) * 0.05 +
+            crowding * 0.1
     fi
 
     force
 si
 
 move(boid: BOID, flock: BOID[]) -> bool is
-    boid.velocity = (boid.velocity + steer(boid, flock)).limited(0.4D, 0.8D)
+    boid.velocity = (boid.velocity + steer(boid, flock)).limited(0.4, 0.8)
 
     let next = boid.position + boid.velocity
 
     if is_wall(next) then
-        boid.velocity = boid.velocity * -0.5D
+        boid.velocity = boid.velocity * -0.5
         return false
     fi
 
@@ -123,14 +123,9 @@ draw(image: IMAGE, flock: BOID[]) is
         for (column, c) in line |> index() do
             if c == '#' then
                 let x = double(column)
-                let y = height - 2.0D * double(row + 1)
+                let y = height - 2.0 * double(row + 1)
 
-                image.fill_rectangle(
-                    x - 0.05D,
-                    y - 0.05D,
-                    x + 1.05D,
-                    y + 2.05D
-                )
+                image.fill_rectangle(x - 0.05, y - 0.05, x + 1.05, y + 2.05)
             fi
         od
     od
@@ -138,7 +133,7 @@ draw(image: IMAGE, flock: BOID[]) is
     image.color(200ub, 40ub, 40ub)
 
     for boid in flock do
-        image.dot(boid.position.x, boid.position.y, 2.0D)
+        image.dot(boid.position.x, boid.position.y, 2.0)
     od
 si
 
@@ -149,8 +144,8 @@ let random = System.Random(1)
 
 let flock = [
     BOID(
-        VEC(double(c.index) + 0.5D, height - 2.0D * double(r.index) - 1.0D),
-        VEC(0.3D, random.next_double() * 0.4D - 0.2D)
+        VEC(double(c.index) + 0.5, height - 2.0 * double(r.index) - 1.0),
+        VEC(0.3, random.next_double() * 0.4 - 0.2)
     )
     for r in cave |> index()
     for c in r.value |> index()
@@ -159,7 +154,7 @@ let flock = [
 
 let image = IMAGE(240, 90)
 
-image.view(0.0D, 0.0D, width, height)
+image.view(0.0, 0.0, width, height)
 
 let animation = ANIMATION(240, 90)
 let crossings mut = 0

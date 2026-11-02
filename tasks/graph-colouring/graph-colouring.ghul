@@ -138,15 +138,15 @@ for (i, (name, description)) in examples |> index() do
     // nodes sit evenly round a circle
     let position = node => (
         let angle =
-            6.283185307D * double(slot[node]) / double(graph.nodes.count)
+            6.283185307 * double(slot[node]) / double(graph.nodes.count)
         (
-            x = cx + 80.0D * Ghul.Math.cos(angle),
-            y = cy + 80.0D * Ghul.Math.sin(angle)
+            x = cx + 80.0 * Ghul.Math.cos(angle),
+            y = cy + 80.0 * Ghul.Math.sin(angle)
         )
     )
 
     image.color(120ub, 120ub, 120ub)
-    image.stroke(2.0D)
+    image.stroke(2.0)
 
     for (from, to) in graph.edges do
         let (x0, y0) = position(from)
@@ -160,13 +160,13 @@ for (i, (name, description)) in examples |> index() do
         let (r, g, b) = palette[colors[node]]
 
         image.color(r, g, b)
-        image.disc(x, y, 14.0D)
+        image.disc(x, y, 14.0)
         image.color(30ub, 30ub, 30ub)
-        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTER)
+        image.text(x, y + 1.0, 11.0, "{node}", Anchor.CENTER)
     od
 
     image.color(30ub, 30ub, 30ub)
-    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTER)
+    image.text(cx, cy - 112.0, 12.0, name, Anchor.CENTER)
 od
 
 image.write("graphs.png")

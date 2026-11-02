@@ -3,7 +3,7 @@ use default
 let i mut = 0
 
 let sum = (low, high, term) => (
-    let total mut = 0.0D
+    let total mut = 0.0
 
     i = low
 
@@ -16,4 +16,4 @@ let sum = (low, high, term) => (
     total
 )
 
-write_line("{sum(1, 100, () => 1.0D / cast(i))}")
+write_line("{sum(1, 100, () => 1.0 / cast(i))}")

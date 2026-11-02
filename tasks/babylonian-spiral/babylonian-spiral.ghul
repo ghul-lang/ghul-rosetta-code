@@ -22,7 +22,7 @@ bend(from: Step, to: Step) -> double =>
         atan2(double(from.y), double(from.x)) -
         atan2(double(to.y), double(to.x))
     in
-    turn - 2.0D * pi * floor(turn / (2.0D * pi))
+    turn - 2.0 * pi * floor(turn / (2.0 * pi))
 
 spiral(count: int) -> Step{} is
     let points = LIST([(x = 0, y = 0), (x = 0, y = 1)])
@@ -77,14 +77,14 @@ let many = spiral(10000)
 let xs = many |> map(p => double(p.x)) |> list()
 let ys = many |> map(p => double(p.y)) |> list()
 
-let low_x = xs |> reduce(0.0D, min)
-let high_x = xs |> reduce(0.0D, max)
-let low_y = ys |> reduce(0.0D, min)
-let high_y = ys |> reduce(0.0D, max)
+let low_x = xs |> reduce(0.0, min)
+let high_x = xs |> reduce(0.0, max)
+let low_y = ys |> reduce(0.0, min)
+let high_y = ys |> reduce(0.0, max)
 
-let middle_x = (low_x + high_x) / 2.0D
-let middle_y = (low_y + high_y) / 2.0D
-let half = max(high_x - low_x, high_y - low_y) * 0.52D
+let middle_x = (low_x + high_x) / 2.0
+let middle_y = (low_y + high_y) / 2.0
+let half = max(high_x - low_x, high_y - low_y) * 0.52
 
 let image = IMAGE(400, 400)
 
@@ -96,7 +96,7 @@ image.view(
 )
 image.clear(252ub, 250ub, 245ub)
 image.color(30ub, 60ub, 140ub)
-image.stroke(1.0D)
+image.stroke(1.0)
 image.line(many |> map(p => (x = double(p.x), y = double(p.y))) |> list())
 
 image.write("spiral.png")
