@@ -1,44 +1,44 @@
 use default
 
-struct VECTOR(x: double public, y: double public) is
-    +(other: VECTOR) -> VECTOR => VECTOR(x + other.x, y + other.y)
+// Operators declared as members of the type, with the left operand as self.
+struct Vector(x: double public, y: double public) is
+    +(other: Vector) -> Vector => Vector(x + other.x, y + other.y)
 
-    -(other: VECTOR) -> VECTOR => VECTOR(x - other.x, y - other.y)
+    -(other: Vector) -> Vector => Vector(x - other.x, y - other.y)
 
-    *(scale: double) -> VECTOR => VECTOR(x * scale, y * scale)
+    *(scale: double) -> Vector => Vector(x * scale, y * scale)
 
-    ⊗(other: VECTOR) -> double => x * other.x + y * other.y
+    ⊗(other: Vector) -> double => x * other.x + y * other.y
 
     to_string() -> string => "({x}, {y})"
 si
 
-class MONEY(pennies: int) is
-    +(other: MONEY) -> MONEY => MONEY(pennies + other.pennies)
-
-    <>(other: MONEY) -> int => pennies - other.pennies
-
-    =~(other: MONEY) -> bool => pennies == other.pennies
-
-    get_hash_code() -> int => pennies
-
+// Operators declared as global functions, taking both operands, for a type
+// that declares none of its own.
+struct Money(pennies: int public) is
     to_string() -> string => "{pennies / 100}.{pennies % 100,2:00}"
 si
 
-let a = VECTOR(1.0, 2.0)
-let b = VECTOR(3.0, 4.0)
++(a: Money, b: Money) -> Money => Money(a.pennies + b.pennies)
+
+*(a: Money, times: int) -> Money => Money(a.pennies * times)
+
+<>(a: Money, b: Money) -> int => a.pennies - b.pennies
+
+let a = Vector(1.0, 2.0)
+let b = Vector(3.0, 4.0)
 
 write_line("{a} + {b} = {a + b}")
 write_line("{b} - {a} = {b - a}")
 write_line("{a} * 3 = {a * 3.0}")
 write_line("{a} ⊗ {b} = {a ⊗ b}")
 
-let small = MONEY(199)
-let large = MONEY(250)
+let small = Money(199)
+let large = Money(250)
 
 write_line("{small} + {large} = {small + large}")
+write_line("{small} * 3 = {small * 3}")
 write_line("{small} < {large}: {small < large}")
-write_line("{small} =~ {MONEY(199)}: {small =~ MONEY(199)}")
-write_line("{small} == {MONEY(199)}: {small == MONEY(199)}")
 
 write_line("the intrinsics are overloaded too:")
 write_line("  2 + 3 = {2 + 3}")
