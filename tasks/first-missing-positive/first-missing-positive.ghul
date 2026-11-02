@@ -5,5 +5,5 @@ first_missing_positive(nums: int[]) -> int =>
     from(1) |> find(n => !present.contains(n))!
 
 for nums in [[1, 2, 0], [3, 4, -1, 1], [7, 8, 9, 11, 12]] do
-    write_line("{$(nums)} -> {first_missing_positive(nums)}")
+    write_line("{nums} -> {first_missing_positive(nums)}")
 od

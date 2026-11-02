@@ -1,3 +1,2 @@
 [apple, orange, pear] has 3, and fixed[1] is orange
-an array indexer only reads, so a list carries the writes
 [quince, orange, pear, lemon] has 4, and growing[0] is quince

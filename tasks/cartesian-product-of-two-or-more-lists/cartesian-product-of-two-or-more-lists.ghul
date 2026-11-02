@@ -12,8 +12,7 @@ product(lists: int[][]) -> int[][] =>
     esac
 
 show(lists: int[][]) =>
-    let factors = lists |> map(list => $(list)) |> join(" × ") in
-    write_line("{factors} = {product(lists)}")
+    write_line("{lists |> join(" × ")} = {product(lists)}")
 
 let empty = ARRAY[int]([])
 
