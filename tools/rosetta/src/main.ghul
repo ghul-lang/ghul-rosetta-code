@@ -932,7 +932,7 @@ adopt(root: string, slugs: LIST[string]) is
             let live = page.substring(replaced.start, replaced.end - replaced.start).trim()
             let expected = IO.File.read_all_text(markup).trim()
 
-            if !string.equals(live, expected) then
+            if digest(live) !~ digest(expected) then
                 error.write_line("{entry.title}: the live section is not the markup in wiki-out/{slug}.wiki, so nothing was recorded")
 
                 IO.File.write_all_text(IO.Path.combine(root, "wiki-out", "{slug}.live"), live)
