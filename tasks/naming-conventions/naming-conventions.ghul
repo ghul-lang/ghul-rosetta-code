@@ -8,7 +8,7 @@ trait Shape is
     area: double
 si
 
-class SQUARE(side: double): Shape is
+class Square(side: double): Shape is
     area: double => side * side
 si
 
@@ -17,7 +17,7 @@ union Reading is
     MISSING
 si
 
-enum Colour is
+enum Color is
     RED,
     GREEN
 si
@@ -26,7 +26,7 @@ total_area(shapes: Shape[]) -> double =>
     shapes |> sum_by(shape => shape.area)
 
 // a leading underscore makes a member private to its class
-class COUNTER is
+class Counter is
     _count: int
 
     init() is
@@ -39,7 +39,7 @@ class COUNTER is
     si
 si
 
-class POINT(x: int public, y: int public)
+class Point(x: int public, y: int public)
 
 // the compiler warns about each of these three
 enum Direction is
@@ -49,13 +49,13 @@ trait drawable is
 si
 CountItems(items: int[]) -> int => items.count
 
-let counter = COUNTER()
+let counter = Counter()
 counter.bump()
 
-write_line("total area {total_area([SQUARE(2.0), SQUARE(3.0)])}")
+write_line("total area {total_area([Square(2.0), Square(3.0)])}")
 write_line("counter at {counter.bump()}")
-write_line("{Colour.GREEN} {Reading.CELSIUS(21.5)}")
-write_line("point {POINT(3, 4).x}, {CountItems([1, 2, 3])} items")
+write_line("{Color.GREEN} {Reading.CELSIUS(21.5)}")
+write_line("point {Point(3, 4).x}, {CountItems([1, 2, 3])} items")
 
 // .NET names are read in ghūl's conventions
 write_line("{System.DateTime.days_in_month(2024, 2)} days")
