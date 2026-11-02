@@ -3,7 +3,6 @@ use default
 let fixed = ["apple", "orange", "pear"]
 
 write_line("{fixed} has {fixed.count}, and fixed[1] is {fixed[1]}")
-write_line("an array indexer only reads, so a list carries the writes")
 
 let growing = LIST(fixed)
 
