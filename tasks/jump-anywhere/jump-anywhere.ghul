@@ -1,37 +1,16 @@
 use default
-use System.Runtime.CompilerServices.ICriticalNotifyCompletion
+use Ghul.Coroutines
 
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
 // `LIST[T]` is a mutable list that grows as elements are added
 // `SET[T]` is a mutable set, holding each element once
-// `QUEUE[T]` is a mutable first-in, first-out queue
 // `yield` in a function makes it a generator, returning a lazy `T{}`
 //  sequence
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 // `if let` pattern-matches, and `[x, ..rest]` matches a list head and tail
-
-let ready = QUEUE[() -> void]()
-
-struct PAUSE: ICriticalNotifyCompletion is
-    init() is si
-
-    get_awaiter() -> PAUSE => self
-
-    is_completed: bool => false
-
-    get_result() is si
-
-    on_completed(continuation: () -> void) is
-        ready.enqueue(continuation)
-    si
-
-    unsafe_on_completed(continuation: () -> void) is
-        ready.enqueue(continuation)
-    si
-si
 
 first_repeat(grid: int[][]) -> int? is
     let seen = SET()
@@ -74,10 +53,10 @@ steps() -> string{} is
     write_line("  generator: finished")
 si
 
-paused() -> Tasks.TASK is
+paused() -> COROUTINE is
     write_line("  coroutine: before the pause")
 
-    await PAUSE()
+    await pause()
 
     write_line("  coroutine: resumed from the scheduler")
 si
@@ -104,8 +83,6 @@ let running = paused()
 
 write_line("main: the coroutine suspended and control returned here")
 
-while ready.count > 0 do
-    ready.dequeue()()
-od
+run()
 
 write_line("main: the coroutine finished: {running.is_completed}")
