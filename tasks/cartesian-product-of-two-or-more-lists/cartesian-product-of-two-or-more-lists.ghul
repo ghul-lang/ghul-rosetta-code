@@ -1,7 +1,5 @@
 use default
 
-// `T{}` is the lazy sequence trait - elements are read on demand and in
-//  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
 // `ARRAY[T]` is a fixed-size, read-only array
 // `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
@@ -22,14 +20,9 @@ product(lists: int[][]) -> int[][] =>
         ]
     esac
 
-braced(values: string{}) -> string => "{{{values |> join(", ")}}}"
-
 show(lists: int[][]) =>
-    let
-        heading = lists |> map(list => braced(list |> map(n => "{n}"))),
-        rows = product(lists) |> map(row => "({row |> join(", ")})")
-    in
-        write_line("{heading |> join(" × ")} = {braced(rows)}")
+    let factors = lists |> map(list => $(list)) |> join(" × ") in
+    write_line("{factors} = {$(product(lists))}")
 
 let empty = ARRAY[int]([])
 

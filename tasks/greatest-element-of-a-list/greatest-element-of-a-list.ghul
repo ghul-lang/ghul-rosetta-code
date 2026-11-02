@@ -3,10 +3,10 @@ use default
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `if let` pattern-matches
 
-if let biggest = [3, 9, 4, 1] |> max() then
-    write_line("{biggest}")
+if let greatest = [3, 9, 4, 1] |> max() then
+    write_line("{greatest}")
 fi
 
-if let last = ["pear", "fig", "quince"] |> max() then
-    write_line("{last}")
+if let greatest = ["pear", "fig", "quince"] |> max() then
+    write_line("{greatest}")
 fi
