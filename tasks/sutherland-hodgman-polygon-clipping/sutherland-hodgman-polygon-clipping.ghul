@@ -94,18 +94,18 @@ image.view(20.0D, 20.0D, 380.0D, 380.0D)
 
 closed(polygon: Point[]) -> Point[] => polygon ++ [polygon[0]] |> list()
 
-image.colour(210ub, 232ub, 214ub)
+image.color(210ub, 232ub, 214ub)
 image.fill(clipped)
 
 image.stroke(2.0D)
 
-image.colour(180ub, 60ub, 60ub)
+image.color(180ub, 60ub, 60ub)
 image.line(closed(subject))
 
-image.colour(70ub, 70ub, 180ub)
+image.color(70ub, 70ub, 180ub)
 image.line(closed(window))
 
-image.colour(30ub, 120ub, 60ub)
+image.color(30ub, 120ub, 60ub)
 image.stroke(2.6D)
 image.line(closed(clipped))
 

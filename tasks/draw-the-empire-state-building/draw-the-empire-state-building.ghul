@@ -26,7 +26,7 @@ let image = IMAGE(240, 480)
 image.view(-120.0D, -10.0D, 120.0D, 470.0D)
 image.clear(15ub, 20ub, 45ub)
 
-image.colour(230ub, 230ub, 240ub)
+image.color(230ub, 230ub, 240ub)
 
 for _ in 0..60 do
     image.dot(
@@ -39,18 +39,18 @@ od
 let bottom mut = 0.0D
 
 for tier in tiers do
-    image.colour(95ub, 95ub, 105ub)
+    image.color(95ub, 95ub, 105ub)
     let left = -tier.half_width
 
     image.fill_rectangle(left, bottom, tier.half_width, tier.top)
 
-    image.colour(120ub, 120ub, 130ub)
+    image.color(120ub, 120ub, 130ub)
     image.fill_rectangle(left, bottom, left + 3.0D, tier.top)
 
     bottom = tier.top
 od
 
-image.colour(200ub, 200ub, 210ub)
+image.color(200ub, 200ub, 210ub)
 image.stroke(1.5D)
 image.line(0.0D, 400.0D, 0.0D, 450.0D)
 
@@ -68,9 +68,9 @@ while double(floor) * floor_height < 340.0D do
 
         while x + window_width < t.half_width - 3.0D do
             if random.next_double() < 0.35D then
-                image.colour(250ub, 220ub, 120ub)
+                image.color(250ub, 220ub, 120ub)
             else
-                image.colour(45ub, 45ub, 60ub)
+                image.color(45ub, 45ub, 60ub)
             fi
 
             image.fill_rectangle(
@@ -87,7 +87,7 @@ while double(floor) * floor_height < 340.0D do
     floor = floor + 1
 od
 
-image.colour(10ub, 12ub, 20ub)
+image.color(10ub, 12ub, 20ub)
 image.fill_rectangle(-120.0D, -10.0D, 120.0D, 0.0D)
 
 write_line("the Empire State Building at night")

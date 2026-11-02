@@ -51,7 +51,7 @@ let points =
 
 let image = IMAGE(760, 470)
 
-image.colour(90ub, 95ub, 110ub)
+image.color(90ub, 95ub, 110ub)
 image.stroke(1.0)
 
 let axes = AXES(image)
@@ -62,10 +62,10 @@ axes.y_title = "a(n)"
 axes.fit(0.0, 0.0, double(terms.count), double(highest) + 20.0)
 axes.draw()
 
-image.colour(170ub, 180ub, 205ub)
+image.color(170ub, 180ub, 205ub)
 image.line(points)
 
-image.colour(30ub, 70ub, 140ub)
+image.color(30ub, 70ub, 140ub)
 
 for point in points do
     image.dot(point.x, point.y, 1.7)

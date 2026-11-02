@@ -128,20 +128,20 @@ let image = IMAGE(400, 400)
 
 image.view(-3.2D, -3.0D, 3.4D, 3.6D)
 image.clear(252ub, 250ub, 245ub)
-image.colour(150ub, 190ub, 230ub)
+image.color(150ub, 190ub, 230ub)
 
 for c in circles do
     image.disc(c.x, c.y, c.r)
 od
 
-image.colour(90ub, 130ub, 180ub)
+image.color(90ub, 130ub, 180ub)
 image.stroke(0.8D)
 
 for c in circles do
     image.circle(c.x, c.y, c.r)
 od
 
-image.colour(20ub, 50ub, 120ub)
+image.color(20ub, 50ub, 120ub)
 image.stroke(2.0D)
 
 for arc in arcs do

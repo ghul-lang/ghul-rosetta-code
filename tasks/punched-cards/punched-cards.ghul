@@ -110,7 +110,7 @@ do
     let left = gap
     let top = gap + double(number) * (card_height + gap)
 
-    image.colour(242ub, 230ub, 196ub)
+    image.color(242ub, 230ub, 196ub)
     image.fill([
         (x = left + 18.0D, y = top),
         (x = left + card_width, y = top),
@@ -130,19 +130,19 @@ do
         let punched = holes(c)
 
         if c != ' ' then
-            image.colour(40ub, 40ub, 90ub)
-            image.text(x, top + 14.0D, 9.0D, "{c}", Anchor.CENTRE)
+            image.color(40ub, 40ub, 90ub)
+            image.text(x, top + 14.0D, 9.0D, "{c}", Anchor.CENTER)
         fi
 
         for row in 0..12 do
             let y = top + 30.0D + spacing * double(row)
 
             if punched |> any(* == row) then
-                image.colour(20ub, 20ub, 20ub)
+                image.color(20ub, 20ub, 20ub)
                 image.fill_rectangle(x - 2.5D, y - 6.0D, x + 2.5D, y + 6.0D)
             elif row >= 2 then
-                image.colour(170ub, 120ub, 90ub)
-                image.text(x, y + 3.5D, 7.0D, labels[row], Anchor.CENTRE)
+                image.color(170ub, 120ub, 90ub)
+                image.text(x, y + 3.5D, 7.0D, labels[row], Anchor.CENTER)
             fi
         od
     od

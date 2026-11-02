@@ -100,11 +100,11 @@ if let grid = shown then
             let y = double(row)
 
             if grid.is_reached(column, row) then
-                image.colour(40ub, 110ub, 220ub)
+                image.color(40ub, 110ub, 220ub)
             elif grid.is_filled(column, row) then
-                image.colour(120ub, 120ub, 130ub)
+                image.color(120ub, 120ub, 130ub)
             else
-                image.colour(235ub, 235ub, 238ub)
+                image.color(235ub, 235ub, 238ub)
             fi
 
             image.fill_rectangle(x + 0.04D, y + 0.04D, x + 0.96D, y + 0.96D)

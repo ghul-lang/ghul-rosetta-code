@@ -22,10 +22,10 @@ let image = IMAGE(500, 500)
 
 image.view(-1.12D, -1.12D, 1.12D, 1.12D)
 
-image.colour(100ub, 149ub, 237ub)
+image.color(100ub, 149ub, 237ub)
 image.fill(0..10 |> map(corner) |> list())
 
-image.colour(64ub, 64ub, 64ub)
+image.color(64ub, 64ub, 64ub)
 image.stroke(4.0D)
 image.line((0::5) |> map(* * 4) |> map(* % 10) |> map(corner) |> list())
 

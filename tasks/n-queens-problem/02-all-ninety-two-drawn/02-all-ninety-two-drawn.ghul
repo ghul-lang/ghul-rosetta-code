@@ -44,9 +44,9 @@ board(image: IMAGE, solution: int[], left: int, top: int) is
     for row in 0..8 do
         for column in 0..8 do
             if (row + column) % 2 == 1 then
-                image.colour(202ub, 212ub, 228ub)
+                image.color(202ub, 212ub, 228ub)
             else
-                image.colour(243ub, 245ub, 250ub)
+                image.color(243ub, 245ub, 250ub)
             fi
 
             image.fill_rectangle(
@@ -58,7 +58,7 @@ board(image: IMAGE, solution: int[], left: int, top: int) is
         od
     od
 
-    image.colour(25ub, 50ub, 105ub)
+    image.color(25ub, 50ub, 105ub)
 
     let half = 0.5 * double(cell)
 
@@ -80,7 +80,7 @@ let image = IMAGE(
     header + margin + down * (side + gap) - gap
 )
 
-image.colour(70ub, 75ub, 90ub)
+image.color(70ub, 75ub, 90ub)
 image.text(
     double(margin),
     26.0,

@@ -1,5 +1,5 @@
 use default
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 
 use Point = (x: double, y: double)
@@ -127,12 +127,12 @@ for pixel_y in 0..image.height do
 
         let part = (height_at(spot.x, spot.y) - lowest) / (highest - lowest)
 
-        image.colour(COLOUR_MAP.viridis(part))
+        image.color(COLOR_MAP.viridis(part))
         image.set_pixel(pixel_x, pixel_y)
     od
 od
 
-image.colour(250ub, 250ub, 250ub)
+image.color(250ub, 250ub, 250ub)
 image.stroke(1.1D)
 
 write_line("level   segments")

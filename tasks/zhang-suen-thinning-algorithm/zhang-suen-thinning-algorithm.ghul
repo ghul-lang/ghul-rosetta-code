@@ -131,11 +131,11 @@ for row in 0..rows do
         let y = double(row * cell)
 
         if black[row][column] then
-            image.colour(20ub, 20ub, 20ub)
+            image.color(20ub, 20ub, 20ub)
         elif original[row][column] then
-            image.colour(200ub, 210ub, 235ub)
+            image.color(200ub, 210ub, 235ub)
         else
-            image.colour(255ub, 255ub, 255ub)
+            image.color(255ub, 255ub, 255ub)
         fi
 
         image.fill_rectangle(x, y, x + double(cell), y + double(cell))

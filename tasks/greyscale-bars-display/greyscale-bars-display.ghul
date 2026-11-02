@@ -16,11 +16,11 @@ for quarter in 0..4 do
 
     for bar in 0..bars do
         let step = if quarter % 2 == 0 then bar else bars - 1 - bar fi
-        let grey = ubyte(255 * step / (bars - 1))
+        let gray = ubyte(255 * step / (bars - 1))
         let left = double(bar * bar_width)
         let right = left + double(bar_width)
 
-        image.colour(grey, grey, grey)
+        image.color(gray, gray, gray)
         image.fill_rectangle(left, top, right, top + double(band))
     od
 

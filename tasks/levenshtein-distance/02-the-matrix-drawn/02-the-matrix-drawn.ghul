@@ -1,6 +1,6 @@
 use default
 use Raster.Anchor
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 use Raster.SHAPES
 
@@ -78,7 +78,7 @@ corner(row: int, column: int) -> (x: double, y: double) => (
     y = double(top + row * cell)
 )
 
-centre(row: int, column: int) -> (x: double, y: double) => (
+center(row: int, column: int) -> (x: double, y: double) => (
     x = double(left + column * cell) + 0.5 * double(cell),
     y = double(top + row * cell) + 0.5 * double(cell)
 )
@@ -104,17 +104,17 @@ for row in 0::source.length do
                 (x = to.x, y = to.y),
                 (x = at.x, y = to.y)
             ],
-            COLOUR_MAP.viridis(double(table[row][column]) / highest)
+            COLOR_MAP.viridis(double(table[row][column]) / highest)
         )
     od
 od
 
 image.fill(cells)
 
-image.colour(225ub, 60ub, 60ub)
+image.color(225ub, 60ub, 60ub)
 image.stroke(2.4)
 image.line(
-    alignment() |> map(step => centre(step.row, step.column)) |> list()
+    alignment() |> map(step => center(step.row, step.column)) |> list()
 )
 
 for row in 0::source.length do
@@ -122,39 +122,39 @@ for row in 0::source.length do
         let shade = double(table[row][column]) / highest
 
         if shade < 0.55 then
-            image.colour(250ub, 250ub, 250ub)
+            image.color(250ub, 250ub, 250ub)
         else
-            image.colour(35ub, 40ub, 35ub)
+            image.color(35ub, 40ub, 35ub)
         fi
 
-        let middle = centre(row, column)
+        let middle = center(row, column)
 
         image.text(
             middle.x,
             middle.y + 5.0,
             15.0,
             "{table[row][column]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 od
 
-image.colour(70ub, 75ub, 90ub)
+image.color(70ub, 75ub, 90ub)
 
 for column in 1::target.length do
-    let middle = centre(0, column)
+    let middle = center(0, column)
 
     image.text(
         middle.x,
         double(top) - 9.0,
         17.0,
         "{target[column - 1]}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 od
 
 for row in 1::source.length do
-    let middle = centre(row, 0)
+    let middle = center(row, 0)
 
     image.text(
         double(left) - 9.0,

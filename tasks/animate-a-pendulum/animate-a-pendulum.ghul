@@ -36,14 +36,14 @@ draw(image: IMAGE, angle: double) is
 
     image.clear()
 
-    image.colour(140ub, 140ub, 150ub)
+    image.color(140ub, 140ub, 150ub)
     image.stroke(2.0D)
     image.line(0.0D, 0.0D, x, y)
 
-    image.colour(60ub, 60ub, 70ub)
+    image.color(60ub, 60ub, 70ub)
     image.dot(0.0D, 0.0D, 5.0D)
 
-    image.colour(200ub, 50ub, 40ub)
+    image.color(200ub, 50ub, 40ub)
     image.dot(x, y, 12.0D)
 si
 

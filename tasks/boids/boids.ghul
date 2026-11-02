@@ -83,7 +83,7 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
     if near.count > 0 then
         let n = double(near.count)
 
-        let centre =
+        let center =
             near |> map(o => o.position) |> reduce(VEC(0.0D, 0.0D), * + *)
 
         let heading =
@@ -99,7 +99,7 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
 
         force =
             force +
-            (centre * (1.0D / n) - boid.position) * 0.01D +
+            (center * (1.0D / n) - boid.position) * 0.01D +
             (heading * (1.0D / n) - boid.velocity) * 0.05D +
             crowding * 0.1D
     fi
@@ -126,7 +126,7 @@ si
 
 draw(image: IMAGE, flock: BOID[]) is
     image.clear(235ub, 240ub, 245ub)
-    image.colour(90ub, 80ub, 70ub)
+    image.color(90ub, 80ub, 70ub)
 
     for (row, line) in cave |> index() do
         for (column, c) in line |> index() do
@@ -144,7 +144,7 @@ draw(image: IMAGE, flock: BOID[]) is
         od
     od
 
-    image.colour(200ub, 40ub, 40ub)
+    image.color(200ub, 40ub, 40ub)
 
     for boid in flock do
         image.dot(boid.position.x, boid.position.y, 2.0D)

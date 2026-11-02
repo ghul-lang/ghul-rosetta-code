@@ -93,7 +93,7 @@ draw(image: IMAGE, angle: double) is
 
     image.fill(shapes)
 
-    image.colour(20ub, 30ub, 50ub)
+    image.color(20ub, 30ub, 50ub)
     image.stroke(1.5D)
 
     for outline in outlines do

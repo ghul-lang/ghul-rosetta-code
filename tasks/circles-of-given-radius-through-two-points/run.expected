@@ -1,5 +1,5 @@
-(0.1234, 0.9876) (0.8765, 0.2345) r = 2: centres (1.8631, 1.9742) and (-0.8632, -0.7521)
-(0.0000, 2.0000) (0.0000, 0.0000) r = 1: a diameter: one circle, centre (0.0000, 1.0000)
+(0.1234, 0.9876) (0.8765, 0.2345) r = 2: centers (1.8631, 1.9742) and (-0.8632, -0.7521)
+(0.0000, 2.0000) (0.0000, 0.0000) r = 1: a diameter: one circle, center (0.0000, 1.0000)
 (0.1234, 0.9876) (0.1234, 0.9876) r = 2: the points coincide: any circle through them
 (0.1234, 0.9876) (0.8765, 0.2345) r = 0.5: none: the points are too far apart
 (0.1234, 0.9876) (0.1234, 0.9876) r = 0: a single point

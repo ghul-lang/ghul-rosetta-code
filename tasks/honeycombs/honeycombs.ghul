@@ -86,7 +86,7 @@ draw() is
 
     image.fill(comb)
 
-    image.colour(30ub, 30ub, 50ub)
+    image.color(30ub, 30ub, 50ub)
 
     for cell in cells do
         image.text(
@@ -94,7 +94,7 @@ draw() is
             cell.y - 0.3D,
             20.0D,
             "{cell.letter}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 

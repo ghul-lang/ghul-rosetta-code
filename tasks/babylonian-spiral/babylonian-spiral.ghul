@@ -105,7 +105,7 @@ image.view(
     middle_y + half
 )
 image.clear(252ub, 250ub, 245ub)
-image.colour(30ub, 60ub, 140ub)
+image.color(30ub, 60ub, 140ub)
 image.stroke(1.0D)
 image.line(many |> map(p => (x = double(p.x), y = double(p.y))) |> list())
 

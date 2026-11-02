@@ -25,16 +25,16 @@ around(radius: double) -> POINT[] =>
 
 let image = IMAGE(300, 300)
 
-image.colour(0ub, 0ub, 0ub)
+image.color(0ub, 0ub, 0ub)
 image.stroke(2.0D)
 
 image.line(around(120.0D))
 image.line(around(50.0D))
 
-image.colour(230ub, 180ub, 60ub)
+image.color(230ub, 180ub, 60ub)
 image.flood_fill(150, 90)
 
-image.colour(60ub, 120ub, 200ub)
+image.color(60ub, 120ub, 200ub)
 image.flood_fill(150, 150)
 
 image.write("flooded.png")

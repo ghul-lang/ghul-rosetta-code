@@ -50,7 +50,7 @@ let plant = [('X', "F+[[X]-X]-F[-FX]+X"), ('F', "FF")] |> MAP()
 let image = IMAGE(500, 500)
 
 image.view(-200.0, -10.0, 150.0, 340.0)
-image.colour(40ub, 120ub, 40ub)
+image.color(40ub, 120ub, 40ub)
 image.stroke(1.0)
 
 let pen = TURTLE(image)

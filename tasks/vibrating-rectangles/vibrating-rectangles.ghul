@@ -20,7 +20,7 @@ draw(image: IMAGE, frame: int) is
         let inset = spacing * double(ring) + 2.0D
         let hue = double(frame - 2 * ring) / double(frames)
 
-        image.colour(
+        image.color(
             channel(hue, 0.0D),
             channel(hue, 1.0D / 3.0D),
             channel(hue, 2.0D / 3.0D)
@@ -47,7 +47,7 @@ for frame in 0..frames do
     animation.add(image, 50)
 od
 
-write_line("{rectangles} rectangles around one centre, the colour fading")
+write_line("{rectangles} rectangles around one center, the color fading")
 write_line("in from the outermost to the innermost")
 
 animation.write("rectangles.png")

@@ -39,11 +39,11 @@ let finish = (x = 280.0D, y = 40.0D)
 
 let image = IMAGE(300, 240)
 
-image.colour(190ub, 190ub, 190ub)
+image.color(190ub, 190ub, 190ub)
 image.stroke(1.0D)
 image.line([start, first, second, finish])
 
-image.colour(0ub, 0ub, 160ub)
+image.color(0ub, 0ub, 160ub)
 image.stroke(2.0D)
 image.line(cubic(start, first, second, finish))
 

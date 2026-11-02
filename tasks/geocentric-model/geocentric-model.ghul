@@ -2,14 +2,14 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-use Colour = (red: ubyte, green: ubyte, blue: ubyte)
+use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
 use Body = (
     name: string,
     radius: double,
     period: double,
     start: double,
-    colour: Colour
+    color: Color
 )
 
 // `T[]` is the read-only list trait - elements can be read by index
@@ -24,7 +24,7 @@ let years = 8.0D
 let shown = 2.2D
 let frames = 88
 
-rgb(r: int, g: int, b: int) -> Colour => (
+rgb(r: int, g: int, b: int) -> Color => (
     red = ubyte(r),
     green = ubyte(g),
     blue = ubyte(b)
@@ -93,7 +93,7 @@ draw(image: IMAGE, frame: int) is
         let here = trail[trail.count - 1]
         let marker = if body.name =~ "Sun" then 4.0D else 2.5D fi
 
-        image.colour(body.colour.red, body.colour.green, body.colour.blue)
+        image.color(body.color.red, body.color.green, body.color.blue)
 
         if trail.count > 1 then
             image.line(trail)
@@ -102,7 +102,7 @@ draw(image: IMAGE, frame: int) is
         image.dot(here.x, here.y, marker)
     od
 
-    image.colour(earth.colour.red, earth.colour.green, earth.colour.blue)
+    image.color(earth.color.red, earth.color.green, earth.color.blue)
     image.dot(0.0D, 0.0D, 3.5D)
 si
 

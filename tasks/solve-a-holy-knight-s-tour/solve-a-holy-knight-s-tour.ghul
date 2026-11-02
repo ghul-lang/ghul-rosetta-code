@@ -107,9 +107,9 @@ for s in open do
     let light = (s.row + s.column) % 2 == 0
 
     if light then
-        image.colour(235ub, 215ub, 180ub)
+        image.color(235ub, 215ub, 180ub)
     else
-        image.colour(180ub, 135ub, 95ub)
+        image.color(180ub, 135ub, 95ub)
     fi
 
     image.fill_rectangle(x, y, x + cell, y + cell)
@@ -124,10 +124,10 @@ let path =
         ))
         |> list()
 
-image.colour(30ub, 60ub, 140ub)
+image.color(30ub, 60ub, 140ub)
 image.stroke(2.0D)
 image.line(path)
-image.colour(200ub, 40ub, 40ub)
+image.color(200ub, 40ub, 40ub)
 image.dot(path[0].x, path[0].y, 6.0D)
 
 image.write("tour.png")

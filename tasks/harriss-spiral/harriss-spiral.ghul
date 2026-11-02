@@ -10,7 +10,7 @@ use Point = (x: double, y: double)
 
 let plastic = 1.324718D
 
-let colours = [
+let colors = [
     (red = 200ub, green = 60ub, blue = 50ub),
     (red = 230ub, green = 170ub, blue = 30ub),
     (red = 40ub, green = 120ub, blue = 200ub),
@@ -20,10 +20,10 @@ let colours = [
 quarter_arc(image: IMAGE, from: Point, to: Point) is
     let middle = (x = (from.x + to.x) / 2.0D, y = (from.y + to.y) / 2.0D)
     let half = (x = (to.x - from.x) / 2.0D, y = (to.y - from.y) / 2.0D)
-    let centre = (x = middle.x + half.y, y = middle.y - half.x)
+    let center = (x = middle.x + half.y, y = middle.y - half.x)
 
-    let start = atan2(from.y - centre.y, from.x - centre.x)
-    let finish = atan2(to.y - centre.y, to.x - centre.x)
+    let start = atan2(from.y - center.y, from.x - center.x)
+    let finish = atan2(to.y - center.y, to.x - center.x)
     let sweep mut = finish - start
 
     if sweep > pi then sweep = sweep - 2.0D * pi fi
@@ -37,8 +37,8 @@ quarter_arc(image: IMAGE, from: Point, to: Point) is
             |> map(i =>
                 let a = start + sweep * double(i) / 24.0D in
                 (
-                    x = centre.x + radius * cos(a),
-                    y = centre.y + radius * sin(a)
+                    x = center.x + radius * cos(a),
+                    y = center.y + radius * sin(a)
                 )
             )
             |> list()
@@ -65,9 +65,9 @@ harriss(
         )
 
         let quadrant = int(round(angle / 90.0D))
-        let colour = colours[(quadrant % 4 + 4) % 4]
+        let color = colors[(quadrant % 4 + 4) % 4]
 
-        image.colour(colour.red, colour.green, colour.blue)
+        image.color(color.red, color.green, color.blue)
         image.stroke(width)
         quarter_arc(image, here, next)
 

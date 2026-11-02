@@ -205,13 +205,13 @@ let image = IMAGE(360, 360)
 
 image.view(-1.1D, -1.1D, 1.1D, 1.1D)
 image.clear(252ub, 250ub, 245ub)
-image.colour(120ub, 130ub, 150ub)
+image.color(120ub, 130ub, 150ub)
 
 for p in points do
     image.dot(p.x, p.y, 2.0D)
 od
 
-image.colour(200ub, 50ub, 40ub)
+image.color(200ub, 50ub, 40ub)
 image.stroke(2.0D)
 image.line(result ++ [result[0]] |> map(p => (x = p.x, y = p.y)) |> list())
 

@@ -23,7 +23,7 @@ use Mesh = (points: Point[], faces: Face[])
 
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
-centre(points: Point[]) -> Point =>
+center(points: Point[]) -> Point =>
     (points |> reduce((x = 0.0D, y = 0.0D, z = 0.0D), (a, b) => a + b)) *
     (1.0D / double(points.count))
 
@@ -40,7 +40,7 @@ subdivided(mesh: Mesh) -> Mesh is
     let face_points =
         faces
             |> map(face =>
-                centre(face |> map(index => points[index]) |> list())
+                center(face |> map(index => points[index]) |> list())
             )
             |> list()
 
@@ -71,9 +71,9 @@ subdivided(mesh: Mesh) -> Mesh is
 
         let position =
             if touching.count == 1 then
-                centre(ends)
+                center(ends)
             else
-                centre(
+                center(
                     ends
                         |> cat(touching |> map(index => face_points[index]))
                         |> list()
@@ -113,10 +113,10 @@ subdivided(mesh: Mesh) -> Mesh is
                 |> list()
 
         if border.count > 0 then
-            new_points[vertex] = centre(
+            new_points[vertex] = center(
                 border
                     |> map((key, faces_here) =>
-                        centre([
+                        center([
                             points[key.low],
                             points[key.high]
                         ])
@@ -127,14 +127,14 @@ subdivided(mesh: Mesh) -> Mesh is
         else
             let n = double(touching_faces.count)
 
-            let face_average = centre(
+            let face_average = center(
                 touching_faces |> map(index => face_points[index]) |> list()
             )
 
-            let edge_average = centre(
+            let edge_average = center(
                 touching_edges
                     |> map((key, faces_here) =>
-                        centre([
+                        center([
                             points[key.low],
                             points[key.high]
                         ])
@@ -224,7 +224,7 @@ let turned = p => (
 image.view(-2.0D, -2.0D, 2.0D, 2.0D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(1.2D)
-image.colour(60ub, 90ub, 170ub)
+image.color(60ub, 90ub, 170ub)
 
 let (final_points, final_faces) = rounds[rounds.count - 1]
 

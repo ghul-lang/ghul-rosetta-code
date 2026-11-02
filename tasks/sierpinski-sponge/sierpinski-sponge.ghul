@@ -96,14 +96,14 @@ for c in cells do
                     )
                     |> list()
 
-            image.colour(
+            image.color(
                 ubyte(200.0D * face.light),
                 ubyte(90.0D * face.light),
                 ubyte(40.0D * face.light)
             )
             image.fill(outline)
 
-            image.colour(30ub, 20ub, 20ub)
+            image.color(30ub, 20ub, 20ub)
             image.line(outline ++ [outline[0]] |> list())
         fi
     od

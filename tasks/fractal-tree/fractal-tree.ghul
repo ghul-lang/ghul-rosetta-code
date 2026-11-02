@@ -24,7 +24,7 @@ branch(x: double, y: double, angle: double, length: double, depth: int) is
 si
 
 image.view(0.0D, 0.0D, 500.0D, 500.0D)
-image.colour(60ub, 40ub, 20ub)
+image.color(60ub, 40ub, 20ub)
 
 branch(250.0D, 10.0D, pi / 2.0D, 110.0D, 10)
 

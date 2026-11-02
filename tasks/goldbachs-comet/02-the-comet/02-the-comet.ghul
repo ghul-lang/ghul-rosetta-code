@@ -53,7 +53,7 @@ let image = IMAGE(760, 480)
 
 image.view(0.0, 0.0, double(limit), double(tallest) + 2.0, 52.0)
 
-image.colour(80ub, 80ub, 80ub)
+image.color(80ub, 80ub, 80ub)
 image.stroke(1.0)
 
 let axes = AXES(image)
@@ -67,7 +67,7 @@ image.stroke(2.4)
 for point in points do
     for band in bands do
         if point.even % 6 == band.residue then
-            image.colour(band.red, band.green, band.blue)
+            image.color(band.red, band.green, band.blue)
 
             let x = double(point.even)
             let y = double(point.count)
@@ -83,11 +83,11 @@ for entry in bands |> index() do
     let band = entry.value
     let y = double(tallest) - step * double(entry.index + 1)
 
-    image.colour(band.red, band.green, band.blue)
+    image.color(band.red, band.green, band.blue)
     image.stroke(2.4)
     image.line(140.0, y, 210.0, y)
 
-    image.colour(60ub, 60ub, 60ub)
+    image.color(60ub, 60ub, 60ub)
     image.text(230.0, y - step / 3.0, 13.0, band.label, Anchor.LEFT)
 od
 

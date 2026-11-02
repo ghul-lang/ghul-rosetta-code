@@ -1,4 +1,4 @@
 the surface of w = sqrt(z), over two turns of the z plane
-height is the real part of w, and colour is its argument
+height is the real part of w, and color is its argument
 2816 quadrilaterals, drawn farthest first
 <<image riemann.png>>

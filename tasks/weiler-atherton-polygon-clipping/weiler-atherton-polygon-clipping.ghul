@@ -184,16 +184,16 @@ image.clear(252ub, 252ub, 250ub)
 outline(polygon: P[]) -> (x: double, y: double)[] =>
     polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y)) |> list()
 
-image.colour(250ub, 200ub, 90ub)
+image.color(250ub, 200ub, 90ub)
 
 for piece in pieces do
     image.fill(outline(piece))
 od
 
 image.stroke(2.0D)
-image.colour(40ub, 90ub, 180ub)
+image.color(40ub, 90ub, 180ub)
 image.line(outline(subject))
-image.colour(200ub, 50ub, 40ub)
+image.color(200ub, 50ub, 40ub)
 image.line(outline(window))
 
 image.write("clipped.png")

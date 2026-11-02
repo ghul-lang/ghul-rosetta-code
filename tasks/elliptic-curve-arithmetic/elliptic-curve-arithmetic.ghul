@@ -91,7 +91,7 @@ draw(p: Point, q: Point, r: Point, s: Point) is
         axes.y_title = "y"
         axes.fit(least - 0.4D, -reach - 0.6D, most, reach + 0.6D)
 
-        image.colour(150ub, 150ub, 150ub)
+        image.color(150ub, 150ub, 150ub)
         image.stroke(1.0D)
         axes.draw()
 
@@ -103,7 +103,7 @@ draw(p: Point, q: Point, r: Point, s: Point) is
                 |> map(x => (x = x, y = sqrt(x * x * x + b)))
                 |> list()
 
-        image.colour(30ub, 70ub, 160ub)
+        image.color(30ub, 70ub, 160ub)
         image.stroke(1.6D)
         image.line(curve)
         image.line(curve |> map(at => (x = at.x, y = -at.y)) |> list())
@@ -111,12 +111,12 @@ draw(p: Point, q: Point, r: Point, s: Point) is
         let slope = (qy - py) / (qx - px)
         let chord = x => (x = x, y = py + slope * (x - px))
 
-        image.colour(200ub, 90ub, 40ub)
+        image.color(200ub, 90ub, 40ub)
         image.stroke(1.2D)
         image.line([chord(least - 0.4D), chord(most)])
         image.line([(x = rx, y = ry), (x = sx, y = sy)])
 
-        image.colour(40ub, 40ub, 40ub)
+        image.color(40ub, 40ub, 40ub)
 
         for
             marked in [

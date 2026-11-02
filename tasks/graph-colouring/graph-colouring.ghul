@@ -61,55 +61,55 @@ parse(description: string) -> GRAPH is
     GRAPH(nodes |> sort() |> list(), edges)
 si
 
-colour(graph: GRAPH) -> MAP[int, int] is
-    let colours = MAP()
+color(graph: GRAPH) -> MAP[int, int] is
+    let colors = MAP()
 
-    let neighbour_colours =
+    let neighbour_colors =
         node =>
             graph.neighbours(node)
-                |> filter(colours.contains_key)
-                |> map(other => colours[other])
+                |> filter(colors.contains_key)
+                |> map(other => colors[other])
                 |> SET[int]()
 
     for _ in graph.nodes do
-        // the uncoloured node seeing the most distinct colours,
+        // the uncolored node seeing the most distinct colors,
         // ties to the higher degree, then to the earlier node
         let (node, taken) =
             graph.nodes
-                |> filter(node => !colours.contains_key(node))
-                |> map(node => (node, neighbour_colours(node)))
+                |> filter(node => !colors.contains_key(node))
+                |> map(node => (node, neighbour_colors(node)))
                 |> max_by((node, taken) => (
                     taken.count,
                     graph.degree(node)
                 ))!
 
-        colours[node] = from(0) |> find(c => !taken.contains(c))!
+        colors[node] = from(0) |> find(c => !taken.contains(c))!
     od
 
-    colours
+    colors
 si
 
 report(name: string, description: string) is
     let graph = parse(description)
-    let colours = colour(graph)
+    let colors = color(graph)
 
     write_line("{name}:")
 
     for (from, to) in graph.edges do
-        write_line("  {from}-{to} coloured {colours[from]}-{colours[to]}")
+        write_line("  {from}-{to} colored {colors[from]}-{colors[to]}")
     od
 
     for node in graph.nodes do
         if graph.degree(node) == 0 then
-            write_line("  {node} isolated, coloured {colours[node]}")
+            write_line("  {node} isolated, colored {colors[node]}")
         fi
     od
 
-    let used = colours.values |> SET()
+    let used = colors.values |> SET()
 
     write_line(
         "  {graph.nodes.count} nodes, {graph.edges.count} edges, "
-        "{used.count} colours"
+        "{used.count} colors"
     )
 si
 
@@ -125,7 +125,7 @@ for (name, description) in examples do
 od
 
 write_line("")
-write_line("the colourings are drawn below")
+write_line("the colorings are drawn below")
 
 let palette = [
     (220ub, 70ub, 60ub), (60ub, 150ub, 80ub),
@@ -138,7 +138,7 @@ image.clear(255ub, 255ub, 255ub)
 
 for (i, (name, description)) in examples |> index() do
     let graph = parse(description)
-    let colours = colour(graph)
+    let colors = color(graph)
     let cx = double(i % 2 * size + size / 2)
     let cy = double(i / 2 * size + size / 2 + 8)
 
@@ -155,7 +155,7 @@ for (i, (name, description)) in examples |> index() do
         )
     )
 
-    image.colour(120ub, 120ub, 120ub)
+    image.color(120ub, 120ub, 120ub)
     image.stroke(2.0D)
 
     for (from, to) in graph.edges do
@@ -167,16 +167,16 @@ for (i, (name, description)) in examples |> index() do
 
     for node in graph.nodes do
         let (x, y) = position(node)
-        let (r, g, b) = palette[colours[node]]
+        let (r, g, b) = palette[colors[node]]
 
-        image.colour(r, g, b)
+        image.color(r, g, b)
         image.disc(x, y, 14.0D)
-        image.colour(30ub, 30ub, 30ub)
-        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTRE)
+        image.color(30ub, 30ub, 30ub)
+        image.text(x, y + 1.0D, 11.0D, "{node}", Anchor.CENTER)
     od
 
-    image.colour(30ub, 30ub, 30ub)
-    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTRE)
+    image.color(30ub, 30ub, 30ub)
+    image.text(cx, cy - 112.0D, 12.0D, name, Anchor.CENTER)
 od
 
 image.write("graphs.png")

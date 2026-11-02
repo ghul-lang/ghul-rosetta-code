@@ -27,13 +27,13 @@ for row in 0..rows do
         let dx = offset * sin(angle)
         let dy = -offset * cos(angle)
 
-        image.colour(255ub, 255ub, 255ub)
+        image.color(255ub, 255ub, 255ub)
         image.disc(x + dx, y + dy, radius)
 
-        image.colour(0ub, 0ub, 0ub)
+        image.color(0ub, 0ub, 0ub)
         image.disc(x - dx, y - dy, radius)
 
-        image.colour(0ub, 0ub, 255ub)
+        image.color(0ub, 0ub, 255ub)
         image.disc(x, y, radius)
     od
 od

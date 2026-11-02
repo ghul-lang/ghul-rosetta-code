@@ -21,7 +21,7 @@ si
 draw(image: IMAGE, time: System.DateTime) is
     image.clear(245ub, 242ub, 235ub)
 
-    image.colour(40ub, 40ub, 50ub)
+    image.color(40ub, 40ub, 50ub)
     image.stroke(3.0D)
     image.circle(0.0D, 0.0D, 1.0D)
 
@@ -42,7 +42,7 @@ draw(image: IMAGE, time: System.DateTime) is
     hand(image, 5.0D * hour, 0.5D, 5.0D)
     hand(image, minute, 0.75D, 3.0D)
 
-    image.colour(200ub, 40ub, 40ub)
+    image.color(200ub, 40ub, 40ub)
     hand(image, second, 0.85D, 1.5D)
     image.disc(0.0D, 0.0D, 0.05D)
 si

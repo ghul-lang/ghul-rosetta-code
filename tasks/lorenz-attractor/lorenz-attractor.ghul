@@ -1,5 +1,5 @@
 use default
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 
 use Point = (x: double, y: double, z: double)
@@ -60,7 +60,7 @@ for at in 0..path.count - 1 do
     let from = path[at]
     let to = path[at + 1]
 
-    image.colour(COLOUR_MAP.viridis(part))
+    image.color(COLOR_MAP.viridis(part))
     image.line(from.x, from.z, to.x, to.z)
 od
 

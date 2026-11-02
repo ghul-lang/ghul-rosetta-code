@@ -38,12 +38,12 @@ axes.x_title = "real"
 axes.y_title = "imaginary"
 axes.fit(-54.0D, -54.0D, 54.0D, 54.0D)
 
-image.colour(90ub, 90ub, 100ub)
+image.color(90ub, 90ub, 100ub)
 image.stroke(1.0D)
 
 axes.draw()
 
-image.colour(40ub, 92ub, 168ub)
+image.color(40ub, 92ub, 168ub)
 
 for b in -50::50 do
     for a in -50::50 do

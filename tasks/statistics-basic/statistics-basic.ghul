@@ -93,7 +93,7 @@ for (which, place) in shown |> index() |> map(iv => (iv.value, iv.index)) do
         let share = double(tally.histogram[bin]) / double(tally.count)
         let x = left + width * double(bin)
 
-        image.colour(60ub, 110ub, 190ub)
+        image.color(60ub, 110ub, 190ub)
         image.fill_rectangle(
             x + 1.0D,
             30.0D,
@@ -102,16 +102,16 @@ for (which, place) in shown |> index() |> map(iv => (iv.value, iv.index)) do
         )
     od
 
-    image.colour(220ub, 60ub, 40ub)
+    image.color(220ub, 60ub, 40ub)
     image.line(left, 130.0D, left + panel - 30.0D, 130.0D)
 
-    image.colour(40ub, 40ub, 40ub)
+    image.color(40ub, 40ub, 40ub)
     image.text(
         left + (panel - 30.0D) / 2.0D,
         10.0D,
         13.0D,
         "{tally.count:N0} samples",
-        Raster.Anchor.CENTRE
+        Raster.Anchor.CENTER
     )
 od
 

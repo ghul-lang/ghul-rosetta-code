@@ -66,7 +66,7 @@ let image = IMAGE(480, 260)
 image.view(low, -0.03D, -low, 0.45D)
 image.clear(252ub, 252ub, 250ub)
 
-image.colour(60ub, 110ub, 190ub)
+image.color(60ub, 110ub, 190ub)
 
 for bin in 0..bins do
     let x = low + width * double(bin)
@@ -86,11 +86,11 @@ let curve =
         )
         |> list()
 
-image.colour(220ub, 60ub, 40ub)
+image.color(220ub, 60ub, 40ub)
 image.stroke(2.5D)
 image.line(curve)
 
-image.colour(80ub, 80ub, 80ub)
+image.color(80ub, 80ub, 80ub)
 image.stroke(1.0D)
 image.line(low, 0.0D, -low, 0.0D)
 

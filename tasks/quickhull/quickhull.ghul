@@ -227,7 +227,7 @@ let turned = p => (x = p.x * 0.8D + p.z * 0.6D, y = p.y * 0.9D + p.z * 0.3D)
 image.view(-2.2D, -2.2D, 2.2D, 2.2D)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(1.2D)
-image.colour(60ub, 90ub, 170ub)
+image.color(60ub, 90ub, 170ub)
 
 for face in hull(cloud) do
     for (from, to) in face.edges do

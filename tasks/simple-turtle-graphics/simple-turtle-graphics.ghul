@@ -64,7 +64,7 @@ si
 
 image.view(0.0, 0.0, 640.0, 360.0)
 
-image.colour(140ub, 60ub, 40ub)
+image.color(140ub, 60ub, 40ub)
 image.stroke(3.0)
 
 pen.move_to(70.0, 30.0)
@@ -72,7 +72,7 @@ pen.face(0.0)
 
 house(160.0)
 
-image.colour(40ub, 90ub, 160ub)
+image.color(40ub, 90ub, 160ub)
 
 pen.move_to(370.0, 30.0)
 pen.face(0.0)

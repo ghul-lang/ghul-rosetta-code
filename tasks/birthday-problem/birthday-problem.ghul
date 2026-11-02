@@ -104,26 +104,26 @@ let most = 400
 image.view(-40.0D, -0.15D, double(most) + 10.0D, 1.08D)
 image.clear(252ub, 250ub, 245ub)
 
-image.colour(200ub, 200ub, 205ub)
+image.color(200ub, 200ub, 205ub)
 image.stroke(1.0D)
 image.line(0.0D, 0.5D, double(most), 0.5D)
 image.line(0.0D, 0.0D, double(most), 0.0D)
 image.line(0.0D, 0.0D, 0.0D, 1.0D)
 
-let colours = [
+let colors = [
     (200ub, 50ub, 40ub), (40ub, 130ub, 60ub),
     (40ub, 80ub, 180ub), (150ub, 60ub, 170ub)
 ]
 
 for (i, at_least) in 2::5 |> index() do
-    let (r, g, b) = colours[i]
+    let (r, g, b) = colors[i]
     let curve =
         (1::most / 4)
             |> map(* * 4)
             |> map(n => (x = double(n), y = curves[i][n]))
             |> list()
 
-    image.colour(r, g, b)
+    image.color(r, g, b)
     image.stroke(2.0D)
     image.line(curve)
 
@@ -135,14 +135,14 @@ for (i, at_least) in 2::5 |> index() do
     image.text(crossing - 6.0D, 0.56D, 11.0D, label, Anchor.RIGHT)
 od
 
-image.colour(60ub, 60ub, 60ub)
+image.color(60ub, 60ub, 60ub)
 image.text(-8.0D, 0.47D, 11.0D, "50%", Anchor.RIGHT)
 image.text(
     double(most) / 2.0D,
     -0.12D,
     12.0D,
     "people in the group",
-    Anchor.CENTRE
+    Anchor.CENTER
 )
 
 image.write("birthdays.png")

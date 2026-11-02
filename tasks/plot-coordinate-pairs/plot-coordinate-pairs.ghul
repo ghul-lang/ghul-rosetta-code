@@ -30,7 +30,7 @@ let image = IMAGE(480, 360)
 
 image.view(-1.0, -20.0, 10.0, 200.0)
 
-image.colour(160ub, 160ub, 160ub)
+image.color(160ub, 160ub, 160ub)
 image.stroke(1.0)
 
 for tick in 0..10 do
@@ -42,11 +42,11 @@ for tick in 0..5 do
     image.line(-1.0, y, 10.0, y)
 od
 
-image.colour(20ub, 60ub, 180ub)
+image.color(20ub, 60ub, 180ub)
 image.stroke(2.0)
 image.line(points)
 
-image.colour(200ub, 40ub, 40ub)
+image.color(200ub, 40ub, 40ub)
 
 for point in points do
     image.fill(marker(point))

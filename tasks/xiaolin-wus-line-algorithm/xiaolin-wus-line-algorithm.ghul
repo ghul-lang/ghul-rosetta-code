@@ -5,7 +5,7 @@ use Ghul.Math
 
 let image = IMAGE(400, 300)
 
-image.colour(0ub, 0ub, 0ub)
+image.color(0ub, 0ub, 0ub)
 
 fraction(value: double) -> double => value - floor(value)
 

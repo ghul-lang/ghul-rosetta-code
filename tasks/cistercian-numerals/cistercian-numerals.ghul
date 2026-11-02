@@ -30,11 +30,11 @@ let cell = 90.0D
 let unit = 22.0D
 
 draw(image: IMAGE, number: int, left: double) is
-    let centre = left + cell / 2.0D
+    let center = left + cell / 2.0D
     let base = 40.0D
 
     image.stroke(3.0D)
-    image.line(centre, base, centre, base + 3.0D * unit)
+    image.line(center, base, center, base + 3.0D * unit)
 
     let place mut = number
 
@@ -47,9 +47,9 @@ draw(image: IMAGE, number: int, left: double) is
             let y1 = if flip_y then 3.0D - s.y1 else s.y1 fi
 
             image.line(
-                centre + flip_x * s.x0 * unit,
+                center + flip_x * s.x0 * unit,
                 base + y0 * unit,
-                centre + flip_x * s.x1 * unit,
+                center + flip_x * s.x1 * unit,
                 base + y1 * unit
             )
         od
@@ -57,7 +57,7 @@ draw(image: IMAGE, number: int, left: double) is
         place = place / 10
     od
 
-    image.text(centre, 12.0D, 12.0D, "{number}", Anchor.CENTRE)
+    image.text(center, 12.0D, 12.0D, "{number}", Anchor.CENTER)
 si
 
 let width = int(cell) * numbers.count
@@ -65,7 +65,7 @@ let image = IMAGE(width, 130)
 
 image.view(0.0D, 0.0D, double(width), 130.0D)
 image.clear(250ub, 247ub, 238ub)
-image.colour(60ub, 40ub, 30ub)
+image.color(60ub, 40ub, 30ub)
 
 for (i, number) in numbers |> index() do
     draw(image, number, cell * double(i))

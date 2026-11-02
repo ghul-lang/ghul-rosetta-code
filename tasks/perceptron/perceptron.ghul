@@ -74,22 +74,22 @@ image.clear(250ub, 250ub, 250ub)
 
 for p in points do
     if guess(p) != above(p.x, p.y) then
-        image.colour(220ub, 30ub, 30ub)
+        image.color(220ub, 30ub, 30ub)
         image.dot(p.x, p.y, 3.0D)
     elif guess(p) == 1 then
-        image.colour(60ub, 110ub, 200ub)
+        image.color(60ub, 110ub, 200ub)
         image.dot(p.x, p.y, 2.0D)
     else
-        image.colour(90ub, 170ub, 90ub)
+        image.color(90ub, 170ub, 90ub)
         image.dot(p.x, p.y, 2.0D)
     fi
 od
 
 image.stroke(1.5D)
-image.colour(30ub, 30ub, 30ub)
+image.color(30ub, 30ub, 30ub)
 image.line(-1.0D, intercept - slope, 1.0D, intercept + slope)
 
-image.colour(230ub, 140ub, 20ub)
+image.color(230ub, 140ub, 20ub)
 image.line(
     -1.0D,
     learned_intercept - learned_slope,

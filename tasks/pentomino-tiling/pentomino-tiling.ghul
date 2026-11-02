@@ -174,7 +174,7 @@ od
 
 let hues = "FILNPTUVWXYZ"
 
-colour(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
+color(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let
         h = double(hues.index_of(name)) / 12.0D * 6.0D,
         f = h - floor(h),
@@ -209,13 +209,13 @@ for i in 0..size * size do
                 (x = x, y = y), (x = x + cell, y = y),
                 (x = x + cell, y = y + cell), (x = x, y = y + cell)
             ],
-            colour(name)
+            color(name)
         )
     fi
 od
 
 image.fill(tiles)
-image.colour(30ub, 30ub, 30ub)
+image.color(30ub, 30ub, 30ub)
 image.stroke(2.5D)
 
 for i in 0..size * size do

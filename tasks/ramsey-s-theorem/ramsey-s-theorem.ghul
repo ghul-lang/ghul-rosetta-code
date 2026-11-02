@@ -84,7 +84,7 @@ at(i: int) -> (x: double, y: double) =>
     in
         (x = cos(angle), y = sin(angle))
 
-image.colour(40ub, 90ub, 180ub)
+image.color(40ub, 90ub, 180ub)
 image.stroke(1.2D)
 
 for a in 0..n do
@@ -101,10 +101,10 @@ od
 for i in 0..n do
     let p = at(i)
 
-    image.colour(200ub, 60ub, 40ub)
+    image.color(200ub, 60ub, 40ub)
     image.dot(p.x, p.y, 11.0D)
-    image.colour(255ub, 255ub, 255ub)
-    image.text(p.x, p.y - 0.03D, 11.0D, "{i}", Raster.Anchor.CENTRE)
+    image.color(255ub, 255ub, 255ub)
+    image.text(p.x, p.y - 0.03D, 11.0D, "{i}", Raster.Anchor.CENTER)
 od
 
 image.write("paley.png")

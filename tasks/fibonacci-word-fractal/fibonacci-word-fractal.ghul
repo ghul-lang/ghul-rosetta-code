@@ -25,7 +25,7 @@ let image = IMAGE(450, 620)
 let pen = TURTLE(image)
 
 image.view(0.0D, 0.0D, 450.0D, 620.0D)
-image.colour(0ub, 0ub, 160ub)
+image.color(0ub, 0ub, 160ub)
 image.stroke(1.0D)
 
 pen.move_to(21.0D, 600.0D)

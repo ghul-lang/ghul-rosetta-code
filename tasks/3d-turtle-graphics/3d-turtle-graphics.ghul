@@ -13,14 +13,14 @@ struct V3(x: double, y: double, z: double) is
     length: double => sqrt(self ⋅ self)
 si
 
-use Segment = (from: V3, to: V3, colour: (ubyte, ubyte, ubyte))
+use Segment = (from: V3, to: V3, color: (ubyte, ubyte, ubyte))
 
 class TURTLE is
     at: V3 public
     heading: V3 public
     left: V3 public
     up: V3 public
-    colour: (ubyte, ubyte, ubyte) public
+    color: (ubyte, ubyte, ubyte) public
     drawing: bool public
     drawn: LIST[Segment]
 
@@ -29,7 +29,7 @@ class TURTLE is
         heading = V3(1.0D, 0.0D, 0.0D)
         left = V3(0.0D, 1.0D, 0.0D)
         up = V3(0.0D, 0.0D, 1.0D)
-        colour = (40ub, 40ub, 40ub)
+        color = (40ub, 40ub, 40ub)
         drawing = true
         drawn = LIST()
     si
@@ -38,7 +38,7 @@ class TURTLE is
         let next = at + heading * distance
 
         if drawing then
-            drawn.add((at, next, colour))
+            drawn.add((at, next, color))
         fi
         at = next
     si
@@ -139,7 +139,7 @@ si
 
 let turtle = TURTLE()
 
-turtle.colour = (170ub, 40ub, 40ub)
+turtle.color = (170ub, 40ub, 40ub)
 house(turtle, 100.0D)
 
 turtle.turn(-90.0D)
@@ -147,7 +147,7 @@ turtle.drawing = false
 turtle.forward(260.0D)
 turtle.drawing = true
 turtle.turn(90.0D)
-turtle.colour = (40ub, 90ub, 170ub)
+turtle.color = (40ub, 90ub, 170ub)
 bar_chart(turtle, [0.5D, 0.33333D, 2.0D, 1.3D, 0.5D], 200.0D)
 
 let at_home = turtle.state
@@ -183,7 +183,7 @@ image.stroke(2.0D)
 for (from, to, (r, g, b)) in turtle.drawn do
     let a = project(from), z = project(to)
 
-    image.colour(r, g, b)
+    image.color(r, g, b)
     image.line(a.x, a.y, z.x, z.y)
 od
 

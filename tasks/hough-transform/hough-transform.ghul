@@ -15,7 +15,7 @@ pentagon() -> IMAGE => (
     let image = IMAGE(size, size)
 
     image.clear(255ub, 255ub, 255ub)
-    image.colour(0ub, 0ub, 0ub)
+    image.color(0ub, 0ub, 0ub)
     image.stroke(2.0D)
     image.line(
         (0::5)
@@ -85,7 +85,7 @@ for _ in 0..5 do
 od
 
 write_line("the five strongest lines, as angle in degrees")
-write_line("and distance from the centre:")
+write_line("and distance from the center:")
 
 for p in peaks |> sort((a, b) => a.theta - b.theta) do
     write_line("  theta {p.theta,3}, rho {p.rho,4} ({p.votes} votes)")

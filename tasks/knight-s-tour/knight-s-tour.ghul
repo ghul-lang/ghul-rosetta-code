@@ -1,5 +1,5 @@
 use default
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 use Raster.SHAPES
 
@@ -125,15 +125,15 @@ for step in 0..tour.count - 1 do
     let from = middle(tour[step])
     let to = middle(tour[step + 1])
 
-    image.colour(COLOUR_MAP.viridis(double(step) / double(tour.count)))
+    image.color(COLOR_MAP.viridis(double(step) / double(tour.count)))
 
     image.line(from.x, from.y, to.x, to.y)
 od
 
-image.colour(190ub, 40ub, 40ub)
+image.color(190ub, 40ub, 40ub)
 image.dot(middle(start).x, middle(start).y, 6.0D)
 
-image.colour(40ub, 40ub, 50ub)
+image.color(40ub, 40ub, 50ub)
 image.stroke(1.4D)
 image.line([
     (x = 0.0D, y = 0.0D), (x = 8.0D, y = 0.0D),

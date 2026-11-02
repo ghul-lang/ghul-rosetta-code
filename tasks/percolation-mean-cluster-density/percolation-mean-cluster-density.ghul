@@ -108,7 +108,7 @@ for cell in 0..225 do
         let x = double(cell % 15)
         let y = double(cell / 15)
 
-        image.colour(red, green, blue)
+        image.color(red, green, blue)
         image.fill_rectangle(x, y, x + 1.0D, y + 1.0D)
     fi
 od

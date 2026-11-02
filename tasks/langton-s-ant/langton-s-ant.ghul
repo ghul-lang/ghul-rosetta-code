@@ -46,7 +46,7 @@ si
 
 draw(image: IMAGE, row: int, column: int) is
     image.clear(250ub, 250ub, 247ub)
-    image.colour(30ub, 30ub, 40ub)
+    image.color(30ub, 30ub, 40ub)
 
     for i in 0..size * size do
         if black[i] then
@@ -57,7 +57,7 @@ draw(image: IMAGE, row: int, column: int) is
         fi
     od
 
-    image.colour(220ub, 50ub, 40ub)
+    image.color(220ub, 50ub, 40ub)
     image.fill_rectangle(
         double(column) - 0.5D,
         double(row) - 0.5D,

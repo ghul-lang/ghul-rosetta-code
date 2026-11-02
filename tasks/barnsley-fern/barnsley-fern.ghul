@@ -19,7 +19,7 @@ next(x: double, y: double) -> (x: double, y: double) => (
 let image = IMAGE(320, 640)
 
 image.view(-2.6D, -0.25D, 2.9D, 10.75D)
-image.colour(24ub, 104ub, 40ub)
+image.color(24ub, 104ub, 40ub)
 
 let point mut = (x = 0.0D, y = 0.0D)
 

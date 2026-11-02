@@ -47,7 +47,7 @@ points.add(finish)
 let image = IMAGE(660, 220)
 
 image.view(-0.1D, -0.06D, 1.1D, 0.34D)
-image.colour(30ub, 60ub, 170ub)
+image.color(30ub, 60ub, 170ub)
 image.stroke(1.4D)
 
 image.line(points)

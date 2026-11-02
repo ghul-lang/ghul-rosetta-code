@@ -45,12 +45,12 @@ let image = IMAGE(248, 248)
 image.view(-15.5D, -15.5D, 15.5D, 15.5D)
 image.clear(252ub, 250ub, 245ub)
 
-image.colour(210ub, 210ub, 215ub)
+image.color(210ub, 210ub, 215ub)
 image.stroke(1.0D)
 image.circle(0.0D, 0.0D, 10.0D)
 image.circle(0.0D, 0.0D, 15.0D)
 
-image.colour(40ub, 80ub, 170ub)
+image.color(40ub, 80ub, 170ub)
 
 for p in distinct do
     image.dot(double(p.x), double(p.y), 3.0D)

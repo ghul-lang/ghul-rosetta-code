@@ -41,64 +41,64 @@ let half = 0.16
 
 let dark = (red = 45ub, green = 75ub, blue = 130ub)
 let pale = (red = 160ub, green = 185ub, blue = 225ub)
-let median_colour = (red = 195ub, green = 70ub, blue = 45ub)
+let median_color = (red = 195ub, green = 70ub, blue = 45ub)
 
-box(image: IMAGE, summary: double[], centre: double) is
-    image.colour(dark)
+box(image: IMAGE, summary: double[], center: double) is
+    image.color(dark)
     image.stroke(1.4)
-    image.line(summary[0], centre, summary[4], centre)
-    image.line(summary[0], centre - half, summary[0], centre + half)
-    image.line(summary[4], centre - half, summary[4], centre + half)
+    image.line(summary[0], center, summary[4], center)
+    image.line(summary[0], center - half, summary[0], center + half)
+    image.line(summary[4], center - half, summary[4], center + half)
 
-    image.colour(pale)
+    image.color(pale)
     image.fill_rectangle(
         summary[1],
-        centre - half,
+        center - half,
         summary[3],
-        centre + half
+        center + half
     )
 
-    image.colour(dark)
+    image.color(dark)
     image.line([
-        (x = summary[1], y = centre - half),
-        (x = summary[3], y = centre - half),
-        (x = summary[3], y = centre + half),
-        (x = summary[1], y = centre + half),
-        (x = summary[1], y = centre - half)
+        (x = summary[1], y = center - half),
+        (x = summary[3], y = center - half),
+        (x = summary[3], y = center + half),
+        (x = summary[1], y = center + half),
+        (x = summary[1], y = center - half)
     ])
 
-    image.colour(median_colour)
+    image.color(median_color)
     image.stroke(2.2)
-    image.line(summary[2], centre - half, summary[2], centre + half)
+    image.line(summary[2], center - half, summary[2], center + half)
 si
 
-annotate(image: IMAGE, summary: double[], centre: double) is
-    image.colour(80ub, 85ub, 100ub)
+annotate(image: IMAGE, summary: double[], center: double) is
+    image.color(80ub, 85ub, 100ub)
 
     for at in [0, 2, 4] do
         image.text(
             summary[at],
-            centre - half - 0.155,
+            center - half - 0.155,
             12.0,
             "{summary[at]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 
     for at in [1, 3] do
         image.text(
             summary[at],
-            centre + half + 0.055,
+            center + half + 0.055,
             12.0,
             "{summary[at]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 si
 
 let image = IMAGE(740, 320)
 
-image.colour(95ub, 100ub, 115ub)
+image.color(95ub, 100ub, 115ub)
 image.stroke(1.0)
 
 let axes = AXES(image)
@@ -118,10 +118,10 @@ axes.fit(0.0, 0.0, 55.0, double(datasets.count))
 axes.draw()
 
 for set in datasets |> index() do
-    let centre = double(datasets.count - set.index) - 0.5
+    let center = double(datasets.count - set.index) - 0.5
 
-    box(image, fivenum(set.value.values), centre)
-    annotate(image, fivenum(set.value.values), centre)
+    box(image, fivenum(set.value.values), center)
+    annotate(image, fivenum(set.value.values), center)
 od
 
 image.write("fivenum.png")

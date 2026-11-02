@@ -33,7 +33,7 @@ step(rule: int, cells: bool[]) -> bool[] =>
 single_cell() -> bool[] => 0..width |> map(at => at == width / 2) |> list()
 
 draw(image: IMAGE, rule: int, left: int) is
-    image.colour(234ub, 237ub, 244ub)
+    image.color(234ub, 237ub, 244ub)
     image.fill_rectangle(
         double(left),
         double(top),
@@ -41,7 +41,7 @@ draw(image: IMAGE, rule: int, left: int) is
         double(top + generations)
     )
 
-    image.colour(30ub, 40ub, 70ub)
+    image.color(30ub, 40ub, 70ub)
 
     let rows =
         stream(single_cell(), cells => cells || step(rule, cells))
@@ -55,13 +55,13 @@ draw(image: IMAGE, rule: int, left: int) is
         od
     od
 
-    image.colour(60ub, 65ub, 80ub)
+    image.color(60ub, 65ub, 80ub)
     image.text(
         double(left + width / 2),
         double(top) - 14.0,
         18.0,
         "rule {rule}",
-        Anchor.CENTRE
+        Anchor.CENTER
     )
 si
 
@@ -70,7 +70,7 @@ let image = IMAGE(width * 2 + gap * 3, top + generations + gap * 3)
 draw(image, 30, gap)
 draw(image, 110, gap * 2 + width)
 
-image.colour(90ub, 95ub, 110ub)
+image.color(90ub, 95ub, 110ub)
 image.text(
     double(gap),
     double(top + generations + gap + 12),

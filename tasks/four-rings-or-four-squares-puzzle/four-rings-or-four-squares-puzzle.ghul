@@ -89,8 +89,8 @@ outline(at: int) -> (x: double, y: double)[] =>
         ]
 
 cell(x: double, y: double, letter: string, value: int, image: IMAGE) is
-    image.text(x, y - 8.0, 15.0, letter, Anchor.CENTRE)
-    image.text(x, y + 22.0, 28.0, "{value}", Anchor.CENTRE)
+    image.text(x, y - 8.0, 15.0, letter, Anchor.CENTER)
+    image.text(x, y + 22.0, 28.0, "{value}", Anchor.CENTER)
 si
 
 draw(s: Solution) is
@@ -120,7 +120,7 @@ draw(s: Solution) is
 
     image.fill(overlaps)
 
-    image.colour(60ub, 60ub, 60ub)
+    image.color(60ub, 60ub, 60ub)
     image.stroke(1.6)
 
     for at in 0..4 do
@@ -175,7 +175,7 @@ draw(s: Solution) is
             y,
             16.0,
             "{sums[at]}",
-            Anchor.CENTRE
+            Anchor.CENTER
         )
     od
 

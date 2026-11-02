@@ -1,51 +1,51 @@
 Ex1:
-  0-1 coloured 0-1
-  1-2 coloured 1-2
-  2-0 coloured 2-0
-  3 isolated, coloured 0
-  4 nodes, 3 edges, 3 colours
+  0-1 colored 0-1
+  1-2 colored 1-2
+  2-0 colored 2-0
+  3 isolated, colored 0
+  4 nodes, 3 edges, 3 colors
 Ex2:
-  1-6 coloured 0-1
-  1-7 coloured 0-1
-  1-8 coloured 0-1
-  2-5 coloured 0-1
-  2-7 coloured 0-1
-  2-8 coloured 0-1
-  3-5 coloured 0-1
-  3-6 coloured 0-1
-  3-8 coloured 0-1
-  4-5 coloured 0-1
-  4-6 coloured 0-1
-  4-7 coloured 0-1
-  8 nodes, 12 edges, 2 colours
+  1-6 colored 0-1
+  1-7 colored 0-1
+  1-8 colored 0-1
+  2-5 colored 0-1
+  2-7 colored 0-1
+  2-8 colored 0-1
+  3-5 colored 0-1
+  3-6 colored 0-1
+  3-8 colored 0-1
+  4-5 colored 0-1
+  4-6 colored 0-1
+  4-7 colored 0-1
+  8 nodes, 12 edges, 2 colors
 Ex3:
-  1-4 coloured 0-1
-  1-6 coloured 0-1
-  1-8 coloured 0-1
-  3-2 coloured 0-1
-  3-6 coloured 0-1
-  3-8 coloured 0-1
-  5-2 coloured 0-1
-  5-4 coloured 0-1
-  5-8 coloured 0-1
-  7-2 coloured 0-1
-  7-4 coloured 0-1
-  7-6 coloured 0-1
-  8 nodes, 12 edges, 2 colours
+  1-4 colored 0-1
+  1-6 colored 0-1
+  1-8 colored 0-1
+  3-2 colored 0-1
+  3-6 colored 0-1
+  3-8 colored 0-1
+  5-2 colored 0-1
+  5-4 colored 0-1
+  5-8 colored 0-1
+  7-2 colored 0-1
+  7-4 colored 0-1
+  7-6 colored 0-1
+  8 nodes, 12 edges, 2 colors
 Ex4:
-  1-6 coloured 0-1
-  7-1 coloured 1-0
-  8-1 coloured 1-0
-  5-2 coloured 1-0
-  2-7 coloured 0-1
-  2-8 coloured 0-1
-  3-5 coloured 0-1
-  6-3 coloured 1-0
-  3-8 coloured 0-1
-  4-5 coloured 0-1
-  4-6 coloured 0-1
-  4-7 coloured 0-1
-  8 nodes, 12 edges, 2 colours
+  1-6 colored 0-1
+  7-1 colored 1-0
+  8-1 colored 1-0
+  5-2 colored 1-0
+  2-7 colored 0-1
+  2-8 colored 0-1
+  3-5 colored 0-1
+  6-3 colored 1-0
+  3-8 colored 0-1
+  4-5 colored 0-1
+  4-6 colored 0-1
+  4-7 colored 0-1
+  8 nodes, 12 edges, 2 colors
 
-the colourings are drawn below
+the colorings are drawn below
 <<image graphs.png>>

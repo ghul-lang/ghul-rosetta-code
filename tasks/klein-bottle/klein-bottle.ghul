@@ -120,14 +120,14 @@ for q in quads do
     let light = brightness(q)
     let outline = q |> map(p => (x = p.x, y = p.y)) |> list()
 
-    image.colour(
+    image.color(
         ubyte(60.0D * light),
         ubyte(150.0D * light),
         ubyte(200.0D * light)
     )
     image.fill(outline)
 
-    image.colour(20ub, 40ub, 60ub)
+    image.color(20ub, 40ub, 60ub)
     image.line(outline ++ [outline[0]] |> list())
 od
 

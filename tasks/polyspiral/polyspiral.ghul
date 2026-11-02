@@ -21,7 +21,7 @@ draw(image: IMAGE, increment: double) is
         let next_y = y + length * sin(radians)
         let fade = double(segment) / double(segments)
 
-        image.colour(
+        image.color(
             ubyte(255.0D * (1.0D - fade)),
             ubyte(120.0D + 100.0D * fade),
             255ub

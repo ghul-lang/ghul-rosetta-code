@@ -16,7 +16,7 @@ si
 
 let full = 2.0D * pi
 
-centre_of(a: P, b: P, c: P) -> P => (
+center_of(a: P, b: P, c: P) -> P => (
     let d =
         2.0D * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
 
@@ -31,10 +31,10 @@ centre_of(a: P, b: P, c: P) -> P => (
 )
 
 curve(start: P, middle: P, finish: P, steps: int) -> P{} is
-    let centre = centre_of(start, middle, finish)
-    let radius = (start - centre).length
+    let center = center_of(start, middle, finish)
+    let radius = (start - center).length
 
-    angle(p) => atan2(p.y - centre.y, p.x - centre.x)
+    angle(p) => atan2(p.y - center.y, p.x - center.x)
 
     let from = angle(start)
     let through = angle(middle)
@@ -50,9 +50,9 @@ curve(start: P, middle: P, finish: P, steps: int) -> P{} is
         |> map(i =>
             let
                 a = from + turn * double(i) / double(steps),
-                x = centre.x + radius * cos(a)
+                x = center.x + radius * cos(a)
             in
-                P(x, centre.y + radius * sin(a))
+                P(x, center.y + radius * sin(a))
         )
         |> list()
 si
@@ -61,11 +61,11 @@ let start = P(10.0D, 10.0D)
 let middle = P(100.0D, 200.0D)
 let finish = P(200.0D, 10.0D)
 
-let centre = centre_of(start, middle, finish)
+let center = center_of(start, middle, finish)
 
-write_line("the circle through all three has its centre at")
-write_line("({centre.x:F3}, {centre.y:F3})")
-write_line("and radius {(start - centre).length:F3}")
+write_line("the circle through all three has its center at")
+write_line("({center.x:F3}, {center.y:F3})")
+write_line("and radius {(start - center).length:F3}")
 
 let points = curve(start, middle, finish, 100)
 
@@ -73,11 +73,11 @@ let image = IMAGE(300, 300)
 
 image.view(-20.0D, -40.0D, 230.0D, 210.0D)
 image.clear(252ub, 250ub, 245ub)
-image.colour(40ub, 80ub, 170ub)
+image.color(40ub, 80ub, 170ub)
 image.stroke(2.5D)
 image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
 
-image.colour(210ub, 50ub, 40ub)
+image.color(210ub, 50ub, 40ub)
 
 for p in [start, middle, finish] do
     image.dot(p.x, p.y, 5.0D)

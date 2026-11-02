@@ -1,5 +1,5 @@
 use default
-use Raster.COLOUR_MAP
+use Raster.COLOR_MAP
 use Raster.IMAGE
 
 // `T[]` is the read-only list trait - elements can be read by index
@@ -83,10 +83,10 @@ image.stroke(0.4D)
 
 for p in patches do
     let light = brightness(p)
-    let tint = COLOUR_MAP.hue(p.phase)
+    let tint = COLOR_MAP.hue(p.phase)
     let outline = p.corners |> map(c => (x = c.x, y = c.y)) |> list()
 
-    image.colour(
+    image.color(
         ubyte(double(tint.red) * light),
         ubyte(double(tint.green) * light),
         ubyte(double(tint.blue) * light)
@@ -97,7 +97,7 @@ for p in patches do
 od
 
 write_line("the surface of w = sqrt(z), over two turns of the z plane")
-write_line("height is the real part of w, and colour is its argument")
+write_line("height is the real part of w, and color is its argument")
 write_line("{patches.count} quadrilaterals, drawn farthest first")
 
 image.write("riemann.png")
