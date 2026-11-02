@@ -760,6 +760,11 @@ self_test() is
 
     check_that("exactly the foreign titles come back", foreign.count =~ 3)
 
+    check_that(
+        "a section and the composed form the wiki saves it in have one digest",
+        SECTION.digest("José") =~ SECTION.digest("José")
+    )
+
     let notes = (source: string) => NOTATION.scan(source) |> join("\n")
 
     check_that(
@@ -927,7 +932,7 @@ adopt(root: string, slugs: LIST[string]) is
             let live = page.substring(replaced.start, replaced.end - replaced.start).trim()
             let expected = IO.File.read_all_text(markup).trim()
 
-            if !string.equals(live, expected) then
+            if digest(live) !~ digest(expected) then
                 error.write_line("{entry.title}: the live section is not the markup in wiki-out/{slug}.wiki, so nothing was recorded")
 
                 IO.File.write_all_text(IO.Path.combine(root, "wiki-out", "{slug}.live"), live)
@@ -1026,7 +1031,7 @@ diff(root: string, slugs: LIST[string]) is
             let section = IO.File.read_all_text(markup).trim()
 
             let status =
-                if live =~ section then
+                if digest(live) =~ digest(section) then
                     "same"
                 elif !entry.published_hash? then
                     "unrecorded"
@@ -1036,7 +1041,7 @@ diff(root: string, slugs: LIST[string]) is
                     "differs"
                 fi
 
-            if live !~ section then
+            if digest(live) !~ digest(section) then
                 IO.File.write_all_text(IO.Path.combine(root, "wiki-out", "{slug}.live"), live)
             fi
 
