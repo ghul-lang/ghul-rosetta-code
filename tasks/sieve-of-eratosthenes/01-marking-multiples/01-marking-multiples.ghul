@@ -3,34 +3,21 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
 // `LIST[T]` is a mutable list that grows as elements are added
-// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
-//  index materialises the source only as far as that index and caches what
-//  it read
+// `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 sieve(limit: int) -> int{} is
-    let composite = LIST()
+    let composite = repeat(false, limit + 1) |> LIST()
 
-    0::limit |> each(_ => composite.add(false))
-
-    let prime mut = 2
-
-    while prime * prime <= limit do
+    for prime in 2::limit do
         if !composite[prime] then
-            let multiple mut = prime * prime
-
-            while multiple <= limit do
+            for multiple in prime * prime::limit |> step(prime) do
                 composite[multiple] = true
-                multiple = multiple + prime
             od
         fi
-
-        prime = prime + 1
     od
 
-    return (2::limit) |> filter(i => !composite[i]) |> list()
+    return 2::limit |> filter(i => !composite[i])
 si
 
-for prime in sieve(100) do
-    write_line("{prime}")
-od
+write_line("{sieve(100)}")
