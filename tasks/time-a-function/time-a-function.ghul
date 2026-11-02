@@ -1,8 +1,6 @@
 use default
 use System.Diagnostics.Stopwatch
 
-// `LIST[T]` is a mutable list that grows as elements are added
-// `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 
 // Process time rather than wall-clock time, so another program running at
@@ -24,25 +22,7 @@ timed(name: string, work: () -> int) =>
             "{processor,8:F2} ms processor"
         )
 
-count_primes(limit: int) -> int is
-    let sieve = repeat(true, limit) |> LIST()
-    let found mut = 0
-
-    for candidate in 2..limit do
-        if sieve[candidate] then
-            found = found + 1
-
-            let multiple mut = candidate * 2
-
-            while multiple < limit do
-                sieve[multiple] = false
-                multiple = multiple + candidate
-            od
-        fi
-    od
-
-    found
-si
+count_primes(limit: int) -> int => 2..limit |> count(is_prime)
 
 timed("primes below 100000", () => count_primes(100_000))
 timed("primes below 1000000", () => count_primes(1_000_000))

@@ -13,8 +13,7 @@ union Tree[T] is
     NODE(value: T, left: Tree[T], right: Tree[T])
 si
 
-use Tree.EMPTY
-use Tree.NODE
+use Tree.*
 
 preorder[T](tree: Tree[T]) -> T{} is
     if let (value, left, right): NODE = tree then

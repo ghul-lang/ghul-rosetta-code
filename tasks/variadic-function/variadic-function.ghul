@@ -8,34 +8,8 @@ print_all[T](values: T[]) is
     od
 si
 
-class Animal(name: string) abstract is
-    speak() -> string
-
-    to_string() -> string => "{name} says {speak()}"
-si
-
-class CAT(name: string): Animal is
-    super(name)
-
-    speak() -> string => "meow"
-si
-
-class DOG(name: string): Animal is
-    super(name)
-
-    speak() -> string => "woof"
-si
-
-herd(animals: Animal[]) is
-    for animal in animals do
-        write_line("{animal}")
-    od
-si
-
 print_all(["one", 2, 3.5])
 
-herd([CAT("felix"), DOG("rex")])
+let words = ["alpha", "beta", "gamma"]
 
-let animals = [CAT("tom"), DOG("spot")]
-
-herd(animals)
+print_all(words)

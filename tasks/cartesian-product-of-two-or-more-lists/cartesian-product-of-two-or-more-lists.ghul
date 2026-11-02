@@ -3,71 +3,39 @@ use default
 // `T{}` is the lazy sequence trait - elements are read on demand and in
 //  order from its source
 // `T[]` is the read-only list trait - elements can be read by index
-// `LIST[T]` is a mutable list that grows as elements are added
-// `yield` in a function makes it a generator, returning a lazy `T{}`
-//  sequence
+// `ARRAY[T]` is a fixed-size, read-only array
+// `list()` returns a `T[]` over a `T{}` sequence. It is lazy - a read by
+//  index materialises the source only as far as that index and caches what
+//  it read
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
-// `==` compares identity
+// `case ... when` pattern-matches, and `[x, ..rest]` matches a list head
+//  and tail
 
-pairs(left: int[], right: int[]) -> (first: int, second: int){} is
-    for first in left do
-        for second in right do
-            yield (first, second)
-        od
-    od
-si
+product(lists: int[][]) -> int[][] =>
+    case lists
+    when [] then [[]]
+    when [first, ..rest] then
+        [[head] ++ tail |> list() for head in first for tail in product(rest)]
+    esac
 
-tuples(lists: int[][], at: int) -> int[]{} is
-    if at == lists.count then
-        yield LIST()
-    else
-        for head in lists[at] do
-            for tail in tuples(lists, at + 1) do
-                let row = LIST(tail.count + 1)
+braced(values: string{}) -> string => "{{{values |> join(", ")}}}"
 
-                row.add(head)
-
-                for value in tail do
-                    row.add(value)
-                od
-
-                yield row
-            od
-        od
-    fi
-si
-
-show(values: string{}) -> string => "{{{values |> join(", ")}}}"
-
-show_numbers(values: int[]) -> string =>
-    show(values |> map(value => "{value}"))
-
-show_tuple(values: int[]) -> string => "({values |> join(", ")})"
-
-show_binary(left: int[], right: int[]) =>
-    let product =
-        pairs(left, right) |> map(pair => "({pair.first}, {pair.second})")
-    in
-    write_line(
-        "{show_numbers(left)} × {show_numbers(right)} = {show(product)}"
-    )
-
-show_nary(lists: int[][]) =>
+show(lists: int[][]) =>
     let
-        heading = lists |> map(show_numbers) |> join(" × "),
-        product = tuples(lists, 0) |> map(show_tuple)
+        heading = lists |> map(list => braced(list |> map(n => "{n}"))),
+        rows = product(lists) |> map(row => "({row |> join(", ")})")
     in
-        write_line("{heading} = {show(product)}")
+        write_line("{heading |> join(" × ")} = {braced(rows)}")
 
-show_binary([1, 2], [3, 4])
-show_binary([3, 4], [1, 2])
-show_binary([1, 2], [])
-show_binary([], [1, 2])
+let empty = ARRAY[int]([])
+
+show([[1, 2], [3, 4]])
+show([[3, 4], [1, 2]])
+show([[1, 2], empty])
+show([empty, [1, 2]])
 
 write_line("")
 
-let empty = []
-
-show_nary([[1776, 1789], [7, 12], [4, 14, 23], [0, 1]])
-show_nary([[1, 2, 3], [30], [500, 100]])
-show_nary([[1, 2, 3], empty, [500, 100]])
+show([[1776, 1789], [7, 12], [4, 14, 23], [0, 1]])
+show([[1, 2, 3], [30], [500, 100]])
+show([[1, 2, 3], empty, [500, 100]])
