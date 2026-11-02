@@ -1,5 +1,7 @@
 use default
 
+// `LIST[T]` is a mutable list that grows as elements are added
+// `|> LIST()` reads the whole sequence into a new `LIST`
 // `|>` is the thread-first operator - `x |> f(a, b)` means `f(x, a, b)`
 // `==` compares identity
 
@@ -43,7 +45,7 @@ class Drop(noise: Noise) is
 si
 
 let noise = Noise(2025L)
-let drops = 0..width |> map(_ => Drop(noise)) |> collect()
+let drops = 0..width |> map(_ => Drop(noise)) |> LIST()
 let delay = if IO.Std.is_output_redirected then 0 else 70 fi
 let white = "\u001B[97m"
 let green = "\u001B[32m"
