@@ -1,79 +1,43 @@
 use default
 
-use Grid = bool[][]
+let offsets = [
+    (dr, dc)
+    for dr in -1::1
+    for dc in -1::1
+    if dr != 0 \/ dc != 0
+]
 
-live_neighbours(grid: Grid, row: int, column: int) -> int is
-    let count mut = 0
+neighbours((row, column): (int, int)) -> (int, int){} =>
+    offsets |> map(((dr, dc)) => (row + dr, column + dc))
 
-    for dr in -1::1 do
-        for dc in -1::1 do
-            if dr == 0 /\ dc == 0 then
-                continue
-            fi
+survives(live: SET[(int, int)], cell: (int, int)) -> bool =>
+    let alive = neighbours(cell) |> count(live.contains(*)) in
+    alive == 3 \/ (alive == 2 /\ live.contains(cell))
 
-            let r = row + dr
-            let c = column + dc
+// A cell can only be alive next generation if it is next to a live one now.
+step(live: SET[(int, int)]) -> SET[(int, int)] =>
+    live |> flat_map(neighbours) |> filter(survives(live, *)) |> SET()
 
-            if
-                r >= 0 /\
-                r < grid.count /\
-                c >= 0 /\
-                c < grid[0].count /\
-                grid[r][c]
-            then
-                count = count + 1
-            fi
-        od
-    od
-
-    count
-si
-
-step(grid: Grid) -> Grid is
-    alive(row, column) is
-        let neighbours = live_neighbours(grid, row, column)
-
-        if grid[row][column] then
-            neighbours == 2 \/ neighbours == 3
-        else
-            neighbours == 3
-        fi
-    si
-
-    0..grid.count
-        |> map(row => 0..grid[0].count |> map(alive(row, *)) |> list())
-        |> list()
-si
-
-show(generation: int, grid: Grid) is
+show(generation: int, live: SET[(int, int)]) is
     write_line("generation {generation}")
 
-    for row in grid do
-        let cells = row |> map(alive => if alive then "#" else "." fi)
-
-        write_line(cells |> join(""))
+    for row in 0..5 do
+        write_line(
+            0..5
+                |> map(column =>
+                    if live.contains((row, column)) then "#" else "." fi
+                )
+                |> string()
+        )
     od
 
     write_line()
 si
 
-parse(rows: string[]) -> Grid => (
-    let grid = LIST()
-
-    for row in rows do
-        grid.add(row |> map(* == '#') |> list())
-    od
-
-    grid
-)
-
 // A blinker, which oscillates with period two.
-let blinker mut = parse([
-    ".....", ".....", ".###.", ".....", "....."
-])
+let blinker = SET([(2, 1), (2, 2), (2, 3)])
 
-for generation in 0::4 do
-    show(generation, blinker)
-
-    blinker = step(blinker)
-od
+iterate(blinker, step)
+    |> take(5)
+    |> index()
+    |> each(g => show(g.index, g.value))

@@ -2,8 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-use Grid = bool[][]
-
 let columns = 80
 let rows = 60
 let cell = 4
@@ -21,81 +19,57 @@ let gun = [
     "............##......................"
 ]
 
-in_gun(row: int, column: int) -> bool =>
-    row >= 0 /\
-    row < gun.count /\
-    column >= 0 /\
-    column < gun[row].length /\
-    gun[row][column] == '#'
+let offsets = [
+    (dr, dc)
+    for dr in -1::1
+    for dc in -1::1
+    if dr != 0 \/ dc != 0
+]
 
-start() -> Grid =>
-    (0..rows)
-        |> map(row =>
-            (0..columns)
-                |> map(column => in_gun(row - 4, column - 4))
-                |> list()
-        )
-        |> list()
+// The world wraps at its edges.
+neighbours((row, column): (int, int)) -> (int, int){} =>
+    offsets
+        |> map(((dr, dc)) => (
+            (row + dr + rows) % rows,
+            (column + dc + columns) % columns
+        ))
 
-live_neighbours(grid: Grid, row: int, column: int) -> int is
-    let count mut = 0
+survives(live: SET[(int, int)], cell: (int, int)) -> bool =>
+    let alive = neighbours(cell) |> count(live.contains(*)) in
+    alive == 3 \/ (alive == 2 /\ live.contains(cell))
 
-    for dr in -1::1 do
-        for dc in -1::1 do
-            let r = (row + dr + rows) % rows
-            let c = (column + dc + columns) % columns
+// A cell can only be alive next generation if it is next to a live one now.
+step(live: SET[(int, int)]) -> SET[(int, int)] =>
+    live |> flat_map(neighbours) |> filter(survives(live, *)) |> SET()
 
-            if !(dr == 0 /\ dc == 0) /\ grid[r][c] then
-                count = count + 1
-            fi
-        od
-    od
-
-    count
-si
-
-survives(grid: Grid, row: int, column: int) -> bool =>
-    let neighbours = live_neighbours(grid, row, column) in
-    if grid[row][column] then
-        neighbours == 2 \/ neighbours == 3
-    else
-        neighbours == 3
-    fi
-
-step(grid: Grid) -> Grid =>
-    (0..rows)
-        |> map(row => (0..columns) |> map(survives(grid, row, *)) |> list())
-        |> list()
-
-draw(image: IMAGE, grid: Grid) is
+draw(image: IMAGE, live: SET[(int, int)]) is
     image.clear(250ub, 250ub, 247ub)
     image.color(35ub, 70ub, 130ub)
 
-    for row in 0..rows do
-        for column in 0..columns do
-            if grid[row][column] then
-                image.fill_rectangle(
-                    double(column * cell),
-                    double(row * cell),
-                    double(column * cell + cell),
-                    double(row * cell + cell)
-                )
-            fi
-        od
+    for (row, column) in live do
+        image.fill_rectangle(
+            double(column * cell),
+            double(row * cell),
+            double(column * cell + cell),
+            double(row * cell + cell)
+        )
     od
 si
+
+let start = SET([
+    (row + 4, column + 4)
+    for row in 0..gun.count
+    for column in 0..gun[row].length
+    if gun[row][column] == '#'
+])
 
 let image = IMAGE(columns * cell, rows * cell)
 let animation = ANIMATION(columns * cell, rows * cell)
 
-let grid mut = start()
-
-for _ in 0..generations do
-    draw(image, grid)
+for live in iterate(start, step) |> take(generations) do
+    draw(image, live)
 
     animation.add(image, 50)
-
-    grid = step(grid)
 od
 
 animation.write("gun.png")
