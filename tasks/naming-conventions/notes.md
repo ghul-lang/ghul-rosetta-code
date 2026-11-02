@@ -21,7 +21,7 @@ one file with `@suppress`, or for a whole project with `--suppress`. The program
 below declares three names in the wrong case, and the compiler reports one
 warning for each:
 
-- `non-UPPER_SNAKE_CASE class 'Point'`
+- `non-UPPER_SNAKE_CASE enum member 'north'`
 - `non-PascalCase trait 'drawable'`
 - `non-snake_case name 'CountItems'`
 
