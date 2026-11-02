@@ -1,7 +1,5 @@
 use default
 
-use Edge = (from: int, to: int)
-
 let size = 13
 
 let edges = [

@@ -1,7 +1,5 @@
 use default
 
-use Item = (name: string, weight: double, value: double)
-
 let items = [
     (name = "beef", weight = 3.8, value = 36.0),
     (name = "pork", weight = 5.4, value = 43.0),

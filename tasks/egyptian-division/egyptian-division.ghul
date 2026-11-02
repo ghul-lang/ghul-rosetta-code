@@ -1,8 +1,5 @@
 use default
 
-use ROW = (power_of_2: int, doubling: int)
-use SUMS = (answer: int, accumulator: int)
-
 divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
     let table =
         stream(
