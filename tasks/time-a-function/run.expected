@@ -1,2 +1,2 @@
-primes below 100000            9592      5.95 ms elapsed      5.11 ms processor
-primes below 1000000          78498     17.19 ms elapsed     17.22 ms processor
+primes below 1000000          78498     21.83 ms elapsed     19.17 ms processor
+primes below 10000000        664579    364.70 ms elapsed    350.62 ms processor

@@ -24,5 +24,5 @@ timed(name: string, work: () -> int) =>
 
 count_primes(limit: int) -> int => 2..limit |> count(is_prime)
 
-timed("primes below 100000", () => count_primes(100_000))
 timed("primes below 1000000", () => count_primes(1_000_000))
+timed("primes below 10000000", () => count_primes(10_000_000))
