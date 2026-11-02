@@ -1,22 +1,6 @@
 use default
 
-let scratch = IO.Path.combine(
-    IO.Path.get_temp_path(),
-    "rosetta-read-entire-file"
-)
-
-IO.Directory.create_directory(scratch)
-
-let path = IO.Path.combine(scratch, "poem.txt")
-
-IO.File.write_all_lines(path, [
-    "Tyger Tyger, burning bright,",
-    "In the forests of the night;"
-])
-
-let whole = IO.File.read_all_text(path)
+let whole = IO.File.read_all_text("poem.txt")
 
 write_line("{whole.length} characters")
 IO.Std.write(whole)
-
-IO.Directory.delete(scratch, true)

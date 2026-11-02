@@ -1,17 +1,6 @@
 use default
 
-let scratch = IO.Path.combine(
-    IO.Path.get_temp_path(),
-    "rosetta-write-entire-file"
-)
+IO.File.write_all_text("greeting.txt", "hello from ghūl\n")
 
-IO.Directory.create_directory(scratch)
-
-let path = IO.Path.combine(scratch, "greeting.txt")
-
-IO.File.write_all_text(path, "hello from ghūl\n")
-
-write_line("{IO.FileInfo(path).length} bytes written")
-IO.Std.write(IO.File.read_all_text(path))
-
-IO.Directory.delete(scratch, true)
+write_line("{IO.FileInfo("greeting.txt").length} bytes written")
+IO.Std.write(IO.File.read_all_text("greeting.txt"))

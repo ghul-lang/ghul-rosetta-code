@@ -1,15 +1,7 @@
 use default
 use System.Diagnostics
 
-let root = "ls-sample"
-
-IO.Directory.create_directory(root)
-
-for name in ["apple.txt", "banana.txt", "cherry.txt"] do
-    IO.File.write_all_text("{root}/{name}", "")
-od
-
-let info = ProcessStartInfo("ls", root)
+let info = ProcessStartInfo("ls", "ls-sample")
 info.redirect_standard_output = true
 info.use_shell_execute = false
 
@@ -18,5 +10,3 @@ let process = Process.start(info)!
 write_line(process.standard_output.read_to_end().trim())
 
 process.wait_for_exit()
-
-IO.Directory.delete(root, true)

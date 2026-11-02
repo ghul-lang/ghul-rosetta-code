@@ -816,6 +816,17 @@ and a program reading a stream by `run.in`. `needs-network` is narrower still: a
 talking to a service is solved against a stand-in for it, as below, and the reason is left for one
 where the live data or the particular machine is the whole of the answer.
 
+### A task that reads or changes files
+
+A task that reads, writes, renames or deletes files does it in its working directory, by relative
+paths, and the files it starts with go in a `fixture/` directory beside its source. The test runs
+the program in a fresh copy of `fixture/`, so the solution shows only the task: no scratch
+directory, no change of directory and no clean-up. An empty directory is committed holding a
+`.keep` file, and a fixture that starts empty is a `fixture/.keep` alone. List each fixture file in
+`playground-files` (`fixture/input.txt`, `fixture/docs/.keep`) so the playground starts the run
+with the same files. Where the task also asks about the file system root, the solution reports
+what happens there, since a test can't arrange the root.
+
 ### A task that talks to a service
 
 A client for HTTP, HTTPS, SMTP, DNS, FTP, SOAP or a web API is published against the real service,
