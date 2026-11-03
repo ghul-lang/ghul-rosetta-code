@@ -8,7 +8,7 @@ bottles(n: int) -> string =>
     else "{n} bottles"
     esac
 
-sing() is
+sing() -> void is
     for n in 1::99 |> map(100 - *) do
         let some = bottles(n)
 
