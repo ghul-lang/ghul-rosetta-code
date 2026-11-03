@@ -1,13 +1,5 @@
 use default
 
-let scratch = IO.Path.combine(
-    IO.Path.get_temp_path(),
-    "rosetta-create-a-file"
-)
-
-IO.Directory.create_directory(scratch)
-IO.Directory.set_current_directory(scratch)
-
 outcome(create: () -> void) -> string is
     try
         create()
@@ -37,6 +29,3 @@ for where in ["", "/"] do
     discard(() => IO.File.delete(file))
     discard(() => IO.Directory.delete(directory))
 od
-
-IO.Directory.set_current_directory(IO.Path.get_temp_path())
-IO.Directory.delete(scratch, true)

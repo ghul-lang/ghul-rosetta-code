@@ -1,16 +1,5 @@
 use default
 
-let scratch = IO.Path.combine(
-    IO.Path.get_temp_path(),
-    "rosetta-rename-a-file"
-)
-
-IO.Directory.create_directory(scratch)
-IO.Directory.set_current_directory(scratch)
-
-IO.File.write_all_text("input.txt", "")
-IO.Directory.create_directory("docs")
-
 rename_file(from: string, to: string) -> string is
     if !IO.File.exists(from) then
         return "not there"
@@ -47,6 +36,3 @@ for where in ["", "/"] do
         "{rename_directory("{where}docs", "{where}mydocs")}"
     )
 od
-
-IO.Directory.set_current_directory(IO.Path.get_temp_path())
-IO.Directory.delete(scratch, true)
