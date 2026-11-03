@@ -1,12 +1,12 @@
 use default
 
-halve(value) => value / 2
+halve(value: int) -> int => value / 2
 
-double(value) => value * 2
+double(value: int) -> int => value * 2
 
-is_even(value) => value % 2 == 0
+is_even(value: int) -> bool => value % 2 == 0
 
-ethiopian(left, right) =>
+ethiopian(left: int, right: int) -> int =>
     stream(
         (multiplier = left, total = right),
         row =>

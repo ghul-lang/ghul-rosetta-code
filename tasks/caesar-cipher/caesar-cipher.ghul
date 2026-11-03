@@ -1,9 +1,9 @@
 use default
 
-rotate(text, key) =>
+rotate(text: string, key: int) -> string =>
     text |> map(letter => rotate_letter(letter, key)) |> string()
 
-rotate_letter(letter, key) =>
+rotate_letter(letter: char, key: int) -> char =>
     let first =
         if letter >= 'a' /\ letter <= 'z' then int('a')
         elif letter >= 'A' /\ letter <= 'Z' then int('A')
@@ -14,8 +14,8 @@ rotate_letter(letter, key) =>
     else char(first + (int(letter) - first + key) % 26)
     fi
 
-encode(text, key) => rotate(text, key)
-decode(text, key) => rotate(text, 26 - key)
+encode(text: string, key: int) -> string => rotate(text, key)
+decode(text: string, key: int) -> string => rotate(text, 26 - key)
 
 let message = "The Quick Brown Fox Jumps Over The Lazy Dog!"
 let encoded = encode(message, 3)
