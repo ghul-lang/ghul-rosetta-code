@@ -28,7 +28,12 @@ let listener =
         assert any? else "no port could be listened on" in any
     fi
 
-let port = (cast IPEndPoint?(listener.local_endpoint))!.port
+let port =
+    if let endpoint: IPEndPoint = listener.local_endpoint then
+        endpoint.port
+    else
+        throw System.Exception("the listener has no address")
+    fi
 
 let receiving = Thread(() is
     let server = listener.accept_tcp_client()

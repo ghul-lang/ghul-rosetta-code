@@ -1,19 +1,25 @@
 use default
-use IO.Directory
-use IO.File
 
-rename(
-    from: string,
-    to: string,
-    exists: string -> bool,
-    move: (string, string) -> void
-) -> string is
-    if !exists(from) then
+rename_file(from: string, to: string) -> string is
+    if !IO.File.exists(from) then
         return "not there"
     fi
 
     try
-        move(from, to)
+        IO.File.move(from, to)
+        return "renamed"
+    catch e: System.Exception
+        return "refused"
+    yrt
+si
+
+rename_directory(from: string, to: string) -> string is
+    if !IO.Directory.exists(from) then
+        return "not there"
+    fi
+
+    try
+        IO.Directory.move(from, to)
         return "renamed"
     catch e: System.Exception
         return "refused"
@@ -21,15 +27,12 @@ rename(
 si
 
 for where in ["", "/"] do
-    let (file, new_file) = ("{where}input.txt", "{where}output.txt")
-    let (folder, new_folder) = ("{where}docs", "{where}mydocs")
-
     write_line(
-        "{file} -> {new_file}: "
-        "{rename(file, new_file, File.exists, File.move)}"
+        "{where}input.txt -> {where}output.txt: "
+        "{rename_file("{where}input.txt", "{where}output.txt")}"
     )
     write_line(
-        "{folder} -> {new_folder}: "
-        "{rename(folder, new_folder, Directory.exists, Directory.move)}"
+        "{where}docs -> {where}mydocs: "
+        "{rename_directory("{where}docs", "{where}mydocs")}"
     )
 od
