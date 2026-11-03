@@ -1,8 +1,6 @@
 use default
-use System.Net.IPAddress
-use System.Net.IPEndPoint
-use System.Net.Sockets.TcpClient
-use System.Net.Sockets.TcpListener
+use System.Net
+use System.Net.Sockets
 use System.Threading.Thread
 
 listen_on(port: int) -> TcpListener? is
@@ -30,14 +28,7 @@ let listener =
         assert any? else "no port could be listened on" in any
     fi
 
-let bound =
-    if let endpoint: IPEndPoint = listener.local_endpoint then
-        endpoint
-    else
-        throw System.Exception("the listener has no address")
-    fi
-
-let port = bound.port
+let port = (cast IPEndPoint?(listener.local_endpoint))!.port
 
 let receiving = Thread(() is
     let server = listener.accept_tcp_client()

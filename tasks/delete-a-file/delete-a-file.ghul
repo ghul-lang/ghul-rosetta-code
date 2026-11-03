@@ -1,25 +1,16 @@
 use default
 
-delete_file(path: string) -> string is
-    if !IO.File.exists(path) then
+delete(
+    path: string,
+    exists: string -> bool,
+    remove: string -> void
+) -> string is
+    if !exists(path) then
         return "not there"
     fi
 
     try
-        IO.File.delete(path)
-        return "deleted"
-    catch e: System.Exception
-        return "refused"
-    yrt
-si
-
-delete_directory(path: string) -> string is
-    if !IO.Directory.exists(path) then
-        return "not there"
-    fi
-
-    try
-        IO.Directory.delete(path)
+        remove(path)
         return "deleted"
     catch e: System.Exception
         return "refused"
@@ -27,6 +18,12 @@ delete_directory(path: string) -> string is
 si
 
 for where in ["", "/"] do
-    write_line("{where}input.txt: {delete_file("{where}input.txt")}")
-    write_line("{where}docs: {delete_directory("{where}docs")}")
+    let file = "{where}input.txt"
+    let directory = "{where}docs"
+
+    write_line("{file}: {delete(file, IO.File.exists, IO.File.delete)}")
+    write_line(
+        "{directory}: "
+        "{delete(directory, IO.Directory.exists, IO.Directory.delete)}"
+    )
 od
