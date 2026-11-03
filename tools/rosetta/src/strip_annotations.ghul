@@ -105,6 +105,10 @@ namespace Rosetta is
         // An operator's definition keeps its types: only a named function can go without them.
         _is_identifier_start(c: char) -> bool => char.is_letter(c) \/ c == '_'
 
+        // A function with no parameters has only its return type to strip, and without it the
+        // function is an ordinary one returning nothing, so it keeps its signature.
+        _is_parameterless(replacement: string) -> bool => replacement.contains("()")
+
         _quote(text: string) -> string => "'{text.replace("'", "'\\''")}'"
 
         // The offset in `text` of the start of each line.
@@ -160,7 +164,7 @@ namespace Rosetta is
 
                 let original = text.substring(start, end - start)
 
-                if original !~ replacement /\ _is_identifier_start(replacement[0]) then
+                if original !~ replacement /\ _is_identifier_start(replacement[0]) /\ !_is_parameterless(replacement) then
                     let name = replacement.substring(0, replacement.index_of('('))
 
                     result.add(SIGNATURE_SITE(file, name, int.parse(span[0]), start, end, original, replacement))
@@ -297,7 +301,7 @@ namespace Rosetta is
             let key = IO.Path.get_relative_path(IO.Path.combine(root, "tasks"), directory)
 
             for site in outcome.sites do
-                if keep.contains("{key} {site.name}") then
+                if keep.contains("{key} {site.name}") \/ keep.contains("{key} *") then
                     site.held = true
                     site.reason = "kept: readability"
                 fi
@@ -442,13 +446,19 @@ namespace Rosetta is
 
         let stripper = SIGNATURE_STRIPPER(root, compiler)
 
-        if let file = keep_file then
+        let standing = IO.Path.combine(root, "tools", "rosetta", "keep-annotations.txt")
+
+        for file in [standing] ++ (if let k = keep_file then [k] else [] fi) do
+            if !IO.File.exists(file) then
+                continue
+            fi
+
             for line in IO.File.read_all_lines(file) do
                 if line.trim().length > 0 /\ !line.trim_start().starts_with("#") then
                     stripper.keep.add(line.trim())
                 fi
             od
-        fi
+        od
         let outcomes = LIST[STRIP_OUTCOME]()
 
         for part in stripper.parts(names) do
