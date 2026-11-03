@@ -1,8 +1,8 @@
 membership:
-  (0,1] u [0,2)   0: True  1: True  2: False
-  [0,2) n (1,2]   0: False 1: False 2: False
-  [0,3) - (0,1)   0: True  1: True  2: True
-  [0,3) - [0,1]   0: False 1: False 2: True
+  (0,1] u [0,2)   0: true  1: true  2: false
+  [0,2) n (1,2]   0: false 1: false 2: false
+  [0,3) - (0,1)   0: true  1: true  2: true
+  [0,3) - [0,1]   0: false 1: false 2: true
 
 emptiness over [0,2]:
   [1,1] is empty: false

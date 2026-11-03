@@ -58,7 +58,7 @@ write_line("membership:")
 examples
     |> each(example => (
         let answers = [0.0, 1.0, 2.0]
-            |> map(value => "{value:F0}: {example.set(value),-5}")
+            |> map(value => "{value:F0}: {$(example.set(value)),-5}")
             |> join(" ")
 
         write_line("  {example.name}   {answers.trim_end()}")
