@@ -4,8 +4,6 @@ use Raster.IMAGE
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-pt(x: double, y: double) -> (x: double, y: double) => (x = x, y = y)
-
 scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
@@ -25,16 +23,16 @@ scene() -> IMAGE is
 
     image.color(90ub, 60ub, 120ub)
     image.fill([
-        pt(0.0, 80.0),
-        pt(45.0, 30.0),
-        pt(95.0, 80.0)
+        (0.0, 80.0),
+        (45.0, 30.0),
+        (95.0, 80.0)
     ])
 
     image.color(60ub, 110ub, 70ub)
     image.fill([
-        pt(55.0, 80.0),
-        pt(105.0, 48.0),
-        pt(160.0, 80.0)
+        (55.0, 80.0),
+        (105.0, 48.0),
+        (160.0, 80.0)
     ])
 
     image.color(70ub, 150ub, 60ub)
@@ -45,9 +43,9 @@ scene() -> IMAGE is
 
     image.color(120ub, 25ub, 30ub)
     image.fill([
-        pt(18.0, 88.0),
-        pt(37.0, 75.0),
-        pt(56.0, 88.0)
+        (18.0, 88.0),
+        (37.0, 75.0),
+        (56.0, 88.0)
     ])
 
     image.color(250ub, 245ub, 235ub)

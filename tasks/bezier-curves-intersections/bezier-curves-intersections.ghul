@@ -7,14 +7,14 @@ use Hit = (t: double, s: double, at: Point)
 
 let tolerance = 1.0e-9
 
-pt(x: double, y: double) -> Point => (x = x, y = y)
-
-middle(a: Point, b: Point) -> Point =>
-    pt((a.x + b.x) / 2.0, (a.y + b.y) / 2.0)
+middle(a: Point, b: Point) -> Point => (
+    (a.x + b.x) / 2.0,
+    (a.y + b.y) / 2.0
+)
 
 point_at(c: Curve, t: double) -> Point =>
     let u = 1.0 - t in
-    pt(
+    (
         u * u * c.p0.x + 2.0 * u * t * c.p1.x + t * t * c.p2.x,
         u * u * c.p0.y + 2.0 * u * t * c.p1.y + t * t * c.p2.y
     )
@@ -35,8 +35,8 @@ low(a: double, b: double, c: double) -> double => min(a, min(b, c))
 high(a: double, b: double, c: double) -> double => max(a, max(b, c))
 
 box(c: Curve) -> (low: Point, high: Point) => (
-    low = pt(low(c.p0.x, c.p1.x, c.p2.x), low(c.p0.y, c.p1.y, c.p2.y)),
-    high = pt(high(c.p0.x, c.p1.x, c.p2.x), high(c.p0.y, c.p1.y, c.p2.y))
+    low = (low(c.p0.x, c.p1.x, c.p2.x), low(c.p0.y, c.p1.y, c.p2.y)),
+    high = (high(c.p0.x, c.p1.x, c.p2.x), high(c.p0.y, c.p1.y, c.p2.y))
 )
 
 overlap(a: Curve, b: Curve) -> bool =>
@@ -83,8 +83,8 @@ si
 
 whole(p0: Point, p1: Point, p2: Point) -> Curve => (p0, p1, p2, 0.0, 1.0)
 
-let first = whole(pt(-1.0, 0.0), pt(0.0, 10.0), pt(1.0, 0.0))
-let second = whole(pt(2.0, 1.0), pt(-8.0, 2.0), pt(2.0, 3.0))
+let first = whole((-1.0, 0.0), (0.0, 10.0), (1.0, 0.0))
+let second = whole((2.0, 1.0), (-8.0, 2.0), (2.0, 3.0))
 
 let hits = LIST()
 
