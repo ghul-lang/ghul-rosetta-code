@@ -18,6 +18,12 @@ namespace Rosetta is
         // generic, and without them it would build only as the one instance the file uses.
         generic: bool => original.substring(name.length).trim_start().starts_with("[")
 
+        // Held to its types by `--keep`, as a judgement that the types help the reader.
+        held: bool public
+
+        // Whether the signature is never stripped.
+        fixed: bool => generic \/ held
+
         // The diagnostic that kept the types on, or what else did.
         reason: string public
 
@@ -30,6 +36,7 @@ namespace Rosetta is
             self.original = original
             self.replacement = replacement
             stripped = false
+            held = false
             reason = if generic then "kept: generic" else "" fi
         si
     si
@@ -67,10 +74,16 @@ namespace Rosetta is
     // is tried alone without them, round after round until a round changes nothing, because an
     // earlier one coming off can let a later one go too.
     class SIGNATURE_STRIPPER(root: string, compiler: string) is
+        // Functions to leave with their types, each written `<part> <function>`, where the part is
+        // its directory under tasks/, as in `currying/01-written-out repeat_text`.
+        keep: SET[string] public
+
         _error_pattern: string static =>
             "([^\\s/\\\\(]+\\.ghul)\\((\\d+),\\d+,\\d+,\\d+\\): ?error ?: ?(.*?)(?: \\[[^\\]]*\\])?\\s*$"
 
-        init(..) is si
+        init(..) is
+            keep = SET()
+        si
 
         // Runs `command` in the repository root, giving its exit code and what it wrote to standard
         // output.
@@ -261,7 +274,7 @@ namespace Rosetta is
                 let users = errors
                     |> map(error => Regex.match(error.message, "explicit argument type required: \\w+ is used by (\\w+)"))
                     |> filter(found => found.success)
-                    |> flat_map(found => outcome.sites |> filter(other => !other.stripped /\ !other.generic /\ other.name =~ found.groups[1].value))
+                    |> flat_map(found => outcome.sites |> filter(other => !other.stripped /\ !other.fixed /\ other.name =~ found.groups[1].value))
                     |> filter(other => !group.contains(other))
                     |> list()
 
@@ -285,8 +298,17 @@ namespace Rosetta is
                 sites(file) |> each(site => outcome.sites.add(site))
             od
 
-            if !(outcome.sites |> any(site => !site.generic)) then
-                outcome.note = if outcome.sites.count == 0 then "nothing to strip" else "only generic functions" fi
+            let key = IO.Path.get_relative_path(IO.Path.combine(root, "tasks"), directory)
+
+            for site in outcome.sites do
+                if keep.contains("{key} {site.name}") then
+                    site.held = true
+                    site.reason = "kept: readability"
+                fi
+            od
+
+            if !(outcome.sites |> any(site => !site.fixed)) then
+                outcome.note = if outcome.sites.count == 0 then "nothing to strip" else "nothing but kept functions" fi
                 return outcome
             fi
 
@@ -296,7 +318,7 @@ namespace Rosetta is
             fi
 
             for site in outcome.sites do
-                site.stripped = !site.generic
+                site.stripped = !site.fixed
             od
 
             _write(outcome, originals)
@@ -330,7 +352,7 @@ namespace Rosetta is
             while changed do
                 changed = false
 
-                for site in outcome.sites |> filter(site => !site.stripped /\ !site.generic) |> list() do
+                for site in outcome.sites |> filter(site => !site.stripped /\ !site.fixed) |> list() do
                     if site.stripped then
                         continue
                     fi
@@ -433,11 +455,12 @@ namespace Rosetta is
         si
     si
 
-    // `rosetta strip-annotations [--dry-run] [--compiler <command>] [--report <file>] <slug or path> ...`
+    // `rosetta strip-annotations [--dry-run] [--compiler <command>] [--report <file>] [--keep <file>] <slug or path> ...`
     strip_annotations(root: string, arguments: LIST[string]) is
         let dry_run = arguments.contains("--dry-run")
         let compiler mut = "dotnet ghul-compiler"
         let report_file: string? mut = null
+        let keep_file: string? mut = null
         let names = LIST[string]()
         let awaiting mut = ""
 
@@ -448,7 +471,10 @@ namespace Rosetta is
             elif awaiting =~ "--report" then
                 report_file = argument
                 awaiting = ""
-            elif argument =~ "--compiler" \/ argument =~ "--report" then
+            elif awaiting =~ "--keep" then
+                keep_file = argument
+                awaiting = ""
+            elif argument =~ "--compiler" \/ argument =~ "--report" \/ argument =~ "--keep" then
                 awaiting = argument
             elif argument !~ "--dry-run" then
                 names.add(argument)
@@ -456,6 +482,14 @@ namespace Rosetta is
         od
 
         let stripper = SIGNATURE_STRIPPER(root, compiler)
+
+        if let file = keep_file then
+            for line in IO.File.read_all_lines(file) do
+                if line.trim().length > 0 /\ !line.trim_start().starts_with("#") then
+                    stripper.keep.add(line.trim())
+                fi
+            od
+        fi
         let outcomes = LIST[STRIP_OUTCOME]()
 
         for part in stripper.parts(names) do
