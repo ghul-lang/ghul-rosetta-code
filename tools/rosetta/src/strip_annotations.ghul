@@ -1,0 +1,447 @@
+namespace Rosetta is
+    use System.Text.RegularExpressions.Regex
+    use Collections
+    use Ghul.Pipes
+
+    // One function signature in a task's source that the compiler can print without its types.
+    class SIGNATURE_SITE is
+        file: string public
+        name: string public
+        line: int public
+        start: int public
+        end: int public
+        original: string public
+        replacement: string public
+        stripped: bool public
+
+        // A function that declares its own type parameters keeps its types: it is written to be
+        // generic, and without them it would build only as the one instance the file uses.
+        generic: bool => original.substring(name.length).trim_start().starts_with("[")
+
+        // The diagnostic that kept the types on, or what else did.
+        reason: string public
+
+        init(file: string, name: string, line: int, start: int, end: int, original: string, replacement: string) is
+            self.file = file
+            self.name = name
+            self.line = line
+            self.start = start
+            self.end = end
+            self.original = original
+            self.replacement = replacement
+            stripped = false
+            reason = if generic then "kept: generic" else "" fi
+        si
+    si
+
+    // An error the compiler reported, at a line of one of the task's sources.
+    class BUILD_ERROR(file: string public, line: int public, message: string public) is si
+
+    // What became of one task part.
+    class STRIP_OUTCOME(part: string public) is
+        sites: LIST[SIGNATURE_SITE] public
+        builds: int public
+        note: string public
+
+        init(..) is
+            sites = LIST()
+            builds = 0
+            note = ""
+        si
+
+        before: int => sites |> count()
+        after: int => sites |> count(site => !site.stripped)
+    si
+
+    // Takes the types out of the signatures of a task's file-local functions wherever the task still
+    // builds and its test still passes, a signature at a time where it has to.
+    //
+    // Every signature the compiler can print without its types is stripped at once, then the task is
+    // built and tested. Each error names either a function that has to keep its types because a
+    // function that keeps them calls it, or a line inside one whose types it needed, and those
+    // functions get their types back until the task passes. Then each function that kept its types
+    // is tried alone without them, round after round until a round changes nothing, because an
+    // earlier one coming off can let a later one go too.
+    class SIGNATURE_STRIPPER(root: string, compiler: string) is
+        _error_pattern: string static =>
+            "([^\\s/\\\\(]+\\.ghul)\\((\\d+),\\d+,\\d+,\\d+\\): ?error ?: ?(.*?)(?: \\[[^\\]]*\\])?\\s*$"
+
+        init(..) is si
+
+        // Runs `command` in the repository root, giving its exit code and what it wrote to standard
+        // output.
+        _run(command: string) -> (code: int, output: string) is
+            let info = System.Diagnostics.ProcessStartInfo("bash")
+
+            info.argument_list.add("-c")
+            info.argument_list.add(command)
+            info.working_directory = root
+            info.use_shell_execute = false
+            info.redirect_standard_output = true
+            info.redirect_standard_error = true
+
+            let process = System.Diagnostics.Process.start(info)!
+            let output = process.standard_output.read_to_end()
+
+            process.standard_error.read_to_end()
+            process.wait_for_exit()
+
+            (code = process.exit_code, output = output)
+        si
+
+        // An operator's definition keeps its types: only a named function can go without them.
+        _is_identifier_start(c: char) -> bool => char.is_letter(c) \/ c == '_'
+
+        _quote(text: string) -> string => "'{text.replace("'", "'\\''")}'"
+
+        // The offset in `text` of the start of each line.
+        _line_starts(text: string) -> LIST[int] is
+            let starts = LIST([0])
+
+            for i in 0..text.length do
+                if text[i] == '\n' then
+                    starts.add(i + 1)
+                fi
+            od
+
+            starts
+        si
+
+        _offset(starts: LIST[int], position: string) -> int is
+            let parts = position.split([','])
+
+            starts[int.parse(parts[0]) - 1] + int.parse(parts[1]) - 1
+        si
+
+        // The signatures in `file` that read differently without their types, from the compiler's
+        // listing. A span that ends at a parameter is taken on to the `)` that closes the list.
+        sites(file: string) -> LIST[SIGNATURE_SITE] is
+            let text = IO.File.read_all_text(file)
+            let starts = _line_starts(text)
+            let listing = _run("{compiler} --strip-annotations signature:list {_quote(file)}")
+            let result = LIST[SIGNATURE_SITE]()
+
+            for row in listing.output.split(['\n']) do
+                let fields = row.trim_end().split([' '], 6)
+
+                if fields.count < 6 \/ fields[1] !~ "signature" then
+                    continue
+                fi
+
+                let span = fields[4].split([','])
+                let start = _offset(starts, "{span[0]},{span[1]}")
+                let end mut = _offset(starts, "{span[2]},{span[3]}") + 1
+                let replacement = fields[5]
+
+                if replacement.ends_with(")") /\ text[end - 1] != ')' then
+                    let close mut = end
+
+                    while close < text.length /\ (char.is_white_space(text[close]) \/ text[close] == ',') do
+                        close = close + 1
+                    od
+
+                    if close < text.length /\ text[close] == ')' then
+                        end = close + 1
+                    fi
+                fi
+
+                let original = text.substring(start, end - start)
+
+                if original !~ replacement /\ _is_identifier_start(replacement[0]) then
+                    let name = replacement.substring(0, replacement.index_of('('))
+
+                    result.add(SIGNATURE_SITE(file, name, int.parse(span[0]), start, end, original, replacement))
+                fi
+            od
+
+            result
+        si
+
+        // Writes each of the part's sources with its stripped signatures replaced.
+        _write(outcome: STRIP_OUTCOME, originals: MAP[string, string]) is
+            for (file, text) in originals do
+                let builder = Text.STRING_BUILDER()
+                let at mut = 0
+
+                for site in outcome.sites |> filter(site => site.file =~ file) |> sort((a, b) => a.start - b.start) do
+                    builder.append(text.substring(at, site.start - at))
+                    builder.append(if site.stripped then site.replacement else site.original fi)
+                    at = site.end
+                od
+
+                builder.append(text.substring(at))
+                IO.File.write_all_text(file, builder.to_string())
+            od
+        si
+
+        // Builds and tests the part, giving the errors its build reported, or none when it passed.
+        // A part that built but whose test failed gives one error with no file, for the output.
+        _test(outcome: STRIP_OUTCOME, directory: string) -> LIST[BUILD_ERROR]? is
+            outcome.builds = outcome.builds + 1
+
+            let compiler_output = IO.Path.combine(directory, "compiler.out")
+
+            if IO.File.exists(compiler_output) then
+                IO.File.delete(compiler_output)
+            fi
+
+            if _run("dotnet ghul-test {_quote(directory)}").code == 0 then
+                return null
+            fi
+
+            let errors = LIST[BUILD_ERROR]()
+
+            if IO.File.exists(compiler_output) then
+                let matches = Regex.matches(IO.File.read_all_text(compiler_output), _error_pattern, System.Text.RegularExpressions.RegexOptions.MULTILINE)
+
+                for i in 0..matches.count do
+                    let found = matches[i]
+
+                    errors.add(BUILD_ERROR(found.groups[1].value, int.parse(found.groups[2].value), found.groups[3].value))
+                od
+            fi
+
+            if errors.count == 0 then
+                errors.add(BUILD_ERROR("", 0, "the test's output changed"))
+            fi
+
+            errors
+        si
+
+        // The stripped functions an error says must keep their types: the one it names as used by a
+        // function that keeps them, or else the one whose signature comes last above the error.
+        _blamed(outcome: STRIP_OUTCOME, error: BUILD_ERROR) -> LIST[SIGNATURE_SITE] is
+            let stripped = outcome.sites |> filter(site => site.stripped) |> list()
+            let used = Regex.match(error.message, "explicit argument type required: (\\w+) (?:is used by|and) ")
+
+            if used.success then
+                return LIST(stripped |> filter(site => site.name =~ used.groups[1].value))
+            fi
+
+            let enclosing = stripped
+                |> filter(site => IO.Path.get_file_name(site.file) =~ error.file /\ site.line <= error.line)
+                |> max_by(site => site.line)
+
+            if let site = enclosing then LIST([site]) else LIST[SIGNATURE_SITE]() fi
+        si
+
+        // Tries `site` without its types, and keeps it that way if the part passes. Where the failure
+        // is only that a function that keeps its types uses it, the two are tried together, and so
+        // on while each try names another: two functions that call each other come off as a pair.
+        _try(outcome: STRIP_OUTCOME, originals: MAP[string, string], directory: string, site: SIGNATURE_SITE) -> bool is
+            let group = LIST([site])
+
+            while true do
+                for member in group do
+                    member.stripped = true
+                od
+
+                _write(outcome, originals)
+
+                let errors = _test(outcome, directory)
+
+                if !errors? then
+                    for member in group do
+                        member.reason = ""
+                    od
+
+                    return true
+                fi
+
+                for member in group do
+                    member.stripped = false
+                od
+
+                _write(outcome, originals)
+
+                let users = errors
+                    |> map(error => Regex.match(error.message, "explicit argument type required: \\w+ is used by (\\w+)"))
+                    |> filter(found => found.success)
+                    |> flat_map(found => outcome.sites |> filter(other => !other.stripped /\ !other.generic /\ other.name =~ found.groups[1].value))
+                    |> filter(other => !group.contains(other))
+                    |> list()
+
+                if users.count == 0 then
+                    site.reason = (errors |> find(error => !error.message.contains(" is used by ")) ?? errors[0]).message
+                    return false
+                fi
+
+                users |> each(other => group.add(other))
+            od
+
+            false
+        si
+
+        strip(directory: string) -> STRIP_OUTCOME is
+            let outcome = STRIP_OUTCOME(IO.Path.get_relative_path(root, directory))
+            let originals = MAP[string, string]()
+
+            for file in IO.Directory.get_files(directory, "*.ghul") do
+                originals[file] = IO.File.read_all_text(file)
+                sites(file) |> each(site => outcome.sites.add(site))
+            od
+
+            if !(outcome.sites |> any(site => !site.generic)) then
+                outcome.note = if outcome.sites.count == 0 then "nothing to strip" else "only generic functions" fi
+                return outcome
+            fi
+
+            if let failing = _test(outcome, directory) then
+                outcome.note = "fails before stripping: {failing[0].message}"
+                return outcome
+            fi
+
+            for site in outcome.sites do
+                site.stripped = !site.generic
+            od
+
+            _write(outcome, originals)
+
+            while let errors = _test(outcome, directory) do
+                let blamed = errors |> flat_map(error => _blamed(outcome, error) |> map(site => (site, error.message))) |> list()
+
+                if blamed.count == 0 then
+                    for site in outcome.sites do
+                        site.stripped = false
+                        site.reason = "no error named a function: {errors[0].message}"
+                    od
+
+                    _write(outcome, originals)
+                    break
+                fi
+
+                for (site, message) in blamed do
+                    site.stripped = false
+
+                    if site.reason.length == 0 then
+                        site.reason = message
+                    fi
+                od
+
+                _write(outcome, originals)
+            od
+
+            let changed mut = true
+
+            while changed do
+                changed = false
+
+                for site in outcome.sites |> filter(site => !site.stripped /\ !site.generic) |> list() do
+                    if site.stripped then
+                        continue
+                    fi
+
+                    if _try(outcome, originals, directory, site) then
+                        changed = true
+                    fi
+                od
+            od
+
+            outcome
+        si
+
+        // The task parts under each slug or path: a directory with a project of its own, or each
+        // such directory directly under it, leaving out the target-specific copies.
+        parts(names: Iterable[string]) -> LIST[string] is
+            let result = LIST[string]()
+
+            for name in names do
+                let directory =
+                    if IO.Directory.exists(name) then IO.Path.get_full_path(name)
+                    else IO.Path.combine(root, "tasks", name) fi
+
+                if IO.Directory.get_files(directory, "*.ghulproj").count > 0 then
+                    result.add(directory)
+                else
+                    for part in IO.Directory.get_directories(directory) |> sort((a, b) => string.compare_ordinal(a, b)) do
+                        if !IO.Path.get_file_name(part)!.starts_with(".") /\ IO.Directory.get_files(part, "*.ghulproj").count > 0 then
+                            result.add(part)
+                        fi
+                    od
+                fi
+            od
+
+            result
+        si
+
+        // The report on what each part kept, as Markdown.
+        report(outcomes: Iterable[STRIP_OUTCOME]) -> string is
+            let builder = Text.STRING_BUILDER()
+            let all = outcomes |> list()
+
+            builder.append_line("| part | signatures before | after | builds | note |")
+            builder.append_line("|---|---|---|---|---|")
+
+            for outcome in all do
+                builder.append_line("| {outcome.part} | {outcome.before} | {outcome.after} | {outcome.builds} | {outcome.note} |")
+            od
+
+            builder.append_line()
+            builder.append_line("Total: {all |> map(o => o.before) |> sum()} signatures, {all |> map(o => o.after) |> sum()} keep their types.")
+
+            for outcome in all |> filter(o => o.after > 0 /\ o.note.length == 0) do
+                builder.append_line()
+                builder.append_line("{outcome.part}:")
+
+                for site in outcome.sites |> filter(site => !site.stripped) do
+                    builder.append_line("- `{site.name}` ({IO.Path.get_file_name(site.file)}:{site.line}): {site.reason}")
+                od
+            od
+
+            builder.to_string()
+        si
+    si
+
+    // `rosetta strip-annotations [--dry-run] [--compiler <command>] [--report <file>] <slug or path> ...`
+    strip_annotations(root: string, arguments: LIST[string]) is
+        let dry_run = arguments.contains("--dry-run")
+        let compiler mut = "dotnet ghul-compiler"
+        let report_file: string? mut = null
+        let names = LIST[string]()
+        let awaiting mut = ""
+
+        for argument in arguments do
+            if awaiting =~ "--compiler" then
+                compiler = argument
+                awaiting = ""
+            elif awaiting =~ "--report" then
+                report_file = argument
+                awaiting = ""
+            elif argument =~ "--compiler" \/ argument =~ "--report" then
+                awaiting = argument
+            elif argument !~ "--dry-run" then
+                names.add(argument)
+            fi
+        od
+
+        let stripper = SIGNATURE_STRIPPER(root, compiler)
+        let outcomes = LIST[STRIP_OUTCOME]()
+
+        for part in stripper.parts(names) do
+            let originals = MAP[string, string]()
+
+            for file in IO.Directory.get_files(part, "*.ghul") do
+                originals[file] = IO.File.read_all_text(file)
+            od
+
+            let outcome = stripper.strip(part)
+
+            IO.Std.error.write_line("{outcome.part}: {outcome.before} -> {outcome.after} in {outcome.builds} builds {outcome.note}")
+            outcomes.add(outcome)
+
+            if dry_run then
+                for (file, text) in originals do
+                    IO.File.write_all_text(file, text)
+                od
+            fi
+        od
+
+        let text = stripper.report(outcomes)
+
+        if let file = report_file then
+            IO.File.write_all_text(file, text)
+        else
+            IO.Std.out.write(text)
+        fi
+    si
+si

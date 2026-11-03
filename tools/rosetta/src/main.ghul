@@ -27,12 +27,15 @@ use Rosetta
 //                                    --commit names the commit the task files are fetched at
 //   rosetta edit-page <title> <file> <summary> [--dry-run]
 //                                    replace a page that is not a task's, such as a template
+//   rosetta strip-annotations [--dry-run] [--compiler <command>] [--report <file>] <slug or path> ...
+//                                    take the types out of file-local function signatures where
+//                                    each task part still builds and passes its test
 //
 // Publishing reads the markup scripts/generate-wiki.sh leaves in wiki-out/, so generate first.
 
 usage() is
     error.write_line(
-        "usage: rosetta <sync|candidates|show|set|reopen|check|diff|self-test|publish|adopt|render-notes|index|edit-page> "
+        "usage: rosetta <sync|candidates|show|set|reopen|check|diff|self-test|publish|adopt|render-notes|index|edit-page|strip-annotations> "
         "[arguments]"
     )
 si
@@ -1414,6 +1417,8 @@ else
         else
             edit_page(arguments[0], arguments[1], arguments[2], dry_run)
         fi
+    when "strip-annotations" then
+        strip_annotations(root, arguments)
     when "diff" then
         diff(root, arguments |> filter(argument => argument !~ "--all") |> collect_mutable())
     when "check" then
