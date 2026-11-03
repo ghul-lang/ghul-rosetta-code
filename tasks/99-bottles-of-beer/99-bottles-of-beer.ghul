@@ -1,13 +1,13 @@
 use default
 
-bottles(n: int) -> string =>
+bottles(n) =>
     case n
     when 0 then "no more bottles"
     when 1 then "1 bottle"
     else "{n} bottles"
     esac
 
-verse(n: int) -> string =>
+verse(n) =>
     "{bottles(n)} of beer on the wall, {bottles(n)} of beer.\n"
     "Take one down and pass it around, "
     "{bottles(n - 1)} of beer on the wall.\n"

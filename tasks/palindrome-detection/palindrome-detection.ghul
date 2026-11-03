@@ -3,7 +3,7 @@ use default
 reverse(text: string) -> string =>
     text |> graphemes() |> reverse() |> string()
 
-is_palindrome(text: string) -> bool => text =~ reverse(text)
+is_palindrome(text) => text =~ reverse(text)
 
 is_inexact_palindrome(text: string) -> bool =>
     text
