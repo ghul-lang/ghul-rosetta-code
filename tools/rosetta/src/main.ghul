@@ -771,6 +771,18 @@ self_test() is
     let notes = (source: string) => NOTATION.scan(source) |> join("\n")
 
     check_that(
+        "an =~ or !~ gets the structural equality note",
+        notes("if a =~ b then x fi").contains("`=~` compares values") /\
+        notes("if a !~ b then x fi").contains("`=~` compares values")
+    )
+
+    check_that(
+        "an == or a != alone gets no equality note",
+        !notes("if a == b then x fi").contains("compares") /\
+        !notes("if a != b then x fi").contains("compares")
+    )
+
+    check_that(
         "a stream gets its note",
         notes("let fibs = stream((0, 1), ((a, b)) => a || (b, a + b))").contains("`stream(seed, step)`")
     )

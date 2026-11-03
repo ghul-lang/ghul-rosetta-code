@@ -69,22 +69,8 @@ namespace Rosetta is
             fixed(null, ["[(,]\\s*\\*(?:\\s*[,)]|\\s+[-+*/%<>=!&|~]|\\s*\\.\\w)"],
                 "`*` as an argument is partial application - `f(*, b)` means `a => f(a, b)`")
 
-            add(
-                null,
-                ["=~|!~", "==|!="],
-                hit => (
-                    let parts = LIST[string]()
-
-                    if hit[0] then
-                        parts.add("`=~` compares values (structural equality)")
-                    fi
-
-                    if hit[1] then
-                        parts.add("`==` compares identity")
-                    fi
-
-                    if parts.count > 0 then parts |> join(" - ") else null fi
-                ))
+            fixed(null, ["=~|!~"],
+                "`=~` compares values (structural equality)")
 
             add(
                 null,

@@ -23,5 +23,9 @@
          nothing about the task, so it is off everywhere here. -->
     <GhulOptions Include="--suppress impure-function-argument" />
 
+    <!-- A solution is one file, so a function being private to its file
+         tells the reader nothing. -->
+    <GhulOptions Include="--suppress file-private-function" />
+
   </ItemGroup>
 </Project>
