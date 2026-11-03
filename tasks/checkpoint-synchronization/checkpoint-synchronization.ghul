@@ -10,7 +10,7 @@ let finished = LIST[string]()
 
 let arrived mut = 0
 
-release_others() is
+release_others() -> void is
     for _ in 1..names.count do
         gate.release()
     od

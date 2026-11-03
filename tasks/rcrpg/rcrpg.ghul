@@ -59,7 +59,7 @@ let equipped mut = null
 
 room() -> ROOM => rooms[here]
 
-describe() is
+describe() -> void is
     let current = room()
     let (x, y, z) = here
     let called = if let name = current.name then " ({name})" else "" fi

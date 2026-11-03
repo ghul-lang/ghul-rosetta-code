@@ -9,14 +9,14 @@ let diagonal = step * sqrt(2.0)
 let image = IMAGE(540, 540)
 let pen = TURTLE(image)
 
-bend() is
+bend() -> void is
     pen.forward(step)
     pen.turn(45.0)
     pen.forward(diagonal)
     pen.turn(45.0)
 si
 
-fold() is
+fold() -> void is
     pen.forward(step)
     pen.turn(-90.0)
     pen.forward(step)
