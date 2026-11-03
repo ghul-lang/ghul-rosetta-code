@@ -19,20 +19,6 @@ if2(
     fi
 si
 
-unless(condition: bool, body: () -> void) is
-    if !condition then
-        body()
-    fi
-si
-
-repeat_until(body: () -> bool) is
-    do
-        if body() then
-            break
-        fi
-    od
-si
-
 for
     pair in [
         (true, true),
@@ -50,16 +36,3 @@ do
         () => write_line("{pair}: neither")
     )
 od
-
-unless(false, () => write_line("unless false, this runs"))
-unless(true, () => write_line("this does not"))
-
-let n mut = 0
-
-repeat_until(() => (
-    n = n + 1
-
-    write_line("pass {n}")
-
-    n == 3
-))

@@ -1,26 +1,9 @@
 use default
 
-bell_triangle() -> bigint[]{} is
-    let row mut = LIST()
+next_row(row: bigint[]) -> bigint[] =>
+    row |> scan(row[row.count - 1], (total, n) => total + n) |> list()
 
-    row.add(1n)
-
-    while true do
-        yield row
-
-        let next = LIST()
-
-        next.add(row[row.count - 1])
-
-        for j in 0..row.count do
-            next.add(next[j] + row[j])
-        od
-
-        row = next
-    od
-si
-
-let rows = bell_triangle() |> take(50) |> list()
+let rows = iterate([1n], next_row) |> take(50) |> list()
 
 write_line("first fifteen and fiftieth Bell numbers:")
 
