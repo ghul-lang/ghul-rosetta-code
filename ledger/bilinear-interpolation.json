@@ -2,7 +2,7 @@
   "title": "Bilinear interpolation",
   "slug": "bilinear-interpolation",
   "state": "published",
-  "published_hash": "9b3b7d0202f862b0a96b2de8e3f34d651058d0573d62eb8a7fd34d8ebbdc5fa2",
+  "published_hash": "d5f43dd586d6c87530de26771b651cfc69345f0f7b0fd0a9cba38b60d217a7c9",
   "image_hashes": {
     "Ghul-bilinear-interpolation-scene.png": "701edb8c917ff73a349373bd3afb95a5e5a2c60a",
     "Ghul-bilinear-interpolation-larger.png": "8d48f29d2af218a075e7944a9350d7a827f0f78c"
