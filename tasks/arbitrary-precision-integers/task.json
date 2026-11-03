@@ -2,7 +2,7 @@
     "task": "Arbitrary-precision integers (included)",
     "url": "https://rosettacode.org/wiki/Arbitrary-precision_integers_(included)",
     "status": "published",
-    "tags": ["number-theory", "generics", "dotnet-interop"],
+    "tags": ["number-theory"],
     "interest": 3,
     "first_output_ms": 1610,
     "run_ms": 1658,
