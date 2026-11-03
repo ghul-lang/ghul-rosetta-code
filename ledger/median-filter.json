@@ -2,7 +2,7 @@
   "title": "Median filter",
   "slug": "median-filter",
   "state": "published",
-  "published_hash": "5fa7d12d6575847d8d53c4cf89f1240b2a3e728a3262d2530420f36f432e8aec",
+  "published_hash": "9330df629c06883af1d40a78addb355d16f95e17d4ecc69f313dee7a98c2f712",
   "image_hashes": {
     "Ghul-median-filter-noisy.png": "f1236ae745ddfc6eb628f27a876756a00b5ad4bd",
     "Ghul-median-filter-cleaned.png": "663b18355ac696c16092d43457674fb58f873771"
