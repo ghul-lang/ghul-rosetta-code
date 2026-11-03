@@ -23,11 +23,5 @@
          nothing about the task, so it is off everywhere here. -->
     <GhulOptions Include="--suppress impure-function-argument" />
 
-    <!-- A function written with no types among a file's top-level
-         statements is private to the file, and the compiler warns when its
-         name doesn't start with _. Every solution is one file, so the
-         warning says nothing a reader needs, and the helpers keep their
-         plain names. -->
-    <GhulOptions Include="--warn-as-hint file-private-function" />
   </ItemGroup>
 </Project>
