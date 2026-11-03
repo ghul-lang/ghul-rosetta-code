@@ -2,7 +2,3 @@
 (true, false): the first only
 (false, true): the second only
 (false, false): neither
-unless false, this runs
-pass 1
-pass 2
-pass 3

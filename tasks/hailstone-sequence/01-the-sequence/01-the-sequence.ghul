@@ -1,23 +1,9 @@
 use default
 
-hailstone(n: int) -> int{} is
-    let current mut = n
+step(c: int) -> int pure => if c % 2 == 0 then c / 2 else 3 * c + 1 fi
 
-    while true do
-        yield current
-
-        if current == 1 then
-            return
-        fi
-
-        current =
-            if current % 2 == 0 then
-                current / 2
-            else
-                3 * current + 1
-            fi
-    od
-si
+hailstone(n: int) -> int{} =>
+    (iterate(n, step) |> take_while(c => c != 1)) ++ [1]
 
 let sequence = hailstone(27) |> list()
 write_line("length of hailstone(27): {sequence.count}")
