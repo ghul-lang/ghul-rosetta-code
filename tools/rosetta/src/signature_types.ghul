@@ -1,0 +1,182 @@
+namespace Rosetta is
+    use Collections
+    use Ghul.Pipes
+
+    // Reads the types a function's signature writes, to tell a signature a reader can take in
+    // at a glance from one they would have to work out. Only a plain scalar, a string, a named
+    // type, or a tuple of those, is plain. A sequence, list, array or map, an optional, a
+    // function type or a reference parameter is constructed, and so is an alias that names one.
+    class SIGNATURE_TYPES is
+        _aliases: MAP[string, string]
+
+        // `source` is the text of the file the signatures are in, for the aliases it declares
+        // with `use Name = Type`.
+        init(source: string) is
+            _aliases = MAP()
+
+            for line in source.split(['\n']) do
+                let text = line.trim()
+
+                if text.starts_with("use ") /\ text.contains("=") then
+                    let at = text.index_of('=')
+                    let name = text.substring(4, at - 4).trim()
+                    let target = text.substring(at + 1).trim()
+
+                    if name.length > 0 /\ !_aliases.contains_key(name) then
+                        _aliases[name] = target
+                    fi
+                fi
+            od
+        si
+
+        // Whether every type `signature` writes, for its parameters and its result, is plain.
+        // `signature` runs from the function's name to the end of its return type.
+        is_plain(signature: string) -> bool =>
+            types(signature) |> all(type => _is_plain_type(type, 0))
+
+        // The types a signature writes, one per typed parameter, then the return type if it
+        // has one.
+        types(signature: string) -> LIST[string] is
+            let result = LIST[string]()
+            let open = _first_top_level(signature, '(')
+
+            if open < 0 then
+                return result
+            fi
+
+            let close = _matching(signature, open)
+
+            if close < 0 then
+                return result
+            fi
+
+            for parameter in _split_top_level(signature.substring(open + 1, close - open - 1)) do
+                let colon = _first_top_level(parameter, ':')
+
+                if colon >= 0 then
+                    result.add(parameter.substring(colon + 1).trim())
+                fi
+            od
+
+            let rest = signature.substring(close + 1).trim()
+
+            if rest.starts_with("->") then
+                let words = LIST(rest.substring(2).trim().split([' ']))
+
+                while words.count > 1 /\ (words[words.count - 1] =~ "memo" \/ words[words.count - 1] =~ "pure") do
+                    words.remove_at(words.count - 1)
+                od
+
+                result.add(words |> join(" "))
+            fi
+
+            result
+        si
+
+        _is_plain_type(type: string, depth: int) -> bool is
+            let text = type.trim()
+
+            if depth > 8 then
+                return false
+            fi
+
+            if text.starts_with("(") /\ _matching(text, 0) == text.length - 1 then
+                for element in _split_top_level(text.substring(1, text.length - 2)) do
+                    let colon = _first_top_level(element, ':')
+                    let element_type = if colon >= 0 then element.substring(colon + 1) else element fi
+
+                    if !_is_plain_type(element_type, depth + 1) then
+                        return false
+                    fi
+                od
+
+                return true
+            fi
+
+            for c in text do
+                if !(char.is_letter_or_digit(c) \/ c == '_' \/ c == '.') then
+                    return false
+                fi
+            od
+
+            if text.length == 0 then
+                return false
+            fi
+
+            if _aliases.contains_key(text) then
+                return _is_plain_type(_aliases[text], depth + 1)
+            fi
+
+            true
+        si
+
+        // The index of the first `wanted` outside any brackets, or -1.
+        _first_top_level(text: string, wanted: char) -> int is
+            let depth mut = 0
+
+            for i in 0..text.length do
+                let c = text[i]
+
+                if c == wanted /\ depth == 0 then
+                    return i
+                fi
+
+                if c == '(' \/ c == '[' \/ c == '{' then
+                    depth = depth + 1
+                elif c == ')' \/ c == ']' \/ c == '}' then
+                    depth = depth - 1
+                fi
+            od
+
+            -1
+        si
+
+        // The index of the bracket that closes the one at `open`, or -1.
+        _matching(text: string, open: int) -> int is
+            let depth mut = 0
+
+            for i in open..text.length do
+                let c = text[i]
+
+                if c == '(' \/ c == '[' \/ c == '{' then
+                    depth = depth + 1
+                elif c == ')' \/ c == ']' \/ c == '}' then
+                    depth = depth - 1
+
+                    if depth == 0 then
+                        return i
+                    fi
+                fi
+            od
+
+            -1
+        si
+
+        _split_top_level(text: string) -> LIST[string] is
+            let parts = LIST[string]()
+            let depth mut = 0
+            let start mut = 0
+
+            for i in 0..text.length do
+                let c = text[i]
+
+                if c == '(' \/ c == '[' \/ c == '{' then
+                    depth = depth + 1
+                elif c == ')' \/ c == ']' \/ c == '}' then
+                    depth = depth - 1
+                elif c == ',' /\ depth == 0 then
+                    parts.add(text.substring(start, i - start).trim())
+                    start = i + 1
+                fi
+            od
+
+            let last = text.substring(start).trim()
+
+            if last.length > 0 then
+                parts.add(last)
+            fi
+
+            parts
+        si
+    si
+si

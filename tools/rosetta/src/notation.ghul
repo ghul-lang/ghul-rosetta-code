@@ -171,5 +171,18 @@ namespace Rosetta is
 
             notes
         si
+
+        // A function definition whose parameters are bare names, with no type
+        // and no return type written: `step(n) => ...`, `walk(row, column) is`.
+        _unwritten_signature: Regex static =>
+            Regex("^\\s*[A-Za-z_][A-Za-z0-9_]*\\(\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\s*,\\s*[A-Za-z_][A-Za-z0-9_]*)*\\s*\\)(?:\\s+(?:memo|pure))*\\s*(?:=>|is\\b)")
+
+        // Whether a source has a function signature that leaves a parameter's
+        // type, or its return type, for the compiler to infer. A whole-line
+        // comment is not code, as for the notes.
+        has_inferred_signature(source: string) -> bool static =>
+            Regex.split(source, "\n")
+                |> filter(line => !Regex.is_match(line, "^\\s*//"))
+                |> any(line => _unwritten_signature.is_match(line))
     si
 si

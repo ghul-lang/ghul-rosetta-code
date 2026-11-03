@@ -408,13 +408,25 @@ comes from, the language page - from a file, using the same credential. Those pa
 in `wiki-pages/`, so a change to one is reviewed like any other before it is posted. It leaves a
 page that already holds the text alone, and `--dry-run` shows the page before and after.
 
-`strip-annotations` takes the types out of the signatures of a task's functions wherever the
-task still builds and its test still passes. A function in a file with top-level statements can
-be written with no types at all, and its argument and return types then come from its uses. The
-command strips every signature the compiler can print without its types, builds and tests the
-task, and gives back their types to the functions the errors name. Then it tries each of those
-again on its own, until a round changes nothing. A function that declares its own type
-parameters keeps them, because it is generic on purpose. The command takes slugs or part
+`strip-annotations` proposes the signatures of a task's functions that could go without their
+types. A function in a file with top-level statements can be written with no types at all, and
+its argument and return types then come from its uses. Which ones should is a judgement, made
+against the checklist's guidelines. The command only narrows the field and keeps every task
+passing:
+
+- It considers only signatures whose types are all plain: scalars, strings, named types, and
+  tuples of those. A sequence, list, array, map, optional or function type keeps its signature,
+  as does an alias for one.
+- It never considers a function that declares its own type parameters, which is generic on
+  purpose, or one with no parameters.
+- It never considers a function listed in `tools/rosetta/keep-annotations.txt`, or in a file
+  passed with `--keep <file>`. Each line is `<part> <function>`, or `<part> *` for the whole
+  part.
+- It strips the remaining candidates, builds and tests the task, and gives their types back to
+  the functions the errors name. Then it tries each of those again on its own, until a round
+  changes nothing.
+
+Nothing moves: each signature is edited where it is. The command takes slugs or part
 directories, rewrites the sources it changes (`--dry-run` puts them back), and writes a report of
 what each part kept and why, to standard output or to `--report <file>`. It commits nothing.
 

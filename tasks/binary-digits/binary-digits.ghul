@@ -1,6 +1,6 @@
 use default
 
-binary(value: int) -> string =>
+binary(value) =>
     if value < 2 then
         "{value}"
     else

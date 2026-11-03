@@ -202,6 +202,11 @@ it does not need is as bad as one that reaches for none of them; the point is
 that where ghūl has its own way of saying something, the entry should say it
 that way.
 
+## Keep a generic solution generic
+
+Keep a generic solution generic: where a solution declares a generic type or function, keep its
+type parameters and the signatures that carry them, even where every use is at one type.
+
 ## Write a type once
 
 The compiler infers a local variable's type from its initializer and from how the variable is

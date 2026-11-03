@@ -10,7 +10,7 @@
       "rollForward": false
     },
     "ghul.compiler": {
-      "version": "70.0.0",
+      "version": "70.1.1",
       "commands": [
         "ghul-compiler"
       ],

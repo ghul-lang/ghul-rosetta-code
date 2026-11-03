@@ -1,0 +1,8 @@
+# Functions `rosetta strip-annotations` always leaves with their types, one per line as
+# `<part> <function>`, or `<part> *` for every function in the part. The part is its
+# directory under tasks/.
+#
+# These programs read their own compiled methods or their own source, so their output
+# changes when a signature does.
+function-frequency *
+syntax-highlighting-using-mediawiki-formatting *
