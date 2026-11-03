@@ -3,7 +3,7 @@ use default
 next_row(row: bigint[]) -> bigint[] =>
     row |> scan(row[row.count - 1], (total, n) => total + n) |> list()
 
-let rows = iterate([1n] |> list(), next_row) |> take(50) |> list()
+let rows = iterate([1n], next_row) |> take(50) |> list()
 
 write_line("first fifteen and fiftieth Bell numbers:")
 
