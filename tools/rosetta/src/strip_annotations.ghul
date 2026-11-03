@@ -22,7 +22,11 @@ namespace Rosetta is
         held: bool public
 
         // Whether the signature is never stripped.
-        fixed: bool => generic \/ held
+        // A signature that writes a constructed type keeps it: a reader can't work out a
+        // sequence or a map of tuples in their head.
+        constructed: bool public
+
+        fixed: bool => generic \/ held \/ constructed
 
         // The diagnostic that kept the types on, or what else did.
         reason: string public
@@ -37,6 +41,7 @@ namespace Rosetta is
             self.replacement = replacement
             stripped = false
             held = false
+            constructed = false
             reason = if generic then "kept: generic" else "" fi
         si
     si
@@ -137,6 +142,7 @@ namespace Rosetta is
             let starts = _line_starts(text)
             let listing = _run("{compiler} --strip-annotations signature:list {_quote(file)}")
             let result = LIST[SIGNATURE_SITE]()
+            let signature_types = SIGNATURE_TYPES(text)
 
             for row in listing.output.split(['\n']) do
                 let fields = row.trim_end().split([' '], 6)
@@ -167,7 +173,14 @@ namespace Rosetta is
                 if original !~ replacement /\ _is_identifier_start(replacement[0]) /\ !_is_parameterless(replacement) then
                     let name = replacement.substring(0, replacement.index_of('('))
 
-                    result.add(SIGNATURE_SITE(file, name, int.parse(span[0]), start, end, original, replacement))
+                    let site = SIGNATURE_SITE(file, name, int.parse(span[0]), start, end, original, replacement)
+
+                    if !site.generic /\ !signature_types.is_plain(original) then
+                        site.constructed = true
+                        site.reason = "kept: constructed type"
+                    fi
+
+                    result.add(site)
                 fi
             od
 
