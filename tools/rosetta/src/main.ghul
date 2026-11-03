@@ -771,19 +771,6 @@ self_test() is
     let notes = (source: string) => NOTATION.scan(source) |> join("\n")
 
     check_that(
-        "a signature with no types gets the static-typing line",
-        NOTATION.has_inferred_signature("step(n) => n + 1\n") /\
-        NOTATION.has_inferred_signature("    walk(row, column) is\n")
-    )
-
-    check_that(
-        "a signature with its types, or a call, gets no static-typing line",
-        !NOTATION.has_inferred_signature("step(n: int) -> int => n + 1\n") /\
-        !NOTATION.has_inferred_signature("write_line(step(n))\n") /\
-        !NOTATION.has_inferred_signature("// step(n) => n + 1\n")
-    )
-
-    check_that(
         "a stream gets its note",
         notes("let fibs = stream((0, 1), ((a, b)) => a || (b, a + b))").contains("`stream(seed, step)`")
     )

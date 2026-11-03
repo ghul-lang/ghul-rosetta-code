@@ -5,7 +5,7 @@ let width = 600
 let height = 450
 let limit = 300
 
-escape(cx, cy) => (
+escape(cx: double, cy: double) -> int => (
     let x mut = 0.0
     let y mut = 0.0
     let steps mut = 0
