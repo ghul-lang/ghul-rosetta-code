@@ -398,6 +398,7 @@ dotnet run --project tools/rosetta -- publish --solved --target "Rosetta Code:Sa
 dotnet run --project tools/rosetta -- publish amb       # post one task, by slug
 dotnet run --project tools/rosetta -- publish --replace amb   # replace the ghul section already there
 dotnet run --project tools/rosetta -- publish --solved  # post every solved task
+dotnet run --project tools/rosetta -- strip-annotations --dry-run amb   # which signatures could go without their types
 dotnet run --project tools/rosetta -- render-notes tasks/binary-digits/notes.md  # one file's markup
 dotnet run --project tools/rosetta -- edit-page Template:Ghul_playground wiki-pages/Template-Ghul_playground.wiki "summary" --dry-run
 ```
@@ -406,6 +407,16 @@ dotnet run --project tools/rosetta -- edit-page Template:Ghul_playground wiki-pa
 comes from, the language page - from a file, using the same credential. Those pages' text lives
 in `wiki-pages/`, so a change to one is reviewed like any other before it is posted. It leaves a
 page that already holds the text alone, and `--dry-run` shows the page before and after.
+
+`strip-annotations` takes the types out of the signatures of a task's functions wherever the
+task still builds and its test still passes. A function in a file with top-level statements can
+be written with no types at all, and its argument and return types then come from its uses. The
+command strips every signature the compiler can print without its types, builds and tests the
+task, and gives back their types to the functions the errors name. Then it tries each of those
+again on its own, until a round changes nothing. A function that declares its own type
+parameters keeps them, because it is generic on purpose. The command takes slugs or part
+directories, rewrites the sources it changes (`--dry-run` puts them back), and writes a report of
+what each part kept and why, to standard output or to `--report <file>`. It commits nothing.
 
 `sync` treats `tasks/` as the authority on what has a solution, and leaves alone anything only
 the ledger knows - a rejection, a block. The wiki it only reads as a cross-check: a page
