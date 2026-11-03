@@ -2,14 +2,8 @@ use default
 
 multiply(left: double, right: double) -> double => left * right
 
-describe(value: double) is
-    write_line("{value}")
-si
-
-write_line("{multiply(3.0, 4.0)}")
-
-describe(multiply(2.5, 2.0))
+write_line(multiply(3.0, 4.0))
 
 let anonymous = (left: double, right: double) => left * right
 
-write_line("{anonymous(1.5, 6.0)}")
+write_line(anonymous(1.5, 6.0))
