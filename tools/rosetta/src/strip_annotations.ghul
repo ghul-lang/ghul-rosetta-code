@@ -43,10 +43,14 @@ namespace Rosetta is
         builds: int public
         note: string public
 
+        // The sources whose typed declarations were moved ahead of their inferred functions.
+        reordered: LIST[string] public
+
         init(..) is
             sites = LIST()
             builds = 0
             note = ""
+            reordered = LIST()
         si
 
         before: int => sites |> count()
@@ -197,7 +201,7 @@ namespace Rosetta is
                 for i in 0..matches.count do
                     let found = matches[i]
 
-                    errors.add(BUILD_ERROR(found.groups[1].value, int.parse(found.groups[2].value), found.groups[3].value))
+                    errors.add(BUILD_ERROR(found.groups[1].value, int.parse(found.groups[2].value), "{found.groups[3].value} @{found.groups[1].value}:{found.groups[2].value}"))
                 od
             fi
 
@@ -337,7 +341,36 @@ namespace Rosetta is
                 od
             od
 
+            _reorder(outcome, directory)
+
             outcome
+        si
+
+        // Moves each changed source's typed declarations ahead of its inferred functions, keeping
+        // the move only where the part still passes its test.
+        _reorder(outcome: STRIP_OUTCOME, directory: string) is
+            let order = DECLARATION_ORDER()
+
+            for file in IO.Directory.get_files(directory, "*.ghul") do
+                let inferred = SET(outcome.sites |> filter(site => site.stripped /\ site.file =~ file) |> map(site => site.name))
+
+                if inferred.count == 0 then
+                    continue
+                fi
+
+                let before = IO.File.read_all_text(file)
+
+                if let after = order.reorder(before, inferred) then
+                    IO.File.write_all_text(file, after)
+
+                    if let errors = _test(outcome, directory) then
+                        IO.File.write_all_text(file, before)
+                        outcome.note = "kept the original order: reordering failed: {errors[0].message}"
+                    else
+                        outcome.reordered.add(IO.Path.get_relative_path(root, file))
+                    fi
+                fi
+            od
         si
 
         // The task parts under each slug or path: a directory with a project of its own, or each
@@ -378,6 +411,14 @@ namespace Rosetta is
 
             builder.append_line()
             builder.append_line("Total: {all |> map(o => o.before) |> sum()} signatures, {all |> map(o => o.after) |> sum()} keep their types.")
+
+            let reordered = all |> flat_map(o => o.reordered) |> list()
+
+            if reordered.count > 0 then
+                builder.append_line()
+                builder.append_line("Reordered, typed declarations first:")
+                reordered |> each(file => builder.append_line("- {file}"))
+            fi
 
             for outcome in all |> filter(o => o.after > 0 /\ o.note.length == 0) do
                 builder.append_line()
