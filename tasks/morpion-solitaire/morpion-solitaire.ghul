@@ -24,7 +24,7 @@ let cross = [
     "...XXXX..."
 ]
 
-let points = SET()
+let points = SET[(int, int)]()
 let used = SET[(int, int, int)]()
 
 for row in 0..10 do
@@ -57,7 +57,7 @@ fits(m: Move) -> bool is
 si
 
 legal_moves() -> Move[] is
-    let empty = SET()
+    let empty = SET[(int, int)]()
 
     for (x, y) in points do
         for dx in -1::1 do
