@@ -46,7 +46,7 @@ head(count: int) -> Filter => source => source |> take(count)
 tail(count: int) -> Filter => last(*, count)
 
 last(source: Stream, count: int) -> Stream => (
-    let held = LIST[string]()
+    let held = LIST()
 
     for line in source do
         held.add(line)
@@ -78,7 +78,7 @@ si
 uniq() -> Filter => source => dedupe(source)
 
 dedupe(source: Stream) -> Stream is
-    let seen = SET[string]()
+    let seen = SET()
 
     for line in source do
         if seen.add(line) then

@@ -53,7 +53,7 @@ slot(names: LIST[string], name: string) -> int is
     names |> find_index(* =~ name)!
 si
 
-let operators = MAP[string, string]()
+let operators = MAP()
 
 for
     (kind, name) in [

@@ -8,7 +8,7 @@ is_seed(n: long) -> bool =>
     0::4 |> all(k => is_prime(bigint.pow(big, k) + big + 1n))
 
 let seeds = LIST()
-let milestones = LIST[(limit: long, seed: long, index: int)]()
+let milestones = LIST()
 let next_milestone mut = 1_000_000L
 let n mut = 1L
 

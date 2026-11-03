@@ -30,7 +30,7 @@ spiral(count: int) -> Step{} is
     let squared mut = 1
 
     while points.count < count do
-        let candidates mut = LIST[Step]()
+        let candidates mut = LIST()
 
         while candidates.count == 0 do
             squared = squared + 1

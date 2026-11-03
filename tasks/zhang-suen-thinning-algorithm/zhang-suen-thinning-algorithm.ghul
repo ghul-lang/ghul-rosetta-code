@@ -76,7 +76,7 @@ thins(row: int, column: int, first: bool) -> bool is
 si
 
 pass(first: bool) -> int is
-    let doomed = LIST[(int, int)]()
+    let doomed = LIST()
 
     for row in 1..rows - 1 do
         for column in 1..columns - 1 do

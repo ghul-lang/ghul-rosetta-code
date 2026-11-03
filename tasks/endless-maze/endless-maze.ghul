@@ -29,7 +29,7 @@ si
 let x mut = 0
 let y mut = 0
 let facing mut = 0
-let visited = SET[(int, int)]()
+let visited = SET()
 
 toward(turn: int) -> int => (facing - turn + 4) % 4
 

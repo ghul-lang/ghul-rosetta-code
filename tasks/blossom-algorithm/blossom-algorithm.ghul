@@ -86,7 +86,7 @@ class GRAPH(order: int public) is
 
         _seen[root] = true
 
-        let pending = LIST[int]()
+        let pending = LIST()
         let reading mut = 0
 
         pending.add(root)

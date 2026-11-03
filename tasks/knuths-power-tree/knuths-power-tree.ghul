@@ -48,7 +48,7 @@ exponentiate[T: INumber[T]](base: T, exponent: int) -> T is
 
     build_until(exponent)
 
-    let computed = MAP[int, T]()
+    let computed = MAP()
     computed.add(1, base)
     let steps = path_to(exponent)
 
