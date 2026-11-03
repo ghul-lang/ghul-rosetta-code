@@ -1,19 +1,6 @@
 use default
-use System.Numerics.INumber
-use System.Numerics.IMultiplyOperators.`*
 
-power[T: INumber[T]](base: T, exponent: int) -> T =>
-    if exponent == 0 then
-        T.one
-    elif exponent % 2 == 0 then
-        let root = power(base, exponent / 2)
-
-        root * root
-    else
-        base * power(base, exponent - 1)
-    fi
-
-let digits = power(5n, power(4, power(3, 2))).to_string()
+let digits = pow(5n, pow(4, pow(3, 2))).to_string()
 
 write_line("first 20 digits: {digits[0..20]}")
 write_line("last 20 digits:  {digits[20..<<0]}")
