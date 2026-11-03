@@ -453,6 +453,13 @@ that rebuilds the text in another notation, such as braces for a set, is code th
 read past to get to the answer. A list stands for a set without being written as one. Format the
 output by hand only where the task asks for a form the default does not give.
 
+## Write syntax directly, not through a helper
+
+Don't write a helper whose body is syntax the language already has: a tuple, list or record
+literal, a field read, an operator, a cast, or a call with its arguments reordered. Write the
+syntax directly. A helper earns its place when its body computes something, or names a step the
+task describes.
+
 ## Output that has to line up is ASCII
 
 The wiki's monospace font has no box-drawing, geometric or most mathematical characters, so a
