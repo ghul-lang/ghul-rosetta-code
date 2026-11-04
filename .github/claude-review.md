@@ -74,6 +74,16 @@ rather than restating them here.
   recovers is usually noise, but a task demonstrating abstraction, or a
   variable whose declared type is what the reader came for, keeps it. Ask what
   the task is for before calling one redundant.
+- **A function left to inference beside functions that are typed.** A solution
+  may leave the types off a few small, self-evident functions - a predicate, a
+  formatter, a step helper - while the rest keep theirs, to show that inference
+  works on a plain signature. That mix is deliberate and is not an
+  inconsistency, even when a typed function elsewhere in the file has a
+  parameter of the same name and type. Do not ask for the types to be put back
+  for that reason alone. What is a finding: a signature left partly typed;
+  functions that form one family - mutually recursive, or the stages of one
+  procedure - with some typed and some not; and a function whose types a reader
+  cannot recover from its name, its body and its callers.
 
 ## Versioning
 
