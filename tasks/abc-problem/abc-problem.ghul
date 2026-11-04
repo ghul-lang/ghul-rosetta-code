@@ -1,6 +1,6 @@
 use default
 
-without(blocks, at) =>
+without(blocks: string[], at: int) -> string[] =>
     blocks
         |> index()
         |> filter(block => block.index != at)

@@ -6,7 +6,7 @@ alive(cells, index) =>
 live_neighbourhood(cells, index) =>
     ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
 
-next_generation(cells: string) -> string =>
+next_generation(cells) =>
     (0..cells.length)
         |> map(index =>
             if live_neighbourhood(cells, index) == 2 then
