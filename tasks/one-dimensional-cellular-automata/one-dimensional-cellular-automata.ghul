@@ -1,6 +1,12 @@
 use default
 
-next_generation(cells) =>
+alive(cells: string, index: int) -> bool =>
+    index >= 0 /\ index < cells.length /\ cells[index] == '#'
+
+live_neighbourhood(cells: string, index: int) -> int =>
+    ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
+
+next_generation(cells: string) -> string =>
     (0..cells.length)
         |> map(index =>
             if live_neighbourhood(cells, index) == 2 then
@@ -10,12 +16,6 @@ next_generation(cells) =>
             fi
         )
         |> join("")
-
-alive(cells, index) =>
-    index >= 0 /\ index < cells.length /\ cells[index] == '#'
-
-live_neighbourhood(cells, index) =>
-    ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
 
 stream("_###_##_#_#_#_#__#__", generation =>
     generation || next_generation(generation)
