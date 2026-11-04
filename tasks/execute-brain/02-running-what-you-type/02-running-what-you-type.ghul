@@ -70,7 +70,7 @@ run(program: string, input: string) -> string is
     string(output)
 si
 
-balanced(program: string) -> bool is
+balanced(program) is
     let depth mut = 0
 
     for symbol in program do
