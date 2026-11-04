@@ -1,7 +1,7 @@
 name: Code review
 
 # Independent of the CI workflow's trigger, which does not fire on these
-# events. Taking a pull request out of draft, or editing its description,
+# events. Taking a pull request out of draft, or editing its title or description,
 # starts or restarts the review without starting, cancelling or invalidating
 # any CI job. A review can also be dispatched manually for one pull request
 # (from its head branch, so the review reads that branch's tree): the run
@@ -57,7 +57,7 @@ jobs:
   code_review:
     name: Code review
     needs: scope
-    if: ${{ !cancelled() && needs.scope.outputs.ledger_only != 'true' && (github.event_name == 'workflow_dispatch' || ((github.event.action != 'edited' || github.event.changes.body != null) && github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository)) }}
+    if: ${{ !cancelled() && needs.scope.outputs.ledger_only != 'true' && (github.event_name == 'workflow_dispatch' || ((github.event.action != 'edited' || github.event.changes.body != null || github.event.changes.title != null) && github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository)) }}
     permissions:
       contents: read
       pull-requests: write
