@@ -8,15 +8,6 @@ let across = 12
 let margin = 12
 let header = 40
 
-safe(queens, row, column) =>
-    queens
-        |> index()
-        |> all((placed_row, placed_column) =>
-            placed_column != column /\
-            placed_row - placed_column != row - column /\
-            placed_row + placed_column != row + column
-        )
-
 placements(n: int, queens: int[]) -> int[]{} is
     if queens.count == n then
         yield queens
@@ -28,6 +19,15 @@ placements(n: int, queens: int[]) -> int[]{} is
         od
     fi
 si
+
+safe(queens, row, column) =>
+    queens
+        |> index()
+        |> all((placed_row, placed_column) =>
+            placed_column != column /\
+            placed_row - placed_column != row - column /\
+            placed_row + placed_column != row + column
+        )
 
 board(image, solution, left, top) is
     for row in 0..8 do

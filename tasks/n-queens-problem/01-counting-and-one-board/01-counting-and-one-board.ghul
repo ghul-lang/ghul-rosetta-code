@@ -1,14 +1,5 @@
 use default
 
-safe(queens, row, column) =>
-    queens
-        |> index()
-        |> all((placed_row, placed_column) =>
-            placed_column != column /\
-            placed_row - placed_column != row - column /\
-            placed_row + placed_column != row + column
-        )
-
 placements(n: int, queens: int[]) -> int[]{} is
     if queens.count == n then
         yield queens
@@ -20,6 +11,15 @@ placements(n: int, queens: int[]) -> int[]{} is
         od
     fi
 si
+
+safe(queens, row, column) =>
+    queens
+        |> index()
+        |> all((placed_row, placed_column) =>
+            placed_column != column /\
+            placed_row - placed_column != row - column /\
+            placed_row + placed_column != row + column
+        )
 
 for n in 1::8 do
     write_line("{n} by {n}: {placements(n, []) |> count()} solutions")

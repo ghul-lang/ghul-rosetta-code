@@ -1,9 +1,9 @@
 use default
 
-step(c) => if c % 2 == 0 then c / 2 else 3 * c + 1 fi
-
 hailstone(n: int) -> int{} =>
     (iterate(n, step) |> take_while(* != 1)) ++ [1]
+
+step(c) => if c % 2 == 0 then c / 2 else 3 * c + 1 fi
 
 let sequence = hailstone(27) |> list()
 write_line("length of hailstone(27): {sequence.count}")
