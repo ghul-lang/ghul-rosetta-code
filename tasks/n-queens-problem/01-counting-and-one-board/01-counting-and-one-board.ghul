@@ -1,6 +1,6 @@
 use default
 
-safe(queens: int[], row: int, column: int) -> bool =>
+safe(queens, row, column) =>
     queens
         |> index()
         |> all((placed_row, placed_column) =>

@@ -8,7 +8,7 @@ let across = 12
 let margin = 12
 let header = 40
 
-safe(queens: int[], row: int, column: int) -> bool =>
+safe(queens, row, column) =>
     queens
         |> index()
         |> all((placed_row, placed_column) =>
@@ -29,7 +29,7 @@ placements(n: int, queens: int[]) -> int[]{} is
     fi
 si
 
-board(image: IMAGE, solution: int[], left: int, top: int) is
+board(image, solution, left, top) is
     for row in 0..8 do
         for column in 0..8 do
             if (row + column) % 2 == 1 then

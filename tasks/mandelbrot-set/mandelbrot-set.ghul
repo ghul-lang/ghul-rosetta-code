@@ -21,8 +21,7 @@ escape(cx: double, cy: double) -> int => (
     steps
 )
 
-band(level: double, phase: double) -> ubyte =>
-    ubyte(127.5 * (1.0 - cos(6.0 * pi * level + phase)))
+band(level, phase) => ubyte(127.5 * (1.0 - cos(6.0 * pi * level + phase)))
 
 let image = IMAGE(width, height)
 
