@@ -106,7 +106,7 @@ sorted_digits(text: string) -> string => (
     string(held)
 )
 
-runs_digits_together(text: string) -> bool =>
+runs_digits_together(text) =>
     (0..text.length - 1)
         |> any(at => char.is_digit(text[at]) /\ char.is_digit(text[at + 1]))
 

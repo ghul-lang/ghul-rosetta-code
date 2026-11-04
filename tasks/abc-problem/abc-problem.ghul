@@ -1,6 +1,6 @@
 use default
 
-without(blocks: string[], at: int) -> string[] =>
+without(blocks, at) =>
     blocks
         |> index()
         |> filter(block => block.index != at)
@@ -23,7 +23,7 @@ let blocks = [
     "JW", "HU", "VI", "AN", "OB", "ER", "FS", "LY", "PC", "ZM"
 ]
 
-can_make_word(word: string) -> bool => can_spell(word.to_upper(), blocks)
+can_make_word(word) => can_spell(word.to_upper(), blocks)
 
 for
     word in [

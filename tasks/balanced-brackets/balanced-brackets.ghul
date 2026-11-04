@@ -1,6 +1,6 @@
 use default
 
-balanced(brackets: string) -> bool => (
+balanced(brackets) => (
     let level mut = 0
 
     for bracket in brackets do
