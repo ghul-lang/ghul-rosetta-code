@@ -35,7 +35,7 @@ walk(every: int) -> Ant{} is
     yield (row = row, column = column, steps = steps, left = true)
 si
 
-draw(image: IMAGE, row: int, column: int) is
+draw(image, row, column) is
     image.clear(250ub, 250ub, 247ub)
     image.color(30ub, 30ub, 40ub)
 

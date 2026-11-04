@@ -35,8 +35,7 @@ let games = 1::rounds |> map(_ => play()) |> list()
 let stay_wins = games |> count(g => g.chosen == g.car)
 let switch_wins = games |> count(g => g.switched == g.car)
 
-percentage(wins: int) -> string =>
-    "{double(wins) * 100.0 / double(rounds),5:F2}%"
+percentage(wins) => "{double(wins) * 100.0 / double(rounds),5:F2}%"
 
 write_line("over {rounds} games")
 write_line("  staying  wins {percentage(stay_wins)}")

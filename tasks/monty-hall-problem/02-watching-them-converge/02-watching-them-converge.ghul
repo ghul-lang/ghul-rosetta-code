@@ -36,7 +36,7 @@ for trial in 1::rounds do
     switching.add(double(switch_wins) / double(trial))
 od
 
-curve(rates: double[]) -> (x: double, y: double)[] =>
+curve(rates) =>
     rates
         |> index()
         |> map(rate => (x = log10(double(rate.index + 1)), y = rate.value))

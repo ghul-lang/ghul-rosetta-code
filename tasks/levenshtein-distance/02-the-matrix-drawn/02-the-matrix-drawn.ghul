@@ -63,12 +63,12 @@ alignment() -> (row: int, column: int){} is
     path
 si
 
-corner(row: int, column: int) -> (x: double, y: double) => (
+corner(row, column) => (
     x = double(left + column * cell),
     y = double(top + row * cell)
 )
 
-center(row: int, column: int) -> (x: double, y: double) => (
+center(row, column) => (
     x = double(left + column * cell) + 0.5 * double(cell),
     y = double(top + row * cell) + 0.5 * double(cell)
 )

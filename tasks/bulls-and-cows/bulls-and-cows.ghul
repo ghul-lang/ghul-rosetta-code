@@ -17,7 +17,7 @@ od
 
 let secret = digits |> map(d => "{d}") |> join("")
 
-is_well_formed(guess: string) -> bool =>
+is_well_formed(guess) =>
     guess.length == 4 /\
     guess |> all(c => c >= '1' /\ c <= '9') /\
     (guess |> distinct() |> count()) == 4
