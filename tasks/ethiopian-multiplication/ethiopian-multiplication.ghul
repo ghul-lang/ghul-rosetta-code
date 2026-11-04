@@ -1,11 +1,5 @@
 use default
 
-halve(value) => value / 2
-
-double(value) => value * 2
-
-is_even(value) => value % 2 == 0
-
 ethiopian(left: int, right: int) -> int =>
     stream(
         (multiplier = left, total = right),
@@ -18,5 +12,11 @@ ethiopian(left: int, right: int) -> int =>
         |> take_while(row => row.multiplier > 0)
         |> filter(row => !is_even(row.multiplier))
         |> sum_by(row => row.total)
+
+halve(value) => value / 2
+
+double(value) => value * 2
+
+is_even(value) => value % 2 == 0
 
 write_line("17 x 34 = {ethiopian(17, 34)}")

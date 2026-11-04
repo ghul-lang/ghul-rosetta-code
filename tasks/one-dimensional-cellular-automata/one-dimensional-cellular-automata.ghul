@@ -1,11 +1,5 @@
 use default
 
-alive(cells, index) =>
-    index >= 0 /\ index < cells.length /\ cells[index] == '#'
-
-live_neighbourhood(cells, index) =>
-    ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
-
 next_generation(cells) =>
     (0..cells.length)
         |> map(index =>
@@ -16,6 +10,12 @@ next_generation(cells) =>
             fi
         )
         |> join("")
+
+alive(cells, index) =>
+    index >= 0 /\ index < cells.length /\ cells[index] == '#'
+
+live_neighbourhood(cells, index) =>
+    ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
 
 stream("_###_##_#_#_#_#__#__", generation =>
     generation || next_generation(generation)

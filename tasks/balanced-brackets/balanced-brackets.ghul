@@ -1,16 +1,5 @@
 use default
 
-balanced(brackets) => (
-    let level mut = 0
-
-    for bracket in brackets do
-        if bracket == ']' /\ level == 0 then return false fi
-        level = level + if bracket == '[' then 1 else -1 fi
-    od
-
-    level == 0
-)
-
 arrangements(opens: int, closes: int) -> string{} is
     if opens == 0 /\ closes == 0 then
         yield ""
@@ -25,6 +14,17 @@ arrangements(opens: int, closes: int) -> string{} is
         fi
     fi
 si
+
+balanced(brackets) => (
+    let level mut = 0
+
+    for bracket in brackets do
+        if bracket == ']' /\ level == 0 then return false fi
+        level = level + if bracket == '[' then 1 else -1 fi
+    od
+
+    level == 0
+)
 
 for pairs in 0::3 do
     for brackets in arrangements(pairs, pairs) do
