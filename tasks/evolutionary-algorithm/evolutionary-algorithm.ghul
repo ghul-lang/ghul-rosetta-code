@@ -12,7 +12,7 @@ random_letter() -> char => letters[random.next(letters.length)]
 fitness(candidate) =>
     0..target.length |> filter(i => candidate[i] == target[i]) |> count()
 
-mutate(parent: string, rate: double) -> string =>
+mutate(parent, rate) =>
     parent
         |> map(letter =>
             if random.next_double() < rate then random_letter()

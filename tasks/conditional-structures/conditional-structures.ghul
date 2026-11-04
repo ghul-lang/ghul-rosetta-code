@@ -30,7 +30,7 @@ color(suit) =>
     else "black"
     esac
 
-area(shape: Shape) -> int =>
+area(shape) =>
     case shape
     when circle: Shape.CIRCLE then
         circle.radius * circle.radius * 3
