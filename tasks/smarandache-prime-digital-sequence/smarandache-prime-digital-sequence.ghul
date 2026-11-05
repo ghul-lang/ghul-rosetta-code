@@ -26,4 +26,4 @@ smarandache()
     |> each(row => write_line(row |> map(value => "{value,7}") |> join("")))
 
 write_line()
-write_line("the hundredth: {smarandache() |> skip(99) |> first_or_throw()}")
+write_line("the hundredth: {smarandache() |> skip(99) |> first()!}")

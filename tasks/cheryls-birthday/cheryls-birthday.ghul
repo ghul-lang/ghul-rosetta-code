@@ -37,6 +37,6 @@ let birthday =
         |> filter(date =>
             sharing_the_month(bernard_now_knows, date.month) == 1
         )
-        |> only()
+        |> only()!
 
 write_line("Cheryl's birthday is {birthday.month} {birthday.day}")

@@ -54,4 +54,5 @@ write_line(" n   counted   subfactorial")
     )
 
 write_line()
-write_line("!20 = {subfactorials() |> skip(20) |> first_or_throw():N0}")
+let twentieth = (subfactorials() |> skip(20) |> first())!
+write_line("!20 = {twentieth:N0}")

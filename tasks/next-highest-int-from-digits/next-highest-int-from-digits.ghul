@@ -9,7 +9,7 @@ next_highest(number: string) -> string =>
         let tail = number[pivot + 1..<0]
 
         let successor =
-            tail |> filter(* > number[pivot]) |> sort() |> first_or_throw()
+            tail |> filter(* > number[pivot]) |> sort() |> first()!
 
         let remaining = tail.remove(tail.index_of(successor), 1)
 

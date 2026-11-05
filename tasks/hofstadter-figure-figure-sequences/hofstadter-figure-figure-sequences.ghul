@@ -40,9 +40,9 @@ s_sequence() -> int{} is
     od
 si
 
-ffr(n: int) -> int => r_sequence() |> skip(n - 1) |> first_or_throw()
+ffr(n: int) -> int => r_sequence() |> skip(n - 1) |> first()!
 
-ffs(n: int) -> int => s_sequence() |> skip(n - 1) |> first_or_throw()
+ffs(n: int) -> int => s_sequence() |> skip(n - 1) |> first()!
 
 write_line("first ten of R: {1::10 |> map(ffr) |> join(", ")}")
 write_line("first ten of S: {1::10 |> map(ffs) |> join(", ")}")

@@ -42,4 +42,4 @@ for token in expression.split([' ']) do
 od
 
 write_line("")
-write_line("result: {stack |> only()}")
+write_line("result: {(stack |> only())!}")

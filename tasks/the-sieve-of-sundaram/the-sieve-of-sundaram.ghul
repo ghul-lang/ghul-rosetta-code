@@ -34,6 +34,6 @@ sundaram(limit)
 
 write_line()
 
-let millionth = sundaram(limit) |> skip(999_999) |> first_or_throw()
+let millionth = sundaram(limit) |> skip(999_999) |> first()!
 
 write_line("the millionth: {millionth:N0}")
