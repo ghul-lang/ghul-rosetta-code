@@ -1,5 +1,5 @@
-// Each value waits its own number of scheduler turns rather than any
-// real time, so values one apart still wake in order.
+// Each value waits its own amount of real time before printing, so the
+// values emerge in ascending order.
 
 use default
 use Ghul.Coroutines
@@ -7,10 +7,7 @@ use Ghul.Coroutines
 let values = [5, 3, 8, 0, 1, 9, 2, 7]
 
 emit(value: int) -> COROUTINE is
-    for _ in 1::value do
-        await pause()
-    od
-
+    await sleep(value * 50)
     write_line("{value}")
 si
 
