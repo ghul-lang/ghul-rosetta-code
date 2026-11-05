@@ -30,7 +30,11 @@ invert(transformed: string) -> string => (
             )
 
     let framed =
-        table |> filter(row => row[row.length - 1] == end_of_text) |> only()
+        (
+            table
+                |> filter(row => row[row.length - 1] == end_of_text)
+                |> only()
+        )!
 
     framed[1..width - 1]
 )

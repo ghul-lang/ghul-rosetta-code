@@ -110,7 +110,7 @@ write_line()
 
 kinds
     |> each(kind => (
-        let triple = runs(kind.with_multiplicity, 3) |> first_or_throw()
+        let triple = runs(kind.with_multiplicity, 3) |> first()!
 
         write_line("first Ruth-Aaron triple ({kind.name}): {triple}")
     ))

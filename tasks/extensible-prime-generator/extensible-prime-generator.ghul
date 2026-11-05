@@ -31,6 +31,6 @@ let band = between(7_700, 8_000) |> count()
 
 write_line("primes between 7,700 and 8,000: {band}")
 
-let ten_thousandth = primes() |> skip(9_999) |> first_or_throw()
+let ten_thousandth = primes() |> skip(9_999) |> first()!
 
 write_line("the 10,000th prime: {ten_thousandth}")

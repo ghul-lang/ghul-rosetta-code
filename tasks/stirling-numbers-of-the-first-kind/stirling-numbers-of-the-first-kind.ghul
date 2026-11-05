@@ -39,7 +39,7 @@ rows()
 
 write_line()
 
-let hundredth = rows() |> skip(100) |> first_or_throw()
+let hundredth = rows() |> skip(100) |> first()!
 
 let largest = hundredth |> max()
 

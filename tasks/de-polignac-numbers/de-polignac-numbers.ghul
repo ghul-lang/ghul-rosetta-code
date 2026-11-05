@@ -17,8 +17,7 @@ od
 write_line()
 
 for position in [1_000, 10_000] do
-    let found =
-        de_polignac_numbers() |> skip(position - 1) |> first_or_throw()
+    let found = de_polignac_numbers() |> skip(position - 1) |> first()!
 
     write_line("{position:N0}th: {found:N0}")
 od
