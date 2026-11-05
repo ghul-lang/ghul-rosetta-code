@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Sleep sort is timing-dependent: under load the values need not emerge
+# in order, so the output is judged by its contents rather than by an
+# exact snapshot.
+
+awk '
+    NF == 0 { next }
+    $0 !~ /^[0-9]+$/ { print "bad line: " $0; bad = 1; next }
+    { got[$0 + 0]++; lines++ }
+    END {
+        n = split("5 3 8 0 1 9 2 7", expar, " ")
+        for (i = 1; i <= n; i++) expectedcount[expar[i] + 0]++
+        for (v in expectedcount) {
+            if (got[v] + 0 != expectedcount[v]) { print "missing " v; bad = 1 }
+        }
+        for (v in got) {
+            if (!(v in expectedcount)) { print "unexpected " v; bad = 1 }
+        }
+        if (lines != n) { print "expected " n " lines, got " lines; bad = 1 }
+        exit bad + 0
+    }
+' "$1"
