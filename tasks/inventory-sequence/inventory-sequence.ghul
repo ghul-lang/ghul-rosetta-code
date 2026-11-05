@@ -26,9 +26,7 @@ inventory() -> int{} is
 si
 
 first_at_least(threshold: int) -> INDEXED_VALUE[int] =>
-    inventory()
-        |> index()
-        |> find(entry => entry.value >= threshold)!
+    inventory() |> index() |> find(entry => entry.value >= threshold)!
 
 inventory()
     |> take(100)
