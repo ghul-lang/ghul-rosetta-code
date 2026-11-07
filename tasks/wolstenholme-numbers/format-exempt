@@ -1,0 +1,5 @@
+# The terse part is hand-laid-out: the formatter spreads every pipe chain, argument
+# list, and expression across lines until a short solution reads as a wall of statements.
+# The hand layout keeps the same program in as few lines as the width allows, with
+# each function standing on its own lines.
+02-terse/02-terse.ghul

@@ -1,33 +1,23 @@
 use default
-w() =>
-    stream(
-        (0n, 1n, 0),
-        (a, b, k) =>
-            let
-                s = bigint(k + 1) * bigint(k + 1),
-                na = a * s + b,
-                nb = b * s,
-                g = gcd(na, nb)
-            in
-                na / g || (na / g, nb / g, k + 1)
-    )
+w() => stream((0n, 1n, 0), (a, b, k) => let
+    s = bigint(k + 1) * bigint(k + 1),
+    na = a * s + b,
+    nb = b * s,
+    g = gcd(na, nb)
+in
+    na / g || (na / g, nb / g, k + 1))
 write_line("summing the harmonic numerators")
 write_line("")
 write_line("the first twenty Wolstenholme numbers:")
 w() |> take(20) |> each(n => write_line("  {n}"))
 write_line("")
 write_line("the first four prime Wolstenholme numbers:")
-w() |> filter(is_prime) |> take(4) |> each(n => write_line("  {n}"))
+w() |> filter(is_prime) |> take(4)
+    |> each(n => write_line("  {n}"))
 write_line("")
 write_line("digit counts:")
-w()
-    |> take(10000)
-    |> index()
-    |> filter(e =>
-        [500, 1000, 2500, 5000, 10000] |> any(k => k == e.index + 1)
-    )
-    |> each(e =>
-        write_line(
-            "  term {e.index + 1,5} has {e.value.to_string().length} digits"
-        )
-    )
+let ks = [500, 1000, 2500, 5000, 10000]
+w() |> take(10000) |> index()
+    |> filter(e => ks |> any(k => k == e.index + 1))
+    |> each(e => let d = e.value.to_string().length in
+        write_line("  term {e.index + 1,5} has {d} digits"))
