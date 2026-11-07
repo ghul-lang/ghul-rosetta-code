@@ -1,0 +1,5 @@
+<includeonly>ghūl is statically typed, and where types are not explicit they are inferred at compile time.</includeonly><noinclude>
+Shown above a terse ghūl solution: one written with no explicit types, where the compiler infers every type at compile time from how each value is used.
+
+ <nowiki>{{ghul terse}}</nowiki>
+</noinclude>

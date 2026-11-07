@@ -142,7 +142,9 @@ namespace Rosetta is
                 return false
             fi
 
-            if !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")) then
+            if wants_terse(slug, name) then
+                text.append("{{{{ghul terse}}}}\n\n")
+            elif !IO.File.exists(IO.Path.combine(directory, "playground-unsupported")) then
                 let id = IO.Path.get_relative_path(IO.Path.combine(_root, "tasks"), directory).replace('\\', '/')
 
                 if needs_other_packages(directory, name) then
@@ -199,6 +201,34 @@ namespace Rosetta is
             let found: System.Text.Json.JsonElement mut
 
             return !document.root_element.try_get_property("notation", found ref) \/ found.value_kind != System.Text.Json.JsonValueKind.FALSE
+        si
+
+        // Whether a part is a terse, fully type-inferred variant: the task.json
+        // names it under "terse", and its section carries the inference template
+        // in place of the playground link.
+        wants_terse(slug: string, name: string) -> bool is
+            let descriptor = IO.Path.combine(_root, "tasks", slug, "task.json")
+
+            if !IO.File.exists(descriptor) then
+                return false
+            fi
+
+            let document = System.Text.Json.JsonDocument.parse(IO.File.read_all_text(descriptor), _)
+            let found: System.Text.Json.JsonElement mut
+
+            if !document.root_element.try_get_property("terse", found ref) \/ found.value_kind != System.Text.Json.JsonValueKind.ARRAY then
+                return false
+            fi
+
+            for i in 0..found.get_array_length() do
+                let part = found[i]
+
+                if (part.value_kind == System.Text.Json.JsonValueKind.STRING) /\ ((part.get_string() ?? "") =~ name) then
+                    return true
+                fi
+            od
+
+            return false
         si
 
         // What the program prints, with trailing newlines dropped: the text
