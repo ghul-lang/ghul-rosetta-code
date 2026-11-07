@@ -9,16 +9,16 @@ ipal(t) =>
             |> string()
     )
 
-check(t, b) =>
-    let m = if (if b then pal else ipal fi)(t) then " " else " not " fi in
+check(t, f) =>
+    let m = if f(t) then " " else " not " fi in
     write_line("\"{t}\" is{m}a palindrome")
 
 [
-    ("racecar", true),
-    ("hello", true),
-    ("rotor", true),
-    ("A man, a plan, a canal: Panama", false),
-    ("race car", false),
-    ("hello world", false)
+    ("racecar", pal),
+    ("hello", pal),
+    ("rotor", pal),
+    ("A man, a plan, a canal: Panama", ipal),
+    ("race car", ipal),
+    ("hello world", ipal)
 ]
     |> each(check)
