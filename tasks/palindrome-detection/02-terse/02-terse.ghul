@@ -9,9 +9,8 @@ ipal(t) =>
             |> string()
     )
 check(t, b) =>
-    write_line(
-        "\"{t}\" is{if (if b then pal(t) else ipal(t) fi) then " " else " not " fi}a palindrome"
-    )
+    let m = if (if b then pal else ipal fi)(t) then " " else " not " fi in
+    write_line("\"{t}\" is{m}a palindrome")
 [
     ("racecar", true),
     ("hello", true),
