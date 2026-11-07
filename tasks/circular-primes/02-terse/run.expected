@@ -1,0 +1,7 @@
+sieving to 1,000,000
+The first 19 circular primes:
+[2, 3, 5, 7, 11, 13, 17, 37, 79, 113, 197, 199, 337, 1193, 3779, 11939, 19937, 193939, 199933]
+
+testing repunits for primality
+The next 4 circular primes, all repunits:
+R(19), R(23), R(317), R(1031)

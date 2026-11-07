@@ -1,0 +1,13 @@
+use default
+dv(d, v) =>
+    let
+        t = stream((1, v), (p, db) => (p, db) || (p * 2, db * 2))
+            |> take_while((p, db) => db <= d),
+        (ans, acc) = t |> reverse() |> reduce((0, 0),
+            ((ans, acc), (p, db)) =>
+            if acc + db <= d then (ans + p, acc + db) else (ans, acc) fi)
+    in
+        (ans, d - acc)
+
+let (a, r) = dv(580, 34)
+write_line("580 divided by 34 is {a} remainder {r}")

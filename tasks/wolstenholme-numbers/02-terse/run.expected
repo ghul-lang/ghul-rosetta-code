@@ -1,0 +1,36 @@
+summing the harmonic numerators
+
+the first twenty Wolstenholme numbers:
+  1
+  5
+  49
+  205
+  5269
+  5369
+  266681
+  1077749
+  9778141
+  1968329
+  239437889
+  240505109
+  40799043101
+  40931552621
+  205234915681
+  822968714749
+  238357395880861
+  238820721143261
+  86364397717734821
+  17299975731542641
+
+the first four prime Wolstenholme numbers:
+  5
+  266681
+  40799043101
+  86364397717734821
+
+digit counts:
+  term   500 has 434 digits
+  term  1000 has 866 digits
+  term  2500 has 2164 digits
+  term  5000 has 4340 digits
+  term 10000 has 8693 digits

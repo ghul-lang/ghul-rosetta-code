@@ -1,0 +1,16 @@
+use default
+
+let h = [
+    "Zig", "Zag", "Wally", "Ronald", "Bush", "Krusty", "Charlie", "Bush",
+    "Bozo"
+]
+pos(n) => h |> index() |> filter(e => e.value =~ n) |> map(e => e.index)
+
+show(n) =>
+    let p = pos(n) |> list() in
+    if p.count == 0 then
+        write_line("{n} is not in the haystack")
+    else
+        write_line("{n}: first at {p[0]}, last at {p[p.count - 1]}")
+    fi
+["Bush", "Washington"] |> each(show)

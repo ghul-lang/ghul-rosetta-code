@@ -1,0 +1,50 @@
+use default
+f(n) => 1::n |> reduce(1n, (a, i) => a * bigint(i))
+npk(n, k) => f(n) / f(n - k)
+nck(n, k) => f(n) / (f(k) * f(n - k))
+
+let g = 7.0
+let cs = [
+    0.99999999999980993, 676.5203681218851, -1259.1392167224028,
+    771.32342877765313, -176.61502916214059, 12.507343278686905,
+    -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
+]
+lg(x) => let
+    xm = x - 1.0,
+    t = xm + g + 0.5,
+    a = 1::8 |> reduce(cs[0], (s, i) => s + cs[i] / (xm + double(i)))
+in
+    0.5 * log(2.0 * pi) + (xm + 0.5) * log(t) - t + log(a)
+sci(v) => let
+    l10 = v / log(10.0),
+    e = floor(l10)
+in
+    "{pow(10.0, l10 - e),0:F6}e+{int(e)}"
+l(x) => lg(double(x))
+anpk(n, k) => sci(l(n + 1) - l(n - k + 1))
+anck(n, k) => sci(l(n + 1) - l(k + 1) - l(n - k + 1))
+tr(v) => let
+    t = "{v + 0n}",
+    m = t.length - 32
+in
+    if t.length <= 32 then t else "{t[0..32]}... ({m} more digits)" fi
+show(n) => (
+    write_line("P({n},{n / 3}) = {tr(npk(n, n / 3))}")
+    write_line("P({n},{n / 3}) ~ {anpk(n, n / 3)}")
+)
+showc(n) => (
+    write_line("C({n * 100},{n * 100 / 3}) = "
+        "{tr(nck(n * 100, n * 100 / 3))}")
+    write_line("C({n * 100},{n * 100 / 3}) ~ {anck(n * 100, n * 100 / 3)}")
+)
+write_line("permutations from 1 to 12, exact integer arithmetic:")
+1::11 |> each(k => write_line("P(12,{k}) = {npk(12, k)}"))
+write_line("")
+write_line("combinations from 10 to 60, exact integer arithmetic:")
+1::5 |> each(s => write_line("C(60,{s * 10}) = {nck(60, s * 10)}"))
+write_line("")
+write_line("permutations from 5 to 15000, exact and approximate:")
+[5, 50, 500, 1000, 5000, 15000] |> each(show)
+write_line("")
+write_line("combinations from 100 to 1000, exact and approximate:")
+1::10 |> each(showc)

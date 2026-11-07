@@ -1,0 +1,14 @@
+part 1: digit-sum checksum
+  co9(318682) = 1
+  co9(101558217124) = 1
+  co9(65536) = 7
+  co9(999999999) = 9
+part 2: k where co9(k) = co9(k^2), for k in 1L::100L
+  23 of 100 numbers: 1, 9, 10, 18, 19, 27, 28, 36, 37, 45, 46, 54, 55, 63, 64, 72, 73, 81, 82, 90, 91, 99, 100
+part 3: fast mod-based checksum, base 10
+  co9_fast(318682, 10) = 1, matches part 1: true
+  co9_fast(101558217124, 10) = 1, matches part 1: true
+  co9_fast(65536, 10) = 7, matches part 1: true
+  co9_fast(999999999, 10) = 9, matches part 1: true
+part 3: generalised to base 16, k where k mod 15 = k^2 mod 15, for k in 1L::100L
+  27 of 100 numbers: 1, 6, 10, 15, 16, 21, 25, 30, 31, 36, 40, 45, 46, 51, 55, 60, 61, 66, 70, 75, 76, 81, 85, 90, 91, 96, 100
