@@ -6,6 +6,7 @@ w() => stream((0n, 1n, 0), (a, b, k) => let
     g = gcd(na, nb)
 in
     na / g || (na / g, nb / g, k + 1))
+
 write_line("summing the harmonic numerators")
 write_line("")
 write_line("the first twenty Wolstenholme numbers:")
