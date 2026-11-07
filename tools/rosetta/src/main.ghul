@@ -41,12 +41,13 @@ usage() is
 si
 
 // The repository root, found by walking up from the working directory. Every path the tool
-// touches hangs off it, so it can be run from anywhere inside the checkout.
+// touches hangs off it, so it can be run from anywhere inside the checkout. The root is the
+// directory holding both tasks/ and ledger/ - the two trees every command reads or writes.
 find_root() -> string is
     let directory mut = IO.Directory.get_current_directory()
 
     while directory.length > 0 do
-        if IO.File.exists(IO.Path.combine(directory, "rosetta-code.ghulproj")) then
+        if IO.Directory.exists(IO.Path.combine(directory, "tasks")) /\ IO.Directory.exists(IO.Path.combine(directory, "ledger")) then
             return directory
         fi
 
