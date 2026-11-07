@@ -2,6 +2,7 @@ use default
 co9(x) => if x < 10L then x else co9(x |> digits() |> sum()) fi
 fast(x, b) =>
     let r = x % (b - 1L) in if r == 0L /\ x > 0L then b - 1L else r fi
+
 write_line("part 1: digit-sum checksum")
 [318682L, 101558217124L, 65536L, 999999999L]
     |> each(x => write_line("  co9({x}) = {co9(x)}"))
