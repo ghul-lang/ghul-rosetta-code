@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["maths", "number-theory"],
     "interest": 4,
-    "summary": "Evaluate continued fractions with given coefficients to approximate the square root of two, Napier's constant and pi."
+    "summary": "Evaluate continued fractions with given coefficients to approximate the square root of two, Napier's constant and pi.",
+    "terse": ["02-terse"]
 }
