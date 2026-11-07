@@ -24,7 +24,7 @@ strip(d, s) => if d.is_even then strip(d / 2n, s + 1L) else (d, s) fi
 pp(n) => let (d, s) = strip(n - 1n, 0L) in
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n]
         |> all(b => b >= n \/ ok(b, d, s, n))
-rep(n) => (bigint.pow(10n, int(n)) - 1n) / 9n
+rep(n) => repeat(1n, int(n)) |> reduce(0n, (a, x) => a * 10n + x)
 
 write_line("sieving to {limit:N0}")
 write_line("The first 19 circular primes:")
