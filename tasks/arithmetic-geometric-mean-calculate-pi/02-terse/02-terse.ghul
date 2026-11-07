@@ -1,0 +1,25 @@
+use default
+pow10(n) => repeat(10n, n) |> product()
+s(n) => if n < 2n then n else w(n, n) fi
+w(n, r) => let x = (r + n / r) / 2n in if x < r then w(n, x) else r fi
+let scale = pow10(112)
+pi(r) =>
+    let (a, _, t, _) =
+        1::r
+            |> reduce(
+                (scale, s(scale * scale / 2n), 0n, 4n),
+                ((a, g, t, w), _) =>
+                    let
+                        na = (a + g) / 2n,
+                        ng = s(a * g)
+                    in
+                        (
+                            na,
+                            ng,
+                            t + w * (na * na - ng * ng) / scale,
+                            w * 2n
+                        )
+            )
+    in 4n * a * a / (scale - t)
+let text = (pi(10) / pow10(12)).to_string()
+write_line("{text[0..1]}.{text[1..text.length]}")
