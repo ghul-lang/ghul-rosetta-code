@@ -1,0 +1,20 @@
+multiplying primes to find the primorial primes
+
+the first ten primorial numbers:
+  primorial(0) = 1
+  primorial(1) = 2
+  primorial(2) = 6
+  primorial(3) = 30
+  primorial(4) = 210
+  primorial(5) = 2310
+  primorial(6) = 30030
+  primorial(7) = 510510
+  primorial(8) = 9699690
+  primorial(9) = 223092870
+
+digits in larger primorial numbers:
+  primorial(     10) has      10 digits
+  primorial(    100) has     220 digits
+  primorial(  1,000) has   3,393 digits
+  primorial( 10,000) has  45,337 digits
+  primorial(100,000) has 563,921 digits

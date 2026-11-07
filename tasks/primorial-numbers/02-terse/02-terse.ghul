@@ -1,0 +1,26 @@
+use default
+write_line("multiplying primes to find the primorial primes")
+write_line("")
+let sieve = repeat(true, 1300001) |> LIST()
+sieve[0] = false
+sieve[1] = false
+mark(m) is
+    sieve[m] = false
+si
+2::1300000
+    |> filter(p => sieve[p] /\ p <= 1300000 / p)
+    |> each(p => from(p * p, p) |> take_while(* <= 1300000) |> each(mark))
+let primes = 2::1300000 |> filter(p => sieve[p]) |> map(bigint) |> list()
+write_line("the first ten primorial numbers:")
+(0..10)
+    |> each(i =>
+        write_line("  primorial({i}) = {primes[0..i] |> product()}")
+    )
+write_line()
+write_line("digits in larger primorial numbers:")
+[10, 100, 1000, 10000, 100000]
+    |> each(i =>
+        write_line(
+            "  primorial({i,7:N0}) has {(primes[0..i] |> product()).to_string().length,7:N0} digits"
+        )
+    )
