@@ -1,0 +1,1 @@
+The terse version below is written in a functional style: functions only, no user-defined types, and no loops where a pipe, a stream, or a recursion does the work. ghūl is statically typed, and every type is inferred at compile time from how each value is used, so no type is written anywhere in the entry.
