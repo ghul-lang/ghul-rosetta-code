@@ -4,5 +4,6 @@
     "status": "published",
     "tags": ["strings", "pipes"],
     "interest": 2,
-    "summary": "Check whether a string is a palindrome, including a looser test that ignores spaces, punctuation and letter case."
+    "summary": "Check whether a string is a palindrome, including a looser test that ignores spaces, punctuation and letter case.",
+    "terse": ["02-terse"]
 }
