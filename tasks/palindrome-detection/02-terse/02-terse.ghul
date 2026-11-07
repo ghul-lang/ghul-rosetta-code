@@ -1,0 +1,23 @@
+use default
+rev(t) => t |> graphemes() |> reverse() |> string()
+pal(t) => t =~ rev(t)
+ipal(t) =>
+    pal(
+        string(t)
+            |> filter(char.is_letter)
+            |> map(char.to_lower)
+            |> string()
+    )
+check(t, b) =>
+    write_line(
+        "\"{t}\" is{if (if b then pal(t) else ipal(t) fi) then " " else " not " fi}a palindrome"
+    )
+[
+    ("racecar", true),
+    ("hello", true),
+    ("rotor", true),
+    ("A man, a plan, a canal: Panama", false),
+    ("race car", false),
+    ("hello world", false)
+]
+    |> each(check)
