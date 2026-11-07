@@ -4,6 +4,7 @@ let h = [
     "Bozo"
 ]
 pos(n) => h |> index() |> filter(e => e.value =~ n) |> map(e => e.index)
+
 show(n) =>
     let p = pos(n) |> list() in
     if p.count == 0 then
