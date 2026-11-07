@@ -2,7 +2,7 @@ use default
 w() =>
     stream(
         (0n, 1n, 0),
-        ((a, b, k)) =>
+        (a, b, k) =>
             let
                 s = bigint(k + 1) * bigint(k + 1),
                 na = a * s + b,
