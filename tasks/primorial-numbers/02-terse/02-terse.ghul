@@ -2,8 +2,7 @@ use default
 write_line("multiplying primes to find the primorial primes")
 write_line("")
 let sieve = repeat(true, 1300001) |> LIST()
-sieve[0] = false
-sieve[1] = false
+(sieve[0], sieve[1]) = (false, false)
 mark(m) is sieve[m] = false si
 
 2::1300000
