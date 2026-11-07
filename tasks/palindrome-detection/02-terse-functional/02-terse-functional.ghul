@@ -13,4 +13,4 @@ test(t: string, f: (string) -> bool) =>
     ("race car", ipal),
     ("hello world", ipal)
 ]
-    |> each(((t, f)) => test(t, f))
+    |> each(test)
