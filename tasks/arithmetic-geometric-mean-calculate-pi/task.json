@@ -8,6 +8,5 @@
         "algorithms"
     ],
     "interest": 4,
-    "summary": "Compute many decimal places of pi using the quadratically converging arithmetic-geometric mean method.",
-    "terse": ["02-terse"]
+    "summary": "Compute many decimal places of pi using the quadratically converging arithmetic-geometric mean method."
 }

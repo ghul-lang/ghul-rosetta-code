@@ -4,6 +4,5 @@
     "status": "published",
     "tags": ["number-theory", "pipes"],
     "interest": 2,
-    "summary": "Implement the casting out nines checksum, use it to filter candidate numbers for Kaprekar properties, and extend the method to other bases.",
-    "terse": ["02-terse"]
+    "summary": "Implement the casting out nines checksum, use it to filter candidate numbers for Kaprekar properties, and extend the method to other bases."
 }

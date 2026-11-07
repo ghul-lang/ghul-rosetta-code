@@ -8,6 +8,5 @@
   ],
   "interest": 3,
     "run_ms": 8306,
-    "summary": "Find the first nineteen circular primes, then the next four repunit circular primes, and test some larger repunits for likely circularity.",
-    "terse": ["02-terse"]
+    "summary": "Find the first nineteen circular primes, then the next four repunit circular primes, and test some larger repunits for likely circularity."
 }
