@@ -5,5 +5,6 @@
     "tags": ["number-theory", "pipes", "maths"],
     "interest": 3,
     "run_ms": 543,
-    "summary": "Implement the combination and permutation functions nCk and nPk, then print samples using exact integers and floating-point approximations."
+    "summary": "Implement the combination and permutation functions nCk and nPk, then print samples using exact integers and floating-point approximations.",
+    "terse": ["02-terse"]
 }
