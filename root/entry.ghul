@@ -1,7 +1,0 @@
-// Gives the root project the entry point named by its `--entry` argument, so the ghūl VS Code
-// extension has a well-formed project to load every task's source into. Nothing runs it: the root
-// project builds as a library, and each task under tasks/ is a program in its own right. Build and
-// run tasks individually, from their own folders.
-
-root_entry() =>
-    IO.Std.write_line("Run each task on its own, for example: dotnet run --project tasks/hello-world-text")

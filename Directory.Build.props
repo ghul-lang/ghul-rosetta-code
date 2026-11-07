@@ -16,6 +16,13 @@
     <GhulOptions Include="--warn-as-error top-level-statements-not-run" />
     <GhulOptions Include="--warn-as-error shadowed-non-callable" />
 
+    <!-- Solutions carry no statement terminators, so a stray ; is an error in
+         every task's own build. This replaces the check the former root
+         project carried: there is no project that compiles every solution
+         together any more. -->
+    <GhulOptions Include="--warn redundant-semicolon" />
+    <GhulOptions Include="--warn-as-error redundant-semicolon" />
+
     <!-- The pipe combinators take pure functions, and a call to write_line or
          a string interpolation is not one. The warning is advice: the call it
          sits on is judged on its own callee either way. Marking a solution's

@@ -522,10 +522,8 @@ been confirmed.
 ## Solutions carry no statement terminators
 
 A statement's terminator can be left off at the end of a line, and here it always is. The line
-break is the terminator. `rosetta-code.ghulproj` compiles every solution with
-`--warn redundant-semicolon`, so a root `dotnet build` reports a stray `;` wherever it is. Nothing
-else does - CI builds each task through its own project, and those do not carry the flag - so run
-that build before opening a pull request.
+break is the terminator. Every task's own build carries `--warn-as-error redundant-semicolon`
+from the root `Directory.Build.props`, so a stray `;` fails that task's build where it sits.
 
 ```ghul
 use IO.Std.write_line
@@ -1006,9 +1004,7 @@ to run the whole suite, or a subset, is a judgement call only when something eve
 has changed: the compiler or runtime version, `Directory.Build.props` or `Directory.Packages.props`,
 the test runner or how the tests are run, or a shared script.
 
-A root `dotnet build` type-checks every solution in one pass and is the only thing that reports a
-stray statement terminator, so it is worth running, but it produces none of the programs - see
-"The root project" below. Build and run a single task with `dotnet run --project tasks/<slug>`.
+Build and run a single task with `dotnet run --project tasks/<slug>`.
 
 - Each task directory is its own test case: the `ghulflags` and `*.expected` files sit beside
   the source. `scripts/new-task.sh` and `scripts/new-part.sh` scaffold them.
@@ -1032,21 +1028,10 @@ stray statement terminator, so it is worth running, but it produces none of the 
   captured deliberately, so a failure means either the solution changed or the compiler did. Find
   out which before touching an expectation file.
 
-## The root project
-
-`rosetta-code.ghulproj`, with `root/entry.ghul`, names every task's source so the ghūl VS Code
-extension loads them in one analysis session.
-
-**It builds, and it produces none of the programs.** Every task carries its own top-level
-statements, so an aggregate of them all has no single entry point to run: the project takes
-`OutputType` `Library` and an `--entry root_entry` stub, and suppresses the
-`top-level-statements-not-run` warning each task would otherwise draw. What the build is good for
-is type-checking every solution at once and reporting stray statement terminators. CI does not run
-it - each task is built by its own test project.
-
 Don't try to make the tasks build together as programs by wrapping solutions in an `entry()`
 function. A task's source should read the way it will read on the wiki, and top-level statements
-are the reason a ghūl entry there needs no wrapper at all.
+are the reason a ghūl entry there needs no wrapper at all. Each task is built and run on its own,
+from its own folder.
 
 ## Keeping GHUL.md in sync
 
