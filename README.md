@@ -17,10 +17,6 @@ posted solution shows up as a failing test here rather than as a wrong answer on
 - `tasks/<slug>/run.expected` - the test expectation: the output the program must produce. The
   project is the test case - `ghulflags` and the `*.expected` files sit beside the source, and
   `dotnet ghul-test tasks/<slug>` runs it in place.
-- `rosetta-code.ghulproj` and `root/entry.ghul` - a stub that names every task's source so the
-  editor loads them all in one analysis session. It builds as a library, which type-checks every
-  solution in one pass, but it produces none of the programs: each task is a program in its own
-  right and carries its own top-level statements. Build and run tasks individually.
 - `ledger/` - the ledger: one file per task that has been done, queued, rejected or blocked, and why.
 - `scripts/new-task.sh` - scaffolds a task and its test.
 - `scripts/ledger-only.sh` - whether a change touches nothing but the ledger, which the ledger,

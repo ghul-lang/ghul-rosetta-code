@@ -110,8 +110,7 @@ jobs:
     - name: Restore the runtime the tasks reference
       run: dotnet restore "$(ls tasks/*/*.ghulproj | head -n 1)"
 
-    # Each task is built by its own test project. The root rosetta-code.ghulproj is an
-    # editor-only stub and is deliberately not built here.
+    # Each task is built by its own test project.
     - name: Run Integration Tests
       run: dotnet ghul-test --shard ${{ matrix.shard }}/10 tasks
 
@@ -184,12 +183,14 @@ jobs:
       run: dotnet run --project tools/rosetta -- show > /dev/null
 
 
-  # The rules a machine can settle: no statement terminators, no line past
-  # the limit, and every source laid out as the formatter writes it. The
-  # first two had a check before this job existed and neither was run by
-  # anything, so both drifted - 39 terminators and 76 over-width lines had
-  # accumulated by the time it was added. A shard builds each task through
-  # its own project, which carries none of the three checks.
+  # The rules a machine can settle: no line past the limit, and every source
+  # laid out as the formatter writes it. The first two had a check before
+  # this job existed and neither was run by anything, so both drifted -
+  # 39 terminators and 76 over-width lines had accumulated by the time it
+  # was added. The terminator check is not this job's: every task's own
+  # build carries --warn-as-error redundant-semicolon from the root
+  # Directory.Build.props, so a stray ; fails that task's build. The other
+  # two checks are not carried by any task build, so they live here.
   hygiene:
     name: Solution hygiene
 
@@ -204,11 +205,6 @@ jobs:
 
     - name: Restore .NET tools
       run: dotnet tool restore
-
-    # The root project is the only one that reports a stray `;`, and it
-    # type-checks every task's source on the way.
-    - name: Build the root project
-      run: dotnet build
 
     - name: Check the line-width check
       run: scripts/check-width.sh --self-test
