@@ -7,5 +7,6 @@ dv(d, v) =>
             if acc + db <= d then (ans + p, acc + db) else (ans, acc) fi)
     in
         (sums.`0, d - sums.`1)
+
 let (a, r) = dv(580, 34)
 write_line("580 divided by 34 is {a} remainder {r}")
