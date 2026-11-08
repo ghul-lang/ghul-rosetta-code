@@ -1,6 +1,6 @@
 use default
 
-multifactorial(n: int, degree: int) -> long =>
+multifactorial(n, degree) =>
     from(n, -degree)
         |> take_while(* > 0)
         |> reduce(1L, (total, term) => total * long(term))

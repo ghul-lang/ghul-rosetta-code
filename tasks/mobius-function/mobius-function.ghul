@@ -1,6 +1,6 @@
 use default
 
-mobius(value: int) -> int is
+mobius(value) is
     let remaining mut = value
     let factors mut = 0
     let factor mut = 2

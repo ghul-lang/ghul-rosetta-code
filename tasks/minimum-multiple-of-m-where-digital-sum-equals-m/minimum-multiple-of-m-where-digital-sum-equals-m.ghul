@@ -1,6 +1,6 @@
 use default
 
-least_multiplier(n: long) -> long =>
+least_multiplier(n) =>
     from(1L) |> find(m => digits(n * m) |> sum() == n)!
 
 let terms = 1L::70L |> map(least_multiplier) |> list()

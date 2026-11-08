@@ -1,13 +1,13 @@
 use default
 
-power(value: int, exponent: int) -> int =>
+power(value, exponent) =>
     if exponent == 0 then
         1
     else
         value * power(value, exponent - 1)
     fi
 
-digit_powers(number: int) -> int =>
+digit_powers(number) =>
     number
         |> digits()
         |> filter(* > 0)

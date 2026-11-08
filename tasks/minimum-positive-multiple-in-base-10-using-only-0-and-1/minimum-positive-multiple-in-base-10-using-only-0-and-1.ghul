@@ -1,6 +1,6 @@
 use default
 
-b10(n: int) -> string is
+b10(n) is
     let parent = repeat(-1, n) |> LIST()
     let digit = repeat('0', n) |> LIST()
     let queue = QUEUE()
