@@ -1,8 +1,8 @@
 from outer:
 from inner:
-  show_trace
-  inner
-  outer
-  entry
-  _entry
+  $globals.show_trace
+  $globals.inner
+  $globals.outer
+  $globals.entry
+  $globals._entry
 and the program carries on
