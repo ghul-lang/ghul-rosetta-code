@@ -2,7 +2,7 @@ use default
 
 let pair_bound = 1200
 
-cube(x: long) -> long => x * x * x
+cube(x) => x * x * x
 
 let taxis = [
     cube(long(a)) + cube(long(b))
@@ -15,14 +15,14 @@ let taxis = [
     |> map((value, _) => value)
     |> list()
 
-cube_root(value: long) -> long => (
+cube_root(value) => (
     let cube_root_of = cbrt(cast(value))
     let root = long(floor(cube_root_of + 0.5))
 
     if root * root * root == value then root else 0L fi
 )
 
-expressions(taxi: long) -> string =>
+expressions(taxi) =>
     from(1L)
         |> take_while(a => cube(a) * 2L < taxi)
         |> map(a => (a, cube_root(taxi - cube(a))))

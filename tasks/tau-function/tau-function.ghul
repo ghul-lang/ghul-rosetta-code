@@ -1,6 +1,6 @@
 use default
 
-tau(value: int) -> int => 1::value |> count(n => value % n == 0)
+tau(value) => 1::value |> count(n => value % n == 0)
 
 write_line("the number of divisors of 1 to 100:")
 

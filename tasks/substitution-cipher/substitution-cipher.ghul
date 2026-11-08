@@ -4,7 +4,7 @@ use IO.File
 let plain_alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
-substitute(text: string, from: string, to: string) -> string =>
+substitute(text, from, to) =>
     text
         |> map(c =>
             if char.is_upper(c) then
@@ -19,11 +19,9 @@ substitute(text: string, from: string, to: string) -> string =>
         )
         |> string()
 
-encrypt(text: string) -> string =>
-    substitute(text, plain_alphabet, cipher_alphabet)
+encrypt(text) => substitute(text, plain_alphabet, cipher_alphabet)
 
-decrypt(text: string) -> string =>
-    substitute(text, cipher_alphabet, plain_alphabet)
+decrypt(text) => substitute(text, cipher_alphabet, plain_alphabet)
 
 let source = File.read_all_text("plain.txt")
 

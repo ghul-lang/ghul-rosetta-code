@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-verse(name: string) -> string => (
+verse(name) => (
     let lower = name.to_lower()
     let first = lower[0]
     let tail =

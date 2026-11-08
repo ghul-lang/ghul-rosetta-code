@@ -9,7 +9,7 @@ sudan(order: int, left: bigint, right: bigint) -> bigint =>
         sudan(order - 1, step, step + right)
     fi
 
-show(order: int, left: int, right: int) =>
+show(order, left, right) =>
     let value = sudan(order, cast(left), cast(right)) in
     write_line("F({order}, {left}, {right}) = {value}")
 
