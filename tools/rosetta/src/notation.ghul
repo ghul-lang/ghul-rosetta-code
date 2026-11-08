@@ -157,5 +157,15 @@ namespace Rosetta is
 
             notes
         si
+
+        // a definition with bare parameter names and no return type, e.g. `step(n) =>`
+        _unwritten_signature: Regex static =>
+            Regex("^\\s*[A-Za-z_][A-Za-z0-9_]*\\(\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\s*,\\s*[A-Za-z_][A-Za-z0-9_]*)*\\s*\\)(?:\\s+(?:memo|pure))*\\s*(?:=>|is\\b)")
+
+        // whether any signature outside a whole-line comment leaves its types to inference
+        has_inferred_signature(source: string) -> bool static =>
+            Regex.split(source, "\n")
+                |> filter(line => !Regex.is_match(line, "^\\s*//"))
+                |> any(line => _unwritten_signature.is_match(line))
     si
 si

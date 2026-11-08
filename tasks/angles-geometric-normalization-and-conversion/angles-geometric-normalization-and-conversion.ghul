@@ -1,10 +1,8 @@
 use default
 
-normalize(angle: double, turn: double) -> double =>
-    angle - turn * truncate(angle / turn) + 0.0
+normalize(angle, turn) => angle - turn * truncate(angle / turn) + 0.0
 
-convert(angle: double, from: double, to: double) -> double =>
-    normalize(angle, from) / from * to
+convert(angle, from, to) => normalize(angle, from) / from * to
 
 let scales = [
     (name = "degrees", turn = 360.0),

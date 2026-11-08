@@ -12,8 +12,7 @@ let table =
     "RGTLEFT RIght LEft  SAVE  SET SHift SI  SORT  SOS  STAck STATus "
     "TOP TRAnsfer Type Up"
 
-minimum_length(command: string) -> int =>
-    command |> filter(char.is_upper) |> count()
+minimum_length(command) => command |> filter(char.is_upper) |> count()
 
 let commands =
     table
@@ -32,7 +31,7 @@ matches(command: (word: string, minimum: int), word: string) -> bool =>
         StringComparison.ORDINAL_IGNORE_CASE
     ) == 0
 
-expand(word: string) -> string =>
+expand(word) =>
     commands
         |> filter(matches(*, word))
         |> map(command => command.word.to_upper())

@@ -1,6 +1,6 @@
 use default
 
-ackermann(m: int, n: int) -> int memo =>
+ackermann(m, n) memo =>
     if m == 0 then
         n + 1
     elif n == 0 then

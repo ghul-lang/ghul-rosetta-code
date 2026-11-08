@@ -42,8 +42,10 @@ rather than restating them here.
   and the fault is having neither.
 - **C# with odd syntax.** A pipe chain written as nested calls, a class where
   three functions would do, `is` ... `si` where an expression body fits, a type
-  written where inference already has it. An entry that a reader could reach from
-  the C# entry by swapping keywords had no reason to be written.
+  written on a local, a type argument or a cast where inference already has it
+  (a written function signature is never a finding in itself). An entry that a
+  reader could reach from the C# entry by swapping keywords had no reason to be
+  written.
 - **Words that AGENTS.md does not earn.** Most solutions carry none. A note in
   `notes.md` or a comment at a line is legitimate only for what the language is
   doing, a design choice a reader would otherwise infer, or an explanation the
@@ -71,19 +73,14 @@ rather than restating them here.
   written by `rosetta sync` and never by hand, so one left at `queued` while
   its `ledger/` file says `solved` means it was edited rather than synced.
 - **An annotation that is the point of the example.** A type inference
-  recovers is usually noise, but a task demonstrating abstraction, or a
+  recovers on a local is usually noise, but a task demonstrating abstraction, or a
   variable whose declared type is what the reader came for, keeps it. Ask what
   the task is for before calling one redundant.
-- **A function left to inference beside functions that are typed.** A solution
-  may leave the types off a few small, self-evident functions - a predicate, a
-  formatter, a step helper - while the rest keep theirs, to show that inference
-  works on a plain signature. That mix is deliberate and is not an
-  inconsistency, even when a typed function elsewhere in the file has a
-  parameter of the same name and type. Do not ask for the types to be put back
-  for that reason alone. What is a finding: a signature left partly typed;
-  functions that form one family - mutually recursive, or the stages of one
-  procedure - with some typed and some not; and a function whose types a reader
-  cannot recover from its name, its body and its callers.
+- **Functions left to inference beside functions that are typed.** A solution
+  may leave any plain signature to inference, all of them included, or keep any
+  of them typed, in whole or in part; either mix is deliberate and is not an
+  inconsistency. The only finding is a function whose types a reader cannot
+  recover from its name, its body and its callers.
 
 ## Versioning
 

@@ -32,7 +32,7 @@ for token in words(table) do
     fi
 od
 
-matches(command: COMMAND, word: string) -> bool =>
+matches(command, word) =>
     word.length >= command.minimum /\
     word.length <= command.word.length /\
     string.compare(

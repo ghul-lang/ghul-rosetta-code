@@ -14,9 +14,9 @@ for candidate in 2..sieve_limit do
     fi
 od
 
-digit_signature(value: int) -> string => "{value}" |> sort() |> join("")
+digit_signature(value) => "{value}" |> sort() |> join("")
 
-report(bound: int) is
+report(bound) is
     let groups =
         (2..bound)
             |> filter(candidate => !composite[candidate])

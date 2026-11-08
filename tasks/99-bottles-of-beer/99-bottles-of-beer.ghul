@@ -1,6 +1,6 @@
 use default
 
-bottles(n: int) -> string =>
+bottles(n) =>
     case n
     when 0 then "no more bottles"
     when 1 then "1 bottle"
