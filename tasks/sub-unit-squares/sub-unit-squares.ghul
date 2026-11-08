@@ -1,6 +1,6 @@
 use default
 
-qualifies(square: long) -> bool =>
+qualifies(square) =>
     let
         digits = "{square}",
 

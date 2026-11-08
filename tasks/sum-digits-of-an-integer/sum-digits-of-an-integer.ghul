@@ -1,6 +1,6 @@
 use default
 
-digit_sum(value: int, base: int) -> int is
+digit_sum(value, base) is
     walk(remaining: int, total: int) -> int =>
         if remaining == 0 then total
         else walk(remaining / base, total + remaining % base)

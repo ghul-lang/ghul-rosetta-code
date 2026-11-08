@@ -1,10 +1,10 @@
 use default
 
-splits_repeated_doubling(value: int) -> bool =>
+splits_repeated_doubling(value) =>
     let wide = long(value) in
     mod_pow(2L, wide, wide) == 2L % wide
 
-is_super_poulet(value: int) -> bool =>
+is_super_poulet(value) =>
     splits_repeated_doubling(value) /\
     !is_prime(value) /\
     (value |> divisors() |> all(splits_repeated_doubling))

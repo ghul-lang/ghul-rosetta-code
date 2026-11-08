@@ -2,6 +2,6 @@ use default
 
 let escape = char(27)
 
-at(row: int, column: int) -> string => "{escape}[{row};{column}H"
+at(row, column) => "{escape}[{row};{column}H"
 
 IO.Std.write("{at(6, 3)}Hello")

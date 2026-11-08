@@ -15,7 +15,7 @@ is_integer(z: Complex) -> bool => z.imaginary == 0.0 /\ is_integer(z.real)
 
 // Close enough, for a double that has picked up rounding error on the
 // way to what should have been an integer.
-is_nearly_integer(x: double, tolerance: double) -> bool =>
+is_nearly_integer(x, tolerance) =>
     abs(x - round(x)) <= tolerance
 
 for d in [25.000000m, 24.999999m, 25.000100m] do
