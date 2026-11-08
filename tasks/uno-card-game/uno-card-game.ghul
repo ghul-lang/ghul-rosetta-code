@@ -161,7 +161,7 @@ human_choice(hand: Card[]) -> Choice? is
         write_line("  {cards}")
     od
 
-    while true do
+    do
         let answer = ask("your move?")
 
         if !answer? then
@@ -354,7 +354,7 @@ play_hand(dealer: int) -> int is
     else
     esac
 
-    while true do
+    do
         let player = seat
         let played = take_turn(player)
 

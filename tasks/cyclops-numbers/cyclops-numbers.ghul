@@ -16,7 +16,7 @@ si
 cyclops() -> long{} is
     let half mut = 0
 
-    while true do
+    do
         let scale = 0..half |> reduce(1L, (acc, _) => acc * 10L)
 
         let halves = zero_free(half) |> list()
@@ -45,15 +45,10 @@ is_palindrome(value: long) -> bool =>
 report(name: string, numbers: () -> long{}) is
     write_line("first 50 {name}:")
 
-    let first_50 = numbers() |> take(50) |> list()
-
-    for row in 0..5 do
-        write_line(
-            (0..10)
-                |> map(column => "{first_50[row * 10 + column],10}")
-                |> join("")
-        )
-    od
+    numbers()
+        |> take(50)
+        |> chunk(10)
+        |> each(row => write_line(row |> map(n => "{n,10}") |> join("")))
 
     let beyond =
         numbers()

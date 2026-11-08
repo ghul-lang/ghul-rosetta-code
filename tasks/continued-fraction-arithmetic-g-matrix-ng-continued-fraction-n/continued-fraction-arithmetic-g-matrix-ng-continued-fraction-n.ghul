@@ -28,9 +28,7 @@ transform(matrix: Matrix, source: long{}) -> long{} is
             (a1, a, b1, b) = (b1, b, a1 - b1 * t, a - b * t)
 
             yield t
-        elif terms.move_next() then
-            let t = terms.current
-
+        elif let t = terms |> next() then
             (a1, a, b1, b) = (a + a1 * t, a1, b + b1 * t, b1)
         else
             (a, b) = (a1, b1)

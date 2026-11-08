@@ -44,7 +44,7 @@ class GRAPH(order: int public) is
         let reached = repeat(false, order) |> LIST()
         let a mut = left
 
-        while true do
+        do
             a = _base_of(a)
             reached[a] = true
 
@@ -147,7 +147,7 @@ class GRAPH(order: int public) is
     _flip(last: int) is
         let at mut = last
 
-        while true do
+        do
             let above = _parent[at]!
             let carried = _match[above]
 

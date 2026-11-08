@@ -33,7 +33,7 @@ visit(vertex) is
     if low[vertex] == index[vertex] then
         let component = LIST()
 
-        while true do
+        do
             let member = stack.pop()
 
             on_stack[member] = false

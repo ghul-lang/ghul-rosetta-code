@@ -195,7 +195,7 @@ human_move() -> Move? is
     let legal = moves('W')
     let placing = to_place['W'] > 0
 
-    while true do
+    do
         let answer = ask(
             if placing then "where do you place a piece?"
             else "which piece do you move, and where to?"
@@ -232,7 +232,7 @@ human_move() -> Move? is
 si
 
 human_removal(options: string[]) -> string? is
-    while true do
+    do
         let answer = ask("which of the computer's pieces do you remove?")
 
         if !answer? then

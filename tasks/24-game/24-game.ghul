@@ -137,7 +137,7 @@ let dealt = (0..4) |> map(_ => "123456789"[random.next(9)]) |> join(" ")
 Std.write_line("make 24 from {dealt}")
 Std.write_line("use + - * / and brackets, each digit once, q to quit")
 
-while true do
+do
     Std.write("expression: ")
 
     let typed = Std.read_line()

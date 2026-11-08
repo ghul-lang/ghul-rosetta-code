@@ -95,7 +95,7 @@ game(white: (string) -> Move?, verbose: bool) -> char is
         fi
     si
 
-    while true do
+    do
         if verbose then
             show(board)
         fi
@@ -150,7 +150,7 @@ si
 human(board: string) -> Move? is
     let legal = moves(board, 'W')
 
-    while true do
+    do
         write_line("your move (for example a1-a2)?")
 
         let line = read_line()

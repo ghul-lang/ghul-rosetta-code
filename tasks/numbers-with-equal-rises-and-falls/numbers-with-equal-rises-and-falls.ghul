@@ -11,15 +11,10 @@ sequence() -> int{} => from(1) |> filter(balanced)
 
 write_line("the first 200 numbers with equal rises and falls:")
 
-let first_200 = sequence() |> take(200) |> list()
-
-for row in 0::19 do
-    write_line(
-        (0::9)
-            |> map(column => "{first_200[row * 10 + column],5}")
-            |> join("")
-    )
-od
+sequence()
+    |> take(200)
+    |> chunk(10)
+    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
 
 let ten_millionth = sequence() |> skip(10000000 - 1) |> first()
 

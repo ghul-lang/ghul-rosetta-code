@@ -21,7 +21,7 @@ let steps = [
     |> MAP()
 
 new_food() -> (x: int, y: int) is
-    while true do
+    do
         let spot = (x = random.next(width), y = random.next(height))
 
         if !snake.contains(spot) then

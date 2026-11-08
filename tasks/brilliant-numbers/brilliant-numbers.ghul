@@ -42,11 +42,10 @@ let brilliant = brilliant_numbers(4)
 
 write_line("the first 100 brilliant numbers:")
 
-for row in 0..10 do
-    let cells = 0..10 |> map(column => "{brilliant[row * 10 + column],5}")
-
-    write_line(cells |> join(""))
-od
+brilliant
+    |> take(100)
+    |> chunk(10)
+    |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
 
 write_line("")
 

@@ -3,7 +3,7 @@ use default
 middle_square(seed: int) -> int{} is
     let current mut = seed
 
-    while true do
+    do
         let squared = "{long(current) * long(current),012}"
 
         current = int.parse(squared.substring(3, 6))

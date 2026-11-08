@@ -6,7 +6,7 @@ words() -> string{} is
 
     yield earlier
 
-    while true do
+    do
         yield later
 
         let next = "{later}{earlier}"

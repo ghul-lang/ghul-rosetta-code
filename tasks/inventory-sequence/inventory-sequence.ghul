@@ -3,10 +3,10 @@ use default
 inventory() -> int{} is
     let counts = MAP()
 
-    while true do
+    do
         let value mut = 0
 
-        while true do
+        do
             let seen mut = 0
             counts.try_get_value(value, seen ref)
 

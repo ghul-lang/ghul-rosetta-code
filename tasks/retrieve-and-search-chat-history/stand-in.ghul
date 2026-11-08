@@ -28,7 +28,7 @@ stand_in() -> string is
     listener.start()
 
     Tasks.TASK.run(() is
-        while true do
+        do
             let context = listener.get_context()
             let path = context.request.url?.absolute_path ?? ""
             let name = IO.Path.get_file_name(path) ?? ""

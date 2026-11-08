@@ -4,7 +4,7 @@ use Raster.IMAGE
 let random = System.Random(1809)
 
 normal() -> double{} is
-    while true do
+    do
         let r = sqrt(-2.0 * log(1.0 - random.next_double()))
         let angle = 2.0 * pi * random.next_double()
 

@@ -4,7 +4,7 @@ primes() -> int{} is
     let found = LIST()
     let candidate mut = 2
 
-    while true do
+    do
         let is_prime =
             found
                 |> take_while(p => p * p <= candidate)

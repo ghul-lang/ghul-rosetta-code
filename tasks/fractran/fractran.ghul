@@ -18,7 +18,7 @@ parse(text: string) -> Fraction[] =>
 run(program: Fraction[], start: bigint) -> bigint{} is
     let n mut = start
 
-    while true do
+    do
         yield n
 
         let fits =

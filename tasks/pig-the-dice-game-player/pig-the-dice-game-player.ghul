@@ -28,7 +28,7 @@ play(first: Player, second: Player, show: bool) -> int is
     let players = [first, second]
     let current mut = 0
 
-    while true do
+    do
         let player = players[current]
         let other = scores[1 - current]
         let turn mut = 0

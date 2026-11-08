@@ -72,7 +72,7 @@ si
 serve(listener: HttpListener) is
     let offered = procedures()
 
-    while true do
+    do
         let context = listener.get_context()
         let body =
             IO.StreamReader(context.request.input_stream).read_to_end()
