@@ -4,8 +4,7 @@ let text = "the quick 🦊 brown fox"
 
 let points = text |> runes() |> map(point => "{point}") |> list()
 
-slice(from, length) =>
-    points[from..from + length] |> join("")
+slice(from, length) => points[from..from + length] |> join("")
 
 starts_at(wanted) =>
     let target = wanted |> runes() |> map(point => "{point}") |> list() in

@@ -14,8 +14,7 @@ let colours = [
 let escape = char(27)
 let reset = "{escape}[0m"
 
-paint(text, attributes) =>
-    "{escape}[{attributes}m{text}{reset}"
+paint(text, attributes) => "{escape}[{attributes}m{text}{reset}"
 
 write_line(colours |> map(c => paint(c.name, "{c.code}")) |> join(" "))
 write_line(colours |> map(c => paint(c.name, "1;{c.code}")) |> join(" "))

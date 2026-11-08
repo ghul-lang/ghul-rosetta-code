@@ -19,11 +19,9 @@ substitute(text, from, to) =>
         )
         |> string()
 
-encrypt(text) =>
-    substitute(text, plain_alphabet, cipher_alphabet)
+encrypt(text) => substitute(text, plain_alphabet, cipher_alphabet)
 
-decrypt(text) =>
-    substitute(text, cipher_alphabet, plain_alphabet)
+decrypt(text) => substitute(text, cipher_alphabet, plain_alphabet)
 
 let source = File.read_all_text("plain.txt")
 
