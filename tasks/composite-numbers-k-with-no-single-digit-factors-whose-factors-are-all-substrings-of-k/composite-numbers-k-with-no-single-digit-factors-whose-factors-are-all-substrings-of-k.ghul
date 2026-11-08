@@ -19,7 +19,7 @@ let prime = (
     sieve
 )
 
-factors_are_substrings(k: int) -> bool is
+factors_are_substrings(k) is
     let digits = "{k}"
     let rest mut = k
     let factor mut = 11

@@ -20,7 +20,7 @@ class MONEY(cents: bigint) is
             "{whole}.{part,2:00}"
 si
 
-dollars(units: int, cents: int) -> MONEY =>
+dollars(units, cents) =>
     MONEY(bigint(units) * 100n + bigint(cents))
 
 let hamburger = dollars(5, 50)

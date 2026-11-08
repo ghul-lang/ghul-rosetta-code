@@ -1,6 +1,6 @@
 use default
 
-divides_repunit(value: int) -> bool =>
+divides_repunit(value) =>
     let remainder =
         (1..value) |> reduce(0, (running, _) => (running * 10 + 1) % value)
     in

@@ -1,6 +1,6 @@
 use default
 
-escaped(text: string) -> string =>
+escaped(text) =>
     text
         |> map(character =>
             case character
@@ -12,12 +12,12 @@ escaped(text: string) -> string =>
         )
         |> join("")
 
-row(line: string, cell: string) -> string =>
+row(line, cell) =>
     line.split([','])
         |> map(value => "      <{cell}>{escaped(value)}</{cell}>")
         |> join("\n")
 
-table(csv: string) -> string => (
+table(csv) => (
     let lines = csv.split(['\n'])
 
     let head =
