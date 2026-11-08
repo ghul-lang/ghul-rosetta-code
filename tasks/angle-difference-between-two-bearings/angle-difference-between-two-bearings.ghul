@@ -1,7 +1,6 @@
 use default
 
-difference(from, to) =>
-    ieee_remainder(to - from, 360.0)
+difference(from, to) => ieee_remainder(to - from, 360.0)
 
 let pairs = [
     (20.0, 45.0),

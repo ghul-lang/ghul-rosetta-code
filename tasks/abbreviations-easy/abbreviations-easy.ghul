@@ -12,8 +12,7 @@ let table =
     "RGTLEFT RIght LEft  SAVE  SET SHift SI  SORT  SOS  STAck STATus "
     "TOP TRAnsfer Type Up"
 
-minimum_length(command) =>
-    command |> filter(char.is_upper) |> count()
+minimum_length(command) => command |> filter(char.is_upper) |> count()
 
 let commands =
     table
