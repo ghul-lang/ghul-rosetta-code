@@ -8,8 +8,7 @@ let words =
         |> filter(w => w |> all(char.is_letter(*)))
         |> list()
 
-capitalised(word) =>
-    "{char.to_upper(word[0])}{word[1..<0]}"
+capitalised(word) => "{char.to_upper(word[0])}{word[1..<0]}"
 
 random_word() =>
     let word = words[random.next(words.count)] in
