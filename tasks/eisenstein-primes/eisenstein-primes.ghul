@@ -3,9 +3,9 @@ use Raster.IMAGE
 
 use Eisenstein = (a: int, b: int)
 
-norm(e: Eisenstein) -> int => e.a * e.a - e.a * e.b + e.b * e.b
+norm(e) => e.a * e.a - e.a * e.b + e.b * e.b
 
-is_eisenstein_prime(e: Eisenstein) -> bool =>
+is_eisenstein_prime(e) =>
     if e.a == 0 \/ e.b == 0 \/ e.a == e.b then
         let p = max(abs(e.a), abs(e.b)) in
         is_prime(p) /\ p % 3 == 2
@@ -13,11 +13,11 @@ is_eisenstein_prime(e: Eisenstein) -> bool =>
         is_prime(norm(e))
     fi
 
-real(e: Eisenstein) -> double => double(e.a) - double(e.b) / 2.0
+real(e) => double(e.a) - double(e.b) / 2.0
 
-imaginary(e: Eisenstein) -> double => double(e.b) * sqrt(3.0) / 2.0
+imaginary(e) => double(e.b) * sqrt(3.0) / 2.0
 
-show(e: Eisenstein) -> string =>
+show(e) =>
     let
         im = imaginary(e),
         sign = if im < 0.0 then "-" else "+" fi

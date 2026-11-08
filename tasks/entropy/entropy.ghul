@@ -1,6 +1,6 @@
 use default
 
-entropy(text: string) -> double =>
+entropy(text) =>
     let
         groups = group_by(text, c => c).values,
         total = double(text.length)

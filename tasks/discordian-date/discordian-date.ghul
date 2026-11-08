@@ -19,7 +19,7 @@ let flux_days = [
     "Chaoflux", "Discoflux", "Confuflux", "Bureflux", "Afflux"
 ]
 
-discordian(date: DateTime) -> string =>
+discordian(date) =>
     let year = date.year + 1166 in
     if date.month == 2 /\ date.day == 29 then
         "St. Tib's Day, YOLD {year}"

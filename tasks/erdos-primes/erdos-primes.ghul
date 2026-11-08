@@ -11,7 +11,7 @@ while next <= limit do
     next = next * step
 od
 
-is_erdos(prime: int) -> bool =>
+is_erdos(prime) =>
     factorials |> filter(* < prime) |> all(f => !is_prime(prime - f))
 
 let erdos = primes() |> take_while(* <= limit) |> filter(is_erdos) |> list()

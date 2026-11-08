@@ -2,7 +2,7 @@ use default
 
 let base = 1_000_000_000L
 
-zeros_in(limb: long, width: int) -> int => (
+zeros_in(limb, width) => (
     let rest mut = limb
     let zeros mut = 0
 
@@ -17,9 +17,9 @@ zeros_in(limb: long, width: int) -> int => (
     zeros
 )
 
-digit_count(n: long) -> int => "{n}".length
+digit_count(n) => "{n}".length
 
-mean_zero_proportion(limit: int) -> double is
+mean_zero_proportion(limit) is
     let limbs = LIST([1L])
     let total mut = 0.0
 
