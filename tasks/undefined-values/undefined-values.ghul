@@ -1,6 +1,6 @@
 use default
 
-lookup(table: MAP[string, int], key: string) -> int? =>
+lookup(table: Map[string, int], key: string) -> int? =>
     if table.contains_key(key) then table[key] else null fi
 
 let ages = MAP()

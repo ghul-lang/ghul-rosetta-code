@@ -17,7 +17,7 @@ derivative(row: double[], order: int) -> LIST[double] =>
     (0..row.count) |> map(k => row[k] * double(order - 2 * k)) |> LIST()
 
 routh_array(coefficients: double[]) -> (
-    rows: LIST[LIST[double]],
+    rows: LIST[double][],
     on_axis: bool
 ) is
     let degree = coefficients.count - 1

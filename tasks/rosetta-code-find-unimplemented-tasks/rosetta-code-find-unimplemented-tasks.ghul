@@ -7,7 +7,7 @@ use System.Text.Json.JsonDocumentOptions
 // of Category:Programming Tasks that is not also in the language's own
 // category. The API returns a category's members a batch at a time, and
 // says where to continue from until there are no more.
-members(client: HttpClient, api: string, category: string) -> SET[string] is
+members(client: HttpClient, api: string, category: string) -> Set[string] is
     let titles = SET()
     let query =
         "{api}?action=query&list=categorymembers"

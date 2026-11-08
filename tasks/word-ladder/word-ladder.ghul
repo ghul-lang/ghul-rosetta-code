@@ -12,7 +12,7 @@ neighbours(word: string) -> string{} =>
         |> filter(words.contains)
 
 path_back(
-    previous: MAP[string, string],
+    previous: Map[string, string],
     start: string,
     word: string
 ) -> string[] =>

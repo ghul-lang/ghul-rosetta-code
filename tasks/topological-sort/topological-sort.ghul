@@ -2,7 +2,7 @@ use default
 
 use ROW = (library: string, dependencies: string)
 
-dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
+dependency_graph(rows: ROW[]) -> Map[string, SET[string]] is
     let graph = MAP()
 
     for row in rows do
@@ -26,7 +26,7 @@ dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
     return graph
 si
 
-compile_order(graph: MAP[string, SET[string]]) -> (
+compile_order(graph: Map[string, SET[string]]) -> (
     ordered: string[],
     blocked: string[]
 ) is

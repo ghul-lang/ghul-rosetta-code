@@ -1,9 +1,9 @@
 use default
 
 merged(
-    base: MAP[string, object],
-    update: MAP[string, object]
-) -> MAP[string, object] is
+    base: Map[string, object],
+    update: Map[string, object]
+) -> Map[string, object] is
     let result = MAP()
 
     for (key, value) in base do

@@ -31,10 +31,10 @@ punctuation_names.add("comma", ',')
 punctuation_names.add("apostrophe", '\'')
 punctuation_names.add("hyphen", '-')
 
-count_of[K](counts: MAP[K, int], key: K) -> int =>
+count_of[K](counts: Map[K, int], key: K) -> int =>
     if counts.contains_key(key) then counts[key] else 0 fi
 
-actual_counts(sentence: string, with_punctuation: bool) -> MAP[char, int] is
+actual_counts(sentence: string, with_punctuation: bool) -> Map[char, int] is
     let counts = MAP()
 
     for character in sentence.to_lower() do
@@ -72,7 +72,7 @@ claimed_item(word: string) -> char? is
     return null
 si
 
-claimed_counts(sentence: string) -> MAP[char, int] is
+claimed_counts(sentence: string) -> Map[char, int] is
     let claims = MAP()
     let pending mut = 0
 
