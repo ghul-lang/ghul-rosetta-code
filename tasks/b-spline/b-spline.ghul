@@ -14,10 +14,7 @@ let spans = control.count - degree
 
 knot(i) => double(clamp(i - degree, 0, spans))
 
-lerp(a, b, t) => (
-    x = a.x + (b.x - a.x) * t,
-    y = a.y + (b.y - a.y) * t
-)
+lerp(a, b, t) => (x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t)
 
 de_boor(t) is
     let span = min(int(t), spans - 1) + degree

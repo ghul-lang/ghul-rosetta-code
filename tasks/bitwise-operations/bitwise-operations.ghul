@@ -5,11 +5,9 @@ use System.Numerics.BitOperations
 show(name, value) =>
     write_line("{name,-22} {Convert.to_string(value, 2),32}")
 
-rotate_left(a, by) =>
-    int(BitOperations.rotate_left(uint(a), by))
+rotate_left(a, by) => int(BitOperations.rotate_left(uint(a), by))
 
-rotate_right(a, by) =>
-    int(BitOperations.rotate_right(uint(a), by))
+rotate_right(a, by) => int(BitOperations.rotate_right(uint(a), by))
 
 bitwise(a, b) is
     show("a", a)
