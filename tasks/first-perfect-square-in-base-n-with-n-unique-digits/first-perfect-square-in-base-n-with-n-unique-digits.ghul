@@ -2,7 +2,7 @@ use default
 
 let digit_glyphs = "0123456789ABCDEF"
 
-is_pandigital(square: long, base: int) -> bool is
+is_pandigital(square, base) is
     let radix = long(base)
     let wanted = (1 << base) - 1
 
@@ -15,7 +15,7 @@ is_pandigital(square: long, base: int) -> bool is
     walk(square, 0)
 si
 
-in_base(value: long, base: int) -> string is
+in_base(value, base) is
     let radix = long(base)
 
     walk(remaining: long) -> string =>
@@ -29,7 +29,7 @@ in_base(value: long, base: int) -> string is
     walk(value)
 si
 
-smallest_root(base: int) -> int =>
+smallest_root(base) =>
     let lowest = pow(double(base), double(base - 1)) in
     int(ceiling(sqrt(lowest)))
 

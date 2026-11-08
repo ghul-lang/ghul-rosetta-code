@@ -1,6 +1,6 @@
 use default
 
-largest_truncatable(base: int) -> bigint is
+largest_truncatable(base) is
     let radix = bigint(base)
 
     let level mut = 1::base - 1 |> map(bigint) |> filter(is_prime) |> list()

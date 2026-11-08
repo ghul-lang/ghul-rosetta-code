@@ -8,10 +8,10 @@ let given = [
 
 let complete = given.count + 1
 
-uses_at(position: int, letter: char) -> int =>
+uses_at(position, letter) =>
     given |> count(word => word[position] == letter)
 
-under_represented(position: int) -> char =>
+under_represented(position) =>
     "ABCD" |> find(letter => uses_at(position, letter) < complete / 4)!
 
 write_line(0..4 |> map(under_represented) |> string())

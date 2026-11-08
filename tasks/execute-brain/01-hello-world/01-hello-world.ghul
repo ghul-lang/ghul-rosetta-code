@@ -1,7 +1,7 @@
 use IO.Std.write
 use default
 
-run(program: string, input: string) is
+run(program, input) is
     let cells = LIST()
 
     for _ in 0..30000 do

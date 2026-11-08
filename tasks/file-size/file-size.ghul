@@ -1,6 +1,6 @@
 use default
 
-report(label: string, path: string) is
+report(label, path) is
     if IO.File.exists(path) then
         write_line("{label}: {IO.FileInfo(path).length} bytes")
     else

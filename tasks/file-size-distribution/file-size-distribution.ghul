@@ -7,14 +7,14 @@ let sizes =
         |> map(path => IO.FileInfo(path).length)
         |> list()
 
-bucket(size: long) -> int =>
+bucket(size) =>
     if size == 0L then
         0
     else
         int(log10(double(size))) + 1
     fi
 
-label(bucket: int) -> string =>
+label(bucket) =>
     if bucket == 0 then
         "empty"
     else

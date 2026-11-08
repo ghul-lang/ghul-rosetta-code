@@ -2,7 +2,7 @@ use default
 
 class ENVIRONMENT(value: int public, count: int public)
 
-hailstone_step(env: ENVIRONMENT) is
+hailstone_step(env) is
     if env.value != 1 then
         env.value =
             if env.value % 2 == 0 then

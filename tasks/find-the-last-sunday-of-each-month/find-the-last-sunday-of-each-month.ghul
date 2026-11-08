@@ -2,7 +2,7 @@ use default
 
 let year = 2013
 
-last_sunday(month: int) -> System.DateTime =>
+last_sunday(month) =>
     let last = System.DateTime(
         year,
         month,
