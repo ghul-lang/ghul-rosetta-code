@@ -79,6 +79,11 @@ namespace Rosetta is
         // its directory under tasks/, as in `currying/01-written-out repeat_text`.
         keep: SET[string] public
 
+        // An inference experiment rather than a change to keep: every named, non-generic function
+        // is a candidate, a parameterless one and one whose types are constructed included, and
+        // the keep lists are ignored.
+        experiment: bool public
+
         _error_pattern: string static =>
             "([^\\s/\\\\(]+\\.ghul)\\((\\d+),\\d+,\\d+,\\d+\\): ?error ?: ?(.*?)(?: \\[[^\\]]*\\])?\\s*$"
 
@@ -170,12 +175,12 @@ namespace Rosetta is
 
                 let original = text.substring(start, end - start)
 
-                if original !~ replacement /\ _is_identifier_start(replacement[0]) /\ !_is_parameterless(replacement) then
+                if original !~ replacement /\ _is_identifier_start(replacement[0]) /\ (experiment \/ !_is_parameterless(replacement)) then
                     let name = replacement.substring(0, replacement.index_of('('))
 
                     let site = SIGNATURE_SITE(file, name, int.parse(span[0]), start, end, original, replacement)
 
-                    if !site.generic /\ !signature_types.is_plain(original) then
+                    if !experiment /\ !site.generic /\ !signature_types.is_plain(original) then
                         site.constructed = true
                         site.reason = "kept: constructed type"
                     fi
@@ -314,7 +319,7 @@ namespace Rosetta is
             let key = IO.Path.get_relative_path(IO.Path.combine(root, "tasks"), directory)
 
             for site in outcome.sites do
-                if keep.contains("{key} {site.name}") \/ keep.contains("{key} *") then
+                if !experiment /\ (keep.contains("{key} {site.name}") \/ keep.contains("{key} *")) then
                     site.held = true
                     site.reason = "kept: readability"
                 fi
@@ -431,7 +436,7 @@ namespace Rosetta is
         si
     si
 
-    // `rosetta strip-annotations [--dry-run] [--compiler <command>] [--report <file>] [--keep <file>] <slug or path> ...`
+    // `rosetta strip-annotations [--dry-run] [--experiment] [--compiler <command>] [--report <file>] [--keep <file>] <slug or path> ...`
     strip_annotations(root: string, arguments: LIST[string]) is
         let dry_run = arguments.contains("--dry-run")
         let compiler mut = "dotnet ghul-compiler"
@@ -452,12 +457,14 @@ namespace Rosetta is
                 awaiting = ""
             elif argument =~ "--compiler" \/ argument =~ "--report" \/ argument =~ "--keep" then
                 awaiting = argument
-            elif argument !~ "--dry-run" then
+            elif argument !~ "--dry-run" /\ argument !~ "--experiment" then
                 names.add(argument)
             fi
         od
 
         let stripper = SIGNATURE_STRIPPER(root, compiler)
+
+        stripper.experiment = arguments.contains("--experiment")
 
         let standing = IO.Path.combine(root, "tools", "rosetta", "keep-annotations.txt")
 
