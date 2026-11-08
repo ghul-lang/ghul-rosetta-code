@@ -6,14 +6,14 @@ union Shape is
     TRIANGLE(base: double, height: double)
 si
 
-area(shape) =>
+area(shape: Shape) -> double =>
     case shape
     when c: Shape.CIRCLE then c.radius * c.radius * 3.14159
     when r: Shape.RECTANGLE then r.width * r.height
     when t: Shape.TRIANGLE then t.base * t.height / 2.0
     esac
 
-describe(shape) =>
+describe(shape: Shape) -> string =>
     case shape
     when c: Shape.CIRCLE then "circle of radius {c.radius}"
     when r: Shape.RECTANGLE then
