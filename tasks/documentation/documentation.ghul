@@ -13,8 +13,7 @@ si
 ///
 /// - a: one end of the line
 /// - b: the other end
-midpoint(a, b) =>
-    POINT((a.x + b.x) / 2.0, (a.y + b.y) / 2.0)
+midpoint(a, b) => POINT((a.x + b.x) / 2.0, (a.y + b.y) / 2.0)
 
 write_line("{POINT(3.0, 4.0).length()}")
 let middle = midpoint(POINT(0.0, 0.0), POINT(6.0, 8.0))

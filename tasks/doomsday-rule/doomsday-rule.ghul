@@ -10,8 +10,7 @@ let month_names = [
     "July", "August", "September", "October", "November", "December"
 ]
 
-is_leap_year(year) =>
-    year % 4 == 0 /\ (year % 100 != 0 \/ year % 400 == 0)
+is_leap_year(year) => year % 4 == 0 /\ (year % 100 != 0 \/ year % 400 == 0)
 
 anchor_day(year, month) =>
     case month
