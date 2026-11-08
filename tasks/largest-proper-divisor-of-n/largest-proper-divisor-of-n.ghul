@@ -1,6 +1,6 @@
 use default
 
-smallest_prime_factor(n: int) -> int is
+smallest_prime_factor(n) is
     let i mut = 2
 
     while i * i <= n do
@@ -14,7 +14,7 @@ smallest_prime_factor(n: int) -> int is
     n
 si
 
-largest_proper_divisor(n: int) -> int =>
+largest_proper_divisor(n) =>
     if n == 1 then 1 else n / smallest_prime_factor(n) fi
 
 let divisors = 1::100 |> map(n => "{largest_proper_divisor(n)}") |> join()

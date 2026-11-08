@@ -6,7 +6,7 @@ use IO.Std.read_line
 // Every character becomes an x, so one line is at least as long as
 // another exactly when its run of x's starts with the other's: no
 // length is ever held as a number or compared.
-relation(line: string, longest: string) -> string =>
+relation(line, longest) =>
     let
         line_marks = Regex.replace(line, ".", "x"),
         longest_marks = Regex.replace(longest, ".", "x")
@@ -21,7 +21,7 @@ relation(line: string, longest: string) -> string =>
 
 // The lines tied for longest are kept as one string, joined with line
 // breaks, rather than in a list.
-longest_lines(longest: string, ties: string) -> string =>
+longest_lines(longest, ties) =>
     if let line = read_line() then
         case relation(line, longest)
         when "longer" then longest_lines(line, line)

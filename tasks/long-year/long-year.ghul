@@ -2,13 +2,13 @@ use default
 
 use System.Globalization.ISOWeek
 
-december_31_weekday(year: int) -> int =>
+december_31_weekday(year) =>
     (year + year / 4 - year / 100 + year / 400) % 7
 
 let thursday = 4
 let wednesday = 3
 
-is_long_year(year: int) -> bool =>
+is_long_year(year) =>
     december_31_weekday(year) == thursday \/
     december_31_weekday(year - 1) == wednesday
 
@@ -18,7 +18,7 @@ for row in 2000::2100 |> filter(is_long_year) |> chunk(9) do
     write_line(row |> join(" "))
 od
 
-has_53_weeks(year: int) -> bool => ISOWeek.get_weeks_in_year(year) == 53
+has_53_weeks(year) => ISOWeek.get_weeks_in_year(year) == 53
 
 let agrees =
     1600::2400 |> all(year => is_long_year(year) == has_53_weeks(year))
