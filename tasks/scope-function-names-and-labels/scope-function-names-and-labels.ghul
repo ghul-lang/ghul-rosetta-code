@@ -1,10 +1,9 @@
 use default
 
-visible_everywhere() -> string =>
+visible_everywhere() =>
     "a namespace-scope function, visible to the whole assembly"
 
-_visible_in_this_assembly() -> string =>
-    "an underscore name, private to the assembly"
+_visible_in_this_assembly() => "an underscore name, private to the assembly"
 
 class HOLDER is
     init() is si
@@ -17,7 +16,7 @@ class HOLDER is
     reaches_its_own() -> string => _private_method()
 si
 
-outer() -> string is
+outer() is
     inner() => "a named function inside a body, local to it"
 
     inner()

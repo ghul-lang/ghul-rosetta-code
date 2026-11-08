@@ -1,6 +1,6 @@
 use default
 
-divisor_count(n: int) -> int =>
+divisor_count(n) =>
     (1..n + 1)
         |> take_while(d => d * d <= n)
         |> filter(d => n % d == 0)

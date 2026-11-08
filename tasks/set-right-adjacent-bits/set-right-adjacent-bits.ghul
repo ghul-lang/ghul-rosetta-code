@@ -1,6 +1,6 @@
 use default
 
-set_right_adjacent(bits: string, n: int) -> string =>
+set_right_adjacent(bits, n) =>
     let remaining mut = 0 in
     bits
         |> map(bit =>
@@ -17,7 +17,7 @@ set_right_adjacent(bits: string, n: int) -> string =>
         |> map(c => "{c}")
         |> join("")
 
-show(bits: string, n: int) is
+show(bits, n) is
     write_line("n = {n}; Width e = {bits.length}:")
     write_line("")
     write_line("    Input b: {bits}")
