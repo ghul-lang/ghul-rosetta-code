@@ -67,7 +67,7 @@ names(expression: Expression) -> string{} is
     esac
 si
 
-evaluate(expression: Expression, values: MAP[string, bool]) -> bool =>
+evaluate(expression: Expression, values: Map[string, bool]) -> bool =>
     case expression
     when leaf: Expression.VARIABLE then
         values[leaf.name]

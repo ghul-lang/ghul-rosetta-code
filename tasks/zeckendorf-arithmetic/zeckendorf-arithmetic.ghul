@@ -103,7 +103,7 @@ add(left: int[], right: int[]) -> LIST[int] is
     total
 si
 
-decrement(value: int[]) -> LIST[int] => (
+decrement(value: int[]) -> int[] => (
     let result = copy(value)
     let lowest = 0..width |> find(index => result[index] == 1)
 
@@ -121,7 +121,7 @@ decrement(value: int[]) -> LIST[int] => (
     result
 )
 
-subtract(left: int[], right: int[]) -> LIST[int] =>
+subtract(left: int[], right: int[]) -> int[] =>
     let result = copy(left) in
     if is_zero(right) then
         result

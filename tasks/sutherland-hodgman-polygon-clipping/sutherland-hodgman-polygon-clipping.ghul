@@ -38,7 +38,7 @@ extend(kept: LIST[Point], at: Point) is
     fi
 si
 
-clip(polygon: Point[], from: Point, to: Point) -> LIST[Point] is
+clip(polygon: Point[], from: Point, to: Point) -> Point[] is
     let kept = LIST()
 
     for index in 0..polygon.count do

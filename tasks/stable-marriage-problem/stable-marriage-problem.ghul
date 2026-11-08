@@ -125,7 +125,7 @@ engage() -> MAP[string, string] is
     engaged_to
 si
 
-is_stable(engaged_to: MAP[string, string]) -> bool =>
+is_stable(engaged_to: Map[string, string]) -> bool =>
     engaged_to.keys
         |> all(woman =>
             men_preferences.keys
@@ -146,7 +146,7 @@ is_stable(engaged_to: MAP[string, string]) -> bool =>
                 )
         )
 
-find_partner(engaged_to: MAP[string, string], man: string) -> string =>
+find_partner(engaged_to: Map[string, string], man: string) -> string =>
     engaged_to.keys |> find(woman => engaged_to[woman] =~ man) ?? ""
 
 let engaged_to = engage()

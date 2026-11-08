@@ -1,7 +1,7 @@
 use default
 
 merged(
-    base: MAP[string, object],
+    base: Map[string, object],
     update: MAP[string, object]
 ) -> MAP[string, object] is
     let result = MAP()

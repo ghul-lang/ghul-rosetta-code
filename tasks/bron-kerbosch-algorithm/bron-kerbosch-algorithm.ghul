@@ -22,7 +22,7 @@ od
 
 let cliques = LIST[string[]]()
 
-report(clique: SET[string]) is
+report(clique: Set[string]) is
     let members = clique |> LIST()
 
     members.sort()
@@ -31,7 +31,7 @@ report(clique: SET[string]) is
 si
 
 search(
-    clique: SET[string],
+    clique: Set[string],
     candidates: SET[string],
     excluded: SET[string]
 ) is

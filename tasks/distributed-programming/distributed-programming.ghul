@@ -58,7 +58,7 @@ client(url: string) is
     write_line("square(7) = {call(http, url, "square", [7])}")
 si
 
-procedures() -> MAP[string, (JsonElement) -> object] is
+procedures() -> Map[string, (JsonElement) -> object] is
     let offered = MAP()
 
     offered["sum"] =

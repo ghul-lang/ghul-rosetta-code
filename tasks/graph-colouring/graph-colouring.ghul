@@ -29,7 +29,7 @@ class GRAPH(nodes: int[], edges: Edge[]) is
                 )
     si
 
-    neighbours(node: int) -> SET[int] => _neighbours[node]
+    neighbours(node: int) -> Set[int] => _neighbours[node]
 
     degree(node: int) -> int => _neighbours[node].count
 si
@@ -51,7 +51,7 @@ parse(description: string) -> GRAPH is
     GRAPH(nodes |> sort() |> list(), edges)
 si
 
-color(graph: GRAPH) -> MAP[int, int] is
+color(graph: GRAPH) -> Map[int, int] is
     let colors = MAP()
 
     let neighbour_colors =

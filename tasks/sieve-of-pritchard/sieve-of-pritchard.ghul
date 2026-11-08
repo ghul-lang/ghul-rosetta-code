@@ -50,7 +50,7 @@ extend(wheel: SET[int], length: int, prime: int, limit: int) is
     od
 si
 
-next_member(wheel: SET[int], length: int) -> int is
+next_member(wheel: Set[int], length: int) -> int is
     for member in wheel |> sort() do
         if member > 1 then
             return member
