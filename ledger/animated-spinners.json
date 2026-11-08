@@ -3,7 +3,7 @@
   "slug": "animated-spinners",
   "state": "published",
   "note": "reopened, was rejected/needs-gui: ghul.raster can draw the spinner frames and collect them into an animated PNG, so no native GUI window is needed",
-  "published_hash": "9056db7f8f7fe8d7ce058fb914b999496e9e1ed3fff0f37390a64bfbc0ef0eff",
+  "published_hash": "13a6c4dab3e7f96b437904345a02726402917580787b81bc09ae9d9bee8a1c85",
   "image_hashes": {
     "Ghul-animated-spinners-animated-spinners.gif": "cc2491d7f362e6d22fa11a7c5fc3ea5b3e404e62"
   }
