@@ -67,7 +67,7 @@ image.view(-20.0, -40.0, 230.0, 210.0)
 image.clear(252ub, 250ub, 245ub)
 image.color(40ub, 80ub, 170ub)
 image.stroke(2.5)
-image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
+image.line(points |> map(p => (p.x, p.y)) |> list())
 
 image.color(210ub, 50ub, 40ub)
 

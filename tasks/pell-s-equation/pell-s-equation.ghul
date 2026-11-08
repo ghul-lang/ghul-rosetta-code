@@ -18,7 +18,7 @@ pell(n: int) -> (x: bigint, y: bigint) is
         let b = f2
 
         if x * x - bigint(n) * b * b =~ 1n then
-            return (x = x, y = b)
+            return (x, b)
         fi
     od
 si

@@ -38,7 +38,7 @@ to_nest(lines: LINE[], position: int) -> (node: NODE, next: int) => (
         cursor = following
     od
 
-    (node = NODE(head.name, children), next = cursor)
+    (NODE(head.name, children), cursor)
 )
 
 let start = NODE("RosettaCode", [

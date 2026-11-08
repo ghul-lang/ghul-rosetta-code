@@ -29,7 +29,7 @@ score(guess: string) -> (bulls: int, cows: int) => (
             |> count(i =>
                 guess[i] != secret[i] /\ secret.contains(guess[i])
             )
-    (bulls = bulls, cows = cows)
+    (bulls, cows)
 )
 
 write_line("I have four different digits from 1 to 9.")

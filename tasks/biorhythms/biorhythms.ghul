@@ -91,7 +91,7 @@ for (i, (label, length)) in cycles |> index() do
             |> map(q =>
                 let day = double(q) / 4.0 in
                 let turn = (double(center) + day) / double(length) in
-                (x = day, y = sin(2.0 * pi * turn))
+                (day, sin(2.0 * pi * turn))
             )
             |> list()
     )

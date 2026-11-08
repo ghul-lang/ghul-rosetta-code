@@ -12,7 +12,7 @@ let tree = SET()
 touches(x: int, y: int) -> bool =>
     -1..2
         |> any(across =>
-            -1..2 |> any(up => tree.contains((x = x + across, y = y + up)))
+            -1..2 |> any(up => tree.contains((x + across, y + up)))
         )
 
 grow() -> (x: int, y: int){} is
@@ -25,13 +25,13 @@ grow() -> (x: int, y: int){} is
             y = (y + random.next(3) - 1 + size) % size
         od
 
-        tree.add((x = x, y = y))
+        tree.add((x, y))
 
-        yield (x = x, y = y)
+        yield (x, y)
     od
 si
 
-tree.add((x = size / 2, y = size / 2))
+tree.add((size / 2, size / 2))
 
 let image = IMAGE(size, size)
 

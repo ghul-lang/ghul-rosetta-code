@@ -14,9 +14,9 @@ use Choice = (source: string, absolute: (int) -> int)
 
 chosen(library: string) -> Choice =>
     if NativeLibrary.try_load(library, _) then
-        (source = "the shared library", absolute = LIBC.abs)
+        ("the shared library", LIBC.abs)
     else
-        (source = "an internal equivalent", absolute = own_abs)
+        ("an internal equivalent", own_abs)
     fi
 
 report(library: string) is

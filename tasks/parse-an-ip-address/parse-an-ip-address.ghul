@@ -18,14 +18,11 @@ bracketed(text: string) -> Parsed =>
                 null
             fi
         in
-        (address = IPAddress.parse(text[1..close]), port = port)
+        (IPAddress.parse(text[1..close]), port)
 
 with_port(text: string) -> Parsed =>
     let colon = text.index_of(':') in
-    (
-        address = IPAddress.parse(text[0..colon]),
-        port = int.parse(after(text, colon))
-    )
+    (IPAddress.parse(text[0..colon]), int.parse(after(text, colon)))
 
 split_port(text: string) -> Parsed =>
     if text.starts_with("[") then
@@ -33,7 +30,7 @@ split_port(text: string) -> Parsed =>
     elif text |> count(* == ':') == 1 then
         with_port(text)
     else
-        (address = IPAddress.parse(text), port = null)
+        (IPAddress.parse(text), null)
     fi
 
 hex(bytes: ubyte[]) -> string =>

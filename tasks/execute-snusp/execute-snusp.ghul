@@ -40,7 +40,7 @@ run(lines: string[]) is
             if get() == 0 then
                 step()
             fi
-        when '@' then calls.push((at = ip, heading = heading))
+        when '@' then calls.push((ip, heading))
         when '#' then
             if calls.count == 0 then
                 return

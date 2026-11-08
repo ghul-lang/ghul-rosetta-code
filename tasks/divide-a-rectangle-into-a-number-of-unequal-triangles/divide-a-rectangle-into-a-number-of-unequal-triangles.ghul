@@ -143,7 +143,7 @@ for (i, t) in many |> index() do
     let shade = ubyte(120 + (i * 37) % 120)
 
     tiles.add(
-        [t.a, t.b, t.c] |> map(p => (x = p.x, y = p.y)) |> list(),
+        [t.a, t.b, t.c] |> map(p => (p.x, p.y)) |> list(),
         (shade - 80ub, shade - 30ub, 255ub - shade / 3ub)
     )
 od
@@ -153,7 +153,7 @@ image.color(30ub, 30ub, 50ub)
 image.stroke(1.0)
 
 for t in many do
-    let corners = [t.a, t.b, t.c, t.a] |> map(p => (x = p.x, y = p.y))
+    let corners = [t.a, t.b, t.c, t.a] |> map(p => (p.x, p.y))
 
     image.line(corners |> list())
 od

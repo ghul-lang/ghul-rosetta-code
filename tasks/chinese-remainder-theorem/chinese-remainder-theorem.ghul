@@ -2,11 +2,11 @@ use default
 
 extended_gcd(a: long, b: long) -> (g: long, x: long, y: long) =>
     if b == 0L then
-        (g = a, x = 1L, y = 0L)
+        (a, 1L, 0L)
     else
         let (g, x1, y1) = extended_gcd(b, a % b)
 
-        (g = g, x = y1, y = x1 - (a / b) * y1)
+        (g, y1, x1 - (a / b) * y1)
     fi
 
 crt(ns: long[], as: long[]) -> long? is

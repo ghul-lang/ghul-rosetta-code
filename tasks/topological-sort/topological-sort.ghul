@@ -61,7 +61,7 @@ compile_order(graph: MAP[string, SET[string]]) -> (
 
     let blocked = pending.keys |> sort() |> list()
 
-    return (ordered = ordered, blocked = blocked)
+    return (ordered, blocked)
 si
 
 report(heading: string, rows: ROW[]) is

@@ -61,7 +61,7 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
             i = skip_space(text, next)
         od
 
-        return (value = LIST(items.to_array()), next = i + 1)
+        return (LIST(items.to_array()), i + 1)
     fi
 
     if text[start] == '"' then
@@ -71,7 +71,7 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
             close = close + 1
         od
 
-        return (value = STRING(text[start + 1..close]), next = close + 1)
+        return (STRING(text[start + 1..close]), close + 1)
     fi
 
     let end mut = start
@@ -80,7 +80,7 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
         end = end + 1
     od
 
-    return (value = atom(text[start..end]), next = end)
+    return (atom(text[start..end]), end)
 si
 
 render(node: SExpr) -> string =>

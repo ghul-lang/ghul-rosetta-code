@@ -63,7 +63,7 @@ image.stroke(0.6)
 
 for q in quads do
     let light = brightness(q)
-    let outline = q |> map(p => (x = p.x, y = p.y)) |> list()
+    let outline = q |> map(p => (p.x, p.y)) |> list()
 
     image.color(
         ubyte(60.0 * light),
