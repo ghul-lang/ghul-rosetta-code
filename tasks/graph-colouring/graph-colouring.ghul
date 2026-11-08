@@ -45,7 +45,7 @@ parse(description: string) -> GRAPH is
     let edges =
         tokens
             |> filter(ends => ends.count == 2)
-            |> map(ends => (from = ends[0], to = ends[1]))
+            |> map(ends => (ends[0], ends[1]))
             |> list()
 
     GRAPH(nodes |> sort() |> list(), edges)
@@ -139,10 +139,7 @@ for (i, (name, description)) in examples |> index() do
     let position = node => (
         let angle =
             6.283185307 * double(slot[node]) / double(graph.nodes.count)
-        (
-            x = cx + 80.0 * Ghul.Math.cos(angle),
-            y = cy + 80.0 * Ghul.Math.sin(angle)
-        )
+        (cx + 80.0 * Ghul.Math.cos(angle), cy + 80.0 * Ghul.Math.sin(angle))
     )
 
     image.color(120ub, 120ub, 120ub)

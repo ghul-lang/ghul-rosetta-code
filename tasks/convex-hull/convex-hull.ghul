@@ -68,7 +68,7 @@ let axes = AXES(image)
 axes.fit(-11.0, -11.0, 21.0, 21.0)
 axes.draw()
 
-let corners = LIST(hull |> map(at => (x = double(at.x), y = double(at.y))))
+let corners = LIST(hull |> map(at => (double(at.x), double(at.y))))
 
 image.color(206ub, 224ub, 244ub)
 image.fill(corners)

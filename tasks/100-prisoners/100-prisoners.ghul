@@ -7,8 +7,8 @@ let trials = 10000
 let random = System.Random(20260908)
 
 let strategies = [
-    (name = "opening at random", finds = opens_at_random),
-    (name = "following the cycle", finds = follows_the_cycle)
+    ("opening at random", opens_at_random),
+    ("following the cycle", follows_the_cycle)
 ]
 
 shuffled_cards() -> int[] => (

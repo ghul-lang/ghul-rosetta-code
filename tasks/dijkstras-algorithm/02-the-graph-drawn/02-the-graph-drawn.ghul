@@ -72,9 +72,9 @@ on_tree(edge: EDGE) -> bool =>
     best.contains_key(edge.finish) /\
     best[edge.finish].previous =~ edge.start
 
-let tree_color = (red = 35ub, green = 85ub, blue = 170ub)
-let other_color = (red = 190ub, green = 194ub, blue = 205ub)
-let ink = (red = 55ub, green = 60ub, blue = 75ub)
+let tree_color = (35ub, 85ub, 170ub)
+let other_color = (190ub, 194ub, 205ub)
+let ink = (55ub, 60ub, 75ub)
 
 let image = IMAGE(740, 520)
 

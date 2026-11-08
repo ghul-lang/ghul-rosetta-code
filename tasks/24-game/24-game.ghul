@@ -112,26 +112,20 @@ runs_digits_together(text: string) -> bool =>
 
 judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
     if runs_digits_together(entered) then
-        (
-            told = "digits cannot be run together into longer numbers",
-            solved = false
-        )
+        ("digits cannot be run together into longer numbers", false)
     elif sorted_digits(entered) !~ sorted_digits(dealt) then
-        (told = "use each of {dealt} exactly once", solved = false)
+        ("use each of {dealt} exactly once", false)
     else
         case parse_sum(entered, 0)
         when bad: Parsed.BAD then
-            (told = bad.complaint, solved = false)
+            (bad.complaint, false)
         when parsed: Parsed.OK then
             if skip_spaces(entered, parsed.at) < entered.length then
-                (told = "the expression does not end there", solved = false)
+                ("the expression does not end there", false)
             elif abs(parsed.value - target) < 0.000001 then
-                (told = "that is 24, well done", solved = true)
+                ("that is 24, well done", true)
             else
-                (
-                    told = "that comes to {parsed.value}, not 24",
-                    solved = false
-                )
+                ("that comes to {parsed.value}, not 24", false)
             fi
         esac
     fi

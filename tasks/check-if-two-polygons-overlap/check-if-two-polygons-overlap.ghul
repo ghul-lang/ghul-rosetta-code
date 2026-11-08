@@ -19,10 +19,7 @@ axes(shape: Polygon) -> Point{} =>
 
 spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
     let alongs = polygon |> map(corner => corner ⋅ axis) |> list() in
-    (
-        low = alongs |> reduce(alongs[0], min),
-        high = alongs |> reduce(alongs[0], max)
-    )
+    (alongs |> reduce(alongs[0], min), alongs |> reduce(alongs[0], max))
 
 separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
     let
@@ -84,9 +81,9 @@ image.clear(252ub, 250ub, 245ub)
 let drawing = SHAPES()
 
 let colors = [
-    (r = 60ub, g = 110ub, b = 200ub),
-    (r = 220ub, g = 150ub, b = 60ub),
-    (r = 80ub, g = 170ub, b = 110ub)
+    (60ub, 110ub, 200ub),
+    (220ub, 150ub, 60ub),
+    (80ub, 170ub, 110ub)
 ]
 
 for index in 0..shapes.count do

@@ -154,7 +154,7 @@ let tests =
     IO.File.read_all_text("test-data.txt")
         |> parse_all()
         |> chunk(3)
-        |> map(c => (h = c[0], f = c[1], g = c[2]))
+        |> map(c => (c[0], c[1], c[2]))
         |> collect()
 
 for (dimension, (h, f, g)) in tests |> index() do

@@ -136,15 +136,15 @@ evaluate(expression: Expression) -> int =>
 node(expression: Expression) -> (label: string, children: Expression[]) =>
     case expression
     when (value): NUMBER then
-        (label = "{value}", children = LIST())
+        ("{value}", LIST())
     when (left, right): ADD then
-        (label = "+", children = [left, right])
+        ("+", [left, right])
     when (left, right): SUBTRACT then
-        (label = "-", children = [left, right])
+        ("-", [left, right])
     when (left, right): MULTIPLY then
-        (label = "*", children = [left, right])
+        ("*", [left, right])
     when (left, right): DIVIDE then
-        (label = "/", children = [left, right])
+        ("/", [left, right])
     esac
 
 draw(expression: Expression, prefix: string, stem: string) is

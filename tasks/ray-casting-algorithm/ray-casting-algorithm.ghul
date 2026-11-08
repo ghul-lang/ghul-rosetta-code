@@ -80,9 +80,9 @@ let hexagon = [
 ]
 
 let shapes = [
-    (name = "square", rings = square),
-    (name = "square with hole", rings = square_hole),
-    (name = "hexagon", rings = hexagon)
+    ("square", square),
+    ("square with hole", square_hole),
+    ("hexagon", hexagon)
 ]
 
 let probes = [

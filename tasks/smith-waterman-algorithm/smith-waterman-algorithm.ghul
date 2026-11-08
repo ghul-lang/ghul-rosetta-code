@@ -44,7 +44,7 @@ best_cell(scores: int[][]) -> (row: int, column: int) is
         od
     od
 
-    return (row = row, column = column)
+    return (row, column)
 si
 
 trace(first: string, second: string, scores: int[][]) -> (
@@ -91,9 +91,9 @@ trace(first: string, second: string, scores: int[][]) -> (
     cells.reverse()
 
     return (
-        a_aligned = string(top.to_array()),
-        b_aligned = string(bottom.to_array()),
-        path = cells |> join(" ")
+        string(top.to_array()),
+        string(bottom.to_array()),
+        cells |> join(" ")
     )
 si
 

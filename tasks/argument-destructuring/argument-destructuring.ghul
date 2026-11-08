@@ -29,7 +29,7 @@ write_line(first_three(squares))
 let marker = ("home", [10, 20], (255, 128, 0))
 write_line(label(marker))
 
-let box = (width = 2, height = 3, depth = 4)
+let box = (2, 3, 4)
 write_line(apply(join_words, words))
 write_line("{apply(cuboid, box)}")
 write_line("{apply(cuboid, 5, 6, 7)}")

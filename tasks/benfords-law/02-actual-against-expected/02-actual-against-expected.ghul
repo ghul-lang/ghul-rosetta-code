@@ -24,8 +24,8 @@ let expected =
         |> map(digit => 100.0 * log10(1.0 + 1.0 / double(digit)))
         |> list()
 
-let observed_color = (red = 40ub, green = 90ub, blue = 180ub)
-let benford_color = (red = 225ub, green = 145ub, blue = 45ub)
+let observed_color = (40ub, 90ub, 180ub)
+let benford_color = (225ub, 145ub, 45ub)
 
 let image = IMAGE(700, 470)
 
@@ -33,10 +33,10 @@ image.view(0.3, 0.0, 9.7, 33.0, 62.0)
 
 box(left: double, bottom: double, right: double, top: double) is
     image.fill([
-        (x = left, y = bottom),
-        (x = right, y = bottom),
-        (x = right, y = top),
-        (x = left, y = top)
+        (left, bottom),
+        (right, bottom),
+        (right, top),
+        (left, top)
     ])
 si
 

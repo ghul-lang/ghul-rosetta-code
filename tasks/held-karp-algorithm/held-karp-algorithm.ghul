@@ -43,7 +43,7 @@ held_karp(cost: int[][]) -> (total: int, tour: int[]) is
 
     tour.add(0)
 
-    (total = best[everything][final] + cost[final][0], tour = tour)
+    (best[everything][final] + cost[final][0], tour)
 si
 
 let cost = [

@@ -17,12 +17,12 @@ remarks_document(remarks: Remark[]) -> XDocument =>
     ])
 
 let remarks = [
-    (name = "April", remark = "Bubbly: I'm > Tam and <= Emily"),
+    ("April", "Bubbly: I'm > Tam and <= Emily"),
     (
-        name = "Tam O'Shanter",
-        remark = "Burns: \"When chapman billies leave the street ...\""
+        "Tam O'Shanter",
+        "Burns: \"When chapman billies leave the street ...\""
     ),
-    (name = "Emily", remark = "Short & shrift")
+    ("Emily", "Short & shrift")
 ]
 
 write_line("{remarks_document(remarks)}")

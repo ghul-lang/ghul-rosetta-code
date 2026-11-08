@@ -68,7 +68,7 @@ draw(image: IMAGE, angle: double) is
             let outline =
                 face.corners
                     |> map(i => turned(corners[i], angle))
-                    |> map(p => (x = p.x, y = p.y))
+                    |> map(p => (p.x, p.y))
                     |> list()
 
             let bright = 0.3 + 0.7 * max(0.0, dot(normal, light))

@@ -57,9 +57,7 @@ write_line("polygon and rect1 overlap? {overlap(polygon, first)}")
 write_line("polygon and rect2 overlap? {overlap(polygon, second)}")
 
 outline(image: IMAGE, shape: Polygon, dx: double) is
-    image.line(
-        shape ++ [shape[0]] |> map(p => (x = p.x + dx, y = p.y)) |> list()
-    )
+    image.line(shape ++ [shape[0]] |> map(p => (p.x + dx, p.y)) |> list())
 si
 
 let image = IMAGE(480, 180)
