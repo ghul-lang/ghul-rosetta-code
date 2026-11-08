@@ -80,10 +80,9 @@ rather than restating them here.
   works on a plain signature. That mix is deliberate and is not an
   inconsistency, even when a typed function elsewhere in the file has a
   parameter of the same name and type. Do not ask for the types to be put back
-  for that reason alone. What is a finding: a signature left partly typed;
-  functions that form one family - mutually recursive, or the stages of one
-  procedure - with some typed and some not; and a function whose types a reader
-  cannot recover from its name, its body and its callers.
+  for that reason alone. What is a finding: a signature left partly typed, and a
+  function whose types a reader cannot recover from its name, its body and its
+  callers.
 
 ## Versioning
 

@@ -8,7 +8,7 @@ integer_term(n) =>
     bigint(532 * n * n + 126 * n + 9) /
     (3n * bigint.pow(factorial(bigint(n)), 6))
 
-square_root(n: bigint) -> bigint =>
+square_root(n) =>
     let walk =
         (x: bigint, y: bigint) -> bigint rec =>
             if y < x then rec(y, (y + n / y) / 2n) else x fi
