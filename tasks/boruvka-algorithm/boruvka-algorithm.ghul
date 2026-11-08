@@ -18,7 +18,7 @@ for vertex in 0..vertices do
     tree[vertex] = vertex
 od
 
-root(vertex: int) -> int is
+root(vertex) is
     if tree[vertex] != vertex then
         tree[vertex] = root(tree[vertex])
     fi

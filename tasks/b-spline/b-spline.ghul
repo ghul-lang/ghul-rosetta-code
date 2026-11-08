@@ -12,14 +12,11 @@ let control: Point[] = [
 let degree = 3
 let spans = control.count - degree
 
-knot(i: int) -> double => double(clamp(i - degree, 0, spans))
+knot(i) => double(clamp(i - degree, 0, spans))
 
-lerp(a: Point, b: Point, t: double) -> Point => (
-    x = a.x + (b.x - a.x) * t,
-    y = a.y + (b.y - a.y) * t
-)
+lerp(a, b, t) => (x = a.x + (b.x - a.x) * t, y = a.y + (b.y - a.y) * t)
 
-de_boor(t: double) -> Point is
+de_boor(t) is
     let span = min(int(t), spans - 1) + degree
     let d = LIST(0::degree |> map(j => control[j + span - degree]))
 

@@ -3,7 +3,7 @@ use default
 let random = System.Random(2011)
 let trials = 100_000
 
-loop_length(n: int) -> int => (
+loop_length(n) => (
     let seen = repeat(false, n + 1) |> LIST()
     let x mut = 1
     let length mut = 0
@@ -17,10 +17,10 @@ loop_length(n: int) -> int => (
     length
 )
 
-simulated(n: int) -> double =>
+simulated(n) =>
     double(1::trials |> sum_by(_ => loop_length(n))) / double(trials)
 
-analytical(n: int) -> double =>
+analytical(n) =>
     let size = double(n) in
     1::n
         |> sum_by(k =>

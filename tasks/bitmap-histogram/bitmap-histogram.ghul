@@ -20,7 +20,7 @@ od
 
 source.write("source.png")
 
-luminance(x: int, y: int) -> int =>
+luminance(x, y) =>
     let pixel = source.pixel(x, y) in
     int(
         0.2126 * double(pixel.red) +
@@ -38,7 +38,7 @@ for y in 0..height do
     od
 od
 
-median() -> int is
+median() is
     let half = width * height / 2
 
     let seen mut = 0
