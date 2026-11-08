@@ -21,8 +21,7 @@ while root * root <= limit do
     root = root + 1
 od
 
-digit_signature(value: int) -> string =>
-    value |> digits() |> sort() |> string()
+digit_signature(value) => value |> digits() |> sort() |> string()
 
 let primes = 2..(limit + 1) |> filter(candidate => !composite[candidate])
 

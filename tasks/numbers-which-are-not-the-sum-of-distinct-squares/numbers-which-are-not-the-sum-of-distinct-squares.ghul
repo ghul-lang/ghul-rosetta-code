@@ -9,7 +9,7 @@ use default
 let reachable = LIST([true])
 let root mut = 0
 
-run_after(start: int) -> int =>
+run_after(start) =>
     start + 1..reachable.count |> take_while(n => reachable[n]) |> count()
 
 do
