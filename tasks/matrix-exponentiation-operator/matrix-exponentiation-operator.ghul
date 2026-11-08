@@ -11,7 +11,7 @@ use Matrix = bigint[][]
         )
         |> collect()
 
-identity(n: int) -> Matrix =>
+identity(n) =>
     0..n
         |> map(i =>
             0..n |> map(j => if i == j then 1n else 0n fi) |> collect()

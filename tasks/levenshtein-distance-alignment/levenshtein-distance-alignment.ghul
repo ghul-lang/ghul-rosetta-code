@@ -1,10 +1,6 @@
 use default
 
-align(a: string, b: string) -> (
-    top: string,
-    bottom: string,
-    distance: int
-) is
+align(a, b) is
     let d =
         0::a.length
             |> map(i =>

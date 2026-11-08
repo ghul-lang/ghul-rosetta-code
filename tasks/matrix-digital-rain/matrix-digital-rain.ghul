@@ -45,7 +45,7 @@ let delay = if IO.Std.is_output_redirected then 0 else 70 fi
 let white = "\u001B[97m"
 let green = "\u001B[32m"
 
-glyph() -> char => glyphs[noise.next(glyphs.length)]
+glyph() => glyphs[noise.next(glyphs.length)]
 
 for frame in 0..frames do
     IO.Std.write("\u001B[H")

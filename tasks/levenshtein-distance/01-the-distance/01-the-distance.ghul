@@ -1,6 +1,6 @@
 use default
 
-levenshtein(source: string, target: string) -> int is
+levenshtein(source, target) is
     let previous mut = 0::target.length |> list()
 
     for i in 1::source.length do

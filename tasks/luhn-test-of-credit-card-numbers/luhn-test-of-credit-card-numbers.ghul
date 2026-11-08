@@ -1,6 +1,6 @@
 use default
 
-luhn(number: string) -> bool is
+luhn(number) is
     let total =
         number
             |> reverse()

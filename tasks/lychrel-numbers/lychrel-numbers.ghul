@@ -4,14 +4,13 @@ use RESULT = (is_lychrel: bool, values: bigint[])
 write_line("reversing and adding, which takes a moment")
 write_line("")
 
-reverse_digits(n: bigint) -> bigint =>
-    bigint.parse("{n}" |> reverse() |> join(""))
+reverse_digits(n) => bigint.parse("{n}" |> reverse() |> join(""))
 
-is_palindrome(n: bigint) -> bool =>
+is_palindrome(n) =>
     let s = "{n}" in
     s =~ (s |> reverse() |> join(""))
 
-lychrel_sequence(n: int) -> RESULT is
+lychrel_sequence(n) is
     let current mut = bigint(n)
     let values = LIST()
 
