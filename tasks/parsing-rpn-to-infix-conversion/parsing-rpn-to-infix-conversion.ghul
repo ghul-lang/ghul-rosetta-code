@@ -7,20 +7,16 @@ si
 
 let operators = ["^", "*", "/", "+", "-"]
 
-precedence(symbol: string) -> int =>
+precedence(symbol) =>
     case symbol
     when "^" then 4
     when "*", "/" then 3
     else 2
     esac
 
-right_associative(symbol: string) -> bool => symbol =~ "^"
+right_associative(symbol) => symbol =~ "^"
 
-needs_parentheses(
-    child: Expression,
-    parent: string,
-    on_right: bool
-) -> bool =>
+needs_parentheses(child, parent, on_right) =>
     case child
     when value: Expression.NUMBER then false
     when inner: Expression.OPERATION then
@@ -31,7 +27,7 @@ needs_parentheses(
         (mine == theirs /\ on_right != right_associative(parent))
     esac
 
-render(node: Expression) -> string =>
+render(node) =>
     case node
     when value: Expression.NUMBER then value.text
     when operation: Expression.OPERATION then
@@ -40,14 +36,14 @@ render(node: Expression) -> string =>
         "{part(operation.right, operation.symbol, true)}"
     esac
 
-part(child: Expression, parent: string, on_right: bool) -> string =>
+part(child, parent, on_right) =>
     if needs_parentheses(child, parent, on_right) then
         "( {render(child)} )"
     else
         render(child)
     fi
 
-convert(source: string) is
+convert(source) is
     let stack = LIST()
 
     write_line("input: {source}")

@@ -1,6 +1,6 @@
 use default
 
-is_pangram(sentence: string) -> bool =>
+is_pangram(sentence) =>
     sentence
         |> map(char.to_lower)
         |> filter(char.is_letter)

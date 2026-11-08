@@ -8,14 +8,13 @@ let words =
         |> filter(w => w |> all(char.is_letter(*)))
         |> list()
 
-capitalised(word: string) -> string =>
-    "{char.to_upper(word[0])}{word[1..<0]}"
+capitalised(word) => "{char.to_upper(word[0])}{word[1..<0]}"
 
-random_word() -> string =>
+random_word() =>
     let word = words[random.next(words.count)] in
     "{capitalised(word)}{random.next(10, 100)}"
 
-passphrase(n: int) -> string => 1::n |> map(_ => random_word()) |> join("-")
+passphrase(n) => 1::n |> map(_ => random_word()) |> join("-")
 
 for n in [3, 5, 7] do
     write_line("{n} words: {passphrase(n)}")

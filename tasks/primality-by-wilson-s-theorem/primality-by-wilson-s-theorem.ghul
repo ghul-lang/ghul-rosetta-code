@@ -1,10 +1,9 @@
 use default
 
-factorial_mod(n: long, m: long) -> long =>
+factorial_mod(n, m) =>
     (1L::n) |> reduce(1L, (product, k) => product * k % m)
 
-is_wilson_prime(p: long) -> bool =>
-    p > 1L /\ factorial_mod(p - 1L, p) == p - 1L
+is_wilson_prime(p) => p > 1L /\ factorial_mod(p - 1L, p) == p - 1L
 
 let tested = [
     2L, 3L, 9L, 15L, 29L, 37L, 47L, 57L, 67L, 77L, 87L, 97L,

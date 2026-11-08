@@ -15,7 +15,7 @@ rooted[1] = 1L
 unrooted[0] = 1L
 unrooted[1] = 1L
 
-tree(branches: int, n: int, largest: int, size: int, count: long) is
+tree(branches, n, largest, size, count) is
     let total mut = size
     let ways mut = 0L
 

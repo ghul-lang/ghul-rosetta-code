@@ -1,6 +1,6 @@
 use default
 
-partitions(n: int) -> bigint is
+partitions(n) is
     let p = LIST([1n])
 
     walk(m: int, k: int, total: bigint) -> bigint =>

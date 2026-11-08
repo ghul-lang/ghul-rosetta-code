@@ -1,7 +1,6 @@
 use default
 
-popcount(n: long) -> int =>
-    if n == 0L then 0 else cast(n & 1L) + popcount(n >>> 1) fi
+popcount(n) => if n == 0L then 0 else cast(n & 1L) + popcount(n >>> 1) fi
 
 let powers_of_three = stream(1L, power => power || power * 3L)
 
