@@ -1,20 +1,22 @@
 use default
-let sieve = repeat(true, 1000001) |> LIST()
+
+let limit = 1000000
+let sieve = repeat(true, limit + 1) |> LIST()
 (sieve[0], sieve[1]) = (false, false)
 mark(m) is sieve[m] = false si
 
-2::1000000
-    |> filter(p => sieve[p] /\ p <= 1000000 / p)
+2::limit
+    |> filter(p => sieve[p] /\ p <= limit / p)
     |> each(p =>
-        from(p * p, p) |> take_while(* <= 1000000) |> each(mark))
+        from(p * p, p) |> take_while(* <= limit) |> each(mark))
 
 pi(s) => (parse[int](s))!
 rot(n) => let d = "{n}" in
-    0..d.length |> map(i => pi("{d.substring(i)}{d.substring(0,i)}"))
+    0..d.length |> map(i => pi("{d[i..<0]}{d[0..i]}"))
 cir(n) => rot(n) |> all(r => r >= n /\ sieve[r])
-sq(v, n) => bigint.mod_pow(v, 2n, n)
+sq(v, n) => mod_pow(v, 2n, n)
 ok(b, d, s, n) =>
-    let x = bigint.mod_pow(b, d, n) in
+    let x = mod_pow(b, d, n) in
     x =~ 1n \/ x =~ n - 1n \/
         stream(x, v => let y = sq(v, n) in y || y)
             |> take(int(s)) |> any(v => v =~ n - 1n)
@@ -22,11 +24,11 @@ strip(d, s) => if d.is_even then strip(d / 2n, s + 1L) else (d, s) fi
 pp(n) => let (d, s) = strip(n - 1n, 0L) in
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n]
         |> all(b => b >= n \/ ok(b, d, s, n))
-rep(n) => (bigint.pow(10n, int(n)) - 1n) / 9n
+rep(n) => repeat(1n, int(n)) |> reduce(0n, (a, x) => a * 10n + x)
 
-write_line("sieving to {1000000:N0}")
+write_line("sieving to {limit:N0}")
 write_line("The first 19 circular primes:")
-write_line(2::1000000 |> filter(cir) |> take(19) |> list())
+write_line(2::limit |> filter(cir) |> take(19) |> list())
 write_line("\ntesting repunits for primality")
 write_line("The next 4 circular primes, all repunits:")
 write_line(from(7) |> filter(n => sieve[int(n)] /\ pp(rep(n)))
