@@ -7,7 +7,7 @@ let random = System.Random(1963)
 
 // Box-Muller: a pair of uniform values on (0, 1] becomes a value from the
 // standard normal distribution, which the mean and deviation then place.
-normal() -> double =>
+normal() =>
     mean +
     deviation *
     sqrt(-2.0 * log(random.next_double())) *

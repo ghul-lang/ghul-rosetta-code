@@ -2,7 +2,7 @@ use default
 
 let square_endings = [0, 1, 4, 5, 6, 9]
 
-reverse_of(n: long) -> long is
+reverse_of(n) is
     walk(remaining: long, reversed: long) -> long =>
         if remaining == 0L then reversed
         else
@@ -12,7 +12,7 @@ reverse_of(n: long) -> long is
     walk(n, 0L)
 si
 
-is_rare(n: long) -> bool =>
+is_rare(n) =>
     let r = reverse_of(n) in
     n > r /\ is_square(n + r) /\ is_square(n - r)
 

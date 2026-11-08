@@ -23,7 +23,7 @@ let primes =
         |> map(bigint)
         |> list()
 
-primorial(index: int) -> bigint => primes[0..index] |> product()
+primorial(index) => primes[0..index] |> product()
 
 write_line("the first ten primorial numbers:")
 

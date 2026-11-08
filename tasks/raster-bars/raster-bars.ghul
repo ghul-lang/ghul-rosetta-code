@@ -17,10 +17,9 @@ let bars = [
     (color = (red = 0.8, green = 0.35, blue = 1.0), phase = 1.4)
 ]
 
-channel(value: double) -> ubyte =>
-    ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
+channel(value) => ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
 
-draw_bar(image: IMAGE, color: Color, top: double) is
+draw_bar(image, color, top) is
     for row in 0..thickness do
         let across = (double(row) + 0.5) / double(thickness)
         let shine = sin(across * pi)
@@ -37,7 +36,7 @@ draw_bar(image: IMAGE, color: Color, top: double) is
     od
 si
 
-draw(image: IMAGE, time: double) is
+draw(image, time) is
     image.clear(0ub, 0ub, 10ub)
 
     let travel = double(height - thickness) / 2.0

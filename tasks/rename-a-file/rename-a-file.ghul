@@ -1,6 +1,6 @@
 use default
 
-rename_file(from: string, to: string) -> string is
+rename_file(from, to) is
     if !IO.File.exists(from) then
         return "not there"
     fi
@@ -13,7 +13,7 @@ rename_file(from: string, to: string) -> string is
     yrt
 si
 
-rename_directory(from: string, to: string) -> string is
+rename_directory(from, to) is
     if !IO.Directory.exists(from) then
         return "not there"
     fi

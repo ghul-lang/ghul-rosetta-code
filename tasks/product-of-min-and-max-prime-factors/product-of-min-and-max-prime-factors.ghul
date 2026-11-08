@@ -1,6 +1,6 @@
 use default
 
-min_max_product(n: int) -> int =>
+min_max_product(n) =>
     let factors = prime_factors(n) in
     case factors
     when [] then 1
