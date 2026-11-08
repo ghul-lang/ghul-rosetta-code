@@ -7,7 +7,7 @@ let suffixes = [
 
 let invariant = CultureInfo.invariant_culture
 
-suffize(text: string, digits: int?, base: int) -> string is
+suffize(text, digits, base) is
     let cleaned = text.trim().replace(",", "")
     let signed = cleaned[0] == '+' \/ cleaned[0] == '-'
     let sign = if signed then "{cleaned[0]}" else "" fi

@@ -1,13 +1,13 @@
 use default
 
-summarize(term: string) -> string =>
+summarize(term) =>
     let counts = term |> frequencies() in
     counts.keys
         |> sort((left, right) => right <> left)
         |> map(digit => "{counts[digit]}{digit}")
         |> join("")
 
-sequence(seed: int) -> string[] => (
+sequence(seed) => (
     let terms = LIST()
     let seen = SET()
 
@@ -21,7 +21,7 @@ sequence(seed: int) -> string[] => (
     terms
 )
 
-canonical(seed: int) -> string => string("{seed}" |> sort())
+canonical(seed) => string("{seed}" |> sort())
 
 let lengths = MAP()
 

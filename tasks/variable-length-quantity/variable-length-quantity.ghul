@@ -1,6 +1,6 @@
 use default
 
-to_octets(value: long) -> ubyte[] => (
+to_octets(value) => (
     let octets = LIST([ubyte(value & 0x7FL)])
     let rest mut = value >> 7
 
@@ -12,13 +12,13 @@ to_octets(value: long) -> ubyte[] => (
     octets
 )
 
-from_octets(octets: ubyte[]) -> long =>
+from_octets(octets) =>
     octets
         |> reduce(0L, (value, octet) =>
             (value << 7) | cast(cast(octet) & 0x7F)
         )
 
-as_hex(octet: ubyte) -> string => "{octet:X2}"
+as_hex(octet) => "{octet:X2}"
 
 [0x200000L, 0x1FFFFFL]
     |> each(value => (

@@ -3,10 +3,10 @@ use System.TimeSpan
 
 let format = "hh\\:mm\\:ss\\,fff"
 
-shift(stamp: string, offset: TimeSpan) -> string =>
+shift(stamp, offset) =>
     (TimeSpan.parse_exact(stamp, format, null) + offset).to_string(format)
 
-synced(lines: string[], seconds: int) -> string{} =>
+synced(lines, seconds) =>
     let offset = TimeSpan.from_seconds(double(seconds)) in
     lines
         |> map(line =>

@@ -1,7 +1,7 @@
 use default
 use IO.Std.write
 
-name(code: int) -> string =>
+name(code) =>
     case code
     when 32 then "Spc"
     when 127 then "Del"

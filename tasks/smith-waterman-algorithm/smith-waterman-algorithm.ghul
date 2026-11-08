@@ -1,17 +1,17 @@
 use default
 
-score(first: char, second: char) -> int =>
+score(first, second) =>
     if first == second then 2 else -1 fi
 
-gap() -> int => -2
+gap() => -2
 
-highest(values: int[]) -> int =>
+highest(values) =>
     values
         |> reduce(0, (best, value) =>
             if value > best then value else best fi
         )
 
-matrix(first: string, second: string) -> int[][] is
+matrix(first, second) is
     let scores =
         0::first.length
             |> map(_ => repeat(0, second.length + 1) |> LIST())
@@ -31,7 +31,7 @@ matrix(first: string, second: string) -> int[][] is
     return scores
 si
 
-best_cell(scores: int[][]) -> (row: int, column: int) is
+best_cell(scores) is
     let row mut = 0
     let column mut = 0
 
@@ -47,11 +47,7 @@ best_cell(scores: int[][]) -> (row: int, column: int) is
     return (row = row, column = column)
 si
 
-trace(first: string, second: string, scores: int[][]) -> (
-    a_aligned: string,
-    b_aligned: string,
-    path: string
-) is
+trace(first, second, scores) is
     let (row, column) = best_cell(scores)
 
     let i mut = row
@@ -97,7 +93,7 @@ trace(first: string, second: string, scores: int[][]) -> (
     )
 si
 
-show(first: string, second: string) is
+show(first, second) is
     let scores = matrix(first, second)
     let (row, column) = best_cell(scores)
     let (a_aligned, b_aligned, path) = trace(first, second, scores)

@@ -77,7 +77,7 @@ compare(first: Tree, second: Tree) -> Comparison is
     od
 si
 
-show(tree: Tree) -> string =>
+show(tree) =>
     case tree
     when (value): LEAF then "{value}"
     when (left, right): NODE then "({show(left)} {show(right)})"

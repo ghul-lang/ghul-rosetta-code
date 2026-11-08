@@ -5,22 +5,22 @@ use Sum = (total: int, sign: int, term: int)
 let joined = 2
 let minus = 1
 
-operators(code: int) -> int[] => [
+operators(code) => [
     code / (repeat(3, at) |> product()) % 3
     for at in 0..9
 ]
 
-separator(operator: int, at: int) -> string =>
+separator(operator, at) =>
     if operator == joined then ""
     elif at == 0 then if operator == minus then "-" else "" fi
     elif operator == minus then " - "
     else " + "
     fi
 
-text_of(operators: int[]) -> string =>
+text_of(operators) =>
     0..9 |> map(at => "{separator(operators[at], at)}{at + 1}") |> join("")
 
-add_digit(sum: Sum, operator: int, digit: int) -> Sum =>
+add_digit(sum, operator, digit) =>
     if operator == joined then
         (sum.total, sum.sign, sum.term * 10 + digit)
     else
@@ -31,7 +31,7 @@ add_digit(sum: Sum, operator: int, digit: int) -> Sum =>
         )
     fi
 
-value_of(operators: int[]) -> int =>
+value_of(operators) =>
     let
         start: Sum = (0, 1, 0),
         sum =
@@ -42,7 +42,7 @@ value_of(operators: int[]) -> int =>
     in
         sum.total + sum.sign * sum.term
 
-expressions() -> (value: int, text: string){} =>
+expressions() =>
     0..19683
         |> map(operators)
         |> filter(ops => ops[0] != joined)

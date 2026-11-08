@@ -17,7 +17,7 @@ let words =
 
 let random = System.Random(42)
 
-at(row: int, column: int) -> int => row * size + column
+at(row, column) => row * size + column
 
 class GRID is
     cells: LIST[char]
@@ -75,7 +75,7 @@ class GRID is
     si
 si
 
-build() -> GRID is
+build() is
     do
         let grid = GRID()
         let attempts mut = 0
@@ -113,7 +113,7 @@ od
 
 write_line("")
 
-ends(p: Placed) -> string =>
+ends(p) =>
     let
         last = p.word.length - 1,
         end_column = p.column + p.dc * last

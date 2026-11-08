@@ -1,6 +1,6 @@
 use default
 
-super_d(d: int) -> long{} =>
+super_d(d) =>
     let run = "".pad_left(d, char(int('0') + d)) in
     from(1)
         |> map(long)

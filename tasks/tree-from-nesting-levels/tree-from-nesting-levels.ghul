@@ -5,7 +5,7 @@ union Tree is
     NEST(children: Tree[])
 si
 
-nest(levels: int[]) -> Tree is
+nest(levels) is
     let root = LIST()
     let open = LIST([root])
 
@@ -27,7 +27,7 @@ nest(levels: int[]) -> Tree is
     Tree.NEST(root)
 si
 
-render(tree: Tree) -> string =>
+render(tree) =>
     case tree
     when leaf: Tree.LEAF then
         "{leaf.value}"

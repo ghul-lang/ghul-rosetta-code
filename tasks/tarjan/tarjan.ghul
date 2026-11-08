@@ -13,7 +13,7 @@ let components = LIST[int[]]()
 
 let next_index mut = 0
 
-visit(vertex: int) is
+visit(vertex) is
     index[vertex] = next_index
     low[vertex] = next_index
     next_index = next_index + 1

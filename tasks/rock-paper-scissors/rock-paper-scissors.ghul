@@ -16,19 +16,19 @@ parse(text: string) -> Move =>
     else throw System.Exception("unrecognised move: {text}")
     esac
 
-name(move: Move) -> string =>
+name(move) =>
     case move
     when _: Move.ROCK then "rock"
     when _: Move.PAPER then "paper"
     when _: Move.SCISSORS then "scissors"
     esac
 
-beats(a: Move, b: Move) -> bool =>
+beats(a, b) =>
     (a =~ Move.ROCK /\ b =~ Move.SCISSORS) \/
     (a =~ Move.SCISSORS /\ b =~ Move.PAPER) \/
     (a =~ Move.PAPER /\ b =~ Move.ROCK)
 
-counters(move: Move) -> Move =>
+counters(move) =>
     case move
     when _: Move.ROCK then Move.PAPER
     when _: Move.PAPER then Move.SCISSORS

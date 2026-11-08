@@ -7,7 +7,7 @@ union Expression is
     NEGATE(inner: Expression)
 si
 
-value_of(expression: Expression) -> double =>
+value_of(expression) =>
     case expression
     when number: Expression.NUMBER then number.value
     when add: Expression.ADD then
@@ -17,7 +17,7 @@ value_of(expression: Expression) -> double =>
     when negate: Expression.NEGATE then -value_of(negate.inner)
     esac
 
-text_of(expression: Expression) -> string =>
+text_of(expression) =>
     case expression
     when number: Expression.NUMBER then "{number.value}"
     when add: Expression.ADD then

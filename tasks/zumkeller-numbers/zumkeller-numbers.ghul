@@ -3,7 +3,7 @@ use default
 write_line("partitioning divisor sets, which takes a moment")
 write_line("")
 
-is_zumkeller(n: int) -> bool is
+is_zumkeller(n) is
     let parts = divisors(n)
     let total = parts |> sum()
 
@@ -31,9 +31,9 @@ is_zumkeller(n: int) -> bool is
     return reachable[half]
 si
 
-column(n: int, width: int) -> string => "{n}".pad_left(width)
+column(n, width) => "{n}".pad_left(width)
 
-show(heading: string, numbers: int{}, per_line: int, width: int) is
+show(heading, numbers, per_line, width) is
     write_line(heading)
 
     for row in numbers |> chunk(per_line) do

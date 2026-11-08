@@ -2,7 +2,7 @@ use default
 
 let order = 3
 
-filled(x: int, y: int) -> bool =>
+filled(x, y) =>
     if x == 0 /\ y == 0 then true
     elif x % 3 == 1 /\ y % 3 == 1 then false
     else filled(x / 3, y / 3)

@@ -2,11 +2,11 @@ use default
 
 let width = 48
 
-blank() -> LIST[int] =>
+blank() =>
     let digits = repeat(0, width) |> LIST() in
     digits
 
-copy(value: int[]) -> LIST[int] => (
+copy(value) => (
     let digits = blank()
 
     for index in 0..width do
@@ -16,7 +16,7 @@ copy(value: int[]) -> LIST[int] => (
     digits
 )
 
-read(text: string) -> int[] => (
+read(text) => (
     let digits = blank()
 
     for entry in text |> reverse() |> index() do
@@ -26,11 +26,11 @@ read(text: string) -> int[] => (
     digits
 )
 
-highest(value: int[]) -> int =>
+highest(value) =>
     let found = 0..width |> reverse() |> find(index => value[index] != 0) in
     found ?? -1
 
-show(value: int[]) -> string =>
+show(value) =>
     let top = highest(value) in
     if top < 0 then
         "0"
@@ -38,9 +38,9 @@ show(value: int[]) -> string =>
         0::top |> reverse() |> map(index => "{value[index]}") |> join("")
     fi
 
-is_zero(value: int[]) -> bool => 0..width |> all(index => value[index] == 0)
+is_zero(value) => 0..width |> all(index => value[index] == 0)
 
-compare(left: int[], right: int[]) -> int =>
+compare(left, right) =>
     let diff = 0..width |> reverse() |> find(i => left[i] != right[i]) in
     if diff? then
         if left[diff] > right[diff] then 1 else -1 fi
@@ -48,7 +48,7 @@ compare(left: int[], right: int[]) -> int =>
         0
     fi
 
-normalise(digits: LIST[int]) is
+normalise(digits) is
     let settled mut = false
 
     while !settled do
@@ -91,7 +91,7 @@ normalise(digits: LIST[int]) is
     od
 si
 
-add(left: int[], right: int[]) -> LIST[int] is
+add(left, right) is
     let total = blank()
 
     for index in 0..width do
@@ -103,7 +103,7 @@ add(left: int[], right: int[]) -> LIST[int] is
     total
 si
 
-decrement(value: int[]) -> LIST[int] => (
+decrement(value) => (
     let result = copy(value)
     let lowest = 0..width |> find(index => result[index] == 1)
 
@@ -121,7 +121,7 @@ decrement(value: int[]) -> LIST[int] => (
     result
 )
 
-subtract(left: int[], right: int[]) -> LIST[int] =>
+subtract(left, right) =>
     let result = copy(left) in
     if is_zero(right) then
         result
@@ -129,7 +129,7 @@ subtract(left: int[], right: int[]) -> LIST[int] =>
         subtract(decrement(result), decrement(right))
     fi
 
-fibonacci_multiples(value: int[], upto: int[]) -> int[][] => (
+fibonacci_multiples(value, upto) => (
     let table = LIST[LIST[int]]()
 
     table.add(copy(value))
@@ -142,7 +142,7 @@ fibonacci_multiples(value: int[], upto: int[]) -> int[][] => (
     table
 )
 
-multiply(left: int[], right: int[]) -> int[] is
+multiply(left, right) is
     let top = highest(right)
 
     if top < 0 then
@@ -166,7 +166,7 @@ si
 
 use DIVISION = (quotient: int[], remainder: int[])
 
-divide(left: int[], right: int[]) -> DIVISION is
+divide(left, right) is
     let table = fibonacci_multiples(right, left)
     let quotient = blank()
     let remainder mut = copy(left)

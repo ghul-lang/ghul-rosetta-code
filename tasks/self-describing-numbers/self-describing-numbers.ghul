@@ -1,8 +1,8 @@
 use default
 
-digit_of(letter: char) -> int => int(letter) - int('0')
+digit_of(letter) => int(letter) - int('0')
 
-self_describing(value: int) -> bool =>
+self_describing(value) =>
     let digits = "{value}" in
     digits
         |> index()

@@ -3,10 +3,10 @@ use default
 let wheel = "ndeokgelw"
 let centre = 'k'
 
-available(letters: string) -> MAP[char, int] =>
+available(letters) =>
     MAP(letters |> frequencies())
 
-spellable(word: string) -> bool is
+spellable(word) is
     let left = available(wheel)
 
     for letter in word do

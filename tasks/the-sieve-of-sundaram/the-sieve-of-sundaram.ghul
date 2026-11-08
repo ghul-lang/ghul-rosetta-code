@@ -1,6 +1,6 @@
 use default
 
-sundaram(limit: int) -> int{} is
+sundaram(limit) is
     let marked = LIST(limit + 1)
 
     (0::limit) |> each(_ => marked.add(false))

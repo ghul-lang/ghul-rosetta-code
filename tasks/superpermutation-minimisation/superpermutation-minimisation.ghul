@@ -2,14 +2,14 @@ use default
 
 let alphabet = "ABCDEFG"
 
-is_permutation(s: string) -> bool =>
+is_permutation(s) =>
     s.to_char_array() |> SET() |> count() == s.length
 
 // Every permutation of n - 1 letters, in the order they first appear in
 // the superpermutation of n - 1, is written out as itself, the new
 // letter, and itself again; each piece overlaps the one before it as far
 // as it can.
-recursive(n: int) -> string is
+recursive(n) is
     if n == 1 then
         return "A"
     fi
@@ -40,7 +40,7 @@ recursive(n: int) -> string is
     result.to_string()
 si
 
-permutations(letters: string) -> string{} =>
+permutations(letters) =>
     if letters.length <= 1 then LIST([letters])
     else
         [
@@ -50,10 +50,10 @@ permutations(letters: string) -> string{} =>
         ]
     fi
 
-contains_all(s: string, n: int) -> bool =>
+contains_all(s, n) =>
     alphabet.substring(0, n) |> permutations() |> all(s.contains)
 
-factorial(n: int) -> int => 1::n |> reduce(1, * * *)
+factorial(n) => 1::n |> reduce(1, * * *)
 
 write_line(" n  joined  recursive  contains all")
 

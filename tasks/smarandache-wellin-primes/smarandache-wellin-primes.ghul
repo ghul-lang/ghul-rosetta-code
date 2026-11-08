@@ -11,12 +11,12 @@ wellin_numbers() -> (index: int, last: int, digits: string){} is
     od
 si
 
-derived(digits: string) -> bigint =>
+derived(digits) =>
     bigint.parse(
         ('0'::'9') |> map(d => "{digits |> count(c => c == d)}") |> join("")
     )
 
-ordinal(n: int) -> string =>
+ordinal(n) =>
     if n % 100 >= 11 /\ n % 100 <= 13 then
         "{n}th"
     else
@@ -28,7 +28,7 @@ ordinal(n: int) -> string =>
         esac
     fi
 
-abbreviated(digits: string) -> string =>
+abbreviated(digits) =>
     if digits.length <= 40 then
         digits
     else

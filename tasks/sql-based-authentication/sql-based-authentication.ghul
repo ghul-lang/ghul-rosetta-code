@@ -9,7 +9,7 @@ use System.Text.Encoding
 // SQLite, through Microsoft.Data.Sqlite, stands in for MySQL: an
 // in-memory database needs no server, and the table and the three
 // operations are the ones the task gives.
-connect_db() -> SqliteConnection is
+connect_db() is
     let db = SqliteConnection("Data Source=:memory:")
     db.open()
 
@@ -27,14 +27,10 @@ connect_db() -> SqliteConnection is
     return db
 si
 
-digest(salt: ubyte[], password: string) -> ubyte[] =>
+digest(salt, password) =>
     MD5.hash_data(salt |> cat(Encoding.utf8.get_bytes(password)) |> ARRAY())
 
-create_user(
-    db: SqliteConnection,
-    username: string,
-    password: string
-) -> bool is
+create_user(db, username, password) is
     let salt = RandomNumberGenerator.get_bytes(16)
     let use insert = db.create_command()
 
@@ -54,11 +50,7 @@ create_user(
     yrt
 si
 
-authenticate_user(
-    db: SqliteConnection,
-    username: string,
-    password: string
-) -> bool is
+authenticate_user(db, username, password) is
     let use select = db.create_command()
 
     select.command_text =

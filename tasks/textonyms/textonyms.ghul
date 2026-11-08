@@ -2,7 +2,7 @@ use default
 
 let keys = "22233344455566677778889999"
 
-digits(word: string) -> string? =>
+digits(word) =>
     let lower = word.to_lower() in
     if lower |> all(c => c >= 'a' /\ c <= 'z') then
         lower |> map(c => keys[int(c) - int('a')]) |> string()

@@ -52,10 +52,10 @@ let around = [
     (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
 ]
 
-neighbours(row: int, column: int) -> bool[] =>
+neighbours(row, column) =>
     around |> map((dr, dc) => black[row + dr][column + dc]) |> ARRAY()
 
-thins(row: int, column: int, first: bool) -> bool is
+thins(row, column, first) is
     if !black[row][column] then
         return false
     fi
@@ -75,7 +75,7 @@ thins(row: int, column: int, first: bool) -> bool is
     fi
 si
 
-pass(first: bool) -> int is
+pass(first) is
     let doomed = LIST()
 
     for row in 1..rows - 1 do

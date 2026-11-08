@@ -7,7 +7,7 @@ use Flat = (x: double, y: double)
 let level = 2
 let size = 9
 
-solid(c: Cell) -> bool is
+solid(c) is
     walk(x: int, y: int, z: int, depth: int) -> bool =>
         if depth == level then
             true
@@ -31,7 +31,7 @@ solid(c: Cell) -> bool is
     walk(c.x, c.y, c.z, 0)
 si
 
-project(x: double, y: double, z: double) -> Flat => (
+project(x, y, z) => (
     x = (x - z) * cos(pi / 6.0),
     y = y - (x + z) * sin(pi / 6.0)
 )

@@ -1,13 +1,13 @@
 use default
 
-is_cube(n: long) -> bool =>
+is_cube(n) =>
     let
         estimate = cbrt(double(n)),
         root = long(round(estimate))
     in
         root * root * root == n
 
-squares() -> long{} => from(1L) |> map(n => n * n)
+squares() => from(1L) |> map(n => n * n)
 
 let last = squares() |> filter(s => !is_cube(s)) |> skip(29) |> first()!
 

@@ -2,7 +2,7 @@ use default
 
 let search_limit = 1000000
 
-is_sphenic(n: int) -> bool =>
+is_sphenic(n) =>
     let factors = prime_factors(n) in
     factors.count == 3 /\
     factors[0] != factors[1] /\

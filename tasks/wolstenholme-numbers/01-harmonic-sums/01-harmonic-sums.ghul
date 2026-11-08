@@ -3,7 +3,7 @@ use default
 write_line("summing the harmonic numerators")
 write_line("")
 
-wolstenholme(count: int) -> bigint{} is
+wolstenholme(count) is
     let numerator mut = 0n
     let denominator mut = 1n
 

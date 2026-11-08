@@ -5,14 +5,14 @@ let bars = "▁▂▃▄▅▆▇█"
 
 let separators = [' ', ',', '\t']
 
-bar(value: double, lowest: double, span: double) -> char =>
+bar(value, lowest, span) =>
     if span == 0.0 then
         bars[0]
     else
         bars[int((value - lowest) * 7.999 / span)]
     fi
 
-sparkline(series: string) -> string is
+sparkline(series) is
     let values =
         series.split(separators, StringSplitOptions.REMOVE_EMPTY_ENTRIES)
             |> map(double.parse)

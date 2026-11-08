@@ -2,7 +2,7 @@ use default
 use Raster.Anchor
 use Raster.IMAGE
 
-running_maxima(heights: int{}) -> int{} is
+running_maxima(heights) is
     let highest mut = 0
 
     for height in heights do
@@ -12,7 +12,7 @@ running_maxima(heights: int{}) -> int{} is
     od
 si
 
-depths(heights: int[]) -> int[] => (
+depths(heights) => (
     let left = heights |> running_maxima() |> list()
     let right = heights |> reverse() |> running_maxima() |> list()
     let last = heights.count - 1
@@ -42,7 +42,7 @@ let image = IMAGE(1000, 300)
 
 image.view(-0.5, -4.0, span + 0.5, double(tallest) + 4.0, 16.0)
 
-box(left: double, bottom: double, right: double, top: double) is
+box(left, bottom, right, top) is
     image.fill([
         (x = left, y = bottom),
         (x = right, y = bottom),

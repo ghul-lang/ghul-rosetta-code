@@ -2,7 +2,7 @@ use default
 use System.Convert
 use System.Text.Encoding
 
-decoded_bytes(text: string, at: int) -> ubyte{} is
+decoded_bytes(text, at) is
     if at < text.length then
         if text[at] == '%' /\ at + 2 < text.length then
             yield Convert.to_byte(text[at + 1..at + 3], 16)
@@ -14,7 +14,7 @@ decoded_bytes(text: string, at: int) -> ubyte{} is
     fi
 si
 
-url_decode(text: string) -> string =>
+url_decode(text) =>
     Encoding.utf8.get_string(decoded_bytes(text, 0) |> ARRAY())
 
 [

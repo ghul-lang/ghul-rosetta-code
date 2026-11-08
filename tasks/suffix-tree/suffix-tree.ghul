@@ -52,7 +52,7 @@ class NODE is
         from(0) |> find(i => i == limit \/ left[i] != right[i]) ?? limit
 si
 
-show(node: NODE, depth: int) is
+show(node, depth) is
     let indent = repeat(" ", depth * 2) |> join("")
 
     for child in node.children do

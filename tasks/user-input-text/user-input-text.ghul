@@ -2,12 +2,12 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
-ask(prompt: string) -> string? is
+ask(prompt) is
     write(prompt)
     read_line()
 si
 
-read_75000() -> int? =>
+read_75000() =>
     while let line = ask("integer: ") do
         if let value = parse[int](line) /\ value == 75000 then
             break value

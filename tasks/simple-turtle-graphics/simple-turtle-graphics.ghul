@@ -5,7 +5,7 @@ let image = IMAGE(640, 360)
 
 let pen = TURTLE(image)
 
-house(size: double) is
+house(size) is
     let x = pen.x
     let y = pen.y
     let heading = pen.heading
@@ -30,7 +30,7 @@ house(size: double) is
     pen.face(heading)
 si
 
-bar_chart(values: double[], size: double) is
+bar_chart(values, size) is
     let x = pen.x
     let y = pen.y
     let heading = pen.heading

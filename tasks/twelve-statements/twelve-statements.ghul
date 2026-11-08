@@ -1,41 +1,41 @@
 use default
 
-holds(values: bool[], number: int) -> bool => values[number - 1]
+holds(values, number) => values[number - 1]
 
-how_many(values: bool[], numbers: int[]) -> int =>
+how_many(values, numbers) =>
     numbers |> filter(holds(values, *)) |> count()
 
-statement_first(values: bool[]) -> bool => true
+statement_first(values) => true
 
-statement_second(values: bool[]) -> bool =>
+statement_second(values) =>
     how_many(values, [7, 8, 9, 10, 11, 12]) == 3
 
-statement_third(values: bool[]) -> bool =>
+statement_third(values) =>
     how_many(values, [2, 4, 6, 8, 10, 12]) == 2
 
-statement_fourth(values: bool[]) -> bool =>
+statement_fourth(values) =>
     !holds(values, 5) \/ (holds(values, 6) /\ holds(values, 7))
 
-statement_fifth(values: bool[]) -> bool => how_many(values, [2, 3, 4]) == 0
+statement_fifth(values) => how_many(values, [2, 3, 4]) == 0
 
-statement_sixth(values: bool[]) -> bool =>
+statement_sixth(values) =>
     how_many(values, [1, 3, 5, 7, 9, 11]) == 4
 
-statement_seventh(values: bool[]) -> bool => how_many(values, [2, 3]) == 1
+statement_seventh(values) => how_many(values, [2, 3]) == 1
 
-statement_eighth(values: bool[]) -> bool =>
+statement_eighth(values) =>
     !holds(values, 7) \/ (holds(values, 5) /\ holds(values, 6))
 
-statement_ninth(values: bool[]) -> bool =>
+statement_ninth(values) =>
     how_many(values, [1, 2, 3, 4, 5, 6]) == 3
 
-statement_tenth(values: bool[]) -> bool =>
+statement_tenth(values) =>
     holds(values, 11) /\ holds(values, 12)
 
-statement_eleventh(values: bool[]) -> bool =>
+statement_eleventh(values) =>
     how_many(values, [7, 8, 9]) == 1
 
-statement_twelfth(values: bool[]) -> bool =>
+statement_twelfth(values) =>
     how_many(values, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) == 4
 
 let statements = [
@@ -45,10 +45,10 @@ let statements = [
     statement_tenth, statement_eleventh, statement_twelfth
 ]
 
-consistent(values: bool[]) -> bool =>
+consistent(values) =>
     0..12 |> all(index => statements[index](values) == values[index])
 
-assignments() -> bool[]{} =>
+assignments() =>
     (0..1 << 12)
         |> map(mask =>
             0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect()

@@ -1,6 +1,6 @@
 use default
 
-log_gamma(x: double) -> double => (
+log_gamma(x) => (
     let coefficients = [
         76.18009172947146, -86.50532032941677, 24.01409824083091,
         -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5
@@ -17,12 +17,12 @@ log_gamma(x: double) -> double => (
     -tmp + log(2.5066282746310005 * series / x)
 )
 
-prefactor(a: double, x: double) -> double =>
+prefactor(a, x) =>
     exp(-x + a * log(x) - log_gamma(a))
 
 // The regularised upper incomplete gamma function Q(a, x), by its series
 // below a + 1 and its continued fraction above.
-upper_gamma(a: double, x: double) -> double is
+upper_gamma(a, x) is
     if x < a + 1.0 then
         let term mut = 1.0 / a
         let sum mut = term
@@ -58,7 +58,7 @@ upper_gamma(a: double, x: double) -> double is
     prefactor(a, x) * h
 si
 
-chi_squared(counts: int[]) -> double =>
+chi_squared(counts) =>
     let
         total = double(counts |> sum()),
         expected = total / double(counts.count)
@@ -66,7 +66,7 @@ chi_squared(counts: int[]) -> double =>
         counts
             |> sum_by(k => let e = double(k) - expected in e * e / expected)
 
-is_uniform(counts: int[], significance: double) -> bool =>
+is_uniform(counts, significance) =>
     let freedom = double(counts.count - 1) in
     upper_gamma(freedom / 2.0, chi_squared(counts) / 2.0) > significance
 

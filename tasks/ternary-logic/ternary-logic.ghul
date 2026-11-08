@@ -10,14 +10,14 @@ use Trit.TRUE
 use Trit.MAYBE
 use Trit.FALSE
 
-rank(trit: Trit) -> int =>
+rank(trit) =>
     case trit
     when _: FALSE then 0
     when _: MAYBE then 1
     when _: TRUE then 2
     esac
 
-of_rank(rank_value: int) -> Trit =>
+of_rank(rank_value) =>
     case rank_value
     when 0 then FALSE
     when 1 then MAYBE
@@ -32,12 +32,12 @@ of_rank(rank_value: int) -> Trit =>
 \/(left: Trit, right: Trit) -> Trit =>
     if rank(left) > rank(right) then left else right fi
 
-implies(left: Trit, right: Trit) -> Trit => !left \/ right
+implies(left, right) => !left \/ right
 
-equivalent(left: Trit, right: Trit) -> Trit =>
+equivalent(left, right) =>
     implies(left, right) /\ implies(right, left)
 
-show(trit: Trit) -> string =>
+show(trit) =>
     case trit
     when _: TRUE then "true"
     when _: MAYBE then "maybe"
@@ -46,7 +46,7 @@ show(trit: Trit) -> string =>
 
 trits: Trit[] => [TRUE, MAYBE, FALSE]
 
-table(name: string, operator: (Trit, Trit) -> Trit) is
+table(name, operator) is
     write_line("")
     let heading = trits |> map(trit => "{show(trit),6}") |> join("")
 

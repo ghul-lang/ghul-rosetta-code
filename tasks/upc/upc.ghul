@@ -28,17 +28,17 @@ let rows = [
     "# #  ### # ###  ###  # # ###  #    # #  ### # #"
 ]
 
-bits(row: string) -> string =>
+bits(row) =>
     row |> map(c => if c == '#' then '1' else '0' fi) |> string()
 
-flipped(seven: string) -> string =>
+flipped(seven) =>
     seven |> map(c => if c == '1' then '0' else '1' fi) |> string()
 
-digit(seven: string, right: bool) -> int? =>
+digit(seven, right) =>
     let wanted = if right then flipped(seven) else seven fi in
     0..10 |> find(d => patterns[d] =~ wanted)
 
-read(scan: string) -> int[]? is
+read(scan) is
     if
         scan[0..3] !~ "101" \/
         scan[45..50] !~ "01010" \/
@@ -67,14 +67,14 @@ read(scan: string) -> int[]? is
     found
 si
 
-sound(found: int[]) -> bool =>
+sound(found) =>
     (
         found
             |> index()
             |> sum_by(d => d.value * if d.index % 2 == 0 then 3 else 1 fi)
     ) % 10 == 0
 
-turned(scan: string) -> string =>
+turned(scan) =>
     0..scan.length |> map(at => scan[scan.length - 1 - at]) |> string()
 
 for row in rows do

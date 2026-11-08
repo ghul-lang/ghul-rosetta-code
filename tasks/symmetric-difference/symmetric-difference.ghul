@@ -1,6 +1,6 @@
 use default
 
-only_in(left: SET[string], right: SET[string]) -> string{} =>
+only_in(left, right) =>
     left |> filter(name => !right.contains(name))
 
 show(label: string, names: string{}) =>

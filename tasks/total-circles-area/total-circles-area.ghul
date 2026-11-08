@@ -34,20 +34,20 @@ let circles: Circle[] = [
 
 let turn = 2.0 * pi
 
-wrap(angle: double) -> double => angle - turn * floor(angle / turn)
+wrap(angle) => angle - turn * floor(angle / turn)
 
-distance(a: Circle, b: Circle) -> double =>
+distance(a, b) =>
     sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y))
 
-inside(c: Circle, others: Circle[]) -> bool =>
+inside(c, others) =>
     others |> any(o => !(o =~ c) /\ distance(o, c) + c.r <= o.r)
 
-on(c: Circle, angle: double) -> (x: double, y: double) => (
+on(c, angle) => (
     x = c.x + c.r * cos(angle),
     y = c.y + c.r * sin(angle)
 )
 
-covers(o: Circle, x: double, y: double) -> bool =>
+covers(o, x, y) =>
     (x - o.x) * (x - o.x) + (y - o.y) * (y - o.y) < o.r * o.r
 
 crossings(c: Circle, o: Circle) -> double{} is
@@ -91,7 +91,7 @@ outer_arcs(c: Circle, others: Circle[]) -> Arc{} is
         |> list()
 si
 
-area_under(arc: Arc) -> double =>
+area_under(arc) =>
     let c = arc.circle in
     0.5 *
     (

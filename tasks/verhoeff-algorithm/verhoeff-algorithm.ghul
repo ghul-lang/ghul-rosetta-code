@@ -28,7 +28,7 @@ let p = [
 
 use Step = (i: int, n: int, permuted: int, c: int)
 
-steps(digits: string) -> Step{} is
+steps(digits) is
     let c mut = 0
 
     for (i, ch) in digits.to_char_array() |> reverse() |> index() do
@@ -41,10 +41,10 @@ steps(digits: string) -> Step{} is
     od
 si
 
-checksum(digits: string) -> int =>
+checksum(digits) =>
     digits |> steps() |> reduce(0, (_, step) => step.c)
 
-show_steps(digits: string) is
+show_steps(digits) is
     write_line(" i  ni  p[i, ni]  c")
     write_line("-------------------")
 

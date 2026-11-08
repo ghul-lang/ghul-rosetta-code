@@ -1,7 +1,7 @@
 use default
 use System.Diagnostics.Stopwatch
 
-square_root(n: bigint) -> bigint is
+square_root(n) is
     let bits = int(n.get_bit_length())
 
     if bits <= 50 then
@@ -21,7 +21,7 @@ si
 
 // The Gauss-Legendre form of the arithmetic-geometric mean, in integers
 // scaled by a power of ten.
-pi_digits(count: int) -> string is
+pi_digits(count) is
     let scale = bigint.pow(10n, count + 10)
     let a mut = scale
     let b mut = square_root(scale * scale / 2n)

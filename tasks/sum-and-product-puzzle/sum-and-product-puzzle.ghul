@@ -2,15 +2,15 @@ use default
 
 use Pair = (x: int, y: int)
 
-sum(pair: Pair) -> int => pair.x + pair.y
-product(pair: Pair) -> int => pair.x * pair.y
+sum(pair) => pair.x + pair.y
+product(pair) => pair.x * pair.y
 
 let candidates = [(x = x, y = y) for x in 2::100 for y in x + 1::100 - x]
 
-with_sum(pairs: Pair[], value: int) -> Pair[] =>
+with_sum(pairs, value) =>
     pairs |> filter(p => sum(p) == value) |> list()
 
-with_product(pairs: Pair[], value: int) -> Pair[] =>
+with_product(pairs, value) =>
     pairs |> filter(p => product(p) == value) |> list()
 
 let s_knows_p_does_not =

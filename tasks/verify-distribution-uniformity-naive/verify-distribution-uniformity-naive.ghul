@@ -2,9 +2,9 @@ use default
 
 let random = System.Random(12345)
 
-dice5() -> int => random.next(1, 6)
+dice5() => random.next(1, 6)
 
-dice7() -> int is
+dice7() is
     do
         let roll = 5 * (dice5() - 1) + dice5() - 1
 
@@ -14,13 +14,9 @@ dice7() -> int is
     od
 si
 
-loaded7() -> int => if random.next(100) < 5 then 7 else dice7() fi
+loaded7() => if random.next(100) < 5 then 7 else dice7() fi
 
-check_distribution(
-    generate: () -> int,
-    calls: int,
-    delta: double
-) -> bool is
+check_distribution(generate, calls, delta) is
     let counts =
         (0..calls)
             |> map(_ => generate())

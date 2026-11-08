@@ -21,7 +21,7 @@ let allocation =
         |> map(_ => repeat(0, tasks.count) |> LIST())
         |> list()
 
-line(cells: Cell[]) -> Line =>
+line(cells) =>
     let prices = cells |> map((r, c) => costs[r][c]) |> sort() |> list() in
     let penalty =
         if prices.count > 1 then

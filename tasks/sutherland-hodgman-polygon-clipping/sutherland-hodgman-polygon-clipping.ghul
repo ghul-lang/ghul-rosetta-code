@@ -16,10 +16,10 @@ let window = [
     (x = 300.0, y = 300.0), (x = 100.0, y = 300.0)
 ]
 
-side(at: Point, from: Point, to: Point) -> double =>
+side(at, from, to) =>
     (to.x - from.x) * (at.y - from.y) - (to.y - from.y) * (at.x - from.x)
 
-crossing(first: Point, second: Point, from: Point, to: Point) -> Point => (
+crossing(first, second, from, to) => (
     let near = side(first, from, to)
     let far = side(second, from, to)
     let part = near / (near - far)
@@ -30,15 +30,15 @@ crossing(first: Point, second: Point, from: Point, to: Point) -> Point => (
     )
 )
 
-same(a: Point, b: Point) -> bool => a.x == b.x /\ a.y == b.y
+same(a, b) => a.x == b.x /\ a.y == b.y
 
-extend(kept: LIST[Point], at: Point) is
+extend(kept, at) is
     if kept.count == 0 \/ !same(kept[kept.count - 1], at) then
         kept.add(at)
     fi
 si
 
-clip(polygon: Point[], from: Point, to: Point) -> LIST[Point] is
+clip(polygon, from, to) is
     let kept = LIST()
 
     for index in 0..polygon.count do
@@ -84,7 +84,7 @@ let image = IMAGE(520, 520)
 
 image.view(20.0, 20.0, 380.0, 380.0)
 
-closed(polygon: Point[]) -> Point[] => polygon ++ [polygon[0]] |> list()
+closed(polygon) => polygon ++ [polygon[0]] |> list()
 
 image.color(210ub, 232ub, 214ub)
 image.fill(clipped)

@@ -1,13 +1,13 @@
 use default
 
-is_square_free(n: long) -> bool =>
+is_square_free(n) =>
     n % 4L != 0L /\
     from(1L)
         |> map(k => 2L * k + 1L)
         |> take_while(d => d * d <= n)
         |> all(d => n % (d * d) != 0L)
 
-show(from: long, to: long) is
+show(from, to) is
     let found = from::to |> filter(is_square_free) |> list()
     let width = "{to}".length + 1
     let per_row = 72 / width

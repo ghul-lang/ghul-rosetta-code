@@ -1,13 +1,13 @@
 use default
 
-zigzag_order(n: int) -> (int, int){} =>
+zigzag_order(n) =>
     [(row, column) for row in 0..n for column in 0..n]
         |> sort_by(((row, column)) =>
             let diagonal = row + column in
             diagonal * n + if diagonal % 2 == 0 then column else row fi
         )
 
-zigzag(n: int) -> int[][] =>
+zigzag(n) =>
     let
         order = zigzag_order(n) |> list(),
         position = MAP(0..order.count |> map(i => (order[i], i)))

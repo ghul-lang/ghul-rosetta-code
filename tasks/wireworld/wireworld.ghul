@@ -8,14 +8,14 @@ let cell = 20
 let margin = 10
 let frames = 24
 
-read(path: string) -> Grid =>
+read(path) =>
     let
         lines = IO.File.read_all_lines(path),
         width = lines |> map(line => line.length) |> reduce(0, int.max)
     in
         lines |> map(line => line.pad_right(width)) |> list()
 
-heads_around(grid: Grid, row: int, column: int) -> int =>
+heads_around(grid, row, column) =>
     [
         (r, c)
         for r in row - 1::row + 1
@@ -28,7 +28,7 @@ heads_around(grid: Grid, row: int, column: int) -> int =>
     ]
         |> count()
 
-next(grid: Grid, row: int, column: int) -> char =>
+next(grid, row, column) =>
     case grid[row][column]
     when 'H' then 't'
     when 't' then '.'
@@ -38,14 +38,14 @@ next(grid: Grid, row: int, column: int) -> char =>
     else ' '
     esac
 
-step(grid: Grid) -> Grid =>
+step(grid) =>
     (0..grid.count)
         |> map(row =>
             (0..grid[row].length) |> map(next(grid, row, *)) |> join("")
         )
         |> list()
 
-draw(image: IMAGE, grid: Grid) is
+draw(image, grid) is
     image.clear(30ub, 30ub, 34ub)
 
     for (row, line) in grid |> index() do

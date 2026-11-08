@@ -8,19 +8,19 @@ use Color = (red: ubyte, green: ubyte, blue: ubyte)
 let size = 300
 let tilt = 0.45
 
-plus(a: Point, b: Point) -> Point => (
+plus(a, b) => (
     x = a.x + b.x,
     y = a.y + b.y,
     z = a.z + b.z
 )
 
-times(p: Point, k: double) -> Point => (
+times(p, k) => (
     x = p.x * k,
     y = p.y * k,
     z = p.z * k
 )
 
-rgb(r: int, g: int, b: int) -> Color => (
+rgb(r, g, b) => (
     red = ubyte(r),
     green = ubyte(g),
     blue = ubyte(b)
@@ -39,7 +39,7 @@ let faces: (normal: Point, u: Point, v: Point, color: Color)[] = [
     (times(x_axis, -1.0), y_axis, z_axis, rgb(255, 88, 0))
 ]
 
-turned(p: Point, angle: double) -> Point =>
+turned(p, angle) =>
     let
         x = p.x * cos(angle) + p.z * sin(angle),
         z = p.z * cos(angle) - p.x * sin(angle)
@@ -50,10 +50,7 @@ turned(p: Point, angle: double) -> Point =>
             z = p.y * sin(tilt) + z * cos(tilt)
         )
 
-square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
-    x: double,
-    y: double
-)[] =>
+square(center, u, v, half, angle) =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(
@@ -64,7 +61,7 @@ square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
         |> map(p => (x = p.x, y = p.y))
         |> list()
 
-draw(image: IMAGE, angle: double) is
+draw(image, angle) is
     image.clear(250ub, 250ub, 247ub)
 
     let body = SHAPES()

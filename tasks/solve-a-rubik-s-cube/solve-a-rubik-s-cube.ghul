@@ -18,7 +18,7 @@ let faces = [
 
 let solved = 0..40 |> map(i => if i < 20 then i else 0 fi) |> list()
 
-apply(move: int, state: int[]) -> int[] is
+apply(move, state) is
     let face = faces[move / 3]
     let turned = LIST(state)
 
@@ -57,11 +57,11 @@ apply(move: int, state: int[]) -> int[] is
     turned.to_array()
 si
 
-inverse(move: int) -> int => move + 2 - 2 * (move % 3)
+inverse(move) => move + 2 - 2 * (move % 3)
 
-slice(cubie: int) -> int => if cubie > 7 then 2 else cubie & 1 fi
+slice(cubie) => if cubie > 7 then 2 else cubie & 1 fi
 
-key(phase: int, state: int[]) -> string is
+key(phase, state) is
     let values =
         if phase == 1 then
             state[20..32]
@@ -97,7 +97,7 @@ key(phase: int, state: int[]) -> string is
     values |> join(",")
 si
 
-solve_phase(phase: int, start: int[]) -> int{} is
+solve_phase(phase, start) is
     let start_key = key(phase, start)
     let goal_key = key(phase, solved)
 
@@ -189,10 +189,10 @@ parse(cubies: string) -> int[] is
     state.to_array()
 si
 
-notation(move: int) -> string =>
+notation(move) =>
     "{"UDFBLR"[move / 3]}{["", "2", "'"][move % 3]}"
 
-solve(title: string, start: int[]) is
+solve(title, start) is
     let state mut = start
     let moves = LIST()
 

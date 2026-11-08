@@ -1,6 +1,6 @@
 use default
 
-sylvester(count: int) -> bigint{} is
+sylvester(count) is
     let term mut = 2n
 
     for _ in 1::count do

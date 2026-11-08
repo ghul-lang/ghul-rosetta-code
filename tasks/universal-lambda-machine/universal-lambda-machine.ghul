@@ -31,7 +31,7 @@ union Result is
     CONS(head: THUNK, tail: THUNK)
 si
 
-lookup(env: ENV?, index: int) -> THUNK => (
+lookup(env, index) => (
     let e mut = env!
 
     for _ in 1..index do
@@ -118,19 +118,19 @@ si
 let truth = Term.LAM(Term.LAM(Term.VAR(2)))
 let falsity = Term.LAM(Term.LAM(Term.VAR(1)))
 
-cons(head: Term, tail: Term) -> Term =>
+cons(head, tail) =>
     Term.LAM(Term.APP(Term.APP(Term.VAR(1), head), tail))
 
-bit(b: bool) -> Term => if b then falsity else truth fi
+bit(b) => if b then falsity else truth fi
 
-byte(b: int) -> Term =>
+byte(b) =>
     from(0)
         |> take(8)
         |> reduce(falsity, (result, i) =>
             cons(bit((b >> i) & 1 == 1), result)
         )
 
-list(items: Term[]) -> Term =>
+list(items) =>
     case items
     when [] then falsity
     when [x, ..rest] then cons(x, list(rest))
@@ -162,7 +162,7 @@ class READER(bits: bool[]) is
     si
 si
 
-constant(term: Term) -> THUNK => (
+constant(term) => (
     let thunk = THUNK(term, null)
 
     thunk.value = Value.CLOSURE(term, null)
@@ -173,7 +173,7 @@ let top = constant(Term.PAIR)
 let zero = constant(Term.ATOM(0))
 let one = constant(Term.ATOM(1))
 
-items(thunk: THUNK, limit: int) -> THUNK{} is
+items(thunk, limit) is
     if limit > 0 then
         if let (head, tail): Result.CONS = evaluate(thunk, [top]) then
             yield head
@@ -182,19 +182,19 @@ items(thunk: THUNK, limit: int) -> THUNK{} is
     fi
 si
 
-bit_of(thunk: THUNK) -> int =>
+bit_of(thunk) =>
     if let (tag): Result.CONSTANT = evaluate(thunk, [zero, one]) then
         tag
     else throw System.InvalidOperationException("bit expected")
     fi
 
-bits_of(bytes: int[]) -> bool[] => [
+bits_of(bytes) => [
     (b >> (7 - i)) & 1 == 1
     for b in bytes
     for i in 0..8
 ]
 
-run_bits(program: string, limit: int) -> string =>
+run_bits(program, limit) =>
     let
         bits = program |> map(* == '1') |> list(),
         reader = READER(bits),
@@ -205,7 +205,7 @@ run_bits(program: string, limit: int) -> string =>
             |> map(t => "{bit_of(t)}")
             |> join("")
 
-run_bytes(bytes: int[], limit: int) -> string =>
+run_bytes(bytes, limit) =>
     let
         reader = READER(bits_of(bytes)),
         term = reader.term(),

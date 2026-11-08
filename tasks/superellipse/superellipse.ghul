@@ -6,13 +6,13 @@ let n = 2.5
 let a = 200.0
 let b = 200.0
 
-shaped(turn: double, half_axis: double) -> double => (
+shaped(turn, half_axis) => (
     let value = pow(abs(turn), 2.0 / n) * half_axis
 
     if turn < 0.0 then -value else value fi
 )
 
-outline(steps: int) -> (x: double, y: double){} =>
+outline(steps) =>
     (0::steps)
         |> map(step => (
             let angle = 2.0 * pi * double(step) / double(steps)

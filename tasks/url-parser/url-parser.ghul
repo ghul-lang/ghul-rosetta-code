@@ -16,7 +16,7 @@ let part_names = [
     "port", "path", "query", "fragment"
 ]
 
-parse_url(url: string) -> (string, string)[]? =>
+parse_url(url) =>
     let m = pattern.match(url) in
     if m.success then
         part_names
@@ -29,7 +29,7 @@ parse_url(url: string) -> (string, string)[]? =>
             |> list()
     fi
 
-show(url: string, indent: string) is
+show(url, indent) is
     if let parts = parse_url(url) then
         for (name, value) in parts do
             write_line("{indent}{name} = {value}")

@@ -7,12 +7,12 @@ union Outcome is
     INCONSISTENT(reason: string)
 si
 
-indent_of(line: string) -> string =>
+indent_of(line) =>
     line
         |> take_while(letter => letter == ' ' \/ letter == '\t')
         |> join("")
 
-build(lines: string[], unit: int) -> NODE is
+build(lines, unit) is
     let root = NODE("", LIST())
     let ancestors = LIST()
 
@@ -33,7 +33,7 @@ build(lines: string[], unit: int) -> NODE is
     root
 si
 
-sort_tree(node: NODE, descending: bool) is
+sort_tree(node, descending) is
     let ordered =
         if descending then
             node.children |> sort_by_descending(child => child.text)
@@ -52,7 +52,7 @@ sort_tree(node: NODE, descending: bool) is
     od
 si
 
-flatten(node: NODE, level: int, pad: string) -> string{} is
+flatten(node, level, pad) is
     if level >= 0 then
         yield "{repeat(pad, level) |> join("")}{node.text}"
     fi
@@ -93,7 +93,7 @@ arrange(outline: string[], descending: bool) -> Outcome is
     Outcome.SORTED(root |> flatten(-1, unit) |> list())
 si
 
-show(title: string, outline: string[], descending: bool) is
+show(title, outline, descending) is
     write_line("{title}:")
 
     let outcome = arrange(outline, descending)

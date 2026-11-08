@@ -2,14 +2,14 @@ use default
 
 let weights = [1, 3, 1, 7, 3, 9]
 
-value(c: char) -> int? =>
+value(c) =>
     if char.is_digit(c) then int(c) - int('0')
     elif c >= 'B' /\ c <= 'Z' /\ !"AEIOU".contains(c) then
         int(c) - int('A') + 10
     else null
     fi
 
-check_digit(sedol: string) -> char? =>
+check_digit(sedol) =>
     let values = sedol |> map(value) |> list() in
     if values.count == 6 /\ values |> all(v => v?) then
         let total =

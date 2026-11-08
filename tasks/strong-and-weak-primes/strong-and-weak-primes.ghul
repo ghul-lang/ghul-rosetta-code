@@ -14,22 +14,22 @@ for candidate in 2::sieve_limit do
     fi
 od
 
-neighbourhoods() -> int[]{} =>
+neighbourhoods() =>
     (2::sieve_limit)
         |> filter(candidate => !composite[candidate])
         |> windows(3)
 
-strong() -> int{} =>
+strong() =>
     neighbourhoods()
         |> filter(around => around[1] * 2 > around[0] + around[2])
         |> map(around => around[1])
 
-weak() -> int{} =>
+weak() =>
     neighbourhoods()
         |> filter(around => around[1] * 2 < around[0] + around[2])
         |> map(around => around[1])
 
-report(name: string, found: () -> int{}, wanted: int) is
+report(name, found, wanted) is
     write_line("first {wanted} {name} primes:")
     write_line("  {found() |> take(wanted) |> join(" ")}")
 

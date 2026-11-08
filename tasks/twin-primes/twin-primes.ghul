@@ -14,14 +14,14 @@ for candidate in 2..sieve_limit do
     fi
 od
 
-twin_pairs(bound: int) -> int =>
+twin_pairs(bound) =>
     (2..bound)
         |> filter(candidate => !composite[candidate])
         |> windows(2)
         |> filter(pair => pair[1] - pair[0] == 2)
         |> count()
 
-powers_of_ten() -> int{} is
+powers_of_ten() is
     let value mut = 10
 
     do

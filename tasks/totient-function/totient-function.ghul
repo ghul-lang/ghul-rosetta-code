@@ -1,6 +1,6 @@
 use default
 
-totient(n: int) -> int is
+totient(n) is
     let result mut = n
     let rest mut = n
     let p mut = 2
@@ -24,7 +24,7 @@ totient(n: int) -> int is
     result
 si
 
-is_prime(n: int) -> bool => n > 1 /\ totient(n) == n - 1
+is_prime(n) => n > 1 /\ totient(n) == n - 1
 
 write_line(" n  phi  prime")
 

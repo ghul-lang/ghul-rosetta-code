@@ -7,7 +7,7 @@ write_line("each round we both hide 0 to 3 coins and guess the total")
 write_line("no guessing the same total; the right guess wins the round")
 write_line("first to three rounds wins")
 
-read_numbers(prompt: string) -> int[]? is
+read_numbers(prompt) is
     write_line(prompt)
 
     let line = read_line()
@@ -21,7 +21,7 @@ read_numbers(prompt: string) -> int[]? is
     return line |> words() |> map(int.parse) |> list()
 si
 
-computer_guess(coins: int, other: int?) -> int => (
+computer_guess(coins, other) => (
     let guess mut = coins + random.next(4)
 
     while other? /\ guess == other do

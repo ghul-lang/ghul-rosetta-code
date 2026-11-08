@@ -8,9 +8,9 @@ let suits = ["C", "D", "H", "S"]
 
 use Card = (rank: int, suit: int)
 
-name(c: Card) -> string => "{ranks[c.rank]}{suits[c.suit]}"
+name(c) => "{ranks[c.rank]}{suits[c.suit]}"
 
-play(seed: int) -> (winner: int, rounds: int) is
+play(seed) is
     let random = System.Random(seed)
     let deck = (0..52) |> map(i => (rank = i % 13, suit = i / 13)) |> LIST()
 

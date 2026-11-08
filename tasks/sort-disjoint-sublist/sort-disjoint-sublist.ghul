@@ -1,6 +1,6 @@
 use default
 
-sort_disjoint_sublist(values: LIST[int], indices: Set[int]) is
+sort_disjoint_sublist(values, indices) is
     let positions = indices |> sort() |> list()
     let picked = positions |> map(i => values[i]) |> sort() |> list()
 

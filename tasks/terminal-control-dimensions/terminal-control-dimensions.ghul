@@ -1,6 +1,6 @@
 use default
 
-dimensions() -> (width: int, height: int)? =>
+dimensions() =>
     if IO.Std.is_output_redirected then
         null
     else

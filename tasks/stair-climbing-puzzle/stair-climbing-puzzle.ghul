@@ -5,7 +5,7 @@ step_up() => while !step() do step_up() od
 
 let random mut = Ghul.RANDOM(0)
 
-step() -> bool is
+step() is
     let up = random.next_double() < 0.5
     write(if up then " up" else " down" fi)
     up

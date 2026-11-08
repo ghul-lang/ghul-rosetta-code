@@ -10,7 +10,7 @@ union Tree is
     LEAF
 si
 
-insert(tree: Tree, value: int) -> Tree =>
+insert(tree, value) =>
     if let (node_value, left, right): Tree.BRANCH = tree then
         if value < node_value then
             Tree.BRANCH(node_value, insert(left, value), right)
@@ -21,14 +21,14 @@ insert(tree: Tree, value: int) -> Tree =>
         Tree.BRANCH(value, Tree.LEAF, Tree.LEAF)
     fi
 
-build_tree(list: LinkedList) -> Tree =>
+build_tree(list) =>
     if let (value, next): LinkedList.NODE = list then
         insert(build_tree(next), value)
     else
         Tree.LEAF
     fi
 
-in_order(tree: Tree) -> int{} is
+in_order(tree) is
     if let (value, left, right): Tree.BRANCH = tree then
         yield in in_order(left)
         yield value

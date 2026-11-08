@@ -31,15 +31,15 @@ od
 
 let order = MAP[Square, int]()
 
-free(s: Square) -> bool => open.contains(s) /\ !order.contains_key(s)
+free(s) => open.contains(s) /\ !order.contains_key(s)
 
-moves(s: Square) -> Square[] =>
+moves(s) =>
     hops
         |> map((dr, dc) => (row = s.row + dr, column = s.column + dc))
         |> filter(free)
         |> list()
 
-hop(s: Square, step: int) -> bool is
+hop(s, step) is
     order[s] = step
 
     if step == open.count then

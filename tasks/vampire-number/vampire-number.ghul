@@ -1,13 +1,13 @@
 use default
 
-sorted_string(s: string) -> string => (
+sorted_string(s) => (
     let chars = s |> LIST()
 
     chars.sort((x, y) => if x < y then -1 elif x == y then 0 else 1 fi)
     chars |> map(c => "{c}") |> join("")
 )
 
-fangs(n: long) -> (long, long){} is
+fangs(n) is
     let half = "{n}".length / 2
     let low mut = 1L
     let digits mut = 1
@@ -36,7 +36,7 @@ fangs(n: long) -> (long, long){} is
     od
 si
 
-fang_text(n: long) -> string =>
+fang_text(n) =>
     let pairs = n |> fangs() |> list() in
     if pairs.count == 0 then
         "{n}: not a vampire number"

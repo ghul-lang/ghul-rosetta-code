@@ -1,6 +1,6 @@
 use default
 
-running_sums(values: int{}) -> (length: int, last: int, sum: int){} is
+running_sums(values) is
     let length mut = 0
     let total mut = 0
 

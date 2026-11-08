@@ -13,8 +13,8 @@ is_palindrome(text: string) -> bool =>
 
 // MSTest 4 records the text of the checked expression through trailing
 // optional parameters, which a call has to supply.
-is_true(condition: bool) => Assert.is_true(condition, "", "")
-is_false(condition: bool) => Assert.is_false(condition, "", "")
+is_true(condition) => Assert.is_true(condition, "", "")
+is_false(condition) => Assert.is_false(condition, "", "")
 
 @TestClass()
 class PALINDROME_TESTS is
@@ -38,7 +38,7 @@ class PALINDROME_TESTS is
     a_word_that_does_not_is_not() => is_false(is_palindrome("rosetta"))
 si
 
-is_test(method: System.Reflection.MethodInfo) -> bool =>
+is_test(method) =>
     method.get_custom_attributes(typeof TestMethodAttribute, true).count > 0
 
 // MSTest's own runner is a test host rather than a program, so this

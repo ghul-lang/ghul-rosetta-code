@@ -16,7 +16,7 @@ let round_constants = [
     0x90BEFFFAu, 0xA4506CEBu, 0xBEF9A3F7u, 0xC67178F2u
 ]
 
-rotate_right(value: uint, count: int) -> uint =>
+rotate_right(value, count) =>
     (value >>> count) | (value << (32 - count))
 
 padded(message: ubyte[]) -> ubyte[] is
@@ -37,12 +37,12 @@ padded(message: ubyte[]) -> ubyte[] is
     return block
 si
 
-word(block: ubyte[], at: int) -> uint =>
+word(block, at) =>
     0..4
         |> map(index => uint(block[at + index]) << (24 - 8 * index))
         |> reduce(0u, * | *)
 
-sha256(message: ubyte[]) -> string is
+sha256(message) is
     let block = padded(message)
 
     let state = LIST([
@@ -128,7 +128,7 @@ sha256(message: ubyte[]) -> string is
     return state |> map(value => "{value:x8}") |> join("")
 si
 
-hex(digest: ubyte[]) -> string =>
+hex(digest) =>
     digest |> map(byte_value => "{byte_value:x2}") |> join("")
 
 let messages = ["", "abc", "Rosetta code"]

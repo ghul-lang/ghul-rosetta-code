@@ -8,11 +8,11 @@ let rectangles = 21
 let spacing = 4.0
 let frames = 42
 
-channel(hue: double, offset: double) -> ubyte =>
+channel(hue, offset) =>
     let wave = 0.5 + 0.5 * cos(2.0 * pi * (hue - offset)) in
     ubyte(round(40.0 + 215.0 * wave))
 
-draw(image: IMAGE, frame: int) is
+draw(image, frame) is
     image.clear(10ub, 10ub, 15ub)
     image.stroke(2.0)
 

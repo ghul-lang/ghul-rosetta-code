@@ -1,10 +1,10 @@
 use default
 
-legendre(a: bigint, p: bigint) -> bigint =>
+legendre(a, p) =>
     bigint.mod_pow(a, (p - 1n) / 2n, p)
 
 // The two square roots of n modulo the odd prime p, if n has any.
-tonelli_shanks(n: bigint, p: bigint) -> (bigint, bigint)? is
+tonelli_shanks(n, p) is
     if !legendre(n, p).is_one then
         return null
     fi

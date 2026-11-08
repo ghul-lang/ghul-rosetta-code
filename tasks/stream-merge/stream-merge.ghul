@@ -44,7 +44,7 @@ merge_all[T: Comparable[T]](streams: T{}[]) -> T{} =>
         )
     esac
 
-counting(start: int, step: int, count: int) -> int{} is
+counting(start, step, count) is
     for term in 0..count do
         yield start + term * step
     od

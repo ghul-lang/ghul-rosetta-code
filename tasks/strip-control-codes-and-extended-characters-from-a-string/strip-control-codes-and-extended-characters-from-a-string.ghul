@@ -1,9 +1,9 @@
 use default
 
-strip_control(text: string) -> string =>
+strip_control(text) =>
     string(text |> filter(c => int(c) >= 32 /\ int(c) != 127))
 
-strip_control_and_extended(text: string) -> string =>
+strip_control_and_extended(text) =>
     string(text |> filter(c => int(c) >= 32 /\ int(c) <= 126))
 
 let sample = "Hello\tWorldCafé"

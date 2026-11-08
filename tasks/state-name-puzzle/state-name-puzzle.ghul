@@ -17,13 +17,13 @@ let fictitious = [
     "New Kory", "Wen Kory", "York New", "Kory New", "New Kory"
 ]
 
-letters(s: string) -> string =>
+letters(s) =>
     s.to_lower().to_char_array()
         |> filter(char.is_letter)
         |> sort()
         |> string()
 
-solve(names: string{}) is
+solve(names) is
     let states = names |> SET() |> sort() |> list()
     let groups = MAP()
 

@@ -25,7 +25,7 @@ let units = [
     ("month", month, year)
 ]
 
-describe(seconds: double) -> string =>
+describe(seconds) =>
     units
         |> filter((_, _, below) => seconds < below)
         |> map((name, size, _) =>

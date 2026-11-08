@@ -3,12 +3,12 @@ use Raster.IMAGE
 
 use POINT = (x: double, y: double)
 
-midpoint(a: POINT, b: POINT) -> POINT => (
+midpoint(a, b) => (
     x = (a.x + b.x) / 2.0,
     y = (a.y + b.y) / 2.0
 )
 
-triangle(a: POINT, b: POINT, c: POINT) -> POINT[] => [
+triangle(a, b, c) => [
     a, b, c
 ]
 

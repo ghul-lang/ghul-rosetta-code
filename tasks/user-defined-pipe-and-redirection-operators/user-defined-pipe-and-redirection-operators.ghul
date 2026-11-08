@@ -24,9 +24,9 @@ si
     lines.count
 si
 
-capture(source: Stream) -> string => source |> join()
+capture(source) => source |> join()
 
-cat(path: string) -> Stream is
+cat(path) is
     let reader = IO.File.open_text(path)
 
     try
@@ -43,9 +43,9 @@ grep(pattern: string) -> Filter =>
 
 head(count: int) -> Filter => source => source |> take(count)
 
-tail(count: int) -> Filter => last(*, count)
+tail(count) => last(*, count)
 
-last(source: Stream, count: int) -> Stream => (
+last(source, count) => (
     let held = LIST()
 
     for line in source do
@@ -59,9 +59,9 @@ last(source: Stream, count: int) -> Stream => (
     pipe(held)
 )
 
-tee(path: string) -> Filter => copy_through(*, path)
+tee(path) => copy_through(*, path)
 
-copy_through(source: Stream, path: string) -> Stream is
+copy_through(source, path) is
     let writer = IO.File.create_text(path)
 
     try
@@ -75,9 +75,9 @@ copy_through(source: Stream, path: string) -> Stream is
     yrt
 si
 
-uniq() -> Filter => source => dedupe(source)
+uniq() => source => dedupe(source)
 
-dedupe(source: Stream) -> Stream is
+dedupe(source) is
     let seen = SET()
 
     for line in source do
@@ -87,9 +87,9 @@ dedupe(source: Stream) -> Stream is
     od
 si
 
-sorted() -> Filter => source => in_order(source)
+sorted() => source => in_order(source)
 
-in_order(source: Stream) -> Stream => (
+in_order(source) => (
     let lines = source |> LIST()
 
     lines.sort((a: string, b: string) -> int => string.compare(a, b))

@@ -1,6 +1,6 @@
 use default
 
-sums_to(divisors: int[], target: int) -> bool =>
+sums_to(divisors, target) =>
     case (divisors, target)
     when (_, 0) then true
     when ([], _) then false
@@ -10,7 +10,7 @@ sums_to(divisors: int[], target: int) -> bool =>
         fi
     esac
 
-weird(n: int) -> bool => (
+weird(n) => (
     let proper =
         n
             |> divisors()

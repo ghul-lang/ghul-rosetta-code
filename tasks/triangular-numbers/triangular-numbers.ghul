@@ -1,22 +1,22 @@
 use default
 
-simplex(dimension: int) -> bigint{} =>
+simplex(dimension) =>
     from(1)
         |> map(index =>
             binomial(bigint(index + dimension - 1), bigint(dimension))
         )
 
-triangular_root(value: double) -> double =>
+triangular_root(value) =>
     (sqrt(8.0 * value + 1.0) - 1.0) / 2.0
 
-tetrahedral_root(value: double) -> double =>
+tetrahedral_root(value) =>
     let
         offset = sqrt(9.0 * value * value - 1.0 / 27.0),
         upper = cbrt(3.0 * value + offset)
     in
         upper + 1.0 / (3.0 * upper) - 1.0
 
-pentatopic_root(value: double) -> double =>
+pentatopic_root(value) =>
     let inner = sqrt(24.0 * value + 1.0) in
     (sqrt(5.0 + 4.0 * inner) - 3.0) / 2.0
 

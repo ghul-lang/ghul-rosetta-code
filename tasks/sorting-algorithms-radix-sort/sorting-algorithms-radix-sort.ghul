@@ -2,7 +2,7 @@ use default
 
 // Least significant digit first, in base 10. Negative numbers are sorted
 // by their magnitude on their own and put first, reversed.
-radix_sort(values: int[]) -> int{} is
+radix_sort(values) is
     sort_magnitudes(magnitudes: int[]) -> int{} is
         let current mut = magnitudes |> list()
         let largest = current |> max() ?? 0

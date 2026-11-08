@@ -2,7 +2,7 @@ use default
 
 use Point = (x: double, y: double)
 
-shoelace_area(vertices: Point[]) -> double =>
+shoelace_area(vertices) =>
     abs(
         zip(vertices, vertices |> skip(1) |> cat([vertices[0]]))
             |> sum_by((a, b) => a.x * b.y - b.x * a.y)

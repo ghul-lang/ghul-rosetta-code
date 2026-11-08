@@ -2,7 +2,7 @@ use default
 
 use Matrix = double[][]
 
-zeros(n: int) -> Matrix =>
+zeros(n) =>
     0..n |> map(_ => repeat(0.0, n) |> collect()) |> collect()
 
 combine(a: Matrix, b: Matrix, sign: double) -> Matrix =>
@@ -12,10 +12,10 @@ combine(a: Matrix, b: Matrix, sign: double) -> Matrix =>
         )
         |> collect()
 
-add(a: Matrix, b: Matrix) -> Matrix => combine(a, b, 1.0)
-subtract(a: Matrix, b: Matrix) -> Matrix => combine(a, b, -1.0)
+add(a, b) => combine(a, b, 1.0)
+subtract(a, b) => combine(a, b, -1.0)
 
-quarter(a: Matrix, row: int, column: int) -> Matrix =>
+quarter(a, row, column) =>
     let half = a.count / 2 in
     0..half
         |> map(i =>
@@ -25,7 +25,7 @@ quarter(a: Matrix, row: int, column: int) -> Matrix =>
         )
         |> collect()
 
-join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
+join(c11, c12, c21, c22) =>
     let half = c11.count in
     0..2 * half
         |> map(i =>
@@ -48,7 +48,7 @@ join(c11: Matrix, c12: Matrix, c21: Matrix, c22: Matrix) -> Matrix =>
         |> collect()
 
 // Seven products of half-size matrices in place of the usual eight.
-strassen(a: Matrix, b: Matrix) -> Matrix is
+strassen(a, b) is
     if let [[a00]] = a, [[b00]] = b then
         return [[a00 * b00]]
     fi
@@ -75,7 +75,7 @@ strassen(a: Matrix, b: Matrix) -> Matrix is
 si
 
 // Pads to the next power of two, since each step halves the size.
-multiply(a: Matrix, b: Matrix) -> Matrix is
+multiply(a, b) is
     let size mut = 1
 
     while size < a.count do
@@ -102,7 +102,7 @@ multiply(a: Matrix, b: Matrix) -> Matrix is
         |> collect()
 si
 
-naive(a: Matrix, b: Matrix) -> Matrix =>
+naive(a, b) =>
     0..a.count
         |> map(i =>
             0..a.count
@@ -111,7 +111,7 @@ naive(a: Matrix, b: Matrix) -> Matrix =>
         )
         |> collect()
 
-show(m: Matrix) is
+show(m) is
     for row in m do
         let rounded = row |> map(x => round(x, 3) + 0.0)
 

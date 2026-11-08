@@ -2,9 +2,9 @@ use default
 
 class NODE(name: string, children: NODE[])
 
-leaf(name: string) -> NODE => NODE(name, LIST())
+leaf(name) => NODE(name, LIST())
 
-indented(node: NODE, depth: int) -> string{} is
+indented(node, depth) is
     yield "{repeat(" ", depth * 4) |> join("")}{node.name}"
 
     for child in node.children do
@@ -12,14 +12,14 @@ indented(node: NODE, depth: int) -> string{} is
     od
 si
 
-nested(node: NODE) -> string =>
+nested(node) =>
     if node.children.count == 0 then
         node.name
     else
         "{node.name}({node.children |> map(nested) |> join(" ")})"
     fi
 
-branches(node: NODE, prefix: string) -> string{} is
+branches(node, prefix) is
     for entry in node.children |> index() do
         let last = entry.index == node.children.count - 1
         let joint = if last then "\\- " else "+- " fi

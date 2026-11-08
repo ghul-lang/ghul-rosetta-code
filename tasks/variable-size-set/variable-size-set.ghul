@@ -1,6 +1,6 @@
 use default
 
-range(name: string, low: object, high: object) =>
+range(name, low, high) =>
     write_line("{name,-8} {low,30} {high,29}")
 
 write_line("{"type",-8} {"minimum",30} {"maximum",29}")

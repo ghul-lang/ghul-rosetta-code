@@ -8,10 +8,10 @@ let d = bigint.parse("5617843187844953170308463622230283376298685")
 
 let block_size = 17
 
-encode(block: ubyte[]) -> bigint =>
+encode(block) =>
     block |> reduce(0n, (total, b) => total * 256n + bigint(int(b)))
 
-decode(number: bigint) -> ubyte{} =>
+decode(number) =>
     if number <= 0n then []
     else
         decode(number / 256n) ++ [ubyte(int(number % 256n))]

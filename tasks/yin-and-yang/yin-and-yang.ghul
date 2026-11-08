@@ -1,9 +1,9 @@
 use default
 
-within(x: double, y: double, centre: double, radius: double) -> bool =>
+within(x, y, centre, radius) =>
     x * x + (y - centre) * (y - centre) <= radius * radius
 
-symbol(x: double, y: double, radius: double) -> string =>
+symbol(x, y, radius) =>
     if !within(x, y, 0.0, radius) then
         " "
     elif within(x, y, -radius / 2.0, radius / 6.0) then
@@ -20,7 +20,7 @@ symbol(x: double, y: double, radius: double) -> string =>
         "#"
     fi
 
-taijitu(radius: int) -> string{} is
+taijitu(radius) is
     for row in -radius::radius do
         yield
             ((-2 * radius)::(2 * radius))

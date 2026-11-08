@@ -7,13 +7,7 @@ let scratch = IO.Path.combine(
 
 IO.Directory.create_directory(scratch)
 
-write_columns(
-    path: string,
-    x: double[],
-    x_precision: int,
-    y: double[],
-    y_precision: int
-) is
+write_columns(path, x, x_precision, y, y_precision) is
     IO.File.write_all_lines(
         path,
         x

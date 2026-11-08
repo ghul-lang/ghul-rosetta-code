@@ -1,6 +1,6 @@
 use default
 
-walk(dir: string) -> string{} is
+walk(dir) is
     for path in IO.Directory.get_files(dir) do
         yield path
     od

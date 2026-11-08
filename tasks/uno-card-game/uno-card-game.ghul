@@ -8,16 +8,16 @@ let names = ["you", "bot 1", "bot 2", "bot 3"]
 
 use Card = (colour: string, value: string)
 
-is_wild(card: Card) -> bool => card.colour =~ "wild"
+is_wild(card) => card.colour =~ "wild"
 
-name(card: Card) -> string =>
+name(card) =>
     if is_wild(card) then
         card.value
     else
         "{card.colour} {card.value}"
     fi
 
-points(card: Card) -> int =>
+points(card) =>
     if is_wild(card) then 50
     elif card.value.length == 1 then int.parse(card.value)
     else 20
@@ -31,7 +31,7 @@ shuffled(cards: Card{}) -> LIST[Card] =>
             |> map(p => p.card)
     )
 
-new_deck() -> LIST[Card] is
+new_deck() is
     let deck = LIST[Card]()
     let values = ["skip", "reverse", "draw two"]
 
@@ -60,27 +60,27 @@ let colour mut = ""
 let direction mut = 1
 let verbose mut = true
 
-acts(seat: int, yours: string, theirs: string) -> string =>
+acts(seat, yours, theirs) =>
     if seat == 0 then
         "you {yours}"
     else
         "{names[seat]} {theirs}"
     fi
 
-say(text: string) is
+say(text) is
     if verbose then
         write_line(text)
     fi
 si
 
-penalised(seat: int, cards: string) =>
+penalised(seat, cards) =>
     let
         drawn = acts(seat, "draw {cards}", "draws {cards}"),
         missed = if seat == 0 then "miss" else "misses" fi
     in
         say("  {drawn} and {missed} a turn")
 
-draw(player: int, count: int) is
+draw(player, count) is
     for _ in 0..count do
         if deck.count == 0 then
             let top = discard[discard.count - 1]
@@ -96,26 +96,26 @@ draw(player: int, count: int) is
     od
 si
 
-top() -> Card => discard[discard.count - 1]
+top() => discard[discard.count - 1]
 
-matches(card: Card) -> bool =>
+matches(card) =>
     is_wild(card) \/ card.colour =~ colour \/ card.value =~ top().value
 
-has_colour(hand: Card[]) -> bool => hand |> any(c => c.colour =~ colour)
+has_colour(hand) => hand |> any(c => c.colour =~ colour)
 
-next_seat(seat: int) -> int => (seat + direction + 4) % 4
+next_seat(seat) => (seat + direction + 4) % 4
 
-in_colour(hand: Card[], wanted: string) -> int =>
+in_colour(hand, wanted) =>
     hand |> filter(card => card.colour =~ wanted) |> count()
 
-favourite_colour(hand: Card[]) -> string =>
+favourite_colour(hand) =>
     colours
         |> map(c => (colour = c, count = in_colour(hand, c)))
         |> sort((a, b) => b.count <> a.count)
         |> map(p => p.colour)
         |> first() ?? "red"
 
-bot_choice(hand: Card[]) -> int? =>
+bot_choice(hand) =>
     (0..hand.count)
         |> filter(i => matches(hand[i]) /\ !is_wild(hand[i]))
         |> cat(0..hand.count |> filter(i => hand[i].value =~ "wild"))
@@ -129,7 +129,7 @@ bot_choice(hand: Card[]) -> int? =>
 
 let autopilot mut = false
 
-ask(prompt: string) -> string? is
+ask(prompt) is
     if autopilot then
         return null
     fi
@@ -149,7 +149,7 @@ si
 
 use Choice = (index: int, colour: string, uno: bool)
 
-human_choice(hand: Card[]) -> Choice? is
+human_choice(hand) is
     write_line("your hand:")
 
     for row in 0..(hand.count + 3) / 4 do
@@ -202,7 +202,7 @@ human_choice(hand: Card[]) -> Choice? is
     null
 si
 
-automatic_choice(hand: Card[]) -> Choice is
+automatic_choice(hand) is
     if let index = bot_choice(hand) then
         let rest =
             (0..hand.count)
@@ -222,7 +222,7 @@ si
 
 use Played = (card: Card, bluffed: bool)
 
-play(seat: int, choice: Choice) -> Played is
+play(seat, choice) is
     let hand = hands[seat]
     let card = hand[choice.index]
     let bluffed = card.value =~ "wild draw four" /\ has_colour(hand)
@@ -296,7 +296,7 @@ take_turn(seat: int) -> Played? is
     play(seat, (index = last, colour = chosen_colour, uno = true))
 si
 
-challenges(seat: int) -> bool is
+challenges(seat) is
     if seat == 0 /\ !autopilot then
         let answer = ask("challenge the wild draw four? (y/n)")
 
@@ -308,7 +308,7 @@ challenges(seat: int) -> bool is
     random.next(3) == 0
 si
 
-play_hand(dealer: int) -> int is
+play_hand(dealer) is
     deck = new_deck()
     discard.clear()
     direction = 1

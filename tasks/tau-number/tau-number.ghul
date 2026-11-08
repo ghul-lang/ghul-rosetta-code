@@ -1,6 +1,6 @@
 use default
 
-is_tau(n: int) -> bool => n % divisor_count(n) == 0
+is_tau(n) => n % divisor_count(n) == 0
 
 let first_hundred = from(1) |> filter(is_tau) |> take(100)
 

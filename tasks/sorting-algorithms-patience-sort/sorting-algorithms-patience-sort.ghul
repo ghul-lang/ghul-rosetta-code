@@ -1,8 +1,8 @@
 use default
 
-top(pile: LIST[int]) -> int => pile[pile.count - 1]
+top(pile) => pile[pile.count - 1]
 
-patience_sort(values: int[]) -> int{} is
+patience_sort(values) is
     let piles = LIST[LIST[int]]()
 
     for value in values do

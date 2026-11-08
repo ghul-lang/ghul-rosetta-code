@@ -40,10 +40,10 @@ groups(differences: int[]) -> int[]{} is
     od
 si
 
-render(group: int[]) -> string =>
+render(group) =>
     "({group |> map(p => "{p}") |> join(", ")})"
 
-report(differences: int[]) is
+report(differences) is
     let found = differences |> groups() |> list()
     let shown = differences |> map(d => "{d}") |> join()
 

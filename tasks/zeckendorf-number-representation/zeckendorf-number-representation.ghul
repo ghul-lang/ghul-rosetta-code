@@ -1,6 +1,6 @@
 use default
 
-fibonacci_up_to(limit: int) -> int{} is
+fibonacci_up_to(limit) is
     let smaller mut = 1
     let larger mut = 2
 
@@ -18,7 +18,7 @@ fibonacci_up_to(limit: int) -> int{} is
     od
 si
 
-zeckendorf(n: int) -> string is
+zeckendorf(n) is
     let digits = System.Text.StringBuilder()
     let remaining mut = n
 

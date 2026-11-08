@@ -1,6 +1,6 @@
 use default
 
-strip_comment(line: string, markers: char[]) -> string =>
+strip_comment(line, markers) =>
     let cut =
         markers
             |> map(line.index_of(*))

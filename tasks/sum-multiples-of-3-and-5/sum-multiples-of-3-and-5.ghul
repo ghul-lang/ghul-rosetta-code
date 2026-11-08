@@ -1,6 +1,6 @@
 use default
 
-sum_of_multiples(below: long) -> long =>
+sum_of_multiples(below) =>
     (1L..below) |> filter(n => n % 3L == 0L \/ n % 5L == 0L) |> sum()
 
 for below in [10L, 1000L, 1000000L] do

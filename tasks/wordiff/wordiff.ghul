@@ -7,7 +7,7 @@ let dictionary =
 
 let words = SET(dictionary)
 
-one_apart(a: string, b: string) -> bool =>
+one_apart(a, b) =>
     if a.length == b.length then
         0..a.length |> filter(i => a[i] != b[i]) |> count() == 1
     elif a.length == b.length + 1 then
@@ -18,7 +18,7 @@ one_apart(a: string, b: string) -> bool =>
         false
     fi
 
-ask(prompt: string) -> string? is
+ask(prompt) is
     write_line(prompt)
 
     let line = read_line()

@@ -1,6 +1,6 @@
 use default
 
-swaps(deck: int[]) -> int => (
+swaps(deck) => (
     let cards = deck |> LIST()
 
     let count mut = 0
@@ -19,7 +19,7 @@ swaps(deck: int[]) -> int => (
     count
 )
 
-topswops(n: int) -> int => (
+topswops(n) => (
     let deck = 1::n |> LIST()
 
     let best mut = 0

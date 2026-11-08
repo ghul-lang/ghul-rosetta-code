@@ -9,7 +9,7 @@ si
 use PARSE = (value: Expression, rest: char[])
 use SUBPARSER = (char[]) -> PARSE
 
-parse_atom(tokens: char[]) -> PARSE =>
+parse_atom(tokens) =>
     case tokens
     when ['(', ..rest] then
         case parse_or(rest)
@@ -27,7 +27,7 @@ parse_atom(tokens: char[]) -> PARSE =>
         throw Ghul.Exception("expected an operand")
     esac
 
-parse_binary(tokens: char[], symbol: char, below: SUBPARSER) -> PARSE is
+parse_binary(tokens, symbol, below) is
     more(left: PARSE) -> PARSE =>
         case left.rest
         when [~symbol, ..rest] then
@@ -49,13 +49,13 @@ parse_binary(tokens: char[], symbol: char, below: SUBPARSER) -> PARSE is
     more(below(tokens))
 si
 
-parse_and(tokens: char[]) -> PARSE => parse_binary(tokens, '&', parse_atom)
+parse_and(tokens) => parse_binary(tokens, '&', parse_atom)
 
-parse_xor(tokens: char[]) -> PARSE => parse_binary(tokens, '^', parse_and)
+parse_xor(tokens) => parse_binary(tokens, '^', parse_and)
 
-parse_or(tokens: char[]) -> PARSE => parse_binary(tokens, '|', parse_xor)
+parse_or(tokens) => parse_binary(tokens, '|', parse_xor)
 
-names(expression: Expression) -> string{} is
+names(expression) is
     case expression
     when leaf: Expression.VARIABLE then
         yield leaf.name
@@ -85,7 +85,7 @@ evaluate(expression: Expression, values: MAP[string, bool]) -> bool =>
             esac
     esac
 
-assignments(count: int) -> bool{}{} =>
+assignments(count) =>
     if count == 0 then
         [[]]
     else
@@ -96,9 +96,9 @@ assignments(count: int) -> bool{}{} =>
         }
     fi
 
-digit(value: bool) -> string => if value then "1" else "0" fi
+digit(value) => if value then "1" else "0" fi
 
-table(source: string) is
+table(source) is
     let expression = parse_or(source |> filter(* != ' ') |> list()).value
     let variables = expression |> names() |> distinct() |> list()
 

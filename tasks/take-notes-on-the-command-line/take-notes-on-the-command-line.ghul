@@ -1,6 +1,6 @@
 use default
 
-notes(arguments: string[]) is
+notes(arguments) is
     let path = "NOTES.TXT"
 
     if arguments.count == 0 then

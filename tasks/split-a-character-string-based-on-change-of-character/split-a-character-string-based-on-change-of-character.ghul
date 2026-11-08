@@ -1,6 +1,6 @@
 use default
 
-split(text: string) -> string{} => (
+split(text) => (
     let runs = LIST()
 
     let start mut = 0

@@ -7,7 +7,7 @@ let lines = [
     (0, 4, 8), (2, 4, 6)
 ]
 
-winner(board: char[]) -> char? =>
+winner(board) =>
     lines
         |> filter((a, b, c) =>
             board[a] != ' ' /\ board[a] == board[b] /\ board[b] == board[c]
@@ -15,13 +15,13 @@ winner(board: char[]) -> char? =>
         |> map((a, _, _) => board[a])
         |> first()
 
-free(board: char[]) -> int{} => 0..9 |> filter(i => board[i] == ' ')
+free(board) => 0..9 |> filter(i => board[i] == ' ')
 
-full(board: char[]) -> bool => !(board |> any(* == ' '))
+full(board) => !(board |> any(* == ' '))
 
-other(player: char) -> char => if player == 'X' then 'O' else 'X' fi
+other(player) => if player == 'X' then 'O' else 'X' fi
 
-score(board: LIST[char], player: char) -> int is
+score(board, player) is
     if winner(board)? then
         return -1
     fi
@@ -41,7 +41,7 @@ score(board: LIST[char], player: char) -> int is
     best
 si
 
-best_move(board: LIST[char]) -> int is
+best_move(board) is
     let move mut = -1
     let best mut = -2
 
@@ -59,14 +59,14 @@ best_move(board: LIST[char]) -> int is
     move
 si
 
-label(board: char[], index: int) -> string =>
+label(board, index) =>
     if board[index] == ' ' then
         "{index + 1}"
     else
         "{board[index]}"
     fi
 
-show(board: char[]) is
+show(board) is
     for row in 0..3 do
         write_line(
             (0..3)

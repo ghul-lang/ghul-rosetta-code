@@ -8,14 +8,14 @@ class SELF_APPLY(_f: (SELF_APPLY) -> Sequence[]) is
     apply(r: SELF_APPLY) -> Sequence[] => _f(r)
 si
 
-fix_star(makers: Maker[]) -> Sequence[] =>
+fix_star(makers) =>
     let wrap = SELF_APPLY(r =>
         makers |> map(make => n => make(r.apply(r))(n)) |> collect()
     )
     in
     wrap.apply(wrap)
 
-show(label: string, f: Sequence) is
+show(label, f) is
     write(label)
 
     for n in 0..21 do

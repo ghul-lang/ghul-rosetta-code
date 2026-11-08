@@ -3,11 +3,11 @@ use System.Diagnostics.Stopwatch
 
 // Process time rather than wall-clock time, so another program running at
 // the same time does not show up as this one taking longer.
-spent() -> double =>
+spent() =>
     let process = System.Diagnostics.Process.get_current_process() in
     process.total_processor_time.total_milliseconds
 
-timed(name: string, work: () -> int) =>
+timed(name, work) =>
     let
         clock = Stopwatch.start_new(),
         before = spent(),
@@ -20,7 +20,7 @@ timed(name: string, work: () -> int) =>
             "{processor,8:F2} ms processor"
         )
 
-count_primes(limit: int) -> int => 2..limit |> count(is_prime)
+count_primes(limit) => 2..limit |> count(is_prime)
 
 timed("primes below 1000000", () => count_primes(1_000_000))
 timed("primes below 10000000", () => count_primes(10_000_000))

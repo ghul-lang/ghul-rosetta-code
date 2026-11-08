@@ -16,7 +16,7 @@ let scales = [
     "trillion", "quadrillion", "quintillion"
 ]
 
-under_hundred(value: int) -> string =>
+under_hundred(value) =>
     if value < 20 then
         small[value]
     elif value % 10 == 0 then
@@ -25,7 +25,7 @@ under_hundred(value: int) -> string =>
         "{tens[value / 10 - 2]}-{small[value % 10]}"
     fi
 
-under_thousand(value: int) -> string =>
+under_thousand(value) =>
     if value < 100 then
         under_hundred(value)
     elif value % 100 == 0 then
@@ -34,14 +34,14 @@ under_thousand(value: int) -> string =>
         "{small[value / 100]} hundred {under_hundred(value % 100)}"
     fi
 
-groups(value: long) -> int{} is
+groups(value) is
     if value > 0L then
         yield int(value % 1000L)
         yield in groups(value / 1000L)
     fi
 si
 
-cardinal(value: long) -> string =>
+cardinal(value) =>
     if value == 0L then
         "zero"
     else
@@ -71,7 +71,7 @@ let irregular = [
     (spelt = "twelve", ranked = "twelfth")
 ]
 
-ranked_word(word: string) -> string =>
+ranked_word(word) =>
     let special = irregular |> find(entry => entry.spelt =~ word) in
     if let known = special then
         known.ranked
@@ -81,7 +81,7 @@ ranked_word(word: string) -> string =>
         "{word}th"
     fi
 
-ordinal(value: long) -> string is
+ordinal(value) is
     let text = cardinal(value)
     let cut =
         (0..text.length)
@@ -95,7 +95,7 @@ ordinal(value: long) -> string is
     ranked_word(text)
 si
 
-as_number(text: string) -> long =>
+as_number(text) =>
     if text.contains(".") \/ text.contains("e") \/ text.contains("E") then
         long(double.parse(text))
     else

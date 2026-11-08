@@ -6,7 +6,7 @@ enum Mark is
     GREEN
 si
 
-marks(answer: string, guess: string) -> Mark{} =>
+marks(answer, guess) =>
     let positions = 0..guess.length in
     let unmatched =
         positions

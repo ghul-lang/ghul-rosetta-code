@@ -20,7 +20,7 @@ let steps = [
 ]
     |> MAP()
 
-new_food() -> (x: int, y: int) is
+new_food() is
     while true do
         let spot = (x = random.next(width), y = random.next(height))
 
@@ -54,7 +54,7 @@ show() is
     write_line("length {snake.count}")
 si
 
-step() -> bool is
+step() is
     let head = snake[0]
     let next = (
         x = (head.x + heading.dx + width) % width,

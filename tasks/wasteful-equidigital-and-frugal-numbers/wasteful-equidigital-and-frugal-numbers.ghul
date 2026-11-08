@@ -35,9 +35,9 @@ while odd * odd <= limit do
     odd = odd + 2
 od
 
-length_in(value: int, base: int) -> int => value |> digits(base) |> count()
+length_in(value, base) => value |> digits(base) |> count()
 
-factor_length(value: int, base: int) -> int is
+factor_length(value, base) is
     let total mut = 0
     let remaining mut = value
 
@@ -60,7 +60,7 @@ factor_length(value: int, base: int) -> int is
     total
 si
 
-classify(value: int, base: int) -> Kind =>
+classify(value, base) =>
     if value == 1 then EQUIDIGITAL
     else
         let own = length_in(value, base)

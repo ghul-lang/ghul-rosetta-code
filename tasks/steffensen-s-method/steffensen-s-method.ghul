@@ -1,6 +1,6 @@
 use default
 
-aitken(f: double -> double, p0: double) -> double =>
+aitken(f, p0) =>
     let
         p1 = f(p0),
         p2 = f(p1),
@@ -8,12 +8,7 @@ aitken(f: double -> double, p0: double) -> double =>
     in
         p0 - (p1m0 * p1m0) / (p2 - 2.0 * p1 + p0)
 
-steffensen_aitken(
-    f: double -> double,
-    initial: double,
-    tolerance: double,
-    iterations: int
-) -> double? is
+steffensen_aitken(f, initial, tolerance, iterations) is
     let p0 mut = initial
     let p mut = aitken(f, p0)
     let count mut = 1
@@ -27,16 +22,16 @@ steffensen_aitken(
     if abs(p - p0) > tolerance then null else p fi
 si
 
-de_casteljau(c0: double, c1: double, c2: double, t: double) -> double =>
+de_casteljau(c0, c1, c2, t) =>
     let s = 1.0 - t in
     s * (s * c0 + t * c1) + t * (s * c1 + t * c2)
 
-x(t: double) -> double => de_casteljau(2.0, -8.0, 2.0, t)
-y(t: double) -> double => de_casteljau(1.0, 2.0, 3.0, t)
+x(t) => de_casteljau(2.0, -8.0, 2.0, t)
+y(t) => de_casteljau(1.0, 2.0, 3.0, t)
 
-implicit_equation(x: double, y: double) -> double => 5.0 * x * x + y - 5.0
+implicit_equation(x, y) => 5.0 * x * x + y - 5.0
 
-f(t: double) -> double => implicit_equation(x(t), y(t)) + t
+f(t) => implicit_equation(x(t), y(t)) + t
 
 for i in 0::10 do
     let t0 = double(i) / 10.0

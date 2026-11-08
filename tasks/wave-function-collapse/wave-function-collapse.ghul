@@ -14,18 +14,18 @@ let tile = grid * 2 + 1
 
 let random = System.Random(3)
 
-column_of(block: int, column: int) -> string =>
+column_of(block, column) =>
     blocks[block] |> map(row => "{row[column]}") |> join("")
 
-fits_right(left: int, right: int) -> bool =>
+fits_right(left, right) =>
     column_of(left, 2) =~ column_of(right, 0)
 
-fits_below(top: int, bottom: int) -> bool =>
+fits_below(top, bottom) =>
     blocks[top][2] =~ blocks[bottom][0]
 
-wrap(i: int) -> int => (i + grid) % grid
+wrap(i) => (i + grid) % grid
 
-attempt() -> int[]? is
+attempt() is
     let placed = repeat(-1, grid * grid) |> LIST()
     let options = LIST[LIST[int]](
         0..grid * grid |> map(_ => LIST(0..blocks.count))
@@ -74,7 +74,7 @@ od
 
 let blocks_placed = placed!
 
-pixel(y: int, x: int) -> char =>
+pixel(y, x) =>
     let
         row = min(y / 2, grid - 1),
         column = min(x / 2, grid - 1),

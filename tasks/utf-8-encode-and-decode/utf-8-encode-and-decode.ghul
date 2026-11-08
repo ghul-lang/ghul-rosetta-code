@@ -1,6 +1,6 @@
 use default
 
-encode(code_point: int) -> int[] is
+encode(code_point) is
     let octets = LIST(4)
 
     if code_point < 0x80 then
@@ -22,7 +22,7 @@ encode(code_point: int) -> int[] is
     return octets
 si
 
-decode(octets: int[]) -> int =>
+decode(octets) =>
     let leader = octets[0] in
     octets
         |> skip(1)
@@ -36,14 +36,9 @@ decode(octets: int[]) -> int =>
             (acc, continuation) => (acc << 6) | (continuation & 0x3F)
         )
 
-hex(octet: int) -> string => "{octet:X2}"
+hex(octet) => "{octet:X2}"
 
-row(
-    character: string,
-    name: string,
-    code_point: string,
-    octets: string
-) -> string => "{character,-11}{name,-38}{code_point,-11}{octets}"
+row(character, name, code_point, octets) => "{character,-11}{name,-38}{code_point,-11}{octets}"
 
 let characters = [
     (code_point = 65, name = "LATIN CAPITAL LETTER A"),

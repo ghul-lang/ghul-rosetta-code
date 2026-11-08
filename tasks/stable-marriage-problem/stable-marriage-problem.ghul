@@ -88,15 +88,10 @@ let women_preferences = [
 ]
     |> MAP()
 
-rank(preferences: ARRAY[string], name: string) -> int =>
+rank(preferences, name) =>
     preferences |> find_index(* =~ name)!
 
-prefers(
-    preferences: Map[string, ARRAY[string]],
-    judge: string,
-    a: string,
-    b: string
-) -> bool => rank(preferences[judge], a) < rank(preferences[judge], b)
+prefers(preferences, judge, a, b) => rank(preferences[judge], a) < rank(preferences[judge], b)
 
 engage() -> MAP[string, string] is
     let engaged_to = MAP()
@@ -125,7 +120,7 @@ engage() -> MAP[string, string] is
     engaged_to
 si
 
-is_stable(engaged_to: MAP[string, string]) -> bool =>
+is_stable(engaged_to) =>
     engaged_to.keys
         |> all(woman =>
             men_preferences.keys
@@ -146,7 +141,7 @@ is_stable(engaged_to: MAP[string, string]) -> bool =>
                 )
         )
 
-find_partner(engaged_to: MAP[string, string], man: string) -> string =>
+find_partner(engaged_to, man) =>
     engaged_to.keys |> find(woman => engaged_to[woman] =~ man) ?? ""
 
 let engaged_to = engage()

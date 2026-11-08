@@ -30,7 +30,7 @@ si
 
 let random = System.Random(100)
 
-samples() -> double{} is
+samples() is
     while true do
         yield random.next_double()
     od

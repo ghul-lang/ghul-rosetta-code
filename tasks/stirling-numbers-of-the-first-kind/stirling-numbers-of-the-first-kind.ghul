@@ -1,6 +1,6 @@
 use default
 
-rows() -> bigint[]{} is
+rows() is
     let row mut = [1n] |> list()
 
     do

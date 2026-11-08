@@ -1,6 +1,6 @@
 use default
 
-show(kelvin: double) is
+show(kelvin) is
     write_line("K {kelvin,8:F2}")
     write_line("C {kelvin - 273.15,8:F2}")
     write_line("F {kelvin * 1.8 - 459.67,8:F2}")

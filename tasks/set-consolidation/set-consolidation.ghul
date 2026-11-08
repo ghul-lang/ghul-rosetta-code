@@ -23,10 +23,10 @@ consolidate(input: List[Set[string]]) -> List[Set[string]] is
     result
 si
 
-render(sets: List[Set[string]]) -> string =>
+render(sets) =>
     sets |> map(one => "{{{one |> sort() |> join(", ")}}}") |> join(" ")
 
-show(groups: string[][]) is
+show(groups) is
     let sets = groups |> map(SET) |> list()
 
     write_line("{render(sets)}")

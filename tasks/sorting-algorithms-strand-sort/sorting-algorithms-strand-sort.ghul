@@ -12,7 +12,7 @@ merge(left: int[], right: int[]) -> int{} =>
         fi
     esac
 
-strand_sort(values: int[]) -> int{} is
+strand_sort(values) is
     let remaining = LIST()
 
     remaining.add_range(values)

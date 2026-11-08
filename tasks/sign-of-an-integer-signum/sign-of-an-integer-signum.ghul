@@ -1,6 +1,6 @@
 use default
 
-signum(value: int) -> int =>
+signum(value) =>
     if value < 0 then -1 elif value > 0 then 1 else 0 fi
 
 for value in [-10, 0, 10] do

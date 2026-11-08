@@ -18,7 +18,7 @@ let staff: Employee[] = [
     ("Timothy Grove", "E16398", 29900, "D190")
 ]
 
-top_earners(department: string, wanted: int) -> Employee{} => (
+top_earners(department, wanted) => (
     let earners = staff |> filter(e => e.department =~ department) |> LIST()
 
     earners.sort((a, b) => b.salary <> a.salary)

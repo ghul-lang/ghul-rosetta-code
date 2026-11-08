@@ -8,7 +8,7 @@ si
 use Tree.LEAF
 use Tree.NODE
 
-fringe(tree: Tree) -> int{} is
+fringe(tree) is
     if isa LEAF(tree) then
         yield tree.value
     elif isa NODE(tree) then
@@ -17,7 +17,7 @@ fringe(tree: Tree) -> int{} is
     fi
 si
 
-compare(first: Tree, second: Tree) -> (same: bool, leaves: int) is
+compare(first, second) is
     let left = fringe(first).iterator
     let right = fringe(second).iterator
 
@@ -43,7 +43,7 @@ compare(first: Tree, second: Tree) -> (same: bool, leaves: int) is
     od
 si
 
-show(tree: Tree) -> string =>
+show(tree) =>
     case tree
     when (value): LEAF then "{value}"
     when (left, right): NODE then "({show(left)} {show(right)})"

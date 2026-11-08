@@ -9,7 +9,7 @@ let random = Random(6)
 use Cell = (row: int, column: int)
 use Piece = (name: char, size: int, cells: Cell[])
 
-shape(name: char, size: int, rows: string[]) -> Piece => (
+shape(name, size, rows) => (
     name = name,
     size = size,
     cells =
@@ -29,7 +29,7 @@ let pieces = [
     shape('L', 3, ["..#", "###", "..."])
 ]
 
-rotated(piece: Piece) -> Piece => (
+rotated(piece) => (
     name = piece.name,
     size = piece.size,
     cells =
@@ -57,17 +57,17 @@ draw() -> Piece is
     next
 si
 
-free(r: int, k: int) -> bool =>
+free(r, k) =>
     r >= 0 /\
     r < height /\
     k >= 0 /\
     k < width /\
     well[r * width + k] == '.'
 
-fits(piece: Piece, row: int, column: int) -> bool =>
+fits(piece, row, column) =>
     piece.cells |> all(c => free(row + c.row, column + c.column))
 
-squares(piece: Piece, row: int, column: int) -> int{} =>
+squares(piece, row, column) =>
     piece.cells |> map(c => (row + c.row) * width + column + c.column)
 
 let current mut = draw()
@@ -117,7 +117,7 @@ show() is
     write_line("+{"".pad_right(width, '-')}+")
 si
 
-lock() -> bool is
+lock() is
     for i in squares(current, row, column) do
         well[i] = current.name
     od

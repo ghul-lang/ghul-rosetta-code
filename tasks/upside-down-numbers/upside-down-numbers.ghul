@@ -1,15 +1,15 @@
 use default
 
-power_of_nine(exponent: int) -> int => repeat(9, exponent) |> product()
+power_of_nine(exponent) => repeat(9, exponent) |> product()
 
-count_of_length(length: int) -> int => power_of_nine(length / 2)
+count_of_length(length) => power_of_nine(length / 2)
 
-locate(rank: int, length: int) -> (int, int) =>
+locate(rank, length) =>
     if rank < count_of_length(length) then (length, rank)
     else locate(rank - count_of_length(length), length + 1)
     fi
 
-upside_down(index: int) -> string =>
+upside_down(index) =>
     let
         (length, rank) = locate(index - 1, 1),
         size = length / 2,

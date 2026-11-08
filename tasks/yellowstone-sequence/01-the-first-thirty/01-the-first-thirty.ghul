@@ -1,6 +1,6 @@
 use default
 
-yellowstone(count: int) -> int{} is
+yellowstone(count) is
     let terms = LIST([1, 2, 3])
     let used = SET([1, 2, 3])
 

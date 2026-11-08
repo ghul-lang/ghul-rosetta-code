@@ -2,7 +2,7 @@ use default
 
 let words = IO.File.read_lines("unixdict.txt") |> SET()
 
-neighbours(word: string) -> string{} =>
+neighbours(word) =>
     (0..word.length)
         |> flat_map(i =>
             ('a'::'z')
@@ -11,11 +11,7 @@ neighbours(word: string) -> string{} =>
         )
         |> filter(words.contains)
 
-path_back(
-    previous: MAP[string, string],
-    start: string,
-    word: string
-) -> string[] =>
+path_back(previous, start, word) =>
     if word =~ start then
         LIST([start])
     else

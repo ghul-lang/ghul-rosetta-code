@@ -6,7 +6,7 @@ write_line("")
 let one = 1n
 let two = 2n
 
-is_odd_prime(value: int) -> bool is
+is_odd_prime(value) is
     if value < 3 \/ value % 2 == 0 then return false fi
 
     let divisor mut = 3
@@ -19,7 +19,7 @@ is_odd_prime(value: int) -> bool is
     true
 si
 
-probably_prime(value: bigint) -> bool is
+probably_prime(value) is
     for small in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37] do
         let witness = bigint(small)
 
@@ -52,7 +52,7 @@ probably_prime(value: bigint) -> bool is
     true
 si
 
-wagstaff(top: int) -> (exponent: int, value: bigint){} is
+wagstaff(top) is
     let reported mut = 0
 
     for exponent in 3::top do

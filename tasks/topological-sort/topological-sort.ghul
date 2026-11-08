@@ -2,7 +2,7 @@ use default
 
 use ROW = (library: string, dependencies: string)
 
-dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
+dependency_graph(rows) is
     let graph = MAP()
 
     for row in rows do
@@ -26,10 +26,7 @@ dependency_graph(rows: ROW[]) -> MAP[string, SET[string]] is
     return graph
 si
 
-compile_order(graph: MAP[string, SET[string]]) -> (
-    ordered: string[],
-    blocked: string[]
-) is
+compile_order(graph) is
     let pending =
         graph.keys
             |> collect_mutable_map(name => name, name => SET(graph[name]))
@@ -64,7 +61,7 @@ compile_order(graph: MAP[string, SET[string]]) -> (
     return (ordered = ordered, blocked = blocked)
 si
 
-report(heading: string, rows: ROW[]) is
+report(heading, rows) is
     let (ordered, blocked) = compile_order(dependency_graph(rows))
 
     write_line(heading)

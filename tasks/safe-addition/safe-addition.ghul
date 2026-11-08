@@ -5,7 +5,7 @@ struct INTERVAL(low: double public, high: double public)
 // The rounding error of a + b is recovered exactly, as the difference
 // between the sum and what each operand contributed to it. Its sign says
 // which side of the exact sum the rounded one fell.
-safe_add(a: double, b: double) -> INTERVAL is
+safe_add(a, b) is
     let sum = a + b
     let b_part = sum - a
     let error = (a - (sum - b_part)) + (b - b_part)

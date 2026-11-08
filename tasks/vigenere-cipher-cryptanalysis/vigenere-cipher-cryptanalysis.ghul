@@ -7,29 +7,29 @@ let english = [
     0.00978, 0.02360, 0.00150, 0.01974, 0.00074
 ]
 
-ord(c: char) -> int => int(c) - int('A')
+ord(c) => int(c) - int('A')
 
-chr(n: int) -> char => char(int('A') + (n % 26 + 26) % 26)
+chr(n) => char(int('A') + (n % 26 + 26) % 26)
 
-counts(text: string) -> int{} =>
+counts(text) =>
     (0..26)
         |> map(letter => text |> filter(c => ord(c) == letter) |> count())
 
-column(text: string, length: int, start: int) -> string =>
+column(text, length, start) =>
     text
         |> index()
         |> filter(c => c.index % length == start)
         |> map(c => c.value)
         |> join("")
 
-coincidence(text: string) -> double =>
+coincidence(text) =>
     (text |> counts() |> sum_by(n => double(n * (n - 1)))) /
     double(text.length * (text.length - 1))
 
-shift(text: string, by: int) -> string =>
+shift(text, by) =>
     text |> map(c => chr(ord(c) - by)) |> join("")
 
-chi_squared(text: string) -> double =>
+chi_squared(text) =>
     text
         |> counts()
         |> index()
@@ -39,7 +39,7 @@ chi_squared(text: string) -> double =>
             difference * difference / expected
         ))
 
-best_shift(text: string) -> int =>
+best_shift(text) =>
     0..26
         |> reduce(0, (best, by) =>
             if
@@ -51,7 +51,7 @@ best_shift(text: string) -> int =>
             fi
         )
 
-decrypt(text: string, key: string) -> string =>
+decrypt(text, key) =>
     text
         |> index()
         |> map(c => chr(ord(c.value) - ord(key[c.index % key.length])))

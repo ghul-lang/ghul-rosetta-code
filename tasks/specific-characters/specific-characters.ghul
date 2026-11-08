@@ -1,8 +1,8 @@
 use default
 
-counts(s: string) -> Map[char, int] => s |> frequencies()
+counts(s) => s |> frequencies()
 
-show(strings: string[]) is
+show(strings) is
     let tallies = strings |> map(counts) |> list()
     let specific = LIST()
     let others = LIST()

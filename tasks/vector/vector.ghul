@@ -16,10 +16,10 @@ struct VECTOR(x: double, y: double) is
     to_string() -> string => "({x:F3}, {y:F3})"
 si
 
-from_polar(angle: double, length: double) -> VECTOR =>
+from_polar(angle, length) =>
     VECTOR(cos(angle) * length, sin(angle) * length)
 
-between(from: VECTOR, to: VECTOR) -> VECTOR => to - from
+between(from, to) => to - from
 
 let a = VECTOR(5.0, 7.0)
 let b = VECTOR(2.0, 3.0)

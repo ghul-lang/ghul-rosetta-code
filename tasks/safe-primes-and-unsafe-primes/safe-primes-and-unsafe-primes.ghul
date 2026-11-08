@@ -1,10 +1,10 @@
 use default
 
-is_safe(prime: int) -> bool => is_prime((prime - 1) / 2)
+is_safe(prime) => is_prime((prime - 1) / 2)
 
-selected(wanted: (int) -> bool) -> int{} => primes() |> filter(wanted)
+selected(wanted) => primes() |> filter(wanted)
 
-report(name: string, wanted: (int) -> bool, first: int) is
+report(name, wanted, first) is
     write_line("first {first} {name} primes:")
     write_line("  {selected(wanted) |> take(first) |> join(" ")}")
 

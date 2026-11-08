@@ -19,7 +19,7 @@ si
 
 use Crossing = (edge: int, t: double, node: NODE)
 
-area(polygon: P[]) -> double =>
+area(polygon) =>
     (0..polygon.count)
         |> sum_by(i => polygon[i] × polygon[(i + 1) % polygon.count])
 
@@ -60,7 +60,7 @@ ring(polygon: P[], crossings: Crossing[]) -> NODE{} is
     nodes
 si
 
-clip(subject: P[], given: P[]) -> P[][] is
+clip(subject, given) is
     let flip = (area(subject) > 0.0) != (area(given) > 0.0)
     let window =
         (0..given.count)
@@ -171,7 +171,7 @@ let image = IMAGE(600, 560)
 image.view(0.0, 540.0, 600.0, 60.0)
 image.clear(252ub, 252ub, 250ub)
 
-outline(polygon: P[]) -> (x: double, y: double)[] =>
+outline(polygon) =>
     polygon ++ [polygon[0]] |> map(p => (x = p.x, y = p.y)) |> list()
 
 image.color(250ub, 200ub, 90ub)

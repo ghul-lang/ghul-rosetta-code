@@ -4,9 +4,9 @@ use LINE = (depth: int, name: string)
 
 class NODE(name: string, children: NODE[])
 
-leaf(name: string) -> NODE => NODE(name, LIST())
+leaf(name) => NODE(name, LIST())
 
-render_nest(node: NODE, depth: int) -> string{} is
+render_nest(node, depth) is
     yield "{repeat("    ", depth) |> join("")}{node.name}"
 
     for child in node.children do
@@ -14,10 +14,10 @@ render_nest(node: NODE, depth: int) -> string{} is
     od
 si
 
-render_indent(lines: LINE[]) -> string{} =>
+render_indent(lines) =>
     lines |> map(line => "{line.depth} {line.name}")
 
-to_indent(node: NODE, depth: int) -> LINE{} is
+to_indent(node, depth) is
     yield (depth = depth, name = node.name)
 
     for child in node.children do
@@ -25,7 +25,7 @@ to_indent(node: NODE, depth: int) -> LINE{} is
     od
 si
 
-to_nest(lines: LINE[], position: int) -> (node: NODE, next: int) => (
+to_nest(lines, position) => (
     let head = lines[position]
     let children = LIST()
     let cursor mut = position + 1

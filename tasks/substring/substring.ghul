@@ -4,10 +4,10 @@ let text = "the quick 🦊 brown fox"
 
 let points = text |> runes() |> map(point => "{point}") |> list()
 
-slice(from: int, length: int) -> string =>
+slice(from, length) =>
     points[from..from + length] |> join("")
 
-starts_at(wanted: string) -> int =>
+starts_at(wanted) =>
     let target = wanted |> runes() |> map(point => "{point}") |> list() in
     0..points.count - target.count + 1
         |> find(at => slice(at, target.count) =~ wanted) ?? -1

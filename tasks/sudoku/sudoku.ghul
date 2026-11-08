@@ -18,7 +18,7 @@ let grid = LIST(
         |> map(cell => if cell =~ "." then 0 else int.parse(cell) fi)
 )
 
-allowed(at: int, digit: int) -> bool is
+allowed(at, digit) is
     let row = at / 9
     let column = at % 9
     let box = (row / 3) * 27 + (column / 3) * 3
@@ -36,7 +36,7 @@ allowed(at: int, digit: int) -> bool is
     true
 si
 
-solve(at: int) -> bool is
+solve(at) is
     if at == 81 then
         return true
     fi
