@@ -2,8 +2,6 @@ use default
 use Raster.ANIMATION
 use Raster.IMAGE
 
-use Color = (red: double, green: double, blue: double)
-
 let width = 240
 let height = 180
 let frames = 60
