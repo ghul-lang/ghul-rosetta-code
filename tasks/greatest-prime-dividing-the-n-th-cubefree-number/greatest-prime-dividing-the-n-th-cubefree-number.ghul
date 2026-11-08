@@ -38,11 +38,10 @@ let sequence =
 
 write_line("first 100 terms:")
 
-for row in 0..10 do
-    let cells = 0..10 |> map(column => "{sequence[row * 10 + column],4}")
-
-    write_line(cells |> join(""))
-od
+sequence
+    |> take(100)
+    |> chunk(10)
+    |> each(row => write_line(row |> map(n => "{n,4}") |> join("")))
 
 for n in [1_000, 10_000, 100_000] do
     write_line("term {n,7}: {sequence[n - 1]}")

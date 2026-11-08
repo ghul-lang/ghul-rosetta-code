@@ -13,14 +13,10 @@ curzon_numbers(base: int) -> int{} => from(1) |> filter(is_curzon(base, *))
 for base in [2, 4, 6, 8, 10] do
     write_line("generalized Curzon numbers with base {base}:")
 
-    let first_50 = curzon_numbers(base) |> take(50) |> list()
-
-    for row in 0..5 do
-        let cells =
-            (0..10) |> map(column => "{first_50[row * 10 + column],5}")
-
-        write_line(cells |> join(""))
-    od
+    curzon_numbers(base)
+        |> take(50)
+        |> chunk(10)
+        |> each(row => write_line(row |> map(n => "{n,5}") |> join("")))
 
     let thousandth = (curzon_numbers(base) |> skip(999) |> first())!
 

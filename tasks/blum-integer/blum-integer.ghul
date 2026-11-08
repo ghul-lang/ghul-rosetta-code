@@ -27,11 +27,10 @@ let blum = 2::limit |> filter(is_blum) |> take(400_000) |> list()
 
 write_line("the first 50 Blum integers:")
 
-for row in 0..5 do
-    let cells = 0..10 |> map(column => "{blum[row * 10 + column],4}")
-
-    write_line(cells |> join(""))
-od
+blum
+    |> take(50)
+    |> chunk(10)
+    |> each(row => write_line(row |> map(n => "{n,4}") |> join("")))
 
 write_line("")
 
