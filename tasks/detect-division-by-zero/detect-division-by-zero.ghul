@@ -1,6 +1,6 @@
 use default
 
-divides(numerator: int, denominator: int) -> bool is
+divides(numerator, denominator) is
     try
         numerator / denominator
 

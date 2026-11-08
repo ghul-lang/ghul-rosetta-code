@@ -10,10 +10,9 @@ let month_names = [
     "July", "August", "September", "October", "November", "December"
 ]
 
-is_leap_year(year: int) -> bool =>
-    year % 4 == 0 /\ (year % 100 != 0 \/ year % 400 == 0)
+is_leap_year(year) => year % 4 == 0 /\ (year % 100 != 0 \/ year % 400 == 0)
 
-anchor_day(year: int, month: int) -> int =>
+anchor_day(year, month) =>
     case month
     when 1 then if is_leap_year(year) then 4 else 3 fi
     when 2 then if is_leap_year(year) then 29 else 28 fi
@@ -29,10 +28,10 @@ anchor_day(year: int, month: int) -> int =>
     else 12
     esac
 
-doomsday(year: int) -> int =>
+doomsday(year) =>
     (2 + 5 * (year % 4) + 4 * (year % 100) + 6 * (year % 400)) % 7
 
-day_of_week(year: int, month: int, day: int) -> int =>
+day_of_week(year, month, day) =>
     (((doomsday(year) + day - anchor_day(year, month)) % 7) + 7) % 7
 
 let dates = [

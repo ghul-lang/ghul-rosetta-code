@@ -1,6 +1,6 @@
 use default
 
-adjacent(left: int, right: int) -> bool =>
+adjacent(left, right) =>
     if left > right then left - right else right - left fi == 1
 
 let floors = [1, 2, 3, 4, 5]

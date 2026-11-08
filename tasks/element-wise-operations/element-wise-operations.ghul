@@ -41,7 +41,7 @@ si
 /(k: double, m: MATRIX) -> MATRIX => m.constant(k) / m
 ^(k: double, m: MATRIX) -> MATRIX => m.constant(k) ^ m
 
-show(label: string, m: MATRIX) is
+show(label, m) is
     write_line("{label} =")
     write_line("{m}")
     write_line("")
