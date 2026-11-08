@@ -1,7 +1,7 @@
 use default
 use IO
 
-truncate(path: string, length: long) is
+truncate(path, length) is
     if !IO.File.exists(path) then
         throw System.Exception("no such file: {path}")
     fi

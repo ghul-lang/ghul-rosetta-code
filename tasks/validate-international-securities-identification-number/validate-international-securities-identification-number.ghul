@@ -1,11 +1,11 @@
 use default
 use System.Text.RegularExpressions.Regex
 
-digit_value(i: int, d: int) -> int =>
+digit_value(i, d) =>
     let doubled = if i % 2 == 1 then d * 2 else d fi in
     doubled / 10 + doubled % 10
 
-luhn(digits: string) -> bool =>
+luhn(digits) =>
     let total =
         digits.to_char_array()
             |> reverse()
@@ -17,12 +17,12 @@ luhn(digits: string) -> bool =>
 
 let format = Regex("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
 
-base_36(c: char) -> int =>
+base_36(c) =>
     if char.is_digit(c) then int(c) - int('0')
     else int(c) - int('A') + 10
     fi
 
-is_valid(isin: string) -> bool =>
+is_valid(isin) =>
     format.is_match(isin) /\
     luhn(isin |> map(c => "{base_36(c)}") |> join(""))
 

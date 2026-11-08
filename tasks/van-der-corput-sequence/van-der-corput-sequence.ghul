@@ -1,6 +1,6 @@
 use default
 
-van_der_corput(n: int, base: int) -> double is
+van_der_corput(n, base) is
     walk(rest: int, weight: double) -> double =>
         if rest == 0 then 0.0
         else

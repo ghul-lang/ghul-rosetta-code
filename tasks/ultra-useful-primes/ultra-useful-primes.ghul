@@ -1,6 +1,6 @@
 use default
 
-ultra_useful(n: int) -> int =>
+ultra_useful(n) =>
     let power = bigint.pow(2n, 1 << n) in
     from(0)
         |> map(i => 2 * i + 1)

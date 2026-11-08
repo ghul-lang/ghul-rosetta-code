@@ -7,10 +7,10 @@ use Collections.SET
 ∪(a: SET[int], b: SET[int]) -> SET[int] =>
     a ++ b |> SET()
 
-bytes(encoding: System.Text.Encoding, text: string) -> string =>
+bytes(encoding, text) =>
     encoding.get_bytes(text) |> map(b => "{b:X2}") |> join(" ")
 
-code_points(text: string) -> int =>
+code_points(text) =>
     text |> runes() |> count()
 
 write_line("source is UTF-8, and a literal holds what it says")

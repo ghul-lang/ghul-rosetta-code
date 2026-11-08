@@ -45,7 +45,7 @@ si
 
 // Each method is a sequence of steps, and it is fatal if either shot
 // fires.
-play(method: string) -> bool is
+play(method) is
     let gun = REVOLVER()
     let dead mut = false
 

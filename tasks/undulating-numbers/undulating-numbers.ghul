@@ -1,6 +1,6 @@
 use default
 
-undulating_value(first: int, second: int, length: int) -> long =>
+undulating_value(first, second, length) =>
     0..length
         |> reduce(0L, (value, position) =>
             value * 10L +
@@ -52,7 +52,7 @@ for row in 0..9 do
     )
 od
 
-prime(value: long) -> bool =>
+prime(value) =>
     value >= 2L /\
     2L::long(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0L)
 
