@@ -1,7 +1,6 @@
 use default
 
-digit_square_sum(value) =>
-    value |> digits() |> map(d => d * d) |> sum()
+digit_square_sum(value) => value |> digits() |> map(d => d * d) |> sum()
 
 reaches_89(value) => (
     let current mut = value

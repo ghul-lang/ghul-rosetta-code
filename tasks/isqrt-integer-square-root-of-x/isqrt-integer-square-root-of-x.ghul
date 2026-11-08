@@ -29,8 +29,7 @@ isqrt(x) is
     return root
 si
 
-grouped(value) =>
-    value.to_string("N0", CultureInfo.invariant_culture)
+grouped(value) => value.to_string("N0", CultureInfo.invariant_culture)
 
 write_line("isqrt of 0 through 65:")
 

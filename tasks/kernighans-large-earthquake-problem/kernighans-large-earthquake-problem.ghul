@@ -1,7 +1,6 @@
 use default
 
-magnitude(line) =>
-    double.parse((words(line) |> list())[2])
+magnitude(line) => double.parse((words(line) |> list())[2])
 
 IO.File.read_lines("data.txt")
     |> filter(line => magnitude(line) > 6.0)
