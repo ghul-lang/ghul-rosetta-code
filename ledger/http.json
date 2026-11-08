@@ -3,5 +3,5 @@
   "slug": "http",
   "state": "published",
   "note": "reopened, was rejected/needs-network: a local stand-in server makes it testable; an endpoint argument uses the real one",
-  "published_hash": "08f4960e26401a6c86edf02f022cee625eed8a78a68c2a4c074c1b5c71bab3e5"
+  "published_hash": "a51be54cf6c1fff4e28ff883e6c7e8a527a2d4fcd99d31a37e29d41903afa17b"
 }
