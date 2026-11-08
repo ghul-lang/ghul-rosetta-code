@@ -17,8 +17,7 @@ let bars = [
     (color = (red = 0.8, green = 0.35, blue = 1.0), phase = 1.4)
 ]
 
-channel(value) =>
-    ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
+channel(value) => ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
 
 draw_bar(image, color, top) is
     for row in 0..thickness do

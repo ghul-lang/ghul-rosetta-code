@@ -3,8 +3,7 @@ use default
 repunit(base, digits) =>
     (bigint.pow(bigint(base), digits) - 1n) / bigint(base - 1)
 
-is_repunit_prime(base, digits) =>
-    is_prime(repunit(base, digits))
+is_repunit_prime(base, digits) => is_prime(repunit(base, digits))
 
 let limit = 1000
 
