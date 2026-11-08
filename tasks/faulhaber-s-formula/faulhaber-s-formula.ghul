@@ -2,7 +2,7 @@ use default
 
 struct FRACTION(numerator: long, denominator: long)
 
-fraction(numerator: long, denominator: long) -> FRACTION =>
+fraction(numerator, denominator) =>
     let
         common = gcd(numerator, denominator),
         divisor = long.abs(common),
@@ -19,7 +19,7 @@ fraction(numerator: long, denominator: long) -> FRACTION =>
 *(a: FRACTION, b: FRACTION) -> FRACTION =>
     fraction(a.numerator * b.numerator, a.denominator * b.denominator)
 
-bernoulli(n: int) -> FRACTION is
+bernoulli(n) is
     let a = 0::n |> map(m => fraction(1L, long(m + 1))) |> LIST()
 
     for m in 1::n do
@@ -31,7 +31,7 @@ bernoulli(n: int) -> FRACTION is
     a[0]
 si
 
-term(coefficient: FRACTION, power: int) -> string =>
+term(coefficient, power) =>
     let
         top = long.abs(coefficient.numerator),
         bottom = coefficient.denominator,
@@ -49,7 +49,7 @@ term(coefficient: FRACTION, power: int) -> string =>
             "{number}{variable}"
         fi
 
-faulhaber(p: int) -> string =>
+faulhaber(p) =>
     let terms =
         0::p
             |> map(j => (

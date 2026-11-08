@@ -1,6 +1,6 @@
 use default
 
-ethiopian(left: int, right: int) -> int =>
+ethiopian(left, right) =>
     stream(
         (multiplier = left, total = right),
         row =>
