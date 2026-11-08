@@ -12,7 +12,7 @@ let cs = [
 lg(x) => let
     xm = x - 1.0,
     t = xm + g + 0.5,
-    a = 1::8 |> reduce(cs[0], (s, i) => s + cs[i] / (xm + double(i)))
+    a = 1::8 |> reduce(cs[0], (s, i) => s + cs[i] / (xm + dbl(i)))
 in
     0.5 * log(2.0 * pi) + (xm + 0.5) * log(t) - t + log(a)
 sci(v) => let
@@ -20,7 +20,7 @@ sci(v) => let
     e = floor(l10)
 in
     "{pow(10.0, l10 - e),0:F6}e+{int(e)}"
-l(x) => lg(double(x))
+l(x) => lg(dbl(x))
 anpk(n, k) => sci(l(n + 1) - l(n - k + 1))
 anck(n, k) => sci(l(n + 1) - l(k + 1) - l(n - k + 1))
 tr(v) => let

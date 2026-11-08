@@ -9,10 +9,10 @@ r(a, b) => 1::10000 |> reduce((a(0), 1.0, 1.0, 0.0),
 let (a1, _, b1, _) = r(n => if n == 0 then 1.0 else 2.0 fi, n => 1.0)
 write_line("sqrt(2) = {a1 / b1,0:F10}")
 
-let (a2, _, b2, _) = r(n => if n == 0 then 2.0 else double(n) fi,
-    n => if n == 1 then 1.0 else double(n - 1) fi)
+let (a2, _, b2, _) = r(n => if n == 0 then 2.0 else dbl(n) fi,
+    n => if n == 1 then 1.0 else dbl(n - 1) fi)
 write_line("e       = {a2 / b2,0:F10}")
 
 let (a3, _, b3, _) = r(n => if n == 0 then 3.0 else 6.0 fi,
-    n => double((2 * n - 1) * (2 * n - 1)))
+    n => dbl((2 * n - 1) * (2 * n - 1)))
 write_line("pi      = {a3 / b3,0:F10}")
