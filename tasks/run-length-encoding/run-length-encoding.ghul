@@ -1,9 +1,9 @@
 use default
 
-encode(text: string) -> string =>
+encode(text) =>
     text |> group() |> map(run => "{run.count}{run[0]}") |> join("")
 
-decode(encoded: string) -> string =>
+decode(encoded) =>
     if encoded.length == 0 then
         ""
     else

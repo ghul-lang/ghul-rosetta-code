@@ -6,7 +6,7 @@ let numerals = [
     (5, "V"), (4, "IV"), (1, "I")
 ]
 
-roman(n: int) -> string =>
+roman(n) =>
     if let
         (value, symbol) = numerals |> find(((value, _)) => value <= n)
     then

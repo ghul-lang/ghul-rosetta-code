@@ -12,7 +12,7 @@ si
 
 let calculator = CALCULATOR()
 
-send(name: string, argument: int) -> string is
+send(name, argument) is
     let method = calculator.get_type().get_method(name)
 
     if !method? then

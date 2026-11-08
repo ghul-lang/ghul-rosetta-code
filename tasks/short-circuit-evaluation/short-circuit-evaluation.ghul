@@ -1,12 +1,12 @@
 use default
 
-a(value: bool) -> bool is
+a(value) is
     write_line("  a({value}) was called")
 
     value
 si
 
-b(value: bool) -> bool is
+b(value) is
     write_line("  b({value}) was called")
 
     value
