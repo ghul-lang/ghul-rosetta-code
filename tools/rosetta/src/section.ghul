@@ -163,14 +163,9 @@ namespace Rosetta is
 
             let code = IO.File.read_all_text(source)
             let entries = if wants_notation(slug) then NOTATION.scan(code) else LIST[string]() fi
-            let inferred = wants_notation(slug) /\ NOTATION.has_inferred_signature(code)
 
-            if inferred then
-                text.append("ghūl is statically typed: every value here has a type fixed at compile time. Where a type isn't written, the compiler infers it.\n")
-
-                if entries.count == 0 then
-                    text.append("\n")
-                fi
+            if wants_notation(slug) /\ NOTATION.has_inferred_signature(code) then
+                entries.insert(0, "where a type isn't written, the compiler infers it - ghūl is statically typed, and every value has a type fixed at compile time")
             fi
 
             if entries.count > 0 then
