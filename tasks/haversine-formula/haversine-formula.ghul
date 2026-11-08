@@ -2,9 +2,9 @@ use default
 
 let earth_radius_km = 6372.8
 
-radians(degrees: double) -> double => degrees * pi / 180.0
+radians(degrees) => degrees * pi / 180.0
 
-haversine(theta: double) -> double => sin(theta / 2.0) * sin(theta / 2.0)
+haversine(theta) => sin(theta / 2.0) * sin(theta / 2.0)
 
 great_circle_distance(
     (latitude_1, longitude_1): (double, double),

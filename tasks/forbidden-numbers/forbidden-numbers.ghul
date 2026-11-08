@@ -1,6 +1,6 @@
 use default
 
-is_forbidden(n: int) -> bool is
+is_forbidden(n) is
     strip(remaining: int) -> int =>
         if remaining % 4 == 0 then
             strip(remaining / 4)

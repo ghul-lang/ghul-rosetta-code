@@ -1,6 +1,6 @@
 use default
 
-multiply(left: double, right: double) -> double => left * right
+multiply(left, right) => left * right
 
 write_line(multiply(3.0, 4.0))
 

@@ -2,7 +2,7 @@ use default
 use Raster.IMAGE
 use Raster.AXES
 
-is_gaussian_prime(a: int, b: int) -> bool =>
+is_gaussian_prime(a, b) =>
     case (a, b)
     when (0, 0) then false
     when (0, b) then is_prime(abs(b)) /\ abs(b) % 4 == 3

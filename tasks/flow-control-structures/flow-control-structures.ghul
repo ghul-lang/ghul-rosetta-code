@@ -1,6 +1,6 @@
 use default
 
-classify(n: int) -> string =>
+classify(n) =>
     if n < 0 then
         "negative"
     elif n == 0 then

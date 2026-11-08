@@ -2,7 +2,7 @@ use default
 
 apply[T, U](f: (T) -> U, argument: T) -> U => f(argument)
 
-shout(text: string) -> string => "{text.to_upper_invariant()}!"
+shout(text) => "{text.to_upper_invariant()}!"
 
 write_line(apply(shout, "hello"))
 write_line(apply(text => "<{text}>", "hello"))
