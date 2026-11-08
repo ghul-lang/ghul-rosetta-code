@@ -1,17 +1,17 @@
 use default
 use System.Text.StringBuilder
 
-is_alphabetic(character: char) -> bool =>
+is_alphabetic(character) =>
     (character >= 'A' /\ character <= 'Z') \/
     (character >= 'a' /\ character <= 'z')
 
-prepared(text: string) -> string =>
+prepared(text) =>
     text
         |> filter(is_alphabetic)
         |> map(char.to_upper_invariant)
         |> join("")
 
-shifted(text: string, key: string, direction: int) -> string => (
+shifted(text, key, direction) => (
     let letters = prepared(text)
     let word = prepared(key)
     let result = StringBuilder()
@@ -27,9 +27,9 @@ shifted(text: string, key: string, direction: int) -> string => (
     result.to_string()
 )
 
-encrypt(text: string, key: string) -> string => shifted(text, key, 1)
+encrypt(text, key) => shifted(text, key, 1)
 
-decrypt(text: string, key: string) -> string => shifted(text, key, -1)
+decrypt(text, key) => shifted(text, key, -1)
 
 let key = "Vigenere Cipher"
 

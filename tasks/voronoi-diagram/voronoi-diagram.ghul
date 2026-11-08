@@ -7,7 +7,7 @@ let sites = 24
 
 let state mut = 1234567L
 
-next(limit: int) -> int is
+next(limit) is
     state = (state * 1103515245L + 12345L) % 2147483648L
 
     return int(state % long(limit))
@@ -24,7 +24,7 @@ let places =
         ))
         |> list()
 
-nearest(x: int, y: int) -> int =>
+nearest(x, y) =>
     0..places.count
         |> min_by(at =>
             let

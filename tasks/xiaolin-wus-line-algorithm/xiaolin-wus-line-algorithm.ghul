@@ -5,11 +5,11 @@ let image = IMAGE(400, 300)
 
 image.color(0ub, 0ub, 0ub)
 
-fraction(value: double) -> double => value - floor(value)
+fraction(value) => value - floor(value)
 
-rest(value: double) -> double => 1.0 - fraction(value)
+rest(value) => 1.0 - fraction(value)
 
-mark(x: int, y: int, steep: bool, weight: double) is
+mark(x, y, steep, weight) is
     if steep then
         image.blend(y, x, weight)
     else
@@ -17,13 +17,7 @@ mark(x: int, y: int, steep: bool, weight: double) is
     fi
 si
 
-endpoint(
-    x: double,
-    y: double,
-    gradient: double,
-    gap: double,
-    steep: bool
-) -> (column: int, height: double) is
+endpoint(x, y, gradient, gap, steep) is
     let ends_at = round(x)
     let height = y + gradient * (ends_at - x)
 
@@ -36,7 +30,7 @@ endpoint(
     return (column = column, height = height)
 si
 
-line(from_x: double, from_y: double, to_x: double, to_y: double) is
+line(from_x, from_y, to_x, to_y) is
     let steep = abs(to_y - from_y) > abs(to_x - from_x)
 
     let ax mut = if steep then from_y else from_x fi
