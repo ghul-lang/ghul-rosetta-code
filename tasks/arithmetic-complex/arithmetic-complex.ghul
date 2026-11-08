@@ -1,7 +1,7 @@
 use default
 use System.Numerics.Complex
 
-show(name: string, value: Complex) =>
+show(name, value) =>
     let
         sign = if value.imaginary < 0.0 then "-" else "+" fi,
         size = abs(value.imaginary)

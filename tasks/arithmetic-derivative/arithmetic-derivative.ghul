@@ -1,6 +1,6 @@
 use default
 
-derivative(value: bigint) -> bigint is
+derivative(value) is
     if value.sign < 0 then return 0n - derivative(-value) fi
     if value < 2n then return 0n fi
 

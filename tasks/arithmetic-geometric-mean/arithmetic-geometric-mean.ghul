@@ -1,6 +1,6 @@
 use default
 
-agm(a: double, g: double) -> double =>
+agm(a, g) =>
     if abs(a - g) <= 1.0e-15 * abs(a) then a
     else agm((a + g) / 2.0, sqrt(a * g))
     fi

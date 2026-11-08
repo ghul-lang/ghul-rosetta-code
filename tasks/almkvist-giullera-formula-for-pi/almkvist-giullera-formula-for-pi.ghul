@@ -1,14 +1,14 @@
 use default
 
-power_of_ten(exponent: int) -> bigint => bigint.pow(10n, exponent)
+power_of_ten(exponent) => bigint.pow(10n, exponent)
 
-integer_term(n: int) -> bigint =>
+integer_term(n) =>
     32n *
     factorial(bigint(6 * n)) *
     bigint(532 * n * n + 126 * n + 9) /
     (3n * bigint.pow(factorial(bigint(n)), 6))
 
-square_root(n: bigint) -> bigint =>
+square_root(n) =>
     let walk =
         (x: bigint, y: bigint) -> bigint rec =>
             if y < x then rec(y, (y + n / y) / 2n) else x fi

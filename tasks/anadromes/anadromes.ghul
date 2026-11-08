@@ -1,6 +1,6 @@
 use default
 
-reversed(word: string) -> string => word |> reverse() |> join("")
+reversed(word) => word |> reverse() |> join("")
 
 let words = [
     word.to_lower()

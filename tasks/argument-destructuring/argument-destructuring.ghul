@@ -13,9 +13,9 @@ label((name, [x, y], (r, g, b)): (string, int[], Rgb)) -> string =>
 
 apply[T.., U](f: T.. -> U, arguments: T..) -> U => f(arguments)
 
-cuboid(width: int, height: int, depth: int) -> int => width * height * depth
+cuboid(width, height, depth) => width * height * depth
 
-join_words(first: string, second: string) -> string => "{first} {second}"
+join_words(first, second) => "{first} {second}"
 
 let words = ("hello", "world")
 write_line(greet(words))

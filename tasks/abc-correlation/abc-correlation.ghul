@@ -1,6 +1,6 @@
 use default
 
-balanced(text: string) -> bool =>
+balanced(text) =>
     let counts =
         "abc" |> map(letter => text |> count(* == letter)) |> list()
     in
