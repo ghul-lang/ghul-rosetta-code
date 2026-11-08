@@ -20,14 +20,13 @@ let months = [
 let correlation = 584_283
 let julian_day_of_0001_01_01 = 1_721_426
 
-days_since_creation(date: DateTime) -> int =>
+days_since_creation(date) =>
     let day = int(date.ticks / System.TimeSpan.ticks_per_day) in
     day + julian_day_of_0001_01_01 - correlation
 
-tzolkin(days: int) -> string =>
-    "{(days + 3) % 13 + 1,2} {day_names[(days + 19) % 20],-9}"
+tzolkin(days) => "{(days + 3) % 13 + 1,2} {day_names[(days + 19) % 20],-9}"
 
-haab(days: int) -> string =>
+haab(days) =>
     let position = (days + 348) % 365 in
     let
         month = months[position / 20],
@@ -39,7 +38,7 @@ haab(days: int) -> string =>
             "{day,4} {month,-9}"
         fi
 
-long_count(days: int) -> string =>
+long_count(days) =>
     let
         bak_tun = days / 144_000,
         k_atun = days / 7_200 % 20
@@ -51,7 +50,7 @@ long_count(days: int) -> string =>
         in
             "{bak_tun}.{k_atun}.{tun}.{winal}.{k_in}"
 
-lord_of_the_night(days: int) -> string => "G{(days + 8) % 9 + 1}"
+lord_of_the_night(days) => "G{(days + 8) % 9 + 1}"
 
 let dates = [
     "2004-06-19", "2012-12-18", "2012-12-21", "2019-01-19",

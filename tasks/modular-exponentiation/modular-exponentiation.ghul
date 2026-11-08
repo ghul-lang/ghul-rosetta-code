@@ -1,6 +1,6 @@
 use default
 
-power_mod(base: bigint, exponent: bigint, modulus: bigint) -> bigint =>
+power_mod(base, exponent, modulus) =>
     if exponent.is_zero then
         1n % modulus
     else

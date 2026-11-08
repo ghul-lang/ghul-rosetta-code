@@ -4,7 +4,7 @@ let random = System.Random(2026)
 
 let rounds = 100000
 
-play() -> (car: int, chosen: int, opened: int, switched: int) => (
+play() => (
     let car = random.next(3)
     let chosen = random.next(3)
 

@@ -4,7 +4,7 @@ let random = System.Random(52)
 
 shuffled[T](items: T{}) -> T{} => items |> sort_by(_ => random.next())
 
-trial() -> (black_in_black: int, red_in_red: int) is
+trial() is
     let deck = shuffled(repeat('R', 26) ++ repeat('B', 26))
     let pairs = deck |> chunk(2)
     let black =

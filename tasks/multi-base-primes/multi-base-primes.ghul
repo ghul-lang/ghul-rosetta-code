@@ -2,15 +2,14 @@ use default
 
 let digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 
-in_base(n: int, base: int) -> string =>
+in_base(n, base) =>
     if n == 0 then
         ""
     else
         "{in_base(n / base, base)}{digits[n % base]}"
     fi
 
-power(base: int, exponent: int) -> int =>
-    1::exponent |> reduce(1, (p, _) => p * base)
+power(base, exponent) => 1::exponent |> reduce(1, (p, _) => p * base)
 
 for length in 1::4 do
     let bases_of = MAP[string, LIST[int]]()

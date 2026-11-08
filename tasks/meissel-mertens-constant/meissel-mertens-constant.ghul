@@ -5,7 +5,7 @@ use default
 
 let gamma = 0.57721566490153286
 
-term(p: int) -> double =>
+term(p) =>
     let reciprocal = 1.0 / double(p) in
     double.log(1.0 - reciprocal) + reciprocal
 

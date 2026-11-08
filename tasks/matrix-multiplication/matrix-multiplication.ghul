@@ -1,7 +1,7 @@
 use default
 use Matrix = int[][]
 
-multiply(left: Matrix, right: Matrix) -> Matrix =>
+multiply(left, right) =>
     assert left[0].count == right.count else "shapes do not conform" in
     left
         |> map(row =>

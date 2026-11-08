@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 let size = 256
 
-shade(value: int, phase: double) -> ubyte =>
+shade(value, phase) =>
     ubyte(127.5 * (1.0 - cos(2.0 * pi * double(value) / 256.0 + phase)))
 
 let image = IMAGE(size, size)

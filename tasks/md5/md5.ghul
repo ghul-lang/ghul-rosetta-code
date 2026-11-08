@@ -2,7 +2,7 @@ use default
 
 use System.Security.Cryptography.MD5
 
-md5(text: string) -> string =>
+md5(text) =>
     System.Convert.to_hex_string_lower(
         MD5.hash_data(System.Text.Encoding.utf8.get_bytes(text))
     )

@@ -1,6 +1,6 @@
 use default
 
-is_mcnugget(n: int) -> bool =>
+is_mcnugget(n) =>
     0::n / 20
         |> any(large =>
             0::(n - 20 * large) / 9
