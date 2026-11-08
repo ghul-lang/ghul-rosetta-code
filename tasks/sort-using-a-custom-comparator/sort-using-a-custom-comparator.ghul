@@ -4,7 +4,7 @@ let words = LIST([
     "Here", "are", "some", "sample", "strings", "to", "be", "sorted"
 ])
 
-compare(left: string, right: string) -> int is
+compare(left, right) is
     if left.length != right.length then
         return right.length - left.length
     fi

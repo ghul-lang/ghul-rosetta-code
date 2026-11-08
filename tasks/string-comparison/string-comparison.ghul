@@ -1,7 +1,7 @@
 use default
 use System.StringComparison
 
-show(expression: string, result: object) =>
+show(expression, result) =>
     write_line("{expression,-40} {result}")
 
 let first = "Hello"

@@ -1,6 +1,6 @@
 use default
 
-compare_oids(a: string, b: string) -> int is
+compare_oids(a, b) is
     let left = a.split(['.']) |> map(int.parse) |> list()
     let right = b.split(['.']) |> map(int.parse) |> list()
 

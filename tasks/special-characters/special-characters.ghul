@@ -1,6 +1,6 @@
 use default
 
-escape(written: string, produced: char) =>
+escape(written, produced) =>
     write_line("{written,-10} U+{int(produced):X4}")
 
 write_line("escape     character")

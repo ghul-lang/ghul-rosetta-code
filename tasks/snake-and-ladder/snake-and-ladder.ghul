@@ -11,7 +11,7 @@ let jumps = [
 
 let random = Random(3)
 
-move(who: string, rolls: string, square: int) -> int is
+move(who, rolls, square) is
     let roll = random.next(1, 7)
 
     if square + roll > 100 then
