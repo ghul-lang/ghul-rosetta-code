@@ -20,11 +20,11 @@ ok(b, d, s, n) =>
     x =~ 1n \/ x =~ n - 1n \/
         stream(x, v => let y = sq(v, n) in y || y)
             |> take(int(s)) |> any(v => v =~ n - 1n)
-strip(d, s) => if d.is_even then strip(d / 2n, s + 1L) else (d, s) fi
+strip(d, s) => if is_even(d) then strip(d / 2n, s + 1L) else (d, s) fi
 pp(n) => let (d, s) = strip(n - 1n, 0L) in
     [2n, 3n, 5n, 7n, 11n, 13n, 17n, 19n, 23n]
         |> all(b => b >= n \/ ok(b, d, s, n))
-rep(n) => repeat(1n, int(n)) |> reduce(0n, (a, x) => a * 10n + x)
+rep(n) => (pow(10n, int(n)) - 1n) / 9n
 
 write_line("sieving to {limit:N0}")
 write_line("The first 19 circular primes:")
