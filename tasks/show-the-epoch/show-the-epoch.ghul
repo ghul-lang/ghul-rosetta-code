@@ -4,7 +4,7 @@ use System.DateTimeOffset
 use System.DateTimeKind
 use System.TimeSpan
 
-show(library: string, epoch: DateTime) =>
+show(library, epoch) =>
     write_line("{library,-22}{epoch,-22:yyyy-MM-dd HH:mm:ss}{epoch.kind}")
 
 let utc_zero = DateTimeOffset(0L, TimeSpan.zero)

@@ -1,10 +1,6 @@
 use default
 
-strip_block_comments(
-    text: string,
-    start: string,
-    ended: string
-) -> string =>
+strip_block_comments(text, start, ended) =>
     let open = text.index_of(start) in
     if open < 0 then
         text

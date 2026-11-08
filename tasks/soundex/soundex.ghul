@@ -1,6 +1,6 @@
 use default
 
-code(c: char) -> char =>
+code(c) =>
     case char.to_upper(c)
     when 'B', 'F', 'P', 'V' then '1'
     when 'C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z' then '2'
@@ -13,7 +13,7 @@ code(c: char) -> char =>
     esac
 
 // H and W do not separate two letters with the same code; a vowel does.
-soundex(name: string) -> string is
+soundex(name) is
     let letters = name.to_char_array() |> filter(char.is_letter) |> list()
 
     if letters.count == 0 then

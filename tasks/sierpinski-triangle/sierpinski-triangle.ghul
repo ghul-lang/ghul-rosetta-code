@@ -1,20 +1,20 @@
 use default
 
-power_of_two(exponent: int) -> int =>
+power_of_two(exponent) =>
     if exponent == 0 then
         1
     else
         2 * power_of_two(exponent - 1)
     fi
 
-indent(width: int) -> string =>
+indent(width) =>
     if width <= 0 then
         ""
     else
         " {indent(width - 1)}"
     fi
 
-row(number: int) -> string =>
+row(number) =>
     (0::number)
         |> map(column =>
             if (number & column) == column then "*" else " " fi
