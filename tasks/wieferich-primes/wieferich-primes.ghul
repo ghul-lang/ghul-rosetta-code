@@ -1,6 +1,6 @@
 use default
 
-is_wieferich(prime: int) -> bool =>
+is_wieferich(prime) =>
     let square = bigint(prime) * bigint(prime) in
     mod_pow(2n, bigint(prime - 1), square) =~ 1n
 

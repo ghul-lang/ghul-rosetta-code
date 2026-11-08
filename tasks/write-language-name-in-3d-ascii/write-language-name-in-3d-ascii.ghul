@@ -31,7 +31,7 @@ let width = 2 * columns + rows + 2
 let canvas =
     (0..rows + 1) |> map(_ => repeat(' ', width) |> LIST()) |> list()
 
-filled(row: int, column: int) -> bool =>
+filled(row, column) =>
     row >= 0 /\
     row < rows /\
     column >= 0 /\

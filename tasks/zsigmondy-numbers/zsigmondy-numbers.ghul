@@ -1,9 +1,9 @@
 use default
 
-difference(exponent: int, a: int, b: int) -> bigint =>
+difference(exponent, a, b) =>
     bigint.pow(bigint(a), exponent) - bigint.pow(bigint(b), exponent)
 
-zsigmondy(exponent: int, a: int, b: int) -> bigint is
+zsigmondy(exponent, a, b) is
     let greatest mut = difference(exponent, a, b)
 
     for lesser in 1..exponent do
