@@ -27,13 +27,12 @@ r_sequence() -> int{} is
 si
 
 s_sequence() -> int{} is
-    let in_r = use r_sequence().iterator
-
-    assert in_r.move_next() else "the R sequence never runs out"
+    let r = r_sequence().iterator
+    let next_r mut = (r |> next())!
 
     for candidate in from(1) do
-        if candidate == in_r.current then
-            assert in_r.move_next() else "the R sequence never runs out"
+        if candidate == next_r then
+            next_r = (r |> next())!
         else
             yield candidate
         fi

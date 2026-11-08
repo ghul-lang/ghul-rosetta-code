@@ -34,7 +34,7 @@ test_entry() is
     listener.start()
 
     Tasks.TASK.run(() is
-        while true do
+        do
             let context = listener.get_context()
             let path = context.request.url?.absolute_path ?? ""
             let asked = path.trim_start('/')

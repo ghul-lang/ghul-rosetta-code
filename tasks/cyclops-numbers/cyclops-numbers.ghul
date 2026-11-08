@@ -16,7 +16,7 @@ si
 cyclops() -> long{} is
     let half mut = 0
 
-    while true do
+    do
         let scale = 0..half |> reduce(1L, (acc, _) => acc * 10L)
 
         let halves = zero_free(half) |> list()

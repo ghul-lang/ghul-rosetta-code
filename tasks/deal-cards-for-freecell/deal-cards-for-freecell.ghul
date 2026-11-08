@@ -3,7 +3,7 @@ use default
 microsoft_rand(seed: int) -> int{} is
     let state mut = long(seed)
 
-    while true do
+    do
         state = (214013L * state + 2531011L) % 2147483648L
         yield int(state / 65536L)
     od

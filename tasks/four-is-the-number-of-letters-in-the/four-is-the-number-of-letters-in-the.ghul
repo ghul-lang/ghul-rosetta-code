@@ -106,7 +106,7 @@ let described mut = 0
 sentence_words() -> string{} is
     let cursor mut = 0
 
-    while true do
+    do
         while words.count <= cursor do
             described = described + 1
 

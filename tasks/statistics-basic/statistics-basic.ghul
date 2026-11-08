@@ -31,7 +31,7 @@ si
 let random = System.Random(100)
 
 samples() -> double{} is
-    while true do
+    do
         yield random.next_double()
     od
 si

@@ -15,7 +15,7 @@ class LEXER is
     si
 
     tokens() -> Token{} is
-        while true do
+        do
             _skip()
 
             let line = _line, column = _column

@@ -13,11 +13,7 @@ powers(exponent: int) -> long{} is
     od
 si
 
-next_power(powers: Iterator[long]) -> long is
-    assert powers.move_next() else "the powers never run out"
-
-    return powers.current
-si
+next_power(powers: Iterator[long]) -> long => (powers |> next())!
 
 without(values: long{}, excluded: long{}) -> long{} is
     let cursor = excluded.iterator

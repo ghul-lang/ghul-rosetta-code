@@ -4,7 +4,7 @@ use Raster.IMAGE
 let random = System.Random(314)
 
 darts() -> (x: double, y: double){} is
-    while true do
+    do
         yield (x = random.next_double(), y = random.next_double())
     od
 si

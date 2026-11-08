@@ -7,7 +7,7 @@ let random = Random(11)
 toss() -> char => if random.next(2) == 0 then 'H' else 'T' fi
 
 tosses() -> char{} is
-    while true do
+    do
         yield toss()
     od
 si
@@ -42,7 +42,7 @@ si
 let player_wins mut = 0
 let computer_wins mut = 0
 
-while true do
+do
     let computer_first = random.next(2) == 0
 
     let computer mut = ""

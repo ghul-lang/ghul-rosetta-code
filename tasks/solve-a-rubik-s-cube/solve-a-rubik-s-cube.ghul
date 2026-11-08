@@ -117,7 +117,7 @@ solve_phase(phase: int, start: int[]) -> int{} is
     direction[start_key] = 1
     direction[goal_key] = 2
 
-    while true do
+    do
         let state = queue.dequeue()
         let state_key = key(phase, state)
         let state_direction = direction[state_key]

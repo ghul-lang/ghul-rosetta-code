@@ -4,7 +4,7 @@ fibonacci() -> bigint{} is
     let previous mut = 0n
     let current mut = 1n
 
-    while true do
+    do
         yield current
         let following = previous + current
         previous = current

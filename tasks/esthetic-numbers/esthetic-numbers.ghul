@@ -20,7 +20,7 @@ esthetic(base: int) -> long{} is
         pending.enqueue((long(digit), digit))
     od
 
-    while true do
+    do
         let (value, last) = pending.dequeue()
 
         yield value

@@ -59,8 +59,6 @@ combine(
     let bottom mut = bottom_row
     let xs = x.iterator
     let ys = y.iterator
-    let x_left mut = true
-    let y_left mut = true
     let waited mut = 0
 
     ratio(n, d) => double(n) / double(d)
@@ -108,19 +106,17 @@ combine(
             waited = waited + 1
 
             if first_is_further() then
-                if x_left /\ xs.move_next() then
-                    top = input_first(top, xs.current)
-                    bottom = input_first(bottom, xs.current)
+                if let next_x = xs |> next() then
+                    top = input_first(top, next_x)
+                    bottom = input_first(bottom, next_x)
                 else
-                    x_left = false
                     top = exhaust_first(top)
                     bottom = exhaust_first(bottom)
                 fi
-            elif y_left /\ ys.move_next() then
-                top = input_second(top, ys.current)
-                bottom = input_second(bottom, ys.current)
+            elif let next_y = ys |> next() then
+                top = input_second(top, next_y)
+                bottom = input_second(bottom, next_y)
             else
-                y_left = false
                 top = exhaust_second(top)
                 bottom = exhaust_second(bottom)
             fi

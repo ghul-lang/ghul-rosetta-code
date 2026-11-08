@@ -32,7 +32,7 @@ class INTEGRATOR is
     si
 
     _integrate() is
-        while true do
+        do
             _sample_due.wait_one()
 
             if !_running then

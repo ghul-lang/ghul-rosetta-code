@@ -24,7 +24,7 @@ step(cells: string, rule: int) -> string => (
 generations(start: string, rule: int) -> string{} is
     let cells mut = start
 
-    while true do
+    do
         yield cells
         cells = step(cells, rule)
     od

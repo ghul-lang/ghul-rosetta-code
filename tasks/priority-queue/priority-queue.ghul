@@ -37,7 +37,7 @@ class PRIORITY_QUEUE[T: Ghul.Comparable[T]] is
 
         let parent mut = 0
 
-        while true do
+        do
             let smallest = _smallest_of(parent)
 
             if smallest == parent then
