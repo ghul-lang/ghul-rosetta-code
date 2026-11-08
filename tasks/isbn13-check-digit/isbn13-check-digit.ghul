@@ -1,8 +1,8 @@
 use default
 
-digit_value(digit: char) -> int => int(digit) - int('0')
+digit_value(digit) => int(digit) - int('0')
 
-checksum(code: string) -> int =>
+checksum(code) =>
     code
         |> filter(char.is_digit)
         |> index()

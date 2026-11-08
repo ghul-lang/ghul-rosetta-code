@@ -1,6 +1,6 @@
 use default
 
-jacobi(a: int, n: int) -> int is
+jacobi(a, n) is
     assert n > 0 /\ n % 2 == 1 else "n must be positive and odd"
 
     let numerator mut = ((a % n) + n) % n

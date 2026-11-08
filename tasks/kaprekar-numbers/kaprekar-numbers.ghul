@@ -1,6 +1,6 @@
 use default
 
-kaprekar(n: int) -> bool =>
+kaprekar(n) =>
     let square = long(n) * long(n) in
     iterate(10L, * * 10L)
         |> take_while(* <= square)

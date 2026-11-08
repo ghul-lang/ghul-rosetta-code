@@ -1,6 +1,6 @@
 use default
 
-lah(n: int, k: int) -> bigint =>
+lah(n, k) =>
     if k == 1 then factorial(bigint(n))
     elif k == n then 1n
     elif k > n \/ k < 1 \/ n < 1 then 0n

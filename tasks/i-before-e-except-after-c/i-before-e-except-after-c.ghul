@@ -2,11 +2,11 @@ use default
 
 let words = IO.File.read_all_lines("unixdict.txt")
 
-count(pattern: string) -> int =>
+count(pattern) =>
     let regex = System.Text.RegularExpressions.Regex(pattern) in
     words |> count(regex.is_match)
 
-plausible(feature: int, opposite: int) -> bool => feature > 2 * opposite
+plausible(feature, opposite) => feature > 2 * opposite
 
 let ie_elsewhere = count("(^|[^c])ie")
 let ei_elsewhere = count("(^|[^c])ei")

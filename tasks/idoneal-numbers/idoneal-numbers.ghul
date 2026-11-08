@@ -1,6 +1,6 @@
 use default
 
-is_idoneal(value: int) -> bool =>
+is_idoneal(value) =>
     !(
         from(1)
             |> take_while(a => 3 * a * a + 2 * a < value)

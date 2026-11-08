@@ -1,6 +1,6 @@
 use default
 
-magnitude(line: string) -> double =>
+magnitude(line) =>
     double.parse((words(line) |> list())[2])
 
 IO.File.read_lines("data.txt")

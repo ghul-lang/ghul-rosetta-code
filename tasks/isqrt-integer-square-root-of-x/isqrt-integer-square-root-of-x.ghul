@@ -1,7 +1,7 @@
 use default
 use System.Globalization.CultureInfo
 
-isqrt(x: bigint) -> bigint is
+isqrt(x) is
     let two = 2n
     let four = 4n
     let q mut = 1n
@@ -29,7 +29,7 @@ isqrt(x: bigint) -> bigint is
     return root
 si
 
-grouped(value: bigint) -> string =>
+grouped(value) =>
     value.to_string("N0", CultureInfo.invariant_culture)
 
 write_line("isqrt of 0 through 65:")

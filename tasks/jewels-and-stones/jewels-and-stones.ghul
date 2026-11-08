@@ -1,6 +1,6 @@
 use default
 
-count_jewels(stones: string, jewels: string) -> int =>
+count_jewels(stones, jewels) =>
     stones |> filter(stone => jewels.contains(stone)) |> count()
 
 for
