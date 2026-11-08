@@ -13,11 +13,9 @@ has_small_factor(n, offset) =>
             (long(n) % p * mod_pow(2L, long(n), p) + offset) % p == 0L
         )
 
-is_cullen_prime(n) =>
-    !has_small_factor(n, 1L) /\ is_prime(cullen(n))
+is_cullen_prime(n) => !has_small_factor(n, 1L) /\ is_prime(cullen(n))
 
-is_woodall_prime(n) =>
-    !has_small_factor(n, -1L) /\ is_prime(woodall(n))
+is_woodall_prime(n) => !has_small_factor(n, -1L) /\ is_prime(woodall(n))
 
 write_line("First 20 Cullen numbers:")
 write_line(from(1) |> map(cullen) |> take(20) |> join(" "))
