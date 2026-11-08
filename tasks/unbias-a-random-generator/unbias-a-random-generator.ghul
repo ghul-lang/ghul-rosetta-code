@@ -2,11 +2,11 @@ use default
 
 let random = System.Random(3)
 
-rand_n(n: int) -> int => if random.next(n) == 0 then 1 else 0 fi
+rand_n(n) => if random.next(n) == 0 then 1 else 0 fi
 
 // A pair of unequal bits is as likely to be 01 as 10, so the first of
 // such a pair is a fair bit.
-unbiased(n: int) -> int is
+unbiased(n) is
     while true do
         let a = rand_n(n)
         let b = rand_n(n)

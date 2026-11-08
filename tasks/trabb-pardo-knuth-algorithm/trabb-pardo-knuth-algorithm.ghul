@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-f(x: double) -> double => sqrt(abs(x)) + 5.0 * x * x * x
+f(x) => sqrt(abs(x)) + 5.0 * x * x * x
 
 write_line("enter 11 numbers:")
 

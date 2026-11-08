@@ -1,11 +1,11 @@
 use default
 
-bits(value: int) -> string =>
+bits(value) =>
     (0..32)
         |> map(position => "{(value >> (31 - position)) & 1}")
         |> join("")
 
-two_s_complement(value: int) -> int => (value ^ -1) + 1
+two_s_complement(value) => (value ^ -1) + 1
 
 for value in [1, 42, 0, -1, 2147483647] do
     let negated = two_s_complement(value)

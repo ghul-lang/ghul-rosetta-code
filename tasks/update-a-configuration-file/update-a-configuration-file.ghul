@@ -13,7 +13,7 @@ class OPTION(name: string, value: string public, enabled: bool public) is
 si
 
 // Tabs, control codes and anything outside ASCII are dropped.
-cleaned(line: string) -> string =>
+cleaned(line) =>
     (line |> filter(c => c >= ' ' /\ c <= '~') |> string()).trim()
 
 parse(line: string) -> OPTION? is

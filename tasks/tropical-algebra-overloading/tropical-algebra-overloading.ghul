@@ -27,7 +27,7 @@ si
 let zero = TROPICAL(minus_infinity)
 let one = TROPICAL(0.0)
 
-show(text: string, result: TROPICAL) => write_line("{text} is {result}")
+show(text, result) => write_line("{text} is {result}")
 
 show("2 ⊗ -2", TROPICAL(2.0) ⊗ TROPICAL(-2.0))
 show("-0.001 ⊕ -Inf", TROPICAL(-0.001) ⊕ zero)
