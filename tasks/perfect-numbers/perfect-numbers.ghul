@@ -1,6 +1,6 @@
 use default
 
-is_perfect(n: int) -> bool is
+is_perfect(n) is
     if n < 2 then
         return false
     fi

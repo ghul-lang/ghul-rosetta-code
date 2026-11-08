@@ -4,7 +4,7 @@ use Ghul.Math
 let width = 480
 let height = 360
 
-plasma(x: double, y: double) -> double =>
+plasma(x, y) =>
     (
         sin(x / 16.0) +
         sin(y / 8.0) +
@@ -13,7 +13,7 @@ plasma(x: double, y: double) -> double =>
         4.0
     ) / 8.0
 
-channel(value: double, phase: double) -> ubyte =>
+channel(value, phase) =>
     ubyte(127.5 + 127.4 * sin(pi * (value * 5.0 + phase)))
 
 let image = IMAGE(width, height)

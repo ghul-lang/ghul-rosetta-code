@@ -4,11 +4,11 @@ class BOX(value: int public)
 
 struct COUNT(value: int public)
 
-bump_box(box: BOX) is
+bump_box(box) is
     box.value = box.value + 1
 si
 
-bump_count(count: COUNT) is
+bump_count(count) is
     count.value = count.value + 1
 si
 

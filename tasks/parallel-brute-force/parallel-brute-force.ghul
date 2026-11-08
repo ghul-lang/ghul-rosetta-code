@@ -14,7 +14,7 @@ let targets = hashes |> map(System.Convert.from_hex_string) |> ARRAY()
 
 let found = ConcurrentDictionary[int, string]()
 
-search(first: int) is
+search(first) is
     let word = LIST(repeat(ubyte(97), 5))
     word[0] = ubyte(97 + first)
 

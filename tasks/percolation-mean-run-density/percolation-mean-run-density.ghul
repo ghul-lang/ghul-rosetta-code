@@ -3,7 +3,7 @@ use default
 let random = System.Random(7)
 let trials = 100
 
-runs(n: int, p: double) -> int => (
+runs(n, p) => (
     let count mut = 0
     let inside mut = false
 

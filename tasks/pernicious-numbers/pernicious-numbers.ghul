@@ -1,13 +1,13 @@
 use default
 
-prime(value: int) -> bool =>
+prime(value) =>
     value >= 2 /\
     2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
-population_count(value: int) -> int =>
+population_count(value) =>
     System.Convert.to_string(value, 2) |> filter(* == '1') |> count()
 
-pernicious(value: int) -> bool => prime(population_count(value))
+pernicious(value) => prime(population_count(value))
 
 write_line("first 25:")
 
