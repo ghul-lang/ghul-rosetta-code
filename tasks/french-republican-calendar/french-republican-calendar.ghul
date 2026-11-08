@@ -18,14 +18,13 @@ let gregorian_months = [
 
 let epoch = DateTime(1792, 9, 22)
 
-is_leap(republican_year: int) -> bool =>
+is_leap(republican_year) =>
     let following = republican_year + 1 in
     following % 4 == 0 /\ (following % 100 != 0 \/ following % 400 == 0)
 
-days_in(republican_year: int) -> int =>
-    if is_leap(republican_year) then 366 else 365 fi
+days_in(republican_year) => if is_leap(republican_year) then 366 else 365 fi
 
-to_republican(date: DateTime) -> string is
+to_republican(date) is
     walk(remaining: int, year: int) -> string =>
         let length = days_in(year) in
         if remaining >= length then
@@ -40,7 +39,7 @@ to_republican(date: DateTime) -> string is
     walk(int(date.subtract(epoch).total_days), 1)
 si
 
-to_gregorian(republican: string) -> DateTime is
+to_gregorian(republican) is
     let words = republican.split([' '])
     let year_text = words[words.count - 1]
     let year = int.parse(year_text)
@@ -59,7 +58,7 @@ to_gregorian(republican: string) -> DateTime is
     return epoch.add_days(cast(days + day_of_year))
 si
 
-describe(date: DateTime) -> string =>
+describe(date) =>
     "{date.day} {gregorian_months[date.month - 1]} {date.year}"
 
 let samples = [

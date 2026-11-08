@@ -6,7 +6,7 @@ let step = 8.0
 let image = IMAGE(560, 560)
 let pen = TURTLE(image)
 
-hilbert(depth: int, angle: double) is
+hilbert(depth, angle) is
     if depth == 0 then
         return
     fi
