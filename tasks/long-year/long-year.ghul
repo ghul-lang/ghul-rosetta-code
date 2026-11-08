@@ -2,8 +2,7 @@ use default
 
 use System.Globalization.ISOWeek
 
-december_31_weekday(year) =>
-    (year + year / 4 - year / 100 + year / 400) % 7
+december_31_weekday(year) => (year + year / 4 - year / 100 + year / 400) % 7
 
 let thursday = 4
 let wednesday = 3
