@@ -1,6 +1,5 @@
 use default
 
-strip(text, unwanted) =>
-    string(text |> filter(c => !unwanted.contains(c)))
+strip(text, unwanted) => string(text |> filter(c => !unwanted.contains(c)))
 
 write_line(strip("She was a soul stripper. She took my heart!", "aei"))

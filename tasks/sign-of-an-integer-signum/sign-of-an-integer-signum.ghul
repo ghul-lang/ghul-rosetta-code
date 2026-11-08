@@ -1,7 +1,6 @@
 use default
 
-signum(value) =>
-    if value < 0 then -1 elif value > 0 then 1 else 0 fi
+signum(value) => if value < 0 then -1 elif value > 0 then 1 else 0 fi
 
 for value in [-10, 0, 10] do
     write_line("{value}: {signum(value)}")
