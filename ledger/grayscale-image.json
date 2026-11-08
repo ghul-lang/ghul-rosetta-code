@@ -2,9 +2,11 @@
   "title": "Grayscale image",
   "slug": "grayscale-image",
   "state": "published",
-  "published_hash": "a28bd596a43985eaed1d85f02cb4e107ea9f091c982e313f454933dde694d461",
+  "published_hash": "752aa9f2251f1130e7f73f78b8ff48fcb72f8a7d86790f029471ec1dc8c557da",
   "image_hashes": {
     "Ghul-grayscale-image-colour.png": "2824f53c5d00bf660fb41a3c5751e877bdcd7234",
-    "Ghul-grayscale-image-grey.png": "dafaaca1fd6eb825fa7338bd46d721d3ee590cc6"
+    "Ghul-grayscale-image-grey.png": "dafaaca1fd6eb825fa7338bd46d721d3ee590cc6",
+    "Ghul-grayscale-image-color.png": "2824f53c5d00bf660fb41a3c5751e877bdcd7234",
+    "Ghul-grayscale-image-gray.png": "dafaaca1fd6eb825fa7338bd46d721d3ee590cc6"
   }
 }
