@@ -1,6 +1,6 @@
 use default
 
-occurrences(haystack: string, needle: string) -> int =>
+occurrences(haystack, needle) =>
     let at = haystack.index_of(needle) in
     if at < 0 then
         0

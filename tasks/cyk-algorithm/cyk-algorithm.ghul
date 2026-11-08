@@ -24,7 +24,7 @@ let grammar = [
     Rule.WORD("A", "muscular")
 ]
 
-parses(sentence: string, start: string) -> bool is
+parses(sentence, start) is
     let words = sentence.split([' '])
     let length = words.count
 

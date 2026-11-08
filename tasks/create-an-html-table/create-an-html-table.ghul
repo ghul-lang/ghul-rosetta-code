@@ -2,8 +2,7 @@ use default
 
 let columns = ["X", "Y", "Z"]
 
-cell(tag: string, text: string) -> string =>
-    "      <{tag} align=\"right\">{text}</{tag}>"
+cell(tag, text) => "      <{tag} align=\"right\">{text}</{tag}>"
 
 let heading = [""] ++ columns |> map(cell("th", *)) |> join("\n")
 

@@ -8,7 +8,7 @@ class U1(message: string): System.Exception is
     super(message)
 si
 
-baz(which: int) is
+baz(which) is
     if which == 0 then
         throw U0("thrown from baz")
     else
@@ -16,11 +16,11 @@ baz(which: int) is
     fi
 si
 
-bar(which: int) is
+bar(which) is
     baz(which)
 si
 
-foo(which: int) is
+foo(which) is
     try
         bar(which)
     catch e: U0

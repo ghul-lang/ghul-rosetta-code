@@ -1,23 +1,21 @@
 use default
 
-cullen(n: int) -> bigint => (bigint(n) << n) + 1n
+cullen(n) => (bigint(n) << n) + 1n
 
-woodall(n: int) -> bigint => (bigint(n) << n) - 1n
+woodall(n) => (bigint(n) << n) - 1n
 
 let small_primes = primes(3L) |> take_while(p => p <= 20_000L) |> list()
 
-has_small_factor(n: int, offset: long) -> bool =>
+has_small_factor(n, offset) =>
     n > 10 /\
     small_primes
         |> any(p =>
             (long(n) % p * mod_pow(2L, long(n), p) + offset) % p == 0L
         )
 
-is_cullen_prime(n: int) -> bool =>
-    !has_small_factor(n, 1L) /\ is_prime(cullen(n))
+is_cullen_prime(n) => !has_small_factor(n, 1L) /\ is_prime(cullen(n))
 
-is_woodall_prime(n: int) -> bool =>
-    !has_small_factor(n, -1L) /\ is_prime(woodall(n))
+is_woodall_prime(n) => !has_small_factor(n, -1L) /\ is_prime(woodall(n))
 
 write_line("First 20 Cullen numbers:")
 write_line(from(1) |> map(cullen) |> take(20) |> join(" "))
