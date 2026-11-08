@@ -1,6 +1,6 @@
 use default
 
-jaro(left: string, right: string) -> double is
+jaro(left, right) is
     if left.length == 0 \/ right.length == 0 then
         return
             if left.length == right.length then

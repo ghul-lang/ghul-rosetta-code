@@ -1,8 +1,8 @@
 use default
 
-increment(text: string) -> string => "{int.parse(text) + 1}"
+increment(text) => "{int.parse(text) + 1}"
 
-huge(text: string) -> string => "{bigint.parse(text) + 1n}"
+huge(text) => "{bigint.parse(text) + 1n}"
 
 write_line(increment("1234"))
 write_line(huge("999999999999999999999999"))

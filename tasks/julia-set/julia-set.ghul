@@ -8,7 +8,7 @@ let limit = 300
 let cx = -0.7
 let cy = 0.27015
 
-escape(start_x: double, start_y: double) -> int => (
+escape(start_x, start_y) => (
     let x mut = start_x
     let y mut = start_y
     let steps mut = 0
@@ -24,8 +24,7 @@ escape(start_x: double, start_y: double) -> int => (
     steps
 )
 
-band(level: double, phase: double) -> ubyte =>
-    ubyte(127.5 * (1.0 - cos(6.0 * pi * level + phase)))
+band(level, phase) => ubyte(127.5 * (1.0 - cos(6.0 * pi * level + phase)))
 
 let image = IMAGE(width, height)
 

@@ -1,6 +1,6 @@
 use default
 
-isogram_order(word: string) -> int =>
+isogram_order(word) =>
     let counts =
         word
             |> group_by(c => c)

@@ -1,7 +1,6 @@
 use IO.Std.write_line
 
-survivor(n: int, k: int) -> int =>
-    if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi
+survivor(n, k) => if n == 1 then 0 else (survivor(n - 1, k) + k) % n fi
 
 write_line(
     "41 prisoners, every 3rd killed: prisoner {survivor(41, 3)} survives"

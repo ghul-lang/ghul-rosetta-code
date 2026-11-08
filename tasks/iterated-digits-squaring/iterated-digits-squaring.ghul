@@ -1,9 +1,8 @@
 use default
 
-digit_square_sum(value: int) -> int =>
-    value |> digits() |> map(d => d * d) |> sum()
+digit_square_sum(value) => value |> digits() |> map(d => d * d) |> sum()
 
-reaches_89(value: int) -> bool => (
+reaches_89(value) => (
     let current mut = value
 
     while current != 1 /\ current != 89 do
