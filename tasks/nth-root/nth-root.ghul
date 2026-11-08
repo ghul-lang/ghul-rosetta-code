@@ -1,6 +1,6 @@
 use default
 
-nth_root(a: double, n: int) -> double is
+nth_root(a, n) is
     let order = double(n)
 
     let estimate mut = a / order

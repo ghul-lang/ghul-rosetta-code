@@ -16,7 +16,7 @@ let units = [
     (name = "kilometer", metres = 1000.0)
 ]
 
-convert(amount: double, from: string) is
+convert(amount, from) is
     let source = (units |> find(unit => unit.name =~ from))!
 
     write_line("{amount} {from} is")

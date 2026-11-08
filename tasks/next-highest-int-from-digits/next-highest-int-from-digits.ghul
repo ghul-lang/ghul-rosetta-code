@@ -1,6 +1,6 @@
 use default
 
-next_highest(number: string) -> string =>
+next_highest(number) =>
     if let
         pivot = (0..number.length - 1)
             |> reverse()
