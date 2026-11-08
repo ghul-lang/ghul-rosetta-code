@@ -16,7 +16,7 @@ for candidate in 2::limit do
     fi
 od
 
-is_blum(value: int) -> bool =>
+is_blum(value) =>
     let
         p = smallest_factor[value],
         q = value / p

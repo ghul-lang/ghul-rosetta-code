@@ -2,7 +2,7 @@ use default
 
 struct FRACTION(numerator: bigint, denominator: bigint)
 
-fraction(numerator: bigint, denominator: bigint) -> FRACTION =>
+fraction(numerator, denominator) =>
     let
         divisor = bigint.greatest_common_divisor(numerator, denominator),
         sign = if denominator < 0n then -1n else 1n fi
@@ -18,7 +18,7 @@ fraction(numerator: bigint, denominator: bigint) -> FRACTION =>
 *(k: int, a: FRACTION) -> FRACTION =>
     fraction(bigint(k) * a.numerator, a.denominator)
 
-bernoulli(n: int) -> FRACTION is
+bernoulli(n) is
     let a = 0::n |> map(m => fraction(1n, bigint(m + 1))) |> LIST()
 
     for m in 1::n do

@@ -1,6 +1,6 @@
 use default
 
-best_shuffle(text: string) -> string is
+best_shuffle(text) is
     let groups =
         0..text.length
             |> group_by(i => text[i])

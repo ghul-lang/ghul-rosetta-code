@@ -3,7 +3,7 @@ use IO.Std.read_line
 
 use Score = (bulls: int, cows: int)
 
-score(guess: string, secret: string) -> Score =>
+score(guess, secret) =>
     let bulls = 0..4 |> filter(i => guess[i] == secret[i]) |> count() in
     let shared = 0..4 |> filter(i => secret.contains(guess[i])) |> count()
     in

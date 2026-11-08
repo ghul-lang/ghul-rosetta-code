@@ -13,7 +13,7 @@ let points = [
     "Northwest by north", "North-northwest", "North by west"
 ]
 
-box(heading: double) -> int => cast(heading / 11.25 + 0.5) % 32
+box(heading) => cast(heading / 11.25 + 0.5) % 32
 
 let headings =
     0::32
