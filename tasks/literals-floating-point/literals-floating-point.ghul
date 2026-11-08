@@ -1,6 +1,6 @@
 use default
 
-show(literal, value) is
+show(literal: string, value: object) is
     write_line("{literal,-14}{value.get_type().name,-9}{value}")
 si
 
