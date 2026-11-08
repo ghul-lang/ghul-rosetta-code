@@ -1,8 +1,8 @@
 from outer:
 from inner:
-  $frame_0.show_trace
-  $frame_1.inner
-  $frame_2.outer
-  $globals.entry
-  $globals._entry
+  show_trace
+  inner
+  outer
+  entry
+  _entry
 and the program carries on
