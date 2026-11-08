@@ -1,6 +1,6 @@
 use default
 
-held_karp(cost: int[][]) -> (total: int, tour: int[]) is
+held_karp(cost) is
     let n = cost.count
     let subsets = 1 << n
     let unreached = int.max_value

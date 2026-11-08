@@ -19,7 +19,7 @@ let camera_distance = 9.0
 
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
-rgb(r: int, g: int, b: int) -> Color => (
+rgb(r, g, b) => (
     red = ubyte(r),
     green = ubyte(g),
     blue = ubyte(b)
@@ -38,7 +38,7 @@ let faces: (normal: Point, u: Point, v: Point, color: Color)[] = [
     (x_axis * -1.0, y_axis, z_axis, rgb(255, 88, 0))
 ]
 
-turned(p: Point, angle: double) -> Point =>
+turned(p, angle) =>
     let
         x = p.x * cos(angle) + p.z * sin(angle),
         z = p.z * cos(angle) - p.x * sin(angle)
@@ -53,13 +53,10 @@ project(p: Point) -> (x: double, y: double) =>
     let scale = camera_distance / (camera_distance - p.z) in
     (x = p.x * scale, y = p.y * scale)
 
-facing(normal: Point, angle: double) -> bool =>
+facing(normal, angle) =>
     turned(normal, angle).z * camera_distance > 1.5
 
-square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
-    x: double,
-    y: double
-)[] =>
+square(center, u, v, half, angle) =>
     [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0)]
         |> map((a, b) =>
             turned(center + u * (a * half) + v * (b * half), angle)
@@ -67,7 +64,7 @@ square(center: Point, u: Point, v: Point, half: double, angle: double) -> (
         |> map(project)
         |> list()
 
-draw(image: IMAGE, angle: double) is
+draw(image, angle) is
     image.clear(250ub, 250ub, 247ub)
 
     let body = SHAPES()

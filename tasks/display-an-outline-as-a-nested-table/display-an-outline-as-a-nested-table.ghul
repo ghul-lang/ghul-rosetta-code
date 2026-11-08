@@ -22,9 +22,9 @@ let outline = [
 let root_colour = "#ffffe6"
 let palette = ["#ffebd2", "#f0fff0", "#e6ffff"]
 
-margin(line: string) -> int => line |> take_while(* == ' ') |> count()
+margin(line) => line |> take_while(* == ' ') |> count()
 
-parse(lines: string[]) -> NODE is
+parse(lines) is
     let unit = lines |> map(margin) |> filter(* > 0) |> min()
     let step = unit ?? 1
     let root = NODE(lines[0].trim(), LIST())
@@ -47,14 +47,14 @@ parse(lines: string[]) -> NODE is
     root
 si
 
-deepest(node: NODE) -> int =>
+deepest(node) =>
     if node.children.count == 0 then
         0
     else
         (node.children |> map(deepest) |> max() ?? 0) + 1
     fi
 
-pad(node: NODE, level: int, bottom: int) is
+pad(node, level, bottom) is
     if level < bottom /\ node.children.count == 0 then
         node.children.add(NODE("", LIST()))
     fi
@@ -64,14 +64,14 @@ pad(node: NODE, level: int, bottom: int) is
     od
 si
 
-width(node: NODE) -> int =>
+width(node) =>
     if node.children.count == 0 then
         1
     else
         node.children |> sum_by(width)
     fi
 
-gather(node: NODE, level: int, colour: string, rows: List[LIST[CELL]]) is
+gather(node, level, colour, rows) is
     rows[level].add(
         (text = node.text, width = width(node), colour = colour)
     )

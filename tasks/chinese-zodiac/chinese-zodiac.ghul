@@ -14,7 +14,7 @@ let branches = [
     "wu3", "wei4", "shen1", "you3", "xu1", "hai4"
 ]
 
-zodiac(year: int) is
+zodiac(year) is
     let offset = year - 1984
     let stem_index = ((offset % 10) + 10) % 10
     let branch_index = ((offset % 12) + 12) % 12

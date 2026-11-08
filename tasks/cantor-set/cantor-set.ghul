@@ -1,13 +1,13 @@
 use default
 
-power_of_three(exponent: int) -> int =>
+power_of_three(exponent) =>
     if exponent == 0 then
         1
     else
         3 * power_of_three(exponent - 1)
     fi
 
-removed(position: int) -> bool =>
+removed(position) =>
     position > 0 /\ (position % 3 == 1 \/ removed(position / 3))
 
 let depth = 4

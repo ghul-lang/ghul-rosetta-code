@@ -9,13 +9,13 @@ let random = System.Random(987654321)
 
 let tree = SET()
 
-touches(x: int, y: int) -> bool =>
+touches(x, y) =>
     -1..2
         |> any(across =>
             -1..2 |> any(up => tree.contains((x = x + across, y = y + up)))
         )
 
-grow() -> (x: int, y: int){} is
+grow() is
     for _ in 0..particles do
         let x mut = random.next(size)
         let y mut = random.next(size)

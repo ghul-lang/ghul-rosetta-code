@@ -2,7 +2,7 @@ use default
 
 use Candidate = (value: int, mask: int, reduced: int[])
 
-describe(value: int) -> Candidate is
+describe(value) is
     let reduced = repeat(0, 10) |> LIST()
     let places = value |> digits() |> list()
 
@@ -26,7 +26,7 @@ describe(value: int) -> Candidate is
     return (value = value, mask = mask, reduced = reduced)
 si
 
-candidates(size: int) -> Candidate[] =>
+candidates(size) =>
     let lowest = repeat(10, size - 1) |> reduce(1, * * *) in
     lowest..lowest * 10
         |> map(describe)

@@ -1,6 +1,6 @@
 use default
 
-euler_maclaurin(n: int) -> double =>
+euler_maclaurin(n) =>
     let
         size = double(n),
         harmonic = 1::n |> sum_by(k => 1.0 / double(k))
@@ -23,7 +23,7 @@ euler_maclaurin(n: int) -> double =>
         in
         harmonic - double.log(size) - 1.0 / (2.0 * size) + correction
 
-brent_mcmillan(digits: int) -> string is
+brent_mcmillan(digits) is
     let scale = bigint.pow(10n, digits + 10)
     let n = 32n
 

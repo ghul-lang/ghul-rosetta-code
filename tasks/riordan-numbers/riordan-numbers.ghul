@@ -1,6 +1,6 @@
 use default
 
-riordan(count: int) -> bigint{} is
+riordan(count) is
     let previous mut = 1n
     let current mut = 0n
 
@@ -25,7 +25,7 @@ for row in 0..8 do
     write_line(line |> join(""))
 od
 
-digits(index: int) -> int =>
+digits(index) =>
     (riordan(index + 1) |> list())[index].to_string().length
 
 write_line("")

@@ -22,7 +22,7 @@ let small_primes =
 
 let segment_size = 1_000_000
 
-prime_divisor_sums(with_multiplicity: bool) -> (number: int, sum: int){} is
+prime_divisor_sums(with_multiplicity) is
     let low mut = 2
 
     do
@@ -79,7 +79,7 @@ prime_divisor_sums(with_multiplicity: bool) -> (number: int, sum: int){} is
     od
 si
 
-runs(with_multiplicity: bool, size: int) -> int{} is
+runs(with_multiplicity, size) is
     let recent = LIST()
 
     for entry in prime_divisor_sums(with_multiplicity) do

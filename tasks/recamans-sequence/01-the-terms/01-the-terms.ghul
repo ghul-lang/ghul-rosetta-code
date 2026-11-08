@@ -1,6 +1,6 @@
 use default
 
-recaman() -> int{} is
+recaman() is
     let seen = SET()
     let term mut = 0
     let index mut = 0

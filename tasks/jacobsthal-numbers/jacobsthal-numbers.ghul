@@ -2,7 +2,7 @@ use default
 
 let two = 2n
 
-jacobsthal_from(first: bigint, second: bigint) -> bigint{} is
+jacobsthal_from(first, second) is
     let previous mut = first
     let current mut = second
 
@@ -14,11 +14,11 @@ jacobsthal_from(first: bigint, second: bigint) -> bigint{} is
     od
 si
 
-jacobsthal() -> bigint{} => jacobsthal_from(0n, 1n)
+jacobsthal() => jacobsthal_from(0n, 1n)
 
-jacobsthal_lucas() -> bigint{} => jacobsthal_from(two, 1n)
+jacobsthal_lucas() => jacobsthal_from(two, 1n)
 
-jacobsthal_oblongs() -> bigint{} is
+jacobsthal_oblongs() is
     let previous mut = 0n
     let current mut = 1n
 
@@ -30,7 +30,7 @@ jacobsthal_oblongs() -> bigint{} is
     od
 si
 
-show(label: string, values: bigint{}, count: int) is
+show(label, values, count) is
     write_line("{label}:")
     let rows = values |> take(count) |> chunk(10)
 

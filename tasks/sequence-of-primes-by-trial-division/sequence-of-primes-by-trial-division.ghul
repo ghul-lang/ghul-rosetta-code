@@ -1,6 +1,6 @@
 use default
 
-primes() -> int{} is
+primes() is
     let found = LIST()
     let candidate mut = 2
 

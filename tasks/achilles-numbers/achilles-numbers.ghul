@@ -1,21 +1,21 @@
 use default
 
-power(base: int, exponent: int) -> int =>
+power(base, exponent) =>
     if exponent == 0 then
         1
     else
         base * power(base, exponent - 1)
     fi
 
-is_achilles(n: int) -> bool =>
+is_achilles(n) =>
     let factors = factorize(n) in
     factors.count > 0 /\
     (factors |> all(factor => factor.exponent >= 2)) /\
     (factors |> map(factor => factor.exponent) |> reduce(0, gcd)) == 1
 
-achilles_numbers() -> int{} => from(1) |> filter(is_achilles)
+achilles_numbers() => from(1) |> filter(is_achilles)
 
-show(heading: string, numbers: int{}) is
+show(heading, numbers) is
     write_line(heading)
 
     for row in numbers |> chunk(10) do

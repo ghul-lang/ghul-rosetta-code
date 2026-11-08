@@ -25,7 +25,7 @@ write_line("cells[0][0][0][0] = {cells[0][0][0][0]}")
 let size = extents |> product()
 let flat = repeat(0, size) |> LIST()
 
-at(index: int[]) -> int =>
+at(index) =>
     0..extents.count
         |> reduce(0, (offset, dimension) =>
             offset * extents[dimension] + index[dimension]

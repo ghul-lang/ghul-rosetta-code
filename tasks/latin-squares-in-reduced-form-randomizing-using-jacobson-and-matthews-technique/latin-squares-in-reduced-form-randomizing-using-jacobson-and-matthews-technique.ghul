@@ -100,7 +100,7 @@ class INCIDENCE_CUBE is
             |> list()
 si
 
-reduced(square: Square) -> Square =>
+reduced(square) =>
     let n = square.count in
     let by_column =
         1::n
@@ -113,10 +113,10 @@ reduced(square: Square) -> Square =>
         |> map(r => 0..n |> map(c => by_column[c][r]) |> list())
         |> list()
 
-text(square: Square) -> string =>
+text(square) =>
     square |> map(row => row |> map(v => "{v,3}") |> join("")) |> join("\n")
 
-is_latin(square: Square) -> bool =>
+is_latin(square) =>
     let n = square.count in
     0..n
         |> all(i =>
@@ -124,13 +124,10 @@ is_latin(square: Square) -> bool =>
             (0..n |> map(r => square[r][i]) |> distinct() |> count()) == n
         )
 
-cyclic(n: int) -> Square =>
+cyclic(n) =>
     0..n |> map(r => 0..n |> map(c => (r + c) % n + 1) |> list()) |> list()
 
-tally(n: int, squares: int, random: System.Random) -> (
-    square: string,
-    times: int
-){} =>
+tally(n, squares, random) =>
     let cube = INCIDENCE_CUBE(cyclic(n), random) in
     0..squares
         |> map(_ => (

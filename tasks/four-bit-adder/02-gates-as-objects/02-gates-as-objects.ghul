@@ -99,7 +99,7 @@ class FOUR_BIT_ADDER is
             )
 si
 
-text(pins: Component[]) -> string =>
+text(pins) =>
     pins |> map(c => if c.output then "1" else "0" fi) |> join("")
 
 let circuit = FOUR_BIT_ADDER()

@@ -17,10 +17,10 @@ let along = 16
 let yaw = 0.5
 let pitch = 0.45
 
-surface(u: double, v: double) -> VEC =>
+surface(u, v) =>
     VEC(cosh(v) * cos(u), cosh(v) * sin(u), v)
 
-turned(p: VEC) -> VEC =>
+turned(p) =>
     let
         x = p.x * cos(yaw) - p.y * sin(yaw),
         y = p.x * sin(yaw) + p.y * cos(yaw)
@@ -31,22 +31,22 @@ turned(p: VEC) -> VEC =>
             p.z * sin(pitch) + y * cos(pitch)
         )
 
-corner(i: int, j: int) -> VEC =>
+corner(i, j) =>
     let
         u = 2.0 * pi * double(i) / double(around),
         v = -1.2 + 2.4 * double(j) / double(along)
     in
         turned(surface(u, v))
 
-depth(quad: Quad) -> double => quad |> sum_by(c => c.z)
+depth(quad) => quad |> sum_by(c => c.z)
 
-brightness(quad: Quad) -> double =>
+brightness(quad) =>
     let n = (quad[1] - quad[0]) × (quad[3] - quad[0]) in
     if n.length == 0.0 then 0.5
     else 0.25 + 0.75 * abs(n.z) / n.length
     fi
 
-quad(i: int, j: int) -> Quad => [
+quad(i, j) => [
     corner(i, j), corner(i + 1, j),
     corner(i + 1, j + 1), corner(i, j + 1)
 ]

@@ -13,7 +13,7 @@ let board = repeat(0, squares) |> LIST()
 
 // The board indices of each row or column, ordered along the
 // direction of travel, so one collapse serves all four moves.
-lines_for(direction: char) -> int[]{} => (
+lines_for(direction) => (
     let lines = LIST[LIST[int]]()
 
     for major in 0..side do
@@ -39,14 +39,14 @@ lines_for(direction: char) -> int[]{} => (
     lines
 )
 
-collapse(values: int[]) -> int[] =>
+collapse(values) =>
     let
         merged = merge_packed(LIST[int](values |> filter(* != 0))),
         padded = merged ++ repeat(0, side - (merged |> count()))
     in
         padded |> ARRAY()
 
-merge_packed(packed: int[]) -> int{} =>
+merge_packed(packed) =>
     case packed
     when [] then []
     when [x, y, ..rest] /\ x == y then
@@ -77,7 +77,7 @@ spawn() is
     fi
 si
 
-stuck() -> bool =>
+stuck() =>
     !(directions |> any(direction => slide(board |> LIST(), direction)))
 
 show() is

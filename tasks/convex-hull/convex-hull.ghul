@@ -14,11 +14,11 @@ let points = [
     (x = -4, y = -2), (x = 12, y = 10)
 ]
 
-turn(from: Point, through: Point, to: Point) -> int =>
+turn(from, through, to) =>
     (through.x - from.x) * (to.y - from.y) -
     (through.y - from.y) * (to.x - from.x)
 
-half_hull(ordered: Point[]) -> LIST[Point] is
+half_hull(ordered) is
     let side = LIST()
 
     for at in ordered do

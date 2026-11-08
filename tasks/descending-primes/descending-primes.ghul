@@ -1,6 +1,6 @@
 use default
 
-descending(so_far: int, next_digit: int, found: LIST[int]) is
+descending(so_far, next_digit, found) is
     if so_far > 0 /\ is_prime(so_far) then
         found.add(so_far)
     fi

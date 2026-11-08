@@ -22,7 +22,7 @@ is_well_formed(guess) =>
     guess |> all(c => c >= '1' /\ c <= '9') /\
     (guess |> distinct() |> count()) == 4
 
-score(guess: string) -> (bulls: int, cows: int) => (
+score(guess) => (
     let bulls = 0..4 |> count(i => guess[i] == secret[i])
     let cows =
         0..4

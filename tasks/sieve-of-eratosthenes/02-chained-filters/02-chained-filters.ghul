@@ -5,7 +5,7 @@ use Numbers = CHANNEL[int?]
 
 let limit = 100
 
-count_up(out: Numbers) -> COROUTINE is
+count_up(out) is
     for n in 2::limit do
         out.send(n)
 
@@ -15,7 +15,7 @@ count_up(out: Numbers) -> COROUTINE is
     out.send(null)
 si
 
-drop_multiples(prime: int, into: Numbers, out: Numbers) -> COROUTINE is
+drop_multiples(prime, into, out) is
     do
         let value = await into.receive()
 
@@ -31,7 +31,7 @@ drop_multiples(prime: int, into: Numbers, out: Numbers) -> COROUTINE is
     od
 si
 
-sieve() -> COROUTINE is
+sieve() is
     let head mut = Numbers()
 
     count_up(head)

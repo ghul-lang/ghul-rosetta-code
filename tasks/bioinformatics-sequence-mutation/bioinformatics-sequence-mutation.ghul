@@ -3,7 +3,7 @@ use default
 let bases = ['A', 'C', 'G', 'T']
 let random = System.Random(1969)
 
-show(label: string, sequence: char[]) is
+show(label, sequence) is
     write_line(label)
 
     for (row, line) in sequence |> chunk(50) |> index() do
@@ -17,7 +17,7 @@ show(label: string, sequence: char[]) is
     write_line("")
 si
 
-mutate(sequence: LIST[char]) -> string is
+mutate(sequence) is
     let at = random.next(0, sequence.count)
     let base = bases[random.next(0, 4)]
 

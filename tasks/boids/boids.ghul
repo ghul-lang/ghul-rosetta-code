@@ -32,16 +32,16 @@ let frames = 240
 let sight = 6.0
 let personal_space = 1.5
 
-row_of(y: double) -> int => rows - 1 - int(floor(y / 2.0))
+row_of(y) => rows - 1 - int(floor(y / 2.0))
 
-column_of(x: double) -> int => (int(floor(x)) % columns + columns) % columns
+column_of(x) => (int(floor(x)) % columns + columns) % columns
 
-is_wall(point: VEC) -> bool =>
+is_wall(point) =>
     point.y < 0.0 \/
     point.y >= height \/
     cave[row_of(point.y)][column_of(point.x)] == '#'
 
-wall_push(point: VEC) -> VEC is
+wall_push(point) is
     let push mut = VEC(0.0, 0.0)
 
     for dx in -3::3 do
@@ -60,7 +60,7 @@ wall_push(point: VEC) -> VEC is
     push
 si
 
-steer(boid: BOID, flock: BOID[]) -> VEC is
+steer(boid, flock) is
     let near =
         flock
             |> filter(other =>
@@ -98,7 +98,7 @@ steer(boid: BOID, flock: BOID[]) -> VEC is
     force
 si
 
-move(boid: BOID, flock: BOID[]) -> bool is
+move(boid, flock) is
     boid.velocity = (boid.velocity + steer(boid, flock)).limited(0.4, 0.8)
 
     let next = boid.position + boid.velocity
@@ -115,7 +115,7 @@ move(boid: BOID, flock: BOID[]) -> bool is
     wrapped
 si
 
-draw(image: IMAGE, flock: BOID[]) is
+draw(image, flock) is
     image.clear(235ub, 240ub, 245ub)
     image.color(90ub, 80ub, 70ub)
 

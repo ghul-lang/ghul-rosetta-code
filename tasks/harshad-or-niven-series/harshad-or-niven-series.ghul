@@ -1,6 +1,6 @@
 use default
 
-harshad() -> int{} =>
+harshad() =>
     from(1) |> filter(number => number % digit_sum(number) == 0)
 
 let first_twenty =

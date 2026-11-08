@@ -1,6 +1,6 @@
 use default
 
-value(letter: char) -> int =>
+value(letter) =>
     case letter
     when 'M' then 1000
     when 'D' then 500
@@ -11,7 +11,7 @@ value(letter: char) -> int =>
     else 1
     esac
 
-signed_value(numeral: string, index: int) -> int =>
+signed_value(numeral, index) =>
     if
         index + 1 < numeral.length /\
         value(numeral[index]) < value(numeral[index + 1])
@@ -21,7 +21,7 @@ signed_value(numeral: string, index: int) -> int =>
         value(numeral[index])
     fi
 
-decode(numeral: string) -> int =>
+decode(numeral) =>
     (0..numeral.length) |> sum_by(signed_value(numeral, *))
 
 for numeral in ["MCMXC", "MMVIII", "MDCLXVI"] do

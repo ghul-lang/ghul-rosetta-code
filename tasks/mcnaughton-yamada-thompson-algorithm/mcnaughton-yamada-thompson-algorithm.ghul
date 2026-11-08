@@ -10,7 +10,7 @@ si
 
 class NFA(initial: STATE, accept: STATE)
 
-precedence(c: char) -> int =>
+precedence(c) =>
     case c
     when '*', '+', '?' then 3
     when '.' then 2
@@ -18,7 +18,7 @@ precedence(c: char) -> int =>
     else 0
     esac
 
-postfix(infix: string) -> string is
+postfix(infix) is
     let output = System.Text.StringBuilder()
     let operators = STACK()
 
@@ -52,7 +52,7 @@ postfix(infix: string) -> string is
     output.to_string()
 si
 
-compile(pattern: string) -> NFA is
+compile(pattern) is
     let stack = STACK()
 
     for c in postfix(pattern) do
@@ -111,7 +111,7 @@ closure(state: STATE?, into: SET[STATE]) is
     fi
 si
 
-matches(pattern: string, text: string) -> bool is
+matches(pattern, text) is
     let nfa = compile(pattern)
     let current mut = SET()
 

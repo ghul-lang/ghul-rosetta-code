@@ -2,7 +2,7 @@ use default
 use double.degrees_to_radians
 use double.radians_to_degrees
 
-mean_angle(degrees: double[]) -> double =>
+mean_angle(degrees) =>
     let radians = degrees |> map(degrees_to_radians) in
     let
         sines = radians |> sum_by(sin),

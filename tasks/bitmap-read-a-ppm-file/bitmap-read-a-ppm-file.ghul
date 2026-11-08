@@ -30,10 +30,10 @@ class BITMAP is
     )
 si
 
-space(value: ubyte) -> bool =>
+space(value) =>
     value == 32ub \/ value == 9ub \/ value == 10ub \/ value == 13ub
 
-read_ppm(path: string) -> BITMAP is
+read_ppm(path) is
     let raw = IO.File.read_all_bytes(path)
 
     let at mut = 0
@@ -76,7 +76,7 @@ read_ppm(path: string) -> BITMAP is
     return image
 si
 
-write_ppm(image: BITMAP, path: string) is
+write_ppm(image, path) is
     let file = IO.File.create(path)
 
     let header = System.Text.Encoding.ascii.get_bytes(
@@ -92,7 +92,7 @@ write_ppm(image: BITMAP, path: string) is
     file.dispose()
 si
 
-to_grey(image: BITMAP) -> BITMAP is
+to_grey(image) is
     let grey = BITMAP(image.width, image.height)
 
     for at in 0..image.width * image.height do

@@ -1,6 +1,6 @@
 use default
 
-has_extension(name: string, extensions: string[]) -> bool =>
+has_extension(name, extensions) =>
     extensions |> any(ext => name.to_lower().ends_with(".{ext.to_lower()}"))
 
 let extensions = [

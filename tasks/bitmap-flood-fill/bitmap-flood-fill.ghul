@@ -5,7 +5,7 @@ use POINT = (x: double, y: double)
 
 let steps = 240
 
-around(radius: double) -> POINT[] =>
+around(radius) =>
     (0..steps + 1)
         |> map(step => (
             let angle = 2.0 * pi * double(step) / double(steps)

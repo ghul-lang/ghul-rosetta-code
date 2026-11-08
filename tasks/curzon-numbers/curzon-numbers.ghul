@@ -1,6 +1,6 @@
 use default
 
-is_curzon(base: int, n: int) -> bool =>
+is_curzon(base, n) =>
     let
         divisor = bigint(base * n + 1),
         big_base = bigint(base)
@@ -8,7 +8,7 @@ is_curzon(base: int, n: int) -> bool =>
         let power = bigint.mod_pow(big_base, bigint(n), divisor) in
         (power + 1n) % divisor =~ 0n
 
-curzon_numbers(base: int) -> int{} => from(1) |> filter(is_curzon(base, *))
+curzon_numbers(base) => from(1) |> filter(is_curzon(base, *))
 
 for base in [2, 4, 6, 8, 10] do
     write_line("generalized Curzon numbers with base {base}:")

@@ -1,6 +1,6 @@
 use default
 
-value_of(c: char) -> int =>
+value_of(c) =>
     case c
     when '*' then 36
     when '@' then 37
@@ -13,18 +13,18 @@ value_of(c: char) -> int =>
         fi
     esac
 
-weighted(c: char, position: int) -> int =>
+weighted(c, position) =>
     let
         factor = if position % 2 == 1 then 2 else 1 fi,
         value = value_of(c) * factor
     in
         value / 10 + value % 10
 
-check_digit(cusip: string) -> int =>
+check_digit(cusip) =>
     let total = 0..8 |> sum_by(i => weighted(cusip[i], i)) in
     (10 - total % 10) % 10
 
-is_valid(cusip: string) -> bool => check_digit(cusip) == value_of(cusip[8])
+is_valid(cusip) => check_digit(cusip) == value_of(cusip[8])
 
 let securities = [
     ("037833100", "Apple Incorporated"),

@@ -11,9 +11,9 @@ show() is
     od
 si
 
-solved() -> bool => board |> index() |> all(c => c.value == c.index + 1)
+solved() => board |> index() |> all(c => c.value == c.index + 1)
 
-rotate(cells: int[], forward: bool) is
+rotate(cells, forward) is
     let values = cells |> map(i => board[i]) |> list()
     let count = values.count
 
@@ -29,7 +29,7 @@ rotate(cells: int[], forward: bool) is
     od
 si
 
-apply(command: string) -> bool is
+apply(command) is
     if command.length != 2 \/ !char.is_digit(command[1]) then
         return false
     fi

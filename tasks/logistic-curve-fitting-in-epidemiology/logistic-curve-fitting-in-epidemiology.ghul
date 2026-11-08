@@ -18,17 +18,17 @@ let cases = [
 let start = 27.0
 let population = 7.8e9
 
-model(r: double, t: double) -> double =>
+model(r, t) =>
     let growth = exp(r * t) in
     start * growth / (1.0 + start * (growth - 1.0) / population)
 
-error(r: double) -> double =>
+error(r) =>
     cases
         |> index()
         |> map(c => model(r, double(c.index)) - double(c.value))
         |> sum_by(d => d * d)
 
-golden_section(low: double, high: double) -> double => (
+golden_section(low, high) => (
     let ratio = (sqrt(5.0) - 1.0) / 2.0
     let a mut = low, b mut = high
 

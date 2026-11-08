@@ -11,7 +11,7 @@ class NODE(label: string public) is
         "{label} -> {links |> map(n => n.label) |> join(", ")}"
 si
 
-deep_copy(node: NODE) -> NODE is
+deep_copy(node) is
     let seen = MAP()
 
     copy_into(source) is

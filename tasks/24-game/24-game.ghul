@@ -8,14 +8,14 @@ si
 
 let target = 24.0
 
-skip_spaces(text: string, at: int) -> int =>
+skip_spaces(text, at) =>
     if at < text.length /\ text[at] == ' ' then
         skip_spaces(text, at + 1)
     else
         at
     fi
 
-closed(text: string, value: double, at: int) -> Parsed => (
+closed(text, value, at) => (
     let close = skip_spaces(text, at)
 
     if close < text.length /\ text[close] == ')' then
@@ -25,7 +25,7 @@ closed(text: string, value: double, at: int) -> Parsed => (
     fi
 )
 
-parse_atom(text: string, at: int) -> Parsed => (
+parse_atom(text, at) => (
     let start = skip_spaces(text, at)
 
     if start >= text.length then
@@ -43,7 +43,7 @@ parse_atom(text: string, at: int) -> Parsed => (
     fi
 )
 
-apply(left: double, operator: char, right: double) -> double =>
+apply(left, operator, right) =>
     case operator
     when '+' then left + right
     when '-' then left - right
@@ -51,13 +51,7 @@ apply(left: double, operator: char, right: double) -> double =>
     else left / right
     esac
 
-carry_on(
-    text: string,
-    value: double,
-    at: int,
-    operators: string,
-    next: (string, int) -> Parsed
-) -> Parsed => (
+carry_on(text, value, at, operators, next) => (
     let operator_at = skip_spaces(text, at)
 
     if
@@ -80,25 +74,20 @@ carry_on(
     fi
 )
 
-parse_run(
-    text: string,
-    at: int,
-    operators: string,
-    next: (string, int) -> Parsed
-) -> Parsed =>
+parse_run(text, at, operators, next) =>
     case next(text, at)
     when bad: Parsed.BAD then bad
     when head: Parsed.OK then
         carry_on(text, head.value, head.at, operators, next)
     esac
 
-parse_product(text: string, at: int) -> Parsed =>
+parse_product(text, at) =>
     parse_run(text, at, "*/", parse_atom)
 
-parse_sum(text: string, at: int) -> Parsed =>
+parse_sum(text, at) =>
     parse_run(text, at, "+-", parse_product)
 
-sorted_digits(text: string) -> string => (
+sorted_digits(text) => (
     let held = text |> filter(char.is_digit) |> ARRAY()
 
     System.Array.sort(held)
@@ -106,11 +95,11 @@ sorted_digits(text: string) -> string => (
     string(held)
 )
 
-runs_digits_together(text: string) -> bool =>
+runs_digits_together(text) =>
     (0..text.length - 1)
         |> any(at => char.is_digit(text[at]) /\ char.is_digit(text[at + 1]))
 
-judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
+judge(entered, dealt) =>
     if runs_digits_together(entered) then
         (
             told = "digits cannot be run together into longer numbers",

@@ -7,7 +7,7 @@ union Diagram is
     REJECTED(why: string)
 si
 
-cells(row: string) -> string[]? is
+cells(row) is
     let trimmed = row.trim()
 
     if
@@ -66,7 +66,7 @@ read(diagram: string) -> Diagram is
     Diagram.HEADER(fields, width)
 si
 
-bits_of(message: string) -> string =>
+bits_of(message) =>
     string(
         message
             |> flat_map(c =>

@@ -1,7 +1,7 @@
 use default
 use System.Random
 
-knuth_shuffle(items: LIST[int], random: Random) is
+knuth_shuffle(items, random) is
     let i mut = items.count - 1
 
     while i >= 1 do

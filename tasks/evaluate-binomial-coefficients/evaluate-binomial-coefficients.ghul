@@ -1,6 +1,6 @@
 use default
 
-binomial(n: int, k: int) -> long => (
+binomial(n, k) => (
     assert k >= 0 /\ k <= n else "k must lie between 0 and n"
 
     let smaller = if k > n - k then n - k else k fi

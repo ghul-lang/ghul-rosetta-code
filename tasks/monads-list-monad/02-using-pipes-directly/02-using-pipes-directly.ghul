@@ -1,9 +1,9 @@
 use default
 use System.Convert.to_string
 
-divisors(n: int) -> int{} => pipe(1::n) |> filter(d => n % d == 0)
+divisors(n) => pipe(1::n) |> filter(d => n % d == 0)
 
-spellings(n: int) -> string{} => pipe(["{n}", "0b{to_string(n, 2)}"])
+spellings(n) => pipe(["{n}", "0b{to_string(n, 2)}"])
 
 write_line(pipe([6]) |> flat_map(divisors) |> join())
 

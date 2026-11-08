@@ -1,6 +1,6 @@
 use default
 
-categorise(p: int) -> int memo =>
+categorise(p) memo =>
     1 +
     (
         factorize(p + 1)

@@ -1,6 +1,6 @@
 use default
 
-first_different(text: string) -> int? =>
+first_different(text) =>
     1..text.length |> find(i => text[i] != text[0])
 
 for

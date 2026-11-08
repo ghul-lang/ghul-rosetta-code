@@ -5,7 +5,7 @@ use Step = (x: int, y: int)
 
 let signs = [(1, 1), (-1, 1), (1, -1), (-1, -1)]
 
-steps_of_length(squared: int) -> Step[] =>
+steps_of_length(squared) =>
     from(0)
         |> take_while(a => 2 * a * a <= squared)
         |> map(a => (a, int(round(sqrt(double(squared - a * a))))))
@@ -17,14 +17,14 @@ steps_of_length(squared: int) -> Step[] =>
         ])
         |> list()
 
-bend(from: Step, to: Step) -> double =>
+bend(from, to) =>
     let turn =
         atan2(double(from.y), double(from.x)) -
         atan2(double(to.y), double(to.x))
     in
     turn - 2.0 * pi * floor(turn / (2.0 * pi))
 
-spiral(count: int) -> Step{} is
+spiral(count) is
     let points = LIST([(x = 0, y = 0), (x = 0, y = 1)])
     let last mut = (x = 0, y = 1)
     let squared mut = 1

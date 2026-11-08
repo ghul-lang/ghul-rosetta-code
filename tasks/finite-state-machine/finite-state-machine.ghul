@@ -11,7 +11,7 @@ si
 
 use State.*
 
-explicit(state: State, signal: string) -> State? =>
+explicit(state, signal) =>
     case (state, signal)
     when (~READY, "deposit") then WAITING
     when (~READY, "quit") then EXIT
@@ -21,13 +21,13 @@ explicit(state: State, signal: string) -> State? =>
     else null
     esac
 
-implicit(state: State) -> State? =>
+implicit(state) =>
     case state
     when REFUNDING then READY
     else null
     esac
 
-signals(state: State) -> string =>
+signals(state) =>
     case state
     when READY then "deposit or quit"
     when WAITING then "select or refund"
@@ -35,7 +35,7 @@ signals(state: State) -> string =>
     else ""
     esac
 
-name(state: State) -> string => "{state}".to_lower()
+name(state) => "{state}".to_lower()
 
 let state mut = READY
 

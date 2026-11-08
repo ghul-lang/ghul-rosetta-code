@@ -1,6 +1,6 @@
 use default
 
-substrings(text: string) -> string{} is
+substrings(text) is
     for start in 0..text.length do
         for finish in (start + 1)::text.length do
             yield text[start..finish]
@@ -8,7 +8,7 @@ substrings(text: string) -> string{} is
     od
 si
 
-longest_common(left: string, right: string) -> string =>
+longest_common(left, right) =>
     substrings(left)
         |> filter(candidate => right.contains(candidate))
         |> reduce("", (best, candidate) =>

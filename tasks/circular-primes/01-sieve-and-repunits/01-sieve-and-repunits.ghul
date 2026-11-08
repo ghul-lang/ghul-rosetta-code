@@ -19,17 +19,17 @@ let prime = (
     sieve
 )
 
-rotations(n: int) -> int{} =>
+rotations(n) =>
     let digits = "{n}" in
     0..digits.length
         |> map(i =>
             int.parse("{digits.substring(i)}{digits.substring(0, i)}")
         )
 
-is_circular(n: int) -> bool =>
+is_circular(n) =>
     n |> rotations() |> all(rotation => rotation >= n /\ prime[rotation])
 
-probably_prime(n: bigint) -> bool is
+probably_prime(n) is
     strip(d: bigint, s: int) -> (bigint, int) =>
         if d.is_even then strip(d / 2n, s + 1) else (d, s) fi
 
@@ -57,7 +57,7 @@ probably_prime(n: bigint) -> bool is
         |> all(base => base >= n \/ !witness(base))
 si
 
-repunit(n: int) -> bigint => (bigint.pow(10n, n) - 1n) / 9n
+repunit(n) => (bigint.pow(10n, n) - 1n) / 9n
 
 write_line("sieving to {limit:N0}")
 

@@ -23,16 +23,16 @@ class PROBLEM(
 
 let random = System.Random(42)
 
-between(low: double, high: double) -> double =>
+between(low, high) =>
     low + (high - low) * random.next_double()
 
-clamp(p: V2, problem: PROBLEM) -> V2 =>
+clamp(p, problem) =>
     V2(
         Ghul.Math.clamp(p.x, problem.low.x, problem.high.x),
         Ghul.Math.clamp(p.y, problem.low.y, problem.high.y)
     )
 
-swarm(problem: PROBLEM) -> (best: V2, particles: PARTICLE[]) is
+swarm(problem) is
     let f = problem.f
     let span = problem.high - problem.low
 
@@ -77,10 +77,10 @@ swarm(problem: PROBLEM) -> (best: V2, particles: PARTICLE[]) is
     return (best = best, particles = particles)
 si
 
-mccormick(p: V2) -> double =>
+mccormick(p) =>
     sin(p.x + p.y) + (p.x - p.y) * (p.x - p.y) - 1.5 * p.x + 2.5 * p.y + 1.0
 
-michalewicz(p: V2) -> double =>
+michalewicz(p) =>
     let term = (x, i) => sin(x) * pow(sin(i * x * x / pi), 20.0) in
     -(term(p.x, 1.0) + term(p.y, 2.0))
 

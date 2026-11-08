@@ -2,14 +2,14 @@ use default
 
 use RANGE = (low: double, high: double)
 
-normalised(bounds: RANGE) -> RANGE =>
+normalised(bounds) =>
     if bounds.low <= bounds.high then
         bounds
     else
         (low = bounds.high, high = bounds.low)
     fi
 
-by_lower_bound(left: RANGE, right: RANGE) -> int =>
+by_lower_bound(left, right) =>
     if left.low < right.low then
         -1
     elif left.low > right.low then
@@ -18,7 +18,7 @@ by_lower_bound(left: RANGE, right: RANGE) -> int =>
         0
     fi
 
-consolidate(ranges: RANGE[]) -> RANGE[] is
+consolidate(ranges) is
     let sorted = ranges |> map(normalised) |> sort(by_lower_bound)
     let merged = LIST()
 
@@ -39,7 +39,7 @@ consolidate(ranges: RANGE[]) -> RANGE[] is
     return merged
 si
 
-show(ranges: RANGE[]) -> string =>
+show(ranges) =>
     ranges |> map(bounds => "[{bounds.low}, {bounds.high}]") |> join()
 
 let inputs = [

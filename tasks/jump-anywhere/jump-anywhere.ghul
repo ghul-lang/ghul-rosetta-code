@@ -34,7 +34,7 @@ descend(level: int) is
     descend(level - 1)
 si
 
-steps() -> string{} is
+steps() is
     write_line("  generator: started")
     yield "one"
     write_line("  generator: resumed")

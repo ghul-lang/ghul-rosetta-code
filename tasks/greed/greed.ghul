@@ -26,10 +26,10 @@ let score mut = 0
 
 grid[y * width + x] = 0
 
-inside(column: int, row: int) -> bool =>
+inside(column, row) =>
     column >= 0 /\ column < width /\ row >= 0 /\ row < height
 
-reach(dx: int, dy: int) -> int is
+reach(dx, dy) is
     if !inside(x + dx, y + dy) then
         return 0
     fi
@@ -64,7 +64,7 @@ show() is
     write_line("score {score}")
 si
 
-can_move() -> bool =>
+can_move() =>
     directions.values |> any((dx, dy) => reach(dx, dy) > 0)
 
 show()

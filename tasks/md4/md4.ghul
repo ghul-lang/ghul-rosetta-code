@@ -8,7 +8,7 @@ let round_three_order = [
     0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15
 ]
 
-rotate_left(value: uint, count: int) -> uint =>
+rotate_left(value, count) =>
     (value << count) | (value >>> (32 - count))
 
 padded(message: ubyte[]) -> ubyte[] is
@@ -29,12 +29,12 @@ padded(message: ubyte[]) -> ubyte[] is
     return block
 si
 
-word(block: ubyte[], at: int) -> uint =>
+word(block, at) =>
     0..4
         |> map(index => uint(block[at + index]) << (8 * index))
         |> reduce(0u, * | *)
 
-md4(message: ubyte[]) -> string is
+md4(message) is
     let block = padded(message)
 
     let state = LIST([

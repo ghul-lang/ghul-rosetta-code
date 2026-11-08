@@ -11,7 +11,7 @@ use Alternation.LITERAL
 use Alternation.SEQUENCE
 use Alternation.BRANCHES
 
-take_pending(pending: StringBuilder, items: LIST[Alternation]) is
+take_pending(pending, items) is
     if pending.length > 0 then
         items.add(LITERAL(pending.to_string()))
         pending.clear()
@@ -93,7 +93,7 @@ parse(text: string, start: int, nested: bool) -> (
     return (tree = SEQUENCE(unpaired), next = position)
 si
 
-expand_from(items: Alternation[], at: int) -> string{} is
+expand_from(items, at) is
     if at == items.count then
         yield ""
     else
@@ -105,7 +105,7 @@ expand_from(items: Alternation[], at: int) -> string{} is
     fi
 si
 
-expand(tree: Alternation) -> string{} is
+expand(tree) is
     if let leaf: LITERAL = tree then
         yield leaf.text
     elif let sequence: SEQUENCE = tree then
@@ -117,7 +117,7 @@ expand(tree: Alternation) -> string{} is
     fi
 si
 
-expansions(text: string) -> string{} => expand(parse(text, 0, false).tree)
+expansions(text) => expand(parse(text, 0, false).tree)
 
 let inputs = [
     "~/{{Downloads,Pictures}}/*.{{jpg,gif,png}}",

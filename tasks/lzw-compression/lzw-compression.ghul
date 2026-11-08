@@ -3,7 +3,7 @@ use System.Text.StringBuilder
 
 let alphabet_size = 256
 
-compress(text: string) -> int[] is
+compress(text) is
     let codes =
         0..alphabet_size
             |> collect_mutable_map(code => "{char(code)}", code => code)
@@ -30,7 +30,7 @@ compress(text: string) -> int[] is
     return compressed
 si
 
-decompress(compressed: int[]) -> string is
+decompress(compressed) is
     if compressed.count == 0 then
         return ""
     fi

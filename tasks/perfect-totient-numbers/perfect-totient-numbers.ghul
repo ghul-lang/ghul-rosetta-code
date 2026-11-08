@@ -1,6 +1,6 @@
 use default
 
-totient_sum(value: int) -> int memo =>
+totient_sum(value) memo =>
     if value > 1 then
         let next = totient(value) in
         next + totient_sum(next)
@@ -8,7 +8,7 @@ totient_sum(value: int) -> int memo =>
         0
     fi
 
-perfect_totients(count: int) -> int{} =>
+perfect_totients(count) =>
     from(2) |> filter(c => totient_sum(c) == c) |> take(count)
 
 let terms = perfect_totients(20) |> map(term => "{term}")

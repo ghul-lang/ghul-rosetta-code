@@ -22,7 +22,7 @@ take(lock_path: string) -> IO.FileStream? is
     yrt
 si
 
-run_second_instance(lock_path: string) is
+run_second_instance(lock_path) is
     let how = ProcessStartInfo(Environment.process_path!)
 
     how.redirect_standard_output = true

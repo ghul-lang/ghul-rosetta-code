@@ -1,6 +1,6 @@
 use default
 
-difference(from: double, to: double) -> double =>
+difference(from, to) =>
     ieee_remainder(to - from, 360.0)
 
 let pairs = [

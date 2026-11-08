@@ -20,7 +20,7 @@ for candidate in 2::limit do
     fi
 od
 
-goldbach(even: int) -> int =>
+goldbach(even) =>
     (2::even / 2)
         |> filter(p => is_prime[p] /\ is_prime[even - p])
         |> count()

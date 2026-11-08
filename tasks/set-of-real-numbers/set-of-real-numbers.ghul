@@ -2,35 +2,35 @@ use default
 
 use RealSet = (double) -> bool
 
-open_range(low: double, high: double) -> RealSet =>
+open_range(low, high) =>
     value => low < value /\ value < high
 
-closed_range(low: double, high: double) -> RealSet =>
+closed_range(low, high) =>
     value => low <= value /\ value <= high
 
-open_closed(low: double, high: double) -> RealSet =>
+open_closed(low, high) =>
     value => low < value /\ value <= high
 
-closed_open(low: double, high: double) -> RealSet =>
+closed_open(low, high) =>
     value => low <= value /\ value < high
 
-joined(left: RealSet, right: RealSet) -> RealSet =>
+joined(left, right) =>
     value => left(value) \/ right(value)
 
-shared(left: RealSet, right: RealSet) -> RealSet =>
+shared(left, right) =>
     value => left(value) /\ right(value)
 
-without(left: RealSet, right: RealSet) -> RealSet =>
+without(left, right) =>
     value => left(value) /\ !right(value)
 
-samples(low: double, high: double, steps: int) -> double{} =>
+samples(low, high, steps) =>
     (0::steps)
         |> map(step => low + (high - low) * double(step) / double(steps))
 
-is_empty(set: RealSet, low: double, high: double, steps: int) -> bool =>
+is_empty(set, low, high, steps) =>
     samples(low, high, steps) |> all(value => !set(value))
 
-extent(set: RealSet, low: double, high: double, steps: int) -> double =>
+extent(set, low, high, steps) =>
     let inside = samples(low, high, steps) |> filter(set) |> count() in
     (high - low) * double(inside) / double(steps)
 

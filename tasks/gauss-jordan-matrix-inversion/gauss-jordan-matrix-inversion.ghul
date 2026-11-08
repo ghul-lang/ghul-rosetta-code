@@ -1,6 +1,6 @@
 use default
 
-invert(a: double[][]) -> double[][] is
+invert(a) is
     let n = a.count
 
     let rows =
@@ -37,7 +37,7 @@ invert(a: double[][]) -> double[][] is
     rows |> map(row => row |> skip(n) |> list()) |> list()
 si
 
-show(matrix: double[][]) =>
+show(matrix) =>
     for row in matrix do
         write_line(row |> map(v => "{v,10:F5}") |> join(""))
     od

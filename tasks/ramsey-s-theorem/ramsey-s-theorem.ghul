@@ -5,7 +5,7 @@ let n = 17
 
 let residues = 1..n |> map(i => i * i % n) |> list()
 
-linked(a: int, b: int) -> bool =>
+linked(a, b) =>
     let d = ((a - b) % n + n) % n in
     residues |> any(* == d)
 
@@ -25,7 +25,7 @@ for a in 0..n do
     write_line(row |> join(" "))
 od
 
-quads() -> (int, int, int, int){} is
+quads() is
     for a in 0..n do
         for b in a + 1..n do
             for c in b + 1..n do
@@ -37,7 +37,7 @@ quads() -> (int, int, int, int){} is
     od
 si
 
-uniform(q: (int, int, int, int)) -> bool =>
+uniform(q) =>
     let
         (a, b, c, d) = q,
         pairs = [
@@ -65,7 +65,7 @@ let image = IMAGE(420, 420)
 image.view(-1.15, -1.15, 1.15, 1.15)
 image.clear(252ub, 252ub, 250ub)
 
-at(i: int) -> (x: double, y: double) =>
+at(i) =>
     let
         turn = double(i) / double(n),
         angle = pi / 2.0 - 2.0 * pi * turn

@@ -3,7 +3,7 @@ use default
 let ten = 10n
 let eleven = 11n
 
-rank(values: bigint[]) -> bigint =>
+rank(values) =>
     values
         |> reduce(1n, (acc, value) =>
             value.to_string()
@@ -13,7 +13,7 @@ rank(values: bigint[]) -> bigint =>
                 )
         )
 
-unrank(index: bigint) -> bigint{} is
+unrank(index) is
     let digits = LIST()
     let remaining mut = index
 

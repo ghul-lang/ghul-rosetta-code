@@ -1,9 +1,6 @@
 use default
 
-rk4(f: (double, double) -> double, dt: double) -> ((double, double)) -> (
-    double,
-    double
-) =>
+rk4(f, dt) =>
     ((t, y)) => (
         let dy1 = dt * f(t, y)
         let dy2 = dt * f(t + dt / 2.0, y + dy1 / 2.0)

@@ -10,7 +10,7 @@ let pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> LIST()
 
 let seed mut = 20260920u
 
-next_letter() -> char is
+next_letter() is
     seed = seed * 1103515245u + 12345u
 
     let drawn = int(seed >>> 16) % pool.count
@@ -46,7 +46,7 @@ let cells =
 
 let chosen = LIST()
 
-corners(x: double, y: double) -> (double, double)[] =>
+corners(x, y) =>
     0..6
         |> map(corner =>
             let angle = double(corner) * pi / 3.0 in

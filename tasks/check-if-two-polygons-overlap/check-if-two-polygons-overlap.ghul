@@ -6,32 +6,32 @@ use Polygon = Point[]
 
 ⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y
 
-normal(corner: Point, next: Point) -> Point => (
+normal(corner, next) => (
     x = corner.y - next.y,
     y = next.x - corner.x
 )
 
-axes(shape: Polygon) -> Point{} =>
+axes(shape) =>
     0..shape.count
         |> map(index =>
             normal(shape[index], shape[(index + 1) % shape.count])
         )
 
-spread(polygon: Polygon, axis: Point) -> (low: double, high: double) =>
+spread(polygon, axis) =>
     let alongs = polygon |> map(corner => corner ⋅ axis) |> list() in
     (
         low = alongs |> reduce(alongs[0], min),
         high = alongs |> reduce(alongs[0], max)
     )
 
-separated(first: Polygon, second: Polygon, axis: Point) -> bool =>
+separated(first, second, axis) =>
     let
         (low, high) = spread(first, axis),
         (other_low, other_high) = spread(second, axis)
     in
         high < other_low \/ other_high < low
 
-overlap(first: Polygon, second: Polygon) -> bool =>
+overlap(first, second) =>
     !(axes(first) ++ axes(second) |> any(separated(first, second, *)))
 
 polygon(corners: (double, double)[]) -> Polygon =>

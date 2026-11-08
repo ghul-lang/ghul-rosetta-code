@@ -1,6 +1,6 @@
 use default
 
-to_reduced_row_echelon_form(m: LIST[LIST[double]]) is
+to_reduced_row_echelon_form(m) is
     let columns = m[0].count
 
     let lead mut = 0

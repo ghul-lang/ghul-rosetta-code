@@ -1,6 +1,6 @@
 use default
 
-squeezed(text: string, target: char) -> char{} is
+squeezed(text, target) is
     let previous mut = null
 
     for ch in text do
@@ -12,10 +12,10 @@ squeezed(text: string, target: char) -> char{} is
     od
 si
 
-squeeze(text: string, target: char) -> string =>
+squeeze(text, target) =>
     text |> squeezed(target) |> string()
 
-show(text: string, target: char) is
+show(text, target) is
     let result = squeeze(text, target)
 
     write_line("squeeze character: '{target}'")

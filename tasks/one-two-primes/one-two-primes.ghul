@@ -1,15 +1,15 @@
 use default
 
-digit_at(bits: long, position: int) -> char =>
+digit_at(bits, position) =>
     if (bits >> position) & 1L == 1L then '2' else '1' fi
 
-one_two_numbers(digits: int) -> string{} =>
+one_two_numbers(digits) =>
     0L..(1L << digits)
         |> map(bits =>
             string(0..digits |> map(i => digit_at(bits, digits - 1 - i)))
         )
 
-smallest_prime(digits: int) -> string =>
+smallest_prime(digits) =>
     one_two_numbers(digits) |> find(text => is_prime(bigint.parse(text)))!
 
 for digits in 1::20 do

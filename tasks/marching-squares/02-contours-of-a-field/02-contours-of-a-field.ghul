@@ -10,7 +10,7 @@ let peaks = [
     (x = 0.2, y = -1.6, height = -0.9, spread = 0.7)
 ]
 
-height_at(x: double, y: double) -> double =>
+height_at(x, y) =>
     peaks
         |> sum_by(peak => (
             let across = x - peak.x
@@ -27,18 +27,12 @@ let top = 2.4
 
 let steps = 120
 
-sample(column: int, row: int) -> Point => (
+sample(column, row) => (
     x = left + (right - left) * double(column) / double(steps),
     y = bottom + (top - bottom) * double(row) / double(steps)
 )
 
-crossing(
-    from: Point,
-    from_height: double,
-    to: Point,
-    to_height: double,
-    level: double
-) -> Point => (
+crossing(from, from_height, to, to_height, level) => (
     let part = (level - from_height) / (to_height - from_height)
 
     (
@@ -47,7 +41,7 @@ crossing(
     )
 )
 
-contour(level: double) -> (from: Point, to: Point){} is
+contour(level) is
     for row in 0..steps do
         for column in 0..steps do
             let south_west = sample(column, row)

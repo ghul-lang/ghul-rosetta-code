@@ -2,7 +2,7 @@ use default
 
 use System.Numerics.Complex
 
-roots_of_unity(n: int) -> Complex{} =>
+roots_of_unity(n) =>
     (0..n)
         |> map(k =>
             Complex.from_polar_coordinates(
@@ -11,9 +11,9 @@ roots_of_unity(n: int) -> Complex{} =>
             )
         )
 
-tidy(x: double) -> double => if abs(x) < 0.00005 then 0.0 else x fi
+tidy(x) => if abs(x) < 0.00005 then 0.0 else x fi
 
-show(z: Complex) -> string =>
+show(z) =>
     let
         re = tidy(z.real),
         im = tidy(z.imaginary)

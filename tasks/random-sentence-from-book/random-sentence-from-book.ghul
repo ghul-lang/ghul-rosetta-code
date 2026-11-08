@@ -10,7 +10,7 @@ let apostrophes = ['\'', '\u2019']
 
 // The book proper sits between Gutenberg's own markers, which are not
 // part of what the task asks to read.
-book_text(path: string) -> string =>
+book_text(path) =>
     let whole = IO.File.read_all_text(path) in
     let start = whole.index_of("*** START OF THE PROJECT GUTENBERG EBOOK")
     in
@@ -21,7 +21,7 @@ book_text(path: string) -> string =>
     whole.substring(from, finish - from)
 
 
-words_of(text: string) -> string[] is
+words_of(text) is
     let words = LIST()
     let current = System.Text.StringBuilder()
 
@@ -78,10 +78,10 @@ for i in 0..words.count - 2 do
     after_two[pair].add(next)
 od
 
-pick(choices: string[]) -> string =>
+pick(choices) =>
     choices[random.next(0, choices.count)]
 
-sentence() -> string is
+sentence() is
     let chosen = LIST()
 
     let first = pick(after_one["."])

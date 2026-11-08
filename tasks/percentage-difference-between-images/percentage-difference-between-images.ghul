@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -51,9 +51,9 @@ scene() -> IMAGE is
     image
 si
 
-coarse(value: ubyte) -> ubyte => ubyte(int(value) / 16 * 16 + 8)
+coarse(value) => ubyte(int(value) / 16 * 16 + 8)
 
-reduced(image: IMAGE) -> IMAGE is
+reduced(image) is
     let copy = IMAGE(image.width, image.height)
 
     for y in 0..image.height do
@@ -73,9 +73,9 @@ reduced(image: IMAGE) -> IMAGE is
     copy
 si
 
-gap(a: ubyte, b: ubyte) -> long => long(abs(int(a) - int(b)))
+gap(a, b) => long(abs(int(a) - int(b)))
 
-difference(a: IMAGE, b: IMAGE) -> double is
+difference(a, b) is
     assert a.width == b.width /\ a.height == b.height
         else "the images are not the same size"
 

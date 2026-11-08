@@ -1,6 +1,6 @@
 use default
 
-pollard_rho(value: bigint, budget: int) -> bigint? is
+pollard_rho(value, budget) is
     let slow mut = 2n
     let fast mut = 2n
     let divisor mut = 1n
@@ -19,7 +19,7 @@ pollard_rho(value: bigint, budget: int) -> bigint? is
     return null
 si
 
-factors(value: bigint) -> bigint{} is
+factors(value) is
     if is_prime(value) then
         yield value
     elif let divisor = pollard_rho(value, 1_000_000) then
@@ -30,7 +30,7 @@ factors(value: bigint) -> bigint{} is
     fi
 si
 
-fermat(index: int) -> bigint => bigint.pow(2n, 1 << index) + 1n
+fermat(index) => bigint.pow(2n, 1 << index) + 1n
 
 write_line("the first ten Fermat numbers:")
 

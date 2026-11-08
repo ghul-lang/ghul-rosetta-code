@@ -10,15 +10,15 @@ let offsets = [
 neighbours((row, column): (int, int)) -> (int, int){} =>
     offsets |> map(((dr, dc)) => (row + dr, column + dc))
 
-survives(live: SET[(int, int)], cell: (int, int)) -> bool =>
+survives(live, cell) =>
     let alive = neighbours(cell) |> count(live.contains(*)) in
     alive == 3 \/ (alive == 2 /\ live.contains(cell))
 
 // A cell can only be alive next generation if it is next to a live one now.
-step(live: SET[(int, int)]) -> SET[(int, int)] =>
+step(live) =>
     live |> flat_map(neighbours) |> filter(survives(live, *)) |> SET()
 
-show(generation: int, live: SET[(int, int)]) is
+show(generation, live) is
     write_line("generation {generation}")
 
     for row in 0..5 do

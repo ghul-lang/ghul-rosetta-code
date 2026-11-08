@@ -6,24 +6,24 @@ let size = 3
 
 let source = System.Random(20260909)
 
-fresh() -> LIST[int] => 0..size * size |> map(_ => source.next(2)) |> LIST()
+fresh() => 0..size * size |> map(_ => source.next(2)) |> LIST()
 
-flip_row(board: LIST[int], row: int) is
+flip_row(board, row) is
     for column in 0..size do
         board[row * size + column] = 1 - board[row * size + column]
     od
 si
 
-flip_column(board: LIST[int], column: int) is
+flip_column(board, column) is
     for row in 0..size do
         board[row * size + column] = 1 - board[row * size + column]
     od
 si
 
-same(left: int[], right: int[]) -> bool =>
+same(left, right) =>
     0..size * size |> all(cell => left[cell] == right[cell])
 
-show(caption: string, board: int[]) is
+show(caption, board) is
     write_line(caption)
 
     let letters = 0..size |> map(c => "{char(int('a') + c)}")

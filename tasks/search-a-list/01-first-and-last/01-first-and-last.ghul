@@ -5,7 +5,7 @@ let haystack = [
     "Bozo"
 ]
 
-positions(needle: string) -> int{} =>
+positions(needle) =>
     haystack
         |> index()
         |> filter(e => e.value =~ needle)
@@ -14,10 +14,10 @@ positions(needle: string) -> int{} =>
 missing(needle: string) -> int =>
     throw Ghul.Exception("{needle} is not in the haystack")
 
-first_index(needle: string) -> int =>
+first_index(needle) =>
     positions(needle) |> first() ?? missing(needle)
 
-last_index(needle: string) -> int =>
+last_index(needle) =>
     positions(needle) |> take_last(1) |> first() ?? missing(needle)
 
 for needle in ["Bush", "Washington"] do

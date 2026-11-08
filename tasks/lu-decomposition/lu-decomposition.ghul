@@ -11,7 +11,7 @@ use Matrix = double[][]
         )
         |> list()
 
-square(n: int, cell: (int, int) -> double) -> LIST[LIST[double]] =>
+square(n, cell) =>
     0..n |> map(i => 0..n |> map(cell(i, *)) |> LIST()) |> LIST()
 
 pivot(a: Matrix) -> Matrix => (
@@ -55,7 +55,7 @@ decompose(a: Matrix) -> (
     (lower, upper, p)
 si
 
-show(name: string, m: Matrix, format: string) is
+show(name, m, format) is
     write_line(name)
 
     for row in m do

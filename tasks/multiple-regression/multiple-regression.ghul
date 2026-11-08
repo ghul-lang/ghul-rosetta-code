@@ -2,7 +2,7 @@ use default
 
 use Matrix = double[][]
 
-transpose(m: Matrix) -> Matrix =>
+transpose(m) =>
     0..m[0].count
         |> map(c => 0..m.count |> map(r => m[r][c]) |> list())
         |> list()
@@ -16,7 +16,7 @@ transpose(m: Matrix) -> Matrix =>
         )
         |> list()
 
-solve(a: Matrix, b: double[]) -> double{} is
+solve(a, b) is
     let n = b.count
 
     let rows = 0..n |> map(i => a[i] ++ [b[i]] |> LIST()) |> LIST()
@@ -44,7 +44,7 @@ solve(a: Matrix, b: double[]) -> double{} is
     x
 si
 
-regress(y: double[], x: Matrix) -> double{} =>
+regress(y, x) =>
     let
         xt = transpose(x),
         xty = xt * (y |> map(v => [v]) |> list())

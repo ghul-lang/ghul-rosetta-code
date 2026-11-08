@@ -2,13 +2,13 @@ use default
 use System.Globalization
 use System.Text.NormalizationForm
 
-plain_whitespace(text: string) -> string =>
+plain_whitespace(text) =>
     text
         |> map(letter =>
             if char.is_white_space(letter) then ' ' else letter fi)
         |> join("")
 
-single_spaces(text: string) -> string => (
+single_spaces(text) => (
     let kept = LIST()
 
     for letter in text do
@@ -24,15 +24,15 @@ single_spaces(text: string) -> string => (
     joined.trim()
 )
 
-folded_case(text: string) -> string => text.to_lower()
+folded_case(text) => text.to_lower()
 
-replaced_letters(text: string) -> string =>
+replaced_letters(text) =>
     text
         .replace("\u00DF", "ss")
         .replace("\u017F", "s")
         .replace("\u0292", "s")
 
-split_ligatures(text: string) -> string =>
+split_ligatures(text) =>
     text
         .replace("\u0133", "ij")
         .replace("\u00E6", "ae")
@@ -40,7 +40,7 @@ split_ligatures(text: string) -> string =>
         .replace("\uFB01", "fi")
         .replace("\uFB02", "fl")
 
-bare_letters(text: string) -> string =>
+bare_letters(text) =>
     text.normalize(NormalizationForm.FORM_D)
         |> filter(letter =>
             CharUnicodeInfo.get_unicode_category(letter) !=
@@ -54,10 +54,10 @@ let transforms =
     [plain_whitespace, single_spaces, folded_case, replaced_letters,
      split_ligatures, bare_letters, without_leading_article]
 
-key(text: string) -> string =>
+key(text) =>
     transforms |> reduce(text, (running, step) => step(running))
 
-runs(text: string) -> string{} is
+runs(text) is
     let held = LIST()
 
     for letter in text do
@@ -79,14 +79,14 @@ runs(text: string) -> string{} is
     fi
 si
 
-is_number(part: string) -> bool =>
+is_number(part) =>
     part.length > 0 /\ (part |> all(char.is_digit))
 
-without_leading_zeros(part: string) -> string =>
+without_leading_zeros(part) =>
     let trimmed = part.trim_start('0') in
     if trimmed.length == 0 then "0" else trimmed fi
 
-compare_parts(left: string, right: string) -> int =>
+compare_parts(left, right) =>
     if is_number(left) /\ is_number(right) then
         let
             a = without_leading_zeros(left),
@@ -101,7 +101,7 @@ compare_parts(left: string, right: string) -> int =>
         string.compare_ordinal(left, right)
     fi
 
-naturally(left: string, right: string) -> int is
+naturally(left, right) is
     let first = left |> key() |> runs() |> list()
     let second = right |> key() |> runs() |> list()
     let shared = if first.count < second.count then first.count
@@ -116,12 +116,12 @@ naturally(left: string, right: string) -> int is
     first.count <> second.count
 si
 
-visible(text: string) -> string =>
+visible(text) =>
     text
         .replace("\t", "\\t").replace("\n", "\\n").replace("\r", "\\r")
         .replace("\u000B", "\\v").replace("\u000C", "\\f")
 
-demonstrate(feature: string, samples: string[]) is
+demonstrate(feature, samples) is
     write_line("{feature}:")
     write_line("  given:")
 

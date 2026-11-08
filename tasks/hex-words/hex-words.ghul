@@ -5,7 +5,7 @@ use Entry = (word: string, value: long, root: long, distinct: int)
 digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
 
-is_hex_word(word: string) -> bool =>
+is_hex_word(word) =>
     word.length >= 4 /\ word |> all(c => c >= 'a' /\ c <= 'f')
 
 let entries =
@@ -21,7 +21,7 @@ let entries =
             )
         )
 
-show(title: string, rows: Entry[]) is
+show(title, rows) is
     write_line(title)
 
     for row in rows do

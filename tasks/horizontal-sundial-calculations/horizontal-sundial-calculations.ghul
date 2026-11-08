@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-ask(prompt: string) -> double? is
+ask(prompt) is
     write_line(prompt)
 
     let line = read_line()
@@ -18,8 +18,8 @@ ask(prompt: string) -> double? is
     )
 si
 
-radians(degrees: double) -> double => degrees * pi / 180.0
-degrees(radians: double) -> double => radians * 180.0 / pi
+radians(degrees) => degrees * pi / 180.0
+degrees(radians) => radians * 180.0 / pi
 
 while let
     latitude = ask("latitude in degrees, negative for south:"),

@@ -1,14 +1,14 @@
 use default
 
-from_array(values: int[]) -> int[] =>
+from_array(values) =>
     let result = values |> list() in
     result
 
-text_of(values: int[]) -> string =>
+text_of(values) =>
     let texts = values |> map(value => "{value}") in
     texts |> join(" ")
 
-binomial_transform(values: int[], forward: bool) -> int[] =>
+binomial_transform(values, forward) =>
     (0..values.count)
         |> map(n =>
             (0::n)
@@ -25,7 +25,7 @@ binomial_transform(values: int[], forward: bool) -> int[] =>
         )
         |> list()
 
-show(name: string, values: int[]) is
+show(name, values) is
     let original = from_array(values)
     let forward = binomial_transform(original, true)
     let inverse = binomial_transform(original, false)

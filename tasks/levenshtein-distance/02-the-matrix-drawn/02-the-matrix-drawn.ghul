@@ -11,7 +11,7 @@ let cell = 38
 let left = 46
 let top = 58
 
-distances(source: string, target: string) -> int[][] is
+distances(source, target) is
     let rows = LIST[int[]]()
     let first = 0::target.length |> list()
 

@@ -2,7 +2,7 @@ use default
 
 use Record = (name: string, sequence: string)
 
-records(lines: string{}) -> Record{} is
+records(lines) is
     let name mut = null
     let sequence = System.Text.StringBuilder()
 

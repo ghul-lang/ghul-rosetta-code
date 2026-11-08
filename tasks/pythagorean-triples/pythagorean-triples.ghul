@@ -1,6 +1,6 @@
 use default
 
-count(limit: long) -> (total: long, primitive: long) is
+count(limit) is
     let total mut = 0L
     let primitive mut = 0L
     let m mut = 2L

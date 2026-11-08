@@ -7,7 +7,7 @@ use System.Diagnostics.Stopwatch
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 use Sorter = (name: string, sort: (LIST[int]) -> void, color: Color)
 
-insertion_sort(xs: LIST[int]) is
+insertion_sort(xs) is
     for i in 1..xs.count do
         let x = xs[i]
         let j mut = i - 1
@@ -21,7 +21,7 @@ insertion_sort(xs: LIST[int]) is
     od
 si
 
-shell_sort(xs: LIST[int]) is
+shell_sort(xs) is
     let gap mut = 1
 
     while gap < xs.count / 3 do
@@ -45,7 +45,7 @@ shell_sort(xs: LIST[int]) is
     od
 si
 
-quicksort(xs: LIST[int]) => partition_sort(xs, 0, xs.count - 1)
+quicksort(xs) => partition_sort(xs, 0, xs.count - 1)
 
 partition_sort(xs: LIST[int], low: int, high: int) is
     if low >= high then
@@ -71,7 +71,7 @@ partition_sort(xs: LIST[int], low: int, high: int) is
     partition_sort(xs, i, high)
 si
 
-library_sort(xs: LIST[int]) => xs.sort()
+library_sort(xs) => xs.sort()
 
 let random = System.Random(1)
 
@@ -92,7 +92,7 @@ let sorts: Sorter[] = [
 
 let powers = (6::14) |> list()
 
-microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
+microseconds(sort, data) =>
     (0..3)
         |> map(_ =>
             let
@@ -106,7 +106,7 @@ microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
         )
         |> min()!
 
-log2(x: double) -> double => Ghul.Math.log2(max(x, 1.0))
+log2(x) => Ghul.Math.log2(max(x, 1.0))
 
 for (name, make) in inputs do
     let data = powers |> map(p => make(1 << p))

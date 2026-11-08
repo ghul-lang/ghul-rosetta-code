@@ -1,6 +1,6 @@
 use default
 
-symbols() -> string[] => [
+symbols() => [
     "H", "He",
     "Li", "Be", "B", "C", "N", "O", "F", "Ne",
     "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
@@ -18,7 +18,7 @@ symbols() -> string[] => [
     "Ts", "Og"
 ]
 
-position(z: int) -> (row: int, column: int) is
+position(z) is
     if z <= 2 then
         (row = 1, column = if z == 1 then 1 else 18 fi)
     elif z <= 18 then

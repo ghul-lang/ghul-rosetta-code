@@ -1,6 +1,6 @@
 use default
 
-floor_div(a: bigint, b: bigint) -> bigint =>
+floor_div(a, b) =>
     let q = a / b in
     if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then
         q - 1n
@@ -8,9 +8,9 @@ floor_div(a: bigint, b: bigint) -> bigint =>
         q
     fi
 
-modulo(a: bigint, m: bigint) -> bigint => ((a % m) + m) % m
+modulo(a, m) => ((a % m) + m) % m
 
-inverse(value: bigint, m: bigint) -> bigint => (
+inverse(value, m) => (
     let (r0, r1) mut = (modulo(value, m), m)
     let (s0, s1) mut = (1n, 0n)
 
@@ -24,7 +24,7 @@ inverse(value: bigint, m: bigint) -> bigint => (
     modulo(s0, m)
 )
 
-without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) => (
+without_p(n, p) => (
     let rest mut = n
     let count mut = 0
 
@@ -36,7 +36,7 @@ without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) => (
     (rest, count)
 )
 
-show(digits: bigint[], exponent: int) -> string =>
+show(digits, exponent) =>
     let text = digits |> reverse() |> map(d => "{d}") |> join("") in
     if exponent >= 0 then
         "...{text}{string('0', exponent)}.0"
@@ -45,7 +45,7 @@ show(digits: bigint[], exponent: int) -> string =>
         "...{text.substring(0, split)}.{text.substring(split)}"
     fi
 
-to_digits(n: bigint, p: bigint, k: int) -> bigint[] =>
+to_digits(n, p, k) =>
     0..k |> map(i => n / bigint.pow(p, i) % p) |> ARRAY()
 
 // the rational a/b nearest to n modulo p^k, by Gauss lattice reduction
@@ -75,7 +75,7 @@ si
 // every residue modulo p^j whose square is u modulo p^j, one digit at a
 // time; for p = 2 a square root is only settled from three digits up
 
-square_roots(u: bigint, p: bigint, digits: int) -> bigint[] is
+square_roots(u, p, digits) is
     let start = if p =~ 2n then 3 else 1 fi
     let modulus mut = bigint.pow(p, start)
 

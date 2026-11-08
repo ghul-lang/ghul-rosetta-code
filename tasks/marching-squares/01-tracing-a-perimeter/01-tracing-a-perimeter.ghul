@@ -21,20 +21,20 @@ let grid = [
     "....."
 ]
 
-filled(column: int, row: int) -> bool =>
+filled(column, row) =>
     row >= 0 /\
     row < grid.count /\
     column >= 0 /\
     column < grid[row].length /\
     grid[row][column] == '#'
 
-corner(column: int, row: int) -> int =>
+corner(column, row) =>
     if filled(column - 1, row - 1) then 1 else 0 fi +
     if filled(column, row - 1) then 2 else 0 fi +
     if filled(column - 1, row) then 4 else 0 fi +
     if filled(column, row) then 8 else 0 fi
 
-heading(value: int, previous: Step?) -> Step =>
+heading(value, previous) =>
     case value
     when 1, 5, 13 then north
     when 2, 3, 7 then east
@@ -67,7 +67,7 @@ assert inked.count > 0 else "the grid has no filled cell"
 
 let start = inked[0]
 
-walk(column: int, row: int, previous: Step?) -> Step{} =>
+walk(column, row, previous) =>
     let facing = heading(corner(column, row), previous) in
     if
         column + facing.across == start.column /\

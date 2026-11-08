@@ -59,7 +59,7 @@ class CLUSTERS is
     si
 si
 
-density(size: int) -> double =>
+density(size) =>
     let total = (0..runs) |> sum_by(_ => double(CLUSTERS(size).count)) in
     total / double(runs) / double(size * size)
 

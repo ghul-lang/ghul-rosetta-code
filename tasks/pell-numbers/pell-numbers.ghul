@@ -1,6 +1,6 @@
 use default
 
-pell_recurrence(first: bigint, second: bigint) -> bigint{} is
+pell_recurrence(first, second) is
     let previous mut = first
     let current mut = second
 
@@ -14,11 +14,11 @@ pell_recurrence(first: bigint, second: bigint) -> bigint{} is
     od
 si
 
-pells() -> bigint{} => pell_recurrence(0n, 1n)
+pells() => pell_recurrence(0n, 1n)
 
-pell_lucas() -> bigint{} => pell_recurrence(2n, 2n)
+pell_lucas() => pell_recurrence(2n, 2n)
 
-approximations() -> (numerator: bigint, denominator: bigint){} =>
+approximations() =>
     pells()
         |> windows(2)
         |> map(pair => (
@@ -26,18 +26,18 @@ approximations() -> (numerator: bigint, denominator: bigint){} =>
             denominator = pair[1]
         ))
 
-pell_primes() -> (index: int, value: bigint){} =>
+pell_primes() =>
     pells()
         |> index()
         |> filter(entry => is_prime(entry.value))
         |> map(entry => (index = entry.index, value = entry.value))
 
-newman_shanks_williams() -> bigint{} =>
+newman_shanks_williams() =>
     pells() |> chunk(2) |> map(pair => pair[0] + pair[1])
 
 use TRIANGLE = (short: bigint, long: bigint, hypotenuse: bigint)
 
-near_isosceles_triples() -> TRIANGLE{} is
+near_isosceles_triples() is
     let running mut = 0n
     let position mut = 0
 

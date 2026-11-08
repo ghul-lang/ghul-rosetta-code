@@ -7,7 +7,7 @@ si
 
 use Nested.*
 
-flatten(node: Nested) -> int{} is
+flatten(node) is
     case node
     when (value): ATOM then
         yield value
@@ -18,7 +18,7 @@ flatten(node: Nested) -> int{} is
     esac
 si
 
-show(node: Nested) -> string =>
+show(node) =>
     case node
     when (value): ATOM then "{value}"
     when (items): LIST then "[{items |> map(show) |> join(", ")}]"

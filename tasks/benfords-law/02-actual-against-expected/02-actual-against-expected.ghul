@@ -31,7 +31,7 @@ let image = IMAGE(700, 470)
 
 image.view(0.3, 0.0, 9.7, 33.0, 62.0)
 
-box(left: double, bottom: double, right: double, top: double) is
+box(left, bottom, right, top) is
     image.fill([
         (x = left, y = bottom),
         (x = right, y = bottom),

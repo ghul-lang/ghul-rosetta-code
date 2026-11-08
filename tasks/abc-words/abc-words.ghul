@@ -1,6 +1,6 @@
 use default
 
-is_abc_word(word: string) -> bool =>
+is_abc_word(word) =>
     let
         a = word.index_of('a'),
         b = word.index_of('b'),

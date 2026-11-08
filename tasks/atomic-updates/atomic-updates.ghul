@@ -35,7 +35,7 @@ let random = System.Random(42)
 let buckets = BUCKETS([10, 20, 30, 40, 50])
 let rounds = 6
 
-pick() -> int => random.next(0, buckets.count)
+pick() => random.next(0, buckets.count)
 
 equalise() -> COROUTINE is
     for _ in 1::rounds do

@@ -1,6 +1,6 @@
 use default
 
-has_five_weekends(year: int, month: int) -> bool =>
+has_five_weekends(year, month) =>
     System.DateTime.days_in_month(year, month) == 31 /\
     System.DateTime(year, month, 1).day_of_week == System.DayOfWeek.FRIDAY
 
@@ -13,7 +13,7 @@ let months = [
     if has_five_weekends(year, month)
 ]
 
-show(label: string, dates: System.DateTime{}) is
+show(label, dates) is
     write_line(label)
 
     dates |> each(date => write_line("  {date.to_string("yyyy-MM")}"))

@@ -2,7 +2,7 @@ use default
 
 use Matrix = long[][]
 
-minor(m: Matrix, column: int) -> Matrix =>
+minor(m, column) =>
     m
         |> skip(1)
         |> map(row =>
@@ -14,7 +14,7 @@ minor(m: Matrix, column: int) -> Matrix =>
         )
         |> list()
 
-expand(m: Matrix, alternating: bool) -> long =>
+expand(m, alternating) =>
     if m.count == 0 then
         1L
     else
@@ -28,7 +28,7 @@ expand(m: Matrix, alternating: bool) -> long =>
             )
     fi
 
-determinant(m: Matrix) -> long => expand(m, true)
+determinant(m) => expand(m, true)
 
 permanent(m: Matrix) -> long => expand(m, false)
 

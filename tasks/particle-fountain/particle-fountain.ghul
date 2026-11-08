@@ -20,9 +20,9 @@ let frames = 50
 
 let random = System.Random(7)
 
-spread(half: double) -> double => (random.next_double() * 2.0 - 1.0) * half
+spread(half) => (random.next_double() * 2.0 - 1.0) * half
 
-launch(drop: DROP) is
+launch(drop) is
     drop.x = double(width / 2) + spread(1.5)
     drop.y = double(height - 10)
     drop.dx = spread(0.9)
@@ -55,10 +55,10 @@ step() is
     od
 si
 
-airborne() -> int =>
+airborne() =>
     drops |> filter(drop => drop.y <= double(height)) |> count()
 
-draw(image: IMAGE) is
+draw(image) is
     image.clear(10ub, 15ub, 35ub)
 
     for drop in drops do

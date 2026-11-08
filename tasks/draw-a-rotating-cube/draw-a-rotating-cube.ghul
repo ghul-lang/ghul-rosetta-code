@@ -8,9 +8,9 @@ use Point = (x: double, y: double, z: double)
 let size = 180
 let frames = 40
 
-dot(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
+dot(a, b) => a.x * b.x + a.y * b.y + a.z * b.z
 
-scale(p: Point, k: double) -> Point => (
+scale(p, k) => (
     x = p.x * k,
     y = p.y * k,
     z = p.z * k
@@ -44,7 +44,7 @@ let faces = [
 
 let light = scale((x = -0.5, y = 0.8, z = 0.4), 1.0 / sqrt(1.05))
 
-turned(p: Point, angle: double) -> Point =>
+turned(p, angle) =>
     let
         a = dot(p, across),
         b = dot(p, toward)
@@ -55,7 +55,7 @@ turned(p: Point, angle: double) -> Point =>
             z = b * cos(angle) - a * sin(angle)
         )
 
-draw(image: IMAGE, angle: double) is
+draw(image, angle) is
     image.clear(250ub, 250ub, 247ub)
 
     let shapes = SHAPES()

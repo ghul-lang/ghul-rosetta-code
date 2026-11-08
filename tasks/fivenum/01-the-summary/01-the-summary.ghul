@@ -1,6 +1,6 @@
 use default
 
-fivenum(xs_raw: double[]) -> double{} is
+fivenum(xs_raw) is
     let xs = xs_raw |> sort() |> list()
     let n = xs.count
     let n4 = floor((double(n) + 3.0) / 2.0) / 2.0

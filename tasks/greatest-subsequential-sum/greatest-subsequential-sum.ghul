@@ -2,7 +2,7 @@ use default
 
 use RUN = (start: int, finish: int, total: int)
 
-greatest_run(values: int[]) -> RUN is
+greatest_run(values) is
     let best mut = (start = 0, finish = 0, total = 0)
     let running mut = best
 
@@ -28,7 +28,7 @@ greatest_run(values: int[]) -> RUN is
     best
 si
 
-list(values: int[]) -> string => values |> map(value => "{value}") |> join()
+list(values) => values |> map(value => "{value}") |> join()
 
 let values = [-1, -2, 3, 5, 6, -2, -1, 4, -4, 2, -1]
 let best = greatest_run(values)

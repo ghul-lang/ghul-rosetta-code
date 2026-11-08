@@ -1,6 +1,6 @@
 use default
 
-reverse(text: string) -> string =>
+reverse(text) =>
     text |> graphemes() |> reverse() |> string()
 
 write_line(reverse("asdf"))

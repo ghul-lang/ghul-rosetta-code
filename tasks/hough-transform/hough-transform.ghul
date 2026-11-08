@@ -4,7 +4,7 @@ use Raster.IMAGE
 let size = 200
 let angles = 360
 
-pentagon() -> IMAGE => (
+pentagon() => (
     let image = IMAGE(size, size)
 
     image.clear(255ub, 255ub, 255ub)

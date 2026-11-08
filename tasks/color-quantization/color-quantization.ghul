@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use Color = (red: int, green: int, blue: int)
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -53,7 +53,7 @@ scene() -> IMAGE is
     image
 si
 
-hue(h: double) -> Color =>
+hue(h) =>
     let
         part = (h * 6.0) - floor(h * 6.0),
         sector = int(h * 6.0) % 6,
@@ -73,13 +73,13 @@ put(image: IMAGE, x: int, y: int, c: Color) is
     image.set_pixel(x, y, ubyte(c.red), ubyte(c.green), ubyte(c.blue))
 si
 
-of(p: (red: ubyte, green: ubyte, blue: ubyte)) -> Color => (
+of(p) => (
     red = int(p.red),
     green = int(p.green),
     blue = int(p.blue)
 )
 
-picture() -> IMAGE is
+picture() is
     let image = scene()
 
     for x in 0..image.width do
@@ -95,20 +95,20 @@ si
 
 use Weighted = (color: Color, count: int)
 
-channel(c: Color, axis: int) -> int =>
+channel(c, axis) =>
     case axis
     when 0 then c.red
     when 1 then c.green
     else c.blue
     esac
 
-spread(box: Weighted[], axis: int) -> int =>
+spread(box, axis) =>
     let values = box |> map(w => channel(w.color, axis)) in
     (values |> max()!) - (values |> min()!)
 
-widest(box: Weighted[]) -> int => 0..3 |> max_by(spread(box, *))!
+widest(box) => 0..3 |> max_by(spread(box, *))!
 
-score(box: Weighted[]) -> int => spread(box, widest(box))
+score(box) => spread(box, widest(box))
 
 split(box: Weighted[]) -> (Weighted[], Weighted[]) is
     let axis = widest(box)
@@ -133,7 +133,7 @@ split(box: Weighted[]) -> (Weighted[], Weighted[]) is
     (sorted |> take(cut) |> list(), sorted |> skip(cut) |> list())
 si
 
-average(box: Weighted[]) -> Color is
+average(box) is
     let n = box |> sum_by(w => w.count)
 
     weighted(axis) =>
@@ -142,7 +142,7 @@ average(box: Weighted[]) -> Color is
     (red = weighted(0), green = weighted(1), blue = weighted(2))
 si
 
-median_cut(colors: Weighted[], count: int) -> Color[] => (
+median_cut(colors, count) => (
     let boxes = LIST[Weighted[]]([colors])
 
     while boxes.count < count do
@@ -156,7 +156,7 @@ median_cut(colors: Weighted[], count: int) -> Color[] => (
     boxes |> map(average) |> list()
 )
 
-distance(a: Color, b: Color) -> int =>
+distance(a, b) =>
     let
         dr = a.red - b.red,
         dg = a.green - b.green,
@@ -164,7 +164,7 @@ distance(a: Color, b: Color) -> int =>
     in
         dr * dr + dg * dg + db * db
 
-nearest(palette: Color[], c: Color) -> Color =>
+nearest(palette, c) =>
     palette |> min_by(distance(*, c))!
 
 picture().write("picture.png")

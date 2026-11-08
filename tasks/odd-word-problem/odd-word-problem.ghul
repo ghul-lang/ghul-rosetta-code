@@ -1,9 +1,9 @@
 use default
 use IO.Std.write
 
-is_letter(character: char) -> bool => character >= 'a' /\ character <= 'z'
+is_letter(character) => character >= 'a' /\ character <= 'z'
 
-forwards(input: IO.TextReader) -> char =>
+forwards(input) =>
     let character = char(input.read()) in
     if is_letter(character) then
         write("{character}")

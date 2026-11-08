@@ -1,7 +1,7 @@
 use default
 use System.Random
 
-sattolo_cycle(items: LIST[int], random: Random) is
+sattolo_cycle(items, random) is
     let i mut = items.count - 1
 
     while i >= 1 do

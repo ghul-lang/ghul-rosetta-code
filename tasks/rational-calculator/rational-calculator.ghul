@@ -16,16 +16,16 @@ struct Q(top: bigint, bottom: bigint) is
         if bottom.is_one then "{top}" else "{top}/{bottom}" fi
 si
 
-make(top: bigint, bottom: bigint) -> Q =>
+make(top, bottom) =>
     let
         g = bigint.greatest_common_divisor(top, bottom),
         sign = if bottom.sign < 0 then -1n else 1n fi
     in
         Q(sign * top / g, sign * bottom / g)
 
-whole(n: bigint) -> Q => Q(n, 1n)
+whole(n) => Q(n, 1n)
 
-decimal(q: Q) -> string is
+decimal(q) is
     let integer = bigint.abs(q.top) / q.bottom
     let sign = if q.top.sign < 0 then "-" else "" fi
     let digits = System.Text.StringBuilder()

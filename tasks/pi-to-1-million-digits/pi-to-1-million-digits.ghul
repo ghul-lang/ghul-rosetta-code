@@ -30,7 +30,7 @@ si
 
 // Each level takes the square root of the top half of the bits, which is
 // right to half the precision, and one Newton step doubles that.
-square_root(n: bigint) -> bigint is
+square_root(n) is
     let bits = int(n.get_bit_length())
 
     if bits <= 50 then
@@ -50,7 +50,7 @@ si
 
 // Decimal conversion by repeatedly halving the number of digits, since
 // converting a million-digit number a digit at a time is quadratic.
-decimal(n: bigint) -> string is
+decimal(n) is
     let powers = LIST([1_000_000_000_000_000_000n])
 
     while powers[powers.count - 1] * powers[powers.count - 1] <= n do
@@ -88,7 +88,7 @@ decimal(n: bigint) -> string is
     text.to_string()
 si
 
-pi_digits(digits: int) -> string =>
+pi_digits(digits) =>
     let
         guard = 10,
         terms = long(digits / 14 + 2),

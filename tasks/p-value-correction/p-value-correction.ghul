@@ -18,11 +18,7 @@ let n = p_values.count
 let ascending = 0..n |> sort((a, b) => p_values[a] <> p_values[b]) |> list()
 let descending = ascending |> reverse() |> list()
 
-running(
-    order: int[],
-    factor: (int) -> double,
-    keep_lower: bool
-) -> double[] is
+running(order, factor, keep_lower) is
     let adjusted = repeat(0.0, n) |> LIST()
     let bound mut = if keep_lower then 1.0 else 0.0 fi
 
@@ -42,25 +38,25 @@ si
 
 let harmonic = 1::n |> sum_by(i => 1.0 / double(i))
 
-benjamini_hochberg() -> double[] =>
+benjamini_hochberg() =>
     running(descending, rank => double(n) / double(n - rank), true)
 
-benjamini_yekutieli() -> double[] =>
+benjamini_yekutieli() =>
     running(
         descending,
         rank => harmonic * double(n) / double(n - rank),
         true
     )
 
-bonferroni() -> double[] =>
+bonferroni() =>
     p_values |> map(p => min(1.0, double(n) * p)) |> list()
 
-hochberg() -> double[] =>
+hochberg() =>
     running(descending, rank => double(rank + 1), true)
 
-holm() -> double[] => running(ascending, rank => double(n - rank), false)
+holm() => running(ascending, rank => double(n - rank), false)
 
-hommel() -> double[] is
+hommel() is
     let sorted = ascending |> map(i => p_values[i]) |> list()
     let smallest =
         0..n
@@ -98,7 +94,7 @@ hommel() -> double[] is
     adjusted
 si
 
-show(name: string, adjusted: double[]) is
+show(name, adjusted) is
     write_line(name)
 
     for row in 0..n / 5 do

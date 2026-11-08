@@ -1,6 +1,6 @@
 use default
 
-repeats(text: string, size: int) -> bool =>
+repeats(text, size) =>
     0..text.length |> all(index => text[index] == text[index % size])
 
 for

@@ -2,22 +2,22 @@ use default
 
 let symbols = "0123456789ABCDEF"
 
-in_base(n: long, base: int) -> string =>
+in_base(n, base) =>
     n |> digits(long(base)) |> map(d => symbols[int(d)]) |> string()
 
-value_of(digits: string, base: int) -> long =>
+value_of(digits, base) =>
     digits
         |> reduce(0L, (total, c) =>
             total * long(base) + long(symbols.index_of(c))
         )
 
-is_penholodigital(square: long, base: int) -> bool =>
+is_penholodigital(square, base) =>
     let ds = square |> digits(long(base)) |> list() in
     ds.count == base - 1 /\
     ds |> SET() |> count() == ds.count /\
     ds |> all(* > 0L)
 
-roots(base: int) -> long[] is
+roots(base) is
     let smallest = value_of(symbols.substring(1, base - 1), base)
     let largest = value_of(reversed(symbols.substring(1, base - 1)), base)
     let modulus = long(base - 1)
@@ -31,9 +31,9 @@ roots(base: int) -> long[] is
         |> list()
 si
 
-reversed(s: string) -> string => string(s.to_char_array() |> reverse())
+reversed(s) => string(s.to_char_array() |> reverse())
 
-show(n: long, base: int) -> string =>
+show(n, base) =>
     "{in_base(n, base)}² = {in_base(n * n, base)}"
 
 for base in 9::15 do

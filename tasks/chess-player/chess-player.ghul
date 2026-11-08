@@ -43,36 +43,22 @@ let king_steps = [
 let rook_steps = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 let bishop_steps = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
 
-on_board(row: int, column: int) -> bool =>
+on_board(row, column) =>
     row >= 0 /\ row < 8 /\ column >= 0 /\ column < 8
 
-piece_at(position: POSITION, row: int, column: int) -> char =>
+piece_at(position, row, column) =>
     if on_board(row, column) then
         position.squares[row * 8 + column]
     else '.'
     fi
 
-holds(
-    position: POSITION,
-    row: int,
-    column: int,
-    white: bool,
-    kinds: string
-) -> bool =>
+holds(position, row, column, white, kinds) =>
     let piece = piece_at(position, row, column) in
     piece != '.' /\
     char.is_upper(piece) == white /\
     kinds.contains(char.to_lower(piece))
 
-ray_hits(
-    position: POSITION,
-    row: int,
-    column: int,
-    dr: int,
-    dc: int,
-    white: bool,
-    kinds: string
-) -> bool is
+ray_hits(position, row, column, dr, dc, white, kinds) is
     let r mut = row + dr
     let k mut = column + dc
 
@@ -84,7 +70,7 @@ ray_hits(
     holds(position, r, k, white, kinds)
 si
 
-attacked(position: POSITION, square: int, by_white: bool) -> bool is
+attacked(position, square, by_white) is
     let row = square / 8
     let column = square % 8
     let pawn_row = if by_white then row + 1 else row - 1 fi
@@ -109,7 +95,7 @@ attacked(position: POSITION, square: int, by_white: bool) -> bool is
         )
 si
 
-castling_targets(position: POSITION, from: int) -> int{} is
+castling_targets(position, from) is
     let white = position.white_to_move
     let home = if white then 60 else 4 fi
     let (short, long) = if white then ("K", "Q") else ("k", "q") fi
@@ -240,7 +226,7 @@ pseudo_moves(position: POSITION) -> Move{} is
     moves
 si
 
-played(position: POSITION, move: Move) -> POSITION is
+played(position, move) is
     let next = POSITION(position)
     let piece = position.squares[move.from]
     let kind = char.to_lower(piece)
@@ -291,11 +277,11 @@ played(position: POSITION, move: Move) -> POSITION is
     next
 si
 
-in_check(position: POSITION, white: bool) -> bool =>
+in_check(position, white) =>
     let king = if white then 'K' else 'k' fi in
     attacked(position, position.squares |> find_index(* == king)!, !white)
 
-legal_moves(position: POSITION) -> Move[] =>
+legal_moves(position) =>
     position
         |> pseudo_moves()
         |> filter(m =>
@@ -303,7 +289,7 @@ legal_moves(position: POSITION) -> Move[] =>
         )
         |> list()
 
-value(piece: char) -> int =>
+value(piece) =>
     case char.to_lower(piece)
     when 'p' then 100
     when 'n' then 320
@@ -313,14 +299,14 @@ value(piece: char) -> int =>
     else 0
     esac
 
-centrality(square: int) -> int =>
+centrality(square) =>
     let
         row = square / 8,
         column = square % 8
     in
         6 - abs(2 * row - 7) / 2 - abs(2 * column - 7) / 2
 
-evaluate(position: POSITION) -> int =>
+evaluate(position) =>
     (0..64)
         |> filter(s => position.squares[s] != '.')
         |> sum_by(s =>
@@ -339,7 +325,7 @@ evaluate(position: POSITION) -> int =>
 
 let mate = 100000
 
-search(position: POSITION, depth: int, alpha: int, beta: int) -> int is
+search(position, depth, alpha, beta) is
     let moves = legal_moves(position)
 
     if moves.count == 0 then
@@ -370,7 +356,7 @@ search(position: POSITION, depth: int, alpha: int, beta: int) -> int is
     best
 si
 
-choose(position: POSITION) -> Move =>
+choose(position) =>
     let ranked =
         position
             |> legal_moves()
@@ -383,9 +369,9 @@ choose(position: POSITION) -> Move =>
     in
     ranked[0].move
 
-name(square: int) -> string => "{"abcdefgh"[square % 8]}{8 - square / 8}"
+name(square) => "{"abcdefgh"[square % 8]}{8 - square / 8}"
 
-notation(move: Move) -> string =>
+notation(move) =>
     let promotion =
         if move.promotion == '.' then ""
         else "{char.to_lower(move.promotion)}"
@@ -395,7 +381,7 @@ notation(move: Move) -> string =>
 
 let symbols = "KQRBNPkqrbnp." |> zip("♔♕♖♗♘♙♚♛♜♝♞♟．") |> MAP()
 
-show(position: POSITION) is
+show(position) is
     for row in 0..8 do
         let pieces =
             0..8
@@ -408,7 +394,7 @@ show(position: POSITION) is
     write_line("  ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ")
 si
 
-over(position: POSITION) -> bool is
+over(position) is
     if legal_moves(position).count > 0 then
         return false
     fi

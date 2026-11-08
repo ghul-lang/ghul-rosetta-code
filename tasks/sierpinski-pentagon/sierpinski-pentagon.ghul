@@ -8,9 +8,9 @@ use Pentagon = (x: double, y: double, radius: double)
 let golden = (1.0 + sqrt(5.0)) / 2.0
 let shrink = 1.0 / (1.0 + golden)
 
-towards(index: int) -> double => pi / 2.0 + 0.4 * pi * double(index)
+towards(index) => pi / 2.0 + 0.4 * pi * double(index)
 
-corner_of(shape: Pentagon, index: int) -> Point => (
+corner_of(shape, index) => (
     let angle = towards(index)
 
     (
@@ -19,7 +19,7 @@ corner_of(shape: Pentagon, index: int) -> Point => (
     )
 )
 
-inner(shape: Pentagon, index: int) -> Pentagon => (
+inner(shape, index) => (
     let angle = towards(index)
     let smaller = shape.radius * shrink
     let reach = shape.radius - smaller
@@ -31,7 +31,7 @@ inner(shape: Pentagon, index: int) -> Pentagon => (
     )
 )
 
-flake(shape: Pentagon, order: int) -> Pentagon{} is
+flake(shape, order) is
     if order == 0 then
         yield shape
     else

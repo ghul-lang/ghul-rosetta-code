@@ -1,6 +1,6 @@
 use default
 
-multiplier(a: double, b: double) -> (double) -> double => m => a * b * m
+multiplier(a, b) => m => a * b * m
 
 let x = 2.0
 let xi = 0.5

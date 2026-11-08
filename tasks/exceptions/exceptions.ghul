@@ -5,7 +5,7 @@ class NEGATIVE_VALUE_EXCEPTION(message: string): System.Exception is
     super(message)
 si
 
-risky(n: int) is
+risky(n) is
     if n < 0 then
         throw NEGATIVE_VALUE_EXCEPTION("negative value: {n}")
     fi

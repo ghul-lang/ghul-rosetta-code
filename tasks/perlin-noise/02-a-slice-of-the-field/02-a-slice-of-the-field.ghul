@@ -24,11 +24,11 @@ let permutation = [
 
 let p = (0..512) |> map(index => permutation[index % 256]) |> list()
 
-fade(t: double) -> double => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
+fade(t) => t * t * t * (t * (t * 6.0 - 15.0) + 10.0)
 
-lerp(t: double, a: double, b: double) -> double => a + t * (b - a)
+lerp(t, a, b) => a + t * (b - a)
 
-grad(hash: int, x: double, y: double, z: double) -> double => (
+grad(hash, x, y, z) => (
     let h = hash & 15, u = if h < 8 then x else y fi
     let v =
         if h < 4 then
@@ -43,7 +43,7 @@ grad(hash: int, x: double, y: double, z: double) -> double => (
     first + second
 )
 
-noise(at_x: double, at_y: double, at_z: double) -> double => (
+noise(at_x, at_y, at_z) => (
     let unit_x = int(floor(at_x)) & 255,
         unit_y = int(floor(at_y)) & 255,
         unit_z = int(floor(at_z)) & 255,

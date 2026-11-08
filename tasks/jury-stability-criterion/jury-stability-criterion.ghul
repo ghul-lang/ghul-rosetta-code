@@ -7,14 +7,14 @@ use default
 
 use Polynomial = double[]
 
-evaluate(p: Polynomial, z: double) -> double =>
+evaluate(p, z) =>
     p |> reduce(0.0, (total, a) => total * z + a)
 
-next_row(row: Polynomial) -> Polynomial =>
+next_row(row) =>
     let n = row.count - 1 in
     0..n |> map(i => row[0] * row[i] - row[n] * row[n - i]) |> list()
 
-rows(p: Polynomial) -> Polynomial{} is
+rows(p) is
     let row mut = p
 
     while row.count > 1 do
@@ -38,7 +38,7 @@ is_stable(p: Polynomial) -> bool =>
                 double.abs(row[0]) > double.abs(row[row.count - 1])
             )
 
-show(p: Polynomial) -> string =>
+show(p) =>
     let n = p.count - 1 in
     let terms =
         p

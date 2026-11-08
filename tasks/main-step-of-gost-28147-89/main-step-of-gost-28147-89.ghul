@@ -13,7 +13,7 @@ let s_boxes = [
     [1, 15, 13, 0, 5, 7, 10, 4, 9, 2, 3, 14, 6, 11, 8, 12]
 ]
 
-substitute(x: uint) -> uint =>
+substitute(x) =>
     0..8
         |> map(i =>
             let nibble = int((x >> (4 * i)) & 0xFui) in
@@ -24,7 +24,7 @@ substitute(x: uint) -> uint =>
 // the left half is combined with the key element, substituted, rotated
 // left 11 bits and mixed into the right half
 
-main_step(block: ulong, key: uint) -> ulong =>
+main_step(block, key) =>
     let
         low = uint(block & 0xFFFF_FFFFul),
         high = uint(block >> 32),
@@ -33,7 +33,7 @@ main_step(block: ulong, key: uint) -> ulong =>
     in
         (ulong(low) << 32) | ulong(mixed)
 
-little_endian(bytes: int[]) -> ulong =>
+little_endian(bytes) =>
     bytes
         |> index()
         |> map((i, b) => ulong(b) << (8 * i))

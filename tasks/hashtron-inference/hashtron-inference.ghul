@@ -2,7 +2,7 @@ use default
 
 use Stage = (salt: uint, max: uint)
 
-hash(n: uint, salt: uint, max: uint) -> uint => (
+hash(n, salt, max) => (
     let m mut = n - salt
 
     m = m ^ (m << 2)
@@ -19,7 +19,7 @@ hash(n: uint, salt: uint, max: uint) -> uint => (
     uint((ulong(m) * ulong(max)) >> 32)
 )
 
-infer_bit(command: uint, bit: int, program: Stage[]) -> bool => (
+infer_bit(command, bit, program) => (
     let input = command | (uint(bit) << 16), first_stage = program[0]
 
     let start = (
@@ -38,7 +38,7 @@ infer_bit(command: uint, bit: int, program: Stage[]) -> bool => (
     result.input & 1u != 0u
 )
 
-inference(command: uint, bits: int, program: Stage[]) -> ulong =>
+inference(command, bits, program) =>
     if program.count == 0 then
         0ul
     else

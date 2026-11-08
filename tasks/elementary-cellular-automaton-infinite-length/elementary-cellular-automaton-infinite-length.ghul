@@ -1,6 +1,6 @@
 use default
 
-flip(cell: char) -> char => if cell == '#' then '.' else '#' fi
+flip(cell) => if cell == '#' then '.' else '#' fi
 
 step(cells: string, rule: int) -> string => (
     let left = flip(cells[0])
@@ -21,7 +21,7 @@ step(cells: string, rule: int) -> string => (
     string(next.to_array())
 )
 
-generations(start: string, rule: int) -> string{} is
+generations(start, rule) is
     let cells mut = start
 
     while true do

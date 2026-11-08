@@ -27,15 +27,15 @@ kolakoski(values: int[], length: int) -> int[] is
     return sequence[0..length]
 si
 
-run_lengths(sequence: int[]) -> int[] =>
+run_lengths(sequence) =>
     sequence |> group() |> map(run => run.count) |> list()
 
-self_describing(sequence: int[]) -> bool => (
+self_describing(sequence) => (
     let runs = run_lengths(sequence)
     0..runs.count - 1 |> all(i => runs[i] == sequence[i])
 )
 
-report(values: int[], length: int) is
+report(values, length) is
     let sequence = kolakoski(values, length)
 
     write_line("from ({values |> join(", ")}), first {length}:")

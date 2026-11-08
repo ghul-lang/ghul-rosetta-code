@@ -8,7 +8,7 @@ si
 
 let full = 2.0 * pi
 
-center_of(a: P, b: P, c: P) -> P => (
+center_of(a, b, c) => (
     let d =
         2.0 * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))
 
@@ -22,7 +22,7 @@ center_of(a: P, b: P, c: P) -> P => (
     )
 )
 
-curve(start: P, middle: P, finish: P, steps: int) -> P{} is
+curve(start, middle, finish, steps) is
     let center = center_of(start, middle, finish)
     let radius = (start - center).length
 

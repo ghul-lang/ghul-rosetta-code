@@ -1,6 +1,6 @@
 use default
 
-de_bruijn(k: int, n: int) -> string is
+de_bruijn(k, n) is
     let a = repeat(0, k * n) |> LIST()
     let digits = LIST()
 
@@ -27,7 +27,7 @@ de_bruijn(k: int, n: int) -> string is
     digits |> map(d => "{d}") |> join("")
 si
 
-missing_pins(sequence: string) -> string[] =>
+missing_pins(sequence) =>
     let wrapped = "{sequence}{sequence[0..3]}" in
     let seen =
         0..wrapped.length - 3 |> map(wrapped.substring(*, 4)) |> SET()
@@ -37,14 +37,14 @@ missing_pins(sequence: string) -> string[] =>
         |> filter(pin => !seen.contains(pin))
         |> list()
 
-describe(missing: string[]) -> string =>
+describe(missing) =>
     if missing.count == 0 then
         "no PINs missing"
     else
         "missing {missing |> join(", ")}"
     fi
 
-verify(label: string, sequence: string) =>
+verify(label, sequence) =>
     write_line("{label}: {describe(missing_pins(sequence))}")
 
 let sequence = de_bruijn(10, 4)

@@ -1,6 +1,6 @@
 use default
 
-collapsed(text: string) -> char{} is
+collapsed(text) is
     let previous mut = null
 
     for ch in text do
@@ -12,7 +12,7 @@ collapsed(text: string) -> char{} is
     od
 si
 
-collapse(text: string) -> string =>
+collapse(text) =>
     text |> collapsed() |> map(c => "{c}") |> join("")
 
 let strings = [

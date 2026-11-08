@@ -1,6 +1,6 @@
 use default
 
-microsoft_rand(seed: int) -> int{} is
+microsoft_rand(seed) is
     let state mut = long(seed)
 
     while true do
@@ -12,9 +12,9 @@ si
 let ranks = "A23456789TJQK"
 let suits = "CDHS"
 
-name(card: int) -> string => "{ranks[card / 4]}{suits[card % 4]}"
+name(card) => "{ranks[card / 4]}{suits[card % 4]}"
 
-deal(game: int) -> string{} is
+deal(game) is
     let deck = LIST(0..52)
 
     for index in microsoft_rand(game) |> take(52) do

@@ -5,10 +5,10 @@ let text =
     "machine 9001. You have been nominated to win one of these! Just make "
     "sure you don't break it"
 
-ends_a_sentence(letter: char) -> bool =>
+ends_a_sentence(letter) =>
     letter == '!' \/ letter == '?' \/ letter == '.'
 
-kind(ending: char) -> string =>
+kind(ending) =>
     case ending
     when '!' then "E"
     when '?' then "Q"
@@ -16,7 +16,7 @@ kind(ending: char) -> string =>
     else "N"
     esac
 
-sentences(source: string) -> string{} is
+sentences(source) is
     let start mut = 0
 
     for at in 0..source.length do

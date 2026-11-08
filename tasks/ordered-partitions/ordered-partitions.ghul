@@ -1,6 +1,6 @@
 use default
 
-combinations(items: int[], k: int) -> int[]{} is
+combinations(items, k) is
     if k == 0 then
         yield LIST()
     elif items.count >= k then
@@ -22,7 +22,7 @@ combinations(items: int[], k: int) -> int[]{} is
     fi
 si
 
-partitions(items: int[], sizes: int[]) -> int[][]{} is
+partitions(items, sizes) is
     case sizes
     when [] then
         yield LIST()
@@ -45,7 +45,7 @@ partitions(items: int[], sizes: int[]) -> int[][]{} is
     esac
 si
 
-braces(block: int[]) -> string => "{{" "{block |> join(", ")}" "}}"
+braces(block) => "{{" "{block |> join(", ")}" "}}"
 
 show(sizes: int[]) is
     let total = sizes |> sum()

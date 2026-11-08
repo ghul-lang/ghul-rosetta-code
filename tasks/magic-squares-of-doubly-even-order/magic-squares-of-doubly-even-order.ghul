@@ -1,6 +1,6 @@
 use default
 
-magic(n: int) -> int[][] =>
+magic(n) =>
     (0..n)
         |> map(row =>
             (0..n)
@@ -17,9 +17,9 @@ magic(n: int) -> int[][] =>
         )
         |> list()
 
-column(square: int[][], c: int) -> int{} => square |> map(row => row[c])
+column(square, c) => square |> map(row => row[c])
 
-check(square: int[][]) -> bool =>
+check(square) =>
     let
         n = square.count,
         target = n * (n * n + 1) / 2

@@ -1,6 +1,6 @@
 use default
 
-moving_average(period: int) -> (double) -> double =>
+moving_average(period) =>
     let window = QUEUE() in
     number is
         window.enqueue(number)

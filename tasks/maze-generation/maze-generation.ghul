@@ -18,9 +18,9 @@ for _ in 0..columns * rows do
     down_open.add(false)
 od
 
-at(column: int, row: int) -> int => row * columns + column
+at(column, row) => row * columns + column
 
-inside(column: int, row: int) -> bool =>
+inside(column, row) =>
     column >= 0 /\ column < columns /\ row >= 0 /\ row < rows
 
 let directions = [
@@ -71,7 +71,7 @@ carve(random.next(columns), random.next(rows))
 
 let image = IMAGE(columns * cell + 2 * margin, rows * cell + 2 * margin)
 
-wall(from_x: int, from_y: int, to_x: int, to_y: int) is
+wall(from_x, from_y, to_x, to_y) is
     image.line(
         double(margin + from_x * cell),
         double(margin + from_y * cell),

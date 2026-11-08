@@ -1,7 +1,7 @@
 use default
 use IO.Std.write
 
-floyd(rows: int) is
+floyd(rows) is
     let last_row_first = rows * (rows - 1) / 2 + 1
     let value mut = 1
 

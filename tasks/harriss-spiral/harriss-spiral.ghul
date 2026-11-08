@@ -12,7 +12,7 @@ let colors = [
     (red = 40ub, green = 40ub, blue = 50ub)
 ]
 
-quarter_arc(image: IMAGE, from: Point, to: Point) is
+quarter_arc(image, from, to) is
     let middle = (x = (from.x + to.x) / 2.0, y = (from.y + to.y) / 2.0)
     let half = (x = (to.x - from.x) / 2.0, y = (to.y - from.y) / 2.0)
     let center = (x = middle.x + half.y, y = middle.y - half.x)
@@ -40,14 +40,7 @@ quarter_arc(image: IMAGE, from: Point, to: Point) is
     )
 si
 
-harriss(
-    image: IMAGE,
-    at: Point,
-    degrees: double,
-    length: double,
-    steps: int,
-    width: double
-) is
+harriss(image, at, degrees, length, steps, width) is
     let here mut = at
     let angle mut = degrees
     let side mut = length
@@ -80,7 +73,7 @@ let x = 450.0
 let y = 630.0
 let base = 525.0 / plastic / plastic
 
-scaled(power: int) -> double => base / pow(plastic, double(power))
+scaled(power) => base / pow(plastic, double(power))
 
 let left = x - (scaled(1) + scaled(3))
 let high = y - (base + scaled(2))

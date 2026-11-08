@@ -20,7 +20,7 @@ expand(axiom: string, rules: Map[char, string], steps: int) -> string is
     return current
 si
 
-interpret(program: string, operations: Map[char, () -> void]) is
+interpret(program, operations) is
     for symbol in program do
         if operations.contains_key(symbol) then
             operations[symbol]()

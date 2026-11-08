@@ -5,7 +5,7 @@ use System.Text.RegularExpressions.Match
 
 let marker = Regex("=={{{{header\\|([^}}]+)}}}}==|<lang>")
 
-bare_tags(page: string) -> (language: string, page: string){} is
+bare_tags(page) is
     let text = IO.File.read_all_text("{page}.txt")
     let language mut = "no language"
 
@@ -20,7 +20,7 @@ bare_tags(page: string) -> (language: string, page: string){} is
     od
 si
 
-report(pages: string[], show_pages: bool) is
+report(pages, show_pages) is
     let found = pages |> flat_map(bare_tags) |> list()
 
     write_line("{found.count} bare language tags.")

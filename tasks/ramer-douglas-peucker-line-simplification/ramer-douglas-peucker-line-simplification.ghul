@@ -9,7 +9,7 @@ struct P(x: double, y: double) is
     to_string() -> string => "({x}, {y})"
 si
 
-distance(p: P, from: P, to: P) -> double =>
+distance(p, from, to) =>
     let line = to - from in
     if line.length == 0.0 then (p - from).length
     else abs(line × (p - from)) / line.length
@@ -54,7 +54,7 @@ let image = IMAGE(400, 400)
 image.view(-0.5, -0.5, 9.5, 9.5)
 image.clear(252ub, 252ub, 250ub)
 
-draw(points: P[], width: double, size: double) is
+draw(points, width, size) is
     image.stroke(width)
     image.line(points |> map(p => (x = p.x, y = p.y)) |> list())
 

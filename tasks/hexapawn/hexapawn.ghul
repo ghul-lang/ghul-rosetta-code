@@ -7,9 +7,9 @@ use Move = (from: int, to: int)
 let random = Random(8)
 let start = "BBB...WWW"
 
-other(side: char) -> char => if side == 'W' then 'B' else 'W' fi
+other(side) => if side == 'W' then 'B' else 'W' fi
 
-moves(board: string, side: char) -> Move[] =>
+moves(board, side) =>
     (0..9)
         |> filter(from => board[from] == side)
         |> flat_map(from =>
@@ -27,7 +27,7 @@ moves(board: string, side: char) -> Move[] =>
         )
         |> list()
 
-play(board: string, move: Move) -> string =>
+play(board, move) =>
     string(
         (0..9)
             |> map(i =>
@@ -38,16 +38,16 @@ play(board: string, move: Move) -> string =>
             )
     )
 
-has_won(board: string, side: char) -> bool =>
+has_won(board, side) =>
     let far_rank = if side == 'W' then 0 else 6 fi in
     board.substring(far_rank, 3).contains(side) \/
     moves(board, other(side)).count == 0
 
-square(index: int) -> string => "{"abc"[index % 3]}{3 - index / 3}"
+square(index) => "{"abc"[index % 3]}{3 - index / 3}"
 
 let symbols = "WB." |> zip("♙♟．") |> MAP()
 
-show(board: string) is
+show(board) is
     for row in 0..3 do
         let pieces =
             board.substring(row * 3, 3) |> map(p => symbols[p]) |> join("")
@@ -76,7 +76,7 @@ si
 
 let memory = MAP[string, LIST[Move]]()
 
-options(board: string) -> Move[] is
+options(board) is
     if !memory.contains_key(board) then
         memory[board] = LIST(moves(board, 'B'))
     fi
@@ -84,7 +84,7 @@ options(board: string) -> Move[] is
     memory[board]
 si
 
-game(white: (string) -> Move?, verbose: bool) -> char is
+game(white, verbose) is
     let board mut = start
     let last_board mut = ""
     let last_move mut = (from = 0, to = 0)
@@ -147,7 +147,7 @@ game(white: (string) -> Move?, verbose: bool) -> char is
     '?'
 si
 
-human(board: string) -> Move? is
+human(board) is
     let legal = moves(board, 'W')
 
     while true do

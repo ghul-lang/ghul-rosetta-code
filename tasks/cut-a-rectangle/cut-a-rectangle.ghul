@@ -55,7 +55,7 @@ class CUTTER is
     si
 si
 
-cuts(h: int, w: int) -> long is
+cuts(h, w) is
     let (tall, wide) = if h % 2 == 1 then (w, h) else (h, w) fi
 
     if tall % 2 == 1 then

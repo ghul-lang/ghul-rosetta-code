@@ -5,24 +5,24 @@ use Raster.SHAPES
 use Cell = (row: int, column: int)
 use Shape = Cell[]
 
-at(row: int, column: int) -> Cell => (row = row, column = column)
+at(row, column) => (row = row, column = column)
 
-reading_order(a: Cell, b: Cell) -> int =>
+reading_order(a, b) =>
     if a.row != b.row then
         a.row - b.row
     else
         a.column - b.column
     fi
 
-has(shape: Shape, cell: Cell) -> bool => shape |> any(c => c =~ cell)
+has(shape, cell) => shape |> any(c => c =~ cell)
 
-height(shape: Shape) -> int =>
+height(shape) =>
     shape |> map(c => c.row) |> reduce(0, int.max) + 1
 
-width(shape: Shape) -> int =>
+width(shape) =>
     shape |> map(c => c.column) |> reduce(0, int.max) + 1
 
-normalised(cells: Cell{}) -> Shape =>
+normalised(cells) =>
     let
         list = cells |> ARRAY(),
         top = list |> map(c => c.row) |> reduce(list[0].row, int.min)
@@ -35,10 +35,10 @@ normalised(cells: Cell{}) -> Shape =>
             |> sort(reading_order)
             |> ARRAY()
 
-key(shape: Shape) -> string =>
+key(shape) =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
-canonical(shape: Shape) -> Shape => (
+canonical(shape) => (
     let forms = LIST()
     let current mut = shape
 
@@ -51,7 +51,7 @@ canonical(shape: Shape) -> Shape => (
     (forms |> min_by(key))!
 )
 
-grow(shapes: Shape[]) -> Shape[] is
+grow(shapes) is
     let seen = MAP()
 
     for shape in shapes do
@@ -72,13 +72,13 @@ grow(shapes: Shape[]) -> Shape[] is
     seen.values |> sort_by(key) |> ARRAY()
 si
 
-row_of(shape: Shape, row: int) -> string =>
+row_of(shape, row) =>
     (0..width(shape))
         |> map(column => has(shape, at(row, column)))
         |> map(filled => if filled then "#" else " " fi)
         |> join("")
 
-art(shapes: Shape[]) -> string{} =>
+art(shapes) =>
     let tallest = shapes |> map(height) |> reduce(0, int.max) in
     (0..tallest)
         |> map(row => shapes |> map(row_of(*, row)) |> join("  "))

@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use MATRIX = int[][]
 
-kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
+kronecker(left, right) =>
     (0..left.count * right.count)
         |> map(row =>
             (0..left[0].count * right[0].count)
@@ -18,7 +18,7 @@ kronecker(left: MATRIX, right: MATRIX) -> MATRIX =>
 power(seed: MATRIX, order: int) -> MATRIX =>
     1..order |> reduce(seed, (r, _) => kronecker(r, seed))
 
-plot(cells: MATRIX, path: string) is
+plot(cells, path) is
     let scale = 4
 
     let image = IMAGE(cells[0].count * scale, cells.count * scale)

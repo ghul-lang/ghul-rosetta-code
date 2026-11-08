@@ -37,7 +37,7 @@ let cells = [
 
 let number = cells |> index() |> map((i, cell) => (cell, i)) |> MAP()
 
-moves(cell: Cell) -> Cell{} =>
+moves(cell) =>
     let
         (row, column) = cell,
         step = int(country[row][column] - '0')
@@ -90,10 +90,10 @@ for k in 0..size do
     od
 od
 
-show(steps: Cell{}) -> string =>
+show(steps) =>
     steps |> map((row, column) => "({row}, {column})") |> join(" -> ")
 
-route(from: Cell, to: Cell) -> string => (
+route(from, to) => (
     let target = number[to]
     let at mut = number[from]
     let steps = LIST([cells[at]])
@@ -135,7 +135,7 @@ dijkstra(source: int) -> Reached is
     (days = days, previous = previous)
 si
 
-path(previous: int[], to: int) -> Cell[] =>
+path(previous, to) =>
     if previous[to] < 0 then [cells[to]]
     else
         (path(previous, previous[to]) ++ [cells[to]]) |> list()

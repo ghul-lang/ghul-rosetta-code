@@ -2,17 +2,17 @@ use default
 
 let limit = 1_000_035
 
-group_from(first: int, size: int) -> int[] =>
+group_from(first, size) =>
     0..size |> map(step => first + step * 6) |> list()
 
-sexy_groups(size: int) -> int[]{} =>
+sexy_groups(size) =>
     (primes() |> take_while(p => p < limit))
         |> map(group_from(*, size))
         |> filter(members =>
             members[size - 1] < limit /\ (members |> all(p => is_prime(p)))
         )
 
-show(values: int[]{}) -> string =>
+show(values) =>
     values |> map(members => "({members |> join(" ")})") |> join(" ")
 
 last[T](values: T[], wanted: int) -> T{} =>

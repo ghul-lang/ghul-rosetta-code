@@ -1,6 +1,6 @@
 use default
 
-honakers() -> (position: int, prime: int){} =>
+honakers() =>
     primes()
         |> index()
         |> map(((i, prime)) => (position = i + 1, prime = prime))

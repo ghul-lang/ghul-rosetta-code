@@ -16,7 +16,7 @@ let scales = [
     "trillion", "quadrillion", "quintillion"
 ]
 
-cardinal(value: long) -> string is
+cardinal(value) is
     if value < 0L then
         return "negative {cardinal(-value)}"
     elif value < 20L then
@@ -54,7 +54,7 @@ cardinal(value: long) -> string is
         fi
 si
 
-phrases(name: string) -> string{} is
+phrases(name) is
     if name =~ "four" then
         yield "four is magic"
     else
@@ -65,7 +65,7 @@ phrases(name: string) -> string{} is
     fi
 si
 
-magic(value: long) -> string =>
+magic(value) =>
     let sentence = cardinal(value) |> phrases() |> join() in
     "{sentence[0..1].to_upper_invariant()}{sentence[1..<0]}."
 

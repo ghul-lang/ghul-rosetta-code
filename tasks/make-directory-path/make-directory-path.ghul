@@ -1,6 +1,6 @@
 use default
 
-mkdir_p(path: string) is
+mkdir_p(path) is
     let parts = path.split(['/'])
     let built mut = ""
 

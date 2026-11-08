@@ -1,6 +1,6 @@
 use default
 
-reciprocal_factorials() -> decimal{} is
+reciprocal_factorials() is
     let term mut = 1m
     let n mut = 1
 

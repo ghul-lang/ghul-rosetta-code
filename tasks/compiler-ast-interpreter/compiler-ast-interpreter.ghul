@@ -29,12 +29,12 @@ si
 
 let globals = MAP[string, int]()
 
-unquote(text: string) -> string =>
+unquote(text) =>
     text[1..<1].replace("\\n", "\n").replace("\\\\", "\\")
 
-truth(value: bool) -> int => if value then 1 else 0 fi
+truth(value) => if value then 1 else 0 fi
 
-interpret(node: Node) -> int =>
+interpret(node) =>
     case node
     when Node.EMPTY then 0
     when ("Integer", value): Node.LEAF then int.parse(value)

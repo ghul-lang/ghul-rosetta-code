@@ -36,7 +36,7 @@ for k in 1::n do
     od
 od
 
-path(u: int, v: int) -> string => (
+path(u, v) => (
     let result = LIST([u])
     let cur mut = u
 

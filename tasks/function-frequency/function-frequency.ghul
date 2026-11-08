@@ -25,7 +25,7 @@ let everything =
     BindingFlags.STATIC |
     BindingFlags.DECLARED_ONLY
 
-callees(method: MethodBase) -> MethodBase{} is
+callees(method) is
     let il = method.get_method_body()?.get_i_l_as_byte_array()
 
     if !il? then
@@ -71,7 +71,7 @@ callees(method: MethodBase) -> MethodBase{} is
     od
 si
 
-operand_size(kind: OperandType, il: ARRAY[ubyte], at: int) -> int =>
+operand_size(kind, il, at) =>
     case kind
     when OperandType.INLINE_NONE then 0
     when
@@ -114,7 +114,7 @@ si
 
 let own_types = Assembly.get_executing_assembly().get_types() |> SET()
 
-declared_by_the_program(method: MethodBase) -> bool is
+declared_by_the_program(method) is
     let owner = method.declaring_type
 
     if !owner? \/ !own_types.contains(owner) then

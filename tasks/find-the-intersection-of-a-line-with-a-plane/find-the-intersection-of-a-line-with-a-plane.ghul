@@ -17,7 +17,7 @@ use Point = (x: double, y: double, z: double)
 
 ⋅(a: Point, b: Point) -> double => a.x * b.x + a.y * b.y + a.z * b.z
 
-meeting(from: Point, along: Point, on: Point, normal: Point) -> Point? =>
+meeting(from, along, on, normal) =>
     if along ⋅ normal == 0.0 then
         null
     else

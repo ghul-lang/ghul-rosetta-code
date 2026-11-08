@@ -3,7 +3,7 @@ use default
 write_line("summing digit powers, which takes a moment")
 write_line("")
 
-exponents(n: int, highest: int) -> int{} is
+exponents(n, highest) is
     let value = bigint(n)
     let power mut = value
 
@@ -16,7 +16,7 @@ exponents(n: int, highest: int) -> int{} is
     od
 si
 
-report(wanted: int, least_ways: int, highest: int) is
+report(wanted, least_ways, highest) is
     let found =
         from(2)
             |> map(n => (n, exponents(n, highest) |> list()))

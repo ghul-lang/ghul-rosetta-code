@@ -1,6 +1,6 @@
 use default
 
-decompose(n: bigint) -> bigint{} is
+decompose(n) is
     if n > 1n then
         let factor =
             from(2L)
@@ -13,7 +13,7 @@ decompose(n: bigint) -> bigint{} is
     fi
 si
 
-show(n: bigint) =>
+show(n) =>
     let rendered = n |> decompose() |> map(factor => "{factor}") in
     write_line("{n} = {rendered |> join(" x ")}")
 

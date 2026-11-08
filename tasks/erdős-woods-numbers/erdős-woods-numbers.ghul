@@ -4,17 +4,17 @@ use System.Numerics.BitOperations
 
 use Partition = (a: long, b: long, free: long)
 
-set_bits(mask: long) -> long{} =>
+set_bits(mask) =>
     0..64 |> map(1L << *) |> filter(bit => mask & bit != 0L)
 
-lowest_bit(mask: long) -> int =>
+lowest_bit(mask) =>
     if mask == 0L then
         -1
     else
         BitOperations.trailing_zero_count(mask)
     fi
 
-inverse(value: bigint, modulus: bigint) -> bigint => (
+inverse(value, modulus) => (
     let (r0, r1) mut = (modulo(value, modulus), modulus)
     let (s0, s1) mut = (1n, 0n)
 
@@ -28,9 +28,9 @@ inverse(value: bigint, modulus: bigint) -> bigint => (
     modulo(s0, modulus)
 )
 
-modulo(value: bigint, m: bigint) -> bigint => ((value % m) + m) % m
+modulo(value, m) => ((value % m) + m) % m
 
-smallest_start(n: int) -> bigint? is
+smallest_start(n) is
     let primes = 2..n |> filter(is_prime) |> list()
 
     let divides =

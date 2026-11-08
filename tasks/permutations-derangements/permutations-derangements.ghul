@@ -1,6 +1,6 @@
 use default
 
-extend(prefix: LIST[int], size: int) -> int[]{} is
+extend(prefix, size) is
     if prefix.count == size then
         yield prefix
     else
@@ -19,9 +19,9 @@ extend(prefix: LIST[int], size: int) -> int[]{} is
     fi
 si
 
-derangements(size: int) -> int[]{} => extend(LIST(), size)
+derangements(size) => extend(LIST(), size)
 
-subfactorials() -> bigint{} is
+subfactorials() is
     let previous mut = 1n
     let current mut = 0n
     let index mut = 0

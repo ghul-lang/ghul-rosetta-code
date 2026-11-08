@@ -1,6 +1,6 @@
 use default
 
-magic_square(n: int) -> int{} is
+magic_square(n) is
     let cells = repeat(0, n * n) |> LIST()
 
     let row mut = 0

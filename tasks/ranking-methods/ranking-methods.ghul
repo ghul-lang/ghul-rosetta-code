@@ -13,10 +13,10 @@ let competitors = [
     (score = 39, name = "Stephen")
 ]
 
-ties(entries: ENTRY[]) -> ENTRY[]{} =>
+ties(entries) =>
     entries |> group_by(e => e.score) |> map((_, group) => group)
 
-ranked(rank: RANKER) -> string{} is
+ranked(rank) is
     let ahead mut = 0
     let place mut = 0
 
@@ -33,18 +33,18 @@ ranked(rank: RANKER) -> string{} is
     od
 si
 
-standard(ahead: int, size: int, member: int, place: int) -> string =>
+standard(ahead, size, member, place) =>
     "{ahead + 1}"
 
-modified(ahead: int, size: int, member: int, place: int) -> string =>
+modified(ahead, size, member, place) =>
     "{ahead + size}"
 
-dense(ahead: int, size: int, member: int, place: int) -> string => "{place}"
+dense(ahead, size, member, place) => "{place}"
 
-ordinal(ahead: int, size: int, member: int, place: int) -> string =>
+ordinal(ahead, size, member, place) =>
     "{ahead + member + 1}"
 
-fractional(ahead: int, size: int, member: int, place: int) -> string =>
+fractional(ahead, size, member, place) =>
     "{double(ahead + ahead + size + 1) / 2.0:F1}"
 
 let methods = [

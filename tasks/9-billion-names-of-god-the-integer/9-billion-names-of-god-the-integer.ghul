@@ -1,6 +1,6 @@
 use default
 
-at_most(total: int, largest: int) -> int memo =>
+at_most(total, largest) memo =>
     if total == 0 then 1
     elif largest == 0 then 0
     elif largest > total then at_most(total, total)
@@ -8,7 +8,7 @@ at_most(total: int, largest: int) -> int memo =>
         at_most(total, largest - 1) + at_most(total - largest, largest)
     fi
 
-row(n: int) -> int{} => 1::n |> map(first => at_most(n - first, first))
+row(n) => 1::n |> map(first => at_most(n - first, first))
 
 for n in 1::25 do
     let cells = row(n) |> map(count => "{count,4}") |> join("")
@@ -16,7 +16,7 @@ for n in 1::25 do
     write_line("{"",(25 - n) * 2}{cells}")
 od
 
-g(n: int) -> bigint is
+g(n) is
     let ways = repeat(0n, n + 1) |> LIST()
 
     ways[0] = 1n
@@ -30,9 +30,9 @@ g(n: int) -> bigint is
     ways[n]
 si
 
-pentagonal(k: int) -> int => k * (3 * k - 1) / 2
+pentagonal(k) => k * (3 * k - 1) / 2
 
-p(n: int) -> bigint is
+p(n) is
     let partitions = LIST([1n])
 
     for m in 1::n do

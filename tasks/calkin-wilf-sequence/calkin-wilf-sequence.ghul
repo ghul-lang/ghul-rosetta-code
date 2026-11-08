@@ -1,6 +1,6 @@
 use default
 
-next_term(numerator: int, denominator: int) -> (int, int) => (
+next_term(numerator, denominator) => (
     denominator,
     denominator * (2 * (numerator / denominator) + 1) - numerator
 )
@@ -13,14 +13,14 @@ let terms = stream(
 
 write_line(terms |> take(20) |> join(" "))
 
-quotients(left: int, right: int) -> int{} is
+quotients(left, right) is
     if right > 0 then
         yield left / right
         yield in quotients(right, left % right)
     fi
 si
 
-continued_fraction(numerator: int, denominator: int) -> int{} =>
+continued_fraction(numerator, denominator) =>
     let terms = quotients(numerator, denominator) |> list() in
     if terms.count % 2 == 0 then
         (terms |> take(terms.count - 1)) ++ [terms[terms.count - 1] - 1, 1]

@@ -1,6 +1,6 @@
 use default
 
-bin(limits: int[], data: int[]) -> int[] => (
+bin(limits, data) => (
     let counts = repeat(0, limits.count + 1) |> LIST()
 
     for value in data do
@@ -12,7 +12,7 @@ bin(limits: int[], data: int[]) -> int[] => (
     counts
 )
 
-show(limits: int[], counts: int[]) is
+show(limits, counts) is
     write_line("{"<",13}{limits[0],6}{counts[0],8}")
 
     for i in 1..limits.count do

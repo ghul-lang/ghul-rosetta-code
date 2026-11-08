@@ -89,7 +89,7 @@ binary_precedence(kind: Kind) -> int? =>
     else null
     esac
 
-operator_spelling(kind: Kind) -> string =>
+operator_spelling(kind) =>
     case kind
     when MULTIPLY then "Multiply"
     when DIVIDE then "Divide"
@@ -280,18 +280,18 @@ class PARSER(tokens: Iterator[TOKEN]) is
         fi
 si
 
-leaf(kind: string, value: string) is
+leaf(kind, value) is
     write_line("{kind,-14}{value}")
 si
 
-unary(kind: string, value: Node) is
+unary(kind, value) is
     // the task's tree gives every unary node an empty second child
     write_line(kind)
     show(value)
     write_line(";")
 si
 
-binary(kind: string, left: Node, right: Node) is
+binary(kind, left, right) is
     write_line(kind)
     show(left)
     show(right)
@@ -336,13 +336,13 @@ show(node: Node) is
     esac
 si
 
-stdin_lines() -> string{} is
+stdin_lines() is
     while let line = read_line() do
         yield line
     od
 si
 
-token(line: string) -> TOKEN => (
+token(line) => (
     let fields = line |> words() |> list()
     let name = fields[2]
     let rest = line.substring(line.index_of(name) + name.length).trim()

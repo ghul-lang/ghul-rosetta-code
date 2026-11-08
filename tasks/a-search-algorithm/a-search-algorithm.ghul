@@ -17,28 +17,28 @@ let barrier = [
     (row = 4, column = 2), (row = 3, column = 2)
 ]
 
-at(square: Square) -> int => square.row * size + square.column
+at(square) => square.row * size + square.column
 
-square_at(index: int) -> Square => (
+square_at(index) => (
     row = index / size,
     column = index % size
 )
 
-blocked(square: Square) -> bool =>
+blocked(square) =>
     barrier |> any(other => at(other) == at(square))
 
-entering(square: Square) -> int => if blocked(square) then 100 else 1 fi
+entering(square) => if blocked(square) then 100 else 1 fi
 
-remaining(square: Square) -> int =>
+remaining(square) =>
     max(abs(goal.row - square.row), abs(goal.column - square.column))
 
-inside(square: Square) -> bool =>
+inside(square) =>
     square.row >= 0 /\
     square.row < size /\
     square.column >= 0 /\
     square.column < size
 
-steps_from(square: Square) -> Square{} is
+steps_from(square) is
     for down in -1::1 do
         for across in -1::1 do
             let next = (
@@ -139,7 +139,7 @@ let image = IMAGE(520, 520)
 
 image.view(-0.15, -0.15, 8.15, 8.15)
 
-middle(square: Square) -> (x: double, y: double) => (
+middle(square) => (
     x = double(square.column) + 0.5,
     y = double(size - square.row) - 0.5
 )

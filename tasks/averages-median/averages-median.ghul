@@ -1,6 +1,6 @@
 use default
 
-median(values: double{}) -> double is
+median(values) is
     let ordered = values |> sort() |> list()
 
     assert ordered.count > 0 else "the median of no values is not defined"

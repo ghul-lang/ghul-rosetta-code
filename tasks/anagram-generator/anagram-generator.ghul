@@ -1,6 +1,6 @@
 use default
 
-letter_counts(text: string) -> LIST[int] => (
+letter_counts(text) => (
     let counts = repeat(0, 26) |> LIST()
 
     for letter in text do
@@ -14,10 +14,10 @@ letter_counts(text: string) -> LIST[int] => (
     counts
 )
 
-fits(word: int[], available: int[]) -> bool =>
+fits(word, available) =>
     0..26 |> all(i => word[i] <= available[i])
 
-adjust(counts: LIST[int], by: int[], sign: int) is
+adjust(counts, by, sign) is
     for letter in 0..26 do
         counts[letter] = counts[letter] + sign * by[letter]
     od
@@ -25,7 +25,7 @@ si
 
 let words = IO.File.read_all_lines("unixdict.txt")
 
-anagrams_of(seed: string, wanted: int) -> string{} is
+anagrams_of(seed, wanted) is
     let remaining = letter_counts(seed)
 
     let candidates =

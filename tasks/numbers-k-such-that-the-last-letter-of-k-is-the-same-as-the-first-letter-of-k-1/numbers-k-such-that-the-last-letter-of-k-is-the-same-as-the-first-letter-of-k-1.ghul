@@ -17,7 +17,7 @@ let scales = [
     (1_000L, "thousand")
 ]
 
-english(n: long) -> string =>
+english(n) =>
     if n < 20L then
         small[int(n)]
     elif n < 100L then

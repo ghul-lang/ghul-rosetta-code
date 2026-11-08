@@ -24,7 +24,7 @@ class BITMAP is
     si
 si
 
-write_ppm(image: BITMAP, path: string) is
+write_ppm(image, path) is
     let file = IO.File.create(path)
 
     let header = System.Text.Encoding.ascii.get_bytes(

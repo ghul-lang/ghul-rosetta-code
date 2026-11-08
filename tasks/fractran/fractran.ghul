@@ -15,7 +15,7 @@ parse(text: string) -> Fraction[] =>
         ))
         |> list()
 
-run(program: Fraction[], start: bigint) -> bigint{} is
+run(program, start) is
     let n mut = start
 
     while true do

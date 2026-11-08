@@ -1,8 +1,8 @@
 use default
 
-nth_prime(index: int) -> int => primes() |> skip(index) |> first()!
+nth_prime(index) => primes() |> skip(index) |> first()!
 
-fibonacci(index: int) -> bigint is
+fibonacci(index) is
     walk(previous: bigint, current: bigint, remaining: int) -> bigint =>
         if remaining == 0 then current
         else walk(current, previous + current, remaining - 1)
@@ -11,7 +11,7 @@ fibonacci(index: int) -> bigint is
     walk(0n, 1n, index)
 si
 
-boustrophedon(term: (int) -> bigint, count: int) -> bigint{} is
+boustrophedon(term, count) is
     let row mut = LIST()
     row.add(term(0))
 

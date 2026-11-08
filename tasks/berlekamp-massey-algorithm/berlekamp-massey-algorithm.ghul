@@ -2,7 +2,7 @@ use default
 
 use Register = (connection: int[], length: int)
 
-predict(sequence: int[], connection: int[], length: int, n: int) -> int =>
+predict(sequence, connection, length, n) =>
     [
         connection[k] & sequence[n - k]
         for k in 1::length
@@ -10,7 +10,7 @@ predict(sequence: int[], connection: int[], length: int, n: int) -> int =>
     ]
         |> reduce(0, * ^ *)
 
-shortest_register(sequence: int[]) -> Register is
+shortest_register(sequence) is
     let connection = LIST([1])
     let previous mut = LIST([1])
     let length mut = 0
@@ -48,7 +48,7 @@ shortest_register(sequence: int[]) -> Register is
     (connection, length)
 si
 
-polynomial(coefficients: int[]) -> string =>
+polynomial(coefficients) =>
     coefficients
         |> index()
         |> filter((_, c) => c == 1)
@@ -61,7 +61,7 @@ polynomial(coefficients: int[]) -> string =>
         )
         |> join(" + ")
 
-regenerates(sequence: int[], connection: int[], length: int) -> bool =>
+regenerates(sequence, connection, length) =>
     length..sequence.count
         |> all(n => predict(sequence, connection, length, n) == sequence[n])
 

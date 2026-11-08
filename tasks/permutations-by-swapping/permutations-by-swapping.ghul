@@ -2,11 +2,11 @@ use default
 
 use STEP = (order: int[], sign: int)
 
-swap(values: LIST[int], left: int, right: int) is
+swap(values, left, right) is
     (values[left], values[right]) = (values[right], values[left])
 si
 
-permutations(size: int) -> STEP{} is
+permutations(size) is
     let values = 1::size |> LIST()
     let facing = repeat(-1, size) |> LIST()
     let sign mut = 1

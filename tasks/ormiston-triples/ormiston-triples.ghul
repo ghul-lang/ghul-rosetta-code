@@ -6,7 +6,7 @@ write_line("")
 let top = 1_000_000_000
 let segment_size = 1 << 20
 
-base_primes(bound: int) -> int{} is
+base_primes(bound) is
     let composite = repeat(false, bound + 1) |> LIST()
 
     let factor mut = 2
@@ -27,7 +27,7 @@ base_primes(bound: int) -> int{} is
     2::bound |> filter(value => !composite[value])
 si
 
-primes_below(bound: int) -> int{} is
+primes_below(bound) is
     let root_bound = int(sqrt(double(bound))) + 1
     let roots = base_primes(root_bound)
     let block = repeat(false, segment_size) |> LIST()
@@ -63,7 +63,7 @@ primes_below(bound: int) -> int{} is
     od
 si
 
-signature(value: int) -> long =>
+signature(value) =>
     value |> digits() |> reduce(0L, (acc, d) => acc + (1L << (4 * d)))
 
 let smallest = LIST()

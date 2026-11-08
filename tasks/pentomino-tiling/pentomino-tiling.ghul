@@ -22,23 +22,23 @@ let pieces = [
     ('Z', [(0, 0), (0, 1), (1, 1), (2, 1), (2, 2)])
 ]
 
-reading_order(a: Cell, b: Cell) -> int =>
+reading_order(a, b) =>
     if a.row != b.row then
         a.row - b.row
     else
         a.column - b.column
     fi
 
-anchored(cells: Cell{}) -> Shape =>
+anchored(cells) =>
     let sorted = cells |> sort(reading_order) |> list() in
     let first = sorted[0] in
     sorted
         |> map(c => cell_at(c.row - first.row, c.column - first.column))
         |> list()
 
-cell_at(row: int, column: int) -> Cell => (row = row, column = column)
+cell_at(row, column) => (row = row, column = column)
 
-key(shape: Shape) -> string =>
+key(shape) =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
 orientations(cells: (int, int)[]) -> Shape{} is
@@ -74,7 +74,7 @@ let shapes =
 let board = repeat('.', size * size) |> LIST()
 let used = repeat(false, pieces.count) |> LIST()
 
-fits(shape: Shape, at: Cell) -> bool =>
+fits(shape, at) =>
     shape
         |> all(c =>
             let
@@ -88,13 +88,13 @@ fits(shape: Shape, at: Cell) -> bool =>
                 board[r * size + col] == '.'
         )
 
-mark(shape: Shape, at: Cell, name: char) is
+mark(shape, at, name) is
     for c in shape do
         board[(at.row + c.row) * size + at.column + c.column] = name
     od
 si
 
-tile() -> bool is
+tile() is
     let next = board |> find_index(* == '.')
 
     if !next? then
@@ -159,7 +159,7 @@ od
 
 let hues = "FILNPTUVWXYZ"
 
-color(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
+color(name) =>
     let
         h = double(hues.index_of(name)) / 12.0 * 6.0,
         f = h - floor(h),

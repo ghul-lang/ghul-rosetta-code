@@ -1,9 +1,9 @@
 use default
 
-next_prime(n: bigint) -> bigint =>
+next_prime(n) =>
     from(0) |> map(k => n + bigint(k)) |> find(is_prime)!
 
-reciprocal_primes() -> bigint{} is
+reciprocal_primes() is
     let numerator mut = 1n
     let denominator mut = 1n
 
@@ -16,7 +16,7 @@ reciprocal_primes() -> bigint{} is
     od
 si
 
-abbreviated(p: bigint) -> string =>
+abbreviated(p) =>
     let digits = "{p}" in
     if digits.length <= 40 then
         digits

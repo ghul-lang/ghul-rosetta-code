@@ -1,11 +1,11 @@
 use default
 
-factorial(n: int) -> bigint =>
+factorial(n) =>
     1::n |> reduce(1n, (acc, i) => acc * bigint(i))
 
-npk(n: int, k: int) -> bigint => factorial(n) / factorial(n - k)
+npk(n, k) => factorial(n) / factorial(n - k)
 
-nck(n: int, k: int) -> bigint =>
+nck(n, k) =>
     factorial(n) / (factorial(k) * factorial(n - k))
 
 let g = 7.0
@@ -15,7 +15,7 @@ let coefficients = [
     -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
 ]
 
-log_gamma(x: double) -> double =>
+log_gamma(x) =>
     let
         xm = x - 1.0,
         t = xm + g + 0.5,
@@ -28,7 +28,7 @@ log_gamma(x: double) -> double =>
 // A value too large for a double is shown as a mantissa and a
 // decimal exponent, both taken from the natural log rather than
 // from the value itself.
-scientific(ln_value: double) -> string =>
+scientific(ln_value) =>
     let
         log10 = ln_value / log(10.0),
         exponent = floor(log10),
@@ -36,17 +36,17 @@ scientific(ln_value: double) -> string =>
     in
         "{mantissa,0:F6}e+{int(exponent)}"
 
-approx_npk(n: int, k: int) -> string =>
+approx_npk(n, k) =>
     scientific(log_gamma(double(n + 1)) - log_gamma(double(n - k + 1)))
 
-approx_nck(n: int, k: int) -> string =>
+approx_nck(n, k) =>
     scientific(
         log_gamma(double(n + 1)) -
         log_gamma(double(k + 1)) -
         log_gamma(double(n - k + 1))
     )
 
-truncated(v: bigint) -> string =>
+truncated(v) =>
     let text = "{v}" in
     if text.length <= 32 then
         text

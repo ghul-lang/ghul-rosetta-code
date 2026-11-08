@@ -15,7 +15,7 @@ permute[T](digits: int[], items: T[]) -> T[] is
     return result
 si
 
-factorial_base_numbers(places: int) -> int[]{} is
+factorial_base_numbers(places) is
     let digits = repeat(0, places) |> LIST()
 
     while true do
@@ -36,7 +36,7 @@ factorial_base_numbers(places: int) -> int[]{} is
     od
 si
 
-parse_digits(text: string) -> int[] =>
+parse_digits(text) =>
     text.split(['.']) |> map(int.parse) |> list()
 
 show[T](digits: int[], items: T[]) =>

@@ -1,7 +1,7 @@
 use default
 use System.Convert.to_string
 
-successors(from: int) -> int{} is
+successors(from) is
     let n mut = from
 
     do

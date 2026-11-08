@@ -13,7 +13,7 @@ od
 
 let primes = [long(n) for n in 2..limit if !composite[n]]
 
-phi(x: long, a: int) -> long =>
+phi(x, a) =>
     if a == 0 then
         x
     elif x < primes[a] then
@@ -22,7 +22,7 @@ phi(x: long, a: int) -> long =>
         phi(x, a - 1) - phi(x / primes[a - 1], a - 1)
     fi
 
-prime_count(n: long) -> long =>
+prime_count(n) =>
     if n < 2L then
         0L
     else

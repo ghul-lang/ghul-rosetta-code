@@ -9,7 +9,7 @@ let gold = (name = "gold", value = 2500, weight = 2.0, volume = 0.002)
 let weight_limit = 25.0
 let volume_limit = 0.25
 
-most_of(item: Bounty) -> int =>
+most_of(item) =>
     min(int(weight_limit / item.weight), int(volume_limit / item.volume))
 
 let best_value mut = 0

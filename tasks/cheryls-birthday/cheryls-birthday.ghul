@@ -2,10 +2,10 @@ use default
 
 use DATE = (month: string, day: int)
 
-sharing_the_day(dates: DATE[], day: int) -> int =>
+sharing_the_day(dates, day) =>
     dates |> filter(date => date.day == day) |> count()
 
-sharing_the_month(dates: DATE[], month: string) -> int =>
+sharing_the_month(dates, month) =>
     dates |> filter(date => date.month =~ month) |> count()
 
 let possible = [

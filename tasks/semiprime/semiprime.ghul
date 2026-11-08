@@ -1,6 +1,6 @@
 use default
 
-is_semiprime(n: int) -> bool => prime_factors(n).count == 2
+is_semiprime(n) => prime_factors(n).count == 2
 
 let up_to_100 = 2::100 |> filter(is_semiprime) |> join()
 

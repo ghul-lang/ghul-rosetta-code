@@ -58,14 +58,14 @@ class TURTLE is
     state: (V3, V3, V3, V3) => (at, heading, left, up)
 si
 
-rectangle(t: TURTLE, a: double, b: double) is
+rectangle(t, a, b) is
     for side in [a, b, a, b] do
         t.forward(side)
         t.turn(90.0)
     od
 si
 
-box(t: TURTLE, width: double, depth: double, height: double) is
+box(t, width, depth, height) is
     rectangle(t, width, depth)
 
     for along in [width, depth, width, depth] do
@@ -80,7 +80,7 @@ box(t: TURTLE, width: double, depth: double, height: double) is
     od
 si
 
-house(t: TURTLE, size: double) is
+house(t, size) is
     let start = t.state
 
     box(t, size, size, size)
@@ -113,7 +113,7 @@ house(t: TURTLE, size: double) is
     assert (t.at - start.`0).length < 1.0e-9
 si
 
-bar_chart(t: TURTLE, values: double[], size: double) is
+bar_chart(t, values, size) is
     let start = t.state
     let width = size / double(values.count)
     let most = values |> reduce(0.0, max)
@@ -155,7 +155,7 @@ write_line("facing the way it started: {facing}")
 let yaw = 35.0 * pi / 180.0
 let elevation = 25.0 * pi / 180.0
 
-project(p: V3) -> (x: double, y: double) =>
+project(p) =>
     let
         across = p.x * cos(yaw) - p.y * sin(yaw),
         depth = p.x * sin(yaw) + p.y * cos(yaw),

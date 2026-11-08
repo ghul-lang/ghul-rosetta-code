@@ -1,13 +1,13 @@
 use default
 
-trees(bags: int) -> string[] memo =>
+trees(bags) memo =>
     if bags == 1 then
         ["()"]
     else
         forests(bags - 1, null) |> map(forest => "({forest})") |> list()
     fi
 
-forests(bags: int, largest: string?) -> string{} is
+forests(bags, largest) is
     if bags == 0 then
         yield ""
         return
@@ -26,7 +26,7 @@ forests(bags: int, largest: string?) -> string{} is
     od
 si
 
-plural(count: int, noun: string) -> string =>
+plural(count, noun) =>
     "{count} {noun}{if count == 1 then "" else "s" fi}"
 
 for bags in 1::5 do

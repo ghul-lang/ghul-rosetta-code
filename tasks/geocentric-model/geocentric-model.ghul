@@ -17,7 +17,7 @@ let years = 8.0
 let shown = 2.2
 let frames = 88
 
-rgb(r: int, g: int, b: int) -> Color => (
+rgb(r, g, b) => (
     red = ubyte(r),
     green = ubyte(g),
     blue = ubyte(b)
@@ -32,28 +32,28 @@ let bodies: Body[] = [
     ("Mars", 1.524, 1.8809, 355.45, rgb(220, 70, 50))
 ]
 
-around_sun(body: Body, year: double) -> (x: double, y: double) =>
+around_sun(body, year) =>
     let
         turns = body.start / 360.0 + year / body.period,
         angle = 2.0 * pi * turns
     in
         (x = body.radius * cos(angle), y = body.radius * sin(angle))
 
-around_earth(body: Body, year: double) -> (x: double, y: double) =>
+around_earth(body, year) =>
     let
         p = around_sun(body, year),
         e = around_sun(earth, year)
     in
         (x = p.x - e.x, y = p.y - e.y)
 
-turning(body: Body, from: double, to: double) -> double =>
+turning(body, from, to) =>
     let
         a = around_earth(body, from),
         b = around_earth(body, to)
     in
         atan2(a.x * b.y - a.y * b.x, a.x * b.x + a.y * b.y)
 
-retrograde_loops(body: Body) -> int is
+retrograde_loops(body) is
     let steps = int(years * 2000.0)
     let loops mut = 0
     let backwards mut = false
@@ -73,9 +73,9 @@ retrograde_loops(body: Body) -> int is
     loops
 si
 
-year_of(frame: int) -> double => shown * double(frame) / double(frames)
+year_of(frame) => shown * double(frame) / double(frames)
 
-draw(image: IMAGE, frame: int) is
+draw(image, frame) is
     image.clear(8ub, 8ub, 20ub)
     image.stroke(1.0)
 

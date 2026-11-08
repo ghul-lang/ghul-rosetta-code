@@ -1,6 +1,6 @@
 use default
 
-report(words: string[]) is
+report(words) is
     let longest_first =
         words |> sort((left, right) => right.length - left.length)
 

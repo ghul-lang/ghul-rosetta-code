@@ -3,14 +3,7 @@ use Raster.IMAGE
 
 use Circle = (x: double, y: double, radius: double)
 
-tangent_to(
-    first: Circle,
-    second: Circle,
-    third: Circle,
-    outside_first: double,
-    outside_second: double,
-    outside_third: double
-) -> Circle => (
+tangent_to(first, second, third, outside_first, outside_second, outside_third) => (
     let v11 = 2.0 * second.x - 2.0 * first.x
     let v12 = 2.0 * second.y - 2.0 * first.y
     let v13 =
@@ -81,7 +74,7 @@ let inside = tangent_to(given[0], given[1], given[2], 1.0, 1.0, 1.0)
 
 let outside = tangent_to(given[0], given[1], given[2], -1.0, -1.0, -1.0)
 
-spelled(circle: Circle) -> string =>
+spelled(circle) =>
     "x = {circle.x:F6}, y = {circle.y:F6}, "
     "r = {circle.radius:F6}"
 

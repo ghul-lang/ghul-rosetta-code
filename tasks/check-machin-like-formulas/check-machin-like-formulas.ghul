@@ -12,7 +12,7 @@ si
 
 struct TERM(multiplier: int, numerator: int, denominator: int)
 
-tangent_is_one(terms: TERM[]) -> bool is
+tangent_is_one(terms) is
     let product mut = GAUSSIAN(1n, 0n)
 
     for term in terms do
@@ -32,7 +32,7 @@ tangent_is_one(terms: TERM[]) -> bool is
     return product.real =~ product.imaginary
 si
 
-describe(term: TERM) -> string =>
+describe(term) =>
     let
         sign = if term.multiplier < 0 then "-" else "+" fi,
         scale = abs(term.multiplier),

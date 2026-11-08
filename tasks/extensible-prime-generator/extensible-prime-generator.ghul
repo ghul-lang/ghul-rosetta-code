@@ -1,6 +1,6 @@
 use default
 
-primes() -> int{} is
+primes() is
     let found = LIST()
     let candidate mut = 2
 
@@ -18,7 +18,7 @@ primes() -> int{} is
     od
 si
 
-between(low: int, high: int) -> int{} =>
+between(low, high) =>
     primes() |> skip_while(* < low) |> take_while(* <= high)
 
 write_line("the first twenty primes:")

@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 let inner = cos(0.4 * pi) / cos(0.2 * pi)
 
-corner(index: int) -> (x: double, y: double) => (
+corner(index) => (
     let radius = if index % 2 == 0 then 1.0 else inner fi
     let angle = (90.0 + 36.0 * double(index)) * pi / 180.0
 

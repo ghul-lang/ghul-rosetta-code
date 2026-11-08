@@ -1,6 +1,6 @@
 use default
 
-ways_to_make(amount: int, coins: int[]) -> long is
+ways_to_make(amount, coins) is
     let ways = repeat(0L, amount + 1) |> LIST()
     ways[0] = 1L
 

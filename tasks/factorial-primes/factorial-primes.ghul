@@ -1,6 +1,6 @@
 use default
 
-factorial_primes() -> (n: int, sign: int, value: bigint){} is
+factorial_primes() is
     let fact mut = 1n
     let n mut = 1
 

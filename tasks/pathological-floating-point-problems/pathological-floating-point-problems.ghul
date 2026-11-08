@@ -47,7 +47,7 @@ struct RATIONAL is
 
 si
 
-whole(n: bigint) -> RATIONAL => RATIONAL(n, 1n)
+whole(n) => RATIONAL(n, 1n)
 
 write_line("Task 1: the sequence v")
 

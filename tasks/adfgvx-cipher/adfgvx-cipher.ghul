@@ -4,7 +4,7 @@ let labels = "ADFGVX"
 
 let random = System.Random(20260908)
 
-shuffled(items: string) -> string => (
+shuffled(items) => (
     let held = items |> LIST()
     for i in 0..held.count do
         let j = i + random.next(held.count - i)
@@ -13,20 +13,20 @@ shuffled(items: string) -> string => (
     string(held)
 )
 
-all_letters(word: string) -> bool => word |> all(char.is_letter)
+all_letters(word) => word |> all(char.is_letter)
 
-no_repeats(word: string) -> bool => (
+no_repeats(word) => (
     let seen = SET()
     word |> all(seen.add)
 )
 
-read_order(key: string) -> int{} =>
+read_order(key) =>
     (0..key.length) |> sort_by(column => key[column])
 
-column_height(key: string, length: int, column: int) -> int =>
+column_height(key, length, column) =>
     (length / key.length) + if column < length % key.length then 1 else 0 fi
 
-to_pairs(square: string, text: string) -> string =>
+to_pairs(square, text) =>
     text
         |> flat_map(letter =>
             let at = square.index_of(letter) in
@@ -34,7 +34,7 @@ to_pairs(square: string, text: string) -> string =>
         )
         |> join("")
 
-from_pairs(square: string, pairs: char[]) -> string =>
+from_pairs(square, pairs) =>
     0..pairs.count / 2
         |> map(at =>
             let
@@ -45,7 +45,7 @@ from_pairs(square: string, pairs: char[]) -> string =>
         )
         |> join("")
 
-encrypt(square: string, key: string, text: string) -> string =>
+encrypt(square, key, text) =>
     let pairs = to_pairs(square, text) in
     key
         |> read_order()
@@ -54,7 +54,7 @@ encrypt(square: string, key: string, text: string) -> string =>
         )
         |> join("")
 
-decrypt(square: string, key: string, cipher: string) -> string => (
+decrypt(square, key, cipher) => (
     let pairs = cipher |> LIST()
     let taken mut = 0
     for column in read_order(key) do

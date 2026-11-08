@@ -117,7 +117,7 @@ si
 
 truth(value: bool) -> int => if value then 1 else 0 fi
 
-unquote(text: string) -> string =>
+unquote(text) =>
     text[1..<1].replace("\\n", "\n").replace("\\\\", "\\")
 
 let lines = LIST()

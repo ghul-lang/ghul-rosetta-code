@@ -1,6 +1,6 @@
 use default
 
-canonicalize(cidr: string) -> string => (
+canonicalize(cidr) => (
     let parts = cidr.split(['/']),
         bits = int.parse(parts[1]),
         octets = parts[0].split(['.']) |> map(long.parse)

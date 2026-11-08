@@ -8,9 +8,9 @@ let random = System.Random(20260908)
 
 let board = 1::squares |> map(* % squares) |> LIST()
 
-blank() -> int => board |> find_index(* == 0)!
+blank() => board |> find_index(* == 0)!
 
-neighbours(square: int) -> int[] => (
+neighbours(square) => (
     let found = LIST()
     let row = square / side
     let column = square % side
@@ -23,7 +23,7 @@ neighbours(square: int) -> int[] => (
     found
 )
 
-slide(square: int) is
+slide(square) is
     let empty = blank()
 
     board[empty] = board[square]
@@ -43,7 +43,7 @@ show() is
     Std.write_line()
 si
 
-solved() -> bool =>
+solved() =>
     (0..squares) |> all(square => board[square] == (square + 1) % squares)
 
 // Shuffling by playing legal moves leaves the puzzle solvable,

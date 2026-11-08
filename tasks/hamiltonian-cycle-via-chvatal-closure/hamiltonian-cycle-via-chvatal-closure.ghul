@@ -2,7 +2,7 @@ use default
 
 use Graph = List[SET[int]]
 
-graph(n: int, edges: (int, int){}) -> Graph => (
+graph(n, edges) => (
     let adjacency = 0..n |> map(_ => SET()) |> list()
 
     for (u, v) in edges do
@@ -13,7 +13,7 @@ graph(n: int, edges: (int, int){}) -> Graph => (
     adjacency
 )
 
-closure(g: Graph) -> Graph is
+closure(g) is
     let n = g.count
     let h = g |> map(SET) |> list()
     let changed mut = true
@@ -35,9 +35,9 @@ closure(g: Graph) -> Graph is
     h
 si
 
-is_complete(g: Graph) -> bool => g |> all(s => s.count == g.count - 1)
+is_complete(g) => g |> all(s => s.count == g.count - 1)
 
-hamiltonian_cycle(g: Graph) -> int[]? is
+hamiltonian_cycle(g) is
     let path = LIST([0])
 
     extend() is
@@ -65,12 +65,12 @@ hamiltonian_cycle(g: Graph) -> int[]? is
     if extend() then path else null fi
 si
 
-show_neighbours(g: Graph) =>
+show_neighbours(g) =>
     for (v, neighbours) in g |> index() do
         write_line("    {v}: {neighbours |> sort() |> join(" ")}")
     od
 
-test(name: string, g: Graph) is
+test(name, g) is
     write_line("{name}")
     write_line("  degrees: {g |> map(s => s.count) |> join(" ")}")
     write_line("  closure:")

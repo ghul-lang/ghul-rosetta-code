@@ -9,7 +9,7 @@ chernick_factors(n: int, m: long) -> bigint{} is
     od
 si
 
-smallest_chernick(n: int) -> (m: long, factors: bigint[]) is
+smallest_chernick(n) is
     let step = if n > 4 then 1L << (n - 4) else 1L fi
     let m mut = step
 

@@ -3,21 +3,21 @@ use default
 let start_of_text = 2c
 let end_of_text = 3c
 
-ordinal_order(left: string, right: string) -> int =>
+ordinal_order(left, right) =>
     string.compare_ordinal(left, right)
 
-rotations(text: string) -> string{} =>
+rotations(text) =>
     (0..text.length) |> map(i => "{text[i..<0]}{text[0..i]}")
 
-last_character(text: string) -> string => "{text[text.length - 1]}"
+last_character(text) => "{text[text.length - 1]}"
 
-transform(text: string) -> string =>
+transform(text) =>
     rotations("{start_of_text}{text}{end_of_text}")
         |> sort(ordinal_order)
         |> map(last_character)
         |> join("")
 
-invert(transformed: string) -> string => (
+invert(transformed) => (
     let width = transformed.length, empty = 0..width |> map(i => "")
 
     let table =
@@ -39,7 +39,7 @@ invert(transformed: string) -> string => (
     framed[1..width - 1]
 )
 
-visible(text: string) -> string =>
+visible(text) =>
     text.replace(start_of_text, '^').replace(end_of_text, '|')
 
 [

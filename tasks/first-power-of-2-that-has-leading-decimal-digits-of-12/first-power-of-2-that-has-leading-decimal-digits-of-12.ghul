@@ -2,7 +2,7 @@ use default
 
 let log_two = log10(2.0)
 
-p(leading: int, nth: int) -> int =>
+p(leading, nth) =>
     let
         digits = floor(log10(double(leading))),
         lower = log10(double(leading)) - digits,

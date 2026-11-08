@@ -37,7 +37,7 @@ od
 
 let start = LIST(points)
 
-fits(m: Move) -> bool is
+fits(m) is
     let step = steps[m.d]
 
     for i in 0..5 do
@@ -56,7 +56,7 @@ fits(m: Move) -> bool is
     return true
 si
 
-legal_moves() -> Move[] is
+legal_moves() is
     let empty = SET[(int, int)]()
 
     for (x, y) in points do
@@ -86,7 +86,7 @@ legal_moves() -> Move[] is
     return moves
 si
 
-play(m: Move) is
+play(m) is
     let step = steps[m.d]
 
     points.add((m.x, m.y))

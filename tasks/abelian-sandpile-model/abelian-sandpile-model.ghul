@@ -48,7 +48,7 @@ class SANDPILE is
     si
 si
 
-settled(size: int, grains: int) -> SANDPILE => (
+settled(size, grains) => (
     let pile = SANDPILE(size)
 
     pile.add(size / 2, size / 2, grains)
@@ -57,7 +57,7 @@ settled(size: int, grains: int) -> SANDPILE => (
     pile
 )
 
-show(grains: int) is
+show(grains) is
     let pile = settled(5, grains)
 
     write_line("{grains} grains:")

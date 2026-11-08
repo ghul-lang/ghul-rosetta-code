@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 
-from_hsv(hue: double, saturation: double, value: double) -> Color => (
+from_hsv(hue, saturation, value) => (
     let sextant = hue / 60.0
     let rising = value * (1.0 - saturation)
     let falling = value * (1.0 - saturation * (sextant - floor(sextant)))

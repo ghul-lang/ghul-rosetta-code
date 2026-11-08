@@ -5,7 +5,7 @@ union Decoded is
     ERROR(message: string)
 si
 
-encode_one(value: int) -> string =>
+encode_one(value) =>
     if value >= 128 then
         "|!{encode_one(value - 128)}"
     elif value < 32 then
@@ -19,7 +19,7 @@ encode_one(value: int) -> string =>
         esac
     fi
 
-encode(values: int{}) -> string => values |> map(encode_one) |> join("")
+encode(values) => values |> map(encode_one) |> join("")
 
 decode(text: string) -> Decoded is
     let quoted =
@@ -71,7 +71,7 @@ decode(text: string) -> Decoded is
     Decoded.VALUES(values)
 si
 
-show(values: int{}) -> string =>
+show(values) =>
     values
         |> map(v =>
             if v >= 32 /\ v < 127 then

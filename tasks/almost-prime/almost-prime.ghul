@@ -1,6 +1,6 @@
 use default
 
-almost_primes(k: int) -> int{} =>
+almost_primes(k) =>
     from(2) |> filter(n => prime_factors(n) |> count() == k)
 
 for k in 1::5 do

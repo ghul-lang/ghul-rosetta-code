@@ -5,7 +5,7 @@ use Raster.SHAPES
 
 use Solution = (a: int, b: int, c: int, d: int, e: int, f: int, g: int)
 
-solutions(low: int, high: int, unique: bool) -> Solution{} is
+solutions(low, high, unique) is
     for a in low::high do
         for b in low::high do
             let total = a + b
@@ -43,7 +43,7 @@ solutions(low: int, high: int, unique: bool) -> Solution{} is
     od
 si
 
-show(low: int, high: int) is
+show(low, high) is
     write_line("unique digits {low} to {high}:")
 
     for s in solutions(low, high, true) do
@@ -58,11 +58,11 @@ let step = 100.0
 let margin = 40.0
 let drop = 60.0
 
-left_of(at: int) -> double => margin + double(at) * step
+left_of(at) => margin + double(at) * step
 
-top_of(at: int) -> double => margin + if at % 2 == 0 then 0.0 else drop fi
+top_of(at) => margin + if at % 2 == 0 then 0.0 else drop fi
 
-outline(at: int) -> (x: double, y: double)[] =>
+outline(at) =>
     let
         x = left_of(at),
         y = top_of(at)
@@ -74,12 +74,12 @@ outline(at: int) -> (x: double, y: double)[] =>
             (x = x, y = y + side)
         ]
 
-cell(x: double, y: double, letter: string, value: int, image: IMAGE) is
+cell(x, y, letter, value, image) is
     image.text(x, y - 8.0, 15.0, letter, Anchor.CENTER)
     image.text(x, y + 22.0, 28.0, "{value}", Anchor.CENTER)
 si
 
-draw(s: Solution) is
+draw(s) is
     let image = IMAGE(
         int(left_of(3) + side + margin),
         int(margin + drop + side + margin + 10.0)

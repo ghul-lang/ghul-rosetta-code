@@ -56,14 +56,14 @@ parse_all(text: string) -> Tensor{} is
     found
 si
 
-shape(tensor: Tensor) -> int[] =>
+shape(tensor) =>
     if let (items): Tensor.ARRAY = tensor then
         [items.count] ++ shape(items[0]) |> collect()
     else
         []
     fi
 
-strides_of(dimensions: int[]) -> int[] =>
+strides_of(dimensions) =>
     0..dimensions.count
         |> map(level => dimensions[level + 1..<0] |> product())
         |> collect()
@@ -122,7 +122,7 @@ reshape(values: int[], dimensions: int[], strides: int[]) -> Tensor is
     build(0, 0)
 si
 
-deconvolve(g: Tensor, f: Tensor) -> Tensor => (
+deconvolve(g, f) => (
     let g_shape = shape(g), strides = strides_of(g_shape)
 
     let h_shape =
@@ -136,14 +136,14 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
     reshape(h_values, h_shape, strides)
 )
 
-show(tensor: Tensor) -> string =>
+show(tensor) =>
     case tensor
     when (value): Tensor.SCALAR then "{value}"
     when (items): Tensor.ARRAY then
         "[{items |> map(show) |> join(", ")}]"
     esac
 
-show_across_lines(tensor: Tensor) -> string =>
+show_across_lines(tensor) =>
     if let (items): Tensor.ARRAY = tensor then
         "[\n{items |> map(item => "    {show(item)}") |> join(",\n")}\n]"
     else

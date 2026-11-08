@@ -5,13 +5,13 @@ let names = [
     "Nickel", "Aluminium", "Iron", "Tin", "Lead"
 ]
 
-lucas(b: bigint) -> bigint{} =>
+lucas(b) =>
     stream((1n, 1n), ((x, y)) => x || (y, b * y + x))
 
 // successive ratios of the sequence, each truncated to the given number of
 // places, until one repeats the one before it
 
-approximate(b: bigint, places: int) -> (value: string, iterations: int) =>
+approximate(b, places) =>
     let scale = bigint.pow(10n, places) in
     let (n, pair) =
         lucas(b)

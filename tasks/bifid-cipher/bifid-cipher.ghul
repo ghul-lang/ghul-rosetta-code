@@ -6,7 +6,7 @@ class SQUARE(letters: string) is
     at(r: int, c: int) -> char => letters[(r - 1) * 5 + (c - 1)]
 si
 
-normalize(text: string) -> string =>
+normalize(text) =>
     [
         if ch == 'J' then 'I' else ch fi
         for ch in text.to_upper()
@@ -15,7 +15,7 @@ normalize(text: string) -> string =>
         |> map(ch => "{ch}")
         |> join("")
 
-encrypt(text: string, square: SQUARE) -> string =>
+encrypt(text, square) =>
     let
         letters = normalize(text),
         n = letters.length,
@@ -27,7 +27,7 @@ encrypt(text: string, square: SQUARE) -> string =>
             |> map(i => square.at(coords[i * 2], coords[i * 2 + 1]))
             |> join("")
 
-decrypt(text: string, square: SQUARE) -> string =>
+decrypt(text, square) =>
     let
         letters = normalize(text),
         n = letters.length
@@ -42,7 +42,7 @@ decrypt(text: string, square: SQUARE) -> string =>
         in
         0..n |> map(i => square.at(coords[i], coords[n + i])) |> join("")
 
-demo(label: string, message: string, square: SQUARE) is
+demo(label, message, square) is
     let encoded = encrypt(message, square)
     let decoded = decrypt(encoded, square)
 

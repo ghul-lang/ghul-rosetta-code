@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -51,7 +51,7 @@ scene() -> IMAGE is
     image
 si
 
-lerp(a: double, b: double, t: double) -> double => a + (b - a) * t
+lerp(a, b, t) => a + (b - a) * t
 
 bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     let x0 = min(int(floor(x)), source.width - 1)
@@ -72,7 +72,7 @@ bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     (mix(p => p.red), mix(p => p.green), mix(p => p.blue))
 si
 
-enlarge(source: IMAGE, factor: double) -> IMAGE is
+enlarge(source, factor) is
     let width = int(round(double(source.width) * factor))
     let height = int(round(double(source.height) * factor))
     let result = IMAGE(width, height)

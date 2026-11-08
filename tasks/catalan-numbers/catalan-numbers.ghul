@@ -1,6 +1,6 @@
 use default
 
-by_convolution(n: int) -> long memo is
+by_convolution(n) memo is
     if n == 0 then
         return 1L
     fi
@@ -9,7 +9,7 @@ by_convolution(n: int) -> long memo is
         (0..n) |> sum_by(i => by_convolution(i) * by_convolution(n - 1 - i))
 si
 
-by_recurrence(n: int) -> long =>
+by_recurrence(n) =>
     1::n
         |> reduce(1L, (c, k) =>
             2L * (2L * long(k) - 1L) * c / (long(k) + 1L)

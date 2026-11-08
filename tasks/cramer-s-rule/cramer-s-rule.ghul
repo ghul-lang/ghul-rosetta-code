@@ -2,9 +2,9 @@ use default
 
 use Matrix = int[][]
 
-sign(column: int) -> int => if column % 2 == 0 then 1 else -1 fi
+sign(column) => if column % 2 == 0 then 1 else -1 fi
 
-minor(m: Matrix, column: int) -> Matrix =>
+minor(m, column) =>
     1..m.count
         |> map(row =>
             0..m.count
@@ -14,7 +14,7 @@ minor(m: Matrix, column: int) -> Matrix =>
         )
         |> list()
 
-determinant(m: Matrix) -> int =>
+determinant(m) =>
     case m
     when [[entry]] then entry
     else
@@ -22,7 +22,7 @@ determinant(m: Matrix) -> int =>
             |> sum_by(c => sign(c) * m[0][c] * determinant(minor(m, c)))
     esac
 
-with_column(m: Matrix, column: int, values: int[]) -> Matrix =>
+with_column(m, column, values) =>
     0..m.count
         |> map(row =>
             0..m.count
@@ -37,7 +37,7 @@ with_column(m: Matrix, column: int, values: int[]) -> Matrix =>
         )
         |> list()
 
-solve(m: Matrix, constants: int[]) -> double{} =>
+solve(m, constants) =>
     let denominator = double(determinant(m)) in
     0..m.count
         |> map(column =>

@@ -20,21 +20,21 @@ let my_books = LIST()
 let you_hold = LIST()
 let you_lack = LIST()
 
-held(hand: int[], rank: int) -> int => hand |> filter(* == rank) |> count()
+held(hand, rank) => hand |> filter(* == rank) |> count()
 
-name_of(rank: int) -> string => ranks[rank]
+name_of(rank) => ranks[rank]
 
-cards(count: int, rank: int) -> string =>
+cards(count, rank) =>
     if count == 1 then
         "a {name_of(rank)}"
     else
         "{count} {name_of(rank)}s"
     fi
 
-sorted_hand(hand: int[]) -> string =>
+sorted_hand(hand) =>
     hand |> sort() |> map(name_of) |> join(" ")
 
-draw() -> int? =>
+draw() =>
     if deck.count == 0 then
         null
     else
@@ -45,7 +45,7 @@ draw() -> int? =>
         card
     fi
 
-hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int => (
+hand_over(from_hand, to_hand, rank) => (
     let moved = held(from_hand, rank)
 
     for _ in 0..moved do
@@ -56,7 +56,7 @@ hand_over(from_hand: LIST[int], to_hand: LIST[int], rank: int) -> int => (
     moved
 )
 
-lay_down_books(hand: LIST[int], books: LIST[int], owner: string) is
+lay_down_books(hand, books, owner) is
     for rank in 0..ranks.count do
         if held(hand, rank) == 4 then
             hand_over(hand, LIST(), rank)
@@ -68,7 +68,7 @@ lay_down_books(hand: LIST[int], books: LIST[int], owner: string) is
     od
 si
 
-top_up(hand: LIST[int]) is
+top_up(hand) is
     if hand.count == 0 then
         if let card = draw() then
             hand.add(card)
@@ -79,7 +79,7 @@ si
 // Ask for what you have shown me you hold, else for something I have
 // not already found you to be out of, and among those the rank I hold
 // most of.
-my_choice() -> int => (
+my_choice() => (
     let mine = (0..ranks.count) |> filter(rank => held(me, rank) > 0)
 
     let known = mine |> filter(you_hold.contains) |> list()

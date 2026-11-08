@@ -7,7 +7,7 @@ union Token(text: string) is
     CLOSE
 si
 
-scan(line: string) -> Token{} is
+scan(line) is
     for word in line.split([' ']) do
         case word
         when "(" then yield Token.OPEN(word)
@@ -19,26 +19,21 @@ scan(line: string) -> Token{} is
     od
 si
 
-precedence(symbol: string) -> int =>
+precedence(symbol) =>
     case symbol
     when "^" then 4
     when "*", "/" then 3
     else 2
     esac
 
-binds_tighter(top: string, incoming: string) -> bool =>
+binds_tighter(top, incoming) =>
     precedence(top) > precedence(incoming) \/
     (precedence(top) == precedence(incoming) /\ incoming !~ "^")
 
-show(tokens: Token[]) -> string =>
+show(tokens) =>
     tokens |> map(token => token.text) |> join(" ")
 
-row(
-    token: string,
-    action: string,
-    operators: string,
-    output: string
-) -> string => "{token,-7}{action,-38}{operators,-14}{output}"
+row(token, action, operators, output) => "{token,-7}{action,-38}{operators,-14}{output}"
 
 let line = "3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"
 

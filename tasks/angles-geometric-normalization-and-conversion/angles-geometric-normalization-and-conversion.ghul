@@ -1,9 +1,9 @@
 use default
 
-normalize(angle: double, turn: double) -> double =>
+normalize(angle, turn) =>
     angle - turn * truncate(angle / turn) + 0.0
 
-convert(angle: double, from: double, to: double) -> double =>
+convert(angle, from, to) =>
     normalize(angle, from) / from * to
 
 let scales = [

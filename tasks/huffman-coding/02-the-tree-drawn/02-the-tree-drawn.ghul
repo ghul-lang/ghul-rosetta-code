@@ -12,7 +12,7 @@ si
 use Huffman.LEAF
 use Huffman.NODE
 
-take_lightest(pending: LIST[Huffman]) -> Huffman is
+take_lightest(pending) is
     let lightest = pending |> min_by(node => node.weight)!
 
     pending.remove(lightest)
@@ -50,7 +50,7 @@ let edges = LIST[(from: SPOT, to: SPOT, bit: string)]()
 
 let next_leaf mut = 0.0
 
-place(node: Huffman, depth: int) -> SPOT =>
+place(node, depth) =>
     if let leaf: LEAF = node then
         let at = (x = next_leaf, y = -double(depth))
 

@@ -1,8 +1,8 @@
 use default
 
-sorted_letters(word: string) -> string => string(word |> sort())
+sorted_letters(word) => string(word |> sort())
 
-is_deranged(first: string, second: string) -> bool =>
+is_deranged(first, second) =>
     0..first.length |> all(i => first[i] != second[i])
 
 let words = IO.File.read_all_lines("unixdict.txt")

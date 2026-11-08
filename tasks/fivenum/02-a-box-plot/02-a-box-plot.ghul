@@ -3,7 +3,7 @@ use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
 
-fivenum(xs_raw: double[]) -> double[] is
+fivenum(xs_raw) is
     let xs = xs_raw |> sort() |> list()
     let n = xs.count
     let n4 = floor((double(n) + 3.0) / 2.0) / 2.0
@@ -37,7 +37,7 @@ let dark = (red = 45ub, green = 75ub, blue = 130ub)
 let pale = (red = 160ub, green = 185ub, blue = 225ub)
 let median_color = (red = 195ub, green = 70ub, blue = 45ub)
 
-box(image: IMAGE, summary: double[], center: double) is
+box(image, summary, center) is
     image.color(dark)
     image.stroke(1.4)
     image.line(summary[0], center, summary[4], center)
@@ -66,7 +66,7 @@ box(image: IMAGE, summary: double[], center: double) is
     image.line(summary[2], center - half, summary[2], center + half)
 si
 
-annotate(image: IMAGE, summary: double[], center: double) is
+annotate(image, summary, center) is
     image.color(80ub, 85ub, 100ub)
 
     for at in [0, 2, 4] do

@@ -1,6 +1,6 @@
 use default
 
-overlap(left: string, right: string) -> int => (
+overlap(left, right) => (
     let longest = min(left.length, right.length)
     let size mut = longest
 
@@ -11,7 +11,7 @@ overlap(left: string, right: string) -> int => (
     size
 )
 
-shortest_superstring(sequences: string[]) -> string is
+shortest_superstring(sequences) is
     let pieces = LIST[string]()
 
     for sequence in sequences do
@@ -46,7 +46,7 @@ shortest_superstring(sequences: string[]) -> string is
     return pieces[0]
 si
 
-report(sequences: string[]) is
+report(sequences) is
     let result = shortest_superstring(sequences)
 
     write_line("shortest common superstring: {result}")

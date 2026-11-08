@@ -11,15 +11,11 @@ let small = (centre = (x = 10.0, y = 10.0, z = 18.0), radius = 14.0)
 
 let light = (x = -0.5, y = 0.6, z = 1.0)
 
-normalized(v: VECTOR) -> VECTOR =>
+normalized(v) =>
     let length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z) in
     (x = v.x / length, y = v.y / length, z = v.z / length)
 
-depths(centre: VECTOR, radius: double, x: double, y: double) -> (
-    hit: bool,
-    near: double,
-    far: double
-) is
+depths(centre, radius, x, y) is
     let dx = x - centre.x
     let dy = y - centre.y
     let squared = radius * radius - dx * dx - dy * dy
@@ -33,7 +29,7 @@ depths(centre: VECTOR, radius: double, x: double, y: double) -> (
     return (hit = true, near = centre.z - half, far = centre.z + half)
 si
 
-shade(normal: VECTOR) -> ubyte is
+shade(normal) is
     let direction = normalized(light)
 
     let lit =
@@ -48,7 +44,7 @@ shade(normal: VECTOR) -> ubyte is
     return ubyte(20.0 + 235.0 * pow(lit, 1.6))
 si
 
-axis(index: int) -> double =>
+axis(index) =>
     extent * (2.0 * double(index) / double(size) - 1.0)
 
 let image = IMAGE(size, size)

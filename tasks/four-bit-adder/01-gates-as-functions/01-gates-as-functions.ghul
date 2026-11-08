@@ -1,19 +1,19 @@
 use default
 
-not(a: bool) -> bool => !a
+not(a) => !a
 
-and(a: bool, b: bool) -> bool => a /\ b
+and(a, b) => a /\ b
 
-or(a: bool, b: bool) -> bool => a \/ b
+or(a, b) => a \/ b
 
-xor(a: bool, b: bool) -> bool => or(and(a, not(b)), and(not(a), b))
+xor(a, b) => or(and(a, not(b)), and(not(a), b))
 
-half_adder(a: bool, b: bool) -> (sum: bool, carry: bool) => (
+half_adder(a, b) => (
     sum = xor(a, b),
     carry = and(a, b)
 )
 
-full_adder(a: bool, b: bool, carry_in: bool) -> (sum: bool, carry: bool) =>
+full_adder(a, b, carry_in) =>
     let
         lower = half_adder(a, b),
         upper = half_adder(lower.sum, carry_in)
@@ -38,20 +38,20 @@ four_bit_adder(a: bool[], b: bool[], carry_in: bool) -> (
     (sum = wires |> list(), carry = carry)
 si
 
-nibble(value: int) -> bool[] =>
+nibble(value) =>
     0..4 |> map(at => (value >> (3 - at)) % 2 == 1) |> list()
 
-binary(bits: bool[]) -> string =>
+binary(bits) =>
     bits |> map(bit => if bit then "1" else "0" fi) |> join("")
 
-value(added: (sum: bool[], carry: bool)) -> int =>
+value(added) =>
     added.sum
         |> reduce(
             if added.carry then 1 else 0 fi,
             (total, bit) => total * 2 + if bit then 1 else 0 fi
         )
 
-adds_correctly(a: int, b: int) -> bool =>
+adds_correctly(a, b) =>
     value(four_bit_adder(nibble(a), nibble(b), false)) == a + b
 
 for

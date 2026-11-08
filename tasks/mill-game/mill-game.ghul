@@ -69,14 +69,14 @@ si
 
 let to_place = [('W', 9), ('B', 9)] |> MAP()
 
-other(side: char) -> char => if side == 'W' then 'B' else 'W' fi
+other(side) => if side == 'W' then 'B' else 'W' fi
 
-holding(side: char) -> string[] =>
+holding(side) =>
     board.keys |> filter(p => board[p] == side) |> list()
 
-count_of(side: char) -> int => holding(side).count
+count_of(side) => holding(side).count
 
-in_mill(point: string, side: char) -> bool =>
+in_mill(point, side) =>
     mills
         |> any(m =>
             m |> any(p => p =~ point) /\ m |> all(p => board[p] == side)
@@ -110,7 +110,7 @@ moves(side: char) -> Move[] is
     result
 si
 
-play(move: Move, side: char) is
+play(move, side) is
     if let from = move.from then
         board[from] = '.'
     else
@@ -120,7 +120,7 @@ play(move: Move, side: char) is
     board[move.to] = side
 si
 
-undo(move: Move, side: char) is
+undo(move, side) is
     board[move.to] = '.'
 
     if let from = move.from then
@@ -130,14 +130,14 @@ undo(move: Move, side: char) is
     fi
 si
 
-makes_mill(move: Move, side: char) -> bool is
+makes_mill(move, side) is
     play(move, side)
     let made = in_mill(move.to, side)
     undo(move, side)
     made
 si
 
-removable(side: char) -> string[] =>
+removable(side) =>
     let
         pieces = holding(side),
         loose = pieces |> filter(p => !in_mill(p, side)) |> list()
@@ -146,7 +146,7 @@ removable(side: char) -> string[] =>
 
 pick[T](items: T[]) -> T => items[random.next(items.count)]
 
-computer_move(side: char) -> Move is
+computer_move(side) is
     let legal = moves(side)
     let winning = legal |> filter(makes_mill(*, side)) |> list()
 
@@ -172,7 +172,7 @@ si
 
 let autopilot mut = false
 
-ask(prompt: string) -> string? is
+ask(prompt) is
     if autopilot then
         return null
     fi
@@ -191,7 +191,7 @@ ask(prompt: string) -> string? is
     line.trim().to_lower()
 si
 
-human_move() -> Move? is
+human_move() is
     let legal = moves('W')
     let placing = to_place['W'] > 0
 
@@ -231,7 +231,7 @@ human_move() -> Move? is
     return null
 si
 
-human_removal(options: string[]) -> string? is
+human_removal(options) is
     while true do
         let answer = ask("which of the computer's pieces do you remove?")
 
@@ -249,14 +249,14 @@ human_removal(options: string[]) -> string? is
     return null
 si
 
-acts(side: char, yours: string, theirs: string) -> string =>
+acts(side, yours, theirs) =>
     if side == 'W' then
         "you {yours}"
     else
         "the computer {theirs}"
     fi
 
-describe(move: Move, side: char) -> string =>
+describe(move, side) =>
     if let from = move.from then
         "{acts(side, "move", "moves")} {from}-{move.to}"
     else

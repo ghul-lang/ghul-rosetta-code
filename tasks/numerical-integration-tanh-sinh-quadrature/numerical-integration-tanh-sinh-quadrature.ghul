@@ -1,12 +1,6 @@
 use default
 
-tanh_sinh(
-    f: double -> double,
-    lower: double,
-    upper: double,
-    steps: int,
-    accuracy: double
-) -> double is
+tanh_sinh(f, lower, upper, steps, accuracy) is
     let h = 0.1
     let half_width = (upper - lower) / 2.0
     let centre = (upper + lower) / 2.0

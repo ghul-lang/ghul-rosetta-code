@@ -37,13 +37,13 @@ class WHEEL_SET is
     si
 si
 
-describe(value: Value) -> string =>
+describe(value) =>
     case value
     when number: NUMBER then "{number.digit}"
     when wheel: WHEEL then "{wheel.name}"
     esac
 
-show(wheels: ARRAY[(name: char, values: ARRAY[Value])]) is
+show(wheels) is
     let wheel_set = WHEEL_SET(wheels)
 
     for (name, values) in wheels do

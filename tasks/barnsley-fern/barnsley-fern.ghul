@@ -2,7 +2,7 @@ use Raster.IMAGE
 
 let random = System.Random(20260918)
 
-next(x: double, y: double) -> (x: double, y: double) => (
+next(x, y) => (
     let choice = random.next_double()
 
     if choice < 0.01 then

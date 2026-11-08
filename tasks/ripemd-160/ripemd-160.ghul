@@ -39,10 +39,10 @@ let constants = [
     [0x50A28BE6u, 0x5C4DD124u, 0x6D703EF3u, 0x7A6D76E9u, 0u]
 ]
 
-rotate_left(value: uint, count: int) -> uint =>
+rotate_left(value, count) =>
     (value << count) | (value >>> (32 - count))
 
-mixed(round: int, x: uint, y: uint, z: uint) -> uint =>
+mixed(round, x, y, z) =>
     case round
     when 0 then x ^ y ^ z
     when 1 then (x & y) | (\x & z)
@@ -69,12 +69,12 @@ padded(message: ubyte[]) -> ubyte[] is
     return block
 si
 
-word(block: ubyte[], at: int) -> uint =>
+word(block, at) =>
     0..4
         |> map(index => uint(block[at + index]) << (8 * index))
         |> reduce(0u, * | *)
 
-ripemd160(message: ubyte[]) -> string is
+ripemd160(message) is
     let block = padded(message)
 
     let state = LIST([

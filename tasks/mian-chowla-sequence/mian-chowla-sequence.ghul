@@ -1,6 +1,6 @@
 use default
 
-mian_chowla() -> int{} is
+mian_chowla() is
     let terms = LIST()
     let sums = SET()
     let candidate mut = 1

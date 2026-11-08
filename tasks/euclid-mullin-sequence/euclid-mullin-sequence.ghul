@@ -5,7 +5,7 @@ let small_primes = [
     53, 59, 61, 67, 71, 73, 79, 83, 89, 97
 ]
 
-pollard_rho(value: bigint) -> bigint is
+pollard_rho(value) is
     let offset mut = 1n
     let divisor mut = 1n
 
@@ -44,7 +44,7 @@ least_prime_factor(value: bigint) -> bigint is
     return if smaller < larger then smaller else larger fi
 si
 
-euclid_mullin(count: int) -> bigint{} is
+euclid_mullin(count) is
     let product mut = 2n
 
     yield product
@@ -59,7 +59,7 @@ si
 
 let sequence = euclid_mullin(16) |> list()
 
-render(terms: bigint[]) -> string =>
+render(terms) =>
     let texts = terms |> map(term => "{term}") in
     texts |> join(" ")
 

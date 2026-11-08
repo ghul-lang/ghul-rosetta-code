@@ -9,13 +9,13 @@ let generated = LIST(words + 1)
 
 0::words |> each(_ => generated.add(0ul))
 
-mark(value: int) is
+mark(value) is
     let word = value >> 6
 
     generated[word] = generated[word] | (1ul << (value & 63))
 si
 
-is_generated(value: int) -> bool =>
+is_generated(value) =>
     (generated[value >> 6] & (1ul << (value & 63))) != 0ul
 
 let digit_sum mut = 1
@@ -42,7 +42,7 @@ for value in 1::limit do
     digit_sum = digit_sum + change
 od
 
-self_numbers() -> int{} => 1::limit |> filter(value => !is_generated(value))
+self_numbers() => 1::limit |> filter(value => !is_generated(value))
 
 write_line("the first 50 self numbers:")
 

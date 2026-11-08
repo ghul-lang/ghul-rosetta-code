@@ -1,6 +1,6 @@
 use default
 
-hex_dump(data: ubyte[], start: int, length: int) is
+hex_dump(data, start, length) is
     let offset mut = start
     let end = min(start + length, data.count)
 

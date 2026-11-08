@@ -12,7 +12,7 @@ struct Q(top: long, bottom: long) is
     is_zero: bool => top == 0L
 si
 
-reduced(top: long, bottom: long) -> Q =>
+reduced(top, bottom) =>
     let
         g = gcd(top, bottom),
         sign = if bottom < 0L then -1L else 1L fi
@@ -23,7 +23,7 @@ use Term = (value: Q, text: string)
 
 let target = Q(24L, 1L)
 
-solve(terms: Term[]) -> string? is
+solve(terms) is
     if let [only] = terms then
         return if only.value =~ target then only.text else null fi
     fi

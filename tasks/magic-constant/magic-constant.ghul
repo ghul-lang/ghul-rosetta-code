@@ -1,13 +1,13 @@
 use default
 
-constant(n: bigint) -> bigint => n * (n * n + 1n) / 2n
+constant(n) => n * (n * n + 1n) / 2n
 
 let first = 3::22 |> map(n => constant(bigint(n))) |> join(" ")
 
 write_line("The first 20 magic constants: {first}")
 write_line("The 1000th magic constant: {constant(1002n)}")
 
-smallest_order_above(limit: bigint) -> bigint is
+smallest_order_above(limit) is
     let low mut = 1n
     let high mut = 1n
 

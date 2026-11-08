@@ -6,7 +6,7 @@ let height = 360
 
 let light = (x = -0.45, y = 0.55, z = 0.70)
 
-brightness(pixel_x: int, pixel_y: int) -> double => (
+brightness(pixel_x, pixel_y) => (
     let x =
         (double(pixel_x) - 0.5 * double(width)) / (0.42 * double(height))
     let y =
@@ -42,13 +42,13 @@ od
 
 let palette = 2
 
-nearest(value: double) -> double => (
+nearest(value) => (
     let steps = double(palette - 1)
 
     round(min(1.0, max(0.0, value)) * steps) / steps
 )
 
-spread(pixel_x: int, pixel_y: int, error: double, part: double) is
+spread(pixel_x, pixel_y, error, part) is
     if pixel_x >= 0 /\ pixel_x < width /\ pixel_y < height then
         let at = pixel_y * width + pixel_x
 

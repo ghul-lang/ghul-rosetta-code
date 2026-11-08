@@ -1,21 +1,18 @@
 use default
 
-reverse(text: string) -> string =>
+reverse(text) =>
     text |> graphemes() |> reverse() |> string()
 
-is_palindrome(text: string) -> bool => text =~ reverse(text)
+is_palindrome(text) => text =~ reverse(text)
 
-is_inexact_palindrome(text: string) -> bool =>
+is_inexact_palindrome(text) =>
     text
         |> filter(char.is_letter)
         |> map(char.to_lower)
         |> string()
         |> is_palindrome()
 
-test(
-    maybe_palindrome: string,
-    palindrome_check: string -> bool
-) -> string =>
+test(maybe_palindrome, palindrome_check) =>
     if palindrome_check(maybe_palindrome) then
         "\"{maybe_palindrome}\" is a palindrome"
     else

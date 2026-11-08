@@ -1,6 +1,6 @@
 use default
 
-zero_free(digits: int) -> long{} is
+zero_free(digits) is
     if digits == 0 then
         yield 0L
         return
@@ -13,7 +13,7 @@ zero_free(digits: int) -> long{} is
     od
 si
 
-cyclops() -> long{} is
+cyclops() is
     let half mut = 0
 
     while true do
@@ -31,18 +31,18 @@ cyclops() -> long{} is
     od
 si
 
-blinded(value: long) -> long =>
+blinded(value) =>
     let
         text = "{value}",
         middle = text.length / 2
     in
         long.parse("{text[0..middle]}{text[middle + 1..<0]}")
 
-is_palindrome(value: long) -> bool =>
+is_palindrome(value) =>
     let text = "{value}" in
     (0..text.length / 2) |> all(i => text[i] == text[text.length - 1 - i])
 
-report(name: string, numbers: () -> long{}) is
+report(name, numbers) is
     write_line("first 50 {name}:")
 
     let first_50 = numbers() |> take(50) |> list()

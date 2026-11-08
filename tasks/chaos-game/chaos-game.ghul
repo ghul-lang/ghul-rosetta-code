@@ -14,7 +14,7 @@ let corners = [
 
 let image = IMAGE(640, 560)
 
-toward_a_corner(at: Step) -> STREAM[Step, Step] => (
+toward_a_corner(at) => (
     let chosen = random.next(corners.count)
     let corner = corners[chosen]
 
@@ -27,7 +27,7 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
     next || next
 )
 
-plot(at: Step) is
+plot(at) is
     let spot = image.to_pixel(at.x, at.y)
 
     image.color(COLOR_MAP.hue(double(at.corner) / 3.0))

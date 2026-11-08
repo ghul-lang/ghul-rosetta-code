@@ -1,9 +1,9 @@
 use default
 
-fs(f: (int) -> int, s: int{}) -> int{} => s |> map(f)
+fs(f, s) => s |> map(f)
 
-f1(n: int) -> int => n * 2
-f2(n: int) -> int => n * n
+f1(n) => n * 2
+f2(n) => n * n
 
 let fsf1 = fs(f1, *)
 let fsf2 = fs(f2, *)

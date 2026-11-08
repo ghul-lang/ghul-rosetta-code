@@ -14,14 +14,14 @@ si
 
 use Triple = (CARD, CARD, CARD)
 
-is_set(t: Triple) -> bool =>
+is_set(t) =>
     let (a, b, c) = t in
     (a.color + b.color + c.color) % 3 == 0 /\
     (a.number + b.number + c.number) % 3 == 0 /\
     (a.symbol + b.symbol + c.symbol) % 3 == 0 /\
     (a.shading + b.shading + c.shading) % 3 == 0
 
-triples(cards: CARD[]) -> Triple{} is
+triples(cards) is
     for i in 0..cards.count do
         for j in i + 1..cards.count do
             for k in j + 1..cards.count do
@@ -45,7 +45,7 @@ deal(size: int) -> CARD[] is
     return deck |> take(size) |> list()
 si
 
-puzzle(size: int, wanted: int) -> CARD[] is
+puzzle(size, wanted) is
     do
         let cards = deal(size)
 
@@ -84,10 +84,7 @@ let inks = [
     (220ub, 30ub, 50ub), (20ub, 150ub, 60ub), (110ub, 40ub, 150ub)
 ]
 
-outline(symbol: int, x: double, y: double) -> List[(
-    x: double,
-    y: double
-)] =>
+outline(symbol, x, y) =>
     let steps = 32 in
     (0..steps)
         |> map(i =>

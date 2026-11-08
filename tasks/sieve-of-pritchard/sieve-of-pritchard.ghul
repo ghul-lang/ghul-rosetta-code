@@ -36,7 +36,7 @@ pritchard(limit: int) -> int{} is
     primes
 si
 
-extend(wheel: SET[int], length: int, prime: int, limit: int) is
+extend(wheel, length, prime, limit) is
     let target = min(length * prime, limit)
 
     for member in wheel |> ARRAY() do
@@ -50,7 +50,7 @@ extend(wheel: SET[int], length: int, prime: int, limit: int) is
     od
 si
 
-next_member(wheel: SET[int], length: int) -> int is
+next_member(wheel, length) is
     for member in wheel |> sort() do
         if member > 1 then
             return member

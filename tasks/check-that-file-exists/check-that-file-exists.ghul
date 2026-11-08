@@ -1,6 +1,6 @@
 use default
 
-report(path: string) =>
+report(path) =>
     let
         file = IO.File.exists(path),
         directory = IO.Directory.exists(path)

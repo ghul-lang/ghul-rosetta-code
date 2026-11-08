@@ -7,17 +7,17 @@ let points = [
     (2.0, 6.0), (0.0, 4.0), (4.0, 4.0), (9.0, 8.0)
 ]
 
-distance(a: int, b: int) -> double =>
+distance(a, b) =>
     let
         (ax, ay) = points[a],
         (bx, by) = points[b]
     in
         double.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by))
 
-length(edges: Edge{}) -> double =>
+length(edges) =>
     edges |> sum_by((from, to) => distance(from, to))
 
-spanning_tree(n: int) -> Edge{} => (
+spanning_tree(n) => (
     let in_tree = SET([0])
     let edges = LIST()
 
@@ -38,7 +38,7 @@ spanning_tree(n: int) -> Edge{} => (
     edges
 )
 
-perfect_matching(vertices: int[]) -> Edge{} =>
+perfect_matching(vertices) =>
     if vertices.count == 0 then
         []
     else

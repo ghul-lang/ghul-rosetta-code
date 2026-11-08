@@ -24,7 +24,7 @@ let visits: VISIT[] = [
 
 let by_patient = visits |> group_by(visit => visit.id)
 
-row(cells: string[]) -> string => "| {cells |> join(" | ")} |"
+row(cells) => "| {cells |> join(" | ")} |"
 
 write_line(
     row([

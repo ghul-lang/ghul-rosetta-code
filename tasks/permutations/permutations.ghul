@@ -1,6 +1,6 @@
 use default
 
-permutations(items: int[]) -> int[]{} is
+permutations(items) is
     if items.count == 0 then
         yield LIST()
     else

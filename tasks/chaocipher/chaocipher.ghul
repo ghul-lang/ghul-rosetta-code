@@ -2,7 +2,7 @@ use default
 
 let nadir = 13
 
-rotate(alphabet: LIST[char], by: int) is
+rotate(alphabet, by) is
     for _ in 0..by do
         let first = alphabet[0]
 
@@ -11,7 +11,7 @@ rotate(alphabet: LIST[char], by: int) is
     od
 si
 
-advance(left: LIST[char], right: LIST[char], index: int) is
+advance(left, right, index) is
     rotate(left, index)
 
     let from_left = left[1]
@@ -27,7 +27,7 @@ advance(left: LIST[char], right: LIST[char], index: int) is
     right.insert(nadir, from_right)
 si
 
-chao(text: string, encrypting: bool) -> string is
+chao(text, encrypting) is
     let left = "HXUCZVAMDSLKPEFJRIGTWOBNYQ" |> LIST()
     let right = "PTLNBQDEOYSFAVZKGJRIHWXUMC" |> LIST()
     let out = LIST()

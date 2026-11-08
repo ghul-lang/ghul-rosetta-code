@@ -5,7 +5,7 @@ let small_primes = [
     53, 59, 61, 67, 71, 73, 79, 83, 89, 97
 ]
 
-pollard_rho(value: bigint) -> bigint is
+pollard_rho(value) is
     let offset mut = 1n
     let divisor mut = 1n
 
@@ -27,7 +27,7 @@ pollard_rho(value: bigint) -> bigint is
     return divisor
 si
 
-prime_factors(value: bigint) -> bigint{} is
+prime_factors(value) is
     let remaining mut = value
 
     for small in small_primes do
@@ -66,7 +66,7 @@ home_prime_chain(start: bigint) -> bigint{} is
     yield current
 si
 
-show(start: int) is
+show(start) is
     let chain = home_prime_chain(cast(start)) |> list()
     let steps = chain.count - 1
     let stages =

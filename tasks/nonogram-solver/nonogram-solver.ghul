@@ -4,7 +4,7 @@ use Cells = LIST[int]
 
 let unknown = -1
 
-clues_of(text: string) -> int[][] =>
+clues_of(text) =>
     text.split([' '])
         |> map(word => word |> map(c => int(c) - 64) |> list())
         |> list()

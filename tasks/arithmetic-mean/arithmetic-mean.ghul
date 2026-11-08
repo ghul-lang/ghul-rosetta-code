@@ -1,5 +1,5 @@
 use default
 
-mean(values: double[]) -> double => values |> sum() / cast(values.count)
+mean(values) => values |> sum() / cast(values.count)
 
 write_line("mean: {mean([1.0, 2.0, 3.0, 4.0, 5.0]):F1}")

@@ -1,6 +1,6 @@
 use default
 
-with_sum_column(line: string, index: int) -> string =>
+with_sum_column(line, index) =>
     if index == 0 then
         "{line},SUM"
     else

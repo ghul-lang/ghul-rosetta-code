@@ -20,7 +20,7 @@ shuffled_cards() -> int[] => (
     cards
 )
 
-follows_the_cycle(cards: int[], prisoner: int) -> bool => (
+follows_the_cycle(cards, prisoner) => (
     let drawer mut = prisoner
     for _ in 0..attempts do
         if cards[drawer - 1] == prisoner then
@@ -31,7 +31,7 @@ follows_the_cycle(cards: int[], prisoner: int) -> bool => (
     false
 )
 
-opens_at_random(cards: int[], prisoner: int) -> bool => (
+opens_at_random(cards, prisoner) => (
     let unopened = 1::prisoners |> LIST()
     for i in 0..attempts do
         let j = i + random.next(unopened.count - i)
@@ -44,11 +44,11 @@ opens_at_random(cards: int[], prisoner: int) -> bool => (
     false
 )
 
-all_pardoned(finds: (int[], int) -> bool) -> bool =>
+all_pardoned(finds) =>
     let cards = shuffled_cards() in
     1::prisoners |> all(finds(cards, *))
 
-success_rate(finds: (int[], int) -> bool) -> double =>
+success_rate(finds) =>
     cast(0..trials |> filter(_ => all_pardoned(finds)) |> count()) *
     100.0 /
     cast(trials)

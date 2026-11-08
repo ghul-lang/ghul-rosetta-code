@@ -12,18 +12,18 @@ use Mesh = (points: Point[], faces: Face[])
 
 *(p: Point, k: double) -> Point => (x = p.x * k, y = p.y * k, z = p.z * k)
 
-center(points: Point[]) -> Point =>
+center(points) =>
     (points |> reduce((x = 0.0, y = 0.0, z = 0.0), (a, b) => a + b)) *
     (1.0 / double(points.count))
 
-edge_key(a: int, b: int) -> (low: int, high: int) =>
+edge_key(a, b) =>
     if a < b then
         (low = a, high = b)
     else
         (low = b, high = a)
     fi
 
-subdivided(mesh: Mesh) -> Mesh is
+subdivided(mesh) is
     let (points, faces) = mesh
 
     let face_points =

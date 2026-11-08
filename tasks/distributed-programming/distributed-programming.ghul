@@ -12,15 +12,10 @@ use System.Text.Json.JsonSerializerOptions
 // The two sides speak JSON-RPC 2.0 over HTTP. Run one copy as
 // `serve http://+:8080/` and another with that address to call it.
 
-json(value: object) -> string =>
+json(value) =>
     JsonSerializer.serialize(value, JsonSerializerOptions())
 
-call(
-    client: HttpClient,
-    url: string,
-    method: string,
-    arguments: object
-) -> string is
+call(client, url, method, arguments) is
     let request = MAP()
 
     request["jsonrpc"] = "2.0"

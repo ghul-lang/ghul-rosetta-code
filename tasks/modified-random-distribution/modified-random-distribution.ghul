@@ -2,10 +2,10 @@ use default
 
 let random = System.Random(42)
 
-modifier(x: double) -> double =>
+modifier(x) =>
     if x < 0.5 then 2.0 * (0.5 - x) else 2.0 * (x - 0.5) fi
 
-modified(generate: () -> double, weight: double -> double) -> double is
+modified(generate, weight) is
     do
         let candidate = generate()
 

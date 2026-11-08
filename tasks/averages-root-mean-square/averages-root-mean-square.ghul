@@ -1,6 +1,6 @@
 use default
 
-root_mean_square(values: double[]) -> double =>
+root_mean_square(values) =>
     let squares = values |> sum_by(v => v * v) in
     sqrt(squares / cast(values.count))
 

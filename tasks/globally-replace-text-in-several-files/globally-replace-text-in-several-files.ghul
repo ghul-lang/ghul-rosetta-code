@@ -1,7 +1,7 @@
 use default
 use IO.File
 
-replace_in_file(source: string, destination: string) is
+replace_in_file(source, destination) is
     let replaced =
         File.read_all_text(source).replace(
             "Goodbye London!",

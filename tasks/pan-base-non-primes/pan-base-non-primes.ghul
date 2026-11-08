@@ -1,12 +1,12 @@
 use default
 
-value_in(digits: int[], base: int) -> long =>
+value_in(digits, base) =>
     digits |> reduce(0L, (value, d) => value * long(base) + long(d))
 
 // A numeric string n is composite in every base once it is composite in
 // every base up to n itself, so only those bases are tried.
 
-is_pan_base_non_prime(n: int) -> bool =>
+is_pan_base_non_prime(n) =>
     let digits = "{n}" |> map(c => int(c - '0')) |> list() in
     let lowest = (digits |> max()!) + 1 in
     lowest..int.max(lowest + 1, n + 1)

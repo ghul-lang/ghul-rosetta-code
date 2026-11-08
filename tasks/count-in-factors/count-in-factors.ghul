@@ -1,6 +1,6 @@
 use default
 
-factors(n: int) -> int{} is
+factors(n) is
     let remaining mut = n
     let divisor mut = 2
 
@@ -18,7 +18,7 @@ factors(n: int) -> int{} is
     fi
 si
 
-describe(n: int) -> string =>
+describe(n) =>
     if n == 1 then
         "1"
     else

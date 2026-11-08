@@ -35,7 +35,7 @@ let strings = LIST[string]()
 
 let size mut = 0
 
-emit(name: string, operand: string) -> INSTRUCTION is
+emit(name, operand) is
     let instruction = INSTRUCTION(size, name, operand)
     let jumps = name =~ "jz" \/ name =~ "jmp"
 
@@ -45,7 +45,7 @@ emit(name: string, operand: string) -> INSTRUCTION is
     instruction
 si
 
-slot(names: LIST[string], name: string) -> int is
+slot(names, name) is
     if !(names |> any(* =~ name)) then
         names.add(name)
     fi

@@ -18,14 +18,14 @@ use Expression.DIVIDE
 
 struct PARSED(expression: Expression, next: int)
 
-skip_spaces(text: string, at: int) -> int =>
+skip_spaces(text, at) =>
     if at < text.length /\ text[at] == ' ' then
         skip_spaces(text, at + 1)
     else
         at
     fi
 
-parse_term(text: string, at: int) -> PARSED? is
+parse_term(text, at) is
     let start = skip_spaces(text, at)
 
     if start == text.length then
@@ -59,7 +59,7 @@ parse_term(text: string, at: int) -> PARSED? is
     return PARSED(NUMBER(int.parse(digits)), end)
 si
 
-operator_at(text: string, position: int, operators: string) -> int? =>
+operator_at(text, position, operators) =>
     let here = skip_spaces(text, position) in
     if here < text.length /\ operators.contains(text[here]) then
         here
@@ -67,7 +67,7 @@ operator_at(text: string, position: int, operators: string) -> int? =>
         null
     fi
 
-build(operator: char, left: Expression, right: Expression) -> Expression =>
+build(operator, left, right) =>
     case operator
     when '+' then ADD(left, right)
     when '-' then SUBTRACT(left, right)
@@ -76,12 +76,7 @@ build(operator: char, left: Expression, right: Expression) -> Expression =>
     else throw System.Exception("not an operator: {operator}")
     esac
 
-parse_run(
-    text: string,
-    at: int,
-    operators: string,
-    operand: (string, int) -> PARSED?
-) -> PARSED? is
+parse_run(text, at, operators, operand) is
     if let (left, next) = operand(text, at) then
         let expression mut = left
         let position mut = next
@@ -101,10 +96,10 @@ parse_run(
     return null
 si
 
-parse_factor(text: string, at: int) -> PARSED? =>
+parse_factor(text, at) =>
     parse_run(text, at, "*/", parse_term)
 
-parse_expression(text: string, at: int) -> PARSED? =>
+parse_expression(text, at) =>
     parse_run(text, at, "+-", parse_factor)
 
 parse(text: string) -> Expression? is
@@ -120,7 +115,7 @@ parse(text: string) -> Expression? is
     return null
 si
 
-evaluate(expression: Expression) -> int =>
+evaluate(expression) =>
     case expression
     when (value): NUMBER then value
     when (left, right): ADD then
@@ -147,7 +142,7 @@ node(expression: Expression) -> (label: string, children: Expression[]) =>
         (label = "/", children = [left, right])
     esac
 
-draw(expression: Expression, prefix: string, stem: string) is
+draw(expression, prefix, stem) is
     let (label, children) = node(expression)
 
     write_line("{stem}{label}")
@@ -163,7 +158,7 @@ draw(expression: Expression, prefix: string, stem: string) is
     od
 si
 
-prompt() -> string? is
+prompt() is
     write("expression: ")
 
     read_line()

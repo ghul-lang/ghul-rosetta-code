@@ -10,7 +10,7 @@ let record_length = 80
 let block_length = 1024
 let block_line_length = 64
 
-records(path: string, length: int) -> string{} is
+records(path, length) is
     let bytes = File.read_all_bytes(path)
     let whole = bytes.count / length
 
@@ -19,7 +19,7 @@ records(path: string, length: int) -> string{} is
     od
 si
 
-reverse(record: string) -> string => (
+reverse(record) => (
     let characters = record |> ARRAY()
 
     System.Array.reverse(characters)

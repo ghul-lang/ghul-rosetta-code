@@ -34,7 +34,7 @@ punctuation_names.add("hyphen", '-')
 count_of[K](counts: MAP[K, int], key: K) -> int =>
     if counts.contains_key(key) then counts[key] else 0 fi
 
-actual_counts(sentence: string, with_punctuation: bool) -> MAP[char, int] is
+actual_counts(sentence, with_punctuation) is
     let counts = MAP()
 
     for character in sentence.to_lower() do
@@ -72,7 +72,7 @@ claimed_item(word: string) -> char? is
     return null
 si
 
-claimed_counts(sentence: string) -> MAP[char, int] is
+claimed_counts(sentence) is
     let claims = MAP()
     let pending mut = 0
 
@@ -96,7 +96,7 @@ claimed_counts(sentence: string) -> MAP[char, int] is
     return claims
 si
 
-is_autogram(sentence: string, with_punctuation: bool) -> bool =>
+is_autogram(sentence, with_punctuation) =>
     let
         actual = actual_counts(sentence, with_punctuation),
         claimed = claimed_counts(sentence)

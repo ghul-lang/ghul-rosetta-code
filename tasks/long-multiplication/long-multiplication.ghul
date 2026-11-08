@@ -1,10 +1,10 @@
 use default
 
-digits_of(s: string) -> int[] =>
+digits_of(s) =>
     let value = c => int(c) - int('0') in
     s |> reverse() |> map(value) |> list()
 
-multiply(a: string, b: string) -> string is
+multiply(a, b) is
     let da = digits_of(a)
     let db = digits_of(b)
     let result = 0::(da.count + db.count) |> map(_ => 0) |> LIST()

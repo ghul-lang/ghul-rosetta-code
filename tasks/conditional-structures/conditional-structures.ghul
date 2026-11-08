@@ -14,7 +14,7 @@ union Shape is
     SQUARE(side: int)
 si
 
-describe(value: int) -> string is
+describe(value) is
     if value < 0 then
         return "negative"
     elif value == 0 then
@@ -30,14 +30,14 @@ color(suit) =>
     else "black"
     esac
 
-area(shape: Shape) -> int =>
+area(shape) =>
     case shape
     when circle: Shape.CIRCLE then
         circle.radius * circle.radius * 3
     when square: Shape.SQUARE then square.side * square.side
     esac
 
-size(shape: Shape) -> string =>
+size(shape) =>
     if let circle: Shape.CIRCLE = shape /\ circle.radius > 10 then
         "a big circle"
     else

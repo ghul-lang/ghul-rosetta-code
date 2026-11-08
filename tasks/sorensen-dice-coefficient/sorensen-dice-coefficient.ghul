@@ -1,20 +1,20 @@
 use default
 
-bigrams(phrase: string) -> Map[string, int] =>
+bigrams(phrase) =>
     phrase.to_lower().split([' '])
         |> flat_map(word =>
             word |> windows(2) |> map(pair => pair |> string())
         )
         |> frequencies()
 
-shared(left: Map[string, int], right: Map[string, int]) -> int =>
+shared(left, right) =>
     left
         |> filter(entry => right.contains_key(entry.key))
         |> sum_by(entry => min(entry.value, right[entry.key]))
 
-size(counted: Map[string, int]) -> int => counted.values |> sum()
+size(counted) => counted.values |> sum()
 
-coefficient(left: Map[string, int], right: Map[string, int]) -> double => (
+coefficient(left, right) => (
     let total = size(left) + size(right)
 
     if total == 0 then
@@ -28,7 +28,7 @@ let tasks =
     IO.File.read_all_lines("rosetta-tasks.txt")
         |> map(name => (name = name, grams = bigrams(name)))
 
-closest(term: string) -> (name: string, score: double){} => (
+closest(term) => (
     let wanted = bigrams(term)
 
     let scored =

@@ -1,9 +1,9 @@
 use default
 
-differences(xs: int[]) -> int[] =>
+differences(xs) =>
     zip(xs[1..<0], xs[0..<1]) |> map(* - *) |> list()
 
-forward(order: int, xs: int[]) -> int{} =>
+forward(order, xs) =>
     if order == 0 then xs
     else forward(order - 1, differences(xs))
     fi

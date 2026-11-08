@@ -1,6 +1,6 @@
 use default
 
-primes_below(limit: int) -> int{} is
+primes_below(limit) is
     let composite = repeat(false, limit) |> LIST()
 
     for candidate in 2..limit do
@@ -39,7 +39,7 @@ si
 
 let primes = primes_below(1_000_000) |> list()
 
-show(name: string, run: int[]) =>
+show(name, run) =>
     write_line("{name}: {run |> map(p => "{p}") |> join(" ")}")
 
 show("ascending", longest_run(primes, * < *))

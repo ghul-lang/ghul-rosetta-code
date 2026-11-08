@@ -8,14 +8,14 @@ let generations = 300
 let gap = 16
 let top = 36
 
-neighbourhood(cells: bool[], at: int) -> int =>
+neighbourhood(cells, at) =>
     let left = cells[(at + cells.count - 1) % cells.count] in
     let right = cells[(at + 1) % cells.count] in
     if left then 4 else 0 fi +
     if cells[at] then 2 else 0 fi +
     if right then 1 else 0 fi
 
-step(rule: int, cells: bool[]) -> bool[] =>
+step(rule, cells) =>
     let next =
         0..cells.count
             |> map(at => (rule >> neighbourhood(cells, at)) & 1 == 1)
@@ -23,9 +23,9 @@ step(rule: int, cells: bool[]) -> bool[] =>
     in
     next
 
-single_cell() -> bool[] => 0..width |> map(at => at == width / 2) |> list()
+single_cell() => 0..width |> map(at => at == width / 2) |> list()
 
-draw(image: IMAGE, rule: int, left: int) is
+draw(image, rule, left) is
     image.color(234ub, 237ub, 244ub)
     image.fill_rectangle(
         double(left),

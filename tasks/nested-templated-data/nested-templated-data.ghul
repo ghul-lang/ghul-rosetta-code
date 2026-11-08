@@ -14,7 +14,7 @@ at(position: int) -> Template => Template.INDEX(position)
 
 group(items: Template[]) -> Template => Template.GROUP(items)
 
-fill(template: Template, payloads: string[]) -> Filled =>
+fill(template, payloads) =>
     case template
     when leaf: Template.INDEX then
         if leaf.position < payloads.count then
@@ -26,14 +26,14 @@ fill(template: Template, payloads: string[]) -> Filled =>
         Filled.GROUP(nested.items |> map(fill(*, payloads)) |> list())
     esac
 
-render(filled: Filled) -> string =>
+render(filled) =>
     case filled
     when leaf: Filled.PAYLOAD then "'{leaf.text}'"
     when nested: Filled.GROUP then
         "[{nested.items |> map(render) |> join(", ")}]"
     esac
 
-positions(template: Template) -> int{} is
+positions(template) is
     case template
     when leaf: Template.INDEX then
         yield leaf.position

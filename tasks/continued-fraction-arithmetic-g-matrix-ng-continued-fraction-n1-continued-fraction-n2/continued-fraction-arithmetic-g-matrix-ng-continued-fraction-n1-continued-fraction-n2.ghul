@@ -11,28 +11,28 @@ use Row = (p12: bigint, p1: bigint, p2: bigint, p: bigint)
 
 *(r: Row, t: bigint) -> Row => (r.p12 * t, r.p1 * t, r.p2 * t, r.p * t)
 
-input_first(r: Row, t: bigint) -> Row => (
+input_first(r, t) => (
     r.p2 + r.p12 * t,
     r.p + r.p1 * t,
     r.p12,
     r.p1
 )
 
-exhaust_first(r: Row) -> Row => (r.p12, r.p1, r.p12, r.p1)
+exhaust_first(r) => (r.p12, r.p1, r.p12, r.p1)
 
-input_second(r: Row, t: bigint) -> Row => (
+input_second(r, t) => (
     r.p1 + r.p12 * t,
     r.p12,
     r.p + r.p2 * t,
     r.p2
 )
 
-exhaust_second(r: Row) -> Row => (r.p12, r.p12, r.p2, r.p2)
+exhaust_second(r) => (r.p12, r.p12, r.p2, r.p2)
 
-is_zero(r: Row) -> bool =>
+is_zero(r) =>
     r.p12 =~ 0n /\ r.p1 =~ 0n /\ r.p2 =~ 0n /\ r.p =~ 0n
 
-r2cf(numerator: bigint, denominator: bigint) -> bigint{} is
+r2cf(numerator, denominator) is
     let n1 mut = numerator
     let n2 mut = denominator
 
@@ -45,16 +45,11 @@ r2cf(numerator: bigint, denominator: bigint) -> bigint{} is
     od
 si
 
-square_root_of_two() -> bigint{} => [1n] ++ repeat(2n)
+square_root_of_two() => [1n] ++ repeat(2n)
 
 let patience = 40
 
-combine(
-    top_row: Row,
-    bottom_row: Row,
-    x: bigint{},
-    y: bigint{}
-) -> bigint{} is
+combine(top_row, bottom_row, x, y) is
     let top mut = top_row
     let bottom mut = bottom_row
     let xs = x.iterator
@@ -128,7 +123,7 @@ combine(
     od
 si
 
-show(terms: bigint{}) -> string =>
+show(terms) =>
     let
         shown = terms |> take(21) |> list(),
         rest = shown |> skip(1) |> take(19) |> join(),
@@ -145,7 +140,7 @@ let subtract: (Row, Row) = ((0n, 1n, -1n, 0n), (0n, 0n, 0n, 1n))
 let multiply: (Row, Row) = ((1n, 0n, 0n, 0n), (0n, 0n, 0n, 1n))
 let divide: (Row, Row) = ((0n, 1n, 0n, 0n), (0n, 0n, 1n, 0n))
 
-run(label: string, operation: (Row, Row), x: bigint{}, y: bigint{}) =>
+run(label, operation, x, y) =>
     let (top, bottom) = operation in
     write_line("{label,-15} = {show(combine(top, bottom, x, y))}")
 

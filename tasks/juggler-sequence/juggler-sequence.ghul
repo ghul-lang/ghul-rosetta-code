@@ -1,13 +1,13 @@
 use default
 
-step(value: long) -> long =>
+step(value) =>
     if (value % 2L) == 0L then
         long(sqrt(cast(value)))
     else
         long(cast(value) * sqrt(cast(value)))
     fi
 
-sequence(start: long) -> long{} is
+sequence(start) is
     yield start
 
     if start != 1L then
@@ -15,7 +15,7 @@ sequence(start: long) -> long{} is
     fi
 si
 
-stats(start: long) -> (int, long, int) =>
+stats(start) =>
     let
         terms = sequence(start) |> list(),
         highest = terms |> max()!

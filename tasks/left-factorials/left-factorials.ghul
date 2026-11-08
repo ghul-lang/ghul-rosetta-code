@@ -1,6 +1,6 @@
 use default
 
-left_factorials() -> bigint{} =>
+left_factorials() =>
     stream(
         (n = 0, factorial = 1n, total = 0n),
         (n, factorial, total) =>

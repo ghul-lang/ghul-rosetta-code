@@ -19,7 +19,7 @@ let mines = SET(
 let cleared = SET[int]()
 let marked = SET()
 
-neighbours(cell: int) -> int{} is
+neighbours(cell) is
     let (x, y) = (cell % width, cell / width)
 
     for dy in -1::1 do
@@ -35,10 +35,10 @@ neighbours(cell: int) -> int{} is
     od
 si
 
-adjacent_mines(cell: int) -> int =>
+adjacent_mines(cell) =>
     cell |> neighbours() |> filter(mines.contains) |> count()
 
-clear(cell: int) is
+clear(cell) is
     if cleared.contains(cell) \/ marked.contains(cell) then
         return
     fi
@@ -52,7 +52,7 @@ clear(cell: int) is
     fi
 si
 
-symbol(cell: int, reveal: bool) -> string =>
+symbol(cell, reveal) =>
     if reveal /\ mines.contains(cell) then "*"
     elif marked.contains(cell) then "?"
     elif !cleared.contains(cell) then "."
@@ -60,7 +60,7 @@ symbol(cell: int, reveal: bool) -> string =>
     else "{adjacent_mines(cell)}"
     fi
 
-show(reveal: bool) is
+show(reveal) is
     for y in 0..height do
         write_line(
             (0..width)

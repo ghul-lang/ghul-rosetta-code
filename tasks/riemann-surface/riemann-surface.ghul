@@ -20,7 +20,7 @@ let reach = 2.2
 let yaw = 0.62
 let pitch = 0.5
 
-turned(p: VEC) -> VEC =>
+turned(p) =>
     let
         x = p.x * cos(yaw) - p.y * sin(yaw),
         y = p.x * sin(yaw) + p.y * cos(yaw)
@@ -31,19 +31,19 @@ turned(p: VEC) -> VEC =>
             p.z * sin(pitch) + y * cos(pitch)
         )
 
-angle(i: int) -> double =>
+angle(i) =>
     2.0 * pi * double(turns) * double(i) / double(around)
 
-radius(j: int) -> double => reach * double(j) / double(along)
+radius(j) => reach * double(j) / double(along)
 
-corner(i: int, j: int) -> VEC =>
+corner(i, j) =>
     let
         t = angle(i),
         r = radius(j)
     in
         VEC(r * cos(t), r * sin(t), sqrt(r) * cos(t / 2.0))
 
-patch(i: int, j: int) -> Patch => (
+patch(i, j) => (
     corners = [
         turned(corner(i, j)),
         turned(corner(i + 1, j)),
@@ -53,9 +53,9 @@ patch(i: int, j: int) -> Patch => (
     phase = angle(i) / (2.0 * pi * double(turns))
 )
 
-depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
+depth(p) => p.corners |> sum_by(c => c.z)
 
-brightness(p: Patch) -> double =>
+brightness(p) =>
     let
         c = p.corners,
         n = (c[1] - c[0]) × (c[3] - c[0])

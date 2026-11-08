@@ -1,6 +1,6 @@
 use default
 
-is_palindrome(text: string) -> bool => text |> reverse() |> join("") =~ text
+is_palindrome(text) => text |> reverse() |> join("") =~ text
 
 let found =
     2..500

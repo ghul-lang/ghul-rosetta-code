@@ -1,10 +1,10 @@
 use default
 
-square(value: double) -> double => value * value
+square(value) => value * value
 
-mean(values: double[]) -> double => (values |> sum()) / cast(values.count)
+mean(values) => (values |> sum()) / cast(values.count)
 
-report(truth: double, estimates: double[]) is
+report(truth, estimates) is
     let collective = mean(estimates)
 
     let average_error = mean(

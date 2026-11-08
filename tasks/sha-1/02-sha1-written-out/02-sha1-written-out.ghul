@@ -1,6 +1,6 @@
 use default
 
-rotate_left(value: uint, count: int) -> uint =>
+rotate_left(value, count) =>
     (value << count) | (value >>> (32 - count))
 
 padded(message: ubyte[]) -> ubyte[] is
@@ -21,12 +21,12 @@ padded(message: ubyte[]) -> ubyte[] is
     return block
 si
 
-word(block: ubyte[], at: int) -> uint =>
+word(block, at) =>
     0..4
         |> map(index => uint(block[at + index]) << (24 - 8 * index))
         |> reduce(0u, * | *)
 
-sha1(message: ubyte[]) -> string is
+sha1(message) is
     let block = padded(message)
 
     let state = LIST([
@@ -92,7 +92,7 @@ sha1(message: ubyte[]) -> string is
     return state |> map(value => "{value:x8}") |> join("")
 si
 
-hex(digest: ubyte[]) -> string =>
+hex(digest) =>
     digest |> map(byte_value => "{byte_value:x2}") |> join("")
 
 let messages = [

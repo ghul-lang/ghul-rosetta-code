@@ -1,7 +1,7 @@
 use default
 use TRIANGLE = (a: int, b: int, c: int, area: long)
 
-heron_area(a: int, b: int, c: int) -> long? is
+heron_area(a, b, c) is
     let al = long(a)
     let bl = long(b)
     let cl = long(c)
@@ -25,14 +25,14 @@ heron_area(a: int, b: int, c: int) -> long? is
     fi
 si
 
-try_triangle(a: int, b: int, c: int) -> TRIANGLE? =>
+try_triangle(a, b, c) =>
     if let area = heron_area(a, b, c) then
         (a = a, b = b, c = c, area = area)
     else
         null
     fi
 
-compare_triangles(x: TRIANGLE, y: TRIANGLE) -> int is
+compare_triangles(x, y) is
     let by_area = x.area <> y.area
 
     if by_area != 0 then
@@ -63,7 +63,7 @@ let triangles =
         |> sort(compare_triangles)
         |> list()
 
-describe(t: TRIANGLE) is
+describe(t) is
     let perimeter = t.a + t.b + t.c
 
     write_line(

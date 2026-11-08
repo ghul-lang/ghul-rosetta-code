@@ -2,12 +2,12 @@ use default
 
 use Implicant = (bits: int, dashes: int)
 
-ones(value: int) -> int => value |> digits(2) |> sum()
+ones(value) => value |> digits(2) |> sum()
 
-covers(implicant: Implicant, minterm: int) -> bool =>
+covers(implicant, minterm) =>
     (minterm & \implicant.dashes) == implicant.bits
 
-render(implicant: Implicant, variables: int) -> string =>
+render(implicant, variables) =>
     0..variables
         |> map(position =>
             let bit = variables - 1 - position in
@@ -73,7 +73,7 @@ si
 // Every prime implicant that alone covers some minterm must be in the
 // answer; the rest is the smallest set of the others that covers what is
 // left, found by trying every combination in increasing size.
-minimal_cover(minterms: int[], variables: int) -> Implicant{} is
+minimal_cover(minterms, variables) is
     let primes = prime_implicants(minterms, variables)
 
     let essential =
@@ -110,21 +110,11 @@ minimal_cover(minterms: int[], variables: int) -> Implicant{} is
     return essential
 si
 
-smallest_choice(
-    spare: Implicant[],
-    uncovered: int[],
-    size: int
-) -> Implicant[]? =>
+smallest_choice(spare, uncovered, size) =>
     let chosen = LIST() in
     search(spare, uncovered, size, 0, chosen)
 
-search(
-    spare: Implicant[],
-    uncovered: int[],
-    size: int,
-    start: int,
-    chosen: LIST[Implicant]
-) -> Implicant[]? is
+search(spare, uncovered, size, start, chosen) is
     if chosen.count == size then
         if uncovered |> all(m => chosen |> any(covers(*, m))) then
             return chosen |> ARRAY()

@@ -7,7 +7,7 @@ let steps = 2000
 
 let last = turns * 2.0 * pi
 
-at(angle: double) -> (x: double, y: double) => (
+at(angle) => (
     x = angle * cos(angle),
     y = angle * sin(angle)
 )

@@ -6,7 +6,7 @@ let days = 365
 let random = System.Random(365)
 let counts = repeat(0, days) |> LIST()
 
-shared(people: int, at_least: int) -> bool is
+shared(people, at_least) is
     for day in 0..days do
         counts[day] = 0
     od
@@ -24,15 +24,15 @@ shared(people: int, at_least: int) -> bool is
     false
 si
 
-simulated(people: int, at_least: int, trials: int) -> double =>
+simulated(people, at_least, trials) =>
     let hits = 0..trials |> filter(_ => shared(people, at_least)) |> count()
     in
     double(hits) / double(trials)
 
-log_factorial(n: int) -> double =>
+log_factorial(n) =>
     1::n |> reduce(0.0, (s, i) => s + log(double(i)))
 
-exact(most: int, at_least: int) -> double[] is
+exact(most, at_least) is
     let inverse_factorial =
         (0..at_least) |> map(j => 1.0 / exp(log_factorial(j))) |> list()
 
@@ -56,7 +56,7 @@ exact(most: int, at_least: int) -> double[] is
         |> list()
 si
 
-first_even(chance: (int) -> double, low: int, high: int) -> int =>
+first_even(chance, low, high) =>
     if low >= high then
         low
     else

@@ -1,6 +1,6 @@
 use default
 
-legendre(n: int, x: double) -> (value: double, slope: double) => (
+legendre(n, x) => (
     let previous mut = 1.0
     let current mut = x
 
@@ -18,7 +18,7 @@ legendre(n: int, x: double) -> (value: double, slope: double) => (
     (value = current, slope = slope)
 )
 
-root(n: int, i: int) -> double => (
+root(n, i) => (
     let guess = (double(i) - 0.25) / (double(n) + 0.5)
     let x mut = cos(pi * guess)
 
@@ -30,7 +30,7 @@ root(n: int, i: int) -> double => (
     x
 )
 
-nodes_and_weights(n: int) -> (node: double, weight: double){} =>
+nodes_and_weights(n) =>
     1::n
         |> map(i =>
             let
@@ -40,7 +40,7 @@ nodes_and_weights(n: int) -> (node: double, weight: double){} =>
                 (node = x, weight = 2.0 / ((1.0 - x * x) * slope * slope))
         )
 
-integrate(f: double -> double, a: double, b: double, n: int) -> double =>
+integrate(f, a, b, n) =>
     let
         half = (b - a) / 2.0,
         middle = (a + b) / 2.0

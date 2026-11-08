@@ -17,7 +17,7 @@ vigesimal(n: int) -> int{} is
     digits
 si
 
-glyph(digit: int) -> string[] is
+glyph(digit) is
     let rows = ["    ", "    ", "    ", "    "] |> LIST()
 
     if digit == 0 then
@@ -37,7 +37,7 @@ glyph(digit: int) -> string[] is
     rows |> list()
 si
 
-cartouche(n: int) -> string{} => (
+cartouche(n) => (
     let glyphs = n |> vigesimal() |> map(glyph) |> list()
     let across = repeat("----", glyphs.count)
 

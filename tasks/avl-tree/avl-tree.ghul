@@ -5,16 +5,16 @@ union Tree is
     NODE(left: Tree, key: int, right: Tree, height: int)
 si
 
-height(tree: Tree) -> int =>
+height(tree) =>
     case tree
     when node: Tree.NODE then node.height
     else 0
     esac
 
-node(left: Tree, key: int, right: Tree) -> Tree =>
+node(left, key, right) =>
     Tree.NODE(left, key, right, 1 + int.max(height(left), height(right)))
 
-balance(tree: Tree) -> int =>
+balance(tree) =>
     case tree
     when n: Tree.NODE then height(n.left) - height(n.right)
     else 0
@@ -53,7 +53,7 @@ rebalance(tree: Tree) -> Tree =>
     else tree
     esac
 
-insert(tree: Tree, key: int) -> Tree =>
+insert(tree, key) =>
     case tree
     when n: Tree.NODE then
         if key < n.key then
@@ -66,7 +66,7 @@ insert(tree: Tree, key: int) -> Tree =>
     else node(Tree.EMPTY, key, Tree.EMPTY)
     esac
 
-in_order(tree: Tree) -> int{} is
+in_order(tree) is
     if let n: Tree.NODE = tree then
         yield in in_order(n.left)
         yield n.key

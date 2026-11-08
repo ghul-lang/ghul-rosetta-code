@@ -1,6 +1,6 @@
 use default
 
-quibble(words: string[]) -> string =>
+quibble(words) =>
     case words.count
     when 0 then "{{}}"
     when 1 then "{{{words[0]}}}"

@@ -1,11 +1,11 @@
 use default
 
-transpose(matrix: int[][]) -> int[][] => [
+transpose(matrix) => [
     [row[column] for row in matrix]
     for column in 0..matrix[0].count
 ]
 
-show(caption: string, matrix: int[][]) is
+show(caption, matrix) is
     write_line(caption)
 
     for row in matrix do

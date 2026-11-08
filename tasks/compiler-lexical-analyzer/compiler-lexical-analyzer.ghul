@@ -199,7 +199,7 @@ class LEXER is
         System.Exception("line {line}, column {column}: {message}")
 si
 
-lex(source: string) is
+lex(source) is
     try
         for (line, column, name, value) in LEXER(source).tokens() do
             let row = "{line,5} {column,6}   {name,-15} {value}"

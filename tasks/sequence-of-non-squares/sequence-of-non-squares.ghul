@@ -1,6 +1,6 @@
 use default
 
-non_square(n: int) -> int => n + int(floor(0.5 + sqrt(double(n))))
+non_square(n) => n + int(floor(0.5 + sqrt(double(n))))
 
 write_line(1::22 |> map(non_square) |> join(" "))
 

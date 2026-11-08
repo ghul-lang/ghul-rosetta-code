@@ -1,9 +1,9 @@
 use default
 
-joined_larger_first(left: int, right: int) -> int =>
+joined_larger_first(left, right) =>
     string.compare_ordinal("{right}{left}", "{left}{right}")
 
-largest(numbers: int[]) -> string =>
+largest(numbers) =>
     numbers
         |> sort(joined_larger_first)
         |> map(number => "{number}")

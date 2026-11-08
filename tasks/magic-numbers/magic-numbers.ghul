@@ -1,6 +1,6 @@
 use default
 
-magic_numbers() -> bigint{} is
+magic_numbers() is
     let current = 1::9 |> map(bigint) |> LIST()
     let length mut = 1
 
@@ -30,7 +30,7 @@ for (digits, group) in magic |> group_by(n => "{n}".length) do
     write_line("{digits,6}  {group.count,5}")
 od
 
-pandigital(n: bigint, digits: string) -> bool =>
+pandigital(n, digits) =>
     let text = "{n}" in
     text.length == digits.length /\ digits |> all(text.contains)
 

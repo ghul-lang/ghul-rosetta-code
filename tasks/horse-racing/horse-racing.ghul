@@ -8,14 +8,14 @@ use Runner = (horse: string, weight: string, behind: double)
 
 let fillies = SET(["B", "D", "I", "J"])
 
-pounds(weight: string) -> int =>
+pounds(weight) =>
     let parts = weight.split(['.']) in
     int.parse(parts[0]) * 14 + int.parse(parts[1])
 
-race_4_weight(horse: string) -> string =>
+race_4_weight(horse) =>
     if fillies.contains(horse) then "8.11" else "9.00" fi
 
-times(winner: double, runners: Runner[]) -> (string, double){} is
+times(winner, runners) is
     let lengths mut = 0.0
 
     for (horse, weight, behind) in runners do
@@ -38,7 +38,7 @@ let adjustments = [
 ]
     |> MAP()
 
-adjustment(horse: string) -> double =>
+adjustment(horse) =>
     if adjustments.contains_key(horse) then
         adjustments[horse]
     else

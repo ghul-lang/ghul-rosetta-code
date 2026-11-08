@@ -2,7 +2,7 @@ use default
 
 use Square = int[][]
 
-odd_magic_square(n: int) -> Square => (
+odd_magic_square(n) => (
     let square = 0..n |> map(_ => repeat(0, n) |> LIST()) |> list()
     let (row, column) mut = (0, n / 2)
 
@@ -27,7 +27,7 @@ odd_magic_square(n: int) -> Square => (
 // four odd magic squares of half the size fill the quadrants, then some
 // columns swap between the top and bottom halves
 
-singly_even_magic_square(n: int) -> Square is
+singly_even_magic_square(n) is
     let half = n / 2, cells = half * half, k = (n - 2) / 4
     let small = odd_magic_square(half)
     let offset = [0, 2, 3, 1]
@@ -71,7 +71,7 @@ singly_even_magic_square(n: int) -> Square is
     square
 si
 
-is_magic(square: Square) -> bool =>
+is_magic(square) =>
     let
         n = square.count,
         target = n * (n * n + 1) / 2

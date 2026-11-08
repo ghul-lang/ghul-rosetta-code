@@ -2,7 +2,7 @@ use default
 
 use ITEM = (name: string, weight: int, value: int)
 
-best_value(items: ITEM[], limit: int) -> int[][] is
+best_value(items, limit) is
     let table =
         0::items.count |> map(_ => repeat(0, limit + 1) |> LIST()) |> list()
 
@@ -31,7 +31,7 @@ best_value(items: ITEM[], limit: int) -> int[][] is
     return table
 si
 
-packed(items: ITEM[], limit: int) -> ITEM{} is
+packed(items, limit) is
     let table = best_value(items, limit)
     let chosen = LIST()
 
@@ -55,7 +55,7 @@ packed(items: ITEM[], limit: int) -> ITEM{} is
     return chosen
 si
 
-row(name: string, weight: string, value: string) -> string =>
+row(name, weight, value) =>
     "{name,-24}{weight,8}{value,7}"
 
 let items = [

@@ -2,7 +2,7 @@ use default
 
 use System.Security.Cryptography.SHA1
 
-sha1(text: string) -> string =>
+sha1(text) =>
     System.Convert.to_hex_string_lower(
         SHA1.hash_data(System.Text.Encoding.utf8.get_bytes(text))
     )

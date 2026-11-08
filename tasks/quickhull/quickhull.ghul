@@ -24,7 +24,7 @@ use Point = (x: double, y: double, z: double)
     z = a.x * b.y - a.y * b.x
 )
 
-length(p: Point) -> double => sqrt(p ⋅ p)
+length(p) => sqrt(p ⋅ p)
 
 class FACE(a: Point, b: Point, c: Point) is
     normal: Point => (b - a) × (c - a)
@@ -41,12 +41,9 @@ class FACE(a: Point, b: Point, c: Point) is
         |> pipe()
 si
 
-same_edge(
-    one: (from: Point, to: Point),
-    other: (from: Point, to: Point)
-) -> bool => one.from =~ other.to /\ one.to =~ other.from
+same_edge(one, other) => one.from =~ other.to /\ one.to =~ other.from
 
-hull(points: Point[]) -> FACE[] is
+hull(points) is
     let furthest =
         (from, along) =>
             points

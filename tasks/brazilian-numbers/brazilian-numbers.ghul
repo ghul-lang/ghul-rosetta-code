@@ -1,6 +1,6 @@
 use default
 
-same_digits(number: int, base: int) -> bool is
+same_digits(number, base) is
     let first = number % base
     let remaining mut = number / base
 
@@ -15,12 +15,12 @@ same_digits(number: int, base: int) -> bool is
     true
 si
 
-is_brazilian(number: int) -> bool =>
+is_brazilian(number) =>
     2..number - 1 |> any(same_digits(number, *))
 
-from_one() -> int{} => from(1)
+from_one() => from(1)
 
-show(description: string, candidates: int{}) is
+show(description, candidates) is
     write_line("first 20 {description}Brazilian numbers:")
 
     write_line(

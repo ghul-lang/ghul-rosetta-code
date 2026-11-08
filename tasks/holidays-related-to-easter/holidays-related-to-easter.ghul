@@ -5,7 +5,7 @@ use System.Globalization.JulianCalendar
 
 let julian = JulianCalendar()
 
-julian_easter(year: int) -> DateTime =>
+julian_easter(year) =>
     let
         a = year % 4,
         b = year % 7,
@@ -17,7 +17,7 @@ julian_easter(year: int) -> DateTime =>
     in
         DateTime(year, month, day, julian)
 
-gregorian_easter(year: int) -> DateTime =>
+gregorian_easter(year) =>
     let
         a = year % 19,
         b = year / 100,
@@ -41,18 +41,14 @@ let months = [
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
 
-in_julian(date: DateTime) -> string =>
+in_julian(date) =>
     let month = months[julian.get_month(date) - 1] in
     "{julian.get_day_of_month(date):D2} {month}"
 
-in_gregorian(date: DateTime) -> string =>
+in_gregorian(date) =>
     "{date.day:D2} {months[date.month - 1]}"
 
-feasts(
-    easter: DateTime,
-    shown: DateTime -> string,
-    days: (string, int)[]
-) -> string =>
+feasts(easter, shown, days) =>
     days
         |> map((name, offset) =>
             "{name} {shown(easter.add_days(double(offset)))}"

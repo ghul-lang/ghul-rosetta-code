@@ -1,6 +1,6 @@
 use default
 
-words() -> string{} is
+words() is
     let earlier mut = "1"
     let later mut = "0"
 
@@ -16,7 +16,7 @@ words() -> string{} is
     od
 si
 
-entropy(word: string) -> double =>
+entropy(word) =>
     let total = double(word.length) in
     word
         |> group_by(c => c)

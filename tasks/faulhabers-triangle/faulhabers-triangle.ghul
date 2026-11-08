@@ -32,7 +32,7 @@ struct RATIONAL is
         fi
 si
 
-whole(value: bigint) -> RATIONAL => RATIONAL(value, 1n)
+whole(value) => RATIONAL(value, 1n)
 
 bernoullis(count: int) -> RATIONAL[] is
     let values = LIST()
@@ -60,7 +60,7 @@ si
 
 let bernoulli = bernoullis(20)
 
-faulhaber_row(power: int) -> RATIONAL{} =>
+faulhaber_row(power) =>
     (1::power + 1)
         |> map(exponent => (
             let index = power + 1 - exponent

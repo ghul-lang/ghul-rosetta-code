@@ -44,18 +44,18 @@ struct FRAC(numerator: long, denominator: long) is
         fi
 si
 
-frac(numerator: long, denominator: long) -> FRAC =>
+frac(numerator, denominator) =>
     let
         sign = if denominator < 0L then -1L else 1L fi,
         divisor = gcd(numerator, denominator) * sign
     in
         FRAC(numerator / divisor, denominator / divisor)
 
-whole(n: long) -> FRAC => FRAC(n, 1L)
+whole(n) => FRAC(n, 1L)
 
 -(value: FRAC) -> FRAC => FRAC(-value.numerator, value.denominator)
 
-abs(value: FRAC) -> FRAC =>
+abs(value) =>
     FRAC(Ghul.Math.abs(value.numerator), value.denominator)
 
 let a = frac(3L, 4L)

@@ -15,7 +15,7 @@ let random = System.Random(42)
 let trials = 1_000_000
 let counts = repeat(0, items.count) |> LIST()
 
-pick(roll: double) -> int is
+pick(roll) is
     let remaining mut = roll
 
     for (slot, (_, probability)) in items |> index() do

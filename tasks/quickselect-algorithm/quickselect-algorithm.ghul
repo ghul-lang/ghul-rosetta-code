@@ -1,6 +1,6 @@
 use default
 
-quickselect(values: int[], k: int) -> int is
+quickselect(values, k) is
     let pivot = values[values.count / 2]
 
     let lowers = values |> filter(* < pivot) |> list()

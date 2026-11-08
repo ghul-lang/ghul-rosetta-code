@@ -10,7 +10,7 @@ union Point is
     AT(x: double, y: double)
 si
 
-on_curve(x: double) -> Point => Point.AT(x, sqrt(x * x * x + b))
+on_curve(x) => Point.AT(x, sqrt(x * x * x + b))
 
 -(p: Point) -> Point =>
     if let (x, y): Point.AT = p then Point.AT(x, -y) else p fi
@@ -48,7 +48,7 @@ si
     total
 si
 
-show(p: Point) -> string =>
+show(p) =>
     if let (x, y): Point.AT = p then
         "({x:F6}, {y:F6})"
     else

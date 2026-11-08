@@ -35,7 +35,7 @@ shortest_paths(
     best
 si
 
-route(best: MAP[string, REACHED], node: string) -> string =>
+route(best, node) =>
     if best[node].previous.length == 0 then
         node
     else

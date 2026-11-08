@@ -1,6 +1,6 @@
 use default
 
-inventory() -> int{} is
+inventory() is
     let counts = MAP()
 
     while true do
@@ -25,7 +25,7 @@ inventory() -> int{} is
     od
 si
 
-first_at_least(threshold: int) -> INDEXED_VALUE[int] =>
+first_at_least(threshold) =>
     inventory() |> index() |> find(entry => entry.value >= threshold)!
 
 inventory()

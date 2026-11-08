@@ -4,7 +4,7 @@ use System.Random
 
 let random = Random(5)
 
-next_line() -> string is
+next_line() is
     let line = read_line()
 
     if !line? then
@@ -15,7 +15,7 @@ next_line() -> string is
     line.trim()
 si
 
-ask(prompt: string, low: int, high: int) -> int is
+ask(prompt, low, high) is
     let value mut = 0
 
     write_line("{prompt} ({low}-{high})?")
@@ -31,10 +31,10 @@ ask(prompt: string, low: int, high: int) -> int is
     value
 si
 
-tally(text: string, letter: char) -> int =>
+tally(text, letter) =>
     text |> filter(* == letter) |> count()
 
-score(code: string, guess: string, palette: string) -> string =>
+score(code, guess, palette) =>
     let exact =
         0..code.length |> filter(i => code[i] == guess[i]) |> count()
     in

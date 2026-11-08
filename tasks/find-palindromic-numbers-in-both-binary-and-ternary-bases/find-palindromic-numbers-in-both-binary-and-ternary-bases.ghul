@@ -1,6 +1,6 @@
 use default
 
-to_digits(value: long, base: long) -> int[] => (
+to_digits(value, base) => (
     let digits = LIST()
     let remaining mut = value
 
@@ -17,20 +17,20 @@ to_digits(value: long, base: long) -> int[] => (
     digits
 )
 
-from_digits(digits: int[], base: long) -> long =>
+from_digits(digits, base) =>
     digits |> reduce(0L, (value, digit) => value * base + long(digit))
 
-is_palindrome(digits: int[]) -> bool =>
+is_palindrome(digits) =>
     0..digits.count / 2
         |> all(i => digits[i] == digits[digits.count - 1 - i])
 
-raised(base: long, exponent: int) -> long =>
+raised(base, exponent) =>
     repeat(base, exponent) |> reduce(1L, * * *)
 
-in_base(value: long, base: long) -> string =>
+in_base(value, base) =>
     string(to_digits(value, base) |> map(digit => "0123456789"[digit]))
 
-ternary_palindromes() -> long{} is
+ternary_palindromes() is
     yield 0L
 
     for length in 1::40 do

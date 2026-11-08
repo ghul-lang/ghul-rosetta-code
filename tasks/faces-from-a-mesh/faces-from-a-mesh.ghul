@@ -1,7 +1,7 @@
 use default
 use Edge = (from: int, to: int)
 
-rotations(face: int[]) -> int[]{} =>
+rotations(face) =>
     0..face.count
         |> map(offset =>
             0..face.count
@@ -9,11 +9,11 @@ rotations(face: int[]) -> int[]{} =>
                 |> list()
         )
 
-same_perimeter(one: int[], other: int[]) -> bool =>
+same_perimeter(one, other) =>
     one.count == other.count /\
     other |> rotations() |> any(turned => turned =~ one)
 
-perimeter(edges: Edge[]) -> int[]? is
+perimeter(edges) is
     let neighbours = MAP()
 
     let join = (a, b) is

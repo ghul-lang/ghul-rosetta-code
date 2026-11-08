@@ -1,7 +1,7 @@
 use default
 
 // Lexicographic order, read as a number in the factorial base.
-unrank(rank: bigint, n: int) -> int[] => (
+unrank(rank, n) => (
     let left = 0..n |> LIST()
     let result = LIST()
     let rest mut = rank
@@ -18,7 +18,7 @@ unrank(rank: bigint, n: int) -> int[] => (
     result
 )
 
-rank(permutation: int[]) -> bigint => (
+rank(permutation) => (
     let n = permutation.count
     let total mut = 0n
 
@@ -34,7 +34,7 @@ rank(permutation: int[]) -> bigint => (
 
 let random = System.Random(12)
 
-random_below(limit: bigint) -> bigint =>
+random_below(limit) =>
     let limbs = limit.to_string().length / 9 + 2 in
     1::limbs
         |> map(_ => bigint(random.next(1_000_000_000)))
@@ -42,7 +42,7 @@ random_below(limit: bigint) -> bigint =>
             total * 1_000_000_000n + limb
         ) % limit
 
-show(permutation: int[]) -> string => "({permutation |> join(", ")})"
+show(permutation) => "({permutation |> join(", ")})"
 
 for r in 0..6 do
     let permutation = unrank(bigint(r), 3)

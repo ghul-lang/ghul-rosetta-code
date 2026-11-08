@@ -6,7 +6,7 @@ union Alignment is
     CENTRE
 si
 
-pad(word: string, width: int, alignment: Alignment) -> string =>
+pad(word, width, alignment) =>
     case alignment
     when _: Alignment.LEFT then word.pad_right(width)
     when _: Alignment.RIGHT then word.pad_left(width)
@@ -16,7 +16,7 @@ pad(word: string, width: int, alignment: Alignment) -> string =>
         )
     esac
 
-line(row: string[], widths: int[], alignment: Alignment) -> string =>
+line(row, widths, alignment) =>
     (
         row
             |> index()

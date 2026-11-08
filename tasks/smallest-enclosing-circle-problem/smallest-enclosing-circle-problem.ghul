@@ -18,9 +18,9 @@ struct CIRCLE(center: P, radius: double) is
         "center ({center.x:F6}, {center.y:F6}), radius {radius:F6}"
 si
 
-across(a: P, b: P) -> CIRCLE => CIRCLE((a + b) * 0.5, (a - b).length / 2.0)
+across(a, b) => CIRCLE((a + b) * 0.5, (a - b).length / 2.0)
 
-through(a: P, b: P, c: P) -> CIRCLE =>
+through(a, b, c) =>
     let
         ab = b - a,
         ac = c - a,
@@ -35,7 +35,7 @@ through(a: P, b: P, c: P) -> CIRCLE =>
 
 let random = System.Random(1857)
 
-enclose(given: P[]) -> CIRCLE is
+enclose(given) is
     let points = LIST(given)
 
     for i in 0..points.count do

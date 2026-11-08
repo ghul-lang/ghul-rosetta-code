@@ -48,7 +48,7 @@ let candidates = Collections.STACK[int]()
 let visited mut = 0
 let components mut = 0
 
-search(vertex: int) is
+search(vertex) is
     preorder[vertex] = visited
     visited = visited + 1
 
@@ -101,7 +101,7 @@ for which in 0..components do
     write_line("Component {which}: {members}")
 od
 
-connected(a: int, b: int) -> bool => component[a]! == component[b]!
+connected(a, b) => component[a]! == component[b]!
 
 write_line("")
 write_line("Example connectivity checks:")

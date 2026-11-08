@@ -11,10 +11,10 @@ let words = [
     (spelling = "gross", shortest = 2, factor = 144n)
 ]
 
-shared_prefix(left: string, right: string) -> int =>
+shared_prefix(left, right) =>
     left |> zip(right) |> take_while(((l, r)) => l == r) |> count()
 
-multifactorial(value: bigint, step: int) -> bigint => (
+multifactorial(value, step) => (
     let product mut = 1n
     let term mut = value
 
@@ -26,7 +26,7 @@ multifactorial(value: bigint, step: int) -> bigint => (
     product
 )
 
-expand(source: string) -> string is
+expand(source) is
     let text = source
     let cursor mut = 0
     let negative = text[0] == '-'

@@ -1,6 +1,6 @@
 use default
 
-say(term: string) -> string =>
+say(term) =>
     term |> group() |> map(run => "{run.count}{run[0]}") |> string()
 
 iterate("1", say) |> take(10) |> each(term => write_line(term))

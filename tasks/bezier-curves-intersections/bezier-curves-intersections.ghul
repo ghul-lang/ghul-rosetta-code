@@ -7,12 +7,12 @@ use Hit = (t: double, s: double, at: Point)
 
 let tolerance = 1.0e-9
 
-middle(a: Point, b: Point) -> Point => (
+middle(a, b) => (
     (a.x + b.x) / 2.0,
     (a.y + b.y) / 2.0
 )
 
-point_at(c: Curve, t: double) -> Point =>
+point_at(c, t) =>
     let u = 1.0 - t in
     (
         u * u * c.p0.x + 2.0 * u * t * c.p1.x + t * t * c.p2.x,
@@ -30,16 +30,16 @@ halves(c: Curve) -> (Curve, Curve) =>
         in
             ((c.p0, left, split, c.from, t), (split, right, c.p2, t, c.to))
 
-low(a: double, b: double, c: double) -> double => min(a, min(b, c))
+low(a, b, c) => min(a, min(b, c))
 
-high(a: double, b: double, c: double) -> double => max(a, max(b, c))
+high(a, b, c) => max(a, max(b, c))
 
 box(c: Curve) -> (low: Point, high: Point) => (
     low = (low(c.p0.x, c.p1.x, c.p2.x), low(c.p0.y, c.p1.y, c.p2.y)),
     high = (high(c.p0.x, c.p1.x, c.p2.x), high(c.p0.y, c.p1.y, c.p2.y))
 )
 
-overlap(a: Curve, b: Curve) -> bool =>
+overlap(a, b) =>
     let
         p = box(a),
         q = box(b)
@@ -49,11 +49,11 @@ overlap(a: Curve, b: Curve) -> bool =>
         p.low.y <= q.high.y /\
         q.low.y <= p.high.y
 
-size(c: Curve) -> double =>
+size(c) =>
     let b = box(c) in
     max(b.high.x - b.low.x, b.high.y - b.low.y)
 
-near(a: double, b: double) -> bool => abs(a - b) < 1.0e-6
+near(a, b) => abs(a - b) < 1.0e-6
 
 intersect(a: Curve, b: Curve, hits: LIST[Hit]) is
     if !overlap(a, b) then
@@ -104,7 +104,7 @@ image.view(-3.5, -0.8, 3.5, 5.6)
 image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0)
 
-trace(curve: Curve) -> Point[] =>
+trace(curve) =>
     (0::100) |> map(i => point_at(curve, double(i) / 100.0)) |> list()
 
 image.color(40ub, 90ub, 170ub)

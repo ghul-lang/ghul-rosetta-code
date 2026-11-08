@@ -8,7 +8,7 @@ let units = [
     (suffix = "sec", size = 1)
 ]
 
-parts(total: int) -> string{} is
+parts(total) is
     let remaining mut = total
 
     for unit in units do
@@ -21,7 +21,7 @@ parts(total: int) -> string{} is
     od
 si
 
-compound_duration(total: int) -> string => total |> parts() |> join()
+compound_duration(total) => total |> parts() |> join()
 
 for seconds in [7259, 86400, 6000000] do
     write_line("{seconds}: {compound_duration(seconds)}")

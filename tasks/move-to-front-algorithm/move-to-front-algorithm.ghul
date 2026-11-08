@@ -1,11 +1,11 @@
 use default
 use System.Text.StringBuilder
 
-symbol_table() -> LIST[char] =>
+symbol_table() =>
     let symbols = int('a')::int('z') |> map(char) |> LIST() in
     symbols
 
-move_to_front(symbols: LIST[char], at: int) is
+move_to_front(symbols, at) is
     let symbol = symbols[at]
 
     symbols.remove_at(at)
@@ -26,7 +26,7 @@ encode(text: string) -> int[] is
     return indices
 si
 
-decode(indices: int[]) -> string is
+decode(indices) is
     let symbols = symbol_table()
     let text = StringBuilder()
 

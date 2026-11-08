@@ -15,7 +15,7 @@ let random = System.Random(20260908)
 
 let taken = LIST[int]()
 
-fresh_room() -> int => (
+fresh_room() => (
     let chosen mut = random.next(caves.count) + 1
 
     while taken.contains(chosen) do
@@ -37,7 +37,7 @@ let arrows mut = 5
 
 tunnels(room: int) -> LIST[int] => caves[room - 1] |> LIST()
 
-deadly(room: int) -> bool =>
+deadly(room) =>
     room == wumpus \/ bats.contains(room) \/ pits.contains(room)
 
 sense() is

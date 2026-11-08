@@ -3,7 +3,7 @@ use default
 use Ordering = (string, string) -> int
 use Row = string[]
 
-lexicographic(left: string, right: string) -> int => left <> right
+lexicographic(left, right) => left <> right
 
 sort_table(rows: Row[]) -> Row[] => sort_table(rows, 0)
 
@@ -29,9 +29,9 @@ sort_table(
         )
         |> list()
 
-by_length(left: string, right: string) -> int => left.length <> right.length
+by_length(left, right) => left.length <> right.length
 
-show(caption: string, rows: Row[]) is
+show(caption, rows) is
     write_line(caption)
 
     for row in rows do

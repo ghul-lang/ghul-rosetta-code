@@ -2,14 +2,14 @@ use default
 
 use Triple = (a: long, b: long, c: long)
 
-exact_root(square: long) -> long? =>
+exact_root(square) =>
     let
         estimate = sqrt(double(square)),
         root = long(round(estimate))
     in
         if root * root == square then root else null fi
 
-triples(k: long, limit: long) -> Triple{} =>
+triples(k, limit) =>
     1L::limit
         |> flat_map(a => a::limit |> map(b => (a, b)))
         |> map((a, b) => (

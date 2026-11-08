@@ -10,36 +10,31 @@ si
 
 use Polygon = P[]
 
-rectangle(
-    x: double,
-    y: double,
-    width: double,
-    height: double
-) -> Polygon => [
+rectangle(x, y, width, height) => [
     P(x, y), P(x, y + height),
     P(x + width, y + height), P(x + width, y)
 ]
 
-edges(shape: Polygon) -> P{} =>
+edges(shape) =>
     0..shape.count |> map(i => shape[(i + 1) % shape.count] - shape[i])
 
-shadow(shape: Polygon, axis: P) -> (low: double, high: double) => (
+shadow(shape, axis) => (
     low = shape |> map(p => p ⋅ axis) |> min()!,
     high = shape |> map(p => p ⋅ axis) |> max()!
 )
 
-separated(a: Polygon, b: Polygon, axis: P) -> bool =>
+separated(a, b, axis) =>
     let
         s = shadow(a, axis),
         t = shadow(b, axis)
     in
         s.high < t.low \/ t.high < s.low
 
-overlap(a: Polygon, b: Polygon) -> bool =>
+overlap(a, b) =>
     let axes = edges(a) ++ edges(b) |> map(e => e.normal) in
     !(axes |> any(separated(a, b, *)))
 
-show(shape: Polygon) -> string =>
+show(shape) =>
     "[{shape |> map(p => "[{p.x}, {p.y}]") |> join(", ")}]"
 
 let polygon: Polygon = [
@@ -56,7 +51,7 @@ write_line("")
 write_line("polygon and rect1 overlap? {overlap(polygon, first)}")
 write_line("polygon and rect2 overlap? {overlap(polygon, second)}")
 
-outline(image: IMAGE, shape: Polygon, dx: double) is
+outline(image, shape, dx) is
     image.line(
         shape ++ [shape[0]] |> map(p => (x = p.x + dx, y = p.y)) |> list()
     )

@@ -1,6 +1,6 @@
 use default
 
-fairshare(base: int) -> int{} =>
+fairshare(base) =>
     from(0) |> map(count => digit_sum(count, base) % base)
 
 write_line("the first 25 terms of the fairshare sequence:")

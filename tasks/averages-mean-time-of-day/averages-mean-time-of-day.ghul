@@ -2,14 +2,14 @@ use default
 
 let seconds_per_day = 24.0 * 60.0 * 60.0
 
-to_angle(time: string) -> double =>
+to_angle(time) =>
     let seconds = System.TimeSpan.parse(time).total_seconds in
     tau * seconds / seconds_per_day
 
-mean_angle(angles: double[]) -> double =>
+mean_angle(angles) =>
     atan2(angles |> sum_by(sin), angles |> sum_by(cos))
 
-mean_time(times: string[]) -> string =>
+mean_time(times) =>
     let
         angle = mean_angle(times |> map(to_angle) |> list()),
         turn = if angle < 0.0 then angle + tau else angle fi,

@@ -1,6 +1,6 @@
 use default
 
-triples(n: int) -> (int, int, int){} =>
+triples(n) =>
     1::n
         |> flat_map(a =>
             a::n

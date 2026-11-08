@@ -1,8 +1,8 @@
 use default
 
-power_sum(xs: double[], k: int) -> double => xs |> sum_by(pow(*, cast(k)))
+power_sum(xs, k) => xs |> sum_by(pow(*, cast(k)))
 
-moment(xs: double[], ys: double[], k: int) -> double =>
+moment(xs, ys, k) =>
     zip(xs, ys) |> sum_by((x, y) => y * pow(x, cast(k)))
 
 solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
@@ -36,7 +36,7 @@ solve(a: LIST[LIST[double]], b: LIST[double]) -> double{} is
     return solution |> list()
 si
 
-fit(xs: double[], ys: double[], degree: int) -> double{} =>
+fit(xs, ys, degree) =>
     solve(
         (0::degree)
             |> map(i =>

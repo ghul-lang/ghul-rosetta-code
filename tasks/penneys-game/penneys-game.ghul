@@ -4,17 +4,17 @@ use System.Random
 
 let random = Random(11)
 
-toss() -> char => if random.next(2) == 0 then 'H' else 'T' fi
+toss() => if random.next(2) == 0 then 'H' else 'T' fi
 
-tosses() -> char{} is
+tosses() is
     while true do
         yield toss()
     od
 si
 
-random_sequence() -> string => "{toss()}{toss()}{toss()}"
+random_sequence() => "{toss()}{toss()}{toss()}"
 
-best_reply(sequence: string) -> string =>
+best_reply(sequence) =>
     let flipped = if sequence[1] == 'H' then 'T' else 'H' fi in
     "{flipped}{sequence[0]}{sequence[1]}"
 

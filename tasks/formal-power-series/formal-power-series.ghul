@@ -31,7 +31,7 @@ struct RATIONAL(numerator: bigint, denominator: bigint) is
         fi
 si
 
-reduced(numerator: bigint, denominator: bigint) -> RATIONAL =>
+reduced(numerator, denominator) =>
     let
         divisor = bigint.greatest_common_divisor(numerator, denominator),
         sign = if denominator < 0n then -1 else 1 fi,
@@ -39,7 +39,7 @@ reduced(numerator: bigint, denominator: bigint) -> RATIONAL =>
     in
         RATIONAL(numerator / scale, denominator / scale)
 
-whole(value: int) -> RATIONAL => RATIONAL(cast(value), 1n)
+whole(value) => RATIONAL(cast(value), 1n)
 
 class SERIES(term: (int) -> RATIONAL) is
     at(index: int) -> RATIONAL memo => term(index)
@@ -80,7 +80,7 @@ class SERIES(term: (int) -> RATIONAL) is
         write_line("{name}: {terms}")
 si
 
-constant(value: int) -> SERIES =>
+constant(value) =>
     SERIES(n => if n == 0 then whole(value) else whole(0) fi)
 
 let sine mut = constant(0)

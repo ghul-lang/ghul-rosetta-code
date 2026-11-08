@@ -34,15 +34,15 @@ neighbours((row, column): (int, int)) -> (int, int){} =>
             (column + dc + columns) % columns
         ))
 
-survives(live: SET[(int, int)], cell: (int, int)) -> bool =>
+survives(live, cell) =>
     let alive = neighbours(cell) |> count(live.contains(*)) in
     alive == 3 \/ (alive == 2 /\ live.contains(cell))
 
 // A cell can only be alive next generation if it is next to a live one now.
-step(live: SET[(int, int)]) -> SET[(int, int)] =>
+step(live) =>
     live |> flat_map(neighbours) |> filter(survives(live, *)) |> SET()
 
-draw(image: IMAGE, live: SET[(int, int)]) is
+draw(image, live) is
     image.clear(250ub, 250ub, 247ub)
     image.color(35ub, 70ub, 130ub)
 

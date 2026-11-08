@@ -8,7 +8,7 @@ si
 use Huffman.LEAF
 use Huffman.NODE
 
-take_lightest(pending: LIST[Huffman]) -> Huffman is
+take_lightest(pending) is
     let lightest = pending |> min_by(node => node.weight)!
 
     pending.remove(lightest)
@@ -29,11 +29,7 @@ build_tree(leaves: Huffman[]) -> Huffman => (
     pending[0]
 )
 
-codes(node: Huffman, prefix: string) -> (
-    symbol: char,
-    weight: int,
-    code: string
-){} is
+codes(node, prefix) is
     if let leaf: LEAF = node then
         let code = if prefix.length == 0 then "0" else prefix fi
 

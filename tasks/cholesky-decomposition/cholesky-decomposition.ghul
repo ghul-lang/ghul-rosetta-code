@@ -1,6 +1,6 @@
 use default
 
-cholesky(a: double[][]) -> double[][] is
+cholesky(a) is
     let size = a.count
     let l = 0..size |> map(_ => repeat(0.0, size) |> LIST()) |> list()
 
@@ -20,7 +20,7 @@ cholesky(a: double[][]) -> double[][] is
     return l
 si
 
-show(a: double[][]) is
+show(a) is
     for row in a do
         write_line(row |> map(value => "{value,10:F5}") |> join(""))
     od

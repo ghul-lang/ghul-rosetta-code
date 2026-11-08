@@ -5,7 +5,7 @@ write_line("")
 
 let prime_sum = 0::41 |> map(is_prime) |> list()
 
-extend(chosen: LIST[int], taken: LIST[bool], size: int) -> int[]{} is
+extend(chosen, taken, size) is
     if chosen.count == size then
         yield chosen
     else
@@ -31,7 +31,7 @@ extend(chosen: LIST[int], taken: LIST[bool], size: int) -> int[]{} is
     fi
 si
 
-arrangements(size: int) -> int[]{} =>
+arrangements(size) =>
     extend([1] |> LIST(), repeat(false, size + 1) |> LIST(), size)
 
 let totals = LIST()

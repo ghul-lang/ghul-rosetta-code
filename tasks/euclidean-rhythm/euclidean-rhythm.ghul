@@ -1,6 +1,6 @@
 use default
 
-euclid(pulses: int, steps: int) -> string is
+euclid(pulses, steps) is
     let first mut = "1"
     let first_count mut = pulses
     let second mut = "0"

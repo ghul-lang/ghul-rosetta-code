@@ -1,6 +1,6 @@
 use default
 
-pell(n: int) -> (x: bigint, y: bigint) is
+pell(n) is
     let root = int(sqrt(double(n)))
     let (y, z, r) mut = (root, 1, root * 2)
     let (e1, e2) mut = (1n, 0n)

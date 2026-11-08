@@ -14,11 +14,11 @@ let height = 180
 let frames = 40
 let substeps = 25
 
-advance(state: STATE, dt: double) -> STATE =>
+advance(state, dt) =>
     let rate = state.rate - dt * gravity / length * sin(state.angle) in
     (angle = state.angle + dt * rate, rate = rate)
 
-quarter_period(dt: double) -> double => (
+quarter_period(dt) => (
     let state mut = (angle = swing, rate = 0.0)
     let elapsed mut = 0.0
 
@@ -30,7 +30,7 @@ quarter_period(dt: double) -> double => (
     elapsed
 )
 
-draw(image: IMAGE, angle: double) is
+draw(image, angle) is
     let x = length * sin(angle)
     let y = -length * cos(angle)
 

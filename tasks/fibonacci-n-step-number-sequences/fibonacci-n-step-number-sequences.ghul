@@ -1,6 +1,6 @@
 use default
 
-n_step(initial: int[]) -> int{} is
+n_step(initial) is
     let window = LIST(initial)
 
     for value in initial do
@@ -17,7 +17,7 @@ n_step(initial: int[]) -> int{} is
     od
 si
 
-show(name: string, initial: int[]) =>
+show(name, initial) =>
     let series =
         n_step(initial) |> take(10) |> map(value => "{value}") |> join(" ")
     in

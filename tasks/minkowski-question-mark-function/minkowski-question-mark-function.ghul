@@ -3,7 +3,7 @@ use Raster.Anchor
 use Raster.AXES
 use Raster.IMAGE
 
-question(x: double) -> double is
+question(x) is
     let whole = floor(x)
 
     if x < 0.0 \/ x >= 1.0 then
@@ -75,7 +75,7 @@ terms(y: double) -> int{} is
     runs
 si
 
-inverse(y: double) -> double is
+inverse(y) is
     let whole = floor(y)
 
     if y < 0.0 \/ y >= 1.0 then

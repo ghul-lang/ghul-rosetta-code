@@ -3,7 +3,7 @@ use default
 write_line("searching for seeds, which takes a moment")
 write_line("")
 
-is_seed(n: long) -> bool =>
+is_seed(n) =>
     let big = bigint(n) in
     0::4 |> all(k => is_prime(bigint.pow(big, k) + big + 1n))
 

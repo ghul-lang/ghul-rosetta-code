@@ -5,10 +5,10 @@ let columns = 8
 
 use Grid = int[][]
 
-parse(lines: string[]) -> Grid =>
+parse(lines) =>
     lines |> map(line => line |> map(c => int(c - '0')) |> list()) |> list()
 
-solve(grid: Grid) -> int[]? is
+solve(grid) is
     let partner = repeat(-1, rows * columns) |> LIST()
     let used = SET()
 
@@ -70,7 +70,7 @@ solve(grid: Grid) -> int[]? is
     if place(0) then partner else null fi
 si
 
-show(grid: Grid, partner: int[]) is
+show(grid, partner) is
     for row in 0..rows do
         let cells =
             0..columns
@@ -103,7 +103,7 @@ show(grid: Grid, partner: int[]) is
     od
 si
 
-shuffled_tableau(random: System.Random) -> Grid is
+shuffled_tableau(random) is
     let tiles = [(a, b) for a in 0::6 for b in a::6]
         |> sort_by(_ => random.next())
 

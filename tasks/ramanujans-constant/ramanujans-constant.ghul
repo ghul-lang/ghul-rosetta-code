@@ -4,7 +4,7 @@ let digits = 60
 let shown = 40
 let guard = 20
 
-power_of_ten(n: int) -> bigint => (
+power_of_ten(n) => (
     let value mut = 1n
 
     for _ in 0..n do
@@ -32,7 +32,7 @@ integer_sqrt(n: bigint) -> bigint is
     return root
 si
 
-pi() -> bigint is
+pi() is
     let a mut = scale
     let g mut = integer_sqrt(scale * scale / 2n)
     let total mut = 0n
@@ -56,7 +56,7 @@ si
 // is halved until it is, and the result squared back as many times.
 let halvings = 8
 
-exp(x: bigint) -> bigint is
+exp(x) is
     let small = x / bigint(1 << halvings)
 
     let total mut = scale
@@ -81,7 +81,7 @@ si
 
 // The working scale carries more digits than are shown, because each
 // squaring in exp doubles the error in the last of them.
-show(heegner: int, value: bigint) =>
+show(heegner, value) =>
     let
         rounded = value / power_of_ten(guard + digits - shown),
         whole = rounded / power_of_ten(shown),

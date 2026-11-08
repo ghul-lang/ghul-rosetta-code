@@ -1,6 +1,6 @@
 use default
 
-choose(m: int, n: int, from: int, chosen: int[]) -> int[]{} is
+choose(m, n, from, chosen) is
     if chosen.count == m then
         yield chosen
 
@@ -13,7 +13,7 @@ choose(m: int, n: int, from: int, chosen: int[]) -> int[]{} is
     od
 si
 
-combinations(m: int, n: int) -> int[]{} => choose(m, n, 0, [])
+combinations(m, n) => choose(m, n, 0, [])
 
 for combination in combinations(3, 5) do
     write_line(combination |> join(" "))

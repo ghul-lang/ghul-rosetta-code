@@ -3,7 +3,7 @@ use default
 use MOVE = (next: int, label: string)
 use STEP = (steps: int, next: int, label: string)
 
-moves(value: int, divisors: int[], subtractors: int[]) -> MOVE{} is
+moves(value, divisors, subtractors) is
     for divisor in divisors do
         if value % divisor == 0 then
             yield (next = value / divisor, label = "/{divisor}")
@@ -17,7 +17,7 @@ moves(value: int, divisors: int[], subtractors: int[]) -> MOVE{} is
     od
 si
 
-solve(divisors: int[], subtractors: int[], limit: int) -> STEP[] is
+solve(divisors, subtractors, limit) is
     let table = [
         (steps = 0, next = 0, label = ""),
         (steps = 0, next = 0, label = "")
@@ -43,7 +43,7 @@ solve(divisors: int[], subtractors: int[], limit: int) -> STEP[] is
     table
 si
 
-route(table: STEP[], value: int) -> string => (
+route(table, value) => (
     let legs = LIST()
     let current mut = value
 
@@ -58,7 +58,7 @@ route(table: STEP[], value: int) -> string => (
     legs |> join(" ")
 )
 
-deepest_in(table: STEP[], limit: int) is
+deepest_in(table, limit) is
     let deepest = 1::limit |> map(value => table[value].steps) |> max()
 
     if let most = deepest then

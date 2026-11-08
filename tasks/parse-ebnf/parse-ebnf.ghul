@@ -26,7 +26,7 @@ class GRAMMAR is
     si
 si
 
-in_name(c: char) -> bool => char.is_letter_or_digit(c) \/ c == '_'
+in_name(c) => char.is_letter_or_digit(c) \/ c == '_'
 
 class READER(source: string) is
     _at: int
@@ -201,7 +201,7 @@ class READER(source: string) is
     si
 si
 
-show(rule: Rule) -> string =>
+show(rule) =>
     case rule
     when (text): Rule.TERMINAL then "\"{text}\""
     when (called): Rule.NAME then called

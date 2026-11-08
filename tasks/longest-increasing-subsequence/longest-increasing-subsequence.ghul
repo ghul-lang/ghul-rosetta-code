@@ -1,6 +1,6 @@
 use default
 
-lis(xs: int[]) -> int{} is
+lis(xs) is
     let n = xs.count
     let lengths = repeat(1, n + 1) |> LIST()
     let prev = repeat(-1, n + 1) |> LIST()

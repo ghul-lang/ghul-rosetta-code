@@ -26,13 +26,13 @@ let random = System.Random(12)
 let bins = repeat(0, rows + 1) |> LIST()
 let falling = LIST()
 
-x_of(row: int, slot: int) -> double =>
+x_of(row, slot) =>
     let offset = double(slot) - double(row) / 2.0 in
     double(width) / 2.0 + offset * pin_spacing
 
-y_of(row: int) -> double => top + double(row) * 11.0
+y_of(row) => top + double(row) * 11.0
 
-draw(image: IMAGE) is
+draw(image) is
     image.clear(245ub, 242ub, 232ub)
 
     image.color(90ub, 90ub, 100ub)

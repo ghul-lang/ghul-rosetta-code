@@ -1,6 +1,6 @@
 use default
 
-rounds(players: int) -> (int, int)[]{} is
+rounds(players) is
     let n = if players % 2 == 0 then players else players + 1 fi
     let seats = (1::n) |> LIST()
 
@@ -13,10 +13,10 @@ rounds(players: int) -> (int, int)[]{} is
     od
 si
 
-show(player: int, players: int) -> string =>
+show(player, players) =>
     if player > players then "bye" else "{player}" fi
 
-schedule(players: int) is
+schedule(players) is
     write_line("{players} players:")
 
     for (round, games) in rounds(players) |> index() do

@@ -9,12 +9,12 @@ si
 
 use Pair = (distance: double, a: P, b: P)
 
-closer(p: Pair, q: Pair) -> Pair =>
+closer(p, q) =>
     if q.distance < p.distance then q else p fi
 
-pair(a: P, b: P) -> Pair => ((a - b).length, a, b)
+pair(a, b) => ((a - b).length, a, b)
 
-brute_force(points: P[]) -> Pair =>
+brute_force(points) =>
     [
         pair(points[i], points[j])
         for i in 0..points.count

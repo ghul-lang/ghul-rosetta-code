@@ -1,16 +1,16 @@
 use default
 
-power(base: int, exponent: int) -> long =>
+power(base, exponent) =>
     repeat(long(base), exponent) |> product()
 
-digit_counts(value: long) -> int[] =>
+digit_counts(value) =>
     let found = value |> digits() |> list() in
     0::9 |> map(d => found |> count(* == long(d))) |> list()
 
-held(combination: int[], digit: int) -> int =>
+held(combination, digit) =>
     combination |> count(* == digit)
 
-multisets(width: int, lowest: int, chosen: int[]) -> int[]{} is
+multisets(width, lowest, chosen) is
     if chosen.count == width then
         yield chosen
     else
@@ -20,7 +20,7 @@ multisets(width: int, lowest: int, chosen: int[]) -> int[]{} is
     fi
 si
 
-own_sums(width: int) -> long{} is
+own_sums(width) is
     for combination in multisets(width, 0, []) do
         let total = combination |> map(power(*, width)) |> sum()
 

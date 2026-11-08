@@ -1,6 +1,6 @@
 use default
 
-anti_primes() -> int{} is
+anti_primes() is
     let most mut = 0
     let n mut = 1
 

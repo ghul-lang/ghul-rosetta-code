@@ -8,7 +8,7 @@ let turns = ["ahead", "right", "back", "left"]
 
 let decided = MAP[(int, int, int), bool]()
 
-edge(x: int, y: int, d: int) -> (int, int, int) =>
+edge(x, y, d) =>
     case d
     when 0 then (x, y, 0)
     when 1 then (x, y, 1)
@@ -16,7 +16,7 @@ edge(x: int, y: int, d: int) -> (int, int, int) =>
     else (x, y - 1, 1)
     esac
 
-passage(x: int, y: int, d: int) -> bool is
+passage(x, y, d) is
     let key = edge(x, y, d)
 
     if !decided.contains_key(key) then
@@ -31,7 +31,7 @@ let y mut = 0
 let facing mut = 0
 let visited = SET()
 
-toward(turn: int) -> int => (facing - turn + 4) % 4
+toward(turn) => (facing - turn + 4) % 4
 
 visited.add((0, 0))
 
@@ -91,19 +91,19 @@ let high_x = visited |> map(v => v.`0) |> reduce(0, (a, b) => max(a, b))
 let low_y = visited |> map(v => v.`1) |> reduce(0, (a, b) => min(a, b))
 let high_y = visited |> map(v => v.`1) |> reduce(0, (a, b) => max(a, b))
 
-known(column: int, row: int, side: int) -> bool =>
+known(column, row, side) =>
     decided.contains_key((column, row, side)) /\
     decided[(column, row, side)]
 
 write_line()
 write_line("the part explored, E the entrance, @ where you stopped:")
 
-wall_above(row: int) -> string =>
+wall_above(row) =>
     (low_x::high_x)
         |> map(column => if known(column, row, 1) then "+  " else "+--" fi)
         |> join("")
 
-cell(column: int, row: int) -> string =>
+cell(column, row) =>
     if column == x /\ row == y then "@ "
     elif column == 0 /\ row == 0 then "E "
     elif visited.contains((column, row)) then ". "

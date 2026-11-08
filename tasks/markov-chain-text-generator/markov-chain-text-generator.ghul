@@ -24,12 +24,7 @@ suffixes(words: string[], size: int) -> (
     (by_prefix = by_prefix, prefixes = prefixes)
 si
 
-generate(
-    by_prefix: Map[string, LIST[string]],
-    start: string,
-    length: int,
-    random: System.Random
-) -> string is
+generate(by_prefix, start, length, random) is
     chain(prefix: string[]) -> string{} is
         let choices = by_prefix[prefix |> join(" ")]
 
@@ -46,7 +41,7 @@ generate(
     (opening ++ chain(opening)) |> take(length) |> join(" ")
 si
 
-wrap(text: string, width: int) -> string{} is
+wrap(text, width) is
     let line = System.Text.StringBuilder()
 
     for word in text.split([' ']) do

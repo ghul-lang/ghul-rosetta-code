@@ -3,7 +3,7 @@ use default
 write_line("testing primorial offsets for primality")
 write_line("")
 
-primorials() -> bigint{} is
+primorials() is
     let product mut = 1n
 
     for prime in primes() do
@@ -13,7 +13,7 @@ primorials() -> bigint{} is
     od
 si
 
-fortunate(primorial: bigint) -> int =>
+fortunate(primorial) =>
     from(1)
         |> map(k => 2 * k + 1)
         |> find(m => is_prime(primorial + cast(m)))!

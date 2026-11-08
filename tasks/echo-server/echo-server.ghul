@@ -4,7 +4,7 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Thread
 
-echo(client: TcpClient, number: int, log: (string) -> void) is
+echo(client, number, log) is
     let stream = client.get_stream()
     let reader = IO.StreamReader(stream), writer = IO.StreamWriter(stream)
 

@@ -1,12 +1,12 @@
 use default
 
-is_de_polignac(n: int) -> bool =>
+is_de_polignac(n) =>
     from(0)
         |> map(1 << *)
         |> take_while(* < n)
         |> all(power => !is_prime(n - power))
 
-de_polignac_numbers() -> int{} => from(1, 2) |> filter(is_de_polignac)
+de_polignac_numbers() => from(1, 2) |> filter(is_de_polignac)
 
 write_line("First 50 de Polignac numbers:")
 

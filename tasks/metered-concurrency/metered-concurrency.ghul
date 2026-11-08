@@ -13,7 +13,7 @@ let holding_turns = 2
 
 let semaphore = SEMAPHORE(permits)
 
-holding() -> int => permits - semaphore.available
+holding() => permits - semaphore.available
 
 worker(id: int) -> COROUTINE is
     await semaphore.acquire()

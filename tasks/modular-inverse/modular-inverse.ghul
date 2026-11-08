@@ -1,6 +1,6 @@
 use default
 
-modular_inverse(a: int, m: int) -> int? => (
+modular_inverse(a, m) => (
     let r mut = m
     let next_r mut = a % m
     let t mut = 0

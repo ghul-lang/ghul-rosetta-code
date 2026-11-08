@@ -1,7 +1,7 @@
 use default
 use System.StringSplitOptions
 
-shortest_unique(line: string) -> int? is
+shortest_unique(line) is
     let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 
     if words.count == 0 then

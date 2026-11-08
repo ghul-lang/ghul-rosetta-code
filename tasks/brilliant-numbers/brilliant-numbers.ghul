@@ -1,6 +1,6 @@
 use default
 
-primes_below(limit: int) -> int{} is
+primes_below(limit) is
     let composite = repeat(false, limit) |> LIST()
 
     for candidate in 2..limit do
@@ -17,15 +17,15 @@ primes_below(limit: int) -> int{} is
     od
 si
 
-power_of_ten(n: int) -> int => repeat(10, n) |> product()
+power_of_ten(n) => repeat(10, n) |> product()
 
-products(group: int[]) -> long{} => [
+products(group) => [
     long(p) * long(q)
     for (i, p) in group |> index()
     for q in group |> skip(i)
 ]
 
-brilliant_numbers(max_digits: int) -> long[] =>
+brilliant_numbers(max_digits) =>
     let primes = primes_below(power_of_ten(max_digits)) |> list() in
     1::max_digits
         |> flat_map(digits =>

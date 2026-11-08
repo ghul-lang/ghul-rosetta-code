@@ -1,6 +1,6 @@
 use default
 
-identity(size: int) -> string{} =>
+identity(size) =>
     (0..size)
         |> map(row =>
             (0..size)

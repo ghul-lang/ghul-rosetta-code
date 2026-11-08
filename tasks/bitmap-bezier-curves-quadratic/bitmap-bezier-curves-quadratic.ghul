@@ -5,7 +5,7 @@ use POINT = (x: double, y: double)
 
 let steps = 200
 
-quadratic(a: POINT, b: POINT, c: POINT) -> POINT[] =>
+quadratic(a, b, c) =>
     (0..steps + 1)
         |> map(step => (
             let t = double(step) / double(steps)

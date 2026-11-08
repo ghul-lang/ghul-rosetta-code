@@ -5,10 +5,10 @@ struct BT(digits: int{}) is
         digits |> reverse() |> map(d => "-0+"[d + 1]) |> string()
 si
 
-trim(ds: int{}) -> int{} =>
+trim(ds) =>
     ds |> reverse() |> skip_while(* == 0) |> reverse()
 
-digit(c: char) -> int =>
+digit(c) =>
     case c
     when '+' then 1
     when '-' then -1
@@ -17,16 +17,16 @@ digit(c: char) -> int =>
 
 parse(s: string) -> BT => BT(s |> reverse() |> map(digit))
 
-balanced(n: bigint) -> BT => BT(digits(n))
+balanced(n) => BT(digits(n))
 
-digits(n: bigint) -> int{} =>
+digits(n) =>
     case int((n % 3n + 3n) % 3n)
     when 0 then if n =~ 0n then [] else [0] ++ digits(n / 3n) fi
     when 1 then [1] ++ digits((n - 1n) / 3n)
     else [-1] ++ digits((n + 1n) / 3n)
     esac
 
-value(a: BT) -> bigint =>
+value(a) =>
     a.digits |> reverse() |> reduce(0n, (t, d) => t * 3n + bigint(d))
 
 add(a: int{}, b: int{}) -> int{} =>

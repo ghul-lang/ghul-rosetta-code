@@ -2,7 +2,7 @@ use default
 
 let biggest_factorial = 18
 
-multiples(value: long, largest: int, limit: long) -> long{} is
+multiples(value, largest, limit) is
     yield value
 
     for i in 2::largest do
@@ -30,7 +30,7 @@ decompose(value: long, largest: int) -> LIST[int]? is
     return null
 si
 
-as_factorials(value: long) -> string =>
+as_factorials(value) =>
     if let factors = decompose(value, biggest_factorial) then
         factors
             |> distinct()

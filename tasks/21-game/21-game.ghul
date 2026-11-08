@@ -9,7 +9,7 @@ union Move is
     BAD(complaint: string)
 si
 
-parse_move(entered: string, total: int) -> Move =>
+parse_move(entered, total) =>
     if entered.to_lower() =~ "q" then
         Move.QUIT
     elif entered.length != 1 \/ !"123".contains(entered) then
@@ -20,14 +20,14 @@ parse_move(entered: string, total: int) -> Move =>
         Move.PLAY(int.parse(entered))
     fi
 
-computer_pick(total: int) -> int =>
+computer_pick(total) =>
     1::3
         |> find(pick =>
             total + pick <= target /\ (total + pick) % 4 == 1
         ) ??
     min(3, target - total)
 
-ask(prompt: string) -> string? => (
+ask(prompt) => (
     Std.write(prompt)
     Std.read_line()
 )

@@ -95,10 +95,10 @@ search(
     return null
 si
 
-solve(m: int, n: int) -> Armies? =>
+solve(m, n) =>
     search(attack_masks(n), m, 0, 0, 0ul, 0ul, 0ul, 0ul)
 
-show(armies: Armies, n: int) is
+show(armies, n) is
     for row in 0..n do
         let squares =
             0..n
@@ -115,7 +115,7 @@ show(armies: Armies, n: int) is
     od
 si
 
-draw(armies: Armies, n: int, file: string) is
+draw(armies, n, file) is
     let square = 44
     let image = IMAGE(n * square, n * square)
 

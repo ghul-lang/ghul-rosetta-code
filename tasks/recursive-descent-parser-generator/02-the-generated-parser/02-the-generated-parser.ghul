@@ -32,9 +32,9 @@ let tokens = tokenize(source)
 let at mut = 0
 let temporaries mut = 0
 
-peek() -> string => if at < tokens.count then tokens[at] else "" fi
+peek() => if at < tokens.count then tokens[at] else "" fi
 
-accept(token: string) -> bool is
+accept(token) is
     if peek() =~ token then
         at = at + 1
         return true
@@ -43,13 +43,13 @@ accept(token: string) -> bool is
     false
 si
 
-expect(token: string) is
+expect(token) is
     if !accept(token) then
         throw System.Exception("expected {token}, found {peek()}")
     fi
 si
 
-name() -> string is
+name() is
     let token = peek()
 
     if token.length == 0 \/ !char.is_letter(token[0]) then
@@ -60,7 +60,7 @@ name() -> string is
     token
 si
 
-emit(left: string, operator: string, right: string) -> string is
+emit(left, operator, right) is
     temporaries = temporaries + 1
 
     let result = "_{temporaries:D4}"
@@ -69,7 +69,7 @@ emit(left: string, operator: string, right: string) -> string is
     result
 si
 
-expr() -> string is
+expr() is
     let left mut = term()
 
     do
@@ -85,7 +85,7 @@ expr() -> string is
     left
 si
 
-term() -> string is
+term() is
     let left mut = factor()
 
     do
@@ -101,7 +101,7 @@ term() -> string is
     left
 si
 
-factor() -> string is
+factor() is
     if accept("(") then
         let value = expr()
 

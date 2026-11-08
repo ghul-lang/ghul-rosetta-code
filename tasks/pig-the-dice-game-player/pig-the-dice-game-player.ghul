@@ -7,14 +7,14 @@ let random = Random(2024)
 use Strategy = (int, int, int) -> bool
 use Player = (name: string, rolls_again: Strategy)
 
-hold_at_20(banked: int, turn: int, opponent: int) -> bool =>
+hold_at_20(banked, turn, opponent) =>
     turn < 20 /\ banked + turn < goal
 
-chase_the_leader(banked: int, turn: int, opponent: int) -> bool =>
+chase_the_leader(banked, turn, opponent) =>
     banked + turn < goal /\
     (turn < 15 \/ opponent >= 71 \/ banked + turn < opponent)
 
-four_rolls(banked: int, turn: int, opponent: int) -> bool =>
+four_rolls(banked, turn, opponent) =>
     turn < 16 /\ banked + turn < goal
 
 let strategies: Player[] = [
@@ -23,7 +23,7 @@ let strategies: Player[] = [
     (name = "four rolls a turn", rolls_again = four_rolls)
 ]
 
-play(first: Player, second: Player, show: bool) -> int is
+play(first, second, show) is
     let scores = LIST([0, 0])
     let players = [first, second]
     let current mut = 0

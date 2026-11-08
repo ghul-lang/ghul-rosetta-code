@@ -2,7 +2,7 @@ use default
 
 let digit_symbols = "0123456789abcdef"
 
-render(value: long, base: int) -> string =>
+render(value, base) =>
     let
         digit = digit_symbols[int(value % cast(base))],
         rest = value / cast(base)
@@ -13,7 +13,7 @@ render(value: long, base: int) -> string =>
             "{digit}"
         fi
 
-esthetic(base: int) -> long{} is
+esthetic(base) is
     let pending = QUEUE()
 
     for digit in 1..base do
@@ -47,7 +47,7 @@ for base in 2::16 do
     write_line("  {shown}")
 od
 
-show_range(low: long, high: long) is
+show_range(low, high) is
     let matching =
         esthetic(10)
             |> filter(* >= low)

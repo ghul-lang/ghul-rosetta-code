@@ -2,7 +2,7 @@ use default
 
 let dice = System.Random(20260909)
 
-attribute() -> int =>
+attribute() =>
     let
         rolls = 1::4 |> map(_ => dice.next(1, 7)) |> list(),
         lowest = rolls |> min_by(roll => roll),
@@ -10,9 +10,9 @@ attribute() -> int =>
     in
         total - (lowest ?? 0)
 
-character() -> int[] => 1::6 |> map(_ => attribute()) |> list()
+character() => 1::6 |> map(_ => attribute()) |> list()
 
-acceptable(values: int[]) -> bool =>
+acceptable(values) =>
     let
         total = values |> sum(),
         strong = values |> filter(* >= 15) |> count()

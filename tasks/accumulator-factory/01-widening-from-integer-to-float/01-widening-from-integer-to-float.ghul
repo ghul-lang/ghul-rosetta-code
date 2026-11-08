@@ -7,20 +7,20 @@ si
 
 use Number.*
 
-widen(n: Number) -> double =>
+widen(n) =>
     case n
     when (value): WHOLE then cast(value)
     when (value): FRACTIONAL then value
     esac
 
-add(left: Number, right: Number) -> Number =>
+add(left, right) =>
     if let whole_left: WHOLE = left, whole_right: WHOLE = right then
         WHOLE(whole_left.value + whole_right.value)
     else
         FRACTIONAL(widen(left) + widen(right))
     fi
 
-accumulator(initial: Number) -> Number -> Number =>
+accumulator(initial) =>
     let sum mut = initial in
 
     value => (

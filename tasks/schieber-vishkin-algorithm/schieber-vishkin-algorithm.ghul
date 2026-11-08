@@ -125,7 +125,7 @@ let parents = [
 
 let lca = LCA(parents)
 
-naive(u: int, v: int) -> int is
+naive(u, v) is
     let ancestors = SET()
     let a mut = u
 

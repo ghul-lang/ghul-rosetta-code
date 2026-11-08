@@ -7,7 +7,7 @@ let target = 9
 
 use State = (small: int, large: int, time: int)
 
-flip(s: State, which: string) -> State =>
+flip(s, which) =>
     case which
     when "4" then
         (small = small - s.small, large = s.large, time = s.time)
@@ -17,9 +17,9 @@ flip(s: State, which: string) -> State =>
         (small = small - s.small, large = large - s.large, time = s.time)
     esac
 
-running(s: State) -> int[] => [s.small, s.large] |> filter(* > 0) |> list()
+running(s) => [s.small, s.large] |> filter(* > 0) |> list()
 
-wait(s: State) -> State? =>
+wait(s) =>
     let sands = running(s) in
     if sands.count == 0 then null
     else
@@ -31,7 +31,7 @@ wait(s: State) -> State? =>
         )
     fi
 
-moves(s: State) -> (command: string, next: State){} => (
+moves(s) => (
     let result = LIST()
 
     if let after = wait(s) then
@@ -45,7 +45,7 @@ moves(s: State) -> (command: string, next: State){} => (
     result
 )
 
-plan(start: State) -> string[]? is
+plan(start) is
     let seen = SET()
     let queue = QUEUE()
 
@@ -72,7 +72,7 @@ plan(start: State) -> string[]? is
     return null
 si
 
-show(s: State) =>
+show(s) =>
     write_line(
         "{s.time} minutes gone; sand left to fall: "
         "{s.small} in the 4, {s.large} in the 7"

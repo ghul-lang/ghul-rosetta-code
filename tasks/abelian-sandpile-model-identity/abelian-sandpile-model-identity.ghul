@@ -54,7 +54,7 @@ si
 +(a: SANDPILE, b: SANDPILE) -> SANDPILE =>
     SANDPILE(a.size, a.cells |> zip(b.cells) |> map(p => p.`0 + p.`1))
 
-side_by_side(label: string, piles: SANDPILE[], signs: string[]) is
+side_by_side(label, piles, signs) is
     write_line(label)
 
     for r in 0..piles[0].size do

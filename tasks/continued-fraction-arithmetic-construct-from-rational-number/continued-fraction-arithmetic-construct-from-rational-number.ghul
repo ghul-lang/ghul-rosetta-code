@@ -1,6 +1,6 @@
 use default
 
-r2cf(numerator: long, denominator: long) -> long{} is
+r2cf(numerator, denominator) is
     let n1 mut = numerator
     let n2 mut = denominator
 
@@ -13,7 +13,7 @@ r2cf(numerator: long, denominator: long) -> long{} is
     od
 si
 
-show(terms: long{}) -> string =>
+show(terms) =>
     case terms
     when [] then "[]"
     when [only] then "[{only}]"

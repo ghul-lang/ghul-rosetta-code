@@ -2,7 +2,7 @@ use default
 
 let one = 1n
 
-motzkin(count: int) -> bigint{} is
+motzkin(count) is
     let previous mut = 0n
     let current mut = one
 

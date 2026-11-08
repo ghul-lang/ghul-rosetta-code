@@ -3,7 +3,7 @@ use System.Globalization.CultureInfo
 
 let invariant = CultureInfo.invariant_culture
 
-show(name: string, value: double) =>
+show(name, value) =>
     write_line("{name,-22} {value.to_string(invariant)}")
 
 show("positive infinity", double.positive_infinity)

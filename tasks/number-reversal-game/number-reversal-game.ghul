@@ -3,7 +3,7 @@ use IO.Std.read_line
 
 let random = System.Random(9)
 
-shuffled() -> int[] => (
+shuffled() => (
     let digits = 1::9 |> LIST()
 
     for i in 0..8 do
@@ -14,7 +14,7 @@ shuffled() -> int[] => (
     digits
 )
 
-sorted(digits: int[]) -> bool => 0..8 |> all(i => digits[i] < digits[i + 1])
+sorted(digits) => 0..8 |> all(i => digits[i] < digits[i + 1])
 
 let digits mut = shuffled()
 

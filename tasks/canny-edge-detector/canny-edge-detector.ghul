@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -70,7 +70,7 @@ class FIELD is
     si
 si
 
-grayscale(image: IMAGE) -> FIELD is
+grayscale(image) is
     let gray = FIELD(image.width, image.height)
 
     for y in 0..image.height do
@@ -98,7 +98,7 @@ let gaussian = [
     [2.0, 4.0, 5.0, 4.0, 2.0]
 ]
 
-blur(f: FIELD) -> FIELD is
+blur(f) is
     let result = FIELD(f.width, f.height)
 
     for y in 0..f.height do
@@ -120,7 +120,7 @@ blur(f: FIELD) -> FIELD is
     result
 si
 
-canny(f: FIELD, low: double, high: double) -> FIELD is
+canny(f, low, high) is
     let w = f.width, h = f.height
     let magnitude = FIELD(w, h)
     let direction = repeat(0, w * h) |> LIST()

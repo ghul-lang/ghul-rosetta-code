@@ -2,7 +2,7 @@ use default
 use IO.Std.write
 use IO.Std.read_line
 
-choose(items: string[]) -> string is
+choose(items) is
     if items.count == 0 then
         return ""
     fi

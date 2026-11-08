@@ -17,15 +17,15 @@ let quadrants = [
     ("down but rising", "transition")
 ]
 
-date(text: string) -> DateTime =>
+date(text) =>
     DateTime.parse(text, CultureInfo.invariant_culture)
 
-show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
+show(d) => d.to_string("yyyy-MM-dd")
 
-level(position: int, length: int) -> double =>
+level(position, length) =>
     sin(2.0 * pi * double(position) / double(length))
 
-report(birth: DateTime, target: DateTime) is
+report(birth, target) is
     let days = int((target - birth).total_days)
 
     write_line("{show(birth)} to {show(target)}, day {days}:")

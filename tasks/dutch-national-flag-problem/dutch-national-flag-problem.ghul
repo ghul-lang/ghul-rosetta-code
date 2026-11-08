@@ -6,10 +6,10 @@ enum Color is
     BLUE
 si
 
-is_sorted(balls: Color[]) -> bool =>
+is_sorted(balls) =>
     0..balls.count - 1 |> all(i => balls[i] <= balls[i + 1])
 
-shuffle(balls: LIST[Color], random: System.Random) is
+shuffle(balls, random) is
     let i mut = balls.count - 1
 
     while i > 0 do
@@ -19,7 +19,7 @@ shuffle(balls: LIST[Color], random: System.Random) is
     od
 si
 
-dutch_flag_sort(balls: LIST[Color]) is
+dutch_flag_sort(balls) is
     let low mut = 0
     let mid mut = 0
     let high mut = balls.count - 1

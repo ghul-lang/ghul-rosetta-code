@@ -1,6 +1,6 @@
 use default
 
-fibonacci() -> int{} is
+fibonacci() is
     let previous mut = 0
     let current mut = 1
     do

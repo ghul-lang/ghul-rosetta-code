@@ -1,13 +1,13 @@
 use default
 
-is_gapful(n: int) -> bool =>
+is_gapful(n) =>
     let
         digits = n.to_string(),
         ends = "{digits[0]}{digits[digits.length - 1]}"
     in
         n % int.parse(ends) == 0
 
-gapful_from(start: int, wanted: int) -> int{} =>
+gapful_from(start, wanted) =>
     from(start) |> filter(is_gapful) |> take(wanted)
 
 write_line("first 30 gapful numbers:")

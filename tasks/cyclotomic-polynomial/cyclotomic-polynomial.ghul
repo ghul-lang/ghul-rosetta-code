@@ -1,6 +1,6 @@
 use default
 
-mobius(n: int) -> int is
+mobius(n) is
     let remaining mut = n
     let sign mut = 1
     let p mut = 2
@@ -22,7 +22,7 @@ mobius(n: int) -> int is
     if remaining > 1 then -sign else sign fi
 si
 
-cyclotomic(n: int) -> long[] is
+cyclotomic(n) is
     let factors = [
         (power = d, exponent = mobius(n / d))
         for d in 1::n
@@ -54,7 +54,7 @@ cyclotomic(n: int) -> long[] is
     fi
 si
 
-term(coefficient: long, power: int) -> string =>
+term(coefficient, power) =>
     let magnitude = abs(coefficient) in
     let digits =
         if magnitude == 1L /\ power > 0 then
@@ -69,7 +69,7 @@ term(coefficient: long, power: int) -> string =>
     else "{digits}x^{power}"
     esac
 
-sign(leading: bool, coefficient: long) -> string =>
+sign(leading, coefficient) =>
     case (leading, coefficient < 0L)
     when (true, true) then "-"
     when (true, false) then ""
@@ -77,7 +77,7 @@ sign(leading: bool, coefficient: long) -> string =>
     when (false, false) then " + "
     esac
 
-show(coefficients: long[]) -> string =>
+show(coefficients) =>
     coefficients
         |> index()
         |> filter(t => t.value != 0L)

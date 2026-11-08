@@ -24,12 +24,12 @@ build(points: Point[], depth: int) -> Tree is
     )
 si
 
-separation(a: Point, b: Point) -> double =>
+separation(a, b) =>
     a |> zip(b, (x, y) => (x - y) * (x - y)) |> sum()
 
 use Found = (point: Point, distance: double, visited: int)
 
-nearest(tree: Tree, target: Point) -> Found is
+nearest(tree, target) is
     let visited mut = 0
     let best: Point? mut = null
     let best_distance mut = double.positive_infinity
@@ -62,9 +62,9 @@ nearest(tree: Tree, target: Point) -> Found is
     (point = best!, distance = sqrt(best_distance), visited = visited)
 si
 
-place(p: Point) -> string => p |> map(c => "{c:F6}") |> join()
+place(p) => p |> map(c => "{c:F6}") |> join()
 
-show(name: string, points: Point[], target: Point) is
+show(name, points, target) is
     let (point, distance, visited) = nearest(build(points, 0), target)
 
     write_line("{name}")
@@ -88,7 +88,7 @@ show("Wikipedia example", wikipedia, [9.0, 2.0])
 
 let random = System.Random(42)
 
-random_point() -> Point =>
+random_point() =>
     repeat(0, 3) |> map(_ => random.next_double()) |> ARRAY()
 
 let cloud = repeat(0, 1000) |> map(_ => random_point()) |> ARRAY()

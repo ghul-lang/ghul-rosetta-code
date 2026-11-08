@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -51,7 +51,7 @@ scene() -> IMAGE is
     image
 si
 
-median_filter(source: IMAGE) -> IMAGE is
+median_filter(source) is
     let result = IMAGE(source.width, source.height)
 
     for y in 0..source.height do

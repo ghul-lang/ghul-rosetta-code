@@ -2,7 +2,7 @@ use default
 
 let digits = "0123456789abcdefghijklmnopqrstuvwxyz"
 
-to_base(n: long, base: int) -> string =>
+to_base(n, base) =>
     let
         b = long(base),
         last = digits[int(n % b)]
@@ -13,7 +13,7 @@ to_base(n: long, base: int) -> string =>
             "{to_base(n / b, base)}{last}"
         fi
 
-from_base(text: string, base: int) -> long =>
+from_base(text, base) =>
     text
         |> reduce(0L, (value, c) =>
             value * long(base) + long(digits.index_of(c))

@@ -11,7 +11,7 @@ union Parsed is
     REJECTED(message: string)
 si
 
-sieve(even: bool, limit: int) -> int[] is
+sieve(even, limit) is
     let start = if even then 2 else 1 fi
     let survivors mut = from(start, 2) |> take_while(* <= limit) |> list()
 
@@ -38,10 +38,10 @@ si
 let lucky_numbers = sieve(false, 150_000)
 let even_lucky_numbers = sieve(true, 150_000)
 
-series(even: bool) -> int[] =>
+series(even) =>
     if even then even_lucky_numbers else lucky_numbers fi
 
-as_number(text: string) -> int? is
+as_number(text) is
     let negative = text.length > 0 /\ text[0] == '-'
     let digits = if negative then text[1..<0] else text fi
 
@@ -57,7 +57,7 @@ as_number(text: string) -> int? is
     return if negative then -value else value fi
 si
 
-as_kind(text: string) -> bool? =>
+as_kind(text) =>
     case text.to_lower()
     when "lucky" then false
     when "evenlucky" then true
@@ -123,7 +123,7 @@ parse(arguments: string[]) -> Parsed is
     Parsed.UNDERSTOOD(Request.BY_INDEX(first, second, even))
 si
 
-evaluate(request: Request) -> int{} =>
+evaluate(request) =>
     case request
     when one: Request.NTH then
         [series(one.even)[one.index - 1]]
@@ -136,7 +136,7 @@ evaluate(request: Request) -> int{} =>
             |> filter(value => value >= valued.low /\ value <= valued.high)
     esac
 
-run(arguments: string[]) is
+run(arguments) is
     write_line("lucky {arguments |> join(" ")}".trim_end())
 
     let outcome = parse(arguments)

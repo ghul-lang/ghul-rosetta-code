@@ -1,6 +1,6 @@
 use default
 
-humble() -> long{} is
+humble() is
     let found = LIST()
     found.add(1L)
 

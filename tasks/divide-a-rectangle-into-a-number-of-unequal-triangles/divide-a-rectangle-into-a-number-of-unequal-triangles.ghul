@@ -13,25 +13,25 @@ si
 
 use Triangle = (a: P, b: P, c: P)
 
-sides(t: Triangle) -> double[] =>
+sides(t) =>
     [(t.b - t.a).length, (t.c - t.b).length, (t.a - t.c).length]
         |> sort()
         |> list()
 
-similar(s: Triangle, t: Triangle) -> bool =>
+similar(s, t) =>
     let
         x = sides(s),
         y = sides(t)
     in
         0..3 |> all(i => abs(x[i] / x[2] - y[i] / y[2]) < 1.0e-6)
 
-area(t: Triangle) -> double => abs((t.b - t.a) × (t.c - t.a)) / 2.0
+area(t) => abs((t.b - t.a) × (t.c - t.a)) / 2.0
 
-all_different(ts: Triangle[]) -> bool =>
+all_different(ts) =>
     0..ts.count
         |> all(i => i + 1..ts.count |> all(j => !similar(ts[i], ts[j])))
 
-length(e: (P, P, P)) -> double => (e.`1 - e.`0).length
+length(e) => (e.`1 - e.`0).length
 
 split(t: Triangle, at: double) -> (Triangle, Triangle) => (
     let edges = [

@@ -5,7 +5,7 @@ let capitals = ['A', 'B', 'C']
 let digits = [1, 2, 3]
 let count = [letters.count, capitals.count, digits.count] |> min()!
 
-rows() -> string{} is
+rows() is
     for i in 0..count do
         yield "{letters[i]}{capitals[i]}{digits[i]}"
     od

@@ -14,7 +14,7 @@ let sines =
         )
         |> list()
 
-rotate_left(value: uint, count: int) -> uint =>
+rotate_left(value, count) =>
     (value << count) | (value >>> (32 - count))
 
 padded(message: ubyte[]) -> ubyte[] is
@@ -35,14 +35,14 @@ padded(message: ubyte[]) -> ubyte[] is
     return block
 si
 
-word(block: ubyte[], at: int) -> uint =>
+word(block, at) =>
     0..4
         |> map(byte_index =>
             uint(block[at + byte_index]) << (8 * byte_index)
         )
         |> reduce(0u, (bits, more) => bits | more)
 
-md5(message: ubyte[]) -> string is
+md5(message) is
     let block = padded(message)
 
     let state = LIST([

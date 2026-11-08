@@ -1,6 +1,6 @@
 use default
 
-is_valid_iban(raw: string) -> bool is
+is_valid_iban(raw) is
     let iban = ["{ch}" for ch in raw if ch != ' '] |> join("")
 
     let is_letter = ch => ch >= 'A' /\ ch <= 'Z'

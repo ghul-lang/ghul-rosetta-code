@@ -1,6 +1,6 @@
 use default
 
-fibonacci() -> bigint{} is
+fibonacci() is
     let previous mut = 0n
     let current mut = 1n
 
@@ -12,7 +12,7 @@ fibonacci() -> bigint{} is
     od
 si
 
-reversed(value: bigint) -> bigint => (
+reversed(value) => (
     let digits = value.to_string().to_char_array()
 
     System.Array.reverse(digits)

@@ -4,25 +4,25 @@ use IO.File
 use IO.Path
 use System.Security.Cryptography.RandomNumberGenerator
 
-letters(text: string) -> string =>
+letters(text) =>
     string([char.to_upper(c) for c in text if char.is_letter(c)])
 
-random_group() -> string =>
+random_group() =>
     string(1::6 |> map(_ => char(65 + RandomNumberGenerator.get_int32(26))))
 
-random_line() -> string => 1::6 |> map(_ => random_group()) |> join(" ")
+random_line() => 1::6 |> map(_ => random_group()) |> join(" ")
 
-generate(path: string, lines: int) =>
+generate(path, lines) =>
     File.write_all_lines(
         path,
         ["# generated one-time pad"]
             |> cat(1::lines |> map(_ => random_line()))
     )
 
-is_unused(line: string) -> bool =>
+is_unused(line) =>
     !line.starts_with("#") /\ !line.starts_with("-")
 
-take_key(path: string, length: int) -> string is
+take_key(path, length) is
     let lines = File.read_all_lines(path) |> LIST()
     let key = System.Text.StringBuilder()
 
@@ -39,9 +39,9 @@ take_key(path: string, length: int) -> string is
     key.to_string().substring(0, length)
 si
 
-position(c: char) -> int => int(c) - int('A')
+position(c) => int(c) - int('A')
 
-shift(text: string, key: string, direction: int) -> string =>
+shift(text, key, direction) =>
     string(
         0..text.length
             |> map(i =>
@@ -51,10 +51,7 @@ shift(text: string, key: string, direction: int) -> string =>
             )
     )
 
-round_trip(message: string, sender: string, receiver: string) -> (
-    sent: string,
-    received: string
-) =>
+round_trip(message, sender, receiver) =>
     let
         sent = shift(message, take_key(sender, message.length), 1),
         key = take_key(receiver, sent.length)
@@ -67,7 +64,7 @@ let folder = Path.combine(
 )
 IO.Directory.create_directory(folder)
 
-pad(name: string) -> string => Path.combine(folder, name)
+pad(name) => Path.combine(folder, name)
 
 File.copy("wikipedia.1tp", pad("sender.1tp"))
 File.copy("wikipedia.1tp", pad("receiver.1tp"))

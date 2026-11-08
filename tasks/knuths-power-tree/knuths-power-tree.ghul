@@ -9,7 +9,7 @@ let cursor mut = 0
 
 queue.add(1)
 
-path_to(target: int) -> int[] => (
+path_to(target) => (
     let steps = LIST()
     let current mut = target
 
@@ -24,7 +24,7 @@ path_to(target: int) -> int[] => (
     steps
 )
 
-build_until(target: int) is
+build_until(target) is
     while target != 1 /\ !parent.contains_key(target) do
         let node = queue[cursor]
         cursor = cursor + 1
@@ -61,7 +61,7 @@ exponentiate[T: INumber[T]](base: T, exponent: int) -> T is
     return computed[exponent]
 si
 
-show_path(target: int) is
+show_path(target) is
     build_until(target)
     let texts = target |> path_to() |> map(step => "{step}")
 

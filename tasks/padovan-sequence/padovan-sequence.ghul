@@ -1,6 +1,6 @@
 use default
 
-padovan() -> int{} is
+padovan() is
     let window mut = (1, 1, 1)
 
     do
@@ -16,10 +16,10 @@ let plastic =
     cbrt((9.0 + sqrt(69.0)) / 18.0) + cbrt((9.0 - sqrt(69.0)) / 18.0)
 let scaling = 1.0453567932525329623
 
-floor_padovan(n: int) -> int =>
+floor_padovan(n) =>
     int(floor(pow(plastic, cast(n - 1)) / scaling + 0.5))
 
-l_system() -> string{} is
+l_system() is
     let current mut = "A"
 
     do

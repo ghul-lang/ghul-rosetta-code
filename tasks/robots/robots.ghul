@@ -10,7 +10,7 @@ use Spot = (x: int, y: int)
 
 let keys = ["y", "k", "u", "h", "w", "l", "b", "j", "n"]
 
-anywhere() -> Spot => (x = random.next(width), y = random.next(height))
+anywhere() => (x = random.next(width), y = random.next(height))
 
 let player mut = anywhere()
 let robots = LIST()
@@ -24,7 +24,7 @@ while robots.count < 8 do
     fi
 od
 
-toward(from: int, to: int) -> int => sign(to - from)
+toward(from, to) => sign(to - from)
 
 draw() is
     write_line("+{"".pad_right(width, '-')}+")

@@ -1,9 +1,9 @@
 use default
 
-after_night(pile: int, sailors: int) -> int =>
+after_night(pile, sailors) =>
     pile - 1 - (pile - 1) / sailors
 
-satisfies_tale(pile: int, sailors: int, nights: int) -> bool =>
+satisfies_tale(pile, sailors, nights) =>
     if nights == 0 then
         pile % sailors == 0
     else
@@ -11,7 +11,7 @@ satisfies_tale(pile: int, sailors: int, nights: int) -> bool =>
         satisfies_tale(after_night(pile, sailors), sailors, nights - 1)
     fi
 
-hidden_piles(pile: int, sailors: int, nights: int) -> int{} is
+hidden_piles(pile, sailors, nights) is
     if nights > 0 then
         yield (pile - 1) / sailors
         yield in hidden_piles(

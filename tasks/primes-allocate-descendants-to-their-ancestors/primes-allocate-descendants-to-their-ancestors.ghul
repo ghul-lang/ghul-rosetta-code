@@ -33,7 +33,7 @@ ancestors(n: int) -> int{} is
     od
 si
 
-abbreviated(list: long[]) -> string =>
+abbreviated(list) =>
     if list.count == 0 then
         "none"
     elif list.count <= 6 then

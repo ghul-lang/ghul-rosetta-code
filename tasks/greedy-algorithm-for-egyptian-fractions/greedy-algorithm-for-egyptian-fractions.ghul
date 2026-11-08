@@ -1,6 +1,6 @@
 use default
 
-egyptian(numerator: bigint, denominator: bigint) -> bigint{} is
+egyptian(numerator, denominator) is
     if numerator > 0n then
         let unit = (denominator + numerator - 1n) / numerator
 
@@ -12,7 +12,7 @@ egyptian(numerator: bigint, denominator: bigint) -> bigint{} is
     fi
 si
 
-describe(numerator: int, denominator: int) -> string =>
+describe(numerator, denominator) =>
     let whole = numerator / denominator in
     let terms =
         if whole > 0 then ["[{whole}]"] else [] fi ++
@@ -27,13 +27,13 @@ for (numerator, denominator) in [(43, 48), (5, 121), (2014, 59)] do
     write_line(describe(numerator, denominator))
 od
 
-units(numerator: int, denominator: int) -> bigint{} =>
+units(numerator, denominator) =>
     egyptian(cast(numerator), cast(denominator))
 
-last_unit(numerator: int, denominator: int) -> bigint =>
+last_unit(numerator, denominator) =>
     units(numerator, denominator) |> reduce(0n, (_, unit) => unit)
 
-report(limit: int) is
+report(limit) is
     let fractions = {
         (numerator, denominator)
         for denominator in 2::limit

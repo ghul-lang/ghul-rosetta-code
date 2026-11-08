@@ -1,6 +1,6 @@
 use default
 
-common_directory_path(paths: string[]) -> string is
+common_directory_path(paths) is
     let segments = paths |> map(p => p.split(['/'])) |> list()
     let common = LIST()
 

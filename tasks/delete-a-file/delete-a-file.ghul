@@ -1,6 +1,6 @@
 use default
 
-delete_file(path: string) -> string is
+delete_file(path) is
     if !IO.File.exists(path) then
         return "not there"
     fi
@@ -13,7 +13,7 @@ delete_file(path: string) -> string is
     yrt
 si
 
-delete_directory(path: string) -> string is
+delete_directory(path) is
     if !IO.Directory.exists(path) then
         return "not there"
     fi

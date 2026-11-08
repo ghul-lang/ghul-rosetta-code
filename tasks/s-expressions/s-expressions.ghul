@@ -14,13 +14,13 @@ use SExpr.STRING
 use SExpr.INTEGER
 use SExpr.REAL
 
-delimits(character: char) -> bool =>
+delimits(character) =>
     character == '(' \/
     character == ')' \/
     character == '"' \/
     character <= ' '
 
-skip_space(text: string, at: int) -> int => (
+skip_space(text, at) => (
     let i mut = at
 
     while i < text.length /\ text[i] <= ' ' do
@@ -83,7 +83,7 @@ read(text: string, at: int) -> (value: SExpr, next: int) is
     return (value = atom(text[start..end]), next = end)
 si
 
-render(node: SExpr) -> string =>
+render(node) =>
     case node
     when (items): LIST then
         "({items |> map(render) |> join(" ")})"

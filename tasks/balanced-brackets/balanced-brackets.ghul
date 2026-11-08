@@ -1,6 +1,6 @@
 use default
 
-arrangements(opens: int, closes: int) -> string{} is
+arrangements(opens, closes) is
     if opens == 0 /\ closes == 0 then
         yield ""
     else

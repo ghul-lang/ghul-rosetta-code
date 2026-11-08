@@ -5,7 +5,7 @@ use Ring = Point[]
 
 let epsilon = 0.000001
 
-crosses(point: Point, from: Point, to: Point) -> bool is
+crosses(point, from, to) is
     let (low, high) = if from.y < to.y then (from, to) else (to, from) fi
 
     let y =
@@ -49,7 +49,7 @@ crosses(point: Point, from: Point, to: Point) -> bool is
         fi
 si
 
-inside(point: Point, rings: Ring[]) -> bool =>
+inside(point, rings) =>
     [
         true
         for ring in rings

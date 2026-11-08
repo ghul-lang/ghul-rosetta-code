@@ -1,9 +1,9 @@
 use default
 
-abundant_odd(start: long) -> long{} =>
+abundant_odd(start) =>
     from(start, 2L) |> filter(n => divisor_sum(n) > 2L * n)
 
-show(n: long) =>
+show(n) =>
     let sum = divisor_sum(n) - n in
     write_line("{n,13:N0}  proper divisor sum {sum,13:N0}")
 

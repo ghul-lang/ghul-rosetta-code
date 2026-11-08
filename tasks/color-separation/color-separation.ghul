@@ -4,7 +4,7 @@ use Raster.IMAGE
 
 use RGB = (red: ubyte, green: ubyte, blue: ubyte)
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -56,11 +56,11 @@ si
 
 use Layer = (name: string, row: int, column: int, show: RGB -> RGB)
 
-byte(v: double) -> ubyte => ubyte(round(255.0 * clamp(v, 0.0, 1.0)))
+byte(v) => ubyte(round(255.0 * clamp(v, 0.0, 1.0)))
 
-fraction(b: ubyte) -> double => double(b) / 255.0
+fraction(b) => double(b) / 255.0
 
-ink(amount: double, r: double, g: double, b: double) -> RGB => (
+ink(amount, r, g, b) => (
     red = byte(1.0 - amount * (1.0 - r)),
     green = byte(1.0 - amount * (1.0 - g)),
     blue = byte(1.0 - amount * (1.0 - b))

@@ -24,7 +24,7 @@ distinct_prime_factors(value: int) -> long[] is
     factors
 si
 
-is_giuga(value: int) -> bool is
+is_giuga(value) is
     let factors = distinct_prime_factors(value)
 
     if factors.count < 2 then return false fi
@@ -34,7 +34,7 @@ is_giuga(value: int) -> bool is
     factors |> all(factor => (total / factor - 1L) % factor == 0L)
 si
 
-giugas() -> int{} => from(2) |> filter(is_giuga)
+giugas() => from(2) |> filter(is_giuga)
 
 write_line("the first four Giuga numbers:")
 

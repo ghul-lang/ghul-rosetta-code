@@ -4,7 +4,7 @@ use System.Numerics.Complex
 
 use Matrix = Complex[][]
 
-conjugate_transpose(m: Matrix) -> Matrix =>
+conjugate_transpose(m) =>
     0..m[0].count
         |> map(j =>
             0..m.count |> map(i => Complex.conjugate(m[i][j])) |> list()
@@ -31,7 +31,7 @@ conjugate_transpose(m: Matrix) -> Matrix =>
                 |> all(j => Complex.abs(a[i][j] - b[i][j]) < 1.0e-12)
         )
 
-identity(n: int) -> Matrix =>
+identity(n) =>
     0..n
         |> map(i =>
             0..n
@@ -46,14 +46,14 @@ identity(n: int) -> Matrix =>
         )
         |> list()
 
-show(c: Complex) -> string =>
+show(c) =>
     let
         sign = if c.imaginary < 0.0 then "-" else "+" fi,
         size = double.abs(c.imaginary)
     in
         "{c.real:0.####}{sign}{size:0.####}i"
 
-print(m: Matrix) =>
+print(m) =>
     for row in m do
         write_line(row |> map(c => "{show(c),12}") |> join(""))
     od

@@ -24,7 +24,7 @@ parse(card: string) -> (face: int, suit: char) =>
     in
         (face_values[face_text], suit)
 
-classify(hand: string) -> string is
+classify(hand) is
     let tokens = hand.split([' '])
 
     if tokens.count != 5 then

@@ -1,7 +1,7 @@
 use default
 use IO.Std.write
 
-run(lines: string[]) is
+run(lines) is
     let width = lines |> map(l => l.length) |> reduce(0, int.max)
     let at_start = (0..lines.count) |> find(y => lines[y].contains('$'))
 

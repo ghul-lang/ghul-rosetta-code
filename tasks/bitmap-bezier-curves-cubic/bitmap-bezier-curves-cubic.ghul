@@ -5,7 +5,7 @@ use POINT = (x: double, y: double)
 
 let steps = 200
 
-cubic(a: POINT, b: POINT, c: POINT, d: POINT) -> POINT[] =>
+cubic(a, b, c, d) =>
     (0..steps + 1)
         |> map(step => (
             let t = double(step) / double(steps)

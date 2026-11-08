@@ -3,7 +3,7 @@ use Raster.Anchor
 use Raster.IMAGE
 use Raster.SHAPES
 
-symbols() -> string[] => [
+symbols() => [
     "H", "He",
     "Li", "Be", "B", "C", "N", "O", "F", "Ne",
     "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar",
@@ -24,7 +24,7 @@ symbols() -> string[] => [
 // Rows 1 to 3 have a gap in the middle, rows 6 and 7 send their
 // fifteen inner elements down to rows 8 and 9, and the rest fill
 // left to right.
-position(z: int) -> (row: int, column: int) is
+position(z) is
     if z <= 2 then
         (row = 1, column = if z == 1 then 1 else 18 fi)
     elif z <= 18 then
@@ -50,14 +50,14 @@ position(z: int) -> (row: int, column: int) is
     fi
 si
 
-block(at: (row: int, column: int)) -> string =>
+block(at) =>
     if at.row >= 8 then "f"
     elif at.row == 1 \/ at.column <= 2 then "s"
     elif at.column >= 13 then "p"
     else "d"
     fi
 
-tint(block: string) -> (red: ubyte, green: ubyte, blue: ubyte) =>
+tint(block) =>
     case block
     when "s" then (red = 255ub, green = 212ub, blue = 212ub)
     when "p" then (red = 206ub, green = 230ub, blue = 255ub)
@@ -70,22 +70,19 @@ let left = 44.0
 let top = 34.0
 let split = 16.0
 
-row_y(row: int) -> double =>
+row_y(row) =>
     top + double(row - 1) * cell + if row >= 8 then split else 0.0 fi
 
-column_x(column: int) -> double => left + double(column - 1) * cell
+column_x(column) => left + double(column - 1) * cell
 
-box(x: double, y: double, width: double, height: double) -> List[(
-    x: double,
-    y: double
-)] => [
+box(x, y, width, height) => [
     (x = x, y = y),
     (x = x + width, y = y),
     (x = x + width, y = y + height),
     (x = x, y = y + height)
 ]
 
-glyph(image: IMAGE, at: (row: int, column: int), letters: string) is
+glyph(image, at, letters) is
     image.text(
         column_x(at.column) + cell / 2.0,
         row_y(at.row) + cell * 0.76,

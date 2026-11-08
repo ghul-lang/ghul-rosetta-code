@@ -8,10 +8,10 @@ let month_names = [
 let month_width = 20
 let gap = "  "
 
-centre(text: string, width: int) -> string =>
+centre(text, width) =>
     "{string(' ', (width - text.length) / 2)}{text}".pad_right(width)
 
-month_lines(year: int, month: int) -> string[] =>
+month_lines(year, month) =>
     let
         offset = cast int(System.DateTime(year, month, 1).day_of_week),
         days = System.DateTime.days_in_month(year, month),
@@ -30,7 +30,7 @@ month_lines(year: int, month: int) -> string[] =>
             |> take(8)
             |> list()
 
-calendar(year: int, page_width: int) -> string{} is
+calendar(year, page_width) is
     let cell = month_width + gap.length
     let across = Ghul.Math.max(1, (page_width + gap.length) / cell)
     let width = across * cell - gap.length

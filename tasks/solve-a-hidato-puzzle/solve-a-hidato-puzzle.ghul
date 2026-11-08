@@ -16,7 +16,7 @@ let hole = -1
 let blank = 0
 
 let rows = puzzle.count
-cells(line: string) -> string[] => line.split([' '], REMOVE_EMPTY_ENTRIES)
+cells(line) => line.split([' '], REMOVE_EMPTY_ENTRIES)
 
 let columns = cells(puzzle[0]).count
 
@@ -34,13 +34,13 @@ let board =
 let given = SET(board |> filter(* > 0))
 let last = given |> reduce(0, (a, b) => max(a, b))
 
-at(row: int, column: int) -> int =>
+at(row, column) =>
     if row < 0 \/ row >= rows \/ column < 0 \/ column >= columns then
         hole
     else board[row * columns + column]
     fi
 
-place(row: int, column: int, n: int) -> bool is
+place(row, column, n) is
     let square = at(row, column)
 
     let wrong =

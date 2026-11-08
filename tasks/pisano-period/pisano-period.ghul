@@ -1,6 +1,6 @@
 use default
 
-pisano_prime(prime: int, power: int) -> int is
+pisano_prime(prime, power) is
     let period mut = 0
     let previous mut = 0
     let current mut = 1
@@ -22,13 +22,13 @@ pisano_prime(prime: int, power: int) -> int is
     scale
 si
 
-pisano(value: int) -> int =>
+pisano(value) =>
     value
         |> factorize()
         |> map(((p, e)) => pisano_prime(p, e))
         |> reduce(1, lcm)
 
-in_rows(entries: string{}, per_row: int) is
+in_rows(entries, per_row) is
     let row = LIST()
 
     for entry in entries do

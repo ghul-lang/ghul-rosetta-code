@@ -1,6 +1,6 @@
 use default
 
-optimal_order(dims: long[]) -> (cost: long, order: string) is
+optimal_order(dims) is
     let n = dims.count - 1
     let cost = 0..n |> map(_ => repeat(0L, n) |> LIST()) |> list()
     let split = 0..n |> map(_ => repeat(0, n) |> LIST()) |> list()

@@ -1,9 +1,9 @@
 use default
 
-power(base: long, exponent: int) -> long =>
+power(base, exponent) =>
     repeat(base, exponent) |> product()
 
-powers(exponent: int) -> long{} is
+powers(exponent) is
     let base mut = 0L
 
     do
@@ -19,7 +19,7 @@ next_power(powers: Iterator[long]) -> long is
     return powers.current
 si
 
-without(values: long{}, excluded: long{}) -> long{} is
+without(values, excluded) is
     let cursor = excluded.iterator
     let skipped mut = next_power(cursor)
 

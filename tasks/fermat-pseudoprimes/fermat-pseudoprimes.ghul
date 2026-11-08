@@ -1,10 +1,10 @@
 use default
 
-is_pseudoprime(a: int, x: int) -> bool =>
+is_pseudoprime(a, x) =>
     let power = mod_pow(long(a), long(x - 1), long(x)) in
     x > 1 /\ !is_prime(x) /\ power == 1L
 
-pseudoprimes_up_to(a: int, limit: int) -> int[] =>
+pseudoprimes_up_to(a, limit) =>
     2::limit |> filter(is_pseudoprime(a, *)) |> list()
 
 for a in 1::20 do

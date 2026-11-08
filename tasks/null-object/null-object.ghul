@@ -1,6 +1,6 @@
 use default
 
-full_name(user: string) -> string? =>
+full_name(user) =>
     if user =~ "alice" then "Alice Liddell" else null fi
 
 let present = full_name("alice")

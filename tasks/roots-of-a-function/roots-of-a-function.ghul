@@ -22,12 +22,7 @@ bisect(f: double -> double, low: double, high: double) -> double is
     return (a + b) / 2.0
 si
 
-roots(
-    f: double -> double,
-    start: double,
-    stop: double,
-    step: double
-) -> Root{} is
+roots(f, start, stop, step) is
     let steps = int(round((stop - start) / step))
     let x = i => start + double(i) * step
 

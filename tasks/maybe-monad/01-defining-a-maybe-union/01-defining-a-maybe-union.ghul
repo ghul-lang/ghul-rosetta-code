@@ -13,16 +13,16 @@ unit[T](value: T) -> Maybe[T] => JUST(value)
 >>=[T, U](value: Maybe[T], f: (T) -> Maybe[U]) -> Maybe[U] =>
     if let (inner): JUST = value then f(inner) else NOTHING fi
 
-halve(n: int) -> Maybe[int] =>
+halve(n) =>
     if n % 2 == 0 then JUST(n / 2) else NOTHING fi
 
-describe(n: int) -> Maybe[string] =>
+describe(n) =>
     if n > 0 then JUST("positive {n}") else NOTHING fi
 
-text(value: Maybe[string]) -> string =>
+text(value) =>
     if let (inner): JUST = value then inner else "nothing" fi
 
-show(n: int) => write_line("{n}: {text(unit(n) >>= halve >>= describe)}")
+show(n) => write_line("{n}: {text(unit(n) >>= halve >>= describe)}")
 
 show(8)
 show(7)

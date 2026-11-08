@@ -1,6 +1,6 @@
 use default
 
-horner(coefficients: int[], x: int) -> int =>
+horner(coefficients, x) =>
     coefficients
         |> reverse()
         |> reduce(0, (accumulator, coefficient) =>

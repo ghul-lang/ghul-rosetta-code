@@ -3,7 +3,7 @@ use Raster
 let order = 23
 let step = 1.0
 
-word(order: int) -> string => (
+word(order) => (
     let previous mut = "1"
     let current mut = "0"
 

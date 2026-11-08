@@ -1,17 +1,17 @@
 use default
 
-reverse(n: int) -> int is
+reverse(n) is
     walk(m: int, r: int) -> int =>
         if m == 0 then r else walk(m / 10, r * 10 + m % 10) fi
 
     walk(n, 0)
 si
 
-is_emirp(n: int) -> bool =>
+is_emirp(n) =>
     let r = reverse(n) in
     r != n /\ is_prime(n) /\ is_prime(r)
 
-emirps() -> int{} => from(2) |> filter(is_emirp)
+emirps() => from(2) |> filter(is_emirp)
 
 write_line("first 20 emirps: {emirps() |> take(20) |> join()}")
 

@@ -1,6 +1,6 @@
 use default
 
-placements(n: int, queens: int[]) -> int[]{} is
+placements(n, queens) is
     if queens.count == n then
         yield queens
     else

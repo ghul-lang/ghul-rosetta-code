@@ -6,7 +6,7 @@ use System.Threading.Thread
 
 let port = 8080
 
-serve(client: TcpClient) is
+serve(client) is
     let stream = client.get_stream()
     let reader = IO.StreamReader(stream)
     let writer = IO.StreamWriter(stream)
@@ -55,7 +55,7 @@ si)
 
 serving.start()
 
-fetch(path: string) is
+fetch(path) is
     let client = TcpClient("127.0.0.1", port)
     let stream = client.get_stream()
     let writer = IO.StreamWriter(stream)

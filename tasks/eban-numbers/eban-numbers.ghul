@@ -1,6 +1,6 @@
 use default
 
-eban_group(group: int) -> bool => (
+eban_group(group) => (
     let (tens, units) = (group / 10, group % 10)
     let eban_units = units == 0 \/ units == 2 \/ units == 4 \/ units == 6
     let eban_tens =
@@ -8,16 +8,16 @@ eban_group(group: int) -> bool => (
     group == 0 \/ group < 100 /\ eban_units /\ eban_tens
 )
 
-groups(n: int) -> int{} is
+groups(n) is
     if n > 0 then
         yield n % 1000
         yield in groups(n / 1000)
     fi
 si
 
-is_eban(n: int) -> bool => n |> groups() |> all(eban_group)
+is_eban(n) => n |> groups() |> all(eban_group)
 
-eban_up_to(limit: int) -> int{} => 1::limit |> filter(is_eban)
+eban_up_to(limit) => 1::limit |> filter(is_eban)
 
 let up_to_1000 = eban_up_to(1000) |> list()
 write_line("eban numbers up to and including 1000:")

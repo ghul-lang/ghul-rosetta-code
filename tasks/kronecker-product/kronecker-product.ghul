@@ -1,6 +1,6 @@
 use default
 
-kronecker(left: int[][], right: int[][]) -> int[][] =>
+kronecker(left, right) =>
     (0..left.count * right.count)
         |> map(row =>
             (0..left[0].count * right[0].count)
@@ -12,14 +12,14 @@ kronecker(left: int[][], right: int[][]) -> int[][] =>
         )
         |> list()
 
-pad(text: string, width: int) -> string =>
+pad(text, width) =>
     if text.length >= width then
         text
     else
         pad(" {text}", width)
     fi
 
-show(matrix: int[][]) =>
+show(matrix) =>
     let width =
         ["{value}".length for row in matrix for value in row] |> max() ?? 1
     in

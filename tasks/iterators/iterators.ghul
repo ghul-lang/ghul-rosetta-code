@@ -1,6 +1,6 @@
 use default
 
-picks(values: string{}, positions: int[]) -> string{} is
+picks(values, positions) is
     let items = use values.iterator
     let at mut = 0
 
@@ -15,7 +15,7 @@ picks(values: string{}, positions: int[]) -> string{} is
     od
 si
 
-show(name: string, values: string{}) is
+show(name, values) is
     let from_start = picks(values, [1, 4, 5]) |> join()
     let from_end = picks(values |> reverse(), [1, 4, 5]) |> join()
 

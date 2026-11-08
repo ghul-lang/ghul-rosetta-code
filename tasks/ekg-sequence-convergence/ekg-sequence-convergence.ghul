@@ -1,13 +1,13 @@
 use default
 
-shares_factor(left_value: int, right_value: int) -> bool =>
+shares_factor(left_value, right_value) =>
     if right_value > 0 then
         shares_factor(right_value, left_value % right_value)
     else
         left_value > 1
     fi
 
-ekg(start: int, count: int) -> int[] => (
+ekg(start, count) => (
     let terms = LIST([1, start])
     let used = SET([1, start])
 

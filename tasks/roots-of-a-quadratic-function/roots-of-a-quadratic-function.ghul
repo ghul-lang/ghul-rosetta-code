@@ -23,7 +23,7 @@ solve(a: double, b: double, c: double) -> Roots is
     return Roots.REAL(q / a, c / q)
 si
 
-describe(roots: Roots) -> string =>
+describe(roots) =>
     case roots
     when (first, second): Roots.REAL then
         "{first:G6} and {second:G6}"

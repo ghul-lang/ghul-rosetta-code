@@ -3,11 +3,11 @@ use default
 // Flipping is its own inverse, so the stacks furthest from sorted are the
 // ones a breadth-first search from the sorted stack reaches last.
 
-flip(stack: string, count: int) -> string =>
+flip(stack, count) =>
     let top = stack.substring(0, count) |> reverse() |> join("") in
     "{top}{stack.substring(count)}"
 
-furthest(n: int) -> (flips: int, example: string) is
+furthest(n) is
     let sorted = 1::n |> map(i => "{i}") |> join("")
     let seen = SET([sorted])
     let frontier mut = LIST([sorted])

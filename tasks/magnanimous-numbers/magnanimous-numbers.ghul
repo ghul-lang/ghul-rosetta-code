@@ -1,6 +1,6 @@
 use default
 
-is_magnanimous(value: int) -> bool =>
+is_magnanimous(value) =>
     let digits = "{value}" in
     1..digits.length
         |> all(split =>
@@ -10,7 +10,7 @@ is_magnanimous(value: int) -> bool =>
             )
         )
 
-magnanimous() -> int{} => from(0) |> filter(is_magnanimous)
+magnanimous() => from(0) |> filter(is_magnanimous)
 
 let terms = magnanimous() |> take(400) |> list()
 

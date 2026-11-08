@@ -23,7 +23,7 @@ runs(values: int[]) -> int[]{} is
     groups
 si
 
-format_run(run: int[]) -> string =>
+format_run(run) =>
     if run.count >= 3 then
         "{run[0]}-{run[run.count - 1]}"
     else

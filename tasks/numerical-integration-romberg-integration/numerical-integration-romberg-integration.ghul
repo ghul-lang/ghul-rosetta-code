@@ -1,12 +1,6 @@
 use default
 
-romberg(
-    f: double -> double,
-    lower: double,
-    upper: double,
-    steps: int,
-    accuracy: double
-) -> double is
+romberg(f, lower, upper, steps, accuracy) is
     let rows = LIST[double[]]()
     let width = upper - lower
     let ends = f(lower) + f(upper)

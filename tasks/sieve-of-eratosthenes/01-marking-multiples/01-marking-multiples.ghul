@@ -1,6 +1,6 @@
 use default
 
-sieve(limit: int) -> int{} is
+sieve(limit) is
     let composite = repeat(false, limit + 1) |> LIST()
 
     for prime in 2::limit do

@@ -7,7 +7,7 @@ let coefficients = [
     -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
 ]
 
-gamma(x: double) -> double =>
+gamma(x) =>
     if x < 0.5 then
         let sine = sin(pi * x)
 

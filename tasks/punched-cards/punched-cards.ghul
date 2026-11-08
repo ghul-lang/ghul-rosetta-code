@@ -8,9 +8,9 @@ let labels = [
 
 let codes = MAP[char, int[]]()
 
-row_of(label: string) -> int => 0..12 |> find(i => labels[i] =~ label) ?? -1
+row_of(label) => 0..12 |> find(i => labels[i] =~ label) ?? -1
 
-punch(c: char, holes: string) is
+punch(c, holes) is
     codes[c] = holes.split([' ']) |> map(row_of) |> list()
 si
 
@@ -43,7 +43,7 @@ do
     punch(special[0], special.substring(2))
 od
 
-holes(c: char) -> int{} =>
+holes(c) =>
     if c == ' ' then LIST()
     elif codes.contains_key(c) then codes[c]
     else

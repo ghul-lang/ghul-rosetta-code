@@ -56,7 +56,7 @@ decode(frame: ubyte[], marker: ubyte) -> ubyte[] is
     data
 si
 
-hex(bytes: ubyte[]) -> string =>
+hex(bytes) =>
     if bytes.count > 8 then
         "{bytes[0..4] |> map(b => "{b:X2}") |> join(" ")} ... "
         "{bytes[bytes.count - 2..<0] |> map(b => "{b:X2}") |> join(" ")} "

@@ -5,18 +5,18 @@ let random = System.Random(20260908)
 
 let pieces = "PNBRQpnbrq"
 
-file_of(square: int) -> int => square % 8
-rank_of(square: int) -> int => square / 8
+file_of(square) => square % 8
+rank_of(square) => square / 8
 
-adjacent(one: int, other: int) -> bool =>
+adjacent(one, other) =>
     abs(file_of(one) - file_of(other)) <= 1 /\
     abs(rank_of(one) - rank_of(other)) <= 1
 
-promotion_square(piece: char, square: int) -> bool =>
+promotion_square(piece, square) =>
     (piece == 'P' /\ rank_of(square) == 0) \/
     (piece == 'p' /\ rank_of(square) == 7)
 
-position() -> char[] => (
+position() => (
     let board = repeat('.', 64) |> LIST()
 
     let white_king = random.next(64)
@@ -41,7 +41,7 @@ position() -> char[] => (
     board
 )
 
-rank_to_fen(squares: char[]) -> string => (
+rank_to_fen(squares) => (
     let text = StringBuilder()
     let empty mut = 0
 
@@ -65,7 +65,7 @@ rank_to_fen(squares: char[]) -> string => (
     text.to_string()
 )
 
-to_fen(board: char[]) -> string => (
+to_fen(board) => (
     let ranks =
         (0..8)
             |> map(rank => rank_to_fen(board[rank * 8..rank * 8 + 8]))

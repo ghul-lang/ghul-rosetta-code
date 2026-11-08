@@ -22,7 +22,7 @@ let irregular_ordinals = [
     ("twelve", "twelfth")
 ]
 
-below_hundred(value: int) -> string =>
+below_hundred(value) =>
     if value < 20 then
         small[value]
     elif value % 10 == 0 then
@@ -31,7 +31,7 @@ below_hundred(value: int) -> string =>
         "{tens[value / 10 - 2]}-{small[value % 10]}"
     fi
 
-below_thousand(value: int) -> string =>
+below_thousand(value) =>
     if value < 100 then
         below_hundred(value)
     elif value % 100 == 0 then
@@ -40,7 +40,7 @@ below_thousand(value: int) -> string =>
         "{small[value / 100]} hundred {below_hundred(value % 100)}"
     fi
 
-cardinal(value: int) -> string is
+cardinal(value) is
     if value == 0 then
         return small[0]
     fi
@@ -72,7 +72,7 @@ cardinal(value: int) -> string is
     return named |> join(" ")
 si
 
-ordinal(value: int) -> string is
+ordinal(value) is
     let words = cardinal(value)
     let cut = max(words.last_index_of(' '), words.last_index_of('-'))
     let head = words[0..cut + 1]
@@ -94,7 +94,7 @@ ordinal(value: int) -> string is
         fi
 si
 
-letters(word: string) -> int => word |> filter(char.is_letter) |> count()
+letters(word) => word |> filter(char.is_letter) |> count()
 
 let opening =
     "Four is the number of letters in the first word of this sentence,"
@@ -103,7 +103,7 @@ let words = opening.split([' ']) |> LIST()
 
 let described mut = 0
 
-sentence_words() -> string{} is
+sentence_words() is
     let cursor mut = 0
 
     while true do
@@ -127,7 +127,7 @@ sentence_words() -> string{} is
     od
 si
 
-sentence_length(word_count: int) -> int =>
+sentence_length(word_count) =>
     let characters = words |> take(word_count) |> sum_by(w => w.length) in
     characters + word_count - 1
 

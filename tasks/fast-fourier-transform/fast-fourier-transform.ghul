@@ -1,17 +1,17 @@
 use default
 use System.Numerics.Complex
 
-every_other(x: Complex[], start: int) -> Complex[] =>
+every_other(x, start) =>
     x
         |> index()
         |> filter(e => e.index % 2 == start)
         |> map(e => e.value)
         |> list()
 
-twiddle(k: int, n: int) -> Complex =>
+twiddle(k, n) =>
     Complex.from_polar_coordinates(1.0, -2.0 * pi * double(k) / double(n))
 
-fft(x: Complex[]) -> Complex[] is
+fft(x) is
     let n = x.count
 
     if n <= 1 then
@@ -29,9 +29,9 @@ fft(x: Complex[]) -> Complex[] is
         |> list()
 si
 
-tidy(v: double) -> double => if abs(v) < 1.0e-12 then 0.0 else v fi
+tidy(v) => if abs(v) < 1.0e-12 then 0.0 else v fi
 
-show(c: Complex) -> string =>
+show(c) =>
     "({tidy(c.real),8:F4}, {tidy(c.imaginary),8:F4})"
 
 let input = [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]

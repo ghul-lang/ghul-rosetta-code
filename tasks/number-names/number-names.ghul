@@ -16,7 +16,7 @@ let scales = [
     "trillion", "quadrillion", "quintillion"
 ]
 
-below_hundred(value: int) -> string =>
+below_hundred(value) =>
     if value < 20 then
         small[value]
     elif value % 10 == 0 then
@@ -25,7 +25,7 @@ below_hundred(value: int) -> string =>
         "{tens[value / 10 - 2]}-{small[value % 10]}"
     fi
 
-below_thousand(value: int) -> string =>
+below_thousand(value) =>
     if value < 100 then
         below_hundred(value)
     elif value % 100 == 0 then
@@ -34,14 +34,14 @@ below_thousand(value: int) -> string =>
         "{small[value / 100]} hundred and {below_hundred(value % 100)}"
     fi
 
-groups(value: long) -> int{} is
+groups(value) is
     if value > 0L then
         yield int(value % 1000L)
         yield in groups(value / 1000L)
     fi
 si
 
-cardinal(value: long) -> string is
+cardinal(value) is
     if value < 0L then
         return "negative {cardinal(-value)}"
     elif value == 0L then

@@ -79,7 +79,7 @@ color(graph: GRAPH) -> MAP[int, int] is
     colors
 si
 
-report(name: string, description: string) is
+report(name, description) is
     let graph = parse(description)
     let colors = color(graph)
 

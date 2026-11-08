@@ -33,7 +33,7 @@ class RUN(path: string) is
     si
 si
 
-write_source(path: string) =>
+write_source(path) =>
     let random = System.Random(2026) in
     File.write_all_lines(
         path,
@@ -72,7 +72,7 @@ split(path: string) -> string[] is
     parts
 si
 
-merge(parts: string[], into: string) is
+merge(parts, into) is
     let runs = parts |> map(RUN) |> list()
     let use writer = File.create_text(into)
 

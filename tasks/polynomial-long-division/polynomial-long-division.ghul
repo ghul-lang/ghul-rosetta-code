@@ -2,7 +2,7 @@ use default
 
 use DIVISION = (quotient: double[], remainder: double[])
 
-degree(poly: double[]) -> int =>
+degree(poly) =>
     let highest =
         (0::poly.count - 1)
             |> reverse()
@@ -32,7 +32,7 @@ divide(numerator: double[], denominator: double[]) -> DIVISION is
     (quotient = quotient, remainder = remainder)
 si
 
-term(size: double, power: int) -> string =>
+term(size, power) =>
     let head = if size == 1.0 /\ power > 0 then "" else "{size:G}" fi in
     case power
     when 0 then head
@@ -40,7 +40,7 @@ term(size: double, power: int) -> string =>
     else "{head}x^{power}"
     esac
 
-render(poly: double[]) -> string is
+render(poly) is
     let top = degree(poly)
 
     if top < 0 then return "0" fi
@@ -65,7 +65,7 @@ render(poly: double[]) -> string is
     parts |> join(" ")
 si
 
-show(numerator: double[], denominator: double[]) is
+show(numerator, denominator) is
     let split = divide(numerator, denominator)
 
     write_line("  ({render(numerator)}) / ({render(denominator)})")

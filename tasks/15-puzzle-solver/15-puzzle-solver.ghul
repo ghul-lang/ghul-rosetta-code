@@ -6,7 +6,7 @@ let column_steps = [0, 0, -1, 1]
 
 let found = -1
 
-distance(tile: int, at: int) -> int =>
+distance(tile, at) =>
     abs(at / 4 - (tile - 1) / 4) + abs(at % 4 - (tile - 1) % 4)
 
 class SOLVER is

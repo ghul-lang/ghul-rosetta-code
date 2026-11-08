@@ -3,13 +3,13 @@ use default
 let digits = 100
 let guard = 12
 
-power_of_ten(n: int) -> bigint => repeat(10n, n) |> product()
+power_of_ten(n) => repeat(10n, n) |> product()
 
-factorial(n: int) -> bigint => 2::n |> map(bigint) |> product()
+factorial(n) => 2::n |> map(bigint) |> product()
 
 let scale = power_of_ten(digits + guard)
 
-show(label: string, scaled: bigint) is
+show(label, scaled) is
     let text = (scaled / power_of_ten(guard)).to_string()
 
     write_line(label)
@@ -17,12 +17,12 @@ show(label: string, scaled: bigint) is
     write_line("")
 si
 
-reciprocal_cubes(terms: int) -> bigint =>
+reciprocal_cubes(terms) =>
     1::terms
         |> map(k => scale / (bigint(k) * bigint(k) * bigint(k)))
         |> sum()
 
-markov(terms: int) -> bigint =>
+markov(terms) =>
     5n *
     (
         1::terms
@@ -40,7 +40,7 @@ markov(terms: int) -> bigint =>
     ) /
     2n
 
-wedeniwski(terms: int) -> bigint =>
+wedeniwski(terms) =>
     (
         0::terms
             |> map(k => (

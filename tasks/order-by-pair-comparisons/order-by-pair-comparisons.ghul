@@ -3,7 +3,7 @@ use IO.Std.read_line
 
 let questions mut = 0
 
-ask(a: string, b: string) -> int is
+ask(a, b) is
     questions = questions + 1
     write_line()
     write_line("{questions}: is {a} <, = or > {b}?")

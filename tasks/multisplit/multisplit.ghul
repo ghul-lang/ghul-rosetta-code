@@ -2,11 +2,11 @@ use default
 
 use PIECE = (text: string, separator: string, at: int)
 
-starts_with(text: string, position: int, separator: string) -> bool =>
+starts_with(text, position, separator) =>
     position + separator.length <= text.length /\
     text[position..position + separator.length] =~ separator
 
-multisplit(text: string, separators: string[]) -> PIECE{} is
+multisplit(text, separators) is
     let start mut = 0
     let position mut = 0
 

@@ -11,7 +11,7 @@ let slope = 0.7
 let intercept = 0.1
 let rate = 0.01
 
-above(x: double, y: double) -> int =>
+above(x, y) =>
     if y > slope * x + intercept then 1 else -1 fi
 
 let random = System.Random(10)
@@ -22,15 +22,15 @@ let points = (0..2000) |> map(_ => V3(spread(), spread(), 1.0)) |> ARRAY()
 
 let weights mut = V3(spread(), spread(), spread())
 
-guess(p: V3) -> int => if weights ⋅ p >= 0.0 then 1 else -1 fi
+guess(p) => if weights ⋅ p >= 0.0 then 1 else -1 fi
 
-train(p: V3) is
+train(p) is
     let error = above(p.x, p.y) - guess(p)
 
     weights = weights + p * (rate * double(error))
 si
 
-correct() -> int =>
+correct() =>
     points |> filter(p => guess(p) == above(p.x, p.y)) |> count()
 
 write_line("the line to learn is y = {slope}x + {intercept}")

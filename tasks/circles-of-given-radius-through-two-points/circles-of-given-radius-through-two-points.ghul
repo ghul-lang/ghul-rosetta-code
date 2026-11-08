@@ -19,7 +19,7 @@ union Circles is
     NONE(reason: string)
 si
 
-circles(a: P, b: P, r: double) -> Circles is
+circles(a, b, r) is
     let d = (b - a).length
 
     if d == 0.0 then

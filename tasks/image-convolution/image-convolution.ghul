@@ -2,7 +2,7 @@ use default
 use Raster.Anchor
 use Raster.IMAGE
 
-scene() -> IMAGE is
+scene() is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
@@ -54,9 +54,9 @@ si
 
 use Kernel = (name: string, weights: int[], divisor: int)
 
-channel(value: double) -> ubyte => ubyte(clamp(round(value), 0.0, 255.0))
+channel(value) => ubyte(clamp(round(value), 0.0, 255.0))
 
-convolve(source: IMAGE, kernel: Kernel) -> IMAGE is
+convolve(source, kernel) is
     let result = IMAGE(source.width, source.height)
     let divisor = double(kernel.divisor)
 

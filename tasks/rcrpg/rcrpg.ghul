@@ -57,9 +57,9 @@ let here mut = (x = 0, y = 0, z = 0)
 let carrying = LIST()
 let equipped mut = null
 
-room() -> ROOM => rooms[here]
+room() => rooms[here]
 
-describe() -> void is
+describe() is
     let current = room()
     let (x, y, z) = here
     let called = if let name = current.name then " ({name})" else "" fi
@@ -76,11 +76,11 @@ describe() -> void is
     write_line("exits: {listed}")
 si
 
-neighbour(direction: string) -> Place =>
+neighbour(direction) =>
     let step = steps[direction] in
     (x = here.x + step.x, y = here.y + step.y, z = here.z + step.z)
 
-move(direction: string) is
+move(direction) is
     if !room().exits.contains(direction) then
         write_line("there is no way {direction}")
     elif direction =~ "up" /\ !room().items.contains("ladder") then
@@ -95,7 +95,7 @@ move(direction: string) is
     fi
 si
 
-attack(direction: string) is
+attack(direction) is
     if !(equipped =~ "sledge") then
         write_line("you need to equip a sledge to break through")
         return
@@ -114,7 +114,7 @@ attack(direction: string) is
     write_line("you break a hole in the {direction} wall")
 si
 
-move_items(from: LIST[string], to: LIST[string], what: string) -> bool is
+move_items(from, to, what) is
     let chosen =
         if what =~ "all" then from
         elif from.contains(what) then [what]

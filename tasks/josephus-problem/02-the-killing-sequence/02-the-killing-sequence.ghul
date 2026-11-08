@@ -1,6 +1,6 @@
 use default
 
-killings(n: int, k: int) -> int{} is
+killings(n, k) is
     let standing = 0..n |> LIST()
     let at mut = 0
 
@@ -13,7 +13,7 @@ killings(n: int, k: int) -> int{} is
     od
 si
 
-show(n: int, k: int) =>
+show(n, k) =>
     write_line("n = {n}, k = {k}: killed {killings(n, k) |> join(", ")}")
 
 show(5, 2)

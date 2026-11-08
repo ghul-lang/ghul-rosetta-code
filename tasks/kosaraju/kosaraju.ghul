@@ -15,7 +15,7 @@ od
 let visited = repeat(false, edges.count) |> LIST()
 let order = LIST[int]()
 
-visit(vertex: int) is
+visit(vertex) is
     if visited[vertex] then
         return
     fi
@@ -31,7 +31,7 @@ si
 
 let root = repeat(-1, edges.count) |> LIST()
 
-assign(vertex: int, component: int) is
+assign(vertex, component) is
     if root[vertex] >= 0 then
         return
     fi

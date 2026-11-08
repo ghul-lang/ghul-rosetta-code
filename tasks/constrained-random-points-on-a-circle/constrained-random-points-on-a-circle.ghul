@@ -3,13 +3,13 @@ use Raster.IMAGE
 
 let random = System.Random(10)
 
-candidates() -> (x: int, y: int){} is
+candidates() is
     while true do
         yield (x = random.next(-15, 16), y = random.next(-15, 16))
     od
 si
 
-in_ring(p: (x: int, y: int)) -> bool =>
+in_ring(p) =>
     let square = p.x * p.x + p.y * p.y in
     square >= 100 /\ square <= 225
 

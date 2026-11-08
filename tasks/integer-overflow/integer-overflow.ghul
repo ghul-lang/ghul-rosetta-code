@@ -5,7 +5,7 @@ use default
 // with the wrong value. The one exception is dividing the most negative
 // value by -1, which throws System.OverflowException.
 
-show(expression: string, compute: () -> string) is
+show(expression, compute) is
     try
         write_line("    {expression,-46} {compute()}")
     catch e: System.OverflowException

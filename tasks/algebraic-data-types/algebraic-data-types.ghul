@@ -15,7 +15,7 @@ si
 use Tree.EMPTY
 use Tree.NODE
 
-balance(c: Color, l: Tree, v: int, r: Tree) -> Tree =>
+balance(c, l, v, r) =>
     case (c, l, v, r)
     when (~BLACK, (~RED, (~RED, a, x, b): NODE, y, m): NODE, z, d) then
         NODE(RED, NODE(BLACK, a, x, b), y, NODE(BLACK, m, z, d))
@@ -43,20 +43,20 @@ _insert(tree: Tree, element: int) -> Tree =>
         fi
     esac
 
-insert(tree: Tree, element: int) -> Tree =>
+insert(tree, element) =>
     case _insert(tree, element)
     when (c, l, v, r): NODE then NODE(BLACK, l, v, r)
     else EMPTY
     esac
 
-in_order(tree: Tree) -> string =>
+in_order(tree) =>
     case tree
     when _: EMPTY then ""
     when (c, l, v, r): NODE then
         "{in_order(l)}{v} {in_order(r)}"
     esac
 
-black_height(tree: Tree) -> int =>
+black_height(tree) =>
     case tree
     when _: EMPTY then
         1
@@ -73,7 +73,7 @@ black_height(tree: Tree) -> int =>
         fi
     esac
 
-is_red(tree: Tree) -> bool =>
+is_red(tree) =>
     case tree
     when _: EMPTY then false
     when (c, l, v, r): NODE then c == RED

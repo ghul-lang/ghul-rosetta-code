@@ -13,10 +13,10 @@ union Resolved is
     FAILED(reason: string)
 si
 
-text(value: string) -> Json => Json.TEXT(value)
-member(key: string, value: Json) -> MEMBER => (key = key, value = value)
+text(value) => Json.TEXT(value)
+member(key, value) => (key = key, value = value)
 
-render(value: Json) -> string =>
+render(value) =>
     case value
     when leaf: Json.TEXT then "\"{leaf.value}\""
     when list: Json.ARRAY then
@@ -25,10 +25,10 @@ render(value: Json) -> string =>
         "{{" "{record.members |> map(render_member) |> join(", ")}" "}}"
     esac
 
-render_member(entry: MEMBER) -> string =>
+render_member(entry) =>
     "\"{entry.key}\": {render(entry.value)}"
 
-as_index(token: string) -> int? =>
+as_index(token) =>
     if
         token.length > 0 /\
         (token |> all(digit => digit >= '0' /\ digit <= '9'))
@@ -38,7 +38,7 @@ as_index(token: string) -> int? =>
         null
     fi
 
-step(node: Json, token: string) -> Resolved =>
+step(node, token) =>
     case node
     when list: Json.ARRAY then
         if let position = as_index(token) then
@@ -61,10 +61,10 @@ step(node: Json, token: string) -> Resolved =>
         Resolved.FAILED("\"{token}\" has nothing to descend into")
     esac
 
-decode(token: string) -> string =>
+decode(token) =>
     token.replace("~1", "/").replace("~0", "~")
 
-resolve(document: Json, pointer: string) -> Resolved =>
+resolve(document, pointer) =>
     if pointer.length == 0 then
         Resolved.FOUND(document)
     elif pointer[0] != '/' then

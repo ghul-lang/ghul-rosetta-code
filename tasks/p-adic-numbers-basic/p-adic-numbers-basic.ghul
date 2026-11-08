@@ -5,7 +5,7 @@ use default
 
 use PAdic = (digits: bigint[], exponent: int)
 
-floor_div(a: bigint, b: bigint) -> bigint =>
+floor_div(a, b) =>
     let q = a / b in
     if (a % b !~ 0n) /\ ((a < 0n) != (b < 0n)) then
         q - 1n
@@ -13,9 +13,9 @@ floor_div(a: bigint, b: bigint) -> bigint =>
         q
     fi
 
-modulo(a: bigint, m: bigint) -> bigint => ((a % m) + m) % m
+modulo(a, m) => ((a % m) + m) % m
 
-inverse(value: bigint, m: bigint) -> bigint is
+inverse(value, m) is
     walk(r0: bigint, r1: bigint, s0: bigint, s1: bigint) -> bigint =>
         if r1 =~ 0n then
             modulo(s0, m)
@@ -27,7 +27,7 @@ inverse(value: bigint, m: bigint) -> bigint is
     walk(modulo(value, m), m, 1n, 0n)
 si
 
-without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
+without_p(n, p) is
     walk(rest: bigint, count: int) -> (rest: bigint, count: int) =>
         if rest !~ 0n /\ rest % p =~ 0n then
             walk(rest / p, count + 1)
@@ -38,7 +38,7 @@ without_p(n: bigint, p: bigint) -> (rest: bigint, count: int) is
     walk(n, 0)
 si
 
-to_p_adic(a: bigint, b: bigint, p: bigint, k: int) -> PAdic => (
+to_p_adic(a, b, p, k) => (
     let (top, above) = without_p(a, p)
     let (bottom, below) = without_p(b, p)
     let divisor = inverse(bottom, p)
@@ -78,7 +78,7 @@ add(x: PAdic, y: PAdic, p: bigint, k: int) -> PAdic is
     (digits, exponent)
 si
 
-show(x: PAdic) -> string =>
+show(x) =>
     let text = x.digits |> reverse() |> map(d => "{d}") |> join("") in
     if x.exponent >= 0 then
         "...{text}{string('0', x.exponent)}"
@@ -91,7 +91,7 @@ show(x: PAdic) -> string =>
 // lattice of pairs with a = b * N modulo p^k, found by Gauss reduction. It
 // is only a valid answer when b has no factor of p.
 
-rational(x: PAdic, p: bigint, k: int) -> string is
+rational(x, p, k) is
     let modulus = bigint.pow(p, k)
     let n = x.digits |> index() |> sum_by((i, d) => d * bigint.pow(p, i))
 

@@ -19,7 +19,7 @@ enum Color is
     GREEN
 si
 
-total_area(shapes: Shape[]) -> double =>
+total_area(shapes) =>
     shapes |> sum_by(shape => shape.area)
 
 // a leading underscore makes a member private to its class
@@ -44,7 +44,7 @@ enum Direction is
 si
 trait drawable is
 si
-CountItems(items: int[]) -> int => items.count
+CountItems(items) => items.count
 
 let counter = Counter()
 counter.bump()

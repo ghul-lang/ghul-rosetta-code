@@ -1,6 +1,6 @@
 use default
 
-divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
+divide(dividend, divisor) =>
     let table =
         stream(
             (power_of_2 = 1, doubling = divisor),

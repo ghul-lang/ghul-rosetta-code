@@ -4,9 +4,9 @@ use System.Net.IPAddress
 
 use Parsed = (address: IPAddress, port: int?)
 
-after(text: string, index: int) -> string => text[index + 1..<0]
+after(text, index) => text[index + 1..<0]
 
-bracketed(text: string) -> Parsed =>
+bracketed(text) =>
     let
         close = text.index_of(']'),
         has_port = close + 1 < text.length
@@ -20,7 +20,7 @@ bracketed(text: string) -> Parsed =>
         in
         (address = IPAddress.parse(text[1..close]), port = port)
 
-with_port(text: string) -> Parsed =>
+with_port(text) =>
     let colon = text.index_of(':') in
     (
         address = IPAddress.parse(text[0..colon]),
@@ -36,12 +36,12 @@ split_port(text: string) -> Parsed =>
         (address = IPAddress.parse(text), port = null)
     fi
 
-hex(bytes: ubyte[]) -> string =>
+hex(bytes) =>
     let number = bytes |> reduce(0n, (n, b) => n * 256n + bigint(int(b))) in
     let digits = "{number:X}".trim_start('0') in
     if digits.length == 0 then "0" else digits fi
 
-describe(text: string) -> string =>
+describe(text) =>
     let
         (address, port) = split_port(text),
         bytes = address.get_address_bytes(),

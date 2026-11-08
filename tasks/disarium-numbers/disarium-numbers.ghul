@@ -1,6 +1,6 @@
 use default
 
-is_disarium(n: int) -> bool =>
+is_disarium(n) =>
     "{n}"
         |> index()
         |> sum_by((position, digit) =>

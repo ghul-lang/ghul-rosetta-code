@@ -1,6 +1,6 @@
 use default
 
-pyramid(base: int[]) -> int[][] => (
+pyramid(base) => (
     let rows = LIST[int[]]([base])
 
     while rows[0].count > 1 do

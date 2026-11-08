@@ -11,12 +11,12 @@ si
 
 let phi = (1.0 + sqrt(5.0)) / 2.0
 
-towards(from: Point, to: Point) -> Point => (
+towards(from, to) => (
     x = from.x + (to.x - from.x) / phi,
     y = from.y + (to.y - from.y) / phi
 )
 
-split(tile: Half) -> Half{} is
+split(tile) is
     if isa Half.THIN(tile) then
         let cut = towards(tile.a, tile.b)
 

@@ -4,7 +4,7 @@ let opcodes = LIST([
     "NOP", "LDA", "STA", "ADD", "SUB", "BRZ", "JMP", "STP"
 ])
 
-assemble(source: string) -> LIST[int] is
+assemble(source) is
     let lines =
         source.trim_end().split(['\n'])
             |> map(line => line.split([';'])[0].trim())
@@ -59,7 +59,7 @@ assemble(source: string) -> LIST[int] is
     return memory
 si
 
-run(memory: LIST[int]) -> int is
+run(memory) is
     let accumulator mut = 0
     let counter mut = 0
 

@@ -13,7 +13,7 @@ class MEMBER(nickname: string, writer: StreamWriter)
 
 let members = LIST[MEMBER]()
 
-tell(who: MEMBER, what: string) is
+tell(who, what) is
     try
         who.writer.write_line(what)
     catch _: System.Exception
@@ -21,7 +21,7 @@ tell(who: MEMBER, what: string) is
     yrt
 si
 
-announce(except: string, what: string) is
+announce(except, what) is
     Monitor.enter(members)
 
     let listening = members |> filter(m => m.nickname !~ except)
@@ -31,7 +31,7 @@ announce(except: string, what: string) is
     listening |> each(tell(*, what))
 si
 
-attend(client: TcpClient) is
+attend(client) is
     let stream = client.get_stream()
     let reader = StreamReader(stream)
     let writer = StreamWriter(stream)

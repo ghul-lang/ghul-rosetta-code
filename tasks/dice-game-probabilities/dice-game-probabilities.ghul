@@ -1,6 +1,6 @@
 use default
 
-totals(dice: int, faces: int) -> long{} is
+totals(dice, faces) is
     let counts = LIST([1L])
 
     for _ in 0..dice do
@@ -19,7 +19,7 @@ totals(dice: int, faces: int) -> long{} is
     counts
 si
 
-beats(dice1: int, faces1: int, dice2: int, faces2: int) -> double =>
+beats(dice1, faces1, dice2, faces2) =>
     let
         first = totals(dice1, faces1),
         second = totals(dice2, faces2)

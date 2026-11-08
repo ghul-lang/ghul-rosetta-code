@@ -4,11 +4,11 @@ use Raster.IMAGE
 
 let size = 180
 
-point(second: double, radius: double) -> (double, double) =>
+point(second, radius) =>
     let angle = pi / 2.0 - second * pi / 30.0 in
     (radius * cos(angle), radius * sin(angle))
 
-hand(image: IMAGE, at: double, length: double, width: double) is
+hand(image, at, length, width) is
     let (x, y) = point(at, length)
     let (tail_x, tail_y) = point(at + 30.0, 0.15)
 
@@ -16,7 +16,7 @@ hand(image: IMAGE, at: double, length: double, width: double) is
     image.line(tail_x, tail_y, x, y)
 si
 
-draw(image: IMAGE, time: System.DateTime) is
+draw(image, time) is
     image.clear(245ub, 242ub, 235ub)
 
     image.color(40ub, 40ub, 50ub)

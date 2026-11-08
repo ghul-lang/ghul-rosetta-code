@@ -9,25 +9,25 @@ let rho = 28.0
 let beta = 8.0 / 3.0
 let dt = 0.004
 
-rate(at: Point) -> Point => (
+rate(at) => (
     x = sigma * (at.y - at.x),
     y = at.x * (rho - at.z) - at.y,
     z = at.x * at.y - beta * at.z
 )
 
-along(at: Point, by: Point, scale: double) -> Point => (
+along(at, by, scale) => (
     x = at.x + by.x * scale,
     y = at.y + by.y * scale,
     z = at.z + by.z * scale
 )
 
-mean(a: Point, b: Point, c: Point, d: Point) -> Point => (
+mean(a, b, c, d) => (
     x = (a.x + 2.0 * b.x + 2.0 * c.x + d.x) / 6.0,
     y = (a.y + 2.0 * b.y + 2.0 * c.y + d.y) / 6.0,
     z = (a.z + 2.0 * b.z + 2.0 * c.z + d.z) / 6.0
 )
 
-step(at: Point) -> STREAM[Point, Point] => (
+step(at) => (
     let first = rate(at)
     let second = rate(along(at, first, dt / 2.0))
     let third = rate(along(at, second, dt / 2.0))

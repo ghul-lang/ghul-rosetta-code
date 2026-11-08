@@ -2,7 +2,7 @@ use default
 
 use Square = List[LIST[int]]
 
-fits(square: Square, row: int, column: int, value: int) -> bool =>
+fits(square, row, column, value) =>
     0..square.count
         |> all(k => square[row][k] != value /\ square[k][column] != value)
 
@@ -21,7 +21,7 @@ completions(square: Square, cells: (int, int)[]) -> int[][]{} is
     esac
 si
 
-reduced_latin_squares(n: int) -> int[][]{} =>
+reduced_latin_squares(n) =>
     let square =
         0..n
             |> map(row =>

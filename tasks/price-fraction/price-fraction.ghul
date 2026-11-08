@@ -8,7 +8,7 @@ let bands = [
     (0.86, 0.90), (0.91, 0.94), (0.96, 0.98), (1.01, 1.00)
 ]
 
-rescale(price: double) -> double =>
+rescale(price) =>
     assert price >= 0.0 /\ price < 1.01 else "price out of range" in
     bands |> find(((upper_bound, _)) => price < upper_bound)?.`1!
 

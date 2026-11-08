@@ -24,16 +24,16 @@ for p in 2..limit + 3 do
     fi
 od
 
-is_tetraprime(n: int) -> bool => distinct_factors[n] == 4 /\ square_free[n]
+is_tetraprime(n) => distinct_factors[n] == 4 /\ square_free[n]
 
-median(sorted: int[]) -> int =>
+median(sorted) =>
     if sorted.count % 2 == 1 then
         sorted[sorted.count / 2]
     else
         (sorted[sorted.count / 2 - 1] + sorted[sorted.count / 2]) / 2
     fi
 
-report(below: int, direction: string, offset: int, show: bool) is
+report(below, direction, offset, show) is
     let found =
         (2..below)
             |> filter(p =>

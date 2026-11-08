@@ -1,6 +1,6 @@
 use default
 
-carmichaels() -> (int, int, int){} is
+carmichaels() is
     for p1 in 2::61 |> filter(is_prime) do
         for h3 in 2..p1 do
             let sum = h3 + p1

@@ -54,7 +54,7 @@ let nodes = ["a", "b", "c", "d", "e", "f"]
 let places = MAP[string, (x: double, y: double)]()
 let labels = MAP[string, (x: double, y: double)]()
 
-place(node: string, x: double, y: double, at: double, above: double) is
+place(node, x, y, at, above) is
     places[node] = (x = x, y = y)
     labels[node] = (x = at, y = above)
 si
@@ -68,7 +68,7 @@ place("f", 2.2, 0.0, 2.20, -0.32)
 
 let best = shortest_paths(edges, nodes, "a")
 
-on_tree(edge: EDGE) -> bool =>
+on_tree(edge) =>
     best.contains_key(edge.finish) /\
     best[edge.finish].previous =~ edge.start
 
@@ -80,13 +80,13 @@ let image = IMAGE(740, 520)
 
 image.view(-0.45, -0.45, 4.55, 2.95, 20.0)
 
-across(pixels: double) -> double =>
+across(pixels) =>
     image.to_user(pixels, 0.0).x - image.to_user(0.0, 0.0).x
 
-down(pixels: double) -> double =>
+down(pixels) =>
     image.to_user(0.0, 0.0).y - image.to_user(0.0, pixels).y
 
-label(x: double, y: double, height: double, text: string) is
+label(x, y, height, text) is
     let half = across(image.text_width(height, text) / 2.0 + 4.0)
 
     image.color(255ub, 255ub, 255ub)

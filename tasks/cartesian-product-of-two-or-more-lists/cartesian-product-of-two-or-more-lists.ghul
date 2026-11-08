@@ -1,6 +1,6 @@
 use default
 
-product(lists: int[][]) -> int[][] =>
+product(lists) =>
     case lists
     when [] then [[]]
     when [first, ..rest] then

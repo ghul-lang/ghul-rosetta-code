@@ -34,7 +34,7 @@ let dys = [
     -0.947, -1.424, -0.542, -1.032
 ]
 
-drops(ds: double[], rule: (double, double) -> double) -> double[] => (
+drops(ds, rule) => (
     let landed = LIST()
     let at mut = 0.0
 
@@ -47,9 +47,9 @@ drops(ds: double[], rule: (double, double) -> double) -> double[] => (
     landed
 )
 
-mean(xs: double[]) -> double => (xs |> sum()) / double(xs.count)
+mean(xs) => (xs |> sum()) / double(xs.count)
 
-deviation(xs: double[]) -> double =>
+deviation(xs) =>
     let m = mean(xs) in
     sqrt((xs |> sum_by(x => (x - m) * (x - m))) / double(xs.count))
 
@@ -63,7 +63,7 @@ let rules = [
     (name = "follow the last marble", next = (at, d) => at + d)
 ]
 
-plot(image: IMAGE, at: int, xs: double[], ys: double[], reach: double) is
+plot(image, at, xs, ys, reach) is
     let width = double(image.width) / 2.0
     let height = double(image.height) / 2.0
     let left = double(at % 2) * width

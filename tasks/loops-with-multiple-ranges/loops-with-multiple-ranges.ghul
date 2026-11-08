@@ -1,6 +1,6 @@
 use default
 
-stepped(start: int, stop: int, step: int) -> int{} is
+stepped(start, stop, step) is
     let value mut = start
 
     while (step > 0 /\ value <= stop) \/ (step < 0 /\ value >= stop) do

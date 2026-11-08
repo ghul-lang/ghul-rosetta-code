@@ -13,7 +13,7 @@ let column_steps = [0, 1, 0, -1]
 
 use Ant = (row: int, column: int, steps: int, left: bool)
 
-walk(every: int) -> Ant{} is
+walk(every) is
     let row mut = size / 2, column mut = size / 2
     let facing mut = 0, steps mut = 0
 

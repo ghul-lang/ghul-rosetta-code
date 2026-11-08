@@ -33,7 +33,7 @@ struct UNCERTAIN(value: double, error: double) is
     to_string() -> string => "{value} ± {error}"
 si
 
-power(a: UNCERTAIN, c: double) -> UNCERTAIN =>
+power(a, c) =>
     let raised = pow(a.value, c) in
     UNCERTAIN(raised, abs(raised * c * a.error / a.value))
 

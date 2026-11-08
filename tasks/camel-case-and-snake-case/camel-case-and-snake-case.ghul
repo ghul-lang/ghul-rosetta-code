@@ -50,7 +50,7 @@ lower_first(word: string) -> string =>
 upper_first(word: string) -> string =>
     "{char.to_upper(word[0])}{word[1..<0]}"
 
-quoted(text: string) -> string => "\"{text}\""
+quoted(text) => "\"{text}\""
 
 let tests = [
     "snakeCase",

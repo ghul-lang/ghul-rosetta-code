@@ -6,7 +6,7 @@ let numbers = [
     197622519L
 ]
 
-factors(number: long) -> Collections.LIST[long] is
+factors(number) is
     let found = Collections.LIST()
     let rest mut = number
     let divisor mut = 2L

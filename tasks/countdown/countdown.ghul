@@ -5,12 +5,12 @@ use Found = (value: int, steps: LIST[string])
 
 use Move = (value: int, step: string)
 
-move(a: int, operator: string, b: int, value: int) -> Move => (
+move(a, operator, b, value) => (
     value = value,
     step = "{a} {operator} {b} = {value}"
 )
 
-combinations(a: int, b: int) -> Move{} is
+combinations(a, b) is
     let (large, small) = if a >= b then (a, b) else (b, a) fi
 
     yield move(large, "+", small, large + small)
@@ -28,7 +28,7 @@ combinations(a: int, b: int) -> Move{} is
     fi
 si
 
-solve(numbers: Found[], target: int, best: Found) -> Found is
+solve(numbers, target, best) is
     let closest mut = numbers |> min_by(f => abs(f.value - target)) ?? best
 
     if closest.value == target then
@@ -63,7 +63,7 @@ solve(numbers: Found[], target: int, best: Found) -> Found is
     closest
 si
 
-play(numbers: int[], target: int) is
+play(numbers, target) is
     write_line("using {numbers |> join(", ")} to make {target}")
 
     let start = numbers |> map(n => (value = n, steps = LIST())) |> list()

@@ -16,7 +16,7 @@ let centers = [
 
 let radius = 22.0
 
-draw_spinner(image: IMAGE, cx: double, cy: double, angle: double) is
+draw_spinner(image, cx, cy, angle) is
     // faint spokes
     image.color(60ub, 60ub, 80ub)
     image.stroke(1.0)

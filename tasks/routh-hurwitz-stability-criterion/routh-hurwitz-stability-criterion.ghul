@@ -13,13 +13,10 @@ next_row(above: double[], row: double[]) -> LIST[double] =>
         )
         |> LIST()
 
-derivative(row: double[], order: int) -> LIST[double] =>
+derivative(row, order) =>
     (0..row.count) |> map(k => row[k] * double(order - 2 * k)) |> LIST()
 
-routh_array(coefficients: double[]) -> (
-    rows: LIST[LIST[double]],
-    on_axis: bool
-) is
+routh_array(coefficients) is
     let degree = coefficients.count - 1
     let width = degree / 2 + 1
 
@@ -64,11 +61,11 @@ routh_array(coefficients: double[]) -> (
     return (rows, on_axis)
 si
 
-sign_changes(column: double[]) -> int =>
+sign_changes(column) =>
     (1..column.count)
         |> count(i => (column[i - 1] < 0.0) != (column[i] < 0.0))
 
-test(coefficients: double[]) is
+test(coefficients) is
     let listed = coefficients |> map(c => "{c}") |> join()
     write_line("coefficients {listed}:")
 

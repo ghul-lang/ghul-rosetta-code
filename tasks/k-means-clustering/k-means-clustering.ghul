@@ -9,10 +9,10 @@ let random = System.Random(20260918)
 let clusters = 6
 let sample_size = 30_000
 
-apart(a: Point, b: Point) -> double =>
+apart(a, b) =>
     (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)
 
-nearest(centers: Point[], at: Point) -> (index: int, distance: double) is
+nearest(centers, at) is
     let best mut = 0
     let closest mut = apart(centers[0], at)
 
@@ -38,7 +38,7 @@ let points =
         ))
         |> list()
 
-seeded_centers() -> Point[] is
+seeded_centers() is
     let centers = LIST([points[random.next(points.count)]])
 
     while centers.count < clusters do
@@ -64,7 +64,7 @@ si
 let centers mut = seeded_centers()
 let membership = points |> map(_ => 0) |> LIST()
 
-recentered() -> Point[] is
+recentered() is
     let totals = LIST()
     let sizes = LIST()
 

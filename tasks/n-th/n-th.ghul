@@ -1,6 +1,6 @@
 use default
 
-ordinal(n: int) -> string =>
+ordinal(n) =>
     let suffix =
         if n % 100 >= 11 /\ n % 100 <= 13 then
             "th"
