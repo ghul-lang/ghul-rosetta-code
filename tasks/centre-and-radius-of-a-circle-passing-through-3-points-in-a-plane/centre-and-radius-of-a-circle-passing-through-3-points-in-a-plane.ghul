@@ -2,8 +2,6 @@ use default
 
 use Point = (x: double, y: double)
 
-use Circle = (centre: Point, radius: double)
-
 circle_through(a, b, c) is
     let determinant =
         2.0 * (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y))

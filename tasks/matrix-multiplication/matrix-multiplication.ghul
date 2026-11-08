@@ -1,5 +1,4 @@
 use default
-use Matrix = int[][]
 
 multiply(left, right) =>
     assert left[0].count == right.count else "shapes do not conform" in

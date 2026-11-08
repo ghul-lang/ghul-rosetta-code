@@ -2,8 +2,6 @@ use Raster.ANIMATION
 use Raster.IMAGE
 use Ghul.Math
 
-use STATE = (angle: double, rate: double)
-
 let gravity = 9.81
 let length = 1.0
 let swing = 1.0
