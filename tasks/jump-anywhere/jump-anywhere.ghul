@@ -12,7 +12,7 @@ first_repeat(grid: int[][]) -> int? is
         od
 si
 
-complete_rows(grid: int[][]) -> string{} is
+complete_rows(grid) is
     let complete = LIST()
 
     scan: for row in grid do
@@ -42,7 +42,7 @@ steps() is
     write_line("  generator: finished")
 si
 
-paused() -> COROUTINE is
+paused() is
     write_line("  coroutine: before the pause")
 
     await pause()

@@ -20,10 +20,7 @@ full_adder(a, b, carry_in) =>
     in
         (sum = upper.sum, carry = or(lower.carry, upper.carry))
 
-four_bit_adder(a: bool[], b: bool[], carry_in: bool) -> (
-    sum: bool[],
-    carry: bool
-) is
+four_bit_adder(a, b, carry_in) is
     let wires = repeat(false, 4) |> LIST()
     let carry mut = carry_in
 

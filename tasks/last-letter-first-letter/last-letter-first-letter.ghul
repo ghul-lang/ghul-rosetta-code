@@ -14,7 +14,7 @@ let names =
         "wartortle whismur wingull yamask"
     ).split([' '])
 
-longest_chain(words: string[]) -> string[] is
+longest_chain(words) is
     let used = repeat(false, words.count) |> LIST()
     let path = LIST()
     let best = LIST()

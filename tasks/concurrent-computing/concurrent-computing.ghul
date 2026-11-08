@@ -3,7 +3,7 @@ use Ghul.Coroutines
 
 let random = System.Random(42)
 
-say(word: string) -> COROUTINE is
+say(word) is
     for _ in 1::random.next(1, 5) do
         await pause()
     od

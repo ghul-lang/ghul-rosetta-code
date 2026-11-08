@@ -109,7 +109,7 @@ neighbours(i) =>
         |> map(c => at(c.column, c.row))
         |> filter(open(i, *))
 
-shortest_path(start: int, finish: int) -> int[] is
+shortest_path(start, finish) is
     let previous = MAP()
     let queue = QUEUE()
 

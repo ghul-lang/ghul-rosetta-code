@@ -10,7 +10,7 @@ let random = System.Random(42)
 
 let forks = philosophers |> map(_ => MUTEX()) |> list()
 
-dine(name: string, seat: int) -> COROUTINE is
+dine(name, seat) is
     let left = seat
     let right = (seat + 1) % forks.count
     let lower = if left < right then left else right fi

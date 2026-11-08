@@ -3,11 +3,7 @@ use default
 use EDGE = (start: string, finish: string, cost: int)
 use REACHED = (cost: int, previous: string)
 
-shortest_paths(
-    edges: EDGE[],
-    nodes: string[],
-    source: string
-) -> MAP[string, REACHED] is
+shortest_paths(edges, nodes, source) is
     let best = MAP()
     let unvisited = LIST(nodes)
 

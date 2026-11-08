@@ -126,7 +126,7 @@ castling_targets(position, from) is
     targets
 si
 
-pseudo_moves(position: POSITION) -> Move{} is
+pseudo_moves(position) is
     let moves = LIST()
     let white = position.white_to_move
     let at = (r, k) => position.squares[r * 8 + k]

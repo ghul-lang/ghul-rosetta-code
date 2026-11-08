@@ -10,7 +10,7 @@ si
 
 in_name(c) => char.is_ascii_letter_or_digit(c) \/ c == '_'
 
-tokens(text: string) -> string[] is
+tokens(text) is
     let result = LIST()
     let i mut = 0
 

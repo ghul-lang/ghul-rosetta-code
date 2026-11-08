@@ -142,7 +142,7 @@ hull(points) =>
 
 turns_left(o, a, b) => (a - o) × (b - o) >= 0.0
 
-monotone_chain(points: P[]) -> P{} is
+monotone_chain(points) is
     let sorted = points |> sort((a, b) => a.x <> b.x) |> list()
     let chain = LIST()
 

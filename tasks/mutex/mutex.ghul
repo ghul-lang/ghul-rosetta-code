@@ -5,13 +5,13 @@ let names = ["Alice", "Bob", "Carol"]
 
 let console = MUTEX()
 
-visit(name: string) -> COROUTINE is
+visit(name) is
     write_line("{name} enters")
     await pause()
     write_line("{name} leaves")
 si
 
-guarded(name: string) -> COROUTINE is
+guarded(name) is
     await console.acquire()
     await visit(name)
     console.release()

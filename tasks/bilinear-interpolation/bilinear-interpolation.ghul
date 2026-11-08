@@ -53,7 +53,7 @@ si
 
 lerp(a, b, t) => a + (b - a) * t
 
-bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
+bilinear(source, x, y) is
     let x0 = min(int(floor(x)), source.width - 1)
     let y0 = min(int(floor(y)), source.height - 1)
     let x1 = min(x0 + 1, source.width - 1)

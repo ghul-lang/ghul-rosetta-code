@@ -1,10 +1,7 @@
 use default
 use Collections
 
-suffixes(words: string[], size: int) -> (
-    by_prefix: MAP[string, LIST[string]],
-    prefixes: string[]
-) is
+suffixes(words, size) is
     let by_prefix = MAP()
     let prefixes = LIST()
 

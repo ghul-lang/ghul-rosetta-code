@@ -1,6 +1,6 @@
 use default
 
-encode(data: ubyte[], marker: ubyte) -> ubyte[] is
+encode(data, marker) is
     let frame = LIST()
     let block = LIST()
 

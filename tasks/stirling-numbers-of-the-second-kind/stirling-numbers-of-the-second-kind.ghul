@@ -1,6 +1,6 @@
 use default
 
-row_of(n: int) -> bigint{} is
+row_of(n) is
     let row mut = LIST()
     row.add(1n)
 

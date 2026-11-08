@@ -40,7 +40,7 @@ write_source(path) =>
         0..values |> map(_ => "{random.next(1_000_000)}")
     )
 
-split(path: string) -> string[] is
+split(path) is
     let parts = LIST()
     let held = LIST()
 

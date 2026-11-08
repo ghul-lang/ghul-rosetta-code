@@ -5,7 +5,7 @@ union Tensor is
     ARRAY(items: Tensor[])
 si
 
-parse_all(text: string) -> Tensor{} is
+parse_all(text) is
     let at mut = 0
 
     skip_spaces() is
@@ -92,7 +92,7 @@ embed(tensor: Tensor, strides: int[]) -> int[] is
     values
 si
 
-deconvolve_1d(g: int[], f: int[]) -> int[] is
+deconvolve_1d(g, f) is
     let h = LIST()
 
     for n in 0..g.count - f.count + 1 do

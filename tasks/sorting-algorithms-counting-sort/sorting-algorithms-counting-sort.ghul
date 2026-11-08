@@ -1,6 +1,6 @@
 use default
 
-counting_sort(values: int[], low: int, high: int) -> int{} is
+counting_sort(values, low, high) is
     let counts = low..high + 1 |> map(_ => 0) |> LIST()
 
     for value in values do

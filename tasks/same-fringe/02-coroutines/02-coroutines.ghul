@@ -89,7 +89,7 @@ let differs_last = NODE(LEAF(1), NODE(LEAF(2), LEAF(4)))
 let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
 let shorter = NODE(LEAF(1), LEAF(2))
 
-report() -> COROUTINE is
+report() is
     for
         (first, second) in [
             (leaning_left, leaning_right),

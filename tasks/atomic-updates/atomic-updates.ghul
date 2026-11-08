@@ -37,7 +37,7 @@ let rounds = 6
 
 pick() => random.next(0, buckets.count)
 
-equalise() -> COROUTINE is
+equalise() is
     for _ in 1::rounds do
         let a = pick()
         let b = pick()
@@ -59,7 +59,7 @@ equalise() -> COROUTINE is
     od
 si
 
-redistribute() -> COROUTINE is
+redistribute() is
     for _ in 1::rounds do
         buckets.transfer(pick(), pick(), random.next(0, 60))
 
@@ -67,7 +67,7 @@ redistribute() -> COROUTINE is
     od
 si
 
-display() -> COROUTINE is
+display() is
     for _ in 1::rounds do
         let shown = buckets.values |> map(v => "{v}") |> join(" ")
 

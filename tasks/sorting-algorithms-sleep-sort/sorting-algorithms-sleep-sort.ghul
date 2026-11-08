@@ -6,7 +6,7 @@ use Ghul.Coroutines
 
 let values = [5, 3, 8, 0, 1, 9, 2, 7]
 
-emit(value: int) -> COROUTINE is
+emit(value) is
     await sleep(value * 50)
     write_line("{value}")
 si

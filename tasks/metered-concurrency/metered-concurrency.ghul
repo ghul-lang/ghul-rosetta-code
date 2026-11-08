@@ -15,7 +15,7 @@ let semaphore = SEMAPHORE(permits)
 
 holding() => permits - semaphore.available
 
-worker(id: int) -> COROUTINE is
+worker(id) is
     await semaphore.acquire()
 
     write_line("worker {id} acquired, {holding()} holding")

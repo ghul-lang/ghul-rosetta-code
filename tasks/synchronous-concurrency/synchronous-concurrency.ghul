@@ -16,7 +16,7 @@ IO.File.write_all_lines(path, ["Enjoy", "Rosetta", "Code"])
 let requests = CHANNEL[Request]()
 let replies = CHANNEL[int]()
 
-printer() -> COROUTINE is
+printer() is
     let printed mut = 0
 
     do
@@ -32,7 +32,7 @@ printer() -> COROUTINE is
     od
 si
 
-reader() -> COROUTINE is
+reader() is
     for line in IO.File.read_lines(path) do
         requests.send(PRINT(line))
         await pause()

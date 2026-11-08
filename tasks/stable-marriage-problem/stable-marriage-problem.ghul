@@ -93,7 +93,7 @@ rank(preferences, name) =>
 
 prefers(preferences, judge, a, b) => rank(preferences[judge], a) < rank(preferences[judge], b)
 
-engage() -> MAP[string, string] is
+engage() is
     let engaged_to = MAP()
     let next_choice = MAP()
     let free = LIST(men_preferences.keys |> sort())

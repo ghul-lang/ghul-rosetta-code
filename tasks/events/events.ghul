@@ -36,7 +36,7 @@ si
 let event = EVENT()
 let delay = 3
 
-waiter(name: string) -> COROUTINE is
+waiter(name) is
     write_line("{name} waits")
 
     await event.wait()
@@ -44,7 +44,7 @@ waiter(name: string) -> COROUTINE is
     write_line("{name} released")
 si
 
-signaller() -> COROUTINE is
+signaller() is
     for _ in 1::delay do
         await pause()
     od

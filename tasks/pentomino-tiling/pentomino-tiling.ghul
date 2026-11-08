@@ -41,7 +41,7 @@ cell_at(row, column) => (row = row, column = column)
 key(shape) =>
     shape |> map(c => "{c.row},{c.column}") |> join(" ")
 
-orientations(cells: (int, int)[]) -> Shape{} is
+orientations(cells) is
     let found = LIST()
     let current mut = cells |> map((r, c) => cell_at(r, c))
 

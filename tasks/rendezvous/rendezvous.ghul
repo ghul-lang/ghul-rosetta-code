@@ -78,7 +78,7 @@ si
 let reserve = PRINTER("reserve", 5, null)
 let main = PRINTER("main", 5, reserve)
 
-writer(name: string, lines: string[]) -> COROUTINE is
+writer(name, lines) is
     try
         for line in lines do
             await main.print(line)

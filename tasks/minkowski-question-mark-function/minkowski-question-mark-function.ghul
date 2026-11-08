@@ -41,7 +41,7 @@ question(x) is
     y + step
 si
 
-terms(y: double) -> int{} is
+terms(y) is
     let runs = LIST()
 
     let rest mut = y

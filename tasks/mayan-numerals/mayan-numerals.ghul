@@ -3,7 +3,7 @@ use default
 let dots = ["    ", " o  ", " oo ", "ooo ", "oooo"]
 let bar = "===="
 
-vigesimal(n: int) -> int{} is
+vigesimal(n) is
     let digits = LIST()
     let rest mut = n
 

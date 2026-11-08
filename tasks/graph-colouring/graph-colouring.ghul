@@ -51,7 +51,7 @@ parse(description: string) -> GRAPH is
     GRAPH(nodes |> sort() |> list(), edges)
 si
 
-color(graph: GRAPH) -> MAP[int, int] is
+color(graph) is
     let colors = MAP()
 
     let neighbour_colors =

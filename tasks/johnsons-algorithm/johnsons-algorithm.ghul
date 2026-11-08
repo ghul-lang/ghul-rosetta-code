@@ -4,7 +4,7 @@ use Matrix = double?[][]
 
 use Edge = (from: int, to: int, weight: double)
 
-weighted(size: int, edges: Edge[]) -> Matrix is
+weighted(size, edges) is
     let graph = LIST()
 
     for u in 0..size do
@@ -67,11 +67,7 @@ potentials(graph: Matrix) -> double[]? is
     potential
 si
 
-shortest_from(
-    graph: Matrix,
-    potential: double[],
-    source: int
-) -> double?[] is
+shortest_from(graph, potential, source) is
     let size = graph.count
     let distance = repeat(cast double?(null), size) |> LIST()
 

@@ -1,6 +1,6 @@
 use default
 
-smooth(bound: int, count: int) -> bigint[] is
+smooth(bound, count) is
     let factors = 2::bound |> filter(is_prime) |> map(bigint) |> list()
 
     let found = LIST()

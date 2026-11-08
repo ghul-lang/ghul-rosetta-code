@@ -1,6 +1,6 @@
 use default
 
-pritchard(limit: int) -> int{} is
+pritchard(limit) is
     let wheel = SET([1])
 
     let primes = LIST()

@@ -32,7 +32,7 @@ checkpoint() -> COROUTINE is
     fi
 si
 
-worker(seat: int) -> COROUTINE is
+worker(seat) is
     let name = names[seat]
 
     for cycle in 1::cycles do
