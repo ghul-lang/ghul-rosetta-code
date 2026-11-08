@@ -18,8 +18,7 @@ let k = bigint.parse(
 
 let cell = 6
 
-lit(x, y) =>
-    ((k + bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n
+lit(x, y) => ((k + bigint(y)) / 17n >> (17 * x + y % 17)) % 2n =~ 1n
 
 let image = IMAGE(106 * cell, 17 * cell)
 

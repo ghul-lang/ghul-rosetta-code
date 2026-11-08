@@ -28,8 +28,7 @@ prime(text) => (
 left_truncatable(text) =>
     0..text.length |> all(start => prime(text[start..<0]))
 
-right_truncatable(text) =>
-    1::text.length |> all(end => prime(text[0..end]))
+right_truncatable(text) => 1::text.length |> all(end => prime(text[0..end]))
 
 let candidates =
     (2..(limit + 1)) |> filter(n => !composite[n] /\ !"{n}".contains('0'))
