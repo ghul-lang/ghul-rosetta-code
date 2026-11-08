@@ -15,7 +15,7 @@ let swaps = MAP(
         |> map((word, swap) => KeyValuePair(word, swap))
 )
 
-reverse_gender(text: string) -> string is
+reverse_gender(text) is
     let word_pattern = Regex("[A-Za-z]+")
 
     word_pattern.replace(text, m => (

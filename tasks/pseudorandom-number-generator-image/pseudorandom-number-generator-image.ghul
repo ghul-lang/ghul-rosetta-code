@@ -2,7 +2,7 @@ use Raster.IMAGE
 
 let size = 250
 
-next(state: uint) -> uint => state * 1664525u + 1013904223u
+next(state) => state * 1664525u + 1013904223u
 
 let image = IMAGE(size, size)
 

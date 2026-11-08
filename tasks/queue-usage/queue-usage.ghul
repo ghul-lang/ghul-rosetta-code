@@ -2,7 +2,7 @@ use default
 
 let queue = QUEUE()
 
-report_empty(pending: QUEUE[string]) =>
+report_empty(pending) =>
     let state = if pending.count == 0 then "yes" else "no" fi in
     write_line("empty: {state}")
 

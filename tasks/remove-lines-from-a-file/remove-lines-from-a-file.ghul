@@ -13,7 +13,7 @@ write_file() is
     IO.File.write_all_lines(path, 1..7 |> map(number => "line {number}"))
 si
 
-remove_lines(path: string, start: int, count: int) is
+remove_lines(path, start, count) is
     let lines = IO.File.read_all_lines(path)
 
     if start < 1 \/ start + count - 1 > lines.count then
