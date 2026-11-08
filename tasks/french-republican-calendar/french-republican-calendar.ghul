@@ -22,8 +22,7 @@ is_leap(republican_year) =>
     let following = republican_year + 1 in
     following % 4 == 0 /\ (following % 100 != 0 \/ following % 400 == 0)
 
-days_in(republican_year) =>
-    if is_leap(republican_year) then 366 else 365 fi
+days_in(republican_year) => if is_leap(republican_year) then 366 else 365 fi
 
 to_republican(date) is
     walk(remaining: int, year: int) -> string =>
