@@ -1,6 +1,5 @@
 use default
 use System.Numerics.Complex
-use System.Globalization.CultureInfo
 
 is_integer(d: decimal) -> bool => d == decimal.truncate(d)
 
@@ -27,7 +26,7 @@ for
         double.positive_infinity, 25.0
     ]
 do
-    let shown = x.to_string(CultureInfo.invariant_culture)
+    let shown = x.to_string()
 
     write_line("double   {shown,-12} {is_integer(x)}")
 od
