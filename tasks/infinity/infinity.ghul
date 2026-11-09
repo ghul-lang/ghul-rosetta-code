@@ -1,9 +1,6 @@
 use default
-use System.Globalization.CultureInfo
 
-let invariant = CultureInfo.invariant_culture
-
-show(name, value) => write_line("{name,-22} {value.to_string(invariant)}")
+show(name, value) => write_line("{name,-22} {value}")
 
 show("positive infinity", double.positive_infinity)
 show("negative infinity", double.negative_infinity)

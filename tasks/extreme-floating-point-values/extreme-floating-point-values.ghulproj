@@ -4,6 +4,9 @@
     <TargetFramework>net10.0</TargetFramework>
 
     <AssemblyName>binary</AssemblyName>
+    <!-- prints infinity and NaN, whose text a culture can change: invariant
+         however the program is run, as on the wasm and llvm targets -->
+    <InvariantGlobalization>true</InvariantGlobalization>
     <GhulCompiler>dotnet ghul-compiler --test-run</GhulCompiler>
   </PropertyGroup>
 

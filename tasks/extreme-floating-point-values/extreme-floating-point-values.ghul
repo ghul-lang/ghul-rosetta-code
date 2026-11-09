@@ -1,10 +1,7 @@
 use default
-use System.Globalization.CultureInfo
 
 show(expression: string, value: double) =>
-    write_line(
-        "{expression,-28} {value.to_string(CultureInfo.invariant_culture)}"
-    )
+    write_line("{expression,-28} {value}")
 
 show(expression: string, value: bool) =>
     write_line("{expression,-28} {value}")
