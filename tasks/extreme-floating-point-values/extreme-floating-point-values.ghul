@@ -1,9 +1,7 @@
 use default
 
 show(expression: string, value: double) =>
-    write_line(
-        "{expression,-28} {value}"
-    )
+    write_line("{expression,-28} {value}")
 
 show(expression: string, value: bool) =>
     write_line("{expression,-28} {value}")
