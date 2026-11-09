@@ -9,5 +9,6 @@
 
   <ItemGroup>
     <GhulSources Include="**/*.ghul" />
+    <GhulOptions Include="--rtti" />
   </ItemGroup>
 </Project>
