@@ -185,7 +185,13 @@ namespace Rosetta is
             if output.length > 0 then
                 text.append("{{{{out}}}}\n")
 
-                output_block(text, slug, directory, output)
+                // A task drawn in a terminal shows a picture of the terminal,
+                // which its escape sequences cannot.
+                if TERMINAL_CAPTURE.wanted(directory) then
+                    text.append("[[File:Ghul-{slug}-{wiki_image(directory, TERMINAL_CAPTURE.IMAGE_NAME)}|none]]\n")
+                else
+                    output_block(text, slug, directory, output)
+                fi
             fi
 
             return true

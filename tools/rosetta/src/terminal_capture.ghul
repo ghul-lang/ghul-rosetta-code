@@ -1,0 +1,203 @@
+namespace Rosetta is
+    use default
+    use Raster.ANIMATION
+    use Raster.IMAGE
+
+    // A task whose output is something drawn in a terminal - colors, cursor
+    // movement, an animation redrawn in place - shown on the wiki as a
+    // picture of the terminal rather than as its escape sequences.
+    //
+    // A task opts in with a `terminal-capture` file holding a JSON object:
+    // `columns` and `rows`, the size of the terminal it draws in (80 and 24
+    // where absent), and `frame_ms`, how long each frame of an animation is
+    // shown for (100 where absent). The output its test asserts is played
+    // onto a TERMINAL, each frame of it written as a page laid out on a fixed
+    // grid of cells, a browser takes a picture of each page, and the pictures
+    // are put together as `terminal.png`: a still for one frame, an animated
+    // PNG for more, which the publish uploads as a GIF.
+    class TERMINAL_CAPTURE is
+        // The file a task opts in with.
+        MARKER: string static => "terminal-capture"
+
+        // The image the capture writes in the task directory.
+        IMAGE_NAME: string static => "terminal.png"
+
+        // The size of one cell, in pixels, in the face the pages use, where
+        // a half-width character takes one cell and a full-width one two.
+        CELL_WIDTH: int static => 9
+        CELL_HEIGHT: int static => 18
+
+        // The most frames kept from one animation.
+        FRAME_LIMIT: int static => 120
+
+        _directory: string
+        columns: int
+        rows: int
+        frame_ms: int
+
+        init(directory: string) is
+            _directory = directory
+            columns = 80
+            rows = 24
+            frame_ms = 100
+
+            let document = System.Text.Json.JsonDocument.parse(IO.File.read_all_text(IO.Path.combine(directory, MARKER)), _)
+            let found: System.Text.Json.JsonElement mut
+
+            if document.root_element.try_get_property("columns", found ref) then columns = found.get_int32() fi
+            if document.root_element.try_get_property("rows", found ref) then rows = found.get_int32() fi
+            if document.root_element.try_get_property("frame_ms", found ref) then frame_ms = found.get_int32() fi
+        si
+
+        // Whether the task in `directory` asks for a capture.
+        wanted(directory: string) -> bool static => IO.File.exists(IO.Path.combine(directory, MARKER))
+
+        // The frames the output its test asserts draws, cropped to the area
+        // any of them uses.
+        frames() -> LIST[SCREEN] is
+            let terminal = TERMINAL(rows, columns)
+
+            terminal.play(IO.File.read_all_text(IO.Path.combine(_directory, "run.expected")))
+
+            let all = terminal.frames
+            let kept = LIST[SCREEN]()
+
+            for i in 0..Ghul.Math.min(all.count, FRAME_LIMIT) do
+                kept.add(all[i])
+            od
+
+            return _cropped(kept)
+        si
+
+        // Every frame cut to the rows and columns any frame draws in, with
+        // a cell to spare on each side.
+        _cropped(frames: LIST[SCREEN]) -> LIST[SCREEN] is
+            let last_row mut = 0
+            let last_column mut = 0
+
+            for screen in frames do
+                for row in 0..screen.rows do
+                    for column in 0..screen.columns do
+                        let cell = screen.at(row, column)
+
+                        if cell.text != ' ' \/ cell.background >= 0 \/ cell.inverse then
+                            last_row = Ghul.Math.max(last_row, row)
+                            last_column = Ghul.Math.max(last_column, column)
+                        fi
+                    od
+                od
+            od
+
+            let used_rows = last_row + 1
+            let used_columns = last_column + 1
+            let result = LIST[SCREEN]()
+
+            for screen in frames do
+                let cells = LIST[CELL](used_rows * used_columns)
+
+                for row in 0..used_rows do
+                    for column in 0..used_columns do
+                        cells.add(screen.at(row, column))
+                    od
+                od
+
+                result.add(SCREEN(used_rows, used_columns, cells))
+            od
+
+            return result
+        si
+
+        // The size in pixels of a picture of `screen`, with a margin.
+        width_of(screen: SCREEN) -> int static => (screen.columns + 2) * CELL_WIDTH
+        height_of(screen: SCREEN) -> int static => screen.rows * CELL_HEIGHT + CELL_HEIGHT
+
+        // A page showing `screen`, each cell placed on the grid by position,
+        // so the width the face gives a character never moves the columns.
+        page(screen: SCREEN) -> string static is
+            let body = Text.STRING_BUILDER()
+
+            for row in 0..screen.rows do
+                for column in 0..screen.columns do
+                    let cell = screen.at(row, column)
+                    let foreground = if cell.inverse then _background(cell) else _foreground(cell) fi
+                    let background = if cell.inverse then _foreground(cell) else _background(cell) fi
+
+                    if cell.text == ' ' /\ background =~ BACKGROUND then
+                        continue
+                    fi
+
+                    let left = (column + 1) * CELL_WIDTH
+                    let top = row * CELL_HEIGHT + CELL_HEIGHT / 2
+                    let weight = if cell.bold then "font-weight:bold;" else "" fi
+
+                    body.append(
+                        "<span style=\"left:{left}px;top:{top}px;color:{foreground};background:{background};{weight}\">{_escaped(cell.text)}</span>")
+                od
+            od
+
+            return
+                "<!doctype html><meta charset=\"utf-8\"><style>"
+                "html,body{{margin:0;background:{BACKGROUND};}}"
+                "span{{position:absolute;width:{CELL_WIDTH}px;height:{CELL_HEIGHT}px;line-height:{CELL_HEIGHT}px;"
+                "font:15px 'Noto Sans Mono CJK JP',monospace;text-align:center;white-space:pre;}}"
+                "</style><body>{body}</body>"
+        si
+
+        // Puts the pictures taken of the frames, `frame-000.png` onwards in
+        // `pictures`, together as the task's terminal image.
+        assemble(pictures: string, count: int) is
+            let target = IO.Path.combine(_directory, IMAGE_NAME)
+            let first = IO.Path.combine(pictures, _picture_name(0))
+
+            if count == 1 then
+                IO.File.copy(first, target, true)
+                return
+            fi
+
+            let opening = IMAGE.read(first)
+            let animation = ANIMATION(opening.width, opening.height)
+
+            for i in 0..count do
+                animation.add(IMAGE.read(IO.Path.combine(pictures, _picture_name(i))), frame_ms)
+            od
+
+            animation.write(target)
+        si
+
+        // The name the picture of frame `index` is taken under.
+        _picture_name(index: int) -> string static => "frame-{index:D3}.png"
+
+        page_name(index: int) -> string static => "frame-{index:D3}.html"
+
+        picture_name(index: int) -> string static => _picture_name(index)
+
+        BACKGROUND: string static => "#1e1e1e"
+
+        // The 16 colors of a terminal, in the order their SGR codes number
+        // them: the eight, then their bright forms.
+        _palette: ARRAY[string] static => [
+            "#000000", "#cd3131", "#0dbc79", "#e5e510", "#2472c8", "#bc3fbc", "#11a8cd", "#e5e5e5",
+            "#666666", "#f14c4c", "#23d18b", "#f5f543", "#3b8eea", "#d670d6", "#29b8db", "#ffffff"
+        ]
+
+        // Bold draws the eight colors in their bright forms, as most
+        // terminals do.
+        _foreground(cell: CELL) -> string static =>
+            if cell.foreground >= 0 then
+                _palette[if cell.bold /\ cell.foreground < 8 then cell.foreground + 8 else cell.foreground fi]
+            else
+                "#cccccc"
+            fi
+
+        _background(cell: CELL) -> string static =>
+            if cell.background >= 0 then _palette[cell.background] else BACKGROUND fi
+
+        _escaped(c: char) -> string static =>
+            case c
+            when '<' then "&lt;"
+            when '>' then "&gt;"
+            when '&' then "&amp;"
+            else "{c}"
+            esac
+    si
+si

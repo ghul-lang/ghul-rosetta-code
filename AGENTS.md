@@ -1022,6 +1022,11 @@ Build and run a single task with `dotnet run --project tasks/<slug>`.
   `run.session` for a program that prompts, answered a line at a time and echoed into the
   transcript; `<name>.png.expected` for an image, compared by bytes and then by pixels. A test
   carrying both `run.in` and `run.session` fails.
+- A task whose output is drawn in a terminal, with colors, cursor movement or an animation redrawn
+  in place, can carry a `terminal-capture` file: JSON with `columns`, `rows` and `frame_ms`. Its
+  section then shows a picture of the terminal in place of the escape sequences, taken at publish
+  time by `scripts/terminal-capture.sh` from the output `run.expected` asserts. The picture,
+  `terminal.png`, is not committed and nothing compares it; `run.expected` stays the test.
 - A compiler pass that throws writes an `exception:` line, and a test whose compiler output holds
   one fails on that alone, whatever it asserts.
 - A failing test is your change. This repository's tests are pinned to output that was read and

@@ -35,7 +35,7 @@ use Rosetta
 
 usage() is
     error.write_line(
-        "usage: rosetta <sync|candidates|show|set|reopen|check|diff|self-test|publish|adopt|render-notes|index|edit-page|strip-annotations> "
+        "usage: rosetta <sync|candidates|show|set|reopen|check|diff|self-test|publish|adopt|render-notes|index|edit-page|strip-annotations|terminal-frames|terminal-image> "
         "[arguments]"
     )
 si
@@ -1309,6 +1309,34 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
     fi
 si
 
+// Writes a page for each frame of the terminal the task `slug` draws in to
+// `directory`, with `frames.txt` saying how many there are and how big a
+// picture of one is, for a browser to take a picture of each.
+terminal_frames(root: string, slug: string, directory: string) is
+    let task = IO.Path.combine(root, "tasks", slug)
+    let capture = TERMINAL_CAPTURE(task)
+    let frames = capture.frames()
+
+    IO.Directory.create_directory(directory)
+
+    for i in 0..frames.count do
+        IO.File.write_all_text(IO.Path.combine(directory, TERMINAL_CAPTURE.page_name(i)), TERMINAL_CAPTURE.page(frames[i]))
+    od
+
+    let size = if frames.count > 0 then "{TERMINAL_CAPTURE.width_of(frames[0])} {TERMINAL_CAPTURE.height_of(frames[0])}" else "0 0" fi
+
+    IO.File.write_all_text(IO.Path.combine(directory, "frames.txt"), "{frames.count} {size}\n")
+si
+
+// Puts the pictures taken of the task `slug`'s frames in `directory`
+// together as its terminal image.
+terminal_image(root: string, slug: string, directory: string) is
+    let task = IO.Path.combine(root, "tasks", slug)
+    let count = int.parse(IO.File.read_all_text(IO.Path.combine(directory, "frames.txt")).split([' '])[0])
+
+    TERMINAL_CAPTURE(task).assemble(directory, count)
+si
+
 let arguments = LIST[string](System.Environment.get_command_line_args())
 
 arguments.remove_at(0)
@@ -1413,6 +1441,18 @@ else
             for warning in renderer.warnings do
                 error.write_line(warning)
             od
+        fi
+    when "terminal-frames" then
+        if arguments.count < 2 then
+            error.write_line("usage: rosetta terminal-frames <slug> <directory>")
+        else
+            terminal_frames(root, arguments[0], arguments[1])
+        fi
+    when "terminal-image" then
+        if arguments.count < 2 then
+            error.write_line("usage: rosetta terminal-image <slug> <directory>")
+        else
+            terminal_image(root, arguments[0], arguments[1])
         fi
     when "wiki-out" then
         write_wiki_out(root, arguments)
