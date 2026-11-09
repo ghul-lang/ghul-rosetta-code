@@ -137,6 +137,7 @@ box-the-compass
 boyer-moore-string-search
 brace-expansion
 brazilian-numbers
+break-oo-privacy
 brilliant-numbers
 bron-kerbosch-algorithm
 brownian-tree
@@ -940,6 +941,7 @@ recamans-sequence/02-the-arc-diagram
 recursive-descent-parser-generator/01-the-generator
 recursive-descent-parser-generator/02-the-generated-parser
 reduced-row-echelon-form
+reflection-list-properties
 remove-duplicate-elements
 remove-lines-from-a-file
 rename-a-file
