@@ -244,6 +244,7 @@ crc-32
 create-a-file
 create-a-two-dimensional-array-at-runtime
 create-an-html-table
+csv-data-manipulation
 csv-to-html-translation
 cuban-primes
 cullen-and-woodall-numbers
@@ -278,6 +279,7 @@ demings-funnel
 department-numbers
 descending-primes
 detect-division-by-zero
+determinant-and-permanent
 determine-if-a-string-has-all-the-same-characters
 determine-if-a-string-has-all-unique-characters
 determine-if-a-string-is-collapsible
@@ -369,6 +371,7 @@ exponentiation-with-infix-operators-in-or-operating-on-the-base
 extend-your-language
 extensible-prime-generator
 external-sort
+extreme-floating-point-values
 faces-from-a-mesh
 factorial
 factorial-base-numbers-indexing-permutations-of-a-collection
@@ -539,6 +542,7 @@ inconsummate-numbers-in-base-10
 increasing-gaps-between-consecutive-niven-numbers
 increment-a-numerical-string
 index-finite-lists-of-positive-integers
+infinity
 inheritance-multiple
 inheritance-single
 input-loop
@@ -673,6 +677,7 @@ mastermind
 matrix-chain-multiplication
 matrix-digital-rain
 matrix-exponentiation-operator
+matrix-multiplication
 matrix-transposition
 maximum-triangle-path-sum
 mayan-calendar
