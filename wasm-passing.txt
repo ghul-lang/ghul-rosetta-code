@@ -1,4 +1,4 @@
-# ghul.compiler 66.12.9, ghul-core v1.2.0, ghul-runtime v29.1.0, ghul-raster v0.13.0
+# ghul.compiler 71.0.5, ghul-runtime v38.2.0
 100-doors
 100-prisoners
 15-puzzle-game
@@ -22,7 +22,7 @@ abelian-sandpile-model-identity
 abstract-type
 abundant-deficient-and-perfect-number-classifications
 abundant-odd-numbers
-accumulator-factory/02-widening-from-integer-to-float
+accumulator-factory/01-widening-from-integer-to-float
 achilles-numbers
 ackermann-function
 additive-primes
@@ -44,6 +44,8 @@ anaprimes
 angle-difference-between-two-bearings
 angles-geometric-normalization-and-conversion
 animate-a-pendulum
+animated-spinners
+animation
 anonymous-recursion
 anti-primes
 aperys-constant
@@ -52,6 +54,7 @@ apply-a-callback-to-an-array/01-using-map
 apply-a-callback-to-an-array/02-writing-apply
 apply-a-digital-filter-direct-form-ii-transposed
 approximate-equality
+arbitrary-precision-integers
 archimedean-spiral
 argument-destructuring
 arithmetic-complex
@@ -87,6 +90,7 @@ b-spline
 babbage-problem
 babylonian-spiral
 balanced-brackets
+balanced-ternary
 barnsley-fern
 base64-decode-data
 bell-numbers
@@ -161,7 +165,9 @@ chaos-game
 character-codes
 check-if-a-polygon-overlaps-with-a-rectangle
 check-if-two-polygons-overlap
+check-input-device-is-a-terminal
 check-machin-like-formulas
+check-output-device-is-a-terminal
 check-that-file-exists
 checkpoint-synchronization
 chernicks-carmichael-numbers
@@ -173,7 +179,7 @@ cholesky-decomposition
 chowla-numbers
 church-numerals
 circles-of-given-radius-through-two-points
-circular-primes
+circular-primes/01-sieve-and-repunits
 cistercian-numerals
 classes
 closest-pair-problem
@@ -186,7 +192,8 @@ colorful-numbers
 colour-bars-display
 colour-pinstripe-display
 combinations
-combinations-and-permutations
+combinations-and-permutations/01-exact-and-approx
+combinations-and-permutations/02-terse
 combinations-with-repetitions
 comma-quibbling
 command-line-arguments
@@ -210,10 +217,11 @@ consecutive-primes-with-ascending-or-descending-differences
 consistent-overhead-byte-stuffing
 constrained-genericity
 constrained-random-points-on-a-circle
-continued-fraction
 continued-fraction-arithmetic-construct-from-rational-number
 continued-fraction-arithmetic-g-matrix-ng-continued-fraction-n
 continued-fraction-arithmetic-g-matrix-ng-continued-fraction-n1-continued-fraction-n2
+continued-fraction/01-recurrence
+continued-fraction/02-terse
 convert-seconds-to-compound-duration
 convex-hull
 conways-game-of-life/01-a-blinker
@@ -235,7 +243,8 @@ cuban-primes
 cullen-and-woodall-numbers
 cumulative-standard-deviation
 currency
-currying
+currying/01-written-out
+currying/02-using-the-library
 curve-that-touches-three-points
 curzon-numbers
 cusip
@@ -245,7 +254,6 @@ cyclops-numbers
 cyclotomic-polynomial
 cyk-algorithm
 damm-algorithm
-dating-agency
 day-of-the-week
 de-bruijn-sequences
 de-polignac-numbers
@@ -303,7 +311,8 @@ dynamic-variable-names
 earliest-difference-between-prime-gaps
 eban-numbers
 eertree
-egyptian-division
+egyptian-division/01-doubling-table
+egyptian-division/02-terse
 eisenstein-primes
 ekg-sequence-convergence
 element-wise-operations
@@ -392,7 +401,9 @@ find-the-last-sunday-of-each-month
 find-the-missing-permutation
 finite-state-machine
 first-class-environments
+first-class-functions
 first-class-functions-use-numbers-analogously
+first-missing-positive
 first-perfect-square-in-base-n-with-n-unique-digits
 first-power-of-2-that-has-leading-decimal-digits-of-12
 five-weekends
@@ -439,6 +450,7 @@ generate-lower-case-ascii-alphabet
 generate-random-chess-position
 generator-exponential
 geocentric-model
+geohash
 giuga-numbers
 globally-replace-text-in-several-files
 goldbachs-comet/01-the-g-numbers
@@ -446,7 +458,6 @@ goldbachs-comet/02-the-comet
 golden-ratio-convergence
 gospers-hack
 gotchas
-graph-colouring
 gray-code
 grayscale-image
 greatest-common-divisor
@@ -473,6 +484,7 @@ hash-from-two-arrays
 hash-join
 haversine-formula
 held-karp-algorithm
+hello-world-graphical
 hello-world-line-printer
 hello-world-newbie/01-in-the-browser
 hello-world-newbie/02-in-a-codespace-or-from-the-template
@@ -527,7 +539,6 @@ isbn13-check-digit
 iterated-digits-squaring
 jacobi-symbol
 jacobsthal-numbers
-jaro-similarity
 jaro-winkler-distance
 jensens-device
 jewels-and-stones
@@ -568,7 +579,9 @@ largest-number-divisible-by-its-digits
 largest-proper-divisor-of-n
 last-friday-of-each-month
 last-letter-first-letter
+last-list-item
 latin-squares-in-reduced-form
+latin-squares-in-reduced-form-randomizing-using-jacobson-and-matthews-technique
 law-of-cosines-triples
 leap-year
 least-common-multiple
@@ -646,7 +659,7 @@ marching-squares/02-contours-of-a-field
 markov-chain-text-generator
 mastermind
 matrix-chain-multiplication
-matrix-multiplication
+matrix-digital-rain
 matrix-transposition
 maximum-triangle-path-sum
 mayan-calendar
@@ -726,6 +739,7 @@ non-decimal-radices-convert
 non-decimal-radices-output
 non-transitive-dice
 nonoblock
+nonogram-solver
 nth-root
 null-object
 number-names
@@ -766,7 +780,8 @@ padovan-n-step-number-sequences
 padovan-sequence
 pairs-with-common-factors
 palindrome-dates
-palindrome-detection
+palindrome-detection/01-exact-and-inexact
+palindrome-detection/02-terse
 palindromic-gapful-numbers
 palindromic-primes-in-base-16
 pan-base-non-primes
@@ -938,6 +953,7 @@ run-length-encoding
 runge-kutta-method
 ruth-aaron-numbers
 s-expressions
+safe-addition
 safe-primes-and-unsafe-primes
 sailors-coconuts-and-a-monkey-problem
 same-fringe/01-generators
@@ -947,8 +963,9 @@ schieber-vishkin-algorithm
 scope-function-names-and-labels
 scope-modifiers
 sealed-classes-and-methods
-search-a-list
 search-a-list-of-records
+search-a-list/01-first-and-last
+search-a-list/02-terse
 search-in-paragraph-s-text
 sedols
 selectively-replace-multiple-instances-of-a-character-within-a-string
@@ -970,8 +987,10 @@ set-right-adjacent-bits
 set-the-card-game
 seven-sided-dice-from-five-sided-dice
 sexy-primes
-sha-1
-sha-256
+sha-1/01-using-sha1-hash-data
+sha-1/02-sha1-written-out
+sha-256/01-using-sha256-hash-data
+sha-256/02-sha256-written-out
 shape-machine
 short-circuit-evaluation
 shortest-common-supersequence
@@ -1001,7 +1020,6 @@ smallest-enclosing-circle-problem
 smallest-number-k-such-that-k-2-m-is-composite-for-all-m-less-than-k
 smarandache-prime-digital-sequence
 smarandache-wellin-primes
-smith-numbers
 smith-waterman-algorithm
 snake
 snake-and-ladder
@@ -1011,6 +1029,7 @@ solve-a-hidato-puzzle
 solve-a-holy-knight-s-tour
 solve-a-hopido-puzzle
 solve-a-numbrix-puzzle
+solve-a-rubik-s-cube
 solve-the-no-connection-puzzle
 sorensen-dice-coefficient
 sort-a-list-of-object-identifiers
@@ -1073,11 +1092,14 @@ stirling-numbers-of-the-first-kind
 stirling-numbers-of-the-second-kind
 straddling-checkerboard
 strassen-s-algorithm
+stream-merge
 string-append
 string-comparison
 string-concatenation
 string-interpolation-included
+string-length/01-character-length
 string-length/02-byte-length
+string-length/03-grapheme-length
 string-matching
 string-prepend
 strip-a-set-of-characters-from-a-string
@@ -1089,6 +1111,7 @@ strong-and-weak-primes
 sub-unit-squares
 subleq
 substitution-cipher
+substring
 substring-top-and-tail
 subtractive-generator
 successive-prime-differences
@@ -1130,7 +1153,9 @@ terminal-control-coloured-text
 terminal-control-cursor-movement
 terminal-control-cursor-positioning
 terminal-control-display-an-extended-character
+terminal-control-hiding-the-cursor
 terminal-control-inverse-video
+terminal-control-preserve-screen
 terminal-control-ringing-the-terminal-bell
 ternary-logic
 tetris
@@ -1183,9 +1208,8 @@ uno-card-game
 unprimeable-numbers
 untouchable-numbers
 upc
-update-a-configuration-file
 upside-down-numbers
-url-decoding
+url-decoding/02-decoder-written-out
 url-encoding
 user-defined-pipe-and-redirection-operators
 user-input-text
@@ -1210,6 +1234,7 @@ visualize-a-tree
 vogel-s-approximation-method
 voronoi-diagram
 wagstaff-primes
+walk-a-directory-non-recursively
 walk-a-directory-recursively
 walsh-matrix
 war-card-game
