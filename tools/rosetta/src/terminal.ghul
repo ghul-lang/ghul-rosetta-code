@@ -19,8 +19,8 @@ namespace Rosetta is
     // the start of a line it has already written and writes over it.
     //
     // It understands the escape sequences Rosetta Code's terminal tasks use:
-    // carriage return and line feed; cursor positioning (ESC[r;cH, ESC[r;cf)
-    // and movement (ESC[nA/B/C/D); clearing the screen and the line
+    // carriage return and line feed; cursor positioning (ESC[r;cH, ESC[r;cf,
+    // ESC[cG) and movement (ESC[nA/B/C/D); clearing the screen and the line
     // (ESC[nJ, ESC[nK); the alternate screen (ESC[?1049h/l); and the
     // attributes of SGR - reset, bold, inverse, the eight colors and their
     // bright forms, foreground and background, and the defaults. Anything
@@ -163,6 +163,8 @@ namespace Rosetta is
                 _column = Ghul.Math.min(columns - 1, _column + first)
             when 'D' then
                 _column = Ghul.Math.max(0, _column - first)
+            when 'G' then
+                _column = Ghul.Math.min(columns - 1, first - 1)
             when 'J' then
                 let mode = if parameters[0] < 0 then 0 else parameters[0] fi
 
