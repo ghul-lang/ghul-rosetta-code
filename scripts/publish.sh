@@ -76,6 +76,26 @@ for argument in "$@" ; do
     esac
 done
 
+# A task drawn in a terminal is shown as a picture of the terminal, taken now
+# from the output its test asserts, before the markup that refers to the
+# picture is generated. The pictures are not committed.
+if [ -n "$SOLVED" ] ; then
+    CAPTURING=$(jq -r 'select(.state == "solved" and .slug != null) | .slug' ledger/*.json)
+else
+    CAPTURING="${SLUGS[*]}"
+fi
+
+CAPTURE=()
+for SLUG in $CAPTURING ; do
+    if [ -f "tasks/$SLUG/terminal-capture" ] ; then
+        CAPTURE+=("$SLUG")
+    fi
+done
+
+if [ ${#CAPTURE[@]} -gt 0 ] ; then
+    scripts/terminal-capture.sh "${CAPTURE[@]}"
+fi
+
 if [ -n "$SOLVED" ] ; then
     scripts/generate-wiki.sh --solved
 elif [ ${#SLUGS[@]} -gt 0 ] ; then
