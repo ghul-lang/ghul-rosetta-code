@@ -1,0 +1,276 @@
+namespace Rosetta is
+    use default
+
+    // One character cell of a terminal screen, with the attributes it is
+    // drawn in. Colors are indexes into the 16-color terminal palette, or -1
+    // for the default.
+    struct CELL(text: char public, foreground: int public, background: int public, bold: bool public, inverse: bool public) is
+        blank() -> CELL static => CELL(' ', -1, -1, false, false)
+    si
+
+    // A screen as it stood at one moment: a grid of cells, row by row.
+    class SCREEN(rows: int public, columns: int public, cells: LIST[CELL] public) is
+        at(row: int, column: int) -> CELL => cells[row * columns + column]
+    si
+
+    // A terminal that plays a program's output onto a grid of character
+    // cells, keeping a screen each time the program starts drawing a new
+    // frame: when it moves the cursor home, clears the screen, or returns to
+    // the start of a line it has already written and writes over it.
+    //
+    // It understands the escape sequences Rosetta Code's terminal tasks use:
+    // carriage return and line feed; cursor positioning (ESC[r;cH, ESC[r;cf)
+    // and movement (ESC[nA/B/C/D); clearing the screen and the line
+    // (ESC[nJ, ESC[nK); the alternate screen (ESC[?1049h/l); and the
+    // attributes of SGR - reset, bold, inverse, the eight colors and their
+    // bright forms, foreground and background, and the defaults. Anything
+    // else is read and ignored, so a sequence it does not know changes
+    // nothing rather than appearing as text.
+    class TERMINAL is
+        rows: int
+        columns: int
+
+        _cells: LIST[CELL]
+        _saved: LIST[CELL]?
+        _row: int
+        _column: int
+        _foreground: int
+        _background: int
+        _bold: bool
+        _inverse: bool
+
+        // Whether anything has been drawn since the last frame was kept.
+        _dirty: bool
+
+        frames: LIST[SCREEN]
+
+        init(rows: int, columns: int) is
+            self.rows = rows
+            self.columns = columns
+            _cells = _blank_cells()
+            _row = 0
+            _column = 0
+            _foreground = -1
+            _background = -1
+            frames = LIST[SCREEN]()
+        si
+
+        // Plays `text` onto the screen, keeping a frame at each point the
+        // program starts a new one, and the screen as it is at the end.
+        play(text: string) is
+            let at mut = 0
+
+            while at < text.length do
+                let c = text[at]
+
+                if c == '\u001B' /\ at + 1 < text.length /\ text[at + 1] == '[' then
+                    at = _escape(text, at + 2)
+                    continue
+                fi
+
+                if c == '\r' then
+                    // A return that will be written over starts a new frame.
+                    if at + 1 < text.length /\ text[at + 1] != '\n' then
+                        _keep()
+                    fi
+
+                    _column = 0
+                elif c == '\n' then
+                    _column = 0
+                    _line_feed()
+                elif c == '\u0008' then
+                    _column = Ghul.Math.max(0, _column - 1)
+                elif c == '\t' then
+                    _column = Ghul.Math.min(columns - 1, (_column / 8 + 1) * 8)
+                elif c >= ' ' then
+                    _put(c)
+                fi
+
+                at = at + 1
+            od
+
+            _keep()
+        si
+
+        // Reads one escape sequence from `at`, just after its ESC[, and
+        // returns where the text goes on.
+        _escape(text: string, start: int) -> int is
+            let at mut = start
+            let private_mode = at < text.length /\ text[at] == '?'
+
+            if private_mode then
+                at = at + 1
+            fi
+
+            let parameters = LIST[int]()
+            let current mut = -1
+
+            while at < text.length /\ (char.is_digit(text[at]) \/ text[at] == ';') do
+                if text[at] == ';' then
+                    parameters.add(current)
+                    current = -1
+                else
+                    current = (if current < 0 then 0 else current fi) * 10 + int(text[at]) - int('0')
+                fi
+
+                at = at + 1
+            od
+
+            parameters.add(current)
+
+            if at >= text.length then
+                return at
+            fi
+
+            let final = text[at]
+            let first = if parameters[0] < 0 then 1 else parameters[0] fi
+
+            if private_mode then
+                if parameters[0] == 1049 then
+                    if final == 'h' then
+                        _saved = _copy(_cells)
+                        _cells = _blank_cells()
+                    elif final == 'l' then
+                        if let saved = _saved then
+                            _keep()
+                            _cells = saved
+                            _saved = null
+                            _dirty = true
+                        fi
+                    fi
+                fi
+
+                return at + 1
+            fi
+
+            case final
+            when 'H', 'f' then
+                // Home starts a new frame.
+                if parameters.count == 1 /\ parameters[0] <= 1 then
+                    _keep()
+                fi
+
+                let row = if parameters.count > 0 /\ parameters[0] > 0 then parameters[0] else 1 fi
+                let column = if parameters.count > 1 /\ parameters[1] > 0 then parameters[1] else 1 fi
+
+                _row = Ghul.Math.min(rows - 1, row - 1)
+                _column = Ghul.Math.min(columns - 1, column - 1)
+            when 'A' then
+                _row = Ghul.Math.max(0, _row - first)
+            when 'B' then
+                _row = Ghul.Math.min(rows - 1, _row + first)
+            when 'C' then
+                _column = Ghul.Math.min(columns - 1, _column + first)
+            when 'D' then
+                _column = Ghul.Math.max(0, _column - first)
+            when 'J' then
+                let mode = if parameters[0] < 0 then 0 else parameters[0] fi
+
+                if mode == 2 \/ mode == 3 then
+                    _keep()
+                    _cells = _blank_cells()
+                else
+                    for i in _row * columns + _column.._cells.count do
+                        _cells[i] = CELL.blank()
+                    od
+                fi
+            when 'K' then
+                let mode = if parameters[0] < 0 then 0 else parameters[0] fi
+                let from = if mode == 0 then _column else 0 fi
+                let to = if mode == 1 then _column + 1 else columns fi
+
+                for column in from..to do
+                    _cells[_row * columns + column] = CELL.blank()
+                od
+            when 'm' then
+                _attributes(parameters)
+            else
+            esac
+
+            return at + 1
+        si
+
+        _attributes(parameters: LIST[int]) is
+            for p in parameters do
+                let code = if p < 0 then 0 else p fi
+
+                if code == 0 then
+                    _foreground = -1
+                    _background = -1
+                    _bold = false
+                    _inverse = false
+                elif code == 1 then
+                    _bold = true
+                elif code == 22 then
+                    _bold = false
+                elif code == 7 then
+                    _inverse = true
+                elif code == 27 then
+                    _inverse = false
+                elif code >= 30 /\ code <= 37 then
+                    _foreground = code - 30
+                elif code == 39 then
+                    _foreground = -1
+                elif code >= 40 /\ code <= 47 then
+                    _background = code - 40
+                elif code == 49 then
+                    _background = -1
+                elif code >= 90 /\ code <= 97 then
+                    _foreground = code - 90 + 8
+                elif code >= 100 /\ code <= 107 then
+                    _background = code - 100 + 8
+                fi
+            od
+        si
+
+        _put(c: char) is
+            if _column >= columns then
+                _column = 0
+                _line_feed()
+            fi
+
+            _cells[_row * columns + _column] = CELL(c, _foreground, _background, _bold, _inverse)
+            _column = _column + 1
+            _dirty = true
+        si
+
+        _line_feed() is
+            if _row < rows - 1 then
+                _row = _row + 1
+                return
+            fi
+
+            // The bottom line scrolls the screen up by one.
+            for i in 0..(rows - 1) * columns do
+                _cells[i] = _cells[i + columns]
+            od
+
+            for column in 0..columns do
+                _cells[(rows - 1) * columns + column] = CELL.blank()
+            od
+        si
+
+        // Keeps the screen as a frame, if anything has been drawn since the
+        // last one was kept.
+        _keep() is
+            if !_dirty then
+                return
+            fi
+
+            frames.add(SCREEN(rows, columns, _copy(_cells)))
+            _dirty = false
+        si
+
+        _blank_cells() -> LIST[CELL] is
+            let result = LIST[CELL](rows * columns)
+
+            for _ in 0..rows * columns do
+                result.add(CELL.blank())
+            od
+
+            return result
+        si
+
+        _copy(cells: LIST[CELL]) -> LIST[CELL] => LIST[CELL](cells)
+    si
+si
