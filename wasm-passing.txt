@@ -1,4 +1,4 @@
-# ghul.compiler 71.6.0, ghul-runtime v38.9.0
+# ghul.compiler 71.8.4, ghul-runtime v38.10.2
 100-doors
 100-prisoners
 15-puzzle-game
@@ -27,6 +27,7 @@ accumulator-factory/01-widening-from-integer-to-float
 achilles-numbers
 ackermann-function
 additive-primes
+address-of-a-variable
 adfgvx-cipher
 aho-corasick-algorithm
 aks-test-for-primes
@@ -219,6 +220,7 @@ compiler-lexical-analyzer
 compiler-simple-file-inclusion-pre-processor
 compiler-syntax-analyzer
 compiler-verifying-syntax
+compiler-virtual-machine-interpreter
 composite-numbers-k-with-no-single-digit-factors-whose-factors-are-all-substrings-of-k
 compound-data-type
 concurrent-computing
