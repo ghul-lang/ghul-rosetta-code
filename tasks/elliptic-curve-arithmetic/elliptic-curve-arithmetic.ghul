@@ -74,7 +74,8 @@ draw(p: Point, q: Point, r: Point, s: Point) is
         (sx, sy): Point.AT = s
     then
         let image = IMAGE(700, 520)
-        let least = -cbrt(b)
+        // Rounded, so the plot doesn't depend on the last bit of cbrt.
+        let least = -round(cbrt(b), 6)
         let most = 4.9
         let reach = sqrt(most * most * most + b)
 
