@@ -7,16 +7,16 @@ let trials = 1000
 let random = System.Random(8)
 
 class GRID is
-    filled: bool[]
-    reached: LIST[bool]
+    filled: bool[,]
+    reached: MATRIX_2[bool]
 
     init(p: double) is
         filled =
             (0..size * size)
                 |> map(_ => random.next_double() < p)
-                |> ARRAY()
+                |> ARRAY_2(size, size)
 
-        reached = repeat(false, size * size) |> LIST()
+        reached = repeat(false) |> MATRIX(size, size)
     si
 
     is_filled(column: int, row: int) -> bool =>
@@ -24,10 +24,9 @@ class GRID is
         column < size /\
         row >= 0 /\
         row < size /\
-        filled[row * size + column]
+        filled[row, column]
 
-    is_reached(column: int, row: int) -> bool =>
-        reached[row * size + column]
+    is_reached(column: int, row: int) -> bool => reached[row, column]
 
     percolates() -> bool is
         let pending = STACK[(int, int)]()
@@ -40,7 +39,7 @@ class GRID is
             let (column, row) = pending.pop()
 
             if is_filled(column, row) /\ !is_reached(column, row) then
-                reached[row * size + column] = true
+                reached[row, column] = true
 
                 pending.push((column + 1, row))
                 pending.push((column - 1, row))
