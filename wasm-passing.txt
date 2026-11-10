@@ -1,4 +1,4 @@
-# ghul.compiler 71.0.6, ghul-runtime v38.3.0
+# ghul.compiler 71.6.0, ghul-runtime v38.9.0
 100-doors
 100-prisoners
 15-puzzle-game
@@ -60,6 +60,7 @@ archimedean-spiral
 argument-destructuring
 arithmetic-complex
 arithmetic-derivative
+arithmetic-evaluation/01-parsing-and-evaluating
 arithmetic-geometric-mean
 arithmetic-geometric-mean-calculate-pi
 arithmetic-integer
@@ -147,6 +148,7 @@ burrows-wheeler-transform
 caesar-cipher
 calendar
 calkin-wilf-sequence
+call-a-function
 call-an-object-method
 camel-case-and-snake-case
 canny-edge-detector
@@ -183,9 +185,11 @@ chinese-remainder-theorem
 chinese-zodiac
 cholesky-decomposition
 chowla-numbers
+christofides-algorithm
 church-numerals
 circles-of-given-radius-through-two-points
 circular-primes/01-sieve-and-repunits
+circular-primes/02-terse
 cistercian-numerals
 classes
 closest-pair-problem
@@ -237,6 +241,7 @@ conways-game-of-life/02-a-glider-gun
 copy-a-string
 copy-stdin-to-stdout
 count-in-factors
+count-in-octal
 count-occurrences-of-a-substring
 count-the-coins
 countdown
@@ -263,6 +268,7 @@ cyclotomic-polynomial
 cyk-algorithm
 damm-algorithm
 date-format
+dating-agency
 day-of-the-week
 de-bruijn-sequences
 de-polignac-numbers
@@ -270,6 +276,7 @@ deal-cards-for-freecell
 death-star
 deceptive-numbers
 deconvolution-1d
+deconvolution-2d
 decorate-sort-undecorate-idiom/01-with-named-lists
 decorate-sort-undecorate-idiom/02-schwartzian-transform
 deepcopy
@@ -288,12 +295,14 @@ determine-if-a-string-is-numeric
 determine-if-a-string-is-squeezable
 determine-if-two-triangles-overlap
 determine-sentence-type
+dice-game-probabilities
 digital-root
 digital-root-multiplicative-digital-root
 dijkstras-algorithm/01-the-shortest-paths
 dijkstras-algorithm/02-the-graph-drawn
 dinesmans-multiple-dwelling-problem
 dining-philosophers
+disarium-numbers
 discordian-date
 display-a-linear-combination
 display-an-outline-as-a-nested-table
@@ -330,6 +339,7 @@ elementary-cellular-automaton-infinite-length
 elementary-cellular-automaton-random-number-generator
 elementary-cellular-automaton/01-three-rules
 elementary-cellular-automaton/02-a-space-time-diagram
+elliptic-curve-arithmetic
 elliptic-curve-digital-signature-algorithm
 emirp-primes
 empty-directory
@@ -338,6 +348,7 @@ empty-string
 endless-maze
 enforced-immutability
 entropy
+entropy-narcissist
 enumerations
 environment-variables
 equal-prime-and-composite-sums
@@ -351,6 +362,7 @@ ethiopian-multiplication
 euclid-mullin-sequence
 euclidean-rhythm
 euler-method
+euler-s-constant-0-5772
 euler-s-sum-of-powers-conjecture
 eulers-identity
 evaluate-binomial-coefficients
@@ -359,6 +371,7 @@ events
 evolutionary-algorithm
 exceptions
 executable-library/01-the-library
+executable-library/02-a-program-using-it
 execute-a-markov-algorithm
 execute-brain/01-hello-world
 execute-brain/02-running-what-you-type
@@ -398,6 +411,7 @@ fibonacci-word
 fibonacci-word-fractal
 file-extension-is-in-extensions-list
 file-input-output
+file-size
 file-size-distribution
 filter
 find-chess960-starting-position-identifier
@@ -461,6 +475,7 @@ generate-chess960-starting-position
 generate-lower-case-ascii-alphabet
 generate-random-chess-position
 generator-exponential
+generic-swap
 geocentric-model
 geohash
 giuga-numbers
@@ -470,6 +485,7 @@ goldbachs-comet/02-the-comet
 golden-ratio-convergence
 gospers-hack
 gotchas
+graph-colouring
 gray-code
 grayscale-image
 greatest-common-divisor
@@ -550,12 +566,15 @@ input-loop
 integer-comparison
 integer-overflow
 intersecting-number-wheels
+inventory-sequence
 inverted-index
 isbn13-check-digit
+isograms-and-heterograms
 isqrt-integer-square-root-of-x
 iterated-digits-squaring
 jacobi-symbol
 jacobsthal-numbers
+jaro-similarity
 jaro-winkler-distance
 jensens-device
 jewels-and-stones
@@ -622,6 +641,7 @@ logistic-curve-fitting-in-epidemiology
 long-literals-with-continuations
 long-multiplication
 long-primes
+long-year
 longest-common-subsequence
 longest-common-substring
 longest-increasing-subsequence
@@ -744,6 +764,7 @@ n-smooth-numbers
 n-th
 named-parameters
 naming-conventions
+narcissist
 narcissistic-decimal-number
 native-shebang
 nautical-bell
@@ -756,6 +777,7 @@ next-highest-int-from-digits
 nim-game
 non-continuous-subsequences
 non-decimal-radices-convert
+non-decimal-radices-input
 non-decimal-radices-output
 non-transitive-dice
 nonoblock
@@ -782,6 +804,7 @@ old-lady-swallowed-a-fly
 old-russian-measure-of-length
 one-dimensional-cellular-automata
 one-of-n-lines-in-a-file
+one-time-pad
 one-two-primes
 openwebnet-password
 operator-precedence
@@ -795,7 +818,9 @@ ormiston-pairs
 ormiston-triples
 overloaded-operators
 own-digits-power-sum
+p-adic-numbers-basic
 p-adic-square-roots
+p-value-correction
 padovan-n-step-number-sequences
 padovan-sequence
 pairs-with-common-factors
@@ -823,6 +848,7 @@ pascal-matrix-generation
 pascal-s-triangle-puzzle
 pascals-triangle
 passphrase-generator
+password-generator
 pathological-floating-point-problems
 peaceful-chess-queen-armies
 peano-curve
@@ -855,6 +881,7 @@ permutations-derangements
 permutations-rank-of-a-permutation
 pernicious-numbers
 phrase-reversals
+pi-to-1-million-digits
 pick-random-element
 pierpont-primes
 pig-the-dice-game
@@ -871,9 +898,11 @@ poker-hand-analyser
 polymorphic-copy
 polymorphism
 polynomial-long-division
+polynomial-regression
 polyspiral
 population-count
 power-set
+pragmatic-directives
 price-fraction
 primality-by-trial-division
 primality-by-wilson-s-theorem
@@ -918,6 +947,8 @@ ramanujans-constant
 ramer-douglas-peucker-line-simplification
 ramsey-s-theorem
 random-latin-squares
+random-number-generator-device
+random-number-generator-included
 random-numbers
 random-sentence-from-book
 range-consolidation
@@ -1012,9 +1043,11 @@ seven-sided-dice-from-five-sided-dice
 sexy-primes
 sha-1/01-using-sha1-hash-data
 sha-1/02-sha1-written-out
+sha-256-merkle-tree
 sha-256/01-using-sha256-hash-data
 sha-256/02-sha256-written-out
 shape-machine
+shoelace-formula-for-polygonal-area
 short-circuit-evaluation
 shortest-common-supersequence
 show-ascii-table
@@ -1043,6 +1076,7 @@ smallest-enclosing-circle-problem
 smallest-number-k-such-that-k-2-m-is-composite-for-all-m-less-than-k
 smarandache-prime-digital-sequence
 smarandache-wellin-primes
+smith-numbers
 smith-waterman-algorithm
 snake
 snake-and-ladder
@@ -1062,6 +1096,7 @@ sort-an-outline-at-every-level
 sort-disjoint-sublist
 sort-numbers-lexicographically
 sort-stability
+sort-three-variables
 sort-using-a-custom-comparator
 sorting-algorithms-bead-sort
 sorting-algorithms-bogosort
@@ -1165,6 +1200,7 @@ symmetric-difference
 sync-subtitles
 synchronous-concurrency
 syntax-highlighting-using-mediawiki-formatting
+system-time
 take-notes-on-the-command-line
 tamagotchi-emulator
 tarjan
@@ -1177,11 +1213,13 @@ terminal-control-clear-the-screen
 terminal-control-coloured-text
 terminal-control-cursor-movement
 terminal-control-cursor-positioning
+terminal-control-dimensions
 terminal-control-display-an-extended-character
 terminal-control-hiding-the-cursor
 terminal-control-inverse-video
 terminal-control-preserve-screen
 terminal-control-ringing-the-terminal-bell
+terminal-control-unicode-output
 ternary-logic
 tetris
 text-processing-1
@@ -1234,7 +1272,9 @@ uno-card-game
 unprimeable-numbers
 untouchable-numbers
 upc
+update-a-configuration-file
 upside-down-numbers
+url-decoding/01-using-unescape-data-string
 url-decoding/02-decoder-written-out
 url-encoding
 user-defined-pipe-and-redirection-operators
@@ -1242,6 +1282,7 @@ user-input-text
 utf-8-encode-and-decode
 vampire-number
 van-der-corput-sequence
+van-eck-sequence
 variable-declaration-reset
 variable-length-quantity
 variables
@@ -1255,6 +1296,7 @@ verify-distribution-uniformity-naive
 vibrating-rectangles
 vigenere-cipher
 vigenere-cipher-cryptanalysis
+visitor-pattern/01-the-visitor-pattern
 visitor-pattern/02-a-union-and-a-case
 visualize-a-tree
 vogel-s-approximation-method
