@@ -7,6 +7,9 @@ settle(pile: MATRIX_2[int]) is
     let (rows, columns) = pile.lengths
     let unstable mut = true
 
+    inside(y: int, x: int) -> bool =>
+        y >= 0 /\ y < rows /\ x >= 0 /\ x < columns
+
     while unstable do
         unstable = false
 
@@ -20,7 +23,7 @@ settle(pile: MATRIX_2[int]) is
                     for (dy, dx) in around do
                         let (ny, nx) = (y + dy, x + dx)
 
-                        if ny >= 0 /\ ny < rows /\ nx >= 0 /\ nx < columns then
+                        if inside(ny, nx) then
                             pile[ny, nx] = pile[ny, nx] + spilled
                         fi
                     od
