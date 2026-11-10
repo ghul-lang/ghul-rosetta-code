@@ -1,71 +1,51 @@
 use default
 use Raster.IMAGE
 
-class SANDPILE is
-    _cells: LIST[int]
+let around = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-    size: int
+settle(pile: MATRIX_2[int]) is
+    let (rows, columns) = pile.lengths
+    let unstable mut = true
 
-    init(size: int) is
-        self.size = size
-        _cells = repeat(0, size * size) |> LIST()
-    si
+    while unstable do
+        unstable = false
 
-    at(x: int, y: int) -> int => _cells[y * size + x]
+        for y in 0..rows do
+            for x in 0..columns do
+                if pile[y, x] >= 4 then
+                    let spilled = pile[y, x] / 4
 
-    add(x: int, y: int, grains: int) is
-        _cells[y * size + x] = at(x, y) + grains
-    si
+                    pile[y, x] = pile[y, x] - 4 * spilled
 
-    spill(x: int, y: int, grains: int) is
-        if x >= 0 /\ x < size /\ y >= 0 /\ y < size then
-            add(x, y, grains)
-        fi
-    si
+                    for (dy, dx) in around do
+                        let (ny, nx) = (y + dy, x + dx)
 
-    settle() is
-        let unstable mut = true
+                        if ny >= 0 /\ ny < rows /\ nx >= 0 /\ nx < columns then
+                            pile[ny, nx] = pile[ny, nx] + spilled
+                        fi
+                    od
 
-        while unstable do
-            unstable = false
-
-            for y in 0..size do
-                for x in 0..size do
-                    if at(x, y) >= 4 then
-                        let spilled = at(x, y) / 4
-
-                        add(x, y, -4 * spilled)
-                        spill(x - 1, y, spilled)
-                        spill(x + 1, y, spilled)
-                        spill(x, y - 1, spilled)
-                        spill(x, y + 1, spilled)
-
-                        unstable = true
-                    fi
-                od
+                    unstable = true
+                fi
             od
         od
-    si
+    od
 si
 
-settled(size: int, grains: int) -> SANDPILE => (
-    let pile = SANDPILE(size)
+settled(size: int, grains: int) -> int[,] => (
+    let pile = repeat(0) |> MATRIX(size, size)
 
-    pile.add(size / 2, size / 2, grains)
-    pile.settle()
+    pile[size / 2, size / 2] = grains
+    settle(pile)
 
     pile
 )
 
 show(grains: int) is
-    let pile = settled(5, grains)
-
     write_line("{grains} grains:")
 
-    for y in 0..pile.size do
-        write_line(
-            "  {0..pile.size |> map(x => "{pile.at(x, y)}") |> join(" ")}"
-        )
+    for row in settled(5, grains) do
+        write_line("  {row |> join(" ")}")
     od
 si
 
@@ -81,12 +61,13 @@ show(6)
 show(16)
 
 let big = settled(201, 20000)
+let (height, width) = big.lengths
 
-let image = IMAGE(big.size, big.size)
+let image = IMAGE(width, height)
 
-for y in 0..big.size do
-    for x in 0..big.size do
-        let shade = shades[big.at(x, y)]
+for y in 0..height do
+    for x in 0..width do
+        let shade = shades[big[y, x]]
 
         image.set_pixel(x, y, shade.red, shade.green, shade.blue)
     od
