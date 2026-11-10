@@ -1,25 +1,28 @@
 use default
 
-use Matrix = double[][]
+use Matrix = double[,]
 
 *(a: Matrix, b: Matrix) -> Matrix =>
-    0..a.count
-        |> map(i =>
-            0..b[0].count
-                |> map(j => 0..b.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> list()
-        )
-        |> list()
+    let
+        (rows, inner) = a.lengths,
+        (_, columns) = b.lengths
+    in
+        0..rows
+            |> flat_map(i =>
+                0..columns
+                    |> map(j => 0..inner |> sum_by(k => a[i, k] * b[k, j]))
+            )
+            |> ARRAY_2(rows, columns)
 
-square(n: int, cell: (int, int) -> double) -> LIST[double][] =>
-    0..n |> map(i => 0..n |> map(cell(i, *)) |> LIST()) |> LIST()
+square(n: int, cell: (int, int) -> double) -> MATRIX_2[double] =>
+    0..n |> flat_map(i => 0..n |> map(cell(i, *))) |> MATRIX(n, n)
 
 pivot(a: Matrix) -> Matrix => (
     let n = a.count
     let order = LIST(0..n)
 
     for column in 0..n do
-        let best = column..n |> max_by(row => double.abs(a[row][column]))!
+        let best = column..n |> max_by(row => double.abs(a[row, column]))!
 
         (order[column], order[best]) = (order[best], order[column])
     od
@@ -40,15 +43,15 @@ decompose(a: Matrix) -> (
 
     for j in 0..n do
         for i in 0::j do
-            let known = 0..i |> sum_by(k => upper[k][j] * lower[i][k])
+            let known = 0..i |> sum_by(k => upper[k, j] * lower[i, k])
 
-            upper[i][j] = pa[i][j] - known
+            upper[i, j] = pa[i, j] - known
         od
 
         for i in j + 1..n do
-            let known = 0..j |> sum_by(k => upper[k][j] * lower[i][k])
+            let known = 0..j |> sum_by(k => upper[k, j] * lower[i, k])
 
-            lower[i][j] = (pa[i][j] - known) / upper[j][j]
+            lower[i, j] = (pa[i, j] - known) / upper[j, j]
         od
     od
 
@@ -65,7 +68,7 @@ show(name: string, m: Matrix, format: string) is
     od
 si
 
-let examples = [
+let examples: Matrix[] = [
     [[1.0, 3.0, 5.0], [2.0, 4.0, 7.0], [1.0, 1.0, 0.0]],
     [
         [11.0, 9.0, 24.0, 2.0],

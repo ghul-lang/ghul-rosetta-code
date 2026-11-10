@@ -26,7 +26,7 @@ let columns =
 
 let black =
     (0..rows)
-        |> map(row =>
+        |> flat_map(row =>
             (0..columns)
                 |> map(column =>
                     let
@@ -42,21 +42,20 @@ let black =
                         column <= line.length /\
                         line[column - 1] == '#'
                 )
-                |> LIST()
         )
-        |> ARRAY()
+        |> MATRIX(rows, columns)
 
-let original = black |> map(row => row |> ARRAY()) |> ARRAY()
+let original = black.elements |> ARRAY_2(rows, columns)
 
 let around = [
     (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)
 ]
 
 neighbours(row: int, column: int) -> bool[] =>
-    around |> map((dr, dc) => black[row + dr][column + dc]) |> ARRAY()
+    around |> map((dr, dc) => black[row + dr, column + dc]) |> ARRAY()
 
 thins(row: int, column: int, first: bool) -> bool is
-    if !black[row][column] then
+    if !black[row, column] then
         return false
     fi
 
@@ -87,7 +86,7 @@ pass(first: bool) -> int is
     od
 
     for (row, column) in doomed do
-        black[row][column] = false
+        black[row, column] = false
     od
 
     doomed.count
@@ -123,9 +122,9 @@ for row in 0..rows do
         let x = double(column * cell)
         let y = double(row * cell)
 
-        if black[row][column] then
+        if black[row, column] then
             image.color(20ub, 20ub, 20ub)
-        elif original[row][column] then
+        elif original[row, column] then
             image.color(200ub, 210ub, 235ub)
         else
             image.color(255ub, 255ub, 255ub)
