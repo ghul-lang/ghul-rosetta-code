@@ -50,7 +50,7 @@ inference(command: uint, bits: int, program: Stage[]) -> ulong =>
 write_line("{inference(42u, 64, [(salt = 0u, max = 2u)])}")
 
 let square_root_program =
-    System.Text.RegularExpressions.Regex.matches(
+    Text.REGEX.matches(
         IO.File.read_all_text("square-root-program.txt"),
         "[0-9]+"
     )

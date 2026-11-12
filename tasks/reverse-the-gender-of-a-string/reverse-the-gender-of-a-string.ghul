@@ -1,5 +1,5 @@
 use default
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
 let swaps = MAP(
     [
@@ -16,7 +16,7 @@ let swaps = MAP(
 )
 
 reverse_gender(text) is
-    let word_pattern = Regex("[A-Za-z]+")
+    let word_pattern = REGEX("[A-Za-z]+")
 
     word_pattern.replace(text, m => (
         let word = m.value

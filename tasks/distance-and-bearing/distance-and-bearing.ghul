@@ -2,9 +2,9 @@ use default
 use double.degrees_to_radians
 use double.radians_to_degrees
 
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
-let csv_field = Regex("(?<=^|,)(\"[^\"]*\"|[^,]*)")
+let csv_field = REGEX("(?<=^|,)(\"[^\"]*\"|[^,]*)")
 let earth_radius = 6371.0 / 1.852
 
 fields(line: string) -> string[] =>

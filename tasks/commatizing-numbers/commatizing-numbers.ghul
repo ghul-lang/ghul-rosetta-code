@@ -1,8 +1,8 @@
 use default
 
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
-let number = Regex("(\\.[0-9]+|[1-9][0-9]*(\\.[0-9]+)?)")
+let number = REGEX("(\\.[0-9]+|[1-9][0-9]*(\\.[0-9]+)?)")
 
 groups(digits: string, period: int) -> string{} =>
     digits |> chunk(period) |> map(part => part |> join(""))

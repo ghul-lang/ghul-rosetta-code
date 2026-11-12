@@ -191,12 +191,14 @@ tasks/combinations-and-permutations
 tasks/combinations-with-repetitions
 tasks/command-line-arguments
 tasks/comma-quibbling
+tasks/commatizing-numbers
 tasks/comments
 tasks/compare-a-list-of-strings
 tasks/compare-length-of-two-strings
 tasks/compiler-ast-interpreter
 tasks/compiler-code-generator
 tasks/compiler-lexical-analyzer
+tasks/compiler-preprocessor
 tasks/compiler-simple-file-inclusion-pre-processor
 tasks/compiler-syntax-analyzer
 tasks/compiler-verifying-syntax
@@ -467,6 +469,7 @@ tasks/harriss-spiral
 tasks/harshad-or-niven-series
 tasks/hash-from-two-arrays
 tasks/hash-join
+tasks/hashtron-inference
 tasks/haversine-formula
 tasks/held-karp-algorithm
 tasks/hello-world-line-printer
@@ -498,6 +501,7 @@ tasks/huffman-coding/02-the-tree-drawn
 tasks/humble-numbers
 tasks/hunt-the-wumpus
 tasks/iban
+tasks/i-before-e-except-after-c
 tasks/iccanobif-primes
 tasks/identity-matrix
 tasks/idiomatically-determine-all-the-lowercase-and-uppercase-letters
@@ -585,6 +589,7 @@ tasks/logistic-curve-fitting-in-epidemiology
 tasks/longest-common-subsequence
 tasks/longest-common-substring
 tasks/longest-increasing-subsequence
+tasks/longest-string-challenge
 tasks/long-literals-with-continuations
 tasks/long-multiplication
 tasks/long-primes
@@ -613,6 +618,7 @@ tasks/luhn-test-of-credit-card-numbers
 tasks/lychrel-numbers
 tasks/lyndon-word
 tasks/lzw-compression
+tasks/mad-libs
 tasks/magic-8-ball
 tasks/magic-constant
 tasks/magic-numbers
@@ -883,6 +889,7 @@ tasks/recamans-sequence/02-the-arc-diagram
 tasks/recursive-descent-parser-generator/01-the-generator
 tasks/recursive-descent-parser-generator/02-the-generated-parser
 tasks/reduced-row-echelon-form
+tasks/regular-expressions
 tasks/remove-duplicate-elements
 tasks/remove-lines-from-a-file
 tasks/rename-a-file
@@ -894,6 +901,7 @@ tasks/repunit-primes
 tasks/resistor-mesh
 tasks/return-multiple-values
 tasks/reverse-a-string
+tasks/reverse-the-gender-of-a-string
 tasks/reverse-words-in-a-string
 tasks/rhonda-numbers
 tasks/riemann-surface
@@ -906,6 +914,8 @@ tasks/roman-numerals-encode
 tasks/roots-of-a-function
 tasks/roots-of-a-quadratic-function
 tasks/roots-of-unity
+tasks/rosetta-code-find-bare-lang-tags
+tasks/rosetta-code-fix-code-tags
 tasks/rot-13
 tasks/rotating-rubik-s-cube
 tasks/round-robin-tournament-schedule
@@ -1161,9 +1171,11 @@ tasks/update-a-configuration-file
 tasks/upside-down-numbers
 tasks/url-decoding
 tasks/url-encoding
+tasks/url-parser
 tasks/user-defined-pipe-and-redirection-operators
 tasks/user-input-text
 tasks/utf-8-encode-and-decode
+tasks/validate-international-securities-identification-number
 tasks/vampire-number
 tasks/van-der-corput-sequence
 tasks/van-eck-sequence
@@ -1199,6 +1211,7 @@ tasks/wieferich-primes
 tasks/wilson-primes-of-order-n
 tasks/wireworld
 tasks/wolstenholme-numbers
+tasks/word-frequency
 tasks/wordiff
 tasks/wordle-comparison
 tasks/words-containing-the-substring

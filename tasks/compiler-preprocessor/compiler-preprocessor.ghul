@@ -1,16 +1,16 @@
 use default
-use System.Text.RegularExpressions.Regex
-use System.Text.RegularExpressions.Match
+use Text.REGEX
+use Text.MATCH
 
 class MACRO(parameters: string[], body: string)
 
 let name = "[A-Za-z_][A-Za-z_0-9]*"
 
-let definition = Regex("^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$")
+let definition = REGEX("^#define\\s+({name})\\s*(\\(([^)]*)\\))?\\s*(.*)$")
 
-let inclusion = Regex("^#include\\s+\"([^\"]*)\"\\s*$")
-let usage = Regex("#({name})\\s*(\\(([^)#]*)\\))?\\s*#")
-let identifier = Regex(name)
+let inclusion = REGEX("^#include\\s+\"([^\"]*)\"\\s*$")
+let usage = REGEX("#({name})\\s*(\\(([^)#]*)\\))?\\s*#")
+let identifier = REGEX(name)
 
 split(list: string) -> string[] =>
     list.split([','])
@@ -44,7 +44,7 @@ class PREPROCESSOR(debug: bool) is
             return expand(defines[m.value].body, used)
         si)
 
-    call(m: Match) -> string is
+    call(m: MATCH) -> string is
         let used = LIST()
         let called = m.groups[1].value
 

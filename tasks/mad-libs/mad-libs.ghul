@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
 write_line("Enter a story with <blanks>, ending with an empty line:")
 
@@ -12,7 +12,7 @@ od
 
 let text mut = story |> join("\n")
 
-let blanks = Regex.matches(text, "<[^>]+>") |> map(m => m.value)
+let blanks = REGEX.matches(text, "<[^>]+>") |> map(m => m.value)
 
 for blank in blanks do
     if text.contains(blank) then
