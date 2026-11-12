@@ -1,6 +1,6 @@
 use default
 
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
 let tag = "syntaxhighlight"
 
@@ -14,7 +14,7 @@ let fixed =
     rules
         |> reduce(IO.File.read_all_text("input.txt"),
             (text, (pattern, replacement)) =>
-            Regex.replace(text, pattern, replacement)
+            REGEX.replace(text, pattern, replacement)
         )
 
 write_line(fixed)

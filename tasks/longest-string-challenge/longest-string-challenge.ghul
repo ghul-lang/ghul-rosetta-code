@@ -1,6 +1,6 @@
 use default
 
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 use IO.Std.read_line
 
 // Every character becomes an x, so one line is at least as long as
@@ -8,8 +8,8 @@ use IO.Std.read_line
 // length is ever held as a number or compared.
 relation(line, longest) =>
     let
-        line_marks = Regex.replace(line, ".", "x"),
-        longest_marks = Regex.replace(longest, ".", "x")
+        line_marks = REGEX.replace(line, ".", "x"),
+        longest_marks = REGEX.replace(longest, ".", "x")
     in
         if !line_marks.starts_with(longest_marks) then
             "shorter"

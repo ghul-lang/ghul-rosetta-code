@@ -1,7 +1,7 @@
 use default
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
-let pattern = Regex(
+let pattern = REGEX(
     "^(?<scheme>[^:/?#]+):"
     "(?://(?:(?<username>[^:@/]*)(?::(?<password>[^@/]*))?@)?"
     "(?<domain>\\[[^\\]]*\\]|[^:/?#]*)"

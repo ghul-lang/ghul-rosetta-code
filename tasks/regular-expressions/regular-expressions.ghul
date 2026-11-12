@@ -1,13 +1,13 @@
 use default
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
 let text = "The quick brown fox jumps over the lazy dog"
 
-let matches_digits = Regex("\\d+").is_match(text)
+let matches_digits = REGEX("\\d+").is_match(text)
 write_line("contains digits: {matches_digits}")
 
-let matches_word = Regex("\\bfox\\b").is_match(text)
+let matches_word = REGEX("\\bfox\\b").is_match(text)
 write_line("contains the word fox: {matches_word}")
 
-let replaced = Regex("\\b(quick|lazy)\\b").replace(text, "slow")
+let replaced = REGEX("\\b(quick|lazy)\\b").replace(text, "slow")
 write_line("with quick/lazy replaced: {replaced}")

@@ -1,5 +1,5 @@
 use default
-use System.Text.RegularExpressions.Regex
+use Text.REGEX
 
 digit_value(i, d) =>
     let doubled = if i % 2 == 1 then d * 2 else d fi in
@@ -15,7 +15,7 @@ luhn(digits) =>
     in
     total % 10 == 0
 
-let format = Regex("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
+let format = REGEX("^[A-Z]{{2}}[A-Z0-9]{{9}}[0-9]$")
 
 base_36(c) =>
     if char.is_digit(c) then int(c) - int('0')
