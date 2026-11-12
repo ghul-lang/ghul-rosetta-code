@@ -121,8 +121,7 @@ expand(source: string) -> string is
                 cursor = cursor + shared_prefix(lowered, word.spelling)
             else
                 let place = metric_letters.index_of(rest[0].to_upper())
-                let binary =
-                    rest.length > 1 /\ rest[1].to_lower() == 'i'
+                let binary = rest.length > 1 /\ rest[1].to_lower() == 'i'
 
                 if binary then
                     value = value * bigint.pow(2n, (place + 1) * 10)

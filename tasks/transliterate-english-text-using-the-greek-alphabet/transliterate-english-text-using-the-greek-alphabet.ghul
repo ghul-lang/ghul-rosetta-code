@@ -38,8 +38,7 @@ letters(text: string, at: int) -> char{} is
 si
 
 final_form(greek: char[], at: int) -> char =>
-    let ends_word = at == greek.count - 1 \/ !greek[at + 1].is_letter
-    in
+    let ends_word = at == greek.count - 1 \/ !greek[at + 1].is_letter in
     if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
 
 transliterate(text: string) -> string =>
