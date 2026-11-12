@@ -33,7 +33,7 @@ words_of(text: string) -> string[] is
         fi
 
     for letter in text do
-        if char.is_letter(letter) \/
+        if letter.is_letter \/
             apostrophes |> any(* == letter)
         then
             current.append(letter)
@@ -106,7 +106,7 @@ sentence() -> string is
 
     let body = chosen |> take(chosen.count - 1) |> join(" ")
 
-    return "{char.to_upper(body[0])}{body.substring(1)}{ending}"
+    return "{body[0].to_upper()}{body.substring(1)}{ending}"
 si
 
 for _ in 0..5 do

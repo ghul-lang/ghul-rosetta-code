@@ -67,10 +67,10 @@ while !same(board, target) do
 
     let move = typed.trim()
 
-    if move.length == 1 /\ char.is_digit(move[0]) then
+    if move.length == 1 /\ move[0].is_digit then
         flip_row(board, int(move[0]) - int('1'))
         moves = moves + 1
-    elif move.length == 1 /\ char.is_letter(move[0]) then
+    elif move.length == 1 /\ move[0].is_letter then
         flip_column(board, int(move.to_lower()[0]) - int('a'))
         moves = moves + 1
     else

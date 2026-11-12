@@ -6,10 +6,10 @@ value_of(c) =>
     when '@' then 37
     when '#' then 38
     else
-        if char.is_digit(c) then
+        if c.is_digit then
             int(c) - int('0')
         else
-            int(char.to_upper(c)) - int('A') + 10
+            int(c.to_upper()) - int('A') + 10
         fi
     esac
 

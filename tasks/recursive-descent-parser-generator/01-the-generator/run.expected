@@ -9,15 +9,15 @@ tokenize(text: string) -> LIST[string] is
     let i mut = 0
 
     while i < text.length do
-        if char.is_letter(text[i]) then
+        if text[i].is_letter then
             let start = i
 
-            while i < text.length /\ char.is_letter_or_digit(text[i]) do
+            while i < text.length /\ text[i].is_letter_or_digit do
                 i = i + 1
             od
 
             result.add(text.substring(start, i - start))
-        elif char.is_white_space(text[i]) then
+        elif text[i].is_white_space then
             i = i + 1
         else
             result.add("{text[i]}")
@@ -52,7 +52,7 @@ si
 name() -> string is
     let token = peek()
 
-    if token.length == 0 \/ !char.is_letter(token[0]) then
+    if token.length == 0 \/ !token[0].is_letter then
         throw System.Exception("expected a name, found {token}")
     fi
 

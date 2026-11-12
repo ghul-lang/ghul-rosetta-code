@@ -27,7 +27,7 @@ si
 write_line("token  action        stack")
 
 for token in expression.split([' ']) do
-    if char.is_digit(token[0]) then
+    if token[0].is_digit then
         stack.add(double.parse(token))
 
         show(token, "push")

@@ -7,15 +7,15 @@ use System.Globalization.UnicodeCategory
 
 starts_identifier(c) =>
     if int(c) <= 0x7E then
-        char.is_ascii_letter(c) \/ c == '_'
+        c.is_ascii_letter \/ c == '_'
     else
-        char.is_letter(c) \/
+        c.is_letter \/
         char.get_unicode_category(c) == UnicodeCategory.LETTER_NUMBER
     fi
 
 continues_identifier(c) =>
     starts_identifier(c) \/
-    char.is_ascii_digit(c) \/
+    c.is_ascii_digit \/
     (
         int(c) > 0x7E /\
         let category = char.get_unicode_category(c) in

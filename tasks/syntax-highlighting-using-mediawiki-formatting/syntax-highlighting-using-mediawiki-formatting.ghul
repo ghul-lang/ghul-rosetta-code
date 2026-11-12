@@ -45,11 +45,11 @@ highlight(line: string) -> string is
 
             out.append(escaped(line.substring(i, stop - i)))
             i = stop
-        elif char.is_letter(c) \/ c == '_' then
+        elif c.is_letter \/ c == '_' then
             let start = i
 
             let word_char = (k: int) =>
-                char.is_letter_or_digit(line[k]) \/ line[k] == '_'
+                line[k].is_letter_or_digit \/ line[k] == '_'
 
             while i < line.length /\ word_char(i) do
                 i = i + 1

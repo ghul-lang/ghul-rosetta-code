@@ -17,8 +17,8 @@ next_generation(cells) =>
         )
         |> join("")
 
-stream("_###_##_#_#_#_#__#__", generation =>
-    generation || next_generation(generation)
+iterate("_###_##_#_#_#_#__#__", generation =>
+    next_generation(generation)
 )
     |> take(10)
     |> each(generation => write_line(generation))

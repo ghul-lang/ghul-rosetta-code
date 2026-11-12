@@ -32,7 +32,7 @@ let cells = [
     (row, column)
     for row in 0..country.count
     for column in 0..country[row].length
-    if char.is_digit(country[row][column])
+    if (country[row][column]).is_digit
 ]
 
 let number = cells |> index() |> map((i, cell) => (cell, i)) |> MAP()

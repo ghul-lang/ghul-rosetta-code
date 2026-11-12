@@ -20,7 +20,7 @@ class FORMULA(text: string) is
     count() -> int is
         let start = _at
 
-        while more /\ char.is_digit(text[_at]) do
+        while more /\ text[_at].is_digit do
             _at = _at + 1
         od
 
@@ -34,7 +34,7 @@ class FORMULA(text: string) is
 
         _at = _at + 1
 
-        while more /\ char.is_lower(text[_at]) do
+        while more /\ text[_at].is_lower do
             _at = _at + 1
         od
 

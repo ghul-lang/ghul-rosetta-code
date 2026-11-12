@@ -3,7 +3,7 @@ use default
 expand(part: string) -> int{} is
     let split_at =
         (1..part.length)
-            |> find(i => part[i] == '-' /\ char.is_digit(part[i - 1]))
+            |> find(i => part[i] == '-' /\ part[i - 1].is_digit)
 
     if let at = split_at then
         yield in int.parse(part[0..at])::int.parse(part[at + 1..<0])

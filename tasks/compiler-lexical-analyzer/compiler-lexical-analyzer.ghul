@@ -28,7 +28,7 @@ class LEXER is
             let start = _at
             let c = _advance()
 
-            if char.is_letter(c) \/ c == '_' then
+            if c.is_letter \/ c == '_' then
                 while _is_word(_peek(0)) do _advance() od
 
                 let word = _source[start.._at]
@@ -40,8 +40,8 @@ class LEXER is
                     else
                         (line, column, "Identifier", word)
                     esac
-            elif char.is_digit(c) then
-                while char.is_digit(_peek(0)) do _advance() od
+            elif c.is_digit then
+                while (_peek(0)).is_digit do _advance() od
 
                 if _is_word(_peek(0)) then
                     throw _error(line, column, "invalid number")
@@ -84,11 +84,11 @@ class LEXER is
         c
     si
 
-    _is_word(c: char) -> bool => char.is_letter_or_digit(c) \/ c == '_'
+    _is_word(c: char) -> bool => c.is_letter_or_digit \/ c == '_'
 
     _skip() is
         do
-            if char.is_white_space(_peek(0)) then
+            if (_peek(0)).is_white_space then
                 _advance()
             elif _peek(0) == '/' /\ _peek(1) == '*' then
                 let line = _line, column = _column

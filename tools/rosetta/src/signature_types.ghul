@@ -94,7 +94,7 @@ namespace Rosetta is
             fi
 
             for c in text do
-                if !(char.is_letter_or_digit(c) \/ c == '_' \/ c == '.') then
+                if !(c.is_letter_or_digit \/ c == '_' \/ c == '.') then
                     return false
                 fi
             od

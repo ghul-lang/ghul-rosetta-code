@@ -18,7 +18,7 @@ sq(v, n) => mod_pow(v, 2n, n)
 ok(b, d, s, n) =>
     let x = mod_pow(b, d, n) in
     x =~ 1n \/ x =~ n - 1n \/
-        stream(x, v => let y = sq(v, n) in y || y)
+        stream(x, v => let y = sq(v, n) in (y, y))
             |> take(int(s)) |> any(v => v =~ n - 1n)
 strip(d, s) => if is_even(d) then strip(d / 2n, s + 1L) else (d, s) fi
 pp(n) => let (d, s) = strip(n - 1n, 0L) in

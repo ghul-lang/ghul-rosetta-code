@@ -4,8 +4,8 @@ letter_counts(text: string) -> LIST[int] => (
     let counts = repeat(0, 26) |> LIST()
 
     for letter in text do
-        if char.is_letter(letter) then
-            let index = int(char.to_lower(letter)) - int('a')
+        if letter.is_letter then
+            let index = int(letter.to_lower()) - int('a')
 
             counts[index] = counts[index] + 1
         fi

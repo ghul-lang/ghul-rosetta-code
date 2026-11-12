@@ -2,13 +2,13 @@ use default
 
 popcount(n) => if n == 0L then 0 else cast(n & 1L) + popcount(n >>> 1) fi
 
-let powers_of_three = stream(1L, power => power || power * 3L)
+let powers_of_three = iterate(1L, power => power * 3L)
 
 let counts = powers_of_three |> take(30) |> map(popcount) |> join()
 
 write_line("population counts of the first thirty powers of 3: {counts}")
 
-let naturals = stream(0L, n => n || n + 1L)
+let naturals = iterate(0L, n => n + 1L)
 
 let evil =
     naturals |> filter(n => popcount(n) % 2 == 0) |> take(30) |> join()

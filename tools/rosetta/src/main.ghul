@@ -785,7 +785,7 @@ self_test() is
 
     check_that(
         "a stream gets its note",
-        notes("let fibs = stream((0, 1), ((a, b)) => a || (b, a + b))").contains("`stream(seed, step)`")
+        notes("let fibs = stream((0, 1), ((a, b)) => (a, (b, a + b)))").contains("`stream(seed, step)`")
     )
 
     check_that(

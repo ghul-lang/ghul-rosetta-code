@@ -9,7 +9,7 @@ decode(encoded) =>
     else
         let
             digits =
-                encoded |> take_while(c => char.is_digit(c)) |> count(),
+                encoded |> take_while(c => c.is_digit) |> count(),
             repeats = int.parse(encoded[0..digits]),
             letter = encoded[digits]
         in

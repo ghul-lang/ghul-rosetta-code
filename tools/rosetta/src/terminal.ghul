@@ -105,7 +105,7 @@ namespace Rosetta is
             let parameters = LIST[int]()
             let current mut = -1
 
-            while at < text.length /\ (char.is_digit(text[at]) \/ text[at] == ';') do
+            while at < text.length /\ (text[at].is_digit \/ text[at] == ';') do
                 if text[at] == ';' then
                     parameters.add(current)
                     current = -1

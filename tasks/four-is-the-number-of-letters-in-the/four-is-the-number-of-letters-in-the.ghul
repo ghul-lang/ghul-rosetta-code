@@ -94,7 +94,7 @@ ordinal(value: int) -> string is
         fi
 si
 
-letters(word: string) -> int => word |> filter(char.is_letter) |> count()
+letters(word: string) -> int => word |> filter(c => c.is_letter) |> count()
 
 let opening =
     "Four is the number of letters in the first word of this sentence,"

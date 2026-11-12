@@ -2,8 +2,8 @@ use default
 
 is_pangram(sentence) =>
     sentence
-        |> map(char.to_lower)
-        |> filter(char.is_letter)
+        |> map(c => c.to_lower())
+        |> filter(c => c.is_letter)
         |> distinct()
         |> count() == 26
 

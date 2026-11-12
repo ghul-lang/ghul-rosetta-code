@@ -8,7 +8,7 @@ characters(path: string) -> string{} is
     while reader.peek() >= 0 do
         let first = char(reader.read())
 
-        if char.is_high_surrogate(first) /\ reader.peek() >= 0 then
+        if first.is_high_surrogate /\ reader.peek() >= 0 then
             let second = char(reader.read())
 
             yield "{first}{second}"

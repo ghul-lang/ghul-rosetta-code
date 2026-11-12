@@ -5,7 +5,7 @@ use System.Text.NormalizationForm
 plain_whitespace(text: string) -> string =>
     text
         |> map(letter =>
-            if char.is_white_space(letter) then ' ' else letter fi)
+            if letter.is_white_space then ' ' else letter fi)
         |> join("")
 
 single_spaces(text: string) -> string => (
@@ -63,7 +63,7 @@ runs(text: string) -> string{} is
     for letter in text do
         let broke =
             held.count > 0 /\
-                char.is_digit(held[held.count - 1]) != char.is_digit(letter)
+                held[held.count - 1].is_digit != letter.is_digit
 
         if broke then
             yield held |> join("")
@@ -80,7 +80,7 @@ runs(text: string) -> string{} is
 si
 
 is_number(part: string) -> bool =>
-    part.length > 0 /\ (part |> all(char.is_digit))
+    part.length > 0 /\ (part |> all(c => c.is_digit))
 
 without_leading_zeros(part: string) -> string =>
     let trimmed = part.trim_start('0') in

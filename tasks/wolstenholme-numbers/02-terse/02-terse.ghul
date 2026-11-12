@@ -5,7 +5,7 @@ w() => stream((0n, 1n, 0), (a, b, k) => let
     nb = b * s,
     g = gcd(na, nb)
 in
-    na / g || (na / g, nb / g, k + 1))
+    (na / g, (na / g, nb / g, k + 1)))
 
 write_line("summing the harmonic numerators")
 write_line("")

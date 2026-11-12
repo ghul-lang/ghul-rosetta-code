@@ -5,10 +5,10 @@ let random = System.Random(2026)
 let words =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(w => w.length >= 4 /\ w.length <= 8)
-        |> filter(w => w |> all(char.is_letter(*)))
+        |> filter(w => w |> all(c => c.is_letter))
         |> list()
 
-capitalised(word) => "{char.to_upper(word[0])}{word[1..<0]}"
+capitalised(word) => "{word[0].to_upper()}{word[1..<0]}"
 
 random_word() =>
     let word = words[random.next(words.count)] in
