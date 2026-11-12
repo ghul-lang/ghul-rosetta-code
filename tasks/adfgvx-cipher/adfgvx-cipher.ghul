@@ -13,7 +13,7 @@ shuffled(items: string) -> string => (
     string(held)
 )
 
-all_letters(word: string) -> bool => word |> all(char.is_letter)
+all_letters(word: string) -> bool => word |> all(c => c.is_letter)
 
 no_repeats(word: string) -> bool => (
     let seen = SET()

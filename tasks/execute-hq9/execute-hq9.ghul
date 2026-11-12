@@ -25,7 +25,7 @@ run(program) is
     let accumulator mut = 0
 
     for command in program do
-        case char.to_upper(command)
+        case command.to_upper()
         when 'H' then write_line("Hello, world!")
         when 'Q' then write_line(program)
         when '9' then sing()

@@ -3,6 +3,6 @@ use default
 complement(text) =>
     text |> map(digit => if digit == '0' then "1" else "0" fi) |> join("")
 
-stream("0", step => step || "{step}{complement(step)}")
+iterate("0", step => "{step}{complement(step)}")
     |> take(7)
     |> each(step => write_line(step))

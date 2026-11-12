@@ -108,7 +108,7 @@ namespace Rosetta is
         si
 
         // An operator's definition keeps its types: only a named function can go without them.
-        _is_identifier_start(c: char) -> bool => char.is_letter(c) \/ c == '_'
+        _is_identifier_start(c: char) -> bool => c.is_letter \/ c == '_'
 
         // A function with no parameters has only its return type to strip, and without it the
         // function is an ordinary one returning nothing, so it keeps its signature.
@@ -159,7 +159,7 @@ namespace Rosetta is
                 if replacement.ends_with(")") /\ text[end - 1] != ')' then
                     let close mut = end
 
-                    while close < text.length /\ (char.is_white_space(text[close]) \/ text[close] == ',') do
+                    while close < text.length /\ (text[close].is_white_space \/ text[close] == ',') do
                         close = close + 1
                     od
 

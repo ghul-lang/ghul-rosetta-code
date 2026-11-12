@@ -41,7 +41,7 @@ class CHECKERBOARD is
         let result = System.Text.StringBuilder()
 
         for c in text.to_upper() do
-            if char.is_digit(c) then
+            if c.is_digit then
                 result.append(_encode['/']).append(c)
             elif _encode.contains_key(c) then
                 result.append(_encode[c])

@@ -27,10 +27,10 @@ class POSITION is
     si
 
     mine(piece: char) -> bool =>
-        piece != '.' /\ char.is_upper(piece) == white_to_move
+        piece != '.' /\ piece.is_upper == white_to_move
 
     theirs(piece: char) -> bool =>
-        piece != '.' /\ char.is_upper(piece) != white_to_move
+        piece != '.' /\ piece.is_upper != white_to_move
 si
 
 let knight_steps = [
@@ -61,8 +61,8 @@ holds(
 ) -> bool =>
     let piece = piece_at(position, row, column) in
     piece != '.' /\
-    char.is_upper(piece) == white /\
-    kinds.contains(char.to_lower(piece))
+    piece.is_upper == white /\
+    kinds.contains(piece.to_lower())
 
 ray_hits(
     position: POSITION,
@@ -147,7 +147,7 @@ pseudo_moves(position: POSITION) -> Move{} is
 
     let add = (from, to) is
         let row = to / 8
-        let pawn = char.to_lower(position.squares[from]) == 'p'
+        let pawn = position.squares[from].to_lower() == 'p'
 
         if pawn /\ (row == 0 \/ row == 7) then
             let queen = if white then 'Q' else 'q' fi
@@ -166,7 +166,7 @@ pseudo_moves(position: POSITION) -> Move{} is
 
         let row = from / 8
         let column = from % 8
-        let kind = char.to_lower(piece)
+        let kind = piece.to_lower()
 
         let step = (dr, dc, slide) is
             let r mut = row + dr
@@ -243,7 +243,7 @@ si
 played(position: POSITION, move: Move) -> POSITION is
     let next = POSITION(position)
     let piece = position.squares[move.from]
-    let kind = char.to_lower(piece)
+    let kind = piece.to_lower()
 
     next.squares[move.to] =
         if move.promotion != '.' then
@@ -304,7 +304,7 @@ legal_moves(position: POSITION) -> Move[] =>
         |> list()
 
 value(piece: char) -> int =>
-    case char.to_lower(piece)
+    case piece.to_lower()
     when 'p' then 100
     when 'n' then 320
     when 'b' then 330
@@ -326,7 +326,7 @@ evaluate(position: POSITION) -> int =>
         |> sum_by(s =>
             let
                 piece = position.squares[s],
-                minor = "nbp".contains(char.to_lower(piece)),
+                minor = "nbp".contains(piece.to_lower()),
                 bonus = if minor then 2 * centrality(s) else 0 fi,
                 worth = value(piece) + bonus
             in
@@ -388,7 +388,7 @@ name(square: int) -> string => "{"abcdefgh"[square % 8]}{8 - square / 8}"
 notation(move: Move) -> string =>
     let promotion =
         if move.promotion == '.' then ""
-        else "{char.to_lower(move.promotion)}"
+        else "{move.promotion.to_lower()}"
         fi
     in
     "{name(move.from)}{name(move.to)}{promotion}"

@@ -25,7 +25,7 @@ let single_cell = 0..width |> map(at => at == width / 2) |> list()
 for rule in [90, 30, 110] do
     write_line("rule {rule}")
 
-    stream(single_cell, cells => cells || step(rule, cells))
+    iterate(single_cell, cells => step(rule, cells))
         |> take(16)
         |> each(cells => write_line(show(cells)))
 

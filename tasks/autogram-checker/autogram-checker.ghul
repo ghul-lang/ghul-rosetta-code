@@ -39,7 +39,7 @@ actual_counts(sentence: string, with_punctuation: bool) -> Map[char, int] is
 
     for character in sentence.to_lower() do
         let counted =
-            char.is_letter(character) \/
+            character.is_letter \/
             (with_punctuation /\ ",'-!".contains(character))
 
         if counted then
@@ -65,7 +65,7 @@ claimed_item(word: string) -> char? is
 
     if punctuation_names.contains_key(stem) then
         return punctuation_names[stem]
-    elif stem.length == 1 /\ char.is_letter(stem[0]) then
+    elif stem.length == 1 /\ stem[0].is_letter then
         return stem[0]
     fi
 

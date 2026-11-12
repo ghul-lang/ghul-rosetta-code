@@ -14,7 +14,7 @@ let corners = [
 
 let image = IMAGE(640, 560)
 
-toward_a_corner(at: Step) -> STREAM[Step, Step] => (
+toward_a_corner(at: Step) -> (Step, Step)? => (
     let chosen = random.next(corners.count)
     let corner = corners[chosen]
 
@@ -24,7 +24,7 @@ toward_a_corner(at: Step) -> STREAM[Step, Step] => (
         corner = chosen
     )
 
-    next || next
+    (next, next)
 )
 
 plot(at: Step) is

@@ -44,7 +44,7 @@ parse_term(text: string, at: int) -> PARSED? is
 
     let end mut = start
 
-    while end < text.length /\ char.is_digit(text[end]) do
+    while end < text.length /\ text[end].is_digit do
         end = end + 1
     od
 

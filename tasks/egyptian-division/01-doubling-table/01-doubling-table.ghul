@@ -2,13 +2,12 @@ use default
 
 divide(dividend: int, divisor: int) -> (answer: int, remainder: int) =>
     let table =
-        stream(
+        iterate(
             (power_of_2 = 1, doubling = divisor),
-            row =>
-                row || (
-                    power_of_2 = row.power_of_2 * 2,
-                    doubling = row.doubling * 2
-                )
+            row => (
+                power_of_2 = row.power_of_2 * 2,
+                doubling = row.doubling * 2
+            )
         )
             |> take_while(row => row.doubling <= dividend)
     in

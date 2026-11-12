@@ -30,7 +30,7 @@ rotate(cells: int[], forward: bool) is
 si
 
 apply(command: string) -> bool is
-    if command.length != 2 \/ !char.is_digit(command[1]) then
+    if command.length != 2 \/ !command[1].is_digit then
         return false
     fi
 
@@ -43,7 +43,7 @@ apply(command: string) -> bool is
     let row = 0..size |> map(c => n * size + c) |> list()
     let column = 0..size |> map(r => r * size + n) |> list()
 
-    case char.to_upper(command[0])
+    case command[0].to_upper()
     when 'R' then rotate(row, true)
     when 'L' then rotate(row, false)
     when 'D' then rotate(column, true)

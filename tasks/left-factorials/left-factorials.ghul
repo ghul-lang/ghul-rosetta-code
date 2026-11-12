@@ -3,8 +3,10 @@ use default
 left_factorials() -> bigint{} =>
     stream(
         (0, 1n, 0n),
-        (n, factorial, total) =>
-            total || (n + 1, factorial * cast(n + 1), total + factorial)
+        (n, factorial, total) => (
+            total,
+            (n + 1, factorial * cast(n + 1), total + factorial)
+        )
     )
 
 write_line("left factorials !0 through !10, then every tenth up to !110:")

@@ -27,7 +27,7 @@ mean(a: Point, b: Point, c: Point, d: Point) -> Point => (
     z = (a.z + 2.0 * b.z + 2.0 * c.z + d.z) / 6.0
 )
 
-step(at: Point) -> STREAM[Point, Point] => (
+step(at: Point) -> (Point, Point)? => (
     let first = rate(at)
     let second = rate(along(at, first, dt / 2.0))
     let third = rate(along(at, second, dt / 2.0))
@@ -36,7 +36,7 @@ step(at: Point) -> STREAM[Point, Point] => (
     let slope = mean(first, second, third, fourth)
     let next = along(at, slope, dt)
 
-    next || next
+    (next, next)
 )
 
 let path =

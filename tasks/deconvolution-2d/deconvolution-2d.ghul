@@ -9,7 +9,7 @@ parse_all(text: string) -> Tensor{} is
     let at mut = 0
 
     skip_spaces() is
-        while at < text.length /\ char.is_white_space(text[at]) do
+        while at < text.length /\ text[at].is_white_space do
             at = at + 1
         od
     si
@@ -36,7 +36,7 @@ parse_all(text: string) -> Tensor{} is
 
         let start = at
 
-        while text[at] == '-' \/ char.is_digit(text[at]) do
+        while text[at] == '-' \/ text[at].is_digit do
             at = at + 1
         od
 

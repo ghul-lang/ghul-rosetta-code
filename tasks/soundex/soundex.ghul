@@ -1,7 +1,7 @@
 use default
 
 code(c) =>
-    case char.to_upper(c)
+    case c.to_upper()
     when 'B', 'F', 'P', 'V' then '1'
     when 'C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z' then '2'
     when 'D', 'T' then '3'
@@ -14,7 +14,7 @@ code(c) =>
 
 // H and W do not separate two letters with the same code; a vowel does.
 soundex(name) is
-    let letters = name.to_char_array() |> filter(char.is_letter) |> list()
+    let letters = name.to_char_array() |> filter(c => c.is_letter) |> list()
 
     if letters.count == 0 then
         return ""
@@ -23,7 +23,7 @@ soundex(name) is
     let result = System.Text.StringBuilder()
     let previous mut = code(letters[0])
 
-    result.append(char.to_upper(letters[0]))
+    result.append(letters[0].to_upper())
 
     for c in letters |> skip(1) do
         let digit = code(c)

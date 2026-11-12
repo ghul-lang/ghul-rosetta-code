@@ -65,7 +65,7 @@ solve() -> string? is
             if seen.add("{next}:{after}") then
                 let move =
                     if pushed then
-                        char.to_upper(name)
+                        name.to_upper()
                     else
                         name
                     fi

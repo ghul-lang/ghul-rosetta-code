@@ -28,7 +28,7 @@ parse(text: string) -> NAME is
                 words.add(word.to_string())
                 word.clear()
             fi
-        elif char.is_upper(character) /\ word.length > 0 then
+        elif character.is_upper /\ word.length > 0 then
             words.add(word.to_string())
             word.clear()
             word.append(character)
@@ -44,11 +44,9 @@ parse(text: string) -> NAME is
     return NAME(words)
 si
 
-lower_first(word: string) -> string =>
-    "{char.to_lower(word[0])}{word[1..<0]}"
+lower_first(word: string) -> string => "{word[0].to_lower()}{word[1..<0]}"
 
-upper_first(word: string) -> string =>
-    "{char.to_upper(word[0])}{word[1..<0]}"
+upper_first(word: string) -> string => "{word[0].to_upper()}{word[1..<0]}"
 
 quoted(text: string) -> string => "\"{text}\""
 

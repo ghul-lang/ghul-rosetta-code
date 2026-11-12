@@ -6,7 +6,7 @@ use Microsoft.VisualStudio.TestTools.UnitTesting
 is_palindrome(text: string) -> bool =>
     let letters =
         text.to_lower().to_char_array()
-            |> filter(char.is_letter_or_digit)
+            |> filter(c => c.is_letter_or_digit)
             |> list()
     in
     letters =~ (letters |> reverse() |> list())

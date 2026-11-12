@@ -45,11 +45,11 @@
  
              out.append(escaped(line.substring(i, stop - i)))
              i = stop
-         '''elif''' char.is_letter(c) \/ c == &apos;_&apos; '''then'''
+         '''elif''' c.is_letter \/ c == &apos;_&apos; '''then'''
              '''let''' start = i
  
              '''let''' word_char = (k: int) =&gt;
-                 char.is_letter_or_digit(line[k]) \/ line[k] == &apos;_&apos;
+                 line[k].is_letter_or_digit \/ line[k] == &apos;_&apos;
  
              '''while''' i &lt; line.length /\ word_char(i) '''do'''
                  i = i + 1

@@ -19,8 +19,8 @@ matched_at(text: string, at: int) -> (string, char)? =>
         )
 
 matching_case(greek: char, english: char) -> char =>
-    if char.is_upper(english) then
-        char.to_upper(greek)
+    if english.is_upper then
+        greek.to_upper()
     else
         greek
     fi
@@ -38,8 +38,7 @@ letters(text: string, at: int) -> char{} is
 si
 
 final_form(greek: char[], at: int) -> char =>
-    let ends_word = at == greek.count - 1 \/ !char.is_letter(greek[at + 1])
-    in
+    let ends_word = at == greek.count - 1 \/ !greek[at + 1].is_letter in
     if greek[at] == 'σ' /\ ends_word then 'ς' else greek[at] fi
 
 transliterate(text: string) -> string =>

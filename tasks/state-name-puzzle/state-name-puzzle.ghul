@@ -19,7 +19,7 @@ let fictitious = [
 
 letters(s: string) -> string =>
     s.to_lower().to_char_array()
-        |> filter(char.is_letter)
+        |> filter(c => c.is_letter)
         |> sort()
         |> string()
 

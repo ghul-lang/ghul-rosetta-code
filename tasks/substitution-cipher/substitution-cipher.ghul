@@ -7,12 +7,12 @@ let cipher_alphabet = "QWERTYUIOPASDFGHJKLZXCVBNM"
 substitute(text, from, to) =>
     text
         |> map(c =>
-            if char.is_upper(c) then
+            if c.is_upper then
                 let i = from.index_of(c)
                 if i >= 0 then to[i] else c fi
-            elif char.is_lower(c) then
-                let i = from.index_of(char.to_upper(c))
-                if i >= 0 then char.to_lower(to[i]) else c fi
+            elif c.is_lower then
+                let i = from.index_of(c.to_upper())
+                if i >= 0 then to[i].to_lower() else c fi
             else
                 c
             fi

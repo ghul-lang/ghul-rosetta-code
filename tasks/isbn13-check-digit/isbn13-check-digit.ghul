@@ -4,7 +4,7 @@ digit_value(digit) => int(digit) - int('0')
 
 checksum(code) =>
     code
-        |> filter(char.is_digit)
+        |> filter(c => c.is_digit)
         |> index()
         |> reduce(0, (total, digit) =>
             total +
