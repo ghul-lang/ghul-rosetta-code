@@ -7,7 +7,7 @@ next_term(numerator: int, denominator: int) -> (int, int) => (
 
 let terms = stream(
     (1, 1),
-    ((numerator, denominator)) => (
+    (numerator, denominator) => (
         "{numerator}/{denominator}",
         next_term(numerator, denominator)
     )
