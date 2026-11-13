@@ -58,7 +58,7 @@ si
 
 shape(tensor: Tensor) -> int[] =>
     if let (items): Tensor.ARRAY = tensor then
-        [items.count] ++ shape(items[0]) |> collect()
+        [items.count] ++ shape(items[0]) |> ARRAY()
     else
         []
     fi
@@ -66,7 +66,7 @@ shape(tensor: Tensor) -> int[] =>
 strides_of(dimensions: int[]) -> int[] =>
     0..dimensions.count
         |> map(level => dimensions[level + 1..<0] |> product())
-        |> collect()
+        |> ARRAY()
 
 embed(tensor: Tensor, strides: int[]) -> int[] is
     let size =
@@ -115,7 +115,7 @@ reshape(values: int[], dimensions: int[], strides: int[]) -> Tensor is
                     |> map(i =>
                         build(level + 1, offset + i * strides[level])
                     )
-                    |> collect()
+                    |> ARRAY()
             )
         fi
 
@@ -129,7 +129,7 @@ deconvolve(g: Tensor, f: Tensor) -> Tensor => (
         g_shape
             |> zip(shape(f))
             |> map((g_extent, f_extent) => g_extent - f_extent + 1)
-            |> collect()
+            |> ARRAY()
 
     let h_values = deconvolve_1d(embed(g, strides), embed(f, strides))
 
@@ -155,7 +155,7 @@ let tests =
         |> parse_all()
         |> chunk(3)
         |> map(c => (c[0], c[1], c[2]))
-        |> collect()
+        |> ARRAY()
 
 for (dimension, (h, f, g)) in tests |> index() do
     let h_found = deconvolve(g, f) =~ h

@@ -7,16 +7,16 @@ use Matrix = bigint[][]
         |> map(i =>
             0..b[0].count
                 |> map(j => 0..b.count |> sum_by(k => a[i][k] * b[k][j]))
-                |> collect()
+                |> ARRAY()
         )
-        |> collect()
+        |> ARRAY()
 
 identity(n) =>
     0..n
         |> map(i =>
-            0..n |> map(j => if i == j then 1n else 0n fi) |> collect()
+            0..n |> map(j => if i == j then 1n else 0n fi) |> ARRAY()
         )
-        |> collect()
+        |> ARRAY()
 
 // ghūl has no exponentiation operator, so ^ is declared here for a
 // matrix raised to an integer power, by repeated squaring.
