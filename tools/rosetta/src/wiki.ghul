@@ -147,7 +147,7 @@ namespace Rosetta is
             let first mut = 0
 
             while first < titles.count do
-                let batch = titles |> skip(first) |> take(50) |> collect_mutable()
+                let batch = titles |> skip(first) |> take(50) |> LIST()
 
                 let joined =
                     batch |> map(title => System.Uri.escape_data_string(title)) |> join("%7C")

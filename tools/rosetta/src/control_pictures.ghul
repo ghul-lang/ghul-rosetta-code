@@ -21,7 +21,7 @@ namespace Rosetta is
         has_any(text: string) -> bool static => text |> any(c => is_pictured(c))
 
         render(text: string) -> string static =>
-            string(text |> map(c => if is_pictured(c) then picture(c) else c fi) |> collect())
+            string(text |> map(c => if is_pictured(c) then picture(c) else c fi) |> ARRAY())
 
         // What the entry says under an output block that holds them, naming
         // each one it actually shows.

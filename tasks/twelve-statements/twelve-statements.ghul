@@ -51,7 +51,7 @@ consistent(values: bool[]) -> bool =>
 assignments() -> bool[]{} =>
     (0..1 << 12)
         |> map(mask =>
-            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> collect()
+            0..12 |> map(bit => (mask >> bit) & 1 == 1) |> ARRAY()
         )
 
 write_line("consistent assignments:")

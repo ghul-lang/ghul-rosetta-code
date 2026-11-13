@@ -1022,9 +1022,9 @@ diff(root: string, slugs: LIST[string]) is
                 else
                     entry.state =~ "published" \/ entry.state =~ "solved"
                 fi)
-            |> collect_mutable()
+            |> LIST()
 
-    let pages = wiki.pages_wikitext(wanted |> map(entry => entry.title) |> collect_mutable())
+    let pages = wiki.pages_wikitext(wanted |> map(entry => entry.title) |> LIST())
 
     for entry in wanted do
         let slug = entry.slug ?? ""
@@ -1473,7 +1473,7 @@ else
     when "strip-annotations" then
         strip_annotations(root, arguments)
     when "diff" then
-        diff(root, arguments |> filter(argument => argument !~ "--all") |> collect_mutable())
+        diff(root, arguments |> filter(argument => argument !~ "--all") |> LIST())
     when "check" then
         check(if arguments.count > 1 /\ arguments[0] =~ "--api" then arguments[1] else null fi)
     when "publish" then
