@@ -1,5 +1,5 @@
 use default
-use System.DateTime
+use Time.DATE_TIME
 use System.Net.HttpListener
 use System.Net.IPAddress
 use System.Net.IPEndPoint
@@ -44,5 +44,5 @@ si
 
 @entry()
 test_entry(args: string[]) is
-    search(stand_in(), DateTime(2026, 9, 25), args[0])
+    search(stand_in(), DATE_TIME(2026, 9, 25), args[0])
 si

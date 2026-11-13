@@ -1,11 +1,11 @@
 use default
 
-use System.DateTime
+use Time.DATE_TIME
 
 // A palindromic yyyymmdd is fixed by its year: the month and day are the
 // year's digits reversed, so each year gives at most one date.
 
-palindrome_date(year: int) -> DateTime? => (
+palindrome_date(year: int) -> DATE_TIME? => (
     let digits = "{year:D4}" |> reverse() |> join(""),
         month = int.parse(digits.substring(0, 2)),
         day = int.parse(digits.substring(2))
@@ -14,10 +14,10 @@ palindrome_date(year: int) -> DateTime? => (
         month >= 1 /\
         month <= 12 /\
         day >= 1 /\
-        day <= DateTime.days_in_month(year, month)
+        day <= DATE_TIME.days_in_month(year, month)
 
     if valid then
-        DateTime(year, month, day)
+        DATE_TIME(year, month, day)
     else
         null
     fi
@@ -26,7 +26,7 @@ palindrome_date(year: int) -> DateTime? => (
 let dates =
     from(2020)
         |> map(palindrome_date)
-        |> filter(date => date? /\ date > DateTime(2020, 2, 2))
+        |> filter(date => date? /\ date > DATE_TIME(2020, 2, 2))
         |> take(15)
 
 write_line("The next 15 palindromic dates after 2020-02-02:")

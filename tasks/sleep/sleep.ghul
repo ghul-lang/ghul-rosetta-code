@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 use System.Threading.Thread
 
 write_line("Enter the milliseconds to sleep:")
@@ -9,7 +9,7 @@ let requested = int.parse(read_line()!)
 
 write_line("Sleeping...")
 
-let elapsed = Stopwatch.start_new()
+let elapsed = STOPWATCH.start_new()
 
 Thread.sleep(requested)
 

@@ -1,11 +1,11 @@
 use default
 
-use System.DateTime
+use Time.DATE_TIME
 use System.Globalization.JulianCalendar
 
 let julian = JulianCalendar()
 
-julian_easter(year: int) -> DateTime =>
+julian_easter(year: int) -> DATE_TIME =>
     let
         a = year % 4,
         b = year % 7,
@@ -15,9 +15,9 @@ julian_easter(year: int) -> DateTime =>
         month = (d + e + 114) / 31,
         day = (d + e + 114) % 31 + 1
     in
-        DateTime(year, month, day, julian)
+        DATE_TIME(year, month, day, julian)
 
-gregorian_easter(year: int) -> DateTime =>
+gregorian_easter(year: int) -> DATE_TIME =>
     let
         a = year % 19,
         b = year / 100,
@@ -34,23 +34,23 @@ gregorian_easter(year: int) -> DateTime =>
         month = (h + l - 7 * m + 114) / 31,
         day = (h + l - 7 * m + 114) % 31 + 1
     in
-        DateTime(year, month, day)
+        DATE_TIME(year, month, day)
 
 let months = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
 
-in_julian(date: DateTime) -> string =>
+in_julian(date: DATE_TIME) -> string =>
     let month = months[julian.get_month(date) - 1] in
     "{julian.get_day_of_month(date):D2} {month}"
 
-in_gregorian(date: DateTime) -> string =>
+in_gregorian(date: DATE_TIME) -> string =>
     "{date.day:D2} {months[date.month - 1]}"
 
 feasts(
-    easter: DateTime,
-    shown: DateTime -> string,
+    easter: DATE_TIME,
+    shown: DATE_TIME -> string,
     days: (string, int)[]
 ) -> string =>
     days

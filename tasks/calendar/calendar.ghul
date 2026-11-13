@@ -13,8 +13,8 @@ centre(text: string, width: int) -> string =>
 
 month_lines(year: int, month: int) -> string[] =>
     let
-        offset = cast int(System.DateTime(year, month, 1).day_of_week),
-        days = System.DateTime.days_in_month(year, month),
+        offset = cast int(Time.DATE_TIME(year, month, 1).day_of_week),
+        days = Time.DATE_TIME.days_in_month(year, month),
         weeks =
             repeat("  ", offset)
                 |> cat(1::days |> map(day => "{day,2}"))

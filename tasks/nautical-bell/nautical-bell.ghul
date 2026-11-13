@@ -1,39 +1,39 @@
 use default
 
 trait Clock is
-    now: System.DateTime
-    wait_until(time: System.DateTime)
+    now: Time.DATE_TIME
+    wait_until(time: Time.DATE_TIME)
 si
 
 class SYSTEM_CLOCK: Clock is
     init() is si
 
-    now: System.DateTime => System.DateTime.utc_now
+    now: Time.DATE_TIME => Time.DATE_TIME.utc_now
 
-    wait_until(time: System.DateTime) is
+    wait_until(time: Time.DATE_TIME) is
         let delay = time - now
 
-        if delay > System.TimeSpan.zero then
+        if delay > Time.TIME_SPAN.zero then
             System.Threading.Thread.sleep(delay)
         fi
     si
 si
 
-class SIMULATED_CLOCK(start: System.DateTime): Clock is
-    _time: System.DateTime
+class SIMULATED_CLOCK(start: Time.DATE_TIME): Clock is
+    _time: Time.DATE_TIME
 
     init(..) is
         _time = start
     si
 
-    now: System.DateTime => _time
+    now: Time.DATE_TIME => _time
 
-    wait_until(time: System.DateTime) is
+    wait_until(time: Time.DATE_TIME) is
         _time = time
     si
 si
 
-watch(time: System.DateTime) -> string =>
+watch(time: Time.DATE_TIME) -> string =>
     let hour = time.add_minutes(-1.0).hour in
     if hour < 4 then "Middle watch"
     elif hour < 8 then "Morning watch"
@@ -50,7 +50,7 @@ ring(bells: int) -> string =>
         |> cat(if bells % 2 == 1 then ["ding"] else [] fi)
         |> join(" ")
 
-keep_watch(clock: Clock, until: System.DateTime) is
+keep_watch(clock: Clock, until: Time.DATE_TIME) is
     let now = clock.now
     let half_hours = int(now.time_of_day.total_minutes) / 30 + 1
     let next mut = now.date.add_minutes(30.0 * double(half_hours))
@@ -72,16 +72,16 @@ keep_watch(clock: Clock, until: System.DateTime) is
 si
 
 if let ["--live", ..] = args then
-    keep_watch(SYSTEM_CLOCK(), System.DateTime.max_value)
+    keep_watch(SYSTEM_CLOCK(), Time.DATE_TIME.max_value)
 else
-    let midnight = System.DateTime(
+    let midnight = Time.DATE_TIME(
         2026,
         1,
         1,
         0,
         0,
         0,
-        System.DateTimeKind.UTC
+        Time.DateTimeKind.UTC
     )
 
     keep_watch(SIMULATED_CLOCK(midnight), midnight.add_days(1.0))

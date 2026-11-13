@@ -1,6 +1,6 @@
 use default
 
-use System.DateTime
+use Time.DATE_TIME
 
 let day_names = [
     "Imix’", "Ik’", "Ak’bal", "K’an", "Chikchan", "Kimi", "Manik’",
@@ -21,7 +21,7 @@ let correlation = 584_283
 let julian_day_of_0001_01_01 = 1_721_426
 
 days_since_creation(date) =>
-    let day = int(date.ticks / System.TimeSpan.ticks_per_day) in
+    let day = int(date.ticks / Time.TIME_SPAN.ticks_per_day) in
     day + julian_day_of_0001_01_01 - correlation
 
 tzolkin(days) => "{(days + 3) % 13 + 1,2} {day_names[(days + 19) % 20],-9}"
@@ -60,7 +60,7 @@ let dates = [
 write_line("Gregorian   Tzolk’in      Haab’           Long count      Lord")
 
 for text in dates do
-    let days = days_since_creation(DateTime.parse(text))
+    let days = days_since_creation(DATE_TIME.parse(text))
 
     write_line(
         "{text}  {tzolkin(days)}  {haab(days)}  "

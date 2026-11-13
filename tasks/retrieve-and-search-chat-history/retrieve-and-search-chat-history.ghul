@@ -1,12 +1,12 @@
 use default
-use System.DateTime
+use Time.DATE_TIME
 use System.Net.Http.HttpClient
 
 // The task: fetch the last ten days of the Tcl chatroom's logs and print
 // the lines that mention a string, under the address of the log each came
 // from. The logs are named for the day in the server's own time zone, so
 // the days are counted back from today there rather than here.
-search(base: string, today: DateTime, wanted: string) is
+search(base: string, today: DATE_TIME, wanted: string) is
     let client = HttpClient()
 
     for back in (0..10) |> reverse() do
@@ -31,7 +31,7 @@ let berlin = System.TimeZoneInfo.find_system_time_zone_by_id(
     "Europe/Berlin"
 )
 let now = System.TimeZoneInfo.convert_time_from_utc(
-    DateTime.utc_now,
+    DATE_TIME.utc_now,
     berlin
 )
 

@@ -16,7 +16,7 @@ hand(image: IMAGE, at: double, length: double, width: double) is
     image.line(tail_x, tail_y, x, y)
 si
 
-draw(image: IMAGE, time: System.DateTime) is
+draw(image: IMAGE, time: Time.DATE_TIME) is
     image.clear(245ub, 242ub, 235ub)
 
     image.color(40ub, 40ub, 50ub)
@@ -53,7 +53,7 @@ image.view(-1.1, -1.1, 1.1, 1.1)
 
 let animation = ANIMATION(size, size)
 
-let now = System.DateTime.now
+let now = Time.DATE_TIME.now
 let start = now.add_milliseconds(double(-now.millisecond))
 
 for second in 0..60 do
@@ -66,7 +66,7 @@ for second in 0..60 do
         image.write("clock.png")
         image.show("clock.png")
 
-        let wait = time.add_seconds(1.0) - System.DateTime.now
+        let wait = time.add_seconds(1.0) - Time.DATE_TIME.now
 
         if wait.total_milliseconds > 0.0 then
             System.Threading.Thread.sleep(wait)

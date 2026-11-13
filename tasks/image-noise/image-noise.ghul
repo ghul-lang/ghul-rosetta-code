@@ -1,7 +1,7 @@
 use default
 
 use Raster.IMAGE
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 let width = 320
 let height = 240
@@ -27,7 +27,7 @@ draw_noise() is
     od
 si
 
-let clock = Stopwatch.start_new()
+let clock = STOPWATCH.start_new()
 
 for second in 1::seconds do
     let frames mut = 0

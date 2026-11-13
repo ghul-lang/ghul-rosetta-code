@@ -25,8 +25,8 @@ test_entry() is
         RSASignaturePadding.pkcs1
     )
     let made = request.create_self_signed(
-        System.DateTimeOffset.now.add_days(-1.0),
-        System.DateTimeOffset.now.add_days(1.0)
+        Time.DATE_TIME_OFFSET.now.add_days(-1.0),
+        Time.DATE_TIME_OFFSET.now.add_days(1.0)
     )
     let pfx = made.export(X509ContentType.PFX)
     let certificate = X509CertificateLoader.load_pkcs12(

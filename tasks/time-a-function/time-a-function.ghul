@@ -1,5 +1,5 @@
 use default
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 // Process time rather than wall-clock time, so another program running at
 // the same time does not show up as this one taking longer.
@@ -9,7 +9,7 @@ spent() -> double =>
 
 timed(name: string, work: () -> int) =>
     let
-        clock = Stopwatch.start_new(),
+        clock = STOPWATCH.start_new(),
         before = spent(),
         answer = work(),
         elapsed = clock.elapsed.total_milliseconds,

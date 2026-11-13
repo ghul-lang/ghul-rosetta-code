@@ -1,9 +1,9 @@
 use default
-use System
+use Time
 
-christmas_days() -> DateTime{} is
+christmas_days() -> DATE_TIME{} is
     for year in 2008::2121 do
-        yield DateTime(year, 12, 25)
+        yield DATE_TIME(year, 12, 25)
     od
 si
 

@@ -55,4 +55,4 @@ write_line("{Color.GREEN} {Reading.CELSIUS(21.5)}")
 write_line("point {Point(3, 4).x}, {CountItems([1, 2, 3])} items")
 
 // .NET names are read in ghūl's conventions
-write_line("{System.DateTime.days_in_month(2024, 2)} days")
+write_line("{Time.DATE_TIME.days_in_month(2024, 2)} days")
