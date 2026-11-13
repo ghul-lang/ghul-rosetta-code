@@ -1,6 +1,6 @@
 use default
 
-use System.Security.Cryptography.SHA256
+use Crypto.sha256
 use Tasks.Parallel
 use System.Collections.Concurrent.ConcurrentDictionary
 
@@ -27,7 +27,7 @@ search(first) is
                     word[3] = ubyte(97 + d)
                     word[4] = ubyte(97 + e)
 
-                    let hash = SHA256.hash_data(word.to_array())
+                    let hash = sha256(word.to_array())
 
                     for (i, target) in targets |> index() do
                         if hash =~ target then

@@ -2,13 +2,13 @@ use default
 
 use IO.File
 use IO.Path
-use System.Security.Cryptography.RandomNumberGenerator
+use Crypto.random_int
 
 letters(text: string) -> string =>
     string([c.to_upper() for c in text if c.is_letter])
 
 random_group() -> string =>
-    string(1::6 |> map(_ => char(65 + RandomNumberGenerator.get_int32(26))))
+    string(1::6 |> map(_ => char(65 + random_int(26))))
 
 random_line() -> string => 1::6 |> map(_ => random_group()) |> join(" ")
 

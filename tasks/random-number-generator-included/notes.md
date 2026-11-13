@@ -13,6 +13,5 @@ a version of Donald Knuth's
 It is kept so that a seed produces the same sequence it did on earlier versions
 of .NET, which is what makes a seeded run repeatable.
 
-Neither is suitable for cryptography. For that,
-`System.Security.Cryptography.RandomNumberGenerator` uses the operating
-system's cryptographic generator.
+Neither is suitable for cryptography. For that, `Crypto.random_int` and
+`Crypto.random_bytes` use the operating system's cryptographic generator.
