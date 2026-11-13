@@ -1,7 +1,7 @@
 use default
 
 use System.Random
-use System.Security.Cryptography.RandomNumberGenerator
+use Crypto.random_int
 
 rolls(generator) =>
     (0..10) |> map(_ => "{generator.next(1, 7)}") |> join(" ")
@@ -17,5 +17,5 @@ let second = rolls(Random())
 write_line("two unseeded generators agree: {first =~ second}")
 
 // the cryptographic generator is the operating system's
-let die = RandomNumberGenerator.get_int32(1, 7)
+let die = random_int(1, 7)
 write_line("cryptographic roll in range: {die >= 1 /\ die <= 6}")

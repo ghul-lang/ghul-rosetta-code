@@ -4,7 +4,7 @@ use IO.Directory
 use IO.File
 use IO.Path
 
-use System.Security.Cryptography.SHA256
+use Crypto.sha256
 
 // Works on any filesystem .NET can read. Files are grouped by size, then by
 // a SHA-256 of their contents. Hard links are not identified: .NET has no
@@ -14,7 +14,7 @@ use Group = (size: long, paths: ARRAY[string])
 
 digest(path: string) -> string =>
     let bytes = File.read_all_bytes(path) in
-    System.Convert.to_hex_string(SHA256.hash_data(bytes))
+    System.Convert.to_hex_string(sha256(bytes))
 
 same_contents(root: string, size: long, paths: string{}) -> Group{} =>
     paths

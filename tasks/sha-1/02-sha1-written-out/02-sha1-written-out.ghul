@@ -103,10 +103,10 @@ let messages = [
 for message in messages do
     let octets = System.Text.Encoding.utf8.get_bytes(message)
 
-    let expected = hex(System.Security.Cryptography.SHA1.hash_data(octets))
+    let expected = hex(Crypto.sha1(octets))
 
     assert sha1(octets) =~ expected
-        else "does not agree with the digest .NET computes"
+        else "does not agree with the digest Crypto computes"
 
     write_line("{sha1(octets)}  \"{message}\"")
 od

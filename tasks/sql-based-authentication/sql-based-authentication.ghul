@@ -2,8 +2,8 @@ use default
 
 use Microsoft.Data.Sqlite.SqliteConnection
 use Microsoft.Data.Sqlite.SqliteException
-use System.Security.Cryptography.MD5
-use System.Security.Cryptography.RandomNumberGenerator
+use Crypto.md5
+use Crypto.random_bytes
 use System.Text.Encoding
 
 // SQLite, through Microsoft.Data.Sqlite, stands in for MySQL: an
@@ -28,14 +28,14 @@ connect_db() -> SqliteConnection is
 si
 
 digest(salt: ubyte[], password: string) -> ubyte[] =>
-    MD5.hash_data(salt |> cat(Encoding.utf8.get_bytes(password)) |> ARRAY())
+    md5(salt |> cat(Encoding.utf8.get_bytes(password)) |> ARRAY())
 
 create_user(
     db: SqliteConnection,
     username: string,
     password: string
 ) -> bool is
-    let salt = RandomNumberGenerator.get_bytes(16)
+    let salt = random_bytes(16)
     let use insert = db.create_command()
 
     insert.command_text =

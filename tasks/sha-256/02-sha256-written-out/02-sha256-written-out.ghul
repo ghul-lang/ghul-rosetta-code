@@ -136,12 +136,10 @@ let messages = ["", "abc", "Rosetta code"]
 for message in messages do
     let octets = System.Text.Encoding.utf8.get_bytes(message)
 
-    let expected = hex(
-        System.Security.Cryptography.SHA256.hash_data(octets)
-    )
+    let expected = hex(Crypto.sha256(octets))
 
     assert sha256(octets) =~ expected
-        else "does not agree with the digest .NET computes"
+        else "does not agree with the digest Crypto computes"
 
     write_line("{sha256(octets)}  \"{message}\"")
 od
