@@ -2,7 +2,7 @@ use default
 
 use Raster.AXES
 use Raster.IMAGE
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 use Color = (red: ubyte, green: ubyte, blue: ubyte)
 use Sorter = (name: string, sort: (LIST[int]) -> void, color: Color)
@@ -97,7 +97,7 @@ microseconds(sort: LIST[int] -> void, data: int[]) -> double =>
         |> map(_ =>
             let
                 copy = LIST(data),
-                clock = Stopwatch.start_new()
+                clock = STOPWATCH.start_new()
             in
                 (
                     sort(copy)

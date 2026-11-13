@@ -1,9 +1,9 @@
 use default
-use System.DateTime
+use Time.DATE_TIME
 use System.Environment
 use System.Environment_SpecialFolder.USER_PROFILE
 
-class ENTRY(date: DateTime, category: string, description: string) is
+class ENTRY(date: DATE_TIME, category: string, description: string) is
     line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"
 
     read(line: string) -> ENTRY? static is
@@ -13,7 +13,7 @@ class ENTRY(date: DateTime, category: string, description: string) is
             return null
         fi
 
-        ENTRY(DateTime.parse(parts[0]), parts[1], parts[2])
+        ENTRY(DATE_TIME.parse(parts[0]), parts[1], parts[2])
     si
 
     to_string() -> string =>
@@ -31,7 +31,7 @@ read_all(file: string) -> LIST[ENTRY] =>
         LIST()
     fi
 
-add(file: string, category: string, description: string, date: DateTime) is
+add(file: string, category: string, description: string, date: DATE_TIME) is
     let entries = read_all(file)
 
     entries.add(ENTRY(date, category, description))
@@ -88,14 +88,14 @@ demo() is
             file,
             "book",
             "The Go Programming Language",
-            DateTime.parse("2026-01-14")
+            DATE_TIME.parse("2026-01-14")
         )
-        add(file, "film", "Solaris", DateTime.parse("2026-02-02"))
+        add(file, "film", "Solaris", DATE_TIME.parse("2026-02-02"))
         add(
             file,
             "book",
             "Programming in Lua",
-            DateTime.parse("2026-03-21")
+            DATE_TIME.parse("2026-03-21")
         )
 
         write_line("latest: {latest(file)}")
@@ -133,9 +133,9 @@ entry(args: string[]) -> int is
 
         let date =
             if args.count > 3 then
-                DateTime.parse(args[3])
+                DATE_TIME.parse(args[3])
             else
-                DateTime.now
+                DATE_TIME.now
             fi
 
         add(file, args[1], args[2], date)

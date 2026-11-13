@@ -1,5 +1,5 @@
 use default
-use System.DateTime
+use Time.DATE_TIME
 
 let republican_months = [
     "Vendémiaire", "Brumaire", "Frimaire", "Nivôse", "Pluviôse", "Ventôse",
@@ -16,7 +16,7 @@ let gregorian_months = [
     "August", "September", "October", "November", "December"
 ]
 
-let epoch = DateTime(1792, 9, 22)
+let epoch = DATE_TIME(1792, 9, 22)
 
 is_leap(republican_year) =>
     let following = republican_year + 1 in
@@ -67,7 +67,7 @@ let samples = [
 ]
 
 for (year, month, day) in samples do
-    let date = DateTime(year, month, day)
+    let date = DATE_TIME(year, month, day)
     let republican = to_republican(date)
 
     write_line("{describe(date)} = {republican}")

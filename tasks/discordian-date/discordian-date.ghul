@@ -1,6 +1,6 @@
 use default
 
-use System.DateTime
+use Time.DATE_TIME
 
 let seasons = [
     "Chaos", "Discord", "Confusion", "Bureaucracy",
@@ -24,7 +24,7 @@ discordian(date) =>
     if date.month == 2 /\ date.day == 29 then
         "St. Tib's Day, YOLD {year}"
     else
-        let leap = DateTime.is_leap_year(date.year),
+        let leap = DATE_TIME.is_leap_year(date.year),
             leap_shift = if leap /\ date.month > 2 then 1 else 0 fi,
             day = date.day_of_year - 1 - leap_shift,
             season = day / 73,
@@ -47,5 +47,5 @@ let dates = [
 ]
 
 for text in dates do
-    write_line("{text}  {discordian(DateTime.parse(text))}")
+    write_line("{text}  {discordian(DATE_TIME.parse(text))}")
 od

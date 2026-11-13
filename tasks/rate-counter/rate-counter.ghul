@@ -1,13 +1,13 @@
 use default
 
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 class RATE_COUNTER is
-    _clock: Stopwatch
+    _clock: STOPWATCH
     _jobs: int
 
     init() is
-        _clock = Stopwatch()
+        _clock = STOPWATCH()
         _jobs = 0
     si
 
@@ -25,7 +25,7 @@ si
 
 job() -> void => 0..10_000 |> sum_by(i => long(i) * long(i))
 
-let tick_ns = 1.0e9 / double(Stopwatch.frequency)
+let tick_ns = 1.0e9 / double(STOPWATCH.frequency)
 write_line("timer resolution: {tick_ns:F0} ns")
 
 for count in [100, 1_000, 10_000] do
@@ -42,7 +42,7 @@ for count in [100, 1_000, 10_000] do
 od
 
 let counter = RATE_COUNTER()
-let deadline = Stopwatch.start_new()
+let deadline = STOPWATCH.start_new()
 
 while deadline.elapsed.total_seconds < 0.25 do
     counter.tick(job)

@@ -1,5 +1,5 @@
 use default
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 // The Chudnovsky series, summed by binary splitting.
 
@@ -100,7 +100,7 @@ pi_digits(digits: int) -> string =>
     in
         "{text[0]}.{text.substring(1, digits - 1)}"
 
-let clock = Stopwatch.start_new()
+let clock = STOPWATCH.start_new()
 write_line("computing a million digits, which takes a while")
 
 let pi = pi_digits(1_000_000)

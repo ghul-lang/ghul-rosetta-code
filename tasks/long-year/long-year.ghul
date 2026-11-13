@@ -1,6 +1,6 @@
 use default
 
-use System.Globalization.ISOWeek
+use Time.ISO_WEEK
 
 december_31_weekday(year) => (year + year / 4 - year / 100 + year / 400) % 7
 
@@ -17,7 +17,7 @@ for row in 2000::2100 |> filter(is_long_year) |> chunk(9) do
     write_line(row |> join(" "))
 od
 
-has_53_weeks(year) => ISOWeek.get_weeks_in_year(year) == 53
+has_53_weeks(year) => ISO_WEEK.get_weeks_in_year(year) == 53
 
 let agrees =
     1600::2400 |> all(year => is_long_year(year) == has_53_weeks(year))

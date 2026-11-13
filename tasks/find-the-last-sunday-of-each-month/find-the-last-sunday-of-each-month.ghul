@@ -3,10 +3,10 @@ use default
 let year = 2013
 
 last_sunday(month) =>
-    let last = System.DateTime(
+    let last = Time.DATE_TIME(
         year,
         month,
-        System.DateTime.days_in_month(year, month)
+        Time.DATE_TIME.days_in_month(year, month)
     )
     in
     last.add_days(double(-cast int(last.day_of_week)))

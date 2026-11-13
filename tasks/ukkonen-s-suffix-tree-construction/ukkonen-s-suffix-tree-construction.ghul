@@ -1,5 +1,5 @@
 use default
-use System.Diagnostics.Stopwatch
+use Time.STOPWATCH
 
 square_root(n: bigint) -> bigint is
     let bits = int(n.get_bit_length())
@@ -197,7 +197,7 @@ write_line("")
 let digits = pi_digits(100_000)
 
 for count in [1_000, 10_000, 100_000] do
-    let clock = Stopwatch.start_new()
+    let clock = STOPWATCH.start_new()
     let tree = SUFFIX_TREE("{digits.substring(0, count)}$")
     let repeat = tree.longest_repeat()
     let elapsed = clock.elapsed.total_milliseconds

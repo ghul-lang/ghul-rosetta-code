@@ -7,7 +7,7 @@ use System.Threading.Thread
 
 metronome(beats_per_minute, beats_per_bar, bars) is
     let interval = 60_000 / beats_per_minute
-    let clock = System.Diagnostics.Stopwatch.start_new()
+    let clock = Time.STOPWATCH.start_new()
 
     write_line(
         "{beats_per_minute} beats a minute, {beats_per_bar} to the bar"
