@@ -4,8 +4,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageVersion Include="ghul.runtime" Version="40.5.0" />
-    <PackageVersion Include="ghul.raster" Version="1.1.2" />
+    <PackageVersion Include="ghul.runtime" Version="41.1.0" />
+    <PackageVersion Include="ghul.raster" Version="1.1.5" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.12" />
     <PackageVersion Include="MSTest.TestFramework" Version="4.4.1" />
   </ItemGroup>
