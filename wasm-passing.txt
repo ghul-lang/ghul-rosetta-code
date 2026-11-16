@@ -1,4 +1,4 @@
-# ghul.compiler 71.8.4, ghul-runtime v38.10.2
+# ghul.compiler 73.1.0, ghul-runtime v42.7.0
 100-doors
 100-prisoners
 15-puzzle-game
@@ -210,6 +210,7 @@ combinations-and-permutations/02-terse
 combinations-with-repetitions
 comma-quibbling
 command-line-arguments
+commatizing-numbers
 comments
 compare-a-list-of-strings
 compare-length-of-two-strings
@@ -217,6 +218,7 @@ compare-sorting-algorithms-performance
 compiler-ast-interpreter
 compiler-code-generator
 compiler-lexical-analyzer
+compiler-preprocessor
 compiler-simple-file-inclusion-pre-processor
 compiler-syntax-analyzer
 compiler-verifying-syntax
@@ -512,6 +514,7 @@ harriss-spiral
 harshad-or-niven-series
 hash-from-two-arrays
 hash-join
+hashtron-inference
 haversine-formula
 held-karp-algorithm
 hello-world-graphical
@@ -546,10 +549,12 @@ huffman-coding/01-the-code-table
 huffman-coding/02-the-tree-drawn
 humble-numbers
 hunt-the-wumpus
+i-before-e-except-after-c
 i-m-a-software-engineer-get-me-out-of-here
 iban
 iccanobif-primes
 identity-matrix
+idiomatically-determine-all-the-characters-that-can-be-used-for-symbols
 idiomatically-determine-all-the-lowercase-and-uppercase-letters
 idoneal-numbers
 image-convolution
@@ -647,6 +652,7 @@ long-year
 longest-common-subsequence
 longest-common-substring
 longest-increasing-subsequence
+longest-string-challenge
 look-and-say-sequence
 loop-over-multiple-arrays-simultaneously/01-zip
 loop-over-multiple-arrays-simultaneously/02-index-range
@@ -681,6 +687,7 @@ luhn-test-of-credit-card-numbers
 lychrel-numbers
 lyndon-word
 lzw-compression
+mad-libs
 magic-8-ball
 magic-constant
 magic-numbers
@@ -975,6 +982,7 @@ recursive-descent-parser-generator/01-the-generator
 recursive-descent-parser-generator/02-the-generated-parser
 reduced-row-echelon-form
 reflection-list-properties
+regular-expressions
 remove-duplicate-elements
 remove-lines-from-a-file
 rename-a-file
@@ -986,6 +994,7 @@ repunit-primes
 resistor-mesh
 return-multiple-values
 reverse-a-string
+reverse-the-gender-of-a-string
 reverse-words-in-a-string
 rhonda-numbers
 riemann-surface
@@ -998,6 +1007,8 @@ roman-numerals-encode
 roots-of-a-function
 roots-of-a-quadratic-function
 roots-of-unity
+rosetta-code-find-bare-lang-tags
+rosetta-code-fix-code-tags
 rot-13
 rotating-rubik-s-cube
 round-robin-tournament-schedule
@@ -1279,9 +1290,11 @@ upside-down-numbers
 url-decoding/01-using-unescape-data-string
 url-decoding/02-decoder-written-out
 url-encoding
+url-parser
 user-defined-pipe-and-redirection-operators
 user-input-text
 utf-8-encode-and-decode
+validate-international-securities-identification-number
 vampire-number
 van-der-corput-sequence
 van-eck-sequence
@@ -1318,6 +1331,7 @@ weird-numbers
 wieferich-primes
 wilson-primes-of-order-n
 wireworld
+word-frequency
 word-ladder
 word-search
 word-wheel
