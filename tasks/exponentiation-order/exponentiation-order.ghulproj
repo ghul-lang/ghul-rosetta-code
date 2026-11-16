@@ -5,6 +5,7 @@
 
     <AssemblyName>binary</AssemblyName>
     <GhulCompiler>dotnet ghul-compiler --test-run</GhulCompiler>
+    <GhulNoWarn>power-chain</GhulNoWarn>
   </PropertyGroup>
 
   <ItemGroup>
