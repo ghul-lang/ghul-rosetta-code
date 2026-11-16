@@ -1,7 +1,7 @@
 use default
 
-// `**` raises to a power. It binds more tightly than `*` and, like every
-// ghūl operator, groups to the left, so 5 ** 3 ** 2 is (5 ** 3) ** 2.
+// The power operator binds more tightly than `*` and, like every ghūl
+// operator, groups to the left, so 5 ** 3 ** 2 is (5 ** 3) ** 2.
 // The compiler warns about a chain like that, which is what this task
 // shows, so its project turns the warning off.
 
