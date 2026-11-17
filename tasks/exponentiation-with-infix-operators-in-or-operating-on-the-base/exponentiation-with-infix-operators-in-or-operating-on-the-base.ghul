@@ -3,15 +3,12 @@ use default
 // A prefix operator applies to its operand before any infix operator
 // does, so -x ** p raises -x to the power p.
 
-for x in [-5, 5] do
-    for p in [2, 3] do
-        let first = -x ** p, second = -(x) ** p
-        let third = (-x) ** p, fourth = -(x ** p)
+let lines = [
+    "x = {x,2}, p = {p}:  -x ** p = {-x ** p,4}  "
+    "-(x) ** p = {-(x) ** p,4}  (-x) ** p = {(-x) ** p,4}  "
+    "-(x ** p) = {-(x ** p),4}"
+    for x in [-5, 5]
+    for p in [2, 3]
+]
 
-        write_line(
-            "x = {x,2}, p = {p}:  -x ** p = {first,4}  "
-            "-(x) ** p = {second,4}  (-x) ** p = {third,4}  "
-            "-(x ** p) = {fourth,4}"
-        )
-    od
-od
+lines |> each(write_line)
