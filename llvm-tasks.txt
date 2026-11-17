@@ -917,6 +917,7 @@ tasks/prime-reciprocal-sum
 tasks/prime-triangle
 tasks/primes-allocate-descendants-to-their-ancestors
 tasks/primes-n-2-m-1
+tasks/primorial-numbers
 tasks/print-itself
 tasks/priority-queue
 tasks/probabilistic-choice
