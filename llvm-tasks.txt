@@ -41,6 +41,7 @@ tasks/anadromes
 tasks/anagram-generator
 tasks/anagrams
 tasks/anagrams-deranged-anagrams
+tasks/anaprimes
 tasks/angle-difference-between-two-bearings
 tasks/angles-geometric-normalization-and-conversion
 tasks/animate-a-pendulum
@@ -372,6 +373,7 @@ tasks/even-or-odd
 tasks/events
 tasks/evolutionary-algorithm
 tasks/exceptions
+tasks/execute-a-markov-algorithm
 tasks/execute-brain/01-hello-world
 tasks/execute-brain/02-running-what-you-type
 tasks/execute-computer-zero
@@ -445,9 +447,11 @@ tasks/forbidden-numbers
 tasks/forest-fire
 tasks/formal-power-series
 tasks/fortunate-numbers
+tasks/forward-difference
 tasks/four-bit-adder/01-gates-as-functions
 tasks/four-bit-adder/02-gates-as-objects
 tasks/four-is-magic
+tasks/four-is-the-number-of-letters-in-the
 tasks/four-rings-or-four-squares-puzzle
 tasks/fractal-tree
 tasks/fraction-reduction
@@ -590,6 +594,7 @@ tasks/k-d-tree
 tasks/k-means-clustering
 tasks/kaprekar-numbers
 tasks/kernighans-large-earthquake-problem
+tasks/kirkpatrick-seidel-algorithm
 tasks/klarner-rado-sequence
 tasks/klein-bottle
 tasks/knapsack-problem-0-1
@@ -598,6 +603,7 @@ tasks/knapsack-problem-continuous
 tasks/knapsack-problem-unbounded
 tasks/knight-s-tour
 tasks/knuth-s-algorithm-s
+tasks/knuth-shuffle
 tasks/koch-curve
 tasks/kolakoski-sequence
 tasks/kosaraju
@@ -670,6 +676,7 @@ tasks/loops-wrong-ranges
 tasks/lorenz-attractor
 tasks/lu-decomposition
 tasks/lucas-lehmer-test
+tasks/lucky-and-even-lucky-numbers
 tasks/ludic-numbers
 tasks/luhn-test-of-credit-card-numbers
 tasks/lychrel-numbers
@@ -935,6 +942,7 @@ tasks/queue-usage
 tasks/quickhull
 tasks/quickselect-algorithm
 tasks/quine
+tasks/quine-mccluskey-algorithm
 tasks/quoting-constructs
 tasks/radical-of-an-integer
 tasks/ramanujan-primes-twins
@@ -972,6 +980,7 @@ tasks/regular-expressions
 tasks/remove-duplicate-elements
 tasks/remove-lines-from-a-file
 tasks/rename-a-file
+tasks/rendezvous
 tasks/rep-string
 tasks/repeat
 tasks/repeat-a-string
@@ -1090,6 +1099,7 @@ tasks/sorensen-dice-coefficient
 tasks/sort-a-list-of-object-identifiers
 tasks/sort-an-array-of-composite-structures
 tasks/sort-an-integer-array
+tasks/sort-an-outline-at-every-level
 tasks/sort-disjoint-sublist
 tasks/sort-numbers-lexicographically
 tasks/sort-stability
@@ -1112,10 +1122,12 @@ tasks/sorting-algorithms-pancake-sort
 tasks/sorting-algorithms-patience-sort
 tasks/sorting-algorithms-permutation-sort
 tasks/sorting-algorithms-quicksort
+tasks/sorting-algorithms-radix-sort
 tasks/sorting-algorithms-selection-sort
 tasks/sorting-algorithms-shell-sort
 tasks/sorting-algorithms-sleep-sort
 tasks/sorting-algorithms-stooge-sort
+tasks/sorting-algorithms-strand-sort
 tasks/sorting-algorithms-tree-sort-on-a-linked-list
 tasks/soundex
 tasks/sparkline-in-unicode
@@ -1193,6 +1205,7 @@ tasks/sutherland-hodgman-polygon-clipping
 tasks/sylvesters-sequence
 tasks/symmetric-difference
 tasks/sync-subtitles
+tasks/synchronous-concurrency
 tasks/syntax-highlighting-using-mediawiki-formatting
 tasks/system-time
 tasks/take-notes-on-the-command-line
@@ -1261,6 +1274,7 @@ tasks/undulating-numbers
 tasks/unicode-variable-names
 tasks/universal-turing-machine
 tasks/unix-ls
+tasks/uno-card-game
 tasks/unprimeable-numbers
 tasks/untouchable-numbers
 tasks/upc
@@ -1309,6 +1323,7 @@ tasks/weiler-atherton-polygon-clipping
 tasks/weird-numbers
 tasks/wieferich-primes
 tasks/wilson-primes-of-order-n
+tasks/wireworld
 tasks/wolstenholme-numbers/01-harmonic-sums
 tasks/wolstenholme-numbers/02-terse
 tasks/word-frequency
