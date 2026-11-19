@@ -12,7 +12,7 @@ let entries =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(is_hex_word)
         |> map(word =>
-            let value = System.Convert.to_int64(word, 16) in
+            let value = Text.from_base(word, 16)! in
             (
                 word = word,
                 value = value,

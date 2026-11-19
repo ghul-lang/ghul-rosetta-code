@@ -1,9 +1,9 @@
 use default
 
-use System.Convert
+use Text.from_base
 use System.Globalization.NumberStyles
 
-// Convert.ToInt64 parses bases 2, 8, 10 and 16, and for base 16 accepts a
+// from_base parses bases 2, 8, 10 and 16, and for base 16 accepts a
 // leading 0x as well. Other bases have no built-in parser.
 
 let cases = [
@@ -11,7 +11,7 @@ let cases = [
 ]
 
 for (text, base) in cases do
-    write_line("{text,-8} in base {base,2}: {Convert.to_int64(text, base)}")
+    write_line("{text,-8} in base {base,2}: {from_base(text, base)!}")
 od
 
 let hex = int.parse("ff", NumberStyles.HEX_NUMBER)

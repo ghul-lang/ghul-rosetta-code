@@ -1,5 +1,5 @@
 use default
-use System.Convert.to_string
+use Text.to_base
 
 successors(from: int) -> int{} is
     let n mut = from
@@ -18,7 +18,7 @@ for start in [1, 3, 7, 15] do
     write_line("from {start}:")
 
     for value in successors(start) |> take(10) do
-        write_line("{value,8}  {to_string(value, 2),14}")
+        write_line("{value,8}  {to_base(value, 2),14}")
     od
 
     write_line()

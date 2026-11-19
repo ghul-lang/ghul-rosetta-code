@@ -41,4 +41,4 @@ let bits =
         )
         |> string()
 
-write_line("83116/51639 is term {System.Convert.to_int64(bits, 2)}")
+write_line("83116/51639 is term {Text.from_base(bits, 2)!}")

@@ -55,7 +55,7 @@ test_entry() is
 
             let reader = IO.StreamReader(tls)
 
-            let expected = System.Convert.to_base64_string(
+            let expected = Text.to_base64(
                 Encoding.utf8.get_bytes("rosetta:code")
             )
             let allowed mut = false
