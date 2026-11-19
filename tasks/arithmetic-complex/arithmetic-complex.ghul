@@ -1,5 +1,4 @@
 use default
-use Ghul.Math.Complex
 
 show(name, value) =>
     let
@@ -8,13 +7,13 @@ show(name, value) =>
     in
         write_line("{name,-10} {value.real} {sign} {size}i")
 
-let a = Complex(1.0, 1.0)
-let b = Complex(3.14159, 1.25)
+let a = 1r + 1j
+let b = 3.14159r + 1.25j
 
 show("a", a)
 show("b", b)
 show("a + b", a + b)
 show("a * b", a * b)
 show("negation", -a)
-show("inverse", Complex.one / a)
-show("conjugate", Complex.conjugate(a))
+show("inverse", 1r / a)
+show("conjugate", complex.conjugate(a))

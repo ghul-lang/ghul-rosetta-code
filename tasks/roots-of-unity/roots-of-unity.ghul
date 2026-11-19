@@ -1,11 +1,9 @@
 use default
 
-use Ghul.Math.Complex
-
-roots_of_unity(n: int) -> Complex{} =>
+roots_of_unity(n: int) -> complex{} =>
     (0..n)
         |> map(k =>
-            Complex.from_polar_coordinates(
+            complex.from_polar_coordinates(
                 1.0,
                 2.0 * pi * double(k) / double(n)
             )
@@ -13,7 +11,7 @@ roots_of_unity(n: int) -> Complex{} =>
 
 tidy(x: double) -> double => if abs(x) < 0.00005 then 0.0 else x fi
 
-show(z: Complex) -> string =>
+show(z: complex) -> string =>
     let
         re = tidy(z.real),
         im = tidy(z.imaginary)
