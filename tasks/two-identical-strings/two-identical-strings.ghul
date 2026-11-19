@@ -1,8 +1,8 @@
 use default
 
 for half in 1::31 do
-    let binary = System.Convert.to_string(half, 2)
-    let n = System.Convert.to_int32("{binary}{binary}", 2)
+    let binary = Text.to_base(half, 2)
+    let n = int(Text.from_base("{binary}{binary}", 2)!)
 
     if n < 1000 then
         write_line("{n,4}  {binary}{binary}")

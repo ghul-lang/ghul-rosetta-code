@@ -1,11 +1,10 @@
 use default
-use System.Convert
 use System.Text.Encoding
 
 decoded_bytes(text: string, at: int) -> ubyte{} is
     if at < text.length then
         if text[at] == '%' /\ at + 2 < text.length then
-            yield Convert.to_byte(text[at + 1..at + 3], 16)
+            yield ubyte(Text.from_base(text[at + 1..at + 3], 16)!)
             yield in decoded_bytes(text, at + 3)
         else
             yield ubyte(text[at])

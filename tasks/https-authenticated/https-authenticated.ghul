@@ -17,7 +17,7 @@ fetch(
     client.default_request_headers.authorization =
         System.Net.Http.Headers.AuthenticationHeaderValue(
             "Basic",
-            System.Convert.to_base64_string(pair)
+            Text.to_base64(pair)
         )
 
     let response = client.get_async(url).result

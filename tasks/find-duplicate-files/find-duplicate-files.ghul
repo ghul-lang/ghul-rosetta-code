@@ -14,7 +14,7 @@ use Group = (size: long, paths: ARRAY[string])
 
 digest(path: string) -> string =>
     let bytes = File.read_all_bytes(path) in
-    System.Convert.to_hex_string(sha256(bytes))
+    Text.to_hex(sha256(bytes))
 
 same_contents(root: string, size: long, paths: string{}) -> Group{} =>
     paths

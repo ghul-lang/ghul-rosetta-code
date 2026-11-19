@@ -1,5 +1,5 @@
 use default
-use System.Convert.to_string
+use Text.to_base
 
 unit[T](value: T) -> T{} => [value]
 
@@ -7,7 +7,7 @@ unit[T](value: T) -> T{} => [value]
 
 factors(n: int) -> int{} => 1::n |> filter(d => n % d == 0)
 
-spellings(n: int) -> string{} => ["{n}", "0b{to_string(n, 2)}"]
+spellings(n: int) -> string{} => ["{n}", "0b{to_base(n, 2)}"]
 
 write_line((unit(6) >>= factors) |> join())
 write_line((unit(6) >>= factors >>= spellings) |> join())

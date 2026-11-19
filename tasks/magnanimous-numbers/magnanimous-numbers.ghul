@@ -5,8 +5,8 @@ is_magnanimous(value: int) -> bool =>
     1..digits.length
         |> all(split =>
             is_prime(
-                System.Convert.to_int32(digits[0..split]) +
-                System.Convert.to_int32(digits[split..<0])
+                parse[int](digits[0..split])! +
+                parse[int](digits[split..<0])!
             )
         )
 

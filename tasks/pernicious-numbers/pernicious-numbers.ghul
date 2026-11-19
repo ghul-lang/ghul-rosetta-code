@@ -5,7 +5,7 @@ prime(value) =>
     2::int(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0)
 
 population_count(value) =>
-    System.Convert.to_string(value, 2) |> filter(* == '1') |> count()
+    Text.to_base(value, 2) |> filter(* == '1') |> count()
 
 pernicious(value) => prime(population_count(value))
 
