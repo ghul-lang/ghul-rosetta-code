@@ -2,8 +2,7 @@ use default
 use Text.to_base
 use System.Numerics.BitOperations
 
-show(name, value) =>
-    write_line("{name,-22} {to_base(value, 2),32}")
+show(name, value) => write_line("{name,-22} {to_base(value, 2),32}")
 
 rotate_left(a, by) => int(BitOperations.rotate_left(uint(a), by))
 
