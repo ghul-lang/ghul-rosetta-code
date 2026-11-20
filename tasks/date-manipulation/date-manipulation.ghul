@@ -15,7 +15,7 @@ let offsets = [
     |> MAP()
 
 let format = "MMMM d yyyy h:mmtt"
-let culture = CultureInfo.invariant_culture
+let culture = Locale.invariant_culture
 
 parse(text: string) -> DATE_TIME_OFFSET =>
     let

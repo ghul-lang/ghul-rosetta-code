@@ -23,4 +23,4 @@ let agrees =
     1600::2400 |> all(year => is_long_year(year) == has_53_weeks(year))
 
 write_line()
-write_line("Agrees with ISOWeek from 1600 to 2400: {agrees}")
+write_line("Agrees with IsoWeek from 1600 to 2400: {agrees}")

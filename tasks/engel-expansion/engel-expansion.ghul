@@ -2,7 +2,7 @@ use default
 use Ghul.Math.Number
 use Ghul.Math.MultiplyOperators.`*
 
-power[T: INumber[T]](base: T, exponent: int) -> T =>
+power[T: Number[T]](base: T, exponent: int) -> T =>
     if exponent == 0 then
         T.one
     elif exponent % 2 == 0 then
