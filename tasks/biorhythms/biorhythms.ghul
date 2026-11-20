@@ -18,7 +18,7 @@ let quadrants = [
 ]
 
 date(text: string) -> DateTime =>
-    DateTime.parse(text, Locale.invariant_culture)
+    DateTime.parse(text, Locale.invariant)
 
 show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
 

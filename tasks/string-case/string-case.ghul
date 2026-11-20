@@ -2,7 +2,7 @@ use default
 use Text.Locale
 
 let subject = "alphaBETA"
-let invariant = Locale.invariant_culture
+let invariant = Locale.invariant
 
 write_line("upper: {subject.to_upper_invariant()}")
 write_line("lower: {subject.to_lower_invariant()}")

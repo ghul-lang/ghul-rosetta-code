@@ -8,7 +8,7 @@ for line in IO.File.read_all_lines("masses.txt") do
 
     masses[fields[0]] = double.parse(
         fields[1],
-        Text.Locale.invariant_culture
+        Text.Locale.invariant
     )
 od
 

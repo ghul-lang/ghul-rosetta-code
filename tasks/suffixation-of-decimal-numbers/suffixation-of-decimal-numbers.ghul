@@ -5,7 +5,7 @@ let suffixes = [
     "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"
 ]
 
-let invariant = Locale.invariant_culture
+let invariant = Locale.invariant
 
 suffize(text: string, digits: int?, base: int) -> string is
     let cleaned = text.trim().replace(",", "")
