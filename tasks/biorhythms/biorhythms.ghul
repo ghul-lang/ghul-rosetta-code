@@ -17,8 +17,7 @@ let quadrants = [
     ("down but rising", "transition")
 ]
 
-date(text: string) -> DateTime =>
-    DateTime.parse(text, Locale.invariant)
+date(text: string) -> DateTime => DateTime.parse(text, Locale.invariant)
 
 show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
 
