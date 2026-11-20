@@ -80,7 +80,7 @@ usage() is
 si
 
 demo() is
-    let name = "simple-database-{System.Guid.new_guid()}"
+    let name = "simple-database-{Ghul.RANDOM().next_int64()}"
     let file = IO.Path.combine(IO.Path.get_temp_path(), name)
 
     try
