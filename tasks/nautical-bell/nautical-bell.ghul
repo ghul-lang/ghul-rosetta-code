@@ -74,15 +74,7 @@ si
 if let ["--live", ..] = args then
     keep_watch(SYSTEM_CLOCK(), Time.DateTime.max_value)
 else
-    let midnight = Time.DateTime(
-        2026,
-        1,
-        1,
-        0,
-        0,
-        0,
-        Time.DateTimeKind.UTC
-    )
+    let midnight = Time.DateTime(2026, 1, 1, 0, 0, 0, Time.DateTimeKind.UTC)
 
     keep_watch(SIMULATED_CLOCK(midnight), midnight.add_days(1.0))
 fi

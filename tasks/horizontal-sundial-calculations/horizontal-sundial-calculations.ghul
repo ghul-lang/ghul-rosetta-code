@@ -12,10 +12,7 @@ ask(prompt: string) -> double? is
 
     write_line("> {line.trim()}")
 
-    return double.parse(
-        line,
-        Text.Locale.invariant_culture
-    )
+    return double.parse(line, Text.Locale.invariant_culture)
 si
 
 radians(degrees: double) -> double => degrees * pi / 180.0

@@ -22,8 +22,7 @@ parse(text: string) -> DateTimeOffset =>
         split = text.last_index_of(' '),
         zone = text[split + 1..<0]
     in
-        let clock = DateTime.parse_exact(text[0..split], format, culture)
-        in
+        let clock = DateTime.parse_exact(text[0..split], format, culture) in
         DateTimeOffset(clock, TimeSpan.from_hours(offsets[zone]))
 
 show(time) =>
