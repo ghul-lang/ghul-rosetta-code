@@ -69,7 +69,7 @@ let examples = [
         [complex.one, complex.zero, complex.one]
     ],
     [
-        [complex(r, 0.0), complex(r, 0.0), complex.zero],
+        [complex(r), complex(r), complex.zero],
         [complex(0.0, r), complex(0.0, -r), complex.zero],
         [complex.zero, complex.zero, 1j]
     ]
