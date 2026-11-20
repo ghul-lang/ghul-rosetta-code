@@ -4,7 +4,7 @@ use Raster.IMAGE
 
 use Step = (x: double, y: double, corner: int)
 
-let random = System.Random(20260918)
+let random = Ghul.Random(20260918)
 
 let corners = [
     (x = 0.0, y = 0.0),

@@ -3,7 +3,7 @@ use IO.Std.write
 use Ghul.Coroutines
 
 @suppress("non-pascal-case-name")
-class OUT_OF_INK: System.Exception is
+class OUT_OF_INK: Ghul.Exception is
     init() is
         super.init("out of ink")
     si
@@ -17,30 +17,30 @@ si
 use Reply.NO_INK
 use Reply.PRINTED
 
-class REQUEST(line: string, replies: CHANNEL[Reply])
+class REQUEST(line: string, replies: Channel[Reply])
 
 class PRINTER is
     _name: string
     _ink: int
     _reserve: PRINTER?
-    _requests: CHANNEL[REQUEST]
+    _requests: Channel[REQUEST]
 
     init(name: string, ink: int, reserve: PRINTER?) is
         _name = name
         _ink = ink
         _reserve = reserve
-        _requests = CHANNEL()
+        _requests = Channel()
     si
 
-    submit(line: string) -> COROUTINE[Reply] is
-        let replies = CHANNEL()
+    submit(line: string) -> Coroutine[Reply] is
+        let replies = Channel()
 
         _requests.send(REQUEST(line, replies))
 
         return await replies.receive()
     si
 
-    print(line: string) -> COROUTINE is
+    print(line: string) -> Coroutine is
         let reply = await submit(line)
 
         if isa NO_INK(reply) then
@@ -48,7 +48,7 @@ class PRINTER is
         fi
     si
 
-    serve() -> COROUTINE is
+    serve() -> Coroutine is
         do
             let request = await _requests.receive()
 
@@ -78,7 +78,7 @@ si
 let reserve = PRINTER("reserve", 5, null)
 let main = PRINTER("main", 5, reserve)
 
-writer(name: string, lines: string[]) -> COROUTINE is
+writer(name: string, lines: string[]) -> Coroutine is
     try
         for line in lines do
             await main.print(line)

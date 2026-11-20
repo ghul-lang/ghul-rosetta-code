@@ -50,7 +50,7 @@ let prelude = [
     "",
     "expect(token: string) is",
     "    if !accept(token) then",
-    "        throw System.Exception("
+    "        throw Ghul.Exception("
     "\"expected {{token}}, found {{peek()}}\")",
     "    fi",
     "si",
@@ -59,7 +59,7 @@ let prelude = [
     "    let token = peek()",
     "",
     "    if token.length == 0 \\/ !token[0].is_letter then",
-    "        throw System.Exception(\"expected a name, found {{token}}\")",
+    "        throw Ghul.Exception(\"expected a name, found {{token}}\")",
     "    fi",
     "",
     "    at = at + 1",

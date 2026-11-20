@@ -3,13 +3,13 @@ use IO
 
 truncate(path, length) is
     if !IO.File.exists(path) then
-        throw System.Exception("no such file: {path}")
+        throw Ghul.Exception("no such file: {path}")
     fi
 
     let current = IO.File.read_all_bytes(path).count
 
     if length >= cast(current) then
-        throw System.Exception(
+        throw Ghul.Exception(
             "length {length} is not less than the current length {current}"
         )
     fi
@@ -31,13 +31,13 @@ write_line("{IO.File.read_all_bytes(path) |> join(" ")}")
 
 try
     truncate("missing.bin", 1L)
-catch e: System.Exception
+catch e: Ghul.Exception
     write_line(e.message)
 yrt
 
 try
     truncate(path, 4L)
-catch e: System.Exception
+catch e: Ghul.Exception
     write_line(e.message)
 yrt
 

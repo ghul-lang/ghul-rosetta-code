@@ -117,7 +117,7 @@ let tests = [
 ]
 
 for (message, expected) in tests do
-    let digest = md5(System.Text.Encoding.utf8.get_bytes(message))
+    let digest = md5(Text.Encoding.utf8.get_bytes(message))
 
     assert digest =~ expected else "does not agree with RFC 1321"
 

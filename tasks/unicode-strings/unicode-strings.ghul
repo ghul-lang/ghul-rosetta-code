@@ -45,9 +45,9 @@ write_line("")
 let text = "né"
 
 write_line("every .NET encoding is reachable, here for {text}")
-write_line("  UTF-8    {bytes(System.Text.Encoding.utf8, text)}")
+write_line("  UTF-8    {bytes(Text.Encoding.utf8, text)}")
 write_line("  UTF-16   {bytes(Text.UTF16_ENCODING(), text)}")
-write_line("  UTF-32   {bytes(System.Text.Encoding.utf32, text)}")
+write_line("  UTF-32   {bytes(Text.Encoding.utf32, text)}")
 write_line("")
 
 let composed = "\u00E9"

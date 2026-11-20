@@ -11,7 +11,7 @@ let answers = [
     "Outlook not so good.", "Very doubtful."
 ]
 
-let random = System.Random(8)
+let random = Ghul.Random(8)
 
 write_line("Ask the Magic 8-Ball a question, or press enter to stop.")
 

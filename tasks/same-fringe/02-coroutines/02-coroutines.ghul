@@ -9,26 +9,26 @@ si
 use Tree.LEAF
 use Tree.NODE
 
-use Comparison = COROUTINE[(same: bool, leaves: int)]
+use Comparison = Coroutine[(same: bool, leaves: int)]
 
 class WALKER is
     _tree: Tree
-    _wanted: CHANNEL[bool]
-    _leaves: CHANNEL[int?]
+    _wanted: Channel[bool]
+    _leaves: Channel[int?]
 
     init(tree: Tree) is
         _tree = tree
-        _wanted = CHANNEL()
-        _leaves = CHANNEL()
+        _wanted = Channel()
+        _leaves = Channel()
     si
 
-    next() -> COROUTINE[int?] is
+    next() -> Coroutine[int?] is
         _wanted.send(true)
 
         return await _leaves.receive()
     si
 
-    walk() -> COROUTINE is
+    walk() -> Coroutine is
         await _emit(_tree)
 
         await _wanted.receive()
@@ -36,7 +36,7 @@ class WALKER is
         _leaves.send(null)
     si
 
-    _emit(tree: Tree) -> COROUTINE is
+    _emit(tree: Tree) -> Coroutine is
         if isa LEAF(tree) then
             await _wanted.receive()
 
@@ -89,7 +89,7 @@ let differs_last = NODE(LEAF(1), NODE(LEAF(2), LEAF(4)))
 let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
 let shorter = NODE(LEAF(1), LEAF(2))
 
-report() -> COROUTINE is
+report() -> Coroutine is
     for
         (first, second) in [
             (leaning_left, leaning_right),

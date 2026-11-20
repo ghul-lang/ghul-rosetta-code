@@ -2,7 +2,7 @@ use default
 use System.Net.Http.HttpClient
 use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
-use System.Text.RegularExpressions.Regex
+use Text.Regex
 
 // The task: count the examples on every task page, which is the number of
 // language headers in its wikitext. The API lists the tasks a batch at a
@@ -37,7 +37,7 @@ count_examples(api: string) is
             let title = task.get_property("title").get_string() ?? ""
             let page = get(
                 "action=parse&prop=wikitext&format=json&formatversion=2"
-                "&page={System.Uri.escape_data_string(title)}"
+                "&page={IO.Uri.escape_data_string(title)}"
             )
             let text =
                 page.get_property("parse").get_property(
@@ -58,7 +58,7 @@ count_examples(api: string) is
         let token = more.get_property("cmcontinue").get_string() ?? ""
 
         next =
-            "&cmcontinue={System.Uri.escape_data_string(token)}"
+            "&cmcontinue={IO.Uri.escape_data_string(token)}"
             "&continue=-||"
     od
 

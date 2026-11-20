@@ -8,7 +8,7 @@ delete_file(path) is
     try
         IO.File.delete(path)
         return "deleted"
-    catch e: System.Exception
+    catch e: Ghul.Exception
         return "refused"
     yrt
 si
@@ -21,7 +21,7 @@ delete_directory(path) is
     try
         IO.Directory.delete(path)
         return "deleted"
-    catch e: System.Exception
+    catch e: Ghul.Exception
         return "refused"
     yrt
 si

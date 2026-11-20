@@ -3,7 +3,7 @@ use default
 use Crypto.sha1
 
 sha1(text: string) -> string =>
-    Text.to_hex_lower(sha1(System.Text.Encoding.utf8.get_bytes(text)))
+    Text.to_hex_lower(sha1(Text.Encoding.utf8.get_bytes(text)))
 
 let messages = [
     "",

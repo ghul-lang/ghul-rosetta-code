@@ -1,5 +1,5 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
 symbol_table() -> LIST[char] =>
     let symbols = int('a')::int('z') |> map(char) |> LIST() in

@@ -60,7 +60,7 @@ find_root() -> string is
         directory = parent.full_name
     od
 
-    throw System.Exception("not inside the ghul-rosetta-code checkout")
+    throw Ghul.Exception("not inside the ghul-rosetta-code checkout")
 si
 
 // The slug and title of every task with a solution here, read from its task.json.
@@ -133,7 +133,7 @@ sync(root: string) is
             let text = IO.File.read_all_text(descriptor)
 
             let updated =
-                System.Text.RegularExpressions.Regex.replace(
+                Text.Regex.replace(
                     text,
                     "\"status\"[ \\t]*:[ \\t]*\"[^\"]*\"",
                     "\"status\": \"{entry.state}\""
@@ -342,7 +342,7 @@ upload_images(
         let path = image_file(root, slug, name)
 
         if !IO.File.exists(path) then
-            throw System.Exception(
+            throw Ghul.Exception(
                 "{title} is referred to but {IO.Path.get_file_name(path)} was not written by the task"
             )
         fi
@@ -360,7 +360,7 @@ upload_images(
             fi
 
             if !recorded.contains_key(title) \/ recorded[title] !~ there then
-                throw System.Exception(
+                throw Ghul.Exception(
                     "File:{title} is not the image published from here, so it "
                     "was not replaced - read it before overwriting it"
                 )
@@ -472,7 +472,7 @@ si
 
 // The digest MediaWiki reports for a file is the SHA-1 of its bytes.
 file_digest(path: string) -> string =>
-    (let hash = System.Security.Cryptography.SHA1.hash_data(IO.File.read_all_bytes(path))
+    (let hash = Crypto.SHA1.hash_data(IO.File.read_all_bytes(path))
 
      System.Convert.to_hex_string(hash).to_lower())
 
@@ -487,7 +487,7 @@ credentials() -> (user: string, password: string) is
         )
 
     if !IO.File.exists(path) then
-        throw System.Exception(
+        throw Ghul.Exception(
             "no wiki credentials at {path}: create one at Special:BotPasswords and write the "
             "user on the first line and the password on the second"
         )
@@ -496,7 +496,7 @@ credentials() -> (user: string, password: string) is
     let lines = IO.File.read_all_lines(path)
 
     if lines.count < 2 then
-        throw System.Exception("{path} should hold the bot user on one line and the password on the next")
+        throw Ghul.Exception("{path} should hold the bot user on one line and the password on the next")
     fi
 
     return (user = lines[0].trim(), password = lines[1].trim())
@@ -641,7 +641,7 @@ self_test() is
 
     check_that(
         "adjacent ghul sections are replaced by one",
-        System.Text.RegularExpressions.Regex.matches(folded, "(?i)header\\|ghul").count == 1 /\
+        Text.Regex.matches(folded, "(?i)header\\|ghul").count == 1 /\
             !folded.contains("older") /\
             !folded.contains("old\n")
     )
@@ -1245,12 +1245,12 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
                 else
                     wiki.lines_removed(source, spliced)
                 fi
-        catch problem: System.Exception
+        catch problem: Ghul.Exception
             error.write_line("{entry.title}: could not check how many lines this would remove, so nothing was sent - {problem.message}")
 
             refused = refused + 1
 
-            System.Threading.Thread.sleep(pace_ms())
+            Tasks.Thread.sleep(pace_ms())
 
             continue
         yrt
@@ -1260,7 +1260,7 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
 
             refused = refused + 1
 
-            System.Threading.Thread.sleep(pace_ms())
+            Tasks.Thread.sleep(pace_ms())
 
             continue
         fi
@@ -1293,13 +1293,13 @@ publish(root: string, slugs: LIST[string], dry_run: bool, target: string?, api: 
 
                 write_line("{entry.title}: published, {where}")
             fi
-        catch refusal: System.Exception
+        catch refusal: Ghul.Exception
             refused = refused + 1
 
             error.write_line("{entry.title}: {refusal.message}")
         yrt
 
-        System.Threading.Thread.sleep(pace_ms())
+        Tasks.Thread.sleep(pace_ms())
     od
 
     if refused > 0 then

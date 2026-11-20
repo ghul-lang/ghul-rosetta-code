@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Random
+use Ghul.Random
 
 let jumps = [
     (4, 14), (9, 31), (17, 7), (20, 38), (28, 84), (40, 59),

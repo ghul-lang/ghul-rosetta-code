@@ -20,7 +20,7 @@ crc32(data: ubyte[]) -> uint =>
     (data |> reduce(0xFFFFFFFFu, step)) ^ 0xFFFFFFFFu
 
 let text = "The quick brown fox jumps over the lazy dog"
-let bytes = System.Text.Encoding.ascii.get_bytes(text)
+let bytes = Text.Encoding.ascii.get_bytes(text)
 
 write_line("{text}")
 write_line("{crc32(bytes),0:X8}")

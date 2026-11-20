@@ -1,5 +1,5 @@
 use default
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 every_other(x: Complex[], start: int) -> Complex[] =>
     x

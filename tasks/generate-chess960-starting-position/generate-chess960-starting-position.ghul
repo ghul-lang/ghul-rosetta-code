@@ -50,7 +50,7 @@ is_legal(rank) =>
 
 let symbols = "KQRBN" |> zip("♔♕♖♗♘") |> MAP()
 
-let random = System.Random(960)
+let random = Ghul.Random(960)
 
 for _ in 1::5 do
     let rank = position(random.next(960))

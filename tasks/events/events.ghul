@@ -4,13 +4,13 @@ use Ghul.Coroutines
 class EVENT is
     _signalled: bool
     _waiting: int
-    _gate: SEMAPHORE
+    _gate: Semaphore
 
     init() is
-        _gate = SEMAPHORE(0)
+        _gate = Semaphore(0)
     si
 
-    wait() -> COROUTINE is
+    wait() -> Coroutine is
         if !_signalled then
             _waiting = _waiting + 1
 
@@ -36,7 +36,7 @@ si
 let event = EVENT()
 let delay = 3
 
-waiter(name: string) -> COROUTINE is
+waiter(name: string) -> Coroutine is
     write_line("{name} waits")
 
     await event.wait()
@@ -44,7 +44,7 @@ waiter(name: string) -> COROUTINE is
     write_line("{name} released")
 si
 
-signaller() -> COROUTINE is
+signaller() -> Coroutine is
     for _ in 1::delay do
         await pause()
     od

@@ -14,7 +14,7 @@ ask(prompt: string) -> double? is
 
     return double.parse(
         line,
-        System.Globalization.CultureInfo.invariant_culture
+        Text.Locale.invariant_culture
     )
 si
 

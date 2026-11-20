@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(1783)
+let random = Ghul.Random(1783)
 
 // Each cell takes a symbol drawn at random from those still free in its row
 // and its column, so every Latin square of the size is reachable. A row can

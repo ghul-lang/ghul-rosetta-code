@@ -1,6 +1,6 @@
 use default
 
-let dice = System.Random(20260909)
+let dice = Ghul.Random(20260909)
 
 attribute() -> int =>
     let

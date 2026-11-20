@@ -1,5 +1,5 @@
 use default
-use System.Random
+use Ghul.Random
 
 sattolo_cycle(items: LIST[int], random: Random) is
     let i mut = items.count - 1

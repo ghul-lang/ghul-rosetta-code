@@ -1,11 +1,11 @@
 use IO.Std.write_line
 use Ghul.Coroutines
 
-use Numbers = CHANNEL[int?]
+use Numbers = Channel[int?]
 
 let limit = 100
 
-count_up(out: Numbers) -> COROUTINE is
+count_up(out: Numbers) -> Coroutine is
     for n in 2::limit do
         out.send(n)
 
@@ -15,7 +15,7 @@ count_up(out: Numbers) -> COROUTINE is
     out.send(null)
 si
 
-drop_multiples(prime: int, into: Numbers, out: Numbers) -> COROUTINE is
+drop_multiples(prime: int, into: Numbers, out: Numbers) -> Coroutine is
     do
         let value = await into.receive()
 
@@ -31,7 +31,7 @@ drop_multiples(prime: int, into: Numbers, out: Numbers) -> COROUTINE is
     od
 si
 
-sieve() -> COROUTINE is
+sieve() -> Coroutine is
     let head mut = Numbers()
 
     count_up(head)

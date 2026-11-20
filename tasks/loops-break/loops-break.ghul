@@ -1,6 +1,6 @@
 use default
 
-let source = System.Random(20260909)
+let source = Ghul.Random(20260909)
 
 do
     let first = source.next(20)

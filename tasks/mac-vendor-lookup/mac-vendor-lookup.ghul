@@ -15,7 +15,7 @@ vendor(api: string, mac: string) -> string? is
         fi
 
         return response.content.read_as_string_async().result
-    catch e: System.AggregateException
+    catch e: Ghul.AggregateException
         return null
     yrt
 si
@@ -27,7 +27,7 @@ let macs = [
 
 for mac in macs do
     // The registry refuses more than about one request a second.
-    System.Threading.Thread.sleep(1500)
+    Tasks.Thread.sleep(1500)
 
     let found = vendor("https://api.macvendors.com/", mac.replace(':', '-'))
 

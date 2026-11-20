@@ -8,7 +8,7 @@ rename_file(from, to) is
     try
         IO.File.move(from, to)
         return "renamed"
-    catch e: System.Exception
+    catch e: Ghul.Exception
         return "refused"
     yrt
 si
@@ -21,7 +21,7 @@ rename_directory(from, to) is
     try
         IO.Directory.move(from, to)
         return "renamed"
-    catch e: System.Exception
+    catch e: Ghul.Exception
         return "refused"
     yrt
 si

@@ -97,7 +97,7 @@ md4(message: ubyte[]) -> string is
 si
 
 for message in ["", "a", "abc", "Rosetta Code"] do
-    let octets = System.Text.Encoding.utf8.get_bytes(message)
+    let octets = Text.Encoding.utf8.get_bytes(message)
 
     write_line("{md4(octets)}  \"{message}\"")
 od

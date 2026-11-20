@@ -52,7 +52,7 @@ languages(api: string) -> (name: string, tasks: int){} is
         let token = more.get_property("gcmcontinue").get_string() ?? ""
 
         next =
-            "&gcmcontinue={System.Uri.escape_data_string(token)}"
+            "&gcmcontinue={IO.Uri.escape_data_string(token)}"
             "&continue=gcmcontinue||"
     od
 

@@ -1,5 +1,5 @@
 use default
-use System.Globalization.CultureInfo
+use Text.Locale
 
 let suffixes = [
     "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"

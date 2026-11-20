@@ -1,5 +1,5 @@
 use default
-use System.StringSplitOptions
+use Text.StringSplitOptions
 
 let bars = "▁▂▃▄▅▆▇█"
 

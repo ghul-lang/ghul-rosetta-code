@@ -1,7 +1,7 @@
 use default
 
 use Text.from_base
-use System.Globalization.NumberStyles
+use Text.NumberStyles
 
 // from_base parses bases 2, 8, 10 and 16, and for base 16 accepts a
 // leading 0x as well. Other bases have no built-in parser.

@@ -34,7 +34,7 @@ si
 let deck =
     (0..81) |> map(i => CARD(i % 3, i / 3 % 3, i / 9 % 3, i / 27)) |> LIST()
 
-let random = System.Random(81)
+let random = Ghul.Random(81)
 
 deal(size: int) -> CARD[] is
     for i in 0..size do

@@ -9,7 +9,7 @@ IO.Std.write("{preserve}{escape}[2J{escape}[H")
 write_line("this is written on a screen of its own")
 
 if !IO.Std.is_output_redirected then
-    System.Threading.Thread.sleep(2000)
+    Tasks.Thread.sleep(2000)
 fi
 
 IO.Std.write(restore)

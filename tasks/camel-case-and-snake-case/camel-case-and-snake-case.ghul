@@ -1,5 +1,5 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
 class NAME(words: string[] private) is
     to_camel_case() -> string =>

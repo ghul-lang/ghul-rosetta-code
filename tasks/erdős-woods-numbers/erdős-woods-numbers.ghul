@@ -1,6 +1,6 @@
 use default
 
-use System.Numerics.BitOperations
+use Ghul.Math.BitOperations
 
 use Partition = (a: long, b: long, free: long)
 

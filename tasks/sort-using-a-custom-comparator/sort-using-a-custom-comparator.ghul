@@ -9,7 +9,7 @@ compare(left, right) is
         return right.length - left.length
     fi
 
-    string.compare(left, right, System.StringComparison.ORDINAL_IGNORE_CASE)
+    string.compare(left, right, Text.StringComparison.ORDINAL_IGNORE_CASE)
 si
 
 words.sort(compare)

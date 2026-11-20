@@ -1,5 +1,5 @@
 namespace Rosetta is
-    use System.Text.RegularExpressions.Regex
+    use Text.Regex
     use Collections
     use Ghul.Pipes
 
@@ -190,7 +190,7 @@ namespace Rosetta is
         // Writes each of the part's sources with its stripped signatures replaced.
         _write(outcome: STRIP_OUTCOME, originals: MAP[string, string]) is
             for (file, text) in originals do
-                let builder = Text.STRING_BUILDER()
+                let builder = Text.StringBuilder()
                 let at mut = 0
 
                 for site in outcome.sites |> filter(site => site.file =~ file) |> sort((a, b) => a.start - b.start) do
@@ -222,7 +222,7 @@ namespace Rosetta is
             let errors = LIST[BUILD_ERROR]()
 
             if IO.File.exists(compiler_output) then
-                let matches = Regex.matches(IO.File.read_all_text(compiler_output), _error_pattern, System.Text.RegularExpressions.RegexOptions.MULTILINE)
+                let matches = Regex.matches(IO.File.read_all_text(compiler_output), _error_pattern, Text.RegexOptions.MULTILINE)
 
                 for i in 0..matches.count do
                     let found = matches[i]
@@ -405,7 +405,7 @@ namespace Rosetta is
 
         // The report on what each part kept, as Markdown.
         report(outcomes: Iterable[STRIP_OUTCOME]) -> string is
-            let builder = Text.STRING_BUILDER()
+            let builder = Text.StringBuilder()
             let all = outcomes |> list()
 
             builder.append_line("| part | signatures before | after | builds | note |")

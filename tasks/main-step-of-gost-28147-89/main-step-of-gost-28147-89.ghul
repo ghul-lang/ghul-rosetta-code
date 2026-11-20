@@ -1,6 +1,6 @@
 use default
 
-use System.Numerics.BitOperations
+use Ghul.Math.BitOperations
 
 let s_boxes = [
     [4, 10, 9, 2, 13, 8, 0, 14, 6, 11, 1, 12, 7, 15, 5, 3],

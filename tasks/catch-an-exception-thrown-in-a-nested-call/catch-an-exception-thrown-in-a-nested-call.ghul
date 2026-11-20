@@ -1,10 +1,10 @@
 use default
 
-class U0(message: string): System.Exception is
+class U0(message: string): Ghul.Exception is
     super(message)
 si
 
-class U1(message: string): System.Exception is
+class U1(message: string): Ghul.Exception is
     super(message)
 si
 

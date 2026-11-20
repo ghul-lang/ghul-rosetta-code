@@ -1,6 +1,6 @@
 use default
 use System.Threading.Interlocked
-use System.Threading.Thread
+use Tasks.Thread
 use System.Threading.Volatile
 
 class FLAG is

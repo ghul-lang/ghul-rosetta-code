@@ -1,5 +1,5 @@
 use default
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 show(name, value) =>
     let

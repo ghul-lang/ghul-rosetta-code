@@ -1,10 +1,10 @@
 use default
 
-use Time.DATE_TIME
-use Time.DATE_TIME_OFFSET
-use Time.TIME_SPAN
+use Time.DateTime
+use Time.DateTimeOffset
+use Time.TimeSpan
 use System.TimeZoneInfo
-use System.Globalization.CultureInfo
+use Text.Locale
 
 let offsets = [
     ("EST", -5), ("EDT", -4),
@@ -22,9 +22,9 @@ parse(text: string) -> DATE_TIME_OFFSET =>
         split = text.last_index_of(' '),
         zone = text[split + 1..<0]
     in
-        let clock = DATE_TIME.parse_exact(text[0..split], format, culture)
+        let clock = DateTime.parse_exact(text[0..split], format, culture)
         in
-        DATE_TIME_OFFSET(clock, TIME_SPAN.from_hours(offsets[zone]))
+        DATE_TIME_OFFSET(clock, TimeSpan.from_hours(offsets[zone]))
 
 show(time) =>
     let

@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(2024)
+let random = Ghul.Random(2024)
 
 // a base between 2 and n - 2
 

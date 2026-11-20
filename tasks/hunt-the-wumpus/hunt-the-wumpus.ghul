@@ -11,7 +11,7 @@ let caves = [
     [7, 16, 18], [9, 17, 19], [11, 18, 20], [13, 16, 19]
 ]
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let taken = LIST[int]()
 

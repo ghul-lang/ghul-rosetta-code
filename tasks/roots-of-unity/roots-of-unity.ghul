@@ -1,6 +1,6 @@
 use default
 
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 roots_of_unity(n: int) -> Complex{} =>
     (0..n)

@@ -1,6 +1,6 @@
 use default
 
-use Time.DATE_TIME
+use Time.DateTime
 
 // A palindromic yyyymmdd is fixed by its year: the month and day are the
 // year's digits reversed, so each year gives at most one date.

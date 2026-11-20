@@ -1,6 +1,6 @@
 use IO.Std.write_line
-use System.Numerics.INumber
-use System.Numerics.IAdditionOperators.`+
+use Ghul.Math.Number
+use Ghul.Math.AdditionOperators.`+
 
 accumulator[T: INumber[T]](initial: T) -> T -> T is
     let sum mut = initial

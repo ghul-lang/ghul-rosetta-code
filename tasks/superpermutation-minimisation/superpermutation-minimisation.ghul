@@ -17,7 +17,7 @@ recursive(n: int) -> string is
     let previous = recursive(n - 1)
     let seen = SET()
     let letter = alphabet[n - 1]
-    let result = System.Text.StringBuilder()
+    let result = Text.StringBuilder()
 
     for i in 0::previous.length - (n - 1) do
         let window = previous.substring(i, n - 1)

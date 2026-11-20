@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Random
+use Ghul.Random
 
 let width = 12
 let height = 8

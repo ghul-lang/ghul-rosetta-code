@@ -4,7 +4,7 @@ use Raster.IMAGE
 let size = 15
 let trials = 1000
 
-let random = System.Random(8)
+let random = Ghul.Random(8)
 
 class GRID is
     filled: bool[,]

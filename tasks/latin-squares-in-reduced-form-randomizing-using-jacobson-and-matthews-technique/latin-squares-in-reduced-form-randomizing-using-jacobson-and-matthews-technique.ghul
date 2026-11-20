@@ -5,10 +5,10 @@ use Square = int[][]
 class INCIDENCE_CUBE is
     _n: int
     _cells: LIST[byte]
-    _random: System.Random
+    _random: Ghul.Random
     _improper: (int, int, int)?
 
-    init(square: Square, random: System.Random) is
+    init(square: Square, random: Ghul.Random) is
         _n = square.count
         _cells = repeat(0b, _n * _n * _n) |> LIST()
         _random = random
@@ -127,7 +127,7 @@ is_latin(square: Square) -> bool =>
 cyclic(n: int) -> Square =>
     0..n |> map(r => 0..n |> map(c => (r + c) % n + 1) |> list()) |> list()
 
-tally(n: int, squares: int, random: System.Random) -> (
+tally(n: int, squares: int, random: Ghul.Random) -> (
     square: string,
     times: int
 ){} =>
@@ -141,7 +141,7 @@ tally(n: int, squares: int, random: System.Random) -> (
         |> map(entry => (square = entry.key, times = entry.value.count))
         |> sort_by(e => e.square)
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 write_line("Part 1: 10,000 squares of order 4, in reduced form:")
 

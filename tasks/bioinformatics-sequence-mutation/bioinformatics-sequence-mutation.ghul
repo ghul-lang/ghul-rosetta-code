@@ -1,7 +1,7 @@
 use default
 
 let bases = ['A', 'C', 'G', 'T']
-let random = System.Random(1969)
+let random = Ghul.Random(1969)
 
 show(label: string, sequence: char[]) is
     write_line(label)

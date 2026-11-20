@@ -3,7 +3,7 @@ use System.Net.FtpWebRequest
 use System.Net.FtpWebResponse
 use System.Net.NetworkCredential
 use System.Net.WebRequestMethods_Ftp
-use System.Text.Encoding
+use Text.Encoding
 
 // The task: through FTP in passive mode, change to a directory, list it,
 // and download a file from it as binary.

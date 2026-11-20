@@ -3,7 +3,7 @@ use IO.Std.read_line
 use IO.Std.write
 
 // Seeded, so the transcript below reproduces.
-let random = System.Random(7)
+let random = Ghul.Random(7)
 
 let target = random.next(1, 11)
 

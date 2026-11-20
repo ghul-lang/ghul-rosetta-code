@@ -27,7 +27,7 @@ si
 write_ppm(image: BITMAP, path: string) is
     let file = IO.File.create(path)
 
-    let header = System.Text.Encoding.ascii.get_bytes(
+    let header = Text.Encoding.ascii.get_bytes(
         "P6\n{image.width} {image.height}\n255\n"
     )
 

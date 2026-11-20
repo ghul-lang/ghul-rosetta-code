@@ -15,7 +15,7 @@ let candidates mut =
         )
         |> list()
 
-let random = System.Random(4)
+let random = Ghul.Random(4)
 
 write_line("think of four different digits from 1 to 9")
 write_line("score each guess as bulls then cows, like 1 2")

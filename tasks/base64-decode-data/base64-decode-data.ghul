@@ -29,4 +29,4 @@ let encoded =
 
 let bytes = encoded |> decode() |> ARRAY()
 
-write_line(System.Text.Encoding.utf8.get_string(bytes))
+write_line(Text.Encoding.utf8.get_string(bytes))

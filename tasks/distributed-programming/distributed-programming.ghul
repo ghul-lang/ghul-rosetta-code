@@ -2,7 +2,7 @@ use default
 use System.Net.HttpListener
 use System.Net.Http.HttpClient
 use System.Net.Http.StringContent
-use System.Text.Encoding
+use Text.Encoding
 use System.Text.Json.JsonDocument
 use System.Text.Json.JsonDocumentOptions
 use System.Text.Json.JsonElement

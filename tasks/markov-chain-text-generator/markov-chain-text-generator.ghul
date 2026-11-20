@@ -28,7 +28,7 @@ generate(
     by_prefix: Map[string, LIST[string]],
     start: string,
     length: int,
-    random: System.Random
+    random: Ghul.Random
 ) -> string is
     chain(prefix: string[]) -> string{} is
         let choices = by_prefix[prefix |> join(" ")]
@@ -47,7 +47,7 @@ generate(
 si
 
 wrap(text: string, width: int) -> string{} is
-    let line = System.Text.StringBuilder()
+    let line = Text.StringBuilder()
 
     for word in text.split([' ']) do
         if line.length > 0 /\ line.length + 1 + word.length > width then
@@ -87,7 +87,7 @@ let length = if args.count > 2 then int.parse(args[2]) else 60 fi
 let words = IO.File.read_all_text(path).split([' ', '\n', '\r', '\t'])
 let corpus = words |> filter(w => w.length > 0) |> list()
 let source = suffixes(corpus, size)
-let random = System.Random(2026)
+let random = Ghul.Random(2026)
 let start = source.prefixes[random.next(0, source.prefixes.count)]
 
 write_line("")

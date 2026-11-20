@@ -1,5 +1,5 @@
 use IO.Std.write_line
-use System.Text.Encoding
+use Text.Encoding
 
 let subjects = ["møøse", "𝔘𝔫𝔦𝔠𝔬𝔡𝔢", "J̲o̲s̲é̲"]
 

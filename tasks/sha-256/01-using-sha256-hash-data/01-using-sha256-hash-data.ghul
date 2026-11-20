@@ -3,7 +3,7 @@ use default
 use Crypto.sha256
 
 sha256(text: string) -> string =>
-    Text.to_hex_lower(sha256(System.Text.Encoding.utf8.get_bytes(text)))
+    Text.to_hex_lower(sha256(Text.Encoding.utf8.get_bytes(text)))
 
 for text in ["", "abc", "Rosetta code"] do
     write_line("{sha256(text)}  \"{text}\"")

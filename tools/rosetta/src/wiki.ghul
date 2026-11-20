@@ -1,6 +1,6 @@
 namespace Rosetta is
     use IO.Std.error
-    use System.Exception
+    use Ghul.Exception
     use System.Net.Http
     use System.Net.Http.MultipartFormDataContent
     use System.Net.Http.StringContent
@@ -42,7 +42,7 @@ namespace Rosetta is
 
                 try
                     return attempt()
-                catch problem: System.Exception
+                catch problem: Ghul.Exception
                     if attempt_number >= max_attempts then
                         throw problem
                     fi
@@ -52,7 +52,7 @@ namespace Rosetta is
                     error.write_line(
                         "wiki request failed, retrying in {backoff_ms / 1000}s: {problem.message}")
 
-                    System.Threading.Thread.sleep(backoff_ms)
+                    Tasks.Thread.sleep(backoff_ms)
                 yrt
             od
         si
@@ -88,14 +88,14 @@ namespace Rosetta is
             do
                 let cursor_argument =
                     if continue_from.length > 0 then
-                        "&cmcontinue={System.Uri.escape_data_string(continue_from)}"
+                        "&cmcontinue={IO.Uri.escape_data_string(continue_from)}"
                     else
                         ""
                     fi
 
                 let query =
                     "action=query&list=categorymembers&cmtype=page&cmlimit=500"
-                    "&cmtitle={System.Uri.escape_data_string(category)}"
+                    "&cmtitle={IO.Uri.escape_data_string(category)}"
                     "{cursor_argument}"
 
                 let document = _get(query)
@@ -128,7 +128,7 @@ namespace Rosetta is
         // The raw wikitext of a page, or absent when the page does not exist.
         page_wikitext(title: string) -> string? is
             let document =
-                _get("action=parse&prop=wikitext&page={System.Uri.escape_data_string(title)}")
+                _get("action=parse&prop=wikitext&page={IO.Uri.escape_data_string(title)}")
 
             let parse: JsonElement mut
 
@@ -150,7 +150,7 @@ namespace Rosetta is
                 let batch = titles |> skip(first) |> take(50) |> LIST()
 
                 let joined =
-                    batch |> map(title => System.Uri.escape_data_string(title)) |> join("%7C")
+                    batch |> map(title => IO.Uri.escape_data_string(title)) |> join("%7C")
 
                 let document =
                     _get("action=query&prop=revisions&rvprop=content&rvslots=main&titles={joined}")
@@ -236,7 +236,7 @@ namespace Rosetta is
                         status
                     fi
 
-                throw System.Exception("could not sign in to the wiki: {detail}")
+                throw Ghul.Exception("could not sign in to the wiki: {detail}")
             fi
 
             _csrf_token = _token("csrf")
@@ -284,7 +284,7 @@ namespace Rosetta is
                     .get_string() ?? ""
 
             return
-                System.Text.RegularExpressions.Regex.matches(body, "diff-deletedline").count
+                Text.Regex.matches(body, "diff-deletedline").count
         si
 
         // The wiki's own digest of a file's current version, or absent when
@@ -295,7 +295,7 @@ namespace Rosetta is
             let document =
                 _get(
                     "action=query&prop=imageinfo&iiprop=sha1"
-                    "&titles={System.Uri.escape_data_string(title)}"
+                    "&titles={IO.Uri.escape_data_string(title)}"
                 )
 
             let pages =
@@ -410,12 +410,12 @@ namespace Rosetta is
                     if !retried /\ (code =~ "maxlag" \/ code =~ "ratelimited") then
                         retried = true
 
-                        System.Threading.Thread.sleep(30000)
+                        Tasks.Thread.sleep(30000)
 
                         continue
                     fi
 
-                    throw System.Exception("the wiki refused the edit: {failure.to_string()}")
+                    throw Ghul.Exception("the wiki refused the edit: {failure.to_string()}")
                 fi
 
                 let outcome = root.get_property("edit")
@@ -425,7 +425,7 @@ namespace Rosetta is
                 // captcha it wants, which filter matched - and none of it is guessable from the
                 // one-word result, so the whole thing is reported.
                 if status !~ "Success" then
-                    throw System.Exception("the wiki did not apply the edit: {outcome.to_string()}")
+                    throw Ghul.Exception("the wiki did not apply the edit: {outcome.to_string()}")
                 fi
 
                 break

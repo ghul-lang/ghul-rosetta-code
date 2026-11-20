@@ -140,7 +140,7 @@ si
 cave |> each(line => write_line(line))
 write_line("")
 
-let random = System.Random(1)
+let random = Ghul.Random(1)
 
 let flock = [
     BOID(

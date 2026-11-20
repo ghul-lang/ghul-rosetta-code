@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(52)
+let random = Ghul.Random(52)
 
 shuffled[T](items: T{}) -> T{} => items |> sort_by(_ => random.next())
 

@@ -3,7 +3,7 @@ use System.Net.HttpListener
 use System.Net.IPAddress
 use System.Net.IPEndPoint
 use System.Net.Sockets.TcpListener
-use System.Text.Encoding
+use Text.Encoding
 
 // The test's entry: answers from replies the wiki gave on the date
 // api-replies.txt names, one reply a request, served on the loopback
@@ -17,7 +17,7 @@ stand_in() -> string is
     let port =
         if let bound: IPEndPoint = probe.local_endpoint then
             bound.port
-        else throw System.Exception("the probe has no address")
+        else throw Ghul.Exception("the probe has no address")
         fi
 
     probe.stop()

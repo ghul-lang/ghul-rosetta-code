@@ -64,7 +64,7 @@ evaluate(start: THUNK, arguments: THUNK[]) -> Result is
             if let (thunk): Frame.ARGUMENT = stack.pop() then
                 thunk
             else
-                throw System.InvalidOperationException("argument expected")
+                throw Ghul.InvalidOperationException("argument expected")
             fi
 
     let term mut = Term.VAR(1)
@@ -185,7 +185,7 @@ si
 bit_of(thunk: THUNK) -> int =>
     if let (tag): Result.CONSTANT = evaluate(thunk, [zero, one]) then
         tag
-    else throw System.InvalidOperationException("bit expected")
+    else throw Ghul.InvalidOperationException("bit expected")
     fi
 
 bits_of(bytes: int[]) -> bool[] => [

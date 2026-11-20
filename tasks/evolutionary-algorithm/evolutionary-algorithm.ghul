@@ -1,5 +1,5 @@
 use default
-use System.Random
+use Ghul.Random
 
 let target = "METHINKS IT IS LIKE A WEASEL"
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "

@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
-use System.Random
-use System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
+use Ghul.Random
+use Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES
 
 let random = Random(9)
 

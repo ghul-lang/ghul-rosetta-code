@@ -98,7 +98,7 @@ interpret(node: Node) -> int =>
             when "Equal" then truth(a == b)
             when "NotEqual" then truth(a != b)
             else
-                throw System.Exception("unknown operator {kind}")
+                throw Ghul.Exception("unknown operator {kind}")
             esac
         esac
     else 0

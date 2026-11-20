@@ -1,5 +1,5 @@
 use default
-use System.Reflection.BindingFlags
+use Ghul.Reflection.BindingFlags
 
 class ROBOT is
     _charge: int

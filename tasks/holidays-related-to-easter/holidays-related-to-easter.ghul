@@ -1,6 +1,6 @@
 use default
 
-use Time.DATE_TIME
+use Time.DateTime
 use System.Globalization.JulianCalendar
 
 let julian = JulianCalendar()

@@ -99,7 +99,7 @@ in_order(source: Stream) -> Stream => (
 
 let work = IO.Path.combine(
     IO.Path.get_temp_path(),
-    "pipes-{Ghul.RANDOM().next_int64()}"
+    "pipes-{Ghul.Random().next_int64()}"
 )
 
 IO.Directory.create_directory(work)

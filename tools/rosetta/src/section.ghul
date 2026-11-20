@@ -1,6 +1,6 @@
 namespace Rosetta is
-    use System.Text.StringBuilder
-    use System.Text.RegularExpressions.Regex
+    use Text.StringBuilder
+    use Text.Regex
     use Collections
     use Ghul.Pipes
 
@@ -35,8 +35,8 @@ namespace Rosetta is
         // which the section sent and the section saved share.
         digest(section: string) -> string static =>
             System.Convert.to_hex_string(
-                System.Security.Cryptography.SHA256.hash_data(
-                    System.Text.Encoding.utf8.get_bytes(section.normalize(System.Text.NormalizationForm.FORM_C)))).to_lower()
+                Crypto.SHA256.hash_data(
+                    Text.Encoding.utf8.get_bytes(section.normalize(System.Text.NormalizationForm.FORM_C)))).to_lower()
 
         // Whether the section this repository would post now differs from the
         // one it last posted, so the wiki shows an older solution.
@@ -368,9 +368,9 @@ namespace Rosetta is
         // which kind of file this is.
         animated_png(path: string) -> bool is
             let bytes = IO.File.read_all_bytes(path)
-            let text = System.Text.Encoding.latin1.get_string(bytes)
-            let animation = text.index_of("acTL", System.StringComparison.ORDINAL)
-            let data = text.index_of("IDAT", System.StringComparison.ORDINAL)
+            let text = Text.Encoding.latin1.get_string(bytes)
+            let animation = text.index_of("acTL", Text.StringComparison.ORDINAL)
+            let data = text.index_of("IDAT", Text.StringComparison.ORDINAL)
 
             return animation >= 0 /\ (data < 0 \/ animation < data)
         si

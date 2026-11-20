@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 modifier(x: double) -> double =>
     if x < 0.5 then 2.0 * (0.5 - x) else 2.0 * (x - 0.5) fi

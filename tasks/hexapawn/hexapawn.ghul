@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Random
+use Ghul.Random
 
 use Move = (from: int, to: int)
 

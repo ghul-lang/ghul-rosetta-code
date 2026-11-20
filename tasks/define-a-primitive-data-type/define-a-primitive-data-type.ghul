@@ -5,7 +5,7 @@ struct BOUNDED is
 
     init(value: int) is
         if value < 1 \/ value > 10 then
-            throw System.Exception("{value} is outside the range 1..10")
+            throw Ghul.Exception("{value} is outside the range 1..10")
         fi
 
         self.value = value
@@ -42,7 +42,7 @@ let attempts = [
 for (text, attempt) in attempts do
     try
         write_line("{text} = {attempt()}")
-    catch e: System.Exception
+    catch e: Ghul.Exception
         write_line("{text} rejected: {e.message}")
     yrt
 od

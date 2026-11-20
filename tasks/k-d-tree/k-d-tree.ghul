@@ -86,7 +86,7 @@ let wikipedia = [
 
 show("Wikipedia example", wikipedia, [9.0, 2.0])
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 random_point() -> Point =>
     repeat(0, 3) |> map(_ => random.next_double()) |> ARRAY()

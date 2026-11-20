@@ -10,13 +10,13 @@ This file is a condensed reference in one file. The full documentation is at <ht
 
 These mistakes cost the most rework. A section below explains each one. The last one is explained in the targets file.
 
-- **.NET members are `snake_case`.** Write `s.length`, `list.count` and `builder.append(x)`. `s.Length`, `list.Count` and `builder.Append(x)` are errors. The compiler converts .NET names.
+- **.NET members are `snake_case`.** Write `s.length`, `list.count` and `builder.append(x)`. `s.Length`, `list.Count` and `builder.Append(x)` are errors. The compiler converts .NET names, and renames a few whose converted spelling reads badly: `double.is_nan`, with `is_na_n` still accepted for now.
 - **The maths functions are in `Ghul.Math`, imported by `use default`.** Write `sqrt(x)`, `floor(x)` and `pi`. `System.Math.sqrt(x)` still compiles, as .NET interop.
 - **`write_line` must be imported.** Write `use IO.Std.write_line` before the code that calls it. Or start the file with `use default`, which imports `write_line`, the pipes, the collections and the maths functions.
 - **Strings have no `+` operator.** Join strings with interpolation: `"{a}{b}"`.
 - **`==` on a `string` compares references.** Compare text with `=~`. Use `==` for scalars, enums and references.
 - **Numbers do not convert implicitly.** `1.0 + 1` is an error. Write `1.0 + double(1)` or `cast double(n)`. A big integer is a `bigint`, written with the `n` suffix. Do not use `System.Numerics.BigInteger`.
-- **There is no `new`.** Construct a value by calling its type: `Box(42)`, `LIST[int]()`.
+- **There is no `new`.** Construct a value by calling its type: `Box(42)`, `LIST[int]()`. `new` is an ordinary identifier.
 - **The closing keyword of a block mirrors its opening keyword**: `is` ... `si`, `if` ... `fi`, `do` ... `od`, `case` ... `esac`, `try` ... `yrt`. There are no braces.
 - **A bare `let` is immutable.** A local declared `let count mut = 0` can be reassigned.
 - **An optional `T?` must be narrowed before it is used as a `T`.** Narrow it with `if x?` or `if let v = x`, or assert that it is present with `x!`.
@@ -43,7 +43,12 @@ ghūl keywords are lowercase. Identifiers follow a naming convention, and the co
 
 - `snake_case`: variables, functions, methods, properties
 - `PascalCase`: namespaces, traits, abstract classes, exception classes, unions, enums
-- `UPPER_SNAKE_CASE`: concrete classes, structs, variants, enum members
+- `UPPER_SNAKE_CASE`: union variants, enum members
+- either: concrete classes and structs
+
+A concrete class or struct can be written either way. The standard library uses `UPPER_SNAKE_CASE` for its concrete types (`LIST`, `MAP`, `SET`), and so do the few .NET types that ghūl renames. Every other .NET type keeps its .NET name. Example code and most programs use `PascalCase` for their own types (`Order`, `Point`).
+
+A name of more than one letter is `PascalCase` only if it has a lower-case letter, so an all-caps word such as `TREE` is `UPPER_SNAKE_CASE` and not `PascalCase`. A single capital such as `T` is both.
 
 An exception class is `PascalCase`, whether or not it is abstract. An exception class is `Exception` or any class that derives from it, directly or indirectly. Code names an exception class where it throws the exception and where it catches it. Every exception imported from .NET is already `PascalCase`.
 
@@ -55,9 +60,7 @@ The compiler warns when a declaration in ghūl source does not follow the conven
 
 - `non-snake-case-name`: variables (including `let`, `for` and `catch` locals, and function arguments), functions, methods, properties.
 - `non-pascal-case-name`: abstract classes, exception classes, traits, unions, enums.
-- `non-upper-snake-case-name`: concrete classes, structs, variants, enum members.
-
-A class with only `static` members and no primary-constructor parameters is a static utility container. Nothing constructs it. Its name can be `PascalCase` or `UPPER_SNAKE_CASE`.
+- `non-upper-snake-case-name`: variants and enum members, and a concrete class or struct whose name is neither `PascalCase` nor `UPPER_SNAKE_CASE`.
 
 *More detail on this section: [language details](https://github.com/ghul-lang/ghul/blob/main/docs/details.md#naming-conventions).*
 
@@ -97,6 +100,23 @@ A whole-file namespace must be the first declaration in the file, after any `@@`
 
 A file with no namespace declaration can contain statements at the top level of the file, and so can a file whose namespace is a whole-file namespace. These top-level statements run in source order as the program's entry point, so a short program needs no `entry` function. Top-level statements can be mixed with global definitions. A global definition is visible everywhere in the file, wherever it appears. A file with top-level statements cannot declare a namespace block.
 
+In a file with no namespace declaration, or whose namespace is a whole-file namespace, a function written with no types anywhere in its signature, including one with no parameters and no return type, has its signature inferred from the file. Its argument types come from its calls in the file and its return type from its body. The file's functions can call each other in any order, including recursively, whether their signatures are inferred or written. The top-level `let`s a function uses take their types from those uses too:
+
+```ghul
+let seen = SET()
+
+_visit(n) is
+    seen.add(n)
+si
+
+_visit(3)
+write_line("{seen.count}")
+```
+
+In a file with a namespace block, a function with no return type returns void, its return type isn't inferred, and every parameter needs its type. So does every function in a build with whole-file inference turned off (`--no-whole-file-inference`).
+
+A function whose signature is inferred is private to its file. That includes a function with no parameters and no return type, whose return is inferred. Where files share a namespace (under `--global-namespace`, or in a whole-file namespace several files declare), another file can call such a function only once its signature names its types; for a function with no parameters, a return type is enough, such as `-> void`. Anything in its own file can call it, including a class, a trait, an operator or a generic function. A function called with arguments of more than one type takes their join, such as `int[]` for an `ARRAY[int]` and an `int[]`. A function can only read a top-level `let` written above it, and a top-level statement can't call a function that reads a top-level `let` declared below that statement, directly or through the functions it calls. Like a function literal, such a function can be marked `memo` or `pure`: `fib(n) memo => ...`. A function whose signature is inferred and that awaits returns `Tasks.TASK` when it returns no value; one that returns a value after awaiting needs its return type written, such as `-> Tasks.TASK[int]`.
+
 A `use` statement brings names into scope, so code can refer to them without qualification. A `use` of a namespace imports every public symbol in it. A `use` of a single symbol imports that symbol:
 
 ```ghul
@@ -121,7 +141,7 @@ use MaybeName = string?;
 use Numbers = Collections.LIST[int];
 ```
 
-`use default` imports a fixed set of names that most files want. By default the set is `IO.Std.write_line`, `Ghul.Pipes`, `Collections`, `Ghul.Math`, `Ghul.NumberTheory` and `Ghul.Functional`. A name in the default set that the runtime doesn't define is skipped. The set is a fallback: a name that an explicit `use` in the same block imports, before or after the `use default`, means what that import says, and the default set's import of it is not a duplicate. A function the default set imports is another overload of its name, unless an explicit import or the program's own declaration takes the same parameters, which wins. In every other way `use default` is an ordinary `use`: it applies to the namespace block that contains it. Unless the project asks for an implicit import with `--implicit-default-use`, a file that does not write `use default` gets none of these names.
+`use default` imports a fixed set of names that most files want. By default the set is `IO.Std.write_line`, `Ghul.parse`, `Ghul.Pipes`, `Collections`, `Ghul.Math`, `Ghul.NumberTheory` and `Ghul.Functional`, plus `dbl` and `sgl` as aliases for `double` and `single`. A project replaces the set with `--default-use`, one name per comma-separated entry; an entry may be `alias=name`, importing the name under a different name, as `dbl=double` imports `double` as `dbl`. The alias stands in the same default tier as a plain name, so an explicit `use` of the alias wins the same way. A name in the default set that the runtime doesn't define is skipped. The set is a fallback: a name that an explicit `use` in the same block imports, before or after the `use default`, means what that import says, and the default set's import of it is not a duplicate. A function the default set imports is another overload of its name, unless an explicit import or the program's own declaration takes the same parameters, which wins. In every other way `use default` is an ordinary `use`: it applies to the namespace block that contains it. Unless the project asks for an implicit import with `--implicit-default-use`, a file that does not write `use default` gets none of these names.
 
 ```ghul
 use default
@@ -214,12 +234,14 @@ tree = Tree.NODE(tree, 1, Tree.EMPTY);
 
 let pet mut = CAT();           // Animal
 pet = DOG();
+
+let xs mut = LIST([1, 2]);     // int[], the list trait both implement
+xs = [3, 4];
 ```
 
-The compiler uses the join only when it is a type that the author wrote. In these cases the local keeps the type of its initializer, and the compiler reports the assignment:
+In these cases the local keeps the type of its initializer, and the compiler reports the assignment:
 
 - the join is `object` or `System.ValueType`
-- the join is a trait, and neither the initializer nor any assigned value has that trait as its type
 - the initializer or an assigned value is a value type
 
 So `let i mut = 0; i = 1L` is an error, and so is assigning a value of an unrelated class. A written type (`let pet: Animal mut = CAT()`) always fixes this.
@@ -296,7 +318,7 @@ od
 write_line("{factorial}");     // 265252859812191058636308480000000
 ```
 
-Mixed operands are an error, exactly as `1.0D + 1` is. If `total` is a `bigint`, `total * 2` is an error; write `total * 2n`. `==` on a `bigint` is an error, as it is on every other struct. Compare `bigint` values with `=~`.
+Mixed operands are an error, exactly as `1.0 + 1` is. If `total` is a `bigint`, `total * 2` is an error; write `total * 2n`. `==` and `!=` on two `bigint`s compare their values, as they do on two `decimal`s, so `factorial(25) == factorial(24) * 25n` is true. `=~` gives the same answer.
 
 A fractional literal is a `double` unless it has a suffix: `s` for single, `d` for double, `m` for decimal, in either case. The `m` suffix also works on a literal with only digits, to write an integral decimal (`100m`). Exponent notation is valid: `1.5e3`, `1.5E-3`.
 
@@ -309,6 +331,8 @@ let o: object = "hello";         // ok, string is an object
 ```
 
 Each scalar type is also a constructor that takes any other scalar. The constructor converts exactly as a cast to that type does. `double(n)` is `cast double(n)`. `int(x)` truncates, as `cast int(x)` does. A value out of range wraps, as it does with a cast. `_(n)` converts to the scalar type that the context expects. The argument must be a scalar: `int("42")` does not parse a string. Convert a value held as `object` or as a type parameter with `cast`, which unboxes it.
+
+`pow` raises a number to a power. `pow(x, y)` on two `double`s calls the platform's power function. Every integer type and `bigint` also has a `pow` that takes an `int` exponent and returns the base's type: `pow(2, 10)` is 1024, and `pow(3L, 30)` is a `long`. An integer `pow` whose result does not fit its type throws `OverflowException`, where `*` wraps, and a negative exponent throws `ArgumentOutOfRangeException`. Because `pow` has several overloads, a call whose arguments are all untyped casts, such as `pow(cast(x), cast(y))`, doesn't resolve, because the compiler can't tell which type to cast to. Name the type, as in `pow(double(x), double(y))`. `pow` is in `Ghul.Math`, so `use default` imports it.
 
 ```ghul
 let n = 7;
@@ -335,7 +359,7 @@ let combined = "{prefix}{suffix}";                  // concatenation
 
 An interpolated expression can have an alignment and a format specifier, as in .NET: `{expr, alignment : format}`.
 
-A format applies to a number, and to a value whose type implements `System.IFormattable`. The value is written with its `to_string(format, format_provider)`, with no provider. A format on any other value is ignored, as on .NET. To make a type of your own accept a format, implement `System.IFormattable`.
+A format applies to a number, and to a value whose type implements `Ghul.Formattable`. The value is written with its `to_string(format, format_provider)`, with no provider. A format on any other value is ignored, as on .NET. To make a type of your own accept a format, implement `Ghul.Formattable`.
 
 ```ghul
 let padded = "[{value,12:F3}]";     // [    1500.000]
@@ -343,10 +367,12 @@ let padded = "[{value,12:F3}]";     // [    1500.000]
 
 The static type of an interpolated value decides how it is written:
 
-- A string, a number, an enum, and any type that declares its own `to_string` are written with that `to_string`. So is any value with an alignment.
+- A string, a number, an enum, and any type that declares its own `to_string` are written with that `to_string`.
 - A `bool` is written `true` or `false`, the ghūl spelling.
 - An optional is written as the value it holds, by these same rules, or as `null` when it holds no value.
 - Every other value is written by the runtime's `$`. This covers an array, a list, a tuple, a struct or class that declares no `to_string`, a value held as `object`, a trait and a type parameter. `$` writes a sequence as its elements in brackets, a tuple as its elements in parentheses, and a record as its type and members. Without `$`, these values would be written as their .NET type name.
+
+An alignment pads the text these rules give, and a format applies wherever they reach a number or a `Ghul.Formattable` value, including the value an optional holds. So `{xs,-12}` pads `[1, 2, 3]`, `{flag,6}` pads `true`, and an absent `{opt:F2}` is `null`.
 
 ```ghul
 struct POINT(x: int public, y: int public);
@@ -407,6 +433,27 @@ The slice is an `E[]` that reads the source. Nothing is copied, so a later chang
 
 The from-the-end operators build a `System.Range`. A `System.Range` has endpoints that only have values relative to a length, so a `System.Range` cannot be iterated. `..` and `::` can be iterated. `for i in 1..<1 do` is an error.
 
+A **two-dimensional array** of `E` is written `E[,]`, and a three-dimensional one `E[,,]`. Higher ranks are an error. `E[,]` is `Collections.Matrix2[E]`, a list of its rows, and `E[,,]` is `Collections.Matrix3[E]`, a list of its planes. Diagnostics, hover and inlays show `E[,]` and `E[,,]`. Both are read-only and covariant:
+
+- `m[i, j]` (or `c[p, i, j]`) reads one element, and `m[i]` is row `i` as an `E[]`.
+- `count` is the number of rows (or planes), and iterating gives the rows (or planes).
+- `lengths` is the extents as a tuple, `(rows, columns)` or `(planes, rows, columns)`.
+- `elements` is every element, row by row.
+- `=~` compares element by element, and is true only for equal extents.
+
+An array literal of rows builds an `E[,]` where one is expected: from an annotation, a return type or a parameter. A literal of planes builds an `E[,,]` in the same way. Rows written as literals must all have the same length, and planes the same shape, and a literal where they don't is an error. A literal with no `E[,]` expected is an array of arrays, as before:
+
+```ghul
+let m: int[,] = [[1, 2, 3], [4, 5, 6]]
+let c: string[,,] = [[["a", "b"]], [["c", "d"]]]
+
+m[1, 2]          // 6
+m.lengths        // (2, 3)
+m[1]             // [4, 5, 6]
+```
+
+`MATRIX(...)` builds a mutable two- or three-dimensional array, which `m[i, j] = v` assigns to. It takes the rows or planes to copy, or a source and the extents to fill row by row from it, reading only as many elements as it needs: `MATRIX([[1, 2], [3, 4]])`, `MATRIX([[[1, 2]], [[3, 4]]])`, `repeat('.') |> MATRIX(5, 4)` and `from(1) |> MATRIX(2, 3, 4)`. A rows or planes argument whose rows aren't all one length throws, as does a source with too few elements. The read-only `Collections.ARRAY_2` and `Collections.ARRAY_3` that literals build take the same arguments: `ARRAY_2(rows)`, `ARRAY_2(source, r, c)`, `ARRAY_3(planes)` and `ARRAY_3(source, p, r, c)`, with the pipe form `repeat(0) |> ARRAY_2(3, 3)`. A .NET multidimensional array is a different type, and can't be used from ghūl (see [.NET interop](#net-interop)).
+
 A **tuple** groups two or more values, which can have different types. A tuple with one element is an error. A tuple has at most 7 elements. Tuple types and tuple literals both use parentheses. Elements can have names. An unnamed element has the name of a backtick and its index. Tuples are immutable, can nest, and can be destructured. Tuples compare element by element with `=~`. `==` on a tuple is an error, as on any other struct (see [equality](#equality)):
 
 ```ghul
@@ -429,10 +476,10 @@ A **positional** target list `(a, b, ...)` matches the source by the first of th
 2. a `deconstruct(...)` instance method whose parameters are all `T ref`
 3. the positional members `` `0 ``, `` `1 ``, ...
 
-The `deconstruct` method covers .NET types such as `Collections.KEY_VALUE_PAIR[K, V]`, ghūl classes that write each `T ref` parameter with postfix `!`, and classes with a primary constructor, which get a synthesised `deconstruct` (see [primary constructors](#primary-constructors)). A type with none of these cannot be destructured positionally. Use the by-name form for it.
+The `deconstruct` method covers .NET types such as `Collections.KeyValuePair[K, V]`, ghūl classes that write each `T ref` parameter with postfix `!`, and classes with a primary constructor, which get a synthesised `deconstruct` (see [primary constructors](#primary-constructors)). A type with none of these cannot be destructured positionally. Use the by-name form for it.
 
 ```ghul
-for (key, value) in dict do          // KEY_VALUE_PAIR.deconstruct
+for (key, value) in dict do          // KeyValuePair.deconstruct
     write_line("{key}={value}");
 od
 
@@ -475,7 +522,7 @@ multiply(a: int, b: int) -> int is
 si
 ```
 
-A named function's signature is fully explicit. Every argument has a written type. The return type is written after `->`; a function with no `->` returns `void`. The compiler infers no part of the signature of a named function or method.
+A method's signature is fully explicit, and so is a named function's in a file with a namespace block. Every argument has a written type. The return type is written after `->`; a function with no `->` returns `void`. In a file with no namespace declaration, or with a whole-file namespace, a function written with no types has its signature inferred (see [namespaces and `use`](#namespaces-and-use)).
 
 A block body returns its value with an explicit `return`, or by ending with an expression. In a non-void body, the final statement is the function's return value on the fall-through path when its type is assignable to the declared return type. This holds with or without a `;` after the statement. An expression, an `if` or `case` expression, and a parenthesised block can each be this final value, the *tail*.
 
@@ -496,7 +543,14 @@ gcd(a: int, b: int) -> int =>
     esac
 ```
 
-A function declared at namespace scope can be overloaded on its argument types. When a generic overload and a non-generic overload fit a call equally well, the compiler chooses the non-generic overload if each of its parameters is at least as specific as the generic overload's parameter, after the generic overload's type arguments are bound. For a `string[]` argument, `f(items: List[string])` is chosen over `f[T](items: Iterable[T])`, and `f[T](items: Iterable[T])` is chosen over `f(items: List[object])` or `f(items: object)`. ghūl has no default argument values.
+A function declared at namespace scope can be overloaded on its argument types. When several overloads fit a call equally well, the compiler compares their parameters position by position, and an overload wins if it is at least as specific at every position and more specific at one. Overloads that are each more specific at a different position stay ambiguous, and the call is an error.
+
+- After type arguments are bound, a parameter is more specific than another it is assignable to: `string` is more specific than `object`, and a derived class is more specific than its base.
+- Where the bound parameters are the same type, the declared parameters decide. A parameter is more specific when substituting the other's type parameters gives it: `int` is more specific than `T`, `(int, int) -> T` than `T`, and `T[][][]` than `T[][]`.
+- Where the bound parameters are unrelated types, a generic parameter that takes the argument's type arguments unchanged is more specific than a fixed one that accepts them only converted. Otherwise the declared parameters decide, as above.
+- When the parameters accept exactly the same values, an overload with no type parameters of its own is more specific than a generic one.
+
+For a `string[]` argument, `f(items: List[string])` is chosen over `f[T](items: Iterable[T])`, and `f[T](items: Iterable[T])` is chosen over `f(items: List[object])` or `f(items: object)`. ghūl has no default argument values.
 
 A program starts at a function named `entry`. In a file with no namespace, the program can instead start at the top-level statements, which the compiler collects in source order into the entry point.
 
@@ -529,7 +583,7 @@ add_pair((a, b): (int, int)) -> int => a + b;
 add_pair((3, 4));    // 7
 ```
 
-Patterns can nest, and can be mixed with ordinary parameters: `f(x: int, (a, b): (int, int), y: int)`. A namespace-scope function's signature is always fully explicit, so the type of the whole pattern is required; there is no context to infer it from. The element types come from the type of the whole pattern, so write the elements as plain names. The type of the whole pattern can be any type that can be destructured positionally: a tuple, or a type with a matching `deconstruct(...)` method. A formal argument list does not support the by-name group form (`(x = field, ...)`).
+Patterns can nest, and can be mixed with ordinary parameters: `f(x: int, (a, b): (int, int), y: int)`. A namespace-scope function written with a pattern has types in its signature, so the type of the whole pattern is required. The element types come from the type of the whole pattern, so write the elements as plain names. The type of the whole pattern can be any type that can be destructured positionally: a tuple, or a type with a matching `deconstruct(...)` method. A formal argument list does not support the by-name group form (`(x = field, ...)`).
 
 Functions are first-class values. A function literal has the same form as a function, without a name. The compiler usually *infers* its argument types and return type from the body and from the context of the literal, so they are usually written without annotations. Either can be written explicitly. A literal with one argument needs no parentheses around it. `A -> B` is the type of a function from `A` to `B`.
 
@@ -570,7 +624,7 @@ The single-parameter shorthand without parentheses (`x => …`) cannot have a pa
 ```ghul
 let add = ((a, b): (int, int)) => a + b;
 
-entries |> each(((key, value): Collections.KEY_VALUE_PAIR[string, int]) =>
+entries |> each(((key, value): Collections.KeyValuePair[string, int]) =>
     write_line("{key}={value}"));
 ```
 
@@ -608,7 +662,7 @@ A nested function refers to itself by its own name, so it needs no `rec`. A lite
     fact(n: int) -> int => if n <= 1 then 1 else n * fact(n - 1) fi;
 ```
 
-A nested function is a local, so it is defined from its own definition onward. A reference to it above its definition is an error. Mutual recursion between two nested functions is an error. To get mutual recursion, write one of the pair as a `let mut` literal and assign it after the other is defined. A file's top-level statements are not a body, so a named function among them is a namespace-scope function, and its argument types are required.
+A nested function is a local of the body it is written in. One that nothing refers to above its definition is defined from its definition onward. One that a statement or another nested function above it refers to exists from the start of the body, so a body can call a nested function written below the call, and nested functions can call each other in any order. Where such a function uses a local the body declares further down, it exists from just after that local instead, and a call above that point is an error. A named function written among a file's top-level statements is a namespace-scope function, not a nested one. One written with no types at all has its signature inferred, as described under [namespaces and `use`](#namespaces-and-use).
 
 A call with `*` written for one or more of its arguments is a *partial application*: a function value with one parameter per `*`, in order, that makes the call with its parameters in those positions. The other arguments are evaluated once, where the partial application is written, not on each call:
 
@@ -622,6 +676,8 @@ items |> each(log.write(*));              // the receiver is evaluated once
 ```
 
 The `*` is a whole argument of the call: `f(*, 2)` is a partial application. It belongs to the innermost argument list it is written in, so `f(g(*, 1), 2)` partially applies `g` and passes the result to `f`. An operator expression is a call of its operator, `a + b` being `+(a, b)`, so `*` as an operand partially applies the operator: `* + 1` is `x => x + 1`, `10 - *` is `x => 10 - x`, `* - *` takes two parameters, `- *` negates, and `xs |> filter(* < 3)` keeps the elements below three. The other operand is evaluated once, where the expression is written, and the operator is whichever the written operands would resolve to, a built-in, a static or an instance member alike. Only the operator node the `*` is an operand of becomes the function, so `(* + 1) * 2` multiplies a function by two and is an error. `??`, `/\` and `\/` evaluate their right operand only for some values of the left and cannot be partially applied. Where an operand is expected, `*` is a placeholder when an operator, a comma, a closing bracket or the end of the statement follows; otherwise it is the prefix operator `*` applied to what follows. Operator characters run together into one operator, so `-*` is the operator `-*`: the negation is written `- *`. Each `*` takes its type from the formal it stands in, exactly as a bare `_` argument does, so the call is resolved as any call is, with the written arguments choosing the overload. Where a function type is expected of the partial application - a declared slot, or a formal of the call it is an argument to - its parameter types type the `*` arguments first, one each in order, so the expected type can choose the overload where the written arguments alone would not: `let halve: (double) -> double = scale(*, 0.5)` picks the `double` overload of `scale`. A `*` whose type nothing decides, such as a lone `*` to an overloaded function with no expected type, is an error: write a function literal with a typed parameter instead. The callee can be a function, a method, a constructor, or a value of function type. A `*` cannot be combined with `~>`.
+
+A `*` can also be the receiver of a member access, written with a space: `* .name`. The function is the whole chain that follows, member reads, calls and indexing, and the one operator the chain is an operand of, if any: `words |> map(* .length)` is `map(w => w.length)`, `* .trim().to_upper()` is `s => s.trim().to_upper()`, and `people |> filter(* .age > 30)` is `filter(p => p.age > 30)`. A `*` written as an argument along the chain is a further parameter, after the receiver, so `* .starts_with(*)` is `(s, prefix) => s.starts_with(prefix)`. The other arguments along the chain are evaluated once, where the partial application is written. The space is required: operator characters run together into one operator, so `*.name` is the operator `*.` followed by `name`. Nothing is written to stand in for the receiver's type, so it comes from the function type the context expects, as `map` or `filter` gives it; with no expected function type, `* .name` is an error.
 
 A function declared `memo` caches its results by its arguments. Every call goes through the cache, including the function's calls to itself and calls through a function value taken from it, so the plain recursive definition is the memoised one:
 
@@ -647,6 +703,20 @@ paths(r: int, c: int) -> long memo =>
 ```
 
 Each value a literal makes has a cache of its own: evaluating the literal again makes a function with an empty cache, and the cache is collected with the function. `memo` is an error on a literal that returns nothing or a task, a generator literal and an async literal. The cache is not a store the compiler sees, so a `memo` function whose body stores nothing is still store-free.
+
+### members or global functions
+
+Which form an operation takes follows one rule:
+
+- An operation that belongs to one type is a member of that type: `s.trim()`, `xs.add(x)`, `m.contains_key(k)`.
+- A member that takes no arguments, is cheap and allocates nothing is a property: `s.length`, `xs.count`. A string's `count` is its `length`, in UTF-16 code units.
+- An operation defined over a family of types is a global function, written with `|>` where it reads well. The families are the numeric types (`Ghul.Math`: `sqrt(x)`, `abs(n)`, `min(a, b)`), any sequence (`Ghul.Pipes`: `xs |> filter(f)`, `xs |> sort()`, `xs |> join(", ")`) and any parsable type (`parse[int](s)`).
+- A collection is built from a sequence by its constructor: `xs |> LIST()`, `SET(xs)`.
+- A static member is not the form to write. Write `sqrt(x)`, not `double.sqrt(x)`, and `xs |> join(", ")`, not `string.join(", ", xs)`. The exceptions are constants such as `int.max_value`, and `string.compare_ordinal`.
+
+`words`, `runes` and `graphemes` are global functions although each reads one string: they produce sequences, and read best in a pipe. The character tests are properties and the case mappings methods: `c.is_digit`, `c.is_white_space`, `c.to_upper()`.
+
+On .NET a `LIST` also has members .NET gives it that work over any sequence: `find`, `exists`, `true_for_all`, `for_each` and `convert_all`. Each warns `[deprecated]` and names its replacement. Write `|> find`, `|> any`, `|> all`, `|> each` and `|> map`, which work on every target. .NET's `LIST.find` returns the type's default value when nothing matches, where `|> find` returns an absent value.
 
 *More detail on this section: [language details](https://github.com/ghul-lang/ghul/blob/main/docs/details.md#functions).*
 
@@ -768,6 +838,8 @@ class HOLDER is
     origin: POINT field;     // a real field, mutable in place
 si
 ```
+
+Code outside the type can read a field but not assign it or pass it by `ref`, unless the field is declared `field public`: `count: int field public` can be assigned and passed by `ref` from anywhere.
 
 *More detail on this section: [language details](https://github.com/ghul-lang/ghul/blob/main/docs/details.md#structs).*
 
@@ -891,6 +963,22 @@ class TALLY: Counted is
 si
 ```
 
+`Ghul.Parsable[T]` is the trait of a type whose values can be read from text. On .NET it is `System.IParsable<T>`, and `Ghul.FormatProvider` is `System.IFormatProvider`, so the BCL's types satisfy it as they are. Used as a bound, it lets generic code call the type's static `try_parse` through the type parameter. The call is resolved by the type argument, so it is made only as `T.try_parse(...)` on a type parameter the trait bounds, not on an instance or on the trait itself:
+
+```ghul
+read_or[T: Ghul.Parsable[T]](text: string, fallback: T) -> T is
+    let value: T mut = _
+
+    if T.try_parse(text, null, value ref) then
+        return value
+    fi
+
+    return fallback
+si
+```
+
+The global `parse[T](text) -> T?` is built the same way, and `use default` imports it. It gives the value `text` holds, or null where it holds none, for a value type `T`: `parse[int]("42")` is 42 and `parse[int]("x")` is null. `T` can come from the type expected, as in `let n: int? = parse(line)`. On every target, `int`, `uint`, `long`, `ulong` and `double` are `Parsable`.
+
 *More detail on this section: [language details](https://github.com/ghul-lang/ghul/blob/main/docs/details.md#traits).*
 
 ### unions
@@ -1008,6 +1096,8 @@ Enum values support the relational operators and equality (`=~` and `==`). They 
 
 A separate block, which can be in a separate file, can add members to a type that is already declared. The type must be declared in the same assembly. The added members are real members of the type. They have full private access and normal virtual dispatch, and they behave exactly like members declared in the type's own body.
 
+The runtime library is built with one exception: with `--allow-member-injection`, a `partial` block inside `namespace Ghul.Internal` can add instance methods and read-only properties to a non-generic imported type. Each such member is compiled as a static that takes the receiver as its first argument. It is not virtual, so it can neither override nor be overridden. A value-type receiver is passed by value, so the member cannot change it.
+
 *More detail on this section: [language details](https://github.com/ghul-lang/ghul/blob/main/docs/details.md#partial-and-impl-blocks).*
 
 ### properties, methods, and visibility
@@ -1025,6 +1115,27 @@ class COUNTER is
             assert new_value >= 0 else "count must be non-negative";
             _count = new_value;
         si
+si
+```
+
+An indexer is a property reached with `[` and `]`. It takes one or more arguments, declared between the brackets, and is read as `x[i]` or `x[i, j]` and assigned as `x[i, j] = v`. Overloads of an indexer are chosen over all its arguments:
+
+```ghul
+class GRID is
+    _cells: Collections.LIST[int];
+    _columns: int;
+
+    init(rows: int, columns: int) is
+        _columns = columns;
+        _cells = Collections.LIST[int]();
+
+        for i in 0..rows * columns do
+            _cells.add(0);
+        od
+    si
+
+    [row: int, column: int]: int => _cells[row * _columns + column],
+        = value is _cells[row * _columns + column] = value; si
 si
 ```
 
@@ -1048,10 +1159,11 @@ si
 
 The compiler resolves an operator among the declarations that take the same number of operands as the use. A prefix `-` has one operand. So a member `-` with two operands (`self` and one argument) never matches a prefix `-`. Inside the type that declares such a member, a prefix `-` still finds the unary operator declared as a static member or at namespace scope.
 
-An operator's precedence comes from its first character. A declaration cannot set it. So an operator that looks like arithmetic has arithmetic precedence. From highest to lowest precedence:
+An operator's precedence comes from its first character. A declaration cannot set it. So an operator that looks like arithmetic has arithmetic precedence. The exceptions are opening pairs: an operator opening with `**` is a power, and one opening with a doubled `<` or `>` is a shift. From highest to lowest precedence:
 
 | level | characters |
 |-------|------------|
+| power | `**` |
 | multiplication | `*` `/` `%` `×` `÷` `✕` `⊗` `⊘` `⊙` `⋅` `∗` |
 | addition | `+` `-` `⊕` `⊖` `±` `∓` |
 | bitwise | `&` `\|` `¦` `^` `∩` `∪` `⊻` `⊼` `⊽` |
@@ -1060,6 +1172,8 @@ An operator's precedence comes from its first character. A declaration cannot se
 | thread-first | `\|>` `~>` |
 | relational | `=` `!` `~` `<` `>` `≠` `≤` `≥` `≈` `≉` `≡` `≢` `∈` `∉` `∋` `⊂` `⊃` `⊆` `⊇` |
 | boolean | `∧` `∨`, and `/\` and `\/` |
+
+`**` raises its left operand to the power of its right one, as `pow` does, and is reached as `pow` is, through `use default` or ``use Ghul.Math.`**``. An integer or `bigint` base takes an `int` exponent, and a `double` base takes a `double`. So `2 ** 10` is 1024, `2L ** 40` is a `long`, and `x ** 0.5` is a square root. An integer power that does not fit its type throws `OverflowException`, where `*` wraps, and a negative integer exponent throws `ArgumentOutOfRangeException`. `**` binds tighter than `*`, so `2 * 3 ** 2` is 18. It groups to the left like every other operator, so `2 ** 3 ** 2` is `(2 ** 3) ** 2`, which is 64. A chain like that has a warning, because mathematics groups a power to the right; parentheses around one pair silence it. A prefix operator applies before `**`, as before any binary operator, so `-2 ** 2` is `(-2) ** 2`, which is 4.
 
 The unary `\` is the bitwise complement of an integer. Its result has the operand's type: `\5` is `-6` for an `int`, `\0` is `-1`, and `\x` is `250` for a `ubyte` `x` of 5. `\` is the unary partner of the binary `&`, `|` and `^`. `!` is the logical not of a `bool`. The boolean operators `/\` and `\/` are each one token.
 
@@ -1083,6 +1197,7 @@ So `a == b` means one instruction, and a reader can understand it without knowin
 Because of this, `==` and `!=` accept only these operands:
 
 - primitive scalars: the integer types, `single`, `double`, `decimal`, `bool`, `char`
+- `bigint`, which `==` compares by value, as `=~` does. Like `decimal`, a `bigint` compares through its type's own equality rather than one instruction. The comparison never throws, but its cost grows with the size of the numbers, since every digit can matter.
 - enum members
 - references: `string`, `object`, any class, any trait, and `null` compared with one of these
 - a bare type parameter. The type argument decides which of the above it is.
@@ -1377,7 +1492,7 @@ for (key, value) in dictionary do
 od
 ```
 
-Some values are both a sequence and their own iterator, such as a generator. A `for` loop reads such a value through the iterator the value returns, so each loop over the value starts at its beginning. A `for` loop reads a struct iterator, such as a range, directly. Every loop supports `break`, which ends the loop, and `continue`, which goes to the next iteration. A loop disposes nothing that it iterates. For a sequence that holds a resource, see [collections and pipes](#collections-and-pipes).
+Some values are both a sequence and their own iterator, such as a generator. A `for` loop reads such a value through the iterator the value returns, so each loop over the value starts at its beginning. A `for` loop reads a struct iterator, such as a range, directly. Every loop supports `break`, which ends the loop, and `continue`, which goes to the next iteration. A loop disposes nothing that it iterates. For a sequence that holds a resource, see [collections and pipes](#collections-and-pipes). A list changed while a loop reads it gives undefined results, never an unsafe memory read.
 
 The range operators work in any expression. `..` includes its start and excludes its end: `0..3` is 0, 1, 2. `::` includes both: `1::5` is 1 to 5. The from-the-end forms (`..<`, `::<`, `..<<`, `::<<`) are for indexing, not iteration (see [arrays](#types-and-literals)).
 
@@ -1607,7 +1722,7 @@ If the last statement has no value (a `let`, `for`, `while`, `assert`, ...), the
 
 - The least upper bound of the other values becomes optional. `(let s = f(); return s; null)` with a `string` return is `string?`.
 - When every value is `null`, the block has the type that the context expects.
-- When every value is `null` and the context expects no type, the block is an error: `all val-block contributions are null`.
+- When every value is `null` and the context expects no type, the block is an error: `all 'val'-block contributions are 'null'`.
 
 Nested blocks follow the innermost rule. A `return` in an inner block exits only the inner block, and the outer block continues.
 
@@ -1673,6 +1788,8 @@ assert index < array.count else "index out of range";
 ```
 
 A string after `else` gets the source location as a prefix, and is thrown in a `Ghul.AssertFailedException`. A `Ghul.Exception` value after `else` is thrown unchanged. Anything else after `else` is a compile error.
+
+When the condition is a comparison (`=~`, `!~`, `==`, `!=`, `<`, `<=`, `>`, `>=`) or a call, the message also gives the values it compared: `index >= 0 (left: -1, right: 0)` for a comparison, `contains(xs, 3) (arguments: [1, 2], 3)` for a call. Each value is written as `inspect` writes it, with a string or a character quoted, after the condition's text or after the `else` string. Each operand is evaluated once, before the condition is tested. A condition of any other form, and an assert in a generator or asynchronous body, gives the condition's text alone.
 
 In an expression, `assert cond else "msg" in expr` checks a condition before an expression. It works like `let X in expr`: if the assert fails it throws, and if it passes the value is the inner expression. The condition's narrowing applies in the inner expression, so the inner expression can use the checked value directly:
 
@@ -1749,7 +1866,7 @@ A function literal whose body contains `yield` is also a generator. It captures 
 
 1. its declared return type
 2. the slot it is assigned to, when that slot expects a `Pipe[T]`, `Iterable[T]` or `Iterator[T]`
-3. its first `yield`
+3. the join of the types its `yield`s produce, as a function's return type is the join of its `return`s: yields of a `Cat` and a `Dog` give `Animal`, and yields that share no type but `object` give `object`
 
 A generator literal whose element type none of these decides is an error. A nested named function that yields is also a generator literal. It refers to itself by name for `yield in`:
 
@@ -1785,7 +1902,7 @@ The collection types are:
 - `Collections.LIST[T]`: the mutable list
 - `MAP` and `Map`: the mutable dictionary and its read-only trait, named in the same way as `LIST` and `List`
 - `SET`: the mutable hash set. `Set` (the .NET `IReadOnlySet<T>`) is its read-only trait, and `MutableSet` (`ISet<T>`) is its mutable trait.
-- `STACK`, `QUEUE`, `PRIORITY_QUEUE` and `LINKED_LIST`: the mutable stack, queue, priority queue and linked list
+- `STACK`, `QUEUE`, `PriorityQueue` and `LINKED_LIST`: the mutable stack, queue, priority queue and linked list
 - `MutableList`, `MutableMap`, `Bag` and `MutableBag`
 
 ghūl has no map literal syntax. To write a map with fixed contents, write a list literal of key and value pairs, and build the map from it with `MAP()`. The constructor throws if a key appears twice:
@@ -1816,6 +1933,8 @@ A collection is built from a sequence by its constructor, which takes the sequen
 
 `++` joins two sequences, as `cat` does: `[1, 2] ++ [3] ++ [4, 5]` is the elements 1 to 5 in order. It reads each operand lazily and has the same precedence as `+`. Both operands are sequences, so a single element goes in an array literal: `[x] ++ xs`.
 
+`|`, `&` and `--` are the set operators over two sequences: `xs | ys` is their union, `xs & ys` their intersection, and `xs -- ys` the elements of `xs` not in `ys`. Each gives every element once, in the order the elements first appear, left operand first, and reads its operands lazily. `intersect` and `except` are the function forms. On integers, `bigint` and flags enums, `|` and `&` keep their bitwise meaning. `|` and `&` share one precedence level, tighter than a range's, so `(1::3) | (2::5)` needs its parentheses and `xs & ys | zs` is `(xs & ys) | zs`; `--` has the precedence of `++`.
+
 ```ghul
 let numbers = [1, 2, 3, 4, 5];
 let evens = numbers |> filter(x => x % 2 == 0);
@@ -1834,17 +1953,25 @@ Every read of a pipe starts from the beginning. Two reads in progress at the sam
 - `p |> count()` followed by `p |> only()` reads the whole sequence both times.
 - `p |> take(2)` gives the first two elements every time it is read. Use `skip` to read later elements.
 
-The combinators return `T{}`. Each read of a combinator's result reads its source again from the beginning. A terminal does not dispose the iterator it reads, and neither does a `for` loop, whether or not it reads to the end (see below). A generator's `dispose()` releases nothing: it does not run the body's `finally` clauses, and does not dispose an iterator that the body reads with `yield in`. `memo` reads its source once. Every read of a `memo` result replays the cached elements, and asks the source for more elements only after the end of the cache.
+The combinators return `T{}`. Each read of a combinator's result reads its source again from the beginning. A terminal does not dispose the iterator it reads, and neither does a `for` loop, whether or not it reads to the end (see below). Disposing a generator's iterator ends its stream. If the generator is suspended at a `yield`, `dispose()` first disposes the iterator that an active `yield in` reads, then runs the `finally` clauses and `use` disposals around that `yield`, innermost first. A generator that has not started, or has already ended, runs nothing. After `dispose()`, `move_next()` returns false, and a second `dispose()` does nothing. `memo` reads its source once. Every read of a `memo` result replays the cached elements, and asks the source for more elements only after the end of the cache.
 
-A `for` loop does not dispose the sequence it iterates. To dispose a sequence that holds a resource, take its iterator with `use`. Few sequences hold a resource: file and directory enumeration, a database reader, a PLINQ query, and a .NET iterator written with a `using`. Disposal matters when the loop can exit early, because the iterator is then still open.
+A `for` loop does not dispose the sequence it iterates. To read a file, open a reader and hold it with `use`. `lines()` and `chars()` read a `TextReader`, and `bytes()` and `chunks(n)` read a `Stream`:
 
 ```ghul
-for line in use IO.File.read_lines(path).iterator do
+for line in use IO.File.open_text(path) |> lines() do
     if line.starts_with(wanted) then
         return line
     fi
 od
+
+let total = use IO.File.open_text(path) |> lines() |> map(l => int.parse(l)) |> sum()
 ```
+
+A `use` in a loop's source is disposed when the loop ends, however it ends, so the `for` above closes the file as it leaves the loop. Anywhere else, `use` disposes the reader when the enclosing block ends, on every way out of the block, including an exception. A parenthesised block is a block, so it closes the reader as soon as its value is computed: `(let use reader = IO.File.open_text(path); reader |> lines() |> first())`. The adaptors borrow the reader: reading a pipe made by one never disposes the reader, and a second read carries on from where the first stopped, as `cursor` does. So a header and the lines after it are read with two pipes over one reader. A reader read again after a loop is held with `let use` before the loop, not with a `use` in the loop's source, which closes it when the loop ends. `write_lines(writer)` writes each element and a line break to a `TextWriter`, then flushes it, and leaves it open: `(let use writer = IO.File.create_text(path); lines |> write_lines(writer))`.
+
+A reader or stream made in the call that reads it, with no `use`, is never disposed, and draws the `undisposed-source` warning. A pipe over a `use`d reader that leaves its block, by a `return`, an expression body or a `yield`, is read after the reader is closed and throws. It draws the `use-escapes` warning.
+
+Few sequences hold a resource themselves: .NET's `File.read_lines` and directory enumeration, a database reader, a PLINQ query, and a .NET iterator written with a `using`. To dispose one, take its iterator with `use`: `for line in use IO.File.read_lines(path).iterator do ... od`.
 
 `next` reads one element from an iterator. It advances the iterator and returns the element it reaches, or the absent value at the end. So `next` works as the condition of a `while let` loop: `while let cat: CAT = animals |> next() do ... od` runs until the iterator ends, or until it gives an element that is not a `CAT`.
 
@@ -1862,7 +1989,7 @@ let seen = repeat(false, 100) |> LIST();                 // LIST[bool], a hundre
 let squares = from(1) |> map(n => n * n) |> take(5);  // 1, 4, 9, 16, 25
 ```
 
-`Ghul.Pipes.stream(initial, advance)` builds a lazy sequence, which can be infinite. `advance` takes the current state and gives the next element and the next state. `advance` can have side effects. It is called lazily, only when an element is needed, so it is much easier to reason about when it has no side effects. The `||` infix operator writes the step: `value || next_state`. A `stream(...)` is an ordinary `Pipe[T]`, so the pipe combinators chain onto it with `|>`. See <https://ghul.dev/functional-programming.html#lazy-sequences>.
+`Ghul.Pipes.stream(initial, advance)` builds a lazy sequence, which can be infinite. `advance` takes the current state and returns the next element and the next state as a tuple, or `null` to end the sequence: `stream(1, n => if n > 5 then null else (n, n + 1) fi)`. Where the state is a tuple, `advance` can take its parts as separate parameters: `stream((0, 1), (a, b) => (a, (b, a + b)))`. `advance` must be pure, as `iterate`'s step must be: it is called lazily, only when an element is needed, and again each time the sequence is read. An argument the compiler cannot prove pure gets the `impure-function-argument` warning. `peek` is the stage for effects: its action need not be pure, and `peek` itself is not declared pure, because whatever reads its result runs the action. A `stream(...)` is an ordinary `Pipe[T]`, so the pipe combinators chain onto it with `|>`. See <https://ghul.dev/functional-programming.html#lazy-sequences>.
 
 The thread-first operator `|>` calls a function with the left value as its first argument. `x |> f(a)` is `f(x, a)`, and `x |> f()` is `f(x)`. The compiler resolves the right-hand side exactly as an ordinary call. So it can be a free function, a method on an explicit receiver (`x |> box.combine(a)` is `box.combine(x, a)`), or a generic function whose type argument is inferred from the left value. Chains associate to the left, so `x |> f(a) |> g(b)` is `g(f(x, a), b)`. `|>` is a plain call. Its right-hand side must be a function call, or the name of a function whose name is an operator:
 
@@ -1879,7 +2006,7 @@ let c = 5 |> double() |> add(1); // add(double(5), 1) is 11
 
 A prefix operator applies to its operand before the chain. So `!xs |> any(p)` negates `xs`, not the result of `any`, and `await t |> f()` is `f(await t)`. `use` works in the same way. `use open(p) |> first()` disposes the value that `open(p)` returns. `use open(p).iterator` disposes the iterator, because member access has higher precedence than any prefix operator. To negate the result of the chain, put the chain in parentheses: `!(xs |> any(p))`.
 
-The left value goes into the last call on the right-hand side. So `x |> box.combine(a)` is `box.combine(x, a)`, and `x |> BOX(1).combine(a)` is `BOX(1).combine(x, a)`. Member access, indexing, `!` and `?` after that call apply to the call's result, as after any call. So `xs |> collect_mutable()[0]` is the first element, and `xs |> collect_mutable().count` is the count. An operator after the call applies to the result of the whole chain, so `xs |> count() % 2` is `count(xs) % 2`.
+The left value goes into the last call on the right-hand side. So `x |> box.combine(a)` is `box.combine(x, a)`, and `x |> BOX(1).combine(a)` is `BOX(1).combine(x, a)`. Member access, indexing, `!` and `?` after that call apply to the call's result, as after any call. So `xs |> LIST()[0]` is the first element, and `xs |> LIST().count` is the count. An operator after the call applies to the result of the whole chain, so `xs |> count() % 2` is `count(xs) % 2`.
 
 The right-hand side can omit the argument list only when it is a function whose name is an operator, because the bare name has no other meaning. The left value is then the only argument. An argument list is also valid:
 
@@ -1899,7 +2026,7 @@ parse_port(s: string) -> int?;
 clamp_port(n: int) -> int?;
 label(n: int) -> string;
 
-let port = text |> trim() |> parse_port() ~> clamp_port() ~> label() ?? "closed";
+let port = text.trim() |> parse_port() ~> clamp_port() ~> label() ?? "closed";
 ```
 
 `|>` and `~>` can be mixed in one chain. A `|>` stage always runs. A `~>` stage propagates absence. `~>` works with every kind of optional, including an unconstrained `T?` in a generic. `~>` has the same diagnostics as `?.`:
@@ -2042,7 +2169,7 @@ When neither the arguments nor any later use decides a type argument, the constr
 
 See <https://ghul.dev/type-inference.html>.
 
-ghūl infers types widely, but inference is **function-local**. A namespace-scope function's signature (its parameter types and return type) is always written out, and the compiler infers types only inside bodies. Inside a body, the compiler infers the types of local variables, loop variables, destructured variables, the parameters and return types of function literals and nested named functions, and the type arguments of generic calls.
+ghūl infers types widely, but inference is **function-local**, with one wider scope. A method's signature, and a namespace-scope function's in a file with a namespace block, is always written out, and the compiler infers types only inside bodies. In a file with no namespace declaration, or with a whole-file namespace, a function written with no types has its signature inferred from the whole file (see [namespaces and `use`](#namespaces-and-use)). Inside a body, the compiler infers the types of local variables, loop variables, destructured variables, the parameters and return types of function literals and nested named functions, and the type arguments of generic calls.
 
 Inference also uses later code. A variable with no type information at its declaration takes its type from how the same body uses it later. This includes the operations the body performs on the variable and, for a function, its own recursive calls. The compiler narrows local variables, fields and store-free properties (see [narrowing](https://github.com/ghul-lang/ghul/blob/main/docs/narrowing.md#type-narrowing) for how long each kind of fact lasts). The inferred type of a `let` variable is never visible outside the function that declares it.
 
@@ -2053,8 +2180,8 @@ See <https://ghul.dev/dotnet-integration.html>.
 ghūl compiles to .NET IL, and can use most types in any .NET assembly. The compiler converts .NET names to ghūl conventions:
 
 - Method, property and field names become `snake_case`.
-- Enum names and enum members become `MACRO_CASE`.
-- Class, struct and trait names keep their .NET names, without .NET's generic arity suffix. So `SortedSet<T>` is `Collections.SortedSet[T]`.
+- Enum members become `UPPER_SNAKE_CASE`.
+- Type names keep their .NET names, without .NET's generic arity suffix, except a short list of core types that ghūl names in `UPPER_SNAKE_CASE` (`LIST`, `MAP`, `SET`, `TASK`, ...), listed below. So `SortedSet<T>` is `Collections.SortedSet[T]`.
 - The namespace `System.Collections.Generic` is `Collections`, and `System.IO` is `IO`.
 
 Some common types have different names:
@@ -2071,12 +2198,22 @@ The dotnet-integration page has the full table of names.
 The core types have ghūl names in ghūl namespaces:
 
 - `System.Exception` is `Ghul.Exception`. The common exceptions in `System` are also in `Ghul`: `Ghul.InvalidOperationException`, `Ghul.NotImplementedException`, `Ghul.ArgumentException` and the others.
-- `System.Text.StringBuilder` is `Text.STRING_BUILDER`.
-- `System.Random` is `Ghul.RANDOM`.
-- `System.StringSplitOptions` and `System.StringComparison` are `Ghul.StringSplitOptions` and `Ghul.StringComparison`.
-- `System.Lazy<T>` is `Ghul.LAZY[T]`.
+- `System.Text.StringBuilder` is `Text.StringBuilder`. The old spelling `Text.STRING_BUILDER` still works.
+- `System.Globalization.UnicodeCategory` is `Text.UnicodeCategory`.
+- The regular expression types in `System.Text.RegularExpressions` are `Text.Regex`, `Text.Match`, `Text.Group`, `Text.MatchCollection`, `Text.GroupCollection` and `Text.RegexOptions`; the UPPER spellings still work.
+- The date and time types are in `Time`: `System.DateTime`, `System.DateTimeOffset` and `System.TimeSpan` are `Time.DateTime`, `Time.DateTimeOffset` and `Time.TimeSpan`, `System.DayOfWeek` and `System.DateTimeKind` are `Time.DayOfWeek` and `Time.DateTimeKind`, `System.Diagnostics.Stopwatch` is `Time.Stopwatch`, and `System.Globalization.ISOWeek` is `Time.IsoWeek`. The UPPER_SNAKE_CASE spellings (`Time.DATE_TIME` and the rest) still work.
+- The rest of the text family is in `Text`, beside `Text.StringBuilder` and `Text.Regex`: `System.Text.Encoding` is `Text.Encoding`, `System.Text.Rune` is `Text.Rune` (`Text.RUNE` still works), `System.Globalization.CultureInfo` is `Text.Locale`, `System.Globalization.NumberStyles` is `Text.NumberStyles`, `System.Text.UTF8Encoding`, `ASCIIEncoding`, `UTF32Encoding` and `UnicodeEncoding` are `Text.UTF8_ENCODING`, `Text.ASCII_ENCODING`, `Text.UTF32_ENCODING` and `Text.UTF16_ENCODING`, `System.Globalization.StringInfo` and `TextInfo` are `Text.StringInfo` and `Text.TextInfo`, and `Ghul.StringComparison` and `Ghul.StringSplitOptions` are `Text.StringComparison` and `Text.StringSplitOptions`. On wasm and llvm the only culture is the invariant one: `Text.Locale.invariant_culture` and `current_culture` are the same culture, and formatting, parsing and changing case work the same whichever culture is passed. `System.Text.Encoding.Unicode` is `Text.Encoding.utf16` on every target; `unicode` is not a name for it.
+- `Text` has functions for numbers in a base and bytes as text: `to_base(value, base)` writes an integer in base 2, 8, 10 or 16, and `from_base(text, base)` reads one back as a `long?`; `to_hex`, `to_hex_lower` and `from_hex` write and read bytes as hexadecimal; `to_base64` and `from_base64` do the same in Base64. Each `from_` function answers null for text it can't read. `System.Convert` is still there and still throws.
+- The numeric types are in `Ghul.Math`, beside the maths functions: `System.Numerics.Complex` is `Ghul.Math.Complex`, `System.Numerics.BitOperations` is `Ghul.Math.BitOperations` and `System.BitConverter` is `Ghul.Math.BitConverter`.
+- The reflection types are in `Ghul.Reflection`, beside `Ghul.Type`: `System.Reflection.Assembly`, `FieldInfo`, `ParameterInfo`, `ConstructorInfo`, `MethodInfo`, `PropertyInfo` and `BindingFlags` are the same names in `Ghul.Reflection`, and `System.Activator` is `Ghul.Reflection.Activator`.
+- The language's own types are in `Ghul`: `System.GC`, `System.ObsoleteAttribute`, `System.Runtime.CompilerServices.MethodImplAttribute` and `MethodImplOptions` are `Ghul.GC`, `Ghul.ObsoleteAttribute`, `Ghul.MethodImplAttribute` and `Ghul.MethodImplOptions`, and `System.IFormattable` is `Ghul.Formattable`. `System.Threading.Thread` is `Tasks.Thread`.
+- `System.Uri` is `IO.Uri`.
+- The hashes are in `Crypto`: `System.Security.Cryptography.MD5`, `SHA1` and `SHA256` are `Crypto.MD5`, `Crypto.SHA1` and `Crypto.SHA256`, and each has `hash_data(bytes)`, which returns the digest. `System.Security.Cryptography.RandomNumberGenerator`, the secure generator, is `Crypto.RandomNumberGenerator`.
+- `System.Random` is `Ghul.Random`. The UPPER_SNAKE_CASE spelling `Ghul.RANDOM` still works.
+- `System.Type` is `Ghul.Type`.
+- `System.Lazy<T>` is `Ghul.Lazy[T]`; `Ghul.LAZY[T]` still works.
 - `System.FlagsAttribute` is `Ghul.FlagsAttribute`.
-- `KeyValuePair<K, V>` is `Collections.KEY_VALUE_PAIR[K, V]`.
+- `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`; `Collections.KEY_VALUE_PAIR` still works. `Ghul.Box`, `Collections.PriorityQueue`, `Ghul.Pipes.IndexedValue` and `Ghul.Interop.Pinned` are the PascalCase names of the library types that were `BOX`, `PRIORITY_QUEUE`, `INDEXED_VALUE` and `PINNED`; the old spellings still work.
 - `IComparer<T>` and `IEqualityComparer<T>` are `Collections.Comparer[T]` and `Collections.EqualityComparer[T]`, as above.
 
 The old name of each of these types still refers to the same type wherever a type can be named. A `use` of an old name imports the type under that old name. Diagnostics, hover and completion show only the new name.
@@ -2106,7 +2243,7 @@ A member `=~` or `<>` must be `pure`: declared `pure`, or provably store-free. O
 
 A backtick escapes an identifier that is a ghūl keyword: `` `class `` is the identifier `class`.
 
-A static property or field is `snake_case`, even when it looks like a constant, because only enum members become `MACRO_CASE`. So `CancellationToken.None` is `System.Threading.CancellationToken.none`.
+A static property or field is `snake_case`, even when it looks like a constant, because only enum members become `UPPER_SNAKE_CASE`. So `CancellationToken.None` is `System.Threading.CancellationToken.none`.
 
 An **indexer** is the one member that code reaches only through its own syntax. .NET does not fix an indexer's name: the property has the name its declaring language chose, and the type names the real one. `System.String` and `Text.STRING_BUILDER` both call theirs `Chars`. Code never writes the name: `[` and `]` find the indexer whatever its name is.
 
@@ -2114,7 +2251,7 @@ An **indexer** is the one member that code reaches only through its own syntax. 
 let initial = name[0];
 ```
 
-The accessors of an indexer are not members of their own, so naming one directly is an error.
+The accessors of an indexer are not members of their own, so naming one directly is an error. A .NET indexer that takes several arguments is reached the same way, as `board[1, 2]`. A .NET member whose signature has a multidimensional array (`int[,]`) can't be used from ghūl, and a use of one is an error.
 
 Code does not reach a **nested** .NET type through its enclosing type. The nested type is in the enclosing type's namespace, with a name that joins the type names with `_`. So `System.Environment.SpecialFolder` is written:
 
@@ -2182,10 +2319,10 @@ let make: (string) -> PERSON = PERSON;              // the one-parameter constru
 
 The compiler resolves an overloaded name against the function or delegate type that the reference must match, in the same way that a call's argument types choose an overload. When there is no such type, an ambiguous name is an error; the compiler does not guess.
 
-A pragma whose name is not a compiler built-in names a .NET **attribute**. The compiler emits the attribute on the declaration that the pragma is written on. That declaration can be a class, trait, struct, union, variant or enum; a function or method; a field or property; or one parameter in the parameter list of a function, method or lambda literal. The short form `Foo` resolves to `FooAttribute` when there is no plain `Foo`. This applies in a `use` as well as in a pragma. So `use System.Obsolete` imports `System.ObsoleteAttribute`, and `use Marker = System.Obsolete` imports it as `Marker`. Attribute arguments can be positional, named (`name = value`), arrays, or `typeof`:
+A pragma whose name is not a compiler built-in names a .NET **attribute**. The compiler emits the attribute on the declaration that the pragma is written on. That declaration can be a class, trait, struct, union, variant or enum; a function or method; a field or property; or one parameter in the parameter list of a function, method or lambda literal. The short form `Foo` resolves to `FooAttribute` when there is no plain `Foo`. This applies in a `use` as well as in a pragma. So `use System.Obsolete` imports `System.ObsoleteAttribute`, and `use Marker = System.Obsolete` imports it as `Marker`. Attribute arguments can be positional, named (`name = value`), arrays, or `typeof`. An integer or enum argument can combine constants with `|`, `&` and `^`, as in `AttributeTargets.CLASS | AttributeTargets.METHOD`:
 
 ```ghul
-@System.Obsolete("use PRODUCT instead")
+@Ghul.Obsolete("use PRODUCT instead")
 class LEGACY_PRODUCT is
     init() is si
 si
@@ -2211,7 +2348,7 @@ app.map_get(
 
 See <https://ghul.dev/webassembly.html>.
 
-`--target` chooses the target. `dotnet` is the default, and writes a .NET assembly. `wasm` writes a WebAssembly module that uses the GC proposal, and a JavaScript loader next to it. The module file has the extension `.wasm` (a name with no extension gets it), and the loader has the same name with the extension `.mjs` and finds the module beside it. The loader runs the module under Node.js 22.19 or later on the 22 line, 24.15 or later on the 24 line, or 25 or later. Node 23 cannot run it. `llvm` writes a native executable (see [compilation targets](https://github.com/ghul-lang/ghul/blob/main/docs/targets.md#compilation-targets)). The same source builds for each target, and has the same meaning on each. Where the `wasm` target cannot compile something yet, it reports an error; it never compiles the code with a different meaning.
+`--target` chooses the target. `dotnet` is the default, and writes a .NET assembly. `wasm` writes a WebAssembly module that uses the GC proposal, and a JavaScript loader next to it. The module file has the extension `.wasm` (a name with no extension gets it), and the loader has the same name with the extension `.mjs` and finds the module beside it. The loader ships with the core library, as `ghul-core/host/loader.mjs`, and `--wasm-loader <path>` names the copy to write; a wasm executable built without it is refused. `ghul build` passes it for you. The loader runs the module under Node.js 22.19 or later on the 22 line, 24.15 or later on the 24 line, or 25 or later. Node 23 cannot run it. `llvm` writes a native executable (see [compilation targets](https://github.com/ghul-lang/ghul/blob/main/docs/targets.md#compilation-targets)). The same source builds for each target, and has the same meaning on each. Where the `wasm` target cannot compile something yet, it reports an error; it never compiles the code with a different meaning.
 
 The wasm and llvm targets both behave like a .NET program configured for invariant globalization (`System.Globalization.Invariant`). Strings compare and sort by code unit, and numbers and dates have the same format on every machine. A .NET program gets the same behaviour by setting `<InvariantGlobalization>true</InvariantGlobalization>` in its project.
 

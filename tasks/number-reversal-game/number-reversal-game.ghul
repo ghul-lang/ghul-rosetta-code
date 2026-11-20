@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-let random = System.Random(9)
+let random = Ghul.Random(9)
 
 shuffled() -> int[] => (
     let digits = 1::9 |> LIST()

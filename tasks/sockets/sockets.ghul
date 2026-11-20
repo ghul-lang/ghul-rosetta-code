@@ -1,7 +1,7 @@
 use default
 use System.Net
 use System.Net.Sockets
-use System.Threading.Thread
+use Tasks.Thread
 
 listen_on(port: int) -> TcpListener? is
     let listener = TcpListener(IPAddress.loopback, port)
@@ -32,7 +32,7 @@ let port =
     if let endpoint: IPEndPoint = listener.local_endpoint then
         endpoint.port
     else
-        throw System.Exception("the listener has no address")
+        throw Ghul.Exception("the listener has no address")
     fi
 
 let receiving = Thread(() is

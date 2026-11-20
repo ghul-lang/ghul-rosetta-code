@@ -3,7 +3,7 @@ use IO.Std.write
 
 step_up() => while !step() do step_up() od
 
-let random mut = Ghul.RANDOM(0)
+let random mut = Ghul.Random(0)
 
 step() is
     let up = random.next_double() < 0.5
@@ -12,7 +12,7 @@ step() is
 si
 
 for seed in 1::5 do
-    random = Ghul.RANDOM(seed)
+    random = Ghul.Random(seed)
     write("seed {seed}:")
     step_up()
     write_line("")

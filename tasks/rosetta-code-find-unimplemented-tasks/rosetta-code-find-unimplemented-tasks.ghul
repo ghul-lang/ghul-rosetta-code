@@ -35,7 +35,7 @@ members(client: HttpClient, api: string, category: string) -> Set[string] is
         let token = more.get_property("cmcontinue").get_string() ?? ""
 
         next =
-            "&cmcontinue={System.Uri.escape_data_string(token)}"
+            "&cmcontinue={IO.Uri.escape_data_string(token)}"
             "&continue=-||"
     od
 

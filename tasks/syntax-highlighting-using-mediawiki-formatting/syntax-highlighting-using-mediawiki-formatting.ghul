@@ -31,7 +31,7 @@ string_end(line: string, start: int) -> int is
 si
 
 highlight(line: string) -> string is
-    let out = System.Text.StringBuilder(" ")
+    let out = Text.StringBuilder(" ")
     let i mut = 0
 
     while i < line.length do

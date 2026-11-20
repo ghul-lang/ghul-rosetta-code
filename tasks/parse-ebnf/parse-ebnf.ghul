@@ -10,7 +10,7 @@ union Rule is
 si
 
 @suppress("non-pascal-case-name")
-class BAD_GRAMMAR(text: string init): System.Exception is
+class BAD_GRAMMAR(text: string init): Ghul.Exception is
     super(text)
 si
 

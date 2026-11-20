@@ -28,7 +28,7 @@ si
 
 descend(level: int) is
     if level == 0 then
-        throw System.Exception("bottom reached")
+        throw Ghul.Exception("bottom reached")
     fi
 
     descend(level - 1)
@@ -42,7 +42,7 @@ steps() -> string{} is
     write_line("  generator: finished")
 si
 
-paused() -> COROUTINE is
+paused() -> Coroutine is
     write_line("  coroutine: before the pause")
 
     await pause()
@@ -60,7 +60,7 @@ write_line("rows with no gap: {grid |> complete_rows() |> join(", ")}")
 
 try
     descend(4)
-catch error: System.Exception
+catch error: Ghul.Exception
     write_line("unwound five frames: {error.message}")
 yrt
 

@@ -2,7 +2,7 @@ use default
 
 let lines = IO.File.read_all_lines("readings.txt")
 let separators = ['\t', ' ']
-let skip_empty = System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
+let skip_empty = Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES
 
 let total mut = 0.0
 let readings mut = 0

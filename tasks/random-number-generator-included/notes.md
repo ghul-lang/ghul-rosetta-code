@@ -1,5 +1,5 @@
 ghūl has no random number generator of its own. A ghūl program uses .NET's
-`System.Random`, which has two algorithms behind it, chosen by how the
+`Ghul.Random`, which has two algorithms behind it, chosen by how the
 generator is constructed.
 
 `Random()`, with no seed, is seeded from the system. In a 64-bit process it uses

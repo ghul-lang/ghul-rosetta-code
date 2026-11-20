@@ -33,7 +33,7 @@ through(a: P, b: P, c: P) -> CIRCLE =>
         in
         CIRCLE(a + offset, offset.length)
 
-let random = System.Random(1857)
+let random = Ghul.Random(1857)
 
 enclose(given: P[]) -> CIRCLE is
     let points = LIST(given)

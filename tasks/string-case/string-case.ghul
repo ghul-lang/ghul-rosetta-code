@@ -1,5 +1,5 @@
 use default
-use System.Globalization.CultureInfo
+use Text.Locale
 
 let subject = "alphaBETA"
 let invariant = CultureInfo.invariant_culture

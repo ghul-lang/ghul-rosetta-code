@@ -1,6 +1,6 @@
 use default
-use System.Numerics.INumber
-use System.Numerics.IMultiplyOperators.`*
+use Ghul.Math.Number
+use Ghul.Math.MultiplyOperators.`*
 
 let parent = MAP[int, int]()
 let added = MAP[int, int]()

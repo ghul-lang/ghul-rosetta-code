@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(3)
+let random = Ghul.Random(3)
 
 rand_n(n) => if random.next(n) == 0 then 1 else 0 fi
 

@@ -65,5 +65,5 @@ for frame in 0..frames do
     od
 
     drops |> each(drop => drop.fall())
-    System.Threading.Thread.sleep(delay)
+    Tasks.Thread.sleep(delay)
 od

@@ -1,5 +1,5 @@
 use default
-use System.StringComparison
+use Text.StringComparison
 
 show(expression: string, result: object) =>
     write_line("{expression,-40} {result}")

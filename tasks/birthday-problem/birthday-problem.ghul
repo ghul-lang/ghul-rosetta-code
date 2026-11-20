@@ -3,7 +3,7 @@ use Raster.Anchor
 use Raster.IMAGE
 
 let days = 365
-let random = System.Random(365)
+let random = Ghul.Random(365)
 let counts = repeat(0, days) |> LIST()
 
 shared(people: int, at_least: int) -> bool is

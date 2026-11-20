@@ -1,6 +1,6 @@
 use default
 use IO.File
-use System.StringSplitOptions
+use Text.StringSplitOptions
 
 let fields_per_record = 49
 let instruments = fields_per_record / 2

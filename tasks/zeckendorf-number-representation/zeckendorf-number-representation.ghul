@@ -19,7 +19,7 @@ fibonacci_up_to(limit: int) -> int{} is
 si
 
 zeckendorf(n: int) -> string is
-    let digits = System.Text.StringBuilder()
+    let digits = Text.StringBuilder()
     let remaining mut = n
 
     for value in fibonacci_up_to(n) |> reverse() do

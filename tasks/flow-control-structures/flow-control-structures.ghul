@@ -67,8 +67,8 @@ let countdown = (
 write_line("counting down: {countdown}")
 
 try
-    throw System.Exception("and out again")
-catch e: System.Exception
+    throw Ghul.Exception("and out again")
+catch e: Ghul.Exception
     write_line("caught: {e.message}")
 finally
     write_line("the finally always runs")

@@ -49,7 +49,7 @@ let lock_path =
     else
         Path.combine(
             Path.get_temp_path(),
-            "one-instance-{Ghul.RANDOM().next_int64()}"
+            "one-instance-{Ghul.Random().next_int64()}"
         )
     fi
 

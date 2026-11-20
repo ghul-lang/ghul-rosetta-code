@@ -84,7 +84,7 @@ median_filter(source: IMAGE) -> IMAGE is
     result
 si
 
-let random = System.Random(3)
+let random = Ghul.Random(3)
 let noisy = scene()
 
 for _ in 0..1500 do

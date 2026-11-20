@@ -1,5 +1,5 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
 is_alphabetic(character) =>
     (character >= 'A' /\ character <= 'Z') \/

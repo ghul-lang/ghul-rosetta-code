@@ -5,7 +5,7 @@ let p = 0.5
 let runs = 5
 let expected = 0.065770
 
-let random = System.Random(3)
+let random = Ghul.Random(3)
 
 class CLUSTERS is
     size: int

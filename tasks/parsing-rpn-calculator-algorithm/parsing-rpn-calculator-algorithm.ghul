@@ -7,7 +7,7 @@ apply(operator, left, right) =>
     when "*" then left * right
     when "/" then left / right
     when "^" then pow(left, right)
-    else throw System.Exception("unknown operator {operator}")
+    else throw Ghul.Exception("unknown operator {operator}")
     esac
 
 let expression = "3 4 2 * 1 5 - 2 3 ^ ^ / +"

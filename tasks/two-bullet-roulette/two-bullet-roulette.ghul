@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(6)
+let random = Ghul.Random(6)
 
 class REVOLVER is
     _chambers: LIST[bool]

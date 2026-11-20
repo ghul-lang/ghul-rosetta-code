@@ -1,5 +1,5 @@
 use default
-use System.Globalization.CultureInfo
+use Text.Locale
 
 isqrt(x) is
     let two = 2n

@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-let random = System.Random(314)
+let random = Ghul.Random(314)
 
 darts() -> (x: double, y: double){} is
     do

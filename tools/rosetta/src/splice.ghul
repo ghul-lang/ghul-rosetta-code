@@ -1,6 +1,6 @@
 namespace Rosetta is
-    use System.Text.RegularExpressions.Regex
-    use System.Text.RegularExpressions.Match
+    use Text.Regex
+    use Text.Match
     use Collections
 
     // Where a language's section belongs in a task page, and what is already there.
@@ -49,10 +49,10 @@ namespace Rosetta is
         _name(m: Match) -> string => m.groups[1].value.trim()
 
         _before(left: string, right: string) -> bool =>
-            string.compare(left, right, System.StringComparison.ORDINAL_IGNORE_CASE) < 0
+            string.compare(left, right, Text.StringComparison.ORDINAL_IGNORE_CASE) < 0
 
         _names(header: Match, language: string) -> bool =>
-            string.equals(_name(header), language, System.StringComparison.ORDINAL_IGNORE_CASE)
+            string.equals(_name(header), language, Text.StringComparison.ORDINAL_IGNORE_CASE)
 
         // Where `language`'s section goes, without changing anything.
         //

@@ -101,7 +101,7 @@ let messages = [
 ]
 
 for message in messages do
-    let octets = System.Text.Encoding.utf8.get_bytes(message)
+    let octets = Text.Encoding.utf8.get_bytes(message)
 
     let expected = hex(Crypto.sha1(octets))
 

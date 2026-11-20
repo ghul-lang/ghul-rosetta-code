@@ -4,7 +4,7 @@ let prisoners = 100
 let attempts = 50
 let trials = 10000
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let strategies = [
     ("opening at random", opens_at_random),

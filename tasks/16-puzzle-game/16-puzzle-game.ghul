@@ -54,7 +54,7 @@ apply(command: string) -> bool is
     true
 si
 
-let random = System.Random(16)
+let random = Ghul.Random(16)
 let letters = "LRUD"
 
 for _ in 0..3 do

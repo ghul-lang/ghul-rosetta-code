@@ -15,7 +15,7 @@ let tiers: Tier[] = [
     (half_width = 2.5, top = 400.0)
 ]
 
-let random = System.Random(34)
+let random = Ghul.Random(34)
 
 let image = IMAGE(240, 480)
 

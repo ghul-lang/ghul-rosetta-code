@@ -13,10 +13,10 @@ let path = "input.txt"
 
 IO.File.write_all_lines(path, ["Enjoy", "Rosetta", "Code"])
 
-let requests = CHANNEL[Request]()
-let replies = CHANNEL[int]()
+let requests = Channel[Request]()
+let replies = Channel[int]()
 
-printer() -> COROUTINE is
+printer() -> Coroutine is
     let printed mut = 0
 
     do
@@ -32,7 +32,7 @@ printer() -> COROUTINE is
     od
 si
 
-reader() -> COROUTINE is
+reader() -> Coroutine is
     for line in IO.File.read_lines(path) do
         requests.send(PRINT(line))
         await pause()

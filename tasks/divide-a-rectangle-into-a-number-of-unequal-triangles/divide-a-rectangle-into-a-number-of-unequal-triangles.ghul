@@ -56,7 +56,7 @@ split(t: Triangle, at: double) -> (Triangle, Triangle) => (
     ((p, point, opposite), (point, q, opposite))
 )
 
-let random = System.Random(5)
+let random = Ghul.Random(5)
 
 divide(width: double, height: double, count: int) -> Triangle[] is
     assert count >= 3 else "at least three triangles are needed"

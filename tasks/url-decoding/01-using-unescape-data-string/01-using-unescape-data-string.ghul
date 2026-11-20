@@ -7,5 +7,5 @@ let encoded = [
 ]
 
 for text in encoded do
-    write_line("{text} -> {System.Uri.unescape_data_string(text)}")
+    write_line("{text} -> {IO.Uri.unescape_data_string(text)}")
 od

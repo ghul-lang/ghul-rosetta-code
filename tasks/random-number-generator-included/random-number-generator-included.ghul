@@ -1,6 +1,6 @@
 use default
 
-use System.Random
+use Ghul.Random
 use Crypto.random_int
 
 rolls(generator) =>

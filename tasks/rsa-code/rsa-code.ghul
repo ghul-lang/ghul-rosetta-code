@@ -1,6 +1,6 @@
 use default
 
-use System.Text.Encoding
+use Text.Encoding
 
 let n = bigint.parse("9516311845790656153499716760847001433441357")
 let e = 65537n

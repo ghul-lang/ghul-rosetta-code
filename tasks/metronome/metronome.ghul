@@ -1,13 +1,13 @@
 use default
 
-use System.Threading.Thread
+use Tasks.Thread
 
 // There is no portable way to play a sound from .NET, so the beat is shown
 // rather than heard: the first beat of each bar is TICK, the others tock.
 
 metronome(beats_per_minute, beats_per_bar, bars) is
     let interval = 60_000 / beats_per_minute
-    let clock = Time.STOPWATCH.start_new()
+    let clock = Time.Stopwatch.start_new()
 
     write_line(
         "{beats_per_minute} beats a minute, {beats_per_bar} to the bar"

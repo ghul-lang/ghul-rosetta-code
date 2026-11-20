@@ -1,5 +1,5 @@
 use default
-use System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
+use Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES
 
 let puzzle = [
     "__ 33 35 __ __  .  .  .",
