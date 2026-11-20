@@ -41,7 +41,7 @@ duplicates(root: string, minimum: long) -> Group{} =>
 
 let root = Path.combine(
     Path.get_temp_path(),
-    "duplicates-{System.Guid.new_guid()}"
+    "duplicates-{Ghul.RANDOM().next_int64()}"
 )
 
 let contents = [

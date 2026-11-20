@@ -25,6 +25,6 @@ swap(first ref, held ref)
 
 write_line("after swapping through two references: {first} and {held}")
 
-if System.Version.try_parse("1.2", _) then
+if int.try_parse("12", _) then
     write_line("a reference the caller has no use for goes to a discard")
 fi

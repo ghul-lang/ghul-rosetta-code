@@ -63,7 +63,7 @@ round_trip(message: string, sender: string, receiver: string) -> (
 
 let folder = Path.combine(
     Path.get_temp_path(),
-    "otp-{System.Guid.new_guid()}"
+    "otp-{Ghul.RANDOM().next_int64()}"
 )
 IO.Directory.create_directory(folder)
 

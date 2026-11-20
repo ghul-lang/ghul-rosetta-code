@@ -7,7 +7,6 @@ use IO.Path
 use System.Diagnostics.Process
 use System.Diagnostics.ProcessStartInfo
 use System.Environment
-use System.Guid
 
 take(lock_path: string) -> IO.FileStream? is
     try
@@ -48,7 +47,10 @@ let lock_path =
     if is_second then
         arguments[arguments.count - 1]
     else
-        Path.combine(Path.get_temp_path(), "one-instance-{Guid.new_guid()}")
+        Path.combine(
+            Path.get_temp_path(),
+            "one-instance-{Ghul.RANDOM().next_int64()}"
+        )
     fi
 
 if let held = take(lock_path) then
