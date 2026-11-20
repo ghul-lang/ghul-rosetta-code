@@ -10,7 +10,10 @@ list_here() =>
         |> sort()
         |> each(name => write_line(name))
 
-let scratch = Path.combine(Path.get_temp_path(), "ls-{Ghul.RANDOM().next_int64()}")
+let scratch = Path.combine(
+    Path.get_temp_path(),
+    "ls-{Ghul.RANDOM().next_int64()}"
+)
 
 Directory.create_directory(scratch)
 
