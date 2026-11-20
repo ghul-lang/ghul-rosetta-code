@@ -1,7 +1,7 @@
 use default
 use IO.File
 use Ghul.Pipes.Pipe
-use System.Text.Encoding
+use Text.Encoding
 use IO.Directory
 use IO.Path
 
@@ -28,7 +28,7 @@ reverse(record: string) -> string => (
 
 let scratch = Path.combine(
     Path.get_temp_path(),
-    "records-{Ghul.RANDOM().next_int64()}"
+    "records-{Ghul.Random().next_int64()}"
 )
 
 Directory.create_directory(scratch)

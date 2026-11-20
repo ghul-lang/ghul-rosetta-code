@@ -5,7 +5,7 @@ namespace Rosetta is
     use System.Text.Json.Utf8JsonWriter
     use System.Text.Json.JsonWriterOptions
     use System.Text.Encodings.Web.JavaScriptEncoder
-    use System.Text.RegularExpressions.Regex
+    use Text.Regex
     use Collections
     use Ghul.Pipes
 
@@ -158,7 +158,7 @@ namespace Rosetta is
             writer.write_end_object()
             writer.flush()
 
-            return "{System.Text.Encoding.utf8.get_string(stream.to_array())}\n"
+            return "{Text.Encoding.utf8.get_string(stream.to_array())}\n"
         si
 
         write_task(writer: Utf8JsonWriter, directory: string) is

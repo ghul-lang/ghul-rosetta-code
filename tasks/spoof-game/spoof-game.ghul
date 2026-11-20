@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-let random = System.Random(3)
+let random = Ghul.Random(3)
 
 write_line("each round we both hide 0 to 3 coins and guess the total")
 write_line("no guessing the same total; the right guess wins the round")

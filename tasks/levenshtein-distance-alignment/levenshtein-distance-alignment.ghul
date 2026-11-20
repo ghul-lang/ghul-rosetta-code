@@ -32,8 +32,8 @@ align(a, b) is
         od
     od
 
-    let top = System.Text.StringBuilder()
-    let bottom = System.Text.StringBuilder()
+    let top = Text.StringBuilder()
+    let bottom = Text.StringBuilder()
     let i mut = a.length
     let j mut = b.length
 

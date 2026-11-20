@@ -12,7 +12,7 @@ list_here() =>
 
 let scratch = Path.combine(
     Path.get_temp_path(),
-    "ls-{Ghul.RANDOM().next_int64()}"
+    "ls-{Ghul.Random().next_int64()}"
 )
 
 Directory.create_directory(scratch)

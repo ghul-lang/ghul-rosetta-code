@@ -3,7 +3,7 @@ use default
 use Crypto.md5
 
 md5(text: string) -> string =>
-    Text.to_hex_lower(md5(System.Text.Encoding.utf8.get_bytes(text)))
+    Text.to_hex_lower(md5(Text.Encoding.utf8.get_bytes(text)))
 
 let test_values = [
     "",

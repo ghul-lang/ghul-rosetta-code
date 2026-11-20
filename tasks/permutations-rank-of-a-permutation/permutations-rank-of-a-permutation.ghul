@@ -32,7 +32,7 @@ rank(permutation: int[]) -> bigint => (
     total
 )
 
-let random = System.Random(12)
+let random = Ghul.Random(12)
 
 random_below(limit: bigint) -> bigint =>
     let limbs = limit.to_string().length / 9 + 2 in

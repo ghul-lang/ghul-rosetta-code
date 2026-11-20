@@ -4,7 +4,7 @@ use Microsoft.Data.Sqlite.SqliteConnection
 use Microsoft.Data.Sqlite.SqliteException
 use Crypto.md5
 use Crypto.random_bytes
-use System.Text.Encoding
+use Text.Encoding
 
 // SQLite, through Microsoft.Data.Sqlite, stands in for MySQL: an
 // in-memory database needs no server, and the table and the three

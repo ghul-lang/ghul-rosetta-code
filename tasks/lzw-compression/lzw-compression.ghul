@@ -1,5 +1,5 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
 let alphabet_size = 256
 

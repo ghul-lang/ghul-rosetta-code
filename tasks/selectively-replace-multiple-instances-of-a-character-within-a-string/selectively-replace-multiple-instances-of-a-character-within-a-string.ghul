@@ -1,5 +1,5 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
 let replacements = [
     (('a', 1), 'A'),

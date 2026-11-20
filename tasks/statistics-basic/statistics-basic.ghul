@@ -28,7 +28,7 @@ class TALLY is
     deviation: double => sqrt(squares / double(count) - mean * mean)
 si
 
-let random = System.Random(100)
+let random = Ghul.Random(100)
 
 samples() -> double{} is
     do

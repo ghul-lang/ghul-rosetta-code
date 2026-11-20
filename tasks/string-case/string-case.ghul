@@ -1,8 +1,8 @@
 use default
-use System.Globalization.CultureInfo
+use Text.Locale
 
 let subject = "alphaBETA"
-let invariant = CultureInfo.invariant_culture
+let invariant = Locale.invariant_culture
 
 write_line("upper: {subject.to_upper_invariant()}")
 write_line("lower: {subject.to_lower_invariant()}")

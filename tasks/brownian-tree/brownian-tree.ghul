@@ -5,7 +5,7 @@ use Raster.IMAGE
 let size = 240
 let particles = 8000
 
-let random = System.Random(987654321)
+let random = Ghul.Random(987654321)
 
 let tree = SET()
 

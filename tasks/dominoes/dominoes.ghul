@@ -103,7 +103,7 @@ show(grid: Grid, partner: int[]) is
     od
 si
 
-shuffled_tableau(random: System.Random) -> Grid is
+shuffled_tableau(random: Ghul.Random) -> Grid is
     let tiles = [(a, b) for a in 0::6 for b in a::6]
         |> sort_by(_ => random.next())
 
@@ -126,7 +126,7 @@ let tableaux = [
         "05132231", "05505246", "43036620", "06235126",
         "11300245", "21433466", "64515414"
     ]),
-    shuffled_tableau(System.Random(5))
+    shuffled_tableau(Ghul.Random(5))
 ]
 
 for grid in tableaux do

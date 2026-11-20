@@ -9,7 +9,7 @@ si
 is_sorted(balls: Color[]) -> bool =>
     0..balls.count - 1 |> all(i => balls[i] <= balls[i + 1])
 
-shuffle(balls: LIST[Color], random: System.Random) is
+shuffle(balls: LIST[Color], random: Ghul.Random) is
     let i mut = balls.count - 1
 
     while i > 0 do
@@ -39,7 +39,7 @@ dutch_flag_sort(balls: LIST[Color]) is
     od
 si
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 let balls = LIST([
     Color.RED, Color.RED, Color.RED,
     Color.WHITE, Color.WHITE, Color.WHITE,

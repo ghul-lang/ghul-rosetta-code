@@ -3,7 +3,7 @@ use IO.Std.write
 use default
 
 // Seeded, so the transcript below reproduces.
-let random = System.Random(3)
+let random = Ghul.Random(3)
 
 let digits = LIST()
 

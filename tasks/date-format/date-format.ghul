@@ -1,9 +1,9 @@
 use default
-use Time.DATE_TIME
-use System.Globalization.CultureInfo
+use Time.DateTime
+use Text.Locale
 
-let today = DATE_TIME.now
-let names = CultureInfo.invariant_culture
+let today = DateTime.now
+let names = Locale.invariant_culture
 
 write_line(today.to_string("yyyy-MM-dd", names))
 write_line(today.to_string("dddd, MMMM d, yyyy", names))

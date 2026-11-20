@@ -1,6 +1,6 @@
 use default
 
-use System.Numerics.BitOperations
+use Ghul.Math.BitOperations
 
 // 64 cells in a ring, held as the bits of one ulong, starting from a
 // single live cell at bit 0; rule 30 is left XOR (centre OR right).

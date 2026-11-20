@@ -1,6 +1,6 @@
 use default
 use Raster.IMAGE
-use System.Numerics.BitOperations
+use Ghul.Math.BitOperations
 
 use Armies = (black: ulong, white: ulong)
 

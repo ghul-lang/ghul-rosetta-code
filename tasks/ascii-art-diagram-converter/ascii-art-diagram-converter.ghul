@@ -70,7 +70,7 @@ bits_of(message: string) -> string =>
     string(
         message
             |> flat_map(c =>
-                let nibble = int(Text.from_base("{c}", 16)!) in
+                let nibble = Text.from_base[int]("{c}", 16)! in
                 0..4
                     |> map(b =>
                         if (nibble >> (3 - b)) & 1 == 1 then '1'
@@ -111,7 +111,7 @@ when header: Diagram.HEADER then
 
         write_line(
             "{part.name,-9} {part.width,4}  {cut,-16}  "
-            "{int(Text.from_base(cut, 2)!)}"
+            "{Text.from_base[int](cut, 2)!}"
         )
     od
 when rejected: Diagram.REJECTED then

@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(1898)
+let random = Ghul.Random(1898)
 
 let terminators = ['.', '!', '?']
 
@@ -23,7 +23,7 @@ book_text(path: string) -> string =>
 
 words_of(text: string) -> string[] is
     let words = LIST()
-    let current = System.Text.StringBuilder()
+    let current = Text.StringBuilder()
 
     let flush = () =>
         if current.length > 0 then

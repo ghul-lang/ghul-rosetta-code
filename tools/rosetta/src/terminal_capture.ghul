@@ -114,7 +114,7 @@ namespace Rosetta is
         // A page showing `screen`, each cell placed on the grid by position,
         // so the width the face gives a character never moves the columns.
         page(screen: SCREEN) -> string static is
-            let body = Text.STRING_BUILDER()
+            let body = Text.StringBuilder()
 
             for row in 0..screen.rows do
                 for column in 0..screen.columns do

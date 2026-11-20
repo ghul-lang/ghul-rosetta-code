@@ -60,7 +60,7 @@ on_curve(point: Point?) -> bool =>
     result
 si
 
-let random = System.Random(1363)
+let random = Ghul.Random(1363)
 
 random_below(limit: bigint) -> bigint =>
     bigint(random.next_int64(1L, long(limit)))

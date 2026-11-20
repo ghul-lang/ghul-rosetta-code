@@ -3,7 +3,7 @@ use Raster.IMAGE
 
 use Move = (x: int, y: int, d: int, k: int)
 
-let random = System.Random(7)
+let random = Ghul.Random(7)
 
 let steps = [
     (dx = 1, dy = 0), (dx = 0, dy = 1),

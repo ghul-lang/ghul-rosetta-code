@@ -15,7 +15,7 @@ let words =
         |> filter(w => w |> all(c => c >= 'a' /\ c <= 'z'))
         |> list()
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 at(row: int, column: int) -> int => row * size + column
 

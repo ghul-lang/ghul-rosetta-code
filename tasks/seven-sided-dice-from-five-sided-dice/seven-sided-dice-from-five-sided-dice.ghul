@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(12345)
+let random = Ghul.Random(12345)
 
 dice5() -> int => random.next(1, 6)
 

@@ -14,7 +14,7 @@ let rate = 0.01
 above(x: double, y: double) -> int =>
     if y > slope * x + intercept then 1 else -1 fi
 
-let random = System.Random(10)
+let random = Ghul.Random(10)
 
 let spread = () => random.next_double() * 2.0 - 1.0
 

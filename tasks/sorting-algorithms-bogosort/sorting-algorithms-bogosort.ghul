@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 in_order(values: int[]) -> bool =>
     (0..values.count - 1) |> all(i => values[i] <= values[i + 1])

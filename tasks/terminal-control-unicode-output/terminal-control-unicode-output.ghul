@@ -3,7 +3,7 @@ use default
 let encoding = IO.Std.output_encoding.web_name
 
 if encoding !~ "utf-8" then
-    throw System.Exception(
+    throw Ghul.Exception(
         "this terminal encodes output as {encoding}, not UTF-8"
     )
 fi

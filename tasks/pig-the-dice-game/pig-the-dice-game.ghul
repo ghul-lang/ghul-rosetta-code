@@ -1,10 +1,10 @@
 use default
 
 class DIE(seed: int init) is
-    _random: System.Random
+    _random: Ghul.Random
 
     init(..) is
-        _random = System.Random(seed)
+        _random = Ghul.Random(seed)
     si
 
     roll() -> int => _random.next(1, 7)

@@ -1,6 +1,6 @@
 use default
 
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 use Matrix = Complex[][]
 

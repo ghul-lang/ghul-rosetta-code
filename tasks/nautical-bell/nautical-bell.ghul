@@ -1,39 +1,39 @@
 use default
 
 trait Clock is
-    now: Time.DATE_TIME
-    wait_until(time: Time.DATE_TIME)
+    now: Time.DateTime
+    wait_until(time: Time.DateTime)
 si
 
 class SYSTEM_CLOCK: Clock is
     init() is si
 
-    now: Time.DATE_TIME => Time.DATE_TIME.utc_now
+    now: Time.DateTime => Time.DateTime.utc_now
 
-    wait_until(time: Time.DATE_TIME) is
+    wait_until(time: Time.DateTime) is
         let delay = time - now
 
-        if delay > Time.TIME_SPAN.zero then
-            System.Threading.Thread.sleep(delay)
+        if delay > Time.TimeSpan.zero then
+            Tasks.Thread.sleep(delay)
         fi
     si
 si
 
-class SIMULATED_CLOCK(start: Time.DATE_TIME): Clock is
-    _time: Time.DATE_TIME
+class SIMULATED_CLOCK(start: Time.DateTime): Clock is
+    _time: Time.DateTime
 
     init(..) is
         _time = start
     si
 
-    now: Time.DATE_TIME => _time
+    now: Time.DateTime => _time
 
-    wait_until(time: Time.DATE_TIME) is
+    wait_until(time: Time.DateTime) is
         _time = time
     si
 si
 
-watch(time: Time.DATE_TIME) -> string =>
+watch(time: Time.DateTime) -> string =>
     let hour = time.add_minutes(-1.0).hour in
     if hour < 4 then "Middle watch"
     elif hour < 8 then "Morning watch"
@@ -50,7 +50,7 @@ ring(bells: int) -> string =>
         |> cat(if bells % 2 == 1 then ["ding"] else [] fi)
         |> join(" ")
 
-keep_watch(clock: Clock, until: Time.DATE_TIME) is
+keep_watch(clock: Clock, until: Time.DateTime) is
     let now = clock.now
     let half_hours = int(now.time_of_day.total_minutes) / 30 + 1
     let next mut = now.date.add_minutes(30.0 * double(half_hours))
@@ -72,17 +72,9 @@ keep_watch(clock: Clock, until: Time.DATE_TIME) is
 si
 
 if let ["--live", ..] = args then
-    keep_watch(SYSTEM_CLOCK(), Time.DATE_TIME.max_value)
+    keep_watch(SYSTEM_CLOCK(), Time.DateTime.max_value)
 else
-    let midnight = Time.DATE_TIME(
-        2026,
-        1,
-        1,
-        0,
-        0,
-        0,
-        Time.DateTimeKind.UTC
-    )
+    let midnight = Time.DateTime(2026, 1, 1, 0, 0, 0, Time.DateTimeKind.UTC)
 
     keep_watch(SIMULATED_CLOCK(midnight), midnight.add_days(1.0))
 fi

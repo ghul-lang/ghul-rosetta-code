@@ -1,5 +1,5 @@
 use default
-use System.Text.Encoding
+use Text.Encoding
 
 percent_encoded(octet) => (
     let character = char(octet)

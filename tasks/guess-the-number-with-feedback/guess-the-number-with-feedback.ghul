@@ -3,7 +3,7 @@ use IO.Std.read_line
 use IO.Std.write
 
 // Seeded, so the transcript below reproduces.
-let random = System.Random(11)
+let random = Ghul.Random(11)
 
 let low = 1
 let high = 100

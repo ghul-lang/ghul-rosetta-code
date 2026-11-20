@@ -1,6 +1,6 @@
 namespace Rosetta is
-    use System.Text.RegularExpressions.Regex
-    use System.Text.RegularExpressions.RegexOptions
+    use Text.Regex
+    use Text.RegexOptions
     use Collections
     use Ghul.Pipes
 

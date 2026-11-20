@@ -7,7 +7,7 @@ let win = 2048
 
 let directions = "wasd"
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let board = repeat(0, squares) |> LIST()
 

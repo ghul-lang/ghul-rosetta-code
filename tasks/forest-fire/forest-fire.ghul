@@ -18,7 +18,7 @@ let generations = 120
 let grow = 0.03
 let lightning = 0.0002
 
-let random = System.Random(2024)
+let random = Ghul.Random(2024)
 
 inside(row: int, column: int) -> bool =>
     row > 0 /\ row < rows - 1 /\ column > 0 /\ column < columns - 1

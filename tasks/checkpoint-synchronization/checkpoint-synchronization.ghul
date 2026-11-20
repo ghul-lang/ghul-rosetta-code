@@ -5,7 +5,7 @@ let names = ["Ann", "Bill", "Cid"]
 let turns = [1, 3, 2]
 let cycles = 3
 
-let gate = SEMAPHORE(0)
+let gate = Semaphore(0)
 let finished = LIST[string]()
 
 let arrived mut = 0
@@ -16,7 +16,7 @@ release_others() -> void is
     od
 si
 
-checkpoint() -> COROUTINE is
+checkpoint() -> Coroutine is
     arrived = arrived + 1
 
     if arrived < names.count then
@@ -32,7 +32,7 @@ checkpoint() -> COROUTINE is
     fi
 si
 
-worker(seat: int) -> COROUTINE is
+worker(seat: int) -> Coroutine is
     let name = names[seat]
 
     for cycle in 1::cycles do

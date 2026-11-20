@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(2026)
+let random = Ghul.Random(2026)
 
 let words =
     IO.File.read_all_lines("unixdict.txt")

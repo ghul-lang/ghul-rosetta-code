@@ -1,5 +1,5 @@
 use default
-use Time.STOPWATCH
+use Time.Stopwatch
 
 // The Chudnovsky series, summed by binary splitting.
 
@@ -57,7 +57,7 @@ decimal(n: bigint) -> string is
         powers.add(powers[powers.count - 1] * powers[powers.count - 1])
     od
 
-    let text = System.Text.StringBuilder()
+    let text = Text.StringBuilder()
 
     write(part, level, padded) is
         if level < 0 then
@@ -100,7 +100,7 @@ pi_digits(digits: int) -> string =>
     in
         "{text[0]}.{text.substring(1, digits - 1)}"
 
-let clock = STOPWATCH.start_new()
+let clock = Stopwatch.start_new()
 write_line("computing a million digits, which takes a while")
 
 let pi = pi_digits(1_000_000)

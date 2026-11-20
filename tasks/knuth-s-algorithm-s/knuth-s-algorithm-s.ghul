@@ -1,6 +1,6 @@
 use default
 
-s_of_n_creator(n: int, source: System.Random) -> (int) -> int{} is
+s_of_n_creator(n: int, source: Ghul.Random) -> (int) -> int{} is
     let sample = LIST()
 
     let seen mut = 0
@@ -18,7 +18,7 @@ s_of_n_creator(n: int, source: System.Random) -> (int) -> int{} is
     si
 si
 
-let source = System.Random(20260909)
+let source = Ghul.Random(20260909)
 
 let counts = repeat(0, 10) |> LIST()
 

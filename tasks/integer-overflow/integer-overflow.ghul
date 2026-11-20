@@ -3,12 +3,12 @@ use default
 // ghūl's fixed-size integers are .NET's, and their arithmetic is unchecked:
 // an overflowing result wraps round silently, and the program carries on
 // with the wrong value. The one exception is dividing the most negative
-// value by -1, which throws System.OverflowException.
+// value by -1, which throws Ghul.OverflowException.
 
 show(expression: string, compute: () -> string) is
     try
         write_line("    {expression,-46} {compute()}")
-    catch e: System.OverflowException
+    catch e: Ghul.OverflowException
         write_line("    {expression,-46} throws {e.message}")
     yrt
 si

@@ -4,7 +4,7 @@ use IO.Std.read_line
 let width = 30
 let height = 12
 
-let random = System.Random(9)
+let random = Ghul.Random(9)
 
 use Spot = (x: int, y: int)
 

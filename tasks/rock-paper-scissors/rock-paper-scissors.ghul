@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Random
+use Ghul.Random
 
 union Move is
     ROCK
@@ -13,7 +13,7 @@ parse(text: string) -> Move =>
     when "rock" then Move.ROCK
     when "paper" then Move.PAPER
     when "scissors" then Move.SCISSORS
-    else throw System.Exception("unrecognised move: {text}")
+    else throw Ghul.Exception("unrecognised move: {text}")
     esac
 
 name(move: Move) -> string =>

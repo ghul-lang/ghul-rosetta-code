@@ -8,7 +8,7 @@ struct Q(top: bigint, bottom: bigint) is
 
     /(o: Q) -> Q =>
         if o.top.is_zero then
-            throw System.DivideByZeroException()
+            throw Ghul.DivideByZeroException()
         else make(top * o.bottom, bottom * o.top)
         fi
 
@@ -28,7 +28,7 @@ whole(n: bigint) -> Q => Q(n, 1n)
 decimal(q: Q) -> string is
     let integer = bigint.abs(q.top) / q.bottom
     let sign = if q.top.sign < 0 then "-" else "" fi
-    let digits = System.Text.StringBuilder()
+    let digits = Text.StringBuilder()
     let seen = MAP()
     let remainder mut = bigint.abs(q.top) % q.bottom
 
@@ -56,7 +56,7 @@ si
 let nothing = char(0)
 
 @suppress("non-pascal-case-name")
-class BAD_INPUT(text: string init): System.Exception is
+class BAD_INPUT(text: string init): Ghul.Exception is
     super(text)
 si
 
@@ -216,7 +216,7 @@ while let line = read_line() do
         write_line("{result} = {decimal(result)}")
     catch e: BAD_INPUT
         write_line("error: {e.message}")
-    catch e: System.DivideByZeroException
+    catch e: Ghul.DivideByZeroException
         write_line("error: division by zero")
     yrt
 od

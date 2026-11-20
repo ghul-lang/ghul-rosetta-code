@@ -1,6 +1,6 @@
 namespace Rosetta is
     use Collections
-    use System.Text.RegularExpressions.Regex
+    use Text.Regex
 
     // Converts the small Markdown subset a task's `notes.md` may carry into MediaWiki markup.
     //
@@ -125,7 +125,7 @@ namespace Rosetta is
         // Code spans first, so nothing else reaches inside one: a backtick span is literal, and
         // an asterisk or underscore within it is part of the code rather than a marker.
         _inline(text: string) -> string is
-            let out = System.Text.StringBuilder()
+            let out = Text.StringBuilder()
             let codes = Regex.matches(text, "`([^`]+)`")
 
             let position mut = 0
@@ -152,7 +152,7 @@ namespace Rosetta is
         // Wikipedia link's path is not an italic marker. The link's own display text still gets
         // bold and italic applied, since that text is prose the writer might reasonably emphasise.
         _links(text: string) -> string is
-            let out = System.Text.StringBuilder()
+            let out = Text.StringBuilder()
             let links = Regex.matches(text, "\\[([^\\]]+)\\]\\(([^)]+)\\)")
 
             let position mut = 0

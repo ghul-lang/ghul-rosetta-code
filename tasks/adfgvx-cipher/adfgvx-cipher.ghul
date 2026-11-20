@@ -2,7 +2,7 @@ use default
 
 let labels = "ADFGVX"
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 shuffled(items: string) -> string => (
     let held = items |> LIST()

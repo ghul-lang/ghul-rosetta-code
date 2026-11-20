@@ -1,12 +1,12 @@
 use default
 
-use Text.REGEX
-use Text.MATCH
+use Text.Regex
+use Text.Match
 
 let n = 10
 
 let text = IO.File.read_all_text("les-miserables.txt").to_lower_invariant()
-let words: MATCH{} = REGEX("\\p{{L}}+").matches(text)
+let words: Match{} = Regex("\\p{{L}}+").matches(text)
 
 let counts =
     words

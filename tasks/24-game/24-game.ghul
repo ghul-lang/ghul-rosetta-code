@@ -130,7 +130,7 @@ judge(entered: string, dealt: string) -> (told: string, solved: bool) =>
         esac
     fi
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let dealt = (0..4) |> map(_ => "123456789"[random.next(9)]) |> join(" ")
 

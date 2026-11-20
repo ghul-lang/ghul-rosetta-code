@@ -1,6 +1,6 @@
 use default
 use Text.to_base
-use System.Numerics.BitOperations
+use Ghul.Math.BitOperations
 
 show(name, value) => write_line("{name,-22} {to_base(value, 2),32}")
 

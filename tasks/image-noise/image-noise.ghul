@@ -1,7 +1,7 @@
 use default
 
 use Raster.IMAGE
-use Time.STOPWATCH
+use Time.Stopwatch
 
 let width = 320
 let height = 240
@@ -9,7 +9,7 @@ let seconds = 3
 
 let live = System.Environment.get_environment_variable("GHUL_LIVE_IMAGES")?
 
-let random = System.Random()
+let random = Ghul.Random()
 let image = IMAGE(width, height)
 let noise = repeat(0ub, width * height / 8) |> ARRAY()
 
@@ -27,7 +27,7 @@ draw_noise() is
     od
 si
 
-let clock = STOPWATCH.start_new()
+let clock = Stopwatch.start_new()
 
 for second in 1::seconds do
     let frames mut = 0

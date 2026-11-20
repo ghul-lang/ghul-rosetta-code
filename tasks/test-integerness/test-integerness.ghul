@@ -1,5 +1,5 @@
 use default
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 is_integer(d: decimal) -> bool => d == decimal.truncate(d)
 

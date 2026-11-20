@@ -1,6 +1,6 @@
 use default
 
-let random = System.Random(2011)
+let random = Ghul.Random(2011)
 let trials = 100_000
 
 loop_length(n) => (

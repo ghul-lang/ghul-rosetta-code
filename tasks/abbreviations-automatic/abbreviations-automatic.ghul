@@ -1,5 +1,5 @@
 use default
-use System.StringSplitOptions
+use Text.StringSplitOptions
 
 shortest_unique(line: string) -> int? is
     let words = line.split(' ', StringSplitOptions.REMOVE_EMPTY_ENTRIES)

@@ -12,7 +12,7 @@ use System.Security.Cryptography.X509Certificates.X509Certificate2
 use System.Security.Cryptography.X509Certificates.X509CertificateLoader
 use System.Security.Cryptography.X509Certificates.X509ContentType
 use System.Security.Cryptography.X509Certificates.X509KeyStorageFlags
-use System.Text.Encoding
+use Text.Encoding
 
 self_signed(name: string) -> X509Certificate2 => (
     let request = CertificateRequest(
@@ -22,8 +22,8 @@ self_signed(name: string) -> X509Certificate2 => (
         RSASignaturePadding.pkcs1
     )
     let made = request.create_self_signed(
-        Time.DATE_TIME_OFFSET.now.add_days(-1.0),
-        Time.DATE_TIME_OFFSET.now.add_days(1.0)
+        Time.DateTimeOffset.now.add_days(-1.0),
+        Time.DateTimeOffset.now.add_days(1.0)
     )
     let pfx = made.export(X509ContentType.PFX)
 
@@ -50,7 +50,7 @@ test_entry() is
         if let bound: IPEndPoint = listener.local_endpoint then
             bound.port
         else
-            throw System.Exception("the listener has no address")
+            throw Ghul.Exception("the listener has no address")
         fi
 
     Tasks.TASK.run(() is

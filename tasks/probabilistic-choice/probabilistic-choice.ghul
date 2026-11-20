@@ -11,7 +11,7 @@ let items = [
     ("heth", 1759.0 / 27720.0)
 ]
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 let trials = 1_000_000
 let counts = repeat(0, items.count) |> LIST()
 

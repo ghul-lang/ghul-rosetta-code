@@ -11,7 +11,7 @@ use System.Security.Cryptography.X509Certificates.X509Certificate2
 use System.Security.Cryptography.X509Certificates.X509CertificateLoader
 use System.Security.Cryptography.X509Certificates.X509ContentType
 use System.Security.Cryptography.X509Certificates.X509KeyStorageFlags
-use System.Text.Encoding
+use Text.Encoding
 
 // The test's entry: a page served over TLS on the loopback interface, under
 // a certificate made for the run, fetched by the task's own code with a
@@ -26,8 +26,8 @@ test_entry() is
         RSASignaturePadding.pkcs1
     )
     let made = request.create_self_signed(
-        Time.DATE_TIME_OFFSET.now.add_days(-1.0),
-        Time.DATE_TIME_OFFSET.now.add_days(1.0)
+        Time.DateTimeOffset.now.add_days(-1.0),
+        Time.DateTimeOffset.now.add_days(1.0)
     )
     let pfx = made.export(X509ContentType.PFX)
     let certificate = X509CertificateLoader.load_pkcs12(
@@ -45,7 +45,7 @@ test_entry() is
         if let bound: IPEndPoint = listener.local_endpoint then
             bound.port
         else
-            throw System.Exception("the listener has no address")
+            throw Ghul.Exception("the listener has no address")
         fi
 
     Tasks.TASK.run(() is

@@ -1,6 +1,6 @@
 use default
 use IO.Std.read_line
-use System.Random
+use Ghul.Random
 
 let random = Random(5)
 
@@ -8,7 +8,7 @@ next_line() -> string is
     let line = read_line()
 
     if !line? then
-        throw System.Exception("input ended before the game did")
+        throw Ghul.Exception("input ended before the game did")
     fi
 
     write_line("> {line}")
@@ -59,7 +59,7 @@ let palette = "ABCDEFGHIJKLMNOPQRST".substring(0, colours)
 let pool = LIST(palette)
 
 let code = (
-    let chosen = System.Text.StringBuilder()
+    let chosen = Text.StringBuilder()
 
     for _ in 0..length do
         let at = random.next(pool.count)

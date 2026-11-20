@@ -1,6 +1,6 @@
 use default
 use System.Threading.AutoResetEvent
-use System.Threading.Thread
+use Tasks.Thread
 
 let frequency = 0.5
 let step = 0.001

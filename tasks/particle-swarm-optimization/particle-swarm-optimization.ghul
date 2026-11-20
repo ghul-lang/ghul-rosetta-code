@@ -21,7 +21,7 @@ class PROBLEM(
     iterations: int
 )
 
-let random = System.Random(42)
+let random = Ghul.Random(42)
 
 between(low: double, high: double) -> double =>
     low + (high - low) * random.next_double()

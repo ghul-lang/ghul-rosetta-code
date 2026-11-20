@@ -1,5 +1,5 @@
 use default
-use System.Reflection.BindingFlags
+use Ghul.Reflection.BindingFlags
 
 class SAFE(combination: string private, contents: string) is
     open(attempt: string) -> string =>

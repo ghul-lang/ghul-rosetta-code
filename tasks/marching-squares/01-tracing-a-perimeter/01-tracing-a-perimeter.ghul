@@ -53,7 +53,7 @@ heading(value: int, previous: Step?) -> Step =>
             south
         fi
     else
-        throw System.Exception("{value} is not a perimeter corner")
+        throw Ghul.Exception("{value} is not a perimeter corner")
     esac
 
 let inked = [

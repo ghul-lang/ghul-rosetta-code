@@ -1,7 +1,7 @@
 use default
 use Raster.IMAGE
 
-let random = System.Random(10)
+let random = Ghul.Random(10)
 
 candidates() -> (x: int, y: int){} is
     do

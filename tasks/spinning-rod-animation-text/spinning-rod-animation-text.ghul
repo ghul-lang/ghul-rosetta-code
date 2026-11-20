@@ -3,7 +3,7 @@ let frames = ["|", "/", "-", "\\"]
 for turn in 0..8 do
     IO.Std.write("\r{frames[turn % frames.count]}")
 
-    System.Threading.Thread.sleep(250)
+    Tasks.Thread.sleep(250)
 od
 
 IO.Std.write_line("\r")

@@ -24,7 +24,7 @@ parse(line: string) -> OPTION? is
         return null
     fi
 
-    let skip_empty = System.StringSplitOptions.REMOVE_EMPTY_ENTRIES
+    let skip_empty = Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES
     let words = body.split([' '], skip_empty)
     let value = words |> skip(1) |> join(" ")
 

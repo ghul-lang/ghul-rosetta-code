@@ -1,5 +1,5 @@
 use default
-use System.Random
+use Ghul.Random
 
 use Found = (value: int, steps: LIST[string])
 

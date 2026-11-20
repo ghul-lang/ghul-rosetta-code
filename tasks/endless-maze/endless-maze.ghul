@@ -1,7 +1,7 @@
 use default
 use IO.Std.read_line
 
-let random = System.Random(2026)
+let random = Ghul.Random(2026)
 
 let steps = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 let turns = ["ahead", "right", "back", "left"]

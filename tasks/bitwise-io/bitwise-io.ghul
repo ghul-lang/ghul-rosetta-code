@@ -67,7 +67,7 @@ pack(text: string) -> ARRAY[ubyte] => (
 
 unpack(packed: ARRAY[ubyte], count: int) -> string => (
     let reader = BIT_READER(IO.MemoryStream(packed))
-    let text = System.Text.StringBuilder()
+    let text = Text.StringBuilder()
 
     for _ in 0..count do
         text.append(char(reader.read(7)))

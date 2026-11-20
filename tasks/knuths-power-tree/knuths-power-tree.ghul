@@ -1,6 +1,6 @@
 use default
-use System.Numerics.INumber
-use System.Numerics.IMultiplyOperators.`*
+use Ghul.Math.Number
+use Ghul.Math.MultiplyOperators.`*
 
 let parent = MAP[int, int]()
 let added = MAP[int, int]()
@@ -41,7 +41,7 @@ build_until(target: int) is
     od
 si
 
-exponentiate[T: INumber[T]](base: T, exponent: int) -> T is
+exponentiate[T: Number[T]](base: T, exponent: int) -> T is
     if exponent == 0 then
         return T.one
     fi

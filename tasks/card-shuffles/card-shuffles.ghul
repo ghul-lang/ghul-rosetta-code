@@ -1,5 +1,5 @@
 use default
-use System.Random
+use Ghul.Random
 
 riffle_shuffle(deck: int[], random: Random) -> int[] is
     let half = deck.count / 2

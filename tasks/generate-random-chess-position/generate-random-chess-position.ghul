@@ -1,7 +1,7 @@
 use default
-use System.Text.StringBuilder
+use Text.StringBuilder
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let pieces = "PNBRQpnbrq"
 

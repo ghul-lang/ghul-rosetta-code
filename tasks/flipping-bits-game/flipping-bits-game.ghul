@@ -4,7 +4,7 @@ use IO.Std.read_line
 
 let size = 3
 
-let source = System.Random(20260909)
+let source = Ghul.Random(20260909)
 
 fresh() -> LIST[int] => 0..size * size |> map(_ => source.next(2)) |> LIST()
 

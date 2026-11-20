@@ -1,6 +1,6 @@
 use default
 use System.Reflection
-use System.Reflection.BindingFlags
+use Ghul.Reflection.BindingFlags
 
 bloop: int
 blip: int
@@ -20,7 +20,7 @@ bloop = -17
 blip = 25
 name = "not an integer"
 
-let assembly = System.Reflection.Assembly.get_entry_assembly()!
+let assembly = Ghul.Reflection.Assembly.get_entry_assembly()!
 let visible = BindingFlags.STATIC | BindingFlags.PUBLIC
 let flags = visible | BindingFlags.NON_PUBLIC
 

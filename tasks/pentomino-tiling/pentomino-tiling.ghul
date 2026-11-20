@@ -124,7 +124,7 @@ tile() -> bool is
     false
 si
 
-let random = System.Random(8)
+let random = Ghul.Random(8)
 let attempts mut = 0
 
 do

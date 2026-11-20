@@ -1,19 +1,19 @@
 use default
 
 has_five_weekends(year: int, month: int) -> bool =>
-    Time.DATE_TIME.days_in_month(year, month) == 31 /\
-    Time.DATE_TIME(year, month, 1).day_of_week == Time.DayOfWeek.FRIDAY
+    Time.DateTime.days_in_month(year, month) == 31 /\
+    Time.DateTime(year, month, 1).day_of_week == Time.DayOfWeek.FRIDAY
 
 let years = 1900::2100
 
 let months = [
-    Time.DATE_TIME(year, month, 1)
+    Time.DateTime(year, month, 1)
     for year in years
     for month in 1::12
     if has_five_weekends(year, month)
 ]
 
-show(label: string, dates: Time.DATE_TIME{}) is
+show(label: string, dates: Time.DateTime{}) is
     write_line(label)
 
     dates |> each(date => write_line("  {date.to_string("yyyy-MM")}"))

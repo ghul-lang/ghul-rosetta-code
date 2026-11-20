@@ -1,10 +1,10 @@
 use default
-use System.Text.Encoding
+use Text.Encoding
 
 decoded_bytes(text: string, at: int) -> ubyte{} is
     if at < text.length then
         if text[at] == '%' /\ at + 2 < text.length then
-            yield ubyte(Text.from_base(text[at + 1..at + 3], 16)!)
+            yield Text.from_base[ubyte](text[at + 1..at + 3], 16)!
             yield in decoded_bytes(text, at + 3)
         else
             yield ubyte(text[at])

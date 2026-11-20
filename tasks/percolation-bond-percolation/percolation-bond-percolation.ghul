@@ -5,7 +5,7 @@ let width = 10
 let height = 10
 let trials = 100
 
-let random = System.Random(21)
+let random = Ghul.Random(21)
 
 class GRID is
     floors: bool[]

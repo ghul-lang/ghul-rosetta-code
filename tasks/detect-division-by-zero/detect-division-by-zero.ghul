@@ -5,7 +5,7 @@ divides(numerator, denominator) is
         numerator / denominator
 
         return true
-    catch _: System.DivideByZeroException
+    catch _: Ghul.DivideByZeroException
         return false
     yrt
 si

@@ -105,7 +105,7 @@ operator_spelling(kind: Kind) -> string =>
     when AND then "And"
     when OR then "Or"
     else
-        throw System.Exception("{kind} is not a binary operator")
+        throw Ghul.Exception("{kind} is not a binary operator")
     esac
 
 class PARSER(tokens: Iterator[TOKEN]) is
@@ -130,7 +130,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
 
     expect(kind: Kind) is
         if !accept(kind) then
-            throw System.Exception(
+            throw Ghul.Exception(
                 "({token.line}, {token.column}) expecting "
                 "{spellings[kind]}, found {spellings[token.kind]}"
             )
@@ -182,7 +182,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
         when LEFT_BRACE then
             block()
         else
-            throw System.Exception(
+            throw Ghul.Exception(
                 "({token.line}, {token.column}) expecting a statement, "
                 "found {spellings[token.kind]}"
             )
@@ -260,7 +260,7 @@ class PARSER(tokens: Iterator[TOKEN]) is
             advance()
             Node.INTEGER(value)
         else
-            throw System.Exception(
+            throw Ghul.Exception(
                 "({token.line}, {token.column}) expecting a primary, "
                 "found {spellings[token.kind]}"
             )

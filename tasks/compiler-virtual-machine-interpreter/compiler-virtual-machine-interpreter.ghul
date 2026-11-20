@@ -1,6 +1,6 @@
 use default
 
-use System.BitConverter
+use Ghul.Math.BitConverter
 
 enum Op is
     FETCH,
@@ -89,7 +89,7 @@ class MACHINE is
         when Op.AND then truth(a != 0 /\ b != 0)
         when Op.OR then truth(a != 0 \/ b != 0)
         else
-            throw System.Exception("not a binary operator: {op}")
+            throw Ghul.Exception("not a binary operator: {op}")
         esac
 
     _offset() -> int => BitConverter.to_int32(_code, _pc)

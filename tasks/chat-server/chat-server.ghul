@@ -5,7 +5,7 @@ use System.Net.IPAddress
 use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.Monitor
-use System.Threading.Thread
+use Tasks.Thread
 
 let port = 12345
 
@@ -16,7 +16,7 @@ let members = LIST[MEMBER]()
 tell(who: MEMBER, what: string) is
     try
         who.writer.write_line(what)
-    catch _: System.Exception
+    catch _: Ghul.Exception
         // A member that has gone away is dropped when its own thread ends.
     yrt
 si

@@ -1,13 +1,13 @@
 use default
-use Time.TIME_SPAN
+use Time.TimeSpan
 
 let format = "hh\\:mm\\:ss\\,fff"
 
-shift(stamp: string, offset: TIME_SPAN) -> string =>
-    (TIME_SPAN.parse_exact(stamp, format, null) + offset).to_string(format)
+shift(stamp: string, offset: TimeSpan) -> string =>
+    (TimeSpan.parse_exact(stamp, format, null) + offset).to_string(format)
 
 synced(lines: string[], seconds: int) -> string{} =>
-    let offset = TIME_SPAN.from_seconds(double(seconds)) in
+    let offset = TimeSpan.from_seconds(double(seconds)) in
     lines
         |> map(line =>
             if line.contains(" --> ") then

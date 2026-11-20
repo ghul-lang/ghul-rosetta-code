@@ -4,7 +4,7 @@ use Raster.IMAGE
 
 use Point = (x: double, y: double)
 
-let random = System.Random(20260918)
+let random = Ghul.Random(20260918)
 
 let clusters = 6
 let sample_size = 30_000

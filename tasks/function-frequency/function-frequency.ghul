@@ -1,12 +1,12 @@
 use default
-use System.BitConverter
-use System.Reflection.Assembly
-use System.Reflection.BindingFlags
+use Ghul.Math.BitConverter
+use Ghul.Reflection.Assembly
+use Ghul.Reflection.BindingFlags
 use System.Reflection.MethodBase
 use System.Reflection.Emit.OpCode
 use System.Reflection.Emit.OpCodes
 use System.Reflection.Emit.OperandType
-use System.Text.RegularExpressions.Regex
+use Text.Regex
 
 let opcodes =
     (typeof OpCodes).get_fields(BindingFlags.PUBLIC | BindingFlags.STATIC)

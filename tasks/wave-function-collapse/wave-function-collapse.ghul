@@ -12,7 +12,7 @@ let blocks = [
 let grid = 8
 let tile = grid * 2 + 1
 
-let random = System.Random(3)
+let random = Ghul.Random(3)
 
 column_of(block: int, column: int) -> string =>
     blocks[block] |> map(row => "{row[column]}") |> join("")

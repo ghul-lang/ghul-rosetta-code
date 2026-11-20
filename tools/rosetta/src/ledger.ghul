@@ -79,7 +79,7 @@ namespace Rosetta is
 
         // A title as a file name: accents dropped, anything but a letter or digit a hyphen.
         key(title: string) -> string is
-            let result = System.Text.StringBuilder()
+            let result = Text.StringBuilder()
             let decomposed = title.to_lower().normalize(System.Text.NormalizationForm.FORM_D)
 
             for c in decomposed do
@@ -160,7 +160,7 @@ namespace Rosetta is
                 let other: string mut
 
                 if claimed.try_get_value(path, other ref) then
-                    throw System.InvalidOperationException(
+                    throw Ghul.InvalidOperationException(
                         "ledger entries '{other}' and '{e.title}' would share {path}")
                 fi
 

@@ -31,7 +31,7 @@
  '''si'''
  
  highlight(line: string) -&gt; string '''is'''
-     '''let''' out = System.Text.StringBuilder(" ")
+     '''let''' out = Text.StringBuilder(" ")
      '''let''' i '''mut''' = 0
  
      '''while''' i &lt; line.length '''do'''

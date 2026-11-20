@@ -1,6 +1,6 @@
 use default
 
-use System.Globalization.UnicodeCategory
+use Text.UnicodeCategory
 
 // These are the tests the ghūl compiler's own scanner applies. An
 // identifier is read in UTF-16 code units, so only the basic plane counts.

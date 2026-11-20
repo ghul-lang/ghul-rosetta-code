@@ -20,7 +20,7 @@ soundex(name) is
         return ""
     fi
 
-    let result = System.Text.StringBuilder()
+    let result = Text.StringBuilder()
     let previous mut = code(letters[0])
 
     result.append(letters[0].to_upper())

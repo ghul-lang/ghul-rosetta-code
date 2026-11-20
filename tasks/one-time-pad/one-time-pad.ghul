@@ -24,7 +24,7 @@ is_unused(line: string) -> bool =>
 
 take_key(path: string, length: int) -> string is
     let lines = File.read_all_lines(path) |> LIST()
-    let key = System.Text.StringBuilder()
+    let key = Text.StringBuilder()
 
     for i in 0..lines.count do
         if key.length < length /\ is_unused(lines[i]) then
@@ -63,7 +63,7 @@ round_trip(message: string, sender: string, receiver: string) -> (
 
 let folder = Path.combine(
     Path.get_temp_path(),
-    "otp-{Ghul.RANDOM().next_int64()}"
+    "otp-{Ghul.Random().next_int64()}"
 )
 IO.Directory.create_directory(folder)
 

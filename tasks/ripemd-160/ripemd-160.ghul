@@ -153,7 +153,7 @@ let messages = ["", "a", "abc", "Rosetta Code"]
 
 for message in messages do
     write_line(
-        "{ripemd160(System.Text.Encoding.utf8.get_bytes(message))}"
+        "{ripemd160(Text.Encoding.utf8.get_bytes(message))}"
         "  \"{message}\""
     )
 od

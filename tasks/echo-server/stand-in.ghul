@@ -5,7 +5,7 @@ use System.Net.Sockets.TcpClient
 use System.Net.Sockets.TcpListener
 use System.Threading.CountdownEvent
 use System.Threading.Monitor
-use System.Threading.Thread
+use Tasks.Thread
 
 // The test's entry: the task's server on the loopback interface, on a port
 // the system picks, with one client stalled on half a line while another is
@@ -20,7 +20,7 @@ test_entry() is
         if let bound: IPEndPoint = listener.local_endpoint then
             bound.port
         else
-            throw System.Exception("the listener has no address")
+            throw Ghul.Exception("the listener has no address")
         fi
 
     let log = LIST()

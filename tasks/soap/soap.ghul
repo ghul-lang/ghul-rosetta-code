@@ -1,7 +1,7 @@
 use default
 use System.Net.Http.HttpClient
 use System.Net.Http.StringContent
-use System.Text.Encoding
+use Text.Encoding
 use System.Xml.Linq.XDocument
 
 // The envelope's namespace, which every SOAP message carries.

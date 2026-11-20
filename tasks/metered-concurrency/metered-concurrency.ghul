@@ -11,11 +11,11 @@ let workers = 5
 // measured in scheduler turns instead.
 let holding_turns = 2
 
-let semaphore = SEMAPHORE(permits)
+let semaphore = Semaphore(permits)
 
 holding() -> int => permits - semaphore.available
 
-worker(id: int) -> COROUTINE is
+worker(id: int) -> Coroutine is
     await semaphore.acquire()
 
     write_line("worker {id} acquired, {holding()} holding")

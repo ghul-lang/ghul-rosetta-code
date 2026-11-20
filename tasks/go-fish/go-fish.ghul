@@ -6,7 +6,7 @@ let ranks = [
     "K"
 ]
 
-let random = System.Random(20260908)
+let random = Ghul.Random(20260908)
 
 let deck = LIST()
 

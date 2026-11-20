@@ -1,7 +1,7 @@
 use default
 use System.Net.Http.HttpClient
 use System.Net.Http.HttpClientHandler
-use System.Text.Encoding
+use Text.Encoding
 
 // The task: an HTTPS request carrying a user name and password, as HTTP
 // basic authentication.

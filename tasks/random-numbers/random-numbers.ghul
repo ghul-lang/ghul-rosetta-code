@@ -3,7 +3,7 @@ use default
 let mean = 1.0
 let deviation = 0.5
 
-let random = System.Random(1963)
+let random = Ghul.Random(1963)
 
 // Box-Muller: a pair of uniform values on (0, 1] becomes a value from the
 // standard normal distribution, which the mean and deviation then place.

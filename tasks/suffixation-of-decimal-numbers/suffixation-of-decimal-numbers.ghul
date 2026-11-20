@@ -1,11 +1,11 @@
 use default
-use System.Globalization.CultureInfo
+use Text.Locale
 
 let suffixes = [
     "", "K", "M", "G", "T", "P", "E", "Z", "Y", "X", "W", "V", "U"
 ]
 
-let invariant = CultureInfo.invariant_culture
+let invariant = Locale.invariant_culture
 
 suffize(text: string, digits: int?, base: int) -> string is
     let cleaned = text.trim().replace(",", "")

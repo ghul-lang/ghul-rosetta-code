@@ -1,5 +1,5 @@
 use default
-use System.InvalidOperationException
+use Ghul.InvalidOperationException
 
 class QUEUE[T] is
     _items: LIST[T]

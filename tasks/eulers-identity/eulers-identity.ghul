@@ -1,5 +1,5 @@
 use default
-use System.Numerics.Complex
+use Ghul.Math.Complex
 
 let e_i_pi = Complex.exp(Complex(0.0, pi))
 let result = e_i_pi + Complex(1.0, 0.0)

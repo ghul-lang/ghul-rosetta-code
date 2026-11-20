@@ -71,7 +71,7 @@ build(operator: char, left: Expression, right: Expression) -> Expression =>
     when '-' then SUBTRACT(left, right)
     when '*' then MULTIPLY(left, right)
     when '/' then DIVIDE(left, right)
-    else throw System.Exception("not an operator: {operator}")
+    else throw Ghul.Exception("not an operator: {operator}")
     esac
 
 parse_run(

@@ -14,7 +14,7 @@ class CHECKERBOARD is
         _rows = rows
         _encode = MAP()
 
-        let blanks = System.Text.StringBuilder()
+        let blanks = Text.StringBuilder()
 
         for column in 0..10 do
             let c = rows[0][column]
@@ -38,7 +38,7 @@ class CHECKERBOARD is
     si
 
     encrypt(text: string) -> string is
-        let result = System.Text.StringBuilder()
+        let result = Text.StringBuilder()
 
         for c in text.to_upper() do
             if c.is_digit then
@@ -52,7 +52,7 @@ class CHECKERBOARD is
     si
 
     decrypt(digits: string) -> string is
-        let result = System.Text.StringBuilder()
+        let result = Text.StringBuilder()
         let i mut = 0
 
         while i < digits.length do

@@ -31,10 +31,9 @@ search(first) is
 
                     for (i, target) in targets |> index() do
                         if hash =~ target then
-                            found[i] =
-                                System.Text.Encoding.ascii.get_string(
-                                    word.to_array()
-                                )
+                            found[i] = Text.Encoding.ascii.get_string(
+                                word.to_array()
+                            )
                         fi
                     od
                 od

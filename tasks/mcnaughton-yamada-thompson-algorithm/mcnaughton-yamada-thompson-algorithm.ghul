@@ -19,7 +19,7 @@ precedence(c: char) -> int =>
     esac
 
 postfix(infix: string) -> string is
-    let output = System.Text.StringBuilder()
+    let output = Text.StringBuilder()
     let operators = STACK()
 
     for c in infix do

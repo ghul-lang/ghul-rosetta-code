@@ -42,7 +42,7 @@ for player in 1::2 do
     fi
 od
 
-let random = System.Random(7)
+let random = Ghul.Random(7)
 let starters = dictionary |> filter(w => w.length <= 4) |> list()
 let used = LIST()
 let last mut = starters[random.next(starters.count)]

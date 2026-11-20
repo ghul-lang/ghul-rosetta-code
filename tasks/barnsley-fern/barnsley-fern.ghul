@@ -1,6 +1,6 @@
 use Raster.IMAGE
 
-let random = System.Random(20260918)
+let random = Ghul.Random(20260918)
 
 next(x: double, y: double) -> (x: double, y: double) => (
     let choice = random.next_double()

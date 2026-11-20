@@ -170,7 +170,7 @@ monotone_chain(points: P[]) -> P{} is
     chain
 si
 
-let random = System.Random(11)
+let random = Ghul.Random(11)
 let points =
     (0..300)
         |> map(_ =>

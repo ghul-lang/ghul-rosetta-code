@@ -34,7 +34,7 @@ class RUN(path: string) is
 si
 
 write_source(path: string) =>
-    let random = System.Random(2026) in
+    let random = Ghul.Random(2026) in
     File.write_all_lines(
         path,
         0..values |> map(_ => "{random.next(1_000_000)}")
