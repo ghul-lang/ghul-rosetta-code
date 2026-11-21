@@ -12,7 +12,6 @@ date-manipulation                      TimeZoneInfo
 file-modification-time                 File.get_last_write_time_utc
 find-limit-of-recursion                RuntimeHelpers
 holidays-related-to-easter             JulianCalendar
-host-introspection                     Marshal
 hostname                               System.Net
 memory-allocation                      Marshal
 memory-layout-of-a-data-structure      Marshal
@@ -21,7 +20,6 @@ parse-an-ip-address                    System.Net.IPAddress
 secure-temporary-file                  FileStream
 stack-traces                           System.Diagnostics.StackTrace
 unicode-strings                        string normalization
-variable-size-get                      Marshal
 xml-dom-serialization                  System.Xml
 xml-input                              System.Xml.Linq
 xml-output                             System.Xml.Linq
@@ -47,6 +45,7 @@ hickerson-series-of-almost-integers    decimal(int)
 literals-floating-point                decimal literals
 test-integerness                       decimal.truncate
 variable-size-set                      decimal.min_value
+variable-size-get                      size_of[decimal]
 
 # Output that differs on wasm.
 distance-and-bearing                   regex lookbehind is not supported

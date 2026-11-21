@@ -1,21 +1,21 @@
 use default
-use System.Runtime.InteropServices.Marshal
+use Ghul.Interop.size_of
 
 struct POINT(x: double, y: double)
 
-size_of[T: struct](name: string) is
-    write_line("{name,-32} {Marshal.size_of[T](),2}")
+show_size[T: struct](name: string) is
+    write_line("{name,-32} {size_of[T](),2}")
 si
 
 write_line("{"type",-32} {"bytes"}")
 
-size_of[byte]("byte")
-size_of[int]("int")
-size_of[long]("long")
-size_of[double]("double")
-size_of[decimal]("decimal")
-size_of[POINT]("POINT")
-size_of[word]("word, the width of a pointer")
+show_size[byte]("byte")
+show_size[int]("int")
+show_size[long]("long")
+show_size[double]("double")
+show_size[decimal]("decimal")
+show_size[POINT]("POINT")
+show_size[word]("word, the width of a pointer")
 
 let text = "hello"
 let numbers = [1, 2, 3, 4]
