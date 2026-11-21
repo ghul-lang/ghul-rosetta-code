@@ -382,7 +382,10 @@ everything under `fixture/` - each as its `name`, the path relative to the part'
 `index.yml` passes as `--commit`, so the paths can be fetched as they stood when the index was
 written. It is null in an index generated without one. `compiler_version`, `runtime_version` and
 `raster_version` are the ghul.compiler, ghul.runtime and ghul.raster releases the tasks are built and
-tested with, read from `.config/dotnet-tools.json` and `Directory.Packages.props`.
+tested with, read from `.config/dotnet-tools.json` and `Directory.Packages.props`. `diagnostics` is
+the diagnostic options every task is built with, read from `Directory.Build.props` and keyed as a
+`ghul-project.json`'s `diagnostics` section is: `suppress`, `warn-as-error`, `warn` and
+`warn-as-hint`, each a list of diagnostic names.
 
 One comes from the ledger as well: `ahead_of_wiki` is true for a published task whose section, as
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
