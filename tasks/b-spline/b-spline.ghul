@@ -38,9 +38,7 @@ si
 let samples = 400
 
 let curve =
-    (0::samples)
-        |> map(s => de_boor(double(spans * s) / double(samples)))
-        |> list()
+    (0::samples) |> map(s => de_boor(double(spans * s) / samples)) |> list()
 
 let image = IMAGE(400, 400)
 

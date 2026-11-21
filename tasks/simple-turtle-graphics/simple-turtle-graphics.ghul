@@ -41,7 +41,7 @@ bar_chart(values: double[], size: double) is
                 if value > most then value else most fi
             )
 
-    let width = size / double(values.count)
+    let width = size / values.count
 
     for value in values do
         let height = size * value / tallest

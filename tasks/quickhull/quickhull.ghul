@@ -157,7 +157,7 @@ let cloud =
 
                 let drawn = int(seed >>> 16) % 1000
 
-                return double(drawn) / 500.0 - 1.0
+                return drawn / 500.0 - 1.0
             si
             in
             (x = next(), y = next(), z = next())

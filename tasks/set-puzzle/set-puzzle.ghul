@@ -92,7 +92,7 @@ outline(symbol: int, x: double, y: double) -> List[(
     (0..steps)
         |> map(i =>
             let
-                turn = double(i) / double(steps),
+                turn = i / double(steps),
                 t = 2.0 * pi * turn
             in
                 case symbol
@@ -137,7 +137,7 @@ do
     image.fill_rectangle(left, top, left + card_width, top + card_height)
 
     for i in 0..card.number + 1 do
-        let offset = double(i) - double(card.number) / 2.0
+        let offset = i - card.number / 2.0
         let x = left + card_width / 2.0 + 26.0 * offset
         let shape = outline(card.symbol, x, top + card_height / 2.0)
 

@@ -1,7 +1,7 @@
 use default
 
 value_in(digits: int[], base: int) -> long =>
-    digits |> reduce(0L, (value, d) => value * long(base) + long(d))
+    digits |> reduce(0L, (value, d) => value * long(base) + d)
 
 // A numeric string n is composite in every base once it is composite in
 // every base up to n itself, so only those bases are tried.

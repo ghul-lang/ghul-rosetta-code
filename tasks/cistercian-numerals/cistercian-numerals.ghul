@@ -64,7 +64,7 @@ image.clear(250ub, 247ub, 238ub)
 image.color(60ub, 40ub, 30ub)
 
 for (i, number) in numbers |> index() do
-    draw(image, number, cell * double(i))
+    draw(image, number, cell * i)
 od
 
 write_line("the numerals for {numbers |> join(", ")}")

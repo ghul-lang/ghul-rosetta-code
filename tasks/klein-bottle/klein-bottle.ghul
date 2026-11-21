@@ -67,8 +67,8 @@ turned(p: VEC) -> VEC =>
 
 corner(i: int, j: int) -> VEC =>
     let
-        u = pi * double(i) / double(around),
-        v = 2.0 * pi * double(j) / double(along)
+        u = pi * i / around,
+        v = 2.0 * pi * j / along
     in
         turned(surface(u, v))
 

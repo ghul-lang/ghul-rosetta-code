@@ -37,7 +37,7 @@ od
 
 let total = sizes |> sum()
 let small = sizes |> filter(* < 1000L) |> list()
-let share = 100.0 * double(small |> sum()) / double(total)
+let share = 100.0 * double(small |> sum()) / total
 
 write_line("")
 write_line(

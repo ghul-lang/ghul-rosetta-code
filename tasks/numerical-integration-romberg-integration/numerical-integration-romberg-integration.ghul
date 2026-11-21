@@ -18,8 +18,8 @@ romberg(
     for i in 1::steps do
         intervals = intervals * 2
 
-        let h = width / double(intervals)
-        let inner = 1..intervals |> sum_by(j => f(lower + double(j) * h))
+        let h = width / intervals
+        let inner = 1..intervals |> sum_by(j => f(lower + j * h))
 
         let row = LIST([(ends / 2.0 + inner) * h])
         let factor mut = 1.0

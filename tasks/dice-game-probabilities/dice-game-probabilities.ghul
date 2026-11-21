@@ -30,7 +30,7 @@ beats(dice1: int, faces1: int, dice2: int, faces2: int) -> double =>
                 |> sum_by((a, ways) => ways * (second |> take(a) |> sum()))
         in
         let games = (first |> sum()) * (second |> sum()) in
-        double(wins) / double(games)
+        wins / double(games)
 
 let first = beats(9, 4, 6, 6)
 let second = beats(5, 10, 6, 7)

@@ -20,7 +20,7 @@ entropy(word: string) -> double =>
     let total = double(word.length) in
     word
         |> group_by(c => c)
-        |> map(group => double(group.value.count) / total)
+        |> map(group => group.value.count / total)
         |> reduce(0.0, (bits, probability) =>
             bits - probability * log2(probability)
         )

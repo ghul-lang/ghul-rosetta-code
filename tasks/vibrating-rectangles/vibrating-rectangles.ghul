@@ -17,8 +17,8 @@ draw(image, frame) is
     image.stroke(2.0)
 
     for ring in 0..rectangles do
-        let inset = spacing * double(ring) + 2.0
-        let hue = double(frame - 2 * ring) / double(frames)
+        let inset = spacing * ring + 2.0
+        let hue = double(frame - 2 * ring) / frames
 
         image.color(
             channel(hue, 0.0),
@@ -28,8 +28,8 @@ draw(image, frame) is
 
         let left = inset
         let top = inset
-        let right = double(width) - inset
-        let bottom = double(height) - inset
+        let right = width - inset
+        let bottom = height - inset
 
         image.line([
             (x = left, y = top), (x = right, y = top),

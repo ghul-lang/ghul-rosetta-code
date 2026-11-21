@@ -67,7 +67,7 @@ image.clear(252ub, 252ub, 250ub)
 
 at(i: int) -> (x: double, y: double) =>
     let
-        turn = double(i) / double(n),
+        turn = i / double(n),
         angle = pi / 2.0 - 2.0 * pi * turn
     in
         (x = cos(angle), y = sin(angle))

@@ -51,7 +51,7 @@ si
 let period = 4.0 * quarter_period(0.0002)
 
 let tick = period / double(frames * substeps)
-let delay = int(round(1000.0 * period / double(frames)))
+let delay = int(round(1000.0 * period / frames))
 
 let image = IMAGE(width, height)
 

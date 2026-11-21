@@ -15,13 +15,9 @@ let best mut = (panaceas = 0, ichors = 0, golds = 0)
 
 for panaceas in 0::most_of(panacea) do
     for ichors in 0::most_of(ichor) do
-        let weight =
-            double(panaceas) * panacea.weight +
-            double(ichors) * ichor.weight
+        let weight = panaceas * panacea.weight + ichors * ichor.weight
 
-        let volume =
-            double(panaceas) * panacea.volume +
-            double(ichors) * ichor.volume
+        let volume = panaceas * panacea.volume + ichors * ichor.volume
 
         if weight > weight_limit \/ volume > volume_limit then
             break
@@ -47,14 +43,10 @@ od
 let (panaceas, ichors, golds) = best
 
 let weight =
-    double(panaceas) * panacea.weight +
-    double(ichors) * ichor.weight +
-    double(golds) * gold.weight
+    panaceas * panacea.weight + ichors * ichor.weight + golds * gold.weight
 
 let volume =
-    double(panaceas) * panacea.volume +
-    double(ichors) * ichor.volume +
-    double(golds) * gold.volume
+    panaceas * panacea.volume + ichors * ichor.volume + golds * gold.volume
 
 write_line("Maximum value achievable is {best_value}")
 write_line(

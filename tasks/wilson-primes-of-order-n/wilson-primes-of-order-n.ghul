@@ -7,7 +7,7 @@ factorials_mod(count: int, modulus: long) -> long[] => (
     let result = LIST([1L])
 
     for k in 1..count do
-        result.add(result[k - 1] * long(k) % modulus)
+        result.add(result[k - 1] * k % modulus)
     od
 
     result
@@ -22,7 +22,7 @@ is_wilson(p: int, n: int, factorials: long[], modulus: long) -> bool =>
 
 orders_of(p: int) -> int[] =>
     let
-        modulus = long(p) * long(p),
+        modulus = p * long(p),
         factorials = factorials_mod(p, modulus)
     in
         1::orders

@@ -19,10 +19,10 @@ channel(value) => ubyte(round(255.0 * clamp(value, 0.0, 1.0)))
 
 draw_bar(image, color, top) is
     for row in 0..thickness do
-        let across = (double(row) + 0.5) / double(thickness)
+        let across = (row + 0.5) / thickness
         let shine = sin(across * pi)
         let glint = pow(shine, 12.0) * 0.5
-        let y = top + double(row)
+        let y = top + row
 
         image.color(
             channel(color.red * shine + glint),
@@ -50,7 +50,7 @@ let image = IMAGE(width, height)
 let animation = ANIMATION(width, height)
 
 for frame in 0..frames do
-    let time = 2.0 * pi * double(frame) / double(frames)
+    let time = 2.0 * pi * frame / frames
 
     draw(image, time)
     animation.add(image, 40)

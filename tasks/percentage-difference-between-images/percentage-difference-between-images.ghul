@@ -5,7 +5,7 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = double(y) / 80.0
+        let t = y / 80.0
 
         image.color(
             ubyte(40.0 + 200.0 * t),
@@ -95,7 +95,7 @@ difference(a: IMAGE, b: IMAGE) -> double is
 
     let most = 255.0 * 3.0 * double(a.width * a.height)
 
-    100.0 * double(total) / most
+    100.0 * total / most
 si
 
 let original = scene()

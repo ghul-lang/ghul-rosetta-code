@@ -39,10 +39,10 @@ turned(p: VEC) -> VEC =>
             p.z * sin(pitch) + y * cos(pitch)
         )
 
-angle(i: int) -> double => 2.0 * pi * double(i) / double(around)
+angle(i: int) -> double => 2.0 * pi * i / around
 
 corner(i: int, j: int) -> VEC =>
-    let v = 2.0 * double(j) / double(across) - 1.0 in
+    let v = 2.0 * j / across - 1.0 in
     turned(surface(angle(i), v))
 
 depth(quad: Quad) -> double => quad |> sum_by(c => c.z)

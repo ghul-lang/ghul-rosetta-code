@@ -49,12 +49,7 @@ draw(image, row, column) is
     od
 
     image.color(220ub, 50ub, 40ub)
-    image.fill_rectangle(
-        double(column) - 0.5,
-        double(row) - 0.5,
-        double(column) + 1.5,
-        double(row) + 1.5
-    )
+    image.fill_rectangle(column - 0.5, row - 0.5, column + 1.5, row + 1.5)
 si
 
 let image = IMAGE(pixels, pixels)

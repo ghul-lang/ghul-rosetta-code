@@ -16,7 +16,7 @@ write_line(
 )
 
 for key in transitions.keys |> sort() do
-    let frequency = 100.0 * double(transitions[key]) / double(count)
+    let frequency = 100.0 * double(transitions[key]) / count
 
     write_line(
         "{key / 10} -> {key % 10} count: {transitions[key],6} "

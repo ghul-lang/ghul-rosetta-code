@@ -19,11 +19,7 @@ image.view(-last, -last, last, last)
 image.color(0ub, 0ub, 160ub)
 image.stroke(1.5)
 
-image.line(
-    (0..steps + 1)
-        |> map(step => at(last * double(step) / double(steps)))
-        |> list()
-)
+image.line((0..steps + 1) |> map(step => at(last * step / steps)) |> list())
 
 image.write("spiral.png")
 

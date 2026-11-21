@@ -32,7 +32,7 @@ for tick in 0..10 do
 od
 
 for tick in 0..5 do
-    let y = double(tick) * 40.0
+    let y = tick * 40.0
     image.line(-1.0, y, 10.0, y)
 od
 

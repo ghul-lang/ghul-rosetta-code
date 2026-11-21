@@ -58,7 +58,7 @@ let step = 100.0
 let margin = 40.0
 let drop = 60.0
 
-left_of(at: int) -> double => margin + double(at) * step
+left_of(at: int) -> double => margin + at * step
 
 top_of(at: int) -> double => margin + if at % 2 == 0 then 0.0 else drop fi
 

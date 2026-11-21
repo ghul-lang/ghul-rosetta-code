@@ -59,8 +59,8 @@ retrograde_loops(body: Body) -> int is
     let backwards mut = false
 
     for step in 1..steps do
-        let year = years * double(step) / double(steps)
-        let previous = years * double(step - 1) / double(steps)
+        let year = years * step / steps
+        let previous = years * double(step - 1) / steps
         let change = turning(body, previous, year)
 
         if change < 0.0 /\ !backwards then
@@ -73,7 +73,7 @@ retrograde_loops(body: Body) -> int is
     loops
 si
 
-year_of(frame: int) -> double => shown * double(frame) / double(frames)
+year_of(frame: int) -> double => shown * frame / frames
 
 draw(image: IMAGE, frame: int) is
     image.clear(8ub, 8ub, 20ub)

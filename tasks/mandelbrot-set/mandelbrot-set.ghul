@@ -27,13 +27,13 @@ let image = IMAGE(width, height)
 
 for row in 0..height do
     for column in 0..width do
-        let cx = -2.2 + 3.0 * double(column) / double(width)
-        let cy = -1.2 + 2.4 * double(row) / double(height)
+        let cx = -2.2 + 3.0 * column / width
+        let cy = -1.2 + 2.4 * row / height
 
         let steps = escape(cx, cy)
 
         if steps < limit then
-            let level = log(double(steps) + 1.0) / log(double(limit) + 1.0)
+            let level = log(steps + 1.0) / log(limit + 1.0)
 
             image.set_pixel(
                 column,

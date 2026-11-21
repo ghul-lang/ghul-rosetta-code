@@ -4,7 +4,7 @@ middle_square(seed: int) -> int{} is
     let current mut = seed
 
     do
-        let squared = "{long(current) * long(current),012}"
+        let squared = "{current * long(current),012}"
 
         current = int.parse(squared.substring(3, 6))
 

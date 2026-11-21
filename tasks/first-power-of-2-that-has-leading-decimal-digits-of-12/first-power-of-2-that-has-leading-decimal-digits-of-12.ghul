@@ -11,7 +11,7 @@ p(leading, nth) =>
         from(1)
             |> filter(power =>
                 let
-                    scaled = double(power) * log_two,
+                    scaled = power * log_two,
                     fraction = scaled - floor(scaled)
                 in
                     fraction >= lower /\ fraction < upper

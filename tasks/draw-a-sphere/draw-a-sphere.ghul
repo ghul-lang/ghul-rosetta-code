@@ -2,7 +2,7 @@ use default
 use Raster.IMAGE
 
 let size = 480
-let centre = double(size) / 2.0
+let centre = size / 2.0
 let radius = 208.0
 
 let ambient = 0.14
@@ -28,8 +28,8 @@ let image = IMAGE(size, size)
 
 for down in 0..size do
     for across in 0..size do
-        let x = (double(across) + 0.5 - centre) / radius
-        let y = (centre - double(down) - 0.5) / radius
+        let x = (across + 0.5 - centre) / radius
+        let y = (centre - down - 0.5) / radius
         let square = x * x + y * y
 
         if square <= 1.0 then

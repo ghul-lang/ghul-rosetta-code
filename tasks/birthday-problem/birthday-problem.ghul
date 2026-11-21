@@ -27,7 +27,7 @@ si
 simulated(people: int, at_least: int, trials: int) -> double =>
     let hits = 0..trials |> filter(_ => shared(people, at_least)) |> count()
     in
-    double(hits) / double(trials)
+    hits / double(trials)
 
 log_factorial(n: int) -> double =>
     1::n |> reduce(0.0, (s, i) => s + log(double(i)))
@@ -49,8 +49,7 @@ exact(most: int, at_least: int) -> double[] is
 
     (0::most)
         |> map(n =>
-            let log_scale = log_factorial(n) - double(n) * log(double(days))
-            in
+            let log_scale = log_factorial(n) - n * log(double(days)) in
             1.0 - ways[n] * exp(log_scale)
         )
         |> list()
@@ -90,7 +89,7 @@ od
 let image = IMAGE(480, 300)
 let most = 400
 
-image.view(-40.0, -0.15, double(most) + 10.0, 1.08)
+image.view(-40.0, -0.15, most + 10.0, 1.08)
 image.clear(252ub, 250ub, 245ub)
 
 image.color(200ub, 200ub, 205ub)
@@ -126,13 +125,7 @@ od
 
 image.color(60ub, 60ub, 60ub)
 image.text(-8.0, 0.47, 11.0, "50%", Anchor.RIGHT)
-image.text(
-    double(most) / 2.0,
-    -0.12,
-    12.0,
-    "people in the group",
-    Anchor.CENTER
-)
+image.text(most / 2.0, -0.12, 12.0, "people in the group", Anchor.CENTER)
 
 image.write("birthdays.png")
 

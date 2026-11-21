@@ -8,7 +8,7 @@ use Pentagon = (x: double, y: double, radius: double)
 let golden = (1.0 + sqrt(5.0)) / 2.0
 let shrink = 1.0 / (1.0 + golden)
 
-towards(index: int) -> double => pi / 2.0 + 0.4 * pi * double(index)
+towards(index: int) -> double => pi / 2.0 + 0.4 * pi * index
 
 corner_of(shape: Pentagon, index: int) -> Point => (
     let angle = towards(index)

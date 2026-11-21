@@ -35,10 +35,10 @@ let block mut = 10L
 
 while block < limit do
     for pair in starts_and_ends do
-        let start = block * long(pair.first)
+        let start = block * pair.first
         let stop = min(start + block, limit)
 
-        let first_candidate = start + long(pair.last)
+        let first_candidate = start + pair.last
 
         let n mut =
             if first_candidate < start then

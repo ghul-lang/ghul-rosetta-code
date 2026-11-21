@@ -26,7 +26,7 @@ let cave = IO.File.read_all_lines("cave.txt")
 let columns = cave[0].length
 let rows = cave.count
 let width = double(columns)
-let height = 2.0 * double(rows)
+let height = 2.0 * rows
 
 let frames = 240
 let sight = 6.0
@@ -144,7 +144,7 @@ let random = Ghul.Random(1)
 
 let flock = [
     BOID(
-        VEC(double(c.index) + 0.5, height - 2.0 * double(r.index) - 1.0),
+        VEC(c.index + 0.5, height - 2.0 * r.index - 1.0),
         VEC(0.3, random.next_double() * 0.4 - 0.2)
     )
     for r in cave |> index()

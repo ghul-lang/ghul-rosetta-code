@@ -30,7 +30,7 @@ od
 if count == 0 then
     write_line("no values were entered")
 else
-    let average = double(total) / double(count)
+    let average = total / double(count)
 
     write_line("average of {count} values: {average:F4}")
 fi

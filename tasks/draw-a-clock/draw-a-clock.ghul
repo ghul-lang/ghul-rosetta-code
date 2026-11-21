@@ -34,7 +34,7 @@ draw(image: IMAGE, time: Time.DateTime) is
     od
 
     let second = double(time.second)
-    let minute = double(time.minute) + second / 60.0
+    let minute = time.minute + second / 60.0
     let hour = double(time.hour % 12) + minute / 60.0
 
     hand(image, 5.0 * hour, 0.5, 5.0)

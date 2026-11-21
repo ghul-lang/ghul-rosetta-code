@@ -14,7 +14,7 @@ branch(x: double, y: double, angle: double, length: double, depth: int) is
     let tip_x = x + length * cos(angle)
     let tip_y = y + length * sin(angle)
 
-    image.stroke(0.6 * double(depth))
+    image.stroke(0.6 * depth)
     image.line(x, y, tip_x, tip_y)
 
     branch(tip_x, tip_y, angle - spread, length * shrink, depth - 1)

@@ -7,7 +7,7 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = double(y) / 80.0
+        let t = y / 80.0
 
         image.color(
             ubyte(40.0 + 200.0 * t),
@@ -83,7 +83,7 @@ picture() -> IMAGE is
     let image = scene()
 
     for x in 0..image.width do
-        let c = hue(double(x) / double(image.width))
+        let c = hue(x / double(image.width))
 
         for y in 0..8 do
             put(image, x, y, c)

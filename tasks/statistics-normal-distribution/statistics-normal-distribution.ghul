@@ -16,11 +16,9 @@ si
 let size = 100000
 let samples = normal() |> take(size) |> list()
 
-let mean = samples |> sum() / double(size)
+let mean = samples |> sum() / size
 
-let deviation = sqrt(
-    samples |> sum_by(x => (x - mean) * (x - mean)) / double(size)
-)
+let deviation = sqrt(samples |> sum_by(x => (x - mean) * (x - mean)) / size)
 
 write_line("{size:N0} samples by the Box-Muller transform")
 write_line("mean {mean:F6}, standard deviation {deviation:F6}")
@@ -43,7 +41,7 @@ od
 let tallest = counts |> reduce(0, (a, b) => max(a, b))
 
 for bin in 0..bins do
-    let from = low + width * double(bin)
+    let from = low + width * bin
 
     let bar = "".pad_right(counts[bin] * 50 / tallest, '#')
 
@@ -58,8 +56,8 @@ image.clear(252ub, 252ub, 250ub)
 image.color(60ub, 110ub, 190ub)
 
 for bin in 0..bins do
-    let x = low + width * double(bin)
-    let density = double(counts[bin]) / double(size) / width
+    let x = low + width * bin
+    let density = double(counts[bin]) / size / width
 
     image.fill_rectangle(x + 0.02, 0.0, x + width - 0.02, density)
 od
@@ -68,7 +66,7 @@ let curve =
     (0::160)
         |> map(i =>
             let
-                x = low + double(i) * 0.05,
+                x = low + i * 0.05,
                 y = exp(-x * x / 2.0) / sqrt(2.0 * pi)
             in
                 (x = x, y = y)

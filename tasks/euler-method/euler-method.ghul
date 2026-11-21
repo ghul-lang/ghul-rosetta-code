@@ -18,7 +18,7 @@ euler(f: (double, double) -> double, y0: double, step: int, end: int) -> (
     for t in from(0, step) |> take_while(* <= end) do
         yield (t, y)
 
-        y = y + double(step) * f(double(t), y)
+        y = y + step * f(double(t), y)
     od
 si
 

@@ -5,7 +5,7 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = double(y) / 80.0
+        let t = y / 80.0
 
         image.color(
             ubyte(40.0 + 200.0 * t),
@@ -58,7 +58,7 @@ bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
     let y0 = min(int(floor(y)), source.height - 1)
     let x1 = min(x0 + 1, source.width - 1)
     let y1 = min(y0 + 1, source.height - 1)
-    let tx = x - double(x0), ty = y - double(y0)
+    let tx = x - x0, ty = y - y0
 
     let a = source.pixel(x0, y0), b = source.pixel(x1, y0)
     let c = source.pixel(x0, y1), d = source.pixel(x1, y1)
@@ -73,16 +73,16 @@ bilinear(source: IMAGE, x: double, y: double) -> (double, double, double) is
 si
 
 enlarge(source: IMAGE, factor: double) -> IMAGE is
-    let width = int(round(double(source.width) * factor))
-    let height = int(round(double(source.height) * factor))
+    let width = int(round(source.width * factor))
+    let height = int(round(source.height * factor))
     let result = IMAGE(width, height)
     let across = double(source.width - 1) / double(width - 1)
     let down = double(source.height - 1) / double(height - 1)
 
     for y in 0..height do
         for x in 0..width do
-            let sx = double(x) * across
-            let sy = double(y) * down
+            let sx = x * across
+            let sy = y * down
             let (r, g, b) = bilinear(source, sx, sy)
 
             result.set_pixel(

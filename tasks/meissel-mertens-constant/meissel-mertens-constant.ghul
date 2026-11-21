@@ -6,7 +6,7 @@ use default
 let gamma = 0.57721566490153286
 
 term(p) =>
-    let reciprocal = 1.0 / double(p) in
+    let reciprocal = 1.0 / p in
     double.log(1.0 - reciprocal) + reciprocal
 
 for bound in [1000, 10_000, 100_000, 1_000_000, 10_000_000] do

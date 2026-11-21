@@ -8,7 +8,7 @@ in_base(n: long, base: int) -> string =>
 value_of(digits: string, base: int) -> long =>
     digits
         |> reduce(0L, (total, c) =>
-            total * long(base) + long(symbols.index_of(c))
+            total * long(base) + symbols.index_of(c)
         )
 
 is_penholodigital(square: long, base: int) -> bool =>

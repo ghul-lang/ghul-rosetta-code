@@ -21,7 +21,7 @@ let bins = 20
 let sample_bins =
     1::samples
         |> map(_ => modified(() => random.next_double(), modifier))
-        |> map(x => int(x * double(bins)))
+        |> map(x => int(x * bins))
         |> list()
 
 let counts = 0..bins |> map(bin => sample_bins |> count(* == bin)) |> list()
@@ -31,8 +31,8 @@ let largest = counts |> max()!
 write_line("{samples:N0} samples from the modified distribution:")
 
 for bin in 0..bins do
-    let low = double(bin) / double(bins)
-    let high = low + 1.0 / double(bins)
+    let low = bin / double(bins)
+    let high = low + 1.0 / bins
     let bar = string('#', counts[bin] * 50 / largest)
 
     write_line("{low:F2} .. {high:F2} {counts[bin],5} {bar}")

@@ -161,7 +161,7 @@ let hues = "FILNPTUVWXYZ"
 
 color(name: char) -> (red: ubyte, green: ubyte, blue: ubyte) =>
     let
-        h = double(hues.index_of(name)) / 12.0 * 6.0,
+        h = hues.index_of(name) / 12.0 * 6.0,
         f = h - floor(h),
         i = int(h),
         up = ubyte(90.0 + 150.0 * f),
@@ -205,7 +205,7 @@ image.stroke(2.5)
 
 for i in 0..size * size do
     let r = i / size, c = i % size
-    let x = cell * double(c), y = cell * double(r)
+    let x = cell * c, y = cell * r
 
     if c + 1 < size /\ board[i] != board[i + 1] then
         image.line(x + cell, y, x + cell, y + cell)

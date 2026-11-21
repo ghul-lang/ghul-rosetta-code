@@ -140,7 +140,7 @@ let image = IMAGE(520, 520)
 image.view(-0.15, -0.15, 8.15, 8.15)
 
 middle(square: Square) -> (x: double, y: double) => (
-    x = double(square.column) + 0.5,
+    x = square.column + 0.5,
     y = double(size - square.row) - 0.5
 )
 

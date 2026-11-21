@@ -91,11 +91,7 @@ let balance =
         )
 
 let naive_balance =
-    1::25
-        |> reduce(
-            Ghul.Math.e - 1.0,
-            (bal, year) => bal * double(year) - 1.0
-        )
+    1::25 |> reduce(Ghul.Math.e - 1.0, (bal, year) => bal * year - 1.0)
 
 write_line("  exact:  ${balance.decimal(16)}")
 write_line("  double: ${naive_balance:R}")

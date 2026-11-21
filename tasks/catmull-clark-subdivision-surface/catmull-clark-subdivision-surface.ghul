@@ -14,7 +14,7 @@ use Mesh = (points: Point[], faces: Face[])
 
 center(points: Point[]) -> Point =>
     (points |> reduce((x = 0.0, y = 0.0, z = 0.0), (a, b) => a + b)) *
-    (1.0 / double(points.count))
+    (1.0 / points.count)
 
 edge_key(a: int, b: int) -> (low: int, high: int) =>
     if a < b then

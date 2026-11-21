@@ -41,7 +41,7 @@ let drops =
 
 step() is
     for drop in drops do
-        if drop.y > double(height) then
+        if drop.y > height then
             if random.next_double() < 0.1 then
                 launch(drop)
             fi
@@ -55,14 +55,13 @@ step() is
     od
 si
 
-airborne() -> int =>
-    drops |> filter(drop => drop.y <= double(height)) |> count()
+airborne() -> int => drops |> filter(drop => drop.y <= height) |> count()
 
 draw(image: IMAGE) is
     image.clear(10ub, 15ub, 35ub)
 
     for drop in drops do
-        if drop.y <= double(height) then
+        if drop.y <= height then
             let fall = clamp(drop.dy / 3.8, -1.0, 1.0)
             let shade = ubyte(170 + int(80.0 * fall * fall))
 

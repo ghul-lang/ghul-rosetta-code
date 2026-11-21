@@ -101,7 +101,7 @@ image.view(-2.0, -2.0, 2.0, 2.0)
 let animation = ANIMATION(size, size)
 
 for frame in 0..frames do
-    let turn = double(frame) / double(frames)
+    let turn = frame / double(frames)
     let angle = 2.0 * pi / 3.0 * turn
 
     draw(image, angle)

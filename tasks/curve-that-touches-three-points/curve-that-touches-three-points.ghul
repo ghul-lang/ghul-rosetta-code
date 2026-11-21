@@ -41,7 +41,7 @@ curve(start: P, middle: P, finish: P, steps: int) -> P{} is
     (0::steps)
         |> map(i =>
             let
-                a = from + turn * double(i) / double(steps),
+                a = from + turn * i / steps,
                 x = center.x + radius * cos(a)
             in
                 P(x, center.y + radius * sin(a))

@@ -10,7 +10,7 @@ let state mut = 1234567L
 next(limit) is
     state = (state * 1103515245L + 12345L) % 2147483648L
 
-    return int(state % long(limit))
+    return int(state % limit)
 si
 
 let places =
@@ -48,10 +48,10 @@ image.color(0ub, 0ub, 0ub)
 
 for site in places do
     image.fill([
-        (x = double(site.x) - 3.0, y = double(site.y) - 3.0),
-        (x = double(site.x) + 3.0, y = double(site.y) - 3.0),
-        (x = double(site.x) + 3.0, y = double(site.y) + 3.0),
-        (x = double(site.x) - 3.0, y = double(site.y) + 3.0)
+        (x = site.x - 3.0, y = site.y - 3.0),
+        (x = site.x + 3.0, y = site.y - 3.0),
+        (x = site.x + 3.0, y = site.y + 3.0),
+        (x = site.x - 3.0, y = site.y + 3.0)
     ])
 od
 

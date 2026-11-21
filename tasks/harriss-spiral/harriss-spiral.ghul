@@ -30,7 +30,7 @@ quarter_arc(image: IMAGE, from: Point, to: Point) is
     image.line(
         (0::24)
             |> map(i =>
-                let a = start + sweep * double(i) / 24.0 in
+                let a = start + sweep * i / 24.0 in
                 (
                     x = center.x + radius * cos(a),
                     y = center.y + radius * sin(a)

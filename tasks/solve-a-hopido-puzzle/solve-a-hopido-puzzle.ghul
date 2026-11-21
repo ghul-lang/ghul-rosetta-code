@@ -85,8 +85,8 @@ let image = IMAGE(int(cell) * columns, int(cell) * rows)
 image.clear(245ub, 240ub, 225ub)
 
 for s in open do
-    let x = cell * double(s.column)
-    let y = cell * double(s.row)
+    let x = cell * s.column
+    let y = cell * s.row
 
     image.color(200ub, 215ub, 235ub)
     image.fill_rectangle(x + 2.0, y + 2.0, x + cell - 2.0, y + cell - 2.0)
@@ -95,10 +95,7 @@ od
 let path =
     open
         |> sort((a, b) => order[a] - order[b])
-        |> map(s => (
-            x = cell * (double(s.column) + 0.5),
-            y = cell * (double(s.row) + 0.5)
-        ))
+        |> map(s => (x = cell * (s.column + 0.5), y = cell * (s.row + 0.5)))
         |> list()
 
 image.color(30ub, 60ub, 140ub)
@@ -113,8 +110,8 @@ image.color(90ub, 90ub, 100ub)
 
 for s in open do
     image.text(
-        cell * double(s.column) + 5.0,
-        cell * double(s.row) + 15.0,
+        cell * s.column + 5.0,
+        cell * s.row + 15.0,
         11.0,
         "{order[s]}"
     )

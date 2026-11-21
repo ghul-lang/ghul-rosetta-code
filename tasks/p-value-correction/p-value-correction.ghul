@@ -40,20 +40,15 @@ running(
     adjusted
 si
 
-let harmonic = 1::n |> sum_by(i => 1.0 / double(i))
+let harmonic = 1::n |> sum_by(i => 1.0 / i)
 
 benjamini_hochberg() -> double[] =>
-    running(descending, rank => double(n) / double(n - rank), true)
+    running(descending, rank => n / double(n - rank), true)
 
 benjamini_yekutieli() -> double[] =>
-    running(
-        descending,
-        rank => harmonic * double(n) / double(n - rank),
-        true
-    )
+    running(descending, rank => harmonic * n / double(n - rank), true)
 
-bonferroni() -> double[] =>
-    p_values |> map(p => min(1.0, double(n) * p)) |> list()
+bonferroni() -> double[] => p_values |> map(p => min(1.0, n * p)) |> list()
 
 hochberg() -> double[] =>
     running(descending, rank => double(rank + 1), true)
@@ -63,9 +58,7 @@ holm() -> double[] => running(ascending, rank => double(n - rank), false)
 hommel() -> double[] is
     let sorted = ascending |> map(i => p_values[i]) |> list()
     let smallest =
-        0..n
-            |> map(i => double(n) * sorted[i] / double(i + 1))
-            |> min() ?? 1.0
+        0..n |> map(i => n * sorted[i] / double(i + 1)) |> min() ?? 1.0
     let q = repeat(smallest, n) |> LIST()
     let floor = repeat(smallest, n) |> LIST()
 
@@ -73,11 +66,11 @@ hommel() -> double[] is
         let tail = n - m + 1
         let q1 =
             tail..n
-                |> map(i => double(m) * sorted[i] / double(i - tail + 2))
+                |> map(i => m * sorted[i] / double(i - tail + 2))
                 |> min() ?? 1.0
 
         for i in 0..tail do
-            q[i] = min(double(m) * sorted[i], q1)
+            q[i] = min(m * sorted[i], q1)
         od
 
         for i in tail..n do

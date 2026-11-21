@@ -31,10 +31,9 @@ turned(p: VEC) -> VEC =>
             p.z * sin(pitch) + y * cos(pitch)
         )
 
-angle(i: int) -> double =>
-    2.0 * pi * double(turns) * double(i) / double(around)
+angle(i: int) -> double => 2.0 * pi * turns * i / around
 
-radius(j: int) -> double => reach * double(j) / double(along)
+radius(j: int) -> double => reach * j / along
 
 corner(i: int, j: int) -> VEC =>
     let
@@ -50,7 +49,7 @@ patch(i: int, j: int) -> Patch => (
         turned(corner(i + 1, j + 1)),
         turned(corner(i, j + 1))
     ],
-    phase = angle(i) / (2.0 * pi * double(turns))
+    phase = angle(i) / (2.0 * pi * turns)
 )
 
 depth(p: Patch) -> double => p.corners |> sum_by(c => c.z)
