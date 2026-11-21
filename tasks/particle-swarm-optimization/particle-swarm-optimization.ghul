@@ -91,8 +91,8 @@ draw(problem: PROBLEM, found: (best: V2, particles: PARTICLE[])) is
 
     let at =
         (column, row) => V2(
-            problem.low.x + span.x * (double(column) + 0.5) / double(size),
-            problem.high.y - span.y * (double(row) + 0.5) / double(size)
+            problem.low.x + span.x * (column + 0.5) / size,
+            problem.high.y - span.y * (row + 0.5) / size
         )
 
     let values = LIST()

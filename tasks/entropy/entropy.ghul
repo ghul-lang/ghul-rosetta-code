@@ -6,7 +6,7 @@ entropy(text) =>
         total = double(text.length)
     in
         groups
-            |> map(group => double(group.count) / total)
+            |> map(group => group.count / total)
             |> reduce(0.0, (bits, probability) =>
                 bits - probability * log2(probability)
             )

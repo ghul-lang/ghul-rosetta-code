@@ -39,12 +39,12 @@ let image = IMAGE(size, size)
 
 image.clear(24ub, 24ub, 28ub)
 
-let center = 0.5 * double(size)
+let center = 0.5 * size
 
 for pixel_y in 0..size do
     for pixel_x in 0..size do
-        let across = double(pixel_x) + 0.5 - center
-        let down = double(pixel_y) + 0.5 - center
+        let across = pixel_x + 0.5 - center
+        let down = pixel_y + 0.5 - center
         let away = sqrt(across * across + down * down)
         let covered = min(1.0, max(0.0, radius + 0.5 - away))
 
@@ -69,7 +69,7 @@ image.write("wheel.png")
 write_line("hue   saturation 1, value 1")
 
 for hue in 0::5 do
-    let degrees = double(hue) * 60.0
+    let degrees = hue * 60.0
     let shade = from_hsv(degrees, 1.0, 1.0)
 
     write_line(

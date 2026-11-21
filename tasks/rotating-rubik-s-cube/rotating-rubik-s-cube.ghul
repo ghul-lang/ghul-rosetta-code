@@ -104,7 +104,7 @@ image.view(-2.8, -2.8, 2.8, 2.8)
 let animation = ANIMATION(size, size)
 
 for frame in 0..frames do
-    let angle = 2.0 * pi * double(frame) / double(frames)
+    let angle = 2.0 * pi * frame / frames
 
     draw(image, angle)
     animation.add(image, 50)

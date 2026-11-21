@@ -34,8 +34,8 @@ chi_squared(text: string) -> double =>
         |> counts()
         |> index()
         |> sum_by(n => (
-            let expected = english[n.index] * double(text.length)
-            let difference = double(n.value) - expected
+            let expected = english[n.index] * text.length
+            let difference = n.value - expected
             difference * difference / expected
         ))
 
@@ -83,7 +83,7 @@ let average_coincidence =
         (
             (0..length)
                 |> sum_by(i => coincidence(column(letters, length, i)))
-        ) / double(length)
+        ) / length
 
 let length =
     1::20 |> find(length => average_coincidence(length) > 0.06) ?? 1

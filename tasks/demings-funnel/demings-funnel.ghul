@@ -47,11 +47,11 @@ drops(ds: double[], rule: (double, double) -> double) -> double[] => (
     landed
 )
 
-mean(xs: double[]) -> double => (xs |> sum()) / double(xs.count)
+mean(xs: double[]) -> double => (xs |> sum()) / xs.count
 
 deviation(xs: double[]) -> double =>
     let m = mean(xs) in
-    sqrt((xs |> sum_by(x => (x - m) * (x - m))) / double(xs.count))
+    sqrt((xs |> sum_by(x => (x - m) * (x - m))) / xs.count)
 
 let rules = [
     (name = "the funnel stays over the target", next = (at, d) => 0.0),
@@ -64,8 +64,8 @@ let rules = [
 ]
 
 plot(image: IMAGE, at: int, xs: double[], ys: double[], reach: double) is
-    let width = double(image.width) / 2.0
-    let height = double(image.height) / 2.0
+    let width = image.width / 2.0
+    let height = image.height / 2.0
     let left = double(at % 2) * width
     let top = double(at / 2) * height
     let middle = (x = left + width / 2.0, y = top + height / 2.0)

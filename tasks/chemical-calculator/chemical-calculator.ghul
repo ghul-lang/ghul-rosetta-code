@@ -60,7 +60,7 @@ class FORMULA(text: string) is
                     element()
                 fi
 
-            total = total + part * double(count())
+            total = total + part * count()
         od
 
         total

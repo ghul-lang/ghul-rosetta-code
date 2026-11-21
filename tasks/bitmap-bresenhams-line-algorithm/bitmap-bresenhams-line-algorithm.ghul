@@ -36,7 +36,7 @@ line(from_x, from_y, to_x, to_y) is
 si
 
 for spoke in 0..24 do
-    let angle = 2.0 * pi * double(spoke) / 24.0
+    let angle = 2.0 * pi * spoke / 24.0
 
     line(
         200,

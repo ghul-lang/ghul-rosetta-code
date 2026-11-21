@@ -65,7 +65,7 @@ let cells = [
     |> list()
 
 let image = IMAGE(420, 450)
-let reach = double(size) * 1.05
+let reach = size * 1.05
 
 image.view(-reach, -1.07 * reach, reach, 1.07 * reach)
 image.clear(250ub, 248ub, 240ub)

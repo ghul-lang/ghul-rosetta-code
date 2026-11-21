@@ -8,7 +8,7 @@ let steps = 240
 around(radius: double) -> POINT[] =>
     (0..steps + 1)
         |> map(step => (
-            let angle = 2.0 * pi * double(step) / double(steps)
+            let angle = 2.0 * pi * step / steps
 
             (
                 x = 150.0 + radius * cos(angle),

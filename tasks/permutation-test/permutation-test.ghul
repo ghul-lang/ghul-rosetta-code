@@ -34,7 +34,7 @@ choose(0, n, 0)
 let groupings = double(at_most + above)
 
 write_line("{at_most + above} alternative groupings")
-percent(count) => 100.0 * double(count) / groupings
+percent(count) => 100.0 * count / groupings
 
 write_line("difference <= observed: {percent(at_most):F4}%")
 write_line("difference  > observed: {percent(above):F4}%")

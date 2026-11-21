@@ -93,8 +93,8 @@ let image = IMAGE(int(cell) * columns, int(cell) * rows)
 image.clear(245ub, 240ub, 225ub)
 
 for s in open do
-    let x = cell * double(s.column)
-    let y = cell * double(s.row)
+    let x = cell * s.column
+    let y = cell * s.row
     let light = (s.row + s.column) % 2 == 0
 
     if light then
@@ -109,10 +109,7 @@ od
 let path =
     open
         |> sort((a, b) => order[a] - order[b])
-        |> map(s => (
-            x = cell * (double(s.column) + 0.5),
-            y = cell * (double(s.row) + 0.5)
-        ))
+        |> map(s => (x = cell * (s.column + 0.5), y = cell * (s.row + 0.5)))
         |> list()
 
 image.color(30ub, 60ub, 140ub)

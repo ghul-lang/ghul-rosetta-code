@@ -137,8 +137,7 @@ for (i, (name, description)) in examples |> index() do
 
     // nodes sit evenly round a circle
     let position = node => (
-        let angle =
-            6.283185307 * double(slot[node]) / double(graph.nodes.count)
+        let angle = 6.283185307 * double(slot[node]) / graph.nodes.count
         (cx + 80.0 * Ghul.Math.cos(angle), cy + 80.0 * Ghul.Math.sin(angle))
     )
 

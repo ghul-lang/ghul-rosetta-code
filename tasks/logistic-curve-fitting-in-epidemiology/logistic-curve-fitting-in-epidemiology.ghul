@@ -25,7 +25,7 @@ model(r: double, t: double) -> double =>
 error(r: double) -> double =>
     cases
         |> index()
-        |> map(c => model(r, double(c.index)) - double(c.value))
+        |> map(c => model(r, double(c.index)) - c.value)
         |> sum_by(d => d * d)
 
 golden_section(low: double, high: double) -> double => (
@@ -63,7 +63,7 @@ od
 image.color(90ub, 90ub, 100ub)
 
 for power in 1::6 do
-    let y = double(power) - 0.07
+    let y = power - 0.07
 
     image.text(-2.0, y, 10.0, "1e{power}", Anchor.RIGHT)
 od
@@ -72,7 +72,7 @@ image.color(200ub, 60ub, 40ub)
 image.stroke(2.0)
 image.line(
     (0::cases.count * 4)
-        |> map(q => double(q) / 4.0)
+        |> map(q => q / 4.0)
         |> map(t => (x = t, y = log10(model(r, t))))
         |> list()
 )

@@ -84,7 +84,7 @@ for a in strategies do
 
             write_line(
                 "{a.name} going first against {b.name}: "
-                "wins {100.0 * double(wins) / double(games):F1}%"
+                "wins {100.0 * wins / games:F1}%"
             )
         fi
     od

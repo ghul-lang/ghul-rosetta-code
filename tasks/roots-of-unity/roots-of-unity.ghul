@@ -2,12 +2,7 @@ use default
 
 roots_of_unity(n: int) -> complex{} =>
     (0..n)
-        |> map(k =>
-            complex.from_polar_coordinates(
-                1.0,
-                2.0 * pi * double(k) / double(n)
-            )
-        )
+        |> map(k => complex.from_polar_coordinates(1.0, 2.0 * pi * k / n))
 
 tidy(x: double) -> double => if abs(x) < 0.00005 then 0.0 else x fi
 

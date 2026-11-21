@@ -57,11 +57,11 @@ write_line("p      fraction of {trials} {size} by {size} grids percolating")
 let shown mut = null
 
 for step in 0::10 do
-    let p = double(step) / 10.0
+    let p = step / 10.0
     let grids = 0..trials |> map(_ => GRID(p)) |> list()
     let through = grids |> filter(g => g.percolates()) |> count()
 
-    write_line("{p:F1}    {double(through) / double(trials):F3}")
+    write_line("{p:F1}    {through / double(trials):F3}")
 
     if step == 6 then
         shown =

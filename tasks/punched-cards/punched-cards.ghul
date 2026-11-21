@@ -79,13 +79,13 @@ od
 let columns = 80
 let pitch = 9.0
 let spacing = 21.0
-let card_width = 44.0 + pitch * double(columns)
+let card_width = 44.0 + pitch * columns
 let card_height = 44.0 + spacing * 12.0
 let gap = 20.0
 
 let image = IMAGE(
     int(card_width + 2.0 * gap),
-    int(gap + double(program.count) * (card_height + gap))
+    int(gap + program.count * (card_height + gap))
 )
 
 image.view(0.0, double(image.height), double(image.width), 0.0)
@@ -95,7 +95,7 @@ for
     (line, number) in program |> index() |> map(iv => (iv.value, iv.index))
 do
     let left = gap
-    let top = gap + double(number) * (card_height + gap)
+    let top = gap + number * (card_height + gap)
 
     image.color(242ub, 230ub, 196ub)
     image.fill([
@@ -107,7 +107,7 @@ do
     ])
 
     for column in 0..columns do
-        let x = left + 26.0 + pitch * double(column)
+        let x = left + 26.0 + pitch * column
         let c =
             if column < line.length then
                 line[column]
@@ -122,7 +122,7 @@ do
         fi
 
         for row in 0..12 do
-            let y = top + 30.0 + spacing * double(row)
+            let y = top + 30.0 + spacing * row
 
             if punched |> any(* == row) then
                 image.color(20ub, 20ub, 20ub)

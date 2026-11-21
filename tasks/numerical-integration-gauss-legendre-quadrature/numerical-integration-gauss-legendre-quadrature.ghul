@@ -13,13 +13,13 @@ legendre(n: int, x: double) -> (value: double, slope: double) => (
         (previous, current) = (current, next)
     od
 
-    let slope = double(n) * (x * current - previous) / (x * x - 1.0)
+    let slope = n * (x * current - previous) / (x * x - 1.0)
 
     (value = current, slope = slope)
 )
 
 root(n: int, i: int) -> double => (
-    let guess = (double(i) - 0.25) / (double(n) + 0.5)
+    let guess = (i - 0.25) / (n + 0.5)
     let x mut = cos(pi * guess)
 
     for _ in 1::100 do

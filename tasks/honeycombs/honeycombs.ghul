@@ -33,9 +33,9 @@ let cells =
             in
                 (
                     letter = letters[index],
-                    x = double(column) * 1.5 * radius,
+                    x = column * 1.5 * radius,
                     y =
-                        double(row) * rise * radius -
+                        row * rise * radius -
                         if column % 2 == 1 then
                             rise * radius / 2.0
                         else 0.0
@@ -49,7 +49,7 @@ let chosen = LIST()
 corners(x: double, y: double) -> (double, double)[] =>
     0..6
         |> map(corner =>
-            let angle = double(corner) * pi / 3.0 in
+            let angle = corner * pi / 3.0 in
             (x + radius * 0.92 * cos(angle), y + radius * 0.92 * sin(angle))
         )
         |> list()

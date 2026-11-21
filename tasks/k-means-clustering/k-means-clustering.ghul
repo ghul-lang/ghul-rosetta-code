@@ -146,7 +146,7 @@ let image = IMAGE(600, 600)
 image.view(-1.06, -1.06, 1.06, 1.06)
 
 for index in 0..points.count do
-    let shade = double(membership[index]) / double(clusters)
+    let shade = double(membership[index]) / clusters
 
     image.color(COLOR_MAP.hue(shade))
     image.dot(points[index].x, points[index].y, 1.4)

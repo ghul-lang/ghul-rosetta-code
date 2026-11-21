@@ -105,7 +105,7 @@ image.clear(252ub, 250ub, 245ub)
 image.stroke(2.0)
 
 trace(curve: Curve) -> Point[] =>
-    (0::100) |> map(i => point_at(curve, double(i) / 100.0)) |> list()
+    (0::100) |> map(i => point_at(curve, i / 100.0)) |> list()
 
 image.color(40ub, 90ub, 170ub)
 image.line(trace(first))

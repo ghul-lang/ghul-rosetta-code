@@ -22,7 +22,7 @@ date(text: string) -> DateTime => DateTime.parse(text, Locale.invariant)
 show(d: DateTime) -> string => d.to_string("yyyy-MM-dd")
 
 level(position: int, length: int) -> double =>
-    sin(2.0 * pi * double(position) / double(length))
+    sin(2.0 * pi * position / length)
 
 report(birth: DateTime, target: DateTime) is
     let days = int((target - birth).total_days)
@@ -88,13 +88,13 @@ for (i, (label, length)) in cycles |> index() do
     image.line(
         (-span * 4::span * 4)
             |> map(q =>
-                let day = double(q) / 4.0 in
-                let turn = (double(center) + day) / double(length) in
+                let day = q / 4.0 in
+                let turn = (center + day) / length in
                 (day, sin(2.0 * pi * turn))
             )
             |> list()
     )
-    image.text(-wide + 10.0 * double(i), 1.45, 13.0, label)
+    image.text(-wide + 10.0 * i, 1.45, 13.0, label)
 od
 
 image.color(60ub, 60ub, 60ub)

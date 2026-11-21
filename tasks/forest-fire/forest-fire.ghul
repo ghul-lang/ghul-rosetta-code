@@ -75,7 +75,7 @@ draw(image: IMAGE, forest: Forest) is
             let x = double(column * cell)
             let y = double(row * cell)
 
-            image.fill_rectangle(x, y, x + double(cell), y + double(cell))
+            image.fill_rectangle(x, y, x + cell, y + cell)
         od
     od
 si

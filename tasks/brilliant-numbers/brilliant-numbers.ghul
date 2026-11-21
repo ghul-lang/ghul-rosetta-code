@@ -20,7 +20,7 @@ si
 power_of_ten(n: int) -> int => repeat(10, n) |> product()
 
 products(group: int[]) -> long{} => [
-    long(p) * long(q)
+    p * long(q)
     for (i, p) in group |> index()
     for q in group |> skip(i)
 ]

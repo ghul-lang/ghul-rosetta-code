@@ -22,9 +22,9 @@ project(p: Point) -> Flat =>
 corner(i: int, j: int, k: int) -> Flat =>
     project(
         (
-            x = width * double(i) - width / 2.0,
-            y = height * double(j) - height / 2.0,
-            z = depth * double(k) - depth / 2.0
+            x = width * i - width / 2.0,
+            y = height * j - height / 2.0,
+            z = depth * k - depth / 2.0
         )
     )
 

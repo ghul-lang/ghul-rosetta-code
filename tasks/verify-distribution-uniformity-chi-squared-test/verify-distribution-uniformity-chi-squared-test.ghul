@@ -44,7 +44,7 @@ upper_gamma(a: double, x: double) -> double is
     let h mut = dd
 
     for i in 1::200 do
-        let an = -double(i) * (double(i) - a)
+        let an = -double(i) * (i - a)
 
         b = b + 2.0
         dd = an * dd + b
@@ -61,10 +61,9 @@ si
 chi_squared(counts: int[]) -> double =>
     let
         total = double(counts |> sum()),
-        expected = total / double(counts.count)
+        expected = total / counts.count
     in
-        counts
-            |> sum_by(k => let e = double(k) - expected in e * e / expected)
+        counts |> sum_by(k => let e = k - expected in e * e / expected)
 
 is_uniform(counts: int[], significance: double) -> bool =>
     let freedom = double(counts.count - 1) in

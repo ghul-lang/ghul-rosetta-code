@@ -22,7 +22,7 @@ draw_spinner(image, cx, cy, angle) is
     image.stroke(1.0)
 
     for s in 0..spokes do
-        let a = double(s) * 360.0 / double(spokes) * pi / 180.0
+        let a = s * 360.0 / spokes * pi / 180.0
         image.line(cx, cy, cx + radius * cos(a), cy + radius * sin(a))
     od
 
@@ -46,8 +46,8 @@ for frame in 0..frames do
 
     for ci in 0..centers.count - 1 do
         let c = centers[ci]
-        let step = 360.0 / double(frames)
-        let angle = double(frame) * step + double(ci) * 30.0
+        let step = 360.0 / frames
+        let angle = frame * step + ci * 30.0
         draw_spinner(image, c.x, c.y, angle)
     od
 

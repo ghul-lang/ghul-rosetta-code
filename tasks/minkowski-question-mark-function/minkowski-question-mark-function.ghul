@@ -28,7 +28,7 @@ question(x: double) -> double is
         let m = p + r
         let n = q + s
 
-        if x < double(m) / double(n) then
+        if x < m / double(n) then
             r = m
             s = n
         else
@@ -86,10 +86,7 @@ inverse(y: double) -> double is
         return 0.0
     fi
 
-    y
-        |> terms()
-        |> reverse()
-        |> reduce(0.0, (x, term) => 1.0 / (double(term) + x))
+    y |> terms() |> reverse() |> reduce(0.0, (x, term) => 1.0 / (term + x))
 si
 
 let phi = (1.0 + sqrt(5.0)) / 2.0
@@ -138,7 +135,7 @@ image.color(30ub, 70ub, 160ub)
 image.stroke(1.6)
 image.line(
     0..1201
-        |> map(step => double(step) / 1200.0)
+        |> map(step => step / 1200.0)
         |> map(x => (x = x, y = question(x)))
         |> list()
 )

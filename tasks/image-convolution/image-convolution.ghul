@@ -6,7 +6,7 @@ scene() -> IMAGE is
     let image = IMAGE(160, 120)
 
     for y in 0..80 do
-        let t = double(y) / 80.0
+        let t = y / 80.0
 
         image.color(
             ubyte(40.0 + 200.0 * t),

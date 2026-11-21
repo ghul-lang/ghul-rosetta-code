@@ -24,15 +24,14 @@ without(left: RealSet, right: RealSet) -> RealSet =>
     value => left(value) /\ !right(value)
 
 samples(low: double, high: double, steps: int) -> double{} =>
-    (0::steps)
-        |> map(step => low + (high - low) * double(step) / double(steps))
+    (0::steps) |> map(step => low + (high - low) * step / steps)
 
 is_empty(set: RealSet, low: double, high: double, steps: int) -> bool =>
     samples(low, high, steps) |> all(value => !set(value))
 
 extent(set: RealSet, low: double, high: double, steps: int) -> double =>
     let inside = samples(low, high, steps) |> filter(set) |> count() in
-    (high - low) * double(inside) / double(steps)
+    (high - low) * inside / steps
 
 let examples = [
     (

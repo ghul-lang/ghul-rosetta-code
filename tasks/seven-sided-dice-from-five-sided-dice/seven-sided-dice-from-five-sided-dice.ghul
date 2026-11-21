@@ -26,7 +26,7 @@ check_distribution(
             |> map(entry => (entry.key, entry.value.count))
             |> MAP()
 
-    let expected = double(calls) / double(counts.count)
+    let expected = calls / double(counts.count)
     let uniform mut = true
 
     for value in counts.keys |> sort() do

@@ -36,13 +36,13 @@ smallest_root(base) =>
 for base in 2::13 do
     let found =
         for root in from(smallest_root(base)) do
-            if is_pandigital(long(root) * long(root), base) then
+            if is_pandigital(root * long(root), base) then
                 break root
             fi
         od
 
     let root = found!
-    let square = long(root) * long(root)
+    let square = root * long(root)
 
     write_line(
         "base {base,2}: {in_base(long(root), base),9} squared is "

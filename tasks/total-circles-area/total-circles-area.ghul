@@ -138,7 +138,7 @@ for arc in arcs do
     image.line(
         (0::32)
             |> map(i =>
-                let t = double(i) / 32.0 in
+                let t = i / 32.0 in
                 on(c, arc.from + (arc.to - arc.from) * t)
             )
             |> list()

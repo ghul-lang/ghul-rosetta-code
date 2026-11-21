@@ -14,7 +14,7 @@ tanh_sinh(
 
     weighted(i) =>
         let
-            t = double(i) * h,
+            t = i * h,
             s = sinh(t) * quarter_turn,
             cosh_s = cosh(s),
             slope = cosh(t) * quarter_turn / (cosh_s * cosh_s)

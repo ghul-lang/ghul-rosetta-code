@@ -130,7 +130,7 @@ for row in 0..rows do
             image.color(255ub, 255ub, 255ub)
         fi
 
-        image.fill_rectangle(x, y, x + double(cell), y + double(cell))
+        image.fill_rectangle(x, y, x + cell, y + cell)
     od
 od
 

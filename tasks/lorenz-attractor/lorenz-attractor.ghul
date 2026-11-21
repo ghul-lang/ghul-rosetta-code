@@ -51,7 +51,7 @@ image.view(-22.0, 0.0, 22.0, 55.0)
 image.stroke(1.0)
 
 for at in 0..path.count - 1 do
-    let part = double(at) / double(path.count)
+    let part = at / double(path.count)
     let from = path[at]
     let to = path[at + 1]
 

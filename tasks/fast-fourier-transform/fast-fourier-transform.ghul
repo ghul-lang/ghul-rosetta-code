@@ -8,7 +8,7 @@ every_other(x: complex[], start: int) -> complex[] =>
         |> list()
 
 twiddle(k: int, n: int) -> complex =>
-    complex.from_polar_coordinates(1.0, -2.0 * pi * double(k) / double(n))
+    complex.from_polar_coordinates(1.0, -2.0 * pi * k / n)
 
 fft(x: complex[]) -> complex[] is
     let n = x.count

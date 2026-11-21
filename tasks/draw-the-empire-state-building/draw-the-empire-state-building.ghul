@@ -55,8 +55,8 @@ let window_width = 4.0
 
 let floor mut = 1
 
-while double(floor) * floor_height < 340.0 do
-    let y = double(floor) * floor_height
+while floor * floor_height < 340.0 do
+    let y = floor * floor_height
     let tier = tiers |> find(t => t.top > y + floor_height)
 
     if let t = tier /\ t.half_width > 8.0 then

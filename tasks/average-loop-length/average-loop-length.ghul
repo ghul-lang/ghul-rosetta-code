@@ -17,8 +17,7 @@ loop_length(n) => (
     length
 )
 
-simulated(n) =>
-    double(1::trials |> sum_by(_ => loop_length(n))) / double(trials)
+simulated(n) => double(1::trials |> sum_by(_ => loop_length(n))) / trials
 
 analytical(n) =>
     let size = double(n) in

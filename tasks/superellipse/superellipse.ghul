@@ -15,7 +15,7 @@ shaped(turn: double, half_axis: double) -> double => (
 outline(steps: int) -> (x: double, y: double){} =>
     (0::steps)
         |> map(step => (
-            let angle = 2.0 * pi * double(step) / double(steps)
+            let angle = 2.0 * pi * step / steps
 
             (x = shaped(cos(angle), a), y = shaped(sin(angle), b))
         ))

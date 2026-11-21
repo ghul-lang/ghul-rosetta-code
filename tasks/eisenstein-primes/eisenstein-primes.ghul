@@ -13,9 +13,9 @@ is_eisenstein_prime(e) =>
         is_prime(norm(e))
     fi
 
-real(e) => double(e.a) - double(e.b) / 2.0
+real(e) => e.a - e.b / 2.0
 
-imaginary(e) => double(e.b) * sqrt(3.0) / 2.0
+imaginary(e) => e.b * sqrt(3.0) / 2.0
 
 show(e) =>
     let
