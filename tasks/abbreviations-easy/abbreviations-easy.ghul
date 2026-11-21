@@ -1,5 +1,4 @@
 use default
-use System
 
 let table =
     "Add ALTer  BAckup Bottom  CAppend Change SCHANGE  CInsert CLAst "
@@ -28,7 +27,7 @@ matches(command: (word: string, minimum: int), word: string) -> bool =>
     string.compare(
         command.word.substring(0, word.length),
         word,
-        StringComparison.ORDINAL_IGNORE_CASE
+        Text.StringComparison.ORDINAL_IGNORE_CASE
     ) == 0
 
 expand(word) =>
