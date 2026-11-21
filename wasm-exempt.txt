@@ -50,10 +50,3 @@ variable-size-get                      size_of[decimal]
 # Output that differs on wasm.
 thiele-s-interpolation-formula         core trig differs from glibc by 1 ulp
 
-# Type inference that fails on the wasm target and not on .NET.
-averages-simple-moving-average         cannot return '_' where '_' expected
-digital-root                           no static overload found
-happy-numbers                          '_' is not assignable to '_'
-iterated-digits-squaring               '_' is not assignable to '_'
-matrix-multiplication                  no static overload found for join
-padovan-n-step-number-sequences        cannot infer type
