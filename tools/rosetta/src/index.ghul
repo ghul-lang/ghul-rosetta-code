@@ -324,7 +324,7 @@ namespace Rosetta is
                 for line in IO.File.read_all_lines(file) do
                     let hash = line.index_of('#')
                     let text = if hash >= 0 then line.substring(0, hash) else line fi
-                    let words = text.split([' ', '\t'], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+                    let words = text.split([' ', '\t'], Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 
                     if words.count > 0 then
                         exempt.add(words[0])
