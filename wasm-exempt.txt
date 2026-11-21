@@ -48,7 +48,6 @@ variable-size-set                      decimal.min_value
 variable-size-get                      size_of[decimal]
 
 # Output that differs on wasm.
-show-the-epoch                         enum display name differs (Utc vs UTC)
 thiele-s-interpolation-formula         core trig differs from glibc by 1 ulp
 
 # Type inference that fails on the wasm target and not on .NET.
