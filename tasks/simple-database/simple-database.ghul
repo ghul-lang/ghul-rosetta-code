@@ -1,7 +1,6 @@
 use default
 use Time.DateTime
 use System.Environment
-use System.Environment_SpecialFolder.USER_PROFILE
 
 class ENTRY(date: DateTime, category: string, description: string) is
     line: string => "{date:yyyy-MM-dd}\t{category}\t{description}"
@@ -113,7 +112,9 @@ entry(args: string[]) -> int is
     let file =
         stored ??
         IO.Path.combine(
-            Environment.get_folder_path(USER_PROFILE),
+            Environment.get_environment_variable(
+                "HOME"
+            ) ?? Environment.current_directory,
             ".simple-database"
         )
 

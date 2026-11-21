@@ -1,32 +1,24 @@
 use default
-use System.Text.Json.Nodes
 
 let text =
     "{{\"name\": \"Ada\", \"age\": 36, "
     "\"languages\": [\"Ada\", \"ghūl\"]}}"
 
-let parsed =
-    JsonNode.parse(
-        text,
-        null,
-        _[System.Text.Json.JsonDocumentOptions]
-    )!.as_object()
-let languages = parsed["languages"]!.as_array()
+let parsed = Json.parse(text)
+let languages = Json.as_array(Json.get(parsed, "languages")!)!
 
-write_line("name = {parsed["name"]!.get_value[string]()}")
-write_line("age = {parsed["age"]!.get_value[int]()}")
-write_line("first language = {languages[0]!.get_value[string]()}")
+write_line("name = {Json.as_string(Json.get(parsed, "name")!)}")
+write_line("age = {int(Json.as_number(Json.get(parsed, "age")!)!)}")
+write_line("first language = {Json.as_string(languages[0])}")
 
-let created = JsonObject(null)
+let created = Json.object()
 
-created["title"] = JsonValue.create("Rosetta Code", null)
-created["year"] = JsonValue.create(2007, null)
+Json.set(created, "title", Json.of("Rosetta Code"))
+Json.set(created, "year", Json.of(2007))
+Json.set(
+    created,
+    "tags",
+    Json.array([Json.of("wiki"), Json.of("programming")])
+)
 
-let tags = JsonArray(null)
-
-tags.add(JsonValue.create("wiki", null))
-tags.add(JsonValue.create("programming", null))
-
-created["tags"] = tags
-
-write_line(created.to_json_string(null))
+write_line(Json.write(created))
