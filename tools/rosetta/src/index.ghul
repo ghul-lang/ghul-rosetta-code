@@ -31,9 +31,14 @@ namespace Rosetta is
         // Whether the program draws with ghul.raster.
         raster: bool
 
+        // The files that test the program, each by its path relative to the
+        // program's directory and the path of the file in the repository.
+        tests: LIST[(name: string, path: string)]
+
         init(
             id: string, heading: string?, source: string, output: string, lines: int, playground: bool, input: bool,
-            images: LIST[string], files: LIST[(name: string, path: string)], args: LIST[string], raster: bool
+            images: LIST[string], files: LIST[(name: string, path: string)], args: LIST[string], raster: bool,
+            tests: LIST[(name: string, path: string)]
         ) is
             self.id = id
             self.heading = heading
@@ -46,6 +51,7 @@ namespace Rosetta is
             self.files = files
             self.args = args
             self.raster = raster
+            self.tests = tests
         si
     si
 
@@ -300,6 +306,17 @@ namespace Rosetta is
 
                 write_strings(writer, "args", part.args)
                 writer.write_boolean("raster", part.raster)
+
+                writer.write_start_array("tests")
+
+                for file in part.tests do
+                    writer.write_start_object()
+                    writer.write_string("name", file.name)
+                    writer.write_string("path", file.path)
+                    writer.write_end_object()
+                od
+
+                writer.write_end_array()
                 writer.write_end_object()
             od
 
@@ -443,9 +460,55 @@ namespace Rosetta is
                     images,
                     files_of(directory, id),
                     lines_of(IO.Path.combine(directory, "run.args")),
-                    _uses_raster(IO.Path.combine(directory, "{name}.ghulproj"))
+                    _uses_raster(IO.Path.combine(directory, "{name}.ghulproj")),
+                    tests_of(directory)
                 )
         si
+
+        // The files ghul-test reads to run and judge the program: what it is
+        // expected to print, write and exit with, on any target or one alone,
+        // what it is given to read and run with, and the directory it runs
+        // in. A symbolic link is followed, as for playground-files.
+        tests_of(directory: string) -> LIST[(name: string, path: string)] is
+            let tests = LIST[(name: string, path: string)]()
+
+            let add = (full: string) is
+                let target = IO.File.resolve_link_target(full, true)
+                let resolved = if let t = target then t.full_name else full fi
+
+                let name = IO.Path.get_relative_path(directory, full).replace('\\', '/')
+
+                tests.add((name = name, path = relative(resolved)))
+            si
+
+            for full in IO.Directory.get_files(directory) do
+                if is_test_file(IO.Path.get_file_name(full) ?? "") then
+                    add(full)
+                fi
+            od
+
+            let fixture = IO.Path.combine(directory, "fixture")
+
+            if IO.Directory.exists(fixture) then
+                for full in IO.Directory.get_files(fixture, "*", IO.SearchOption.ALL_DIRECTORIES) do
+                    add(full)
+                od
+            fi
+
+            tests.sort(
+                (a: (name: string, path: string), b: (name: string, path: string)) -> int =>
+                    string.compare_ordinal(a.name, b.name))
+
+            return tests
+        si
+
+        // Whether `name` is one of the files ghul-test reads beside a test's
+        // sources to run and judge the program.
+        is_test_file(name: string) -> bool =>
+            name =~ "run.in" \/ name =~ "run.args" \/ name =~ "run.session" \/ name =~ "run.check" \/
+            name =~ "ignore-space" \/ name =~ "cultures" \/ name.ends_with(".png.expected") \/
+            Regex.is_match(name, "^run(\\.(dotnet|wasm|llvm))?\\.expected$") \/
+            Regex.is_match(name, "^run\\.(exit|err)(\\.(dotnet|wasm|llvm))?\\.expected$")
 
         // The files playground-files names, one per line relative to the
         // program's directory. A symbolic link is followed to the file it

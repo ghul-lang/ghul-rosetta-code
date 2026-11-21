@@ -370,11 +370,15 @@ and describes them. They are not tags, because they are derived rather than writ
 `task.json`, and the playground and the site compare tags to find tasks that are alike, which every
 task would be on these.
 
-Three fields on each part say what a reader needs to build and run it away from this repository:
+Four fields on each part say what a reader needs to build, run and test it away from this repository:
 `files`, each file named in the part's `playground-files` as the `name` the program opens it under
 and the `path` of the file in the repository, with a symbolic link followed to the file it names;
-`args`, the lines of `run.args`, the command line the part is run with; and `raster`, whether its
-project references ghul.raster. The index's own `commit` is the commit it was generated from, which
+`args`, the lines of `run.args`, the command line the part is run with; `raster`, whether its
+project references ghul.raster; and `tests`, the files ghul-test reads to run and judge the part -
+`run.expected` and its per-target forms, `run.exit.expected`, `run.err.expected`, `run.in`,
+`run.args`, `run.session`, `run.check`, `ignore-space`, `cultures`, each `.png.expected` and
+everything under `fixture/` - each as its `name`, the path relative to the part's directory, and the
+`path` of the file in the repository. The index's own `commit` is the commit it was generated from, which
 `index.yml` passes as `--commit`, so the paths can be fetched as they stood when the index was
 written. It is null in an index generated without one. `compiler_version`, `runtime_version` and
 `raster_version` are the ghul.compiler, ghul.runtime and ghul.raster releases the tasks are built and
