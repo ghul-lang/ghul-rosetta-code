@@ -11,13 +11,13 @@ pell(n: int) -> (x: bigint, y: bigint) is
         z = (n - y * y) / z
         r = (root + y) / z
 
-        (e1, e2) = (e2, e1 + e2 * bigint(r))
-        (f1, f2) = (f2, f1 + f2 * bigint(r))
+        (e1, e2) = (e2, e1 + e2 * r)
+        (f1, f2) = (f2, f1 + f2 * r)
 
-        let x = e2 + f2 * bigint(root)
+        let x = e2 + f2 * root
         let b = f2
 
-        if x * x - bigint(n) * b * b =~ 1n then
+        if x * x - n * b * b =~ 1n then
             return (x, b)
         fi
     od

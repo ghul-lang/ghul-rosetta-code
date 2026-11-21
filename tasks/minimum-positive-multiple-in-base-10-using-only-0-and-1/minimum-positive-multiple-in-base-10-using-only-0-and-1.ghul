@@ -51,6 +51,6 @@ let numbers = [
 
 for n in numbers do
     let multiple = b10(n)
-    let multiplier = bigint.parse(multiple) / bigint(n)
+    let multiplier = bigint.parse(multiple) / n
     write_line("{n,5}: {multiple} = {n} * {multiplier}")
 od

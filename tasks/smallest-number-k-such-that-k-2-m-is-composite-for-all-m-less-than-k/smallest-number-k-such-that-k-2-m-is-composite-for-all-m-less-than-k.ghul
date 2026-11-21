@@ -6,7 +6,7 @@ has_small_factor(k: int, m: int, powers: int[]) -> bool =>
     (0..small_primes.count)
         |> any(i =>
             (k + powers[i]) % small_primes[i] == 0 /\
-            bigint(k) + bigint.pow(2n, m) !~ bigint(small_primes[i])
+            k + bigint.pow(2n, m) !~ bigint(small_primes[i])
         )
 
 always_composite(k: int) -> bool is
@@ -19,7 +19,7 @@ always_composite(k: int) -> bool is
 
         if
             !has_small_factor(k, m, powers) /\
-            is_prime(bigint(k) + bigint.pow(2n, m))
+            is_prime(k + bigint.pow(2n, m))
         then
             return false
         fi

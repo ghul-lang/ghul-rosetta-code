@@ -11,7 +11,7 @@ row_of(n: int) -> bigint{} is
         for k in 1::step do
             let above = if k < row.count then row[k] else 0n fi
 
-            following.add(bigint(k) * above + row[k - 1])
+            following.add(k * above + row[k - 1])
         od
 
         row = following

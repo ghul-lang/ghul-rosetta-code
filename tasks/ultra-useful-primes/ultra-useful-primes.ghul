@@ -2,9 +2,7 @@ use default
 
 ultra_useful(n) =>
     let power = bigint.pow(2n, 1 << n) in
-    from(0)
-        |> map(i => 2 * i + 1)
-        |> find(k => is_prime(power - bigint(k)))!
+    from(0) |> map(i => 2 * i + 1) |> find(k => is_prime(power - k))!
 
 write_line(" n     k")
 

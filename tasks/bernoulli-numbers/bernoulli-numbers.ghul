@@ -16,7 +16,7 @@ fraction(numerator, denominator) =>
     )
 
 *(k: int, a: FRACTION) -> FRACTION =>
-    fraction(bigint(k) * a.numerator, a.denominator)
+    fraction(k * a.numerator, a.denominator)
 
 bernoulli(n) is
     let a = 0::n |> map(m => fraction(1n, bigint(m + 1))) |> LIST()

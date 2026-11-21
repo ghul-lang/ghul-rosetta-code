@@ -19,7 +19,7 @@ squfof(n: bigint) -> bigint? is
     let bound = 3n * isqrt(8n * s)
 
     for k in multipliers do
-        let d = bigint(k) * n
+        let d = k * n
         let p0 = isqrt(d)
         let p mut = p0
         let p_previous mut = p0

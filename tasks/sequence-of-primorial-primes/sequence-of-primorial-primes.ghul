@@ -5,7 +5,7 @@ let primorial mut = 1n
 let index mut = 0
 
 for p in primes() do
-    primorial = primorial * bigint(p)
+    primorial = primorial * p
     index = index + 1
 
     let below = is_prime(primorial - 1n)
