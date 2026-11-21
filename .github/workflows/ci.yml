@@ -279,6 +279,52 @@ jobs:
       run: scripts/wasm-tasks.sh --check
 
 
+  # A solution fetched the way a reader fetches one, with `ghul rosetta`
+  # from the released ghul.cli, built and checked with `ghul test` against
+  # the tests the repository holds for it. The index is generated from the
+  # change rather than read from the published one, so a change that would
+  # leave a fetched solution unbuildable or untestable fails here, before
+  # the index carrying it is published.
+  fetch:
+    name: Fetched as a project
+
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [wasm, llvm]
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Install ghul.cli
+      shell: bash
+      run: |
+        dotnet tool install --global ghul.cli
+        echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+
+    - name: Install what the target runs with
+      shell: bash
+      run: |
+        if [ "${{ matrix.target }}" = wasm ] ; then
+            ghul install node
+        else
+            ghul install llvm
+        fi
+
+    - name: Fetch and test a sample of solutions
+      shell: bash
+      run: scripts/fetch-check.sh --target ${{ matrix.target }}
+
+
   # The rules a machine can settle: no line past the limit, and every source
   # laid out as the formatter writes it. The first two had a check before
   # this job existed and neither was run by anything, so both drifted -
@@ -322,7 +368,7 @@ jobs:
   # `always()` is load-bearing: a skipped job satisfies a required check, so
   # without it anything that skipped the shards would show green here.
   build:
-    needs: [changes, task_shards, touched_tasks, wasm_shards, wasm_touched, index, hygiene]
+    needs: [changes, task_shards, touched_tasks, wasm_shards, wasm_touched, index, fetch, hygiene]
 
     if: always()
 
@@ -340,6 +386,7 @@ jobs:
         WASM: ${{ needs.wasm_shards.result }}
         WASM_TOUCHED: ${{ needs.wasm_touched.result }}
         INDEX: ${{ needs.index.result }}
+        FETCH: ${{ needs.fetch.result }}
         HYGIENE: ${{ needs.hygiene.result }}
       run: |
         set -uo pipefail
@@ -350,6 +397,7 @@ jobs:
         echo "wasm shards: $WASM"
         echo "wasm touched: $WASM_TOUCHED"
         echo "index: $INDEX"
+        echo "fetch: $FETCH"
         echo "hygiene: $HYGIENE"
 
         # Exactly one of the two test jobs runs, and the other must have
@@ -374,6 +422,7 @@ jobs:
             && [ "$WASM_WANTED" = success ] \
             && [ "$WASM_OTHER" = skipped ] \
             && [ "$INDEX" = success ] \
+            && [ "$FETCH" = success ] \
             && [ "$HYGIENE" = success ]
 
 
