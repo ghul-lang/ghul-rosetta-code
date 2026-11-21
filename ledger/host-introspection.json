@@ -3,5 +3,5 @@
   "slug": "host-introspection",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: the hosts that run this are all 64-bit and little-endian, so the word size and the endianness are the same every run",
-  "published_hash": "2e9dc9b4c7ec32208d9b96482278259a4fbe8b5de2b8518ad5a86e6ad9bb60f4"
+  "published_hash": "947772e75022d12cd663c2a0ac1eb3e41443b5bc4ef64f959fcbb4e71e053e69"
 }
