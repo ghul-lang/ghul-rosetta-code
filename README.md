@@ -340,13 +340,15 @@ Everything else in an index entry comes from the task's files: its parts, source
 the playground can run it (no `playground-unsupported` marker).
 
 `wasm` on each part is true when the playground runs that part compiled to WebAssembly: every part
-it can run at all (no `playground-unsupported` marker) unless `wasm-exempt.txt` lists it. CI builds
+it can run at all (no `playground-unsupported` marker) unless `wasm-exempt.txt` or `wasm-never.txt`
+lists it. CI builds
 and runs each of those parts for wasm, against the compiler and the ghul-runtime and ghul-raster
 sources at the versions this repository pins, and under Node, so a part the index marks `wasm` has
 passed there: its output matched `run.expected` and every image it wrote its `.png.expected`. An
 expectation only one target produces goes in a file named for it, such as `warn.wasm.expected`.
-`wasm-exempt.txt` names one part a line, by its `id` in the index, followed by why it can't run on
-wasm; the playground runs those on .NET. `scripts/wasm-tasks.sh` lists the parts to run:
+Each of those two files names one part a line, by its `id` in the index, followed by why it can't
+run on wasm; the playground runs those on .NET. `wasm-exempt.txt` holds the parts that could run on
+wasm once something is fixed or added, and `wasm-never.txt` the ones no browser can run. `scripts/wasm-tasks.sh` lists the parts to run:
 
 ```sh
 dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh)               # every one

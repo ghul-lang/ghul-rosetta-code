@@ -1,0 +1,12 @@
+# Programs no browser can run, which the playground always runs on .NET,
+# one a line: the program's id in the index, then why. The programs that
+# could run on wasm once something is fixed or added are in
+# wasm-exempt.txt instead.
+
+# Threads that share memory, which a browser page does not have.
+multiton                               Tasks.Parallel
+parallel-brute-force                   Tasks.Parallel
+szymanskis-algorithm                   Interlocked
+
+# The machine's name, which a browser does not give a page.
+hostname                               System.Net

@@ -308,29 +308,34 @@ namespace Rosetta is
         si
 
         // Whether the playground runs `part` compiled to WebAssembly: every
-        // program it can run at all, unless wasm-exempt.txt lists it. CI
+        // program it can run at all, unless wasm-exempt.txt or
+        // wasm-never.txt lists it. CI
         // builds and runs each of the others for wasm, so none is listed
         // that does not pass there.
         runs_on_wasm(part: INDEX_PART) -> bool => part.playground /\ !_wasm_exempt.contains(part.id)
 
-        // The programs wasm-exempt.txt lists as not running correctly when
-        // compiled for WebAssembly, by part id: the first word of each line,
-        // with anything after a # ignored. None when there is no such file.
+        // The programs wasm-exempt.txt and wasm-never.txt list as not
+        // running correctly when compiled for WebAssembly, by part id: the
+        // first word of each line, with anything after a # ignored. A
+        // missing file lists none.
         wasm_exempt(root: string) -> SET[string] is
             let exempt = SET[string]()
-            let file = IO.Path.combine(root, "wasm-exempt.txt")
 
-            if IO.File.exists(file) then
-                for line in IO.File.read_all_lines(file) do
-                    let hash = line.index_of('#')
-                    let text = if hash >= 0 then line.substring(0, hash) else line fi
-                    let words = text.split([' ', '\t'], Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+            for list in ["wasm-exempt.txt", "wasm-never.txt"] do
+                let file = IO.Path.combine(root, list)
 
-                    if words.count > 0 then
-                        exempt.add(words[0])
-                    fi
-                od
-            fi
+                if IO.File.exists(file) then
+                    for line in IO.File.read_all_lines(file) do
+                        let hash = line.index_of('#')
+                        let text = if hash >= 0 then line.substring(0, hash) else line fi
+                        let words = text.split([' ', '\t'], Text.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
+
+                        if words.count > 0 then
+                            exempt.add(words[0])
+                        fi
+                    od
+                fi
+            od
 
             return exempt
         si
