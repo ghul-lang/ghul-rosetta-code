@@ -46,6 +46,7 @@ szymanskis-algorithm                   Interlocked
 calculating-the-value-of-e             a decimal field
 hickerson-series-of-almost-integers    decimal(int)
 literals-floating-point                decimal literals
+test-integerness                       decimal.truncate
 variable-size-set                      decimal.min_value
 
 # Output that differs on wasm.
@@ -53,17 +54,7 @@ distance-and-bearing                   regex lookbehind is not supported
 show-the-epoch                         DateTime display
 thiele-s-interpolation-formula         last digit of a round-tripped double
 
-# The project sets a property the direct build cannot read, so CI passes
-# the program over for wasm and nothing checks it there.
-compare-sorting-algorithms-performance TieredCompilation
-executable-library/01-the-library      PackageId
-extreme-floating-point-values          InvariantGlobalization
-formatted-numeric-output               InvariantGlobalization
-infinity                               InvariantGlobalization
-test-integerness                       InvariantGlobalization
-
 # Type inference that fails on the wasm target and not on .NET.
-15-puzzle-game                         cannot infer type
 averages-simple-moving-average         cannot return '_' where '_' expected
 digital-root                           no static overload found
 happy-numbers                          '_' is not assignable to '_'
