@@ -44,7 +44,7 @@ bare_letters(text: string) -> string =>
     text.normalize(NormalizationForm.FORM_D)
         |> filter(letter =>
             CharUnicodeInfo.get_unicode_category(letter) !=
-                UnicodeCategory.NON_SPACING_MARK)
+                Text.UnicodeCategory.NON_SPACING_MARK)
         |> join("")
 
 without_leading_article(text: string) -> string =>

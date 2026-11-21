@@ -8,7 +8,7 @@ use default
 @suppress("non-snake-case-name")
 BadlyNamed() -> string => "declared with a name the convention rejects"
 
-@System.Obsolete("superseded, but still callable")
+@Ghul.Obsolete("superseded, but still callable")
 superseded() -> string => "carrying a .NET attribute"
 
 @equality()

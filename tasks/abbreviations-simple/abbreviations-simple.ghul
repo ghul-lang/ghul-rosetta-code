@@ -1,5 +1,4 @@
 use default
-use System
 
 let table =
     "add 1  alter 3  backup 2  bottom 1  Cappend 2  change 1  Schange  "
@@ -36,7 +35,7 @@ matches(command, word) =>
     string.compare(
         command.word.substring(0, word.length),
         word,
-        StringComparison.ORDINAL_IGNORE_CASE
+        Text.StringComparison.ORDINAL_IGNORE_CASE
     ) == 0
 
 expand(word: string) -> string =>
