@@ -20,7 +20,7 @@ multifactorial(value: bigint, step: int) -> bigint => (
 
     while term > 0n do
         product = product * term
-        term = term - bigint(step)
+        term = term - step
     od
 
     product

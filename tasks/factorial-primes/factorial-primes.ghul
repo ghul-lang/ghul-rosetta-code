@@ -5,7 +5,7 @@ factorial_primes() -> (n: int, sign: int, value: bigint){} is
     let n mut = 1
 
     do
-        fact = fact * bigint(n)
+        fact = fact * n
 
         if is_prime(fact - 1n) then
             yield (n = n, sign = -1, value = fact - 1n)

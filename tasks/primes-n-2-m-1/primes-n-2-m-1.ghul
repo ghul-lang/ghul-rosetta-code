@@ -11,7 +11,7 @@ abbreviated(p) =>
 for n in 1::50 do
     let (m, p) =
         from(0)
-            |> map(m => (m, bigint(n) * bigint.pow(2n, m) + 1n))
+            |> map(m => (m, n * bigint.pow(2n, m) + 1n))
             |> find((_, p) => is_prime(p))!
 
     write_line("n: {n,2} m: {m,3} p: {abbreviated(p)}")

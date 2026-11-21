@@ -5,7 +5,7 @@ struct RATIONAL is
     denominator: bigint
 
     init(n: bigint, d: bigint) is
-        let divisor = bigint.greatest_common_divisor(n, d) * bigint(d.sign)
+        let divisor = bigint.greatest_common_divisor(n, d) * d.sign
         numerator = n / divisor
         denominator = d / divisor
     si

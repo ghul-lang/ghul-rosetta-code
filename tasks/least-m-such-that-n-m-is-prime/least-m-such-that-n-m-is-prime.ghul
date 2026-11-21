@@ -5,7 +5,7 @@ has_factor_up_to(m: int, n: int) -> bool => 2::n |> any(p => m % p == 0)
 least_m(n: int, factorial: bigint) -> int =>
     from(1)
         |> filter(m => m == 1 \/ !has_factor_up_to(m, n))
-        |> find(m => is_prime(factorial + bigint(m)))!
+        |> find(m => is_prime(factorial + m))!
 
 terms() -> (n: int, m: int){} =>
     from(0) |> map(n => (n = n, m = least_m(n, factorial(bigint(n)))))

@@ -28,8 +28,7 @@ brent_mcmillan(digits) is
     let n = 32n
 
     let ln_2 =
-        1::(4 * digits)
-            |> sum_by(k => scale / (bigint(k) * bigint.pow(2n, k)))
+        1::(4 * digits) |> sum_by(k => scale / (k * bigint.pow(2n, k)))
 
     let a mut = -5n * ln_2
     let b mut = scale

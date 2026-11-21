@@ -65,7 +65,7 @@ exp(x: bigint) -> bigint is
     let n mut = 1
 
     while term !~ 0n do
-        term = term * small / scale / bigint(n)
+        term = term * small / scale / n
         total = total + term
         n = n + 1
     od
@@ -92,7 +92,7 @@ show(heegner: int, value: bigint) =>
 let pi_value = pi()
 
 for heegner in [19, 43, 67, 163] do
-    let root = integer_sqrt(bigint(heegner) * scale * scale)
+    let root = integer_sqrt(heegner * scale * scale)
 
     show(heegner, exp(pi_value * root / scale))
 od

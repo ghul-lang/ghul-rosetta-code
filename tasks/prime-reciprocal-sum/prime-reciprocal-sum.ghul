@@ -1,7 +1,7 @@
 use default
 
 next_prime(n: bigint) -> bigint =>
-    from(0) |> map(k => n + bigint(k)) |> find(is_prime)!
+    from(0) |> map(k => n + k) |> find(is_prime)!
 
 reciprocal_primes() -> bigint{} is
     let numerator mut = 1n

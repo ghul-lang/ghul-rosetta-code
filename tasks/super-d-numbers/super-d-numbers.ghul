@@ -5,7 +5,7 @@ super_d(d: int) -> long{} =>
     from(1)
         |> map(long)
         |> filter(n =>
-            let value = bigint(d) * bigint.pow(bigint(n), d) in
+            let value = d * bigint.pow(bigint(n), d) in
             value.to_string().contains(run)
         )
 

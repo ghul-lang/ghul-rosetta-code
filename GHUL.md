@@ -15,7 +15,7 @@ These mistakes cost the most rework. A section below explains each one. The last
 - **`write_line` must be imported.** Write `use IO.Std.write_line` before the code that calls it. Or start the file with `use default`, which imports `write_line`, the pipes, the collections and the maths functions.
 - **Strings have no `+` operator.** Join strings with interpolation: `"{a}{b}"`.
 - **`==` on a `string` compares references.** Compare text with `=~`. Use `==` for scalars, enums and references.
-- **Numbers do not convert implicitly.** `1.0 + 1` is an error. Write `1.0 + double(1)` or `cast double(n)`. A big integer is a `bigint`, written with the `n` suffix. Do not use `System.Numerics.BigInteger`.
+- **Numbers widen only in arithmetic and ordering.** `1 + 2.5` is `3.5`: an `int`, `long` or `single` operand widens to the other operand's wider type, and an `int` or `long` widens to `bigint`. Nothing else converts implicitly: `let n: int = 2.5`, `decimal` and the small and unsigned types need `double(n)` or `cast`, and `==` never widens. A big integer is a `bigint`, written with the `n` suffix, and a complex number a `complex`, written `3r + 4j`. Do not use `System.Numerics.BigInteger`.
 - **There is no `new`.** Construct a value by calling its type: `Box(42)`, `LIST[int]()`. `new` is an ordinary identifier.
 - **The closing keyword of a block mirrors its opening keyword**: `is` ... `si`, `if` ... `fi`, `do` ... `od`, `case` ... `esac`, `try` ... `yrt`. There are no braces.
 - **A bare `let` is immutable.** A local declared `let count mut = 0` can be reassigned.
@@ -33,7 +33,7 @@ GHUL.md covers the language that ordinary programs use. Seven further files cove
 | [docs/generics.md](https://github.com/ghul-lang/ghul/blob/main/docs/generics.md) | argument packs, variance, generic-math operator imports, open generics in `typeof`, `size_of` | you are writing generic library code |
 | [docs/async.md](https://github.com/ghul-lang/ghul/blob/main/docs/async.md) | the awaiter pattern, task-like return types and their builders, asynchronous function literals | you are writing a coroutine library or a custom task type |
 | [docs/sessions.md](https://github.com/ghul-lang/ghul/blob/main/docs/sessions.md) | `--submission`, `--cells`, `--session` and `--cell-link`, and the checks each one adds | you are working on the REPL, a notebook kernel or the playground |
-| [docs/dotnet.md](https://github.com/ghul-lang/ghul/blob/main/docs/dotnet.md) | the core type names, attributes and pragmas (`@intrinsic`, `@trusted_store_free()`, `@finalizer()`), `DllImport`, `StructLayout`, `IL.name`, operators declared by .NET types | you are calling .NET libraries beyond the common cases |
+| [docs/dotnet.md](https://github.com/ghul-lang/ghul/blob/main/docs/dotnet.md) | the core type names, attributes and pragmas (`@intrinsic`, `@trusted_store_free()`, `@widening()`, `@widen_operands()`, `@widened_form()`, `@finalizer()`), `DllImport`, `StructLayout`, `IL.name`, operators declared by .NET types | you are calling .NET libraries beyond the common cases |
 | [docs/targets.md](https://github.com/ghul-lang/ghul/blob/main/docs/targets.md) | what each target supports, conditional compilation, what differs on wasm, `@extern` on each target, the llvm options | you are building for WebAssembly or native executables |
 | [docs/details.md](https://github.com/ghul-lang/ghul/blob/main/docs/details.md) | access policy flags, file-level pragmas, doc comment rules, `cast` target inference, synthesised equality and `@equality()`, `@Flags()` operators, `partial` and `impl` blocks, `@precedence`, `Displayable` | you need a specific rule |
 
@@ -275,6 +275,7 @@ ghūl gives the .NET primitive types lowercase names:
 - integers: `byte`, `ubyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `word`, `uword`
 - floating point: `single`, `double` and `decimal`
 - `bigint`, an integer with no fixed width
+- `complex`, a complex number with `double` parts
 - `bool`, `char`, `void`
 
 `string` and `object` are reference types from the .NET base class library.
@@ -290,6 +291,7 @@ let ratio = 123.456;           // double
 let coarse = 123.456s;         // single
 let price = 19.99m;            // decimal
 let huge = 900719925474099n;   // bigint
+let z = 3r + 4j;               // complex
 let letter = 'c';              // char
 let greeting = "hello";        // string
 ```
@@ -318,15 +320,29 @@ od
 write_line("{factorial}");     // 265252859812191058636308480000000
 ```
 
-Mixed operands are an error, exactly as `1.0 + 1` is. If `total` is a `bigint`, `total * 2` is an error; write `total * 2n`. `==` and `!=` on two `bigint`s compare their values, as they do on two `decimal`s, so `factorial(25) == factorial(24) * 25n` is true. `=~` gives the same answer.
+An `int` or `long` operand widens to `bigint` in arithmetic, `%` included, and in ordering, so if `total` is a `bigint`, `total * 2` and `total < 100` are valid. Nothing else mixes with a `bigint`: a `single`, `double` or `decimal` operand is an error, the bitwise operators never widen, and neither does equality, so `total == 2` is an error; write `total == 2n`. `==` and `!=` on two `bigint`s compare their values, as they do on two `decimal`s, so `factorial(25) == factorial(24) * 25n` is true. `=~` gives the same answer.
 
 A fractional literal is a `double` unless it has a suffix: `s` for single, `d` for double, `m` for decimal, in either case. The `m` suffix also works on a literal with only digits, to write an integral decimal (`100m`). Exponent notation is valid: `1.5e3`, `1.5E-3`.
 
-ghūl does not convert between scalar types implicitly. An arithmetic expression with operands of different types is a compile-time error, and needs a `cast`. Upcasting is implicit: a value can be assigned to a variable of any ancestor type. So a `string` can be assigned to an `object` with no cast.
+`complex` is a built-in name for `System.Numerics.Complex`, as `bigint` is for `BigInteger`, and `complex` is the only name for it. The suffixes `r` and `j`, in either case, make a `complex` literal from decimal digits: `2.5r` is the complex number with real part 2.5 and imaginary part zero, and `2.5j` the one with real part zero and imaginary part 2.5. Both suffixes also work on a literal with only digits (`2r`, `3j`) and with an exponent (`1.5e3j`). A complex number with both parts is the sum of the two, `3r + 4j`, or `complex(3.0, 4.0)`.
+
+A `complex`'s arithmetic operators take two `complex` operands, and an `int`, `long`, `single` or `double` operand widens to `complex`, as an `int` widens to `double`: `z * 2` and `1.5 + z` are `complex`. .NET's own mixed `complex` and `double` operators are not imported. A `complex` is also constructed from one `double`, `single`, `int` or `long` as its real part, as in `complex(x)`. Equality doesn't widen: `z == 2.0` is an error.
 
 ```ghul
-let a = 1.0 + 1.0;               // ok, both double
-let b = 1.0 + cast double(1);    // ok, explicit cast
+let z = 3r + 4j;
+
+write_line("{z * z} {z.magnitude} {complex.sqrt(-4r)}");   // <-7; 24> 5 <0; 2>
+```
+
+ghūl converts between scalar types implicitly in one place: an arithmetic or ordering operator whose operands are two of `int`, `long`, `single` and `double` widens the narrower operand, and works in the wider type. `int` widens to `long`, `single` and `double`; `long` to `single` and `double`; `single` to `double`; and each of the four to `complex`; `int` and `long` also widen to `bigint`. So `3 * 0.5` is `1.5`, an `int` times a `long` is a `long`, and `n < 2.5` compares as `double`. Where two results are reachable, the narrower wins: `long * single` and `int * single` are `single`. `%` widens between `int` and `long`, and from either to `bigint`; shifts and the bitwise operators never widen. An operator over the exact operand types is always chosen over a widened one.
+
+Equality doesn't widen. Ordering compares magnitudes, so it widens; `==` compares representation, so its operand types must already match. `i == d` and `i =~ d` with `i: int` and `d: double` are errors: convert one explicitly, as in `double(i) == d`, for value equality. Any other mix, such as `decimal` with `double`, or an assignment of a `double` to an `int`, also needs a `cast`.
+
+Upcasting is implicit: a value can be assigned to a variable of any ancestor type. So a `string` can be assigned to an `object` with no cast.
+
+```ghul
+let a = 1.0 + 1;                 // ok, the int widens to double
+let b = 1.0m + cast decimal(1);  // decimal never widens: explicit cast
 let o: object = "hello";         // ok, string is an object
 ```
 
@@ -2198,25 +2214,25 @@ The dotnet-integration page has the full table of names.
 The core types have ghūl names in ghūl namespaces:
 
 - `System.Exception` is `Ghul.Exception`. The common exceptions in `System` are also in `Ghul`: `Ghul.InvalidOperationException`, `Ghul.NotImplementedException`, `Ghul.ArgumentException` and the others.
-- `System.Text.StringBuilder` is `Text.StringBuilder`. The old spelling `Text.STRING_BUILDER` still works.
+- `System.Text.StringBuilder` is `Text.StringBuilder`.
 - `System.Globalization.UnicodeCategory` is `Text.UnicodeCategory`.
-- The regular expression types in `System.Text.RegularExpressions` are `Text.Regex`, `Text.Match`, `Text.Group`, `Text.MatchCollection`, `Text.GroupCollection` and `Text.RegexOptions`; the UPPER spellings still work.
-- The date and time types are in `Time`: `System.DateTime`, `System.DateTimeOffset` and `System.TimeSpan` are `Time.DateTime`, `Time.DateTimeOffset` and `Time.TimeSpan`, `System.DayOfWeek` and `System.DateTimeKind` are `Time.DayOfWeek` and `Time.DateTimeKind`, `System.Diagnostics.Stopwatch` is `Time.Stopwatch`, and `System.Globalization.ISOWeek` is `Time.IsoWeek`. The UPPER_SNAKE_CASE spellings (`Time.DATE_TIME` and the rest) still work.
-- The rest of the text family is in `Text`, beside `Text.StringBuilder` and `Text.Regex`: `System.Text.Encoding` is `Text.Encoding`, `System.Text.Rune` is `Text.Rune` (`Text.RUNE` still works), `System.Globalization.CultureInfo` is `Text.Locale`, `System.Globalization.NumberStyles` is `Text.NumberStyles`, `System.Text.UTF8Encoding`, `ASCIIEncoding`, `UTF32Encoding` and `UnicodeEncoding` are `Text.UTF8_ENCODING`, `Text.ASCII_ENCODING`, `Text.UTF32_ENCODING` and `Text.UTF16_ENCODING`, `System.Globalization.StringInfo` and `TextInfo` are `Text.StringInfo` and `Text.TextInfo`, and `Ghul.StringComparison` and `Ghul.StringSplitOptions` are `Text.StringComparison` and `Text.StringSplitOptions`. On wasm and llvm the only culture is the invariant one: `Text.Locale.invariant_culture` and `current_culture` are the same culture, and formatting, parsing and changing case work the same whichever culture is passed. `System.Text.Encoding.Unicode` is `Text.Encoding.utf16` on every target; `unicode` is not a name for it.
+- The regular expression types in `System.Text.RegularExpressions` are `Text.Regex`, `Text.Match`, `Text.Group`, `Text.MatchCollection`, `Text.GroupCollection` and `Text.RegexOptions`.
+- The date and time types are in `Time`: `System.DateTime`, `System.DateTimeOffset` and `System.TimeSpan` are `Time.DateTime`, `Time.DateTimeOffset` and `Time.TimeSpan`, `System.DayOfWeek` and `System.DateTimeKind` are `Time.DayOfWeek` and `Time.DateTimeKind`, `System.Diagnostics.Stopwatch` is `Time.Stopwatch`, and `System.Globalization.ISOWeek` is `Time.IsoWeek`.
+- The rest of the text family is in `Text`, beside `Text.StringBuilder` and `Text.Regex`: `System.Text.Encoding` is `Text.Encoding`, `System.Text.Rune` is `Text.Rune`, `System.Globalization.CultureInfo` is `Text.Locale`, `System.Globalization.NumberStyles` is `Text.NumberStyles`, `System.Text.UTF8Encoding`, `ASCIIEncoding`, `UTF32Encoding` and `UnicodeEncoding` are `Text.UTF8_ENCODING`, `Text.ASCII_ENCODING`, `Text.UTF32_ENCODING` and `Text.UTF16_ENCODING`, `System.Globalization.StringInfo` and `TextInfo` are `Text.StringInfo` and `Text.TextInfo`, and `Ghul.StringComparison` and `Ghul.StringSplitOptions` are `Text.StringComparison` and `Text.StringSplitOptions`. On wasm and llvm the only locale is the invariant one: the invariant and current locales are the same, and formatting, parsing and changing case work the same whichever locale is passed. The members of `Text.Locale` that said culture drop the word on .NET: `invariant`, `current` and `current_ui` are `InvariantCulture`, `CurrentCulture` and `CurrentUICulture`; `installed_ui`, `default_thread_current`, `default_thread_current_ui`, `create_specific`, `get`, `get_by_ietf_language_tag`, `get_locales`, `get_console_fallback_ui`, `is_neutral` and `locale_types` follow the same rule. The core library on wasm and llvm declares the same names from the release that follows. The other .NET names with culture in them change the same way: `System.Globalization.CultureTypes` is `Text.LocaleTypes` (members such as `NEUTRAL_LOCALES`), `CultureNotFoundException` is `Text.LocaleNotFoundException`, `System.Reflection.AssemblyCultureAttribute` is `Ghul.Reflection.AssemblyLocaleAttribute`, `StringComparison` has `CURRENT_LOCALE`, `CURRENT_LOCALE_IGNORE_CASE`, `INVARIANT_LOCALE` and `INVARIANT_LOCALE_IGNORE_CASE`, `RegexOptions` has `LOCALE_INVARIANT`, and `StringComparer` has `current`, `current_ignore_case`, `invariant` and `invariant_ignore_case`. The old spellings of the members (`invariant_culture`, `current_culture`, `get_culture_info` and the rest) still compile for one release and are removed after it. The renamed enum members (`CURRENT_CULTURE` and the others) and the `RegexOptions` member have no second name: the old ones are gone. `System.Text.Encoding.Unicode` is `Text.Encoding.utf16` on every target; `unicode` is not a name for it.
 - `Text` has functions for numbers in a base and bytes as text: `to_base(value, base)` writes an integer in base 2, 8, 10 or 16, and `from_base(text, base)` reads one back as a `long?`; `to_hex`, `to_hex_lower` and `from_hex` write and read bytes as hexadecimal; `to_base64` and `from_base64` do the same in Base64. Each `from_` function answers null for text it can't read. `System.Convert` is still there and still throws.
-- The numeric types are in `Ghul.Math`, beside the maths functions: `System.Numerics.Complex` is `Ghul.Math.Complex`, `System.Numerics.BitOperations` is `Ghul.Math.BitOperations` and `System.BitConverter` is `Ghul.Math.BitConverter`.
+- The bit-level numeric types are in `Ghul.Math`, beside the maths functions: `System.Numerics.BitOperations` is `Ghul.Math.BitOperations` and `System.BitConverter` is `Ghul.Math.BitConverter`. `System.Numerics.Complex` is the built-in `complex`.
 - The reflection types are in `Ghul.Reflection`, beside `Ghul.Type`: `System.Reflection.Assembly`, `FieldInfo`, `ParameterInfo`, `ConstructorInfo`, `MethodInfo`, `PropertyInfo` and `BindingFlags` are the same names in `Ghul.Reflection`, and `System.Activator` is `Ghul.Reflection.Activator`.
 - The language's own types are in `Ghul`: `System.GC`, `System.ObsoleteAttribute`, `System.Runtime.CompilerServices.MethodImplAttribute` and `MethodImplOptions` are `Ghul.GC`, `Ghul.ObsoleteAttribute`, `Ghul.MethodImplAttribute` and `Ghul.MethodImplOptions`, and `System.IFormattable` is `Ghul.Formattable`. `System.Threading.Thread` is `Tasks.Thread`.
 - `System.Uri` is `IO.Uri`.
 - The hashes are in `Crypto`: `System.Security.Cryptography.MD5`, `SHA1` and `SHA256` are `Crypto.MD5`, `Crypto.SHA1` and `Crypto.SHA256`, and each has `hash_data(bytes)`, which returns the digest. `System.Security.Cryptography.RandomNumberGenerator`, the secure generator, is `Crypto.RandomNumberGenerator`.
-- `System.Random` is `Ghul.Random`. The UPPER_SNAKE_CASE spelling `Ghul.RANDOM` still works.
+- `System.Random` is `Ghul.Random`.
 - `System.Type` is `Ghul.Type`.
-- `System.Lazy<T>` is `Ghul.Lazy[T]`; `Ghul.LAZY[T]` still works.
+- `System.Lazy<T>` is `Ghul.Lazy[T]`.
 - `System.FlagsAttribute` is `Ghul.FlagsAttribute`.
-- `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`; `Collections.KEY_VALUE_PAIR` still works. `Ghul.Box`, `Collections.PriorityQueue`, `Ghul.Pipes.IndexedValue` and `Ghul.Interop.Pinned` are the PascalCase names of the library types that were `BOX`, `PRIORITY_QUEUE`, `INDEXED_VALUE` and `PINNED`; the old spellings still work.
+- `KeyValuePair<K, V>` is `Collections.KeyValuePair[K, V]`. `Ghul.Box`, `Collections.PriorityQueue`, `Ghul.Pipes.IndexedValue` and `Ghul.Interop.Pinned` are the PascalCase names of the library types.
 - `IComparer<T>` and `IEqualityComparer<T>` are `Collections.Comparer[T]` and `Collections.EqualityComparer[T]`, as above.
 
-The old name of each of these types still refers to the same type wherever a type can be named. A `use` of an old name imports the type under that old name. Diagnostics, hover and completion show only the new name.
+These are the only names for these types, on every target: the .NET name of a type in this list, and any earlier ghūl spelling of it, such as `Text.STRING_BUILDER`, is not found.
 
 `Ghul.Equatable[T]` and `Ghul.Comparable[T]` are declared with operators, not named methods. `Ghul.Equatable[T]` requires `=~`, and `Ghul.Comparable[T]` requires `<>`. So a type implements them by defining the operator. Every .NET type that implements these interfaces gets the operator too. This is how `=~` compares a `System.DateTime`, and how the relational operators order a `System.Version`.
 

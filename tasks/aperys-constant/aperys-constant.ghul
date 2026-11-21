@@ -18,9 +18,7 @@ show(label: string, scaled: bigint) is
 si
 
 reciprocal_cubes(terms: int) -> bigint =>
-    1::terms
-        |> map(k => scale / (bigint(k) * bigint(k) * bigint(k)))
-        |> sum()
+    1::terms |> map(k => scale / (k * bigint(k) * k)) |> sum()
 
 markov(terms: int) -> bigint =>
     5n *
@@ -33,7 +31,7 @@ markov(terms: int) -> bigint =>
                     factorial(k) *
                     factorial(k) *
                     scale /
-                    (factorial(2 * k) * (bigint(k) * bigint(k) * bigint(k)))
+                    (factorial(2 * k) * (k * bigint(k) * k))
                 )
             )
             |> sum()
