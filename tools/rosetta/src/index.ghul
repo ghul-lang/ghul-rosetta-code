@@ -60,7 +60,7 @@ namespace Rosetta is
         _problems: LIST[string]
         _section: SECTION
         _published: MAP[string, string]
-        _wasm: SET[string]
+        _wasm_exempt: SET[string]
         _native: SET[string]
         _commit: string?
 
@@ -77,7 +77,7 @@ namespace Rosetta is
             _problems = LIST[string]()
             _section = SECTION(root)
             _published = MAP[string, string]()
-            _wasm = wasm_passing(root)
+            _wasm_exempt = wasm_exempt(root)
             _native = native_passing(root)
 
             for entry in LEDGER(IO.Path.combine(root, "ledger")).entries() do
@@ -243,7 +243,7 @@ namespace Rosetta is
                 writer.write_string_value("dotnet")
             fi
 
-            if parts |> any(p => _wasm.contains(p.id) /\ p.playground) then
+            if parts |> any(p => runs_on_wasm(p)) then
                 writer.write_string_value("wasm")
             fi
 
@@ -284,7 +284,7 @@ namespace Rosetta is
                 writer.write_boolean("playground", part.playground)
                 writer.write_boolean("input", part.input)
                 write_strings(writer, "images", part.images)
-                writer.write_boolean("wasm", _wasm.contains(part.id) /\ part.playground)
+                writer.write_boolean("wasm", runs_on_wasm(part))
                 writer.write_boolean("native", _native.contains(part.id))
 
                 writer.write_start_array("files")
@@ -307,23 +307,32 @@ namespace Rosetta is
             writer.write_end_object()
         si
 
-        // The programs wasm-passing.txt lists as running correctly when compiled
-        // for WebAssembly, by part id. None when there is no such file.
-        wasm_passing(root: string) -> SET[string] is
-            let passing = SET[string]()
-            let file = IO.Path.combine(root, "wasm-passing.txt")
+        // Whether the playground runs `part` compiled to WebAssembly: every
+        // program it can run at all, unless wasm-exempt.txt lists it. CI
+        // builds and runs each of the others for wasm, so none is listed
+        // that does not pass there.
+        runs_on_wasm(part: INDEX_PART) -> bool => part.playground /\ !_wasm_exempt.contains(part.id)
+
+        // The programs wasm-exempt.txt lists as not running correctly when
+        // compiled for WebAssembly, by part id: the first word of each line,
+        // with anything after a # ignored. None when there is no such file.
+        wasm_exempt(root: string) -> SET[string] is
+            let exempt = SET[string]()
+            let file = IO.Path.combine(root, "wasm-exempt.txt")
 
             if IO.File.exists(file) then
                 for line in IO.File.read_all_lines(file) do
-                    let id = line.trim()
+                    let hash = line.index_of('#')
+                    let text = if hash >= 0 then line.substring(0, hash) else line fi
+                    let words = text.split([' ', '\t'], System.StringSplitOptions.REMOVE_EMPTY_ENTRIES)
 
-                    if id.length > 0 /\ !id.starts_with("#") then
-                        passing.add(id)
+                    if words.count > 0 then
+                        exempt.add(words[0])
                     fi
                 od
             fi
 
-            return passing
+            return exempt
         si
 
         // The programs llvm-tasks.txt lists as building and passing as native

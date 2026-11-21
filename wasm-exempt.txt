@@ -1,0 +1,72 @@
+# Programs the playground runs on .NET rather than compiled to WebAssembly,
+# one a line: the program's id in the index, then why. CI builds and runs
+# every other program the playground can run for wasm, against the
+# compiler, ghul-runtime and ghul-raster this repository pins, and the
+# index marks each of those `wasm`. A program with a playground-unsupported
+# file is not run in the playground at all and is not listed here.
+#
+# Remove a line when its program passes on wasm; CI then holds it there.
+
+# The core library does not have the .NET API the solution uses.
+24-game                                char.get_numeric_value
+date-manipulation                      TimeZoneInfo
+file-modification-time                 File.get_last_write_time_utc
+find-limit-of-recursion                RuntimeHelpers
+function-frequency                     reflection over method bodies
+holidays-related-to-easter             JulianCalendar
+host-introspection                     Marshal
+hostname                               System.Net
+introspection                          System.Math through reflection
+json                                   System.Text.Json.Nodes
+memory-allocation                      Marshal
+memory-layout-of-a-data-structure      Marshal
+natural-sorting                        string normalization
+parse-an-ip-address                    System.Net.IPAddress
+program-name                           Assembly.get_name
+reflection-list-methods                MethodInfo.declaring_type
+secure-temporary-file                  FileStream
+send-an-unknown-method-call            Type.get_method
+simple-database                        Environment.SpecialFolder
+stack-traces                           System.Diagnostics.StackTrace
+truncate-a-file                        FileStream
+unicode-strings                        string normalization
+variable-size-get                      Marshal
+xml-dom-serialization                  System.Xml
+xml-input                              System.Xml.Linq
+xml-output                             System.Xml.Linq
+xml-xpath                              System.Xml.Linq
+
+# Threads, which a wasm program does not have.
+active-object                          AutoResetEvent
+multiton                               Tasks.Parallel
+parallel-brute-force                   Tasks.Parallel
+szymanskis-algorithm                   Interlocked
+
+# decimal, which the wasm target does not represent.
+calculating-the-value-of-e             a decimal field
+hickerson-series-of-almost-integers    decimal(int)
+literals-floating-point                decimal literals
+variable-size-set                      decimal.min_value
+
+# Output that differs on wasm.
+distance-and-bearing                   regex lookbehind is not supported
+show-the-epoch                         DateTime display
+thiele-s-interpolation-formula         last digit of a round-tripped double
+
+# The project sets a property the direct build cannot read, so CI passes
+# the program over for wasm and nothing checks it there.
+compare-sorting-algorithms-performance TieredCompilation
+executable-library/01-the-library      PackageId
+extreme-floating-point-values          InvariantGlobalization
+formatted-numeric-output               InvariantGlobalization
+infinity                               InvariantGlobalization
+test-integerness                       InvariantGlobalization
+
+# Type inference that fails on the wasm target and not on .NET.
+15-puzzle-game                         cannot infer type
+averages-simple-moving-average         cannot return '_' where '_' expected
+digital-root                           no static overload found
+happy-numbers                          '_' is not assignable to '_'
+iterated-digits-squaring               '_' is not assignable to '_'
+matrix-multiplication                  no static overload found for join
+padovan-n-step-number-sequences        cannot infer type

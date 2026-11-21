@@ -37,6 +37,34 @@
                     ]
                 }
             }
+        },
+
+        // The same tasks built as WebAssembly, as ghul.dev's playground builds
+        // them, and run under Node on the loader the runtime's core ships,
+        // with the same libraries as the llvm configuration. CI runs it over
+        // every task wasm-exempt.txt does not list:
+        //   dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh)
+        "wasm": {
+            "extends": "tasks",
+            "build_targets": ["wasm"],
+            "targets": {
+                "wasm": {
+                    "libraries": [
+                        {
+                            "name": "ghul-runtime",
+                            "root": ["libraries/ghul-runtime", "../ghul-runtime", "../../../ghul-runtime"],
+                            "sources": ["ghul-core/src/**/*.ghul", "ghul-runtime/src/**/*.ghul"],
+                            "loader": "ghul-core/host/loader.mjs"
+                        },
+                        {
+                            "name": "ghul-raster",
+                            "package": "ghul.raster",
+                            "root": ["libraries/ghul-raster", "../ghul-raster", "../../../ghul-raster"],
+                            "sources": "src/**/*.ghul"
+                        }
+                    ]
+                }
+            }
         }
     }
 }
