@@ -1,18 +1,15 @@
 use default
-use System.Threading.AutoResetEvent
-use Tasks.Thread
+use Ghul.Coroutines
 
 let frequency = 0.5
 let step = 0.001
 
-// The integrator samples only when the clock is advanced, and the advance
-// waits for that sample to be taken, so the number of samples is what the
-// caller asked for rather than however many the machine managed in the
-// time available.
+// The integrator is a coroutine of its own. It samples only when the clock
+// is advanced, and the advance waits for that sample to be taken, so the
+// number of samples is what the caller asked for.
 class INTEGRATOR is
-    _worker: Thread
-    _sample_due: AutoResetEvent
-    _sample_taken: AutoResetEvent
+    _sample_due: Semaphore
+    _sample_taken: Semaphore
     _input: (double) -> double
     _now: double
     _output: double
@@ -22,21 +19,17 @@ class INTEGRATOR is
 
     init() is
         _input = t => 0.0
-        _sample_due = AutoResetEvent(false)
-        _sample_taken = AutoResetEvent(false)
+        _sample_due = Semaphore(0)
+        _sample_taken = Semaphore(0)
         _running = true
-        _worker = Thread(() => _integrate())
-
-        _worker.is_background = true
-        _worker.start()
     si
 
-    _integrate() is
+    integrate() -> Coroutine is
         do
-            _sample_due.wait_one()
+            await _sample_due.acquire()
 
             if !_running then
-                _sample_taken.set()
+                _sample_taken.release()
 
                 return
             fi
@@ -47,15 +40,16 @@ class INTEGRATOR is
             _previous = sample
             _last = _now
 
-            _sample_taken.set()
+            _sample_taken.release()
         od
     si
 
-    advance(seconds: double) is
+    advance(seconds: double) -> Coroutine is
         _now = _now + seconds
 
-        _sample_due.set()
-        _sample_taken.wait_one()
+        _sample_due.release()
+
+        await _sample_taken.acquire()
     si
 
     input(k: (double) -> double) is
@@ -65,40 +59,46 @@ class INTEGRATOR is
 
     output: double => _output
 
-    stop() is
+    stop() -> Coroutine is
         _running = false
 
-        _sample_due.set()
-        _sample_taken.wait_one()
+        _sample_due.release()
 
-        _worker.join()
+        await _sample_taken.acquire()
     si
 si
 
-run_for(integrator: INTEGRATOR, seconds: double) is
+run_for(integrator: INTEGRATOR, seconds: double) -> Coroutine is
     for _ in 0..int(seconds / step) do
-        integrator.advance(step)
+        await integrator.advance(step)
     od
 si
 
 let integrator = INTEGRATOR()
 
-integrator.input(t => sin(2.0 * pi * frequency * t))
+driver() -> Coroutine is
+    integrator.input(t => sin(2.0 * pi * frequency * t))
 
-run_for(integrator, 1.0)
+    await run_for(integrator, 1.0)
 
-let half_period = integrator.output
+    let half_period = integrator.output
 
-run_for(integrator, 1.0)
+    await run_for(integrator, 1.0)
 
-let full_period = integrator.output
+    let full_period = integrator.output
 
-integrator.input(t => 0.0)
+    integrator.input(t => 0.0)
 
-run_for(integrator, 0.5)
+    await run_for(integrator, 0.5)
 
-integrator.stop()
+    await integrator.stop()
 
-write_line("integral over half a period: {half_period:F4}")
-write_line("integral over a whole period: {abs(full_period):F4}")
-write_line("integral once the input is zero: {abs(integrator.output):F4}")
+    write_line("integral over half a period: {half_period:F4}")
+    write_line("integral over a whole period: {abs(full_period):F4}")
+    write_line("integral once the input is zero: {abs(integrator.output):F4}")
+si
+
+integrator.integrate()
+driver()
+
+run()

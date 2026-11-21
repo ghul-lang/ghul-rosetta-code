@@ -8,27 +8,18 @@
 # Remove a line when its program passes on wasm; CI then holds it there.
 
 # The core library does not have the .NET API the solution uses.
-24-game                                char.get_numeric_value
 date-manipulation                      TimeZoneInfo
 file-modification-time                 File.get_last_write_time_utc
 find-limit-of-recursion                RuntimeHelpers
-function-frequency                     reflection over method bodies
 holidays-related-to-easter             JulianCalendar
 host-introspection                     Marshal
 hostname                               System.Net
-introspection                          System.Math through reflection
-json                                   System.Text.Json.Nodes
 memory-allocation                      Marshal
 memory-layout-of-a-data-structure      Marshal
 natural-sorting                        string normalization
 parse-an-ip-address                    System.Net.IPAddress
-program-name                           Assembly.get_name
-reflection-list-methods                MethodInfo.declaring_type
 secure-temporary-file                  FileStream
-send-an-unknown-method-call            Type.get_method
-simple-database                        Environment.SpecialFolder
 stack-traces                           System.Diagnostics.StackTrace
-truncate-a-file                        FileStream
 unicode-strings                        string normalization
 variable-size-get                      Marshal
 xml-dom-serialization                  System.Xml
@@ -36,8 +27,16 @@ xml-input                              System.Xml.Linq
 xml-output                             System.Xml.Linq
 xml-xpath                              System.Xml.Linq
 
+# Reflection over ordinary methods, which wasm does not describe yet: only
+# fields, properties, constructors and test methods are described.
+introspection                          Type.get_method
+reflection-list-methods                MethodInfo.declaring_type
+send-an-unknown-method-call            Type.get_method
+
+# A program path, which the wasm host does not give a program.
+program-name                           Environment.get_command_line_args()[0]
+
 # Threads, which a wasm program does not have.
-active-object                          AutoResetEvent
 multiton                               Tasks.Parallel
 parallel-brute-force                   Tasks.Parallel
 szymanskis-algorithm                   Interlocked

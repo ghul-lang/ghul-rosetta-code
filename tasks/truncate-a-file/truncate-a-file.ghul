@@ -1,5 +1,4 @@
 use default
-use IO
 
 truncate(path, length) is
     if !IO.File.exists(path) then
@@ -14,9 +13,9 @@ truncate(path, length) is
         )
     fi
 
-    let stream = FileStream(path, FileMode.OPEN, FileAccess.WRITE)
-    stream.set_length(length)
-    stream.dispose()
+    let kept = IO.File.read_all_bytes(path) |> take(int(length)) |> ARRAY()
+
+    IO.File.write_all_bytes(path, kept)
 si
 
 let path = "sample.bin"
