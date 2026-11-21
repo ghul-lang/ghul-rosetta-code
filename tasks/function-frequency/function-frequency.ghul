@@ -5,7 +5,10 @@ use Text.Regex
 // an opening parenthesis, other than where a line declares a function, is
 // a call of that function.
 
-let keywords = ["if", "elif", "when", "while", "for", "case", "return", "assert"] |> SET()
+let keywords = [
+    "if", "elif", "when", "while", "for", "case", "return", "assert"
+]
+    |> SET()
 
 let source = IO.File.read_all_text("function-frequency.ghul")
 

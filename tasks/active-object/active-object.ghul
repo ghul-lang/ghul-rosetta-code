@@ -95,7 +95,9 @@ driver() -> Coroutine is
 
     write_line("integral over half a period: {half_period:F4}")
     write_line("integral over a whole period: {abs(full_period):F4}")
-    write_line("integral once the input is zero: {abs(integrator.output):F4}")
+    let after_zero = abs(integrator.output)
+
+    write_line("integral once the input is zero: {after_zero:F4}")
 si
 
 integrator.integrate()

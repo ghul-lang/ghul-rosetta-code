@@ -15,6 +15,10 @@ let created = Json.object()
 
 Json.set(created, "title", Json.of("Rosetta Code"))
 Json.set(created, "year", Json.of(2007))
-Json.set(created, "tags", Json.array([Json.of("wiki"), Json.of("programming")]))
+Json.set(
+    created,
+    "tags",
+    Json.array([Json.of("wiki"), Json.of("programming")])
+)
 
 write_line(Json.write(created))

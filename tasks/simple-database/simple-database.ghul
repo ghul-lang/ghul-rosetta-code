@@ -112,7 +112,9 @@ entry(args: string[]) -> int is
     let file =
         stored ??
         IO.Path.combine(
-            Environment.get_environment_variable("HOME") ?? Environment.current_directory,
+            Environment.get_environment_variable(
+                "HOME"
+            ) ?? Environment.current_directory,
             ".simple-database"
         )
 
