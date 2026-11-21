@@ -391,6 +391,16 @@ One comes from the ledger as well: `ahead_of_wiki` is true for a published task 
 `rosetta section` renders it now, is not the one `publish` last posted, so the site can say that
 the solution it shows is newer than the one on the wiki.
 
+`ghul rosetta <task>` (from ghul.cli) reads the index to fetch a solution as a project of its own,
+with its tests in `tests/snapshots/default/`, where `ghul test` checks it. CI's "Fetched as a
+project" job does that for a sample of tasks, one for each kind of test file, from an index
+generated from the change, on wasm and llvm, so the index and what ghul.cli makes of it can't drift
+apart. To run the same check locally, with `ghul` on the PATH:
+
+```sh
+scripts/fetch-check.sh [--target wasm|llvm] [<task>...]
+```
+
 ## the rosetta tool
 
 `tools/rosetta` is the ledger and the wiki client. Publishing signs in with a
