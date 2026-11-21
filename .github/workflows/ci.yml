@@ -156,6 +156,93 @@ jobs:
         dotnet ghul-test $TASKS
 
 
+  # ghul.dev's playground runs most programs compiled to WebAssembly, so
+  # each one it runs that way is built and run here for wasm too, against
+  # the libraries' sources at the versions this repository pins: every
+  # program the playground can run that wasm-exempt.txt does not list. A
+  # wasm build compiles the core library from source, so a program costs
+  # several times its .NET build, and the shards are many.
+  wasm_shards:
+    name: Wasm shard
+
+    needs: changes
+
+    if: needs.changes.outputs.full == 'true'
+
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - uses: ./.github/actions/wasm-libraries
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Restore the runtime the tasks reference
+      run: dotnet restore "$(ls tasks/*/*.ghulproj | head -n 1)"
+
+    - name: Build and run the programs for wasm
+      shell: bash
+      run: dotnet ghul-test --config wasm --shard ${{ matrix.shard }}/12 $(scripts/wasm-tasks.sh)
+
+
+  # The wasm half of the touched tasks.
+  wasm_touched:
+    name: Touched tasks on wasm
+
+    needs: changes
+
+    if: needs.changes.outputs.full != 'true'
+
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+
+    timeout-minutes: 15
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - uses: ./.github/actions/wasm-libraries
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Restore the runtime the tasks reference
+      run: dotnet restore "$(ls tasks/*/*.ghulproj | head -n 1)"
+
+    - name: Build and run the touched programs for wasm
+      shell: bash
+      env:
+        TASKS: ${{ needs.changes.outputs.tasks }}
+      run: |
+        set -euo pipefail
+
+        if [ -z "${TASKS// /}" ] ; then
+            echo "no task changed"
+            exit 0
+        fi
+
+        PROGRAMS=$(scripts/wasm-tasks.sh $TASKS)
+
+        if [ -z "$PROGRAMS" ] ; then
+            echo "no touched program runs on wasm"
+            exit 0
+        fi
+
+        dotnet ghul-test --config wasm $PROGRAMS
+
+
   # index.json is what ghul.dev's explorer reads. It is generated from the
   # task directories and published by index.yml on each push to main; here a
   # task whose tags or interest score do not validate fails before it lands.
@@ -181,6 +268,13 @@ jobs:
     # task directories. Listing it fails on any entry the reader cannot parse.
     - name: Check the ledger is readable
       run: dotnet run --project tools/rosetta -- show > /dev/null
+
+    # The index marks every program the playground can run as wasm unless
+    # wasm-exempt.txt lists it, so a line that names no such program would
+    # hide nothing and is an error.
+    - name: Check the wasm exemptions
+      shell: bash
+      run: scripts/wasm-tasks.sh --check
 
 
   # The rules a machine can settle: no line past the limit, and every source
@@ -226,7 +320,7 @@ jobs:
   # `always()` is load-bearing: a skipped job satisfies a required check, so
   # without it anything that skipped the shards would show green here.
   build:
-    needs: [changes, task_shards, touched_tasks, index, hygiene]
+    needs: [changes, task_shards, touched_tasks, wasm_shards, wasm_touched, index, hygiene]
 
     if: always()
 
@@ -241,6 +335,8 @@ jobs:
         CHANGES: ${{ needs.changes.result }}
         RESULT: ${{ needs.task_shards.result }}
         TOUCHED: ${{ needs.touched_tasks.result }}
+        WASM: ${{ needs.wasm_shards.result }}
+        WASM_TOUCHED: ${{ needs.wasm_touched.result }}
         INDEX: ${{ needs.index.result }}
         HYGIENE: ${{ needs.hygiene.result }}
       run: |
@@ -249,6 +345,8 @@ jobs:
         echo "changes: $CHANGES (full=$FULL)"
         echo "shards: $RESULT"
         echo "touched: $TOUCHED"
+        echo "wasm shards: $WASM"
+        echo "wasm touched: $WASM_TOUCHED"
         echo "index: $INDEX"
         echo "hygiene: $HYGIENE"
 
@@ -259,14 +357,20 @@ jobs:
         if [ "$FULL" = true ] ; then
             WANTED=$RESULT
             OTHER=$TOUCHED
+            WASM_WANTED=$WASM
+            WASM_OTHER=$WASM_TOUCHED
         else
             WANTED=$TOUCHED
             OTHER=$RESULT
+            WASM_WANTED=$WASM_TOUCHED
+            WASM_OTHER=$WASM
         fi
 
         [ "$CHANGES" = success ] \
             && [ "$WANTED" = success ] \
             && [ "$OTHER" = skipped ] \
+            && [ "$WASM_WANTED" = success ] \
+            && [ "$WASM_OTHER" = skipped ] \
             && [ "$INDEX" = success ] \
             && [ "$HYGIENE" = success ]
 

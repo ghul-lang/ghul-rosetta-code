@@ -339,15 +339,22 @@ Everything else in an index entry comes from the task's files: its parts, source
 `*.png.expected` images, whether it reads standard input (`run.in` or `run.session`), and whether
 the playground can run it (no `playground-unsupported` marker).
 
-`wasm` on each part is true when the playground can run that part compiled to WebAssembly: it is
-listed in `wasm-passing.txt`, and it has no `playground-unsupported` marker.
-`wasm-passing.txt` names one program a line, by the part's `id` in the index, under a `#` line
-giving the compiler, ghul-runtime and ghul-raster versions it was checked with. Those are the
-versions the playground's compile service builds WebAssembly with, so the file is regenerated
-whenever those move: every program is compiled with `--target wasm` against those versions, run
-under Node, and listed when its output matches `run.expected` and every image it is expected to
-write matches its `.png.expected` pixel for pixel. Without the file every part's
-`wasm` is false.
+`wasm` on each part is true when the playground runs that part compiled to WebAssembly: every part
+it can run at all (no `playground-unsupported` marker) unless `wasm-exempt.txt` lists it. CI builds
+and runs each of those parts for wasm, against the compiler and the ghul-runtime and ghul-raster
+sources at the versions this repository pins, and under Node, so a part the index marks `wasm` has
+passed there: its output matched `run.expected` and every image it wrote its `.png.expected`. An
+expectation only one target produces goes in a file named for it, such as `warn.wasm.expected`.
+`wasm-exempt.txt` names one part a line, by its `id` in the index, followed by why it can't run on
+wasm; the playground runs those on .NET. `scripts/wasm-tasks.sh` lists the parts to run:
+
+```sh
+dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh)               # every one
+dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh tasks/<slug>)  # one task's
+```
+
+The `wasm` configuration looks for the library sources under `libraries/` first, where CI checks
+them out at the pinned versions, then beside the repository.
 
 `native` on each part is true when the part is listed in `llvm-tasks.txt`, the tests that build and
 pass as native executables through the `llvm` configuration. The file names each by its path,

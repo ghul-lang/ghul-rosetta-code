@@ -1,0 +1,37 @@
+name: Wasm libraries
+description: >
+  Node, and the sources of ghul-runtime and ghul-raster at the versions
+  Directory.Packages.props pins, checked out under libraries/, where the
+  wasm configuration in ghul-test.json looks for them.
+
+runs:
+  using: composite
+
+  steps:
+  - id: pins
+    shell: bash
+    run: |
+      set -euo pipefail
+
+      pin() {
+          sed -n "s/.*Include=\"$1\" Version=\"\([^\"]*\)\".*/\1/p" Directory.Packages.props
+      }
+
+      echo "runtime=$(pin ghul.runtime)" >> "$GITHUB_OUTPUT"
+      echo "raster=$(pin ghul.raster)" >> "$GITHUB_OUTPUT"
+
+  - uses: actions/checkout@v7
+    with:
+      repository: ghul-lang/ghul-runtime
+      ref: v${{ steps.pins.outputs.runtime }}
+      path: libraries/ghul-runtime
+
+  - uses: actions/checkout@v7
+    with:
+      repository: ghul-lang/ghul-raster
+      ref: v${{ steps.pins.outputs.raster }}
+      path: libraries/ghul-raster
+
+  - uses: actions/setup-node@v7
+    with:
+      node-version: '24'
