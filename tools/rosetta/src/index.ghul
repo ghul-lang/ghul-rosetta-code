@@ -130,6 +130,23 @@ namespace Rosetta is
             _write_version(writer, "runtime_version", _package_version("ghul.runtime"))
             _write_version(writer, "raster_version", _package_version("ghul.raster"))
 
+            // The diagnostic options every task is built with, keyed as a
+            // ghul-project.json's diagnostics section is, so a solution
+            // fetched as a project builds as it does here.
+            writer.write_start_object("diagnostics")
+
+            for (option, names) in _diagnostics() do
+                writer.write_start_array(option)
+
+                for name in names do
+                    writer.write_string_value(name)
+                od
+
+                writer.write_end_array()
+            od
+
+            writer.write_end_object()
+
             writer.write_start_object("tags")
 
             for tag in _tag_order do
@@ -568,6 +585,36 @@ namespace Rosetta is
             let found = Regex.match(IO.File.read_all_text(props), "Include=\"{Regex.escape(package)}\"\\s+Version=\"([^\"]+)\"")
 
             return if found.success then found.groups[1].value else null fi
+        si
+
+        // The --suppress, --warn-as-error, --warn and --warn-as-hint options
+        // Directory.Build.props passes the compiler, each with the
+        // diagnostic names it is given, in that order.
+        _diagnostics() -> Collections.LIST[(option: string, names: Collections.LIST[string])] is
+            let result = Collections.LIST[(option: string, names: Collections.LIST[string])]()
+            let props = IO.Path.combine(_root, "Directory.Build.props")
+
+            if !IO.File.exists(props) then
+                return result
+            fi
+
+            let text = IO.File.read_all_text(props)
+
+            for option in ["suppress", "warn-as-error", "warn", "warn-as-hint"] do
+                let names = Collections.LIST[string]()
+
+                for found in Regex.matches(text, "<GhulOptions\\s+Include=\"--{Regex.escape(option)}\\s+([^\"]+)\"") do
+                    for name in found.groups[1].value.split([' ', ',']) |> filter(n => n.length > 0) do
+                        names.add(name)
+                    od
+                od
+
+                if names.count > 0 then
+                    result.add((option = option, names = names))
+                fi
+            od
+
+            return result
         si
 
         _compiler_version() -> string? is
