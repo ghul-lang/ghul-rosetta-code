@@ -1,8 +1,7 @@
 use default
-use Ghul.Math.Complex
 
-let e_i_pi = Complex.exp(Complex(0.0, pi))
-let result = e_i_pi + Complex(1.0, 0.0)
+let e_i_pi = complex.exp(complex(0.0, pi))
+let result = e_i_pi + 1r
 
 write_line("e^(i*pi)     = {e_i_pi.real,0:F15} + {e_i_pi.imaginary,0:F15}i")
 write_line("e^(i*pi) + 1 = {result.real,0:F15} + {result.imaginary,0:F15}i")

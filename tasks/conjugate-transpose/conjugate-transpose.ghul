@@ -1,13 +1,11 @@
 use default
 
-use Ghul.Math.Complex
-
-use Matrix = Complex[][]
+use Matrix = complex[][]
 
 conjugate_transpose(m: Matrix) -> Matrix =>
     0..m[0].count
         |> map(j =>
-            0..m.count |> map(i => Complex.conjugate(m[i][j])) |> list()
+            0..m.count |> map(i => complex.conjugate(m[i][j])) |> list()
         )
         |> list()
 
@@ -18,7 +16,7 @@ conjugate_transpose(m: Matrix) -> Matrix =>
                 |> map(j =>
                     0..b.count
                         |> map(k => a[i][k] * b[k][j])
-                        |> reduce(Complex.zero, * + *)
+                        |> reduce(complex.zero, * + *)
                 )
                 |> list()
         )
@@ -28,7 +26,7 @@ conjugate_transpose(m: Matrix) -> Matrix =>
     0..a.count
         |> all(i =>
             0..a[i].count
-                |> all(j => Complex.abs(a[i][j] - b[i][j]) < 1.0e-12)
+                |> all(j => complex.abs(a[i][j] - b[i][j]) < 1.0e-12)
         )
 
 identity(n: int) -> Matrix =>
@@ -37,16 +35,16 @@ identity(n: int) -> Matrix =>
             0..n
                 |> map(j =>
                     if i == j then
-                        Complex.one
+                        complex.one
                     else
-                        Complex.zero
+                        complex.zero
                     fi
                 )
                 |> list()
         )
         |> list()
 
-show(c: Complex) -> string =>
+show(c: complex) -> string =>
     let
         sign = if c.imaginary < 0.0 then "-" else "+" fi,
         size = double.abs(c.imaginary)
@@ -62,18 +60,18 @@ let r = double.sqrt(0.5)
 
 let examples = [
     [
-        [Complex(3.0, 0.0), Complex(2.0, 1.0)],
-        [Complex(2.0, -1.0), Complex(1.0, 0.0)]
+        [3r, 2r + 1j],
+        [2r - 1j, 1r]
     ],
     [
-        [Complex.one, Complex.one, Complex.zero],
-        [Complex.zero, Complex.one, Complex.one],
-        [Complex.one, Complex.zero, Complex.one]
+        [complex.one, complex.one, complex.zero],
+        [complex.zero, complex.one, complex.one],
+        [complex.one, complex.zero, complex.one]
     ],
     [
-        [Complex(r, 0.0), Complex(r, 0.0), Complex.zero],
-        [Complex(0.0, r), Complex(0.0, -r), Complex.zero],
-        [Complex.zero, Complex.zero, Complex(0.0, 1.0)]
+        [complex(r), complex(r), complex.zero],
+        [complex(0.0, r), complex(0.0, -r), complex.zero],
+        [complex.zero, complex.zero, 1j]
     ]
 ]
 

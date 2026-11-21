@@ -1,5 +1,4 @@
 use default
-use Ghul.Math.Complex
 
 is_integer(d: decimal) -> bool => d == decimal.truncate(d)
 
@@ -10,7 +9,7 @@ is_integer(x: double) -> bool => double.is_finite(x) /\ x == floor(x)
 is_integer(numerator: bigint, denominator: bigint) -> bool =>
     (numerator % denominator).is_zero
 
-is_integer(z: Complex) -> bool => z.imaginary == 0.0 /\ is_integer(z.real)
+is_integer(z: complex) -> bool => z.imaginary == 0.0 /\ is_integer(z.real)
 
 // Close enough, for a double that has picked up rounding error on the
 // way to what should have been an integer.
@@ -37,9 +36,9 @@ od
 
 for
     z in [
-        Complex(5.0, 0.0),
-        Complex(5.0, 1.0),
-        Complex(1.5, 0.0)
+        5r,
+        5r + 1j,
+        1.5r
     ]
 do
     let shown = "{z.real}+{z.imaginary}i"

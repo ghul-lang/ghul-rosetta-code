@@ -1,17 +1,16 @@
 use default
-use Ghul.Math.Complex
 
-every_other(x: Complex[], start: int) -> Complex[] =>
+every_other(x: complex[], start: int) -> complex[] =>
     x
         |> index()
         |> filter(e => e.index % 2 == start)
         |> map(e => e.value)
         |> list()
 
-twiddle(k: int, n: int) -> Complex =>
-    Complex.from_polar_coordinates(1.0, -2.0 * pi * double(k) / double(n))
+twiddle(k: int, n: int) -> complex =>
+    complex.from_polar_coordinates(1.0, -2.0 * pi * double(k) / double(n))
 
-fft(x: Complex[]) -> Complex[] is
+fft(x: complex[]) -> complex[] is
     let n = x.count
 
     if n <= 1 then
@@ -31,11 +30,11 @@ si
 
 tidy(v: double) -> double => if abs(v) < 1.0e-12 then 0.0 else v fi
 
-show(c: Complex) -> string =>
+show(c: complex) -> string =>
     "({tidy(c.real),8:F4}, {tidy(c.imaginary),8:F4})"
 
 let input = [1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
-    |> map(Complex(*, 0.0))
+    |> map(complex(*, 0.0))
     |> list()
 
 write_line("input:  {input |> map(c => c.real) |> join(", ")}")
