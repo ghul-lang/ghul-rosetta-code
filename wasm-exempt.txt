@@ -1,27 +1,30 @@
-# Programs the playground runs on .NET rather than compiled to WebAssembly,
-# one a line: the program's id in the index, then why. CI builds and runs
-# every other program the playground can run for wasm, against the
-# compiler, ghul-runtime and ghul-raster this repository pins, and the
-# index marks each of those `wasm`. A program with a playground-unsupported
-# file is not run in the playground at all and is not listed here.
+# Programs the playground runs on .NET rather than compiled to WebAssembly
+# until something is fixed or added, one a line: the program's id in the
+# index, then what it needs. CI builds and runs every program the
+# playground can run for wasm, unless this file or wasm-never.txt lists
+# it, against the compiler, ghul-runtime and ghul-raster this repository
+# pins, and the index marks each of those `wasm`. A program with a
+# playground-unsupported file is not run in the playground at all and is
+# not listed here.
 #
 # Remove a line when its program passes on wasm; CI then holds it there.
 
 # The core library does not have the .NET API the solution uses.
 date-manipulation                      TimeZoneInfo
 file-modification-time                 File.get_last_write_time_utc
-find-limit-of-recursion                RuntimeHelpers
 holidays-related-to-easter             JulianCalendar
-host-introspection                     Marshal
-hostname                               System.Net
-memory-allocation                      Marshal
-memory-layout-of-a-data-structure      Marshal
 natural-sorting                        string normalization
 parse-an-ip-address                    System.Net.IPAddress
 secure-temporary-file                  FileStream
 stack-traces                           System.Diagnostics.StackTrace
+
+# A catchable stack overflow.
+find-limit-of-recursion                RuntimeHelpers
+
+# Linear memory, which the wasm target does not give a program.
+memory-allocation                      Marshal
+memory-layout-of-a-data-structure      Marshal
 unicode-strings                        string normalization
-variable-size-get                      Marshal
 xml-dom-serialization                  System.Xml
 xml-input                              System.Xml.Linq
 xml-output                             System.Xml.Linq
@@ -36,22 +39,17 @@ send-an-unknown-method-call            Type.get_method
 # A program path, which the wasm host does not give a program.
 program-name                           Environment.get_command_line_args()[0]
 
-# Threads, which a wasm program does not have.
-multiton                               Tasks.Parallel
-parallel-brute-force                   Tasks.Parallel
-szymanskis-algorithm                   Interlocked
-
 # decimal, which the wasm target does not represent.
 calculating-the-value-of-e             a decimal field
 hickerson-series-of-almost-integers    decimal(int)
 literals-floating-point                decimal literals
 test-integerness                       decimal.truncate
 variable-size-set                      decimal.min_value
+variable-size-get                      size_of[decimal]
 
 # Output that differs on wasm.
-distance-and-bearing                   regex lookbehind is not supported
-show-the-epoch                         DateTime display
-thiele-s-interpolation-formula         last digit of a round-tripped double
+show-the-epoch                         enum display name differs (Utc vs UTC)
+thiele-s-interpolation-formula         core trig differs from glibc by 1 ulp
 
 # Type inference that fails on the wasm target and not on .NET.
 averages-simple-moving-average         cannot return '_' where '_' expected

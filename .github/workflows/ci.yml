@@ -159,7 +159,8 @@ jobs:
   # ghul.dev's playground runs most programs compiled to WebAssembly, so
   # each one it runs that way is built and run here for wasm too, against
   # the libraries' sources at the versions this repository pins: every
-  # program the playground can run that wasm-exempt.txt does not list. A
+  # program the playground can run that neither wasm-exempt.txt nor
+  # wasm-never.txt lists. A
   # wasm build compiles the core library from source, so a program costs
   # several times its .NET build, and the shards are many.
   wasm_shards:
@@ -270,7 +271,8 @@ jobs:
       run: dotnet run --project tools/rosetta -- show > /dev/null
 
     # The index marks every program the playground can run as wasm unless
-    # wasm-exempt.txt lists it, so a line that names no such program would
+    # wasm-exempt.txt or wasm-never.txt lists it, so a line that names no
+    # such program would
     # hide nothing and is an error.
     - name: Check the wasm exemptions
       shell: bash
