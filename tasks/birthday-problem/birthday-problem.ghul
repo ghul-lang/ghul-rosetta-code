@@ -29,8 +29,7 @@ simulated(people: int, at_least: int, trials: int) -> double =>
     in
     hits / double(trials)
 
-log_factorial(n: int) -> double =>
-    1::n |> reduce(0.0, (s, i) => s + log(i))
+log_factorial(n: int) -> double => 1::n |> reduce(0.0, (s, i) => s + log(i))
 
 exact(most: int, at_least: int) -> double[] is
     let inverse_factorial =

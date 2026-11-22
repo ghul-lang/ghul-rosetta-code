@@ -62,8 +62,7 @@ si
 
 let random = Ghul.Random(1363)
 
-random_below(limit: bigint) -> bigint =>
-    random.next_int64(1L, long(limit))
+random_below(limit: bigint) -> bigint => random.next_int64(1L, long(limit))
 
 sign(hash: bigint, secret: bigint) -> (c: bigint, d: bigint) is
     do

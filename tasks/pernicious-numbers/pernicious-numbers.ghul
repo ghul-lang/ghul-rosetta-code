@@ -1,8 +1,7 @@
 use default
 
 prime(value) =>
-    value >= 2 /\
-    2::int(Ghul.Math.sqrt(value)) |> all(d => value % d != 0)
+    value >= 2 /\ 2::int(Ghul.Math.sqrt(value)) |> all(d => value % d != 0)
 
 population_count(value) =>
     Text.to_base(value, 2) |> filter(* == '1') |> count()

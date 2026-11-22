@@ -82,10 +82,7 @@ draw(image: IMAGE, angle: double) is
                 for j in -1::1 do
                     let at = plus(
                         center,
-                        plus(
-                            times(face.u, i),
-                            times(face.v, j)
-                        )
+                        plus(times(face.u, i), times(face.v, j))
                     )
 
                     stickers.add(
