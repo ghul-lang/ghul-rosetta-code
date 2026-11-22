@@ -1,5 +1,0 @@
-# \uXXXX escapes for the combining marks, which the formatter would rewrite as
-# characters and the wiki would then normalise into precomposed ones
-01-character-length/01-character-length.ghul
-02-byte-length/02-byte-length.ghul
-03-grapheme-length/03-grapheme-length.ghul
