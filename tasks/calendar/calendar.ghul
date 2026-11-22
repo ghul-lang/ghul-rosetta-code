@@ -43,7 +43,7 @@ calendar(year: int, page_width: int) -> string{} is
     yield center("{year}", width)
 
     for row in 1::12 |> chunk(across) do
-        let months = row |> map(month => month_lines(year, month)) |> list()
+        let months = row |> map(month_lines(year, *)) |> list()
 
         yield ""
 
