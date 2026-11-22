@@ -1,3 +1,5 @@
+@@rtti()
+
 use default
 
 class CALCULATOR is
