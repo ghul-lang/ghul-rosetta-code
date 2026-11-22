@@ -4,8 +4,10 @@ as double, halved: 1073741823.5
 as complex, times j: <0; 2147483647>
 bigint as double, plus a half: 2147483647.5
 call argument: sqrt(2) = 1.4142135623730951
-return: 3.5, assignment: 1073741823.5
-if: 0.5, array literal: 3.25
+return: System.Double
+assignment: System.Double
+if: System.Double
+array literal: System.Double[]
 byte 5 + 1 = 6, int(2.9) = 2
 int('A') = 65, double(1) == 1.0: true
 ints halved as doubles: [0.5, 1, 1.5]
