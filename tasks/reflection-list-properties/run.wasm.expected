@@ -1,0 +1,9 @@
+borrowed: bool, read and write
+  value now: false
+pages: int, read and write
+  value now: 204
+title: string, read and write
+  value now: Solaris
+words: int, read only
+  value now: 61200
+after setting it through reflection: true
