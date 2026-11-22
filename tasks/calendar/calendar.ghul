@@ -8,49 +8,54 @@ let month_names = [
 let month_width = 20
 let gap = "  "
 
-centre(text: string, width: int) -> string =>
-    "{string(' ', (width - text.length) / 2)}{text}".pad_right(width)
+// The text with enough spaces before it to center it in the width.
+center(text: string, width: int) -> string =>
+    text.pad_left((width + text.length) / 2)
 
-month_lines(year: int, month: int) -> string[] =>
-    let
-        offset = cast int(Time.DateTime(year, month, 1).day_of_week),
-        days = Time.DateTime.days_in_month(year, month),
-        weeks =
-            repeat("  ", offset)
-                |> cat(1::days |> map(day => "{day,2}"))
-                |> chunk(7)
-                |> map(week => (week |> join(" ")).pad_right(month_width))
-    in
+// A month as eight lines of month_width characters: its name, the day
+// names, and six weeks, the ones it doesn't need left blank.
+month_lines(year: int, month: int) -> string[] is
+    let first_day = cast int(Time.DateTime(year, month, 1).day_of_week)
+    let days = Time.DateTime.days_in_month(year, month)
+
+    let cells =
+        repeat("  ", first_day) ++ (1::days |> map(day => "{day,2}"))
+    let weeks = cells |> chunk(7) |> map(week => week |> join(" "))
+    let lines =
         [
-            centre(month_names[month - 1], month_width),
+            center(month_names[month - 1], month_width),
             "Su Mo Tu We Th Fr Sa"
-        ] ++
-        weeks ++
-        repeat(string(' ', month_width), 6)
+        ] ++ weeks ++ repeat("", 6)
+
+    return
+        lines
             |> take(8)
+            |> map(line => line.pad_right(month_width))
             |> list()
+si
 
+// The year's calendar, as many months across as fit in the page width.
 calendar(year: int, page_width: int) -> string{} is
-    let cell = month_width + gap.length
-    let across = Ghul.Math.max(1, (page_width + gap.length) / cell)
-    let width = across * cell - gap.length
+    let across = (page_width + gap.length) / (month_width + gap.length)
+    let width = across * (month_width + gap.length) - gap.length
 
-    yield centre("[ Snoopy ]", width)
-    yield centre("{year}", width)
+    yield center("[ Snoopy ]", width)
+    yield center("{year}", width)
 
     for row in 1::12 |> chunk(across) do
-        let months = row |> map(month_lines(year, *)) |> list()
+        let months = row |> map(month => month_lines(year, month)) |> list()
 
         yield ""
 
         for line in 0..8 do
-            let text = months |> map(lines => lines[line]) |> join(gap)
-
-            yield text.trim_end()
+            yield
+                (
+                    months |> map(lines => lines[line]) |> join(gap)
+                ).trim_end()
         od
     od
 si
 
-for line in calendar(1969, 132) do
+for line in calendar(1969, 80) do
     write_line(line)
 od
