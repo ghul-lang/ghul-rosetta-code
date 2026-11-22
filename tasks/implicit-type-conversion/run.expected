@@ -1,3 +1,13 @@
-a CAT is an ANIMAL: true
-count widened to int?: 7
-byte 5 widened by explicit cast to 5
+int 2147483647 + 1 = -2147483648, as long 2147483648
+as bigint, squared: 4611686014132420609
+as double, halved: 1073741823.5
+as complex, times j: <0; 2147483647>
+bigint as double, plus a half: 2147483647.5
+call argument: sqrt(2) = 1.4142135623730951
+return: 3.5, assignment: 1073741823.5
+if: 0.5, array literal: 3.25
+byte 5 + 1 = 6, int(2.9) = 2
+int('A') = 65, double(1) == 1.0: true
+ints halved as doubles: [0.5, 1, 1.5]
+a Cat is an Animal: Tom; an int is an int?: 2147483647
+int to Fraction: 2147483647/1; char to char[]: [x]
