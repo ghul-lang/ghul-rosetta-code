@@ -92,6 +92,17 @@
                     ]
                 }
             }
+        },
+
+        // The wasm tasks built by a native compiler in hosts/llvm/ghul, each
+        // from a fork server that compiles the libraries once, as the
+        // compiler's CI builds them; the tasks wasm-tasks.sh leaves out are
+        // built for .NET instead:
+        //   dotnet ghul-test --config ci-wasm $(scripts/wasm-tasks.sh)
+        //   dotnet ghul-test $(scripts/wasm-tasks.sh --others)
+        "ci-wasm": {
+            "extends": "wasm",
+            "compiler": { "path": "hosts/llvm/ghul", "reference_assemblies": false, "fork_server": true }
         }
     }
 }
