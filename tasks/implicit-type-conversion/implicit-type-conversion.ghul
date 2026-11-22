@@ -5,9 +5,9 @@ use default
 //   long   -> single, double, bigint, complex
 //   single -> double, complex
 //   double -> complex
-// The conversion happens in arithmetic, at a call argument, in a typed let,
-// an assignment or a return, and where the arms of an if, or the elements of
-// an array literal, are numbers of different types.
+// The conversion happens in arithmetic, at a call argument, in a typed
+// let, an assignment or a return, and where the arms of an if, or the
+// elements of an array literal, are numbers of different types.
 
 // Two paths from the smallest type that widens to the largest: integers
 // stay exact, 32 bits to 64 to unbounded; reals go 32 bits to 64 to 128.
