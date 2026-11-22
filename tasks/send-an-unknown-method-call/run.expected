@@ -2,4 +2,3 @@ double(7) = 14
 square(7) = 49
 negate(7) = -7
 cube is not a method of CALCULATOR
-square(9) = 81

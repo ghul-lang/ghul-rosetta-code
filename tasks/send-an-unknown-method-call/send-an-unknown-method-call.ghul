@@ -31,7 +31,3 @@ si
 for chosen in ["double", "square", "negate", "cube"] do
     write_line(send(chosen, 7))
 od
-
-let generated = "{"squ"}{"are"}"
-
-write_line(send(generated, 9))
