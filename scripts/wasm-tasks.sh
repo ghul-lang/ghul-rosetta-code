@@ -7,6 +7,7 @@
 #
 #   dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh)
 #   scripts/wasm-tasks.sh --check    # every exemption names a program
+#   scripts/wasm-tasks.sh --others   # the programs left out instead
 #
 # A program is a directory holding a source named after it. Its id is its
 # path under tasks/, as the index writes it. A program with a
@@ -60,6 +61,12 @@ if [ "${1:-}" = --check ] ; then
     exit $STATUS
 fi
 
+OTHERS=
+if [ "${1:-}" = --others ] ; then
+    OTHERS=1
+    shift
+fi
+
 [ $# -gt 0 ] || set -- tasks
 
 declare -A SKIP
@@ -69,7 +76,8 @@ done
 
 for program in $(programs "$@") ; do
     if [ -n "${SKIP[$program]:-}" ] || [ -f "$ROOT/$program/playground-unsupported" ] ; then
+        [ -n "$OTHERS" ] && echo "$program"
         continue
     fi
-    echo "$program"
+    [ -n "$OTHERS" ] || echo "$program"
 done
