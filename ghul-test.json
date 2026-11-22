@@ -39,6 +39,33 @@
             }
         },
 
+        // The llvm tasks built unoptimised by a native compiler in
+        // hosts/llvm/ghul rather than by a .NET-hosted one, as the compiler's
+        // CI builds them with the native compiler its pull request produced:
+        //   dotnet ghul-test --config native $(cat llvm-tasks.txt)
+        "native": {
+            "extends": "llvm",
+            "compiler": { "path": "hosts/llvm/ghul", "reference_assemblies": false },
+            "targets": {
+                "llvm": {
+                    "flags": "--optimise 0",
+                    "libraries": [
+                        {
+                            "name": "ghul-runtime",
+                            "root": ["libraries/ghul-runtime", "../ghul-runtime", "../../../ghul-runtime"],
+                            "sources": ["ghul-core/src/**/*.ghul", "ghul-runtime/src/**/*.ghul"]
+                        },
+                        {
+                            "name": "ghul-raster",
+                            "package": "ghul.raster",
+                            "root": ["libraries/ghul-raster", "../ghul-raster", "../../../ghul-raster"],
+                            "sources": "src/**/*.ghul"
+                        }
+                    ]
+                }
+            }
+        },
+
         // The same tasks built as WebAssembly, as ghul.dev's playground builds
         // them, and run under Node on the loader the runtime's core ships,
         // with the same libraries as the llvm configuration. CI runs it over
