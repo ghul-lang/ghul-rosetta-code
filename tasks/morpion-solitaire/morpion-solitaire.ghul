@@ -163,12 +163,7 @@ for m in played do
     let from_x = m.x - m.k * step.dx
     let from_y = m.y - m.k * step.dy
 
-    image.line(
-        from_x,
-        from_y,
-        double(from_x + 4 * step.dx),
-        double(from_y + 4 * step.dy)
-    )
+    image.line(from_x, from_y, from_x + 4 * step.dx, from_y + 4 * step.dy)
 od
 
 image.color(20ub, 20ub, 20ub)
