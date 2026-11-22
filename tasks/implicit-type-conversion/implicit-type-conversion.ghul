@@ -31,7 +31,8 @@ let joined = if small > 0 then 1 else 0.5 fi
 let listed = [1, 2.5, 3]
 
 write_line("call argument: sqrt(2) = {sqrt(2)}")
-// each is a double, so '/ 2' is real division: 7 / 2 gives 3.5:
+// dividing by 2 shows each value is a double:
+// an int would print 3, not 3.5:
 write_line("return: {as_real(7) / 2}, assignment: {total / 2}")
 write_line("if: {joined / 2}, array literal: {listed |> sum() / 2}")
 
