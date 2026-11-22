@@ -617,7 +617,7 @@ reader, who otherwise runs `--fix` and undoes it. Two further cases always earn 
 that is also its own data - a quine, a program that reads its own text - because laying it out
 differently changes what the program prints; and a source whose layout is itself what the entry
 demonstrates, such as the Comments task's block comment inside a call. The formatter writes a
-`\uXXXX` escape back as it was written, so an escape needs no exemption.
+`\uXXXX` escape back as it was written, so a solution doesn't need an exemption for an escape.
 
 A hand layout still keeps to 76 columns, four-space indentation that depends only on nesting,
 and no statement terminators; what it chooses is where the breaks fall.
