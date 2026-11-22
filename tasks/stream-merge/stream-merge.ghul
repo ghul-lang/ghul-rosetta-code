@@ -2,40 +2,26 @@ use default
 use Ghul.Comparable
 
 merge_two[T: Comparable[T]](left: T{}, right: T{}) -> T{} is
-    let ahead = left.iterator
-    let behind = right.iterator
-    let more_ahead mut = ahead.move_next()
-    let more_behind mut = behind.move_next()
-
-    while more_ahead /\ more_behind do
-        if ahead.current <= behind.current then
-            yield ahead.current
-
-            more_ahead = ahead.move_next()
+    case (left, right)
+    when ([], _) then
+        yield in right
+    when (_, []) then
+        yield in left
+    when ([x, ..xs], [y, ..ys]) then
+        if x <= y then
+            yield x
+            yield in merge_two(xs, right)
         else
-            yield behind.current
-
-            more_behind = behind.move_next()
+            yield y
+            yield in merge_two(left, ys)
         fi
-    od
-
-    while more_ahead do
-        yield ahead.current
-
-        more_ahead = ahead.move_next()
-    od
-
-    while more_behind do
-        yield behind.current
-
-        more_behind = behind.move_next()
-    od
+    esac
 si
 
 merge_all[T: Comparable[T]](streams: T{}[]) -> T{} =>
-    case streams.count
-    when 0 then LIST()
-    when 1 then streams[0]
+    case streams
+    when [] then LIST()
+    when [s] then s
     else
         let middle = streams.count / 2 in
         merge_two(
@@ -44,11 +30,8 @@ merge_all[T: Comparable[T]](streams: T{}[]) -> T{} =>
         )
     esac
 
-counting(start: int, step: int, count: int) -> int{} is
-    for term in 0..count do
-        yield start + term * step
-    od
-si
+counting(start: int, step: int, count: int) -> int{} =>
+    0..count |> map(term => start + term * step)
 
 let pair = merge_two(counting(0, 3, 4), counting(1, 3, 4))
 
