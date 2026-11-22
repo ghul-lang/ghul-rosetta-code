@@ -2,7 +2,7 @@
     "task": "Implicit type conversion",
     "url": "https://rosettacode.org/wiki/Implicit_type_conversion",
     "status": "published",
-    "tags": ["basics", "classes", "optionals"],
+    "tags": ["basics", "traits", "optionals"],
     "interest": 1,
-    "summary": "Demonstrate implicit type conversions from the smallest numeric type to the largest, and whether users can define their own."
+    "summary": "Show the implicit number widenings, the two paths they take from int to the largest types, what still needs an explicit conversion, and why a program can't declare its own."
 }

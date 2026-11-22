@@ -1,26 +1,94 @@
 use default
 
-class ANIMAL is
-    init() is si
+// ghūl converts a number implicitly only to a wider number:
+//   int    -> long, single, double, bigint, complex
+//   long   -> single, double, bigint, complex
+//   single -> double, complex
+//   double -> complex
+// The conversion happens in arithmetic, at a call argument, in a typed let,
+// an assignment or a return, and where the arms of an if, or the elements of
+// an array literal, are numbers of different types.
+
+// Two paths from the smallest type that widens to the largest: integers
+// stay exact, 32 bits to 64 to unbounded; reals go 32 bits to 64 to 128.
+let small: int = 2_147_483_647
+let wider: long = small
+let widest: bigint = wider
+
+write_line("int {small} + 1 = {small + 1}, as long {wider + 1}")
+write_line("as bigint, squared: {widest * widest}")
+
+let real: double = small
+let plane: complex = real
+
+write_line("as double, halved: {real / 2.0}")
+write_line("as complex, times j: {plane * 1j}")
+
+// The paths branch at int and never meet again: bigint and complex convert
+// to neither each other nor double, so mixing them needs an explicit
+// conversion.
+//   wrong: widest + 0.5;  let z: complex = widest
+write_line("bigint as double, plus a half: {double(widest) + 0.5}")
+
+// The other places a number widens.
+as_real(n: int) -> double => n
+
+let total: double mut = 0
+total = small
+
+let joined = if small > 0 then 1 else 0.5 fi
+let listed = [1, 2.5, 3]
+
+write_line("call argument: sqrt(2) = {sqrt(2)}")
+// each of these is a double, so dividing by 2 keeps the half
+write_line("return: {as_real(7) / 2}, assignment: {total / 2}")
+write_line("if: {joined / 2}, array literal: {listed |> sum() / 2}")
+
+// Explicit conversions: anything narrower than int, any narrowing, decimal,
+// char, and every comparison with ==.
+//   wrong: let i: int = tiny;  let n: int = 2.9;  let d: decimal = 1
+//          let c: int = 'A';  1 == 1.0
+let tiny: byte = 5b
+let from_byte = int(tiny) + 1
+let truncated = int(2.9)
+let code = int('A')
+let same = double(1) == 1.0
+
+write_line("byte {tiny} + 1 = {from_byte}, int(2.9) = {truncated}")
+write_line("int('A') = {code}, double(1) == 1.0: {same}")
+
+// A number never widens through a type argument: a list of int is not a
+// list of double, so each element converts.
+//   wrong: let reals: LIST[double] = ints |> LIST()
+let ints = [1, 2, 3]
+let reals = ints |> map(n => double(n) / 2.0) |> list()
+
+write_line("ints halved as doubles: {reals}")
+
+// Conversions that aren't numeric: a value converts implicitly to any type
+// it inherits from or implements, and to the optional of its own type.
+trait Animal is
+    name: string
 si
 
-class CAT: ANIMAL is
-    init() is
-        super.init()
-    si
+class Cat(name: string public): Animal
+
+let animal: Animal = Cat("Tom")
+let maybe: int? = small
+
+write_line("a Cat is an Animal: {animal.name}; an int is an int?: {maybe}")
+
+// A program can't declare an implicit conversion of its own: only the core
+// library declares widenings. It can declare explicit ones, as functions or
+// constructors, and an argument still widens on its way in.
+struct Fraction(numerator: long public, denominator: long public) is
+    to_string() -> string => "{numerator}/{denominator}"
 si
 
-let cat = CAT()
-let animal: ANIMAL = cat
+fraction(whole: long) -> Fraction => Fraction(whole, 1L)
 
-write_line("a CAT is an ANIMAL: {isa ANIMAL(animal)}")
+letters(c: char) -> char[] => [c]
 
-let count: int = 7
-let maybe_count: int? = count
-
-write_line("count widened to int?: {maybe_count}")
-
-let smallest: byte = 5b
-let widened: double = double(int(smallest))
-
-write_line("byte {smallest} widened by explicit cast to {widened}")
+write_line(
+    "int to Fraction: {fraction(small)}; char to char[]: {letters('x')}"
+)
