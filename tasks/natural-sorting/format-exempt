@@ -1,5 +1,4 @@
-# The source writes Unicode code points as \uXXXX escapes, and the formatter
-# rewrites an escape whose code point has a glyph as that character, which
-# changes what the source shows. Remove this file once the formatter keeps a
-# literal's escapes as they were written.
+# Each replacement in the folding chains is a call on a line of its own, so
+# the table of what folds to what reads down the page; the formatter packs
+# the calls onto shared lines and splits one call's arguments apart.
 natural-sorting.ghul

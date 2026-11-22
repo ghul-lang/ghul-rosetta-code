@@ -15,7 +15,8 @@ write_line("unicode by code point: \u20AC and \uD83D\uDE00")
 write_line(
     "adjacent literals chain, "
     "so this is one string "
-    "written over three lines")
+    "written over three lines"
+)
 
 let letter = 'g'
 

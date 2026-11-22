@@ -613,13 +613,11 @@ it writes a line that reads worse than a hand layout would - a short `case` spre
 lines, a pipe chain rejoined so its stages no longer line up with what each does, a table of
 arguments wrapped out of its columns - lay it out by hand and name the source here, with the `#`
 line saying what the hand layout shows that the formatter's does not. The line is for the next
-reader, who otherwise runs `--fix` and undoes it. Three further cases always earn one: a source
+reader, who otherwise runs `--fix` and undoes it. Two further cases always earn one: a source
 that is also its own data - a quine, a program that reads its own text - because laying it out
-differently changes what the program prints; a source whose layout is itself what the entry
-demonstrates, such as the Comments task's block comment inside a call; and a source whose string
-literals are written as `\uXXXX` escapes, which the formatter rewrites as the characters
-themselves - a formatter bug rather than a layout decision, so those exemptions go when it is
-fixed, and each says so.
+differently changes what the program prints; and a source whose layout is itself what the entry
+demonstrates, such as the Comments task's block comment inside a call. The formatter writes a
+`\uXXXX` escape back as it was written, so a solution doesn't need an exemption for an escape.
 
 A hand layout still keeps to 76 columns, four-space indentation that depends only on nesting,
 and no statement terminators; what it chooses is where the breaks fall.

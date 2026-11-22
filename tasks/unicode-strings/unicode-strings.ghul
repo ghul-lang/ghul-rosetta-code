@@ -4,14 +4,12 @@ use Collections.SET
 
 ×(a: int, b: int) -> int => a * b
 
-∪(a: SET[int], b: SET[int]) -> SET[int] =>
-    a ++ b |> SET()
+∪(a: SET[int], b: SET[int]) -> SET[int] => a ++ b |> SET()
 
 bytes(encoding, text) =>
     encoding.get_bytes(text) |> map(b => "{b:X2}") |> join(" ")
 
-code_points(text) =>
-    text |> runes() |> count()
+code_points(text) => text |> runes() |> count()
 
 write_line("source is UTF-8, and a literal holds what it says")
 write_line("  héllo wörld")
@@ -58,6 +56,7 @@ let normalized = decomposed.normalize(form_c)
 write_line("normalization comes from .NET too")
 write_line(
     "  \\u00E9 is {composed.length} char, "
-    "e\\u0301 is {decomposed.length}")
+    "e\\u0301 is {decomposed.length}"
+)
 write_line("  composed =~ decomposed is {composed =~ decomposed}")
 write_line("  after NFC it is {composed =~ normalized}")

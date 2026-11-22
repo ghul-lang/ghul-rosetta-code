@@ -1,5 +1,4 @@
-# The source writes Unicode code points as \uXXXX escapes, and the formatter
-# rewrites an escape whose code point has a glyph as that character, which
-# changes what the source shows. Remove this file once the formatter keeps a
-# literal's escapes as they were written.
+# The flush literal starts on the line of its let, and the word test stays
+# split at its \/ so each condition reads on its own; the formatter moves the
+# literal onto a line of its own and indents its whole body a step further.
 random-sentence-from-book.ghul

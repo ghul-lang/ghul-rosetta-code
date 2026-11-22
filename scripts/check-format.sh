@@ -10,8 +10,8 @@
 # A format-exempt file names the sources to leave as they are, one path per line
 # relative to the task directory, with the reason on a # line above them: a hand
 # layout that reads better than the formatter's, saying what it shows; a source
-# that is also its own data; a layout the entry itself demonstrates; or \uXXXX
-# escapes the formatter would rewrite as characters. See AGENTS.md.
+# that is also its own data; or a layout the entry itself demonstrates. See
+# AGENTS.md.
 #
 # Uses the compiler the tool manifest pins. Exits non-zero if any source
 # differs, or if the formatter could not read one.
