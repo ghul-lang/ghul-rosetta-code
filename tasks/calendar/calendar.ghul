@@ -11,7 +11,7 @@ let gap = "  "
 center(text: string, width: int) -> string =>
     text.pad_left((width + text.length) / 2)
 
-month_lines(year: int, month: int) -> string[] is
+month_lines(year: int, month: int) -> string[] => (
     let first_day = cast int(Time.DateTime(year, month, 1).day_of_week)
     let days = Time.DateTime.days_in_month(year, month)
 
@@ -24,12 +24,8 @@ month_lines(year: int, month: int) -> string[] is
             "Su Mo Tu We Th Fr Sa"
         ] ++ weeks ++ repeat("", 6)
 
-    return
-        lines
-            |> take(8)
-            |> map(line => line.pad_right(month_width))
-            |> list()
-si
+    lines |> take(8) |> map(line => line.pad_right(month_width)) |> list()
+)
 
 calendar(year: int, page_width: int) -> string{} is
     let across = (page_width + gap.length) / (month_width + gap.length)
@@ -44,10 +40,9 @@ calendar(year: int, page_width: int) -> string{} is
         yield ""
 
         for line in 0..8 do
-            yield
-                (
-                    months |> map(lines => lines[line]) |> join(gap)
-                ).trim_end()
+            let text = months |> map(lines => lines[line]) |> join(gap)
+
+            yield text.trim_end()
         od
     od
 si
