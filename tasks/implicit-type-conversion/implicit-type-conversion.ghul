@@ -31,7 +31,7 @@ let joined = if small > 0 then 1 else 0.5 fi
 let listed = [1, 2.5, 3]
 
 write_line("call argument: sqrt(2) = {sqrt(2)}")
-// each left side is a double, so dividing it by 2 gives a fraction:
+// each is a double, so '/ 2' is real division: 7 / 2 gives 3.5:
 write_line("return: {as_real(7) / 2}, assignment: {total / 2}")
 write_line("if: {joined / 2}, array literal: {listed |> sum() / 2}")
 
@@ -52,7 +52,8 @@ write_line("int('A') = {code}, double(1) == 1.0: {same}")
 
 let ints = [1, 2, 3]
 
-// widening applies to values only, so a list of int stays a list of int:
+// widening converts one number at a time;
+// a list of int stays a list of int:
 //   wrong: let reals: LIST[double] = ints |> LIST()
 // for a list of doubles, convert each element explicitly:
 let reals = ints |> map(n => double(n) / 2.0) |> list()
