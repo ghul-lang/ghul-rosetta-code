@@ -30,8 +30,7 @@ merge_all[T: Comparable[T]](streams: T{}[]) -> T{} =>
         )
     esac
 
-counting(start: int, step: int, count: int) -> int{} =>
-    0..count |> map(term => start + term * step)
+counting(start, step, count) => 0..count |> map(term => start + term * step)
 
 let pair = merge_two(counting(0, 3, 4), counting(1, 3, 4))
 
@@ -48,11 +47,11 @@ write_line("three streams:")
 write_line("  {streams |> merge_all() |> join(" ")}")
 
 write_line("nothing to merge:")
-write_line("  [{merge_all(LIST[int{}]()) |> join(" ")}]")
+write_line("  [{merge_all[int]([]) |> join(" ")}]")
 
 let words = [
-    pipe(["apple", "cherry", "grape"]),
-    pipe(["banana", "date"])
+    ["apple", "cherry", "grape"],
+    ["banana", "date"]
 ]
 
 write_line("two streams of words:")
