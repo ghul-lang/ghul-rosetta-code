@@ -54,7 +54,7 @@ od
 
 prime(value) =>
     value >= 2L /\
-    2L::long(Ghul.Math.sqrt(double(value))) |> all(d => value % d != 0L)
+    2L::long(Ghul.Math.sqrt(value)) |> all(d => value % d != 0L)
 
 write_line("three digit primes:")
 

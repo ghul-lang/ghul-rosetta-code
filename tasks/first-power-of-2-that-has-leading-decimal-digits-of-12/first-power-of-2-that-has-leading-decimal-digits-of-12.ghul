@@ -4,8 +4,8 @@ let log_two = log10(2.0)
 
 p(leading, nth) =>
     let
-        digits = floor(log10(double(leading))),
-        lower = log10(double(leading)) - digits,
+        digits = floor(log10(leading)),
+        lower = log10(leading) - digits,
         upper = log10(double(leading + 1)) - digits
     in
         from(1)

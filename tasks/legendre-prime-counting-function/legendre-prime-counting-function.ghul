@@ -26,11 +26,11 @@ prime_count(n) =>
     if n < 2L then
         0L
     else
-        let a = prime_count(long(sqrt(double(n)))) in
+        let a = prime_count(long(sqrt(n))) in
         phi(n, int(a)) + a - 1L
     fi
 
 for exponent in 0::9 do
-    let n = long(pow(10.0, double(exponent)))
+    let n = long(pow(10.0, exponent))
     write_line("10^{exponent} {prime_count(n),12:N0}")
 od

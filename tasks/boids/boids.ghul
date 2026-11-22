@@ -46,7 +46,7 @@ wall_push(point: VEC) -> VEC is
 
     for dx in -3::3 do
         for dy in -6::6 do
-            let probe = point + VEC(double(dx), double(dy))
+            let probe = point + VEC(dx, dy)
 
             if is_wall(probe) then
                 let away = point - probe

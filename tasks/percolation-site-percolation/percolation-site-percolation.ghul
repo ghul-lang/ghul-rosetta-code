@@ -76,7 +76,7 @@ if let grid = shown then
     let cell = 24
     let image = IMAGE(size * cell, size * cell)
 
-    image.view(0.0, double(size), double(size), 0.0)
+    image.view(0.0, size, size, 0.0)
     image.clear(250ub, 250ub, 250ub)
 
     for row in 0..size do

@@ -59,7 +59,7 @@ si
 let width = int(cell) * numbers.count
 let image = IMAGE(width, 130)
 
-image.view(0.0, 0.0, double(width), 130.0)
+image.view(0.0, 0.0, width, 130.0)
 image.clear(250ub, 247ub, 238ub)
 image.color(60ub, 40ub, 30ub)
 

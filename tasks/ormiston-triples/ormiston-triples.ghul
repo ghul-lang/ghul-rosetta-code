@@ -28,7 +28,7 @@ base_primes(bound: int) -> int{} is
 si
 
 primes_below(bound: int) -> int{} is
-    let root_bound = int(sqrt(double(bound))) + 1
+    let root_bound = int(sqrt(bound)) + 1
     let roots = base_primes(root_bound)
     let block = repeat(false, segment_size) |> LIST()
 

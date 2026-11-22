@@ -121,7 +121,7 @@ let image = IMAGE(
     int(3.0 * card_height + 4.0 * gap)
 )
 
-image.view(0.0, double(image.height), double(image.width), 0.0)
+image.view(0.0, image.height, image.width, 0.0)
 image.clear(40ub, 90ub, 60ub)
 
 for

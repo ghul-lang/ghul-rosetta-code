@@ -18,10 +18,7 @@ steps_of_length(squared: int) -> Step[] =>
         |> list()
 
 bend(from: Step, to: Step) -> double =>
-    let turn =
-        atan2(double(from.y), double(from.x)) -
-        atan2(double(to.y), double(to.x))
-    in
+    let turn = atan2(from.y, from.x) - atan2(to.y, to.x) in
     turn - 2.0 * pi * floor(turn / (2.0 * pi))
 
 spiral(count: int) -> Step{} is

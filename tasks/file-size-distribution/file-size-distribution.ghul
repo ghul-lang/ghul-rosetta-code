@@ -11,7 +11,7 @@ bucket(size) =>
     if size == 0L then
         0
     else
-        int(log10(double(size))) + 1
+        int(log10(size)) + 1
     fi
 
 label(bucket) =>
@@ -19,7 +19,7 @@ label(bucket) =>
         "empty"
     else
         "{pow(10.0, double(bucket - 1))} to "
-        "{pow(10.0, double(bucket)) - 1.0} bytes"
+        "{pow(10.0, bucket) - 1.0} bytes"
     fi
 
 let counts =

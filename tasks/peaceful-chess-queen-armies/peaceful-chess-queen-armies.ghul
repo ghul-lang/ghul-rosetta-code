@@ -119,7 +119,7 @@ draw(armies: Armies, n: int, file: string) is
     let square = 44
     let image = IMAGE(n * square, n * square)
 
-    image.view(0.0, double(n), double(n), 0.0)
+    image.view(0.0, n, n, 0.0)
 
     for row in 0..n do
         for column in 0..n do

@@ -6,7 +6,7 @@ let first_primes = primes() |> take(50) |> list()
 // p - 1, so the nth of them is the nth prime to that power.
 term(n) =>
     if is_prime(n) then
-        bigint.pow(bigint(first_primes[n - 1]), n - 1)
+        bigint.pow(first_primes[n - 1], n - 1)
     else
         bigint(
             from(1L)

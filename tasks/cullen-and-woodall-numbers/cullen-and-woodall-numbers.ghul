@@ -8,8 +8,7 @@ let small_primes = primes(3L) |> take_while(p => p <= 20_000L) |> list()
 
 has_small_factor(n, offset) =>
     n > 10 /\
-    small_primes
-        |> any(p => (n % p * mod_pow(2L, long(n), p) + offset) % p == 0L)
+    small_primes |> any(p => (n % p * mod_pow(2L, n, p) + offset) % p == 0L)
 
 is_cullen_prime(n) => !has_small_factor(n, 1L) /\ is_prime(cullen(n))
 

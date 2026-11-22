@@ -25,7 +25,7 @@ model(r: double, t: double) -> double =>
 error(r: double) -> double =>
     cases
         |> index()
-        |> map(c => model(r, double(c.index)) - c.value)
+        |> map(c => model(r, c.index) - c.value)
         |> sum_by(d => d * d)
 
 golden_section(low: double, high: double) -> double => (
@@ -57,7 +57,7 @@ image.color(215ub, 215ub, 220ub)
 image.stroke(1.0)
 
 for power in 1::6 do
-    image.line(0.0, double(power), days, double(power))
+    image.line(0.0, power, days, power)
 od
 
 image.color(90ub, 90ub, 100ub)
@@ -80,7 +80,7 @@ image.line(
 image.color(40ub, 80ub, 170ub)
 
 for (day, count) in cases |> index() do
-    image.dot(double(day), log10(double(count)), 2.5)
+    image.dot(day, log10(count), 2.5)
 od
 
 image.write("fit.png")
