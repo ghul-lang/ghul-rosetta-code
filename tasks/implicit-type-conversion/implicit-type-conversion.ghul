@@ -1,7 +1,6 @@
 use default
 
-// Two paths from the smallest type that widens to the largest: integers
-// stay exact, 32 bits to 64 to unbounded; reals go 32 bits to 64 to 128.
+// int widens to long, and long to bigint, which has arbitrary precision:
 let small: int = 2_147_483_647
 let wider: long = small
 let widest: bigint = wider
@@ -9,19 +8,20 @@ let widest: bigint = wider
 write_line("int {small} + 1 = {small + 1}, as long {wider + 1}")
 write_line("as bigint, squared: {widest * widest}")
 
+// int widens to double, and double to complex, a pair of doubles:
 let real: double = small
 let plane: complex = real
 
 write_line("as double, halved: {real / 2.0}")
 write_line("as complex, times j: {plane * 1j}")
 
-// The paths branch at int and never meet again: bigint and complex convert
-// to neither each other nor double, so mixing them needs an explicit
-// conversion.
+// a bigint mixed with a double or a complex takes an explicit conversion:
 //   wrong: widest + 0.5;  let z: complex = widest
 write_line("bigint as double, plus a half: {double(widest) + 0.5}")
 
-// The other places a number widens.
+// a number also widens at a return, an assignment, a call argument, an if
+// with arms of mixed number types, and an array literal of mixed number
+// types:
 as_real(n: int) -> double => n
 
 let total: double mut = 0
@@ -31,33 +31,36 @@ let joined = if small > 0 then 1 else 0.5 fi
 let listed = [1, 2.5, 3]
 
 write_line("call argument: sqrt(2) = {sqrt(2)}")
-// each of these is a double, so dividing by 2 keeps the half
+// each left side is a double, so dividing it by 2 gives a fraction:
 write_line("return: {as_real(7) / 2}, assignment: {total / 2}")
 write_line("if: {joined / 2}, array literal: {listed |> sum() / 2}")
 
-// Explicit conversions: anything narrower than int, any narrowing, decimal,
-// char, and every comparison with ==.
-//   wrong: let i: int = tiny;  let n: int = 2.9;  let d: decimal = 1
-//          let c: int = 'A';  1 == 1.0
+// these take an explicit conversion: from a type narrower than int, from
+// a wider type to a narrower one, from char, and to decimal:
+//   wrong: let i: int = tiny;  let n: int = 2.9;  let c: int = 'A'
+//          let d: decimal = 1
 let tiny: byte = 5b
 let from_byte = int(tiny) + 1
 let truncated = int(2.9)
 let code = int('A')
+// '==' takes two operands of the same type:
+//   wrong: 1 == 1.0
 let same = double(1) == 1.0
 
 write_line("byte {tiny} + 1 = {from_byte}, int(2.9) = {truncated}")
 write_line("int('A') = {code}, double(1) == 1.0: {same}")
 
-// A number never widens through a type argument: a list of int is not a
-// list of double, so each element converts.
-//   wrong: let reals: LIST[double] = ints |> LIST()
 let ints = [1, 2, 3]
+
+// widening applies to values only, so a list of int stays a list of int:
+//   wrong: let reals: LIST[double] = ints |> LIST()
+// for a list of doubles, convert each element explicitly:
 let reals = ints |> map(n => double(n) / 2.0) |> list()
 
 write_line("ints halved as doubles: {reals}")
 
-// Conversions that aren't numeric: a value converts implicitly to any type
-// it inherits from or implements, and to the optional of its own type.
+// subtypes and optionals: a value converts implicitly to any class it
+// inherits from, any trait it implements, and the optional of its type:
 trait Animal is
     name: string
 si
@@ -69,9 +72,8 @@ let maybe: int? = small
 
 write_line("a Cat is an Animal: {animal.name}; an int is an int?: {maybe}")
 
-// A program can't declare an implicit conversion of its own: only the core
-// library declares widenings. It can declare explicit ones, as functions or
-// constructors, and an argument still widens on its way in.
+// a program declares explicit conversions only, as functions or
+// constructors; the implicit ones come from the core library:
 struct Fraction(numerator: long public, denominator: long public) is
     to_string() -> string => "{numerator}/{denominator}"
 si
@@ -80,6 +82,7 @@ fraction(whole: long) -> Fraction => Fraction(whole, 1L)
 
 letters(c: char) -> char[] => [c]
 
+// the int passed to fraction widens to long:
 write_line(
     "int to Fraction: {fraction(small)}; char to char[]: {letters('x')}"
 )
