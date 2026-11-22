@@ -9,30 +9,34 @@ let month_width = 20
 let gap = "  "
 
 center(text: string, width: int) -> string =>
-    text.pad_left((width + text.length) / 2)
+    "{string(' ', (width - text.length) / 2)}{text}".pad_right(width)
 
-month_lines(year: int, month: int) -> string[] => (
-    let first_day = cast int(Time.DateTime(year, month, 1).day_of_week)
-    let days = Time.DateTime.days_in_month(year, month)
-
-    let cells =
-        repeat("  ", first_day) ++ (1::days |> map(day => "{day,2}"))
-    let weeks = cells |> chunk(7) |> map(week => week |> join(" "))
-    let lines =
+month_lines(year: int, month: int) -> string[] =>
+    let
+        offset = cast int(Time.DateTime(year, month, 1).day_of_week),
+        days = Time.DateTime.days_in_month(year, month),
+        weeks =
+            repeat("  ", offset)
+                |> cat(1::days |> map(day => "{day,2}"))
+                |> chunk(7)
+                |> map(week => (week |> join(" ")).pad_right(month_width))
+    in
         [
             center(month_names[month - 1], month_width),
             "Su Mo Tu We Th Fr Sa"
-        ] ++ weeks ++ repeat("", 6)
-
-    lines |> take(8) |> map(line => line.pad_right(month_width)) |> list()
-)
+        ] ++
+        weeks ++
+        repeat(string(' ', month_width), 6)
+            |> take(8)
+            |> list()
 
 calendar(year: int, page_width: int) -> string{} is
-    let across = (page_width + gap.length) / (month_width + gap.length)
-    let width = across * (month_width + gap.length) - gap.length
+    let cell = month_width + gap.length
+    let across = Ghul.Math.max(1, (page_width + gap.length) / cell)
+    let width = across * cell - gap.length
 
-    yield center("[ Snoopy ]", width)
-    yield center("{year}", width)
+    yield center("[ Snoopy ]", width).trim_end()
+    yield center("{year}", width).trim_end()
 
     for row in 1::12 |> chunk(across) do
         let months = row |> map(month_lines(year, *)) |> list()
