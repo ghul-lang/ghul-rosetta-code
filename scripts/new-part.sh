@@ -8,7 +8,7 @@
 #
 # The heading comes from the directory name: 01-using-map becomes "Using map". A task with parts
 # has no source of its own - move the existing one into a part first, and delete the task's
-# .ghulproj and ghul.json, or the two will collide over the entry point.
+# .ghulproj and test.json, or the two will collide over the entry point.
 
 set -e
 
@@ -59,19 +59,15 @@ PROJECT='  <PropertyGroup>
     echo '</Project>'
 } >"$DIR/$PART.ghulproj"
 
-cat >"$DIR/ghul.json" <<'EOJ'
-{
-    "restore_tools": true
-}
-EOJ
-
 cat >"$DIR/$PART.ghul" <<'EOJ'
 use IO.Std.write_line
 
 write_line("not written yet")
 EOJ
 
-for f in ghulflags err.expected warn.expected run.expected ; do
+echo '{}' >"$DIR/test.json"
+
+for f in err.expected warn.expected run.expected ; do
     : >"$DIR/$f"
 done
 

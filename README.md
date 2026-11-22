@@ -15,7 +15,7 @@ posted solution shows up as a failing test here rather than as a wrong answer on
 - `tasks/<slug>/notes.md` - optional, and rare: explanatory prose ahead of the code. See
   'writing explanatory text' below.
 - `tasks/<slug>/run.expected` - the test expectation: the output the program must produce. The
-  project is the test case - `ghulflags` and the `*.expected` files sit beside the source, and
+  project is the test case - `test.json` and the `*.expected` files sit beside the source, and
   `dotnet ghul-test tasks/<slug>` runs it in place.
 - `ledger/` - the ledger: one file per task that has been done, queued, rejected or blocked, and why.
 - `scripts/new-task.sh` - scaffolds a task and its test.
@@ -73,7 +73,7 @@ tasks/apply-a-callback-to-an-array/
 Each part becomes one `===heading===` section of the entry, with its own source and its own output,
 in the order the numbers give. The heading comes from the directory name, so `01-using-map` is
 "Using map". A task with parts has no source of its own: move the existing one into a part and
-delete the task's `.ghulproj` and `ghul.json`, or the two projects collide over the entry point.
+delete the task's `.ghulproj` and `test.json`, or the two projects collide over the entry point.
 
 Parts are for a task that genuinely reads better as two entries. A solution that simply prints
 several things is one part.

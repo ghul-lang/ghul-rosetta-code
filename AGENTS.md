@@ -1004,7 +1004,7 @@ the test runner or how the tests are run, or a shared script.
 
 Build and run a single task with `dotnet run --project tasks/<slug>`.
 
-- Each task directory is its own test case: the `ghulflags` and `*.expected` files sit beside
+- Each task directory is its own test case: the `test.json` and `*.expected` files sit beside
   the source. `scripts/new-task.sh` and `scripts/new-part.sh` scaffold them.
 - Tests assert the program's output. There are deliberately no IL snapshots - a test folder with
   no `il.expected` has its IL ignored, and `capture.sh` will not create one.
