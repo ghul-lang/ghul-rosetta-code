@@ -66,6 +66,15 @@
             }
         },
 
+        // The tasks wasm-slow.txt lists, built for llvm at -O2 by a native
+        // compiler in hosts/llvm/ghul, as the compiler's CI runs them in
+        // place of wasm:
+        //   dotnet ghul-test --config ci-llvm $(scripts/wasm-tasks.sh --slow)
+        "ci-llvm": {
+            "extends": "native",
+            "optimise": 2
+        },
+
         // The same tasks built as WebAssembly, as ghul.dev's playground builds
         // them, and run under Node on the loader the runtime's core ships,
         // with the same libraries as the llvm configuration. CI runs it over

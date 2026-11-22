@@ -1,0 +1,13 @@
+# Programs the playground runs on wasm that take many times as long there
+# as anything else, one a line: the program's id in the index, then its
+# time on wasm. The compiler's CI builds these for llvm at -O2 instead,
+# where each takes a fraction of the time, with
+#   dotnet ghul-test --config ci-llvm $(scripts/wasm-tasks.sh --slow)
+# and leaves them out of its wasm shards with --fast. Nothing else reads
+# this file: the index still marks these programs wasm, and this
+# repository's own wasm shards still run them.
+
+ormiston-triples                       34 s
+prime-triangle                         29 s
+wolstenholme-numbers/01-harmonic-sums  254 s
+wolstenholme-numbers/02-terse          254 s
