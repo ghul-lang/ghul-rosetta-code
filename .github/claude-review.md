@@ -52,6 +52,19 @@ rather than restating them here.
   task asks for - never mathematics, the task restated, the code narrated, a
   standard technique named, a fixed seed, or jargon. A fix or a clearer line
   comes first. See 'When a solution carries words, and when it does not'.
+- **How the words that remain are written.** Every comment added or changed in
+  a task source, and every `notes.md`, is published on the wiki, so it is held
+  to STYLE.md's 'State rules forwards' rule and its 'code comments'
+  section. Read each one against the line it sits on:
+  - A comment says something the reader can check against that line.
+  - A fact a comment states (a width, a range, an order, a count) is what
+    the code does. Verify it against the code rather than taking it from the
+    comment.
+  - A rule is stated as what happens. A comment that explains it only by
+    what does not happen, or by a negative example with no positive one, is
+    a finding.
+  - Metaphor in place of the mechanism, and a capitalized opening that
+    starts narrative, are findings under those same rules.
 - **A compiler bug worked around rather than reported.** A solution reshaped to
   avoid a bug ships the workaround to the wiki, where it outlives the bug. The
   task is marked blocked against an issue in `ghul-lang/ghul` instead.
