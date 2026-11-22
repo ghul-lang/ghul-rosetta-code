@@ -6,7 +6,16 @@ let subjects = [
 
 for subject in subjects do
     write_line(
-        "{subject}: {subject |> runes() |> count()} code points, "
+        "{shown(subject)}: {subject |> runes() |> count()} code points, "
         "{subject.length} UTF-16 code units"
     )
 od
+
+// prints combining marks as escapes, so on a page that normalizes text the
+// string shown is still the string counted
+shown(text: string) -> string => text |> map(escaped) |> string()
+
+escaped(c: char) -> string =>
+    if is_combining(c) then "\\u{int(c):X4}" else "{c}" fi
+
+is_combining(c: char) -> bool => int(c) >= 0x300 /\ int(c) <= 0x36F
