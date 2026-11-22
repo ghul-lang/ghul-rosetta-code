@@ -8,12 +8,9 @@ let month_names = [
 let month_width = 20
 let gap = "  "
 
-// The text with enough spaces before it to center it in the width.
 center(text: string, width: int) -> string =>
     text.pad_left((width + text.length) / 2)
 
-// A month as eight lines of month_width characters: its name, the day
-// names, and six weeks, the ones it doesn't need left blank.
 month_lines(year: int, month: int) -> string[] is
     let first_day = cast int(Time.DateTime(year, month, 1).day_of_week)
     let days = Time.DateTime.days_in_month(year, month)
@@ -34,7 +31,6 @@ month_lines(year: int, month: int) -> string[] is
             |> list()
 si
 
-// The year's calendar, as many months across as fit in the page width.
 calendar(year: int, page_width: int) -> string{} is
     let across = (page_width + gap.length) / (month_width + gap.length)
     let width = across * (month_width + gap.length) - gap.length
