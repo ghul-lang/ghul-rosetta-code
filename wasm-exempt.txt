@@ -30,9 +30,10 @@ xml-input                              System.Xml.Linq
 xml-output                             System.Xml.Linq
 xml-xpath                              System.Xml.Linq
 
-# Reflection the wasm core library does not match .NET in: it has no runtime
-# version, and its entry assembly is not optional; and the methods a type
-# inherits from object are not described, and would carry ghul names.
+# Reflection the wasm core library does not match .NET in. It has no runtime
+# version and its entry assembly is not optional (ghul-lang/ghul#4234), and
+# it does not describe the methods a class inherits from object
+# (ghul-lang/ghul#4235).
 introspection                          Environment.version
 reflection-list-methods                object's methods
 
