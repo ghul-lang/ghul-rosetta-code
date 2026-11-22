@@ -31,10 +31,10 @@ let joined = if small > 0 then 1 else 0.5 fi
 let listed = [1, 2.5, 3]
 
 write_line("call argument: sqrt(2) = {sqrt(2)}")
-// dividing by 2 shows each value is a double:
-// 7 / 2 prints 3.5, where an int prints 3:
-write_line("return: {as_real(7) / 2}, assignment: {total / 2}")
-write_line("if: {joined / 2}, array literal: {listed |> sum() / 2}")
+write_line("return: {as_real(7).get_type()}")
+write_line("assignment: {total.get_type()}")
+write_line("if: {joined.get_type()}")
+write_line("array literal: {listed.get_type()}")
 
 // these take an explicit conversion: from a type narrower than int, from
 // a wider type to a narrower one, from char, and to decimal:
