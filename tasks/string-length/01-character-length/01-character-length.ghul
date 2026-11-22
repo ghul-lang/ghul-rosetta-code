@@ -11,9 +11,8 @@ for subject in subjects do
     )
 od
 
-// A combining mark prints as its escape: a page that normalizes text would
-// otherwise fold e and U+0301 into one é, and show a different string from
-// the one counted.
+// prints combining marks as escapes, so on a page that normalizes text the
+// string shown is still the string counted
 shown(text: string) -> string => text |> map(escaped) |> string()
 
 escaped(c: char) -> string =>
