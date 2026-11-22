@@ -355,6 +355,11 @@ dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh)               # every on
 dotnet ghul-test --config wasm $(scripts/wasm-tasks.sh tasks/<slug>)  # one task's
 ```
 
+`wasm-slow.txt` names the parts that run on wasm but take many times as long there as anything
+else. The index still marks them `wasm` and this repository's wasm shards still run them; the
+compiler's CI builds them for llvm at `-O2` instead (`--config ci-llvm`), picking them with
+`scripts/wasm-tasks.sh --slow` and leaving them out of its wasm shards with `--fast`.
+
 The `wasm` configuration looks for the library sources under `libraries/` first, where CI checks
 them out at the pinned versions, then beside the repository.
 
