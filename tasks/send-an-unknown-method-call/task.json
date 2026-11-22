@@ -4,5 +4,5 @@
     "status": "published",
     "tags": ["dotnet-interop", "classes"],
     "interest": 3,
-    "summary": "Call an object method whose name is generated at run time."
+    "summary": "Invoke an object method where the name of the method to be invoked can be generated at run time."
 }
