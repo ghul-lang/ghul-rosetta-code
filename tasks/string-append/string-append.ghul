@@ -11,4 +11,4 @@ let built = StringBuilder("hello")
 
 built.append(", world")
 
-write_line("{built}")
+write_line(built)
