@@ -7,8 +7,8 @@ if [ ! -d $CASE ] ; then
     exit 1;
 fi
 
-if [ ! -f $CASE/ghulflags ] ; then
-    echo "not a test case directory (no ghulflags): $CASE"
+if [ ! -f $CASE/test.json ] ; then
+    echo "not a test case directory (no test.json): $CASE"
     exit 1;
 fi
 

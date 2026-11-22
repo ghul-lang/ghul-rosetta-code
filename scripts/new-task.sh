@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Scaffold a task: a runnable, testable project under tasks/. The test files
-# (ghulflags, expected outputs) live in the same directory - the project is the
+# (test.json, expected outputs) live in the same directory - the project is the
 # test case.
 #
 #   scripts/new-task.sh <slug> "<Rosetta task title>"
@@ -55,12 +55,6 @@ PROJECT='  <PropertyGroup>
     echo '</Project>'
 } >"$TASK/$SLUG.ghulproj"
 
-cat >"$TASK/ghul.json" <<'EOJ'
-{
-    "restore_tools": true
-}
-EOJ
-
 cat >"$TASK/task.json" <<EOJ
 {
     "task": "$JSON_TITLE",
@@ -78,7 +72,9 @@ use IO.Std.write_line
 write_line("not written yet")
 EOJ
 
-for f in ghulflags err.expected warn.expected run.expected ; do
+echo '{}' >"$TASK/test.json"
+
+for f in err.expected warn.expected run.expected ; do
     : >"$TASK/$f"
 done
 
