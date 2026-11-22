@@ -83,8 +83,8 @@ draw(image: IMAGE, angle: double) is
                     let at = plus(
                         center,
                         plus(
-                            times(face.u, double(i)),
-                            times(face.v, double(j))
+                            times(face.u, i),
+                            times(face.v, j)
                         )
                     )
 

@@ -24,7 +24,7 @@ bernoulli(n) is
 
     for m in 1::n do
         for j in 1::m |> reverse() do
-            a[j - 1] = fraction(long(j), 1L) * (a[j - 1] - a[j])
+            a[j - 1] = fraction(j, 1L) * (a[j - 1] - a[j])
         od
     od
 

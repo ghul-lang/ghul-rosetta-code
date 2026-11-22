@@ -30,7 +30,7 @@ draw_bar(image, color, top) is
             channel(color.blue * shine + glint)
         )
 
-        image.fill_rectangle(0.0, y, double(width), y + 1.0)
+        image.fill_rectangle(0.0, y, width, y + 1.0)
     od
 si
 

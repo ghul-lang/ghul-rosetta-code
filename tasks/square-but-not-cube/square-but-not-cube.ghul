@@ -2,7 +2,7 @@ use default
 
 is_cube(n: long) -> bool =>
     let
-        estimate = cbrt(double(n)),
+        estimate = cbrt(n),
         root = long(round(estimate))
     in
         root * root * root == n

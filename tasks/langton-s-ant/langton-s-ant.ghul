@@ -54,7 +54,7 @@ si
 
 let image = IMAGE(pixels, pixels)
 
-image.view(0.0, 0.0, double(size), double(size))
+image.view(0.0, 0.0, size, size)
 
 let animation = ANIMATION(pixels, pixels)
 

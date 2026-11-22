@@ -28,7 +28,7 @@ image.color(160ub, 160ub, 160ub)
 image.stroke(1.0)
 
 for tick in 0..10 do
-    image.line(double(tick), -20.0, double(tick), 200.0)
+    image.line(tick, -20.0, tick, 200.0)
 od
 
 for tick in 0..5 do

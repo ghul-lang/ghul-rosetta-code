@@ -16,7 +16,7 @@ estimate(throws: int) -> double =>
     4.0 * hits / throws
 
 for power in 2::7 do
-    let throws = int(pow(10.0, double(power)))
+    let throws = int(pow(10.0, power))
     let pi = estimate(throws)
 
     let error = abs(pi - Ghul.Math.pi)

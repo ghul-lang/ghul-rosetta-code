@@ -81,12 +81,12 @@ image.line(corners)
 
 for at in points do
     image.color(60ub, 60ub, 70ub)
-    image.dot(double(at.x), double(at.y), 3.5)
+    image.dot(at.x, at.y, 3.5)
 od
 
 for at in hull do
     image.color(216ub, 64ub, 48ub)
-    image.dot(double(at.x), double(at.y), 5.0)
+    image.dot(at.x, at.y, 5.0)
 od
 
 image.write("hull.png")

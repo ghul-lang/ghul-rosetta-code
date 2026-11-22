@@ -28,7 +28,7 @@ for step in [2, 5, 10] do
 
     for (time, value) in euler(cooling, initial, step, 100) do
         if time % 10 == 0 then
-            let expected = exact(double(time))
+            let expected = exact(time)
 
             write_line("{time,6} {value,8:F3} {expected,8:F3}")
         fi

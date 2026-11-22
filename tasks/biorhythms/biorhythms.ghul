@@ -46,7 +46,7 @@ report(birth: DateTime, target: DateTime) is
                 let
                     (trend, next) = quadrants[quadrant],
                     ahead = (quadrant + 1) * length / 4 - position,
-                    due = show(target.add_days(double(ahead)))
+                    due = show(target.add_days(ahead))
                 in
                     "{percentage}% ({trend}, next {next} {due})"
             fi

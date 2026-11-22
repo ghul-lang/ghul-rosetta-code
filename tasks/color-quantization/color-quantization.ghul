@@ -14,7 +14,7 @@ scene() -> IMAGE is
             ubyte(70.0 + 100.0 * t),
             ubyte(160.0 - 60.0 * t)
         )
-        image.fill_rectangle(0.0, double(y), 160.0, double(y + 1))
+        image.fill_rectangle(0.0, y, 160.0, y + 1)
     od
 
     image.color(255ub, 220ub, 60ub)
