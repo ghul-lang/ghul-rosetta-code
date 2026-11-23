@@ -4,10 +4,10 @@ alive(cells, index) =>
     index >= 0 /\ index < cells.length /\ cells[index] == '#'
 
 live_neighbourhood(cells, index) =>
-    ((index - 1)::(index + 1)) |> filter(alive(cells, *)) |> count()
+    index - 1::index + 1 |> filter(alive(cells, *)) |> count()
 
 next_generation(cells) =>
-    (0..cells.length)
+    0..cells.length
         |> map(index =>
             if live_neighbourhood(cells, index) == 2 then
                 "#"
