@@ -3,5 +3,5 @@
   "slug": "100-prisoners",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: a seeded generator makes the simulation reproducible, and the ~31% answer is the point",
-  "published_hash": "8280f1c8a1d5ac9dc72de4fdfb37351e5fec3819fe9017943dbbeda95e25d6d9"
+  "published_hash": "8acbe71da85671baa57556749d5dee1ec5ac2e7b6ad5f04909b3a89d34f6e0de"
 }
