@@ -34,4 +34,8 @@ dine(name: string, seat: int) -> Future is
     od
 si
 
-run(() => Future.when_all(0..philosophers.count |> map(seat => dine(philosophers[seat], seat))))
+run(() =>
+    Future.when_all(
+        0..philosophers.count |> map(seat => dine(philosophers[seat], seat))
+    )
+)

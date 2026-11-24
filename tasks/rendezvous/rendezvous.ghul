@@ -92,21 +92,23 @@ si
 main.serve()
 reserve.serve()
 
-run(() => Future.when_all([
-    writer("Humpty Dumpty", [
-        "Humpty Dumpty sat on a wall",
-        "Humpty Dumpty had a great fall",
-        "All the king's horses",
-        "And all the king's men",
-        "Couldn't put Humpty",
-        "Together again"
-    ]),
-    writer("Mother Goose", [
-        "Old Mother Goose",
-        "When she wanted to wander",
-        "Would ride through the air",
-        "On a very fine gander",
-        "Jack's mother came in",
-        "And caught the goose soon"
+run(() =>
+    Future.when_all([
+        writer("Humpty Dumpty", [
+            "Humpty Dumpty sat on a wall",
+            "Humpty Dumpty had a great fall",
+            "All the king's horses",
+            "And all the king's men",
+            "Couldn't put Humpty",
+            "Together again"
+        ]),
+        writer("Mother Goose", [
+            "Old Mother Goose",
+            "When she wanted to wander",
+            "Would ride through the air",
+            "On a very fine gander",
+            "Jack's mother came in",
+            "And caught the goose soon"
+        ])
     ])
-]))
+)

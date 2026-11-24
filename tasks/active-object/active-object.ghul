@@ -5,9 +5,9 @@ use Tasks.Future
 let frequency = 0.5
 let step = 0.001
 
-// The integrator is an asynchronous function of its own. It samples only when the clock
-// is advanced, and the advance waits for that sample to be taken, so the
-// number of samples is what the caller asked for.
+// The integrator is an asynchronous function of its own. It samples only
+// when the clock is advanced, and the advance waits for that sample to be
+// taken, so the number of samples is what the caller asked for.
 class INTEGRATOR is
     _sample_due: Semaphore
     _sample_taken: Semaphore
