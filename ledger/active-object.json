@@ -3,5 +3,5 @@
   "slug": "active-object",
   "state": "published",
   "note": "a cooperative scheduler gives it a reproducible clock, so the nondeterminism rejection no longer holds",
-  "published_hash": "d64608b26115a421afa28996bf4445c61bd6a602e150a55f4c0a29e37f9b5e0a"
+  "published_hash": "3e35f61befa8487a41ae706e489b9b88cd44410262070f688b4bb0a39aabaed2"
 }
