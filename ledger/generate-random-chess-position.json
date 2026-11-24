@@ -3,5 +3,5 @@
   "slug": "generate-random-chess-position",
   "state": "published",
   "note": "reopened, was rejected/nondeterministic: assert the generated position is a legal FEN rather than pinning one string",
-  "published_hash": "443ce45892debf63b8fd43a13eacb2f77a4883480c11cc29925334f2f8ea1975"
+  "published_hash": "0fb16cef374504266450825bf35515017368f08bb98c84802ae47f5dd57982d7"
 }

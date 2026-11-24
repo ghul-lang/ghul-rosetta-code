@@ -1,43 +1,22 @@
 use default
 
-fibonacci_up_to(limit: int) -> int{} is
-    let smaller mut = 1
-    let larger mut = 2
-
-    do
-        yield smaller
-
-        if larger > limit then
-            break
-        fi
-
-        let next = smaller + larger
-
-        smaller = larger
-        larger = next
-    od
-si
+let fibonacci = stream((1, 2), (a, b) => (a, (b, a + b)))
 
 zeckendorf(n: int) -> string is
     let digits = Text.StringBuilder()
     let remaining mut = n
 
-    for value in fibonacci_up_to(n) |> reverse() do
-        if value <= remaining then
+    for fib in fibonacci |> take_while(f => f <= n) |> reverse() do
+        if fib <= remaining then
             digits.append('1')
 
-            remaining = remaining - value
+            remaining = remaining - fib
         elif digits.length > 0 then
             digits.append('0')
         fi
     od
 
-    return
-        if digits.length == 0 then
-            "0"
-        else
-            digits.to_string()
-        fi
+    if digits.length == 0 then "0" else digits.to_string() fi
 si
 
 for n in 0::20 do

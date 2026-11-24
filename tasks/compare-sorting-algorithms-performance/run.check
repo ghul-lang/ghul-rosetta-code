@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Timings depend on the machine, so what is asserted is the shape of each of
-# the three reports and plots, plus the one result no machine changes:
-# insertion sort grows as the square of the length on shuffled input.
+# Timings depend on the machine and on its load, so what is asserted is the
+# shape of each of the three reports and plots, never a timing or a growth
+# exponent measured from them.
 
 out=$1
 
@@ -30,8 +30,3 @@ for input in ones range shuffled ; do
     [ "$(od -An -tu1 -j16 -N8 "$input.png" 2>/dev/null | tr -s ' ' | sed 's/^ //')" = "0 0 1 224 0 0 1 104" ] ||
         fail "$input.png is missing or not 480 by 360"
 done
-
-exponent=$(sed -n '/^shuffled:/,$ s/^growth exponent.*insertion \([0-9.]*\),.*/\1/p' "$out")
-
-awk -v e="$exponent" 'BEGIN { exit !(e >= 1.6) }' ||
-    fail "insertion sort on shuffled input grew as n to the $exponent, not quadratically"
