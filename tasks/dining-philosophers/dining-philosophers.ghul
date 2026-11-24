@@ -1,5 +1,6 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let philosophers = [
     "Aristotle", "Kant", "Spinoza", "Marx", "Russell"
@@ -8,9 +9,9 @@ let philosophers = [
 let meals = 2
 let random = Ghul.Random(42)
 
-let forks = philosophers |> map(_ => MUTEX()) |> list()
+let forks = philosophers |> map(_ => Mutex()) |> list()
 
-dine(name: string, seat: int) -> Coroutine is
+dine(name: string, seat: int) -> Future is
     let left = seat
     let right = (seat + 1) % forks.count
     let lower = if left < right then left else right fi
@@ -33,8 +34,4 @@ dine(name: string, seat: int) -> Coroutine is
     od
 si
 
-for seat in 0..philosophers.count do
-    dine(philosophers[seat], seat)
-od
-
-run()
+run(() => Future.when_all(0..philosophers.count |> map(seat => dine(philosophers[seat], seat))))

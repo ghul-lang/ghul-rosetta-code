@@ -1,21 +1,22 @@
-// The scheduler is cooperative and runs the workers on one thread, so
-// a turn parked stands in for the two seconds the task asks for.
+// The event loop runs the workers on one thread, so a turn parked stands
+// in for the two seconds the task asks for.
 
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let permits = 3
 let workers = 5
-// The task has each worker hold its permit for two seconds. Every
-// coroutine here runs cooperatively on one thread, so the hold is
-// measured in scheduler turns instead.
+// The task has each worker hold its permit for two seconds. Every worker
+// here runs on one thread, so the hold is measured in turns of the event
+// loop instead.
 let holding_turns = 2
 
 let semaphore = Semaphore(permits)
 
 holding() -> int => permits - semaphore.available
 
-worker(id: int) -> Coroutine is
+worker(id: int) -> Future is
     await semaphore.acquire()
 
     write_line("worker {id} acquired, {holding()} holding")
@@ -29,8 +30,4 @@ worker(id: int) -> Coroutine is
     write_line("worker {id} released, {holding()} holding")
 si
 
-for id in 1::workers do
-    worker(id)
-od
-
-run()
+run(() => Future.when_all(1::workers |> map(worker)))

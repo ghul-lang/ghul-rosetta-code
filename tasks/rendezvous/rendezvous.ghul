@@ -1,6 +1,7 @@
 use default
 use IO.Std.write
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 @suppress("non-pascal-case-name")
 class OUT_OF_INK: Ghul.Exception is
@@ -32,7 +33,7 @@ class PRINTER is
         _requests = Channel()
     si
 
-    submit(line: string) -> Coroutine[Reply] is
+    submit(line: string) -> Future[Reply] is
         let replies = Channel()
 
         _requests.send(REQUEST(line, replies))
@@ -40,7 +41,7 @@ class PRINTER is
         return await replies.receive()
     si
 
-    print(line: string) -> Coroutine is
+    print(line: string) -> Future is
         let reply = await submit(line)
 
         if isa NO_INK(reply) then
@@ -48,7 +49,7 @@ class PRINTER is
         fi
     si
 
-    serve() -> Coroutine is
+    serve() -> Future is
         do
             let request = await _requests.receive()
 
@@ -78,7 +79,7 @@ si
 let reserve = PRINTER("reserve", 5, null)
 let main = PRINTER("main", 5, reserve)
 
-writer(name: string, lines: string[]) -> Coroutine is
+writer(name: string, lines: string[]) -> Future is
     try
         for line in lines do
             await main.print(line)
@@ -91,22 +92,21 @@ si
 main.serve()
 reserve.serve()
 
-writer("Humpty Dumpty", [
-    "Humpty Dumpty sat on a wall",
-    "Humpty Dumpty had a great fall",
-    "All the king's horses",
-    "And all the king's men",
-    "Couldn't put Humpty",
-    "Together again"
-])
-
-writer("Mother Goose", [
-    "Old Mother Goose",
-    "When she wanted to wander",
-    "Would ride through the air",
-    "On a very fine gander",
-    "Jack's mother came in",
-    "And caught the goose soon"
-])
-
-run()
+run(() => Future.when_all([
+    writer("Humpty Dumpty", [
+        "Humpty Dumpty sat on a wall",
+        "Humpty Dumpty had a great fall",
+        "All the king's horses",
+        "And all the king's men",
+        "Couldn't put Humpty",
+        "Together again"
+    ]),
+    writer("Mother Goose", [
+        "Old Mother Goose",
+        "When she wanted to wander",
+        "Would ride through the air",
+        "On a very fine gander",
+        "Jack's mother came in",
+        "And caught the goose soon"
+    ])
+]))

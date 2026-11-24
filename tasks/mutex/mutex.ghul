@@ -1,17 +1,18 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let names = ["Alice", "Bob", "Carol"]
 
-let console = MUTEX()
+let console = Mutex()
 
-visit(name: string) -> Coroutine is
+visit(name: string) -> Future is
     write_line("{name} enters")
     await pause()
     write_line("{name} leaves")
 si
 
-guarded(name: string) -> Coroutine is
+guarded(name: string) -> Future is
     await console.acquire()
     await visit(name)
     console.release()
@@ -19,17 +20,9 @@ si
 
 write_line("without the mutex")
 
-for name in names do
-    visit(name)
-od
-
-run()
+run(() => Future.when_all(names |> map(visit)))
 
 write_line("")
 write_line("with the mutex")
 
-for name in names do
-    guarded(name)
-od
-
-run()
+run(() => Future.when_all(names |> map(guarded)))

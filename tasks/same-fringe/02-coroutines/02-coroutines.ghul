@@ -1,5 +1,6 @@
 use IO.Std.write_line
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 union Tree is
     LEAF(value: int)
@@ -9,7 +10,7 @@ si
 use Tree.LEAF
 use Tree.NODE
 
-use Comparison = Coroutine[(same: bool, leaves: int)]
+use Comparison = Future[(same: bool, leaves: int)]
 
 class WALKER is
     _tree: Tree
@@ -22,13 +23,13 @@ class WALKER is
         _leaves = Channel()
     si
 
-    next() -> Coroutine[int?] is
+    next() -> Future[int?] is
         _wanted.send(true)
 
         return await _leaves.receive()
     si
 
-    walk() -> Coroutine is
+    walk() -> Future is
         await _emit(_tree)
 
         await _wanted.receive()
@@ -36,7 +37,7 @@ class WALKER is
         _leaves.send(null)
     si
 
-    _emit(tree: Tree) -> Coroutine is
+    _emit(tree: Tree) -> Future is
         if isa LEAF(tree) then
             await _wanted.receive()
 
@@ -89,7 +90,7 @@ let differs_last = NODE(LEAF(1), NODE(LEAF(2), LEAF(4)))
 let differs_first = NODE(NODE(LEAF(9), LEAF(2)), LEAF(3))
 let shorter = NODE(LEAF(1), LEAF(2))
 
-report() -> Coroutine is
+report() -> Future is
     for
         (first, second) in [
             (leaning_left, leaning_right),
@@ -110,6 +111,4 @@ report() -> Coroutine is
     od
 si
 
-report()
-
-run()
+run(report)

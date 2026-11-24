@@ -1,10 +1,11 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let frequency = 0.5
 let step = 0.001
 
-// The integrator is a coroutine of its own. It samples only when the clock
+// The integrator is an asynchronous function of its own. It samples only when the clock
 // is advanced, and the advance waits for that sample to be taken, so the
 // number of samples is what the caller asked for.
 class INTEGRATOR is
@@ -24,7 +25,7 @@ class INTEGRATOR is
         _running = true
     si
 
-    integrate() -> Coroutine is
+    integrate() -> Future is
         do
             await _sample_due.acquire()
 
@@ -44,7 +45,7 @@ class INTEGRATOR is
         od
     si
 
-    advance(seconds: double) -> Coroutine is
+    advance(seconds: double) -> Future is
         _now = _now + seconds
 
         _sample_due.release()
@@ -59,7 +60,7 @@ class INTEGRATOR is
 
     output: double => _output
 
-    stop() -> Coroutine is
+    stop() -> Future is
         _running = false
 
         _sample_due.release()
@@ -68,7 +69,7 @@ class INTEGRATOR is
     si
 si
 
-run_for(integrator: INTEGRATOR, seconds: double) -> Coroutine is
+run_for(integrator: INTEGRATOR, seconds: double) -> Future is
     for _ in 0..int(seconds / step) do
         await integrator.advance(step)
     od
@@ -76,7 +77,7 @@ si
 
 let integrator = INTEGRATOR()
 
-driver() -> Coroutine is
+driver() -> Future is
     integrator.input(t => sin(2.0 * pi * frequency * t))
 
     await run_for(integrator, 1.0)
@@ -100,7 +101,4 @@ driver() -> Coroutine is
     write_line("integral once the input is zero: {after_zero:F4}")
 si
 
-integrator.integrate()
-driver()
-
-run()
+run(() => Future.when_all([integrator.integrate(), driver()]))
