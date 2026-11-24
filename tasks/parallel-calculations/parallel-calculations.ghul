@@ -1,5 +1,5 @@
 use default
-use Tasks.TASK
+use Tasks.Future
 
 let numbers = [
     12757923L, 12878611L, 12878893L, 12757923L, 15808973L, 15780709L,
@@ -29,7 +29,7 @@ si
 
 let factorisations =
     numbers
-        |> map(number => TASK.run(() => factors(number)))
+        |> map(number => Future.run(() => factors(number)))
         |> ARRAY()
         |> map(running => running.result)
         |> list()

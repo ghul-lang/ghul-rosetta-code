@@ -53,7 +53,7 @@ test_entry() is
             throw Ghul.Exception("the listener has no address")
         fi
 
-    Tasks.TASK.run(() is
+    Tasks.Future.run(() is
         let tls = SslStream(
             listener.accept_tcp_client().get_stream(),
             false,
