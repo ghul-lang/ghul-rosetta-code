@@ -2,8 +2,7 @@
 // an await, so a method with no await in it runs to completion undisturbed.
 
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 class BUCKETS is
     _values: LIST[int]

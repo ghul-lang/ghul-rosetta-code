@@ -28,7 +28,7 @@ stand_in() -> string is
     listener.prefixes.add(prefix)
     listener.start()
 
-    Tasks.Future.run(() is
+    Concurrency.Future.run(() is
         for reply in replies do
             let context = listener.get_context()
             let body = Encoding.utf8.get_bytes(reply)

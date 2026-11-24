@@ -1,6 +1,5 @@
 use IO.Std.write_line
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 use Numbers = Channel[int?]
 

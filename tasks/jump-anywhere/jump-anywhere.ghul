@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 first_repeat(grid: int[][]) -> int? is
     let seen = SET()

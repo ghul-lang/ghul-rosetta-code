@@ -1,6 +1,5 @@
 use IO.Std.write_line
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 union Tree is
     LEAF(value: int)

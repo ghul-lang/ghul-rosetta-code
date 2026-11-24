@@ -2,8 +2,7 @@
 // values emerge in ascending order.
 
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let values = [5, 3, 8, 0, 1, 9, 2, 7]
 

@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 class EVENT is
     _signalled: bool

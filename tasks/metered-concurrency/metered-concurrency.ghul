@@ -2,8 +2,7 @@
 // in for the two seconds the task asks for.
 
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let permits = 3
 let workers = 5
