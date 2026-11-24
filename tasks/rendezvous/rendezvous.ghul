@@ -1,7 +1,6 @@
 use default
 use IO.Std.write
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 @suppress("non-pascal-case-name")
 class OUT_OF_INK: Ghul.Exception is

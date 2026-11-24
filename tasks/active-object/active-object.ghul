@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let frequency = 0.5
 let step = 0.001

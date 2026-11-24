@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let philosophers = [
     "Aristotle", "Kant", "Spinoza", "Marx", "Russell"

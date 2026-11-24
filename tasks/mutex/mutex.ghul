@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let names = ["Alice", "Bob", "Carol"]
 

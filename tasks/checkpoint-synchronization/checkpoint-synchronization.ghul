@@ -1,6 +1,5 @@
 use default
-use Ghul.Threads
-use Tasks.Future
+use Concurrency
 
 let names = ["Ann", "Bill", "Cid"]
 let turns = [1, 3, 2]
