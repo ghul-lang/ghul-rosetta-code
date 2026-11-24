@@ -1,5 +1,6 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 class EVENT is
     _signalled: bool
@@ -10,7 +11,7 @@ class EVENT is
         _gate = Semaphore(0)
     si
 
-    wait() -> Coroutine is
+    wait() -> Future is
         if !_signalled then
             _waiting = _waiting + 1
 
@@ -36,7 +37,7 @@ si
 let event = EVENT()
 let delay = 3
 
-waiter(name: string) -> Coroutine is
+waiter(name: string) -> Future is
     write_line("{name} waits")
 
     await event.wait()
@@ -44,7 +45,7 @@ waiter(name: string) -> Coroutine is
     write_line("{name} released")
 si
 
-signaller() -> Coroutine is
+signaller() -> Future is
     for _ in 1::delay do
         await pause()
     od
@@ -54,24 +55,18 @@ signaller() -> Coroutine is
     event.signal()
 si
 
-waiter("first")
-waiter("second")
-signaller()
+run(() => Future.when_all([waiter("first"), waiter("second"), signaller()]))
 
-run()
-
-waiter("third")
-
-run()
+run(() => waiter("third"))
 
 event.reset()
 
-waiter("fourth")
+run(() is
+    let fourth = waiter("fourth")
 
-run()
+    write_line("fourth is still waiting")
 
-write_line("fourth is still waiting")
+    event.signal()
 
-event.signal()
-
-run()
+    return fourth
+si)

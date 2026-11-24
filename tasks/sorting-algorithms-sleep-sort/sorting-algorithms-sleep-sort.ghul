@@ -2,17 +2,14 @@
 // values emerge in ascending order.
 
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let values = [5, 3, 8, 0, 1, 9, 2, 7]
 
-emit(value: int) -> Coroutine is
+emit(value: int) -> Future is
     await sleep(value * 50)
     write_line("{value}")
 si
 
-for value in values do
-    emit(value)
-od
-
-run()
+run(() => Future.when_all(values |> map(emit)))

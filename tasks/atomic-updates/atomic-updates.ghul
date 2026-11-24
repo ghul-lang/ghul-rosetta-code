@@ -1,8 +1,9 @@
-// The scheduler is cooperative and only changes coroutine at an await,
-// so a method with no await in it runs to completion undisturbed.
+// The event loop runs one thing at a time and only changes to another at
+// an await, so a method with no await in it runs to completion undisturbed.
 
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 class BUCKETS is
     _values: LIST[int]
@@ -37,7 +38,7 @@ let rounds = 6
 
 pick() -> int => random.next(0, buckets.count)
 
-equalise() -> Coroutine is
+equalise() -> Future is
     for _ in 1::rounds do
         let a = pick()
         let b = pick()
@@ -59,7 +60,7 @@ equalise() -> Coroutine is
     od
 si
 
-redistribute() -> Coroutine is
+redistribute() -> Future is
     for _ in 1::rounds do
         buckets.transfer(pick(), pick(), random.next(0, 60))
 
@@ -67,7 +68,7 @@ redistribute() -> Coroutine is
     od
 si
 
-display() -> Coroutine is
+display() -> Future is
     for _ in 1::rounds do
         let shown = buckets.values |> map(v => "{v}") |> join(" ")
 
@@ -77,8 +78,4 @@ display() -> Coroutine is
     od
 si
 
-equalise()
-redistribute()
-display()
-
-run()
+run(() => Future.when_all([equalise(), redistribute(), display()]))

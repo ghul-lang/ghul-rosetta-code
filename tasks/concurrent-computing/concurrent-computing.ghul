@@ -1,9 +1,10 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 let random = Ghul.Random(42)
 
-say(word: string) -> Coroutine is
+say(word: string) -> Future is
     for _ in 1::random.next(1, 5) do
         await pause()
     od
@@ -11,8 +12,4 @@ say(word: string) -> Coroutine is
     write_line(word)
 si
 
-for word in ["Enjoy", "Rosetta", "Code"] do
-    say(word)
-od
-
-run()
+run(() => Future.when_all(["Enjoy", "Rosetta", "Code"] |> map(say)))

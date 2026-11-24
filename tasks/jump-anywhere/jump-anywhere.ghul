@@ -1,5 +1,6 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 first_repeat(grid: int[][]) -> int? is
     let seen = SET()
@@ -42,7 +43,7 @@ steps() -> string{} is
     write_line("  generator: finished")
 si
 
-paused() -> Coroutine is
+paused() -> Future is
     write_line("  coroutine: before the pause")
 
     await pause()
@@ -68,10 +69,14 @@ for step in steps() do
     write_line("main: pulled {step}")
 od
 
-let running = paused()
+drive() -> Future is
+    let running = paused()
 
-write_line("main: the coroutine suspended and control returned here")
+    write_line("main: the coroutine suspended and control returned here")
 
-run()
+    await running
 
-write_line("main: the coroutine finished: {running.is_completed}")
+    write_line("main: the coroutine finished: {running.is_completed}")
+si
+
+run(drive)

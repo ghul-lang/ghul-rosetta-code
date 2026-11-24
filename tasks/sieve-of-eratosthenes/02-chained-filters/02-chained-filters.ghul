@@ -1,11 +1,12 @@
 use IO.Std.write_line
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 use Numbers = Channel[int?]
 
 let limit = 100
 
-count_up(out: Numbers) -> Coroutine is
+count_up(out: Numbers) -> Future is
     for n in 2::limit do
         out.send(n)
 
@@ -15,7 +16,7 @@ count_up(out: Numbers) -> Coroutine is
     out.send(null)
 si
 
-drop_multiples(prime: int, into: Numbers, out: Numbers) -> Coroutine is
+drop_multiples(prime: int, into: Numbers, out: Numbers) -> Future is
     do
         let value = await into.receive()
 
@@ -31,7 +32,7 @@ drop_multiples(prime: int, into: Numbers, out: Numbers) -> Coroutine is
     od
 si
 
-sieve() -> Coroutine is
+sieve() -> Future is
     let head mut = Numbers()
 
     count_up(head)
@@ -53,6 +54,4 @@ sieve() -> Coroutine is
     od
 si
 
-sieve()
-
-run()
+run(sieve)

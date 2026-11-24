@@ -1,5 +1,6 @@
 use default
-use Ghul.Coroutines
+use Ghul.Threads
+use Tasks.Future
 
 union Request is
     PRINT(line: string)
@@ -16,7 +17,7 @@ IO.File.write_all_lines(path, ["Enjoy", "Rosetta", "Code"])
 let requests = Channel[Request]()
 let replies = Channel[int]()
 
-printer() -> Coroutine is
+printer() -> Future is
     let printed mut = 0
 
     do
@@ -32,7 +33,7 @@ printer() -> Coroutine is
     od
 si
 
-reader() -> Coroutine is
+reader() -> Future is
     for line in IO.File.read_lines(path) do
         requests.send(PRINT(line))
         await pause()
@@ -45,9 +46,6 @@ reader() -> Coroutine is
     write_line("{printed} lines printed")
 si
 
-printer()
-reader()
-
-run()
+run(() => Future.when_all([printer(), reader()]))
 
 IO.File.delete(path)
