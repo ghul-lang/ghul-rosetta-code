@@ -61,10 +61,12 @@ run(() => waiter("third"))
 
 event.reset()
 
-let fourth = waiter("fourth")
+run(() is
+    let fourth = waiter("fourth")
 
-write_line("fourth is still waiting")
+    write_line("fourth is still waiting")
 
-event.signal()
+    event.signal()
 
-run(() => fourth)
+    return fourth
+si)

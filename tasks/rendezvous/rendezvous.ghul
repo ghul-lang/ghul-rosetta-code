@@ -89,11 +89,11 @@ writer(name: string, lines: string[]) -> Future is
     yrt
 si
 
-main.serve()
-reserve.serve()
+run(() is
+    main.serve()
+    reserve.serve()
 
-run(() =>
-    Future.when_all([
+    return Future.when_all([
         writer("Humpty Dumpty", [
             "Humpty Dumpty sat on a wall",
             "Humpty Dumpty had a great fall",
@@ -111,4 +111,4 @@ run(() =>
             "And caught the goose soon"
         ])
     ])
-)
+si)
