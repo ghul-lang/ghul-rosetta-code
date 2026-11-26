@@ -15,7 +15,7 @@ These mistakes cost the most rework. A section below explains each one. The last
 - **`write_line` must be imported.** Write `use IO.Std.write_line` before the code that calls it. Or start the file with `use default`, which imports `write_line`, the pipes, the collections and the maths functions.
 - **Strings have no `+` operator.** Join strings with interpolation: `"{a}{b}"`.
 - **`==` on a `string` compares references.** Compare text with `=~`. Use `==` for scalars, enums and references.
-- **Numbers widen only in arithmetic and ordering.** `1 + 2.5` is `3.5`: an `int`, `long` or `single` operand widens to the other operand's wider type, and an `int` or `long` widens to `bigint`. Nothing else converts implicitly: `let n: int = 2.5`, `decimal` and the small and unsigned types need `double(n)` or `cast`, and `==` never widens. A big integer is a `bigint`, written with the `n` suffix, and a complex number a `complex`, written `3r + 4j`. Do not use `System.Numerics.BigInteger`.
+- **Numbers widen to a wider number, never to a narrower one.** `1 + 2.5` is `3.5`, and an `int` passed to a `double` parameter, stored in a `double` local, field or element, or returned where a `double` is declared widens to `double`; `if c then 1 else 2.5 fi` and `[1, 2.5]` are `double`. `int` widens to `long`, `single` and `double`, `long` to `single` and `double`, `single` to `double`, and an `int` or `long` widens to `bigint`. Nothing else converts implicitly: `let n: int = 2.5`, `decimal` and the small and unsigned types need `double(n)` or `cast`, and `==` never widens. A big integer is a `bigint`, written with the `n` suffix, and a complex number a `complex`, written `3r + 4j`. Do not use `System.Numerics.BigInteger`.
 - **There is no `new`.** Construct a value by calling its type: `Box(42)`, `LIST[int]()`. `new` is an ordinary identifier.
 - **The closing keyword of a block mirrors its opening keyword**: `is` ... `si`, `if` ... `fi`, `do` ... `od`, `case` ... `esac`, `try` ... `yrt`. There are no braces.
 - **A bare `let` is immutable.** A local declared `let count mut = 0` can be reassigned.
@@ -100,7 +100,7 @@ A whole-file namespace must be the first declaration in the file, after any `@@`
 
 A file with no namespace declaration can contain statements at the top level of the file, and so can a file whose namespace is a whole-file namespace. These top-level statements run in source order as the program's entry point, so a short program needs no `entry` function. Top-level statements can be mixed with global definitions. A global definition is visible everywhere in the file, wherever it appears. A file with top-level statements cannot declare a namespace block.
 
-In a file with no namespace declaration, or whose namespace is a whole-file namespace, a function written with no types anywhere in its signature, including one with no parameters and no return type, has its signature inferred from the file. Its argument types come from its calls in the file and its return type from its body. The file's functions can call each other in any order, including recursively, whether their signatures are inferred or written. The top-level `let`s a function uses take their types from those uses too:
+In a file with no namespace declaration, or whose namespace is a whole-file namespace, a function that leaves any type out of its signature has the types it leaves out inferred from the file. That includes a function with no parameters and no return type. Its argument types come from its calls in the file and its return type from its body; a type it writes stays as written. The file's functions can call each other in any order, including recursively, whether their signatures are inferred or written. The top-level `let`s a function uses take their types from those uses too:
 
 ```ghul
 let seen = SET()
@@ -113,9 +113,29 @@ _visit(3)
 write_line("{seen.count}")
 ```
 
+A function with no return type returns what its body gives. An `=>` body returns its expression. An `is` body returns what its `return`s and `yield`s give, and the value of its last statement, as an `if`, a `case` or a `( )` block does:
+
+```ghul
+halve(x: int) => x / 2
+
+scaled(factor, x: int) is
+    let y = x + 1
+    factor * y
+si
+
+sign(x: int) is
+    if x < 0 then return "negative" fi
+    return "non-negative"
+si
+
+label(name: string, value) -> string => "{name}={value}"
+```
+
+A function with parameters, every one of them typed, and no return type doesn't return the value of its last statement, so one ending in a call that returns a value, such as `seen.add(n)`, returns nothing. Its `return`s still decide its return type, as `sign` above shows. With no `return` and no `yield` it returns `void`, as in a namespace block, and isn't private to its file.
+
 In a file with a namespace block, a function with no return type returns void, its return type isn't inferred, and every parameter needs its type. So does every function in a build with whole-file inference turned off (`--no-whole-file-inference`).
 
-A function whose signature is inferred is private to its file. That includes a function with no parameters and no return type, whose return is inferred. Where files share a namespace (under `--global-namespace`, or in a whole-file namespace several files declare), another file can call such a function only once its signature names its types; for a function with no parameters, a return type is enough, such as `-> void`. Anything in its own file can call it, including a class, a trait, an operator or a generic function. A function called with arguments of more than one type takes their join, such as `int[]` for an `ARRAY[int]` and an `int[]`. A function can only read a top-level `let` written above it, and a top-level statement can't call a function that reads a top-level `let` declared below that statement, directly or through the functions it calls. Like a function literal, such a function can be marked `memo` or `pure`: `fib(n) memo => ...`. A function whose signature is inferred and that awaits returns `Tasks.TASK` when it returns no value; one that returns a value after awaiting needs its return type written, such as `-> Tasks.TASK[int]`.
+A function whose signature is inferred is private to its file. That includes a function with no parameters and no return type, whose return is inferred. Where files share a namespace (under `--global-namespace`, or in a whole-file namespace several files declare), another file can call such a function only once its signature names every type; for a function with no parameters, a return type is enough, such as `-> void`. Anything in its own file can call it, including a class, a trait, an operator or a generic function. A function called with arguments of more than one type takes their join, such as `int[]` for an `ARRAY[int]` and an `int[]`. A function can only read a top-level `let` written above it, and a top-level statement can't call a function that reads a top-level `let` declared below that statement, directly or through the functions it calls. Like a function literal, such a function can be marked `memo` or `pure`: `fib(n) memo => ...`. A function whose signature is inferred and that awaits returns `Concurrency.Future` when it returns no value; one that returns a value after awaiting needs its return type written, such as `-> Concurrency.Future[int]`.
 
 A `use` statement brings names into scope, so code can refer to them without qualification. A `use` of a namespace imports every public symbol in it. A `use` of a single symbol imports that symbol:
 
@@ -129,7 +149,9 @@ A `use` applies only within the namespace block that contains it. If a namespace
 
 A qualified `use` names its target inside its qualifier: in `use IO.Std.write_line`, `write_line` is a member of `IO.Std`. The qualifier itself is relative, like any name - inside `namespace A.B.C`, `use B.E` means `A.B.E`. A target that is not a member of its qualifier but resolves through an enclosing namespace is accepted with a `use-outside-qualifier` warning; naming the namespace that declares the symbol silences it.
 
-One namespace needs no `use`: `Ghul.Intrinsics`. It holds the names the language supplies: the built-in types such as `int` and `string`, the function and tuple types, and the operators on them. Every namespace block sees `Ghul.Intrinsics` as if the block started with `use Ghul.Intrinsics;`. The runtime declares everything else in `Ghul` and its nested namespaces, and code imports these like any other library: `use Ghul.Functional;` imports the functional combinators such as `apply` (runtimes before 35.0.0 declare them in `Ghul` itself), and `use Ghul.Pipes;` imports the pipe combinators. `use default` imports both. Your own definition can have the same name as one of these, such as your own `apply`. A file that does not import that name sees only your definition. A file that also imports the name sees both: your function and the imported function form one overload group, and the compiler resolves each call against both. The same holds for functions of one name imported from several namespaces: every global function in scope under a name is in one overload group, however it is brought into scope, and the group holds each function once however many ways it is reached. Where two of them take the same arguments, a call that either fits calls the one found first. A name is looked up in the calling namespace's own declarations first, then in the functions it imports by name with `use X.f`, then in the namespaces it imports whole with `use X`, then in the enclosing namespaces; among imports of the same kind, the earlier `use` line comes first. A function the calling namespace declares shadows an imported one that takes the same arguments, so your own `digits(n: int)` is called in place of the one `use Ghul.Pipes` imports. Two imported functions that take the same arguments draw a `duplicate-overload` warning on each call that either fits.
+One namespace needs no `use`: `Ghul.Intrinsics`. It holds the names the language supplies: the built-in types such as `int` and `string`, the function and tuple types, and the operators on them. Every namespace block sees `Ghul.Intrinsics` as if the block started with `use Ghul.Intrinsics;`. The runtime declares everything else in `Ghul` and its nested namespaces, and code imports these like any other library: `use Ghul.Functional;` imports the functional combinators such as `apply` (runtimes before 35.0.0 declare them in `Ghul` itself), and `use Ghul.Pipes;` imports the pipe combinators. `use default` imports both. Your own definition can have the same name as one of these, such as your own `apply`. A file that does not import that name sees only your definition. A file that also imports the name sees both: your function and the imported function form one overload group, and the compiler resolves each call against both. The same holds for functions of one name imported from several namespaces: every global function in scope under a name is in one overload group, however it is brought into scope, and the group holds each function once however many ways it is reached. Where two of them take the same arguments, a call that either fits calls the one found first. A function's name is looked up in the calling namespace's own declarations first, then in the functions it imports by name with `use X.f`, then in the namespaces it imports whole with `use X`, then in the enclosing namespaces; among imports of the same kind, the earlier `use` line comes first. A function the calling namespace declares shadows an imported one that takes the same arguments, so your own `digits(n: int)` is called in place of the one `use Ghul.Pipes` imports. Two imported functions that take the same arguments draw a `duplicate-overload` warning on each call that either fits.
+
+A name that is not a function follows the same order, and means the first declaration found: the calling namespace's own, then one a `use` imports by name, such as `use A.Box`, then one in a namespace it imports whole. When two namespaces it imports whole both declare the name, and the two are not both functions, a bare use of the name is ambiguous: it draws an `ambiguous-import` warning naming both, and means the one the earlier `use` imports. The qualified name, `A.Box`, or a `use A.Box`, says which. The namespaces `use default` imports are a tier below every explicit `use`, so a name an explicit import finds is never ambiguous with the default set's, but two namespaces of the default set that both declare a name are ambiguous with each other.
 
 A `use` with a type expression on the right defines a *type alias*. A type alias names a type; it does not import a symbol:
 
@@ -334,7 +356,14 @@ let z = 3r + 4j;
 write_line("{z * z} {z.magnitude} {complex.sqrt(-4r)}");   // <-7; 24> 5 <0; 2>
 ```
 
-ghūl converts between scalar types implicitly in one place: an arithmetic or ordering operator whose operands are two of `int`, `long`, `single` and `double` widens the narrower operand, and works in the wider type. `int` widens to `long`, `single` and `double`; `long` to `single` and `double`; `single` to `double`; and each of the four to `complex`; `int` and `long` also widen to `bigint`. So `3 * 0.5` is `1.5`, an `int` times a `long` is a `long`, and `n < 2.5` compares as `double`. Where two results are reachable, the narrower wins: `long * single` and `int * single` are `single`. `%` widens between `int` and `long`, and from either to `bigint`; shifts and the bitwise operators never widen. An operator over the exact operand types is always chosen over a widened one.
+ghūl widens a number implicitly, never narrows it. `int` widens to `long`, `single` and `double`; `long` to `single` and `double`; `single` to `double`; and each of the four to `complex`; `int` and `long` also widen to `bigint`. A widening happens in these places, and nowhere else:
+
+- **An arithmetic or ordering operator** whose operands are two of these types widens the narrower operand and works in the wider type. So `3 * 0.5` is `1.5`, an `int` times a `long` is a `long`, and `n < 2.5` compares as `double`. Where two results are reachable, the narrower wins: `long * single` and `int * single` are `single`. `%` widens between `int` and `long`, and from either to `bigint`; shifts and the bitwise operators never widen. An operator over the exact operand types is always chosen over a widened one.
+- **A call argument** widens to the parameter's type, for a function, a method or a constructor: `sqrt(n)` with `n: int` calls `sqrt(double)`, and `values.add(n)` adds to a `LIST[double]`. An overload that takes the argument as it is wins over one the argument only reaches by widening, so with `f(int)` and `f(double)`, `f(n)` calls `f(int)`; among widened overloads the narrowest wins, so with `g(long)` and `g(double)`, `g(n)` calls `g(long)`. An `object` or type-parameter parameter takes the value as it is, unwidened.
+- **A typed slot**: a value stored in a local, field, property or indexer of a wider type, by a `let` with a type or by assignment, and a value returned from a function declared to return a wider type. So `let d: double = n`, `total = n` with `total: double`, `values[0] = n` with `values: LIST[double]`, and `return n` from a `-> double` function widen. A slot or parameter of the optional of a wider type, such as `double?`, takes the widened value too.
+- **A join**: the arms of an `if` or `case` expression, and the elements of an array literal, join to the widest of their types when each is one of these types or widens to it. `if c then 1 else 2.5 fi` is a `double`, and `[1, 2.5, 3L]` an array of `double`. Where the expression has an expected type, each arm or element widens to that type instead.
+
+A widening never reaches through a type argument: a `LIST[int]` is not a `LIST[double]`, and a tuple `(int, string)` doesn't widen to `(double, string)`, so the elements of a tuple don't widen in a join.
 
 Equality doesn't widen. Ordering compares magnitudes, so it widens; `==` compares representation, so its operand types must already match. `i == d` and `i =~ d` with `i: int` and `d: double` are errors: convert one explicitly, as in `double(i) == d`, for value equality. Any other mix, such as `decimal` with `double`, or an assignment of a `double` to an `int`, also needs a `cast`.
 
@@ -342,6 +371,7 @@ Upcasting is implicit: a value can be assigned to a variable of any ancestor typ
 
 ```ghul
 let a = 1.0 + 1;                 // ok, the int widens to double
+let h: double = 1;               // ok, the int widens to double
 let b = 1.0m + cast decimal(1);  // decimal never widens: explicit cast
 let o: object = "hello";         // ok, string is an object
 ```
@@ -486,6 +516,24 @@ An unnamed element of a tuple literal that is a bare identifier takes its name f
 
 Destructuring has two forms, **positional** and **by-name**. The syntax shows which form is used.
 
+Every type in a pattern is optional, at every depth and in every position, for a single name as much as for a pattern. Write one only to give a name an explicit type, or to test a value's type in a refutable pattern (`if let`, `while let`, a `case` arm). Otherwise the type comes from the value. The one exception is a signature that must be typed: every name in a parameter pattern of a method or a namespace-scope function needs a type, from the pattern's type or from its own.
+
+Wherever a tuple pattern can take a type on its right, it can take the same type spread across its elements. These three are the same pattern:
+
+```ghul
+((a, b), (c, d)): ((DOG, CAT), (CAT, DOG))
+((a, b): (DOG, CAT), (c, d): (CAT, DOG))
+((a: DOG, b: CAT), (c: CAT, d: DOG))
+```
+
+A tuple-typed group takes its types on the group or inside it, not both: `(a: int, b): (int, int)` is an error. A group typed as a variant or as a type with a `deconstruct`, such as `(value, left, right): Tree.NODE`, says nothing about its parts' types, so the elements inside it can have types of their own.
+
+What a type means depends on where the pattern is:
+
+- In `let` and `for`, the value is assigned to the type, as in `let x: T = e`: it must be assignable to `T`, or a number that widens into it. `let (total: long, count) = (3, 4)` makes `total` a `long`, and `let (name: string, age) = (3, 4)` is an error.
+- In `if let`, `while let` and a `case` arm, the type is a test: the pattern matches only when the value at that position has the type. A tuple type is tested element by element, so `((a, b), (c, d)): ((DOG, CAT), (CAT, DOG))` over a `((ANIMAL, ANIMAL), (ANIMAL, ANIMAL))` tests each of the four values. A value whose own type already has the written type is not tested.
+- In a parameter, the types give the parameter its type (see [functions](#functions)).
+
 A **positional** target list `(a, b, ...)` matches the source by the first of these that applies:
 
 1. a value tuple with the same number of elements
@@ -538,7 +586,7 @@ multiply(a: int, b: int) -> int is
 si
 ```
 
-A method's signature is fully explicit, and so is a named function's in a file with a namespace block. Every argument has a written type. The return type is written after `->`; a function with no `->` returns `void`. In a file with no namespace declaration, or with a whole-file namespace, a function written with no types has its signature inferred (see [namespaces and `use`](#namespaces-and-use)).
+A method's signature is fully explicit, and so is a named function's in a file with a namespace block. Every argument has a written type. The return type is written after `->`; a function with no `->` returns `void`. In a file with no namespace declaration, or with a whole-file namespace, a function that leaves types out of its signature has them inferred (see [namespaces and `use`](#namespaces-and-use)).
 
 A block body returns its value with an explicit `return`, or by ending with an expression. In a non-void body, the final statement is the function's return value on the fall-through path when its type is assignable to the declared return type. This holds with or without a `;` after the statement. An expression, an `if` or `case` expression, and a parenthesised block can each be this final value, the *tail*.
 
@@ -599,7 +647,7 @@ add_pair((a, b): (int, int)) -> int => a + b;
 add_pair((3, 4));    // 7
 ```
 
-Patterns can nest, and can be mixed with ordinary parameters: `f(x: int, (a, b): (int, int), y: int)`. A namespace-scope function written with a pattern has types in its signature, so the type of the whole pattern is required. The element types come from the type of the whole pattern, so write the elements as plain names. The type of the whole pattern can be any type that can be destructured positionally: a tuple, or a type with a matching `deconstruct(...)` method. A formal argument list does not support the by-name group form (`(x = field, ...)`).
+Patterns can nest, and can be mixed with ordinary parameters: `f(x: int, (a, b): (int, int), y: int)`. The pattern goes left of the `:` and the parameter's type on the right, as with any parameter: `(a, b): (int, int)` has the same shape as `a: int` or `ab: (int, int)`, and the element types come from that type. The types can be spread across the elements instead, as in any pattern: `add_pair((a: int, b: int))` takes an `(int, int)`. A function whose signature must be typed needs a type for every name in the pattern, from either place. The type of the whole pattern can be any type that can be destructured positionally: a tuple, or a type with a matching `deconstruct(...)` method. A formal argument list does not support the by-name group form (`(x = field, ...)`).
 
 Functions are first-class values. A function literal has the same form as a function, without a name. The compiler usually *infers* its argument types and return type from the body and from the context of the literal, so they are usually written without annotations. Either can be written explicitly. A literal with one argument needs no parentheses around it. `A -> B` is the type of a function from `A` to `B`.
 
@@ -635,7 +683,7 @@ let pairs = [(1, 2), (3, 4)];
 pairs |> map(((a, b)) => a + b);          // element types inferred from the sequence
 ```
 
-The single-parameter shorthand without parentheses (`x => …`) cannot have a pattern, and cannot have a type annotation. Both need the parentheses. Unlike in a named function, the compiler usually infers the type of the whole pattern, from the sequence or slot that the literal is passed to, or from how the parameter is used. Write the type explicitly when nothing gives it. As for a named function, the type can be any type that can be destructured positionally, and the elements are written as plain names. The type of the whole pattern accepts the full type syntax:
+The single-parameter shorthand without parentheses (`x => …`) cannot have a pattern, and cannot have a type annotation. Both need the parentheses. Unlike in a named function, the compiler usually infers the type of the whole pattern, from the sequence or slot that the literal is passed to, or from how the parameter is used. Write the type explicitly when nothing gives it. As for a named function, the type can be any type that can be destructured positionally. The types can be spread across the elements instead, as in `((a: int, b: string)) => ...`, and an element left untyped is inferred: `((a: int, b)) => a + b`. The type of the whole pattern accepts the full type syntax:
 
 ```ghul
 let add = ((a, b): (int, int)) => a + b;
@@ -678,7 +726,7 @@ A nested function refers to itself by its own name, so it needs no `rec`. A lite
     fact(n: int) -> int => if n <= 1 then 1 else n * fact(n - 1) fi;
 ```
 
-A nested function is a local of the body it is written in. One that nothing refers to above its definition is defined from its definition onward. One that a statement or another nested function above it refers to exists from the start of the body, so a body can call a nested function written below the call, and nested functions can call each other in any order. Where such a function uses a local the body declares further down, it exists from just after that local instead, and a call above that point is an error. A named function written among a file's top-level statements is a namespace-scope function, not a nested one. One written with no types at all has its signature inferred, as described under [namespaces and `use`](#namespaces-and-use).
+A nested function is a local of the body it is written in. One that nothing refers to above its definition is defined from its definition onward. One that a statement or another nested function above it refers to exists from the start of the body, so a body can call a nested function written below the call, and nested functions can call each other in any order. Where such a function uses a local the body declares further down, it exists from just after that local instead, and a call above that point is an error. A named function written among a file's top-level statements is a namespace-scope function, not a nested one. One that leaves types out of its signature has them inferred, as described under [namespaces and `use`](#namespaces-and-use).
 
 A call with `*` written for one or more of its arguments is a *partial application*: a function value with one parameter per `*`, in order, that makes the call with its parameters in those positions. The other arguments are evaluated once, where the partial application is written, not on each call:
 
@@ -1620,7 +1668,7 @@ esac;
 A `when` arm can have a pattern instead of a list of expressions. The patterns are the same as in `if let`:
 
 - `when v: T then` tests the type `T`. When it matches, `v` holds the narrowed value.
-- `when (a, b) then` destructures a tuple scrutinee into named variables. Each element can have a type (`when (c: CAT, d: DOG) then`). `_` discards an element. A literal leaf, as in `when (1, label) then` or `when (Color.RED, label) then`, tests that position for equality. A leaf marked with `~`, as in `when (~expected, label) then`, tests the position against the value the name holds, and declares no variable.
+- `when (a, b) then` destructures a tuple scrutinee into named variables. A type after the pattern tests the value: `when (c, d): (CAT, DOG) then` matches when the first value is a `CAT` and the second a `DOG`, and so does `when (c: CAT, d: DOG) then`. `_` discards an element. A literal leaf, as in `when (1, label) then` or `when (Color.RED, label) then`, tests that position for equality. A leaf marked with `~`, as in `when (~expected, label) then`, tests the position against the value the name holds, and declares no variable.
 - `when _: T then` tests the type only, and declares no variable.
 
 Pattern arms follow the same refutability rules as `if let`. An optional scrutinee gives the pattern its unwrapped value. A value-type pattern on a plain value-type scrutinee has nothing to test. It is an error, reported once, and the pattern's variables get the error type:
@@ -1819,10 +1867,10 @@ lookup(key: string?) -> int =>
 
 ### asynchronous code
 
-A function is asynchronous when its declared return type is `Tasks.TASK[T]` (the .NET `Task<T>`) or `Tasks.TASK` (the non-generic `Task`). Inside an asynchronous function, `await e` is an expression. It waits for the task `e` to complete, and its value is the task's result. So `let x = await e;` initializes `x` to the result, and the function then continues:
+A function is asynchronous when its declared return type is `Concurrency.Future[T]` (the .NET `Task<T>`) or `Concurrency.Future` (the non-generic `Task`). Inside an asynchronous function, `await e` is an expression. It waits for the task `e` to complete, and its value is the task's result. So `let x = await e;` initializes `x` to the result, and the function then continues:
 
 ```ghul
-compute() -> Tasks.TASK[int] is
+compute() -> Concurrency.Future[int] is
     let a = await double_async(10);
     let b = await add_async(a, 1);
     return b;
@@ -1831,7 +1879,7 @@ si
 
 The code reads from top to bottom, although execution suspends at each `await`. `await e;` as a statement waits for the task to complete, and discards any result.
 
-A function declared `-> Tasks.TASK[T]` can `return` a bare `T`. The compiler gives the value to the completed task. When the body has no suspension, the compiler wraps the value as `Tasks.TASK.from_result(...)`. The function can also `return` a task, or any other awaitable value, whose result is a `T`:
+A function declared `-> Concurrency.Future[T]` can `return` a bare `T`. The compiler gives the value to the completed task. When the body has no suspension, the compiler wraps the value as `Concurrency.Future.from_result(...)`. The function can also `return` a task, or any other awaitable value, whose result is a `T`:
 
 - When the body does not `await`, the caller receives that task.
 - When the body does `await`, the caller already has the function's own task, and the returned task can only complete it. So the compiler awaits the returned task and uses its result. `return t` and `return await t` then do the same thing.
@@ -1839,6 +1887,33 @@ A function declared `-> Tasks.TASK[T]` can `return` a bare `T`. The compiler giv
 A void body accepts a returned task whose `await` gives no value, in the same way.
 
 *More detail on this section: [asynchronous code](https://github.com/ghul-lang/ghul/blob/main/docs/async.md#asynchronous-code).*
+
+### threads
+
+`Concurrency` starts threads on the `dotnet` and `llvm` targets. `start(body)` runs `body` on a new thread, with an 8 MB stack or the size in bytes passed as a second argument, and gives a `Thread[T]`, or a `Thread` for a body that gives nothing. `join()` waits for the thread to finish and gives what the body gave, or throws what it threw, each time it is called. `AtomicInt`, `AtomicLong`, `AtomicBool` and `Atomic[T]` (for a reference) have `load`, `store`, `exchange` and `compare_exchange(expected, replacement)`, and the integer ones have `add` and `increment`, which give the new value. Each atomic operation is indivisible: no other thread sees it half done, and it takes no lock.
+
+Each thread runs its asynchronous code on an event loop of its own: work queued on the loop runs one piece at a time, and code that awaits carries on on the thread that awaited. `run(body)` runs the asynchronous `body` on the calling thread's loop until the `Concurrency.Future` it gives completes, then gives the future's result or throws what it threw; calling `run` from code the same loop is running is an `InvalidOperationException`. `sleep(milliseconds)` gives a future that completes once that time has passed, and `pause()` one that completes once the loop has run the work already queued on it. `start(body)` with an asynchronous body runs it on a new thread's own loop and gives a `Concurrency.Future` for its result. Any thread can complete a future, through a `Concurrency.Completer` or by finishing the function that gives it, and the code awaiting the future resumes on its own thread.
+
+An asynchronous function can also `await` a `Thread`: the `await` gives what the body gave, or throws what it threw, once the thread finishes.
+
+`Mutex`, `Semaphore` and `Channel[T]` are safe to share between threads, and each has a form to await and a form that blocks. `Mutex` is a lock that one holder has at a time: `acquire()` gives a future that completes once the caller holds it, `release()` hands it on, and `try_lock()` takes it only if it is free; `lock()`, `unlock()` and `hold(body)`, which runs `body` holding the lock and releases it however `body` ends, block the thread instead. It is not reentrant: a thread that locks it again gets `InvalidOperationException`. `Semaphore(permits)` has `available`, `acquire()`, `try_acquire()`, `release()` and the blocking `lock()`. `Channel[T]` has `send(value)`, which never waits, `receive()`, which gives a future for the next value, and the blocking `take()`.
+
+```ghul
+use Concurrency
+
+let hits = AtomicInt(0)
+let workers = [start(() => hits.increment()) for _ in 0..4]
+
+for w in workers do
+    w.join()
+od
+
+write_line("{hits.load()}")   // 4
+```
+
+A program that changes a value while another thread reads or changes it, with nothing ordering the two, has a bug, and what either thread then sees is not defined. `join`, a `Mutex`, and the atomics order memory: what a thread wrote before its body ended is seen after `join` gives, what one thread wrote while holding a `Mutex` is seen by the next thread to take it, and the atomic operations are sequentially consistent, so every thread sees them in one order. Collections, pipes, a `memo` cache, the coroutine scheduler and the prime functions' sieve are not safe to use from more than one thread at a time; a program shares them under a `Mutex`. A static constructor runs once, however many threads reach the type together, and they all see what it set up. The state the library keeps out of the program's sight, such as what an interpolation is rendering and the task scheduler, is kept for each thread or locked, so ordinary code on one thread pays nothing for threads. The `wasm` target runs one thread. There, `Concurrency` has the event loop, `run`, `sleep` and `pause`, and the awaited forms of `Mutex`, `Semaphore` and `Channel`. `start` takes only an asynchronous body, which it runs on the calling thread's loop. There is no `Thread`, no blocking form and no atomics.
+
+*More detail on this section: [threads on llvm](https://github.com/ghul-lang/ghul/blob/main/docs/targets.md#threads).*
 
 ### generators
 
@@ -1903,6 +1978,15 @@ walk(t: Tree) -> Pipe[int] is
         yield in walk(right)
     fi
 si
+```
+
+An `=>` body can be a generator too. A `yield` inside a parenthesized block that is the whole body yields from the function, and a `yield` inside a block within an `is` body yields from the enclosing generator. The body's value, if it has one, is discarded, as the value of an `is` body's last statement is:
+
+```ghul
+pair() -> int{} => (
+    yield 1
+    yield 2
+)
 ```
 
 A generator's return type must be `T{}`, `Iterator[T]` or `Ghul.Pipes.Pipe[T]`. `yield` in a function with any other return type is an error. A generator that returns an `Iterator[T]` can be read once: the read uses the iterator that the generator returns. A function cannot be both a generator and asynchronous. As with `await`, `yield` is not yet supported inside a `catch` or `finally` handler.
@@ -2185,7 +2269,7 @@ When neither the arguments nor any later use decides a type argument, the constr
 
 See <https://ghul.dev/type-inference.html>.
 
-ghūl infers types widely, but inference is **function-local**, with one wider scope. A method's signature, and a namespace-scope function's in a file with a namespace block, is always written out, and the compiler infers types only inside bodies. In a file with no namespace declaration, or with a whole-file namespace, a function written with no types has its signature inferred from the whole file (see [namespaces and `use`](#namespaces-and-use)). Inside a body, the compiler infers the types of local variables, loop variables, destructured variables, the parameters and return types of function literals and nested named functions, and the type arguments of generic calls.
+ghūl infers types widely, but inference is **function-local**, with one wider scope. A method's signature, and a namespace-scope function's in a file with a namespace block, is always written out, and the compiler infers types only inside bodies. In a file with no namespace declaration, or with a whole-file namespace, a function that leaves types out of its signature has them inferred from the whole file (see [namespaces and `use`](#namespaces-and-use)). Inside a body, the compiler infers the types of local variables, loop variables, destructured variables, the parameters and return types of function literals and nested named functions, and the type arguments of generic calls.
 
 Inference also uses later code. A variable with no type information at its declaration takes its type from how the same body uses it later. This includes the operations the body performs on the variable and, for a function, its own recursive calls. The compiler narrows local variables, fields and store-free properties (see [narrowing](https://github.com/ghul-lang/ghul/blob/main/docs/narrowing.md#type-narrowing) for how long each kind of fact lasts). The inferred type of a `let` variable is never visible outside the function that declares it.
 
@@ -2197,7 +2281,7 @@ ghūl compiles to .NET IL, and can use most types in any .NET assembly. The comp
 
 - Method, property and field names become `snake_case`.
 - Enum members become `UPPER_SNAKE_CASE`.
-- Type names keep their .NET names, without .NET's generic arity suffix, except a short list of core types that ghūl renames, in `UPPER_SNAKE_CASE` where an abstract alternative exists (`LIST`, `MAP`, `SET`, `TASK`, ...) and in `PascalCase` where none does (`StringBuilder`, `DateTime`, ...), listed below. So `SortedSet<T>` is `Collections.SortedSet[T]`.
+- Type names keep their .NET names, without .NET's generic arity suffix, except a short list of core types that ghūl renames, in `UPPER_SNAKE_CASE` where an abstract alternative exists (`LIST`, `MAP`, `SET`, ...) and in `PascalCase` where none does (`StringBuilder`, `DateTime`, `Future`, ...), listed below. So `SortedSet<T>` is `Collections.SortedSet[T]`.
 - The namespace `System.Collections.Generic` is `Collections`, and `System.IO` is `IO`.
 
 Some common types have different names:
@@ -2207,6 +2291,7 @@ Some common types have different names:
 - `IReadOnlySet<T>` is `Collections.Set[T]`.
 - `IEnumerable<T>` is `Collections.Iterable[T]`.
 - `IComparable<T>` and `IEquatable<T>` are `Ghul.Comparable[T]` and `Ghul.Equatable[T]`.
+- `Task` and `Task<T>` are `Concurrency.Future` and `Concurrency.Future[T]`, and `TaskCompletionSource` and `TaskCompletionSource<T>` are `Concurrency.Completer` and `Concurrency.Completer[T]`. Their former names, `Tasks.Future`, `Tasks.TASK`, `Tasks.Completer` and `Tasks.TaskCompletionSource`, still resolve to them.
 - `IComparer<T>` and `IEqualityComparer<T>` are `Collections.Comparer[T]` and `Collections.EqualityComparer[T]`. So the .NET classes `Comparer<T>` and `EqualityComparer<T>` are `Collections.ComparerBase[T]` and `Collections.EqualityComparerBase[T]`.
 
 The dotnet-integration page has the full table of names.
@@ -2221,7 +2306,7 @@ The core types have ghūl names in ghūl namespaces:
 - The rest of the text family is in `Text`, beside `Text.StringBuilder` and `Text.Regex`: `System.Text.Encoding` is `Text.Encoding`, `System.Text.Rune` is `Text.Rune`, `System.Globalization.CultureInfo` is `Text.Locale`, `System.Globalization.NumberStyles` is `Text.NumberStyles`, `System.Text.UTF8Encoding`, `ASCIIEncoding`, `UTF32Encoding` and `UnicodeEncoding` are `Text.UTF8_ENCODING`, `Text.ASCII_ENCODING`, `Text.UTF32_ENCODING` and `Text.UTF16_ENCODING`, `System.Globalization.StringInfo` and `TextInfo` are `Text.StringInfo` and `Text.TextInfo`, and `Ghul.StringComparison` and `Ghul.StringSplitOptions` are `Text.StringComparison` and `Text.StringSplitOptions`. On wasm and llvm the only locale is the invariant one: the invariant and current locales are the same, and formatting, parsing and changing case work the same whichever locale is passed. The members of `Text.Locale` that said culture drop the word on .NET: `invariant`, `current` and `current_ui` are `InvariantCulture`, `CurrentCulture` and `CurrentUICulture`; `installed_ui`, `default_thread_current`, `default_thread_current_ui`, `create_specific`, `get`, `get_by_ietf_language_tag`, `get_locales`, `get_console_fallback_ui`, `is_neutral` and `locale_types` follow the same rule. The core library on wasm and llvm declares the same names from the release that follows. The other .NET names with culture in them change the same way: `System.Globalization.CultureTypes` is `Text.LocaleTypes` (members such as `NEUTRAL_LOCALES`), `CultureNotFoundException` is `Text.LocaleNotFoundException`, `System.Reflection.AssemblyCultureAttribute` is `Ghul.Reflection.AssemblyLocaleAttribute`, `StringComparison` has `CURRENT_LOCALE`, `CURRENT_LOCALE_IGNORE_CASE`, `INVARIANT_LOCALE` and `INVARIANT_LOCALE_IGNORE_CASE`, `RegexOptions` has `LOCALE_INVARIANT`, and `StringComparer` has `current`, `current_ignore_case`, `invariant` and `invariant_ignore_case`. The old spellings of the members (`invariant_culture`, `current_culture`, `get_culture_info` and the rest) still compile for one release and are removed after it. The renamed enum members (`CURRENT_CULTURE` and the others) and the `RegexOptions` member have no second name: the old ones are gone. `System.Text.Encoding.Unicode` is `Text.Encoding.utf16` on every target; `unicode` is not a name for it.
 - `Text` has functions for numbers in a base and bytes as text: `to_base(value, base)` writes an integer in base 2, 8, 10 or 16, and `from_base(text, base)` reads one back as a `long?`; `to_hex`, `to_hex_lower` and `from_hex` write and read bytes as hexadecimal; `to_base64` and `from_base64` do the same in Base64. Each `from_` function answers null for text it can't read. `System.Convert` is still there and still throws.
 - The bit-level numeric types are in `Ghul.Math`, beside the maths functions: `System.Numerics.BitOperations` is `Ghul.Math.BitOperations` and `System.BitConverter` is `Ghul.Math.BitConverter`. `System.Numerics.Complex` is the built-in `complex`.
-- The reflection types are in `Ghul.Reflection`, beside `Ghul.Type`: `System.Reflection.Assembly`, `FieldInfo`, `ParameterInfo`, `ConstructorInfo`, `MethodInfo`, `PropertyInfo` and `BindingFlags` are the same names in `Ghul.Reflection`, and `System.Activator` is `Ghul.Reflection.Activator`.
+- The reflection types are in `Ghul.Reflection`, beside `Ghul.Type`: `System.Reflection.Assembly`, `FieldInfo`, `ParameterInfo`, `ConstructorInfo`, `MethodInfo`, `PropertyInfo`, `BindingFlags` and `AmbiguousMatchException` are the same names in `Ghul.Reflection`, and `System.Activator` is `Ghul.Reflection.Activator`. `Ghul.Reflection.get_type(name)`, `get_function(name)` and `get_function(name, types)` find a type, and a global function as a static `MethodInfo`, by the name the source gives it, such as `Ghul.Math.abs`, on every target.
 - The language's own types are in `Ghul`: `System.GC`, `System.ObsoleteAttribute`, `System.Runtime.CompilerServices.MethodImplAttribute` and `MethodImplOptions` are `Ghul.GC`, `Ghul.ObsoleteAttribute`, `Ghul.MethodImplAttribute` and `Ghul.MethodImplOptions`, and `System.IFormattable` is `Ghul.Formattable`. `System.Threading.Thread` is `Tasks.Thread`.
 - `System.Uri` is `IO.Uri`.
 - The hashes are in `Crypto`: `System.Security.Cryptography.MD5`, `SHA1` and `SHA256` are `Crypto.MD5`, `Crypto.SHA1` and `Crypto.SHA256`, and each has `hash_data(bytes)`, which returns the digest. `System.Security.Cryptography.RandomNumberGenerator`, the secure generator, is `Crypto.RandomNumberGenerator`.
@@ -2346,13 +2431,13 @@ si
 get_product(
     @Microsoft.AspNetCore.Mvc.FromServices() store: ProductStore,
     @Microsoft.AspNetCore.Mvc.FromRoute() index: int
-) -> Tasks.TASK[IResult] is
+) -> Concurrency.Future[IResult] is
     ...
 si
 
 app.map_get(
     "/products/{index}",
-    (@Microsoft.AspNetCore.Mvc.FromRoute() index: int, store: ProductStore) -> Tasks.TASK[IResult] is
+    (@Microsoft.AspNetCore.Mvc.FromRoute() index: int, store: ProductStore) -> Concurrency.Future[IResult] is
         ...
     si
 );
