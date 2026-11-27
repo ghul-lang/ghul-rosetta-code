@@ -57,9 +57,10 @@ md4(message: ubyte[]) -> string is
             let z = registers[(target + 3) % 4]
 
             let (mixed, constant, index, shift) =
-                if step < 16 then
+                case step
+                when 0..16 then
                     ((x & y) | (\x & z), 0u, step, [3, 7, 11, 19][step % 4])
-                elif step < 32 then
+                when 16..32 then
                     (
                         (x & y) | (x & z) | (y & z),
                         0x5A827999u,
@@ -73,7 +74,7 @@ md4(message: ubyte[]) -> string is
                         round_three_order[step - 32],
                         [3, 9, 11, 15][step % 4]
                     )
-                fi
+                esac
 
             registers[target] = rotate_left(
                 registers[target] + mixed + words[index] + constant,

@@ -1,7 +1,7 @@
 use default
 use IO.Std.write
 
-is_letter(character) => character >= 'a' /\ character <= 'z'
+is_letter(character) => character ~ 'a'::'z'
 
 forwards(input) =>
     let character = char(input.read()) in

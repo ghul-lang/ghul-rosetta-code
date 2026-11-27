@@ -6,13 +6,13 @@ open_range(low: double, high: double) -> RealSet =>
     value => low < value /\ value < high
 
 closed_range(low: double, high: double) -> RealSet =>
-    value => low <= value /\ value <= high
+    value => value ~ low::high
 
 open_closed(low: double, high: double) -> RealSet =>
     value => low < value /\ value <= high
 
 closed_open(low: double, high: double) -> RealSet =>
-    value => low <= value /\ value < high
+    value => value ~ low..high
 
 joined(left: RealSet, right: RealSet) -> RealSet =>
     value => left(value) \/ right(value)

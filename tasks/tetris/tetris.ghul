@@ -105,11 +105,12 @@ show() is
         let line = 0..width |> map(k => symbol(r * width + k)) |> join("")
 
         let side =
-            if r == 0 then "  next"
-            elif r >= 1 /\ r <= 2 then "  {upcoming(r - 1)}"
-            elif r == 4 then "  score {score}"
+            case r
+            when 0 then "  next"
+            when 1::2 then "  {upcoming(r - 1)}"
+            when 4 then "  score {score}"
             else ""
-            fi
+            esac
 
         write_line("|{line}|{side}")
     od

@@ -35,14 +35,15 @@ si
 
 watch(time: Time.DateTime) -> string =>
     let hour = time.add_minutes(-1.0).hour in
-    if hour < 4 then "Middle watch"
-    elif hour < 8 then "Morning watch"
-    elif hour < 12 then "Forenoon watch"
-    elif hour < 16 then "Afternoon watch"
-    elif hour < 18 then "First dog watch"
-    elif hour < 20 then "Last dog watch"
+    case hour
+    when 0..4 then "Middle watch"
+    when 4..8 then "Morning watch"
+    when 8..12 then "Forenoon watch"
+    when 12..16 then "Afternoon watch"
+    when 16..18 then "First dog watch"
+    when 18..20 then "Last dog watch"
     else "First watch"
-    fi
+    esac
 
 ring(bells: int) -> string =>
     (0..bells / 2)

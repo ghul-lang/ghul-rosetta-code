@@ -5,10 +5,11 @@ rotate(text, key) =>
 
 rotate_letter(letter, key) =>
     let first =
-        if letter >= 'a' /\ letter <= 'z' then int('a')
-        elif letter >= 'A' /\ letter <= 'Z' then int('A')
+        case letter
+        when 'a'::'z' then int('a')
+        when 'A'::'Z' then int('A')
         else -1
-        fi
+        esac
     in
     if first < 0 then letter
     else char(first + (int(letter) - first + key) % 26)

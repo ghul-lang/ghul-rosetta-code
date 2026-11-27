@@ -19,7 +19,7 @@ class PLAYFAIR(key: string, alphabet: Alphabet) is
 
     clean(text: string) -> char{} =>
         text.to_upper_invariant()
-            |> filter(c => c >= 'A' /\ c <= 'Z')
+            |> filter(c => c ~ 'A'::'Z')
             |> filter(c => alphabet != Alphabet.NO_Q \/ c != 'Q')
             |> map(c =>
                 if alphabet == Alphabet.J_IS_I /\ c == 'J' then

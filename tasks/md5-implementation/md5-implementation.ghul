@@ -62,15 +62,12 @@ md5(message: ubyte[]) -> string is
 
         for step in 0..64 do
             let (mixed, index) =
-                if step < 16 then
-                    ((b & c) | (\b & d), step)
-                elif step < 32 then
-                    ((d & b) | (\d & c), (5 * step + 1) % 16)
-                elif step < 48 then
-                    (b ^ c ^ d, (3 * step + 5) % 16)
-                else
-                    (c ^ (b | \d), (7 * step) % 16)
-                fi
+                case step
+                when 0..16 then ((b & c) | (\b & d), step)
+                when 16..32 then ((d & b) | (\d & c), (5 * step + 1) % 16)
+                when 32..48 then (b ^ c ^ d, (3 * step + 5) % 16)
+                else (c ^ (b | \d), (7 * step) % 16)
+                esac
 
             let rotated = rotate_left(
                 a + mixed + sines[step] + words[index],

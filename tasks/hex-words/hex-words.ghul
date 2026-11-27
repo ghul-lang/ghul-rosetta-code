@@ -6,7 +6,7 @@ digital_root(n: long) -> long =>
     if n < 10L then n else digital_root((n - 1L) % 9L + 1L) fi
 
 is_hex_word(word: string) -> bool =>
-    word.length >= 4 /\ word |> all(c => c >= 'a' /\ c <= 'f')
+    word.length >= 4 /\ word |> all(c => c ~ 'a'::'f')
 
 let entries =
     IO.File.read_all_lines("unixdict.txt")

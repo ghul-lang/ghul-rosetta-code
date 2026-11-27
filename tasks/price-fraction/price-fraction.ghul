@@ -9,7 +9,7 @@ let bands = [
 ]
 
 rescale(price) =>
-    assert price >= 0.0 /\ price < 1.01 else "price out of range" in
+    assert price ~ 0.0..1.01 else "price out of range" in
     bands |> find(((upper_bound, _)) => price < upper_bound)?.`1!
 
 let shown =

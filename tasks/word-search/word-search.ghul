@@ -12,7 +12,7 @@ let directions = [
 let words =
     IO.File.read_all_lines("unixdict.txt")
         |> filter(w => w.length >= 3 /\ w.length <= size)
-        |> filter(w => w |> all(c => c >= 'a' /\ c <= 'z'))
+        |> filter(w => w |> all(c => c ~ 'a'::'z'))
         |> list()
 
 let random = Ghul.Random(42)

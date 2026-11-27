@@ -31,7 +31,7 @@ render_member(entry: MEMBER) -> string =>
 as_index(token: string) -> int? =>
     if
         token.length > 0 /\
-        (token |> all(digit => digit >= '0' /\ digit <= '9'))
+        (token |> all(digit => digit ~ '0'::'9'))
     then
         int.parse(token)
     else

@@ -25,14 +25,15 @@ symbols() -> string[] => [
 // fifteen inner elements down to rows 8 and 9, and the rest fill
 // left to right.
 position(z: int) -> (row: int, column: int) is
-    if z <= 2 then
+    case z
+    when * <= 2 then
         (row = 1, column = if z == 1 then 1 else 18 fi)
-    elif z <= 18 then
+    when 3::18 then
         let row = if z <= 10 then 2 else 3 fi
         let at = z - if row == 2 then 3 else 11 fi
 
         (row = row, column = if at < 2 then at + 1 else at + 11 fi)
-    elif z <= 54 then
+    when 19::54 then
         let row = if z <= 36 then 4 else 5 fi
 
         (row = row, column = z - if row == 4 then 19 else 37 fi + 1)
@@ -47,7 +48,7 @@ position(z: int) -> (row: int, column: int) is
         else
             (row = row, column = at - 13)
         fi
-    fi
+    esac
 si
 
 block(at: (row: int, column: int)) -> string =>

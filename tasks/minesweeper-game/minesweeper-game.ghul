@@ -26,7 +26,7 @@ neighbours(cell: int) -> int{} is
         for dx in -1::1 do
             let (nx, ny) = (x + dx, y + dy)
 
-            let on_grid = nx >= 0 /\ nx < width /\ ny >= 0 /\ ny < height
+            let on_grid = nx ~ 0..width /\ ny ~ 0..height
 
             if (dx != 0 \/ dy != 0) /\ on_grid then
                 yield ny * width + nx
