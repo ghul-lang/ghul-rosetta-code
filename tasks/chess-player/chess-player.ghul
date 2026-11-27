@@ -43,8 +43,7 @@ let king_steps = [
 let rook_steps = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 let bishop_steps = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
 
-on_board(row: int, column: int) -> bool =>
-    row ~ 0..8 /\ column ~ 0..8
+on_board(row: int, column: int) -> bool => row ~ 0..8 /\ column ~ 0..8
 
 piece_at(position: POSITION, row: int, column: int) -> char =>
     if on_board(row, column) then

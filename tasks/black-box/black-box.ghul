@@ -38,8 +38,7 @@ point_at(cell: Cell) -> int =>
     else 3 * size + size - cell.row
     fi
 
-inside(row: int, column: int) -> bool =>
-    row ~ 0..size /\ column ~ 0..size
+inside(row: int, column: int) -> bool => row ~ 0..size /\ column ~ 0..size
 
 atom(row: int, column: int) -> bool =>
     atoms.contains((row = row, column = column))

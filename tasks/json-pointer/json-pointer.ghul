@@ -29,10 +29,7 @@ render_member(entry: MEMBER) -> string =>
     "\"{entry.key}\": {render(entry.value)}"
 
 as_index(token: string) -> int? =>
-    if
-        token.length > 0 /\
-        (token |> all(digit => digit ~ '0'::'9'))
-    then
+    if token.length > 0 /\ (token |> all(digit => digit ~ '0'::'9')) then
         int.parse(token)
     else
         null

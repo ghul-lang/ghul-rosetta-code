@@ -6,10 +6,14 @@ next(x: double, y: double) -> (x: double, y: double) => (
     let choice = random.next_double()
 
     case choice
-    when 0.0..0.01 then (x = 0.0, y = 0.16 * y)
-    when 0.01..0.86 then (x = 0.85 * x + 0.04 * y, y = -0.04 * x + 0.85 * y + 1.6)
-    when 0.86..0.93 then (x = 0.2 * x - 0.26 * y, y = 0.23 * x + 0.22 * y + 1.6)
-    else (x = -0.15 * x + 0.28 * y, y = 0.26 * x + 0.24 * y + 0.44)
+    when 0.0..0.01 then
+        (x = 0.0, y = 0.16 * y)
+    when 0.01..0.86 then
+        (x = 0.85 * x + 0.04 * y, y = -0.04 * x + 0.85 * y + 1.6)
+    when 0.86..0.93 then
+        (x = 0.2 * x - 0.26 * y, y = 0.23 * x + 0.22 * y + 1.6)
+    else
+        (x = -0.15 * x + 0.28 * y, y = 0.26 * x + 0.24 * y + 0.44)
     esac
 )
 

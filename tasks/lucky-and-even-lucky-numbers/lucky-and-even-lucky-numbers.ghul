@@ -46,8 +46,7 @@ as_number(text: string) -> int? is
     let digits = if negative then text[1..<0] else text fi
 
     if
-        digits.length == 0 \/
-        !(digits |> all(digit => digit ~ '0'::'9'))
+        digits.length == 0 \/ !(digits |> all(digit => digit ~ '0'::'9'))
     then
         return null
     fi
