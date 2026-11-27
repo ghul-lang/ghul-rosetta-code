@@ -29,13 +29,11 @@ lerp(t: double, a: double, b: double) -> double => a + t * (b - a)
 grad(hash: int, x: double, y: double, z: double) -> double => (
     let h = hash & 15, u = if h < 8 then x else y fi
     let v =
-        if h < 4 then
-            y
-        elif h == 12 \/ h == 14 then
-            x
-        else
-            z
-        fi
+        case h
+        when 0..4 then y
+        when 12, 14 then x
+        else z
+        esac
     let first = if h & 1 == 0 then u else -u fi,
         second = if h & 2 == 0 then v else -v fi
     first + second

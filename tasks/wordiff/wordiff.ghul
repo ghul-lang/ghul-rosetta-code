@@ -3,7 +3,7 @@ use IO.Std.read_line
 
 let dictionary =
     IO.File.read_all_lines("unixdict.txt")
-        |> filter(w => w.length >= 3 /\ w |> all(c => c >= 'a' /\ c <= 'z'))
+        |> filter(w => w.length >= 3 /\ w |> all(c => c ~ 'a'::'z'))
 
 let words = SET(dictionary)
 

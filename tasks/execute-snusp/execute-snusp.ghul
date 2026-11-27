@@ -22,7 +22,7 @@ run(lines: string[]) is
         ip = (x = ip.x + heading.x, y = ip.y + heading.y)
     si
 
-    while ip.y >= 0 /\ ip.y < lines.count /\ ip.x >= 0 /\ ip.x < width do
+    while ip.y ~ 0..lines.count /\ ip.x ~ 0..width do
         let line = lines[ip.y]
         let op = if ip.x < line.length then line[ip.x] else ' ' fi
 

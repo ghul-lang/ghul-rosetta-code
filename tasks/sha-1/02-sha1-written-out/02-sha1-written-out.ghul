@@ -60,15 +60,12 @@ sha1(message: ubyte[]) -> string is
 
         for step in 0..80 do
             let (mixed, constant) =
-                if step < 20 then
-                    ((b & c) | (\b & d), 0x5A827999u)
-                elif step < 40 then
-                    (b ^ c ^ d, 0x6ED9EBA1u)
-                elif step < 60 then
-                    ((b & c) | (b & d) | (c & d), 0x8F1BBCDCu)
-                else
-                    (b ^ c ^ d, 0xCA62C1D6u)
-                fi
+                case step
+                when 0..20 then ((b & c) | (\b & d), 0x5A827999u)
+                when 20..40 then (b ^ c ^ d, 0x6ED9EBA1u)
+                when 40..60 then ((b & c) | (b & d) | (c & d), 0x8F1BBCDCu)
+                else (b ^ c ^ d, 0xCA62C1D6u)
+                esac
 
             let rotated =
                 rotate_left(a, 5) + mixed + e + constant + schedule[step]

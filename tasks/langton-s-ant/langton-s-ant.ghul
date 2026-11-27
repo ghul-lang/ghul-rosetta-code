@@ -17,7 +17,7 @@ walk(every: int) -> Ant{} is
     let row mut = size / 2, column mut = size / 2
     let facing mut = 0, steps mut = 0
 
-    while row >= 0 /\ row < size /\ column >= 0 /\ column < size do
+    while row ~ 0..size /\ column ~ 0..size do
         if steps % every == 0 then
             yield (row = row, column = column, steps = steps, left = false)
         fi

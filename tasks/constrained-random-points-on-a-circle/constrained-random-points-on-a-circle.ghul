@@ -11,7 +11,7 @@ si
 
 in_ring(p: (x: int, y: int)) -> bool =>
     let square = p.x * p.x + p.y * p.y in
-    square >= 100 /\ square <= 225
+    square ~ 100::225
 
 let points = candidates() |> filter(in_ring) |> take(100) |> list()
 let distinct = points |> SET()

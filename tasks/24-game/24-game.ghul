@@ -30,7 +30,7 @@ parse_atom(text: string, at: int) -> Parsed => (
 
     if start >= text.length then
         Parsed.BAD("the expression ends too soon")
-    elif text[start] >= '0' /\ text[start] <= '9' then
+    elif text[start] ~ '0'::'9' then
         Parsed.OK(double(int(text[start]) - int('0')), start + 1)
     elif text[start] != '(' then
         Parsed.BAD("{text[start]} does not belong here")

@@ -7,8 +7,7 @@ settle(pile: MATRIX_2[int]) is
     let (rows, columns) = pile.lengths
     let unstable mut = true
 
-    inside(y: int, x: int) -> bool =>
-        y >= 0 /\ y < rows /\ x >= 0 /\ x < columns
+    inside(y: int, x: int) -> bool => y ~ 0..rows /\ x ~ 0..columns
 
     while unstable do
         unstable = false

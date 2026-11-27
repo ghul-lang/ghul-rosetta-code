@@ -21,7 +21,7 @@ od
 at(column: int, row: int) -> int => row * columns + column
 
 inside(column: int, row: int) -> bool =>
-    column >= 0 /\ column < columns /\ row >= 0 /\ row < rows
+    column ~ 0..columns /\ row ~ 0..rows
 
 let directions = [
     (across = 1, down = 0), (across = -1, down = 0),

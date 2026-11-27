@@ -1,7 +1,7 @@
 use default
 
 binomial(n, k) => (
-    assert k >= 0 /\ k <= n else "k must lie between 0 and n"
+    assert k ~ 0::n else "k must lie between 0 and n"
 
     let smaller = if k > n - k then n - k else k fi
 

@@ -13,11 +13,11 @@ solutions(low: int, high: int, unique: bool) -> Solution{} is
             for c in low::high do
                 let d = total - b - c
 
-                if d >= low /\ d <= high then
+                if d ~ low::high then
                     for e in low::high do
                         let f = total - d - e
 
-                        if f >= low /\ f <= high then
+                        if f ~ low::high then
                             let g = total - f
 
                             if

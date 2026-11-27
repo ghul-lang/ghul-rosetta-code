@@ -27,7 +27,7 @@ let score mut = 0
 grid[y * width + x] = 0
 
 inside(column: int, row: int) -> bool =>
-    column >= 0 /\ column < width /\ row >= 0 /\ row < height
+    column ~ 0..width /\ row ~ 0..height
 
 reach(dx: int, dy: int) -> int is
     if !inside(x + dx, y + dy) then

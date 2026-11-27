@@ -47,7 +47,7 @@ nearest(value: double) -> double => (
 )
 
 spread(pixel_x: int, pixel_y: int, error: double, part: double) is
-    if pixel_x >= 0 /\ pixel_x < width /\ pixel_y < height then
+    if pixel_x ~ 0..width /\ pixel_y < height then
         let at = pixel_y * width + pixel_x
 
         grey[at] = grey[at] + error * part

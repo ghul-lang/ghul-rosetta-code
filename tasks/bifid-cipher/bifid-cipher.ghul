@@ -10,7 +10,7 @@ normalize(text) =>
     [
         if ch == 'J' then 'I' else ch fi
         for ch in text.to_upper()
-        if ch >= 'A' /\ ch <= 'Z'
+        if ch ~ 'A'::'Z'
     ]
         |> map(ch => "{ch}")
         |> join("")

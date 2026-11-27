@@ -34,13 +34,11 @@ ancestors(n: int) -> int{} is
 si
 
 abbreviated(list: long[]) -> string =>
-    if list.count == 0 then
-        "none"
-    elif list.count <= 6 then
-        list |> map(d => "{d}") |> join(" ")
-    else
-        "{list[0]} {list[1]} {list[2]} ... {list[list.count - 1]}"
-    fi
+    case list.count
+    when 0 then "none"
+    when 1::6 then list |> map(d => "{d}") |> join(" ")
+    else "{list[0]} {list[1]} {list[2]} ... {list[list.count - 1]}"
+    esac
 
 for n in 1::top do
     let chain = n |> ancestors() |> sort() |> list()

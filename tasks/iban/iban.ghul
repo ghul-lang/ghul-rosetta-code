@@ -3,7 +3,7 @@ use default
 is_valid_iban(raw) is
     let iban = ["{ch}" for ch in raw if ch != ' '] |> join("")
 
-    let is_letter = ch => ch >= 'A' /\ ch <= 'Z'
+    let is_letter = ch => ch ~ 'A'::'Z'
 
     if iban.length < 4 \/ !is_letter(iban[0]) \/ !is_letter(iban[1]) then
         return false

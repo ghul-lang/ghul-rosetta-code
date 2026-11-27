@@ -1,9 +1,9 @@
 use default
 
 rot13(c: char) -> char =>
-    if c >= 'a' /\ c <= 'z' then
+    if c ~ 'a'::'z' then
         char((int(c) - int('a') + 13) % 26 + int('a'))
-    elif c >= 'A' /\ c <= 'Z' then
+    elif c ~ 'A'::'Z' then
         char((int(c) - int('A') + 13) % 26 + int('A'))
     else
         c

@@ -1,9 +1,7 @@
 use default
 use Text.StringBuilder
 
-is_alphabetic(character) =>
-    (character >= 'A' /\ character <= 'Z') \/
-    (character >= 'a' /\ character <= 'z')
+is_alphabetic(character) => character ~ 'A'::'Z' \/ character ~ 'a'::'z'
 
 prepared(text) =>
     text
